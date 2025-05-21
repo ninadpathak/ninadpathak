@@ -31,8 +31,3 @@ The output will be in the `public/` directory.
 ## Deployment
 
 The contents of the `public/` folder are pushed to the `main` branch of this repository for deployment.
-
-## License
-
-Content © Ninad Pathak.  
-Theme: [PaperMod](https://github.com/adityatelange/hugo-PaperMod) (MIT License).
