@@ -1,4 +1,4 @@
-# ninadpathak.com
+# Personal Website
 
 This repository contains the static site for [ninadpathak.com](https://ninadpathak.com), built with [Hugo](https://gohugo.io/) and the [PaperMod](https://github.com/adityatelange/hugo-PaperMod) theme.
 
