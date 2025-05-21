@@ -22,5 +22,12 @@
       <guid>https://ninadpathak.com/essays/second-essay/</guid>
       <description>How a focused content strategy drives engagement and conversions.</description>
     </item>
+    <item>
+      <title>My Content Process</title>
+      <link>https://ninadpathak.com/process/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://ninadpathak.com/process/</guid>
+      <description>How I create technical content that actually works for your business.</description>
+    </item>
   </channel>
 </rss>
