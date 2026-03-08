@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss version="2.0">
+  <channel>
+    <title>Ninad Pathak</title>
+    <link>https://ninadpathak.com</link>
+    <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
+    <language>en-us</language>
+    <item>
+      <title>Why AI Agent Testing Is Harder Than It Looks</title>
+      <link>https://ninadpathak.com/blog/sample-post/</link>
+      <description>AI agents break in ways that unit tests don't catch. Here's a systematic approach to testing non-deterministic systems that actually ship.</description>
+      <pubDate>Feb 15, 2026</pubDate>
+    </item>
+  </channel>
+</rss>
