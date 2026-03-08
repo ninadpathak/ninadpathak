@@ -23,6 +23,11 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://ninadpathak.com/portfolio/">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -123,6 +128,8 @@
       <button class="filter-btn" data-filter="devtools">DevTools</button>
       <button class="filter-btn" data-filter="ai-&-testing">AI & Testing</button>
       <button class="filter-btn" data-filter="localization">Localization</button>
+      <button class="filter-btn" data-filter="ai-&-memory">AI & Memory</button>
+      <button class="filter-btn" data-filter="analytics">Analytics</button>
       <button class="filter-btn" data-filter="wordpress">WordPress</button>
       <button class="filter-btn" data-filter="hosting-&-infra">Hosting & Infra</button>
       <button class="filter-btn" data-filter="ecommerce">eCommerce</button>
@@ -131,7 +138,7 @@
 
     <!-- GRID -->
     <div class="portfolio-grid" id="portfolioGrid">
-      <a href="https://graphite.dev/guides/code-review-best-practices"
+      <a href="https://graphite.dev/blog/code-review-best-practices"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -140,7 +147,7 @@
         <div class="p-item-title">Code Review Best Practices for Engineering Teams</div>
         <div class="p-item-cat">DevTools</div>
       </a>
-      <a href="https://graphite.dev/guides/phabricator"
+      <a href="https://graphite.dev/blog/phabricator-code-review"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -149,7 +156,7 @@
         <div class="p-item-title">Phabricator Code Review: Complete Guide</div>
         <div class="p-item-cat">DevTools</div>
       </a>
-      <a href="https://graphite.dev/guides/phabricator-alternatives"
+      <a href="https://graphite.dev/blog/phabricator-alternatives"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -158,16 +165,16 @@
         <div class="p-item-title">Phabricator Alternatives for Modern Teams</div>
         <div class="p-item-cat">DevTools</div>
       </a>
-      <a href="https://graphite.dev/guides/pull-request-merge-strategy"
+      <a href="https://graphite.dev/blog/pull-request-guidelines"
          class="p-item"
          target="_blank"
          rel="noopener"
          data-cat="devtools">
         <div class="p-item-client">Graphite</div>
-        <div class="p-item-title">Pull Request Merge Strategy Guide</div>
+        <div class="p-item-title">Pull Request Best Practices for Teams</div>
         <div class="p-item-cat">DevTools</div>
       </a>
-      <a href="https://www.lambdatest.com/learning-hub/ai-agent-testing"
+      <a href="https://www.testmu.ai/learning-hub/ai-agent-testing"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -176,7 +183,7 @@
         <div class="p-item-title">AI Agent Testing: A Complete Guide</div>
         <div class="p-item-cat">AI & Testing</div>
       </a>
-      <a href="https://www.lambdatest.com/blog/ai-adoption-challenges"
+      <a href="https://www.testmu.ai/blog/ai-adoption-challenges/"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -194,43 +201,25 @@
         <div class="p-item-title">Svelte Localization with svelte-i18n</div>
         <div class="p-item-cat">Localization</div>
       </a>
-      <a href="https://centus.com/blog/php-localization"
-         class="p-item"
-         target="_blank"
-         rel="noopener"
-         data-cat="localization">
-        <div class="p-item-client">Centus</div>
-        <div class="p-item-title">PHP Localization: A Developer's Guide</div>
-        <div class="p-item-cat">Localization</div>
-      </a>
-      <a href="https://centus.com/blog/python-localization-gettext"
-         class="p-item"
-         target="_blank"
-         rel="noopener"
-         data-cat="localization">
-        <div class="p-item-client">Centus</div>
-        <div class="p-item-title">Python Localization with gettext</div>
-        <div class="p-item-cat">Localization</div>
-      </a>
       <a href="https://centus.com/blog/react-i18n-intl"
          class="p-item"
          target="_blank"
          rel="noopener"
          data-cat="localization">
         <div class="p-item-client">Centus</div>
-        <div class="p-item-title">React i18n with the Intl API</div>
+        <div class="p-item-title">React i18n with react-intl</div>
         <div class="p-item-cat">Localization</div>
       </a>
-      <a href="https://centus.com/blog/laravel-localization"
+      <a href="https://centus.com/blog/react-i18next-localization"
          class="p-item"
          target="_blank"
          rel="noopener"
          data-cat="localization">
         <div class="p-item-client">Centus</div>
-        <div class="p-item-title">Laravel Localization Guide</div>
+        <div class="p-item-title">React-i18next Localization Guide</div>
         <div class="p-item-cat">Localization</div>
       </a>
-      <a href="https://centus.com/blog/yaml-translation-files"
+      <a href="https://centus.com/blog/yaml-translation"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -239,14 +228,77 @@
         <div class="p-item-title">YAML Translation Files: Best Practices</div>
         <div class="p-item-cat">Localization</div>
       </a>
-      <a href="https://ottokit.com/blog/manage-youtube-channel-ottokit"
+      <a href="https://centus.com/blog/software-internationalization"
          class="p-item"
          target="_blank"
          rel="noopener"
-         data-cat="wordpress">
-        <div class="p-item-client">OttoKit</div>
-        <div class="p-item-title">Manage YouTube Channel with OttoKit Automation</div>
-        <div class="p-item-cat">WordPress</div>
+         data-cat="localization">
+        <div class="p-item-client">Centus</div>
+        <div class="p-item-title">Software Internationalization Best Practices</div>
+        <div class="p-item-cat">Localization</div>
+      </a>
+      <a href="https://centus.com/blog/javascript-localization"
+         class="p-item"
+         target="_blank"
+         rel="noopener"
+         data-cat="localization">
+        <div class="p-item-client">Centus</div>
+        <div class="p-item-title">JavaScript Localization Guide for Web Apps</div>
+        <div class="p-item-cat">Localization</div>
+      </a>
+      <a href="https://mem0.ai/blog/what-is-natural-language-processing"
+         class="p-item"
+         target="_blank"
+         rel="noopener"
+         data-cat="ai-&-memory">
+        <div class="p-item-client">Mem0</div>
+        <div class="p-item-title">What is Natural Language Processing (NLP)?</div>
+        <div class="p-item-cat">AI & Memory</div>
+      </a>
+      <a href="https://mem0.ai/blog/what-is-ai-agent-memory"
+         class="p-item"
+         target="_blank"
+         rel="noopener"
+         data-cat="ai-&-memory">
+        <div class="p-item-client">Mem0</div>
+        <div class="p-item-title">What is AI Agent Memory?</div>
+        <div class="p-item-cat">AI & Memory</div>
+      </a>
+      <a href="https://mem0.ai/blog/mem0-memory-for-openclaw"
+         class="p-item"
+         target="_blank"
+         rel="noopener"
+         data-cat="ai-&-memory">
+        <div class="p-item-client">Mem0</div>
+        <div class="p-item-title">We Built Persistent Memory for OpenClaw AI Agents</div>
+        <div class="p-item-cat">AI & Memory</div>
+      </a>
+      <a href="https://www.factors.ai/authors/ninad-pathak"
+         class="p-item"
+         target="_blank"
+         rel="noopener"
+         data-cat="analytics">
+        <div class="p-item-client">Factors.ai</div>
+        <div class="p-item-title">Top Lead Scoring Software for B2B Teams</div>
+        <div class="p-item-cat">Analytics</div>
+      </a>
+      <a href="https://www.factors.ai/blog/content-marketing-metrics-and-kpis-for-saas"
+         class="p-item"
+         target="_blank"
+         rel="noopener"
+         data-cat="analytics">
+        <div class="p-item-client">Factors.ai</div>
+        <div class="p-item-title">Content Marketing Metrics vs KPIs for SaaS</div>
+        <div class="p-item-cat">Analytics</div>
+      </a>
+      <a href="https://www.factors.ai/authors/ninad-pathak"
+         class="p-item"
+         target="_blank"
+         rel="noopener"
+         data-cat="analytics">
+        <div class="p-item-client">Factors.ai</div>
+        <div class="p-item-title">Customer Acquisition Funnel Guide</div>
+        <div class="p-item-cat">Analytics</div>
       </a>
       <a href="https://cartflows.com/blog/cart-abandonment-recovery"
          class="p-item"
@@ -275,52 +327,43 @@
         <div class="p-item-title">WordPress Sales Funnel: Complete Guide</div>
         <div class="p-item-cat">WordPress</div>
       </a>
-      <a href="https://www.dreamhost.com/blog/vps-hosting-guide"
-         class="p-item"
-         target="_blank"
-         rel="noopener"
-         data-cat="hosting-&-infra">
-        <div class="p-item-client">DreamHost</div>
-        <div class="p-item-title">Beginner's Guide to VPS Hosting</div>
-        <div class="p-item-cat">Hosting & Infra</div>
-      </a>
-      <a href="https://www.dreamhost.com/blog/how-to-find-wordpress-themes"
-         class="p-item"
-         target="_blank"
-         rel="noopener"
-         data-cat="hosting-&-infra">
-        <div class="p-item-client">DreamHost</div>
-        <div class="p-item-title">How to Find and Install WordPress Themes</div>
-        <div class="p-item-cat">Hosting & Infra</div>
-      </a>
-      <a href="https://www.hostinger.com/tutorials/wordpress-categories-vs-tags"
+      <a href="https://www.hostinger.com/tutorials/difference-between-wordpress-categories-and-tags"
          class="p-item"
          target="_blank"
          rel="noopener"
          data-cat="hosting-&-infra">
         <div class="p-item-client">Hostinger</div>
-        <div class="p-item-title">WordPress Categories vs Tags: The Difference</div>
+        <div class="p-item-title">WordPress Categories vs Tags: What are the differences?</div>
         <div class="p-item-cat">Hosting & Infra</div>
       </a>
-      <a href="https://www.delightchat.io/blog/automate-customer-service-ecommerce"
+      <a href="https://www.delightchat.io/blog/automate-customer-service-for-ecommerce"
          class="p-item"
          target="_blank"
          rel="noopener"
          data-cat="ecommerce">
         <div class="p-item-client">DelightChat</div>
-        <div class="p-item-title">Automate Customer Service for eCommerce</div>
+        <div class="p-item-title">10 Easy Ways to Automate Customer Service for eCommerce</div>
         <div class="p-item-cat">eCommerce</div>
       </a>
-      <a href="https://www.delightchat.io/blog/launch-live-chat-ecommerce"
+      <a href="https://www.delightchat.io/blog/live-chat-launch"
          class="p-item"
          target="_blank"
          rel="noopener"
          data-cat="ecommerce">
         <div class="p-item-client">DelightChat</div>
-        <div class="p-item-title">How to Launch Live Chat for Your eCommerce Store</div>
+        <div class="p-item-title">Live Chat Launch Guide for Ecommerce Stores</div>
         <div class="p-item-cat">eCommerce</div>
       </a>
-      <a href="https://www.linuxfordevices.com/tutorials/linux/check-cpu-temperature"
+      <a href="https://www.delightchat.io/blog/gorgias-vs-freshchat-top-differences-and-similarities"
+         class="p-item"
+         target="_blank"
+         rel="noopener"
+         data-cat="ecommerce">
+        <div class="p-item-client">DelightChat</div>
+        <div class="p-item-title">Gorgias vs Freshchat: Top Differences</div>
+        <div class="p-item-cat">eCommerce</div>
+      </a>
+      <a href="https://www.linuxfordevices.com/tutorials/linux/check-your-cpu-frequency-on-linux"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -329,7 +372,7 @@
         <div class="p-item-title">How to Check CPU Temperature on Linux</div>
         <div class="p-item-cat">Linux & DevOps</div>
       </a>
-      <a href="https://www.linuxfordevices.com/tutorials/linux/process-management"
+      <a href="https://www.linuxfordevices.com/tutorials/process-termination-in-linux"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -338,7 +381,7 @@
         <div class="p-item-title">Linux Process Management: A Complete Guide</div>
         <div class="p-item-cat">Linux & DevOps</div>
       </a>
-      <a href="https://www.linuxfordevices.com/tutorials/linux/bash-scripting"
+      <a href="https://www.linuxfordevices.com/tutorials/shell-script/variables-in-shell-scripts"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -347,16 +390,16 @@
         <div class="p-item-title">Bash Scripting for Beginners</div>
         <div class="p-item-cat">Linux & DevOps</div>
       </a>
-      <a href="https://www.linuxfordevices.com/tutorials/linux/development-environment"
+      <a href="https://www.linuxfordevices.com/tutorials/linux/start-stop-restart-services-linux"
          class="p-item"
          target="_blank"
          rel="noopener"
          data-cat="linux-&-devops">
         <div class="p-item-client">LinuxForDevices</div>
-        <div class="p-item-title">Setting Up a Linux Development Environment</div>
+        <div class="p-item-title">How to Start, Stop, and Restart Services in Linux</div>
         <div class="p-item-cat">Linux & DevOps</div>
       </a>
-      <a href="https://www.linuxfordevices.com/tutorials/linux/docker-installation"
+      <a href="https://www.linuxfordevices.com/tutorials/ubuntu/install-docker-run-docker-container-ubuntu"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -365,7 +408,7 @@
         <div class="p-item-title">Docker on Linux: Installation and Usage Guide</div>
         <div class="p-item-cat">Linux & DevOps</div>
       </a>
-      <a href="https://www.linuxfordevices.com/tutorials/linux/systemd-guide"
+      <a href="https://www.linuxfordevices.com/tutorials/linux/start-stop-restart-services-linux"
          class="p-item"
          target="_blank"
          rel="noopener"
@@ -374,7 +417,7 @@
         <div class="p-item-title">Understanding systemd for Linux Administration</div>
         <div class="p-item-cat">Linux & DevOps</div>
       </a>
-      <a href="https://www.linuxfordevices.com/tutorials/linux/ssh-configuration"
+      <a href="https://www.linuxfordevices.com/tutorials/ssh-command-in-linux"
          class="p-item"
          target="_blank"
          rel="noopener"

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building a Developer Newsletter That Gets Opened | Ninad Pathak</title>
+  <meta name="description" content="Developer inboxes are crowded. Here is how to build a newsletter developers actually read, from subject lines to content structure.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Building a Developer Newsletter That Gets Opened">
+  <meta property="og:description" content="Developer inboxes are crowded. Here is how to build a newsletter developers actually read, from subject lines to content structure.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/07-building-a-developer-newsletter-that-gets-opened/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/07-building-a-developer-newsletter-that-gets-opened/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Building a Developer Newsletter That Gets Opened",
+  "description": "Developer inboxes are crowded. Here is how to build a newsletter developers actually read, from subject lines to content structure.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-15",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/ninadpathak/meet/" class="nav-cta" target="_blank" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 15, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">2 min read</span>
+      </div>
+      <h1 class="post-title">Building a Developer Newsletter That Gets Opened</h1>
+      <p class="lead">Developer inboxes are crowded. Here is how to build a newsletter developers actually read, from subject lines to content structure.</p>
+      <div class="post-tags">
+        <span class="tag">email-marketing</span>
+        <span class="tag">newsletters</span>
+        <span class="tag">developer-marketing</span>
+        <span class="tag">community</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content">
+        <h1 id="building-a-developer-newsletter-that-gets-opened">Building a Developer Newsletter That Gets Opened</h1>
+<p>Developers receive dozens of emails daily. Marketing messages go straight to spam. Product updates get ignored. Your newsletter competes with GitHub notifications and production alerts.</p>
+<p>Here is how to build a newsletter that survives the inbox.</p>
+<h2 id="promise-specific-value-in-the-subject-line">Promise Specific Value in the Subject Line</h2>
+<p>Vague subjects fail. "Weekly Update" tells the reader nothing. "March Newsletter" sounds like work.</p>
+<p>Specific subjects work:
+* "Fixing memory leaks in Python async code"
+* "Three API patterns we abandoned this month"
+* "How we cut build times by 40 percent"</p>
+<p>The reader knows exactly what they will learn.</p>
+<h2 id="lead-with-code">Lead With Code</h2>
+<p>Do not start with introductions. Do not start with context. Start with code.</p>
+<p>Developers scan for technical substance. Give it to them immediately. Put your best code snippet or command in the first paragraph.</p>
+<h2 id="keep-it-short">Keep It Short</h2>
+<p>Long newsletters do not get read. Aim for 500 words maximum. One main topic per issue. One clear takeaway.</p>
+<p>Developers read on phones between meetings. Respect their time constraints.</p>
+<h2 id="link-to-details">Link to Details</h2>
+<p>Use the newsletter as a teaser. Summarize the key insight. Link to the full tutorial or documentation.</p>
+<p>This serves two purposes. Short content gets read. Interested readers self select for deeper engagement.</p>
+<h2 id="send-on-tuesdays-or-wednesdays">Send on Tuesdays or Wednesdays</h2>
+<p>Monday inboxes overflow from the weekend. Thursday and Friday minds drift toward the weekend. Tuesday and Wednesday offer the best attention windows.</p>
+<p>Send at 10 AM in your primary timezone. Avoid early morning when inboxes pile up. Avoid afternoon when focus fades.</p>
+<h2 id="use-plain-text-or-minimal-html">Use Plain Text or Minimal HTML</h2>
+<p>Fancy templates look like marketing. Plain text looks like a message from a colleague.</p>
+<p>If you use HTML, keep it minimal. Single column layout. Readable fonts. No animated GIFs. No tracking pixels that trigger spam filters.</p>
+<h2 id="let-readers-reply">Let Readers Reply</h2>
+<p>Use a real reply to address. Respond to every reply personally. These conversations build relationships.</p>
+<p>Reply volume indicates engagement. High reply rates signal content resonance.</p>
+<h2 id="test-subject-lines">Test Subject Lines</h2>
+<p>Write three subject lines for every issue. Test them with colleagues. Pick the one that makes people curious.</p>
+<p>Track open rates by subject line style. Learn what your specific audience prefers.</p>
+<hr />
+<p>Developer newsletters succeed through respect. Respect their time. Respect their intelligence. Respect their inbox. Deliver genuine technical value every single issue.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/04-writing-technical-content-when-you-are-not-technical/" class="related-card">
+        <div class="related-card-date">2026-03-12</div>
+        <div class="related-card-title">Writing Technical Content When You Are Not Technical</div>
+      </a>
+      <a href="/blog/02-documentation-is-your-best-sales-page/" class="related-card">
+        <div class="related-card-date">2026-03-10</div>
+        <div class="related-card-title">Documentation Is Your Best Sales Page</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding: 4rem 0; border-top: 1px solid var(--border);">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">ninad pathak</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/work/"      class="footer-link">Work</a>
+        <a href="/portfolio/" class="footer-link">Portfolio</a>
+        <a href="/blog/"      class="footer-link">Writing</a>
+        <a href="/about/"     class="footer-link">About</a>
+        <a href="/contact/"   class="footer-link">Contact</a>
+        <a href="/feed.xml"   class="footer-link">RSS</a>
+      </nav>
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>
