@@ -8,7 +8,7 @@ author = "Ninad Pathak"
 [content]
 # Set this to the full path of your Obsidian blog posts folder
 # Example: obsidian_path = "/Users/ninad/Obsidian/Blog Posts"
-obsidian_path = ""
+obsidian_path = "/Users/ninad/Obsidian/Essays"
 posts_per_page = 20
 
 [contact]
