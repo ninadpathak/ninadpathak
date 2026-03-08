@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | Ninad Pathak{% endblock %}
+{% block description %}Book a call with Ninad Pathak, technical content writer for DevTools and B2B SaaS companies. I reply within 24 hours.{% endblock %}
+{% block canonical %}/contact/{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Contact</div>
+    <h1>Let's talk.</h1>
+    <p class="lead">
+      If you're building something technical and need content that engineers
+      actually respect, I'd love to hear about it.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- Left: info -->
+      <div>
+        <div class="contact-methods">
+          <div>
+            <div class="contact-method-label">// Email</div>
+            <a href="mailto:{{ contact.email }}" class="contact-method-val">{{ contact.email }}</a>
+          </div>
+          <div>
+            <div class="contact-method-label">// LinkedIn</div>
+            <a href="{{ contact.linkedin }}" class="contact-method-val" target="_blank" rel="noopener">linkedin.com/in/ninadwites</a>
+          </div>
+          <div>
+            <div class="contact-method-label">// Twitter / X</div>
+            <a href="{{ contact.twitter }}" class="contact-method-val" target="_blank" rel="noopener">@ninadwrites</a>
+          </div>
+          <div>
+            <div class="contact-method-label">// Response Time</div>
+            <span class="contact-method-val" style="cursor: default;">Within 24 hours</span>
+          </div>
+        </div>
+
+        <div class="expect-list">
+          <h4>// What to expect on the call</h4>
+          <div class="expect-item">We'll talk about your content goals and what's blocking you.</div>
+          <div class="expect-item">I'll share how I'd approach your specific challenges.</div>
+          <div class="expect-item">You'll leave with a clear picture of how we can work together, no pressure.</div>
+          <div class="expect-item">The call is 30 minutes. I won't waste your time.</div>
+        </div>
+      </div>
+
+      <!-- Right: booking -->
+      <div>
+        <div class="contact-booking-box">
+          <div class="contact-booking-label">// Book a Call</div>
+          <div class="contact-booking-title">30-minute intro call</div>
+          <p class="contact-booking-desc">
+            Let's see if we're a good fit. Tell me about your product,
+            your audience, and what kind of content you need.
+          </p>
+          <a href="{{ contact.booking_url }}" class="btn btn-primary" target="_blank" rel="noopener" style="width: 100%; justify-content: center;">
+            Open Booking Calendar →
+          </a>
+        </div>
+
+        <!-- Who I work best with -->
+        <div style="padding: 2rem; border: 1px solid var(--border); border-top: none;">
+          <div class="contact-method-label" style="margin-bottom: 1rem;">// I work best with</div>
+          <div class="expect-item">DevTools companies whose audience is developers</div>
+          <div class="expect-item">B2B SaaS companies that need technical depth, not surface-level content</div>
+          <div class="expect-item">Teams who value accuracy over output volume</div>
+          <div class="expect-item">Founders who want content their engineering team won't cringe at</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

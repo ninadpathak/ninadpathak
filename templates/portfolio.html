@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio | Ninad Pathak{% endblock %}
+{% block description %}27+ published technical articles across DevTools, AI, testing platforms, hosting, and B2B SaaS. Written by Ninad Pathak.{% endblock %}
+{% block canonical %}/portfolio/{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Portfolio</div>
+    <h1>Published work.</h1>
+    <p class="lead">
+      A selection of articles, guides, and tutorials published across DevTools companies,
+      hosting platforms, and B2B SaaS brands. Every piece is technically accurate,
+      reviewed by engineers, not just editors.
+    </p>
+  </div>
+</section>
+
+<section style="padding-bottom: 5rem;">
+  <div class="container">
+    <!-- FILTERS -->
+    <div class="portfolio-filters" id="portfolioFilters" role="group" aria-label="Filter portfolio by category">
+      <button class="filter-btn active" data-filter="all">All</button>
+      {% set categories = [] %}
+      {% for item in portfolio.entries %}
+        {% if item.category not in categories %}
+          {% set _ = categories.append(item.category) %}
+        {% endif %}
+      {% endfor %}
+      {% for cat in categories %}
+      <button class="filter-btn" data-filter="{{ cat | lower | replace(' ', '-') }}">{{ cat }}</button>
+      {% endfor %}
+    </div>
+
+    <!-- GRID -->
+    <div class="portfolio-grid" id="portfolioGrid">
+      {% for item in portfolio.entries %}
+      <a href="{{ item.url }}"
+         class="p-item"
+         target="_blank"
+         rel="noopener"
+         data-cat="{{ item.category | lower | replace(' ', '-') }}">
+        <div class="p-item-client">{{ item.client }}</div>
+        <div class="p-item-title">{{ item.title }}</div>
+        <div class="p-item-cat">{{ item.category }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Like what you see?</h2>
+        <p>I'm currently taking on new clients. Let's talk about your content.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="{{ contact.booking_url }}" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+        <a href="/work/" class="btn btn-outline">See Case Studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.p-item[hidden] { display: none; }
+</style>
+{% endblock %}

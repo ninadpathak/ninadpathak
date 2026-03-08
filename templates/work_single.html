@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}{{ case.title }} | Ninad Pathak{% endblock %}
+{% block description %}{{ case.summary }}{% endblock %}
+{% block canonical %}/work/{{ case.slug }}/{% endblock %}
+
+{% block content %}
+
+<header class="case-header">
+  <div class="container">
+    <a href="/work/" class="back-link">← All Work</a>
+    <div class="label">// Case Study: {{ case.client }}</div>
+    <h1>{{ case.title }}</h1>
+
+    <div class="case-meta-bar">
+      <div class="case-meta-item">
+        <span class="case-meta-label">Client</span>
+        <span class="case-meta-val">{{ case.client }}</span>
+      </div>
+      {% if case.industry %}
+      <div class="case-meta-item">
+        <span class="case-meta-label">Industry</span>
+        <span class="case-meta-val">{{ case.industry }}</span>
+      </div>
+      {% endif %}
+      {% if case.duration %}
+      <div class="case-meta-item">
+        <span class="case-meta-label">Duration</span>
+        <span class="case-meta-val">{{ case.duration }}</span>
+      </div>
+      {% endif %}
+      {% if case.services %}
+      <div class="case-meta-item">
+        <span class="case-meta-label">Services</span>
+        <span class="case-meta-val">{{ case.services }}</span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    {% if case.metrics %}
+    <div class="case-metrics">
+      {% for m in case.metrics %}
+      <div class="cs-metric">
+        <div class="cs-metric-num">{{ m.value }}</div>
+        <div class="cs-metric-label">{{ m.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="case-body" style="max-width: var(--prose-w);">
+      {{ case.content }}
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Want results like {{ case.client }}'s?</h2>
+        <p>Let's talk about what technically accurate content can do for your product.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="{{ contact.booking_url }}" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+        <a href="/work/" class="btn btn-outline">More Case Studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

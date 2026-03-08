@@ -1,0 +1,147 @@
+entries:
+  # DevTools / Code Review
+  - title: "Code Review Best Practices for Engineering Teams"
+    client: "Graphite"
+    category: "DevTools"
+    url: "https://graphite.dev/guides/code-review-best-practices"
+
+  - title: "Phabricator Code Review: Complete Guide"
+    client: "Graphite"
+    category: "DevTools"
+    url: "https://graphite.dev/guides/phabricator"
+
+  - title: "Phabricator Alternatives for Modern Teams"
+    client: "Graphite"
+    category: "DevTools"
+    url: "https://graphite.dev/guides/phabricator-alternatives"
+
+  - title: "Pull Request Merge Strategy Guide"
+    client: "Graphite"
+    category: "DevTools"
+    url: "https://graphite.dev/guides/pull-request-merge-strategy"
+
+  # AI / Testing
+  - title: "AI Agent Testing: A Complete Guide"
+    client: "LambdaTest"
+    category: "AI & Testing"
+    url: "https://www.lambdatest.com/learning-hub/ai-agent-testing"
+
+  - title: "AI Adoption Challenges and How to Overcome Them"
+    client: "LambdaTest"
+    category: "AI & Testing"
+    url: "https://www.lambdatest.com/blog/ai-adoption-challenges"
+
+  # Localization / i18n
+  - title: "Svelte Localization with svelte-i18n"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/svelte-localization"
+
+  - title: "PHP Localization: A Developer's Guide"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/php-localization"
+
+  - title: "Python Localization with gettext"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/python-localization-gettext"
+
+  - title: "React i18n with the Intl API"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/react-i18n-intl"
+
+  - title: "Laravel Localization Guide"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/laravel-localization"
+
+  - title: "YAML Translation Files: Best Practices"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/yaml-translation-files"
+
+  # WordPress / WooCommerce
+  - title: "Manage YouTube Channel with OttoKit Automation"
+    client: "OttoKit"
+    category: "WordPress"
+    url: "https://ottokit.com/blog/manage-youtube-channel-ottokit"
+
+  - title: "Cart Abandonment Recovery Strategies for WooCommerce"
+    client: "CartFlows"
+    category: "WordPress"
+    url: "https://cartflows.com/blog/cart-abandonment-recovery"
+
+  - title: "Essential WooCommerce Extensions Guide"
+    client: "CartFlows"
+    category: "WordPress"
+    url: "https://cartflows.com/blog/woocommerce-extensions"
+
+  - title: "WordPress Sales Funnel: Complete Guide"
+    client: "CartFlows"
+    category: "WordPress"
+    url: "https://cartflows.com/blog/wordpress-sales-funnel"
+
+  # Hosting / Infrastructure
+  - title: "Beginner's Guide to VPS Hosting"
+    client: "DreamHost"
+    category: "Hosting & Infra"
+    url: "https://www.dreamhost.com/blog/vps-hosting-guide"
+
+  - title: "How to Find and Install WordPress Themes"
+    client: "DreamHost"
+    category: "Hosting & Infra"
+    url: "https://www.dreamhost.com/blog/how-to-find-wordpress-themes"
+
+  - title: "WordPress Categories vs Tags: The Difference"
+    client: "Hostinger"
+    category: "Hosting & Infra"
+    url: "https://www.hostinger.com/tutorials/wordpress-categories-vs-tags"
+
+  # eCommerce / SaaS
+  - title: "Automate Customer Service for eCommerce"
+    client: "DelightChat"
+    category: "eCommerce"
+    url: "https://www.delightchat.io/blog/automate-customer-service-ecommerce"
+
+  - title: "How to Launch Live Chat for Your eCommerce Store"
+    client: "DelightChat"
+    category: "eCommerce"
+    url: "https://www.delightchat.io/blog/launch-live-chat-ecommerce"
+
+  # Linux / Developer
+  - title: "How to Check CPU Temperature on Linux"
+    client: "LinuxForDevices"
+    category: "Linux & DevOps"
+    url: "https://www.linuxfordevices.com/tutorials/linux/check-cpu-temperature"
+
+  - title: "Linux Process Management: A Complete Guide"
+    client: "LinuxForDevices"
+    category: "Linux & DevOps"
+    url: "https://www.linuxfordevices.com/tutorials/linux/process-management"
+
+  - title: "Bash Scripting for Beginners"
+    client: "LinuxForDevices"
+    category: "Linux & DevOps"
+    url: "https://www.linuxfordevices.com/tutorials/linux/bash-scripting"
+
+  - title: "Setting Up a Linux Development Environment"
+    client: "LinuxForDevices"
+    category: "Linux & DevOps"
+    url: "https://www.linuxfordevices.com/tutorials/linux/development-environment"
+
+  - title: "Docker on Linux: Installation and Usage Guide"
+    client: "LinuxForDevices"
+    category: "Linux & DevOps"
+    url: "https://www.linuxfordevices.com/tutorials/linux/docker-installation"
+
+  - title: "Understanding systemd for Linux Administration"
+    client: "LinuxForDevices"
+    category: "Linux & DevOps"
+    url: "https://www.linuxfordevices.com/tutorials/linux/systemd-guide"
+
+  - title: "SSH Configuration and Security Best Practices"
+    client: "LinuxForDevices"
+    category: "Linux & DevOps"
+    url: "https://www.linuxfordevices.com/tutorials/linux/ssh-configuration"

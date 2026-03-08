@@ -1,0 +1,18 @@
+[site]
+title = "Ninad Pathak"
+tagline = "Technical Content for DevTools & B2B SaaS"
+description = "Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve."
+url = "https://ninadpathak.com"
+author = "Ninad Pathak"
+
+[content]
+# Set this to the full path of your Obsidian blog posts folder
+# Example: obsidian_path = "/Users/ninad/Obsidian/Blog Posts"
+obsidian_path = ""
+posts_per_page = 20
+
+[contact]
+booking_url = "https://zcal.co/ninadpathak/meet/"
+linkedin = "https://linkedin.com/in/ninadwites/"
+twitter = "https://twitter.com/ninadwrites"
+email = "hello@ninadpathak.com"

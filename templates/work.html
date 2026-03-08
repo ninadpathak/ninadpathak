@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Work | Ninad Pathak{% endblock %}
+{% block description %}Case studies showing how technical content drove real results: 450K monthly visits, 740% ROI, and 50K organic sessions from zero.{% endblock %}
+{% block canonical %}/work/{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Selected Work</div>
+    <h1>Results, not just output.</h1>
+    <p class="lead">
+      Every engagement is measured. Here's what technically accurate, well-researched
+      content actually does when strategy and execution are aligned.
+    </p>
+  </div>
+</section>
+
+<section style="padding-bottom: 5rem;">
+  <div class="container">
+    <div class="work-grid">
+      {% for case in cases %}
+      <a href="/work/{{ case.slug }}/" class="work-card">
+        <div class="work-card-client">{{ case.client }}</div>
+        <div class="work-card-num">{{ case.hero_metric }}</div>
+        <div class="work-card-num-label">{{ case.hero_metric_label }}</div>
+        <div class="work-card-title">{{ case.title }}</div>
+        <p class="work-card-desc">{{ case.summary }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS STRIP -->
+<section style="padding: 5rem 0; border-top: 1px solid var(--border); background: var(--bg-1);">
+  <div class="container">
+    <div class="label" style="margin-bottom: 1rem;">// In their words</div>
+    <div class="testimonials-grid">
+      <div class="tcard">
+        <p class="tcard-quote">Our devs called it 'awesome' and just sent it ahead for publishing. If you need deep tech content, get him onboard!</p>
+        <div class="tcard-author">
+          <span class="tcard-name">Roman Hresko</span>
+          <span class="tcard-role">Head of Content, Centus</span>
+        </div>
+      </div>
+      <div class="tcard">
+        <p class="tcard-quote">A skilled B2B SaaS writer with the coding chops to boot, closing the gap in a very important writing sphere.</p>
+        <div class="tcard-author">
+          <span class="tcard-name">Brinda Gulati</span>
+          <span class="tcard-role">Freelance Editor, Shopify / Userpilot</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Want results like these?</h2>
+        <p>Let's talk about your content program. I reply within 24 hours.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="{{ contact.booking_url }}" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+        <a href="/portfolio/" class="btn btn-outline">See Portfolio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

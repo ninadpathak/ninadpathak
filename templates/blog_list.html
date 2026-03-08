@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Writing | Ninad Pathak{% endblock %}
+{% block description %}Technical articles on AI agents, DevTools, developer documentation, and content strategy. Written by a programmer-turned-writer.{% endblock %}
+{% block canonical %}/blog/{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Writing</div>
+    <h1>Thinking out loud.</h1>
+    <p class="lead">
+      Technical takes on AI agents, developer tooling, content strategy, and the craft
+      of writing for engineering audiences. No newsletters. No paywalls.
+    </p>
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    {% if posts %}
+      {% for post in posts %}
+      <a href="/blog/{{ post.slug }}/" class="blog-row">
+        <div class="blog-row-date">{{ post.date | format_date_iso }}</div>
+        <div>
+          <div class="blog-row-title">{{ post.title }}</div>
+          {% if post.description %}
+          <div class="blog-row-desc">{{ post.description }}</div>
+          {% endif %}
+          <div class="blog-row-meta">
+            <span class="read-time">{{ post.reading_time }} min read</span>
+            {% for tag in post.tags[:3] %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    {% else %}
+      <div style="padding: 4rem 0; color: var(--text-3); font-family: var(--mono); font-size: 0.875rem;">
+        // No posts yet. Check back soon.
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

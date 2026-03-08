@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}About | Ninad Pathak{% endblock %}
+{% block description %}Programmer-turned-writer with 6+ years creating technical content for DevTools and B2B SaaS companies. The technical writer your engineers will actually respect.{% endblock %}
+{% block canonical %}/about/{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// About</div>
+    <h1>The technical writer<br>your engineers will respect.</h1>
+    <p class="lead">
+      I started as a programmer. Then I became a writer. That combination
+      is rarer than it should be.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="about-layout">
+
+      <!-- Sidebar -->
+      <aside class="about-sidebar">
+        <div class="about-sidebar-name">// Ninad Pathak</div>
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat-num">6yr+</div>
+            <div class="about-stat-label">Experience</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">30+</div>
+            <div class="about-stat-label">Companies</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">450K</div>
+            <div class="about-stat-label">Peak monthly visits</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">740%</div>
+            <div class="about-stat-label">ROI delivered</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">$34K</div>
+            <div class="about-stat-label">MRR added (1 client)</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <a href="{{ contact.linkedin }}" class="arrow-link" target="_blank" rel="noopener" style="display: flex; margin-bottom: 0.75rem;">LinkedIn →</a>
+          <a href="{{ contact.booking_url }}" class="arrow-link" target="_blank" rel="noopener" style="display: flex;">Book a Call →</a>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="about-content">
+        {{ content }}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section style="padding: 5rem 0; border-top: 1px solid var(--border); background: var(--bg-1);">
+  <div class="container">
+    <div class="label" style="margin-bottom: 1rem;">// What people say</div>
+    <div class="testimonials-grid">
+      <div class="tcard">
+        <p class="tcard-quote">Our devs called it 'awesome' and just sent it ahead for publishing.</p>
+        <div class="tcard-author">
+          <span class="tcard-name">Roman Hresko</span>
+          <span class="tcard-role">Head of Content, Centus</span>
+        </div>
+      </div>
+      <div class="tcard">
+        <p class="tcard-quote">A skilled B2B SaaS writer with the coding chops to boot, closing the gap in a very important writing sphere.</p>
+        <div class="tcard-author">
+          <span class="tcard-name">Brinda Gulati</span>
+          <span class="tcard-role">Freelance Editor, Shopify / Userpilot</span>
+        </div>
+      </div>
+      <div class="tcard">
+        <p class="tcard-quote">His work usually requires minimal editing and when it does, he is fast and responsive to recommendations.</p>
+        <div class="tcard-author">
+          <span class="tcard-name">Jamie Kavanagh</span>
+          <span class="tcard-role">Senior Editor, Brainstorm Force</span>
+        </div>
+      </div>
+      <div class="tcard">
+        <p class="tcard-quote">Ninad is one of the best writers I've worked with to date, especially brilliant with technical writing projects.</p>
+        <div class="tcard-author">
+          <span class="tcard-name">Deb Mukherjee</span>
+          <span class="tcard-role">Founder, Blync AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Let's work together.</h2>
+        <p>Currently accepting new clients. Technical writing, tutorials, and content strategy for DevTools & SaaS.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="{{ contact.booking_url }}" class="btn btn-primary" target="_blank" rel="noopener">Book a 30-min Call →</a>
+        <a href="/work/" class="btn btn-outline">See My Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
