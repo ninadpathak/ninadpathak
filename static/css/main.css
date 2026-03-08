@@ -16,8 +16,8 @@
   --border:    #1e1e1e;
   --border-2:  #2c2c2c;
   --text-1:    #f0f0f0;
-  --text-2:    #9a9a9a;
-  --text-3:    #484848;
+  --text-2:    #c2c2c2;
+  --text-3:    #6a6a6a;
   --accent:    #ff5f1f;
   --accent-lo: #1a0d07;
 
@@ -39,8 +39,8 @@
   --border:    #e0e0dc;
   --border-2:  #c8c8c4;
   --text-1:    #0e0e0e;
-  --text-2:    #555555;
-  --text-3:    #aaaaaa;
+  --text-2:    #3a3a3a;
+  --text-3:    #888888;
   --accent:    #d44000;
   --accent-lo: #fdf1ec;
 }
