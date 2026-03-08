@@ -36,7 +36,7 @@ I've written about:
 - Localization frameworks in Svelte, React, PHP, Python, and Laravel
 - Code review workflows and tooling (Graphite, Phabricator)
 - AI agent testing and deployment
-- WooCommerce, CartFlows, and WordPress automation
+- WooCommerce and WordPress automation
 - VPS hosting, Linux system administration, and developer tooling
 - Fintech platforms and data infrastructure
 

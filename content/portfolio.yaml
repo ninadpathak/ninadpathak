@@ -94,22 +94,6 @@ entries:
     category: "Analytics"
     url: "https://www.factors.ai/authors/ninad-pathak"
 
-  # WordPress / WooCommerce
-  - title: "Cart Abandonment Recovery Strategies for WooCommerce"
-    client: "CartFlows"
-    category: "WordPress"
-    url: "https://cartflows.com/blog/cart-abandonment-recovery"
-
-  - title: "Essential WooCommerce Extensions Guide"
-    client: "CartFlows"
-    category: "WordPress"
-    url: "https://cartflows.com/blog/woocommerce-extensions"
-
-  - title: "WordPress Sales Funnel: Complete Guide"
-    client: "CartFlows"
-    category: "WordPress"
-    url: "https://cartflows.com/blog/wordpress-sales-funnel"
-
   # Hosting / Infrastructure
   - title: "WordPress Categories vs Tags: What are the differences?"
     client: "Hostinger"
