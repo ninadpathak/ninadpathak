@@ -6,11 +6,11 @@ title: About Ninad Pathak
 
 I started my career writing code. I learned to read documentation, curse at it when it was wrong, and appreciate it when someone actually explained the hard parts.
 
-Then I started writing instead of coding, and brought everything I learned from the engineering side with me.
+Then I started writing, bringing everything I learned from the engineering side with me.
 
 That transition is the whole point. Most technical writers approach a codebase the way a tourist approaches a city, everything looks right on the surface, but locals can always tell. Engineers at every company I've worked with have spotted the same thing. When someone who actually understands the technology writes about it, the output is different. Developers feel it.
 
-That's my edge. Not just that I can explain, most writers can explain. It's that I can *verify*. I run the code. I check the API. I notice when the example in the docs doesn't match the current version.
+That's my edge. I don't just explain. I verify. I run the code. I check the API. I notice when the example in the docs matches the current version.
 
 ## What I work on
 
@@ -28,7 +28,7 @@ I helped **LinuxForDevices** grow from 487 to 203,400 monthly visits in 15 month
 
 **DelightChat** grew from zero to 50,000 monthly organic visits through a ground-up content strategy.
 
-These aren't vanity metrics. They're the result of treating content as a product, with the same rigor you'd apply to an engineering project.
+These metrics reflect treating content as a product, with the same rigor you'd apply to an engineering project.
 
 ## Six years of specifics
 

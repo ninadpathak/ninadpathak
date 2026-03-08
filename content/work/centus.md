@@ -20,7 +20,7 @@ metrics:
 
 Centus is a localization and translation management platform. Their audience is developers who need to implement i18n in their applications, Svelte, React, PHP, Python, Laravel, and more.
 
-The challenge: create technical documentation that's accurate enough that engineering teams don't need to correct it before publishing. This is a higher bar than it sounds. Developers read documentation skeptically. One wrong command, one outdated API call, one incorrect explanation of how a library works, and the whole article loses credibility.
+The challenge: create technical documentation accurate enough that engineering teams approve it for publishing. This is a higher bar than it sounds. Developers read documentation skeptically. One wrong command, one outdated API call, one incorrect explanation of how a library works, and the whole article loses credibility.
 
 ## What I Did
 
@@ -36,7 +36,7 @@ The challenge: create technical documentation that's accurate enough that engine
 - Laravel localization
 - YAML-based translation file management
 
-**Wrote for the developer audience specifically.** Centus's readers aren't decision-makers evaluating software, they're engineers implementing it under a deadline. The content is structured for people who read documentation to solve a specific problem, not to understand the space.
+**Wrote for the developer audience specifically.** Centus's readers are engineers implementing software under a deadline, not decision-makers evaluating options. The content is structured for people who read documentation to solve a specific problem, not to understand the space.
 
 ## The Results
 

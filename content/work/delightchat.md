@@ -24,7 +24,7 @@ The product had strong PMF. The organic presence didn't exist. The challenge was
 
 ## What I Did
 
-**Identified the content-market fit.** DelightChat's audience is eCommerce operators, store owners, operations managers, and customer service leads at Shopify businesses. They don't think in SaaS terms; they think in conversion rates, CSAT scores, and return rates. The content had to speak that language.
+**Identified the content-market fit.** DelightChat's audience is eCommerce operators, store owners, operations managers, and customer service leads at Shopify businesses. They think in conversion rates, CSAT scores, and return rates. The content had to speak that language.
 
 **Built a topical cluster strategy.** Rather than chasing broad competitive keywords from the start, I mapped the specific sub-topics where DelightChat could realistically rank early and build authority. Customer service automation, Shopify integrations, WhatsApp for business, these became the pillars.
 

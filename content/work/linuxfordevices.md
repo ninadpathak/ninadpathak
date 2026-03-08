@@ -43,6 +43,6 @@ The goal was to build a content program that developers trusted and search engin
 
 ## What Made It Work
 
-The audience can't be fooled. Linux developers and embedded engineers read technical documentation professionally, they know when an article is written by someone who doesn't understand the command they're explaining. Every article passed a simple test: would a senior Linux engineer find this useful or would they immediately close the tab?
+The audience can't be fooled. Linux developers and embedded engineers read technical documentation professionally, they recognize when an author understands the commands they explain. Every article passed a simple test: would a senior Linux engineer find this useful or would they immediately close the tab?
 
 That bar, combined with systematic SEO architecture, produced results that sustained well beyond the engagement period.
