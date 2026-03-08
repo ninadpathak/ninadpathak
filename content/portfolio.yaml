@@ -3,33 +3,33 @@ entries:
   - title: "Code Review Best Practices for Engineering Teams"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/guides/code-review-best-practices"
+    url: "https://graphite.dev/blog/code-review-best-practices"
 
   - title: "Phabricator Code Review: Complete Guide"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/guides/phabricator"
+    url: "https://graphite.dev/blog/phabricator-code-review"
 
   - title: "Phabricator Alternatives for Modern Teams"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/guides/phabricator-alternatives"
+    url: "https://graphite.dev/blog/phabricator-alternatives"
 
-  - title: "Pull Request Merge Strategy Guide"
+  - title: "Pull Request Best Practices for Teams"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/guides/pull-request-merge-strategy"
+    url: "https://graphite.dev/blog/pull-request-guidelines"
 
   # AI / Testing
   - title: "AI Agent Testing: A Complete Guide"
     client: "LambdaTest"
     category: "AI & Testing"
-    url: "https://www.lambdatest.com/learning-hub/ai-agent-testing"
+    url: "https://www.testmu.ai/learning-hub/ai-agent-testing"
 
   - title: "AI Adoption Challenges and How to Overcome Them"
     client: "LambdaTest"
     category: "AI & Testing"
-    url: "https://www.lambdatest.com/blog/ai-adoption-challenges"
+    url: "https://www.testmu.ai/blog/ai-adoption-challenges/"
 
   # Localization / i18n
   - title: "Svelte Localization with svelte-i18n"
@@ -37,37 +37,64 @@ entries:
     category: "Localization"
     url: "https://centus.com/blog/svelte-localization"
 
-  - title: "PHP Localization: A Developer's Guide"
-    client: "Centus"
-    category: "Localization"
-    url: "https://centus.com/blog/php-localization"
-
-  - title: "Python Localization with gettext"
-    client: "Centus"
-    category: "Localization"
-    url: "https://centus.com/blog/python-localization-gettext"
-
-  - title: "React i18n with the Intl API"
+  - title: "React i18n with react-intl"
     client: "Centus"
     category: "Localization"
     url: "https://centus.com/blog/react-i18n-intl"
 
-  - title: "Laravel Localization Guide"
+  - title: "React-i18next Localization Guide"
     client: "Centus"
     category: "Localization"
-    url: "https://centus.com/blog/laravel-localization"
+    url: "https://centus.com/blog/react-i18next-localization"
 
   - title: "YAML Translation Files: Best Practices"
     client: "Centus"
     category: "Localization"
-    url: "https://centus.com/blog/yaml-translation-files"
+    url: "https://centus.com/blog/yaml-translation"
+
+  - title: "Software Internationalization Best Practices"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/software-internationalization"
+
+  - title: "JavaScript Localization Guide for Web Apps"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/javascript-localization"
+
+  # AI / Memory
+  - title: "What is Natural Language Processing (NLP)?"
+    client: "Mem0"
+    category: "AI & Memory"
+    url: "https://mem0.ai/blog/what-is-natural-language-processing"
+
+  - title: "What is AI Agent Memory?"
+    client: "Mem0"
+    category: "AI & Memory"
+    url: "https://mem0.ai/blog/what-is-ai-agent-memory"
+
+  - title: "We Built Persistent Memory for OpenClaw AI Agents"
+    client: "Mem0"
+    category: "AI & Memory"
+    url: "https://mem0.ai/blog/mem0-memory-for-openclaw"
+
+  # Analytics / Marketing
+  - title: "Top Lead Scoring Software for B2B Teams"
+    client: "Factors.ai"
+    category: "Analytics"
+    url: "https://www.factors.ai/authors/ninad-pathak"
+
+  - title: "Content Marketing Metrics vs KPIs for SaaS"
+    client: "Factors.ai"
+    category: "Analytics"
+    url: "https://www.factors.ai/blog/content-marketing-metrics-and-kpis-for-saas"
+
+  - title: "Customer Acquisition Funnel Guide"
+    client: "Factors.ai"
+    category: "Analytics"
+    url: "https://www.factors.ai/authors/ninad-pathak"
 
   # WordPress / WooCommerce
-  - title: "Manage YouTube Channel with OttoKit Automation"
-    client: "OttoKit"
-    category: "WordPress"
-    url: "https://ottokit.com/blog/manage-youtube-channel-ottokit"
-
   - title: "Cart Abandonment Recovery Strategies for WooCommerce"
     client: "CartFlows"
     category: "WordPress"
@@ -84,64 +111,59 @@ entries:
     url: "https://cartflows.com/blog/wordpress-sales-funnel"
 
   # Hosting / Infrastructure
-  - title: "Beginner's Guide to VPS Hosting"
-    client: "DreamHost"
-    category: "Hosting & Infra"
-    url: "https://www.dreamhost.com/blog/vps-hosting-guide"
-
-  - title: "How to Find and Install WordPress Themes"
-    client: "DreamHost"
-    category: "Hosting & Infra"
-    url: "https://www.dreamhost.com/blog/how-to-find-wordpress-themes"
-
-  - title: "WordPress Categories vs Tags: The Difference"
+  - title: "WordPress Categories vs Tags: What are the differences?"
     client: "Hostinger"
     category: "Hosting & Infra"
-    url: "https://www.hostinger.com/tutorials/wordpress-categories-vs-tags"
+    url: "https://www.hostinger.com/tutorials/difference-between-wordpress-categories-and-tags"
 
   # eCommerce / SaaS
-  - title: "Automate Customer Service for eCommerce"
+  - title: "10 Easy Ways to Automate Customer Service for eCommerce"
     client: "DelightChat"
     category: "eCommerce"
-    url: "https://www.delightchat.io/blog/automate-customer-service-ecommerce"
+    url: "https://www.delightchat.io/blog/automate-customer-service-for-ecommerce"
 
-  - title: "How to Launch Live Chat for Your eCommerce Store"
+  - title: "Live Chat Launch Guide for Ecommerce Stores"
     client: "DelightChat"
     category: "eCommerce"
-    url: "https://www.delightchat.io/blog/launch-live-chat-ecommerce"
+    url: "https://www.delightchat.io/blog/live-chat-launch"
+
+  - title: "Gorgias vs Freshchat: Top Differences"
+    client: "DelightChat"
+    category: "eCommerce"
+    url: "https://www.delightchat.io/blog/gorgias-vs-freshchat-top-differences-and-similarities"
 
   # Linux / Developer
   - title: "How to Check CPU Temperature on Linux"
     client: "LinuxForDevices"
     category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/linux/check-cpu-temperature"
+    url: "https://www.linuxfordevices.com/tutorials/linux/check-your-cpu-frequency-on-linux"
 
   - title: "Linux Process Management: A Complete Guide"
     client: "LinuxForDevices"
     category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/linux/process-management"
+    url: "https://www.linuxfordevices.com/tutorials/process-termination-in-linux"
 
   - title: "Bash Scripting for Beginners"
     client: "LinuxForDevices"
     category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/linux/bash-scripting"
+    url: "https://www.linuxfordevices.com/tutorials/shell-script/variables-in-shell-scripts"
 
-  - title: "Setting Up a Linux Development Environment"
+  - title: "How to Start, Stop, and Restart Services in Linux"
     client: "LinuxForDevices"
     category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/linux/development-environment"
+    url: "https://www.linuxfordevices.com/tutorials/linux/start-stop-restart-services-linux"
 
   - title: "Docker on Linux: Installation and Usage Guide"
     client: "LinuxForDevices"
     category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/linux/docker-installation"
+    url: "https://www.linuxfordevices.com/tutorials/ubuntu/install-docker-run-docker-container-ubuntu"
 
   - title: "Understanding systemd for Linux Administration"
     client: "LinuxForDevices"
     category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/linux/systemd-guide"
+    url: "https://www.linuxfordevices.com/tutorials/linux/start-stop-restart-services-linux"
 
   - title: "SSH Configuration and Security Best Practices"
     client: "LinuxForDevices"
     category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/linux/ssh-configuration"
+    url: "https://www.linuxfordevices.com/tutorials/ssh-command-in-linux"
