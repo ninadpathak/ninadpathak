@@ -139,6 +139,8 @@ class SiteBuilder:
 
             self.md.reset()
             html = self.md.convert(post.content)
+            # Extract TOC from markdown if available
+            toc_html = getattr(self.md, 'toc', '') if hasattr(self.md, 'toc') else ''
             slug = post.get("slug") or slugify(md_file.stem)
 
             posts.append({
@@ -151,6 +153,7 @@ class SiteBuilder:
                 "slug": slug,
                 "reading_time": estimate_reading_time(post.content),
                 "url": f"/blog/{slug}/",
+                "toc": toc_html,
             })
 
         return sorted(posts, key=sort_key, reverse=True)
@@ -338,6 +341,11 @@ class SiteBuilder:
 
         if Path("static").exists():
             shutil.copytree("static", self.output / "static")
+            # Copy robots.txt to root if it exists
+            robots_src = Path("static") / "robots.txt"
+            robots_dst = self.output / "robots.txt"
+            if robots_src.exists():
+                shutil.copy2(robots_src, robots_dst)
         else:
             (self.output / "static" / "css").mkdir(parents=True)
 

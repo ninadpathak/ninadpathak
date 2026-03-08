@@ -4,6 +4,7 @@ date: 2026-03-12
 description: "You do not need to be a senior engineer to write technical content. You need a process for learning fast and validating with experts."
 tags: [technical-writing, content-creation, developer-marketing]
 status: published
+slug: writing-technical-content
 ---
 
 You are a marketer tasked with writing about Kubernetes. Or a content strategist covering machine learning. The subject matter intimidates you.

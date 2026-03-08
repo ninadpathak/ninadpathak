@@ -707,6 +707,83 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .page-intro .lead  { max-width: 52ch; }
 
 /* =====================================================================
+   BREADCRUMB
+   ===================================================================== */
+.breadcrumb {
+  padding: 1.5rem 0 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0 0 1.5rem;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.breadcrumb-item a {
+  color: var(--text-2);
+  transition: color var(--t);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--accent);
+}
+
+.breadcrumb-item.current {
+  color: var(--text-1);
+}
+
+.breadcrumb-separator {
+  color: var(--text-3);
+}
+
+/* =====================================================================
+   TABLE OF CONTENTS
+   ===================================================================== */
+.toc {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.toc-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 1rem;
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc li {
+  margin-bottom: 0.5rem;
+}
+
+.toc a {
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: color var(--t);
+}
+
+.toc a:hover {
+  color: var(--accent);
+}
+
+/* =====================================================================
    BLOG LIST
    ===================================================================== */
 .blog-list-section { padding: 3rem 0; }

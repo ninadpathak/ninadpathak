@@ -4,6 +4,7 @@ date: 2026-03-23
 description: "Your engineering team cannot write everything. Know the signs that it is time to bring in specialized technical writing talent."
 tags: [hiring, technical-writing, team-building, content-strategy]
 status: published
+slug: hire-technical-writer
 ---
 
 Engineers write documentation. They write blog posts. They write release notes. This works until it does not.

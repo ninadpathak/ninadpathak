@@ -4,6 +4,7 @@ date: 2026-03-11
 description: "Your old blog posts are assets. Refresh them systematically to regain lost traffic without writing from scratch."
 tags: [content-strategy, seo, content-refresh, editorial]
 status: published
+slug: content-refresh-framework
 ---
 
 Old blog posts decay. Screenshots become outdated. Links break. Code examples use deprecated syntax. Traffic drops.
@@ -62,3 +63,9 @@ Document what works. Some updates double traffic. Others do nothing. Learn the p
 ---
 
 Content refresh is compound interest for your blog. Small improvements stack. Old posts become new assets. Start your first 30 day cycle this week.
+
+## Related Resources
+
+* [Measuring Content ROI for B2B SaaS](/blog/content-roi-saas/) - Track content performance metrics
+* [Building Content Hubs That Rank](/blog/content-hubs/) - Create topical authority clusters
+* [The DevTools Content Audit Checklist](/blog/devtools-content-audit/) - Score your existing content

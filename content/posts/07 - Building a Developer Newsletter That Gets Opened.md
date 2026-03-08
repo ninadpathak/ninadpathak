@@ -4,6 +4,7 @@ date: 2026-03-15
 description: "Developer inboxes are crowded. Here is how to build a newsletter developers actually read, from subject lines to content structure."
 tags: [email-marketing, newsletters, developer-marketing, community]
 status: published
+slug: developer-newsletter
 ---
 
 Developers receive dozens of emails daily. Marketing messages go straight to spam. Product updates get ignored. Your newsletter competes with GitHub notifications and production alerts.

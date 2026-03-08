@@ -27,9 +27,48 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site.url }}/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "{{ site.url }}/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ post.title }}",
+      "item": "{{ site.url }}/blog/{{ post.slug }}/"
+    }
+  ]
+}
+</script>
 {% endblock %}
 
 {% block content %}
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">{{ post.title }}</li>
+    </ol>
+  </div>
+</nav>
 
 <article>
   <header class="post-header">
@@ -56,6 +95,12 @@
 
   <div class="post-body">
     <div class="prose-container">
+      {% if post.toc %}
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        {{ post.toc }}
+      </nav>
+      {% endif %}
       <div class="post-content">
         {{ post.content }}
       </div>

@@ -4,6 +4,7 @@ date: 2026-03-10
 description: "Your API docs do more than explain functionality. They convert evaluators into users. Here is how to treat documentation as a growth channel."
 tags: [documentation, developer-marketing, api-docs, growth]
 status: published
+slug: documentation-sales-page
 ---
 
 Developers do not start with your pricing page. They start with your documentation. They want to see what your API looks like. They want to know if it solves their problem. They want to understand how hard it is to implement.
@@ -64,3 +65,9 @@ Documentation improves through iteration. Make iteration easy.
 ---
 
 Your documentation works while you sleep. It answers questions at 2 AM. It convinces evaluators while your sales team is offline. Invest in it accordingly.
+
+## Related Resources
+
+* [Write Code Tutorials That Developers Actually Finish](/blog/code-tutorials-developers-finish/) - Structure tutorials that convert
+* [Product Led Content for DevTools](/blog/product-led-content/) - Connect content to product capabilities
+* [Writing Error Messages That Help Developers](/blog/error-messages-developers/) - Improve your product UX copy

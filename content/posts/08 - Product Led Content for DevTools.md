@@ -4,6 +4,7 @@ date: 2026-03-16
 description: "Stop writing generic thought leadership. Connect every piece of content to specific product capabilities your developers can try immediately."
 tags: [product-led-growth, content-strategy, devtools, plg]
 status: published
+slug: product-led-content
 ---
 
 Generic content attracts generic readers. A post about "The Future of Cloud Computing" brings visitors who may never need your product.
@@ -64,3 +65,9 @@ Friction should match value. Low value content with high friction annoys readers
 ---
 
 Product led content aligns marketing with product. Every piece of content demonstrates value. Every piece of content creates a natural path to trying your tool.
+
+## Related Resources
+
+* [Documentation Is Your Best Sales Page](/blog/documentation-sales-page/) - Convert evaluators through docs
+* [Write Code Tutorials That Developers Actually Finish](/blog/code-tutorials-developers-finish/) - Create tutorials that convert
+* [Creating Technical Diagrams That Do Not Confuse](/blog/technical-diagrams/) - Visual communication for complex systems

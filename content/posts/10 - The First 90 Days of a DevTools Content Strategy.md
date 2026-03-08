@@ -4,6 +4,7 @@ date: 2026-03-18
 description: "Your first three months set the trajectory. Focus on quick wins, technical foundation, and building distribution before chasing perfection."
 tags: [content-strategy, devtools, startup-marketing, 90-day-plan]
 status: published
+slug: devtools-content-strategy
 ---
 
 You joined a DevTools company. You need to build content from nothing. Three months feels like nothing. Three months is enough.
@@ -69,3 +70,9 @@ Present results to leadership. Show what content cost. Show what it produced.
 ---
 
 Your first 90 days establish patterns. Move fast. Ship frequently. Learn from real audience response. Perfection comes through iteration, not planning.
+
+## Related Resources
+
+* [The DevTools Content Audit Checklist](/blog/devtools-content-audit/) - Evaluate existing content
+* [Interviewing Engineers for Content](/blog/interviewing-engineers/) - Extract knowledge from your team
+* [Building Content Hubs That Rank](/blog/content-hubs/) - Create topical authority

@@ -4,6 +4,7 @@ date: 2026-03-19
 description: "Bad error messages waste engineering hours. Good error messages point directly to solutions. Learn to write the helpful kind."
 tags: [ux-writing, error-messages, developer-experience, product-copy]
 status: published
+slug: error-messages-developers
 ---
 
 Developers see your error messages at their worst moments. Something broke. They are frustrated. They need answers fast.

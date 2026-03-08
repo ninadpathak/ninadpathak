@@ -4,6 +4,7 @@ date: 2026-03-09
 description: "Most code tutorials lose developers halfway through. Here is how to structure tutorials that keep readers engaged until the last line."
 tags: [technical-writing, tutorials, developer-experience]
 status: published
+slug: code-tutorials-developers-finish
 ---
 
 Developers abandon tutorials for one reason. The tutorial makes assumptions about what they already know. Every assumption is a point where someone closes the tab.
@@ -66,6 +67,12 @@ Test every single code block by pasting it fresh.
 Tell the reader what to do now. Link to documentation. Suggest modifications. Point to related tutorials.
 
 The worst ending is "and that is it." Give them somewhere to go next.
+
+## Related Resources
+
+* [Documentation Is Your Best Sales Page](/blog/documentation-sales-page/) - Turn your docs into a conversion channel
+* [The DevTools Content Audit Checklist](/blog/devtools-content-audit/) - Audit your existing technical content
+* [The First 90 Days of a DevTools Content Strategy](/blog/devtools-content-strategy/) - Build your content operation from scratch
 
 ---
 

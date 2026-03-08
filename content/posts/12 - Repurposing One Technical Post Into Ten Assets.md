@@ -4,6 +4,7 @@ date: 2026-03-20
 description: "Maximize your content investment. Turn a single blog post into threads, videos, talks, documentation, and more without starting from scratch."
 tags: [content-repurposing, efficiency, content-operations, distribution]
 status: published
+slug: content-repurposing
 ---
 
 You spent a week writing a comprehensive tutorial. It published. It performed well. Now it sits in your blog archive.
@@ -73,3 +74,9 @@ Courses command higher perceived value. They generate leads. They generate reven
 ---
 
 One post is never just one post. It is source material. Extract every drop of value. Distribute across every channel your audience uses.
+
+## Related Resources
+
+* [Building a Developer Newsletter That Gets Opened](/blog/developer-newsletter/) - Email distribution strategy
+* [The 30 Day Content Refresh Framework](/blog/content-refresh-framework/) - Update and republish old content
+* [Product Led Content for DevTools](/blog/product-led-content/) - Multi-format content creation

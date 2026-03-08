@@ -4,6 +4,7 @@ date: 2026-03-21
 description: "Extract knowledge from engineers effectively. Ask the right questions. Turn technical conversations into compelling content."
 tags: [subject-matter-experts, interviews, technical-writing, content-creation]
 status: published
+slug: interviewing-engineers
 ---
 
 Engineers know things worth sharing. They built the system. They solved the problems. They have war stories.

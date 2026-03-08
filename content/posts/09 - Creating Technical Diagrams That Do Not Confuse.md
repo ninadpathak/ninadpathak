@@ -4,6 +4,7 @@ date: 2026-03-17
 description: "Bad architecture diagrams waste time. Good diagrams explain systems instantly. Follow these principles for diagrams developers actually understand."
 tags: [technical-writing, diagrams, visual-communication, documentation]
 status: published
+slug: technical-diagrams
 ---
 
 Architecture diagrams confuse more often than they clarify. Too many boxes. Too many arrows. Too many colors serving no purpose.

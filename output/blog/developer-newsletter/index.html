@@ -10,7 +10,7 @@
   <meta property="og:type"        content="article">
   <meta property="og:title"       content="Building a Developer Newsletter That Gets Opened">
   <meta property="og:description" content="Developer inboxes are crowded. Here is how to build a newsletter developers actually read, from subject lines to content structure.">
-  <meta property="og:url"         content="https://ninadpathak.com/blog/07-building-a-developer-newsletter-that-gets-opened/">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/developer-newsletter/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Twitter -->
@@ -21,7 +21,7 @@
   <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://ninadpathak.com/blog/07-building-a-developer-newsletter-that-gets-opened/">
+  <link rel="canonical" href="https://ninadpathak.com/blog/developer-newsletter/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -56,6 +56,32 @@
     "@type": "Person",
     "name": "Ninad Pathak"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Building a Developer Newsletter That Gets Opened",
+      "item": "https://ninadpathak.com/blog/developer-newsletter/"
+    }
+  ]
 }
 </script>
 </head>
@@ -109,6 +135,19 @@
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
 
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Building a Developer Newsletter That Gets Opened</li>
+    </ol>
+  </div>
+</nav>
+
 <article>
   <header class="post-header">
     <div class="prose-container">
@@ -131,6 +170,22 @@
 
   <div class="post-body">
     <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#promise-specific-value-in-the-subject-line">Promise Specific Value in the Subject Line</a></li>
+<li><a href="#lead-with-code">Lead With Code</a></li>
+<li><a href="#keep-it-short">Keep It Short</a></li>
+<li><a href="#link-to-details">Link to Details</a></li>
+<li><a href="#send-on-tuesdays-or-wednesdays">Send on Tuesdays or Wednesdays</a></li>
+<li><a href="#use-plain-text-or-minimal-html">Use Plain Text or Minimal HTML</a></li>
+<li><a href="#let-readers-reply">Let Readers Reply</a></li>
+<li><a href="#test-subject-lines">Test Subject Lines</a></li>
+</ul>
+</div>
+
+      </nav>
       <div class="post-content">
         <p>Developers receive dozens of emails daily. Marketing messages go straight to spam. Product updates get ignored. Your newsletter competes with GitHub notifications and production alerts.</p>
 <p>Here is how to build a newsletter that survives the inbox.</p>
@@ -173,11 +228,11 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/04-writing-technical-content-when-you-are-not-technical/" class="related-card">
+      <a href="/blog/writing-technical-content/" class="related-card">
         <div class="related-card-date">2026-03-12</div>
         <div class="related-card-title">Writing Technical Content When You Are Not Technical</div>
       </a>
-      <a href="/blog/02-documentation-is-your-best-sales-page/" class="related-card">
+      <a href="/blog/documentation-sales-page/" class="related-card">
         <div class="related-card-date">2026-03-10</div>
         <div class="related-card-title">Documentation Is Your Best Sales Page</div>
       </a>

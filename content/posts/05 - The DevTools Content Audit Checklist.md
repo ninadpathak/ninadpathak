@@ -4,6 +4,7 @@ date: 2026-03-13
 description: "Audit your DevTools content strategy against 25 specific checkpoints. Find gaps. Fix priorities. Improve your editorial operation."
 tags: [content-strategy, audit, devtools, editorial]
 status: published
+slug: devtools-content-audit
 ---
 
 Most DevTools companies publish content randomly. A tutorial here. A product update there. No cohesive strategy.
@@ -73,3 +74,9 @@ Random acts of content fail. Systems produce consistent results.
 ---
 
 Score each category from 1 to 5. Total your score. Anything under 15 in a category needs immediate attention. Start there.
+
+## Related Resources
+
+* [The 30 Day Content Refresh Framework](/blog/content-refresh-framework/) - Systematically update existing content
+* [Measuring Content ROI for B2B SaaS](/blog/content-roi-saas/) - Connect content to revenue
+* [The First 90 Days of a DevTools Content Strategy](/blog/devtools-content-strategy/) - Build your content foundation
