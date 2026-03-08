@@ -6,8 +6,6 @@ tags: [product-led-growth, content-strategy, devtools, plg]
 status: published
 ---
 
-# Product Led Content for DevTools
-
 Generic content attracts generic readers. A post about "The Future of Cloud Computing" brings visitors who may never need your product.
 
 Product led content attracts potential users. It teaches while demonstrating your tool. It creates immediate next steps.

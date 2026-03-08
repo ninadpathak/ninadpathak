@@ -6,8 +6,6 @@ tags: [analytics, content-roi, saas, metrics]
 status: published
 ---
 
-# Measuring Content ROI for B2B SaaS
-
 Page views do not pay salaries. Social shares do not close deals. You need metrics that connect content to revenue.
 
 Here is how to measure content ROI for B2B SaaS.

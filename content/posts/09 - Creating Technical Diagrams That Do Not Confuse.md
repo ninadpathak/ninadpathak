@@ -6,8 +6,6 @@ tags: [technical-writing, diagrams, visual-communication, documentation]
 status: published
 ---
 
-# Creating Technical Diagrams That Do Not Confuse
-
 Architecture diagrams confuse more often than they clarify. Too many boxes. Too many arrows. Too many colors serving no purpose.
 
 Clean diagrams communicate instantly. Here is how to make them.

@@ -6,8 +6,6 @@ tags: [content-strategy, audit, devtools, editorial]
 status: published
 ---
 
-# The DevTools Content Audit Checklist
-
 Most DevTools companies publish content randomly. A tutorial here. A product update there. No cohesive strategy.
 
 Run your content through this audit. Score yourself honestly. Fix the gaps.

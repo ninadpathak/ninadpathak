@@ -6,8 +6,6 @@ tags: [content-strategy, devtools, startup-marketing, 90-day-plan]
 status: published
 ---
 
-# The First 90 Days of a DevTools Content Strategy
-
 You joined a DevTools company. You need to build content from nothing. Three months feels like nothing. Three months is enough.
 
 Here is your 90 day roadmap.

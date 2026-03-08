@@ -6,8 +6,6 @@ tags: [technical-writing, tutorials, developer-experience]
 status: published
 ---
 
-# Write Code Tutorials That Developers Actually Finish
-
 Developers abandon tutorials for one reason. The tutorial makes assumptions about what they already know. Every assumption is a point where someone closes the tab.
 
 Here is how to write tutorials that developers complete.

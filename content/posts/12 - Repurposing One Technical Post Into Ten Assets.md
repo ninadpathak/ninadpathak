@@ -6,8 +6,6 @@ tags: [content-repurposing, efficiency, content-operations, distribution]
 status: published
 ---
 
-# Repurposing One Technical Post Into Ten Assets
-
 You spent a week writing a comprehensive tutorial. It published. It performed well. Now it sits in your blog archive.
 
 That post contains ten pieces of content. Extract them.

@@ -6,8 +6,6 @@ tags: [email-marketing, newsletters, developer-marketing, community]
 status: published
 ---
 
-# Building a Developer Newsletter That Gets Opened
-
 Developers receive dozens of emails daily. Marketing messages go straight to spam. Product updates get ignored. Your newsletter competes with GitHub notifications and production alerts.
 
 Here is how to build a newsletter that survives the inbox.

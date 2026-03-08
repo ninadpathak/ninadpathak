@@ -6,8 +6,6 @@ tags: [technical-writing, content-creation, developer-marketing]
 status: published
 ---
 
-# Writing Technical Content When You Are Not Technical
-
 You are a marketer tasked with writing about Kubernetes. Or a content strategist covering machine learning. The subject matter intimidates you.
 
 Good news. You do not need a computer science degree. You need a system for learning enough to write accurately.

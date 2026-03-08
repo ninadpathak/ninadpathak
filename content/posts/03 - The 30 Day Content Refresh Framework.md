@@ -6,8 +6,6 @@ tags: [content-strategy, seo, content-refresh, editorial]
 status: published
 ---
 
-# The 30 Day Content Refresh Framework
-
 Old blog posts decay. Screenshots become outdated. Links break. Code examples use deprecated syntax. Traffic drops.
 
 You have two options. Write new posts. Or fix the old ones.

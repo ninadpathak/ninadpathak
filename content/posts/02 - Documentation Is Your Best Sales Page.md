@@ -6,8 +6,6 @@ tags: [documentation, developer-marketing, api-docs, growth]
 status: published
 ---
 
-# Documentation Is Your Best Sales Page
-
 Developers do not start with your pricing page. They start with your documentation. They want to see what your API looks like. They want to know if it solves their problem. They want to understand how hard it is to implement.
 
 Your documentation is doing sales work. Treat it that way.

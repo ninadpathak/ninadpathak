@@ -6,8 +6,6 @@ tags: [hiring, technical-writing, team-building, content-strategy]
 status: published
 ---
 
-# When to Hire a Technical Writer
-
 Engineers write documentation. They write blog posts. They write release notes. This works until it does not.
 
 Know the signs that you need dedicated technical writing help.

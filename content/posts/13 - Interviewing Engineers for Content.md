@@ -6,8 +6,6 @@ tags: [subject-matter-experts, interviews, technical-writing, content-creation]
 status: published
 ---
 
-# Interviewing Engineers for Content
-
 Engineers know things worth sharing. They built the system. They solved the problems. They have war stories.
 
 Your job is extracting that knowledge. Turning it into content. Making it accessible.
