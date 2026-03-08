@@ -324,9 +324,22 @@ class SiteBuilder:
         tree.write(feed_path, xml_declaration=True, encoding="utf-8")
 
     def build_pygments_css(self):
-        dark_css = HtmlFormatter(style="monokai").get_style_defs(".highlight")
+        # Light mode: use 'default' style (good contrast on light backgrounds)
+        light_formatter = HtmlFormatter(style="default")
+        light_css = light_formatter.get_style_defs("[data-theme='light'] .highlight")
+        
+        # Dark mode: use 'monokai' style (good contrast on dark backgrounds)
+        dark_formatter = HtmlFormatter(style="monokai")
+        dark_css = dark_formatter.get_style_defs("[data-theme='dark'] .highlight")
+        
+        # Combine with base pre styles
+        base_css = """pre { line-height: 1.6; overflow-x: auto; }
+.highlight { border-radius: 4px; padding: 1rem; }
+"""
+        
+        css_content = base_css + "\n" + light_css + "\n" + dark_css
         css_path = self.output / "static" / "css" / "highlight.css"
-        css_path.write_text(dark_css, encoding="utf-8")
+        css_path.write_text(css_content, encoding="utf-8")
 
     # ------------------------------------------------------------------
     # Main build
