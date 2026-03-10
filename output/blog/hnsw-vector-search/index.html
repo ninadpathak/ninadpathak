@@ -155,7 +155,7 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 05, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">8 min read</span>
+        <span class="post-meta-time">7 min read</span>
       </div>
       <h1 class="post-title">HNSW: What's Actually Happening When You Do a Vector Search</h1>
       <p class="lead">Vector database users often treat HNSW as a black box. Here's the actual algorithm, the tradeoffs, and when you should care.</p>
@@ -190,7 +190,6 @@
       <div class="post-content">
         <p>Treating vector search as a black box works fine, until it doesn't. You add embeddings to a vector DB, call a search function, get back results. Then at some point you need to tune recall, or you're running out of memory, or your queries are slow, and suddenly you're staring at parameters called <code>M</code>, <code>ef_construction</code>, and <code>efSearch</code> with no mental model for what they do.</p>
 <p>Reading the <a href="https://arxiv.org/abs/1603.09320">original HNSW paper</a> is actually worth your time. You won't implement it yourself. But the algorithm's structure explains every tradeoff you'll encounter in production, and that's what made it worth my time.</p>
-<p>Here's what's happening.</p>
 <h2 id="the-problem-hnsw-is-solving">The problem HNSW is solving</h2>
 <p>Finding the nearest neighbor to a query vector in a dataset of a million 1536-dimensional floats is slow done naively. Brute force computes cosine similarity against every vector, returns the top k, and scales linearly with dataset size. At 10 million vectors, that's slow. At 100 million, it's unusable for anything interactive.</p>
 <p>The standard computer science move is to trade exactness for speed. You find the <em>approximate</em> nearest neighbors. HNSW (Hierarchical Navigable Small World graphs) is the dominant approach right now across Qdrant, Weaviate, Chroma, FAISS, and other vector databases. The paper, by Malkov and Yashunin, was submitted to arXiv in 2016 and published in IEEE TPAMI in 2018. It won out over the competition because it achieves very high recall at very low latency, in a structure that's easy to reason about once you understand the layers.</p>
@@ -200,7 +199,7 @@
 <p>The structure is intentionally similar to a skip list. The top layers let you take big jumps across the space; the bottom layer is where you do precise local search.</p>
 <h2 id="how-search-works">How search works</h2>
 <p>You enter the graph at the top layer, at a pre-designated entry point. You greedily traverse: at each step, you move to whichever connected neighbor is nearest to your query. When no neighbor is closer than your current position, you've hit a local minimum on that layer. Drop to the next layer. Repeat.</p>
-<p>Here's where I lose people, so let me be precise about it: the greedy traversal on the top layers isn't finding the answer. It's finding a <em>starting point</em> for the detailed search at layer 0. The top layers are navigation; layer 0 is where the actual nearest neighbor candidates get identified.</p>
+<p>The greedy traversal on the top layers isn't finding the answer. It's finding a <em>starting point</em> for the detailed search at layer 0. The top layers are navigation; layer 0 is where the actual nearest neighbor candidates get identified.</p>
 <p>At layer 0, you run the search with a larger candidate pool controlled by the <code>ef</code> (or <code>efSearch</code>) parameter. Higher ef means you explore more candidates before returning results. More exploration, better recall. More computation, higher latency. The tradeoff is direct and predictable, which is one reason people like HNSW.</p>
 <p>On the SIFT1M benchmark, you can get roughly 80% recall at sub-millisecond query times, or ~100% recall at around 50ms. That's a 50x latency difference across the recall range. Where you land depends entirely on ef.</p>
 <h2 id="the-m-parameter-is-doing-more-than-you-think">The M parameter is doing more than you think</h2>
@@ -215,15 +214,15 @@
 <p>The graph traversal is random-access by nature. Each step in the greedy search jumps to a neighbor, which could be anywhere in the vector space. On spinning disks, random I/O is fatal. On SSDs, it's still slow enough to destroy performance.</p>
 <p>That's HNSW's fundamental scaling ceiling. You can hold roughly 100-500 million vectors in RAM depending on dimensionality and M, but beyond that you're either compromising recall or switching algorithms.</p>
 <p><a href="https://www.microsoft.com/en-us/research/publication/diskann-fast-accurate-billion-point-nearest-neighbor-search-on-a-single-node/">DiskANN</a>, out of Microsoft Research (NeurIPS 2019), solves this with a different graph structure (Vamana) designed for SSD access patterns. It indexed 1 billion vectors on a single workstation with 64GB RAM, hitting 5000+ QPS at 95%+ recall and under 3ms mean latency. Pinecone's serverless architecture uses something similar: vectors live in object storage (S3/GCS), organized into immutable files called "slabs", with caching layers to manage the latency.</p>
-<p>Well below a billion vectors, none of this matters today. The architectural assumption that your index fits in RAM is still worth being aware of.</p>
+<p>Well below a billion vectors, none of this matters today. Know the ceiling exists.</p>
 <h2 id="for-very-high-dimensional-embeddings-the-hierarchy-might-not-help">For very high-dimensional embeddings, the hierarchy might not help</h2>
-<p>A 2024 paper found that for dimensions &gt;= 96, a flat navigable small world graph (no layers, just layer 0) matches HNSW latency and recall while using 38% less memory. The intuition: at high dimensions, the layers don't help navigation as much, because the geometry of high-dimensional spaces makes "big jumps" less effective. You're not getting the skip-list benefit you pay for with extra memory.</p>
+<p>A 2024 paper found that for dimensions &gt;= 96, a flat navigable small world graph (no layers, just layer 0) matches HNSW latency and recall while using 38% less memory. At high dimensions, the layers don't help navigation as much, because the geometry of high-dimensional spaces makes "big jumps" less effective. You're not getting the skip-list benefit you pay for with extra memory.</p>
 <p>Theoretical for most use cases right now, but worth watching. Modern embedding models produce 768, 1536, or higher-dimensional vectors. The hierarchy that makes HNSW work might matter less at the dimensions we're actually using.</p>
 <h2 id="googles-scann-takes-a-different-approach">Google's ScaNN takes a different approach</h2>
 <p><a href="https://arxiv.org/abs/1908.10396">ScaNN</a> (ICML 2020) doesn't use HNSW at all. It uses anisotropic vector quantization: quantizing vectors in a way that penalizes errors in the direction parallel to the query more than errors in orthogonal directions. The idea is that parallel errors affect the dot product more than orthogonal ones, so your quantization should be query-aware.</p>
 <p>Google claimed 2x performance over other libraries on ann-benchmarks.com at the time. The <a href="http://ann-benchmarks.com/">ann-benchmarks site</a> is the canonical reference: automated benchmarks on glove-100, sift-128, nytimes-256 and others, with recall vs. queries-per-second plots for 38 algorithms. When evaluating which index to use for a specific dataset and dimensionality, that's where to start.</p>
 <h2 id="the-parameters-youll-actually-tune">The parameters you'll actually tune</h2>
-<p>Here's what the research says matters:</p>
+<p>What the research says matters:</p>
 <p><strong>M:</strong> Set higher for better recall, lower for lower memory and faster builds. Weaviate and Qdrant both default to M=16 or M=32. For most use cases, M=16 is fine. M=32 when recall is critical and you have the memory.</p>
 <p><strong>ef_construction:</strong> A build-time investment. Higher ef_construction affects only graph quality, leaving memory and query time unchanged. Teams indexing infrequently and querying constantly should set this high (200+). Qdrant's accurate config uses 100; doubling that won't break anything but will slow your index build.</p>
 <p><strong>efSearch (or ef at query time):</strong> The dial you turn when you need more recall without rebuilding the index. Start low, measure recall against a held-out dataset, increase until you hit your recall target. The latency cost is linear with ef. When recall is already fine, leave it alone.</p>

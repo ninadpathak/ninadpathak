@@ -10,8 +10,6 @@ Treating vector search as a black box works fine, until it doesn't. You add embe
 
 Reading the [original HNSW paper](https://arxiv.org/abs/1603.09320) is actually worth your time. You won't implement it yourself. But the algorithm's structure explains every tradeoff you'll encounter in production, and that's what made it worth my time.
 
-Here's what's happening.
-
 ## The problem HNSW is solving
 
 Finding the nearest neighbor to a query vector in a dataset of a million 1536-dimensional floats is slow done naively. Brute force computes cosine similarity against every vector, returns the top k, and scales linearly with dataset size. At 10 million vectors, that's slow. At 100 million, it's unusable for anything interactive.
@@ -30,7 +28,7 @@ The structure is intentionally similar to a skip list. The top layers let you ta
 
 You enter the graph at the top layer, at a pre-designated entry point. You greedily traverse: at each step, you move to whichever connected neighbor is nearest to your query. When no neighbor is closer than your current position, you've hit a local minimum on that layer. Drop to the next layer. Repeat.
 
-Here's where I lose people, so let me be precise about it: the greedy traversal on the top layers isn't finding the answer. It's finding a *starting point* for the detailed search at layer 0. The top layers are navigation; layer 0 is where the actual nearest neighbor candidates get identified.
+The greedy traversal on the top layers isn't finding the answer. It's finding a *starting point* for the detailed search at layer 0. The top layers are navigation; layer 0 is where the actual nearest neighbor candidates get identified.
 
 At layer 0, you run the search with a larger candidate pool controlled by the `ef` (or `efSearch`) parameter. Higher ef means you explore more candidates before returning results. More exploration, better recall. More computation, higher latency. The tradeoff is direct and predictable, which is one reason people like HNSW.
 
@@ -60,11 +58,11 @@ That's HNSW's fundamental scaling ceiling. You can hold roughly 100-500 million 
 
 [DiskANN](https://www.microsoft.com/en-us/research/publication/diskann-fast-accurate-billion-point-nearest-neighbor-search-on-a-single-node/), out of Microsoft Research (NeurIPS 2019), solves this with a different graph structure (Vamana) designed for SSD access patterns. It indexed 1 billion vectors on a single workstation with 64GB RAM, hitting 5000+ QPS at 95%+ recall and under 3ms mean latency. Pinecone's serverless architecture uses something similar: vectors live in object storage (S3/GCS), organized into immutable files called "slabs", with caching layers to manage the latency.
 
-Well below a billion vectors, none of this matters today. The architectural assumption that your index fits in RAM is still worth being aware of.
+Well below a billion vectors, none of this matters today. Know the ceiling exists.
 
 ## For very high-dimensional embeddings, the hierarchy might not help
 
-A 2024 paper found that for dimensions >= 96, a flat navigable small world graph (no layers, just layer 0) matches HNSW latency and recall while using 38% less memory. The intuition: at high dimensions, the layers don't help navigation as much, because the geometry of high-dimensional spaces makes "big jumps" less effective. You're not getting the skip-list benefit you pay for with extra memory.
+A 2024 paper found that for dimensions >= 96, a flat navigable small world graph (no layers, just layer 0) matches HNSW latency and recall while using 38% less memory. At high dimensions, the layers don't help navigation as much, because the geometry of high-dimensional spaces makes "big jumps" less effective. You're not getting the skip-list benefit you pay for with extra memory.
 
 Theoretical for most use cases right now, but worth watching. Modern embedding models produce 768, 1536, or higher-dimensional vectors. The hierarchy that makes HNSW work might matter less at the dimensions we're actually using.
 
@@ -76,7 +74,7 @@ Google claimed 2x performance over other libraries on ann-benchmarks.com at the 
 
 ## The parameters you'll actually tune
 
-Here's what the research says matters:
+What the research says matters:
 
 **M:** Set higher for better recall, lower for lower memory and faster builds. Weaviate and Qdrant both default to M=16 or M=32. For most use cases, M=16 is fine. M=32 when recall is critical and you have the memory.
 

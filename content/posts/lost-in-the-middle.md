@@ -8,7 +8,7 @@ status: published
 
 There's a paper from 2023 that should have changed how everyone builds RAG systems. It didn't, really, and I find that genuinely frustrating. Teams kept stuffing more documents into longer contexts, assuming bigger windows meant better results. The paper said otherwise, with numbers.
 
-It's called ["Lost in the Middle: How Language Models Use Long Contexts"](https://arxiv.org/abs/2307.03172), by Nelson Liu, Kevin Lin, and others from Stanford. The finding: language models are significantly better at using information at the beginning or end of their context window than information in the middle. The performance curve across context position is U-shaped. Put your relevant document in the middle of a 20-document context and watch accuracy fall off a cliff.
+It's called ["Lost in the Middle: How Language Models Use Long Contexts"](https://arxiv.org/abs/2307.03172), by Nelson Liu, Kevin Lin, and others from Stanford. Language models are significantly better at using information at the beginning or end of their context window than information in the middle. The performance curve across context position is U-shaped. Put your relevant document in the middle of a 20-document context and watch accuracy fall off a cliff.
 
 Anyone who's read the attention mechanism papers won't be surprised. But seeing it quantified hit differently than understanding it theoretically.
 
@@ -18,7 +18,7 @@ The experiment was multi-document question answering. Given a question and 20 do
 
 With GPT-3.5-Turbo and 20 documents: when the relevant document was at position 20 (the end), accuracy was around 42%. When it was at positions 5 through 15 (the middle), accuracy dropped to around 25%. That's a 17 percentage point drop, from one placement decision.
 
-Here's the part that should make you uncomfortable: adding more context hurt. GPT-3.5-Turbo's closed-book baseline (no retrieved documents at all) was 56.1% on the evaluation set. When the relevant document was in the middle of the context, the model with access to the answer performed *worse* than the model with no access at all. You gave it the information and it performed worse than if you hadn't.
+Adding more context hurt. GPT-3.5-Turbo's closed-book baseline (no retrieved documents at all) was 56.1% on the evaluation set. When the relevant document was in the middle of the context, the model with access to the answer performed *worse* than the model with no access at all. You gave it the information and it performed worse than if you hadn't.
 
 Extended-context models, the ones specifically trained for longer inputs, showed nearly identical U-shaped curves. The window got bigger. The bias didn't go away.
 
@@ -32,7 +32,7 @@ There's also a simpler story: at very long contexts, attending to positions in t
 
 Naive RAG pipelines chunk documents, embed them, retrieve top-k by similarity, and concatenate everything into the prompt. The most relevant chunk lands somewhere in the middle of the context by default, ranked first in the retrieval list but buried after the system prompt.
 
-A few things follow from the research:
+Three things follow directly:
 
 **Put the highest-ranked result at the start of the retrieved context, not buried in the middle.** With 10 retrieved chunks, the one with the highest similarity score should be first (and possibly last, reordered). A one-line reordering that improves accuracy on nearly every setup.
 

@@ -16,7 +16,7 @@ These aren't vibes. They're published numbers from [Composio](https://composio.d
 
 The [ReAct paper](https://arxiv.org/abs/2210.03629) from Yao et al. in 2022 was important. It showed you could interleave reasoning traces and actions (Thought, Act, Observe, repeat) and get agents that could handle tasks on HotpotQA and ALFWorld that pure chain-of-thought couldn't. ALFWorld improvements were substantial: +34% success rate over imitation and RL methods. People read this and got excited about autonomous agents.
 
-What the paper didn't claim was that this approach scales to complex, long-horizon tasks without problems. And a 2025 analysis makes the reason explicit: reasoning is not planning.
+What the paper didn't claim was that this approach scales to complex, long-horizon tasks without problems. A 2025 analysis stated it plainly: reasoning is not planning.
 
 Chain-of-thought is a "step-wise greedy policy based on local scores." At each step, the model picks the next action that looks most plausible given what it knows so far. Works fine when tasks are short and each step is independent. It breaks down when you're 15 steps into a multi-hour task and realize that a decision you made at step 3 was wrong, but you can't go back and restructure the plan because you've already executed downstream actions that depend on it.
 
@@ -74,7 +74,7 @@ They checkpoint. For tasks longer than five steps, they write state to durable s
 
 They have human-in-the-loop gates for high-stakes decisions. Human oversight at this stage is the right design for the current state of agent reliability, not a concession to it. The goal is to extend agent autonomy over time as you build confidence in specific decision types, not to remove humans from the loop on day one.
 
-Anthropic's [Model Context Protocol](https://modelcontextprotocol.io/specification/2025-11-25) is worth paying attention to for the tool integration problem specifically. Rather than each agent integration being a custom implementation, MCP provides a standard for how LLM applications connect to external tools and data sources. The adoption has been broad enough that it's looking like the default standard for agent-to-tool connections. Fewer bespoke integrations means fewer failure modes.
+Anthropic's [Model Context Protocol](https://modelcontextprotocol.io/specification/2025-11-25) directly addresses the tool integration problem. Rather than each agent integration being a custom implementation, MCP provides a standard for how LLM applications connect to external tools and data sources. The adoption has been broad enough that it's looking like the default standard for agent-to-tool connections. Fewer bespoke integrations means fewer failure modes.
 
 ---
 
