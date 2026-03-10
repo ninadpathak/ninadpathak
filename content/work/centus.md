@@ -18,7 +18,7 @@ metrics:
 
 ## The benchmark wasn't "editors liked it." It was "engineers shipped it."
 
-Centus is a localization and translation management platform. Their readers aren't evaluating software — they're engineers implementing i18n at 11pm before a launch, trying to figure out why their plural forms aren't working in Polish.
+Centus is a localization and translation management platform. Their readers aren't evaluating software. They're engineers implementing i18n at 11pm before a launch, trying to figure out why their plural forms aren't working in Polish.
 
 When Roman, their Head of Content, needed technical guides for their developer blog, the brief was clear: write content that Centus's own engineering team wouldn't have to clean up before publishing. That's a harder standard than it sounds.
 
@@ -26,7 +26,7 @@ When Roman, their Head of Content, needed technical guides for their developer b
 
 There's a version of a localization tutorial that explains what i18n is and shows `t('hello')`. Developers hate that version. It skips everything that actually causes problems: RTL language support, plural forms that differ by locale, missing translation fallbacks, dynamic string interpolation, date and number formatting across regions.
 
-I wrote the other version — the one that works through the implementation completely. Every guide was built from a working codebase. When a framework's documentation conflicted with its actual behavior, I tested both and documented what worked. If the edge case would bite a developer at launch, it was in the article.
+I wrote the other version, the one that works through the implementation completely. Every guide was built from a working codebase. When a framework's documentation conflicted with its actual behavior, I tested both and documented what worked. If the edge case would bite a developer at launch, it was in the article.
 
 ## Ten frameworks. Zero shortcuts.
 
@@ -39,7 +39,7 @@ The Centus content program covered the full i18n ecosystem:
 - Laravel localization
 - YAML-based translation file management
 
-Each guide addressed the same pattern: setup, configuration, common edge cases, and integration with Centus's platform. Not because that's a convenient template — because that's the actual sequence a developer goes through.
+Each guide addressed the same pattern: setup, configuration, common edge cases, and integration with Centus's platform. It mirrors the actual sequence a developer goes through.
 
 ## "Our devs called it 'awesome' and just sent it ahead for publishing."
 

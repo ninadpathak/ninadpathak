@@ -32,6 +32,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <!-- Apply saved theme before first paint to prevent flash -->
+  <script>try{var t=localStorage.getItem('np-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/main.css">
   <link rel="stylesheet" href="/static/css/highlight.css">
@@ -151,11 +154,11 @@
 
     <div class="case-body" style="max-width: var(--prose-w);">
       <h2 id="the-benchmark-wasnt-editors-liked-it-it-was-engineers-shipped-it">The benchmark wasn't "editors liked it." It was "engineers shipped it."</h2>
-<p>Centus is a localization and translation management platform. Their readers aren't evaluating software — they're engineers implementing i18n at 11pm before a launch, trying to figure out why their plural forms aren't working in Polish.</p>
+<p>Centus is a localization and translation management platform. Their readers aren't evaluating software. They're engineers implementing i18n at 11pm before a launch, trying to figure out why their plural forms aren't working in Polish.</p>
 <p>When Roman, their Head of Content, needed technical guides for their developer blog, the brief was clear: write content that Centus's own engineering team wouldn't have to clean up before publishing. That's a harder standard than it sounds.</p>
 <h2 id="localization-looks-simple-until-you-actually-implement-it">Localization looks simple until you actually implement it</h2>
 <p>There's a version of a localization tutorial that explains what i18n is and shows <code>t('hello')</code>. Developers hate that version. It skips everything that actually causes problems: RTL language support, plural forms that differ by locale, missing translation fallbacks, dynamic string interpolation, date and number formatting across regions.</p>
-<p>I wrote the other version — the one that works through the implementation completely. Every guide was built from a working codebase. When a framework's documentation conflicted with its actual behavior, I tested both and documented what worked. If the edge case would bite a developer at launch, it was in the article.</p>
+<p>I wrote the other version, the one that works through the implementation completely. Every guide was built from a working codebase. When a framework's documentation conflicted with its actual behavior, I tested both and documented what worked. If the edge case would bite a developer at launch, it was in the article.</p>
 <h2 id="ten-frameworks-zero-shortcuts">Ten frameworks. Zero shortcuts.</h2>
 <p>The Centus content program covered the full i18n ecosystem:</p>
 <ul>
@@ -166,7 +169,7 @@
 <li>Laravel localization</li>
 <li>YAML-based translation file management</li>
 </ul>
-<p>Each guide addressed the same pattern: setup, configuration, common edge cases, and integration with Centus's platform. Not because that's a convenient template — because that's the actual sequence a developer goes through.</p>
+<p>Each guide addressed the same pattern: setup, configuration, common edge cases, and integration with Centus's platform. It mirrors the actual sequence a developer goes through.</p>
 <h2 id="our-devs-called-it-awesome-and-just-sent-it-ahead-for-publishing">"Our devs called it 'awesome' and just sent it ahead for publishing."</h2>
 <p>That's the Roman Hresko quote that matters. Not "our editors approved it." Developers reviewed the technical articles and pushed them directly to publish, skipping the revision cycle entirely.</p>
 <p>Fifty guides later, that pattern held. Zero rounds of engineering revision across the engagement. The content cited in developer forums, linked from framework-adjacent resources, and referenced in localization community discussions.</p>

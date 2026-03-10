@@ -32,6 +32,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <!-- Apply saved theme before first paint to prevent flash -->
+  <script>try{var t=localStorage.getItem('np-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/main.css">
   <link rel="stylesheet" href="/static/css/highlight.css">
@@ -190,8 +193,8 @@
 <p>Anyone who's read the attention mechanism papers won't be surprised. But seeing it quantified hit differently than understanding it theoretically.</p>
 <h2 id="the-numbers">The numbers</h2>
 <p>The experiment was multi-document question answering. Given a question and 20 documents (one containing the answer, the rest distractors), models were tested with the answer-containing document placed at different positions.</p>
-<p>With GPT-3.5-Turbo and 20 documents: when the relevant document was at position 20 (the end), accuracy was around 42%. When it was at positions 5 through 15 (the middle), accuracy dropped to around 25%. That's a 17 percentage point drop, from one placement decision.</p>
-<p>Adding more context hurt. GPT-3.5-Turbo's closed-book baseline (no retrieved documents at all) was 56.1% on the evaluation set. When the relevant document was in the middle of the context, the model with access to the answer performed <em>worse</em> than the model with no access at all. You gave it the information and it performed worse than if you hadn't.</p>
+<p>With 20 documents in context: when the relevant document was at position 20 (the end), accuracy was around 42%. Moved to positions 5 through 15 (the middle), accuracy dropped to around 25%. A 17 percentage point gap from one placement decision.</p>
+<p>Adding more context hurt. The closed-book baseline, no retrieved documents at all, was 56.1% on the evaluation set. When the relevant document was buried in the middle, the model with access to the answer performed <em>worse</em> than the model with no access. You gave it the information and it did worse.</p>
 <p>Extended-context models, the ones specifically trained for longer inputs, showed nearly identical U-shaped curves. The window got bigger. The bias didn't go away.</p>
 <h2 id="why-this-happens">Why this happens</h2>
 <p>The paper doesn't provide a definitive mechanistic explanation, but the intuition is reasonable: models are trained on text where important information tends to appear at the start or end. Abstracts, introductions, conclusions, subject lines. The attention patterns that emerge from training reflect those distributions.</p>
@@ -203,8 +206,8 @@
 <p><strong>Don't retrieve more than you need.</strong> The <a href="https://arxiv.org/abs/2411.03538">Databricks long context RAG research</a> from late 2024 found that retrieval performance peaks around top 5-10 chunks and degrades with more. You're adding noise, not signal, and the noise lands in the middle of the context.</p>
 <p><strong>Evaluate on your actual distribution.</strong> The U-shaped curve varies by model and task. The only way to know how bad your specific setup is: create a held-out eval set, place your known-answer chunk at positions 1, 5, 10, 15, 20, measure accuracy at each. You'll probably see the curve. Then you'll know whether it's a problem worth fixing for your use case.</p>
 <h2 id="long-context-vs-rag-is-the-wrong-frame">Long context vs. RAG is the wrong frame</h2>
-<p>The conventional wisdom in mid-2024 was "context windows are getting so big that RAG will become unnecessary." Gemini 1.5 Pro at 1 million tokens. Claude with 200k. Just dump everything in.</p>
-<p>The research doesn't support this. The SummHay benchmark tested whether models could summarize information from long contexts. Without a retrieval mechanism, GPT-4o and Claude 3 Opus scored below 20%, despite both having near-perfect performance on "needle in a haystack" tests (&gt;99% recall). Finding a specific string in a long document is not the same as reasoning over distributed information in that document.</p>
+<p>The conventional wisdom in mid-2024 was "context windows are getting so big that RAG will become unnecessary." Models pushing 1 million tokens. Claude at 200k. Just dump everything in.</p>
+<p>The research doesn't support this. The SummHay benchmark tested whether models could synthesize information from long contexts. Without a retrieval mechanism, frontier models scored below 20%, despite near-perfect performance on "needle in a haystack" tests (&gt;99% recall). Finding a specific string in a long document is not the same as reasoning over distributed information in that document.</p>
 <p>RAG isn't redundant because context windows got bigger. They solve different things. Long context handles cases where the information is known, bounded, and fits comfortably. RAG handles cases where you have more information than the context can hold, or where you need to pull from dynamic external sources.</p>
 <p>The real question isn't "should I use RAG or long context?" It's "how do I fill my context window with the right information for this specific query?" Which is where context engineering comes in.</p>
 <h2 id="context-engineering-is-a-real-discipline-now">Context engineering is a real discipline now</h2>

@@ -20,13 +20,13 @@ metrics:
 
 LinuxForDevices was publishing content with no strategy behind it. Topics chosen by gut feel, no internal linking, no keyword architecture. The result: 487 monthly visitors across a site with dozens of articles. A developer community that didn't know it existed.
 
-The brief was simple on paper — build a content program that Linux developers actually find, read, and trust. The execution was anything but simple, because this audience has a finely tuned detector for shallow content.
+The brief was simple on paper: build a content program that Linux developers actually find, read, and trust. The execution was harder, because this audience has a finely tuned detector for shallow content.
 
 ## The audience is the hardest part
 
-Linux developers and embedded engineers read documentation the way most people read contracts — looking for the thing that's wrong. They run the commands. They notice when an example uses a deprecated flag. They close the tab the moment something feels off.
+Linux developers and embedded engineers read documentation the way most people read contracts, looking for the thing that's wrong. They run the commands. They notice when an example uses a deprecated flag. They close the tab the moment something feels off.
 
-This meant every article had to be verified before it was written. Not fact-checked in the journalism sense — actually tested. Commands run, output confirmed, edge cases documented. If the Linux kernel docs said one thing and the actual behavior was another, the article said what actually happened.
+This meant every article had to be verified before it was written. Tested, not fact-checked in the journalism sense. Commands run, output confirmed, edge cases documented. If the Linux kernel docs said one thing and the actual behavior was another, the article said what actually happened.
 
 That's not a writing standard. That's an engineering standard applied to content.
 
@@ -34,7 +34,7 @@ That's not a writing standard. That's an engineering standard applied to content
 
 Before a single piece was published, I mapped the topical territory: Linux system administration, embedded development, DevOps tooling, open-source ecosystem. Every cluster of search intent got its own content structure, with cornerstone articles linking to supporting pieces and vice versa.
 
-The SEO mechanics were layered on top of the accuracy, not instead of it. Matching search intent, structuring for featured snippets, building internal link equity — these amplify good content. They can't rescue bad content, especially not with this audience.
+The SEO mechanics amplified the accuracy. Matching search intent, structuring for featured snippets, building internal link equity: they work when the content is already right. They can't rescue bad content, especially not with this audience.
 
 ## Brand recognition went from 3% to 34%
 

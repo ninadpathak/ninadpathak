@@ -32,6 +32,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <!-- Apply saved theme before first paint to prevent flash -->
+  <script>try{var t=localStorage.getItem('np-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/main.css">
   <link rel="stylesheet" href="/static/css/highlight.css">
@@ -152,14 +155,14 @@
     <div class="case-body" style="max-width: var(--prose-w);">
       <h2 id="they-had-articles-they-had-no-readers">They had articles. They had no readers.</h2>
 <p>LinuxForDevices was publishing content with no strategy behind it. Topics chosen by gut feel, no internal linking, no keyword architecture. The result: 487 monthly visitors across a site with dozens of articles. A developer community that didn't know it existed.</p>
-<p>The brief was simple on paper — build a content program that Linux developers actually find, read, and trust. The execution was anything but simple, because this audience has a finely tuned detector for shallow content.</p>
+<p>The brief was simple on paper: build a content program that Linux developers actually find, read, and trust. The execution was harder, because this audience has a finely tuned detector for shallow content.</p>
 <h2 id="the-audience-is-the-hardest-part">The audience is the hardest part</h2>
-<p>Linux developers and embedded engineers read documentation the way most people read contracts — looking for the thing that's wrong. They run the commands. They notice when an example uses a deprecated flag. They close the tab the moment something feels off.</p>
-<p>This meant every article had to be verified before it was written. Not fact-checked in the journalism sense — actually tested. Commands run, output confirmed, edge cases documented. If the Linux kernel docs said one thing and the actual behavior was another, the article said what actually happened.</p>
+<p>Linux developers and embedded engineers read documentation the way most people read contracts, looking for the thing that's wrong. They run the commands. They notice when an example uses a deprecated flag. They close the tab the moment something feels off.</p>
+<p>This meant every article had to be verified before it was written. Tested, not fact-checked in the journalism sense. Commands run, output confirmed, edge cases documented. If the Linux kernel docs said one thing and the actual behavior was another, the article said what actually happened.</p>
 <p>That's not a writing standard. That's an engineering standard applied to content.</p>
 <h2 id="architecture-before-articles">Architecture before articles</h2>
 <p>Before a single piece was published, I mapped the topical territory: Linux system administration, embedded development, DevOps tooling, open-source ecosystem. Every cluster of search intent got its own content structure, with cornerstone articles linking to supporting pieces and vice versa.</p>
-<p>The SEO mechanics were layered on top of the accuracy, not instead of it. Matching search intent, structuring for featured snippets, building internal link equity — these amplify good content. They can't rescue bad content, especially not with this audience.</p>
+<p>The SEO mechanics amplified the accuracy. Matching search intent, structuring for featured snippets, building internal link equity: they work when the content is already right. They can't rescue bad content, especially not with this audience.</p>
 <h2 id="brand-recognition-went-from-3-to-34">Brand recognition went from 3% to 34%</h2>
 <p>Traffic was one part of the brief. Brand recognition was the other. Alongside the content program, I built a distribution strategy targeting Linux and DevOps communities on Twitter and in developer forums. Developers who'd never heard of LinuxForDevices started citing its tutorials in Stack Overflow answers and GitHub issues.</p>
 <p>Developer brand recognition grew from 3% to 34% over the engagement. Twitter followers grew by 8,900. The site became a reference point in the Linux community, not just another tutorial blog.</p>

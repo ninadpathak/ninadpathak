@@ -16,9 +16,9 @@ Anyone who's read the attention mechanism papers won't be surprised. But seeing 
 
 The experiment was multi-document question answering. Given a question and 20 documents (one containing the answer, the rest distractors), models were tested with the answer-containing document placed at different positions.
 
-With GPT-3.5-Turbo and 20 documents: when the relevant document was at position 20 (the end), accuracy was around 42%. When it was at positions 5 through 15 (the middle), accuracy dropped to around 25%. That's a 17 percentage point drop, from one placement decision.
+With 20 documents in context: when the relevant document was at position 20 (the end), accuracy was around 42%. Moved to positions 5 through 15 (the middle), accuracy dropped to around 25%. A 17 percentage point gap from one placement decision.
 
-Adding more context hurt. GPT-3.5-Turbo's closed-book baseline (no retrieved documents at all) was 56.1% on the evaluation set. When the relevant document was in the middle of the context, the model with access to the answer performed *worse* than the model with no access at all. You gave it the information and it performed worse than if you hadn't.
+Adding more context hurt. The closed-book baseline, no retrieved documents at all, was 56.1% on the evaluation set. When the relevant document was buried in the middle, the model with access to the answer performed *worse* than the model with no access. You gave it the information and it did worse.
 
 Extended-context models, the ones specifically trained for longer inputs, showed nearly identical U-shaped curves. The window got bigger. The bias didn't go away.
 
@@ -42,9 +42,9 @@ Three things follow directly:
 
 ## Long context vs. RAG is the wrong frame
 
-The conventional wisdom in mid-2024 was "context windows are getting so big that RAG will become unnecessary." Gemini 1.5 Pro at 1 million tokens. Claude with 200k. Just dump everything in.
+The conventional wisdom in mid-2024 was "context windows are getting so big that RAG will become unnecessary." Models pushing 1 million tokens. Claude at 200k. Just dump everything in.
 
-The research doesn't support this. The SummHay benchmark tested whether models could summarize information from long contexts. Without a retrieval mechanism, GPT-4o and Claude 3 Opus scored below 20%, despite both having near-perfect performance on "needle in a haystack" tests (>99% recall). Finding a specific string in a long document is not the same as reasoning over distributed information in that document.
+The research doesn't support this. The SummHay benchmark tested whether models could synthesize information from long contexts. Without a retrieval mechanism, frontier models scored below 20%, despite near-perfect performance on "needle in a haystack" tests (>99% recall). Finding a specific string in a long document is not the same as reasoning over distributed information in that document.
 
 RAG isn't redundant because context windows got bigger. They solve different things. Long context handles cases where the information is known, bounded, and fits comfortably. RAG handles cases where you have more information than the context can hold, or where you need to pull from dynamic external sources.
 
