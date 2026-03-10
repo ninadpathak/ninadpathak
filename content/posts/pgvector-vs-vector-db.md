@@ -8,7 +8,7 @@ status: published
 
 There's a recurring debate in AI infrastructure circles that generates more heat than light. On one side: "just use pgvector, you already have Postgres." On the other: "pgvector doesn't scale, use a real vector database." Both sides are mostly arguing past each other, and neither is right as a general principle.
 
-The honest answer depends on what you're building, at what scale, with what query patterns. Here's an attempt at a grounded comparison.
+The honest answer depends on what you're building, at what scale, with what query patterns. Here's my attempt at a grounded comparison from everything I've read on this.
 
 ## What pgvector actually is
 
@@ -82,7 +82,7 @@ Consider a dedicated database when:
 - You need distributed deployment across nodes
 - Your team can absorb the operational overhead of an additional system
 
-A third path worth considering: avoid the debate entirely by starting with pgvector and abstracting the vector database interface in your application code. When migration becomes necessary, you handle it at the adapter layer without rewriting application code. The teams that have navigated this successfully usually started here.
+A third path worth considering: avoid the debate entirely by starting with pgvector and abstracting the vector database interface in your application code. When migration becomes necessary, you handle it at the adapter layer without rewriting application code. Every team I've seen navigate this successfully started here.
 
 ## What the benchmarks say (and don't say)
 
@@ -94,6 +94,6 @@ The benchmark that matters is the one you run on your data, with your query patt
 
 ---
 
-The framing of "pgvector vs. vector databases" implies a binary choice that doesn't reflect how good teams actually make infrastructure decisions. The real question is: what's the minimum system that reliably handles your current requirements, with a migration path when requirements change?
+The framing of "pgvector vs. vector databases" implies a binary choice that doesn't reflect how good teams actually make infrastructure decisions. The real question, as I've come to think about it, is: what's the minimum system that reliably handles your current requirements, with a migration path when requirements change?
 
 At most stages of growth, that system starts with pgvector.

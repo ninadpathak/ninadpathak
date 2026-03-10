@@ -185,7 +185,7 @@
 
       </nav>
       <div class="post-content">
-        <p>When cognitive scientists talk about memory, they usually break it into four categories: sensory, short-term, episodic, and semantic. These categories emerged from studying how humans store and retrieve information. They also, as it turns out, map remarkably well onto the architecture decisions you face when building AI agents that need to remember things.</p>
+        <p>When cognitive scientists talk about memory, they usually break it into four categories: sensory, short-term, episodic, and semantic. These categories emerged from studying how humans store and retrieve information. What I find interesting is how well they map onto the architecture decisions you face when building AI agents that need to remember things.</p>
 <p>The parallel isn't perfect. Biological memory and vector stores are not the same thing. But the framework is useful because it forces you to ask a question that most agent implementations skip entirely: what <em>kind</em> of memory does this agent actually need, for which tasks, at which timescales?</p>
 <p>The question gets answered by accident in most implementations. Everything goes in the context window, context runs out, RAG gets added as an afterthought, and nobody understands why the agent can't maintain coherent behavior across a long task. Getting memory architecture right requires being deliberate about it from the start.</p>
 <h2 id="sensory-memory-the-input-buffer">Sensory memory: the input buffer</h2>
@@ -232,7 +232,7 @@
 <p>There's a practical reason most agents use only short-term memory: it's the default. The LLM SDK gives you a messages array, you append to it, you send it. No additional infrastructure required.</p>
 <p>The failure mode is predictable: the agent works fine on tasks that fit in the context window, fails on long tasks where context fills up, can't maintain consistency across sessions, and hallucinates facts it should be looking up.</p>
 <p><a href="https://arize.com/blog/common-ai-agent-failures/">Research on production agent failures</a> consistently lists context overflow and goal drift among the top failure modes. Both are symptoms of treating the context window as the only memory store.</p>
-<p>The design principle that follows: memory architecture is not an afterthought. It's a first-class decision, made before you start implementing. Before writing any agent code, the questions to answer are: what does this agent need to remember across turns, across tasks, and across sessions? Which of those memory types are time-sensitive enough that they belong in the context window, and which are stable enough that they can be retrieved on demand?</p>
+<p>The design principle I keep coming back to: memory architecture is not an afterthought. It's a first-class decision, made before you start implementing. Before writing any agent code, the questions to answer are: what does this agent need to remember across turns, across tasks, and across sessions? Which of those memory types are time-sensitive enough that they belong in the context window, and which are stable enough that they can be retrieved on demand?</p>
 <p>Answering those questions before writing code is the difference between an agent that degrades after 30 minutes and one that handles week-long projects without losing the thread.</p>
       </div>
     </div>

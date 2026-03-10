@@ -6,7 +6,7 @@ tags: [ai, agents, memory, architecture]
 status: published
 ---
 
-When cognitive scientists talk about memory, they usually break it into four categories: sensory, short-term, episodic, and semantic. These categories emerged from studying how humans store and retrieve information. They also, as it turns out, map remarkably well onto the architecture decisions you face when building AI agents that need to remember things.
+When cognitive scientists talk about memory, they usually break it into four categories: sensory, short-term, episodic, and semantic. These categories emerged from studying how humans store and retrieve information. What I find interesting is how well they map onto the architecture decisions you face when building AI agents that need to remember things.
 
 The parallel isn't perfect. Biological memory and vector stores are not the same thing. But the framework is useful because it forces you to ask a question that most agent implementations skip entirely: what *kind* of memory does this agent actually need, for which tasks, at which timescales?
 
@@ -93,6 +93,6 @@ The failure mode is predictable: the agent works fine on tasks that fit in the c
 
 [Research on production agent failures](https://arize.com/blog/common-ai-agent-failures/) consistently lists context overflow and goal drift among the top failure modes. Both are symptoms of treating the context window as the only memory store.
 
-The design principle that follows: memory architecture is not an afterthought. It's a first-class decision, made before you start implementing. Before writing any agent code, the questions to answer are: what does this agent need to remember across turns, across tasks, and across sessions? Which of those memory types are time-sensitive enough that they belong in the context window, and which are stable enough that they can be retrieved on demand?
+The design principle I keep coming back to: memory architecture is not an afterthought. It's a first-class decision, made before you start implementing. Before writing any agent code, the questions to answer are: what does this agent need to remember across turns, across tasks, and across sessions? Which of those memory types are time-sensitive enough that they belong in the context window, and which are stable enough that they can be retrieved on demand?
 
 Answering those questions before writing code is the difference between an agent that degrades after 30 minutes and one that handles week-long projects without losing the thread.

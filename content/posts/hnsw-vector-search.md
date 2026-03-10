@@ -8,7 +8,7 @@ status: published
 
 Treating vector search as a black box works fine, until it doesn't. You add embeddings to a vector DB, call a search function, get back results. Then at some point you need to tune recall, or you're running out of memory, or your queries are slow, and suddenly you're staring at parameters called `M`, `ef_construction`, and `efSearch` with no mental model for what they do.
 
-Reading the [original HNSW paper](https://arxiv.org/abs/1603.09320) is actually worth your time. You won't implement it yourself. The algorithm's structure explains every tradeoff you'll encounter in production, and that's the useful part.
+Reading the [original HNSW paper](https://arxiv.org/abs/1603.09320) is actually worth your time. You won't implement it yourself. But the algorithm's structure explains every tradeoff you'll encounter in production, and that's what made it worth my time.
 
 Here's what's happening.
 
@@ -30,7 +30,7 @@ The structure is intentionally similar to a skip list. The top layers let you ta
 
 You enter the graph at the top layer, at a pre-designated entry point. You greedily traverse: at each step, you move to whichever connected neighbor is nearest to your query. When no neighbor is closer than your current position, you've hit a local minimum on that layer. Drop to the next layer. Repeat.
 
-Here's where I lose some people, so let me be direct about it: the greedy traversal on the top layers isn't finding the answer. It's finding a *starting point* for the detailed search at layer 0. The top layers are navigation; layer 0 is where the actual nearest neighbor candidates get identified.
+Here's where I lose people, so let me be precise about it: the greedy traversal on the top layers isn't finding the answer. It's finding a *starting point* for the detailed search at layer 0. The top layers are navigation; layer 0 is where the actual nearest neighbor candidates get identified.
 
 At layer 0, you run the search with a larger candidate pool controlled by the `ef` (or `efSearch`) parameter. Higher ef means you explore more candidates before returning results. More exploration, better recall. More computation, higher latency. The tradeoff is direct and predictable, which is one reason people like HNSW.
 
@@ -90,4 +90,4 @@ Here's what the research says matters:
 
 HNSW is an approximate algorithm, every parameter is a tradeoff surface, and the tradeoffs are predictable once you understand the structure. M controls memory and density. ef controls query-time recall and speed. ef_construction controls build-time graph quality. The rest is implementation details.
 
-Performance issues with a vector DB almost always resolve at the parameter level before requiring architecture changes.
+What I keep seeing: performance issues with a vector DB almost always resolve at the parameter level before requiring architecture changes. Start there.

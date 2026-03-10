@@ -179,15 +179,15 @@
 <li><a href="#what-this-means-for-how-you-build-rag">What this means for how you build RAG</a></li>
 <li><a href="#long-context-vs-rag-is-the-wrong-frame">Long context vs. RAG is the wrong frame</a></li>
 <li><a href="#context-engineering-is-a-real-discipline-now">Context engineering is a real discipline now</a></li>
-<li><a href="#what-im-convinced-of-after-reading-this-research">What I'm convinced of after reading this research</a></li>
+<li><a href="#what-im-convinced-of-now">What I'm convinced of now</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>There's a paper from 2023 that should have changed how everyone builds RAG systems. It didn't, really. Teams kept stuffing more documents into longer contexts, assuming bigger windows meant better results. The paper said otherwise, with numbers.</p>
+        <p>There's a paper from 2023 that should have changed how everyone builds RAG systems. It didn't, really, and I find that genuinely frustrating. Teams kept stuffing more documents into longer contexts, assuming bigger windows meant better results. The paper said otherwise, with numbers.</p>
 <p>It's called <a href="https://arxiv.org/abs/2307.03172">"Lost in the Middle: How Language Models Use Long Contexts"</a>, by Nelson Liu, Kevin Lin, and others from Stanford. The finding: language models are significantly better at using information at the beginning or end of their context window than information in the middle. The performance curve across context position is U-shaped. Put your relevant document in the middle of a 20-document context and watch accuracy fall off a cliff.</p>
-<p>Anyone who's read the attention mechanism papers won't be surprised, but seeing it quantified is different from understanding it theoretically.</p>
+<p>Anyone who's read the attention mechanism papers won't be surprised. But seeing it quantified hit differently than understanding it theoretically.</p>
 <h2 id="the-numbers">The numbers</h2>
 <p>The experiment was multi-document question answering. Given a question and 20 documents (one containing the answer, the rest distractors), models were tested with the answer-containing document placed at different positions.</p>
 <p>With GPT-3.5-Turbo and 20 documents: when the relevant document was at position 20 (the end), accuracy was around 42%. When it was at positions 5 through 15 (the middle), accuracy dropped to around 25%. That's a 17 percentage point drop, from one placement decision.</p>
@@ -212,7 +212,7 @@
 <p>For a real agent or RAG system, what goes in the context at inference time is not static. It's assembled dynamically from: the system prompt, any cached instructions, retrieved documents ordered carefully, conversation history (summarized or truncated how?), tool outputs, current task state. Getting each of these right, in the right order, in the right amount, is engineering work.</p>
 <p>Anthropic's <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">prompt caching</a> is partly a context engineering tool: when your system prompt is 50k tokens (a large codebase, a full policy document, detailed instructions), you pay to write it to cache once and then read it at 90% discount on subsequent calls. A 200k token context at standard Claude pricing costs around $3.00 per call. With cache hits, it drops to about $0.10. That's not a marginal savings.</p>
 <p>The interesting design question is not "how big a context can I use" but "what is the minimum context that gives the right answer?" Smaller context is cheaper, faster, and, the research confirms, often more accurate.</p>
-<h2 id="what-im-convinced-of-after-reading-this-research">What I'm convinced of after reading this research</h2>
+<h2 id="what-im-convinced-of-now">What I'm convinced of now</h2>
 <p>Position matters more than presence. Retrieving the right document is necessary but not sufficient. Where it lands in the context window determines whether the model actually uses it.</p>
 <p>Optimal RAG parameters exist and are measurable. Five to ten chunks, ordered carefully, is roughly the sweet spot for most models and tasks. Going to 20 chunks adds noise. Going to 50 is almost certainly hurting you.</p>
 <p>Long context and RAG are complementary, not competing. Use long context for bounded, stable information. Use RAG for dynamic retrieval from large corpora. Use both together for complex agents.</p>

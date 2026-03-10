@@ -6,11 +6,11 @@ tags: [ai, llm, rag, context-engineering]
 status: published
 ---
 
-There's a paper from 2023 that should have changed how everyone builds RAG systems. It didn't, really. Teams kept stuffing more documents into longer contexts, assuming bigger windows meant better results. The paper said otherwise, with numbers.
+There's a paper from 2023 that should have changed how everyone builds RAG systems. It didn't, really, and I find that genuinely frustrating. Teams kept stuffing more documents into longer contexts, assuming bigger windows meant better results. The paper said otherwise, with numbers.
 
 It's called ["Lost in the Middle: How Language Models Use Long Contexts"](https://arxiv.org/abs/2307.03172), by Nelson Liu, Kevin Lin, and others from Stanford. The finding: language models are significantly better at using information at the beginning or end of their context window than information in the middle. The performance curve across context position is U-shaped. Put your relevant document in the middle of a 20-document context and watch accuracy fall off a cliff.
 
-Anyone who's read the attention mechanism papers won't be surprised, but seeing it quantified is different from understanding it theoretically.
+Anyone who's read the attention mechanism papers won't be surprised. But seeing it quantified hit differently than understanding it theoretically.
 
 ## The numbers
 
@@ -60,7 +60,7 @@ Anthropic's [prompt caching](https://platform.claude.com/docs/en/build-with-clau
 
 The interesting design question is not "how big a context can I use" but "what is the minimum context that gives the right answer?" Smaller context is cheaper, faster, and, the research confirms, often more accurate.
 
-## What I'm convinced of after reading this research
+## What I'm convinced of now
 
 Position matters more than presence. Retrieving the right document is necessary but not sufficient. Where it lands in the context window determines whether the model actually uses it.
 

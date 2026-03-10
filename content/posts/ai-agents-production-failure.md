@@ -38,7 +38,7 @@ Hallucination works differently in agents than in single-turn Q&A. A chat system
 
 After a 20-step task, errors from step 2 can be deeply embedded in the agent's working understanding of the task state. You often can't trace the final wrong answer back to the original hallucination without full traces.
 
-The hallucination rates by task type are sobering. [Vectara's 2023 research](https://vectara.com/blog/cut-the-bull-detecting-factual-errors-in-llm-responses/) found ~3% hallucination rate for text summarization. Medical systematic reviews: 28-40%. Legal citation generation: 69-88% (per Stanford research). These are single-turn tasks. In multi-step agents operating in specialized domains, there's no principled reason to expect rates to be lower.
+The hallucination rates by task type are sobering, and they stuck with me after I read them. [Vectara's 2023 research](https://vectara.com/blog/cut-the-bull-detecting-factual-errors-in-llm-responses/) found ~3% hallucination rate for text summarization. Medical systematic reviews: 28-40%. Legal citation generation: 69-88% (per Stanford research). These are single-turn tasks. In multi-step agents operating in specialized domains, there's no principled reason to expect rates to be lower.
 
 ## The context window is a fixed resource and agents burn through it
 
@@ -64,7 +64,7 @@ Based on what's reported in failure analyses and post-mortems from teams that ha
 
 ## What actually works
 
-The systems that work well in production have a few things in common.
+The systems I've seen work well in production have a few things in common.
 
 They're scoped narrowly. The agent does one class of task, in a constrained environment, with a small set of tools. Scope creep kills agent reliability. An agent that "helps with customer support" is harder to make reliable than an agent that "classifies incoming support tickets into five categories and routes them."
 

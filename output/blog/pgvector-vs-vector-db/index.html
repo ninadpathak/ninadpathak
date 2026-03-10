@@ -155,7 +155,7 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 11, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">7 min read</span>
+        <span class="post-meta-time">8 min read</span>
       </div>
       <h1 class="post-title">pgvector vs Dedicated Vector Databases: An Honest Comparison</h1>
       <p class="lead">pgvector is genuinely good. Dedicated vector databases exist for real reasons. Here's how to think through the tradeoff without the vendor hype.</p>
@@ -188,7 +188,7 @@
       </nav>
       <div class="post-content">
         <p>There's a recurring debate in AI infrastructure circles that generates more heat than light. On one side: "just use pgvector, you already have Postgres." On the other: "pgvector doesn't scale, use a real vector database." Both sides are mostly arguing past each other, and neither is right as a general principle.</p>
-<p>The honest answer depends on what you're building, at what scale, with what query patterns. Here's an attempt at a grounded comparison.</p>
+<p>The honest answer depends on what you're building, at what scale, with what query patterns. Here's my attempt at a grounded comparison from everything I've read on this.</p>
 <h2 id="what-pgvector-actually-is">What pgvector actually is</h2>
 <p><a href="https://github.com/pgvector/pgvector">pgvector</a> is a Postgres extension, first released in 2021, that adds a vector data type and approximate nearest neighbor search to Postgres. You store embeddings as <code>vector(1536)</code> columns alongside your regular relational data. You create an index using either IVFFlat (inverted file flat) or HNSW (since pgvector 0.5.0). You query with <code>&lt;-&gt;</code> for L2 distance, <code>&lt;=&gt;</code> for cosine, <code>&lt;#&gt;</code> for inner product.</p>
 <p>The HNSW implementation in pgvector uses the same basic algorithm as dedicated databases: hierarchical navigable small world graphs, the same parameters (m, ef_construction, ef at query time). The core algorithm isn't the differentiator.</p>
@@ -233,13 +233,13 @@
 <li>You need distributed deployment across nodes</li>
 <li>Your team can absorb the operational overhead of an additional system</li>
 </ul>
-<p>A third path worth considering: avoid the debate entirely by starting with pgvector and abstracting the vector database interface in your application code. When migration becomes necessary, you handle it at the adapter layer without rewriting application code. The teams that have navigated this successfully usually started here.</p>
+<p>A third path worth considering: avoid the debate entirely by starting with pgvector and abstracting the vector database interface in your application code. When migration becomes necessary, you handle it at the adapter layer without rewriting application code. Every team I've seen navigate this successfully started here.</p>
 <h2 id="what-the-benchmarks-say-and-dont-say">What the benchmarks say (and don't say)</h2>
 <p>The <a href="http://ann-benchmarks.com/">ANN Benchmarks</a> site publishes recall vs. queries-per-second plots for dozens of algorithms and datasets. At equivalent recall targets, the gaps between pgvector's HNSW and dedicated database HNSW implementations are often small. The algorithm is the algorithm.</p>
 <p>Where dedicated databases pull ahead is in concurrent load, filtered search, and memory-constrained environments. Those conditions don't show up in single-client benchmarks.</p>
 <p>The benchmark that matters is the one you run on your data, with your query patterns, under your production load profile. That benchmark is harder to set up than running ANN Benchmarks, but it's the only one that tells you something actionable about your specific situation.</p>
 <hr />
-<p>The framing of "pgvector vs. vector databases" implies a binary choice that doesn't reflect how good teams actually make infrastructure decisions. The real question is: what's the minimum system that reliably handles your current requirements, with a migration path when requirements change?</p>
+<p>The framing of "pgvector vs. vector databases" implies a binary choice that doesn't reflect how good teams actually make infrastructure decisions. The real question, as I've come to think about it, is: what's the minimum system that reliably handles your current requirements, with a migration path when requirements change?</p>
 <p>At most stages of growth, that system starts with pgvector.</p>
       </div>
     </div>
