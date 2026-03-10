@@ -368,6 +368,24 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   flex-wrap: wrap;
 }
 
+.hero-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 0.5rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--border-2);
+}
+
+.hero-socials a {
+  color: var(--text-3);
+  transition: color var(--t);
+  display: flex;
+  align-items: center;
+}
+
+.hero-socials a:hover { color: var(--accent); }
+
 /* =====================================================================
    CLIENTS STRIP
    ===================================================================== */
