@@ -155,7 +155,7 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 11, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">8 min read</span>
+        <span class="post-meta-time">7 min read</span>
       </div>
       <h1 class="post-title">pgvector vs Dedicated Vector Databases: An Honest Comparison</h1>
       <p class="lead">pgvector is genuinely good. Dedicated vector databases exist for real reasons. Here's how to think through the tradeoff without the vendor hype.</p>
@@ -191,33 +191,33 @@
 <p>The honest answer depends on what you're building, at what scale, with what query patterns. Here's an attempt at a grounded comparison.</p>
 <h2 id="what-pgvector-actually-is">What pgvector actually is</h2>
 <p><a href="https://github.com/pgvector/pgvector">pgvector</a> is a Postgres extension, first released in 2021, that adds a vector data type and approximate nearest neighbor search to Postgres. You store embeddings as <code>vector(1536)</code> columns alongside your regular relational data. You create an index using either IVFFlat (inverted file flat) or HNSW (since pgvector 0.5.0). You query with <code>&lt;-&gt;</code> for L2 distance, <code>&lt;=&gt;</code> for cosine, <code>&lt;#&gt;</code> for inner product.</p>
-<p>The HNSW implementation in pgvector uses the same basic algorithm as dedicated databases -- hierarchical navigable small world graphs, the same parameters (m, ef_construction, ef at query time). The core algorithm isn't the differentiator.</p>
-<p>What pgvector gives you is the rest of Postgres for free. Your vectors live in the same database as your relational data. You can do <code>JOIN</code> between vector search results and your users table. You get Postgres's ACID transactions, full-text search, JSONB columns, row-level security, and everything else in a single system. Backups, replication, point-in-time recovery -- the entire Postgres ecosystem applies.</p>
+<p>The HNSW implementation in pgvector uses the same basic algorithm as dedicated databases: hierarchical navigable small world graphs, the same parameters (m, ef_construction, ef at query time). The core algorithm isn't the differentiator.</p>
+<p>What pgvector gives you is the rest of Postgres for free. Your vectors live in the same database as your relational data. You can do <code>JOIN</code> between vector search results and your users table. You get Postgres's ACID transactions, full-text search, JSONB columns, row-level security, and everything else in a single system. Backups, replication, point-in-time recovery: the entire Postgres ecosystem applies.</p>
 <h2 id="why-dedicated-vector-databases-exist">Why dedicated vector databases exist</h2>
 <p>The "just use pgvector" argument is compelling for small to medium deployments. Dedicated vector databases didn't emerge because pgvector is wrong in principle. They emerged because at large scale, vector search has specific performance and operational requirements that don't fit naturally into a general-purpose RDBMS.</p>
-<p><strong>Memory architecture.</strong> HNSW must live in RAM for performance -- the random-access traversal pattern is fatal on any storage medium with seek latency. Postgres manages memory via its shared buffer pool, which also needs to cache table data, index pages for other operations, and work through the OS page cache. A dedicated vector database can dedicate its entire memory footprint to the index. At 50 million vectors, the difference matters.</p>
-<p><strong>Filtered search.</strong> Filtered vector search -- "find me the 10 most similar vectors where <code>user_id = 42</code> and <code>status = active</code>" -- is genuinely hard. pgvector 0.7.0 introduced iterative index scans that help considerably, but the problem isn't fully solved at high filter selectivity. Qdrant built a custom query planner that estimates filter cardinality and decides whether to pre-filter (reduce the dataset before searching) or post-filter (search then filter). Weaviate has a similar approach with its filtered HNSW traversal. These are purpose-built solutions to a problem that Postgres wasn't designed around.</p>
+<p><strong>Memory architecture.</strong> HNSW must live in RAM for performance; the random-access traversal pattern is fatal on any storage medium with seek latency. Postgres manages memory via its shared buffer pool, which also needs to cache table data, index pages for other operations, and work through the OS page cache. A dedicated vector database can dedicate its entire memory footprint to the index. At 50 million vectors, the difference matters.</p>
+<p><strong>Filtered search.</strong> Filtered vector search is genuinely hard. Take a query like: "find me the 10 most similar vectors where <code>user_id = 42</code> and <code>status = active</code>". pgvector 0.7.0 introduced iterative index scans that help considerably, but the problem isn't fully solved at high filter selectivity. Qdrant built a custom query planner that estimates filter cardinality and decides whether to pre-filter (reduce the dataset before searching) or post-filter (search then filter). Weaviate has a similar approach with its filtered HNSW traversal. These are purpose-built solutions to a problem that Postgres wasn't designed around.</p>
 <p><strong>Quantization and compression.</strong> At scale, storing full-precision float32 vectors is expensive. INT8 scalar quantization reduces memory to 25%; binary quantization reduces it to 3% at the cost of some recall (recoverable with oversampling). Qdrant and Weaviate both have first-class quantization support. pgvector got half-precision (float16) storage in 0.7.0, which helps, but doesn't match the quantization options available in dedicated databases.</p>
 <p><strong>Distributed deployment.</strong> Postgres can be sharded horizontally, but it requires significant operational work. Purpose-built distributed vector search (Pinecone's pods, Qdrant's cluster mode, Weaviate's node sharding) is designed from the start to distribute across nodes. For datasets that don't fit on a single machine's RAM, the distributed options in dedicated databases are more mature.</p>
 <h2 id="the-numbers-you-should-actually-look-at">The numbers you should actually look at</h2>
 <p>Generic claims about "pgvector doesn't scale" or "pgvector is fast enough" don't tell you anything useful. The relevant questions are specific:</p>
 <p><strong>At what vector count does pgvector start degrading?</strong> For an in-memory HNSW index, pgvector performs comparably to dedicated databases up to roughly 1-5 million vectors, assuming you've tuned m and ef_construction appropriately. Above that, dedicated databases start showing advantages in query latency, particularly under concurrent load.</p>
 <p><strong>What's the recall at your efSearch setting?</strong> pgvector's HNSW implementation achieves comparable recall to Qdrant and Weaviate at equivalent efSearch values on standard benchmarks (ANN Benchmarks, the canonical evaluation source). The algorithm is the algorithm.</p>
-<p><strong>What's your p99 latency under production load?</strong> Benchmarks in isolation don't capture shared buffer pool contention, Postgres vacuum overhead, or checkpoint interference. If your database is handling a mix of OLTP and vector workloads, the vector queries compete for resources with everything else.</p>
+<p><strong>What's your p99 latency under production load?</strong> Benchmarks in isolation don't capture shared buffer pool contention, Postgres vacuum overhead, or checkpoint interference. A database handling a mix of OLTP and vector workloads forces the vector queries to compete for resources with everything else.</p>
 <p><strong>What are your filter selectivity patterns?</strong> Low selectivity filters (eliminating 1-5% of the dataset) are handled fine by pgvector's post-filter approach. High selectivity filters (returning 0.1% of the dataset) are where the dedicated query planners in Qdrant or Weaviate start pulling ahead.</p>
 <h2 id="the-case-for-pgvector">The case for pgvector</h2>
 <p>Fewer systems is a genuine advantage. Each additional database in your infrastructure is an operational liability: another thing to monitor, back up, secure, upgrade, and learn. The cognitive overhead of multi-database architecture compounds.</p>
 <p>For applications under a few million vectors, pgvector with HNSW indexed correctly (m=16 or m=32, ef_construction=100+, efSearch tuned to your recall target) delivers performance that's good enough for the large majority of use cases. The marginal recall or latency improvement from switching to a dedicated database often doesn't justify the operational overhead and migration cost.</p>
 <p>There's also the data locality argument. When your vectors live next to your metadata in Postgres, queries like "retrieve the 10 most semantically similar items to this one, ordered by creation date, filtered by subscription tier" are a single query. With a separate vector database, you do a vector search, get back IDs, then query Postgres for the metadata, then filter and sort in application code. That's three round trips and more application complexity.</p>
-<p><a href="https://supabase.com/vector">Supabase Vector</a> and <a href="https://neon.tech/">Neon</a> have made pgvector operationally simpler by hosting it as a managed service with sensible defaults. If you're already on managed Postgres and under ~5 million vectors, starting with pgvector and migrating if needed is a reasonable strategy.</p>
+<p><a href="https://supabase.com/vector">Supabase Vector</a> and <a href="https://neon.tech/">Neon</a> have made pgvector operationally simpler by hosting it as a managed service with sensible defaults. Already on managed Postgres and under ~5 million vectors, starting with pgvector and migrating when needed is a reasonable strategy.</p>
 <h2 id="the-case-for-dedicated-databases">The case for dedicated databases</h2>
-<p>At scale -- 10 million+ vectors, high query volume, strict p95 latency requirements -- dedicated databases have real advantages that aren't just marketing.</p>
+<p>At scale, ten million or more vectors with high query volume and strict p95 latency requirements, dedicated databases have real advantages that aren't just marketing.</p>
 <p>Qdrant, written in Rust, has consistently strong benchmark numbers. The filtered search implementation is purpose-built. Memory-mapped storage lets it handle datasets larger than RAM with reasonable performance (slower than in-memory, but more graceful degradation than pgvector under memory pressure). The payload indexing system lets you filter on metadata without a separate database call.</p>
 <p>Weaviate makes a different set of tradeoffs: HNSW filtered traversal, a GraphQL and gRPC API, module-based integration for generating embeddings. Better for teams that want a more opinionated system; more operational complexity for teams that want control.</p>
 <p>Pinecone is the managed option for teams that don't want to run infrastructure. You pay a significant premium over self-hosted alternatives for serverless scaling and operational simplicity. The proprietary architecture means less visibility into what's happening under the hood.</p>
 <p><a href="https://www.microsoft.com/en-us/research/publication/diskann-fast-accurate-billion-point-nearest-neighbor-search-on-a-single-node/">DiskANN-based</a> systems (used in Pinecone's serverless backend, among others) make sense at billion-vector scale by using SSDs instead of RAM as primary storage. The random-access problem with HNSW on disk is addressed with a graph layout optimized for SSD access patterns. For datasets that don't fit in RAM, this matters.</p>
 <h2 id="a-decision-framework-thats-actually-useful">A decision framework that's actually useful</h2>
-<p>Start with pgvector if:</p>
+<p>Start with pgvector when:</p>
 <ul>
 <li>Your vector count is under 5 million</li>
 <li>Filtered search selectivity is low-to-moderate</li>
@@ -225,22 +225,22 @@
 <li>Your team's operational capacity is limited</li>
 <li>You need transactional consistency between vector and relational data</li>
 </ul>
-<p>Consider a dedicated database if:</p>
+<p>Consider a dedicated database when:</p>
 <ul>
-<li>You're approaching 10 million+ vectors</li>
+<li>You're approaching 10 million or more vectors</li>
 <li>High selectivity filtered search is a core requirement (returning &lt;1% of the dataset)</li>
 <li>You have strict p95 latency requirements (under 10ms) under production load</li>
 <li>You need distributed deployment across nodes</li>
 <li>Your team can absorb the operational overhead of an additional system</li>
 </ul>
-<p>A third path: avoid the debate entirely by starting with pgvector and setting up your application so the vector database interface is abstracted. When you need to migrate -- if the benchmarks tell you to -- you do it at the adapter layer without rewriting application code. This is how the teams that have done this successfully usually approach it.</p>
+<p>A third path worth considering: avoid the debate entirely by starting with pgvector and abstracting the vector database interface in your application code. When migration becomes necessary, you handle it at the adapter layer without rewriting application code. The teams that have navigated this successfully usually started here.</p>
 <h2 id="what-the-benchmarks-say-and-dont-say">What the benchmarks say (and don't say)</h2>
 <p>The <a href="http://ann-benchmarks.com/">ANN Benchmarks</a> site publishes recall vs. queries-per-second plots for dozens of algorithms and datasets. At equivalent recall targets, the gaps between pgvector's HNSW and dedicated database HNSW implementations are often small. The algorithm is the algorithm.</p>
 <p>Where dedicated databases pull ahead is in concurrent load, filtered search, and memory-constrained environments. Those conditions don't show up in single-client benchmarks.</p>
 <p>The benchmark that matters is the one you run on your data, with your query patterns, under your production load profile. That benchmark is harder to set up than running ANN Benchmarks, but it's the only one that tells you something actionable about your specific situation.</p>
 <hr />
-<p>The framing of "pgvector vs. vector databases" implies a binary choice that doesn't reflect how good teams actually make infrastructure decisions. The real question is: what's the minimum system that reliably handles your current requirements, with a migration path if requirements change?</p>
-<p>For most teams at most stages, that system starts with pgvector.</p>
+<p>The framing of "pgvector vs. vector databases" implies a binary choice that doesn't reflect how good teams actually make infrastructure decisions. The real question is: what's the minimum system that reliably handles your current requirements, with a migration path when requirements change?</p>
+<p>At most stages of growth, that system starts with pgvector.</p>
       </div>
     </div>
   </div>

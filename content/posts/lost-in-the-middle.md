@@ -20,7 +20,7 @@ With GPT-3.5-Turbo and 20 documents: when the relevant document was at position 
 
 Here's the part that should make you uncomfortable: adding more context hurt. GPT-3.5-Turbo's closed-book baseline (no retrieved documents at all) was 56.1% on the evaluation set. When the relevant document was in the middle of the context, the model with access to the answer performed *worse* than the model with no access at all. You gave it the information and it performed worse than if you hadn't.
 
-Extended-context models -- the ones specifically trained to handle longer inputs -- showed nearly identical U-shaped curves. The window got bigger. The bias didn't go away.
+Extended-context models, the ones specifically trained for longer inputs, showed nearly identical U-shaped curves. The window got bigger. The bias didn't go away.
 
 ## Why this happens
 
@@ -30,15 +30,15 @@ There's also a simpler story: at very long contexts, attending to positions in t
 
 ## What this means for how you build RAG
 
-If you're doing naive RAG -- chunk documents, embed them, retrieve top-k by similarity, concatenate them into the prompt, query -- you're probably placing the most relevant chunk somewhere in the middle of your context by default. The retrieval ranked it first, so it goes first in the list, which ends up buried after the system prompt.
+Naive RAG pipelines chunk documents, embed them, retrieve top-k by similarity, and concatenate everything into the prompt. The most relevant chunk lands somewhere in the middle of the context by default, ranked first in the retrieval list but buried after the system prompt.
 
 A few things follow from the research:
 
-**Put the highest-ranked result at the start of the retrieved context, not buried in the middle.** If you're passing 10 retrieved chunks, the one with the highest similarity score should be first (and possibly last, reordered). A one-line reordering that should improve accuracy on most setups.
+**Put the highest-ranked result at the start of the retrieved context, not buried in the middle.** With 10 retrieved chunks, the one with the highest similarity score should be first (and possibly last, reordered). A one-line reordering that improves accuracy on nearly every setup.
 
 **Don't retrieve more than you need.** The [Databricks long context RAG research](https://arxiv.org/abs/2411.03538) from late 2024 found that retrieval performance peaks around top 5-10 chunks and degrades with more. You're adding noise, not signal, and the noise lands in the middle of the context.
 
-**Evaluate on your actual distribution.** The U-shaped curve varies by model and task. The only way to know how bad your specific setup is: create a held-out eval set, place your known-answer chunk at positions 1, 5, 10, 15, 20, measure accuracy at each. You'll probably see the curve. Then you'll know if it's a problem worth fixing for your use case.
+**Evaluate on your actual distribution.** The U-shaped curve varies by model and task. The only way to know how bad your specific setup is: create a held-out eval set, place your known-answer chunk at positions 1, 5, 10, 15, 20, measure accuracy at each. You'll probably see the curve. Then you'll know whether it's a problem worth fixing for your use case.
 
 ## Long context vs. RAG is the wrong frame
 
@@ -56,9 +56,9 @@ Andrej Karpathy [defined it](https://x.com/karpathy/status/1937902205765607626) 
 
 For a real agent or RAG system, what goes in the context at inference time is not static. It's assembled dynamically from: the system prompt, any cached instructions, retrieved documents ordered carefully, conversation history (summarized or truncated how?), tool outputs, current task state. Getting each of these right, in the right order, in the right amount, is engineering work.
 
-Anthropic's [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) is partly a context engineering tool: if your system prompt is 50k tokens (a large codebase, a full policy document, detailed instructions), you pay to write it to cache once and then read it at 90% discount on subsequent calls. A 200k token context at standard Claude pricing costs around $3.00 per call. With cache hits, it drops to about $0.10. That's not a marginal savings.
+Anthropic's [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) is partly a context engineering tool: when your system prompt is 50k tokens (a large codebase, a full policy document, detailed instructions), you pay to write it to cache once and then read it at 90% discount on subsequent calls. A 200k token context at standard Claude pricing costs around $3.00 per call. With cache hits, it drops to about $0.10. That's not a marginal savings.
 
-The interesting design question is not "how big a context can I use" but "what is the minimum context that gives the right answer?" Smaller context is cheaper, faster, and -- based on the research -- often more accurate.
+The interesting design question is not "how big a context can I use" but "what is the minimum context that gives the right answer?" Smaller context is cheaper, faster, and, the research confirms, often more accurate.
 
 ## What I'm convinced of after reading this research
 
@@ -70,6 +70,6 @@ Long context and RAG are complementary, not competing. Use long context for boun
 
 The models that score well on needle-in-a-haystack benchmarks are not solving the same problem as models reasoning over large documents. Needle-in-a-haystack is easy; it's string matching at scale. Synthesizing distributed information is hard, and longer contexts don't automatically make it easier.
 
-None of this is exotic research. The "Lost in the Middle" paper is two years old. The practices that follow from it -- reranking, result ordering, limiting retrieved chunks -- are available in every RAG framework. The question is whether the teams building these systems actually know about the curve.
+None of this is exotic research. The "Lost in the Middle" paper is two years old. The practices that follow, reranking, result ordering, limiting retrieved chunks, are available in every RAG framework. The question is whether the teams building these systems actually know about the curve.
 
 The ones getting RAG right do. The ones stuffing 50 chunks into a prompt and wondering why accuracy is mediocre probably don't.

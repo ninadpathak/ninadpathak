@@ -14,7 +14,7 @@ These aren't vibes. They're published numbers from [Composio](https://composio.d
 
 ## The planning problem is not the execution problem
 
-The [ReAct paper](https://arxiv.org/abs/2210.03629) from Yao et al. in 2022 was important. It showed you could interleave reasoning traces and actions -- Thought, Act, Observe, repeat -- and get agents that could handle tasks on HotpotQA and ALFWorld that pure chain-of-thought couldn't. ALFWorld improvements were substantial: +34% success rate over imitation and RL methods. People read this and got excited about autonomous agents.
+The [ReAct paper](https://arxiv.org/abs/2210.03629) from Yao et al. in 2022 was important. It showed you could interleave reasoning traces and actions (Thought, Act, Observe, repeat) and get agents that could handle tasks on HotpotQA and ALFWorld that pure chain-of-thought couldn't. ALFWorld improvements were substantial: +34% success rate over imitation and RL methods. People read this and got excited about autonomous agents.
 
 What the paper didn't claim was that this approach scales to complex, long-horizon tasks without problems. And a 2025 analysis makes the reason explicit: reasoning is not planning.
 
@@ -30,7 +30,7 @@ Here's a thing that seems obvious but has non-obvious implications: in a chain o
 
 Even at 95% per-call success, a 20-step chain succeeds 36% of the time. You need roughly 99.5% per-call reliability to get 90% chain completion at 20 steps. That's a hard engineering target.
 
-The tool call reliability improvements of 2025 (15% to 80%) are real progress. But 80% per-call is not close to good enough for anything that requires sequential tool calls on production data. The improvement hasn't been linear, and the path from 80% to 99.5% is not just better models -- it requires better error handling, retry logic, checkpointing, and probably task decomposition so individual chains are shorter.
+The tool call reliability improvements of 2025 (15% to 80%) are real progress. But 80% per-call is not close to good enough for anything that requires sequential tool calls on production data. The improvement hasn't been linear, and the path from 80% to 99.5% demands more than better models: better error handling, retry logic, checkpointing, and probably task decomposition so individual chains are shorter.
 
 ## Hallucination accumulates differently in agents
 
@@ -46,7 +46,7 @@ Every tool output gets appended to the agent's context. Every reasoning trace. E
 
 What happens when the context fills up varies by implementation. Some truncate from the beginning (losing task context). Some summarize (introducing information loss and potential distortion). Some just fail. None of these are great.
 
-[MemGPT](https://arxiv.org/abs/2310.08560) from UC Berkeley treated this as an operating system problem: the context window is like RAM, external storage is like disk, and the model needs to actively manage paging between them. The system uses OS-style interrupts to control flow when context limits are approached. It's the right framing. The practical implementations are getting better, but most production agents aren't doing this properly yet.
+[MemGPT](https://arxiv.org/abs/2310.08560) from UC Berkeley treated this as an operating system problem: the context window is like RAM, external storage is like disk, and the model needs to actively manage paging between them. The system uses OS-style interrupts to control flow when context limits are approached. It's the right framing. The practical implementations are getting better, but production agents aren't doing this properly yet.
 
 ## The actual failure modes in order of frequency
 
@@ -64,17 +64,17 @@ Based on what's reported in failure analyses and post-mortems from teams that ha
 
 ## What actually works
 
-The systems I've seen work well in production have a few things in common.
+The systems that work well in production have a few things in common.
 
 They're scoped narrowly. The agent does one class of task, in a constrained environment, with a small set of tools. Scope creep kills agent reliability. An agent that "helps with customer support" is harder to make reliable than an agent that "classifies incoming support tickets into five categories and routes them."
 
 They use structure, not natural language, for tool outputs wherever possible. JSON schema validation on tool responses, typed interfaces, explicit error codes rather than error messages that the model has to interpret. The less the model has to reason about tool output format, the less it can get wrong.
 
-They checkpoint. For tasks longer than five steps, they write state to durable storage at each step. If something fails, you restart from the last checkpoint, not from scratch.
+They checkpoint. For tasks longer than five steps, they write state to durable storage at each step. Something fails, you restart from the last checkpoint, not from scratch.
 
-They have human-in-the-loop gates for high-stakes decisions. Human oversight at this stage isn't a failure of the system -- it's the right design for the current state of agent reliability. The goal is to extend agent autonomy over time as you build confidence in specific decision types, not to remove humans from the loop on day one.
+They have human-in-the-loop gates for high-stakes decisions. Human oversight at this stage is the right design for the current state of agent reliability, not a concession to it. The goal is to extend agent autonomy over time as you build confidence in specific decision types, not to remove humans from the loop on day one.
 
-Anthropic's [Model Context Protocol](https://modelcontextprotocol.io/specification/2025-11-25) is worth paying attention to for the tool integration problem specifically. Instead of each agent integration being a custom implementation, MCP provides a standard for how LLM applications connect to external tools and data sources. The adoption has been broad enough that it's looking like the default standard for agent-to-tool connections. Fewer bespoke integrations means fewer failure modes.
+Anthropic's [Model Context Protocol](https://modelcontextprotocol.io/specification/2025-11-25) is worth paying attention to for the tool integration problem specifically. Rather than each agent integration being a custom implementation, MCP provides a standard for how LLM applications connect to external tools and data sources. The adoption has been broad enough that it's looking like the default standard for agent-to-tool connections. Fewer bespoke integrations means fewer failure modes.
 
 ---
 

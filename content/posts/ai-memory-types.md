@@ -1,7 +1,7 @@
 ---
 title: "The Four Types of Memory in AI Agents (And Why Most Systems Only Use One)"
 date: 2026-03-08
-description: "Sensory, short-term, episodic, semantic -- AI agents can use all four types of memory. Most implementations use only the context window and wonder why they fail at long tasks."
+description: "Sensory, short-term, episodic, semantic: AI agents can use all four types of memory. Nearly every implementation uses only the context window and then wonders why long tasks fall apart."
 tags: [ai, agents, memory, architecture]
 status: published
 ---
@@ -40,7 +40,7 @@ Neither fix is automatic. Both require explicit implementation decisions.
 
 Human episodic memory stores specific events tied to context: you remember *that* meeting, with *those* people, where *that* decision was made. It's retrievable, but retrieval requires a cue.
 
-For AI agents, episodic memory is any persistent record of past interactions, sessions, or task executions that can be retrieved when relevant. The context window doesn't provide this -- it's session-scoped. Episodic memory persists across sessions.
+For AI agents, episodic memory is any persistent record of past interactions, sessions, or task executions that can be retrieved when relevant. The context window doesn't provide this; it's session-scoped. Episodic memory persists across sessions.
 
 A customer support agent without episodic memory handles every conversation as if the customer is new. One with episodic memory can retrieve: "Last time this user contacted us about billing, the issue was a duplicate charge that we resolved with a credit. Mentioning that credit proactively might save five minutes." The information isn't in the current context. It needs to be retrieved from somewhere.
 
@@ -48,9 +48,9 @@ The implementation options range from simple to complex:
 
 **Conversation logs with semantic search.** Store every past conversation as a text blob, chunk it, embed it, retrieve by similarity at the start of each new session. Simple to implement, covers most cases. The quality of retrieval depends entirely on your chunking strategy and embedding model.
 
-**Structured episode storage.** Instead of raw logs, extract structured records: what was the task, what was the outcome, what intermediate decisions were made, what failed and why. Retrieving structured records gives the agent much cleaner context than dumping raw conversation history.
+**Structured episode storage.** Rather than raw logs, extract structured records: what was the task, what was the outcome, what intermediate decisions were made, what failed and why. Retrieving structured records gives the agent much cleaner context than dumping raw conversation history.
 
-**[Mem0](https://mem0.ai/) and similar memory layers.** Projects like Mem0 wrap the storage and retrieval layer and expose it as an API. Instead of implementing semantic search over your own database, you push observations to the memory service and pull relevant memories before each agent step. The tradeoff is dependency on an external service; the benefit is not having to implement vector search, chunking, and deduplication yourself.
+**[Mem0](https://mem0.ai/) and similar memory layers.** Projects like Mem0 wrap the storage and retrieval layer and expose it as an API. Rather than implementing semantic search over your own database, you push observations to the memory service and pull relevant memories before each agent step. The tradeoff is dependency on an external service; the benefit is not having to implement vector search, chunking, and deduplication yourself.
 
 The challenge with episodic memory is relevance. Retrieving everything stored about a user is rarely useful. The useful retrieval is context-aware: given the current task and the current session context, what past episodes are actually informative? That's a retrieval quality problem, and it's harder than it looks.
 
@@ -58,19 +58,19 @@ The challenge with episodic memory is relevance. Retrieving everything stored ab
 
 Semantic memory in humans is disconnected from specific experiences. You know what photosynthesis is without remembering when or where you learned it. Knowledge that's been abstracted from its original context.
 
-For AI agents, the model's training weights are semantic memory. The model "knows" how to write Python, what REST APIs are, how TCP/IP works -- not because of anything in the context window, but because that knowledge was baked in during training.
+For AI agents, the model's training weights are semantic memory. The model "knows" how to write Python, what REST APIs are, how TCP/IP works. All of it baked into the weights during training, not stored anywhere in the context window.
 
 The limitation is obvious: training knowledge has a cutoff date and can't be updated cheaply. Semantic memory in an AI system also covers knowledge bases, documentation stores, and curated fact repositories that the agent can query.
 
 The retrieval mechanism for semantic knowledge is usually RAG: chunk the knowledge base, embed it, retrieve the top-k relevant chunks at query time, include them in the context. The effectiveness depends on retrieval quality, and retrieval quality degrades as the knowledge base grows and as the queries become more complex.
 
-There's a distinction worth making here between semantic memory as retrieval and semantic memory as fine-tuning. RAG retrieves knowledge at inference time. Fine-tuning bakes it into the weights. For knowledge that's stable and used constantly, fine-tuning is worth considering -- you trade flexibility for latency and quality. For knowledge that changes frequently, RAG is the only practical option.
+There's a distinction worth making between semantic memory as retrieval and semantic memory as fine-tuning. RAG retrieves knowledge at inference time. Fine-tuning bakes it into the weights. For knowledge that's stable and used constantly, fine-tuning is worth considering: you trade update flexibility for improved latency and quality. For dynamic, frequently-changing knowledge, RAG is the only practical option.
 
-A harder case is structured knowledge that requires reasoning, not just retrieval. If the knowledge base is a set of policies with complex interdependencies, simple chunk retrieval won't give the agent the right mental model for applying them. Knowledge graphs -- where concepts and their relationships are explicitly represented -- can help, but they're significantly more expensive to build and maintain.
+A harder case is structured knowledge that requires reasoning, not just retrieval. A knowledge base of policies with complex interdependencies won't yield to simple chunk retrieval. Knowledge graphs, where concepts and their relationships are explicitly represented, can help, though they're significantly more expensive to build and maintain.
 
 ## The architectures that actually work
 
-The interesting design question is how these memory types interact. Most production agent systems that handle non-trivial tasks combine at least three of the four.
+The interesting design question is how these memory types interact. Production agent systems that handle non-trivial tasks tend to combine at least three of the four.
 
 **Short + episodic** is the minimum viable setup for any agent that handles returning users or multi-session tasks. The context window handles the current conversation; episodic memory provides relevant history at session start. Retrieval quality matters enormously here.
 
@@ -89,7 +89,7 @@ Building that well takes real engineering. The tricky parts are retrieval releva
 
 There's a practical reason most agents use only short-term memory: it's the default. The LLM SDK gives you a messages array, you append to it, you send it. No additional infrastructure required.
 
-The failure mode is predictable: the agent works fine on tasks that fit in the context window, fails on long tasks where context fills up, can't maintain consistency across sessions, and halluccinates facts it should be looking up.
+The failure mode is predictable: the agent works fine on tasks that fit in the context window, fails on long tasks where context fills up, can't maintain consistency across sessions, and hallucinates facts it should be looking up.
 
 [Research on production agent failures](https://arize.com/blog/common-ai-agent-failures/) consistently lists context overflow and goal drift among the top failure modes. Both are symptoms of treating the context window as the only memory store.
 

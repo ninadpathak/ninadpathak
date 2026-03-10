@@ -14,13 +14,13 @@
     <item>
       <title>The Four Types of Memory in AI Agents (And Why Most Systems Only Use One)</title>
       <link>https://ninadpathak.com/blog/ai-memory-types/</link>
-      <description>Sensory, short-term, episodic, semantic -- AI agents can use all four types of memory. Most implementations use only the context window and wonder why they fail at long tasks.</description>
+      <description>Sensory, short-term, episodic, semantic: AI agents can use all four types of memory. Nearly every implementation uses only the context window and then wonders why long tasks fall apart.</description>
       <pubDate>Mar 08, 2026</pubDate>
     </item>
     <item>
       <title>HNSW: What's Actually Happening When You Do a Vector Search</title>
       <link>https://ninadpathak.com/blog/hnsw-vector-search/</link>
-      <description>Most people using vector databases have no idea what HNSW is doing under the hood. Here's the actual algorithm, the tradeoffs, and when you should care.</description>
+      <description>Vector database users often treat HNSW as a black box. Here's the actual algorithm, the tradeoffs, and when you should care.</description>
       <pubDate>Mar 05, 2026</pubDate>
     </item>
     <item>
