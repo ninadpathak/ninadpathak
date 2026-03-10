@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pgvector vs Dedicated Vector Databases: An Honest Comparison | Ninad Pathak</title>
+  <meta name="description" content="pgvector is genuinely good. Dedicated vector databases exist for real reasons. Here's how to think through the tradeoff without the vendor hype.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="pgvector vs Dedicated Vector Databases: An Honest Comparison">
+  <meta property="og:description" content="pgvector is genuinely good. Dedicated vector databases exist for real reasons. Here's how to think through the tradeoff without the vendor hype.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/pgvector-vs-vector-db/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/pgvector-vs-vector-db/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "pgvector vs Dedicated Vector Databases: An Honest Comparison",
+  "description": "pgvector is genuinely good. Dedicated vector databases exist for real reasons. Here's how to think through the tradeoff without the vendor hype.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-11",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "pgvector vs Dedicated Vector Databases: An Honest Comparison",
+      "item": "https://ninadpathak.com/blog/pgvector-vs-vector-db/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/ninadpathak/meet/" class="nav-cta" target="_blank" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">pgvector vs Dedicated Vector Databases: An Honest Comparison</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 11, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">8 min read</span>
+      </div>
+      <h1 class="post-title">pgvector vs Dedicated Vector Databases: An Honest Comparison</h1>
+      <p class="lead">pgvector is genuinely good. Dedicated vector databases exist for real reasons. Here's how to think through the tradeoff without the vendor hype.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">vector-search</span>
+        <span class="tag">pgvector</span>
+        <span class="tag">infrastructure</span>
+        <span class="tag">rag</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#what-pgvector-actually-is">What pgvector actually is</a></li>
+<li><a href="#why-dedicated-vector-databases-exist">Why dedicated vector databases exist</a></li>
+<li><a href="#the-numbers-you-should-actually-look-at">The numbers you should actually look at</a></li>
+<li><a href="#the-case-for-pgvector">The case for pgvector</a></li>
+<li><a href="#the-case-for-dedicated-databases">The case for dedicated databases</a></li>
+<li><a href="#a-decision-framework-thats-actually-useful">A decision framework that's actually useful</a></li>
+<li><a href="#what-the-benchmarks-say-and-dont-say">What the benchmarks say (and don't say)</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>There's a recurring debate in AI infrastructure circles that generates more heat than light. On one side: "just use pgvector, you already have Postgres." On the other: "pgvector doesn't scale, use a real vector database." Both sides are mostly arguing past each other, and neither is right as a general principle.</p>
+<p>The honest answer depends on what you're building, at what scale, with what query patterns. Here's an attempt at a grounded comparison.</p>
+<h2 id="what-pgvector-actually-is">What pgvector actually is</h2>
+<p><a href="https://github.com/pgvector/pgvector">pgvector</a> is a Postgres extension, first released in 2021, that adds a vector data type and approximate nearest neighbor search to Postgres. You store embeddings as <code>vector(1536)</code> columns alongside your regular relational data. You create an index using either IVFFlat (inverted file flat) or HNSW (since pgvector 0.5.0). You query with <code>&lt;-&gt;</code> for L2 distance, <code>&lt;=&gt;</code> for cosine, <code>&lt;#&gt;</code> for inner product.</p>
+<p>The HNSW implementation in pgvector uses the same basic algorithm as dedicated databases -- hierarchical navigable small world graphs, the same parameters (m, ef_construction, ef at query time). The core algorithm isn't the differentiator.</p>
+<p>What pgvector gives you is the rest of Postgres for free. Your vectors live in the same database as your relational data. You can do <code>JOIN</code> between vector search results and your users table. You get Postgres's ACID transactions, full-text search, JSONB columns, row-level security, and everything else in a single system. Backups, replication, point-in-time recovery -- the entire Postgres ecosystem applies.</p>
+<h2 id="why-dedicated-vector-databases-exist">Why dedicated vector databases exist</h2>
+<p>The "just use pgvector" argument is compelling for small to medium deployments. Dedicated vector databases didn't emerge because pgvector is wrong in principle. They emerged because at large scale, vector search has specific performance and operational requirements that don't fit naturally into a general-purpose RDBMS.</p>
+<p><strong>Memory architecture.</strong> HNSW must live in RAM for performance -- the random-access traversal pattern is fatal on any storage medium with seek latency. Postgres manages memory via its shared buffer pool, which also needs to cache table data, index pages for other operations, and work through the OS page cache. A dedicated vector database can dedicate its entire memory footprint to the index. At 50 million vectors, the difference matters.</p>
+<p><strong>Filtered search.</strong> Filtered vector search -- "find me the 10 most similar vectors where <code>user_id = 42</code> and <code>status = active</code>" -- is genuinely hard. pgvector 0.7.0 introduced iterative index scans that help considerably, but the problem isn't fully solved at high filter selectivity. Qdrant built a custom query planner that estimates filter cardinality and decides whether to pre-filter (reduce the dataset before searching) or post-filter (search then filter). Weaviate has a similar approach with its filtered HNSW traversal. These are purpose-built solutions to a problem that Postgres wasn't designed around.</p>
+<p><strong>Quantization and compression.</strong> At scale, storing full-precision float32 vectors is expensive. INT8 scalar quantization reduces memory to 25%; binary quantization reduces it to 3% at the cost of some recall (recoverable with oversampling). Qdrant and Weaviate both have first-class quantization support. pgvector got half-precision (float16) storage in 0.7.0, which helps, but doesn't match the quantization options available in dedicated databases.</p>
+<p><strong>Distributed deployment.</strong> Postgres can be sharded horizontally, but it requires significant operational work. Purpose-built distributed vector search (Pinecone's pods, Qdrant's cluster mode, Weaviate's node sharding) is designed from the start to distribute across nodes. For datasets that don't fit on a single machine's RAM, the distributed options in dedicated databases are more mature.</p>
+<h2 id="the-numbers-you-should-actually-look-at">The numbers you should actually look at</h2>
+<p>Generic claims about "pgvector doesn't scale" or "pgvector is fast enough" don't tell you anything useful. The relevant questions are specific:</p>
+<p><strong>At what vector count does pgvector start degrading?</strong> For an in-memory HNSW index, pgvector performs comparably to dedicated databases up to roughly 1-5 million vectors, assuming you've tuned m and ef_construction appropriately. Above that, dedicated databases start showing advantages in query latency, particularly under concurrent load.</p>
+<p><strong>What's the recall at your efSearch setting?</strong> pgvector's HNSW implementation achieves comparable recall to Qdrant and Weaviate at equivalent efSearch values on standard benchmarks (ANN Benchmarks, the canonical evaluation source). The algorithm is the algorithm.</p>
+<p><strong>What's your p99 latency under production load?</strong> Benchmarks in isolation don't capture shared buffer pool contention, Postgres vacuum overhead, or checkpoint interference. If your database is handling a mix of OLTP and vector workloads, the vector queries compete for resources with everything else.</p>
+<p><strong>What are your filter selectivity patterns?</strong> Low selectivity filters (eliminating 1-5% of the dataset) are handled fine by pgvector's post-filter approach. High selectivity filters (returning 0.1% of the dataset) are where the dedicated query planners in Qdrant or Weaviate start pulling ahead.</p>
+<h2 id="the-case-for-pgvector">The case for pgvector</h2>
+<p>Fewer systems is a genuine advantage. Each additional database in your infrastructure is an operational liability: another thing to monitor, back up, secure, upgrade, and learn. The cognitive overhead of multi-database architecture compounds.</p>
+<p>For applications under a few million vectors, pgvector with HNSW indexed correctly (m=16 or m=32, ef_construction=100+, efSearch tuned to your recall target) delivers performance that's good enough for the large majority of use cases. The marginal recall or latency improvement from switching to a dedicated database often doesn't justify the operational overhead and migration cost.</p>
+<p>There's also the data locality argument. When your vectors live next to your metadata in Postgres, queries like "retrieve the 10 most semantically similar items to this one, ordered by creation date, filtered by subscription tier" are a single query. With a separate vector database, you do a vector search, get back IDs, then query Postgres for the metadata, then filter and sort in application code. That's three round trips and more application complexity.</p>
+<p><a href="https://supabase.com/vector">Supabase Vector</a> and <a href="https://neon.tech/">Neon</a> have made pgvector operationally simpler by hosting it as a managed service with sensible defaults. If you're already on managed Postgres and under ~5 million vectors, starting with pgvector and migrating if needed is a reasonable strategy.</p>
+<h2 id="the-case-for-dedicated-databases">The case for dedicated databases</h2>
+<p>At scale -- 10 million+ vectors, high query volume, strict p95 latency requirements -- dedicated databases have real advantages that aren't just marketing.</p>
+<p>Qdrant, written in Rust, has consistently strong benchmark numbers. The filtered search implementation is purpose-built. Memory-mapped storage lets it handle datasets larger than RAM with reasonable performance (slower than in-memory, but more graceful degradation than pgvector under memory pressure). The payload indexing system lets you filter on metadata without a separate database call.</p>
+<p>Weaviate makes a different set of tradeoffs: HNSW filtered traversal, a GraphQL and gRPC API, module-based integration for generating embeddings. Better for teams that want a more opinionated system; more operational complexity for teams that want control.</p>
+<p>Pinecone is the managed option for teams that don't want to run infrastructure. You pay a significant premium over self-hosted alternatives for serverless scaling and operational simplicity. The proprietary architecture means less visibility into what's happening under the hood.</p>
+<p><a href="https://www.microsoft.com/en-us/research/publication/diskann-fast-accurate-billion-point-nearest-neighbor-search-on-a-single-node/">DiskANN-based</a> systems (used in Pinecone's serverless backend, among others) make sense at billion-vector scale by using SSDs instead of RAM as primary storage. The random-access problem with HNSW on disk is addressed with a graph layout optimized for SSD access patterns. For datasets that don't fit in RAM, this matters.</p>
+<h2 id="a-decision-framework-thats-actually-useful">A decision framework that's actually useful</h2>
+<p>Start with pgvector if:</p>
+<ul>
+<li>Your vector count is under 5 million</li>
+<li>Filtered search selectivity is low-to-moderate</li>
+<li>You're already on Postgres</li>
+<li>Your team's operational capacity is limited</li>
+<li>You need transactional consistency between vector and relational data</li>
+</ul>
+<p>Consider a dedicated database if:</p>
+<ul>
+<li>You're approaching 10 million+ vectors</li>
+<li>High selectivity filtered search is a core requirement (returning &lt;1% of the dataset)</li>
+<li>You have strict p95 latency requirements (under 10ms) under production load</li>
+<li>You need distributed deployment across nodes</li>
+<li>Your team can absorb the operational overhead of an additional system</li>
+</ul>
+<p>A third path: avoid the debate entirely by starting with pgvector and setting up your application so the vector database interface is abstracted. When you need to migrate -- if the benchmarks tell you to -- you do it at the adapter layer without rewriting application code. This is how the teams that have done this successfully usually approach it.</p>
+<h2 id="what-the-benchmarks-say-and-dont-say">What the benchmarks say (and don't say)</h2>
+<p>The <a href="http://ann-benchmarks.com/">ANN Benchmarks</a> site publishes recall vs. queries-per-second plots for dozens of algorithms and datasets. At equivalent recall targets, the gaps between pgvector's HNSW and dedicated database HNSW implementations are often small. The algorithm is the algorithm.</p>
+<p>Where dedicated databases pull ahead is in concurrent load, filtered search, and memory-constrained environments. Those conditions don't show up in single-client benchmarks.</p>
+<p>The benchmark that matters is the one you run on your data, with your query patterns, under your production load profile. That benchmark is harder to set up than running ANN Benchmarks, but it's the only one that tells you something actionable about your specific situation.</p>
+<hr />
+<p>The framing of "pgvector vs. vector databases" implies a binary choice that doesn't reflect how good teams actually make infrastructure decisions. The real question is: what's the minimum system that reliably handles your current requirements, with a migration path if requirements change?</p>
+<p>For most teams at most stages, that system starts with pgvector.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/ai-memory-types/" class="related-card">
+        <div class="related-card-date">2026-03-08</div>
+        <div class="related-card-title">The Four Types of Memory in AI Agents (And Why Most Systems Only Use One)</div>
+      </a>
+      <a href="/blog/hnsw-vector-search/" class="related-card">
+        <div class="related-card-date">2026-03-05</div>
+        <div class="related-card-title">HNSW: What's Actually Happening When You Do a Vector Search</div>
+      </a>
+      <a href="/blog/lost-in-the-middle/" class="related-card">
+        <div class="related-card-date">2026-02-20</div>
+        <div class="related-card-title">Your Context Window Has a Middle. Models Don't Read It.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding: 4rem 0; border-top: 1px solid var(--border);">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">ninad pathak</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/work/"      class="footer-link">Work</a>
+        <a href="/portfolio/" class="footer-link">Portfolio</a>
+        <a href="/blog/"      class="footer-link">Writing</a>
+        <a href="/about/"     class="footer-link">About</a>
+        <a href="/contact/"   class="footer-link">Contact</a>
+        <a href="/feed.xml"   class="footer-link">RSS</a>
+      </nav>
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

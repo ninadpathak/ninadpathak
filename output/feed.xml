@@ -6,10 +6,40 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>pgvector vs Dedicated Vector Databases: An Honest Comparison</title>
+      <link>https://ninadpathak.com/blog/pgvector-vs-vector-db/</link>
+      <description>pgvector is genuinely good. Dedicated vector databases exist for real reasons. Here's how to think through the tradeoff without the vendor hype.</description>
+      <pubDate>Mar 11, 2026</pubDate>
+    </item>
+    <item>
+      <title>The Four Types of Memory in AI Agents (And Why Most Systems Only Use One)</title>
+      <link>https://ninadpathak.com/blog/ai-memory-types/</link>
+      <description>Sensory, short-term, episodic, semantic -- AI agents can use all four types of memory. Most implementations use only the context window and wonder why they fail at long tasks.</description>
+      <pubDate>Mar 08, 2026</pubDate>
+    </item>
+    <item>
+      <title>HNSW: What's Actually Happening When You Do a Vector Search</title>
+      <link>https://ninadpathak.com/blog/hnsw-vector-search/</link>
+      <description>Most people using vector databases have no idea what HNSW is doing under the hood. Here's the actual algorithm, the tradeoffs, and when you should care.</description>
+      <pubDate>Mar 05, 2026</pubDate>
+    </item>
+    <item>
+      <title>Your Context Window Has a Middle. Models Don't Read It.</title>
+      <link>https://ninadpathak.com/blog/lost-in-the-middle/</link>
+      <description>The 'lost in the middle' problem is real, quantified, and not solved by bigger context windows. Here's what the research actually says about where LLMs pay attention.</description>
+      <pubDate>Feb 20, 2026</pubDate>
+    </item>
+    <item>
       <title>Why AI Agent Testing Is Harder Than It Looks</title>
       <link>https://ninadpathak.com/blog/sample-post/</link>
       <description>AI agents break in ways that unit tests don't catch. Here's a systematic approach to testing non-deterministic systems that actually ship.</description>
       <pubDate>Feb 15, 2026</pubDate>
+    </item>
+    <item>
+      <title>AI Agents Keep Failing in Production. Here's Why.</title>
+      <link>https://ninadpathak.com/blog/ai-agents-production-failure/</link>
+      <description>95% of enterprise AI systems fail to reach production. The ones that do mostly fail within six months. The reasons aren't mysterious.</description>
+      <pubDate>Feb 08, 2026</pubDate>
     </item>
   </channel>
 </rss>

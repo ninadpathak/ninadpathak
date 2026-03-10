@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Context Window Has a Middle. Models Don't Read It. | Ninad Pathak</title>
+  <meta name="description" content="The 'lost in the middle' problem is real, quantified, and not solved by bigger context windows. Here's what the research actually says about where LLMs pay attention.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Your Context Window Has a Middle. Models Don't Read It.">
+  <meta property="og:description" content="The 'lost in the middle' problem is real, quantified, and not solved by bigger context windows. Here's what the research actually says about where LLMs pay attention.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/lost-in-the-middle/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/lost-in-the-middle/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Your Context Window Has a Middle. Models Don't Read It.",
+  "description": "The 'lost in the middle' problem is real, quantified, and not solved by bigger context windows. Here's what the research actually says about where LLMs pay attention.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-02-20",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Your Context Window Has a Middle. Models Don't Read It.",
+      "item": "https://ninadpathak.com/blog/lost-in-the-middle/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/ninadpathak/meet/" class="nav-cta" target="_blank" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Your Context Window Has a Middle. Models Don't Read It.</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Feb 20, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">6 min read</span>
+      </div>
+      <h1 class="post-title">Your Context Window Has a Middle. Models Don't Read It.</h1>
+      <p class="lead">The 'lost in the middle' problem is real, quantified, and not solved by bigger context windows. Here's what the research actually says about where LLMs pay attention.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">rag</span>
+        <span class="tag">context-engineering</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-numbers">The numbers</a></li>
+<li><a href="#why-this-happens">Why this happens</a></li>
+<li><a href="#what-this-means-for-how-you-build-rag">What this means for how you build RAG</a></li>
+<li><a href="#long-context-vs-rag-is-the-wrong-frame">Long context vs. RAG is the wrong frame</a></li>
+<li><a href="#context-engineering-is-a-real-discipline-now">Context engineering is a real discipline now</a></li>
+<li><a href="#what-im-convinced-of-after-reading-this-research">What I'm convinced of after reading this research</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>There's a paper from 2023 that should have changed how everyone builds RAG systems. It didn't, really. Teams kept stuffing more documents into longer contexts, assuming bigger windows meant better results. The paper said otherwise, with numbers.</p>
+<p>It's called <a href="https://arxiv.org/abs/2307.03172">"Lost in the Middle: How Language Models Use Long Contexts"</a>, by Nelson Liu, Kevin Lin, and others from Stanford. The finding: language models are significantly better at using information at the beginning or end of their context window than information in the middle. The performance curve across context position is U-shaped. Put your relevant document in the middle of a 20-document context and watch accuracy fall off a cliff.</p>
+<p>Anyone who's read the attention mechanism papers won't be surprised, but seeing it quantified is different from understanding it theoretically.</p>
+<h2 id="the-numbers">The numbers</h2>
+<p>The experiment was multi-document question answering. Given a question and 20 documents (one containing the answer, the rest distractors), models were tested with the answer-containing document placed at different positions.</p>
+<p>With GPT-3.5-Turbo and 20 documents: when the relevant document was at position 20 (the end), accuracy was around 42%. When it was at positions 5 through 15 (the middle), accuracy dropped to around 25%. That's a 17 percentage point drop, from one placement decision.</p>
+<p>Here's the part that should make you uncomfortable: adding more context hurt. GPT-3.5-Turbo's closed-book baseline (no retrieved documents at all) was 56.1% on the evaluation set. When the relevant document was in the middle of the context, the model with access to the answer performed <em>worse</em> than the model with no access at all. You gave it the information and it performed worse than if you hadn't.</p>
+<p>Extended-context models -- the ones specifically trained to handle longer inputs -- showed nearly identical U-shaped curves. The window got bigger. The bias didn't go away.</p>
+<h2 id="why-this-happens">Why this happens</h2>
+<p>The paper doesn't provide a definitive mechanistic explanation, but the intuition is reasonable: models are trained on text where important information tends to appear at the start or end. Abstracts, introductions, conclusions, subject lines. The attention patterns that emerge from training reflect those distributions.</p>
+<p>There's also a simpler story: at very long contexts, attending to positions in the middle is harder. The gradient signal during training is weaker for distant positions in some architectures. The recency bias (end of context) and primacy bias (start of context) are stable phenomena in human cognition too; it's not obvious that transformers trained on human text would be immune to them.</p>
+<h2 id="what-this-means-for-how-you-build-rag">What this means for how you build RAG</h2>
+<p>If you're doing naive RAG -- chunk documents, embed them, retrieve top-k by similarity, concatenate them into the prompt, query -- you're probably placing the most relevant chunk somewhere in the middle of your context by default. The retrieval ranked it first, so it goes first in the list, which ends up buried after the system prompt.</p>
+<p>A few things follow from the research:</p>
+<p><strong>Put the highest-ranked result at the start of the retrieved context, not buried in the middle.</strong> If you're passing 10 retrieved chunks, the one with the highest similarity score should be first (and possibly last, reordered). A one-line reordering that should improve accuracy on most setups.</p>
+<p><strong>Don't retrieve more than you need.</strong> The <a href="https://arxiv.org/abs/2411.03538">Databricks long context RAG research</a> from late 2024 found that retrieval performance peaks around top 5-10 chunks and degrades with more. You're adding noise, not signal, and the noise lands in the middle of the context.</p>
+<p><strong>Evaluate on your actual distribution.</strong> The U-shaped curve varies by model and task. The only way to know how bad your specific setup is: create a held-out eval set, place your known-answer chunk at positions 1, 5, 10, 15, 20, measure accuracy at each. You'll probably see the curve. Then you'll know if it's a problem worth fixing for your use case.</p>
+<h2 id="long-context-vs-rag-is-the-wrong-frame">Long context vs. RAG is the wrong frame</h2>
+<p>The conventional wisdom in mid-2024 was "context windows are getting so big that RAG will become unnecessary." Gemini 1.5 Pro at 1 million tokens. Claude with 200k. Just dump everything in.</p>
+<p>The research doesn't support this. The SummHay benchmark tested whether models could summarize information from long contexts. Without a retrieval mechanism, GPT-4o and Claude 3 Opus scored below 20%, despite both having near-perfect performance on "needle in a haystack" tests (&gt;99% recall). Finding a specific string in a long document is not the same as reasoning over distributed information in that document.</p>
+<p>RAG isn't redundant because context windows got bigger. They solve different things. Long context handles cases where the information is known, bounded, and fits comfortably. RAG handles cases where you have more information than the context can hold, or where you need to pull from dynamic external sources.</p>
+<p>The real question isn't "should I use RAG or long context?" It's "how do I fill my context window with the right information for this specific query?" Which is where context engineering comes in.</p>
+<h2 id="context-engineering-is-a-real-discipline-now">Context engineering is a real discipline now</h2>
+<p>Andrej Karpathy <a href="https://x.com/karpathy/status/1937902205765607626">defined it</a> as "the delicate art and science of filling the context window with just the right information for the next step." It sounds obvious when you read it. The practice is not obvious.</p>
+<p>For a real agent or RAG system, what goes in the context at inference time is not static. It's assembled dynamically from: the system prompt, any cached instructions, retrieved documents ordered carefully, conversation history (summarized or truncated how?), tool outputs, current task state. Getting each of these right, in the right order, in the right amount, is engineering work.</p>
+<p>Anthropic's <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">prompt caching</a> is partly a context engineering tool: if your system prompt is 50k tokens (a large codebase, a full policy document, detailed instructions), you pay to write it to cache once and then read it at 90% discount on subsequent calls. A 200k token context at standard Claude pricing costs around $3.00 per call. With cache hits, it drops to about $0.10. That's not a marginal savings.</p>
+<p>The interesting design question is not "how big a context can I use" but "what is the minimum context that gives the right answer?" Smaller context is cheaper, faster, and -- based on the research -- often more accurate.</p>
+<h2 id="what-im-convinced-of-after-reading-this-research">What I'm convinced of after reading this research</h2>
+<p>Position matters more than presence. Retrieving the right document is necessary but not sufficient. Where it lands in the context window determines whether the model actually uses it.</p>
+<p>Optimal RAG parameters exist and are measurable. Five to ten chunks, ordered carefully, is roughly the sweet spot for most models and tasks. Going to 20 chunks adds noise. Going to 50 is almost certainly hurting you.</p>
+<p>Long context and RAG are complementary, not competing. Use long context for bounded, stable information. Use RAG for dynamic retrieval from large corpora. Use both together for complex agents.</p>
+<p>The models that score well on needle-in-a-haystack benchmarks are not solving the same problem as models reasoning over large documents. Needle-in-a-haystack is easy; it's string matching at scale. Synthesizing distributed information is hard, and longer contexts don't automatically make it easier.</p>
+<p>None of this is exotic research. The "Lost in the Middle" paper is two years old. The practices that follow from it -- reranking, result ordering, limiting retrieved chunks -- are available in every RAG framework. The question is whether the teams building these systems actually know about the curve.</p>
+<p>The ones getting RAG right do. The ones stuffing 50 chunks into a prompt and wondering why accuracy is mediocre probably don't.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/pgvector-vs-vector-db/" class="related-card">
+        <div class="related-card-date">2026-03-11</div>
+        <div class="related-card-title">pgvector vs Dedicated Vector Databases: An Honest Comparison</div>
+      </a>
+      <a href="/blog/ai-memory-types/" class="related-card">
+        <div class="related-card-date">2026-03-08</div>
+        <div class="related-card-title">The Four Types of Memory in AI Agents (And Why Most Systems Only Use One)</div>
+      </a>
+      <a href="/blog/hnsw-vector-search/" class="related-card">
+        <div class="related-card-date">2026-03-05</div>
+        <div class="related-card-title">HNSW: What's Actually Happening When You Do a Vector Search</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding: 4rem 0; border-top: 1px solid var(--border);">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">ninad pathak</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/work/"      class="footer-link">Work</a>
+        <a href="/portfolio/" class="footer-link">Portfolio</a>
+        <a href="/blog/"      class="footer-link">Writing</a>
+        <a href="/about/"     class="footer-link">About</a>
+        <a href="/contact/"   class="footer-link">Contact</a>
+        <a href="/feed.xml"   class="footer-link">RSS</a>
+      </nav>
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

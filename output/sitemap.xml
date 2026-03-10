@@ -31,7 +31,32 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://ninadpathak.com/blog/pgvector-vs-vector-db/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/ai-memory-types/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/hnsw-vector-search/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/lost-in-the-middle/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://ninadpathak.com/blog/sample-post/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/ai-agents-production-failure/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
