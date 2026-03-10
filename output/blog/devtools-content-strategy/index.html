@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Strategy for DevTools Companies: Writing for an Audience That Hates Marketing | Ninad Pathak</title>
+  <meta name="description" content="Developer audiences don't respond to content marketing the way B2B buyers do. Here's the framework I use to build content programs that developers actually read.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Content Strategy for DevTools Companies: Writing for an Audience That Hates Marketing">
+  <meta property="og:description" content="Developer audiences don't respond to content marketing the way B2B buyers do. Here's the framework I use to build content programs that developers actually read.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/devtools-content-strategy/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/devtools-content-strategy/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Apply saved theme before first paint to prevent flash -->
+  <script>try{var t=localStorage.getItem('np-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Content Strategy for DevTools Companies: Writing for an Audience That Hates Marketing",
+  "description": "Developer audiences don't respond to content marketing the way B2B buyers do. Here's the framework I use to build content programs that developers actually read.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-17",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Content Strategy for DevTools Companies: Writing for an Audience That Hates Marketing",
+      "item": "https://ninadpathak.com/blog/devtools-content-strategy/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/ninadpathak/meet/" class="nav-cta" target="_blank" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Content Strategy for DevTools Companies: Writing for an Audience That Hates Marketing</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 17, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">8 min read</span>
+      </div>
+      <h1 class="post-title">Content Strategy for DevTools Companies: Writing for an Audience That Hates Marketing</h1>
+      <p class="lead">Developer audiences don't respond to content marketing the way B2B buyers do. Here's the framework I use to build content programs that developers actually read.</p>
+      <div class="post-tags">
+        <span class="tag">content-strategy</span>
+        <span class="tag">devtools</span>
+        <span class="tag">developer-marketing</span>
+        <span class="tag">seo</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#how-developers-actually-read">How developers actually read</a></li>
+<li><a href="#the-trust-hierarchy">The trust hierarchy</a></li>
+<li><a href="#what-actually-gets-read-and-shared">What actually gets read and shared</a></li>
+<li><a href="#formats-that-work-formats-that-dont">Formats that work, formats that don't</a></li>
+<li><a href="#the-seo-reality-for-technical-content">The SEO reality for technical content</a></li>
+<li><a href="#distribution-where-developer-content-actually-spreads">Distribution: where developer content actually spreads</a></li>
+<li><a href="#the-practical-content-program-structure">The practical content program structure</a></li>
+<li><a href="#what-separates-the-content-programs-that-compound-from-the-ones-that-plateau">What separates the content programs that compound from the ones that plateau</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Developer audiences are not a harder version of regular B2B audiences. They're a different audience entirely, with different trust hierarchies, different reading behaviors, and a different relationship to content that markets to them. Teams that treat them as just technical B2B buyers will produce content that gets ignored.</p>
+<p>I've built content programs for DevTools companies for six years. The ones that worked had a specific structure. The ones that failed followed conventional B2B content playbooks. Here's what I've learned.</p>
+<h2 id="how-developers-actually-read">How developers actually read</h2>
+<p>The first thing to understand about developer audiences: they don't read linearly. They skim until something is wrong, then they stop. They scroll to the code example before reading a word of prose. They check the date before deciding whether a tutorial is worth their time. They'll read 4,000 words if every paragraph is earning its place, and close a 500-word post that wasted their first three sentences.</p>
+<p>The scan pattern for a typical developer reading a technical post goes like this: check the title to see if it's specific enough to be useful, check the date to see if it's current, look at code blocks to see if there are any and if they look real, scan subheadings to see if it covers what they need, then finally read the first paragraph of the relevant section to see if the author actually knows what they're talking about.</p>
+<p>Content that fails the scan doesn't get a second chance.</p>
+<h2 id="the-trust-hierarchy">The trust hierarchy</h2>
+<p>Developers have a tiered trust hierarchy for information.</p>
+<p>Tier 1 is official documentation. The source of truth, even when it's wrong. Developers will follow docs into broken behavior before they'll trust a blog post.</p>
+<p>Tier 2 is code. Working examples, open source repositories, GitHub issues where people describe real problems.</p>
+<p>Tier 3 is technical posts by practitioners. Blog posts from people who clearly built the thing they're writing about. The fly.io engineering blog, the Cloudflare blog, Stripe's technical posts.</p>
+<p>Tier 4 is general technical content. Well-researched posts from people who haven't built the specific thing but understand the domain. Useful, but trusted less.</p>
+<p>Tier 5 is marketing content. Anything that leads with outcomes rather than mechanisms gets filed here regardless of how technical it tries to sound.</p>
+<p>Content strategy for DevTools companies needs to be explicit about which tier you're targeting and why. Trying to reach Tier 3 credibility with Tier 5 instincts produces expensive content that developers route around.</p>
+<h2 id="what-actually-gets-read-and-shared">What actually gets read and shared</h2>
+<p>My clearest signal on what developer audiences value comes from what gets posted to Hacker News and what the comments say about it.</p>
+<p>Posts that land on HN share a few properties. They're specific. They have a concrete, named protagonist: a problem, a system, a benchmark. They show work. The author ran something, measured something, built something, and the post describes what happened including the parts that didn't work.</p>
+<p>"How we migrated 50 million rows without downtime" works. "Best practices for database migrations" doesn't. "We benchmarked seven vector databases and here's what we found" works. "Choosing a vector database for your AI application" doesn't.</p>
+<p>The difference is specificity and evidence. The specific post with evidence can be argued with, extended, contradicted. It enters a conversation. The general post has no entry point for engagement.</p>
+<p>For DevTools companies, this means the content program should produce posts with concrete, named results. Not "how to improve your developer experience" but "the three DX changes that cut our support tickets by 40%." Not "understanding rate limiting" but "how we built rate limiting that developers can actually debug."</p>
+<h2 id="formats-that-work-formats-that-dont">Formats that work, formats that don't</h2>
+<p>Tutorials with working code are the highest-value format for DevTools content. Developers search for how to do specific things. A tutorial that actually works, with code that runs, that covers the edge cases, builds trust that nothing else does. It also ranks: long-tail tutorial searches have high intent and relatively low competition compared to broad category terms.</p>
+<p>Technical comparisons work well. "X vs Y" searches are high-intent and underserved for most technical categories. The comparison needs to be genuinely analytical: here's when to use X, here's when to use Y, here are the actual tradeoffs. Not a feature matrix designed to make the author's product look good. Developers smell the latter immediately.</p>
+<p>Incident reports and post-mortems earn extremely high trust. Describing what broke, why, and what changed is one of the most readable forms of technical content. Stripe and Cloudflare have built enormous credibility publishing detailed incident analyses. This format requires organizational courage since you're publishing failure stories, but it pays back in trust.</p>
+<p>"We built X" engineering posts work for companies that have built interesting infrastructure. Requires genuine engineering depth, not a marketing summary of an engineering decision.</p>
+<p>Formats that don't work for developer audiences include thought leadership without specifics like "the future of DevTools," customer case studies written for procurement committees, ROI calculators and content designed to be downloaded in exchange for an email address, and anything that opens with market size or "digital transformation."</p>
+<h2 id="the-seo-reality-for-technical-content">The SEO reality for technical content</h2>
+<p>Technical keywords are different from B2B SaaS keywords. The search behavior is more specific, the competition is different, and the conversion funnel works differently.</p>
+<p>A developer searching "how to implement rate limiting with Redis" is further down the trust-building funnel than a VP Engineering searching "best developer tools 2026." The tutorial that answers the specific question builds relationship before the commercial relationship exists. Done at scale, this is how developer tools build organic growth that compounds.</p>
+<p>The practical strategy: identify the 10-20 specific implementation problems your product solves. Write a tutorial for each one that would be the definitive resource for a developer facing that problem. Not keyword-stuffed content designed to rank. Actually the best tutorial on the internet for that specific problem. Those rank, get cited, get bookmarked, and build the topical authority that then helps adjacent content rank.</p>
+<p>One thing I consistently see teams underestimate: internal linking and topical clustering matter more for technical content than for general B2B content. Developers follow links deeper. A post about rate limiting that links to your posts about Redis, API authentication, and webhook delivery builds a content cluster that outperforms any individual piece.</p>
+<h2 id="distribution-where-developer-content-actually-spreads">Distribution: where developer content actually spreads</h2>
+<p>The distribution channels for developer content are different from standard B2B content.</p>
+<p>Hacker News is the highest-leverage single distribution event for developer content. Submission timing matters: weekday mornings US time. Title framing matters: avoid superlatives, be specific. The first 30 minutes determine whether a post reaches the front page. Content that reaches the HN front page gets read by hundreds of thousands of engaged technical people.</p>
+<p>Relevant subreddits like r/programming, r/devops, r/MachineLearning, r/webdev, and topic-specific subreddits reward organic contribution and punish overt marketing. Posts that share something genuinely interesting with context get upvoted. Posts that look like promotion get removed or downvoted. The frame matters: share the interesting insight or result, not the product.</p>
+<p>Technical newsletters like TLDR, Console, DevOps Weekly, and JavaScript Weekly can drive thousands of targeted visits from exactly the right audience. Most technical newsletter curators respond well to direct outreach with a brief description of why the post would interest their audience.</p>
+<p>Developer Twitter threads that break down a complex topic or share an interesting result perform well. The audience there has gotten better at filtering low-quality technical takes, which means high-quality specific takes get more engagement than they used to.</p>
+<p>LinkedIn is less valuable for engineering audiences specifically, more valuable for reaching engineering managers and technical decision-makers. Adjust the framing accordingly.</p>
+<h2 id="the-practical-content-program-structure">The practical content program structure</h2>
+<p>For a DevTools company starting from zero, here's my sequence.</p>
+<p>Start with 3-5 deep tutorials covering the most-searched implementation problems your product solves. Get those right. They'll rank slowly but they establish the baseline of what quality means for your content.</p>
+<p>Add comparison content once you have the tutorials. "X vs Y" posts that cover your category drive high-intent search traffic.</p>
+<p>Layer in engineering blog posts about interesting technical problems you've solved. These are the ones that spread on HN and Reddit. They require genuine stories to tell, which means the content team needs access to engineering.</p>
+<p>Publish on a cadence you can sustain at quality. One genuinely good post every two weeks beats four mediocre posts every week. Developer audiences remember the site that consistently publishes something worth reading.</p>
+<p>The metric to track: are developers in your target communities sharing your content voluntarily? Not because they were asked to, not because it appeared in a sponsored slot, but because they found it useful or interesting and wanted to share it. That's the signal that the content program is working.</p>
+<h2 id="what-separates-the-content-programs-that-compound-from-the-ones-that-plateau">What separates the content programs that compound from the ones that plateau</h2>
+<p>The programs that keep growing share one property: they treat content as a product. Every post is a product decision about who this is for, what problem it solves, and how will we know if it worked. The ones that plateau treat content as a marketing execution: volume, keywords, publish schedule.</p>
+<p>Developer audiences have excellent filtering. They've been market-researched, content-marketed, and retargeted into numbness. Content that respects their intelligence and actually helps them with real problems gets through. Content that approximates helpfulness while really being a sales pitch gets filtered.</p>
+<p>The bar is high. The reward for clearing it is an audience that trusts you before they ever talk to your sales team.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/sample-post/" class="related-card">
+        <div class="related-card-date">2026-02-15</div>
+        <div class="related-card-title">Why AI Agent Testing Is Harder Than It Looks</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding: 4rem 0; border-top: 1px solid var(--border);">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">ninad pathak</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/work/"      class="footer-link">Work</a>
+        <a href="/portfolio/" class="footer-link">Portfolio</a>
+        <a href="/blog/"      class="footer-link">Writing</a>
+        <a href="/about/"     class="footer-link">About</a>
+        <a href="/contact/"   class="footer-link">Contact</a>
+        <a href="/feed.xml"   class="footer-link">RSS</a>
+      </nav>
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

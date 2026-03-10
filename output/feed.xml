@@ -6,6 +6,24 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>What Makes API Documentation Good: Lessons From Stripe, Twilio, and Resend</title>
+      <link>https://ninadpathak.com/blog/api-documentation-good/</link>
+      <description>Most API documentation fails developers in the same three ways. Stripe, Twilio, and Resend figured out what good looks like. Here's what they got right.</description>
+      <pubDate>Mar 20, 2026</pubDate>
+    </item>
+    <item>
+      <title>Content Strategy for DevTools Companies: Writing for an Audience That Hates Marketing</title>
+      <link>https://ninadpathak.com/blog/devtools-content-strategy/</link>
+      <description>Developer audiences don't respond to content marketing the way B2B buyers do. Here's the framework I use to build content programs that developers actually read.</description>
+      <pubDate>Mar 17, 2026</pubDate>
+    </item>
+    <item>
+      <title>RAG Chunking Strategies: What the Research Actually Shows</title>
+      <link>https://ninadpathak.com/blog/rag-chunking-strategies/</link>
+      <description>Chunk size and strategy affect RAG accuracy more than model choice in most systems. Here's what the research shows about fixed-size, semantic, and contextual approaches.</description>
+      <pubDate>Mar 14, 2026</pubDate>
+    </item>
+    <item>
       <title>pgvector vs Dedicated Vector Databases: An Honest Comparison</title>
       <link>https://ninadpathak.com/blog/pgvector-vs-vector-db/</link>
       <description>pgvector is genuinely good. Dedicated vector databases exist for real reasons. Here's how to think through the tradeoff without the vendor hype.</description>

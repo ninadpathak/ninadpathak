@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG Chunking Strategies: What the Research Actually Shows | Ninad Pathak</title>
+  <meta name="description" content="Chunk size and strategy affect RAG accuracy more than model choice in most systems. Here's what the research shows about fixed-size, semantic, and contextual approaches.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="RAG Chunking Strategies: What the Research Actually Shows">
+  <meta property="og:description" content="Chunk size and strategy affect RAG accuracy more than model choice in most systems. Here's what the research shows about fixed-size, semantic, and contextual approaches.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/rag-chunking-strategies/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/rag-chunking-strategies/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Apply saved theme before first paint to prevent flash -->
+  <script>try{var t=localStorage.getItem('np-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "RAG Chunking Strategies: What the Research Actually Shows",
+  "description": "Chunk size and strategy affect RAG accuracy more than model choice in most systems. Here's what the research shows about fixed-size, semantic, and contextual approaches.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-14",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "RAG Chunking Strategies: What the Research Actually Shows",
+      "item": "https://ninadpathak.com/blog/rag-chunking-strategies/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/ninadpathak/meet/" class="nav-cta" target="_blank" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">RAG Chunking Strategies: What the Research Actually Shows</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 14, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">7 min read</span>
+      </div>
+      <h1 class="post-title">RAG Chunking Strategies: What the Research Actually Shows</h1>
+      <p class="lead">Chunk size and strategy affect RAG accuracy more than model choice in most systems. Here's what the research shows about fixed-size, semantic, and contextual approaches.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">llm</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#fixed-size-chunking-the-default-that-causes-most-problems">Fixed-size chunking: the default that causes most problems</a></li>
+<li><a href="#recursive-text-splitting-better-boundary-detection-same-core-problem">Recursive text splitting: better boundary detection, same core problem</a></li>
+<li><a href="#semantic-chunking-embedding-based-boundary-detection">Semantic chunking: embedding-based boundary detection</a></li>
+<li><a href="#parent-child-chunking-the-architecture-i-find-most-interesting">Parent-child chunking: the architecture I find most interesting</a></li>
+<li><a href="#contextual-retrieval-anthropics-approach-to-the-lost-context-problem">Contextual retrieval: Anthropic's approach to the lost context problem</a></li>
+<li><a href="#the-parameters-that-actually-matter">The parameters that actually matter</a></li>
+<li><a href="#what-i-actually-recommend-for-new-rag-systems">What I actually recommend for new RAG systems</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Every RAG tutorial starts with chunking and spends two paragraphs on it. Chunk your documents, embed them, retrieve them. The parameters get passed as defaults: chunk size of 512, overlap of 50, split-on-newlines. Then the tutorial moves on to the parts that feel more interesting.</p>
+<p>Chunking is where most RAG systems are quietly broken.</p>
+<p>The retrieval quality ceiling for any RAG system gets set by chunking quality. A great embedding model retrieving bad chunks will consistently underperform a mediocre model retrieving good ones. The LlamaIndex benchmarks from 2024 showed retrieval precision varying by over 30 percentage points across chunking strategies on the same corpus. That's not a marginal difference. It's the difference between a system that works and one that doesn't.</p>
+<p>Here's what I understand about the main approaches and what each trades away.</p>
+<h2 id="fixed-size-chunking-the-default-that-causes-most-problems">Fixed-size chunking: the default that causes most problems</h2>
+<p>Fixed-size chunking splits text at token or character boundaries, usually with some overlap. LangChain's RecursiveCharacterTextSplitter with chunk_size=1000 and chunk_overlap=200 is probably the most common RAG configuration running in production today.</p>
+<p>The problem is mechanical. Text has semantic units: a sentence, a paragraph, a section. Fixed-size splitting ignores all of them. A chunk boundary can land in the middle of a code example, between a function definition and its parameters, or cut off an explanation right when it becomes useful.</p>
+<p>The overlap parameter exists to patch this. Repeating 200 characters at the boundary gives adjacent chunks some shared context. It helps. It doesn't solve the underlying issue. You're still encoding fragments that may not make sense independently.</p>
+<p>Fixed-size chunking makes sense for high-volume ingestion pipelines where speed matters, corpora with highly uniform structure like rows of tabular data, or early-stage prototypes where you want to move fast and tune later. Just understand what you're trading when you choose it.</p>
+<h2 id="recursive-text-splitting-better-boundary-detection-same-core-problem">Recursive text splitting: better boundary detection, same core problem</h2>
+<p>LangChain's recursive character splitter improves on pure fixed-size chunking by attempting to split at semantic boundaries in order: paragraph breaks first, then sentence breaks, then word breaks, then characters. It degrades gracefully as chunk targets force smaller splits.</p>
+<p>For most natural language documents, this produces meaningfully better chunks than naive fixed-size splitting. Paragraphs stay together when they fit. The overlap still patches rough edges.</p>
+<p>It doesn't solve the core problem. The splitter has no understanding of content. A 400-token paragraph that covers two distinct topics will stay in a single chunk. Two tightly related sentences on opposite sides of a paragraph break will end up in different chunks. The splitting logic is syntactic, not semantic.</p>
+<p>For general-purpose RAG over mixed document types, recursive splitting with tuned parameters is a reasonable default. The parameters that actually matter: chunk size relative to your embedding model's context window, and overlap as a fraction of chunk size. Twenty to twenty-five percent is a reasonable target, not a fixed number.</p>
+<h2 id="semantic-chunking-embedding-based-boundary-detection">Semantic chunking: embedding-based boundary detection</h2>
+<p>Semantic chunking uses embedding similarity to find topic boundaries. The approach: embed each sentence or small paragraph, compute similarity between adjacent embeddings, and split where similarity drops sharply. A sudden shift in embedding space indicates a topic transition.</p>
+<p>Greg Kamradt's chunking experiments formalized this and showed it produces chunks with more coherent content than fixed-size or recursive approaches on narrative and technical documents. Each chunk is semantically unified because the splits happen where topics actually change.</p>
+<p>The cost is latency. Every sentence needs to be embedded during ingestion, which is slower and more expensive than character counting. For a 100-page technical document, this is manageable. For a corpus of millions of documents, it's a bottleneck that changes the economics.</p>
+<p>There's also a calibration problem. The similarity threshold for splits is a hyperparameter with no obvious correct value. Set it too high and you split aggressively, producing many small chunks with poor context. Set it too low and you produce large, heterogeneous chunks. The right value depends on corpus characteristics and needs tuning per domain.</p>
+<p>For corpora with natural topical structure like technical documentation, long-form articles, or research papers, semantic chunking produces noticeably better retrieval at the cost of more complex ingestion. Worth the investment for high-value corpora where retrieval precision matters.</p>
+<h2 id="parent-child-chunking-the-architecture-i-find-most-interesting">Parent-child chunking: the architecture I find most interesting</h2>
+<p>Parent-child chunking, also called small-to-big retrieval or hierarchical chunking, addresses a real tension in RAG. Embedding quality and retrieval precision improve with smaller chunks, but generated responses improve with more context.</p>
+<p>The implementation: split your document at two granularities. Small child chunks of 64-128 tokens for embedding and retrieval. Larger parent chunks of 512-2048 tokens for context. When a child chunk gets retrieved as relevant, you serve the parent chunk to the LLM.</p>
+<p>The retrieval step benefits from the specificity of small chunks. A 100-token passage about a specific API parameter will be retrieved precisely when someone asks about that parameter. A 1000-token parent chunk containing that passage gives the LLM enough surrounding context to generate a useful answer.</p>
+<p>LlamaIndex implements this as their ParentDocumentRetriever. LangChain has equivalent functionality. The indexing complexity is higher since you maintain two chunk sizes and a mapping between them. For most systems, the retrieval quality improvement justifies it.</p>
+<h2 id="contextual-retrieval-anthropics-approach-to-the-lost-context-problem">Contextual retrieval: Anthropic's approach to the lost context problem</h2>
+<p>Late 2024, Anthropic published their contextual retrieval approach. The core insight: chunks lose context when separated from their source document. A chunk that says "The quarterly revenue was $2.3B, up 15% year-over-year" is useless without knowing which company, which quarter.</p>
+<p>Their solution: before embedding each chunk, prepend a brief AI-generated summary explaining where the chunk sits in the document. Something like "This chunk is from the Q3 2025 earnings report for Acme Corp. It discusses revenue performance." The chunk gets embedded with this context included.</p>
+<p>Anthropic's benchmarks showed a 49% reduction in retrieval failures compared to standard chunking, and a 67% reduction when combined with BM25 hybrid search. Those numbers are from their own evaluation on their own test cases, so independent reproduction varies. The approach is sound regardless of the exact improvement.</p>
+<p>The cost is real: you need an LLM call per chunk to generate the contextual prefix. For a corpus of 100,000 chunks, that's 100,000 API calls at ingestion time. Anthropic's prompt caching reduces this cost significantly when the document structure is reused, but it changes the economics of ingestion substantially.</p>
+<p>For high-stakes RAG applications where retrieval quality directly affects outcomes like customer support, legal research, or medical information, the cost is worth it. For general knowledge bases and internal wikis, the standard approaches are usually sufficient.</p>
+<h2 id="the-parameters-that-actually-matter">The parameters that actually matter</h2>
+<p>Chunk size interacts with everything. The embedding model's effective context window sets the upper bound. Models like OpenAI's text-embedding-3-small perform well up to about 512 tokens per chunk. Above that, the embedding starts averaging over too much content and precision drops. Below about 64 tokens, you lose too much context. The 128-512 token range is the empirically validated sweet spot for most embedding models.</p>
+<p>Overlap should be proportional. Fixed overlap values like 200 characters don't scale across different chunk sizes. Aim for 10-20% of chunk size.</p>
+<p>Metadata matters as much as content. Source document, section headers, page numbers, document type. When you retrieve a chunk, that metadata can be used for filtering and can be passed to the LLM alongside the chunk content. Most systems underuse metadata.</p>
+<h2 id="what-i-actually-recommend-for-new-rag-systems">What I actually recommend for new RAG systems</h2>
+<p>Start with recursive text splitting at 512 tokens with 10% overlap. Measure retrieval precision against a held-out evaluation set with 20-50 representative queries. Know your baseline.</p>
+<p>Switch to parent-child if you find that retrieved chunks are precise but response quality is suffering from lack of context. Switch to semantic chunking if you have long documents with clear topic shifts and retrieval precision is the bottleneck. Add contextual retrieval only if you've established that chunk-level context loss is your primary failure mode, and only if the ingestion cost is acceptable.</p>
+<p>The evaluation step is non-negotiable. Chunking intuitions built on toy datasets don't transfer. The only way to know what's working is to measure it on your actual corpus with your actual queries.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/pgvector-vs-vector-db/" class="related-card">
+        <div class="related-card-date">2026-03-11</div>
+        <div class="related-card-title">pgvector vs Dedicated Vector Databases: An Honest Comparison</div>
+      </a>
+      <a href="/blog/ai-memory-types/" class="related-card">
+        <div class="related-card-date">2026-03-08</div>
+        <div class="related-card-title">The Four Types of Memory in AI Agents (And Why Most Systems Only Use One)</div>
+      </a>
+      <a href="/blog/hnsw-vector-search/" class="related-card">
+        <div class="related-card-date">2026-03-05</div>
+        <div class="related-card-title">HNSW: What's Actually Happening When You Do a Vector Search</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding: 4rem 0; border-top: 1px solid var(--border);">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">ninad pathak</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/work/"      class="footer-link">Work</a>
+        <a href="/portfolio/" class="footer-link">Portfolio</a>
+        <a href="/blog/"      class="footer-link">Writing</a>
+        <a href="/about/"     class="footer-link">About</a>
+        <a href="/contact/"   class="footer-link">Contact</a>
+        <a href="/feed.xml"   class="footer-link">RSS</a>
+      </nav>
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Makes API Documentation Good: Lessons From Stripe, Twilio, and Resend | Ninad Pathak</title>
+  <meta name="description" content="Most API documentation fails developers in the same three ways. Stripe, Twilio, and Resend figured out what good looks like. Here's what they got right.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="What Makes API Documentation Good: Lessons From Stripe, Twilio, and Resend">
+  <meta property="og:description" content="Most API documentation fails developers in the same three ways. Stripe, Twilio, and Resend figured out what good looks like. Here's what they got right.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/api-documentation-good/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/api-documentation-good/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Apply saved theme before first paint to prevent flash -->
+  <script>try{var t=localStorage.getItem('np-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Makes API Documentation Good: Lessons From Stripe, Twilio, and Resend",
+  "description": "Most API documentation fails developers in the same three ways. Stripe, Twilio, and Resend figured out what good looks like. Here's what they got right.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-20",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "What Makes API Documentation Good: Lessons From Stripe, Twilio, and Resend",
+      "item": "https://ninadpathak.com/blog/api-documentation-good/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/ninadpathak/meet/" class="nav-cta" target="_blank" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">What Makes API Documentation Good: Lessons From Stripe, Twilio, and Resend</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 20, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">8 min read</span>
+      </div>
+      <h1 class="post-title">What Makes API Documentation Good: Lessons From Stripe, Twilio, and Resend</h1>
+      <p class="lead">Most API documentation fails developers in the same three ways. Stripe, Twilio, and Resend figured out what good looks like. Here's what they got right.</p>
+      <div class="post-tags">
+        <span class="tag">technical-writing</span>
+        <span class="tag">api-docs</span>
+        <span class="tag">developer-experience</span>
+        <span class="tag">documentation</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-three-audiences-your-api-docs-serve">The three audiences your API docs serve</a></li>
+<li><a href="#what-stripe-got-right">What Stripe got right</a></li>
+<li><a href="#what-resend-got-right">What Resend got right</a></li>
+<li><a href="#what-twilio-got-right-and-what-they-struggled-with">What Twilio got right and what they struggled with</a></li>
+<li><a href="#the-documentation-patterns-that-consistently-fail">The documentation patterns that consistently fail</a></li>
+<li><a href="#the-practical-writing-process-for-api-docs">The practical writing process for API docs</a></li>
+<li><a href="#what-this-means-for-teams-building-developer-products">What this means for teams building developer products</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>API documentation is the most consequential writing in software. A developer who can't figure out your API in 20 minutes will either give up or find a workaround that haunts your support queue for years. A developer who gets to a working implementation in 10 minutes will recommend your product to three colleagues.</p>
+<p>The difference between those outcomes is almost entirely documentation quality.</p>
+<p>I've spent six years reading, writing, and debugging API docs for DevTools companies. Some teams have figured this out. Most haven't. The distance between the good and the mediocre is not effort, since both sides have worked hard on their docs. The distance is understanding what developers actually need at each stage of the integration journey.</p>
+<h2 id="the-three-audiences-your-api-docs-serve">The three audiences your API docs serve</h2>
+<p>Every API has three distinct audiences that need different things.</p>
+<p>The evaluator is deciding whether to use your API at all. They have 15 minutes and a GitHub tab open. They want to know: what does this API actually do, how is it authenticated, and can they see a working example before committing to a deeper read. They will not read conceptual documentation at this stage. They want evidence that the API does what it says.</p>
+<p>The implementer is integrating the API into a production system. They need accurate reference documentation for every endpoint, comprehensive error codes, rate limit behavior, and enough worked examples to cover their specific use case. They'll hit edge cases that the happy-path docs don't cover. The quality of your docs here determines how many support tickets you receive.</p>
+<p>The debugger has something broken and is trying to figure out why. They need error codes with specific explanations, not just "invalid request." They need response examples for error states, and information about API behavior under edge conditions: what happens when a rate limit is hit, what happens during a provider outage, what the retry behavior should be.</p>
+<p>Most API docs are written for the implementer and fail the evaluator and debugger. The best docs serve all three.</p>
+<h2 id="what-stripe-got-right">What Stripe got right</h2>
+<p>Stripe's API documentation is widely cited as the gold standard. Having spent significant time in it while writing integration guides, I want to be specific about what actually makes it excellent.</p>
+<p>Every endpoint has a working curl example. Not pseudocode, not YOUR_SECRET_KEY, but a real curl command you can run after swapping in your test key. This sounds obvious. Walk through the docs for 20 APIs and count how many actually do it.</p>
+<p>The reference and the guide are genuinely separate. Stripe's reference documentation is a machine-readable index of every endpoint, parameter, and response field. The guides are prose explanations of how to accomplish specific goals: accept a payment, set up subscriptions, handle disputes. The two formats serve different readers and aren't muddled together.</p>
+<p>Error handling is documented at the same level as success cases. Every Stripe error has a code, a category, and specific guidance on how to handle it. The card_declined error, for instance, distinguishes between insufficient_funds, do_not_honor, and fraud_block and explains what each means for retry logic. That's the level of detail that saves developers from shipping bad retry implementations.</p>
+<p>The changelog is a first-class document. Breaking changes are announced with migration guides. Versioning behavior is explicit. Developers building on Stripe know what to expect when things change, which removes a category of anxiety from the integration.</p>
+<h2 id="what-resend-got-right">What Resend got right</h2>
+<p>Resend launched in 2023 and quickly earned a reputation for excellent developer experience. Their approach is different from Stripe's, and worth studying for the specific things they prioritize.</p>
+<p>SDK-first documentation means Resend documents every integration from the SDK perspective, not the raw HTTP perspective. If you're building in TypeScript, the TypeScript examples are first-class, not an afterthought. The code you copy is idiomatic for your language.</p>
+<p>Copy-paste completeness means every code example in Resend's docs is complete: imports included, error handling included, environment variable setup shown. You can paste it into an empty file and run it. The psychological effect of documentation that actually works on first try is significant. It builds trust that the rest of the docs are also accurate.</p>
+<p>Minimal prose means Resend's docs are short. They don't explain email infrastructure theory before showing you how to send an email. The explanation of DKIM, SPF, and DMARC exists, but it's behind a link, not between the developer and their working example.</p>
+<h2 id="what-twilio-got-right-and-what-they-struggled-with">What Twilio got right and what they struggled with</h2>
+<p>Twilio built enormous market share on the strength of developer experience in their early years. Their quickstart guides are still useful to study: they start with the absolute minimum viable implementation like sending one SMS or making one phone call, verify that it works, and then layer in complexity.</p>
+<p>The quickstart philosophy matters because developers don't learn APIs by reading reference documentation. They learn by getting something working and then extending it. A quickstart that gets to "it worked" in under 10 minutes is worth more than 100 pages of comprehensive reference docs for a developer evaluating whether to build on your platform.</p>
+<p>Twilio's struggle as they scaled was consistent quality across a large surface area. The core voice and SMS docs are excellent. The peripheral products are uneven. Maintaining documentation quality across a growing API surface is an organizational problem as much as a writing problem. The team maintaining the documentation needs to be as close to the product as the team building it.</p>
+<h2 id="the-documentation-patterns-that-consistently-fail">The documentation patterns that consistently fail</h2>
+<p>"See our GitHub repository for examples" is not documentation. The examples in the repository are not documentation. They're examples. Without context, navigation, and explanation, they serve the developer who already understands the API, not the one trying to learn it.</p>
+<p>Long conceptual intros before working code fail because developers do not read 1,500 words of conceptual explanation before seeing an example. They skip to the code. If the conceptual explanation is necessary for the code to make sense, put the explanation adjacent to the code, not before it.</p>
+<p>Response schemas without examples fail because listing every field in an API response is necessary but not sufficient. Show the actual JSON. Show what a nested object looks like when populated. Show what an empty array response looks like. Documentation that describes structure without showing it makes developers write their own test scripts just to see what the data looks like.</p>
+<p>Error codes without severity or handling guidance fail because "Error 422: Unprocessable Entity" tells a developer nothing useful. What caused it, which field was invalid, what's the expected format, and should they retry or fix the request? Those questions need answers in the error documentation.</p>
+<p>Docs that assume the happy path fail because real integrations encounter rate limits, authentication expiration, partial failures, and concurrent request conflicts. Documentation that only covers the success case leaves developers writing defensive code against behaviors they can't predict.</p>
+<h2 id="the-practical-writing-process-for-api-docs">The practical writing process for API docs</h2>
+<p>When I write API documentation, my process starts with the implementation, not the outline.</p>
+<p>Build the integration myself from the raw reference. Document every point of confusion: where did the reference docs fail me, what did I have to figure out by trial and error, what error did I get before I got the success response? Every point of confusion is a documentation gap.</p>
+<p>Write the quickstart first. Get a developer from zero to working in as few steps as possible. Time how long it takes someone unfamiliar with the API to follow the quickstart and reach success. That's your baseline.</p>
+<p>Write the reference from the API behavior, not the internal implementation. The reference docs describe the API's contract: inputs, outputs, errors, constraints. They're not an explanation of how the API works internally.</p>
+<p>Then add the guides for the specific use cases developers will actually implement. Not "introduction to our payments API" but "implement a subscription with a free trial period" or "migrate from PayPal to our checkout."</p>
+<p>The test of whether API documentation is good: can a competent developer reach a working production integration without asking your support team a question? If yes, the docs are doing their job.</p>
+<h2 id="what-this-means-for-teams-building-developer-products">What this means for teams building developer products</h2>
+<p>API documentation is not a marketing problem. It's not a design problem. It's a technical writing problem that requires someone who has built integrations, who knows what questions developers actually ask, and who cares whether the example code runs.</p>
+<p>Teams that treat API docs as a checklist item, something that needs to exist rather than something that needs to be good, will pay for it in support volume, integration abandonment, and developer advocacy that goes negative rather than positive.</p>
+<p>The competitive advantage of excellent API docs compounds. A developer who had a good experience with your documentation will give you the benefit of the doubt the next time they're evaluating your product. They'll recommend you specifically because "their docs are actually good." That word-of-mouth is free and it's driven entirely by documentation quality.</p>
+<p>Stripe built a company culture where documentation quality is treated as seriously as product quality. That's not a coincidence.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+<!-- CTA -->
+<section style="padding: 4rem 0; border-top: 1px solid var(--border);">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">ninad pathak</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/work/"      class="footer-link">Work</a>
+        <a href="/portfolio/" class="footer-link">Portfolio</a>
+        <a href="/blog/"      class="footer-link">Writing</a>
+        <a href="/about/"     class="footer-link">About</a>
+        <a href="/contact/"   class="footer-link">Contact</a>
+        <a href="/feed.xml"   class="footer-link">RSS</a>
+      </nav>
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>
