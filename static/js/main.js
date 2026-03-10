@@ -130,6 +130,95 @@
   });
 
   // ----------------------------------------------------------------
+  // Hero canvas animation (homepage only)
+  // ----------------------------------------------------------------
+  (function () {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+
+    const ctx    = canvas.getContext('2d');
+    const hero   = canvas.closest('.hero');
+    const CHARS  = '0123456789ABCDEF<>{}[]/\\=;()'.split('');
+    const CW     = 16; // cell width
+    const CH     = 22; // cell height
+
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+
+    const cols = Math.ceil(canvas.width  / CW);
+    const rows = Math.ceil(canvas.height / CH);
+    const cx   = cols / 2;
+    const cy   = rows / 2;
+    const maxD = Math.sqrt(cx * cx + cy * cy);
+
+    // Build cell grid
+    const cells = [];
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var dist = Math.sqrt((c - cx) * (c - cx) + (r - cy) * (r - cy));
+        cells.push({
+          x:       c * CW,
+          y:       r * CH,
+          char:    CHARS[Math.floor(Math.random() * CHARS.length)],
+          // Clear from center out: cells near center clear first
+          clearAt: 300 + (dist / maxD) * 750 + Math.random() * 180,
+          alpha:   1
+        });
+      }
+    }
+
+    var start = null;
+    var SCRAMBLE_INTERVAL = 6; // frames between char shuffles per cell
+    var frame  = 0;
+
+    function tick(ts) {
+      if (!start) start = ts;
+      var elapsed = ts - start;
+      frame++;
+
+      var isDark  = document.documentElement.getAttribute('data-theme') !== 'light';
+      var rgb     = isDark ? '255,95,31' : '160,50,0';
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font          = (CH - 6) + "px 'JetBrains Mono', monospace";
+      ctx.textAlign     = 'center';
+      ctx.textBaseline  = 'middle';
+
+      var anyVisible = false;
+
+      for (var i = 0; i < cells.length; i++) {
+        var cell = cells[i];
+
+        // Scramble chars while visible
+        if (frame % SCRAMBLE_INTERVAL === 0) {
+          cell.char = CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+
+        var alpha;
+        if (elapsed < cell.clearAt) {
+          alpha = 0.22;
+        } else {
+          var fade = (elapsed - cell.clearAt) / 280;
+          if (fade >= 1) continue; // fully gone
+          alpha = 0.22 * (1 - fade);
+        }
+
+        anyVisible = true;
+        ctx.fillStyle = 'rgba(' + rgb + ',' + alpha + ')';
+        ctx.fillText(cell.char, cell.x + CW / 2, cell.y + CH / 2);
+      }
+
+      if (anyVisible) {
+        requestAnimationFrame(tick);
+      } else {
+        canvas.style.display = 'none';
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }());
+
+  // ----------------------------------------------------------------
   // Active nav link
   // ----------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', function () {
