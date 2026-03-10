@@ -16,7 +16,7 @@ Anyone who's read the attention mechanism papers won't be surprised. But seeing 
 
 The experiment was multi-document question answering. Given a question and 20 documents (one containing the answer, the rest distractors), models were tested with the answer-containing document placed at different positions.
 
-With 20 documents in context: when the relevant document was at position 20 (the end), accuracy was around 42%. Moved to positions 5 through 15 (the middle), accuracy dropped to around 25%. A 17 percentage point gap from one placement decision.
+With 20 documents in context: when the relevant document was at position 20 (the end), accuracy was around 42%. Moved to positions 5 through 15 (the middle), accuracy dropped to around 25%. A 17 percentage point drop from one placement decision.
 
 Adding more context hurt. The closed-book baseline, no retrieved documents at all, was 56.1% on the evaluation set. When the relevant document was buried in the middle, the model with access to the answer performed *worse* than the model with no access. You gave it the information and it did worse.
 

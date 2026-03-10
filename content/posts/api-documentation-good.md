@@ -8,7 +8,7 @@ status: published
 
 API documentation is the most consequential writing in software. I say this with the passion of someone who has both been saved by good docs and ruined entire weekends wrestling with bad ones. A developer who can't figure out your API in 20 minutes will either give up or find a workaround that haunts your support queue for years. A developer who gets to a working implementation in 10 minutes will recommend your product to three colleagues. I've been both of these developers.
 
-The difference between those outcomes is documentation quality, and the gap isn't about effort. Every team I've worked with has worked hard on their docs. The gap is understanding what developers actually need at each stage of the integration journey. It's empathy, applied systematically.
+The difference between those outcomes is documentation quality, and it isn't about effort. Every team I've worked with has worked hard on their docs. What separates the good from the bad is understanding what developers actually need at each stage of the integration journey. It's empathy, applied systematically.
 
 ## The three audiences your API docs serve
 
@@ -68,7 +68,7 @@ Docs that assume the happy path fail because real integrations encounter rate li
 
 When I write API documentation, my process starts with the implementation, not the outline.
 
-Build the integration myself from the raw reference. Document every point of confusion: where did the reference docs fail me, what did I have to figure out by trial and error, what error did I get before I got the success response? Every point of confusion is a documentation gap.
+Build the integration myself from the raw reference. Document every point of confusion: where did the reference docs fail me, what did I have to figure out by trial and error, what error did I get before I got the success response? Every point of confusion is something the docs failed to explain.
 
 Write the quickstart first. Get a developer from zero to working in as few steps as possible. Time how long it takes someone unfamiliar with the API to follow the quickstart and reach success. If it takes more than 10 minutes, something is wrong. I've had clients where we got it down to 3 minutes. That should be the goal.
 

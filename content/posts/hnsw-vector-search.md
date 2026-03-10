@@ -40,7 +40,7 @@ M controls the number of bidirectional connections per node. The memory cost of 
 
 For 1 million OpenAI text-embedding-3-small vectors (1536 dimensions, float32): that's ~6.1 GB of raw vector data. With M=32, add another ~128 MB for connection overhead. Fine. At 100 million vectors, the memory requirements become the constraint, not query performance.
 
-During index construction, you use `ef_construction` to control how carefully neighbors are selected at build time. Higher ef_construction = better graph quality = slower build. One-time cost, but significant for large datasets. Weaviate defaults to efConstruction=100; Qdrant's "accurate" config uses ef_construct=100 with m=32. The gap between fast and accurate configurations isn't small on billion-scale data.
+During index construction, you use `ef_construction` to control how carefully neighbors are selected at build time. Higher ef_construction = better graph quality = slower build. One-time cost, but significant for large datasets. Weaviate defaults to efConstruction=100; Qdrant's "accurate" config uses ef_construct=100 with m=32. The difference between fast and accurate configurations is substantial on billion-scale data.
 
 ## The thing everyone learns the hard way about filtering
 

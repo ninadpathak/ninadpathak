@@ -86,7 +86,7 @@ A third path worth considering: avoid the debate entirely by starting with pgvec
 
 ## What the benchmarks say (and don't say)
 
-The [ANN Benchmarks](http://ann-benchmarks.com/) site publishes recall vs. queries-per-second plots for dozens of algorithms and datasets. At equivalent recall targets, the gaps between pgvector's HNSW and dedicated database HNSW implementations are often small. The algorithm is the algorithm.
+The [ANN Benchmarks](http://ann-benchmarks.com/) site publishes recall vs. queries-per-second plots for dozens of algorithms and datasets. At equivalent recall targets, the differences between pgvector's HNSW and dedicated database HNSW implementations are often small. The algorithm is the algorithm.
 
 Where dedicated databases pull ahead is in concurrent load, filtered search, and memory-constrained environments. Those conditions don't show up in single-client benchmarks.
 
