@@ -16,19 +16,22 @@ metrics:
     label: "Frameworks covered"
 ---
 
-## The Challenge
+## The benchmark wasn't "editors liked it." It was "engineers shipped it."
 
-Centus is a localization and translation management platform. Their audience is developers who need to implement i18n in their applications, Svelte, React, PHP, Python, Laravel, and more.
+Centus is a localization and translation management platform. Their readers aren't evaluating software — they're engineers implementing i18n at 11pm before a launch, trying to figure out why their plural forms aren't working in Polish.
 
-The challenge: create technical documentation accurate enough that engineering teams approve it for publishing. This is a higher bar than it sounds. Developers read documentation skeptically. One wrong command, one outdated API call, one incorrect explanation of how a library works, and the whole article loses credibility.
+When Roman, their Head of Content, needed technical guides for their developer blog, the brief was clear: write content that Centus's own engineering team wouldn't have to clean up before publishing. That's a harder standard than it sounds.
 
-## What I Did
+## Localization looks simple until you actually implement it
 
-**Wrote at implementation depth, not explanation depth.** There's a difference between an article that explains what i18n is and an article that shows you how to set up `svelte-i18n`, configure fallback locales, handle pluralization edge cases, and integrate with a translation management system. I wrote the second kind.
+There's a version of a localization tutorial that explains what i18n is and shows `t('hello')`. Developers hate that version. It skips everything that actually causes problems: RTL language support, plural forms that differ by locale, missing translation fallbacks, dynamic string interpolation, date and number formatting across regions.
 
-**Tested every code example.** Every tutorial was built from a working implementation. When a framework's documentation conflicted with its actual behavior, I tested both and reported accurately on what worked.
+I wrote the other version — the one that works through the implementation completely. Every guide was built from a working codebase. When a framework's documentation conflicted with its actual behavior, I tested both and documented what worked. If the edge case would bite a developer at launch, it was in the article.
 
-**Covered the full framework ecosystem:**
+## Ten frameworks. Zero shortcuts.
+
+The Centus content program covered the full i18n ecosystem:
+
 - Svelte localization with `svelte-i18n`
 - React internationalization with `react-i18next` and the native `Intl` API
 - PHP localization with gettext
@@ -36,24 +39,19 @@ The challenge: create technical documentation accurate enough that engineering t
 - Laravel localization
 - YAML-based translation file management
 
-**Wrote for the developer audience specifically.** Centus's readers are engineers implementing software under a deadline, not decision-makers evaluating options. The content is structured for people who read documentation to solve a specific problem, not to understand the space.
+Each guide addressed the same pattern: setup, configuration, common edge cases, and integration with Centus's platform. Not because that's a convenient template — because that's the actual sequence a developer goes through.
 
-## The Results
+## "Our devs called it 'awesome' and just sent it ahead for publishing."
 
-- **50+ technical guides** published to the Centus blog and documentation
-- **Zero rounds of engineering revision**, developers reviewed and pushed directly
-- Multiple frameworks covered at implementation depth
-- Centus established as a technical authority in the i18n/localization developer space
-- Content cited in developer community discussions and linked from framework-adjacent resources
+That's the Roman Hresko quote that matters. Not "our editors approved it." Developers reviewed the technical articles and pushed them directly to publish, skipping the revision cycle entirely.
 
-## What Roman (Head of Content) Said
+Fifty guides later, that pattern held. Zero rounds of engineering revision across the engagement. The content cited in developer forums, linked from framework-adjacent resources, and referenced in localization community discussions.
 
-> "Our devs called it 'awesome' and just sent it ahead for publishing. If you need deep tech content, get him onboard!"
+## What this means for DevTools companies
 
-That's the benchmark. Not "our editors liked it." Engineers liked it.
+If your content team is regularly sending drafts back to engineers for accuracy review, that's a workflow problem that the right writer can solve. The revision cycle exists because most writers don't test the code. I do.
 
-## The Technical Approach
-
-Localization is one of those topics that looks simple until you implement it. Edge cases accumulate fast: RTL language support, plural forms that differ by locale, date and number formatting, missing translation fallbacks, dynamic string interpolation. A tutorial that doesn't address these feels incomplete to the engineers who'll hit them at 11pm before a launch.
-
-Every guide I wrote for Centus addressed the implementation in full, setup, configuration, edge cases, and integration with Centus's own platform. That depth is what made engineers trust the content.
+- **50+** technical guides published
+- **0** rounds of engineering revision
+- **10+** frameworks covered at implementation depth
+- Content actively cited in developer community resources

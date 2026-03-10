@@ -73,11 +73,6 @@ entries:
     category: "AI & Memory"
     url: "https://mem0.ai/blog/what-is-ai-agent-memory"
 
-  - title: "We Built Persistent Memory for OpenClaw AI Agents"
-    client: "Mem0"
-    category: "AI & Memory"
-    url: "https://mem0.ai/blog/mem0-memory-for-openclaw"
-
   # Analytics / Marketing
   - title: "Top Lead Scoring Software for B2B Teams"
     client: "Factors.ai"
@@ -117,16 +112,6 @@ entries:
     url: "https://www.delightchat.io/blog/gorgias-vs-freshchat-top-differences-and-similarities"
 
   # Linux / Developer
-  - title: "How to Check CPU Temperature on Linux"
-    client: "LinuxForDevices"
-    category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/linux/check-your-cpu-frequency-on-linux"
-
-  - title: "Linux Process Management: A Complete Guide"
-    client: "LinuxForDevices"
-    category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/process-termination-in-linux"
-
   - title: "Bash Scripting for Beginners"
     client: "LinuxForDevices"
     category: "Linux & DevOps"
@@ -136,11 +121,6 @@ entries:
     client: "LinuxForDevices"
     category: "Linux & DevOps"
     url: "https://www.linuxfordevices.com/tutorials/linux/start-stop-restart-services-linux"
-
-  - title: "Docker on Linux: Installation and Usage Guide"
-    client: "LinuxForDevices"
-    category: "Linux & DevOps"
-    url: "https://www.linuxfordevices.com/tutorials/ubuntu/install-docker-run-docker-container-ubuntu"
 
   - title: "Understanding systemd for Linux Administration"
     client: "LinuxForDevices"

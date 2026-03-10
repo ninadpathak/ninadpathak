@@ -16,29 +16,35 @@ metrics:
     label: "Where we started"
 ---
 
-## The Challenge
+## A solid product with a traffic problem
 
-Kiwi Sizing is a Shopify app helping eCommerce stores reduce returns with accurate size recommendations. The product was solid. The organic visibility wasn't.
+Kiwi Sizing helps Shopify stores reduce returns by giving shoppers accurate size recommendations. The product worked well. Merchants who used it saw fewer returns. The problem was that 7,000 monthly visitors were finding it — in a market where hundreds of thousands of people were searching for exactly the problem it solved.
 
-At 7,000 monthly visits, the site was underperforming relative to the scale of its market. The challenge: identify the systematic content opportunity and build the infrastructure to capture it.
+The gap between the product's value and its organic reach was the opportunity.
 
-## What I Did
+## The insight: this market is made for programmatic SEO
 
-**Identified the programmatic SEO opportunity.** The size guide space has enormous long-tail search volume, thousands of specific queries around sizing charts for specific brands, garment types, and measurement conversions. No single page could capture this. A systematized content approach could.
+The size guide space has an unusual characteristic — it generates enormous long-tail search volume that's highly specific and largely uncontested. Shoppers search for size charts for specific brands, garment types, and measurement conversions in enormous numbers. No single article captures this. A systematized content approach can.
 
-**Built the content templates and architecture.** Rather than writing individual articles, I designed content templates that could be applied at scale to address the full range of sizing-related search intent. Each template was built around real search demand with proper internal linking.
+The strategy wasn't to write one great guide about sizing charts. It was to build the infrastructure that could address the full range of sizing-related intent at scale, while maintaining the accuracy that makes those pages actually useful.
 
-**Wrote the cornerstone content.** Beyond the programmatic layer, I developed in-depth cornerstone content targeting high-competition, high-value terms that drove topical authority.
+## Quality at scale, not instead of it
 
-**Maintained technical accuracy in a non-technical domain.** Even in eCommerce content, accuracy matters. Size charts, measurement conversions, and brand-specific data need to be correct, otherwise the content creates the exact problem (returns from wrong sizes) that the product is supposed to solve.
+The failure mode for programmatic SEO is thin content — templated pages that technically exist but answer nothing. Search engines have gotten very good at filtering these out, and shoppers bounce immediately from pages that don't help them.
 
-## The Results
+Every template was built around real search demand. Every data point — brand-specific measurements, garment conversions, regional sizing standards — was accurate. The scale came from systematizing the process, not compromising the output.
+
+The cornerstone content anchored the topical authority. The programmatic layer captured the long tail. Both had to be right for either to work.
+
+## 7,000 visitors became 450,000
 
 - **7,000 → 450,000** monthly visits
-- **64x traffic growth**
+- **64x** traffic growth
 - Content infrastructure that continued scaling after the initial engagement
 - Topical authority established in the Shopify app ecosystem
 
-## The Lesson
+The infrastructure outlasted the active engagement. Pages built early in the program continued compounding in rank because the architecture was designed for that — proper internal linking, topical clustering, and accuracy that earned links from eCommerce communities.
 
-Programmatic SEO only works when the underlying content is genuinely useful. Templates that produce thin, inaccurate content get filtered out. The Kiwi Sizing program succeeded because every page answered a real question accurately, the scale came from systematizing quality, not replacing it.
+## The lesson that applies everywhere
+
+Programmatic SEO gets a bad reputation because it's usually done wrong. Templates that produce inaccurate, unhelpful content get filtered by search engines and ignored by users. The Kiwi Sizing program worked because it treated accuracy as a non-negotiable input, not something to trade away for volume.
