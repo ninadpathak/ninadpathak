@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
+  <!-- Set theme immediately to prevent flash -->
+  <script>(function(){try{var t=localStorage.getItem('np-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{{ site.title }} | {{ site.tagline }}{% endblock %}</title>
@@ -31,9 +33,6 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Apply saved theme before first paint to prevent flash -->
-  <script>try{var t=localStorage.getItem('np-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/main.css">
