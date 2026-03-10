@@ -130,89 +130,102 @@
   });
 
   // ----------------------------------------------------------------
-  // Hero canvas animation (homepage only)
+  // Hero canvas — continuous ambient character field (homepage only)
   // ----------------------------------------------------------------
   (function () {
-    const canvas = document.getElementById('hero-canvas');
+    var canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
 
-    const ctx    = canvas.getContext('2d');
-    const hero   = canvas.closest('.hero');
-    const CHARS  = '0123456789ABCDEF<>{}[]/\\=;()'.split('');
-    const CW     = 16; // cell width
-    const CH     = 22; // cell height
+    var ctx   = canvas.getContext('2d');
+    var hero  = canvas.closest('.hero');
+    var CHARS = '0123456789ABCDEF<>{}[]/\\=;()'.split('');
+    var CW    = 16;
+    var CH    = 22;
 
-    canvas.width  = hero.offsetWidth;
-    canvas.height = hero.offsetHeight;
+    function resize() {
+      canvas.width  = hero.offsetWidth;
+      canvas.height = hero.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
 
-    const cols = Math.ceil(canvas.width  / CW);
-    const rows = Math.ceil(canvas.height / CH);
-    const cx   = cols / 2;
-    const cy   = rows / 2;
-    const maxD = Math.sqrt(cx * cx + cy * cy);
+    var cols  = Math.ceil(canvas.width  / CW);
+    var rows  = Math.ceil(canvas.height / CH);
 
-    // Build cell grid
-    const cells = [];
+    // Each cell cycles: idle → fade-in → live (scrambling) → fade-out → idle
+    var cells = [];
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < cols; c++) {
-        var dist = Math.sqrt((c - cx) * (c - cx) + (r - cy) * (r - cy));
         cells.push({
-          x:       c * CW,
-          y:       r * CH,
-          char:    CHARS[Math.floor(Math.random() * CHARS.length)],
-          // Clear from center out: cells near center clear first
-          clearAt: 300 + (dist / maxD) * 750 + Math.random() * 180,
-          alpha:   1
+          x:            c * CW,
+          y:            r * CH,
+          char:         CHARS[Math.floor(Math.random() * CHARS.length)],
+          alpha:        0,
+          state:        'idle',
+          timer:        0,
+          // Stagger the initial activations so they don't all fire at once
+          nextActivate: Math.random() * 2500,
+          liveFor:      700 + Math.random() * 1400
         });
       }
     }
 
-    var start = null;
-    var SCRAMBLE_INTERVAL = 6; // frames between char shuffles per cell
-    var frame  = 0;
+    var last = null;
 
     function tick(ts) {
-      if (!start) start = ts;
-      var elapsed = ts - start;
-      frame++;
+      if (!last) last = ts;
+      var dt  = Math.min(ts - last, 64); // cap at ~2 frames to avoid jumps after tab switch
+      last    = ts;
 
-      var isDark  = document.documentElement.getAttribute('data-theme') !== 'light';
-      var rgb     = isDark ? '255,95,31' : '160,50,0';
+      var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+      var rgb    = isDark ? '255,95,31' : '140,45,0';
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.font          = (CH - 6) + "px 'JetBrains Mono', monospace";
-      ctx.textAlign     = 'center';
-      ctx.textBaseline  = 'middle';
-
-      var anyVisible = false;
+      ctx.font         = (CH - 6) + "px 'JetBrains Mono', monospace";
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
 
       for (var i = 0; i < cells.length; i++) {
         var cell = cells[i];
+        cell.timer += dt;
 
-        // Scramble chars while visible
-        if (frame % SCRAMBLE_INTERVAL === 0) {
-          cell.char = CHARS[Math.floor(Math.random() * CHARS.length)];
+        if (cell.state === 'idle') {
+          if (cell.timer >= cell.nextActivate) {
+            cell.state = 'in';
+            cell.timer = 0;
+            cell.char  = CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+          continue;
         }
 
-        var alpha;
-        if (elapsed < cell.clearAt) {
-          alpha = 0.22;
-        } else {
-          var fade = (elapsed - cell.clearAt) / 280;
-          if (fade >= 1) continue; // fully gone
-          alpha = 0.22 * (1 - fade);
+        if (cell.state === 'in') {
+          cell.alpha = Math.min(cell.timer / 220, 1);
+          if (cell.alpha >= 1) { cell.state = 'live'; cell.timer = 0; }
+
+        } else if (cell.state === 'live') {
+          // Occasionally flip the character
+          if (Math.random() < 0.008) {
+            cell.char = CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+          if (cell.timer >= cell.liveFor) { cell.state = 'out'; cell.timer = 0; }
+
+        } else if (cell.state === 'out') {
+          cell.alpha = Math.max(1 - cell.timer / 280, 0);
+          if (cell.alpha <= 0) {
+            cell.state        = 'idle';
+            cell.timer        = 0;
+            cell.nextActivate = 800 + Math.random() * 3500;
+            cell.liveFor      = 700 + Math.random() * 1400;
+          }
         }
 
-        anyVisible = true;
-        ctx.fillStyle = 'rgba(' + rgb + ',' + alpha + ')';
-        ctx.fillText(cell.char, cell.x + CW / 2, cell.y + CH / 2);
+        if (cell.alpha > 0) {
+          ctx.fillStyle = 'rgba(' + rgb + ',' + (cell.alpha * 0.2) + ')';
+          ctx.fillText(cell.char, cell.x + CW / 2, cell.y + CH / 2);
+        }
       }
 
-      if (anyVisible) {
-        requestAnimationFrame(tick);
-      } else {
-        canvas.style.display = 'none';
-      }
+      requestAnimationFrame(tick);
     }
 
     requestAnimationFrame(tick);
