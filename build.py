@@ -117,7 +117,10 @@ class SiteBuilder:
                 "codehilite": {
                     "css_class": "highlight",
                     "guess_lang": False,
-                }
+                },
+                "toc": {
+                    "toc_depth": "2-2",
+                },
             },
         )
 
