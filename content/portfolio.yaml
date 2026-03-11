@@ -73,6 +73,36 @@ entries:
     category: "AI Systems"
     url: "https://mem0.ai/blog/what-is-ai-agent-memory"
 
+  - title: "Add Persistent Memory to Claude Code with Mem0 (5-Minute Setup)"
+    client: "Mem0"
+    category: "DevTools"
+    url: "https://mem0.ai/blog/claude-code-memory"
+
+  - title: "Long-Term Memory for AI Agents: The What, Why and How"
+    client: "Mem0"
+    category: "AI Systems"
+    url: "https://mem0.ai/blog/long-term-memory-ai-agents"
+
+  - title: "Short-Term Memory for AI Agents: What, Why, and How?"
+    client: "Mem0"
+    category: "AI Systems"
+    url: "https://mem0.ai/blog/short-term-memory-for-ai-agents"
+
+  - title: "What Are Vector Embeddings? A Complete Guide"
+    client: "Mem0"
+    category: "AI Systems"
+    url: "https://mem0.ai/blog/vector-embeddings"
+
+  - title: "Reducing Hallucinations in LLMs with Grounded Memory"
+    client: "Mem0"
+    category: "AI Systems"
+    url: "https://mem0.ai/blog/reducing-hallucinations-llms-with-grounded-memory"
+
+  - title: "What Is Agentic RAG? How It Works and When to Use It"
+    client: "Mem0"
+    category: "AI Systems"
+    url: "https://mem0.ai/blog/what-is-agentic-rag"
+
   # Analytics / Marketing
   - title: "Top Lead Scoring Software for B2B Teams"
     client: "Factors.ai"
@@ -131,3 +161,39 @@ entries:
     client: "LinuxForDevices"
     category: "Developer Infrastructure"
     url: "https://www.linuxfordevices.com/tutorials/ssh-command-in-linux"
+
+  # Firecrawl / AI + Developer Tools
+  - title: "Agent Tools: Building Effective Capabilities for AI Systems"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/agent-tools"
+
+  - title: "Context Layer for AI Agents: Can You Automate Context Feeding into Your Agents?"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/context-layer-for-ai-agents"
+
+  - title: "Best Semantic Search APIs for Building AI Applications in 2026"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/best-semantic-search-apis"
+
+  - title: "Why CLIs Are Better for AI Coding Agents Than IDEs"
+    client: "Firecrawl"
+    category: "DevTools"
+    url: "https://www.firecrawl.dev/blog/why-clis-are-better-for-agents"
+
+  - title: "How to Set Up and Use Firecrawl MCP in Cursor"
+    client: "Firecrawl"
+    category: "DevTools"
+    url: "https://www.firecrawl.dev/blog/firecrawl-mcp-in-cursor"
+
+  - title: "Firecrawl MCP in ChatGPT: Web Scraping and Search Inside Your Conversations"
+    client: "Firecrawl"
+    category: "DevTools"
+    url: "https://www.firecrawl.dev/blog/firecrawl-mcp-chatgpt"
+
+  - title: "Selenium Web Scraping with Python - Setup, Selectors, Waits, and Scaling"
+    client: "Firecrawl"
+    category: "Developer Infrastructure"
+    url: "https://www.firecrawl.dev/blog/selenium-web-scraping"
