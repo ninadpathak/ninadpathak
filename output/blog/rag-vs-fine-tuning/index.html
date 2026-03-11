@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html[data-theme="light"] {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='dark';try{t=localStorage.getItem('np-theme')||'dark';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='light'?'#f8f8f6':'#090909';d.style.colorScheme=t==='light'?'light':'dark';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG vs fine-tuning: how to actually decide | Ninad Pathak</title>
+  <meta name="description" content="RAG and fine-tuning solve different problems. Here is how I decide between them, when to combine them, and where teams waste time choosing the wrong one.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="RAG vs fine-tuning: how to actually decide">
+  <meta property="og:description" content="RAG and fine-tuning solve different problems. Here is how I decide between them, when to combine them, and where teams waste time choosing the wrong one.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/rag-vs-fine-tuning/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/rag-vs-fine-tuning/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "RAG vs fine-tuning: how to actually decide",
+  "description": "RAG and fine-tuning solve different problems. Here is how I decide between them, when to combine them, and where teams waste time choosing the wrong one.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-06",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "RAG vs fine-tuning: how to actually decide",
+      "item": "https://ninadpathak.com/blog/rag-vs-fine-tuning/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">RAG vs fine-tuning: how to actually decide</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 06, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">11 min read</span>
+      </div>
+      <h1 class="post-title">RAG vs fine-tuning: how to actually decide</h1>
+      <p class="lead">RAG and fine-tuning solve different problems. Here is how I decide between them, when to combine them, and where teams waste time choosing the wrong one.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">fine-tuning</span>
+        <span class="tag">llm</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-first-question-is-not-technical">The first question is not technical</a></li>
+<li><a href="#what-rag-is-actually-good-at">What RAG is actually good at</a><ul>
+<li><a href="#1-fresh-knowledge">1. Fresh knowledge</a></li>
+<li><a href="#2-private-knowledge">2. Private knowledge</a></li>
+<li><a href="#3-source-grounding">3. Source grounding</a></li>
+</ul>
+</li>
+<li><a href="#what-fine-tuning-is-actually-good-at">What fine-tuning is actually good at</a><ul>
+<li><a href="#1-consistent-behavior">1. Consistent behavior</a></li>
+<li><a href="#2-lower-prompt-overhead">2. Lower prompt overhead</a></li>
+<li><a href="#3-smaller-model-performance">3. Smaller-model performance</a></li>
+<li><a href="#4-learned-task-behavior">4. Learned task behavior</a></li>
+</ul>
+</li>
+<li><a href="#the-mistake-teams-make">The mistake teams make</a></li>
+<li><a href="#a-better-decision-framework">A better decision framework</a><ul>
+<li><a href="#choose-rag-first-when-the-answer-depends-on-external-knowledge">Choose RAG first when the answer depends on external knowledge</a></li>
+<li><a href="#choose-fine-tuning-first-when-the-answer-depends-on-consistent-task-behavior">Choose fine-tuning first when the answer depends on consistent task behavior</a></li>
+<li><a href="#use-both-when-the-problem-has-two-layers">Use both when the problem has two layers</a></li>
+</ul>
+</li>
+<li><a href="#the-hidden-cost-of-choosing-the-wrong-tool">The hidden cost of choosing the wrong tool</a></li>
+<li><a href="#rag-has-its-own-failure-modes">RAG has its own failure modes</a></li>
+<li><a href="#fine-tuning-has-its-own-failure-modes">Fine-tuning has its own failure modes</a></li>
+<li><a href="#a-practical-way-to-decide-in-one-meeting">A practical way to decide in one meeting</a></li>
+<li><a href="#three-common-scenarios">Three common scenarios</a><ul>
+<li><a href="#customer-support-bot">Customer support bot</a></li>
+<li><a href="#contract-clause-extraction">Contract clause extraction</a></li>
+<li><a href="#internal-engineering-assistant">Internal engineering assistant</a></li>
+</ul>
+</li>
+<li><a href="#my-actual-rule">My actual rule</a></li>
+<li><a href="#frequently-asked-questions">Frequently asked questions</a><ul>
+<li><a href="#should-i-use-rag-or-fine-tuning-for-a-support-chatbot">Should I use RAG or fine-tuning for a support chatbot?</a></li>
+<li><a href="#can-fine-tuning-replace-rag">Can fine-tuning replace RAG?</a></li>
+<li><a href="#can-rag-replace-fine-tuning">Can RAG replace fine-tuning?</a></li>
+<li><a href="#when-should-i-combine-them">When should I combine them?</a></li>
+<li><a href="#what-should-i-build-first-if-i-am-unsure">What should I build first if I am unsure?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>The RAG versus fine-tuning debate reminds me of an older systems rule: keep changing data out of the part that is hardest to update. Teams still get this wrong with LLMs. They try to decide between retrieval and training before they have named the failure clearly.</p>
+<p>I think that framing causes half the confusion. RAG and fine-tuning are not rival features sitting on the same shelf. They solve different failure modes. If the model lacks knowledge it cannot see at inference time, retrieval is usually the answer. If the model sees the right context and still behaves the wrong way, I start thinking about fine-tuning.</p>
+<p>That is the real split. One fixes missing context. The other fixes behavior.</p>
+<p>Here is the short version.</p>
+<blockquote>
+<p>Use RAG when the problem is knowledge freshness, private data, or source grounding. Use fine-tuning when the problem is response behavior, format consistency, latency, or cost at scale. If the system needs both current knowledge and consistent behavior, combine them.</p>
+</blockquote>
+<h2 id="the-first-question-is-not-technical">The first question is not technical</h2>
+<p>Before I think about embeddings, training files, or eval sets, I ask one blunt question:</p>
+<p><strong>What exactly is failing in the current system?</strong></p>
+<p>That sounds basic, but it forces the decision into the right shape.</p>
+<p>If the model gives outdated answers, ignores internal documentation, or invents facts that should have come from a source document, the problem is almost always missing context.</p>
+<p>If the model already has the right context but keeps using the wrong tone, the wrong structure, the wrong extraction logic, or the wrong decision policy, the problem is usually behavior.</p>
+<p>Once you look at it that way, the choice gets much easier.</p>
+<table>
+<thead>
+<tr>
+<th>Failure mode</th>
+<th>Start with</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The model does not know current or private facts</td>
+<td>RAG</td>
+<td>The knowledge needs to be injected at runtime</td>
+</tr>
+<tr>
+<td>The model sees the right facts but answers inconsistently</td>
+<td>Fine-tuning</td>
+<td>The task behavior needs to be learned</td>
+</tr>
+<tr>
+<td>The answer must cite sources</td>
+<td>RAG</td>
+<td>Retrieval gives the model something concrete to ground on</td>
+</tr>
+<tr>
+<td>The output format keeps drifting</td>
+<td>Fine-tuning</td>
+<td>The model needs repeated examples of the desired behavior</td>
+</tr>
+<tr>
+<td>Prompts are huge and expensive</td>
+<td>Fine-tuning</td>
+<td>A trained model can replace some prompt overhead</td>
+</tr>
+<tr>
+<td>The application needs both current facts and stable behavior</td>
+<td>Both</td>
+<td>They solve different parts of the stack</td>
+</tr>
+</tbody>
+</table>
+<p>That table is the decision rule I keep coming back to.</p>
+<h2 id="what-rag-is-actually-good-at">What RAG is actually good at</h2>
+<p>OpenAI’s explanation of <a href="https://help.openai.com/en/articles/8868588-retrieval-augmented-generation-rag-and-semantic-search-for-gpts%23.pls">retrieval-augmented generation</a> is simple and correct. RAG improves answers by injecting external context into the prompt at runtime instead of relying only on the model’s pre-trained knowledge.</p>
+<p>That makes it a good fit for three jobs.</p>
+<h3 id="1-fresh-knowledge">1. Fresh knowledge</h3>
+<p>If the underlying information changes, I do not want that knowledge baked into weights. Product docs change. Policies change. Pricing changes. Internal runbooks change. Fine-tuning on data that will drift is a maintenance problem disguised as intelligence.</p>
+<p>RAG is better here because it lets the model pull from the latest source material without retraining.</p>
+<h3 id="2-private-knowledge">2. Private knowledge</h3>
+<p>A base model may know general software concepts. It does not know your incident history, customer contracts, support notes, or internal architecture docs. RAG is the natural way to expose that information at inference time.</p>
+<h3 id="3-source-grounding">3. Source grounding</h3>
+<p>When the answer needs to be anchored in a document, retrieval gives the model something concrete to cite or summarize. That matters in support systems, internal search, compliance workflows, and document-heavy assistants.</p>
+<p>RAG is strongest when the problem is not that the model is stupid. The problem is that the model cannot see the material it should answer from.</p>
+<h2 id="what-fine-tuning-is-actually-good-at">What fine-tuning is actually good at</h2>
+<p>OpenAI’s <a href="https://developers.openai.com/api/docs/guides/model-optimization">model optimization guide</a> makes a useful distinction. Fine-tuning helps when you need a model to perform a task more reliably, use shorter prompts, or push a smaller model toward a very specific job.</p>
+<p>That maps to a different set of problems.</p>
+<h3 id="1-consistent-behavior">1. Consistent behavior</h3>
+<p>If you need the model to extract fields in a precise format, follow a strict response style, or apply a decision rubric the same way every time, fine-tuning starts to make sense.</p>
+<p>This is where RAG gets overprescribed. Retrieval can give the model the right information, but it does not force the model to use that information in a consistent way.</p>
+<h3 id="2-lower-prompt-overhead">2. Lower prompt overhead</h3>
+<p>OpenAI’s docs note that fine-tuning can let you use shorter prompts with fewer examples and less context, which can reduce both latency and cost. That matters once a system is stable enough that the same instructions and examples are being repeated on every call.</p>
+<h3 id="3-smaller-model-performance">3. Smaller-model performance</h3>
+<p>A fine-tuned smaller model can sometimes handle a narrow task well enough to replace a larger general model. That changes the economics of production systems in a real way.</p>
+<h3 id="4-learned-task-behavior">4. Learned task behavior</h3>
+<p>There are jobs where the model does not need more knowledge. It needs better judgment within a narrow frame. Classification, extraction, rewriting into a strict template, and policy-driven response generation all fit that pattern.</p>
+<p>Fine-tuning is strongest when the information is already present or easy to supply, but the behavior is still unreliable.</p>
+<h2 id="the-mistake-teams-make">The mistake teams make</h2>
+<p>The recurring mistake is treating RAG like a universal intelligence upgrade.</p>
+<p>It is not.</p>
+<p>RAG is a retrieval system plus a prompt assembly system. If the model sees the right chunks and still reasons badly, retrieval did its part. The failure is somewhere else.</p>
+<p>I think this is the point many articles soften too much. Engineers reach for RAG because it feels reversible. It is easier to add a retriever than to commit to training data, evals, and a model optimization loop. That does not make retrieval the right answer.</p>
+<p>A badly behaved model with a perfect retriever is still a badly behaved model.</p>
+<p>The reverse mistake also happens. Teams jump to fine-tuning because they want the model to know internal facts. That is almost always the wrong reason to fine-tune. If the facts change, the model drifts out of date and the retraining burden never really stops.</p>
+<h2 id="a-better-decision-framework">A better decision framework</h2>
+<p>This is the framework I would use before spending engineering time.</p>
+<h3 id="choose-rag-first-when-the-answer-depends-on-external-knowledge">Choose RAG first when the answer depends on external knowledge</h3>
+<p>Start with retrieval when most of these are true:</p>
+<ul>
+<li>The source material changes often.</li>
+<li>The model needs access to private or internal documents.</li>
+<li>The answer should be grounded in a source.</li>
+<li>You want updates to happen by changing data, not retraining.</li>
+<li>The main risk is factual drift, not behavioral drift.</li>
+</ul>
+<h3 id="choose-fine-tuning-first-when-the-answer-depends-on-consistent-task-behavior">Choose fine-tuning first when the answer depends on consistent task behavior</h3>
+<p>Start with fine-tuning when most of these are true:</p>
+<ul>
+<li>The model already has the right context.</li>
+<li>Output structure must be stable.</li>
+<li>The task repeats at high volume.</li>
+<li>Prompt size is becoming expensive.</li>
+<li>A smaller specialized model could replace a larger general one.</li>
+<li>The main risk is inconsistency, not missing knowledge.</li>
+</ul>
+<h3 id="use-both-when-the-problem-has-two-layers">Use both when the problem has two layers</h3>
+<p>A lot of production systems end up here.</p>
+<p>OpenAI’s accuracy guidance makes this explicit in practice. RAG helps with in-context knowledge. Fine-tuning helps with learned task behavior. Those techniques stack.</p>
+<p>A support assistant is a clean example.</p>
+<ul>
+<li>RAG pulls current help-center articles, release notes, and policy docs.</li>
+<li>Fine-tuning teaches the model how to answer in the company’s preferred structure, escalation style, and tone.</li>
+</ul>
+<p>That is not indecision. That is a clean architecture.</p>
+<h2 id="the-hidden-cost-of-choosing-the-wrong-tool">The hidden cost of choosing the wrong tool</h2>
+<p>The cost is not just model quality. It is iteration speed.</p>
+<p>If you use RAG where fine-tuning is needed, you end up inflating prompts, adding more examples, retrieving more documents, and hoping the model eventually behaves. The system gets slower and more expensive while staying unstable.</p>
+<p>If you use fine-tuning where RAG is needed, you end up retraining to encode knowledge that should have lived in a retriever. The model gets stale the moment the source documents change.</p>
+<p>OpenAI’s optimization docs hint at this in a useful way. Once you add RAG, you now have retrieval quality and model behavior to tune. Once you add fine-tuning, you have training and test data to maintain. Both increase complexity. That is exactly why I do not like treating them as default upgrades.</p>
+<p>The right goal is not sophistication. The right goal is solving the failure mode with the smallest system that works.</p>
+<h2 id="rag-has-its-own-failure-modes">RAG has its own failure modes</h2>
+<p>Teams talk about RAG as if the hard part is choosing the vector database. It usually is not.</p>
+<p>The hard parts are:</p>
+<ul>
+<li>chunking documents in a way that preserves meaning</li>
+<li>retrieving the right context instead of vaguely related context</li>
+<li>deciding how much context to inject</li>
+<li>preventing stale or low-quality source documents from polluting answers</li>
+<li>evaluating whether the model actually used the retrieved material correctly</li>
+</ul>
+<p>That is why I do not treat RAG as the cheap path. It is easier to start than fine-tuning, but serious retrieval systems still need evaluation work.</p>
+<h2 id="fine-tuning-has-its-own-failure-modes">Fine-tuning has its own failure modes</h2>
+<p>Fine-tuning also gets described too cleanly.</p>
+<p>The OpenAI <a href="https://developers.openai.com/api/docs/guides/fine-tuning-best-practices">fine-tuning best practices</a> page makes one point that matters a lot in practice: keep the prompts and instructions that already work and include them in the training examples. The model still needs a coherent framing for the task.</p>
+<p>The real failure modes show up elsewhere:</p>
+<ul>
+<li>low-quality training examples that teach the wrong thing</li>
+<li>overfitting to narrow examples</li>
+<li>outdated training data that turns into stale behavior</li>
+<li>weak evals that make improvement look better than it is</li>
+<li>using fine-tuning to compensate for a retrieval problem</li>
+</ul>
+<p>Fine-tuning does not remove the need for system design. It makes the behavior layer more specialized. That is useful, but only if the task is stable enough to justify the effort.</p>
+<h2 id="a-practical-way-to-decide-in-one-meeting">A practical way to decide in one meeting</h2>
+<p>If I had to make the call quickly, I would ask the team these questions in order:</p>
+<ol>
+<li><strong>Does the answer depend on information the base model cannot know or cannot keep current?</strong></li>
+<li>If yes, start with RAG.</li>
+<li><strong>If the right context is present, does the model still behave badly?</strong></li>
+<li>If yes, start evaluating fine-tuning.</li>
+<li><strong>Is the prompt carrying a lot of repeated instructions and examples on every call?</strong></li>
+<li>If yes, fine-tuning may improve cost and latency.</li>
+<li><strong>Do we need the answer tied to evidence from source documents?</strong></li>
+<li>If yes, retrieval should stay in the system.</li>
+<li><strong>Is the job narrow enough that a smaller specialized model could handle it?</strong></li>
+<li>If yes, fine-tuning becomes more attractive.</li>
+</ol>
+<p>That sequence gets to the point faster than a generic architecture debate.</p>
+<h2 id="three-common-scenarios">Three common scenarios</h2>
+<h3 id="customer-support-bot">Customer support bot</h3>
+<p>Start with RAG.</p>
+<p>Support content changes. Policies change. Release notes matter. The assistant needs access to current knowledge and ideally should ground answers in source material.</p>
+<p>Add fine-tuning later only if the assistant still struggles with tone, escalation rules, or output format after retrieval is working.</p>
+<h3 id="contract-clause-extraction">Contract clause extraction</h3>
+<p>Start with fine-tuning or at least a strong prompt-and-evals loop. Maybe add retrieval if the model needs external reference material.</p>
+<p>The main challenge here is usually consistent extraction behavior, not access to changing knowledge.</p>
+<h3 id="internal-engineering-assistant">Internal engineering assistant</h3>
+<p>Usually both.</p>
+<p>RAG brings in current runbooks, internal docs, codebase summaries, and incident notes. Fine-tuning may help if the assistant needs a stable house style for summaries, ticket triage, or remediation steps.</p>
+<h2 id="my-actual-rule">My actual rule</h2>
+<p>My rule is simple.</p>
+<p>If the system is wrong because it cannot see the right information, I fix visibility first.</p>
+<p>If the system is wrong because it sees the right information and still responds badly, I fix behavior.</p>
+<p>RAG is a visibility tool. Fine-tuning is a behavior tool.</p>
+<p>That is the cleanest way I know to decide.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="should-i-use-rag-or-fine-tuning-for-a-support-chatbot">Should I use RAG or fine-tuning for a support chatbot?</h3>
+<p>I would start with RAG. Support content changes too often to bake into model weights. Fine-tuning can come later if the model still needs stronger behavior around tone, escalation, or formatting.</p>
+<h3 id="can-fine-tuning-replace-rag">Can fine-tuning replace RAG?</h3>
+<p>Not if the core problem is changing or private knowledge. Fine-tuning can teach behavior. It is a poor substitute for a system that needs current documents at inference time.</p>
+<h3 id="can-rag-replace-fine-tuning">Can RAG replace fine-tuning?</h3>
+<p>Not when the model already sees the right context and still behaves inconsistently. Retrieval does not train the model to follow a task reliably.</p>
+<h3 id="when-should-i-combine-them">When should I combine them?</h3>
+<p>Use both when the system needs current knowledge and stable behavior. That is common in production assistants that answer from live documents but also need strict formatting or policy-driven output.</p>
+<h3 id="what-should-i-build-first-if-i-am-unsure">What should I build first if I am unsure?</h3>
+<p>I would start with evals and a strong prompt baseline, then add the smallest layer that addresses the observed failure. If the failure is knowledge access, add retrieval. If the failure is behavior with the right context already present, consider fine-tuning.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/best-llms-for-coding/" class="related-card">
+        <div class="related-card-date">2026-03-11</div>
+        <div class="related-card-title">Best LLMs for coding in 2026 (it's not what benchmarks say)</div>
+      </a>
+      <a href="/blog/agent-harnesses/" class="related-card">
+        <div class="related-card-date">2026-03-10</div>
+        <div class="related-card-title">Agent harnesses: the infrastructure layer your LLM agent actually needs</div>
+      </a>
+      <a href="/blog/model-context-protocol-explained/" class="related-card">
+        <div class="related-card-date">2026-03-09</div>
+        <div class="related-card-title">The Model Context Protocol explained: why MCP matters architecturally</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">ninad pathak</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/work/"      class="footer-link">Work</a>
+        <a href="/portfolio/" class="footer-link">Portfolio</a>
+        <a href="/blog/"      class="footer-link">Writing</a>
+        <a href="/about/"     class="footer-link">About</a>
+        <a href="/contact/"   class="footer-link">Contact</a>
+        <a href="/feed.xml"   class="footer-link">RSS</a>
+      </nav>
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

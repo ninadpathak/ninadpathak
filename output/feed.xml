@@ -29,5 +29,17 @@
       <description>TTFT is the latency metric that matters most for chat, copilots, and interactive AI apps. Here is what time to first token measures and how to reduce it without optimizing the wrong thing.</description>
       <pubDate>Mar 08, 2026</pubDate>
     </item>
+    <item>
+      <title>Prompt caching: what it is and when the math works in your favor</title>
+      <link>https://ninadpathak.com/blog/prompt-caching-what-it-is-and-when-the-math-works/</link>
+      <description>Prompt caching can cut latency and input cost, but only when your prompts share a stable prefix often enough to make cache reuse real. Here is how I think about it in production.</description>
+      <pubDate>Mar 07, 2026</pubDate>
+    </item>
+    <item>
+      <title>RAG vs fine-tuning: how to actually decide</title>
+      <link>https://ninadpathak.com/blog/rag-vs-fine-tuning/</link>
+      <description>RAG and fine-tuning solve different problems. Here is how I decide between them, when to combine them, and where teams waste time choosing the wrong one.</description>
+      <pubDate>Mar 06, 2026</pubDate>
+    </item>
   </channel>
 </rss>
