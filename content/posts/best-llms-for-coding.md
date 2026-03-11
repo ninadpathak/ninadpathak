@@ -35,7 +35,10 @@ As of early 2026, the top performers cluster tightly:
 - DeepSeek V3.2-Exp: ~67.8%
 - DeepSeek V3.1: ~66%
 
-![SWE-bench leaderboard showing top coding models and scores](/static/images/posts/best-llms-for-coding/swebench-leaderboard.png)
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/swebench-leaderboard.png" alt="SWE-bench leaderboard showing top coding models and scores">
+  <figcaption>Top SWE-bench Verified performers as shown on the official leaderboard.</figcaption>
+</figure>
 
 For teams doing rigorous evaluation, [SWE-bench Pro](https://www.morphllm.com/swe-bench-pro) is worth watching. It uses 1,865 tasks across 41 actively maintained repositories in Python, Go, TypeScript, and JavaScript. Scores drop substantially relative to Verified -- and the gap between a model's SWE-bench Verified number and its SWE-bench Pro number is a better indicator of real generalization than either score alone. [Epoch AI's benchmark tracker](https://epoch.ai/benchmarks/swe-bench-verified) keeps a maintained history of verified results if you want to track how specific models have moved over time.
 
@@ -43,7 +46,10 @@ For teams doing rigorous evaluation, [SWE-bench Pro](https://www.morphllm.com/sw
 
 If you are building an AI agent that writes, edits, and reviews code with minimal human intervention, Claude is where the evidence points. The SWE-bench Verified score of ~80.8% is competitive, but the more interesting signal comes from what companies actually report from production use. Replit noted a 0% error rate on their internal code editing benchmark with Claude, compared to 9% with the prior version. That kind of internal measurement -- from a company whose core product depends on code quality -- carries more weight with me than a standardized test.
 
-![Anthropic API page showing Claude model overview](/static/images/posts/best-llms-for-coding/anthropic-api-claude-opus.png)
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/anthropic-api-claude-opus.png" alt="Anthropic API page showing Claude model overview">
+  <figcaption>Anthropic's API page highlighting Claude's model lineup and capabilities.</figcaption>
+</figure>
 
 Claude also handles long-context reasoning better than most alternatives. Running a 200,000-token context window across an entire codebase and then making targeted, coherent edits is a real capability that matters for agent workflows. I covered the infrastructure layer around this kind of reasoning in [my earlier piece on agent harnesses](/blog/agent-harnesses/) -- the model is only one component of what makes an agent reliable. The execution loop, state manager, and context assembly matter as much as which model you call.
 
@@ -55,7 +61,10 @@ If your team writes algorithms -- competitive programming, quantitative research
 
 Gemini's Grandmaster-tier rating on Codeforces and a 2,439 LiveCodeBench Elo are the relevant numbers here, not SWE-bench. Competitive programming problems are different from real-world software engineering. They require dense mathematical reasoning, pattern recognition across problem types, and the ability to produce correct code under constraint. Gemini's architecture has consistently outperformed Claude and GPT models on this class of problem.
 
-![Gemini API models page showing Gemini model details](/static/images/posts/best-llms-for-coding/gemini-models-page.png)
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/gemini-models-page.png" alt="Gemini API models page showing Gemini model details">
+  <figcaption>Google's Gemini models page showing the available Gemini API options.</figcaption>
+</figure>
 
 The 1-million-token context window is also genuinely useful for processing large codebases. I have seen teams at data infrastructure companies use it specifically for this -- loading an entire repository into context before asking the model to trace a bug. It works better than most people expect, though context length and context utilization are not the same thing, and Gemini at 800k tokens is not as sharp as Gemini at 50k tokens.
 
@@ -65,7 +74,10 @@ DeepSeek V3 changed the economics of coding LLMs when it was released. The [tech
 
 For production pipelines that generate code completions, run code review, or assist with documentation at scale, DeepSeek V3.2 is a serious option. I have seen teams in the DevTools space use it for internal tooling where the cost of Claude at full volume would have been prohibitive. The quality gap is real but often acceptable for specific, well-scoped tasks.
 
-![DeepSeek pricing page showing model pricing details](/static/images/posts/best-llms-for-coding/deepseek-pricing.png)
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/deepseek-pricing.png" alt="DeepSeek pricing page showing model pricing details">
+  <figcaption>DeepSeek's pricing page, useful for comparing cost-sensitive coding workloads.</figcaption>
+</figure>
 
 The open-weight availability matters too. Running DeepSeek on your own infrastructure eliminates API dependency, gives you data control, and changes the economics again. [DeepSeek Coder](https://deepseekcoder.github.io/) is the purpose-built variant worth evaluating for pure coding tasks if you want to run it locally.
 
@@ -73,7 +85,10 @@ The open-weight availability matters too. Running DeepSeek on your own infrastru
 
 For developers who want fast, reliable autocomplete and code suggestions inside their editor, the practical answer is still the GPT-5-based ecosystem -- not because the model is categorically better, but because the tooling is. GitHub Copilot, Cursor, and Windsurf all have mature integrations, predictable latency, and feature sets built around how developers actually work.
 
-![GitHub Copilot feature page showing IDE integration overview](/static/images/posts/best-llms-for-coding/github-copilot.png)
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/github-copilot.png" alt="GitHub Copilot feature page showing IDE integration overview">
+  <figcaption>GitHub Copilot's product page emphasizing IDE-native coding assistance.</figcaption>
+</figure>
 
 Autocomplete is a different product than an agentic coding assistant. The benchmark numbers are less relevant when the model is making 200 small suggestions per hour and the developer is accepting or rejecting each one in under a second. What matters there is latency, suggestion accuracy on short completions, and how well the model reads the surrounding file context. The GPT-5 ecosystem is optimized for this in a way that frontier research models are not.
 

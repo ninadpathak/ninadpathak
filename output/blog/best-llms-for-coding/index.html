@@ -222,26 +222,46 @@
 <li>DeepSeek V3.2-Exp: ~67.8%</li>
 <li>DeepSeek V3.1: ~66%</li>
 </ul>
-<p><img alt="SWE-bench leaderboard showing top coding models and scores" src="/static/images/posts/best-llms-for-coding/swebench-leaderboard.png" /></p>
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/swebench-leaderboard.png" alt="SWE-bench leaderboard showing top coding models and scores">
+  <figcaption>Top SWE-bench Verified performers as shown on the official leaderboard.</figcaption>
+</figure>
+
 <p>For teams doing rigorous evaluation, <a href="https://www.morphllm.com/swe-bench-pro">SWE-bench Pro</a> is worth watching. It uses 1,865 tasks across 41 actively maintained repositories in Python, Go, TypeScript, and JavaScript. Scores drop substantially relative to Verified -- and the gap between a model's SWE-bench Verified number and its SWE-bench Pro number is a better indicator of real generalization than either score alone. <a href="https://epoch.ai/benchmarks/swe-bench-verified">Epoch AI's benchmark tracker</a> keeps a maintained history of verified results if you want to track how specific models have moved over time.</p>
 <h2 id="for-agentic-and-autonomous-coding-claude-opus-46">For agentic and autonomous coding: Claude Opus 4.6</h2>
 <p>If you are building an AI agent that writes, edits, and reviews code with minimal human intervention, Claude is where the evidence points. The SWE-bench Verified score of ~80.8% is competitive, but the more interesting signal comes from what companies actually report from production use. Replit noted a 0% error rate on their internal code editing benchmark with Claude, compared to 9% with the prior version. That kind of internal measurement -- from a company whose core product depends on code quality -- carries more weight with me than a standardized test.</p>
-<p><img alt="Anthropic API page showing Claude model overview" src="/static/images/posts/best-llms-for-coding/anthropic-api-claude-opus.png" /></p>
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/anthropic-api-claude-opus.png" alt="Anthropic API page showing Claude model overview">
+  <figcaption>Anthropic's API page highlighting Claude's model lineup and capabilities.</figcaption>
+</figure>
+
 <p>Claude also handles long-context reasoning better than most alternatives. Running a 200,000-token context window across an entire codebase and then making targeted, coherent edits is a real capability that matters for agent workflows. I covered the infrastructure layer around this kind of reasoning in <a href="/blog/agent-harnesses/">my earlier piece on agent harnesses</a> -- the model is only one component of what makes an agent reliable. The execution loop, state manager, and context assembly matter as much as which model you call.</p>
 <p>The honest limitation: Claude Opus 4.6 is expensive. For high-volume coding tasks or teams doing continuous code review at scale, the cost-to-performance ratio pushes you toward Sonnet 4.5, which sits at 77.2% on SWE-bench and is meaningfully cheaper per million tokens.</p>
 <h2 id="for-competitive-programming-and-algorithmic-work-gemini-3-pro">For competitive programming and algorithmic work: Gemini 3 Pro</h2>
 <p>If your team writes algorithms -- competitive programming, quantitative research, anything where mathematical reasoning is central to code correctness -- Gemini 3 Pro is where I would start.</p>
 <p>Gemini's Grandmaster-tier rating on Codeforces and a 2,439 LiveCodeBench Elo are the relevant numbers here, not SWE-bench. Competitive programming problems are different from real-world software engineering. They require dense mathematical reasoning, pattern recognition across problem types, and the ability to produce correct code under constraint. Gemini's architecture has consistently outperformed Claude and GPT models on this class of problem.</p>
-<p><img alt="Gemini API models page showing Gemini model details" src="/static/images/posts/best-llms-for-coding/gemini-models-page.png" /></p>
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/gemini-models-page.png" alt="Gemini API models page showing Gemini model details">
+  <figcaption>Google's Gemini models page showing the available Gemini API options.</figcaption>
+</figure>
+
 <p>The 1-million-token context window is also genuinely useful for processing large codebases. I have seen teams at data infrastructure companies use it specifically for this -- loading an entire repository into context before asking the model to trace a bug. It works better than most people expect, though context length and context utilization are not the same thing, and Gemini at 800k tokens is not as sharp as Gemini at 50k tokens.</p>
 <h2 id="for-cost-sensitive-production-use-deepseek-v32">For cost-sensitive production use: DeepSeek V3.2</h2>
 <p>DeepSeek V3 changed the economics of coding LLMs when it was released. The <a href="https://arxiv.org/pdf/2412.19437">technical report</a> describes a 671B parameter mixture-of-experts architecture that achieves frontier-competitive performance at open-weight costs. V3.2-Exp's 67.8% SWE-bench score is lower than Claude Opus, but the cost differential is not marginal -- it is an order of magnitude.</p>
 <p>For production pipelines that generate code completions, run code review, or assist with documentation at scale, DeepSeek V3.2 is a serious option. I have seen teams in the DevTools space use it for internal tooling where the cost of Claude at full volume would have been prohibitive. The quality gap is real but often acceptable for specific, well-scoped tasks.</p>
-<p><img alt="DeepSeek pricing page showing model pricing details" src="/static/images/posts/best-llms-for-coding/deepseek-pricing.png" /></p>
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/deepseek-pricing.png" alt="DeepSeek pricing page showing model pricing details">
+  <figcaption>DeepSeek's pricing page, useful for comparing cost-sensitive coding workloads.</figcaption>
+</figure>
+
 <p>The open-weight availability matters too. Running DeepSeek on your own infrastructure eliminates API dependency, gives you data control, and changes the economics again. <a href="https://deepseekcoder.github.io/">DeepSeek Coder</a> is the purpose-built variant worth evaluating for pure coding tasks if you want to run it locally.</p>
 <h2 id="for-everyday-ide-autocomplete-the-gpt-5-ecosystem">For everyday IDE autocomplete: the GPT-5 ecosystem</h2>
 <p>For developers who want fast, reliable autocomplete and code suggestions inside their editor, the practical answer is still the GPT-5-based ecosystem -- not because the model is categorically better, but because the tooling is. GitHub Copilot, Cursor, and Windsurf all have mature integrations, predictable latency, and feature sets built around how developers actually work.</p>
-<p><img alt="GitHub Copilot feature page showing IDE integration overview" src="/static/images/posts/best-llms-for-coding/github-copilot.png" /></p>
+<figure class="post-figure">
+  <img src="/static/images/posts/best-llms-for-coding/github-copilot.png" alt="GitHub Copilot feature page showing IDE integration overview">
+  <figcaption>GitHub Copilot's product page emphasizing IDE-native coding assistance.</figcaption>
+</figure>
+
 <p>Autocomplete is a different product than an agentic coding assistant. The benchmark numbers are less relevant when the model is making 200 small suggestions per hour and the developer is accepting or rejecting each one in under a second. What matters there is latency, suggestion accuracy on short completions, and how well the model reads the surrounding file context. The GPT-5 ecosystem is optimized for this in a way that frontier research models are not.</p>
 <p>One thing worth knowing: if you work with a DevTools company writing content about AI coding tools, this distinction between autocomplete performance and agentic coding performance is one of the most consistently misunderstood things I encounter. The two serve different workflows and should be evaluated differently. It comes up often in the technical writing briefs I get from engineering teams -- <a href="/work">my work page</a> has examples of how I have explained this kind of nuance for technical audiences.</p>
 <h2 id="the-open-source-angle">The open-source angle</h2>
