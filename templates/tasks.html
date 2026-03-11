@@ -28,9 +28,7 @@
         <span class="tasks-summary-num">{{ total_count }}</span>
         <span class="tasks-summary-label">Total planned</span>
       </div>
-      <div class="tasks-progress-bar-wrap">
-        <div class="tasks-progress-bar" style="width: {{ progress_pct }}%"></div>
-      </div>
+      <progress class="tasks-progress-bar-wrap" value="{{ progress_pct }}" max="100" aria-label="Content queue progress"></progress>
     </div>
 
     {% for category in categories %}

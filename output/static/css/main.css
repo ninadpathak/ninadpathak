@@ -61,6 +61,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   transition: background var(--t), color var(--t);
   overflow-x: hidden;
+  overflow-wrap: break-word;
 }
 
 img { max-width: 100%; display: block; }
@@ -75,12 +76,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 0 1.5rem;
+  width: 100%;
 }
 
 .prose-container {
   max-width: var(--prose-w);
   margin: 0 auto;
   padding: 0 1.5rem;
+  width: 100%;
 }
 
 /* =====================================================================
@@ -91,6 +94,7 @@ h1, h2, h3, h4 {
   letter-spacing: -0.025em;
   line-height: 1.15;
   color: var(--text-1);
+  overflow-wrap: anywhere;
 }
 
 h1 { font-size: clamp(2.75rem, 6vw, 4.5rem); }
@@ -294,14 +298,18 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-size: 0.9375rem;
   font-weight: 500;
   padding: 0.75rem 1.5rem;
   transition: all var(--t);
   line-height: 1;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
 }
+
+.btn-block { width: 100%; }
 
 .btn-primary {
   background: var(--accent);
@@ -327,6 +335,8 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   transition: gap var(--t);
 }
 .arrow-link:hover { gap: 0.6rem; }
+
+.arrow-link-block { display: flex; }
 
 /* =====================================================================
    HERO
@@ -454,8 +464,10 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .stat-cell {
   padding: 2.5rem 2rem;
   border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
-.stat-cell:first-child { padding-left: 0; }
 .stat-cell:last-child  { border-right: none; }
 
 .stat-num {
@@ -541,6 +553,26 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 3rem;
+}
+
+.section-block {
+  padding: 5rem 0;
+}
+
+.section-block-top-border {
+  border-top: 1px solid var(--border);
+}
+
+.section-block-bottom-tight {
+  padding-bottom: 5rem;
+}
+
+.section-block-muted {
+  background: var(--bg-1);
+}
+
+.section-label {
+  margin-bottom: 1rem;
 }
 
 .cases-grid {
@@ -665,7 +697,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 
 .post-row-date  { font-family: var(--mono); font-size: 0.8125rem; color: var(--text-3); white-space: nowrap; }
 .post-row-title { font-size: 1rem; font-weight: 500; color: var(--text-1); transition: color var(--t); }
-.post-row-tags  { display: flex; gap: 0.5rem; justify-content: flex-end; }
+.post-row-tags  { display: flex; gap: 0.5rem; justify-content: flex-end; flex-wrap: wrap; min-width: 0; }
 
 .tag {
   font-family: var(--mono);
@@ -685,6 +717,10 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   padding: 6rem 0;
 }
 
+.cta-band-top-border {
+  border-top: 1px solid var(--border);
+}
+
 .cta-inner {
   display: flex;
   align-items: center;
@@ -698,6 +734,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .cta-inner h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); margin-bottom: 0.5rem; }
 .cta-inner p  { font-size: 1rem; max-width: 45ch; }
 .cta-actions  { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
+.cta-title-compact { font-size: 1.5rem; margin-bottom: 0.5rem; }
 
 /* =====================================================================
    FOOTER
@@ -721,7 +758,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   color: var(--text-3);
 }
 
-.footer-links { display: flex; gap: 2rem; }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
 .footer-link  { font-size: 0.8125rem; color: var(--text-3); transition: color var(--t); }
 .footer-link:hover { color: var(--text-2); }
 
@@ -754,6 +791,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
   list-style: none;
   padding: 0 0 1.5rem;
   margin: 0;
@@ -858,6 +896,13 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .blog-row-meta { display: flex; align-items: center; gap: 1rem; }
 .read-time { font-family: var(--mono); font-size: 0.75rem; color: var(--text-3); }
 
+.empty-state {
+  padding: 4rem 0;
+  color: var(--text-3);
+  font-family: var(--mono);
+  font-size: 0.875rem;
+}
+
 /* =====================================================================
    POST (SINGLE)
    ===================================================================== */
@@ -903,6 +948,37 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   background: var(--bg-1);
 }
 .post-content blockquote p { margin: 0; font-style: italic; }
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.9375rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.post-content thead tr {
+  background: var(--bg-2);
+}
+.post-content th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-1);
+  border-bottom: 2px solid var(--border-2);
+  border-right: 1px solid var(--border);
+}
+.post-content th:last-child { border-right: none; }
+.post-content td {
+  padding: 0.7rem 1rem;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.post-content td:last-child { border-right: none; }
+.post-content tbody tr:last-child td { border-bottom: none; }
+.post-content tbody tr:hover { background: var(--bg-1); }
 
 .post-content .highlight { margin-bottom: 1.25rem; position: relative; }
 
@@ -1029,6 +1105,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .case-body p  { margin-bottom: 1.25rem; color: var(--text-2); }
 .case-body ul { margin-bottom: 1.25rem; padding-left: 1.5rem; list-style: disc; }
 .case-body li { color: var(--text-2); margin-bottom: 0.4rem; }
+.case-body-prose { max-width: var(--prose-w); }
 
 /* =====================================================================
    PORTFOLIO
@@ -1077,6 +1154,14 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .p-item-title  { font-size: 0.9375rem; font-weight: 500; color: var(--text-1); line-height: 1.4; margin-bottom: 0.75rem; }
 .p-item-cat    { font-family: var(--mono); font-size: 0.6875rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
 .p-item[hidden] { display: none; }
+.p-item-title,
+.contact-method-val,
+.footer-link,
+.post-row-title,
+.blog-row-title,
+.tcard-role {
+  overflow-wrap: anywhere;
+}
 
 /* =====================================================================
    ABOUT
@@ -1092,6 +1177,14 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   position: sticky;
   top: calc(var(--nav-h) + 2rem);
   height: fit-content;
+}
+
+.about-sidebar-links {
+  margin-top: 2rem;
+}
+
+.about-sidebar-links .arrow-link + .arrow-link {
+  margin-top: 0.75rem;
 }
 
 .about-sidebar-name { font-family: var(--mono); font-size: 0.875rem; color: var(--text-3); margin-bottom: 2rem; }
@@ -1121,11 +1214,21 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .contact-method-label { font-family: var(--mono); font-size: 0.6875rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
 .contact-method-val   { font-size: 1rem; font-weight: 500; color: var(--text-1); transition: color var(--t); }
 .contact-method-val:hover { color: var(--accent); }
+.contact-method-val-static { cursor: default; }
+.contact-method-val-static:hover { color: var(--text-1); }
 
 .contact-booking-box {
   padding: 2rem;
   border: 1px solid var(--border);
   background: var(--bg-1);
+}
+.contact-secondary-box {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-top: none;
+}
+.contact-subsection-label {
+  margin-bottom: 1rem;
 }
 .contact-booking-label { font-family: var(--mono); font-size: 0.6875rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
 .contact-booking-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
@@ -1175,18 +1278,19 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 }
 
 .tasks-progress-bar-wrap {
+  appearance: none;
+  -webkit-appearance: none;
   flex: 1;
   min-width: 120px;
   height: 3px;
   background: var(--border-2);
   margin-left: auto;
+  border: none;
 }
 
-.tasks-progress-bar {
-  height: 100%;
-  background: var(--accent);
-  transition: width 0.4s var(--ease);
-}
+.tasks-progress-bar-wrap::-webkit-progress-bar { background: var(--border-2); }
+.tasks-progress-bar-wrap::-webkit-progress-value { background: var(--accent); }
+.tasks-progress-bar-wrap::-moz-progress-bar { background: var(--accent); }
 
 .task-category { margin-bottom: 3rem; }
 
@@ -1283,6 +1387,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
    ===================================================================== */
 @media (max-width: 1024px) {
   .stats-grid      { grid-template-columns: repeat(2, 1fr); }
+  .stat-cell       { padding: 1.75rem 1.25rem; }
   .stat-cell:nth-child(2) { border-right: none; }
   .stat-cell:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
   .stat-cell:nth-child(4) { border-right: none; border-top: 1px solid var(--border); }
@@ -1301,6 +1406,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
+  .nav-cta { display: none; }
 
   .hero { padding: 4rem 0 3.5rem; }
   .hero h1 { max-width: 100%; }
@@ -1324,6 +1430,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   .post-row-tags { justify-content: flex-start; margin-top: 0.5rem; }
 
   .blog-row { grid-template-columns: 1fr; }
+  .blog-row-meta { flex-wrap: wrap; gap: 0.5rem; }
 
   .case-metrics { grid-template-columns: 1fr; }
   .cs-metric    { border-right: none; border-bottom: 1px solid var(--border); }
@@ -1331,15 +1438,22 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 
   .related-grid { grid-template-columns: 1fr; }
   .section-row  { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .footer-links { gap: 0.75rem 1rem; }
 }
 
 @media (max-width: 480px) {
   .stats-grid     { grid-template-columns: 1fr 1fr; }
+  .stat-cell      { padding: 1.25rem 1rem; }
   .portfolio-grid { grid-template-columns: 1fr; }
   .hero-actions   { flex-direction: column; align-items: flex-start; }
   .hero-socials   { border-left: none; padding-left: 0; margin-left: 0; border-top: 1px solid var(--border-2); padding-top: 0.75rem; }
   .cta-actions    { flex-direction: column; width: 100%; }
   .cta-actions .btn { width: 100%; justify-content: center; }
+  .mobile-nav { padding: 1.25rem; }
+  .mobile-nav-link { font-size: clamp(1.5rem, 8vw, 1.75rem); }
+  .contact-booking-box,
+  .contact-secondary-box,
+  .cta-inner { padding: 1.5rem; }
 
   .footer-links   { flex-wrap: wrap; gap: 1rem; }
   .footer-inner   { flex-direction: column; align-items: flex-start; }
