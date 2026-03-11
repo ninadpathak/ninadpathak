@@ -173,7 +173,7 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 12, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">7 min read</span>
+        <span class="post-meta-time">6 min read</span>
       </div>
       <h1 class="post-title">Speculative decoding explained: how LLMs generate tokens faster without changing the output</h1>
       <p class="lead">Speculative decoding cuts LLM latency by 2-3x without changing output quality. Here's how the draft-verify loop works, why acceptance rate is the only number that matters, and when it actually hurts.</p>
@@ -207,9 +207,9 @@
 <p>That is why speculative decoding matters. It is one of the few inference tricks that can make a model feel much faster without changing the output distribution. The basic move is simple: let a smaller draft model guess a few upcoming tokens, then ask the large target model to verify them in one pass instead of generating each token serially.</p>
 <p><strong>The short answer:</strong> speculative decoding uses a fast draft model to propose several next tokens, then verifies them with the target model in parallel. If the guesses are accepted, the system emits multiple tokens for roughly the cost of one target-model step. If they are rejected, it falls back cleanly. In the standard form, output quality is unchanged because the algorithm preserves the target model's sampling distribution.</p>
 <h2 id="why-memory-boundedness-makes-this-possible">Why memory-boundedness makes this possible</h2>
-<p>A transformer forward pass is expensive because it has to read the model's weights from memory. That memory movement is often the real constraint, not the matrix multiplies themselves. Once the weights are available on chip, the GPU can do more work than a naive token-by-token decoding loop asks it to do.</p>
-<p>Standard autoregressive decoding wastes that headroom. One forward pass gives you one token. Then the model does it again. And again. Each step reloads the same large set of weights.</p>
-<p>Speculative decoding exploits that gap directly. If a draft model can guess <code>K</code> future tokens, the target model can check all of them in one pass. That spreads the expensive memory read across multiple candidate tokens instead of paying it once per token.</p>
+<p>A transformer step is expensive because the model has to pull a huge set of weights from memory. That data movement is often the bottleneck. The math is not always the slow part.</p>
+<p>Normal decoding wastes a lot of that capacity. The model does one full pass to generate one token. Then it repeats the whole process for the next token.</p>
+<p>Speculative decoding takes advantage of that. If a draft model guesses <code>K</code> future tokens, the target model can check them together. That means one expensive read can cover several tokens instead of just one.</p>
 <p><a href="https://github.com/hemingkx/Spec-Bench">Spec-Bench, the ACL 2024 benchmark</a> for evaluating speculative decoding methods, measured EAGLE achieving a 2.4x to 2.5x speedup over autoregressive decoding across model sizes, with a maximum of 3.0x on mathematical reasoning tasks with Vicuna-33B. The <a href="https://research.google/blog/looking-back-at-speculative-decoding/">original Google Research blog post on speculative decoding</a> documented 2x to 3x improvements across translation and summarization tasks from the initial 2022 work.</p>
 <p>[SCREENSHOT: Google Research blog post header at research.google/blog/looking-back-at-speculative-decoding/ showing the original post and any speedup figures]</p>
 <h2 id="how-the-draft-verify-loop-works">How the draft-verify loop works</h2>
@@ -240,17 +240,17 @@
 </tr>
 </tbody>
 </table>
-<p>In practice, the details differ by implementation, but the shape stays the same. A cheap model guesses ahead. The expensive model checks the work. Accepted tokens move straight into the output stream.</p>
-<p>The key property is accuracy. The standard rejection-sampling version produces the same output distribution as ordinary decoding from the target model. There is no built-in quality tradeoff in that version of the algorithm. The <a href="https://arxiv.org/html/2401.07851v2">comprehensive survey of speculative decoding techniques</a> covers the formal proofs across rejection-sampling variants.</p>
+<p>The exact implementation can vary, but the pattern stays the same. A small model guesses ahead. The large model checks the guesses. Accepted tokens go straight into the output.</p>
+<p>The important part is that the standard version does not change the result. It is designed to sample from the same distribution as the target model on its own. The <a href="https://arxiv.org/html/2401.07851v2">comprehensive survey of speculative decoding techniques</a> covers the formal proofs if you want the math.</p>
 <h2 id="acceptance-rate-the-only-metric-that-matters-for-real-world-speedup">Acceptance rate: the only metric that matters for real-world speedup</h2>
-<p>Everything comes back to acceptance rate. If the draft model proposes four tokens and the target model accepts three on average, the system looks great. If it accepts one, the gain can disappear once you count the draft model overhead.</p>
-<p>This is the metric to watch because it captures whether the draft model is actually useful for your workload.</p>
+<p>Everything comes back to acceptance rate. If the draft model proposes four tokens and the target model accepts three, the setup looks good. If it accepts one, the benefit can disappear.</p>
+<p>This is the number to watch because it tells you whether the draft model is helping or just adding work.</p>
 <p>Acceptance rate depends on two things:</p>
 <ul>
 <li><strong>Task predictability.</strong> Code, structured outputs, and repetitive continuations tend to accept well. Open-ended generation usually accepts less.</li>
-<li><strong>Draft-target alignment.</strong> The draft model needs to guess what the target model would have said, not just something plausible. If those distributions drift apart, rejection goes up.</li>
+<li><strong>Draft-target alignment.</strong> The draft model needs to guess what the target model would have picked. If the two models behave differently, rejection goes up.</li>
 </ul>
-<p>That is why benchmark numbers need context. A setup that looks great on code or math can look ordinary on looser generation tasks. Measure acceptance rate on your own traffic before treating any published speedup as your baseline.</p>
+<p>That is why benchmark numbers can mislead you. A setup that looks great on code or math can look average on open-ended generation. Measure acceptance rate on your own workload before you plan around any published speedup.</p>
 <h2 id="the-main-variants-worth-knowing">The main variants worth knowing</h2>
 <p>You do not need every variant in your head. These are the ones worth recognizing:</p>
 <table>
@@ -264,52 +264,52 @@
 <tbody>
 <tr>
 <td>External draft model</td>
-<td>Uses a separate smaller model as the speculator.</td>
-<td>Simple conceptually, but adds another model to serve.</td>
+<td>A separate small model makes the guesses.</td>
+<td>Easy to understand, but you have another model to run.</td>
 </tr>
 <tr>
 <td>Medusa</td>
-<td>Adds extra decoding heads on the target model.</td>
-<td>Better alignment, but requires training changes.</td>
+<td>Extra heads on the target model predict future tokens.</td>
+<td>Usually better matched, but needs model-side training work.</td>
 </tr>
 <tr>
 <td>Speculative Streaming</td>
-<td>Uses the target model's own signals to speculate.</td>
-<td>Simpler serving story, but gains depend on the task.</td>
+<td>The target model uses its own signals to guess ahead.</td>
+<td>Cleaner serving setup, but gains vary.</td>
 </tr>
 <tr>
 <td>Mirror Speculative Decoding</td>
-<td>Handles draft and target models with different vocabularies.</td>
-<td>Useful when model families do not line up cleanly.</td>
+<td>Lets draft and target models use different vocabularies.</td>
+<td>Helpful when the two models come from different families.</td>
 </tr>
 </tbody>
 </table>
-<p>The <a href="https://bentoml.com/llm/inference-optimization/speculative-decoding">BentoML inference handbook's speculative decoding section</a> and their <a href="https://www.bentoml.com/blog/3x-faster-llm-inference-with-speculative-decoding">practical 3x speedup guide</a> are good references for the external-draft setup. <a href="https://machinelearning.apple.com/research/llm-inference">Apple Machine Learning Research</a> and <a href="https://machinelearning.apple.com/research/mirror">Mirror Speculative Decoding</a> cover two important variants.</p>
+<p>The <a href="https://bentoml.com/llm/inference-optimization/speculative-decoding">BentoML inference handbook's speculative decoding section</a> and their <a href="https://www.bentoml.com/blog/3x-faster-llm-inference-with-speculative-decoding">practical 3x speedup guide</a> are useful if you want the practical version. <a href="https://machinelearning.apple.com/research/llm-inference">Apple Machine Learning Research</a> and <a href="https://machinelearning.apple.com/research/mirror">Mirror Speculative Decoding</a> cover two important variants.</p>
 <p>[SCREENSHOT: BentoML blog post at bentoml.com/blog/3x-faster-llm-inference-with-speculative-decoding showing the chart with draft model comparison]</p>
 <h2 id="when-speculative-decoding-helps-and-when-it-hurts">When speculative decoding helps and when it hurts</h2>
 <p><strong>It helps most when:</strong></p>
 <ul>
 <li>You are serving single requests or low-concurrency workloads. The draft-verify loop's gains are per-request latency improvements, which is what matters for interactive applications like chat and coding assistants.</li>
-<li>Your outputs are partially predictable. Structured outputs, code generation, and continuation tasks have naturally high acceptance rates.</li>
-<li>You are optimizing TTFT and inter-token latency. Speculative decoding reduces the number of sequential target-model steps needed to produce a response. I wrote more about <a href="/blog/time-to-first-token-ttft/">why TTFT matters for interactive applications in my earlier post on time to first token</a>.</li>
+<li>Your outputs are partly predictable. Structured outputs, code generation, and continuation tasks usually get higher acceptance rates.</li>
+<li>You are optimizing TTFT and inter-token latency. Speculative decoding cuts the number of target-model steps needed to produce a response. I wrote more about <a href="/blog/time-to-first-token-ttft/">why TTFT matters for interactive applications in my earlier post on time to first token</a>.</li>
 </ul>
 <p><strong>It hurts or does not help when:</strong></p>
 <ul>
-<li>You are running high-throughput batch inference. When the GPU is already heavily utilized serving many concurrent requests, the draft model adds compute overhead without a corresponding benefit. The memory-bound argument only holds when the GPU has spare compute capacity.</li>
-<li>Your acceptance rate is low. If the draft model's distribution consistently diverges from the target, as it often does in creative writing, domain-specific outputs, or multilingual text, the overhead of running the draft model and doing rejection sampling adds latency instead of removing it.</li>
-<li>You have tight memory constraints. Running a draft model alongside a large target model doubles your GPU memory usage relative to running just the target. On setups where memory is already the constraint, this can force you to a smaller batch size and erase the gains.</li>
+<li>You are running high-throughput batch inference. If the GPU is already busy serving many requests at once, the draft model can add overhead without giving you much back.</li>
+<li>Your acceptance rate is low. If the draft model keeps guessing wrong, the extra work can add latency instead of removing it. This shows up more often in creative writing, domain-heavy outputs, and multilingual text.</li>
+<li>You have tight memory constraints. Running a draft model next to a large target model takes more GPU memory. That can force smaller batch sizes and wipe out the gain.</li>
 </ul>
 <h2 id="faq">FAQ</h2>
 <p><strong>Does speculative decoding change the quality of outputs?</strong></p>
-<p>No in the standard rejection-sampling approach. It is designed to preserve the exact output distribution of the target model. Some faster approximations do relax that guarantee, so it is worth checking what your inference stack actually implements.</p>
+<p>No in the standard rejection-sampling approach. It is designed to preserve the exact output distribution of the target model. Some faster variants relax that guarantee, so check what your inference stack actually uses.</p>
 <p><strong>How do I know if my use case has a high enough acceptance rate?</strong></p>
-<p>Run it and measure. Most inference frameworks that support speculative decoding expose acceptance rate directly. As a rough rule, above 70% is promising. Below 50%, the gains often get thin. Code and structured outputs usually do better than open-ended generation.</p>
+<p>Run it and measure. Most inference frameworks expose acceptance rate directly. As a rough rule, above 70% is promising. Below 50%, gains often get thin. Code and structured outputs usually do better than open-ended generation.</p>
 <p><strong>What is the right draft model to use?</strong></p>
-<p>Ideally, a purpose-built speculator trained to match your target model's token distribution. The target model's own smaller variant from the same family is a reasonable second choice. A generic small model from a different family is the weakest option and often not worth the setup cost. Medusa heads are worth considering if you have the compute to train them on your specific target model.</p>
+<p>Ideally, you want a purpose-built speculator trained to match the target model. A smaller model from the same family is a good second choice. A generic small model from a different family is usually the weakest option. Medusa is worth considering if you can afford the training work.</p>
 <p><strong>How does speculative decoding interact with quantization?</strong></p>
-<p>They can stack, but the gain changes. Quantization already reduces the memory pressure that makes speculative decoding attractive, so the upside may shrink. It can still help, especially at low concurrency. The <a href="https://arxiv.org/abs/2509.04474">2025 benchmark on test-time scaling</a> includes evaluation under different model configurations.</p>
+<p>They can stack, but the gain changes. Quantization already reduces some of the memory pressure that makes speculative decoding useful, so the upside may shrink. It can still help, especially at low concurrency. The <a href="https://arxiv.org/abs/2509.04474">2025 benchmark on test-time scaling</a> includes evaluation under different model configurations.</p>
 <p><strong>Is speculative decoding worth implementing for a small team?</strong></p>
-<p>It depends on where you run inference. If you call a hosted API, this is mostly the provider's concern. If you run your own stack with vLLM, TGI, or similar frameworks, it is worth testing for latency-sensitive workloads.</p>
+<p>It depends on where you run inference. If you call a hosted API, this is mostly the provider's problem. If you run your own stack with vLLM, TGI, or similar frameworks, it is worth testing for latency-sensitive workloads.</p>
       </div>
     </div>
   </div>
