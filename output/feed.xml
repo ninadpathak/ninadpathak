@@ -18,9 +18,9 @@
       <pubDate>Mar 11, 2026</pubDate>
     </item>
     <item>
-      <title>The Model Context Protocol explained: why MCP matters more than most tutorials admit</title>
+      <title>The Model Context Protocol explained: why MCP matters architecturally</title>
       <link>https://ninadpathak.com/blog/model-context-protocol-explained/</link>
-      <description>Most MCP explainers stop at definitions. This one explains why the Model Context Protocol matters architecturally, how FastAPI MCP fits in, and why skipping that boundary creates framework lock-in.</description>
+      <description>A practical explanation of the Model Context Protocol, why it matters architecturally, how FastAPI MCP fits in, and how to avoid framework lock-in in agent systems.</description>
       <pubDate>Mar 11, 2026</pubDate>
     </item>
   </channel>

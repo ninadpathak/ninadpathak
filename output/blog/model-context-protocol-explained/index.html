@@ -19,13 +19,13 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='dark';try{t=localStorage.getItem('np-theme')||'dark';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='light'?'#f8f8f6':'#090909';d.style.colorScheme=t==='light'?'light':'dark';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Model Context Protocol explained: why MCP matters more than most tutorials admit | Ninad Pathak</title>
-  <meta name="description" content="Most MCP explainers stop at definitions. This one explains why the Model Context Protocol matters architecturally, how FastAPI MCP fits in, and why skipping that boundary creates framework lock-in.">
+  <title>The Model Context Protocol explained: why MCP matters architecturally | Ninad Pathak</title>
+  <meta name="description" content="A practical explanation of the Model Context Protocol, why it matters architecturally, how FastAPI MCP fits in, and how to avoid framework lock-in in agent systems.">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="The Model Context Protocol explained: why MCP matters more than most tutorials admit">
-  <meta property="og:description" content="Most MCP explainers stop at definitions. This one explains why the Model Context Protocol matters architecturally, how FastAPI MCP fits in, and why skipping that boundary creates framework lock-in.">
+  <meta property="og:title"       content="The Model Context Protocol explained: why MCP matters architecturally">
+  <meta property="og:description" content="A practical explanation of the Model Context Protocol, why it matters architecturally, how FastAPI MCP fits in, and how to avoid framework lock-in in agent systems.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/model-context-protocol-explained/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -60,8 +60,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "The Model Context Protocol explained: why MCP matters more than most tutorials admit",
-  "description": "Most MCP explainers stop at definitions. This one explains why the Model Context Protocol matters architecturally, how FastAPI MCP fits in, and why skipping that boundary creates framework lock-in.",
+  "headline": "The Model Context Protocol explained: why MCP matters architecturally",
+  "description": "A practical explanation of the Model Context Protocol, why it matters architecturally, how FastAPI MCP fits in, and how to avoid framework lock-in in agent systems.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
@@ -94,7 +94,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "The Model Context Protocol explained: why MCP matters more than most tutorials admit",
+      "name": "The Model Context Protocol explained: why MCP matters architecturally",
       "item": "https://ninadpathak.com/blog/model-context-protocol-explained/"
     }
   ]
@@ -159,7 +159,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">The Model Context Protocol explained: why MCP matters more than most tutorials admit</li>
+      <li class="breadcrumb-item current" aria-current="page">The Model Context Protocol explained: why MCP matters architecturally</li>
     </ol>
   </div>
 </nav>
@@ -171,10 +171,10 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 11, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">11 min read</span>
+        <span class="post-meta-time">10 min read</span>
       </div>
-      <h1 class="post-title">The Model Context Protocol explained: why MCP matters more than most tutorials admit</h1>
-      <p class="lead">Most MCP explainers stop at definitions. This one explains why the Model Context Protocol matters architecturally, how FastAPI MCP fits in, and why skipping that boundary creates framework lock-in.</p>
+      <h1 class="post-title">The Model Context Protocol explained: why MCP matters architecturally</h1>
+      <p class="lead">A practical explanation of the Model Context Protocol, why it matters architecturally, how FastAPI MCP fits in, and how to avoid framework lock-in in agent systems.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
         <span class="tag">agents</span>
@@ -200,18 +200,15 @@
 <li><a href="#mcp-inside-an-agent-harness">MCP inside an agent harness</a></li>
 <li><a href="#openai-agents-sdk-support-is-a-good-signal">OpenAI Agents SDK support is a good signal</a></li>
 <li><a href="#when-mcp-is-worth-it-and-when-it-is-overkill">When MCP is worth it and when it is overkill</a></li>
-<li><a href="#the-real-reason-mcp-is-catching-on">The real reason MCP is catching on</a></li>
+<li><a href="#why-mcp-adoption-makes-sense">Why MCP adoption makes sense</a></li>
 <li><a href="#frequently-asked-questions">Frequently asked questions</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>Most explainers of the Model Context Protocol make the same mistake. They tell you what MCP is, list the nouns in the spec, and stop there.</p>
-<p>That is not the interesting part.</p>
-<p>The interesting part is that MCP is an architectural boundary. It is a standard way for agents to talk to tools, data, and prompts without hard-wiring those integrations to one SDK or framework. If you get that boundary right, you can swap agent runtimes, reuse tools, and keep your application layer sane. If you get it wrong, your tool layer quietly becomes proprietary glue code tied to whatever framework you happened to start with.</p>
-<p>That is why MCP matters.</p>
-<p>It is not just another protocol in the agent stack. It is the layer that decides whether your tools are portable or trapped.</p>
+        <p>The important thing about MCP is not the acronym. It is the boundary.</p>
+<p>MCP gives agents a standard way to talk to tools, data, and prompts without hard-wiring those integrations to one SDK or framework. If that boundary is clean, you can swap runtimes and reuse tools. If it is not, the tool layer turns into framework-specific glue.</p>
 <p><strong>The short version:</strong> if you are building agents that need to call internal APIs, run actions, or work with business data, you should care about the Model Context Protocol for the same reason you care about clean API design. It separates the agent from the implementation details of the tools it uses.</p>
 <table>
 <thead>
@@ -240,28 +237,27 @@
 </tbody>
 </table>
 <h2 id="what-the-model-context-protocol-actually-is">What the Model Context Protocol actually is</h2>
-<p>The <a href="https://modelcontextprotocol.io/overview">official MCP overview</a> describes it as an open protocol for connecting models to external systems. That is accurate, but it is still too abstract for most builders.</p>
+<p>The <a href="https://modelcontextprotocol.io/">official MCP overview</a> describes it as an open protocol for connecting models to external systems. That is accurate. For implementation work, it helps to make it more concrete.</p>
 <p>A more useful definition is this:</p>
 <p><strong>MCP is a standard contract between an agent host and the things that agent can use.</strong></p>
-<p>Those things usually fall into three buckets:</p>
+<p>Those things fall into three buckets:</p>
 <ul>
 <li><strong>Tools</strong> for taking actions</li>
 <li><strong>Resources</strong> for exposing structured or unstructured data</li>
 <li><strong>Prompts</strong> for reusable interaction templates</li>
 </ul>
 <figure class="post-figure">
-  <img src="/static/images/posts/model-context-protocol-explained/mcp-tools-resources.png" alt="Model Context Protocol tools documentation page">
-  <figcaption>MCP becomes much more concrete once you understand the three capability types: tools, resources, and prompts.</figcaption>
+  <img src="/static/images/posts/model-context-protocol-explained/mcp-server-concepts.png" alt="Model Context Protocol servers page showing tools resources and prompts">
+  <figcaption>The official MCP servers page shows the three capability types clearly: tools, resources, and prompts.</figcaption>
 </figure>
 
 <p>That matters because agent systems stop being simple the moment they need to do real work. The model has to call tools. Tools need typed inputs. Results have to come back in a predictable format. Permissions matter. Discovery matters. Tool descriptions matter. At that point, you are no longer just prompting a model. You are designing an interface between reasoning and execution.</p>
 <figure class="post-figure">
-  <img src="/static/images/posts/model-context-protocol-explained/mcp-overview.png" alt="Model Context Protocol overview page">
-  <figcaption>The official MCP overview frames the protocol as the connection layer between models and external systems.</figcaption>
+  <img src="/static/images/posts/model-context-protocol-explained/mcp-homepage-live.png" alt="Live Model Context Protocol overview page">
+  <figcaption>The official MCP overview page frames MCP as the connection layer between AI applications and external systems.</figcaption>
 </figure>
 
 <h2 id="why-mcp-matters-architecturally">Why MCP matters architecturally</h2>
-<p>This is the part most articles skip.</p>
 <p>If you define your tools in a framework-specific way, you are making an architectural choice whether you mean to or not. Your agent might work fine inside Framework A. Then six months later you want to move to Framework B, or a new SDK, or a different host like Claude Desktop, Cursor, or the OpenAI Agents SDK. Suddenly your tools are not really tools. They are wrappers tied to the first orchestration layer you picked.</p>
 <p>That is lock-in.</p>
 <p>MCP gives you a cleaner boundary:</p>
@@ -270,9 +266,7 @@
 <li>the <strong>client/runtime</strong> decides how to communicate with servers</li>
 <li>the <strong>server</strong> exposes capabilities in a standard format</li>
 </ul>
-<p>That separation is the real value.</p>
-<p>Without it, your tool layer turns into hidden coupling.</p>
-<p>With it, your tools become infrastructure.</p>
+<p>That separation is the real value. Without it, the tool layer becomes hidden coupling. With it, the tool layer becomes infrastructure.</p>
 <p>I wrote earlier about <a href="/blog/agent-harnesses/">agent harnesses</a>. MCP fits directly into that picture. The model handles reasoning. The harness handles execution and orchestration. MCP gives the harness a standard way to discover and call tools. That means the harness does not need bespoke integration code for every tool surface in your system.</p>
 <h2 id="the-host-client-and-server-model-in-plain-english">The host, client, and server model in plain English</h2>
 <p>The <a href="https://modelcontextprotocol.io/specification/draft/architecture/">MCP architecture spec</a> uses a host, client, and server model. Once you understand that split, the whole protocol becomes much easier to reason about.</p>
@@ -294,7 +288,7 @@
 </figure>
 
 <h2 id="what-goes-wrong-when-you-skip-mcp">What goes wrong when you skip MCP</h2>
-<p>If you skip MCP, you can still build agent tools. People do it every day. The problem is what that code turns into over time.</p>
+<p>If you skip MCP, you can still build agent tools. The problem is what that code turns into over time.</p>
 <p>Here is the usual path:</p>
 <ol>
 <li>You add tool calling in one framework</li>
@@ -310,7 +304,7 @@
 <li>APIs should not need to be redesigned every time the orchestration stack changes</li>
 <li>hosts should be replaceable without rebuilding the tool surface</li>
 </ul>
-<p>This is also why MCP matters even if you only use one framework today. Lock-in is rarely painful on day one. It becomes painful the first time your team wants to change the host, adopt a new SDK, or expose the same tools to a second agent environment.</p>
+<p>This is why MCP matters even if you only use one framework today. The cost shows up when you want to change the host, adopt a new SDK, or expose the same tools to a second agent environment.</p>
 <h2 id="mcp-versus-direct-framework-tool-calling">MCP versus direct framework tool calling</h2>
 <p>This is where the tradeoff becomes concrete.</p>
 <table>
@@ -347,10 +341,9 @@
 <p>If you are prototyping a single agent inside one environment, direct framework tool calling is fine.</p>
 <p>If you are building systems that need to survive framework changes, host changes, or multiple agent entry points, MCP is the better long-term decision.</p>
 <h2 id="where-fastapi-mcp-fits">Where FastAPI MCP fits</h2>
-<p>This is the practical part of the story.</p>
-<p>Most teams do not start from zero. They already have APIs. They already have business logic. They already have auth, validation, and routing sitting inside a web app. That is exactly why <strong>FastAPI MCP</strong> is interesting.</p>
+<p>FastAPI MCP is practical for one simple reason: many teams already have APIs, business logic, auth, validation, and routing inside an existing FastAPI app.</p>
 <p>The <a href="https://thedocs.io/fastapi_mcp/">FastAPI MCP docs</a> show the basic idea clearly: you can expose FastAPI routes as MCP tools instead of rebuilding everything in a separate tool registry from scratch.</p>
-<p>That means you can take an application surface you already maintain and make it agent-usable with much less glue code.</p>
+<p>That means you can take an existing application surface and make it agent-usable with much less glue code.</p>
 <p>Architecturally, that is a strong move because it keeps the boundary clean:</p>
 <ul>
 <li>FastAPI remains your application surface</li>
@@ -363,16 +356,14 @@
 </figure>
 
 <h2 id="why-fastapi-mcp-is-more-important-than-it-looks">Why FastAPI MCP is more important than it looks</h2>
-<p>A lot of developers see FastAPI MCP and think, "Nice convenience wrapper."</p>
-<p>That undersells it.</p>
-<p>It is really an architectural shortcut. It lets you move from "we have APIs" to "our agents can use these capabilities through a standard protocol" without hand-authoring every tool definition in a separate agent framework.</p>
+<p>FastAPI MCP is more than a convenience wrapper. It is an architectural shortcut. It lets you move from "we have APIs" to "our agents can use these capabilities through a standard protocol" without hand-authoring every tool definition in a separate agent framework.</p>
 <p>That reduces three kinds of duplication:</p>
 <ul>
 <li>duplicated validation logic</li>
 <li>duplicated route-to-tool mapping</li>
 <li>duplicated business capability layers</li>
 </ul>
-<p>That is the kind of duplication that quietly kills maintainability in internal AI products.</p>
+<p>That kind of duplication increases maintenance cost quickly in internal AI products.</p>
 <p>The <a href="https://fastmcp.wiki/en/integrations/fastapi">FastMCP FastAPI integration docs</a> reinforce the same pattern from another angle. The story is not just "you can expose tools." The story is that you can treat your application and your agent interface as adjacent layers rather than two disconnected systems.</p>
 <figure class="post-figure">
   <img src="/static/images/posts/model-context-protocol-explained/fastmcp-fastapi.png" alt="FastMCP FastAPI integration documentation">
@@ -380,7 +371,6 @@
 </figure>
 
 <h2 id="mcp-inside-an-agent-harness">MCP inside an agent harness</h2>
-<p>This is where the connection to the harness article matters.</p>
 <p>A production agent system has at least three layers:</p>
 <ul>
 <li><strong>the model</strong> for reasoning</li>
@@ -388,7 +378,7 @@
 <li><strong>the tool boundary</strong> for capabilities and data access</li>
 </ul>
 <p>MCP belongs in the third layer.</p>
-<p>That is an important distinction because people often blur these layers together. They talk as if the framework, the tool calling, and the agent runtime are one thing. They are not.</p>
+<p>That distinction matters because the framework, the tool boundary, and the runtime do different jobs.</p>
 <p>The harness should own:</p>
 <ul>
 <li>execution loop</li>
@@ -405,18 +395,15 @@
 <li>prompt exposure where needed</li>
 <li>a standard contract between host and server</li>
 </ul>
-<p>Once you see it that way, MCP makes much more sense. It is not competing with your harness. It is making the harness less coupled to specific tool implementations.</p>
+<p>Seen that way, MCP is not competing with the harness. It reduces how tightly the harness is coupled to tool implementations.</p>
 <h2 id="openai-agents-sdk-support-is-a-good-signal">OpenAI Agents SDK support is a good signal</h2>
-<p>The <a href="https://openai.github.io/openai-agents-python/mcp/">OpenAI Agents SDK MCP docs</a> matter for one reason more than any other: they are evidence that serious agent runtimes now expect MCP to be part of the stack.</p>
-<p>That is important because standards only matter when ecosystems adopt them.</p>
-<p>If MCP had stayed a niche spec only used in one desktop app, it would have been interesting and mostly irrelevant. Once major agent tooling starts treating MCP as a normal integration path, it becomes infrastructure you should design around.</p>
+<p>The <a href="https://openai.github.io/openai-agents-python/mcp/">OpenAI Agents SDK MCP docs</a> are a useful signal because they show MCP support in a mainstream agent runtime. Standards matter once tooling ecosystems adopt them.</p>
 <figure class="post-figure">
   <img src="/static/images/posts/model-context-protocol-explained/openai-agents-mcp.png" alt="OpenAI Agents SDK MCP documentation page">
   <figcaption>Support in the OpenAI Agents SDK is one of the strongest signals that MCP is becoming infrastructure, not just a side protocol.</figcaption>
 </figure>
 
 <h2 id="when-mcp-is-worth-it-and-when-it-is-overkill">When MCP is worth it and when it is overkill</h2>
-<p>Not every project needs MCP on day one.</p>
 <p>You probably should use MCP if:</p>
 <ul>
 <li>your agents need more than a couple of tools</li>
@@ -432,13 +419,9 @@
 <li>the agent will only ever run inside one tightly controlled framework</li>
 <li>you are still trying to prove the workflow itself is useful</li>
 </ul>
-<p>That is the honest answer. MCP is not mandatory. It is just the better architectural choice once the system starts to matter.</p>
-<h2 id="the-real-reason-mcp-is-catching-on">The real reason MCP is catching on</h2>
-<p>It is not because builders suddenly love standards.</p>
-<p>It is because agent stacks got messy.</p>
-<p>Frameworks multiplied. Hosts multiplied. Tool definitions multiplied. Everyone started rebuilding the same integration surface in slightly different formats. MCP solves a very ordinary engineering problem: too many systems need to talk to the same capabilities, and custom glue does not scale.</p>
-<p>That is why I think MCP will stick.</p>
-<p>Not because the protocol is flashy, but because the need is real.</p>
+<p>MCP is not mandatory on day one. It becomes more useful as the tool layer grows and the system needs to last.</p>
+<h2 id="why-mcp-adoption-makes-sense">Why MCP adoption makes sense</h2>
+<p>MCP addresses a straightforward engineering problem: multiple hosts and runtimes need to talk to the same capabilities, and custom glue does not scale well. A standard interface is a cleaner answer than repeating the same integration work in each framework.</p>
 <h2 id="frequently-asked-questions">Frequently asked questions</h2>
 <p><strong>Is MCP only useful for desktop clients like Claude Desktop?</strong></p>
 <p>No. That is one visible use case, not the whole point. The larger value is that MCP gives agent hosts and runtimes a shared way to talk to external capabilities.</p>
