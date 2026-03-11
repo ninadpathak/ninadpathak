@@ -171,7 +171,7 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 11, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">11 min read</span>
+        <span class="post-meta-time">10 min read</span>
       </div>
       <h1 class="post-title">Best LLMs for coding in 2026 (it's not what benchmarks say)</h1>
       <p class="lead">HumanEval scores are nearly meaningless in 2026. Here's how to pick the right coding LLM based on your actual task: agentic coding, autocomplete, or cost-sensitive production.</p>
@@ -204,15 +204,55 @@
 
       </nav>
       <div class="post-content">
-        <p>Back in the Codex and early GPT-3.5 era, a coding benchmark win still felt like useful information. Models were far enough apart that a benchmark score could tell you something real. That is no longer true.</p>
-<p>Kimi K2.5 scores 99.0 on HumanEval. That looks impressive. It also tells you almost nothing about whether you should trust the model inside a real codebase.</p>
-<p>HumanEval, the benchmark OpenAI published in 2021, asks models to complete Python function bodies from docstrings. It was a reasonable proxy when top models were much weaker. At 99%, it is a solved test with well-documented contamination problems. The training data for most frontier models contains, at minimum, adjacent material. A high HumanEval score in 2026 signals that a model knows how to perform well on a specific format of problem. It does not tell you whether the model can read a 3,000-line codebase, understand a failing test, trace a multi-file bug, or write code that a human reviewer would actually approve.</p>
+        <p>In the Codex and early GPT-3.5 era, benchmark wins still felt useful. Models were far enough apart that the numbers could tell you something. In 2026, they usually do not.</p>
+<p>Kimi K2.5 scores 99.0 on HumanEval. That looks great. It does not tell you whether you should trust the model inside a real codebase.</p>
 <p><strong>The short answer:</strong> stop looking for one winner. The useful question is not "what is the best coding LLM?" The useful question is "best for what?" If I were picking today, I would start with Claude for agentic coding, Gemini 3.1 Pro for reasoning-heavy work, DeepSeek V3.2 for cost-sensitive production, GPT-5.3-Codex for OpenAI-native workflows, and Qwen3-Coder for self-hosted setups.</p>
+<table>
+<thead>
+<tr>
+<th>Use case</th>
+<th>Model I would start with</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agentic coding</td>
+<td>Claude Opus 4.6</td>
+<td>Best track record for multi-step code editing</td>
+</tr>
+<tr>
+<td>Algorithmic and reasoning-heavy work</td>
+<td>Gemini 3.1 Pro</td>
+<td>Strong reasoning and long-context performance</td>
+</tr>
+<tr>
+<td>Cost-sensitive production</td>
+<td>DeepSeek V3.2</td>
+<td>Best economics without falling off a cliff</td>
+</tr>
+<tr>
+<td>OpenAI-native workflows</td>
+<td>GPT-5.3-Codex</td>
+<td>Purpose-built OpenAI coding line</td>
+</tr>
+<tr>
+<td>Self-hosted coding</td>
+<td>Qwen3-Coder</td>
+<td>Best current open model to evaluate first</td>
+</tr>
+</tbody>
+</table>
 <h2 id="why-humaneval-is-the-wrong-metric-to-use">Why HumanEval is the wrong metric to use</h2>
-<p><a href="https://runloop.ai/blog/understanding-llm-code-benchmarks-from-humaneval-to-swe-bench">Runloop's analysis of LLM code benchmarks</a> puts it plainly: HumanEval tests whether a model can complete short, isolated functions in a controlled format. Real software development is almost nothing like that.</p>
-<p>A noteworthy data point: OpenAI quietly stopped self-reporting SWE-bench Verified scores for its frontier models after contamination was flagged in the dataset. When the organization that helped popularize a benchmark stops reporting its own models' results on it, that should shift how much weight you put on that number.</p>
-<p>The paper <a href="https://arxiv.org/html/2506.12286v3">"The SWE-Bench Illusion"</a> goes further, arguing that state-of-the-art models on SWE-bench are partially memorizing rather than reasoning. The benchmark uses historical GitHub issues, and those issues and their solutions are findable in training data. SWE-bench Verified addresses some of this by using human-verified problems, but the contamination risk does not disappear at the frontier.</p>
-<p>My take on this is simple: most articles comparing coding LLMs are comparing the wrong thing. A model that solves a GitHub issue it has seen before is not the same as a model that can debug your authentication service at 2am. I have spent enough time running LLMs against real codebases to say that benchmark rankings and practical usefulness have a loose relationship at best.</p>
+<p>HumanEval was useful when coding models were much weaker. It is not very useful now.</p>
+<p><a href="https://runloop.ai/blog/understanding-llm-code-benchmarks-from-humaneval-to-swe-bench">Runloop's analysis</a> makes the core issue clear. HumanEval checks whether a model can complete short, isolated functions in a controlled format. Real software work is not that.</p>
+<p>The bigger problem is contamination. The paper <a href="https://arxiv.org/html/2506.12286v3">"The SWE-Bench Illusion"</a> argues that strong benchmark performance is often partly recall, not reasoning. OpenAI also stopped self-reporting SWE-bench Verified scores for frontier models after contamination concerns were raised. That should tell you how careful you need to be.</p>
+<p>Here is the practical takeaway:</p>
+<ul>
+<li>HumanEval can still tell you if a model is obviously weak</li>
+<li>It cannot tell you how a model behaves in a real codebase</li>
+<li>A model that aces a benchmark can still be painful to use in production</li>
+</ul>
 <h2 id="swe-bench-verified-the-better-signal-with-caveats">SWE-bench Verified: the better signal, with caveats</h2>
 <p>SWE-bench Verified is currently the closest thing to a meaningful coding benchmark. It evaluates models on real GitHub issues, actual pull requests, actual test suites, and multi-file changes. The <a href="https://www.swebench.com/">official SWE-bench leaderboard</a> is the best place to track current scores.</p>
 <p>As of March 2026, the official Verified leaderboard shows a tight cluster rather than a clean winner:</p>

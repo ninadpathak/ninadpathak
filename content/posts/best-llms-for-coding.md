@@ -6,23 +6,33 @@ tags: [ai, llm, coding, benchmarks]
 status: published
 ---
 
-Back in the Codex and early GPT-3.5 era, a coding benchmark win still felt like useful information. Models were far enough apart that a benchmark score could tell you something real. That is no longer true.
+In the Codex and early GPT-3.5 era, benchmark wins still felt useful. Models were far enough apart that the numbers could tell you something. In 2026, they usually do not.
 
-Kimi K2.5 scores 99.0 on HumanEval. That looks impressive. It also tells you almost nothing about whether you should trust the model inside a real codebase.
-
-HumanEval, the benchmark OpenAI published in 2021, asks models to complete Python function bodies from docstrings. It was a reasonable proxy when top models were much weaker. At 99%, it is a solved test with well-documented contamination problems. The training data for most frontier models contains, at minimum, adjacent material. A high HumanEval score in 2026 signals that a model knows how to perform well on a specific format of problem. It does not tell you whether the model can read a 3,000-line codebase, understand a failing test, trace a multi-file bug, or write code that a human reviewer would actually approve.
+Kimi K2.5 scores 99.0 on HumanEval. That looks great. It does not tell you whether you should trust the model inside a real codebase.
 
 **The short answer:** stop looking for one winner. The useful question is not "what is the best coding LLM?" The useful question is "best for what?" If I were picking today, I would start with Claude for agentic coding, Gemini 3.1 Pro for reasoning-heavy work, DeepSeek V3.2 for cost-sensitive production, GPT-5.3-Codex for OpenAI-native workflows, and Qwen3-Coder for self-hosted setups.
 
+| Use case | Model I would start with | Why |
+| --- | --- | --- |
+| Agentic coding | Claude Opus 4.6 | Best track record for multi-step code editing |
+| Algorithmic and reasoning-heavy work | Gemini 3.1 Pro | Strong reasoning and long-context performance |
+| Cost-sensitive production | DeepSeek V3.2 | Best economics without falling off a cliff |
+| OpenAI-native workflows | GPT-5.3-Codex | Purpose-built OpenAI coding line |
+| Self-hosted coding | Qwen3-Coder | Best current open model to evaluate first |
+
 ## Why HumanEval is the wrong metric to use
 
-[Runloop's analysis of LLM code benchmarks](https://runloop.ai/blog/understanding-llm-code-benchmarks-from-humaneval-to-swe-bench) puts it plainly: HumanEval tests whether a model can complete short, isolated functions in a controlled format. Real software development is almost nothing like that.
+HumanEval was useful when coding models were much weaker. It is not very useful now.
 
-A noteworthy data point: OpenAI quietly stopped self-reporting SWE-bench Verified scores for its frontier models after contamination was flagged in the dataset. When the organization that helped popularize a benchmark stops reporting its own models' results on it, that should shift how much weight you put on that number.
+[Runloop's analysis](https://runloop.ai/blog/understanding-llm-code-benchmarks-from-humaneval-to-swe-bench) makes the core issue clear. HumanEval checks whether a model can complete short, isolated functions in a controlled format. Real software work is not that.
 
-The paper ["The SWE-Bench Illusion"](https://arxiv.org/html/2506.12286v3) goes further, arguing that state-of-the-art models on SWE-bench are partially memorizing rather than reasoning. The benchmark uses historical GitHub issues, and those issues and their solutions are findable in training data. SWE-bench Verified addresses some of this by using human-verified problems, but the contamination risk does not disappear at the frontier.
+The bigger problem is contamination. The paper ["The SWE-Bench Illusion"](https://arxiv.org/html/2506.12286v3) argues that strong benchmark performance is often partly recall, not reasoning. OpenAI also stopped self-reporting SWE-bench Verified scores for frontier models after contamination concerns were raised. That should tell you how careful you need to be.
 
-My take on this is simple: most articles comparing coding LLMs are comparing the wrong thing. A model that solves a GitHub issue it has seen before is not the same as a model that can debug your authentication service at 2am. I have spent enough time running LLMs against real codebases to say that benchmark rankings and practical usefulness have a loose relationship at best.
+Here is the practical takeaway:
+
+- HumanEval can still tell you if a model is obviously weak
+- It cannot tell you how a model behaves in a real codebase
+- A model that aces a benchmark can still be painful to use in production
 
 ## SWE-bench Verified: the better signal, with caveats
 
