@@ -23,12 +23,12 @@ entries:
   # AI / Testing
   - title: "AI Agent Testing: A Complete Guide"
     client: "LambdaTest"
-    category: "AI"
+    category: "AI Systems"
     url: "https://www.testmu.ai/learning-hub/ai-agent-testing"
 
   - title: "AI Adoption Challenges and How to Overcome Them"
     client: "LambdaTest"
-    category: "AI"
+    category: "AI Systems"
     url: "https://www.testmu.ai/blog/ai-adoption-challenges/"
 
   # Localization / i18n
@@ -65,69 +65,69 @@ entries:
   # AI / Memory
   - title: "What is Natural Language Processing (NLP)?"
     client: "Mem0"
-    category: "AI"
+    category: "AI Systems"
     url: "https://mem0.ai/blog/what-is-natural-language-processing"
 
   - title: "What is AI Agent Memory?"
     client: "Mem0"
-    category: "AI"
+    category: "AI Systems"
     url: "https://mem0.ai/blog/what-is-ai-agent-memory"
 
   # Analytics / Marketing
   - title: "Top Lead Scoring Software for B2B Teams"
     client: "Factors.ai"
-    category: "SaaS Growth"
+    category: "Growth & Marketing"
     url: "https://www.factors.ai/authors/ninad-pathak"
 
   - title: "Content Marketing Metrics vs KPIs for SaaS"
     client: "Factors.ai"
-    category: "SaaS Growth"
+    category: "Growth & Marketing"
     url: "https://www.factors.ai/blog/content-marketing-metrics-and-kpis-for-saas"
 
   - title: "Customer Acquisition Funnel Guide"
     client: "Factors.ai"
-    category: "SaaS Growth"
+    category: "Growth & Marketing"
     url: "https://www.factors.ai/authors/ninad-pathak"
 
   # Hosting / Infrastructure
   - title: "WordPress Categories vs Tags: What are the differences?"
     client: "Hostinger"
-    category: "Infrastructure & DevOps"
+    category: "Developer Infrastructure"
     url: "https://www.hostinger.com/tutorials/difference-between-wordpress-categories-and-tags"
 
   # eCommerce / SaaS
   - title: "10 Easy Ways to Automate Customer Service for eCommerce"
     client: "DelightChat"
-    category: "SaaS Growth"
+    category: "Growth & Marketing"
     url: "https://www.delightchat.io/blog/automate-customer-service-for-ecommerce"
 
   - title: "Live Chat Launch Guide for Ecommerce Stores"
     client: "DelightChat"
-    category: "SaaS Growth"
+    category: "Growth & Marketing"
     url: "https://www.delightchat.io/blog/live-chat-launch"
 
   - title: "Gorgias vs Freshchat: Top Differences"
     client: "DelightChat"
-    category: "SaaS Growth"
+    category: "Growth & Marketing"
     url: "https://www.delightchat.io/blog/gorgias-vs-freshchat-top-differences-and-similarities"
 
   # Linux / Developer
   - title: "Bash Scripting for Beginners"
     client: "LinuxForDevices"
-    category: "Infrastructure & DevOps"
+    category: "Developer Infrastructure"
     url: "https://www.linuxfordevices.com/tutorials/shell-script/variables-in-shell-scripts"
 
   - title: "How to Start, Stop, and Restart Services in Linux"
     client: "LinuxForDevices"
-    category: "Infrastructure & DevOps"
+    category: "Developer Infrastructure"
     url: "https://www.linuxfordevices.com/tutorials/linux/start-stop-restart-services-linux"
 
   - title: "Understanding systemd for Linux Administration"
     client: "LinuxForDevices"
-    category: "Infrastructure & DevOps"
+    category: "Developer Infrastructure"
     url: "https://www.linuxfordevices.com/tutorials/linux/start-stop-restart-services-linux"
 
   - title: "SSH Configuration and Security Best Practices"
     client: "LinuxForDevices"
-    category: "Infrastructure & DevOps"
+    category: "Developer Infrastructure"
     url: "https://www.linuxfordevices.com/tutorials/ssh-command-in-linux"
