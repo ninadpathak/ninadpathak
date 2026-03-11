@@ -6,7 +6,7 @@ tags: [ai, llm, inference, performance]
 status: published
 ---
 
-Your LLM is slow. Not because it can't do the math. Modern GPUs are obscenely fast at matrix multiplication. The bottleneck is memory bandwidth. Every time the model generates a token, it reads its full set of weights from DRAM. That memory transfer is the slow part, not the computation.
+GPUs these days are obscenely fast at matrix multiplication, yet LLMs still feel slow. The reason is memory bandwidth. Every time a model generates a token, it has to pull its full set of weights from DRAM, and that memory transfer is the actual bottleneck. The math finishes in microseconds. The waiting is what takes time.
 
 Speculative decoding exploits a simple insight: if you're going to pay for one expensive memory read, you might as well verify several tokens during that pass instead of just one.
 
@@ -22,11 +22,11 @@ This is the part most articles skip, and it's the part that lets you reason abou
 
 A GPU forward pass has two costs: loading the weights into fast memory, and doing the computation with them. For large models, loading the weights dominates. The compute happens fast. The GPU then sits idle waiting for the next weight transfer.
 
-Standard autoregressive decoding runs one pass per token. Each pass loads the full model weights. For a 70B model, that is a lot of memory to move for a single token.
+Standard autoregressive decoding runs one full pass per token, which means loading the full model weights every single time. For a 70B model, that is an enormous amount of memory movement just to produce one token.
 
 Speculative decoding doesn't change the cost of loading weights. But it does change how many tokens you get per load. If the draft model guesses `def`, `reverse_list`, `(`, `head` and the target model agrees with all four, you just got four tokens for the cost of one weight-loading cycle.
 
-That is why the speedup is real and not a trick. You're not approximating anything. You're just using the GPU's compute capacity that was sitting idle anyway.
+That is why the speedup is real and not a trick. You're not approximating anything or cutting corners on quality. You're just using the compute capacity that was sitting idle during the memory transfer anyway.
 
 ## The draft-verify loop in practice
 
@@ -36,7 +36,7 @@ That is why the speedup is real and not a trick. You're not approximating anythi
 | Verify | Target model runs one forward pass over context + all K draft tokens simultaneously. |
 | Accept or reject | Matching tokens are kept. First mismatch triggers resampling, rest are discarded. |
 
-Concrete example. User asks for a Python function to reverse a linked list. Draft model guesses: `def reverse_list(head):`. Target model checks the whole thing in one pass. If it agrees, all five tokens are accepted immediately. If it disagrees at `head`, the system keeps `def reverse_list(` and resumes from there.
+Say a user asks for a Python function to reverse a linked list. The draft model guesses `def reverse_list(head):` and the target model checks that whole stretch in one pass. If it agrees, all five tokens are accepted immediately. If it disagrees at `head`, the system keeps the accepted prefix and resumes from the first mismatch.
 
 The [survey of speculative decoding techniques](https://arxiv.org/html/2401.07851v2) has the formal proofs if you want to verify the output equivalence mathematically.
 
@@ -44,7 +44,7 @@ The [survey of speculative decoding techniques](https://arxiv.org/html/2401.0785
 
 Draft model choice, K value, variant selection: none of it matters independently. It all feeds into one metric: acceptance rate. What fraction of the draft model's proposed tokens does the target model accept?
 
-High acceptance rate, good speedup. Low acceptance rate, you're burning compute on a draft model that keeps getting overruled.
+A high acceptance rate means good speedup. A low one means you're burning compute on a draft model that keeps getting overruled and barely breaking even.
 
 Two things drive acceptance rate:
 
@@ -101,4 +101,4 @@ If you're calling a hosted API, this is the provider's problem. If you're runnin
 
 **What's a realistic speedup to expect?**
 
-2-3x on code and math tasks with a well-matched draft model and high concurrency. 1.3-1.8x on more open-ended workloads. Measure yours. Don't plan around someone else's benchmark.
+With a well-matched draft model on code or math tasks, 2-3x is realistic. On more open-ended workloads, expect 1.3-1.8x. Measure on your actual workload before planning anything around published numbers.
