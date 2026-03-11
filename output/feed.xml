@@ -11,5 +11,11 @@
       <description>Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.</description>
       <pubDate>Mar 22, 2026</pubDate>
     </item>
+    <item>
+      <title>Best LLMs for coding in 2026 (it's not what benchmarks say)</title>
+      <link>https://ninadpathak.com/blog/best-llms-for-coding/</link>
+      <description>HumanEval scores are nearly meaningless in 2026. Here's how to pick the right coding LLM based on your actual task — agentic coding, autocomplete, or cost-sensitive production.</description>
+      <pubDate>Mar 11, 2026</pubDate>
+    </item>
   </channel>
 </rss>
