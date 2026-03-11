@@ -14,7 +14,8 @@ Speculative decoding exploits a simple insight: if you're going to pay for one e
 
 The output distribution is mathematically identical to running the target model on its own. No quality tradeoff. [Spec-Bench](https://github.com/hemingkx/Spec-Bench) measured 2.4-3x speedup on code and math tasks. [Google's original 2022 work](https://research.google/blog/looking-back-at-speculative-decoding/) showed similar numbers on translation and summarization.
 
-[SCREENSHOT: Google Research blog post at research.google/blog/looking-back-at-speculative-decoding/ - grab the speedup chart]
+![Google Research speedup chart for speculative decoding](/static/images/posts/speculative-decoding-explained/google-research-speedup-chart.png)
+*Google Research reported 2x to 3x gains on translation and summarization tasks in the original speculative decoding work.*
 
 ## Why the memory-bound argument actually matters
 
