@@ -459,6 +459,8 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
 }
 
 .stat-cell {
