@@ -46,6 +46,47 @@
   });
 
   // ----------------------------------------------------------------
+  // Booking modal
+  // ----------------------------------------------------------------
+  document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('bookingModal');
+    const closeBtn = document.getElementById('bookingModalClose');
+    const triggers = document.querySelectorAll('.booking-modal-trigger');
+    if (!modal || !triggers.length) return;
+
+    function openModal() {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    triggers.forEach(function (trigger) {
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal || e.target.hasAttribute('data-booking-close')) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+  });
+
+  // ----------------------------------------------------------------
   // Mobile nav
   // ----------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', function () {

@@ -292,6 +292,93 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   padding-top: 2rem;
 }
 
+.booking-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 300;
+}
+
+.booking-modal.open {
+  display: flex;
+}
+
+.booking-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.booking-modal-dialog {
+  position: relative;
+  width: min(960px, 100%);
+  max-height: min(90vh, 860px);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.booking-modal-label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.booking-modal-header h2 {
+  font-size: 1.25rem;
+}
+
+.booking-modal-close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-2);
+  color: var(--text-2);
+  flex-shrink: 0;
+}
+
+.booking-modal-body {
+  padding: 1.25rem;
+  overflow: auto;
+}
+
+.booking-modal .zcal-inline-widget {
+  min-height: 720px;
+}
+
+.booking-modal-fallback {
+  margin-top: 0.875rem;
+  font-size: 0.875rem;
+  color: var(--text-3);
+}
+
+.booking-modal-fallback a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* =====================================================================
    BUTTONS
    ===================================================================== */
@@ -1478,6 +1565,10 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   .cta-actions .btn { width: 100%; justify-content: center; }
   .mobile-nav { padding: 1.25rem; }
   .mobile-nav-link { font-size: clamp(1.5rem, 8vw, 1.75rem); }
+  .booking-modal { padding: 0.75rem; }
+  .booking-modal-header,
+  .booking-modal-body { padding: 1rem; }
+  .booking-modal .zcal-inline-widget { min-height: 640px; }
   .contact-booking-box,
   .contact-secondary-box,
   .cta-inner { padding: 1.5rem; }
