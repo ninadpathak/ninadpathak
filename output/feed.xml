@@ -14,7 +14,13 @@
     <item>
       <title>Best LLMs for coding in 2026 (it's not what benchmarks say)</title>
       <link>https://ninadpathak.com/blog/best-llms-for-coding/</link>
-      <description>HumanEval scores are nearly meaningless in 2026. Here's how to pick the right coding LLM based on your actual task — agentic coding, autocomplete, or cost-sensitive production.</description>
+      <description>HumanEval scores are nearly meaningless in 2026. Here's how to pick the right coding LLM based on your actual task: agentic coding, autocomplete, or cost-sensitive production.</description>
+      <pubDate>Mar 11, 2026</pubDate>
+    </item>
+    <item>
+      <title>The Model Context Protocol explained: why MCP matters more than most tutorials admit</title>
+      <link>https://ninadpathak.com/blog/model-context-protocol-explained/</link>
+      <description>Most MCP explainers stop at definitions. This one explains why the Model Context Protocol matters architecturally, how FastAPI MCP fits in, and why skipping that boundary creates framework lock-in.</description>
       <pubDate>Mar 11, 2026</pubDate>
     </item>
   </channel>
