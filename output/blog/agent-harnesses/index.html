@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Set theme + background on html immediately to prevent any flash -->
+  <script>(function(){var t='dark';try{t=localStorage.getItem('np-theme')||'dark';}catch(e){}document.documentElement.setAttribute('data-theme',t);document.documentElement.style.background=t==='light'?'#f8f8f6':'#090909';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent harnesses: the infrastructure layer your LLM agent actually needs | Ninad Pathak</title>
+  <meta name="description" content="Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Agent harnesses: the infrastructure layer your LLM agent actually needs">
+  <meta property="og:description" content="Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/agent-harnesses/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/agent-harnesses/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Agent harnesses: the infrastructure layer your LLM agent actually needs",
+  "description": "Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-22",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Agent harnesses: the infrastructure layer your LLM agent actually needs",
+      "item": "https://ninadpathak.com/blog/agent-harnesses/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/ninadpathak/meet/" class="nav-cta" target="_blank" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Agent harnesses: the infrastructure layer your LLM agent actually needs</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">11 min read</span>
+      </div>
+      <h1 class="post-title">Agent harnesses: the infrastructure layer your LLM agent actually needs</h1>
+      <p class="lead">Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">infrastructure</span>
+        <span class="tag">llm</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#why-the-raw-api-isnt-enough">Why the raw API isn't enough</a></li>
+<li><a href="#what-a-harness-actually-contains">What a harness actually contains</a></li>
+<li><a href="#frameworks-versus-building-your-own">Frameworks versus building your own</a></li>
+<li><a href="#the-checkpoint-problem">The checkpoint problem</a></li>
+<li><a href="#context-management-inside-the-harness">Context management inside the harness</a></li>
+<li><a href="#a-minimal-harness-checklist">A minimal harness checklist</a></li>
+<li><a href="#when-you-dont-need-a-harness">When you don't need a harness</a></li>
+<li><a href="#frequently-asked-questions">Frequently asked questions</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>An agent without a harness is a prompt with ambitions. The LLM handles reasoning. The harness handles everything else: tool registration, state persistence, error recovery, prompt assembly, rate limiting, and the thousand other things that determine whether a multi-step agent actually completes its task or quietly fails at step four.</p>
+<p>I've watched teams build the same harness from scratch three times before deciding to use a framework, and I've watched other teams adopt frameworks they didn't understand and spend weeks fighting the abstraction. The choice matters. Understanding what a harness does before you choose how to build one is the prerequisite.</p>
+<p><strong>What is an agent harness?</strong> An agent harness is the runtime control layer that sits between your application and the LLM. It accepts a task, manages the agent's execution loop, provides the LLM with tools and context, handles tool call responses, tracks state across steps, and surfaces results and errors back to your system. The LLM handles reasoning. The harness handles execution.</p>
+<hr />
+<h2 id="why-the-raw-api-isnt-enough">Why the raw API isn't enough</h2>
+<p>A direct LLM API call is stateless. You send a prompt, get a completion, done. Agents need more. They make decisions across multiple steps, call external tools, accumulate context, and need to recover from partial failures.</p>
+<p>Consider a research agent that reads ten web pages, synthesizes findings, and writes a report. Across that task it might make 30 to 50 API calls, call a browser tool twenty times, and manage a context window that grows with each observation. None of that is handled by the API itself.</p>
+<p>Without a harness, the code that manages all this lives in your application layer. You write an execution loop. You handle tool call parsing. You append tool results to the message history. You catch API rate limit errors and retry. You truncate context when it gets too long. You log what happened for debugging.</p>
+<p>That's a harness. You've built one. The question is whether it's the one you'd design intentionally or the one that grew organically around your specific use case and is now hard to test, extend, or hand off.</p>
+<hr />
+<h2 id="what-a-harness-actually-contains">What a harness actually contains</h2>
+<p>A well-designed harness has five components.</p>
+<p><strong>Tool registry.</strong> A catalog of available tools with their schemas, descriptions, and execution handlers. The harness exposes this catalog to the LLM as function definitions and intercepts tool call requests, routes them to the right handler, and returns results in the format the LLM expects. The non-obvious part: the tool registry is also where you enforce permissions and rate limits per tool. A web browsing tool that can make unlimited requests is an incident waiting to happen.</p>
+<p><strong>Prompt assembler.</strong> At inference time, the harness constructs the full context window from multiple sources: the system prompt, any cached instructions, retrieved documents, conversation history, current task state, and pending tool results. The order matters. How much to include matters. The prompt assembler is where context engineering happens at runtime, not at design time.</p>
+<p><strong>Execution loop.</strong> The core of any agent harness. Send the current context to the LLM. If the response contains a tool call, execute it, append the result, and send again. If the response is a final answer, surface it. Handle the stop conditions: max iterations reached, context window full, explicit done signal, or unrecoverable error. The loop is simple to describe and surprisingly easy to get wrong under load.</p>
+<p><strong>State manager.</strong> Agents that run longer than a single API call need somewhere to put their working state. What subtasks are complete? What information has been gathered? What decisions have been made? Some harnesses keep state in the context window, which works for short tasks but breaks for long ones. Others write to external storage at each step, enabling checkpoint-based recovery. The choice between in-context state and external state is the single biggest architectural decision in agent design.</p>
+<p><strong>Observer.</strong> Structured logging of every agent step: what was in the prompt, what the LLM returned, which tool was called, what it returned, how long each step took. Without this, debugging a failed agent run means staring at opaque error messages. With it, you can replay any run, pinpoint exactly where reasoning went wrong, and build evaluation datasets from production traces. Observability is not optional for anything running in production.</p>
+<hr />
+<h2 id="frameworks-versus-building-your-own">Frameworks versus building your own</h2>
+<p>The frameworks worth knowing:</p>
+<p><strong>LangChain's AgentExecutor and LangGraph.</strong> AgentExecutor is the original framework harness, now showing its age for complex multi-agent workflows. LangGraph is the current recommendation for anything graph-based or requiring fine-grained control over agent topology. Mature ecosystem, extensive integrations, steeper learning curve than the docs suggest.</p>
+<p><strong>LlamaIndex's agent framework.</strong> Tightly integrated with LlamaIndex's retrieval primitives. If you're already using LlamaIndex for retrieval-augmented generation, the agent layer composes naturally. Less flexible than LangGraph for complex multi-agent topologies.</p>
+<p><strong>Microsoft AutoGen.</strong> Designed around multi-agent conversations where different agents with different roles collaborate on tasks. A good fit if your problem is inherently multi-agent. Overkill for single-agent systems.</p>
+<p><strong>OpenAI's Agents SDK.</strong> OpenAI's lightweight framework, open-sourced and updated from their earlier Swarm project. Minimal abstraction, close to raw API, good for teams that want to understand what's happening without fighting framework internals.</p>
+<p><strong>Custom harnesses.</strong> More common than people admit. Most teams I've talked to who are serious about production reliability end up with a custom harness for their core agent path, even if they started with a framework. The reason is almost always the observer component. Production observability requirements exceed what frameworks provide out of the box.</p>
+<p>My take on the build-versus-buy question: use a framework to learn the pattern and move fast in the first month. Plan to own the harness layer for anything critical. The framework abstractions that feel helpful during development often become obstacles when you need to debug production failures at the step level.</p>
+<hr />
+<h2 id="the-checkpoint-problem">The checkpoint problem</h2>
+<p>The hardest part of building a harness is state recovery.</p>
+<p>Agents fail partway through tasks. The LLM hallucinates a tool call argument. A downstream API returns a 503. Context fills up at step 18 of a 25-step task. A network timeout kills the connection.</p>
+<p>Without checkpointing, all of those failures mean starting over. For a task that takes 20 minutes and costs $0.80 in API calls, that's manageable. For a task that takes four hours and costs $15, it isn't.</p>
+<p>Checkpointing means writing the agent's full state to durable storage after each completed step. State includes the message history, any external data gathered, decisions made, subtask completion status, and metadata like total token usage and elapsed time.</p>
+<p>Three checkpointing patterns I've seen work:</p>
+<p><strong>Step-level persistence.</strong> Write state after each tool call completes. Maximum recovery granularity, higher storage and write overhead. Right for long-running tasks with expensive tool calls.</p>
+<p><strong>Phase-level persistence.</strong> Write state at logical phase boundaries: after research is complete, after analysis is complete, before writing begins. Simpler to implement, coarser recovery points. Right for tasks with clear phases that take roughly equal time.</p>
+<p><strong>Idempotent tool design.</strong> Build tools so that calling them twice produces the same result as calling them once. Combined with step-level checkpointing, this means recovery always works: re-run from the last checkpoint, idempotent tools produce the same results, the agent continues from where it stopped. Harder to implement, but it eliminates an entire class of recovery errors.</p>
+<p>The harness is where checkpointing logic lives. The LLM doesn't know about checkpoints. The application layer shouldn't have to manage them. The harness takes on that responsibility as a core function.</p>
+<hr />
+<h2 id="context-management-inside-the-harness">Context management inside the harness</h2>
+<p>The context window is a fixed resource. Long-running agents consume it. The harness needs a policy for what to do when context gets full.</p>
+<p>Four approaches, roughly in order of complexity:</p>
+<p><strong>Truncate from the oldest end.</strong> Drop the earliest messages when context is near capacity. Simple. Loses information. Acceptable for tasks where early messages are low-value.</p>
+<p><strong>Summarize and compress.</strong> Before truncating, run a summarization step that condenses earlier turns into a compact summary. Keep the summary, drop the raw messages. Better information preservation, adds latency and cost at compression time.</p>
+<p><strong>External memory with retrieval.</strong> Keep the full message history in an external store. At each step, retrieve the most relevant past observations and inject them into context. The hardest approach to implement correctly, but the only one that scales to truly long-horizon tasks.</p>
+<p><strong>Task decomposition.</strong> Avoid the problem by breaking large tasks into smaller subtasks, each of which fits comfortably in context. Pass outputs between subtasks explicitly rather than relying on a shared context window. Requires more upfront task design but produces the most reliable results.</p>
+<p>The harness is the right place to implement whichever policy fits your task characteristics. Pushing this logic into the LLM's prompt ("summarize when context is full") produces inconsistent results. Handling it deterministically in the harness produces predictable behavior.</p>
+<hr />
+<h2 id="a-minimal-harness-checklist">A minimal harness checklist</h2>
+<p>Before deploying any agent to production, run through these requirements:</p>
+<p><strong>Tool registry:</strong>
+- All tools have typed schemas with validation
+- Tool calls are logged with inputs, outputs, and latency
+- Tools have per-call timeout enforcement
+- Tool errors return structured error objects the LLM can reason about</p>
+<p><strong>Execution loop:</strong>
+- Maximum iteration count is enforced
+- Context window usage is tracked at each step
+- Loop exits cleanly on unrecoverable error with a structured error response
+- Stop conditions are explicit, not inferred from LLM output format</p>
+<p><strong>State manager:</strong>
+- Task state is serializable
+- Checkpoint write happens after each successful tool call
+- Recovery from checkpoint is tested, not assumed to work</p>
+<p><strong>Observer:</strong>
+- Every prompt sent is logged with timestamp and token count
+- Every LLM response is logged with latency and finish reason
+- Every tool call is logged with full inputs and outputs
+- Traces are queryable by run ID</p>
+<hr />
+<h2 id="when-you-dont-need-a-harness">When you don't need a harness</h2>
+<p>Not every LLM application is an agent. A harness adds complexity. For applications that are single-turn or lightly interactive, that complexity is unnecessary overhead.</p>
+<p>You probably don't need an agent harness if your application does one of the following:</p>
+<ul>
+<li>Takes a single user input, calls the LLM once, and returns a response</li>
+<li>Calls the LLM a fixed number of times with a fixed sequence of prompts</li>
+<li>Uses retrieval-augmented generation with a fixed retrieval step followed by a single synthesis step</li>
+</ul>
+<p>You need a harness when your application does one of the following:</p>
+<ul>
+<li>Lets the LLM decide which tools to call and in what order</li>
+<li>Runs tasks that take more than a handful of LLM calls to complete</li>
+<li>Needs to recover from partial failures without restarting from scratch</li>
+<li>Requires auditability of what the agent did and why</li>
+</ul>
+<p>The line is roughly: if the LLM controls the flow, you need a harness. If your code controls the flow and the LLM is a subroutine, you don't.</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<p><strong>What's the difference between an agent harness and an agent framework?</strong></p>
+<p>A framework is a library or tool that provides harness functionality. The harness is the concept. LangGraph, AutoGen, and OpenAI's Agents SDK are frameworks that implement harness patterns. You can build a harness without using a framework.</p>
+<p><strong>Do agent harnesses add significant latency?</strong></p>
+<p>The harness itself adds minimal latency. State writes and checkpoint operations add some overhead, typically under 50 ms per step on local storage and 100 to 300 ms on remote storage. The bigger latency driver is the execution loop overhead when you're making dozens of LLM calls in sequence.</p>
+<p><strong>How do harnesses handle concurrent agents?</strong></p>
+<p>Most framework harnesses are designed for single-agent execution. Multi-agent concurrency requires explicit design: shared state needs locking or conflict resolution, tool rate limits need to account for concurrent usage, and the observer needs to tag traces by agent identity. AutoGen and LangGraph both have patterns for this, but concurrent agent execution adds meaningful complexity.</p>
+<p><strong>What should I log in the observer?</strong></p>
+<p>Log every prompt (or a hash of it if PII is a concern), every completion, every tool call with inputs and outputs, every error with full context, and total token usage per step. At minimum. Production incidents in agent systems are almost always debugged by replaying traces.</p>
+<p><strong>When should I checkpoint after every step versus after phases?</strong></p>
+<p>Checkpoint after every step if any individual step is expensive: long-running API calls, database writes, or anything that takes more than 10 to 15 seconds. Checkpoint after phases if steps are fast but phases have clear semantic meaning. The goal is always the same: minimize the amount of work lost on failure.</p>
+<hr />
+<p>The harness is not the interesting part of an agent system. The interesting part is what the agent can do. The harness is the part that determines whether what the agent can do is reliable enough to matter in production. Getting it right upfront is much cheaper than rebuilding it around a system that's already deployed.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+<!-- CTA -->
+<section style="padding: 4rem 0; border-top: 1px solid var(--border);">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/ninadpathak/meet/" class="btn btn-primary" target="_blank" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">ninad pathak</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/work/"      class="footer-link">Work</a>
+        <a href="/portfolio/" class="footer-link">Portfolio</a>
+        <a href="/blog/"      class="footer-link">Writing</a>
+        <a href="/about/"     class="footer-link">About</a>
+        <a href="/contact/"   class="footer-link">Contact</a>
+        <a href="/feed.xml"   class="footer-link">RSS</a>
+      </nav>
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

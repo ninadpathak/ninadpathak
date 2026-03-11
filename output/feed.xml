@@ -6,58 +6,10 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
-      <title>What Makes API Documentation Good: Lessons From Stripe, Twilio, and Resend</title>
-      <link>https://ninadpathak.com/blog/api-documentation-good/</link>
-      <description>Most API documentation fails developers in the same three ways. Stripe, Twilio, and Resend figured out what good looks like. Here's what they got right.</description>
-      <pubDate>Mar 20, 2026</pubDate>
-    </item>
-    <item>
-      <title>Content Strategy for DevTools Companies: Writing for an Audience That Hates Marketing</title>
-      <link>https://ninadpathak.com/blog/devtools-content-strategy/</link>
-      <description>Developer audiences don't respond to content marketing the way B2B buyers do. Here's the framework I use to build content programs that developers actually read.</description>
-      <pubDate>Mar 17, 2026</pubDate>
-    </item>
-    <item>
-      <title>RAG Chunking Strategies: What the Research Actually Shows</title>
-      <link>https://ninadpathak.com/blog/rag-chunking-strategies/</link>
-      <description>Chunk size and strategy affect RAG accuracy more than model choice in most systems. Here's what the research shows about fixed-size, semantic, and contextual approaches.</description>
-      <pubDate>Mar 14, 2026</pubDate>
-    </item>
-    <item>
-      <title>pgvector vs Dedicated Vector Databases: An Honest Comparison</title>
-      <link>https://ninadpathak.com/blog/pgvector-vs-vector-db/</link>
-      <description>pgvector is genuinely good. Dedicated vector databases exist for real reasons. Here's how to think through the tradeoff without the vendor hype.</description>
-      <pubDate>Mar 11, 2026</pubDate>
-    </item>
-    <item>
-      <title>The Four Types of Memory in AI Agents (And Why Most Systems Only Use One)</title>
-      <link>https://ninadpathak.com/blog/ai-memory-types/</link>
-      <description>Sensory, short-term, episodic, semantic: AI agents can use all four types of memory. Nearly every implementation uses only the context window and then wonders why long tasks fall apart.</description>
-      <pubDate>Mar 08, 2026</pubDate>
-    </item>
-    <item>
-      <title>HNSW: What's Actually Happening When You Do a Vector Search</title>
-      <link>https://ninadpathak.com/blog/hnsw-vector-search/</link>
-      <description>Vector database users often treat HNSW as a black box. Here's the actual algorithm, the tradeoffs, and when you should care.</description>
-      <pubDate>Mar 05, 2026</pubDate>
-    </item>
-    <item>
-      <title>Your Context Window Has a Middle. Models Don't Read It.</title>
-      <link>https://ninadpathak.com/blog/lost-in-the-middle/</link>
-      <description>The 'lost in the middle' problem is real, quantified, and not solved by bigger context windows. Here's what the research actually says about where LLMs pay attention.</description>
-      <pubDate>Feb 20, 2026</pubDate>
-    </item>
-    <item>
-      <title>Why AI Agent Testing Is Harder Than It Looks</title>
-      <link>https://ninadpathak.com/blog/ai-agent-testing/</link>
-      <description>AI agents break in ways that unit tests don't catch. Here's a systematic approach to testing non-deterministic systems that actually ship.</description>
-      <pubDate>Feb 15, 2026</pubDate>
-    </item>
-    <item>
-      <title>AI Agents Keep Failing in Production. Here's Why.</title>
-      <link>https://ninadpathak.com/blog/ai-agents-production-failure/</link>
-      <description>95% of enterprise AI systems fail to reach production. The ones that do mostly fail within six months. The reasons aren't mysterious.</description>
-      <pubDate>Feb 08, 2026</pubDate>
+      <title>Agent harnesses: the infrastructure layer your LLM agent actually needs</title>
+      <link>https://ninadpathak.com/blog/agent-harnesses/</link>
+      <description>Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.</description>
+      <pubDate>Mar 22, 2026</pubDate>
     </item>
   </channel>
 </rss>
