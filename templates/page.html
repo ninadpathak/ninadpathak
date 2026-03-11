@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ legal_page.title }} | Ninad Pathak{% endblock %}
+{% block description %}{{ legal_page.description }}{% endblock %}
+{% block canonical %}{{ legal_page.url }}{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// {{ legal_page.label }}</div>
+    <h1>{{ legal_page.title }}</h1>
+    {% if legal_page.intro %}
+    <p class="lead">{{ legal_page.intro }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="page-content page-content-legal">
+      {{ legal_page.content }}
+    </div>
+  </div>
+</section>
+{% endblock %}

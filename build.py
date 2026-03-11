@@ -186,6 +186,26 @@ class SiteBuilder:
         self.md.reset()
         return post.metadata, self.md.convert(post.content)
 
+    def load_legal_pages(self) -> list[dict]:
+        pages = []
+        legal_dir = Path("content/legal")
+        if not legal_dir.exists():
+            return pages
+
+        for md_file in sorted(legal_dir.glob("*.md")):
+            meta, content = self.load_md_content(str(md_file))
+            slug = meta.get("slug") or md_file.stem
+            pages.append({
+                "title": meta.get("title", md_file.stem.replace("-", " ").title()),
+                "description": meta.get("description", self.config["site"]["description"]),
+                "slug": slug,
+                "label": meta.get("label", meta.get("title", md_file.stem.replace("-", " ").title())),
+                "intro": meta.get("intro", ""),
+                "content": content,
+                "url": f"/{slug}/",
+            })
+        return pages
+
     # ------------------------------------------------------------------
     # Render helper
     # ------------------------------------------------------------------
@@ -196,6 +216,7 @@ class SiteBuilder:
         ctx["contact"] = self.config["contact"]
         ctx["current_page"] = page
         ctx["build_year"] = datetime.now().year
+        ctx["latest_posts"] = getattr(self, "latest_posts", [])
 
         html = template.render(**ctx)
         out = self.output / output_path
@@ -275,6 +296,15 @@ class SiteBuilder:
             page="contact",
         )
 
+    def build_legal_pages(self, legal_pages):
+        for legal_page in legal_pages:
+            self.render(
+                "page.html",
+                f"{legal_page['slug']}/index.html",
+                page=legal_page["slug"],
+                legal_page=legal_page,
+            )
+
     def build_tasks(self, posts):
         with open("content/tasks.yaml") as f:
             data = yaml.safe_load(f)
@@ -324,6 +354,8 @@ class SiteBuilder:
             ("/portfolio/", "0.7", "monthly"),
             ("/about/", "0.6", "monthly"),
             ("/contact/", "0.5", "yearly"),
+            ("/privacy/", "0.3", "yearly"),
+            ("/terms/", "0.3", "yearly"),
         ]
         for post in posts:
             urls.append((post["url"], "0.9", "monthly"))
@@ -406,8 +438,10 @@ class SiteBuilder:
             (self.output / "static" / "css").mkdir(parents=True)
 
         posts = self.load_posts()
+        self.latest_posts = posts[:3]
         work_cases = self.load_work()
         portfolio = self.load_portfolio()
+        legal_pages = self.load_legal_pages()
 
         self.build_homepage(posts, work_cases)
         self.build_blog_list(posts)
@@ -417,6 +451,7 @@ class SiteBuilder:
         self.build_portfolio(portfolio)
         self.build_about()
         self.build_contact()
+        self.build_legal_pages(legal_pages)
         self.build_tasks(posts)
         self.build_sitemap(posts, work_cases)
         self.build_rss(posts)
