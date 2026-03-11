@@ -211,7 +211,7 @@
 <h2 id="the-actual-failure-modes-in-order-of-frequency">The actual failure modes in order of frequency</h2>
 <p>Based on what's reported in failure analyses and post-mortems from teams that have deployed:</p>
 <p><strong>1. Tool integration failures.</strong> APIs change, authentication expires, response formats are inconsistent, rate limits hit unexpectedly. The agent gets a 429 or a changed response schema and either fails silently or spirals. The most common failure mode and the most fixable: robust error handling, typed tool definitions, retry logic with backoff.</p>
-<p><strong>2. Context overflow.</strong> The task grows longer than expected and context fills. At best, the agent degrades gracefully. Usually it doesn't.</p>
+<p><strong>2. Context overflow.</strong> The task grows longer than expected and context fills. At best, the agent degrades gracefully. Usually it doesn't. This is a memory architecture problem, and <a href="/blog/ai-memory-types/">understanding the four memory types in AI agents</a> helps design systems that handle it properly.</p>
 <p><strong>3. Goal drift.</strong> On very long tasks, agents lose track of the original objective and optimize for something adjacent. They complete the task as they currently understand it, which isn't the task as specified. Happens more often than it should when initial instructions are ambiguous.</p>
 <p><strong>4. Hallucination propagation.</strong> Discussed above. Particularly bad in domains with specialized knowledge (legal, medical, financial) where the model's training knowledge is unreliable and tool outputs should be the ground truth.</p>
 <p><strong>5. Plan rigidity.</strong> The agent makes a planning decision early that turns out to be wrong, but continues executing based on that decision because it has no mechanism for detecting that the plan needs to change.</p>
@@ -224,7 +224,7 @@
 <p>Anthropic's <a href="https://modelcontextprotocol.io/specification/2025-11-25">Model Context Protocol</a> directly addresses the tool integration problem. Rather than each agent integration being a custom implementation, MCP provides a standard for how LLM applications connect to external tools and data sources. The adoption has been broad enough that it's looking like the default standard for agent-to-tool connections. Fewer bespoke integrations means fewer failure modes.</p>
 <hr />
 <p>The fundamental issue isn't that agents are bad. It's that agents are deployed as if they were reliable at tasks they haven't demonstrated reliability on, in environments they haven't been tested in, with expectations calibrated to demos rather than production behavior.</p>
-<p>The teams getting agents to work in production are treating them like the unreliable systems they currently are: narrow scope, explicit error handling, checkpoint-based recovery, conservative expansion of autonomous decision-making. That's not a limitation to engineer around. That's the right way to build with the current technology.</p>
+<p>The teams getting agents to work in production are treating them like the unreliable systems they currently are: narrow scope, explicit error handling, checkpoint-based recovery, conservative expansion of autonomous decision-making. That's not a limitation to engineer around. That's the right way to build with the current technology. Once the system is running, <a href="/blog/ai-agent-testing/">testing AI agents</a> requires a different approach than traditional software tests.</p>
       </div>
     </div>
   </div>

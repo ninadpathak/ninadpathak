@@ -104,4 +104,4 @@ The programs that keep growing share one property: they treat content as a produ
 
 Developer audiences have excellent filtering. They've been market-researched, content-marketed, and retargeted into numbness. Content that respects their intelligence and actually helps them with real problems gets through. Content that approximates helpfulness while really being a sales pitch gets filtered.
 
-The bar is high. The reward for clearing it is an audience that trusts you before they ever talk to your sales team.
+The bar is high. The reward for clearing it is an audience that trusts you before they ever talk to your sales team. One high-leverage entry point: your API documentation. It's the first technical experience most developers have with your product, and the quality gap between good and bad is significant. [What Stripe, Twilio, and Resend got right about API docs](/blog/what-makes-api-documentation-good/) breaks down the specific patterns that work.

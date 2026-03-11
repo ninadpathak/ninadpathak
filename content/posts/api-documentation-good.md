@@ -86,4 +86,4 @@ Teams that treat API docs as a checklist item, something that needs to exist rat
 
 The competitive advantage of excellent API docs compounds. A developer who had a good experience with your documentation will give you the benefit of the doubt the next time they're evaluating your product. They'll recommend you specifically because "their docs are actually good." That word-of-mouth is free and it's driven entirely by documentation quality.
 
-Stripe built a company culture where documentation quality is treated as seriously as product quality. That's not a coincidence. It's why they're the reference point everyone uses.
+Stripe built a company culture where documentation quality is treated as seriously as product quality. That's not a coincidence. It's why they're the reference point everyone uses. If you're thinking about the broader content program around your API docs, [the framework for DevTools content strategy](/blog/devtools-content-strategy/) covers how developer audiences evaluate and share technical content.

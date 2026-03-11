@@ -10,7 +10,7 @@ Every RAG tutorial starts with chunking and spends two paragraphs on it. Chunk y
 
 I used to do this too. I'd set up a quick RAG pipeline, accept the defaults, and start playing with the fun stuff: prompt engineering, retrieval ranking, the LLM itself. It took me embarrassingly long to realize I was building on sand. The chunking was quietly breaking everything downstream.
 
-The retrieval quality ceiling for any RAG system gets set by chunking quality. The LlamaIndex benchmarks from 2024 showed retrieval precision varying by over 30 percentage points across chunking strategies on the same corpus. That's not a marginal difference. It's the difference between a system that works and one that frustrates your users into giving up.
+The retrieval quality ceiling for any RAG system gets set by chunking quality. The LlamaIndex benchmarks from 2024 showed retrieval precision varying by over 30 percentage points across chunking strategies on the same corpus. That's not a marginal difference. It's the difference between a system that works and one that frustrates your users into giving up. And once you have the right chunks coming back, how you order them in the context window matters just as much — that's the [lost-in-the-middle problem](/blog/lost-in-the-middle/).
 
 Here's what I've learned about the main approaches and what each one trades away.
 
@@ -82,4 +82,4 @@ Start with recursive text splitting at 512 tokens with 10% overlap. Measure retr
 
 Switch to parent-child if you find that retrieved chunks are precise but response quality is suffering from lack of context. Switch to semantic chunking if you have long documents with clear topic shifts and retrieval precision is the bottleneck. Add contextual retrieval only if you've established that chunk-level context loss is your primary failure mode, and only if the ingestion cost is acceptable.
 
-The evaluation step is non-negotiable. Chunking intuitions built on toy datasets don't transfer. The only way to know what's working is to measure it on your actual corpus with your actual queries.
+The evaluation step is non-negotiable. Chunking intuitions built on toy datasets don't transfer. The only way to know what's working is to measure it on your actual corpus with your actual queries. Once you've decided on chunking, the next layer is the index itself: [how HNSW works under the hood](/blog/hnsw-vector-search/) explains why some parameter combinations produce better recall at the same latency.

@@ -54,7 +54,7 @@ Based on what's reported in failure analyses and post-mortems from teams that ha
 
 **1. Tool integration failures.** APIs change, authentication expires, response formats are inconsistent, rate limits hit unexpectedly. The agent gets a 429 or a changed response schema and either fails silently or spirals. The most common failure mode and the most fixable: robust error handling, typed tool definitions, retry logic with backoff.
 
-**2. Context overflow.** The task grows longer than expected and context fills. At best, the agent degrades gracefully. Usually it doesn't.
+**2. Context overflow.** The task grows longer than expected and context fills. At best, the agent degrades gracefully. Usually it doesn't. This is a memory architecture problem, and [understanding the four memory types in AI agents](/blog/ai-memory-types/) helps design systems that handle it properly.
 
 **3. Goal drift.** On very long tasks, agents lose track of the original objective and optimize for something adjacent. They complete the task as they currently understand it, which isn't the task as specified. Happens more often than it should when initial instructions are ambiguous.
 
@@ -80,4 +80,4 @@ Anthropic's [Model Context Protocol](https://modelcontextprotocol.io/specificati
 
 The fundamental issue isn't that agents are bad. It's that agents are deployed as if they were reliable at tasks they haven't demonstrated reliability on, in environments they haven't been tested in, with expectations calibrated to demos rather than production behavior.
 
-The teams getting agents to work in production are treating them like the unreliable systems they currently are: narrow scope, explicit error handling, checkpoint-based recovery, conservative expansion of autonomous decision-making. That's not a limitation to engineer around. That's the right way to build with the current technology.
+The teams getting agents to work in production are treating them like the unreliable systems they currently are: narrow scope, explicit error handling, checkpoint-based recovery, conservative expansion of autonomous decision-making. That's not a limitation to engineer around. That's the right way to build with the current technology. Once the system is running, [testing AI agents](/blog/ai-agent-testing/) requires a different approach than traditional software tests.

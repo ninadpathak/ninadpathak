@@ -14,7 +14,7 @@ The honest answer depends on what you're building, at what scale, with what quer
 
 [pgvector](https://github.com/pgvector/pgvector) is a Postgres extension, first released in 2021, that adds a vector data type and approximate nearest neighbor search to Postgres. You store embeddings as `vector(1536)` columns alongside your regular relational data. You create an index using either IVFFlat (inverted file flat) or HNSW (since pgvector 0.5.0). You query with `<->` for L2 distance, `<=>` for cosine, `<#>` for inner product.
 
-The HNSW implementation in pgvector uses the same basic algorithm as dedicated databases: hierarchical navigable small world graphs, the same parameters (m, ef_construction, ef at query time). The core algorithm isn't the differentiator.
+The HNSW implementation in pgvector uses the same basic algorithm as dedicated databases: hierarchical navigable small world graphs, the same parameters (m, ef_construction, ef at query time). The core algorithm isn't the differentiator. If you want to understand what those parameters actually do before tuning them, [the deep dive on HNSW](/blog/hnsw-vector-search/) covers the mechanics.
 
 What pgvector gives you is the rest of Postgres for free. Your vectors live in the same database as your relational data. You can do `JOIN` between vector search results and your users table. You get Postgres's ACID transactions, full-text search, JSONB columns, row-level security, and everything else in a single system. Backups, replication, point-in-time recovery: the entire Postgres ecosystem applies.
 
@@ -22,11 +22,11 @@ What pgvector gives you is the rest of Postgres for free. Your vectors live in t
 
 The "just use pgvector" argument is compelling for small to medium deployments. Dedicated vector databases didn't emerge because pgvector is wrong in principle. They emerged because at large scale, vector search has specific performance and operational requirements that don't fit naturally into a general-purpose RDBMS.
 
-**Memory architecture.** HNSW must live in RAM for performance; the random-access traversal pattern is fatal on any storage medium with seek latency. Postgres manages memory via its shared buffer pool, which also needs to cache table data, index pages for other operations, and work through the OS page cache. A dedicated vector database can dedicate its entire memory footprint to the index. At 50 million vectors, the difference matters.
+**Memory architecture.** HNSW must live in RAM for performance. The random-access traversal pattern is fatal on any storage medium with seek latency. Postgres manages memory via its shared buffer pool, which also needs to cache table data, index pages for other operations, and work through the OS page cache. A dedicated vector database can dedicate its entire memory footprint to the index. At 50 million vectors, the difference matters.
 
 **Filtered search.** Filtered vector search is genuinely hard. Take a query like: "find me the 10 most similar vectors where `user_id = 42` and `status = active`". pgvector 0.7.0 introduced iterative index scans that help considerably, but the problem isn't fully solved at high filter selectivity. Qdrant built a custom query planner that estimates filter cardinality and decides whether to pre-filter (reduce the dataset before searching) or post-filter (search then filter). Weaviate has a similar approach with its filtered HNSW traversal. These are purpose-built solutions to a problem that Postgres wasn't designed around.
 
-**Quantization and compression.** At scale, storing full-precision float32 vectors is expensive. INT8 scalar quantization reduces memory to 25%; binary quantization reduces it to 3% at the cost of some recall (recoverable with oversampling). Qdrant and Weaviate both have first-class quantization support. pgvector got half-precision (float16) storage in 0.7.0, which helps, but doesn't match the quantization options available in dedicated databases.
+**Quantization and compression.** At scale, storing full-precision float32 vectors is expensive. INT8 scalar quantization reduces memory to 25%. Binary quantization reduces it to 3% at the cost of some recall (recoverable with oversampling). Qdrant and Weaviate both have first-class quantization support. pgvector got half-precision (float16) storage in 0.7.0, which helps, but doesn't match the quantization options available in dedicated databases.
 
 **Distributed deployment.** Postgres can be sharded horizontally, but it requires significant operational work. Purpose-built distributed vector search (Pinecone's pods, Qdrant's cluster mode, Weaviate's node sharding) is designed from the start to distribute across nodes. For datasets that don't fit on a single machine's RAM, the distributed options in dedicated databases are more mature.
 
@@ -58,7 +58,7 @@ At scale, ten million or more vectors with high query volume and strict p95 late
 
 Qdrant, written in Rust, has consistently strong benchmark numbers. The filtered search implementation is purpose-built. Memory-mapped storage lets it handle datasets larger than RAM with reasonable performance (slower than in-memory, but more graceful degradation than pgvector under memory pressure). The payload indexing system lets you filter on metadata without a separate database call.
 
-Weaviate makes a different set of tradeoffs: HNSW filtered traversal, a GraphQL and gRPC API, module-based integration for generating embeddings. Better for teams that want a more opinionated system; more operational complexity for teams that want control.
+Weaviate makes a different set of tradeoffs: HNSW filtered traversal, a GraphQL and gRPC API, module-based integration for generating embeddings. Better for teams that want a more opinionated system, with more operational complexity for teams that want control.
 
 Pinecone is the managed option for teams that don't want to run infrastructure. You pay a significant premium over self-hosted alternatives for serverless scaling and operational simplicity. The proprietary architecture means less visibility into what's happening under the hood.
 
@@ -96,4 +96,4 @@ The benchmark that matters is the one you run on your data, with your query patt
 
 The framing of "pgvector vs. vector databases" implies a binary choice that doesn't reflect how good teams actually make infrastructure decisions. The real question, as I've come to think about it, is: what's the minimum system that reliably handles your current requirements, with a migration path when requirements change?
 
-At most stages of growth, that system starts with pgvector.
+At most stages of growth, that system starts with pgvector. And whatever system you choose, the retrieval quality depends heavily on what you're indexing: [chunking strategy](/blog/rag-chunking-strategies/) and [context placement](/blog/lost-in-the-middle/) affect accuracy more than the choice of vector store in most setups.

@@ -190,7 +190,7 @@
       <div class="post-content">
         <p>Every RAG tutorial starts with chunking and spends two paragraphs on it. Chunk your documents, embed them, retrieve them. The parameters get passed as defaults: chunk size of 512, overlap of 50, split-on-newlines. Then the tutorial moves on to the parts that feel more interesting.</p>
 <p>I used to do this too. I'd set up a quick RAG pipeline, accept the defaults, and start playing with the fun stuff: prompt engineering, retrieval ranking, the LLM itself. It took me embarrassingly long to realize I was building on sand. The chunking was quietly breaking everything downstream.</p>
-<p>The retrieval quality ceiling for any RAG system gets set by chunking quality. The LlamaIndex benchmarks from 2024 showed retrieval precision varying by over 30 percentage points across chunking strategies on the same corpus. That's not a marginal difference. It's the difference between a system that works and one that frustrates your users into giving up.</p>
+<p>The retrieval quality ceiling for any RAG system gets set by chunking quality. The LlamaIndex benchmarks from 2024 showed retrieval precision varying by over 30 percentage points across chunking strategies on the same corpus. That's not a marginal difference. It's the difference between a system that works and one that frustrates your users into giving up. And once you have the right chunks coming back, how you order them in the context window matters just as much — that's the <a href="/blog/lost-in-the-middle/">lost-in-the-middle problem</a>.</p>
 <p>Here's what I've learned about the main approaches and what each one trades away.</p>
 <h2 id="fixed-size-chunking-the-default-that-causes-most-problems">Fixed-size chunking: the default that causes most problems</h2>
 <p>Fixed-size chunking splits text at token or character boundaries, usually with some overlap. LangChain's RecursiveCharacterTextSplitter with chunk_size=1000 and chunk_overlap=200 is probably the most common RAG configuration running in production today.</p>
@@ -226,7 +226,7 @@
 <h2 id="what-i-actually-recommend-for-new-rag-systems">What I actually recommend for new RAG systems</h2>
 <p>Start with recursive text splitting at 512 tokens with 10% overlap. Measure retrieval precision against a held-out evaluation set with 20-50 representative queries. Know your baseline.</p>
 <p>Switch to parent-child if you find that retrieved chunks are precise but response quality is suffering from lack of context. Switch to semantic chunking if you have long documents with clear topic shifts and retrieval precision is the bottleneck. Add contextual retrieval only if you've established that chunk-level context loss is your primary failure mode, and only if the ingestion cost is acceptable.</p>
-<p>The evaluation step is non-negotiable. Chunking intuitions built on toy datasets don't transfer. The only way to know what's working is to measure it on your actual corpus with your actual queries.</p>
+<p>The evaluation step is non-negotiable. Chunking intuitions built on toy datasets don't transfer. The only way to know what's working is to measure it on your actual corpus with your actual queries. Once you've decided on chunking, the next layer is the index itself: <a href="/blog/hnsw-vector-search/">how HNSW works under the hood</a> explains why some parameter combinations produce better recall at the same latency.</p>
       </div>
     </div>
   </div>

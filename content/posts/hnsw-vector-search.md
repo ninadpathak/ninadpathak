@@ -14,7 +14,7 @@ Reading the [original HNSW paper](https://arxiv.org/abs/1603.09320) is actually 
 
 Finding the nearest neighbor to a query vector in a dataset of a million 1536-dimensional floats is slow done naively. Brute force computes cosine similarity against every vector, returns the top k, and scales linearly with dataset size. At 10 million vectors, that's slow. At 100 million, it's unusable for anything interactive.
 
-The standard computer science move is to trade exactness for speed. You find the *approximate* nearest neighbors. HNSW (Hierarchical Navigable Small World graphs) is the dominant approach right now across Qdrant, Weaviate, Chroma, FAISS, and other vector databases. The paper, by Malkov and Yashunin, was submitted to arXiv in 2016 and published in IEEE TPAMI in 2018. It won out over the competition because it achieves very high recall at very low latency, in a structure that's easy to reason about once you understand the layers.
+The standard computer science move is to trade exactness for speed. You find the *approximate* nearest neighbors. HNSW (Hierarchical Navigable Small World graphs) is the dominant approach right now across Qdrant, Weaviate, Chroma, FAISS, and other vector databases. The paper, by Malkov and Yashunin, was submitted to arXiv in 2016 and published in IEEE TPAMI in 2018. It won out over the competition because it achieves very high recall at very low latency, in a structure that's easy to reason about once you understand the layers. HNSW is also what both [pgvector and dedicated vector databases](/blog/pgvector-vs-vector-db/) use under the hood, which is why the algorithm comparison matters for infrastructure decisions.
 
 ## The layers
 
@@ -22,13 +22,13 @@ HNSW builds a multi-layer graph. At the bottom layer (layer 0), every vector in 
 
 At higher layers, only some nodes appear, with exponentially decreasing probability. The formula is roughly `exp(-level / mL)` where mL is derived from M. With M=32, you get about 97% of nodes at layer 0, about 3% at layer 1, about 0.09% at layer 2, and so on. It thins out fast.
 
-The structure is intentionally similar to a skip list. The top layers let you take big jumps across the space; the bottom layer is where you do precise local search.
+The structure is intentionally similar to a skip list. The top layers let you take big jumps across the space. The bottom layer is where you do precise local search.
 
 ## How search works
 
 You enter the graph at the top layer, at a pre-designated entry point. You greedily traverse: at each step, you move to whichever connected neighbor is nearest to your query. When no neighbor is closer than your current position, you've hit a local minimum on that layer. Drop to the next layer. Repeat.
 
-The greedy traversal on the top layers isn't finding the answer. It's finding a *starting point* for the detailed search at layer 0. The top layers are navigation; layer 0 is where the actual nearest neighbor candidates get identified.
+The greedy traversal on the top layers isn't finding the answer. It's finding a *starting point* for the detailed search at layer 0. The top layers are navigation. Layer 0 is where the actual nearest neighbor candidates get identified.
 
 At layer 0, you run the search with a larger candidate pool controlled by the `ef` (or `efSearch`) parameter. Higher ef means you explore more candidates before returning results. More exploration, better recall. More computation, higher latency. The tradeoff is direct and predictable, which is one reason people like HNSW.
 
@@ -78,7 +78,7 @@ What the research says matters:
 
 **M:** Set higher for better recall, lower for lower memory and faster builds. Weaviate and Qdrant both default to M=16 or M=32. For most use cases, M=16 is fine. M=32 when recall is critical and you have the memory.
 
-**ef_construction:** A build-time investment. Higher ef_construction affects only graph quality, leaving memory and query time unchanged. Teams indexing infrequently and querying constantly should set this high (200+). Qdrant's accurate config uses 100; doubling that won't break anything but will slow your index build.
+**ef_construction:** A build-time investment. Higher ef_construction affects only graph quality, leaving memory and query time unchanged. Teams indexing infrequently and querying constantly should set this high (200+). Qdrant's accurate config uses 100. Doubling that won't break anything but will slow your index build.
 
 **efSearch (or ef at query time):** The dial you turn when you need more recall without rebuilding the index. Start low, measure recall against a held-out dataset, increase until you hit your recall target. The latency cost is linear with ef. When recall is already fine, leave it alone.
 
@@ -88,4 +88,4 @@ What the research says matters:
 
 HNSW is an approximate algorithm, every parameter is a tradeoff surface, and the tradeoffs are predictable once you understand the structure. M controls memory and density. ef controls query-time recall and speed. ef_construction controls build-time graph quality. The rest is implementation details.
 
-What I keep seeing: performance issues with a vector DB almost always resolve at the parameter level before requiring architecture changes. Start there.
+What I keep seeing: performance issues with a vector DB almost always resolve at the parameter level before requiring architecture changes. Start there. If you're evaluating whether to stay on pgvector or move to a dedicated system, [the comparison post covers the thresholds where each makes sense](/blog/pgvector-vs-vector-db/).

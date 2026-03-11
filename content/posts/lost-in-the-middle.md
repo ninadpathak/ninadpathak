@@ -26,11 +26,11 @@ Extended-context models, the ones specifically trained for longer inputs, showed
 
 The paper doesn't provide a definitive mechanistic explanation, but the intuition is reasonable: models are trained on text where important information tends to appear at the start or end. Abstracts, introductions, conclusions, subject lines. The attention patterns that emerge from training reflect those distributions.
 
-There's also a simpler story: at very long contexts, attending to positions in the middle is harder. The gradient signal during training is weaker for distant positions in some architectures. The recency bias (end of context) and primacy bias (start of context) are stable phenomena in human cognition too; it's not obvious that transformers trained on human text would be immune to them.
+There's also a simpler story: at very long contexts, attending to positions in the middle is harder. The gradient signal during training is weaker for distant positions in some architectures. The recency bias (end of context) and primacy bias (start of context) are stable phenomena in human cognition too. Transformers trained on human text aren't obviously immune.
 
 ## What this means for how you build RAG
 
-Naive RAG pipelines chunk documents, embed them, retrieve top-k by similarity, and concatenate everything into the prompt. The most relevant chunk lands somewhere in the middle of the context by default, ranked first in the retrieval list but buried after the system prompt.
+Naive RAG pipelines chunk documents, embed them, retrieve top-k by similarity, and concatenate everything into the prompt. The most relevant chunk lands somewhere in the middle of the context by default, ranked first in the retrieval list but buried after the system prompt. (The chunking strategy itself matters too: how you split documents determines which chunk gets retrieved. I cover that in detail in [RAG Chunking Strategies: What the Research Actually Shows](/blog/rag-chunking-strategies/).)
 
 Three things follow directly:
 
@@ -54,7 +54,7 @@ The real question isn't "should I use RAG or long context?" It's "how do I fill 
 
 Andrej Karpathy [defined it](https://x.com/karpathy/status/1937902205765607626) as "the delicate art and science of filling the context window with just the right information for the next step." It sounds obvious when you read it. The practice is not obvious.
 
-For a real agent or RAG system, what goes in the context at inference time is not static. It's assembled dynamically from: the system prompt, any cached instructions, retrieved documents ordered carefully, conversation history (summarized or truncated how?), tool outputs, current task state. Getting each of these right, in the right order, in the right amount, is engineering work.
+For a real agent or RAG system, what goes in the context at inference time is not static. It's assembled dynamically from: the system prompt, any cached instructions, retrieved documents ordered carefully, conversation history (summarized or truncated how?), tool outputs, current task state. Getting each of these right, in the right order, in the right amount, is engineering work. The vector retrieval layer is where documents get selected. [Understanding how HNSW search works](/blog/hnsw-vector-search/) helps when debugging why the wrong chunks are coming back.
 
 Anthropic's [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) is partly a context engineering tool: when your system prompt is 50k tokens (a large codebase, a full policy document, detailed instructions), you pay to write it to cache once and then read it at 90% discount on subsequent calls. A 200k token context at standard Claude pricing costs around $3.00 per call. With cache hits, it drops to about $0.10. That's not a marginal savings.
 
@@ -68,7 +68,7 @@ Optimal RAG parameters exist and are measurable. Five to ten chunks, ordered car
 
 Long context and RAG are complementary, not competing. Use long context for bounded, stable information. Use RAG for dynamic retrieval from large corpora. Use both together for complex agents.
 
-The models that score well on needle-in-a-haystack benchmarks are not solving the same problem as models reasoning over large documents. Needle-in-a-haystack is easy; it's string matching at scale. Synthesizing distributed information is hard, and longer contexts don't automatically make it easier.
+The models that score well on needle-in-a-haystack benchmarks are not solving the same problem as models reasoning over large documents. Needle-in-a-haystack is easy. It's string matching at scale. Synthesizing distributed information is hard, and longer contexts don't automatically make it easier.
 
 None of this is exotic research. The "Lost in the Middle" paper is two years old. The practices that follow, reranking, result ordering, limiting retrieved chunks, are available in every RAG framework. The question is whether the teams building these systems actually know about the curve.
 

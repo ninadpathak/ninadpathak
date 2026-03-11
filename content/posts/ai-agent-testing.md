@@ -84,4 +84,4 @@ From working with multiple teams on AI agent testing:
 
 4. **Test the full pipeline, not just the model.** Agents fail in retrieval, in tool parsing, in output formatting, not just in model reasoning. Your tests need to cover the whole stack.
 
-The teams shipping reliable AI agents aren't the ones who got lucky with a good model. They're the ones who built the infrastructure to know when something breaks.
+The teams shipping reliable AI agents aren't the ones who got lucky with a good model. They're the ones who built the infrastructure to know when something breaks. For the root-cause picture of why agents break in production, [AI Agents Keep Failing in Production](/blog/ai-agents-production-failure/) covers the specific failure patterns and what the production data shows.

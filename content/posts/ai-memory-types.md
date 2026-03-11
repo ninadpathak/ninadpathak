@@ -16,7 +16,7 @@ The question gets answered by accident in most implementations. Everything goes 
 
 Sensory memory in humans is extremely short-lived, around 200-500 milliseconds for visual input. It's the brief persistence of raw sensory data before it's either processed into short-term memory or discarded.
 
-For AI agents, the analog is the raw input stream: the tokens the model is currently processing, the tool call that just returned, the image that was just passed in. Sensory memory is automatic. You don't design it; you just accept that the model processes inputs as they arrive and that unprocessed context evaporates if you don't do anything with it.
+For AI agents, the analog is the raw input stream: the tokens the model is currently processing, the tool call that just returned, the image that was just passed in. Sensory memory is automatic. You don't design it. You just accept that the model processes inputs as they arrive and that unprocessed context evaporates if you don't do anything with it.
 
 The practical implication: raw tool outputs that aren't explicitly stored somewhere are gone after the current context. An agent that reads a file, does something with the content, and then needs to reference the original file content three steps later will fail unless that content was deliberately captured. The model's "memory" of the file isn't persistent. It's sensory.
 
@@ -30,7 +30,7 @@ Two problems compound each other here.
 
 The first is the capacity problem. A 200k token context sounds large until you're running a multi-hour task and filling it with tool outputs, reasoning traces, and intermediate state. Tokens per minute varies by provider, but at Claude's output speeds, a moderately complex agent can burn through 100k tokens of context in under an hour of active work.
 
-The second is the [lost-in-the-middle problem](/posts/lost-in-the-middle/). Information at the beginning and end of the context window is reliably attended to. Information in the middle gets deprioritized. An agent that accumulates 50k tokens of intermediate state before reaching the final task step is operating with degraded access to much of that history, even though it's technically in the window.
+The second is the [lost-in-the-middle problem](/blog/lost-in-the-middle/). Information at the beginning and end of the context window is reliably attended to. Information in the middle gets deprioritized. An agent that accumulates 50k tokens of intermediate state before reaching the final task step is operating with degraded access to much of that history, even though it's technically in the window.
 
 The fix for capacity is context compression: summarizing earlier turns, rolling up completed subtask results, truncating irrelevant intermediate steps. The fix for position bias is more subtle: structure the context deliberately, put the most important persistent information at the front (system prompt, core task spec), and keep the working area near the end.
 
@@ -40,7 +40,7 @@ Neither fix is automatic. Both require explicit implementation decisions.
 
 Human episodic memory stores specific events tied to context: you remember *that* meeting, with *those* people, where *that* decision was made. It's retrievable, but retrieval requires a cue.
 
-For AI agents, episodic memory is any persistent record of past interactions, sessions, or task executions that can be retrieved when relevant. The context window doesn't provide this; it's session-scoped. Episodic memory persists across sessions.
+For AI agents, episodic memory is any persistent record of past interactions, sessions, or task executions that can be retrieved when relevant. The context window doesn't provide this. It's session-scoped. Episodic memory persists across sessions.
 
 A customer support agent without episodic memory handles every conversation as if the customer is new. One with episodic memory can retrieve: "Last time this user contacted us about billing, the issue was a duplicate charge that we resolved with a credit. Mentioning that credit proactively might save five minutes." The information isn't in the current context. It needs to be retrieved from somewhere.
 
@@ -50,7 +50,7 @@ The implementation options range from simple to complex:
 
 **Structured episode storage.** Rather than raw logs, extract structured records: what was the task, what was the outcome, what intermediate decisions were made, what failed and why. Retrieving structured records gives the agent much cleaner context than dumping raw conversation history.
 
-**[Mem0](https://mem0.ai/) and similar memory layers.** Projects like Mem0 wrap the storage and retrieval layer and expose it as an API. Rather than implementing semantic search over your own database, you push observations to the memory service and pull relevant memories before each agent step. The tradeoff is dependency on an external service; the benefit is not having to implement vector search, chunking, and deduplication yourself.
+**[Mem0](https://mem0.ai/) and similar memory layers.** Projects like Mem0 wrap the storage and retrieval layer and expose it as an API. Rather than implementing semantic search over your own database, you push observations to the memory service and pull relevant memories before each agent step. The tradeoff is dependency on an external service. The benefit is not having to implement vector search, chunking, and deduplication yourself.
 
 The challenge with episodic memory is relevance. Retrieving everything stored about a user is rarely useful. The useful retrieval is context-aware: given the current task and the current session context, what past episodes are actually informative? That's a retrieval quality problem, and it's harder than it looks.
 
@@ -72,7 +72,7 @@ A harder case is structured knowledge that requires reasoning, not just retrieva
 
 The interesting design question is how these memory types interact. Production agent systems that handle non-trivial tasks tend to combine at least three of the four.
 
-**Short + episodic** is the minimum viable setup for any agent that handles returning users or multi-session tasks. The context window handles the current conversation; episodic memory provides relevant history at session start. Retrieval quality matters enormously here.
+**Short + episodic** is the minimum viable setup for any agent that handles returning users or multi-session tasks. The context window handles the current conversation, and episodic memory provides relevant history at session start. Retrieval quality matters enormously here.
 
 **Short + semantic (RAG)** is standard for knowledge-intensive tasks: customer support with product docs, code assistants with codebase context, research assistants with document collections. The failure mode is retrieving irrelevant chunks that crowd out useful context.
 
@@ -91,7 +91,7 @@ There's a practical reason most agents use only short-term memory: it's the defa
 
 The failure mode is predictable: the agent works fine on tasks that fit in the context window, fails on long tasks where context fills up, can't maintain consistency across sessions, and hallucinates facts it should be looking up.
 
-[Research on production agent failures](https://arize.com/blog/common-ai-agent-failures/) consistently lists context overflow and goal drift among the top failure modes. Both are symptoms of treating the context window as the only memory store.
+[Research on production agent failures](https://arize.com/blog/common-ai-agent-failures/) consistently lists context overflow and goal drift among the top failure modes (I break down the specific patterns in [AI Agents Keep Failing in Production](/blog/ai-agents-production-failure/)). Both are symptoms of treating the context window as the only memory store.
 
 The design principle I keep coming back to: memory architecture is not an afterthought. It's a first-class decision, made before you start implementing. Before writing any agent code, the questions to answer are: what does this agent need to remember across turns, across tasks, and across sessions? Which of those memory types are time-sensitive enough that they belong in the context window, and which are stable enough that they can be retrieved on demand?
 

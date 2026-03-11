@@ -49,7 +49,7 @@
     </item>
     <item>
       <title>Why AI Agent Testing Is Harder Than It Looks</title>
-      <link>https://ninadpathak.com/blog/sample-post/</link>
+      <link>https://ninadpathak.com/blog/ai-agent-testing/</link>
       <description>AI agents break in ways that unit tests don't catch. Here's a systematic approach to testing non-deterministic systems that actually ship.</description>
       <pubDate>Feb 15, 2026</pubDate>
     </item>
