@@ -8,9 +8,9 @@ status: published
 
 A lot of MCP explainers spend their time defining the protocol. The more important question is why you should care in the first place.
 
-If your tools are tightly coupled to one agent framework, every runtime change gets more painful than it should be. MCP matters because it gives you a cleaner boundary between the agent and the things it can call.
+If your tools are tightly coupled to one agent framework, every runtime change gets more painful than it should be. MCP gives you a cleaner boundary between the agent and the things it can call.
 
-**The short version:** if you are building agents that need to call internal APIs, run actions, or work with business data, you should care about the Model Context Protocol for the same reason you care about clean API design. It separates the agent from the implementation details of the tools it uses.
+**The short version:** if you are building agents that need to call internal APIs, run actions, or work with business data, you should care about the Model Context Protocol. It keeps the agent separate from the implementation details of the tools it uses.
 
 | Question | Short answer |
 | --- | --- |

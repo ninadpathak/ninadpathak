@@ -8,7 +8,7 @@ status: published
 
 Prompt caching sounds great in theory because the pitch is simple. Reuse the expensive part of the prompt, cut latency, lower cost, move on.
 
-The catch is that it only works when the reusable part of the prompt is actually stable. If your app keeps rebuilding the top of the prompt, changing document order, or injecting dynamic context too early, the savings disappear fast.
+The catch is that it only works when the reusable part of the prompt is actually stable. If your app keeps rebuilding the top of the prompt, changing document order, or stuffing dynamic context too early, the savings disappear fast.
 
 Here is the short version.
 

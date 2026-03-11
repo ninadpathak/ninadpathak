@@ -8,9 +8,9 @@ status: published
 
 Agents look impressive in demos because the happy path is easy to show. The problems start later, when a tool times out, a task runs too long, or the model needs to recover from a partial failure without starting over.
 
-That is the part people mean when they talk about an agent harness. It is the runtime layer around the model that keeps the whole system from falling apart once real execution starts.
+That is what the harness is for. It is the runtime layer around the model that keeps the system steady once real execution starts.
 
-**What an agent harness is:** An agent harness is the runtime control layer between your application and the LLM. It accepts a task, manages the execution loop, provides the model with tools and context, handles tool call results, tracks state across steps, and surfaces results and errors back upstream. The model handles reasoning. The harness handles everything else.
+**What an agent harness is:** An agent harness is the runtime control layer between your application and the LLM. It manages the execution loop, gives the model tools and context, handles tool results, tracks state across steps, and sends results and errors back upstream. The model handles reasoning. The harness handles everything else.
 
 ## Why the raw LLM API breaks down for agentic tasks
 

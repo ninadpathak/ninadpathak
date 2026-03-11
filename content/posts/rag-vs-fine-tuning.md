@@ -10,7 +10,7 @@ A lot of teams ask the RAG versus fine-tuning question too early. They have a mo
 
 RAG and fine-tuning solve different problems. If the model cannot see the knowledge it needs, retrieval is usually the answer. If it can see the right context and still behaves badly, that is when I start thinking about fine-tuning.
 
-That is the real split. One fixes missing context. The other fixes behavior.
+That is the split that matters. One is a knowledge fix. The other is a behavior fix.
 
 Here is the short version.
 

@@ -10,9 +10,9 @@ If your assistant feels slow, users notice it before they care why. They are not
 
 That delay has a name: **time to first token**, or **TTFT**.
 
-TTFT captures the start of the user experience, not the end of the computation. A model can stream quickly once it gets going and still feel slow if it waits too long before the first token.
+It measures how long the system takes to start responding. A model can stream quickly once it gets going and still feel slow if it waits too long before the first token.
 
-For interactive products, TTFT is usually the latency metric to optimize first. The main levers are smaller models, shorter prompts, cache reuse, better placement, and less queueing. Throughput work comes later.
+For interactive products, TTFT is usually the first latency metric I would fix. The main levers are smaller models, shorter prompts, cache reuse, better placement, and less queueing. Throughput work comes later.
 
 ## What TTFT actually measures
 
