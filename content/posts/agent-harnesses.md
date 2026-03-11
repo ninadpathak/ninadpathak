@@ -1,6 +1,6 @@
 ---
 title: "Agent harnesses: the infrastructure layer your LLM agent actually needs"
-date: 2026-03-22
+date: 2026-03-10
 description: "Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability."
 tags: [ai, agents, infrastructure, llm]
 status: published

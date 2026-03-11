@@ -1,6 +1,6 @@
 ---
 title: "The Model Context Protocol explained: why MCP matters architecturally"
-date: 2026-03-11
+date: 2026-03-09
 description: "A practical explanation of the Model Context Protocol, why it matters architecturally, how FastAPI MCP fits in, and how to avoid framework lock-in in agent systems."
 tags: [ai, agents, mcp, fastapi]
 status: published

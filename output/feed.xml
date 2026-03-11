@@ -6,22 +6,28 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
-      <title>Agent harnesses: the infrastructure layer your LLM agent actually needs</title>
-      <link>https://ninadpathak.com/blog/agent-harnesses/</link>
-      <description>Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.</description>
-      <pubDate>Mar 22, 2026</pubDate>
-    </item>
-    <item>
       <title>Best LLMs for coding in 2026 (it's not what benchmarks say)</title>
       <link>https://ninadpathak.com/blog/best-llms-for-coding/</link>
       <description>HumanEval scores are nearly meaningless in 2026. Here's how to pick the right coding LLM based on your actual task: agentic coding, autocomplete, or cost-sensitive production.</description>
       <pubDate>Mar 11, 2026</pubDate>
     </item>
     <item>
+      <title>Agent harnesses: the infrastructure layer your LLM agent actually needs</title>
+      <link>https://ninadpathak.com/blog/agent-harnesses/</link>
+      <description>Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.</description>
+      <pubDate>Mar 10, 2026</pubDate>
+    </item>
+    <item>
       <title>The Model Context Protocol explained: why MCP matters architecturally</title>
       <link>https://ninadpathak.com/blog/model-context-protocol-explained/</link>
       <description>A practical explanation of the Model Context Protocol, why it matters architecturally, how FastAPI MCP fits in, and how to avoid framework lock-in in agent systems.</description>
-      <pubDate>Mar 11, 2026</pubDate>
+      <pubDate>Mar 09, 2026</pubDate>
+    </item>
+    <item>
+      <title>Time to first token: what TTFT measures and how to reduce it</title>
+      <link>https://ninadpathak.com/blog/time-to-first-token-ttft/</link>
+      <description>TTFT is the latency metric that matters most for chat, copilots, and interactive AI apps. Here is what time to first token measures and how to reduce it without optimizing the wrong thing.</description>
+      <pubDate>Mar 08, 2026</pubDate>
     </item>
   </channel>
 </rss>
