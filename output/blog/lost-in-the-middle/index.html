@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Set theme immediately to prevent flash -->
-  <script>(function(){try{var t=localStorage.getItem('np-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+  <!-- Set theme + background on html immediately to prevent any flash -->
+  <script>(function(){var t='dark';try{t=localStorage.getItem('np-theme')||'dark';}catch(e){}document.documentElement.setAttribute('data-theme',t);document.documentElement.style.background=t==='light'?'#f8f8f6':'#090909';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Context Window Has a Middle. Models Don't Read It. | Ninad Pathak</title>
