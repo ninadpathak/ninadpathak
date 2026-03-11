@@ -6,9 +6,9 @@ tags: [ai, llm, prompt-caching, inference]
 status: published
 ---
 
-If your long prompts are getting expensive, prompt caching is the same lesson computer architects learned when systems like the [IBM System/360](https://www.ibm.com/history/system-360) pushed reuse closer to the processor: the painful part is repeated access to the same state. Teams like the headline numbers, then discover the prompt they wanted to reuse was never stable enough to cache.
+Prompt caching sounds great in theory because the pitch is simple. Reuse the expensive part of the prompt, cut latency, lower cost, move on.
 
-Prompt caching only works when the stable part of the prompt is actually stable, when requests arrive often enough to hit the cache, and when the expensive part of the request sits in the prefix instead of getting rebuilt every time. If those conditions are not true, the headline numbers do not matter much.
+The catch is that it only works when the reusable part of the prompt is actually stable. If your app keeps rebuilding the top of the prompt, changing document order, or injecting dynamic context too early, the savings disappear fast.
 
 Here is the short version.
 

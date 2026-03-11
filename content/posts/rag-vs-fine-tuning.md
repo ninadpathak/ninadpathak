@@ -6,9 +6,9 @@ tags: [ai, rag, fine-tuning, llm]
 status: published
 ---
 
-If your team is trying to bake changing knowledge into model weights, you are running into the same problem the [Twelve-Factor App](https://www.12factor.net/config) tried to solve with config and code: the parts that change fastest should stay outside the artifact that is hardest to update. That is the cleanest way I know to frame RAG versus fine-tuning.
+A lot of teams ask the RAG versus fine-tuning question too early. They have a model problem, but they have not named the failure clearly enough to know what kind of fix they actually need.
 
-RAG and fine-tuning are not rival features sitting on the same shelf. They solve different failure modes. If the model lacks knowledge it cannot see at inference time, retrieval is usually the answer. If the model sees the right context and still behaves the wrong way, I start thinking about fine-tuning.
+RAG and fine-tuning solve different problems. If the model cannot see the knowledge it needs, retrieval is usually the answer. If it can see the right context and still behaves badly, that is when I start thinking about fine-tuning.
 
 That is the real split. One fixes missing context. The other fixes behavior.
 

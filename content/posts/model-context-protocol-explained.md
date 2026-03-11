@@ -6,9 +6,9 @@ tags: [ai, agents, mcp, fastapi]
 status: published
 ---
 
-If your agent stack feels one framework swap away from a rewrite, you are running into the same interface problem behind the [Unix philosophy](https://archive.computerhistory.org/resources/access/text/2019/11/102740539-05-01-acc.pdf): components stay useful when they can work together through a stable boundary. That is why MCP matters.
+A lot of MCP explainers spend their time defining the protocol. The more important question is why you should care in the first place.
 
-MCP gives agents a standard way to talk to tools, data, and prompts without hard-wiring those integrations to one SDK or framework. If that boundary is clean, you can swap runtimes and reuse tools. If it is not, the tool layer turns into framework-specific glue.
+If your tools are tightly coupled to one agent framework, every runtime change gets more painful than it should be. MCP matters because it gives you a cleaner boundary between the agent and the things it can call.
 
 **The short version:** if you are building agents that need to call internal APIs, run actions, or work with business data, you should care about the Model Context Protocol for the same reason you care about clean API design. It separates the agent from the implementation details of the tools it uses.
 

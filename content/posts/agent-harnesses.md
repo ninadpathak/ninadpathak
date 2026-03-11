@@ -6,11 +6,9 @@ tags: [ai, agents, infrastructure, llm]
 status: published
 ---
 
-When an agent dies halfway through a task, I think about the [Apollo Guidance Computer's Executive and Waitlist system](https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19750004273.pdf), built because real computation fails if scheduling, prioritization, and recovery around it are weak. Agent failures look modern. The control problem is not.
+Agents look impressive in demos because the happy path is easy to show. The problems start later, when a tool times out, a task runs too long, or the model needs to recover from a partial failure without starting over.
 
-Picture a research agent that reads twenty web pages, cross-references the findings, and produces a structured report. It fails at step fourteen because a downstream API times out, and the whole run has to start from scratch. That is not a model failure. The LLM reasoned correctly. The surrounding runtime did not.
-
-That infrastructure has a name: the agent harness.
+That is the part people mean when they talk about an agent harness. It is the runtime layer around the model that keeps the whole system from falling apart once real execution starts.
 
 **What an agent harness is:** An agent harness is the runtime control layer between your application and the LLM. It accepts a task, manages the execution loop, provides the model with tools and context, handles tool call results, tracks state across steps, and surfaces results and errors back upstream. The model handles reasoning. The harness handles everything else.
 
