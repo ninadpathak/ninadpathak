@@ -205,7 +205,8 @@
 
       </nav>
       <div class="post-content">
-        <p>Picture a research agent that reads twenty web pages, cross-references the findings, and produces a structured report. Sounds straightforward until you watch it fail at step fourteen because a downstream API timed out, and you realize the whole run has to start from scratch. That failure is not a model failure. The LLM reasoned correctly every step of the way. What failed was the infrastructure holding it together.</p>
+        <p>When an agent dies halfway through a task, I think about the <a href="https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19750004273.pdf">Apollo Guidance Computer's Executive and Waitlist system</a>, built because real computation fails if scheduling, prioritization, and recovery around it are weak. Agent failures look modern. The control problem is not.</p>
+<p>Picture a research agent that reads twenty web pages, cross-references the findings, and produces a structured report. It fails at step fourteen because a downstream API times out, and the whole run has to start from scratch. That is not a model failure. The LLM reasoned correctly. The surrounding runtime did not.</p>
 <p>That infrastructure has a name: the agent harness.</p>
 <p><strong>What an agent harness is:</strong> An agent harness is the runtime control layer between your application and the LLM. It accepts a task, manages the execution loop, provides the model with tools and context, handles tool call results, tracks state across steps, and surfaces results and errors back upstream. The model handles reasoning. The harness handles everything else.</p>
 <h2 id="why-the-raw-llm-api-breaks-down-for-agentic-tasks">Why the raw LLM API breaks down for agentic tasks</h2>

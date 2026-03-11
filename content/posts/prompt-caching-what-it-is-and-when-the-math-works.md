@@ -6,9 +6,7 @@ tags: [ai, llm, prompt-caching, inference]
 status: published
 ---
 
-Prompt caching is the same old cache story in a new layer. The expensive part is not work. It is repeated work. Teams like the headline numbers, then find out the prompt they wanted to reuse was never stable enough to cache in the first place.
-
-That is directionally true. It is also where people stop thinking.
+If your long prompts are getting expensive, prompt caching is the same lesson computer architects learned when systems like the [IBM System/360](https://www.ibm.com/history/system-360) pushed reuse closer to the processor: the painful part is repeated access to the same state. Teams like the headline numbers, then discover the prompt they wanted to reuse was never stable enough to cache.
 
 Prompt caching only works when the stable part of the prompt is actually stable, when requests arrive often enough to hit the cache, and when the expensive part of the request sits in the prefix instead of getting rebuilt every time. If those conditions are not true, the headline numbers do not matter much.
 

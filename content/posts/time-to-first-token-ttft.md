@@ -6,7 +6,7 @@ tags: [ai, llm, latency, inference]
 status: published
 ---
 
-In the early web, people obsessed over page load. The first visible response shaped the whole interaction. LLM apps work the same way. In a chat UI or coding assistant, the first moment that matters is when the model starts answering.
+If your assistant feels slow before it says anything useful, you are back in the old [web performance era](https://www.stevesouders.com/blog/), where the first visible response shaped the whole experience long before the page was fully done. LLM apps work the same way. In a chat UI or coding assistant, the first moment that matters is when the model starts answering.
 
 That delay has a name: **time to first token**, or **TTFT**.
 

@@ -6,7 +6,9 @@ tags: [ai, agents, infrastructure, llm]
 status: published
 ---
 
-Picture a research agent that reads twenty web pages, cross-references the findings, and produces a structured report. Sounds straightforward until you watch it fail at step fourteen because a downstream API timed out, and you realize the whole run has to start from scratch. That failure is not a model failure. The LLM reasoned correctly every step of the way. What failed was the infrastructure holding it together.
+When an agent dies halfway through a task, I think about the [Apollo Guidance Computer's Executive and Waitlist system](https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19750004273.pdf), built because real computation fails if scheduling, prioritization, and recovery around it are weak. Agent failures look modern. The control problem is not.
+
+Picture a research agent that reads twenty web pages, cross-references the findings, and produces a structured report. It fails at step fourteen because a downstream API times out, and the whole run has to start from scratch. That is not a model failure. The LLM reasoned correctly. The surrounding runtime did not.
 
 That infrastructure has a name: the agent harness.
 

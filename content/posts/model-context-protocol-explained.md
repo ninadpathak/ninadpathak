@@ -6,7 +6,7 @@ tags: [ai, agents, mcp, fastapi]
 status: published
 ---
 
-The important thing about MCP is not the acronym. It is the boundary.
+If your agent stack feels one framework swap away from a rewrite, you are running into the same interface problem behind the [Unix philosophy](https://archive.computerhistory.org/resources/access/text/2019/11/102740539-05-01-acc.pdf): components stay useful when they can work together through a stable boundary. That is why MCP matters.
 
 MCP gives agents a standard way to talk to tools, data, and prompts without hard-wiring those integrations to one SDK or framework. If that boundary is clean, you can swap runtimes and reuse tools. If it is not, the tool layer turns into framework-specific glue.
 

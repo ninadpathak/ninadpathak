@@ -6,7 +6,7 @@ tags: [ai, llm, coding, benchmarks]
 status: published
 ---
 
-In the Codex and early GPT-3.5 era, benchmark wins still felt useful. Models were far enough apart that the numbers could tell you something. In 2026, they usually do not.
+If you are still choosing coding models the way the [Codex launch](https://openai.com/index/introducing-codex/) and early [GPT-3.5 era](https://openai.com/index/gpt-3-5-turbo-fine-tuning-and-api-updates/) trained us to, by looking for one benchmark winner, you are using a 2021 heuristic in a 2026 market. The models are closer, the tasks are messier, and the benchmark table hides the part that actually hurts in practice.
 
 Kimi K2.5 scores 99.0 on HumanEval. That looks great. It does not tell you whether you should trust the model inside a real codebase.
 

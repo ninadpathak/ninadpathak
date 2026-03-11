@@ -6,9 +6,9 @@ tags: [ai, rag, fine-tuning, llm]
 status: published
 ---
 
-The RAG versus fine-tuning debate reminds me of an older systems rule: keep changing data out of the part that is hardest to update. Teams still get this wrong with LLMs. They try to decide between retrieval and training before they have named the failure clearly.
+If your team is trying to bake changing knowledge into model weights, you are running into the same problem the [Twelve-Factor App](https://www.12factor.net/config) tried to solve with config and code: the parts that change fastest should stay outside the artifact that is hardest to update. That is the cleanest way I know to frame RAG versus fine-tuning.
 
-I think that framing causes half the confusion. RAG and fine-tuning are not rival features sitting on the same shelf. They solve different failure modes. If the model lacks knowledge it cannot see at inference time, retrieval is usually the answer. If the model sees the right context and still behaves the wrong way, I start thinking about fine-tuning.
+RAG and fine-tuning are not rival features sitting on the same shelf. They solve different failure modes. If the model lacks knowledge it cannot see at inference time, retrieval is usually the answer. If the model sees the right context and still behaves the wrong way, I start thinking about fine-tuning.
 
 That is the real split. One fixes missing context. The other fixes behavior.
 
