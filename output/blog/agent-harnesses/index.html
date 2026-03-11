@@ -192,13 +192,11 @@
         <p>An agent without a harness is a prompt with ambitions. The LLM handles reasoning. The harness handles everything else: tool registration, state persistence, error recovery, prompt assembly, rate limiting, and the thousand other things that determine whether a multi-step agent actually completes its task or quietly fails at step four.</p>
 <p>I've watched teams build the same harness from scratch three times before deciding to use a framework, and I've watched other teams adopt frameworks they didn't understand and spend weeks fighting the abstraction. The choice matters. Understanding what a harness does before you choose how to build one is the prerequisite.</p>
 <p><strong>What is an agent harness?</strong> An agent harness is the runtime control layer that sits between your application and the LLM. It accepts a task, manages the agent's execution loop, provides the LLM with tools and context, handles tool call responses, tracks state across steps, and surfaces results and errors back to your system. The LLM handles reasoning. The harness handles execution.</p>
-<hr />
 <h2 id="why-the-raw-api-isnt-enough">Why the raw API isn't enough</h2>
 <p>A direct LLM API call is stateless. You send a prompt, get a completion, done. Agents need more. They make decisions across multiple steps, call external tools, accumulate context, and need to recover from partial failures.</p>
 <p>Consider a research agent that reads ten web pages, synthesizes findings, and writes a report. Across that task it might make 30 to 50 API calls, call a browser tool twenty times, and manage a context window that grows with each observation. None of that is handled by the API itself.</p>
 <p>Without a harness, the code that manages all this lives in your application layer. You write an execution loop. You handle tool call parsing. You append tool results to the message history. You catch API rate limit errors and retry. You truncate context when it gets too long. You log what happened for debugging.</p>
 <p>That's a harness. You've built one. The question is whether it's the one you'd design intentionally or the one that grew organically around your specific use case and is now hard to test, extend, or hand off.</p>
-<hr />
 <h2 id="what-a-harness-actually-contains">What a harness actually contains</h2>
 <p>A well-designed harness has five components.</p>
 <p><strong>Tool registry.</strong> A catalog of available tools with their schemas, descriptions, and execution handlers. The harness exposes this catalog to the LLM as function definitions and intercepts tool call requests, routes them to the right handler, and returns results in the format the LLM expects. The non-obvious part: the tool registry is also where you enforce permissions and rate limits per tool. A web browsing tool that can make unlimited requests is an incident waiting to happen.</p>
@@ -206,7 +204,6 @@
 <p><strong>Execution loop.</strong> The core of any agent harness. Send the current context to the LLM. If the response contains a tool call, execute it, append the result, and send again. If the response is a final answer, surface it. Handle the stop conditions: max iterations reached, context window full, explicit done signal, or unrecoverable error. The loop is simple to describe and surprisingly easy to get wrong under load.</p>
 <p><strong>State manager.</strong> Agents that run longer than a single API call need somewhere to put their working state. What subtasks are complete? What information has been gathered? What decisions have been made? Some harnesses keep state in the context window, which works for short tasks but breaks for long ones. Others write to external storage at each step, enabling checkpoint-based recovery. The choice between in-context state and external state is the single biggest architectural decision in agent design.</p>
 <p><strong>Observer.</strong> Structured logging of every agent step: what was in the prompt, what the LLM returned, which tool was called, what it returned, how long each step took. Without this, debugging a failed agent run means staring at opaque error messages. With it, you can replay any run, pinpoint exactly where reasoning went wrong, and build evaluation datasets from production traces. Observability is not optional for anything running in production.</p>
-<hr />
 <h2 id="frameworks-versus-building-your-own">Frameworks versus building your own</h2>
 <p>The frameworks worth knowing:</p>
 <p><strong>LangChain's AgentExecutor and LangGraph.</strong> AgentExecutor is the original framework harness, now showing its age for complex multi-agent workflows. LangGraph is the current recommendation for anything graph-based or requiring fine-grained control over agent topology. Mature ecosystem, extensive integrations, steeper learning curve than the docs suggest.</p>
@@ -215,7 +212,6 @@
 <p><strong>OpenAI's Agents SDK.</strong> OpenAI's lightweight framework, open-sourced and updated from their earlier Swarm project. Minimal abstraction, close to raw API, good for teams that want to understand what's happening without fighting framework internals.</p>
 <p><strong>Custom harnesses.</strong> More common than people admit. Most teams I've talked to who are serious about production reliability end up with a custom harness for their core agent path, even if they started with a framework. The reason is almost always the observer component. Production observability requirements exceed what frameworks provide out of the box.</p>
 <p>My take on the build-versus-buy question: use a framework to learn the pattern and move fast in the first month. Plan to own the harness layer for anything critical. The framework abstractions that feel helpful during development often become obstacles when you need to debug production failures at the step level.</p>
-<hr />
 <h2 id="the-checkpoint-problem">The checkpoint problem</h2>
 <p>The hardest part of building a harness is state recovery.</p>
 <p>Agents fail partway through tasks. The LLM hallucinates a tool call argument. A downstream API returns a 503. Context fills up at step 18 of a 25-step task. A network timeout kills the connection.</p>
@@ -226,7 +222,6 @@
 <p><strong>Phase-level persistence.</strong> Write state at logical phase boundaries: after research is complete, after analysis is complete, before writing begins. Simpler to implement, coarser recovery points. Right for tasks with clear phases that take roughly equal time.</p>
 <p><strong>Idempotent tool design.</strong> Build tools so that calling them twice produces the same result as calling them once. Combined with step-level checkpointing, this means recovery always works: re-run from the last checkpoint, idempotent tools produce the same results, the agent continues from where it stopped. Harder to implement, but it eliminates an entire class of recovery errors.</p>
 <p>The harness is where checkpointing logic lives. The LLM doesn't know about checkpoints. The application layer shouldn't have to manage them. The harness takes on that responsibility as a core function.</p>
-<hr />
 <h2 id="context-management-inside-the-harness">Context management inside the harness</h2>
 <p>The context window is a fixed resource. Long-running agents consume it. The harness needs a policy for what to do when context gets full.</p>
 <p>Four approaches, roughly in order of complexity:</p>
@@ -235,7 +230,6 @@
 <p><strong>External memory with retrieval.</strong> Keep the full message history in an external store. At each step, retrieve the most relevant past observations and inject them into context. The hardest approach to implement correctly, but the only one that scales to truly long-horizon tasks.</p>
 <p><strong>Task decomposition.</strong> Avoid the problem by breaking large tasks into smaller subtasks, each of which fits comfortably in context. Pass outputs between subtasks explicitly rather than relying on a shared context window. Requires more upfront task design but produces the most reliable results.</p>
 <p>The harness is the right place to implement whichever policy fits your task characteristics. Pushing this logic into the LLM's prompt ("summarize when context is full") produces inconsistent results. Handling it deterministically in the harness produces predictable behavior.</p>
-<hr />
 <h2 id="a-minimal-harness-checklist">A minimal harness checklist</h2>
 <p>Before deploying any agent to production, run through these requirements:</p>
 <p><strong>Tool registry:</strong>
@@ -257,7 +251,6 @@
 - Every LLM response is logged with latency and finish reason
 - Every tool call is logged with full inputs and outputs
 - Traces are queryable by run ID</p>
-<hr />
 <h2 id="when-you-dont-need-a-harness">When you don't need a harness</h2>
 <p>Not every LLM application is an agent. A harness adds complexity. For applications that are single-turn or lightly interactive, that complexity is unnecessary overhead.</p>
 <p>You probably don't need an agent harness if your application does one of the following:</p>
@@ -274,7 +267,6 @@
 <li>Requires auditability of what the agent did and why</li>
 </ul>
 <p>The line is roughly: if the LLM controls the flow, you need a harness. If your code controls the flow and the LLM is a subroutine, you don't.</p>
-<hr />
 <h2 id="frequently-asked-questions">Frequently asked questions</h2>
 <p><strong>What's the difference between an agent harness and an agent framework?</strong></p>
 <p>A framework is a library or tool that provides harness functionality. The harness is the concept. LangGraph, AutoGen, and OpenAI's Agents SDK are frameworks that implement harness patterns. You can build a harness without using a framework.</p>
@@ -286,7 +278,6 @@
 <p>Log every prompt (or a hash of it if PII is a concern), every completion, every tool call with inputs and outputs, every error with full context, and total token usage per step. At minimum. Production incidents in agent systems are almost always debugged by replaying traces.</p>
 <p><strong>When should I checkpoint after every step versus after phases?</strong></p>
 <p>Checkpoint after every step if any individual step is expensive: long-running API calls, database writes, or anything that takes more than 10 to 15 seconds. Checkpoint after phases if steps are fast but phases have clear semantic meaning. The goal is always the same: minimize the amount of work lost on failure.</p>
-<hr />
 <p>The harness is not the interesting part of an agent system. The interesting part is what the agent can do. The harness is the part that determines whether what the agent can do is reliable enough to matter in production. Getting it right upfront is much cheaper than rebuilding it around a system that's already deployed.</p>
       </div>
     </div>
