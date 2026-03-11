@@ -892,6 +892,12 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   align-items: flex-start;
 }
 
+.footer-links-inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.65rem 1rem;
+}
+
 .footer-link  {
   font-size: 0.875rem;
   color: var(--text-3);
