@@ -10,9 +10,9 @@ In the early web, people obsessed over page load. That focus made sense because 
 
 That delay has a name: **time to first token**, or **TTFT**.
 
-TTFT captures the start of the user experience, not the end of the computation. A model can stream quickly once it gets going and still feel sluggish if it waits too long before the first token. That is why TTFT deserves its own analysis instead of getting buried inside a generic latency number.
+TTFT captures the start of the user experience, not the end of the computation. A model can stream quickly once it gets going and still feel slow if it waits too long before the first token.
 
-In this piece, I want to make one point clearly. For interactive products, TTFT usually matters more than throughput. The knobs that improve TTFT are also different from the knobs that improve tokens per second. If those two goals get mixed together, teams spend time polishing the wrong part of the system.
+For interactive products, TTFT is usually the latency metric to optimize first. The levers are straightforward: smaller models, shorter prompts, cache reuse, better placement, and less queueing. Throughput work comes later.
 
 ## What TTFT actually measures
 
