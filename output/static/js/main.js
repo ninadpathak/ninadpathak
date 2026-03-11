@@ -150,38 +150,79 @@
     var canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
 
-    var ctx   = canvas.getContext('2d');
-    var hero  = canvas.closest('.hero');
-    var CHARS = '0123456789ABCDEF<>{}[]/\\=;()'.split('');
-    var CW    = 16;
-    var CH    = 22;
+    var ctx      = canvas.getContext('2d');
+    var hero     = canvas.closest('.hero');
+    var heroCopy = hero ? hero.querySelector('.hero-copy') : null;
+    var CHARS    = '0123456789ABCDEF<>{}[]/\\=;()'.split('');
+    var CW       = 16;
+    var CH       = 22;
+    var cells    = [];
+
+    function buildCells() {
+      var cols = Math.ceil(canvas.width / CW);
+      var rows = Math.ceil(canvas.height / CH);
+      cells = [];
+
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          cells.push({
+            x:            c * CW,
+            y:            r * CH,
+            char:         CHARS[Math.floor(Math.random() * CHARS.length)],
+            alpha:        0,
+            state:        'idle',
+            timer:        0,
+            nextActivate: Math.random() * 2500,
+            liveFor:      700 + Math.random() * 1400
+          });
+        }
+      }
+    }
 
     function resize() {
       canvas.width  = hero.offsetWidth;
       canvas.height = hero.offsetHeight;
+      buildCells();
     }
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    var cols  = Math.ceil(canvas.width  / CW);
-    var rows  = Math.ceil(canvas.height / CH);
+    function getExclusionRect() {
+      if (!heroCopy) return null;
 
-    // Each cell cycles: idle → fade-in → live (scrambling) → fade-out → idle
-    var cells = [];
-    for (var r = 0; r < rows; r++) {
-      for (var c = 0; c < cols; c++) {
-        cells.push({
-          x:            c * CW,
-          y:            r * CH,
-          char:         CHARS[Math.floor(Math.random() * CHARS.length)],
-          alpha:        0,
-          state:        'idle',
-          timer:        0,
-          // Stagger the initial activations so they don't all fire at once
-          nextActivate: Math.random() * 2500,
-          liveFor:      700 + Math.random() * 1400
-        });
-      }
+      var heroRect = hero.getBoundingClientRect();
+      var copyRect = heroCopy.getBoundingClientRect();
+      var horizontalPad = window.innerWidth <= 768 ? 28 : 72;
+      var verticalPad = window.innerWidth <= 768 ? 24 : 40;
+
+      return {
+        left: Math.max(0, copyRect.left - heroRect.left - horizontalPad),
+        right: Math.min(canvas.width, copyRect.right - heroRect.left + horizontalPad),
+        top: Math.max(0, copyRect.top - heroRect.top - verticalPad),
+        bottom: Math.min(canvas.height, copyRect.bottom - heroRect.top + verticalPad)
+      };
+    }
+
+    function getZoneAlpha(x, y, rect) {
+      if (!rect) return 1;
+
+      var feather = window.innerWidth <= 768 ? 18 : 28;
+      var insideX = x >= rect.left && x <= rect.right;
+      var insideY = y >= rect.top && y <= rect.bottom;
+
+      if (insideX && insideY) return 0;
+
+      var dx = 0;
+      if (x < rect.left) dx = rect.left - x;
+      else if (x > rect.right) dx = x - rect.right;
+
+      var dy = 0;
+      if (y < rect.top) dy = rect.top - y;
+      else if (y > rect.bottom) dy = y - rect.bottom;
+
+      var distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance >= feather) return 1;
+      return Math.max(0, Math.min(1, distance / feather));
     }
 
     var last = null;
@@ -193,6 +234,7 @@
 
       var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
       var rgb    = isDark ? '255,95,31' : '140,45,0';
+      var exclusionRect = getExclusionRect();
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.font         = (CH - 6) + "px 'JetBrains Mono', monospace";
@@ -234,7 +276,9 @@
         }
 
         if (cell.alpha > 0) {
-          ctx.fillStyle = 'rgba(' + rgb + ',' + (cell.alpha * 0.2) + ')';
+          var zoneAlpha = getZoneAlpha(cell.x + CW / 2, cell.y + CH / 2, exclusionRect);
+          if (zoneAlpha <= 0) continue;
+          ctx.fillStyle = 'rgba(' + rgb + ',' + (cell.alpha * 0.2 * zoneAlpha) + ')';
           ctx.fillText(cell.char, cell.x + CW / 2, cell.y + CH / 2);
         }
       }

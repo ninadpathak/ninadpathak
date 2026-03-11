@@ -362,6 +362,13 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   z-index: 2;
 }
 
+.hero-copy {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  max-width: min(42rem, 100%);
+}
+
 .hero-label { margin-bottom: 1.5rem; }
 
 .hero h1 {
