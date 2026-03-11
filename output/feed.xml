@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Speculative decoding explained: how LLMs generate tokens faster without changing the output</title>
+      <link>https://ninadpathak.com/blog/speculative-decoding-explained/</link>
+      <description>Speculative decoding cuts LLM latency by 2-3x without changing output quality. Here's how the draft-verify loop works, why acceptance rate is the only number that matters, and when it actually hurts.</description>
+      <pubDate>Mar 12, 2026</pubDate>
+    </item>
+    <item>
       <title>Best LLMs for coding in 2026 (it's not what benchmarks say)</title>
       <link>https://ninadpathak.com/blog/best-llms-for-coding/</link>
       <description>HumanEval scores are nearly meaningless in 2026. Here's how to pick the right coding LLM based on your actual task: agentic coding, autocomplete, or cost-sensitive production.</description>

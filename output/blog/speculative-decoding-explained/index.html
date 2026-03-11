@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html[data-theme="light"] {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='dark';try{t=localStorage.getItem('np-theme')||'dark';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='light'?'#f8f8f6':'#090909';d.style.colorScheme=t==='light'?'light':'dark';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speculative decoding explained: how LLMs generate tokens faster without changing the output | Ninad Pathak</title>
+  <meta name="description" content="Speculative decoding cuts LLM latency by 2-3x without changing output quality. Here's how the draft-verify loop works, why acceptance rate is the only number that matters, and when it actually hurts.">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Speculative decoding explained: how LLMs generate tokens faster without changing the output">
+  <meta property="og:description" content="Speculative decoding cuts LLM latency by 2-3x without changing output quality. Here's how the draft-verify loop works, why acceptance rate is the only number that matters, and when it actually hurts.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/speculative-decoding-explained/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/speculative-decoding-explained/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Speculative decoding explained: how LLMs generate tokens faster without changing the output",
+  "description": "Speculative decoding cuts LLM latency by 2-3x without changing output quality. Here's how the draft-verify loop works, why acceptance rate is the only number that matters, and when it actually hurts.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-12",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Speculative decoding explained: how LLMs generate tokens faster without changing the output",
+      "item": "https://ninadpathak.com/blog/speculative-decoding-explained/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Speculative decoding explained: how LLMs generate tokens faster without changing the output</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 12, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">7 min read</span>
+      </div>
+      <h1 class="post-title">Speculative decoding explained: how LLMs generate tokens faster without changing the output</h1>
+      <p class="lead">Speculative decoding cuts LLM latency by 2-3x without changing output quality. Here's how the draft-verify loop works, why acceptance rate is the only number that matters, and when it actually hurts.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">inference</span>
+        <span class="tag">performance</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#why-memory-boundedness-makes-this-possible">Why memory-boundedness makes this possible</a></li>
+<li><a href="#how-the-draft-verify-loop-works">How the draft-verify loop works</a></li>
+<li><a href="#acceptance-rate-the-only-metric-that-matters-for-real-world-speedup">Acceptance rate: the only metric that matters for real-world speedup</a></li>
+<li><a href="#the-main-variants-worth-knowing">The main variants worth knowing</a></li>
+<li><a href="#when-speculative-decoding-helps-and-when-it-hurts">When speculative decoding helps and when it hurts</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>If your model feels slow, the bottleneck is often not the math. It is the waiting. A large model spends a lot of inference time pulling weights from memory over and over just to emit one token at a time.</p>
+<p>That is why speculative decoding matters. It is one of the few inference tricks that can make a model feel much faster without changing the output distribution. The basic move is simple: let a smaller draft model guess a few upcoming tokens, then ask the large target model to verify them in one pass instead of generating each token serially.</p>
+<p><strong>The short answer:</strong> speculative decoding uses a fast draft model to propose several next tokens, then verifies them with the target model in parallel. If the guesses are accepted, the system emits multiple tokens for roughly the cost of one target-model step. If they are rejected, it falls back cleanly. In the standard form, output quality is unchanged because the algorithm preserves the target model's sampling distribution.</p>
+<h2 id="why-memory-boundedness-makes-this-possible">Why memory-boundedness makes this possible</h2>
+<p>A transformer forward pass is expensive because it has to read the model's weights from memory. That memory movement is often the real constraint, not the matrix multiplies themselves. Once the weights are available on chip, the GPU can do more work than a naive token-by-token decoding loop asks it to do.</p>
+<p>Standard autoregressive decoding wastes that headroom. One forward pass gives you one token. Then the model does it again. And again. Each step reloads the same large set of weights.</p>
+<p>Speculative decoding exploits that gap directly. If a draft model can guess <code>K</code> future tokens, the target model can check all of them in one pass. That spreads the expensive memory read across multiple candidate tokens instead of paying it once per token.</p>
+<p><a href="https://github.com/hemingkx/Spec-Bench">Spec-Bench, the ACL 2024 benchmark</a> for evaluating speculative decoding methods, measured EAGLE achieving a 2.4x to 2.5x speedup over autoregressive decoding across model sizes, with a maximum of 3.0x on mathematical reasoning tasks with Vicuna-33B. The <a href="https://research.google/blog/looking-back-at-speculative-decoding/">original Google Research blog post on speculative decoding</a> documented 2x to 3x improvements across translation and summarization tasks from the initial 2022 work.</p>
+<p>[SCREENSHOT: Google Research blog post header at research.google/blog/looking-back-at-speculative-decoding/ showing the original post and any speedup figures]</p>
+<h2 id="how-the-draft-verify-loop-works">How the draft-verify loop works</h2>
+<p>The loop is easier to understand when you break it into three parts:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>What happens</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Draft</td>
+<td>A smaller model proposes the next <code>K</code> tokens.</td>
+<td>This is cheap because the draft model is small.</td>
+</tr>
+<tr>
+<td>Verify</td>
+<td>The target model evaluates the context plus those draft tokens in one pass.</td>
+<td>This is where the latency savings come from.</td>
+</tr>
+<tr>
+<td>Accept or reject</td>
+<td>Matching tokens are kept. The first mismatch triggers resampling and the rest are discarded.</td>
+<td>This preserves correctness while still getting speedup from accepted runs.</td>
+</tr>
+</tbody>
+</table>
+<p>In practice, the details differ by implementation, but the shape stays the same. A cheap model guesses ahead. The expensive model checks the work. Accepted tokens move straight into the output stream.</p>
+<p>The key property is accuracy. The standard rejection-sampling version produces the same output distribution as ordinary decoding from the target model. There is no built-in quality tradeoff in that version of the algorithm. The <a href="https://arxiv.org/html/2401.07851v2">comprehensive survey of speculative decoding techniques</a> covers the formal proofs across rejection-sampling variants.</p>
+<h2 id="acceptance-rate-the-only-metric-that-matters-for-real-world-speedup">Acceptance rate: the only metric that matters for real-world speedup</h2>
+<p>Everything comes back to acceptance rate. If the draft model proposes four tokens and the target model accepts three on average, the system looks great. If it accepts one, the gain can disappear once you count the draft model overhead.</p>
+<p>This is the metric to watch because it captures whether the draft model is actually useful for your workload.</p>
+<p>Acceptance rate depends on two things:</p>
+<ul>
+<li><strong>Task predictability.</strong> Code, structured outputs, and repetitive continuations tend to accept well. Open-ended generation usually accepts less.</li>
+<li><strong>Draft-target alignment.</strong> The draft model needs to guess what the target model would have said, not just something plausible. If those distributions drift apart, rejection goes up.</li>
+</ul>
+<p>That is why benchmark numbers need context. A setup that looks great on code or math can look ordinary on looser generation tasks. Measure acceptance rate on your own traffic before treating any published speedup as your baseline.</p>
+<h2 id="the-main-variants-worth-knowing">The main variants worth knowing</h2>
+<p>You do not need every variant in your head. These are the ones worth recognizing:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>What it does</th>
+<th>Tradeoff</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>External draft model</td>
+<td>Uses a separate smaller model as the speculator.</td>
+<td>Simple conceptually, but adds another model to serve.</td>
+</tr>
+<tr>
+<td>Medusa</td>
+<td>Adds extra decoding heads on the target model.</td>
+<td>Better alignment, but requires training changes.</td>
+</tr>
+<tr>
+<td>Speculative Streaming</td>
+<td>Uses the target model's own signals to speculate.</td>
+<td>Simpler serving story, but gains depend on the task.</td>
+</tr>
+<tr>
+<td>Mirror Speculative Decoding</td>
+<td>Handles draft and target models with different vocabularies.</td>
+<td>Useful when model families do not line up cleanly.</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="https://bentoml.com/llm/inference-optimization/speculative-decoding">BentoML inference handbook's speculative decoding section</a> and their <a href="https://www.bentoml.com/blog/3x-faster-llm-inference-with-speculative-decoding">practical 3x speedup guide</a> are good references for the external-draft setup. <a href="https://machinelearning.apple.com/research/llm-inference">Apple Machine Learning Research</a> and <a href="https://machinelearning.apple.com/research/mirror">Mirror Speculative Decoding</a> cover two important variants.</p>
+<p>[SCREENSHOT: BentoML blog post at bentoml.com/blog/3x-faster-llm-inference-with-speculative-decoding showing the chart with draft model comparison]</p>
+<h2 id="when-speculative-decoding-helps-and-when-it-hurts">When speculative decoding helps and when it hurts</h2>
+<p><strong>It helps most when:</strong></p>
+<ul>
+<li>You are serving single requests or low-concurrency workloads. The draft-verify loop's gains are per-request latency improvements, which is what matters for interactive applications like chat and coding assistants.</li>
+<li>Your outputs are partially predictable. Structured outputs, code generation, and continuation tasks have naturally high acceptance rates.</li>
+<li>You are optimizing TTFT and inter-token latency. Speculative decoding reduces the number of sequential target-model steps needed to produce a response. I wrote more about <a href="/blog/time-to-first-token-ttft/">why TTFT matters for interactive applications in my earlier post on time to first token</a>.</li>
+</ul>
+<p><strong>It hurts or does not help when:</strong></p>
+<ul>
+<li>You are running high-throughput batch inference. When the GPU is already heavily utilized serving many concurrent requests, the draft model adds compute overhead without a corresponding benefit. The memory-bound argument only holds when the GPU has spare compute capacity.</li>
+<li>Your acceptance rate is low. If the draft model's distribution consistently diverges from the target, as it often does in creative writing, domain-specific outputs, or multilingual text, the overhead of running the draft model and doing rejection sampling adds latency instead of removing it.</li>
+<li>You have tight memory constraints. Running a draft model alongside a large target model doubles your GPU memory usage relative to running just the target. On setups where memory is already the constraint, this can force you to a smaller batch size and erase the gains.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Does speculative decoding change the quality of outputs?</strong></p>
+<p>No in the standard rejection-sampling approach. It is designed to preserve the exact output distribution of the target model. Some faster approximations do relax that guarantee, so it is worth checking what your inference stack actually implements.</p>
+<p><strong>How do I know if my use case has a high enough acceptance rate?</strong></p>
+<p>Run it and measure. Most inference frameworks that support speculative decoding expose acceptance rate directly. As a rough rule, above 70% is promising. Below 50%, the gains often get thin. Code and structured outputs usually do better than open-ended generation.</p>
+<p><strong>What is the right draft model to use?</strong></p>
+<p>Ideally, a purpose-built speculator trained to match your target model's token distribution. The target model's own smaller variant from the same family is a reasonable second choice. A generic small model from a different family is the weakest option and often not worth the setup cost. Medusa heads are worth considering if you have the compute to train them on your specific target model.</p>
+<p><strong>How does speculative decoding interact with quantization?</strong></p>
+<p>They can stack, but the gain changes. Quantization already reduces the memory pressure that makes speculative decoding attractive, so the upside may shrink. It can still help, especially at low concurrency. The <a href="https://arxiv.org/abs/2509.04474">2025 benchmark on test-time scaling</a> includes evaluation under different model configurations.</p>
+<p><strong>Is speculative decoding worth implementing for a small team?</strong></p>
+<p>It depends on where you run inference. If you call a hosted API, this is mostly the provider's concern. If you run your own stack with vLLM, TGI, or similar frameworks, it is worth testing for latency-sensitive workloads.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/best-llms-for-coding/" class="related-card">
+        <div class="related-card-date">2026-03-11</div>
+        <div class="related-card-title">Best LLMs for coding in 2026 (it's not what benchmarks say)</div>
+      </a>
+      <a href="/blog/agent-harnesses/" class="related-card">
+        <div class="related-card-date">2026-03-10</div>
+        <div class="related-card-title">Agent harnesses: the infrastructure layer your LLM agent actually needs</div>
+      </a>
+      <a href="/blog/model-context-protocol-explained/" class="related-card">
+        <div class="related-card-date">2026-03-09</div>
+        <div class="related-card-title">The Model Context Protocol explained: why MCP matters architecturally</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links footer-links-inline">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links footer-links-stacked">
+          <a href="/blog/speculative-decoding-explained/" class="footer-link">Speculative decoding explained: how LLMs generate tokens faster without changing the output</a>
+          <a href="/blog/best-llms-for-coding/" class="footer-link">Best LLMs for coding in 2026 (it's not what benchmarks say)</a>
+          <a href="/blog/agent-harnesses/" class="footer-link">Agent harnesses: the infrastructure layer your LLM agent actually needs</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links footer-links-stacked">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>
