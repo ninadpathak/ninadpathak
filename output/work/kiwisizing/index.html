@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Set theme + background on html immediately to prevent any flash -->
-  <script>(function(){var t='dark';try{t=localStorage.getItem('np-theme')||'dark';}catch(e){}document.documentElement.setAttribute('data-theme',t);document.documentElement.style.background=t==='light'?'#f8f8f6':'#090909';})();</script>
+  <style>
+    html {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html[data-theme="light"] {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='dark';try{t=localStorage.getItem('np-theme')||'dark';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='light'?'#f8f8f6':'#090909';d.style.colorScheme=t==='light'?'light':'dark';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7,000 to 450,000 Monthly Visits, A 64x Traffic Multiplier | Ninad Pathak</title>

@@ -15,12 +15,26 @@
 
   function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme === 'light' ? 'light' : 'dark';
+    document.documentElement.style.backgroundColor = theme === 'light' ? '#f8f8f6' : '#090909';
     try { localStorage.setItem(THEME_KEY, theme); } catch {}
   }
 
   // Apply saved theme immediately (avoids flash)
   const savedTheme = getStoredTheme();
   if (savedTheme) setTheme(savedTheme);
+
+  function releaseThemePreload() {
+    window.requestAnimationFrame(function () {
+      document.documentElement.classList.remove('theme-preload');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', releaseThemePreload, { once: true });
+  } else {
+    releaseThemePreload();
+  }
 
   document.addEventListener('DOMContentLoaded', function () {
     const btn = document.getElementById('themeToggle');
