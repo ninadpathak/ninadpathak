@@ -454,6 +454,9 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .stat-cell {
   padding: 2.5rem 2rem;
   border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .stat-cell:first-child { padding-left: 0; }
 .stat-cell:last-child  { border-right: none; }
