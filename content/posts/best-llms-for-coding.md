@@ -10,7 +10,7 @@ Kimi K2.5 scores 99.0 on HumanEval. That is nearly a perfect score on a benchmar
 
 HumanEval, the benchmark OpenAI published in 2021, asks models to complete Python function bodies from docstrings. It was a reasonable proxy when models scored 50%. At 99%, it is a solved test with well-documented contamination problems. The training data for most frontier models contains, at minimum, adjacent material. A high HumanEval score in 2026 signals that a model knows how to game a specific format of problem. It does not tell you whether the model can read a 3,000-line codebase, understand a failing test, trace a multi-file bug, or write code that a human reviewer would actually approve.
 
-**The short answer:** For agentic and autonomous coding tasks, Claude Opus 4.6 leads with roughly 80.8% on SWE-bench Verified. For competitive programming and algorithm-heavy work, Gemini 3 Pro is the strongest choice. For cost-sensitive production use where you are running thousands of completions, DeepSeek V3.2 scores 67.8% on SWE-bench at a fraction of the API cost. For everyday IDE autocomplete, the GPT-5-based tooling ecosystem (Copilot, Cursor) remains the most integrated and practical default. The "best" is a function of what you are actually building.
+**The short answer:** There is no single runaway winner anymore. The official SWE-bench Verified leaderboard has Anthropic, Gemini, MiniMax, and OpenAI's Codex line much closer together than most roundup posts imply. For algorithmic and long-context work, Gemini 3.1 Pro is Google's current model I would test first. For cost-sensitive production use, DeepSeek V3.2 remains the value pick. For OpenAI-heavy agent workflows, the current coding-specific releases to watch are GPT-5.3-Codex and GPT-5.3-Codex-Spark. For self-hosted teams, Qwen3-Coder is the open model worth serious evaluation. The "best" is still a function of what you are actually building.
 
 ## Why HumanEval is the wrong metric to use
 
@@ -26,19 +26,21 @@ My take on this: most articles comparing coding LLMs are comparing the wrong thi
 
 SWE-bench Verified is currently the closest thing to a meaningful coding benchmark. It evaluates models on real GitHub issues -- actual pull requests, actual test suites, actual multi-file changes. The [official SWE-bench leaderboard](https://www.swebench.com/) is the best place to track current scores.
 
-As of early 2026, the top performers cluster tightly:
+As of March 2026, the official Verified leaderboard shows a tight cluster rather than a clean winner:
 
-- Claude Opus 4.6: ~80.8%
-- Gemini 3.1 Pro: ~80.6%
-- MiniMax M2.5: ~80.2%
-- Claude Sonnet 4.5: ~77.2%
-- DeepSeek V3.2-Exp: ~67.8%
-- DeepSeek V3.1: ~66%
+- Claude 4.5 Opus: 76.8%
+- Gemini 3 Flash: 75.8%
+- MiniMax M2.5: 75.8%
+- Claude Opus 4.6: 75.6%
+- GPT-5.2-Codex: 72.8%
+- GLM-5: 72.0%
 
 <figure class="post-figure">
-  <img src="/static/images/posts/best-llms-for-coding/swebench-leaderboard.png" alt="SWE-bench leaderboard showing top coding models and scores">
-  <figcaption>Top SWE-bench Verified performers as shown on the official leaderboard.</figcaption>
+  <img src="/static/images/posts/best-llms-for-coding/swebench-full-refresh.png" alt="Current SWE-bench Verified leaderboard from the official benchmark site">
+  <figcaption>Current SWE-bench Verified leaderboard capture from the official benchmark site.</figcaption>
 </figure>
+
+One thing worth stating explicitly: benchmark boards and model release names do not move in lockstep. Google's current flagship reasoning/coding model is Gemini 3.1 Pro, even though public leaderboards may still show older Gemini 3 variants in the table. This is one reason I dislike overly precise articles that pretend a single benchmark screenshot is the whole story.
 
 For teams doing rigorous evaluation, [SWE-bench Pro](https://www.morphllm.com/swe-bench-pro) is worth watching. It uses 1,865 tasks across 41 actively maintained repositories in Python, Go, TypeScript, and JavaScript. Scores drop substantially relative to Verified -- and the gap between a model's SWE-bench Verified number and its SWE-bench Pro number is a better indicator of real generalization than either score alone. [Epoch AI's benchmark tracker](https://epoch.ai/benchmarks/swe-bench-verified) keeps a maintained history of verified results if you want to track how specific models have moved over time.
 
@@ -55,18 +57,18 @@ Claude also handles long-context reasoning better than most alternatives. Runnin
 
 The honest limitation: Claude Opus 4.6 is expensive. For high-volume coding tasks or teams doing continuous code review at scale, the cost-to-performance ratio pushes you toward Sonnet 4.5, which sits at 77.2% on SWE-bench and is meaningfully cheaper per million tokens.
 
-## For competitive programming and algorithmic work: Gemini 3 Pro
+## For competitive programming and algorithmic work: Gemini 3.1 Pro
 
-If your team writes algorithms -- competitive programming, quantitative research, anything where mathematical reasoning is central to code correctness -- Gemini 3 Pro is where I would start.
+If your team writes algorithms -- competitive programming, quantitative research, anything where mathematical reasoning is central to code correctness -- Gemini 3.1 Pro is where I would start.
 
-Gemini's Grandmaster-tier rating on Codeforces and a 2,439 LiveCodeBench Elo are the relevant numbers here, not SWE-bench. Competitive programming problems are different from real-world software engineering. They require dense mathematical reasoning, pattern recognition across problem types, and the ability to produce correct code under constraint. Gemini's architecture has consistently outperformed Claude and GPT models on this class of problem.
+Google is not positioning Gemini 3.1 Pro as a minor point release. It is the current Gemini model they are pointing at for harder reasoning and more complex problem-solving. In practice, that is usually where Gemini makes the most sense for coding too: algorithm design, deep code understanding, and tasks where you want the model to reason first and emit code second.
 
 <figure class="post-figure">
   <img src="/static/images/posts/best-llms-for-coding/gemini-models-page.png" alt="Gemini API models page showing Gemini model details">
-  <figcaption>Google's Gemini models page showing the available Gemini API options.</figcaption>
+  <figcaption>Google's Gemini 3.1 Pro announcement page.</figcaption>
 </figure>
 
-The 1-million-token context window is also genuinely useful for processing large codebases. I have seen teams at data infrastructure companies use it specifically for this -- loading an entire repository into context before asking the model to trace a bug. It works better than most people expect, though context length and context utilization are not the same thing, and Gemini at 800k tokens is not as sharp as Gemini at 50k tokens.
+The long context window is also genuinely useful for processing large codebases. I have seen teams at data infrastructure companies use Gemini specifically for this -- loading an entire repository into context before asking the model to trace a bug. It works better than most people expect, though context length and context utilization are not the same thing, and every long-context model gets sloppier as you push it toward the ceiling.
 
 ## For cost-sensitive production use: DeepSeek V3.2
 
@@ -81,22 +83,30 @@ For production pipelines that generate code completions, run code review, or ass
 
 The open-weight availability matters too. Running DeepSeek on your own infrastructure eliminates API dependency, gives you data control, and changes the economics again. [DeepSeek Coder](https://deepseekcoder.github.io/) is the purpose-built variant worth evaluating for pure coding tasks if you want to run it locally.
 
-## For everyday IDE autocomplete: the GPT-5 ecosystem
+## For OpenAI-first agent workflows: GPT-5.3-Codex
 
-For developers who want fast, reliable autocomplete and code suggestions inside their editor, the practical answer is still the GPT-5-based ecosystem -- not because the model is categorically better, but because the tooling is. GitHub Copilot, Cursor, and Windsurf all have mature integrations, predictable latency, and feature sets built around how developers actually work.
+If your team is already standardized on the OpenAI stack, the model to pay attention to is GPT-5.3-Codex -- not a vague idea of "GPT-5 for coding," and not an unofficial "GPT-5.4 Codex" name floating around on social posts. OpenAI's official coding releases right now are GPT-5.3-Codex and the faster GPT-5.3-Codex-Spark variant.
+
+That distinction matters. OpenAI is clearly treating coding as its own product line, not just a capability of the base chat model. The official SWE-bench board still lists GPT-5.2-Codex rather than 5.3-Codex, which is exactly why you should be careful with stale comparison posts: benchmark tables lag launches, product naming, and production usage. If I were already deep in the OpenAI ecosystem, I would test 5.3-Codex before assuming Claude or Gemini automatically wins for my workflow.
+
+## For everyday IDE autocomplete: the OpenAI/Copilot ecosystem
+
+For developers who want fast, reliable autocomplete and code suggestions inside their editor, the practical answer is still the OpenAI-centered ecosystem -- not because the model is categorically better, but because the tooling is. GitHub Copilot, Cursor, and Windsurf all have mature integrations, predictable latency, and feature sets built around how developers actually work.
 
 <figure class="post-figure">
   <img src="/static/images/posts/best-llms-for-coding/github-copilot.png" alt="GitHub Copilot feature page showing IDE integration overview">
   <figcaption>GitHub Copilot's product page emphasizing IDE-native coding assistance.</figcaption>
 </figure>
 
-Autocomplete is a different product than an agentic coding assistant. The benchmark numbers are less relevant when the model is making 200 small suggestions per hour and the developer is accepting or rejecting each one in under a second. What matters there is latency, suggestion accuracy on short completions, and how well the model reads the surrounding file context. The GPT-5 ecosystem is optimized for this in a way that frontier research models are not.
+Autocomplete is a different product than an agentic coding assistant. The benchmark numbers are less relevant when the model is making 200 small suggestions per hour and the developer is accepting or rejecting each one in under a second. What matters there is latency, suggestion accuracy on short completions, and how well the model reads the surrounding file context. The Copilot/Cursor class of tooling is optimized for this in a way that frontier research models are not.
 
 One thing worth knowing: if you work with a DevTools company writing content about AI coding tools, this distinction between autocomplete performance and agentic coding performance is one of the most consistently misunderstood things I encounter. The two serve different workflows and should be evaluated differently. It comes up often in the technical writing briefs I get from engineering teams -- [my work page](/work) has examples of how I have explained this kind of nuance for technical audiences.
 
 ## The open-source angle
 
-The open-source field is genuinely competitive now. Qwen 3.5 and GLM-5 both post SWE-bench scores in the 76-78% range. For teams that cannot send code to a third-party API for compliance or security reasons, these are viable options and not a significant compromise on capability.
+The open-weight field is genuinely competitive now. If you need self-hosted coding models, Qwen3-Coder is the one I would start with. Alibaba has paired it with Qwen Code, a terminal agent built specifically for repository-level software engineering work, which is the right way to think about coding models in 2026: not just model quality, but model plus harness.
+
+GLM-5 is also strong enough on the public leaderboard to be worth testing. The question is not whether open models can code anymore. The question is whether your team wants to own the inference stack, serving layer, and evaluation discipline that come with running them yourself.
 
 The caveat is that running a 70B+ parameter model in production requires infrastructure investment. You need hardware, a serving stack, and your own versioning discipline. The model weights are free; the operations are not. Teams underestimate this tradeoff consistently.
 
@@ -104,7 +114,7 @@ The caveat is that running a 70B+ parameter model in production requires infrast
 
 **Is Claude or GPT better for coding in 2026?**
 
-For agentic coding -- autonomous agents, multi-step code editing, real-world bug fixing -- Claude Opus 4.6 has the stronger benchmark evidence and the better production track record from companies like Replit. For everyday autocomplete and IDE integration, GPT-5-based tooling has the deeper ecosystem. Calling one "better" without specifying the task is a category error.
+For agentic coding -- autonomous agents, multi-step code editing, real-world bug fixing -- Claude and the top Gemini/OpenAI Codex models are close enough that workflow fit matters more than headline bragging rights. For everyday autocomplete and IDE integration, Copilot/Cursor-style tooling has the deeper ecosystem. Calling one "better" without specifying the task is a category error.
 
 **Are HumanEval scores still worth looking at?**
 
@@ -120,4 +130,4 @@ Mixing is increasingly common and often the right call. I have seen teams run Cl
 
 **What about Gemini for general coding beyond algorithms?**
 
-Gemini 3 Pro is competitive across most coding tasks, particularly when context window size matters. Where it falls slightly short in my experience is on sustained multi-step agentic tasks requiring coherent edits across many files over many turns. Strong model, just not where I would start for that workflow specifically.
+Gemini 3.1 Pro is competitive across most coding tasks, particularly when context window size matters. Where it falls slightly short in my experience is on sustained multi-step agentic tasks requiring coherent edits across many files over many turns. Strong model, just not where I would start for that workflow specifically.
