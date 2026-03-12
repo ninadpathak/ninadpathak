@@ -160,7 +160,7 @@
 
       <nav class="footer-group" aria-label="Important links">
         <div class="footer-heading">Important links</div>
-        <div class="footer-links footer-links-inline">
+        <div class="footer-links">
           <a href="/work/" class="footer-link">Work</a>
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/blog/" class="footer-link">Writing</a>
@@ -171,7 +171,7 @@
 
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
-        <div class="footer-links footer-links-stacked">
+        <div class="footer-links">
           {% for post in latest_posts %}
           <a href="{{ post.url }}" class="footer-link">{{ post.title }}</a>
           {% endfor %}
@@ -180,7 +180,7 @@
 
       <nav class="footer-group" aria-label="Company links">
         <div class="footer-heading">Company</div>
-        <div class="footer-links footer-links-stacked">
+        <div class="footer-links">
           <a href="/about/" class="footer-link">About</a>
           <a href="/terms/" class="footer-link">Terms</a>
           <a href="/privacy/" class="footer-link">Privacy</a>
