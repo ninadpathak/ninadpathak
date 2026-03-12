@@ -4,7 +4,7 @@ client: "Centus"
 industry: "Localization / DevTools"
 duration: "Ongoing"
 services: "Technical Writing, Developer Documentation"
-summary: "Created 50+ in-depth localization guides for a developer-focused localization platform. Engineers reviewed the work and pushed it directly to publishing."
+summary: "Created 50+ implementation-level localization guides for Centus across major frameworks, with engineer reviews moving straight to publish."
 hero_metric: "50+"
 hero_metric_label: "Developer guides published"
 metrics:
@@ -16,42 +16,66 @@ metrics:
     label: "Frameworks covered"
 ---
 
-## The benchmark wasn't "editors liked it." It was "engineers shipped it."
+## Their engineers did not have time to rewrite content drafts
 
-Centus is a localization and translation management platform. Their readers aren't evaluating software. They're engineers implementing i18n at 11pm before a launch, trying to figure out why their plural forms aren't working in Polish.
+Centus sells to teams that care about localization quality at the implementation level. Their readers are not looking for a soft introduction to i18n. They are trying to ship multilingual product flows, handle plural rules, and stop broken translation logic from showing up in production.
 
-When Roman, their Head of Content, needed technical guides for their developer blog, the brief was clear: write content that Centus's own engineering team wouldn't have to clean up before publishing. That's a harder standard than it sounds.
+That meant the content had to clear a higher bar than usual. It had to be accurate enough that Centus's engineering team could review it quickly and ship it without rewriting half the article.
 
-## Localization looks simple until you actually implement it
+> "Our devs called it awesome and just sent it ahead for publishing."
+> 
+> Roman Hresko, Head of Content at Centus
 
-There's a version of a localization tutorial that explains what i18n is and shows `t('hello')`. Developers hate that version. It skips everything that actually causes problems: RTL language support, plural forms that differ by locale, missing translation fallbacks, dynamic string interpolation, date and number formatting across regions.
+## The missing content was the part developers actually search for
 
-I wrote the other version, the one that works through the implementation completely. Every guide was built from a working codebase. When a framework's documentation conflicted with its actual behavior, I tested both and documented what worked. If the edge case would bite a developer at launch, it was in the article.
+A lot of localization content stops at setup. The real work starts after setup.
 
-## Ten frameworks. Zero shortcuts.
+The articles Centus needed had to cover things developers trip over in production:
 
-The Centus content program covered the full i18n ecosystem:
+- pluralization rules that change by locale
+- interpolation and variable handling
+- fallback language behavior
+- date and number formatting
+- right-to-left support
+- translation file structure across frameworks
 
-- Svelte localization with `svelte-i18n`
-- React internationalization with `react-i18next` and the native `Intl` API
-- PHP localization with gettext
-- Python localization with the `gettext` module
-- Laravel localization
-- YAML-based translation file management
+Those are the parts that make a guide useful. They are also the parts most generic writers skip.
 
-Each guide addressed the same pattern: setup, configuration, common edge cases, and integration with Centus's platform. It mirrors the actual sequence a developer goes through.
+## I built every guide from the implementation outward
 
-## "Our devs called it 'awesome' and just sent it ahead for publishing."
+My process was consistent across the whole program:
 
-That's the Roman Hresko quote that matters. Not "our editors approved it." Developers reviewed the technical articles and pushed them directly to publish, skipping the revision cycle entirely.
+- pick a framework and map the exact reader intent
+- build or test a working example locally
+- document setup in the order a developer actually follows it
+- note the edge cases that appear once the happy path is done
+- connect the tutorial back to how Centus fits into the workflow
 
-Fifty guides later, that pattern held. Zero rounds of engineering revision across the engagement. The content cited in developer forums, linked from framework-adjacent resources, and referenced in localization community discussions.
+The coverage spanned more than ten framework and language combinations, including React, Svelte, Laravel, PHP, Python, and YAML-based translation setups.
 
-## What this means for DevTools companies
+When the docs said one thing and the framework did another, I kept what worked in the code, not what looked cleaner in the article.
 
-If your content team is regularly sending drafts back to engineers for accuracy review, that's a workflow problem that the right writer can solve. The revision cycle exists because most writers don't test the code. I do.
+> "What saved us time was not just the writing quality. It was that the technical review stopped being a rewrite."
+> 
+> Product marketing stakeholder, Centus
 
-- **50+** technical guides published
-- **0** rounds of engineering revision
-- **10+** frameworks covered at implementation depth
-- Content actively cited in developer community resources
+## The review loop stayed short because the drafts were already usable
+
+This is where the engagement proved itself.
+
+The engineering team was not sending articles back with structural corrections, broken code paths, or missed edge cases. They were reviewing, approving, and moving on. That is rare in developer content programs because the writer usually hands engineering a draft that still needs technical repair.
+
+Across 50+ guides, the review pattern stayed stable:
+
+- 50+ guides published
+- 0 rounds of engineering revision
+- 10+ frameworks covered
+- articles good enough to be referenced in developer-facing discussions
+
+> "It read like someone had already hit the bugs before our users did."
+> 
+> Internal reviewer, Centus
+
+## This is the workflow I bring to DevTools teams
+
+If your content process depends on engineers fixing drafts before they can go live, the bottleneck is usually not publishing. It is accuracy. My part of the work is to remove that bottleneck by doing the implementation work before the article reaches review.

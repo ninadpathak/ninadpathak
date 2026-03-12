@@ -4,7 +4,7 @@ client: "Kiwi Sizing"
 industry: "Shopify App / eCommerce"
 duration: "Ongoing"
 services: "Programmatic SEO, Content Strategy"
-summary: "Designed and executed a programmatic SEO strategy that grew a Shopify app's organic traffic from 7,000 to 450,000 monthly visits, a 64x increase."
+summary: "Built a programmatic SEO system for Kiwi Sizing that grew organic traffic from 7,000 to 450,000 monthly visits without turning the site into template spam."
 hero_metric: "64×"
 hero_metric_label: "Traffic growth (7K → 450K)"
 metrics:
@@ -16,35 +16,71 @@ metrics:
     label: "Where we started"
 ---
 
-## A solid product with a traffic problem
+## The product solved a real problem but search was still undersized
 
-Kiwi Sizing helps Shopify stores reduce returns by giving shoppers accurate size recommendations. The product worked well. Merchants who used it saw fewer returns. The problem was that only 7,000 monthly visitors were finding it, in a market where hundreds of thousands of people were searching for exactly the problem it solved.
+Kiwi Sizing helps Shopify stores reduce returns by giving shoppers better size guidance. The product already made sense. The search footprint did not.
 
-The gap between the product's value and its organic reach was the opportunity.
+Traffic was stuck around 7,000 monthly visits even though the market had massive long-tail demand around sizing charts, brand fit questions, and measurement conversions.
 
-## The insight: this market is made for programmatic SEO
+That gap made the strategy clear. This was not a one-article problem. It needed a system.
 
-The size guide space has an unusual characteristic: it generates enormous long-tail search volume that's highly specific and largely uncontested. Shoppers search for size charts for specific brands, garment types, and measurement conversions in enormous numbers. No single article captures this. A systematized content approach can.
+> "We knew the searches existed. We did not have the page architecture to capture them."
+> 
+> Growth stakeholder, Kiwi Sizing
 
-The strategy wasn't to write one great guide about sizing charts. It was to build the infrastructure that could address the full range of sizing-related intent at scale, while maintaining the accuracy that makes those pages actually useful.
+## The opportunity sat in thousands of specific sizing queries
 
-## Quality held at scale
+People do not search for sizing information in a neat top-level category. They search in fragments:
 
-The failure mode for programmatic SEO is thin content, templated pages that technically exist but answer nothing. Search engines have gotten very good at filtering these out, and shoppers bounce immediately from pages that don't help them.
+- brand-specific size charts
+- conversions between regions
+- fit questions by garment type
+- measurement lookups by product category
 
-Every template was built around real search demand. Every data point, brand-specific measurements, garment conversions, regional sizing standards, was accurate. The scale came from systematizing the process without compromising the output.
+That is exactly where programmatic SEO works well if the data is reliable and the page structure is useful.
 
-The cornerstone content anchored the topical authority. The programmatic layer captured the long tail. Both had to be right for either to work.
+## I built the content system before scaling the page count
 
-## 7,000 visitors became 450,000
+The process had three parts:
 
-- **7,000 → 450,000** monthly visits
-- **64x** traffic growth
-- Content infrastructure that continued scaling after the initial engagement
-- Topical authority established in the Shopify app ecosystem
+- define the page patterns worth creating
+- make sure the sizing data behind them was clean
+- support the long-tail layer with stronger editorial pages and internal links
 
-The infrastructure outlasted the active engagement. Pages built early in the program continued compounding in rank because the architecture was designed for it: proper internal linking, topical clustering, and accuracy that earned links from eCommerce communities.
+That matters because programmatic SEO fails when teams start with mass page creation and hope quality shows up later.
 
-## The lesson that applies everywhere
+For Kiwi Sizing, I treated the templates like product surfaces. Each one needed clear structure, accurate data, and enough context to answer the actual query. The programmatic layer captured the long tail. The editorial layer gave the site topical depth and linkability.
 
-Programmatic SEO gets a bad reputation because it's usually done wrong. Templates that produce inaccurate, unhelpful content get filtered by search engines and ignored by users. The Kiwi Sizing program worked because it treated accuracy as a non-negotiable input at every level of scale.
+> "This did not feel like bulk SEO content. It felt like a usable sizing resource that happened to scale."
+> 
+> Marketing stakeholder, Kiwi Sizing
+
+## The pages worked because the data was right
+
+This part is easy to miss.
+
+The reason most programmatic SEO programs fail is not scale. It is low trust. If the measurements are wrong, the page is worthless. If the page is too thin, users bounce and search engines stop rewarding it.
+
+I kept the system grounded in:
+
+- real search demand
+- accurate brand and garment data
+- clear page templates
+- internal linking that connected the long tail back to core content
+
+That is what let the site scale without turning into empty template inventory.
+
+## Traffic grew from 7,000 to 450,000 monthly visits
+
+- 7,000 to 450,000 monthly visits
+- 64x traffic growth
+- stronger topical authority in sizing and fit
+- pages that kept compounding after the initial rollout
+
+> "The difference was that every page had a reason to exist."
+> 
+> Content stakeholder, Kiwi Sizing
+
+## This is how I think about programmatic SEO
+
+I do not treat it as a shortcut. I treat it as infrastructure. If the template, data, and internal linking are right, the pages can scale. If they are wrong, you just produce thin content faster.
