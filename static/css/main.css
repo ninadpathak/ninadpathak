@@ -181,7 +181,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 0.875rem;
+  gap: 1.75rem;
   margin-left: auto;
 }
 
