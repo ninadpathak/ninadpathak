@@ -6,96 +6,74 @@ tags: [ai, llm, inference, architecture]
 status: published
 ---
 
-DeepSeek V3 has 671 billion parameters. When you send it a token, it uses 37 billion of them. The other 634 billion sit in memory doing nothing for that particular token. This sounds wasteful. It is actually the point.
+DeepSeek's API pricing was roughly a tenth of comparable Anthropic and OpenAI endpoints when it launched. Output quality competitive across most standard benchmarks. The obvious question was how.
 
-This architecture is called mixture of experts, and it's the reason DeepSeek's API is priced at roughly a tenth of what Anthropic and OpenAI charge for comparable output quality. Understanding why requires understanding the specific bottleneck that MoE is designed to exploit, because the cost advantage is real but the tradeoffs are a little different than most explainers admit.
+The architecture-level answer is mixture of experts. But that answer comes with a nuance that most explainers drop before they finish the paragraph, so let's start there.
 
-Here's where things get slightly counterintuitive, so stick with me for a minute.
+**Short answer:** Mixture of experts breaks the feedforward layers of a transformer into specialist subnetworks and routes each token through only a small subset of them. You get a model with much higher total parameter capacity than a dense model of the same inference cost, because most parameters are dormant on any given token. The catch is that you still need all of them loaded in GPU memory to run the model at all.
 
-## What MoE actually is
+## How the numbers work out
 
-A standard dense transformer runs every token through every parameter on every forward pass. If you have a 70B parameter model, every single one of those 70B parameters participates in producing every single token. This is the brute-force approach to language modeling, and it works well, but it's expensive because the compute scales with total parameter count.
+A standard dense transformer runs every token through every parameter in every layer. 70B model, 70B parameters worth of compute per token. Linear scaling.
 
-A mixture of experts model breaks the feedforward layers of the transformer into a collection of "expert" subnetworks. For each token, a small routing network, called the gating network or router, decides which experts to activate. Typically it picks the top-K experts out of N total. DeepSeek V3 uses 256 experts per layer and activates 8 of them per token. The token flows through only the activated experts, the rest are skipped.
+A MoE model keeps the attention layers the same but replaces each transformer block's single feedforward network with a collection of expert networks, typically 8 to 256 per layer. A small learned router assigns each token to the top-K experts, typically 2 to 8. The token goes through those experts only. Everything else sits idle.
 
-The result is a model where total parameter count and active parameter count are very different numbers. [DeepSeek-V3](https://huggingface.co/deepseek-ai/DeepSeek-V3) has 671B total parameters with 37B active per token. Compared to a dense 37B model, it has similar compute cost per forward pass. But compared to a dense 671B model, it has dramatically more capacity, because all those dormant experts can store specialized knowledge that gets invoked when relevant.
+DeepSeek V3 uses 256 routed experts per layer plus a handful of shared experts, and activates 8 routed experts per token. Total parameters: 671B. Active parameters per token: 37B. Cameron Wolfe's [technical breakdown of MoE LLMs](https://cameronrwolfe.substack.com/p/moe-llms) goes through the parameter math in detail. The [DeepSeekMoE paper](https://arxiv.org/abs/2401.06066) and [DeepSeek-V2 paper](https://arxiv.org/abs/2405.04434) are the primary sources for the specific architectural choices.
 
-[SCREENSHOT: DeepSeek V3 model card on HuggingFace showing the 671B total / 37B active parameter breakdown]
+[SCREENSHOT: DeepSeek V3 HuggingFace model card at huggingface.co/deepseek-ai/DeepSeek-V3 showing the 671B total / 37B active parameter split]
 
-Cameron Wolfe's [deep dive on MoE LLMs](https://cameronrwolfe.substack.com/p/moe-llms) is the clearest technical walkthrough I've found if you want to go deeper on the architecture. The [DeepSeekMoE paper](https://arxiv.org/abs/2401.06066) and the [DeepSeek-V2 paper](https://arxiv.org/abs/2405.04434) are worth reading if you want the original implementation details.
+The reason this matters for cost is the memory bandwidth bottleneck I wrote about in [my piece on speculative decoding](/blog/speculative-decoding-explained/). LLM inference is mostly waiting for weight reads from DRAM, not running matrix multiplications. GPUs finish the compute almost instantly then idle while weights transfer. If you're only activating 37B parameters per forward pass, you're doing 37B parameters worth of that weight loading, not 671B. A 671B MoE model running 37B active parameters per token is doing roughly the same math per token as a 37B dense model.
 
-## Why this cuts inference cost
+## The part that doesn't save you money
 
-Going back to the memory bandwidth argument I made in [my post on speculative decoding](/blog/speculative-decoding-explained/): LLM inference is memory-bound, not compute-bound. The bottleneck is loading model weights from DRAM, not running the matrix multiplications.
+The router needs to know which experts to route each token to. That decision happens at inference time, based on the token itself. Until you run the router, you don't know which experts you'll need. So you need all of them loaded in GPU memory before you can process a single token.
 
-This is where MoE gets interesting. If you have a 671B parameter model but only activate 37B parameters per token, you're doing roughly 37B worth of compute per forward pass, not 671B worth. Your compute cost scales with active parameters, not total parameters. That's the source of the inference efficiency.
+Running DeepSeek V3 requires holding 671B parameters in VRAM. In FP8 quantization, that's over 1.3TB. In BF16, more. That's a multi-node GPU cluster problem. NVIDIA's [Blackwell MoE overview](https://blogs.nvidia.com/blog/mixture-of-experts-frontier-models/) cites 10x faster inference and 1/10 the token cost in the headline. The context for those numbers is that you need NVL72 hardware to run the model in the first place.
 
-But, and this is the catch that almost never makes it into the explainer articles: you still have to load all 671B parameters into memory. The gating network needs all the expert weights accessible so it can route tokens to the right ones. You cannot load just the experts you expect to use, because you don't know which ones you'll need until the routing happens at inference time.
+When you call DeepSeek's API, you're benefiting from the fact that they have that hardware and are running the model at high enough throughput that many concurrent requests share the same loaded weights. The [DeepSeek-V2 paper](https://arxiv.org/abs/2405.04434) compared it against their 67B dense model and found 5.76x improvement in maximum generation throughput, 42.5% lower training cost, and 93.3% reduction in KV cache size. That throughput multiplier is why the economics work at API scale.
 
-So MoE gives you: a smaller compute bill per token, but the same (or larger) memory bill as a dense model of equivalent total size. Running DeepSeek V3 requires enough GPU VRAM to hold 671B parameters, which is roughly 1.3TB in FP8, or more in higher precision. That is not a consumer GPU problem. That's a cluster problem.
+Self-hosting is a different story. You face the same memory footprint as self-hosting a dense model of the same total size, and the compute benefit only kicks in once you're running enough concurrent requests to keep GPU utilization high. Whether that breakeven point makes sense depends heavily on your traffic patterns.
 
-NVIDIA put it plainly in their [Blackwell MoE overview](https://blogs.nvidia.com/blog/mixture-of-experts-frontier-models/): MoE runs 10x faster and at 1/10 the token cost on their hardware. What that framing leaves out is how much that hardware costs.
+## Routing is where the hard engineering lives
 
-## The routing problem nobody talks about
+Here's where most explainers stop, which is a problem because this is where most of the training difficulty actually is.
 
-Routing sounds simple: a small neural network looks at a token and picks the best experts for it. In practice, training a MoE model is significantly harder than training a dense model, and most of the difficulty is in routing.
+Without an explicit mechanism to prevent it, the gating network converges on a few general-purpose experts and routes almost all tokens to them. This is called expert collapse. If 240 of your 256 experts never get used, you paid the memory cost for 256 experts and got the performance of 16. Great job, you've built an expensive dense model.
 
-The core problem is called expert collapse. Left to its own devices, the gating network will figure out that a few experts are generally good at most things and start routing almost everything to them, ignoring the other experts entirely. You end up paying the memory cost for 256 experts but only using 8. The whole point was to have specialized experts that accumulate domain-specific knowledge. Expert collapse defeats this.
+The traditional fix is an auxiliary loss term that penalizes uneven expert utilization during training. It works until it doesn't. [2024 research](https://arxiv.org/abs/2408.15664) found that tuning the auxiliary loss weight is a genuinely frustrating balancing act: too weak and you get collapse, too strong and the interference gradients hurt model quality. You're trading one problem for another.
 
-The traditional fix is an auxiliary loss, a penalty term added during training that pushes the router toward routing tokens evenly across experts. This works, but [research from 2024 found](https://arxiv.org/abs/2408.15664) that large auxiliary losses introduce interference gradients that hurt model quality. You're trading routing diversity for training stability. DeepSeek's solution was to develop an auxiliary-loss-free load balancing strategy, where instead of penalizing uneven routing in the loss function, they apply a per-expert bias to routing scores and update those biases dynamically based on recent load. Maarten Grootendorst's [visual guide to MoE](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts) covers the routing mechanics well if you're trying to build intuition here.
+DeepSeek's approach in V3 was to remove the auxiliary loss entirely and instead apply a per-expert bias term to routing scores, dynamically updated based on each expert's recent utilization. If an expert is getting too much traffic, its bias gets nudged down, reducing selection probability in future batches. It's a feedback control loop instead of a penalty. The [Hugging Face post on MoE load balancing](https://huggingface.co/blog/NormalUhr/moe-balance) tracks how the approach to load balancing has evolved and what teams discovered trying to productionize each version. Cerebras's [router comparison](https://www.cerebras.ai/blog/moe-guide-router) gets into how much routing algorithm choice affects final model quality, and the answer is more than you'd expect.
 
-This is genuinely hard engineering. The [Cerebras analysis of MoE routing strategies](https://www.cerebras.ai/blog/moe-guide-router) goes into how much the choice of routing algorithm affects final model quality, and the short version is: it matters a lot more than the architecture diagrams suggest.
+Expert specialization is also messier than the diagrams imply. Research teams have tried to interpret what individual experts learn. The results are distributed and noisy, not the clean "expert A handles Python, expert B handles French" story. Maarten Grootendorst's [visual guide to MoE](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts) is the best I've seen at making the routing mechanics intuitive without oversimplifying them.
 
-## What DeepSeek's numbers actually show
+## When to use MoE and when to not bother
 
-The DeepSeek-V2 paper is worth reading for the raw efficiency numbers. Compared to DeepSeek 67B (a dense model), DeepSeek-V2 achieved:
+Fine-tuning is genuinely harder. Fine-tuning a dense model updates all parameters toward your target domain. Fine-tuning a MoE model also changes routing decisions, which can destabilize the expert specialization the model built during pretraining. The approaches for handling this exist but add complexity. If you need a domain-specific model and you're not operating at massive scale, a dense base model is the simpler starting point.
 
-- 42.5% lower training cost
-- 93.3% reduction in KV cache
-- 5.76x improvement in maximum generation throughput
+For evaluation: benchmark numbers for MoE models are usually measured on tasks that favor routing stability. Coding, math, structured reasoning. These tasks have predictable token distributions and consistent expert selection. Open-ended generation, multilingual tasks, and domain-specific workloads with unusual token distributions tend to see more variable performance because the routing is less stable on out-of-distribution inputs.
 
-The KV cache number is particularly interesting. Key-value cache is what allows transformers to avoid recomputing attention for every token on every forward pass during generation. In a large dense model, the KV cache grows proportionally with model size and context length. MoE models, by activating fewer parameters per token, generate smaller KV caches per layer, which means they can fit more concurrent requests into the same GPU memory.
+If you're consuming MoE models through an API, most of this is academic. You're paying per token, the provider owns the infrastructure problem, and you should evaluate on your actual task. The architecture matters if you're self-hosting, deciding whether to fine-tune, or trying to understand why a model behaves inconsistently on edge cases.
 
-This is why DeepSeek can offer API pricing at a fraction of the cost of comparable dense models. It's not just that the model is more efficient to run. It's that the reduced KV cache allows higher throughput per GPU, so the economics of serving it are fundamentally different.
-
-## When MoE helps and when it doesn't
-
-MoE is a good fit for inference at scale where you're serving many different types of requests. The theory is that different experts specialize in different domains, so a request about Python code routes to different experts than a request about medieval history. Whether this actually happens as cleanly as the theory suggests is debated, but the efficiency gains are real regardless.
-
-MoE is a worse fit for fine-tuning. When you fine-tune a dense model, you're updating all the parameters toward your target domain. When you fine-tune a MoE model, you're also updating the routing decisions, which means fine-tuning can disrupt the expert specialization that the model developed during pretraining. There are approaches that address this, but it's non-trivial compared to fine-tuning a dense model.
-
-MoE also doesn't help you if memory is your constraint rather than compute. If you can't fit the full parameter count in GPU VRAM, a 671B MoE model has the same problem as a 671B dense model. The compute efficiency advantage evaporates if you're spending it on model sharding overhead instead.
-
-## The honest version
-
-MoE is a real architectural advancement and the efficiency gains are not marketing. DeepSeek V3's training cost of 2.788 million H800 GPU hours for a model that competes with frontier models is genuinely impressive, and MoE is a significant reason why.
-
-But the narrative that MoE models are just "cheaper and better" leaves out a few things. They're harder to train, harder to fine-tune, and require the same (or more) memory to serve despite doing less compute per token. The cost advantage shows up at inference throughput scale, not necessarily in your initial setup cost.
-
-If you're evaluating MoE models for production use, the question is not just "how much does a token cost?" It's "how much does serving this model cost at my expected throughput, with my expected prompt lengths, on the hardware I have access to?" Those answers are different from the API pricing and worth working out before you commit to an architecture.
-
-One more thing: the routing behavior of MoE models is still not fully understood. Researchers are still figuring out what individual experts actually specialize in and whether the specialization is as clean as the diagrams suggest. The [Hugging Face analysis of MoE load balancing](https://huggingface.co/blog/NormalUhr/moe-balance) goes into some of the pitfalls teams have discovered in production. It's worth reading before you decide these models are solved.
-
-If you're writing about this kind of architectural nuance for a technical audience and you want someone who can do the research and get the details right, [my work page](/work) has examples of that kind of writing.
+Technical writing about infrastructure tradeoffs like this is a significant part of what I do for AI companies who need to explain architectural decisions to developer audiences. If that's relevant to your team, [my work page](/work) has examples.
 
 ## Questions
 
-**Is DeepSeek V3's 671B MoE model actually comparable to GPT-4 class models?**
+**Is a MoE model with 37B active parameters as good as a dense 37B model?**
 
-On most benchmarks, yes. The SWE-bench scores and coding benchmarks put it in the same tier as frontier models. Whether that holds for your specific use case depends on what you're doing, but the quality argument is not just marketing.
+Usually better, because MoE models have much more total capacity. Active parameter count determines inference cost. Total parameter count determines how much specialized knowledge can be stored across the expert bank. A 671B MoE model activating 37B parameters per token has access to knowledge distributed across 671B parameters, even though it only uses 37B of them at a time.
+
+**Why doesn't everyone use MoE?**
+
+Training complexity. Getting load balancing right, avoiding expert collapse, validating that expert specialization actually developed correctly is substantially more work than training a dense model. It pays off at scale when you have the engineering resources to get it right.
 
 **Can I run DeepSeek V3 locally?**
 
-Technically yes, practically probably not. You need enough GPU VRAM to hold 671B parameters. In FP8, that's over 1TB. In BF16, it's closer to 1.3TB. That requires a serious multi-GPU cluster. Quantized versions bring this down substantially, but you're still talking 8+ high-end GPUs minimum.
+Only with serious hardware. FP8 requires over 1.3TB of VRAM. GPTQ and GGUF quantizations bring this down, but you're still looking at a minimum of 8 high-end GPUs for reasonable throughput. Quantized versions run on less but with quality degradation that matters for some tasks.
 
-**Why don't all models use MoE if it's more efficient?**
+**Does MoE improve reasoning or just efficiency?**
 
-Training difficulty. MoE models require getting the routing right, which means solving the load balancing problem, which adds significant complexity to the training process. A dense model of the same active parameter count is simpler to train reliably. MoE pays off at scale when you have the engineering resources to get the training right.
+Primarily efficiency, though higher total capacity plausibly allows more domain-specific knowledge to accumulate in specialized experts. The evidence that MoE specifically improves reasoning over a dense model of the same active parameter count is mixed. What's consistently true is better output quality per dollar of inference cost at scale.
 
-**Does MoE improve reasoning quality or just efficiency?**
+**How does the KV cache reduction work?**
 
-Primarily efficiency, though there's an argument that more total capacity (even if sparse) allows more specialized knowledge to accumulate. The evidence that MoE specifically improves reasoning over a dense model of the same active parameter count is mixed. What it clearly does is give you a better quality-per-compute-dollar ratio at scale.
-
-**How do I choose between a MoE model and a dense model for my application?**
-
-If you're calling a hosted API, use whichever model has the best quality for your task at your price point. The architecture is someone else's problem. If you're self-hosting, and you have memory constraints, a dense model of the size you can fit is usually simpler to serve. If you have memory headroom and want to maximize throughput, MoE is worth evaluating seriously.
+The key-value cache stores past attention states so the model doesn't recompute them on every generation step. In a dense model, KV cache size scales with model width and context length. In a MoE model, only the active experts contribute to the KV cache for any given token, so the per-token footprint is smaller. Across many concurrent requests, that smaller cache means more requests fit in the same GPU memory simultaneously, which directly improves throughput. The DeepSeek-V2 numbers on this were striking: 93.3% reduction in KV cache size compared to their 67B dense model, which is the main driver of the 5.76x throughput improvement.

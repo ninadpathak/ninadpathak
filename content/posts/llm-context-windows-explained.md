@@ -6,78 +6,76 @@ tags: [ai, llm, inference, context]
 status: published
 ---
 
-Someone is going to pitch you a model with a 1 million token context window. They'll say you can load your entire codebase, your full document library, your whole customer history into a single prompt and the model will reason across all of it. This sounds great. It is also, in practice, significantly less useful than advertised.
+A 1M token context window does not mean you get 1M tokens of reliable reasoning. It means the model will accept 1M tokens. Those are different things.
 
-Here's where I lose you a little, and I want to warn you because this gets counterintuitive fast. The context window number tells you the maximum number of tokens a model can accept. It does not tell you how well the model uses tokens at different positions inside that window. Those are two different things, and the industry mostly talks about the first one.
+Here's what actually happens: model providers benchmark long-context performance by putting the relevant content at the beginning or end of a long context. That's where models perform best. They don't test middle-of-context retrieval, because middle-of-context retrieval is where things fall apart.
 
-**The short version:** LLMs perform best on information at the start and end of their context. Performance on information buried in the middle degrades, sometimes significantly. Longer contexts also cost more compute, add latency, and introduce what researchers are calling "context rot." The number on the spec sheet is a ceiling, not a promise.
+**Short answer:** LLMs attend unevenly across their context. Performance is strong at the start and end, weak in the middle, and gets worse as total context length grows. The spec sheet number is an input limit, not a performance guarantee.
 
-## The lost in the middle problem is real and documented
+## Your data doesn't get equal attention
 
-In 2023, researchers at Stanford, UC Berkeley, and Samaya AI published ["Lost in the Middle: How Language Models Use Long Contexts"](https://arxiv.org/abs/2307.03172). The finding was uncomfortable: performance is highest when relevant information appears at the very beginning or very end of the input. Shove that same information into the middle of a long context and retrieval accuracy drops, sometimes by 40%.
+This is the mechanical reason, and once you see it you can't unsee it.
 
-This isn't a bug in a specific model. It's a structural consequence of how transformers work. Each token can only attend to tokens that came before it, which is called causal masking. Tokens at the start of a context get attended to by every subsequent token in the model. Token 500,000 sitting in the middle only gets attended to by token 500,001 onward. Earlier tokens accumulate more attention weight simply because they have more opportunities to be referenced. The middle gets comparatively starved.
+During a transformer's forward pass, each token attends to every token before it in the sequence. A token at position 1 gets attended to by every single subsequent token through the entire model. A token at position 200,000 only matters to positions 200,001 onward. The attention signal that early tokens accumulate over the full sequence is categorically different from what middle tokens get.
 
-[SCREENSHOT: Figure from the "Lost in the Middle" paper showing performance curve by document position]
+Researchers at Stanford, Berkeley, and Samaya AI tested this systematically in 2023. They published [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172), where they varied the position of relevant documents across a fixed context and measured retrieval accuracy. Performance dropped by up to 40% for content in the middle of the context compared to content at the beginning. The pattern held across model sizes and families.
 
-I've seen this bite teams building document Q&A systems. They stuff 50 PDFs into a single context, get decent answers on the first few and the last few documents, and assume the whole thing is working. It isn't. The model is quietly ignoring a large chunk of what they fed it.
+Flash attention doesn't help here. [Flash attention](https://arxiv.org/abs/2205.14135) is a compute optimization that tiles the attention calculation to fit in fast SRAM, which reduces memory use and speeds things up considerably. The attention weights that create this positional bias are unchanged. You get the same biased distribution, faster.
 
-## Context rot: what happens as the window fills up
+[SCREENSHOT: Figure from the "Lost in the Middle" paper showing retrieval accuracy by document position in context]
 
-The "lost in the middle" problem is about position. Context rot is about volume. The [Understanding AI piece on context rot](https://www.understandingai.org/p/context-rot-the-emerging-challenge) describes what happens as context gets longer: performance doesn't just plateau, it actively degrades. More context creates more noise for the model to sort through. The relevant signal competes with an increasing amount of irrelevant tokens, and the model's ability to isolate what matters goes down.
+## More context also makes the model dumber
 
-There's a related finding from a 2025 paper [showing that context length alone hurts performance](https://arxiv.org/html/2510.05381v1) even under perfect retrieval conditions. Meaning: even if you retrieve exactly the right documents and put them in the context, adding more total context around them degrades the model's performance on questions about those documents. The context window is not a neutral container. Filling it has consequences.
+Here's where I lose some people, because they assume these are the same problem. They're not.
 
-My take on this, and it's a take I know isn't popular: the "big context window" arms race has mostly benefited marketing departments. For the use cases where you actually need long context, like processing a single long document, reasoning across a book-length piece of text, or analyzing a multi-hour transcript, long context windows are genuinely useful. But for the "dump everything in and let the model figure it out" use case, they mostly just let you build systems that feel like they're working when they're not.
+The positional degradation issue is about where in the context your content lives. This second issue is about how much total content you have, regardless of position.
 
-## What context length actually costs you
+A [2025 paper studying context length in isolation](https://arxiv.org/html/2510.05381v1) found that retrieval accuracy degrades as total context length increases, even when the relevant documents are placed correctly and retrieved without error. Adding more irrelevant content makes it harder for the model to isolate the signal, full stop.
 
-Here's the part that gets left off the spec sheet.
+[The Understanding AI writeup on context rot](https://www.understandingai.org/p/context-rot-the-emerging-challenge) calls this a noise problem: every additional irrelevant token competes with the content you actually care about. At 500k tokens, there's a lot of noise. The model has to look past all of it every time it generates a token.
 
-Attention, the core mechanism of a transformer, is O(n²) in the naive implementation. Double your context length, and the attention computation quadruples. In practice, most modern models use [flash attention](https://arxiv.org/abs/2205.14135) and other approximations that bring this down, but long contexts still cost meaningfully more compute per request and take meaningfully longer to process.
+The context window arms race has mostly answered the question "can we technically process this many tokens" without answering "does the model reason well across all of them." Anthropic, Google, and OpenAI have all shipped million-token windows. The underlying attention architecture hasn't changed.
 
-The latency hit shows up as time to first token. If you've read [my earlier piece on TTFT](/blog/time-to-first-token-ttft/), you know TTFT is what makes an interactive application feel responsive. A 200k token prompt is going to have a noticeably longer TTFT than a 5k token prompt, regardless of how the model is optimized. You're paying for that context in wall clock time before you see the first word of response.
+## It also costs a lot
 
-You're also paying for it in dollars. Most APIs price on input tokens. Loading 500k tokens into a single request is expensive even if the model handles it gracefully.
+Attention is O(n²) in the naive implementation. Double the context, quadruple the compute. Flash attention reduces that in practice, but the relationship is still steep. A 200k token prompt costs substantially more to process than a 5k token prompt, on every single request.
 
-## What actually works in production
+The latency hit is the one you feel first. It shows up as time to first token, which I covered in more depth [in my post on TTFT](/blog/time-to-first-token-ttft/). A model that starts generating 8 seconds after you submit a 200k token prompt is behaving correctly. Whether 8 seconds works for your application is a different question, and for most interactive use cases the answer is no.
 
-The teams I've seen get good results with long context tend to do a few specific things.
+Then there's the bill. Most providers price input tokens similarly to output tokens. Loading 500,000 tokens per request means paying for 500,000 tokens per request. At scale, that adds up fast. I've seen teams build perfectly functional RAG systems and then decide to "simplify" by just dumping everything into context, not realizing they were trading a few hours of plumbing work for a 10x increase in API costs.
 
-Put the most important content first and last. If you know which documents are most relevant to the query, don't bury them in the middle. This is inelegant and annoying and it works.
+## What actually works
 
-Use retrieval to limit context in the first place. RAG exists partly because we realized that stuffing everything into a context window was a bad idea. Retrieving the 10 most relevant chunks and passing those to the model beats passing all 500 chunks and hoping the model figures it out. [The tradeoffs in that decision are worth understanding](/blog/rag-vs-fine-tuning/) before you commit to either approach.
+Think about context like you'd think about RAM. You don't load your entire database into RAM because you have enough RAM to hold it. You load what you need. Same logic applies to context.
 
-Evaluate on your actual data with your actual context sizes. The benchmarks that model providers use to measure long context performance are often designed to make their models look good. Run your own evals. Check whether the model is actually using information from the middle of your context or quietly ignoring it. [Introl's guide on long-context infrastructure](https://introl.com/blog/long-context-llm-infrastructure-million-token-windows-guide) covers some of the evaluation approaches worth running.
+If you know which documents are relevant to a query, put them at the top of the context. It's inelegant but the positional bias is real and consistent. Working with it beats pretending it doesn't exist.
 
-Treat context like memory, not like disk. The context window is not a place to dump everything and search later. It's a working memory. The more you put in it, the more the model has to hold in its head simultaneously, and the worse it does at any of it.
+For most production document Q&A, retrieval beats long context architecturally. Passing the model fewer tokens with higher signal density is better than passing it everything and hoping. The [tradeoffs between RAG and other approaches](/blog/rag-vs-fine-tuning/) are worth thinking through before you commit to an architecture, but RAG's fundamental advantage here is that it controls what the model actually sees.
 
-## The honest ceiling
+[Introl's guide on long-context infrastructure](https://introl.com/blog/long-context-llm-infrastructure-million-token-windows-guide) goes into evaluation methodology in detail. [Together AI's writeup on long-context fine-tuning](https://www.together.ai/blog/long-context-fine-tuning-a-technical-deep-dive) is worth reading if you're building systems that genuinely need long context rather than systems that are reaching for it because it's available.
 
-Long context is genuinely useful and genuinely improving. The [Together AI work on long context fine-tuning](https://www.together.ai/blog/long-context-fine-tuning-a-technical-deep-dive) shows real progress on extending reliable context lengths. Models today handle 50k tokens more reliably than models from two years ago handled 8k tokens. The trajectory is real.
-
-But the claim that you can load a million tokens and have the model reason uniformly well across all of it is not where the technology is right now. The spec sheet number is an upper bound on what the model accepts. What it reliably uses well is a much smaller number, and that number is task-dependent, position-dependent, and affected by how much total noise you're putting around your signal.
-
-If someone is selling you a system design that depends on uniform performance across a 1M token context window, ask them to show you the evaluation. Ask where in the context the relevant information lives in their tests. The answer is usually the beginning.
+Long context is genuinely the right answer for some tasks: legal analysis across an entire contract, reasoning about how changes in one part of a codebase affect another, synthesizing a full research paper. These break when you chunk and retrieve because chunking destroys the relationships between parts. For "answer questions about our knowledge base," RAG wins.
 
 ## Questions
 
-**Does putting relevant information at the start of the context always help?**
+**What context length is actually usable?**
 
-Consistently, yes. The "lost in the middle" research is robust across models. If you have control over what goes into your context and where, prioritize the most critical information at the top. This feels wrong because it's not how you'd organize a document for a human reader, but it matters for LLMs.
+Rough heuristic: the first 20-30% and last 20-30% of a model's advertised context are the high-confidence zones. For a 128k model, that's roughly the first 25k and last 25k tokens. The middle 75k is where you're taking on risk. Run evals on your actual data rather than trusting benchmark numbers.
 
-**Is 128k tokens enough for most use cases?**
+**Does putting relevant content at the start always help?**
 
-For most practical applications, yes. A 128k context window fits roughly 250 pages of text, which covers the vast majority of single-document analysis tasks, long conversations, and medium-sized codebases. The cases where you need more than that are real but rarer than the marketing suggests.
+Consistently yes. It's the cheapest single intervention for improving long-context retrieval quality. It feels wrong because it's not how you'd structure a document for a human reader, but you're not writing for a human reader.
 
-**Does flash attention solve the lost in the middle problem?**
+**Is long context ever the right answer over RAG?**
 
-No. Flash attention is a compute optimization that makes the attention calculation more efficient. It doesn't change the underlying dynamics of how much attention different positions receive. The positional bias problem is about the model's learned behavior, not the computational implementation of attention.
+Yes, when the task requires reasoning over relationships between documents rather than retrieving specific facts. When chunking would destroy the thing you're trying to understand. For fact retrieval from a knowledge base, RAG is almost always the better system.
 
-**How do I know if my application is actually hitting this problem?**
+**Does flash attention fix the positional bias?**
 
-Put your most critical information in the middle of your context window and test whether model answers quality changes. Most teams are surprised. If you're building something where context utilization matters, this is a 30-minute test worth running before you build a whole system around the assumption that context position doesn't matter.
+No. Flash attention changes how the computation runs, not what values come out of it. The same tokens still accumulate the same relative attention weight.
 
-**Should I use RAG or long context for document Q&A?**
+**If the model has a 1M token context window, why shouldn't I just use it?**
 
-For most production document Q&A, RAG. Not because long context doesn't work, but because RAG gives you control over what the model sees, makes it easier to cite sources, and doesn't charge you for tokens you don't need. Long context is better for tasks where the relationships between documents matter and where retrieval would break those relationships. Legal contract analysis across a long document is a good long context use case. "Answer questions about our knowledge base" is usually a RAG use case.
+You can. Put your test questions where the answers live in the middle of the context and run evals. If it's working, great. If it's returning confident but wrong answers, you've found your practical limit, and it's almost certainly smaller than 1M tokens.
+
+Writing about infrastructure tradeoffs like these for developer audiences is a significant part of what I do. If your team needs that kind of technical depth, [my work page](/work) has examples.
