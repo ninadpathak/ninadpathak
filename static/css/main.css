@@ -1322,7 +1322,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   letter-spacing: 0.08em;
   padding: 0.4rem 0.875rem;
   border: 1px solid var(--border-2);
-  color: var(--text-3);
+  color: var(--text-2);
   background: transparent;
   transition: all var(--t);
 }
@@ -1350,7 +1350,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .p-item:hover { background: var(--bg-1); }
 .p-item-client { font-family: var(--mono); font-size: 0.6875rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
 .p-item-title  { font-size: 0.9375rem; font-weight: 500; color: var(--text-1); line-height: 1.4; margin-bottom: 0.75rem; }
-.p-item-cat    { font-family: var(--mono); font-size: 0.6875rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
+.p-item-cat    { font-family: var(--mono); font-size: 0.6875rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
 .p-item[hidden] { display: none; }
 .p-item-title,
 .contact-method-val,
