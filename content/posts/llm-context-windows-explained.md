@@ -16,7 +16,7 @@ The mechanism is causal masking. During a transformer's forward pass, each token
 
 Researchers at Stanford, Berkeley, and Samaya AI measured this directly in 2023. Their paper [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172) varied the position of relevant documents within a fixed-length context and measured retrieval accuracy. Performance dropped by up to 40% for content placed in the middle, and the pattern held across model sizes and families.
 
-[SCREENSHOT: Figure from the "Lost in the Middle" paper showing retrieval accuracy by document position]
+![Figure 1 from "Lost in the Middle" — GPT-3.5 accuracy by answer document position across 20 retrieved documents. Performance starts at ~76% for position 1, drops to ~54% in the middle, and partially recovers to ~63% at position 20.](/static/images/posts/llm-context-windows-explained/lost-in-middle-fig1.png)
 
 [Flash attention](https://arxiv.org/abs/2205.14135) does not change this. Flash attention tiles the attention computation to fit in fast SRAM, which cuts memory use and speeds up processing considerably. The attention weights that create positional bias are unchanged. You get the same biased distribution, faster.
 
