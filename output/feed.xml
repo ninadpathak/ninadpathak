@@ -6,6 +6,18 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Mixture of experts: how MoE models are cheap to run but expensive to host</title>
+      <link>https://ninadpathak.com/blog/mixture-of-experts-explained/</link>
+      <description>DeepSeek V3 has 671B parameters but only activates 37B per token. Here's how mixture of experts works, why it cuts inference costs, and the catch nobody puts in the headline.</description>
+      <pubDate>Mar 13, 2026</pubDate>
+    </item>
+    <item>
+      <title>LLM context windows: what the number on the spec sheet actually means</title>
+      <link>https://ninadpathak.com/blog/llm-context-windows-explained/</link>
+      <description>A 1M token context window sounds impressive. Here's why the model often can't reliably use most of it, and what actually happens to your data inside a full context window.</description>
+      <pubDate>Mar 13, 2026</pubDate>
+    </item>
+    <item>
       <title>Speculative decoding explained: how LLMs generate tokens faster without changing the output</title>
       <link>https://ninadpathak.com/blog/speculative-decoding-explained/</link>
       <description>Speculative decoding cuts LLM latency by 2-3x without changing output quality. Here's how the draft-verify loop works, why acceptance rate is the only number that matters, and when it actually hurts.</description>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM context windows: what the number on the spec sheet actually means | Ninad Pathak</title>
+  <meta name="description" content="A 1M token context window sounds impressive. Here's why the model often can't reliably use most of it, and what actually happens to your data inside a full context window.">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="LLM context windows: what the number on the spec sheet actually means">
+  <meta property="og:description" content="A 1M token context window sounds impressive. Here's why the model often can't reliably use most of it, and what actually happens to your data inside a full context window.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/llm-context-windows-explained/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/llm-context-windows-explained/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "LLM context windows: what the number on the spec sheet actually means",
+  "description": "A 1M token context window sounds impressive. Here's why the model often can't reliably use most of it, and what actually happens to your data inside a full context window.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-13",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "LLM context windows: what the number on the spec sheet actually means",
+      "item": "https://ninadpathak.com/blog/llm-context-windows-explained/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">LLM context windows: what the number on the spec sheet actually means</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 13, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">6 min read</span>
+      </div>
+      <h1 class="post-title">LLM context windows: what the number on the spec sheet actually means</h1>
+      <p class="lead">A 1M token context window sounds impressive. Here's why the model often can't reliably use most of it, and what actually happens to your data inside a full context window.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">inference</span>
+        <span class="tag">context</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#why-the-middle-of-your-context-gets-ignored">Why the middle of your context gets ignored</a></li>
+<li><a href="#context-rot-the-volume-problem-on-top-of-the-position-problem">Context rot: the volume problem on top of the position problem</a></li>
+<li><a href="#what-long-context-actually-costs">What long context actually costs</a></li>
+<li><a href="#long-context-vs-rag-vs-hybrid-when-each-approach-wins">Long context vs RAG vs hybrid: when each approach wins</a></li>
+<li><a href="#what-works-in-production">What works in production</a></li>
+<li><a href="#questions">Questions</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Model providers advertise context windows in tokens. The number on the spec sheet is how much input the model accepts, not how much of it the model reliably uses. I've seen this distinction cause real production problems for teams building document Q&amp;A systems, code search tools, and multi-document analysis pipelines.</p>
+<p><strong>Short answer:</strong> LLMs don't attend equally to all positions in their context. Performance is strongest at the beginning and end, weakest in the middle, and degrades further as total context length grows. The 1M token spec number is an input ceiling, not a performance guarantee. For most production retrieval tasks, RAG outperforms long context because it gives the model fewer tokens with higher signal density.</p>
+<h2 id="why-the-middle-of-your-context-gets-ignored">Why the middle of your context gets ignored</h2>
+<p>The mechanism is causal masking. During a transformer's forward pass, each token attends to all tokens before it in the sequence. A token at position 1 accumulates attention from every subsequent token through the full model depth. A token at position 500,000 only matters to positions 500,001 onward. Tokens at the start of the context receive proportionally more attention weight than tokens in the middle, and this is not a bug — it is how transformers work.</p>
+<p>Researchers at Stanford, Berkeley, and Samaya AI measured this directly in 2023. Their paper <a href="https://arxiv.org/abs/2307.03172">Lost in the Middle: How Language Models Use Long Contexts</a> varied the position of relevant documents within a fixed-length context and measured retrieval accuracy. Performance dropped by up to 40% for content placed in the middle, and the pattern held across model sizes and families.</p>
+<p><img alt="Figure 1 from &quot;Lost in the Middle&quot; — GPT-3.5 accuracy by answer document position across 20 retrieved documents. Performance starts at ~76% for position 1, drops to ~54% in the middle, and partially recovers to ~63% at position 20." src="/static/images/posts/llm-context-windows-explained/lost-in-middle-fig1.png" /></p>
+<p><a href="https://arxiv.org/abs/2205.14135">Flash attention</a> does not change this. Flash attention tiles the attention computation to fit in fast SRAM, which cuts memory use and speeds up processing considerably. The attention weights that create positional bias are unchanged. You get the same biased distribution, faster.</p>
+<h2 id="context-rot-the-volume-problem-on-top-of-the-position-problem">Context rot: the volume problem on top of the position problem</h2>
+<p>Positional degradation and context rot are separate issues. Positional degradation is about where content sits. Context rot is about how much total content you have.</p>
+<p>A <a href="https://arxiv.org/html/2510.05381v1">2025 paper studying context length in isolation</a> found that retrieval accuracy degrades as total context grows, even when relevant documents are placed correctly. Adding more irrelevant tokens makes it harder for the model to isolate the signal, regardless of placement. <a href="https://www.understandingai.org/p/context-rot-the-emerging-challenge">The Understanding AI writeup on context rot</a> describes this as a noise problem: every additional irrelevant token competes with the content you care about. At 500k tokens, there is a lot of competition.</p>
+<p>My read on the context window arms race: providers have gotten very good at answering "can we technically accept this many tokens." The harder question — does the model reason well across all of them — remains largely unanswered. Every major provider has shipped million-token windows. The underlying attention architecture that creates positional bias has not changed.</p>
+<h2 id="what-long-context-actually-costs">What long context actually costs</h2>
+<p>Attention complexity is O(n²) in the naive implementation. Double the context length, quadruple the compute. Flash attention reduces this in practice, but a 200k token prompt still costs substantially more than a 5k prompt, on every request.</p>
+<p>The first thing you feel is latency. Time to first token scales with context length, which I covered in more depth <a href="/blog/time-to-first-token-ttft/">in my post on TTFT</a>. A model that starts generating its first response token 8 seconds after receiving a 200k token prompt is working correctly. For interactive applications, 8 seconds is not acceptable.</p>
+<p>The second thing is the bill. Most providers price input tokens similarly to output tokens. Loading 500,000 tokens per request means paying for 500,000 tokens per request. I have watched teams "simplify" their retrieval pipelines by dumping everything into context, not realizing they were trading a few days of engineering work for a 10x increase in ongoing API costs.</p>
+<h2 id="long-context-vs-rag-vs-hybrid-when-each-approach-wins">Long context vs RAG vs hybrid: when each approach wins</h2>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Use when</th>
+<th>Breaks when</th>
+<th>Cost profile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Long context</td>
+<td>Task requires reasoning across document relationships — legal analysis, full codebase understanding, synthesizing a research paper</td>
+<td>Relevant content lands in middle; total context volume is large</td>
+<td>High — O(n²) per request</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>Fact retrieval from a knowledge base; answering specific questions about documents</td>
+<td>Task requires understanding how parts of documents relate to each other</td>
+<td>Low to medium — retrieval is cheap, you control token count</td>
+</tr>
+<tr>
+<td>Hybrid</td>
+<td>High-value queries needing both retrieval precision and relationship reasoning</td>
+<td>Engineering complexity is a real cost to factor in</td>
+<td>Medium to high</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="/blog/rag-vs-fine-tuning/">tradeoffs between RAG and other approaches</a> are worth thinking through carefully before committing to an architecture. RAG's main advantage over long-context approaches is not cost alone — it is signal density. You pass the model fewer tokens with a higher ratio of relevant content, and models reliably perform better on that.</p>
+<p>Long context genuinely wins for tasks where chunking destroys what you are trying to understand: how decisions in one part of a codebase affect another, how arguments in a contract interact across sections, how findings in a paper build on each other. For "answer questions about our knowledge base," RAG almost always wins.</p>
+<h2 id="what-works-in-production">What works in production</h2>
+<p>Put relevant content at the top of the context. The positional bias is real and consistent, and working with it beats pretending it does not exist.</p>
+<p>Run evals with test questions where the answers are in the middle of the context. Model providers do not design their long-context benchmarks that way, which is why benchmark numbers look better than production results. A rough heuristic: for a 128k context model, the reliable zones are roughly the first 25k and last 25k tokens. The middle 75k is where you are taking on risk.</p>
+<p>If you are building systems that genuinely need long context, <a href="https://www.together.ai/blog/long-context-fine-tuning-a-technical-deep-dive">Together AI's writeup on long-context fine-tuning</a> is worth reading before you finalize your architecture. <a href="https://introl.com/blog/long-context-llm-infrastructure-million-token-windows-guide">Introl's guide on long-context infrastructure</a> goes into evaluation methodology in detail.</p>
+<p>Explaining infrastructure tradeoffs like these clearly for developer audiences is a big part of what I do when writing for AI companies. <a href="/work">My work page</a> has examples if that is relevant.</p>
+<h2 id="questions">Questions</h2>
+<p><strong>What context length is actually usable in practice?</strong></p>
+<p>For most models, the first 20-30% and last 20-30% of the advertised context are the reliable zones. For a 128k model, that is roughly 25k tokens at each end. The middle is where retrieval accuracy degrades meaningfully. Run evals on your own data rather than trusting provider benchmarks.</p>
+<p><strong>Does putting relevant content at the start always help?</strong></p>
+<p>Yes, consistently. It is the cheapest single intervention for improving long-context retrieval quality. It feels wrong because humans read front-to-back with roughly equal attention, but transformers do not work that way.</p>
+<p><strong>When is long context the right answer over RAG?</strong></p>
+<p>When the task requires reasoning over relationships between documents rather than retrieving specific facts. When chunking would destroy the thing you are trying to understand. For knowledge base Q&amp;A, use RAG.</p>
+<p><strong>Does flash attention fix positional bias?</strong></p>
+<p>No. Flash attention changes how the attention computation runs, not what the attention weights are. The same positional bias exists, computed faster.</p>
+<p><strong>If the model accepts 1M tokens, why not just use it?</strong></p>
+<p>Put your test questions where the answers are in the middle of the context and measure accuracy. If you are getting correct answers, use it. If you are getting confident-sounding wrong answers, you have found your practical limit, and it is almost certainly much less than 1M tokens.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/mixture-of-experts-explained/" class="related-card">
+        <div class="related-card-date">2026-03-13</div>
+        <div class="related-card-title">Mixture of experts: how MoE models are cheap to run but expensive to host</div>
+      </a>
+      <a href="/blog/speculative-decoding-explained/" class="related-card">
+        <div class="related-card-date">2026-03-12</div>
+        <div class="related-card-title">Speculative decoding explained: how LLMs generate tokens faster without changing the output</div>
+      </a>
+      <a href="/blog/best-llms-for-coding/" class="related-card">
+        <div class="related-card-date">2026-03-11</div>
+        <div class="related-card-title">Best LLMs for coding in 2026 (it's not what benchmarks say)</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/mixture-of-experts-explained/" class="footer-link">Mixture of experts: how MoE models are cheap to run but expensive to host</a>
+          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM context windows: what the number on the spec sheet actually means</a>
+          <a href="/blog/speculative-decoding-explained/" class="footer-link">Speculative decoding explained: how LLMs generate tokens faster without changing the output</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

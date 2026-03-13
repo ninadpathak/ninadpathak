@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mixture of experts: how MoE models are cheap to run but expensive to host | Ninad Pathak</title>
+  <meta name="description" content="DeepSeek V3 has 671B parameters but only activates 37B per token. Here's how mixture of experts works, why it cuts inference costs, and the catch nobody puts in the headline.">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Mixture of experts: how MoE models are cheap to run but expensive to host">
+  <meta property="og:description" content="DeepSeek V3 has 671B parameters but only activates 37B per token. Here's how mixture of experts works, why it cuts inference costs, and the catch nobody puts in the headline.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/mixture-of-experts-explained/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/mixture-of-experts-explained/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Mixture of experts: how MoE models are cheap to run but expensive to host",
+  "description": "DeepSeek V3 has 671B parameters but only activates 37B per token. Here's how mixture of experts works, why it cuts inference costs, and the catch nobody puts in the headline.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-13",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Mixture of experts: how MoE models are cheap to run but expensive to host",
+      "item": "https://ninadpathak.com/blog/mixture-of-experts-explained/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Mixture of experts: how MoE models are cheap to run but expensive to host</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 13, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">7 min read</span>
+      </div>
+      <h1 class="post-title">Mixture of experts: how MoE models are cheap to run but expensive to host</h1>
+      <p class="lead">DeepSeek V3 has 671B parameters but only activates 37B per token. Here's how mixture of experts works, why it cuts inference costs, and the catch nobody puts in the headline.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">inference</span>
+        <span class="tag">architecture</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#how-moe-cuts-inference-compute">How MoE cuts inference compute</a></li>
+<li><a href="#dense-vs-moe-across-the-dimensions-that-matter">Dense vs MoE across the dimensions that matter</a></li>
+<li><a href="#the-memory-catch">The memory catch</a></li>
+<li><a href="#routing-is-where-most-of-the-training-difficulty-lives">Routing is where most of the training difficulty lives</a></li>
+<li><a href="#when-moe-is-and-is-not-the-right-choice">When MoE is and is not the right choice</a></li>
+<li><a href="#questions">Questions</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>DeepSeek's API launched at roughly a tenth the price of comparable Anthropic and OpenAI endpoints, with competitive benchmark results. The architecture answer is mixture of experts. But that answer only makes sense once you understand the part most explainers skip: MoE cuts compute costs but does not cut memory costs. You still need the full model loaded in VRAM before processing a single token.</p>
+<p><strong>Short answer:</strong> Mixture of experts replaces each transformer block's feedforward layer with a bank of specialist subnetworks and routes each token through only a small subset. Inference compute scales with active parameters, not total parameters. DeepSeek V3 activates 37B parameters per token out of 671B total, doing roughly the same math per token as a 37B dense model. The catch: all 671B parameters must be loaded into GPU memory before inference begins.</p>
+<h2 id="how-moe-cuts-inference-compute">How MoE cuts inference compute</h2>
+<p>A dense transformer runs every token through every parameter. A 70B model means 70B parameters worth of compute per token, every time.</p>
+<p>A MoE model keeps attention layers unchanged but replaces each block's single feedforward network with a collection of expert networks, typically 8 to 256 per layer. A small learned router assigns each token to the top-K experts — usually 2 to 8. The token goes through only those experts. Everything else is skipped for that token.</p>
+<p>DeepSeek V3 uses 256 routed experts per layer plus a few shared experts, activating 8 per token. Cameron Wolfe's <a href="https://cameronrwolfe.substack.com/p/moe-llms">technical breakdown of MoE LLMs</a> goes through the parameter math in detail. The <a href="https://arxiv.org/abs/2401.06066">DeepSeekMoE paper</a> and <a href="https://arxiv.org/abs/2405.04434">DeepSeek-V2 paper</a> cover the specific architectural choices behind V3.</p>
+<p>The reason this translates to cost savings is the memory bandwidth bottleneck I explained in <a href="/blog/speculative-decoding-explained/">my piece on speculative decoding</a>. LLM inference spends most of its time waiting for weight reads from DRAM, not running matrix multiplications. If you activate only 37B parameters per forward pass, you do only 37B parameters worth of that weight loading — not 671B worth. A 671B MoE model running 37B active parameters per token does roughly the same math per token as a 37B dense model.</p>
+<h2 id="dense-vs-moe-across-the-dimensions-that-matter">Dense vs MoE across the dimensions that matter</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Dense 67B</th>
+<th>MoE 671B (37B active)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compute per token</td>
+<td>~67B params</td>
+<td>~37B params</td>
+</tr>
+<tr>
+<td>Memory to run (BF16)</td>
+<td>~134GB</td>
+<td>~1.3TB</td>
+</tr>
+<tr>
+<td>Training complexity</td>
+<td>Standard</td>
+<td>Significantly harder</td>
+</tr>
+<tr>
+<td>Fine-tuning</td>
+<td>Straightforward</td>
+<td>Harder — routing disrupts expert specialization</td>
+</tr>
+<tr>
+<td>API cost at provider scale</td>
+<td>Higher</td>
+<td>Lower</td>
+</tr>
+<tr>
+<td>Self-hosting feasibility</td>
+<td>8x A100</td>
+<td>Multi-node cluster required</td>
+</tr>
+</tbody>
+</table>
+<p>The DeepSeek-V2 paper compared their MoE model directly against their 67B dense model: 5.76x improvement in maximum generation throughput, 42.5% lower training cost, 93.3% reduction in KV cache size. That throughput multiplier is what makes the economics work at API scale. When many concurrent requests share the same loaded weights, per-token cost drops considerably.</p>
+<h2 id="the-memory-catch">The memory catch</h2>
+<p>The router decides which experts to send each token to based on the token itself, at inference time. Until the router runs, you do not know which experts you need. So all of them must be in GPU memory before processing begins.</p>
+<p>Running DeepSeek V3 requires holding 671B parameters in VRAM. In FP8 quantization, that is over 1.3TB. In BF16, more. NVIDIA's <a href="https://blogs.nvidia.com/blog/mixture-of-experts-frontier-models/">Blackwell MoE overview</a> cites 10x faster inference and 1/10 the token cost — those numbers are accurate, but they apply in the context of NVL72-class hardware.</p>
+<p>When you call DeepSeek's API, you are benefiting from their hardware and from running at high enough throughput to amortize that footprint across many requests. Self-hosting means facing the same memory footprint as self-hosting a dense model of the same total size, with the compute advantage only materializing at high concurrent request volumes.</p>
+<h2 id="routing-is-where-most-of-the-training-difficulty-lives">Routing is where most of the training difficulty lives</h2>
+<p>Without an explicit mechanism to prevent it, the gating network converges on a few generalist experts and routes most tokens to them. This is expert collapse. If 240 of 256 experts never get used, you paid the memory cost for 256 and got the performance of 16.</p>
+<p>The standard fix is an auxiliary loss term that penalizes uneven expert utilization during training. <a href="https://arxiv.org/abs/2408.15664">2024 research</a> found that tuning this loss weight is a frustrating balancing act: too weak and you get collapse, too strong and the interference gradients hurt model quality. You trade one problem for another.</p>
+<p>DeepSeek's approach in V3 removes the auxiliary loss entirely, replacing it with per-expert bias terms on routing scores, dynamically updated based on recent utilization. Overloaded experts get their bias nudged down, reducing selection probability in future batches. It is a feedback control loop rather than a penalty. The <a href="https://huggingface.co/blog/NormalUhr/moe-balance">Hugging Face post on MoE load balancing</a> traces how balancing strategies have evolved. Cerebras's <a href="https://www.cerebras.ai/blog/moe-guide-router">router comparison</a> makes the case that routing algorithm choice affects final model quality more than most people expect.</p>
+<p>Expert specialization is also messier than the diagrams imply. Research teams have tried to interpret what individual experts learn. The results are distributed and noisy — not the clean "expert A handles Python, expert B handles French" story. Maarten Grootendorst's <a href="https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts">visual guide to MoE</a> is the most honest treatment I have seen at showing what routing actually looks like.</p>
+<h2 id="when-moe-is-and-is-not-the-right-choice">When MoE is and is not the right choice</h2>
+<p>Fine-tuning is harder with MoE. Updating a dense model toward a target domain changes parameters uniformly. Updating a MoE model also shifts routing decisions, which can disrupt expert specialization built during pretraining. The mitigations exist but add complexity. If you need a domain-specific model and are not operating at massive scale, a dense base model is the simpler starting point.</p>
+<p>Benchmark numbers for MoE models are usually measured on tasks that favor routing stability: coding, math, structured reasoning. These have predictable token distributions and consistent expert selection. Open-ended generation, multilingual tasks, and domain-specific workloads with unusual token distributions tend to see more variable performance because routing is less stable on out-of-distribution inputs.</p>
+<p>If you are consuming MoE models through an API, the architecture mostly does not matter to you. You pay per token, the provider owns the infrastructure, and you should evaluate on your actual task. The architecture matters if you are self-hosting, deciding whether to fine-tune, or trying to understand why a model behaves inconsistently on edge cases.</p>
+<p>Explaining these kinds of infrastructure tradeoffs clearly for developer audiences is a significant part of what I do for AI companies. <a href="/work">My work page</a> has examples if that is relevant.</p>
+<h2 id="questions">Questions</h2>
+<p><strong>Is a MoE model with 37B active parameters as capable as a dense 37B model?</strong></p>
+<p>Usually more capable. Active parameter count determines inference cost. Total parameter count determines how much specialized knowledge can be stored. A 671B MoE model activating 37B parameters per token has access to knowledge distributed across 671B parameters, even though any given token only touches 37B of them.</p>
+<p><strong>Why doesn't every model use MoE?</strong></p>
+<p>Training complexity. Getting load balancing right, preventing expert collapse, and validating that expert specialization developed correctly is substantially more work than training a dense model. At smaller scales, the complexity overhead is not worth the efficiency gains.</p>
+<p><strong>Can I run DeepSeek V3 locally?</strong></p>
+<p>Only with serious hardware. FP8 requires over 1.3TB of VRAM. Quantized versions (GPTQ, GGUF) reduce this, but you are still looking at a minimum of 8 high-end GPUs for reasonable throughput. More aggressive quantization degrades output quality on tasks that are sensitive to it.</p>
+<p><strong>Does MoE improve reasoning or just efficiency?</strong></p>
+<p>Primarily efficiency, though higher total capacity plausibly allows more domain-specific knowledge to accumulate in specialized experts. The evidence that MoE specifically improves reasoning over a dense model of the same active parameter count is mixed. What is consistent: better output quality per dollar of inference cost at provider scale.</p>
+<p><strong>How does the KV cache reduction work?</strong></p>
+<p>The key-value cache stores past attention states so the model does not recompute them on each generation step. In a dense model, KV cache scales with model width and context length. In MoE, only active experts contribute to the cache for any given token, so the per-token footprint is smaller. More requests fit in the same GPU memory simultaneously, directly improving throughput. The DeepSeek-V2 numbers: 93.3% reduction in KV cache size compared to their 67B dense model, which is the main driver of the 5.76x throughput improvement.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/llm-context-windows-explained/" class="related-card">
+        <div class="related-card-date">2026-03-13</div>
+        <div class="related-card-title">LLM context windows: what the number on the spec sheet actually means</div>
+      </a>
+      <a href="/blog/speculative-decoding-explained/" class="related-card">
+        <div class="related-card-date">2026-03-12</div>
+        <div class="related-card-title">Speculative decoding explained: how LLMs generate tokens faster without changing the output</div>
+      </a>
+      <a href="/blog/best-llms-for-coding/" class="related-card">
+        <div class="related-card-date">2026-03-11</div>
+        <div class="related-card-title">Best LLMs for coding in 2026 (it's not what benchmarks say)</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/mixture-of-experts-explained/" class="footer-link">Mixture of experts: how MoE models are cheap to run but expensive to host</a>
+          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM context windows: what the number on the spec sheet actually means</a>
+          <a href="/blog/speculative-decoding-explained/" class="footer-link">Speculative decoding explained: how LLMs generate tokens faster without changing the output</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

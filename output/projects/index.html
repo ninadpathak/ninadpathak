@@ -19,8 +19,8 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy | Ninad Pathak</title>
-  <meta name="description" content="Simple privacy policy for ninadpathak.com.">
+  <title>Projects | Ninad Pathak</title>
+  <meta name="description" content="A collection of tools, libraries, and experiments built by Ninad Pathak.">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
@@ -38,7 +38,7 @@
   <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://ninadpathak.com/privacy/">
+  <link rel="canonical" href="https://ninadpathak.com/projects/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -83,7 +83,7 @@
     <ul class="nav-links" role="list">
       <li><a href="/work/"      class="nav-link ">Work</a></li>
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
-      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/projects/"  class="nav-link active">Projects</a></li>
       <li><a href="/blog/"      class="nav-link ">Writing</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
@@ -124,50 +124,60 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
+
 <section class="page-intro">
   <div class="container">
-    <div class="label">// Privacy</div>
-    <h1>Privacy Policy</h1>
-    <p class="lead">This site keeps data collection minimal. This page covers what I collect, what third-party tools do, and how to get in touch about it.</p>
+    <div class="label">// Projects</div>
+    <h1>Building in public.</h1>
+    <p class="lead">
+      Beyond writing, I enjoy building tools that solve real problems. 
+      From social media automation to developer utilities, these are the projects I've been working on.
+    </p>
   </div>
 </section>
 
-<section>
+<section class="section-block section-block-bottom-tight">
   <div class="container">
-    <div class="page-content page-content-legal">
-      <h2 id="what-i-collect">What I collect</h2>
-<p>If you email me, book a call, or contact me through a third-party service linked on this site, I receive the information you choose to share. That usually includes your name, email address, company name, and project details.</p>
-<p>I do not sell personal data.</p>
-<h2 id="analytics-and-third-party-services">Analytics and third-party services</h2>
-<p>This site may use standard analytics, embedded scheduling tools, and social platforms that collect their own usage data through cookies or similar technologies.</p>
-<p>Third-party services linked or embedded on this site may include:</p>
-<ul>
-<li>Google</li>
-<li>Zcal</li>
-<li>LinkedIn</li>
-<li>X</li>
-</ul>
-<p>Those services operate under their own privacy policies.</p>
-<h2 id="cookies">Cookies</h2>
-<p>This site may use basic cookies or local storage for functionality such as theme preference, analytics, and embedded tools.</p>
-<p>You can disable cookies in your browser settings, though some parts of the site may work differently.</p>
-<h2 id="how-i-use-information">How I use information</h2>
-<p>I use submitted information to:</p>
-<ul>
-<li>respond to inquiries</li>
-<li>schedule calls</li>
-<li>discuss projects</li>
-<li>improve the site and content</li>
-</ul>
-<h2 id="data-retention">Data retention</h2>
-<p>I keep messages and inquiry details for as long as they are useful for communication, recordkeeping, or ongoing business discussions.</p>
-<h2 id="your-rights">Your rights</h2>
-<p>If you want me to delete an email thread or any personal information you shared directly with me, email me at <a href="mailto:hello@ninadpathak.com">hello@ninadpathak.com</a>.</p>
-<h2 id="contact">Contact</h2>
-<p>For privacy questions, email <a href="mailto:hello@ninadpathak.com">hello@ninadpathak.com</a>.</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-cat">SaaS / Automation</div>
+          <div class="project-card-status">Live</div>
+        </div>
+        
+        <h2 class="project-card-title">Social Ground</h2>
+        <p class="project-card-desc">A social media automation tool designed to streamline content scheduling and engagement across multiple platforms.</p>
+        
+        <div class="project-card-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">PostgreSQL</span>
+        </div>
+        
+        <div class="project-card-footer">
+          <a href="https://social.ninadpathak.com" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Visit Project →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<section class="cta-band cta-band-top-border">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Have an idea?</h2>
+        <p>I'm always looking for interesting projects to collaborate on.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+        <a href="/contact/" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <div class="booking-modal" id="bookingModal" aria-hidden="true">

@@ -181,6 +181,11 @@ class SiteBuilder:
         with open("content/portfolio.yaml") as f:
             return yaml.safe_load(f)
 
+    def load_projects(self) -> list[dict]:
+        with open("content/projects.yaml") as f:
+            data = yaml.safe_load(f)
+        return data.get("projects", [])
+
     def load_md_content(self, path: str) -> tuple[dict, str]:
         post = frontmatter.load(path)
         self.md.reset()
@@ -281,6 +286,13 @@ class SiteBuilder:
             portfolio=portfolio,
         )
 
+    def build_projects(self, projects):
+        self.render(
+            "projects.html", "projects/index.html",
+            page="projects",
+            projects=projects,
+        )
+
     def build_about(self):
         meta, content = self.load_md_content("content/about.md")
         self.render(
@@ -352,6 +364,7 @@ class SiteBuilder:
             ("/blog/", "0.9", "daily"),
             ("/work/", "0.8", "monthly"),
             ("/portfolio/", "0.7", "monthly"),
+            ("/projects/", "0.7", "monthly"),
             ("/about/", "0.6", "monthly"),
             ("/contact/", "0.5", "yearly"),
             ("/privacy/", "0.3", "yearly"),
@@ -441,6 +454,7 @@ class SiteBuilder:
         self.latest_posts = posts[:3]
         work_cases = self.load_work()
         portfolio = self.load_portfolio()
+        projects = self.load_projects()
         legal_pages = self.load_legal_pages()
 
         self.build_homepage(posts, work_cases)
@@ -449,6 +463,7 @@ class SiteBuilder:
         self.build_work_list(work_cases)
         self.build_work_pages(work_cases)
         self.build_portfolio(portfolio)
+        self.build_projects(projects)
         self.build_about()
         self.build_contact()
         self.build_legal_pages(legal_pages)
@@ -459,6 +474,7 @@ class SiteBuilder:
 
         print(f"  {len(posts)} blog post(s)")
         print(f"  {len(work_cases)} case stud(ies)")
+        print(f"  {len(projects)} project(s)")
         print(f"Done → output/")
 
 

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Projects | Ninad Pathak{% endblock %}
+{% block description %}A collection of tools, libraries, and experiments built by Ninad Pathak.{% endblock %}
+{% block canonical %}/projects/{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Projects</div>
+    <h1>Building in public.</h1>
+    <p class="lead">
+      Beyond writing, I enjoy building tools that solve real problems. 
+      From social media automation to developer utilities, these are the projects I've been working on.
+    </p>
+  </div>
+</section>
+
+<section class="section-block section-block-bottom-tight">
+  <div class="container">
+    <div class="projects-grid">
+      {% for project in projects %}
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-card-cat">{{ project.category }}</div>
+          {% if project.status %}
+          <div class="project-card-status">{{ project.status }}</div>
+          {% endif %}
+        </div>
+        
+        <h2 class="project-card-title">{{ project.title }}</h2>
+        <p class="project-card-desc">{{ project.description }}</p>
+        
+        <div class="project-card-stack">
+          {% for tech in project.tech_stack %}
+          <span class="tech-tag">{{ tech }}</span>
+          {% endfor %}
+        </div>
+        
+        <div class="project-card-footer">
+          <a href="{{ project.url }}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Visit Project →</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-band cta-band-top-border">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Have an idea?</h2>
+        <p>I'm always looking for interesting projects to collaborate on.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+        <a href="/contact/" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
