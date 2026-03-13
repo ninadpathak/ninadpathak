@@ -1,7 +1,7 @@
 projects:
   - title: "Social Ground"
     description: "A social media automation tool designed to streamline content scheduling and engagement across multiple platforms."
-    url: "https://social.ninadpathak.com"
+    url: "https://socialgroundhq.com"
     tech_stack:
       - "Python"
       - "FastAPI"
