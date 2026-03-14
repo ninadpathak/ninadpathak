@@ -2,47 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SWE-bench Leaderboard 2026 | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); padding: 40px; box-sizing: border-box; min-height: 400px; }
-    
-    .chart { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+    .chart { display: flex; flex-direction: column; gap: 16px; margin-top: 10px; }
     .row { display: grid; grid-template-columns: 160px 1fr 60px; align-items: center; gap: 20px; }
-    .label { font-size: 12px; text-align: right; color: #888; }
-    .track { height: 14px; background: var(--bg); border: 1px solid var(--border); position: relative; }
-    .fill { height: 100%; background: var(--accent); width: 0%; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
-    .val { font-size: 11px; font-weight: 600; color: var(--accent); }
+    .label-name { font-size: 12px; text-align: right; color: var(--text-dim); font-weight: 500; }
+    .track { height: 16px; background: var(--bg); border: 1px solid var(--border); position: relative; overflow: hidden; }
+    .fill { height: 100%; background: var(--accent); width: 0%; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+    .val { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--accent); }
     
-    .legend { margin-top: 30px; font-size: 10px; color: #888; border-top: 1px solid var(--border); padding-top: 15px; }
+    @media (max-width: 600px) {
+      .row { grid-template-columns: 100px 1fr 45px; gap: 10px; }
+      .label-name { font-size: 10px; }
+    }
   </style>
 </head>
 <body>
-  <div style="text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Benchmarks March 2026</div>
-    <div style="font-size: 16px; font-weight: 600;">SWE-bench Verified (Resolved %)</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Benchmarks_2026</div>
+        <h1 class="title">SWE-bench Verified</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Resolved_%</div>
+    </div>
+
+    <div class="chart" id="chart"></div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot pulse"></div> UPDATED: MARCH_2026</div>
+      <div class="status-item">MODELS: AGENT_NATIVE</div>
+    </div>
   </div>
-
-  <div class="chart" id="chart"></div>
-
-  <div class="legend">* Data from March 2026 leaderboard. All models tested with native agentic frameworks.</div>
 
   <script>
     const data = [
@@ -50,8 +46,7 @@
       { name: "DeepSeek V4", val: 78.5 },
       { name: "GPT-5.4 (Codex)", val: 76.2 },
       { name: "Claude 4.6 Sonnet", val: 72.4 },
-      { name: "Gemini 3.1 Pro", val: 68.5 },
-      { name: "Llama 4.0 405B", val: 62.2 }
+      { name: "Gemini 3.1 Pro", val: 68.5 }
     ];
 
     const chart = document.getElementById('chart');
@@ -61,7 +56,7 @@
       const row = document.createElement('div');
       row.className = 'row';
       row.innerHTML = `
-        <div class="label">${d.name}</div>
+        <div class="label-name">${d.name}</div>
         <div class="track"><div class="fill" style="width: 0%"></div></div>
         <div class="val">${d.val}%</div>
       `;
@@ -70,6 +65,8 @@
         row.querySelector('.fill').style.width = (d.val / max * 100) + '%';
       }, 100);
     });
+
+    function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);
   </script>
-<script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+</body>
 </html>

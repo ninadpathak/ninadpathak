@@ -2,36 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Model Specialization 2026 | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
+    .radar-area { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; min-height: 350px; }
+    canvas { background: transparent; position: relative; z-index: 5; }
+    
+    .controls { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; gap: 8px; z-index: 10; }
+    .btn { background: var(--bg); border: 1px solid var(--border); color: var(--text-dim); padding: 10px 16px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; cursor: pointer; transition: all var(--t); text-align: left; }
+    .btn:hover { border-color: var(--text); color: var(--text); }
+    .btn.active { color: var(--accent); border-color: var(--accent); font-weight: 600; box-shadow: -3px 0 0 var(--accent); }
+
+    @media (max-width: 600px) {
+      .radar-area { flex-direction: column; align-items: flex-start; justify-content: flex-start; min-height: 400px; }
+      .controls { position: relative; flex-direction: row; flex-wrap: wrap; margin-bottom: 20px; }
+      canvas { margin: 0 auto; }
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; min-height: 450px; }
-    canvas { background: transparent; }
-    .controls { display: flex; gap: 10px; margin-bottom: 30px; }
-    .btn { padding: 8px 16px; border: 1px solid var(--border); color: #888; font-size: 11px; cursor: pointer; text-transform: uppercase; background: var(--bg); }
-    .btn.active { border-color: var(--accent); color: var(--accent); font-weight: 600; }
   </style>
 </head>
 <body>
-  <div class="controls" id="btns"></div>
-  <canvas id="canvas"></canvas>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Model_Capabilites</div>
+        <h1 class="title">Specialization Radar</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Tier_1_Analysis</div>
+    </div>
+
+    <div class="radar-area">
+      <div class="controls" id="btns"></div>
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot pulse"></div> REALTIME_RENDER</div>
+      <div class="status-item">MODELS: 4</div>
+    </div>
+  </div>
 
   <script>
     const canvas = document.getElementById('canvas');
@@ -62,7 +74,7 @@
 
     function draw() {
       const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const size = 350;
+      const size = window.innerWidth < 600 ? 300 : 350;
       canvas.width = size * window.devicePixelRatio;
       canvas.height = size * window.devicePixelRatio;
       canvas.style.width = size + 'px';
@@ -71,11 +83,11 @@
       
       const cx = size / 2;
       const cy = size / 2;
-      const radius = size * 0.35;
+      const radius = size * 0.32;
 
       ctx.clearRect(0, 0, size, size);
 
-      ctx.strokeStyle = isDark ? '#222' : '#e0e0dc';
+      ctx.strokeStyle = isDark ? '#1e1e1e' : '#e0e0dc';
       for(let i=1; i<=5; i++) {
         const r = radius * (i/5);
         ctx.beginPath();
@@ -88,6 +100,7 @@
       }
 
       ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
       ctx.font = '10px "JetBrains Mono"';
       for(let i=0; i<5; i++) {
         const a = (i/5) * Math.PI * 2 - Math.PI/2;
@@ -95,13 +108,12 @@
         ctx.moveTo(cx, cy);
         ctx.lineTo(cx + radius * Math.cos(a), cy + radius * Math.sin(a));
         ctx.stroke();
-        
-        ctx.fillStyle = '#888';
+        ctx.fillStyle = varColor('--text-dim');
         ctx.fillText(metrics[i], cx + (radius + 25) * Math.cos(a), cy + (radius + 25) * Math.sin(a));
       }
 
       const vals = models[current];
-      ctx.fillStyle = isDark ? 'rgba(255, 95, 31, 0.2)' : 'rgba(212, 64, 0, 0.1)';
+      ctx.fillStyle = isDark ? 'rgba(255, 95, 31, 0.15)' : 'rgba(212, 64, 0, 0.1)';
       ctx.strokeStyle = isDark ? '#ff5f1f' : '#d44000';
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -115,8 +127,14 @@
 
       requestAnimationFrame(draw);
     }
+
+    function varColor(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
     
     draw();
+
+    function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);
   </script>
-<script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+</body>
 </html>

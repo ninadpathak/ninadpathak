@@ -2,52 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hybrid Retrieval | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    .pipeline { flex: 1; display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    .step { border: 1px solid var(--border); padding: 16px; font-family: var(--mono); font-size: 10px; background: var(--bg); text-align: center; line-height: 1.4; transition: all 0.3s; color: var(--text-dim); }
+    .arrow { color: var(--border); font-weight: 700; }
+    .highlight { border-color: var(--accent); color: var(--accent); font-weight: 600; background: rgba(212, 64, 0, 0.02); }
     
-    .pipeline { display: flex; align-items: center; gap: 20px; }
-    .step { border: 1px solid var(--border); padding: 15px; font-size: 11px; background: var(--bg); text-align: center; }
-    .arrow { color: var(--border); }
-    .highlight { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+    @media (max-width: 600px) {
+      .pipeline { flex-direction: column; gap: 8px; }
+      .arrow { transform: rotate(90deg); }
+    }
   </style>
 </head>
 <body>
-  <div style="text-align: center; margin-bottom: 40px;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Production Pattern</div>
-    <div style="font-size: 16px; font-weight: 600;">The RAG + Long Context Hybrid</div>
-  </div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Retrieval_Strategy</div>
+        <h1 class="title">RAG + Long Context Hybrid</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Efficiency_Model</div>
+    </div>
 
-  <div class="pipeline">
-    <div class="step">Huge Corpus<br>(10M tokens)</div>
-    <div class="arrow">→</div>
-    <div class="step highlight">Vector Search<br>(Top 50 docs)</div>
-    <div class="arrow">→</div>
-    <div class="step highlight">Reranker<br>(Top 5 docs)</div>
-    <div class="arrow">→</div>
-    <div class="step">Long Context LLM<br>(Final Answer)</div>
-  </div>
+    <div class="pipeline">
+      <div class="step">CORPUS<br>(10M+ TOKENS)</div>
+      <div class="arrow">→</div>
+      <div class="step highlight">VECTOR_SEARCH<br>(TOP_50_DOCS)</div>
+      <div class="arrow">→</div>
+      <div class="step highlight">RERANKER<br>(TOP_5_DOCS)</div>
+      <div class="arrow">→</div>
+      <div class="step">LLM_SYNTHESIS<br>(FINAL_ANSWER)</div>
+    </div>
 
-  <div style="margin-top: 40px; font-size: 11px; color: #888; text-align: center; max-width: 450px;">
-    Even with massive windows, pre-filtering data with retrieval is 10x cheaper and 5x faster than dumping everything into the prompt.
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> PIPELINE: ACTIVE</div>
+      <div class="status-item">LATENCY: ~1.2s</div>
+    </div>
   </div>
-<script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+  <script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

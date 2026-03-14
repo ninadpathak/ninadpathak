@@ -2,55 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MCP Integration Problem | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
+    .compare { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; margin-top: 10px; }
+    .side { border: 1px solid var(--border); padding: 30px 20px; display: flex; flex-direction: column; align-items: center; gap: 24px; background: var(--bg); position: relative; }
+    .side-label { font-family: var(--mono); font-size: 10px; color: var(--accent); text-transform: uppercase; font-weight: 600; letter-spacing: 0.1em; }
+    
+    .viz { height: 160px; width: 100%; position: relative; }
+    .node { width: 44px; height: 44px; border: 1px solid var(--border); position: absolute; background: var(--bg); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 8px; text-transform: uppercase; font-weight: 500; }
+    .center { left: 50%; top: 50%; transform: translate(-50%, -50%); border-color: var(--accent); width: 64px; height: 64px; font-size: 11px; font-weight: 700; z-index: 10; color: var(--accent); box-shadow: 0 0 20px rgba(212, 64, 0, 0.1); }
+    
+    .line { position: absolute; background: var(--border); transform-origin: 0 0; height: 1px; z-index: 1; opacity: 0.4; }
+    .line.standard { background: var(--accent); opacity: 0.2; height: 1.5px; }
+
+    @media (max-width: 600px) {
+      .compare { grid-template-columns: 1fr; }
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-    
-    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; max-width: 800px; }
-    .side { border: 1px solid var(--border); padding: 30px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-    .header { font-size: 11px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
-    
-    .viz { height: 150px; width: 100%; position: relative; }
-    .node { width: 40px; height: 40px; border: 1px solid var(--border); position: absolute; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 8px; }
-    .center { left: 50%; top: 50%; transform: translate(-50%, -50%); border-color: var(--accent); width: 60px; height: 60px; font-size: 10px; font-weight: 600; z-index: 10; }
-    
-    .line { position: absolute; background: var(--border); transform-origin: 0 0; height: 1px; z-index: 1; }
-    .line.standard { background: var(--accent); opacity: 0.5; }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 40px; text-align: center;">
-    <div style="font-size: 16px; font-weight: 600;">The N × M Integration Bottleneck</div>
-  </div>
-
-  <div class="compare">
-    <div class="side">
-      <div class="header">Before MCP</div>
-      <div class="viz" id="v1"></div>
-      <div style="font-size: 10px; color: #888; text-align: center;">Every AI app needs a custom connector for every data source.</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// N_x_M_Bottleneck</div>
+        <h1 class="title">Standardization Impact</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Network_Topology</div>
     </div>
-    <div class="side">
-      <div class="header">With MCP</div>
-      <div class="viz" id="v2"></div>
-      <div style="font-size: 10px; color: #888; text-align: center;">Every AI app connects to one protocol to access all sources.</div>
+
+    <div class="compare">
+      <div class="side">
+        <div class="side-label">Before_MCP</div>
+        <div class="viz" id="v1"></div>
+        <div style="font-size: 11px; color: var(--text-dim); text-align: center;">Bespoke connectors required for every source.</div>
+      </div>
+      <div class="side">
+        <div class="side-label">With_MCP</div>
+        <div class="viz" id="v2"></div>
+        <div style="font-size: 11px; color: var(--text-dim); text-align: center;">Single protocol for all data sources.</div>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> COMPLEXITY: O(N*M) -> O(N+M)</div>
     </div>
   </div>
 
@@ -62,17 +61,17 @@
       center.innerText = isMCP ? 'MCP' : 'APP';
       c.appendChild(center);
 
-      const items = ['Drive', 'GitHub', 'Slack', 'SQL', 'Docs'];
+      const items = ['DRIVE', 'GITHUB', 'SLACK', 'POSTGRES', 'LINEAR'];
       items.forEach((item, i) => {
         const n = document.createElement('div');
         n.className = 'node';
         n.innerText = item;
         const angle = (i / items.length) * Math.PI * 2;
         const radius = 60;
-        const x = 100 + Math.cos(angle) * radius;
-        const y = 75 + Math.sin(angle) * radius;
-        n.style.left = x - 20 + 'px';
-        n.style.top = y - 20 + 'px';
+        const x = (c.clientWidth/2) + Math.cos(angle) * radius;
+        const y = (c.clientHeight/2) + Math.sin(angle) * radius;
+        n.style.left = x - 22 + 'px';
+        n.style.top = y - 22 + 'px';
         c.appendChild(n);
 
         const line = document.createElement('div');
@@ -85,8 +84,13 @@
       });
     }
 
-    createNodes('v1', false);
-    createNodes('v2', true);
+    // Ensure container has width before drawing
+    requestAnimationFrame(() => {
+      createNodes('v1', false);
+      createNodes('v2', true);
+    });
+
+    function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);
   </script>
-<script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+</body>
 </html>

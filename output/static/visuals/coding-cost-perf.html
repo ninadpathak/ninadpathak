@@ -2,34 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cost-Performance Coding 2026 | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 20px; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; }
-    
-    .chart-container {
+    .chart-area {
       flex: 1;
       position: relative;
-      margin: 40px 60px 60px 80px;
+      margin: 20px 40px 40px 60px;
       border-left: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      min-height: 300px;
     }
 
     .grid-line {
@@ -47,13 +33,10 @@
       background: var(--accent); 
       border-radius: 50%; 
       cursor: pointer; 
-      transition: transform 0.2s, box-shadow 0.2s; 
-      transform: translate(-50%, 50%); /* Using 50% Y because 0,0 is top-left but we invert Y */
+      transition: all var(--t);
+      transform: translate(-50%, -50%);
       z-index: 10;
     }
-    /* Correction: if we use 100-y%, then translate should be -50%, -50% for center */
-    .dot { transform: translate(-50%, -50%); }
-
     .dot:hover { transform: translate(-50%, -50%) scale(1.5); box-shadow: 0 0 15px var(--accent); }
     
     .dot-label { 
@@ -70,35 +53,44 @@
       transform: translateX(-50%);
     }
     
-    .axis-x { position: absolute; bottom: -40px; left: 0; right: 0; text-align: center; font-size: 11px; color: #888; }
-    .axis-y { position: absolute; left: -70px; top: 0; bottom: 0; writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: 11px; color: #888; }
+    .axis-label-x { position: absolute; bottom: -40px; left: 0; right: 0; text-align: center; font-size: 11px; color: var(--text-dim); font-family: var(--mono); }
+    .axis-label-y { position: absolute; left: -70px; top: 0; bottom: 0; writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: 11px; color: var(--text-dim); font-family: var(--mono); }
     
-    .tick-label { position: absolute; font-size: 9px; color: #888; }
+    .tick { position: absolute; font-size: 9px; color: var(--text-dim); font-family: var(--mono); }
 
     #tooltip { position: fixed; background: var(--bg); border: 1px solid var(--accent); padding: 10px; font-size: 11px; display: none; pointer-events: none; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.2); color: var(--text); }
   </style>
 </head>
 <body>
-  <div style="text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Economic Analysis 2026</div>
-    <div style="font-size: 16px; font-weight: 600;">Coding Cost vs Performance</div>
-  </div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Economic_Analysis</div>
+        <h1 class="title">Coding Cost vs Performance</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Market_Snapshot_2026</div>
+    </div>
 
-  <div class="chart-container" id="plot">
-    <div class="axis-x">Price per 1M tokens (USD) →</div>
-    <div class="axis-y">SWE-bench Verified (%) →</div>
+    <div class="chart-area" id="plot">
+      <div class="axis-label-x">Price per 1M tokens (USD) →</div>
+      <div class="axis-label-y">SWE-bench Verified (%) →</div>
+      
+      <div class="tick" style="bottom: -20px; left: 0;">$0</div>
+      <div class="tick" style="bottom: -20px; left: 50%; transform: translateX(-50%);">$5</div>
+      <div class="tick" style="bottom: -20px; right: 0;">$10</div>
+      
+      <div class="tick" style="left: -30px; bottom: 0;">0%</div>
+      <div class="tick" style="left: -30px; top: 50%; transform: translateY(-50%);">50%</div>
+      <div class="tick" style="left: -30px; top: 0;">100%</div>
+    </div>
     
-    <!-- Ticks -->
-    <div class="tick-label" style="bottom: -20px; left: 0;">$0</div>
-    <div class="tick-label" style="bottom: -20px; left: 50%; transform: translateX(-50%);">$5</div>
-    <div class="tick-label" style="bottom: -20px; right: 0;">$10</div>
-    
-    <div class="tick-label" style="left: -30px; bottom: 0;">0%</div>
-    <div class="tick-label" style="left: -30px; top: 50%; transform: translateY(-50%);">50%</div>
-    <div class="tick-label" style="left: -30px; top: 0;">100%</div>
+    <div id="tooltip"></div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot pulse"></div> UPDATED: 2026_Q1</div>
+      <div class="status-item">DATA_SOURCE: SWE-BENCH</div>
+    </div>
   </div>
-  
-  <div id="tooltip"></div>
 
   <script>
     const data = [
@@ -115,13 +107,11 @@
     const maxCost = 10;
     const maxPerf = 100;
 
-    // Grid lines
     for(let i=1; i<4; i++) {
       const hLine = document.createElement('div');
       hLine.className = 'grid-line grid-h';
       hLine.style.top = (i * 25) + '%';
       plot.appendChild(hLine);
-      
       const vLine = document.createElement('div');
       vLine.className = 'grid-line grid-v';
       vLine.style.left = (i * 25) + '%';
@@ -152,9 +142,10 @@
         tooltip.style.top = e.clientY + 15 + 'px';
       };
       dot.onmouseleave = () => tooltip.style.display = 'none';
-      
       plot.appendChild(dot);
     });
+
+    function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);
   </script>
-<script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+</body>
 </html>

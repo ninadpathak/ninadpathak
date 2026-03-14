@@ -2,61 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MCP Architecture | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
+    .mcp-grid { flex: 1; display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 20px; }
+    
+    .box { border: 1px solid var(--border); padding: 24px; text-align: center; width: 160px; background: var(--bg); transition: all var(--t); position: relative; }
+    .box.active { border-color: var(--accent); color: var(--accent); font-weight: 600; box-shadow: 0 0 20px rgba(212, 64, 0, 0.1); transform: scale(1.05); }
+    
+    .box-label { font-family: var(--mono); font-size: 9px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.1em; font-weight: 600; }
+    .box-title { font-size: 13px; font-weight: 700; line-height: 1.3; }
+    
+    .arrow-container { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .arrow { font-size: 20px; color: var(--border); transition: color 0.3s; }
+    .arrow.active { color: var(--accent); }
+    
+    .protocol-tag { border: 1px dashed var(--accent); padding: 6px 12px; font-family: var(--mono); font-size: 10px; color: var(--accent); background: rgba(212, 64, 0, 0.02); font-weight: 600; }
+
+    @media (max-width: 600px) {
+      .mcp-grid { flex-direction: column; gap: 20px; }
+      .box { width: 100%; max-width: 300px; }
+      .arrow { transform: rotate(90deg); }
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; min-height: 400px; }
-    
-    .mcp-grid { display: flex; align-items: center; gap: 40px; }
-    .box { border: 1px solid var(--border); padding: 20px; text-align: center; width: 140px; background: var(--bg); transition: all 0.3s; }
-    .box.active { border-color: var(--accent); color: var(--accent); font-weight: 600; box-shadow: 0 0 15px rgba(255, 95, 31, 0.1); }
-    
-    .label { font-size: 9px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.1em; }
-    .title { font-size: 13px; }
-    
-    .arrow { font-size: 20px; color: var(--border); }
-    .protocol { border: 1px dashed var(--accent); padding: 5px 15px; font-size: 10px; color: var(--accent); }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 50px; text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Integration Pattern</div>
-    <div style="font-size: 16px; font-weight: 600;">The Model Context Protocol (MCP) Topology</div>
-  </div>
-
-  <div class="mcp-grid">
-    <div class="box active">
-      <div class="label">Host</div>
-      <div class="title">Claude Desktop / IDE</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Integration_Pattern</div>
+        <h1 class="title">Host-Client-Server Topology</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Standardized_Interface</div>
     </div>
-    <div class="arrow">↔</div>
-    <div class="protocol">MCP JSON-RPC</div>
-    <div class="arrow">↔</div>
-    <div class="box">
-      <div class="label">Server</div>
-      <div class="title">Google Drive / GitHub / Local Files</div>
+
+    <div class="mcp-grid">
+      <div class="box active">
+        <div class="box-label">Agent_Host</div>
+        <div class="box-title">Claude Desktop / IDE</div>
+      </div>
+      <div class="arrow-container">
+        <div class="arrow">↔</div>
+        <div class="protocol-tag">MCP_RPC</div>
+        <div class="arrow">↔</div>
+      </div>
+      <div class="box">
+        <div class="box-label">Data_Server</div>
+        <div class="box-title">SaaS / Local_DB / Filesystem</div>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> PROTOCOL: ACTIVE</div>
+      <div class="status-item">VERSION: 1.0.0</div>
     </div>
   </div>
-
-  <div style="margin-top: 50px; font-size: 11px; color: #888; text-align: center; max-width: 500px;">
-    Hosts provide the user interface and model access. Servers provide the data and tool definitions. MCP provides the universal language for them to communicate.
-  </div>
-<script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+  <script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

@@ -2,71 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Context Rot | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-    
-    .rot-stage { position: relative; width: 400px; height: 200px; border: 1px solid var(--border); overflow: hidden; display: flex; flex-wrap: wrap; align-content: flex-start; padding: 10px; gap: 5px; }
-    .word { font-size: 8px; color: #888; transition: all 0.5s; }
-    .noise { filter: blur(1px); opacity: 0.3; }
-    .signal { color: var(--accent); font-weight: 600; font-size: 10px; }
+    .rot-stage { flex: 1; border: 1px solid var(--border); overflow: hidden; display: flex; flex-wrap: wrap; align-content: flex-start; padding: 20px; gap: 6px; min-height: 200px; background: rgba(0,0,0,0.01); margin-top: 10px; }
+    .word { font-family: var(--mono); font-size: 9px; color: var(--text-dim); transition: all 0.5s; opacity: 0.8; }
+    .noise { filter: blur(1px); opacity: 0.15; }
+    .signal { color: var(--accent); font-weight: 700; font-size: 11px; opacity: 1; text-shadow: 0 0 8px rgba(212, 64, 0, 0.2); }
     
     .controls { margin-top: 30px; display: flex; align-items: center; gap: 20px; }
-    input { accent-color: var(--accent); width: 200px; }
+    input { flex: 1; accent-color: var(--accent); cursor: pointer; }
+    .vol-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); min-width: 80px; }
   </style>
 </head>
 <body>
-  <div style="text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Attention Decay</div>
-    <div style="font-size: 16px; font-weight: 600;">Context Rot (Signal-to-Noise Ratio)</div>
-  </div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Attention_Decay</div>
+        <h1 class="title">Signal-to-Noise Ratio (Context Rot)</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Density_Analysis</div>
+    </div>
 
-  <div class="rot-stage" id="stage"></div>
+    <div class="rot-stage" id="stage"></div>
 
-  <div class="controls">
-    <span style="font-size: 10px;">Low Context</span>
-    <input type="range" id="vol" min="10" max="200" value="10">
-    <span style="font-size: 10px;">High Context</span>
+    <div class="controls">
+      <span class="vol-label">CONTEXT_LOW</span>
+      <input type="range" id="vol" min="20" max="300" value="20">
+      <span class="vol-label" style="text-align: right;">CONTEXT_HIGH</span>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> <span id="count-label">TOKENS: 20</span></div>
+      <div class="status-item" id="snr-label">SNR: 100%</div>
+    </div>
   </div>
 
   <script>
     const stage = document.getElementById('stage');
     const vol = document.getElementById('vol');
+    const countLabel = document.getElementById('count-label');
+    const snrLabel = document.getElementById('snr-label');
 
     function update() {
       stage.innerHTML = '';
       const count = parseInt(vol.value);
+      countLabel.innerText = `TOKENS: ${count}K`;
       
+      const snr = Math.max(10, 100 - (count / 300 * 90));
+      snrLabel.innerText = `SNR: ${Math.round(snr)}%`;
+
       for(let i=0; i<count; i++) {
         const w = document.createElement('span');
         w.className = 'word';
-        w.innerText = 'DATA';
+        w.innerText = 'DATA_';
         
-        // As volume increases, old words "rot" (blur/fade)
-        const rotChance = (count / 200) * 0.8;
-        if (Math.random() < rotChance) {
+        const rotChance = (count / 300) * 0.85;
+        if (Math.random() < rotChance && i !== 15) {
           w.classList.add('noise');
         }
         
-        if (i === 5) {
+        if (i === 15) {
           w.innerText = 'TARGET_FACT';
           w.className = 'word signal';
         }
@@ -77,6 +78,8 @@
 
     vol.oninput = update;
     update();
+
+    function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);
   </script>
-<script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+</body>
 </html>
