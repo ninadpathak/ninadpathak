@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fact Evolution | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .timeline { position: relative; padding: 40px 0; margin-top: 20px; }
+    .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+    
+    .event { position: relative; padding-left: 50px; margin-bottom: 30px; opacity: 0; transform: translateX(-20px); transition: all 0.5s; }
+    .event.show { opacity: 1; transform: translateX(0); }
+    .dot { position: absolute; left: 16px; top: 5px; width: 9px; height: 9px; background: var(--bg); border: 2px solid var(--border); border-radius: 50%; z-index: 2; }
+    .dot.active { border-color: var(--accent); background: var(--accent); }
+    
+    .fact-box { border: 1px solid var(--border); padding: 15px; background: var(--bg); width: 100%; }
+    .date { font-family: var(--mono); font-size: 9px; color: #888; margin-bottom: 5px; }
+    .fact-text { font-size: 12px; }
+    .evolution { margin-top: 10px; font-size: 10px; color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+  </style>
+</head>
+<body>
+  <div class="viz-container">
+    <div class="label">// Temporal Knowledge Graphs</div>
+    <div class="title">Zep AI: Fact Evolution over Time</div>
+    
+    <div class="timeline" id="timeline">
+      <div class="event" id="e1">
+        <div class="dot active"></div>
+        <div class="fact-box">
+          <div class="date">T+0 | Session 1</div>
+          <div class="fact-text">User: "I am using Python 3.10 for this project."</div>
+        </div>
+      </div>
+      <div class="event" id="e2">
+        <div class="dot active"></div>
+        <div class="fact-box">
+          <div class="date">T+7 Days | Session 4</div>
+          <div class="fact-text">User: "We just upgraded to Python 3.12."</div>
+          <div class="evolution">↑ FACT_UPDATED: python_version</div>
+        </div>
+      </div>
+      <div class="event" id="e3">
+        <div class="dot active"></div>
+        <div class="fact-box">
+          <div class="date">T+30 Days | Session 12</div>
+          <div class="fact-text">Agent: "Since you are on 3.12, we can use f-string formalizing..."</div>
+          <div class="evolution">✓ CONTEXT_RECONCILED</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const events = ['e1', 'e2', 'e3'];
+    let idx = 0;
+    function run() {
+      if(idx < events.length) {
+        document.getElementById(events[idx]).classList.add('show');
+        idx++;
+        setTimeout(run, 1500);
+      }
+    }
+    setTimeout(run, 500);
+  </script>
+</body>
+</html>

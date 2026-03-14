@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph Memory | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .graph-stage { height: 300px; border: 1px solid var(--border); position: relative; overflow: hidden; background: var(--bg); margin-top: 20px; }
+    .node { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); position: absolute; transition: all 0.5s; z-index: 10; }
+    .line { position: absolute; background: var(--border); height: 1px; transform-origin: 0 0; z-index: 5; opacity: 0.3; }
+    
+    .pulse { animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(212, 64, 0, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(212, 64, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 64, 0, 0); } }
+    
+    .info-overlay { position: absolute; bottom: 10px; right: 10px; font-family: var(--mono); font-size: 9px; color: #888; background: var(--bg); padding: 5px; border: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+  <div class="viz-container">
+    <div class="label">// Knowledge Graph Extraction</div>
+    <div class="title">Cognee: Turning Text into Relationships</div>
+    
+    <div class="graph-stage" id="stage">
+      <div id="links"></div>
+      <div id="nodes"></div>
+      <div class="info-overlay">AGENT_QUERY: "Who does Alice report to?"</div>
+    </div>
+    
+    <div style="margin-top: 20px; font-size: 11px; color: #888;">
+      Cognee doesn't just store text chunks. It extracts entities (Alice, Bob) and relationships (REPORTS_TO) to build a navigable world model.
+    </div>
+  </div>
+
+  <script>
+    const stage = document.getElementById('stage');
+    const nodesContainer = document.getElementById('nodes');
+    const linksContainer = document.getElementById('links');
+    
+    const nodes = [
+      { x: 150, y: 150, label: 'Alice' },
+      { x: 250, y: 100, label: 'Bob' },
+      { x: 250, y: 200, label: 'Tech Stack' },
+      { x: 350, y: 150, label: 'Project Omega' }
+    ];
+
+    const links = [
+      { from: 0, to: 1 }, { from: 1, to: 3 }, { from: 0, to: 2 }
+    ];
+
+    nodes.forEach((n, i) => {
+      const el = document.createElement('div');
+      el.className = 'node' + (i === 0 ? ' pulse' : '');
+      el.style.left = n.x + 'px';
+      el.style.top = n.y + 'px';
+      nodesContainer.appendChild(el);
+      
+      const lbl = document.createElement('div');
+      lbl.style.position = 'absolute';
+      lbl.style.left = (n.x + 15) + 'px';
+      lbl.style.top = (n.y - 5) + 'px';
+      lbl.style.fontSize = '10px';
+      lbl.style.color = '#666';
+      lbl.innerText = n.label;
+      nodesContainer.appendChild(lbl);
+    });
+
+    links.forEach(l => {
+      const n1 = nodes[l.from];
+      const n2 = nodes[l.to];
+      const line = document.createElement('div');
+      line.className = 'line';
+      const dist = Math.sqrt((n2.x - n1.x)**2 + (n2.y - n1.y)**2);
+      const angle = Math.atan2(n2.y - n1.y, n2.x - n1.x);
+      line.style.width = dist + 'px';
+      line.style.left = (n1.x + 6) + 'px';
+      line.style.top = (n1.y + 6) + 'px';
+      line.style.transform = `rotate(${angle}rad)`;
+      linksContainer.appendChild(line);
+    });
+  </script>
+</body>
+</html>

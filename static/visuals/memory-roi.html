@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory ROI | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
+    .roi-box { border: 1px solid var(--border); padding: 25px; text-align: center; }
+    .roi-val { font-size: 32px; font-weight: 700; color: var(--accent); margin-bottom: 5px; }
+    .roi-label { font-family: var(--mono); font-size: 10px; color: #888; text-transform: uppercase; }
+    
+    .bar-compare { margin-top: 40px; display: flex; flex-direction: column; gap: 15px; }
+    .bar-row { display: grid; grid-template-columns: 100px 1fr; align-items: center; gap: 15px; }
+    .bar-track { height: 20px; background: var(--border); position: relative; }
+    .bar-fill { height: 100%; background: var(--accent); transition: width 1s; }
+  </style>
+</head>
+<body>
+  <div class="viz-container">
+    <div class="label">// Economic Impact</div>
+    <div class="title">The ROI of Persistent Memory</div>
+    
+    <div class="roi-grid">
+      <div class="roi-box">
+        <div class="roi-val">-65%</div>
+        <div class="roi-label">Avg. Latency</div>
+      </div>
+      <div class="roi-box">
+        <div class="roi-val">4.2x</div>
+        <div class="roi-label">User Retention</div>
+      </div>
+    </div>
+
+    <div class="bar-compare">
+      <div class="bar-row">
+        <div class="roi-label">Stateless</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="roi-label">Stateful</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 25%"></div></div>
+      </div>
+      <div style="font-size: 10px; color: #888; text-align: right;">TOKENS_PER_SESSION</div>
+    </div>
+  </div>
+</body>
+</html>

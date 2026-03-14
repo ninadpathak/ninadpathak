@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shared Memory | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .multi-agent { display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 20px; }
+    .central-memory { width: 120px; height: 120px; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; background: var(--bg); font-weight: 600; font-size: 12px; position: relative; z-index: 10; }
+    
+    .agents { display: flex; gap: 60px; }
+    .agent-node { width: 80px; height: 80px; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg); font-family: var(--mono); font-size: 10px; position: relative; }
+    .agent-node::after { content: ''; position: absolute; top: -40px; left: 50%; height: 40px; width: 1px; background: var(--border); }
+    
+    .sync { animation: sync 2s infinite; }
+    @keyframes sync { 0% { opacity: 0.3; } 50% { opacity: 1; color: var(--accent); } 100% { opacity: 0.3; } }
+  </style>
+</head>
+<body>
+  <div class="viz-container">
+    <div class="label">// Multi-Agent Coordination</div>
+    <div class="title">Shared Global State</div>
+    
+    <div class="multi-agent">
+      <div class="central-memory sync">CENTRAL<br>STATE</div>
+      <div class="agents">
+        <div class="agent-node">Search<br>Agent</div>
+        <div class="agent-node">Coder<br>Agent</div>
+        <div class="agent-node">Reviewer<br>Agent</div>
+      </div>
+    </div>
+    
+    <div style="margin-top: 30px; font-size: 11px; color: #888; text-align: center;">
+      In 2026, multi-agent frameworks like CrewAI and AutoGen use a shared memory layer to ensure that if the Search Agent finds a fact, the Coder Agent "remembers" it instantly.
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Filesystem | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .tree { margin-top: 20px; font-family: var(--mono); font-size: 12px; }
+    .folder { padding: 8px 0; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .indent { margin-left: 20px; border-left: 1px solid var(--border); padding-left: 20px; }
+    .file { padding: 5px 0; color: #666; display: flex; align-items: center; gap: 8px; }
+    .file::before { content: '📄'; font-size: 10px; }
+    .folder::before { content: '📁'; font-size: 12px; }
+    
+    .active-load { color: var(--accent); font-weight: 600; }
+    .price-tag { font-size: 9px; padding: 2px 5px; border: 1px solid var(--border); margin-left: auto; color: #888; }
+    
+    .highlight { background: rgba(212, 64, 0, 0.05); border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="viz-container">
+    <div class="label">// Hierarchical Context</div>
+    <div class="title">Open Viking: Memory as a Filesystem</div>
+    
+    <div class="tree">
+      <div class="folder">viking://root/agent_id_01</div>
+      <div class="indent">
+        <div class="folder highlight active-load">L0_Identity/
+          <div class="price-tag">LOADED: 100%</div>
+        </div>
+        <div class="indent">
+          <div class="file active-load">system_prompt.md</div>
+          <div class="file active-load">safety_constraints.json</div>
+        </div>
+        
+        <div class="folder active-load">L1_Session/
+          <div class="price-tag">LOADED: 100%</div>
+        </div>
+        <div class="indent">
+          <div class="file active-load">last_5_turns.log</div>
+          <div class="file">session_metadata.yaml</div>
+        </div>
+        
+        <div class="folder">L2_Archive/
+          <div class="price-tag">LAZY_LOAD</div>
+        </div>
+        <div class="indent">
+          <div class="file">project_history_2025.db</div>
+          <div class="file">user_preferences_v2.db</div>
+        </div>
+      </div>
+    </div>
+    
+    <div style="margin-top: 30px; font-size: 11px; color: #888; line-height: 1.5;">
+      Open Viking avoids "Context Bloat" by only mounting the directories needed for the current reasoning step. L2 data is only fetched when explicitly requested via <code>viking://</code> URIs.
+    </div>
+  </div>
+</body>
+</html>

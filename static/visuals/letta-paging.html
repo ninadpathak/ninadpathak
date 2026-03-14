@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Paging | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .paging-wrap { display: flex; align-items: center; justify-content: center; gap: 40px; height: 300px; position: relative; }
+    .node { width: 120px; height: 120px; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg); font-family: var(--mono); font-size: 12px; transition: all 0.3s; }
+    .node.active { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 20px rgba(255, 95, 31, 0.1); }
+    
+    .arrow { font-size: 24px; color: var(--border); }
+    .token { position: absolute; width: 10px; height: 10px; background: var(--accent); border-radius: 2px; opacity: 0; }
+    
+    @keyframes pageOut { 0% { left: 180px; opacity: 1; } 100% { left: 350px; opacity: 0; } }
+    @keyframes pageIn { 0% { right: 180px; opacity: 1; } 100% { right: 350px; opacity: 0; } }
+  </style>
+</head>
+<body>
+  <div class="viz-container">
+    <div class="label">// Virtual Context Management</div>
+    <div class="title">Letta (MemGPT) Paging Loop</div>
+    
+    <div class="paging-wrap">
+      <div class="node active" id="llm">Working<br>Context<br>(RAM)</div>
+      <div class="arrow">↔</div>
+      <div class="node" id="storage">Archival<br>Storage<br>(Disk)</div>
+      <div id="tokens"></div>
+    </div>
+    
+    <div id="status" style="text-align: center; font-family: var(--mono); font-size: 11px; color: #888;">Agent autonomously swapping context blocks...</div>
+  </div>
+
+  <script>
+    const tokens = document.getElementById('tokens');
+    const llm = document.getElementById('llm');
+    const storage = document.getElementById('storage');
+    const status = document.getElementById('status');
+
+    function spawn(dir) {
+      const t = document.createElement('div');
+      t.className = 'token';
+      t.style.top = '50%';
+      t.style.left = dir === 'out' ? '180px' : '350px';
+      t.style.animation = dir === 'out' ? 'pageOut 1s forwards' : 'pageIn 1s reverse forwards';
+      tokens.appendChild(t);
+      
+      if(dir === 'out') {
+        llm.style.transform = 'scale(1.05)';
+        setTimeout(() => llm.style.transform = 'scale(1)', 200);
+        status.innerText = "CALL: core_memory_append(...)";
+      } else {
+        storage.style.transform = 'scale(1.05)';
+        setTimeout(() => storage.style.transform = 'scale(1)', 200);
+        status.innerText = "CALL: archival_memory_search(...)";
+      }
+      
+      setTimeout(() => t.remove(), 1000);
+    }
+
+    let i = 0;
+    setInterval(() => {
+      spawn(i % 2 === 0 ? 'out' : 'in');
+      i++;
+    }, 2000);
+  </script>
+</body>
+</html>

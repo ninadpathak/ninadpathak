@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amnesia Problem | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .amnesia-wrap { border: 1px solid var(--border); padding: 30px; margin-top: 20px; background: var(--bg); position: relative; }
+    .chat { display: flex; flex-direction: column; gap: 15px; }
+    .msg { padding: 10px 15px; border: 1px solid var(--border); font-size: 12px; max-width: 80%; }
+    .user { align-self: flex-end; border-color: var(--accent); color: var(--accent); }
+    .agent { align-self: flex-start; }
+    
+    .blur { filter: blur(3px); opacity: 0.3; }
+    .error-tag { color: #ff3b30; font-family: var(--mono); font-size: 10px; font-weight: 600; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <div class="viz-container">
+    <div class="label">// UX Failure Modes</div>
+    <div class="title">The "Amnesia Problem" in Stateless AI</div>
+    
+    <div class="amnesia-wrap">
+      <div class="chat">
+        <div class="msg user blur">"I prefer working in Rust for the backend." (Session 1)</div>
+        <div class="msg user">"Can you suggest a library for my new web server?" (Session 5)</div>
+        <div class="msg agent active">"Certainly! I recommend Express.js or Django..."</div>
+        <div class="error-tag">⚠ AMNESIA_DETECTED: Model ignored user's Rust preference from Session 1.</div>
+      </div>
+    </div>
+    
+    <div style="margin-top: 30px; font-size: 11px; color: #888; line-height: 1.5;">
+      Stateless LLMs "forget" critical preferences as soon as they fall out of the active context window. Agentic memory layers prevent this by persisting these "anchors" across sessions.
+    </div>
+  </div>
+</body>
+</html>

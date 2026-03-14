@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Hierarchy | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .hierarchy { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .tier { border: 1px solid var(--border); padding: 20px; position: relative; transition: all 0.3s; cursor: pointer; background: var(--bg); }
+    .tier:hover { border-color: var(--accent); }
+    .tier-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-family: var(--mono); font-size: 10px; color: #888; }
+    .tier-name { font-weight: 600; font-size: 14px; }
+    .speed { color: var(--accent); }
+    
+    .t1 { border-left: 4px solid #34c759; }
+    .t2 { border-left: 4px solid #007aff; }
+    .t3 { border-left: 4px solid var(--accent); }
+    .t4 { border-left: 4px solid #5856d6; }
+  </style>
+</head>
+<body>
+  <div class="viz-container">
+    <div class="label">// Cognitive Stack</div>
+    <div class="title">The 4-Tier Memory Hierarchy</div>
+    
+    <div class="hierarchy">
+      <div class="tier t1">
+        <div class="tier-name">Working Memory (RAM)</div>
+        <p style="font-size: 12px; color: #666; margin-top: 5px;">Active context window. Fast reasoning, low persistence.</p>
+        <div class="tier-meta">
+          <span>LATENCY: &lt;10ms</span>
+          <span class="speed">VOLATILE</span>
+        </div>
+      </div>
+      <div class="tier t2">
+        <div class="tier-name">Episodic Memory (The Log)</div>
+        <p style="font-size: 12px; color: #666; margin-top: 5px;">Append-only record of past interactions and raw experiences.</p>
+        <div class="tier-meta">
+          <span>LATENCY: ~200ms</span>
+          <span>DURABLE</span>
+        </div>
+      </div>
+      <div class="tier t3">
+        <div class="tier-name">Semantic Memory (The KB)</div>
+        <p style="font-size: 12px; color: #666; margin-top: 5px;">Distilled facts, entity relationships, and world models.</p>
+        <div class="tier-meta">
+          <span>LATENCY: ~500ms</span>
+          <span>EVOLVING</span>
+        </div>
+      </div>
+      <div class="tier t4">
+        <div class="tier-name">Procedural Memory (Skills)</div>
+        <p style="font-size: 12px; color: #666; margin-top: 5px;">Successful workflow patterns and tool-use heuristics.</p>
+        <div class="tier-meta">
+          <span>LATENCY: ~1s</span>
+          <span>LEARNED</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
