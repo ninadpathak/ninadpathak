@@ -169,7 +169,7 @@ Large-scale systems often use a hybrid approach. They use a provider's API for t
 Such a strategy requires careful alignment to ensure both models project into a compatible space. Re-embedding a small set of results at query time is the most common way to handle this complexity. Consistency in your vector space is required for reliable retrieval.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/latency-benchmark-interactive.html" style="top: 40px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/latency-benchmark-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Accuracy stability in long-context models
