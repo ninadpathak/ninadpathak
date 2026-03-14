@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Latency Benchmarks | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
+    .header { margin-bottom: 30px; }
+    .label { font-size: 10px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 5px; text-transform: uppercase; }
+    .title { font-size: 18px; font-weight: 500; }
+    
+    .chart-container { display: flex; flex-direction: column; gap: 15px; margin-top: 40px; }
+    .bar-row { display: grid; grid-template-columns: 140px 1fr 60px; align-items: center; gap: 20px; }
+    .bar-label { font-size: 12px; color: #888; text-align: right; }
+    .bar-track { height: 12px; background: var(--bg); border: 1px solid var(--border); position: relative; }
+    .bar-fill { height: 100%; background: var(--accent); transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .bar-val { font-size: 11px; color: var(--accent); font-weight: 600; }
+    
+    .tabs { display: flex; gap: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+    .tab { padding: 10px 0; font-size: 11px; color: #888; cursor: pointer; border-bottom: 2px solid transparent; text-transform: uppercase; }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+    
+    .legend { margin-top: 30px; font-size: 10px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="label">// Provider Performance</div>
+    <div class="title">Inference Latency (p95)</div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-set="small">Short Text (25 tokens)</div>
+    <div class="tab" data-set="medium">Medium Text (256 tokens)</div>
+    <div class="tab" data-set="large">Large Text (2048 tokens)</div>
+  </div>
+
+  <div class="chart-container" id="chart"></div>
+
+  <div class="legend">* Simulated benchmarks based on average provider performance. Actual results vary by region and traffic.</div>
+
+  <script>
+    const data = {
+      small: [
+        { name: 'OpenAI (3-small)', val: 180 },
+        { name: 'Cohere (v3)', val: 120 },
+        { name: 'Voyage AI', val: 150 },
+        { name: 'Self-hosted (BGE)', val: 45 },
+        { name: 'Jina Embeddings', val: 210 }
+      ],
+      medium: [
+        { name: 'OpenAI (3-small)', val: 320 },
+        { name: 'Cohere (v3)', val: 240 },
+        { name: 'Voyage AI', val: 290 },
+        { name: 'Self-hosted (BGE)', val: 110 },
+        { name: 'Jina Embeddings', val: 380 }
+      ],
+      large: [
+        { name: 'OpenAI (3-small)', val: 850 },
+        { name: 'Cohere (v3)', val: 620 },
+        { name: 'Voyage AI', val: 740 },
+        { name: 'Self-hosted (BGE)', val: 340 },
+        { name: 'Jina Embeddings', val: 980 }
+      ]
+    };
+
+    function render(set) {
+      const container = document.getElementById('chart');
+      container.innerHTML = '';
+      const items = data[set];
+      const max = Math.max(...items.map(i => i.val));
+
+      items.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'bar-row';
+        const width = (item.val / max) * 100;
+        
+        row.innerHTML = `
+          <div class="bar-label">${item.name}</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
+          <div class="bar-val">${item.val}ms</div>
+        `;
+        container.appendChild(row);
+        
+        setTimeout(() => {
+          row.querySelector('.bar-fill').style.width = width + '%';
+        }, 50);
+      });
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        render(tab.dataset.set);
+      });
+    });
+
+    render('small');
+  </script>
+</body>
+</html>

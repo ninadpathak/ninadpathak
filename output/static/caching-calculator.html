@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Caching ROI | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .calc { width: 100%; max-width: 400px; border: 1px solid var(--border); padding: 30px; display: flex; flex-direction: column; gap: 25px; }
+    .row { display: flex; flex-direction: column; gap: 10px; }
+    .label { font-size: 10px; color: #888; text-transform: uppercase; }
+    input { width: 100%; accent-color: var(--accent); }
+    
+    .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
+    .res-box { border: 1px solid var(--border); padding: 15px; }
+    .val { font-size: 18px; font-weight: 600; color: var(--accent); margin-bottom: 5px; }
+    .v-label { font-size: 9px; color: #888; }
+  </style>
+</head>
+<body>
+  <div style="margin-bottom: 40px; text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Savings Calculator</div>
+    <div style="font-size: 16px; font-weight: 600;">Prompt Caching ROI</div>
+  </div>
+
+  <div class="calc">
+    <div class="row">
+      <div class="label">Cache Hit Rate: <span id="hit-val" style="color: var(--accent);">50%</span></div>
+      <input type="range" id="hit" min="0" max="100" value="50">
+    </div>
+    
+    <div class="res-grid">
+      <div class="res-box">
+        <div class="val" id="cost-save">$0</div>
+        <div class="v-label">Estimated Savings / mo</div>
+      </div>
+      <div class="res-box">
+        <div class="val" id="speed-up">1.0x</div>
+        <div class="v-label">Latency Speedup</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hit = document.getElementById('hit');
+    const hitVal = document.getElementById('hit-val');
+    const costSave = document.getElementById('cost-save');
+    const speedUp = document.getElementById('speed-up');
+
+    function update() {
+      const h = hit.value / 100;
+      hitVal.innerText = hit.value + '%';
+      
+      // Rough estimates based on $3/1M input tokens and 50k tokens per request
+      const monthlyVol = 10000; 
+      const savings = monthlyVol * 0.05 * h * 0.9; // 90% discount on cache hits
+      costSave.innerText = '$' + Math.round(savings);
+      
+      // Latency speedup approx 2x for cached portions
+      const speed = 1 + (h * 1.5);
+      speedUp.innerText = speed.toFixed(1) + 'x';
+    }
+
+    hit.oninput = update;
+    update();
+  </script>
+</body>
+</html>

@@ -147,6 +147,32 @@
 
 <section class="blog-list-section">
   <div class="container">
+      <a href="/blog/embedding-models-compared/" class="blog-row">
+        <div class="blog-row-date">2026-03-15</div>
+        <div>
+          <div class="blog-row-title">Vector Embeddings: A Guide to the Geometry of Meaning in AI</div>
+          <div class="blog-row-desc">Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.</div>
+          <div class="blog-row-meta">
+            <span class="read-time">15 min read</span>
+            <span class="tag">ai</span>
+            <span class="tag">llm</span>
+            <span class="tag">rag</span>
+          </div>
+        </div>
+      </a>
+      <a href="/blog/llm-context-windows-explained/" class="blog-row">
+        <div class="blog-row-date">2026-03-14</div>
+        <div>
+          <div class="blog-row-title">LLM Context Windows Explained: Why More is Not Always Better</div>
+          <div class="blog-row-desc">Context windows are expanding to millions of tokens. Here is why the middle of your context still gets ignored, what long context actually costs, and how to build production systems that use these massive windows effectively.</div>
+          <div class="blog-row-meta">
+            <span class="read-time">4 min read</span>
+            <span class="tag">ai</span>
+            <span class="tag">llm</span>
+            <span class="tag">infrastructure</span>
+          </div>
+        </div>
+      </a>
       <a href="/blog/mixture-of-experts-explained/" class="blog-row">
         <div class="blog-row-date">2026-03-13</div>
         <div>
@@ -160,42 +186,42 @@
           </div>
         </div>
       </a>
-      <a href="/blog/llm-context-windows-explained/" class="blog-row">
+      <a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/" class="blog-row">
         <div class="blog-row-date">2026-03-13</div>
         <div>
-          <div class="blog-row-title">LLM context windows: what the number on the spec sheet actually means</div>
-          <div class="blog-row-desc">A 1M token context window sounds impressive. Here's why the model often can't reliably use most of it, and what actually happens to your data inside a full context window.</div>
+          <div class="blog-row-title">Prompt Caching: What It Is and When the Math Works</div>
+          <div class="blog-row-desc">Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.</div>
           <div class="blog-row-meta">
-            <span class="read-time">6 min read</span>
+            <span class="read-time">3 min read</span>
             <span class="tag">ai</span>
             <span class="tag">llm</span>
-            <span class="tag">inference</span>
-          </div>
-        </div>
-      </a>
-      <a href="/blog/speculative-decoding-explained/" class="blog-row">
-        <div class="blog-row-date">2026-03-12</div>
-        <div>
-          <div class="blog-row-title">Speculative decoding explained: how LLMs generate tokens faster without changing the output</div>
-          <div class="blog-row-desc">Speculative decoding cuts LLM latency by 2-3x without changing output quality. Here's how the draft-verify loop works, why acceptance rate is the only number that matters, and when it actually hurts.</div>
-          <div class="blog-row-meta">
-            <span class="read-time">7 min read</span>
-            <span class="tag">ai</span>
-            <span class="tag">llm</span>
-            <span class="tag">inference</span>
+            <span class="tag">infrastructure</span>
           </div>
         </div>
       </a>
       <a href="/blog/best-llms-for-coding/" class="blog-row">
-        <div class="blog-row-date">2026-03-11</div>
+        <div class="blog-row-date">2026-03-12</div>
         <div>
-          <div class="blog-row-title">Best LLMs for coding in 2026 (it's not what benchmarks say)</div>
-          <div class="blog-row-desc">HumanEval scores are nearly meaningless in 2026. Here's how to pick the right coding LLM based on your actual task: agentic coding, autocomplete, or cost-sensitive production.</div>
+          <div class="blog-row-title">The Best LLMs for Coding in 2026: An Engineering Review</div>
+          <div class="blog-row-desc">Not all models are created equal for software development. Here is a benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic logic, and repository-scale refactoring as of March 2026.</div>
           <div class="blog-row-meta">
-            <span class="read-time">10 min read</span>
+            <span class="read-time">5 min read</span>
             <span class="tag">ai</span>
             <span class="tag">llm</span>
-            <span class="tag">coding</span>
+            <span class="tag">technical-writing</span>
+          </div>
+        </div>
+      </a>
+      <a href="/blog/model-context-protocol-explained/" class="blog-row">
+        <div class="blog-row-date">2026-03-11</div>
+        <div>
+          <div class="blog-row-title">The Model Context Protocol (MCP) Explained: A Universal Language for AI Tools</div>
+          <div class="blog-row-desc">Model Context Protocol (MCP) is the new standard for connecting AI models to data sources and tools. Here is why it matters, how it works, and why it is the missing link for agentic infrastructure.</div>
+          <div class="blog-row-meta">
+            <span class="read-time">4 min read</span>
+            <span class="tag">ai</span>
+            <span class="tag">agents</span>
+            <span class="tag">infrastructure</span>
           </div>
         </div>
       </a>
@@ -203,64 +229,51 @@
         <div class="blog-row-date">2026-03-10</div>
         <div>
           <div class="blog-row-title">Agent harnesses: the infrastructure layer your LLM agent actually needs</div>
-          <div class="blog-row-desc">Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.</div>
+          <div class="blog-row-desc">Every production AI agent needs a harness. Here is what one contains, why frameworks often are not enough, and how to build the layer that actually determines reliability.</div>
           <div class="blog-row-meta">
-            <span class="read-time">12 min read</span>
+            <span class="read-time">10 min read</span>
             <span class="tag">ai</span>
             <span class="tag">agents</span>
             <span class="tag">infrastructure</span>
           </div>
         </div>
       </a>
-      <a href="/blog/model-context-protocol-explained/" class="blog-row">
+      <a href="/blog/rag-vs-fine-tuning/" class="blog-row">
         <div class="blog-row-date">2026-03-09</div>
         <div>
-          <div class="blog-row-title">The Model Context Protocol explained: why MCP matters architecturally</div>
-          <div class="blog-row-desc">A practical explanation of the Model Context Protocol, why it matters architecturally, how FastAPI MCP fits in, and how to avoid framework lock-in in agent systems.</div>
+          <div class="blog-row-title">RAG vs Fine-Tuning: A Better Decision Framework</div>
+          <div class="blog-row-desc">Choosing between Retrieval-Augmented Generation (RAG) and Fine-Tuning is the most common architectural mistake in AI. Here is how to decide based on knowledge frequency, data privacy, and behavior requirements.</div>
           <div class="blog-row-meta">
-            <span class="read-time">10 min read</span>
+            <span class="read-time">2 min read</span>
             <span class="tag">ai</span>
-            <span class="tag">agents</span>
-            <span class="tag">mcp</span>
+            <span class="tag">llm</span>
+            <span class="tag">rag</span>
           </div>
         </div>
       </a>
       <a href="/blog/time-to-first-token-ttft/" class="blog-row">
         <div class="blog-row-date">2026-03-08</div>
         <div>
-          <div class="blog-row-title">Time to first token: what TTFT measures and how to reduce it</div>
-          <div class="blog-row-desc">TTFT is the latency metric that matters most for chat, copilots, and interactive AI apps. Here is what time to first token measures and how to reduce it without optimizing the wrong thing.</div>
+          <div class="blog-row-title">Time to First Token (TTFT): The Metric That Determines AI Snappiness</div>
+          <div class="blog-row-desc">Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.</div>
           <div class="blog-row-meta">
-            <span class="read-time">13 min read</span>
+            <span class="read-time">3 min read</span>
             <span class="tag">ai</span>
             <span class="tag">llm</span>
-            <span class="tag">latency</span>
+            <span class="tag">infrastructure</span>
           </div>
         </div>
       </a>
-      <a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/" class="blog-row">
+      <a href="/blog/speculative-decoding-explained/" class="blog-row">
         <div class="blog-row-date">2026-03-07</div>
         <div>
-          <div class="blog-row-title">Prompt caching: what it is and when the math works in your favor</div>
-          <div class="blog-row-desc">Prompt caching can cut latency and input cost, but only when your prompts share a stable prefix often enough to make cache reuse real. Here is how I think about it in production.</div>
+          <div class="blog-row-title">Speculative Decoding: How to Speed Up LLM Inference for Free</div>
+          <div class="blog-row-desc">LLM inference is memory-bound, not compute-bound. Speculative decoding uses this fact to speed up generation by 2-3x using a smaller draft model to predict tokens for a larger one.</div>
           <div class="blog-row-meta">
-            <span class="read-time">10 min read</span>
+            <span class="read-time">2 min read</span>
             <span class="tag">ai</span>
             <span class="tag">llm</span>
-            <span class="tag">prompt-caching</span>
-          </div>
-        </div>
-      </a>
-      <a href="/blog/rag-vs-fine-tuning/" class="blog-row">
-        <div class="blog-row-date">2026-03-06</div>
-        <div>
-          <div class="blog-row-title">RAG vs fine-tuning: how to actually decide</div>
-          <div class="blog-row-desc">RAG and fine-tuning solve different problems. Here is how I decide between them, when to combine them, and where teams waste time choosing the wrong one.</div>
-          <div class="blog-row-meta">
-            <span class="read-time">11 min read</span>
-            <span class="tag">ai</span>
-            <span class="tag">rag</span>
-            <span class="tag">fine-tuning</span>
+            <span class="tag">infrastructure</span>
           </div>
         </div>
       </a>
@@ -314,9 +327,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/embedding-models-compared/" class="footer-link">Vector Embeddings: A Guide to the Geometry of Meaning in AI</a>
+          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM Context Windows Explained: Why More is Not Always Better</a>
           <a href="/blog/mixture-of-experts-explained/" class="footer-link">Mixture of experts: how MoE models are cheap to run but expensive to host</a>
-          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM context windows: what the number on the spec sheet actually means</a>
-          <a href="/blog/speculative-decoding-explained/" class="footer-link">Speculative decoding explained: how LLMs generate tokens faster without changing the output</a>
         </div>
       </div>
 

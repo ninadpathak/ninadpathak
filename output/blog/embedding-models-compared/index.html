@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vector Embeddings: A Guide to the Geometry of Meaning in AI | Ninad Pathak</title>
+  <meta name="description" content="Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Vector Embeddings: A Guide to the Geometry of Meaning in AI">
+  <meta property="og:description" content="Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/embedding-models-compared/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/embedding-models-compared/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Vector Embeddings: A Guide to the Geometry of Meaning in AI",
+  "description": "Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-15",
+  "publisher": {
+    "@type": "Person",
+    "name": "Ninad Pathak"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Vector Embeddings: A Guide to the Geometry of Meaning in AI",
+      "item": "https://ninadpathak.com/blog/embedding-models-compared/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Vector Embeddings: A Guide to the Geometry of Meaning in AI</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 15, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">15 min read</span>
+      </div>
+      <h1 class="post-title">Vector Embeddings: A Guide to the Geometry of Meaning in AI</h1>
+      <p class="lead">Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">rag</span>
+        <span class="tag">vector-search</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#how-text-becomes-geometry">How text becomes geometry</a></li>
+<li><a href="#measuring-semantic-proximity-with-vector-similarity">Measuring semantic proximity with vector similarity</a></li>
+<li><a href="#architecture-choices-for-embedding-generation">Architecture choices for embedding generation</a></li>
+<li><a href="#balancing-dimensionality-and-information-density">Balancing dimensionality and information density</a></li>
+<li><a href="#building-flexible-vectors-with-matryoshka-embeddings">Building flexible vectors with Matryoshka embeddings</a></li>
+<li><a href="#spatial-collapse-in-high-dimensions">Spatial collapse in high dimensions</a></li>
+<li><a href="#comparing-openai-cohere-and-voyage-ai">Comparing OpenAI, Cohere, and Voyage AI</a></li>
+<li><a href="#reducing-memory-with-binary-and-scalar-quantization">Reducing memory with binary and scalar quantization</a></li>
+<li><a href="#the-standard-semantic-search-pipeline">The standard semantic search pipeline</a></li>
+<li><a href="#api-latency-vs-self-hosted-model-performance">API latency vs self-hosted model performance</a></li>
+<li><a href="#accuracy-stability-in-long-context-models">Accuracy stability in long-context models</a></li>
+<li><a href="#searching-across-languages-with-vector-alignment">Searching across languages with vector alignment</a></li>
+<li><a href="#token-level-matching-with-colbert-and-late-interaction">Token-level matching with ColBERT and late interaction</a></li>
+<li><a href="#selecting-the-right-embedding-infrastructure">Selecting the right embedding infrastructure</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Every interaction with a modern language model begins with a conversion. You provide text, and the system translates that text into a list of numbers. These numbers represent the semantic essence of your input in a coordinate system so vast that human intuition for space completely fails.</p>
+<p>We call these lists of numbers embeddings. They are the foundational infrastructure for retrieval-augmented generation (RAG), semantic search, and recommendation engines. The choice of embedding model determines the ceiling of your system's accuracy. A weak model clusters unrelated concepts together, while a strong model preserves the subtle distinctions between "bank" as a financial institution and "bank" as the side of a river.</p>
+<p>I spent the last year benchmarking these models across production workloads. The landscape has shifted from simple BERT-based encoders to massive, multi-billion parameter models that rival the reasoning capabilities of small LLMs. Understanding the geometry behind these models is no longer optional for engineers building AI products.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/embedding-3d-space.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="how-text-becomes-geometry">How text becomes geometry</h2>
+<p>Encoding text into a vector is a process of projection. You take a discrete string of characters and map it onto a point in a high-dimensional space. OpenAI's <code>text-embedding-3d-small</code> model uses 1536 dimensions. Each dimension represents a learned feature of language that the model discovered during training.</p>
+<p>One dimension might track the sentiment of the text. Another might track the presence of technical jargon. A third might track the relationship to a specific geographic region. The model does not label these dimensions for us. Instead, it learns them by processing trillions of tokens and observing which words tend to appear in similar contexts.</p>
+<p>Words that share meaning end up physically close to each other in this space. "King" and "Queen" reside in a similar neighborhood. "Apple" and "iPhone" cluster together, while "Apple" and "Banana" form a separate but nearby cluster representing fruit. The relationship between these points is what we measure when we perform a search.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/token-to-vector-pipeline.html" style="width: 100%; height: 250px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="measuring-semantic-proximity-with-vector-similarity">Measuring semantic proximity with vector similarity</h2>
+<p>Searching through millions of vectors requires a consistent way to measure the "closeness" of two points. L2 norm is the most intuitive metric, as it measures the spatial interval between two coordinates. However, many embedding models are normalized to have a length of one, placing every vector on the surface of a multi-dimensional unit sphere.</p>
+<p>Cosine similarity becomes the preferred metric in this constrained geometry. It measures the cosine of the angle between two vectors. When two vectors point in exactly the same direction, the angle is zero and the similarity is one. When they point in opposite directions, the similarity is negative one.</p>
+<p>I've seen many teams struggle with the "curse of dimensionality" when using these metrics. High-dimensional spaces push points toward the edges of the space. The difference between the interval to the nearest neighbor and the interval to the average neighbor starts to disappear. Such sensitivity makes similarity thresholds extremely precise. A similarity of 0.82 might be a perfect match, while 0.79 is completely irrelevant.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/cosine-similarity-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="architecture-choices-for-embedding-generation">Architecture choices for embedding generation</h2>
+<p>The transition from text to vector happens inside the transformer architecture. Traditional LLMs like GPT-4 are decoders; they predict the next token in a sequence. Embedding models are often encoders, like BERT or RoBERTa. They process the entire input at once to generate a single summary representation.</p>
+<p>Newer models have moved away from this rigid distinction. Many modern embedding models use a decoder-only architecture but are fine-tuned specifically for the embedding task. They take the final hidden state of the last token or use mean pooling across all hidden states to produce the final vector.</p>
+<p>The quality of the encoder determines how well the model handles long-form text. A small model might compress 500 words into the same vector space as a single sentence. Such compression leads to information loss. Significant research now focuses on "late interaction" models like ColBERT, which preserve more granular information by keeping multiple vectors per document instead of just one.</p>
+<h2 id="balancing-dimensionality-and-information-density">Balancing dimensionality and information density</h2>
+<p>There is a constant tension between the size of a vector and its expressive power. Larger vectors store more nuance but increase the cost of storage and the latency of searches. A 3072-dimension vector takes up twice the space of a 1536-dimension vector and requires twice the compute for similarity calculations.</p>
+<p>I've monitored how models like Cohere's <code>embed-english-v3.0</code> handle this trade-off. They use a technique called compression-aware training to ensure that information is packed efficiently into each dimension. Such efficiency allows their models to outperform larger competitors while using fewer resources.</p>
+<p>Dimensionality reduction is the process of taking these high-dimensional vectors and projecting them down to smaller spaces. We do this for visualization or to speed up initial search phases. Techniques like Principal Component Analysis (PCA) or t-SNE help us see the clusters that the model creates, but they always come with a cost in accuracy.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/dimensionality-reduction-viz.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="building-flexible-vectors-with-matryoshka-embeddings">Building flexible vectors with Matryoshka embeddings</h2>
+<p>The most significant innovation in embedding geometry recently is the Matryoshka Representation Learning (MRL) technique. These models are trained so that the most important information is stored in the first few dimensions. The vector acts like a Russian nesting doll.</p>
+<p>You can take a 1536-dimension Matryoshka vector and truncate it to 128 dimensions. The resulting smaller vector still captures most of the semantic meaning. Such flexibility allows you to build multi-stage search systems. You perform a fast, coarse search using the first 128 dimensions and then refine the results using the full 1536-dimension vectors.</p>
+<p>OpenAI's latest models support this natively through the <code>dimensions</code> parameter. My testing shows that you can often drop 75% of the dimensions with less than a 5% drop in retrieval accuracy. Such a massive win for infrastructure costs in large-scale RAG systems cannot be ignored. The mathematical elegance of MRL comes from a multi-scale loss function that penalizes errors at every truncation point simultaneously.</p>
+<p>The training process forces the model to prioritize the most discriminative features in the early dimensions. The hierarchy means that the first 10% of your vector often contains 90% of the useful semantic signal. We can use this to optimize cold storage layers. You store the full vectors on high-latency disk and keep only the truncated Matryoshka heads in low-latency RAM for the initial candidate selection.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/matryoshka-visualizer.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="spatial-collapse-in-high-dimensions">Spatial collapse in high dimensions</h2>
+<p>Navigating a 1536-dimension space is not like navigating a 3D room. Our brains are built to understand volume, but high-dimensional geometry behaves according to different rules. The most counter-intuitive rule is the volume concentration phenomenon.</p>
+<p>Almost all the volume of a high-dimensional sphere is concentrated in a thin shell near its surface. Points do not fill the middle of the space; they cluster at the boundaries. Such concentration causes the "spatial collapse" I mentioned earlier. Vectors that look semantically distinct often end up with extremely high cosine similarity scores simply because they are all pushed into the same outer layer of the geometry.</p>
+<p>Understanding this collapse is vital for setting search thresholds. A similarity score of 0.7 in 3D space might indicate a strong relationship. That same score in 1536D might be noise. You need to calibrate your retrieval system based on the specific distribution of your model's output space.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/curse-of-dimensionality.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="comparing-openai-cohere-and-voyage-ai">Comparing OpenAI, Cohere, and Voyage AI</h2>
+<p>Choosing a provider involves balancing accuracy, latency, and cost. OpenAI remains the default choice for many teams due to their aggressive pricing and decent performance. Their <code>text-embedding-3d-small</code> model is cheap and reliable for general-purpose semantic search.</p>
+<p>Cohere offers a more specialized experience. Their <code>v3</code> models are trained specifically for enterprise retrieval tasks. They excel at handling noisy data and maintain high accuracy on domain-specific jargon. I've found their models particularly effective for legal and financial documentation where precision is non-negotiable.</p>
+<p>Voyage AI is a newer entrant that has consistently topped the MTEB (Massive Text Embedding Benchmark) leaderboards. Their models often show a meaningful improvement in recall over OpenAI. They achieve this by using larger base architectures and more sophisticated training data curation. Smaller providers often move faster with architectural innovations that the giants take months to adopt.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/provider-comparison-radar.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="reducing-memory-with-binary-and-scalar-quantization">Reducing memory with binary and scalar quantization</h2>
+<p>Storing millions of high-dimensional vectors as 32-bit floats is prohibitively expensive. A single 1536-dimension vector at float32 precision takes up 6KB. One million vectors would require 6GB of memory. High-performance vector databases like Pinecone or Weaviate solve this using quantization.</p>
+<p>Scalar quantization (SQ) reduces each dimension from 32 bits to 8 bits. Such reduction cuts memory usage by 75% with almost no loss in retrieval quality. The model maps the range of floating-point values to a 256-level integer scale. The result is the industry standard for production systems today.</p>
+<p>Binary quantization (BQ) goes further. It reduces each dimension to a single bit: 0 or 1. You only store whether the value is positive or negative. Such reduction cuts memory usage by 32x. Search speeds increase dramatically because similarity calculations become simple XOR operations at the hardware level. Cohere's latest models are specifically designed to support binary quantization with minimal accuracy trade-offs.</p>
+<p>Modern vector databases now implement "over-sampling and re-scoring" to mitigate the small accuracy loss from BQ. You retrieve 10x more results than you need using the binary index and then re-rank them using the original full-precision vectors. Such a strategy provides the speed of binary search with the accuracy of floating-point search. The engineering trade-off shifts from compute to IO, which is often easier to manage at scale.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/quantization-bit-level.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="the-standard-semantic-search-pipeline">The standard semantic search pipeline</h2>
+<p>Building a search system with these models follows a predictable pipeline. You start by chunking your documents. Each chunk is passed to the embedding model to generate a vector. These vectors are stored in a vector database alongside the original text and metadata.</p>
+<p>A user query arrives and is embedded using the same model. The vector database performs a nearest-neighbor search to find the chunks with the highest similarity. These chunks are then passed to an LLM as context for the final answer. The embedding model acts as the librarian, while the LLM acts as the researcher.</p>
+<p>Failures in this workflow usually happen at the librarian stage. Semantic search is only as good as the geometry of the underlying space. Searching fails when the embedding model cannot understand the semantic relationship between a query like "Why is my bill high?" and a document about "usage-based billing tiers," the system fails.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/semantic-search-animation.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="api-latency-vs-self-hosted-model-performance">API latency vs self-hosted model performance</h2>
+<p>Embedding large datasets is an asynchronous batch process, but querying them is a synchronous user interaction. Latency matters. OpenAI and Cohere typically return vectors in 150ms to 300ms. Such response times are acceptable for many web applications but might feel sluggish for interactive chat interfaces.</p>
+<p>Self-hosting models like BGE-M3 or Hugging Face's latest encoders can reduce latency to less than 50ms. You gain control over the hardware and eliminate the network hop to a provider's API. The cost is the operational overhead of managing GPU clusters and the engineering effort required to scale them.</p>
+<p>Large-scale systems often use a hybrid approach. They use a provider's API for the initial embedding of the corpus and then use a highly optimized, self-hosted model for real-time user queries. Such a strategy requires careful alignment to ensure both models project into a compatible space. Re-embedding a small set of results at query time is the most common way to handle this complexity.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/latency-benchmark-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="accuracy-stability-in-long-context-models">Accuracy stability in long-context models</h2>
+<p>The maximum sequence length for most embedding models is 8192 tokens. Newer models from Jina and Nomic have pushed this to 32k or even 128k tokens. Such expansion sounds like an advantage for processing long documents without chunking, but my tests show a significant decay in vector stability as the input grows.</p>
+<p>Embeddings are essentially a weighted average of token hidden states. The semantic signal becomes diluted when you cram 32k tokens into a single 1536-dimension vector. The model struggles to maintain the importance of specific facts buried in the middle of a long text. The "Lost in the Middle" phenomenon I wrote about previously applies to embedding encoders just as much as to decoder LLMs.</p>
+<p>Recursive chunking with overlap remains the most reliable strategy for production RAG. Small, focused chunks preserve semantic density. You can then use cross-encoders for reranking or implement a parent-document retrieval strategy to give the LLM broader context. The long context window on an embedding model is best used for processing large cohesive units like code files, not for replacing a robust chunking strategy.</p>
+<h2 id="searching-across-languages-with-vector-alignment">Searching across languages with vector alignment</h2>
+<p>Language-agnostic embeddings allow you to search in one language and retrieve results in another. A query in English can match a document in French if both project into the same neighborhood of the vector space. The alignment is achieved by training models on parallel corpora where the same sentence in multiple languages is encouraged to have the same vector. Such mathematical mapping between disparate syntaxes is one of the most profound outcomes of modern representation learning. We can now build truly global knowledge graphs that do not require brittle translation layers to bridge the divide between local content silos. Engineering teams often underestimate the complexity of maintaining these cross-lingual spaces, but the result is a unified semantic surface that covers the entire breadth of human communication. Many benchmarks show that these multilingual models now perform comparably to monolingual models on native tasks. Such parity suggests that the model has learned a deeper, language-independent representation of world knowledge and logic. </p>
+<p>Cohere's <code>embed-multilingual-v3.0</code> is the leader in this category. Their training process explicitly aligns over 100 languages. I've used this to build search systems for global knowledge bases where documents are scattered across five different languages. The system retrieves the most relevant information regardless of the source language. A translation layer or a multilingual LLM handles the final response.</p>
+<p>Open-source models like the multilingual-E5 series also perform well. They are often smaller and easier to self-host for specific region-locked data requirements. The geometry of a multilingual space is a fascinating achievement in representation learning. It proves that meaning exists in a mathematical layer that transcends specific human syntax.</p>
+<h2 id="token-level-matching-with-colbert-and-late-interaction">Token-level matching with ColBERT and late interaction</h2>
+<p>Compressing an entire document into one vector is a lossy operation. The late interaction paradigm, popularized by ColBERT, offers a more granular alternative. Instead of one vector per document, ColBERT stores a vector for every token in the document.</p>
+<p>At query time, the system performs a search that compares every token in the query against every token in the candidate documents. The comparison preserves the subtle interactions between words that single-vector models lose. The accuracy improvement is dramatic, especially for complex technical queries where the specific relationship between words matters as much as the words themselves.</p>
+<p>Storage costs are the primary hurdle for ColBERT. Storing 512 vectors per document instead of one is a massive increase in resource requirements. Newer variants like ColBERTv2 use aggressive compression and quantization to make this manageable. Many vector databases now offer native support for ColBERT indices, signaling a shift toward this more granular retrieval strategy for high-precision use cases.</p>
+<h2 id="selecting-the-right-embedding-infrastructure">Selecting the right embedding infrastructure</h2>
+<p>Choosing a model starts with your data's complexity. General-purpose search on clean English text is a solved problem. OpenAI is your starting point. You move to Cohere or Voyage when you deal with messy, domain-specific data or require top-tier retrieval recall for high-stakes applications.</p>
+<p>Hardware constraints drive the choice to self-host. Open-source models like BGE or GTE are excellent if you have an existing GPU cluster and need sub-50ms latency. The operational cost of maintenance is the real price you pay. Providers give you a managed experience that scales automatically, allowing you to focus on the application logic instead of GPU driver versions.</p>
+<p>Cost-sensitive applications should look at Matryoshka models and binary quantization. Reducing your storage footprint by 32x changes the economics of search at the multi-million document scale. You can store your entire index in memory for the price of a standard disk-based index. This speed boost is often more valuable than a few percentage points of theoretical accuracy on a benchmark.</p>
+<p>The geometry of meaning is the most important map in your AI architecture. You spend your engineering time navigating this space, building paths between users and information. Choosing the right model is about choosing the right map for the terrain you intend to cover. I've helped teams build these maps from the ground up. The teams that succeed are the ones that treat their vector space as a first-class engineering concern.</p>
+<p>Last, remember that your choice is not permanent. Vector databases allow you to migrate and re-embed data as models improve. The field moves fast, and what looks like state-of-the-art today will be a baseline in twelve months. Build for flexibility, monitor your retrieval quality, and never stop exploring the high-dimensional neighbors of your data.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/llm-context-windows-explained/" class="related-card">
+        <div class="related-card-date">2026-03-14</div>
+        <div class="related-card-title">LLM Context Windows Explained: Why More is Not Always Better</div>
+      </a>
+      <a href="/blog/mixture-of-experts-explained/" class="related-card">
+        <div class="related-card-date">2026-03-13</div>
+        <div class="related-card-title">Mixture of experts: how MoE models are cheap to run but expensive to host</div>
+      </a>
+      <a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/" class="related-card">
+        <div class="related-card-date">2026-03-13</div>
+        <div class="related-card-title">Prompt Caching: What It Is and When the Math Works</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/embedding-models-compared/" class="footer-link">Vector Embeddings: A Guide to the Geometry of Meaning in AI</a>
+          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM Context Windows Explained: Why More is Not Always Better</a>
+          <a href="/blog/mixture-of-experts-explained/" class="footer-link">Mixture of experts: how MoE models are cheap to run but expensive to host</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

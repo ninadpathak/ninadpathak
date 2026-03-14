@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cosine Similarity | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .container { display: flex; gap: 40px; align-items: center; width: 100%; padding: 40px; box-sizing: border-box; }
+    #viz { flex: 1; position: relative; }
+    #ui { width: 300px; }
+    .label { font-size: 10px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 5px; }
+    .title { font-size: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .stat { margin-bottom: 20px; }
+    .stat-val { font-size: 24px; color: var(--accent); font-weight: 500; }
+    .stat-label { font-size: 11px; color: #888; margin-top: 4px; }
+    .relationship { font-size: 13px; color: #888; line-height: 1.5; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="viz">
+      <canvas id="canvas"></canvas>
+    </div>
+    <div id="ui">
+      <div class="label">// Real-time Vector Math</div>
+      <div class="title">Cosine Similarity</div>
+      <div class="stat">
+        <div id="similarity" class="stat-val">1.000</div>
+        <div class="stat-label">Similarity Score (cos θ)</div>
+      </div>
+      <div class="stat">
+        <div id="angle" class="stat-val">0°</div>
+        <div class="stat-label">Angular Distance (θ)</div>
+      </div>
+      <div class="relationship" id="relationship">These vectors are semantically identical.</div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const simEl = document.getElementById('similarity');
+    const angleEl = document.getElementById('angle');
+    const relEl = document.getElementById('relationship');
+
+    let width, height, centerX, centerY, radius;
+    let v1 = { x: 1, y: 0 };
+    let v2 = { x: 0.8, y: 0.6 };
+    let dragging = null;
+
+    function resize() {
+      const parent = canvas.parentElement;
+      width = parent.clientWidth;
+      height = 500;
+      canvas.width = width * window.devicePixelRatio;
+      canvas.height = height * window.devicePixelRatio;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      
+      centerX = width / 2;
+      centerY = height / 2;
+      radius = Math.min(width, height) * 0.4;
+    }
+
+    function draw() {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      ctx.clearRect(0, 0, width, height);
+
+      // Grid
+      ctx.strokeStyle = isDark ? '#1e1e1e' : '#e0e0dc';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(centerX - radius - 20, centerY);
+      ctx.lineTo(centerX + radius + 20, centerY);
+      ctx.moveTo(centerX, centerY - radius - 20);
+      ctx.lineTo(centerX, centerY + radius + 20);
+      ctx.stroke();
+
+      // Unit Circle
+      ctx.strokeStyle = isDark ? '#222' : '#f0f0f0';
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Vector 1
+      drawVector(v1, isDark ? '#666' : '#888', 'v1');
+      // Vector 2
+      drawVector(v2, isDark ? '#ff5f1f' : '#d44000', 'v2');
+
+      requestAnimationFrame(draw);
+    }
+
+    function drawVector(v, color, label) {
+      const tx = centerX + v.x * radius;
+      const ty = centerY - v.y * radius;
+
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(tx, ty);
+      ctx.stroke();
+
+      // Arrow head
+      const angle = Math.atan2(-v.y, v.x);
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(tx - 10 * Math.cos(angle - 0.5), ty - 10 * Math.sin(angle - 0.5));
+      ctx.lineTo(tx - 10 * Math.cos(angle + 0.5), ty - 10 * Math.sin(angle + 0.5));
+      ctx.fill();
+    }
+
+    function updateStats() {
+      const dot = v1.x * v2.x + v1.y * v2.y;
+      const mag1 = Math.sqrt(v1.x**2 + v1.y**2);
+      const mag2 = Math.sqrt(v2.x**2 + v2.y**2);
+      const similarity = dot / (mag1 * mag2);
+      
+      simEl.innerText = similarity.toFixed(3);
+      const degrees = Math.acos(Math.max(-1, Math.min(1, similarity))) * (180 / Math.PI);
+      angleEl.innerText = Math.round(degrees) + '°';
+
+      if (similarity > 0.95) relEl.innerText = "These vectors are semantically identical.";
+      else if (similarity > 0.7) relEl.innerText = "These vectors are strongly related (e.g., 'King' and 'Queen').";
+      else if (similarity > 0.3) relEl.innerText = "These vectors share some context (e.g., 'Apple' and 'Fruit').";
+      else if (similarity > -0.1 && similarity < 0.1) relEl.innerText = "These vectors are orthogonal (completely unrelated).";
+      else if (similarity < -0.7) relEl.innerText = "These vectors are semantically opposite.";
+      else relEl.innerText = "Low semantic relationship.";
+    }
+
+    canvas.addEventListener('mousedown', e => {
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX - rect.left - centerX) / radius;
+      const y = -(e.clientY - rect.top - centerY) / radius;
+      
+      const d1 = Math.sqrt((x - v1.x)**2 + (y - v1.y)**2);
+      const d2 = Math.sqrt((x - v2.x)**2 + (y - v2.y)**2);
+      
+      if (d1 < 0.2) dragging = 'v1';
+      else if (d2 < 0.2) dragging = 'v2';
+    });
+
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const rect = canvas.getBoundingClientRect();
+      let x = (e.clientX - rect.left - centerX) / radius;
+      let y = -(e.clientY - rect.top - centerY) / radius;
+      
+      const mag = Math.sqrt(x**2 + y**2);
+      x /= mag;
+      y /= mag;
+      
+      if (dragging === 'v1') { v1.x = x; v1.y = y; }
+      else { v2.x = x; v2.y = y; }
+      
+      updateStats();
+    });
+
+    window.addEventListener('mouseup', () => dragging = null);
+
+    window.addEventListener('resize', resize);
+    resize();
+    updateStats();
+    draw();
+  </script>
+</body>
+</html>

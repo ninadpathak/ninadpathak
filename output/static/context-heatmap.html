@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lost in the Middle | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .heatmap { display: flex; flex-direction: column; width: 100%; max-width: 600px; border: 1px solid var(--border); }
+    .slot { height: 30px; display: flex; align-items: center; justify-content: center; font-size: 10px; transition: background 0.5s; border-bottom: 1px solid var(--border); }
+    .slot:last-child { border-bottom: none; }
+    
+    .label { font-size: 10px; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.1em; }
+  </style>
+</head>
+<body>
+  <div class="label">// Retrieval Accuracy</div>
+  <div style="font-size: 16px; font-weight: 600; margin-bottom: 30px;">"Lost in the Middle" Accuracy Heatmap</div>
+
+  <div class="heatmap" id="heatmap"></div>
+
+  <div style="margin-top: 30px; font-size: 11px; color: #888; text-align: center;">
+    Models perform best at the <strong>start</strong> and <strong>end</strong> of the prompt.
+  </div>
+
+  <script>
+    const heatmap = document.getElementById('heatmap');
+    const slots = 10;
+    
+    for(let i=0; i<slots; i++) {
+      const slot = document.createElement('div');
+      slot.className = 'slot';
+      
+      // Accuracy U-curve: high at ends, low in middle
+      const x = i / (slots - 1);
+      const accuracy = 0.5 + (2 * (x - 0.5)**2) * 0.9; 
+      
+      const opacity = accuracy;
+      slot.style.backgroundColor = `rgba(212, 64, 0, ${opacity})`;
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        slot.style.backgroundColor = `rgba(255, 95, 31, ${opacity})`;
+      }
+      
+      slot.innerText = `${Math.round(accuracy * 100)}% Recall`;
+      slot.style.color = accuracy > 0.6 ? '#fff' : '#888';
+      
+      heatmap.appendChild(slot);
+    }
+  </script>
+</body>
+</html>

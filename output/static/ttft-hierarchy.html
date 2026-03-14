@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Optimization Hierarchy | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .pyramid { display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; max-width: 500px; }
+    .layer { border: 1px solid var(--border); padding: 15px; text-align: center; font-size: 11px; background: var(--bg); transition: all 0.3s; cursor: pointer; }
+    .layer:hover { border-color: var(--accent); color: var(--accent); }
+    
+    .l1 { width: 40%; }
+    .l2 { width: 60%; }
+    .l3 { width: 80%; }
+    .l4 { width: 100%; border-color: var(--accent); color: var(--accent); font-weight: 600; }
+    
+    .label { font-size: 10px; color: #888; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <div class="label">Priority of TTFT Work (Highest Impact at Bottom)</div>
+  
+  <div class="pyramid">
+    <div class="layer l1">Quantization & Kernels</div>
+    <div class="layer l2">Speculative Decoding</div>
+    <div class="layer l3">Prompt Caching</div>
+    <div class="layer l4">Model Selection (Size)</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Open Source Coding Growth | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; }
+    
+    .graph-wrap { flex: 1; border: 1px solid var(--border); position: relative; margin-top: 30px; padding: 20px; }
+    .line-svg { width: 100%; height: 100%; }
+    .data-line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 2s forwards ease-out; }
+    .ref-line { fill: none; stroke: var(--border); stroke-width: 1; stroke-dasharray: 4; }
+    
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    
+    .label { font-size: 9px; color: #888; position: absolute; }
+    .point-label { font-size: 10px; color: var(--text); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div style="text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Performance Trends</div>
+    <div style="font-size: 16px; font-weight: 600;">The closing gap of Open Source coding</div>
+  </div>
+
+  <div class="graph-wrap">
+    <svg class="line-svg" viewBox="0 0 400 200">
+      <!-- Grid -->
+      <line class="ref-line" x1="0" y1="180" x2="400" y2="180" />
+      <line class="ref-line" x1="0" y1="100" x2="400" y2="100" />
+      <line class="ref-line" x1="0" y1="20" x2="400" y2="20" />
+      
+      <!-- Open Source Path -->
+      <path class="data-line" d="M 20 170 L 100 150 L 200 110 L 300 60 L 380 40" />
+      
+      <!-- Proprietary baseline (Flat top) -->
+      <line style="stroke: #888; stroke-width: 1;" x1="0" y1="30" x2="400" y2="30" />
+    </svg>
+    <div class="label" style="bottom: 5px; left: 20px;">Late 2023</div>
+    <div class="label" style="bottom: 5px; right: 20px;">Now (2025)</div>
+    <div class="label" style="top: 25px; left: 10px; color: #888;">Proprietary Baseline</div>
+    <div class="label point-label" style="top: 35px; right: 30px;">Llama 3.1 / DeepSeek</div>
+  </div>
+</body>
+</html>

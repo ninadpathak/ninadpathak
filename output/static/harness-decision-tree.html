@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Harness Decision Tree | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    
+    .tree { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+    .q-box { border: 1px solid var(--border); padding: 20px; font-size: 14px; font-weight: 600; background: var(--bg); text-align: center; max-width: 400px; }
+    .options { display: flex; gap: 40px; }
+    .opt { cursor: pointer; border: 1px solid var(--border); padding: 10px 30px; font-size: 12px; transition: all 0.2s; }
+    .opt:hover { border-color: var(--accent); color: var(--accent); }
+    
+    .result { border: 2px solid var(--accent); padding: 20px; color: var(--accent); font-weight: 600; display: none; }
+  </style>
+</head>
+<body>
+  <div style="margin-bottom: 40px; text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Assessment</div>
+    <div style="font-size: 16px; font-weight: 600;">Do you actually need a harness?</div>
+  </div>
+
+  <div class="tree" id="tree">
+    <div class="q-box" id="q">Does the model decide which tools to call and in what order?</div>
+    <div class="options" id="opts">
+      <div class="opt" onclick="ans('yes')">YES</div>
+      <div class="opt" onclick="ans('no')">NO</div>
+    </div>
+    <div class="result" id="res"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "Does the model decide which tools to call and in what order?", yes: 1, no: "RESULT_NO" },
+      { q: "Does the task span more than 5 sequential API calls?", yes: "RESULT_YES", no: 2 },
+      { q: "Is recovery from partial failure a requirement?", yes: "RESULT_YES", no: "RESULT_NO" }
+    ];
+
+    let step = 0;
+
+    function ans(v) {
+      const next = questions[step][v];
+      if (next === "RESULT_YES") {
+        show("HARNESS IS REQUIRED. The model controls the flow and complexity warrants infrastructure.");
+      } else if (next === "RESULT_NO") {
+        show("HARNESS IS OVERHEAD. A simple stateless application flow is sufficient.");
+      } else {
+        step = next;
+        document.getElementById('q').innerText = questions[step].q;
+      }
+    }
+
+    function show(t) {
+      document.getElementById('q').style.display = 'none';
+      document.getElementById('opts').style.display = 'none';
+      const r = document.getElementById('res');
+      r.style.display = 'block';
+      r.innerText = t;
+    }
+  </script>
+</body>
+</html>

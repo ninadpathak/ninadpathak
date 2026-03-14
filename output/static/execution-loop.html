@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agent Execution Loop | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    
+    .loop-container {
+      position: relative;
+      width: 500px;
+      height: 300px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .node {
+      border: 1px solid var(--border);
+      padding: 15px 25px;
+      background: var(--bg);
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 5;
+      transition: all 0.3s;
+    }
+
+    .node.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 20px rgba(255, 95, 31, 0.1);
+    }
+
+    .node-llm { position: absolute; top: 20px; }
+    .node-harness { position: absolute; bottom: 20px; }
+
+    .token {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    @keyframes flowDown {
+      0% { top: 60px; opacity: 0; transform: scale(0.5); }
+      20% { opacity: 1; transform: scale(1); }
+      80% { opacity: 1; transform: scale(1); }
+      100% { top: 230px; opacity: 0; transform: scale(0.5); }
+    }
+
+    @keyframes flowUp {
+      0% { bottom: 60px; opacity: 0; transform: scale(0.5); }
+      20% { opacity: 1; transform: scale(1); }
+      80% { opacity: 1; transform: scale(1); }
+      100% { bottom: 230px; opacity: 0; transform: scale(0.5); }
+    }
+
+    .status { margin-top: 30px; font-size: 12px; color: #888; }
+  </style>
+</head>
+<body>
+  <div style="margin-bottom: 30px; text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Runtime</div>
+    <div style="font-size: 16px; font-weight: 600;">The Reasoning execution loop</div>
+  </div>
+
+  <div class="loop-container">
+    <div class="node node-llm" id="n-llm">LLM (Reasoning)</div>
+    <div class="node node-harness" id="n-harness">Harness (Coordination)</div>
+    <div id="token-box"></div>
+  </div>
+
+  <div class="status" id="status-text">Agent is thinking...</div>
+
+  <script>
+    const statusText = document.getElementById('status-text');
+    const nLlm = document.getElementById('n-llm');
+    const nHarness = document.getElementById('n-harness');
+    const tokenBox = document.getElementById('token-box');
+
+    const steps = [
+      { status: "LLM generating tool request...", activeText: "n-llm", anim: "flowDown" },
+      { status: "Harness executing tool: search_docs", activeText: "n-harness", anim: "flowUp" },
+      { status: "LLM processing tool result...", activeText: "n-llm", anim: "flowDown" },
+      { status: "Agent task complete.", activeText: "n-llm", anim: null }
+    ];
+
+    let current = 0;
+
+    function next() {
+      const step = steps[current];
+      statusText.innerText = step.status;
+      
+      nLlm.classList.toggle('active', step.activeText === 'n-llm');
+      nHarness.classList.toggle('active', step.activeText === 'n-harness');
+
+      if (step.anim) {
+        const t = document.createElement('div');
+        t.className = 'token';
+        t.style.animation = `${step.anim} 1.5s forwards cubic-bezier(0.16, 1, 0.3, 1)`;
+        // Center the token horizontally
+        t.style.left = "50%";
+        t.style.marginLeft = "-4px";
+        tokenBox.appendChild(t);
+        setTimeout(() => t.remove(), 1500);
+      }
+
+      current = (current + 1) % steps.length;
+      setTimeout(next, 2000);
+    }
+
+    next();
+  </script>
+</body>
+</html>

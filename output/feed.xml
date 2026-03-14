@@ -6,58 +6,64 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Vector Embeddings: A Guide to the Geometry of Meaning in AI</title>
+      <link>https://ninadpathak.com/blog/embedding-models-compared/</link>
+      <description>Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.</description>
+      <pubDate>Mar 15, 2026</pubDate>
+    </item>
+    <item>
+      <title>LLM Context Windows Explained: Why More is Not Always Better</title>
+      <link>https://ninadpathak.com/blog/llm-context-windows-explained/</link>
+      <description>Context windows are expanding to millions of tokens. Here is why the middle of your context still gets ignored, what long context actually costs, and how to build production systems that use these massive windows effectively.</description>
+      <pubDate>Mar 14, 2026</pubDate>
+    </item>
+    <item>
       <title>Mixture of experts: how MoE models are cheap to run but expensive to host</title>
       <link>https://ninadpathak.com/blog/mixture-of-experts-explained/</link>
       <description>DeepSeek V3 has 671B parameters but only activates 37B per token. Here's how mixture of experts works, why it cuts inference costs, and the catch nobody puts in the headline.</description>
       <pubDate>Mar 13, 2026</pubDate>
     </item>
     <item>
-      <title>LLM context windows: what the number on the spec sheet actually means</title>
-      <link>https://ninadpathak.com/blog/llm-context-windows-explained/</link>
-      <description>A 1M token context window sounds impressive. Here's why the model often can't reliably use most of it, and what actually happens to your data inside a full context window.</description>
+      <title>Prompt Caching: What It Is and When the Math Works</title>
+      <link>https://ninadpathak.com/blog/prompt-caching-what-it-is-and-when-the-math-works/</link>
+      <description>Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.</description>
       <pubDate>Mar 13, 2026</pubDate>
     </item>
     <item>
-      <title>Speculative decoding explained: how LLMs generate tokens faster without changing the output</title>
-      <link>https://ninadpathak.com/blog/speculative-decoding-explained/</link>
-      <description>Speculative decoding cuts LLM latency by 2-3x without changing output quality. Here's how the draft-verify loop works, why acceptance rate is the only number that matters, and when it actually hurts.</description>
+      <title>The Best LLMs for Coding in 2026: An Engineering Review</title>
+      <link>https://ninadpathak.com/blog/best-llms-for-coding/</link>
+      <description>Not all models are created equal for software development. Here is a benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic logic, and repository-scale refactoring as of March 2026.</description>
       <pubDate>Mar 12, 2026</pubDate>
     </item>
     <item>
-      <title>Best LLMs for coding in 2026 (it's not what benchmarks say)</title>
-      <link>https://ninadpathak.com/blog/best-llms-for-coding/</link>
-      <description>HumanEval scores are nearly meaningless in 2026. Here's how to pick the right coding LLM based on your actual task: agentic coding, autocomplete, or cost-sensitive production.</description>
+      <title>The Model Context Protocol (MCP) Explained: A Universal Language for AI Tools</title>
+      <link>https://ninadpathak.com/blog/model-context-protocol-explained/</link>
+      <description>Model Context Protocol (MCP) is the new standard for connecting AI models to data sources and tools. Here is why it matters, how it works, and why it is the missing link for agentic infrastructure.</description>
       <pubDate>Mar 11, 2026</pubDate>
     </item>
     <item>
       <title>Agent harnesses: the infrastructure layer your LLM agent actually needs</title>
       <link>https://ninadpathak.com/blog/agent-harnesses/</link>
-      <description>Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.</description>
+      <description>Every production AI agent needs a harness. Here is what one contains, why frameworks often are not enough, and how to build the layer that actually determines reliability.</description>
       <pubDate>Mar 10, 2026</pubDate>
     </item>
     <item>
-      <title>The Model Context Protocol explained: why MCP matters architecturally</title>
-      <link>https://ninadpathak.com/blog/model-context-protocol-explained/</link>
-      <description>A practical explanation of the Model Context Protocol, why it matters architecturally, how FastAPI MCP fits in, and how to avoid framework lock-in in agent systems.</description>
+      <title>RAG vs Fine-Tuning: A Better Decision Framework</title>
+      <link>https://ninadpathak.com/blog/rag-vs-fine-tuning/</link>
+      <description>Choosing between Retrieval-Augmented Generation (RAG) and Fine-Tuning is the most common architectural mistake in AI. Here is how to decide based on knowledge frequency, data privacy, and behavior requirements.</description>
       <pubDate>Mar 09, 2026</pubDate>
     </item>
     <item>
-      <title>Time to first token: what TTFT measures and how to reduce it</title>
+      <title>Time to First Token (TTFT): The Metric That Determines AI Snappiness</title>
       <link>https://ninadpathak.com/blog/time-to-first-token-ttft/</link>
-      <description>TTFT is the latency metric that matters most for chat, copilots, and interactive AI apps. Here is what time to first token measures and how to reduce it without optimizing the wrong thing.</description>
+      <description>Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.</description>
       <pubDate>Mar 08, 2026</pubDate>
     </item>
     <item>
-      <title>Prompt caching: what it is and when the math works in your favor</title>
-      <link>https://ninadpathak.com/blog/prompt-caching-what-it-is-and-when-the-math-works/</link>
-      <description>Prompt caching can cut latency and input cost, but only when your prompts share a stable prefix often enough to make cache reuse real. Here is how I think about it in production.</description>
+      <title>Speculative Decoding: How to Speed Up LLM Inference for Free</title>
+      <link>https://ninadpathak.com/blog/speculative-decoding-explained/</link>
+      <description>LLM inference is memory-bound, not compute-bound. Speculative decoding uses this fact to speed up generation by 2-3x using a smaller draft model to predict tokens for a larger one.</description>
       <pubDate>Mar 07, 2026</pubDate>
-    </item>
-    <item>
-      <title>RAG vs fine-tuning: how to actually decide</title>
-      <link>https://ninadpathak.com/blog/rag-vs-fine-tuning/</link>
-      <description>RAG and fine-tuning solve different problems. Here is how I decide between them, when to combine them, and where teams waste time choosing the wrong one.</description>
-      <pubDate>Mar 06, 2026</pubDate>
     </item>
   </channel>
 </rss>

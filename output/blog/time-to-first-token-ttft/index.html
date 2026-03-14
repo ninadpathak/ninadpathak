@@ -19,14 +19,14 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Time to first token: what TTFT measures and how to reduce it | Ninad Pathak</title>
-  <meta name="description" content="TTFT is the latency metric that matters most for chat, copilots, and interactive AI apps. Here is what time to first token measures and how to reduce it without optimizing the wrong thing.">
+  <title>Time to First Token (TTFT): The Metric That Determines AI Snappiness | Ninad Pathak</title>
+  <meta name="description" content="Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="Time to first token: what TTFT measures and how to reduce it">
-  <meta property="og:description" content="TTFT is the latency metric that matters most for chat, copilots, and interactive AI apps. Here is what time to first token measures and how to reduce it without optimizing the wrong thing.">
+  <meta property="og:title"       content="Time to First Token (TTFT): The Metric That Determines AI Snappiness">
+  <meta property="og:description" content="Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/time-to-first-token-ttft/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -71,8 +71,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Time to first token: what TTFT measures and how to reduce it",
-  "description": "TTFT is the latency metric that matters most for chat, copilots, and interactive AI apps. Here is what time to first token measures and how to reduce it without optimizing the wrong thing.",
+  "headline": "Time to First Token (TTFT): The Metric That Determines AI Snappiness",
+  "description": "Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
@@ -105,7 +105,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Time to first token: what TTFT measures and how to reduce it",
+      "name": "Time to First Token (TTFT): The Metric That Determines AI Snappiness",
       "item": "https://ninadpathak.com/blog/time-to-first-token-ttft/"
     }
   ]
@@ -172,7 +172,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">Time to first token: what TTFT measures and how to reduce it</li>
+      <li class="breadcrumb-item current" aria-current="page">Time to First Token (TTFT): The Metric That Determines AI Snappiness</li>
     </ol>
   </div>
 </nav>
@@ -184,15 +184,14 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 08, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">13 min read</span>
+        <span class="post-meta-time">3 min read</span>
       </div>
-      <h1 class="post-title">Time to first token: what TTFT measures and how to reduce it</h1>
-      <p class="lead">TTFT is the latency metric that matters most for chat, copilots, and interactive AI apps. Here is what time to first token measures and how to reduce it without optimizing the wrong thing.</p>
+      <h1 class="post-title">Time to First Token (TTFT): The Metric That Determines AI Snappiness</h1>
+      <p class="lead">Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
         <span class="tag">llm</span>
-        <span class="tag">latency</span>
-        <span class="tag">inference</span>
+        <span class="tag">infrastructure</span>
       </div>
     </div>
   </header>
@@ -205,378 +204,47 @@
 <ul>
 <li><a href="#what-ttft-actually-measures">What TTFT actually measures</a></li>
 <li><a href="#ttft-is-not-the-same-as-throughput">TTFT is not the same as throughput</a></li>
-<li><a href="#why-interactive-apps-should-optimize-ttft-first">Why interactive apps should optimize TTFT first</a></li>
-<li><a href="#what-sits-inside-ttft">What sits inside TTFT</a></li>
-<li><a href="#model-size-is-usually-the-first-real-lever">Model size is usually the first real lever</a></li>
-<li><a href="#prompt-size-is-a-ttft-tax">Prompt size is a TTFT tax</a></li>
-<li><a href="#prompt-caching-changes-the-economics-of-repeated-context">Prompt caching changes the economics of repeated context</a></li>
-<li><a href="#speculative-decoding-helps-but-not-with-every-ttft-problem">Speculative decoding helps, but not with every TTFT problem</a></li>
-<li><a href="#placement-still-matters">Placement still matters</a></li>
-<li><a href="#throughput-optimizations-and-ttft-optimizations-are-different-work">Throughput optimizations and TTFT optimizations are different work</a></li>
-<li><a href="#a-practical-order-for-ttft-work">A practical order for TTFT work</a></li>
-<li><a href="#how-to-measure-ttft-without-fooling-yourself">How to measure TTFT without fooling yourself</a></li>
-<li><a href="#where-teams-usually-waste-time">Where teams usually waste time</a></li>
-<li><a href="#what-i-would-optimize-for-different-workloads">What I would optimize for different workloads</a></li>
-<li><a href="#the-practical-takeaway">The practical takeaway</a></li>
-<li><a href="#frequently-asked-questions">Frequently asked questions</a></li>
+<li><a href="#model-size-is-the-first-real-lever">Model size is the first real lever</a></li>
+<li><a href="#a-practical-order-for-optimization">A practical order for optimization</a></li>
+<li><a href="#how-to-measure-without-fooling-yourself">How to measure without fooling yourself</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>If your assistant feels slow, users notice it before they care why. They are not thinking about throughput or model size. They are waiting for the first useful sign that the system is alive.</p>
-<p>That delay has a name: <strong>time to first token</strong>, or <strong>TTFT</strong>.</p>
-<p>It measures how long the system takes to start responding. A model can stream quickly once it gets going and still feel slow if it waits too long before the first token.</p>
-<p>For interactive products, TTFT is usually the first latency metric I would fix. The main levers are smaller models, shorter prompts, cache reuse, better placement, and less queueing. Throughput work comes later.</p>
+        <p>Interactive AI applications live or die by perceived latency. A model might generate 100 tokens per second. Such speed is irrelevant if the user waits five seconds for the stream to start. Time to First Token (TTFT) is the metric that determines if your application feels "alive" or broken.</p>
+<p>Understanding the components of TTFT is vital for performance engineering. It is not a single number. It is the result of a complex pipeline involving networking and queueing and model prefill.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/ttft-breakdown.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+</div>
+
 <h2 id="what-ttft-actually-measures">What TTFT actually measures</h2>
-<p>TTFT is the time between sending a request and receiving the first generated token back from the model.</p>
-<p>That sounds neat because it collapses several steps into one number. The actual path is longer:</p>
-<ul>
-<li>the request travels from the client to the inference service</li>
-<li>the request may wait in a queue</li>
-<li>the system tokenizes and validates the prompt</li>
-<li>the model runs the <strong>prefill</strong> pass over the input</li>
-<li>the server schedules the first decode step</li>
-<li>the first token travels back to the client</li>
-</ul>
-<p>The <a href="https://platform.openai.com/docs/guides/latency-optimization">OpenAI latency optimization guide</a> treats latency as a mix of model choice, prompt size, and infrastructure behavior. That framing is the right one. TTFT is not one operation. It is a visible summary of several operations that happen before generation starts.</p>
-<p>When the first token arrives late, the delay can come from network distance, queueing, prompt size, model size, cache misses, or server scheduling. The top-line number alone does not tell you which one is responsible.</p>
+<p>TTFT measures the interval between a user sending a request and receiving the first generated token. This is different from "tokens per second," which measures the generation speed once the stream has started.</p>
+<p>Prefilling the prompt is the primary driver of TTFT. The model must process all input tokens to build the initial KV cache. Such computation is a "one-time tax" paid at the start of every request. Longer prompts lead directly to higher TTFT.</p>
 <h2 id="ttft-is-not-the-same-as-throughput">TTFT is not the same as throughput</h2>
-<p>These metrics get blurred together too often.</p>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>What it measures</th>
-<th>What it changes in the product</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>TTFT</strong></td>
-<td>Delay before the first token appears</td>
-<td>Whether the app feels responsive at the start</td>
-</tr>
-<tr>
-<td><strong>Throughput</strong></td>
-<td>Tokens generated per second after generation begins</td>
-<td>How fast long answers stream</td>
-</tr>
-<tr>
-<td><strong>Total latency</strong></td>
-<td>Time until the entire response completes</td>
-<td>End-to-end wait time</td>
-</tr>
-</tbody>
-</table>
-<p>A system can do well on throughput and still feel slow.</p>
-<p>Suppose one path starts streaming in 350 milliseconds and emits 65 tokens per second. Another path starts in 2.1 seconds and emits 140 tokens per second. The second path wins on raw generation speed. The first path usually feels better in chat because the user sees output immediately.</p>
-<p>That is the practical distinction. Once output is flowing, the interface has already crossed an important threshold. A long pause before that point creates more friction than a slightly slower stream after it.</p>
-<h2 id="why-interactive-apps-should-optimize-ttft-first">Why interactive apps should optimize TTFT first</h2>
-<p>Interactive products run on short loops. A user asks a question. A coding assistant suggests a fix. A support tool drafts a reply. An internal agent reports status. In each case, the model is part of a live workflow, not an offline batch job.</p>
-<p>That changes the performance target.</p>
-<p>For a batch summarization job, I care more about total runtime, cost, and tokens per second. For a streamed assistant, I care first about whether it starts quickly enough to keep the workflow moving.</p>
-<p>TTFT usually matters most in products like these:</p>
-<ul>
-<li>chat assistants</li>
-<li>code copilots</li>
-<li>agent dashboards with live progress</li>
-<li>support tools that draft replies</li>
-<li>search products that stream synthesized answers</li>
-<li>internal AI tools used many times per hour</li>
-</ul>
-<p>Throughput usually matters more in:</p>
-<ul>
-<li>offline summarization pipelines</li>
-<li>report generation jobs</li>
-<li>document processing queues</li>
-<li>evaluation runs</li>
-<li>asynchronous workloads where nobody watches the response stream live</li>
-</ul>
-<p>The metric should match the workload. That sounds obvious, but a lot of latency work goes wrong right here.</p>
-<h2 id="what-sits-inside-ttft">What sits inside TTFT</h2>
-<p>When I am debugging TTFT, I split it into stages.</p>
-<table>
-<thead>
-<tr>
-<th>Stage</th>
-<th>What happens</th>
-<th>Common source of delay</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Network ingress</td>
-<td>Request reaches the model service</td>
-<td>Long physical distance, slow gateways</td>
-</tr>
-<tr>
-<td>Queueing</td>
-<td>Request waits for compute</td>
-<td>Load spikes, oversubscribed GPUs</td>
-</tr>
-<tr>
-<td>Prompt processing</td>
-<td>Input is tokenized and prepared</td>
-<td>Large prompts, tool-heavy contexts</td>
-</tr>
-<tr>
-<td>Prefill</td>
-<td>Model reads the input prompt</td>
-<td>Large context windows, large models</td>
-</tr>
-<tr>
-<td>First decode step</td>
-<td>Model generates the first output token</td>
-<td>Model compute cost, server scheduling</td>
-</tr>
-<tr>
-<td>Network egress</td>
-<td>First token reaches the client</td>
-<td>Streaming path overhead</td>
-</tr>
-</tbody>
-</table>
-<p>This breakdown matters because each stage has different fixes. Prompt compression helps prefill. Regional placement helps network time. Warm capacity helps queueing. Speculative decoding helps when decode is the limiting factor.</p>
-<p>Without that split, optimization turns into guesswork.</p>
-<h2 id="model-size-is-usually-the-first-real-lever">Model size is usually the first real lever</h2>
-<p>The cleanest TTFT improvement is often model selection.</p>
-<p>Before a model can emit anything, it has to read the prompt. Larger models generally make that first pass more expensive. Long prompts make the effect worse. A heavier model may still be the right choice for deep analysis, but that does not make it the right default for a short interactive turn.</p>
-<p>I usually frame the decision with three questions:</p>
-<ul>
-<li>does this request need the strongest model available</li>
-<li>does it need that model on the first turn</li>
-<li>can a faster model handle the interaction and escalate only when necessary</li>
-</ul>
-<p>That is a better starting point than treating model quality as one ranking.</p>
-<p>The <a href="https://platform.openai.com/docs/guides/latency-optimization">OpenAI latency guide</a> connects model choice directly to latency. That is not just an API concern. It is an architectural one. If every request routes to the biggest model by default, TTFT usually pays for it.</p>
-<p>For interactive paths, I prefer a tiered setup:</p>
-<table>
-<thead>
-<tr>
-<th>Request type</th>
-<th>Better default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Short Q&amp;A</td>
-<td>Small or medium model with strong instruction following</td>
-</tr>
-<tr>
-<td>Code suggestions</td>
-<td>Fast coding model tuned for short turns</td>
-</tr>
-<tr>
-<td>Agent planning</td>
-<td>Mid-tier model, escalate when needed</td>
-</tr>
-<tr>
-<td>Long analysis</td>
-<td>Larger model where total quality matters more than start time</td>
-</tr>
-</tbody>
-</table>
-<p>A lot of TTFT work disappears once routing becomes sane.</p>
-<h2 id="prompt-size-is-a-ttft-tax">Prompt size is a TTFT tax</h2>
-<p>Prompt length is one of the easiest TTFT costs to introduce and one of the hardest to notice once it becomes normal.</p>
-<p>Conversation history grows. Retrieval systems add more chunks. Tool descriptions expand. System prompts accumulate policy, style, product context, and fallback instructions. Each change looks minor in isolation. The model still has to read all of it before it can answer.</p>
-<p>When I look at a slow interactive path, these are the first questions I ask:</p>
-<ul>
-<li>does the request need the full conversation history</li>
-<li>are retrieved chunks ranked tightly enough</li>
-<li>are tool descriptions longer than they need to be</li>
-<li>is the system prompt doing work that belongs elsewhere</li>
-<li>is stale context hanging around because nobody pruned it</li>
-</ul>
-<p>Shorter prompts are not automatically better. If you remove the context that makes the answer correct, the product gets faster and worse. The goal is to stop rereading irrelevant material on every turn.</p>
-<h2 id="prompt-caching-changes-the-economics-of-repeated-context">Prompt caching changes the economics of repeated context</h2>
-<p>Once a prefix repeats across requests, caching becomes one of the strongest practical TTFT levers.</p>
-<p>Both <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching">Anthropic prompt caching</a> and <a href="https://platform.openai.com/docs/guides/prompt-caching">OpenAI prompt caching</a> are built around the same idea: if the stable part of the prompt has already been processed, the platform can reuse that work instead of paying the full prefill cost again.</p>
-<p>On the self-hosted side, vLLM documents <a href="https://docs.vllm.ai/en/latest/features/automatic_prefix_caching.html">automatic prefix caching</a>, which applies the same idea at the serving layer.</p>
-<p>This matters most when you have:</p>
-<ul>
-<li>long stable system prompts</li>
-<li>repeated tool definitions</li>
-<li>shared policy text across requests</li>
-<li>similar multi-turn structures where only the tail changes</li>
-</ul>
-<p>Caching rewards prompt discipline. If the stable instructions sit in a consistent prefix, the system can reuse them. If the prompt gets rebuilt differently every time, the opportunity disappears.</p>
-<h2 id="speculative-decoding-helps-but-not-with-every-ttft-problem">Speculative decoding helps, but not with every TTFT problem</h2>
-<p>Speculative decoding works by having a smaller draft model predict candidate tokens and a larger model verify them. When the guesses line up, generation moves faster.</p>
-<p>vLLM’s <a href="https://docs.vllm.ai/en/latest/features/spec_decode.html">speculative decoding documentation</a> is a useful reference for how the serving path works.</p>
-<p>The practical limit is simple. Speculative decoding helps when decode speed is the bottleneck. It does not fix queueing, long cross-region hops, or prompt-heavy prefill.</p>
-<p>I would reach for it after answering two questions:</p>
-<ol>
-<li>Is decode a meaningful part of the delay before the response feels usable?</li>
-<li>Have I already reduced prompt and placement overhead?</li>
-</ol>
-<p>If the answer to the second question is no, there are usually easier wins first.</p>
-<h2 id="placement-still-matters">Placement still matters</h2>
-<p>TTFT is shaped by distance and contention.</p>
-<p>If the user is in one region and the model runs in another, the request has to cross that distance twice before the first token appears. If the serving fleet is saturated, the request waits. If the system has to cold-start a worker or load weights under pressure, the user waits longer.</p>
-<p>That is why placement and capacity planning belong in any serious TTFT discussion.</p>
-<p>These checks are worth doing early:</p>
-<ul>
-<li>is the inference endpoint close to the users who need low latency</li>
-<li>is the traffic pattern creating queue spikes at peak time</li>
-<li>is autoscaling slow enough to expose cold paths</li>
-<li>is batching tuned for utilization at the expense of per-request responsiveness</li>
-<li>is a gateway or proxy adding work that the user does not benefit from</li>
-</ul>
-<p>Many serving optimizations improve machine efficiency. That does not mean they improve the first moment of the product experience.</p>
-<h2 id="throughput-optimizations-and-ttft-optimizations-are-different-work">Throughput optimizations and TTFT optimizations are different work</h2>
-<p>Some changes improve the time before the first token. Some improve generation after it starts. A few help both.</p>
-<table>
-<thead>
-<tr>
-<th>Optimization</th>
-<th>Helps TTFT</th>
-<th>Helps throughput</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Smaller model</td>
-<td>Yes</td>
-<td>Often</td>
-<td>Best first check for interactive paths</td>
-</tr>
-<tr>
-<td>Shorter prompts</td>
-<td>Yes</td>
-<td>Sometimes</td>
-<td>Mainly reduces prefill cost</td>
-</tr>
-<tr>
-<td>Prompt or prefix caching</td>
-<td>Yes</td>
-<td>Sometimes</td>
-<td>Strong when prompts share a stable prefix</td>
-</tr>
-<tr>
-<td>Regional placement</td>
-<td>Yes</td>
-<td>No</td>
-<td>Cuts network delay and can reduce queueing</td>
-</tr>
-<tr>
-<td>Warm capacity</td>
-<td>Yes</td>
-<td>No</td>
-<td>Avoids queue spikes and cold starts</td>
-</tr>
-<tr>
-<td>Speculative decoding</td>
-<td>Sometimes</td>
-<td>Yes</td>
-<td>Best when decode is the constraint</td>
-</tr>
-<tr>
-<td>Large dynamic batching</td>
-<td>Often no</td>
-<td>Yes</td>
-<td>Can make TTFT worse</td>
-</tr>
-</tbody>
-</table>
-<p>For interactive systems, I start on the TTFT side of that table before I chase throughput.</p>
-<h2 id="a-practical-order-for-ttft-work">A practical order for TTFT work</h2>
-<p>When I need to reduce TTFT, I use this order:</p>
-<ol>
-<li><strong>Measure TTFT separately from total latency.</strong> A blended number hides too much.</li>
-<li><strong>Check queueing and regional placement.</strong> If the request is waiting before execution, model tweaks will not save it.</li>
-<li><strong>Measure prompt size and prefill cost.</strong> Large contexts explain more latency than teams expect.</li>
-<li><strong>Test a smaller or faster model.</strong> This can cut both prefill and decode cost.</li>
-<li><strong>Introduce prompt or prefix caching where the prefix is stable.</strong></li>
-<li><strong>Explore speculative decoding if decode still limits responsiveness.</strong></li>
-</ol>
-<p>This order avoids a common mistake: reaching for a sophisticated serving trick before confirming that the prompt is twice as large as it should be.</p>
-<h2 id="how-to-measure-ttft-without-fooling-yourself">How to measure TTFT without fooling yourself</h2>
-<p>TTFT sounds easy to measure, but client-side timing and server-side timing get mixed together quickly.</p>
-<p>A useful measurement setup records:</p>
-<ul>
-<li>request sent timestamp</li>
-<li>first byte received timestamp</li>
-<li>first token rendered timestamp in the client</li>
-<li>total response completion timestamp</li>
-<li>queue time if the serving system exposes it</li>
-<li>prompt token count and output token count</li>
-<li>model name and region</li>
-</ul>
-<p>Those fields let you answer concrete questions. If TTFT rises with prompt size, prefill is likely involved. If TTFT spikes only during high concurrency, queueing is a better suspect. If server-side first byte is stable but client render time is erratic, the issue may sit in the streaming path or frontend.</p>
-<p>For products with multiple model routes, I also want TTFT broken out by route. One slow path can disappear inside an average.</p>
-<h2 id="where-teams-usually-waste-time">Where teams usually waste time</h2>
-<p>One failure mode shows up again and again. The team sees latency complaints and optimizes the easiest number to benchmark. That is often output tokens per second. The chart improves. The app still feels slow because the painful part was the wait before the first visible response.</p>
-<p>Prompt growth is another trap. Retrieval adds more context. Tools add more schemas. Product logic adds more instructions. Quality can improve for a while, but TTFT drifts upward until the product feels heavier than it should.</p>
-<p>The third trap is sending every request through one model path. That keeps routing simple, but it forces very different workloads into the same latency budget.</p>
-<p>These are architectural mistakes, not tuning details.</p>
-<h2 id="what-i-would-optimize-for-different-workloads">What I would optimize for different workloads</h2>
-<table>
-<thead>
-<tr>
-<th>Workload</th>
-<th>Primary metric</th>
-<th>Secondary metric</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Chat assistant</td>
-<td>TTFT</td>
-<td>Total latency</td>
-</tr>
-<tr>
-<td>Coding copilot</td>
-<td>TTFT</td>
-<td>Suggestion quality</td>
-</tr>
-<tr>
-<td>Agent progress UI</td>
-<td>TTFT</td>
-<td>Reliability</td>
-</tr>
-<tr>
-<td>Async document summarization</td>
-<td>Throughput</td>
-<td>Cost</td>
-</tr>
-<tr>
-<td>Batch evaluation pipeline</td>
-<td>Throughput</td>
-<td>Total runtime</td>
-</tr>
-<tr>
-<td>Long report generation</td>
-<td>Total latency</td>
-<td>Cost</td>
-</tr>
-</tbody>
-</table>
-<p>A single stack can serve all of these workloads, but it should not treat them the same way. If one latency strategy gets applied to all of them, one class of workload will get a worse tradeoff than it needs.</p>
-<h2 id="the-practical-takeaway">The practical takeaway</h2>
-<p>For interactive systems, TTFT is usually the first metric to fix.</p>
-<p>The checklist is short:</p>
-<ul>
-<li>choose a model that fits the interaction, not just the benchmark</li>
-<li>keep prompts smaller and more stable than they naturally become over time</li>
-<li>use caching when repeated prefixes make it worthwhile</li>
-<li>keep inference close to the user and avoid avoidable queueing</li>
-<li>treat speculative decoding as a targeted optimization, not a default answer</li>
-</ul>
-<p>Once those pieces are in place, throughput work becomes more useful.</p>
-<h2 id="frequently-asked-questions">Frequently asked questions</h2>
-<h3 id="what-is-a-good-ttft-for-an-llm-app">What is a good TTFT for an LLM app?</h3>
-<p>There is no single threshold that fits every product. For interactive apps, lower is usually better. Once the delay pushes past about a second, the pause becomes much more noticeable. The acceptable number depends on the value of the answer and how often the user has to wait for it.</p>
-<h3 id="is-ttft-the-same-as-first-byte-latency">Is TTFT the same as first byte latency?</h3>
-<p>They are close, but not always identical. First byte latency refers to when the first byte arrives from the server. TTFT refers to when the first generated token becomes available. Streaming and client rendering can make those differ slightly.</p>
-<h3 id="does-prompt-caching-always-reduce-ttft">Does prompt caching always reduce TTFT?</h3>
-<p>No. It helps when requests share a stable prefix that the system can reuse. If the prompt structure changes significantly each time, the cache hit rate may be too low to matter.</p>
-<h3 id="does-speculative-decoding-always-improve-responsiveness">Does speculative decoding always improve responsiveness?</h3>
-<p>No. It helps when decode speed is a meaningful bottleneck. If the delay is mostly queueing, network time, or prefill, the impact on TTFT will be limited.</p>
-<h3 id="should-i-optimize-ttft-or-total-latency-first">Should I optimize TTFT or total latency first?</h3>
-<p>For interactive apps, I would usually start with TTFT because it drives perceived responsiveness. For offline or asynchronous workloads, total latency and throughput are often more important.</p>
+<p>High throughput is important for batch tasks like document parsing. Interactive chat requires low TTFT. You can often trade one for the other.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/ttft-vs-throughput.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+</div>
+
+<p>Optimizing for throughput usually involves increasing batch sizes. Such a strategy allows the GPU to work more efficiently but increases the wait time for individual requests. Optimizing for TTFT requires smaller batches or dedicated compute resources to ensure immediate processing.</p>
+<h2 id="model-size-is-the-first-real-lever">Model size is the first real lever</h2>
+<p>The size of the model determines the baseline TTFT. A 7B parameter model will always generate the first token faster than a 400B model on identical hardware. This is because the smaller model requires fewer memory loads to process the input.</p>
+<p>Choosing a smaller "distilled" model is the most effective way to drop TTFT if your reasoning requirements allow it. Many teams use a small model for the initial response and a larger model for background tasks. Such an architecture provides immediate feedback to the user without sacrificing depth.</p>
+<h2 id="a-practical-order-for-optimization">A practical order for optimization</h2>
+<p>Follow this hierarchy when tasked with reducing latency in production.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/ttft-hierarchy.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+</div>
+
+<p><strong>Model Selection.</strong> Start by choosing the smallest model that meets your quality bar. This is the "low-hanging fruit" of latency work.</p>
+<p><strong>Prompt Caching.</strong> Use caching to eliminate the prefill tax for static context. This can drop TTFT by 80% for repeated prefixes.</p>
+<p><strong>Speculative Decoding.</strong> Use a draft model to speed up the verification step. Such a technique improves snappiness by predicting multiple tokens in parallel.</p>
+<p><strong>Quantization.</strong> Reduce the precision of model weights to speed up memory loads. Moving from FP16 to INT8 or FP8 provides a meaningful boost with minimal accuracy loss.</p>
+<h2 id="how-to-measure-without-fooling-yourself">How to measure without fooling yourself</h2>
+<p>Do not rely on averages. Latency is defined by the "tail." Measure your p95 and p99 TTFT to understand what your unluckiest users are experiencing.</p>
+<p>Track TTFT alongside prompt length. A p95 of 500ms is great for a 1k token prompt. Such a number is impossible for a 100k token prompt without caching. Successful engineers build dashboards that normalize latency metrics by context volume.</p>
+<p>Perception is reality in AI engineering. You win when the first token appears before the user has finished their thought. Focus on TTFT to build applications that feel like magic.</p>
       </div>
     </div>
   </div>
@@ -586,17 +254,17 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/embedding-models-compared/" class="related-card">
+        <div class="related-card-date">2026-03-15</div>
+        <div class="related-card-title">Vector Embeddings: A Guide to the Geometry of Meaning in AI</div>
+      </a>
+      <a href="/blog/llm-context-windows-explained/" class="related-card">
+        <div class="related-card-date">2026-03-14</div>
+        <div class="related-card-title">LLM Context Windows Explained: Why More is Not Always Better</div>
+      </a>
       <a href="/blog/mixture-of-experts-explained/" class="related-card">
         <div class="related-card-date">2026-03-13</div>
         <div class="related-card-title">Mixture of experts: how MoE models are cheap to run but expensive to host</div>
-      </a>
-      <a href="/blog/llm-context-windows-explained/" class="related-card">
-        <div class="related-card-date">2026-03-13</div>
-        <div class="related-card-title">LLM context windows: what the number on the spec sheet actually means</div>
-      </a>
-      <a href="/blog/speculative-decoding-explained/" class="related-card">
-        <div class="related-card-date">2026-03-12</div>
-        <div class="related-card-title">Speculative decoding explained: how LLMs generate tokens faster without changing the output</div>
       </a>
     </div>
   </div>
@@ -664,9 +332,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/embedding-models-compared/" class="footer-link">Vector Embeddings: A Guide to the Geometry of Meaning in AI</a>
+          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM Context Windows Explained: Why More is Not Always Better</a>
           <a href="/blog/mixture-of-experts-explained/" class="footer-link">Mixture of experts: how MoE models are cheap to run but expensive to host</a>
-          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM context windows: what the number on the spec sheet actually means</a>
-          <a href="/blog/speculative-decoding-explained/" class="footer-link">Speculative decoding explained: how LLMs generate tokens faster without changing the output</a>
         </div>
       </div>
 

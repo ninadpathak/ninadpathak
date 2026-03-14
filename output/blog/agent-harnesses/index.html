@@ -20,13 +20,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agent harnesses: the infrastructure layer your LLM agent actually needs | Ninad Pathak</title>
-  <meta name="description" content="Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.">
+  <meta name="description" content="Every production AI agent needs a harness. Here is what one contains, why frameworks often are not enough, and how to build the layer that actually determines reliability.">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
   <meta property="og:title"       content="Agent harnesses: the infrastructure layer your LLM agent actually needs">
-  <meta property="og:description" content="Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.">
+  <meta property="og:description" content="Every production AI agent needs a harness. Here is what one contains, why frameworks often are not enough, and how to build the layer that actually determines reliability.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/agent-harnesses/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -72,7 +72,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Agent harnesses: the infrastructure layer your LLM agent actually needs",
-  "description": "Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.",
+  "description": "Every production AI agent needs a harness. Here is what one contains, why frameworks often are not enough, and how to build the layer that actually determines reliability.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
@@ -184,10 +184,10 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 10, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">12 min read</span>
+        <span class="post-meta-time">10 min read</span>
       </div>
       <h1 class="post-title">Agent harnesses: the infrastructure layer your LLM agent actually needs</h1>
-      <p class="lead">Every production AI agent needs a harness. Here's what one contains, why frameworks often aren't enough, and how to build the layer that actually determines reliability.</p>
+      <p class="lead">Every production AI agent needs a harness. Here is what one contains, why frameworks often are not enough, and how to build the layer that actually determines reliability.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
         <span class="tag">agents</span>
@@ -205,132 +205,106 @@
 <ul>
 <li><a href="#why-the-raw-llm-api-breaks-down-for-agentic-tasks">Why the raw LLM API breaks down for agentic tasks</a></li>
 <li><a href="#the-five-components-every-harness-contains">The five components every harness contains</a></li>
-<li><a href="#framework-options-and-where-each-one-fits">Framework options and where each one fits</a></li>
 <li><a href="#checkpointing-the-part-most-harnesses-get-wrong">Checkpointing: the part most harnesses get wrong</a></li>
 <li><a href="#context-management-strategies-for-long-horizon-tasks">Context management strategies for long-horizon tasks</a></li>
 <li><a href="#what-to-check-before-deploying-an-agent-to-production">What to check before deploying an agent to production</a></li>
 <li><a href="#when-you-do-not-need-a-harness">When you do not need a harness</a></li>
-<li><a href="#the-harness-is-not-glamorous-and-that-is-the-point">The harness is not glamorous, and that is the point</a></li>
-<li><a href="#frequently-asked-questions">Frequently asked questions</a></li>
+<li><a href="#the-harness-is-not-glamorous">The harness is not glamorous</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>Agents look impressive in demos because the happy path is easy to show. The problems start later, when a tool times out, a task runs too long, or the model needs to recover from a partial failure without starting over.</p>
+        <p>Agents look impressive in demos because the happy path is easy to show. The problems start later. A tool might timeout. A task could run too long. The model may need to recover from a partial failure without starting over.</p>
 <p>That is what the harness is for. It is the runtime layer around the model that keeps the system steady once real execution starts.</p>
-<p><strong>What an agent harness is:</strong> An agent harness is the runtime control layer between your application and the LLM. It manages the execution loop, gives the model tools and context, handles tool results, tracks state across steps, and sends results and errors back upstream. The model handles reasoning. The harness handles everything else.</p>
+<p><strong>What an agent harness is.</strong> An agent harness is the runtime control layer between your application and the LLM. It manages the execution loop and gives the model tools and context. It handles tool results and tracks state across steps. The harness sends results and errors back upstream. The model handles reasoning. The harness handles everything else.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/stateless-vs-agentic.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+</div>
+
 <h2 id="why-the-raw-llm-api-breaks-down-for-agentic-tasks">Why the raw LLM API breaks down for agentic tasks</h2>
-<p>A direct API call is stateless. You send a prompt, receive a completion, and the interaction ends. Agents need something more durable. They make decisions across many sequential steps, call external tools, accumulate context as they go, and need to recover gracefully from partial failures.</p>
-<p>Consider that research agent again. Across a single task it might make thirty to fifty API calls, invoke a browser tool twenty times, and manage a context window that grows with every new observation. The API handles none of that coordination. Without something to manage it, that coordination code ends up scattered across your application layer: a custom execution loop here, some ad-hoc tool call parsing there, a retry handler someone bolted on after the first production incident.</p>
-<p>That is still a harness. The question is whether it was designed intentionally or grew organically around a specific use case until it became impossible to test, extend, or hand off.</p>
+<p>A direct API call is stateless. You send a prompt and receive a completion. The interaction ends there. Agents need something more durable. They make decisions across many sequential steps and call external tools. They accumulate context as they go. Agents need to recover gracefully from partial failures.</p>
+<p>Consider that research agent again. It might make thirty to fifty API calls across a single task. It may invoke a browser tool twenty times. It must manage a context window that grows with every new observation. The API handles none of that coordination. Without something to manage it, that coordination code ends up scattered across your application layer. You might find a custom execution loop in one place and some ad-hoc tool call parsing in another. You may see a retry handler someone bolted on after the first production incident.</p>
+<p>That is still a harness. The question is whether it was designed intentionally. It could have grown organically around a specific use case until it became impossible to test or extend.</p>
 <h2 id="the-five-components-every-harness-contains">The five components every harness contains</h2>
-<p>A well-designed harness is not one monolithic block of logic. It has five distinct components, each with a specific responsibility.</p>
-<p><strong>Tool registry.</strong> A catalog of available tools, each defined with a typed schema, a description the model can read, and an execution handler the harness calls when the model requests it. The harness intercepts tool call requests, routes them to the right handler, and returns results in the format the model expects. The non-obvious part: the tool registry is also where you enforce per-tool permissions and rate limits. A web browsing tool with uncapped request volume is an incident waiting to happen.</p>
-<p><strong>Prompt assembler.</strong> At inference time, the harness constructs the full context window from multiple sources: the system prompt, any cached instructions, retrieved documents, conversation history, current task state, and pending tool results. The order of those components matters. How much of each to include matters. The prompt assembler is where context engineering happens at runtime, dynamically, not once at design time and never revisited.</p>
-<p><strong>Execution loop.</strong> The core of any harness. Send the current context to the model. If the response contains a tool call, execute it, append the result, and send again. If the response is a final answer, surface it. Enforce the stop conditions: maximum iterations reached, context window full, explicit completion signal, unrecoverable error. The loop is simple to describe and surprisingly easy to get wrong at scale, especially when you need it to handle concurrent runs and partial failures without corrupting shared state.</p>
-<p><strong>State manager.</strong> Agents that span more than a few API calls need somewhere to store their working state: what subtasks are complete, what data has been gathered, what decisions have been made. Some harnesses keep all of this inside the context window, which works for short tasks and breaks for long ones. Others write to external storage after each step, enabling checkpoint-based recovery. That choice (in-context state versus external state) is the single biggest architectural decision in agent design, and the harness is where it gets made.</p>
-<p><strong>Observer.</strong> Structured logging of every step: what was in the prompt, what the model returned, which tool was called, what it returned, how long each step took. Without observability, debugging a failed run means staring at an opaque error and guessing. With it, you can replay any run, pinpoint exactly where reasoning went wrong, and build evaluation datasets from production traces. Observability is not a nice-to-have for production agents. It is load-bearing infrastructure.</p>
-<h2 id="framework-options-and-where-each-one-fits">Framework options and where each one fits</h2>
-<p>The open-source ecosystem has matured enough that building a harness from scratch is no longer the default starting point. Several frameworks implement harness patterns with meaningful differences in philosophy and scope.</p>
-<table>
-<thead>
-<tr>
-<th>Framework</th>
-<th>Best fit</th>
-<th>Key tradeoff</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LangGraph</td>
-<td>Complex multi-agent topologies, graph-based workflows</td>
-<td>Steeper learning curve than docs suggest</td>
-</tr>
-<tr>
-<td>LlamaIndex agents</td>
-<td>Teams already using LlamaIndex for retrieval</td>
-<td>Less flexible for complex multi-agent patterns</td>
-</tr>
-<tr>
-<td>Microsoft AutoGen</td>
-<td>Inherently multi-agent problems with conversational agents</td>
-<td>Overkill for single-agent systems</td>
-</tr>
-<tr>
-<td>OpenAI Agents SDK</td>
-<td>Teams wanting minimal abstraction close to raw API</td>
-<td>Less batteries-included than LangGraph</td>
-</tr>
-<tr>
-<td>Custom harness</td>
-<td>Production systems with strict observability requirements</td>
-<td>Higher upfront engineering cost</td>
-</tr>
-</tbody>
-</table>
-<p>LangGraph is the framework I reach for when the agent topology is genuinely complex: multiple agents with different roles, conditional routing between steps, or subgraphs that need to run in parallel. For something closer to a single focused agent, OpenAI's Agents SDK (which evolved from the earlier Swarm project) offers a lightweight starting point that stays close to the raw API and does not require fighting abstraction layers to understand what is happening.</p>
-<p>The pattern I have seen most often in serious production systems is hybrid: a framework for early development and learning, then a custom harness for the critical agent path once the team understands what observability requirements actually look like in production. The framework abstractions that accelerate development in month one often become obstacles in month three, when you need step-level traces and the framework logs at a coarser granularity.</p>
+<p>A well-designed harness is not one monolithic block of logic. It has five distinct components. Each component has a specific responsibility.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/harness-architecture.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+</div>
+
+<p><strong>Tool registry.</strong> A catalog of available tools. Each tool is defined with a typed schema and a description the model can read. It includes an execution handler the harness calls when the model requests it. The harness intercepts tool call requests and routes them to the right handler. It returns results in the format the model expects. The non-obvious part is that the tool registry is also where you enforce per-tool permissions and rate limits. A web browsing tool with uncapped request volume is an incident waiting to happen.</p>
+<p><strong>Prompt assembler.</strong> The harness constructs the full context window from multiple sources at inference time. These sources include the system prompt and any cached instructions. They include retrieved documents and conversation history. They include the current task state and pending tool results. The order of those components matters. How much of each to include also matters. The prompt assembler is where context engineering happens at runtime dynamically. It does not happen once at design time and never get revisited.</p>
+<p><strong>Execution loop.</strong> The core of any harness. Send the current context to the model. Execute the tool if the response contains a tool call. Append the result and send it again. Surface the final answer if the response is complete. Enforce the stop conditions such as maximum iterations reached or context window full. Enforce explicit completion signals or unrecoverable errors. The loop is simple to describe and surprisingly easy to get wrong at scale. This is especially true when you need it to handle concurrent runs and partial failures without corrupting shared state.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/execution-loop.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+</div>
+
+<p><strong>State manager.</strong> Agents that span more than a few API calls need somewhere to store their working state. They need to know what subtasks are complete and what data has been gathered. They need to track what decisions have been made. Some harnesses keep all of this inside the context window. This works for short tasks but breaks for long ones. Others write to external storage after each step to enable checkpoint-based recovery. That choice between in-context state and external state is the single biggest architectural decision in agent design. The harness is where that decision gets made.</p>
+<p><strong>Observer.</strong> Structured logging of every step. Know what was in the prompt and what the model returned. Know which tool was called and what it returned. Track how long each step took. Debugging a failed run means staring at an opaque error and guessing without observability. You can replay any run with it. You can pinpoint exactly where reasoning went wrong. You can build evaluation datasets from production traces. Observability is not a nice-to-have for production agents. It is load-bearing infrastructure.</p>
 <h2 id="checkpointing-the-part-most-harnesses-get-wrong">Checkpointing: the part most harnesses get wrong</h2>
-<p>The hardest problem in harness design is not the execution loop. The hardest problem is state recovery.</p>
-<p>Agents fail partway through tasks. The model hallucinates a tool call argument. A downstream API returns a 503. Context fills up at step eighteen of a twenty-five-step task. A network timeout drops the connection.</p>
-<p>Without checkpointing, every one of those failures means restarting from the beginning. For a twenty-minute task costing a dollar in API fees, that is manageable. For a four-hour task costing fifteen dollars, it is not, and the cost compounds quickly when the failures are frequent enough to matter.</p>
-<p>Checkpointing means writing the agent's full state to durable storage after each completed step. That state includes the message history, any external data gathered, decisions made, subtask completion status, and metadata like total token usage and elapsed time.</p>
-<p>Three patterns work in practice:</p>
-<p><strong>Step-level persistence.</strong> Write state after each tool call completes. Maximum recovery granularity, higher storage overhead. Appropriate for long-running tasks with expensive tool calls.</p>
-<p><strong>Phase-level persistence.</strong> Write state at logical phase boundaries: after research completes, after analysis completes, before writing begins. Simpler to implement, coarser recovery points. Appropriate for tasks with clear phases that take roughly equal time.</p>
-<p><strong>Idempotent tool design.</strong> Build tools so calling them twice produces the same result as calling them once. Combined with step-level checkpointing, this eliminates an entire class of recovery errors: re-run from the last checkpoint, idempotent tools produce the same results, the agent continues from where it left off. Harder to implement, but the reliability improvement is substantial.</p>
+<p>The hardest problem in harness design is not the execution loop. The hardest problem is state recovery. Agents fail partway through tasks. The model might hallucinate a tool call argument. A downstream API could return a 503 error. Context may fill up at step eighteen of a twenty-five-step task. A network timeout might drop the connection.</p>
+<p>Every one of those failures means restarting from the beginning without checkpointing. That is manageable for a twenty-minute task costing a dollar in API fees. It is not manageable for a four-hour task costing fifteen dollars. The cost compounds quickly when the failures are frequent enough to matter.</p>
+<p>Checkpointing means writing the agent's full state to durable storage after each completed step. That state includes the message history and any external data gathered. It includes decisions made and subtask completion status. It includes metadata like total token usage and elapsed time.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/checkpointing-viz.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+</div>
+
+<p>Three patterns work in practice.</p>
+<p><strong>Step-level persistence.</strong> Write state after each tool call completes. This provides maximum recovery granularity at the cost of higher storage overhead. It is appropriate for long-running tasks with expensive tool calls.</p>
+<p><strong>Phase-level persistence.</strong> Write state at logical phase boundaries. Do this after research completes or after analysis completes. Do it before writing begins. This is simpler to implement but provides coarser recovery points. It is appropriate for tasks with clear phases that take roughly equal time.</p>
+<p><strong>Idempotent tool design.</strong> Build tools so calling them twice produces the same result as calling them once. This eliminates an entire class of recovery errors when combined with step-level checkpointing. Re-run from the last checkpoint. Idempotent tools produce the same results. The agent continues from where it left off. This is harder to implement but the reliability improvement is substantial.</p>
 <p>The harness owns the checkpointing logic. The model has no concept of checkpoints. The application layer should not have to manage them. Taking that responsibility into the harness as a core function is what separates a harness built for production from one built to get a demo working.</p>
 <h2 id="context-management-strategies-for-long-horizon-tasks">Context management strategies for long-horizon tasks</h2>
-<p>The context window is a fixed resource. Long-running agents consume it. The harness needs a deliberate policy for what happens when it gets full, because "do nothing" is not a policy, it is a bug that surfaces at the worst possible moment.</p>
-<p>Four approaches, in order of implementation complexity:</p>
-<p><strong>Truncation.</strong> Drop the earliest messages when context approaches capacity. Simple, predictable, and information-lossy. Acceptable when early messages are genuinely low-value.</p>
-<p><strong>Summarization.</strong> Before truncating, run a compression step that condenses earlier turns into a compact summary. Keep the summary, drop the raw messages. Better information preservation at the cost of additional latency and API spend at compression time.</p>
-<p><strong>External memory with retrieval.</strong> Keep the full message history in an external store. At each step, retrieve the most relevant past observations and inject them into context. The only approach that scales to truly long-horizon tasks, and the hardest to implement correctly.</p>
-<p><strong>Task decomposition.</strong> Avoid the problem by breaking large tasks into smaller subtasks, each fitting comfortably in context. Pass outputs between subtasks explicitly rather than relying on a shared context window. Requires more upfront task design, but produces the most reliable results for complex workflows.</p>
-<p>The harness is the right place to implement whichever policy fits your task characteristics. Handling context management deterministically in the harness produces predictable behavior. Delegating it to the model with a prompt instruction like "summarize when context is full" produces inconsistent results.</p>
+<p>The context window is a fixed resource. Long-running agents consume it. The harness needs a deliberate policy for what happens when it gets full. Doing nothing is not a policy. It is a bug that surfaces at the worst possible moment.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/context-management.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+</div>
+
+<p>Four approaches work in order of implementation complexity.</p>
+<p><strong>Truncation.</strong> Drop the earliest messages when context approaches capacity. This is simple and predictable but information-lossy. It is acceptable when early messages are genuinely low-value.</p>
+<p><strong>Summarization.</strong> Run a compression step that condenses earlier turns into a compact summary before truncating. Keep the summary and drop the raw messages. This provides better information preservation at the cost of additional latency and API spend at compression time.</p>
+<p><strong>External memory with retrieval.</strong> Keep the full message history in an external store. Retrieve the most relevant past observations at each step. Inject them into context. This is the only approach that scales to truly long-horizon tasks. It is also the hardest to implement correctly.</p>
+<p><strong>Task decomposition.</strong> Avoid the problem by breaking large tasks into smaller subtasks. Each subtask should fit comfortably in context. Pass outputs between subtasks explicitly rather than relying on a shared context window. This requires more upfront task design but produces the most reliable results for complex workflows.</p>
+<p>The harness is the right place to implement whichever policy fits your task characteristics. Handling context management deterministically in the harness produces predictable behavior. Delegating it to the model produces inconsistent results.</p>
 <h2 id="what-to-check-before-deploying-an-agent-to-production">What to check before deploying an agent to production</h2>
-<p>Before any agent ships, a harness audit should cover the following ground.</p>
-<p><strong>Tool registry:</strong>
+<p>A harness audit should cover specific ground before any agent ships.</p>
+<p><strong>Tool registry.</strong>
 - All tools have typed schemas with input validation
-- Tool calls are logged with inputs, outputs, and latency
+- Tool calls are logged with inputs and outputs and latency
 - Tools have per-call timeout enforcement
 - Tool errors return structured objects the model can reason about</p>
-<p><strong>Execution loop:</strong>
+<p><strong>Execution loop.</strong>
 - Maximum iteration count is enforced and tested
 - Context window usage is tracked at each step
 - Loop exits cleanly on unrecoverable error with a structured error response
-- Stop conditions are explicit, not inferred from output format</p>
-<p><strong>State manager:</strong>
+- Stop conditions are explicit and not inferred from output format</p>
+<p><strong>State manager.</strong>
 - Task state is fully serializable
 - Checkpoint write happens after each successful tool call
-- Recovery from checkpoint is tested, not assumed to work</p>
-<p><strong>Observer:</strong>
+- Recovery from checkpoint is tested and not assumed to work</p>
+<p><strong>Observer.</strong>
 - Every prompt is logged with timestamp and token count
 - Every completion is logged with latency and finish reason
 - Every tool call is logged with full inputs and outputs
 - Traces are queryable by run ID</p>
-<p>That last item matters more than it looks. Production incidents in agent systems are almost always diagnosed by replaying traces. Without a run ID that threads through every log entry for a given execution, trace replay is not possible and debugging collapses into guesswork.</p>
+<p>That last item matters more than it looks. Production incidents in agent systems are almost always diagnosed by replaying traces. Trace replay is not possible without a run ID that threads through every log entry for a given execution. Debugging collapses into guesswork without it.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/observability-trace.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+</div>
+
 <h2 id="when-you-do-not-need-a-harness">When you do not need a harness</h2>
-<p>Not every LLM application is an agent. A harness adds real complexity, and adding complexity to a system that does not need it is not good engineering.</p>
-<p>Harness complexity is unnecessary when an application takes a single user input, calls the model once, and returns a response; when it calls the model a fixed number of times with a fixed sequence of prompts; or when it uses retrieval-augmented generation with a fixed retrieval step followed by a single synthesis step.</p>
-<p>A harness is necessary when the model decides which tools to call and in what order; when tasks span more than a handful of API calls; when partial failures need recovery without a full restart; or when auditability of what the agent did and why is a requirement.</p>
-<p>The rough line: if the model controls the flow, the harness is load-bearing infrastructure. If the application controls the flow and the model is a subroutine, the harness is overhead.</p>
-<h2 id="the-harness-is-not-glamorous-and-that-is-the-point">The harness is not glamorous, and that is the point</h2>
-<p>The agent harness is not where interesting AI capability lives. The interesting capability is what the agent can do. The harness is what determines whether that capability is reliable enough to run in production, survive failures, and be debugged when something goes wrong.</p>
-<p>Teams that treat the harness as scaffolding they will clean up later consistently spend more time on reliability than teams that design it deliberately from the start. The investment pays off not because a well-designed harness makes agents smarter, but because it makes failure modes predictable and recoverable.</p>
-<p>An agent that fails cleanly, checkpoints its progress, and can be debugged through structured traces is worth far more than one that is technically more capable but opaque when it breaks. In production, predictable failure beats opaque success.</p>
-<h2 id="frequently-asked-questions">Frequently asked questions</h2>
-<p><strong>What is the difference between a harness and a framework?</strong></p>
-<p>A framework is a library that implements harness patterns. The harness is the concept. LangGraph, AutoGen, and OpenAI's Agents SDK are frameworks. You can build a harness without using any of them.</p>
-<p><strong>Do harnesses add significant latency?</strong></p>
-<p>The harness itself adds minimal latency. State writes add some overhead: typically under 50 milliseconds per step on local storage and 100 to 300 milliseconds on remote storage. The bigger latency driver is the execution loop when dozens of sequential LLM calls are in play.</p>
-<p><strong>How do harnesses handle concurrent agents?</strong></p>
-<p>Most framework harnesses are designed for single-agent execution. Multi-agent concurrency requires explicit design: shared state needs locking or conflict resolution, tool rate limits need to account for concurrent usage, and the observer needs to tag traces by agent identity. AutoGen and LangGraph both have patterns for this, but concurrent execution adds meaningful architectural complexity.</p>
-<p><strong>When should checkpoints happen after every step versus after phases?</strong></p>
-<p>Checkpoint after every step when any individual step is expensive: long-running API calls, database writes, or anything that takes more than ten to fifteen seconds. Checkpoint after phases when steps are fast but phases carry clear semantic meaning. The goal is the same in either case: minimize work lost on failure.</p>
-<p><strong>What belongs in the observer log?</strong></p>
-<p>Every prompt (or a hash of it when PII is a concern), every completion, every tool call with full inputs and outputs, every error with complete context, and total token usage per step. Production incidents in agent systems are almost always debugged by replaying traces, and you cannot replay what you did not capture.</p>
+<p>Not every LLM application is an agent. A harness adds real complexity. Adding complexity to a system that does not need it is not good engineering.</p>
+<p>Harness complexity is unnecessary when an application takes a single user input and calls the model once and returns a response. It is unnecessary when it calls the model a fixed number of times with a fixed sequence of prompts. It is unnecessary when it uses retrieval-augmented generation with a fixed retrieval step followed by a single synthesis step.</p>
+<p>A harness is necessary when the model decides which tools to call and in what order. It is necessary when tasks span more than a handful of API calls. It is necessary when partial failures need recovery without a full restart. It is necessary when auditability of what the agent did and why is a requirement.</p>
+<p>The rough line is clear. The harness is load-bearing infrastructure if the model controls the flow. The harness is overhead if the application controls the flow and the model is a subroutine.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/harness-decision-tree.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+</div>
+
+<h2 id="the-harness-is-not-glamorous">The harness is not glamorous</h2>
+<p>The agent harness is not where interesting AI capability lives. The interesting capability is what the agent can do. The harness determines whether that capability is reliable enough to run in production. It determines if it can survive failures and be debugged when something goes wrong.</p>
+<p>Teams that treat the harness as scaffolding consistently spend more time on reliability than teams that design it deliberately from the start. The investment pays off because a well-designed harness makes failure modes predictable and recoverable. It does not necessarily make agents smarter.</p>
+<p>An agent that fails cleanly and checkpoints its progress is worth far more than one that is technically more capable but opaque when it breaks. It must be debugged through structured traces. Predictable failure beats opaque success in production.</p>
       </div>
     </div>
   </div>
@@ -340,17 +314,17 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/embedding-models-compared/" class="related-card">
+        <div class="related-card-date">2026-03-15</div>
+        <div class="related-card-title">Vector Embeddings: A Guide to the Geometry of Meaning in AI</div>
+      </a>
+      <a href="/blog/llm-context-windows-explained/" class="related-card">
+        <div class="related-card-date">2026-03-14</div>
+        <div class="related-card-title">LLM Context Windows Explained: Why More is Not Always Better</div>
+      </a>
       <a href="/blog/mixture-of-experts-explained/" class="related-card">
         <div class="related-card-date">2026-03-13</div>
         <div class="related-card-title">Mixture of experts: how MoE models are cheap to run but expensive to host</div>
-      </a>
-      <a href="/blog/llm-context-windows-explained/" class="related-card">
-        <div class="related-card-date">2026-03-13</div>
-        <div class="related-card-title">LLM context windows: what the number on the spec sheet actually means</div>
-      </a>
-      <a href="/blog/speculative-decoding-explained/" class="related-card">
-        <div class="related-card-date">2026-03-12</div>
-        <div class="related-card-title">Speculative decoding explained: how LLMs generate tokens faster without changing the output</div>
       </a>
     </div>
   </div>
@@ -418,9 +392,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/embedding-models-compared/" class="footer-link">Vector Embeddings: A Guide to the Geometry of Meaning in AI</a>
+          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM Context Windows Explained: Why More is Not Always Better</a>
           <a href="/blog/mixture-of-experts-explained/" class="footer-link">Mixture of experts: how MoE models are cheap to run but expensive to host</a>
-          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM context windows: what the number on the spec sheet actually means</a>
-          <a href="/blog/speculative-decoding-explained/" class="footer-link">Speculative decoding explained: how LLMs generate tokens faster without changing the output</a>
         </div>
       </div>
 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Model Specialization 2026 | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    canvas { background: transparent; }
+    .controls { display: flex; gap: 10px; margin-bottom: 30px; }
+    .btn { padding: 8px 16px; border: 1px solid var(--border); color: #888; font-size: 11px; cursor: pointer; text-transform: uppercase; background: var(--bg); }
+    .btn.active { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="controls" id="btns"></div>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const btns = document.getElementById('btns');
+    
+    const models = {
+      'Claude 4.6': [0.98, 0.95, 0.8, 0.6, 0.9],
+      'GPT-5.4': [0.92, 0.92, 0.9, 0.7, 0.85],
+      'DeepSeek V4': [0.95, 0.98, 0.7, 0.98, 0.95],
+      'Gemini 3.1': [0.85, 0.88, 0.95, 0.75, 0.98]
+    };
+
+    const metrics = ['Agentic', 'Logic', 'Latency', 'Price', 'Context'];
+    let current = 'Claude 4.6';
+
+    Object.keys(models).forEach(m => {
+      const b = document.createElement('button');
+      b.className = 'btn' + (m === current ? ' active' : '');
+      b.innerText = m;
+      b.onclick = () => {
+        document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+        b.classList.add('active');
+        current = m;
+      };
+      btns.appendChild(b);
+    });
+
+    function draw() {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const size = 350;
+      canvas.width = size * window.devicePixelRatio;
+      canvas.height = size * window.devicePixelRatio;
+      canvas.style.width = size + 'px';
+      canvas.style.height = size + 'px';
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      
+      const cx = size / 2;
+      const cy = size / 2;
+      const radius = size * 0.35;
+
+      ctx.clearRect(0, 0, size, size);
+
+      ctx.strokeStyle = isDark ? '#222' : '#e0e0dc';
+      for(let i=1; i<=5; i++) {
+        const r = radius * (i/5);
+        ctx.beginPath();
+        for(let j=0; j<5; j++) {
+          const a = (j/5) * Math.PI * 2 - Math.PI/2;
+          ctx.lineTo(cx + r * Math.cos(a), cy + r * Math.sin(a));
+        }
+        ctx.closePath();
+        ctx.stroke();
+      }
+
+      ctx.textAlign = 'center';
+      ctx.font = '10px "JetBrains Mono"';
+      for(let i=0; i<5; i++) {
+        const a = (i/5) * Math.PI * 2 - Math.PI/2;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + radius * Math.cos(a), cy + radius * Math.sin(a));
+        ctx.stroke();
+        
+        ctx.fillStyle = '#888';
+        ctx.fillText(metrics[i], cx + (radius + 25) * Math.cos(a), cy + (radius + 25) * Math.sin(a));
+      }
+
+      const vals = models[current];
+      ctx.fillStyle = isDark ? 'rgba(255, 95, 31, 0.2)' : 'rgba(212, 64, 0, 0.1)';
+      ctx.strokeStyle = isDark ? '#ff5f1f' : '#d44000';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      vals.forEach((v, i) => {
+        const a = (i/5) * Math.PI * 2 - Math.PI/2;
+        ctx.lineTo(cx + radius * v * Math.cos(a), cy + radius * v * Math.sin(a));
+      });
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      requestAnimationFrame(draw);
+    }
+    
+    draw();
+  </script>
+</body>
+</html>

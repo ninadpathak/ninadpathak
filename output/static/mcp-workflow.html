@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MCP Developer Workflow | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .workflow { display: flex; flex-direction: column; gap: 30px; align-items: center; }
+    .step { display: flex; gap: 20px; align-items: center; width: 100%; max-width: 500px; }
+    .num { width: 30px; height: 30px; border: 1px solid var(--accent); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+    .box { border: 1px solid var(--border); padding: 15px; flex: 1; font-size: 12px; background: var(--bg); }
+    .arrow { height: 20px; width: 1px; background: var(--border); }
+  </style>
+</head>
+<body>
+  <div style="margin-bottom: 40px; text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Developer Experience</div>
+    <div style="font-size: 16px; font-weight: 600;">Building a tool with FastAPI MCP</div>
+  </div>
+
+  <div class="workflow">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="box">Define Python function with Pydantic types</div>
+    </div>
+    <div class="arrow"></div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="box">Wrap with @mcp.tool() decorator</div>
+    </div>
+    <div class="arrow"></div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="box">Server auto-generates MCP Schema (JSON-RPC)</div>
+    </div>
+    <div class="arrow"></div>
+    <div class="step">
+      <div class="num">4</div>
+      <div class="box">Any MCP-ready client (Claude/Cursor) connects instantly</div>
+    </div>
+  </div>
+</body>
+</html>

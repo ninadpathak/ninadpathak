@@ -19,14 +19,14 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prompt caching: what it is and when the math works in your favor | Ninad Pathak</title>
-  <meta name="description" content="Prompt caching can cut latency and input cost, but only when your prompts share a stable prefix often enough to make cache reuse real. Here is how I think about it in production.">
+  <title>Prompt Caching: What It Is and When the Math Works | Ninad Pathak</title>
+  <meta name="description" content="Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="Prompt caching: what it is and when the math works in your favor">
-  <meta property="og:description" content="Prompt caching can cut latency and input cost, but only when your prompts share a stable prefix often enough to make cache reuse real. Here is how I think about it in production.">
+  <meta property="og:title"       content="Prompt Caching: What It Is and When the Math Works">
+  <meta property="og:description" content="Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/prompt-caching-what-it-is-and-when-the-math-works/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -71,14 +71,14 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Prompt caching: what it is and when the math works in your favor",
-  "description": "Prompt caching can cut latency and input cost, but only when your prompts share a stable prefix often enough to make cache reuse real. Here is how I think about it in production.",
+  "headline": "Prompt Caching: What It Is and When the Math Works",
+  "description": "Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
     "url": "https://ninadpathak.com"
   },
-  "datePublished": "2026-03-07",
+  "datePublished": "2026-03-13",
   "publisher": {
     "@type": "Person",
     "name": "Ninad Pathak"
@@ -105,7 +105,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Prompt caching: what it is and when the math works in your favor",
+      "name": "Prompt Caching: What It Is and When the Math Works",
       "item": "https://ninadpathak.com/blog/prompt-caching-what-it-is-and-when-the-math-works/"
     }
   ]
@@ -172,7 +172,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">Prompt caching: what it is and when the math works in your favor</li>
+      <li class="breadcrumb-item current" aria-current="page">Prompt Caching: What It Is and When the Math Works</li>
     </ol>
   </div>
 </nav>
@@ -182,17 +182,16 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
-        <span class="post-meta-date">Mar 07, 2026</span>
+        <span class="post-meta-date">Mar 13, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">10 min read</span>
+        <span class="post-meta-time">3 min read</span>
       </div>
-      <h1 class="post-title">Prompt caching: what it is and when the math works in your favor</h1>
-      <p class="lead">Prompt caching can cut latency and input cost, but only when your prompts share a stable prefix often enough to make cache reuse real. Here is how I think about it in production.</p>
+      <h1 class="post-title">Prompt Caching: What It Is and When the Math Works</h1>
+      <p class="lead">Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
         <span class="tag">llm</span>
-        <span class="tag">prompt-caching</span>
-        <span class="tag">inference</span>
+        <span class="tag">infrastructure</span>
       </div>
     </div>
   </header>
@@ -205,228 +204,42 @@
 <ul>
 <li><a href="#what-prompt-caching-actually-does">What prompt caching actually does</a></li>
 <li><a href="#the-important-detail-is-prefix-not-prompt">The important detail is prefix, not prompt</a></li>
-<li><a href="#the-headline-numbers-are-real-but-conditional">The headline numbers are real, but conditional</a></li>
 <li><a href="#when-the-math-actually-works">When the math actually works</a></li>
-<li><a href="#the-best-prompt-caching-workloads">The best prompt caching workloads</a></li>
-<li><a href="#the-hidden-reason-caching-fails">The hidden reason caching fails</a></li>
-<li><a href="#openai-anthropic-gemini-and-vllm-do-not-behave-exactly-the-same-way">OpenAI, Anthropic, Gemini, and vLLM do not behave exactly the same way</a></li>
-<li><a href="#prompt-caching-is-not-a-throughput-trick-only">Prompt caching is not a throughput trick only</a></li>
-<li><a href="#caching-does-not-fix-everything">Caching does not fix everything</a></li>
+<li><a href="#provider-differences">Provider differences</a></li>
 <li><a href="#a-practical-design-checklist">A practical design checklist</a></li>
-<li><a href="#the-best-mental-model">The best mental model</a></li>
-<li><a href="#frequently-asked-questions">Frequently asked questions</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>Prompt caching sounds great in theory because the pitch is simple. Reuse the expensive part of the prompt, cut latency, lower cost, move on.</p>
-<p>The catch is that it only works when the reusable part of the prompt is actually stable. If your app keeps rebuilding the top of the prompt, changing document order, or stuffing dynamic context too early, the savings disappear fast.</p>
-<p>Here is the short version.</p>
-<blockquote>
-<p>Prompt caching reduces the cost of repeatedly processing the same prompt prefix. It works best when long instructions, tool definitions, examples, documents, or conversation history stay identical across requests. The math works when the reusable prefix is large, the requests recur within the cache lifetime, and the uncached tail is relatively small.</p>
-</blockquote>
+        <p>Inference costs are the primary bottleneck for scaling LLM applications. Standard API calls require the model to re-process the entire prompt for every request. Such repetition is wasteful when large portions of your context remain static across thousands of calls.</p>
+<p>Prompt caching solves this by persisting the intermediate state of the model's computation. It allows you to "reuse" the work done on previous prompts. Understanding the mechanics of prefix matching is the key to making this work in production.</p>
 <h2 id="what-prompt-caching-actually-does">What prompt caching actually does</h2>
-<p>A language model has to process the input prompt before it can generate output. That prefill work is expensive when the prompt is large. Prompt caching lets the system reuse that work when the beginning of the prompt is identical across requests.</p>
-<p>OpenAI’s <a href="https://developers.openai.com/api/docs/guides/prompt-caching">prompt caching guide</a> says this directly. Requests with the same prefix can be routed to a machine that already processed that prefix, making the request cheaper and faster than processing the prompt from scratch.</p>
-<p>The same idea shows up elsewhere.</p>
-<ul>
-<li>Anthropic’s <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">prompt caching docs</a> describe caching across <code>tools</code>, <code>system</code>, and <code>messages</code> up to the block marked with <code>cache_control</code>.</li>
-<li>Google’s <a href="https://ai.google.dev/gemini-api/docs/caching">Gemini context caching docs</a> split the feature into implicit and explicit caching.</li>
-<li>vLLM’s <a href="https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/">automatic prefix caching</a> exposes the same principle in self-hosted serving.</li>
-</ul>
-<p>So the core idea is not vendor-specific. It is an inference optimization around shared prefixes.</p>
+<p>Caching stores the Key-Value (KV) cache of a prompt prefix in memory or on disk. The KV cache represents the mathematical summary of all tokens processed so far. The model can skip the initial computation phase and jump straight to generating new tokens when a new prompt shares an identical prefix with a cached one.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/caching-prefix-viz.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+</div>
+
+<p>Such a strategy is particularly effective for systems with long system instructions or large retrieved datasets. You pay the full "prefill" price once. Subsequent requests only pay for the unique tokens added at the end. This changes the economics of long-context RAG and agentic workflows.</p>
 <h2 id="the-important-detail-is-prefix-not-prompt">The important detail is prefix, not prompt</h2>
-<p>This is the part that decides whether caching helps.</p>
-<p>OpenAI says cache hits are possible only for exact prefix matches. Anthropic says cache hits require 100 percent identical prompt segments up to the cached block. Gemini recommends placing large common content at the beginning of the prompt.</p>
-<p>That means prompt caching does not care that two requests are conceptually similar. It cares that the reusable section is byte-for-byte or token-for-token identical in the right place.</p>
-<p>That one detail changes how I design prompts.</p>
-<table>
-<thead>
-<tr>
-<th>Prompt pattern</th>
-<th>Cache-friendly</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Long system prompt first, user tail last</td>
-<td>Yes</td>
-<td>Stable instructions sit in the prefix</td>
-</tr>
-<tr>
-<td>Tool definitions repeated identically</td>
-<td>Yes</td>
-<td>Tools become reusable prefix material</td>
-</tr>
-<tr>
-<td>Retrieved documents inserted in random order</td>
-<td>No</td>
-<td>Prefix changes even when content is similar</td>
-</tr>
-<tr>
-<td>Dynamic timestamps near the top</td>
-<td>No</td>
-<td>Small variations break the shared prefix</td>
-</tr>
-<tr>
-<td>Long conversation history reused across turns</td>
-<td>Often</td>
-<td>Shared history can be prefetched and reused</td>
-</tr>
-</tbody>
-</table>
-<p>This is why prompt caching is partly an application design problem, not just an API feature.</p>
-<h2 id="the-headline-numbers-are-real-but-conditional">The headline numbers are real, but conditional</h2>
-<p>OpenAI says prompt caching can reduce latency by up to 80 percent and input token costs by up to 90 percent. Those are strong numbers. They are also best-case numbers.</p>
-<p>The conditions matter.</p>
-<p>OpenAI’s guide says caching kicks in automatically for prompts that are 1024 tokens or longer. Anthropic’s docs describe a default 5-minute cache lifetime, with an optional 1-hour cache at additional cost. OpenAI’s in-memory retention generally lasts 5 to 10 minutes of inactivity, sometimes up to 1 hour, and some models support extended retention up to 24 hours.</p>
-<p>So when I read <code>up to 80 percent</code>, I translate that into a more useful question:</p>
-<p><strong>How much of my prompt is large, repeated, and reused within the cache window?</strong></p>
-<p>That is the real variable.</p>
+<p>Most developers assume caching works like a standard key-value store for the whole prompt. Real LLM caching is more granular. It works on the prefix. If your prompt consists of a system block, a knowledge block, and a user query, the cache hit occurs as long as the first two blocks are identical.</p>
+<p>Any change at the beginning of the prompt invalidates the entire cache for that request. Such sensitivity means you must order your prompt components from most static to most dynamic. Place your system instructions first. Follow them with your background data. Put the user's unique query at the very end.</p>
 <h2 id="when-the-math-actually-works">When the math actually works</h2>
-<p>I think about prompt caching as a ratio problem.</p>
-<p>The bigger the reusable prefix, the more there is to save. The more often that prefix repeats within the cache lifetime, the more often the savings show up. The smaller the variable tail, the more the request benefits from reuse.</p>
-<p>The math tends to work when most of these are true:</p>
-<ul>
-<li>the prompt has a long stable prefix</li>
-<li>the same prefix appears across many requests</li>
-<li>requests land close enough together to stay within the cache lifetime</li>
-<li>the uncached tail is small relative to the cached section</li>
-<li>the system is latency-sensitive enough that faster prefill matters</li>
-</ul>
-<p>The math usually does <strong>not</strong> work when most of these are true:</p>
-<ul>
-<li>every request rewrites the top of the prompt</li>
-<li>the shared content is short</li>
-<li>requests are too sparse to keep caches warm</li>
-<li>most of the cost sits in output generation, not input prefill</li>
-<li>the application injects dynamic context before the stable instructions</li>
-</ul>
-<p>That last one is more common than it should be.</p>
-<h2 id="the-best-prompt-caching-workloads">The best prompt caching workloads</h2>
-<p>The vendor docs line up on the kinds of workloads that benefit.</p>
-<p>Anthropic calls out long conversations, coding assistants, document-heavy prompts, and agentic tool use. vLLM highlights long-document querying and multi-round conversations. Gemini points to repeated input tokens and explicit cached corpora.</p>
-<p>Those cases share a structure.</p>
-<h3 id="1-long-system-instructions">1. Long system instructions</h3>
-<p>If your application repeats a large system prompt, style guide, policy block, or tool schema on every call, caching can remove a lot of redundant prefill work.</p>
-<h3 id="2-code-assistants-and-agent-systems">2. Code assistants and agent systems</h3>
-<p>These systems often resend a stable instruction set, tool definitions, and working context across many turns. Anthropic explicitly mentions coding assistants and agentic tool use here, and that makes sense. The stable prefix is usually large.</p>
-<h3 id="3-document-q-and-a">3. Document Q and A</h3>
-<p>If users keep asking questions about the same large document, caching becomes powerful. vLLM describes this case directly. Process the large document once, then reuse that prefix for follow-up questions.</p>
-<h3 id="4-multi-turn-conversations">4. Multi-turn conversations</h3>
-<p>When a conversation retains a large shared history, prefix reuse can cut both latency and cost. vLLM and Anthropic both call this out.</p>
-<h2 id="the-hidden-reason-caching-fails">The hidden reason caching fails</h2>
-<p>The feature usually fails for boring reasons.</p>
-<p>The prompt is not actually stable.</p>
-<p>That can happen in a lot of ways:</p>
-<ul>
-<li>documents are inserted in a different order</li>
-<li>JSON keys get serialized differently across calls</li>
-<li>timestamps or request IDs sit near the top of the prompt</li>
-<li>tools are included conditionally and shift the prefix</li>
-<li>user-specific context gets inserted before the stable instructions</li>
-</ul>
-<p>Anthropic’s docs are particularly useful here because they spell out how easy it is to invalidate a cache. Changes to <code>tool_choice</code>, image presence, block locations, or even unstable key ordering in <code>tool_use</code> payloads can break reuse.</p>
-<p>This is why I think prompt caching rewards disciplined prompt assembly more than clever prompting.</p>
-<h2 id="openai-anthropic-gemini-and-vllm-do-not-behave-exactly-the-same-way">OpenAI, Anthropic, Gemini, and vLLM do not behave exactly the same way</h2>
-<p>The underlying idea is the same. The details differ enough to matter.</p>
-<table>
-<thead>
-<tr>
-<th>System</th>
-<th>Important detail</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OpenAI</td>
-<td>Automatic for prompts 1024 tokens and longer, exact prefix matching, optional <code>prompt_cache_key</code>, overflow effects above roughly 15 requests per minute per prefix-key combination</td>
-</tr>
-<tr>
-<td>Anthropic</td>
-<td>Explicit <code>cache_control</code>, caching across <code>tools</code>, <code>system</code>, and <code>messages</code>, default 5-minute TTL, optional 1-hour TTL</td>
-</tr>
-<tr>
-<td>Gemini</td>
-<td>Implicit and explicit caching, TTL on explicit caches, cache-hit counts visible in usage metadata</td>
-</tr>
-<tr>
-<td>vLLM</td>
-<td>Prefix caching only reduces prefill, not decode, and works best when large prefixes repeat</td>
-</tr>
-</tbody>
-</table>
-<p>That difference matters because the application strategy should follow the platform behavior.</p>
-<p>If I am working with Anthropic, I care more about explicit cache breakpoints and block ordering. If I am on OpenAI, I care more about exact prefix construction, prompt length thresholds, and whether <code>prompt_cache_key</code> will improve routing. If I am self-hosting with vLLM, I care about whether the workload is prefill-heavy enough to benefit at all.</p>
-<h2 id="prompt-caching-is-not-a-throughput-trick-only">Prompt caching is not a throughput trick only</h2>
-<p>People often describe caching as a cost optimization. It is that. It is also a latency optimization.</p>
-<p>OpenAI frames it as both. Anthropic explicitly says you will generally see improved time to first token for long documents. That is the more interesting effect for interactive products.</p>
-<p>If the model no longer has to reprocess a long shared prefix, the first visible output can show up faster. That matters in chat, copilots, and document-heavy assistants.</p>
-<p>I wrote separately about <a href="/blog/time-to-first-token-ttft/">why TTFT often matters more than throughput for interactive products</a>. Prompt caching fits directly into that argument because it attacks prefill cost, which is a major component of first-token latency.</p>
-<h2 id="caching-does-not-fix-everything">Caching does not fix everything</h2>
-<p>Prompt caching only helps with the reused part of the input. It does not change how long the model takes to generate new output.</p>
-<p>vLLM’s docs state this cleanly. Automatic prefix caching reduces the processing time of the query, the prefilling phase, but does not reduce decoding time. That means the benefit shrinks when responses are very long or when most of the time is spent generating tokens.</p>
-<p>This is the easiest mistake to make with the feature. A team sees large latency numbers, enables caching, then expects every request to feel faster. If the application spends most of its time in generation rather than prefill, the gains will be smaller.</p>
-<p>That is why I separate workloads like this:</p>
-<table>
-<thead>
-<tr>
-<th>Workload</th>
-<th>Caching impact</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Long shared prompt, short answer</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Large document Q and A</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Agent loop with repeated tool definitions</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Short prompt, long generated report</td>
-<td>Limited</td>
-</tr>
-<tr>
-<td>Requests with highly dynamic prompt prefixes</td>
-<td>Limited</td>
-</tr>
-</tbody>
-</table>
+<p>Caching is not a free lunch. Providers often charge a small fee to store the cache or require a minimum token count to trigger the savings. You must have enough traffic to ensure that the cached prefix stays "warm" in the provider's memory.</p>
+<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
+  <iframe src="/static/caching-calculator.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+</div>
+
+<p>Calculations for ROI should consider the cache hit rate and the ratio of static to dynamic tokens. A system with a 10,000-token static prefix and a 100-token user query will see massive savings even at low volumes. A system where the prefix changes constantly will see zero benefit and might even incur higher costs due to storage fees.</p>
+<h2 id="provider-differences">Provider differences</h2>
+<p>OpenAI, Anthropic, and Gemini each implement caching with different rules. Some provide automatic caching based on common prefixes. Others require you to explicitly flag which blocks should be cached.</p>
+<p>Anthropic's implementation is currently the most flexible for developers. It allows you to place "cache breakpoints" at specific points in the prompt. This gives you granular control over what stays in memory. OpenAI's approach is more automated but offers less predictability for cost control.</p>
 <h2 id="a-practical-design-checklist">A practical design checklist</h2>
-<p>If I wanted prompt caching to work in production, I would design for it explicitly.</p>
-<ol>
-<li><strong>Move stable instructions to the front.</strong></li>
-<li><strong>Keep dynamic user-specific data at the end.</strong></li>
-<li><strong>Keep serialization stable.</strong></li>
-<li><strong>Do not shuffle documents or tools without a reason.</strong></li>
-<li><strong>Measure cache-hit tokens and latency, not just total tokens.</strong></li>
-<li><strong>Check whether requests arrive frequently enough to keep the cache useful.</strong></li>
-</ol>
-<p>OpenAI exposes cached-token details in usage. Gemini exposes cache-hit counts in usage metadata. Anthropic exposes cache read and cache creation token counts. If the platform gives you cache metrics and you are not logging them, you are flying blind.</p>
-<h2 id="the-best-mental-model">The best mental model</h2>
-<p>My mental model is simple.</p>
-<p>Prompt caching is not a magic acceleration layer for prompts in general. It is a discount on repeated prefill work.</p>
-<p>If the expensive part of your request sits in a stable prefix, caching can be one of the cleanest wins in the stack.</p>
-<p>If your prompt assembly is chaotic, the feature will mostly sit there looking impressive in the docs.</p>
-<h2 id="frequently-asked-questions">Frequently asked questions</h2>
-<h3 id="does-prompt-caching-change-model-output">Does prompt caching change model output?</h3>
-<p>No. Anthropic’s docs say output generation is unaffected, and OpenAI describes caching as reuse of prompt processing rather than a change in the generated response. The model still computes the answer fresh.</p>
-<h3 id="does-prompt-caching-help-short-prompts">Does prompt caching help short prompts?</h3>
-<p>Usually not much. OpenAI says automatic caching applies to prompts of 1024 tokens or more. Even when a platform reports cached tokens for smaller requests, the savings are limited if the repeated prefix is tiny.</p>
-<h3 id="is-prompt-caching-mainly-about-cost-or-latency">Is prompt caching mainly about cost or latency?</h3>
-<p>Both. The strongest cost savings show up when large prefixes repeat. The strongest latency gains show up when prefill is a large part of the request, which is common in long-prompt interactive systems.</p>
-<h3 id="should-i-rely-on-caching-instead-of-shortening-prompts">Should I rely on caching instead of shortening prompts?</h3>
-<p>No. I would still simplify prompts where possible. Caching helps repeated work. It does not excuse unnecessary work.</p>
-<h3 id="when-should-i-use-a-longer-cache-ttl">When should I use a longer cache TTL?</h3>
-<p>Anthropic’s docs give a practical answer. Use the default short cache when prompts recur frequently enough to refresh it. Reach for longer TTLs when requests are less frequent but still predictable enough that reuse will happen before the longer window expires.</p>
+<p>Follow these three rules when implementing prompt caching.</p>
+<p><strong>Order matters.</strong> Move all dynamic variables like timestamps or unique IDs to the end of the prompt.</p>
+<p><strong>Standardize prefixes.</strong> Ensure that minor whitespace changes or formatting differences do not break your cache hits.</p>
+<p><strong>Monitor hit rates.</strong> Track your actual cache performance in production. Use these metrics to adjust your prompt assembly logic.</p>
+<p>Prompt caching is the most effective way to scale LLM applications without a linear increase in cost. It rewards teams that treat their prompt engineering as a structured infrastructure task.</p>
       </div>
     </div>
   </div>
@@ -436,17 +249,17 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/embedding-models-compared/" class="related-card">
+        <div class="related-card-date">2026-03-15</div>
+        <div class="related-card-title">Vector Embeddings: A Guide to the Geometry of Meaning in AI</div>
+      </a>
+      <a href="/blog/llm-context-windows-explained/" class="related-card">
+        <div class="related-card-date">2026-03-14</div>
+        <div class="related-card-title">LLM Context Windows Explained: Why More is Not Always Better</div>
+      </a>
       <a href="/blog/mixture-of-experts-explained/" class="related-card">
         <div class="related-card-date">2026-03-13</div>
         <div class="related-card-title">Mixture of experts: how MoE models are cheap to run but expensive to host</div>
-      </a>
-      <a href="/blog/llm-context-windows-explained/" class="related-card">
-        <div class="related-card-date">2026-03-13</div>
-        <div class="related-card-title">LLM context windows: what the number on the spec sheet actually means</div>
-      </a>
-      <a href="/blog/speculative-decoding-explained/" class="related-card">
-        <div class="related-card-date">2026-03-12</div>
-        <div class="related-card-title">Speculative decoding explained: how LLMs generate tokens faster without changing the output</div>
       </a>
     </div>
   </div>
@@ -514,9 +327,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/embedding-models-compared/" class="footer-link">Vector Embeddings: A Guide to the Geometry of Meaning in AI</a>
+          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM Context Windows Explained: Why More is Not Always Better</a>
           <a href="/blog/mixture-of-experts-explained/" class="footer-link">Mixture of experts: how MoE models are cheap to run but expensive to host</a>
-          <a href="/blog/llm-context-windows-explained/" class="footer-link">LLM context windows: what the number on the spec sheet actually means</a>
-          <a href="/blog/speculative-decoding-explained/" class="footer-link">Speculative decoding explained: how LLMs generate tokens faster without changing the output</a>
         </div>
       </div>
 

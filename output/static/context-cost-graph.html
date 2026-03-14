@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cost of Context | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .chart-box { width: 100%; max-width: 500px; height: 250px; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; }
+    .line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 2s forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    
+    .axis-label { font-size: 9px; color: #888; position: absolute; }
+  </style>
+</head>
+<body>
+  <div style="text-align: center; margin-bottom: 40px;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Resource Economics</div>
+    <div style="font-size: 16px; font-weight: 600;">Quadratic Attention Cost (O(n²))</div>
+  </div>
+
+  <div class="chart-box">
+    <svg width="100%" height="100%" viewBox="0 0 500 250">
+      <path class="line" d="M 0 240 Q 250 230 500 10" />
+    </svg>
+    <div class="axis-label" style="bottom: -20px; left: 0;">1k tokens</div>
+    <div class="axis-label" style="bottom: -20px; right: 0;">128k tokens</div>
+    <div class="axis-label" style="top: 0; left: -40px; transform: rotate(-90deg); transform-origin: top left;">Compute/Memory →</div>
+  </div>
+
+  <div style="margin-top: 40px; font-size: 11px; color: #888; text-align: center; max-width: 400px;">
+    As context grows, every token must attend to every other token. Costs grow quadratically without optimizations like FlashAttention.
+  </div>
+</body>
+</html>
