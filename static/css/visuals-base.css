@@ -21,22 +21,15 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-  width: 100%;
-  overflow-x: hidden;
-}
-
 body {
   margin: 0;
-  width: 100%;
-  min-height: 100%;
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
   padding: 30px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Ensure horizontal centering */
+  align-items: center;
   -webkit-font-smoothing: antialiased;
   position: relative;
   overflow-x: hidden;
