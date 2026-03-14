@@ -11,7 +11,7 @@ Evaluating models for software engineering has moved beyond simple snippet gener
 I benchmarked the leading models across four distinct engineering personas. I looked at agentic autonomy and algorithmic complexity. I considered cost efficiency and repository-scale context management.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-leaderboard.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/coding-leaderboard.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Why SWE-bench Verified is the only metric that matters
@@ -27,7 +27,7 @@ Claude 4.6 Opus is the gold standard for autonomous engineering agents. It displ
 Such reliability is why many agentic frameworks now default to Claude. The model handles "effort controls" that allow you to toggle reasoning depth based on task complexity. Claude is the best choice if you are building an agent that needs to manage multi-file pull requests independently.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-agent-success.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/coding-agent-success.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## For complex logic and repository-scale context: Gemini 3.1 Pro
@@ -43,7 +43,7 @@ DeepSeek V4 has changed the economics of high-performance AI coding. It performs
 I use DeepSeek for high-volume tasks. These include automated code reviews and massive unit test generation. It also features "Engram Memory" which helps it remember your specific project style across sessions. You can run millions of tokens through DeepSeek for the price of a few thousand on a proprietary model. Such an advantage is vital for startups and internal devtools.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-cost-perf.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/coding-cost-perf.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## For multi-step reasoning and planning: GPT-5.4 Codex
@@ -53,7 +53,7 @@ GPT-5.4 Codex remains a highly reliable choice for planning. It may not lead eve
 GPT-5.4 has exceptional support for structured outputs and predicted tokens. These features are critical for building low-latency coding tools. The model is deeply integrated into the OpenAI ecosystem. It is a safe bet for teams that want a stable and well-supported platform.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-model-radar.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/coding-model-radar.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## For everyday IDE autocomplete: the OpenAI and Cursor ecosystem
@@ -63,7 +63,7 @@ The choice of model matters less than the integration for real-time autocomplete
 Low latency is the most important metric for autocomplete. These systems use smaller models or speculative decoding to provide instant suggestions. They are the tools that most engineers use every hour to maintain their flow state.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-ecosystem.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/coding-ecosystem.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## The closing gap of open source
@@ -73,7 +73,7 @@ Open-source coding models are catching up rapidly. Llama 4.0 and Qwen 2.5 Coder 
 The gap in performance is closing every month. Open-source models now solve complex bugs and write clean logic. They benefit from the collective intelligence of the research community. I expect open-weights to become the default for most enterprise coding tasks by the end of 2026.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-os-growth.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/coding-os-growth.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Summary decision framework
@@ -81,7 +81,7 @@ The gap in performance is closing every month. Open-source models now solve comp
 The right model depends on your specific needs. Use Claude for high-autonomy agents. Choose Gemini for complex logic and large repositories. Select DeepSeek for cost efficiency. Stick with GPT-5.4 for reliable planning.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-decision-tree.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/coding-decision-tree.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## FAQ

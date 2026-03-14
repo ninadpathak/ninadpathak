@@ -13,7 +13,7 @@ That is what the harness is for. It is the runtime layer around the model that k
 **What an agent harness is.** An agent harness is the runtime control layer between your application and the LLM. It manages the execution loop and gives the model tools and context. It handles tool results and tracks state across steps. The harness sends results and errors back upstream. The model handles reasoning. The harness handles everything else.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/stateless-vs-agentic.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/stateless-vs-agentic.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Why the raw LLM API breaks down for agentic tasks
@@ -29,7 +29,7 @@ That is still a harness. The question is whether it was designed intentionally. 
 A well-designed harness is not one monolithic block of logic. It has five distinct components. Each component has a specific responsibility.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/harness-architecture.html" style="width: 100%; height: 600px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/harness-architecture.html" style="width: 100%; height: 600px; border: none;" scrolling="no"></iframe>
 </div>
 
 **Tool registry.** A catalog of available tools. Each tool is defined with a typed schema and a description the model can read. It includes an execution handler the harness calls when the model requests it. The harness intercepts tool call requests and routes them to the right handler. It returns results in the format the model expects. The non-obvious part is that the tool registry is also where you enforce per-tool permissions and rate limits. A web browsing tool with uncapped request volume is an incident waiting to happen.
@@ -39,7 +39,7 @@ A well-designed harness is not one monolithic block of logic. It has five distin
 **Execution loop.** The core of any harness. Send the current context to the model. Execute the tool if the response contains a tool call. Append the result and send it again. Surface the final answer if the response is complete. Enforce the stop conditions such as maximum iterations reached or context window full. Enforce explicit completion signals or unrecoverable errors. The loop is simple to describe and surprisingly easy to get wrong at scale. This is especially true when you need it to handle concurrent runs and partial failures without corrupting shared state.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/execution-loop.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/execution-loop.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 **State manager.** Agents that span more than a few API calls need somewhere to store their working state. They need to know what subtasks are complete and what data has been gathered. They need to track what decisions have been made. Some harnesses keep all of this inside the context window. This works for short tasks but breaks for long ones. Others write to external storage after each step to enable checkpoint-based recovery. That choice between in-context state and external state is the single biggest architectural decision in agent design. The harness is where that decision gets made.
@@ -55,7 +55,7 @@ Every one of those failures means restarting from the beginning without checkpoi
 Checkpointing means writing the agent's full state to durable storage after each completed step. That state includes the message history and any external data gathered. It includes decisions made and subtask completion status. It includes metadata like total token usage and elapsed time.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/checkpointing-viz.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/checkpointing-viz.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 Three patterns work in practice.
@@ -73,7 +73,7 @@ The harness owns the checkpointing logic. The model has no concept of checkpoint
 The context window is a fixed resource. Long-running agents consume it. The harness needs a deliberate policy for what happens when it gets full. Doing nothing is not a policy. It is a bug that surfaces at the worst possible moment.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/context-management.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/context-management.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
 Four approaches work in order of implementation complexity.
@@ -118,7 +118,7 @@ A harness audit should cover specific ground before any agent ships.
 That last item matters more than it looks. Production incidents in agent systems are almost always diagnosed by replaying traces. Trace replay is not possible without a run ID that threads through every log entry for a given execution. Debugging collapses into guesswork without it.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/observability-trace.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/observability-trace.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## When you do not need a harness
@@ -132,7 +132,7 @@ A harness is necessary when the model decides which tools to call and in what or
 The rough line is clear. The harness is load-bearing infrastructure if the model controls the flow. The harness is overhead if the application controls the flow and the model is a subroutine.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/harness-decision-tree.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/harness-decision-tree.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## The harness is not glamorous

@@ -219,7 +219,7 @@
 <p>That is what the harness is for. It is the runtime layer around the model that keeps the system steady once real execution starts.</p>
 <p><strong>What an agent harness is.</strong> An agent harness is the runtime control layer between your application and the LLM. It manages the execution loop and gives the model tools and context. It handles tool results and tracks state across steps. The harness sends results and errors back upstream. The model handles reasoning. The harness handles everything else.</p>
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/stateless-vs-agentic.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/stateless-vs-agentic.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 <h2 id="why-the-raw-llm-api-breaks-down-for-agentic-tasks">Why the raw LLM API breaks down for agentic tasks</h2>
@@ -229,14 +229,14 @@
 <h2 id="the-five-components-every-harness-contains">The five components every harness contains</h2>
 <p>A well-designed harness is not one monolithic block of logic. It has five distinct components. Each component has a specific responsibility.</p>
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/harness-architecture.html" style="width: 100%; height: 600px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/harness-architecture.html" style="width: 100%; height: 600px; border: none;" scrolling="no"></iframe>
 </div>
 
 <p><strong>Tool registry.</strong> A catalog of available tools. Each tool is defined with a typed schema and a description the model can read. It includes an execution handler the harness calls when the model requests it. The harness intercepts tool call requests and routes them to the right handler. It returns results in the format the model expects. The non-obvious part is that the tool registry is also where you enforce per-tool permissions and rate limits. A web browsing tool with uncapped request volume is an incident waiting to happen.</p>
 <p><strong>Prompt assembler.</strong> The harness constructs the full context window from multiple sources at inference time. These sources include the system prompt and any cached instructions. They include retrieved documents and conversation history. They include the current task state and pending tool results. The order of those components matters. How much of each to include also matters. The prompt assembler is where context engineering happens at runtime dynamically. It does not happen once at design time and never get revisited.</p>
 <p><strong>Execution loop.</strong> The core of any harness. Send the current context to the model. Execute the tool if the response contains a tool call. Append the result and send it again. Surface the final answer if the response is complete. Enforce the stop conditions such as maximum iterations reached or context window full. Enforce explicit completion signals or unrecoverable errors. The loop is simple to describe and surprisingly easy to get wrong at scale. This is especially true when you need it to handle concurrent runs and partial failures without corrupting shared state.</p>
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/execution-loop.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/execution-loop.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 <p><strong>State manager.</strong> Agents that span more than a few API calls need somewhere to store their working state. They need to know what subtasks are complete and what data has been gathered. They need to track what decisions have been made. Some harnesses keep all of this inside the context window. This works for short tasks but breaks for long ones. Others write to external storage after each step to enable checkpoint-based recovery. That choice between in-context state and external state is the single biggest architectural decision in agent design. The harness is where that decision gets made.</p>
@@ -246,7 +246,7 @@
 <p>Every one of those failures means restarting from the beginning without checkpointing. That is manageable for a twenty-minute task costing a dollar in API fees. It is not manageable for a four-hour task costing fifteen dollars. The cost compounds quickly when the failures are frequent enough to matter.</p>
 <p>Checkpointing means writing the agent's full state to durable storage after each completed step. That state includes the message history and any external data gathered. It includes decisions made and subtask completion status. It includes metadata like total token usage and elapsed time.</p>
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/checkpointing-viz.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/checkpointing-viz.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 <p>Three patterns work in practice.</p>
@@ -257,7 +257,7 @@
 <h2 id="context-management-strategies-for-long-horizon-tasks">Context management strategies for long-horizon tasks</h2>
 <p>The context window is a fixed resource. Long-running agents consume it. The harness needs a deliberate policy for what happens when it gets full. Doing nothing is not a policy. It is a bug that surfaces at the worst possible moment.</p>
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/context-management.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/context-management.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
 <p>Four approaches work in order of implementation complexity.</p>
@@ -289,7 +289,7 @@
 - Traces are queryable by run ID</p>
 <p>That last item matters more than it looks. Production incidents in agent systems are almost always diagnosed by replaying traces. Trace replay is not possible without a run ID that threads through every log entry for a given execution. Debugging collapses into guesswork without it.</p>
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/observability-trace.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/observability-trace.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
 </div>
 
 <h2 id="when-you-do-not-need-a-harness">When you do not need a harness</h2>
@@ -298,7 +298,7 @@
 <p>A harness is necessary when the model decides which tools to call and in what order. It is necessary when tasks span more than a handful of API calls. It is necessary when partial failures need recovery without a full restart. It is necessary when auditability of what the agent did and why is a requirement.</p>
 <p>The rough line is clear. The harness is load-bearing infrastructure if the model controls the flow. The harness is overhead if the application controls the flow and the model is a subroutine.</p>
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/harness-decision-tree.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/harness-decision-tree.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
 <h2 id="the-harness-is-not-glamorous">The harness is not glamorous</h2>

@@ -15,7 +15,7 @@ Large models are "memory-bound." The bottleneck is the time it takes to move wei
 Speculative decoding uses two models. A small "draft" model guesses the next few tokens. A large "target" model then verifies these guesses in a single parallel step. The small model is much faster and less accurate. The large model is slow but authoritative.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/speculative-decoding-viz.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/speculative-decoding-viz.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 Such a system works because the large model can check four or five tokens in almost the same time it takes to generate one. If the small model's guesses are correct, we have successfully generated multiple tokens in one step. If a guess is wrong, we simply discard it and continue from the last correct token.

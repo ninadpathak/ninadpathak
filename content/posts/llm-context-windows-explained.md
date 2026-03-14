@@ -15,7 +15,7 @@ The reality of production engineering is more complex. Larger windows introduce 
 Models do not pay equal attention to every part of the prompt. Research has identified a consistent U-shaped performance curve. Models are best at retrieving information located at the very beginning or the very end of the context. Information placed in the middle is often ignored or "lost."
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/context-heatmap.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/context-heatmap.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 Such a phenomenon occurs because the model's attention mechanism must distribute limited focus across many tokens. The early tokens set the stage. The late tokens provide the immediate context for the next word. The middle tokens become a sea of noise. You must place your most critical instructions and data at the boundaries if you use long contexts.
@@ -25,7 +25,7 @@ Such a phenomenon occurs because the model's attention mechanism must distribute
 Performance degrades as you fill the window. Such decay is known as context rot. It is not just about where information is placed. It is about how much total information the model must process. Every additional token increases the probability of a reasoning error.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/context-rot.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/context-rot.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
 </div>
 
 A model might follow a complex instruction perfectly when the context is 2,000 tokens. That same model may hallucinate or ignore constraints when the context reaches 100,000 tokens. The "signal-to-noise ratio" drops as the volume of data grows. Successful engineers keep prompts as lean as possible even when the window is large.
@@ -35,7 +35,7 @@ A model might follow a complex instruction perfectly when the context is 2,000 t
 Expansion comes with a financial and performance tax. Standard attention mechanisms have a quadratic relationship with context length. Doubling the context can quadruple the computational requirement. This leads to higher latency and increased cost per request.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/context-cost-graph.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/context-cost-graph.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
 Prompt caching can mitigate some of these costs. However, the fundamental physics of attention remains a bottleneck. You must weigh the benefit of more context against the penalty of slower response times. Many interactive applications cannot afford the latency of a fully loaded 128k token window.
@@ -49,7 +49,7 @@ RAG is still superior for navigating massive corpora that exceed even the larges
 The best production systems use a hybrid approach. They use RAG to find the relevant neighborhood of data. They then use a medium-length context window to provide the LLM with enough detail to be accurate. Such a pipeline balances precision and cost.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/context-hybrid-viz.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/context-hybrid-viz.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## What works in production

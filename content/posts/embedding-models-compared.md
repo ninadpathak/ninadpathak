@@ -13,7 +13,7 @@ We call these lists of numbers embeddings. They are the foundational infrastruct
 I spent the last year benchmarking these models across production workloads. The landscape has shifted from simple BERT-based encoders to massive, multi-billion parameter models that rival the reasoning capabilities of small LLMs. Understanding the geometry behind these models is no longer optional for engineers building AI products.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/embedding-3d-space.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/embedding-3d-space.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## How text becomes geometry
@@ -25,7 +25,7 @@ One dimension might track the sentiment of the text. Another might track the pre
 Words that share meaning end up physically close to each other in this space. "King" and "Queen" reside in a similar neighborhood. "Apple" and "iPhone" cluster together, while "Apple" and "Banana" form a separate but nearby cluster representing fruit. The relationship between these points is what we measure when we perform a search.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/token-to-vector-pipeline.html" style="width: 100%; height: 250px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/token-to-vector-pipeline.html" style="width: 100%; height: 250px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Measuring semantic proximity with vector similarity
@@ -37,7 +37,7 @@ Cosine similarity becomes the preferred metric in this constrained geometry. It 
 I've seen many teams struggle with the "curse of dimensionality" when using these metrics. High-dimensional spaces push points toward the edges of the space. The difference between the interval to the nearest neighbor and the interval to the average neighbor starts to disappear. Such sensitivity makes similarity thresholds extremely precise. A similarity of 0.82 might be a perfect match, while 0.79 is completely irrelevant.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/cosine-similarity-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/cosine-similarity-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Architecture choices for embedding generation
@@ -57,7 +57,7 @@ I've monitored how models like Cohere's `embed-english-v3.0` handle this trade-o
 Dimensionality reduction is the process of taking these high-dimensional vectors and projecting them down to smaller spaces. We do this for visualization or to speed up initial search phases. Techniques like Principal Component Analysis (PCA) or t-SNE help us see the clusters that the model creates, but they always come with a cost in accuracy.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/dimensionality-reduction-viz.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/dimensionality-reduction-viz.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Building flexible vectors with Matryoshka embeddings
@@ -71,7 +71,7 @@ OpenAI's latest models support this natively through the `dimensions` parameter.
 The training process forces the model to prioritize the most discriminative features in the early dimensions. The hierarchy means that the first 10% of your vector often contains 90% of the useful semantic signal. We can use this to optimize cold storage layers. You store the full vectors on high-latency disk and keep only the truncated Matryoshka heads in low-latency RAM for the initial candidate selection.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/matryoshka-visualizer.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/matryoshka-visualizer.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Spatial collapse in high dimensions
@@ -83,7 +83,7 @@ Almost all the volume of a high-dimensional sphere is concentrated in a thin she
 Understanding this collapse is vital for setting search thresholds. A similarity score of 0.7 in 3D space might indicate a strong relationship. That same score in 1536D might be noise. You need to calibrate your retrieval system based on the specific distribution of your model's output space.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/curse-of-dimensionality.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/curse-of-dimensionality.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Comparing OpenAI, Cohere, and Voyage AI
@@ -95,7 +95,7 @@ Cohere offers a more specialized experience. Their `v3` models are trained speci
 Voyage AI is a newer entrant that has consistently topped the MTEB (Massive Text Embedding Benchmark) leaderboards. Their models often show a meaningful improvement in recall over OpenAI. They achieve this by using larger base architectures and more sophisticated training data curation. Smaller providers often move faster with architectural innovations that the giants take months to adopt.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/provider-comparison-radar.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/provider-comparison-radar.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Reducing memory with binary and scalar quantization
@@ -109,7 +109,7 @@ Binary quantization (BQ) goes further. It reduces each dimension to a single bit
 Modern vector databases now implement "over-sampling and re-scoring" to mitigate the small accuracy loss from BQ. You retrieve 10x more results than you need using the binary index and then re-rank them using the original full-precision vectors. Such a strategy provides the speed of binary search with the accuracy of floating-point search. The engineering trade-off shifts from compute to IO, which is often easier to manage at scale.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/quantization-bit-level.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/quantization-bit-level.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## The standard semantic search pipeline
@@ -121,7 +121,7 @@ A user query arrives and is embedded using the same model. The vector database p
 Failures in this workflow usually happen at the librarian stage. Semantic search is only as good as the geometry of the underlying space. Searching fails when the embedding model cannot understand the semantic relationship between a query like "Why is my bill high?" and a document about "usage-based billing tiers," the system fails.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/semantic-search-animation.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/semantic-search-animation.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## API latency vs self-hosted model performance
@@ -133,7 +133,7 @@ Self-hosting models like BGE-M3 or Hugging Face's latest encoders can reduce lat
 Large-scale systems often use a hybrid approach. They use a provider's API for the initial embedding of the corpus and then use a highly optimized, self-hosted model for real-time user queries. Such a strategy requires careful alignment to ensure both models project into a compatible space. Re-embedding a small set of results at query time is the most common way to handle this complexity.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/latency-benchmark-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/visuals/latency-benchmark-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Accuracy stability in long-context models
