@@ -3,10 +3,3 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://ninadpathak.com/sitemap.xml
-
-# Crawl delay for bots that respect it
-Crawl-delay: 10
-
-# Disallow admin or private areas if they existed
-# Disallow: /admin/
-# Disallow: /private/

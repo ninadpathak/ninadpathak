@@ -12,7 +12,7 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "TechArticle",
   "headline": "{{ post.title }}",
   "description": "{{ post.description }}",
   "author": {
@@ -22,8 +22,16 @@
   },
   "datePublished": "{{ post.date | format_date_iso }}",
   "publisher": {
-    "@type": "Person",
-    "name": "Ninad Pathak"
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.url }}/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ site.url }}/blog/{{ post.slug }}/"
   }
 }
 </script>

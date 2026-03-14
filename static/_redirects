@@ -1,0 +1,18 @@
+# Japanese Keyword Hack Recovery
+# Telling Google these pages are permanently gone (410)
+/wp-admin/* 410
+/wp-includes/* 410
+/wp-content/* 410
+/xmlrpc.php 410
+/author/* 410
+/category/* 410
+/tag/* 410
+/comments/* 410
+/feed/* 410
+
+# Common spam patterns from JKH
+/shop/* 410
+/products/* 410
+/casinos/* 410
+/buy-* 410
+/*?* 410
