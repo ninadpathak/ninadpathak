@@ -1,7 +1,7 @@
 ---
 title: "The State of Open Source AI Memory in 2026: Beyond the Context Window Myth"
 date: 2026-03-15
-description: "AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve the problem of LLM amnesia at production scale."
+description: "AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve identity fragmentation at production scale."
 tags: [ai, agents, infrastructure, open-source]
 status: published
 ---
