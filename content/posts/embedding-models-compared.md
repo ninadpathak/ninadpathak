@@ -16,7 +16,7 @@ I spent the last year benchmarking these models across production workloads. The
   <iframe src="/static/embedding-3d-space.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
-## How text becomes geometry: the mechanics of projection
+## How text becomes geometry
 
 Encoding text into a vector is a process of projection. You take a discrete string of characters and map it onto a point in a high-dimensional space. OpenAI's `text-embedding-3d-small` model uses 1536 dimensions. Each dimension represents a learned feature of language that the model discovered during training.
 
@@ -28,7 +28,7 @@ Words that share meaning end up physically close to each other in this space. "K
   <iframe src="/static/token-to-vector-pipeline.html" style="width: 100%; height: 250px; border: none;" scrolling="no"></iframe>
 </div>
 
-## Vector similarity metrics: measuring semantic proximity
+## Measuring semantic proximity with vector similarity
 
 Searching through millions of vectors requires a consistent way to measure the "closeness" of two points. L2 norm is the most intuitive metric, as it measures the spatial interval between two coordinates. However, many embedding models are normalized to have a length of one, placing every vector on the surface of a multi-dimensional unit sphere.
 
@@ -40,7 +40,7 @@ I've seen many teams struggle with the "curse of dimensionality" when using thes
   <iframe src="/static/cosine-similarity-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
-## Transformer architectures for embedding generation
+## Architecture choices for embedding generation
 
 The transition from text to vector happens inside the transformer architecture. Traditional LLMs like GPT-4 are decoders; they predict the next token in a sequence. Embedding models are often encoders, like BERT or RoBERTa. They process the entire input at once to generate a single summary representation.
 
@@ -48,7 +48,7 @@ Newer models have moved away from this rigid distinction. Many modern embedding 
 
 The quality of the encoder determines how well the model handles long-form text. A small model might compress 500 words into the same vector space as a single sentence. Such compression leads to information loss. Significant research now focuses on "late interaction" models like ColBERT, which preserve more granular information by keeping multiple vectors per document instead of just one.
 
-## Information density and dimensionality trade-offs
+## Balancing dimensionality and information density
 
 There is a constant tension between the size of a vector and its expressive power. Larger vectors store more nuance but increase the cost of storage and the latency of searches. A 3072-dimension vector takes up twice the space of a 1536-dimension vector and requires twice the compute for similarity calculations.
 
@@ -60,7 +60,7 @@ Dimensionality reduction is the process of taking these high-dimensional vectors
   <iframe src="/static/dimensionality-reduction-viz.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
 </div>
 
-## Matryoshka embeddings: building flexible vector representations
+## Building flexible vectors with Matryoshka embeddings
 
 The most significant innovation in embedding geometry recently is the Matryoshka Representation Learning (MRL) technique. These models are trained so that the most important information is stored in the first few dimensions. The vector acts like a Russian nesting doll.
 
@@ -74,7 +74,7 @@ The training process forces the model to prioritize the most discriminative feat
   <iframe src="/static/matryoshka-visualizer.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
-## The curse of dimensionality: spatial collapse in high dimensions
+## Spatial collapse in high dimensions
 
 Navigating a 1536-dimension space is not like navigating a 3D room. Our brains are built to understand volume, but high-dimensional geometry behaves according to different rules. The most counter-intuitive rule is the volume concentration phenomenon.
 
@@ -86,7 +86,7 @@ Understanding this collapse is vital for setting search thresholds. A similarity
   <iframe src="/static/curse-of-dimensionality.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
-## Provider Benchmarks: comparing OpenAI, Cohere, and Voyage AI
+## Comparing OpenAI, Cohere, and Voyage AI
 
 Choosing a provider involves balancing accuracy, latency, and cost. OpenAI remains the default choice for many teams due to their aggressive pricing and decent performance. Their `text-embedding-3d-small` model is cheap and reliable for general-purpose semantic search.
 
@@ -98,7 +98,7 @@ Voyage AI is a newer entrant that has consistently topped the MTEB (Massive Text
   <iframe src="/static/provider-comparison-radar.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
-## Quantization strategies: Binary and Scalar representations
+## Reducing memory with binary and scalar quantization
 
 Storing millions of high-dimensional vectors as 32-bit floats is prohibitively expensive. A single 1536-dimension vector at float32 precision takes up 6KB. One million vectors would require 6GB of memory. High-performance vector databases like Pinecone or Weaviate solve this using quantization.
 
@@ -112,7 +112,7 @@ Modern vector databases now implement "over-sampling and re-scoring" to mitigate
   <iframe src="/static/quantization-bit-level.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
 </div>
 
-## RAG architecture: the semantic search pipeline
+## The standard semantic search pipeline
 
 Building a search system with these models follows a predictable pipeline. You start by chunking your documents. Each chunk is passed to the embedding model to generate a vector. These vectors are stored in a vector database alongside the original text and metadata.
 
@@ -124,7 +124,7 @@ Failures in this workflow usually happen at the librarian stage. Semantic search
   <iframe src="/static/semantic-search-animation.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
 </div>
 
-## Latency analysis: provider API vs self-hosted models
+## API latency vs self-hosted model performance
 
 Embedding large datasets is an asynchronous batch process, but querying them is a synchronous user interaction. Latency matters. OpenAI and Cohere typically return vectors in 150ms to 300ms. Such response times are acceptable for many web applications but might feel sluggish for interactive chat interfaces.
 
@@ -136,7 +136,7 @@ Large-scale systems often use a hybrid approach. They use a provider's API for t
   <iframe src="/static/latency-benchmark-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
-## Performance stability in long-context embedding models
+## Accuracy stability in long-context models
 
 The maximum sequence length for most embedding models is 8192 tokens. Newer models from Jina and Nomic have pushed this to 32k or even 128k tokens. Such expansion sounds like an advantage for processing long documents without chunking, but my tests show a significant decay in vector stability as the input grows.
 
@@ -144,7 +144,7 @@ Embeddings are essentially a weighted average of token hidden states. The semant
 
 Recursive chunking with overlap remains the most reliable strategy for production RAG. Small, focused chunks preserve semantic density. You can then use cross-encoders for reranking or implement a parent-document retrieval strategy to give the LLM broader context. The long context window on an embedding model is best used for processing large cohesive units like code files, not for replacing a robust chunking strategy.
 
-## Cross-lingual retrieval and multilingual vector alignment
+## Searching across languages with vector alignment
 
 Language-agnostic embeddings allow you to search in one language and retrieve results in another. A query in English can match a document in French if both project into the same neighborhood of the vector space. The alignment is achieved by training models on parallel corpora where the same sentence in multiple languages is encouraged to have the same vector. Such mathematical mapping between disparate syntaxes is one of the most profound outcomes of modern representation learning. We can now build truly global knowledge graphs that do not require brittle translation layers to bridge the divide between local content silos. Engineering teams often underestimate the complexity of maintaining these cross-lingual spaces, but the result is a unified semantic surface that covers the entire breadth of human communication. Many benchmarks show that these multilingual models now perform comparably to monolingual models on native tasks. Such parity suggests that the model has learned a deeper, language-independent representation of world knowledge and logic. 
 
@@ -152,7 +152,7 @@ Cohere's `embed-multilingual-v3.0` is the leader in this category. Their trainin
 
 Open-source models like the multilingual-E5 series also perform well. They are often smaller and easier to self-host for specific region-locked data requirements. The geometry of a multilingual space is a fascinating achievement in representation learning. It proves that meaning exists in a mathematical layer that transcends specific human syntax.
 
-## Late interaction and ColBERT: token-level semantic matching
+## Token-level matching with ColBERT and late interaction
 
 Compressing an entire document into one vector is a lossy operation. The late interaction paradigm, popularized by ColBERT, offers a more granular alternative. Instead of one vector per document, ColBERT stores a vector for every token in the document.
 
@@ -160,7 +160,7 @@ At query time, the system performs a search that compares every token in the que
 
 Storage costs are the primary hurdle for ColBERT. Storing 512 vectors per document instead of one is a massive increase in resource requirements. Newer variants like ColBERTv2 use aggressive compression and quantization to make this manageable. Many vector databases now offer native support for ColBERT indices, signaling a shift toward this more granular retrieval strategy for high-precision use cases.
 
-## Decision Framework: selecting embedding infrastructure
+## Selecting the right embedding infrastructure
 
 Choosing a model starts with your data's complexity. General-purpose search on clean English text is a solved problem. OpenAI is your starting point. You move to Cohere or Voyage when you deal with messy, domain-specific data or require top-tier retrieval recall for high-stakes applications.
 
