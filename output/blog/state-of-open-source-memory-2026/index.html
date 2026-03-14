@@ -245,7 +245,7 @@
 
 <p><a href="https://arxiv.org/abs/2307.03172">Lost in the Middle</a> research remains the definitive warning for the 2026 era. Models lose their focus when the signal-to-noise ratio collapses under the weight of irrelevant data. Effective memory systems curate the specific neighborhood of facts required for one reasoning step rather than relying on volume.</p>
 <h2 id="tiered-cognitive-architectures">Tiered cognitive architectures</h2>
-<p>Open-source developers are building <a href="https://en.wikipedia.org/wiki/Cognitive_architecture">cognitive architectures</a> that mimic human systems to solve this. They categorize knowledge into four tiers based on how long a fact needs to survive.</p>
+<p>Open-source developers are building <a href="https://en.wikipedia.org/wiki/Cognitive_architecture">cognitive architectures</a> that mimic human systems to solve this. They categorize knowledge into four tiers based on how long a fact needs to survive. This <a href="/blog/rag-vs-fine-tuning/">replaces the basic RAG pipeline</a> with a more robust stateful system.</p>
 <p>Working memory handles the immediate context window for fast reasoning. It is the most expensive layer and disappears the moment the session ends. Episodic memory acts as an append-only log of raw interaction history.</p>
 <p>Semantic memory stores stable world models and entity relationships. Procedural memory encodes the heuristics of successful workflows. This tiered stack allows agents to scale their intelligence without a linear explosion in token costs.</p>
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">

@@ -30,7 +30,7 @@ Recall accuracy drops sharply once you fill the middle of a long prompt. Data at
 
 ## Tiered cognitive architectures
 
-Open-source developers are building [cognitive architectures](https://en.wikipedia.org/wiki/Cognitive_architecture) that mimic human systems to solve this. They categorize knowledge into four tiers based on how long a fact needs to survive.
+Open-source developers are building [cognitive architectures](https://en.wikipedia.org/wiki/Cognitive_architecture) that mimic human systems to solve this. They categorize knowledge into four tiers based on how long a fact needs to survive. This [replaces the basic RAG pipeline](/blog/rag-vs-fine-tuning/) with a more robust stateful system.
 
 Working memory handles the immediate context window for fast reasoning. It is the most expensive layer and disappears the moment the session ends. Episodic memory acts as an append-only log of raw interaction history.
 
