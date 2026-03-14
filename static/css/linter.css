@@ -5,12 +5,15 @@
 
 /* ── Layout ─────────────────────────────────────────────────────────── */
 
+.linter-section {
+  padding: 4rem 0;
+}
+
 .linter-layout {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 1.5rem;
   align-items: stretch;
-  margin-top: 1rem;
 }
 
 @media (max-width: 1024px) {
