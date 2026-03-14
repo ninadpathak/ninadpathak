@@ -8,7 +8,7 @@
     <item>
       <title>The State of Open Source AI Memory in 2026: Beyond the Context Window Myth</title>
       <link>https://ninadpathak.com/blog/state-of-open-source-memory-2026/</link>
-      <description>AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve identity fragmentation at production scale.</description>
+      <description>Context windows have scaled to millions of tokens, yet memory remains a bottleneck. Here is why 'effective context' is the metric that matters, and how Letta, Zep, and Cognee are building the stateful infrastructure for 2026.</description>
       <pubDate>Mar 15, 2026</pubDate>
     </item>
     <item>
