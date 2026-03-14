@@ -48,20 +48,46 @@
       pointer-events: none;
     }
 
+    .viz-header {
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .viz-header-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .viz-header-label span { opacity: 0.5; }
+
+    .viz-branding {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
     .viz-stage {
       flex: 1;
       display: flex;
       align-items: center;
-      justify-content: center; /* Centered instead of space-between */
-      gap: 60px; /* Tighter gap */
+      justify-content: center;
+      gap: 60px;
       padding: 0 40px;
       position: relative;
     }
 
     /* Router Node */
     .router-node {
-      width: 90px;
-      height: 90px;
+      width: 80px;
+      height: 80px;
       border: 2px solid var(--accent);
       background: var(--bg);
       display: flex;
@@ -75,11 +101,11 @@
       flex-shrink: 0;
     }
     .router-node::before {
-      content: 'ROUTER';
+      content: 'GATE';
       position: absolute;
-      top: -25px;
+      top: -22px;
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 9px;
       color: var(--accent);
       font-weight: 600;
       letter-spacing: 0.05em;
@@ -90,7 +116,7 @@
       display: grid;
       grid-template-columns: repeat(8, 1fr);
       gap: 6px;
-      width: 280px;
+      width: 260px;
       z-index: 5;
       flex-shrink: 0;
     }
@@ -195,13 +221,18 @@
   <div class="canvas">
     <div class="grid-bg"></div>
 
+    <div class="viz-header">
+      <div class="viz-header-label"><span>//</span> MOE_SPARSE_ACTIVATION_TRACE</div>
+      <div class="viz-branding">ninadpathak.com</div>
+    </div>
+
     <svg class="svg-paths" id="svgPaths"></svg>
 
     <div class="viz-stage">
       <div id="tokenContainer"></div>
 
       <div class="router-node" id="routerNode">
-        <div style="font-family: var(--mono); font-size: 11px; font-weight: 600;">GATE</div>
+        <div style="font-family: var(--mono); font-size: 11px; font-weight: 600;">TOP_K</div>
       </div>
 
       <div class="expert-grid" id="expertGrid"></div>
@@ -209,11 +240,11 @@
 
     <div class="viz-footer">
       <div>
-        <span class="stat-label">System:</span>
-        <span class="stat-val">MoE Sparse Topology</span>
+        <span class="stat-label">Model:</span>
+        <span class="stat-val">DeepSeek-V3</span>
       </div>
       <div>
-        <span class="stat-label">Inference:</span>
+        <span class="stat-label">Active:</span>
         <span class="stat-val"><span>37B</span> / 671B Params</span>
       </div>
     </div>
@@ -232,7 +263,6 @@
       { prompt: "Explain MoE", experts: ["NLP Expert", "Arch Expert"] }
     ];
 
-    // Create 32 experts
     for(let i=0; i<32; i++) {
       const cell = document.createElement('div');
       cell.className = 'expert-cell';
@@ -271,7 +301,6 @@
       token.innerHTML = `<div class="token-text">Prompt: ${scenario.prompt}</div><div class="token-box"></div>`;
       tokenContainer.appendChild(token);
 
-      // Trigger at router hit (45% of 5s)
       setTimeout(() => {
         activateExperts(scenario.experts);
         router.style.transform = 'scale(1.15)';
@@ -287,7 +316,6 @@
 
     function activateExperts(labels) {
       const indices = [];
-      // Pick experts that are somewhat spread out for better readability
       while(indices.length < labels.length) {
         const r = Math.floor(Math.random() * 32);
         if(!indices.includes(r)) indices.push(r);
@@ -302,7 +330,6 @@
         cell.classList.add('active');
         path.style.opacity = "0.8";
 
-        // Stay visible much longer (2.5s)
         setTimeout(() => {
           cell.classList.remove('active');
           path.style.opacity = "0";
@@ -312,11 +339,9 @@
 
     window.onload = () => {
       updatePaths();
-      // Increase spawn interval to 3s to prevent overlap with longer expert duration
       setInterval(spawnToken, 3000);
     };
 
-    // Re-calculate SVG paths if window size changes
     let resizeTimer;
     window.onresize = () => {
       clearTimeout(resizeTimer);
