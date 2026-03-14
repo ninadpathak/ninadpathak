@@ -30,7 +30,7 @@
 
     .canvas {
       width: 100%;
-      height: 500px; /* Reduced for blog embed */
+      height: 500px;
       position: relative;
       overflow: hidden;
       border: 1px solid var(--border);
@@ -52,15 +52,16 @@
       flex: 1;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 80px;
+      justify-content: center; /* Centered instead of space-between */
+      gap: 60px; /* Tighter gap */
+      padding: 0 40px;
       position: relative;
     }
 
     /* Router Node */
     .router-node {
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       border: 2px solid var(--accent);
       background: var(--bg);
       display: flex;
@@ -70,25 +71,28 @@
       position: relative;
       z-index: 5;
       box-shadow: 0 0 30px var(--accent-dim);
-      transition: all 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      flex-shrink: 0;
     }
     .router-node::before {
-      content: 'GATE_ROUTER';
+      content: 'ROUTER';
       position: absolute;
       top: -25px;
       font-family: var(--mono);
       font-size: 10px;
       color: var(--accent);
       font-weight: 600;
+      letter-spacing: 0.05em;
     }
 
     /* Expert Matrix */
     .expert-grid {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
-      gap: 8px;
-      width: 320px;
+      gap: 6px;
+      width: 280px;
       z-index: 5;
+      flex-shrink: 0;
     }
     .expert-cell {
       aspect-ratio: 1;
@@ -106,53 +110,57 @@
     }
     .expert-label {
       position: absolute;
-      bottom: -20px;
+      bottom: -22px;
       left: 50%;
       transform: translateX(-50%);
       font-family: var(--mono);
-      font-size: 9px;
+      font-size: 10px;
       color: var(--accent);
       white-space: nowrap;
       opacity: 0;
-      transition: opacity 0.2s;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      font-weight: 500;
+      background: var(--bg);
+      padding: 2px 4px;
+      z-index: 20;
     }
     .expert-cell.active .expert-label { opacity: 1; }
 
     /* Tokens */
     .token {
       position: absolute;
-      background: #fff;
-      border-radius: 2px;
       z-index: 10;
       opacity: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 5px;
+      pointer-events: none;
     }
-    .token-box { width: 14px; height: 14px; background: #fff; border-radius: 2px; }
+    .token-box { width: 12px; height: 12px; background: #fff; border-radius: 2px; box-shadow: 0 0 10px #fff; }
     .token-text {
       font-family: var(--mono);
       font-size: 11px;
       color: #fff;
       white-space: nowrap;
       background: var(--accent);
-      padding: 2px 6px;
+      padding: 3px 8px;
       position: absolute;
-      top: -25px;
+      top: -30px;
+      font-weight: 600;
     }
 
     @keyframes token-flow {
-      0% { transform: translate(-150px, 0); opacity: 0; }
-      10% { opacity: 1; }
+      0% { transform: translate(-180px, 0); opacity: 0; }
+      15% { opacity: 1; }
       45% { transform: translate(0, 0); opacity: 1; }
-      50% { transform: translate(0, 0); opacity: 1; scale: 1.1; }
+      50% { transform: translate(0, 0); opacity: 1; scale: 1.2; }
       55% { transform: translate(0, 0); opacity: 1; scale: 1; }
-      90% { opacity: 1; }
-      100% { transform: translate(450px, 0); opacity: 0; }
+      85% { opacity: 1; }
+      100% { transform: translate(350px, 0); opacity: 0; }
     }
 
-    .token-anim { animation: token-flow 4s linear infinite; }
+    .token-anim { animation: token-flow 5s ease-in-out infinite; }
 
     .svg-paths {
       position: absolute;
@@ -165,20 +173,20 @@
       stroke-width: 1.5;
       fill: none;
       opacity: 0;
-      transition: opacity 0.2s;
+      transition: opacity 0.3s ease;
     }
 
     .viz-footer {
-      padding: 15px 40px;
-      background: rgba(0,0,0,0.3);
+      padding: 12px 30px;
+      background: rgba(0,0,0,0.4);
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-top: 1px solid var(--border);
       z-index: 10;
     }
-    .stat-label { font-family: var(--mono); font-size: 11px; color: var(--text-3); text-transform: uppercase; }
-    .stat-val { font-family: var(--mono); font-size: 14px; color: var(--text-1); font-weight: 600; }
+    .stat-label { font-family: var(--mono); font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-val { font-family: var(--mono); font-size: 13px; color: var(--text-1); font-weight: 600; }
     .stat-val span { color: var(--accent); }
   </style>
 </head>
@@ -193,7 +201,7 @@
       <div id="tokenContainer"></div>
 
       <div class="router-node" id="routerNode">
-        <div style="font-family: var(--mono); font-size: 11px; font-weight: 600;">ROUTER</div>
+        <div style="font-family: var(--mono); font-size: 11px; font-weight: 600;">GATE</div>
       </div>
 
       <div class="expert-grid" id="expertGrid"></div>
@@ -201,12 +209,12 @@
 
     <div class="viz-footer">
       <div>
-        <span class="stat-label">Model:</span>
-        <span class="stat-val">DeepSeek-V3</span>
+        <span class="stat-label">System:</span>
+        <span class="stat-val">MoE Sparse Topology</span>
       </div>
       <div>
-        <span class="stat-label">Active Params:</span>
-        <span class="stat-val"><span>37B</span> / 671B</span>
+        <span class="stat-label">Inference:</span>
+        <span class="stat-val"><span>37B</span> / 671B Params</span>
       </div>
     </div>
   </div>
@@ -224,6 +232,7 @@
       { prompt: "Explain MoE", experts: ["NLP Expert", "Arch Expert"] }
     ];
 
+    // Create 32 experts
     for(let i=0; i<32; i++) {
       const cell = document.createElement('div');
       cell.className = 'expert-cell';
@@ -236,6 +245,7 @@
       svg.innerHTML = '';
       const rRect = router.getBoundingClientRect();
       const canvasRect = document.querySelector('.canvas').getBoundingClientRect();
+      
       const x1 = (rRect.left + rRect.width) - canvasRect.left;
       const y1 = (rRect.top + rRect.height/2) - canvasRect.top;
 
@@ -261,21 +271,23 @@
       token.innerHTML = `<div class="token-text">Prompt: ${scenario.prompt}</div><div class="token-box"></div>`;
       tokenContainer.appendChild(token);
 
+      // Trigger at router hit (45% of 5s)
       setTimeout(() => {
         activateExperts(scenario.experts);
-        router.style.transform = 'scale(1.1)';
+        router.style.transform = 'scale(1.15)';
         router.style.borderColor = '#fff';
         setTimeout(() => {
           router.style.transform = 'scale(1)';
           router.style.borderColor = 'var(--accent)';
-        }, 200);
-      }, 2000);
+        }, 300);
+      }, 2250);
 
-      setTimeout(() => token.remove(), 4000);
+      setTimeout(() => token.remove(), 5000);
     }
 
     function activateExperts(labels) {
       const indices = [];
+      // Pick experts that are somewhat spread out for better readability
       while(indices.length < labels.length) {
         const r = Math.floor(Math.random() * 32);
         if(!indices.includes(r)) indices.push(r);
@@ -290,16 +302,25 @@
         cell.classList.add('active');
         path.style.opacity = "0.8";
 
+        // Stay visible much longer (2.5s)
         setTimeout(() => {
           cell.classList.remove('active');
           path.style.opacity = "0";
-        }, 1000);
+        }, 2500);
       });
     }
 
     window.onload = () => {
       updatePaths();
-      setInterval(spawnToken, 2000);
+      // Increase spawn interval to 3s to prevent overlap with longer expert duration
+      setInterval(spawnToken, 3000);
+    };
+
+    // Re-calculate SVG paths if window size changes
+    let resizeTimer;
+    window.onresize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updatePaths, 100);
     };
   </script>
 </body>
