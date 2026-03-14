@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SWE-bench Leaderboard | Ninad Pathak</title>
+  <title>SWE-bench Leaderboard 2026 | Ninad Pathak</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -36,26 +36,26 @@
 </head>
 <body>
   <div style="text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Benchmarks</div>
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Benchmarks March 2026</div>
     <div style="font-size: 16px; font-weight: 600;">SWE-bench Verified (Resolved %)</div>
   </div>
 
   <div class="chart" id="chart"></div>
 
-  <div class="legend">* Data from latest SWE-bench Verified leaderboard. Proprietary models shown with agentic harnesses.</div>
+  <div class="legend">* Data from March 2026 leaderboard. All models tested with native agentic frameworks.</div>
 
   <script>
     const data = [
-      { name: "Claude 3.5 Sonnet", val: 49.0 },
-      { name: "Claude 3.5 Opus", val: 52.4 },
-      { name: "GPT-4o (2024-08)", val: 42.1 },
-      { name: "Gemini 1.5 Pro", val: 38.5 },
-      { name: "DeepSeek V2.5", val: 35.8 },
-      { name: "Llama 3.1 405B", val: 28.2 }
+      { name: "Claude 4.6 Opus", val: 80.9 },
+      { name: "DeepSeek V4", val: 78.5 },
+      { name: "GPT-5.4 (Codex)", val: 76.2 },
+      { name: "Claude 4.6 Sonnet", val: 72.4 },
+      { name: "Gemini 3.1 Pro", val: 68.5 },
+      { name: "Llama 4.0 405B", val: 62.2 }
     ];
 
     const chart = document.getElementById('chart');
-    const max = 60;
+    const max = 100;
 
     data.forEach(d => {
       const row = document.createElement('div');

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cost-Performance Coding | Ninad Pathak</title>
+  <title>Cost-Performance Coding 2026 | Ninad Pathak</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@
 </head>
 <body>
   <div style="text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Economic Analysis</div>
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Economic Analysis 2026</div>
     <div style="font-size: 16px; font-weight: 600;">Coding Cost vs Performance</div>
   </div>
 
@@ -51,18 +51,18 @@
 
   <script>
     const data = [
-      { name: "Claude 3.5 Sonnet", cost: 3.0, perf: 49.0 },
-      { name: "GPT-4o", cost: 5.0, perf: 42.1 },
-      { name: "Claude 3.5 Opus", cost: 15.0, perf: 52.4 },
-      { name: "DeepSeek V3", cost: 0.2, perf: 35.8 },
-      { name: "Gemini 1.5 Pro", cost: 3.5, perf: 38.5 },
-      { name: "Llama 3.1 405B", cost: 2.0, perf: 28.2 }
+      { name: "Claude 4.6 Opus", cost: 8.0, perf: 80.9 },
+      { name: "GPT-5.4 (Codex)", cost: 6.0, perf: 76.2 },
+      { name: "Claude 4.6 Sonnet", cost: 2.0, perf: 72.4 },
+      { name: "DeepSeek V4", cost: 0.15, perf: 78.5 },
+      { name: "Gemini 3.1 Pro", cost: 2.5, perf: 68.5 },
+      { name: "Llama 4.0 405B", cost: 1.5, perf: 62.2 }
     ];
 
     const plot = document.getElementById('plot');
     const tooltip = document.getElementById('tooltip');
-    const maxCost = 16;
-    const maxPerf = 60;
+    const maxCost = 10;
+    const maxPerf = 100;
 
     data.forEach(d => {
       const dot = document.createElement('div');

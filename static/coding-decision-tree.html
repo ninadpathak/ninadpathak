@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LLM Selector | Ninad Pathak</title>
+  <title>LLM Selector 2026 | Ninad Pathak</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -35,12 +35,12 @@
 </head>
 <body>
   <div style="margin-bottom: 40px; text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Decision Engine</div>
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Decision Engine 2026</div>
     <div style="font-size: 16px; font-weight: 600;">Which coding model should you use?</div>
   </div>
 
   <div class="tree" id="tree">
-    <div class="q-box" id="q">Is this for an autonomous agent that calls tools and browses the web?</div>
+    <div class="q-box" id="q">Is this for a high-autonomy agent that needs to manage multi-file pull requests?</div>
     <div class="options" id="opts">
       <div class="opt" onclick="ans('yes')">YES</div>
       <div class="opt" onclick="ans('no')">NO</div>
@@ -50,19 +50,19 @@
 
   <script>
     const questions = [
-      { q: "Is this for an autonomous agent that calls tools and browses the web?", yes: "CLAUDE", no: 1 },
-      { q: "Are you building highly complex algorithmic or math-heavy software?", yes: "GEMINI", no: 2 },
-      { q: "Is minimizing per-token cost your primary constraint?", yes: "DEEPSEEK", no: "GPT4O" }
+      { q: "Is this for a high-autonomy agent that needs to manage multi-file pull requests?", yes: "CLAUDE", no: 1 },
+      { q: "Are you debugging complex UI or analyzing massive 1M+ token repositories?", yes: "GEMINI", no: 2 },
+      { q: "Is minimizing per-token cost your primary constraint for bulk tasks?", yes: "DEEPSEEK", no: "GPT5" }
     ];
 
     let step = 0;
 
     function ans(v) {
       const next = questions[step][v];
-      if (next === "CLAUDE") show("USE CLAUDE 3.5 OPUS. The leading model for agentic reasoning and tool reliability.");
-      else if (next === "GEMINI") show("USE GEMINI 1.5 PRO. Best-in-class for long context and complex logic.");
-      else if (next === "DEEPSEEK") show("USE DEEPSEEK V3. The most cost-efficient high-performance coding model.");
-      else if (next === "GPT4O") show("USE GPT-4o. The most reliable general-purpose coding ecosystem.");
+      if (next === "CLAUDE") show("USE CLAUDE 4.6 OPUS. The definitive choice for agentic reasoning and SWE-bench performance.");
+      else if (next === "GEMINI") show("USE GEMINI 3.1 PRO. Unmatched for multimodal debugging and extreme context windows.");
+      else if (next === "DEEPSEEK") show("USE DEEPSEEK V4. The most efficient high-performance coding model for local or bulk use.");
+      else if (next === "GPT5") show("USE GPT-5.4 CODEX. The most reliable model for multi-step reasoning and planning.");
       else {
         step = next;
         document.getElementById('q').innerText = questions[step].q;
