@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TTFT vs Throughput | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; max-width: 600px; }
+    .side { border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .label { font-size: 10px; color: var(--accent); text-transform: uppercase; }
+    
+    .viz { height: 100px; display: flex; align-items: flex-end; gap: 5px; }
+    .bar { width: 15px; background: var(--border); transition: height 1s; }
+    .active { background: var(--accent); }
+  </style>
+</head>
+<body>
+  <div style="margin-bottom: 40px; text-align: center;">
+    <div style="font-size: 16px; font-weight: 600;">Snappiness (TTFT) vs Volume (Throughput)</div>
+  </div>
+
+  <div class="compare">
+    <div class="side">
+      <div class="label">Interactive Chat</div>
+      <div class="viz" id="v1"></div>
+      <div style="font-size: 10px; color: #888;">Low TTFT is critical.</div>
+    </div>
+    <div class="side">
+      <div class="label">Batch Processing</div>
+      <div class="viz" id="v2"></div>
+      <div style="font-size: 10px; color: #888;">Throughput is critical.</div>
+    </div>
+  </div>
+
+  <script>
+    const v1 = document.getElementById('v1');
+    const v2 = document.getElementById('v2');
+    
+    for(let i=0; i<10; i++) {
+      const b1 = document.createElement('div');
+      b1.className = 'bar active';
+      b1.style.height = '80px';
+      v1.appendChild(b1);
+      
+      const b2 = document.createElement('div');
+      b2.className = 'bar';
+      b2.style.height = '30px';
+      v2.appendChild(b2);
+    }
+    
+    setInterval(() => {
+      v1.querySelectorAll('.bar').forEach(b => b.style.height = (20 + Math.random() * 60) + 'px');
+      v2.querySelectorAll('.bar').forEach(b => b.style.height = (60 + Math.random() * 40) + 'px');
+    }, 1000);
+  </script>
+</body>
+</html>

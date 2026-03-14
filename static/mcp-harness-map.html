@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MCP inside Harness | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .harness-box { border: 1px solid var(--border); padding: 40px; width: 100%; max-width: 600px; position: relative; }
+    .label { font-size: 10px; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; }
+    
+    .inner-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .comp { border: 1px solid var(--border); padding: 15px; font-size: 11px; background: var(--bg); text-align: center; }
+    
+    .mcp-layer { grid-column: 1 / span 2; border: 2px solid var(--accent); padding: 20px; margin-top: 20px; position: relative; }
+    .mcp-label { position: absolute; top: -10px; left: 20px; background: var(--bg); padding: 0 10px; font-size: 10px; color: var(--accent); font-weight: 600; }
+    
+    .external { margin-top: 30px; display: flex; gap: 15px; justify-content: center; }
+    .ext-box { border: 1px solid var(--border); padding: 10px 20px; font-size: 10px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="harness-box">
+    <div class="label">// Infrastructure Layer</div>
+    <div style="font-size: 16px; font-weight: 600; margin-bottom: 30px;">Where MCP sits in your Agent Harness</div>
+    
+    <div class="inner-grid">
+      <div class="comp">Execution Loop</div>
+      <div class="comp">State Manager</div>
+      <div class="mcp-layer">
+        <div class="mcp-label">MCP Tool SDK</div>
+        <div style="font-size: 12px;">Dynamic Tool Discovery & Execution</div>
+      </div>
+    </div>
+
+    <div class="external">
+      <div class="ext-box">Local DB</div>
+      <div class="ext-box">Browser</div>
+      <div class="ext-box">SaaS APIs</div>
+    </div>
+  </div>
+</body>
+</html>

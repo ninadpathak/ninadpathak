@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TTFT Breakdown | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .timeline { width: 100%; max-width: 600px; height: 60px; border: 1px solid var(--border); display: flex; position: relative; }
+    .seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 9px; text-transform: uppercase; border-right: 1px solid var(--border); }
+    .seg:last-child { border-right: none; }
+    
+    .s1 { width: 15%; background: rgba(212, 64, 0, 0.05); }
+    .s2 { width: 25%; background: rgba(212, 64, 0, 0.1); }
+    .s3 { width: 50%; background: rgba(212, 64, 0, 0.2); color: #fff; font-weight: 600; }
+    .s4 { width: 10%; background: var(--accent); color: #fff; font-weight: 600; }
+    
+    .marker { position: absolute; bottom: -25px; font-size: 10px; color: var(--accent); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div style="margin-bottom: 50px; text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Latency Components</div>
+    <div style="font-size: 16px; font-weight: 600;">Time to First Token (TTFT) Lifecycle</div>
+  </div>
+
+  <div class="timeline">
+    <div class="seg s1">Network</div>
+    <div class="seg s2">Auth / Queue</div>
+    <div class="seg s3">Prompt Prefill</div>
+    <div class="seg s4">T1</div>
+    <div class="marker" style="right: 0;">← TTFT ends here</div>
+  </div>
+
+  <div style="margin-top: 50px; font-size: 11px; color: #888; text-align: center; max-width: 500px;">
+    Prompt Prefill is usually the largest component. It is where the model processes your input context before generating the first token (T1).
+  </div>
+</body>
+</html>

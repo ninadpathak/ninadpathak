@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RAG vs Fine-Tuning Matrix | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .matrix { display: grid; grid-template-columns: 40px 1fr 1fr; grid-template-rows: 1fr 1fr 40px; gap: 10px; width: 100%; max-width: 500px; height: 400px; }
+    .cell { border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 11px; }
+    .label-v { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: 10px; color: #888; }
+    .label-h { text-align: center; font-size: 10px; color: #888; }
+    
+    .highlight-rag { background: rgba(212, 64, 0, 0.05); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+    .highlight-ft { background: rgba(52, 199, 89, 0.05); border-color: #34c759; color: #34c759; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div style="margin-bottom: 40px; text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Decision Matrix</div>
+    <div style="font-size: 16px; font-weight: 600;">Knowledge vs Behavior</div>
+  </div>
+
+  <div class="matrix">
+    <div class="label-v">Knowledge Update Frequency →</div>
+    <div class="cell"><strong>Static Data</strong><br>General Knowledge</div>
+    <div class="cell highlight-rag"><strong>Real-time Data</strong><br>Use RAG</div>
+    <div class="label-v"></div>
+    <div class="cell highlight-ft"><strong>Specific Behavior</strong><br>Use Fine-Tuning</div>
+    <div class="cell"><strong>Hybrid</strong><br>RAG for Facts + FT for Style</div>
+    <div></div>
+    <div class="label-h">Standard Style ←</div>
+    <div class="label-h">→ Custom Style/Format</div>
+  </div>
+</body>
+</html>

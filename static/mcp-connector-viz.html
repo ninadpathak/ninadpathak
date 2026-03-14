@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MCP Integration Problem | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; max-width: 800px; }
+    .side { border: 1px solid var(--border); padding: 30px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .header { font-size: 11px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+    
+    .viz { height: 150px; width: 100%; position: relative; }
+    .node { width: 40px; height: 40px; border: 1px solid var(--border); position: absolute; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 8px; }
+    .center { left: 50%; top: 50%; transform: translate(-50%, -50%); border-color: var(--accent); width: 60px; height: 60px; font-size: 10px; font-weight: 600; z-index: 10; }
+    
+    .line { position: absolute; background: var(--border); transform-origin: 0 0; height: 1px; z-index: 1; }
+    .line.standard { background: var(--accent); opacity: 0.5; }
+  </style>
+</head>
+<body>
+  <div style="margin-bottom: 40px; text-align: center;">
+    <div style="font-size: 16px; font-weight: 600;">The N × M Integration Bottleneck</div>
+  </div>
+
+  <div class="compare">
+    <div class="side">
+      <div class="header">Before MCP</div>
+      <div class="viz" id="v1"></div>
+      <div style="font-size: 10px; color: #888; text-align: center;">Every AI app needs a custom connector for every data source.</div>
+    </div>
+    <div class="side">
+      <div class="header">With MCP</div>
+      <div class="viz" id="v2"></div>
+      <div style="font-size: 10px; color: #888; text-align: center;">Every AI app connects to one protocol to access all sources.</div>
+    </div>
+  </div>
+
+  <script>
+    function createNodes(containerId, isMCP) {
+      const c = document.getElementById(containerId);
+      const center = document.createElement('div');
+      center.className = 'node center';
+      center.innerText = isMCP ? 'MCP' : 'APP';
+      c.appendChild(center);
+
+      const items = ['Drive', 'GitHub', 'Slack', 'SQL', 'Docs'];
+      items.forEach((item, i) => {
+        const n = document.createElement('div');
+        n.className = 'node';
+        n.innerText = item;
+        const angle = (i / items.length) * Math.PI * 2;
+        const radius = 60;
+        const x = 100 + Math.cos(angle) * radius;
+        const y = 75 + Math.sin(angle) * radius;
+        n.style.left = x - 20 + 'px';
+        n.style.top = y - 20 + 'px';
+        c.appendChild(n);
+
+        const line = document.createElement('div');
+        line.className = 'line' + (isMCP ? ' standard' : '');
+        line.style.left = '50%';
+        line.style.top = '50%';
+        line.style.width = radius + 'px';
+        line.style.transform = `rotate(${angle}rad)`;
+        c.appendChild(line);
+      });
+    }
+
+    createNodes('v1', false);
+    createNodes('v2', true);
+  </script>
+</body>
+</html>
