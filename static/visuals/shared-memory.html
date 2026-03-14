@@ -9,15 +9,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    .multi-agent { display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 20px; }
+    .multi-agent { display: flex; flex-direction: column; align-items: center; gap: 60px; padding: 20px; position: relative; }
     .central-memory { width: 120px; height: 120px; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; background: var(--bg); font-weight: 600; font-size: 12px; position: relative; z-index: 10; }
     
-    .agents { display: flex; gap: 60px; }
-    .agent-node { width: 80px; height: 80px; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg); font-family: var(--mono); font-size: 10px; position: relative; }
-    .agent-node::after { content: ''; position: absolute; top: -40px; left: 50%; height: 40px; width: 1px; background: var(--border); }
+    .agents { display: flex; gap: 40px; position: relative; z-index: 10; width: 100%; justify-content: center; }
+    .agent-node { width: 90px; height: 90px; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg); font-family: var(--mono); font-size: 10px; transition: all 0.3s; }
+    
+    .svg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .connector-line { stroke: var(--border); stroke-width: 1; fill: none; transition: stroke 0.3s; }
     
     .sync { animation: sync 2s infinite; }
-    @keyframes sync { 0% { opacity: 0.3; } 50% { opacity: 1; color: var(--accent); } 100% { opacity: 0.3; } }
+    @keyframes sync { 0% { opacity: 0.3; } 50% { opacity: 1; color: var(--accent); border-color: var(--accent); } 100% { opacity: 0.3; } }
+    
+    @media (max-width: 600px) {
+      .agents { gap: 15px; }
+      .agent-node { width: 75px; height: 75px; font-size: 9px; }
+    }
   </style>
 </head>
 <body>
@@ -25,18 +32,58 @@
     <div class="label">// Multi-Agent Coordination</div>
     <div class="title">Shared Global State</div>
     
-    <div class="multi-agent">
-      <div class="central-memory sync">CENTRAL<br>STATE</div>
+    <div class="multi-agent" id="canvas">
+      <svg class="svg-layer" id="svg"></svg>
+      
+      <div class="central-memory sync" id="center">CENTRAL<br>STATE</div>
+      
       <div class="agents">
-        <div class="agent-node">Search<br>Agent</div>
-        <div class="agent-node">Coder<br>Agent</div>
-        <div class="agent-node">Reviewer<br>Agent</div>
+        <div class="agent-node" id="a1">Search<br>Agent</div>
+        <div class="agent-node" id="a2">Coder<br>Agent</div>
+        <div class="agent-node" id="a3">Reviewer<br>Agent</div>
       </div>
     </div>
     
-    <div style="margin-top: 30px; font-size: 11px; color: #888; text-align: center;">
-      In 2026, multi-agent frameworks like CrewAI and AutoGen use a shared memory layer to ensure that if the Search Agent finds a fact, the Coder Agent "remembers" it instantly.
+    <div style="margin-top: 30px; font-size: 11px; color: #888; text-align: center; line-height: 1.5;">
+      In 2026, multi-agent frameworks use a shared memory layer to ensure that facts found by one agent are instantly available to the entire swarm.
     </div>
   </div>
+
+  <script>
+    const svg = document.getElementById('svg');
+    const center = document.getElementById('center');
+    const agents = ['a1', 'a2', 'a3'];
+
+    function drawLines() {
+      svg.innerHTML = '';
+      const cRect = center.getBoundingClientRect();
+      const parentRect = document.getElementById('canvas').getBoundingClientRect();
+      
+      const cx = (cRect.left + cRect.width / 2) - parentRect.left;
+      const cy = (cRect.top + cRect.height / 2) - parentRect.top;
+
+      agents.forEach(id => {
+        const el = document.getElementById(id);
+        const aRect = el.getBoundingClientRect();
+        
+        const ax = (aRect.left + aRect.width / 2) - parentRect.left;
+        const ay = (aRect.top + aRect.height / 2) - parentRect.top;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', cx);
+        line.setAttribute('y1', cy);
+        line.setAttribute('x2', ax);
+        line.setAttribute('y2', ay);
+        line.setAttribute('class', 'connector-line');
+        svg.appendChild(line);
+      });
+    }
+
+    window.addEventListener('resize', drawLines);
+    // Use requestAnimationFrame to ensure elements are rendered before measuring
+    requestAnimationFrame(() => {
+      setTimeout(drawLines, 100);
+    });
+  </script>
 </body>
 </html>
