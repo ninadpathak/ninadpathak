@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SWE-bench Leaderboard | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
+    
+    .chart { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+    .row { display: grid; grid-template-columns: 160px 1fr 60px; align-items: center; gap: 20px; }
+    .label { font-size: 12px; text-align: right; color: #888; }
+    .track { height: 14px; background: var(--bg); border: 1px solid var(--border); position: relative; }
+    .fill { height: 100%; background: var(--accent); width: 0%; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .val { font-size: 11px; font-weight: 600; color: var(--accent); }
+    
+    .legend { margin-top: 30px; font-size: 10px; color: #888; border-top: 1px solid var(--border); padding-top: 15px; }
+  </style>
+</head>
+<body>
+  <div style="text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Benchmarks</div>
+    <div style="font-size: 16px; font-weight: 600;">SWE-bench Verified (Resolved %)</div>
+  </div>
+
+  <div class="chart" id="chart"></div>
+
+  <div class="legend">* Data from latest SWE-bench Verified leaderboard. Proprietary models shown with agentic harnesses.</div>
+
+  <script>
+    const data = [
+      { name: "Claude 3.5 Sonnet", val: 49.0 },
+      { name: "Claude 3.5 Opus", val: 52.4 },
+      { name: "GPT-4o (2024-08)", val: 42.1 },
+      { name: "Gemini 1.5 Pro", val: 38.5 },
+      { name: "DeepSeek V2.5", val: 35.8 },
+      { name: "Llama 3.1 405B", val: 28.2 }
+    ];
+
+    const chart = document.getElementById('chart');
+    const max = 60;
+
+    data.forEach(d => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML = `
+        <div class="label">${d.name}</div>
+        <div class="track"><div class="fill" style="width: 0%"></div></div>
+        <div class="val">${d.val}%</div>
+      `;
+      chart.appendChild(row);
+      setTimeout(() => {
+        row.querySelector('.fill').style.width = (d.val / max * 100) + '%';
+      }, 100);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agent Harness Architecture | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    
+    .diagram {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+    }
+
+    .comp {
+      border: 1px solid var(--border);
+      padding: 20px;
+      background: var(--bg);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      min-height: 100px;
+    }
+
+    .comp:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .comp.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(255, 95, 31, 0.1);
+    }
+
+    .comp-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      letter-spacing: 0.1em;
+    }
+
+    .comp-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .llm-core {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 16px;
+      background: var(--bg);
+      z-index: 2;
+    }
+
+    #info-panel {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 800px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      min-height: 80px;
+    }
+
+    .info-text {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    .arrow {
+      position: absolute;
+      color: var(--border);
+      font-size: 20px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div style="margin-bottom: 30px; text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Architecture</div>
+    <div style="font-size: 16px; font-weight: 600;">The 5 Components of an Agent Harness</div>
+  </div>
+
+  <div class="diagram">
+    <div class="comp" data-id="registry">
+      <div class="comp-label">01</div>
+      <div class="comp-title">Tool Registry</div>
+    </div>
+    <div class="llm-core">LLM Reasoning Core</div>
+    <div class="comp" data-id="loop">
+      <div class="comp-label">03</div>
+      <div class="comp-title">Execution Loop</div>
+    </div>
+    <div class="comp" data-id="assembler">
+      <div class="comp-label">02</div>
+      <div class="comp-title">Prompt Assembler</div>
+    </div>
+    <div class="comp" data-id="state">
+      <div class="comp-label">04</div>
+      <div class="comp-title">State Manager</div>
+    </div>
+    <div class="comp" data-id="observer">
+      <div class="comp-label">05</div>
+      <div class="comp-title">Observer</div>
+    </div>
+  </div>
+
+  <div id="info-panel">
+    <div class="comp-label" id="info-label">Select a component to learn more</div>
+    <div class="info-text" id="info-content">Click on any module above to see how it supports the core reasoning process.</div>
+  </div>
+
+  <script>
+    const data = {
+      registry: {
+        title: "Tool Registry",
+        text: "Manages tool definitions, schemas, and execution handlers. Enforces permissions and rate limits at the boundary."
+      },
+      assembler: {
+        title: "Prompt Assembler",
+        text: "Dynamically constructs the context window from system prompts, message history, and retrieved context at runtime."
+      },
+      loop: {
+        title: "Execution Loop",
+        text: "The core orchestration logic. Manages token generation, tool call parsing, and stop condition enforcement."
+      },
+      state: {
+        title: "State Manager",
+        text: "Handles durable persistence and checkpointing. Ensures the agent can recover from partial failures without restarting."
+      },
+      observer: {
+        title: "Observer",
+        text: "Captures high-fidelity traces of every step. Provides the visibility needed to debug reasoning failures in production."
+      }
+    };
+
+    document.querySelectorAll('.comp').forEach(el => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.comp').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        
+        const id = el.dataset.id;
+        document.getElementById('info-label').innerText = "// " + data[id].title;
+        document.getElementById('info-content').innerText = data[id].text;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agentic Success Rate | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    
+    .circles { display: flex; gap: 60px; margin-top: 40px; }
+    .circle-item { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    
+    .radial { width: 120px; height: 120px; position: relative; }
+    .radial svg { transform: rotate(-90deg); }
+    .radial-bg { fill: none; stroke: var(--border); stroke-width: 8; }
+    .radial-fill { fill: none; stroke: var(--accent); stroke-width: 8; stroke-dasharray: 314; stroke-dashoffset: 314; transition: stroke-dashoffset 2s cubic-bezier(0.16, 1, 0.3, 1); }
+    
+    .percent { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; color: var(--accent); }
+    .name { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .desc { font-size: 10px; color: #888; text-align: center; max-width: 100px; }
+  </style>
+</head>
+<body>
+  <div style="text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Autonomous Coding</div>
+    <div style="font-size: 16px; font-weight: 600;">Agentic Success Rate (End-to-End Tasks)</div>
+  </div>
+
+  <div class="circles">
+    <div class="circle-item">
+      <div class="radial">
+        <svg width="120" height="120"><circle class="radial-bg" cx="60" cy="60" r="50"/><circle id="f1" class="radial-fill" cx="60" cy="60" r="50"/></svg>
+        <div class="percent">52%</div>
+      </div>
+      <div class="name">Claude 3.5</div>
+      <div class="desc">High tool calling accuracy</div>
+    </div>
+    <div class="circle-item">
+      <div class="radial">
+        <svg width="120" height="120"><circle class="radial-bg" cx="60" cy="60" r="50"/><circle id="f2" class="radial-fill" cx="60" cy="60" r="50"/></svg>
+        <div class="percent">42%</div>
+      </div>
+      <div class="name">GPT-4o</div>
+      <div class="desc">Strong instruction following</div>
+    </div>
+    <div class="circle-item">
+      <div class="radial">
+        <svg width="120" height="120"><circle class="radial-bg" cx="60" cy="60" r="50"/><circle id="f3" class="radial-fill" cx="60" cy="60" r="50"/></svg>
+        <div class="percent">36%</div>
+      </div>
+      <div class="name">DeepSeek</div>
+      <div class="desc">Exceptional logic density</div>
+    </div>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('f1').style.strokeDashoffset = 314 * (1 - 0.52);
+      document.getElementById('f2').style.strokeDashoffset = 314 * (1 - 0.42);
+      document.getElementById('f3').style.strokeDashoffset = 314 * (1 - 0.36);
+    }, 500);
+  </script>
+</body>
+</html>

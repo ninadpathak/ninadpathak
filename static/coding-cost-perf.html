@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cost-Performance Coding | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; }
+    
+    .scatter-wrap { flex: 1; border: 1px solid var(--border); position: relative; margin-top: 20px; }
+    .dot { position: absolute; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; cursor: pointer; transition: transform 0.2s; transform: translate(-50%, 50%); }
+    .dot:hover { transform: translate(-50%, 50%) scale(1.5); }
+    .dot-label { position: absolute; font-size: 9px; color: #888; margin-top: -15px; white-space: nowrap; }
+    
+    .axis-x { position: absolute; bottom: -25px; left: 0; right: 0; text-align: center; font-size: 10px; color: #888; }
+    .axis-y { position: absolute; left: -45px; top: 0; bottom: 0; writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: 10px; color: #888; }
+    
+    #tooltip { position: fixed; background: var(--bg); border: 1px solid var(--accent); padding: 10px; font-size: 11px; display: none; pointer-events: none; z-index: 100; }
+  </style>
+</head>
+<body>
+  <div style="text-align: center;">
+    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Economic Analysis</div>
+    <div style="font-size: 16px; font-weight: 600;">Coding Cost vs Performance</div>
+  </div>
+
+  <div style="padding: 40px 60px; flex: 1;">
+    <div class="scatter-wrap" id="plot">
+      <div class="axis-x">Price per 1M tokens (USD) →</div>
+      <div class="axis-y">SWE-bench Verified (%) →</div>
+    </div>
+  </div>
+  <div id="tooltip"></div>
+
+  <script>
+    const data = [
+      { name: "Claude 3.5 Sonnet", cost: 3.0, perf: 49.0 },
+      { name: "GPT-4o", cost: 5.0, perf: 42.1 },
+      { name: "Claude 3.5 Opus", cost: 15.0, perf: 52.4 },
+      { name: "DeepSeek V3", cost: 0.2, perf: 35.8 },
+      { name: "Gemini 1.5 Pro", cost: 3.5, perf: 38.5 },
+      { name: "Llama 3.1 405B", cost: 2.0, perf: 28.2 }
+    ];
+
+    const plot = document.getElementById('plot');
+    const tooltip = document.getElementById('tooltip');
+    const maxCost = 16;
+    const maxPerf = 60;
+
+    data.forEach(d => {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      const x = (d.cost / maxCost) * 100;
+      const y = 100 - (d.perf / maxPerf * 100);
+      dot.style.left = x + '%';
+      dot.style.top = y + '%';
+      
+      const label = document.createElement('div');
+      label.className = 'dot-label';
+      label.innerText = d.name;
+      dot.appendChild(label);
+
+      dot.onmouseenter = (e) => {
+        tooltip.style.display = 'block';
+        tooltip.style.left = e.clientX + 15 + 'px';
+        tooltip.style.top = e.clientY + 15 + 'px';
+        tooltip.innerHTML = `<strong>${d.name}</strong><br>Cost: $${d.cost}/1M<br>Score: ${d.perf}%`;
+      };
+      dot.onmouseleave = () => tooltip.style.display = 'none';
+      
+      plot.appendChild(dot);
+    });
+  </script>
+</body>
+</html>
