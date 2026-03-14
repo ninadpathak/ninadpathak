@@ -1,4 +1,12 @@
 projects:
+  - title: "Technical Writing Linter"
+    description: "A specialized tool for technical writers and DevTools teams to flag patterns that make readers close the tab: condescension, AI signals, and fluff."
+    url: "/linter/"
+    tech_stack:
+      - "Vanilla JS"
+      - "CSS"
+    category: "Tooling / DX"
+    status: "Live"
   - title: "Social Ground"
     description: "A social media automation tool designed to streamline content scheduling and engagement across multiple platforms."
     url: "https://socialgroundhq.com"

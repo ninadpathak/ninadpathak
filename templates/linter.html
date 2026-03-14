@@ -28,55 +28,65 @@
     <div class="linter-layout">
 
       <!-- INPUT PANEL -->
-      <div class="linter-input-panel">
-        <div class="linter-input-header">
+      <div class="linter-panel linter-input-panel">
+        <div class="linter-panel-header">
           <span class="linter-file-label">article.txt</span>
-          <div class="linter-input-header-actions">
+          <div class="linter-panel-header-actions">
             <span class="linter-shortcut">⌘↩ to run</span>
             <button class="linter-sample-btn" id="loadSample">load sample</button>
           </div>
         </div>
-        <textarea
-          id="linterInput"
-          class="linter-textarea"
-          placeholder="Paste your article, tutorial, or technical post here..."
-          spellcheck="false"
-          autocomplete="off"
-        ></textarea>
-        <div class="linter-input-footer">
+        
+        <div class="linter-editor-container">
+          <div
+            id="linterInput"
+            class="linter-editor"
+            contenteditable="true"
+            spellcheck="false"
+            placeholder="Paste your article, tutorial, or technical post here..."
+          ></div>
+        </div>
+
+        <div class="linter-panel-footer">
           <span class="linter-char-count" id="charCount">0 words</span>
-          <button class="btn btn-primary" id="lintBtn">Run Lint →</button>
+          <button class="btn btn-primary btn-sm" id="lintBtn">Run Lint →</button>
         </div>
       </div>
 
-      <!-- OUTPUT PANEL (hidden until lint runs) -->
-      <div class="linter-output-panel" id="linterOutput" hidden>
+      <!-- OUTPUT PANEL -->
+      <div class="linter-panel linter-output-panel" id="linterOutput">
+        <div class="linter-panel-header">
+          <span class="linter-file-label">results.log</span>
+          <div class="linter-panel-header-actions">
+            <button class="linter-action-btn" id="clearLinter">clear</button>
+            <button class="linter-action-btn" id="copyResults">copy</button>
+          </div>
+        </div>
 
-        <div class="lint-score-bar" id="lintScoreBar">
-          <div class="lint-score-left">
-            <div class="lint-score-number" id="lintScore">--</div>
-            <div class="lint-score-label">
-              <span class="lint-grade" id="lintGrade">-</span>
-              <span class="lint-grade-desc" id="lintGradeDesc"></span>
+        <div class="linter-results-container">
+          <!-- EMPTY STATE -->
+          <div class="linter-empty" id="linterEmpty">
+            <div class="linter-empty-inner">
+              <div class="linter-empty-icon">{ }</div>
+              <p>Results appear here after you run the linter.</p>
             </div>
           </div>
-          <div class="lint-score-stats" id="lintStats"></div>
-        </div>
 
-        <div class="lint-issues" id="lintIssues"></div>
+          <!-- RESULTS CONTENT -->
+          <div class="linter-results-content" id="linterResults" hidden>
+            <div class="lint-score-bar" id="lintScoreBar">
+              <div class="lint-score-left">
+                <div class="lint-score-number" id="lintScore">--</div>
+                <div class="lint-score-label">
+                  <span class="lint-grade" id="lintGrade">-</span>
+                  <span class="lint-grade-desc" id="lintGradeDesc"></span>
+                </div>
+              </div>
+              <div class="lint-score-stats" id="lintStats"></div>
+            </div>
 
-        <div class="lint-actions">
-          <button class="btn btn-outline btn-sm" id="copyResults">Copy Results</button>
-          <button class="btn btn-outline btn-sm" id="clearLinter">Clear</button>
-        </div>
-
-      </div>
-
-      <!-- EMPTY STATE -->
-      <div class="linter-empty" id="linterEmpty">
-        <div class="linter-empty-inner">
-          <div class="linter-empty-icon">{ }</div>
-          <p>Results appear here after you run the linter.</p>
+            <div class="lint-issues" id="lintIssues"></div>
+          </div>
         </div>
       </div>
 
