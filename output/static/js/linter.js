@@ -304,6 +304,9 @@
       html += '</div>';
     });
 
+    var container = document.querySelector('.linter-results-container');
+    container.scrollTop = 0;
+
     issuesEl.innerHTML = html || '<div style="padding: 2rem; text-align: center; color: var(--text-3); font-family: var(--mono); font-size: 0.8rem;">No issues found. Perfect.</div>';
     document.getElementById('linterResults').hidden = false;
     document.getElementById('linterEmpty').hidden = true;

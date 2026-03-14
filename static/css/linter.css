@@ -271,6 +271,10 @@
 
 /* ── Highlighting ───────────────────────────────────────────────────── */
 
+[hidden] {
+  display: none !important;
+}
+
 .lint-highlight {
   cursor: pointer;
   border-bottom: 2px solid transparent;
