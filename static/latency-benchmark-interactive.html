@@ -8,11 +8,19 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090909;
-      --accent: #ff5f1f;
-      --border: #1e1e1e;
-      --text: #f0f0f0;
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
       --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
     }
     body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
     .header { margin-bottom: 30px; }
@@ -21,16 +29,16 @@
     
     .chart-container { display: flex; flex-direction: column; gap: 15px; margin-top: 40px; }
     .bar-row { display: grid; grid-template-columns: 140px 1fr 60px; align-items: center; gap: 20px; }
-    .bar-label { font-size: 12px; color: #aaa; text-align: right; }
-    .bar-track { height: 12px; background: #1a1a1a; position: relative; }
+    .bar-label { font-size: 12px; color: #888; text-align: right; }
+    .bar-track { height: 12px; background: var(--bg); border: 1px solid var(--border); position: relative; }
     .bar-fill { height: 100%; background: var(--accent); transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-    .bar-val { font-size: 11px; color: var(--accent); font-weight: 500; }
+    .bar-val { font-size: 11px; color: var(--accent); font-weight: 600; }
     
     .tabs { display: flex; gap: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-    .tab { padding: 10px 0; font-size: 11px; color: #666; cursor: pointer; border-bottom: 2px solid transparent; text-transform: uppercase; }
-    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab { padding: 10px 0; font-size: 11px; color: #888; cursor: pointer; border-bottom: 2px solid transparent; text-transform: uppercase; }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
     
-    .legend { margin-top: 30px; font-size: 10px; color: #555; }
+    .legend { margin-top: 30px; font-size: 10px; color: #888; }
   </style>
 </head>
 <body>

@@ -8,11 +8,19 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090909;
-      --accent: #ff5f1f;
-      --border: #1e1e1e;
-      --text: #f0f0f0;
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
       --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
     }
     body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
     .header { margin-bottom: 30px; }
@@ -20,17 +28,17 @@
     .title { font-size: 18px; font-weight: 500; }
     
     .viz-container { display: flex; flex-direction: column; gap: 40px; }
-    .vector-track { height: 60px; background: #111; border: 1px solid var(--border); position: relative; display: flex; align-items: center; padding: 0 10px; }
-    .vector-cell { flex: 1; height: 30px; margin: 2px; background: var(--accent); opacity: 0.3; transition: opacity 0.3s; }
+    .vector-track { height: 60px; background: var(--bg); border: 1px solid var(--border); position: relative; display: flex; align-items: center; padding: 0 10px; }
+    .vector-cell { flex: 1; height: 30px; margin: 2px; background: var(--accent); opacity: 0.1; transition: opacity 0.2s; }
     .vector-cell.active { opacity: 1; }
     
     .controls { display: flex; align-items: center; gap: 20px; }
-    input[type=range] { flex: 1; accent-color: var(--accent); }
+    input[type=range] { flex: 1; accent-color: var(--accent); cursor: pointer; }
     
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .stat-box { border: 1px solid var(--border); padding: 20px; }
-    .stat-num { font-size: 24px; color: var(--accent); margin-bottom: 5px; }
-    .stat-label { font-size: 11px; color: #666; text-transform: uppercase; }
+    .stat-num { font-size: 24px; color: var(--accent); margin-bottom: 5px; font-weight: 600; }
+    .stat-label { font-size: 11px; color: #888; text-transform: uppercase; }
   </style>
 </head>
 <body>
@@ -43,9 +51,9 @@
     <div class="vector-track" id="vectorTrack"></div>
     
     <div class="controls">
-      <span class="stat-label">Dimensions:</span>
-      <input type="range" id="dimRange" min="8" max="256" step="8" value="256">
-      <span id="dimVal" style="color: var(--accent); width: 40px;">256</span>
+      <span class="stat-label" style="min-width: 100px;">Dimensions:</span>
+      <input type="range" id="dimRange" min="1" max="128" step="1" value="128">
+      <span id="dimVal" style="color: var(--accent); width: 40px; font-weight: 600;">128</span>
     </div>
 
     <div class="stats">
@@ -54,12 +62,12 @@
         <div class="stat-label">Retrieval Recall</div>
       </div>
       <div class="stat-box">
-        <div id="storage" class="stat-num">1.02 MB</div>
-        <div class="stat-label">Storage Footprint (1k vectors)</div>
+        <div id="storage" class="stat-num">0.51 MB</div>
+        <div class="stat-label">Footprint (1k)</div>
       </div>
       <div class="stat-box">
-        <div id="latency" class="stat-num">0.4ms</div>
-        <div class="stat-label">Search Latency</div>
+        <div id="latency" class="stat-num">0.2ms</div>
+        <div class="stat-label">Latency</div>
       </div>
     </div>
   </div>
@@ -72,7 +80,8 @@
     const storageEl = document.getElementById('storage');
     const latencyEl = document.getElementById('latency');
 
-    for (let i = 0; i < 256; i++) {
+    const totalCells = 128;
+    for (let i = 0; i < totalCells; i++) {
       const cell = document.createElement('div');
       cell.className = 'vector-cell active';
       track.appendChild(cell);
@@ -80,7 +89,7 @@
 
     const cells = track.querySelectorAll('.vector-cell');
 
-    range.addEventListener('input', () => {
+    function update() {
       const val = parseInt(range.value);
       dimVal.innerText = val;
       
@@ -89,16 +98,18 @@
         else cell.classList.remove('active');
       });
 
-      // Simulated metrics based on typical Matryoshka behavior
-      const ratio = val / 256;
-      const recall = 90 + (Math.sqrt(ratio) * 10);
+      const ratio = val / 128;
+      const recall = 85 + (Math.pow(ratio, 0.2) * 14.8);
       const storage = (val * 4 * 1000) / (1024 * 1024);
-      const latency = 0.1 + (ratio * 0.3);
+      const latency = 0.05 + (ratio * 0.15);
 
       recallEl.innerText = recall.toFixed(1) + '%';
       storageEl.innerText = storage.toFixed(2) + ' MB';
       latencyEl.innerText = latency.toFixed(2) + 'ms';
-    });
+    }
+
+    range.addEventListener('input', update);
+    update();
   </script>
 </body>
 </html>

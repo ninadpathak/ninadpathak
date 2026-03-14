@@ -8,11 +8,19 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090909;
-      --accent: #ff5f1f;
-      --border: #1e1e1e;
-      --text: #f0f0f0;
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
       --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
     }
     body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; display: flex; align-items: center; justify-content: center; height: 100vh; }
     .container { display: flex; gap: 40px; align-items: center; width: 100%; padding: 40px; box-sizing: border-box; }
@@ -22,8 +30,8 @@
     .title { font-size: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
     .stat { margin-bottom: 20px; }
     .stat-val { font-size: 24px; color: var(--accent); font-weight: 500; }
-    .stat-label { font-size: 11px; color: #666; margin-top: 4px; }
-    .relationship { font-size: 13px; color: #aaa; line-height: 1.5; margin-top: 20px; }
+    .stat-label { font-size: 11px; color: #888; margin-top: 4px; }
+    .relationship { font-size: 13px; color: #888; line-height: 1.5; margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -74,10 +82,11 @@
     }
 
     function draw() {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       ctx.clearRect(0, 0, width, height);
 
       // Grid
-      ctx.strokeStyle = '#1e1e1e';
+      ctx.strokeStyle = isDark ? '#1e1e1e' : '#e0e0dc';
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(centerX - radius - 20, centerY);
@@ -87,15 +96,15 @@
       ctx.stroke();
 
       // Unit Circle
-      ctx.strokeStyle = '#222';
+      ctx.strokeStyle = isDark ? '#222' : '#f0f0f0';
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
       ctx.stroke();
 
       // Vector 1
-      drawVector(v1, '#666', 'v1');
+      drawVector(v1, isDark ? '#666' : '#888', 'v1');
       // Vector 2
-      drawVector(v2, '#ff5f1f', 'v2');
+      drawVector(v2, isDark ? '#ff5f1f' : '#d44000', 'v2');
 
       requestAnimationFrame(draw);
     }

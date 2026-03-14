@@ -8,18 +8,26 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090909;
-      --accent: #ff5f1f;
-      --border: #1e1e1e;
-      --text: #f0f0f0;
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
       --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
     }
     body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
     .search-stage { display: flex; flex-direction: column; align-items: center; gap: 40px; height: 100%; }
-    .input-box { border: 1px solid var(--border); padding: 10px 20px; font-size: 14px; color: var(--accent); }
+    .input-box { border: 1px solid var(--border); padding: 10px 20px; font-size: 14px; color: var(--accent); font-weight: 600; background: var(--bg); }
     .grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; width: 100%; max-width: 600px; }
-    .item { aspect-ratio: 1; border: 1px solid var(--border); transition: all 0.5s; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #333; }
-    .match { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px var(--accent); transform: scale(1.1); }
+    .item { aspect-ratio: 1; border: 1px solid var(--border); transition: all 0.5s; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #888; }
+    .match { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px var(--accent); transform: scale(1.1); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -31,7 +39,6 @@
   <script>
     const grid = document.getElementById('grid');
     const queries = ["Financial results", "Python coding", "Nature hiking", "Modern art"];
-    const keywords = ["Revenue", "Profit", "Shares", "Earnings", "Tax", "Deficit", "Budget", "Stocks"];
     
     for(let i=0; i<50; i++) {
       const item = document.createElement('div');

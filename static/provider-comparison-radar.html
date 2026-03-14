@@ -8,17 +8,26 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090909;
-      --accent: #ff5f1f;
-      --border: #1e1e1e;
-      --text: #f0f0f0;
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
       --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
     }
     body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; height: 100vh; }
     canvas { background: transparent; }
     .ui { position: absolute; left: 40px; top: 40px; display: flex; flex-direction: column; gap: 10px; }
-    .btn { background: #1a1a1a; border: 1px solid var(--border); color: #666; padding: 10px 20px; font-size: 11px; text-transform: uppercase; cursor: pointer; }
-    .btn.active { color: var(--accent); border-color: var(--accent); }
+    .btn { background: var(--bg); border: 1px solid var(--border); color: #888; padding: 10px 20px; font-size: 11px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .btn:hover { border-color: var(--text); color: var(--text); }
+    .btn.active { color: var(--accent); border-color: var(--accent); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -54,6 +63,7 @@
     });
 
     function draw() {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const size = 400;
       canvas.width = size * window.devicePixelRatio;
       canvas.height = size * window.devicePixelRatio;
@@ -68,7 +78,7 @@
       ctx.clearRect(0, 0, size, size);
 
       // Web
-      ctx.strokeStyle = '#222';
+      ctx.strokeStyle = isDark ? '#222' : '#f0f0f0';
       for(let i=1; i<=5; i++) {
         const r = radius * (i/5);
         ctx.beginPath();
@@ -90,14 +100,14 @@
         ctx.lineTo(cx + radius * Math.cos(a), cy + radius * Math.sin(a));
         ctx.stroke();
         
-        ctx.fillStyle = '#555';
+        ctx.fillStyle = '#888';
         ctx.fillText(metrics[i], cx + (radius + 25) * Math.cos(a), cy + (radius + 25) * Math.sin(a));
       }
 
       // Shape
       const vals = providers[current];
-      ctx.fillStyle = 'rgba(255, 95, 31, 0.2)';
-      ctx.strokeStyle = '#ff5f1f';
+      ctx.fillStyle = isDark ? 'rgba(255, 95, 31, 0.2)' : 'rgba(212, 64, 0, 0.1)';
+      ctx.strokeStyle = isDark ? '#ff5f1f' : '#d44000';
       ctx.lineWidth = 2;
       ctx.beginPath();
       vals.forEach((v, i) => {

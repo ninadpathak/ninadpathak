@@ -8,20 +8,28 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090909;
-      --accent: #ff5f1f;
-      --border: #1e1e1e;
-      --text: #f0f0f0;
+      --bg: #f8f8f6;
+      --accent: #d44000;
+      --border: #e0e0dc;
+      --text: #0e0e0e;
       --mono: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090909;
+        --accent: #ff5f1f;
+        --border: #1e1e1e;
+        --text: #f0f0f0;
+      }
     }
     body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
     .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 100%; }
-    .side { border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; }
-    .label { font-size: 10px; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .side { border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; background: var(--bg); }
+    .label { font-size: 10px; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
     .bit-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; flex: 1; }
-    .bit { background: #1a1a1a; aspect-ratio: 1; border-radius: 2px; transition: background 0.2s; }
-    .bit.on { background: var(--accent); }
-    .float-val { font-size: 12px; color: #666; margin-top: 10px; }
+    .bit { background: var(--bg); border: 1px solid var(--border); aspect-ratio: 1; border-radius: 2px; transition: background 0.2s; }
+    .bit.on { background: var(--accent); border-color: var(--accent); }
+    .float-val { font-size: 11px; color: #888; margin-top: 10px; font-family: var(--mono); }
   </style>
 </head>
 <body>
