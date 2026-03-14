@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     .graph-stage { 
-      flex: 1; 
+      height: 350px; 
       border: 1px solid var(--border); 
       position: relative; 
       overflow: hidden; 
@@ -28,7 +28,7 @@
     .query-terminal {
       position: absolute;
       top: 20px;
-      right: 20px;
+      left: 20px;
       background: rgba(0,0,0,0.03);
       border: 1px solid var(--border);
       padding: 10px 15px;
@@ -36,6 +36,18 @@
       font-size: 10px;
       color: var(--accent);
       z-index: 20;
+      width: calc(100% - 40px);
+    }
+
+    .reasoning-path {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      z-index: 15;
+      box-shadow: 0 0 10px var(--accent);
+      display: none;
     }
   </style>
 </head>
@@ -50,37 +62,41 @@
     </div>
     
     <div class="graph-stage" id="stage">
-      <div class="query-terminal">&gt; SELECT relationships WHERE entity="Alice"</div>
+      <div class="query-terminal" id="terminal">&gt; INITIALIZING_REASONING_ENGINE...</div>
       <div id="links"></div>
       <div id="nodes"></div>
+      <div id="path-dot" class="reasoning-path"></div>
     </div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot"></div> ENGINE: COGNEE_CORE</div>
-      <div class="status-item">NODES: 1,240</div>
-      <div class="status-item">EDGES: 4,892</div>
+      <div class="status-item"><div class="status-dot pulse"></div> ENGINE: COGNEE_CORE</div>
+      <div class="status-item" id="hop-status">HOP: 0</div>
     </div>
   </div>
 
   <script>
     const nodesContainer = document.getElementById('nodes');
     const linksContainer = document.getElementById('links');
+    const terminal = document.getElementById('terminal');
+    const pathDot = document.getElementById('path-dot');
+    const hopStatus = document.getElementById('hop-status');
     
     const nodes = [
-      { x: 100, y: 100, label: 'Alice' },
-      { x: 250, y: 60, label: 'Reporting_Line' },
-      { x: 220, y: 180, label: 'Technical_Stack' },
-      { x: 400, y: 120, label: 'Project_Alpha' },
-      { x: 350, y: 220, label: 'Cloud_Infrastructure' }
+      { x: 100, y: 150, label: 'Bug_Report #402' },
+      { x: 250, y: 100, label: 'Commit_hash: f92k' },
+      { x: 220, y: 250, label: 'Module: Auth_Layer' },
+      { x: 450, y: 150, label: 'Developer: Alice' },
+      { x: 400, y: 280, label: 'Team: Security' }
     ];
 
     const links = [
-      { from: 0, to: 1 }, { from: 1, to: 3 }, { from: 0, to: 2 }, { from: 2, to: 4 }
+      { from: 0, to: 1 }, { from: 1, to: 3 }, { from: 0, to: 2 }, { from: 3, to: 4 }
     ];
 
     nodes.forEach((n, i) => {
       const el = document.createElement('div');
-      el.className = 'node' + (i === 0 ? ' pulse' : '');
+      el.className = 'node';
+      el.id = 'node-' + i;
       el.style.left = n.x + 'px';
       el.style.top = n.y + 'px';
       nodesContainer.appendChild(el);
@@ -106,6 +122,39 @@
       line.style.transform = `rotate(${angle}rad)`;
       linksContainer.appendChild(line);
     });
+
+    const chain = [0, 1, 3, 4];
+    let step = 0;
+
+    async function runReasoning() {
+      if(step >= chain.length) {
+        step = 0;
+        pathDot.style.display = 'none';
+        terminal.innerText = "> REASONING_COMPLETE. AUTHORITATIVE_NODE_FOUND.";
+        await new Promise(r => setTimeout(r, 2000));
+      }
+
+      const nodeIdx = chain[step];
+      const node = nodes[nodeIdx];
+      
+      pathDot.style.display = 'block';
+      pathDot.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      pathDot.style.left = (node.x + 3) + 'px';
+      pathDot.style.top = (node.y + 3) + 'px';
+      
+      document.querySelectorAll('.node').forEach(n => n.classList.remove('pulse'));
+      document.getElementById('node-' + nodeIdx).classList.add('pulse');
+      
+      terminal.innerText = `> HOP_${step}: ANALYZING_${node.label.toUpperCase()}`;
+      hopStatus.innerText = `HOP: ${step}`;
+      
+      step++;
+      setTimeout(runReasoning, 1200);
+    }
+
+    setTimeout(runReasoning, 1000);
+
+    function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);
   </script>
-<script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+</body>
 </html>
