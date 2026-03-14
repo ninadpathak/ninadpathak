@@ -64,5 +64,5 @@
       <div class="status-item">TRANSPORT: STDIO/SSE</div>
     </div>
   </div>
-</body>
+<script>function sendHeight(){const h=document.body.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
 </html>
