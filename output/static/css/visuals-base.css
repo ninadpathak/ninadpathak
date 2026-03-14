@@ -27,12 +27,9 @@ body {
   color: var(--text);
   font-family: var(--sans);
   padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   -webkit-font-smoothing: antialiased;
   position: relative;
-  overflow-x: hidden;
+  /* Removed flex-centering which caused squeezing */
 }
 
 /* Background Grid Overlay */
@@ -52,6 +49,7 @@ body::before {
 .viz-container {
   width: 100%;
   max-width: 800px;
+  margin: 0 auto; /* Standard centering */
   display: flex;
   flex-direction: column;
   position: relative;
@@ -94,6 +92,7 @@ body::before {
   margin-top: 30px;
   padding-top: 20px;
   border-top: 1px solid var(--border);
+  flex-wrap: wrap;
 }
 
 .status-item { display: flex; align-items: center; gap: 5px; }
