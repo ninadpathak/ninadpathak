@@ -339,7 +339,8 @@
 
     window.onload = () => {
       updatePaths();
-      setInterval(spawnToken, 3000);
+      spawnToken(); // Spawn immediately on load
+      setInterval(spawnToken, 2500); // Reduced interval for better flow
     };
 
     let resizeTimer;
