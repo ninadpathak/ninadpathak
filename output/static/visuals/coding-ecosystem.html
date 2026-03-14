@@ -2,58 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Copilot Ecosystem | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .map { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; margin-top: 20px; }
+    .layer { display: flex; gap: 24px; width: 100%; justify-content: center; flex-wrap: wrap; }
     
-    .map { display: flex; flex-direction: column; align-items: center; gap: 40px; }
-    .layer { display: flex; gap: 20px; }
-    .box { border: 1px solid var(--border); padding: 15px 25px; background: var(--bg); font-size: 12px; transition: border-color 0.3s; }
-    .box.active { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+    .box { border: 1px solid var(--border); padding: 16px 24px; background: var(--bg); font-family: var(--mono); font-size: 11px; transition: all 0.3s; color: var(--text-dim); text-align: center; }
+    .box.active { border-color: var(--accent); color: var(--accent); font-weight: 600; box-shadow: 0 4px 12px rgba(212, 64, 0, 0.05); }
     
-    .connector { height: 40px; width: 2px; background: var(--border); position: relative; }
-    .connector::after { content: '↓'; position: absolute; bottom: -10px; left: -4px; color: var(--border); }
+    .connector { height: 40px; width: 1px; background: var(--border); position: relative; }
+    .connector::after { content: '↓'; position: absolute; bottom: -10px; left: -4px; color: var(--border); font-size: 14px; }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 40px; text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Infrastructure</div>
-    <div style="font-size: 16px; font-weight: 600;">The AI Coding Ecosystem</div>
-  </div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Infrastructure</div>
+        <h1 class="title">The AI Coding Ecosystem</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Integration_Layers</div>
+    </div>
 
-  <div class="map">
-    <div class="layer">
-      <div class="box active">OpenAI Codex / GPT-4o</div>
-      <div class="box">Claude 3.5</div>
+    <div class="map">
+      <div class="layer">
+        <div class="box active">OpenAI Codex / GPT-5.4</div>
+        <div class="box">Claude 4.6</div>
+      </div>
+      <div class="connector"></div>
+      <div class="layer">
+        <div class="box active">GitHub Copilot API</div>
+        <div class="box">Cursor Backend</div>
+      </div>
+      <div class="connector"></div>
+      <div class="layer">
+        <div class="box">VS Code Extension</div>
+        <div class="box active">IDE Native (Cursor)</div>
+        <div class="box">JetBrains Plugin</div>
+      </div>
     </div>
-    <div class="connector"></div>
-    <div class="layer">
-      <div class="box active">GitHub Copilot API</div>
-      <div class="box">Cursor Backend</div>
-    </div>
-    <div class="connector"></div>
-    <div class="layer">
-      <div class="box">VS Code Extension</div>
-      <div class="box active">IDE Native (Cursor)</div>
-      <div class="box">JetBrains Plugin</div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> FOCUS: AUTOCOMPLETE</div>
+      <div class="status-item">LATENCY_BUDGET: &lt;50ms</div>
     </div>
   </div>
 </body>

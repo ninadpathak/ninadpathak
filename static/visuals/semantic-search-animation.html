@@ -2,45 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Semantic Search | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
+    .search-stage { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-top: 20px; }
+    
+    .input-box { border: 1px solid var(--accent); padding: 15px 30px; font-family: var(--mono); font-size: 14px; color: var(--accent); font-weight: 600; background: rgba(212, 64, 0, 0.05); width: 100%; max-width: 500px; text-align: center; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(30px, 1fr)); gap: 8px; width: 100%; max-width: 600px; }
+    .item { aspect-ratio: 1; border: 1px solid var(--border); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: center; font-size: 8px; color: var(--text-dim); background: var(--bg); }
+    .match { border-color: var(--accent); color: var(--accent); background: var(--accent); color: var(--bg); transform: scale(1.2); z-index: 10; font-weight: 700; box-shadow: 0 4px 12px rgba(212, 64, 0, 0.3); }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(20px, 1fr)); gap: 4px; }
+      .input-box { font-size: 11px; padding: 10px; }
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
-    .search-stage { display: flex; flex-direction: column; align-items: center; gap: 40px; height: 100%; }
-    .input-box { border: 1px solid var(--border); padding: 10px 20px; font-size: 14px; color: var(--accent); font-weight: 600; background: var(--bg); }
-    .grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; width: 100%; max-width: 600px; }
-    .item { aspect-ratio: 1; border: 1px solid var(--border); transition: all 0.5s; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #888; }
-    .match { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px var(--accent); transform: scale(1.1); font-weight: 600; }
   </style>
 </head>
 <body>
-  <div class="search-stage">
-    <div class="input-box" id="input">Query: "Financial results"</div>
-    <div class="grid" id="grid"></div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Retrieval_Pipeline</div>
+        <h1 class="title">Semantic Search Matching</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">ANN_Lookup</div>
+    </div>
+    
+    <div class="search-stage">
+      <div class="input-box" id="input">QUERY: "Financial results Q3"</div>
+      <div class="grid" id="grid"></div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot pulse"></div> INDEX: FAISS_HNSW</div>
+      <div class="status-item" id="latency-val">LATENCY: 12ms</div>
+      <div class="status-item">DOCS: 2.4M</div>
+    </div>
   </div>
 
   <script>
     const grid = document.getElementById('grid');
-    const queries = ["Financial results", "Python coding", "Nature hiking", "Modern art"];
+    const latencyVal = document.getElementById('latency-val');
+    const queries = ["Financial results Q3", "Python memory optimization", "System architecture diagram", "OAuth2 implementation flow"];
     
-    for(let i=0; i<50; i++) {
+    const isMobile = window.innerWidth < 600;
+    const numDocs = isMobile ? 80 : 120;
+
+    for(let i=0; i<numDocs; i++) {
       const item = document.createElement('div');
       item.className = 'item';
       item.innerText = 'DOC';
@@ -52,11 +65,12 @@
 
     function next() {
       items.forEach(i => i.classList.remove('match'));
-      document.getElementById('input').innerText = `Query: "${queries[qIdx]}"`;
+      document.getElementById('input').innerText = `QUERY: "${queries[qIdx]}"`;
+      latencyVal.innerText = `LATENCY: ${10 + Math.floor(Math.random() * 15)}ms`;
       
-      const count = 3 + Math.floor(Math.random() * 5);
+      const count = 3 + Math.floor(Math.random() * 4);
       for(let i=0; i<count; i++) {
-        const idx = Math.floor(Math.random() * 50);
+        const idx = Math.floor(Math.random() * numDocs);
         items[idx].classList.add('match');
       }
       

@@ -2,63 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agent Checkpointing | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
+    .compare-grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; }
+    .lane { border: 1px solid var(--border); padding: 20px; position: relative; display: flex; flex-direction: column; background: var(--bg); }
+    .lane-title { font-family: var(--mono); font-size: 10px; color: var(--accent); text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.1em; font-weight: 600; }
+    
+    .steps-list { display: flex; flex-direction: column; gap: 6px; flex: 1; overflow: hidden; }
+    .step-item { height: 24px; border: 1px solid var(--border); display: flex; align-items: center; padding: 0 12px; font-family: var(--mono); font-size: 9px; background: rgba(0,0,0,0.02); transition: all 0.2s; color: var(--text-dim); }
+    .step-item.done { border-color: var(--border); background: var(--border); color: var(--bg); font-weight: 600; }
+    .step-item.fail { border-color: var(--accent); color: var(--accent); background: rgba(212, 64, 0, 0.1); font-weight: 600; }
+    
+    .fail-overlay { position: absolute; inset: 0; background: rgba(212, 64, 0, 0.1); backdrop-filter: blur(2px); display: none; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 600; color: var(--accent); font-size: 11px; z-index: 10; text-align: center; padding: 20px; line-height: 1.5; border: 1px solid var(--accent); }
+    
+    .btn-wrap { display: flex; justify-content: center; margin-top: 30px; }
+    .btn { padding: 12px 24px; border: 1px solid var(--border); color: var(--text); background: var(--bg); cursor: pointer; font-family: var(--mono); font-size: 11px; font-weight: 600; transition: all 0.2s; text-transform: uppercase; }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .compare-grid { grid-template-columns: 1fr; gap: 20px; }
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); padding: 40px; box-sizing: border-box; min-height: 450px; }
-    
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 300px; }
-    .lane { border: 1px solid var(--border); padding: 20px; position: relative; }
-    .lane-title { font-size: 11px; color: var(--accent); text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.1em; }
-    
-    .steps-list { display: flex; flex-direction: column; gap: 10px; }
-    .step-item { height: 30px; border: 1px solid var(--border); display: flex; align-items: center; padding: 0 15px; font-size: 11px; background: var(--bg); transition: all 0.3s; }
-    .step-item.done { border-color: var(--accent); background: var(--accent); color: #fff; }
-    .step-item.fail { border-color: #ff3b30; color: #ff3b30; background: rgba(255, 59, 48, 0.1); }
-    
-    .fail-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 59, 48, 0.1); display: none; align-items: center; justify-content: center; font-weight: 600; color: #ff3b30; font-size: 14px; z-index: 10; }
-    
-    .btn { margin-top: 30px; padding: 10px 20px; border: 1px solid var(--accent); color: var(--accent); cursor: pointer; font-size: 12px; }
-    .btn:hover { background: var(--accent); color: #fff; }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 30px;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Reliability</div>
-    <div style="font-size: 16px; font-weight: 600;">Work lost on execution failure</div>
-  </div>
-
-  <div class="compare-grid">
-    <div class="lane" id="no-checkpoint">
-      <div class="lane-title">Without Checkpointing</div>
-      <div class="steps-list" id="list-1"></div>
-      <div class="fail-overlay" id="overlay-1">RESTARTING FROM STEP 1</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Reliability_Engineering</div>
+        <h1 class="title">Work Lost on Execution Failure</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">State_Recovery</div>
     </div>
-    <div class="lane" id="with-checkpoint">
-      <div class="lane-title">With Checkpointing</div>
-      <div class="steps-list" id="list-2"></div>
-      <div class="fail-overlay" id="overlay-2">RESUMING FROM STEP 18</div>
+
+    <div class="compare-grid">
+      <div class="lane" id="no-checkpoint">
+        <div class="lane-title">Without Checkpointing</div>
+        <div class="steps-list" id="list-1"></div>
+        <div class="fail-overlay" id="overlay-1">CRITICAL_FAILURE<br><br>RESTARTING_FROM_STEP_01</div>
+      </div>
+      <div class="lane" id="with-checkpoint">
+        <div class="lane-title">With Checkpointing</div>
+        <div class="steps-list" id="list-2"></div>
+        <div class="fail-overlay" id="overlay-2">TRANSIENT_FAILURE<br><br>RESUMING_FROM_STEP_18</div>
+      </div>
+    </div>
+
+    <div class="btn-wrap">
+      <button class="btn" onclick="startSim()">Run Simulation</button>
+    </div>
+
+    <div class="status-bar" style="margin-top: 20px;">
+      <div class="status-item"><div class="status-dot"></div> SIMULATION_MODE</div>
+      <div class="status-item">TASK_LENGTH: 25_STEPS</div>
     </div>
   </div>
-
-  <button class="btn" onclick="startSim()">Run Simulation</button>
 
   <script>
     function createSteps(id) {
@@ -67,7 +69,7 @@
       for(let i=1; i<=25; i++) {
         const item = document.createElement('div');
         item.className = 'step-item';
-        item.innerText = `Step ${i}`;
+        item.innerText = `EXEC_STEP_${i.toString().padStart(2, '0')}`;
         list.appendChild(item);
       }
     }
@@ -75,7 +77,12 @@
     createSteps('list-1');
     createSteps('list-2');
 
+    let isRunning = false;
+
     async function startSim() {
+      if(isRunning) return;
+      isRunning = true;
+      
       createSteps('list-1');
       createSteps('list-2');
       const items1 = document.getElementById('list-1').children;
@@ -88,26 +95,26 @@
       for(let i=0; i<18; i++) {
         items1[i].classList.add('done');
         items2[i].classList.add('done');
-        await new Promise(r => setTimeout(r, 50));
+        await new Promise(r => setTimeout(r, 40));
       }
 
       items1[18].classList.add('fail');
       items2[18].classList.add('fail');
       
-      await new Promise(r => setTimeout(r, 500));
+      await new Promise(r => setTimeout(r, 600));
       
       overlay1.style.display = 'flex';
       overlay2.style.display = 'flex';
       
-      await new Promise(r => setTimeout(r, 1500));
+      await new Promise(r => setTimeout(r, 1800));
       
       overlay1.style.display = 'none';
       overlay2.style.display = 'none';
       
-      // Reset lane 1
       for(let i=0; i<19; i++) items1[i].classList.remove('done', 'fail');
-      // Lane 2 stays at 18
       items2[18].classList.remove('fail');
+      
+      isRunning = false;
     }
   </script>
 </body>

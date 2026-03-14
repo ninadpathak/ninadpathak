@@ -2,73 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Matryoshka Embeddings | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
-    .header { margin-bottom: 30px; }
-    .label { font-size: 10px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 5px; text-transform: uppercase; }
-    .title { font-size: 18px; font-weight: 500; }
+    .viz-body { flex: 1; display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
     
-    .viz-container { display: flex; flex-direction: column; gap: 40px; }
-    .vector-track { height: 60px; background: var(--bg); border: 1px solid var(--border); position: relative; display: flex; align-items: center; padding: 0 10px; }
-    .vector-cell { flex: 1; height: 30px; margin: 2px; background: var(--accent); opacity: 0.1; transition: opacity 0.2s; }
+    .vector-track { height: 60px; background: rgba(0,0,0,0.02); border: 1px solid var(--border); display: flex; align-items: center; padding: 0 5px; }
+    .vector-cell { flex: 1; height: 40px; margin: 0 1px; background: var(--accent); opacity: 0.1; transition: opacity 0.2s, background 0.2s; }
     .vector-cell.active { opacity: 1; }
     
-    .controls { display: flex; align-items: center; gap: 20px; }
-    input[type=range] { flex: 1; accent-color: var(--accent); cursor: pointer; }
+    .controls { display: flex; align-items: center; gap: 20px; font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+    input[type=range] { flex: 1; accent-color: var(--accent); cursor: pointer; height: 4px; background: var(--border); appearance: none; border-radius: 2px; }
+    input[type=range]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; background: var(--accent); border-radius: 50%; cursor: pointer; }
     
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .stat-box { border: 1px solid var(--border); padding: 20px; }
-    .stat-num { font-size: 24px; color: var(--accent); margin-bottom: 5px; font-weight: 600; }
-    .stat-label { font-size: 11px; color: #888; text-transform: uppercase; }
+    .stat-box { border: 1px solid var(--border); padding: 24px; text-align: center; background: var(--bg); transition: all 0.3s; }
+    .stat-num { font-family: var(--mono); font-size: 28px; color: var(--accent); font-weight: 600; margin-bottom: 8px; letter-spacing: -0.05em; }
+    .stat-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    @media (max-width: 600px) {
+      .stats { grid-template-columns: 1fr; gap: 10px; }
+      .stat-box { padding: 15px; }
+      .stat-num { font-size: 24px; }
+    }
   </style>
 </head>
 <body>
-  <div class="header">
-    <div class="label">// Nested Representations</div>
-    <div class="title">Matryoshka Embeddings</div>
-  </div>
-
   <div class="viz-container">
-    <div class="vector-track" id="vectorTrack"></div>
-    
-    <div class="controls">
-      <span class="stat-label" style="min-width: 100px;">Dimensions:</span>
-      <input type="range" id="dimRange" min="1" max="128" step="1" value="128">
-      <span id="dimVal" style="color: var(--accent); width: 40px; font-weight: 600;">128</span>
+    <div class="header-meta">
+      <div>
+        <div class="label">// Truncation_Resilience</div>
+        <h1 class="title">Matryoshka Representation Learning</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Dynamic_Sizing</div>
     </div>
 
-    <div class="stats">
-      <div class="stat-box">
-        <div id="recall" class="stat-num">99.8%</div>
-        <div class="stat-label">Retrieval Recall</div>
+    <div class="viz-body">
+      <div class="vector-track" id="vectorTrack"></div>
+      
+      <div class="controls">
+        <span style="min-width: 80px;">DIMENSIONS</span>
+        <input type="range" id="dimRange" min="1" max="128" step="1" value="128">
+        <span id="dimVal" style="color: var(--accent); font-weight: 600; min-width: 30px; text-align: right;">128</span>
       </div>
-      <div class="stat-box">
-        <div id="storage" class="stat-num">0.51 MB</div>
-        <div class="stat-label">Footprint (1k)</div>
+
+      <div class="stats">
+        <div class="stat-box">
+          <div id="recall" class="stat-num">99.8%</div>
+          <div class="stat-label">Retrieval Recall</div>
+        </div>
+        <div class="stat-box">
+          <div id="storage" class="stat-num">0.51 MB</div>
+          <div class="stat-label">Footprint (1k)</div>
+        </div>
+        <div class="stat-box">
+          <div id="latency" class="stat-num">0.2ms</div>
+          <div class="stat-label">Search Latency</div>
+        </div>
       </div>
-      <div class="stat-box">
-        <div id="latency" class="stat-num">0.2ms</div>
-        <div class="stat-label">Latency</div>
-      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot pulse"></div> MODEL: TEXT-EMBEDDING-3</div>
+      <div class="status-item">TRUNCATION: LOSSLESS</div>
     </div>
   </div>
 
@@ -84,6 +84,8 @@
     for (let i = 0; i < totalCells; i++) {
       const cell = document.createElement('div');
       cell.className = 'vector-cell active';
+      // Add a slight gradient effect to show "importance" is front-loaded
+      cell.style.opacity = 1 - (i / totalCells) * 0.5; 
       track.appendChild(cell);
     }
 
@@ -94,8 +96,15 @@
       dimVal.innerText = val;
       
       cells.forEach((cell, i) => {
-        if (i < val) cell.classList.add('active');
-        else cell.classList.remove('active');
+        if (i < val) {
+          cell.classList.add('active');
+          cell.style.background = 'var(--accent)';
+          cell.style.opacity = 1 - (i / totalCells) * 0.5;
+        } else {
+          cell.classList.remove('active');
+          cell.style.background = 'var(--border)';
+          cell.style.opacity = 0.2;
+        }
       });
 
       const ratio = val / 128;

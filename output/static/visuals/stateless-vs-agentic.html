@@ -2,61 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stateless vs Agentic | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
+    .split { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; }
+    .side { border: 1px solid var(--border); padding: 30px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: var(--bg); position: relative; }
+    .side-label { position: absolute; top: -10px; left: 20px; font-family: var(--mono); font-size: 10px; color: var(--text-dim); background: var(--bg); padding: 0 8px; text-transform: uppercase; font-weight: 600; }
     
-    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 300px; }
-    .side { border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-    .label { font-size: 10px; color: var(--accent); text-transform: uppercase; margin-bottom: 20px; }
+    .box { border: 1px solid var(--border); padding: 12px 16px; margin: 6px 0; font-family: var(--mono); font-size: 10px; width: 85%; background: var(--bg); transition: all 0.2s; font-weight: 500; color: var(--text-dim); }
+    .arrow { font-size: 16px; color: var(--border); margin: 2px 0; line-height: 1; }
     
-    .box { border: 1px solid var(--border); padding: 15px; margin: 5px; font-size: 12px; width: 80%; background: var(--bg); }
-    .arrow { font-size: 20px; color: var(--border); margin: 5px 0; }
-    .active-box { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+    .active-box { border-color: var(--accent); color: var(--accent); font-weight: 600; box-shadow: 0 4px 12px rgba(212, 64, 0, 0.05); }
+    .dashed-box { border-style: dashed; }
+
+    @media (max-width: 600px) {
+      .split { grid-template-columns: 1fr; gap: 30px; }
+      .side { padding: 25px 15px; }
+    }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 40px; text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Workflow Patterns</div>
-    <div style="font-size: 16px; font-weight: 600;">Stateless API Call vs Statefull Agent Harness</div>
-  </div>
-
-  <div class="split">
-    <div class="side">
-      <div class="label">Standard API</div>
-      <div class="box">Prompt</div>
-      <div class="arrow">↓</div>
-      <div class="box active-box">LLM Generation</div>
-      <div class="arrow">↓</div>
-      <div class="box">Result</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Workflow_Patterns</div>
+        <h1 class="title">Stateless API vs Agent Harness</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Execution_Flow</div>
     </div>
-    <div class="side">
-      <div class="label">Agent Harness</div>
-      <div class="box">Prompt + History</div>
-      <div class="arrow">↓</div>
-      <div class="box active-box">LLM Reasoning Step</div>
-      <div class="arrow">↓</div>
-      <div class="box" style="border-style: dashed;">Tool Request → Result</div>
-      <div class="arrow">↑</div>
-      <div class="box">State Persistence</div>
+
+    <div class="split">
+      <div class="side">
+        <div class="side-label">Standard_API</div>
+        <div class="box">Prompt</div>
+        <div class="arrow">↓</div>
+        <div class="box active-box">LLM_Generation</div>
+        <div class="arrow">↓</div>
+        <div class="box">Result</div>
+      </div>
+      <div class="side" style="border-color: var(--accent);">
+        <div class="side-label" style="color: var(--accent);">Agent_Harness</div>
+        <div class="box">Prompt + History</div>
+        <div class="arrow">↓</div>
+        <div class="box active-box">LLM_Reasoning_Step</div>
+        <div class="arrow">↓</div>
+        <div class="box dashed-box">Tool_Request → Result</div>
+        <div class="arrow">↑</div>
+        <div class="box" style="border-color: var(--text); color: var(--text);">State_Persistence</div>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> ARCH: STATEFUL_LOOP</div>
+      <div class="status-item">COMPLEXITY: HIGH</div>
     </div>
   </div>
 </body>

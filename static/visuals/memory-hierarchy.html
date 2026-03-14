@@ -7,59 +7,82 @@
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .hierarchy { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-    .tier { border: 1px solid var(--border); padding: 20px; position: relative; transition: all 0.3s; cursor: pointer; background: var(--bg); }
-    .tier:hover { border-color: var(--accent); }
-    .tier-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-family: var(--mono); font-size: 10px; color: #888; }
-    .tier-name { font-weight: 600; font-size: 14px; }
-    .speed { color: var(--accent); }
+    .hierarchy { display: flex; flex-direction: column; gap: 12px; }
+    .tier { 
+      border: 1px solid var(--border); 
+      padding: 24px; 
+      position: relative; 
+      transition: all var(--t); 
+      cursor: pointer; 
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+    }
+    .tier:hover { 
+      border-color: var(--accent); 
+      transform: translateX(4px);
+      box-shadow: -4px 0 0 var(--accent);
+    }
+    .tier-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+    .tier-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
     
-    .t1 { border-left: 4px solid var(--accent); opacity: 0.4; }
-    .t2 { border-left: 4px solid var(--accent); opacity: 0.6; }
-    .t3 { border-left: 4px solid var(--accent); opacity: 0.8; }
-    .t4 { border-left: 4px solid var(--accent); opacity: 1.0; }
+    .tier-meta { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-top: 16px; 
+      font-family: var(--mono); 
+      font-size: 9px; 
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .val-accent { color: var(--accent); font-weight: 600; }
   </style>
 </head>
 <body>
   <div class="viz-container">
-    <div class="label">// Cognitive Stack</div>
-    <div class="title">The 4-Tier Memory Hierarchy</div>
+    <div class="header-meta">
+      <div>
+        <div class="label">// Cognitive_Arch</div>
+        <h1 class="title">Memory Hierarchy</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Tiered_Persistence</div>
+    </div>
     
     <div class="hierarchy">
-      <div class="tier t1">
-        <div class="tier-name">Working Memory (RAM)</div>
-        <p style="font-size: 12px; color: #666; margin-top: 5px;">Active context window. Fast reasoning, low persistence.</p>
+      <div class="tier">
+        <div class="tier-name">Working Memory</div>
+        <div class="tier-desc">The primary reasoning buffer. Transient, high-speed context management.</div>
         <div class="tier-meta">
-          <span>LATENCY: &lt;10ms</span>
-          <span class="speed">VOLATILE</span>
+          <span>Latency: <span class="val-accent">&lt;10ms</span></span>
+          <span>State: <span class="val-accent">Volatile</span></span>
         </div>
       </div>
-      <div class="tier t2">
-        <div class="tier-name">Episodic Memory (The Log)</div>
-        <p style="font-size: 12px; color: #666; margin-top: 5px;">Append-only record of past interactions and raw experiences.</p>
+      <div class="tier">
+        <div class="tier-name">Episodic Memory</div>
+        <div class="tier-desc">Sequential log of interactions. High-fidelity record of user experiences.</div>
         <div class="tier-meta">
-          <span>LATENCY: ~200ms</span>
-          <span>DURABLE</span>
+          <span>Latency: <span class="val-accent">~200ms</span></span>
+          <span>State: <span>Durable</span></span>
         </div>
       </div>
-      <div class="tier t3">
-        <div class="tier-name">Semantic Memory (The KB)</div>
-        <p style="font-size: 12px; color: #666; margin-top: 5px;">Distilled facts, entity relationships, and world models.</p>
+      <div class="tier">
+        <div class="tier-name">Semantic Memory</div>
+        <div class="tier-desc">Structured world model. Distilled facts and entity relationship mappings.</div>
         <div class="tier-meta">
-          <span>LATENCY: ~500ms</span>
-          <span>EVOLVING</span>
+          <span>Latency: <span class="val-accent">~500ms</span></span>
+          <span>State: <span>Evolving</span></span>
         </div>
       </div>
-      <div class="tier t4">
-        <div class="tier-name">Procedural Memory (Skills)</div>
-        <p style="font-size: 12px; color: #666; margin-top: 5px;">Successful workflow patterns and tool-use heuristics.</p>
-        <div class="tier-meta">
-          <span>LATENCY: ~1s</span>
-          <span>LEARNED</span>
-        </div>
-      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot pulse"></div> ACTIVE_SESSION</div>
+      <div class="status-item">SYNC_STATUS: OK</div>
+      <div class="status-item">VERSION: 2.0.4</div>
     </div>
   </div>
 </body>

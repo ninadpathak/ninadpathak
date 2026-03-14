@@ -2,50 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LLM Selector 2026 | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .tree { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; margin-top: 20px; }
     
-    .tree { display: flex; flex-direction: column; align-items: center; gap: 30px; }
-    .q-box { border: 1px solid var(--border); padding: 20px; font-size: 14px; font-weight: 600; background: var(--bg); text-align: center; max-width: 400px; }
-    .options { display: flex; gap: 40px; }
-    .opt { cursor: pointer; border: 1px solid var(--border); padding: 10px 30px; font-size: 12px; transition: all 0.2s; }
-    .opt:hover { border-color: var(--accent); color: var(--accent); }
+    .q-box { border: 1px solid var(--border); padding: 24px; font-size: 14px; font-weight: 600; background: var(--bg); text-align: center; max-width: 450px; line-height: 1.5; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
     
-    .result { border: 2px solid var(--accent); padding: 20px; color: var(--accent); font-weight: 600; display: none; text-align: center; }
+    .options { display: flex; gap: 20px; }
+    .opt { cursor: pointer; border: 1px solid var(--border); padding: 12px 30px; font-family: var(--mono); font-size: 11px; font-weight: 600; transition: all 0.2s; background: rgba(0,0,0,0.02); }
+    .opt:hover { border-color: var(--accent); color: var(--accent); background: rgba(212, 64, 0, 0.05); }
+    
+    .result { border: 1px solid var(--accent); padding: 30px; color: var(--text); background: rgba(212, 64, 0, 0.02); font-weight: 500; display: none; text-align: center; max-width: 500px; line-height: 1.6; }
+    .res-model { font-family: var(--mono); font-size: 16px; color: var(--accent); font-weight: 700; margin-bottom: 12px; display: block; }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 40px; text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Decision Engine 2026</div>
-    <div style="font-size: 16px; font-weight: 600;">Which coding model should you use?</div>
-  </div>
-
-  <div class="tree" id="tree">
-    <div class="q-box" id="q">Is this for a high-autonomy agent that needs to manage multi-file pull requests?</div>
-    <div class="options" id="opts">
-      <div class="opt" onclick="ans('yes')">YES</div>
-      <div class="opt" onclick="ans('no')">NO</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Decision_Engine</div>
+        <h1 class="title">Model Selector 2026</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Workflow_Routing</div>
     </div>
-    <div class="result" id="res"></div>
+
+    <div class="tree" id="tree">
+      <div class="q-box" id="q">Is this for a high-autonomy agent that needs to manage multi-file pull requests?</div>
+      <div class="options" id="opts">
+        <div class="opt" onclick="ans('yes')">YES</div>
+        <div class="opt" onclick="ans('no')">NO</div>
+      </div>
+      <div class="result" id="res"></div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot pulse"></div> ENGINE: ACTIVE</div>
+      <div class="status-item">NODES: 4</div>
+    </div>
   </div>
 
   <script>
@@ -59,22 +57,22 @@
 
     function ans(v) {
       const next = questions[step][v];
-      if (next === "CLAUDE") show("USE CLAUDE 4.6 OPUS. The definitive choice for agentic reasoning and SWE-bench performance.");
-      else if (next === "GEMINI") show("USE GEMINI 3.1 PRO. Unmatched for multimodal debugging and extreme context windows.");
-      else if (next === "DEEPSEEK") show("USE DEEPSEEK V4. The most efficient high-performance coding model for local or bulk use.");
-      else if (next === "GPT5") show("USE GPT-5.4 CODEX. The most reliable model for multi-step reasoning and planning.");
+      if (next === "CLAUDE") show("CLAUDE 4.6 OPUS", "The definitive choice for agentic reasoning, tool usage, and end-to-end SWE-bench performance.");
+      else if (next === "GEMINI") show("GEMINI 3.1 PRO", "Unmatched for multimodal debugging, massive file analysis, and extreme 2M+ context windows.");
+      else if (next === "DEEPSEEK") show("DEEPSEEK V4", "The most efficient high-performance coding model for local deployment or massive bulk processing tasks.");
+      else if (next === "GPT5") show("GPT-5.4 CODEX", "The most reliable, well-supported model for multi-step reasoning, planning, and ecosystem integration.");
       else {
         step = next;
         document.getElementById('q').innerText = questions[step].q;
       }
     }
 
-    function show(t) {
+    function show(model, text) {
       document.getElementById('q').style.display = 'none';
       document.getElementById('opts').style.display = 'none';
       const r = document.getElementById('res');
       r.style.display = 'block';
-      r.innerText = t;
+      r.innerHTML = `<span class="res-model">USE ${model}</span>${text}`;
     }
   </script>
 </body>

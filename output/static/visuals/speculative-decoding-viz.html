@@ -2,57 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Speculative Decoding Animation | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; min-height: 400px; }
+    .loop { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 40px; width: 100%; max-width: 600px; margin: 0 auto; }
     
-    .loop { display: flex; flex-direction: column; gap: 30px; width: 100%; max-width: 500px; }
     .model-row { display: flex; align-items: center; gap: 20px; }
-    .model-label { width: 100px; font-size: 10px; color: var(--accent); text-transform: uppercase; }
-    .token-track { flex: 1; height: 40px; border: 1px solid var(--border); display: flex; align-items: center; padding: 0 10px; gap: 5px; }
+    .model-label { width: 120px; font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; font-weight: 600; }
+    .token-track { flex: 1; height: 50px; border: 1px solid var(--border); display: flex; align-items: center; padding: 0 15px; gap: 8px; background: rgba(0,0,0,0.02); }
     
-    .token { font-size: 10px; padding: 4px 8px; border: 1px solid var(--border); background: var(--bg); opacity: 0; transform: translateY(10px); transition: all 0.3s; }
+    .token { font-family: var(--mono); font-size: 11px; padding: 6px 10px; border: 1px solid var(--border); background: var(--bg); opacity: 0; transform: translateY(10px); transition: all 0.3s; color: var(--text-dim); }
     .token.show { opacity: 1; transform: translateY(0); }
-    .token.verified { border-color: var(--accent); color: var(--accent); font-weight: 600; }
-    .token.rejected { border-color: #ff3b30; color: #ff3b30; opacity: 0.3; }
+    .token.verified { border-color: var(--accent); color: var(--bg); background: var(--accent); font-weight: 600; box-shadow: 0 4px 8px rgba(212, 64, 0, 0.2); }
+    .token.rejected { border-color: var(--text); color: var(--text); background: var(--bg); opacity: 0.3; text-decoration: line-through; }
+
+    @media (max-width: 600px) {
+      .model-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .model-label { width: auto; }
+      .token-track { width: 100%; }
+    }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 40px; text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Draft & Verify</div>
-    <div style="font-size: 16px; font-weight: 600;">Speculative Decoding Loop</div>
-  </div>
-
-  <div class="loop">
-    <div class="model-row">
-      <div class="model-label">Draft Model</div>
-      <div class="token-track" id="draft-track"></div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Parallel_Compute</div>
+        <h1 class="title">Speculative Decoding Loop</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Draft_and_Verify</div>
     </div>
-    <div class="model-row">
-      <div class="model-label">Target Model</div>
-      <div class="token-track" id="target-track"></div>
+
+    <div class="loop">
+      <div class="model-row">
+        <div class="model-label">Draft Model (Fast)</div>
+        <div class="token-track" id="draft-track"></div>
+      </div>
+      <div class="model-row">
+        <div class="model-label" style="color: var(--accent);">Target Model (Slow)</div>
+        <div class="token-track" id="target-track"></div>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot pulse"></div> <span id="status">DRAFTING...</span></div>
+      <div class="status-item" style="margin-left: auto;">SPEEDUP: ~2.4x</div>
     </div>
   </div>
-
-  <div style="margin-top: 40px; font-size: 11px; color: #888;" id="status">Drafting 4 tokens...</div>
 
   <script>
     const dTrack = document.getElementById('draft-track');
@@ -63,7 +63,7 @@
     async function run() {
       dTrack.innerHTML = '';
       tTrack.innerHTML = '';
-      status.innerText = "Drafting 4 tokens...";
+      status.innerText = "DRAFTING_TOKENS...";
       
       // 1. Drafting
       for(let i=0; i<4; i++) {
@@ -71,11 +71,11 @@
         t.className = 'token';
         t.innerText = words[i];
         dTrack.appendChild(t);
-        setTimeout(() => t.classList.add('show'), i * 200);
+        setTimeout(() => t.classList.add('show'), i * 150);
       }
       
-      await new Promise(r => setTimeout(r, 1500));
-      status.innerText = "Verifying draft in parallel...";
+      await new Promise(r => setTimeout(r, 1200));
+      status.innerText = "VERIFYING_PARALLEL...";
       
       // 2. Verifying
       for(let i=0; i<4; i++) {
@@ -84,10 +84,10 @@
         t.innerText = words[i];
         tTrack.appendChild(t);
         dTrack.children[i].classList.add('verified');
-        await new Promise(r => setTimeout(r, 300));
+        await new Promise(r => setTimeout(r, 200));
       }
       
-      status.innerText = "4 tokens accepted. 1 step overhead.";
+      status.innerText = "ACCEPTED. 1_STEP_OVERHEAD.";
       await new Promise(r => setTimeout(r, 2000));
       run();
     }

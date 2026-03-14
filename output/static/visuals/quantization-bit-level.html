@@ -2,47 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quantization | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
+    .compare { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; }
+    .side { border: 1px solid var(--border); padding: 30px; display: flex; flex-direction: column; background: var(--bg); position: relative; }
+    .side-label { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+    
+    .bit-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; flex: 1; align-content: flex-start; }
+    .bit { background: var(--bg); border: 1px solid var(--border); aspect-ratio: 1; border-radius: 2px; transition: all 0.3s; opacity: 0.3; }
+    .bit.on { background: var(--accent); border-color: var(--accent); opacity: 1; box-shadow: 0 0 8px rgba(212, 64, 0, 0.4); }
+    
+    .float-val { font-family: var(--mono); font-size: 12px; color: var(--text-dim); margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); }
+    .speed-tag { position: absolute; top: 30px; right: 30px; font-family: var(--mono); font-size: 9px; padding: 2px 6px; border: 1px solid var(--border); color: var(--text-dim); }
+
+    @media (max-width: 600px) {
+      .compare { grid-template-columns: 1fr; gap: 20px; }
+      .side { padding: 20px; }
+      .speed-tag { top: 20px; right: 20px; }
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
-    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 100%; }
-    .side { border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; background: var(--bg); }
-    .label { font-size: 10px; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
-    .bit-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; flex: 1; }
-    .bit { background: var(--bg); border: 1px solid var(--border); aspect-ratio: 1; border-radius: 2px; transition: background 0.2s; }
-    .bit.on { background: var(--accent); border-color: var(--accent); }
-    .float-val { font-size: 11px; color: #888; margin-top: 10px; font-family: var(--mono); }
   </style>
 </head>
 <body>
-  <div class="compare">
-    <div class="side">
-      <div class="label">Float32 (32-bit)</div>
-      <div class="bit-grid" id="f32"></div>
-      <div class="float-val">0.1234567890123456</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Memory_Compression</div>
+        <h1 class="title">Vector Quantization</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Storage_Efficiency</div>
     </div>
-    <div class="side">
-      <div class="label">Binary (1-bit)</div>
-      <div class="bit-grid" id="b1"></div>
-      <div class="float-val">1</div>
+    
+    <div class="compare">
+      <div class="side">
+        <div class="speed-tag">IO: SLOW</div>
+        <div class="side-label">Float32 (Uncompressed)</div>
+        <div class="bit-grid" id="f32"></div>
+        <div class="float-val">VAL: 0.1234567890123456</div>
+      </div>
+      <div class="side">
+        <div class="speed-tag" style="color: var(--accent); border-color: var(--accent);">IO: FAST_XOR</div>
+        <div class="side-label">Binary (1-bit)</div>
+        <div class="bit-grid" id="b1"></div>
+        <div class="float-val">VAL: 1 (Positive)</div>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> COMPRESSION: 32x</div>
+      <div class="status-item">MEMORY_SAVED: ~5.8GB / 1M VECTORS</div>
     </div>
   </div>
 
@@ -52,16 +64,31 @@
     
     for(let i=0; i<32; i++) {
       const bit = document.createElement('div');
-      bit.className = 'bit ' + (Math.random() > 0.5 ? 'on' : '');
+      bit.className = 'bit';
       f32.appendChild(bit);
     }
     
     for(let i=0; i<32; i++) {
       const bit = document.createElement('div');
       bit.className = 'bit';
-      if(i === 0) bit.className += ' on';
       b1.appendChild(bit);
     }
+
+    function animate() {
+      const fBits = f32.children;
+      for(let i=0; i<32; i++) {
+        if(Math.random() > 0.5) fBits[i].classList.add('on');
+        else fBits[i].classList.remove('on');
+      }
+
+      const bBits = b1.children;
+      for(let i=0; i<32; i++) bBits[i].className = 'bit';
+      bBits[0].classList.add('on');
+
+      setTimeout(animate, 2000);
+    }
+
+    animate();
   </script>
 </body>
 </html>

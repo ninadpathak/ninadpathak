@@ -2,72 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agent Observability | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 20px; box-sizing: border-box; height: 100vh; display: flex; flex-direction: column; }
+    .trace-view { flex: 1; border: 1px solid var(--border); display: flex; flex-direction: column; background: var(--bg); overflow: hidden; margin-top: 10px; }
+    .trace-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.02); }
+    .trace-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
     
-    .trace-view { flex: 1; border: 1px solid var(--border); display: flex; flex-direction: column; background: var(--bg); overflow: hidden; }
-    .trace-header { padding: 15px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .trace-body { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+    .trace-step { border-left: 2px solid var(--border); padding-left: 16px; position: relative; }
+    .trace-step.error { border-left-color: var(--accent); }
+    .trace-step.tool { border-left-color: var(--text-dim); }
     
-    .trace-step { border-left: 2px solid var(--border); padding-left: 15px; position: relative; }
-    .trace-step.error { border-left-color: #ff3b30; }
-    .trace-step.tool { border-left-color: var(--accent); }
+    .step-meta { font-family: var(--mono); font-size: 9px; color: var(--text-dim); margin-bottom: 6px; letter-spacing: 0.05em; }
+    .step-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    .step-data { font-family: var(--mono); font-size: 10px; background: rgba(0,0,0,0.02); padding: 10px; border: 1px solid var(--border); color: var(--text-dim); white-space: pre-wrap; line-height: 1.5; }
     
-    .step-meta { font-size: 10px; color: #888; margin-bottom: 5px; }
-    .step-title { font-size: 12px; font-weight: 600; margin-bottom: 5px; }
-    .step-data { font-size: 11px; background: var(--bg); padding: 8px; border: 1px solid var(--border); color: #666; white-space: pre; }
-    
-    .badge { font-size: 9px; padding: 2px 6px; border: 1px solid var(--border); margin-left: 10px; text-transform: uppercase; }
-    .badge-error { color: #ff3b30; border-color: #ff3b30; }
+    .badge { font-family: var(--mono); font-size: 8px; padding: 2px 6px; border: 1px solid var(--border); margin-left: 10px; text-transform: uppercase; font-weight: 600; }
+    .badge-error { color: var(--accent); border-color: var(--accent); background: rgba(212, 64, 0, 0.05); }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 20px;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Diagnostics</div>
-    <div style="font-size: 16px; font-weight: 600;">High-fidelity trace observability</div>
-  </div>
-
-  <div class="trace-view">
-    <div class="trace-header">
-      <div style="font-size: 12px; font-weight: 600;">Run ID: <span style="color: var(--accent);">agent_f92k_01</span></div>
-      <div class="badge">Status: Failed</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Diagnostics</div>
+        <h1 class="title">High-Fidelity Trace Observability</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Run_Replay</div>
     </div>
-    <div class="trace-body">
-      <div class="trace-step">
-        <div class="step-meta">T+0ms • 1,240 tokens</div>
-        <div class="step-title">Prompt Sent</div>
-        <div class="step-data">Task: "Analyze revenue trends..."</div>
+
+    <div class="trace-view">
+      <div class="trace-header">
+        <div style="font-family: var(--mono); font-size: 11px; font-weight: 600;">RUN_ID: <span style="color: var(--accent);">agent_f92k_01</span></div>
+        <div class="badge badge-error" style="margin: 0;">STATUS: FAILED</div>
       </div>
-      <div class="trace-step tool">
-        <div class="step-meta">T+1.2s • latency: 450ms</div>
-        <div class="step-title">Tool Call: get_financials</div>
-        <div class="step-data">args: { "quarter": "Q3", "year": 2025 }</div>
-      </div>
-      <div class="trace-step error">
-        <div class="step-meta">T+1.8s</div>
-        <div class="step-title">Reasoning Error <span class="badge badge-error">HALLUCINATION</span></div>
-        <div class="step-data">Model attempted to call "calculate_projections" 
+      <div class="trace-body">
+        <div class="trace-step">
+          <div class="step-meta">T+0ms • 1,240 TOKENS</div>
+          <div class="step-title">Prompt Sent</div>
+          <div class="step-data">Task: "Analyze Q3 revenue trends and compile report..."</div>
+        </div>
+        <div class="trace-step tool">
+          <div class="step-meta">T+1.2s • LATENCY: 450ms</div>
+          <div class="step-title">Tool Call: get_financials</div>
+          <div class="step-data">args: { "quarter": "Q3", "year": 2026 }</div>
+        </div>
+        <div class="trace-step error">
+          <div class="step-meta">T+1.8s • EXCEPTION</div>
+          <div class="step-title">Reasoning Error <span class="badge badge-error">HALLUCINATION</span></div>
+          <div class="step-data" style="color: var(--text);">Model attempted to call "calculate_projections" 
 which does not exist in the tool registry.</div>
+        </div>
       </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> TELEMETRY: ACTIVE</div>
+      <div class="status-item">STORAGE: COLD_TIER</div>
     </div>
   </div>
 </body>

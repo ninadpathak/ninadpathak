@@ -2,52 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TTFT vs Throughput | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    .compare { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; }
+    .side { border: 1px solid var(--border); padding: 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; background: var(--bg); position: relative; }
     
-    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; max-width: 600px; }
-    .side { border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-    .label { font-size: 10px; color: var(--accent); text-transform: uppercase; }
+    .side-label { font-family: var(--mono); font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 10px; }
     
-    .viz { height: 100px; display: flex; align-items: flex-end; gap: 5px; }
-    .bar { width: 15px; background: var(--border); transition: height 1s; }
-    .active { background: var(--accent); }
+    .viz { height: 120px; display: flex; align-items: flex-end; gap: 6px; width: 100%; justify-content: center; }
+    .bar { width: 15%; background: var(--border); transition: height 0.5s; opacity: 0.5; }
+    .active { background: var(--accent); opacity: 1; box-shadow: 0 0 10px rgba(212, 64, 0, 0.2); }
+    
+    .desc { font-size: 11px; color: var(--text-dim); text-align: center; margin-top: 10px; line-height: 1.5; }
+
+    @media (max-width: 600px) {
+      .compare { grid-template-columns: 1fr; gap: 20px; }
+      .side { padding: 20px; }
+      .viz { height: 80px; }
+    }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 40px; text-align: center;">
-    <div style="font-size: 16px; font-weight: 600;">Snappiness (TTFT) vs Volume (Throughput)</div>
-  </div>
-
-  <div class="compare">
-    <div class="side">
-      <div class="label">Interactive Chat</div>
-      <div class="viz" id="v1"></div>
-      <div style="font-size: 10px; color: #888;">Low TTFT is critical.</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Trade_Offs</div>
+        <h1 class="title">Snappiness vs Volume</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Batch_Size_Impact</div>
     </div>
-    <div class="side">
-      <div class="label">Batch Processing</div>
-      <div class="viz" id="v2"></div>
-      <div style="font-size: 10px; color: #888;">Throughput is critical.</div>
+
+    <div class="compare">
+      <div class="side">
+        <div class="side-label">Interactive Chat</div>
+        <div class="viz" id="v1"></div>
+        <div class="desc">Small batch size. Low TTFT is critical for user experience.</div>
+      </div>
+      <div class="side">
+        <div class="side-label" style="color: var(--text);">Batch Processing</div>
+        <div class="viz" id="v2"></div>
+        <div class="desc">Large batch size. Overall throughput is prioritized over TTFT.</div>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot pulse"></div> SIMULATION_RUNNING</div>
+      <div class="status-item">METRIC: BATCH_EFFICIENCY</div>
     </div>
   </div>
 
@@ -55,7 +60,7 @@
     const v1 = document.getElementById('v1');
     const v2 = document.getElementById('v2');
     
-    for(let i=0; i<10; i++) {
+    for(let i=0; i<6; i++) {
       const b1 = document.createElement('div');
       b1.className = 'bar active';
       b1.style.height = '80px';
@@ -68,8 +73,8 @@
     }
     
     setInterval(() => {
-      v1.querySelectorAll('.bar').forEach(b => b.style.height = (20 + Math.random() * 60) + 'px');
-      v2.querySelectorAll('.bar').forEach(b => b.style.height = (60 + Math.random() * 40) + 'px');
+      v1.querySelectorAll('.bar').forEach(b => b.style.height = (20 + Math.random() * 80) + '%');
+      v2.querySelectorAll('.bar').forEach(b => b.style.height = (60 + Math.random() * 40) + '%');
     }, 1000);
   </script>
 </body>

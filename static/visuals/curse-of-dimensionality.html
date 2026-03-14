@@ -2,61 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Curse of Dimensionality | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; height: 100vh; }
-    .container { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 40px; }
-    .header { text-align: center; }
-    .label { font-size: 10px; color: var(--accent); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.1em; }
-    .title { font-size: 14px; font-weight: 500; }
+    .viz-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; margin-top: 20px; }
     
-    .viz { height: 200px; border: 1px solid var(--border); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .circle { width: 150px; height: 150px; border: 1px solid var(--border); border-radius: 50%; position: relative; }
-    .dot { width: 4px; height: 4px; background: var(--accent); position: absolute; border-radius: 50%; transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .sphere-container { width: 200px; height: 200px; border: 1px solid var(--border); border-radius: 50%; position: relative; background: radial-gradient(circle, var(--bg) 0%, rgba(0,0,0,0.05) 100%); display: flex; align-items: center; justify-content: center; }
+    .dot { width: 6px; height: 6px; background: var(--accent); position: absolute; border-radius: 50%; transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 0 8px var(--accent); }
     
-    .controls { display: flex; align-items: center; gap: 20px; }
-    input[type=range] { flex: 1; accent-color: var(--accent); }
+    .controls { display: flex; align-items: center; gap: 20px; width: 100%; max-width: 400px; font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+    input[type=range] { flex: 1; accent-color: var(--accent); height: 4px; background: var(--border); appearance: none; border-radius: 2px; }
+    input[type=range]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; background: var(--accent); border-radius: 50%; cursor: pointer; }
     
-    .info { font-size: 12px; color: #888; text-align: center; line-height: 1.6; }
+    .info-panel { font-size: 12px; color: var(--text-dim); text-align: center; line-height: 1.6; max-width: 500px; min-height: 40px; }
+    .highlight { color: var(--accent); font-weight: 600; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="label">// Spatial Collapse</div>
-      <div class="title">The Curse of Dimensionality</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Spatial_Geometry</div>
+        <h1 class="title">The Curse of Dimensionality</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Volume_Concentration</div>
     </div>
 
-    <div class="viz">
-      <div class="circle" id="sphere"></div>
+    <div class="viz-body">
+      <div class="sphere-container" id="sphere"></div>
+
+      <div class="controls">
+        <span>D=2</span>
+        <input type="range" id="dimRange" min="2" max="100" value="2">
+        <span>D=100</span>
+      </div>
+
+      <div class="info-panel" id="info">
+        In 2D space, data points are distributed evenly throughout the volume.
+      </div>
     </div>
 
-    <div class="controls">
-      <span style="font-size: 10px;">D=2</span>
-      <input type="range" id="dimRange" min="2" max="100" value="2">
-      <span style="font-size: 10px;">D=100</span>
-    </div>
-
-    <div class="info" id="info">
-      As dimensions increase, points move toward the boundary of the space.
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> VECTORS: 50</div>
+      <div class="status-item">DIST_METRIC: COSINE</div>
     </div>
   </div>
 
@@ -65,8 +57,9 @@
     const range = document.getElementById('dimRange');
     const info = document.getElementById('info');
     
-    const count = 40;
+    const count = 50;
     const dots = [];
+    const radius = 100; // Half of container width
 
     for(let i=0; i<count; i++) {
       const dot = document.createElement('div');
@@ -77,19 +70,32 @@
 
     function update() {
       const d = parseInt(range.value);
-      dots.forEach(dot => {
-        // In high dimensions, the distance from center r follows r ~ sqrt(d)
-        // Normalized, points push toward r=1
-        const pull = Math.pow(Math.random(), 1/d);
-        const angle = Math.random() * Math.PI * 2;
-        const x = 75 + Math.cos(angle) * 75 * pull;
-        const y = 75 + Math.sin(angle) * 75 * pull;
+      
+      // Seed random specifically so animation looks cohesive
+      // Math.random() is fine for this simulation, but we calculate distance based on dimension
+      dots.forEach((dot, i) => {
+        // In high dimensions, points are pushed to the surface (r -> 1)
+        // Simulate this by adjusting the distance from center
+        const pull = Math.pow(Math.random(), 1/d); 
+        
+        // Random angle for 2D projection
+        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.5;
+        
+        // Calculate position relative to center (100,100)
+        const x = radius + Math.cos(angle) * (radius - 5) * pull;
+        const y = radius + Math.sin(angle) * (radius - 5) * pull;
+        
         dot.style.left = x + 'px';
         dot.style.top = y + 'px';
       });
 
-      if (d > 50) info.innerText = "High Dimensionality: All vectors are now nearly orthogonal and equidistant.";
-      else info.innerText = "As dimensions increase, points move toward the boundary of the space.";
+      if (d > 50) {
+        info.innerHTML = `High Dimensionality: Almost all volume is concentrated in a thin shell near the surface. Vectors become <span class="highlight">nearly orthogonal and equidistant</span>.`;
+      } else if (d > 10) {
+        info.innerHTML = `As dimensions increase, points begin to push rapidly toward the boundary of the space.`;
+      } else {
+        info.innerHTML = `In low-dimensional space, data points are distributed evenly throughout the interior volume.`;
+      }
     }
 
     range.addEventListener('input', update);

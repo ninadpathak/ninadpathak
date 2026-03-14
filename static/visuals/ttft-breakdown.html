@@ -2,56 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TTFT Breakdown | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; min-height: 350px; }
+    .timeline-wrap { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; margin-top: 20px; }
     
-    .timeline { width: 100%; max-width: 600px; height: 60px; border: 1px solid var(--border); display: flex; position: relative; }
-    .seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 9px; text-transform: uppercase; border-right: 1px solid var(--border); }
+    .timeline { width: 100%; max-width: 600px; height: 60px; border: 1px solid var(--border); display: flex; position: relative; background: var(--bg); }
+    .seg { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--mono); border-right: 1px solid var(--border); transition: all 0.3s; }
     .seg:last-child { border-right: none; }
     
-    .s1 { width: 15%; background: rgba(212, 64, 0, 0.05); }
-    .s2 { width: 25%; background: rgba(212, 64, 0, 0.1); }
-    .s3 { width: 50%; background: rgba(212, 64, 0, 0.2); color: #fff; font-weight: 600; }
-    .s4 { width: 10%; background: var(--accent); color: #fff; font-weight: 600; }
+    .seg-title { font-size: 10px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+    .seg-val { font-size: 9px; opacity: 0.8; }
     
-    .marker { position: absolute; bottom: -25px; font-size: 10px; color: var(--accent); font-weight: 600; }
+    .s1 { width: 15%; background: rgba(0,0,0,0.02); color: var(--text-dim); }
+    .s2 { width: 20%; background: rgba(0,0,0,0.05); color: var(--text-dim); }
+    .s3 { width: 55%; background: rgba(212, 64, 0, 0.1); color: var(--accent); }
+    .s4 { width: 10%; background: var(--accent); color: var(--bg); }
+    
+    .marker { position: absolute; bottom: -30px; font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 700; white-space: nowrap; }
+
+    @media (max-width: 600px) {
+      .timeline { height: 80px; }
+      .seg-title { font-size: 8px; }
+      .seg-val { display: none; }
+    }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 50px; text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Latency Components</div>
-    <div style="font-size: 16px; font-weight: 600;">Time to First Token (TTFT) Lifecycle</div>
-  </div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Latency_Components</div>
+        <h1 class="title">Time to First Token (TTFT)</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Lifecycle_Analysis</div>
+    </div>
 
-  <div class="timeline">
-    <div class="seg s1">Network</div>
-    <div class="seg s2">Auth / Queue</div>
-    <div class="seg s3">Prompt Prefill</div>
-    <div class="seg s4">T1</div>
-    <div class="marker" style="right: 0;">← TTFT ends here</div>
-  </div>
+    <div class="timeline-wrap">
+      <div class="timeline">
+        <div class="seg s1">
+          <span class="seg-title">Network</span>
+          <span class="seg-val">150ms</span>
+        </div>
+        <div class="seg s2">
+          <span class="seg-title">Queue</span>
+          <span class="seg-val">200ms</span>
+        </div>
+        <div class="seg s3">
+          <span class="seg-title">Prompt Prefill</span>
+          <span class="seg-val">800ms</span>
+        </div>
+        <div class="seg s4">
+          <span class="seg-title">T1</span>
+          <span class="seg-val">20ms</span>
+        </div>
+        <div class="marker" style="right: 0;">← TTFT: 1170ms</div>
+      </div>
+    </div>
 
-  <div style="margin-top: 50px; font-size: 11px; color: #888; text-align: center; max-width: 500px;">
-    Prompt Prefill is usually the largest component. It is where the model processes your input context before generating the first token (T1).
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> BOTTLENECK: PREFILL</div>
+      <div class="status-item">PROMPT_SIZE: 16K</div>
+    </div>
   </div>
 </body>
 </html>

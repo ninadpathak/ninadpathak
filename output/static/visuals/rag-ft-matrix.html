@@ -2,53 +2,76 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RAG vs Fine-Tuning Matrix | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    .matrix-wrap { flex: 1; display: flex; justify-content: center; align-items: center; margin-top: 10px; }
     
-    .matrix { display: grid; grid-template-columns: 40px 1fr 1fr; grid-template-rows: 1fr 1fr 40px; gap: 10px; width: 100%; max-width: 500px; height: 400px; }
-    .cell { border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 11px; }
-    .label-v { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: 10px; color: #888; }
-    .label-h { text-align: center; font-size: 10px; color: #888; }
+    .matrix { display: grid; grid-template-columns: 40px 1fr 1fr; grid-template-rows: 1fr 1fr 40px; gap: 12px; width: 100%; max-width: 550px; height: 350px; }
     
-    .highlight-rag { background: rgba(212, 64, 0, 0.05); border-color: var(--accent); color: var(--accent); font-weight: 600; }
-    .highlight-ft { background: rgba(212, 64, 0, 0.05); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+    .cell { border: 1px solid var(--border); padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 12px; background: var(--bg); transition: all 0.3s; }
+    
+    .label-v { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
+    .label-h { text-align: center; font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; align-self: center; }
+    
+    .highlight-rag { background: rgba(212, 64, 0, 0.05); border-color: var(--accent); color: var(--accent); font-weight: 600; box-shadow: 0 4px 12px rgba(212, 64, 0, 0.05); }
+    .highlight-ft { background: rgba(0, 0, 0, 0.03); border-color: var(--text); color: var(--text); font-weight: 600; }
+    .highlight-hybrid { background: rgba(212, 64, 0, 0.02); border: 2px dashed var(--accent); font-weight: 600; }
+
+    .cell-title { font-family: var(--mono); font-size: 11px; margin-bottom: 6px; }
+
+    @media (max-width: 600px) {
+      .matrix { height: 300px; gap: 8px; }
+      .cell { padding: 10px; font-size: 10px; }
+      .cell-title { font-size: 9px; }
+    }
   </style>
 </head>
 <body>
-  <div style="margin-bottom: 40px; text-align: center;">
-    <div style="font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;">// Decision Matrix</div>
-    <div style="font-size: 16px; font-weight: 600;">Knowledge vs Behavior</div>
-  </div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Decision_Matrix</div>
+        <h1 class="title">Knowledge vs Behavior</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Architecture_Selection</div>
+    </div>
 
-  <div class="matrix">
-    <div class="label-v">Knowledge Update Frequency →</div>
-    <div class="cell"><strong>Static Data</strong><br>General Knowledge</div>
-    <div class="cell highlight-rag"><strong>Real-time Data</strong><br>Use RAG</div>
-    <div class="label-v"></div>
-    <div class="cell highlight-ft"><strong>Specific Behavior</strong><br>Use Fine-Tuning</div>
-    <div class="cell"><strong>Hybrid</strong><br>RAG for Facts + FT for Style</div>
-    <div></div>
-    <div class="label-h">Standard Style ←</div>
-    <div class="label-h">→ Custom Style/Format</div>
+    <div class="matrix-wrap">
+      <div class="matrix">
+        <div class="label-v">Knowledge Frequency →</div>
+        
+        <div class="cell">
+          <div class="cell-title">STATIC_DATA</div>
+          <div style="color: var(--text-dim);">General Knowledge</div>
+        </div>
+        
+        <div class="cell highlight-rag">
+          <div class="cell-title">DYNAMIC_DATA</div>
+          <div>Use RAG (Vector DB)</div>
+        </div>
+        
+        <div class="label-v"></div>
+        
+        <div class="cell highlight-ft">
+          <div class="cell-title">SPECIFIC_BEHAVIOR</div>
+          <div>Use Fine-Tuning</div>
+        </div>
+        
+        <div class="cell highlight-hybrid">
+          <div class="cell-title">HYBRID_SYSTEM</div>
+          <div style="color: var(--text-dim);">RAG (Facts) + FT (Style)</div>
+        </div>
+        
+        <div></div>
+        <div class="label-h">Standard Style ←</div>
+        <div class="label-h">→ Custom Format</div>
+      </div>
+    </div>
   </div>
 </body>
 </html>

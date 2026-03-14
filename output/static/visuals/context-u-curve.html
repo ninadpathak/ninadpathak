@@ -7,38 +7,89 @@
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .curve-stage { height: 250px; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; margin-top: 40px; }
-    .u-path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 2s forwards; }
+    .curve-container {
+      flex: 1;
+      position: relative;
+      margin: 40px 0;
+      border-left: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .u-path {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 3;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 2.5s forwards ease-in-out;
+    }
+
     @keyframes draw { to { stroke-dashoffset: 0; } }
-    
-    .axis-label { font-family: var(--mono); font-size: 9px; color: #888; position: absolute; }
-    .zone { position: absolute; height: 100%; border-right: 1px dashed var(--border); opacity: 0.1; }
+
+    .zone-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      pointer-events: none;
+    }
+
+    .zone { 
+      height: 100%; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      padding-top: 20px;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .zone-high { width: 20%; background: var(--accent); opacity: 0.05; color: var(--accent); }
+    .zone-dead { width: 60%; background: var(--text); opacity: 0.02; color: var(--text-dim); }
+
+    .axis-label {
+      position: absolute;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-dim);
+    }
   </style>
 </head>
 <body>
   <div class="viz-container">
-    <div class="label">// Attention Distribution</div>
-    <div class="title">The Attention "U-Curve" Problem</div>
-    
-    <div class="curve-stage">
-      <div class="zone" style="width: 20%; left: 0; background: var(--accent); opacity: 0.15;"></div>
-      <div class="zone" style="width: 20%; right: 0; background: var(--accent); opacity: 0.15;"></div>
-      <div class="zone" style="width: 60%; left: 20%; background: var(--border); opacity: 0.1;"></div>
-      
-      <svg width="100%" height="100%" viewBox="0 0 500 250" preserveAspectRatio="none">
-        <path class="u-path" d="M 0 20 Q 250 450 500 20" />
-      </svg>
-      
-      <div class="axis-label" style="top: 0; left: -45px; transform: rotate(-90deg); transform-origin: top left;">RECALL_ACCURACY →</div>
-      <div class="axis-label" style="bottom: -25px; left: 0;">PROMPT_START</div>
-      <div class="axis-label" style="bottom: -25px; left: 50%; transform: translateX(-50%);">THE_MIDDLE (Dead Zone)</div>
-      <div class="axis-label" style="bottom: -25px; right: 0;">PROMPT_END</div>
+    <div class="header-meta">
+      <div>
+        <div class="label">// Performance_Degradation</div>
+        <h1 class="title">The Attention U-Curve</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Context_Window_Limits</div>
     </div>
-    
-    <div style="margin-top: 40px; font-size: 11px; color: #888; text-align: center;">
-      Even with 1M+ token windows, models struggle to retrieve facts buried in the middle. Efficient memory systems bypass this by only injecting relevant facts into the "high-recall" zones.
+
+    <div class="curve-container">
+      <div class="zone-overlay">
+        <div class="zone zone-high">HIGH_RECALL</div>
+        <div class="zone zone-dead">THE_SILENT_MIDDLE</div>
+        <div class="zone zone-high">HIGH_RECALL</div>
+      </div>
+
+      <svg width="100%" height="100%" viewBox="0 0 500 250" preserveAspectRatio="none" style="position: relative; z-index: 5;">
+        <path class="u-path" d="M 0 30 Q 250 480 500 30" />
+      </svg>
+
+      <div class="axis-label" style="bottom: -25px; left: 0;">PROMPT_START</div>
+      <div class="axis-label" style="bottom: -25px; right: 0;">PROMPT_END</div>
+      <div class="axis-label" style="top: 50%; left: -65px; transform: rotate(-90deg) translateY(-50%);">RECALL_ACCURACY</div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> MODEL: CLAUDE_4.6_OPUS</div>
+      <div class="status-item">TEST_SIZE: 128K</div>
+      <div class="status-item">FAILURE_RATE: 42% (MIDDLE)</div>
     </div>
   </div>
 </body>

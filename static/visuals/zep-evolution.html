@@ -7,51 +7,63 @@
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .timeline { position: relative; padding: 40px 0; margin-top: 20px; }
+    .timeline { position: relative; padding: 20px 0; flex: 1; }
     .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: var(--border); }
     
-    .event { position: relative; padding-left: 50px; margin-bottom: 30px; opacity: 0; transform: translateX(-20px); transition: all 0.5s; }
+    .event { position: relative; padding-left: 50px; margin-bottom: 24px; opacity: 0; transform: translateX(-10px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
     .event.show { opacity: 1; transform: translateX(0); }
-    .dot { position: absolute; left: 16px; top: 5px; width: 9px; height: 9px; background: var(--bg); border: 2px solid var(--border); border-radius: 50%; z-index: 2; }
-    .dot.active { border-color: var(--accent); background: var(--accent); }
     
-    .fact-box { border: 1px solid var(--border); padding: 15px; background: var(--bg); width: 100%; }
-    .date { font-family: var(--mono); font-size: 9px; color: #888; margin-bottom: 5px; }
-    .fact-text { font-size: 12px; }
-    .evolution { margin-top: 10px; font-size: 10px; color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+    .dot { position: absolute; left: 16px; top: 12px; width: 9px; height: 9px; background: var(--bg); border: 2px solid var(--border); border-radius: 50%; z-index: 2; transition: all 0.3s; }
+    .event.show .dot { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+    
+    .fact-card { border: 1px solid var(--border); padding: 16px; background: var(--bg); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .event-meta { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: var(--mono); font-size: 9px; color: var(--text-dim); text-transform: uppercase; }
+    .fact-text { font-size: 13px; line-height: 1.4; color: var(--text); }
+    .evolution-badge { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 9px; color: var(--accent); font-weight: 600; padding: 2px 8px; border: 1px solid var(--accent); background: rgba(212, 64, 0, 0.05); }
   </style>
 </head>
 <body>
   <div class="viz-container">
-    <div class="label">// Temporal Knowledge Graphs</div>
-    <div class="title">Zep AI: Fact Evolution over Time</div>
+    <div class="header-meta">
+      <div>
+        <div class="label">// Temporal_Consistency</div>
+        <h1 class="title">Zep AI: Fact Evolution</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Knowledge_Reconciliation</div>
+    </div>
     
-    <div class="timeline" id="timeline">
+    <div class="timeline">
       <div class="event" id="e1">
-        <div class="dot active"></div>
-        <div class="fact-box">
-          <div class="date">T+0 | Session 1</div>
-          <div class="fact-text">User: "I am using Python 3.10 for this project."</div>
+        <div class="dot"></div>
+        <div class="fact-card">
+          <div class="event-meta"><span>Session_01</span><span>T+0h</span></div>
+          <div class="fact-text">"I am using Python 3.10 for the backend services."</div>
         </div>
       </div>
       <div class="event" id="e2">
-        <div class="dot active"></div>
-        <div class="fact-box">
-          <div class="date">T+7 Days | Session 4</div>
-          <div class="fact-text">User: "We just upgraded to Python 3.12."</div>
-          <div class="evolution">↑ FACT_UPDATED: python_version</div>
+        <div class="dot"></div>
+        <div class="fact-card">
+          <div class="event-meta"><span>Session_04</span><span>T+168h</span></div>
+          <div class="fact-text">"We just completed the upgrade to Python 3.12."</div>
+          <div class="evolution-badge">↑ UPDATE: env_constraints.runtime</div>
         </div>
       </div>
       <div class="event" id="e3">
-        <div class="dot active"></div>
-        <div class="fact-box">
-          <div class="date">T+30 Days | Session 12</div>
-          <div class="fact-text">Agent: "Since you are on 3.12, we can use f-string formalizing..."</div>
-          <div class="evolution">✓ CONTEXT_RECONCILED</div>
+        <div class="dot"></div>
+        <div class="fact-card">
+          <div class="event-meta"><span>Session_12</span><span>T+720h</span></div>
+          <div class="fact-text">"Agent: Recommending 3.12 syntax for latest refactor."</div>
+          <div class="evolution-badge">✓ CONTEXT_RECONCILED</div>
         </div>
       </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> ENGINE: GRAPHITI_V2</div>
+      <div class="status-item">CONFLICTS_RESOLVED: 1</div>
+      <div class="status-item">LATENCY: 12ms</div>
     </div>
   </div>
 
@@ -62,10 +74,10 @@
       if(idx < events.length) {
         document.getElementById(events[idx]).classList.add('show');
         idx++;
-        setTimeout(run, 1500);
+        setTimeout(run, 1200);
       }
     }
-    setTimeout(run, 500);
+    setTimeout(run, 800);
   </script>
 </body>
 </html>

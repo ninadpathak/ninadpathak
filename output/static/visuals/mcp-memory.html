@@ -7,44 +7,61 @@
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .schema-wrap { display: flex; flex-direction: column; gap: 20px; margin-top: 20px; }
-    .code-block { background: var(--bg); border: 1px solid var(--border); padding: 20px; font-family: var(--mono); font-size: 11px; color: #666; position: relative; }
-    .code-block::after { content: 'JSON-RPC'; position: absolute; top: 10px; right: 10px; font-size: 8px; color: var(--accent); border: 1px solid var(--accent); padding: 2px 5px; }
+    .schema-stage { flex: 1; display: flex; flex-direction: column; gap: 24px; margin-top: 10px; }
     
-    .keyword { color: var(--accent); }
-    .string { color: #34c759; }
+    .mcp-flow { display: flex; align-items: center; justify-content: center; gap: 20px; font-family: var(--mono); font-size: 10px; padding: 20px; border: 1px solid var(--border); background: rgba(0,0,0,0.02); }
+    .flow-box { border: 1px solid var(--border); padding: 8px 16px; background: var(--bg); }
+    .flow-arrow { color: var(--accent); font-weight: 700; font-size: 14px; }
+
+    .code-editor { border: 1px solid var(--border); background: var(--bg); position: relative; flex: 1; display: flex; flex-direction: column; }
+    .editor-header { padding: 8px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 6px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
     
-    .mcp-flow { display: flex; align-items: center; justify-content: center; gap: 20px; font-family: var(--mono); font-size: 10px; }
-    .flow-box { border: 1px solid var(--border); padding: 10px; background: var(--bg); }
+    .code-content { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--text-dim); }
+    .k { color: var(--accent); }
+    .s { color: #0080FF; }
   </style>
 </head>
 <body>
   <div class="viz-container">
-    <div class="label">// Universal Connectors</div>
-    <div class="title">MCP: Standardizing Memory Access</div>
+    <div class="header-meta">
+      <div>
+        <div class="label">// Standardized_Transport</div>
+        <h1 class="title">Model Context Protocol</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Schema: JSON-RPC_2.0</div>
+    </div>
     
-    <div class="mcp-flow">
-      <div class="flow-box">AGENT_HOST</div>
-      <div style="color: var(--accent)">↔</div>
-      <div class="flow-box" style="border-color: var(--accent)">MCP_PROTOCOL</div>
-      <div style="color: var(--accent)">↔</div>
-      <div class="flow-box">MEMORY_SERVER</div>
+    <div class="schema-stage">
+      <div class="mcp-flow">
+        <div class="flow-box">AGENT_HOST</div>
+        <div class="flow-arrow">↔</div>
+        <div class="flow-box" style="border-color: var(--accent); color: var(--accent); font-weight: 600;">MCP_PROTOCOL</div>
+        <div class="flow-arrow">↔</div>
+        <div class="flow-box">MEMORY_SERVER</div>
+      </div>
+
+      <div class="code-editor">
+        <div class="editor-header">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <div class="code-content">
+{<br>
+&nbsp;&nbsp;<span class="k">"method"</span>: <span class="s">"resources/read"</span>,<br>
+&nbsp;&nbsp;<span class="k">"params"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">"uri"</span>: <span class="s">"memory://user_123/preferences"</span><br>
+&nbsp;&nbsp;}<br>
+}
+        </div>
+      </div>
     </div>
 
-    <div class="schema-wrap">
-      <div class="code-block">
-{
-  <span class="keyword">"method"</span>: <span class="string">"resources/read"</span>,
-  <span class="keyword">"params"</span>: {
-    <span class="keyword">"uri"</span>: <span class="string">"memory://user_123/preferences"</span>
-  }
-}
-      </div>
-      <div style="font-size: 11px; color: #888; line-height: 1.5;">
-        The Model Context Protocol (MCP) allows any agent host to read from and write to any memory server using a unified schema. This eliminates the need for custom database connectors.
-      </div>
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> PROTOCOL: MCP_v1.0</div>
+      <div class="status-item">ENC: UTF-8</div>
+      <div class="status-item">TRANSPORT: STDIO/SSE</div>
     </div>
   </div>
 </body>

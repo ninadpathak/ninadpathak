@@ -2,48 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Optimization Hierarchy | Ninad Pathak</title>
+  <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f8f8f6;
-      --accent: #d44000;
-      --border: #e0e0dc;
-      --text: #0e0e0e;
-      --mono: 'JetBrains Mono', monospace;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #090909;
-        --accent: #ff5f1f;
-        --border: #1e1e1e;
-        --text: #f0f0f0;
-      }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    .pyramid { flex: 1; display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; width: 100%; max-width: 500px; margin: 20px auto 0; }
     
-    .pyramid { display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; max-width: 500px; }
-    .layer { border: 1px solid var(--border); padding: 15px; text-align: center; font-size: 11px; background: var(--bg); transition: all 0.3s; cursor: pointer; }
-    .layer:hover { border-color: var(--accent); color: var(--accent); }
+    .layer { 
+      border: 1px solid var(--border); 
+      padding: 16px 20px; 
+      text-align: center; 
+      font-family: var(--mono); 
+      font-size: 11px; 
+      background: var(--bg); 
+      transition: all var(--t); 
+      cursor: pointer; 
+      color: var(--text-dim);
+      font-weight: 500;
+    }
     
-    .l1 { width: 40%; }
-    .l2 { width: 60%; }
+    .layer:hover { border-color: var(--accent); color: var(--accent); background: rgba(212, 64, 0, 0.02); }
+    
+    .l1 { width: 50%; }
+    .l2 { width: 65%; }
     .l3 { width: 80%; }
-    .l4 { width: 100%; border-color: var(--accent); color: var(--accent); font-weight: 600; }
+    .l4 { width: 100%; border-color: var(--accent); color: var(--accent); font-weight: 600; background: rgba(212, 64, 0, 0.05); box-shadow: 0 4px 12px rgba(212, 64, 0, 0.05); }
     
-    .label { font-size: 10px; color: #888; margin-bottom: 20px; }
+    .axis-label { font-family: var(--mono); font-size: 9px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.1em; text-align: center; }
   </style>
 </head>
 <body>
-  <div class="label">Priority of TTFT Work (Highest Impact at Bottom)</div>
-  
-  <div class="pyramid">
-    <div class="layer l1">Quantization & Kernels</div>
-    <div class="layer l2">Speculative Decoding</div>
-    <div class="layer l3">Prompt Caching</div>
-    <div class="layer l4">Model Selection (Size)</div>
+  <div class="viz-container">
+    <div class="header-meta">
+      <div>
+        <div class="label">// Strategy</div>
+        <h1 class="title">TTFT Optimization Priority</h1>
+      </div>
+      <div class="label" style="color: var(--text-dim);">Impact_Hierarchy</div>
+    </div>
+
+    <div class="axis-label">Highest Effort / Lowest Impact ↑</div>
+    
+    <div class="pyramid">
+      <div class="layer l1">Quantization & Kernels</div>
+      <div class="layer l2">Speculative Decoding</div>
+      <div class="layer l3">Prompt Caching</div>
+      <div class="layer l4">Model Selection (Size)</div>
+    </div>
+
+    <div class="axis-label" style="margin-top: 20px;">Lowest Effort / Highest Impact ↓</div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot"></div> BASELINE: 1500ms</div>
+      <div class="status-item">TARGET: &lt;500ms</div>
+    </div>
   </div>
 </body>
 </html>
