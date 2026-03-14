@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Technical Writing Linter | Ninad Pathak{% endblock %}
+{% block description %}Paste a technical article. Get a linter report: condescension words, AI writing signals, buzzwords, passive voice, readability score. Free. No signup.{% endblock %}
+{% block canonical %}/linter/{% endblock %}
+{% block og_url %}/linter/{% endblock %}
+{% block og_title %}Technical Writing Linter{% endblock %}
+{% block og_description %}Paste a technical article. Get an honest linter report. Flags condescension words, AI writing signals, buzzwords, passive voice, and low readability. Free.{% endblock %}
+{% block tw_title %}Technical Writing Linter{% endblock %}
+{% block tw_desc %}Paste a technical article. Get an honest linter report. Free. No signup.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/linter.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Tool</div>
+    <h1>Technical Writing Linter</h1>
+    <p class="lead">Paste a technical article, tutorial, or blog post. Get an honest report. Flags the patterns that make technical readers close the tab.</p>
+  </div>
+</section>
+
+<section class="linter-section">
+  <div class="container">
+    <div class="linter-layout">
+
+      <!-- INPUT PANEL -->
+      <div class="linter-input-panel">
+        <div class="linter-input-header">
+          <span class="linter-file-label">article.txt</span>
+          <div class="linter-input-header-actions">
+            <span class="linter-shortcut">⌘↩ to run</span>
+            <button class="linter-sample-btn" id="loadSample">load sample</button>
+          </div>
+        </div>
+        <textarea
+          id="linterInput"
+          class="linter-textarea"
+          placeholder="Paste your article, tutorial, or technical post here..."
+          spellcheck="false"
+          autocomplete="off"
+        ></textarea>
+        <div class="linter-input-footer">
+          <span class="linter-char-count" id="charCount">0 words</span>
+          <button class="btn btn-primary" id="lintBtn">Run Lint →</button>
+        </div>
+      </div>
+
+      <!-- OUTPUT PANEL (hidden until lint runs) -->
+      <div class="linter-output-panel" id="linterOutput" hidden>
+
+        <div class="lint-score-bar" id="lintScoreBar">
+          <div class="lint-score-left">
+            <div class="lint-score-number" id="lintScore">--</div>
+            <div class="lint-score-label">
+              <span class="lint-grade" id="lintGrade">-</span>
+              <span class="lint-grade-desc" id="lintGradeDesc"></span>
+            </div>
+          </div>
+          <div class="lint-score-stats" id="lintStats"></div>
+        </div>
+
+        <div class="lint-issues" id="lintIssues"></div>
+
+        <div class="lint-actions">
+          <button class="btn btn-outline btn-sm" id="copyResults">Copy Results</button>
+          <button class="btn btn-outline btn-sm" id="clearLinter">Clear</button>
+        </div>
+
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="linter-empty" id="linterEmpty">
+        <div class="linter-empty-inner">
+          <div class="linter-empty-icon">{ }</div>
+          <p>Results appear here after you run the linter.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RULES REFERENCE -->
+<section class="linter-rules-section">
+  <div class="container">
+    <div class="linter-rules-header">
+      <div class="label">// Rules</div>
+      <h2>What gets flagged</h2>
+    </div>
+    <div class="linter-rules-grid">
+
+      <div class="linter-rule-group">
+        <div class="lint-severity-badge lint-severity-error">error</div>
+        <ul class="linter-rule-list">
+          <li><strong>Condescension words</strong> — "simply", "just", "easy", "obviously", "of course". They assume the reader already knows what you're about to explain.</li>
+          <li><strong>AI writing signals</strong> — "delve", "in conclusion", "it's worth noting", "rapidly evolving", "harness the power". Dead giveaways of LLM-generated content.</li>
+          <li><strong>Filler openers</strong> — Starting with "In this article…" or "Today we will learn…". The weakest possible first line.</li>
+        </ul>
+      </div>
+
+      <div class="linter-rule-group">
+        <div class="lint-severity-badge lint-severity-warning">warning</div>
+        <ul class="linter-rule-list">
+          <li><strong>Hedge words</strong> — "very", "really", "quite", "basically". They make every statement weaker.</li>
+          <li><strong>Buzzwords</strong> — "leverage", "seamless", "robust", "cutting-edge", "utilize". Say what you mean.</li>
+          <li><strong>Filler phrases</strong> — "in order to", "note that", "please note", "as you can see". Zero information content.</li>
+          <li><strong>Tutorial "we"</strong> — "we will", "let's". You're teaching someone. Address them directly.</li>
+        </ul>
+      </div>
+
+      <div class="linter-rule-group">
+        <div class="lint-severity-badge lint-severity-info">info</div>
+        <ul class="linter-rule-list">
+          <li><strong>Passive voice</strong> — Detected by pattern. Not always wrong, but worth reviewing.</li>
+          <li><strong>Long sentences</strong> — Over 35 words. Technical readers scan. Long sentences fight that.</li>
+          <li><strong>High adverb density</strong> — More than 5% of words ending in -ly. A sign of over-modified prose.</li>
+          <li><strong>Low readability</strong> — Flesch-Kincaid below 30. A score used in plain-language standards worldwide.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-band cta-band-top-border">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Need writing that passes its own linter?</h2>
+        <p>Technical content for DevTools and B2B SaaS — accurate, minimal-revision, no fluff.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+        <a href="/blog/" class="btn btn-outline">Read the Writing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/static/js/linter.js"></script>
+{% endblock %}

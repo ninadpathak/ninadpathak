@@ -1,0 +1,440 @@
+/* =====================================================================
+   TECHNICAL WRITING LINTER
+   ninadpathak.com/linter/
+   ===================================================================== */
+
+/* ── Section spacing ────────────────────────────────────────────────── */
+
+.linter-section {
+  padding: 0 0 4rem;
+}
+
+/* ── Input Panel ────────────────────────────────────────────────────── */
+
+.linter-input-panel {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-1);
+  margin-bottom: 1.5rem;
+}
+
+.linter-input-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.linter-file-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+.linter-input-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.linter-shortcut {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-3);
+}
+
+.linter-sample-btn {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: opacity var(--t);
+}
+
+.linter-sample-btn:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+.linter-textarea {
+  display: block;
+  width: 100%;
+  min-height: 340px;
+  padding: 1.25rem;
+  background: var(--bg-1);
+  color: var(--text-1);
+  border: none;
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  resize: vertical;
+  outline: none;
+  transition: background var(--t);
+}
+
+.linter-textarea::placeholder {
+  color: var(--text-3);
+}
+
+.linter-input-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-2);
+}
+
+.linter-char-count {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+/* ── Output Panel ───────────────────────────────────────────────────── */
+
+.linter-output-panel {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-1);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Score Bar ──────────────────────────────────────────────────────── */
+
+.lint-score-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+}
+
+.lint-score-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.lint-score-number {
+  font-family: var(--mono);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-1);
+  min-width: 3.5rem;
+  transition: color 0.2s;
+}
+
+.lint-grade {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.lint-grade-desc {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--sans);
+}
+
+/* Grade colour overrides */
+.lint-grade-a .lint-score-number,
+.lint-grade-a .lint-grade { color: #22c55e; }
+
+.lint-grade-b .lint-score-number,
+.lint-grade-b .lint-grade { color: #3b82f6; }
+
+.lint-grade-c .lint-score-number,
+.lint-grade-c .lint-grade { color: #f59e0b; }
+
+.lint-grade-d .lint-score-number,
+.lint-grade-d .lint-grade { color: #ef4444; }
+
+.lint-grade-f .lint-score-number,
+.lint-grade-f .lint-grade { color: #dc2626; }
+
+.lint-score-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-3);
+  flex-wrap: wrap;
+}
+
+.lint-stat-sep {
+  color: var(--border-2);
+}
+
+/* ── Issue Groups ───────────────────────────────────────────────────── */
+
+.lint-issues {
+  padding: 0;
+}
+
+.lint-group {
+  border-bottom: 1px solid var(--border);
+}
+
+.lint-group:last-child {
+  border-bottom: none;
+}
+
+.lint-group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.lint-sev-icon {
+  font-size: 0.65rem;
+}
+
+.lint-group-error   .lint-sev-icon,
+.lint-group-error   .lint-group-label { color: #ef4444; }
+
+.lint-group-warning .lint-sev-icon,
+.lint-group-warning .lint-group-label { color: #f59e0b; }
+
+.lint-group-info    .lint-sev-icon,
+.lint-group-info    .lint-group-label { color: #3b82f6; }
+
+.lint-group-count {
+  margin-left: auto;
+  background: var(--bg);
+  color: var(--text-3);
+  padding: 0.1rem 0.45rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+}
+
+/* ── Individual Issue ───────────────────────────────────────────────── */
+
+.lint-item {
+  padding: 0.875rem 1.5rem 0.875rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.lint-item:last-child {
+  border-bottom: none;
+}
+
+.lint-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+}
+
+.lint-item-error::before   { background: #ef4444; }
+.lint-item-warning::before { background: #f59e0b; }
+.lint-item-info::before    { background: #3b82f6; }
+
+.lint-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.lint-item-rule {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.lint-item-line {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-3);
+  background: var(--bg-2);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+.lint-item-excerpt {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-2);
+  margin-bottom: 0.25rem;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.lint-item-message {
+  font-size: 0.8rem;
+  color: var(--text-3);
+  line-height: 1.5;
+}
+
+/* ── Clean / no-issues state ────────────────────────────────────────── */
+
+.lint-clean {
+  padding: 2.5rem 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: #22c55e;
+  text-align: center;
+}
+
+/* ── Actions bar ────────────────────────────────────────────────────── */
+
+.lint-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-2);
+}
+
+/* ── Empty state ────────────────────────────────────────────────────── */
+
+.linter-empty {
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  background: var(--bg-1);
+}
+
+.linter-empty-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 2rem;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.linter-empty-icon {
+  font-family: var(--mono);
+  font-size: 1.75rem;
+  color: var(--border-2);
+}
+
+.linter-empty p {
+  font-size: 0.875rem;
+  color: var(--text-3);
+  margin: 0;
+}
+
+/* ── Rules reference section ────────────────────────────────────────── */
+
+.linter-rules-section {
+  padding: 3rem 0 4rem;
+  border-top: 1px solid var(--border);
+}
+
+.linter-rules-header {
+  margin-bottom: 2rem;
+}
+
+.linter-rules-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.linter-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.lint-severity-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  margin-bottom: 0.875rem;
+}
+
+.lint-severity-error   { background: rgba(239,68,68,0.12);  color: #ef4444; }
+.lint-severity-warning { background: rgba(245,158,11,0.12); color: #f59e0b; }
+.lint-severity-info    { background: rgba(59,130,246,0.12); color: #3b82f6; }
+
+.linter-rule-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.linter-rule-list li {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.linter-rule-list li strong {
+  color: var(--text-1);
+  font-weight: 600;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .linter-rules-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .lint-score-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lint-score-stats {
+    justify-content: flex-start;
+  }
+
+  .lint-item {
+    padding: 0.75rem 1rem 0.75rem 1.25rem;
+  }
+
+  .lint-group-header {
+    padding: 0.5rem 1rem;
+  }
+
+  .lint-actions {
+    padding: 0.875rem 1rem;
+  }
+
+  .linter-shortcut {
+    display: none;
+  }
+}

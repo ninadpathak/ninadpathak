@@ -308,6 +308,12 @@ class SiteBuilder:
             page="contact",
         )
 
+    def build_linter(self):
+        self.render(
+            "linter.html", "linter/index.html",
+            page="linter",
+        )
+
     def build_legal_pages(self, legal_pages):
         for legal_page in legal_pages:
             self.render(
@@ -367,6 +373,7 @@ class SiteBuilder:
             ("/projects/", "0.7", "monthly"),
             ("/about/", "0.6", "monthly"),
             ("/contact/", "0.5", "yearly"),
+            ("/linter/", "0.9", "monthly"),
             ("/privacy/", "0.3", "yearly"),
             ("/terms/", "0.3", "yearly"),
         ]
@@ -466,6 +473,7 @@ class SiteBuilder:
         self.build_projects(projects)
         self.build_about()
         self.build_contact()
+        self.build_linter()
         self.build_legal_pages(legal_pages)
         self.build_tasks(posts)
         self.build_sitemap(posts, work_cases)
