@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Token Pipeline | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090909;
+      --accent: #ff5f1f;
+      --border: #1e1e1e;
+      --text: #f0f0f0;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
+    .pipeline { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 20px; }
+    .stage { flex: 1; border: 1px solid var(--border); height: 200px; padding: 20px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .stage::after { content: '→'; position: absolute; right: -25px; top: 50%; transform: translateY(-50%); color: #333; font-size: 20px; }
+    .stage:last-child::after { display: none; }
+    .label { position: absolute; top: -10px; left: 10px; background: var(--bg); padding: 0 5px; font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
+    .content { font-size: 13px; text-align: center; color: #888; }
+    .active-text { color: #fff; font-weight: 500; }
+    .vector-small { display: flex; gap: 2px; margin-top: 10px; }
+    .v-dot { width: 4px; height: 12px; background: var(--accent); opacity: 0.3; }
+    
+    @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+    .animating .v-dot { animation: pulse 1s infinite; }
+  </style>
+</head>
+<body>
+  <div class="pipeline">
+    <div class="stage" id="s1">
+      <div class="label">Input</div>
+      <div class="content active-text">"Artificial intelligence"</div>
+    </div>
+    <div class="stage" id="s2">
+      <div class="label">Tokenization</div>
+      <div class="content">["Artif", "icial", " intelligence"]</div>
+    </div>
+    <div class="stage" id="s3">
+      <div class="label">Encoder</div>
+      <div class="content">Neural Network Passes</div>
+    </div>
+    <div class="stage" id="s4">
+      <div class="label">Vector</div>
+      <div class="content">[0.12, -0.45, 0.89, ...]</div>
+      <div class="vector-small" id="vDots"></div>
+    </div>
+  </div>
+
+  <script>
+    const vDots = document.getElementById('vDots');
+    for(let i=0; i<16; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'v-dot';
+      dot.style.animationDelay = (i * 0.1) + 's';
+      vDots.appendChild(dot);
+    }
+
+    let current = 0;
+    const stages = ['s1', 's2', 's3', 's4'];
+    
+    function animate() {
+      stages.forEach(id => document.getElementById(id).classList.remove('animating'));
+      document.getElementById(stages[current]).classList.add('animating');
+      current = (current + 1) % stages.length;
+      setTimeout(animate, 1500);
+    }
+    
+    animate();
+  </script>
+</body>
+</html>

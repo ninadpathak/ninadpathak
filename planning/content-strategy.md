@@ -19,6 +19,7 @@
 | 7 | RAG Chunking Strategies: What the Research Actually Shows | 2026-03-14 | r/MachineLearning, r/LocalLLaMA, r/LangChain |
 | 8 | Content Strategy for DevTools Companies | 2026-03-17 | r/devops, r/programming, r/Entrepreneur |
 | 9 | What Makes API Documentation Good | 2026-03-20 | r/webdev, r/programming, r/devops |
+| 10 | Embedding models: the geometry of meaning across OpenAI, Cohere, and open-source | 2026-03-15 | r/MachineLearning, r/LocalLLaMA |
 
 ---
 

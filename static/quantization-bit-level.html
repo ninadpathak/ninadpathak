@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quantization | Ninad Pathak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090909;
+      --accent: #ff5f1f;
+      --border: #1e1e1e;
+      --text: #f0f0f0;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; padding: 40px; box-sizing: border-box; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; height: 100%; }
+    .side { border: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; }
+    .label { font-size: 10px; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .bit-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; flex: 1; }
+    .bit { background: #1a1a1a; aspect-ratio: 1; border-radius: 2px; transition: background 0.2s; }
+    .bit.on { background: var(--accent); }
+    .float-val { font-size: 12px; color: #666; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="compare">
+    <div class="side">
+      <div class="label">Float32 (32-bit)</div>
+      <div class="bit-grid" id="f32"></div>
+      <div class="float-val">0.1234567890123456</div>
+    </div>
+    <div class="side">
+      <div class="label">Binary (1-bit)</div>
+      <div class="bit-grid" id="b1"></div>
+      <div class="float-val">1</div>
+    </div>
+  </div>
+
+  <script>
+    const f32 = document.getElementById('f32');
+    const b1 = document.getElementById('b1');
+    
+    for(let i=0; i<32; i++) {
+      const bit = document.createElement('div');
+      bit.className = 'bit ' + (Math.random() > 0.5 ? 'on' : '');
+      f32.appendChild(bit);
+    }
+    
+    for(let i=0; i<32; i++) {
+      const bit = document.createElement('div');
+      bit.className = 'bit';
+      if(i === 0) bit.className += ' on';
+      b1.appendChild(bit);
+    }
+  </script>
+</body>
+</html>
