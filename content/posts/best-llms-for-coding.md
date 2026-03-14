@@ -11,7 +11,7 @@ Evaluating models for software engineering has moved beyond simple snippet gener
 I benchmarked the leading models across four distinct engineering personas. I looked at agentic autonomy and algorithmic complexity. I considered cost efficiency and repository-scale context management.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-leaderboard.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/coding-leaderboard.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Why SWE-bench Verified is the only metric that matters
@@ -43,7 +43,7 @@ DeepSeek V4 has changed the economics of high-performance AI coding. It performs
 I use DeepSeek for high-volume tasks. These include automated code reviews and massive unit test generation. It also features "Engram Memory" which helps it remember your specific project style across sessions. You can run millions of tokens through DeepSeek for the price of a few thousand on a proprietary model. Such an advantage is vital for startups and internal devtools.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-cost-perf.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/coding-cost-perf.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## For multi-step reasoning and planning: GPT-5.4 Codex
@@ -53,7 +53,7 @@ GPT-5.4 Codex remains a highly reliable choice for planning. It may not lead eve
 GPT-5.4 has exceptional support for structured outputs and predicted tokens. These features are critical for building low-latency coding tools. The model is deeply integrated into the OpenAI ecosystem. It is a safe bet for teams that want a stable and well-supported platform.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/coding-model-radar.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/coding-model-radar.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## For everyday IDE autocomplete: the OpenAI and Cursor ecosystem

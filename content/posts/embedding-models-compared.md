@@ -71,7 +71,7 @@ OpenAI's latest models support this natively through the `dimensions` parameter.
 The training process forces the model to prioritize the most discriminative features in the early dimensions. The hierarchy means that the first 10% of your vector often contains 90% of the useful semantic signal. We can use this to optimize cold storage layers. You store the full vectors on high-latency disk and keep only the truncated Matryoshka heads in low-latency RAM for the initial candidate selection.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/matryoshka-visualizer.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/matryoshka-visualizer.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Spatial collapse in high dimensions

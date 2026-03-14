@@ -21,7 +21,7 @@ MCP is an open standard that decouples the AI application from the tools it uses
 The system consists of three parts. The host is the primary AI interface like Claude Desktop or an IDE. The server is the provider of data or tools. The client is the bridge that manages the connection between them. Such a separation of concerns allows developers to build tools once and deploy them across any MCP-compliant platform.
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/mcp-architecture.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/mcp-architecture.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 ## Why MCP matters architecturally

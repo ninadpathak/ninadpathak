@@ -15,7 +15,7 @@ The reality of production engineering is more complex. Larger windows introduce 
 Models do not pay equal attention to every part of the prompt. Research has identified a consistent U-shaped performance curve. Models are best at retrieving information located at the very beginning or the very end of the context. Information placed in the middle is often ignored or "lost."
 
 <div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/context-heatmap.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
+  <iframe src="/static/context-heatmap.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
 </div>
 
 Such a phenomenon occurs because the model's attention mechanism must distribute limited focus across many tokens. The early tokens set the stage. The late tokens provide the immediate context for the next word. The middle tokens become a sea of noise. You must place your most critical instructions and data at the boundaries if you use long contexts.
