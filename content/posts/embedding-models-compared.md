@@ -14,9 +14,7 @@ A weak model clusters unrelated concepts together. A strong model preserves the 
 
 I spent the last year benchmarking these models across production workloads. The landscape has shifted from simple BERT-based encoders to massive parameter models that rival the reasoning capabilities of small LLMs. Understanding the geometry behind these models is no longer optional for engineers building AI products.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/embedding-3d-space.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## How text becomes geometry
 
