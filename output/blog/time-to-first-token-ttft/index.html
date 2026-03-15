@@ -222,29 +222,17 @@
       <div class="post-content">
         <p>Interactive AI applications live or die by perceived latency. A model might generate 100 tokens per second. Such speed is irrelevant if the user waits five seconds for the stream to start. Time to First Token (TTFT) is the metric that determines if your application feels "alive" or broken.</p>
 <p>Understanding the components of TTFT is vital for performance engineering. It is not a single number. It is the result of a complex pipeline involving networking and queueing and model prefill.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/ttft-breakdown.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="what-ttft-actually-measures">What TTFT actually measures</h2>
 <p>TTFT measures the interval between a user sending a request and receiving the first generated token. This is different from "tokens per second," which measures the generation speed once the stream has started.</p>
 <p>Prefilling the prompt is the primary driver of TTFT. The model must process all input tokens to build the initial KV cache. Such computation is a "one-time tax" paid at the start of every request. Longer prompts lead directly to higher TTFT.</p>
 <h2 id="ttft-is-not-the-same-as-throughput">TTFT is not the same as throughput</h2>
 <p>High throughput is important for batch tasks like document parsing. Interactive chat requires low TTFT. You can often trade one for the other.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/ttft-vs-throughput.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
-</div>
-
 <p>Optimizing for throughput usually involves increasing batch sizes. Such a strategy allows the GPU to work more efficiently but increases the wait time for individual requests. Optimizing for TTFT requires smaller batches or dedicated compute resources to ensure immediate processing.</p>
 <h2 id="model-size-is-the-first-real-lever">Model size is the first real lever</h2>
 <p>The size of the model determines the baseline TTFT. A 7B parameter model will always generate the first token faster than a 400B model on identical hardware. This is because the smaller model requires fewer memory loads to process the input.</p>
 <p>Choosing a smaller "distilled" model is the most effective way to drop TTFT if your reasoning requirements allow it. Many teams use a small model for the initial response and a larger model for background tasks. Such an architecture provides immediate feedback to the user without sacrificing depth.</p>
 <h2 id="a-practical-order-for-optimization">A practical order for optimization</h2>
 <p>Follow this hierarchy when tasked with reducing latency in production.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/ttft-hierarchy.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
-
 <p><strong>Model Selection.</strong> Start by choosing the smallest model that meets your quality bar. This is the "low-hanging fruit" of latency work.</p>
 <p><strong>Prompt Caching.</strong> Use caching to eliminate the prefill tax for static context. This can drop TTFT by 80% for repeated prefixes.</p>
 <p><strong>Speculative Decoding.</strong> Use a draft model to speed up the verification step. Such a technique improves snappiness by predicting multiple tokens in parallel.</p>

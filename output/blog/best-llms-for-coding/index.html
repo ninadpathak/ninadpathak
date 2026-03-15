@@ -192,7 +192,7 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 12, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">5 min read</span>
+        <span class="post-meta-time">4 min read</span>
       </div>
       <h1 class="post-title">The Best LLMs for Coding in 2026: An Engineering Review</h1>
       <p class="lead">Not all models are created equal for software development. Here is a benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic logic, and repository-scale refactoring as of March 2026.</p>
@@ -227,57 +227,29 @@
       <div class="post-content">
         <p>Evaluating models for software engineering has moved beyond simple snippet generation. Production coding tasks now involve long-range reasoning and autonomous tool interaction. They require deep algorithmic logic. The model that wins on a Python quiz might fail when tasked with refactoring a multi-file repository or managing a complex migration.</p>
 <p>I benchmarked the leading models across four distinct engineering personas. I looked at agentic autonomy and algorithmic complexity. I considered cost efficiency and repository-scale context management.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/coding-leaderboard.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="why-swe-bench-verified-is-the-only-metric-that-matters">Why SWE-bench Verified is the only metric that matters</h2>
 <p>HumanEval and other snippet-based benchmarks are obsolete. They measure the ability to solve isolated coding problems that represent a tiny fraction of professional work. Professional engineering happens at the repository level.</p>
 <p>SWE-bench Verified provides the most accurate signal today. It requires models to resolve real-world GitHub issues. They must navigate a codebase and identify the root cause of a bug. They have to write a fix and verify it against existing tests. Such a task reveals the models that can genuinely think like engineers. Claude 4.6 Opus currently leads this benchmark with a score of 80.9%.</p>
 <h2 id="for-agentic-and-autonomous-coding-claude-46-opus">For agentic and autonomous coding: Claude 4.6 Opus</h2>
 <p>Claude 4.6 Opus is the gold standard for autonomous engineering agents. It displays a unique ability to reason through multi-step plans. It does not get lost when a tool call returns an unexpected error. Opus often pauses to correct its own assumptions when a build fails.</p>
 <p>Such reliability is why many agentic frameworks now default to Claude. The model handles "effort controls" that allow you to toggle reasoning depth based on task complexity. Claude is the best choice if you are building an agent that needs to manage multi-file pull requests independently.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/coding-agent-success.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="for-complex-logic-and-repository-scale-context-gemini-31-pro">For complex logic and repository-scale context: Gemini 3.1 Pro</h2>
 <p>Gemini 3.1 Pro excels at complex architectural challenges. Google has integrated "Antigravity" agents that plan across the terminal and browser. Its logic density allows it to solve mathematical puzzles that trip up other models.</p>
 <p>Gemini maintains a massive lead with a two million token context window. This allows you to dump an entire documentation site and a full legacy repository into a single prompt. The model maintains high retrieval accuracy across this range. It is the ideal tool for architectural reviews and large-scale code migrations.</p>
 <h2 id="for-cost-sensitive-production-use-deepseek-v4">For cost-sensitive production use: DeepSeek V4</h2>
 <p>DeepSeek V4 has changed the economics of high-performance AI coding. It performs at a level comparable to Claude 4.6 while costing a fraction of the price. The model uses a Mixture-of-Experts architecture that prioritizes efficiency.</p>
 <p>I use DeepSeek for high-volume tasks. These include automated code reviews and massive unit test generation. It also features "Engram Memory" which helps it remember your specific project style across sessions. You can run millions of tokens through DeepSeek for the price of a few thousand on a proprietary model. Such an advantage is vital for startups and internal devtools.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/coding-cost-perf.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="for-multi-step-reasoning-and-planning-gpt-54-codex">For multi-step reasoning and planning: GPT-5.4 Codex</h2>
 <p>GPT-5.4 Codex remains a highly reliable choice for planning. It may not lead every raw benchmark. However, it exhibits consistent behavior across different languages and task types. OpenAI's model features "Adaptive Reasoning" that automatically decides when to think deeply.</p>
 <p>GPT-5.4 has exceptional support for structured outputs and predicted tokens. These features are critical for building low-latency coding tools. The model is deeply integrated into the OpenAI ecosystem. It is a safe bet for teams that want a stable and well-supported platform.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/coding-model-radar.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="for-everyday-ide-autocomplete-the-openai-and-cursor-ecosystem">For everyday IDE autocomplete: the OpenAI and Cursor ecosystem</h2>
 <p>The choice of model matters less than the integration for real-time autocomplete. GitHub Copilot and Cursor use custom-trained versions of OpenAI and Anthropic models. They are optimized for the specific task of predicting the next few lines of code.</p>
 <p>Low latency is the most important metric for autocomplete. These systems use smaller models or speculative decoding to provide instant suggestions. They are the tools that most engineers use every hour to maintain their flow state.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/coding-ecosystem.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="the-closing-gap-of-open-source">The closing gap of open source</h2>
 <p>Open-source coding models are catching up rapidly. Llama 4.0 and Qwen 2.5 Coder are now legitimate alternatives to proprietary models. They allow you to host your own coding assistant. Such a capability is vital for companies with strict data privacy requirements.</p>
 <p>The gap in performance is closing every month. Open-source models now solve complex bugs and write clean logic. They benefit from the collective intelligence of the research community. I expect open-weights to become the default for most enterprise coding tasks by the end of 2026.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/coding-os-growth.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="summary-decision-framework">Summary decision framework</h2>
-<p>The right model depends on your specific needs. Use Claude for high-autonomy agents. Choose Gemini for complex logic and large repositories. Select DeepSeek for cost efficiency. Stick with GPT-5.4 for reliable planning.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/coding-decision-tree.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
-</div>
-
+<p>The right model depends on your specific needs. Answer three questions to get a direct recommendation.</p>
 <h2 id="faq">FAQ</h2>
 <p><strong>Should I use one model for everything?</strong></p>
 <p>No. Multi-model pipelines are more efficient. Use a small model for autocomplete and a large model for architectural decisions.</p>

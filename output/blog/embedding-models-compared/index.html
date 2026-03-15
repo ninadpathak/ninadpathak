@@ -192,7 +192,7 @@
       <div class="post-meta">
         <span class="post-meta-date">Mar 15, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">15 min read</span>
+        <span class="post-meta-time">14 min read</span>
       </div>
       <h1 class="post-title">Vector Embeddings: A Guide to the Geometry of Meaning in AI</h1>
       <p class="lead">Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.</p>
@@ -234,30 +234,18 @@
 <p>We call these lists of numbers embeddings. They are the foundational infrastructure for retrieval-augmented generation (RAG), semantic search, and recommendation engines. The choice of embedding model determines the ceiling of your system's accuracy.</p>
 <p>A weak model clusters unrelated concepts together. A strong model preserves the subtle distinctions between "bank" as a financial institution and "bank" as the side of a river. This precision is what enables modern AI to understand context.</p>
 <p>I spent the last year benchmarking these models across production workloads. The landscape has shifted from simple BERT-based encoders to massive parameter models that rival the reasoning capabilities of small LLMs. Understanding the geometry behind these models is no longer optional for engineers building AI products.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/embedding-3d-space.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="how-text-becomes-geometry">How text becomes geometry</h2>
 <p>Encoding text into a vector is a process of projection. You take a discrete string of characters and map it onto a point in a high-dimensional space. OpenAI's <code>text-embedding-3d-small</code> model uses 1536 dimensions.</p>
 <p>Each dimension represents a learned feature of language that the model discovered during training. One dimension might track the sentiment of the text. Another might track the presence of technical jargon.</p>
 <p>A third might track the relationship to a specific geographic region. The model does not label these dimensions for us. It learns them by processing trillions of tokens and observing which words tend to appear in similar contexts.</p>
 <p>Words that share meaning end up physically close to each other in this space. "King" and "Queen" reside in a similar neighborhood. "Apple" and "iPhone" cluster together.</p>
 <p>"Apple" and "Banana" form a separate but nearby cluster representing fruit. The relationship between these points is what we measure when we perform a search. This spatial logic is the foundation of semantic understanding.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/token-to-vector-pipeline.html" style="width: 100%; height: 250px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="measuring-semantic-proximity-with-vector-similarity">Measuring semantic proximity with vector similarity</h2>
 <p>Searching through millions of vectors requires a consistent way to measure the "closeness" of two points. L2 norm is the most intuitive metric. It measures the spatial interval between two coordinates.</p>
 <p>Many embedding models are normalized to have a length of one. This places every vector on the surface of a multi-dimensional unit sphere. Normalization ensures that the magnitude of the vector does not bias the search results.</p>
 <p>Cosine similarity becomes the preferred metric in this constrained geometry. It measures the cosine of the angle between two vectors. When two vectors point in exactly the same direction, the angle is zero and the similarity is one.</p>
 <p>When they point in opposite directions, the similarity is negative one. I've seen many teams struggle with the "curse of dimensionality" when using these metrics. High-dimensional spaces push points toward the edges of the space.</p>
 <p>The difference between the interval to the nearest neighbor and the interval to the average neighbor starts to disappear. Such sensitivity makes similarity thresholds extremely precise. A similarity of 0.82 might be a perfect match, while 0.79 is completely irrelevant.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/cosine-similarity-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="architecture-choices-for-embedding-generation">Architecture choices for embedding generation</h2>
 <p>The transition from text to vector happens inside the transformer architecture. Traditional LLMs like GPT-4 are decoders. They predict the next token in a sequence.</p>
 <p>Embedding models are often encoders like BERT or RoBERTa. They process the entire input at once to generate a single summary representation. This global view is necessary for capturing the full meaning of a document.</p>
@@ -269,10 +257,6 @@
 <p>It also requires twice the compute for similarity calculations. I've monitored how models like Cohere's <code>embed-english-v3.0</code> handle this trade-off. They use a technique called compression-aware training to ensure that information is packed efficiently into each dimension.</p>
 <p>Such efficiency allows their models to outperform larger competitors while using fewer resources. Dimensionality reduction is the process of taking these high-dimensional vectors and projecting them down to smaller spaces. We do this for visualization or to speed up initial search phases.</p>
 <p>Techniques like Principal Component Analysis (PCA) or t-SNE help us see the clusters that the model creates. These projections always come with a cost in accuracy. You must carefully validate the performance impact when using reduced vectors in production.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/dimensionality-reduction-viz.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="building-flexible-vectors-with-matryoshka-embeddings">Building flexible vectors with Matryoshka embeddings</h2>
 <p>The most significant innovation in embedding geometry recently is the Matryoshka Representation Learning (MRL) technique. These models are trained so that the most important information is stored in the first few dimensions. The vector acts like a Russian nesting doll.</p>
 <p>You can take a 1536-dimension Matryoshka vector and truncate it to 128 dimensions. The resulting smaller vector still captures most of the semantic meaning. Such flexibility allows you to build multi-stage search systems.</p>
@@ -280,29 +264,17 @@
 <p>My testing shows that you can often drop 75% of the dimensions with less than a 5% drop in retrieval accuracy. Such a massive win for infrastructure costs in large-scale RAG systems cannot be ignored. The mathematical elegance of MRL comes from a multi-scale loss function that penalizes errors at every truncation point simultaneously.</p>
 <p>The training process forces the model to prioritize the most discriminative features in the early dimensions. The hierarchy means that the first 10% of your vector often contains 90% of the useful semantic signal. We can use this to optimize cold storage layers.</p>
 <p>You store the full vectors on high-latency disk. You keep only the truncated Matryoshka heads in low-latency RAM for the initial candidate selection. This layered approach is the current gold standard for large-scale retrieval.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/matryoshka-visualizer.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="spatial-collapse-in-high-dimensions">Spatial collapse in high dimensions</h2>
 <p>Navigating a 1536-dimension space is not like navigating a 3D room. Our brains are built to understand volume. High-dimensional geometry behaves according to different rules.</p>
 <p>The most counter-intuitive rule is the volume concentration phenomenon. Almost all the volume of a high-dimensional sphere is concentrated in a thin shell near its surface. Points do not fill the middle of the space.</p>
 <p>They cluster at the boundaries. Such concentration causes the "spatial collapse" I mentioned earlier. Vectors that look semantically distinct often end up with extremely high cosine similarity scores.</p>
 <p>This happens because they are all pushed into the same outer layer of the geometry. Understanding this collapse is vital for setting search thresholds. A similarity score of 0.7 in 3D space might indicate a strong relationship.</p>
 <p>That same score in 1536D might be noise. You need to calibrate your retrieval system based on the specific distribution of your model's output space. Accurate calibration prevents false positives in your search results.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/curse-of-dimensionality.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="comparing-openai-cohere-and-voyage-ai">Comparing OpenAI, Cohere, and Voyage AI</h2>
 <p>Choosing a provider involves balancing accuracy, latency, and cost. OpenAI remains the default choice for many teams due to their aggressive pricing and decent performance. Their <code>text-embedding-3d-small</code> model is cheap and reliable for general-purpose semantic search.</p>
 <p>Cohere offers a more specialized experience. Their <code>v3</code> models are trained specifically for enterprise retrieval tasks. They excel at handling noisy data and maintain high accuracy on domain-specific jargon.</p>
 <p>I've found their models particularly effective for legal and financial documentation where precision is non-negotiable. Voyage AI is a newer entrant that has consistently topped the MTEB (Massive Text Embedding Benchmark) leaderboards. Their models often show a meaningful improvement in recall over OpenAI.</p>
 <p>They achieve this by using larger base architectures and more sophisticated training data curation. Smaller providers often move faster with architectural innovations that the giants take months to adopt. You should evaluate multiple providers to find the best match for your specific data distribution.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/provider-comparison-radar.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="reducing-memory-with-binary-and-scalar-quantization">Reducing memory with binary and scalar quantization</h2>
 <p>Storing millions of high-dimensional vectors as 32-bit floats is prohibitively expensive. A single 1536-dimension vector at float32 precision takes up 6KB. One million vectors would require 6GB of memory.</p>
 <p>High-performance vector databases like Pinecone or Weaviate solve this using quantization. Scalar quantization (SQ) reduces each dimension from 32 bits to 8 bits. Such reduction cuts memory usage by 75% with almost no loss in retrieval quality.</p>
@@ -310,29 +282,17 @@
 <p>It reduces each dimension to a single bit: 0 or 1. You only store whether the value is positive or negative. Such reduction cuts memory usage by 32x.</p>
 <p>Search speeds increase dramatically because similarity calculations become simple XOR operations at the hardware level. Cohere's latest models are specifically designed to support binary quantization with minimal accuracy trade-offs. Modern vector databases now implement "over-sampling and re-scoring" to mitigate the small accuracy loss from BQ.</p>
 <p>You retrieve 10x more results than you need using the binary index. You then re-rank them using the original full-precision vectors. Such a strategy provides the speed of binary search with the accuracy of floating-point search.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/quantization-bit-level.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="the-standard-semantic-search-pipeline">The standard semantic search pipeline</h2>
 <p>Building a search system with these models follows a predictable pipeline. You start by chunking your documents. Each chunk is passed to the embedding model to generate a vector.</p>
 <p>These vectors are stored in a vector database alongside the original text and metadata. A user query arrives and is embedded using the same model. The vector database performs a nearest-neighbor search to find the chunks with the highest similarity.</p>
 <p>These chunks are then passed to an LLM as context for the final answer. The embedding model acts as the librarian. The LLM acts as the researcher.</p>
 <p>Failures in this workflow usually happen at the librarian stage. Semantic search is only as good as the geometry of the underlying space. Searching fails when the embedding model cannot understand the semantic relationship between a query and a document.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/semantic-search-animation.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="api-latency-vs-self-hosted-model-performance">API latency vs self-hosted model performance</h2>
 <p>Embedding large datasets is an asynchronous batch process. Querying them is a synchronous user interaction. Latency matters.</p>
 <p>OpenAI and Cohere typically return vectors in 150ms to 300ms. Such response times are acceptable for many web applications. They might feel sluggish for interactive chat interfaces.</p>
 <p>Self-hosting models like BGE-M3 or Hugging Face's latest encoders can reduce latency to less than 50ms. You gain control over the hardware and eliminate the network hop to a provider's API. The cost is the operational overhead of managing GPU clusters.</p>
 <p>Large-scale systems often use a hybrid approach. They use a provider's API for the initial embedding of the corpus. They then use a highly optimized, self-hosted model for real-time user queries.</p>
 <p>Such a strategy requires careful alignment to ensure both models project into a compatible space. Re-embedding a small set of results at query time is the most common way to handle this complexity. Consistency in your vector space is required for reliable retrieval.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/latency-benchmark-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="accuracy-stability-in-long-context-models">Accuracy stability in long-context models</h2>
 <p>The maximum sequence length for most embedding models is 8192 tokens. Newer models from Jina and Nomic have pushed this to 32k or even 128k tokens. Such expansion sounds like an advantage for processing long documents without chunking.</p>
 <p>My tests show a significant decay in vector stability as the input grows. Embeddings are essentially a weighted average of token hidden states. The semantic signal becomes diluted when you cram 32k tokens into a single 1536-dimension vector.</p>

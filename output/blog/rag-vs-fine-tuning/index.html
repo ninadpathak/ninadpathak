@@ -223,10 +223,6 @@
 <p>Retrieval-Augmented Generation (RAG) is for providing the model with facts. Fine-tuning is for teaching the model a specific behavior or format. Choosing the wrong tool for the job leads to expensive systems that fail in production.</p>
 <h2 id="the-first-question-is-not-technical">The first question is not technical</h2>
 <p>Start by asking what you are trying to change. Do you need the model to know new information that it was not trained on? Or do you need it to act differently, such as speaking in a specific technical tone or following a rigid JSON schema?</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/rag-ft-matrix.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
-</div>
-
 <p>RAG is the superior choice for dynamic information. It allows you to update the model's "knowledge" in seconds by adding a document to a vector database. Fine-tuning requires a new training run every time your data changes. This makes it unsuitable for most business applications where data is in constant flux.</p>
 <h2 id="what-rag-is-actually-good-at">What RAG is actually good at</h2>
 <p>RAG excels at accuracy and auditability. The model can cite its sources because the information is provided in the prompt. You can see exactly which document was retrieved to generate a specific answer. Such transparency is critical for legal, medical, or financial applications.</p>

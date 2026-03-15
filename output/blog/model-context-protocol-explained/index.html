@@ -225,34 +225,18 @@
       <div class="post-content">
         <p>Connecting AI models to external data has always been a messy engineering challenge. Every application needs its own set of connectors for GitHub or Google Drive. Every tool requires custom code to translate model requests into API calls. Such fragmentation slows down development and increases the risk of reasoning errors.</p>
 <p>The Model Context Protocol (MCP) solves this by introducing a universal standard. It allows any AI host to communicate with any data server using a single language. This is the missing infrastructure layer for the next generation of AI agents.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/mcp-connector-viz.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="what-the-model-context-protocol-actually-is">What the Model Context Protocol actually is</h2>
 <p>MCP is an open standard that decouples the AI application from the tools it uses. It defines a consistent way for a host to discover and execute functions on a remote server. The protocol uses JSON-RPC to manage these interactions. It ensures that data and tool definitions are served in a format the model can understand natively.</p>
 <p>The system consists of three parts. The host is the primary AI interface like Claude Desktop or an IDE. The server is the provider of data or tools. The client is the bridge that manages the connection between them. Such a separation of concerns allows developers to build tools once and deploy them across any MCP-compliant platform.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/mcp-architecture.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="why-mcp-matters-architecturally">Why MCP matters architecturally</h2>
 <p>Standardizing the interface between models and tools simplifies the entire AI stack. You no longer have to write a custom Slack connector for your research agent and then another one for your coding assistant. You build one MCP server for Slack. Any agent can then use it immediately.</p>
 <p>Such modularity enables "dynamic tool discovery." An agent can query an MCP server to see what capabilities are available at runtime. This allows for more flexible and capable systems that can adapt to new data sources without a full rebuild. MCP turns tool integration from a coding task into a configuration task.</p>
 <h2 id="how-the-protocol-works">How the protocol works</h2>
 <p>The communication flow is predictable. The host initiates a connection to the server. The server responds with a list of available resources and tools. Each tool includes a name and a description. It also includes a JSON Schema defining the required input arguments.</p>
 <p>The model generates a tool call based on these definitions. The host forwards this request to the MCP server. The server executes the function and returns the result. Such a structured loop minimizes the probability of hallucinated arguments. It provides a reliable boundary for security and rate limiting.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/mcp-workflow.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="mcp-inside-an-agent-harness">MCP inside an agent harness</h2>
 <p>MCP is most powerful when integrated into an agent harness. The harness manages the high-level reasoning loop. MCP handles the granular task of tool execution and data retrieval. This combination creates a robust production environment.</p>
 <p>The harness uses MCP to fetch real-time context. It might query a database or pull the latest logs from a monitoring tool. Such data is then injected into the prompt assembler. MCP provides the pipes. The harness provides the brain.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/mcp-harness-map.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="when-to-use-mcp">When to use MCP</h2>
 <p>Adopt MCP if you are building an ecosystem of tools that need to work across different AI applications. It is the best choice for enterprise environments where data is siloed across many SaaS platforms. MCP is also ideal for local development where you want to give an LLM access to your file system or terminal in a controlled way.</p>
 <p>Direct tool calling might still be simpler for a single-purpose application with one or two fixed tools. The overhead of the protocol is only worth it when scale and interoperability become priorities. MCP is an investment in the long-term flexibility of your AI infrastructure.</p>

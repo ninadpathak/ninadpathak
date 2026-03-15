@@ -224,20 +224,12 @@
 <p>Prompt caching solves this by persisting the intermediate state of the model's computation. It allows you to "reuse" the work done on previous prompts. Understanding the mechanics of prefix matching is the key to making this work in production.</p>
 <h2 id="what-prompt-caching-actually-does">What prompt caching actually does</h2>
 <p>Caching stores the Key-Value (KV) cache of a prompt prefix in memory or on disk. The KV cache represents the mathematical summary of all tokens processed so far. The model can skip the initial computation phase and jump straight to generating new tokens when a new prompt shares an identical prefix with a cached one.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/caching-prefix-viz.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
-
 <p>Such a strategy is particularly effective for systems with long system instructions or large retrieved datasets. You pay the full "prefill" price once. Subsequent requests only pay for the unique tokens added at the end. This changes the economics of long-context RAG and agentic workflows.</p>
 <h2 id="the-important-detail-is-prefix-not-prompt">The important detail is prefix, not prompt</h2>
 <p>Most developers assume caching works like a standard key-value store for the whole prompt. Real LLM caching is more granular. It works on the prefix. If your prompt consists of a system block, a knowledge block, and a user query, the cache hit occurs as long as the first two blocks are identical.</p>
 <p>Any change at the beginning of the prompt invalidates the entire cache for that request. Such sensitivity means you must order your prompt components from most static to most dynamic. Place your system instructions first. Follow them with your background data. Put the user's unique query at the very end.</p>
 <h2 id="when-the-math-actually-works">When the math actually works</h2>
 <p>Caching is not a free lunch. Providers often charge a small fee to store the cache or require a minimum token count to trigger the savings. You must have enough traffic to ensure that the cached prefix stays "warm" in the provider's memory.</p>
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/caching-calculator.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
-
 <p>Calculations for ROI should consider the cache hit rate and the ratio of static to dynamic tokens. A system with a 10,000-token static prefix and a 100-token user query will see massive savings even at low volumes. A system where the prefix changes constantly will see zero benefit and might even incur higher costs due to storage fees.</p>
 <h2 id="provider-differences">Provider differences</h2>
 <p>OpenAI, Anthropic, and Gemini each implement caching with different rules. Some provide automatic caching based on common prefixes. Others require you to explicitly flag which blocks should be cached.</p>

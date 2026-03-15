@@ -224,10 +224,6 @@
       <div class="post-content">
         <p>DeepSeek's API launched at roughly a tenth the price of comparable Anthropic and OpenAI endpoints, with competitive benchmark results. The architecture answer is mixture of experts. But that answer only makes sense once you understand the part most explainers skip: MoE cuts compute costs but does not cut memory costs. You still need the full model loaded in VRAM before processing a single token.</p>
 <p><strong>Short answer:</strong> Mixture of experts replaces each transformer block's feedforward layer with a bank of specialist subnetworks and routes each token through only a small subset. Inference compute scales with active parameters, not total parameters. DeepSeek V3 activates 37B parameters per token out of 671B total, doing roughly the same math per token as a 37B dense model. The catch: all 671B parameters must be loaded into GPU memory before inference begins.</p>
-<div style="margin: 3rem 0; background: #090909; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/moe-viz.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
-
 <h2 id="how-moe-cuts-inference-compute">How MoE cuts inference compute</h2>
 <p>A dense transformer runs every token through every parameter. A 70B model means 70B parameters worth of compute per token, every time.</p>
 <p>A MoE model keeps attention layers unchanged but replaces each block's single feedforward network with a collection of expert networks, typically 8 to 256 per layer. A small learned router assigns each token to the top-K experts — usually 2 to 8. The token goes through only those experts. Everything else is skipped for that token.</p>
