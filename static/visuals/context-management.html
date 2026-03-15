@@ -3,31 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Context Management | Ninad Pathak</title>
+  <title>Context Window Pressure | Ninad Pathak</title>
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .gauge-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; margin-top: 20px; }
-    
-    .bar-container { width: 100%; max-width: 600px; height: 32px; background: rgba(0,0,0,0.02); border: 1px solid var(--border); position: relative; overflow: hidden; }
-    .bar-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-    
-    .limit-marker { position: absolute; right: 10%; top: 0; bottom: 0; width: 1px; border-left: 1px dashed var(--bg); z-index: 5; }
-    .limit-label { position: absolute; right: 10%; top: -20px; transform: translateX(50%); font-family: var(--mono); font-size: 9px; color: var(--text-dim); font-weight: 600; white-space: nowrap; }
+    .window-visual { margin-bottom: 20px; }
+    .win-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+    .win-pct { font-family: var(--mono); font-size: 36px; font-weight: 600; color: var(--accent); letter-spacing: -0.04em; transition: color var(--t); }
+    .win-pct.danger { color: var(--text); }
+    .win-label { font-family: var(--mono); font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em; }
 
-    .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 600px; }
-    .btn { padding: 12px 16px; border: 1px solid var(--border); color: var(--text-dim); background: var(--bg); font-family: var(--mono); font-size: 10px; cursor: pointer; text-transform: uppercase; font-weight: 600; transition: all 0.2s; }
-    .btn:hover { border-color: var(--text); color: var(--text); }
-    .btn.active { border-color: var(--accent); color: var(--accent); box-shadow: -3px 0 0 var(--accent); }
-    
-    .explanation { font-size: 13px; color: var(--text); line-height: 1.6; text-align: center; max-width: 500px; min-height: 60px; padding: 15px; border: 1px solid var(--border); background: var(--bg); }
-
-    @media (max-width: 600px) {
-      .controls { grid-template-columns: 1fr; }
-      .bar-container { margin-top: 20px; }
+    .bar-outer {
+      height: 40px; border: 1px solid var(--border);
+      background: var(--surface); position: relative; overflow: hidden;
+      margin-bottom: 6px;
     }
+    .bar-fill {
+      height: 100%; background: var(--accent);
+      width: 0%;
+      transition: width 0.7s cubic-bezier(0.16,1,0.3,1), background 0.5s;
+      position: relative;
+    }
+    .bar-fill::after {
+      content: '';
+      position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
+      background: rgba(255,255,255,0.4);
+      filter: blur(2px);
+    }
+    .bar-fill.danger { background: #c62828; }
+    .capacity-line {
+      position: absolute; right: 10%; top: 0; bottom: 0;
+      width: 1px; background: var(--bg); border-left: 2px dashed rgba(255,255,255,0.6);
+      z-index: 2;
+    }
+    .capacity-tag {
+      position: absolute; right: 10%; top: -22px;
+      transform: translateX(50%);
+      font-family: var(--mono); font-size: 8px;
+      color: var(--text-dim); white-space: nowrap;
+    }
+
+    .token-blocks { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 20px; min-height: 60px; }
+    .t-block { height: 24px; border-radius: 2px; transition: all 0.4s; cursor: default; }
+    .t-block:hover { opacity: 0.7; }
+
+    .strategies { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+    @media(max-width:440px){ .strategies { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -37,56 +60,109 @@
         <div class="label">// Resource_Management</div>
         <h1 class="title">Context Window Pressure</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Long_Horizon_Tasks</div>
+      <div class="label" style="color:var(--text-dim)">128K_Token_Budget</div>
     </div>
 
-    <div class="gauge-wrap">
-      <div style="width: 100%; position: relative;">
-        <div class="limit-label">CRITICAL_CAPACITY</div>
-        <div class="bar-container">
-          <div class="limit-marker"></div>
+    <div class="window-visual">
+      <div class="win-header">
+        <div class="win-pct" id="pct">95%</div>
+        <div id="tokenCount" style="font-family:var(--mono);font-size:11px;color:var(--text-dim)">121,600 / 128,000 tokens</div>
+      </div>
+      <div style="position:relative; margin-bottom:8px">
+        <div class="capacity-tag">SOFT LIMIT</div>
+        <div class="bar-outer">
+          <div class="capacity-line"></div>
           <div class="bar-fill" id="fill"></div>
         </div>
       </div>
-
-      <div class="controls" id="btns">
-        <button class="btn" data-val="95" data-text="Context full. Logic likely to fail as oldest turns are pushed out of the buffer.">Truncation</button>
-        <button class="btn" data-val="40" data-text="Compression step reduces volume while preserving the core semantic signal.">Summarization</button>
-        <button class="btn" data-val="25" data-text="Storing history externally keeps working window empty for new reasoning.">External Memory</button>
-        <button class="btn" data-val="15" data-text="Splitting tasks keeps total token count low per independent execution call.">Task Decomposition</button>
-      </div>
-
-      <div class="explanation" id="exp">Select a strategy above to see its impact on the active context window.</div>
+      <div class="win-label">Active context window · <span id="winSub">CRITICAL — performance degrading</span></div>
     </div>
 
+    <div class="token-blocks" id="blocks"></div>
+
+    <div class="strategies">
+      <button class="btn active" onclick="setStrategy('truncation')" id="sTrunc">Truncation</button>
+      <button class="btn" onclick="setStrategy('summarization')" id="sSumm">Summarization</button>
+      <button class="btn" onclick="setStrategy('external')" id="sExt">External Memory</button>
+      <button class="btn" onclick="setStrategy('decomp')" id="sDecomp">Task Decomposition</button>
+    </div>
+
+    <div class="explain" id="exp">Context is at capacity. Oldest turns are being silently dropped — the model has lost context from earlier in the session.</div>
+
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot"></div> POLICY: DYNAMIC</div>
-      <div class="status-item">MAX_TOKENS: 128K</div>
+      <div class="status-item"><div class="status-dot pulse"></div>POLICY: ACTIVE</div>
+      <div class="status-item">MAX: 128K TOKENS</div>
+      <div class="status-item" id="costTag">EST_COST: HIGH</div>
     </div>
   </div>
 
   <script>
-    const fill = document.getElementById('fill');
-    const exp = document.getElementById('exp');
-    
-    document.querySelectorAll('.btn').forEach(b => {
-      b.onclick = () => {
-        document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
-        b.classList.add('active');
-        fill.style.width = b.dataset.val + '%';
-        
-        if(b.dataset.val > 90) {
-          fill.style.background = 'var(--text)';
-        } else {
-          fill.style.background = 'var(--accent)';
-        }
-        
-        exp.innerText = b.dataset.text;
-      };
-    });
-    
-    // Init first state
-    document.querySelector('.btn').click();
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const acc = isDark ? '#ff5f1f' : '#d44000';
+
+    const strategies = {
+      truncation: {
+        pct: 95, label: 'CRITICAL — oldest turns silently dropped',
+        tokens: 121600, danger: true,
+        blocks: [{w:240,c:isDark?'#333':'#ddd',tip:'System prompt (retained)'},{w:180,c:isDark?'#2a2a2a':'#e5e5e5',tip:'Earlier turns'},{w:160,c:'#c62828',tip:'TRUNCATED ✗'},{w:320,c:acc,tip:'Recent context (active)'},{w:280,c:acc,tip:'Active working memory'}],
+        exp: 'At 95% capacity, the model silently drops oldest turns. The agent <b>loses context</b> from early in the session — preferences, constraints, and facts disappear.',
+        cost:'COST: HIGH (input tokens × full price)'
+      },
+      summarization: {
+        pct: 38, label: 'HEALTHY — compressed to key facts',
+        tokens: 48640, danger: false,
+        blocks: [{w:80,c:acc,tip:'Summary of earlier turns'},{w:320,c:acc,tip:'Current context (full)'}],
+        exp: 'A summarization step compresses historical turns to ~500 tokens of key facts. The <b>semantic signal is preserved</b> while token count drops dramatically.',
+        cost:'COST: MODERATE (extra summarization call)'
+      },
+      external: {
+        pct: 18, label: 'OPTIMAL — history stored externally',
+        tokens: 23040, danger: false,
+        blocks: [{w:40,c:acc,tip:'Retrieved facts [{3 relevant memories}]'},{w:280,c:acc,tip:'Active reasoning window'}],
+        exp: 'Only <b>retrieved memories</b> from vector store enter the context — not full history. The window stays clean and costs stay low. Scales to infinite conversation length.',
+        cost:'COST: LOW (only retrieved chunks)'
+      },
+      decomp: {
+        pct: 12, label: 'MINIMAL — isolated subtask context',
+        tokens: 15360, danger: false,
+        blocks: [{w:40,c:acc,tip:'Subtask scope'},{w:120,c:acc,tip:'Focused working context'}],
+        exp: 'Task decomposition creates <b>independent subtask agents</b> with small isolated contexts. No task ever accumulates unbounded token history.',
+        cost:'COST: LOWEST (parallel minimal contexts)'
+      }
+    };
+
+    function setStrategy(key) {
+      const s = strategies[key];
+      document.querySelectorAll('.strategies .btn').forEach(b=>b.classList.remove('active'));
+      document.getElementById('s'+{truncation:'Trunc',summarization:'Summ',external:'Ext',decomp:'Decomp'}[key]).classList.add('active');
+
+      const fill = document.getElementById('fill');
+      fill.style.width = s.pct + '%';
+      fill.className = 'bar-fill' + (s.danger ? ' danger':'');
+
+      document.getElementById('pct').textContent = s.pct + '%';
+      document.getElementById('pct').className   = 'win-pct' + (s.danger ? ' danger':'');
+      document.getElementById('tokenCount').textContent = s.tokens.toLocaleString() + ' / 128,000 tokens';
+      document.getElementById('winSub').textContent = s.label;
+      document.getElementById('exp').innerHTML = s.exp;
+      document.getElementById('costTag').textContent = s.cost;
+
+      // Render blocks
+      const blocksEl = document.getElementById('blocks');
+      blocksEl.innerHTML = '';
+      s.blocks.forEach(b => {
+        const el = document.createElement('div');
+        el.className = 't-block';
+        el.style.width = b.w + 'px';
+        el.style.background = b.c;
+        el.style.opacity = '0.85';
+        el.title = b.tip;
+        blocksEl.appendChild(el);
+      });
+    }
+
+    setStrategy('truncation');
   </script>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

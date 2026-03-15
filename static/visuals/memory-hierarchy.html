@@ -9,81 +9,149 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .hierarchy { display: flex; flex-direction: column; gap: 12px; }
-    .tier { 
-      border: 1px solid var(--border); 
-      padding: 24px; 
-      position: relative; 
-      transition: all var(--t); 
-      cursor: pointer; 
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
+    .pyramid { display: flex; flex-direction: column; gap: 0; margin-bottom: 20px; }
+    .tier {
+      border: 1px solid var(--border);
+      border-bottom: none;
+      padding: 18px 24px;
+      position: relative;
+      cursor: pointer;
+      background: var(--surface);
+      transition: all var(--t);
+      overflow: hidden;
     }
-    .tier:hover { 
-      border-color: var(--accent); 
-      transform: translateX(4px);
-      box-shadow: -4px 0 0 var(--accent);
+    .tier:last-child { border-bottom: 1px solid var(--border); }
+    .tier::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--border);
+      transition: background var(--t), width var(--t);
     }
-    .tier-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
-    .tier-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
-    
-    .tier-meta { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      margin-top: 16px; 
-      font-family: var(--mono); 
-      font-size: 9px; 
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .tier.active::before { background: var(--accent); width: 4px; }
+    .tier.active { border-color: var(--accent); background: var(--accent-lo); }
+    .tier.active + .tier { border-top-color: var(--accent); }
+
+    .tier-top { display: flex; justify-content: space-between; align-items: center; }
+    .tier-name { font-weight: 700; font-size: 14px; transition: color var(--t); }
+    .tier.active .tier-name { color: var(--accent); }
+    .tier-badges { display: flex; gap: 6px; }
+    .badge { font-family: var(--mono); font-size: 8px; padding: 2px 7px; border: 1px solid var(--border); color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
+    .tier.active .badge { border-color: var(--accent); color: var(--accent); }
+
+    .tier-desc { font-size: 12px; color: var(--text-dim); line-height: 1.6; margin-top: 8px; }
+    .tier-meta { display: flex; gap: 24px; margin-top: 12px; font-family: var(--mono); font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+    .tier-meta .v { color: var(--accent); font-weight: 600; }
+
+    /* Speed gauge visual */
+    .speed-bar { position: absolute; right: 24px; bottom: 18px; display: flex; gap: 2px; align-items: flex-end; }
+    .sb { width: 3px; background: var(--border); border-radius: 1px; transition: background var(--t); }
+    .tier.active .sb { background: var(--accent); }
+
+    @media(max-width:480px){
+      .tier-badges { flex-wrap: wrap; }
+      .tier-meta { flex-wrap: wrap; gap: 12px; }
+      .speed-bar { display: none; }
+      .tier { padding: 14px 16px; }
     }
-    .val-accent { color: var(--accent); font-weight: 600; }
   </style>
 </head>
 <body>
   <div class="viz-container">
     <div class="header-meta">
       <div>
-        <div class="label">// Cognitive_Arch</div>
-        <h1 class="title">Memory Hierarchy</h1>
+        <div class="label">// Cognitive_Architecture</div>
+        <h1 class="title">AI Memory Hierarchy</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Tiered_Persistence</div>
-    </div>
-    
-    <div class="hierarchy">
-      <div class="tier">
-        <div class="tier-name">Working Memory</div>
-        <div class="tier-desc">The primary reasoning buffer. Transient, high-speed context management.</div>
-        <div class="tier-meta">
-          <span>Latency: <span class="val-accent">&lt;10ms</span></span>
-          <span>State: <span class="val-accent">Volatile</span></span>
-        </div>
-      </div>
-      <div class="tier">
-        <div class="tier-name">Episodic Memory</div>
-        <div class="tier-desc">Sequential log of interactions. High-fidelity record of user experiences.</div>
-        <div class="tier-meta">
-          <span>Latency: <span class="val-accent">~200ms</span></span>
-          <span>State: <span>Durable</span></span>
-        </div>
-      </div>
-      <div class="tier">
-        <div class="tier-name">Semantic Memory</div>
-        <div class="tier-desc">Structured world model. Distilled facts and entity relationship mappings.</div>
-        <div class="tier-meta">
-          <span>Latency: <span class="val-accent">~500ms</span></span>
-          <span>State: <span>Evolving</span></span>
-        </div>
-      </div>
+      <div class="label" style="color:var(--text-dim)">Tiered_Persistence</div>
     </div>
 
+    <div class="pyramid" id="pyramid"></div>
+
+    <div class="explain" id="exp">Click any memory tier to learn how it works. A well-designed agent retrieves from the right store at the right time.</div>
+
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot pulse"></div> ACTIVE_SESSION</div>
-      <div class="status-item">SYNC_STATUS: OK</div>
-      <div class="status-item">VERSION: 2.0.4</div>
+      <div class="status-item"><div class="status-dot pulse"></div>ACTIVE_SESSION</div>
+      <div class="status-item">TIERS: 4</div>
+      <div class="status-item" id="selectedTag">SELECT A TIER</div>
     </div>
   </div>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+
+  <script>
+    const tiers = [
+      {
+        name:'In-Context (Working)',
+        badges:['Volatile','<10ms','Tokens'],
+        desc:'The primary reasoning buffer — the LLM\'s active context window. Fastest, most precise, but limited by token count and wiped after each session.',
+        latency:'<10ms', capacity:'128K–1M tokens', persistence:'Session-only', cost:'High (input tokens)',
+        speeds:[18,16,14,12,10],
+        exp:'<b>In-context memory</b> is just tokens in the prompt. Instant access, but temporary. When the window fills, oldest content is truncated or summarized.',
+      },
+      {
+        name:'Episodic Memory',
+        badges:['Durable','~100ms','Vector DB'],
+        desc:'Sequential log of past interactions. Stored as embeddings — retrieved by semantic similarity. Enables recall of what happened in previous sessions.',
+        latency:'50–200ms', capacity:'Unbounded', persistence:'Long-term', cost:'Low (retrieval only)',
+        speeds:[10,8,7,5,3],
+        exp:'<b>Episodic memory</b> stores past conversations as embeddings. When the user asks something, relevant past exchanges are retrieved and injected into context.',
+      },
+      {
+        name:'Semantic Memory',
+        badges:['Evolving','~500ms','Knowledge Graph'],
+        desc:'Distilled world model — extracted facts, entities, relationships. Built from episodic data over time. The agent\'s persistent "knowledge base".',
+        latency:'200–500ms', capacity:'Millions of facts', persistence:'Permanent', cost:'Medium (extraction cost)',
+        speeds:[7,5,4,3,2],
+        exp:'<b>Semantic memory</b> is structured knowledge: "User prefers Python", "Company A is a customer". Updated as new facts are extracted from episodic events.',
+      },
+      {
+        name:'Procedural Memory',
+        badges:['Static','~0ms','Weights/Tools'],
+        desc:'Baked into model weights + tool definitions. Skills, behaviors, and capabilities the agent always has — not retrieved, just activated.',
+        latency:'~0ms (always present)', capacity:'Model-defined', persistence:'Permanent (until retrain)', cost:'Zero (already loaded)',
+        speeds:[14,12,12,11,10],
+        exp:'<b>Procedural memory</b> = what the model knows how to do: arithmetic, reasoning, code. Also includes tool schemas. Can\'t be changed without fine-tuning.',
+      }
+    ];
+
+    const pyramid = document.getElementById('pyramid');
+    let active = -1;
+
+    tiers.forEach((t, i) => {
+      const div = document.createElement('div');
+      div.className = 'tier';
+      div.innerHTML = `
+        <div class="tier-top">
+          <div class="tier-name">${t.name}</div>
+          <div class="tier-badges">${t.badges.map(b=>`<span class="badge">${b}</span>`).join('')}</div>
+        </div>
+        <div class="tier-desc">${t.desc}</div>
+        <div class="tier-meta">
+          <span>LATENCY: <span class="v">${t.latency}</span></span>
+          <span>CAPACITY: <span class="v">${t.capacity}</span></span>
+          <span>COST: <span class="v">${t.cost}</span></span>
+        </div>
+        <div class="speed-bar">${t.speeds.map((h,j)=>`<div class="sb" style="height:${h}px"></div>`).join('')}</div>
+      `;
+      div.onclick = () => {
+        pyramid.querySelectorAll('.tier').forEach(el=>el.classList.remove('active'));
+        div.classList.add('active');
+        document.getElementById('exp').innerHTML = t.exp;
+        document.getElementById('selectedTag').textContent = t.name.toUpperCase().replace(/ /g,'_');
+        active = i;
+      };
+      pyramid.appendChild(div);
+    });
+
+    // Auto-cycle through tiers
+    let autoIdx = 0;
+    function autoCycle() {
+      pyramid.querySelectorAll('.tier')[autoIdx].click();
+      autoIdx = (autoIdx+1) % tiers.length;
+    }
+    autoCycle();
+    let autoTimer = setInterval(autoCycle, 3000);
+    pyramid.addEventListener('click', () => { clearInterval(autoTimer); });
+  </script>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

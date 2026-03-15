@@ -9,17 +9,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .viz-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; margin-top: 20px; }
-    
-    .sphere-container { width: 200px; height: 200px; border: 1px solid var(--border); border-radius: 50%; position: relative; background: radial-gradient(circle, var(--bg) 0%, rgba(0,0,0,0.05) 100%); display: flex; align-items: center; justify-content: center; }
-    .dot { width: 6px; height: 6px; background: var(--accent); position: absolute; border-radius: 50%; transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 0 8px var(--accent); }
-    
-    .controls { display: flex; align-items: center; gap: 20px; width: 100%; max-width: 400px; font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
-    input[type=range] { flex: 1; accent-color: var(--accent); height: 4px; background: var(--border); appearance: none; border-radius: 2px; }
-    input[type=range]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; background: var(--accent); border-radius: 50%; cursor: pointer; }
-    
-    .info-panel { font-size: 12px; color: var(--text-dim); text-align: center; line-height: 1.6; max-width: 500px; min-height: 40px; }
-    .highlight { color: var(--accent); font-weight: 600; }
+    .stage { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; margin-bottom: 20px; }
+    .canvas-wrap { position: relative; }
+    canvas { width: 100%; height: 100%; display: block; }
+    .dim-label { font-family: var(--mono); font-size: 9px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; }
+    .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .slider-row span { font-family: var(--mono); font-size: 9px; color: var(--text-dim); white-space: nowrap; }
+    .dim-val { font-family: var(--mono); font-size: 28px; font-weight: 600; color: var(--accent); letter-spacing: -0.04em; min-width: 48px; text-align: right; }
+    .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media(max-width:500px){ .stage { grid-template-columns: 1fr; } .metrics { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
@@ -27,79 +25,205 @@
     <div class="header-meta">
       <div>
         <div class="label">// Spatial_Geometry</div>
-        <h1 class="title">The Curse of Dimensionality</h1>
+        <h1 class="title">Curse of Dimensionality</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Volume_Concentration</div>
+      <div class="label" style="color:var(--text-dim)">Volume_Concentration</div>
     </div>
 
-    <div class="viz-body">
-      <div class="sphere-container" id="sphere"></div>
+    <div class="slider-row">
+      <span>D=2</span>
+      <input type="range" id="dim" min="2" max="512" value="2">
+      <span>D=512</span>
+      <span class="dim-val" id="dimVal">2</span>
+    </div>
 
-      <div class="controls">
-        <span>D=2</span>
-        <input type="range" id="dimRange" min="2" max="100" value="2">
-        <span>D=100</span>
+    <div class="stage">
+      <div>
+        <div class="dim-label">Shell volume ratio</div>
+        <div class="canvas-wrap" style="aspect-ratio:1"><canvas id="cvol"></canvas></div>
       </div>
-
-      <div class="info-panel" id="info">
-        In 2D space, data points are distributed evenly throughout the volume.
+      <div>
+        <div class="dim-label">Pairwise distances</div>
+        <div class="canvas-wrap" style="aspect-ratio:1"><canvas id="cdist"></canvas></div>
       </div>
     </div>
+
+    <div class="stat-grid" style="margin-bottom:16px">
+      <div class="stat-box"><div class="stat-num" id="sVol">0.0%</div><div class="stat-label">Volume in thin shell</div></div>
+      <div class="stat-box"><div class="stat-num" id="sNear">0.00</div><div class="stat-label">Near dist / Far dist</div></div>
+      <div class="stat-box"><div class="stat-num" id="sCos">1.000</div><div class="stat-label">Avg |cos θ| between pairs</div></div>
+    </div>
+
+    <div class="explain" id="exp">In low-dimensional space data is spread throughout the volume. Drag the slider to see what happens as dimensions grow.</div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot"></div> VECTORS: 50</div>
-      <div class="status-item">DIST_METRIC: COSINE</div>
+      <div class="status-item"><div class="status-dot pulse"></div>LIVE_SIMULATION</div>
+      <div class="status-item">POINTS: 200</div>
+      <div class="status-item">METRIC: ℓ²</div>
     </div>
   </div>
 
   <script>
-    const sphere = document.getElementById('sphere');
-    const range = document.getElementById('dimRange');
-    const info = document.getElementById('info');
-    
-    const count = 50;
-    const dots = [];
-    const radius = 100; // Half of container width
+    const dimSlider = document.getElementById('dim');
+    const dimVal    = document.getElementById('dimVal');
+    const cvol = document.getElementById('cvol');
+    const cdist = document.getElementById('cdist');
+    const ctxV = cvol.getContext('2d');
+    const ctxD = cdist.getContext('2d');
+    let dpr = window.devicePixelRatio || 1;
 
-    for(let i=0; i<count; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'dot';
-      sphere.appendChild(dot);
-      dots.push(dot);
+    function setupCanvas(c) {
+      const s = c.parentElement.clientWidth;
+      c.width  = s * dpr; c.height = s * dpr;
+      c.style.width = s + 'px'; c.style.height = s + 'px';
+      c.getContext('2d').scale(dpr, dpr);
+      return s;
+    }
+
+    const isDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const accent = () => isDark() ? '#ff5f1f' : '#d44000';
+    const border = () => isDark() ? '#222220' : '#e0e0dc';
+    const textDim = () => isDark() ? '#555' : '#bbb';
+    const bg = () => isDark() ? '#0a0a09' : '#f8f8f6';
+
+    // Simulate high-dim point positions in 2D projection
+    // Shell volume = 1 - (1-thickness)^D
+    function shellVolume(D) {
+      const thickness = 0.05; // outer 5% shell
+      return 1 - Math.pow(1 - thickness, D);
+    }
+
+    function drawVolumeViz(D) {
+      const s = cvol.parentElement.clientWidth;
+      ctxV.clearRect(0,0,s,s);
+      const cx = s/2, cy = s/2, R = s*0.42;
+      const shellFrac = shellVolume(D);
+
+      // Gradient fill inner sphere
+      const g = ctxV.createRadialGradient(cx,cy,0,cx,cy,R);
+      g.addColorStop(0, isDark() ? 'rgba(255,95,31,0.03)':'rgba(212,64,0,0.04)');
+      g.addColorStop(Math.max(0, 1-shellFrac), isDark() ? 'rgba(255,95,31,0.04)':'rgba(212,64,0,0.06)');
+      g.addColorStop(1, isDark() ? 'rgba(255,95,31,0.35)':'rgba(212,64,0,0.28)');
+      ctxV.beginPath();
+      ctxV.arc(cx,cy,R,0,Math.PI*2);
+      ctxV.fillStyle = g; ctxV.fill();
+      ctxV.strokeStyle = accent(); ctxV.lineWidth = 1.5; ctxV.stroke();
+
+      // Inner boundary of shell
+      const innerR = R * Math.pow(1-0.05, 1/D + 0.01) * Math.sqrt(shellFrac < 0.99 ? 1 : 0.98);
+      const shellInner = R * (1 - shellFrac * 0.4);
+      ctxV.beginPath();
+      ctxV.arc(cx,cy, Math.max(4, shellInner),0,Math.PI*2);
+      ctxV.strokeStyle = isDark() ? 'rgba(255,95,31,0.3)':'rgba(212,64,0,0.25)';
+      ctxV.setLineDash([4,4]); ctxV.lineWidth = 1; ctxV.stroke();
+      ctxV.setLineDash([]);
+
+      // Draw dots — higher D → more on surface
+      const N = 80;
+      for (let i = 0; i < N; i++) {
+        const pull = Math.pow(Math.random(), 1/D);
+        const ang  = Math.random() * Math.PI * 2;
+        const r    = R * pull;
+        const px   = cx + Math.cos(ang)*r;
+        const py   = cy + Math.sin(ang)*r;
+        const nearEdge = r/R;
+        ctxV.beginPath();
+        ctxV.arc(px,py,2,0,Math.PI*2);
+        ctxV.fillStyle = `rgba(${isDark()?'255,95,31':'212,64,0'},${0.2 + nearEdge*0.8})`;
+        ctxV.fill();
+      }
+
+      // label
+      ctxV.font = `600 9px 'JetBrains Mono'`;
+      ctxV.fillStyle = textDim();
+      ctxV.fillText(`${(shellFrac*100).toFixed(0)}% volume near shell`, 8, s-10);
+    }
+
+    function drawDistViz(D) {
+      const s = cdist.parentElement.clientWidth;
+      ctxD.clearRect(0,0,s,s);
+
+      // Generate N random unit vectors in D-space and compute pairwise distances
+      const N = 40;
+      const pts = [];
+      for (let i=0;i<N;i++) {
+        let v = Array.from({length:D},()=>Math.random()*2-1);
+        let m = Math.sqrt(v.reduce((a,x)=>a+x*x,0));
+        pts.push(v.map(x=>x/m));
+      }
+
+      // Compute pairwise distances, get min/max
+      const dists = [];
+      for (let i=0;i<N;i++) for(let j=i+1;j<N;j++) {
+        let d = Math.sqrt(pts[i].reduce((a,x,k)=>a+(x-pts[j][k])**2,0));
+        dists.push(d);
+      }
+      dists.sort((a,b)=>a-b);
+      const mn = dists[0], mx = dists[dists.length-1];
+      const ratio = mx > 0 ? mn/mx : 1;
+
+      // Histogram
+      const bins = 20;
+      const binW = (s - 40) / bins;
+      const counts = new Array(bins).fill(0);
+      dists.forEach(d => {
+        const b = Math.min(bins-1, Math.floor( (d-mn)/(mx-mn+1e-9) * bins ));
+        counts[b]++;
+      });
+      const maxC = Math.max(...counts);
+
+      const startX = 20, endY = s-28;
+      ctxD.strokeStyle = border(); ctxD.lineWidth = 1;
+      ctxD.beginPath();
+      ctxD.moveTo(startX, 10); ctxD.lineTo(startX, endY);
+      ctxD.moveTo(startX, endY); ctxD.lineTo(s-10, endY);
+      ctxD.stroke();
+
+      counts.forEach((c,i) => {
+        const bh = maxC > 0 ? (c/maxC)*(endY-20) : 0;
+        const x = startX + i*binW;
+        const grad = ctxD.createLinearGradient(x, endY-bh, x, endY);
+        grad.addColorStop(0, isDark()?'rgba(255,95,31,0.9)':'rgba(212,64,0,0.85)');
+        grad.addColorStop(1, isDark()?'rgba(255,95,31,0.2)':'rgba(212,64,0,0.15)');
+        ctxD.fillStyle = grad;
+        ctxD.fillRect(x+1, endY-bh, binW-2, bh);
+      });
+
+      ctxD.font = `600 9px 'JetBrains Mono'`;
+      ctxD.fillStyle = textDim();
+      ctxD.fillText('Pairwise distance', startX+2, s-10);
+
+      // Update stats
+      const cosVals = [];
+      for (let i=0;i<Math.min(N,20);i++) for(let j=i+1;j<Math.min(N,20);j++) {
+        cosVals.push(Math.abs(pts[i].reduce((a,x,k)=>a+x*pts[j][k],0)));
+      }
+      const avgCos = cosVals.reduce((a,x)=>a+x,0)/cosVals.length;
+
+      document.getElementById('sVol').textContent = (shellVolume(D)*100).toFixed(1)+'%';
+      document.getElementById('sNear').textContent = ratio.toFixed(3);
+      document.getElementById('sCos').textContent  = avgCos.toFixed(3);
+
+      const exp = document.getElementById('exp');
+      if (D <= 5) exp.innerHTML = 'In <b>low dimensions</b>, distances between points vary widely — nearest and farthest neighbors are clearly distinguishable.';
+      else if (D <= 50) exp.innerHTML = 'As dimensions grow, distances <b>concentrate</b> — nearest/farthest neighbors become almost equally distant. Retrieval gets harder.';
+      else exp.innerHTML = 'In <span class="accent">very high dimensions</span>, almost all volume is near the surface. Every point is equidistant from every other — making similarity search nearly meaningless without dimensionality reduction.';
     }
 
     function update() {
-      const d = parseInt(range.value);
-      
-      // Seed random specifically so animation looks cohesive
-      // Math.random() is fine for this simulation, but we calculate distance based on dimension
-      dots.forEach((dot, i) => {
-        // In high dimensions, points are pushed to the surface (r -> 1)
-        // Simulate this by adjusting the distance from center
-        const pull = Math.pow(Math.random(), 1/d); 
-        
-        // Random angle for 2D projection
-        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.5;
-        
-        // Calculate position relative to center (100,100)
-        const x = radius + Math.cos(angle) * (radius - 5) * pull;
-        const y = radius + Math.sin(angle) * (radius - 5) * pull;
-        
-        dot.style.left = x + 'px';
-        dot.style.top = y + 'px';
-      });
-
-      if (d > 50) {
-        info.innerHTML = `High Dimensionality: Almost all volume is concentrated in a thin shell near the surface. Vectors become <span class="highlight">nearly orthogonal and equidistant</span>.`;
-      } else if (d > 10) {
-        info.innerHTML = `As dimensions increase, points begin to push rapidly toward the boundary of the space.`;
-      } else {
-        info.innerHTML = `In low-dimensional space, data points are distributed evenly throughout the interior volume.`;
-      }
+      const D = +dimSlider.value;
+      dimVal.textContent = D;
+      drawVolumeViz(D);
+      drawDistViz(D);
     }
 
-    range.addEventListener('input', update);
+    const ro = new ResizeObserver(update);
+    ro.observe(cvol.parentElement);
+    ro.observe(cdist.parentElement);
+
+    dimSlider.addEventListener('input', update);
     update();
   </script>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

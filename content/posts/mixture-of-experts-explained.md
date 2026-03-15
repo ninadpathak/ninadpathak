@@ -10,9 +10,7 @@ DeepSeek's API launched at roughly a tenth the price of comparable Anthropic and
 
 **Short answer:** Mixture of experts replaces each transformer block's feedforward layer with a bank of specialist subnetworks and routes each token through only a small subset. Inference compute scales with active parameters, not total parameters. DeepSeek V3 activates 37B parameters per token out of 671B total, doing roughly the same math per token as a 37B dense model. The catch: all 671B parameters must be loaded into GPU memory before inference begins.
 
-<div style="margin: 3rem 0; background: #090909; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/moe-viz.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## How MoE cuts inference compute
 

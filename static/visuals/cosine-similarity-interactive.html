@@ -9,20 +9,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .math-stage { display: flex; gap: 40px; align-items: center; padding: 20px 0; min-height: 350px; }
-    #viz { flex: 1; height: 350px; position: relative; }
-    #ui { width: 220px; border-left: 1px solid var(--border); padding-left: 40px; height: 350px; display: flex; flex-direction: column; justify-content: center; }
-    
-    .stat { margin-bottom: 24px; }
-    .stat-val { font-family: var(--mono); font-size: 28px; color: var(--accent); font-weight: 600; letter-spacing: -0.05em; }
-    .stat-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; margin-top: 4px; }
-    
-    .relationship { font-size: 12px; color: var(--text); line-height: 1.5; margin-top: 20px; font-weight: 500; }
-    
-    @media (max-width: 600px) {
-      .math-stage { flex-direction: column; min-height: auto; }
-      #ui { width: 100%; border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 30px; height: auto; }
-      #viz { width: 100%; height: 300px; }
+    .stage { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; margin-bottom: 20px; }
+    .canvas-wrap { position: relative; aspect-ratio: 1; width: 100%; max-width: 340px; }
+    canvas { width: 100%; height: 100%; }
+
+    .panel { min-width: 160px; display: flex; flex-direction: column; gap: 18px; }
+    .big-stat { line-height: 1; }
+    .big-num { font-family: var(--mono); font-size: 40px; font-weight: 600; color: var(--accent); letter-spacing: -0.04em; }
+    .big-sub  { font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-dim); margin-top: 4px; }
+    .formula  { font-family: var(--mono); font-size: 10px; color: var(--text-dim); padding: 10px 12px; border: 1px solid var(--border); background: var(--surface); line-height: 1.6; }
+
+    @media (max-width: 500px) {
+      .stage { grid-template-columns: 1fr; }
+      .canvas-wrap { max-width: 100%; }
+      .panel { flex-direction: row; flex-wrap: wrap; min-width: 0; }
+      .big-num { font-size: 30px; }
     }
   </style>
 </head>
@@ -33,136 +34,170 @@
         <div class="label">// Vector_Arithmetic</div>
         <h1 class="title">Cosine Similarity</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Unit_Sphere_Math</div>
+      <div class="label" style="color:var(--text-dim)">Drag_Vector_Heads</div>
     </div>
 
-    <div class="math-stage">
-      <div id="viz">
-        <canvas id="canvas"></canvas>
-      </div>
-      <div id="ui">
-        <div class="stat">
-          <div id="similarity" class="stat-val">1.000</div>
-          <div class="stat-label">Similarity (cos θ)</div>
+    <div class="stage">
+      <div class="canvas-wrap"><canvas id="c"></canvas></div>
+      <div class="panel">
+        <div class="big-stat">
+          <div class="big-num" id="sim">1.000</div>
+          <div class="big-sub">cos(θ) similarity</div>
         </div>
-        <div class="stat">
-          <div id="angle" class="stat-val">0°</div>
-          <div class="stat-label">Angular Dist (θ)</div>
+        <div class="big-stat">
+          <div class="big-num" id="deg">0°</div>
+          <div class="big-sub">angle between vectors</div>
         </div>
-        <div class="relationship" id="relationship">V1 and V2 are semantically identical.</div>
+        <div class="formula">cos(θ) = A·B<br>────────<br>|A| × |B|</div>
       </div>
     </div>
+
+    <div class="explain" id="exp">Drag either vector tip to change the angle. Cosine similarity measures the <b>angle</b> between vectors — not their magnitude.</div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot pulse"></div> INTERACTIVE: ENABLED</div>
-      <div class="status-item">DRAG_VECTOR_HEADS</div>
+      <div class="status-item"><div class="status-dot pulse"></div>INTERACTIVE: POINTER_EVENTS</div>
+      <div class="status-item">VECTORS: UNIT_SPHERE</div>
     </div>
   </div>
 
   <script>
-    const canvas = document.getElementById('canvas');
+    const canvas = document.getElementById('c');
     const ctx = canvas.getContext('2d');
-    const simEl = document.getElementById('similarity');
-    const angleEl = document.getElementById('angle');
-    const relEl = document.getElementById('relationship');
-
-    let width, height, centerX, centerY, radius;
-    let v1 = { x: 1, y: 0 };
-    let v2 = { x: 0.8, y: 0.6 };
+    let W, H, cx, cy, R;
+    let v1 = {x:1, y:0}, v2 = {x:0.6, y:0.8};
     let dragging = null;
+    let dpr = 1;
 
-    function resize() {
-      const parent = canvas.parentElement;
-      width = parent.clientWidth;
-      height = parent.clientHeight;
-      canvas.width = width * window.devicePixelRatio;
-      canvas.height = height * window.devicePixelRatio;
-      canvas.style.width = width + 'px';
-      canvas.style.height = height + 'px';
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-      
-      centerX = width / 2;
-      centerY = height / 2;
-      radius = Math.min(width, height) * 0.4;
+    const isDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const accent = () => isDark() ? '#ff5f1f' : '#d44000';
+    const border = () => isDark() ? '#222220' : '#e0e0dc';
+    const textDim = () => isDark() ? '#555' : '#aaa';
+    const bg = () => isDark() ? '#0a0a09' : '#f8f8f6';
+
+    function setup() {
+      dpr = window.devicePixelRatio || 1;
+      const el = canvas.parentElement;
+      const size = el.clientWidth;
+      canvas.width  = size * dpr;
+      canvas.height = size * dpr;
+      ctx.scale(dpr, dpr);
+      W = H = size;
+      cx = cy = size / 2;
+      R = size * 0.4;
+    }
+
+    function drawArrow(x0,y0,x1,y1,color,width=2.5) {
+      const dx = x1-x0, dy = y1-y0;
+      const len = Math.hypot(dx,dy);
+      const ux = dx/len, uy = dy/len;
+      const hw = 9, hl = 16;
+      ctx.beginPath();
+      ctx.moveTo(x0,y0);
+      ctx.lineTo(x1 - ux*hl, y1 - uy*hl);
+      ctx.strokeStyle = color; ctx.lineWidth = width;
+      ctx.lineCap = 'round'; ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x1 - ux*hl - uy*hw, y1 - uy*hl + ux*hw);
+      ctx.lineTo(x1 - ux*hl + uy*hw, y1 - uy*hl - ux*hw);
+      ctx.closePath(); ctx.fillStyle = color; ctx.fill();
     }
 
     function draw() {
-      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0,0,W,H);
 
-      ctx.strokeStyle = isDark ? '#1e1e1e' : '#e0e0dc';
-      ctx.lineWidth = 1;
+      // Grid lines
+      ctx.strokeStyle = border(); ctx.lineWidth = 1;
       ctx.beginPath();
-      ctx.moveTo(centerX - radius - 20, centerY); ctx.lineTo(centerX + radius + 20, centerY);
-      ctx.moveTo(centerX, centerY - radius - 20); ctx.lineTo(centerX, centerY + radius + 20);
+      ctx.moveTo(0,cy); ctx.lineTo(W,cy);
+      ctx.moveTo(cx,0); ctx.lineTo(cx,H);
       ctx.stroke();
 
-      ctx.strokeStyle = isDark ? '#222' : '#f0f0f0';
+      // Unit circle
       ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      ctx.stroke();
+      ctx.arc(cx,cy,R,0,Math.PI*2);
+      ctx.strokeStyle = border(); ctx.lineWidth = 1.5; ctx.stroke();
 
-      drawVector(v1, isDark ? '#444' : '#ccc');
-      drawVector(v2, isDark ? '#ff5f1f' : '#d44000');
-
-      requestAnimationFrame(draw);
-    }
-
-    function drawVector(v, color) {
-      const tx = centerX + v.x * radius;
-      const ty = centerY - v.y * radius;
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 3;
+      // Arc between vectors
+      const a1 = Math.atan2(-v1.y, v1.x);
+      const a2 = Math.atan2(-v2.y, v2.x);
+      const sim = v1.x*v2.x + v1.y*v2.y;
+      const alpha = Math.min(1, 0.15 + Math.abs(sim)*0.15);
       ctx.beginPath();
-      ctx.moveTo(centerX, centerY); ctx.lineTo(tx, ty);
-      ctx.stroke();
-      const angle = Math.atan2(-v.y, v.x);
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.moveTo(tx, ty);
-      ctx.lineTo(tx - 12 * Math.cos(angle - 0.5), ty - 12 * Math.sin(angle - 0.5));
-      ctx.lineTo(tx - 12 * Math.cos(angle + 0.5), ty - 12 * Math.sin(angle + 0.5));
-      ctx.fill();
+      ctx.arc(cx,cy,R*0.25,a1,a2, a2-a1 > Math.PI);
+      ctx.strokeStyle = accent(); ctx.lineWidth = 2; ctx.globalAlpha = alpha; ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      // Vector 1 (dim)
+      const v1x = cx + v1.x*R, v1y = cy - v1.y*R;
+      const v2x = cx + v2.x*R, v2y = cy - v2.y*R;
+      drawArrow(cx,cy,v1x,v1y,textDim(),2);
+      // Vector 2 (accent)
+      drawArrow(cx,cy,v2x,v2y,accent(),3);
+
+      // Labels
+      ctx.font = `600 10px 'JetBrains Mono'`;
+      ctx.fillStyle = textDim();
+      ctx.fillText('A', v1x + 8, v1y - 6);
+      ctx.fillStyle = accent();
+      ctx.fillText('B', v2x + 8, v2y - 6);
+
+      // Glow on v2 tip
+      const grad = ctx.createRadialGradient(v2x,v2y,0,v2x,v2y,20);
+      grad.addColorStop(0, isDark() ? 'rgba(255,95,31,0.35)':'rgba(212,64,0,0.2)');
+      grad.addColorStop(1,'transparent');
+      ctx.beginPath(); ctx.arc(v2x,v2y,20,0,Math.PI*2);
+      ctx.fillStyle = grad; ctx.fill();
     }
 
     function updateStats() {
-      const dot = v1.x * v2.x + v1.y * v2.y;
-      const mag1 = Math.sqrt(v1.x**2 + v1.y**2);
-      const mag2 = Math.sqrt(v2.x**2 + v2.y**2);
-      const similarity = dot / (mag1 * mag2);
-      simEl.innerText = similarity.toFixed(3);
-      const degrees = Math.acos(Math.max(-1, Math.min(1, similarity))) * (180 / Math.PI);
-      angleEl.innerText = Math.round(degrees) + '°';
+      const dot = v1.x*v2.x + v1.y*v2.y;
+      const sim = Math.max(-1,Math.min(1,dot));
+      const deg = Math.round(Math.acos(sim)*(180/Math.PI));
+      document.getElementById('sim').textContent = sim.toFixed(3);
+      document.getElementById('deg').textContent = deg + '°';
 
-      if (similarity > 0.95) relEl.innerText = "Vectors are semantically identical.";
-      else if (similarity > 0.7) relEl.innerText = "Strong relationship detected.";
-      else if (similarity > 0.3) relEl.innerText = "Moderate context overlap.";
-      else if (similarity > -0.1 && similarity < 0.1) relEl.innerText = "Orthogonal (Unrelated).";
-      else relEl.innerText = "Low relationship.";
+      const exp = document.getElementById('exp');
+      if (sim > 0.95) exp.innerHTML = 'Vectors are nearly <span class="accent">identical</span> in direction. Cosine similarity → 1. Semantically the same concept.';
+      else if (sim > 0.6) exp.innerHTML = '<span class="accent">Strong</span> semantic overlap. Both vectors point in a similar direction in embedding space.';
+      else if (sim > 0.2) exp.innerHTML = '<b>Moderate</b> relationship. Some shared semantic context, but distinct meaning.';
+      else if (Math.abs(sim) < 0.1) exp.innerHTML = 'Vectors are <b>orthogonal</b> — completely unrelated concepts. cos(90°)=0.';
+      else exp.innerHTML = '<span class="accent">Negative</span> similarity: vectors point in opposite directions. Semantically <b>antonymous</b>.';
     }
 
-    canvas.addEventListener('mousedown', e => {
+    function getPos(e) {
       const rect = canvas.getBoundingClientRect();
-      const x = (e.clientX - rect.left - centerX) / radius;
-      const y = -(e.clientY - rect.top - centerY) / radius;
-      if (Math.sqrt((x - v1.x)**2 + (y - v1.y)**2) < 0.3) dragging = 'v1';
-      else if (Math.sqrt((x - v2.x)**2 + (y - v2.y)**2) < 0.3) dragging = 'v2';
-    });
+      const cl = e.touches ? e.touches[0] : e;
+      return {
+        x: (cl.clientX - rect.left - cx) / R,
+        y: -((cl.clientY - rect.top) - cy) / R
+      };
+    }
 
-    window.addEventListener('mousemove', e => {
+    function normalize(v) {
+      const m = Math.hypot(v.x,v.y);
+      return m > 0 ? {x:v.x/m, y:v.y/m} : v;
+    }
+
+    canvas.addEventListener('pointerdown', e => {
+      const p = getPos(e);
+      if (Math.hypot(p.x-v1.x, p.y-v1.y) < 0.25) dragging = 'v1';
+      else if (Math.hypot(p.x-v2.x, p.y-v2.y) < 0.25) dragging = 'v2';
+    });
+    window.addEventListener('pointermove', e => {
       if (!dragging) return;
-      const rect = canvas.getBoundingClientRect();
-      let x = (e.clientX - rect.left - centerX) / radius;
-      let y = -(e.clientY - rect.top - centerY) / radius;
-      const mag = Math.sqrt(x**2 + y**2);
-      x /= mag; y /= mag;
-      if (dragging === 'v1') { v1.x = x; v1.y = y; } else { v2.x = x; v2.y = y; }
+      const p = normalize(getPos(e));
+      if (dragging === 'v1') v1 = p; else v2 = p;
       updateStats();
     });
+    window.addEventListener('pointerup', () => dragging = null);
 
-    window.addEventListener('mouseup', () => dragging = null);
-    window.addEventListener('resize', resize);
-    resize(); updateStats(); draw();
+    function loop() { draw(); requestAnimationFrame(loop); }
+
+    const ro = new ResizeObserver(() => { setup(); });
+    ro.observe(canvas.parentElement);
+    setup(); updateStats(); loop();
   </script>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

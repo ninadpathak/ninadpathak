@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Embedding Space | Ninad Pathak</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -10,178 +11,204 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body { padding: 0; }
-    canvas { display: block; width: 100%; height: 100%; }
-    .ui-overlay {
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      z-index: 10;
-      pointer-events: none;
-      width: calc(100% - 60px);
+    body { padding: 0; overflow: hidden; }
+    #three { position: fixed; inset: 0; }
+    .hud {
+      position: fixed; top: 28px; left: 28px; right: 28px;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      pointer-events: none; z-index: 10;
     }
+    .hud-title { }
+    .hud-right { text-align: right; }
+    .legend { display: flex; flex-direction: column; gap: 6px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em; }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
     #tooltip {
-      position: absolute;
-      background: var(--bg);
+      position: fixed; background: var(--bg);
       border: 1px solid var(--accent);
-      padding: 8px 12px;
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text);
+      padding: 8px 12px; font-family: var(--mono); font-size: 10px;
+      color: var(--accent); pointer-events: none; display: none; z-index: 20;
+      box-shadow: 0 0 20px var(--glow);
+      line-height: 1.5;
+    }
+    .status-bottom {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--bg); z-index: 10; padding: 0 28px;
+      border-top: 1px solid var(--border);
+    }
+    .hint {
+      position: fixed; bottom: 52px; left: 28px;
+      font-family: var(--mono); font-size: 8px; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.12em; z-index: 10;
       pointer-events: none;
-      display: none;
-      z-index: 20;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .controls-hint {
-      position: absolute;
-      bottom: 80px;
-      left: 30px;
-      font-family: var(--mono);
-      font-size: 9px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-    .status-bar-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--bg);
-      padding: 0 30px;
-      z-index: 10;
     }
   </style>
 </head>
 <body>
-  <div class="ui-overlay">
-    <div class="header-meta">
-      <div>
-        <div class="label">// Vector_Space_Projection</div>
-        <h1 class="title">3D Semantic Clusters</h1>
-      </div>
-      <div class="label" style="color: var(--text-dim);">Dim: 1536 -> 3D</div>
+  <div id="three"></div>
+
+  <div class="hud">
+    <div class="hud-title">
+      <div class="label" style="position:relative;z-index:1">// PCA_Projection · 1536D→3D</div>
+      <h1 class="title" style="position:relative;z-index:1">3D Semantic Clusters</h1>
+    </div>
+    <div class="hud-right">
+      <div class="legend" id="legend"></div>
     </div>
   </div>
 
   <div id="tooltip"></div>
-  <div class="controls-hint">DRAG_TO_ROTATE • SCROLL_TO_ZOOM</div>
+  <div class="hint">DRAG_TO_ROTATE · SCROLL_TO_ZOOM · HOVER_TO_INSPECT</div>
 
-  <div class="status-bar-overlay">
+  <div class="status-bottom">
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot"></div> RENDERER: WEBGL_2.0</div>
-      <div class="status-item">POINTS: 800</div>
-      <div class="status-item">CLUSTERS: 4</div>
+      <div class="status-item"><div class="status-dot pulse"></div>RENDERER: WEBGL</div>
+      <div class="status-item">POINTS: 600</div>
+      <div class="status-item">CLUSTERS: 5</div>
+      <div class="status-item" id="camPos">CAMERA: ORBITING</div>
     </div>
   </div>
 
   <script>
-    let scene, camera, renderer, controls, points, raycaster, mouse;
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const clusters = [
+      { name:'Technology', color: isDark ? 0xff5f1f : 0xd44000, center:[18,18,8],  hex: isDark?'#ff5f1f':'#d44000' },
+      { name:'Biology',    color: 0x4a9eff,                     center:[-22,-10,6],hex:'#4a9eff' },
+      { name:'Finance',    color: 0x22d3a0,                     center:[14,-22,-8], hex:'#22d3a0' },
+      { name:'Art',        color: 0xd4a022,                     center:[-14,20,-12],hex:'#d4a022' },
+      { name:'Medicine',   color: 0xb44aff,                     center:[2,-5,22],   hex:'#b44aff' },
+    ];
+
+    const labels = {
+      Technology: ['GPU Cluster','Neural Net','Transformer','Tokenizer','LoRA','RLHF','Attention','Quantize','SFT','Embeddings'],
+      Biology:    ['Protein','DNA','Cell','Genome','Enzyme','Synapse','Neuron','RNA','CRISPR','Mitosis'],
+      Finance:    ['Portfolio','Hedge','Yield','Arbitrage','Delta','Bond','Equity','Swap','Margin','Alpha'],
+      Art:        ['Cubism','Brushstroke','Palette','Sculpture','Canvas','Surreal','Pigment','Texture','Motif','Composition'],
+      Medicine:   ['Biopsy','MRI','Vasodilator','Pathology','Prognosis','Diagnosis','Oncology','Serology','Dosage','Receptor'],
+    };
+
     const pointData = [];
 
-    function init() {
-      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      scene = new THREE.Scene();
-      
-      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.z = 60;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(isDark ? 0x0a0a09 : 0xf8f8f6);
+    scene.fog = new THREE.FogExp2(isDark ? 0x0a0a09 : 0xf8f8f6, 0.008);
 
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+    camera.position.set(50, 40, 60);
 
-      controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.05;
+    const renderer = new THREE.WebGLRenderer({antialias:true});
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('three').appendChild(renderer.domElement);
 
-      const gridColor = isDark ? 0x1e1e1e : 0xe0e0dc;
-      const gridHelper = new THREE.GridHelper(120, 24, gridColor, gridColor);
-      gridHelper.rotation.x = Math.PI / 2;
-      scene.add(gridHelper);
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.4;
 
-      createClusters();
-      
-      raycaster = new THREE.Raycaster();
-      mouse = new THREE.Vector2();
+    // Grid
+    const gridColor = isDark ? 0x1a1a18 : 0xe4e4e0;
+    const grid = new THREE.GridHelper(120, 20, gridColor, gridColor);
+    scene.add(grid);
 
-      window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('resize', onWindowResize);
-      
-      animate();
-    }
+    // Build point cloud
+    const positions = [], colors = [], sizes = [];
+    clusters.forEach(c => {
+      const col = new THREE.Color(c.color);
+      const lbls = labels[c.name];
+      for (let i=0;i<120;i++) {
+        const x = c.center[0] + (Math.random()-0.5)*22;
+        const y = c.center[1] + (Math.random()-0.5)*22;
+        const z = c.center[2] + (Math.random()-0.5)*22;
+        positions.push(x,y,z);
+        colors.push(col.r, col.g, col.b);
+        sizes.push(1.5 + Math.random()*1.5);
+        pointData.push({x,y,z,label:lbls[i%lbls.length],cluster:c.name});
+      }
+    });
 
-    function createClusters() {
-      const geometry = new THREE.BufferGeometry();
-      const positions = [];
-      const colors = [];
-      
-      const accentColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? [1, 0.37, 0.12] : [0.83, 0.25, 0];
-      
-      const clusters = [
-        { center: [20, 20, 10], color: accentColor, label: "Technology" },
-        { center: [-25, -15, 5], color: [0.5, 0.5, 0.5], label: "Nature" },
-        { center: [15, -25, -10], color: [0.3, 0.3, 0.3], label: "Finance" },
-        { center: [-15, 25, -15], color: [0.7, 0.7, 0.7], label: "Art" }
-      ];
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(positions,3));
+    geo.setAttribute('color', new THREE.Float32BufferAttribute(colors,3));
+    geo.setAttribute('size', new THREE.Float32BufferAttribute(sizes,1));
 
-      clusters.forEach(c => {
-        for (let i = 0; i < 200; i++) {
-          const x = c.center[0] + (Math.random() - 0.5) * 18;
-          const y = c.center[1] + (Math.random() - 0.5) * 18;
-          const z = c.center[2] + (Math.random() - 0.5) * 18;
-          positions.push(x, y, z);
-          colors.push(...c.color);
-          pointData.push({ x, y, z, label: c.label + " Node " + i });
+    // Custom shader for glowing points
+    const mat = new THREE.ShaderMaterial({
+      vertexShader: `
+        attribute float size;
+        attribute vec3 color;
+        varying vec3 vColor;
+        void main() {
+          vColor = color;
+          vec4 mvPos = modelViewMatrix * vec4(position,1.0);
+          gl_PointSize = size * (280.0 / -mvPos.z);
+          gl_Position = projectionMatrix * mvPos;
         }
-      });
+      `,
+      fragmentShader: `
+        varying vec3 vColor;
+        void main() {
+          float d = length(gl_PointCoord - vec2(0.5));
+          if (d > 0.5) discard;
+          float alpha = 1.0 - smoothstep(0.2, 0.5, d);
+          gl_FragColor = vec4(vColor, alpha * 0.9);
+        }
+      `,
+      transparent: true,
+      vertexColors: true,
+    });
 
-      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    const points = new THREE.Points(geo, mat);
+    scene.add(points);
 
-      const material = new THREE.PointsMaterial({
-        size: 1.2,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.8
-      });
+    // Legend
+    const legendEl = document.getElementById('legend');
+    clusters.forEach(c => {
+      const item = document.createElement('div');
+      item.className = 'legend-item';
+      item.innerHTML = `<div class="legend-dot" style="background:${c.hex}"></div>${c.name}`;
+      legendEl.appendChild(item);
+    });
 
-      points = new THREE.Points(geometry, material);
-      scene.add(points);
-    }
+    // Tooltip / raycasting
+    const raycaster = new THREE.Raycaster();
+    raycaster.params.Points.threshold = 1.5;
+    const mouse = new THREE.Vector2();
+    const tooltip = document.getElementById('tooltip');
 
-    function onMouseMove(event) {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-      
-      const tooltip = document.getElementById('tooltip');
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObject(points);
-
-      if (intersects.length > 0) {
-        const index = intersects[0].index;
+    renderer.domElement.addEventListener('pointermove', e => {
+      mouse.x = (e.clientX/window.innerWidth)*2-1;
+      mouse.y = -(e.clientY/window.innerHeight)*2+1;
+      raycaster.setFromCamera(mouse,camera);
+      const hits = raycaster.intersectObject(points);
+      if (hits.length>0) {
+        const idx = hits[0].index;
+        const pd = pointData[idx];
         tooltip.style.display = 'block';
-        tooltip.style.left = event.clientX + 15 + 'px';
-        tooltip.style.top = event.clientY + 15 + 'px';
-        tooltip.innerText = pointData[index].label;
+        tooltip.style.left = (e.clientX+16)+'px';
+        tooltip.style.top  = (e.clientY-10)+'px';
+        tooltip.innerHTML  = `${pd.label}<br><span style="opacity:0.5;font-size:8px">${pd.cluster} cluster · [${pd.x.toFixed(1)}, ${pd.y.toFixed(1)}, ${pd.z.toFixed(1)}]</span>`;
       } else {
         tooltip.style.display = 'none';
       }
-    }
+    });
 
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth/window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+    });
 
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
-      points.rotation.y += 0.0008;
-      renderer.render(scene, camera);
+      renderer.render(scene,camera);
     }
-
-    init();
+    animate();
   </script>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+  <script>function sendHeight(){window.parent.postMessage({type:"resize-iframe",height:window.innerHeight},"*");}window.addEventListener("load",sendHeight);</script>
+</body>
 </html>

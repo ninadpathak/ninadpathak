@@ -9,58 +9,226 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .mcp-grid { flex: 1; display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 20px; }
-    
-    .box { border: 1px solid var(--border); padding: 24px; text-align: center; width: 160px; background: var(--bg); transition: all var(--t); position: relative; }
-    .box.active { border-color: var(--accent); color: var(--accent); font-weight: 600; box-shadow: 0 0 20px rgba(212, 64, 0, 0.1); transform: scale(1.05); }
-    
-    .box-label { font-family: var(--mono); font-size: 9px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.1em; font-weight: 600; }
-    .box-title { font-size: 13px; font-weight: 700; line-height: 1.3; }
-    
-    .arrow-container { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .arrow { font-size: 20px; color: var(--border); transition: color 0.3s; }
-    .arrow.active { color: var(--accent); }
-    
-    .protocol-tag { border: 1px dashed var(--accent); padding: 6px 12px; font-family: var(--mono); font-size: 10px; color: var(--accent); background: rgba(212, 64, 0, 0.02); font-weight: 600; }
+    .arch-canvas { position: relative; margin-bottom: 20px; }
+    canvas { width: 100%; display: block; }
 
-    @media (max-width: 600px) {
-      .mcp-grid { flex-direction: column; gap: 20px; }
-      .box { width: 100%; max-width: 300px; }
-      .arrow { transform: rotate(90deg); }
+    /* Click-to-explore overlay */
+    .node-info {
+      padding: 14px 16px; border: 1px solid var(--border);
+      background: var(--surface); margin-bottom: 16px;
+      min-height: 64px; display: flex; flex-direction: column; gap: 6px;
     }
+    .ni-title { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); font-weight: 600; }
+    .ni-body  { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
   </style>
 </head>
 <body>
   <div class="viz-container">
     <div class="header-meta">
       <div>
-        <div class="label">// Integration_Pattern</div>
-        <h1 class="title">Host-Client-Server Topology</h1>
+        <div class="label">// Protocol_Architecture</div>
+        <h1 class="title">MCP Host–Client–Server</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Standardized_Interface</div>
+      <div class="label" style="color:var(--text-dim)">Standardized_Interface</div>
     </div>
 
-    <div class="mcp-grid">
-      <div class="box active">
-        <div class="box-label">Agent_Host</div>
-        <div class="box-title">Claude Desktop / IDE</div>
-      </div>
-      <div class="arrow-container">
-        <div class="arrow">↔</div>
-        <div class="protocol-tag">MCP_RPC</div>
-        <div class="arrow">↔</div>
-      </div>
-      <div class="box">
-        <div class="box-label">Data_Server</div>
-        <div class="box-title">SaaS / Local_DB / Filesystem</div>
-      </div>
+    <div class="arch-canvas">
+      <canvas id="c"></canvas>
+    </div>
+
+    <div class="node-info">
+      <div class="ni-title" id="niTitle">Click any node to explore</div>
+      <div class="ni-body"  id="niBody">The Model Context Protocol creates a standardized way for AI hosts to communicate with external data sources and tools.</div>
     </div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot"></div> PROTOCOL: ACTIVE</div>
-      <div class="status-item">VERSION: 1.0.0</div>
+      <div class="status-item"><div class="status-dot pulse"></div>PROTOCOL: MCP 1.0</div>
+      <div class="status-item">TRANSPORT: STDIO / HTTP+SSE</div>
+      <div class="status-item" id="msgTag">MESSAGES: 0</div>
     </div>
   </div>
+
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const acc = isDark ? '#ff5f1f' : '#d44000';
+    const brd = isDark ? '#222220' : '#e0e0dc';
+    const bg  = isDark ? '#111110' : '#ffffff';
+    const txt = isDark ? '#f0f0ee' : '#0e0e0e';
+    const dim = isDark ? '#555' : '#aaa';
+    let dpr = window.devicePixelRatio || 1;
+    let W, H;
+
+    const nodes = [
+      {
+        id: 'host', label: 'MCP Host', sub: 'Claude / Cline / IDE',
+        role: 'Agent Host',
+        info: 'The <b>MCP Host</b> is the AI application — Claude Desktop, Cline, or any IDE. It manages the lifecycle of MCP clients and orchestrates communication with servers.',
+        x: 0.12, y: 0.5
+      },
+      {
+        id: 'client', label: 'MCP Client', sub: 'Protocol Handler',
+        role: 'Mediator',
+        info: 'The <b>MCP Client</b> is embedded within the host. It speaks the MCP protocol — sending JSON-RPC requests and handling responses. There\'s one client per server connection.',
+        x: 0.5, y: 0.5
+      },
+      {
+        id: 'local', label: 'Local Server', sub: 'Files / DB / Git',
+        role: 'Data Source',
+        info: '<b>Local MCP servers</b> run on the same machine. They expose filesystem access, local databases, code tools, or any local resource over stdio.',
+        x: 0.88, y: 0.25
+      },
+      {
+        id: 'remote', label: 'Remote Server', sub: 'SaaS / APIs / Slack',
+        role: 'Remote Resource',
+        info: '<b>Remote MCP servers</b> run in the cloud. They expose SaaS APIs — Notion, Slack, GitHub, Jira — over HTTP with SSE transport.',
+        x: 0.88, y: 0.75
+      },
+    ];
+
+    const edges = [
+      {from:'host', to:'client', label:'JSON-RPC', bidirectional:true},
+      {from:'client', to:'local', label:'stdio', bidirectional:true},
+      {from:'client', to:'remote', label:'HTTP+SSE', bidirectional:true},
+    ];
+
+    const particles = [];
+    let msgCount = 0;
+    let selected = null;
+
+    function setup() {
+      W = canvas.parentElement.clientWidth;
+      H = Math.round(W * 0.5);
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.scale(dpr, dpr);
+    }
+
+    function npos(n) { return {x: n.x*W, y: n.y*H}; }
+
+    function getNodeAt(px, py) {
+      return nodes.find(n => {
+        const {x,y} = npos(n);
+        const r = Math.min(W,H)*0.12;
+        return Math.hypot(px-x, py-y) < r;
+      });
+    }
+
+    function drawNode(n, highlight) {
+      const {x,y} = npos(n);
+      const r = Math.min(W,H)*0.1;
+      // Glow
+      if (highlight || n.id === selected?.id) {
+        const g = ctx.createRadialGradient(x,y,0,x,y,r*2);
+        g.addColorStop(0, isDark?'rgba(255,95,31,0.15)':'rgba(212,64,0,0.1)');
+        g.addColorStop(1,'transparent');
+        ctx.beginPath(); ctx.arc(x,y,r*2,0,Math.PI*2);
+        ctx.fillStyle=g; ctx.fill();
+      }
+      // Box (rect with rounded corners)
+      const bw = r*2.2, bh = r*1.5;
+      ctx.beginPath();
+      ctx.roundRect(x-bw/2, y-bh/2, bw, bh, 4);
+      ctx.fillStyle = n.id === selected?.id ? (isDark?'rgba(255,95,31,0.08)':'rgba(212,64,0,0.06)') : bg;
+      ctx.fill();
+      ctx.strokeStyle = n.id === selected?.id ? acc : brd;
+      ctx.lineWidth = n.id === selected?.id ? 2 : 1;
+      ctx.stroke();
+
+      // Role tag
+      ctx.font = `600 ${Math.max(8,W*0.01)}px 'JetBrains Mono'`;
+      ctx.fillStyle = acc;
+      ctx.textAlign = 'center';
+      ctx.fillText(n.role.toUpperCase(), x, y-bh/2+14);
+
+      // Label
+      ctx.font = `700 ${Math.max(11,W*0.016)}px 'Inter'`;
+      ctx.fillStyle = txt;
+      ctx.fillText(n.label, x, y+2);
+
+      // Sub
+      ctx.font = `400 ${Math.max(9,W*0.011)}px 'JetBrains Mono'`;
+      ctx.fillStyle = dim;
+      ctx.fillText(n.sub, x, y+16);
+    }
+
+    function drawEdge(e) {
+      const from = nodes.find(n=>n.id===e.from);
+      const to   = nodes.find(n=>n.id===e.to);
+      const {x:fx,y:fy} = npos(from);
+      const {x:tx,y:ty} = npos(to);
+
+      ctx.beginPath();
+      ctx.moveTo(fx,fy); ctx.lineTo(tx,ty);
+      ctx.strokeStyle = brd; ctx.lineWidth=1.5; ctx.stroke();
+
+      // Label
+      const mx=(fx+tx)/2, my=(fy+ty)/2;
+      ctx.font = `600 8px 'JetBrains Mono'`;
+      ctx.fillStyle = dim;
+      ctx.textAlign='center';
+      // Background pill
+      const tw = ctx.measureText(e.label).width;
+      ctx.fillStyle = isDark ? '#0a0a09' : '#f8f8f6';
+      ctx.fillRect(mx-tw/2-4, my-9, tw+8, 14);
+      ctx.fillStyle = acc;
+      ctx.fillText(e.label, mx, my+1);
+    }
+
+    function spawnPacket(edgeIdx) {
+      const e = edges[edgeIdx];
+      const from = nodes.find(n=>n.id===e.from);
+      const to   = nodes.find(n=>n.id===e.to);
+      const rev  = Math.random() > 0.5;
+      const {x:sx,y:sy} = npos(rev ? to : from);
+      const {x:ex,y:ey} = npos(rev ? from : to);
+      particles.push({sx,sy,ex,ey,p:0,speed:0.02+Math.random()*0.01});
+      msgCount++;
+      document.getElementById('msgTag').textContent = 'MESSAGES: ' + msgCount;
+    }
+
+    function draw() {
+      ctx.clearRect(0,0,W,H);
+      edges.forEach(drawEdge);
+      nodes.forEach(n => drawNode(n, false));
+
+      // Particles
+      for (let i=particles.length-1;i>=0;i--) {
+        const p=particles[i];
+        p.p += p.speed;
+        const x=p.sx+(p.ex-p.sx)*p.p;
+        const y=p.sy+(p.ey-p.sy)*p.p;
+        const g = ctx.createRadialGradient(x,y,0,x,y,6);
+        g.addColorStop(0,acc); g.addColorStop(1,'transparent');
+        ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
+        ctx.fillStyle=g; ctx.fill();
+        if (p.p>=1) particles.splice(i,1);
+      }
+    }
+
+    canvas.addEventListener('pointerdown', e => {
+      const rect = canvas.getBoundingClientRect();
+      const px = (e.clientX - rect.left) * (W / rect.width);
+      const py = (e.clientY - rect.top)  * (H / rect.height);
+      const n = getNodeAt(px, py);
+      if (n) {
+        selected = n;
+        document.getElementById('niTitle').textContent = n.label + ' · ' + n.role;
+        document.getElementById('niBody').innerHTML   = n.info;
+      }
+    });
+
+    const ro = new ResizeObserver(() => { setup(); });
+    ro.observe(canvas.parentElement);
+    setup();
+
+    setInterval(() => { spawnPacket(Math.floor(Math.random()*edges.length)); }, 800);
+    function loop() { draw(); requestAnimationFrame(loop); }
+    loop();
+  </script>
   <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
 </body>
 </html>

@@ -30,9 +30,7 @@ Words that share meaning end up physically close to each other in this space. "K
 
 "Apple" and "Banana" form a separate but nearby cluster representing fruit. The relationship between these points is what we measure when we perform a search. This spatial logic is the foundation of semantic understanding.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/token-to-vector-pipeline.html" style="width: 100%; height: 250px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## Measuring semantic proximity with vector similarity
 
@@ -46,9 +44,7 @@ When they point in opposite directions, the similarity is negative one. I've see
 
 The difference between the interval to the nearest neighbor and the interval to the average neighbor starts to disappear. Such sensitivity makes similarity thresholds extremely precise. A similarity of 0.82 might be a perfect match, while 0.79 is completely irrelevant.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/cosine-similarity-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## Architecture choices for embedding generation
 
@@ -72,9 +68,7 @@ Such efficiency allows their models to outperform larger competitors while using
 
 Techniques like Principal Component Analysis (PCA) or t-SNE help us see the clusters that the model creates. These projections always come with a cost in accuracy. You must carefully validate the performance impact when using reduced vectors in production.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/dimensionality-reduction-viz.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## Building flexible vectors with Matryoshka embeddings
 
@@ -90,9 +84,7 @@ The training process forces the model to prioritize the most discriminative feat
 
 You store the full vectors on high-latency disk. You keep only the truncated Matryoshka heads in low-latency RAM for the initial candidate selection. This layered approach is the current gold standard for large-scale retrieval.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/matryoshka-visualizer.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## Spatial collapse in high dimensions
 
@@ -106,9 +98,7 @@ This happens because they are all pushed into the same outer layer of the geomet
 
 That same score in 1536D might be noise. You need to calibrate your retrieval system based on the specific distribution of your model's output space. Accurate calibration prevents false positives in your search results.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/curse-of-dimensionality.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## Comparing OpenAI, Cohere, and Voyage AI
 
@@ -120,9 +110,7 @@ I've found their models particularly effective for legal and financial documenta
 
 They achieve this by using larger base architectures and more sophisticated training data curation. Smaller providers often move faster with architectural innovations that the giants take months to adopt. You should evaluate multiple providers to find the best match for your specific data distribution.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/provider-comparison-radar.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## Reducing memory with binary and scalar quantization
 
@@ -138,9 +126,7 @@ Search speeds increase dramatically because similarity calculations become simpl
 
 You retrieve 10x more results than you need using the binary index. You then re-rank them using the original full-precision vectors. Such a strategy provides the speed of binary search with the accuracy of floating-point search.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/quantization-bit-level.html" style="width: 100%; height: 350px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## The standard semantic search pipeline
 
@@ -152,9 +138,7 @@ These chunks are then passed to an LLM as context for the final answer. The embe
 
 Failures in this workflow usually happen at the librarian stage. Semantic search is only as good as the geometry of the underlying space. Searching fails when the embedding model cannot understand the semantic relationship between a query and a document.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/semantic-search-animation.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## API latency vs self-hosted model performance
 
@@ -168,9 +152,7 @@ Large-scale systems often use a hybrid approach. They use a provider's API for t
 
 Such a strategy requires careful alignment to ensure both models project into a compatible space. Re-embedding a small set of results at query time is the most common way to handle this complexity. Consistency in your vector space is required for reliable retrieval.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/latency-benchmark-interactive.html" style="width: 100%; height: 500px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## Accuracy stability in long-context models
 

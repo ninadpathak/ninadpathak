@@ -9,26 +9,35 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .viz-body { flex: 1; display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
-    
-    .vector-track { height: 60px; background: rgba(0,0,0,0.02); border: 1px solid var(--border); display: flex; align-items: center; padding: 0 5px; }
-    .vector-cell { flex: 1; height: 40px; margin: 0 1px; background: var(--accent); opacity: 0.1; transition: opacity 0.2s, background 0.2s; }
-    .vector-cell.active { opacity: 1; }
-    
-    .controls { display: flex; align-items: center; gap: 20px; font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
-    input[type=range] { flex: 1; accent-color: var(--accent); cursor: pointer; height: 4px; background: var(--border); appearance: none; border-radius: 2px; }
-    input[type=range]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; background: var(--accent); border-radius: 50%; cursor: pointer; }
-    
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .stat-box { border: 1px solid var(--border); padding: 24px; text-align: center; background: var(--bg); transition: all 0.3s; }
-    .stat-num { font-family: var(--mono); font-size: 28px; color: var(--accent); font-weight: 600; margin-bottom: 8px; letter-spacing: -0.05em; }
-    .stat-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+    .mrl-stage { margin-bottom: 20px; }
+    .track-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .track-label span { font-family: var(--mono); font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em; }
+    .track-label .acc { color: var(--accent); font-weight: 600; }
 
-    @media (max-width: 600px) {
-      .stats { grid-template-columns: 1fr; gap: 10px; }
-      .stat-box { padding: 15px; }
-      .stat-num { font-size: 24px; }
+    .vector-track {
+      height: 48px;
+      display: flex;
+      align-items: stretch;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 16px;
     }
+    .vc { flex: 1; transition: background var(--t), opacity var(--t); min-width: 0; }
+    .vc.on  { background: var(--accent); opacity: 1; }
+    .vc.off { background: var(--surface); opacity: 0.15; }
+
+    .slider-row { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .slider-row .label-l { font-family: var(--mono); font-size: 9px; color: var(--text-dim); white-space: nowrap; }
+    .dim-badge {
+      font-family: var(--mono); font-size: 28px; font-weight: 600;
+      color: var(--accent); letter-spacing:-0.04em; min-width:54px; text-align:right;
+    }
+
+    .sub-labels { display: flex; margin-top: 4px; margin-bottom: 16px; }
+    .sub-mark { font-family: var(--mono); font-size: 8px; color: var(--text-dim); flex: 1; text-align: center; border-left: 1px solid var(--border); padding: 4px 0; }
+    .sub-mark.lit { color: var(--accent); border-color: var(--accent); }
   </style>
 </head>
 <body>
@@ -38,87 +47,119 @@
         <div class="label">// Truncation_Resilience</div>
         <h1 class="title">Matryoshka Representation Learning</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Dynamic_Sizing</div>
+      <div class="label" style="color:var(--text-dim)">MRL · Dynamic_Sizing</div>
     </div>
 
-    <div class="viz-body">
-      <div class="vector-track" id="vectorTrack"></div>
-      
-      <div class="controls">
-        <span style="min-width: 80px;">DIMENSIONS</span>
-        <input type="range" id="dimRange" min="1" max="128" step="1" value="128">
-        <span id="dimVal" style="color: var(--accent); font-weight: 600; min-width: 30px; text-align: right;">128</span>
+    <div class="mrl-stage">
+      <div class="track-label">
+        <span>Embedding dimensions · <span class="acc" id="active">1536</span> active / 1536 total</span>
+        <span id="pct">100%</span>
       </div>
+      <div class="vector-track" id="track"></div>
 
-      <div class="stats">
-        <div class="stat-box">
-          <div id="recall" class="stat-num">99.8%</div>
-          <div class="stat-label">Retrieval Recall</div>
-        </div>
-        <div class="stat-box">
-          <div id="storage" class="stat-num">0.51 MB</div>
-          <div class="stat-label">Footprint (1k)</div>
-        </div>
-        <div class="stat-box">
-          <div id="latency" class="stat-num">0.2ms</div>
-          <div class="stat-label">Search Latency</div>
-        </div>
+      <div class="sub-labels" id="subLabels"></div>
+
+      <div class="slider-row">
+        <span class="label-l">8</span>
+        <input type="range" id="dimR" min="0" max="10" value="10" step="1">
+        <span class="label-l">1536</span>
+        <span class="dim-badge" id="dimBadge">1536</span>
       </div>
     </div>
+
+    <div class="stat-grid" style="margin-bottom:16px">
+      <div class="stat-box"><div class="stat-num" id="recall">99.8%</div><div class="stat-label">Retrieval Recall</div></div>
+      <div class="stat-box"><div class="stat-num" id="storage">0.49MB</div><div class="stat-label">Storage / 100K</div></div>
+      <div class="stat-box"><div class="stat-num" id="latency">0.21ms</div><div class="stat-label">Search Latency</div></div>
+      <div class="stat-box"><div class="stat-num" id="speedup">1.0×</div><div class="stat-label">Speed vs Full</div></div>
+    </div>
+
+    <div class="explain" id="exp">MRL trains nested subsets so <b>any prefix</b> of dimensions is still a valid embedding. Truncate to 64-dim for fast coarse search, then 1536-dim for final ranking.</div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot pulse"></div> MODEL: TEXT-EMBEDDING-3</div>
-      <div class="status-item">TRUNCATION: LOSSLESS</div>
+      <div class="status-item"><div class="status-dot pulse"></div>MODEL: text-embedding-3-large</div>
+      <div class="status-item">STRATEGY: COARSE→FINE</div>
     </div>
   </div>
 
   <script>
-    const track = document.getElementById('vectorTrack');
-    const range = document.getElementById('dimRange');
-    const dimVal = document.getElementById('dimVal');
-    const recallEl = document.getElementById('recall');
-    const storageEl = document.getElementById('storage');
-    const latencyEl = document.getElementById('latency');
+    const TOTAL = 1536;
+    const steps = [8, 16, 32, 64, 128, 256, 512, 768, 1024, 1280, 1536];
+    const CELLS = 128; // visual cells
 
-    const totalCells = 128;
-    for (let i = 0; i < totalCells; i++) {
-      const cell = document.createElement('div');
-      cell.className = 'vector-cell active';
-      // Add a slight gradient effect to show "importance" is front-loaded
-      cell.style.opacity = 1 - (i / totalCells) * 0.5; 
-      track.appendChild(cell);
+    const track = document.getElementById('track');
+    const subLabels = document.getElementById('subLabels');
+
+    // Build cells
+    const cells = [];
+    for (let i=0;i<CELLS;i++) {
+      const c = document.createElement('div');
+      c.className = 'vc on';
+      // gradient opacity — earlier dims more important
+      c.style.opacity = (1 - (i/CELLS)*0.55).toString();
+      track.appendChild(c);
+      cells.push(c);
     }
 
-    const cells = track.querySelectorAll('.vector-cell');
+    // Sub-labels
+    const checkpoints = [8,32,128,512,1536];
+    checkpoints.forEach(v => {
+      const m = document.createElement('div');
+      m.className = 'sub-mark';
+      m.dataset.val = v;
+      m.textContent = v < 1000 ? v : (v/1000).toFixed(1)+'K';
+      m.style.flex = (v / TOTAL).toString();
+      subLabels.appendChild(m);
+    });
+
+    const dimR = document.getElementById('dimR');
 
     function update() {
-      const val = parseInt(range.value);
-      dimVal.innerText = val;
-      
-      cells.forEach((cell, i) => {
-        if (i < val) {
-          cell.classList.add('active');
-          cell.style.background = 'var(--accent)';
-          cell.style.opacity = 1 - (i / totalCells) * 0.5;
+      const idx = +dimR.value;
+      const dim = steps[idx];
+      const ratio = dim / TOTAL;
+      const activeCells = Math.round(ratio * CELLS);
+
+      cells.forEach((c,i) => {
+        if (i < activeCells) {
+          c.classList.add('on'); c.classList.remove('off');
+          c.style.opacity = (1 - (i/CELLS)*0.55).toString();
         } else {
-          cell.classList.remove('active');
-          cell.style.background = 'var(--border)';
-          cell.style.opacity = 0.2;
+          c.classList.remove('on'); c.classList.add('off');
+          c.style.opacity = '0.1';
         }
       });
 
-      const ratio = val / 128;
-      const recall = 85 + (Math.pow(ratio, 0.2) * 14.8);
-      const storage = (val * 4 * 1000) / (1024 * 1024);
-      const latency = 0.05 + (ratio * 0.15);
+      // Sub marks
+      document.querySelectorAll('.sub-mark').forEach(m => {
+        m.classList.toggle('lit', +m.dataset.val <= dim);
+      });
 
-      recallEl.innerText = recall.toFixed(1) + '%';
-      storageEl.innerText = storage.toFixed(2) + ' MB';
-      latencyEl.innerText = latency.toFixed(2) + 'ms';
+      document.getElementById('active').textContent = dim;
+      document.getElementById('pct').textContent = (ratio*100).toFixed(1) + '%';
+      document.getElementById('dimBadge').textContent = dim;
+
+      // Scaled stats (real-ish values)
+      const recall  = 75 + Math.pow(ratio, 0.18) * 24.8;
+      const storage = (dim * 4 * 100000) / (1024*1024); // float32 bytes
+      const latency = 0.04 + ratio * 0.38;
+      const speedup = TOTAL / dim;
+
+      document.getElementById('recall').textContent  = recall.toFixed(1) + '%';
+      document.getElementById('storage').textContent = storage >= 1 ? storage.toFixed(0)+'MB' : (storage*1024).toFixed(0)+'KB';
+      document.getElementById('latency').textContent = latency.toFixed(2) + 'ms';
+      document.getElementById('speedup').textContent = speedup.toFixed(1) + '×';
+
+      const exp = document.getElementById('exp');
+      if (dim <= 32) exp.innerHTML = 'Using only <span class="accent">' + dim + ' dimensions</span>: <b>very fast</b> but recall drops. Good for first-pass candidate retrieval at scale.';
+      else if (dim <= 128) exp.innerHTML = 'At <span class="accent">' + dim + ' dimensions</span>, you get a solid speed/quality tradeoff — ~' + recall.toFixed(0) + '% recall at ' + speedup.toFixed(0) + '× the speed of full embeddings.';
+      else if (dim < TOTAL) exp.innerHTML = '<span class="accent">' + dim + 'd</span> is a strong middle ground. Near-full recall with significant storage savings. Great for production retrieval.';
+      else exp.innerHTML = 'Full <span class="accent">1536 dimensions</span> — maximum recall. Use for final re-ranking after a fast coarse search over truncated vectors.';
     }
 
-    range.addEventListener('input', update);
+    dimR.addEventListener('input', update);
     update();
   </script>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

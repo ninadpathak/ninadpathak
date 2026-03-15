@@ -3,26 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Decay | Ninad Pathak</title>
+  <title>Ebbinghaus Memory Decay | Ninad Pathak</title>
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .decay-stage { 
-      flex: 1; 
-      border-left: 1px solid var(--border); 
-      border-bottom: 1px solid var(--border); 
-      position: relative; 
-      margin: 20px 0 40px 60px;
-    }
-    .curve { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 3s forwards ease-in-out; }
-    @keyframes draw { to { stroke-dashoffset: 0; } }
-    
-    .point { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; position: absolute; transform: translate(-50%, -50%); box-shadow: 0 0 15px var(--accent); }
-    .label-dot { font-family: var(--mono); font-size: 10px; position: absolute; color: var(--text); background: var(--bg); padding: 2px 6px; border: 1px solid var(--border); white-space: nowrap; transform: translate(15px, -50%); font-weight: 500; }
-    
-    .axis-label { position: absolute; font-family: var(--mono); font-size: 10px; color: var(--text-dim); }
+    .chart-wrap { position: relative; width: 100%; margin-bottom: 20px; }
+    canvas { display: block; width: 100%; }
+    .slider-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .slider-row .lbl { font-family: var(--mono); font-size: 9px; color: var(--text-dim); white-space: nowrap; text-transform: uppercase; letter-spacing: 0.1em; }
+    .stab-val { font-family: var(--mono); font-size: 28px; font-weight: 600; color: var(--accent); letter-spacing:-0.04em; min-width:54px; text-align:right; }
   </style>
 </head>
 <body>
@@ -32,31 +23,169 @@
         <div class="label">// Active_Forgetting</div>
         <h1 class="title">Ebbinghaus Memory Decay</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Salience_Filtering</div>
+      <div class="label" style="color:var(--text-dim)">Salience_Filtering</div>
     </div>
-    
-    <div class="decay-stage">
-      <svg width="100%" height="100%" viewBox="0 0 500 250" preserveAspectRatio="none">
-        <path class="curve" d="M 0 30 Q 150 220 500 240" />
-      </svg>
-      <div class="point" style="left: 0; top: 30px;"></div>
-      <div class="label-dot" style="left: 0; top: 30px;">NEW_EPISODE</div>
-      
-      <div class="point" style="left: 200px; top: 180px;"></div>
-      <div class="label-dot" style="left: 200px; top: 180px;">CONSOLIDATION_TH</div>
-      
-      <div class="point" style="left: 500px; top: 240px;"></div>
-      <div class="label-dot" style="left: 400px; top: 220px;">EVICTION_READY</div>
 
-      <div class="axis-label" style="bottom: -25px; left: 0;">TIME_ELAPSED</div>
-      <div class="axis-label" style="top: 50%; left: -75px; transform: rotate(-90deg) translateY(-50%);">WEIGHT_ACTIVATION</div>
+    <div class="slider-row">
+      <span class="lbl">Stability</span>
+      <input type="range" id="stab" min="1" max="30" value="5">
+      <span class="lbl" style="min-width:60px">Value: <span class="stab-val" id="stabVal">5</span></span>
     </div>
+
+    <div class="chart-wrap"><canvas id="c"></canvas></div>
+
+    <div class="stat-grid" style="margin-bottom:16px">
+      <div class="stat-box"><div class="stat-num" id="s24h">–</div><div class="stat-label">Retention @ 24h</div></div>
+      <div class="stat-box"><div class="stat-num" id="s7d">–</div><div class="stat-label">Retention @ 7d</div></div>
+      <div class="stat-box"><div class="stat-num" id="sEvict">–</div><div class="stat-label">Eviction threshold</div></div>
+    </div>
+
+    <div class="explain" id="exp">The <b>Ebbinghaus forgetting curve</b>: R(t) = e^(−t/S). Stability <em>S</em> determines how quickly a memory decays. Drag the slider to see how memory types differ — episodic memories fade fast, consolidated semantic facts persist.</div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot"></div> DECAY_RATE: 0.04/h</div>
-      <div class="status-item">SET_SIZE: 4,200</div>
-      <div class="status-item">AUTO_CLEAN: ENABLED</div>
+      <div class="status-item"><div class="status-dot pulse"></div>MODEL: R(t) = e^(-t/S)</div>
+      <div class="status-item">THRESHOLD: 20%</div>
+      <div class="status-item" id="evictTag">EVICT: –</div>
     </div>
   </div>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const stab = document.getElementById('stab');
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const acc = isDark ? '#ff5f1f' : '#d44000';
+    const brd = isDark ? '#222220' : '#e0e0dc';
+    const dimC = isDark ? '#333' : '#ccc';
+    const txtC = isDark ? '#f0f0ee' : '#0e0e0e';
+    const tdim = isDark ? '#555' : '#aaa';
+    const bgC  = isDark ? '#111110' : '#ffffff';
+
+    let dpr = window.devicePixelRatio || 1;
+    let W, H;
+
+    function setup() {
+      W = canvas.parentElement.clientWidth;
+      H = Math.round(W * 0.5);
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.scale(dpr, dpr);
+    }
+
+    function R(t, S) { return Math.exp(-t / S); }
+
+    function draw() {
+      const S = +stab.value;
+      ctx.clearRect(0,0,W,H);
+
+      const pad = {l:50, r:20, t:24, b:36};
+      const cw = W - pad.l - pad.r;
+      const ch = H - pad.t - pad.b;
+      const maxT = 30; // days
+
+      // Background fill under curve
+      ctx.beginPath();
+      ctx.moveTo(pad.l, pad.t + ch);
+      for (let px=0; px<=cw; px++) {
+        const t = (px/cw)*maxT;
+        const r = R(t, S);
+        ctx.lineTo(pad.l + px, pad.t + ch*(1-r));
+      }
+      ctx.lineTo(pad.l+cw, pad.t+ch);
+      ctx.closePath();
+      const grad = ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
+      grad.addColorStop(0, isDark?'rgba(255,95,31,0.2)':'rgba(212,64,0,0.15)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad; ctx.fill();
+
+      // Grid lines
+      [0,0.25,0.5,0.75,1].forEach(y => {
+        const py = pad.t + ch*(1-y);
+        ctx.beginPath(); ctx.moveTo(pad.l, py); ctx.lineTo(pad.l+cw, py);
+        ctx.strokeStyle = brd; ctx.lineWidth=0.5; ctx.stroke();
+        ctx.font = `600 8px 'JetBrains Mono'`;
+        ctx.fillStyle = tdim; ctx.textAlign='right';
+        ctx.fillText((y*100).toFixed(0)+'%', pad.l-6, py+3);
+      });
+
+      [0,7,14,21,30].forEach(d => {
+        const px = pad.l + (d/maxT)*cw;
+        ctx.beginPath(); ctx.moveTo(px, pad.t); ctx.lineTo(px, pad.t+ch);
+        ctx.strokeStyle = brd; ctx.lineWidth=0.5; ctx.stroke();
+        ctx.font = `600 8px 'JetBrains Mono'`;
+        ctx.fillStyle = tdim; ctx.textAlign='center';
+        ctx.fillText(d+'d', px, pad.t+ch+18);
+      });
+
+      // Eviction threshold line (20%)
+      const threshY = pad.t + ch*(1-0.2);
+      ctx.beginPath(); ctx.moveTo(pad.l, threshY); ctx.lineTo(pad.l+cw, threshY);
+      ctx.strokeStyle = isDark?'rgba(255,95,31,0.5)':'rgba(212,64,0,0.4)';
+      ctx.lineWidth=1.5; ctx.setLineDash([5,5]); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font='600 8px \'JetBrains Mono\''; ctx.fillStyle=acc; ctx.textAlign='left';
+      ctx.fillText('EVICTION THRESHOLD (20%)', pad.l+4, threshY-5);
+
+      // Main decay curve
+      ctx.beginPath();
+      for (let px=0; px<=cw; px++) {
+        const t = (px/cw)*maxT;
+        const r = R(t, S);
+        const py = pad.t + ch*(1-r);
+        if (px===0) ctx.moveTo(pad.l+px, py); else ctx.lineTo(pad.l+px, py);
+      }
+      ctx.strokeStyle=acc; ctx.lineWidth=3; ctx.lineJoin='round'; ctx.stroke();
+
+      // Eviction point
+      const evictT = -S * Math.log(0.2);
+      if (evictT <= maxT) {
+        const evictX = pad.l + (evictT/maxT)*cw;
+        const evictY = pad.t + ch*(1-0.2);
+        ctx.beginPath(); ctx.arc(evictX, evictY, 6, 0, Math.PI*2);
+        ctx.fillStyle=acc; ctx.fill();
+        ctx.strokeStyle=bgC; ctx.lineWidth=2; ctx.stroke();
+        ctx.font='700 9px \'JetBrains Mono\''; ctx.fillStyle=acc; ctx.textAlign='center';
+        ctx.fillText(evictT.toFixed(1)+'d', evictX, evictY-14);
+      }
+
+      // Axes
+      ctx.beginPath();
+      ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, pad.t+ch+2);
+      ctx.moveTo(pad.l-2, pad.t+ch); ctx.lineTo(pad.l+cw, pad.t+ch);
+      ctx.strokeStyle=brd; ctx.lineWidth=1; ctx.stroke();
+
+      ctx.save();
+      ctx.translate(14, pad.t+ch/2);
+      ctx.rotate(-Math.PI/2);
+      ctx.font='600 9px \'JetBrains Mono\''; ctx.fillStyle=tdim; ctx.textAlign='center';
+      ctx.fillText('RETENTION R(t)', 0, 0);
+      ctx.restore();
+
+      ctx.font='600 9px \'JetBrains Mono\''; ctx.fillStyle=tdim; ctx.textAlign='center';
+      ctx.fillText('TIME (days)', pad.l+cw/2, H-4);
+
+      // Update stats
+      const r24h = R(1, S), r7d = R(7, S), evictD = -S*Math.log(0.2);
+      document.getElementById('s24h').textContent = (r24h*100).toFixed(0)+'%';
+      document.getElementById('s7d').textContent  = (r7d*100).toFixed(0)+'%';
+      document.getElementById('sEvict').textContent = evictD <= maxT ? evictD.toFixed(1)+'d' : '>30d';
+      document.getElementById('evictTag').textContent = 'EVICT_AT: ' + (evictD<=maxT ? evictD.toFixed(1)+'d' : '>30d');
+
+      const stabLabel = S <= 3 ? '(Flash memory)' : S <= 8 ? '(Episodic memory)' : S <= 15 ? '(Semantic memory)' : '(Core identity)';
+      document.getElementById('exp').innerHTML = `<b>R(t) = e<sup>−t/S</sup></b> where S=${S} ${stabLabel}. At 24h: <span class="accent">${(r24h*100).toFixed(0)}%</span> retained. Evicted at <span class="accent">${evictD<=maxT?evictD.toFixed(1)+'d':'>30d'}</span> when weight drops below threshold.`;
+    }
+
+    stab.addEventListener('input', () => {
+      document.getElementById('stabVal').textContent = stab.value;
+      draw();
+    });
+
+    const ro = new ResizeObserver(() => { setup(); draw(); });
+    ro.observe(canvas.parentElement);
+    setup(); draw();
+  </script>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

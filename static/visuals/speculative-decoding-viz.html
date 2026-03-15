@@ -3,27 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Speculative Decoding Animation | Ninad Pathak</title>
+  <title>Speculative Decoding | Ninad Pathak</title>
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .loop { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 40px; width: 100%; max-width: 600px; margin: 0 auto; }
-    
-    .model-row { display: flex; align-items: center; gap: 20px; }
-    .model-label { width: 120px; font-family: var(--mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; font-weight: 600; }
-    .token-track { flex: 1; height: 50px; border: 1px solid var(--border); display: flex; align-items: center; padding: 0 15px; gap: 8px; background: rgba(0,0,0,0.02); }
-    
-    .token { font-family: var(--mono); font-size: 11px; padding: 6px 10px; border: 1px solid var(--border); background: var(--bg); opacity: 0; transform: translateY(10px); transition: all 0.3s; color: var(--text-dim); }
-    .token.show { opacity: 1; transform: translateY(0); }
-    .token.verified { border-color: var(--accent); color: var(--bg); background: var(--accent); font-weight: 600; box-shadow: 0 4px 8px rgba(212, 64, 0, 0.2); }
-    .token.rejected { border-color: var(--text); color: var(--text); background: var(--bg); opacity: 0.3; text-decoration: line-through; }
+    .loop-stage { margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .model-row { display: grid; grid-template-columns: 140px 1fr; align-items: stretch; min-height: 60px; border: 1px solid var(--border); overflow: hidden; }
+    .model-meta { padding: 12px 14px; border-right: 1px solid var(--border); display: flex; align-items: center; background: var(--surface); }
+    .model-name { font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); font-weight: 600; line-height: 1.4; }
+    .model-name.accent { color: var(--accent); }
+    .token-area { padding: 10px 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; min-height: 60px; }
 
-    @media (max-width: 600px) {
-      .model-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-      .model-label { width: auto; }
-      .token-track { width: 100%; }
+    .tok {
+      font-family: var(--mono); font-size: 11px;
+      padding: 4px 9px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-dim);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: all 280ms cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+    }
+    .tok.show     { opacity: 1; transform: none; }
+    .tok.verified { border-color: var(--accent); color: var(--bg); background: var(--accent); font-weight: 600; }
+    .tok.rejected { border-color: var(--border); background: var(--surface); opacity: 0.3; text-decoration: line-through; }
+    .tok.new      { border-color: var(--accent); color: var(--accent); border-style: dashed; }
+
+    .phase-bar { display: flex; gap: 6px; align-items: center; margin-bottom: 16px; }
+    .phase { flex: 1; height: 4px; background: var(--border); border-radius: 2px; transition: background var(--t); }
+    .phase.done { background: var(--accent); }
+    .phase-name { font-family: var(--mono); font-size: 8px; color: var(--text-dim); white-space: nowrap; min-width: 90px; text-align: right; }
+
+    .timer { font-family: var(--mono); font-size: 9px; color: var(--text-dim); margin-bottom: 12px; }
+    .timer span { color: var(--accent); font-weight: 600; }
+
+    @media(max-width:480px){
+      .model-row { grid-template-columns: 90px 1fr; }
+      .tok { font-size: 10px; padding: 3px 7px; }
     }
   </style>
 </head>
@@ -31,68 +50,153 @@
   <div class="viz-container">
     <div class="header-meta">
       <div>
-        <div class="label">// Parallel_Compute</div>
-        <h1 class="title">Speculative Decoding Loop</h1>
+        <div class="label">// Parallel_Inference</div>
+        <h1 class="title">Speculative Decoding</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Draft_and_Verify</div>
+      <div class="label" style="color:var(--text-dim)">Draft_then_Verify</div>
     </div>
 
-    <div class="loop">
-      <div class="model-row">
-        <div class="model-label">Draft Model (Fast)</div>
-        <div class="token-track" id="draft-track"></div>
+    <div class="phase-bar">
+      <div class="phase" id="ph1"></div>
+      <div class="phase" id="ph2"></div>
+      <div class="phase" id="ph3"></div>
+      <div class="phase-name" id="phaseName">DRAFTING...</div>
+    </div>
+
+    <div class="loop-stage">
+      <div class="model-row" id="draftRow">
+        <div class="model-meta"><div class="model-name">Draft<br>Model<br>(small fast)</div></div>
+        <div class="token-area" id="draftTrack"></div>
       </div>
-      <div class="model-row">
-        <div class="model-label" style="color: var(--accent);">Target Model (Slow)</div>
-        <div class="token-track" id="target-track"></div>
+      <div class="model-row" id="targetRow">
+        <div class="model-meta"><div class="model-name accent">Target<br>Model<br>(large slow)</div></div>
+        <div class="token-area" id="targetTrack"></div>
       </div>
     </div>
+
+    <div class="timer">Cycle time: <span id="cycleTime">–</span> · Speedup vs sequential: <span id="speedup">–</span></div>
+
+    <div class="stat-grid" style="margin-bottom:16px">
+      <div class="stat-box"><div class="stat-num" id="sAccepted">0</div><div class="stat-label">Tokens accepted</div></div>
+      <div class="stat-box"><div class="stat-num" id="sAccRate">–</div><div class="stat-label">Acceptance rate</div></div>
+      <div class="stat-box"><div class="stat-num" id="sBatch">4</div><div class="stat-label">Draft batch size</div></div>
+      <div class="stat-box"><div class="stat-num" id="sEff">~2.4×</div><div class="stat-label">Effective speedup</div></div>
+    </div>
+
+    <div class="explain" id="exp">The <b>draft model</b> speculatively generates 4 tokens in parallel. The <b>target model</b> verifies all 4 in a single forward pass — accepting or rejecting each one.</div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot pulse"></div> <span id="status">DRAFTING...</span></div>
-      <div class="status-item" style="margin-left: auto;">SPEEDUP: ~2.4x</div>
+      <div class="status-item"><div class="status-dot pulse"></div><span id="statusTxt">DRAFTING</span></div>
+      <div class="status-item">DRAFT_TOKENS: 4</div>
+      <div class="status-item">AUTO_LOOP: ON</div>
     </div>
   </div>
 
   <script>
-    const dTrack = document.getElementById('draft-track');
-    const tTrack = document.getElementById('target-track');
-    const status = document.getElementById('status');
-    const words = ["The", "quick", "brown", "fox", "jumps", "over"];
+    const words = ["The","quick","brown","fox","jumps","over","the","lazy","dog","and","runs","fast","through","dark","woods"];
+    let wordIdx = 0;
+    let totalAccepted = 0, totalDrafted = 0;
 
-    async function run() {
-      dTrack.innerHTML = '';
-      tTrack.innerHTML = '';
-      status.innerText = "DRAFTING_TOKENS...";
-      
-      // 1. Drafting
-      for(let i=0; i<4; i++) {
-        const t = document.createElement('div');
-        t.className = 'token';
-        t.innerText = words[i];
-        dTrack.appendChild(t);
-        setTimeout(() => t.classList.add('show'), i * 150);
-      }
-      
-      await new Promise(r => setTimeout(r, 1200));
-      status.innerText = "VERIFYING_PARALLEL...";
-      
-      // 2. Verifying
-      for(let i=0; i<4; i++) {
-        const t = document.createElement('div');
-        t.className = 'token show verified';
-        t.innerText = words[i];
-        tTrack.appendChild(t);
-        dTrack.children[i].classList.add('verified');
-        await new Promise(r => setTimeout(r, 200));
-      }
-      
-      status.innerText = "ACCEPTED. 1_STEP_OVERHEAD.";
-      await new Promise(r => setTimeout(r, 2000));
-      run();
+    function nextWords(n) {
+      return Array.from({length:n}, () => words[wordIdx++ % words.length]);
     }
 
-    run();
+    function makeTok(txt, area) {
+      const t = document.createElement('div');
+      t.className = 'tok';
+      t.textContent = txt;
+      area.appendChild(t);
+      return t;
+    }
+
+    async function sleep(ms) { return new Promise(r=>setTimeout(r,ms)); }
+
+    async function cycle() {
+      const dTrack = document.getElementById('draftTrack');
+      const tTrack = document.getElementById('targetTrack');
+      dTrack.innerHTML = '';
+      tTrack.innerHTML = '';
+
+      document.getElementById('ph1').classList.remove('done');
+      document.getElementById('ph2').classList.remove('done');
+      document.getElementById('ph3').classList.remove('done');
+
+      const batchSize = 4;
+      const draftWords = nextWords(batchSize);
+
+      // ── Phase 1: Drafting ──
+      document.getElementById('phaseName').textContent = '1. DRAFTING';
+      document.getElementById('statusTxt').textContent = 'DRAFTING_TOKENS';
+      document.getElementById('exp').innerHTML = 'The <b>small draft model</b> generates ' + batchSize + ' candidate tokens quickly in sequence.';
+      const t0 = Date.now();
+
+      const draftToks = [];
+      for (let i=0;i<batchSize;i++) {
+        const t = makeTok(draftWords[i], dTrack);
+        await sleep(120);
+        t.classList.add('show');
+        draftToks.push(t);
+      }
+      document.getElementById('ph1').classList.add('done');
+      await sleep(400);
+
+      // ── Phase 2: Verify ──
+      document.getElementById('phaseName').textContent = '2. VERIFYING';
+      document.getElementById('statusTxt').textContent = 'VERIFYING_PARALLEL';
+      document.getElementById('exp').innerHTML = 'The <b>large target model</b> runs <i>one</i> forward pass to verify all ' + batchSize + ' draft tokens simultaneously.';
+
+      const rejectAt = Math.random() < 0.4 ? Math.floor(Math.random()*batchSize) + 1 : batchSize;
+      const verifiedToks = [];
+
+      for (let i=0;i<batchSize;i++) {
+        const accepted = i < rejectAt;
+        const t = makeTok(draftWords[i], tTrack);
+        await sleep(80);
+        t.classList.add('show');
+        if (accepted) {
+          t.classList.add('verified');
+          draftToks[i].classList.add('verified');
+        } else {
+          t.classList.add('rejected');
+          draftToks[i].classList.add('rejected');
+        }
+        verifiedToks.push({tok:t, accepted});
+        totalDrafted++;
+        if (accepted) totalAccepted++;
+      }
+      document.getElementById('ph2').classList.add('done');
+      await sleep(300);
+
+      // ── Phase 3: Correction token ──
+      if (rejectAt < batchSize) {
+        document.getElementById('phaseName').textContent = '3. CORRECTION';
+        const corrTok = makeTok(words[(wordIdx + 3) % words.length], tTrack);
+        corrTok.classList.add('show','new');
+        document.getElementById('exp').innerHTML = 'Token ' + (rejectAt+1) + ' was <b>rejected</b>. Target model samples a corrected token, then the cycle restarts.';
+      } else {
+        document.getElementById('phaseName').textContent = '3. COMPLETE ✓';
+        document.getElementById('exp').innerHTML = 'All ' + batchSize + ' tokens <b>accepted</b>! Only 1 target-model forward pass produced ' + batchSize + ' tokens.';
+      }
+      document.getElementById('ph3').classList.add('done');
+
+      const cycleMs = Date.now() - t0;
+      document.getElementById('cycleTime').textContent = cycleMs + 'ms';
+      document.getElementById('statusTxt').textContent = rejectAt < batchSize ? 'PARTIAL_ACCEPT' : 'ALL_ACCEPTED';
+
+      const accRate = totalDrafted > 0 ? (totalAccepted/totalDrafted*100).toFixed(0) : 0;
+      const speedup = (1 + (totalAccepted/Math.max(1,totalDrafted)) * 1.8).toFixed(1);
+      document.getElementById('sAccepted').textContent = totalAccepted;
+      document.getElementById('sAccRate').textContent   = accRate + '%';
+      document.getElementById('sEff').textContent       = speedup + '×';
+      document.getElementById('speedup').textContent    = speedup + '×';
+      document.getElementById('cycleTime').textContent  = cycleMs + 'ms';
+
+      await sleep(2200);
+      cycle();
+    }
+
+    cycle();
   </script>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

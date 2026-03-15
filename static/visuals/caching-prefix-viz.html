@@ -3,52 +3,160 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prefix Matching | Ninad Pathak</title>
+  <title>KV Cache Prefix | Ninad Pathak</title>
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .stack { flex: 1; display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 500px; margin: 20px auto 0; }
-    
-    .block { border: 1px solid var(--border); padding: 20px 24px; font-family: var(--mono); font-size: 11px; background: var(--bg); position: relative; transition: all 0.3s; color: var(--text-dim); }
-    
-    .block.cached { border-color: var(--accent); background: rgba(212, 64, 0, 0.05); color: var(--text); font-weight: 600; }
-    .cached::after { content: 'KV_CACHED'; position: absolute; right: 16px; top: 16px; font-size: 9px; color: var(--accent); border: 1px solid var(--accent); padding: 4px 8px; letter-spacing: 0.1em; background: var(--bg); }
-    
-    .dynamic { border-color: var(--text); color: var(--text); font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .dynamic::after { content: 'NEW_COMPUTE'; position: absolute; right: 16px; top: 16px; font-size: 9px; color: var(--text); border: 1px solid var(--text); padding: 4px 8px; letter-spacing: 0.1em; background: var(--bg); }
+    .prefix-stage { margin-bottom: 20px; }
+    .prompt-row {
+      display: flex; flex-direction: column; gap: 2px; margin-bottom: 14px;
+    }
+    .prompt-label { font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); margin-bottom: 6px; }
+
+    .token-strip { display: flex; gap: 2px; flex-wrap: wrap; }
+    .tok {
+      font-family: var(--mono); font-size: 9px;
+      padding: 3px 6px; border: 1px solid var(--border);
+      border-radius: 2px; transition: all 0.3s;
+    }
+    .tok.cached { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+    .tok.new-tok { background: var(--surface); border-color: var(--text-dim); color: var(--text); }
+    .tok.computing { animation: compute 0.8s ease infinite; }
+    @keyframes compute { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+    .savings-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--border); background: var(--surface); margin-bottom: 14px; }
+    .savings-bar-wrap { flex: 1; }
+    .savings-label { font-family: var(--mono); font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+    .savings-bar-outer { height: 12px; background: var(--surface2); border: 1px solid var(--border); }
+    .savings-bar-fill { height: 100%; background: var(--border); position: relative; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .savings-bar-fill.saved { background: var(--accent); }
+    .savings-pct { font-family: var(--mono); font-size: 20px; font-weight: 600; color: var(--accent); min-width: 52px; text-align: right; }
+
+    .query-switch { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
   </style>
 </head>
 <body>
   <div class="viz-container">
     <div class="header-meta">
       <div>
-        <div class="label">// State_Persistence</div>
-        <h1 class="title">KV Cache Reuse (Prefix Matching)</h1>
+        <div class="label">// KV_Cache_Reuse</div>
+        <h1 class="title">Prompt Prefix Caching</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Economics_of_Inference</div>
+      <div class="label" style="color:var(--text-dim)">Economics_of_Inference</div>
     </div>
 
-    <div class="stack">
-      <div class="block cached">BLOCK_01: System Instructions (Fixed)</div>
-      <div class="block cached">BLOCK_02: Knowledge Base / Context (Fixed)</div>
-      <div class="block dynamic" id="user">BLOCK_03: User Query: "How do I install..."</div>
+    <div class="prefix-stage">
+      <div class="prompt-label">FULL PROMPT COMPOSITION</div>
+
+      <div class="prompt-row">
+        <div class="prompt-label" style="color:var(--accent)">CACHED PREFIX — computed once, reused forever</div>
+        <div class="token-strip" id="cachedTokens"></div>
+      </div>
+
+      <div class="prompt-row" style="margin-top:8px">
+        <div class="prompt-label">NEW TOKENS — computed fresh each request</div>
+        <div class="token-strip" id="newTokens"></div>
+      </div>
     </div>
+
+    <div class="savings-row">
+      <div class="savings-bar-wrap">
+        <div class="savings-label">COMPUTE REUSED</div>
+        <div class="savings-bar-outer">
+          <div class="savings-bar-fill saved" id="savedBar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="savings-pct" id="savedPct">–</div>
+    </div>
+
+    <div class="query-switch">
+      <button class="btn active" onclick="setQuery(0)">RAG App</button>
+      <button class="btn" onclick="setQuery(1)">Chatbot</button>
+      <button class="btn" onclick="setQuery(2)">Code Agent</button>
+    </div>
+
+    <div class="explain" id="exp">KV-cache prefix matching: identical prompt prefixes share computed key-value attention states. Only the new tokens at the end require actual compute.</div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot pulse"></div> HIT_RATE: 100% (PREFIX)</div>
-      <div class="status-item">COMPUTE_SAVED: 92%</div>
+      <div class="status-item"><div class="status-dot pulse"></div>CACHE: HIT</div>
+      <div class="status-item" id="cacheTag">PREFIX: –</div>
+      <div class="status-item" id="totalTag">TOTAL: –</div>
     </div>
   </div>
 
   <script>
-    const queries = ["How do I install...", "What is the pricing for...", "Can I use Python with..."];
-    let idx = 0;
-    setInterval(() => {
-      document.getElementById('user').innerText = `BLOCK_03: User Query: "${queries[idx]}"`;
-      idx = (idx + 1) % queries.length;
-    }, 2500);
+    const scenarios = [
+      {
+        name: 'RAG App',
+        cached: ['[SYS]','You are','a helpful','assistant.','[DOC_1]','The company','was founded','in 2012','[DOC_2]','Revenue grew','24% last','quarter','[DOC_3]','The CEO','joined in','2019'],
+        newEach: ['[USER]','What is','the CEO\'s','background?'],
+        exp: 'RAG applications inject retrieved documents into <b>every request</b>. With prefix caching, the document embeddings are computed once and reused — only the user\'s unique question is newly computed.',
+        savings: 80
+      },
+      {
+        name: 'Chatbot',
+        cached: ['[SYS]','You are','CustomerBot','for Acme','Corp.','[RULES]','Always be','polite.','Never reveal','internal','pricing.','[KB]','Product A','costs $49'],
+        newEach: ['[HIST]','Turn_14:','User asks','[USER]','How do I','cancel?'],
+        exp: 'Chatbots have a fixed <b>system prompt + knowledge base</b>. With prefix caching, these expensive tokens are only processed once — saving ~75% compute on every turn.',
+        savings: 70
+      },
+      {
+        name: 'Code Agent',
+        cached: ['[SYS]','You are an','expert coder.','[CODEBASE]','File: app.py','def main():','...450 lines...','File: utils.py','...280 lines...','[INSTRUCTIONS]','Follow PEP8'],
+        newEach: ['[TASK]','Add error','handling to','the API route'],
+        exp: 'Coding agents inject the <b>entire codebase context</b> on every request. Prefix caching makes this economically viable — thousands of code tokens cached, only the task description is newly computed.',
+        savings: 87
+      }
+    ];
+
+    let cur = 0;
+
+    function setQuery(idx) {
+      cur = idx;
+      document.querySelectorAll('.query-switch .btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+      render();
+    }
+
+    function render() {
+      const s = scenarios[cur];
+      const cachedEl = document.getElementById('cachedTokens');
+      const newEl    = document.getElementById('newTokens');
+      cachedEl.innerHTML = '';
+      newEl.innerHTML    = '';
+
+      s.cached.forEach(t => {
+        const d = document.createElement('div');
+        d.className = 'tok cached';
+        d.textContent = t;
+        cachedEl.appendChild(d);
+      });
+
+      s.newEach.forEach(t => {
+        const d = document.createElement('div');
+        d.className = 'tok new-tok computing';
+        d.textContent = t;
+        newEl.appendChild(d);
+      });
+
+      const total  = s.cached.length + s.newEach.length;
+      const pct    = s.savings;
+      document.getElementById('exp').innerHTML = s.exp;
+      document.getElementById('cacheTag').textContent  = 'CACHED: ' + s.cached.length + ' tokens';
+      document.getElementById('totalTag').textContent  = 'TOTAL: '  + total + ' tokens';
+      document.getElementById('savedPct').textContent  = pct + '%';
+
+      const bar = document.getElementById('savedBar');
+      bar.style.width = '0%';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        bar.style.transition = 'width 0.8s cubic-bezier(0.16,1,0.3,1)';
+        bar.style.width = pct + '%';
+      }));
+    }
+
+    render();
   </script>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>

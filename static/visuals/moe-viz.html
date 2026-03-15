@@ -3,174 +3,201 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animated MoE Topology | Ninad Pathak</title>
+  <title>MoE Topology | Ninad Pathak</title>
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .moe-stage { flex: 1; border: 1px solid var(--border); position: relative; overflow: hidden; background: var(--bg); margin-top: 10px; display: flex; align-items: center; justify-content: center; }
-    
-    canvas { background: transparent; cursor: crosshair; }
-    
-    .overlay-ui { position: absolute; top: 20px; left: 20px; font-family: var(--mono); font-size: 10px; color: var(--accent); pointer-events: none; }
-    
-    .legend { position: absolute; bottom: 20px; right: 20px; font-family: var(--mono); font-size: 9px; color: var(--text-dim); text-align: right; line-height: 1.5; }
+    .stage { position: relative; width: 100%; aspect-ratio: 16/9; max-height: 320px; border: 1px solid var(--border); overflow: hidden; background: var(--surface); margin-bottom: 20px; }
+    canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
+    .overlay { position: absolute; top: 12px; left: 14px; font-family: var(--mono); font-size: 8px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; pointer-events: none; }
+    .token-count { position: absolute; top:12px; right:14px; font-family: var(--mono); font-size: 8px; color: var(--text-dim); }
+    .controls-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
   </style>
 </head>
 <body>
   <div class="viz-container">
     <div class="header-meta">
       <div>
-        <div class="label">// Sparse_Activation_Pathways</div>
-        <h1 class="title">Mixture of Experts Topology</h1>
+        <div class="label">// Sparse_Activation</div>
+        <h1 class="title">Mixture of Experts Routing</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Routed_Inference</div>
+      <div class="label" style="color:var(--text-dim)">top-K_Gating</div>
     </div>
 
-    <div class="moe-stage" id="container">
-      <div class="overlay-ui">SYSTEM_STATUS: ROUTING_ACTIVE</div>
-      <canvas id="moeCanvas"></canvas>
-      <div class="legend">
-        ● ACTIVE_EXPERT (VERMILLION)<br>
-        ○ INACTIVE_EXPERT (NEUTRAL)
-      </div>
+    <div class="stage" id="stage">
+      <canvas id="c"></canvas>
+      <div class="overlay" id="routerLabel">ROUTER: GATING_ACTIVE</div>
+      <div class="token-count" id="tc">TOKENS_ROUTED: 0</div>
     </div>
+
+    <div class="controls-row">
+      <button class="btn" id="b2" onclick="setK(1)">Top-1 Routing</button>
+      <button class="btn active" id="b3" onclick="setK(2)">Top-2 Routing</button>
+      <button class="btn" id="b4" onclick="setK(4)">Top-4 Routing</button>
+    </div>
+
+    <div class="stat-grid" style="margin-bottom:16px">
+      <div class="stat-box"><div class="stat-num" id="sActive">2</div><div class="stat-label">Active experts / token</div></div>
+      <div class="stat-box"><div class="stat-num" id="sTotal">256</div><div class="stat-label">Total experts</div></div>
+      <div class="stat-box"><div class="stat-num" id="sSparse">99.2%</div><div class="stat-label">Sparsity</div></div>
+      <div class="stat-box"><div class="stat-num" id="sParam">37B</div><div class="stat-label">Active params</div></div>
+    </div>
+
+    <div class="explain" id="exp">Each token is routed to only <b>2 of 256 experts</b>. The gating network learns which experts specialize in what kinds of patterns. 99% of the model is dormant per token.</div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot pulse"></div> ENGINE: DEEPSEEK_V3</div>
-      <div class="status-item">SPARSITY: 37B / 671B</div>
+      <div class="status-item"><div class="status-dot pulse"></div>MODEL: DEEPSEEK_V3</div>
+      <div class="status-item">TOTAL_PARAMS: 671B</div>
+      <div class="status-item">ACTIVE: 37B</div>
     </div>
   </div>
 
   <script>
-    const canvas = document.getElementById('moeCanvas');
+    const canvas = document.getElementById('c');
     const ctx = canvas.getContext('2d');
-    const container = document.getElementById('container');
-
-    let width, height;
-    const experts = [];
-    const tokens = [];
-    const numExperts = 16;
-    const activePerToken = 2;
-
+    const stage = document.getElementById('stage');
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const accentColor = isDark ? '#ff5f1f' : '#d44000';
-    const borderColor = isDark ? '#1e1e1e' : '#e0e0dc';
+    const acc = isDark ? '#ff5f1f' : '#d44000';
+    const brd = isDark ? '#222220' : '#e0e0dc';
+    const bg  = isDark ? '#111110' : '#ffffff';
+    const dimC = isDark ? '#333331' : '#d8d8d4';
+    let dpr = window.devicePixelRatio || 1;
 
-    function resize() {
-      width = container.clientWidth;
-      height = container.clientHeight;
-      canvas.width = width * window.devicePixelRatio;
-      canvas.height = height * window.devicePixelRatio;
-      canvas.style.width = width + 'px';
-      canvas.style.height = height + 'px';
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    const NUM_EXP = 32;
+    const experts = [];
+    const particles = [];
+    let topK = 2;
+    let totalRouted = 0;
+    let W, H;
+
+    function setup() {
+      W = stage.clientWidth;
+      H = stage.clientHeight;
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      ctx.scale(dpr, dpr);
       initExperts();
     }
 
     function initExperts() {
       experts.length = 0;
-      const radius = Math.min(width, height) * 0.35;
-      for (let i = 0; i < numExperts; i++) {
-        const angle = (i / numExperts) * Math.PI * 2;
+      const R = Math.min(W,H) * 0.38;
+      const cx = W/2, cy = H/2;
+      for (let i=0;i<NUM_EXP;i++) {
+        const a = (i/NUM_EXP)*Math.PI*2;
         experts.push({
-          x: width / 2 + Math.cos(angle) * radius,
-          y: height / 2 + Math.sin(angle) * radius,
-          active: false,
-          lastActive: 0
+          x: cx + Math.cos(a)*R,
+          y: cy + Math.sin(a)*R,
+          hotness: 0,
+          specialty: ['Syntax','Semantics','Math','Code','Facts','Logic','Language','Reasoning'][i%8]
         });
       }
     }
 
     function spawnToken() {
-      const startX = width / 2;
-      const startY = height / 2;
-      
-      const targetIndices = [];
-      while(targetIndices.length < activePerToken) {
-        const idx = Math.floor(Math.random() * numExperts);
-        if(!targetIndices.includes(idx)) targetIndices.push(idx);
+      const cx = W/2, cy = H/2;
+      const chosen = [];
+      while (chosen.length < topK) {
+        const r = Math.floor(Math.random()*NUM_EXP);
+        if (!chosen.includes(r)) chosen.push(r);
       }
-
-      targetIndices.forEach(idx => {
-        tokens.push({
-          x: startX,
-          y: startY,
-          targetIdx: idx,
-          progress: 0,
-          speed: 0.02 + Math.random() * 0.01
-        });
+      chosen.forEach(idx => {
+        particles.push({sx:cx,sy:cy,tx:experts[idx].x,ty:experts[idx].y,p:0,targetIdx:idx,speed:0.025+Math.random()*0.015});
       });
+      totalRouted++;
+      document.getElementById('tc').textContent = 'TOKENS_ROUTED: '+ totalRouted;
     }
 
     function draw() {
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0,0,W,H);
+      const cx=W/2, cy=H/2;
 
-      // Draw Router Core
-      ctx.beginPath();
-      ctx.arc(width/2, height/2, 10, 0, Math.PI*2);
-      ctx.fillStyle = accentColor;
-      ctx.fill();
-
-      // Draw Experts
-      experts.forEach((exp, i) => {
-        const timeSinceActive = Date.now() - exp.lastActive;
-        const isActive = timeSinceActive < 500;
-        
-        ctx.beginPath();
-        ctx.arc(exp.x, exp.y, 6, 0, Math.PI*2);
-        ctx.strokeStyle = isActive ? accentColor : borderColor;
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        
-        if (isActive) {
-          ctx.fillStyle = accentColor;
-          ctx.globalAlpha = Math.max(0, 1 - (timeSinceActive / 500));
-          ctx.fill();
-          ctx.globalAlpha = 1;
-        }
+      // Background spoke lines (dim)
+      experts.forEach(e => {
+        ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(e.x,e.y);
+        ctx.strokeStyle = brd; ctx.lineWidth=0.5; ctx.stroke();
       });
 
-      // Draw Tokens
-      for (let i = tokens.length - 1; i >= 0; i--) {
-        const t = tokens[i];
-        t.progress += t.speed;
-        
-        const target = experts[t.targetIdx];
-        t.x = width/2 + (target.x - width/2) * t.progress;
-        t.y = height/2 + (target.y - height/2) * t.progress;
+      // Router core glow
+      const g = ctx.createRadialGradient(cx,cy,0,cx,cy,18);
+      g.addColorStop(0,acc);
+      g.addColorStop(0.4,isDark?'rgba(255,95,31,0.4)':'rgba(212,64,0,0.35)');
+      g.addColorStop(1,'transparent');
+      ctx.beginPath(); ctx.arc(cx,cy,18,0,Math.PI*2);
+      ctx.fillStyle=g; ctx.fill();
 
-        // Trace
-        ctx.beginPath();
-        ctx.moveTo(width/2, height/2);
-        ctx.lineTo(t.x, t.y);
-        ctx.strokeStyle = accentColor;
-        ctx.globalAlpha = 0.15;
+      // Expert nodes
+      experts.forEach((e,i) => {
+        const hot = Math.max(0, 1 - e.hotness/800);
+        ctx.beginPath(); ctx.arc(e.x,e.y,hot<0.5?7:4,0,Math.PI*2);
+        if (e.hotness > 50) {
+          const grad = ctx.createRadialGradient(e.x,e.y,0,e.x,e.y,12);
+          grad.addColorStop(0,acc); grad.addColorStop(1,'transparent');
+          ctx.fillStyle = grad; ctx.fill();
+        }
+        ctx.beginPath(); ctx.arc(e.x,e.y,4,0,Math.PI*2);
+        ctx.strokeStyle = e.hotness > 50 ? acc : brd;
+        ctx.lineWidth = e.hotness > 50 ? 2 : 1;
         ctx.stroke();
-        ctx.globalAlpha = 1;
+        if (e.hotness > 50) {
+          ctx.fillStyle = acc; ctx.fill();
+        }
+        e.hotness = Math.max(0, e.hotness - 6);
+      });
 
-        // Dot
+      // Particles
+      for (let i=particles.length-1;i>=0;i--) {
+        const p = particles[i];
+        p.p += p.speed;
+        const x = p.sx + (p.tx-p.sx)*p.p;
+        const y = p.sy + (p.ty-p.sy)*p.p;
         ctx.beginPath();
-        ctx.arc(t.x, t.y, 3, 0, Math.PI*2);
-        ctx.fillStyle = accentColor;
+        ctx.arc(x,y,3,0,Math.PI*2);
+        ctx.fillStyle = acc;
+        ctx.globalAlpha = 1-p.p*0.3;
         ctx.fill();
-
-        if (t.progress >= 1) {
-          experts[t.targetIdx].lastActive = Date.now();
-          tokens.splice(i, 1);
+        ctx.globalAlpha = 1;
+        // Trail
+        ctx.beginPath(); ctx.moveTo(p.sx,p.sy); ctx.lineTo(x,y);
+        ctx.strokeStyle = acc; ctx.lineWidth=1; ctx.globalAlpha=0.08; ctx.stroke();
+        ctx.globalAlpha=1;
+        if (p.p >= 1) {
+          experts[p.targetIdx].hotness = 1000;
+          particles.splice(i,1);
         }
       }
-
-      requestAnimationFrame(draw);
     }
 
-    window.addEventListener('resize', resize);
-    resize();
-    draw();
-    setInterval(spawnToken, 800);
+    function setK(k) {
+      topK = k;
+      document.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+      document.getElementById(`b${k+1}`) && document.getElementById(`b${k+1}`).classList.add('active');
+      // fix button IDs
+      if(k===1) document.getElementById('b2').classList.add('active');
+      else if(k===2) document.getElementById('b3').classList.add('active');
+      else if(k===4) document.getElementById('b4').classList.add('active');
+      document.getElementById('sActive').textContent = k;
+      const sp = ((NUM_EXP - k)/NUM_EXP*100).toFixed(1);
+      document.getElementById('sSparse').textContent = sp+'%';
 
-    function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);
+      const activeB = {1:'37B',2:'37B',4:'64B'}[k];
+      document.getElementById('sParam').textContent = activeB || k*20+'B';
+
+      const exp = document.getElementById('exp');
+      if (k===1) exp.innerHTML = '<span class="accent">Top-1 routing</span>: each token sent to exactly one expert. Maximum sparsity, but can cause load imbalance across experts.';
+      else if (k===2) exp.innerHTML = 'Standard <span class="accent">Top-2 routing</span> (DeepSeek-V3 style): two experts collaborate per token. Balances quality and sparsity.';
+      else exp.innerHTML = '<span class="accent">Top-4 routing</span>: richer representations, more compute. Used in some MoE variants for long-form reasoning tasks.';
+    }
+
+    const ro = new ResizeObserver(setup);
+    ro.observe(stage);
+    setup();
+    setInterval(spawnToken, 400);
+    function loop() { draw(); requestAnimationFrame(loop); }
+    loop();
   </script>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
 </body>
 </html>

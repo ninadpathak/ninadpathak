@@ -10,9 +10,7 @@ Interactive AI applications live or die by perceived latency. A model might gene
 
 Understanding the components of TTFT is vital for performance engineering. It is not a single number. It is the result of a complex pipeline involving networking and queueing and model prefill.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/ttft-breakdown.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## What TTFT actually measures
 
@@ -24,9 +22,7 @@ Prefilling the prompt is the primary driver of TTFT. The model must process all 
 
 High throughput is important for batch tasks like document parsing. Interactive chat requires low TTFT. You can often trade one for the other.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/ttft-vs-throughput.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 Optimizing for throughput usually involves increasing batch sizes. Such a strategy allows the GPU to work more efficiently but increases the wait time for individual requests. Optimizing for TTFT requires smaller batches or dedicated compute resources to ensure immediate processing.
 
@@ -40,9 +36,7 @@ Choosing a smaller "distilled" model is the most effective way to drop TTFT if y
 
 Follow this hierarchy when tasked with reducing latency in production.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/ttft-hierarchy.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 **Model Selection.** Start by choosing the smallest model that meets your quality bar. This is the "low-hanging fruit" of latency work.
 

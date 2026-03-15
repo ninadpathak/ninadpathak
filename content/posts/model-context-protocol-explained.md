@@ -10,9 +10,7 @@ Connecting AI models to external data has always been a messy engineering challe
 
 The Model Context Protocol (MCP) solves this by introducing a universal standard. It allows any AI host to communicate with any data server using a single language. This is the missing infrastructure layer for the next generation of AI agents.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/mcp-connector-viz.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## What the Model Context Protocol actually is
 
@@ -20,9 +18,7 @@ MCP is an open standard that decouples the AI application from the tools it uses
 
 The system consists of three parts. The host is the primary AI interface like Claude Desktop or an IDE. The server is the provider of data or tools. The client is the bridge that manages the connection between them. Such a separation of concerns allows developers to build tools once and deploy them across any MCP-compliant platform.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/mcp-architecture.html" style="width: 100%; height: 550px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## Why MCP matters architecturally
 
@@ -36,9 +32,7 @@ The communication flow is predictable. The host initiates a connection to the se
 
 The model generates a tool call based on these definitions. The host forwards this request to the MCP server. The server executes the function and returns the result. Such a structured loop minimizes the probability of hallucinated arguments. It provides a reliable boundary for security and rate limiting.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/mcp-workflow.html" style="width: 100%; height: 450px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## MCP inside an agent harness
 
@@ -46,9 +40,7 @@ MCP is most powerful when integrated into an agent harness. The harness manages 
 
 The harness uses MCP to fetch real-time context. It might query a database or pull the latest logs from a monitoring tool. Such data is then injected into the prompt assembler. MCP provides the pipes. The harness provides the brain.
 
-<div style="margin: 3rem 0; background: transparent; border: 1px solid var(--border); overflow: hidden;">
-  <iframe src="/static/visuals/mcp-harness-map.html" style="width: 100%; height: 400px; border: none;" scrolling="no"></iframe>
-</div>
+
 
 ## When to use MCP
 

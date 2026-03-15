@@ -3,94 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Context U-Curve | Ninad Pathak</title>
+  <title>The Attention U-Curve | Ninad Pathak</title>
   <link rel="stylesheet" href="/static/css/visuals-base.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .curve-container {
-      flex: 1;
-      position: relative;
-      margin: 40px 0;
-      border-left: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .u-path {
-      fill: none;
-      stroke: var(--accent);
-      stroke-width: 3;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: draw 2.5s forwards ease-in-out;
-    }
-
-    @keyframes draw { to { stroke-dashoffset: 0; } }
-
-    .zone-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      pointer-events: none;
-    }
-
-    .zone { 
-      height: 100%; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      padding-top: 20px;
-      font-family: var(--mono);
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-    }
-
-    .zone-high { width: 20%; background: var(--accent); opacity: 0.05; color: var(--accent); }
-    .zone-dead { width: 60%; background: var(--text); opacity: 0.02; color: var(--text-dim); }
-
-    .axis-label {
-      position: absolute;
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--text-dim);
-    }
+    .chart-wrap { position: relative; width: 100%; margin-bottom: 20px; cursor: crosshair; }
+    canvas { display: block; width: 100%; }
+    .probe-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .probe-row .lbl { font-family: var(--mono); font-size: 9px; color: var(--text-dim); white-space: nowrap; text-transform: uppercase; letter-spacing: 0.1em; }
+    .probe-val { font-family: var(--mono); font-size: 28px; font-weight: 600; color: var(--accent); letter-spacing:-0.04em; min-width:54px; text-align:right; }
   </style>
 </head>
 <body>
   <div class="viz-container">
     <div class="header-meta">
       <div>
-        <div class="label">// Performance_Degradation</div>
+        <div class="label">// Lost_in_the_Middle</div>
         <h1 class="title">The Attention U-Curve</h1>
       </div>
-      <div class="label" style="color: var(--text-dim);">Context_Window_Limits</div>
+      <div class="label" style="color:var(--text-dim)">Context_Position_Bias</div>
     </div>
 
-    <div class="curve-container">
-      <div class="zone-overlay">
-        <div class="zone zone-high">HIGH_RECALL</div>
-        <div class="zone zone-dead">THE_SILENT_MIDDLE</div>
-        <div class="zone zone-high">HIGH_RECALL</div>
-      </div>
-
-      <svg width="100%" height="100%" viewBox="0 0 500 250" preserveAspectRatio="none" style="position: relative; z-index: 5;">
-        <path class="u-path" d="M 0 30 Q 250 480 500 30" />
-      </svg>
-
-      <div class="axis-label" style="bottom: -25px; left: 0;">PROMPT_START</div>
-      <div class="axis-label" style="bottom: -25px; right: 0;">PROMPT_END</div>
-      <div class="axis-label" style="top: 50%; left: -65px; transform: rotate(-90deg) translateY(-50%);">RECALL_ACCURACY</div>
+    <div class="probe-row">
+      <span class="lbl">Context size</span>
+      <input type="range" id="ctxSize" min="1" max="100" value="50">
+      <span class="lbl">100K tokens</span>
+      <span class="probe-val" id="ctxVal">50K</span>
     </div>
+
+    <div class="chart-wrap"><canvas id="c"></canvas></div>
+
+    <div class="stat-grid" style="margin-bottom:16px">
+      <div class="stat-box"><div class="stat-num" id="sStart">95%</div><div class="stat-label">Recall @ start</div></div>
+      <div class="stat-box"><div class="stat-num" id="sMiddle">41%</div><div class="stat-label">Recall @ middle</div></div>
+      <div class="stat-box"><div class="stat-num" id="sEnd">91%</div><div class="stat-label">Recall @ end</div></div>
+      <div class="stat-box"><div class="stat-num" id="sDrop">54pp</div><div class="stat-label">Middle drop</div></div>
+    </div>
+
+    <div class="explain" id="exp">Transformers have a <b>primacy and recency bias</b>. Information buried in the middle of a long context window is recalled significantly less accurately. This is the "Lost in the Middle" effect.</div>
 
     <div class="status-bar">
-      <div class="status-item"><div class="status-dot"></div> MODEL: CLAUDE_4.6_OPUS</div>
-      <div class="status-item">TEST_SIZE: 128K</div>
-      <div class="status-item">FAILURE_RATE: 42% (MIDDLE)</div>
+      <div class="status-item"><div class="status-dot pulse"></div>STUDY: Liu et al. 2023</div>
+      <div class="status-item">TASK: MULTI_DOC_QA</div>
+      <div class="status-item" id="modelTag">CTX: 50K</div>
     </div>
   </div>
-<script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script></body>
+
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const ctxSize = document.getElementById('ctxSize');
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const acc = isDark ? '#ff5f1f' : '#d44000';
+    const brd = isDark ? '#222220' : '#e0e0dc';
+    const tdim = isDark ? '#555' : '#aaa';
+    const bgC  = isDark ? '#111110' : '#ffffff';
+    let dpr = window.devicePixelRatio || 1;
+    let W, H;
+    let probeX = null;
+
+    function setup() {
+      W = canvas.parentElement.clientWidth;
+      H = Math.round(W * 0.5);
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.scale(dpr, dpr);
+    }
+
+    // U-curve model: recall drops as context grows, center worst
+    // R(pos, ctx) where pos ∈ [0,1] and ctx is 1-100K
+    function recall(pos, ctxK) {
+      // primacy bump at start, recency bump at end
+      const primacy  = Math.exp(-pos * 6);
+      const recency  = Math.exp(-(1-pos)*5);
+      const base     = Math.max(primacy, recency);
+      // Middle gets worse as ctx grows
+      const midDrop  = (ctxK/100) * 0.58 * Math.exp(-((pos-0.5)**2)*12);
+      return Math.min(1, Math.max(0.1, base * (0.95 - midDrop*0.3) + 0.05));
+    }
+
+    function draw() {
+      const ctxK = +ctxSize.value;
+      ctx.clearRect(0,0,W,H);
+
+      const pad = {l:44, r:16, t:20, b:36};
+      const cw = W-pad.l-pad.r, ch = H-pad.t-pad.b;
+
+      // Background shading zones
+      const zoneW = cw/3;
+      const zones = [
+        {x:pad.l,       w:zoneW,   label:'PRIMACY\nZONE',  color:isDark?'rgba(255,95,31,0.05)':'rgba(212,64,0,0.04)'},
+        {x:pad.l+zoneW, w:zoneW,   label:'LOST IN\nMIDDLE',color:isDark?'rgba(100,100,100,0.04)':'rgba(0,0,0,0.02)'},
+        {x:pad.l+zoneW*2,w:zoneW,  label:'RECENCY\nZONE',  color:isDark?'rgba(255,95,31,0.05)':'rgba(212,64,0,0.04)'},
+      ];
+      zones.forEach(z => {
+        ctx.fillStyle = z.color;
+        ctx.fillRect(z.x, pad.t, z.w, ch);
+        ctx.font = `700 8px 'JetBrains Mono'`; ctx.fillStyle=tdim; ctx.textAlign='center';
+        const lines = z.label.split('\n');
+        lines.forEach((l,li)=>ctx.fillText(l, z.x+z.w/2, pad.t+14+li*13));
+      });
+
+      // Grid lines
+      [0,0.25,0.5,0.75,1].forEach(y => {
+        const py = pad.t + ch*(1-y);
+        ctx.beginPath(); ctx.moveTo(pad.l,py); ctx.lineTo(pad.l+cw,py);
+        ctx.strokeStyle=brd; ctx.lineWidth=0.5; ctx.stroke();
+        ctx.font='600 8px \'JetBrains Mono\''; ctx.fillStyle=tdim; ctx.textAlign='right';
+        ctx.fillText((y*100).toFixed(0)+'%', pad.l-5, py+3);
+      });
+
+      // Sample curves for comparison (lighter)
+      [20, 80].forEach(k => {
+        ctx.beginPath();
+        for (let px=0; px<=cw; px++) {
+          const pos=(px/cw), r=recall(pos,k);
+          const py=pad.t+ch*(1-r);
+          if(px===0)ctx.moveTo(pad.l+px,py); else ctx.lineTo(pad.l+px,py);
+        }
+        ctx.strokeStyle=brd; ctx.lineWidth=1; ctx.stroke();
+      });
+
+      // Main curve fill
+      ctx.beginPath();
+      ctx.moveTo(pad.l, pad.t+ch);
+      for (let px=0; px<=cw; px++) {
+        const pos=(px/cw), r=recall(pos,ctxK);
+        ctx.lineTo(pad.l+px, pad.t+ch*(1-r));
+      }
+      ctx.lineTo(pad.l+cw,pad.t+ch); ctx.closePath();
+      const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
+      grad.addColorStop(0,isDark?'rgba(255,95,31,0.2)':'rgba(212,64,0,0.15)');
+      grad.addColorStop(1,'transparent');
+      ctx.fillStyle=grad; ctx.fill();
+
+      // Main curve
+      ctx.beginPath();
+      for (let px=0; px<=cw; px++) {
+        const pos=(px/cw), r=recall(pos,ctxK);
+        const py=pad.t+ch*(1-r);
+        if(px===0)ctx.moveTo(pad.l+px,py); else ctx.lineTo(pad.l+px,py);
+      }
+      ctx.strokeStyle=acc; ctx.lineWidth=3; ctx.lineJoin='round'; ctx.stroke();
+
+      // Probe marker
+      if (probeX !== null) {
+        const pos = Math.max(0, Math.min(1, (probeX - pad.l)/cw));
+        const r = recall(pos, ctxK);
+        const px = pad.l + pos*cw;
+        const py = pad.t + ch*(1-r);
+        ctx.beginPath(); ctx.arc(px,py,6,0,Math.PI*2);
+        ctx.fillStyle=acc; ctx.fill();
+        ctx.strokeStyle=bgC; ctx.lineWidth=2; ctx.stroke();
+        // Tooltip
+        const label = `pos=${(pos*100).toFixed(0)}% · recall=${(r*100).toFixed(0)}%`;
+        const tw = ctx.measureText(label).width;
+        const tx = Math.min(pad.l+cw-tw/2-8, Math.max(pad.l+tw/2+8, px));
+        const ty = py - 18;
+        ctx.fillStyle = isDark?'rgba(10,10,9,0.85)':'rgba(248,248,246,0.9)';
+        ctx.fillRect(tx-tw/2-6, ty-12, tw+12, 18);
+        ctx.strokeStyle=acc; ctx.lineWidth=1; ctx.strokeRect(tx-tw/2-6, ty-12, tw+12, 18);
+        ctx.font='700 9px \'JetBrains Mono\''; ctx.fillStyle=acc; ctx.textAlign='center';
+        ctx.fillText(label, tx, ty+1);
+      }
+
+      // Axes
+      ctx.beginPath();
+      ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,pad.t+ch+2);
+      ctx.moveTo(pad.l-2,pad.t+ch); ctx.lineTo(pad.l+cw,pad.t+ch);
+      ctx.strokeStyle=brd; ctx.lineWidth=1; ctx.stroke();
+      ctx.font='600 8px \'JetBrains Mono\''; ctx.fillStyle=tdim; ctx.textAlign='center';
+      ctx.fillText('POSITION IN CONTEXT →', pad.l+cw/2, H-4);
+
+      // Update stats
+      const rStart  = recall(0.02, ctxK);
+      const rMiddle = recall(0.5,  ctxK);
+      const rEnd    = recall(0.98, ctxK);
+      const drop    = rStart - rMiddle;
+      document.getElementById('sStart').textContent  = (rStart*100).toFixed(0)+'%';
+      document.getElementById('sMiddle').textContent = (rMiddle*100).toFixed(0)+'%';
+      document.getElementById('sEnd').textContent    = (rEnd*100).toFixed(0)+'%';
+      document.getElementById('sDrop').textContent   = (drop*100).toFixed(0)+'pp';
+      document.getElementById('ctxVal').textContent  = ctxK+'K';
+      document.getElementById('modelTag').textContent= 'CTX: '+ctxK+'K';
+
+      const exp = document.getElementById('exp');
+      if (ctxK < 20) exp.innerHTML = 'At <span class="accent">'+ctxK+'K tokens</span>, the U-curve is mild. Short contexts are easier for models to attend over — middle recall drops only <b>~'+((drop*100).toFixed(0))+'pp</b>.';
+      else if (ctxK < 60) exp.innerHTML = 'At <span class="accent">'+ctxK+'K tokens</span>, the "Lost in the Middle" effect is significant. <b>'+((drop*100).toFixed(0))+'pp</b> drop in middle recall. Always place critical facts at the start or end of your prompt.';
+      else exp.innerHTML = 'At <span class="accent">'+ctxK+'K tokens</span>, middle recall collapses. <b>'+((drop*100).toFixed(0))+'pp</b> drop. Use RAG to place retrieved context at the end — never bury key facts in the middle.';
+    }
+
+    ctxSize.addEventListener('input', draw);
+
+    canvas.addEventListener('pointermove', e => {
+      const rect = canvas.getBoundingClientRect();
+      probeX = (e.clientX - rect.left) * (W / rect.width);
+      draw();
+    });
+    canvas.addEventListener('pointerleave', () => { probeX = null; draw(); });
+
+    const ro = new ResizeObserver(() => { setup(); draw(); });
+    ro.observe(canvas.parentElement);
+    setup(); draw();
+  </script>
+  <script>function sendHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:"resize-iframe",height:h},"*")}window.addEventListener("load",sendHeight);window.addEventListener("resize",sendHeight);new ResizeObserver(sendHeight).observe(document.body);</script>
+</body>
 </html>
