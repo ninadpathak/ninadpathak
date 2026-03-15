@@ -323,45 +323,6 @@ class SiteBuilder:
                 legal_page=legal_page,
             )
 
-    def build_tasks(self, posts):
-        with open("content/tasks.yaml") as f:
-            data = yaml.safe_load(f)
-
-        published_slugs = {p["slug"] for p in posts}
-
-        categories = []
-        published_count = 0
-        total_count = 0
-
-        for cat in data.get("categories", []):
-            tasks = []
-            for t in cat.get("tasks", []):
-                slug = t.get("slug")
-                is_published = bool(slug and slug != "~" and slug in published_slugs)
-                url = f"/blog/{slug}/" if is_published else None
-                tasks.append({
-                    "title": t["title"],
-                    "tags": t.get("tags", []),
-                    "published": is_published,
-                    "url": url,
-                })
-                total_count += 1
-                if is_published:
-                    published_count += 1
-            categories.append({"name": cat["name"], "tasks": tasks})
-
-        queued_count = total_count - published_count
-        progress_pct = round(published_count / total_count * 100) if total_count else 0
-
-        self.render(
-            "tasks.html", "tasks/index.html",
-            page="tasks",
-            categories=categories,
-            published_count=published_count,
-            queued_count=queued_count,
-            total_count=total_count,
-            progress_pct=progress_pct,
-        )
 
     def build_sitemap(self, posts, work_cases):
         base = self.config["site"]["url"].rstrip("/")
@@ -475,7 +436,7 @@ class SiteBuilder:
         self.build_contact()
         self.build_linter()
         self.build_legal_pages(legal_pages)
-        self.build_tasks(posts)
+
         self.build_sitemap(posts, work_cases)
         self.build_rss(posts)
         self.build_pygments_css()
