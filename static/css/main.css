@@ -1747,3 +1747,45 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 
   .post-content table { display: block; overflow-x: auto; max-width: 100%; }
 }
+
+/* =====================================================================
+   VISUALS
+   ===================================================================== */
+.visual-wrapper {
+  width: 110%;
+  margin: 64px -5%;
+  align-self: center;
+}
+
+.visual-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 5%;
+}
+
+.visual-title span {
+  opacity: 0.4;
+}
+
+.visual-container {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.visual-container iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  display: block !important;
+}

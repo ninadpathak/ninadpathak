@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Reranking in RAG: Why Your Top-k Results Are Probably Wrong</title>
+      <link>https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/</link>
+      <description>Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.</description>
+      <pubDate>Mar 21, 2026</pubDate>
+    </item>
+    <item>
       <title>The State of Open Source AI Memory in 2026: Beyond the Context Window Myth</title>
       <link>https://ninadpathak.com/blog/state-of-open-source-memory-2026/</link>
       <description>AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve identity fragmentation at production scale.</description>

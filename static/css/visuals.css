@@ -1,0 +1,51 @@
+/* Visual Container Styles */
+.visual-wrapper {
+  margin: 3rem 0;
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.visual-title {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1.5rem 0;
+}
+
+.visual-title::before {
+  content: '//';
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+.visual-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+}
+
+.visual-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  overflow: hidden;
+}
+
+/* Fallback for smaller screens */
+@media (max-width: 768px) {
+  .visual-container {
+    height: 500px;
+  }
+}

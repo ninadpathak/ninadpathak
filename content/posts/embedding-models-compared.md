@@ -14,6 +14,13 @@ A weak model clusters unrelated concepts together. A strong model preserves the 
 
 I spent the last year benchmarking these models across production workloads. The landscape has shifted from simple BERT-based encoders to massive parameter models that rival the reasoning capabilities of small LLMs. Understanding the geometry behind these models is no longer optional for engineers building AI products.
 
+<div class="visual-wrapper">
+  <div class="visual-title">Semantic Clustering in 3D Space</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/vector-space.html" title="3D Vector Space Simulation" loading="lazy"></iframe>
+  </div>
+</div>
+
 
 
 ## How text becomes geometry
@@ -37,6 +44,13 @@ Searching through millions of vectors requires a consistent way to measure the "
 Many embedding models are normalized to have a length of one. This places every vector on the surface of a multi-dimensional unit sphere. Normalization ensures that the magnitude of the vector does not bias the search results.
 
 Cosine similarity becomes the preferred metric in this constrained geometry. It measures the cosine of the angle between two vectors. When two vectors point in exactly the same direction, the angle is zero and the similarity is one.
+
+<div class="visual-wrapper">
+  <div class="visual-title">Vector Distance and Cosine Similarity</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/cosine-similarity.html" title="Cosine Similarity Animation" loading="lazy"></iframe>
+  </div>
+</div>
 
 When they point in opposite directions, the similarity is negative one. I've seen many teams struggle with the "curse of dimensionality" when using these metrics. High-dimensional spaces push points toward the edges of the space.
 
@@ -71,6 +85,15 @@ Techniques like Principal Component Analysis (PCA) or t-SNE help us see the clus
 ## Building flexible vectors with Matryoshka embeddings
 
 The most significant innovation in embedding geometry recently is the Matryoshka Representation Learning (MRL) technique. These models are trained so that the most important information is stored in the first few dimensions. The vector acts like a Russian nesting doll.
+
+<div class="visual-wrapper">
+    <div class="visual-title">
+        <span>//</span> Matryoshka: Dimensionality vs. Precision
+    </div>
+    <div class="visual-container" style="height: 500px;">
+        <iframe src="/static/visuals/matryoshka-truncation.html" title="Matryoshka Truncation Simulator"></iframe>
+    </div>
+</div>
 
 You can take a 1536-dimension Matryoshka vector and truncate it to 128 dimensions. The resulting smaller vector still captures most of the semantic meaning. Such flexibility allows you to build multi-stage search systems.
 
@@ -129,6 +152,13 @@ You retrieve 10x more results than you need using the binary index. You then re-
 ## The standard semantic search pipeline
 
 Building a search system with these models follows a predictable pipeline. You start by chunking your documents. Each chunk is passed to the embedding model to generate a vector.
+
+<div class="visual-wrapper">
+  <div class="visual-title">Splitting and Embedding Document Chunks</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/chunking.html" title="Document Chunking and Embedding Animation" loading="lazy"></iframe>
+  </div>
+</div>
 
 These vectors are stored in a vector database alongside the original text and metadata. A user query arrives and is embedded using the same model. The vector database performs a nearest-neighbor search to find the chunks with the highest similarity.
 

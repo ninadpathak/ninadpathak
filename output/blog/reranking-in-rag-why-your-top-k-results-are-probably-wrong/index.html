@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reranking in RAG: Why Your Top-k Results Are Probably Wrong | Ninad Pathak</title>
+  <meta name="description" content="Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Reranking in RAG: Why Your Top-k Results Are Probably Wrong">
+  <meta property="og:description" content="Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Reranking in RAG: Why Your Top-k Results Are Probably Wrong",
+  "description": "Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-21",
+  "dateModified": "2026-03-21",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Reranking in RAG: Why Your Top-k Results Are Probably Wrong",
+      "item": "https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Reranking in RAG: Why Your Top-k Results Are Probably Wrong</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 21, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">9 min read</span>
+      </div>
+      <h1 class="post-title">Reranking in RAG: Why Your Top-k Results Are Probably Wrong</h1>
+      <p class="lead">Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">vector-search</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-structural-limitation-of-dense-embeddings">The structural limitation of dense embeddings</a></li>
+<li><a href="#enter-the-cross-encoder">Enter the cross-encoder</a></li>
+<li><a href="#designing-a-two-stage-retrieval-pipeline">Designing a two-stage retrieval pipeline</a></li>
+<li><a href="#evaluating-the-latency-tradeoff">Evaluating the latency tradeoff</a></li>
+<li><a href="#dealing-with-keyword-exactness">Dealing with keyword exactness</a></li>
+<li><a href="#comparing-models-and-providers">Comparing models and providers</a></li>
+<li><a href="#why-you-cannot-skip-the-reranker">Why you cannot skip the reranker</a></li>
+<li><a href="#implementing-the-architecture">Implementing the architecture</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Vector databases are powerful tools for building retrieval-augmented generation systems. I have seen many engineering teams assume that dropping text into an embedding model and performing a cosine similarity search is the entire retrieval job. You retrieve the top five results. You inject them into your prompt. You expect the language model to synthesize a perfect answer.</p>
+<p>That architecture almost always breaks down in production. I consistently notice accuracy issues when systems rely solely on single-stage dense retrieval. The top-k results from a vector database are often semantically related to the query but entirely irrelevant to the user's actual question.</p>
+<p>I want to explain exactly why this happens and how you can fix it. The solution requires adding a reranking stage to your retrieval pipeline. You will need to understand the structural limitations of bi-encoder models and the computational tradeoffs of cross-encoder architectures.</p>
+<h2 id="the-structural-limitation-of-dense-embeddings">The structural limitation of dense embeddings</h2>
+<p>Every document you store in a vector database passes through an embedding model. I discussed the geometry of these spaces in <a href="/blog/embedding-models-compared/">Embedding models: the geometry of meaning across OpenAI, Cohere, and open-source</a>. The model compresses the entire semantic meaning of a chunk of text into a single array of floating-point numbers.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Bi-Encoder Architecture</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/bi-encoder-arch.html" title="Bi-Encoder isolated embedding architecture" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>The query undergoes the exact same process. The database then calculates the distance between the query vector and the document vectors.</p>
+<p>A fundamental problem exists here. The embedding model evaluates the query and the document in total isolation. The model never sees the query and the document together. We call this a bi-encoder architecture. The model generates a vector for the query. The model generates vectors for the documents. The database compares the vectors.</p>
+<p>Such an approach is extremely fast. You can pre-compute all document embeddings. You only need to embed the query at runtime. The distance calculation is computationally cheap.</p>
+<p>Speed comes at the cost of deep reasoning. The model compresses everything into one fixed-size representation. Nuanced relationships between specific words in the query and specific words in the document get lost during that compression.</p>
+<p>You ask a question about "how to configure a timeout for the postgres connection pool." The database might return a document about "how to configure a timeout for the redis connection pool." Both documents share massive semantic overlap. They both talk about configuring timeouts for connection pools. The embedding model plots them very close together in vector space.</p>
+<p>The language model receives the redis document. The language model generates a hallucinated answer or states it cannot find the information. Your retrieval system failed because semantic similarity does not equal relevance.</p>
+<h2 id="enter-the-cross-encoder">Enter the cross-encoder</h2>
+<p>I implement cross-encoders to solve this precise issue. A cross-encoder is a different type of machine learning model. It does not produce standalone embeddings.</p>
+<p>A cross-encoder takes two pieces of text simultaneously. You feed it the query and a single document as a single input. The model processes them together through its attention layers.</p>
+<p>Every token in the query can attend to every token in the document. The model can identify exact keyword matches. The model can understand complex logical connections between the two texts. The model outputs a single number. That number represents a highly accurate relevance score.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Cross-Encoder Architecture</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/cross-encoder-arch.html" title="Cross-Encoder joint attention architecture" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>You cannot use a cross-encoder for your initial search. I will explain why. Running a cross-encoder requires passing the query and the document through a transformer model at runtime. Doing that for a million documents would take hours or days for a single search.</p>
+<p>We must combine both approaches. I build two-stage retrieval systems. The bi-encoder handles the initial wide net. The cross-encoder handles the final precision sorting.</p>
+<h2 id="designing-a-two-stage-retrieval-pipeline">Designing a two-stage retrieval pipeline</h2>
+<p>The architecture looks like a funnel. You start with your massive corpus of documents.</p>
+<p>Stage one uses your standard vector database. You take the user's query and embed it using a fast bi-encoder. You run a vector search. You do not ask for the top five results. You ask for a much larger number. I typically retrieve the top one hundred or two hundred chunks from the database.</p>
+<p>Those one hundred chunks contain the correct answer somewhere inside them. The order of those one hundred chunks is likely wrong. The correct answer might sit at position forty-seven because the bi-encoder missed a subtle keyword connection.</p>
+<p>Stage two applies the cross-encoder. You take the original query. You pair it with each of the one hundred chunks retrieved in stage one. You send those one hundred pairs to your reranker model.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Bi-Encoder vs Cross-Encoder Sorting</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/reranking-pipeline.html" title="Two Stage Reranking Pipeline Animation" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>The reranker scores each pair. You sort the one hundred chunks based on these new scores.</p>
+<p>You now take the top five or ten chunks from that newly sorted list. You pass only those highly relevant chunks to your language model for the final generation step. I covered the dangers of passing too much context in <a href="/blog/llm-context-windows-explained/">Your Context Window Has a Middle. Models Don't Read It.</a>. Providing a small, highly accurate set of chunks is critical for generation quality.</p>
+<h2 id="evaluating-the-latency-tradeoff">Evaluating the latency tradeoff</h2>
+<p>Adding a reranker introduces new latency to your pipeline. I always measure the impact of this additional compute step.</p>
+<p>Retrieving one hundred vectors from a database takes milliseconds. Embedding the query takes perhaps fifty milliseconds. Your initial retrieval is very fast.</p>
+<p>Running one hundred pairs through a cross-encoder takes time. You are performing heavy transformer inference at runtime. Calling an external API like Cohere's Rerank endpoint will add network latency plus inference time. That can easily add hundreds of milliseconds to your total response time.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Latency Tradeoff Comparison</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/latency-tradeoff.html" title="Latency chart comparing vector search to reranking" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>You must balance accuracy against speed. I sometimes reduce the initial retrieval size to fifty chunks if latency becomes a critical bottleneck. You can also host a smaller, open-source reranker model on your own infrastructure to eliminate network round trips.</p>
+<p>Models like <code>bge-reranker-base</code> or <code>cross-encoder/ms-marco-MiniLM-L-6-v2</code> run very efficiently on small GPUs or even modern CPUs. I frequently deploy these models directly alongside the application server.</p>
+<p>You might wonder if the latency penalty is worth it. I consistently measure massive improvements in retrieval metrics after adding a reranker. Metrics like Mean Reciprocal Rank (MRR) or Normalized Discounted Cumulative Gain (NDCG) jump significantly. The user experience improves because the system stops providing confidently wrong answers based on loosely related documents.</p>
+<h2 id="dealing-with-keyword-exactness">Dealing with keyword exactness</h2>
+<p>Vector search struggles with exact numbers, acronyms, and specific identifiers. I see this fail constantly in technical documentation search.</p>
+<p>A user searches for error code <code>E-4048</code>. The embedding model might split that into several tokens. The resulting vector represents a vague concept of an error code. The search returns documents containing <code>E-4049</code> or <code>E-4047</code> because they look semantically identical to the bi-encoder.</p>
+<p>The cross-encoder fixes this immediately. The cross-encoder sees <code>E-4048</code> in the query and looks for it specifically in the document. It understands that a one-character difference changes the relevance entirely.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Evaluating Keyword Exactness</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/keyword-exactness.html" title="Comparison of vector similarity vs reranker score for exact keywords" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>You can also improve the first stage by using hybrid search. I often combine vector search with standard keyword search (BM25) to generate that initial list of one hundred candidates. The reranker then evaluates candidates from both sources. This ensures that exact keyword matches make it into the reranking pool even if the vector search missed them entirely.</p>
+<h2 id="comparing-models-and-providers">Comparing models and providers</h2>
+<p>The market provides excellent options for reranking. I have tested several approaches across different production workloads.</p>
+<p>Cohere provides a fantastic commercial API. Their <code>rerank-english-v3.0</code> and <code>rerank-multilingual-v3.0</code> models offer exceptional accuracy out of the box. You send them your query and a list of texts. They return the sorted indices and scores. The integration takes minutes.</p>
+<p>Open-source options require more infrastructure work but offer better unit economics at scale. The BAAI general embedding (BGE) family includes several powerful rerankers. I rely on <code>bge-reranker-large</code> for high-accuracy local deployments.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Comparing Models and Providers</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/models-providers.html" title="Comparison between commercial API and open source rerankers" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>You can also use a standard language model as a reranker. You pass the query and the document into a prompt and ask the model to output a score from one to ten. I generally avoid this approach. Generative models are slow. Parsing their output is fragile. Dedicated cross-encoders are smaller, faster, and trained specifically for the scoring task.</p>
+<h2 id="why-you-cannot-skip-the-reranker">Why you cannot skip the reranker</h2>
+<p>I hear arguments that newer, larger embedding models solve the relevance problem natively. Some teams believe that moving from a 384-dimensional vector to a 3072-dimensional vector eliminates the need for a second stage.</p>
+<p>My experience shows that dimensionality does not solve the fundamental architecture flaw. A bi-encoder still compresses two texts independently. You can give it more dimensions. You are still asking it to predict a relationship without looking at the two items together.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">The Problem with Dimension Scaling</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/dimension-scaling.html" title="Scaling vector dimensions does not solve isolated evaluation" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>I also hear arguments that massive context windows solve the problem. You might think you can just pass all one hundred retrieved chunks directly to the language model. You let the language model sort it out. I analyzed this approach when comparing <a href="/blog/rag-vs-fine-tuning/">Fine-Tuning vs RAG</a>. Stuffing the context window increases your inference costs linearly. It also increases latency dramatically. Time to first token degrades when you send eighty thousand tokens on every request.</p>
+<p>The language model will also lose track of information buried in that massive context. Providing five highly relevant chunks always yields better generation than providing one hundred marginally related chunks.</p>
+<h2 id="implementing-the-architecture">Implementing the architecture</h2>
+<p>You should map out your current retrieval pipeline. I recommend logging the initial retrieved chunks and their vector distance scores. You will quickly notice that the document you actually want often sits below the top five results.</p>
+<p>You can add a reranker with very few lines of code. Frameworks provide native wrappers for this. I prefer writing the integration manually to control the exact number of candidates passed between stages.</p>
+<p>You take the output of your vector database client. You format it into a list of strings. You pass that list and the query to your reranker. You slice the top results from the response. You pass those to your prompt builder.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Two-Stage Implementation Flow</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/implementation-flow.html" title="Code level pipeline steps for reranking" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>The impact on system reliability is profound. The language model receives crisp, relevant context. Hallucinations drop. The system feels much more intelligent to the end user.</p>
+<p>You cannot build a production RAG system relying solely on cosine similarity. The math of vector spaces provides a great filtering mechanism. The math of vector spaces provides a terrible ranking mechanism. I always build with a two-stage pipeline to ensure the right information actually reaches the generation step.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/state-of-open-source-memory-2026/" class="related-card">
+        <div class="related-card-date">2026-03-15</div>
+        <div class="related-card-title">The State of Open Source AI Memory in 2026: Beyond the Context Window Myth</div>
+      </a>
+      <a href="/blog/embedding-models-compared/" class="related-card">
+        <div class="related-card-date">2026-03-15</div>
+        <div class="related-card-title">Vector Embeddings: A Guide to the Geometry of Meaning in AI</div>
+      </a>
+      <a href="/blog/llm-context-windows-explained/" class="related-card">
+        <div class="related-card-date">2026-03-14</div>
+        <div class="related-card-title">LLM Context Windows Explained: Why More is Not Always Better</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/" class="footer-link">Reranking in RAG: Why Your Top-k Results Are Probably Wrong</a>
+          <a href="/blog/state-of-open-source-memory-2026/" class="footer-link">The State of Open Source AI Memory in 2026: Beyond the Context Window Myth</a>
+          <a href="/blog/embedding-models-compared/" class="footer-link">Vector Embeddings: A Guide to the Geometry of Meaning in AI</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Stage Reranking Pipeline</title>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+        
+        body { 
+            margin: 0; 
+            background: var(--bg-1); 
+            font-family: var(--mono); 
+            color: var(--text-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-
+            
+         overflow: hidden; }
+
+        .pipeline {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .stage {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+        }
+
+        .stage-title {
+            font-size: 11px;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .chunk {
+            height: 32px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 12px;
+            background: var(--bg-1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .chunk.target {
+            border-color: var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .score {
+            margin-left: auto;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        /* Arrows */
+        .arrow {
+            font-size: 24px;
+            color: var(--text-3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: translateX(0); }
+            50% { opacity: 1; transform: translateX(5px); }
+        }
+
+        /* Animation specific states */
+        .stage-2 .chunk { transform: translateY(0); }
+        
+        /* Simulating the sorting mechanism in Stage 2 */
+        @keyframes resort {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(0) scale(1.05); border-color: var(--accent); z-index: 10;}
+            100% { transform: translateY(-120px); border-color: var(--accent); background: rgba(212, 64, 0, 0.05); }
+        }
+
+        @keyframes pushDown {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); opacity: 0.5;}
+        }
+
+        .animating .target-move {
+            animation: resort 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animating .push-down {
+            animation: pushDown 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @media (max-width: 600px) {
+            .pipeline {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 0;
+            }
+            body {
+                height: auto;
+                min-min-
+                padding: 20px 0;
+             overflow: hidden; }
+            .arrow {
+                transform: rotate(90deg);
+            }
+            @keyframes pulse {
+                0%, 100% { opacity: 0.4; transform: rotate(90deg) translateY(0); }
+                50% { opacity: 1; transform: rotate(90deg) translateY(5px); }
+            }
+            /* Adjust vertical animation for mobile if needed, though they just shift chunks */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="pipeline" id="anim-root">
+        <!-- Stage 1 -->
+        <div class="stage stage-1">
+            <div class="stage-title">1. Bi-Encoder (Top 100)</div>
+            <div class="chunk">Vector Result #1 <span class="score">0.892</span></div>
+            <div class="chunk">Vector Result #2 <span class="score">0.881</span></div>
+            <div class="chunk">Vector Result #3 <span class="score">0.875</span></div>
+            <div class="chunk target">Target Document <span class="score">0.860</span></div>
+            <div class="chunk">Vector Result #5 <span class="score">0.855</span></div>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <!-- Stage 2 -->
+        <div class="stage stage-2">
+            <div class="stage-title">2. Cross-Encoder (Rerank)</div>
+            <div class="chunk push-down">Vector Result #1 <span class="score rerank-score">0.12</span></div>
+            <div class="chunk push-down">Vector Result #2 <span class="score rerank-score">0.45</span></div>
+            <div class="chunk push-down">Vector Result #3 <span class="score rerank-score">0.05</span></div>
+            <div class="chunk target target-move">Target Document <span class="score rerank-score">0.99</span></div>
+            <div class="chunk push-down">Vector Result #5 <span class="score rerank-score">0.31</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Simple loop to restart the animation every 4 seconds
+        const root = document.getElementById('anim-root');
+        const rerankScores = document.querySelectorAll('.rerank-score');
+        
+        function playAnim() {
+            root.classList.remove('animating');
+            // reset text
+            rerankScores[0].innerText = "0.12";
+            rerankScores[1].innerText = "0.45";
+            rerankScores[2].innerText = "0.05";
+            rerankScores[3].innerText = "0.99";
+            rerankScores[4].innerText = "0.31";
+
+            // Trigger reflow
+            void root.offsetWidth;
+            
+            root.classList.add('animating');
+        }
+
+        setInterval(playAnim, 3500);
+        playAnim();
+    </script>
+</body>
+</html>

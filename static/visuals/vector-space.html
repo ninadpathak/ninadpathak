@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimensionality - Vector Space</title>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --text-1: #0e0e0e;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --text-1: #f0f0f0;
+                --accent: #ff5f1f;
+            }
+        }
+        
+        body { margin: 0; height: 100vh; height: 100vh;  background: var(--bg-1); font-family: var(--mono); color: var(--text-1);  overflow: hidden; }
+        #canvas-container { width: 100vw; min- }
+        
+        .overlay {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: var(--bg-1);
+            padding: 10px;
+            border: 1px solid var(--border);
+            left: 20px;
+            font-size: 12px;
+            pointer-events: none;
+        }
+        .stat { color: var(--accent); }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div class="overlay">
+        Dimensions: <span class="stat" id="dim-counter">3</span>D <br>
+        Space mapping: <span class="stat">Semantic Concept Grouping</span>
+        <div style="font-size: 10px; color: var(--text-3); margin-top: 8px;">Drag to rotate</div>
+    </div>
+
+    <script>
+        const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const colorBg = isDark ? 0x111111 : 0xffffff;
+        const colorPoint = isDark ? 0xff5f1f : 0xd44000;
+        const colorLine = isDark ? 0x333333 : 0xdddddd;
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(colorBg);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(15, 10, 20);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        
+        // Add OrbitControls for interactivity
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.enablePan = false;
+        controls.enableZoom = false;
+        
+        // Grid Helper
+
+        const gridHelper = new THREE.GridHelper(20, 20, colorLine, colorLine);
+        scene.add(gridHelper);
+
+        // Data Points (Simulating Word Embeddings)
+        const particles = new THREE.BufferGeometry();
+        const particleCount = 150;
+        
+        const posArray = new Float32Array(particleCount * 3);
+        const targetPosArray = new Float32Array(particleCount * 3);
+        
+        // Group points into 3 loose clusters
+        for(let i = 0; i < particleCount * 3; i+=3) {
+            let cluster = Math.floor(i / (particleCount));
+            let cx = cluster === 0 ? 5 : cluster === 1 ? -5 : 0;
+            let cz = cluster === 0 ? 5 : cluster === 1 ? -5 : -5;
+            let cy = cluster === 0 ? 2 : cluster === 1 ? 4 : 1;
+
+            // Current (chaotic state)
+            posArray[i] = (Math.random() - 0.5) * 20;
+            posArray[i+1] = (Math.random() - 0.5) * 10 + 5;
+            posArray[i+2] = (Math.random() - 0.5) * 20;
+
+            // Target (clustered semantic state)
+            targetPosArray[i] = cx + (Math.random() - 0.5) * 4;
+            targetPosArray[i+1] = cy + (Math.random() - 0.5) * 3;
+            targetPosArray[i+2] = cz + (Math.random() - 0.5) * 4;
+        }
+
+        particles.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        // Create glowing dots
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.3,
+            color: colorPoint,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+
+        // Animation logic
+        let state = 0; // 0 = chaotic, 1 = moving to cluster, 2 = clustered, 3 = moving back
+        let time = 0;
+        const speed = 0.02;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate camera slowly
+            controls.update();
+
+            // Morph between states
+            const positions = particleSystem.geometry.attributes.position.array;
+            
+            for(let i = 0; i < particleCount * 3; i++) {
+                if (state === 0) {
+                    positions[i] += (targetPosArray[i] - positions[i]) * 0.01;
+                } else if (state === 1) {
+                    // slight float
+                    positions[i] += Math.sin(time * 2 + i) * 0.005;
+                }
+            }
+            particleSystem.geometry.attributes.position.needsUpdate = true;
+
+            time += 0.01;
+            if (time > 3 && state === 0) state = 1;
+            
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

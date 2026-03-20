@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matryoshka Truncation Simulator</title>
+    <style>
+        :root {
+            --bg: #f8f8f6;
+            --bg-1: #ffffff;
+            --text-1: #000000;
+            --text-3: #666666;
+            --accent: #ff5f1f;
+            --border: #e0e0dc;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --font-sans: 'Inter', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg: #090909;
+            --bg-1: #111111;
+            --text-1: #ffffff;
+            --text-3: #888888;
+            --accent: #ff5f1f;
+            --border: #222222;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            
+            background: var(--bg);
+            color: var(--text-1);
+            font-family: var(--font-sans);
+        }
+
+        #ui-layer {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .panel {
+            background: var(--bg-1);
+            border: 1px solid var(--border);
+            padding: 16px;
+            pointer-events: auto;
+            width: 280px;
+            box-shadow: 6px 6px 0 var(--border);
+        }
+
+        .label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .slider-container {
+            margin-bottom: 20px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+        }
+
+        input[type=range] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+
+        .stats {
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-label { font-size: 11px; color: var(--text-3); }
+        .stat-val { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--accent); }
+
+        .accuracy-bar-outer {
+            width: 100%;
+            height: 4px;
+            background: var(--border);
+            margin-top: 4px;
+        }
+
+        .accuracy-bar-inner {
+            height: 100%;
+            background: var(--accent);
+            width: 98%;
+            transition: width 0.3s ease;
+        }
+
+        #tooltip {
+            position: absolute;
+            background: var(--bg-1);
+            padding: 6px 10px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            border: 1px solid var(--accent);
+            pointer-events: none;
+            display: none;
+            z-index: 100;
+        }
+
+        .hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 9px;
+            font-family: var(--font-mono);
+            color: var(--text-3);
+            background: var(--bg-1);
+            padding: 4px 8px;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div id="ui-layer">
+        <div class="panel">
+            <div class="label">// MRL_TRUNCATION_TEST</div>
+            
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span>DIMENSIONS</span>
+                    <span id="dim-val">1536</span>
+                </div>
+                <input type="range" id="dim-slider" min="8" max="1536" value="1536" step="8">
+            </div>
+
+            <div class="stats">
+                <div class="stat-row">
+                    <span class="stat-label">Retrieval Accuracy</span>
+                    <span class="stat-val" id="accy-val">99.2%</span>
+                </div>
+                <div class="accuracy-bar-outer">
+                    <div class="accuracy-bar-inner" id="accy-bar"></div>
+                </div>
+                <div class="stat-row" style="margin-top: 4px;">
+                    <span class="stat-label">Memory Impact</span>
+                    <span class="stat-val" id="mem-val">-0.0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tooltip"></div>
+    <div class="hint">Orbit: Drag • Zoom: Scroll • Precision: Adjust Slider</div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+
+        const getColors = () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            return {
+                bg: new THREE.Color(isDark ? 0x090909 : 0xf8f8f6),
+                noise: isDark ? 0x222222 : 0xddeede,
+                grid: isDark ? 0x161616 : 0xeeeeee,
+                clusters: {
+                    ai: new THREE.Color(isDark ? 0xff5f1f : 0xd44000),      
+                    code: new THREE.Color(isDark ? 0x00f3ff : 0x0088aa),    
+                    data: new THREE.Color(isDark ? 0xbd00ff : 0x8800aa),    
+                    human: new THREE.Color(isDark ? 0x00ff85 : 0x00aa55)
+                }
+            };
+        };
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.body.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(15, 12, 22);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.4;
+
+        // Categorized Semantic Data Generator
+        const clusterSources = [
+            { id: "LLM CORE", group: "ai", center: [8, 5, 8], labels: ["GPT-4", "Claude", "Gemini", "Llama", "MoE", "Transformers", "Tokens"] },
+            { id: "CODING", group: "code", center: [-8, 4, 3], labels: ["Python", "Rust", "Go", "WASM", "C++", "Debugging", "Algorithms"] },
+            { id: "DATA", group: "data", center: [4, -8, -5], labels: ["Vectors", "SQL", "Redis", "ETL", "Parquet", "S3", "Latency"] },
+            { id: "HUMAN", group: "human", center: [-4, -9, 8], labels: ["User", "Intent", "UI", "Persona", "Speech", "Vision", "Touch"] }
+        ];
+
+        const nodes = [];
+        clusterSources.forEach(s => {
+            // Main labeled nodes
+            s.labels.forEach((label, i) => {
+                nodes.push({
+                    id: label,
+                    group: s.group,
+                    base: [
+                        s.center[0] + (Math.random() - 0.5) * 4,
+                        s.center[1] + (Math.random() - 0.5) * 4,
+                        s.center[2] + (Math.random() - 0.5) * 4
+                    ],
+                    noise: [Math.random()-0.5, Math.random()-0.5, Math.random()-0.5].map(v => v * 15)
+                });
+            });
+            // Filler nodes for density
+            for(let i=0; i<15; i++) {
+                nodes.push({
+                    id: null,
+                    group: s.group,
+                    base: [
+                        s.center[0] + (Math.random() - 0.5) * 8,
+                        s.center[1] + (Math.random() - 0.5) * 8,
+                        s.center[2] + (Math.random() - 0.5) * 8
+                    ],
+                    noise: [Math.random()-0.5, Math.random()-0.5, Math.random()-0.5].map(v => v * 20)
+                });
+            }
+        });
+
+        // Particles
+        const partCount = 2000;
+        const partPos = new Float32Array(partCount * 3);
+        const partGeo = new THREE.BufferGeometry();
+        for(let i=0; i<partCount*3; i++) partPos[i] = (Math.random()-0.5)*60;
+        partGeo.setAttribute('position', new THREE.BufferAttribute(partPos, 3));
+        const partMat = new THREE.PointsMaterial({ size: 0.1, transparent: true, opacity: 0.2 });
+        const particles = new THREE.Points(partGeo, partMat);
+        scene.add(particles);
+
+        // Grid
+        const grid = new THREE.GridHelper(60, 60, 0x444444, 0x444444);
+        grid.position.y = -15;
+        scene.add(grid);
+
+        // Meshes
+        const boxGeo = new THREE.BoxGeometry(0.8, 0.8, 0.8);
+        const meshes = nodes.map(n => {
+            const m = new THREE.Mesh(boxGeo, new THREE.MeshBasicMaterial());
+            m.userData = n;
+            scene.add(m);
+            return m;
+        });
+
+        // Connectivity Lines (Manifold)
+        const manifolds = [];
+        const lineMat = new THREE.LineBasicMaterial({ transparent: true, opacity: 0.1 });
+        clusterSources.forEach(s => {
+            const groupMeshes = meshes.filter(m => m.userData.group === s.group);
+            for(let i=0; i<groupMeshes.length; i++) {
+                for(let j=i+1; j<groupMeshes.length; j++) {
+                    const geo = new THREE.BufferGeometry().setFromPoints([
+                        groupMeshes[i].position,
+                        groupMeshes[j].position
+                    ]);
+                    const line = new THREE.Line(geo, lineMat);
+                    scene.add(line);
+                    manifolds.push({ line, m1: groupMeshes[i], m2: groupMeshes[j] });
+                }
+            }
+        });
+
+        const slider = document.getElementById('dim-slider');
+        const dimVal = document.getElementById('dim-val');
+        const accyVal = document.getElementById('accy-val');
+        const accyBar = document.getElementById('accy-bar');
+        const memVal = document.getElementById('mem-val');
+
+        function updatePositions() {
+            const dims = parseInt(slider.value);
+            const ratio = dims / 1536;
+            const errorScale = Math.pow(1 - ratio, 2); 
+
+            meshes.forEach(m => {
+                const n = m.userData;
+                m.position.set(
+                    n.base[0] + n.noise[0] * errorScale,
+                    n.base[1] + n.noise[1] * errorScale,
+                    n.base[2] + n.noise[2] * errorScale
+                );
+            });
+
+            // Update lines
+            manifolds.forEach(man => {
+                const pos = man.line.geometry.attributes.position.array;
+                pos[0] = man.m1.position.x;
+                pos[1] = man.m1.position.y;
+                pos[2] = man.m1.position.z;
+                pos[3] = man.m2.position.x;
+                pos[4] = man.m2.position.y;
+                pos[5] = man.m2.position.z;
+                man.line.geometry.attributes.position.needsUpdate = true;
+            });
+
+            // Update UI
+            dimVal.innerText = dims;
+            const accuracy = (90 + (ratio * 9.8)).toFixed(1);
+            accyVal.innerText = `${accuracy}%`;
+            accyBar.style.width = `${accuracy}%`;
+            
+            const saved = (100 - (ratio * 100)).toFixed(1);
+            memVal.innerText = `-${saved}%`;
+        }
+
+        slider.oninput = updatePositions;
+
+        function updateTheme() {
+            const c = getColors();
+            scene.background = c.bg;
+            partMat.color.set(c.noise);
+            grid.material.color.set(c.grid);
+            meshes.forEach(m => {
+                m.material.color.copy(c.clusters[m.userData.group]);
+            });
+        }
+
+        const mouse = new THREE.Vector2();
+        const raycaster = new THREE.Raycaster();
+        let clientX = 0, clientY = 0;
+
+        window.addEventListener('mousemove', e => {
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+            clientX = e.clientX;
+            clientY = e.clientY;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+
+            raycaster.setFromCamera(mouse, camera);
+            const hits = raycaster.intersectObjects(meshes);
+            const tooltip = document.getElementById('tooltip');
+
+            if(hits.length > 0 && hits[0].object.userData.id) {
+                const n = hits[0].object.userData;
+                tooltip.style.display = 'block';
+                tooltip.style.left = clientX + 15 + 'px';
+                tooltip.style.top = clientY + 15 + 'px';
+                tooltip.innerText = n.id;
+                hits[0].object.scale.set(1.5, 1.5, 1.5);
+            } else {
+                tooltip.style.display = 'none';
+                meshes.forEach(m => m.scale.set(1, 1, 1));
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        setInterval(() => {
+            const theme = window.parent.document.documentElement.getAttribute('data-theme') || 'light';
+            if(document.documentElement.getAttribute('data-theme') !== theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                updateTheme();
+            }
+        }, 500);
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        updatePositions();
+        updateTheme();
+        animate();
+    </script>
+</body>
+</html>

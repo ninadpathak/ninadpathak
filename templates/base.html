@@ -21,6 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{{ site.title }} | {{ site.tagline }}{% endblock %}</title>
   <meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
@@ -52,6 +53,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/main.css">
   <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
   {% block extra_css %}{% endblock %}
   <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
 
@@ -206,5 +208,11 @@
 </footer>
 
 <script src="/static/js/main.js"></script>
-</body>
+
+    
+    
+    </body>
+
+
+
 </html>

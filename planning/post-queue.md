@@ -4,7 +4,6 @@ Posts are published one per day in order. Claude picks the next post from this l
 
 ## Queue (ordered)
 
-1. Reranking in RAG: Why Your Top-k Results Are Probably Wrong
 2. Token Counting Isn't Optional: A Practical Guide to LLM Cost Control
 4. How Anthropic's Contextual Retrieval Changes RAG Architecture
 5. Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each

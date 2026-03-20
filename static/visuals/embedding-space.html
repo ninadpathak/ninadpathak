@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Similarity Probe</title>
+    <style>
+        :root {
+            --bg: #f8f8f6;
+            --bg-1: #ffffff;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg: #090909;
+            --bg-1: #111111;
+            --text-1: #f0f0f0;
+            --text-2: #c2c2c2;
+            --text-3: #6a6a6a;
+            --accent: #ff5f1f;
+            --border: #1e1e1e;
+        }
+
+        body {
+            margin: 0;
+            
+            background-color: var(--bg);
+            color: var(--text-1);
+            font-family: var(--font-sans);
+            transition: background-color 0.2s ease;
+         overflow: hidden; }
+
+        #ui-layer {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .panel {
+            background: var(--bg-1);
+            border: 1px solid var(--border);
+            padding: 12px;
+            pointer-events: auto;
+            width: 260px;
+            box-shadow: 6px 6px 0 var(--border);
+        }
+
+        .label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        h1 { display: none; } /* HIDDEN TO SAVE SPACE */
+        p.desc { display: none; } /* HIDDEN TO SAVE SPACE */
+
+        .search-box {
+            display: flex;
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+
+        input {
+            background: var(--bg);
+            border: none;
+            color: var(--text-1);
+            padding: 6px 10px;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            flex: 1;
+            outline: none;
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 10px;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .stats-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .stat-val {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--text-3);
+            word-break: break-all;
+            background: var(--bg);
+            padding: 4px;
+            border: 0.5px solid var(--border);
+        }
+
+        .match-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .match-label { font-size: 11px; font-weight: 600; }
+        .match-score { font-family: var(--font-mono); font-size: 11px; color: var(--accent); }
+
+        #tooltip {
+            position: absolute;
+            background: var(--bg-1);
+            color: var(--text-1);
+            padding: 6px 10px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            border: 1px solid var(--accent);
+            pointer-events: none;
+            display: none;
+            z-index: 100;
+        }
+
+        .hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 9px;
+            font-family: var(--font-mono);
+            color: var(--text-3);
+            background: var(--bg-1);
+            padding: 4px 8px;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div id="ui-layer">
+        <div class="panel">
+            <div class="label">// SEMANTIC_PROBE</div>
+            <div class="search-box">
+                <input type="text" id="query" placeholder="Search (e.g. 'coding')..."/>
+                <button id="probe-btn">Search</button>
+            </div>
+
+            <div id="result-pane" style="display: none;">
+                <div class="stats-list">
+                    <div class="stat-item">
+                        <div class="match-row">
+                            <span class="match-label" id="match-name">-</span>
+                            <span class="match-score" id="similarity">0.0</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div id="vec-out" class="stat-val"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tooltip"></div>
+    <div class="hint">Orbit: Drag • Zoom: Scroll • Inspect: Click Points</div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+
+        const getColors = () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            return {
+                bg: new THREE.Color(isDark ? 0x090909 : 0xf8f8f6),
+                noise: isDark ? 0x222222 : 0xddeede,
+                grid: isDark ? 0x161616 : 0xeeeeee,
+                line: isDark ? 0x333333 : 0xcccccc,
+                clusters: {
+                    ai: new THREE.Color(isDark ? 0xff5f1f : 0xd44000),      
+                    code: new THREE.Color(isDark ? 0x00f3ff : 0x0088aa),    
+                    data: new THREE.Color(isDark ? 0xbd00ff : 0x8800aa),    
+                    human: new THREE.Color(isDark ? 0x00ff85 : 0x00aa55)
+                }
+            };
+        };
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.body.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(22, 18, 28);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.2;
+
+        // Categorized Semantic Data Generator
+        const clusterSources = [
+            { id: "LLM MODELS", group: "ai", center: [12, 8, 10], labels: ["GPT-4o", "Claude 3.5 Sonnet", "Llama 3 70B", "Gemini 1.5 Pro", "Mixtral 8x22B", "Transformer", "Attention", "Tokens", "Context Window", "Inference", "MoE", "RLHF", "Quantization", "Fine-tuning"] },
+            { id: "DEVELOPMENT", group: "code", center: [-12, 6, 2], labels: ["Python", "Rust", "TypeScript", "WASM", "CI/CD", "Git", "Debugger", "Compiler", "API", "Async/Await", "Memory Management", "Concurrency", "Testing", "Linters", "Refactoring"] },
+            { id: "DATA SYSTEMS", group: "data", center: [2, -10, -8], labels: ["Vector DB", "PostgreSQL", "Redis", "Parquet", "S3", "Indexing", "ETL", "OLAP", "Consistency", "Scalability", "ACID", "Caching", "Pipelines", "Sharding"] },
+            { id: "HUMAN INTERFACE", group: "human", center: [-8, -12, 10], labels: ["UX Design", "Accessibility", "Natural Language", "Voice UI", "Gesture", "Haptic", "Cognition", "Psychology", "Typography", "Empathy", "User Journey", "Wireframes", "Prototypes"] }
+        ];
+
+        const nodes = [];
+        clusterSources.forEach(s => {
+            // Main nodes (labeled)
+            s.labels.forEach((label, i) => {
+                const spread = 4.0;
+                nodes.push({
+                    id: label,
+                    text: `${s.id} Node`,
+                    group: s.group,
+                    pos: [
+                        s.center[0] + (Math.random() - 0.5) * spread,
+                        s.center[1] + (Math.random() - 0.5) * spread,
+                        s.center[2] + (Math.random() - 0.5) * spread
+                    ]
+                });
+            });
+            // Filler nodes (sparse points to add density)
+            for(let i=0; i<30; i++) {
+                const spread = 12.0;
+                nodes.push({
+                    id: null,
+                    group: s.group,
+                    pos: [
+                        s.center[0] + (Math.random() - 0.5) * spread,
+                        s.center[1] + (Math.random() - 0.5) * spread,
+                        s.center[2] + (Math.random() - 0.5) * spread
+                    ]
+                });
+            }
+        });
+
+        // Background Particles
+        const count = 3000;
+        const partPos = new Float32Array(count * 3);
+        for (let i = 0; i < count * 3; i++) partPos[i] = (Math.random() - 0.5) * 100;
+
+        const partGeo = new THREE.BufferGeometry();
+        partGeo.setAttribute('position', new THREE.BufferAttribute(partPos, 3));
+        const partMat = new THREE.PointsMaterial({ size: 0.1, color: 0x444444, transparent: true, opacity: 0.4 });
+        const particles = new THREE.Points(partGeo, partMat);
+        scene.add(particles);
+
+        // Grid
+        const grid = new THREE.GridHelper(60, 60, 0x888888, 0x888888);
+        grid.position.y = -20;
+        scene.add(grid);
+
+        // Core Meshes
+        const boxGeo = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+        const meshes = nodes.map(n => {
+            const m = new THREE.Mesh(boxGeo, new THREE.MeshBasicMaterial());
+            m.position.set(...n.pos);
+            m.userData = n;
+            scene.add(m);
+            return m;
+        });
+
+        // Connectivity Lines (Manifold - Intra-cluster)
+        const lineMat = new THREE.LineBasicMaterial({ transparent: true, opacity: 0.1 });
+        clusterSources.forEach(s => {
+            const groupMeshes = meshes.filter(m => m.userData.group === s.group);
+            for(let i=0; i<groupMeshes.length; i++) {
+                // Connect to a few nearest neighbors to create a web look
+                let neighbors = groupMeshes
+                    .slice()
+                    .sort((a,b) => a.position.distanceTo(groupMeshes[i].position) - b.position.distanceTo(groupMeshes[i].position))
+                    .slice(1, 4); 
+
+                neighbors.forEach(n => {
+                    const geo = new THREE.BufferGeometry().setFromPoints([
+                        groupMeshes[i].position,
+                        n.position
+                    ]);
+                    const line = new THREE.Line(geo, lineMat);
+                    scene.add(line);
+                });
+            }
+        });
+
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        let clientX = 0, clientY = 0;
+        window.addEventListener('mousemove', e => {
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+            clientX = e.clientX;
+            clientY = e.clientY;
+        });
+
+        // Search logic
+        const btn = document.getElementById('probe-btn');
+        btn.onclick = () => {
+            const q = document.getElementById('query').value.toLowerCase();
+            if(!q) return;
+
+            controls.autoRotate = false;
+            document.getElementById('result-pane').style.display = 'block';
+            
+            // Search for query in nodes (only labeled ones)
+            const labeledNodes = nodes.filter(n => n.id);
+            const found = labeledNodes.find(n => n.id.toLowerCase().includes(q) || n.text.toLowerCase().includes(q));
+            const targetNode = found ? meshes.find(m => m.userData.id === found.id) : meshes[Math.floor(Math.random() * meshes.length)];
+            const n = targetNode.userData;
+
+            // Stats Update
+            const mockVec = Array.from({length: 12}, () => (Math.random() * 2 - 1).toFixed(4));
+            document.getElementById('vec-out').innerText = `[${mockVec.join(', ')} ... ]`;
+            document.getElementById('match-name').innerText = n.id;
+            document.getElementById('similarity').innerText = (0.88 + Math.random()*0.11).toFixed(4);
+
+            // Animate
+            const targetPos = new THREE.Vector3(...n.pos);
+            const camTarget = targetPos.clone().add(new THREE.Vector3(8, 6, 8));
+            
+            let progress = 0;
+            const startPos = camera.position.clone();
+            const startTarget = controls.target.clone();
+
+            function fly() {
+                progress += 0.04;
+                if(progress <= 1) {
+                    camera.position.lerpVectors(startPos, camTarget, progress);
+                    controls.target.lerpVectors(startTarget, targetPos, progress);
+                    requestAnimationFrame(fly);
+                }
+            }
+            fly();
+        };
+
+        function updateTheme() {
+            const c = getColors();
+            scene.background = c.bg;
+            mat.color.set(c.noise);
+            grid.material.color.set(c.grid);
+            meshes.forEach(m => {
+                const group = m.userData.group;
+                m.material.color.copy(c.clusters[group]);
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+
+            raycaster.setFromCamera(mouse, camera);
+            const hits = raycaster.intersectObjects(meshes);
+            const tooltip = document.getElementById('tooltip');
+
+            if(hits.length > 0) {
+                const n = hits[0].object.userData;
+                tooltip.style.display = 'block';
+                tooltip.style.left = clientX + 15 + 'px';
+                tooltip.style.top = clientY + 15 + 'px';
+                tooltip.innerText = `${n.id}: ${n.text}`;
+                hits[0].object.scale.set(1.4, 1.4, 1.4);
+            } else {
+                tooltip.style.display = 'none';
+                meshes.forEach(m => m.scale.set(1,1,1));
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Parent theme listener
+        setInterval(() => {
+            const theme = window.parent.document.documentElement.getAttribute('data-theme') || 'light';
+            if(document.documentElement.getAttribute('data-theme') !== theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                updateTheme();
+            }
+        }, 500);
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        updateTheme();
+        animate();
+    </script>
+</body>
+</html>
