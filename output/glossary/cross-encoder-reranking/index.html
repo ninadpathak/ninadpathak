@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>In standard vector search (Bi-Encoders), the user query and the document are embedded separately and compared using simple geometry (Cosine Similarity). While incredibly fast, this misses deep linguistic nuances because the words in the query never interact with the words in the document during processing. A Cross-Encoder passes the query and the document *together* into a Transformer model (e.g., `[CLS] Query [SEP] Document [SEP]`). The self-attention mechanism compares every word in the query against every word in the document simultaneously, producing a single, highly accurate similarity score. Because this is computationally expensive, it is used strictly as a 'Reranker'—re-evaluating only the top 50 results retrieved by the faster Bi-Encoder.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Stage 1 (Retrieval):</strong> A fast Bi-Encoder retrieves the top 100 potential documents from a vector database of millions.</li>
   <li><strong>Stage 2 (Concatenation):</strong> The system pairs the exact user query with each of the 100 documents.</li>
@@ -174,13 +174,13 @@
   <li><strong>Stage 4 (Reranking):</strong> The model outputs a float score (0 to 1) for each pair. The list is sorted, and the absolute top 5 results are sent to the LLM.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Fixing 'Top-K' retrieval failures in enterprise RAG pipelines.</li>
           <li>Improving search relevance for highly technical or domain-specific language where exact phrasing matters.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/bi-encoder/">Bi-Encoder Architecture</a></li>
           <li><a href="/glossary/semantic-chunking/">Semantic Chunking</a></li>

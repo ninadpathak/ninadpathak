@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>While ReAct prompting is great for dynamic problems, it is inherently short-sighted. The agent decides its next action based only on its immediate observation, which often leads to infinite loops or losing track of the overarching goal. The Plan-and-Solve architecture splits cognitive labor into two distinct phases. First, a 'Planner' model receives the user's objective and outputs a rigid, step-by-step plan (often a Directed Acyclic Graph of dependencies). Second, a 'Worker' model simply executes those steps sequentially, passing the output of step 1 as the input to step 2. This significantly reduces API costs and prevents the agent from spiraling off-topic.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Planning Phase:</strong> An LLM writes out a numbered list of sub-tasks required to fulfill the user's request.</li>
   <li><strong>Execution Loop:</strong> A separate prompt (or separate specialized agent) is given Task 1 and the necessary tools.</li>
@@ -174,13 +174,13 @@
   <li><strong>Completion:</strong> Once all tasks in the plan are crossed off, a final response is generated.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Automated software engineering where file creation, coding, and testing must happen in a specific order.</li>
           <li>Complex data analysis pipelines requiring multiple distinct API queries.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
           <li><a href="/glossary/react-prompting/">ReAct Prompting</a></li>

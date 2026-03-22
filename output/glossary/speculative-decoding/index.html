@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>LLM generation is memory-bandwidth bound. Producing text token-by-token is incredibly slow because the GPU has to load the entire massive model's weights into memory just to calculate a single word. Speculative Decoding breaks this sequential bottleneck. A tiny, highly efficient 'draft' model (e.g., 1B parameters) rapidly guesses the next 5 to 10 tokens. These guessed tokens are then passed to the main, massive 'target' model (e.g., 70B parameters). The massive model evaluates all 5 tokens in parallel in a single forward pass. If it agrees with the draft model's logic, it accepts the tokens instantly, essentially generating 5 words for the computational time of 1.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Drafting:</strong> A fast, small model generates a sequence of <em>k</em> speculative tokens.</li>
   <li><strong>Verification:</strong> The large target model processes these <em>k</em> tokens in parallel.</li>
@@ -174,13 +174,13 @@
   <li><strong>Correction:</strong> At the point of the mistake, the target model discards the remaining draft tokens and generates the correct token itself, then the loop restarts.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Reducing latency and Time to First Token (TTFT) in real-time conversational agents.</li>
           <li>Increasing serving throughput for massive open-source models without sacrificing output quality.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/pagedattention/">PagedAttention</a></li>
           <li><a href="/glossary/test-time-compute/">Test-Time Compute (TTC)</a></li>

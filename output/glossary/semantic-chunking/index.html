@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>Traditional 'naive' chunking splits documents by an arbitrary character count (e.g., 500 tokens). This often slices a complex paragraph in half, destroying the context and guaranteeing poor vector retrieval. Semantic chunking solves this by using a lightweight embedding model to measure the 'distance' between consecutive sentences. If the distance suddenly spikes, the system recognizes a shift in topic and draws the chunk boundary there. This results in dynamically sized chunks that map perfectly to the original author's logical boundaries, drastically reducing hallucinations during the generation phase of RAG.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Sentence Splitting:</strong> The document is broken down into individual sentences.</li>
   <li><strong>Embedding:</strong> Each sentence is individually embedded into a vector.</li>
@@ -174,13 +174,13 @@
   <li><strong>Boundary Creation:</strong> When the distance between two sentences exceeds a predefined threshold (e.g., 95th percentile), a chunk boundary is placed between them.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Processing highly unstructured documents like transcripts or chat logs where formatting cues are missing.</li>
           <li>Improving recall accuracy in RAG systems built on dense academic papers.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/late-chunking/">Late Chunking</a></li>
           <li><a href="/glossary/cross-encoder-reranking/">Cross-Encoder Reranking</a></li>

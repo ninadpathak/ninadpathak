@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>Traditional RAG uses vector similarity to find specific text snippets. If a user asks a global question like, 'What are the common themes among all the product complaints last quarter?', standard RAG fails because no single text chunk contains that summary. GraphRAG (Knowledge Graph Retrieval-Augmented Generation), popularized by Microsoft Research, solves this by running an LLM over the entire dataset during the ingestion phase. It extracts 'entities' (e.g., Product X, Bug Y) and their 'relationships' (e.g., 'causes'), constructing a massive network graph. When the user queries the system, it traverses this graph to pull in connected nodes, enabling true multi-hop reasoning and holistic summarization.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Indexing Phase:</strong> An LLM processes the source documents and extracts structured nodes (Entities) and edges (Relationships).</li>
   <li><strong>Community Detection:</strong> The graph is clustered into hierarchical 'communities' based on closely related nodes.</li>
@@ -174,13 +174,13 @@
   <li><strong>Retrieval Phase:</strong> When a query is made, the system matches it to the relevant community summaries and graph nodes, passing a holistic, interconnected context to the final LLM.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Answering 'sensemaking' questions that require connecting dots across hundreds of documents.</li>
           <li>Enterprise search where relationships between employees, projects, and codebases are more important than exact keyword matches.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>
           <li><a href="/glossary/cross-encoder-reranking/">Cross-Encoder Reranking</a></li>

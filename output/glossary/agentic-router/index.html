@@ -166,20 +166,20 @@
       <div class="post-content glossary-content">
         <p>In a Compound AI System, sending every user query to the most expensive, massive model (like GPT-4 or Claude 3.5 Sonnet) is an architectural failure that destroys unit economics. An Agentic Router sits at the very edge of the application. When a user sends a prompt, the Router evaluates its complexity and intent. If the user asks 'Reset my password', the router sends it to a fast, cheap 8B parameter model or a deterministic script. If the user asks 'Debug this Python memory leak', the router forwards it to the massive, expensive coding model. Routers ensure high system reliability while minimizing API costs and latency.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Intent Classification:</strong> The router uses a fast embedding model or a small LLM to classify the query into predefined categories.</li>
   <li><strong>Semantic Routing:</strong> If vector similarity is used, the query is routed based on its proximity to known problem clusters in the database.</li>
   <li><strong>Fallback Logic:</strong> If an invoked agent fails to solve the problem, the router catches the failure and dynamically re-routes the task to a stronger, slower agent.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Managing multi-agent customer support systems to protect margins.</li>
           <li>Building robust MoE (Mixture of Experts) style architectures at the application layer.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/compound-ai-systems/">Compound AI Systems</a></li>
           <li><a href="/glossary/semantic-caching/">Semantic Caching</a></li>

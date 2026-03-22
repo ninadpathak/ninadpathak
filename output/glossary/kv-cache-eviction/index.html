@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>As context windows push past 100k tokens, the memory required to store the Key-Value (KV) cache grows linearly and quickly overwhelms even the largest GPUs. KV Cache Eviction policies dynamically prune this memory during generation. Based on the observation that attention within an LLM is extremely sparse (a model only actually 'looks at' a fraction of the previous tokens to predict the next one), these policies drop tokens that receive low attention scores. Techniques like 'Heavy Hitter Oracle' (H2O) retain only the most critical tokens (like the system prompt and the most recent turns), effectively simulating an infinite context window within a strict memory budget.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Attention Scoring:</strong> During generation, the algorithm monitors the attention weights across all tokens in the cache.</li>
   <li><strong>Heavy Hitters:</strong> Tokens that consistently accumulate high attention scores (often the initial instructions or specific entities) are marked as 'Heavy Hitters' and preserved.</li>
@@ -174,13 +174,13 @@
   <li><strong>Rolling Window:</strong> A fixed sliding window preserves the absolute most recent tokens to maintain immediate fluency.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Running infinite-length chatbots or agents on consumer-grade GPUs (e.g., LocalLLaMA).</li>
           <li>Processing massive codebases or books where only specific variables and structural boundaries actually matter for the final output.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/pagedattention/">PagedAttention</a></li>
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>

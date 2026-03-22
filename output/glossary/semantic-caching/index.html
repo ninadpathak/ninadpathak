@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>Traditional caching (like Redis) requires an exact string match to return a cached result. If a user asks 'How do I reset my password?' and later asks 'What is the process to change my password?', a traditional cache misses. Semantic caching solves this by embedding the incoming user query into a vector and performing a fast nearest-neighbor search against previously answered queries. If the similarity score exceeds a defined threshold, the system immediately returns the cached response. This drastically reduces API costs, cuts latency to milliseconds, and protects backend LLMs from repetitive load.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         A typical semantic cache pipeline:
 <ul>
   <li><strong>Embedding:</strong> The incoming user query is embedded into a dense vector using a fast, cheap model.</li>
@@ -175,13 +175,13 @@
   <li><strong>Cache Miss:</strong> If no match is found, the query goes to the expensive LLM, and the new response is cached.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Customer support chatbots dealing with high volumes of repetitive questions.</li>
           <li>Reducing API costs for enterprise RAG deployments.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/kv-cache-eviction/">KV Cache Eviction</a></li>
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>

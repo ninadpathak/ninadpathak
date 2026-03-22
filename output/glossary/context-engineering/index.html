@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>Moving beyond 'prompt engineering' (which focuses on wording and instruction), context engineering focuses on the architecture of the data environment itself. As context windows have grown to support over a million tokens, the bottleneck is no longer how much an LLM can read, but how it pays attention to what it reads. Context engineering involves designing the retrieval pipelines (RAG), managing state/memory over multi-turn conversations, preventing 'context poisoning' (where irrelevant data derails reasoning), and structuring inputs (like XML or JSON) so the model can consistently parse high-signal data without getting 'lost in the middle'.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         Context engineers typically build a pipeline that looks like this:
 <ul>
   <li><strong>Retrieval Strategy:</strong> Selecting the exact snippets of code, docs, or database records needed for the task.</li>
@@ -175,14 +175,14 @@
   <li><strong>Assembly:</strong> Ordering the information based on the specific LLM's attention bias (e.g., placing the most critical instructions at the very beginning or the very end of the prompt).</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Building production-grade RAG applications that require near-zero hallucination rates.</li>
           <li>Designing multi-agent systems where agents must pass structured context to one another.</li>
           <li>Injecting large, messy codebases into an LLM while maintaining high instructional adherence.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
           <li><a href="/glossary/semantic-caching/">Semantic Caching</a></li>

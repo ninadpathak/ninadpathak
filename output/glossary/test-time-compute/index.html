@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>Historically, the intelligence of an AI model was determined entirely by 'Training Compute'—the amount of processing power used to train the base model. Test-Time Compute (TTC), popularized by models like OpenAI's o1, shifts this paradigm by scaling compute dynamically when a question is asked. By allowing the model to generate thousands of internal 'Chain of Thought' tokens, simulate different strategies, backtrack from dead ends, and verify its own logic *before* returning a response to the user, TTC dramatically improves performance on hard logic, math, and coding problems without requiring a larger base model.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         TTC is typically implemented through:
 <ul>
   <li><strong>Hidden Chain of Thought:</strong> The model generates a long, internal monologue of reasoning steps that the end-user does not see.</li>
@@ -174,13 +174,13 @@
   <li><strong>Dynamic Compute Allocation:</strong> Easy questions bypass TTC and return instantly, while hard questions trigger massive internal token generation.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Solving advanced mathematical proofs and competitive programming challenges.</li>
           <li>Medical and legal diagnostics where step-by-step logical deduction is required.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/process-reward-models/">Process Reward Models (PRM)</a></li>
         </ul>

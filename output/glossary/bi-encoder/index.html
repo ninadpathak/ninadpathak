@@ -166,20 +166,20 @@
       <div class="post-content glossary-content">
         <p>The foundation of modern semantic search is the Bi-Encoder. Unlike Cross-Encoders which process two texts together, a Bi-Encoder processes text in isolation. You pass a Wikipedia article through the model, and it outputs a vector. Months later, a user types a query; that query is passed through the same model to output a second vector. The system then calculates the cosine similarity between the two vectors. Because the document vectors can be pre-computed and stored offline in a database (like Pinecone or Milvus), Bi-Encoders can search through millions of documents in milliseconds. The trade-off is accuracy: because the query and document never 'see' each other during the neural network processing, deep contextual relationships are lost.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Offline Indexing:</strong> Millions of documents are individually passed through the Transformer model to generate dense vectors. These are stored in a vector index.</li>
   <li><strong>Online Querying:</strong> A user query is passed through the same Transformer model to generate a single vector.</li>
   <li><strong>Distance Calculation:</strong> The database performs Approximate Nearest Neighbor (ANN) search to find the document vectors with the highest cosine similarity to the query vector.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>The primary retrieval mechanism (Stage 1) in almost all RAG applications.</li>
           <li>Semantic deduplication of massive datasets.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/cross-encoder-reranking/">Cross-Encoder Reranking</a></li>
           <li><a href="/glossary/matryoshka-representation-learning/">Matryoshka Representation Learning (MRL)</a></li>

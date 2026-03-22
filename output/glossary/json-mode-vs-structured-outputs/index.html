@@ -166,19 +166,19 @@
       <div class="post-content glossary-content">
         <p>For years, engineers struggled to parse LLM text into backend systems. The first solution was 'JSON Mode'—a system prompt flag that heavily weighted the model's probability distribution toward generating brackets and quotes. While it rarely produced invalid syntax, JSON Mode offered no guarantees about the keys and values inside the object; the model could still invent its own schema. 'Structured Outputs' (or Constrained Decoding) is a lower-level architectural upgrade. The inference engine converts the developer's exact JSON Schema into a formal grammar or state machine. During generation, any token that would violate the schema (e.g., trying to output a string when an integer is required) is mathematically masked out. Structured Outputs guarantee 100% schema adherence.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>JSON Mode:</strong> The developer begs the model in the prompt to return JSON. The model usually complies, but might inject conversational filler.</li>
   <li><strong>Structured Outputs:</strong> The developer provides a strict JSON Schema API object. The inference server compiles this schema into a Finite State Machine. The LLM is physically incapable of generating tokens outside the permitted grammar paths.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Extracting clean data tables from messy, unstructured PDF invoices.</li>
           <li>Feeding LLM decisions directly into rigid SQL databases or strongly-typed frontend components.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/tool-calling/">Tool Calling</a></li>
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>

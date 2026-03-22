@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>If you ask an LLM a complex question that requires an external tool, it will often hallucinate an answer immediately or execute the wrong tool. The ReAct (Reason + Act) paradigm, introduced by researchers at Princeton and Google, forces the model into a strict cognitive loop. The model is prompted to first output a `Thought:` detailing its current understanding of the problem and what it needs to do next. Only then does it output an `Action:` (like querying a database). Once the database returns an `Observation:`, the model loops back to `Thought:`. This explicit externalization of the planning process drastically reduces hallucinations and gives developers a clear trace of the agent's logic.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         The agent is trapped in a loop until it outputs an answer:
 <ul>
   <li><strong>Thought:</strong> The agent assesses the current state. (e.g., 'I need to find the CEO's email. I should search the directory.')</li>
@@ -175,13 +175,13 @@
   <li><strong>Thought:</strong> The agent evaluates the observation. (e.g., 'I have the email. I can answer the user now.')</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Building autonomous web-research agents.</li>
           <li>Creating conversational interfaces for complex internal databases.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
           <li><a href="/glossary/tool-calling/">Tool Calling</a></li>

@@ -166,20 +166,20 @@
       <div class="post-content glossary-content">
         <p>Building complex LLM applications historically required developers to painstakingly tweak the wording of their prompts (e.g., 'Think step by step', 'You are an expert'). If the underlying model was changed, all the hardcoded prompts broke. DSPy shifts this paradigm by abstracting the prompt away entirely. Developers define modules (like `Retrieve`, `ChainOfThought`) and provide a small dataset of desired inputs and outputs. The DSPy 'Compiler' then runs hundreds of variations, scoring the outputs, and automatically discovering the mathematically optimal prompt instructions for that specific LLM and task. It treats prompting as an optimization problem, not an art form.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Signatures:</strong> The developer defines the input/output behavior without writing instructions (e.g., <code>question -> answer</code>).</li>
   <li><strong>Modules:</strong> The developer stitches together pre-built reasoning architectures.</li>
   <li><strong>Teleprompters (Optimizers):</strong> The developer provides a metric (like accuracy). DSPy automatically rewrites the internal prompts and updates the system weights until the metric is maximized.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Building highly robust RAG pipelines that survive underlying model deprecations.</li>
           <li>Systematically improving the accuracy of complex extraction tasks without manually guessing prompt words.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>
           <li><a href="/glossary/flow-engineering/">Flow Engineering</a></li>

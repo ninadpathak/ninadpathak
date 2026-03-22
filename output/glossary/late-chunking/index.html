@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>Standard RAG pipelines use 'Early Chunking': they arbitrarily slice a PDF into 500-word blocks, and then embed each block separately. This destroys context—a chunk in the middle of chapter 3 might lose all reference to the main subject established in chapter 1, making it un-findable in a vector search. Late Chunking (pioneered by models like Jina AI's v2/v3 architecture) solves this by passing the *entire* document (up to 8k or 32k tokens) through the Transformer model. The model computes contextualized representations for every single token based on the whole document. Only after this global contextualization occurs are the tokens pooled together into smaller 500-word chunks for storage.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Global Processing:</strong> A long-context embedding model reads the entire document in one pass.</li>
   <li><strong>Token-Level Embedding:</strong> The model generates an embedding for every single token, enriched by the context of the entire text.</li>
@@ -174,13 +174,13 @@
   <li><strong>Mean Pooling:</strong> The token embeddings within each boundary are averaged together to create the final chunk vector. The resulting vector inherently 'knows' the broader context of the document it came from.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Processing complex financial reports or legal contracts where individual clauses depend heavily on the overarching document theme.</li>
           <li>Solving the 'lost in the middle' retrieval problem in traditional RAG.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/semantic-chunking/">Semantic Chunking</a></li>
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>

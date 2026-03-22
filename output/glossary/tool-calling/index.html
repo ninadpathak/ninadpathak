@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>LLMs natively output unstructured text. Tool Calling (originally introduced as Function Calling by OpenAI) is the process of providing an LLM with a schema of available tools (like a weather API or a database query function). The model evaluates the user's prompt, determines if one of the tools is necessary to fulfill the request, and instead of replying with conversational text, it halts generation and outputs a perfectly structured JSON object matching the tool's expected arguments. The application executes the external code using those arguments and feeds the result back into the model to generate the final human-readable response.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Schema Injection:</strong> The developer passes a JSON Schema outlining the available tools (e.g., `get_weather(location, unit)`) alongside the system prompt.</li>
   <li><strong>Model Decision:</strong> The LLM decides it cannot answer the user query based on internal weights and chooses to invoke a tool.</li>
@@ -174,13 +174,13 @@
   <li><strong>Execution:</strong> The developer's backend intercepts this, runs the actual Python code, and appends the result (e.g., `15°C`) to the message history for the LLM to read.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Empowering autonomous agents to interact with the real world (sending emails, modifying databases).</li>
           <li>Fetching real-time data that an LLM could not possibly know (stock prices, current news).</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
           <li><a href="/glossary/model-context-protocol/">Model Context Protocol (MCP)</a></li>

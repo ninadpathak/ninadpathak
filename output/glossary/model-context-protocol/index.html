@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>Before MCP, developers had to write custom API integrations for every single tool they wanted an AI agent to use (e.g., GitHub, Slack, and Google Drive required three different codebases). Introduced by Anthropic in late 2024, the Model Context Protocol (MCP) establishes a universal standard—often described as the 'USB-C port for AI'. If a data source exposes an MCP Server, any MCP-compatible AI client (like Claude Desktop) can instantly discover the available data, read files, and execute tools without bespoke integration code.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         MCP operates on a client-server architecture:
 <ul>
   <li><strong>MCP Hosts:</strong> The application the user interacts with (e.g., Claude Desktop, an IDE).</li>
@@ -174,13 +174,13 @@
   <li><strong>MCP Servers:</strong> Lightweight programs connected to specific data sources (e.g., a Postgres database) that expose resources and tools via the standard protocol.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Giving local AI IDEs instant, read-only access to proprietary enterprise databases.</li>
           <li>Building universal enterprise search agents that can query Jira, Confluence, and GitHub simultaneously.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>
           <li><a href="/glossary/tool-calling/">Tool Calling</a></li>

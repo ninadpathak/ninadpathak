@@ -36,12 +36,12 @@
         <p>{{ term.long_definition }}</p>
         
         {% if term.how_it_works %}
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         {{ term.how_it_works | safe }}
         {% endif %}
 
         {% if term.use_cases %}
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           {% for use_case in term.use_cases %}
           <li>{{ use_case }}</li>
@@ -50,7 +50,7 @@
         {% endif %}
 
         {% if term.related_terms %}
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           {% for related in term.related_terms %}
           <li><a href="/glossary/{{ related.slug }}/">{{ related.name }}</a></li>

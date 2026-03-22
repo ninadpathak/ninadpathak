@@ -166,20 +166,20 @@
       <div class="post-content glossary-content">
         <p>During LLM inference, the model stores the state of previously processed tokens in the Key-Value (KV) cache to avoid recalculating them. Historically, AI serving frameworks allocated a large, contiguous block of GPU memory for the maximum possible length of the request. Because request lengths are unpredictable, this led to massive internal memory fragmentation and wasted capacity (often up to 60% of GPU memory sitting idle). PagedAttention, introduced by the vLLM project, solves this by breaking the KV cache into fixed-size 'blocks' or 'pages' that can be stored non-contiguously anywhere in the GPU memory. This allows the server to dynamically allocate exact memory as the sequence grows, sharing blocks across multiple concurrent requests.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Virtual Memory:</strong> Like an OS, PagedAttention uses a block table to map virtual logical blocks of tokens to physical blocks in the GPU memory.</li>
   <li><strong>Dynamic Allocation:</strong> Memory is allocated on-demand, block by block, rather than pre-allocating the theoretical maximum.</li>
   <li><strong>Copy-on-Write:</strong> When using techniques like parallel sampling or beam search, multiple requests can share the exact same physical memory blocks for their common prompt prefixes, only allocating new blocks when the generated text diverges.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Maximizing throughput and reducing costs for high-traffic LLM inference APIs.</li>
           <li>Efficiently serving complex agentic workflows that require multiple parallel completions from the same base prompt.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/kv-cache-eviction/">KV Cache Eviction</a></li>
           <li><a href="/glossary/test-time-compute/">Test-Time Compute (TTC)</a></li>

@@ -166,20 +166,20 @@
       <div class="post-content glossary-content">
         <p>In standard embedding models, semantic meaning is distributed equally across all dimensions (e.g., all 1,536 dimensions in an OpenAI vector). If you truncate the vector to save database space, the representation is destroyed. Matryoshka Representation Learning (MRL) forces the model to learn representations at multiple granularities simultaneously during training—like Russian nesting dolls. This guarantees that the first 256 dimensions contain a highly compressed, accurate summary of the full 1536 dimensions. Engineers can use this to perform massive, fast, cheap vector searches using the small dimensions, and then rerank the top results using the full dimensions.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         <ul>
   <li><strong>Training:</strong> The model's loss function evaluates the accuracy of the embedding not just at its full size, but at mathematically smaller subsets (e.g., 2048, 1024, 512, 256 dimensions).</li>
   <li><strong>Truncation at Index Time:</strong> Developers can simply slice off the end of the array (e.g., `vector[:256]`) before storing it in a vector database, cutting storage costs by 80%.</li>
   <li><strong>Multi-stage Retrieval:</strong> A fast coarse search is done on the 256-dimension vectors, followed by rescoring using the full vectors.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Dramatically reducing memory overhead in large-scale vector databases.</li>
           <li>Deploying vector search on edge devices with limited memory constraints.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/cross-encoder-reranking/">Cross-Encoder Reranking</a></li>
           <li><a href="/glossary/product-quantization/">Product Quantization (PQ)</a></li>

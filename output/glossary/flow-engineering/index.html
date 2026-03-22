@@ -166,7 +166,7 @@
       <div class="post-content glossary-content">
         <p>Popularized by projects like AlphaCodium, flow engineering assumes that LLMs are relatively weak at zero-shot, complex reasoning but exceptionally strong when forced to iterate. Instead of writing one massive prompt hoping for the perfect output, flow engineers design a state machine. The LLM is forced through a sequence: generating a plan, writing draft code, running that code against a compiler, reading the error trace, and attempting a fix. By rigidly structuring this 'flow', developers can dramatically increase the reliability and performance of an underlying model without needing to upgrade to a more expensive, larger parameter model.</p>
         
-        <h3>How It Works</h3>
+        <h2>How It Works</h2>
         A classic flow engineering pipeline for code generation looks like:
 <ul>
   <li><strong>Phase 1 (Reflection):</strong> The model reads the problem and outputs its understanding of the constraints.</li>
@@ -175,14 +175,14 @@
   <li><strong>Phase 4 (Execution & Critique):</strong> The code is run in a sandbox. A separate prompt passes the execution trace (success or stack trace) back to the model for refinement.</li>
 </ul>
 
-        <h3>Common Use Cases</h3>
+        <h2>Common Use Cases</h2>
         <ul>
           <li>Competitive programming and automated software engineering.</li>
           <li>Complex data extraction where the schema must be validated iteratively.</li>
           <li>High-stakes content generation requiring rigorous fact-checking loops.</li>
         </ul>
 
-        <h3>Related Terms</h3>
+        <h2>Related Terms</h2>
         <ul class="related-terms-list">
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
           <li><a href="/glossary/test-time-compute/">Test-Time Compute (TTC)</a></li>
