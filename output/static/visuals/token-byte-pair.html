@@ -37,6 +37,17 @@
             z-index: 10;
         }
         .stat { color: var(--accent); }
+    
+        .label3d {
+            position: absolute;
+            color: var(--text-1);
+            font-family: var(--mono);
+            font-size: 14px;
+            font-weight: bold;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            text-shadow: 0 0 3px var(--bg-1), 0 0 5px var(--bg-1);
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -122,6 +133,33 @@
         group.add(createLine(0, 1.5, 0, -0.5));
         group.add(createLine(2.25, 1.5, 2.25, -0.5));
 
+        
+        // Add HTML labels that track the 3D objects
+        const createLabel = (text) => {
+            const div = document.createElement('div');
+            div.className = 'label3d';
+            div.innerText = text;
+            document.body.appendChild(div);
+            return div;
+        };
+
+        const lblFull = createLabel('unbelievable');
+        const lbl1 = createLabel('un');
+        const lbl2 = createLabel('believ');
+        const lbl3 = createLabel('able');
+
+        const updateLabelPosition = (mesh, labelDiv) => {
+            const vector = new THREE.Vector3();
+            mesh.getWorldPosition(vector);
+            vector.project(camera);
+            
+            const x = (vector.x * .5 + .5) * window.innerWidth;
+            const y = (vector.y * -.5 + .5) * window.innerHeight;
+            
+            labelDiv.style.left = `${x}px`;
+            labelDiv.style.top = `${y}px`;
+        };
+
         let time = 0;
 
         function animate() {
@@ -136,6 +174,12 @@
             t1.scale.set(scale, scale, scale);
             t2.scale.set(scale, scale, scale);
             t3.scale.set(scale, scale, scale);
+
+            
+            updateLabelPosition(fullBlock, lblFull);
+            updateLabelPosition(t1, lbl1);
+            updateLabelPosition(t2, lbl2);
+            updateLabelPosition(t3, lbl3);
 
             time += 0.02;
             renderer.render(scene, camera);
