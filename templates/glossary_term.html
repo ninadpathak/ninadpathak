@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ term.title }} | AI Memory & Agent Glossary{% endblock %}
+{% block description %}{{ term.description }}{% endblock %}
+
+{% block content %}
+<article class="post">
+  <div class="container prose-container">
+    <header class="post-header">
+      <div class="post-meta">
+        <a href="/glossary/" class="tag">Glossary</a>
+        <span class="post-meta-sep">•</span>
+        <time datetime="{{ term.last_updated | format_date_iso }}">{{ term.last_updated | format_date }}</time>
+      </div>
+      <h1 class="post-title">What is {{ term.name }}?</h1>
+      <p class="post-desc">{{ term.short_definition }}</p>
+    </header>
+
+    <div class="post-body" style="padding-bottom: 4.5rem;">
+      <div class="post-content">
+        <h2>Definition</h2>
+        <p>{{ term.long_definition }}</p>
+        
+        {% if term.how_it_works %}
+        <h2>How It Works</h2>
+        {{ term.how_it_works | safe }}
+        {% endif %}
+
+        {% if term.use_cases %}
+        <h2>Common Use Cases</h2>
+        <ul>
+          {% for use_case in term.use_cases %}
+          <li>{{ use_case }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if term.related_terms %}
+        <h2>Related Terms</h2>
+        <ul class="related-terms-list">
+          {% for related in term.related_terms %}
+          <li><a href="/glossary/{{ related.slug }}/">{{ related.name }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</article>
+{% endblock %}

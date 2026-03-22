@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Memory & Agent Glossary | Ninad Pathak</title>
+  <meta name="description" content="A comprehensive, highly technical glossary of AI memory, RAG, and agentic framework terminology.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Ninad Pathak | Technical Content for DevTools & B2B SaaS">
+  <meta property="og:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta property="og:url"         content="https://ninadpathak.com/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com",
+    "jobTitle": "Technical Content Writer",
+    "description": "Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.",
+    "sameAs": [
+      "https://linkedin.com/in/ninadwites/",
+      "https://twitter.com/ninadwrites"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link ">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+<section class="section">
+  <div class="container">
+    <header class="section-header">
+      <h1 class="section-title">Glossary</h1>
+      <p class="section-desc">Technical definitions for AI memory, vector search, and agent architectures.</p>
+    </header>
+
+    <div class="glossary-list" style="margin-top: 2rem;">
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/context-engineering/" style="color: var(--text-1); text-decoration: none;">Context Engineering</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">The systematic discipline of designing, structuring, and managing the information provided to a Large Language Model (LLM) to maximize its reasoning capability and accuracy.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/agentic-engineering/" style="color: var(--text-1); text-decoration: none;">Agentic Engineering</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">The discipline of designing, orchestrating, and evaluating systems where AI agents autonomously plan and execute multi-step workflows.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/flow-engineering/" style="color: var(--text-1); text-decoration: none;">Flow Engineering</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">The practice of designing deterministic, multi-step architectures where an LLM's output is iteratively refined, tested, and corrected through a predefined pipeline.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/test-time-compute/" style="color: var(--text-1); text-decoration: none;">Test-Time Compute (TTC)</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">The practice of allocating more computational resources during inference (the 'test time') to allow an AI model to perform internal reasoning, planning, and self-correction before outputting an answer.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/model-context-protocol/" style="color: var(--text-1); text-decoration: none;">Model Context Protocol (MCP)</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An open-source, standardized protocol that acts as a universal API allowing AI models to securely connect to, read from, and interact with external data sources and tools.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/semantic-caching/" style="color: var(--text-1); text-decoration: none;">Semantic Caching</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An optimization technique that stores previous LLM responses and uses vector similarity to return those cached answers for new queries that have the same semantic meaning, bypassing the LLM entirely.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/matryoshka-representation-learning/" style="color: var(--text-1); text-decoration: none;">Matryoshka Representation Learning (MRL)</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A technique for training embedding models so that the most critical semantic information is front-loaded into the earliest dimensions of the vector, allowing the vector to be truncated to save space without catastrophic accuracy loss.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/cross-encoder-reranking/" style="color: var(--text-1); text-decoration: none;">Cross-Encoder Reranking</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An architecture where an embedding model processes both the user's query and a target document simultaneously through its attention layers to generate a highly precise relevance score.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/late-chunking/" style="color: var(--text-1); text-decoration: none;">Late Chunking</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A RAG optimization where an entire document is processed by the embedding model first to capture global context, and only then split into individual searchable chunks.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/graphrag/" style="color: var(--text-1); text-decoration: none;">GraphRAG</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An advanced retrieval technique that extracts entities and relationships from documents to build a Knowledge Graph, allowing an LLM to answer complex queries that span across multiple disparate documents.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/tool-calling/" style="color: var(--text-1); text-decoration: none;">Tool Calling</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A capability fine-tuned into modern LLMs that allows them to intelligently select an external tool and output the exact JSON arguments required to execute it.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/pagedattention/" style="color: var(--text-1); text-decoration: none;">PagedAttention</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An attention algorithm inspired by operating system memory paging that non-contiguously stores an LLM's KV cache, dramatically increasing the throughput of AI servers.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/kv-cache-eviction/" style="color: var(--text-1); text-decoration: none;">KV Cache Eviction</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">Algorithms that selectively delete less important tokens from an LLM's Key-Value cache during inference to prevent GPU memory exhaustion during long conversations.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/semantic-chunking/" style="color: var(--text-1); text-decoration: none;">Semantic Chunking</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A method of splitting text for vector databases that evaluates the embedding distance between sentences, ensuring that logically coherent thoughts are kept together in a single chunk.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/hypothetical-document-embeddings-hyde/" style="color: var(--text-1); text-decoration: none;">Hypothetical Document Embeddings (HyDE)</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A zero-shot retrieval technique where a user's question is first answered by an LLM (hallucinating a hypothetical document), and that hallucinated answer is embedded and used to search the vector database.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/self-querying-retrieval/" style="color: var(--text-1); text-decoration: none;">Self-Querying Retrieval</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An intelligent retrieval mechanism where an LLM parses a user's natural language query to automatically extract exact metadata filters (like dates or authors) while simultaneously performing a semantic vector search.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/bi-encoder/" style="color: var(--text-1); text-decoration: none;">Bi-Encoder Architecture</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A neural network architecture where two separate inputs (like a query and a document) are passed through an embedding model independently to create two distinct vectors that can be compared mathematically.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/product-quantization/" style="color: var(--text-1); text-decoration: none;">Product Quantization (PQ)</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A highly efficient lossy compression algorithm used in vector databases to drastically reduce the memory footprint of embeddings while maintaining fast nearest-neighbor search capabilities.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/hierarchical-navigable-small-world-hnsw/" style="color: var(--text-1); text-decoration: none;">Hierarchical Navigable Small World (HNSW)</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A graph-based algorithm that organizes vector embeddings into multiple layers, enabling sub-millisecond Approximate Nearest Neighbor (ANN) search across billions of data points.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/react-prompting/" style="color: var(--text-1); text-decoration: none;">ReAct Prompting</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An agentic framework that strictly interleaves internal reasoning (Chain of Thought) with external actions (Tool Calling), allowing an LLM to solve complex, multi-step problems autonomously.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/plan-and-solve-framework/" style="color: var(--text-1); text-decoration: none;">Plan-and-Solve Framework</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An agentic architecture where a complex objective is broken down into a complete, sequential list of sub-tasks before any actual execution or tool calling begins.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/speculative-decoding/" style="color: var(--text-1); text-decoration: none;">Speculative Decoding</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An inference optimization technique that accelerates text generation by using a small, fast 'draft' model to predict multiple upcoming tokens, which are then verified simultaneously by the main, larger model.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/agentic-router/" style="color: var(--text-1); text-decoration: none;">Agentic Router</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A lightweight classifier model or programmatic logic layer that analyzes an incoming user query and routes it to the specific AI agent, tool, or LLM best suited to handle it.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/json-mode-vs-structured-outputs/" style="color: var(--text-1); text-decoration: none;">JSON Mode vs. Structured Outputs</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">JSON Mode heavily biases an LLM to produce valid JSON syntax, whereas Structured Outputs mathematically constrain the model's token generation to guarantee the output perfectly matches a specific JSON Schema.</p>
+      </div>
+      <div class="post-row" style="display: block;">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/dspy/" style="color: var(--text-1); text-decoration: none;">DSPy</a></h3>
+        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An open-source framework developed by Stanford that replaces manual prompt engineering with programmatic compilation, allowing developers to write declarative logic that automatically optimizes the prompts sent to an LLM.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/" class="footer-link">Reranking in RAG: Why Your Top-k Results Are Probably Wrong</a>
+          <a href="/blog/state-of-open-source-memory-2026/" class="footer-link">The State of Open Source AI Memory in 2026: Beyond the Context Window Myth</a>
+          <a href="/blog/embedding-models-compared/" class="footer-link">Vector Embeddings: A Guide to the Geometry of Meaning in AI</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

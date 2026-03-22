@@ -211,6 +211,19 @@ class SiteBuilder:
             })
         return pages
 
+    def load_glossary(self) -> list[dict]:
+        glossary_path = Path("content/data/glossary.yaml")
+        if not glossary_path.exists():
+            return []
+        with open(glossary_path, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+        
+        terms = data.get("terms", [])
+        for term in terms:
+            term["url"] = f"/glossary/{term['slug']}/"
+            
+        return terms
+
     # ------------------------------------------------------------------
     # Render helper
     # ------------------------------------------------------------------
@@ -323,8 +336,27 @@ class SiteBuilder:
                 legal_page=legal_page,
             )
 
+    def build_glossary(self, terms):
+        if not terms:
+            return
+            
+        # Build index
+        self.render(
+            "glossary_index.html", "glossary/index.html",
+            page="glossary",
+            terms=terms,
+        )
+        
+        # Build individual term pages
+        for term in terms:
+            self.render(
+                "glossary_term.html",
+                f"glossary/{term['slug']}/index.html",
+                page="glossary",
+                term=term,
+            )
 
-    def build_sitemap(self, posts, work_cases):
+    def build_sitemap(self, posts, work_cases, glossary_terms):
         base = self.config["site"]["url"].rstrip("/")
         urls = [
             ("", "1.0", "weekly"),
@@ -337,11 +369,14 @@ class SiteBuilder:
             ("/linter/", "0.9", "monthly"),
             ("/privacy/", "0.3", "yearly"),
             ("/terms/", "0.3", "yearly"),
+            ("/glossary/", "0.8", "weekly"),
         ]
         for post in posts:
             urls.append((post["url"], "0.9", "monthly"))
         for case in work_cases:
             urls.append((case["url"], "0.8", "monthly"))
+        for term in glossary_terms:
+            urls.append((term["url"], "0.8", "monthly"))
 
         root = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
         for path, priority, freq in urls:
@@ -424,6 +459,7 @@ class SiteBuilder:
         portfolio = self.load_portfolio()
         projects = self.load_projects()
         legal_pages = self.load_legal_pages()
+        glossary_terms = self.load_glossary()
 
         self.build_homepage(posts, work_cases)
         self.build_blog_list(posts)
@@ -436,14 +472,16 @@ class SiteBuilder:
         self.build_contact()
         self.build_linter()
         self.build_legal_pages(legal_pages)
+        self.build_glossary(glossary_terms)
 
-        self.build_sitemap(posts, work_cases)
+        self.build_sitemap(posts, work_cases, glossary_terms)
         self.build_rss(posts)
         self.build_pygments_css()
 
         print(f"  {len(posts)} blog post(s)")
         print(f"  {len(work_cases)} case stud(ies)")
         print(f"  {len(projects)} project(s)")
+        print(f"  {len(glossary_terms)} glossary term(s)")
         print(f"Done → output/")
 
 

@@ -51,6 +51,11 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://ninadpathak.com/glossary/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -127,6 +132,131 @@
   </url>
   <url>
     <loc>https://ninadpathak.com/work/linuxfordevices/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/context-engineering/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/agentic-engineering/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/flow-engineering/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/test-time-compute/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/model-context-protocol/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/semantic-caching/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/matryoshka-representation-learning/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/cross-encoder-reranking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/late-chunking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/graphrag/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/tool-calling/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/pagedattention/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/kv-cache-eviction/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/semantic-chunking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/hypothetical-document-embeddings-hyde/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/self-querying-retrieval/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/bi-encoder/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/product-quantization/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/hierarchical-navigable-small-world-hnsw/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/react-prompting/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/plan-and-solve-framework/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/speculative-decoding/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/agentic-router/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/json-mode-vs-structured-outputs/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/glossary/dspy/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

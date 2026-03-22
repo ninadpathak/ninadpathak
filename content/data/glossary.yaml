@@ -1,0 +1,875 @@
+terms:
+- name: Context Engineering
+  slug: context-engineering
+  title: 'Context Engineering: Structuring LLM Data Environments'
+  description: Context engineering is the systematic discipline of designing, structuring,
+    and managing the information provided to an LLM to maximize reasoning accuracy.
+  short_definition: The systematic discipline of designing, structuring, and managing
+    the information provided to a Large Language Model (LLM) to maximize its reasoning
+    capability and accuracy.
+  long_definition: Moving beyond 'prompt engineering' (which focuses on wording and
+    instruction), context engineering focuses on the architecture of the data environment
+    itself. As context windows have grown to support over a million tokens, the bottleneck
+    is no longer how much an LLM can read, but how it pays attention to what it reads.
+    Context engineering involves designing the retrieval pipelines (RAG), managing
+    state/memory over multi-turn conversations, preventing 'context poisoning' (where
+    irrelevant data derails reasoning), and structuring inputs (like XML or JSON)
+    so the model can consistently parse high-signal data without getting 'lost in
+    the middle'.
+  how_it_works: "Context engineers typically build a pipeline that looks like this:\n\
+    <ul>\n  <li><strong>Retrieval Strategy:</strong> Selecting the exact snippets\
+    \ of code, docs, or database records needed for the task.</li>\n  <li><strong>Formatting:</strong>\
+    \ Wrapping that data in strict, predictable formats (e.g., XML tags like <code>&lt;context&gt;</code>\
+    \ and <code>&lt;instructions&gt;</code>) to separate data from behavioral commands.</li>\n\
+    \  <li><strong>Pruning:</strong> Actively stripping out 'noisy' tokens, standardizing\
+    \ syntax, and removing irrelevant conversation history before passing it to the\
+    \ model.</li>\n  <li><strong>Assembly:</strong> Ordering the information based\
+    \ on the specific LLM's attention bias (e.g., placing the most critical instructions\
+    \ at the very beginning or the very end of the prompt).</li>\n</ul>"
+  use_cases:
+  - Building production-grade RAG applications that require near-zero hallucination
+    rates.
+  - Designing multi-agent systems where agents must pass structured context to one
+    another.
+  - Injecting large, messy codebases into an LLM while maintaining high instructional
+    adherence.
+  related_terms:
+  - name: Agentic Engineering
+    slug: agentic-engineering
+  - name: Semantic Caching
+    slug: semantic-caching
+  last_updated: '2026-03-22'
+- name: Agentic Engineering
+  slug: agentic-engineering
+  title: What is Agentic Engineering in AI?
+  description: Agentic engineering is the discipline of orchestrating multiple AI
+    agents to perform complex, multi-step tasks autonomously.
+  short_definition: The discipline of designing, orchestrating, and evaluating systems
+    where AI agents autonomously plan and execute multi-step workflows.
+  long_definition: "Agentic engineering represents a paradigm shift from using LLMs\
+    \ as single-turn answering machines to utilizing them as active participants in\
+    \ software architecture. Instead of relying on a single, massive prompt to output\
+    \ a final result, agentic engineering breaks complex objectives down into a Directed\
+    \ Acyclic Graph (DAG) of smaller tasks. The engineer's job shifts from writing\
+    \ code to building the orchestration layer\u2014defining the agents, granting\
+    \ them specific tools (APIs, execution environments), setting up the communication\
+    \ protocols between them, and implementing robust error recovery and verification\
+    \ loops."
+  how_it_works: "An agentic system is typically built using the following components:\n\
+    <ul>\n  <li><strong>The Router:</strong> A lightweight classifier that receives\
+    \ a user query and routes it to the most capable specialized agent.</li>\n  <li><strong>The\
+    \ Planner:</strong> An agent responsible solely for taking an objective and breaking\
+    \ it down into a step-by-step sequential plan.</li>\n  <li><strong>Tool Calling:</strong>\
+    \ Agents use structured outputs to execute external functions, such as running\
+    \ a Python script, querying a database, or searching the web.</li>\n  <li><strong>Verification\
+    \ Loops:</strong> Before declaring a task complete, a separate 'Critic' or 'Verifier'\
+    \ agent reviews the output against the original constraints and sends it back\
+    \ if it fails.</li>\n</ul>"
+  use_cases:
+  - Automating complex CI/CD pipelines and code reviews (e.g., SWE-agent).
+  - Building autonomous research assistants that can browse the web, synthesize data,
+    and write reports.
+  - Creating dynamic customer support systems capable of executing database transactions
+    safely.
+  related_terms:
+  - name: Flow Engineering
+    slug: flow-engineering
+  - name: Tool Calling
+    slug: tool-calling
+  last_updated: '2026-03-22'
+- name: Flow Engineering
+  slug: flow-engineering
+  title: Flow Engineering for LLM Applications
+  description: Flow engineering involves designing iterative, multi-step LLM architectures
+    rather than relying on a single zero-shot prompt.
+  short_definition: The practice of designing deterministic, multi-step architectures
+    where an LLM's output is iteratively refined, tested, and corrected through a
+    predefined pipeline.
+  long_definition: 'Popularized by projects like AlphaCodium, flow engineering assumes
+    that LLMs are relatively weak at zero-shot, complex reasoning but exceptionally
+    strong when forced to iterate. Instead of writing one massive prompt hoping for
+    the perfect output, flow engineers design a state machine. The LLM is forced through
+    a sequence: generating a plan, writing draft code, running that code against a
+    compiler, reading the error trace, and attempting a fix. By rigidly structuring
+    this ''flow'', developers can dramatically increase the reliability and performance
+    of an underlying model without needing to upgrade to a more expensive, larger
+    parameter model.'
+  how_it_works: "A classic flow engineering pipeline for code generation looks like:\n\
+    <ul>\n  <li><strong>Phase 1 (Reflection):</strong> The model reads the problem\
+    \ and outputs its understanding of the constraints.</li>\n  <li><strong>Phase\
+    \ 2 (Planning):</strong> The model outlines the algorithmic approach without writing\
+    \ syntax.</li>\n  <li><strong>Phase 3 (Generation):</strong> The model generates\
+    \ the actual code based strictly on the plan.</li>\n  <li><strong>Phase 4 (Execution\
+    \ & Critique):</strong> The code is run in a sandbox. A separate prompt passes\
+    \ the execution trace (success or stack trace) back to the model for refinement.</li>\n\
+    </ul>"
+  use_cases:
+  - Competitive programming and automated software engineering.
+  - Complex data extraction where the schema must be validated iteratively.
+  - High-stakes content generation requiring rigorous fact-checking loops.
+  related_terms:
+  - name: Agentic Engineering
+    slug: agentic-engineering
+  - name: Test-Time Compute (TTC)
+    slug: test-time-compute
+  last_updated: '2026-03-22'
+- name: Test-Time Compute (TTC)
+  slug: test-time-compute
+  title: What is Test-Time Compute in AI Reasoning?
+  description: Test-Time Compute (TTC) refers to dynamically allocating more computational
+    resources to an AI model during inference to improve complex reasoning.
+  short_definition: The practice of allocating more computational resources during
+    inference (the 'test time') to allow an AI model to perform internal reasoning,
+    planning, and self-correction before outputting an answer.
+  long_definition: "Historically, the intelligence of an AI model was determined entirely\
+    \ by 'Training Compute'\u2014the amount of processing power used to train the\
+    \ base model. Test-Time Compute (TTC), popularized by models like OpenAI's o1,\
+    \ shifts this paradigm by scaling compute dynamically when a question is asked.\
+    \ By allowing the model to generate thousands of internal 'Chain of Thought' tokens,\
+    \ simulate different strategies, backtrack from dead ends, and verify its own\
+    \ logic *before* returning a response to the user, TTC dramatically improves performance\
+    \ on hard logic, math, and coding problems without requiring a larger base model."
+  how_it_works: "TTC is typically implemented through:\n<ul>\n  <li><strong>Hidden\
+    \ Chain of Thought:</strong> The model generates a long, internal monologue of\
+    \ reasoning steps that the end-user does not see.</li>\n  <li><strong>Tree of\
+    \ Thoughts (ToT):</strong> The model branches out into multiple possible solution\
+    \ paths, evaluates the viability of each, and prunes the paths that lead to dead\
+    \ ends.</li>\n  <li><strong>Dynamic Compute Allocation:</strong> Easy questions\
+    \ bypass TTC and return instantly, while hard questions trigger massive internal\
+    \ token generation.</li>\n</ul>"
+  use_cases:
+  - Solving advanced mathematical proofs and competitive programming challenges.
+  - Medical and legal diagnostics where step-by-step logical deduction is required.
+  related_terms:
+  - name: Process Reward Models (PRM)
+    slug: process-reward-models
+  last_updated: '2026-03-22'
+- name: Model Context Protocol (MCP)
+  slug: model-context-protocol
+  title: 'Model Context Protocol (MCP): The USB Port for AI'
+  description: MCP is an open standard introduced by Anthropic to connect AI assistants
+    to local and remote data sources seamlessly.
+  short_definition: An open-source, standardized protocol that acts as a universal
+    API allowing AI models to securely connect to, read from, and interact with external
+    data sources and tools.
+  long_definition: "Before MCP, developers had to write custom API integrations for\
+    \ every single tool they wanted an AI agent to use (e.g., GitHub, Slack, and Google\
+    \ Drive required three different codebases). Introduced by Anthropic in late 2024,\
+    \ the Model Context Protocol (MCP) establishes a universal standard\u2014often\
+    \ described as the 'USB-C port for AI'. If a data source exposes an MCP Server,\
+    \ any MCP-compatible AI client (like Claude Desktop) can instantly discover the\
+    \ available data, read files, and execute tools without bespoke integration code."
+  how_it_works: "MCP operates on a client-server architecture:\n<ul>\n  <li><strong>MCP\
+    \ Hosts:</strong> The application the user interacts with (e.g., Claude Desktop,\
+    \ an IDE).</li>\n  <li><strong>MCP Clients:</strong> The bridge within the Host\
+    \ application that initiates the protocol connection.</li>\n  <li><strong>MCP\
+    \ Servers:</strong> Lightweight programs connected to specific data sources (e.g.,\
+    \ a Postgres database) that expose resources and tools via the standard protocol.</li>\n\
+    </ul>"
+  use_cases:
+  - Giving local AI IDEs instant, read-only access to proprietary enterprise databases.
+  - Building universal enterprise search agents that can query Jira, Confluence, and
+    GitHub simultaneously.
+  related_terms:
+  - name: Context Engineering
+    slug: context-engineering
+  - name: Tool Calling
+    slug: tool-calling
+  last_updated: '2026-03-22'
+- name: Semantic Caching
+  slug: semantic-caching
+  title: 'Semantic Caching: Reducing LLM Costs and Latency'
+  description: Semantic caching intercepts prompts and returns cached responses for
+    queries that have similar meaning, saving LLM API costs.
+  short_definition: An optimization technique that stores previous LLM responses and
+    uses vector similarity to return those cached answers for new queries that have
+    the same semantic meaning, bypassing the LLM entirely.
+  long_definition: Traditional caching (like Redis) requires an exact string match
+    to return a cached result. If a user asks 'How do I reset my password?' and later
+    asks 'What is the process to change my password?', a traditional cache misses.
+    Semantic caching solves this by embedding the incoming user query into a vector
+    and performing a fast nearest-neighbor search against previously answered queries.
+    If the similarity score exceeds a defined threshold, the system immediately returns
+    the cached response. This drastically reduces API costs, cuts latency to milliseconds,
+    and protects backend LLMs from repetitive load.
+  how_it_works: "A typical semantic cache pipeline:\n<ul>\n  <li><strong>Embedding:</strong>\
+    \ The incoming user query is embedded into a dense vector using a fast, cheap\
+    \ model.</li>\n  <li><strong>Vector Search:</strong> The vector is compared against\
+    \ a database of previous queries using Cosine Similarity.</li>\n  <li><strong>Threshold\
+    \ Check:</strong> If the similarity score is above 0.95, the cached LLM response\
+    \ is returned instantly.</li>\n  <li><strong>Cache Miss:</strong> If no match\
+    \ is found, the query goes to the expensive LLM, and the new response is cached.</li>\n\
+    </ul>"
+  use_cases:
+  - Customer support chatbots dealing with high volumes of repetitive questions.
+  - Reducing API costs for enterprise RAG deployments.
+  related_terms:
+  - name: KV Cache Eviction
+    slug: kv-cache-eviction
+  - name: Context Engineering
+    slug: context-engineering
+  last_updated: '2026-03-22'
+- name: Matryoshka Representation Learning (MRL)
+  slug: matryoshka-representation-learning
+  title: Matryoshka Representation Learning (MRL) in Vector Search
+  description: MRL is a training technique that allows vector embeddings to be truncated
+    without losing their core semantic meaning.
+  short_definition: A technique for training embedding models so that the most critical
+    semantic information is front-loaded into the earliest dimensions of the vector,
+    allowing the vector to be truncated to save space without catastrophic accuracy
+    loss.
+  long_definition: "In standard embedding models, semantic meaning is distributed\
+    \ equally across all dimensions (e.g., all 1,536 dimensions in an OpenAI vector).\
+    \ If you truncate the vector to save database space, the representation is destroyed.\
+    \ Matryoshka Representation Learning (MRL) forces the model to learn representations\
+    \ at multiple granularities simultaneously during training\u2014like Russian nesting\
+    \ dolls. This guarantees that the first 256 dimensions contain a highly compressed,\
+    \ accurate summary of the full 1536 dimensions. Engineers can use this to perform\
+    \ massive, fast, cheap vector searches using the small dimensions, and then rerank\
+    \ the top results using the full dimensions."
+  how_it_works: "<ul>\n  <li><strong>Training:</strong> The model's loss function\
+    \ evaluates the accuracy of the embedding not just at its full size, but at mathematically\
+    \ smaller subsets (e.g., 2048, 1024, 512, 256 dimensions).</li>\n  <li><strong>Truncation\
+    \ at Index Time:</strong> Developers can simply slice off the end of the array\
+    \ (e.g., `vector[:256]`) before storing it in a vector database, cutting storage\
+    \ costs by 80%.</li>\n  <li><strong>Multi-stage Retrieval:</strong> A fast coarse\
+    \ search is done on the 256-dimension vectors, followed by rescoring using the\
+    \ full vectors.</li>\n</ul>"
+  use_cases:
+  - Dramatically reducing memory overhead in large-scale vector databases.
+  - Deploying vector search on edge devices with limited memory constraints.
+  related_terms:
+  - name: Cross-Encoder Reranking
+    slug: cross-encoder-reranking
+  - name: Product Quantization (PQ)
+    slug: product-quantization
+  last_updated: '2026-03-22'
+- name: Cross-Encoder Reranking
+  slug: cross-encoder-reranking
+  title: Cross-Encoder Reranking in RAG Systems
+  description: A cross-encoder processes a user query and a document simultaneously
+    to output a highly accurate relevance score, used in the final stage of RAG.
+  short_definition: An architecture where an embedding model processes both the user's
+    query and a target document simultaneously through its attention layers to generate
+    a highly precise relevance score.
+  long_definition: "In standard vector search (Bi-Encoders), the user query and the\
+    \ document are embedded separately and compared using simple geometry (Cosine\
+    \ Similarity). While incredibly fast, this misses deep linguistic nuances because\
+    \ the words in the query never interact with the words in the document during\
+    \ processing. A Cross-Encoder passes the query and the document *together* into\
+    \ a Transformer model (e.g., `[CLS] Query [SEP] Document [SEP]`). The self-attention\
+    \ mechanism compares every word in the query against every word in the document\
+    \ simultaneously, producing a single, highly accurate similarity score. Because\
+    \ this is computationally expensive, it is used strictly as a 'Reranker'\u2014\
+    re-evaluating only the top 50 results retrieved by the faster Bi-Encoder."
+  how_it_works: "<ul>\n  <li><strong>Stage 1 (Retrieval):</strong> A fast Bi-Encoder\
+    \ retrieves the top 100 potential documents from a vector database of millions.</li>\n\
+    \  <li><strong>Stage 2 (Concatenation):</strong> The system pairs the exact user\
+    \ query with each of the 100 documents.</li>\n  <li><strong>Stage 3 (Cross-Encoding):</strong>\
+    \ A Cross-Encoder model processes each pair, allowing deep contextual interactions\
+    \ between the query and document tokens.</li>\n  <li><strong>Stage 4 (Reranking):</strong>\
+    \ The model outputs a float score (0 to 1) for each pair. The list is sorted,\
+    \ and the absolute top 5 results are sent to the LLM.</li>\n</ul>"
+  use_cases:
+  - Fixing 'Top-K' retrieval failures in enterprise RAG pipelines.
+  - Improving search relevance for highly technical or domain-specific language where
+    exact phrasing matters.
+  related_terms:
+  - name: Bi-Encoder Architecture
+    slug: bi-encoder
+  - name: Semantic Chunking
+    slug: semantic-chunking
+  last_updated: '2026-03-22'
+- name: Late Chunking
+  slug: late-chunking
+  title: 'Late Chunking: Context-Aware Vector Embeddings'
+  description: Late chunking embeds an entire document first before splitting it into
+    chunks, preserving global context in vector search.
+  short_definition: A RAG optimization where an entire document is processed by the
+    embedding model first to capture global context, and only then split into individual
+    searchable chunks.
+  long_definition: "Standard RAG pipelines use 'Early Chunking': they arbitrarily\
+    \ slice a PDF into 500-word blocks, and then embed each block separately. This\
+    \ destroys context\u2014a chunk in the middle of chapter 3 might lose all reference\
+    \ to the main subject established in chapter 1, making it un-findable in a vector\
+    \ search. Late Chunking (pioneered by models like Jina AI's v2/v3 architecture)\
+    \ solves this by passing the *entire* document (up to 8k or 32k tokens) through\
+    \ the Transformer model. The model computes contextualized representations for\
+    \ every single token based on the whole document. Only after this global contextualization\
+    \ occurs are the tokens pooled together into smaller 500-word chunks for storage."
+  how_it_works: "<ul>\n  <li><strong>Global Processing:</strong> A long-context embedding\
+    \ model reads the entire document in one pass.</li>\n  <li><strong>Token-Level\
+    \ Embedding:</strong> The model generates an embedding for every single token,\
+    \ enriched by the context of the entire text.</li>\n  <li><strong>Boundary Definition:</strong>\
+    \ The text is split into chunks (e.g., by paragraph or sentence).</li>\n  <li><strong>Mean\
+    \ Pooling:</strong> The token embeddings within each boundary are averaged together\
+    \ to create the final chunk vector. The resulting vector inherently 'knows' the\
+    \ broader context of the document it came from.</li>\n</ul>"
+  use_cases:
+  - Processing complex financial reports or legal contracts where individual clauses
+    depend heavily on the overarching document theme.
+  - Solving the 'lost in the middle' retrieval problem in traditional RAG.
+  related_terms:
+  - name: Semantic Chunking
+    slug: semantic-chunking
+  - name: Context Engineering
+    slug: context-engineering
+  last_updated: '2026-03-22'
+- name: GraphRAG
+  slug: graphrag
+  title: 'GraphRAG: Knowledge Graphs for Retrieval Augmented Generation'
+  description: GraphRAG combines vector search with Knowledge Graphs to allow LLMs
+    to reason across complex relationships and entire datasets.
+  short_definition: An advanced retrieval technique that extracts entities and relationships
+    from documents to build a Knowledge Graph, allowing an LLM to answer complex queries
+    that span across multiple disparate documents.
+  long_definition: Traditional RAG uses vector similarity to find specific text snippets.
+    If a user asks a global question like, 'What are the common themes among all the
+    product complaints last quarter?', standard RAG fails because no single text chunk
+    contains that summary. GraphRAG (Knowledge Graph Retrieval-Augmented Generation),
+    popularized by Microsoft Research, solves this by running an LLM over the entire
+    dataset during the ingestion phase. It extracts 'entities' (e.g., Product X, Bug
+    Y) and their 'relationships' (e.g., 'causes'), constructing a massive network
+    graph. When the user queries the system, it traverses this graph to pull in connected
+    nodes, enabling true multi-hop reasoning and holistic summarization.
+  how_it_works: "<ul>\n  <li><strong>Indexing Phase:</strong> An LLM processes the\
+    \ source documents and extracts structured nodes (Entities) and edges (Relationships).</li>\n\
+    \  <li><strong>Community Detection:</strong> The graph is clustered into hierarchical\
+    \ 'communities' based on closely related nodes.</li>\n  <li><strong>Pre-Summarization:</strong>\
+    \ The LLM generates a summary for each community ahead of time.</li>\n  <li><strong>Retrieval\
+    \ Phase:</strong> When a query is made, the system matches it to the relevant\
+    \ community summaries and graph nodes, passing a holistic, interconnected context\
+    \ to the final LLM.</li>\n</ul>"
+  use_cases:
+  - Answering 'sensemaking' questions that require connecting dots across hundreds
+    of documents.
+  - Enterprise search where relationships between employees, projects, and codebases
+    are more important than exact keyword matches.
+  related_terms:
+  - name: Context Engineering
+    slug: context-engineering
+  - name: Cross-Encoder Reranking
+    slug: cross-encoder-reranking
+  last_updated: '2026-03-22'
+- name: Tool Calling
+  slug: tool-calling
+  title: Tool Calling (Function Calling) in LLMs
+  description: Tool calling allows LLMs to interact with external APIs by reliably
+    outputting structured JSON arguments.
+  short_definition: A capability fine-tuned into modern LLMs that allows them to intelligently
+    select an external tool and output the exact JSON arguments required to execute
+    it.
+  long_definition: LLMs natively output unstructured text. Tool Calling (originally
+    introduced as Function Calling by OpenAI) is the process of providing an LLM with
+    a schema of available tools (like a weather API or a database query function).
+    The model evaluates the user's prompt, determines if one of the tools is necessary
+    to fulfill the request, and instead of replying with conversational text, it halts
+    generation and outputs a perfectly structured JSON object matching the tool's
+    expected arguments. The application executes the external code using those arguments
+    and feeds the result back into the model to generate the final human-readable
+    response.
+  how_it_works: "<ul>\n  <li><strong>Schema Injection:</strong> The developer passes\
+    \ a JSON Schema outlining the available tools (e.g., `get_weather(location, unit)`)\
+    \ alongside the system prompt.</li>\n  <li><strong>Model Decision:</strong> The\
+    \ LLM decides it cannot answer the user query based on internal weights and chooses\
+    \ to invoke a tool.</li>\n  <li><strong>JSON Output:</strong> The model outputs\
+    \ a specific token (like `<tool_call>`) followed by `{\"location\": \"Seattle\"\
+    , \"unit\": \"celsius\"}`.</li>\n  <li><strong>Execution:</strong> The developer's\
+    \ backend intercepts this, runs the actual Python code, and appends the result\
+    \ (e.g., `15\xB0C`) to the message history for the LLM to read.</li>\n</ul>"
+  use_cases:
+  - Empowering autonomous agents to interact with the real world (sending emails,
+    modifying databases).
+  - Fetching real-time data that an LLM could not possibly know (stock prices, current
+    news).
+  related_terms:
+  - name: Agentic Engineering
+    slug: agentic-engineering
+  - name: Model Context Protocol (MCP)
+    slug: model-context-protocol
+  last_updated: '2026-03-22'
+- name: PagedAttention
+  slug: pagedattention
+  title: 'PagedAttention: Optimizing LLM Memory Serving'
+  description: PagedAttention is the memory management algorithm behind vLLM that
+    fragments the KV cache to eliminate memory waste.
+  short_definition: An attention algorithm inspired by operating system memory paging
+    that non-contiguously stores an LLM's KV cache, dramatically increasing the throughput
+    of AI servers.
+  long_definition: During LLM inference, the model stores the state of previously
+    processed tokens in the Key-Value (KV) cache to avoid recalculating them. Historically,
+    AI serving frameworks allocated a large, contiguous block of GPU memory for the
+    maximum possible length of the request. Because request lengths are unpredictable,
+    this led to massive internal memory fragmentation and wasted capacity (often up
+    to 60% of GPU memory sitting idle). PagedAttention, introduced by the vLLM project,
+    solves this by breaking the KV cache into fixed-size 'blocks' or 'pages' that
+    can be stored non-contiguously anywhere in the GPU memory. This allows the server
+    to dynamically allocate exact memory as the sequence grows, sharing blocks across
+    multiple concurrent requests.
+  how_it_works: "<ul>\n  <li><strong>Virtual Memory:</strong> Like an OS, PagedAttention\
+    \ uses a block table to map virtual logical blocks of tokens to physical blocks\
+    \ in the GPU memory.</li>\n  <li><strong>Dynamic Allocation:</strong> Memory is\
+    \ allocated on-demand, block by block, rather than pre-allocating the theoretical\
+    \ maximum.</li>\n  <li><strong>Copy-on-Write:</strong> When using techniques like\
+    \ parallel sampling or beam search, multiple requests can share the exact same\
+    \ physical memory blocks for their common prompt prefixes, only allocating new\
+    \ blocks when the generated text diverges.</li>\n</ul>"
+  use_cases:
+  - Maximizing throughput and reducing costs for high-traffic LLM inference APIs.
+  - Efficiently serving complex agentic workflows that require multiple parallel completions
+    from the same base prompt.
+  related_terms:
+  - name: KV Cache Eviction
+    slug: kv-cache-eviction
+  - name: Test-Time Compute (TTC)
+    slug: test-time-compute
+  last_updated: '2026-03-22'
+- name: KV Cache Eviction
+  slug: kv-cache-eviction
+  title: KV Cache Eviction Policies
+  description: KV Cache eviction drops low-impact tokens from an LLM's memory to handle
+    infinite context windows on limited GPU hardware.
+  short_definition: Algorithms that selectively delete less important tokens from
+    an LLM's Key-Value cache during inference to prevent GPU memory exhaustion during
+    long conversations.
+  long_definition: As context windows push past 100k tokens, the memory required to
+    store the Key-Value (KV) cache grows linearly and quickly overwhelms even the
+    largest GPUs. KV Cache Eviction policies dynamically prune this memory during
+    generation. Based on the observation that attention within an LLM is extremely
+    sparse (a model only actually 'looks at' a fraction of the previous tokens to
+    predict the next one), these policies drop tokens that receive low attention scores.
+    Techniques like 'Heavy Hitter Oracle' (H2O) retain only the most critical tokens
+    (like the system prompt and the most recent turns), effectively simulating an
+    infinite context window within a strict memory budget.
+  how_it_works: "<ul>\n  <li><strong>Attention Scoring:</strong> During generation,\
+    \ the algorithm monitors the attention weights across all tokens in the cache.</li>\n\
+    \  <li><strong>Heavy Hitters:</strong> Tokens that consistently accumulate high\
+    \ attention scores (often the initial instructions or specific entities) are marked\
+    \ as 'Heavy Hitters' and preserved.</li>\n  <li><strong>Eviction:</strong> Tokens\
+    \ with near-zero attention scores are permanently evicted from the GPU memory.</li>\n\
+    \  <li><strong>Rolling Window:</strong> A fixed sliding window preserves the absolute\
+    \ most recent tokens to maintain immediate fluency.</li>\n</ul>"
+  use_cases:
+  - Running infinite-length chatbots or agents on consumer-grade GPUs (e.g., LocalLLaMA).
+  - Processing massive codebases or books where only specific variables and structural
+    boundaries actually matter for the final output.
+  related_terms:
+  - name: PagedAttention
+    slug: pagedattention
+  - name: Context Engineering
+    slug: context-engineering
+  last_updated: '2026-03-22'
+- name: Semantic Chunking
+  slug: semantic-chunking
+  title: Semantic Chunking vs. Naive Chunking in RAG
+  description: Semantic chunking splits documents dynamically based on sentence embedding
+    distance rather than arbitrary character limits.
+  short_definition: A method of splitting text for vector databases that evaluates
+    the embedding distance between sentences, ensuring that logically coherent thoughts
+    are kept together in a single chunk.
+  long_definition: Traditional 'naive' chunking splits documents by an arbitrary character
+    count (e.g., 500 tokens). This often slices a complex paragraph in half, destroying
+    the context and guaranteeing poor vector retrieval. Semantic chunking solves this
+    by using a lightweight embedding model to measure the 'distance' between consecutive
+    sentences. If the distance suddenly spikes, the system recognizes a shift in topic
+    and draws the chunk boundary there. This results in dynamically sized chunks that
+    map perfectly to the original author's logical boundaries, drastically reducing
+    hallucinations during the generation phase of RAG.
+  how_it_works: "<ul>\n  <li><strong>Sentence Splitting:</strong> The document is\
+    \ broken down into individual sentences.</li>\n  <li><strong>Embedding:</strong>\
+    \ Each sentence is individually embedded into a vector.</li>\n  <li><strong>Distance\
+    \ Calculation:</strong> The system calculates the cosine distance between Sentence\
+    \ A and Sentence B, then B and C.</li>\n  <li><strong>Boundary Creation:</strong>\
+    \ When the distance between two sentences exceeds a predefined threshold (e.g.,\
+    \ 95th percentile), a chunk boundary is placed between them.</li>\n</ul>"
+  use_cases:
+  - Processing highly unstructured documents like transcripts or chat logs where formatting
+    cues are missing.
+  - Improving recall accuracy in RAG systems built on dense academic papers.
+  related_terms:
+  - name: Late Chunking
+    slug: late-chunking
+  - name: Cross-Encoder Reranking
+    slug: cross-encoder-reranking
+  last_updated: '2026-03-22'
+- name: Hypothetical Document Embeddings (HyDE)
+  slug: hypothetical-document-embeddings-hyde
+  title: 'HyDE: Hypothetical Document Embeddings for Zero-Shot Retrieval'
+  description: HyDE improves vector search by using an LLM to generate a fake perfect
+    answer before searching the vector database.
+  short_definition: A zero-shot retrieval technique where a user's question is first
+    answered by an LLM (hallucinating a hypothetical document), and that hallucinated
+    answer is embedded and used to search the vector database.
+  long_definition: In standard vector search, you are comparing a short, interrogative
+    user query ('How do I configure Redis?') against long, declarative document chunks.
+    These two text formats live in different parts of the embedding space, causing
+    low similarity scores. Hypothetical Document Embeddings (HyDE) fixes this asymmetry.
+    When a user asks a question, an LLM is prompted to write a fake, hypothetical
+    answer based purely on its internal weights. This hallucinated document is mathematically
+    much closer to the actual, factual documents stored in the vector database. The
+    system embeds the fake document, retrieves the factual documents, and then generates
+    the final, grounded response.
+  how_it_works: "<ul>\n  <li><strong>Generation:</strong> The user query is sent to\
+    \ an Instruct LLM.</li>\n  <li><strong>Hallucination:</strong> The LLM generates\
+    \ a hypothetical, plausible-sounding (but potentially factually incorrect) document\
+    \ that answers the query.</li>\n  <li><strong>Embedding:</strong> The hypothetical\
+    \ document is encoded into a dense vector.</li>\n  <li><strong>Retrieval:</strong>\
+    \ The vector database retrieves the actual, factual documents that are semantically\
+    \ closest to the hallucinated text.</li>\n</ul>"
+  use_cases:
+  - Searching dense technical documentation where the user's vocabulary doesn't match
+    the documentation's vocabulary.
+  - Zero-shot domain retrieval where the embedding model hasn't been fine-tuned on
+    the specific jargon.
+  related_terms:
+  - name: Bi-Encoder Architecture
+    slug: bi-encoder
+  - name: Context Engineering
+    slug: context-engineering
+  last_updated: '2026-03-22'
+- name: Self-Querying Retrieval
+  slug: self-querying-retrieval
+  title: 'Self-Querying Retrieval: Combining Metadata and Vector Search'
+  description: Self-querying retrieval uses an LLM to dynamically write database filters
+    (SQL/NoSQL) alongside generating a vector search query.
+  short_definition: An intelligent retrieval mechanism where an LLM parses a user's
+    natural language query to automatically extract exact metadata filters (like dates
+    or authors) while simultaneously performing a semantic vector search.
+  long_definition: Vector similarity is terrible at exact matches. If a user asks,
+    'Find me marketing reports from 2024 about AI,' a pure vector search might return
+    a highly relevant AI report from 2022 because '2024' is just a minor token. Self-Querying
+    Retrieval solves this by placing an LLM in front of the database. The LLM reads
+    the user's intent and translates it into a structured query. It strips out 'from
+    2024' to build a deterministic metadata filter (e.g., `WHERE year = 2024`) and
+    uses the remaining phrase ('marketing reports about AI') to perform the semantic
+    vector search. The results must pass both the hard filter and the semantic similarity
+    threshold.
+  how_it_works: "<ul>\n  <li><strong>Schema Injection:</strong> The LLM is provided\
+    \ with the exact schema of the vector database's metadata (e.g., `year: int`,\
+    \ `department: string`).</li>\n  <li><strong>Parsing:</strong> The LLM analyzes\
+    \ the user prompt and extracts relevant constraints based on the schema.</li>\n\
+    \  <li><strong>Query Construction:</strong> The system builds a composite database\
+    \ query utilizing both the structured filters and the dense vector representation\
+    \ of the semantic intent.</li>\n</ul>"
+  use_cases:
+  - E-commerce search where users mix semantic desires ('a comfortable shoe') with
+    hard constraints ('under $100', 'size 10').
+  - Enterprise document retrieval requiring strict access control and date-range filtering.
+  related_terms:
+  - name: Tool Calling
+    slug: tool-calling
+  - name: Agentic Engineering
+    slug: agentic-engineering
+  last_updated: '2026-03-22'
+- name: Bi-Encoder Architecture
+  slug: bi-encoder
+  title: What is a Bi-Encoder Architecture in NLP?
+  description: A Bi-Encoder architecture embeds queries and documents separately,
+    enabling massive, pre-computed vector searches.
+  short_definition: A neural network architecture where two separate inputs (like
+    a query and a document) are passed through an embedding model independently to
+    create two distinct vectors that can be compared mathematically.
+  long_definition: 'The foundation of modern semantic search is the Bi-Encoder. Unlike
+    Cross-Encoders which process two texts together, a Bi-Encoder processes text in
+    isolation. You pass a Wikipedia article through the model, and it outputs a vector.
+    Months later, a user types a query; that query is passed through the same model
+    to output a second vector. The system then calculates the cosine similarity between
+    the two vectors. Because the document vectors can be pre-computed and stored offline
+    in a database (like Pinecone or Milvus), Bi-Encoders can search through millions
+    of documents in milliseconds. The trade-off is accuracy: because the query and
+    document never ''see'' each other during the neural network processing, deep contextual
+    relationships are lost.'
+  how_it_works: "<ul>\n  <li><strong>Offline Indexing:</strong> Millions of documents\
+    \ are individually passed through the Transformer model to generate dense vectors.\
+    \ These are stored in a vector index.</li>\n  <li><strong>Online Querying:</strong>\
+    \ A user query is passed through the same Transformer model to generate a single\
+    \ vector.</li>\n  <li><strong>Distance Calculation:</strong> The database performs\
+    \ Approximate Nearest Neighbor (ANN) search to find the document vectors with\
+    \ the highest cosine similarity to the query vector.</li>\n</ul>"
+  use_cases:
+  - The primary retrieval mechanism (Stage 1) in almost all RAG applications.
+  - Semantic deduplication of massive datasets.
+  related_terms:
+  - name: Cross-Encoder Reranking
+    slug: cross-encoder-reranking
+  - name: Matryoshka Representation Learning (MRL)
+    slug: matryoshka-representation-learning
+  last_updated: '2026-03-22'
+- name: Product Quantization (PQ)
+  slug: product-quantization
+  title: Product Quantization (PQ) for Vector Compression
+  description: Product Quantization is an algorithmic technique used to compress dense
+    vectors, reducing memory usage in large-scale databases.
+  short_definition: A highly efficient lossy compression algorithm used in vector
+    databases to drastically reduce the memory footprint of embeddings while maintaining
+    fast nearest-neighbor search capabilities.
+  long_definition: Storing 100 million dense vectors (like OpenAI's 1536-dimensional
+    float32 arrays) requires hundreds of gigabytes of expensive RAM. Product Quantization
+    (PQ) is the mathematical solution to this infrastructure bottleneck. Instead of
+    storing the exact 1536-dimensional point in space, PQ splits the vector into smaller
+    sub-vectors. It then runs a clustering algorithm (like k-means) on these sub-vectors
+    to find a predefined set of 'centroids' (a codebook). Every vector is then replaced
+    by the short ID of the centroid it is closest to. This reduces the memory footprint
+    of a vector by up to 97%, allowing massive vector indexes to fit entirely in memory
+    for millisecond retrieval times, at the cost of a slight drop in recall accuracy.
+  how_it_works: "<ul>\n  <li><strong>Vector Splitting:</strong> A high-dimensional\
+    \ vector is divided into equal-sized sub-vectors.</li>\n  <li><strong>Codebook\
+    \ Generation:</strong> The system trains a k-means clustering model on the sub-vectors\
+    \ to create a 'codebook' of representative points.</li>\n  <li><strong>Quantization:</strong>\
+    \ The actual vector values are discarded and replaced with the integer ID of the\
+    \ nearest codebook entry.</li>\n  <li><strong>Asymmetric Distance Computation\
+    \ (ADC):</strong> During a search, the uncompressed user query vector is compared\
+    \ against the compressed document vectors using a pre-calculated distance lookup\
+    \ table, ensuring rapid execution.</li>\n</ul>"
+  use_cases:
+  - Scaling vector databases from millions to billions of documents without proportionally
+    scaling RAM costs.
+  - Deploying semantic search capabilities on edge devices or mobile phones.
+  related_terms:
+  - name: Matryoshka Representation Learning (MRL)
+    slug: matryoshka-representation-learning
+  - name: Hierarchical Navigable Small World (HNSW)
+    slug: hierarchical-navigable-small-world-hnsw
+  last_updated: '2026-03-22'
+- name: Hierarchical Navigable Small World (HNSW)
+  slug: hierarchical-navigable-small-world-hnsw
+  title: 'HNSW Algorithm: Fast Vector Search Explained'
+  description: HNSW is the dominant graph-based algorithm used by vector databases
+    to perform fast approximate nearest neighbor (ANN) searches.
+  short_definition: A graph-based algorithm that organizes vector embeddings into
+    multiple layers, enabling sub-millisecond Approximate Nearest Neighbor (ANN) search
+    across billions of data points.
+  long_definition: "Performing an exact search (k-NN) on a vector database requires\
+    \ comparing the user's query against every single document vector in the system.\
+    \ This 'brute force' approach does not scale. Hierarchical Navigable Small World\
+    \ (HNSW) is the algorithmic engine that powers almost every modern vector database\
+    \ (Pinecone, Weaviate, Qdrant). It builds a multi-layered graph where the bottom\
+    \ layer contains every single vector connected to its nearest neighbors. The higher\
+    \ layers contain progressively fewer vectors with longer links\u2014acting like\
+    \ an express highway system. When a query is made, HNSW starts at the sparse top\
+    \ layer, quickly zooms into the general neighborhood of the query, and then drops\
+    \ down to the dense bottom layer to find the exact nearest neighbors."
+  how_it_works: "<ul>\n  <li><strong>Graph Construction:</strong> Vectors are inserted\
+    \ into a multi-layered graph. Short connections reside at the bottom (local roads),\
+    \ and long connections reside at the top (highways).</li>\n  <li><strong>Routing\
+    \ Phase:</strong> A search begins at the top layer. The algorithm traverses the\
+    \ graph to find the node closest to the query vector.</li>\n  <li><strong>Descent:</strong>\
+    \ Once it can no longer get closer on the top layer, it drops down to the next\
+    \ layer and repeats the process.</li>\n  <li><strong>Local Search:</strong> At\
+    \ the bottom layer, a localized search occurs among the dense neighborhood to\
+    \ return the final 'Approximate' Nearest Neighbors.</li>\n</ul>"
+  use_cases:
+  - Powering low-latency semantic search in production RAG systems.
+  - Real-time recommendation engines for e-commerce and streaming platforms.
+  related_terms:
+  - name: Product Quantization (PQ)
+    slug: product-quantization
+  - name: Bi-Encoder Architecture
+    slug: bi-encoder
+  last_updated: '2026-03-22'
+- name: ReAct Prompting
+  slug: react-prompting
+  title: 'ReAct Prompting: Reason and Act Framework'
+  description: ReAct is a prompting paradigm that forces an LLM to explicitly output
+    its reasoning trace before executing an action or tool call.
+  short_definition: An agentic framework that strictly interleaves internal reasoning
+    (Chain of Thought) with external actions (Tool Calling), allowing an LLM to solve
+    complex, multi-step problems autonomously.
+  long_definition: If you ask an LLM a complex question that requires an external
+    tool, it will often hallucinate an answer immediately or execute the wrong tool.
+    The ReAct (Reason + Act) paradigm, introduced by researchers at Princeton and
+    Google, forces the model into a strict cognitive loop. The model is prompted to
+    first output a `Thought:` detailing its current understanding of the problem and
+    what it needs to do next. Only then does it output an `Action:` (like querying
+    a database). Once the database returns an `Observation:`, the model loops back
+    to `Thought:`. This explicit externalization of the planning process drastically
+    reduces hallucinations and gives developers a clear trace of the agent's logic.
+  how_it_works: "The agent is trapped in a loop until it outputs an answer:\n<ul>\n\
+    \  <li><strong>Thought:</strong> The agent assesses the current state. (e.g.,\
+    \ 'I need to find the CEO's email. I should search the directory.')</li>\n  <li><strong>Action:</strong>\
+    \ The agent calls a tool. (e.g., <code>search_directory(\"CEO\")</code>)</li>\n\
+    \  <li><strong>Observation:</strong> The system returns the tool's output. (e.g.,\
+    \ 'Result: jane.doe@company.com')</li>\n  <li><strong>Thought:</strong> The agent\
+    \ evaluates the observation. (e.g., 'I have the email. I can answer the user now.')</li>\n\
+    </ul>"
+  use_cases:
+  - Building autonomous web-research agents.
+  - Creating conversational interfaces for complex internal databases.
+  related_terms:
+  - name: Agentic Engineering
+    slug: agentic-engineering
+  - name: Tool Calling
+    slug: tool-calling
+  last_updated: '2026-03-22'
+- name: Plan-and-Solve Framework
+  slug: plan-and-solve-framework
+  title: Plan-and-Solve Architecture for AI Agents
+  description: Plan-and-Solve is an agentic architecture that replaces the step-by-step
+    ReAct loop with a comprehensive upfront planning phase.
+  short_definition: An agentic architecture where a complex objective is broken down
+    into a complete, sequential list of sub-tasks before any actual execution or tool
+    calling begins.
+  long_definition: While ReAct prompting is great for dynamic problems, it is inherently
+    short-sighted. The agent decides its next action based only on its immediate observation,
+    which often leads to infinite loops or losing track of the overarching goal. The
+    Plan-and-Solve architecture splits cognitive labor into two distinct phases. First,
+    a 'Planner' model receives the user's objective and outputs a rigid, step-by-step
+    plan (often a Directed Acyclic Graph of dependencies). Second, a 'Worker' model
+    simply executes those steps sequentially, passing the output of step 1 as the
+    input to step 2. This significantly reduces API costs and prevents the agent from
+    spiraling off-topic.
+  how_it_works: "<ul>\n  <li><strong>Planning Phase:</strong> An LLM writes out a\
+    \ numbered list of sub-tasks required to fulfill the user's request.</li>\n  <li><strong>Execution\
+    \ Loop:</strong> A separate prompt (or separate specialized agent) is given Task\
+    \ 1 and the necessary tools.</li>\n  <li><strong>State Management:</strong> The\
+    \ results of Task 1 are appended to the system memory. Task 2 is then executed\
+    \ using the context gained from Task 1.</li>\n  <li><strong>Completion:</strong>\
+    \ Once all tasks in the plan are crossed off, a final response is generated.</li>\n\
+    </ul>"
+  use_cases:
+  - Automated software engineering where file creation, coding, and testing must happen
+    in a specific order.
+  - Complex data analysis pipelines requiring multiple distinct API queries.
+  related_terms:
+  - name: Agentic Engineering
+    slug: agentic-engineering
+  - name: ReAct Prompting
+    slug: react-prompting
+  last_updated: '2026-03-22'
+- name: Speculative Decoding
+  slug: speculative-decoding
+  title: 'Speculative Decoding: Accelerating LLM Inference'
+  description: Speculative decoding uses a tiny, fast model to guess the next tokens,
+    which a massive model then verifies in parallel.
+  short_definition: An inference optimization technique that accelerates text generation
+    by using a small, fast 'draft' model to predict multiple upcoming tokens, which
+    are then verified simultaneously by the main, larger model.
+  long_definition: LLM generation is memory-bandwidth bound. Producing text token-by-token
+    is incredibly slow because the GPU has to load the entire massive model's weights
+    into memory just to calculate a single word. Speculative Decoding breaks this
+    sequential bottleneck. A tiny, highly efficient 'draft' model (e.g., 1B parameters)
+    rapidly guesses the next 5 to 10 tokens. These guessed tokens are then passed
+    to the main, massive 'target' model (e.g., 70B parameters). The massive model
+    evaluates all 5 tokens in parallel in a single forward pass. If it agrees with
+    the draft model's logic, it accepts the tokens instantly, essentially generating
+    5 words for the computational time of 1.
+  how_it_works: "<ul>\n  <li><strong>Drafting:</strong> A fast, small model generates\
+    \ a sequence of <em>k</em> speculative tokens.</li>\n  <li><strong>Verification:</strong>\
+    \ The large target model processes these <em>k</em> tokens in parallel.</li>\n\
+    \  <li><strong>Acceptance:</strong> The target model compares the draft's probabilities\
+    \ against its own. It accepts tokens up to the point where the draft made a mistake.</li>\n\
+    \  <li><strong>Correction:</strong> At the point of the mistake, the target model\
+    \ discards the remaining draft tokens and generates the correct token itself,\
+    \ then the loop restarts.</li>\n</ul>"
+  use_cases:
+  - Reducing latency and Time to First Token (TTFT) in real-time conversational agents.
+  - Increasing serving throughput for massive open-source models without sacrificing
+    output quality.
+  related_terms:
+  - name: PagedAttention
+    slug: pagedattention
+  - name: Test-Time Compute (TTC)
+    slug: test-time-compute
+  last_updated: '2026-03-22'
+- name: Agentic Router
+  slug: agentic-router
+  title: 'Agentic Routers: Optimizing Multi-Agent Workflows'
+  description: An agentic router acts as a traffic controller, directing user queries
+    to the cheapest or most specialized model in a compound AI system.
+  short_definition: A lightweight classifier model or programmatic logic layer that
+    analyzes an incoming user query and routes it to the specific AI agent, tool,
+    or LLM best suited to handle it.
+  long_definition: In a Compound AI System, sending every user query to the most expensive,
+    massive model (like GPT-4 or Claude 3.5 Sonnet) is an architectural failure that
+    destroys unit economics. An Agentic Router sits at the very edge of the application.
+    When a user sends a prompt, the Router evaluates its complexity and intent. If
+    the user asks 'Reset my password', the router sends it to a fast, cheap 8B parameter
+    model or a deterministic script. If the user asks 'Debug this Python memory leak',
+    the router forwards it to the massive, expensive coding model. Routers ensure
+    high system reliability while minimizing API costs and latency.
+  how_it_works: "<ul>\n  <li><strong>Intent Classification:</strong> The router uses\
+    \ a fast embedding model or a small LLM to classify the query into predefined\
+    \ categories.</li>\n  <li><strong>Semantic Routing:</strong> If vector similarity\
+    \ is used, the query is routed based on its proximity to known problem clusters\
+    \ in the database.</li>\n  <li><strong>Fallback Logic:</strong> If an invoked\
+    \ agent fails to solve the problem, the router catches the failure and dynamically\
+    \ re-routes the task to a stronger, slower agent.</li>\n</ul>"
+  use_cases:
+  - Managing multi-agent customer support systems to protect margins.
+  - Building robust MoE (Mixture of Experts) style architectures at the application
+    layer.
+  related_terms:
+  - name: Compound AI Systems
+    slug: compound-ai-systems
+  - name: Semantic Caching
+    slug: semantic-caching
+  last_updated: '2026-03-22'
+- name: JSON Mode vs. Structured Outputs
+  slug: json-mode-vs-structured-outputs
+  title: JSON Mode vs. Structured Outputs in LLMs
+  description: Understanding the technical difference between requesting JSON from
+    an LLM and enforcing guaranteed structured outputs via constrained decoding.
+  short_definition: JSON Mode heavily biases an LLM to produce valid JSON syntax,
+    whereas Structured Outputs mathematically constrain the model's token generation
+    to guarantee the output perfectly matches a specific JSON Schema.
+  long_definition: "For years, engineers struggled to parse LLM text into backend\
+    \ systems. The first solution was 'JSON Mode'\u2014a system prompt flag that heavily\
+    \ weighted the model's probability distribution toward generating brackets and\
+    \ quotes. While it rarely produced invalid syntax, JSON Mode offered no guarantees\
+    \ about the keys and values inside the object; the model could still invent its\
+    \ own schema. 'Structured Outputs' (or Constrained Decoding) is a lower-level\
+    \ architectural upgrade. The inference engine converts the developer's exact JSON\
+    \ Schema into a formal grammar or state machine. During generation, any token\
+    \ that would violate the schema (e.g., trying to output a string when an integer\
+    \ is required) is mathematically masked out. Structured Outputs guarantee 100%\
+    \ schema adherence."
+  how_it_works: "<ul>\n  <li><strong>JSON Mode:</strong> The developer begs the model\
+    \ in the prompt to return JSON. The model usually complies, but might inject conversational\
+    \ filler.</li>\n  <li><strong>Structured Outputs:</strong> The developer provides\
+    \ a strict JSON Schema API object. The inference server compiles this schema into\
+    \ a Finite State Machine. The LLM is physically incapable of generating tokens\
+    \ outside the permitted grammar paths.</li>\n</ul>"
+  use_cases:
+  - Extracting clean data tables from messy, unstructured PDF invoices.
+  - Feeding LLM decisions directly into rigid SQL databases or strongly-typed frontend
+    components.
+  related_terms:
+  - name: Tool Calling
+    slug: tool-calling
+  - name: Context Engineering
+    slug: context-engineering
+  last_updated: '2026-03-22'
+- name: DSPy
+  slug: dspy
+  title: 'DSPy: Programming AI Language Models'
+  description: DSPy is a framework that treats LLM prompts as compiled code, using
+    machine learning to optimize prompts automatically.
+  short_definition: An open-source framework developed by Stanford that replaces manual
+    prompt engineering with programmatic compilation, allowing developers to write
+    declarative logic that automatically optimizes the prompts sent to an LLM.
+  long_definition: Building complex LLM applications historically required developers
+    to painstakingly tweak the wording of their prompts (e.g., 'Think step by step',
+    'You are an expert'). If the underlying model was changed, all the hardcoded prompts
+    broke. DSPy shifts this paradigm by abstracting the prompt away entirely. Developers
+    define modules (like `Retrieve`, `ChainOfThought`) and provide a small dataset
+    of desired inputs and outputs. The DSPy 'Compiler' then runs hundreds of variations,
+    scoring the outputs, and automatically discovering the mathematically optimal
+    prompt instructions for that specific LLM and task. It treats prompting as an
+    optimization problem, not an art form.
+  how_it_works: "<ul>\n  <li><strong>Signatures:</strong> The developer defines the\
+    \ input/output behavior without writing instructions (e.g., <code>question ->\
+    \ answer</code>).</li>\n  <li><strong>Modules:</strong> The developer stitches\
+    \ together pre-built reasoning architectures.</li>\n  <li><strong>Teleprompters\
+    \ (Optimizers):</strong> The developer provides a metric (like accuracy). DSPy\
+    \ automatically rewrites the internal prompts and updates the system weights until\
+    \ the metric is maximized.</li>\n</ul>"
+  use_cases:
+  - Building highly robust RAG pipelines that survive underlying model deprecations.
+  - Systematically improving the accuracy of complex extraction tasks without manually
+    guessing prompt words.
+  related_terms:
+  - name: Context Engineering
+    slug: context-engineering
+  - name: Flow Engineering
+    slug: flow-engineering
+  last_updated: '2026-03-22'
