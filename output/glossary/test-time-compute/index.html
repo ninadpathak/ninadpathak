@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Test-Time Compute (TTC)?</h1>
-      <p class="post-desc">The practice of allocating more computational resources during inference (the 'test time') to allow an AI model to perform internal reasoning, planning, and self-correction before outputting an answer.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Test-Time Compute (TTC)</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Test-Time Compute (TTC)</h1>
+      <p class="lead">The practice of allocating more computational resources during inference (the 'test time') to allow an AI model to perform internal reasoning, planning, and self-correction before outputting an answer.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Historically, the intelligence of an AI model was determined entirely by 'Training Compute'—the amount of processing power used to train the base model. Test-Time Compute (TTC), popularized by models like OpenAI's o1, shifts this paradigm by scaling compute dynamically when a question is asked. By allowing the model to generate thousands of internal 'Chain of Thought' tokens, simulate different strategies, backtrack from dead ends, and verify its own logic *before* returning a response to the user, TTC dramatically improves performance on hard logic, math, and coding problems without requiring a larger base model.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         TTC is typically implemented through:
 <ul>
   <li><strong>Hidden Chain of Thought:</strong> The model generates a long, internal monologue of reasoning steps that the end-user does not see.</li>
@@ -160,13 +174,13 @@
   <li><strong>Dynamic Compute Allocation:</strong> Easy questions bypass TTC and return instantly, while hard questions trigger massive internal token generation.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Solving advanced mathematical proofs and competitive programming challenges.</li>
           <li>Medical and legal diagnostics where step-by-step logical deduction is required.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/process-reward-models/">Process Reward Models (PRM)</a></li>
         </ul>

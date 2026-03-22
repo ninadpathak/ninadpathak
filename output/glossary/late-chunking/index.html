@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Late Chunking?</h1>
-      <p class="post-desc">A RAG optimization where an entire document is processed by the embedding model first to capture global context, and only then split into individual searchable chunks.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Late Chunking</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Late Chunking</h1>
+      <p class="lead">A RAG optimization where an entire document is processed by the embedding model first to capture global context, and only then split into individual searchable chunks.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Standard RAG pipelines use 'Early Chunking': they arbitrarily slice a PDF into 500-word blocks, and then embed each block separately. This destroys context—a chunk in the middle of chapter 3 might lose all reference to the main subject established in chapter 1, making it un-findable in a vector search. Late Chunking (pioneered by models like Jina AI's v2/v3 architecture) solves this by passing the *entire* document (up to 8k or 32k tokens) through the Transformer model. The model computes contextualized representations for every single token based on the whole document. Only after this global contextualization occurs are the tokens pooled together into smaller 500-word chunks for storage.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Global Processing:</strong> A long-context embedding model reads the entire document in one pass.</li>
   <li><strong>Token-Level Embedding:</strong> The model generates an embedding for every single token, enriched by the context of the entire text.</li>
@@ -160,13 +174,13 @@
   <li><strong>Mean Pooling:</strong> The token embeddings within each boundary are averaged together to create the final chunk vector. The resulting vector inherently 'knows' the broader context of the document it came from.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Processing complex financial reports or legal contracts where individual clauses depend heavily on the overarching document theme.</li>
           <li>Solving the 'lost in the middle' retrieval problem in traditional RAG.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/semantic-chunking/">Semantic Chunking</a></li>
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>

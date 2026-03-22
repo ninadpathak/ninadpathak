@@ -135,37 +135,51 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Bi-Encoder Architecture?</h1>
-      <p class="post-desc">A neural network architecture where two separate inputs (like a query and a document) are passed through an embedding model independently to create two distinct vectors that can be compared mathematically.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Bi-Encoder Architecture</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Bi-Encoder Architecture</h1>
+      <p class="lead">A neural network architecture where two separate inputs (like a query and a document) are passed through an embedding model independently to create two distinct vectors that can be compared mathematically.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>The foundation of modern semantic search is the Bi-Encoder. Unlike Cross-Encoders which process two texts together, a Bi-Encoder processes text in isolation. You pass a Wikipedia article through the model, and it outputs a vector. Months later, a user types a query; that query is passed through the same model to output a second vector. The system then calculates the cosine similarity between the two vectors. Because the document vectors can be pre-computed and stored offline in a database (like Pinecone or Milvus), Bi-Encoders can search through millions of documents in milliseconds. The trade-off is accuracy: because the query and document never 'see' each other during the neural network processing, deep contextual relationships are lost.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Offline Indexing:</strong> Millions of documents are individually passed through the Transformer model to generate dense vectors. These are stored in a vector index.</li>
   <li><strong>Online Querying:</strong> A user query is passed through the same Transformer model to generate a single vector.</li>
   <li><strong>Distance Calculation:</strong> The database performs Approximate Nearest Neighbor (ANN) search to find the document vectors with the highest cosine similarity to the query vector.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>The primary retrieval mechanism (Stage 1) in almost all RAG applications.</li>
           <li>Semantic deduplication of massive datasets.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/cross-encoder-reranking/">Cross-Encoder Reranking</a></li>
           <li><a href="/glossary/matryoshka-representation-learning/">Matryoshka Representation Learning (MRL)</a></li>

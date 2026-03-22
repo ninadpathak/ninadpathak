@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Hierarchical Navigable Small World (HNSW)?</h1>
-      <p class="post-desc">A graph-based algorithm that organizes vector embeddings into multiple layers, enabling sub-millisecond Approximate Nearest Neighbor (ANN) search across billions of data points.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Hierarchical Navigable Small World (HNSW)</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Hierarchical Navigable Small World (HNSW)</h1>
+      <p class="lead">A graph-based algorithm that organizes vector embeddings into multiple layers, enabling sub-millisecond Approximate Nearest Neighbor (ANN) search across billions of data points.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Performing an exact search (k-NN) on a vector database requires comparing the user's query against every single document vector in the system. This 'brute force' approach does not scale. Hierarchical Navigable Small World (HNSW) is the algorithmic engine that powers almost every modern vector database (Pinecone, Weaviate, Qdrant). It builds a multi-layered graph where the bottom layer contains every single vector connected to its nearest neighbors. The higher layers contain progressively fewer vectors with longer links—acting like an express highway system. When a query is made, HNSW starts at the sparse top layer, quickly zooms into the general neighborhood of the query, and then drops down to the dense bottom layer to find the exact nearest neighbors.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Graph Construction:</strong> Vectors are inserted into a multi-layered graph. Short connections reside at the bottom (local roads), and long connections reside at the top (highways).</li>
   <li><strong>Routing Phase:</strong> A search begins at the top layer. The algorithm traverses the graph to find the node closest to the query vector.</li>
@@ -160,13 +174,13 @@
   <li><strong>Local Search:</strong> At the bottom layer, a localized search occurs among the dense neighborhood to return the final 'Approximate' Nearest Neighbors.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Powering low-latency semantic search in production RAG systems.</li>
           <li>Real-time recommendation engines for e-commerce and streaming platforms.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/product-quantization/">Product Quantization (PQ)</a></li>
           <li><a href="/glossary/bi-encoder/">Bi-Encoder Architecture</a></li>

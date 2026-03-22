@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is ReAct Prompting?</h1>
-      <p class="post-desc">An agentic framework that strictly interleaves internal reasoning (Chain of Thought) with external actions (Tool Calling), allowing an LLM to solve complex, multi-step problems autonomously.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">ReAct Prompting</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">ReAct Prompting</h1>
+      <p class="lead">An agentic framework that strictly interleaves internal reasoning (Chain of Thought) with external actions (Tool Calling), allowing an LLM to solve complex, multi-step problems autonomously.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>If you ask an LLM a complex question that requires an external tool, it will often hallucinate an answer immediately or execute the wrong tool. The ReAct (Reason + Act) paradigm, introduced by researchers at Princeton and Google, forces the model into a strict cognitive loop. The model is prompted to first output a `Thought:` detailing its current understanding of the problem and what it needs to do next. Only then does it output an `Action:` (like querying a database). Once the database returns an `Observation:`, the model loops back to `Thought:`. This explicit externalization of the planning process drastically reduces hallucinations and gives developers a clear trace of the agent's logic.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         The agent is trapped in a loop until it outputs an answer:
 <ul>
   <li><strong>Thought:</strong> The agent assesses the current state. (e.g., 'I need to find the CEO's email. I should search the directory.')</li>
@@ -161,13 +175,13 @@
   <li><strong>Thought:</strong> The agent evaluates the observation. (e.g., 'I have the email. I can answer the user now.')</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Building autonomous web-research agents.</li>
           <li>Creating conversational interfaces for complex internal databases.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
           <li><a href="/glossary/tool-calling/">Tool Calling</a></li>

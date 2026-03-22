@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Plan-and-Solve Framework?</h1>
-      <p class="post-desc">An agentic architecture where a complex objective is broken down into a complete, sequential list of sub-tasks before any actual execution or tool calling begins.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Plan-and-Solve Framework</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Plan-and-Solve Framework</h1>
+      <p class="lead">An agentic architecture where a complex objective is broken down into a complete, sequential list of sub-tasks before any actual execution or tool calling begins.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>While ReAct prompting is great for dynamic problems, it is inherently short-sighted. The agent decides its next action based only on its immediate observation, which often leads to infinite loops or losing track of the overarching goal. The Plan-and-Solve architecture splits cognitive labor into two distinct phases. First, a 'Planner' model receives the user's objective and outputs a rigid, step-by-step plan (often a Directed Acyclic Graph of dependencies). Second, a 'Worker' model simply executes those steps sequentially, passing the output of step 1 as the input to step 2. This significantly reduces API costs and prevents the agent from spiraling off-topic.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Planning Phase:</strong> An LLM writes out a numbered list of sub-tasks required to fulfill the user's request.</li>
   <li><strong>Execution Loop:</strong> A separate prompt (or separate specialized agent) is given Task 1 and the necessary tools.</li>
@@ -160,13 +174,13 @@
   <li><strong>Completion:</strong> Once all tasks in the plan are crossed off, a final response is generated.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Automated software engineering where file creation, coding, and testing must happen in a specific order.</li>
           <li>Complex data analysis pipelines requiring multiple distinct API queries.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
           <li><a href="/glossary/react-prompting/">ReAct Prompting</a></li>

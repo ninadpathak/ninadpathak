@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Agentic Engineering?</h1>
-      <p class="post-desc">The discipline of designing, orchestrating, and evaluating systems where AI agents autonomously plan and execute multi-step workflows.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Agentic Engineering</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Agentic Engineering</h1>
+      <p class="lead">The discipline of designing, orchestrating, and evaluating systems where AI agents autonomously plan and execute multi-step workflows.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Agentic engineering represents a paradigm shift from using LLMs as single-turn answering machines to utilizing them as active participants in software architecture. Instead of relying on a single, massive prompt to output a final result, agentic engineering breaks complex objectives down into a Directed Acyclic Graph (DAG) of smaller tasks. The engineer's job shifts from writing code to building the orchestration layer—defining the agents, granting them specific tools (APIs, execution environments), setting up the communication protocols between them, and implementing robust error recovery and verification loops.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         An agentic system is typically built using the following components:
 <ul>
   <li><strong>The Router:</strong> A lightweight classifier that receives a user query and routes it to the most capable specialized agent.</li>
@@ -161,14 +175,14 @@
   <li><strong>Verification Loops:</strong> Before declaring a task complete, a separate 'Critic' or 'Verifier' agent reviews the output against the original constraints and sends it back if it fails.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Automating complex CI/CD pipelines and code reviews (e.g., SWE-agent).</li>
           <li>Building autonomous research assistants that can browse the web, synthesize data, and write reports.</li>
           <li>Creating dynamic customer support systems capable of executing database transactions safely.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/flow-engineering/">Flow Engineering</a></li>
           <li><a href="/glossary/tool-calling/">Tool Calling</a></li>

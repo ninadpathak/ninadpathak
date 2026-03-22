@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Cross-Encoder Reranking?</h1>
-      <p class="post-desc">An architecture where an embedding model processes both the user's query and a target document simultaneously through its attention layers to generate a highly precise relevance score.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Cross-Encoder Reranking</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Cross-Encoder Reranking</h1>
+      <p class="lead">An architecture where an embedding model processes both the user's query and a target document simultaneously through its attention layers to generate a highly precise relevance score.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>In standard vector search (Bi-Encoders), the user query and the document are embedded separately and compared using simple geometry (Cosine Similarity). While incredibly fast, this misses deep linguistic nuances because the words in the query never interact with the words in the document during processing. A Cross-Encoder passes the query and the document *together* into a Transformer model (e.g., `[CLS] Query [SEP] Document [SEP]`). The self-attention mechanism compares every word in the query against every word in the document simultaneously, producing a single, highly accurate similarity score. Because this is computationally expensive, it is used strictly as a 'Reranker'—re-evaluating only the top 50 results retrieved by the faster Bi-Encoder.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Stage 1 (Retrieval):</strong> A fast Bi-Encoder retrieves the top 100 potential documents from a vector database of millions.</li>
   <li><strong>Stage 2 (Concatenation):</strong> The system pairs the exact user query with each of the 100 documents.</li>
@@ -160,13 +174,13 @@
   <li><strong>Stage 4 (Reranking):</strong> The model outputs a float score (0 to 1) for each pair. The list is sorted, and the absolute top 5 results are sent to the LLM.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Fixing 'Top-K' retrieval failures in enterprise RAG pipelines.</li>
           <li>Improving search relevance for highly technical or domain-specific language where exact phrasing matters.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/bi-encoder/">Bi-Encoder Architecture</a></li>
           <li><a href="/glossary/semantic-chunking/">Semantic Chunking</a></li>

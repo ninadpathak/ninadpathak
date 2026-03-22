@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Product Quantization (PQ)?</h1>
-      <p class="post-desc">A highly efficient lossy compression algorithm used in vector databases to drastically reduce the memory footprint of embeddings while maintaining fast nearest-neighbor search capabilities.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Product Quantization (PQ)</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Product Quantization (PQ)</h1>
+      <p class="lead">A highly efficient lossy compression algorithm used in vector databases to drastically reduce the memory footprint of embeddings while maintaining fast nearest-neighbor search capabilities.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Storing 100 million dense vectors (like OpenAI's 1536-dimensional float32 arrays) requires hundreds of gigabytes of expensive RAM. Product Quantization (PQ) is the mathematical solution to this infrastructure bottleneck. Instead of storing the exact 1536-dimensional point in space, PQ splits the vector into smaller sub-vectors. It then runs a clustering algorithm (like k-means) on these sub-vectors to find a predefined set of 'centroids' (a codebook). Every vector is then replaced by the short ID of the centroid it is closest to. This reduces the memory footprint of a vector by up to 97%, allowing massive vector indexes to fit entirely in memory for millisecond retrieval times, at the cost of a slight drop in recall accuracy.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Vector Splitting:</strong> A high-dimensional vector is divided into equal-sized sub-vectors.</li>
   <li><strong>Codebook Generation:</strong> The system trains a k-means clustering model on the sub-vectors to create a 'codebook' of representative points.</li>
@@ -160,13 +174,13 @@
   <li><strong>Asymmetric Distance Computation (ADC):</strong> During a search, the uncompressed user query vector is compared against the compressed document vectors using a pre-calculated distance lookup table, ensuring rapid execution.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Scaling vector databases from millions to billions of documents without proportionally scaling RAM costs.</li>
           <li>Deploying semantic search capabilities on edge devices or mobile phones.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/matryoshka-representation-learning/">Matryoshka Representation Learning (MRL)</a></li>
           <li><a href="/glossary/hierarchical-navigable-small-world-hnsw/">Hierarchical Navigable Small World (HNSW)</a></li>

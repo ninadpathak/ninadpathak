@@ -135,37 +135,51 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Self-Querying Retrieval?</h1>
-      <p class="post-desc">An intelligent retrieval mechanism where an LLM parses a user's natural language query to automatically extract exact metadata filters (like dates or authors) while simultaneously performing a semantic vector search.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Self-Querying Retrieval</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Self-Querying Retrieval</h1>
+      <p class="lead">An intelligent retrieval mechanism where an LLM parses a user's natural language query to automatically extract exact metadata filters (like dates or authors) while simultaneously performing a semantic vector search.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Vector similarity is terrible at exact matches. If a user asks, 'Find me marketing reports from 2024 about AI,' a pure vector search might return a highly relevant AI report from 2022 because '2024' is just a minor token. Self-Querying Retrieval solves this by placing an LLM in front of the database. The LLM reads the user's intent and translates it into a structured query. It strips out 'from 2024' to build a deterministic metadata filter (e.g., `WHERE year = 2024`) and uses the remaining phrase ('marketing reports about AI') to perform the semantic vector search. The results must pass both the hard filter and the semantic similarity threshold.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Schema Injection:</strong> The LLM is provided with the exact schema of the vector database's metadata (e.g., `year: int`, `department: string`).</li>
   <li><strong>Parsing:</strong> The LLM analyzes the user prompt and extracts relevant constraints based on the schema.</li>
   <li><strong>Query Construction:</strong> The system builds a composite database query utilizing both the structured filters and the dense vector representation of the semantic intent.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>E-commerce search where users mix semantic desires ('a comfortable shoe') with hard constraints ('under $100', 'size 10').</li>
           <li>Enterprise document retrieval requiring strict access control and date-range filtering.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/tool-calling/">Tool Calling</a></li>
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>

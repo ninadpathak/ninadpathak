@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Hypothetical Document Embeddings (HyDE)?</h1>
-      <p class="post-desc">A zero-shot retrieval technique where a user's question is first answered by an LLM (hallucinating a hypothetical document), and that hallucinated answer is embedded and used to search the vector database.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Hypothetical Document Embeddings (HyDE)</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Hypothetical Document Embeddings (HyDE)</h1>
+      <p class="lead">A zero-shot retrieval technique where a user's question is first answered by an LLM (hallucinating a hypothetical document), and that hallucinated answer is embedded and used to search the vector database.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>In standard vector search, you are comparing a short, interrogative user query ('How do I configure Redis?') against long, declarative document chunks. These two text formats live in different parts of the embedding space, causing low similarity scores. Hypothetical Document Embeddings (HyDE) fixes this asymmetry. When a user asks a question, an LLM is prompted to write a fake, hypothetical answer based purely on its internal weights. This hallucinated document is mathematically much closer to the actual, factual documents stored in the vector database. The system embeds the fake document, retrieves the factual documents, and then generates the final, grounded response.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Generation:</strong> The user query is sent to an Instruct LLM.</li>
   <li><strong>Hallucination:</strong> The LLM generates a hypothetical, plausible-sounding (but potentially factually incorrect) document that answers the query.</li>
@@ -160,13 +174,13 @@
   <li><strong>Retrieval:</strong> The vector database retrieves the actual, factual documents that are semantically closest to the hallucinated text.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Searching dense technical documentation where the user's vocabulary doesn't match the documentation's vocabulary.</li>
           <li>Zero-shot domain retrieval where the embedding model hasn't been fine-tuned on the specific jargon.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/bi-encoder/">Bi-Encoder Architecture</a></li>
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>

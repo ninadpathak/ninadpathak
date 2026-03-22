@@ -135,37 +135,51 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Agentic Router?</h1>
-      <p class="post-desc">A lightweight classifier model or programmatic logic layer that analyzes an incoming user query and routes it to the specific AI agent, tool, or LLM best suited to handle it.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Agentic Router</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Agentic Router</h1>
+      <p class="lead">A lightweight classifier model or programmatic logic layer that analyzes an incoming user query and routes it to the specific AI agent, tool, or LLM best suited to handle it.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>In a Compound AI System, sending every user query to the most expensive, massive model (like GPT-4 or Claude 3.5 Sonnet) is an architectural failure that destroys unit economics. An Agentic Router sits at the very edge of the application. When a user sends a prompt, the Router evaluates its complexity and intent. If the user asks 'Reset my password', the router sends it to a fast, cheap 8B parameter model or a deterministic script. If the user asks 'Debug this Python memory leak', the router forwards it to the massive, expensive coding model. Routers ensure high system reliability while minimizing API costs and latency.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Intent Classification:</strong> The router uses a fast embedding model or a small LLM to classify the query into predefined categories.</li>
   <li><strong>Semantic Routing:</strong> If vector similarity is used, the query is routed based on its proximity to known problem clusters in the database.</li>
   <li><strong>Fallback Logic:</strong> If an invoked agent fails to solve the problem, the router catches the failure and dynamically re-routes the task to a stronger, slower agent.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Managing multi-agent customer support systems to protect margins.</li>
           <li>Building robust MoE (Mixture of Experts) style architectures at the application layer.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/compound-ai-systems/">Compound AI Systems</a></li>
           <li><a href="/glossary/semantic-caching/">Semantic Caching</a></li>

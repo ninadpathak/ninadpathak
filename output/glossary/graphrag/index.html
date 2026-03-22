@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is GraphRAG?</h1>
-      <p class="post-desc">An advanced retrieval technique that extracts entities and relationships from documents to build a Knowledge Graph, allowing an LLM to answer complex queries that span across multiple disparate documents.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">GraphRAG</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">GraphRAG</h1>
+      <p class="lead">An advanced retrieval technique that extracts entities and relationships from documents to build a Knowledge Graph, allowing an LLM to answer complex queries that span across multiple disparate documents.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Traditional RAG uses vector similarity to find specific text snippets. If a user asks a global question like, 'What are the common themes among all the product complaints last quarter?', standard RAG fails because no single text chunk contains that summary. GraphRAG (Knowledge Graph Retrieval-Augmented Generation), popularized by Microsoft Research, solves this by running an LLM over the entire dataset during the ingestion phase. It extracts 'entities' (e.g., Product X, Bug Y) and their 'relationships' (e.g., 'causes'), constructing a massive network graph. When the user queries the system, it traverses this graph to pull in connected nodes, enabling true multi-hop reasoning and holistic summarization.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Indexing Phase:</strong> An LLM processes the source documents and extracts structured nodes (Entities) and edges (Relationships).</li>
   <li><strong>Community Detection:</strong> The graph is clustered into hierarchical 'communities' based on closely related nodes.</li>
@@ -160,13 +174,13 @@
   <li><strong>Retrieval Phase:</strong> When a query is made, the system matches it to the relevant community summaries and graph nodes, passing a holistic, interconnected context to the final LLM.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Answering 'sensemaking' questions that require connecting dots across hundreds of documents.</li>
           <li>Enterprise search where relationships between employees, projects, and codebases are more important than exact keyword matches.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>
           <li><a href="/glossary/cross-encoder-reranking/">Cross-Encoder Reranking</a></li>

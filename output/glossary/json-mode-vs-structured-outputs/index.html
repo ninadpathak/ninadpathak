@@ -135,36 +135,50 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is JSON Mode vs. Structured Outputs?</h1>
-      <p class="post-desc">JSON Mode heavily biases an LLM to produce valid JSON syntax, whereas Structured Outputs mathematically constrain the model's token generation to guarantee the output perfectly matches a specific JSON Schema.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">JSON Mode vs. Structured Outputs</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">JSON Mode vs. Structured Outputs</h1>
+      <p class="lead">JSON Mode heavily biases an LLM to produce valid JSON syntax, whereas Structured Outputs mathematically constrain the model's token generation to guarantee the output perfectly matches a specific JSON Schema.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>For years, engineers struggled to parse LLM text into backend systems. The first solution was 'JSON Mode'—a system prompt flag that heavily weighted the model's probability distribution toward generating brackets and quotes. While it rarely produced invalid syntax, JSON Mode offered no guarantees about the keys and values inside the object; the model could still invent its own schema. 'Structured Outputs' (or Constrained Decoding) is a lower-level architectural upgrade. The inference engine converts the developer's exact JSON Schema into a formal grammar or state machine. During generation, any token that would violate the schema (e.g., trying to output a string when an integer is required) is mathematically masked out. Structured Outputs guarantee 100% schema adherence.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>JSON Mode:</strong> The developer begs the model in the prompt to return JSON. The model usually complies, but might inject conversational filler.</li>
   <li><strong>Structured Outputs:</strong> The developer provides a strict JSON Schema API object. The inference server compiles this schema into a Finite State Machine. The LLM is physically incapable of generating tokens outside the permitted grammar paths.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Extracting clean data tables from messy, unstructured PDF invoices.</li>
           <li>Feeding LLM decisions directly into rigid SQL databases or strongly-typed frontend components.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/tool-calling/">Tool Calling</a></li>
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>

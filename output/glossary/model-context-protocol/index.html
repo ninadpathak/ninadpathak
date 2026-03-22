@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Model Context Protocol (MCP)?</h1>
-      <p class="post-desc">An open-source, standardized protocol that acts as a universal API allowing AI models to securely connect to, read from, and interact with external data sources and tools.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Model Context Protocol (MCP)</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Model Context Protocol (MCP)</h1>
+      <p class="lead">An open-source, standardized protocol that acts as a universal API allowing AI models to securely connect to, read from, and interact with external data sources and tools.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Before MCP, developers had to write custom API integrations for every single tool they wanted an AI agent to use (e.g., GitHub, Slack, and Google Drive required three different codebases). Introduced by Anthropic in late 2024, the Model Context Protocol (MCP) establishes a universal standard—often described as the 'USB-C port for AI'. If a data source exposes an MCP Server, any MCP-compatible AI client (like Claude Desktop) can instantly discover the available data, read files, and execute tools without bespoke integration code.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         MCP operates on a client-server architecture:
 <ul>
   <li><strong>MCP Hosts:</strong> The application the user interacts with (e.g., Claude Desktop, an IDE).</li>
@@ -160,13 +174,13 @@
   <li><strong>MCP Servers:</strong> Lightweight programs connected to specific data sources (e.g., a Postgres database) that expose resources and tools via the standard protocol.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Giving local AI IDEs instant, read-only access to proprietary enterprise databases.</li>
           <li>Building universal enterprise search agents that can query Jira, Confluence, and GitHub simultaneously.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>
           <li><a href="/glossary/tool-calling/">Tool Calling</a></li>

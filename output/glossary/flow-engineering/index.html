@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Flow Engineering?</h1>
-      <p class="post-desc">The practice of designing deterministic, multi-step architectures where an LLM's output is iteratively refined, tested, and corrected through a predefined pipeline.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Flow Engineering</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Flow Engineering</h1>
+      <p class="lead">The practice of designing deterministic, multi-step architectures where an LLM's output is iteratively refined, tested, and corrected through a predefined pipeline.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Popularized by projects like AlphaCodium, flow engineering assumes that LLMs are relatively weak at zero-shot, complex reasoning but exceptionally strong when forced to iterate. Instead of writing one massive prompt hoping for the perfect output, flow engineers design a state machine. The LLM is forced through a sequence: generating a plan, writing draft code, running that code against a compiler, reading the error trace, and attempting a fix. By rigidly structuring this 'flow', developers can dramatically increase the reliability and performance of an underlying model without needing to upgrade to a more expensive, larger parameter model.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         A classic flow engineering pipeline for code generation looks like:
 <ul>
   <li><strong>Phase 1 (Reflection):</strong> The model reads the problem and outputs its understanding of the constraints.</li>
@@ -161,14 +175,14 @@
   <li><strong>Phase 4 (Execution & Critique):</strong> The code is run in a sandbox. A separate prompt passes the execution trace (success or stack trace) back to the model for refinement.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Competitive programming and automated software engineering.</li>
           <li>Complex data extraction where the schema must be validated iteratively.</li>
           <li>High-stakes content generation requiring rigorous fact-checking loops.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
           <li><a href="/glossary/test-time-compute/">Test-Time Compute (TTC)</a></li>

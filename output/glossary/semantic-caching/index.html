@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Semantic Caching?</h1>
-      <p class="post-desc">An optimization technique that stores previous LLM responses and uses vector similarity to return those cached answers for new queries that have the same semantic meaning, bypassing the LLM entirely.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Semantic Caching</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Semantic Caching</h1>
+      <p class="lead">An optimization technique that stores previous LLM responses and uses vector similarity to return those cached answers for new queries that have the same semantic meaning, bypassing the LLM entirely.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Traditional caching (like Redis) requires an exact string match to return a cached result. If a user asks 'How do I reset my password?' and later asks 'What is the process to change my password?', a traditional cache misses. Semantic caching solves this by embedding the incoming user query into a vector and performing a fast nearest-neighbor search against previously answered queries. If the similarity score exceeds a defined threshold, the system immediately returns the cached response. This drastically reduces API costs, cuts latency to milliseconds, and protects backend LLMs from repetitive load.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         A typical semantic cache pipeline:
 <ul>
   <li><strong>Embedding:</strong> The incoming user query is embedded into a dense vector using a fast, cheap model.</li>
@@ -161,13 +175,13 @@
   <li><strong>Cache Miss:</strong> If no match is found, the query goes to the expensive LLM, and the new response is cached.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Customer support chatbots dealing with high volumes of repetitive questions.</li>
           <li>Reducing API costs for enterprise RAG deployments.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/kv-cache-eviction/">KV Cache Eviction</a></li>
           <li><a href="/glossary/context-engineering/">Context Engineering</a></li>

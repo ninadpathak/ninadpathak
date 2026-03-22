@@ -135,117 +135,199 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<section class="section">
-  <div class="container">
-    <header class="section-header">
-      <h1 class="section-title">Glossary</h1>
-      <p class="section-desc">Technical definitions for AI memory, vector search, and agent architectures.</p>
-    </header>
 
-    <div class="glossary-list" style="margin-top: 2rem;">
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/context-engineering/" style="color: var(--text-1); text-decoration: none;">Context Engineering</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">The systematic discipline of designing, structuring, and managing the information provided to a Large Language Model (LLM) to maximize its reasoning capability and accuracy.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/agentic-engineering/" style="color: var(--text-1); text-decoration: none;">Agentic Engineering</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">The discipline of designing, orchestrating, and evaluating systems where AI agents autonomously plan and execute multi-step workflows.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/flow-engineering/" style="color: var(--text-1); text-decoration: none;">Flow Engineering</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">The practice of designing deterministic, multi-step architectures where an LLM's output is iteratively refined, tested, and corrected through a predefined pipeline.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/test-time-compute/" style="color: var(--text-1); text-decoration: none;">Test-Time Compute (TTC)</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">The practice of allocating more computational resources during inference (the 'test time') to allow an AI model to perform internal reasoning, planning, and self-correction before outputting an answer.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/model-context-protocol/" style="color: var(--text-1); text-decoration: none;">Model Context Protocol (MCP)</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An open-source, standardized protocol that acts as a universal API allowing AI models to securely connect to, read from, and interact with external data sources and tools.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/semantic-caching/" style="color: var(--text-1); text-decoration: none;">Semantic Caching</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An optimization technique that stores previous LLM responses and uses vector similarity to return those cached answers for new queries that have the same semantic meaning, bypassing the LLM entirely.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/matryoshka-representation-learning/" style="color: var(--text-1); text-decoration: none;">Matryoshka Representation Learning (MRL)</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A technique for training embedding models so that the most critical semantic information is front-loaded into the earliest dimensions of the vector, allowing the vector to be truncated to save space without catastrophic accuracy loss.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/cross-encoder-reranking/" style="color: var(--text-1); text-decoration: none;">Cross-Encoder Reranking</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An architecture where an embedding model processes both the user's query and a target document simultaneously through its attention layers to generate a highly precise relevance score.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/late-chunking/" style="color: var(--text-1); text-decoration: none;">Late Chunking</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A RAG optimization where an entire document is processed by the embedding model first to capture global context, and only then split into individual searchable chunks.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/graphrag/" style="color: var(--text-1); text-decoration: none;">GraphRAG</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An advanced retrieval technique that extracts entities and relationships from documents to build a Knowledge Graph, allowing an LLM to answer complex queries that span across multiple disparate documents.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/tool-calling/" style="color: var(--text-1); text-decoration: none;">Tool Calling</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A capability fine-tuned into modern LLMs that allows them to intelligently select an external tool and output the exact JSON arguments required to execute it.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/pagedattention/" style="color: var(--text-1); text-decoration: none;">PagedAttention</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An attention algorithm inspired by operating system memory paging that non-contiguously stores an LLM's KV cache, dramatically increasing the throughput of AI servers.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/kv-cache-eviction/" style="color: var(--text-1); text-decoration: none;">KV Cache Eviction</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">Algorithms that selectively delete less important tokens from an LLM's Key-Value cache during inference to prevent GPU memory exhaustion during long conversations.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/semantic-chunking/" style="color: var(--text-1); text-decoration: none;">Semantic Chunking</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A method of splitting text for vector databases that evaluates the embedding distance between sentences, ensuring that logically coherent thoughts are kept together in a single chunk.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/hypothetical-document-embeddings-hyde/" style="color: var(--text-1); text-decoration: none;">Hypothetical Document Embeddings (HyDE)</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A zero-shot retrieval technique where a user's question is first answered by an LLM (hallucinating a hypothetical document), and that hallucinated answer is embedded and used to search the vector database.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/self-querying-retrieval/" style="color: var(--text-1); text-decoration: none;">Self-Querying Retrieval</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An intelligent retrieval mechanism where an LLM parses a user's natural language query to automatically extract exact metadata filters (like dates or authors) while simultaneously performing a semantic vector search.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/bi-encoder/" style="color: var(--text-1); text-decoration: none;">Bi-Encoder Architecture</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A neural network architecture where two separate inputs (like a query and a document) are passed through an embedding model independently to create two distinct vectors that can be compared mathematically.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/product-quantization/" style="color: var(--text-1); text-decoration: none;">Product Quantization (PQ)</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A highly efficient lossy compression algorithm used in vector databases to drastically reduce the memory footprint of embeddings while maintaining fast nearest-neighbor search capabilities.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/hierarchical-navigable-small-world-hnsw/" style="color: var(--text-1); text-decoration: none;">Hierarchical Navigable Small World (HNSW)</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A graph-based algorithm that organizes vector embeddings into multiple layers, enabling sub-millisecond Approximate Nearest Neighbor (ANN) search across billions of data points.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/react-prompting/" style="color: var(--text-1); text-decoration: none;">ReAct Prompting</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An agentic framework that strictly interleaves internal reasoning (Chain of Thought) with external actions (Tool Calling), allowing an LLM to solve complex, multi-step problems autonomously.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/plan-and-solve-framework/" style="color: var(--text-1); text-decoration: none;">Plan-and-Solve Framework</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An agentic architecture where a complex objective is broken down into a complete, sequential list of sub-tasks before any actual execution or tool calling begins.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/speculative-decoding/" style="color: var(--text-1); text-decoration: none;">Speculative Decoding</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An inference optimization technique that accelerates text generation by using a small, fast 'draft' model to predict multiple upcoming tokens, which are then verified simultaneously by the main, larger model.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/agentic-router/" style="color: var(--text-1); text-decoration: none;">Agentic Router</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">A lightweight classifier model or programmatic logic layer that analyzes an incoming user query and routes it to the specific AI agent, tool, or LLM best suited to handle it.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/json-mode-vs-structured-outputs/" style="color: var(--text-1); text-decoration: none;">JSON Mode vs. Structured Outputs</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">JSON Mode heavily biases an LLM to produce valid JSON syntax, whereas Structured Outputs mathematically constrain the model's token generation to guarantee the output perfectly matches a specific JSON Schema.</p>
-      </div>
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/dspy/" style="color: var(--text-1); text-decoration: none;">DSPy</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">An open-source framework developed by Stanford that replaces manual prompt engineering with programmatic compilation, allowing developers to write declarative logic that automatically optimizes the prompts sent to an LLM.</p>
-      </div>
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Glossary</div>
+    <h1>AI Memory & Agent Glossary</h1>
+    <p class="lead">
+      Technical definitions for AI memory, vector search, and agent architectures. Built for engineers.
+    </p>
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    <div class="glossary-list">
+      <a href="/glossary/context-engineering/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Context Engineering</div>
+          <div class="blog-row-desc">The systematic discipline of designing, structuring, and managing the information provided to a Large Language Model (LLM) to maximize its reasoning capability and accuracy.</div>
+        </div>
+      </a>
+      <a href="/glossary/agentic-engineering/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Agentic Engineering</div>
+          <div class="blog-row-desc">The discipline of designing, orchestrating, and evaluating systems where AI agents autonomously plan and execute multi-step workflows.</div>
+        </div>
+      </a>
+      <a href="/glossary/flow-engineering/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Flow Engineering</div>
+          <div class="blog-row-desc">The practice of designing deterministic, multi-step architectures where an LLM's output is iteratively refined, tested, and corrected through a predefined pipeline.</div>
+        </div>
+      </a>
+      <a href="/glossary/test-time-compute/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Test-Time Compute (TTC)</div>
+          <div class="blog-row-desc">The practice of allocating more computational resources during inference (the 'test time') to allow an AI model to perform internal reasoning, planning, and self-correction before outputting an answer.</div>
+        </div>
+      </a>
+      <a href="/glossary/model-context-protocol/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Model Context Protocol (MCP)</div>
+          <div class="blog-row-desc">An open-source, standardized protocol that acts as a universal API allowing AI models to securely connect to, read from, and interact with external data sources and tools.</div>
+        </div>
+      </a>
+      <a href="/glossary/semantic-caching/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Semantic Caching</div>
+          <div class="blog-row-desc">An optimization technique that stores previous LLM responses and uses vector similarity to return those cached answers for new queries that have the same semantic meaning, bypassing the LLM entirely.</div>
+        </div>
+      </a>
+      <a href="/glossary/matryoshka-representation-learning/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Matryoshka Representation Learning (MRL)</div>
+          <div class="blog-row-desc">A technique for training embedding models so that the most critical semantic information is front-loaded into the earliest dimensions of the vector, allowing the vector to be truncated to save space without catastrophic accuracy loss.</div>
+        </div>
+      </a>
+      <a href="/glossary/cross-encoder-reranking/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Cross-Encoder Reranking</div>
+          <div class="blog-row-desc">An architecture where an embedding model processes both the user's query and a target document simultaneously through its attention layers to generate a highly precise relevance score.</div>
+        </div>
+      </a>
+      <a href="/glossary/late-chunking/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Late Chunking</div>
+          <div class="blog-row-desc">A RAG optimization where an entire document is processed by the embedding model first to capture global context, and only then split into individual searchable chunks.</div>
+        </div>
+      </a>
+      <a href="/glossary/graphrag/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">GraphRAG</div>
+          <div class="blog-row-desc">An advanced retrieval technique that extracts entities and relationships from documents to build a Knowledge Graph, allowing an LLM to answer complex queries that span across multiple disparate documents.</div>
+        </div>
+      </a>
+      <a href="/glossary/tool-calling/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Tool Calling</div>
+          <div class="blog-row-desc">A capability fine-tuned into modern LLMs that allows them to intelligently select an external tool and output the exact JSON arguments required to execute it.</div>
+        </div>
+      </a>
+      <a href="/glossary/pagedattention/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">PagedAttention</div>
+          <div class="blog-row-desc">An attention algorithm inspired by operating system memory paging that non-contiguously stores an LLM's KV cache, dramatically increasing the throughput of AI servers.</div>
+        </div>
+      </a>
+      <a href="/glossary/kv-cache-eviction/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">KV Cache Eviction</div>
+          <div class="blog-row-desc">Algorithms that selectively delete less important tokens from an LLM's Key-Value cache during inference to prevent GPU memory exhaustion during long conversations.</div>
+        </div>
+      </a>
+      <a href="/glossary/semantic-chunking/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Semantic Chunking</div>
+          <div class="blog-row-desc">A method of splitting text for vector databases that evaluates the embedding distance between sentences, ensuring that logically coherent thoughts are kept together in a single chunk.</div>
+        </div>
+      </a>
+      <a href="/glossary/hypothetical-document-embeddings-hyde/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Hypothetical Document Embeddings (HyDE)</div>
+          <div class="blog-row-desc">A zero-shot retrieval technique where a user's question is first answered by an LLM (hallucinating a hypothetical document), and that hallucinated answer is embedded and used to search the vector database.</div>
+        </div>
+      </a>
+      <a href="/glossary/self-querying-retrieval/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Self-Querying Retrieval</div>
+          <div class="blog-row-desc">An intelligent retrieval mechanism where an LLM parses a user's natural language query to automatically extract exact metadata filters (like dates or authors) while simultaneously performing a semantic vector search.</div>
+        </div>
+      </a>
+      <a href="/glossary/bi-encoder/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Bi-Encoder Architecture</div>
+          <div class="blog-row-desc">A neural network architecture where two separate inputs (like a query and a document) are passed through an embedding model independently to create two distinct vectors that can be compared mathematically.</div>
+        </div>
+      </a>
+      <a href="/glossary/product-quantization/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Product Quantization (PQ)</div>
+          <div class="blog-row-desc">A highly efficient lossy compression algorithm used in vector databases to drastically reduce the memory footprint of embeddings while maintaining fast nearest-neighbor search capabilities.</div>
+        </div>
+      </a>
+      <a href="/glossary/hierarchical-navigable-small-world-hnsw/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Hierarchical Navigable Small World (HNSW)</div>
+          <div class="blog-row-desc">A graph-based algorithm that organizes vector embeddings into multiple layers, enabling sub-millisecond Approximate Nearest Neighbor (ANN) search across billions of data points.</div>
+        </div>
+      </a>
+      <a href="/glossary/react-prompting/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">ReAct Prompting</div>
+          <div class="blog-row-desc">An agentic framework that strictly interleaves internal reasoning (Chain of Thought) with external actions (Tool Calling), allowing an LLM to solve complex, multi-step problems autonomously.</div>
+        </div>
+      </a>
+      <a href="/glossary/plan-and-solve-framework/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Plan-and-Solve Framework</div>
+          <div class="blog-row-desc">An agentic architecture where a complex objective is broken down into a complete, sequential list of sub-tasks before any actual execution or tool calling begins.</div>
+        </div>
+      </a>
+      <a href="/glossary/speculative-decoding/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Speculative Decoding</div>
+          <div class="blog-row-desc">An inference optimization technique that accelerates text generation by using a small, fast 'draft' model to predict multiple upcoming tokens, which are then verified simultaneously by the main, larger model.</div>
+        </div>
+      </a>
+      <a href="/glossary/agentic-router/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">Agentic Router</div>
+          <div class="blog-row-desc">A lightweight classifier model or programmatic logic layer that analyzes an incoming user query and routes it to the specific AI agent, tool, or LLM best suited to handle it.</div>
+        </div>
+      </a>
+      <a href="/glossary/json-mode-vs-structured-outputs/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">JSON Mode vs. Structured Outputs</div>
+          <div class="blog-row-desc">JSON Mode heavily biases an LLM to produce valid JSON syntax, whereas Structured Outputs mathematically constrain the model's token generation to guarantee the output perfectly matches a specific JSON Schema.</div>
+        </div>
+      </a>
+      <a href="/glossary/dspy/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">DSPy</div>
+          <div class="blog-row-desc">An open-source framework developed by Stanford that replaces manual prompt engineering with programmatic compilation, allowing developers to write declarative logic that automatically optimizes the prompts sent to an LLM.</div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
+
 </main>
 
 <div class="booking-modal" id="bookingModal" aria-hidden="true">

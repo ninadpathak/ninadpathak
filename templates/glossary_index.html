@@ -4,21 +4,31 @@
 {% block description %}A comprehensive, highly technical glossary of AI memory, RAG, and agentic framework terminology.{% endblock %}
 
 {% block content %}
-<section class="section">
-  <div class="container">
-    <header class="section-header">
-      <h1 class="section-title">Glossary</h1>
-      <p class="section-desc">Technical definitions for AI memory, vector search, and agent architectures.</p>
-    </header>
 
-    <div class="glossary-list" style="margin-top: 2rem;">
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Glossary</div>
+    <h1>AI Memory & Agent Glossary</h1>
+    <p class="lead">
+      Technical definitions for AI memory, vector search, and agent architectures. Built for engineers.
+    </p>
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    <div class="glossary-list">
       {% for term in terms %}
-      <div class="post-row" style="display: block;">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.25rem;"><a href="/glossary/{{ term.slug }}/" style="color: var(--text-1); text-decoration: none;">{{ term.name }}</a></h3>
-        <p style="margin: 0; color: var(--text-2); font-size: 0.95rem;">{{ term.short_definition }}</p>
-      </div>
+      <a href="/glossary/{{ term.slug }}/" class="blog-row" style="text-decoration: none;">
+        <div class="blog-row-date">Definition</div>
+        <div>
+          <div class="blog-row-title">{{ term.name }}</div>
+          <div class="blog-row-desc">{{ term.short_definition }}</div>
+        </div>
+      </a>
       {% endfor %}
     </div>
   </div>
 </section>
+
 {% endblock %}

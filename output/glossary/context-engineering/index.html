@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Context Engineering?</h1>
-      <p class="post-desc">The systematic discipline of designing, structuring, and managing the information provided to a Large Language Model (LLM) to maximize its reasoning capability and accuracy.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Context Engineering</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Context Engineering</h1>
+      <p class="lead">The systematic discipline of designing, structuring, and managing the information provided to a Large Language Model (LLM) to maximize its reasoning capability and accuracy.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Moving beyond 'prompt engineering' (which focuses on wording and instruction), context engineering focuses on the architecture of the data environment itself. As context windows have grown to support over a million tokens, the bottleneck is no longer how much an LLM can read, but how it pays attention to what it reads. Context engineering involves designing the retrieval pipelines (RAG), managing state/memory over multi-turn conversations, preventing 'context poisoning' (where irrelevant data derails reasoning), and structuring inputs (like XML or JSON) so the model can consistently parse high-signal data without getting 'lost in the middle'.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         Context engineers typically build a pipeline that looks like this:
 <ul>
   <li><strong>Retrieval Strategy:</strong> Selecting the exact snippets of code, docs, or database records needed for the task.</li>
@@ -161,14 +175,14 @@
   <li><strong>Assembly:</strong> Ordering the information based on the specific LLM's attention bias (e.g., placing the most critical instructions at the very beginning or the very end of the prompt).</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Building production-grade RAG applications that require near-zero hallucination rates.</li>
           <li>Designing multi-agent systems where agents must pass structured context to one another.</li>
           <li>Injecting large, messy codebases into an LLM while maintaining high instructional adherence.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
           <li><a href="/glossary/semantic-caching/">Semantic Caching</a></li>

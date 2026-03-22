@@ -135,24 +135,38 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is Semantic Chunking?</h1>
-      <p class="post-desc">A method of splitting text for vector databases that evaluates the embedding distance between sentences, ensuring that logically coherent thoughts are kept together in a single chunk.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Semantic Chunking</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">Semantic Chunking</h1>
+      <p class="lead">A method of splitting text for vector databases that evaluates the embedding distance between sentences, ensuring that logically coherent thoughts are kept together in a single chunk.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>Traditional 'naive' chunking splits documents by an arbitrary character count (e.g., 500 tokens). This often slices a complex paragraph in half, destroying the context and guaranteeing poor vector retrieval. Semantic chunking solves this by using a lightweight embedding model to measure the 'distance' between consecutive sentences. If the distance suddenly spikes, the system recognizes a shift in topic and draws the chunk boundary there. This results in dynamically sized chunks that map perfectly to the original author's logical boundaries, drastically reducing hallucinations during the generation phase of RAG.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Sentence Splitting:</strong> The document is broken down into individual sentences.</li>
   <li><strong>Embedding:</strong> Each sentence is individually embedded into a vector.</li>
@@ -160,13 +174,13 @@
   <li><strong>Boundary Creation:</strong> When the distance between two sentences exceeds a predefined threshold (e.g., 95th percentile), a chunk boundary is placed between them.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Processing highly unstructured documents like transcripts or chat logs where formatting cues are missing.</li>
           <li>Improving recall accuracy in RAG systems built on dense academic papers.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/late-chunking/">Late Chunking</a></li>
           <li><a href="/glossary/cross-encoder-reranking/">Cross-Encoder Reranking</a></li>

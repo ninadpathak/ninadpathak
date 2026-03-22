@@ -135,37 +135,51 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-<article class="post">
-  <div class="container prose-container">
-    <header class="post-header">
-      <div class="post-meta">
-        <a href="/glossary/" class="tag">Glossary</a>
-        <span class="post-meta-sep">•</span>
-        <time datetime="2026-03-22">Mar 22, 2026</time>
-      </div>
-      <h1 class="post-title">What is PagedAttention?</h1>
-      <p class="post-desc">An attention algorithm inspired by operating system memory paging that non-contiguously stores an LLM's KV cache, dramatically increasing the throughput of AI servers.</p>
-    </header>
 
-    <div class="post-body" style="padding-bottom: 4.5rem;">
-      <div class="post-content">
-        <h2>Definition</h2>
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">PagedAttention</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/glossary/" class="back-link">← All glossary terms</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 22, 2026</span>
+      </div>
+      <h1 class="post-title">PagedAttention</h1>
+      <p class="lead">An attention algorithm inspired by operating system memory paging that non-contiguously stores an LLM's KV cache, dramatically increasing the throughput of AI servers.</p>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <div class="post-content glossary-content">
         <p>During LLM inference, the model stores the state of previously processed tokens in the Key-Value (KV) cache to avoid recalculating them. Historically, AI serving frameworks allocated a large, contiguous block of GPU memory for the maximum possible length of the request. Because request lengths are unpredictable, this led to massive internal memory fragmentation and wasted capacity (often up to 60% of GPU memory sitting idle). PagedAttention, introduced by the vLLM project, solves this by breaking the KV cache into fixed-size 'blocks' or 'pages' that can be stored non-contiguously anywhere in the GPU memory. This allows the server to dynamically allocate exact memory as the sequence grows, sharing blocks across multiple concurrent requests.</p>
         
-        <h2>How It Works</h2>
+        <h3>How It Works</h3>
         <ul>
   <li><strong>Virtual Memory:</strong> Like an OS, PagedAttention uses a block table to map virtual logical blocks of tokens to physical blocks in the GPU memory.</li>
   <li><strong>Dynamic Allocation:</strong> Memory is allocated on-demand, block by block, rather than pre-allocating the theoretical maximum.</li>
   <li><strong>Copy-on-Write:</strong> When using techniques like parallel sampling or beam search, multiple requests can share the exact same physical memory blocks for their common prompt prefixes, only allocating new blocks when the generated text diverges.</li>
 </ul>
 
-        <h2>Common Use Cases</h2>
+        <h3>Common Use Cases</h3>
         <ul>
           <li>Maximizing throughput and reducing costs for high-traffic LLM inference APIs.</li>
           <li>Efficiently serving complex agentic workflows that require multiple parallel completions from the same base prompt.</li>
         </ul>
 
-        <h2>Related Terms</h2>
+        <h3>Related Terms</h3>
         <ul class="related-terms-list">
           <li><a href="/glossary/kv-cache-eviction/">KV Cache Eviction</a></li>
           <li><a href="/glossary/test-time-compute/">Test-Time Compute (TTC)</a></li>
