@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>How Anthropic's Contextual Retrieval Changes RAG Architecture</title>
+      <link>https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/</link>
+      <description>Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49% with contextual embeddings plus contextual BM25. I walk through the mechanism, the benchmark, and the part of the RAG pipeline it changes.</description>
+      <pubDate>Mar 26, 2026</pubDate>
+    </item>
+    <item>
       <title>Token Counting Isn't Optional: A Practical Guide to LLM Cost Control</title>
       <link>https://ninadpathak.com/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/</link>
       <description>I explain the mechanics of LLM tokenization, why JSON burns your API budget, and how to architect systems for strict token efficiency.</description>

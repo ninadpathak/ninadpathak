@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Anthropic's Contextual Retrieval Changes RAG Architecture | Ninad Pathak</title>
+  <meta name="description" content="Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49% with contextual embeddings plus contextual BM25. I walk through the mechanism, the benchmark, and the part of the RAG pipeline it changes.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="How Anthropic's Contextual Retrieval Changes RAG Architecture">
+  <meta property="og:description" content="Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49% with contextual embeddings plus contextual BM25. I walk through the mechanism, the benchmark, and the part of the RAG pipeline it changes.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "How Anthropic's Contextual Retrieval Changes RAG Architecture",
+  "description": "Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49% with contextual embeddings plus contextual BM25. I walk through the mechanism, the benchmark, and the part of the RAG pipeline it changes.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-26",
+  "dateModified": "2026-03-26",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How Anthropic's Contextual Retrieval Changes RAG Architecture",
+      "item": "https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">How Anthropic's Contextual Retrieval Changes RAG Architecture</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 26, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">9 min read</span>
+      </div>
+      <h1 class="post-title">How Anthropic's Contextual Retrieval Changes RAG Architecture</h1>
+      <p class="lead">Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49% with contextual embeddings plus contextual BM25. I walk through the mechanism, the benchmark, and the part of the RAG pipeline it changes.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">infrastructure</span>
+        <span class="tag">vector-search</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-chunk-is-usually-the-problem">The chunk is usually the problem</a></li>
+<li><a href="#anthropics-move-is-simple">Anthropic's move is simple</a></li>
+<li><a href="#contextual-retrieval-fixes-a-real-retrieval-failure">Contextual Retrieval fixes a real retrieval failure</a></li>
+<li><a href="#the-benchmark-is-three-benchmark-claims">The benchmark is three benchmark claims</a></li>
+<li><a href="#the-interesting-change-happens-before-query-time">The interesting change happens before query time</a></li>
+<li><a href="#prompt-caching-is-what-makes-the-idea-practical">Prompt caching is what makes the idea practical</a></li>
+<li><a href="#code-looks-like-the-cleanest-use-case">Code looks like the cleanest use case</a></li>
+<li><a href="#small-corpora-do-not-need-this-much-machinery">Small corpora do not need this much machinery</a></li>
+<li><a href="#reranking-still-matters">Reranking still matters</a></li>
+<li><a href="#how-i-would-use-it">How I would use it</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Anthropic took a chunk like <code>"The company's revenue grew by 3% over the previous quarter."</code>, asked Claude to explain that chunk using the full document, then prepended the explanation before indexing it. That one step cut top-20 retrieval failure by <strong>49%</strong> when Anthropic combined contextual embeddings with contextual BM25, according to <a href="https://www.anthropic.com/engineering/contextual-retrieval">their writeup</a>.</p>
+<p>I like that result because the mechanism is clean. No new retrieval model. No weird ranking trick. No attempt to hide the failure behind a bigger context window. Anthropic changed the chunk before retrieval ever started.</p>
+<p>That is the part I keep coming back to. Retrieval work usually piles up at query time. Teams swap embedding models, add rerankers, widen top-K, and keep pushing on the same end of the system. Anthropic pushed on the other end. I think that is why the idea matters.</p>
+<h2 id="the-chunk-is-usually-the-problem">The chunk is usually the problem</h2>
+<p>A raw chunk carries less meaning than the document it came from. That sounds obvious. I still see people treat the chunk as if it were a clean unit of knowledge.</p>
+<p>It rarely is.</p>
+<p>A sentence about revenue growth loses the company and quarter once I split it away from the filing. A setup step loses the product surface it configures. A function body loses the file and module that tell me why it exists. A paragraph about retries loses the service boundary that makes it relevant.</p>
+<p>Retrieval quality drops right there.</p>
+<p>I wrote about context decay in <a href="/blog/llm-context-windows-explained/">LLM Context Windows Explained</a>. The same idea shows up earlier in the pipeline. Small chunks improve recall because they are easier to match. Small chunks also strip away the frame that made the text identifiable.</p>
+<p>That tradeoff sits in the middle of production RAG.</p>
+<h2 id="anthropics-move-is-simple">Anthropic's move is simple</h2>
+<p>The standard pipeline looks like this:</p>
+<ol>
+<li>split the document</li>
+<li>embed the chunk</li>
+<li>store the chunk in a vector index</li>
+<li>optionally store it in BM25</li>
+<li>retrieve at query time</li>
+<li>rerank or generate</li>
+</ol>
+<p>Anthropic inserts one extra step after chunking.</p>
+<p>Claude sees:</p>
+<ul>
+<li>the full document</li>
+<li>one chunk from that document</li>
+</ul>
+<p>Claude then writes a short explanation of what the chunk is about in the context of the full document. Anthropic says that explanation is usually <strong>50 to 100 tokens</strong>. That explanation gets prepended to the raw chunk. The enriched text goes into the embedding model and the BM25 index.</p>
+<p>Anthropic calls the two retrieval pieces <strong>Contextual Embeddings</strong> and <strong>Contextual BM25</strong>.</p>
+<p>That is the whole trick.</p>
+<p>I like techniques like this because they are easy to reason about. The indexed chunk becomes more legible. Semantic search gets more context. Lexical search gets more terms. A reranker, when I add one, starts from a stronger candidate pool.</p>
+<h2 id="contextual-retrieval-fixes-a-real-retrieval-failure">Contextual Retrieval fixes a real retrieval failure</h2>
+<p>Embedding search and BM25 fail in different ways.</p>
+<p>Embeddings handle paraphrase well. They struggle when a chunk needs document-level framing before the semantic representation becomes useful. BM25 handles exact terms well. It struggles when the query and the text use different words for the same thing.</p>
+<p>Contextual Retrieval helps both.</p>
+<p>The prepended explanation gives embeddings more signal. It gives BM25 more exact vocabulary. A chunk about quarterly growth can now carry words like company name, quarter, filing type, or section purpose even when the original text did not contain them.</p>
+<p>That is why I do not read this as a replacement for hybrid search. I read it as a way to give hybrid search better input.</p>
+<p>My <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/">reranking piece</a> makes the case that vector similarity is a decent filter and a weak ranker. Contextual Retrieval fixes something earlier. It makes the filter more likely to surface the right chunk at all.</p>
+<h2 id="the-benchmark-is-three-benchmark-claims">The benchmark is three benchmark claims</h2>
+<p>Anthropic's headline number gets quoted a lot. The full result is more useful than the headline.</p>
+<p>According to the <a href="https://www.anthropic.com/engineering/contextual-retrieval">official post</a>:</p>
+<ul>
+<li>Contextual Embeddings cut top-20 retrieval failure from <strong>5.7%</strong> to <strong>3.7%</strong></li>
+<li>Contextual Embeddings plus Contextual BM25 cut it from <strong>5.7%</strong> to <strong>2.9%</strong></li>
+<li>Adding reranking on top cut it from <strong>5.7%</strong> to <strong>1.9%</strong></li>
+</ul>
+<p>I read those as three separate claims:</p>
+<ul>
+<li><strong>35%</strong> lower failure from contextual embeddings alone</li>
+<li><strong>49%</strong> lower failure once contextual BM25 joins the stack</li>
+<li><strong>67%</strong> lower failure once reranking joins too</li>
+</ul>
+<p>I trust that breakdown more than a single aggregate number because it shows where the lift comes from. Contextualization helps. Hybrid retrieval still helps. Reranking still helps. Anthropic did not publish a benchmark saying one clever chunking trick made the rest of the stack irrelevant.</p>
+<p>Anthropic also shares details that matter:</p>
+<ul>
+<li>the headline metric is <strong>1 - recall@20</strong></li>
+<li>the appendix includes <strong>@10</strong> and <strong>@5</strong></li>
+<li><strong>top-20 chunks</strong> worked better than top-10 and top-5 in Anthropic's tests</li>
+<li>reranking started from <strong>top 150</strong> candidates and reduced them to <strong>top 20</strong></li>
+<li>the datasets included <strong>codebases, fiction, ArXiv papers, and science papers</strong></li>
+</ul>
+<p>The full breakdown lives in <a href="https://assets.anthropic.com/m/1632cded0a125333/original/Contextual-Retrieval-Appendix-2.pdf">Appendix II</a>.</p>
+<p>I trust the result as strong evidence. I would still run my own evals. Retrieval depends heavily on the corpus. Code, support content, legal docs, and internal knowledge bases all fail differently.</p>
+<h2 id="the-interesting-change-happens-before-query-time">The interesting change happens before query time</h2>
+<p>The reason I keep dwelling on this technique is simple: it moves work upstream.</p>
+<p>Most RAG conversations revolve around the live request path. That makes sense. Query-time mistakes are visible. People talk about embeddings, rerankers, top-K, prompt assembly, and model choice because those components touch the final answer directly.</p>
+<p>I care about the index because bad candidate generation poisons everything after it.</p>
+<p>A reranker cannot rescue a chunk that never made it into the candidate pool. The model cannot cite a paragraph it never saw. A perfect answerer on top of a weak index still gives weak answers.</p>
+<p>Contextual Retrieval changes that part of the system. The chunk is no longer just a slice of source text. It becomes an enriched retrieval artifact.</p>
+<p>That changes the questions I ask:</p>
+<ul>
+<li>which corpora lose the most meaning during chunking?</li>
+<li>which metadata fields are missing often enough that I should recover them in the contextualizer?</li>
+<li>should the final model see the raw chunk, the contextualized chunk, or both?</li>
+<li>how much ingestion cost buys me a real lift in retrieval quality?</li>
+</ul>
+<p>Those are indexing questions. I think that is the real contribution here.</p>
+<h2 id="prompt-caching-is-what-makes-the-idea-practical">Prompt caching is what makes the idea practical</h2>
+<p>Contextual Retrieval would get expensive fast without prompt caching.</p>
+<p>The preprocessing job repeats the same pattern over and over:</p>
+<ul>
+<li>full document stays fixed</li>
+<li>target chunk changes</li>
+</ul>
+<p>Anthropic points directly to <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching">prompt caching</a> as the practical answer. That tracks with how I think about token costs already. Static prefixes should be reused. Anthropic applies that rule during ingestion instead of generation.</p>
+<p>I covered the same cost logic in <a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/">Prompt Caching</a>. Anthropic's docs say prompt caching can cut latency by <strong>more than 2x</strong> and reduce costs by <strong>up to 90%</strong> in the right setup. Those numbers matter here because contextualization cost lands up front. Query-time retrieval does not change much unless I add reranking.</p>
+<p>The ingestion cost still needs discipline. Every chunk gets longer. Embedding cost rises. BM25 index size rises. Storage rises. I would only pay that bill where retrieval misses are expensive enough to justify it.</p>
+<h2 id="code-looks-like-the-cleanest-use-case">Code looks like the cleanest use case</h2>
+<p>Anthropic includes codebases in the evaluation set. I think code is where this idea looks strongest.</p>
+<p>Code chunks lose identity quickly. A helper function name tells me very little on its own. A short logging block can look semantically close to similar code across several services. A line about retries might belong to the exact module I want or to another subsystem that happens to use the same pattern.</p>
+<p>Contextualization puts some of that identity back:</p>
+<ul>
+<li>file role</li>
+<li>module purpose</li>
+<li>service boundary</li>
+<li>implementation intent</li>
+</ul>
+<p>Technical docs show the same pattern.</p>
+<ul>
+<li>setup steps lose the product surface they configure</li>
+<li>examples lose the endpoint or SDK section they came from</li>
+<li>troubleshooting notes lose the error family they answer</li>
+<li>migration instructions lose the version boundary that makes them useful</li>
+</ul>
+<p>Anthropic's codebase benchmark in the cookbook got my attention for that reason. Code retrieval punishes vague chunks quickly.</p>
+<h2 id="small-corpora-do-not-need-this-much-machinery">Small corpora do not need this much machinery</h2>
+<p>Anthropic makes one point I strongly agree with: corpora under <strong>200,000 tokens</strong> may not need RAG at all. I would often use long context there and skip the indexing complexity.</p>
+<p>I would also skip Contextual Retrieval when:</p>
+<ul>
+<li>chunks are already self-contained</li>
+<li>the corpus changes constantly</li>
+<li>metadata already carries most of the missing frame</li>
+<li>ingestion cost matters more than small recall gains</li>
+</ul>
+<p>Metadata is the first thing I would check before adding a contextualizer. A solid chunk schema with titles, section names, repo paths, service names, and version tags may already recover enough context. Contextual Retrieval earns its keep when the raw chunk still feels anonymous after basic metadata work.</p>
+<h2 id="reranking-still-matters">Reranking still matters</h2>
+<p>Reranking solves a different problem.</p>
+<p>Contextual Retrieval changes what I store. Reranking changes how I sort.</p>
+<p>I have seen both failure modes.</p>
+<p>One system retrieves the right answer somewhere in the top 100 and buries it under cleaner-looking but weaker chunks. A reranker helps there.</p>
+<p>Another system never surfaces the right chunk at all because the original chunk lost too much identity when I split it out of the source document. Contextual Retrieval helps there.</p>
+<p>Anthropic's results show the combination works well, which is exactly what I would expect. Better chunk representation and better ranking attack different parts of retrieval.</p>
+<h2 id="how-i-would-use-it">How I would use it</h2>
+<p>I would reach for Contextual Retrieval when chunk identity carries a lot of the retrieval burden.</p>
+<p>That usually means:</p>
+<ul>
+<li>codebases</li>
+<li>API docs</li>
+<li>legal or financial corpora</li>
+<li>product docs with repetitive local phrasing</li>
+<li>internal knowledge bases full of short, under-specified paragraphs</li>
+</ul>
+<p>My rollout would stay simple:</p>
+<ol>
+<li>keep the raw chunk and metadata</li>
+<li>generate contextualized chunks at ingestion time</li>
+<li>index the contextualized text into embeddings and BM25</li>
+<li>retrieve a wider candidate pool</li>
+<li>add reranking when evals justify it</li>
+</ol>
+<p>I would also test generation three ways:</p>
+<ul>
+<li>raw chunk only</li>
+<li>contextualized chunk only</li>
+<li>contextualized header plus raw body</li>
+</ul>
+<p>The best retrieval artifact is not always the best generation artifact. A chunk can retrieve beautifully and still carry a synthetic preface that I do not want the answer model to trust too much.</p>
+<p>Plenty of RAG work feels like tuning around a weak core. I think Contextual Retrieval improves the core. That is why I expect it to stick.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/" class="related-card">
+        <div class="related-card-date">2026-03-22</div>
+        <div class="related-card-title">Token Counting Isn't Optional: A Practical Guide to LLM Cost Control</div>
+      </a>
+      <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/" class="related-card">
+        <div class="related-card-date">2026-03-21</div>
+        <div class="related-card-title">Reranking in RAG: Why Your Top-k Results Are Probably Wrong</div>
+      </a>
+      <a href="/blog/state-of-open-source-memory-2026/" class="related-card">
+        <div class="related-card-date">2026-03-15</div>
+        <div class="related-card-title">The State of Open Source AI Memory in 2026: Beyond the Context Window Myth</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/" class="footer-link">How Anthropic's Contextual Retrieval Changes RAG Architecture</a>
+          <a href="/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/" class="footer-link">Token Counting Isn't Optional: A Practical Guide to LLM Cost Control</a>
+          <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/" class="footer-link">Reranking in RAG: Why Your Top-k Results Are Probably Wrong</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>
