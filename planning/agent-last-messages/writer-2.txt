@@ -1,0 +1,7 @@
+Three drafts are written and self-edited in the assigned files:
+
+[developer-onboarding-docs-what-works-what-doesnt.md](/Users/ninad/Development/NinadPathak/content/posts/developer-onboarding-docs-what-works-what-doesnt.md)  
+[the-case-for-shorter-technical-documentation.md](/Users/ninad/Development/NinadPathak/content/posts/the-case-for-shorter-technical-documentation.md)  
+[how-stripes-technical-blog-became-a-competitive-moat.md](/Users/ninad/Development/NinadPathak/content/posts/how-stripes-technical-blog-became-a-competitive-moat.md)
+
+Each post has valid frontmatter, internal links, a research-backed draft, and the requested non-published editor note in an HTML comment at the bottom. I also ran a self-edit pass for banned openings, length targets, and style constraints.

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Write a Technical Tutorial That Actually Teaches | Ninad Pathak</title>
+  <meta name="description" content="I explain how I structure technical tutorials so readers finish with a working result, fewer hidden assumptions, and less time wasted on broken examples.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="How to Write a Technical Tutorial That Actually Teaches">
+  <meta property="og:description" content="I explain how I structure technical tutorials so readers finish with a working result, fewer hidden assumptions, and less time wasted on broken examples.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "How to Write a Technical Tutorial That Actually Teaches",
+  "description": "I explain how I structure technical tutorials so readers finish with a working result, fewer hidden assumptions, and less time wasted on broken examples.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-02",
+  "dateModified": "2026-04-02",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How to Write a Technical Tutorial That Actually Teaches",
+      "item": "https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">How to Write a Technical Tutorial That Actually Teaches</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 02, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">12 min read</span>
+      </div>
+      <h1 class="post-title">How to Write a Technical Tutorial That Actually Teaches</h1>
+      <p class="lead">I explain how I structure technical tutorials so readers finish with a working result, fewer hidden assumptions, and less time wasted on broken examples.</p>
+      <div class="post-tags">
+        <span class="tag">technical-writing</span>
+        <span class="tag">tutorials</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#a-tutorial-is-a-guided-build">A tutorial is a guided build</a></li>
+<li><a href="#define-the-reader-with-enough-precision-to-remove-hidden-assumptions">Define the reader with enough precision to remove hidden assumptions</a></li>
+<li><a href="#choose-one-end-state-and-make-it-visible-early">Choose one end state and make it visible early</a></li>
+<li><a href="#prerequisites-should-reduce-failure-not-satisfy-a-template">Prerequisites should reduce failure, not satisfy a template</a></li>
+<li><a href="#use-code-examples-that-survive-copy-paste">Use code examples that survive copy-paste</a></li>
+<li><a href="#heading-structure-carries-more-teaching-weight-than-people-think">Heading structure carries more teaching weight than people think</a></li>
+<li><a href="#teaching-requires-sequencing-pressure-not-encyclopedic-completeness">Teaching requires sequencing pressure, not encyclopedic completeness</a></li>
+<li><a href="#verify-the-workflow-on-a-clean-machine-or-the-tutorial-is-unfinished">Verify the workflow on a clean machine or the tutorial is unfinished</a></li>
+<li><a href="#good-tutorials-leave-readers-with-transferable-judgment">Good tutorials leave readers with transferable judgment</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Readers quit tutorials for boring reasons. A command fails. A prerequisite was implied instead of stated. A code sample proves a feature exists yet never helps anyone build something real. I think weak tutorials usually fail long before the final paragraph because the writer optimized for coverage instead of successful completion.</p>
+<p><strong>Short answer:</strong> I write technical tutorials around one concrete outcome, one clearly defined reader, and one verified path from blank project to working result. That means listing prerequisites precisely, showing code readers can actually run, cutting side quests, linking outward instead of duplicating reference material, and treating every confusing step as a product bug in the tutorial itself.</p>
+<h2 id="a-tutorial-is-a-guided-build">A tutorial is a guided build</h2>
+<p>Diataxis separates documentation into tutorials, how-to guides, reference, and explanation because readers arrive with different needs and should not be forced through the wrong format. A tutorial exists for guided learning through action, while a reference exists for lookup and a how-to guide exists for solving a narrower task with less hand-holding. That distinction matters more than most teams admit because many so-called tutorials are really product tours with code blocks pasted into them. The <a href="https://diataxis.fr/">Diataxis framework</a> makes that separation explicit.</p>
+<p>GitHub makes a similar point in its docs model. Their guidance says tutorials should help someone with basic product familiarity solve a real problem through a full workflow, include troubleshooting, and give readers concrete next steps after completion. GitHub also says products with tutorials should already have a quickstart, which is a useful constraint because it stops teams from using tutorials as the place where all first-time setup confusion goes to hide. I think that rule is right. A tutorial should build on existing confidence from a quickstart. See GitHub's <a href="https://docs.github.com/en/enterprise-server@3.20/contributing/style-guide-and-content-model/tutorial-content-type">tutorial content type guidance</a>.</p>
+<p>That distinction changed how I write. Early in my career, I wrote pieces that tried to teach the whole product surface in one pass. Readers reached the end with plenty of nouns in their head and very little muscle memory. My drafts improved once I started asking a simpler question: what working thing will the reader have on their machine ninety minutes from now?</p>
+<h2 id="define-the-reader-with-enough-precision-to-remove-hidden-assumptions">Define the reader with enough precision to remove hidden assumptions</h2>
+<p>Google's technical writing course uses an equation I like because it forces discipline: good documentation equals the knowledge and skills the audience needs minus the knowledge and skills they already have. That framework sounds obvious until you try to list what your reader already knows. Google's <a href="https://developers.google.com/tech-writing/one/audience">audience guidance</a> also calls out the curse of knowledge, which is the root cause behind half the tutorial failures I see.</p>
+<p>My process starts with a brutally specific reader profile:</p>
+<ol>
+<li>Current skill level: "comfortable with TypeScript, new to Workers KV"</li>
+<li>Starting environment: "macOS or Linux, Node.js already installed"</li>
+<li>Goal state: "deploy a basic API that persists comments"</li>
+<li>Things I will not explain: "how HTTP works, what JSON is, how to install Git"</li>
+</ol>
+<p>That list shapes every paragraph that follows. Google says audience definition should account for role, proximity to the subject, and what the audience still needs to learn. I use the same frame because it gives me permission to leave some things out. Tutorials get bloated when the writer fears excluding anyone. Exclusion is exactly what keeps the learning path usable.</p>
+<p>Readers usually forgive depth they can skip. Readers rarely forgive missing setup assumptions they had no way to infer.</p>
+<h2 id="choose-one-end-state-and-make-it-visible-early">Choose one end state and make it visible early</h2>
+<p>GitHub's tutorial guidance recommends stating what someone will build and showing an example of a successful result. That advice sounds small. I think it is load-bearing.</p>
+<p>A tutorial without a visible end state feels like unpaid labor. Readers keep executing steps without knowing whether the payoff matches their use case. Twilio's <a href="https://www.twilio.com/docs/messaging/quickstart">SMS quickstart</a> works because the goal is concrete from the first section: send and receive text messages with a specific product path. Cloudflare's <a href="https://developers.cloudflare.com/workers/tutorials/">Workers tutorials index</a> does the same thing at catalog level by naming the artifact, the difficulty, and the freshness of each tutorial.</p>
+<p>Whenever I draft a tutorial, I make the outcome visible in the opening:</p>
+<ul>
+<li>what gets built</li>
+<li>what stack it uses</li>
+<li>what the reader should already know</li>
+<li>what the finished result looks like</li>
+</ul>
+<p>That opening does two jobs. Search engines can understand the page faster, and a human can decide whether to commit the next half hour. I covered a similar DX problem in <a href="/blog/how-to-write-a-changelog-developers-actually-read/">How to Write a Changelog That Developers Actually Read</a>: engineers keep reading when the page tells them quickly whether the next section is worth their time.</p>
+<h2 id="prerequisites-should-reduce-failure-not-satisfy-a-template">Prerequisites should reduce failure, not satisfy a template</h2>
+<p>Weak tutorials list prerequisites like corporate boilerplate:</p>
+<ul>
+<li>basic familiarity with programming</li>
+<li>some knowledge of APIs</li>
+<li>an account</li>
+</ul>
+<p>Those bullets help nobody. GitHub explicitly says the introduction should clarify audience, prerequisites, and prior knowledge. Twilio's quickstart goes further and lists the runtime, local tooling, SDK dependency, and account setup in a way that maps cleanly to the work ahead. That level of specificity saves support time because the reader can self-select out before step three.</p>
+<p>I now write prerequisites in two layers:</p>
+<ol>
+<li>Conceptual prerequisites</li>
+<li>Machine prerequisites</li>
+</ol>
+<p>Conceptual prerequisites describe what the reader must already understand. Machine prerequisites describe exactly what must already exist on the reader's system. That second layer should include versions when they matter, credentials when they matter, and region or plan constraints when they matter.</p>
+<p>GitLab's docs workflow argues that documentation quality improves when engineers think early about the examples a user will want and verify them alongside the feature. I have seen that firsthand. Tutorial breakage usually traces back to an example that nobody reran after the product changed. GitLab's <a href="https://docs.gitlab.com/development/documentation/workflow/">documentation workflow</a> treats docs as part of the definition of done for user-facing changes. More teams should copy that.</p>
+<p>My take is blunt: a missing prerequisite is a failed test case.</p>
+<h2 id="use-code-examples-that-survive-copy-paste">Use code examples that survive copy-paste</h2>
+<p>MDN's code example guidance contains the sentence every tutorial writer should tape above the monitor: readers will copy and paste examples into their own code and may put them into production. MDN then draws the obvious consequence. Examples should be usable, follow accepted best practices, and avoid insecure or bloated patterns. Read the full guidance at <a href="https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Code_style_guide">MDN's code example guide</a>.</p>
+<p>That rule changes the standard for tutorial code. A code block in a tutorial is software someone will try under deadline pressure.</p>
+<p>My code example checklist is simple:</p>
+<ol>
+<li>Every snippet must run as shown or be clearly labeled as partial.</li>
+<li>Variable names must match the surrounding prose.</li>
+<li>Secrets and credentials must use secure patterns from the start.</li>
+<li>Supporting files must exist in the repo or article when required.</li>
+<li>Output screenshots or sample responses must reflect the current product.</li>
+</ol>
+<p>Twilio does one thing here that I respect: it allows faster setup, then immediately warns readers not to keep credentials hardcoded in production and shows the environment variable pattern. That sequence respects the tutorial's teaching goal without pretending shortcuts are safe forever. Plenty of tutorials hide production tradeoffs until the end, which is late enough to teach the wrong habit.</p>
+<p>I have shipped tutorials where I only noticed a broken step during the final clean-room test on a laptop with none of my usual tooling installed. Those sessions are humbling. They are also where the tutorial becomes real.</p>
+<h2 id="heading-structure-carries-more-teaching-weight-than-people-think">Heading structure carries more teaching weight than people think</h2>
+<p>Google's style guide says task-based headings should start with a bare infinitive such as "Create an instance" rather than an "-ing" form such as "Creating an instance." Microsoft says procedural headings should concisely describe what the instructions help customers do. Both guides are pushing toward the same outcome: headings that expose action clearly and make scanning reliable. See Google's <a href="https://developers.google.com/style/headings">headings guidance</a> and Microsoft's <a href="https://learn.microsoft.com/en-us/style-guide/procedures-instructions/writing-step-by-step-instructions">step-by-step instruction guidance</a>.</p>
+<p>I agree with both, partly for pedagogy and partly for SEO. Headings in strong tutorials carry a second interface for the page:</p>
+<ul>
+<li>search engines extract them</li>
+<li>answer engines quote them</li>
+<li>readers skim them before committing</li>
+<li>frustrated readers jump between them when a step breaks</li>
+</ul>
+<p>Heading quality often tells me whether a tutorial will teach well before I read the body. Vague headings usually mean vague sequencing.</p>
+<h2 id="teaching-requires-sequencing-pressure-not-encyclopedic-completeness">Teaching requires sequencing pressure, not encyclopedic completeness</h2>
+<p>Microsoft recommends one action per step, numbered procedures for multi-step flows, and splitting long procedures into manageable groups. GitHub says tutorials should link outward rather than replicate reference material if duplication interrupts flow. Those guidelines point to a non-obvious truth: good tutorial pacing depends on what the writer refuses to include.</p>
+<p>I cut aggressively in tutorial drafts. Reference material goes to docs links. Deep conceptual explanation goes to a dedicated section or another post. Optional branches get labeled as optional or removed outright. Readers who are trying to finish a build rarely need a detour into system architecture during step six.</p>
+<p>That does not mean tutorials should be shallow. Depth belongs in the choice of workflow, the reasoning behind key decisions, and the troubleshooting that anticipates where readers get stuck. GitHub recommends a troubleshooting section for tutorials, and I think teams underinvest there because troubleshooting feels less glamorous than the happy path. Yet the troubleshooting section often contains the highest teaching value on the page.</p>
+<p>My favorite non-obvious sign of a mature tutorial is a short section that says, in plain language, "if you hit this symptom, here is what likely went wrong." That shows the author has watched someone actually use the tutorial.</p>
+<h2 id="verify-the-workflow-on-a-clean-machine-or-the-tutorial-is-unfinished">Verify the workflow on a clean machine or the tutorial is unfinished</h2>
+<p>GitLab requires review, technical validation, and even style tooling like Vale for AI-generated docs. That workflow matters because the easiest way to publish a tutorial is to trust the author's memory of the environment. Memory is terrible at documentation.</p>
+<p>I do a clean run before I publish:</p>
+<ol>
+<li>Start with a fresh directory</li>
+<li>Follow the tutorial exactly as written</li>
+<li>Copy commands without fixing them mentally</li>
+<li>Record every point where I had to infer something</li>
+<li>Fix the article before fixing the code locally</li>
+</ol>
+<p>That pass catches three recurring tutorial bugs:</p>
+<ul>
+<li>commands that rely on a globally installed dependency never mentioned in prerequisites</li>
+<li>filenames that changed during revision but not in prose</li>
+<li>outputs that differ slightly from the current product and make readers doubt the whole workflow</li>
+</ul>
+<p>Writers often think the draft is finished once the prose reads well. My experience says the draft becomes trustworthy only after the verification pass produces no surprises. If you need someone to write this kind of piece for your team, <a href="/work">my work page</a> shows the kind of technical depth I aim for across developer content.</p>
+<h2 id="good-tutorials-leave-readers-with-transferable-judgment">Good tutorials leave readers with transferable judgment</h2>
+<p>A reader should finish a tutorial with more than a deployed demo. They should also understand a few decisions well enough to adapt the pattern later.</p>
+<p>That is where many tutorials miss the last mile. They lead the reader through commands and never explain why one path was chosen over another. GitHub's model for tutorials includes next steps and best-practice discussion for exactly this reason. A tutorial that only yields replication creates dependency on the writer. A tutorial that adds a small amount of judgment creates independence.</p>
+<p>I try to leave readers with three forms of transfer:</p>
+<ul>
+<li>what they built</li>
+<li>why the workflow was arranged that way</li>
+<li>what they should change first for their own environment</li>
+</ul>
+<p>That last part matters for developer audiences. Engineers do not really want a shrine to the happy path. They want a reliable starting point they can bend without breaking.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>How long should a technical tutorial be?</strong></p>
+<p>Length should be set by the workflow instead of an arbitrary word target. A tutorial that gets a reader from zero to a working result in 900 words is better than a 3,000-word sprawl full of side trips. My own bias is toward shorter tutorials with cleaner scope and stronger outward links to reference material.</p>
+<p><strong>Should tutorials include full code listings or only key snippets?</strong></p>
+<p>Full listings belong in tutorials when omission would make copy-paste fragile. Partial snippets work when the surrounding file is obvious and unchanged. MDN's guidance on runnable examples is the standard I use: if the reader needs more context to run the sample, I either provide it or label the snippet as partial.</p>
+<p><strong>Where should troubleshooting go in a tutorial?</strong></p>
+<p>Near the end for most pieces, with inline callouts only where a failure is common enough to block progress. Readers should not have to bounce to a separate doc for the top two failure modes of the main workflow. GitHub is right to treat troubleshooting as a core tutorial section rather than optional garnish.</p>
+<p><strong>Should a tutorial explain every concept it touches?</strong></p>
+<p>No. Tutorials teach through guided execution. Reference pages and explanation pages exist for a reason. Diataxis is useful here because it gives you permission to stop a tutorial from becoming a second-rate encyclopedia.</p>
+<p><strong>What is the fastest way to improve a weak tutorial already getting traffic?</strong></p>
+<p>Run it from scratch on a clean machine and log every point of friction. That one pass usually tells you more than a week of abstract editorial debate. Missing prerequisites, stale code, and heading vagueness show up quickly when someone tries to finish the task for real.</p>
+<!--
+primary keyword: how to write a technical tutorial
+sources used:
+- https://diataxis.fr/
+- https://docs.github.com/en/enterprise-server@3.20/contributing/style-guide-and-content-model/tutorial-content-type
+- https://developers.google.com/tech-writing/one/audience
+- https://developers.google.com/style/headings
+- https://learn.microsoft.com/en-us/style-guide/procedures-instructions/writing-step-by-step-instructions
+- https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Code_style_guide
+- https://docs.gitlab.com/development/documentation/workflow/
+- https://www.twilio.com/docs/messaging/quickstart
+- https://developers.cloudflare.com/workers/tutorials/
+research gap identified: SERP results for this topic skew toward generic writing advice and style-guide summaries, with very little emphasis on tutorial verification, workflow testing, or the distinction between tutorials and other doc types.
+self-identified risks or weak spots: Article relies on repo-internal experience and opinion more than published benchmarks because the topic is process-heavy. A live SERP-specific PAA pass could add one or two reader questions later.
+-->
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="related-card">
+        <div class="related-card-date">2026-04-08</div>
+        <div class="related-card-title">Technical Content as a Moat: The Long Game for Developer Tools</div>
+      </a>
+      <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="related-card">
+        <div class="related-card-date">2026-04-07</div>
+        <div class="related-card-title">How Stripe's Technical Blog Became a Competitive Moat</div>
+      </a>
+      <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="related-card">
+        <div class="related-card-date">2026-04-06</div>
+        <div class="related-card-title">Why DevTools Startups Lose Deals Over Bad Docs</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="footer-link">Technical Content as a Moat: The Long Game for Developer Tools</a>
+          <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="footer-link">How Stripe's Technical Blog Became a Competitive Moat</a>
+          <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="footer-link">Why DevTools Startups Lose Deals Over Bad Docs</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

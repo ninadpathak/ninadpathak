@@ -1,0 +1,9 @@
+Three drafts are written and self-edited in the assigned files:
+
+[how-to-write-a-technical-tutorial-that-actually-teaches.md](/Users/ninad/Development/NinadPathak/content/posts/how-to-write-a-technical-tutorial-that-actually-teaches.md)  
+[from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md](/Users/ninad/Development/NinadPathak/content/posts/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md)  
+[technical-content-as-a-moat-the-long-game-for-developer-tools.md](/Users/ninad/Development/NinadPathak/content/posts/technical-content-as-a-moat-the-long-game-for-developer-tools.md)
+
+Each post includes valid frontmatter, official-source citations, internal links to existing site posts, and the requested non-published editor note in an HTML comment. I also ran a style pass against the hard constraints and removed one internal link that pointed at another draft in the same batch.
+
+I did not build the site.

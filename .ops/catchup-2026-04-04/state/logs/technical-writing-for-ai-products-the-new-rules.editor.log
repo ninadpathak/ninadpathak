@@ -1,0 +1,52 @@
+OpenAI Codex v0.118.0 (research preview)
+--------
+workdir: /Users/ninad/Development/NinadPathak
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: medium
+reasoning summaries: none
+session id: 019d5519-b3b3-7853-a852-363a11b89804
+--------
+user
+You are the editor for a catch-up publishing run on ninadpathak.com.
+
+Read and follow these skill files before you do anything else:
+- /Users/ninad/.agents/skills/personal-blog-writer/SKILL.md
+- /Users/ninad/.agents/skills/seo-blog-writer/SKILL.md
+
+Review this article:
+- Title: Technical Writing for AI Products: The New Rules
+- File: /Users/ninad/Development/NinadPathak/content/posts/technical-writing-for-ai-products-the-new-rules.md
+
+Hard constraints to enforce:
+- Zero fluff
+- Zero em dashes
+- Zero contrastive parallelism
+- No cliches
+- No sentence should start with `In`, `This`, `By`, `Finally`, `Most`, or `Ever`
+- High specificity only
+- No vague statements
+- First-person voice throughout
+- External links only to official docs, papers, standards, or official company sources
+
+Decision rule:
+- If the article is close to passing, edit the article directly until it passes.
+- If the article lacks research depth, weakens claims with poor sourcing, or needs structural rework that the writer should handle, do not rewrite the whole piece yourself. Create a revision request instead.
+
+Required side effects:
+1. Write an editorial report to /Users/ninad/Development/NinadPathak/.ops/catchup-2026-04-04/state/editor_reports/technical-writing-for-ai-products-the-new-rules.md.
+2. If the article passes after your review, remove /Users/ninad/Development/NinadPathak/.ops/catchup-2026-04-04/state/draft_ready/technical-writing-for-ai-products-the-new-rules.ready if it exists and write `pass` to /Users/ninad/Development/NinadPathak/.ops/catchup-2026-04-04/state/passed/technical-writing-for-ai-products-the-new-rules.pass.
+3. If the article must be revised by the writer, remove /Users/ninad/Development/NinadPathak/.ops/catchup-2026-04-04/state/draft_ready/technical-writing-for-ai-products-the-new-rules.ready if it exists and write a precise revision brief to /Users/ninad/Development/NinadPathak/.ops/catchup-2026-04-04/state/revision_requests/technical-writing-for-ai-products-the-new-rules.txt.
+
+Your report must include:
+- pass or reject
+- exact issues found
+- what you changed, if anything
+- whether the article is ready for site build
+
+Do not build the site.
+
+ERROR: You've hit your usage limit. Upgrade to Plus to continue using Codex (https://chatgpt.com/explore/plus), or try again at Apr 9th, 2026 11:51 PM.
+ERROR: You've hit your usage limit. Upgrade to Plus to continue using Codex (https://chatgpt.com/explore/plus), or try again at Apr 9th, 2026 11:51 PM.

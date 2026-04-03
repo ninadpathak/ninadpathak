@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Engineer to Technical Writer: What I Kept and What I Left Behind | Ninad Pathak</title>
+  <meta name="description" content="I explain which engineering habits still make me better at technical writing, which ones I had to drop, and how the day-to-day work changed.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="From Engineer to Technical Writer: What I Kept and What I Left Behind">
+  <meta property="og:description" content="I explain which engineering habits still make me better at technical writing, which ones I had to drop, and how the day-to-day work changed.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "From Engineer to Technical Writer: What I Kept and What I Left Behind",
+  "description": "I explain which engineering habits still make me better at technical writing, which ones I had to drop, and how the day-to-day work changed.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-05",
+  "dateModified": "2026-04-05",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "From Engineer to Technical Writer: What I Kept and What I Left Behind",
+      "item": "https://ninadpathak.com/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">From Engineer to Technical Writer: What I Kept and What I Left Behind</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 05, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">10 min read</span>
+      </div>
+      <h1 class="post-title">From Engineer to Technical Writer: What I Kept and What I Left Behind</h1>
+      <p class="lead">I explain which engineering habits still make me better at technical writing, which ones I had to drop, and how the day-to-day work changed.</p>
+      <div class="post-tags">
+        <span class="tag">technical-writing</span>
+        <span class="tag">career</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#i-kept-the-habit-of-empirical-verification">I kept the habit of empirical verification</a></li>
+<li><a href="#i-kept-systems-thinking-and-documentation-architecture">I kept systems thinking and documentation architecture</a></li>
+<li><a href="#i-left-behind-the-assumption-of-shared-context">I left behind the assumption of shared context</a></li>
+<li><a href="#i-kept-the-instinct-to-debug-the-unhappy-path">I kept the instinct to debug the "unhappy path"</a></li>
+<li><a href="#i-left-behind-local-optimization-of-prose">I left behind local optimization of prose</a></li>
+<li><a href="#i-kept-the-respect-for-docs-as-code-tooling">I kept the respect for Docs-as-Code tooling</a></li>
+<li><a href="#i-left-behind-the-idea-of-shipping-and-forgetting">I left behind the idea of "shipping and forgetting"</a></li>
+<li><a href="#i-left-behind-a-narrow-definition-of-what-is-technical">I left behind a narrow definition of what is "technical"</a></li>
+<li><a href="#what-changed-in-my-day-to-day-workflow">What changed in my day-to-day workflow</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Moving from engineering to technical writing did not feel like abandoning a technical career. I simply changed the artifact I delivered. Code used to be the primary output of my work. Clarity became the primary output later. Plenty of my old instincts as a programmer still help me navigate complex documentation projects, yet others became immediate liabilities that I had to unlearn.</p>
+<p><strong>Short answer:</strong> I kept the engineering habits that prioritize verification, systems thinking, and operational rigor. I left behind the habits that rewarded local optimization and the assumption of shared context. Technical writing requires a transition from a mindset of "it works on my machine" to a mindset where a stranger can succeed using only the text I provide.</p>
+<h2 id="i-kept-the-habit-of-empirical-verification">I kept the habit of empirical verification</h2>
+<p>Engineering taught me to distrust any explanation that has not survived contact with a real environment. I transfer this skepticism directly to my writing. If a tutorial claims that a command produces a specific JSON output, I run that command on my own machine before I commit the sentence.</p>
+<p>Some of the strongest technical teams bake this mindset into their formal workflows. GitLab treats documentation as a mandatory part of the "definition of done" for any user-facing change. Their <a href="https://docs.gitlab.com/development/documentation/workflow/">documentation workflow</a> requires that developers draft the initial docs and that these undergo a technical review before merging. I agree with their stance that generative AI cannot replace the subject matter expertise required for these verification passes.</p>
+<p>My entire production cycle is shaped by this habit. If I am writing about <a href="/blog/structured-outputs-llms-json-mode-function-calling/">Structured Outputs With LLMs</a>, I am not just summarizing a press release. I am testing the API to see what it really guarantees when the schema is deeply nested. Writers without a background in code can build this discipline, but engineers arrive with the scars from "untested" code already installed.</p>
+<h2 id="i-kept-systems-thinking-and-documentation-architecture">I kept systems thinking and documentation architecture</h2>
+<p>Technical writing is often mistaken for simple wordsmithing. Day to day, the job is closer to information architecture and systems design. A single page does not exist in isolation. It lives within a network of headers, search indices, versioned artifacts, and internal links.</p>
+<p>Engineering trained me to think about coupling and cohesion. I ask the same questions when structuring a documentation site.</p>
+<ol>
+<li>Is this section too tightly coupled to a specific version of the UI?</li>
+<li>Does this tutorial have high cohesion, or is it trying to teach three unrelated concepts?</li>
+<li>What is the upstream dependency for this configuration step?</li>
+<li>Where should this logic live so that I don't have to duplicate it in five places?</li>
+</ol>
+<p>GitHub's <a href="https://docs.github.com/en/contributing/writing-for-github-docs/best-practices-for-github-docs">best practices for docs</a> emphasize this structural approach. They push writers to define the core purpose of a document and choose the right content type before writing a single word. I use the <strong>Diataxis framework</strong> to maintain this separation of concerns. By categorizing content into tutorials, how-to guides, technical references, and conceptual explanations, I ensure that the architecture of the information remains stable as the product grows. You can find the framework at <a href="https://diataxis.fr/">diataxis.fr</a>.</p>
+<h2 id="i-left-behind-the-assumption-of-shared-context">I left behind the assumption of shared context</h2>
+<p>Engineers survive on a massive amount of unstated context. Team communication often relies on acronyms, service names, and implicit deployment quirks that everyone "just knows." Technical writing punishes this habit immediately because your reader is often a stranger who is missing the exact piece of context that makes the rest of the page work.</p>
+<p>Google's technical writing course identifies this as the "curse of knowledge." Their <a href="https://developers.google.com/tech-writing/one/audience">audience guidance</a> states that writers must account for the reader's role and their proximity to the subject matter. I had to learn to be explicit about prerequisites that I once thought were too basic to mention.</p>
+<p>I also had to unlearn the "idempotency" of my engineering explanations. In code, an idempotent operation can be run multiple times without changing the result. In writing, repeating the same explanation in different ways on the same page just creates noise. I had to learn the value of a single, precise definition that I could link back to whenever the concept reappeared.</p>
+<h2 id="i-kept-the-instinct-to-debug-the-unhappy-path">I kept the instinct to debug the "unhappy path"</h2>
+<p>Technical writing rewards the engineer's habit of looking for failure modes. Most documentation describes the "happy path," which is the sequence where everything works perfectly on the first try. Real software rarely behaves this way.</p>
+<p>A debugger's mindset persists in my writing for this reason. One recurring problem in AI content is the neglect of control flow and observability. My post on <a href="/blog/agent-harnesses/">Agent harnesses</a> grew out of that frustration. Plenty of material explained how to prompt an agent, but almost nobody explained how to handle the failure when the agent entered an infinite loop. Great documentation comes from someone who has already anticipated the crash.</p>
+<h2 id="i-left-behind-local-optimization-of-prose">I left behind local optimization of prose</h2>
+<p>Engineering often rewards local optimization—speeding up one specific function or cleaning up one specific module. Writing has similar local moves, such as perfecting a single sentence or adding a clever analogy. I found that local optimization in writing can easily damage the utility of the whole page.</p>
+<p>A sentence can be grammatically perfect and still wrong for the audience. A section can be technically brilliant and still ruin the flow of a tutorial. I had to learn to cut sections that I was personally proud of because they added unnecessary weight to the reader's journey.</p>
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/contribute/content/style-quick-start">style and voice quick start</a> emphasizes empathy and conciseness. They advise writers to focus on the customer's intent and use everyday words. I learned that an engineer's desire for "completeness" is often the enemy of a reader's need for "utility." Ruthless omission is a professional requirement in technical writing.</p>
+<h2 id="i-kept-the-respect-for-docs-as-code-tooling">I kept the respect for Docs-as-Code tooling</h2>
+<p>Writers who treat documentation as a sidecar artifact usually end up with a library of stale truths. Engineers understand that the artifact only remains valid if the process around it is rigorous. I embrace the operational side of the job because the shape of the work is familiar to me.</p>
+<p>I use the same tools for documentation that I use for code.</p>
+<ul>
+<li><strong>Version Control:</strong> Storing Markdown files in Git repositories alongside the source code.</li>
+<li><strong>Linting:</strong> Automated style and link checks to catch errors before they reach the reader.</li>
+<li><strong>CI/CD Pipelines:</strong> Automated builds that generate previews of the documentation on every pull request.</li>
+<li><strong>Review Gates:</strong> Ensuring that a technical expert has signed off on every change.</li>
+</ul>
+<p>The <strong>Write the Docs 2024 salary survey</strong> shows that this "DocOps" side of the field is expanding. The survey collected data from 55 countries and identified 217 unique job titles, many of which focus on information architecture and tooling rather than just drafting prose. Technical writing is a production function that scales through process, not through individual charisma. You can read the full survey results at <a href="https://www.writethedocs.org/surveys/salary-survey/2024/">writethedocs.org</a>.</p>
+<h2 id="i-left-behind-the-idea-of-shipping-and-forgetting">I left behind the idea of "shipping and forgetting"</h2>
+<p>Code enters a maintenance phase once it is shipped. Documentation follows the same lifecycle, yet many teams behave as if clicking "publish" is the end of the project. I learned to think in terms of maintenance costs for every page I create.</p>
+<p>Search queries change over time. Product defaults drift. Screenshots become outdated as the UI evolves. I view a published tutorial as a living system that requires recurring validation. I also look for opportunities to link older posts to newer ones, turning the site into a network of information rather than a pile of isolated blog posts.</p>
+<p>One example from this site is <a href="/blog/how-to-write-a-changelog-developers-actually-read/">How to Write a Changelog That Developers Actually Read</a>. That post creates a stable reference point that I can link to in every subsequent piece about developer communication. Maintenance is not a chore; it is how you preserve the value of the technical assets you have already built.</p>
+<h2 id="i-left-behind-a-narrow-definition-of-what-is-technical">I left behind a narrow definition of what is "technical"</h2>
+<p>Some people assume that moving into writing is a step away from technical substance. My experience is that writing for a technical audience is one of the most intellectually demanding forms of engineering work.</p>
+<p>Serious technical writing requires six specific skills.</p>
+<ol>
+<li>Accurate reading of source code and internal specs.</li>
+<li>Judgment of the product's underlying mental model.</li>
+<li>Rigorous verification of every code example.</li>
+<li>Strategic information architecture for the entire site.</li>
+<li>Empathy-driven calibration for different audiences.</li>
+<li>Ruthless editorial compression under technical constraints.</li>
+</ol>
+<p>Google’s materials on <a href="https://developers.google.com/tech-writing/becoming/meet">becoming a technical writer</a> show that many writers arrive from roles in software engineering, support, and testing. This framing matches my own belief. Technical writing is not a decorative layer added to engineering. It is a separate production function with its own success metrics.</p>
+<p>If you are looking for this kind of depth for your own team, <a href="/work">my work page</a> shows how I apply these engineering habits to client projects.</p>
+<h2 id="what-changed-in-my-day-to-day-workflow">What changed in my day-to-day workflow</h2>
+<p>Three major shifts stand out from my time in this role.</p>
+<p>First, feedback loops became more legible. A confusing page fails in visible ways that are often easier to observe than a latent bug in a distributed system. Readers drop off at specific steps. Support questions repeat the same patterns. When you are willing to look at the data, documentation failure is highly observable.</p>
+<p>Second, audience empathy moved from a "soft skill" to a core production requirement. An engineer can occasionally succeed while being impatient with a user's lack of context. A technical writer cannot. My job is to bridge that gap by becoming the "first user" of every feature.</p>
+<p>Third, the leverage of my work shifted. A feature helps the users who find it. A well-written page can change the understanding of thousands of developers before they ever interact with your product. I focus on durable technical assets—changelogs, migration guides, and deep-dive tutorials—because they provide the highest return on investment for the team over the long term.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do engineers have an advantage when they switch to technical writing?</strong></p>
+<p>Yes, but only if they are willing to unlearn their communication habits. The advantage comes from their ability to read source code, verify examples, and understand system architecture. The risk is that they will write from their own private context and leave the reader behind.</p>
+<p><strong>Which engineering skill was the most useful for me?</strong></p>
+<p>Empirical verification. Refusing to publish anything that I haven't tested on my own machine prevents the most common trust-killing errors in documentation.</p>
+<p><strong>What was the hardest habit to break?</strong></p>
+<p>I had to stop compressing my explanations too early. I used to write for the person who already understood 90% of the system. I had to learn to write for the person who is missing the exact 10% that makes the whole system fail.</p>
+<p><strong>Does technical writing involve less technical work than engineering?</strong></p>
+<p>No. It involves a different type of technical work. You are still reading code, testing APIs, and designing systems. You are simply producing a technical document as the final artifact instead of a pull request.</p>
+<p><strong>Should I move into technical writing if I enjoy explaining things?</strong></p>
+<p>Enjoying the explanation is only half of the job. You also need to enjoy the research, the verification, the editing, and the architectural design of information systems. If you find those tasks as rewarding as writing code, the transition is likely a good fit.</p>
+<!--
+primary keyword: engineer to technical writer
+sources used:
+- https://docs.gitlab.com/development/documentation/workflow/
+- https://docs.github.com/en/contributing/writing-for-github-docs/best-practices-for-github-docs
+- https://developers.google.com/tech-writing/one/audience
+- https://developers.google.com/tech-writing/becoming/meet
+- https://learn.microsoft.com/en-us/contribute/content/style-quick-start
+- https://www.writethedocs.org/surveys/salary-survey/2024/
+- https://diataxis.fr/
+research gap identified: Most articles on this topic focus on portfolio tips; I have focused on the cognitive and structural transition from a code-first to a clarity-first mindset.
+self-identified risks or weak spots: The article uses a first-person narrative which is required by the skill, but it balances this with authoritative external citations to avoid becoming a simple memoir.
+-->
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="related-card">
+        <div class="related-card-date">2026-04-08</div>
+        <div class="related-card-title">Technical Content as a Moat: The Long Game for Developer Tools</div>
+      </a>
+      <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="related-card">
+        <div class="related-card-date">2026-04-07</div>
+        <div class="related-card-title">How Stripe's Technical Blog Became a Competitive Moat</div>
+      </a>
+      <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="related-card">
+        <div class="related-card-date">2026-04-06</div>
+        <div class="related-card-title">Why DevTools Startups Lose Deals Over Bad Docs</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="footer-link">Technical Content as a Moat: The Long Game for Developer Tools</a>
+          <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="footer-link">How Stripe's Technical Blog Became a Competitive Moat</a>
+          <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="footer-link">Why DevTools Startups Lose Deals Over Bad Docs</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

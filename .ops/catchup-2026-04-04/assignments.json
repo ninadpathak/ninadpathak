@@ -1,0 +1,60 @@
+{
+  "repo_root": "/Users/ninad/Development/NinadPathak",
+  "skill_paths": {
+    "personal_blog_writer": "/Users/ninad/.agents/skills/personal-blog-writer/SKILL.md",
+    "seo_blog_writer": "/Users/ninad/.agents/skills/seo-blog-writer/SKILL.md"
+  },
+  "lanes": {
+    "writer1": [
+      {
+        "title": "Technical Writing for AI Products: The New Rules",
+        "slug": "technical-writing-for-ai-products-the-new-rules",
+        "date": "2026-03-31"
+      },
+      {
+        "title": "Writing Release Notes That Developers Trust",
+        "slug": "writing-release-notes-that-developers-trust",
+        "date": "2026-04-03"
+      },
+      {
+        "title": "Why DevTools Startups Lose Deals Over Bad Docs",
+        "slug": "why-devtools-startups-lose-deals-over-bad-docs",
+        "date": "2026-04-06"
+      }
+    ],
+    "writer2": [
+      {
+        "title": "Developer Onboarding Docs: What Works, What Doesn't",
+        "slug": "developer-onboarding-docs-what-works-what-doesnt",
+        "date": "2026-04-01"
+      },
+      {
+        "title": "The Case for Shorter Technical Documentation",
+        "slug": "the-case-for-shorter-technical-documentation",
+        "date": "2026-04-04"
+      },
+      {
+        "title": "How Stripe's Technical Blog Became a Competitive Moat",
+        "slug": "how-stripes-technical-blog-became-a-competitive-moat",
+        "date": "2026-04-07"
+      }
+    ],
+    "writer3": [
+      {
+        "title": "How to Write a Technical Tutorial That Actually Teaches",
+        "slug": "how-to-write-a-technical-tutorial-that-actually-teaches",
+        "date": "2026-04-02"
+      },
+      {
+        "title": "From Engineer to Technical Writer: What I Kept and What I Left Behind",
+        "slug": "from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind",
+        "date": "2026-04-05"
+      },
+      {
+        "title": "Technical Content as a Moat: The Long Game for Developer Tools",
+        "slug": "technical-content-as-a-moat-the-long-game-for-developer-tools",
+        "date": "2026-04-08"
+      }
+    ]
+  }
+}

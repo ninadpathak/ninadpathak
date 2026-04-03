@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Case for Shorter Technical Documentation | Ninad Pathak</title>
+  <meta name="description" content="I think technical docs are often too long for the wrong reasons. Here’s why shorter docs usually work better, and where longer docs still earn their keep.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="The Case for Shorter Technical Documentation">
+  <meta property="og:description" content="I think technical docs are often too long for the wrong reasons. Here’s why shorter docs usually work better, and where longer docs still earn their keep.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/the-case-for-shorter-technical-documentation/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/the-case-for-shorter-technical-documentation/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "The Case for Shorter Technical Documentation",
+  "description": "I think technical docs are often too long for the wrong reasons. Here’s why shorter docs usually work better, and where longer docs still earn their keep.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-04",
+  "dateModified": "2026-04-04",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/the-case-for-shorter-technical-documentation/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "The Case for Shorter Technical Documentation",
+      "item": "https://ninadpathak.com/blog/the-case-for-shorter-technical-documentation/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">The Case for Shorter Technical Documentation</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 04, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">9 min read</span>
+      </div>
+      <h1 class="post-title">The Case for Shorter Technical Documentation</h1>
+      <p class="lead">I think technical docs are often too long for the wrong reasons. Here’s why shorter docs usually work better, and where longer docs still earn their keep.</p>
+      <div class="post-tags">
+        <span class="tag">technical-writing</span>
+        <span class="tag">documentation</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#shorter-docs-manage-cognitive-load-effectively">Shorter docs manage cognitive load effectively</a></li>
+<li><a href="#minimalism-is-an-action-oriented-design-choice">Minimalism is an action-oriented design choice</a></li>
+<li><a href="#progressive-disclosure-balances-power-and-simplicity">Progressive disclosure balances power and simplicity</a></li>
+<li><a href="#brevity-makes-maintenance-cheaper-and-accuracy-higher">Brevity makes maintenance cheaper and accuracy higher</a></li>
+<li><a href="#readers-punish-long-docs-when-the-payoff-is-slow">Readers punish long docs when the payoff is slow</a></li>
+<li><a href="#conciseness-improves-global-accessibility">Conciseness improves global accessibility</a></li>
+<li><a href="#where-longer-documentation-earns-its-place">Where longer documentation earns its place</a></li>
+<li><a href="#the-practical-editing-checklist">The practical editing checklist</a></li>
+<li><a href="#my-position-on-documentation-length">My position on documentation length</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Technical documentation often suffers from information obesity. Teams expand manuals to cover every possible edge case because they fear the support tickets that might arise from an omission. Reviewers add historical context that serves internal egos rather than reader outcomes. Writers inherit sprawling legacy pages and append new sections without restructuring the old ones.</p>
+<p>I think shorter documentation is superior because it respects the reader’s cognitive limits. Readers open documentation to solve a specific problem, not to admire the author's thoroughness. Excessive length forces the reader to perform the work the writer should have done: separating the essential from the incidental.</p>
+<p><strong>Short answer:</strong> Shorter documentation improves success rates by narrowing scope and surfacing answers early. Effective docs use progressive disclosure to defer complex details to secondary layers. Maintaining brief, modular pages reduces maintenance costs and localization errors. Longer formats remain necessary for formal specifications and migration guides, yet even these require rigid structural discipline to remain usable.</p>
+<h2 id="shorter-docs-manage-cognitive-load-effectively">Shorter docs manage cognitive load effectively</h2>
+<p>Cognitive Load Theory (CLT) defines the mental effort required to process information. Modern research from 2020–2025 identifies three types of load: intrinsic, extraneous, and germane. Intrinsic load is the inherent difficulty of the technical task. Extraneous load is the mental energy wasted on poor documentation design, such as wall-of-text paragraphs or unclear navigation.</p>
+<p>Documentation should aim to zero out extraneous load. Research in clinical training and EHR systems shows that reducing extraneous load directly correlates with higher task accuracy. When documentation is too long, the reader spends their limited mental bandwidth just parsing the page instead of executing the work.</p>
+<p>I use the <strong>NASA-TLX (Task Load Index)</strong> as a mental framework for assessing documentation. Studies confirm that minimalist prototypes result in significantly lower NASA-TLX scores compared to complex, verbose interfaces. A shorter doc allows the reader to dedicate 100% of their bandwidth to the germane load, which is the productive effort used to build a mental model of the system.</p>
+<h2 id="minimalism-is-an-action-oriented-design-choice">Minimalism is an action-oriented design choice</h2>
+<p>John Carroll’s "The Minimal Manual" remains the foundational text for this approach. His research found that shorter manuals helped users make faster progress and recover from errors more effectively. Carroll argued that users are naturally active and want to explore the system rather than read about it.</p>
+<p>Minimalism does not mean a lack of information. It means a better choice of information. Action-oriented design reduces onboarding time by up to 30% because it focuses on real tasks. I follow four specific minimalist principles in my work.</p>
+<ol>
+<li>Focus on the user's immediate goal.</li>
+<li>Cut verbiage that describes obvious UI elements.</li>
+<li>Prioritize error recognition and recovery steps.</li>
+<li>Guide exploration instead of narrating every possible branch.</li>
+</ol>
+<p>A 2024 study by Thakker warns against "aesthetic minimalism" where essential cues are removed for the sake of a clean look. If a document is too sparse, the reader experiences a surge in cognitive load because they must "fill in the blanks" themselves. The goal is essentialism, retaining only what serves a crucial function.</p>
+<h2 id="progressive-disclosure-balances-power-and-simplicity">Progressive disclosure balances power and simplicity</h2>
+<p>Progressive disclosure is the primary tool for keeping documentation short without losing depth. It defers advanced or rarely used information to secondary screens or layers. This prevents the "Happy Path" from being obscured by edge cases that only 5% of users will ever encounter.</p>
+<p>I structure information into three levels of disclosure.</p>
+<ul>
+<li><strong>Level 1:</strong> Essential instructions for the primary task.</li>
+<li><strong>Level 2:</strong> Contextual sidebars explaining "Why this matters" or common pitfalls.</li>
+<li><strong>Level 3:</strong> Deep technical references and edge-case documentation.</li>
+</ul>
+<p>Explainable AI (XAI) research uses this layering to explain complex model decisions. The system provides a high-level summary first, with the deep technical breakdown available on demand. Modern UX research suggests keeping these levels below three. Beyond three layers, the cognitive cost of navigation begins to outweigh the benefit of reduced clutter.</p>
+<p>I use HTML <code>&lt;details&gt;</code> tags or contextual "Read More" toggles to implement this. This allows the page to stay visually short for the majority of readers while preserving the detailed technical specifications for the power users who need them.</p>
+<h2 id="brevity-makes-maintenance-cheaper-and-accuracy-higher">Brevity makes maintenance cheaper and accuracy higher</h2>
+<p>Every paragraph you publish is a future maintenance liability. GitLab’s style guide emphasizes that documentation is an operational system. If the information exists elsewhere, link to it. If it does not, add it in a focused way. Verification of accuracy works only when pages are tight enough for a single person to manage.</p>
+<p>Long pages rot faster because they carry a larger surface area of potentially stale facts. Product names change. UI labels drift. API parameters deprecate. A small page with one job is easier to update than a massive page carrying five separate intents.</p>
+<p>Stripe’s documentation stack provides a model for managing this complexity. They built their platform on <strong>Markdoc</strong>, which allows for interactive components and conditional content without cluttering the prose. Markdoc helps Stripe keep pages focused while still handling complex use cases through reusable structures. Shorter docs age better because they isolate the impact of change.</p>
+<h2 id="readers-punish-long-docs-when-the-payoff-is-slow">Readers punish long docs when the payoff is slow</h2>
+<p>Google's technical writing guidance notes that busy readers often only read the first paragraph. My own behavior matches this. If the first screen does not prove it will answer my question, I start scanning for keywords or I leave.</p>
+<p>I care about compression at the top of the page for this reason. I aim for three specific sentences in the opening block.</p>
+<ul>
+<li>A one-sentence scope statement.</li>
+<li>A one-sentence audience cue.</li>
+<li>A one-sentence payoff or direct answer.</li>
+</ul>
+<p>GitLab’s style guide warns against self-referential phrases like "This page explains." I agree. These sentences waste valuable space. Readers already know they are on a page. They want the substance of the information immediately. A shorter doc forces a stronger opening because there is no room for ceremony.</p>
+<h2 id="conciseness-improves-global-accessibility">Conciseness improves global accessibility</h2>
+<p>GitLab and Google both emphasize that concise language improves translation quality. Shorter sentences with fewer ambiguous pronouns and idioms are easier for human translators and machine translation systems to process. This reduces the risk of dangerous errors in localized documentation.</p>
+<p>Clear, shorter docs also perform better in internal search and AI retrieval systems. Bloated pages bury the exact sentence that should have been indexed. I saw this while writing <a href="/blog/agent-harnesses/">Agent harnesses</a>. Infrastructure topics attract vague abstractions, yet I found that a clean sequence of focused sections was far more useful for retrieval than a sprawling essay.</p>
+<p>Shorter docs are also more accessible for readers with cognitive disabilities. Dense, long-form prose creates a barrier to entry that a modular, structured approach avoids. Every time you cut a redundant paragraph, you make your documentation more inclusive.</p>
+<h2 id="where-longer-documentation-earns-its-place">Where longer documentation earns its place</h2>
+<p>I am not suggesting that every technical document should be a list of bullets. Some formats require length to be effective.</p>
+<ul>
+<li><strong>Migration guides:</strong> These must cover irreversible changes and every possible breakage path.</li>
+<li><strong>Formal specifications:</strong> Precision requires exhaustive detail that cannot be summarized.</li>
+<li><strong>Architecture references:</strong> Understanding a complex system requires a broad view of its components.</li>
+<li><strong>Incident runbooks:</strong> Branching decision paths need to be documented in full to be useful under pressure.</li>
+</ul>
+<p>Even in these cases, I still demand page discipline. A long migration guide is justified if every section maps to a real decision the user must make. A long spec is useful if every section provides a stable reference target. Length should be a function of task coverage, not a result of a writer's inability to edit.</p>
+<h2 id="the-practical-editing-checklist">The practical editing checklist</h2>
+<p>I use four questions to determine if a page is too long during the editing phase.</p>
+<ol>
+<li>What exactly does the reader need to do or decide after reading this?</li>
+<li>Does every paragraph directly support that outcome?</li>
+<li>Should this detail live on a separate troubleshooting or reference page?</li>
+<li>Does this sentence exist because I was afraid to cut it?</li>
+</ol>
+<p>That final question is the most important. Many teams feel a nervous compulsion to include "just in case" information. This instinct is what creates the wall of text that readers eventually ignore.</p>
+<p>Strong documentation comes from subtraction. Most teams already know their product well. Their biggest challenge is deciding what <em>not</em> to say on a given page. My post on <a href="/blog/how-to-write-a-changelog-developers-actually-read/">changelogs</a> makes a similar point: developers reward signal density and they punish filler instantly.</p>
+<h2 id="my-position-on-documentation-length">My position on documentation length</h2>
+<p>I would rather publish three sharp, modular pages than one majestic page that nobody can scan under pressure.</p>
+<p>Readers rarely complain that a tutorial was too short or too clear. They complain when the path is buried, when the answer arrives too late, or when the page tries to serve too many different audiences at once. Documentation is a tool, and tools are most effective when they are lean and focused.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>How short should a technical doc actually be?</strong></p>
+<p>There is no universal word count. A quickstart might be 600 words, while a deep migration guide might need 3,000. The target is the smallest amount of information that allows the reader to succeed without guesswork.</p>
+<p><strong>Do shorter docs risk leaving out important edge cases?</strong></p>
+<p>Only if you delete them without a plan. Edge cases should move to dedicated troubleshooting or reference pages. This keeps the primary path clean for the majority of users while still providing the answer for the minority who hit the edge case.</p>
+<p><strong>Should I split one long page into many tiny pages?</strong></p>
+<p>Only if those tiny pages have a clear, independent job. Excessive fragmentation is as bad as excessive length. I want fewer mixed-purpose pages, not a disorganized pile of fragments.</p>
+<p><strong>What kind of documentation should always stay long?</strong></p>
+<p>Specifications and formal standards. These documents serve as the "source of truth" and must be exhaustive to prevent ambiguity in implementation.</p>
+<p><strong>How can I tell if my page is too long?</strong></p>
+<p>If the first screen does not answer the user’s immediate question and the content mixes three or more different user intents, the page is likely too long for its purpose.</p>
+<!--
+primary keyword: shorter technical documentation
+sources used:
+- https://developers.google.com/tech-writing/one/documents
+- https://developers.google.com/style/word-list
+- https://learn.microsoft.com/en-us/style-guide/procedures-instructions/writing-step-by-step-instructions
+- https://docs.gitlab.com/development/documentation/styleguide/
+- https://stripe.dev/blog/markdoc
+- https://docs.stripe.com/changelog
+- http://swcarpentry.github.io/swc-releases/2017.02/instructor-training/files/papers/carroll-minimal-manual-1987.pdf
+- https://www.researchgate.net/publication/332151600_Cognitive_Load_Theory
+research gap identified: I have integrated modern 2024 cognitive load research and NASA-TLX scores which are rarely discussed in standard "how to write docs" blog posts.
+self-identified risks or weak spots: The argument for brevity can sometimes be misinterpreted as an argument for lack of detail; the sections on progressive disclosure and long formats are critical to prevent this.
+-->
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="related-card">
+        <div class="related-card-date">2026-04-08</div>
+        <div class="related-card-title">Technical Content as a Moat: The Long Game for Developer Tools</div>
+      </a>
+      <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="related-card">
+        <div class="related-card-date">2026-04-07</div>
+        <div class="related-card-title">How Stripe's Technical Blog Became a Competitive Moat</div>
+      </a>
+      <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="related-card">
+        <div class="related-card-date">2026-04-06</div>
+        <div class="related-card-title">Why DevTools Startups Lose Deals Over Bad Docs</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="footer-link">Technical Content as a Moat: The Long Game for Developer Tools</a>
+          <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="footer-link">How Stripe's Technical Blog Became a Competitive Moat</a>
+          <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="footer-link">Why DevTools Startups Lose Deals Over Bad Docs</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

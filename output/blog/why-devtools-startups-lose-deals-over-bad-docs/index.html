@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why DevTools Startups Lose Deals Over Bad Docs | Ninad Pathak</title>
+  <meta name="description" content="DevTools startups lose deals long before sales hears the objection. I explain how weak docs break evaluation, trials, and rollout confidence.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Why DevTools Startups Lose Deals Over Bad Docs">
+  <meta property="og:description" content="DevTools startups lose deals long before sales hears the objection. I explain how weak docs break evaluation, trials, and rollout confidence.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Why DevTools Startups Lose Deals Over Bad Docs",
+  "description": "DevTools startups lose deals long before sales hears the objection. I explain how weak docs break evaluation, trials, and rollout confidence.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-06",
+  "dateModified": "2026-04-06",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Why DevTools Startups Lose Deals Over Bad Docs",
+      "item": "https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Why DevTools Startups Lose Deals Over Bad Docs</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 06, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">9 min read</span>
+      </div>
+      <h1 class="post-title">Why DevTools Startups Lose Deals Over Bad Docs</h1>
+      <p class="lead">DevTools startups lose deals long before sales hears the objection. I explain how weak docs break evaluation, trials, and rollout confidence.</p>
+      <div class="post-tags">
+        <span class="tag">technical-writing</span>
+        <span class="tag">devtools</span>
+        <span class="tag">documentation</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#buyers-use-docs-as-the-product-not-the-brochure">Buyers use docs as the product, not the brochure</a></li>
+<li><a href="#the-first-broken-quickstart-can-kill-the-trial">The first broken quickstart can kill the trial</a></li>
+<li><a href="#buyers-read-docs-for-signs-of-operational-honesty">Buyers read docs for signs of operational honesty</a></li>
+<li><a href="#bad-docs-force-evaluators-into-unpaid-solution-engineering">Bad docs force evaluators into unpaid solution engineering</a></li>
+<li><a href="#documentation-quality-signals-product-maturity">Documentation quality signals product maturity</a></li>
+<li><a href="#the-hidden-deal-killer-is-post-sale-fear">The hidden deal killer is post-sale fear</a></li>
+<li><a href="#what-i-would-fix-first-on-a-startup-docs-site">What I would fix first on a startup docs site</a></li>
+<li><a href="#strong-docs-allow-smaller-startups-to-compete-with-larger-vendors">Strong docs allow smaller startups to compete with larger vendors</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>DevTools startups lose deals over bad docs long before anyone writes "documentation" into a CRM field. A buyer hits a dead quickstart, an auth example leaves out a required scope, a pricing-sensitive limit is buried, or the migration path for one breaking change is unclear. The trial cools off quietly. Sales blames timing. Product blames pricing. I think the docs were the real loss point more often than teams want to admit.</p>
+<p><strong>Short answer:</strong> DevTools buyers use docs as a proxy for product maturity, implementation risk, and post-sale support quality. The 2026 State of Docs report says 80% of decision-makers review documentation before buying, 88% rate docs extremely or somewhat important, and 51% say docs are important or essential for closing deals, yet 57% do not track leads from documentation. Bad docs lose deals because they create friction exactly where technical buyers evaluate trust: setup speed, API clarity, edge-case disclosure, and upgrade confidence.</p>
+<h2 id="buyers-use-docs-as-the-product-not-the-brochure">Buyers use docs as the product, not the brochure</h2>
+<p>The <a href="https://www.stateofdocs.com/2026/purchase-decisions-and-business-impact">State of Docs 2026 purchase and business impact report</a> makes the commercial case more directly than most product teams do internally. Eighty percent of decision-makers review docs before buying. Eighty-eight percent rate docs extremely or somewhat important. More than half of respondents say docs matter for closing deals, while most teams still do not instrument lead tracking from docs.</p>
+<p>Those numbers line up with what I have seen on technical evaluations. Developers do not start on the marketing site when the product is technical enough to change infrastructure, workflows, or developer time. They go to the docs because the docs answer the uncomfortable questions: how fast can I test this, what is hidden behind the first successful request, and what will break when I ship it?</p>
+<p>The same report includes operators from Gravitee, Docker, and Stripe describing docs as a sales tool, a developer enablement engine, and even infra. That language matters because it captures the real evaluation path. Buyers read documentation to judge the product team and solve immediate implementation problems at the same time.</p>
+<h2 id="the-first-broken-quickstart-can-kill-the-trial">The first broken quickstart can kill the trial</h2>
+<p>I think quickstarts carry more revenue weight than most startups give them. A quickstart is not an onboarding asset in the abstract. It is a timed test of whether a stranger can make your product work without hand-holding.</p>
+<p>Stripe's <a href="https://docs.stripe.com/development/quickstart">development quickstart</a> is a good example of what "serious" looks like. It starts with the CLI, shows the exact SDK version used, spells out what the reader will learn, and walks through the first successful request with real commands. Stripe's <a href="https://docs.stripe.com/quickstarts">quickstart index</a> also makes path selection obvious across different integration shapes.</p>
+<p>Vercel's <a href="https://vercel.com/docs/functions/quickstart">Functions quickstart</a> is much shorter, but it still does the essential job: prerequisites, a working code example, and the next technical steps. Cloudflare's <a href="https://developers.cloudflare.com/workers/get-started/">Workers getting started guide</a> follows the same pattern. Good quickstarts reduce ambiguity fast. Weak quickstarts force the buyer to improvise the missing steps. That improvisation is where doubt enters the evaluation.</p>
+<p>I have watched engineering teams shrug off a broken sample because "support can help." Support is too late. Once the evaluator has to ask for help to finish the first ten minutes, the product feels expensive before procurement ever sees a quote.</p>
+<h2 id="buyers-read-docs-for-signs-of-operational-honesty">Buyers read docs for signs of operational honesty</h2>
+<p>A polished docs site does not close deals on its own. Honest docs close more deals because they show the team understands the ugly parts of adoption.</p>
+<p>Buyers look for questions like these, even if they never state them explicitly:</p>
+<ul>
+<li>Which auth scopes or API keys do I need, exactly?</li>
+<li>What are the rate limits, timeouts, and default quotas?</li>
+<li>Which deployment environments are actually supported?</li>
+<li>How do retries, idempotency, and failure states behave?</li>
+<li>What changes when the next major version ships?</li>
+</ul>
+<p>Stripe's <a href="https://docs.stripe.com/development">developer resources page</a> groups versioning, API upgrades, testing, and error handling as core developer concerns. That is not accidental. Mature docs acknowledge that adoption risk extends beyond basic implementation. Explicit limit documentation and edge-case handling help the buyer assess the full operational surface. I've found that missing detail damages trust more effectively than poor visual design. Accurate constraints sell products. </p>
+<h2 id="bad-docs-force-evaluators-into-unpaid-solution-engineering">Bad docs force evaluators into unpaid solution engineering</h2>
+<p>Every missing prerequisite or unlabeled beta feature pushes cognitive load onto the evaluator. Vague migration notes and broken code samples increase implementation cost. That cost rarely appears in a forecast sheet, but it shapes deal momentum.</p>
+<p>State of Docs reports that onboarding and feature discovery are the highest-impact areas for documentation today. Feature discovery drives trial success. If a buyer cannot get through setup cleanly, they never reach the internal champion phase where a tool gets defended.</p>
+<p>I think devtools startups underestimate how often bad docs force prospects into pseudo-consulting mode. The buyer has to infer naming conventions and reconstruct request formats. They hunt changelog entries to piece together compatibility. That work feels like future maintenance cost. Tools that are difficult to understand give a meaningful advantage to competitors with clearer documentation.</p>
+<p>One reason I write for devtools companies is that docs quality improves sales and support simultaneously. Good docs reduce the labor required to believe in the product. <a href="/work">My work page</a> covers the kind of writing work I mean.</p>
+<h2 id="documentation-quality-signals-product-maturity">Documentation quality signals product maturity</h2>
+<p>Buyers use docs as a maturity detector because docs expose coordination quality across product, engineering, and support. I can usually tell a lot from four pages:</p>
+<ol>
+<li>Quickstart</li>
+<li>Authentication or API keys</li>
+<li>Limits, pricing, or quotas</li>
+<li>Changelog or release notes</li>
+</ol>
+<p>Those pages reveal whether the team respects downstream implementation work. A startup can still be early and score well here. I do not expect perfect breadth from a small team. I do expect the essentials to be current, tested, and honest.</p>
+<p>Release communication matters to founders. Vague update pages make buyers wonder how painful upgrades will become after adoption. I covered that problem from the user side in <a href="/blog/how-to-write-a-changelog-developers-actually-read/">How to Write a Changelog That Developers Actually Read</a> and from the release side in <a href="/blog/writing-release-notes-that-developers-trust/">Writing release notes that developers trust</a>. Buyers read those surfaces as evidence that the product will age gracefully.</p>
+<h2 id="the-hidden-deal-killer-is-post-sale-fear">The hidden deal killer is post-sale fear</h2>
+<p>A buyer does not need to prove your docs are bad to walk away. They only need to suspect that post-sale life will be harder than promised.</p>
+<p>That suspicion usually forms from small details:</p>
+<ul>
+<li>The code sample uses a deprecated SDK version.</li>
+<li>The limits page exists, but the defaults on it do not match the API behavior.</li>
+<li>The changelog mentions removals without migration steps.</li>
+<li>The auth guide assumes knowledge a new evaluator will not have.</li>
+<li>The troubleshooting page explains symptoms without root causes.</li>
+</ul>
+<p>None of those issues alone sounds dramatic. Together they tell a story about the company's operational habits. Buyers notice the pattern because they have lived through painful integrations before. Good docs lower perceived implementation risk.</p>
+<p>My non-obvious view here is that docs act as a risk model. Buyers study docs to estimate how the vendor will behave after signature. They evaluate the vendor's behavior during outages, deprecations, and urgent support tickets.</p>
+<h2 id="what-i-would-fix-first-on-a-startup-docs-site">What I would fix first on a startup docs site</h2>
+<p>If I had one week with a devtools startup whose docs were hurting conversion, I would start with the pages buyers hit during evaluation:</p>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>What I would tighten first</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quickstart</td>
+<td>Remove hidden prerequisites, test every command, show the first successful outcome</td>
+</tr>
+<tr>
+<td>Auth</td>
+<td>Spell out exact scopes, token lifetimes, environment differences, and failure responses</td>
+</tr>
+<tr>
+<td>Limits</td>
+<td>Publish defaults, rate limits, quotas, and upgrade paths clearly</td>
+</tr>
+<tr>
+<td>Release history</td>
+<td>Separate breaking changes, deprecations, and migrations with dates and versions</td>
+</tr>
+<tr>
+<td>Troubleshooting</td>
+<td>Cover top integration failures with symptom, cause, and fix</td>
+</tr>
+</tbody>
+</table>
+<p>I would also instrument docs better. State of Docs shows a huge measurement gap between believing docs matter and proving where they matter. Teams need to know which pages start trials, which pages correlate with activation, and which pages generate support.</p>
+<h2 id="strong-docs-allow-smaller-startups-to-compete-with-larger-vendors">Strong docs allow smaller startups to compete with larger vendors</h2>
+<p>Small companies can win against established vendors with documentation. I have seen that happen because docs compress the distance between product quality and buyer confidence. Great docs let a small team look operationally credible. </p>
+<p>Tailwind often comes up in docs discussions for a reason: the docs make the product legible immediately. Plenty of startups could borrow that lesson. Clear information architecture and tested examples create momentum. </p>
+<p>Founders sometimes ask whether docs should wait until the product is more mature. I think the opposite is true for devtools. Early products need sharper docs because buyers already discount the company for age and roadmap uncertainty. Docs are one of the few places a startup can remove that discount.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>Do bad docs really lose deals, or just slow onboarding?</strong></p>
+<p>They do both. Bad docs slow onboarding first, then they lose deals when the buyer interprets that friction as future implementation and support cost. The sales team often sees the slowdown without seeing the cause.</p>
+<p><strong>Which docs page matters most for devtools conversion?</strong></p>
+<p>Usually the quickstart, because it compresses setup, clarity, and trust into one session. After that, I would rank auth, limits, and release history very high because they reveal operational honesty.</p>
+<p><strong>Should startups invest in docs before they hire DevRel?</strong></p>
+<p>Yes. Docs are the cheapest durable technical explanation a startup can publish. DevRel can amplify and humanize the product later. Weak docs make every later channel work harder.</p>
+<p><strong>What is the biggest documentation mistake early-stage devtools teams make?</strong></p>
+<p>They document the happy path and assume support can cover the rest. Buyers are evaluating the unhappy path too. If docs do not explain constraints, migration, and failure handling, the product feels risky.</p>
+<p><strong>How should teams measure whether docs influence revenue?</strong></p>
+<p>Track docs-to-signup paths, docs pages viewed before trial activation, support tickets opened after a docs view, and which docs pages correlate with first successful use. State of Docs shows that many teams still miss this measurement layer entirely.</p>
+<!--
+primary keyword: why devtools startups lose deals over bad docs
+sources used:
+- https://www.stateofdocs.com/2026/introduction-and-demographics
+- https://www.stateofdocs.com/2026/purchase-decisions-and-business-impact
+- https://docs.stripe.com/development/quickstart
+- https://docs.stripe.com/quickstarts
+- https://docs.stripe.com/development
+- https://vercel.com/docs/functions/quickstart
+- https://developers.cloudflare.com/workers/get-started/
+research gap identified: plenty of people say docs matter, but very few pieces explain the specific evaluation moments where bad docs create deal risk for devtools buyers.
+self-identified risks or weak spots: article leans on State of Docs heavily for business framing; buyer-behavior examples rely partly on my synthesis rather than vendor-published conversion studies.
+-->
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="related-card">
+        <div class="related-card-date">2026-04-08</div>
+        <div class="related-card-title">Technical Content as a Moat: The Long Game for Developer Tools</div>
+      </a>
+      <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="related-card">
+        <div class="related-card-date">2026-04-07</div>
+        <div class="related-card-title">How Stripe's Technical Blog Became a Competitive Moat</div>
+      </a>
+      <a href="/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/" class="related-card">
+        <div class="related-card-date">2026-04-05</div>
+        <div class="related-card-title">From Engineer to Technical Writer: What I Kept and What I Left Behind</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="footer-link">Technical Content as a Moat: The Long Game for Developer Tools</a>
+          <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="footer-link">How Stripe's Technical Blog Became a Competitive Moat</a>
+          <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="footer-link">Why DevTools Startups Lose Deals Over Bad Docs</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

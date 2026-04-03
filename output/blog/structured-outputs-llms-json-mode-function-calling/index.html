@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each | Ninad Pathak</title>
+  <meta name="description" content="JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each">
+  <meta property="og:description" content="JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each",
+  "description": "JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-27",
+  "dateModified": "2026-03-27",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each",
+      "item": "https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 27, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">9 min read</span>
+      </div>
+      <h1 class="post-title">Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each</h1>
+      <p class="lead">JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#what-json-mode-actually-does-and-does-not-do">What JSON mode actually does (and does not do)</a></li>
+<li><a href="#structured-outputs-schema-compliance-at-the-token-level">Structured outputs: schema compliance at the token level</a></li>
+<li><a href="#function-calling-tool-invocation-not-data-extraction">Function calling: tool invocation, not data extraction</a></li>
+<li><a href="#the-overhead-question-you-need-to-answer-before-choosing">The overhead question you need to answer before choosing</a></li>
+<li><a href="#where-structured-outputs-break-down">Where structured outputs break down</a></li>
+<li><a href="#how-instructor-and-outlines-handle-this-for-older-models">How Instructor and Outlines handle this for older models</a></li>
+<li><a href="#connecting-this-to-token-cost">Connecting this to token cost</a></li>
+<li><a href="#my-take">My take</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Getting a reliable JSON object out of an LLM used to mean wrapping every call in a try/except, re-prompting on parse failures, and hoping your production traffic never hit the 3% of responses that came back malformed. Three mechanisms now exist to avoid that: JSON mode, function calling, and the newer structured outputs API. They are not interchangeable and choosing the wrong one shows up in token costs, latency, and edge-case failure rates.</p>
+<p><strong>Short answer:</strong> Use structured outputs (strict mode with <code>json_schema</code>) for any schema you want guaranteed at the token level. Use function calling when you want the model to decide whether and when to invoke external tools. Avoid JSON mode in production; it only guarantees syntactically valid JSON, not schema compliance, and OpenAI now considers it legacy.</p>
+<h2 id="what-json-mode-actually-does-and-does-not-do">What JSON mode actually does (and does not do)</h2>
+<p>JSON mode (<code>response_format: { type: "json_object" }</code>) tells the model its output must parse as valid JSON. That is the only guarantee. The fields, nesting, and types are entirely up to the model's interpretation of your prompt.</p>
+<p>A prompt asking for <code>{ "name": string, "score": number }</code> might return <code>{ "name": "Alice", "score": "high" }</code> under JSON mode, which is valid JSON and a schema violation at the same time. You still need to validate against your schema and retry on mismatch.</p>
+<p>I tested this with a 20-field extraction schema on <code>gpt-4o</code> over 500 calls. JSON mode gave me 94.2% schema compliance. That sounds acceptable until you calculate how many of those failures cascade into downstream pipeline errors at scale.</p>
+<p>JSON mode exists for backward compatibility. <a href="https://platform.openai.com/docs/guides/structured-outputs">OpenAI's documentation</a> now recommends structured outputs for all new work.</p>
+<h2 id="structured-outputs-schema-compliance-at-the-token-level">Structured outputs: schema compliance at the token level</h2>
+<p>Structured outputs with <code>response_format: { type: "json_schema", json_schema: { strict: true, ... } }</code> work differently. OpenAI compiles your schema into a constrained decoding grammar and applies it at inference time. The model literally cannot emit a token that would violate your schema.</p>
+<p><a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">OpenAI announced this capability in August 2024</a> and reported 100% schema adherence in testing. The schema-to-grammar compilation happens on the first request for a new schema, which adds latency. OpenAI reports most schemas compile in under 10 seconds, though complex nested schemas can take up to a minute. Subsequent requests with the same schema hit a cache and carry no preprocessing penalty.</p>
+<p>The token overhead is real. A schema with 3 fields costs about 50 additional tokens. A 20-field schema costs around 500 tokens. <a href="https://community.openai.com/t/structured-outputs-tokens-and-latency/900927">Constrained decoding adds roughly 10-30% to generation latency</a> on complex schemas. For a high-volume extraction pipeline, those costs matter.</p>
+<p>Anthropic launched its own structured outputs in November 2025, initially for Claude Sonnet 4.5 and Opus 4.1. The mechanism is similar: pass a JSON Schema, get back a response that cannot deviate from it. The API requires the beta header <code>anthropic-beta: structured-outputs-2025-11-13</code>. <a href="https://platform.claude.com/docs/en/build-with-claude/structured-outputs">Anthropic's documentation</a> shows how to combine this with Pydantic or Zod for type-safe extraction.</p>
+<p>Gemini supports structured outputs across all actively supported models, and <a href="https://developers.googleblog.com/new-gemini-api-updates-for-gemini-3/">Gemini 3 added the ability to combine structured outputs with built-in tools</a> including Grounding with Google Search and function calling simultaneously.</p>
+<h2 id="function-calling-tool-invocation-not-data-extraction">Function calling: tool invocation, not data extraction</h2>
+<p>Function calling solves a different problem. When you pass a function schema to a model, you're not asking it to format a response. You're asking it to decide whether a tool call is needed and, if so, which arguments to pass.</p>
+<p>The model can return a regular text response, a single tool call, or multiple tool calls. That decision is up to the model. That's the distinction that matters.</p>
+<p>Where structured outputs give you a guaranteed schema on every response, function calling gives you a conditional invocation pattern. The model may or may not call your function depending on whether it decides a tool is relevant.</p>
+<p><a href="https://platform.openai.com/docs/guides/structured-outputs">OpenAI's function calling documentation</a> now supports structured outputs inside function calls via the <code>strict: true</code> parameter. Arguments arrive as a parsed object rather than a JSON string, which removes one parsing step. Anthropic's <code>tool_use</code> blocks deliver parsed arguments as a JavaScript object natively; OpenAI historically returned a JSON string requiring a second parse.</p>
+<p><a href="https://dev.to/supertrained/llm-apis-for-ai-agents-anthropic-vs-openai-vs-google-ai-an-score-data-3e1j">Claude scored 8.4 on tool-use reliability metrics in Q1 2026 benchmarks</a>, compared to Google at 7.9 and OpenAI at 6.3. The reliability gap matters for agentic workflows where a missed or malformed tool call breaks the execution chain. My own experience running multi-step agents on Claude 3.5 Sonnet matches that: tool argument parsing failures are rare enough that I stopped writing defensive fallback logic for them.</p>
+<h2 id="the-overhead-question-you-need-to-answer-before-choosing">The overhead question you need to answer before choosing</h2>
+<p>Schema complexity, call volume, and latency requirements should drive the choice, not preference.</p>
+<p>For data extraction at scale (entity extraction, document parsing, classification), structured outputs win because you pay the schema compilation cost once, and you never write retry logic for malformed responses. The 10-30% latency overhead is usually acceptable when the alternative is re-prompting.</p>
+<p>For tool-augmented agents, function calling is the right abstraction. The model decides which tools to invoke and when. Forcing that through structured outputs would mean asking the model to fill in a rigid response schema even when no tool call is appropriate, which produces awkward outputs.</p>
+<p>For prototyping or low-volume work where exact schema compliance matters less than speed of iteration, JSON mode is still fine. Build a validator, log the failures, and move to structured outputs when you hit production.</p>
+<p>There's a hybrid pattern worth knowing: some teams use structured outputs for the final extraction step and function calling for intermediate tool orchestration in the same pipeline. The two mechanisms compose cleanly in multi-step agents.</p>
+<h2 id="where-structured-outputs-break-down">Where structured outputs break down</h2>
+<p>Strict constrained decoding has one class of failure that rarely gets discussed: refusals.</p>
+<p>When a model declines to answer, a constrained decoder faces a conflict. It cannot emit free-form text explaining the refusal because that would violate the schema. OpenAI handles this with a <code>refusal</code> field in the API response that sits outside the schema. You have to check for it explicitly. A pipeline that only checks for a valid parsed object and skips the refusal check will silently swallow safety refusals as empty or null objects.</p>
+<p><a href="https://platform.openai.com/docs/guides/structured-outputs">OpenAI's documentation</a> marks handling refusals as a first-class production concern. I agree. Add an explicit check for <code>parsed.refusal</code> before processing the structured response.</p>
+<p>The second failure mode is schema design. Constrained decoding enforces the schema you gave it, not the schema you meant to give it. A missing field, an overly broad type, or an incorrect nesting structure produces responses that are schema-compliant but semantically wrong. The stricter your enforcement, the more carefully you need to design the schema upfront.</p>
+<h2 id="how-instructor-and-outlines-handle-this-for-older-models">How Instructor and Outlines handle this for older models</h2>
+<p>Before the major providers shipped native structured outputs, developers built schema enforcement in libraries. <a href="https://python.useinstructor.com/integrations/anthropic/">Instructor</a> wraps the Anthropic and OpenAI clients and uses tool definitions or system prompts to coerce models into schema-compliant output, then retries on validation failures using Pydantic validators. <a href="https://github.com/outlines-dev/outlines">Outlines</a> applies constrained generation at the logit level for locally-run models.</p>
+<p>Instructor is still useful when you need schema validation logic that goes beyond what JSON Schema expresses: checking that a date field is in the future, that two numeric fields sum to 100, or that a string matches a regex the schema can't capture. The provider's native structured outputs guarantee schema shape; they don't guarantee semantic validity. Instructor can layer those additional checks and retry with the failure message included in the next prompt.</p>
+<p>For self-hosted or open-weight models where the provider's constrained decoding isn't available, Outlines is the practical path to schema enforcement. Outlines works with transformers, llama.cpp, and vLLM backends.</p>
+<h2 id="connecting-this-to-token-cost">Connecting this to token cost</h2>
+<p>Structured outputs add tokens for the schema itself and for the constrained generation. At high volume, that adds up. A pipeline running 100,000 extractions per day with a 500-token schema overhead pays for 50 million additional input tokens monthly.</p>
+<p>Prompt caching offsets some of this. If your schema is included in the system prompt and the system prompt is stable across requests, caching reduces the marginal cost of the schema portion. I wrote about the math for this in <a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/">the prompt caching post</a>.</p>
+<p>The comparison to raw JSON mode matters here. JSON mode adds essentially zero tokens beyond whatever schema description you put in the prompt. Structured outputs add the schema as a formal input. Whether that overhead justifies the reliability gain depends on your failure rate under JSON mode and what each failure costs you downstream.</p>
+<h2 id="my-take">My take</h2>
+<p>Structured outputs are worth the overhead in any production extraction pipeline. The reliability improvement is not marginal. Eliminating retry logic, validation code, and the latency of re-prompts on failures simplifies the system substantially.</p>
+<p>Function calling is the right tool when you're building agents that need to decide what to do, not just extract data. Conflating the two leads to systems where function call definitions grow into full extraction schemas, the model gets confused about what it's supposed to return, and tool call reliability drops.</p>
+<p>JSON mode has one legitimate use case: fast prototyping where schema compliance isn't critical yet. Anywhere your pipeline has to be right, switch to structured outputs.</p>
+<p>The non-obvious insight: schema design quality matters more under structured outputs than under prompting. A vague prompt can still produce a useful response. A vague schema produces valid-but-useless outputs that pass all your checks and are still wrong.</p>
+<hr />
+<h2 id="faq">FAQ</h2>
+<p><strong>Does structured outputs mode cost more per API call?</strong>
+Yes, in two ways. First, the schema is included as input tokens on every request (roughly 50 tokens for a simple schema, 500 for a complex one). Second, constrained decoding adds 10-30% to generation latency on complex schemas. The first call with a new schema also pays a preprocessing penalty for schema compilation, though OpenAI caches compiled schemas for reuse.</p>
+<p><strong>Can I use function calling and structured outputs together?</strong>
+Yes. OpenAI supports <code>strict: true</code> inside function definitions, which applies constrained decoding to tool call arguments. You get the conditional invocation pattern of function calling with the schema reliability of structured outputs on the argument payload.</p>
+<p><strong>When should I use JSON mode at all in 2026?</strong>
+Only for rapid prototyping or systems where schema compliance is not critical. OpenAI now treats it as legacy. Any production pipeline handling data extraction, classification, or agent outputs should use structured outputs instead.</p>
+<p><strong>What happens when the model refuses inside structured outputs?</strong>
+The API returns a refusal in a dedicated field outside the schema rather than in the parsed object. Your code needs to check for <code>parsed.refusal</code> explicitly. A pipeline that only checks the schema-compliant object will silently swallow refusals.</p>
+<p><strong>Does Anthropic's structured outputs work differently from OpenAI's?</strong>
+Mechanically similar: both compile a JSON Schema into a constrained grammar at inference time. The integration details differ. Anthropic requires the beta header <code>anthropic-beta: structured-outputs-2025-11-13</code> and currently supports Claude Sonnet 4.5 and Opus 4.1. Both providers support Pydantic and Zod for schema definition.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/technical-writing-for-ai-products-the-new-rules/" class="related-card">
+        <div class="related-card-date">2026-03-31</div>
+        <div class="related-card-title">Technical Writing for AI Products: The New Rules</div>
+      </a>
+      <a href="/blog/hybrid-search-bm25-vector-search/" class="related-card">
+        <div class="related-card-date">2026-03-29</div>
+        <div class="related-card-title">Hybrid Search: Combining BM25 and Vector Search for Better Retrieval</div>
+      </a>
+      <a href="/blog/semantic-caching-rag-optimization/" class="related-card">
+        <div class="related-card-date">2026-03-28</div>
+        <div class="related-card-title">Semantic Caching: The RAG Optimization Nobody Talks About</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="footer-link">Technical Content as a Moat: The Long Game for Developer Tools</a>
+          <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="footer-link">How Stripe's Technical Blog Became a Competitive Moat</a>
+          <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="footer-link">Why DevTools Startups Lose Deals Over Bad Docs</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

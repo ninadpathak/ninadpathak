@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Writing for AI Products: The New Rules | Ninad Pathak</title>
+  <meta name="description" content="AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Technical Writing for AI Products: The New Rules">
+  <meta property="og:description" content="AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Technical Writing for AI Products: The New Rules",
+  "description": "AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-31",
+  "dateModified": "2026-03-31",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Technical Writing for AI Products: The New Rules",
+      "item": "https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Technical Writing for AI Products: The New Rules</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 31, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">12 min read</span>
+      </div>
+      <h1 class="post-title">Technical Writing for AI Products: The New Rules</h1>
+      <p class="lead">AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.</p>
+      <div class="post-tags">
+        <span class="tag">technical-writing</span>
+        <span class="tag">ai</span>
+        <span class="tag">developer-experience</span>
+        <span class="tag">devtools</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#ai-product-docs-now-have-three-readers">AI product docs now have three readers</a></li>
+<li><a href="#prompts-schemas-and-evals-are-part-of-the-product-surface">Prompts, schemas, and evals are part of the product surface</a></li>
+<li><a href="#sample-code-has-to-be-runnable-not-decorative">Sample code has to be runnable, not decorative</a></li>
+<li><a href="#versioning-matters-more-in-ai-docs-than-teams-admit">Versioning matters more in AI docs than teams admit</a></li>
+<li><a href="#retrieval-and-agent-use-change-what-clear-docs-means">Retrieval and agent use change what “clear docs” means</a></li>
+<li><a href="#how-i-would-evaluate-a-technical-writer-for-an-ai-company">How I would evaluate a technical writer for an AI company</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Technical writing for AI products has become a product design problem. A weak paragraph used to confuse a reader for five minutes. A weak prompt example or sloppy schema explanation now gets copied into production, fed to an agent, and multiplied across hundreds of calls before anyone notices the damage.</p>
+<p>I think a lot of teams are still hiring technical writers for the previous generation of software. They ask for someone who can explain features clearly. That still matters, but it is nowhere near enough for an AI product. I would not trust a writer on an LLM, agent, or AI API product unless they can document prompts, outputs, failure modes, evaluation criteria, and version drift with the same rigor they bring to an endpoint reference.</p>
+<p><strong>Short answer:</strong> Technical writing for AI products now needs to cover three things at once: human understanding, machine-readable structure, and behavioral reliability. Strong AI docs include tested examples, explicit output constraints, prompt and schema versioning, and clear failure boundaries. Teams evaluating writers should look for someone who can treat prompts, JSON schemas, and eval cases as part of the product surface, not as side material around it.</p>
+<h2 id="ai-product-docs-now-have-three-readers">AI product docs now have three readers</h2>
+<p>Classic software documentation usually had one primary reader: the developer integrating the API. AI product documentation has at least three.</p>
+<p>Reader one is still the human developer. Reader two is the model-facing workflow the developer assembles from your docs: prompt templates, function schemas, system instructions, output validators, and guardrails. Reader three is the retrieval layer around modern tooling: site search, support copilots, coding assistants, internal knowledge bases, and agent harnesses that quote your docs back to users.</p>
+<p>Google's guidance for web content generated with AI says the bar is still "accuracy, quality, and relevance," and that metadata, structured data, titles, and descriptions need the same care as body copy (<a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content">Google Search Central</a>). That sounds obvious until you audit a typical AI startup docs set. Plenty of teams still treat metadata as an SEO chore, prompt examples as blog fodder, and JSON schemas as something the SDK team can explain later.</p>
+<p>My take is blunt: if your AI product has a prompt surface, then your prompt surface is documentation. If your product emits structured JSON, then your schema is documentation. If your agent can fail in predictable ways, then those failure modes belong in documentation before they land in support tickets.</p>
+<p>That change in audience is why I care so much about information architecture. A model cannot infer the intended contract from marketing language. A harried engineer will not guess it either. Google's API writing guidance requires a description for every method, parameter, return value, and exception, and it asks for a code sample of roughly 5 to 20 lines near the top of each API page (<a href="https://developers.google.com/style/api-reference-comments">Google developer documentation style guide</a>). AI products need that discipline plus one extra layer: documented behavior under ambiguity.</p>
+<h2 id="prompts-schemas-and-evals-are-part-of-the-product-surface">Prompts, schemas, and evals are part of the product surface</h2>
+<p>Teams still separate "real docs" from "prompting guidance" far too often. I think that split is a mistake.</p>
+<p>OpenAI's prompt engineering guide explicitly recommends pinning production apps to model snapshots and building evals that measure prompt behavior as you iterate or upgrade model versions (<a href="https://developers.openai.com/api/docs/guides/prompt-engineering">OpenAI prompt engineering guide</a>). Anthropic's prompting guide makes the same point from a different angle: be clear and direct, provide explicit output constraints, and use 3 to 5 examples for best results (<a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Anthropic prompting best practices</a>).</p>
+<p>Once the model vendors tell you to pin versions and measure prompt behavior, the writing problem stops being "how do I explain the feature?" and becomes "how do I document a behavioral contract that changes over time?"</p>
+<p>That is where many AI docs fall apart. They explain what the endpoint does and skip the instructions that make it work reliably. They give one happy-path example and never show the borderline cases. They say "returns structured JSON" without showing the schema or the refusal path. They talk about consistency while shipping a prompt example that was never evaluated against the current model snapshot.</p>
+<p>I covered the schema side of that problem in my post on <a href="/blog/structured-outputs-llms-json-mode-function-calling/">structured outputs</a>. OpenAI's structured outputs docs say the feature ensures the model adheres to your supplied JSON Schema and removes the need to retry malformed responses (<a href="https://developers.openai.com/api/docs/guides/structured-outputs">OpenAI structured outputs guide</a>). That changes what good documentation looks like. A writer working on an AI API now needs to explain:</p>
+<ul>
+<li>which fields are guaranteed by schema</li>
+<li>which fields are model-generated but unconstrained</li>
+<li>how refusals appear</li>
+<li>what changes when teams use tool calling instead of direct response formatting</li>
+</ul>
+<p>Those are not edge concerns. Those details determine whether the integration survives contact with production traffic.</p>
+<p>My experience with AI infrastructure content has made one pattern very clear: the best writers on these products think like interface designers. They do not stop at prose. They ask for the actual prompt template, the exact schema, the logged error objects, the benchmark setup, and the deprecation plan. That is also the kind of technical depth I bring when writing for AI companies. <a href="/work">My work page</a> has examples if that is relevant.</p>
+<h2 id="sample-code-has-to-be-runnable-not-decorative">Sample code has to be runnable, not decorative</h2>
+<p>Good AI documentation lives or dies on examples. Google states that good sample code should build without errors, perform the task it claims to perform, be production-ready where possible, and explain how to run it, including setup, dependencies, and expected results (<a href="https://developers.google.com/tech-writing/two/sample-code">Google technical writing course on sample code</a>).</p>
+<p>That standard matters more for AI products than for ordinary CRUD APIs because developers actively mutate the sample. They paste it into a notebook, replace the model name, tweak a system instruction, and ship a variant into a prototype by lunch.</p>
+<p>Snippet quality has a compounding effect in AI docs:</p>
+<ul>
+<li>A correct example teaches the integration pattern.</li>
+<li>A complete example teaches the surrounding constraints.</li>
+<li>A tested example teaches trust.</li>
+</ul>
+<p>Weak examples create very specific failure modes. A missing system instruction changes output shape. An omitted validator hides schema drift. A toy prompt with no delimiters teaches bad prompting habits. A code sample that hardcodes a model alias without a snapshot masks version instability. A response example without a refusal case teaches developers to parse the happy path only.</p>
+<p>Google's style guidance says the first sentence of an API description should carry unique, descriptive information and not repeat what the name already implies (<a href="https://developers.google.com/style/api-reference-comments">Google developer documentation style guide</a>). I apply the same rule to examples. A code block should not merely prove the endpoint exists. It should teach the non-obvious part. If a developer could have guessed the sample from the method name alone, the sample is wasting space.</p>
+<p>My preferred pattern for AI docs is simple:</p>
+<ol>
+<li>Show the minimal working request.</li>
+<li>Show the exact output contract.</li>
+<li>Show one failure or refusal case.</li>
+<li>Show the production caveat that changes implementation choices.</li>
+</ol>
+<p>Anything less usually produces docs that demo well and deploy badly.</p>
+<h2 id="versioning-matters-more-in-ai-docs-than-teams-admit">Versioning matters more in AI docs than teams admit</h2>
+<p>Traditional API versioning taught teams to document endpoints, parameters, and deprecations. AI products need all of that plus model-behavior versioning.</p>
+<p>OpenAI recommends pinning production applications to specific model snapshots so behavior remains consistent across releases (<a href="https://developers.openai.com/api/docs/guides/prompt-engineering">OpenAI prompt engineering guide</a>). Anthropic's docs are equally explicit that prompt behavior depends on model generation, prompt structure, examples, and effort settings (<a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Anthropic prompting best practices</a>). SemVer gives software teams a shared language for contract changes (<a href="https://semver.org/">Semantic Versioning 2.0.0</a>).</p>
+<p>AI companies rarely apply that thinking far enough. They version SDKs and neglect prompt packs, eval datasets, output schemas, and migration notes between model snapshots. Then they act surprised when support volume rises after a "minor" model update.</p>
+<p>I wrote recently about <a href="/blog/how-to-write-a-changelog-developers-actually-read/">how to write a changelog developers actually read</a>. AI product teams need the same discipline, except the changelog has to explain behavioral changes with much more care. "Improved reasoning quality" is not a useful release note. "Responses are now more likely to include intermediate rationale unless <code>verbosity</code> is set to low" is useful. "Tool selection is more aggressive on multi-step prompts" is useful. "Strict schema enforcement now rejects unsupported keywords instead of ignoring them" is useful.</p>
+<p>Readers evaluating an AI writer should ask one uncomfortable question: can this person write migration notes for model behavior as well as feature release notes? Plenty of otherwise competent SaaS writers cannot.</p>
+<h2 id="retrieval-and-agent-use-change-what-clear-docs-means">Retrieval and agent use change what “clear docs” means</h2>
+<p>Search-friendly documentation used to mean headings, metadata, and sane page structure. Those basics still matter. Modern AI products add another constraint: your docs will be read piecemeal by agents, retrieval systems, support copilots, and developer tools.</p>
+<p>OpenAI's prompting docs recommend structuring developer messages with sections such as identity, instructions, examples, and context, using Markdown and XML to mark logical boundaries (<a href="https://developers.openai.com/api/docs/guides/prompt-engineering">OpenAI prompt engineering guide</a>). Anthropic recommends XML tags for complex prompts and reports that placing longform data first, with the query near the end, can improve quality by up to 30% in tests on complex multi-document inputs (<a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Anthropic prompting best practices</a>).</p>
+<p>That guidance is nominally about prompts, but I think it has a direct writing implication: document structure itself has become part of product performance.</p>
+<p>A few concrete rules follow from that:</p>
+<ul>
+<li>Headings should answer real questions, not label vague topic buckets.</li>
+<li>Example blocks should have enough context around them that retrieval systems can surface them meaningfully.</li>
+<li>Parameter tables should state defaults, limits, and replacement paths explicitly.</li>
+<li>Error sections should include the exact failure object or message shape where possible.</li>
+</ul>
+<p>My post on <a href="/blog/agent-harnesses/">agent harnesses</a> makes a related point from the systems side: the runtime around an LLM becomes load-bearing once the model is taking multi-step actions. Documentation plays the same role for developers. A vague paragraph that a human can mentally patch over becomes a serious integration bug when an agent or assistant uses it as operating context.</p>
+<p>That is the non-obvious shift I do not see enough articles mention. AI documentation is no longer just explanatory text around the product. It is often the retrieval corpus and behavioral instruction layer around the product.</p>
+<h2 id="how-i-would-evaluate-a-technical-writer-for-an-ai-company">How I would evaluate a technical writer for an AI company</h2>
+<p>If I were hiring for this work, I would not ask for a generic portfolio review first. I would ask for evidence in five specific areas:</p>
+<ol>
+<li>Can the writer document a prompt or system instruction set with the same precision they use for an API method?</li>
+<li>Can they explain a JSON schema, refusal case, and validation boundary without flattening the nuance?</li>
+<li>Can they produce examples that are complete enough to run and concrete enough to implement from?</li>
+<li>Can they write migration notes for changing model behavior and not hide behind soft language?</li>
+<li>Can they work directly with PMs, engineers, and applied AI teams to extract the actual contract instead of paraphrasing whatever made it into a Notion brief?</li>
+</ol>
+<p>I would also look for one more thing that rarely shows up on job descriptions: taste in omission. Strong AI writing leaves out speculative claims, hand-wavy guarantees, and fake certainty. Weak AI writing fills space where experimental uncertainty should have been stated plainly.</p>
+<p>My experience has been that AI teams do not need more words. They need better boundaries. A writer who can turn fuzzy behavior into a documented contract is much more valuable than a writer who can produce a polished 1,500-word feature page from a launch brief.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>How is technical writing for AI products different from ordinary API documentation?</strong></p>
+<p>AI docs still need reference accuracy, but they also need to document behavior. That includes prompts, examples, schemas, refusals, model-version caveats, and evaluation criteria. Ordinary API docs can often stop at syntax plus semantics. AI docs usually fail if they stop there.</p>
+<p><strong>Should a technical writer for an AI company know how to run evals?</strong></p>
+<p>Yes, at least at a practical level. I do not expect every writer to design evaluation infrastructure, but I do expect them to understand what is being measured, what changed between versions, and which examples are part of the tested contract. A writer who cannot read eval outputs will struggle to document model behavior honestly.</p>
+<p><strong>Do AI product docs need more tutorials or more reference pages?</strong></p>
+<p>Both, but reference quality usually breaks first. Teams rush to publish glossy tutorials and skip the hard parts: parameter defaults, schema guarantees, refusal handling, and migration notes. I would fix reference and examples before adding another tutorial series.</p>
+<p><strong>Should writers own prompt libraries and system prompts?</strong></p>
+<p>Shared ownership works best. Applied AI or engineering should own runtime behavior. Writers should own clarity, structure, consistency, and upgrade notes. That split fails when writers are blocked from seeing the actual prompts or when engineers treat prompt text as too informal to document. Prompt text is product logic in many AI systems.</p>
+<p><strong>What is the fastest way to tell whether an AI writer is strong?</strong></p>
+<p>Ask them to rewrite one weak API page for an LLM feature. Give them the schema, a prompt template, three failure logs, and a model upgrade note. Strong writers get sharper. Weak writers get vaguer.</p>
+<!--
+Editor note:
+Primary keyword: technical writing for AI products
+Sources used:
+- https://developers.google.com/search/docs/fundamentals/using-gen-ai-content
+- https://developers.google.com/style/api-reference-comments
+- https://developers.google.com/tech-writing/two/sample-code
+- https://developers.openai.com/api/docs/guides/prompt-engineering
+- https://developers.openai.com/api/docs/guides/structured-outputs
+- https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+- https://semver.org/
+ - Competitor scan covered adjacent SERP results on AI documentation, AI API docs, and LLM docs workflows; I used the scan to find the gap, then cited only official sources in the article body.
+Research gap identified: ranking and adjacent content largely focuses on AI governance transparency or generic “AI can help docs” advice; very little covers prompts, schemas, evals, and model-version drift as core documentation responsibilities.
+Self-identified risks: article intentionally takes a strong position and uses limited quantitative evidence because official sources on writing-team hiring criteria are sparse; competitor scan for the exact keyword was weak, so topic framing is based on adjacent intent and primary-source synthesis.
+-->
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="related-card">
+        <div class="related-card-date">2026-04-08</div>
+        <div class="related-card-title">Technical Content as a Moat: The Long Game for Developer Tools</div>
+      </a>
+      <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="related-card">
+        <div class="related-card-date">2026-04-07</div>
+        <div class="related-card-title">How Stripe's Technical Blog Became a Competitive Moat</div>
+      </a>
+      <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="related-card">
+        <div class="related-card-date">2026-04-06</div>
+        <div class="related-card-title">Why DevTools Startups Lose Deals Over Bad Docs</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="footer-link">Technical Content as a Moat: The Long Game for Developer Tools</a>
+          <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="footer-link">How Stripe's Technical Blog Became a Competitive Moat</a>
+          <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="footer-link">Why DevTools Startups Lose Deals Over Bad Docs</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

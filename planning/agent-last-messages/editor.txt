@@ -1,0 +1,14 @@
+All nine review notes now exist in [/Users/ninad/Development/NinadPathak/planning/agent-reviews](file:///Users/ninad/Development/NinadPathak/planning/agent-reviews), and every one is marked `REJECTED` because the corresponding draft file does not exist under `content/posts/`. I did not build the site.
+
+Representative notes:
+[technical-writing-for-ai-products-the-new-rules.md](/Users/ninad/Development/NinadPathak/planning/agent-reviews/technical-writing-for-ai-products-the-new-rules.md)
+[developer-onboarding-docs-what-works-what-doesnt.md](/Users/ninad/Development/NinadPathak/planning/agent-reviews/developer-onboarding-docs-what-works-what-doesnt.md)
+[how-to-write-a-technical-tutorial-that-actually-teaches.md](/Users/ninad/Development/NinadPathak/planning/agent-reviews/how-to-write-a-technical-tutorial-that-actually-teaches.md)
+[writing-release-notes-that-developers-trust.md](/Users/ninad/Development/NinadPathak/planning/agent-reviews/writing-release-notes-that-developers-trust.md)
+[the-case-for-shorter-technical-documentation.md](/Users/ninad/Development/NinadPathak/planning/agent-reviews/the-case-for-shorter-technical-documentation.md)
+[from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md](/Users/ninad/Development/NinadPathak/planning/agent-reviews/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md)
+[why-devtools-startups-lose-deals-over-bad-docs.md](/Users/ninad/Development/NinadPathak/planning/agent-reviews/why-devtools-startups-lose-deals-over-bad-docs.md)
+[how-stripes-technical-blog-became-a-competitive-moat.md](/Users/ninad/Development/NinadPathak/planning/agent-reviews/how-stripes-technical-blog-became-a-competitive-moat.md)
+[technical-content-as-a-moat-the-long-game-for-developer-tools.md](/Users/ninad/Development/NinadPathak/planning/agent-reviews/technical-content-as-a-moat-the-long-game-for-developer-tools.md)
+
+Blocker: none of these files exists yet in [/Users/ninad/Development/NinadPathak/content/posts](file:///Users/ninad/Development/NinadPathak/content/posts). Once drafts land at those exact paths, I can do the actual developmental review pass.

@@ -1,0 +1,9 @@
+Wrote and self-edited all three assigned drafts:
+
+- [technical-writing-for-ai-products-the-new-rules.md](/Users/ninad/Development/NinadPathak/content/posts/technical-writing-for-ai-products-the-new-rules.md)
+- [writing-release-notes-that-developers-trust.md](/Users/ninad/Development/NinadPathak/content/posts/writing-release-notes-that-developers-trust.md)
+- [why-devtools-startups-lose-deals-over-bad-docs.md](/Users/ninad/Development/NinadPathak/content/posts/why-devtools-startups-lose-deals-over-bad-docs.md)
+
+Each file has valid frontmatter, current-source research baked into the draft, internal links to existing site content, and a non-published HTML editor note with the keyword, sources, research gap, and risks. I also ran a mechanical pass for banned sentence starts and em dashes, then tightened a few lines that were too close to the banned contrastive pattern.
+
+I did not build the site.

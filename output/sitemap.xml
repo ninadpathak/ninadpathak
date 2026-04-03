@@ -56,6 +56,71 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://ninadpathak.com/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/how-stripes-technical-blog-became-a-competitive-moat/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/the-case-for-shorter-technical-documentation/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/writing-release-notes-that-developers-trust/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/developer-onboarding-docs-what-works-what-doesnt/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/how-to-write-a-changelog-developers-actually-read/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/hybrid-search-bm25-vector-search/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/semantic-caching-rag-optimization/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

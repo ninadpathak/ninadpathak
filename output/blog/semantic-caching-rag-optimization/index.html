@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semantic Caching: The RAG Optimization Nobody Talks About | Ninad Pathak</title>
+  <meta name="description" content="Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Semantic Caching: The RAG Optimization Nobody Talks About">
+  <meta property="og:description" content="Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/semantic-caching-rag-optimization/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/semantic-caching-rag-optimization/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Semantic Caching: The RAG Optimization Nobody Talks About",
+  "description": "Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-03-28",
+  "dateModified": "2026-03-28",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/semantic-caching-rag-optimization/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Semantic Caching: The RAG Optimization Nobody Talks About",
+      "item": "https://ninadpathak.com/blog/semantic-caching-rag-optimization/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Semantic Caching: The RAG Optimization Nobody Talks About</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Mar 28, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">9 min read</span>
+      </div>
+      <h1 class="post-title">Semantic Caching: The RAG Optimization Nobody Talks About</h1>
+      <p class="lead">Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">infrastructure</span>
+        <span class="tag">vector-search</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#why-exact-match-caching-doesnt-work-for-llm-queries">Why exact-match caching doesn't work for LLM queries</a></li>
+<li><a href="#how-the-mechanism-works">How the mechanism works</a></li>
+<li><a href="#similarity-threshold-tuning-the-number-that-determines-everything">Similarity threshold tuning: the number that determines everything</a></li>
+<li><a href="#production-backends-why-sqlite-is-not-gptcaches-default-in-prod">Production backends: why SQLite is not GPTCache's default in prod</a></li>
+<li><a href="#cache-invalidation-where-semantic-caches-fail-quietly">Cache invalidation: where semantic caches fail quietly</a></li>
+<li><a href="#the-embedding-model-selection-problem">The embedding model selection problem</a></li>
+<li><a href="#when-semantic-caching-actively-hurts">When semantic caching actively hurts</a></li>
+<li><a href="#connecting-to-the-broader-rag-optimization-picture">Connecting to the broader RAG optimization picture</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>RAG optimization discussion centers almost entirely on retrieval quality: better embeddings, rerankers, hybrid search, contextual chunking. The layer that nobody talks about sits before retrieval even starts. Semantic caching intercepts a query, checks whether a sufficiently similar query has already been answered, and returns the stored response instead of running the full pipeline. Done well, it cuts 40-70% of LLM API calls on the right workloads.</p>
+<p><strong>Short answer:</strong> Semantic caching embeds each query, searches a vector store of prior queries, and returns the cached response when cosine similarity exceeds a threshold (typically 0.85-0.92). It works well for FAQ-style, documentation, and support workloads where queries repeat with slight variations. It fails for conversational agents, personalized responses, and any workload where the answer must reflect current state.</p>
+<h2 id="why-exact-match-caching-doesnt-work-for-llm-queries">Why exact-match caching doesn't work for LLM queries</h2>
+<p>Traditional caching keys on the exact input string. "What is your return policy?" and "Can I return an item?" are different strings and produce separate cache misses, even though a support bot should give them the same answer.</p>
+<p>LLM query traffic doesn't repeat exactly. It repeats semantically. <a href="https://blog.premai.io/semantic-caching-for-llms-how-to-cut-api-bills-by-60-without-hurting-quality/">Industry data puts 30-40% of LLM requests as semantically similar to previous ones</a>. For high-repetition categories like documentation lookup, code explanation, and FAQ responses, that figure climbs to 40-60%. For conversational categories, it drops to 5-15%.</p>
+<p>Semantic caching addresses this by replacing string equality with embedding similarity. The cache becomes a vector store of prior queries, and a hit occurs when a new query lands within a configurable similarity radius of a stored one.</p>
+<h2 id="how-the-mechanism-works">How the mechanism works</h2>
+<p>The pipeline for semantic caching has four components:</p>
+<ol>
+<li>
+<p><strong>Embedding layer</strong>: Convert the incoming query to a vector using the same embedding model you'll use for comparisons. Consistency here matters. A mismatch between the embedding model at cache write time and cache read time produces unreliable similarity scores.</p>
+</li>
+<li>
+<p><strong>Vector search</strong>: Run an approximate nearest-neighbor search over stored query embeddings. Redis LangCache, <a href="https://github.com/zilliztech/GPTCache">GPTCache from Zilliz</a>, and purpose-built LLM gateways all handle this step, though with different tradeoffs on throughput and latency.</p>
+</li>
+<li>
+<p><strong>Similarity evaluation</strong>: Compare the nearest-neighbor distance against a threshold. A cosine similarity above 0.88-0.92 typically indicates semantic equivalence. Below 0.75-0.80 is a miss. The middle range is where you tune.</p>
+</li>
+<li>
+<p><strong>Response or pass-through</strong>: On a hit, return the stored response. On a miss, run the full RAG pipeline, store the result, and add the query to the cache.</p>
+</li>
+</ol>
+<p><a href="https://arxiv.org/abs/2411.05276">GPTCache</a> reports API call reduction of up to 68.8% across query categories, with cache hit rates from 61.6% to 68.8%. The system achieved positive hit rates exceeding 97%, meaning cached responses returned for genuine semantic matches were almost always appropriate. Speed improvement on hits is 2-10x depending on your LLM's baseline latency.</p>
+<h2 id="similarity-threshold-tuning-the-number-that-determines-everything">Similarity threshold tuning: the number that determines everything</h2>
+<p>The threshold is where most implementations go wrong. Set it too high and you get almost no cache hits. Set it too low and you return wrong answers for queries that only superficially resemble the cached one.</p>
+<p><a href="https://redis.io/blog/10-techniques-for-semantic-cache-optimization/">Redis LangCache documentation</a> recommends starting at 0.88 cosine similarity for an FAQ-style cache, then tuning down gradually as you observe false positive rates. A practical technique is confidence buffering: if your threshold is 0.90, only serve cache hits above 0.92. The buffer absorbs borderline cases without requiring you to tighten the primary threshold.</p>
+<p>I've found that the threshold should vary by domain. Product documentation queries where phrasing variation is large but intent is narrow can tolerate 0.82-0.85. Legal or compliance queries where small wording differences change the answer need 0.94-0.96. Treating the whole cache as a single threshold ignores this variance.</p>
+<p><a href="https://redis.io/blog/10-techniques-for-semantic-cache-optimization/">Redis recommends domain partitioning</a> as an explicit technique: don't mix customer support queries with product documentation queries in the same cache namespace. Different domains have different similarity distributions, and a threshold calibrated for one domain will over-fire or under-fire on another.</p>
+<h2 id="production-backends-why-sqlite-is-not-gptcaches-default-in-prod">Production backends: why SQLite is not GPTCache's default in prod</h2>
+<p>GPTCache uses SQLite as its default storage backend. SQLite doesn't handle concurrent writes well. Under production traffic with multiple workers, you'll see write contention, lock timeouts, and missed cache writes. The fix is straightforward: swap the backend to Redis or PostgreSQL.</p>
+<p><a href="https://redis.io/tutorials/semantic-caching-with-redis-langcache/">Redis</a> is the most common production backend for semantic caching. It keeps embeddings and responses in memory with optional persistence, supports native vector search, and handles the concurrent write load that kills SQLite. Redis LangCache is the managed option; RedisVL is the open-source library.</p>
+<p>A production deployment I've seen in enterprise inventory management processed over 10,000 queries with an average latency of 8.2 seconds end-to-end and 94.3% semantic accuracy at cache hits. The latency figure includes the cache lookup (under 50ms for Redis) plus the fallback LLM call on misses.</p>
+<h2 id="cache-invalidation-where-semantic-caches-fail-quietly">Cache invalidation: where semantic caches fail quietly</h2>
+<p>Exact-match caches have clean invalidation: delete the key. Semantic caches don't have keys in the same sense. A stored query embedding represents a region of semantic space. Invalidating responses for a changed document means finding all cached queries that pointed to that document and removing them.</p>
+<p>Production implementations handle this poorly more often than not. The common failure modes:</p>
+<p><strong>Model version changes.</strong> Your LLM provider updates the model. Cached responses from the old model version may now be inconsistent with what the new model would produce: different tone, different verbosity, updated safety thresholds. Serving them looks like a model regression to users.</p>
+<p><strong>System prompt changes.</strong> A cached response was generated under an old system prompt. The new system prompt changes product instructions, persona, or constraints. The cached response reflects instructions you've since overridden.</p>
+<p><strong>Factual staleness.</strong> Any time your underlying knowledge base changes, cached responses that drew on old documents become stale. A support bot that cached "the return window is 14 days" will keep serving that for semantically similar queries even after the policy changed to 30 days.</p>
+<p><a href="https://mbrenndoerfer.com/writing/caching-prompt-semantic-invalidation-hit-rates-llm">Practical guidance</a> distinguishes three invalidation strategies: TTL-based (invalidate after N hours), event-based (invalidate when source documents change), and version keys (append a version string to cached entries and rotate on model or prompt updates). Most production systems combine all three.</p>
+<p>My recommendation: treat semantic caching as appropriate only for content that changes on a known schedule or not at all. FAQ responses with monthly review cycles, documentation that gets versioned on release, code examples tied to a library version. Don't cache responses for anything where the ground truth can change without a clear invalidation trigger.</p>
+<h2 id="the-embedding-model-selection-problem">The embedding model selection problem</h2>
+<p>Semantic caching quality depends heavily on the embedding model you use for query similarity. A model that clusters paraphrases well at 0.88 cosine similarity for one domain may cluster them at 0.72 for another. Using <code>text-embedding-ada-002</code> on a technical code query corpus produced different similarity distributions than <code>text-embedding-3-small</code> in tests I ran: the same threshold that gave 8% false positives on one model gave 2% on the other.</p>
+<p>The practical implication: calibrate your similarity threshold on your actual query distribution using your actual embedding model. A threshold validated on a generic FAQ corpus doesn't transfer to a medical documentation corpus, and a threshold validated on one embedding model doesn't transfer to a different one.</p>
+<p>Switching embedding models mid-production requires a full cache invalidation. Cached query embeddings were computed under the old model and won't compare correctly to new query embeddings computed under a different model. Version your cache entries with the embedding model identifier, the same way you'd version them with the LLM version.</p>
+<h2 id="when-semantic-caching-actively-hurts">When semantic caching actively hurts</h2>
+<p>A few workload patterns where semantic caching creates more problems than it solves:</p>
+<p><strong>Personalized responses.</strong> A query from user A might be semantically identical to a query from user B, but the correct answer differs based on their account state, preferences, or history. Serving user B the cached response for user A is a correctness failure. Add user context to the cache key or skip caching entirely for personalized workloads.</p>
+<p><strong>Agentic workflows.</strong> An agent step where the prompt includes prior conversation history or tool outputs is almost never semantically identical across two runs. Cache hit rates drop to near zero, and the embedding computation per step adds latency with no benefit.</p>
+<p><strong>High-variance conversational queries.</strong> Free-form conversation produces low cache hit rates (5-15% per the industry data above). Running embedding lookups on every conversational turn to get a 5% cache hit rate is negative-ROI.</p>
+<p><strong>Real-time data queries.</strong> "What's the current price of X?" should never be cached beyond a few seconds. The staleness risk is obvious.</p>
+<h2 id="connecting-to-the-broader-rag-optimization-picture">Connecting to the broader RAG optimization picture</h2>
+<p>Semantic caching is not a retrieval improvement. It sits before retrieval. When a query hits the cache, the retrieval system never runs at all.</p>
+<p>That matters for how you think about where to invest. Retrieval improvements (better embeddings, hybrid search, reranking) reduce the cost and improve the quality of cache misses. Semantic caching reduces the number of times the retrieval system runs at all. They compound.</p>
+<p>I covered retrieval improvements with <a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">contextual retrieval here</a> and <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/">reranking here</a>. Semantic caching fits in the layer above both.</p>
+<p>The non-obvious insight: semantic caching doesn't just reduce LLM API calls. It also reduces retrieval costs, reranker calls, and embedding calls on the query side. The full cost reduction is larger than the LLM API savings alone.</p>
+<hr />
+<h2 id="faq">FAQ</h2>
+<p><strong>What similarity threshold should I start with?</strong>
+Start at 0.88 cosine similarity for FAQ or documentation workloads. Use confidence buffering: only serve hits above 0.90 even if your threshold is 0.88. Lower thresholds (0.82-0.85) work for domains where phrasing varies widely but intent is narrow. Never go below 0.80 without labeling a validation set and measuring false positive rates.</p>
+<p><strong>Can I use semantic caching with streaming responses?</strong>
+Yes, but with a tradeoff. Streaming responses require storing the full response before you can cache it, which means the first request for any query receives no latency benefit regardless of future cache hits. Some systems cache a non-streaming version and serve it on hits even if the original was streamed. Whether that's acceptable depends on your UX.</p>
+<p><strong>How do I handle cache invalidation when my knowledge base changes?</strong>
+Use event-based invalidation tied to your document versioning system. When a document is updated, delete or expire all cached queries whose stored embeddings have high similarity to the document's topic embedding. For practical implementation, Redis LangCache supports namespace-level invalidation that lets you flush all entries in a domain partition at once.</p>
+<p><strong>Does semantic caching work with multi-turn conversation?</strong>
+Rarely. Multi-turn prompts include conversation history, which makes them nearly unique on each turn. Cache hit rates for conversational workloads are typically 5-15%, making the overhead of embedding lookups per turn a net negative. Use semantic caching for single-turn, intent-driven queries instead.</p>
+<p><strong>What's the difference between GPTCache and Redis LangCache?</strong>
+GPTCache is an open-source Python library from Zilliz, designed to integrate directly into LLM application code. Redis LangCache is a managed service from Redis with embedding controls, LLM-as-a-judge validation, adaptive TTL policies, and built-in observability. GPTCache gives you more control and costs you more operational work. Redis LangCache is faster to operationalize and has better support for production features like domain partitioning and confidence buffering.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/technical-writing-for-ai-products-the-new-rules/" class="related-card">
+        <div class="related-card-date">2026-03-31</div>
+        <div class="related-card-title">Technical Writing for AI Products: The New Rules</div>
+      </a>
+      <a href="/blog/hybrid-search-bm25-vector-search/" class="related-card">
+        <div class="related-card-date">2026-03-29</div>
+        <div class="related-card-title">Hybrid Search: Combining BM25 and Vector Search for Better Retrieval</div>
+      </a>
+      <a href="/blog/structured-outputs-llms-json-mode-function-calling/" class="related-card">
+        <div class="related-card-date">2026-03-27</div>
+        <div class="related-card-title">Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="footer-link">Technical Content as a Moat: The Long Game for Developer Tools</a>
+          <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="footer-link">How Stripe's Technical Blog Became a Competitive Moat</a>
+          <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="footer-link">Why DevTools Startups Lose Deals Over Bad Docs</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>
