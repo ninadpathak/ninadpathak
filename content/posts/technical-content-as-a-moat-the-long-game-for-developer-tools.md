@@ -64,6 +64,13 @@ Stripe's upgrade guide is a retention asset because it teaches customers how to 
 
 GitLab's documentation workflow reinforces an important principle: docs for user-facing changes are part of the release process. Documentation quality improves when engineers think about user workflows early. Users who hit the UI and find no documentation often reconsider their choice. Read GitLab's [workflow page](https://docs.gitlab.com/development/documentation/workflow/).
 
+<div class="visual-wrapper">
+  <div class="visual-title">GitLab Documentation Workflow</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/gitlab-docs-workflow.png" alt="GitLab Documentation Workflow" loading="lazy">
+  </div>
+</div>
+
 Defensive content is not always a blog post. A well-maintained upgrade guide can protect revenue more effectively than another launch article.
 
 ## Many teams sabotage the moat by separating content from product truth

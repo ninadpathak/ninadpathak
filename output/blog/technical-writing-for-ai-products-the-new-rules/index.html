@@ -237,6 +237,20 @@
 <p>That change in audience is why I care so much about information architecture. A model cannot infer the intended contract from marketing language. A harried engineer will not guess it either. Google's API writing guidance requires a description for every method, parameter, return value, and exception, and it asks for a code sample of roughly 5 to 20 lines near the top of each API page (<a href="https://developers.google.com/style/api-reference-comments">Google developer documentation style guide</a>). AI products need that discipline plus one extra layer: documented behavior under ambiguity.</p>
 <h2 id="prompts-schemas-and-evals-are-part-of-the-product-surface">Prompts, schemas, and evals are part of the product surface</h2>
 <p>Teams still separate "real docs" from "prompting guidance" far too often. I think that split is a mistake.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">OpenAI Prompt Engineering Guide</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/openai-prompt-engineering.png" alt="OpenAI Prompt Engineering Guide" loading="lazy">
+  </div>
+</div>
+
+<div class="visual-wrapper">
+  <div class="visual-title">Anthropic Prompt Engineering Guide</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/anthropic-prompt-engineering.png" alt="Anthropic Prompt Engineering Guide" loading="lazy">
+  </div>
+</div>
+
 <p>OpenAI's prompt engineering guide explicitly recommends pinning production apps to model snapshots and building evals that measure prompt behavior as you iterate or upgrade model versions (<a href="https://developers.openai.com/api/docs/guides/prompt-engineering">OpenAI prompt engineering guide</a>). Anthropic's prompting guide makes the same point from a different angle: be clear and direct, provide explicit output constraints, and use 3 to 5 examples for best results (<a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Anthropic prompting best practices</a>).</p>
 <p>Once the model vendors tell you to pin versions and measure prompt behavior, the writing problem stops being "how do I explain the feature?" and becomes "how do I document a behavioral contract that changes over time?"</p>
 <p>That is where many AI docs fall apart. They explain what the endpoint does and skip the instructions that make it work reliably. They give one happy-path example and never show the borderline cases. They say "returns structured JSON" without showing the schema or the refusal path. They talk about consistency while shipping a prompt example that was never evaluated against the current model snapshot.</p>

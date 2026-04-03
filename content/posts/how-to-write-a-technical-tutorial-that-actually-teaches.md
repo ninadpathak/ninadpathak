@@ -14,6 +14,13 @@ Readers quit tutorials for boring reasons. A command fails. A prerequisite was i
 
 Diataxis separates documentation into tutorials, how-to guides, reference, and explanation because readers arrive with different needs and should not be forced through the wrong format. A tutorial exists for guided learning through action, while a reference exists for lookup and a how-to guide exists for solving a narrower task with less hand-holding. That distinction matters more than most teams admit because many so-called tutorials are really product tours with code blocks pasted into them. The [Diataxis framework](https://diataxis.fr/) makes that separation explicit.
 
+<div class="visual-wrapper">
+  <div class="visual-title">The Diataxis Framework</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/diataxis-framework.png" alt="The Diataxis Framework" loading="lazy">
+  </div>
+</div>
+
 GitHub makes a similar point in its docs model. Their guidance says tutorials should help someone with basic product familiarity solve a real problem through a full workflow, include troubleshooting, and give readers concrete next steps after completion. GitHub also says products with tutorials should already have a quickstart, which is a useful constraint because it stops teams from using tutorials as the place where all first-time setup confusion goes to hide. I think that rule is right. A tutorial should build on existing confidence from a quickstart. See GitHub's [tutorial content type guidance](https://docs.github.com/en/enterprise-server@3.20/contributing/style-guide-and-content-model/tutorial-content-type).
 
 That distinction changed how I write. Early in my career, I wrote pieces that tried to teach the whole product surface in one pass. Readers reached the end with plenty of nouns in their head and very little muscle memory. My drafts improved once I started asking a simpler question: what working thing will the reader have on their machine ninety minutes from now?
@@ -21,6 +28,13 @@ That distinction changed how I write. Early in my career, I wrote pieces that tr
 ## Define the reader with enough precision to remove hidden assumptions
 
 Google's technical writing course uses an equation I like because it forces discipline: good documentation equals the knowledge and skills the audience needs minus the knowledge and skills they already have. That framework sounds obvious until you try to list what your reader already knows. Google's [audience guidance](https://developers.google.com/tech-writing/one/audience) also calls out the curse of knowledge, which is the root cause behind half the tutorial failures I see.
+
+<div class="visual-wrapper">
+  <div class="visual-title">Google Technical Writing: Audience Guidance</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/google-tech-writing-audience.png" alt="Google Technical Writing Audience Guidance" loading="lazy">
+  </div>
+</div>
 
 My process starts with a brutally specific reader profile:
 

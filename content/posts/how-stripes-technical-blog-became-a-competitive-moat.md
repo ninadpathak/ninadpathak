@@ -16,6 +16,13 @@ I think that is the part many companies still miss. A technical blog becomes a m
 
 Stripe says it plainly on the engineering blog landing page: the company cares deeply about beautiful code, APIs, and documentation. Plenty of companies could write that line. Stripe earned it by treating the surrounding content system as part of the developer experience.
 
+<div class="visual-wrapper">
+  <div class="visual-title">Stripe Engineering Blog Landing Page</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/stripe-engineering-blog.png" alt="Stripe Engineering Blog Landing Page" loading="lazy">
+  </div>
+</div>
+
 Look at the shape of Stripe’s content surface:
 
 - the main engineering blog

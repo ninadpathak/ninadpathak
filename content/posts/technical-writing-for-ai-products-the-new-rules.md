@@ -28,6 +28,20 @@ That change in audience is why I care so much about information architecture. A 
 
 Teams still separate "real docs" from "prompting guidance" far too often. I think that split is a mistake.
 
+<div class="visual-wrapper">
+  <div class="visual-title">OpenAI Prompt Engineering Guide</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/openai-prompt-engineering.png" alt="OpenAI Prompt Engineering Guide" loading="lazy">
+  </div>
+</div>
+
+<div class="visual-wrapper">
+  <div class="visual-title">Anthropic Prompt Engineering Guide</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/anthropic-prompt-engineering.png" alt="Anthropic Prompt Engineering Guide" loading="lazy">
+  </div>
+</div>
+
 OpenAI's prompt engineering guide explicitly recommends pinning production apps to model snapshots and building evals that measure prompt behavior as you iterate or upgrade model versions ([OpenAI prompt engineering guide](https://developers.openai.com/api/docs/guides/prompt-engineering)). Anthropic's prompting guide makes the same point from a different angle: be clear and direct, provide explicit output constraints, and use 3 to 5 examples for best results ([Anthropic prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)).
 
 Once the model vendors tell you to pin versions and measure prompt behavior, the writing problem stops being "how do I explain the feature?" and becomes "how do I document a behavioral contract that changes over time?"
