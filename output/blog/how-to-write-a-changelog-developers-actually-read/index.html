@@ -273,7 +273,6 @@
 <p>That mental model shift changes the writing entirely. "Updated dependency X" is a record. "Updated X from 3.1 to 3.2 to address CVE-2026-0231 (CVSS 7.4); no API changes required" is communication.</p>
 <p>The other consistent failure: no one owns the changelog. Developers merge PRs, releases ship, and no one maintains the changelog entry until it's time to cut a release. At that point, reconstructing a week's worth of merged changes from commit messages is painful enough that entries become abbreviated. The fix is requiring a changelog entry on every PR that touches the public surface area — not as a process burden, but as part of how the team communicates externally.</p>
 <p>The non-obvious insight: a good changelog is a forcing function for good API design. When you have to explain what changed and why to a developer who doesn't have your context, you notice quickly when a change is hard to explain clearly. Changes that are hard to document are often changes that should have been designed differently.</p>
-<hr />
 <h2 id="faq">FAQ</h2>
 <p><strong>Should the changelog live in the repo or on a web page?</strong>
 Both, ideally. CHANGELOG.md in the repo satisfies developers who want it under version control alongside the code. A web page (or published GitHub releases) makes it discoverable without cloning. The canonical source should be the repo file. The web version is a rendering of it.</p>

@@ -275,7 +275,6 @@
 <p>Hybrid search is not universally better than dense-only. On workloads where your queries are natural language and your documents are prose, well-trained dense embeddings often match or exceed hybrid search. The gains show up on mixed corpora: code, product names, technical identifiers mixed with prose documentation.</p>
 <p>The infrastructure cost is real. You're running two indexes (BM25 and vector), two retrieval passes per query, and a merge operation. Latency roughly doubles versus single-retriever approaches before any reranking. For latency-sensitive applications, that matters.</p>
 <p>I covered embedding model selection in <a href="/blog/embedding-models-compared/">Embedding Models Compared</a>, which is relevant here: the dense retriever quality has a floor effect on hybrid search. A weak dense retriever won't be salvaged by BM25. The combination amplifies both retrievers' strengths, not their weaknesses.</p>
-<hr />
 <h2 id="faq">FAQ</h2>
 <p><strong>Should I always use hybrid search for RAG?</strong>
 For general-purpose document retrieval over mixed corpora, yes. For narrow semantic workloads where your queries are always natural language and your documents are prose, a well-tuned dense-only retriever can match hybrid performance with half the infrastructure cost. Benchmark your specific corpus before committing to the added complexity.</p>

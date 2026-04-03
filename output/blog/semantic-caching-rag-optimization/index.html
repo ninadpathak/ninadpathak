@@ -283,7 +283,6 @@
 <p>That matters for how you think about where to invest. Retrieval improvements (better embeddings, hybrid search, reranking) reduce the cost and improve the quality of cache misses. Semantic caching reduces the number of times the retrieval system runs at all. They compound.</p>
 <p>I covered retrieval improvements with <a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">contextual retrieval here</a> and <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/">reranking here</a>. Semantic caching fits in the layer above both.</p>
 <p>The non-obvious insight: semantic caching doesn't just reduce LLM API calls. It also reduces retrieval costs, reranker calls, and embedding calls on the query side. The full cost reduction is larger than the LLM API savings alone.</p>
-<hr />
 <h2 id="faq">FAQ</h2>
 <p><strong>What similarity threshold should I start with?</strong>
 Start at 0.88 cosine similarity for FAQ or documentation workloads. Use confidence buffering: only serve hits above 0.90 even if your threshold is 0.88. Lower thresholds (0.82-0.85) work for domains where phrasing varies widely but intent is narrow. Never go below 0.80 without labeling a validation set and measuring false positive rates.</p>

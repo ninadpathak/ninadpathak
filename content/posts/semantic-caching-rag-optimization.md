@@ -96,8 +96,6 @@ I covered retrieval improvements with [contextual retrieval here](/blog/how-anth
 
 The non-obvious insight: semantic caching doesn't just reduce LLM API calls. It also reduces retrieval costs, reranker calls, and embedding calls on the query side. The full cost reduction is larger than the LLM API savings alone.
 
----
-
 ## FAQ
 
 **What similarity threshold should I start with?**

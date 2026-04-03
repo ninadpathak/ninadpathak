@@ -270,7 +270,6 @@
 <p>Function calling is the right tool when you're building agents that need to decide what to do, not just extract data. Conflating the two leads to systems where function call definitions grow into full extraction schemas, the model gets confused about what it's supposed to return, and tool call reliability drops.</p>
 <p>JSON mode has one legitimate use case: fast prototyping where schema compliance isn't critical yet. Anywhere your pipeline has to be right, switch to structured outputs.</p>
 <p>The non-obvious insight: schema design quality matters more under structured outputs than under prompting. A vague prompt can still produce a useful response. A vague schema produces valid-but-useless outputs that pass all your checks and are still wrong.</p>
-<hr />
 <h2 id="faq">FAQ</h2>
 <p><strong>Does structured outputs mode cost more per API call?</strong>
 Yes, in two ways. First, the schema is included as input tokens on every request (roughly 50 tokens for a simple schema, 500 for a complex one). Second, constrained decoding adds 10-30% to generation latency on complex schemas. The first call with a new schema also pays a preprocessing penalty for schema compilation, though OpenAI caches compiled schemas for reuse.</p>

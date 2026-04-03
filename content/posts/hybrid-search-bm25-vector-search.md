@@ -94,8 +94,6 @@ The infrastructure cost is real. You're running two indexes (BM25 and vector), t
 
 I covered embedding model selection in [Embedding Models Compared](/blog/embedding-models-compared/), which is relevant here: the dense retriever quality has a floor effect on hybrid search. A weak dense retriever won't be salvaged by BM25. The combination amplifies both retrievers' strengths, not their weaknesses.
 
----
-
 ## FAQ
 
 **Should I always use hybrid search for RAG?**

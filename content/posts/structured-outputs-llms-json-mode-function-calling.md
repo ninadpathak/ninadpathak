@@ -92,8 +92,6 @@ JSON mode has one legitimate use case: fast prototyping where schema compliance 
 
 The non-obvious insight: schema design quality matters more under structured outputs than under prompting. A vague prompt can still produce a useful response. A vague schema produces valid-but-useless outputs that pass all your checks and are still wrong.
 
----
-
 ## FAQ
 
 **Does structured outputs mode cost more per API call?**

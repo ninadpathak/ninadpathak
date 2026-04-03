@@ -90,8 +90,6 @@ The other consistent failure: no one owns the changelog. Developers merge PRs, r
 
 The non-obvious insight: a good changelog is a forcing function for good API design. When you have to explain what changed and why to a developer who doesn't have your context, you notice quickly when a change is hard to explain clearly. Changes that are hard to document are often changes that should have been designed differently.
 
----
-
 ## FAQ
 
 **Should the changelog live in the repo or on a web page?**
