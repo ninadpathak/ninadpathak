@@ -157,19 +157,3 @@ Shared ownership works best. Applied AI or engineering should own runtime behavi
 **What is the fastest way to tell whether an AI writer is strong?**
 
 Ask them to rewrite one weak API page for an LLM feature. Give them the schema, a prompt template, three failure logs, and a model upgrade note. Strong writers get sharper. Weak writers get vaguer.
-
-<!--
-Editor note:
-Primary keyword: technical writing for AI products
-Sources used:
-- https://developers.google.com/search/docs/fundamentals/using-gen-ai-content
-- https://developers.google.com/style/api-reference-comments
-- https://developers.google.com/tech-writing/two/sample-code
-- https://developers.openai.com/api/docs/guides/prompt-engineering
-- https://developers.openai.com/api/docs/guides/structured-outputs
-- https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
-- https://semver.org/
- - Competitor scan covered adjacent SERP results on AI documentation, AI API docs, and LLM docs workflows; I used the scan to find the gap, then cited only official sources in the article body.
-Research gap identified: ranking and adjacent content largely focuses on AI governance transparency or generic “AI can help docs” advice; very little covers prompts, schemas, evals, and model-version drift as core documentation responsibilities.
-Self-identified risks: article intentionally takes a strong position and uses limited quantitative evidence because official sources on writing-team hiring criteria are sparse; competitor scan for the exact keyword was weak, so topic framing is based on adjacent intent and primary-source synthesis.
--->

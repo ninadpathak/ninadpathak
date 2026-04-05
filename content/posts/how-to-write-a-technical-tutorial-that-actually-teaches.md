@@ -186,19 +186,3 @@ No. Tutorials teach through guided execution. Reference pages and explanation pa
 **What is the fastest way to improve a weak tutorial already getting traffic?**
 
 Run it from scratch on a clean machine and log every point of friction. That one pass usually tells you more than a week of abstract editorial debate. Missing prerequisites, stale code, and heading vagueness show up quickly when someone tries to finish the task for real.
-
-<!--
-primary keyword: how to write a technical tutorial
-sources used:
-- https://diataxis.fr/
-- https://docs.github.com/en/enterprise-server@3.20/contributing/style-guide-and-content-model/tutorial-content-type
-- https://developers.google.com/tech-writing/one/audience
-- https://developers.google.com/style/headings
-- https://learn.microsoft.com/en-us/style-guide/procedures-instructions/writing-step-by-step-instructions
-- https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Code_style_guide
-- https://docs.gitlab.com/development/documentation/workflow/
-- https://www.twilio.com/docs/messaging/quickstart
-- https://developers.cloudflare.com/workers/tutorials/
-research gap identified: SERP results for this topic skew toward generic writing advice and style-guide summaries, with very little emphasis on tutorial verification, workflow testing, or the distinction between tutorials and other doc types.
-self-identified risks or weak spots: Article relies on repo-internal experience and opinion more than published benchmarks because the topic is process-heavy. A live SERP-specific PAA pass could add one or two reader questions later.
--->

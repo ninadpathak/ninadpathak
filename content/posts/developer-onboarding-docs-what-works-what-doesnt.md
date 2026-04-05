@@ -170,17 +170,3 @@ A safe production-adjacent task that exercises the real delivery path. I would c
 **Can AI replace onboarding docs for new engineers?**
 
 No. AI can answer questions faster when the team already has strong written context. Weak onboarding docs give the model the same missing pieces that frustrate humans.
-
-<!--
-primary keyword: developer onboarding docs
-sources used:
-- https://developers.google.com/tech-writing/one/documents
-- https://microsoft.github.io/code-with-engineering-playbook/developer-experience/onboarding-guide-template/
-- https://handbook.gitlab.com/handbook/people-group/general-onboarding/
-- https://github.blog/engineering/infrastructure/githubs-engineering-team-moved-codespaces/
-- https://arxiv.org/pdf/2103.05055
-- https://arxiv.org/pdf/2011.08130
-- http://swcarpentry.github.io/swc-releases/2017.02/instructor-training/files/papers/carroll-minimal-manual-1987.pdf
-research gap identified: I found plenty of generic advice and solid papers, but very few current official engineering sources showing exactly how teams measure onboarding doc quality after the first merged change.
-self-identified risks or weak spots: GitHub’s Codespaces example is older than the other sources, though still useful for the reproducibility argument. I relied on papers for quantified onboarding findings because official company sources rarely publish comparable numbers.
--->

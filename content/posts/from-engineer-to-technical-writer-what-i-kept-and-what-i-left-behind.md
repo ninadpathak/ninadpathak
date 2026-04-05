@@ -129,17 +129,3 @@ No. It involves a different type of technical work. You are still reading code, 
 **Should I move into technical writing if I enjoy explaining things?**
 
 Enjoying the explanation is only half of the job. You also need to enjoy the research, the verification, the editing, and the architectural design of information systems. If you find those tasks as rewarding as writing code, the transition is likely a good fit.
-
-<!--
-primary keyword: engineer to technical writer
-sources used:
-- https://docs.gitlab.com/development/documentation/workflow/
-- https://docs.github.com/en/contributing/writing-for-github-docs/best-practices-for-github-docs
-- https://developers.google.com/tech-writing/one/audience
-- https://developers.google.com/tech-writing/becoming/meet
-- https://learn.microsoft.com/en-us/contribute/content/style-quick-start
-- https://www.writethedocs.org/surveys/salary-survey/2024/
-- https://diataxis.fr/
-research gap identified: Most articles on this topic focus on portfolio tips; I have focused on the cognitive and structural transition from a code-first to a clarity-first mindset.
-self-identified risks or weak spots: The article uses a first-person narrative which is required by the skill, but it balances this with authoritative external citations to avoid becoming a simple memoir.
--->

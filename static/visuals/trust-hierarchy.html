@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Trust Hierarchy</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
+            --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
+                --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+
+        body { 
+            margin: 0; 
+            background: var(--bg-1); 
+            font-family: var(--sans); 
+            color: var(--text-1);
+            overflow: hidden; 
+        }
+
+        #label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-3);
+            text-transform: uppercase;
+        }
+
+        .tier-label {
+            position: absolute;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-1);
+            background: var(--bg-2);
+            padding: 4px 10px;
+            border: 1px solid var(--border);
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="label">developer trust hierarchy // information verification</div>
+    
+    <div id="tier-1" class="tier-label">TIER 1: THE BINARY (SOURCE CODE)</div>
+    <div id="tier-2" class="tier-label">TIER 2: REFERENCE (API SPECS)</div>
+    <div id="tier-3" class="tier-label">TIER 3: PRACTITIONER BLOGS</div>
+    <div id="tier-4" class="tier-label">TIER 4: TUTORIALS / GUIDES</div>
+    <div id="tier-5" class="tier-label">TIER 5: MARKETING / BRAND</div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        scene.background = new THREE.Color(isDark ? 0x111111 : 0xffffff);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
+        const tiers = [
+            { y: 3, label: 'tier-1', color: isDark ? 0xff5f1f : 0xd44000, size: 1.0 },
+            { y: 1.5, label: 'tier-2', color: isDark ? 0xaaaaaa : 0x888888, size: 1.5 },
+            { y: 0, label: 'tier-3', color: isDark ? 0x888888 : 0xaaaaaa, size: 2.0 },
+            { y: -1.5, label: 'tier-4', color: isDark ? 0x666666 : 0xcccccc, size: 2.5 },
+            { y: -3, label: 'tier-5', color: isDark ? 0x444444 : 0xeeeeee, size: 3.0 }
+        ];
+
+        const tierMeshes = [];
+        tiers.forEach(t => {
+            const geo = new THREE.CylinderGeometry(t.size, t.size * 1.1, 0.8, 32);
+            const mat = new THREE.MeshBasicMaterial({ color: t.color, transparent: true, opacity: 0.8 });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.y = t.y;
+            scene.add(mesh);
+            tierMeshes.push(mesh);
+            t.mesh = mesh;
+
+            const wireGeo = new THREE.EdgesGeometry(geo);
+            const wireMat = new THREE.LineBasicMaterial({ color: isDark ? 0x333333 : 0xdddddd });
+            const wire = new THREE.LineSegments(wireGeo, wireMat);
+            mesh.add(wire);
+        });
+
+        camera.position.z = 12;
+        camera.position.y = 2;
+        camera.lookAt(0, 0, 0);
+
+        function updateLabels() {
+            tiers.forEach(t => {
+                const vector = t.mesh.position.clone();
+                vector.project(camera);
+                const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+                const y = (vector.y * -0.5 + 0.5) * window.innerHeight;
+                const el = document.getElementById(t.label);
+                el.style.left = (x + (t.size * 40)) + 'px';
+                el.style.top = y + 'px';
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            
+            const time = Date.now() * 0.001;
+            tierMeshes.forEach((m, i) => {
+                m.position.y = tiers[i].y + Math.sin(time + i) * 0.05;
+                m.rotation.y += 0.002;
+            });
+
+            updateLabels();
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>

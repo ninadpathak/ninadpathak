@@ -156,17 +156,3 @@ SemVer is a powerful tool for communicating risk. If you use it, you must follow
 **What is the most common mistake in release notes?**
 
 Prioritizing the "Added" section over the "Breaking Changes" or "Security" sections. Marketing teams want to talk about new features. Developers want to talk about what might break their production environment. Trust is built by prioritizing the developer's needs.
-
-<!--
-primary keyword: writing release notes that developers trust
-sources used:
-- https://keepachangelog.com/en/1.1.0/
-- https://semver.org/
-- https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases
-- https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
-- https://docs.stripe.com/changelog
-- https://kubernetes.io/releases/notes
-- https://www.fbi.gov/news/press-releases/sec-adopts-rules-on-cybersecurity-risk-management-strategy-governance-and-incident-disclosure
-research gap identified: Many guides treat release notes as a simple markdown file; I have connected them to modern compliance (SEC/EU CRA) and performance-metric standards.
-self-identified risks or weak spots: The article assumes the reader is familiar with basic version control, but the expansion into legal compliance adds a layer of complexity that some smaller teams might find daunting.
--->

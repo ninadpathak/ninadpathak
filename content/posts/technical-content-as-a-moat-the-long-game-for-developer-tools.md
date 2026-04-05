@@ -155,19 +155,3 @@ Track search impressions and conversions, yes, though also track activation supp
 **Can a small team build this without a huge content operation?**
 
 Yes, if the scope is disciplined. One verified quickstart, one solid concepts page, one changelog, and a handful of deep technical posts can outperform a bloated content calendar full of interchangeable articles.
-
-<!--
-primary keyword: technical content moat
-sources used:
-- https://docs.stripe.com/changelog
-- https://docs.stripe.com/upgrades
-- https://www.twilio.com/docs/messaging/quickstart
-- https://developers.cloudflare.com/workers/tutorials/
-- https://vercel.com/templates/documentation
-- https://posthog.com/handbook/content
-- https://docs.gitlab.com/development/documentation/workflow/
-- https://docs.github.com/en/contributing/writing-for-github-docs/best-practices-for-github-docs
-- https://www.writethedocs.org/surveys/salary-survey/2024/
-research gap identified: Search results around developer marketing focus heavily on campaign strategy and generic content playbooks, while official company sources reveal a stronger story about docs, changelogs, quickstarts, and templates as part of product infrastructure.
-self-identified risks or weak spots: PostHog handbook content was only partially scrapeable, so the article uses it conservatively. A later revision could add one or two more public official handbook or engineering-source examples from other devtools companies for broader comparative coverage.
--->

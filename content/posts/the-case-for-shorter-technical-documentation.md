@@ -133,18 +133,3 @@ Specifications and formal standards. These documents serve as the "source of tru
 **How can I tell if my page is too long?**
 
 If the first screen does not answer the user’s immediate question and the content mixes three or more different user intents, the page is likely too long for its purpose.
-
-<!--
-primary keyword: shorter technical documentation
-sources used:
-- https://developers.google.com/tech-writing/one/documents
-- https://developers.google.com/style/word-list
-- https://learn.microsoft.com/en-us/style-guide/procedures-instructions/writing-step-by-step-instructions
-- https://docs.gitlab.com/development/documentation/styleguide/
-- https://stripe.dev/blog/markdoc
-- https://docs.stripe.com/changelog
-- http://swcarpentry.github.io/swc-releases/2017.02/instructor-training/files/papers/carroll-minimal-manual-1987.pdf
-- https://www.researchgate.net/publication/332151600_Cognitive_Load_Theory
-research gap identified: I have integrated modern 2024 cognitive load research and NASA-TLX scores which are rarely discussed in standard "how to write docs" blog posts.
-self-identified risks or weak spots: The argument for brevity can sometimes be misinterpreted as an argument for lack of detail; the sections on progressive disclosure and long formats are critical to prevent this.
--->

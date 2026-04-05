@@ -158,17 +158,3 @@ They document the happy path and assume support can cover the rest. Buyers are e
 **How should teams measure whether docs influence revenue?**
 
 Track docs-to-signup paths, docs pages viewed before trial activation, support tickets opened after a docs view, and which docs pages correlate with first successful use. State of Docs shows that many teams still miss this measurement layer entirely.
-
-<!--
-primary keyword: why devtools startups lose deals over bad docs
-sources used:
-- https://www.stateofdocs.com/2026/introduction-and-demographics
-- https://www.stateofdocs.com/2026/purchase-decisions-and-business-impact
-- https://docs.stripe.com/development/quickstart
-- https://docs.stripe.com/quickstarts
-- https://docs.stripe.com/development
-- https://vercel.com/docs/functions/quickstart
-- https://developers.cloudflare.com/workers/get-started/
-research gap identified: plenty of people say docs matter, but very few pieces explain the specific evaluation moments where bad docs create deal risk for devtools buyers.
-self-identified risks or weak spots: article leans on State of Docs heavily for business framing; buyer-behavior examples rely partly on my synthesis rather than vendor-published conversion studies.
--->

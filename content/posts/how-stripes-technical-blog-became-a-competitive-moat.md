@@ -146,16 +146,3 @@ Yes. Docs help during integration. Blog posts create trust and mental models bef
 **What is the biggest lesson for developer-first companies?**
 
 Treat technical content as product infrastructure. If the blog, docs, changelog, and tooling reinforce each other, the content starts compounding instead of resetting every quarter.
-
-<!--
-primary keyword: Stripe technical blog
-sources used:
-- https://stripe.com/blog/engineering
-- https://stripe.dev/blog
-- https://stripe.dev/blog/payment-api-design
-- https://stripe.dev/blog/markdoc
-- https://docs.stripe.com/changelog
-- https://stripe.com/annual-updates/2025
-research gap identified: Stripe does not publish direct attribution data showing how the blog influences acquisition or retention, so the moat argument is necessarily inferred from the structure, consistency, and strategic fit of the public content system.
-self-identified risks or weak spots: The “competitive moat” framing is an inference rather than a quoted Stripe claim. I supported it with public evidence from Stripe’s content architecture, but the business impact case remains partly interpretive.
--->

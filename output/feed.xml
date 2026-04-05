@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>The developer trust hierarchy: why practitioner writing outranks marketing content</title>
+      <link>https://ninadpathak.com/blog/developer-trust-hierarchy/</link>
+      <description>I analyze the structural reasons why engineers filter for technical depth and verify-ability, creating a 5-tier hierarchy of developer trust.</description>
+      <pubDate>Apr 10, 2026</pubDate>
+    </item>
+    <item>
       <title>Technical Content as a Moat: The Long Game for Developer Tools</title>
       <link>https://ninadpathak.com/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/</link>
       <description>I explain why durable technical content compounds for developer tools, how strong docs and tutorials create distribution, and where teams usually waste the opportunity.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/llm-context-windows-explained/</link>
       <description>Context windows are expanding to millions of tokens. Here is why the middle of your context still gets ignored, what long context actually costs, and how to build production systems that use these massive windows effectively.</description>
       <pubDate>Mar 14, 2026</pubDate>
-    </item>
-    <item>
-      <title>Mixture of experts: how MoE models are cheap to run but expensive to host</title>
-      <link>https://ninadpathak.com/blog/mixture-of-experts-explained/</link>
-      <description>DeepSeek V3 has 671B parameters but only activates 37B per token. Here's how mixture of experts works, why it cuts inference costs, and the catch nobody puts in the headline.</description>
-      <pubDate>Mar 13, 2026</pubDate>
     </item>
   </channel>
 </rss>
