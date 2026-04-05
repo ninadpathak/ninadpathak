@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trust vs Effort</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <title>Hertzum Trust Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --bg-1: #ffffff;
@@ -31,81 +30,125 @@
             }
         }
 
-        body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
-        #label { position: absolute; bottom: 20px; left: 20px; font-family: var(--mono); font-size: 12px; color: var(--text-3); text-transform: uppercase; }
-        .axis-label { position: absolute; font-family: var(--mono); font-size: 10px; color: var(--text-2); }
+        body { 
+            margin: 0; 
+            background: var(--bg-1); 
+            font-family: var(--sans); 
+            color: var(--text-1); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .chart-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--bg-2);
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        #label { 
+            margin-top: 10px;
+            font-family: var(--mono); 
+            font-size: 12px; 
+            color: var(--text-3); 
+            text-transform: uppercase; 
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div id="label">Hertzum Trust Model // Trust > Effort</div>
-    <div class="axis-label" style="top: 50%; left: 10px; transform: rotate(-90deg);">TRUST (Verify-ability)</div>
-    <div class="axis-label" style="bottom: 10px; left: 50%;">EFFORT (Ease of Access)</div>
+    <div class="chart-container">
+        <canvas id="trustChart"></canvas>
+        <div id="label">Hertzum Trust Model: Trust > Effort for Engineers</div>
+    </div>
 
     <script>
-        const scene = new THREE.Scene();
         const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        scene.background = new THREE.Color(isDark ? 0x111111 : 0xffffff);
+        const ctx = document.getElementById('trustChart').getContext('2d');
+        
+        const data = {
+            datasets: [
+                {
+                    label: 'Trust vs Effort Curve',
+                    data: [
+                        { x: 1, y: 0.5 },
+                        { x: 3, y: 1.5 },
+                        { x: 5, y: 3.5 },
+                        { x: 7, y: 6.5 },
+                        { x: 9, y: 9.5 }
+                    ],
+                    borderColor: isDark ? '#ff5f1f' : '#d44000',
+                    backgroundColor: 'rgba(212, 64, 0, 0.1)',
+                    showLine: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                },
+                {
+                    label: 'Information Sources',
+                    data: [
+                        { x: 2, y: 0.5, label: 'Marketing Blog' },
+                        { x: 4, y: 2.0, label: 'Tutorial' },
+                        { x: 7, y: 7.0, label: 'API Reference' },
+                        { x: 9, y: 9.8, label: 'Source Code' }
+                    ],
+                    backgroundColor: isDark ? '#ff5f1f' : '#d44000',
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }
+            ]
+        };
 
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-
-        // Grid helper for the 3D space
-        const grid = new THREE.GridHelper(10, 10, isDark ? 0x333333 : 0xdddddd, isDark ? 0x222222 : 0xeeeeee);
-        grid.position.y = -0.5;
-        scene.add(grid);
-
-        // Curve showing the relationship
-        const points = [];
-        for (let i = 0; i <= 20; i++) {
-            const x = (i / 20) * 10 - 5;
-            // Trust increases as Effort becomes secondary
-            const y = Math.pow(i / 20, 2) * 5; 
-            const z = Math.sin(i / 5) * 2;
-            points.push(new THREE.Vector3(x, y, z));
-        }
-        const curve = new THREE.CatmullRomCurve3(points);
-        const geometry = new THREE.TubeGeometry(curve, 64, 0.1, 8, false);
-        const material = new THREE.MeshBasicMaterial({ color: isDark ? 0xff5f1f : 0xd44000 });
-        const line = new THREE.Mesh(geometry, material);
-        scene.add(line);
-
-        // Data points for specific sources
-        const sources = [
-            { name: 'Marketing Blog', x: 4, y: 0.5, z: 0, color: 0xeeeeee },
-            { name: 'Tutorial', x: 2, y: 2, z: 1, color: 0xcccccc },
-            { name: 'API Reference', x: -2, y: 4, z: -1, color: 0x888888 },
-            { name: 'Source Code', x: -4, y: 5, z: 0, color: isDark ? 0xff5f1f : 0xd44000 }
-        ];
-
-        sources.forEach(s => {
-            const geo = new THREE.SphereGeometry(0.2, 16, 16);
-            const mat = new THREE.MeshBasicMaterial({ color: s.color });
-            const mesh = new THREE.Mesh(geo, mat);
-            mesh.position.set(s.x, s.y, s.z);
-            scene.add(mesh);
+        new Chart(ctx, {
+            type: 'scatter',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'EFFORT (Ease of Access)',
+                            font: { family: 'JetBrains Mono', size: 12 },
+                            color: isDark ? '#c2c2c2' : '#3a3a3a'
+                        },
+                        min: 0,
+                        max: 10,
+                        grid: { color: isDark ? '#222222' : '#eeeeee' },
+                        ticks: { color: isDark ? '#6a6a6a' : '#888888' }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'TRUST (Verify-ability)',
+                            font: { family: 'JetBrains Mono', size: 12 },
+                            color: isDark ? '#c2c2c2' : '#3a3a3a'
+                        },
+                        min: 0,
+                        max: 10,
+                        grid: { color: isDark ? '#222222' : '#eeeeee' },
+                        ticks: { color: isDark ? '#6a6a6a' : '#888888' }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw.label || '';
+                            }
+                        }
+                    },
+                    legend: { display: false }
+                }
+            }
         });
-
-        camera.position.set(8, 5, 8);
-        camera.lookAt(0, 0, 0);
-
-        function animate() {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        }
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        animate();
     </script>
 </body>
 </html>
