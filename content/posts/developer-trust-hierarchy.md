@@ -33,7 +33,7 @@ Hertzum (2002) established in *The importance of trust in software engineers' as
 <div class="visual-wrapper">
   <div class="visual-title">Hertzum trust model: trust vs effort</div>
   <div class="visual-container">
-    <iframe src="/static/visuals/trust-vs-effort.html" title="Trust vs Effort" loading="lazy"></iframe>
+    <iframe src="/static/visuals/hertzum-model.html" title="Hertzum Trust Model" loading="lazy"></iframe>
   </div>
 </div>
 

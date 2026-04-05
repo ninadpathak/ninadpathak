@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hertzum Trust Model</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+            max-height: 500px;
+            padding: 40px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .axis { stroke: var(--border); stroke-width: 1; }
+        .grid { stroke: var(--border); stroke-width: 0.5; stroke-dasharray: 4; opacity: 0.5; }
+        .label { font-family: var(--mono); font-size: 10px; fill: var(--text-dim); text-transform: uppercase; }
+        .axis-title { font-family: var(--mono); font-size: 12px; fill: var(--text); font-weight: 500; text-transform: uppercase; }
+        
+        .curve { fill: none; stroke: var(--accent); stroke-width: 2; }
+        .point { fill: var(--accent); }
+        .point-label { font-family: var(--sans); font-size: 11px; fill: var(--text); font-weight: 500; }
+        
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <svg viewBox="0 0 800 400">
+            <!-- Grid Lines -->
+            <line x1="0" y1="0" x2="800" y2="0" class="grid" />
+            <line x1="0" y1="100" x2="800" y2="100" class="grid" />
+            <line x1="0" y1="200" x2="800" y2="200" class="grid" />
+            <line x1="0" y1="300" x2="800" y2="300" class="grid" />
+            
+            <!-- Axes -->
+            <line x1="0" y1="400" x2="800" y2="400" class="axis" /> <!-- X -->
+            <line x1="0" y1="0" x2="0" y2="400" class="axis" />   <!-- Y -->
+            
+            <!-- Axis Titles -->
+            <text x="400" y="440" text-anchor="middle" class="axis-title">Ease of Access (Lower Effort →)</text>
+            <text x="-200" y="-40" text-anchor="middle" class="axis-title" transform="rotate(-90)">Trust (Verify-ability →)</text>
+            
+            <!-- Trust Curve (Engineering Preference) -->
+            <path d="M 0 400 Q 400 380 800 0" class="curve" />
+            
+            <!-- Data Points -->
+            <!-- Source Code (High Trust, High Effort) -->
+            <circle cx="50" cy="50" r="5" class="point" />
+            <text x="65" y="55" class="point-label">Source Code</text>
+            
+            <!-- API Reference (High Trust, Med Effort) -->
+            <circle cx="200" cy="150" r="5" class="point" />
+            <text x="215" y="155" class="point-label">API Reference</text>
+            
+            <!-- Tutorial (Med Trust, Low Effort) -->
+            <circle cx="500" cy="300" r="5" class="point" />
+            <text x="515" y="305" class="point-label">Technical Tutorial</text>
+            
+            <!-- Marketing Blog (Low Trust, Low Effort) -->
+            <circle cx="750" cy="380" r="5" class="point" />
+            <text x="620" y="370" class="point-label">Marketing Blog</text>
+        </svg>
+        <div class="legend">Hertzum Model: Trust > Effort for technical practitioners</div>
+    </div>
+</body>
+</html>
