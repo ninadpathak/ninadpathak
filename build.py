@@ -254,11 +254,39 @@ class SiteBuilder:
         )
 
     def build_blog_list(self, posts):
-        self.render(
-            "blog_list.html", "blog/index.html",
-            page="blog",
-            posts=posts,
-        )
+        posts_per_page = 20
+        total_pages = (len(posts) + posts_per_page - 1) // posts_per_page if posts else 1
+
+        for i in range(total_pages):
+            page_num = i + 1
+            start = i * posts_per_page
+            end = start + posts_per_page
+            page_posts = posts[start:end]
+
+            # Determine output path
+            if page_num == 1:
+                output_path = "blog/index.html"
+            else:
+                output_path = f"blog/page/{page_num}/index.html"
+
+            # Pagination URLs
+            prev_url = None
+            if page_num > 1:
+                prev_url = "/blog/" if page_num == 2 else f"/blog/page/{page_num - 1}/"
+
+            next_url = None
+            if page_num < total_pages:
+                next_url = f"/blog/page/{page_num + 1}/"
+
+            self.render(
+                "blog_list.html", output_path,
+                page="blog",
+                posts=page_posts,
+                current_page_num=page_num,
+                total_pages=total_pages,
+                prev_url=prev_url,
+                next_url=next_url,
+            )
 
     def build_posts(self, posts):
         for post in posts:

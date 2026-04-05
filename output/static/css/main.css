@@ -1789,3 +1789,61 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   border: none !important;
   display: block !important;
 }
+
+/* =====================================================================
+   PAGINATION
+   ===================================================================== */
+.pagination {
+  padding: 4rem 0 2rem;
+}
+
+.pagination-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+}
+
+.pagination-link {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color var(--t);
+}
+
+.pagination-link:hover:not(.disabled) {
+  color: var(--accent);
+}
+
+.pagination-link.disabled {
+  color: var(--text-3);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination-info {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 480px) {
+  .pagination-inner {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .pagination-info {
+    order: -1;
+  }
+}

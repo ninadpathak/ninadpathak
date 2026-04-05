@@ -37,6 +37,37 @@
         </div>
       </a>
       {% endfor %}
+
+      {% if total_pages > 1 %}
+      <nav class="pagination">
+        <div class="pagination-inner">
+          {% if prev_url %}
+          <a href="{{ prev_url }}" class="pagination-link prev">
+            <span class="arrow">←</span> Previous
+          </a>
+          {% else %}
+          <span class="pagination-link disabled prev">
+            <span class="arrow">←</span> Previous
+          </span>
+          {% endif %}
+
+          <span class="pagination-info">
+            Page {{ current_page_num }} of {{ total_pages }}
+          </span>
+
+          {% if next_url %}
+          <a href="{{ next_url }}" class="pagination-link next">
+            Next <span class="arrow">→</span>
+          </a>
+          {% else %}
+          <span class="pagination-link disabled next">
+            Next <span class="arrow">→</span>
+          </span>
+          {% endif %}
+        </div>
+      </nav>
+      {% endif %}
+
     {% else %}
       <div class="empty-state">
         // No posts yet. Check back soon.
