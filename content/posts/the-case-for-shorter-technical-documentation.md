@@ -16,6 +16,13 @@ I think shorter documentation is superior because it respects the reader’s cog
 
 Cognitive Load Theory (CLT) defines the mental effort required to process information. Modern research from 2020–2025 identifies three types of load: intrinsic, extraneous, and germane. Intrinsic load is the inherent difficulty of the technical task. Extraneous load is the mental energy wasted on poor documentation design, such as wall-of-text paragraphs or unclear navigation.
 
+<div class="visual-wrapper">
+  <div class="visual-title">Cognitive Load Distribution</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/cognitive-load.html" title="Cognitive Load Distribution" loading="lazy"></iframe>
+  </div>
+</div>
+
 Documentation should aim to zero out extraneous load. Research in clinical training and EHR systems shows that reducing extraneous load directly correlates with higher task accuracy. When documentation is too long, the reader spends their limited mental bandwidth just parsing the page instead of executing the work.
 
 I use the **NASA-TLX (Task Load Index)** as a mental framework for assessing documentation. Studies confirm that minimalist prototypes result in significantly lower NASA-TLX scores compared to complex, verbose interfaces. A shorter doc allows the reader to dedicate 100% of their bandwidth to the germane load, which is the productive effort used to build a mental model of the system.

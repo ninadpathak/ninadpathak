@@ -8,6 +8,13 @@ status: published
 
 DevTools startups lose deals over bad docs long before anyone writes "documentation" into a CRM field. A buyer hits a dead quickstart, an auth example leaves out a required scope, a pricing-sensitive limit is buried, or the migration path for one breaking change is unclear. The trial cools off quietly. Sales blames timing. Product blames pricing. I think the docs were the real loss point more often than teams want to admit.
 
+<div class="visual-wrapper">
+  <div class="visual-title">The Evaluation Friction Funnel</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/evaluation-funnel.html" title="Evaluation Friction Funnel" loading="lazy"></iframe>
+  </div>
+</div>
+
 **Short answer:** DevTools buyers use docs as a proxy for product maturity, implementation risk, and post-sale support quality. The 2026 State of Docs report says 80% of decision-makers review documentation before buying, 88% rate docs extremely or somewhat important, and 51% say docs are important or essential for closing deals, yet 57% do not track leads from documentation. Bad docs lose deals because they create friction exactly where technical buyers evaluate trust: setup speed, API clarity, edge-case disclosure, and upgrade confidence.
 
 ## Buyers use docs as the product, not the brochure

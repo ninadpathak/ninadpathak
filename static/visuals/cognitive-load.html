@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Load Distribution</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
+            --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
+                --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+
+        body { 
+            margin: 0; 
+            background: var(--bg-1); 
+            font-family: var(--sans); 
+            color: var(--text-1);
+            overflow: hidden; 
+        }
+
+        #label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-3);
+            text-transform: uppercase;
+        }
+
+        #metrics {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-2);
+            text-align: right;
+            background: var(--bg-2);
+            padding: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .metric-row { margin-bottom: 4px; }
+        .intrinsic { color: var(--text-1); }
+        .extraneous { color: var(--accent); }
+        .germane { color: #0088ff; }
+    </style>
+</head>
+<body>
+    <div id="label">cognitive load theory // working memory capacity</div>
+    <div id="metrics">
+        <div class="metric-row">total_capacity: 1.00</div>
+        <div class="metric-row intrinsic">intrinsic_load: <span id="intrinsic-val">0.40</span></div>
+        <div class="metric-row extraneous">extraneous_load: <span id="extraneous-val">0.50</span></div>
+        <div class="metric-row germane">germane_load: <span id="germane-val">0.10</span></div>
+        <div class="metric-row" style="border-top: 1px solid var(--border); margin-top: 8px; padding-top: 4px;">available_reserve: <span id="reserve-val">0.00</span></div>
+    </div>
+    <script>
+        const scene = new THREE.Scene();
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        scene.background = new THREE.Color(isDark ? 0x111111 : 0xffffff);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Container representing total working memory capacity
+        const containerGeo = new THREE.BoxGeometry(4, 8, 4);
+        const containerMat = new THREE.MeshBasicMaterial({ 
+            color: isDark ? 0x222222 : 0xeeeeee, 
+            wireframe: true,
+            transparent: true,
+            opacity: 0.3
+        });
+        const container = new THREE.Mesh(containerGeo, containerMat);
+        scene.add(container);
+
+        // Load components as stacking blocks
+        const createBlock = (color) => {
+            const geo = new THREE.BoxGeometry(3.8, 1, 3.8);
+            const mat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.8 });
+            return new THREE.Mesh(geo, mat);
+        };
+
+        const intrinsicBlock = createBlock(isDark ? 0x888888 : 0x333333);
+        const extraneousBlock = createBlock(isDark ? 0xff5f1f : 0xd44000);
+        const germaneBlock = createBlock(0x0088ff);
+
+        scene.add(intrinsicBlock);
+        scene.add(extraneousBlock);
+        scene.add(germaneBlock);
+
+        camera.position.z = 10;
+        camera.position.y = 2;
+        camera.lookAt(0, 0, 0);
+
+        const iVal = document.getElementById('intrinsic-val');
+        const eVal = document.getElementById('extraneous-val');
+        const gVal = document.getElementById('germane-val');
+        const rVal = document.getElementById('reserve-val');
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const time = Date.now() * 0.001;
+            
+            // Mathematically precise oscillation of loads
+            // Extraneous load (noise) fluctuates, reducing germane load (learning)
+            const intrinsic = 0.4;
+            const extraneous = 0.3 + Math.sin(time) * 0.2;
+            const germane = Math.max(0.05, 1.0 - intrinsic - extraneous - 0.1);
+            const reserve = Math.max(0, 1.0 - intrinsic - extraneous - germane);
+
+            iVal.innerText = intrinsic.toFixed(2);
+            eVal.innerText = extraneous.toFixed(2);
+            gVal.innerText = germane.toFixed(2);
+            rVal.innerText = reserve.toFixed(2);
+
+            // Update block scales and positions
+            intrinsicBlock.scale.y = intrinsic * 8;
+            intrinsicBlock.position.y = -4 + (intrinsic * 8) / 2;
+
+            extraneousBlock.scale.y = extraneous * 8;
+            extraneousBlock.position.y = intrinsicBlock.position.y + (intrinsic * 8) / 2 + (extraneous * 8) / 2;
+
+            germaneBlock.scale.y = germane * 8;
+            germaneBlock.position.y = extraneousBlock.position.y + (extraneous * 8) / 2 + (germane * 8) / 2;
+
+            scene.rotation.y += 0.005;
+
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>

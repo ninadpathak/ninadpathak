@@ -10,6 +10,13 @@ Developer-tool companies often treat content as short-term promotion. They publi
 
 **Short answer:** Technical content becomes a moat when it compounds into a trusted learning layer around the product. Strong docs, quickstarts, changelogs, upgrade guides, templates, and deep technical posts reduce adoption friction and capture high-intent search traffic. These assets give answer engines quotable material and keep teaching after the launch cycle ends. That compounding only works when the content is accurate, current, and integrated with the product itself.
 
+<div class="visual-wrapper">
+  <div class="visual-title">The Compounding Content Moat</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/content-moat.html" title="Compounding Content Moat" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## The moat comes from accumulated trust, not from one viral post
 
 A single successful article can spike traffic. A moat requires slower and more defensible progress: repeated proof that your company explains complex systems clearly and maintains those explanations.
