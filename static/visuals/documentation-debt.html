@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Debt ROI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
+            --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
+                --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+
+        body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+        #label { position: absolute; bottom: 20px; left: 20px; font-family: var(--mono); font-size: 12px; color: var(--text-3); text-transform: uppercase; }
+        #stats { position: absolute; top: 20px; right: 20px; font-family: var(--mono); font-size: 12px; color: var(--accent); text-align: right; }
+    </style>
+</head>
+<body>
+    <div id="label">Documentation Debt // Compounding Velocity Loss</div>
+    <div id="stats">Wasted Hours/Week: <span id="wasted">17</span><br>Efficiency Loss: <span id="loss">0%</span></div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        scene.background = new THREE.Color(isDark ? 0x111111 : 0xffffff);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
+        // Exponential stack of boxes representing "Debt"
+        const stack = new THREE.Group();
+        scene.add(stack);
+
+        const boxGeo = new THREE.BoxGeometry(4, 0.2, 4);
+        const boxes = [];
+
+        for (let i = 0; i < 20; i++) {
+            const mat = new THREE.MeshBasicMaterial({ 
+                color: isDark ? 0xff5f1f : 0xd44000, 
+                transparent: true, 
+                opacity: 0.1 + (i / 20) * 0.8 
+            });
+            const box = new THREE.Mesh(boxGeo, mat);
+            // Increasing scale representing compounding debt
+            box.scale.set(1 + i*0.1, 1, 1 + i*0.1);
+            box.position.y = i * 0.25 - 2.5;
+            stack.add(box);
+            boxes.push(box);
+
+            const wire = new THREE.LineSegments(
+                new THREE.EdgesGeometry(boxGeo),
+                new THREE.LineBasicMaterial({ color: isDark ? 0x333333 : 0xdddddd })
+            );
+            box.add(wire);
+        }
+
+        camera.position.set(10, 5, 10);
+        camera.lookAt(0, 0, 0);
+
+        const wastedEl = document.getElementById('wasted');
+        const lossEl = document.getElementById('loss');
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            stack.rotation.y += 0.005;
+            
+            const time = Date.now() * 0.001;
+            const loss = (Math.min(100, Math.pow(1.1, time % 50))).toFixed(1);
+            lossEl.innerText = loss + '%';
+            
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>

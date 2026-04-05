@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Quantifying the Engineering Velocity Impact of Technical Documentation</title>
+      <link>https://ninadpathak.com/blog/engineering-velocity-documentation/</link>
+      <description>I analyze the structural correlation between documentation quality and engineering throughput, using DORA metrics and Accelerate research to quantify the ROI of technical writing.</description>
+      <pubDate>Apr 11, 2026</pubDate>
+    </item>
+    <item>
       <title>The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketing Content</title>
       <link>https://ninadpathak.com/blog/developer-trust-hierarchy/</link>
       <description>I analyze the structural reasons why engineers filter for technical depth and verify-ability, creating a 5-tier hierarchy of developer trust.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/embedding-models-compared/</link>
       <description>Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.</description>
       <pubDate>Mar 15, 2026</pubDate>
-    </item>
-    <item>
-      <title>Llm Context Windows Explained: Why More Is Not Always Better</title>
-      <link>https://ninadpathak.com/blog/llm-context-windows-explained/</link>
-      <description>Context windows are expanding to millions of tokens. Here is why the middle of your context still gets ignored, what long context actually costs, and how to build production systems that use these massive windows effectively.</description>
-      <pubDate>Mar 14, 2026</pubDate>
     </item>
   </channel>
 </rss>

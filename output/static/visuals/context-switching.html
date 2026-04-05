@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context Switching Cost</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
+            --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
+                --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+
+        body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+        #label { position: absolute; bottom: 20px; left: 20px; font-family: var(--mono); font-size: 12px; color: var(--text-3); text-transform: uppercase; }
+        .platform-label { position: absolute; font-family: var(--mono); font-size: 11px; color: var(--text-1); background: var(--bg-2); padding: 4px 8px; border: 1px solid var(--border); transform: translate(-50%, -50%); }
+    </style>
+</head>
+<body>
+    <div id="label">Context Switching // Cognitive Load Flow</div>
+    <div id="ide" class="platform-label" style="left: 20%; top: 50%;">IDE (Code)</div>
+    <div id="docs" class="platform-label" style="left: 50%; top: 50%;">DOCS (Source)</div>
+    <div id="slack" class="platform-label" style="left: 80%; top: 50%;">SLACK (Silo)</div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        scene.background = new THREE.Color(isDark ? 0x111111 : 0xffffff);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
+        // Three anchor points
+        const posIDE = new THREE.Vector3(-6, 0, 0);
+        const posDocs = new THREE.Vector3(0, 0, 0);
+        const posSlack = new THREE.Vector3(6, 0, 0);
+
+        const anchors = [posIDE, posDocs, posSlack];
+        anchors.forEach(pos => {
+            const geo = new THREE.BoxGeometry(2, 2, 2);
+            const mat = new THREE.MeshBasicMaterial({ color: isDark ? 0x222222 : 0xeeeeee, wireframe: true });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.copy(pos);
+            scene.add(mesh);
+        });
+
+        // Particles moving between IDE and Docs (Smooth) vs IDE and Slack (Chaotic)
+        const particles = new THREE.Group();
+        scene.add(particles);
+
+        const pGeo = new THREE.SphereGeometry(0.08, 8, 8);
+        const pMatSmooth = new THREE.MeshBasicMaterial({ color: isDark ? 0x888888 : 0x333333 });
+        const pMatChaotic = new THREE.MeshBasicMaterial({ color: isDark ? 0xff5f1f : 0xd44000 });
+
+        const particleData = [];
+        for (let i = 0; i < 50; i++) {
+            const isSmooth = i < 25;
+            const p = new THREE.Mesh(pGeo, isSmooth ? pMatSmooth : pMatChaotic);
+            particles.add(p);
+            particleData.push({
+                mesh: p,
+                t: Math.random(),
+                speed: 0.005 + Math.random() * 0.01,
+                isSmooth: isSmooth
+            });
+        }
+
+        camera.position.set(0, 5, 12);
+        camera.lookAt(0, 0, 0);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            
+            const time = Date.now() * 0.001;
+
+            particleData.forEach(p => {
+                p.t += p.speed;
+                if (p.t > 1) p.t = 0;
+
+                if (p.isSmooth) {
+                    // Smooth path between IDE and Docs
+                    p.mesh.position.lerpVectors(posIDE, posDocs, p.t);
+                    p.mesh.position.y += Math.sin(p.t * Math.PI) * 1;
+                } else {
+                    // Chaotic path between IDE and Slack
+                    p.mesh.position.lerpVectors(posIDE, posSlack, p.t);
+                    p.mesh.position.y += Math.sin(p.t * Math.PI * 4) * 2;
+                    p.mesh.position.z += Math.cos(p.t * Math.PI * 2) * 2;
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>

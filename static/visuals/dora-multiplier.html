@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The DORA Multiplier</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 90%; max-width: 800px; padding: 40px; background: var(--bg); }
+        svg { width: 100%; height: auto; overflow: visible; }
+        .bar-label { font-family: var(--mono); font-size: 12px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+        .bar-val { font-family: var(--mono); font-size: 14px; fill: var(--accent); font-weight: 700; }
+        .axis { stroke: var(--text); stroke-width: 1.5; }
+        .grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 4; }
+        .desc { font-family: var(--sans); font-size: 11px; fill: var(--text-dim); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="0 0 800 300">
+            <!-- Grid -->
+            <line x1="200" y1="50" x2="800" y2="50" class="grid" />
+            <line x1="200" y1="150" x2="800" y2="150" class="grid" />
+            <line x1="200" y1="250" x2="800" y2="250" class="grid" />
+            
+            <!-- Bars -->
+            <!-- Poor Docs -->
+            <g>
+                <rect x="200" y="70" width="34" height="60" fill="var(--border)" />
+                <text x="190" y="105" text-anchor="end" class="bar-label">Poor Documentation</text>
+                <text x="245" y="105" class="bar-val">34%</text>
+                <text x="200" y="145" class="desc">Performance lift from CI/CD</text>
+            </g>
+            
+            <!-- High-Quality Docs -->
+            <g>
+                <rect x="200" y="170" width="550" height="60" fill="var(--accent)" />
+                <text x="190" y="205" text-anchor="end" class="bar-label">Elite Documentation</text>
+                <text x="760" y="205" class="bar-val">750%</text>
+                <text x="200" y="245" class="desc">Performance lift from CI/CD (Capability Amplification)</text>
+            </g>
+            
+            <!-- Y-Axis -->
+            <line x1="200" y1="50" x2="200" y2="250" class="axis" />
+        </svg>
+    </div>
+</body>
+</html>
