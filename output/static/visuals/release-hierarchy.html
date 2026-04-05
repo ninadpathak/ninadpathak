@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Release Impact Layers</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
+            --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
+                --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+
+        body { 
+            margin: 0; 
+            background: var(--bg-1); 
+            font-family: var(--sans); 
+            color: var(--text-1);
+            overflow: hidden; 
+        }
+
+        #label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-3);
+            text-transform: uppercase;
+        }
+
+        .layer-label {
+            position: absolute;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-1);
+            background: var(--bg-2);
+            padding: 4px 8px;
+            border: 1px solid var(--border);
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="label">release notes hierarchy // impact prioritization</div>
+    
+    <div id="layer-1" class="layer-label">1. BREAKING CHANGES (Action Required)</div>
+    <div id="layer-2" class="layer-label">2. SECURITY (CVEs, Fixes)</div>
+    <div id="layer-3" class="layer-label">3. FEATURES (New Capability)</div>
+    <div id="layer-4" class="layer-label">4. INTERNAL (Refactors, Tests)</div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        scene.background = new THREE.Color(isDark ? 0x111111 : 0xffffff);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const layers = [
+            { y: 3, label: 'layer-1', color: isDark ? 0xff5f1f : 0xd44000, importance: 1.2 },
+            { y: 1, label: 'layer-2', color: 0x888888, importance: 1.0 },
+            { y: -1, label: 'layer-3', color: 0xaaaaaa, importance: 0.8 },
+            { y: -3, label: 'layer-4', color: 0xcccccc, importance: 0.6 }
+        ];
+
+        const meshes = [];
+        layers.forEach(l => {
+            const geo = new THREE.BoxGeometry(6 * l.importance, 0.4, 4 * l.importance);
+            const mat = new THREE.MeshBasicMaterial({ color: l.color, transparent: true, opacity: 0.8 });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.y = l.y;
+            scene.add(mesh);
+            meshes.push(mesh);
+            l.mesh = mesh;
+
+            const wireGeo = new THREE.EdgesGeometry(geo);
+            const wireMat = new THREE.LineBasicMaterial({ color: isDark ? 0x333333 : 0xdddddd });
+            const wire = new THREE.LineSegments(wireGeo, wireMat);
+            mesh.add(wire);
+        });
+
+        camera.position.z = 10;
+        camera.position.y = 2;
+        camera.lookAt(0, 0, 0);
+
+        function updateLabels() {
+            layers.forEach(l => {
+                const vector = l.mesh.position.clone();
+                vector.project(camera);
+                const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+                const y = (vector.y * -0.5 + 0.5) * window.innerHeight;
+                const el = document.getElementById(l.label);
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            scene.rotation.y += 0.005;
+            
+            const time = Date.now() * 0.001;
+            meshes.forEach((m, i) => {
+                m.position.y = layers[i].y + Math.sin(time + i) * 0.05;
+            });
+
+            updateLabels();
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>

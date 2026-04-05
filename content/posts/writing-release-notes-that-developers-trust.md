@@ -96,7 +96,32 @@ One of the projects I am frequently asked to lead for DevTools companies is the 
 
 ## My default release note template
 
-Such a format works for SDKs, APIs, and CLI tools. It forces the writer to confront the "Action Required" field, which is often what developers are looking for first.
+The [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) project provides a standard for these categories: Added, Changed, Deprecated, Removed, Fixed, and Security. I follow this standard because it aligns with how developers categorize risk.
+
+<div class="visual-wrapper">
+  <div class="visual-title">Keep a Changelog Standard</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/keep-a-changelog.png" alt="Keep a Changelog Standard" loading="lazy">
+  </div>
+</div>
+
+[Semantic Versioning (SemVer)](https://semver.org/) adds another layer of communication by encoding the magnitude of change into the version number itself.
+
+<div class="visual-wrapper">
+  <div class="visual-title">Semantic Versioning (SemVer)</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/semver.png" alt="Semantic Versioning" loading="lazy">
+  </div>
+</div>
+
+I use a four-layer hierarchy for release notes prioritization:
+
+<div class="visual-wrapper">
+  <div class="visual-title">Impact Prioritization</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/release-hierarchy.html" title="Release Impact Layers" loading="lazy"></iframe>
+  </div>
+</div>
 
 | Field | Requirement |
 | --- | --- |

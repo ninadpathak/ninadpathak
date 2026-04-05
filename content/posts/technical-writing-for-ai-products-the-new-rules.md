@@ -63,6 +63,13 @@ My experience with AI infrastructure content has made one pattern very clear: th
 
 Good AI documentation lives or dies on examples. Google states that good sample code should build without errors, perform the task it claims to perform, be production-ready where possible, and explain how to run it, including setup, dependencies, and expected results ([Google technical writing course on sample code](https://developers.google.com/tech-writing/two/sample-code)).
 
+<div class="visual-wrapper">
+  <div class="visual-title">Schema Constraint Geometry</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/schema-constraints.html" title="3D Schema Constraints" loading="lazy"></iframe>
+  </div>
+</div>
+
 That standard matters more for AI products than for ordinary CRUD APIs because developers actively mutate the sample. They paste it into a notebook, replace the model name, tweak a system instruction, and ship a variant into a prototype by lunch.
 
 Snippet quality has a compounding effect in AI docs:

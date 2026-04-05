@@ -118,6 +118,13 @@ Heading quality often tells me whether a tutorial will teach well before I read 
 
 Microsoft recommends one action per step, numbered procedures for multi-step flows, and splitting long procedures into manageable groups. GitHub says tutorials should link outward rather than replicate reference material if duplication interrupts flow. Those guidelines point to a non-obvious truth: good tutorial pacing depends on what the writer refuses to include.
 
+<div class="visual-wrapper">
+  <div class="visual-title">Sequence vs Sprawl</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/tutorial-path.html" title="Guided Path vs Encyclopedia" loading="lazy"></iframe>
+  </div>
+</div>
+
 I cut aggressively in tutorial drafts. Reference material goes to docs links. Deep conceptual explanation goes to a dedicated section or another post. Optional branches get labeled as optional or removed outright. Readers who are trying to finish a build rarely need a detour into system architecture during step six.
 
 That does not mean tutorials should be shallow. Depth belongs in the choice of workflow, the reasoning behind key decisions, and the troubleshooting that anticipates where readers get stuck. GitHub recommends a troubleshooting section for tutorials, and I think teams underinvest there because troubleshooting feels less glamorous than the happy path. Yet the troubleshooting section often contains the highest teaching value on the page.

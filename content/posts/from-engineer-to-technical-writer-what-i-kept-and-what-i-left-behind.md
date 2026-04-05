@@ -49,6 +49,13 @@ A debugger's mindset persists in my writing for this reason. One recurring probl
 
 Engineering often rewards local optimization—speeding up one specific function or cleaning up one specific module. Writing has similar local moves, such as perfecting a single sentence or adding a clever analogy. I found that local optimization in writing can easily damage the utility of the whole page.
 
+<div class="visual-wrapper">
+  <div class="visual-title">The Context Bridge</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/context-bridge.html" title="The Context Bridge" loading="lazy"></iframe>
+  </div>
+</div>
+
 A sentence can be grammatically perfect and still wrong for the audience. A section can be technically brilliant and still ruin the flow of a tutorial. I had to learn to cut sections that I was personally proud of because they added unnecessary weight to the reader's journey.
 
 Microsoft's [style and voice quick start](https://learn.microsoft.com/en-us/contribute/content/style-quick-start) emphasizes empathy and conciseness. They advise writers to focus on the customer's intent and use everyday words. I learned that an engineer's desire for "completeness" is often the enemy of a reader's need for "utility." Ruthless omission is a professional requirement in technical writing.

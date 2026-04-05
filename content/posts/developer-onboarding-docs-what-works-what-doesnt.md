@@ -16,7 +16,23 @@ I think teams usually miss one hard truth: onboarding docs are an operational to
 
 Google’s [technical writing course](https://developers.google.com/tech-writing/one/documents) tells writers to define scope, state the audience, and summarize key points at the start of a document. That advice matters even more for onboarding because the reader is under time pressure and usually half-lost already. A new engineer does not read an onboarding page like a tutorial reader. They read it like someone trying to unblock the next thirty minutes of work.
 
-Microsoft’s [onboarding guide template](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/onboarding-guide-template/) lands in the same place from a different angle. It asks for scope, contacts, team processes, codebase details, standards, and setup links. GitLab’s [public onboarding handbook](https://handbook.gitlab.com/handbook/people-group/general-onboarding/) goes one step further and turns onboarding into a tracked issue with due dates, role-specific tasks, and supplemental links for each function. I like that model because it treats onboarding as work with owners, not as ambient hope.
+Microsoft’s [onboarding guide template](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/onboarding-guide-template/) lands in the same place from a different angle. It asks for scope, contacts, team processes, codebase details, standards, and setup links. 
+
+<div class="visual-wrapper">
+  <div class="visual-title">Microsoft Onboarding Guide Template</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/microsoft-onboarding-template.png" alt="Microsoft Onboarding Guide Template" loading="lazy">
+  </div>
+</div>
+
+GitLab’s [public onboarding handbook](https://handbook.gitlab.com/handbook/people-group/general-onboarding/) goes one step further and turns onboarding into a tracked issue with due dates, role-specific tasks, and supplemental links for each function. I like that model because it treats onboarding as work with owners, not as ambient hope.
+
+<div class="visual-wrapper">
+  <div class="visual-title">GitLab Onboarding Handbook</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/gitlab-onboarding-handbook.png" alt="GitLab Onboarding Handbook" loading="lazy">
+  </div>
+</div>
 
 Three things matter early:
 
@@ -121,6 +137,13 @@ If I were rewriting an onboarding page for an engineering team tomorrow, I would
 6. First task recommendations.
 7. Thin system mental model.
 8. Links to deeper docs by topic.
+
+<div class="visual-wrapper">
+  <div class="visual-title">Onboarding Critical Path</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/onboarding-path.html" title="Onboarding Critical Path" loading="lazy"></iframe>
+  </div>
+</div>
 
 That shape stays short enough to read in one sitting and specific enough to use under pressure. It also matches how people actually onboard: environment first, workflow second, architecture third.
 

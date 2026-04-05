@@ -287,7 +287,30 @@
 <p>Commercial consequences follow this distinction. Release notes are often the only recurring technical communication a user receives from a company after the initial sale. If those notes are vague or promotional, the user assumes the rest of the documentation is also unreliable. Support costs rise as users fail to navigate upgrades.</p>
 <p>One of the projects I am frequently asked to lead for DevTools companies is the repair of release communication. The problem usually isn't just the prose. The problem is the internal definition of what a release note is. Once the team views the note as operational guidance for a peer, the quality of the writing improves immediately.</p>
 <h2 id="my-default-release-note-template">My default release note template</h2>
-<p>Such a format works for SDKs, APIs, and CLI tools. It forces the writer to confront the "Action Required" field, which is often what developers are looking for first.</p>
+<p>The <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a> project provides a standard for these categories: Added, Changed, Deprecated, Removed, Fixed, and Security. I follow this standard because it aligns with how developers categorize risk.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Keep a Changelog Standard</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/keep-a-changelog.png" alt="Keep a Changelog Standard" loading="lazy">
+  </div>
+</div>
+
+<p><a href="https://semver.org/">Semantic Versioning (SemVer)</a> adds another layer of communication by encoding the magnitude of change into the version number itself.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Semantic Versioning (SemVer)</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/semver.png" alt="Semantic Versioning" loading="lazy">
+  </div>
+</div>
+
+<p>I use a four-layer hierarchy for release notes prioritization:</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Impact Prioritization</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/release-hierarchy.html" title="Release Impact Layers" loading="lazy"></iframe>
+  </div>
+</div>
+
 <table>
 <thead>
 <tr>

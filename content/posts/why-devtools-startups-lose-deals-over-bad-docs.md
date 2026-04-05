@@ -29,9 +29,36 @@ The same report includes operators from Gravitee, Docker, and Stripe describing 
 
 I think quickstarts carry more revenue weight than most startups give them. A quickstart is not an onboarding asset in the abstract. It is a timed test of whether a stranger can make your product work without hand-holding.
 
-Stripe's [development quickstart](https://docs.stripe.com/development/quickstart) is a good example of what "serious" looks like. It starts with the CLI, shows the exact SDK version used, spells out what the reader will learn, and walks through the first successful request with real commands. Stripe's [quickstart index](https://docs.stripe.com/quickstarts) also makes path selection obvious across different integration shapes.
+Stripe's [development quickstart](https://docs.stripe.com/development/quickstart) is a good example of what "serious" looks like. It starts with the CLI, shows the exact SDK version used, spells out what the reader will learn, and walks through the first successful request with real commands. 
 
-Vercel's [Functions quickstart](https://vercel.com/docs/functions/quickstart) is much shorter, but it still does the essential job: prerequisites, a working code example, and the next technical steps. Cloudflare's [Workers getting started guide](https://developers.cloudflare.com/workers/get-started/) follows the same pattern. Good quickstarts reduce ambiguity fast. Weak quickstarts force the buyer to improvise the missing steps. That improvisation is where doubt enters the evaluation.
+<div class="visual-wrapper">
+  <div class="visual-title">Stripe Development Quickstart</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/stripe-quickstart.png" alt="Stripe Development Quickstart" loading="lazy">
+  </div>
+</div>
+
+Stripe's [quickstart index](https://docs.stripe.com/quickstarts) also makes path selection obvious across different integration shapes.
+
+Vercel's [Functions quickstart](https://vercel.com/docs/functions/quickstart) is much shorter, but it still does the essential job: prerequisites, a working code example, and the next technical steps. 
+
+<div class="visual-wrapper">
+  <div class="visual-title">Vercel Functions Quickstart</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/vercel-quickstart.png" alt="Vercel Functions Quickstart" loading="lazy">
+  </div>
+</div>
+
+Cloudflare's [Workers getting started guide](https://developers.cloudflare.com/workers/get-started/) follows the same pattern. 
+
+<div class="visual-wrapper">
+  <div class="visual-title">Cloudflare Workers Getting Started</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/cloudflare-quickstart.png" alt="Cloudflare Workers Getting Started" loading="lazy">
+  </div>
+</div>
+
+Good quickstarts reduce ambiguity fast. Weak quickstarts force the buyer to improvise the missing steps. That improvisation is where doubt enters the evaluation.
 
 I have watched engineering teams shrug off a broken sample because "support can help." Support is too late. Once the evaluator has to ask for help to finish the first ten minutes, the product feels expensive before procurement ever sees a quote.
 

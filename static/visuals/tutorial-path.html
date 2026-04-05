@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guided Path vs Encyclopedia</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
+            --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
+                --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+
+        body { 
+            margin: 0; 
+            background: var(--bg-1); 
+            font-family: var(--sans); 
+            color: var(--text-1);
+            overflow: hidden; 
+        }
+
+        #label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-3);
+            text-transform: uppercase;
+        }
+
+        .side-label {
+            position: absolute;
+            top: 20px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-2);
+            background: var(--bg-2);
+            padding: 4px 10px;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div id="label">tutorial design // sequence vs sprawl</div>
+    <div class="side-label" style="left: 20px;">GUIDED PATH (Linear)</div>
+    <div class="side-label" style="right: 20px;">ENCYCLOPEDIA (Chaotic)</div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        scene.background = new THREE.Color(isDark ? 0x111111 : 0xffffff);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // --- Left Side: Guided Path ---
+        const pathPoints = [];
+        for (let i = 0; i < 10; i++) {
+            pathPoints.push(new THREE.Vector3(-4, (i - 4.5) * 0.8, 0));
+        }
+        const pathCurve = new THREE.CatmullRomCurve3(pathPoints);
+        const pathGeo = new THREE.TubeGeometry(pathCurve, 64, 0.05, 8, false);
+        const pathMat = new THREE.MeshBasicMaterial({ color: isDark ? 0xff5f1f : 0xd44000 });
+        const pathTube = new THREE.Mesh(pathGeo, pathMat);
+        scene.add(pathTube);
+
+        pathPoints.forEach(p => {
+            const nodeGeo = new THREE.SphereGeometry(0.12, 16, 16);
+            const node = new THREE.Mesh(nodeGeo, pathMat);
+            node.position.copy(p);
+            scene.add(node);
+        });
+
+        // --- Right Side: Encyclopedia ---
+        const nodes = [];
+        const numNodes = 25;
+        const encycloGroup = new THREE.Group();
+        encycloGroup.position.x = 4;
+        scene.add(encycloGroup);
+
+        const encycloMat = new THREE.MeshBasicMaterial({ color: isDark ? 0x444444 : 0xaaaaaa, transparent: true, opacity: 0.6 });
+        for (let i = 0; i < numNodes; i++) {
+            const nodeGeo = new THREE.SphereGeometry(0.08, 8, 8);
+            const node = new THREE.Mesh(nodeGeo, encycloMat);
+            node.position.set(
+                (Math.random() - 0.5) * 3,
+                (Math.random() - 0.5) * 6,
+                (Math.random() - 0.5) * 3
+            );
+            encycloGroup.add(node);
+            nodes.push(node);
+        }
+
+        const lineMat = new THREE.LineBasicMaterial({ color: isDark ? 0x222222 : 0xeeeeee, transparent: true, opacity: 0.3 });
+        for (let i = 0; i < numNodes; i++) {
+            for (let j = i + 1; j < numNodes; j++) {
+                if (Math.random() < 0.15) {
+                    const lineGeo = new THREE.BufferGeometry().setFromPoints([nodes[i].position, nodes[j].position]);
+                    const line = new THREE.Line(lineGeo, lineMat);
+                    encycloGroup.add(line);
+                }
+            }
+        }
+
+        camera.position.z = 10;
+        camera.position.y = 0;
+        camera.lookAt(0, 0, 0);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            encycloGroup.rotation.y += 0.005;
+            
+            const time = Date.now() * 0.001;
+            pathTube.scale.x = 1 + Math.sin(time) * 0.02;
+            
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>

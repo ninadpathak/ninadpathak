@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Context Bridge</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
+            --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
+                --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+
+        body { 
+            margin: 0; 
+            background: var(--bg-1); 
+            font-family: var(--sans); 
+            color: var(--text-1);
+            overflow: hidden; 
+        }
+
+        #label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-3);
+            text-transform: uppercase;
+        }
+
+        .side-label {
+            position: absolute;
+            top: 20px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-2);
+            background: var(--bg-2);
+            padding: 4px 10px;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div id="label">technical writing // the context bridge</div>
+    <div class="side-label" style="left: 20px;">ENGINEERING (Detail)</div>
+    <div class="side-label" style="right: 20px;">USER (Outcomes)</div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        scene.background = new THREE.Color(isDark ? 0x111111 : 0xffffff);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Pillars
+        const createPillar = (x) => {
+            const geo = new THREE.BoxGeometry(2, 6, 2);
+            const mat = new THREE.MeshBasicMaterial({ color: isDark ? 0x222222 : 0xeeeeee });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set(x, -2, 0);
+            scene.add(mesh);
+            
+            const wireGeo = new THREE.EdgesGeometry(geo);
+            const wireMat = new THREE.LineBasicMaterial({ color: isDark ? 0x333333 : 0xdddddd });
+            const wire = new THREE.LineSegments(wireGeo, wireMat);
+            mesh.add(wire);
+        };
+
+        createPillar(-6);
+        createPillar(6);
+
+        // The Bridge
+        const bridgeGeo = new THREE.BoxGeometry(10, 0.2, 1.5);
+        const bridgeMat = new THREE.MeshBasicMaterial({ color: isDark ? 0xff5f1f : 0xd44000 });
+        const bridge = new THREE.Mesh(bridgeGeo, bridgeMat);
+        bridge.position.y = 1;
+        scene.add(bridge);
+
+        // Bridge Cables/Wires
+        const lineMat = new THREE.LineBasicMaterial({ color: isDark ? 0x444444 : 0xaaaaaa });
+        for (let i = 0; i < 5; i++) {
+            const x = (i - 2) * 2;
+            const lineGeo = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(x, 1, 0.75),
+                new THREE.Vector3(x, 3, 0)
+            ]);
+            const line = new THREE.Line(lineGeo, lineMat);
+            scene.add(line);
+            
+            const lineGeo2 = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(x, 1, -0.75),
+                new THREE.Vector3(x, 3, 0)
+            ]);
+            const line2 = new THREE.Line(lineGeo2, lineMat);
+            scene.add(line2);
+        }
+
+        // Main suspension cable
+        const cablePoints = [];
+        for (let i = 0; i <= 20; i++) {
+            const t = (i / 20) * 2 - 1; // -1 to 1
+            const x = t * 6;
+            const y = 3 + (t * t) * -1.5; // catenary-ish
+            cablePoints.push(new THREE.Vector3(x, y, 0));
+        }
+        const cableCurve = new THREE.CatmullRomCurve3(cablePoints);
+        const cableGeo = new THREE.TubeGeometry(cableCurve, 64, 0.05, 8, false);
+        const cableMesh = new THREE.Mesh(cableGeo, lineMat);
+        scene.add(cableMesh);
+
+        camera.position.z = 12;
+        camera.position.y = 2;
+        camera.lookAt(0, 1, 0);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            scene.rotation.y = Math.sin(Date.now() * 0.0005) * 0.2;
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
