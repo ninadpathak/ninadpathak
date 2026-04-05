@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Context Bridge</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <style>
         :root {
             --bg-1: #ffffff;
@@ -75,6 +76,9 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
         // Pillars
         const createPillar = (x) => {
             const geo = new THREE.BoxGeometry(2, 6, 2);
@@ -137,6 +141,7 @@
 
         function animate() {
             requestAnimationFrame(animate);
+            controls.update();
             scene.rotation.y = Math.sin(Date.now() * 0.0005) * 0.2;
             renderer.render(scene, camera);
         }

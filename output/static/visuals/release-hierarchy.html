@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Release Impact Layers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <style>
         :root {
             --bg-1: #ffffff;
@@ -79,6 +80,9 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
         const layers = [
             { y: 3, label: 'layer-1', color: isDark ? 0xff5f1f : 0xd44000, importance: 1.2 },
             { y: 1, label: 'layer-2', color: 0x888888, importance: 1.0 },
@@ -120,6 +124,7 @@
 
         function animate() {
             requestAnimationFrame(animate);
+            controls.update();
             scene.rotation.y += 0.005;
             
             const time = Date.now() * 0.001;

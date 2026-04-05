@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compounding Content Moat</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <style>
         :root {
             --bg-1: #ffffff;
@@ -72,6 +73,9 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
         // Core Moat structure - a spiral path of points
         const points = [];
         const numPoints = 200;
@@ -126,6 +130,7 @@
 
         function animate() {
             requestAnimationFrame(animate);
+            controls.update();
             tube.rotation.y += 0.005;
             assetNodes.forEach((node, i) => {
                 const time = Date.now() * 0.001;
