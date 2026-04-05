@@ -33,13 +33,6 @@ I tasked both agents with three specific objectives:
 2. Resolve the hidden race condition.
 3. Write a comprehensive Jest test suite to verify the fix under concurrency.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Experiment start: terminal execution</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/claude-code-benchmark.png" alt="Claude Code Benchmark Start" loading="lazy">
-  </div>
-</div>
-
 ## Claude Code: supervised autonomy and architectural depth
 
 Claude Code (v2.1.92) operates with a high degree of skepticism. When I initiated the refactor, it didn't just replace callbacks with promises. It performed a dependency analysis and identified that `resetCounter()` needed to reset the promise queue itself—an edge case I hadn't explicitly prompted for.
@@ -64,32 +57,11 @@ Claude's execution philosophy relies on a "Supervised Autonomy" model. It presen
 
 Gemini CLI (v0.36.0) takes a more aggressive, "YOLO" approach to automation. By using the `-y` flag, I allowed Gemini to autonomously iterate through the refactor. Its primary strength is the **Conductor** loop, which automatically runs tests and linters after every edit.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Gemini CLI: Conductor verification logs</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/google-docs-capability.png" alt="Gemini CLI Verification" loading="lazy">
-  </div>
-</div>
-
 While Gemini's first-pass solution was robust, it initially missed the edge case of resetting the global lock state. However, its speed was undeniable. Gemini completed the full migration and test suite 40% faster than Claude, largely due to its "lite" context management which loads only the necessary procedural skills for each sub-task.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Final benchmark state: refactored files and tests</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/agent-benchmark-final.png" alt="Final Benchmark State" loading="lazy">
-  </div>
-</div>
 
 ## Hardware constraints: the 16GB unified memory ceiling
 
 Running these agentic loops locally on an M2 Air (16GB) reveals the true bottleneck: context-driven memory pressure. Both agents maintain 1M+ token windows, which translates to a significant RAM footprint when multiple subagents are spawned.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Memory pressure during 1M token context usage</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/full-activity-monitor.png" alt="Activity Monitor Profiling" loading="lazy">
-  </div>
-</div>
 
 During the benchmark, I observed Claude Code triggering swap memory more frequently than Gemini. This is likely due to Claude's "Parallel Subagent" architecture, which requires maintaining multiple independent reasoning trajectories in the context window.
 
