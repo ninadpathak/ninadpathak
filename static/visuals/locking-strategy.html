@@ -25,18 +25,20 @@
             }
         }
 
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        body {
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
         .container { width: 90%; max-width: 800px; padding: 40px; background: var(--bg); }
         svg { width: 100%; height: auto; overflow: visible; }
-        .step-label { font-family: var(--mono); font-size: 18px; fill: var(--text); font-weight: 600; }
-        .time-label { font-family: var(--mono); font-size: 16px; fill: var(--text-dim); }
+        .step-label { font-family: var(--mono); font-size: 22px; fill: var(--text); font-weight: 600; }
+        .time-label { font-family: var(--mono); font-size: 20px; fill: var(--text-dim); }
         .state-box { fill: var(--bg); stroke: var(--border); stroke-width: 2.5; }
         .lock-line { stroke: #0088ff; stroke-width: 3.5; stroke-dasharray: 4; }
     </style>
 </head>
 <body>
     <div class="container">
-        <svg viewBox="0 0 800 300">
+        <svg viewBox="-80 -40 960 420">
             <!-- Timeline -->
             <line x1="50" y1="250" x2="750" y2="250" stroke="var(--text-dim)" stroke-width="1" />
             <text x="750" y="270" text-anchor="end" class="time-label">TIME →</text>

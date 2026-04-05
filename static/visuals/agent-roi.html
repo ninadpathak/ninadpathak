@@ -25,23 +25,27 @@
             }
         }
 
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        body {
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
         .container { width: 90%; max-width: 800px; padding: 40px; background: var(--bg); }
         svg { width: 100%; height: auto; overflow: visible; }
-        .bar-label { font-family: var(--mono); font-size: 18px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
-        .axis { stroke: var(--text); stroke-width: 3.0; }
-        .grid { stroke: var(--border); stroke-width: 2.5; stroke-dasharray: 4; }
+        .bar-label { font-family: var(--mono); font-size: 22px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+        .axis {
+            vector-effect: non-scaling-stroke; stroke: var(--text); stroke-width: 3.0; }
+        .grid {
+            vector-effect: non-scaling-stroke; stroke: var(--border); stroke-width: 2.5; stroke-dasharray: 4; }
     </style>
 </head>
 <body>
     <div class="container">
-        <svg viewBox="0 0 800 300">
+        <svg viewBox="-80 -40 960 420">
             <!-- Cost Projection over 1M tokens -->
             <line x1="50" y1="250" x2="750" y2="250" class="axis" />
             <line x1="50" y1="50" x2="50" y2="250" class="axis" />
             
             <text x="400" y="280" text-anchor="middle" class="bar-label">Inference Volume (1M Tokens)</text>
-            <text x="-150" y="20" text-anchor="middle" class="bar-label" transform="rotate(-90)">Operational Cost ($)</text>
+            <text x="-150" y="40" text-anchor="middle" class="bar-label" transform="rotate(-90)">Operational Cost ($)</text>
 
             <!-- Cloud API Line -->
             <path d="M 50 250 L 750 50" fill="none" stroke="var(--accent)" stroke-width="3" />
