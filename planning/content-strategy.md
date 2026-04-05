@@ -1,63 +1,56 @@
-# Content Strategy: Ninad Pathak Portfolio (v3.0 - April 2026)
+# Content Strategy: Ninad Pathak Portfolio (v4.0 - The Experiment Era)
 
-**Target audience:** Staff Engineers, AI Architects, CTOs, and DevTools Founders.
-**Goal:** Dominate emerging, high-potential, low-competition technical queries. Capitalize on the April 2026 shift from "AI-assisted" to "AI-native" development (Agentic orchestration, local-first tools, advanced retrieval, and applied research).
-**Methodology:** SEO Master (Narrative Technical Voice v2), Programmatic Benchmarking, Topic Hubs.
-
----
-
-## The Strategic Pivot (April 2026)
-
-Standard RAG and basic DORA metrics are saturated. To rank and go viral on Hacker News, we are pivoting to **un-fabricatable engineering problems** and **bleeding-edge research implementations**. 
-
-We are targeting 4 new high-growth hubs:
-1. **Agentic Orchestration & The CLI-First Era**: Moving from chat interfaces to state machines and file-system autonomy.
-2. **Advanced Retrieval & Memory (RAG 3.0)**: Local-first WASM databases, GraphRAG, and context window heap management.
-3. **Applied AI Research Implementation**: Translating papers like VGRPO, FIPO, and Agentic Tree Search into engineering practice.
-4. **DevTools & The New Platform**: High-performance native tools (Zed, uv, Mago, Scalar) replacing legacy Electron/Node bloat.
+**Hardware Baseline**: MacBook Air M2, 16GB Unified Memory.
+**Core Objective**: Transition from "Technical Explainer" to "Engineering Laboratory." Every article must be anchored in code written, benchmarks run, and failures documented on local hardware. 
+**Target Audience**: The Hacker News reader who ignores marketing but upvotes "I ran X on Y and here is the profiler output."
 
 ---
 
-## The Next 20: Bleeding-Edge Engineering Frameworks
+## The Strategic Pivot: Un-fabricatable Data
 
-Every post targets a 3000+ word count with original data, ArXiv citations, and mathematically precise, interactive 2D/3D visuals (minimum one visual per 250 words).
+We are moving away from general advice. If a topic can be summarized by an AI Overview without a human running code, we are not writing it. We are building a "Competitive Moat" through **local instrumentation**.
 
-### Hub 1: Agentic Orchestration & The CLI-First Era
-*   **The death of prompt engineering: why state machines are replacing string templates**
-*   **Claude Code vs Cursor: the architectural shift from autocomplete to autonomous file manipulation**
-*   **Vibe coding is a terrible name for a serious paradigm shift**
-*   **Context quarantine: preventing memory poisoning in multi-agent workflows**
-*   **The API tax: why local inference servers are the only way to scale agentic loops**
-
-### Hub 2: Advanced Retrieval & Memory (RAG 3.0)
-*   **Triples over vectors: when Knowledge Graphs beat semantic search in production**
-*   **The million-vector laptop: why SQLite-vec and PGLite are enough for most RAG apps**
-*   **Context engineering: treating the 2M token window as a garbage-collected heap**
-*   **Late interaction: implementing ColBERT for retrieval that actually understands context**
-*   **The Groundhog Day method: why repeating instructions at the end of a 100k context window boosts accuracy by 30%**
-
-### Hub 3: Applied AI Research Implementation
-*   **Agentic Tree Search: how The AI Scientist-v2 automates discovery and why it matters for SWEs**
-*   **FIPO vs PPO: rewarding reasoning trajectories instead of final outputs**
-*   **Unified embedding spaces: why "stitched" multimodal models are dead**
-*   **4D latent rewards: solving the "teleportation" problem in physical video generation (VGRPO)**
-*   **Think Anywhere: moving beyond Chain-of-Thought by making reasoning token placement a learnable parameter**
-
-### Hub 4: DevTools, Performance, & The New Platform
-*   **Scalar vs Swagger: the transition to high-performance interactive API playgrounds**
-*   **Continuous Quality Engineering: replacing test phases with real-time AI triage**
-*   **Why Zed is the most-starred open-source startup project: the return to native performance**
-*   **Temporal 2.0: treating long-running distributed processes as first-class citizens**
-*   **The intelligent compiler: why Mago and uv are setting a new standard for toolchain speed**
+### The Experiment Framework (Strict Requirements)
+1.  **Repository-Linked**: Every article must reference a specific setup (Ollama, vLLM, local WASM DBs, or specific open-source benchmarks).
+2.  **Hardware-Specific Findings**: Documenting how 16GB Unified Memory behaves under pressure (Swap usage, thermal throttling impacts on inference, memory pressure graphs).
+3.  **The "Failure" Section**: Every post must include a section on what didn't work (e.g., "The model OOM'd at 4k context tokens").
+4.  **Meaningful 2D/3D Data Visuals**: No more generic shapes. Visuals must be generated from the test result JSON/CSV files.
 
 ---
 
-## Writing & Visual Rules (Strict Enforcement)
+## The Next 20: Engineering Benchmarks & Implementation Post-mortems
 
-1.  **Direct Answer**: Define the technical concept in the first 50 words. No fluff preambles.
-2.  **Cynical Tone**: Write for the senior engineer who is tired of "digital transformation" marketing.
-3.  **Deep Citations**: Minimum 2 ArXiv papers and 3 official docs/engineering blogs per article.
-4.  **No Contrastive Parallelism**: Avoid "Stop doing X, start doing Y" or "Not X, but Y". Use direct, factual statements.
-5.  **Casing Rules**: Title Case for Titles. Sentence case for headings.
-6.  **Interactive Visuals**: Every article must include 12+ visuals (Interactive 2D/3D charts and verified screenshots), averaging one visual per 250 words. Visuals must be mathematically precise and meaningful—no empty 3D shapes.
-7.  **Programmatic Data**: Use tables and benchmarks. Don't just say "it is faster," say "it reduced p99 latency by 45ms in [Test Case]."
+### Hub 1: Local Inference & Memory Pressure
+*   **The VRAM ceiling: running 1T parameter MoE models on a 16GB M2 Air**
+    *   *Experiment*: Testing DeepSeek-V4 (quantized) and Mistral Large 3 local weights.
+    *   *Metric*: Token/sec vs. Memory Pressure.
+*   **Context engineering as RAM management: implementing KV cache eviction in TurboQuant**
+    *   *Experiment*: Measuring accuracy decay as we aggressively prune the context window.
+*   **The 800ms barrier: measuring local A2A (Audio-to-Audio) latency on Gemini 3.1 Flash Lite**
+    *   *Experiment*: Building a real-time voice agent and profiling the latency chain.
+
+### Hub 2: Edge Databases & Retrieval (RAG 3.0)
+*   **100ms vector search in the browser: a head-to-head of PGLite vs SQLite-vec**
+    *   *Experiment*: Indexing 100,000 vectors and measuring query time under concurrent load.
+*   **Triples beat vectors: a production-grade post-mortem of GraphRAG vs Traditional RAG**
+    *   *Experiment*: Testing "relationship-heavy" queries against a 10k document set.
+*   **Local reranking: does a Cross-Encoder matter on 16GB?**
+    *   *Experiment*: Comparing BGE-Reranker-v3 latency vs accuracy gains.
+
+### Hub 3: Agentic Orchestration & Toolchains
+*   **From 4 minutes to 12 seconds: a quantitative audit of uv and Mago toolchains**
+    *   *Experiment*: Moving a 500-dependency project from Poetry to uv.
+*   **Claude Code vs Cursor: a structural analysis of agentic file manipulation**
+    *   *Experiment*: Forcing agents to refactor a legacy 10k LOC codebase and measuring success rate.
+*   **Memory poisoning in shared contexts: measuring the hallucination rate of multi-agent loops**
+    *   *Experiment*: Testing "Context Quarantine" vs Shared History in a 5-agent chain.
+
+---
+
+## Writing & Visual Rules (V4.0)
+
+1.  **Title Case Titles / sentence case headings.**
+2.  **Direct Answer**: "I reduced build times by 85% by switching to uv."
+3.  **No Contrastive Parallelism**: Use factual evidence.
+4.  **Visual Density**: 12+ visuals per post. Visuals MUST be data-driven (charts, sequence diagrams, profiler screenshots).
+5.  **Verified Proof**: Use real screenshots of the terminal, profiler (Activity Monitor/Instruments), and benchmark outputs.

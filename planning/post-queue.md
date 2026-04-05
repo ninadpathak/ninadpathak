@@ -1,134 +1,79 @@
-# Daily Post Queue (v3.0 - April 2026 Niche & Viral Strategy)
+# Daily Post Queue (v4.0 - Experiment & Benchmark Driven)
 
-Posts are published one per day in order. Claude picks the next post from this list, writes it, builds, and pushes.
+Posts are published one per day. Claude picks the next post, runs the experiment, writes the post-mortem, builds, and pushes.
 
 ## Queue (ordered)
 
-20. **The death of prompt engineering: why state machines are replacing string templates**
+20. **The 16GB VRAM ceiling: profiling DeepSeek-V4 MoE inference on an M2 Air**
     - Target: Apr 12, 2026
-    - Visual: 2D Interactive Finite State Machine graph
-    - Primary Keyword: agentic prompt architecture
-    - HN Hook: Why string templating is the "PHP of AI" and how to build real, deterministic logic.
+    - Visual: 2D Line chart of tokens/sec vs. context size; Screenshot of Activity Monitor memory pressure.
+    - Primary Keyword: DeepSeek-V4 local benchmark
+    - HN Hook: Can a 16GB Air handle a 1T parameter MoE? (Yes, with 4-bit quantization, and here is the profiler data).
 
-21. **Claude Code vs Cursor: the architectural shift from autocomplete to autonomous file manipulation**
+21. **100ms vector search in the browser: PGLite vs SQLite-vec head-to-head**
     - Target: Apr 13, 2026
-    - Visual: 2D Sequence diagram of CLI-first agent file operations
-    - Primary Keyword: agentic coding interfaces
-    - HN Hook: Autocomplete is dead. Agents now own the terminal and the filesystem.
+    - Visual: 2D Bar chart of query latency over 100k vectors; Sequence diagram of WASM DB initialization.
+    - Primary Keyword: local WASM vector database benchmarks
+    - HN Hook: Moving RAG to the edge. I benchmarked the two fastest WASM relational-vector databases.
 
-22. **Vibe coding is a terrible name for a serious paradigm shift**
+22. **From 4 minutes to 12 seconds: a quantitative audit of the uv package manager**
     - Target: Apr 14, 2026
-    - Visual: 2D Scatter plot of intent abstraction vs execution speed
-    - Primary Keyword: vibe coding lovable replit
-    - HN Hook: Stop laughing at "vibe coding." High-level intent orchestration is the new compiler.
+    - Visual: 2D Stacked bar chart of cold vs warm build times; Screenshot of `uv lock` vs `poetry lock`.
+    - Primary Keyword: uv vs poetry benchmark
+    - HN Hook: I migrated a monolithic 500-dependency repo to uv. Here is exactly where the time was saved.
 
-23. **Context quarantine: preventing memory poisoning in multi-agent workflows**
+23. **Context engineering as heap management: measuring accuracy vs KV cache eviction**
     - Target: Apr 15, 2026
-    - Visual: 3D Isolated memory partitions (interactive)
-    - Primary Keyword: multi-agent memory architecture
-    - HN Hook: Why your agents forget their instructions and hallucinate cross-task data.
+    - Visual: 3D Heatmap of "Attention Decay" as cache blocks are evicted; 2D line chart of RAG accuracy vs Pruning ratio.
+    - Primary Keyword: KV cache eviction strategies
+    - HN Hook: You don't need a 2M token window if you manage it like a garbage-collected heap.
 
-24. **The API tax: why local inference servers are the only way to scale agentic loops**
+24. **The 800ms barrier: profiling the latency chain of a real-time Gemini 3.1 voice agent**
     - Target: Apr 16, 2026
-    - Visual: 2D Cost comparison chart (API vs vLLM/BentoML over 1M loops)
-    - Primary Keyword: local inference server scaling
-    - HN Hook: Cloud API costs will bankrupt your multi-agent architecture. Go local.
+    - Visual: 2D Timeline of the A2A (Audio-to-Audio) request/response loop; Waterfall chart of network vs. inference latency.
+    - Primary Keyword: real-time voice AI latency
+    - HN Hook: I built a sub-second latency voice assistant. Here is the bottleneck analysis.
 
-25. **Triples over vectors: when Knowledge Graphs beat semantic search in production**
+25. **Local reranking on M2: measuring the latency tax of Cross-Encoders**
     - Target: Apr 17, 2026
-    - Visual: 3D Interactive Knowledge Graph traversal vs Vector distance
-    - Primary Keyword: GraphRAG vs vector search
-    - HN Hook: Semantic search fails at relational facts. GraphRAG fixes it.
+    - Visual: 2D Tradeoff chart (MRR vs Latency); Screenshot of Python profiler showing top-K processing time.
+    - Primary Keyword: BGE-Reranker-v3 local performance
+    - HN Hook: Everyone says reranking is "slow." I measured exactly how slow it is on unified memory.
 
-26. **The million-vector laptop: why SQLite-vec and PGLite are enough for most RAG apps**
+26. **Triples beat vectors: a GraphRAG implementation post-mortem**
     - Target: Apr 18, 2026
-    - Visual: 2D Latency vs Vector count benchmark chart
-    - Primary Keyword: sqlite-vec edge RAG
-    - HN Hook: You don't need a distributed vector database cluster for a million documents.
+    - Visual: 3D Interactive Knowledge Graph showing relationship traversal; 2D Accuracy comparison (GraphRAG vs Naive RAG).
+    - Primary Keyword: GraphRAG vs vector search
+    - HN Hook: Semantic search failed at complex relational queries. Here is how I implemented GraphRAG to fix it.
 
-27. **Context engineering: treating the 2M token window as a garbage-collected heap**
+27. **Memory poisoning in multi-agent workflows: a quantified hallucination audit**
     - Target: Apr 19, 2026
-    - Visual: 2D Memory map of KV cache eviction strategies (TurboQuant)
-    - Primary Keyword: context window management
-    - HN Hook: If you treat a 2M token window like a string, you will run out of VRAM.
+    - Visual: 2D Confusion matrix of agent task crossovers; Sequence diagram of a 5-agent "Context Quarantine" loop.
+    - Primary Keyword: multi-agent hallucination rates
+    - HN Hook: I ran a 5-agent chain with and without context isolation. halllucination rates dropped by 45%.
 
-28. **Late interaction: implementing ColBERT for retrieval that actually understands context**
+28. **The intelligent compiler: profiling Mago linting speeds in enterprise PHP repos**
     - Target: Apr 20, 2026
-    - Visual: 3D Token-to-token similarity matrix
-    - Primary Keyword: ColBERT multi-vector retrieval
-    - HN Hook: Stop compressing documents into a single vector. It destroys meaning.
+    - Visual: 2D Comparison chart (Mago vs PHPStan vs Psalm); Waterfall chart of AST parsing time.
+    - Primary Keyword: Mago PHP linter benchmark
+    - HN Hook: Rust-native tooling is finally arriving for PHP. Here is the throughput analysis.
 
-29. **The Groundhog Day method: why repeating instructions at the end of a 100k context window boosts accuracy by 30%**
+29. **Claude Code vs Cursor: measuring success rates in autonomous file manipulation**
     - Target: Apr 21, 2026
-    - Visual: 2D Attention decay curve over 100k tokens
-    - Primary Keyword: context window optimization hacks
-    - HN Hook: The "Lost in the Middle" problem is real, and this hack exploits attention mechanisms to fix it.
+    - Visual: 2D Success/Fail rate chart for a standardized refactoring task; 3D visualization of file-system edits.
+    - Primary Keyword: agentic coding tools success rates
+    - HN Hook: I forced two agents to refactor the same 10k LOC project. One won by a landslide.
 
-30. **Agentic Tree Search: how The AI Scientist-v2 automates discovery and why it matters for SWEs**
+30. **Think Anywhere: measuring the efficiency of learnable reasoning token placement**
     - Target: Apr 22, 2026
-    - Visual: 2D Interactive tree search decision algorithm
-    - Primary Keyword: agentic tree search automated reasoning
-    - HN Hook: Autonomous research agents are passing peer review. Here is the architecture.
+    - Visual: 2D Timeline of reasoning token activation during generation; 2D Tokens/sec vs Thinking Budget.
+    - Primary Keyword: learnable reasoning tokens
+    - HN Hook: Stop putting CoT at the start. I implemented dynamic thinking tokens and saved 20% on compute.
 
-31. **FIPO vs PPO: rewarding reasoning trajectories instead of final outputs**
-    - Target: Apr 23, 2026
-    - Visual: 2D Reward distribution graph across logical steps
-    - Primary Keyword: reinforcement learning LLM reasoning
-    - HN Hook: We stopped rewarding the final answer and started grading the scratchpad.
+## Writing & Visual Rules (V4.0)
 
-32. **Unified embedding spaces: why "stitched" multimodal models are dead**
-    - Target: Apr 24, 2026
-    - Visual: 3D Latent space embedding projection (Text, Audio, Video)
-    - Primary Keyword: unified embedding spaces multimodal
-    - HN Hook: GPT-5.5 and Gemini 3.1 don't translate audio to text. They "think" in sound.
-
-33. **4D latent rewards: solving the "teleportation" problem in physical video generation (VGRPO)**
-    - Target: Apr 25, 2026
-    - Visual: 3D Temporal consistency reward model
-    - Primary Keyword: VGRPO physical video generation
-    - HN Hook: How AI video models finally learned object permanence.
-
-34. **Think Anywhere: moving beyond Chain-of-Thought by making reasoning token placement a learnable parameter**
-    - Target: Apr 26, 2026
-    - Visual: 2D Timeline of dynamic reasoning allocation during generation
-    - Primary Keyword: dynamic reasoning token allocation
-    - HN Hook: Forcing models to think at the beginning is inefficient. Let them pause and think mid-sentence.
-
-35. **Scalar vs Swagger: the transition to high-performance interactive API playgrounds**
-    - Target: Apr 27, 2026
-    - Visual: 2D Render blocking benchmark chart (Scalar vs Swagger)
-    - Primary Keyword: open source API documentation tools
-    - HN Hook: Swagger UI is bloated. Scalar is fast, interactive, and built for modern APIs.
-
-36. **Continuous Quality Engineering: replacing test phases with real-time AI triage**
-    - Target: Apr 28, 2026
-    - Visual: 2D Shift-left CI/CD pipeline integration diagram
-    - Primary Keyword: zero-trust CI/CD AI testing
-    - HN Hook: "QA" is no longer a phase. It is an ambient AI process in your CI/CD pipeline.
-
-37. **Why Zed is the most-starred open-source startup project: the return to native performance**
-    - Target: Apr 29, 2026
-    - Visual: 2D Memory footprint and input latency comparison chart
-    - Primary Keyword: native performance devtools rust
-    - HN Hook: Developers are rejecting Electron bloatware. Native Rust/C++ apps are winning.
-
-38. **Temporal 2.0: treating long-running distributed processes as first-class citizens**
-    - Target: Apr 30, 2026
-    - Visual: 2D Workflow state orchestration diagram
-    - Primary Keyword: distributed workflow orchestration
-    - HN Hook: Microservices without workflow orchestration is just distributed chaos.
-
-39. **The intelligent compiler: why Mago and uv are setting a new standard for toolchain speed**
-    - Target: May 1, 2026
-    - Visual: 2D Build time reduction chart across toolchains
-    - Primary Keyword: high performance package managers
-    - HN Hook: Your linter and package manager shouldn't take longer to run than the code took to write.
-
-## Writing & Visual Rules (Non-Negotiable)
-
-- **Word Count**: 3000+ words. No exceptions.
+- **Word Count**: 3000+ words.
 - **Tone**: Cynical, practitioner-first, Hacker News style.
-- **Sentence Structure**: No em dashes, no semicolons, no contrastive parallelism. No sentences starting with forbidden words (In, This, By, Finally, Most, Ever, If).
+- **Visuals**: 12+ per post. MUST be data-driven (charts, sequence diagrams, profiler screenshots).
 - **Casing**: Title Case for titles. Sentence case for headings.
-- **Research**: Minimum 2 ArXiv citations + 3 official docs/engineering blog links.
-- **Visuals**: 12+ visuals (Interactive 2D/3D charts and verified screenshots), averaging one visual per 250 words.
+- **Proof**: Link to the benchmark script or repo for every article.
