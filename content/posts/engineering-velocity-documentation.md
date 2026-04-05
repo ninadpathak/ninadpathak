@@ -6,7 +6,7 @@ tags: [engineering-velocity, developer-productivity, dora-metrics, technical-wri
 status: published
 ---
 
-Technical documentation is the single greatest force multiplier for engineering velocity. While most teams treat writing as a secondary administrative task, DORA research (Accelerate) confirms that high-quality documentation makes a team 2.4x more likely to achieve elite software delivery performance. The impact is non-linear: technical practices like Continuous Integration provide a 34% performance lift with poor documentation, but that lift surges to 750% when supported by high-quality technical writing. Documentation is not a "clarity" exercise; it is a systemic optimization for engineering throughput.
+Technical documentation is the single greatest force multiplier for engineering velocity. While most teams treat writing as a secondary administrative task, [DORA research (Accelerate)](https://dora.dev/publications/) confirms that high-quality documentation makes a team 2.4x more likely to achieve elite software delivery performance. The impact is non-linear: technical practices like Continuous Integration provide a 34% performance lift with poor documentation, but that lift surges to 750% when supported by high-quality technical writing. Documentation is not a "clarity" exercise; it is a systemic optimization for engineering throughput.
 
 <div class="visual-wrapper">
   <div class="visual-title">The DORA multiplier: capability amplification</div>
@@ -28,9 +28,9 @@ Engineering teams frequently prioritize code-level technical debt over documenta
   </div>
 </div>
 
-A Stripe survey found that developers spend an average of 17 hours per week on technical debt and maintenance. Poor documentation is cited as a primary friction point in this calculation. When information is unstated or buried in ephemeral Slack threads, the cost of discovery becomes linear with the size of the team. In an undocumented system, a team of 100 engineers is not 10x more productive than a team of 10; they are often less productive because the communication overhead of maintaining tribal knowledge consumes the surplus capacity.
+A [Stripe survey](https://stripe.com/reports/developer-coefficient-2018) found that developers spend an average of 17 hours per week on technical debt and maintenance. Poor documentation is cited as a primary friction point in this calculation. When information is unstated or buried in ephemeral Slack threads, the cost of discovery becomes linear with the size of the team. In an undocumented system, a team of 100 engineers is not 10x more productive than a team of 10; they are often less productive because the communication overhead of maintaining tribal knowledge consumes the surplus capacity.
 
-McKinsey research on "Tech Equity" confirms that companies with significant documentation gaps take 18% longer to release new features. This delay is not caused by slow typing; it is caused by the "discovery latency" required to understand undocumented dependencies and side effects.
+[McKinsey research](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-debt-reclaiming-tech-equity-through-software-excellence) on "Tech Equity" confirms that companies with significant documentation gaps take 18% longer to release new features. This delay is not caused by slow typing; it is caused by the "discovery latency" required to understand undocumented dependencies and side effects.
 
 <div class="visual-wrapper">
   <div class="visual-title">Research: tech debt and engineering excellence (McKinsey)</div>
@@ -41,7 +41,7 @@ McKinsey research on "Tech Equity" confirms that companies with significant docu
 
 ## DORA metrics as a documentation benchmark
 
-The DevOps Research and Assessment (DORA) team has spent nearly a decade identifying the capabilities that drive software delivery and operational (SDO) performance. Their findings consistently place documentation at the center of the performance web.
+The [DevOps Research and Assessment (DORA)](https://dora.dev/) team has spent nearly a decade identifying the capabilities that drive software delivery and operational (SDO) performance. Their findings consistently place documentation at the center of the performance web.
 
 <div class="visual-wrapper">
   <div class="visual-title">DORA metrics: the industry standard for velocity</div>
@@ -70,9 +70,9 @@ A knowledge silo is an undocumented architectural detail that lives only in one 
   </div>
 </div>
 
-Throughput capacity is limited by the slowest component of the system. If your deployment pipeline takes 10 minutes, but understanding the "Auth Service" dependencies takes 4 hours of Slack interrogation, your true velocity is capped by the lack of documentation. Initiatives focused on intentional knowledge sharing—such as Architecture Decision Records (ADRs)—have been shown to boost engineering throughput by nearly 70%.
+Throughput capacity is limited by the slowest component of the system. If your deployment pipeline takes 10 minutes, but understanding the "Auth Service" dependencies takes 4 hours of Slack interrogation, your true velocity is capped by the lack of documentation. Initiatives focused on intentional knowledge sharing—such as [Architecture Decision Records (ADRs)](https://github.com/joelparkerhenderson/architecture-decision-record)—have been shown to boost engineering throughput by nearly 70%.
 
-GitHub's State of the Octoverse reports consistently show that high-quality documentation can increase developer productivity by 50%. This productivity gain comes from the decentralization of truth. When the documentation is the source of truth, the "Bus Factor" of any individual component becomes secondary to the reliability of the written spec.
+[GitHub's State of the Octoverse](https://octoverse.github.com/) reports consistently show that high-quality documentation can increase developer productivity by 50%. This productivity gain comes from the decentralization of truth. When the documentation is the source of truth, the "Bus Factor" of any individual component becomes secondary to the reliability of the written spec.
 
 <div class="visual-wrapper">
   <div class="visual-title">GitHub Octoverse: productivity and documentation</div>
