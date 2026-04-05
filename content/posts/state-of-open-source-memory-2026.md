@@ -1,9 +1,15 @@
 ---
-title: "The State of Open Source AI Memory in 2026: Beyond the Context Window Myth"
 date: 2026-03-15
-description: "AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve identity fragmentation at production scale."
-tags: [ai, agents, infrastructure, open-source]
+description: AI architecture has reached a plateau in model reasoning. The next frontier
+  of differentiation lives in stateful memory systems that solve identity fragmentation
+  at production scale.
 status: published
+tags:
+- ai
+- agents
+- infrastructure
+- open-source
+title: 'The State of Open Source Ai Memory in 2026: Beyond the Context Window Myth'
 ---
 
 I often return to that legendary [Hacker News thread](https://news.ycombinator.com/item?id=8863) where a user famously dismissed Dropbox as a trivial rsync clone. The author argued that anyone with a few spare hours could replicate the service using basic shell scripts and a mount point. We know that take aged poorly because the actual challenge lived in the invisible orchestration of state across a messy network.

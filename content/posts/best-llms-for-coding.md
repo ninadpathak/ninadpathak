@@ -1,9 +1,15 @@
 ---
-title: "The Best LLMs for Coding in 2026: An Engineering Review"
 date: 2026-03-12
-description: "Not all models are created equal for software development. Here is a benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic logic, and repository-scale refactoring as of March 2026."
-tags: [ai, llm, technical-writing, devtools]
+description: Not all models are created equal for software development. Here is a
+  benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic
+  logic, and repository-scale refactoring as of March 2026.
 status: published
+tags:
+- ai
+- llm
+- technical-writing
+- devtools
+title: 'The Best Llms for Coding in 2026: an Engineering Review'
 ---
 
 Evaluating models for software engineering has moved beyond simple snippet generation. Production coding tasks now involve long-range reasoning and autonomous tool interaction. They require deep algorithmic logic. The model that wins on a Python quiz might fail when tasked with refactoring a multi-file repository or managing a complex migration.

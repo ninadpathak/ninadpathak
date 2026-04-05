@@ -4,93 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support Deflection ROI</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <style>
         :root {
-            --bg-1: #ffffff;
-            --bg-2: #efefed;
-            --border: #e0e0dc;
-            --text-1: #0e0e0e;
-            --text-2: #3a3a3a;
-            --text-3: #888888;
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
             --accent: #d44000;
+            --border: #e0e0dc;
             --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
             --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-1: #111111;
-                --bg-2: #1a1a1a;
-                --border: #1e1e1e;
-                --text-1: #f0f0f0;
-                --text-2: #c2c2c2;
-                --text-3: #6a6a6a;
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
                 --accent: #ff5f1f;
+                --border: #1e1e1e;
             }
         }
 
-        body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
-        #label { position: absolute; bottom: 20px; left: 20px; font-family: var(--mono); font-size: 12px; color: var(--text-3); text-transform: uppercase; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .chart-container {
+            width: 90%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .axis { stroke: var(--text); stroke-width: 1.5; }
+        .grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 4; }
+        .axis-title { font-family: var(--mono); font-size: 14px; fill: var(--text); font-weight: 500; text-transform: uppercase; }
+        
+        .bar-depth { fill: var(--border); }
+        .bar-tickets { fill: var(--accent); opacity: 0.8; }
+        .bar-label { font-family: var(--mono); font-size: 11px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+        
+        .legend {
+            margin-top: 40px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: center;
+            display: flex;
+            gap: 20px;
+        }
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-color { width: 12px; height: 12px; }
     </style>
 </head>
 <body>
-    <div id="label">Documentation ROI // Support Ticket Deflection</div>
-
-    <script>
-        const scene = new THREE.Scene();
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        scene.background = new THREE.Color(isDark ? 0x111111 : 0xffffff);
-
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-
-        // Bars representing different documentation levels
-        const data = [
-            { label: 'Marketing Only', depth: 1, tickets: 10, color: 0xeeeeee },
-            { label: 'Basic Tutorials', depth: 3, tickets: 7, color: 0xcccccc },
-            { label: 'Full Reference', depth: 6, tickets: 4, color: 0x888888 },
-            { label: 'Practitioner Deep Dives', depth: 10, tickets: 1, color: isDark ? 0xff5f1f : 0xd44000 }
-        ];
-
-        data.forEach((d, i) => {
-            // Documentation Depth Bar (White/Grey)
-            const depthGeo = new THREE.BoxGeometry(1, d.depth, 1);
-            const depthMat = new THREE.MeshBasicMaterial({ color: d.color, transparent: true, opacity: 0.7 });
-            const depthBar = new THREE.Mesh(depthGeo, depthMat);
-            depthBar.position.set(i * 2 - 3, d.depth / 2 - 5, 0);
-            scene.add(depthBar);
-
-            // Support Ticket Bar (Red/Accent) - inversely proportional
-            const ticketGeo = new THREE.BoxGeometry(1, d.tickets, 1);
-            const ticketMat = new THREE.MeshBasicMaterial({ color: isDark ? 0xff5f1f : 0xd44000, transparent: true, opacity: 0.4 });
-            const ticketBar = new THREE.Mesh(ticketGeo, ticketMat);
-            ticketBar.position.set(i * 2 - 3, d.tickets / 2 - 5, 2);
-            scene.add(ticketBar);
-        });
-
-        camera.position.set(5, 5, 10);
-        camera.lookAt(0, 0, 0);
-
-        function animate() {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        }
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        animate();
-    </script>
+    <div class="chart-container">
+        <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+            <!-- Grid Lines -->
+            <line x1="0" y1="100" x2="800" y2="100" class="grid" />
+            <line x1="0" y1="200" x2="800" y2="200" class="grid" />
+            <line x1="0" y1="300" x2="800" y2="300" class="grid" />
+            
+            <!-- Axes -->
+            <line x1="0" y1="400" x2="800" y2="400" class="axis" /> <!-- X -->
+            <line x1="0" y1="0" x2="0" y2="400" class="axis" />   <!-- Y -->
+            
+            <!-- Axis Titles -->
+            <text x="400" y="450" text-anchor="middle" class="axis-title">Documentation Maturity →</text>
+            <text x="-200" y="-50" text-anchor="middle" class="axis-title" transform="rotate(-90)">Relative Volume</text>
+            
+            <!-- Bar Groups -->
+            <!-- Marketing Only -->
+            <g transform="translate(100, 400)">
+                <rect x="-30" y="-40" width="30" height="40" class="bar-depth" />
+                <rect x="0" y="-380" width="30" height="380" class="bar-tickets" />
+                <text x="0" y="25" text-anchor="middle" class="bar-label">Marketing Only</text>
+            </g>
+            
+            <!-- Basic Tutorials -->
+            <g transform="translate(300, 400)">
+                <rect x="-30" y="-120" width="30" height="120" class="bar-depth" />
+                <rect x="0" y="-280" width="30" height="280" class="bar-tickets" />
+                <text x="0" y="25" text-anchor="middle" class="bar-label">Basic Tutorials</text>
+            </g>
+            
+            <!-- Full Reference -->
+            <g transform="translate(500, 400)">
+                <rect x="-30" y="-240" width="30" height="240" class="bar-depth" />
+                <rect x="0" y="-150" width="30" height="150" class="bar-tickets" />
+                <text x="0" y="25" text-anchor="middle" class="bar-label">Full Reference</text>
+            </g>
+            
+            <!-- Practitioner Dives -->
+            <g transform="translate(700, 400)">
+                <rect x="-30" y="-380" width="30" height="380" class="bar-depth" />
+                <rect x="0" y="-40" width="30" height="40" class="bar-tickets" />
+                <text x="0" y="25" text-anchor="middle" class="bar-label">Practitioner Dives</text>
+            </g>
+        </svg>
+    </div>
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background: var(--border);"></div>
+            <span>Documentation Depth</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: var(--accent);"></div>
+            <span>Support Ticket Volume</span>
+        </div>
+    </div>
 </body>
 </html>

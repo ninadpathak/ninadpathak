@@ -1,9 +1,13 @@
 ---
-title: "Token Counting Isn't Optional: A Practical Guide to LLM Cost Control"
-description: "I explain the mechanics of LLM tokenization, why JSON burns your API budget, and how to architect systems for strict token efficiency."
 date: 2026-03-22
-tags: [llm, infrastructure, ai]
+description: I explain the mechanics of LLM tokenization, why JSON burns your API
+  budget, and how to architect systems for strict token efficiency.
 status: published
+tags:
+- llm
+- infrastructure
+- ai
+title: 'Token Counting Isn''t Optional: a Practical Guide to Llm Cost Control'
 ---
 
 I often see engineering teams treat LLM calls like traditional REST API requests. Traditional APIs have fixed costs per request regardless of the payload size. LLM API costs are entirely dynamic and scale directly with every character you send and receive. You cannot scale an AI product without strict token budgeting. I will explain the mechanics of tokenization and show you how to architect systems that keep costs predictable.

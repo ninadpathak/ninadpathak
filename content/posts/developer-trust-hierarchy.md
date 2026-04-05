@@ -1,9 +1,15 @@
 ---
-title: "The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketing Content"
 date: 2026-04-10
-description: "I analyze the structural reasons why engineers filter for technical depth and verify-ability, creating a 5-tier hierarchy of developer trust."
-tags: [technical-writing, developer-experience, content-strategy, devtools]
+description: I analyze the structural reasons why engineers filter for technical depth
+  and verify-ability, creating a 5-tier hierarchy of developer trust.
 status: published
+tags:
+- technical-writing
+- developer-experience
+- content-strategy
+- devtools
+title: 'The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketing
+  Content'
 ---
 
 Engineers prioritize information sources based on a hierarchy of verify-ability and perceived intent. This "Trust Hierarchy" places source code and raw reference documentation at the top, followed by practitioner writing (Staff/Principal engineers solving specific problems), and marketing-led content at the bottom. Technical audiences possess a high "nonsense detector" that filters for edge cases, performance trade-offs, and failure modes — details often stripped from marketing-approved drafts. To win developer trust, content must shift from driving awareness to reducing implementation friction.

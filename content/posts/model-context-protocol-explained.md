@@ -1,9 +1,15 @@
 ---
-title: "The Model Context Protocol (MCP) Explained: A Universal Language for AI Tools"
 date: 2026-03-11
-description: "Model Context Protocol (MCP) is the new standard for connecting AI models to data sources and tools. Here is why it matters, how it works, and why it is the missing link for agentic infrastructure."
-tags: [ai, agents, infrastructure, mcp]
+description: Model Context Protocol (MCP) is the new standard for connecting AI models
+  to data sources and tools. Here is why it matters, how it works, and why it is the
+  missing link for agentic infrastructure.
 status: published
+tags:
+- ai
+- agents
+- infrastructure
+- mcp
+title: 'The Model Context Protocol (mcp) Explained: a Universal Language for Ai Tools'
 ---
 
 Connecting AI models to external data has always been a messy engineering challenge. Every application needs its own set of connectors for GitHub or Google Drive. Every tool requires custom code to translate model requests into API calls. Such fragmentation slows down development and increases the risk of reasoning errors.

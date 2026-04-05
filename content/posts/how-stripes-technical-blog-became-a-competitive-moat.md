@@ -1,9 +1,13 @@
 ---
-title: "How Stripe's Technical Blog Became a Competitive Moat"
 date: 2026-04-07
-description: "I think Stripe’s technical blog compounds into a moat because it teaches, documents, and shapes developer trust long before a sales conversation starts."
-tags: [technical-writing, developer-marketing, developer-experience]
+description: I think Stripe’s technical blog compounds into a moat because it teaches,
+  documents, and shapes developer trust long before a sales conversation starts.
 status: published
+tags:
+- technical-writing
+- developer-marketing
+- developer-experience
+title: How Stripe's Technical Blog Became a Competitive Moat
 ---
 
 Stripe built a strong technical blog by creating an acquisition surface, a trust layer, and a product education system. These assets keep paying back years after publication. 

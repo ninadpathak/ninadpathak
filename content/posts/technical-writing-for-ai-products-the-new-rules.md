@@ -1,9 +1,14 @@
 ---
-title: "Technical Writing for AI Products: The New Rules"
 date: 2026-03-31
-description: "AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company."
-tags: [technical-writing, ai, developer-experience, devtools]
+description: AI product docs now need prompts, schemas, evals, and version boundaries.
+  I explain the rules I would use to judge a technical writer for an AI company.
 status: published
+tags:
+- technical-writing
+- ai
+- developer-experience
+- devtools
+title: 'Technical Writing for Ai Products: the New Rules'
 ---
 
 Technical writing for AI products has become a product design problem. A weak paragraph used to confuse a reader for five minutes. A weak prompt example or sloppy schema explanation now gets copied into production, fed to an agent, and multiplied across hundreds of calls before anyone notices the damage.

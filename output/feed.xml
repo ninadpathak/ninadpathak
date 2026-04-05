@@ -12,7 +12,7 @@
       <pubDate>Apr 10, 2026</pubDate>
     </item>
     <item>
-      <title>Technical Content as a Moat: The Long Game for Developer Tools</title>
+      <title>Technical Content as a Moat: the Long Game for Developer Tools</title>
       <link>https://ninadpathak.com/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/</link>
       <description>I explain why durable technical content compounds for developer tools, how strong docs and tutorials create distribution, and where teams usually waste the opportunity.</description>
       <pubDate>Apr 08, 2026</pubDate>
@@ -24,7 +24,7 @@
       <pubDate>Apr 07, 2026</pubDate>
     </item>
     <item>
-      <title>Why DevTools Startups Lose Deals Over Bad Docs</title>
+      <title>Why Devtools Startups Lose Deals Over Bad Docs</title>
       <link>https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/</link>
       <description>DevTools startups lose deals long before sales hears the objection. I explain how weak docs break evaluation, trials, and rollout confidence.</description>
       <pubDate>Apr 06, 2026</pubDate>
@@ -60,7 +60,7 @@
       <pubDate>Apr 01, 2026</pubDate>
     </item>
     <item>
-      <title>Technical Writing for AI Products: The New Rules</title>
+      <title>Technical Writing for Ai Products: the New Rules</title>
       <link>https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/</link>
       <description>AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.</description>
       <pubDate>Mar 31, 2026</pubDate>
@@ -72,55 +72,55 @@
       <pubDate>Mar 30, 2026</pubDate>
     </item>
     <item>
-      <title>Hybrid Search: Combining BM25 and Vector Search for Better Retrieval</title>
+      <title>Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval</title>
       <link>https://ninadpathak.com/blog/hybrid-search-bm25-vector-search/</link>
       <description>Hybrid search combines BM25 sparse retrieval with dense vector search. Here's how reciprocal rank fusion works, what it costs, and when the combination actually beats either method alone.</description>
       <pubDate>Mar 29, 2026</pubDate>
     </item>
     <item>
-      <title>Semantic Caching: The RAG Optimization Nobody Talks About</title>
+      <title>Semantic Caching: the Rag Optimization Nobody Talks About</title>
       <link>https://ninadpathak.com/blog/semantic-caching-rag-optimization/</link>
       <description>Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.</description>
       <pubDate>Mar 28, 2026</pubDate>
     </item>
     <item>
-      <title>Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each</title>
+      <title>Structured Outputs with Llms: Json Mode, Function Calling, and When to Use Each</title>
       <link>https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/</link>
       <description>JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.</description>
       <pubDate>Mar 27, 2026</pubDate>
     </item>
     <item>
-      <title>How Anthropic's Contextual Retrieval Changes RAG Architecture</title>
+      <title>How Anthropic's Contextual Retrieval Changes Rag Architecture</title>
       <link>https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/</link>
       <description>Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49% with contextual embeddings plus contextual BM25. I walk through the mechanism, the benchmark, and the part of the RAG pipeline it changes.</description>
       <pubDate>Mar 26, 2026</pubDate>
     </item>
     <item>
-      <title>Token Counting Isn't Optional: A Practical Guide to LLM Cost Control</title>
+      <title>Token Counting Isn't Optional: a Practical Guide to Llm Cost Control</title>
       <link>https://ninadpathak.com/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/</link>
       <description>I explain the mechanics of LLM tokenization, why JSON burns your API budget, and how to architect systems for strict token efficiency.</description>
       <pubDate>Mar 22, 2026</pubDate>
     </item>
     <item>
-      <title>Reranking in RAG: Why Your Top-k Results Are Probably Wrong</title>
+      <title>Reranking in Rag: Why Your Top-k Results Are Probably Wrong</title>
       <link>https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/</link>
       <description>Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.</description>
       <pubDate>Mar 21, 2026</pubDate>
     </item>
     <item>
-      <title>The State of Open Source AI Memory in 2026: Beyond the Context Window Myth</title>
+      <title>The State of Open Source Ai Memory in 2026: Beyond the Context Window Myth</title>
       <link>https://ninadpathak.com/blog/state-of-open-source-memory-2026/</link>
       <description>AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve identity fragmentation at production scale.</description>
       <pubDate>Mar 15, 2026</pubDate>
     </item>
     <item>
-      <title>Vector Embeddings: A Guide to the Geometry of Meaning in AI</title>
+      <title>Vector Embeddings: a Guide to the Geometry of Meaning in Ai</title>
       <link>https://ninadpathak.com/blog/embedding-models-compared/</link>
       <description>Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.</description>
       <pubDate>Mar 15, 2026</pubDate>
     </item>
     <item>
-      <title>LLM Context Windows Explained: Why More is Not Always Better</title>
+      <title>Llm Context Windows Explained: Why More Is Not Always Better</title>
       <link>https://ninadpathak.com/blog/llm-context-windows-explained/</link>
       <description>Context windows are expanding to millions of tokens. Here is why the middle of your context still gets ignored, what long context actually costs, and how to build production systems that use these massive windows effectively.</description>
       <pubDate>Mar 14, 2026</pubDate>

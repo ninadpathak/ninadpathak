@@ -1,9 +1,15 @@
 ---
-title: "Agent harnesses: the infrastructure layer your LLM agent actually needs"
 date: 2026-03-10
-description: "Every production AI agent needs a harness. Here is what one contains, why frameworks often are not enough, and how to build the layer that actually determines reliability."
-tags: [ai, agents, infrastructure, llm]
+description: Every production AI agent needs a harness. Here is what one contains,
+  why frameworks often are not enough, and how to build the layer that actually determines
+  reliability.
 status: published
+tags:
+- ai
+- agents
+- infrastructure
+- llm
+title: 'Agent Harnesses: the Infrastructure Layer Your Llm Agent Actually Needs'
 ---
 
 Agents look impressive in demos because the happy path is easy to show. The problems start later. A tool might timeout. A task could run too long. The model may need to recover from a partial failure without starting over.

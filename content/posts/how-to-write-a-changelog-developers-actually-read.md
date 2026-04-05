@@ -1,9 +1,14 @@
 ---
-title: "How to Write a Changelog That Developers Actually Read"
 date: 2026-03-30
-description: "Most changelogs exist to satisfy a checkbox. Here's what makes developers actually read them, and how to structure entries so breaking changes land before they cause incidents."
-tags: [technical-writing, developer-experience, devtools]
+description: Most changelogs exist to satisfy a checkbox. Here's what makes developers
+  actually read them, and how to structure entries so breaking changes land before
+  they cause incidents.
 status: published
+tags:
+- technical-writing
+- developer-experience
+- devtools
+title: How to Write a Changelog That Developers Actually Read
 ---
 
 A changelog nobody reads is infrastructure cost with no return. You pay someone to write it, you maintain the format, and developers still get surprised by breaking changes because they skimmed the entry or never opened the file. Getting developers to read changelogs requires two things: a format that makes the critical information findable in seconds, and enough signal-to-noise ratio that they trust the document is worth their attention.

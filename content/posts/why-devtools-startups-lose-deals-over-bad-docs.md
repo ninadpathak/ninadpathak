@@ -1,9 +1,13 @@
 ---
-title: "Why DevTools Startups Lose Deals Over Bad Docs"
 date: 2026-04-06
-description: "DevTools startups lose deals long before sales hears the objection. I explain how weak docs break evaluation, trials, and rollout confidence."
-tags: [technical-writing, devtools, documentation]
+description: DevTools startups lose deals long before sales hears the objection. I
+  explain how weak docs break evaluation, trials, and rollout confidence.
 status: published
+tags:
+- technical-writing
+- devtools
+- documentation
+title: Why Devtools Startups Lose Deals Over Bad Docs
 ---
 
 DevTools startups lose deals over bad docs long before anyone writes "documentation" into a CRM field. A buyer hits a dead quickstart, an auth example leaves out a required scope, a pricing-sensitive limit is buried, or the migration path for one breaking change is unclear. The trial cools off quietly. Sales blames timing. Product blames pricing. I think the docs were the real loss point more often than teams want to admit.

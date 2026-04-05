@@ -1,9 +1,14 @@
 ---
-title: "Technical Content as a Moat: The Long Game for Developer Tools"
 date: 2026-04-08
-description: "I explain why durable technical content compounds for developer tools, how strong docs and tutorials create distribution, and where teams usually waste the opportunity."
-tags: [technical-writing, developer-tools, content-strategy]
+description: I explain why durable technical content compounds for developer tools,
+  how strong docs and tutorials create distribution, and where teams usually waste
+  the opportunity.
 status: published
+tags:
+- technical-writing
+- developer-tools
+- content-strategy
+title: 'Technical Content as a Moat: the Long Game for Developer Tools'
 ---
 
 Developer-tool companies often treat content as short-term promotion. They publish a launch post and ship a handful of tutorials before moving on. I think that mindset misses significant opportunities because the best technical content behaves like product surface area rather than marketing collateral.

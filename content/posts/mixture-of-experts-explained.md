@@ -1,9 +1,15 @@
 ---
-title: "Mixture of experts: how MoE models are cheap to run but expensive to host"
 date: 2026-03-13
-description: "DeepSeek V3 has 671B parameters but only activates 37B per token. Here's how mixture of experts works, why it cuts inference costs, and the catch nobody puts in the headline."
-tags: [ai, llm, inference, architecture]
+description: DeepSeek V3 has 671B parameters but only activates 37B per token. Here's
+  how mixture of experts works, why it cuts inference costs, and the catch nobody
+  puts in the headline.
 status: published
+tags:
+- ai
+- llm
+- inference
+- architecture
+title: 'Mixture of Experts: How Moe Models Are Cheap to Run but Expensive to Host'
 ---
 
 DeepSeek's API launched at roughly a tenth the price of comparable Anthropic and OpenAI endpoints, with competitive benchmark results. The architecture answer is mixture of experts. But that answer only makes sense once you understand the part most explainers skip: MoE cuts compute costs but does not cut memory costs. You still need the full model loaded in VRAM before processing a single token.

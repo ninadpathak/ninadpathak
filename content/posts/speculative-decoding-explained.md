@@ -1,9 +1,14 @@
 ---
-title: "Speculative Decoding: How to Speed Up LLM Inference for Free"
 date: 2026-03-07
-description: "LLM inference is memory-bound, not compute-bound. Speculative decoding uses this fact to speed up generation by 2-3x using a smaller draft model to predict tokens for a larger one."
-tags: [ai, llm, infrastructure]
+description: LLM inference is memory-bound, not compute-bound. Speculative decoding
+  uses this fact to speed up generation by 2-3x using a smaller draft model to predict
+  tokens for a larger one.
 status: published
+tags:
+- ai
+- llm
+- infrastructure
+title: 'Speculative Decoding: How to Speed up Llm Inference for Free'
 ---
 
 Inference speed is the biggest hurdle for interactive LLM applications. Waiting for a large model to generate text token-by-token feels slow. Most developers assume they need more GPUs to fix this. Such a view ignores the fundamental physics of how these models run.

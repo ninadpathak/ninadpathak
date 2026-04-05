@@ -1,9 +1,13 @@
 ---
-title: "From Engineer to Technical Writer: What I Kept and What I Left Behind"
 date: 2026-04-05
-description: "I explain which engineering habits still make me better at technical writing, which ones I had to drop, and how the day-to-day work changed."
-tags: [technical-writing, career, developer-experience]
+description: I explain which engineering habits still make me better at technical
+  writing, which ones I had to drop, and how the day-to-day work changed.
 status: published
+tags:
+- technical-writing
+- career
+- developer-experience
+title: 'From Engineer to Technical Writer: What I Kept and What I Left Behind'
 ---
 
 Moving from engineering to technical writing did not feel like abandoning a technical career. I simply changed the artifact I delivered. Code used to be the primary output of my work. Clarity became the primary output later. Plenty of my old instincts as a programmer still help me navigate complex documentation projects, yet others became immediate liabilities that I had to unlearn.

@@ -1,9 +1,15 @@
 ---
-title: "Hybrid Search: Combining BM25 and Vector Search for Better Retrieval"
 date: 2026-03-29
-description: "Hybrid search combines BM25 sparse retrieval with dense vector search. Here's how reciprocal rank fusion works, what it costs, and when the combination actually beats either method alone."
-tags: [ai, rag, vector-search, infrastructure]
+description: Hybrid search combines BM25 sparse retrieval with dense vector search.
+  Here's how reciprocal rank fusion works, what it costs, and when the combination
+  actually beats either method alone.
 status: published
+tags:
+- ai
+- rag
+- vector-search
+- infrastructure
+title: 'Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval'
 ---
 
 Dense vector search became the default for RAG systems quickly. Embeddings capture semantic meaning, handle paraphrase and synonym matching, and outperform keyword search on most standard retrieval benchmarks. The problem is that dense retrieval fails predictably on exact keyword queries: product codes, error messages, proper nouns, and technical identifiers that don't have semantic neighbors in embedding space. BM25 handles all of those well. Hybrid search runs both retrievers and fuses their results.

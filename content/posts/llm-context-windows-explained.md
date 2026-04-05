@@ -1,9 +1,14 @@
 ---
-title: "LLM Context Windows Explained: Why More is Not Always Better"
 date: 2026-03-14
-description: "Context windows are expanding to millions of tokens. Here is why the middle of your context still gets ignored, what long context actually costs, and how to build production systems that use these massive windows effectively."
-tags: [ai, llm, infrastructure]
+description: Context windows are expanding to millions of tokens. Here is why the
+  middle of your context still gets ignored, what long context actually costs, and
+  how to build production systems that use these massive windows effectively.
 status: published
+tags:
+- ai
+- llm
+- infrastructure
+title: 'Llm Context Windows Explained: Why More Is Not Always Better'
 ---
 
 Language models process information within a specific range called the context window. This window has expanded from a few thousand tokens to millions in the last year. Such growth suggests that we can now feed entire codebases or libraries of books into a single prompt.

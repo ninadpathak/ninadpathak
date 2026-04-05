@@ -1,9 +1,15 @@
 ---
-title: "How Anthropic's Contextual Retrieval Changes RAG Architecture"
 date: 2026-03-26
-description: "Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49% with contextual embeddings plus contextual BM25. I walk through the mechanism, the benchmark, and the part of the RAG pipeline it changes."
-tags: [ai, rag, infrastructure, vector-search]
+description: Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49%
+  with contextual embeddings plus contextual BM25. I walk through the mechanism, the
+  benchmark, and the part of the RAG pipeline it changes.
 status: published
+tags:
+- ai
+- rag
+- infrastructure
+- vector-search
+title: How Anthropic's Contextual Retrieval Changes Rag Architecture
 ---
 
 Anthropic took a chunk like `"The company's revenue grew by 3% over the previous quarter."`, asked Claude to explain that chunk using the full document, then prepended the explanation before indexing it. That one step cut top-20 retrieval failure by **49%** when Anthropic combined contextual embeddings with contextual BM25, according to [their writeup](https://www.anthropic.com/engineering/contextual-retrieval).

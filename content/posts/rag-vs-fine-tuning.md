@@ -1,9 +1,14 @@
 ---
-title: "RAG vs Fine-Tuning: A Better Decision Framework"
 date: 2026-03-09
-description: "Choosing between Retrieval-Augmented Generation (RAG) and Fine-Tuning is the most common architectural mistake in AI. Here is how to decide based on knowledge frequency, data privacy, and behavior requirements."
-tags: [ai, llm, rag]
+description: Choosing between Retrieval-Augmented Generation (RAG) and Fine-Tuning
+  is the most common architectural mistake in AI. Here is how to decide based on knowledge
+  frequency, data privacy, and behavior requirements.
 status: published
+tags:
+- ai
+- llm
+- rag
+title: 'Rag Vs Fine-tuning: a Better Decision Framework'
 ---
 
 The debate between RAG and fine-tuning is often framed as a competition. One is portrayed as the "easy" way to add data and the other as the "hard" way. Such a framing ignores the fundamental engineering difference between the two approaches.

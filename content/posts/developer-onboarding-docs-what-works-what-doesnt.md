@@ -1,9 +1,13 @@
 ---
-title: "Developer Onboarding Docs: What Works, What Doesn't"
 date: 2026-04-01
-description: "I’ve seen developer onboarding docs fail for the same reasons over and over. Here’s what actually helps a new engineer ship useful code in week one."
-tags: [technical-writing, developer-experience, documentation]
+description: I’ve seen developer onboarding docs fail for the same reasons over and
+  over. Here’s what actually helps a new engineer ship useful code in week one.
 status: published
+tags:
+- technical-writing
+- developer-experience
+- documentation
+title: 'Developer Onboarding Docs: What Works, What Doesn''t'
 ---
 
 Developer onboarding docs fail when they try to explain everything at once. New engineers do not need your architecture memoir on day one. They need a fast path to a working environment, a first useful task, and enough context to avoid breaking production.

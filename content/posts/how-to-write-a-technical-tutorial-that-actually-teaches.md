@@ -1,9 +1,13 @@
 ---
-title: "How to Write a Technical Tutorial That Actually Teaches"
 date: 2026-04-02
-description: "I explain how I structure technical tutorials so readers finish with a working result, fewer hidden assumptions, and less time wasted on broken examples."
-tags: [technical-writing, tutorials, developer-experience]
+description: I explain how I structure technical tutorials so readers finish with
+  a working result, fewer hidden assumptions, and less time wasted on broken examples.
 status: published
+tags:
+- technical-writing
+- tutorials
+- developer-experience
+title: How to Write a Technical Tutorial That Actually Teaches
 ---
 
 Readers quit tutorials for boring reasons. A command fails. A prerequisite was implied instead of stated. A code sample proves a feature exists yet never helps anyone build something real. I think weak tutorials usually fail long before the final paragraph because the writer optimized for coverage instead of successful completion.

@@ -1,9 +1,13 @@
 ---
-title: "Writing Release Notes That Developers Trust"
 date: 2026-04-03
-description: "Developers trust release notes when they can make upgrade decisions fast. I explain the format, level of detail, and disclosure standard that earns that trust."
-tags: [technical-writing, developer-experience, releases]
+description: Developers trust release notes when they can make upgrade decisions fast.
+  I explain the format, level of detail, and disclosure standard that earns that trust.
 status: published
+tags:
+- technical-writing
+- developer-experience
+- releases
+title: Writing Release Notes That Developers Trust
 ---
 
 Release notes are operational guidance for people who carry pager risk. Software teams often treat them as a marketing chore or a list of Jira tickets, yet for the developer integrating the code, these notes are a risk-assessment tool. Trust does not come from a predictable publishing schedule. Trust comes from the specific disclosure of impact, security, and migration cost.

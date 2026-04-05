@@ -1,9 +1,13 @@
 ---
-title: "The Case for Shorter Technical Documentation"
 date: 2026-04-04
-description: "I think technical docs are often too long for the wrong reasons. Here’s why shorter docs usually work better, and where longer docs still earn their keep."
-tags: [technical-writing, documentation, developer-experience]
+description: I think technical docs are often too long for the wrong reasons. Here’s
+  why shorter docs usually work better, and where longer docs still earn their keep.
 status: published
+tags:
+- technical-writing
+- documentation
+- developer-experience
+title: The Case for Shorter Technical Documentation
 ---
 
 Technical documentation often suffers from information obesity. Teams expand manuals to cover every possible edge case because they fear the support tickets that might arise from an omission. Reviewers add historical context that serves internal egos rather than reader outcomes. Writers inherit sprawling legacy pages and append new sections without restructuring the old ones.

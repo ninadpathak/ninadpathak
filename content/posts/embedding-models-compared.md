@@ -1,9 +1,15 @@
 ---
-title: "Vector Embeddings: A Guide to the Geometry of Meaning in AI"
 date: 2026-03-15
-description: "Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models."
-tags: [ai, llm, rag, vector-search]
+description: Everything in AI starts with a vector. Here is how embedding models turn
+  human language into high-dimensional geometry, why dimensionality reduction matters,
+  and how to choose between OpenAI, Cohere, and self-hosted models.
 status: published
+tags:
+- ai
+- llm
+- rag
+- vector-search
+title: 'Vector Embeddings: a Guide to the Geometry of Meaning in Ai'
 ---
 
 Every interaction with a modern language model begins with a conversion. You provide text, and the system translates that text into a list of numbers. These numbers represent the semantic essence of your input in a coordinate system so vast that human intuition for space completely fails.

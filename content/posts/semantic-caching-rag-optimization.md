@@ -1,9 +1,15 @@
 ---
-title: "Semantic Caching: The RAG Optimization Nobody Talks About"
 date: 2026-03-28
-description: "Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails."
-tags: [ai, rag, infrastructure, vector-search]
+description: Semantic caching returns cached LLM responses for semantically similar
+  queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism
+  works and where it fails.
 status: published
+tags:
+- ai
+- rag
+- infrastructure
+- vector-search
+title: 'Semantic Caching: the Rag Optimization Nobody Talks About'
 ---
 
 RAG optimization discussion centers almost entirely on retrieval quality: better embeddings, rerankers, hybrid search, contextual chunking. The layer that nobody talks about sits before retrieval even starts. Semantic caching intercepts a query, checks whether a sufficiently similar query has already been answered, and returns the stored response instead of running the full pipeline. Done well, it cuts 40-70% of LLM API calls on the right workloads.

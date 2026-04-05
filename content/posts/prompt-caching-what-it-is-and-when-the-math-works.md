@@ -1,9 +1,14 @@
 ---
-title: "Prompt Caching: What It Is and When the Math Works"
 date: 2026-03-13
-description: "Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI."
-tags: [ai, llm, infrastructure]
+description: Prompt caching can reduce LLM costs by up to 90% and cut latency by half.
+  Here is the engineering guide to how it works, why prefix matching matters, and
+  how to calculate your ROI.
 status: published
+tags:
+- ai
+- llm
+- infrastructure
+title: 'Prompt Caching: What It Is and When the Math Works'
 ---
 
 Inference costs are the primary bottleneck for scaling LLM applications. Standard API calls require the model to re-process the entire prompt for every request. Such repetition is wasteful when large portions of your context remain static across thousands of calls.

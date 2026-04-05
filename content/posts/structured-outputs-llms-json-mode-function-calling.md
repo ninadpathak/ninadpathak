@@ -1,9 +1,14 @@
 ---
-title: "Structured Outputs With LLMs: JSON Mode, Function Calling, and When to Use Each"
 date: 2026-03-27
-description: "JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you."
-tags: [ai, llm, infrastructure]
+description: JSON mode, function calling, and structured outputs solve different problems.
+  Here's when each one actually makes sense and what they cost you.
 status: published
+tags:
+- ai
+- llm
+- infrastructure
+title: 'Structured Outputs with Llms: Json Mode, Function Calling, and When to Use
+  Each'
 ---
 
 Getting a reliable JSON object out of an LLM used to mean wrapping every call in a try/except, re-prompting on parse failures, and hoping your production traffic never hit the 3% of responses that came back malformed. Three mechanisms now exist to avoid that: JSON mode, function calling, and the newer structured outputs API. They are not interchangeable and choosing the wrong one shows up in token costs, latency, and edge-case failure rates.
