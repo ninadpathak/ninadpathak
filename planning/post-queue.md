@@ -1,14 +1,14 @@
-# Daily Post Queue (v4.0 - Experiment & Benchmark Driven)
+# Daily Post Queue (v4.1 - Experiment & Benchmark Driven)
 
 Posts are published one per day. Claude picks the next post, runs the experiment, writes the post-mortem, builds, and pushes.
 
 ## Queue (ordered)
 
-20. **The 16GB VRAM ceiling: profiling DeepSeek-V4 MoE inference on an M2 Air**
+20. **Beyond the chatbox: benchmarking Claude Code vs. Gemini CLI for autonomous repository refactoring**
     - Target: Apr 12, 2026
-    - Visual: 2D Line chart of tokens/sec vs. context size; Screenshot of Activity Monitor memory pressure.
-    - Primary Keyword: DeepSeek-V4 local benchmark
-    - HN Hook: Can a 16GB Air handle a 1T parameter MoE? (Yes, with 4-bit quantization, and here is the profiler data).
+    - Visual: 2D success/fail rate comparison; Timeline of self-correction loops; Traces of file-system manipulation.
+    - Primary Keyword: agentic CLI benchmarks
+    - HN Hook: I gave two agentic CLIs the same legacy repo and a list of bugs. Here is the success-rate data and trace logs.
 
 21. **100ms vector search in the browser: PGLite vs SQLite-vec head-to-head**
     - Target: Apr 13, 2026
@@ -58,11 +58,11 @@ Posts are published one per day. Claude picks the next post, runs the experiment
     - Primary Keyword: Mago PHP linter benchmark
     - HN Hook: Rust-native tooling is finally arriving for PHP. Here is the throughput analysis.
 
-29. **Claude Code vs Cursor: measuring success rates in autonomous file manipulation**
+29. **The 16GB VRAM ceiling: profiling DeepSeek-V4 MoE inference on an M2 Air**
     - Target: Apr 21, 2026
-    - Visual: 2D Success/Fail rate chart for a standardized refactoring task; 3D visualization of file-system edits.
-    - Primary Keyword: agentic coding tools success rates
-    - HN Hook: I forced two agents to refactor the same 10k LOC project. One won by a landslide.
+    - Visual: 2D Line chart of tokens/sec vs. context size; Activity Monitor screenshot.
+    - Primary Keyword: DeepSeek-V4 local benchmark
+    - HN Hook: Can a 16GB Air handle a 1T parameter MoE? (Yes, with 4-bit quantization, and here is the profiler data).
 
 30. **Think Anywhere: measuring the efficiency of learnable reasoning token placement**
     - Target: Apr 22, 2026

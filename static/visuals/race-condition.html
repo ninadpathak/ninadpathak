@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Race Condition Visualization</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 90%; max-width: 800px; padding: 40px; background: var(--bg); }
+        svg { width: 100%; height: auto; overflow: visible; }
+        .step-label { font-family: var(--mono); font-size: 12px; fill: var(--text); font-weight: 600; }
+        .time-label { font-family: var(--mono); font-size: 10px; fill: var(--text-dim); }
+        .state-box { fill: var(--bg); stroke: var(--border); stroke-width: 1; }
+        .action-line { stroke: var(--accent); stroke-width: 2; marker-end: url(#arrowhead); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="0 0 800 300">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="var(--accent)" />
+                </marker>
+            </defs>
+            
+            <!-- Timeline -->
+            <line x1="50" y1="250" x2="750" y2="250" stroke="var(--text-dim)" stroke-width="1" />
+            <text x="750" y="270" text-anchor="end" class="time-label">TIME →</text>
+
+            <!-- Request A -->
+            <g transform="translate(100, 50)">
+                <rect width="150" height="40" rx="4" class="state-box" />
+                <text x="75" y="25" text-anchor="middle" class="step-label">A: READ (0)</text>
+                <line x1="75" y1="40" x2="75" y2="100" stroke="var(--border)" stroke-dasharray="4" />
+                <rect y="100" width="300" height="40" rx="4" class="state-box" fill="rgba(212, 64, 0, 0.1)" />
+                <text x="150" y="125" text-anchor="middle" class="step-label" style="font-style: italic;">WAITING...</text>
+                <rect x="300" y="50" width="150" height="40" rx="4" class="state-box" style="stroke: var(--accent);" />
+                <text x="375" y="75" text-anchor="middle" class="step-label">A: WRITE (1)</text>
+            </g>
+
+            <!-- Request B (The Interleaving) -->
+            <g transform="translate(200, 180)">
+                <rect width="150" height="40" rx="4" class="state-box" />
+                <text x="75" y="25" text-anchor="middle" class="step-label">B: READ (0)</text>
+                <text x="75" y="55" text-anchor="middle" class="time-label" style="fill: var(--accent);">STALE READ!</text>
+                <rect x="250" y="0" width="150" height="40" rx="4" class="state-box" style="stroke: var(--accent);" />
+                <text x="325" y="25" text-anchor="middle" class="step-label">B: WRITE (1)</text>
+            </g>
+
+            <text x="400" y="295" text-anchor="middle" class="time-label" style="font-weight: 700; fill: var(--accent);">RESULT: BOTH WRITE "1", ONE INCREMENT LOST</text>
+        </svg>
+    </div>
+</body>
+</html>

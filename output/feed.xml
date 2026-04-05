@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomous Repository Refactoring</title>
+      <link>https://ninadpathak.com/blog/agentic-cli-benchmarks/</link>
+      <description>I ran a head-to-head benchmark of Claude Code and Gemini CLI on an M2 Air (16GB), testing their ability to autonomously refactor legacy code and resolve race conditions.</description>
+      <pubDate>Apr 12, 2026</pubDate>
+    </item>
+    <item>
       <title>Quantifying the Engineering Velocity Impact of Technical Documentation</title>
       <link>https://ninadpathak.com/blog/engineering-velocity-documentation/</link>
       <description>I analyze the structural correlation between documentation quality and engineering throughput, using DORA metrics and Accelerate research to quantify the ROI of technical writing.</description>
@@ -117,12 +123,6 @@
       <title>The State of Open Source Ai Memory in 2026: Beyond the Context Window Myth</title>
       <link>https://ninadpathak.com/blog/state-of-open-source-memory-2026/</link>
       <description>AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve identity fragmentation at production scale.</description>
-      <pubDate>Mar 15, 2026</pubDate>
-    </item>
-    <item>
-      <title>Vector Embeddings: a Guide to the Geometry of Meaning in Ai</title>
-      <link>https://ninadpathak.com/blog/embedding-models-compared/</link>
-      <description>Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.</description>
       <pubDate>Mar 15, 2026</pubDate>
     </item>
   </channel>

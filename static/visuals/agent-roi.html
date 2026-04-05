@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic ROI Benchmark</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 90%; max-width: 800px; padding: 40px; background: var(--bg); }
+        svg { width: 100%; height: auto; overflow: visible; }
+        .bar-label { font-family: var(--mono); font-size: 12px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+        .axis { stroke: var(--text); stroke-width: 1.5; }
+        .grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="0 0 800 300">
+            <!-- Cost Projection over 1M tokens -->
+            <line x1="50" y1="250" x2="750" y2="250" class="axis" />
+            <line x1="50" y1="50" x2="50" y2="250" class="axis" />
+            
+            <text x="400" y="280" text-anchor="middle" class="bar-label">Inference Volume (1M Tokens)</text>
+            <text x="-150" y="20" text-anchor="middle" class="bar-label" transform="rotate(-90)">Operational Cost ($)</text>
+
+            <!-- Cloud API Line -->
+            <path d="M 50 250 L 750 50" fill="none" stroke="var(--accent)" stroke-width="3" />
+            <text x="700" y="40" text-anchor="end" class="bar-label" style="fill: var(--accent);">Cloud API (Linear Scalability)</text>
+
+            <!-- Local M2 Line -->
+            <path d="M 50 250 L 750 230" fill="none" stroke="#0088ff" stroke-width="3" />
+            <text x="700" y="220" text-anchor="end" class="bar-label" style="fill: #0088ff;">Local M2 Air (Electricity/HW Only)</text>
+
+            <rect x="200" y="100" width="400" height="80" rx="4" fill="rgba(0, 136, 255, 0.1)" stroke="#0088ff" stroke-dasharray="4" />
+            <text x="400" y="145" text-anchor="middle" class="bar-label" style="fill: #0088ff;">ROI BREAK-EVEN ZONE (150k Tokens/Day)</text>
+        </svg>
+    </div>
+</body>
+</html>
