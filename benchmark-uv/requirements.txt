@@ -1,0 +1,47 @@
+# Core Data & AI (2026 stack)
+pandas>=2.2.0
+numpy>=2.1.0
+torch>=2.5.0
+tensorflow>=2.18.0
+scikit-learn>=1.5.0
+jax>=0.4.30
+transformers>=4.45.0
+accelerate>=0.34.0
+pydantic>=2.9.0
+langchain>=0.3.0
+langgraph>=0.2.30
+llama-index>=0.11.0
+sentence-transformers>=3.1.0
+openai>=1.50.0
+anthropic>=0.35.0
+google-generativeai>=0.8.0
+
+# Web & API
+fastapi>=0.115.0
+uvicorn[standard]>=0.31.0
+django>=5.1.0
+flask>=3.0.0
+httpx>=0.27.0
+requests>=2.32.0
+
+# Infrastructure & Ops
+boto3>=1.35.0
+sentry-sdk>=2.14.0
+prometheus-client>=0.21.0
+opentelemetry-api>=1.27.0
+opentelemetry-sdk>=1.27.0
+alembic>=1.13.0
+sqlalchemy>=2.0.0
+redis>=5.1.0
+celery>=5.4.0
+
+# Tooling & Quality
+pytest>=8.3.0
+ruff>=0.6.0
+mypy>=1.11.0
+black>=24.8.0
+isort>=5.13.0
+tqdm>=4.66.0
+click>=8.1.0
+typer>=0.12.0
+rich>=13.8.0
