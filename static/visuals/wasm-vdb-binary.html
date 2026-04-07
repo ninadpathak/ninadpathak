@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM VDB Binary Quantization</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+        body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 95%; max-width: 1000px; padding: 40px; background: var(--bg); }
+        svg { width: 100%; height: auto; overflow: visible; }
+        .label { font-family: var(--mono); font-size: 18px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+        .box { fill: var(--bg); stroke: var(--border); stroke-width: 2; }
+        .arrow { stroke: var(--text-dim); stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="-300 -80 1200 650">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="var(--text-dim)" />
+                </marker>
+            </defs>
+            
+            <text x="0" y="50" class="label">Float32 Vector (32 bits per dim)</text>
+            <rect x="0" y="70" width="800" height="60" rx="4" class="box" />
+            <text x="400" y="105" text-anchor="middle" class="label" style="font-size: 14px;">[ 0.12, -0.45, 0.89, -0.01, ... ]</text>
+            
+            <path d="M 400 130 L 400 230" class="arrow" />
+            <text x="420" y="185" class="label" style="font-size: 14px; fill: var(--accent);">Sign Threshold ( > 0 )</text>
+            
+            <text x="0" y="280" class="label">Binary Vector (1 bit per dim)</text>
+            <rect x="0" y="300" width="800" height="60" rx="4" class="box" style="stroke: var(--accent);" />
+            <text x="400" y="335" text-anchor="middle" class="label" style="font-size: 14px; fill: var(--accent);">[ 1, 0, 1, 0, ... ]</text>
+            
+            <text x="400" y="450" text-anchor="middle" class="label" style="font-size: 24px;">Binary Quantization: 32x Memory Reduction</text>
+            <text x="400" y="490" text-anchor="middle" class="label" style="font-size: 16px; fill: var(--text-dim);">XOR-based Hamming distance replaces Dot Product</text>
+        </svg>
+    </div>
+</body>
+</html>

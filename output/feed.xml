@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head</title>
+      <link>https://ninadpathak.com/blog/local-wasm-vector-benchmarks/</link>
+      <description>I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.</description>
+      <pubDate>Apr 13, 2026</pubDate>
+    </item>
+    <item>
       <title>Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomous Repository Refactoring</title>
       <link>https://ninadpathak.com/blog/agentic-cli-benchmarks/</link>
       <description>I ran a head-to-head benchmark of Claude Code and Gemini CLI on an M2 Air (16GB), testing their ability to autonomously refactor legacy code and resolve race conditions.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/</link>
       <description>Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.</description>
       <pubDate>Mar 21, 2026</pubDate>
-    </item>
-    <item>
-      <title>The State of Open Source Ai Memory in 2026: Beyond the Context Window Myth</title>
-      <link>https://ninadpathak.com/blog/state-of-open-source-memory-2026/</link>
-      <description>AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve identity fragmentation at production scale.</description>
-      <pubDate>Mar 15, 2026</pubDate>
     </item>
   </channel>
 </rss>

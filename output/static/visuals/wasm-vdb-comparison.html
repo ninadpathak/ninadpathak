@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM VDB Summary</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+        body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 95%; max-width: 1000px; padding: 40px; background: var(--bg); }
+        svg { width: 100%; height: auto; overflow: visible; }
+        .label { font-family: var(--mono); font-size: 18px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+        .header { font-family: var(--mono); font-size: 20px; fill: var(--accent); font-weight: 700; }
+        .line { stroke: var(--border); stroke-width: 2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="-300 -80 1200 650">
+            <!-- Headers -->
+            <text x="250" y="0" class="header">PGlite (pgvector)</text>
+            <text x="650" y="0" class="header">SQLite-vec</text>
+            
+            <line x1="-200" y1="30" x2="900" y2="30" class="line" />
+            
+            <!-- Rows -->
+            <g transform="translate(0, 100)">
+                <text x="-200" y="0" class="label">Architecture</text>
+                <text x="250" y="0" text-anchor="middle" class="label" style="font-size: 14px;">Postgres WASM</text>
+                <text x="650" y="0" text-anchor="middle" class="label" style="font-size: 14px;">C Extension</text>
+            </g>
+            <line x1="-200" y1="130" x2="900" y2="130" class="line" opacity="0.5" />
+            
+            <g transform="translate(0, 200)">
+                <text x="-200" y="0" class="label">Best Index</text>
+                <text x="250" y="0" text-anchor="middle" class="label" style="font-size: 14px; fill: var(--accent);">HNSW (ANN)</text>
+                <text x="650" y="0" text-anchor="middle" class="label" style="font-size: 14px; fill: var(--accent);">Binary Quant</text>
+            </g>
+            <line x1="-200" y1="230" x2="900" y2="230" class="line" opacity="0.5" />
+            
+            <g transform="translate(0, 300)">
+                <text x="-200" y="0" class="label">Payloads</text>
+                <text x="250" y="0" text-anchor="middle" class="label" style="font-size: 14px;">JSONB / Full SQL</text>
+                <text x="650" y="0" text-anchor="middle" class="label" style="font-size: 14px;">Standard BLOBs</text>
+            </g>
+            <line x1="-200" y1="330" x2="900" y2="330" class="line" opacity="0.5" />
+            
+            <g transform="translate(0, 400)">
+                <text x="-200" y="0" class="label">Ideal Use</text>
+                <text x="250" y="0" text-anchor="middle" class="label" style="font-size: 14px;">Complex App DB</text>
+                <text x="650" y="0" text-anchor="middle" class="label" style="font-size: 14px;">Search component</text>
+            </g>
+            
+            <text x="400" y="520" text-anchor="middle" class="label" style="font-size: 24px;">Architectural Decision Matrix (2026)</text>
+        </svg>
+    </div>
+</body>
+</html>

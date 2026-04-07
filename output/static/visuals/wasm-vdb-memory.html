@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM VDB Memory</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+        body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 95%; max-width: 1000px; padding: 40px; background: var(--bg); }
+        svg { width: 100%; height: auto; overflow: visible; }
+        .bar-label { font-family: var(--mono); font-size: 22px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+        .bar-val { font-family: var(--mono); font-size: 24px; fill: var(--accent); font-weight: 700; }
+        .axis { vector-effect: non-scaling-stroke; stroke: var(--text); stroke-width: 3.0; }
+        .grid { vector-effect: non-scaling-stroke; stroke: var(--border); stroke-width: 2.5; stroke-dasharray: 4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="-300 -80 1200 650">
+            <line x1="0" y1="100" x2="800" y2="100" class="grid" />
+            <line x1="0" y1="300" x2="800" y2="300" class="grid" />
+            <line x1="0" y1="0" x2="800" y2="0" class="axis" />
+            <line x1="0" y1="400" x2="800" y2="400" class="axis" />
+            <line x1="0" y1="0" x2="0" y2="400" class="axis" />
+            
+            <g>
+                <rect x="0" y="50" width="750" height="100" fill="var(--border)" />
+                <text x="-20" y="110" text-anchor="end" class="bar-label">PGlite (HNSW Heap)</text>
+                <text x="770" y="110" class="bar-val">180 MB</text>
+            </g>
+            <g>
+                <rect x="0" y="250" width="187" height="100" fill="var(--accent)" />
+                <text x="-20" y="310" text-anchor="end" class="bar-label">SQLite-vec</text>
+                <text x="207" y="310" class="bar-val">45 MB</text>
+            </g>
+            <text x="400" y="480" text-anchor="middle" class="bar-label" style="font-size: 24px;">Memory Footprint during 100k Vector Search</text>
+        </svg>
+    </div>
+</body>
+</html>

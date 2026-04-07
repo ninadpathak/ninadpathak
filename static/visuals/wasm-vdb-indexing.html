@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM VDB Complexity</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+        body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 95%; max-width: 1000px; padding: 40px; background: var(--bg); }
+        svg { width: 100%; height: auto; overflow: visible; }
+        .axis { vector-effect: non-scaling-stroke; stroke: var(--text); stroke-width: 3.0; }
+        .grid { vector-effect: non-scaling-stroke; stroke: var(--border); stroke-width: 2.5; stroke-dasharray: 4; }
+        .label { font-family: var(--mono); font-size: 18px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="-300 -80 1200 650">
+            <!-- Grid -->
+            <line x1="0" y1="100" x2="800" y2="100" class="grid" />
+            <line x1="0" y1="200" x2="800" y2="200" class="grid" />
+            <line x1="0" y1="300" x2="800" y2="300" class="grid" />
+            
+            <!-- Axes -->
+            <line x1="0" y1="400" x2="800" y2="400" class="axis" />
+            <line x1="0" y1="0" x2="0" y2="400" class="axis" />
+            
+            <!-- O(N) Complexity (Flat Scan) -->
+            <path d="M 0 400 L 800 0" fill="none" stroke="var(--border)" stroke-width="4" />
+            <text x="810" y="20" class="label" style="fill: var(--text-dim);">Flat Scan: O(N)</text>
+            
+            <!-- O(log N) Complexity (HNSW) -->
+            <path d="M 0 400 Q 100 350 800 320" fill="none" stroke="var(--accent)" stroke-width="4" />
+            <text x="810" y="325" class="label" style="fill: var(--accent);">HNSW Index: O(log N)</text>
+            
+            <text x="400" y="480" text-anchor="middle" class="label" style="font-size: 24px;">Search Complexity: Flat vs Indexing</text>
+            <text x="400" y="520" text-anchor="middle" class="label" style="font-size: 18px; fill: var(--text-dim);">X: Dataset Size (N) | Y: Comparison operations</text>
+        </svg>
+    </div>
+</body>
+</html>

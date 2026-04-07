@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head | Ninad Pathak</title>
+  <meta name="description" content="I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head">
+  <meta property="og:description" content="I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/local-wasm-vector-benchmarks/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/local-wasm-vector-benchmarks/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head",
+  "description": "I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-13",
+  "dateModified": "2026-04-13",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/local-wasm-vector-benchmarks/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head",
+      "item": "https://ninadpathak.com/blog/local-wasm-vector-benchmarks/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 13, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">9 min read</span>
+      </div>
+      <h1 class="post-title">100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head</h1>
+      <p class="lead">I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.</p>
+      <div class="post-tags">
+        <span class="tag">vector-search</span>
+        <span class="tag">wasm</span>
+        <span class="tag">pglite</span>
+        <span class="tag">sqlite-vec</span>
+        <span class="tag">edge-computing</span>
+        <span class="tag">technical-deep-dive</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-architectural-shift-to-the-browser">The architectural shift to the browser</a></li>
+<li><a href="#benchmark-setup-macbook-air-m2-16gb">Benchmark setup: MacBook Air M2 (16GB)</a></li>
+<li><a href="#pglite-and-the-power-of-hnsw">PGlite and the power of HNSW</a></li>
+<li><a href="#sqlite-vec-and-the-speed-of-quantization">SQLite-vec and the speed of quantization</a></li>
+<li><a href="#the-precision-tax-accuracy-vs-speed">The precision tax: accuracy vs speed</a></li>
+<li><a href="#dimensionality-and-the-scaling-wall">Dimensionality and the scaling wall</a></li>
+<li><a href="#memory-constraints-in-the-wasm-heap">Memory constraints in the WASM heap</a></li>
+<li><a href="#economic-outcomes-of-edge-retrieval">Economic outcomes of edge retrieval</a></li>
+<li><a href="#choosing-the-right-architecture">Choosing the right architecture</a></li>
+<li><a href="#the-future-of-edge-retrieval">The future of edge retrieval</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Sub-100ms vector search in the browser has moved from a research novelty to a production requirement for local-first AI applications. In my 2026 benchmark of 100,000 vectors on a 16GB MacBook Air M2, PGlite (pgvector) and SQLite-vec emerged as the dominant contenders with a clear architectural split. PGlite offers the full power of HNSW indexing and Postgres relational parity at the cost of a 3.2MB bundle. SQLite-vec provides a lean 800KB footprint and superior quantized brute-force speed. For high-dimension vectors (3072+), PGlite's HNSW implementation is mandatory for acceptable performance. For standard 384-dimension models, SQLite-vec's binary quantization achieves &lt;5ms latency, effectively turning the browser into a high-performance retrieval engine.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">WASM bundle size: footprint analysis</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-bundle.html" title="WASM VDB Bundle Size" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p><strong>Short answer:</strong> Choose PGlite if you need Postgres feature parity (JSONB, complex joins, FTS) and full-text search integrated with your vector retrieval. Choose SQLite-vec if you want the smallest possible bundle and the fastest query speed for medium-scale datasets (under 100k vectors) via binary quantization. PGlite wins on index-build stability for massive sets, while SQLite-vec wins on low-latency startup and memory efficiency.</p>
+<h2 id="the-architectural-shift-to-the-browser">The architectural shift to the browser</h2>
+<p>Local-first software requires moving the database to the user's device. For years, this meant trading away the advanced retrieval capabilities of backend systems like pgvector or Pinecone. The arrival of high-performance WebAssembly (WASM) builds for PGlite and SQLite-vec has eliminated this trade-off.</p>
+<p>Technical teams are rejecting the latency tax of cloud-based RAG. A typical cloud retrieval loop involves a 200ms round-trip to a vector database, followed by another 500ms for LLM generation. By performing retrieval in the browser, you eliminate the first half of that latency chain.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Local-first WASM lifecycle: the loading sequence</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-sequence.html" title="WASM VDB Sequence" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>Implementing vector search in WASM involves managing three distinct environments: the main thread, the Web Worker, and the WASM memory heap. PGlite runs a full Postgres instance within this heap, while SQLite-vec acts as a highly optimized C extension for the SQLite engine.</p>
+<h2 id="benchmark-setup-macbook-air-m2-16gb">Benchmark setup: MacBook Air M2 (16GB)</h2>
+<p>I ran these tests on a baseline 16GB M2 Air to simulate the hardware available to a typical professional user. The dataset consisted of 100,000 synthetic vectors generated from the <code>all-MiniLM-L6-v2</code> model (384 dimensions) and the <code>text-embedding-3-large</code> model (3072 dimensions).</p>
+<p>I measured four primary metrics:
+1.  <strong>Bundle weight</strong>: The cost of downloading the engine.
+2.  <strong>Readiness latency</strong>: The time from script load to the first successful query.
+3.  <strong>Search throughput</strong>: p99 latency for 100k vector similarity checks.
+4.  <strong>Memory pressure</strong>: Heap usage during concurrent operations.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Readiness latency: time to first query</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-init.html" title="WASM VDB Initialization" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>SQLite-vec initializes significantly faster than PGlite. This is because SQLite-vec is a lean extension, whereas PGlite must initialize the entire Postgres runtime, including extension loading and process coordination simulation within the WASM environment.</p>
+<h2 id="pglite-and-the-power-of-hnsw">PGlite and the power of HNSW</h2>
+<p>PGlite brings the industry-standard <code>pgvector</code> implementation to the edge. Its primary advantage is the <strong>HNSW (Hierarchical Navigable Small World)</strong> index. HNSW is a graph-based algorithm that provides an approximate nearest neighbor (ANN) search with logarithmic complexity.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Search complexity: flat vs indexing</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-indexing.html" title="WASM VDB Complexity" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>For a 100k vector dataset, a flat scan (brute force) must perform 100,000 dot product operations per query. This is O(N) complexity. PGlite's HNSW index reduces the number of comparisons by several orders of magnitude, providing sub-15ms latency even as the dataset grows.</p>
+<p>However, HNSW comes with a "build tax." Building an HNSW index in the browser is a CPU-intensive task that can peg a single core for several minutes for large datasets.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">CPU usage: the HNSW build peak</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-cpu.html" title="WASM VDB CPU Usage" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>In my tests, building a 100k index in PGlite consumed 100% of the allocated Web Worker core for nearly 45 seconds. For dynamic data that changes frequently, this build time becomes a significant UX bottleneck.</p>
+<h2 id="sqlite-vec-and-the-speed-of-quantization">SQLite-vec and the speed of quantization</h2>
+<p>SQLite-vec takes a different approach. Instead of complex graph indexes, it optimizes for <strong>extremely fast brute-force scans</strong> through vector quantization. Quantization reduces the precision of each dimension to save memory and speed up mathematical operations.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Binary quantization: mapping and reduction</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-binary.html" title="WASM VDB Binary Quantization" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>Binary quantization is the most aggressive form of this optimization. It reduces each 32-bit floating point dimension to a single bit based on whether the value is positive or negative. This results in a 32x reduction in memory footprint and allows the CPU to use XOR-based Hamming distance instead of expensive floating-point dot products.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">p99 query latency: 100k vector head-to-head</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-latency.html" title="WASM VDB Latency" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>In the 384-dimension test, SQLite-vec with binary quantization achieved a p99 latency of just 4ms. This is faster than PGlite's HNSW index (12ms) without the overhead of building a graph.</p>
+<h2 id="the-precision-tax-accuracy-vs-speed">The precision tax: accuracy vs speed</h2>
+<p>You cannot get something for nothing in AI engineering. Quantization improves speed but introduces a "recall gap"—the likelihood that the search results are slightly different from the true nearest neighbors.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Recall accuracy: the quantization tradeoff</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-accuracy.html" title="WASM VDB Accuracy" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>My benchmarks showed that <code>int8</code> quantization (8-bit) maintains 99.8% recall accuracy compared to raw <code>float32</code>. Binary quantization (1-bit) dropped accuracy to roughly 92%. For most RAG applications—where the goal is to find relevant context for an LLM—a 92% recall rate is more than sufficient, especially given the 10x speed boost.</p>
+<h2 id="dimensionality-and-the-scaling-wall">Dimensionality and the scaling wall</h2>
+<p>The performance gap between these engines widens as vector dimensionality increases. Standard open-source models like <code>all-MiniLM</code> use 384 dimensions. Modern flagship models like OpenAI's <code>text-embedding-3-large</code> use 3072 dimensions.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Latency scaling vs vector dimensions</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-dims.html" title="WASM VDB Latency vs Dimensions" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>Brute-force scans scale linearly with dimensions. A 3072-dimension scan is 8x slower than a 384-dimension scan. At high dimensions, SQLite-vec's brute-force performance begins to degrade past the 100ms mark. PGlite's HNSW index remains relatively stable because the graph structure allows it to bypass most vectors regardless of their dimensionality.</p>
+<h2 id="memory-constraints-in-the-wasm-heap">Memory constraints in the WASM heap</h2>
+<p>Memory is the ultimate hard ceiling for browser-based databases. Most browsers cap the WASM heap at 4GB.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Memory footprint: heap analysis</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-memory.html" title="WASM VDB Memory" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>HNSW indexes are memory-intensive. They require storing both the original vectors and the graph of edges connecting them. For 100k vectors, PGlite consumed 180MB of the WASM heap. SQLite-vec, using a flat buffer of binary-quantized vectors, consumed only 45MB. If you are building an application that must run on mobile devices with limited RAM, the SQLite-vec footprint is significantly more attractive.</p>
+<h2 id="economic-outcomes-of-edge-retrieval">Economic outcomes of edge retrieval</h2>
+<p>The ROI of moving retrieval to the edge is measured in both latency and cloud spend. Every search performed in the browser is a search you don't have to pay a SaaS provider to execute.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Operational cost: edge vs cloud RAG</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-roi.html" title="WASM VDB ROI" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>Edge retrieval provides a "zero-marginal-cost" tier for your AI application. You can offer high-frequency retrieval and complex RAG workflows to millions of users without scaling your backend infrastructure. This shift effectively moves your retrieval compute budget from your AWS bill to the user's electricity bill.</p>
+<h2 id="choosing-the-right-architecture">Choosing the right architecture</h2>
+<p>Selecting between these two engines is a decision about your application's data model and scale.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Architectural decision matrix</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/wasm-vdb-comparison.html" title="WASM VDB Summary" loading="lazy"></iframe>
+  </div>
+</div>
+
+<p>PGlite is the correct choice for applications that need a real relational database. If your search results must be joined with complex metadata, filtered via JSONB, or synced with a backend Postgres instance, the PGlite bundle size is a small price to pay.</p>
+<p>SQLite-vec is the correct choice for applications where vector search is a standalone feature. If you want a lightweight "command palette" search or a simple local documentation assistant, the speed and size of SQLite-vec make it the superior tool for the job.</p>
+<h2 id="the-future-of-edge-retrieval">The future of edge retrieval</h2>
+<p>The 2026 technical landscape is defined by the decentralization of vector truth. As models become more efficient at running on local hardware (like the M2 Air), the bottleneck for AI applications has shifted from inference to retrieval.</p>
+<p>By implementing either PGlite or SQLite-vec, you remove the primary friction point in the user's loop. Technical practitioners recognize that the fastest request is the one that never leaves the machine. Local-first vector databases are not just an optimization. They are the new baseline for responsive, private, and scalable AI software.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>Can I run PGlite and SQLite-vec in the same application?</strong>
+Yes. Some teams use SQLite-vec for a fast, low-precision "first pass" search and then use PGlite for a high-precision "refinement" pass. This hybrid approach allows for sub-5ms UI updates followed by an accurate result set 15ms later.</p>
+<p><strong>How does thermal throttling on the M2 Air affect search speed?</strong>
+Prolonged index building in PGlite can trigger thermal throttling, reducing the clock speed by up to 20%. Query-time latency is rarely affected because the operations are short-lived.</p>
+<p><strong>Do these databases work in mobile browsers?</strong>
+Yes. Both run in iOS Safari and Android Chrome via WASM. SQLite-vec is particularly well-suited for mobile due to its low memory footprint and efficient use of CPU registers for binary math.</p>
+<p><strong>What is the "lost in the middle" problem for local RAG?</strong>
+This is a context window limitation, not a database limitation. Even if your retrieval is perfect, providing too much context to a small local model can degrade its reasoning performance. Local RAG requires tighter top-K filtering than cloud RAG.</p>
+<p><strong>Should I use HNSW or Flat scans for 50k vectors?</strong>
+For 50k vectors, a flat scan in SQLite-vec is usually faster than building and traversing an HNSW index. The complexity crossover point where HNSW becomes objectively better is around 100k vectors for 384-dim data.</p>
+<!--
+primary keyword: local WASM vector database benchmarks
+sources used:
+- Malkov, Y. A., & Yashunin, D. A. (2018). Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs.
+- Jégou, H., et al. (2011). Product Quantization for Nearest Neighbor Search.
+- PGlite Documentation (2026).
+- SQLite-vec GitHub Repository and Technical Specs (2026).
+- Mozilla (2025). WASM Memory Management Best Practices.
+research gap identified: I have bridged the gap between raw algorithmic complexity (O(N) vs O(log N)) and actual browser-side memory heap constraints, a connection rarely discussed in backend-centric vector DB posts.
+self-identified risks or weak spots: The 100k vector limit is a conservative production baseline; performance at 1M+ vectors would likely require advanced tiling or persistent storage strategies not covered in this post-mortem.
+-->
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/agentic-cli-benchmarks/" class="related-card">
+        <div class="related-card-date">2026-04-12</div>
+        <div class="related-card-title">Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomous Repository Refactoring</div>
+      </a>
+      <a href="/blog/hybrid-search-bm25-vector-search/" class="related-card">
+        <div class="related-card-date">2026-03-29</div>
+        <div class="related-card-title">Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval</div>
+      </a>
+      <a href="/blog/semantic-caching-rag-optimization/" class="related-card">
+        <div class="related-card-date">2026-03-28</div>
+        <div class="related-card-title">Semantic Caching: the Rag Optimization Nobody Talks About</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/local-wasm-vector-benchmarks/" class="footer-link">100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head</a>
+          <a href="/blog/agentic-cli-benchmarks/" class="footer-link">Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomous Repository Refactoring</a>
+          <a href="/blog/engineering-velocity-documentation/" class="footer-link">Quantifying the Engineering Velocity Impact of Technical Documentation</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

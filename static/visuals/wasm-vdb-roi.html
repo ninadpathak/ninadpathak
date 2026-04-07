@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM VDB ROI</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+        body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 95%; max-width: 1000px; padding: 40px; background: var(--bg); }
+        svg { width: 100%; height: auto; overflow: visible; }
+        .label { font-family: var(--mono); font-size: 18px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+        .axis { vector-effect: non-scaling-stroke; stroke: var(--text); stroke-width: 3.0; }
+        .grid { vector-effect: non-scaling-stroke; stroke: var(--border); stroke-width: 2.5; stroke-dasharray: 4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="-300 -80 1200 650">
+            <!-- Grid -->
+            <line x1="0" y1="100" x2="800" y2="100" class="grid" />
+            <line x1="0" y1="200" x2="800" y2="200" class="grid" />
+            <line x1="0" y1="300" x2="800" y2="300" class="grid" />
+            
+            <!-- Axes -->
+            <line x1="0" y1="400" x2="800" y2="400" class="axis" />
+            <line x1="0" y1="0" x2="0" y2="400" class="axis" />
+            
+            <!-- Cloud RAG Cost/Latency -->
+            <rect x="100" y="50" width="150" height="350" fill="var(--border)" />
+            <text x="175" y="40" text-anchor="middle" class="label">Cloud VDB</text>
+            <text x="175" y="225" text-anchor="middle" class="label" style="fill: var(--bg);">$$$</text>
+            
+            <!-- Edge RAG Cost/Latency -->
+            <rect x="550" y="350" width="150" height="50" fill="var(--accent)" />
+            <text x="625" y="340" text-anchor="middle" class="label">Edge WASM</text>
+            <text x="625" y="385" text-anchor="middle" class="label" style="fill: var(--bg);">$0</text>
+            
+            <text x="400" y="480" text-anchor="middle" class="label" style="font-size: 24px;">Edge vs Cloud RAG: Operational Cost comparison</text>
+            <text x="400" y="520" text-anchor="middle" class="label" style="font-size: 18px; fill: var(--text-dim);">Y: Cumulative monthly spend</text>
+        </svg>
+    </div>
+</body>
+</html>

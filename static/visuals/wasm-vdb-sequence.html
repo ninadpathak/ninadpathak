@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM VDB Sequence</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0e0e0e;
+            --text-dim: #888888;
+            --accent: #d44000;
+            --border: #e0e0dc;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #111111;
+                --text: #f0f0f0;
+                --text-dim: #6a6a6a;
+                --accent: #ff5f1f;
+                --border: #1e1e1e;
+            }
+        }
+        body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { width: 95%; max-width: 1000px; padding: 40px; background: var(--bg); }
+        svg { width: 100%; height: auto; overflow: visible; }
+        .label { font-family: var(--mono); font-size: 18px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+        .line { stroke: var(--border); stroke-width: 2; }
+        .arrow { stroke: var(--accent); stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="-300 -80 1200 650">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="var(--accent)" />
+                </marker>
+            </defs>
+            
+            <line x1="0" y1="0" x2="0" y2="500" class="line" />
+            <text x="0" y="-20" text-anchor="middle" class="label">Main Thread</text>
+            
+            <line x1="400" y1="0" x2="400" y2="500" class="line" />
+            <text x="400" y="-20" text-anchor="middle" class="label">Web Worker</text>
+            
+            <line x1="800" y1="0" x2="800" y2="500" class="line" />
+            <text x="800" y="-20" text-anchor="middle" class="label">WASM DB</text>
+            
+            <path d="M 0 50 L 390 50" class="arrow" />
+            <text x="200" y="40" text-anchor="middle" class="label" style="font-size: 14px;">Init Worker</text>
+            
+            <path d="M 400 100 L 790 100" class="arrow" />
+            <text x="600" y="90" text-anchor="middle" class="label" style="font-size: 14px;">Instantiate WASM</text>
+            
+            <path d="M 800 200 L 410 200" class="arrow" />
+            <text x="600" y="190" text-anchor="middle" class="label" style="font-size: 14px;">Ready Signal</text>
+            
+            <path d="M 0 300 L 390 300" class="arrow" />
+            <text x="200" y="290" text-anchor="middle" class="label" style="font-size: 14px;">Query(vector)</text>
+            
+            <path d="M 400 400 L 790 400" class="arrow" />
+            <text x="600" y="390" text-anchor="middle" class="label" style="font-size: 14px;">Similarity Search</text>
+            
+            <text x="400" y="560" text-anchor="middle" class="label" style="font-size: 24px;">Local-First WASM Lifecycle</text>
+        </svg>
+    </div>
+</body>
+</html>
