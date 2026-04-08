@@ -22,9 +22,9 @@ Garbage collecting unimportant tokens in real-time maintains performance without
 I decided to benchmark exactly how much context I could throw away before the model started losing facts.
 
 <div class="visual-wrapper">
-  <div class="visual-title">KV cache memory scaling: sequence length vs VRAM</div>
+  <div class="visual-title">KV cache memory scaling: 128k context footprint</div>
   <div class="visual-container">
-    <iframe src="/static/visuals/wasm-vdb-scaling.html" title="KV Cache Memory Scaling" loading="lazy"></iframe>
+    <iframe src="/static/visuals/kv-cache-vram-scaling.html" title="KV Cache Memory Scaling" loading="lazy"></iframe>
   </div>
 </div>
 
@@ -73,7 +73,8 @@ Random eviction was expected to fail miserably, and my data confirmed that seman
 <div class="visual-wrapper">
   <div class="visual-title">The Attention Sink: why the first 4 tokens matter</div>
   <div class="visual-container">
-    <iframe src="/static/visuals/context-bridge.html" title="Attention Sink Visualization" loading="lazy"></iframe>
+    <iframe src="/static/visuals/uv-reflink-lifecycle.html" title="Attention Sink Visualization" loading="lazy"></iframe>
+  </div>
 </div>
 
 ## The experiment: measuring retrieval accuracy at the limit
@@ -134,7 +135,7 @@ Vertical pillars of high attention appear across the entire sequence for heavy h
 <div class="visual-wrapper">
   <div class="visual-title">Attention pillar decay: 3D density map</div>
   <div class="visual-container">
-    <iframe src="/static/visuals/agent-memory.html" title="3D Attention Map" loading="lazy"></iframe>
+    <iframe src="/static/visuals/kv-cache-heatmap.html" title="3D Attention Map" loading="lazy"></iframe>
   </div>
 </div>
 

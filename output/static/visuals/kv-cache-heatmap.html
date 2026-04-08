@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Attention Heatmap</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --text-1: #0e0e0e;
+            --accent: #d44000;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --text-1: #f0f0f0;
+                --accent: #ff5f1f;
+            }
+        }
+        body { margin: 0; background: var(--bg-1); overflow: hidden; font-family: sans-serif; }
+        canvas { display: block; }
+        .label {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            color: var(--text-1);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="label">3D Attention Map: Heavy Hitter Pillars</div>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Grid parameters
+        const size = 20;
+        const segments = 40;
+        const geometry = new THREE.PlaneGeometry(size, size, segments, segments);
+        
+        // Materials
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const baseColor = isDark ? 0x333333 : 0xcccccc;
+        const accentColor = 0xd44000;
+
+        const material = new THREE.MeshPhongMaterial({
+            color: baseColor,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        const plane = new THREE.Mesh(geometry, material);
+        plane.rotation.x = -Math.PI / 2;
+        scene.add(plane);
+
+        // Add Pillars (Heavy Hitters)
+        const pillarGeometry = new THREE.BoxGeometry(0.4, 1, 0.4);
+        const pillars = [];
+        for(let i = 0; i < 15; i++) {
+            const pillarMaterial = new THREE.MeshPhongMaterial({ color: accentColor });
+            const pillar = new THREE.Mesh(pillarGeometry, pillarMaterial);
+            pillar.position.x = (Math.random() - 0.5) * 18;
+            pillar.position.z = (Math.random() - 0.5) * 18;
+            pillar.scale.y = 2 + Math.random() * 8;
+            pillar.position.y = pillar.scale.y / 2;
+            scene.add(pillar);
+            pillars.push(pillar);
+        }
+
+        // Lighting
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(5, 10, 7.5);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x404040));
+
+        camera.position.set(15, 15, 15);
+        camera.lookAt(0, 0, 0);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            scene.rotation.y += 0.005;
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
