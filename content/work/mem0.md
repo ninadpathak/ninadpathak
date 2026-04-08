@@ -1,10 +1,10 @@
 ---
-title: "Scaling Mem0 from 30k to 45k Monthly Visits"
+title: "Scaling Mem0 from 24k to 45k Monthly Visits in 60 Days"
 client: "Mem0"
 industry: "AI / Memory Infrastructure"
 duration: "2 Months"
 services: "Operational Content Management, Team Leadership, Workflow Automation"
-summary: "Led a team of 13 writers and implemented an automated content engine for Mem0, growing organic traffic by 50% within 60 days."
+summary: "Managed a team of 13 writers and implemented a fully automated content engine for Mem0, increasing organic traffic by 50% within two months of joining."
 hero_metric: "50%"
 hero_metric_label: "Traffic growth in 2 months"
 metrics:
@@ -18,18 +18,18 @@ metrics:
 
 ## Technical content management at scale
 
-Mem0 organic traffic increased from 30,000 to 45,000 monthly visits within 60 days of my taking ownership of the content engine. Managing a team of 13 writers required implementing automation for technical vetting and invoice processing. Leadership of the program covered hiring, calendar creation, and workflow simplification.
+I joined Mem0 in February 2026 with clear instructions to professionalize the content operation and scale organic traffic. Weekly traffic sat at roughly 6,000 visits when I arrived, totaling 24,000 monthly visits. April data showed that traffic climbed to about 45,000 monthly visits, a 50% increase driven by technical depth and workflow efficiency.
 
-![Mem0 Growth Statistics](/static/images/mem0-growth.png)
+![Mem0 Search Console Growth](/static/images/mem0-growth.png)
 
-## Leading a team of 13 writers
+## Leading a team of 13 writers without technical bottlenecks
 
-Scaling the publishing velocity required a system that handled technical complexity without engineering overhead. Hiring writers capable of understanding vector embeddings and KV cache eviction ensured technical accuracy. Automation layers handled status tracking and handoffs between editors and publishers.
+Managing a distributed team of 13 writers required end-to-end operational ownership. I handled hiring, vetting, and technical reviews to ensure every guide met engineering standards. Hiring writers capable of understanding vector embeddings and KV cache eviction ensured that drafts were accurate before they reached the publishing stage. Automation layers simplified the handoff between writers and editors while managing the administrative burden of invoices and resource allocation.
 
-Operational ownership of the program removed the management burden from the engineering team. High-intent keywords in the memory infrastructure niche drove the growth in monthly visits. Standardized technical reviews ensured that drafts reached production without engineering rewrites.
+Operational ownership removed the management tax from the engineering team. Standardized technical reviews ensured that drafts reached production without structural corrections or broken code paths. Results were driven by a data-driven calendar targeting high-intent keywords in the memory infrastructure space.
 
-## Automation for content velocity
+## Workflow automation as a growth multiplier
 
-Workflow automation simplified the entire lifecycle from hiring to publishing. Technical depth remained the primary focus while scaling the publishing velocity. Scale results from combining technical vetting with operational rigor. Engineering teams saved time as I took over the technical review and publishing lifecycle. 
+Scale fails when it depends on manual follow-ups. My role involved setting up custom internal tools to manage the 13-writer pipeline without technical bottlenecks. Administrative tasks like invoicing and editorial feedback loops were automated to maintain a high publishing velocity. Technical depth remained the primary focus while scaling output across multiple categories.
 
-Management of the content operation included handling editors, invoicing, and resource allocation. Results were driven by a data-driven calendar targeting specific technical audiences in the AI space. Technical writing for AI infrastructure requires a peer-to-peer engineering tone that generic writers cannot replicate.
+Management of the content operation included handling editors, invoicing, and resource allocation. Peer-to-peer engineering tones in the content ensured that we reached technical audiences that generic writers cannot replicate. Scaling your technical content program requires a combination of technical vetting, workflow automation, and leadership.
