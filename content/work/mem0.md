@@ -1,52 +1,35 @@
 ---
-title: "Scaling Mem0 from 30k to 45k Monthly Visits in 60 Days"
+title: "Scaling Mem0 from 30k to 45k Monthly Visits"
 client: "Mem0"
 industry: "AI / Memory Infrastructure"
 duration: "2 Months"
-services: "End-to-End Content Management, Team Leadership, Workflow Automation"
-summary: "Managed a team of 13 writers and implemented a fully automated content engine for Mem0, resulting in a 50% traffic increase within two months of joining."
+services: "Operational Content Management, Team Leadership, Workflow Automation"
+summary: "Led a team of 13 writers and implemented an automated content engine for Mem0, growing organic traffic by 50% within 60 days."
 hero_metric: "50%"
 hero_metric_label: "Traffic growth in 2 months"
 metrics:
   - value: "45k"
-    label: "Monthly visits (up from 30k)"
+    label: "Monthly visits"
   - value: "13"
     label: "Writers managed"
   - value: "100%"
-    label: "End-to-end management"
+    label: "Operational ownership"
 ---
 
-## Managing a high-output content engine at the speed of AI
+## Technical content management at scale
 
-I joined Mem0 in February 2026 with a clear mandate: professionalize the content operation and scale organic traffic. At the time, the site was doing ~30k monthly visits. By April, that number had climbed to 45k—a 50% increase driven by technical depth and workflow efficiency.
+Mem0 organic traffic increased from 30,000 to 45,000 monthly visits within 60 days of my taking ownership of the content engine. Managing a team of 13 writers required implementing automation for technical vetting and invoice processing. Leadership of the program covered hiring, calendar creation, and workflow simplification.
 
-This wasn't just about writing more articles. It was about building a system that could handle the complexity of AI memory infrastructure while maintaining a high publishing velocity.
+![Mem0 Growth Statistics](/static/images/mem0-growth.png)
 
-![Mem0 Search Console Growth](/static/images/mem0-growth.png)
+## Leading a team of 13 writers
 
-## Leading a team of 13 writers without technical bottlenecks
+Scaling the publishing velocity required a system that handled technical complexity without engineering overhead. Hiring writers capable of understanding vector embeddings and KV cache eviction ensured technical accuracy. Automation layers handled status tracking and handoffs between editors and publishers.
 
-Scaling to this level required managing a distributed team of 13 writers. My role was end-to-end:
+Operational ownership of the program removed the management burden from the engineering team. High-intent keywords in the memory infrastructure niche drove the growth in monthly visits. Standardized technical reviews ensured that drafts reached production without engineering rewrites.
 
-- **Hiring and Vetting:** Identified and onboarded writers who could actually understand vector embeddings and KV cache eviction.
-- **Content Strategy:** Developed a data-driven calendar targeting specific high-intent keywords in the AI infrastructure space.
-- **Workflow Automation:** Set up custom internal tools to simplify the handoff between writers, editors, and the publishing team.
-- **Operational Management:** Handled everything from editorial feedback to invoicing and resource allocation.
+## Automation for content velocity
 
-By removing the "management tax" from the engineering team, I allowed them to focus on the product while I turned their technical roadmap into a growth engine.
+Workflow automation simplified the entire lifecycle from hiring to publishing. Technical depth remained the primary focus while scaling the publishing velocity. Scale results from combining technical vetting with operational rigor. Engineering teams saved time as I took over the technical review and publishing lifecycle. 
 
-## Automation as the secret to content velocity
-
-Scale fails when it depends on manual follow-ups. I implemented automation layers to handle the repetitive parts of the content lifecycle:
-
-- Automated status tracking for every piece in the 13-writer pipeline.
-- Simplified invoice processing to ensure the team stayed focused on output.
-- Structured editor feedback loops that reduced the rounds of revision per post.
-
-This operational rigour meant that as our volume increased, our quality didn't just stay stable—it improved. We moved from generic AI explainers to implementation-level guides that developers actually used.
-
-## Scaling your technical content program
-
-Scale is a management problem, not a writing problem. My work with Mem0 proves that with the right combination of technical vetting, workflow automation, and leadership, you can move the needle on organic traffic even in highly competitive technical niches.
-
-If you're looking to scale your own content engine without overwhelming your engineers, [my work page](/work) shows how I bridge the gap between high-level strategy and implementation-level execution.
+Management of the content operation included handling editors, invoicing, and resource allocation. Results were driven by a data-driven calendar targeting specific technical audiences in the AI space. Technical writing for AI infrastructure requires a peer-to-peer engineering tone that generic writers cannot replicate.
