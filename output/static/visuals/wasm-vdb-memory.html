@@ -6,52 +6,99 @@
     <title>WASM VDB Memory</title>
     <style>
         :root {
-            --bg: #ffffff;
-            --text: #0e0e0e;
-            --text-dim: #888888;
-            --accent: #d44000;
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
             --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
             --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
             --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
+
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #111111;
-                --text: #f0f0f0;
-                --text-dim: #6a6a6a;
-                --accent: #ff5f1f;
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
                 --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
             }
         }
-        body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-        .container { width: 95%; max-width: 1000px; padding: 40px; background: var(--bg); }
-        svg { width: 100%; height: auto; overflow: visible; }
-        .bar-label { font-family: var(--mono); font-size: 22px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body { 
+            background: var(--bg-1); 
+            font-family: var(--sans); 
+            color: var(--text-1);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container { 
+            width: 100%; 
+            height: 100%;
+            padding: 1rem;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            overflow: visible;
+        }
+
+        .bar-label { font-family: var(--mono); font-size: 22px; fill: var(--text-2); font-weight: 600; text-transform: uppercase; }
         .bar-val { font-family: var(--mono); font-size: 24px; fill: var(--accent); font-weight: 700; }
-        .axis { vector-effect: non-scaling-stroke; stroke: var(--text); stroke-width: 3.0; }
-        .grid { vector-effect: non-scaling-stroke; stroke: var(--border); stroke-width: 2.5; stroke-dasharray: 4; }
+        .tick-label { font-family: var(--mono); font-size: 18px; fill: var(--text-3); }
+        .chart-title { font-family: var(--mono); font-size: 26px; fill: var(--text-1); font-weight: 700; text-transform: uppercase; }
+        
+        .axis { stroke: var(--text-1); stroke-width: 2; vector-effect: non-scaling-stroke; }
+        .grid { stroke: var(--border); stroke-width: 1.5; stroke-dasharray: 4; vector-effect: non-scaling-stroke; }
     </style>
 </head>
 <body>
     <div class="container">
-        <svg viewBox="-300 -80 1200 650">
-            <line x1="0" y1="100" x2="800" y2="100" class="grid" />
-            <line x1="0" y1="300" x2="800" y2="300" class="grid" />
-            <line x1="0" y1="0" x2="800" y2="0" class="axis" />
-            <line x1="0" y1="400" x2="800" y2="400" class="axis" />
-            <line x1="0" y1="0" x2="0" y2="400" class="axis" />
+        <svg viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
+            <line x1="250" y1="80" x2="250" y2="300" class="axis" />
+            <line x1="250" y1="300" x2="950" y2="300" class="axis" />
             
-            <g>
-                <rect x="0" y="50" width="750" height="100" fill="var(--border)" />
-                <text x="-20" y="110" text-anchor="end" class="bar-label">PGlite (HNSW Heap)</text>
-                <text x="770" y="110" class="bar-val">180 MB</text>
+            <g transform="translate(250, 0)">
+                <line x1="200" y1="80" x2="200" y2="300" class="grid" />
+                <text x="200" y="330" text-anchor="middle" class="tick-label">50MB</text>
+                
+                <line x1="400" y1="80" x2="400" y2="300" class="grid" />
+                <text x="400" y="330" text-anchor="middle" class="tick-label">100MB</text>
+                
+                <line x1="600" y1="80" x2="600" y2="300" class="grid" />
+                <text x="600" y="330" text-anchor="middle" class="tick-label">150MB</text>
+                
+                <line x1="720" y1="80" x2="720" y2="300" class="grid" />
+                <text x="720" y="330" text-anchor="middle" class="tick-label">180MB</text>
             </g>
+
             <g>
-                <rect x="0" y="250" width="187" height="100" fill="var(--accent)" />
-                <text x="-20" y="310" text-anchor="end" class="bar-label">SQLite-vec</text>
-                <text x="207" y="310" class="bar-val">45 MB</text>
+                <text x="240" y="145" text-anchor="end" class="bar-label">PGlite (HNSW Heap)</text>
+                <rect x="250" y="110" width="720" height="50" fill="var(--bg-2)" />
+                <text x="880" y="145" class="bar-val">180 MB</text>
             </g>
-            <text x="400" y="480" text-anchor="middle" class="bar-label" style="font-size: 24px;">Memory Footprint during 100k Vector Search</text>
+
+            <g>
+                <text x="240" y="245" text-anchor="end" class="bar-label">SQLite-vec</text>
+                <rect x="250" y="210" width="180" height="50" fill="var(--accent)" />
+                <text x="440" y="245" class="bar-val">45 MB</text>
+            </g>
+
+            <text x="500" y="40" text-anchor="middle" class="chart-title">Memory Footprint</text>
         </svg>
     </div>
 </body>

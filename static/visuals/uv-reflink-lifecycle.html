@@ -6,63 +6,110 @@
     <title>uv Zero-copy Link Lifecycle</title>
     <style>
         :root {
-            --bg: #ffffff;
-            --text: #0e0e0e;
-            --text-dim: #888888;
-            --accent: #d44000;
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
             --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
             --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
             --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
+
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #111111;
-                --text: #f0f0f0;
-                --text-dim: #6a6a6a;
-                --accent: #ff5f1f;
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
                 --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
             }
         }
-        body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-        .container { width: 95%; max-width: 1000px; padding: 40px; background: var(--bg); }
-        svg { width: 100%; height: auto; overflow: visible; }
-        .label { font-family: var(--mono); font-size: 18px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body { 
+            background: var(--bg-1); 
+            font-family: var(--sans); 
+            color: var(--text-1);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container { 
+            width: 100%; 
+            height: 100%;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            overflow: visible;
+        }
+
+        .label { font-family: var(--mono); font-size: 18px; fill: var(--text-2); font-weight: 600; text-transform: uppercase; }
+        .desc { font-family: var(--sans); font-size: 16px; fill: var(--text-3); }
         .line { stroke: var(--border); stroke-width: 2; }
-        .arrow { stroke: var(--accent); stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+        .arrow { stroke: var(--accent); stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+        .box { fill: var(--bg-2); stroke: var(--border); stroke-width: 1.5; }
+        .highlight { fill: var(--accent); font-weight: 700; font-size: 20px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <svg viewBox="-300 -80 1200 650">
+        <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
             <defs>
-                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-                    <polygon points="0 0, 10 3.5, 0 7" fill="var(--accent)" />
+                <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                    <polygon points="0 0, 8 3, 0 6" fill="var(--accent)" />
                 </marker>
             </defs>
             
-            <line x1="0" y1="0" x2="0" y2="500" class="line" />
-            <text x="0" y="-20" text-anchor="middle" class="label">Project venv</text>
+            <g transform="translate(150, 80)">
+                <rect x="-80" y="0" width="160" height="50" rx="4" class="box" />
+                <text x="0" y="32" text-anchor="middle" class="label">PyPI</text>
+                <line x1="0" y1="50" x2="0" y2="380" class="line" stroke-dasharray="6" />
+            </g>
             
-            <line x1="400" y1="0" x2="400" y2="500" class="line" />
-            <text x="400" y="-20" text-anchor="middle" class="label">Global Cache</text>
+            <g transform="translate(500, 80)">
+                <rect x="-100" y="0" width="200" height="50" rx="4" class="box" style="stroke: var(--accent); stroke-width: 2.5;" />
+                <text x="0" y="32" text-anchor="middle" class="label" style="fill: var(--accent);">uv Cache</text>
+                <line x1="0" y1="50" x2="0" y2="380" class="line" stroke-dasharray="6" />
+            </g>
             
-            <line x1="800" y1="0" x2="800" y2="500" class="line" />
-            <text x="800" y="-20" text-anchor="middle" class="label">Disk Storage</text>
+            <g transform="translate(850, 80)">
+                <rect x="-80" y="0" width="160" height="50" rx="4" class="box" />
+                <text x="0" y="32" text-anchor="middle" class="label">Project</text>
+                <line x1="0" y1="50" x2="0" y2="380" class="line" stroke-dasharray="6" />
+            </g>
+
+            <g transform="translate(0, 150)">
+                <path d="M 150 0 L 490 0" class="arrow" />
+                <text x="325" y="-15" text-anchor="middle" class="label" style="font-size: 16px;">1. Download</text>
+            </g>
             
-            <path d="M 400 50 L 790 50" class="arrow" />
-            <text x="600" y="40" text-anchor="middle" class="label" style="font-size: 14px;">One-time Download</text>
+            <g transform="translate(0, 250)">
+                <path d="M 850 0 L 510 0" class="arrow" />
+                <text x="680" y="-15" text-anchor="middle" class="label" style="font-size: 16px;">2. Resolve</text>
+            </g>
             
-            <path d="M 800 100 L 410 100" class="arrow" />
-            <text x="600" y="90" text-anchor="middle" class="label" style="font-size: 14px;">Store in Content-addressable Cache</text>
+            <g transform="translate(0, 350)">
+                <path d="M 500 0 L 840 0" class="arrow" />
+                <text x="670" y="-15" text-anchor="middle" class="highlight">3. Zero-Copy Link</text>
+                <text x="670" y="25" text-anchor="middle" class="desc">Reflink / Hardlink</text>
+            </g>
             
-            <path d="M 0 200 L 390 200" class="arrow" />
-            <text x="200" y="190" text-anchor="middle" class="label" style="font-size: 14px;">Request dependency</text>
-            
-            <path d="M 400 300 L 10 300" class="arrow" />
-            <text x="200" y="290" text-anchor="middle" class="label" style="font-size: 14px; fill: var(--accent);">Reflink / Hardlink (Zero Copy)</text>
-            
-            <text x="400" y="560" text-anchor="middle" class="label" style="font-size: 24px;">uv Zero-copy Link Lifecycle</text>
-            <text x="400" y="600" text-anchor="middle" class="label" style="font-size: 16px; fill: var(--text-dim);">Why env sync takes < 20ms even for GBs of data</text>
+            <rect x="150" y="420" width="700" height="60" rx="4" fill="var(--bg-2)" stroke="var(--border)" />
+            <text x="500" y="458" text-anchor="middle" class="label" style="font-size: 22px; fill: var(--text-1);">Architecture: One Copy, Many Environments</text>
         </svg>
     </div>
 </body>

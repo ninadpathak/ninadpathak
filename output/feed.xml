@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache Eviction</title>
+      <link>https://ninadpathak.com/blog/kv-cache-eviction-accuracy/</link>
+      <description>VRAM is too expensive to waste on low-attention tokens. I benchmarked KV cache eviction strategies to treat LLM context like a managed heap, reaching 90% pruning with zero recall loss.</description>
+      <pubDate>Apr 15, 2026</pubDate>
+    </item>
+    <item>
       <title>From 4 Minutes to 12 Seconds: A Quantitative Audit of the uv Package Manager</title>
       <link>https://ninadpathak.com/blog/uv-package-manager-benchmark/</link>
       <description>I benchmarked Astral uv against Poetry and pip on a 2026 AI dependency stack. Here is how Rust-native tooling reduces build times by 20x.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/</link>
       <description>Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49% with contextual embeddings plus contextual BM25. I walk through the mechanism, the benchmark, and the part of the RAG pipeline it changes.</description>
       <pubDate>Mar 26, 2026</pubDate>
-    </item>
-    <item>
-      <title>Token Counting Isn't Optional: a Practical Guide to Llm Cost Control</title>
-      <link>https://ninadpathak.com/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/</link>
-      <description>I explain the mechanics of LLM tokenization, why JSON burns your API budget, and how to architect systems for strict token efficiency.</description>
-      <pubDate>Mar 22, 2026</pubDate>
     </item>
   </channel>
 </rss>
