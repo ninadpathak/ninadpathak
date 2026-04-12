@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2A Lifecycle</title>
+    <style>
+        :root {
+            --bg-1: #ffffff;
+            --bg-2: #efefed;
+            --border: #e0e0dc;
+            --text-1: #0e0e0e;
+            --text-2: #3a3a3a;
+            --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111;
+                --bg-2: #1a1a1a;
+                --border: #1e1e1e;
+                --text-1: #f0f0f0;
+                --text-2: #c2c2c2;
+                --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body { background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .container { width: 100%; height: 100%; padding: 1.5rem; box-sizing: border-box; display: flex; justify-content: center; align-items: center; }
+        svg { width: 100%; height: auto; max-height: 100%; overflow: visible; }
+        .label { font-family: var(--mono); font-size: 18px; fill: var(--text-2); font-weight: 600; text-transform: uppercase; }
+        .desc { font-family: var(--sans); font-size: 14px; fill: var(--text-3); }
+        .line { stroke: var(--border); stroke-width: 2; }
+        .arrow { stroke: var(--accent); stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+        .box { fill: var(--bg-2); stroke: var(--border); stroke-width: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="0 0 1000 450" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                    <polygon points="0 0, 8 3, 0 6" fill="var(--accent)" />
+                </marker>
+            </defs>
+            <g transform="translate(100, 60)">
+                <rect x="-70" y="0" width="140" height="40" rx="4" class="box" />
+                <text x="0" y="26" text-anchor="middle" class="label">User</text>
+                <line x1="0" y1="40" x2="0" y2="380" class="line" stroke-dasharray="6" />
+            </g>
+            <g transform="translate(350, 60)">
+                <rect x="-70" y="0" width="140" height="40" rx="4" class="box" />
+                <text x="0" y="26" text-anchor="middle" class="label">VAD + STT</text>
+                <line x1="0" y1="40" x2="0" y2="380" class="line" stroke-dasharray="6" />
+            </g>
+            <g transform="translate(600, 60)">
+                <rect x="-70" y="0" width="140" height="40" rx="4" class="box" style="stroke: var(--accent); stroke-width: 2;" />
+                <text x="0" y="26" text-anchor="middle" class="label" style="fill: var(--accent);">LLM</text>
+                <line x1="0" y1="40" x2="0" y2="380" class="line" stroke-dasharray="6" />
+            </g>
+            <g transform="translate(850, 60)">
+                <rect x="-70" y="0" width="140" height="40" rx="4" class="box" />
+                <text x="0" y="26" text-anchor="middle" class="label">TTS</text>
+                <line x1="0" y1="40" x2="0" y2="380" class="line" stroke-dasharray="6" />
+            </g>
+            <g transform="translate(0, 140)">
+                <path d="M 100 0 L 340 0" class="arrow" />
+                <text x="220" y="-12" text-anchor="middle" class="label" style="font-size: 15px;">Audio Input</text>
+            </g>
+            <g transform="translate(0, 210)">
+                <rect x="280" y="-12" width="140" height="24" rx="3" fill="var(--accent)" opacity="0.15" />
+                <text x="350" y="5" text-anchor="middle" class="label" style="font-size: 14px; fill: var(--accent);">VAD fires (+510ms)</text>
+            </g>
+            <g transform="translate(0, 280)">
+                <path d="M 350 0 L 590 0" class="arrow" />
+                <text x="470" y="-12" text-anchor="middle" class="label" style="font-size: 15px;">Transcript</text>
+            </g>
+            <g transform="translate(0, 350)">
+                <rect x="530" y="-12" width="140" height="24" rx="3" fill="var(--accent)" opacity="0.2" />
+                <text x="600" y="5" text-anchor="middle" class="label" style="font-size: 14px; fill: var(--accent);">TTFT (+320ms)</text>
+            </g>
+            <g transform="translate(0, 420)">
+                <path d="M 600 0 L 840 0" class="arrow" />
+                <text x="720" y="-12" text-anchor="middle" class="label" style="font-size: 15px;">Text → Audio</text>
+            </g>
+        </svg>
+    </div>
+</body>
+</html>

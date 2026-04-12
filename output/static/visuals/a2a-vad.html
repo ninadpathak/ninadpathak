@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAD Patience Tradeoff</title>
+    <style>
+        :root {
+            --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+            --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+            --accent: #d44000;
+            --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+                --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+                --accent: #ff5f1f;
+            }
+        }
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body { background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .container { width: 100%; height: 100%; padding: 1rem; box-sizing: border-box; display: flex; justify-content: center; align-items: center; }
+        svg { width: 100%; height: auto; max-height: 100%; overflow: visible; }
+        .bar-label { font-family: var(--mono); font-size: 20px; fill: var(--text-2); font-weight: 600; text-transform: uppercase; }
+        .bar-val { font-family: var(--mono); font-size: 22px; fill: var(--accent); font-weight: 700; }
+        .tick-label { font-family: var(--mono); font-size: 16px; fill: var(--text-3); }
+        .chart-title { font-family: var(--mono); font-size: 24px; fill: var(--text-1); font-weight: 700; text-transform: uppercase; }
+        .axis { stroke: var(--text-1); stroke-width: 2; }
+        .grid { stroke: var(--border); stroke-width: 1.5; stroke-dasharray: 4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
+            <line x1="250" y1="80" x2="250" y2="320" class="axis" />
+            <line x1="250" y1="320" x2="950" y2="320" class="axis" />
+            <g transform="translate(250, 0)">
+                <line x1="175" y1="80" x2="175" y2="320" class="grid" /><text x="175" y="345" text-anchor="middle" class="tick-label">15%</text>
+                <line x1="350" y1="80" x2="350" y2="320" class="grid" /><text x="350" y="345" text-anchor="middle" class="tick-label">10%</text>
+                <line x1="525" y1="80" x2="525" y2="320" class="grid" /><text x="525" y="345" text-anchor="middle" class="tick-label">5%</text>
+            </g>
+            <g>
+                <text x="240" y="145" text-anchor="end" class="bar-label">Aggressive (200ms)</text>
+                <rect x="250" y="110" width="630" height="50" fill="var(--accent)" />
+                <text x="890" y="145" class="bar-val">18%</text>
+            </g>
+            <g>
+                <text x="240" y="205" text-anchor="end" class="bar-label">Balanced (500ms)</text>
+                <rect x="250" y="170" width="210" height="50" fill="var(--bg-2)" />
+                <text x="470" y="205" class="bar-val" style="fill: var(--text-1);">6%</text>
+            </g>
+            <g>
+                <text x="240" y="265" text-anchor="end" class="bar-label">Conservative (800ms)</text>
+                <rect x="250" y="230" width="35" height="50" fill="var(--bg-2)" />
+                <text x="295" y="265" class="bar-val" style="fill: var(--text-1);">1%</text>
+            </g>
+            <text x="500" y="40" text-anchor="middle" class="chart-title">VAD Patience vs False Turn-End Rate</text>
+        </svg>
+    </div>
+</body>
+</html>
