@@ -12,7 +12,7 @@ The failures are predictable. Agents loop indefinitely because a tool returned a
 
 This is about the error patterns that actually break agents in production, and the concrete patterns that fix them. I am focusing on LLM-based agents that use tools to interact with external systems. That covers the majority of production agents I have encountered.
 
-## The Core Problem: Agents Are Undefined State Machines
+## The core problem: agents are undefined state machines
 
 Most agent implementations look like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs the error and tells the LLM something went wrong.
 
@@ -20,7 +20,7 @@ This fails because tool failure leaves the agent in an undefined state. The LLM 
 
 The fix is to classify errors before deciding how to respond.
 
-## Classify Errors First
+## Classify errors first
 
 Three categories cover most cases.
 
@@ -54,7 +54,7 @@ def classify_error(error: Exception, response: httpx.Response = None) -> ErrorCa
     return ErrorCategory.AMBIGUOUS
 ```
 
-## Idempotent Tool Design
+## Idempotent tool design
 
 Agents retry. When a tool call fails ambiguously, the agent calls it again. If the tool is not idempotent, the retry causes duplicate side effects.
 
@@ -84,7 +84,7 @@ def execute_with_deduplication(tool_fn, operation_id: str, **kwargs):
     return result
 ```
 
-## Explicit State Transitions
+## Explicit state transitions
 
 When a tool fails, the agent needs an explicit recovery path, not just an error string. The code decides the recovery strategy. The LLM receives a clean state transition and acts accordingly.
 
@@ -111,7 +111,7 @@ def handle_tool_error(state: AgentState, error: Exception, context: dict) -> Age
     return AgentState.RECOVERING
 ```
 
-## Checkpointing for Long-Horizon Tasks
+## Checkpointing for long-horizon tasks
 
 Agents running dozens of steps need state persistence. Without it, a failure at step 40 restarts from step 1.
 
@@ -141,7 +141,7 @@ def restore_if_exists(task_id: str) -> dict | None:
 
 Write checkpoints after each successful step. On restart, restore from the most recent checkpoint before retrying.
 
-## Timeout Strategy
+## Timeout strategy
 
 LLM API timeouts are ambiguous. The request might have been processed. Set conservative timeouts and use idempotency keys.
 
@@ -163,7 +163,7 @@ def llm_call_with_idempotency(prompt: str, operation_id: str) -> str:
     return response.json()["completion"]
 ```
 
-## What Actually Breaks in Practice
+## What actually breaks in practice
 
 Five failure modes show up consistently across production incidents.
 
@@ -199,7 +199,7 @@ def logged_tool_call(tool_name: str, tool_fn, **kwargs):
         raise
 ```
 
-## The Non-Negotiables
+## The non-negotiables
 
 Five things will break your agent in production if you skip them.
 
