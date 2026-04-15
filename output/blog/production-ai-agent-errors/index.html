@@ -20,14 +20,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What Nobody Tells You About Error Handling in Production AI Agents | Ninad Pathak</title>
-  <meta name="description" content="The error patterns that actually break AI agents in production, and the patterns that fix them.">
+  <meta name="description" content="Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
   <meta property="og:title"       content="What Nobody Tells You About Error Handling in Production AI Agents">
-  <meta property="og:description" content="The error patterns that actually break AI agents in production, and the patterns that fix them.">
+  <meta property="og:description" content="Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/production-ai-agent-errors/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -74,7 +74,7 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "What Nobody Tells You About Error Handling in Production AI Agents",
-  "description": "The error patterns that actually break AI agents in production, and the patterns that fix them.",
+  "description": "Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
@@ -195,10 +195,10 @@
       <div class="post-meta">
         <span class="post-meta-date">Apr 16, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">5 min read</span>
+        <span class="post-meta-time">6 min read</span>
       </div>
       <h1 class="post-title">What Nobody Tells You About Error Handling in Production AI Agents</h1>
-      <p class="lead">The error patterns that actually break AI agents in production, and the patterns that fix them.</p>
+      <p class="lead">Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
         <span class="tag">devtools</span>
@@ -216,10 +216,10 @@
 <ul>
 <li><a href="#the-core-problem-agents-are-undefined-state-machines">The Core Problem: Agents Are Undefined State Machines</a></li>
 <li><a href="#classify-errors-first">Classify Errors First</a></li>
-<li><a href="#pattern-2-idempotent-tool-design">Pattern 2: Idempotent Tool Design</a></li>
-<li><a href="#pattern-3-explicit-state-transitions">Pattern 3: Explicit State Transitions</a></li>
-<li><a href="#pattern-4-checkpointing-for-long-horizon-tasks">Pattern 4: Checkpointing for Long-Horizon Tasks</a></li>
-<li><a href="#pattern-5-timeout-strategy">Pattern 5: Timeout Strategy</a></li>
+<li><a href="#idempotent-tool-design">Idempotent Tool Design</a></li>
+<li><a href="#explicit-state-transitions">Explicit State Transitions</a></li>
+<li><a href="#checkpointing-for-long-horizon-tasks">Checkpointing for Long-Horizon Tasks</a></li>
+<li><a href="#timeout-strategy">Timeout Strategy</a></li>
 <li><a href="#what-actually-breaks-in-practice">What Actually Breaks in Practice</a></li>
 <li><a href="#the-non-negotiables">The Non-Negotiables</a></li>
 </ul>
@@ -227,17 +227,18 @@
 
       </nav>
       <div class="post-content">
-        <p>AI agents fail in predictable ways. After two years of running them in production, the error patterns are consistent across teams and use cases. This article covers the patterns that actually break systems and the concrete fixes.</p>
-<p>The most common failures: agents looping on unexpected tool output, silently dropping steps when APIs throttle, and corrupting state on non-idempotent retries. These are not edge cases. Every team running agents hits all of them.</p>
+        <p>After two years of running AI agents in production, here is what I know: error handling is the difference between a system that survives reality and one that falls over the moment something goes wrong. The glamorous part is reasoning and tool use. The unglamorous part, the part that keeps your on-call phone from lighting up at 2 AM, is error handling.</p>
+<p>The failures are predictable. Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. Every team I know running agents has hit some version of all three.</p>
+<p>This is about the error patterns that actually break agents in production, and the concrete patterns that fix them. I am focusing on LLM-based agents that use tools to interact with external systems. That covers the majority of production agents I have encountered.</p>
 <h2 id="the-core-problem-agents-are-undefined-state-machines">The Core Problem: Agents Are Undefined State Machines</h2>
-<p>Most agent implementations look like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs and tells the LLM something went wrong.</p>
-<p>This fails because tool failure leaves the agent in an undefined state. The LLM decided to call that tool based on everything it knew. Returning an error message leaves the LLM to decide what happens next. It might retry the same tool, try a different tool that assumes the first succeeded, or give up entirely. None of these are predictable.</p>
-<p>Fix this by classifying errors before deciding how to respond.</p>
+<p>Most agent implementations look like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs the error and tells the LLM something went wrong.</p>
+<p>This fails because tool failure leaves the agent in an undefined state. The LLM decided to call that tool based on everything it knew. Returning an error string leaves the LLM to improvise recovery. Sometimes it recovers. Often it retries the same tool with slightly different arguments. Occasionally it calls a completely different tool that assumes the first succeeded, and now you have a cascading failure that is hard to trace back.</p>
+<p>The fix is to classify errors before deciding how to respond.</p>
 <h2 id="classify-errors-first">Classify Errors First</h2>
 <p>Three categories cover most cases.</p>
-<p><strong>Transient</strong>: temporary failures like timeouts, rate limits, overloaded servers. Candidates for retry with backoff.</p>
-<p><strong>Permanent</strong>: missing parameters, invalid API keys, nonexistent resources. Retrying wastes time and causes cascading failures. Fail fast.</p>
-<p><strong>Ambiguous</strong>: timeouts where you do not know if the server processed the request. The hardest category. Requires idempotency-aware retry logic.</p>
+<p><strong>Transient</strong>: timeouts, rate limits, overloaded servers. These are candidates for retry with backoff.</p>
+<p><strong>Permanent</strong>: missing parameters, invalid API keys, nonexistent resources. Retrying these wastes time and causes cascading failures. Fail fast.</p>
+<p><strong>Ambiguous</strong>: the request timed out, but you do not know if the server processed it. This is the hardest category. It requires idempotency-aware retry logic.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <span class="kn">import</span> <span class="nn">httpx</span>
 
@@ -261,14 +262,14 @@
     <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">AMBIGUOUS</span>
 </code></pre></div>
 
-<h2 id="pattern-2-idempotent-tool-design">Pattern 2: Idempotent Tool Design</h2>
-<p>Agents retry. When a tool call fails ambiguously, the agent might call it again. If the tool is not idempotent, the retry causes duplicate side effects.</p>
+<h2 id="idempotent-tool-design">Idempotent Tool Design</h2>
+<p>Agents retry. When a tool call fails ambiguously, the agent calls it again. If the tool is not idempotent, the retry causes duplicate side effects.</p>
 <p>Design tools to be safe to call twice.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Bad: creates a new record on every call</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Bad: creates a new record every time</span>
 <span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">api</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">})</span>
 
-<span class="c1"># Good: checks if user exists first</span>
+<span class="c1"># Good: checks for existing user first</span>
 <span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="n">existing</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/users?email=</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">existing</span><span class="p">:</span>
@@ -276,17 +277,17 @@
     <span class="k">return</span> <span class="n">api</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">})</span>
 </code></pre></div>
 
-<p>For tools that cannot be made idempotent, use a unique operation ID.</p>
+<p>For tools that cannot be made naturally idempotent, use a deduplication layer.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">execute_with_deduplication</span><span class="p">(</span><span class="n">tool_fn</span><span class="p">,</span> <span class="n">operation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">cache</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">operation_id</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">operation_id</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">tool_fn</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">operation_id</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">operation_id</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
 
-<h2 id="pattern-3-explicit-state-transitions">Pattern 3: Explicit State Transitions</h2>
-<p>When a tool fails, the agent needs an explicit recovery path, not just an error string.</p>
+<h2 id="explicit-state-transitions">Explicit State Transitions</h2>
+<p>When a tool fails, the agent needs an explicit recovery path, not just an error string. The code decides the recovery strategy. The LLM receives a clean state transition and acts accordingly.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AgentState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">RUNNING</span> <span class="o">=</span> <span class="s2">&quot;running&quot;</span>
     <span class="n">WAITING_ON_RETRY</span> <span class="o">=</span> <span class="s2">&quot;waiting_on_retry&quot;</span>
@@ -304,16 +305,16 @@
             <span class="k">return</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">FAILED</span>
         <span class="n">context</span><span class="p">[</span><span class="s2">&quot;retry_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;retry_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">WAITING_ON_RETRY</span>
-    <span class="c1"># Ambiguous: checkpoint state before retry</span>
+    <span class="c1"># Ambiguous: checkpoint before retry</span>
     <span class="n">checkpoint_state</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">RECOVERING</span>
 </code></pre></div>
 
-<p>The LLM does not decide recovery strategy. The code does. The LLM receives a clean state transition and acts accordingly.</p>
-<h2 id="pattern-4-checkpointing-for-long-horizon-tasks">Pattern 4: Checkpointing for Long-Horizon Tasks</h2>
-<p>Agents that run dozens of steps need state persistence. Without it, a failure at step 30 restarts from step 1.</p>
+<h2 id="checkpointing-for-long-horizon-tasks">Checkpointing for Long-Horizon Tasks</h2>
+<p>Agents running dozens of steps need state persistence. Without it, a failure at step 40 restarts from step 1.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">def</span> <span class="nf">checkpoint_state</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
     <span class="n">checkpoint</span> <span class="o">=</span> <span class="p">{</span>
@@ -322,7 +323,8 @@
         <span class="s2">&quot;tool_results&quot;</span><span class="p">:</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tool_results&quot;</span><span class="p">),</span>
         <span class="s2">&quot;checkpointed_at&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
     <span class="p">}</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tmp/agent_checkpoint_</span><span class="si">{</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/tmp/agent_checkpoint_</span><span class="si">{</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.json&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">restore_if_exists</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -334,8 +336,8 @@
 </code></pre></div>
 
 <p>Write checkpoints after each successful step. On restart, restore from the most recent checkpoint before retrying.</p>
-<h2 id="pattern-5-timeout-strategy">Pattern 5: Timeout Strategy</h2>
-<p>LLM API timeouts are ambiguous by definition. The request might have been processed. Set timeouts conservatively and use idempotency keys.</p>
+<h2 id="timeout-strategy">Timeout Strategy</h2>
+<p>LLM API timeouts are ambiguous. The request might have been processed. Set conservative timeouts and use idempotency keys.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
@@ -354,16 +356,17 @@
 </code></pre></div>
 
 <h2 id="what-actually-breaks-in-practice">What Actually Breaks in Practice</h2>
-<p>Based on production incidents across teams:</p>
-<p><strong>Context window exhaustion</strong>: The agent accumulates tool results until the context is full. Set a hard limit on total tool call history and fail explicitly when approaching the limit.</p>
-<p><strong>Tool schema drift</strong>: The LLM calls a tool with parameters that match an older version of the schema. Version your tool schemas and validate inputs against the expected version.</p>
-<p><strong>Partial failure in parallel tool calls</strong>: The agent calls multiple tools simultaneously. Some succeed, some fail. Track each independently and do not assume all-or-nothing.</p>
-<p><strong>Observability gaps</strong>: Without structured logs of tool inputs and outputs, debugging a failed agent run is guesswork. Log every tool call with its input, output, latency, and error.</p>
+<p>Five failure modes show up consistently across production incidents.</p>
+<p><strong>Context window exhaustion</strong>: the agent accumulates tool results until the context is full. Set a hard limit on total tool call history and fail explicitly when approaching the limit.</p>
+<p><strong>Tool schema drift</strong>: the LLM calls a tool with parameters that match an older version of the schema. Version your tool schemas and validate inputs against the expected version before executing.</p>
+<p><strong>Partial failure in parallel tool calls</strong>: the agent calls multiple tools simultaneously. Some succeed, some fail. Track each independently and do not assume all-or-nothing semantics.</p>
+<p><strong>Ambiguous timeouts</strong>: a timeout fires but the server might have processed the request. If the operation is not idempotent, you risk duplication. Always use idempotency keys for non-idempotent operations.</p>
+<p><strong>Observability gaps</strong>: without structured logs of tool inputs and outputs, debugging a failed agent run is archaeology. Log every tool call with its input, output, latency, and error.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">logged_tool_call</span><span class="p">(</span><span class="n">tool_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tool_fn</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">tool_fn</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tool_call&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tool_call&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span>
             <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="n">tool_name</span><span class="p">,</span>
             <span class="s2">&quot;latency_ms&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
             <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
@@ -371,7 +374,7 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="n">result</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tool_call&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;tool_call&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span>
             <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="n">tool_name</span><span class="p">,</span>
             <span class="s2">&quot;latency_ms&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
             <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
@@ -382,11 +385,11 @@
 
 <h2 id="the-non-negotiables">The Non-Negotiables</h2>
 <p>Five things will break your agent in production if you skip them.</p>
-<p>First, classify errors before deciding how to respond. Returning raw errors to the LLM is not error handling.</p>
-<p>Second, design tools to be idempotent or use deduplication. Non-idempotent tools will be called twice.</p>
-<p>Third, checkpoint long-horizon tasks. A failure at step 40 that restarts from step 1 is not acceptable.</p>
-<p>Fourth, set explicit timeout and retry policies. Do not rely on defaults.</p>
-<p>Fifth, log every tool call with inputs, outputs, latency, and errors. Without observability, debugging is archaeology.</p>
+<p>Classify errors before deciding how to respond. Returning raw errors to the LLM is not error handling.</p>
+<p>Design tools to be idempotent or use a deduplication layer. Non-idempotent tools will be called twice.</p>
+<p>Checkpoint long-horizon tasks. A failure at step 40 that restarts from step 1 is not acceptable.</p>
+<p>Set explicit timeout and retry policies. Default timeouts are not tuned for your use case.</p>
+<p>Log every tool call with inputs, outputs, latency, and errors. Without observability, debugging is archaeology.</p>
 <p>These patterns apply regardless of which LLM or framework you use. The error modes are the same across providers.</p>
       </div>
     </div>

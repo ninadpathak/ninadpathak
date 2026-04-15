@@ -14,7 +14,7 @@
     <item>
       <title>What Nobody Tells You About Error Handling in Production AI Agents</title>
       <link>https://ninadpathak.com/blog/production-ai-agent-errors/</link>
-      <description>The error patterns that actually break AI agents in production, and the patterns that fix them.</description>
+      <description>Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.</description>
       <pubDate>Apr 16, 2026</pubDate>
     </item>
     <item>
