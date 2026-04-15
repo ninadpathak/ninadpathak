@@ -12,6 +12,12 @@
       <pubDate>Apr 16, 2026</pubDate>
     </item>
     <item>
+      <title>What Nobody Tells You About Error Handling in Production AI Agents</title>
+      <link>https://ninadpathak.com/blog/production-ai-agent-errors/</link>
+      <description>Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.</description>
+      <pubDate>Apr 16, 2026</pubDate>
+    </item>
+    <item>
       <title>Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache Eviction</title>
       <link>https://ninadpathak.com/blog/kv-cache-eviction-accuracy/</link>
       <description>VRAM is too expensive to waste on low-attention tokens. I benchmarked KV cache eviction strategies to treat LLM context like a managed heap, reaching 90% pruning with zero recall loss.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/semantic-caching-rag-optimization/</link>
       <description>Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.</description>
       <pubDate>Mar 28, 2026</pubDate>
-    </item>
-    <item>
-      <title>Structured Outputs with Llms: Json Mode, Function Calling, and When to Use Each</title>
-      <link>https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/</link>
-      <description>JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.</description>
-      <pubDate>Mar 27, 2026</pubDate>
     </item>
   </channel>
 </rss>
