@@ -20,14 +20,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What Nobody Tells You About Error Handling in Production AI Agents | Ninad Pathak</title>
-  <meta name="description" content="Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.">
+  <meta name="description" content="The error patterns that actually break AI agents in production, and the patterns that fix them.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
   <meta property="og:title"       content="What Nobody Tells You About Error Handling in Production AI Agents">
-  <meta property="og:description" content="Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.">
+  <meta property="og:description" content="The error patterns that actually break AI agents in production, and the patterns that fix them.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/production-ai-agent-errors/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -74,7 +74,7 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "What Nobody Tells You About Error Handling in Production AI Agents",
-  "description": "Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.",
+  "description": "The error patterns that actually break AI agents in production, and the patterns that fix them.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
@@ -195,10 +195,10 @@
       <div class="post-meta">
         <span class="post-meta-date">Apr 16, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">12 min read</span>
+        <span class="post-meta-time">5 min read</span>
       </div>
       <h1 class="post-title">What Nobody Tells You About Error Handling in Production AI Agents</h1>
-      <p class="lead">Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.</p>
+      <p class="lead">The error patterns that actually break AI agents in production, and the patterns that fix them.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
         <span class="tag">devtools</span>
@@ -214,33 +214,31 @@
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#the-fundamental-problem-agents-are-state-machines-nobody-designed">The Fundamental Problem: Agents Are State Machines Nobody Designed</a></li>
-<li><a href="#pattern-1-classify-errors-before-deciding-what-to-do">Pattern 1: Classify Errors Before Deciding What to Do</a></li>
-<li><a href="#pattern-2-retry-with-exponential-backoff-and-jitter-but-only-for-the-right-errors">Pattern 2: Retry with Exponential Backoff and Jitter, But Only for the Right Errors</a></li>
-<li><a href="#pattern-3-circuit-breakers-prevent-cascading-failures">Pattern 3: Circuit Breakers Prevent Cascading Failures</a></li>
-<li><a href="#pattern-4-structured-error-context-for-the-llm">Pattern 4: Structured Error Context for the LLM</a></li>
-<li><a href="#pattern-5-timeout-everything-and-set-the-right-values">Pattern 5: Timeout Everything, and Set the Right Values</a></li>
-<li><a href="#pattern-6-graceful-degradation-over-hard-failures">Pattern 6: Graceful Degradation Over Hard Failures</a></li>
-<li><a href="#what-actually-matters-in-production">What Actually Matters in Production</a></li>
+<li><a href="#the-core-problem-agents-are-undefined-state-machines">The Core Problem: Agents Are Undefined State Machines</a></li>
+<li><a href="#classify-errors-first">Classify Errors First</a></li>
+<li><a href="#pattern-2-idempotent-tool-design">Pattern 2: Idempotent Tool Design</a></li>
+<li><a href="#pattern-3-explicit-state-transitions">Pattern 3: Explicit State Transitions</a></li>
+<li><a href="#pattern-4-checkpointing-for-long-horizon-tasks">Pattern 4: Checkpointing for Long-Horizon Tasks</a></li>
+<li><a href="#pattern-5-timeout-strategy">Pattern 5: Timeout Strategy</a></li>
+<li><a href="#what-actually-breaks-in-practice">What Actually Breaks in Practice</a></li>
+<li><a href="#the-non-negotiables">The Non-Negotiables</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>After running AI agents in production for two years, I can tell you that the error handling is the difference between a system that survives contact with reality and one that falls over the moment something goes slightly wrong. The glamorous part of AI agents is the reasoning and tool use. The unglamorous part, the part that keeps your on-call phone from lighting up at 2 AM, is error handling.</p>
-<p>I have seen agents loop indefinitely because a tool returned an unexpected format. I have seen agents silently fail to complete multi-step workflows because a downstream API was throttled for 200 milliseconds. I have seen agents corrupt state because they retried a non-idempotent operation without checking whether it had already succeeded. These are not theoretical problems. Every team I know that runs agents in production has hit some version of all of them.</p>
-<p>This article is about the error patterns that actually break AI agents in production, and the concrete patterns that fix them. I am focusing on agents built on LLMs that use tools to interact with external systems. That covers the majority of production agents I have encountered.</p>
-<h2 id="the-fundamental-problem-agents-are-state-machines-nobody-designed">The Fundamental Problem: Agents Are State Machines Nobody Designed</h2>
-<p>The first thing to understand is that an AI agent is a state machine, even though nobody writes it that way. An agent has a current state (the conversation history, the tool results so far, any scratchpad memory), it receives inputs (user messages, tool responses, time), and it transitions to new states by deciding which tool to call next. When you think about it this way, error handling becomes a state machine design problem, which is a domain where software engineers have decades of established practice.</p>
-<p>The problem is that most agent implementations do not think about it this way at all. The agent loop looks something like this: receive a message, call the LLM, parse the tool call, execute the tool, append the result, repeat. Error handling typically means wrapping the tool execution in a try-except that logs the error and tells the LLM something went wrong. That is insufficient, and here is why.</p>
-<p>When a tool call fails, the agent's state is now inconsistent. The LLM decided to call that tool based on everything it knew up to that point. If the tool call fails and you just return an error message, the LLM has to decide what to do with that information. Sometimes it recovers gracefully. Often it tries the same tool again with slightly different arguments. Occasionally it calls a completely different tool that assumes the first tool succeeded, and now you have a cascading failure that is hard to debug.</p>
-<p>The core issue is that error handling in agents requires you to think about which states are recoverable and which are not, and then design explicit transitions for both cases.</p>
-<h2 id="pattern-1-classify-errors-before-deciding-what-to-do">Pattern 1: Classify Errors Before Deciding What to Do</h2>
-<p>Not all errors are equal. The single most impactful change you can make to your agent's error handling is to classify errors into categories before deciding how to respond. I use three categories that cover the vast majority of cases.</p>
-<p><strong>Transient errors</strong> are temporary. A network timeout, a rate limit, a server that is briefly overloaded. These are candidates for retry, but retries must be handled carefully, which I will get to. <strong>Permanent errors</strong> are things that will not resolve on their own. A missing parameter, an invalid API key, a resource that does not exist. Retrying these wastes time and risks cascading failures. <strong>Ambiguous errors</strong> are the tricky ones. The request timed out. Did the server process it or not? The API returned a 500. Was it a data corruption or a load issue? These require idempotency-aware retry logic.</p>
-<p>Here is a practical classification function that I use as a starting point.</p>
+        <p>AI agents fail in predictable ways. After two years of running them in production, the error patterns are consistent across teams and use cases. This article covers the patterns that actually break systems and the concrete fixes.</p>
+<p>The most common failures: agents looping on unexpected tool output, silently dropping steps when APIs throttle, and corrupting state on non-idempotent retries. These are not edge cases. Every team running agents hits all of them.</p>
+<h2 id="the-core-problem-agents-are-undefined-state-machines">The Core Problem: Agents Are Undefined State Machines</h2>
+<p>Most agent implementations look like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs and tells the LLM something went wrong.</p>
+<p>This fails because tool failure leaves the agent in an undefined state. The LLM decided to call that tool based on everything it knew. Returning an error message leaves the LLM to decide what happens next. It might retry the same tool, try a different tool that assumes the first succeeded, or give up entirely. None of these are predictable.</p>
+<p>Fix this by classifying errors before deciding how to respond.</p>
+<h2 id="classify-errors-first">Classify Errors First</h2>
+<p>Three categories cover most cases.</p>
+<p><strong>Transient</strong>: temporary failures like timeouts, rate limits, overloaded servers. Candidates for retry with backoff.</p>
+<p><strong>Permanent</strong>: missing parameters, invalid API keys, nonexistent resources. Retrying wastes time and causes cascading failures. Fail fast.</p>
+<p><strong>Ambiguous</strong>: timeouts where you do not know if the server processed the request. The hardest category. Requires idempotency-aware retry logic.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 <span class="kn">import</span> <span class="nn">httpx</span>
 
 <span class="k">class</span> <span class="nc">ErrorCategory</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -248,207 +246,148 @@
     <span class="n">PERMANENT</span> <span class="o">=</span> <span class="s2">&quot;permanent&quot;</span>
     <span class="n">AMBIGUOUS</span> <span class="o">=</span> <span class="s2">&quot;ambiguous&quot;</span>
 
-<span class="k">def</span> <span class="nf">classify_error</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">httpx</span><span class="o">.</span><span class="n">Response</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorCategory</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">classify_error</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Response</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorCategory</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">httpx</span><span class="o">.</span><span class="n">TimeoutException</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">AMBIGUOUS</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">httpx</span><span class="o">.</span><span class="n">ConnectError</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">TRANSIENT</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">httpx</span><span class="o">.</span><span class="n">HTTPStatusError</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">status</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
-            <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">429</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">TRANSIENT</span>
-            <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">401</span> <span class="ow">or</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">403</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">PERMANENT</span>
-            <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">PERMANENT</span>
-            <span class="k">if</span> <span class="mi">500</span> <span class="o">&lt;=</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">600</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">TRANSIENT</span>
-        <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">AMBIGUOUS</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">PERMANENT</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">httpx</span><span class="o">.</span><span class="n">HTTPStatusError</span><span class="p">)</span> <span class="ow">and</span> <span class="n">response</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">429</span><span class="p">,</span> <span class="mi">502</span><span class="p">,</span> <span class="mi">503</span><span class="p">,</span> <span class="mi">504</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">TRANSIENT</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">401</span><span class="p">,</span> <span class="mi">403</span><span class="p">,</span> <span class="mi">404</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">PERMANENT</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&gt;=</span> <span class="mi">500</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">AMBIGUOUS</span>
     <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">AMBIGUOUS</span>
 </code></pre></div>
 
-<p>This is a simplified version. Your production code will need to handle your specific error types, but the principle is the same. Classify before you react.</p>
-<h2 id="pattern-2-retry-with-exponential-backoff-and-jitter-but-only-for-the-right-errors">Pattern 2: Retry with Exponential Backoff and Jitter, But Only for the Right Errors</h2>
-<p>Once you have classified your error, retry logic follows naturally. Transient errors should be retried with backoff. Permanent errors should not be retried at all. Ambiguous errors require idempotency-aware retry logic, which is the hardest part.</p>
-<p>For backoff, the standard approach is exponential backoff with jitter. The formula is <code>min(base * (2 ** attempt), max_delay) + random_jitter</code>. A base of 1 second and a max delay of 60 seconds works for most APIs.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">time</span>
+<h2 id="pattern-2-idempotent-tool-design">Pattern 2: Idempotent Tool Design</h2>
+<p>Agents retry. When a tool call fails ambiguously, the agent might call it again. If the tool is not idempotent, the retry causes duplicate side effects.</p>
+<p>Design tools to be safe to call twice.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Bad: creates a new record on every call</span>
+<span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">api</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">})</span>
 
-<span class="k">def</span> <span class="nf">retry_with_backoff</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">max_attempts</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">max_delay</span><span class="o">=</span><span class="mf">60.0</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">func</span><span class="p">()</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">category</span> <span class="o">=</span> <span class="n">classify_error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">category</span> <span class="o">==</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">PERMANENT</span><span class="p">:</span>
-                <span class="k">raise</span>
-            <span class="k">if</span> <span class="n">attempt</span> <span class="o">==</span> <span class="n">max_attempts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">raise</span>
-            <span class="n">delay</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">base</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span><span class="p">),</span> <span class="n">max_delay</span><span class="p">)</span>
-            <span class="n">jitter</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span> <span class="o">+</span> <span class="n">jitter</span><span class="p">)</span>
+<span class="c1"># Good: checks if user exists first</span>
+<span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">existing</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/users?email=</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">existing</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">existing</span>
+    <span class="k">return</span> <span class="n">api</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">})</span>
 </code></pre></div>
 
-<p>The jitter is important. Without it, all clients that hit a transient failure will retry at the same time, which can turn a brief outage into a sustained thundering herd problem.</p>
-<p>Now for the hard case: ambiguous errors. If a request to your payment API times out, you do not know whether the server processed the charge or not. Retrying immediately could charge the customer twice. The standard solution is idempotency keys. Generate a unique key for the operation, send it with the request, and if the request times out, retry with the same key. The server stores the result keyed by the idempotency key and returns the cached result on duplicate requests.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">uuid</span>
-
-<span class="k">def</span> <span class="nf">call_with_idempotency</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">max_attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">idempotency_key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Idempotency-Key&quot;</span><span class="p">:</span> <span class="n">idempotency_key</span><span class="p">}</span>
-    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">category</span> <span class="o">=</span> <span class="n">classify_error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">category</span> <span class="o">!=</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">AMBIGUOUS</span><span class="p">:</span>
-                <span class="k">raise</span>
-            <span class="k">if</span> <span class="n">attempt</span> <span class="o">==</span> <span class="n">max_attempts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">raise</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span><span class="p">)</span>
+<p>For tools that cannot be made idempotent, use a unique operation ID.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">execute_with_deduplication</span><span class="p">(</span><span class="n">tool_fn</span><span class="p">,</span> <span class="n">operation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">cache</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">operation_id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">operation_id</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">tool_fn</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">operation_id</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
 
-<p>Not every API supports idempotency keys. For those that do not, you have to decide whether the cost of a potential duplicate is worth the cost of a failure. For payments, it is almost never worth the risk. For a background enrichment job, it might be fine to occasionally run twice. Know your blast radius.</p>
-<h2 id="pattern-3-circuit-breakers-prevent-cascading-failures">Pattern 3: Circuit Breakers Prevent Cascading Failures</h2>
-<p>Retry logic helps when failures are rare. When failures become common, retries make things worse. Every client that keeps hammering a failing service adds load, which slows the service more, which causes more timeouts, which causes more retries. The circuit breaker pattern breaks this loop.</p>
-<p>The idea is simple. Track the failure rate for each downstream service. If the failure rate exceeds a threshold, "open" the circuit: stop making requests to that service for a period of time and immediately return an error to the caller. After the timeout, allow a single request through. If it succeeds, "close" the circuit and restore normal operation. If it fails, open the circuit again.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<h2 id="pattern-3-explicit-state-transitions">Pattern 3: Explicit State Transitions</h2>
+<p>When a tool fails, the agent needs an explicit recovery path, not just an error string.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AgentState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">RUNNING</span> <span class="o">=</span> <span class="s2">&quot;running&quot;</span>
+    <span class="n">WAITING_ON_RETRY</span> <span class="o">=</span> <span class="s2">&quot;waiting_on_retry&quot;</span>
+    <span class="n">RECOVERING</span> <span class="o">=</span> <span class="s2">&quot;recovering&quot;</span>
+    <span class="n">FAILED</span> <span class="o">=</span> <span class="s2">&quot;failed&quot;</span>
 
-<span class="k">class</span> <span class="nc">CircuitState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="n">CLOSED</span> <span class="o">=</span> <span class="s2">&quot;closed&quot;</span>
-    <span class="n">OPEN</span> <span class="o">=</span> <span class="s2">&quot;open&quot;</span>
-    <span class="n">HALF_OPEN</span> <span class="o">=</span> <span class="s2">&quot;half_open&quot;</span>
-
-<span class="k">class</span> <span class="nc">CircuitBreaker</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">failure_threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">failure_threshold</span> <span class="o">=</span> <span class="n">failure_threshold</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">CircuitState</span><span class="o">.</span><span class="n">CLOSED</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">success_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_failure_time</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">total_calls</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">CircuitState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_failure_time</span><span class="p">:</span>
-                <span class="n">elapsed</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_failure_time</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">elapsed</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">CircuitState</span><span class="o">.</span><span class="n">HALF_OPEN</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Circuit breaker is open&quot;</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_on_success</span><span class="p">()</span>
-            <span class="k">return</span> <span class="n">result</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_on_failure</span><span class="p">()</span>
-            <span class="k">raise</span>
-
-    <span class="k">def</span> <span class="nf">_on_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">CircuitState</span><span class="o">.</span><span class="n">HALF_OPEN</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">CircuitState</span><span class="o">.</span><span class="n">CLOSED</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">total_calls</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="k">def</span> <span class="nf">_on_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_failure_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">total_calls</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">CircuitState</span><span class="o">.</span><span class="n">HALF_OPEN</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">CircuitState</span><span class="o">.</span><span class="n">OPEN</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_calls</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
-            <span class="n">failure_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_calls</span>
-            <span class="k">if</span> <span class="n">failure_rate</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">failure_threshold</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">CircuitState</span><span class="o">.</span><span class="n">OPEN</span>
+<span class="k">def</span> <span class="nf">handle_tool_error</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentState</span><span class="p">:</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">classify_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">category</span> <span class="o">==</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">PERMANENT</span><span class="p">:</span>
+        <span class="n">context</span><span class="p">[</span><span class="s2">&quot;failure_reason&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">FAILED</span>
+    <span class="k">if</span> <span class="n">category</span> <span class="o">==</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">TRANSIENT</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;retry_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">context</span><span class="p">[</span><span class="s2">&quot;failure_reason&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Max retries exceeded: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">return</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">FAILED</span>
+        <span class="n">context</span><span class="p">[</span><span class="s2">&quot;retry_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;retry_count&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">WAITING_ON_RETRY</span>
+    <span class="c1"># Ambiguous: checkpoint state before retry</span>
+    <span class="n">checkpoint_state</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">RECOVERING</span>
 </code></pre></div>
 
-<p>This is a simplified version. Production circuit breakers also need to handle partial failures (where the downstream returned a response but it was an error response), sliding window failure tracking instead of simple counters, and programmatic reset APIs. The Pybreaker library handles these cases well if you are working in Python.</p>
-<p>The important insight is that circuit breakers protect your agent from downstream services, but they also protect downstream services from your agent. When a service is struggling, the worst thing you can do is keep sending it requests. Circuit breakers are how you stop.</p>
-<h2 id="pattern-4-structured-error-context-for-the-llm">Pattern 4: Structured Error Context for the LLM</h2>
-<p>When a tool fails and you tell the LLM, what you tell it matters enormously. A raw exception message is almost useless. The LLM does not know which tool was being called, whether this is a common failure mode for this tool, or whether there is a recovery path.</p>
-<p>I use a structured error context object that gets appended to the agent's context alongside the error.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<p>The LLM does not decide recovery strategy. The code does. The LLM receives a clean state transition and acts accordingly.</p>
+<h2 id="pattern-4-checkpointing-for-long-horizon-tasks">Pattern 4: Checkpointing for Long-Horizon Tasks</h2>
+<p>Agents that run dozens of steps need state persistence. Without it, a failure at step 30 restarts from step 1.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">ToolErrorContext</span><span class="p">:</span>
-    <span class="n">tool_name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">error_type</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">is_retryable</span><span class="p">:</span> <span class="nb">bool</span>
-    <span class="n">retry_after_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">suggested_alternatives</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">incident_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">def</span> <span class="nf">checkpoint_state</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="n">checkpoint</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;current_step&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;history&quot;</span><span class="p">:</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message_history&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;tool_results&quot;</span><span class="p">:</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tool_results&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;checkpointed_at&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tmp/agent_checkpoint_</span><span class="si">{</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">format_error_for_llm</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="n">ToolErrorContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="sa">f</span><span class="s2">&quot;Tool &#39;</span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">&#39; failed.&quot;</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s2">&quot;Error type: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">error_type</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s2">&quot;Message: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">error_message</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
-    <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">is_retryable</span><span class="p">:</span>
-        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;This error is retryable.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">retry_after_seconds</span><span class="p">:</span>
-            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended wait: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">retry_after_seconds</span><span class="si">}</span><span class="s2"> seconds.&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;This error is not retryable.&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">suggested_alternatives</span><span class="p">:</span>
-        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Consider alternatives: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">suggested_alternatives</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">incident_id</span><span class="p">:</span>
-        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reference: </span><span class="si">{</span><span class="n">error</span><span class="o">.</span><span class="n">incident_id</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">restore_if_exists</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/tmp/agent_checkpoint_</span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2">.json&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div>
 
-<p>This is what the LLM sees when a tool fails. It knows the tool name, the error type, whether to retry, how long to wait, and what alternatives exist. With this context, the LLM can make an informed decision about whether to retry, try a different tool, or escalate to the user. Without it, the LLM is guessing.</p>
-<p>The <code>suggested_alternatives</code> field is particularly useful. If your primary search tool is rate-limited, you can suggest an alternative search endpoint. If the database is unavailable, you can suggest the cache as a fallback. You are encoding domain knowledge into the error context so the LLM does not have to rediscover it every time.</p>
-<h2 id="pattern-5-timeout-everything-and-set-the-right-values">Pattern 5: Timeout Everything, and Set the Right Values</h2>
-<p>LLM calls are one of the most common sources of unexpected hangs in agent systems. The default timeout for most HTTP clients is either very long (30 seconds to no timeout) or undefined. For LLM API calls, you need an explicit timeout that accounts for both the model's latency and the request's complexity.</p>
-<p>For most gpt-4 class models, 60 seconds is a reasonable timeout for a single turn. For o1 class models that do internal reasoning, 120 seconds is more appropriate. For streaming responses, you need a timeout for the first token and a separate timeout for the total response.</p>
-<p>The key insight is that a timeout is not a failure, it is an error category. You need to decide what a timeout means for your agent. Does it mean the model is slow (retry)? Does it mean the model is stuck in a loop (do not retry)? Does it mean the request is too complex (break it into smaller steps)? Your timeout handling should be informed by which of these is most likely.</p>
-<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">call_llm_with_timeout</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">openai_client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-            <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
-            <span class="n">messages</span><span class="o">=</span><span class="n">messages</span>
-        <span class="p">)</span>
+<p>Write checkpoints after each successful step. On restart, restore from the most recent checkpoint before retrying.</p>
+<h2 id="pattern-5-timeout-strategy">Pattern 5: Timeout Strategy</h2>
+<p>LLM API timeouts are ambiguous by definition. The request might have been processed. Set timeouts conservatively and use idempotency keys.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="n">httpx</span><span class="o">.</span><span class="n">Timeout</span><span class="p">(</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">connect</span><span class="o">=</span><span class="mf">5.0</span><span class="p">),</span>
+    <span class="n">follow_redirects</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">llm_call_with_idempotency</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">operation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Idempotency-Key&quot;</span><span class="p">:</span> <span class="n">operation_id</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+        <span class="s2">&quot;https://api.llm.provider/v1/completions&quot;</span><span class="p">,</span>
+        <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">},</span>
+        <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;completion&quot;</span><span class="p">]</span>
 </code></pre></div>
 
-<p>For tool calls, the timeout depends on the tool. A search API call might need 10 seconds. A database query might need 5 seconds. A file read might need 2 seconds. Set these explicitly based on what you know about your tools, not based on defaults.</p>
-<h2 id="pattern-6-graceful-degradation-over-hard-failures">Pattern 6: Graceful Degradation Over Hard Failures</h2>
-<p>Production agents should have a concept of "good enough" responses. If your agent is designed to search three sources and synthesize the results, and one source is unavailable, it should still search the other two and note that one source failed. This is graceful degradation.</p>
-<p>Hard failures happen when your agent has a single point of failure with no fallback. If the LLM call fails, the whole agent fails. If one tool fails, the whole workflow fails. Graceful degradation means designing your agent with fallbacks from the start.</p>
-<p>The implementation pattern I use is a required-vs-optional distinction for tools. When defining the agent's available tools, mark some as required and others as optional. If a required tool fails, the agent should escalate to the user or return an error state. If an optional tool fails, the agent should continue without it and note the failure in its response.</p>
-<div class="highlight"><pre><span></span><code><span class="n">TOOL_DEFINITIONS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;calculate&quot;</span><span class="p">,</span> <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;fetch_metadata&quot;</span><span class="p">,</span> <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;log_event&quot;</span><span class="p">,</span> <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
-<span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">execute_tools</span><span class="p">(</span><span class="n">tool_calls</span><span class="p">,</span> <span class="n">required_tool_names</span><span class="p">):</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">tool_call</span> <span class="ow">in</span> <span class="n">tool_calls</span><span class="p">:</span>
-        <span class="n">tool_name</span> <span class="o">=</span> <span class="n">tool_call</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">results</span><span class="p">[</span><span class="n">tool_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">tool_call</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">tool_name</span> <span class="ow">in</span> <span class="n">required_tool_names</span><span class="p">:</span>
-                <span class="k">raise</span>
-            <span class="n">results</span><span class="p">[</span><span class="n">tool_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;failed&quot;</span><span class="p">}</span>
-    <span class="k">return</span> <span class="n">results</span>
+<h2 id="what-actually-breaks-in-practice">What Actually Breaks in Practice</h2>
+<p>Based on production incidents across teams:</p>
+<p><strong>Context window exhaustion</strong>: The agent accumulates tool results until the context is full. Set a hard limit on total tool call history and fail explicitly when approaching the limit.</p>
+<p><strong>Tool schema drift</strong>: The LLM calls a tool with parameters that match an older version of the schema. Version your tool schemas and validate inputs against the expected version.</p>
+<p><strong>Partial failure in parallel tool calls</strong>: The agent calls multiple tools simultaneously. Some succeed, some fail. Track each independently and do not assume all-or-nothing.</p>
+<p><strong>Observability gaps</strong>: Without structured logs of tool inputs and outputs, debugging a failed agent run is guesswork. Log every tool call with its input, output, latency, and error.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">logged_tool_call</span><span class="p">(</span><span class="n">tool_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tool_fn</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">tool_fn</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tool_call&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="n">tool_name</span><span class="p">,</span>
+            <span class="s2">&quot;latency_ms&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;input_params&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tool_call&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="n">tool_name</span><span class="p">,</span>
+            <span class="s2">&quot;latency_ms&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="p">})</span>
+        <span class="k">raise</span>
 </code></pre></div>
 
-<p>This is a simplified version. In practice, you need to propagate these partial failures through the agent's context so the LLM knows what happened and can respond appropriately.</p>
-<h2 id="what-actually-matters-in-production">What Actually Matters in Production</h2>
-<p>After two years of running agents in production, here is what I have learned. Error handling is not an afterthought. It is a first-class design concern that you need to think about before you deploy, not after your first incident.</p>
-<p>The patterns that matter most are the ones that prevent cascading failures: circuit breakers, timeouts, and idempotency-aware retry logic. The patterns that matter most for debugging are structured error context and classification. The patterns that matter most for reliability are graceful degradation and required-vs-optional tool designation.</p>
-<p>One more thing. Test your error handling. I do not mean unit tests for your error handling functions, though those are fine. I mean inject failures into your system in staging and watch what happens. Disable your LLM. Return 500s from your tools. Slow down your database. Your agent should handle all of these gracefully. If it does not, you have work to do before production.</p>
-<p>The agents that survive contact with reality are not the ones with the most sophisticated reasoning. They are the ones that fail gracefully, recover quickly, and give their users useful information when things go wrong. That is what error handling is for.</p>
+<h2 id="the-non-negotiables">The Non-Negotiables</h2>
+<p>Five things will break your agent in production if you skip them.</p>
+<p>First, classify errors before deciding how to respond. Returning raw errors to the LLM is not error handling.</p>
+<p>Second, design tools to be idempotent or use deduplication. Non-idempotent tools will be called twice.</p>
+<p>Third, checkpoint long-horizon tasks. A failure at step 40 that restarts from step 1 is not acceptable.</p>
+<p>Fourth, set explicit timeout and retry policies. Do not rely on defaults.</p>
+<p>Fifth, log every tool call with inputs, outputs, latency, and errors. Without observability, debugging is archaeology.</p>
+<p>These patterns apply regardless of which LLM or framework you use. The error modes are the same across providers.</p>
       </div>
     </div>
   </div>
