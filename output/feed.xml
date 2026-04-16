@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>RAG Evaluation Metrics: What Actually Matters</title>
+      <link>https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/</link>
+      <description>A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes.</description>
+      <pubDate>Apr 16, 2026</pubDate>
+    </item>
+    <item>
       <title>The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1 Voice Agent</title>
       <link>https://ninadpathak.com/blog/voice-ai-latency-gemini-benchmark/</link>
       <description>I built a sub-second latency voice assistant and profiled every millisecond of the Audio-to-Audio request/response loop on a MacBook Air M2. Here is the bottleneck analysis.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/hybrid-search-bm25-vector-search/</link>
       <description>Hybrid search combines BM25 sparse retrieval with dense vector search. Here's how reciprocal rank fusion works, what it costs, and when the combination actually beats either method alone.</description>
       <pubDate>Mar 29, 2026</pubDate>
-    </item>
-    <item>
-      <title>Semantic Caching: the Rag Optimization Nobody Talks About</title>
-      <link>https://ninadpathak.com/blog/semantic-caching-rag-optimization/</link>
-      <description>Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.</description>
-      <pubDate>Mar 28, 2026</pubDate>
     </item>
   </channel>
 </rss>

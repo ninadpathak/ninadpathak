@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG Evaluation Metrics: What Actually Matters | Ninad Pathak</title>
+  <meta name="description" content="A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="RAG Evaluation Metrics: What Actually Matters">
+  <meta property="og:description" content="A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "RAG Evaluation Metrics: What Actually Matters",
+  "description": "A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-16",
+  "dateModified": "2026-04-16",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "RAG Evaluation Metrics: What Actually Matters",
+      "item": "https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">RAG Evaluation Metrics: What Actually Matters</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 16, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">8 min read</span>
+      </div>
+      <h1 class="post-title">RAG Evaluation Metrics: What Actually Matters</h1>
+      <p class="lead">A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes.</p>
+      <div class="post-tags">
+        <span class="tag">rag</span>
+        <span class="tag">evaluation</span>
+        <span class="tag">llm</span>
+        <span class="tag">metrics</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-rag-evaluation-stack">The RAG Evaluation Stack</a></li>
+<li><a href="#metrics-that-look-good-but-mislead">Metrics That Look Good But Mislead</a></li>
+<li><a href="#building-a-practical-evaluation-pipeline">Building a Practical Evaluation Pipeline</a></li>
+<li><a href="#the-most-common-failure-mode">The Most Common Failure Mode</a></li>
+<li><a href="#what-to-actually-optimize">What to Actually Optimize</a></li>
+<li><a href="#thresholds-that-work">Thresholds That Work</a></li>
+<li><a href="#the-human-feedback-loop">The Human Feedback Loop</a></li>
+<li><a href="#the-real-takeaway">The Real Takeaway</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Most RAG tutorials show you how to build one. Almost none teach you how to measure whether it's working. This gap explains why so many production RAG systems feel decent in demos and fall apart in production.</p>
+<p>The core problem: RAG evaluation is genuinely hard. You're evaluating a pipeline that chains retrieval, passage selection, and generation. A failure at any stage compounds. A metric that looks good on one stage might be terrible for the whole system.</p>
+<p>This guide cuts through the noise. I'll cover the metrics that matter, why they matter, and how to actually use them.</p>
+<h2 id="the-rag-evaluation-stack">The RAG Evaluation Stack</h2>
+<p>RAG systems have three distinct failure modes. Your evaluation strategy needs to catch all three.</p>
+<h3 id="stage-1-retrieval-quality">Stage 1: Retrieval Quality</h3>
+<p>Retrieval quality determines the ceiling for everything downstream. If the retrieved passages don't contain the answer, no amount of clever prompting fixes it.</p>
+<p><strong>Recall@K</strong> measures what fraction of all relevant passages appear in the top-K results. For a question with multiple supporting facts spread across documents, recall tells you whether the system even has access to the information it needs.</p>
+<div class="highlight"><pre><span></span><code>recall@k = (number of relevant documents in top-k) / (total number of relevant documents)
+</code></pre></div>
+
+<p>Recall@K is a lower bound. A system can have perfect recall and still retrieve passages full of noise. You need more.</p>
+<p><strong>Precision@K</strong> measures how many of the top-K results are actually relevant. High precision means the model wastes less context budget on irrelevant material. Low precision dilutes the generation signal.</p>
+<p>The tradeoff between recall and precision depends on your context window. If you're context-rich, optimize recall. If you're context-constrained, precision matters more.</p>
+<p><strong>NDCG@K</strong> (Normalized Discounted Cumulative Gain) weights ranked results by relevance. A relevant document at rank 1 scores higher than the same document at rank 5. Use NDCG when rank order matters for your pipeline.</p>
+<h3 id="stage-2-passage-selection">Stage 2: Passage Selection</h3>
+<p>Retrieval finds candidate passages. Selection picks which ones to include in the context.</p>
+<p><strong>Context Precision</strong> measures whether relevant content ranks higher within a passage. A retrieved passage might be 80% relevant and 20% noise. Context precision penalizes passages with relevant content buried deep inside.</p>
+<p><strong>Context Recall</strong> compares the retrieved context against a ground-truth answer. It checks whether all facts needed to answer are present in the retrieved context, not just in the raw document store.</p>
+<p>This is where many tutorials cut corners. They test retrieval against a document store, not against the actual context fed to the generator. These are different things.</p>
+<h3 id="stage-3-response-quality">Stage 3: Response Quality</h3>
+<p>The generator produces the final answer. You need to evaluate what comes out.</p>
+<p><strong>RAGAs</strong> (Retrieval-Augmented Generation Assessment) is a framework developed specifically for this. It decomposes response evaluation into three scores:</p>
+<p>Faithfulness measures whether the generated answer stays consistent with the retrieved context. A faithful answer doesn't hallucinate facts that aren't in the context.</p>
+<p>Answer Relevancy measures whether the response actually addresses the question. A relevant answer provides information the user was asking for, not a plausible-sounding tangent.</p>
+<p>Context Relevancy measures whether the retrieved context is useful for answering the question. High context relevancy means the passages selected actually contain information needed to construct the answer.</p>
+<p>RAGAs scores range from 0 to 1. Most production systems I've seen score between 0.4 and 0.7 on faithfulness. Scores above 0.6 typically indicate a system worth deploying. Above 0.75 is strong.</p>
+<h3 id="the-hallucination-problem">The Hallucination Problem</h3>
+<p>Hallucination is not a retrieval problem. It's a generation problem.</p>
+<p>Retrieval metrics can be perfect and the model still hallucinates. This is why you need answer-level evaluation that goes beyond context faithfulness.</p>
+<p><strong>Self-RAG</strong> and similar approaches try to solve this by having the model critique its own responses against retrieved context. The model learns to flag when it's generating from knowledge not present in retrieved passages.</p>
+<p>These approaches add latency and cost. The tradeoff often isn't worth it for factual Q&amp;A where retrieval is already strong. It matters more for open-ended generation where the model is tempted to extrapolate.</p>
+<h2 id="metrics-that-look-good-but-mislead">Metrics That Look Good But Mislead</h2>
+<p><strong>BLEU</strong> and <strong>ROUGE</strong> score surface-level overlap between generated and reference answers. They're popular because they're automated and easy. They're also nearly useless for RAG evaluation.</p>
+<p>Two answers can be semantically equivalent and score 0.3 on BLEU. Two answers can be factually opposite and score 0.7 on ROUGE. These metrics measure text similarity, not answer quality.</p>
+<p>The trap: teams optimize for BLEU/ROUGE because they're easy to measure. The system learns to produce text that tricks the metric without improving actual answer quality.</p>
+<p><strong>Perplexity</strong> on the generated text is similarly misleading. Low perplexity means the model is confident in its text. A confidently wrong answer still fools perplexity-based metrics.</p>
+<h2 id="building-a-practical-evaluation-pipeline">Building a Practical Evaluation Pipeline</h2>
+<p>The right evaluation pipeline combines automated metrics with human evaluation.</p>
+<h3 id="automated-metrics-you-can-run-in-ci">Automated Metrics You Can Run in CI</h3>
+<p>Set up automated scoring on every commit:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ragas</span> <span class="kn">import</span> <span class="n">evaluate</span>
+<span class="kn">from</span> <span class="nn">ragas.metrics</span> <span class="kn">import</span> <span class="n">faithfulness</span><span class="p">,</span> <span class="n">answer_relevancy</span><span class="p">,</span> <span class="n">context_precision</span>
+
+<span class="k">def</span> <span class="nf">evaluate_rag_response</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">contexts</span><span class="p">,</span> <span class="n">ground_truth</span><span class="p">):</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">faithfulness</span><span class="p">,</span>
+        <span class="n">answer_relevancy</span><span class="p">,</span>
+        <span class="n">context_precision</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span>
+        <span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span>
+        <span class="n">answer</span><span class="o">=</span><span class="n">answer</span><span class="p">,</span>
+        <span class="n">contexts</span><span class="o">=</span><span class="n">contexts</span><span class="p">,</span>
+        <span class="n">ground_truth</span><span class="o">=</span><span class="n">ground_truth</span><span class="p">,</span>
+        <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;faithfulness&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;faithfulness&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;answer_relevancy&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;answer_relevancy&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;context_precision&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;context_precision&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<p>RAGAs supports this out of the box. The framework accepts a dataset of question/answer/context triples and returns scored results.</p>
+<p>The cost: RAGAs itself calls an LLM to evaluate responses. Using GPT-4 for evaluation at scale gets expensive fast. Use smaller models (GPT-3.5, Claude Haiku) for triage, flag borderline cases for human review.</p>
+<h3 id="human-evaluation-traps">Human Evaluation Traps</h3>
+<p>Human evaluation is necessary but expensive. The trap is asking humans the wrong questions.</p>
+<p>Bad question: "Rate this answer from 1-5 on quality."</p>
+<p>This produces inconsistent, subjective scores that don't generalize. A 4 from one evaluator means something different from a 4 from another.</p>
+<p>Good question: "Does this answer contain any factual errors compared to the retrieved context? (Yes/No)"</p>
+<p>Binary factual checks are fast, consistent, and actionable. When you find errors, escalate to detailed review.</p>
+<h3 id="evaluating-retrieval-in-isolation">Evaluating Retrieval in Isolation</h3>
+<p>Test retrieval separately before touching generation:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate_retrieval</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">k_values</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Measure retrieval quality independent of generation.&quot;&quot;&quot;</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">test_dataset</span><span class="p">:</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span>
+        <span class="n">relevant_docs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;relevant_doc_ids&quot;</span><span class="p">])</span>
+
+        <span class="n">retrieved</span> <span class="o">=</span> <span class="n">retrieval_model</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">k_values</span><span class="p">))</span>
+        <span class="n">retrieved_ids</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">retrieved</span><span class="p">[</span><span class="s2">&quot;doc_ids&quot;</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_values</span><span class="p">:</span>
+            <span class="n">retrieved_k</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">retrieved_ids</span><span class="p">[:</span><span class="n">k</span><span class="p">])</span>
+
+            <span class="n">precision</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">retrieved_k</span> <span class="o">&amp;</span> <span class="n">relevant_docs</span><span class="p">)</span> <span class="o">/</span> <span class="n">k</span>
+            <span class="n">recall</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">retrieved_k</span> <span class="o">&amp;</span> <span class="n">relevant_docs</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">relevant_docs</span><span class="p">)</span>
+
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+                <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="n">precision</span><span class="p">,</span>
+                <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="n">recall</span><span class="p">,</span>
+                <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
+            <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This runs fast, costs nothing, and gives you reliable signal about retrieval quality before you invest in generation improvements.</p>
+<h2 id="the-most-common-failure-mode">The Most Common Failure Mode</h2>
+<p>The failure mode I see most often: evaluation looks great in testing, collapses in production.</p>
+<p>The reason is distribution shift. Test datasets are static. Production queries drift over time as users discover new question patterns, as documents get stale, as the document corpus grows and changes structure.</p>
+<p>Your evaluation pipeline needs to detect distribution shift. Monitor retrieval recall quarterly. Re-run human evaluation on production queries monthly. When scores drop, investigate before users complain.</p>
+<h2 id="what-to-actually-optimize">What to Actually Optimize</h2>
+<p>If you're starting from scratch, optimize in this order:</p>
+<ol>
+<li>
+<p><strong>Retrieval recall first.</strong> No generation improvement fixes missing context. Measure what percentage of your knowledge base the system can actually surface for any given query.</p>
+</li>
+<li>
+<p><strong>Context precision second.</strong> Once recall is solid, reduce noise. High precision means the generator spends its context budget on signal, not noise.</p>
+</li>
+<li>
+<p><strong>Faithfulness third.</strong> Faithful generation keeps users trusting the system. Measure it, set a threshold, reject generations that fall below it.</p>
+</li>
+<li>
+<p><strong>Answer relevancy fourth.</strong> Everything above this point measures parts of the system. Answer relevancy measures the whole thing working together.</p>
+</li>
+</ol>
+<p>The mistake most teams make is starting at step 4 without the foundation. They tune prompts, try different models, add retrieval augmentation, and waste time on generation tweaks while retrieval quietly fails.</p>
+<h2 id="thresholds-that-work">Thresholds That Work</h2>
+<p>Based on production deployments I've seen:</p>
+<ul>
+<li><strong>Retrieval Recall@5 &lt; 0.7</strong>: Retrieval needs work before anything else matters.</li>
+<li><strong>Context Precision@5 &lt; 0.5</strong>: Too much noise in retrieved passages for the generator to reliably extract signal.</li>
+<li><strong>Faithfulness &lt; 0.5</strong>: The model is hallucinating frequently. This is a generation problem, not a retrieval problem.</li>
+<li><strong>Answer Relevancy &lt; 0.6</strong>: Either retrieval is missing context, or generation isn't using what it has.</li>
+</ul>
+<p>These thresholds aren't universal. Adjust based on your domain. A medical RAG system needs higher faithfulness than a creative writing assistant. A legal RAG system needs higher recall than a product FAQ bot.</p>
+<h2 id="the-human-feedback-loop">The Human Feedback Loop</h2>
+<p>Metrics don't capture everything. A system that scores well on RAGAs can still produce answers that feel cold, unhelpful, or misaligned with user intent in ways the metrics don't measure.</p>
+<p>Set up a way to capture user feedback at scale. Thumbs up/down on answers. "This answer was helpful" buttons. Follow-up questions that indicate whether the initial answer actually resolved the user's need.</p>
+<p>Use this feedback to build a human-labeled eval set. Rotate it quarterly. This labeled data is the foundation for fine-tuning the generator, choosing between models, and catching regressions that automated metrics miss.</p>
+<h2 id="the-real-takeaway">The Real Takeaway</h2>
+<p>RAG evaluation is not solved by any single metric. The metrics that are easy to automate (BLEU, ROUGE, perplexity) are the ones that don't measure what matters. The metrics that measure what matters (faithfulness, answer relevancy) require LLM-based evaluation that's expensive and imperfect.</p>
+<p>Build a multi-layered evaluation strategy. Automated metrics catch regressions. Human evaluation catches misalignment. Production monitoring catches distribution shift.</p>
+<p>Measure retrieval, generation, and end-to-end quality separately. A failure in retrieval compounds through generation. Fix the foundation before optimizing the surface.</p>
+<p>The teams that ship reliable RAG systems treat evaluation as a first-class concern, not an afterthought. They build eval pipelines before they build the retrieval system. They set thresholds and reject systems that don't meet them. They monitor in production and iterate when metrics drift.</p>
+<p>Most RAG tutorials never get to this point. Now you know what actually matters.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/kv-cache-eviction-accuracy/" class="related-card">
+        <div class="related-card-date">2026-04-15</div>
+        <div class="related-card-title">Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache Eviction</div>
+      </a>
+      <a href="/blog/hybrid-search-bm25-vector-search/" class="related-card">
+        <div class="related-card-date">2026-03-29</div>
+        <div class="related-card-title">Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval</div>
+      </a>
+      <a href="/blog/semantic-caching-rag-optimization/" class="related-card">
+        <div class="related-card-date">2026-03-28</div>
+        <div class="related-card-title">Semantic Caching: the Rag Optimization Nobody Talks About</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/rag-evaluation-metrics-what-actually-matters/" class="footer-link">RAG Evaluation Metrics: What Actually Matters</a>
+          <a href="/blog/voice-ai-latency-gemini-benchmark/" class="footer-link">The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1 Voice Agent</a>
+          <a href="/blog/production-ai-agent-errors/" class="footer-link">What Nobody Tells You About Error Handling in Production AI Agents</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>
