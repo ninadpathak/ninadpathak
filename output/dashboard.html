@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Pipeline Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f1117; color: #e6e6e6; padding: 24px; }
+  h1 { color: #fff; font-size: 24px; margin-bottom: 24px; font-weight: 600; }
+  h2 { color: #a0a0a0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 10px; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: #1a1d27; border-radius: 12px; padding: 20px; border: 1px solid #2a2d3a; }
+  .site { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+  .section-label { color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin: 12px 0 6px; }
+  .item { padding: 6px 0; border-bottom: 1px solid #2a2d3a; font-size: 13px; color: #d1d5db; }
+  .item:last-child { border-bottom: none; }
+  .tag { display: inline-block; background: #2a2d3a; color: #9ca3af; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .tag-q { background: #1e3a5f; color: #60a5fa; }
+  .tag-p { background: #14532d; color: #4ade80; }
+  .published-list { margin-top: 8px; }
+  .pub-item { font-size: 12px; color: #6b7280; padding: 4px 0; }
+  .timestamp { text-align: right; color: #374151; font-size: 11px; margin-top: 16px; }
+  .queue-count { float: right; color: #60a5fa; font-size: 12px; font-weight: 400; }
+  .empty { color: #4b5563; font-style: italic; font-size: 12px; }
+</style>
+</head>
+<body>
+<h1>Content Pipeline Dashboard</h1>
+<div class="grid">
+
+<div class="card">
+<div class="site"><span class="dot"></span>Codeforgeek</div>
+<div class="section-label">Queue </div>
+<div class="item empty">Queue empty or all published</div>
+<div class="section-label">Recently Published</div>
+<div class="published-list">
+<div class="pub-item">&#10003; 2026-04-16 - Refresh Agent (CF-Refresh-AM) <span class="tag tag-p">pub</span></div>
+<div class="pub-item">&#10003; 2026-04-16 - Daily Writer Agent <span class="tag tag-p">pub</span></div>
+<div class="pub-item">&#10003; 2026-04-16 - AM Refresh (8:47 IST) <span class="tag tag-p">pub</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="site"><span class="dot" style="background:#f97316"></span>AskPython</div>
+<div class="section-label">Queue <span class="queue-count">10 topics</span></div>
+<div class="item">&#8226; 2</div>
+<div class="item">&#8226; 3</div>
+<div class="item">&#8226; 4</div>
+<div class="item">&#8226; 5</div>
+<div class="item">&#8226; 6</div>
+<div class="section-label">Recently Published</div>
+<div class="published-list">
+<div class="pub-item empty">No articles published yet</div>
+</div>
+</div>
+
+<div class="card">
+<div class="site"><span class="dot" style="background:#8b5cf6"></span>ninadpathak.com</div>
+<div class="section-label">Queue <span class="queue-count">8 topics</span></div>
+<div class="item">&#8226; LLM token budgets: a practical guide to cost control</div>
+<div class="item">&#8226; Technical writing for engineers: the 80/20 guide</div>
+<div class="item">&#8226; Vector database comparison: Pinecone vs Weaviate vs Qdrant</div>
+<div class="item">&#8226; API documentation that developers love</div>
+<div class="item">&#8226; Developer experience metrics: measuring DX the right way</div>
+<div class="section-label">Recently Published</div>
+<div class="published-list">
+<div class="pub-item">&#10003; rag-evaluation-metrics-what-actually-matters.md (2026-04-16)</div>
+<div class="pub-item">&#10003; production-ai-agent-errors.md (2026-04-16)</div>
+<div class="pub-item">&#10003; agent-harnesses.md (2026-03-10)</div>
+<div class="pub-item">&#10003; agentic-cli-benchmarks.md</div>
+<div class="pub-item">&#10003; best-llms-for-coding.md</div>
+</div>
+</div>
+
+</div>
+<div class="timestamp">Last updated: 2026-04-16 10:22 IST</div>
+</body>
+</html>
