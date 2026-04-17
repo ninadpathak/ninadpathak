@@ -174,11 +174,11 @@ def route_query(query: str) -> str:
     Query: {query}
     """
 
-    response = call_model("gpt-4o-mini", routing_prompt)
+    response = call_model("gpt-5.4-nano", routing_prompt)
 
     if "simple" in response.lower():
-        return "gpt-4o-mini"
-    return "gpt-4o"
+        return "gpt-5.4-nano"
+    return "gpt-5.4"
 ```
 
 The cost of the routing call is negligible. The savings from sending 80% of queries to the $0.15/$0.60 model instead of the $2.50/$10 model are not.
