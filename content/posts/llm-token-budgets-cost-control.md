@@ -18,20 +18,20 @@ Here is the current pricing landscape as of Q2 2026, rounded to three significan
 
 | Model | Input (per 1M tokens) | Output (per 1M tokens) |
 |---|---|---|
-| GPT-4o (latest) | $2.50 | $10 |
-| GPT-4o-mini | $0.15 | $0.60 |
+| GPT-5.4 | $2.50 | $15 |
+| GPT-5.4o-mini | $0.15 | $0.60 |
+| GPT-5.4 Pro | $15 | $60 |
 | o3 | $15 | $60 |
 | o4-mini | $1.10 | $4.40 |
-| Claude 3.7 Sonnet | $3 | $15 |
-| Claude 3.5 Sonnet (new) | $3 | $15 |
+| Claude Opus 4.6 | $3 | $15 |
+| Claude Sonnet 4.6 | $3 | $15 |
 | Claude 3.5 Haiku | $0.80 | $4 |
-| Gemini 2.5 Pro | $1.25 | $5 |
-| Gemini 2.5 Flash | $0.15 | $0.60 |
-| Gemini 2.0 Flash Thinking | $0.60 | $2.40 |
+| Gemini 3.1 Pro | $1.25 | $5 |
+| Gemini 3.1 Flash Lite | $0.15 | $0.60 |
 
 Numbers shift frequently. Always check the current API pricing pages before architecting around a specific rate.
 
-A 1,000-token input with a 500-token output on GPT-4.5 costs $0.112. That sounds small until you multiply it by 50,000 requests per day. Then it is $5,600 per day, or $168,000 per month. Context compounds.
+A 1,000-token input with a 500-token output on GPT-5.4o-mini costs $0.0002. That sounds small until you multiply it by 50,000 requests per day. Then it is $10 per day, or $300 per month. Context compounds.
 
 ## Counting tokens before you spend them
 
@@ -113,7 +113,7 @@ Apply it to your LLM calls:
 ```python
 budget = TokenBudget(max_tokens_per_minute=500_000)
 
-def llm_with_budget(prompt: str, model: str = "gpt-4o") -> str:
+def llm_with_budget(prompt: str, model: str = "gpt-5.4") -> str:
     estimated = estimate_tokens(prompt)
 
     if not budget.consume(estimated):
@@ -247,9 +247,10 @@ class SpendTracker:
         self.logger = logging.getLogger("llm_spend")
         self.daily_spend = {}
         self.model_prices = {
-            "gpt-4o": {"input": 2.50, "output": 10.00},
-            "gpt-4o-mini": {"input": 0.15, "output": 0.60},
-            "claude-sonnet-4-20250514": {"input": 3.00, "output": 15.00},
+            "gpt-5.4": {"input": 2.50, "output": 15.00},
+            "gpt-5.4o-mini": {"input": 0.15, "output": 0.60},
+            "claude-opus-4.6": {"input": 3.00, "output": 15.00},
+            "claude-sonnet-4.6": {"input": 3.00, "output": 15.00},
         }
 
     def record(self, model: str, input_tokens: int, output_tokens: int):
@@ -284,7 +285,7 @@ Build the proxy. Instrument every call. Tag every request with a cost center. Th
 If you are starting from a position of no cost control, here is the priority order:
 
 1. Enable token counting on every request. You cannot manage what you cannot measure.
-2. Route simple queries to cheap models. A 60% routing ratio to GPT-4o-mini instead of GPT-4o saves 94% on input token costs.
+2. Route simple queries to cheap models. A 60% routing ratio to GPT-5.4o-mini instead of GPT-5.4 saves 94% on input token costs.
 3. Audit system prompts. Halve them first. Measure the difference.
 4. Enable caching. Target 30%+ cache hit rate on high-volume endpoints.
 5. Set hard output token limits. This alone can cut output costs by 20-40%.
