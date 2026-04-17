@@ -18,13 +18,16 @@ Here is the current pricing landscape as of Q2 2026, rounded to three significan
 
 | Model | Input (per 1M tokens) | Output (per 1M tokens) |
 |---|---|---|
-| GPT-4.5 | $75 | $150 |
-| GPT-4o | $2.50 | $10 |
+| GPT-4o (latest) | $2.50 | $10 |
 | GPT-4o-mini | $0.15 | $0.60 |
-| Claude 3.5 Sonnet | $3 | $15 |
+| o3 | $15 | $60 |
+| o4-mini | $1.10 | $4.40 |
+| Claude 3.7 Sonnet | $3 | $15 |
+| Claude 3.5 Sonnet (new) | $3 | $15 |
 | Claude 3.5 Haiku | $0.80 | $4 |
-| Gemini 2.5 Flash | $0.15 | $0.60 |
 | Gemini 2.5 Pro | $1.25 | $5 |
+| Gemini 2.5 Flash | $0.15 | $0.60 |
+| Gemini 2.0 Flash Thinking | $0.60 | $2.40 |
 
 Numbers shift frequently. Always check the current API pricing pages before architecting around a specific rate.
 
