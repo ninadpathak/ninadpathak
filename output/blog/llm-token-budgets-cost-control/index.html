@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM token budgets: a practical guide to cost control | Ninad Pathak</title>
+  <meta name="description" content="Real numbers, real pricing, and concrete strategies for keeping your LLM spend predictable.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="LLM token budgets: a practical guide to cost control">
+  <meta property="og:description" content="Real numbers, real pricing, and concrete strategies for keeping your LLM spend predictable.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/llm-token-budgets-cost-control/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/llm-token-budgets-cost-control/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "LLM token budgets: a practical guide to cost control",
+  "description": "Real numbers, real pricing, and concrete strategies for keeping your LLM spend predictable.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-17",
+  "dateModified": "2026-04-17",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/llm-token-budgets-cost-control/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "LLM token budgets: a practical guide to cost control",
+      "item": "https://ninadpathak.com/blog/llm-token-budgets-cost-control/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">LLM token budgets: a practical guide to cost control</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 17, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">8 min read</span>
+      </div>
+      <h1 class="post-title">LLM token budgets: a practical guide to cost control</h1>
+      <p class="lead">Real numbers, real pricing, and concrete strategies for keeping your LLM spend predictable.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">cost</span>
+        <span class="tag">backend</span>
+        <span class="tag">llm</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#what-a-token-actually-costs">What a token actually costs</a></li>
+<li><a href="#counting-tokens-before-you-spend-them">Counting tokens before you spend them</a></li>
+<li><a href="#building-a-token-budget-system">Building a token budget system</a></li>
+<li><a href="#prompt-compression-the-high-leverage-move">Prompt compression: the high-leverage move</a></li>
+<li><a href="#caching-when-the-math-works">Caching: when the math works</a></li>
+<li><a href="#output-token-control">Output token control</a></li>
+<li><a href="#monitoring-in-production">Monitoring in production</a></li>
+<li><a href="#the-multiplier-problem">The multiplier problem</a></li>
+<li><a href="#where-to-cut-first">Where to cut first</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Token costs are the new EC2 bills. For the first few years of the LLM era, engineers treated inference spend as a black box. Input goes in, output comes out, invoice arrives at the end of the month. That approach works until it doesn't. A single weekend of heavy debugging with GPT-4 can run $200. A production RAG pipeline that gets 10,000 queries per day can hit $1,000 per month without anyone noticing until the bill lands.</p>
+<p>This guide is about making token costs visible, predictable, and controllable. No fluff. Real numbers.</p>
+<h2 id="what-a-token-actually-costs">What a token actually costs</h2>
+<p>Tokens are not bytes. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.</p>
+<p>Here is the current pricing landscape as of Q2 2026, rounded to three significant figures:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Input (per 1M tokens)</th>
+<th>Output (per 1M tokens)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-4.5</td>
+<td>$75</td>
+<td>$150</td>
+</tr>
+<tr>
+<td>GPT-4o</td>
+<td>$2.50</td>
+<td>$10</td>
+</tr>
+<tr>
+<td>GPT-4o-mini</td>
+<td>$0.15</td>
+<td>$0.60</td>
+</tr>
+<tr>
+<td>Claude 3.5 Sonnet</td>
+<td>$3</td>
+<td>$15</td>
+</tr>
+<tr>
+<td>Claude 3.5 Haiku</td>
+<td>$0.80</td>
+<td>$4</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>$0.15</td>
+<td>$0.60</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Pro</td>
+<td>$1.25</td>
+<td>$5</td>
+</tr>
+</tbody>
+</table>
+<p>Numbers shift frequently. Always check the current API pricing pages before architecting around a specific rate.</p>
+<p>A 1,000-token input with a 500-token output on GPT-4.5 costs $0.112. That sounds small until you multiply it by 50,000 requests per day. Then it is $5,600 per day, or $168,000 per month. Context compounds.</p>
+<h2 id="counting-tokens-before-you-spend-them">Counting tokens before you spend them</h2>
+<p>The most basic cost control technique is knowing how many tokens a request will consume before you send it. Every major SDK provides a token counting utility.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">anthropic</span> <span class="kn">import</span> <span class="n">Anthropic</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">()</span>
+
+<span class="c1"># Count tokens without making a request</span>
+<span class="n">message</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">count_tokens</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+    <span class="n">system</span><span class="o">=</span><span class="s2">&quot;You are a code reviewer.&quot;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Explain the difference between a mutex and a semaphore.&quot;</span><span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Token count: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>OpenAI provides the same capability:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tiktoken</span>
+
+<span class="n">encoding</span> <span class="o">=</span> <span class="n">tiktoken</span><span class="o">.</span><span class="n">get_encoding</span><span class="p">(</span><span class="s2">&quot;claude&quot;</span><span class="p">)</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">encoding</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;Explain the difference between a mutex and a semaphore.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Token count: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The tiktoken library is fast and works without making an API call. Use it in your request pipeline to reject or queue requests that would exceed a budget threshold.</p>
+<h2 id="building-a-token-budget-system">Building a token budget system</h2>
+<p>Raw token counting is table stakes. A real budget system needs three components: a budget allocation per time window, a running tally, and a circuit breaker when limits are hit.</p>
+<p>Here is a lightweight implementation:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Lock</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">TokenBudget</span><span class="p">:</span>
+    <span class="n">max_tokens_per_minute</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">window_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">used_tokens</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">consume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the tokens can be consumed, False if budget is exceeded.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">now</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_start</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_seconds</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">used_tokens</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">window_start</span> <span class="o">=</span> <span class="n">now</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">used_tokens</span> <span class="o">+</span> <span class="n">token_count</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_tokens_per_minute</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">used_tokens</span> <span class="o">+=</span> <span class="n">token_count</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">wait_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Seconds to wait until enough budget is available.&quot;&quot;&quot;</span>
+        <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_start</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_seconds</span> <span class="o">-</span> <span class="n">elapsed</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Apply it to your LLM calls:</p>
+<div class="highlight"><pre><span></span><code><span class="n">budget</span> <span class="o">=</span> <span class="n">TokenBudget</span><span class="p">(</span><span class="n">max_tokens_per_minute</span><span class="o">=</span><span class="mi">500_000</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">llm_with_budget</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gpt-4o&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">estimated</span> <span class="o">=</span> <span class="n">estimate_tokens</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">budget</span><span class="o">.</span><span class="n">consume</span><span class="p">(</span><span class="n">estimated</span><span class="p">):</span>
+        <span class="n">wait</span> <span class="o">=</span> <span class="n">budget</span><span class="o">.</span><span class="n">wait_time</span><span class="p">(</span><span class="n">estimated</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">call_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">prompt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
+
+<p>This keeps your spend rate bounded even if traffic spikes unexpectedly.</p>
+<h2 id="prompt-compression-the-high-leverage-move">Prompt compression: the high-leverage move</h2>
+<p>The single most effective cost reduction technique is sending fewer tokens. Every token you remove from the input is a token you do not pay for twice (input + output context).</p>
+<p>Three compression strategies work well in practice.</p>
+<p><strong>Truncation with semantic loss detection.</strong> Rather than blindly truncating context at a token limit, identify and preserve the most relevant chunks. Use an embedding similarity search to rank chunks before inclusion.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compress_context</span><span class="p">(</span><span class="n">chunks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="kn">from</span> <span class="nn">anthropic</span> <span class="kn">import</span> <span class="n">Anthropic</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">()</span>
+
+    <span class="c1"># Score each chunk against the query</span>
+    <span class="n">scored</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">:</span>
+        <span class="n">similarity</span> <span class="o">=</span> <span class="n">compute_embedding_similarity</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">chunk</span><span class="p">)</span>
+        <span class="n">scored</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">similarity</span><span class="p">,</span> <span class="n">chunk</span><span class="p">))</span>
+
+    <span class="n">scored</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">selected</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">total_tokens</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">scored</span><span class="p">:</span>
+        <span class="n">chunk_tokens</span> <span class="o">=</span> <span class="n">count_tokens</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">total_tokens</span> <span class="o">+</span> <span class="n">chunk_tokens</span> <span class="o">&gt;</span> <span class="n">max_tokens</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">selected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="n">total_tokens</span> <span class="o">+=</span> <span class="n">chunk_tokens</span>
+
+    <span class="k">return</span> <span class="n">selected</span>
+</code></pre></div>
+
+<p><strong>System prompt minimization.</strong> System prompts accumulate. A typical engineering team starts with a 200-token system prompt. Six months later it is 1,500 tokens and nobody remembers why half of it exists. Audit system prompts quarterly. Remove every instruction that the model follows without being told.</p>
+<p><strong>LLM distillation for routing.</strong> Route simple queries to cheap models. Route complex ones to premium models. The routing itself can be done by an LLM:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">route_query</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">routing_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Classify this query as &#39;simple&#39; or &#39;complex&#39;.</span>
+<span class="s2">    Simple: factual recall, short answers, well-defined tasks.</span>
+<span class="s2">    Complex: multi-step reasoning, ambiguous requirements, creative tasks.</span>
+
+<span class="s2">    Query: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">call_model</span><span class="p">(</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span> <span class="n">routing_prompt</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;simple&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&quot;gpt-4o-mini&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;gpt-4o&quot;</span>
+</code></pre></div>
+
+<p>The cost of the routing call is negligible. The savings from sending 80% of queries to the $0.15/$0.60 model instead of the $2.50/$10 model are not.</p>
+<h2 id="caching-when-the-math-works">Caching: when the math works</h2>
+<p>Token costs are incurred on every new request. If your application handles repetitive or similar queries, response caching can eliminate a large fraction of your bill.</p>
+<p>OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object and the model processes them at a deep discount, typically 90% off input token pricing.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Anthropic caching example</span>
+<span class="n">cache_key</span> <span class="o">=</span> <span class="n">compute_cache_key</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">conversation_topic</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">cached_context</span> <span class="o">:=</span> <span class="n">redis</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">):</span>
+    <span class="c1"># Cache hit: use cached tokens at reduced cost</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">cache_control</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;hit&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">cached_context</span><span class="p">}],</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">current_message</span><span class="p">}]</span>
+    <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Cache miss: build context, store for next time</span>
+    <span class="n">context_tokens</span> <span class="o">=</span> <span class="n">build_context</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">conversation_topic</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">context_tokens</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">current_message</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">redis</span><span class="o">.</span><span class="n">setex</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="mi">3600</span><span class="p">,</span> <span class="n">extract_tokens</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
+</code></pre></div>
+
+<p>Cache hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns.</p>
+<h2 id="output-token-control">Output token control</h2>
+<p>Input costs dominate for most applications. Output costs matter when your pipeline generates long responses. Code generation, document synthesis, and agentic reasoning all produce large outputs.</p>
+<p>Hard-limit output tokens. Set max_tokens conservatively. A question that can be answered in 50 tokens should never be allowed to generate 500 tokens at $0.15 per 1M.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">bounded_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_output</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="n">max_output</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+</code></pre></div>
+
+<p>The model will truncate if the answer requires more tokens. That is preferable to an unbounded bill.</p>
+<h2 id="monitoring-in-production">Monitoring in production</h2>
+<p>Cost control without monitoring is guesswork. Set up per-model, per-endpoint spend tracking.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">class</span> <span class="nc">SpendTracker</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;llm_spend&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daily_spend</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_prices</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;gpt-4o&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">2.50</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">10.00</span><span class="p">},</span>
+            <span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">0.60</span><span class="p">},</span>
+            <span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">3.00</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">15.00</span><span class="p">},</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">prices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_prices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_tokens</span> <span class="o">/</span> <span class="mi">1_000_000</span> <span class="o">*</span> <span class="n">prices</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">]</span> <span class="o">+</span>
+                <span class="n">output_tokens</span> <span class="o">/</span> <span class="mi">1_000_000</span> <span class="o">*</span> <span class="n">prices</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">])</span>
+
+        <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daily_spend</span><span class="p">[</span><span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">daily_spend</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">today</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">cost</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;model=</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2"> input_tokens=</span><span class="si">{</span><span class="n">input_tokens</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;output_tokens=</span><span class="si">{</span><span class="n">output_tokens</span><span class="si">}</span><span class="s2"> cost=$</span><span class="si">{</span><span class="n">cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;daily_total=$</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">daily_spend</span><span class="p">[</span><span class="n">today</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+</code></pre></div>
+
+<p>Route the logs to your metrics system. Alert when daily spend exceeds a threshold. Set weekly budget caps that trigger circuit breakers rather than surprise invoices.</p>
+<h2 id="the-multiplier-problem">The multiplier problem</h2>
+<p>Most cost control advice focuses on individual request optimization. The harder problem is scale.</p>
+<p>A pipeline that costs $0.001 per request seems cheap. Run it 5 million times per month and it is $5,000. Add a second pipeline at $0.002 per request and you are at $15,000. Three pipelines, 20 million requests, different models across teams, and nobody has the full picture.</p>
+<p>The fix is centralized spend governance. Every LLM call in every service should route through a thin proxy that records token counts and cost. Aggregate by team, by product, by endpoint. Without this visibility, you are managing a budget by looking at your bank balance once a quarter.</p>
+<p>Build the proxy. Instrument every call. Tag every request with a cost center. This is not glamorous work. It is the work that separates teams that get surprised by their invoice from teams that set budgets and hit them.</p>
+<h2 id="where-to-cut-first">Where to cut first</h2>
+<p>If you are starting from a position of no cost control, here is the priority order:</p>
+<ol>
+<li>Enable token counting on every request. You cannot manage what you cannot measure.</li>
+<li>Route simple queries to cheap models. A 60% routing ratio to GPT-4o-mini instead of GPT-4o saves 94% on input token costs.</li>
+<li>Audit system prompts. Halve them first. Measure the difference.</li>
+<li>Enable caching. Target 30%+ cache hit rate on high-volume endpoints.</li>
+<li>Set hard output token limits. This alone can cut output costs by 20-40%.</li>
+<li>Build a spend dashboard. Alert on anomalies before they compound.</li>
+</ol>
+<p>The goal is not to use fewer models. It is to use the right model for each task at the right price. That requires visibility, discipline, and the willingness to measure what you spend.</p>
+<p>Token budgets are not optional. They are the cost accounting layer that makes LLM applications sustainable.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/rag-evaluation-metrics-what-actually-matters/" class="related-card">
+        <div class="related-card-date">2026-04-16</div>
+        <div class="related-card-title">RAG Evaluation Metrics: What Actually Matters</div>
+      </a>
+      <a href="/blog/production-ai-agent-errors/" class="related-card">
+        <div class="related-card-date">2026-04-16</div>
+        <div class="related-card-title">What Nobody Tells You About Error Handling in Production AI Agents</div>
+      </a>
+      <a href="/blog/kv-cache-eviction-accuracy/" class="related-card">
+        <div class="related-card-date">2026-04-15</div>
+        <div class="related-card-title">Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache Eviction</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/llm-token-budgets-cost-control/" class="footer-link">LLM token budgets: a practical guide to cost control</a>
+          <a href="/blog/rag-evaluation-metrics-what-actually-matters/" class="footer-link">RAG Evaluation Metrics: What Actually Matters</a>
+          <a href="/blog/voice-ai-latency-gemini-benchmark/" class="footer-link">The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1 Voice Agent</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

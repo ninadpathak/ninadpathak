@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>LLM token budgets: a practical guide to cost control</title>
+      <link>https://ninadpathak.com/blog/llm-token-budgets-cost-control/</link>
+      <description>Real numbers, real pricing, and concrete strategies for keeping your LLM spend predictable.</description>
+      <pubDate>Apr 17, 2026</pubDate>
+    </item>
+    <item>
       <title>RAG Evaluation Metrics: What Actually Matters</title>
       <link>https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/</link>
       <description>A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/how-to-write-a-changelog-developers-actually-read/</link>
       <description>Most changelogs exist to satisfy a checkbox. Here's what makes developers actually read them, and how to structure entries so breaking changes land before they cause incidents.</description>
       <pubDate>Mar 30, 2026</pubDate>
-    </item>
-    <item>
-      <title>Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval</title>
-      <link>https://ninadpathak.com/blog/hybrid-search-bm25-vector-search/</link>
-      <description>Hybrid search combines BM25 sparse retrieval with dense vector search. Here's how reciprocal rank fusion works, what it costs, and when the combination actually beats either method alone.</description>
-      <pubDate>Mar 29, 2026</pubDate>
     </item>
   </channel>
 </rss>
