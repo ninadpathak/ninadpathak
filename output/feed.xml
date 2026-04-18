@@ -6,6 +6,66 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>AI Memory Management for LLMs: How Modern AI Systems Remember (and Forget)</title>
+      <link>https://ninadpathak.com/blog/ai-memory-management-llms/</link>
+      <description>A technical deep-dive into memory management strategies for LLMs and AI agents — covering KV cache eviction, importance-weighted retention, and production systems like Letta and MemGPT.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
+      <title>How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness</title>
+      <link>https://ninadpathak.com/blog/how-memory-works-in-deerflow/</link>
+      <description>DeerFlow 2.0 hit #1 on GitHub Trending in February 2026. I explored its multi-layer memory architecture: within-session summarization, cross-session long-term storage, and isolated sub-agent contexts.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
+      <title>RAG vs. Memory in AI Systems: What Developers Need to Know in 2026</title>
+      <link>https://ninadpathak.com/blog/rag-vs-memory/</link>
+      <description>A practical guide to understanding the difference between retrieval-augmented generation and conversation memory, when to use each, and how to combine them effectively.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
+      <title>Short-Term Memory for AI Agents: What It Is, Why It Matters, and How to Implement It</title>
+      <link>https://ninadpathak.com/blog/short-term-memory-ai-agents/</link>
+      <description>A practical guide to understanding and implementing short-term memory for AI agents in 2026 — from context windows to sliding buffers to importance-weighted systems.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
+      <title>The BEAM Memory Benchmark: Why 1M Context Windows Fail Production AI Agents</title>
+      <link>https://ninadpathak.com/blog/beam-memory-benchmark/</link>
+      <description>The BEAM benchmark from ICLR 2026 shows that even 1M token context windows cannot solve the memory problem. Here's what this means for anyone building AI agents in production.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
+      <title>Why 1M Context Windows Are a Lie (And What Actually Works)</title>
+      <link>https://ninadpathak.com/blog/context-window-vs-memory/</link>
+      <description>Context windows keep growing. Models keep forgetting. Here's the research proving that stuffing more tokens into your prompt isn't the same as memory, and what persistent memory architectures actually do differently.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
+      <title>The Memory Hierarchy in AI Systems: From Sensory Input to Semantic Knowledge</title>
+      <link>https://ninadpathak.com/blog/memory-hierarchy-ai-systems/</link>
+      <description>How modern AI agents borrow from cognitive science to build memory systems that persist, learn, and retrieve across sessions. A deep dive into the four-layer hierarchy that powers stateful AI.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
+      <title>The State of AI Agent Memory in 2026</title>
+      <link>https://ninadpathak.com/blog/state-of-ai-agent-memory-2026/</link>
+      <description>A deep dive into how production AI systems handle memory in 2026 — the tiered architectures, the fragmentation crisis, the standardization push, and what is still fundamentally broken.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
+      <title>How Memory Works in Claude Code: A Deep Dive into Anthropic's Coding Agent</title>
+      <link>https://ninadpathak.com/blog/how-memory-works-in-claude-code/</link>
+      <description>An in-depth exploration of how Claude Code stores, retrieves, and forgets information across sessions, and how to leverage its memory architecture for better workflows.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
+      <title>How Memory Works in HyperAgents: A Deep Dive into Meta's Self-Improving AI Architecture</title>
+      <link>https://ninadpathak.com/blog/how-memory-works-in-hyperagents/</link>
+      <description>An in-depth look at how HyperAgents, Meta's 2026 self-modifying AI framework, develop and manage memory systems autonomously — and why this changes everything for agent infrastructure.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
       <title>Technical Writing for Engineers: The 80/20 Guide</title>
       <link>https://ninadpathak.com/blog/technical-writing-for-engineers/</link>
       <description>Most engineering documentation fails for the same reasons. Here is what actually moves the needle.</description>
@@ -64,66 +124,6 @@
       <link>https://ninadpathak.com/blog/engineering-velocity-documentation/</link>
       <description>I analyze the structural correlation between documentation quality and engineering throughput, using DORA metrics and Accelerate research to quantify the ROI of technical writing.</description>
       <pubDate>Apr 11, 2026</pubDate>
-    </item>
-    <item>
-      <title>The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketing Content</title>
-      <link>https://ninadpathak.com/blog/developer-trust-hierarchy/</link>
-      <description>I analyze the structural reasons why engineers filter for technical depth and verify-ability, creating a 5-tier hierarchy of developer trust.</description>
-      <pubDate>Apr 10, 2026</pubDate>
-    </item>
-    <item>
-      <title>Technical Content as a Moat: the Long Game for Developer Tools</title>
-      <link>https://ninadpathak.com/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/</link>
-      <description>I explain why durable technical content compounds for developer tools, how strong docs and tutorials create distribution, and where teams usually waste the opportunity.</description>
-      <pubDate>Apr 08, 2026</pubDate>
-    </item>
-    <item>
-      <title>How Stripe's Technical Blog Became a Competitive Moat</title>
-      <link>https://ninadpathak.com/blog/how-stripes-technical-blog-became-a-competitive-moat/</link>
-      <description>I think Stripe’s technical blog compounds into a moat because it teaches, documents, and shapes developer trust long before a sales conversation starts.</description>
-      <pubDate>Apr 07, 2026</pubDate>
-    </item>
-    <item>
-      <title>Why Devtools Startups Lose Deals Over Bad Docs</title>
-      <link>https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/</link>
-      <description>DevTools startups lose deals long before sales hears the objection. I explain how weak docs break evaluation, trials, and rollout confidence.</description>
-      <pubDate>Apr 06, 2026</pubDate>
-    </item>
-    <item>
-      <title>From Engineer to Technical Writer: What I Kept and What I Left Behind</title>
-      <link>https://ninadpathak.com/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/</link>
-      <description>I explain which engineering habits still make me better at technical writing, which ones I had to drop, and how the day-to-day work changed.</description>
-      <pubDate>Apr 05, 2026</pubDate>
-    </item>
-    <item>
-      <title>The Case for Shorter Technical Documentation</title>
-      <link>https://ninadpathak.com/blog/the-case-for-shorter-technical-documentation/</link>
-      <description>I think technical docs are often too long for the wrong reasons. Here’s why shorter docs usually work better, and where longer docs still earn their keep.</description>
-      <pubDate>Apr 04, 2026</pubDate>
-    </item>
-    <item>
-      <title>Writing Release Notes That Developers Trust</title>
-      <link>https://ninadpathak.com/blog/writing-release-notes-that-developers-trust/</link>
-      <description>Developers trust release notes when they can make upgrade decisions fast. I explain the format, level of detail, and disclosure standard that earns that trust.</description>
-      <pubDate>Apr 03, 2026</pubDate>
-    </item>
-    <item>
-      <title>How to Write a Technical Tutorial That Actually Teaches</title>
-      <link>https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/</link>
-      <description>I explain how I structure technical tutorials so readers finish with a working result, fewer hidden assumptions, and less time wasted on broken examples.</description>
-      <pubDate>Apr 02, 2026</pubDate>
-    </item>
-    <item>
-      <title>Developer Onboarding Docs: What Works, What Doesn't</title>
-      <link>https://ninadpathak.com/blog/developer-onboarding-docs-what-works-what-doesnt/</link>
-      <description>I’ve seen developer onboarding docs fail for the same reasons over and over. Here’s what actually helps a new engineer ship useful code in week one.</description>
-      <pubDate>Apr 01, 2026</pubDate>
-    </item>
-    <item>
-      <title>Technical Writing for Ai Products: the New Rules</title>
-      <link>https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/</link>
-      <description>AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.</description>
-      <pubDate>Mar 31, 2026</pubDate>
     </item>
   </channel>
 </rss>

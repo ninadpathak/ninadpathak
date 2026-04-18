@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HyperAgents Memory Architecture</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0a; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
+  canvas { display: block; }
+  #info {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff5f1f;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  #legend {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: #ff5f1f;
+    font-size: 12px;
+    line-height: 2;
+    opacity: 0.8;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff5f1f;
+  }
+  .dot.semantic { background: #d44000; }
+  .dot.episodic { background: #ff5f1f; opacity: 0.6; }
+  .dot.working { background: #ff5f1f; opacity: 0.3; }
+  #title {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    color: #ff5f1f;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  #subtitle {
+    position: absolute;
+    top: 58px;
+    left: 30px;
+    color: #d44000;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+<div id="title">HyperAgents</div>
+<div id="subtitle">Memory Architecture Visualizer</div>
+<div id="legend">
+  <div class="legend-item"><div class="dot"></div> Working Memory</div>
+  <div class="legend-item"><div class="dot episodic"></div> Episodic Memory</div>
+  <div class="legend-item"><div class="dot semantic"></div> Semantic Memory</div>
+</div>
+<div id="info">Drag to orbit &bull; Scroll to zoom</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function() {
+  const DARK = 0xff5f1f;
+  const LIGHT = 0xd44000;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0a0a0a);
+
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 4, 12);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  document.body.appendChild(renderer.domElement);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.minDistance = 5;
+  controls.maxDistance = 30;
+
+  // Ambient glow for center node
+  const glowGeo = new THREE.SphereGeometry(1.4, 32, 32);
+  const glowMat = new THREE.MeshBasicMaterial({ color: DARK, transparent: true, opacity: 0.08 });
+  const glowMesh = new THREE.Mesh(glowGeo, glowMat);
+  scene.add(glowMesh);
+
+  // Center HyperAgent node - wireframe icosahedron
+  const centerGeo = new THREE.IcosahedronGeometry(1.0, 1);
+  const centerMat = new THREE.MeshBasicMaterial({ color: DARK, wireframe: true });
+  const centerMesh = new THREE.Mesh(centerGeo, centerMat);
+  scene.add(centerMesh);
+
+  // Inner solid core
+  const coreGeo = new THREE.IcosahedronGeometry(0.5, 0);
+  const coreMat = new THREE.MeshBasicMaterial({ color: DARK, transparent: true, opacity: 0.3 });
+  const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+  scene.add(coreMesh);
+
+  // Orbit rings around center
+  function createRing(radius, color, opacity) {
+    const points = [];
+    for (let i = 0; i <= 64; i++) {
+      const theta = (i / 64) * Math.PI * 2;
+      points.push(new THREE.Vector3(Math.cos(theta) * radius, 0, Math.sin(theta) * radius));
+    }
+    const geo = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: opacity });
+    return new THREE.Line(geo, mat);
+  }
+
+  scene.add(createRing(3.0, DARK, 0.15));
+  scene.add(createRing(5.0, LIGHT, 0.1));
+  scene.add(createRing(7.0, DARK, 0.07));
+
+  // Memory tier wireframe spheres
+  function createMemorySphere(radius, color, opacity, segments) {
+    const geo = new THREE.SphereGeometry(radius, segments, segments);
+    const mat = new THREE.MeshBasicMaterial({ color: color, wireframe: true, transparent: true, opacity: opacity });
+    return new THREE.Mesh(geo, mat);
+  }
+
+  // Working memory - smallest, closest
+  const workingMem = createMemorySphere(2.2, DARK, 0.25, 16);
+  scene.add(workingMem);
+
+  // Connecting lines from center to working memory
+  for (let i = 0; i < 6; i++) {
+    const theta = (i / 6) * Math.PI * 2;
+    const points = [
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(Math.cos(theta) * 2.2, 0, Math.sin(theta) * 2.2)
+    ];
+    const geo = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineBasicMaterial({ color: DARK, transparent: true, opacity: 0.2 });
+    scene.add(new THREE.Line(geo, mat));
+  }
+
+  // Episodic memory - medium, middle orbit
+  const episodicMem = createMemorySphere(4.0, LIGHT, 0.18, 16);
+  scene.add(episodicMem);
+
+  // Connecting arcs for episodic
+  for (let i = 0; i < 8; i++) {
+    const theta = (i / 8) * Math.PI * 2;
+    const points = [];
+    for (let j = 0; j <= 16; j++) {
+      const t = j / 16;
+      const r = 1.0 + t * 3.0;
+      const y = Math.sin(t * Math.PI) * 0.5;
+      points.push(new THREE.Vector3(Math.cos(theta) * r, y, Math.sin(theta) * r));
+    }
+    const geo = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineBasicMaterial({ color: LIGHT, transparent: true, opacity: 0.12 });
+    scene.add(new THREE.Line(geo, mat));
+  }
+
+  // Semantic memory - largest, outermost
+  const semanticMem = createMemorySphere(6.2, DARK, 0.12, 12);
+  scene.add(semanticMem);
+
+  // Long connecting tendrils from center outward
+  for (let i = 0; i < 12; i++) {
+    const theta = (i / 12) * Math.PI * 2;
+    const phi = Math.random() * Math.PI;
+    const points = [];
+    for (let j = 0; j <= 24; j++) {
+      const t = j / 24;
+      const r = 1.0 + t * 5.2;
+      const wobble = Math.sin(t * Math.PI * 4) * 0.3;
+      points.push(new THREE.Vector3(
+        Math.cos(theta) * (r + wobble),
+        Math.sin(phi) * wobble,
+        Math.sin(theta) * (r + wobble)
+      ));
+    }
+    const geo = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineBasicMaterial({ color: DARK, transparent: true, opacity: 0.06 });
+    scene.add(new THREE.Line(geo, mat));
+  }
+
+  // Archive nodes - small dots orbiting in the semantic layer
+  const archiveNodes = [];
+  for (let i = 0; i < 20; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.random() * Math.PI;
+    const r = 5.5 + Math.random() * 1.5;
+    const x = Math.cos(theta) * r;
+    const z = Math.sin(theta) * r;
+    const y = Math.sin(phi) * r * 0.4;
+    const geo = new THREE.SphereGeometry(0.08, 8, 8);
+    const mat = new THREE.MeshBasicMaterial({ color: LIGHT, transparent: true, opacity: 0.4 + Math.random() * 0.4 });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(x, y, z);
+    mesh.userData = {
+      theta: theta,
+      phi: phi,
+      r: r,
+      speed: 0.1 + Math.random() * 0.3,
+      yBase: y
+    };
+    scene.add(mesh);
+    archiveNodes.push(mesh);
+  }
+
+  // Floating data particles
+  const particles = [];
+  const particleCount = 80;
+  const particleGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const r = 2 + Math.random() * 5;
+    positions[i * 3] = Math.cos(theta) * r;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 4;
+    positions[i * 3 + 2] = Math.sin(theta) * r;
+    particles.push({
+      theta: theta,
+      r: r,
+      speed: 0.2 + Math.random() * 0.5,
+      ySpeed: 0.5 + Math.random() * 1,
+      yPhase: Math.random() * Math.PI * 2
+    });
+  }
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const particleMat = new THREE.PointsMaterial({ color: DARK, size: 0.06, transparent: true, opacity: 0.5 });
+  const particleSystem = new THREE.Points(particleGeo, particleMat);
+  scene.add(particleSystem);
+
+  // Animation
+  const clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const elapsed = clock.getElapsedTime();
+
+    // Rotate center meshes
+    centerMesh.rotation.y = elapsed * 0.3;
+    centerMesh.rotation.x = elapsed * 0.1;
+    coreMesh.rotation.y = -elapsed * 0.5;
+    glowMesh.rotation.y = elapsed * 0.15;
+
+    // Pulse memory spheres
+    const pulseFactor = 1 + Math.sin(elapsed * 1.5) * 0.03;
+    workingMem.scale.setScalar(pulseFactor);
+
+    const episodicPulse = 1 + Math.sin(elapsed * 1.0 + 1) * 0.02;
+    episodicMem.scale.setScalar(episodicPulse);
+
+    const semanticPulse = 1 + Math.sin(elapsed * 0.7 + 2) * 0.015;
+    semanticMem.scale.setScalar(semanticPulse);
+
+    // Orbit archive nodes
+    const posAttr = particleGeo.attributes.position;
+    for (let i = 0; i < particleCount; i++) {
+      const p = particles[i];
+      p.theta += p.speed * 0.01;
+      posAttr.array[i * 3] = Math.cos(p.theta) * p.r;
+      posAttr.array[i * 3 + 2] = Math.sin(p.theta) * p.r;
+      posAttr.array[i * 3 + 1] = Math.sin(elapsed * p.ySpeed + p.yPhase) * 1.5;
+    }
+    posAttr.needsUpdate = true;
+
+    // Move archive nodes
+    for (const node of archiveNodes) {
+      const ud = node.userData;
+      ud.theta += ud.speed * 0.008;
+      node.position.x = Math.cos(ud.theta) * ud.r;
+      node.position.z = Math.sin(ud.theta) * ud.r;
+      node.position.y = ud.yBase + Math.sin(elapsed * 0.5 + ud.theta) * 0.3;
+    }
+
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
+</script>
+</body>
+</html>

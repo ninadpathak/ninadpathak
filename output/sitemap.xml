@@ -56,6 +56,56 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://ninadpathak.com/blog/ai-memory-management-llms/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/how-memory-works-in-deerflow/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/rag-vs-memory/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/short-term-memory-ai-agents/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/beam-memory-benchmark/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/context-window-vs-memory/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/memory-hierarchy-ai-systems/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/state-of-ai-agent-memory-2026/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/how-memory-works-in-claude-code/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/how-memory-works-in-hyperagents/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://ninadpathak.com/blog/technical-writing-for-engineers/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

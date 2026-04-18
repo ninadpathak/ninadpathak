@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Context Window vs Memory: Performance Over Context Length</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; overflow: hidden; font-family: 'Courier New', monospace; }
+  canvas { display: block; }
+  #legend {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 40px;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .legend-item { display: flex; align-items: center; gap: 10px; }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .context-dot { background: #ff5f1f; box-shadow: 0 0 10px #ff5f1f; }
+  .memory-dot { background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
+  #title {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0.8;
+  }
+  #subtitle {
+    position: absolute;
+    top: 58px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff5f1f;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  #axis-labels {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+<div id="title">Context Window vs Memory</div>
+<div id="subtitle">Retrieval Accuracy as Context Length Grows</div>
+<div id="legend">
+  <div class="legend-item"><div class="dot context-dot"></div>Context Stuffing</div>
+  <div class="legend-item"><div class="dot memory-dot"></div>Memory Retrieval</div>
+</div>
+<div id="axis-labels">
+  Y: Accuracy<br>
+  X: Context Length<br>
+  Z: Token Count
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function() {
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0a0a0f);
+  scene.fog = new THREE.FogExp2(0x0a0a0f, 0.00008);
+
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 5000);
+  camera.position.set(400, 200, 600);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  document.body.appendChild(renderer.domElement);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.minDistance = 200;
+  controls.maxDistance = 2000;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.4;
+
+  // Grid
+  const gridHelper = new THREE.GridHelper(1000, 20, 0x222233, 0x111122);
+  gridHelper.position.y = -50;
+  scene.add(gridHelper);
+
+  // Axes
+  const axisMat = new THREE.LineBasicMaterial({ color: 0x444466, transparent: true, opacity: 0.5 });
+
+  // X axis (Context Length)
+  const xGeo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(500, 0, 0)
+  ]);
+  scene.add(new THREE.Line(xGeo, axisMat));
+
+  // Z axis (Token Count)
+  const zGeo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(0, 0, 500)
+  ]);
+  scene.add(new THREE.Line(zGeo, axisMat));
+
+  // Y axis (Accuracy)
+  const yGeo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(0, 300, 0)
+  ]);
+  scene.add(new THREE.Line(yGeo, axisMat));
+
+  // Axis labels
+  function makeTextSprite(text, position, color) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    ctx.font = '32px Courier New';
+    ctx.fillStyle = color;
+    ctx.fillText(text, 10, 45);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.copy(position);
+    sprite.scale.set(120, 30, 1);
+    return sprite;
+  }
+
+  scene.add(makeTextSprite('CONTEXT LENGTH', new THREE.Vector3(250, -20, 0), '#444466'));
+  scene.add(makeTextSprite('TOKEN COUNT', new THREE.Vector3(0, -20, 250), '#444466'));
+  scene.add(makeTextSprite('ACCURACY', new THREE.Vector3(-60, 150, 0), '#444466'));
+
+  // Context stuffing curve (drops off - exponential decay)
+  // x = context length factor, z = token count, y = accuracy
+  const contextPoints = [];
+  for (let i = 0; i <= 200; i++) {
+    const t = i / 200;
+    const x = t * 500;
+    const z = t * 500;
+    // Exponential decay with middle dip - classic "lost in middle" pattern
+    // Base decay + sine wave for middle dip
+    const baseDecay = Math.exp(-t * 2.5);
+    const middleDip = 0.15 * Math.sin(t * Math.PI) * Math.exp(-t * 1.5);
+    const y = Math.max(5, (baseDecay - middleDip) * 280);
+    contextPoints.push(new THREE.Vector3(x, y, z));
+  }
+
+  const contextCurveGeo = new THREE.BufferGeometry().setFromPoints(contextPoints);
+  const contextMat = new THREE.LineBasicMaterial({ color: 0xff5f1f, linewidth: 3 });
+  const contextLine = new THREE.Line(contextCurveGeo, contextMat);
+  scene.add(contextLine);
+
+  // Glow effect for context line
+  const contextGlowGeo = new THREE.BufferGeometry().setFromPoints(contextPoints);
+  const contextGlowMat = new THREE.LineBasicMaterial({ color: 0xff5f1f, transparent: true, opacity: 0.2, linewidth: 8 });
+  const contextGlow = new THREE.Line(contextGlowGeo, contextGlowMat);
+  scene.add(contextGlow);
+
+  // Memory retrieval curve (stays flat with slight improvement)
+  const memoryPoints = [];
+  for (let i = 0; i <= 200; i++) {
+    const t = i / 200;
+    const x = t * 500;
+    const z = t * 500;
+    // Starts at ~70%, slight rise due to retrieval learning, stays high
+    const base = 200;
+    const improvement = 30 * (1 - Math.exp(-t * 3));
+    const noise = 8 * Math.sin(t * 50) * Math.exp(-t * 2);
+    const y = Math.min(280, base + improvement + noise);
+    memoryPoints.push(new THREE.Vector3(x, y, z));
+  }
+
+  const memoryCurveGeo = new THREE.BufferGeometry().setFromPoints(memoryPoints);
+  const memoryMat = new THREE.LineBasicMaterial({ color: 0x00e5ff, linewidth: 3 });
+  const memoryLine = new THREE.Line(memoryCurveGeo, memoryMat);
+  scene.add(memoryLine);
+
+  // Glow for memory line
+  const memoryGlowGeo = new THREE.BufferGeometry().setFromPoints(memoryPoints);
+  const memoryGlowMat = new THREE.LineBasicMaterial({ color: 0x00e5ff, transparent: true, opacity: 0.2, linewidth: 8 });
+  const memoryGlow = new THREE.Line(memoryGlowGeo, memoryGlowMat);
+  scene.add(memoryGlow);
+
+  // Data points
+  function addDots(points, color, count = 20) {
+    const step = Math.floor(points.length / count);
+    for (let i = 0; i < points.length; i += step) {
+      const dotGeo = new THREE.SphereGeometry(3, 8, 8);
+      const dotMat = new THREE.MeshBasicMaterial({ color: color });
+      const dot = new THREE.Mesh(dotGeo, dotMat);
+      dot.position.copy(points[i]);
+      scene.add(dot);
+    }
+  }
+
+  addDots(contextPoints, 0xff5f1f, 25);
+  addDots(memoryPoints, 0x00e5ff, 25);
+
+  // Surface ribbon for context stuffing (shows the drop-off volume)
+  const ribbonPoints = [];
+  const ribbonWidth = 40;
+  for (let i = 0; i <= 200; i++) {
+    const t = i / 200;
+    const x = t * 500;
+    const z = t * 500;
+    const baseDecay = Math.exp(-t * 2.5);
+    const middleDip = 0.15 * Math.sin(t * Math.PI) * Math.exp(-t * 1.5);
+    const y = Math.max(5, (baseDecay - middleDip) * 280);
+    ribbonPoints.push(new THREE.Vector3(x, y, z));
+  }
+
+  // Create ribbon surface
+  const ribbonShape = new THREE.Shape();
+  ribbonShape.moveTo(0, 0);
+  for (let i = 0; i < ribbonPoints.length; i++) {
+    ribbonShape.lineTo(i / 200 * 500, 0);
+  }
+
+  // Particles
+  const particleCount = 800;
+  const particleGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+
+  for (let i = 0; i < particleCount; i++) {
+    const t = Math.random();
+    const x = t * 500;
+    const z = t * 500;
+
+    // Context region (below context curve)
+    if (Math.random() > 0.5) {
+      const baseDecay = Math.exp(-t * 2.5);
+      const middleDip = 0.15 * Math.sin(t * Math.PI) * Math.exp(-t * 1.5);
+      const yMax = (baseDecay - middleDip) * 280;
+      const y = Math.random() * yMax;
+      positions[i * 3] = x + (Math.random() - 0.5) * 30;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z + (Math.random() - 0.5) * 30;
+    } else {
+      // Memory region (below memory curve, higher)
+      const base = 200;
+      const improvement = 30 * (1 - Math.exp(-t * 3));
+      const yMax = base + improvement + 20;
+      const y = Math.random() * yMax;
+      positions[i * 3] = x + (Math.random() - 0.5) * 30;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z + (Math.random() - 0.5) * 30;
+    }
+  }
+
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const particleMat = new THREE.PointsMaterial({ color: 0x333355, size: 1.5, transparent: true, opacity: 0.4 });
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+  // Tick marks on axes
+  const tickMat = new THREE.LineBasicMaterial({ color: 0x333355 });
+  for (let i = 0; i <= 5; i++) {
+    const pos = i * 100;
+    // X ticks
+    const xTick = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(pos, 0, 0),
+      new THREE.Vector3(pos, -8, 0)
+    ]);
+    scene.add(new THREE.Line(xTick, tickMat));
+    // Z ticks
+    const zTick = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, 0, pos),
+      new THREE.Vector3(0, -8, pos)
+    ]);
+    scene.add(new THREE.Line(zTick, tickMat));
+    // Y ticks
+    const yTick = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, pos, 0),
+      new THREE.Vector3(-8, pos, 0)
+    ]);
+    scene.add(new THREE.Line(yTick, tickMat));
+  }
+
+  // Labels for tick values
+  function makeTickLabel(text, position) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 128;
+    canvas.height = 32;
+    const ctx = canvas.getContext('2d');
+    ctx.font = '24px Courier New';
+    ctx.fillStyle = '#555577';
+    ctx.fillText(text, 5, 24);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.copy(position);
+    sprite.scale.set(50, 12, 1);
+    return sprite;
+  }
+
+  scene.add(makeTickLabel('0', new THREE.Vector3(-25, -15, 0)));
+  scene.add(makeTickLabel('1M', new THREE.Vector3(475, -15, 0)));
+  scene.add(makeTickLabel('0', new THREE.Vector3(0, -25, -15)));
+  scene.add(makeTickLabel('10M', new THREE.Vector3(0, -25, 475)));
+
+  // Animation
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  window.addEventListener('resize', function() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
+</script>
+</body>
+</html>

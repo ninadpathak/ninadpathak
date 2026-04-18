@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Memory Works in Claude Code: A Deep Dive into Anthropic's Coding Agent | Ninad Pathak</title>
+  <meta name="description" content="An in-depth exploration of how Claude Code stores, retrieves, and forgets information across sessions, and how to leverage its memory architecture for better workflows.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="How Memory Works in Claude Code: A Deep Dive into Anthropic's Coding Agent">
+  <meta property="og:description" content="An in-depth exploration of how Claude Code stores, retrieves, and forgets information across sessions, and how to leverage its memory architecture for better workflows.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/how-memory-works-in-claude-code/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/how-memory-works-in-claude-code/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "How Memory Works in Claude Code: A Deep Dive into Anthropic's Coding Agent",
+  "description": "An in-depth exploration of how Claude Code stores, retrieves, and forgets information across sessions, and how to leverage its memory architecture for better workflows.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/how-memory-works-in-claude-code/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How Memory Works in Claude Code: A Deep Dive into Anthropic's Coding Agent",
+      "item": "https://ninadpathak.com/blog/how-memory-works-in-claude-code/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">How Memory Works in Claude Code: A Deep Dive into Anthropic's Coding Agent</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 19, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">17 min read</span>
+      </div>
+      <h1 class="post-title">How Memory Works in Claude Code: A Deep Dive into Anthropic's Coding Agent</h1>
+      <p class="lead">An in-depth exploration of how Claude Code stores, retrieves, and forgets information across sessions, and how to leverage its memory architecture for better workflows.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">claude</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+        <span class="tag">anthropic</span>
+        <span class="tag">coding</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-three-layer-memory-architecture">The Three-Layer Memory Architecture</a></li>
+<li><a href="#what-gets-remembered-and-what-gets-forgotten">What Gets Remembered and What Gets Forgotten</a></li>
+<li><a href="#how-to-manually-add-memory-to-claude-code">How to Manually Add Memory to Claude Code</a></li>
+<li><a href="#memory-file-locations-and-format">Memory File Locations and Format</a></li>
+<li><a href="#how-this-compares-to-stateless-ai-coding">How This Compares to Stateless AI Coding</a></li>
+<li><a href="#limitations-of-claude-code-memory">Limitations of Claude Code Memory</a></li>
+<li><a href="#best-practices-for-leveraging-claude-code-memory">Best Practices for Leveraging Claude Code Memory</a></li>
+<li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>You open Claude Code on Monday. It knows your Express API routes. You close it. You reopen it on Thursday. It still knows your Express API routes. But ask it what you were working on at 2 PM on Tuesday and it draws a blank. That inconsistency is not a bug. It is the intended behavior of a layered memory system that Anthropic built specifically to handle the gap between ephemeral conversation context and persistent project knowledge.</p>
+<p>I spent the last few weeks digging into how Claude Code actually remembers things, what it stores where, and why some information survives session boundaries while other stuff vanishes the moment you close the terminal. The architecture is more sophisticated than most people realize. Here is what I found.</p>
+<h2 id="the-three-layer-memory-architecture">The Three-Layer Memory Architecture</h2>
+<p>Claude Code does not have one memory system. It has three distinct layers that operate at different timescales and serve different purposes. Understanding which layer owns what piece of information is the key to making Claude Code work with you instead of against you.</p>
+<p><strong>Project-level memory lives in CLAUDE.md files.</strong> These are markdown files you write and place in specific locations. They persist indefinitely, survive sessions, and load into every conversation until you change them. This is the most durable form of memory Claude Code has.</p>
+<p><strong>Session-level memory lives in auto memory.</strong> Claude Code writes these notes itself. It captures learnings from your corrections, build commands it discovers, debugging patterns it observes. This auto memory lives in <code>.claude/auto-memory.md</code> and is limited to 200 lines or 25KB per working tree. It survives sessions but undergoes periodic consolidation that can drop older or lower-priority entries.</p>
+<p><strong>Conversation-level memory is the context window.</strong> This is everything in your current session. The history, the files you have open, the commands you ran, the errors you hit. This vanishes when you close the session. There is no recovering it.</p>
+<p>The official documentation puts it plainly: each session begins with a fresh context window. The mechanisms that carry knowledge across sessions are CLAUDE.md files and auto memory. Everything else is temporary.</p>
+<h3 id="project-memory-the-claudemd-system">Project Memory: The CLAUDE.md System</h3>
+<p>The primary vehicle for project-level memory is the CLAUDE.md file. You write it in plain markdown. Claude reads it at the start of every session. The file sits in one of several locations depending on what scope you want it to have.</p>
+<p>The project-level CLAUDE.md lives at <code>./CLAUDE.md</code> or <code>./.claude/CLAUDE.md</code> in your repository root. This file gets shared with your team through version control, so it should contain project-wide standards that anyone working on the codebase needs to know. Build commands, test instructions, coding conventions, architectural decisions, naming standards. The <code>/init</code> command can generate a starter CLAUDE.md by analyzing your codebase structure and tech stack.</p>
+<p>Personal preferences go in <code>~/.claude/CLAUDE.md</code>. This file applies to every project you work on. The documentation gives the example of code styling preferences or personal tooling shortcuts.</p>
+<p>Local overrides that should not be committed to version control go in <code>./CLAUDE.local.md</code>. This file is gitignored by convention. It lives at the project root and contains your sandbox URLs, preferred test data, or other settings that do not belong in the shared project context.</p>
+<p>For organization-wide rules managed by IT or DevOps, there is a managed policy location. On macOS this is <code>/Library/Application Support/ClaudeCode/CLAUDE.md</code>. On Linux and WSL it is <code>/etc/claude-code/CLAUDE.md</code>. On Windows it is <code>C:\Program Files\ClaudeCode\CLAUDE.md</code>. These load for every user in the organization.</p>
+<p>When you have CLAUDE.md files at multiple levels, more specific locations take precedence. A local <code>./CLAUDE.local.md</code> overrides a project <code>./CLAUDE.md</code> which overrides a user <code>~/.claude/CLAUDE.md</code>. The resolution order follows standard filesystem precedence.</p>
+<h3 id="session-memory-auto-memory-and-consolidation">Session Memory: Auto Memory and Consolidation</h3>
+<p>Auto memory is where Claude Code becomes interesting. Unlike CLAUDE.md which you write, auto memory is synthesized by Claude itself based on your corrections, preferences, and discoveries during a session.</p>
+<p>The auto memory file lives at <code>.claude/auto-memory.md</code> within each working tree. It captures things like build commands you used successfully, debugging patterns that worked, mistakes Claude made that you corrected, and preferences you expressed repeatedly. The documentation describes it as "learnings and patterns" versus CLAUDE.md which is "instructions and rules."</p>
+<p>Auto memory loads into every session for that working tree. But here is the important part: it only loads the first 200 lines or 25KB, whichever limit it hits first. This is a hard constraint. Claude consolidates auto memory periodically to stay within this limit.</p>
+<p>The consolidation process, sometimes internally referred to as memory compaction or auto-dream consolidation, runs in the background. It resolves contradictions, deletes outdated entries, and keeps the memory concise. The trigger factors include time elapsed and the number of new sessions since the last consolidation. The goal is to keep the most relevant recent learnings while pruning stale information.</p>
+<p>This is the layer that causes the frustration people describe as "Claude forgets things." It does not forget randomly. It consolidates. Lower-priority learnings get dropped when space runs out. If you spent three sessions debugging a tricky race condition and then did not reference it for two weeks, that entry might get pruned during consolidation.</p>
+<h3 id="conversation-memory-the-context-window">Conversation Memory: The Context Window</h3>
+<p>The context window is the working memory of any given session. It holds the full conversation history, loaded files, tool outputs, system instructions, and everything Claude is actively reasoning about. Claude 3.5 Sonnet supports a 200,000 token context window. Opus 4.7, released April 16, 2026, supports 200,000 tokens as well. Claude Code also has access to a one million token context window in beta for Sonnet 4.</p>
+<p>The context window is a shared resource. As it fills up, performance degrades. This phenomenon is called "context rot." Claude Code proactively compacts its context window, sometimes triggering compaction around 64 to 75 percent usage to preserve enough working memory for planning and evaluation.</p>
+<p>You can manually trigger compaction at natural task boundaries using the <code>/compact</code> command. This lets you reset context efficiency without ending the session.</p>
+<h2 id="what-gets-remembered-and-what-gets-forgotten">What Gets Remembered and What Gets Forgotten</h2>
+<p>The distinction matters more than most documentation makes it. Here is the explicit breakdown.</p>
+<p><strong>Remembered across sessions:</strong>
+- Everything in your CLAUDE.md files at any scope level
+- Auto memory entries that survived consolidation
+- Project structure and file layout (from filesystem scanning)
+- Coding standards and conventions from CLAUDE.md
+- Build and test commands discovered and stored in auto memory</p>
+<p><strong>Forgotten between sessions:</strong>
+- Conversation history from previous sessions
+- Files you had open but did not reference in CLAUDE.md or auto memory
+- Debugging context from prior sessions unless it made it into auto memory
+-临时 notes or thoughts you did not write down
+- What you were working on at 2 PM on Tuesday unless it became a stored learning</p>
+<p>This is why you can ask Claude Code about your Express API routes on Thursday and get a coherent answer, but asking what you were debugging on Tuesday produces something like "I do not have information about that."</p>
+<p>The architecture is designed around project knowledge, not personal journaling. If you want something remembered, you have to put it in CLAUDE.md or have it surface naturally as a pattern strong enough to survive auto memory consolidation.</p>
+<h2 id="how-to-manually-add-memory-to-claude-code">How to Manually Add Memory to Claude Code</h2>
+<p>You have several tools for this. The right one depends on the type of information and how widely you want it shared.</p>
+<p><strong>Write or update CLAUDE.md directly.</strong> The simplest approach. Open your project root and create or edit <code>./CLAUDE.md</code>. Write instructions that you want Claude to follow in every session. The documentation recommends treating CLAUDE.md as the place where you write down what you would otherwise re-explain at the start of every conversation.</p>
+<p>When you notice Claude making the same mistake a second time, that is a signal to add it to CLAUDE.md. When a code review catches something Claude should have known about the codebase, that belongs in CLAUDE.md. When you type the same correction you typed last session, that is a CLAUDE.md entry.</p>
+<p>Keep entries specific and concise. Claude treats these as context, not enforced configuration. The more specific and concise your instructions, the more consistently Claude follows them. Vague or rambling entries get partially ignored.</p>
+<p><strong>Use the <code>/init</code> command for new projects.</strong> Running <code>/init</code> in a fresh project directory causes Claude to analyze the codebase structure and generate a starter CLAUDE.md. It discovers build commands, test instructions, and project conventions automatically. If a CLAUDE.md already exists, <code>/init</code> suggests improvements rather than overwriting the existing file.</p>
+<p><strong>Use CLAUDE.local.md for personal project overrides.</strong> Create <code>./CLAUDE.local.md</code> at the project root and add personal settings that should not be committed. Things like your local development server URL, preferred test fixtures, or custom aliases. This file is gitignored by convention.</p>
+<p><strong>Use <code>.claude/rules/</code> for path-scoped instructions.</strong> For large projects or monorepos, you can break instructions into topic-specific files using project rules. Rules let you scope instructions to specific file types or subdirectories. The <code>.claude/rules/</code> directory can contain multiple markdown files that load on demand when Claude reads files in those directories.</p>
+<p><strong>Manage auto memory directly.</strong> The <code>/memory</code> command shows you what is currently stored in auto memory. You can view and edit entries. The <code>/clear-memory</code> command wipes auto memory for the current project if you want a clean slate.</p>
+<p><strong>Use hooks for session-end capture.</strong> Claude Code's hook system lets you register scripts that run at specific points in the session lifecycle, including at session end. These hooks can capture session transcripts, extract structured insights using Claude, and store them in an external knowledge base like Obsidian. The captured knowledge can then be fed back into future Claude Code sessions via CLAUDE.md.</p>
+<p>The mindstudio.ai blog documents a pattern where you set up a hook that runs at session end, uses Claude to extract lessons, patterns, and decisions from the session transcript, and writes those to a daily note in Obsidian. That Obsidian note becomes project memory that you can reference in future CLAUDE.md files.</p>
+<h2 id="memory-file-locations-and-format">Memory File Locations and Format</h2>
+<p>Here is the concrete structure of where Claude Code stores memory on a Linux system.</p>
+<div class="highlight"><pre><span></span><code>~/.claude/
+  CLAUDE.md              # User-level instructions, applies to all projects
+  auto-memory.md        # Auto-generated learnings (per working tree)
+
+/path/to/project/
+  CLAUDE.md              # Project-level instructions, version controlled
+  CLAUDE.local.md        # Local overrides, gitignored
+  .claude/
+    CLAUDE.md            # Alternative project location
+    rules/               # Path-scoped rule files
+    auto-memory.md       # Auto memory for this working tree
+    logs/                # Session logs
+    hooks/               # Hook scripts
+</code></pre></div>
+
+<p>The managed policy location on Linux is <code>/etc/claude-code/CLAUDE.md</code>. This requires elevated permissions to modify and applies organization-wide.</p>
+<p>Auto memory files use a simple markdown format. Entries are organized with headers and plain text descriptions. The file looks something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># Auto Memory</span>
+
+<span class="gu">## Build Commands</span>
+<span class="k">-</span><span class="w"> </span>Use <span class="sb">`pnpm dev`</span> to start the development server
+<span class="k">-</span><span class="w"> </span>Tests require <span class="sb">`pnpm test`</span> and a running database
+
+<span class="gu">## Debugging Patterns</span>
+<span class="k">-</span><span class="w"> </span>React state issues: check console for stale closures first
+<span class="k">-</span><span class="w"> </span>API errors: always check the network tab before reading code
+
+<span class="gu">## Project Conventions</span>
+<span class="k">-</span><span class="w"> </span>Components go in <span class="sb">`src/components`</span>
+<span class="k">-</span><span class="w"> </span>API routes go in <span class="sb">`src/routes`</span>
+</code></pre></div>
+
+<p>Claude consolidates this file periodically, keeping the most recent and relevant entries while pruning older ones. If you want to manually remove an entry, you can edit the file directly.</p>
+<h2 id="how-this-compares-to-stateless-ai-coding">How This Compares to Stateless AI Coding</h2>
+<p>Traditional AI coding assistants are stateless. Each conversation starts fresh. You paste context, explain the codebase, describe the problem, and get an answer. Close the tab and start over. Every session requires you to re-establish context from scratch.</p>
+<p>Claude Code with its CLAUDE.md and auto memory system is closer to a stateful agent. It maintains project context across sessions without requiring you to re-explain fundamentals. The first time you introduce your stack, it remembers. The second time, it already knows.</p>
+<p>This is a fundamental architectural shift. Stateless tools treat every problem as new. Stateful agents build up knowledge over time. Claude Code is in the latter category, but the state is scoped to specific files and mechanisms rather than being automatic or magical.</p>
+<p>The tradeoff is that stateful memory requires active management. You have to write CLAUDE.md entries. You have to verify that auto memory remains accurate as the codebase evolves. A stale CLAUDE.md can cause Claude to follow outdated patterns. Auto memory can drift from reality if consolidation drops context that would have been relevant.</p>
+<p>Stateless tools do not have this problem, but they also do not have the benefit. If you want stateless behavior from Claude Code, you can achieve it by keeping CLAUDE.md minimal and clearing auto memory regularly. If you want deep stateful memory, you invest in maintaining rich CLAUDE.md files and monitoring auto memory quality.</p>
+<h2 id="limitations-of-claude-code-memory">Limitations of Claude Code Memory</h2>
+<p>The system is powerful but not magic. Here are the concrete limitations you will encounter.</p>
+<p><strong>The 200-line auto memory cap is real.</strong> When auto memory hits this limit, consolidation kicks in. Lower-priority learnings get dropped. If you are working on a complex project with many distinct patterns, some will get pruned. You cannot expand this limit. Your only recourse is to keep auto memory focused and rely on CLAUDE.md for information that must persist.</p>
+<p><strong>Cross-project memory does not exist.</strong> Auto memory is scoped to a specific working tree. CLAUDE.md at the user level (<code>~/.claude/CLAUDE.md</code>) applies to all projects, but it is not aware of project-specific context. If you want knowledge from one project to influence another, you have to explicitly reference it or add it to your user-level CLAUDE.md. The system does not connect project learnings automatically.</p>
+<p><strong>Self-skeptical verification means memory is a hint, not a source of truth.</strong> Claude Code verifies information against the actual codebase before acting on it. This is by design. It prevents hallucinations from stale memory. But it also means that if you refactor code significantly, auto memory entries that referenced the old structure will be treated with skepticism. Claude will prefer direct filesystem verification over trusting stored notes.</p>
+<p><strong>Long-horizon planning across weeks or months is not supported.</strong> The memory system is scoped to a project session. If you are working on a six-month refactoring effort, the system does not track your overall progress. It tracks project knowledge, not project status. You are responsible for maintaining a separate record of where you are in a long-running effort.</p>
+<p><strong>CLAUDE.md is context, not memory.</strong> Entries in CLAUDE.md are loaded into the context window at session start. This means they consume tokens. If you write a massive CLAUDE.md file, you are burning context window space on background information that may not be relevant to the current task. The documentation recommends keeping CLAUDE.md focused and using skills or path-scoped rules for specific, task-focused instructions.</p>
+<p><strong>Hooks and plugins are not built-in.</strong> The memory system covers basic needs. If you want advanced patterns like automatic Obsidian integration or cross-project memory aggregation, you need to build hooks or install plugins like claude-mem. These are not included by default.</p>
+<h2 id="best-practices-for-leveraging-claude-code-memory">Best Practices for Leveraging Claude Code Memory</h2>
+<p>After working with this system extensively, here is what actually works in daily practice.</p>
+<p><strong>Use <code>/init</code> on every new project.</strong> It generates a baseline CLAUDE.md in under a minute. You get build commands, test instructions, and project conventions that Claude discovered from your codebase structure. Refine the output rather than starting from scratch.</p>
+<p><strong>Write CLAUDE.md entries as context, not commands.</strong> The documentation says Claude treats these as context, not enforced configuration. Phrase things like "Components in <code>src/components</code> follow a <code>.tsx</code> pattern" rather than "You must put all components in <code>src/components</code>." Context gets integrated naturally. Commands get partially followed and partially ignored.</p>
+<p><strong>Be specific with language.</strong> Vague instructions produce vague behavior. Instead of "follow project conventions," write "API routes follow REST conventions, use <code>async/await</code>, and return JSON with a <code>data</code> field." Specificity is the difference between Claude following your notes and Claude improvising.</p>
+<p><strong>Trigger <code>/compact</code> at natural task boundaries.</strong> Do not wait for context rot to degrade performance. After you finish a feature, fix a bug, or complete a refactoring, run <code>/compact</code> to reset context efficiency. This keeps Claude operating at full capacity for reasoning and planning.</p>
+<p><strong>Review auto memory periodically.</strong> Run <code>/memory</code> and read what Claude has stored. Verify accuracy against the current codebase. Remove outdated entries. Add missing patterns. Auto memory quality depends on active maintenance.</p>
+<p><strong>Use CLAUDE.local.md for personal project settings.</strong> Keep your sandbox URLs, test data paths, and personal tooling preferences in the local file. This keeps them available without cluttering the shared project CLAUDE.md.</p>
+<p><strong>Write hooks for session capture if you want long-term memory.</strong> If you need Claude to remember what happened in sessions from three months ago, build a hook that extracts insights from session transcripts and stores them in an external system. Claude Code itself does not retain session history, but you can build that layer on top.</p>
+<p><strong>Verify critical memory entries.</strong> For important architectural decisions stored in CLAUDE.md, do not assume Claude will follow them perfectly. Ask Claude to explain the current architecture and compare it against your stored notes. Memory drift is real and checking takes seconds.</p>
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<p><strong>Can I expand the 200-line auto memory limit?</strong>
+No. The limit is fixed at 200 lines or 25KB per working tree. If you need to store more, move information to CLAUDE.md which does not have a hard size limit, though larger files consume more context window tokens.</p>
+<p><strong>Does Claude Code share memory across team members?</strong>
+Project-level CLAUDE.md files at <code>./CLAUDE.md</code> or <code>./.claude/CLAUDE.md</code> are shared through version control. Auto memory is not shared. User-level CLAUDE.md at <code>~/.claude/CLAUDE.md</code> is private to you. Organization-level managed policy files at <code>/etc/claude-code/CLAUDE.md</code> apply to all users.</p>
+<p><strong>What happens to memory when I change branches?</strong>
+Auto memory is stored in <code>.claude/auto-memory.md</code> which is typically gitignored. Switching branches does not affect it. CLAUDE.md files that are version controlled will change when you switch branches, reflecting the conventions and architecture of the target branch.</p>
+<p><strong>How do I clear all memory for a project?</strong>
+Run <code>/clear-memory</code> to wipe auto memory for the current project. To reset CLAUDE.md, edit or delete the file directly. For a complete reset, remove both <code>./CLAUDE.md</code> and <code>./.claude/</code> directory contents.</p>
+<p><strong>Can Claude Code remember what we discussed in a previous session about the architecture?</strong>
+Only if that discussion produced a CLAUDE.md entry or a learned pattern that survived auto memory consolidation. Raw conversation history is not stored. The architecture discussion itself, if you formalized it into a CLAUDE.md entry, will persist.</p>
+<p><strong>Is there a way to see exactly what Claude Code remembers about my project?</strong>
+Run <code>/memory</code> to see the current auto memory contents. CLAUDE.md contents are visible in the files themselves. There is no single command to view everything Claude has loaded, but the <code>/status</code> command shows session-level context including loaded CLAUDE.md files.</p>
+<p><strong>How does Claude Code memory compare to using a context manager or vector database?</strong>
+Claude Code memory is file-based and text-native. It does not use embeddings or semantic search. Information retrieval is based on file loading and context inclusion. Vector databases and semantic memory systems can layer on top through hooks and plugins, but that is custom infrastructure, not built-in Claude Code functionality.</p>
+<p>The memory architecture in Claude Code is deliberately simple. Files on disk, loaded into context at session start. Auto memory written by the model itself, consolidated periodically. A CLI command to view and clear memory. There is no hidden magic, no opaque vector store, no mysterious retrieval mechanism. What you see is what you get, and what you get is enough for most coding workflows if you invest the time to maintain it properly.</p>
+<p>If you want to understand more about how Claude Code compares to other AI coding tools, see my post on <a href="/blog/best-llms-for-coding/">the best LLMs for coding in 2026</a>. For a deeper look at common errors in production AI agent deployments, check out <a href="/blog/production-ai-agent-errors/">production AI agent errors and how to avoid them</a>.</p>
+<p>The memory system will likely evolve. The leaked KAIROS daemon documentation suggests future always-on background memory monitoring. But for now, the three-layer architecture of CLAUDE.md, auto memory, and context window is the system you work with. Understand it, maintain it, and it will serve you well across months of project work.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/ai-memory-management-llms/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">AI Memory Management for LLMs: How Modern AI Systems Remember (and Forget)</div>
+      </a>
+      <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness</div>
+      </a>
+      <a href="/blog/rag-vs-memory/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">RAG vs. Memory in AI Systems: What Developers Need to Know in 2026</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/ai-memory-management-llms/" class="footer-link">AI Memory Management for LLMs: How Modern AI Systems Remember (and Forget)</a>
+          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness</a>
+          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs. Memory in AI Systems: What Developers Need to Know in 2026</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

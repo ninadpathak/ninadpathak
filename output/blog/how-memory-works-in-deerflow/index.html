@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness | Ninad Pathak</title>
+  <meta name="description" content="DeerFlow 2.0 hit #1 on GitHub Trending in February 2026. I explored its multi-layer memory architecture: within-session summarization, cross-session long-term storage, and isolated sub-agent contexts.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness">
+  <meta property="og:description" content="DeerFlow 2.0 hit #1 on GitHub Trending in February 2026. I explored its multi-layer memory architecture: within-session summarization, cross-session long-term storage, and isolated sub-agent contexts.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/how-memory-works-in-deerflow/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/how-memory-works-in-deerflow/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness",
+  "description": "DeerFlow 2.0 hit #1 on GitHub Trending in February 2026. I explored its multi-layer memory architecture: within-session summarization, cross-session long-term storage, and isolated sub-agent contexts.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/how-memory-works-in-deerflow/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness",
+      "item": "https://ninadpathak.com/blog/how-memory-works-in-deerflow/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 19, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">11 min read</span>
+      </div>
+      <h1 class="post-title">How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness</h1>
+      <p class="lead">DeerFlow 2.0 hit #1 on GitHub Trending in February 2026. I explored its multi-layer memory architecture: within-session summarization, cross-session long-term storage, and isolated sub-agent contexts.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+        <span class="tag">deerflow</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#what-deerflow-actually-is">What DeerFlow Actually Is</a></li>
+<li><a href="#the-three-memory-layers-in-deerflow">The Three Memory Layers in DeerFlow</a></li>
+<li><a href="#how-sub-agent-context-isolation-works">How Sub-Agent Context Isolation Works</a></li>
+<li><a href="#the-sandbox-and-context-interaction">The Sandbox and Context Interaction</a></li>
+<li><a href="#session-continuity-and-thread-checkpointing">Session Continuity and Thread Checkpointing</a></li>
+<li><a href="#comparing-deerflow-memory-to-other-frameworks">Comparing DeerFlow Memory to Other Frameworks</a></li>
+<li><a href="#production-considerations">Production Considerations</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#the-architecture-in-one-view">The Architecture in One View</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>I have been building agentic systems for three years. The hard problems are never about model capability. They are about memory. A model that cannot remember what happened five minutes ago cannot reason about a multi-step task. A system that loses state between sessions cannot build on past work. DeerFlow 2.0, the ByteDance open-source super agent harness that topped GitHub Trending on February 28th 2026, makes memory a first-class architectural concern. Here is what I found inside its design.</p>
+<h2 id="what-deerflow-actually-is">What DeerFlow Actually Is</h2>
+<p>DeerFlow stands for Deep Exploration and Efficient Research Flow. The project lives at <a href="https://github.com/bytedance/deer-flow">github.com/bytedance/deer-flow</a> and it is a ground-up rewrite from v1. The team abandoned backward compatibility to build something that works as a production runtime, not a research prototype.</p>
+<p>The core architecture runs on LangGraph for agent orchestration and LangChain for tool integration. You configure models in <code>config.yaml</code> using any OpenAI-compatible endpoint. The system supports Doubao-Seed-2.0-Code, DeepSeek v3.2, and Kimi 2.5 as recommended models, but the framework is model-agnostic. You can point it at any endpoint that speaks the ChatCompletions API.</p>
+<p>What makes DeerFlow different from a bare LangChain app is everything it ships with: skills as structured Markdown workflows, sandboxed code execution, sub-agent spawning, IM channel integrations (Telegram, Slack, Feishu, WeChat, WeCom), and a memory system that operates at three distinct layers. That memory system is the focus of this piece.</p>
+<h2 id="the-three-memory-layers-in-deerflow">The Three Memory Layers in DeerFlow</h2>
+<p>Most agent frameworks conflate memory into one bucket. DeerFlow splits it deliberately. Each layer serves a different purpose and operates on a different timescale.</p>
+<h3 id="layer-1-thread-state-and-context-memory">Layer 1: Thread State and Context Memory</h3>
+<p>The first layer is session-scoped and lives in LangGraph's thread state. Every conversation lives in a ThreadState object that extends LangGraph's base AgentState. The data structure looks like this in the codebase:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ThreadState</span><span class="p">(</span><span class="n">AgentState</span><span class="p">):</span>
+    <span class="c1"># Core state from AgentState</span>
+    <span class="n">messages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BaseMessage</span><span class="p">]</span>
+
+    <span class="c1"># DeerFlow extensions</span>
+    <span class="n">sandbox</span><span class="p">:</span> <span class="nb">dict</span>             <span class="c1"># Sandbox environment info</span>
+    <span class="n">artifacts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>      <span class="c1"># Generated file paths</span>
+    <span class="n">thread_data</span><span class="p">:</span> <span class="nb">dict</span>         <span class="c1"># {workspace, uploads, outputs} paths</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>         <span class="c1"># Auto-generated conversation title</span>
+    <span class="n">todos</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span>        <span class="c1"># Task tracking (plan mode)</span>
+    <span class="n">viewed_images</span><span class="p">:</span> <span class="nb">dict</span>       <span class="c1"># Vision model image data</span>
+</code></pre></div>
+
+<p>The ThreadState lives in memory during the session and gets checkpointed to disk by LangGraph's checkpointer. If you restart the server, the thread state is reloaded from the last checkpoint, so the agent picks up exactly where it left off. This is not trivial. Getting checkpointing right across a distributed setup with multiple processes requires the LangGraph server to be the source of truth for state.</p>
+<h3 id="layer-2-within-session-summarization">Layer 2: Within-Session Summarization</h3>
+<p>Long conversations blow past token limits fast. DeerFlow handles this with a SummarizationMiddleware that runs inside the LangGraph agent before each model call. The middleware monitors message token counts and triggers compression when any configured threshold is hit.</p>
+<p>The configuration in <code>config.yaml</code> looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">summarization</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">  </span><span class="c1"># null = use default model</span>
+
+<span class="w">  </span><span class="nt">trigger</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tokens</span>
+<span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4000</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">messages</span>
+<span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+
+<span class="w">  </span><span class="nt">keep</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">messages</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+
+<span class="w">  </span><span class="nt">trim_tokens_to_summarize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4000</span>
+</code></pre></div>
+
+<p>The trigger uses OR logic. If token count hits 4000 or message count hits 50, summarization fires. The <code>keep</code> setting says preserve the 20 most recent messages. Everything older gets condensed into a single summary message injected back into the conversation.</p>
+<p>The system is careful about message boundaries. AI messages and their corresponding tool result messages are kept together. If a cutoff point falls in the middle of an AI/Tool pair, the middleware adjusts to preserve the entire exchange. This matters because splitting a tool call from its result would break context continuity.</p>
+<p>The summarization middleware runs at position 4 in the middleware chain, after ThreadDataMiddleware sets up paths and UploadsMiddleware processes files, but before TitleMiddleware generates conversation titles. The order matters: you want sandbox and file context established before the model generates a summary.</p>
+<h3 id="layer-3-cross-session-long-term-memory">Layer 3: Cross-Session Long-Term Memory</h3>
+<p>This is the layer most other agent frameworks skip. DeerFlow stores a persistent memory file at <code>backend/.deer-flow/memory.json</code>. This file accumulates facts about the user across sessions. You can view it via the <code>/memory</code> command in IM channels, and the Settings UI exposes a full editor.</p>
+<p>The memory schema includes content, category, and confidence fields. You can add facts manually or let the system infer them from conversation. The fixture file at <code>backend/docs/memory-settings-sample.json</code> shows what the structure looks like:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;facts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reviewer-added memory fact&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;testing&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.88</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Manual&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The architecture doc shows that memory lives in the Gateway API layer, not in the LangGraph server. The Gateway API (<code>app/gateway/app.py</code>) serves REST endpoints for skills management, file uploads, and thread cleanup. Long-term memory is part of this same surface. This means memory operations do not go through the agent runtime, which keeps them fast and isolated from agent state churn.</p>
+<p>The memory is stored locally and stays under your control. There is no external service dependency. If you want encryption at rest, you handle it at the filesystem level. This design reflects DeerFlow's philosophy: the user owns their data.</p>
+<h2 id="how-sub-agent-context-isolation-works">How Sub-Agent Context Isolation Works</h2>
+<p>DeerFlow decomposes complex tasks by spawning sub-agents. A research task might fan out into a dozen parallel sub-agents, each exploring a different angle, then converge into a single output. This is where most frameworks trip up.</p>
+<p>DeerFlow enforces strict context isolation between sub-agents. The documentation puts it plainly: each sub-agent runs in its own isolated context and cannot see the main agent's context or other sub-agents' contexts. This is a deliberate architectural decision. If every sub-agent could see the full parent context, context window usage would explode and you'd lose the ability to run truly parallel work.</p>
+<p>The isolation works through LangGraph's thread system. When the lead agent spawns a sub-agent, it creates a new thread with a scoped context, its own tools, and its own termination conditions. The sub-agent reports back structured results. The lead agent then synthesizes everything. You can see this pattern in the Go implementation (deer-flow-go) which has explicit agent roles: coordinator, planner, researcher, coder, reporter.</p>
+<p>The implication for memory is important. Sub-agents do not have access to long-term memory by default. They operate with only what the lead agent explicitly passes in. If you want a sub-agent to know something about the user, the lead agent must inject it into the sub-agent's context. This keeps sub-agents focused and predictable.</p>
+<h2 id="the-sandbox-and-context-interaction">The Sandbox and Context Interaction</h2>
+<p>DeerFlow runs every task inside an isolated Docker container (or Kubernetes pod in production mode). The sandbox has its own filesystem with virtual paths:</p>
+<table>
+<thead>
+<tr>
+<th>Virtual Path</th>
+<th>Physical Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/mnt/user-data/workspace</code></td>
+<td><code>backend/.deer-flow/threads/{thread_id}/user-data/workspace</code></td>
+</tr>
+<tr>
+<td><code>/mnt/user-data/uploads</code></td>
+<td><code>backend/.deer-flow/threads/{thread_id}/user-data/uploads</code></td>
+</tr>
+<tr>
+<td><code>/mnt/user-data/outputs</code></td>
+<td><code>backend/.deer-flow/threads/{thread_id}/user-data/outputs</code></td>
+</tr>
+<tr>
+<td><code>/mnt/skills</code></td>
+<td><code>deer-flow/skills/</code></td>
+</tr>
+</tbody>
+</table>
+<p>The agent reads, writes, and edits files inside the sandbox. Intermediate results go to workspace. Uploads land in the uploads directory. Final deliverables go to outputs. This filesystem is the out-of-band memory channel. When summarization fires and old messages get compressed, the artifacts from those messages are still on disk in the workspace. The agent can retrieve them if needed.</p>
+<p>The sandbox system is abstract. <code>LocalSandboxProvider</code> runs code directly on the host for development. <code>AioSandboxProvider</code> uses Docker containers for isolation. In production with Kubernetes, a provisioner service spins up pods dynamically. The agent code does not care which provider is active; the abstraction holds.</p>
+<h2 id="session-continuity-and-thread-checkpointing">Session Continuity and Thread Checkpointing</h2>
+<p>Most chat interfaces treat each message as independent. DeerFlow treats each conversation as a thread that persists. The LangGraph server manages threads with a checkpointer that saves state after every step. If the server crashes and restarts, threads resume from their last checkpoint.</p>
+<p>The Gateway API handles filesystem cleanup when threads are deleted. The flow is split: LangGraph handles <code>DELETE /api/langgraph/threads/{thread_id}</code> for thread state, and then the Gateway's threads router removes DeerFlow-managed filesystem data via <code>Paths.delete_thread_dir()</code>. This separation keeps the LangGraph server focused on agent state while the Gateway handles file lifecycle.</p>
+<p>Thread state includes the auto-generated title, task todos (when plan mode is enabled), viewed images (for vision model support), and the full message history. When a thread resumes, the model sees the complete conversation, not just the last message.</p>
+<h2 id="comparing-deerflow-memory-to-other-frameworks">Comparing DeerFlow Memory to Other Frameworks</h2>
+<p>LangChain agents typically store conversation in a BaseChatMessageHistory object that persists to a backing store. The abstraction is clean but the implementation is left to the developer. DeerFlow makes concrete choices: checkpoint to LangGraph's checkpointing system, store long-term memory in a local JSON file, summarize with a middleware component.</p>
+<p>AutoGPT and similar frameworks write task outputs to disk and read them back as context. DeerFlow formalizes this with its sandbox filesystem. The difference is that DeerFlow's sandbox paths are first-class citizens that the middleware manages automatically. You do not manually inject file contents into prompts; the system handles it.</p>
+<p>CrewAI uses a "bag of tasks" approach where agents share context loosely. DeerFlow's sub-agent isolation is stricter. You spawn a sub-agent with exactly the context it needs. If you want shared context, you pass it explicitly. This trades flexibility for predictability.</p>
+<h2 id="production-considerations">Production Considerations</h2>
+<p>If you run DeerFlow as a long-running server, the memory system has specific operational implications. The long-term memory file grows over time. There is no built-in eviction policy in the documentation; you manage it through the Settings UI or by editing the JSON directly. For high-volume deployments, you will want to consider a memory compaction strategy.</p>
+<p>Summarization has a cost. The middleware makes an additional model call when thresholds are hit. The default configuration uses the same model for summarization as for the main task, which works but is not cheap. The documentation recommends a lightweight model like <code>gpt-4o-mini</code> for summarization to reduce costs.</p>
+<p>Checkpointing adds latency to every step. For latency-sensitive applications, you need to benchmark the overhead. The checkpointer saves state to disk after each agent step; for I/O-bound storage, this can add measurable delay.</p>
+<p>The sandbox isolation layer adds overhead that pure in-process agents do not have. If your tasks are short and stateless, this overhead may not be worth it. If your tasks involve code execution or file manipulation, the isolation is worth the cost.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>Does DeerFlow use vector storage for memory retrieval?</strong></p>
+<p>No. The long-term memory system stores structured facts in a JSON file. There is no semantic search over memory built into the framework. You manage retrieval yourself if you need it.</p>
+<p><strong>Can sub-agents access long-term memory?</strong></p>
+<p>Sub-agents do not have direct access to the long-term memory file. The lead agent must inject relevant facts into the sub-agent's context. This is a design choice to keep sub-agent contexts small and predictable.</p>
+<p><strong>What happens when summarization triggers mid-conversation?</strong></p>
+<p>The middleware preserves the last N messages (configured via <code>keep</code>) and compresses everything older into a single summary message injected as a HumanMessage. The AI/Tool message pairs are kept intact. The conversation continues with the summary as context.</p>
+<p><strong>How does DeerFlow handle concurrent sessions?</strong></p>
+<p>Each thread is independent in LangGraph. The Gateway API manages concurrency through async tasks in Gateway mode (experimental), or through the LangGraph server's job queue in standard mode. Gateway mode reduces process count from 4 to 3 and removes the LangGraph Platform license requirement.</p>
+<p><strong>Is memory encrypted at rest?</strong></p>
+<p>No. The memory file at <code>backend/.deer-flow/memory.json</code> is plain JSON on disk. Encryption is your responsibility at the filesystem level.</p>
+<p><strong>Can I use DeerFlow without Docker?</strong></p>
+<p>Yes. The <code>LocalSandboxProvider</code> runs sandbox code directly on the host machine. Docker is the recommended production path but not the only option. Local mode is intended for development and evaluation.</p>
+<h2 id="the-architecture-in-one-view">The Architecture in One View</h2>
+<p>DeerFlow's memory system is not a single component. It is a composition of three layers operating at different timescales. The ThreadState holds the active conversation. The SummarizationMiddleware compresses it when needed. The memory.json file holds facts across sessions. Sub-agent isolation keeps parallel work from interfering. The sandbox filesystem provides the out-of-band storage for artifacts and intermediate results.</p>
+<p>The design reflects a specific philosophy: memory should be explicit, controllable, and layered. When you know where each piece of information lives, you can reason about it. When the system manages memory automatically, you get surprises in production.</p>
+<p>For me, the most interesting choice is the strict sub-agent isolation. Most frameworks let you share context freely, which makes prototyping easier but production harder. DeerFlow forces you to be explicit. If you want shared context, you pass it. This is more work upfront but it makes multi-agent systems predictable.</p>
+<p>The framework is young. Version 2.0 launched in early 2026 and the GitHub repo shows active development. The memory system will evolve. But the core architecture, the separation of concerns, and the emphasis on user ownership of data are solid foundations to build on.</p>
+<p>If you want to explore the codebase yourself, the key files are: <code>packages/harness/deerflow/agents/lead_agent/agent.py</code> for the lead agent and middleware chain, <code>packages/harness/deerflow/config/summarization_config.py</code> for the summarization configuration, and <code>backend/.deer-flow/memory.json</code> for the long-term memory store.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/ai-memory-management-llms/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">AI Memory Management for LLMs: How Modern AI Systems Remember (and Forget)</div>
+      </a>
+      <a href="/blog/rag-vs-memory/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">RAG vs. Memory in AI Systems: What Developers Need to Know in 2026</div>
+      </a>
+      <a href="/blog/short-term-memory-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">Short-Term Memory for AI Agents: What It Is, Why It Matters, and How to Implement It</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/ai-memory-management-llms/" class="footer-link">AI Memory Management for LLMs: How Modern AI Systems Remember (and Forget)</a>
+          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow: A Deep Dive into the 2026 Agent Harness</a>
+          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs. Memory in AI Systems: What Developers Need to Know in 2026</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>
