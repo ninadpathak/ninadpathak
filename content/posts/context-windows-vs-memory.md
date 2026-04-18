@@ -6,11 +6,9 @@ tags: [ai, llm, memory, context-window, infrastructure]
 status: published
 ---
 
-You have a 1M token context window. Your RAG pipeline still returns stale results. Your agent loses track of what it was doing three turns ago. You assumed context and memory were the same thing. They are not, and that confusion is costing you real money.
+You have a 1M token context window and your agent still forgets what the user said three turns ago. Your RAG pipeline returns stale results. Your agent loses track of what it was doing mid-task. Context windows and memory solve different problems at different cost profiles with different failure modes, and conflating them produces systems that are simultaneously over-engineered and under-equipped.
 
-I have watched engineers build elaborate pipelines around long context windows and then wonder why their system still "forgets." The answer is structural. Context windows and memory solve different problems at different cost profiles with different failure modes. conflating them produces systems that are simultaneously over-engineered and under-equipped.
-
-This is not a philosophical distinction. It is an engineering reality with concrete consequences for how you build, price, and debug AI systems.
+I have watched engineers build elaborate pipelines around long context windows and then wonder why their system still "forgets." This is not a philosophical distinction. It is an engineering reality with concrete consequences for how you build, price, and debug AI systems.
 
 ## What a context window actually is
 

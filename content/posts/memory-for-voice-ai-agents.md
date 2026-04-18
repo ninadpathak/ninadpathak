@@ -6,11 +6,11 @@ tags: [ai, voice, agents, memory, voice-ai, infrastructure]
 status: published
 ---
 
-A text chatbot that forgets your context is annoying. A voice agent that forgets is a catastrophe. The difference is temporal. Text conversations move at the speed of typing. Voice conversations move at the speed of speech, which means a 200ms pause from the agent feels like a conversation breakdown, not a technical glitch.
+Voice agents and text chatbots fail differently. A text chatbot that loses context produces confusing responses. A voice agent that loses context produces silence, confusion, and a conversation that derails mid-sentence. The failure mode is catastrophic in a way text is not.
 
-I have been building real-time voice agents for six months. The hardest problem is not STT accuracy or TTS quality. It is memory management across a streaming pipeline where the agent must track conversation state while handling interruptions, partial transcriptions, and overlapping audio. Text chatbots solve this with retrieval-augmented generation and a tidy message history. Voice agents cannot afford to wait for a retrieval step in the middle of a conversation turn.
+I have been building real-time voice agents for six months. The hardest problem is not STT accuracy or TTS quality. It is memory management across a streaming pipeline where the agent must track conversation state while handling interruptions, partial transcriptions, and overlapping audio. Voice agents cannot afford to wait for a retrieval step in the middle of a conversation turn the way text chatbots do.
 
-This article explains how memory actually works in a production voice agent. I will cover the pipeline stages where state lives, how Voice Activity Detection shapes what gets remembered, the architecture for handling interruptions without losing context, and the latency constraints that force every design decision. If you are building or evaluating voice AI infrastructure, this is the architecture you need to understand.
+This article explains how memory actually works in a production voice agent. I will cover the pipeline stages where state lives, how Voice Activity Detection shapes what gets remembered, the architecture for handling interruptions without losing context, and the latency constraints that force every design decision.
 
 ##The Fundamental Difference: Memory Latency Budget
 

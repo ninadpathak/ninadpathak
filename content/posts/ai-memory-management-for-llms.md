@@ -6,9 +6,7 @@ tags: [ai, agents, memory, llm, infrastructure, memory-management]
 status: published
 ---
 
-LLMs have a context window. That does not mean they have memory.
-
-When I started building agentic pipelines in 2023, I watched junior engineers assume that a 128K token context meant their agent could "remember" previous interactions. It cannot. A 128K context is a static buffer. What happens inside it is determined entirely by how you manage it. The moment you exceed that window, or the moment you need cross-session continuity, you need an explicit memory system. This post is about what actually works in those systems.
+LLMs have a context window. That does not mean they have memory. When I started building agentic pipelines in 2023, I watched junior engineers assume that a 128K token context meant their agent could "remember" previous interactions. It cannot. A 128K context is a static buffer. What happens inside it is determined entirely by how you manage it. The moment you exceed that window, or the moment you need cross-session continuity, you need an explicit memory system.
 
 I have shipped memory management layers into production pipelines handling tens of thousands of agent sessions. I have benchmarked eviction strategies, debugged summarization drift, and watched KV caches eat GPU memory faster than anything else. Here is what I have learned.
 
