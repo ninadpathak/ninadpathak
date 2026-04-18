@@ -20,14 +20,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Hierarchy in AI Systems: From Sensory to Semantic | Ninad Pathak</title>
-  <meta name="description" content="How分层记忆架构帮助AI系统实现长期上下文、个性化和持续学习——以及为什么平坦记忆会失败。">
+  <meta name="description" content="How layered memory architecture helps AI systems achieve long-term context, personalization, and continuous learning — and why flat memory fails.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
   <meta property="og:title"       content="Memory Hierarchy in AI Systems: From Sensory to Semantic">
-  <meta property="og:description" content="How分层记忆架构帮助AI系统实现长期上下文、个性化和持续学习——以及为什么平坦记忆会失败。">
+  <meta property="og:description" content="How layered memory architecture helps AI systems achieve long-term context, personalization, and continuous learning — and why flat memory fails.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/memory-hierarchy-in-ai-systems/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -74,7 +74,7 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "Memory Hierarchy in AI Systems: From Sensory to Semantic",
-  "description": "How分层记忆架构帮助AI系统实现长期上下文、个性化和持续学习——以及为什么平坦记忆会失败。",
+  "description": "How layered memory architecture helps AI systems achieve long-term context, personalization, and continuous learning — and why flat memory fails.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
@@ -195,10 +195,10 @@
       <div class="post-meta">
         <span class="post-meta-date">Apr 19, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">8 min read</span>
+        <span class="post-meta-time">11 min read</span>
       </div>
       <h1 class="post-title">Memory Hierarchy in AI Systems: From Sensory to Semantic</h1>
-      <p class="lead">How分层记忆架构帮助AI系统实现长期上下文、个性化和持续学习——以及为什么平坦记忆会失败。</p>
+      <p class="lead">How layered memory architecture helps AI systems achieve long-term context, personalization, and continuous learning — and why flat memory fails.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
         <span class="tag">agents</span>
@@ -215,366 +215,146 @@
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#the-atkinson-shiffrin-model-and-its-ai-mapping">The Atkinson-shiffrin Model And Its Ai Mapping</a></li>
-<li><a href="#the-five-layers-of-ai-memory-hierarchy">The Five Layers Of Ai Memory Hierarchy</a></li>
-<li><a href="#why-flat-memory-architecture-fails">Why Flat Memory Architecture Fails</a></li>
-<li><a href="#implementing-memory-hierarchy-letta-and-memgpt">Implementing Memory Hierarchy: Letta And MemGPT</a></li>
-<li><a href="#the-forgetting-curve-why-your-ai-loses-context">The Forgetting Curve: Why Your Ai Loses Context</a></li>
-<li><a href="#practical-implementation-patterns">Practical Implementation Patterns</a></li>
-<li><a href="#architecture-diagram-full-memory-pipeline">Architecture Diagram: Full Memory Pipeline</a></li>
-<li><a href="#what-this-means-for-your-agent">What This Means For Your Agent</a></li>
-<li><a href="#related-articles">Related Articles</a></li>
-<li><a href="#faq">Faq</a></li>
+<li><a href="#the-atkinson-shiffrin-model-and-its-ai-mapping">The Atkinson-Shiffrin model and its AI mapping</a></li>
+<li><a href="#layer-1-sensory-memory-the-input-buffer">Layer 1: Sensory memory — the input buffer</a></li>
+<li><a href="#layer-2-short-term-memory-working-context">Layer 2: Short-term memory — working context</a></li>
+<li><a href="#layer-3-episodic-memory-what-happened">Layer 3: Episodic memory — what happened</a></li>
+<li><a href="#layer-4-semantic-memory-what-is-known">Layer 4: Semantic memory — what is known</a></li>
+<li><a href="#layer-5-procedural-memory-how-to-do-things">Layer 5: Procedural memory — how to do things</a></li>
+<li><a href="#why-hierarchy-beats-flat-memory">Why hierarchy beats flat memory</a></li>
+<li><a href="#implementation-patterns-from-production-systems">Implementation patterns from production systems</a></li>
+<li><a href="#faq">FAQ</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>为什么AI模型在对话中途突然失忆，却声称自己记得一切？为什么一个Agent前几轮说的话，下一轮就像没发生过？问题不在模型本身，在于记忆架构。</p>
-<p>人类大脑从不把全部经验平铺存储。它分层管理：从感官输入到工作记忆，再到长期记忆，层层过滤，层层抽象。AI系统借鉴这套机制，才能真正具备持续性和一致性。</p>
-<h2 id="the-atkinson-shiffrin-model-and-its-ai-mapping">The Atkinson-shiffrin Model And Its Ai Mapping</h2>
-<p>Richard Atkinson和Richard Shiffrin在1968年提出经典的三系统记忆模型：感觉记忆(sensory register)、短时记忆(short-term store)和长时记忆(long-term store)。五十年后，AI架构师不约而同地复制了这套设计。</p>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────┐
-│           COGNITIVE ARCHITECTURE             │
-│                                             │
-│   Human Memory        →  AI System Memory   │
-│   ─────────────        ─  ──────────────    │
-│   Sensory Register    →  Input Buffer       │
-│   Short-Term Store    →  Working Context    │
-│   Long-Term Memory    →  Persistent Store   │
-│     (Episodic)          (Vector DB)         │
-│     (Semantic)          (Knowledge Graph)   │
-│     (Procedural)        (Function Store)    │
-└─────────────────────────────────────────────┘
+        <p>Human brains do not store every experience equally. They layer it: sensory input gets filtered into working memory, some of that gets compressed into long-term storage, and the rest evaporates. This is not a bug in human cognition. It is the feature that makes it scalable. AI systems work the same way, and the teams that understand this build agents that actually remember things. The teams that treat memory as a flat document store end up with systems that forget the moment context runs out.</p>
+<p>I have implemented layered memory architectures in three different agent systems over the past two years. The difference between a flat memory approach and a hierarchical one is the difference between an agent that degrades over a long session and one that stays sharp. The Atkinson-Shiffrin model from 1968 maps almost perfectly onto what modern AI memory systems are building, and that is not a coincidence.</p>
+<h2 id="the-atkinson-shiffrin-model-and-its-ai-mapping">The Atkinson-Shiffrin model and its AI mapping</h2>
+<p>Richard Atkinson and Richard Shiffrin proposed a three-system memory model in 1968: the sensory register, the short-term store, and the long-term store. Fifty years later, AI architects are building the same architecture without having read the paper. The sensory register becomes the input buffer. The short-term store becomes working context. The long-term store becomes persistent memory across sessions.</p>
+<p>Here is how that mapping actually works in a production AI system.</p>
+<div class="highlight"><pre><span></span><code>Sensory Register  -&gt;  Input buffer (audio/text/raw features)
+Short-Term Store -&gt;  Working context (current context window)
+Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
 </code></pre></div>
 
-<p>每层的物理实现完全不同。人类大脑靠神经元群和突触权重；AI靠上下文窗口、向量数据库和代码存储。功能映射却惊人地一致。</p>
-<h2 id="the-five-layers-of-ai-memory-hierarchy">The Five Layers Of Ai Memory Hierarchy</h2>
-<h3 id="sensory-memory-raw-input-capture">Sensory Memory: Raw Input Capture</h3>
-<p>这是最底层，寿命以毫秒计。在AI系统里，这对应原始用户输入——文字、语音 token、图像像素。你不会永久存储这些，它们进入系统的方式是一次性burst。</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Sensory layer: raw input capture</span>
-<span class="k">class</span> <span class="nc">SensoryMemory</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttl_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">RingBuffer</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ttl_ms</span> <span class="o">=</span> <span class="n">ttl_ms</span>
+<p>The key insight is that each layer has different retention characteristics. Sensory memory holds raw input for milliseconds. Short-term memory holds curated content for seconds to minutes. Long-term memory holds compressed representations for days to years. You need all three layers, and they need to interact through explicit policies, not through a single flat store.</p>
+<h2 id="layer-1-sensory-memory-the-input-buffer">Layer 1: Sensory memory — the input buffer</h2>
+<p>Sensory memory in AI systems is the raw input layer. For a voice agent, this is the audio stream before ASR transcription. For a text agent, this is the raw token sequence before any processing. For a multimodal agent, this might be video frames or sensor readings.</p>
+<p>The retention time at this layer is effectively zero for practical purposes. The buffer exists only to feed into the next layer. What matters here is what gets selected for promotion to short-term memory. This is where Voice Activity Detection lives for voice agents, and where relevance filtering lives for text agents.</p>
+<p>The mistake engineers make is trying to store too much at this layer. You cannot retain the full raw audio stream for a two-hour conversation. The cost would be astronomical and the retrieval value would be near zero. Instead, you summarize and compress at this boundary.</p>
+<h2 id="layer-2-short-term-memory-working-context">Layer 2: Short-term memory — working context</h2>
+<p>Short-term memory in AI is the context window. It holds what the model is currently reasoning about. In a transformer, this is the full token sequence that gets attention computed across. In an agent, this also includes the working variables, retrieved documents, and intermediate outputs from tool calls.</p>
+<p>The capacity of short-term memory is your context window size. For GPT-4o, that is 128K tokens. For Claude 3.5 Sonnet, that is 200K tokens. For Gemini 1.5 Pro, that is 1 million tokens. The numbers keep growing, but the fundamental problem does not change: you cannot fit everything you want to remember into this window.</p>
+<p>The selection policy for what gets kept in short-term memory is where the engineering gets interesting. Most systems use recency as the primary signal. Newer content stays, older content gets evicted. But recency is a poor proxy for importance. A message from three turns ago that established a user preference is more important than a message from ten turns ago about an unrelated topic.</p>
+<p>Importance-weighted eviction performs significantly better than recency-only. Here is the pattern I use in production.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
-    <span class="k">def</span> <span class="nf">capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">write</span><span class="p">({</span>
-            <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">input_token</span><span class="p">,</span>
-            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
-            <span class="s2">&quot;decay&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ttl_ms</span>
-        <span class="p">})</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MemoryItem</span><span class="p">:</span>
+    <span class="n">content</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">importance</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">access_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">importance_score</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MemoryItem</span><span class="p">,</span> <span class="n">current_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">recency</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">current_time</span> <span class="o">-</span> <span class="n">item</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span> <span class="o">/</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="n">importance</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">importance</span>
+    <span class="n">access</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">access_count</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">importance</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">recency</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">access</span>
+
+<span class="k">def</span> <span class="nf">select_for_context_window</span><span class="p">(</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryItem</span><span class="p">],</span>
+    <span class="n">budget</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryItem</span><span class="p">]:</span>
+    <span class="n">current_time</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span> <span class="k">if</span> <span class="n">items</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">scored</span> <span class="o">=</span> <span class="p">[(</span><span class="n">importance_score</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">current_time</span><span class="p">),</span> <span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
+    <span class="n">scored</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">scored</span><span class="p">[:</span><span class="n">budget</span><span class="p">]]</span>
 </code></pre></div>
 
-<p>Sensory memory的目的是保真度。不压缩，不索引，直接pass through。当用户说了一句话，前50个token还留在sensory buffer里，可以快速检索用于共指解析(coreference resolution)。</p>
-<h3 id="working-memory-the-context-window">Working Memory: The Context Window</h3>
-<p>GPT-4的128K上下文窗口，Claude的200Ktoken，这些是AI的working memory——或者说，是对它的拙劣模拟。真实working memory有容量限制，大约7±2个chunk；LLM的上下文窗口是固定token配额，没有内在优先级机制。</p>
-<p>Working memory的特性是：<strong>易失、有限、当前聚焦</strong>。你在这个窗口里做的推理，决定了系统此刻的行为质量。</p>
-<div class="highlight"><pre><span></span><code>Working Memory State (example, simplified):
+<p>The important thing is that short-term memory is volatile. When the context window resets or the session ends, working context disappears unless you explicitly promote selected items to long-term memory.</p>
+<h2 id="layer-3-episodic-memory-what-happened">Layer 3: Episodic memory — what happened</h2>
+<p>Episodic memory stores particular events or interactions. In an AI system, this maps to session logs, conversation transcripts, and event sequences. The defining characteristic is that episodic memory is indexed by time and context, not by semantic similarity.</p>
+<p>When a user asks "what did we discuss about the API design last Tuesday?", that is an episodic retrieval problem. The system needs to find the session from last Tuesday and extract the relevant portion. Vector similarity search on a flat embedding store is a poor fit for this. You need time-based indexing with semantic filtering on top.</p>
+<p>The implementation I use stores session summaries with timestamps and topic tags. Individual turns get embedded and stored with a session ID foreign key. Retrieval first narrows by time range and topic, then does semantic similarity within that subset.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-[0] system: &quot;You are a helpful assistant...&quot;
-[1] user: &quot;My dog Max is 3 years old...&quot;
-[2] user: &quot;He&#39;s always scratching behind his ear...&quot;
-[3] assistant: &quot;That sounds like it could be...&quot;
-[4] user: &quot;What shampoo should I use?&quot;
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;episodic_memory.db&#39;</span><span class="p">)</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-Current focus: shampoo recommendation for dog&#39;s ear issue
-Relevant context: Max, 3yr dog, scratching behavior
-Discarded (evicted): earlier parts of conversation
+<span class="c1"># Store a session summary</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    INSERT INTO sessions (project, summary, topic_tags, started_at)</span>
+<span class="s2">    VALUES (?, ?, ?, ?)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;my-project&#39;</span><span class="p">,</span> <span class="s1">&#39;Discussed API versioning strategy...&#39;</span><span class="p">,</span> <span class="s1">&#39;api,design,v1&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
+
+<span class="c1"># Retrieve sessions by time range and topic</span>
+<span class="k">def</span> <span class="nf">get_relevant_sessions</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">days_back</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days_back</span><span class="p">)</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        SELECT summary, started_at FROM sessions</span>
+<span class="s2">        WHERE project = ?</span>
+<span class="s2">          AND topic_tags LIKE ?</span>
+<span class="s2">          AND started_at &gt; ?</span>
+<span class="s2">        ORDER BY started_at DESC</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 </code></pre></div>
 
-<p>Eviction策略决定系统表现。FIFO是naive的；LLM用attention scores动态决定什么重要。这产生了一个AI特有的悖论：<strong>上下文越长，推理质量不一定越高</strong>。噪声稀释信号，相关token的attention weight被稀释。</p>
-<p>Letta在2024年的研究量化了这个问题：在128K上下文中，中间25%的token平均attention weight只有边缘token的23%。</p>
-<h3 id="episodic-memory-experience-storage">Episodic Memory: Experience Storage</h3>
-<p>Episodic memory存储特定经历的时间、地点、情感标记。对AI，这对应对话历史、交互序列、任务执行轨迹。不同于working memory的volatile特性，episodic是persistent的——你希望它跨session存活。</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Episodic memory schema (simplified)</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">episodic_memory</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
-<span class="w">    </span><span class="n">session_id</span><span class="w"> </span><span class="n">UUID</span><span class="p">,</span>
-<span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
-<span class="w">    </span><span class="n">episode_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">  </span><span class="c1">-- &#39;conversation&#39;, &#39;task&#39;, &#39;error&#39;</span>
-<span class="w">    </span><span class="n">content_vector</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">1536</span><span class="p">),</span><span class="w">  </span><span class="c1">-- embedding</span>
-<span class="w">    </span><span class="n">raw_text</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">importance_score</span><span class="w"> </span><span class="nb">FLOAT</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 0-1, computed by relevance model</span>
-<span class="w">    </span><span class="n">decay_factor</span><span class="w"> </span><span class="nb">FLOAT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="w">  </span><span class="c1">-- for forgetting curve</span>
-<span class="p">);</span>
+<p>Episodic memory is what most teams mean when they say "conversation history." But conversation history is only useful when it can be retrieved efficiently. Storing it is not the hard part. Retrieving the right episode at the right time is.</p>
+<h2 id="layer-4-semantic-memory-what-is-known">Layer 4: Semantic memory — what is known</h2>
+<p>Semantic memory stores facts, concepts, and world knowledge separate from the specific episodes where they were learned. In AI systems, this maps to the trained model weights, the retrieved knowledge base, and the persistent facts that persist across sessions.</p>
+<p>The key property of semantic memory is that it survives session boundaries and can be updated without retraining. When Claude Code remembers that your project uses Python 3.12 and pytest, that is semantic memory. When it remembers the specific conversation where you decided to upgrade from Python 3.9, that is episodic memory.</p>
+<p>The failure mode for semantic memory is staleness. Facts change. When your team switches from pytest to unittest, the semantic memory entry that says "uses pytest" is now wrong. Detecting and correcting staleness is an unsolved problem in production memory systems.</p>
+<h2 id="layer-5-procedural-memory-how-to-do-things">Layer 5: Procedural memory — how to do things</h2>
+<p>Procedural memory stores skills and learned behaviors. In AI systems, this maps to system prompts, tool definitions, agent loop configurations, and the behavioral patterns encoded through fine-tuning or RLHF.</p>
+<p>This is the most overlooked memory layer in AI agent design. When you write a system prompt that tells an agent how to behave, you are writing to procedural memory. When you define a tool schema, you are adding to procedural memory. When you configure the retry logic for API calls, that is procedural memory too.</p>
+<p>The important insight is that procedural memory is the most stable layer. It does not change within a session. It changes through explicit editing of prompts and tool definitions. This is also where the most consequential errors live. A flawed system prompt affects every interaction.</p>
+<h2 id="why-hierarchy-beats-flat-memory">Why hierarchy beats flat memory</h2>
+<p>The argument for a flat memory store is simplicity. One vector database, one retrieval step, done. The problem is that flat memory treats a user's name from two weeks ago the same way it treats the current conversation turn. It treats a factual claim about your product pricing the same way it treats a transient hypothesis from the current session.</p>
+<p>Flat memory fails at scale for three reasons. First, retrieval noise grows with the store size. As you add more documents, semantic similarity search returns more false positives. Second, importance signals are lost. A message about a user preference is scored the same as a message about an intermediate tool result. Third, staleness compounds. Old facts accumulate faster than they can be pruned, and retrieval increasingly surfaces outdated information.</p>
+<p>Hierarchical memory addresses all three. Importance is assessed at each layer transition. Staleness is handled by eviction from short-term and compression into long-term rather than by raw deletion. Retrieval is scoped to the relevant layer, so a query about user preferences searches episodic memory, not the entire history.</p>
+<h2 id="implementation-patterns-from-production-systems">Implementation patterns from production systems</h2>
+<p>Letta implements a paged memory system inspired by operating system virtual memory. Memory gets swapped in and out of the context window based on relevance scoring. The architecture is clean and the codebase is worth studying, but the production operational burden is high.</p>
+<p>MemGPT takes a different approach, treating memory as a managed external store with explicit summary and retrieval steps. The self-managed memory loop is clever, but the inconsistency in production is real. I have seen the memory system discard critical context mid-session because the summary threshold was crossed at an awkward moment.</p>
+<p>The pattern I have converged on uses tiered summarization with importance-gated promotion. Items start in short-term memory. Every N turns, an importance score is computed. Items above a threshold get promoted to episodic memory as compressed summaries. Items below the threshold get discarded.</p>
+<p>Here is the core of the promotion logic.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MemoryItem</span><span class="p">:</span>
+    <span class="n">content</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">importance</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">turns_old</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">access_count</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="k">def</span> <span class="nf">should_promote_to_episodic</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MemoryItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="c1"># Must be important AND accessed recently OR very old</span>
+    <span class="n">importance_gate</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">importance</span> <span class="o">&gt;</span> <span class="mf">0.6</span>
+    <span class="n">recency_gate</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">access_count</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">item</span><span class="o">.</span><span class="n">turns_old</span> <span class="o">&gt;=</span> <span class="mi">5</span>
+    <span class="k">return</span> <span class="n">importance_gate</span> <span class="ow">and</span> <span class="n">recency_gate</span>
+
+<span class="k">def</span> <span class="nf">compress_for_episodic</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MemoryItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="c1"># Summarize to 2-3 sentences</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">turns_old</span><span class="si">}</span><span class="s2"> turns ago]: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span>
 </code></pre></div>
 
-<p>Letta的实现是这个方向最成熟的例子。它的MemFree协议定义了如何在episodic layer做检索：先用embedding similarity找到候选episodes，再用水印验证事实一致性，最后用reranker排序。实际召回率比纯向量搜索高40%。</p>
-<h3 id="semantic-memory-structured-knowledge">Semantic Memory: Structured Knowledge</h3>
-<p>Semantic memory存储事实、概念、词义关系——去除了一切个人经历的具体细节。这是知识库的本质：脱离上下文仍然为真的东西。</p>
-<p>AI的semantic memory通常实现为知识图谱或结构化数据库。</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Semantic memory: knowledge graph node</span>
-<span class="k">class</span> <span class="nc">Concept</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">definition</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">relations</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># {relation_type: [target_concepts]}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">properties</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">confidence</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_updated</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update concept with new evidence.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">confidence</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">confidence</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_updated</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-</code></pre></div>
-
-<p>MemGPT用tiered memory架构处理这个：热点事实驻留在GPU memory（HBM），冷数据下沉到CPU内存或NVMe SSD。关键问题是<strong>何时把信息从episodic提升到semantic</strong>。MemGPT用访问频率+重要性评分联合决策：访问超过10次且重要性&gt;0.7的episodes触发蒸馏(consolidation)。</p>
-<h3 id="procedural-memory-how-to-act">Procedural Memory: How To Act</h3>
-<p>这是最古老、最自动化的记忆形式——骑车不会忘记怎么骑车。对AI，procedural memory是function definitions、agent loops、prompt templates和工具调用模式。</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Procedural memory: stored action patterns</span>
-<span class="n">PROCEDURAL_STORE</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;web_search&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;trigger&quot;</span><span class="p">:</span> <span class="s2">&quot;user asks about current events or facts&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;invoke search API with query extraction&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fallback&quot;</span><span class="p">:</span> <span class="s2">&quot;ask user to rephrase question&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;code_execution&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;trigger&quot;</span><span class="p">:</span> <span class="s2">&quot;user asks to run code or analyze data&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;spin up sandbox, execute, return output&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fallback&quot;</span><span class="p">:</span> <span class="s2">&quot;explain limitations of execution environment&quot;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>强化学习里的policy gradient就是procedural memory的机器版本。Agent通过梯度更新改变行为模式，这些更新直接编码在模型权重里——不是在context里， 是模型本身。</p>
-<h2 id="why-flat-memory-architecture-fails">Why Flat Memory Architecture Fails</h2>
-<p>平坦记忆是大多数简单RAG系统的做法：<strong>把所有文档塞进一个向量索引，检索时做相似度搜索，返回top-k结果拼进context</strong>。</p>
-<p>这套方案有三个致命缺陷。</p>
-<p><strong>第一个缺陷：语义密度不均。</strong> 一次一小时的对话，前5分钟和最后5分钟 embedding 可能完全不相关——用户在不同时间讨论完全不同的话题。Top-k检索无法捕捉这种多主题结构。</p>
-<p><strong>第二个缺陷：检索质量与上下文相关。</strong> 用户问"上次我们讨论的那个问题"——这个query的embedding可能与当时讨论的embedding不在同一语义空间。跨session检索是平坦系统的死穴。</p>
-<p><strong>第三个缺陷：无法区分时效性。</strong> 两篇文档，一篇写于2020年，一篇写于2024年。向量相似度不考虑时间。用户的保险政策在2023年变了，RAG系统不知道。</p>
-<p>层次架构解决了这三个问题：</p>
-<div class="highlight"><pre><span></span><code>Flat Memory:
-[Doc1] [Doc2] [Doc3] ... [DocN]  →  retrieve top-k →  context
-                                   ↑ random access, no structure
-
-Hierarchical Memory:
-Sensory → Working → Episodic → Semantic → Procedural
-   ↑          ↑         ↑          ↑           ↑
-   │          │         │          │           │
-   └──────────┴──────────┴──────────┴───────────┘
-   Cross-layer inference: retrieval propagates up
-   Temporal awareness: episodic layer tracks recency
-   Priority: importance scores gate access at each layer
-</code></pre></div>
-
-<p>每层有明确的职责边界。Sensory处理原始输入，Working维持当前焦点，Episodic存储事件序列，Semantic抽象知识，Procedural定义行为。三星半导体在内部AI助手里用这套架构，对话连贯性比flat RAG高67%（内部数据，2024年）。</p>
-<h2 id="implementing-memory-hierarchy-letta-and-memgpt">Implementing Memory Hierarchy: Letta And MemGPT</h2>
-<h3 id="lettas-approach">Letta's Approach</h3>
-<p>Letta（原名 MemGPT）构建了一套生产级的记忆层次系统。它的核心是<strong>记忆虚拟化</strong>：把长期记忆当作外部存储，用 streaming 方式管理。</p>
-<div class="highlight"><pre><span></span><code>Letta Memory Architecture:
-
-User Input
-    ↓
-[Sensory Buffer] ←── ephemeral, 500ms TTL
-    ↓
-[Working Context] ←── context window, LLM direct access
-    ↓
-[Episodes Store] ←── PostgreSQL + pgvector
-    ↓
-[Core Memory] ←── semantic facts, knowledge graph
-    ↓
-[Procedural Memory] ←── system prompts, function defs
-</code></pre></div>
-
-<p>Letta的创新是<strong>分层召回(layzed recall)</strong>：不每次都查询所有层。根据query type决定访问深度。简单的事实查询直接走 semantic；需要上下文的复杂推理才会触发 episodic 检索。召回延迟从平均 340ms 降到 89ms。</p>
-<p>关键API端点：
-- <code>POST /v1/memory/ingest</code> — 写入 sensory/episodic
-- <code>GET /v1/memory/search</code> — 多层检索
-- <code>POST /v1/memory/consolidate</code> — 把 episodic 蒸馏到 semantic</p>
-<h3 id="memgpts-memory-tiers">MemGPT's Memory Tiers</h3>
-<p>MemGPT（University of伯克利, 2024）更偏向研究系统。它的核心思想是<strong>virtual memory abstraction</strong>：把LLM的上下文当作寄存器，把外部存储当作RAM/ROM。</p>
-<div class="highlight"><pre><span></span><code>MemGPT Memory Hierarchy:
-
-Tier 0 (Context Register)
-  - LLM attention window
-  - Direct read/write, O(1) access
-  - Capacity: ~128K tokens (GPT-4)
-
-Tier 1 (Primary Memory / RAM)
-  - Working context summaries
-  - Recent episodic buffer
-  - Capacity: ~1M tokens equivalent
-  - Latency: &lt;10ms
-
-Tier 2 (Secondary Memory / Storage)
-  - Full conversation history
-  - Archived episodes
-  - Capacity: unlimited
-  - Latency: 50-200ms (SSD)
-
-Tier 3 (Archive / Cold Storage)
-  - Semantic knowledge base
-  - Fact store, long-term facts
-  - Capacity: unlimited
-  - Latency: 200-500ms
-</code></pre></div>
-
-<p>MemGPT的fifo思想：用队列管理 episodic 的进出。新 episode 入队；当队列满了，低重要性 episodes 被压缩成 summary 或推入 Tier 2。重要性由 LLM 自己判断——每次交互后，模型输出一个 importance score，决定这条记忆的命运。</p>
-<h2 id="the-forgetting-curve-why-your-ai-loses-context">The Forgetting Curve: Why Your Ai Loses Context</h2>
-<p>艾宾浩斯1885年的实验定义了人类遗忘曲线：信息在24小时后只剩33%。AI系统有类似问题，但机制不同。</p>
-<p>AI的遗忘是<strong>容量危机</strong>。上下文窗口满了，必须evict。Eviction策略决定什么被保留，什么被丢弃。</p>
-<div class="highlight"><pre><span></span><code>AI Forgetting Mechanisms:
-
-1. Attention Dilution
-   Context length ↑ → per-token attention ↓
-   128K context: middle tokens get 15-20% attention weight
-
-2. Retrieval Decay
-   Older embeddings drift from original semantics
-   6-month old vector: ~40% semantic drift measured
-
-3. Consolidation Failure
-   Episodic → Semantic distillation misses important details
-   Estimated information loss: 15-25% per consolidation cycle
-</code></pre></div>
-
-<p>解决这个问题的工程手段：定期重新嵌入（re-embed）重要context；用 importance score 做主动eviction而不是被动FIFO；在semantic层维护一个"核心事实"摘要作为锚点。</p>
-<h2 id="practical-implementation-patterns">Practical Implementation Patterns</h2>
-<h3 id="pattern-1-multi-layer-rag">Pattern 1: Multi-layer RAG</h3>
-<div class="highlight"><pre><span></span><code>Query Flow:
-User: &quot;What happened in my meeting yesterday about the API redesign?&quot;
-
-Layer 1: Working Memory
-  → Is this in current context? No.
-
-Layer 2: Episodic Search
-  → Semantic search: &quot;meeting + API redesign + yesterday&quot;
-  → Returns: conversation with timestamp 2024-04-18 14:32
-  → Latency: 45ms
-
-Layer 3: Semantic Enrichment
-  → Extract entities: &quot;API redesign&quot;, &quot;backend team&quot;
-  → Query knowledge graph for related context
-  → Returns: project documentation link
-  → Latency: 120ms
-
-Final: Merge and respond
-  → Combined context: episodic + semantic
-  → Response grounded in both
-</code></pre></div>
-
-<h3 id="pattern-2-self-summary-for-long-context">Pattern 2: Self-summary For Long Context</h3>
-<p>模型在长对话中定期输出摘要，这些摘要存入episodic层而非原始对话。这压缩了记忆占用，同时保留了关键信息。</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SelfSummarizer</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">should_summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">context_length</span> <span class="o">&gt;</span> <span class="mi">100_000</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="c1"># Also trigger on topic shift</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic_drift_score</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.7</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="kc">False</span>
-
-    <span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conversation</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Summarize this conversation, preserving:</span>
-<span class="s2">        - Key decisions made</span>
-<span class="s2">        - Important facts mentioned</span>
-<span class="s2">        - Open questions or follow-ups</span>
-<span class="s2">        Format as bullet points, max 500 words.&quot;&quot;&quot;</span>
-
-        <span class="n">summary</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">summary</span>
-</code></pre></div>
-
-<h3 id="pattern-3-priority-gated-access">Pattern 3: Priority-gated Access</h3>
-<p>每层记忆有一个重要性阈值。只有超过阈值的记忆才能被提升到更高层。这防止低价值信息污染核心记忆。</p>
-<div class="highlight"><pre><span></span><code>Importance Score Calculation:
-
-score = α × relevance + β × recency + γ × frequency + δ × user_flag
-
-α = 0.4 (relevance weight)
-β = 0.2 (recency weight)
-γ = 0.2 (frequency weight)
-δ = 0.2 (user explicit flag)
-
-Threshold: 0.65 (tuneable per use case)
-Below threshold: store in episodic only
-Above threshold: candidate for semantic promotion
-</code></pre></div>
-
-<h2 id="architecture-diagram-full-memory-pipeline">Architecture Diagram: Full Memory Pipeline</h2>
-<div class="highlight"><pre><span></span><code>                    ┌─────────────────┐
-                    │   USER INPUT    │
-                    │  (text/audio/   │
-                    │   image tokens) │
-                    └────────┬────────┘
-                             │
-                             ▼
-┌──────────────────────────────────────────────┐
-│              LAYER 0: SENSORY                 │
-│  Raw capture, ring buffer, 500ms TTL        │
-│  No compression, full fidelity             │
-└──────────────────────┬───────────────────────┘
-                       │
-                       ▼
-┌──────────────────────────────────────────────┐
-│              LAYER 1: WORKING                 │
-│  Context window, attention focus, ~128K      │
-│  Eviction: attention-weight based           │
-└──────────────────────┬───────────────────────┘
-                       │
-                       ▼
-┌──────────────────────────────────────────────┐
-│              LAYER 2: EPISODIC               │
-│  Conversation history, event sequences      │
-│  Embedding: text-embedding-ada-002          │
-│  Store: PostgreSQL + pgvector               │
-└──────────────────────┬───────────────────────┘
-                       │
-                       ▼
-┌──────────────────────────────────────────────┐
-│              LAYER 3: SEMANTIC               │
-│  Facts, concepts, knowledge graph          │
-│  Consolidation: episodic → semantic        │
-│  Importance gating: score &gt; 0.65           │
-└──────────────────────┬───────────────────────┘
-                       │
-                       ▼
-┌──────────────────────────────────────────────┐
-│              LAYER 4: PROCEDURAL            │
-│  Function defs, policies, agent loops       │
-│  Stored in: code + model weights           │
-│  Update via: RLHF, fine-tuning             │
-└──────────────────────────────────────────────┘
-</code></pre></div>
-
-<h2 id="what-this-means-for-your-agent">What This Means For Your Agent</h2>
-<p>平坦记忆能让你快速上线，但三个月后你会有一个充满噪声、无法检索、上下文稀释严重的系统。你不需要从第一天就实现完整的五层架构，但需要从分层设计开始。</p>
-<p>最小可行实现：
-- Sensory: input logging without storage
-- Working: context truncation with summary preservation
-- Episodic: session-level conversation storage in vector DB
-- Semantic: entity extraction and fact store
-- Procedural: function definitions as code</p>
-<p>这套最小实现的成本：PostgreSQL + pgvector实例（每月50美元），一个 embedding 服务（每月20美元），和大约两星期的开发时间。</p>
-<p>回报是一个可以跨session记住用户偏好的Agent，一个在长对话中保持上下文的系统，一个知识随时间真正积累而非稀释的架构。</p>
-<p>现在开始设计你的记忆层。</p>
-<hr />
-<h2 id="related-articles">Related Articles</h2>
-<ul>
-<li><a href="/blog/context-windows-vs-memory/">Context windows vs memory</a></li>
-<li><a href="/blog/ai-memory-management-for-llms/">AI memory management for LLMs</a></li>
-<li><a href="/blog/short-term-memory-for-ai-agents/">Short-term memory for AI agents</a></li>
-<li><a href="/blog/how-memory-works-in-hyperagents/">How memory works in HyperAgents</a></li>
-<li><a href="/blog/state-of-ai-agent-memory-2026/">State of AI agent memory 2026</a></li>
-</ul>
-<h2 id="faq">Faq</h2>
-<p><strong>Q: How is AI working memory different from human working memory?</strong></p>
-<p>Human working memory holds roughly 7 chunks (Miller, 1956). AI working memory is a fixed context window with no intrinsic capacity limit, but attention mechanisms create soft limits—longer contexts dilute the importance of individual tokens. A 128K context window sounds infinite, but research shows model performance degrades non-linearly as length increases, with middle tokens receiving disproportionately low attention.</p>
-<p><strong>Q: Can I implement memory hierarchy without a vector database?</strong></p>
-<p>Yes. The minimum implementation uses a relational database (PostgreSQL/MySQL) for episodic storage with JSON columns for raw text. You lose embedding-based similarity search, but gain SQL query flexibility. For small-scale systems (&lt; 1000 sessions/day), SQLite with JSON columns performs adequately. Upgrade path: add pgvector or Pinecone when retrieval quality becomes a bottleneck.</p>
-<p><strong>Q: How often should I consolidate episodic to semantic memory?</strong></p>
-<p>Consolidation frequency depends on memory pressure and quality requirements. Recommended triggers: (1) episodic store exceeds 10K entries, (2) session count above 1K, (3) retrieval latency exceeds 200ms p99. Between consolidations, the system should accumulate importance scores—this is what gates which episodes get promoted.</p>
-<p><strong>Q: What happens when context window fills completely?</strong></p>
-<p>Without hierarchical eviction, the system either crashes, truncates arbitrarily, or loses coherence. With hierarchy: working memory evicts to episodic (with summary), episodic evicts older sessions to semantic (summarized), semantic remains stable. The cascade ensures no hard failure—only gradual quality reduction as you move down the hierarchy.</p>
-<p><strong>Q: How does MemGPT's tiered storage handle latency?</strong></p>
-<p>MemGPT uses a two-tier SSD/RAM architecture with automatic migration. Hot data (recent episodes, core facts) stays in RAM with &lt; 10ms access. Cold data (archived conversations, long-term knowledge) stays on SSD with 50-200ms access. The migration threshold is user-configurable, typically based on access frequency and explicit importance tags.</p>
-<p><strong>Q: Is memory hierarchy necessary for single-turn interactions?</strong></p>
-<p>No. Memory hierarchy becomes critical when you have: (1) multi-turn conversations exceeding 20 exchanges, (2) cross-session continuity requirements, (3) personalization that spans days or weeks. For simple single-turn or short-conversation use cases, a flat context approach is sufficient and simpler to implement.</p>
-<p><strong>Q: How do you handle conflicting information in semantic memory?</strong></p>
-<p>When two sources provide contradictory facts, rank by: (1) source reliability score, (2) recency, (3) confidence in original extraction. Store the conflict as a tagged pair rather than silently overwriting. Surface conflicts to users for explicit resolution when the confidence gap is below threshold. The system should never discard contradictory evidence—conflicts are often where the most interesting insights live.</p>
+<p>The compression is rough but the selectivity is high. Only genuinely important items survive. The episodic store stays small enough that retrieval is fast, and the summaries preserve enough context to be useful.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>Why not just use a large context window instead of a memory hierarchy?</strong></p>
+<p>Context windows have a fixed capacity and a retrieval accuracy curve that degrades in the middle of long contexts. The BEAM benchmark shows this clearly. A 1 million token context window does not give you 1 million tokens of useful memory. It gives you about 200K tokens of usable context at high accuracy, with the rest being noise. Explicit memory systems that manage what gets stored and how it gets retrieved outperform brute-force context at scale.</p>
+<p><strong>How do you handle memory conflicts?</strong></p>
+<p>Memory conflicts happen when new information contradicts old information. The approach I use is last-write-wins for factual claims, with explicit conflict flags for high-stakes contradictions. If a user says their name is Alice today and Bob yesterday, the system records both with timestamps and surfaces the recency to the agent for resolution.</p>
+<p><strong>What about privacy and memory?</strong></p>
+<p>Memory systems that persist user data across sessions introduce privacy considerations that flat context does not. The key is segmentation. User-specific memory should be stored with user isolation at the storage layer, not just at the application layer. I use project-scoped episodic stores where each project has its own database file. A project for work conversations never shares memory with a project for personal conversations.</p>
+<p><strong>How does this differ from RAG?</strong></p>
+<p>RAG is a retrieval mechanism for external knowledge. Memory hierarchy is an architecture for maintaining agent state across sessions. RAG answers the question "what does the model know?" Memory hierarchy answers "what does the agent remember?" They are complementary. RAG feeds external knowledge into the working context layer. Memory hierarchy manages everything the agent has experienced.</p>
+<p><strong>What is the biggest failure mode in layered memory systems?</strong></p>
+<p>Staleness is the biggest failure mode. Memory systems that do not prune aggressively accumulate outdated information faster than they retrieve useful information. The fix is aggressive compression at the short-term to long-term boundary and explicit staleness thresholds that trigger deletion, not just compression.</p>
       </div>
     </div>
   </div>
