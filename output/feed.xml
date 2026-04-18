@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Why Voice AI Agents Break Standard Memory Architectures</title>
+      <link>https://ninadpathak.com/blog/memory-for-voice-agents/</link>
+      <description>Voice AI agents aren't just text chatbots with a microphone attached. The real-time, turn-taking, interruption-heavy nature of spoken dialogue breaks every assumption that works for text-based memory systems. Here's what I learned building both.</description>
+      <pubDate>Apr 19, 2026</pubDate>
+    </item>
+    <item>
       <title>AI Memory Management for LLMs: How Modern AI Systems Remember (and Forget)</title>
       <link>https://ninadpathak.com/blog/ai-memory-management-llms/</link>
       <description>A technical deep-dive into memory management strategies for LLMs and AI agents — covering KV cache eviction, importance-weighted retention, and production systems like Letta and MemGPT.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/agentic-cli-benchmarks/</link>
       <description>I ran a head-to-head benchmark of Claude Code and Gemini CLI on an M2 Air (16GB), testing their ability to autonomously refactor legacy code and resolve race conditions.</description>
       <pubDate>Apr 12, 2026</pubDate>
-    </item>
-    <item>
-      <title>Quantifying the Engineering Velocity Impact of Technical Documentation</title>
-      <link>https://ninadpathak.com/blog/engineering-velocity-documentation/</link>
-      <description>I analyze the structural correlation between documentation quality and engineering throughput, using DORA metrics and Accelerate research to quantify the ROI of technical writing.</description>
-      <pubDate>Apr 11, 2026</pubDate>
     </item>
   </channel>
 </rss>
