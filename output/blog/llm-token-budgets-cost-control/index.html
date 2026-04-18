@@ -243,44 +243,64 @@
 </thead>
 <tbody>
 <tr>
-<td>GPT-4.5</td>
-<td>$75</td>
-<td>$150</td>
+<td>GPT-5.4 Standard</td>
+<td>$2.50</td>
+<td>$15</td>
 </tr>
 <tr>
-<td>GPT-4o</td>
-<td>$2.50</td>
+<td>GPT-5.4 Mini</td>
+<td>$0.75</td>
+<td>$4.50</td>
+</tr>
+<tr>
+<td>GPT-5.4 Nano</td>
+<td>$0.20</td>
+<td>$1.25</td>
+</tr>
+<tr>
+<td>GPT-5.4 Pro</td>
+<td>$30</td>
+<td>$180</td>
+</tr>
+<tr>
+<td>GPT-5.2</td>
+<td>$1.75</td>
+<td>$14</td>
+</tr>
+<tr>
+<td>GPT-5.1</td>
+<td>$1.25</td>
 <td>$10</td>
 </tr>
 <tr>
-<td>GPT-4o-mini</td>
-<td>$0.15</td>
-<td>$0.60</td>
+<td>Claude Opus 4.7</td>
+<td>$5</td>
+<td>$25</td>
 </tr>
 <tr>
-<td>Claude 3.5 Sonnet</td>
+<td>Claude Sonnet 4.6</td>
 <td>$3</td>
 <td>$15</td>
 </tr>
 <tr>
-<td>Claude 3.5 Haiku</td>
-<td>$0.80</td>
-<td>$4</td>
-</tr>
-<tr>
-<td>Gemini 2.5 Flash</td>
-<td>$0.15</td>
-<td>$0.60</td>
-</tr>
-<tr>
-<td>Gemini 2.5 Pro</td>
-<td>$1.25</td>
+<td>Claude Haiku 4.5</td>
+<td>$1</td>
 <td>$5</td>
+</tr>
+<tr>
+<td>Gemini 3.1 Pro (&lt;=200K ctx)</td>
+<td>$2</td>
+<td>$12</td>
+</tr>
+<tr>
+<td>Gemini 3.1 Pro (&gt;200K ctx)</td>
+<td>$4</td>
+<td>$18</td>
 </tr>
 </tbody>
 </table>
 <p>Numbers shift frequently. Always check the current API pricing pages before architecting around a specific rate.</p>
-<p>A 1,000-token input with a 500-token output on GPT-4.5 costs $0.112. That sounds small until you multiply it by 50,000 requests per day. Then it is $5,600 per day, or $168,000 per month. Context compounds.</p>
+<p>A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds.</p>
 <h2 id="counting-tokens-before-you-spend-them">Counting tokens before you spend them</h2>
 <p>The most basic cost control technique is knowing how many tokens a request will consume before you send it. Every major SDK provides a token counting utility.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">anthropic</span> <span class="kn">import</span> <span class="n">Anthropic</span>
@@ -349,7 +369,7 @@
 <p>Apply it to your LLM calls:</p>
 <div class="highlight"><pre><span></span><code><span class="n">budget</span> <span class="o">=</span> <span class="n">TokenBudget</span><span class="p">(</span><span class="n">max_tokens_per_minute</span><span class="o">=</span><span class="mi">500_000</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">llm_with_budget</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gpt-4o&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">llm_with_budget</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gpt-5.4&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">estimated</span> <span class="o">=</span> <span class="n">estimate_tokens</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">budget</span><span class="o">.</span><span class="n">consume</span><span class="p">(</span><span class="n">estimated</span><span class="p">):</span>
@@ -400,11 +420,11 @@
 <span class="s2">    Query: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span>
 <span class="s2">    &quot;&quot;&quot;</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">call_model</span><span class="p">(</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span> <span class="n">routing_prompt</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">call_model</span><span class="p">(</span><span class="s2">&quot;gpt-5.4-nano&quot;</span><span class="p">,</span> <span class="n">routing_prompt</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="s2">&quot;simple&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s2">&quot;gpt-4o-mini&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;gpt-4o&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;gpt-5.4-nano&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;gpt-5.4&quot;</span>
 </code></pre></div>
 
 <p>The cost of the routing call is negligible. The savings from sending 80% of queries to the $0.15/$0.60 model instead of the $2.50/$10 model are not.</p>
@@ -460,9 +480,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;llm_spend&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">daily_spend</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_prices</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;gpt-4o&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">2.50</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">10.00</span><span class="p">},</span>
-            <span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">0.60</span><span class="p">},</span>
-            <span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">3.00</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">15.00</span><span class="p">},</span>
+            <span class="s2">&quot;gpt-5.4&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">2.50</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">15.00</span><span class="p">},</span>
+            <span class="s2">&quot;gpt-5.4-mini&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">4.50</span><span class="p">},</span>
+            <span class="s2">&quot;claude-opus-4.7&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">5.00</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">25.00</span><span class="p">},</span>
+            <span class="s2">&quot;claude-sonnet-4.6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">3.00</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">15.00</span><span class="p">},</span>
+            <span class="s2">&quot;gemini-3.1-pro&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">2.00</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">12.00</span><span class="p">},</span>
         <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
@@ -490,7 +512,7 @@
 <p>If you are starting from a position of no cost control, here is the priority order:</p>
 <ol>
 <li>Enable token counting on every request. You cannot manage what you cannot measure.</li>
-<li>Route simple queries to cheap models. A 60% routing ratio to GPT-4o-mini instead of GPT-4o saves 94% on input token costs.</li>
+<li>Route simple queries to cheap models. A 60% routing ratio to GPT-5.4 Nano instead of GPT-5.4 saves 92% on input token costs.</li>
 <li>Audit system prompts. Halve them first. Measure the difference.</li>
 <li>Enable caching. Target 30%+ cache hit rate on high-volume endpoints.</li>
 <li>Set hard output token limits. This alone can cut output costs by 20-40%.</li>
@@ -599,9 +621,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/technical-writing-for-engineers/" class="footer-link">Technical Writing for Engineers: The 80/20 Guide</a>
           <a href="/blog/llm-token-budgets-cost-control/" class="footer-link">LLM token budgets: a practical guide to cost control</a>
           <a href="/blog/rag-evaluation-metrics-what-actually-matters/" class="footer-link">RAG Evaluation Metrics: What Actually Matters</a>
-          <a href="/blog/voice-ai-latency-gemini-benchmark/" class="footer-link">The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1 Voice Agent</a>
         </div>
       </div>
 

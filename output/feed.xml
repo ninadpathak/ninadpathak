@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Technical Writing for Engineers: The 80/20 Guide</title>
+      <link>https://ninadpathak.com/blog/technical-writing-for-engineers/</link>
+      <description>Most engineering documentation fails for the same reasons. Here is what actually moves the needle.</description>
+      <pubDate>Apr 18, 2026</pubDate>
+    </item>
+    <item>
       <title>LLM token budgets: a practical guide to cost control</title>
       <link>https://ninadpathak.com/blog/llm-token-budgets-cost-control/</link>
       <description>Real numbers, real pricing, and concrete strategies for keeping your LLM spend predictable.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/</link>
       <description>AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.</description>
       <pubDate>Mar 31, 2026</pubDate>
-    </item>
-    <item>
-      <title>How to Write a Changelog That Developers Actually Read</title>
-      <link>https://ninadpathak.com/blog/how-to-write-a-changelog-developers-actually-read/</link>
-      <description>Most changelogs exist to satisfy a checkbox. Here's what makes developers actually read them, and how to structure entries so breaking changes land before they cause incidents.</description>
-      <pubDate>Mar 30, 2026</pubDate>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Writing for Engineers: The 80/20 Guide | Ninad Pathak</title>
+  <meta name="description" content="Most engineering documentation fails for the same reasons. Here is what actually moves the needle.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Technical Writing for Engineers: The 80/20 Guide">
+  <meta property="og:description" content="Most engineering documentation fails for the same reasons. Here is what actually moves the needle.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/technical-writing-for-engineers/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/technical-writing-for-engineers/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Technical Writing for Engineers: The 80/20 Guide",
+  "description": "Most engineering documentation fails for the same reasons. Here is what actually moves the needle.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-18",
+  "dateModified": "2026-04-18",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/technical-writing-for-engineers/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Technical Writing for Engineers: The 80/20 Guide",
+      "item": "https://ninadpathak.com/blog/technical-writing-for-engineers/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Technical Writing for Engineers: The 80/20 Guide</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 18, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">10 min read</span>
+      </div>
+      <h1 class="post-title">Technical Writing for Engineers: The 80/20 Guide</h1>
+      <p class="lead">Most engineering documentation fails for the same reasons. Here is what actually moves the needle.</p>
+      <div class="post-tags">
+        <span class="tag">technical-writing</span>
+        <span class="tag">developer-experience</span>
+        <span class="tag">engineering-culture</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-core-problem">The core problem</a></li>
+<li><a href="#start-with-the-task-not-the-concept">Start with the task, not the concept</a></li>
+<li><a href="#code-that-works-beats-code-that-explains">Code that works beats code that explains</a></li>
+<li><a href="#name-things-precisely">Name things precisely</a></li>
+<li><a href="#structure-for-scanning">Structure for scanning</a></li>
+<li><a href="#the-four-documentation-types">The four documentation types</a></li>
+<li><a href="#version-control-your-documentation">Version control your documentation</a></li>
+<li><a href="#measure-whether-docs-work">Measure whether docs work</a></li>
+<li><a href="#the-update-discipline">The update discipline</a></li>
+<li><a href="#what-to-cut">What to cut</a></li>
+<li><a href="#the-minimal-viable-documentation-stack">The minimal viable documentation stack</a></li>
+<li><a href="#the-compounding-return">The compounding return</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Documentation debt accumulates silently. It starts when a project ships without a README. It compounds when features get added but never explained. It becomes critical when a new engineer joins and spends three days reconstructing knowledge that existed in someone's head. By the time organizations notice, the debt is so large that fixing it feels hopeless.</p>
+<p>This is the default trajectory for most engineering teams. Documentation gets treated as a post-launch chore rather than a first-class engineering artifact. The result is a consistent failure mode: technical writers who cannot keep up with the pace of development, and engineers who do not trust documentation because it is perpetually out of date.</p>
+<p>The 80/20 rule applies here. Twenty percent of documentation practices deliver eighty percent of the value. The rest is ceremony.</p>
+<h2 id="the-core-problem">The core problem</h2>
+<p>Most technical writing fails because it is written for the wrong audience. The author writes to demonstrate understanding rather than transfer it. Every sentence is written from the author's perspective — what the author knows, what the author thinks is important, what the author remembers.</p>
+<p>The reader needs the opposite. The reader arrives with a specific gap. They do not care what you know. They care whether your documentation closes the gap between where they are and where they want to be.</p>
+<p>This is a perspective shift that sounds simple but changes everything. When you write for the reader, you structure around questions, not topics. You anticipate confusion points before they happen. You provide working code before explaining edge cases. You prioritize the happy path and treat exceptions as secondary.</p>
+<h2 id="start-with-the-task-not-the-concept">Start with the task, not the concept</h2>
+<p>The most common mistake in engineering documentation is starting with background. Authors spend three paragraphs explaining what a system is before telling the reader how to use it.</p>
+<p>Readers do not read linearly. They scan for action. If they cannot find what they need in thirty seconds, they leave or they ask a colleague. Either outcome means your documentation failed.</p>
+<p>Lead with the task. State what the reader will accomplish. Show the concrete steps. Then provide context.</p>
+<p>Example of the wrong order:</p>
+<blockquote>
+<p>"GraphQL is a query language for APIs. It was developed by Facebook in 2012 and open-sourced in 2015. Unlike REST, GraphQL allows clients to request exactly the data they need. This reduces over-fetching and gives frontend teams more autonomy. In this tutorial, we will cover how to set up a GraphQL server with Node.js."</p>
+</blockquote>
+<p>Example of the right order:</p>
+<blockquote>
+<p>"Initialize a GraphQL server in Node.js:</p>
+<p><code>npm install express-graphql graphql</code></p>
+<p>Define your schema:</p>
+<p><code>const schema = buildSchema('type Query { hello: String }');</code></p>
+<p>GraphQL lets clients request exactly the fields they need, reducing the over-fetching that plagues REST endpoints. If this is your first time with GraphQL, read the official schema guide before continuing."</p>
+</blockquote>
+<p>The second version respects the reader's time. It provides a working starting point immediately. The concept follows the action.</p>
+<h2 id="code-that-works-beats-code-that-explains">Code that works beats code that explains</h2>
+<p>Every code example in documentation should be copy-paste-run. Not almost run. Run. This is a hard constraint.</p>
+<p>If your code example has a missing import, a wrong variable name, or an API call that was changed three versions ago, you have actively wasted the reader's time. Engineers will forgive a poorly written explanation. They will not forgive code that does not work.</p>
+<p>Write code examples as complete files when possible. Partial snippets force the reader to reconstruct the missing context. Complete examples let the reader verify the solution in under two minutes.</p>
+<p>Test every code block. Run it yourself. Change the dependency versions to match your documentation's stated requirements and run it again. If you cannot run it successfully, either fix it or remove it.</p>
+<p>The discipline here is brutal: if you are not willing to maintain it, do not write it.</p>
+<h2 id="name-things-precisely">Name things precisely</h2>
+<p>Technical writing for engineers requires exact naming. Vague terminology creates cognitive overhead.</p>
+<p>Avoid phrases like "the system," "it," "this module," "the component." Replace them with specific names. "The AuthService," "the background job queue," "the rate limiter." Specific names let readers build a precise mental model.</p>
+<p>Avoid undefined acronyms in the introduction. If you use JWT, spell out what it means the first time: JSON Web Token (JWT). Engineers from different backgrounds may know the acronym but not its expansion, or vice versa.</p>
+<p>Avoid vague verbs: "handle," "manage," "process." Instead, describe what actually happens. "The retry handler attempts the request up to three times with exponential backoff." That sentence contains no ambiguity. "The system handles retries" could mean anything.</p>
+<h2 id="structure-for-scanning">Structure for scanning</h2>
+<p>Engineers rarely read documentation from top to bottom. They scan. They look for keywords. They jump to the section most likely to contain their answer. Only when they are fully lost do they read linearly.</p>
+<p>Write for this behavior. Use headings that function as answers, not topics. "Timeouts cause memory leaks in long-running workers" is a better heading than "Timeout handling." The former tells the reader what they will learn. The latter tells them what the section is about.</p>
+<p>Use bullet points for lists of related things. Use numbered lists for sequential steps. Do not use bullet points for sequential steps — the ordering implied by a numbered list carries information.</p>
+<p>Use code blocks for code. Use bold for UI labels and filenames. Avoid italics in technical writing — they are harder to read at speed and add no information in this context.</p>
+<p>Keep paragraphs short. Two sentences maximum. This is not a style preference. It is functional. Short paragraphs break information into digestible chunks. When a paragraph exceeds three sentences, the reader has to work to identify which sentence carries the point.</p>
+<h2 id="the-four-documentation-types">The four documentation types</h2>
+<p>Engineers need four types of documentation, and conflating them is a common failure.</p>
+<p><strong>Tutorials</strong> take a newcomer from zero to a working result. They are task-oriented and forgiving of complexity. Tutorials should say "here is how to build X" and hold the reader's hand through every step. The goal is success, not completeness.</p>
+<p><strong>How-to guides</strong> solve a specific problem for someone who already knows the basics. "How to configure OAuth with an existing Next.js app" is a how-to guide. It assumes the reader understands OAuth conceptually but needs help with the implementation details.</p>
+<p><strong>Reference documentation</strong> describes the API, CLI, or library as it exists. Reference docs are exhaustive, accurate, and boring. They answer "what does this parameter do?" not "why would I use this?" Examples and usage notes belong in reference docs, but they come after the parameter description.</p>
+<p><strong>Explanation</strong> explores a topic, discusses trade-offs, and provides context. "Why does eventual consistency make debugging harder?" is an explanation article. It does not give steps. It builds understanding.</p>
+<p>Most teams produce only reference documentation and wonder why their docs feel cold. Reference material is necessary but insufficient. Engineers need tutorials to get started, how-to guides to unblock themselves, and explanations to build judgment.</p>
+<h2 id="version-control-your-documentation">Version control your documentation</h2>
+<p>Documentation belongs in version control. This is non-negotiable.</p>
+<p>When docs live in Google Docs or Confluence, they rot. API versions change. Flags get renamed. Screenshots go stale. Nobody knows when the document was last updated. Diff history is nonexistent. Rollback is painful.</p>
+<p>Markdown in a Git repository solves all of this. Changes have authors and timestamps. PRs enable review. Branches let you update docs for new API versions without breaking the current documentation. The diff view shows exactly what changed and why.</p>
+<p>This also enables docs-as-code. Engineers can update documentation in the same PR as the code that changed. The documentation and the feature ship together. No more documentation sprints that never happen.</p>
+<p>The tooling cost is near zero. Every static site generator — Hugo, MkDocs, Docusaurus, Astro — supports Markdown. GitHub Pages, Netlify, Cloudflare Pages, and Vercel all serve static sites for free. There is no reason to accept documentation rot.</p>
+<h2 id="measure-whether-docs-work">Measure whether docs work</h2>
+<p>You can improve what you measure. For documentation, the right metrics are behavioral, not vanity.</p>
+<p>Bad metrics: pageviews, time on page, number of documents, doc coverage percentage. These measure activity, not outcomes.</p>
+<p>Good metrics: task completion rate, support ticket deflection, time-to-answer for common questions, percentage of new engineers who rate onboarding docs as helpful. These measure whether the documentation actually works.</p>
+<p>You can run a task completion survey at the bottom of every how-to guide. "Did this solve your problem? Yes / No." It takes five seconds for the reader. It gives you signal within days.</p>
+<p>Read the search queries that return no results on your internal search. Those are documentation gaps. When engineers search for something and find nothing, they ask a colleague or open a support ticket. Both outcomes are documentation failures.</p>
+<h2 id="the-update-discipline">The update discipline</h2>
+<p>Documentation has a half-life. The moment you publish a new feature, your documentation starts becoming outdated. Features get renamed. Flags get deprecated. Screenshots diverge from the current UI.</p>
+<p>The only solution is treating documentation as code. When you change the behavior of a feature, you change the documentation in the same PR. If you cannot do this, at minimum add a "Last verified" timestamp to the top of the document. This sets expectations and creates accountability.</p>
+<p>Automate staleness detection where possible. Run scripts that flag docs older than six months. Build a culture where updating docs is a normal part of feature work, not a separate project that never happens.</p>
+<h2 id="what-to-cut">What to cut</h2>
+<p>Documentation debt is not just about missing content. It is also about content that should not exist.</p>
+<p>Delete onboarding documents that contradict the current codebase. Delete tutorials that reference deprecated API versions. Delete FAQ entries that are no longer questions anyone asks. Stale documentation is worse than no documentation because it sends engineers down wrong paths.</p>
+<p>The test for keeping a document: does this help someone accomplish a task or understand a concept that exists in our current system? If not, cut it.</p>
+<p>Every document you keep is a document you are committing to maintain. Be selective.</p>
+<h2 id="the-minimal-viable-documentation-stack">The minimal viable documentation stack</h2>
+<p>You do not need a full documentation platform to start. You need three things.</p>
+<p>A repository of Markdown files with a clear folder structure. Keep reference docs separate from tutorials. Keep internal docs separate from external docs.</p>
+<p>A static site generator that produces a searchable site. Docusaurus, MkDocs Material, and Hugo with a documentation theme all satisfy this. Choose based on your team's existing tooling.</p>
+<p>A convention: every feature PR includes a documentation update. This is the only process change required. Everything else follows from this.</p>
+<p>You can add a documentation team, a content calendar, a style guide, and automated freshness checks. None of it matters if the documentation and the code ship independently. Start with the discipline. Add tooling later.</p>
+<h2 id="the-compounding-return">The compounding return</h2>
+<p>Documentation compounds. Every accurate document you publish reduces the number of repetitive questions your team answers. Every tutorial that works shortens the time it takes a new engineer to contribute. Every reference doc that is kept current saves hours of debugging from engineers using outdated information.</p>
+<p>The return on investment is not linear. The first document saves a few hours. The tenth document saves a full day per week. The fiftieth document makes your engineering team measurably faster.</p>
+<p>The teams with excellent documentation did not start with excellent documentation. They started with the discipline to write it and the process to keep it current.</p>
+<p>That discipline is what separates docs that gather dust from docs that engineers actually use.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/engineering-velocity-documentation/" class="related-card">
+        <div class="related-card-date">2026-04-11</div>
+        <div class="related-card-title">Quantifying the Engineering Velocity Impact of Technical Documentation</div>
+      </a>
+      <a href="/blog/developer-trust-hierarchy/" class="related-card">
+        <div class="related-card-date">2026-04-10</div>
+        <div class="related-card-title">The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketing Content</div>
+      </a>
+      <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="related-card">
+        <div class="related-card-date">2026-04-08</div>
+        <div class="related-card-title">Technical Content as a Moat: the Long Game for Developer Tools</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/technical-writing-for-engineers/" class="footer-link">Technical Writing for Engineers: The 80/20 Guide</a>
+          <a href="/blog/llm-token-budgets-cost-control/" class="footer-link">LLM token budgets: a practical guide to cost control</a>
+          <a href="/blog/rag-evaluation-metrics-what-actually-matters/" class="footer-link">RAG Evaluation Metrics: What Actually Matters</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>
