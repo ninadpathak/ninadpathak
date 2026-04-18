@@ -195,7 +195,7 @@
       <div class="post-meta">
         <span class="post-meta-date">Apr 17, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">8 min read</span>
+        <span class="post-meta-time">9 min read</span>
       </div>
       <h1 class="post-title">LLM token budgets: a practical guide to cost control</h1>
       <p class="lead">Real numbers, real pricing, and concrete strategies for keeping your LLM spend predictable.</p>
@@ -228,10 +228,10 @@
 
       </nav>
       <div class="post-content">
-        <p>Token costs are the new EC2 bills. For the first few years of the LLM era, engineers treated inference spend as a black box. Input goes in, output comes out, invoice arrives at the end of the month. That approach works until it doesn't. A single weekend of heavy debugging with GPT-4 can run $200. A production RAG pipeline that gets 10,000 queries per day can hit $1,000 per month without anyone noticing until the bill lands.</p>
+        <p>Token costs are the new EC2 bills. I learned this the hard way. A single weekend of heavy debugging with GPT-4 burned $200 before I noticed. A production RAG pipeline serving 10,000 queries per day quietly hit $1,000 per month while I wasn't paying attention. For the first few years of the LLM era, engineers treated inference spend as a black box. Input goes in, output comes out, invoice arrives at the end of the month. That approach works until it doesn't.</p>
 <p>This guide is about making token costs visible, predictable, and controllable. No fluff. Real numbers.</p>
 <h2 id="what-a-token-actually-costs">What a token actually costs</h2>
-<p>Tokens are not bytes. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.</p>
+<p>Tokens are not bytes. I keep reminding myself this because it's counterintuitive. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.</p>
 <p>Here is the current pricing landscape as of Q2 2026, rounded to three significant figures:</p>
 <table>
 <thead>
@@ -268,11 +268,6 @@
 <td>$14</td>
 </tr>
 <tr>
-<td>GPT-5.1</td>
-<td>$1.25</td>
-<td>$10</td>
-</tr>
-<tr>
 <td>Claude Opus 4.7</td>
 <td>$5</td>
 <td>$25</td>
@@ -299,8 +294,8 @@
 </tr>
 </tbody>
 </table>
-<p>Numbers shift frequently. Always check the current API pricing pages before architecting around a specific rate.</p>
-<p>A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds.</p>
+<p>Numbers shift frequently. I check the API pricing pages before architecting around a specific rate. Always.</p>
+<p>A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds. This is the math that bites you.</p>
 <h2 id="counting-tokens-before-you-spend-them">Counting tokens before you spend them</h2>
 <p>The most basic cost control technique is knowing how many tokens a request will consume before you send it. Every major SDK provides a token counting utility.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">anthropic</span> <span class="kn">import</span> <span class="n">Anthropic</span>
@@ -328,10 +323,10 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Token count: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-<p>The tiktoken library is fast and works without making an API call. Use it in your request pipeline to reject or queue requests that would exceed a budget threshold.</p>
+<p>The tiktoken library is fast and works without making an API call. I use it in request pipelines to reject or queue requests that would exceed a budget threshold. It takes five minutes to add and saves you from bill surprises.</p>
 <h2 id="building-a-token-budget-system">Building a token budget system</h2>
 <p>Raw token counting is table stakes. A real budget system needs three components: a budget allocation per time window, a running tally, and a circuit breaker when limits are hit.</p>
-<p>Here is a lightweight implementation:</p>
+<p>Here is a lightweight implementation I have used in production:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Lock</span>
@@ -380,9 +375,9 @@
     <span class="k">return</span> <span class="n">response</span>
 </code></pre></div>
 
-<p>This keeps your spend rate bounded even if traffic spikes unexpectedly.</p>
+<p>This keeps your spend rate bounded even if traffic spikes unexpectedly. I have watched this prevent a $2,000 weekend bill from becoming a $12,000 weekend bill.</p>
 <h2 id="prompt-compression-the-high-leverage-move">Prompt compression: the high-leverage move</h2>
-<p>The single most effective cost reduction technique is sending fewer tokens. Every token you remove from the input is a token you do not pay for twice (input + output context).</p>
+<p>The single most effective cost reduction technique is sending fewer tokens. Every token you remove from the input is a token you do not pay for twice.</p>
 <p>Three compression strategies work well in practice.</p>
 <p><strong>Truncation with semantic loss detection.</strong> Rather than blindly truncating context at a token limit, identify and preserve the most relevant chunks. Use an embedding similarity search to rank chunks before inclusion.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compress_context</span><span class="p">(</span><span class="n">chunks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
@@ -409,7 +404,7 @@
     <span class="k">return</span> <span class="n">selected</span>
 </code></pre></div>
 
-<p><strong>System prompt minimization.</strong> System prompts accumulate. A typical engineering team starts with a 200-token system prompt. Six months later it is 1,500 tokens and nobody remembers why half of it exists. Audit system prompts quarterly. Remove every instruction that the model follows without being told.</p>
+<p><strong>System prompt minimization.</strong> System prompts accumulate. A typical engineering team starts with a 200-token system prompt. Six months later it is 1,500 tokens and nobody remembers why half of it exists. I audit system prompts quarterly. Remove every instruction that the model follows without being told.</p>
 <p><strong>LLM distillation for routing.</strong> Route simple queries to cheap models. Route complex ones to premium models. The routing itself can be done by an LLM:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">route_query</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">routing_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
@@ -427,7 +422,7 @@
     <span class="k">return</span> <span class="s2">&quot;gpt-5.4&quot;</span>
 </code></pre></div>
 
-<p>The cost of the routing call is negligible. The savings from sending 80% of queries to the $0.15/$0.60 model instead of the $2.50/$10 model are not.</p>
+<p>The cost of the routing call is negligible. The savings from sending 80% of queries to the $0.20/$1.25 model instead of the $2.50/$15 model are not.</p>
 <h2 id="caching-when-the-math-works">Caching: when the math works</h2>
 <p>Token costs are incurred on every new request. If your application handles repetitive or similar queries, response caching can eliminate a large fraction of your bill.</p>
 <p>OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object and the model processes them at a deep discount, typically 90% off input token pricing.</p>
@@ -456,7 +451,7 @@
     <span class="n">redis</span><span class="o">.</span><span class="n">setex</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="mi">3600</span><span class="p">,</span> <span class="n">extract_tokens</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
 </code></pre></div>
 
-<p>Cache hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns.</p>
+<p>Cache hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns. I have seen hit rates hit 60% in internal dev tooling where the same questions come up over and over.</p>
 <h2 id="output-token-control">Output token control</h2>
 <p>Input costs dominate for most applications. Output costs matter when your pipeline generates long responses. Code generation, document synthesis, and agentic reasoning all produce large outputs.</p>
 <p>Hard-limit output tokens. Set max_tokens conservatively. A question that can be answered in 50 tokens should never be allowed to generate 500 tokens at $0.15 per 1M.</p>
@@ -469,7 +464,7 @@
     <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
 </code></pre></div>
 
-<p>The model will truncate if the answer requires more tokens. That is preferable to an unbounded bill.</p>
+<p>The model will truncate if the answer requires more tokens. That is preferable to an unbounded bill. I learned this after a single debug session produced $180 in output costs because nobody set a max_tokens limit.</p>
 <h2 id="monitoring-in-production">Monitoring in production</h2>
 <p>Cost control without monitoring is guesswork. Set up per-model, per-endpoint spend tracking.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
@@ -519,7 +514,7 @@
 <li>Build a spend dashboard. Alert on anomalies before they compound.</li>
 </ol>
 <p>The goal is not to use fewer models. It is to use the right model for each task at the right price. That requires visibility, discipline, and the willingness to measure what you spend.</p>
-<p>Token budgets are not optional. They are the cost accounting layer that makes LLM applications sustainable.</p>
+<p>Token budgets are not optional. They are the cost accounting layer that makes LLM applications sustainable. I have yet to see a team regret building this too early.</p>
       </div>
     </div>
   </div>

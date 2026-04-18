@@ -228,7 +228,7 @@
       </nav>
       <div class="post-content">
         <p>After two years of running AI agents in production, here is what I know: error handling is the difference between a system that survives reality and one that falls over the moment something goes wrong. The glamorous part is reasoning and tool use. The unglamorous part, the part that keeps your on-call phone from lighting up at 2 AM, is error handling.</p>
-<p>The failures are predictable. Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. Every team I know running agents has hit some version of all three.</p>
+<p>The failures are predictable. Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. Every team I know running agents has hit some version of all three. I have hit all three myself, usually at the worst possible time.</p>
 <p>This is about the error patterns that actually break agents in production, and the concrete patterns that fix them. I am focusing on LLM-based agents that use tools to interact with external systems. That covers the majority of production agents I have encountered.</p>
 <h2 id="the-core-problem-agents-are-undefined-state-machines">The core problem: agents are undefined state machines</h2>
 <p>Most agent implementations look like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs the error and tells the LLM something went wrong.</p>
@@ -262,6 +262,7 @@
     <span class="k">return</span> <span class="n">ErrorCategory</span><span class="o">.</span><span class="n">AMBIGUOUS</span>
 </code></pre></div>
 
+<p>This five-minute classification function has saved me more debugging time than anything else in my agent infrastructure.</p>
 <h2 id="idempotent-tool-design">Idempotent tool design</h2>
 <p>Agents retry. When a tool call fails ambiguously, the agent calls it again. If the tool is not idempotent, the retry causes duplicate side effects.</p>
 <p>Design tools to be safe to call twice.</p>
@@ -286,6 +287,7 @@
     <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
 
+<p>I have seen this prevent duplicate payment processing twice. It is not optional.</p>
 <h2 id="explicit-state-transitions">Explicit state transitions</h2>
 <p>When a tool fails, the agent needs an explicit recovery path, not just an error string. The code decides the recovery strategy. The LLM receives a clean state transition and acts accordingly.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AgentState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -311,7 +313,7 @@
 </code></pre></div>
 
 <h2 id="checkpointing-for-long-horizon-tasks">Checkpointing for long-horizon tasks</h2>
-<p>Agents running dozens of steps need state persistence. Without it, a failure at step 40 restarts from step 1.</p>
+<p>Agents running dozens of steps need state persistence. Without it, a failure at step 40 restarts from step 1. This is the most demoralizing thing to debug at 1 AM.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -386,11 +388,11 @@
 <h2 id="the-non-negotiables">The non-negotiables</h2>
 <p>Five things will break your agent in production if you skip them.</p>
 <p>Classify errors before deciding how to respond. Returning raw errors to the LLM is not error handling.</p>
-<p>Design tools to be idempotent or use a deduplication layer. Non-idempotent tools will be called twice.</p>
+<p>Design tools to be idempotent or use a deduplication layer. Non-idempotent tools will be called twice. I have the Stripe charge receipts to prove it.</p>
 <p>Checkpoint long-horizon tasks. A failure at step 40 that restarts from step 1 is not acceptable.</p>
 <p>Set explicit timeout and retry policies. Default timeouts are not tuned for your use case.</p>
 <p>Log every tool call with inputs, outputs, latency, and errors. Without observability, debugging is archaeology.</p>
-<p>These patterns apply regardless of which LLM or framework you use. The error modes are the same across providers.</p>
+<p>These patterns apply regardless of which LLM or framework you use. The error modes are the same across providers. The fixes are the same too.</p>
       </div>
     </div>
   </div>

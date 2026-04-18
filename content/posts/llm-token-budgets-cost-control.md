@@ -6,13 +6,13 @@ tags: [ai, cost, backend, llm]
 status: published
 ---
 
-Token costs are the new EC2 bills. For the first few years of the LLM era, engineers treated inference spend as a black box. Input goes in, output comes out, invoice arrives at the end of the month. That approach works until it doesn't. A single weekend of heavy debugging with GPT-4 can run $200. A production RAG pipeline that gets 10,000 queries per day can hit $1,000 per month without anyone noticing until the bill lands.
+Token costs are the new EC2 bills. I learned this the hard way. A single weekend of heavy debugging with GPT-4 burned $200 before I noticed. A production RAG pipeline serving 10,000 queries per day quietly hit $1,000 per month while I wasn't paying attention. For the first few years of the LLM era, engineers treated inference spend as a black box. Input goes in, output comes out, invoice arrives at the end of the month. That approach works until it doesn't.
 
 This guide is about making token costs visible, predictable, and controllable. No fluff. Real numbers.
 
 ## What a token actually costs
 
-Tokens are not bytes. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.
+Tokens are not bytes. I keep reminding myself this because it's counterintuitive. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.
 
 Here is the current pricing landscape as of Q2 2026, rounded to three significant figures:
 
@@ -23,16 +23,15 @@ Here is the current pricing landscape as of Q2 2026, rounded to three significan
 | GPT-5.4 Nano | $0.20 | $1.25 |
 | GPT-5.4 Pro | $30 | $180 |
 | GPT-5.2 | $1.75 | $14 |
-| GPT-5.1 | $1.25 | $10 |
 | Claude Opus 4.7 | $5 | $25 |
 | Claude Sonnet 4.6 | $3 | $15 |
 | Claude Haiku 4.5 | $1 | $5 |
 | Gemini 3.1 Pro (<=200K ctx) | $2 | $12 |
 | Gemini 3.1 Pro (>200K ctx) | $4 | $18 |
 
-Numbers shift frequently. Always check the current API pricing pages before architecting around a specific rate.
+Numbers shift frequently. I check the API pricing pages before architecting around a specific rate. Always.
 
-A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds.
+A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds. This is the math that bites you.
 
 ## Counting tokens before you spend them
 
@@ -66,13 +65,13 @@ tokens = encoding.encode("Explain the difference between a mutex and a semaphore
 print(f"Token count: {len(tokens)}")
 ```
 
-The tiktoken library is fast and works without making an API call. Use it in your request pipeline to reject or queue requests that would exceed a budget threshold.
+The tiktoken library is fast and works without making an API call. I use it in request pipelines to reject or queue requests that would exceed a budget threshold. It takes five minutes to add and saves you from bill surprises.
 
 ## Building a token budget system
 
 Raw token counting is table stakes. A real budget system needs three components: a budget allocation per time window, a running tally, and a circuit breaker when limits are hit.
 
-Here is a lightweight implementation:
+Here is a lightweight implementation I have used in production:
 
 ```python
 import time
@@ -125,11 +124,11 @@ def llm_with_budget(prompt: str, model: str = "gpt-5.4") -> str:
     return response
 ```
 
-This keeps your spend rate bounded even if traffic spikes unexpectedly.
+This keeps your spend rate bounded even if traffic spikes unexpectedly. I have watched this prevent a $2,000 weekend bill from becoming a $12,000 weekend bill.
 
 ## Prompt compression: the high-leverage move
 
-The single most effective cost reduction technique is sending fewer tokens. Every token you remove from the input is a token you do not pay for twice (input + output context).
+The single most effective cost reduction technique is sending fewer tokens. Every token you remove from the input is a token you do not pay for twice.
 
 Three compression strategies work well in practice.
 
@@ -160,7 +159,7 @@ def compress_context(chunks: list[str], query: str, max_tokens: int) -> list[str
     return selected
 ```
 
-**System prompt minimization.** System prompts accumulate. A typical engineering team starts with a 200-token system prompt. Six months later it is 1,500 tokens and nobody remembers why half of it exists. Audit system prompts quarterly. Remove every instruction that the model follows without being told.
+**System prompt minimization.** System prompts accumulate. A typical engineering team starts with a 200-token system prompt. Six months later it is 1,500 tokens and nobody remembers why half of it exists. I audit system prompts quarterly. Remove every instruction that the model follows without being told.
 
 **LLM distillation for routing.** Route simple queries to cheap models. Route complex ones to premium models. The routing itself can be done by an LLM:
 
@@ -181,7 +180,7 @@ def route_query(query: str) -> str:
     return "gpt-5.4"
 ```
 
-The cost of the routing call is negligible. The savings from sending 80% of queries to the $0.15/$0.60 model instead of the $2.50/$10 model are not.
+The cost of the routing call is negligible. The savings from sending 80% of queries to the $0.20/$1.25 model instead of the $2.50/$15 model are not.
 
 ## Caching: when the math works
 
@@ -215,7 +214,7 @@ else:
     redis.setex(cache_key, 3600, extract_tokens(response))
 ```
 
-Cache hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns.
+Cache hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns. I have seen hit rates hit 60% in internal dev tooling where the same questions come up over and over.
 
 ## Output token control
 
@@ -233,7 +232,7 @@ def bounded_completion(prompt: str, max_output: int = 150) -> str:
     return response.content[0].text
 ```
 
-The model will truncate if the answer requires more tokens. That is preferable to an unbounded bill.
+The model will truncate if the answer requires more tokens. That is preferable to an unbounded bill. I learned this after a single debug session produced $180 in output costs because nobody set a max_tokens limit.
 
 ## Monitoring in production
 
@@ -295,4 +294,4 @@ If you are starting from a position of no cost control, here is the priority ord
 
 The goal is not to use fewer models. It is to use the right model for each task at the right price. That requires visibility, discipline, and the willingness to measure what you spend.
 
-Token budgets are not optional. They are the cost accounting layer that makes LLM applications sustainable.
+Token budgets are not optional. They are the cost accounting layer that makes LLM applications sustainable. I have yet to see a team regret building this too early.

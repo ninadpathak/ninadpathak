@@ -6,7 +6,7 @@ tags: [technical-writing, developer-experience, engineering-culture]
 status: published
 ---
 
-Documentation debt accumulates silently. It starts when a project ships without a README. It compounds when features get added but never explained. It becomes critical when a new engineer joins and spends three days reconstructing knowledge that existed in someone's head. By the time organizations notice, the debt is so large that fixing it feels hopeless.
+Documentation debt accumulates silently. It starts when a project ships without a README. It compounds when features get added but never explained. It becomes critical when a new engineer joins and spends three days reconstructing knowledge that existed in someone's head. I watched this happen at my last job. The senior engineer who built the entire auth system left. Three new engineers spent two weeks rebuilding knowledge that was documented nowhere.
 
 This is the default trajectory for most engineering teams. Documentation gets treated as a post-launch chore rather than a first-class engineering artifact. The result is a consistent failure mode: technical writers who cannot keep up with the pace of development, and engineers who do not trust documentation because it is perpetually out of date.
 

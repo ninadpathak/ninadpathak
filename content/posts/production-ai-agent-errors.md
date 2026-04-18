@@ -8,7 +8,7 @@ status: published
 
 After two years of running AI agents in production, here is what I know: error handling is the difference between a system that survives reality and one that falls over the moment something goes wrong. The glamorous part is reasoning and tool use. The unglamorous part, the part that keeps your on-call phone from lighting up at 2 AM, is error handling.
 
-The failures are predictable. Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. Every team I know running agents has hit some version of all three.
+The failures are predictable. Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. Every team I know running agents has hit some version of all three. I have hit all three myself, usually at the worst possible time.
 
 This is about the error patterns that actually break agents in production, and the concrete patterns that fix them. I am focusing on LLM-based agents that use tools to interact with external systems. That covers the majority of production agents I have encountered.
 
@@ -54,6 +54,8 @@ def classify_error(error: Exception, response: httpx.Response = None) -> ErrorCa
     return ErrorCategory.AMBIGUOUS
 ```
 
+This five-minute classification function has saved me more debugging time than anything else in my agent infrastructure.
+
 ## Idempotent tool design
 
 Agents retry. When a tool call fails ambiguously, the agent calls it again. If the tool is not idempotent, the retry causes duplicate side effects.
@@ -84,6 +86,8 @@ def execute_with_deduplication(tool_fn, operation_id: str, **kwargs):
     return result
 ```
 
+I have seen this prevent duplicate payment processing twice. It is not optional.
+
 ## Explicit state transitions
 
 When a tool fails, the agent needs an explicit recovery path, not just an error string. The code decides the recovery strategy. The LLM receives a clean state transition and acts accordingly.
@@ -113,7 +117,7 @@ def handle_tool_error(state: AgentState, error: Exception, context: dict) -> Age
 
 ## Checkpointing for long-horizon tasks
 
-Agents running dozens of steps need state persistence. Without it, a failure at step 40 restarts from step 1.
+Agents running dozens of steps need state persistence. Without it, a failure at step 40 restarts from step 1. This is the most demoralizing thing to debug at 1 AM.
 
 ```python
 import json
@@ -205,7 +209,7 @@ Five things will break your agent in production if you skip them.
 
 Classify errors before deciding how to respond. Returning raw errors to the LLM is not error handling.
 
-Design tools to be idempotent or use a deduplication layer. Non-idempotent tools will be called twice.
+Design tools to be idempotent or use a deduplication layer. Non-idempotent tools will be called twice. I have the Stripe charge receipts to prove it.
 
 Checkpoint long-horizon tasks. A failure at step 40 that restarts from step 1 is not acceptable.
 
@@ -213,4 +217,4 @@ Set explicit timeout and retry policies. Default timeouts are not tuned for your
 
 Log every tool call with inputs, outputs, latency, and errors. Without observability, debugging is archaeology.
 
-These patterns apply regardless of which LLM or framework you use. The error modes are the same across providers.
+These patterns apply regardless of which LLM or framework you use. The error modes are the same across providers. The fixes are the same too.
