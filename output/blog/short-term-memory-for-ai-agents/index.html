@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Short-Term Memory for AI Agents: A Practical Guide | Ninad Pathak</title>
+  <meta name="description" content="Context windows are not memory. Here is what every production AI agent engineer needs to understand about token budgets, overflow handling, and how short-term and long-term memory actually work together.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Short-Term Memory for AI Agents: A Practical Guide">
+  <meta property="og:description" content="Context windows are not memory. Here is what every production AI agent engineer needs to understand about token budgets, overflow handling, and how short-term and long-term memory actually work together.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/short-term-memory-for-ai-agents/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/short-term-memory-for-ai-agents/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Short-Term Memory for AI Agents: A Practical Guide",
+  "description": "Context windows are not memory. Here is what every production AI agent engineer needs to understand about token budgets, overflow handling, and how short-term and long-term memory actually work together.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/short-term-memory-for-ai-agents/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Short-Term Memory for AI Agents: A Practical Guide",
+      "item": "https://ninadpathak.com/blog/short-term-memory-for-ai-agents/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Short-Term Memory for AI Agents: A Practical Guide</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 19, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">11 min read</span>
+      </div>
+      <h1 class="post-title">Short-Term Memory for AI Agents: A Practical Guide</h1>
+      <p class="lead">Context windows are not memory. Here is what every production AI agent engineer needs to understand about token budgets, overflow handling, and how short-term and long-term memory actually work together.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+        <span class="tag">context-window</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#what-the-context-window-actually-is">What The Context Window Actually Is</a></li>
+<li><a href="#token-budgets-and-overflow-handling">Token Budgets And Overflow Handling</a></li>
+<li><a href="#the-architecture-of-agent-memory-systems">The Architecture Of Agent Memory Systems</a></li>
+<li><a href="#designing-your-memory-architecture">Designing Your Memory Architecture</a></li>
+<li><a href="#common-failure-modes">Common Failure Modes</a></li>
+<li><a href="#relationship-to-long-term-memory">Relationship To Long-term Memory</a></li>
+<li><a href="#related-articles">Related Articles</a></li>
+<li><a href="#faq">Faq</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Context windows are not memory. That is the first thing engineers get wrong when building AI agents. A context window is a fixed-size buffer. Memory is what you build on top of that buffer. Understanding the distinction will save you weeks of debugging flaky agents.</p>
+<p>Every production AI agent I have shipped runs into the same failure mode eventually: it starts forgetting recent conversation turns, dropping critical instructions, or producing responses that ignore what the user just said. The root cause is almost always a misunderstanding of how short-term memory works inside the context window architecture.</p>
+<h2 id="what-the-context-window-actually-is">What The Context Window Actually Is</h2>
+<p>The context window is a contiguous token buffer that feeds into the transformer's attention mechanism. When you send a 128k token context to Claude or GPT-4o, the model does not "remember" everything equally. Attention scores distribute across all tokens, but research has consistently shown that performance degrades for information placed in the middle of long contexts.</p>
+<p>A context window has three properties you must track as an agent engineer. First, total capacity in tokens. GPT-4o supports 128k tokens. Claude 3.5 Sonnet supports 200k tokens. Gemini 1.5 Pro supports 1 million tokens. Second, current fill level, which is the sum of your system prompt, conversation history, retrieved documents, and scratchpad. Third, headroom, which is the remaining capacity for the next response and tool call arguments.</p>
+<p>I track fill level programmatically in every agent I build. Here is the pattern:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">estimate_tokens</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rough token estimation. Use tiktoken for production.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span>  <span class="c1"># rough approximation for English</span>
+
+<span class="k">def</span> <span class="nf">build_context_window</span><span class="p">(</span>
+    <span class="n">system_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">conversation_history</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+    <span class="n">retrieved_context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">max_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128000</span><span class="p">,</span>
+    <span class="n">reserved_headroom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Construct a context window within token budget.</span>
+
+<span class="sd">    Returns a list of message dicts that fit within the budget.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">available</span> <span class="o">=</span> <span class="n">max_tokens</span> <span class="o">-</span> <span class="n">reserved_headroom</span>
+
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system_prompt</span><span class="p">}]</span>
+
+    <span class="n">system_tokens</span> <span class="o">=</span> <span class="n">estimate_tokens</span><span class="p">(</span><span class="n">system_prompt</span><span class="p">)</span>
+    <span class="n">available</span> <span class="o">-=</span> <span class="n">system_tokens</span>
+
+    <span class="c1"># Add conversation history in reverse (newest first)</span>
+    <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">conversation_history</span><span class="p">):</span>
+        <span class="n">msg_tokens</span> <span class="o">=</span> <span class="n">estimate_tokens</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">10</span>  <span class="c1"># overhead</span>
+        <span class="k">if</span> <span class="n">available</span> <span class="o">-</span> <span class="n">msg_tokens</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+        <span class="n">available</span> <span class="o">-=</span> <span class="n">msg_tokens</span>
+
+    <span class="c1"># Fill remaining with retrieved context</span>
+    <span class="k">for</span> <span class="n">ctx</span> <span class="ow">in</span> <span class="n">retrieved_context</span><span class="p">:</span>
+        <span class="n">ctx_tokens</span> <span class="o">=</span> <span class="n">estimate_tokens</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span>
+        <span class="k">if</span> <span class="n">available</span> <span class="o">-</span> <span class="n">ctx_tokens</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">ctx</span><span class="p">})</span>
+        <span class="n">available</span> <span class="o">-=</span> <span class="n">ctx_tokens</span>
+
+    <span class="k">return</span> <span class="n">messages</span>
+</code></pre></div>
+
+<p>This is a sliding window over your conversation history. It guarantees you never overflow the context window, but it has a brutal limitation: it discards the oldest messages indiscriminately. If a user asked something critical forty turns ago and you have been chatting about unrelated things since, that information is gone.</p>
+<h2 id="token-budgets-and-overflow-handling">Token Budgets And Overflow Handling</h2>
+<p>The overflow problem has three canonical solutions. The first is naive truncation, which is what most chatbot backends do. You cut the oldest messages until the context fits. This is simple to implement and destroys agent reliability in multi-turn conversations.</p>
+<p>The second solution is a priority queue for messages. You score each message by recency, user importance, and semantic relevance to the current task. Then you fill the context window with the highest-scoring items. This requires a retriever or an embedding model to compute relevance scores, which adds latency and cost.</p>
+<p>The third solution is summarization-based compression. You periodically summarize the conversation history into a condensed form that fits in fewer tokens. This preserves context across many turns but introduces summarization artifacts and latency. You also need a separate model or prompt to perform the summarization.</p>
+<p>I use a combination for production agents. Recency gets the highest weight, but I also boost messages that match keywords in the current user query. Here is a scoring function I use:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Message</span><span class="p">:</span>
+    <span class="n">role</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">content</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span>
+    <span class="n">user_mentioned</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">def</span> <span class="nf">score_message</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">current_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">query_keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Score a message for context window inclusion.</span>
+
+<span class="sd">    Higher scores = more likely to be retained.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">age_minutes</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_time</span> <span class="o">-</span> <span class="n">msg</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">60</span>
+
+    <span class="n">recency_score</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">age_minutes</span> <span class="o">/</span> <span class="mi">1440</span><span class="p">))</span>  <span class="c1"># decay over 24 hours</span>
+
+    <span class="n">role_score</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">role</span> <span class="o">==</span> <span class="s2">&quot;user&quot;</span> <span class="k">else</span> <span class="mf">0.3</span> <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">role</span> <span class="o">==</span> <span class="s2">&quot;assistant&quot;</span> <span class="k">else</span> <span class="mf">0.1</span>
+
+    <span class="n">keyword_boost</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">content_lower</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">query_keywords</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kw</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">content_lower</span><span class="p">:</span>
+            <span class="n">keyword_boost</span> <span class="o">+=</span> <span class="mf">0.2</span>
+
+    <span class="n">mention_boost</span> <span class="o">=</span> <span class="mf">0.3</span> <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">user_mentioned</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">recency_score</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">role_score</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">)</span> <span class="o">+</span> <span class="n">keyword_boost</span> <span class="o">+</span> <span class="n">mention_boost</span>
+
+<span class="k">def</span> <span class="nf">select_messages</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Message</span><span class="p">],</span>
+    <span class="n">current_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">token_estimator</span><span class="p">:</span> <span class="nb">callable</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Message</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select messages that fit within token budget using importance weighting.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">query_keywords</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>  <span class="c1"># simple keyword extraction</span>
+
+    <span class="n">scored</span> <span class="o">=</span> <span class="p">[(</span><span class="n">msg</span><span class="p">,</span> <span class="n">score_message</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">current_time</span><span class="p">,</span> <span class="n">query_keywords</span><span class="p">))</span> <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">]</span>
+    <span class="n">scored</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">selected</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current_tokens</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">msg</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scored</span><span class="p">:</span>
+        <span class="n">msg_tokens</span> <span class="o">=</span> <span class="n">token_estimator</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">content</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span>
+        <span class="k">if</span> <span class="n">current_tokens</span> <span class="o">+</span> <span class="n">msg_tokens</span> <span class="o">&gt;</span> <span class="n">max_tokens</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">selected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">current_tokens</span> <span class="o">+=</span> <span class="n">msg_tokens</span>
+
+    <span class="n">selected</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>  <span class="c1"># chronological for context</span>
+    <span class="k">return</span> <span class="n">selected</span>
+</code></pre></div>
+
+<p>This gives you an importance-weighted buffer that adapts to the current conversation. It is not perfect, but it preserves critical messages better than pure recency.</p>
+<h2 id="the-architecture-of-agent-memory-systems">The Architecture Of Agent Memory Systems</h2>
+<p>A production agent memory system has three layers. The first layer is the context window, which is short-term memory. It holds the current conversation, active retrieved documents, and working scratchpad. Everything in this layer is "alive" for the current turn.</p>
+<p>The second layer is episodic memory, which stores summaries of past interactions. When a user reconnects after a week, the agent should know who they are and what they were working on. Episodic memory is built by summarizing past conversation sessions and storing those summaries in a database.</p>
+<p>The third layer is semantic memory, which is external knowledge retrieval. This is your RAG pipeline, your product documentation, your codebases. The agent retrieves relevant documents from this layer on each turn based on the current query.</p>
+<p>I have written about <a href="/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/">how Anthropic's contextual retrieval changes RAG architecture</a> and about <a href="/articles/rag-evaluation-metrics-what-actually-matters/">RAG evaluation metrics that actually matter</a>. Both posts are relevant here because the retrieval quality in your semantic memory layer directly affects how much you need to rely on raw context window capacity.</p>
+<p>The key insight is that these three layers are not separate systems. They are one memory hierarchy. Your context window is the top of that hierarchy. Semantic and episodic memory feed into it. When the context window is full, you evict from the bottom (old episodic memories) before you lose information from the top (current conversation).</p>
+<h2 id="designing-your-memory-architecture">Designing Your Memory Architecture</h2>
+<p>Start with the token budget. Calculate the maximum tokens available for conversation history in your context window. Subtract your system prompt, your reserved headroom for responses, and any retrieved context you must include on every turn. What remains is your budget for conversation history.</p>
+<p>Once you have that number, work backwards. If you have 32k tokens for conversation history and your average turn is 500 tokens, you can retain roughly 64 conversation turns. That sounds like a lot until you have a twenty-turn debugging session with a user and then need to reference something from turn five.</p>
+<p>I track token usage per session in production. Every agent session gets a running tally of context window fill percentage, and I log warning events when fill exceeds 75 percent. That gives me data to tune the budget allocation over time.</p>
+<p>The overflow strategy matters more than the raw budget size. An agent with a 32k context window and smart eviction will outperform an agent with 128k and naive truncation. The eviction strategy determines which information survives.</p>
+<p>Your episodic memory layer should capture summaries of every session. I use a structured format:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">SessionSummary</span><span class="p">:</span>
+    <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span>
+    <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span>
+    <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">key_outcomes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">unresolved_issues</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">user_preferences</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">summarize_session</span><span class="p">(</span><span class="n">messages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SessionSummary</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a session summary from message history.</span>
+
+<span class="sd">    In production, use a separate LLM call to generate this.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">SessionSummary</span><span class="p">(</span>
+        <span class="n">session_id</span><span class="o">=</span><span class="n">generate_session_id</span><span class="p">(),</span>
+        <span class="n">user_id</span><span class="o">=</span><span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">),</span>
+        <span class="n">start_time</span><span class="o">=</span><span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">],</span>
+        <span class="n">end_time</span><span class="o">=</span><span class="n">messages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">],</span>
+        <span class="n">topic</span><span class="o">=</span><span class="n">extract_topic</span><span class="p">(</span><span class="n">messages</span><span class="p">),</span>
+        <span class="n">key_outcomes</span><span class="o">=</span><span class="n">extract_outcomes</span><span class="p">(</span><span class="n">messages</span><span class="p">),</span>
+        <span class="n">unresolved_issues</span><span class="o">=</span><span class="n">extract_unresolved</span><span class="p">(</span><span class="n">messages</span><span class="p">),</span>
+        <span class="n">user_preferences</span><span class="o">=</span><span class="n">extract_preferences</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div>
+
+<p>This summary goes into your episodic store. When the user starts a new session, you retrieve relevant past sessions and inject their summaries into the context window before the conversation begins.</p>
+<h2 id="common-failure-modes">Common Failure Modes</h2>
+<p>The most common failure mode I see is context window exhaustion without warning. The agent receives a long prompt, consumes most of the context window, and then the next user message causes an overflow. The system either errors or silently truncates, and the user loses context.</p>
+<p>The fix is to monitor fill level before every LLM call. If fill exceeds a threshold like 80 percent, trigger eviction or summarization before proceeding. Do not wait for the overflow to happen.</p>
+<p>The second failure mode is semantic retrieval that conflicts with recent conversation context. The user says "use the new API endpoint instead" and the agent retrieves documents about the old endpoint because the retrieved context is based on keywords, not conversation state. The agent then ignores the user's instruction and follows the old documentation.</p>
+<p>You can address this by prepending recent conversation turns to your retrieval query. The retrieval query becomes "previous instruction: use new API endpoint instead, plus user query: how do I authenticate" instead of just the authentication query.</p>
+<p>The third failure mode is summarization degradation. After multiple summarization rounds, the conversation history becomes a sequence of increasingly abstracted summaries. Specific details get dropped. The agent loses track of exact values, names, or decisions made in earlier turns.</p>
+<p>Track the number of summarization passes each message has undergone. After two or three passes, consider freezing the original message into the episodic store rather than continuing to compress it.</p>
+<h2 id="relationship-to-long-term-memory">Relationship To Long-term Memory</h2>
+<p>Short-term and long-term memory are not competing systems. They are a hierarchy. The context window is the working table. Semantic and episodic stores are the filing cabinets. You pull relevant files from the cabinets onto the table, work with them there, and file updated versions back when the session ends.</p>
+<p>The mistake is treating long-term memory as optional or secondary. If your agent only has access to the context window, it has no memory of previous sessions, no knowledge of the user's past preferences, and no ability to retrieve relevant documentation beyond what fits in the current context.</p>
+<p>I have written about <a href="/articles/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/">token counting and cost control</a> and <a href="/articles/prompt-caching-what-it-is-and-when-the-math-works/">prompt caching and when the math works</a>. Both are relevant here because the memory architecture you design has direct cost implications. Every retrieval call, every summarization pass, and every context window refill costs money.</p>
+<p>The pattern I follow: maximize context window efficiency first, then build episodic memory as a reliability layer, then invest in semantic retrieval quality. This sequence gives you the best return on engineering effort.</p>
+<p>Context window management is not a solved problem. The approaches in this post represent current practice, but the field is moving fast. The architectures that work in 2026 will look primitive by 2028. Build for replaceability, not permanence.</p>
+<h2 id="related-articles">Related Articles</h2>
+<ul>
+<li><a href="/blog/context-windows-vs-memory/">Context windows vs memory</a></li>
+<li><a href="/blog/ai-memory-management-for-llms/">AI memory management for LLMs</a></li>
+<li><a href="/blog/short-term-memory-for-ai-agents/">Short-term memory for AI agents</a></li>
+<li><a href="/blog/how-memory-works-in-hyperagents/">How memory works in HyperAgents</a></li>
+<li><a href="/blog/state-of-ai-agent-memory-2026/">State of AI agent memory 2026</a></li>
+</ul>
+<h2 id="faq">Faq</h2>
+<p><strong>How do I calculate context window fill in real time?</strong></p>
+<p>Use a tokenizer matching your model. For OpenAI models, use <code>tiktoken</code>. For Claude, use the Anthropic tokenizer SDK. Track the cumulative token count of your system prompt, conversation history, and retrieved context before every API call. If you are within 80 percent of the limit, trigger eviction or summarization.</p>
+<p><strong>What is the best overflow strategy for production agents?</strong></p>
+<p>Use importance-weighted eviction over simple truncation. Score each message by recency, role (user messages score higher), and keyword relevance to the current query. Fill the context window with the highest-scoring messages. Summarize older messages periodically and store summaries in episodic memory.</p>
+<p><strong>Should I use summarization or retrieval for long conversations?</strong></p>
+<p>Both. Summarization compresses the conversation history itself. Retrieval adds external knowledge. Use retrieval to pull in relevant documents from your semantic store. Use summarization to compress conversation history that cannot be retrieved but is still relevant. The combination outperforms either approach alone.</p>
+<p><strong>How does episodic memory differ from semantic memory?</strong></p>
+<p>Episodic memory stores summaries of past interactions with a specific user or session. It answers "what did we do in previous sessions?" Semantic memory stores structured knowledge about the world, your product, or your domain. It answers "what is this thing and how does it work?" Both feed into the context window, but they serve different purposes.</p>
+<p><strong>When should I flush episodic memory to disk versus keeping it in the context window?</strong></p>
+<p>Keep recent episodic content (sessions from the last 7 days) in the context window on session start. Archive older sessions to a database or vector store. You do not need every past session in context for every query. Retrieve the most relevant ones based on the current topic or user profile.</p>
+<p><strong>How do I handle context window overflow with tool calls?</strong></p>
+<p>Tool call arguments consume context window space. Reserve a portion of your token budget for tool arguments (typically 1k-2k tokens). If you are approaching the limit, pause tool use, evict low-priority messages, then continue. Long tool call chains can exhaust context faster than equivalent conversation turns because arguments tend to be verbose.</p>
+<p><strong>What models should I target for context window efficiency?</strong></p>
+<p>Any model with at least 128k context window capacity gives you enough room to implement meaningful eviction strategies. Models with smaller windows (8k-32k) force you into aggressive compression that degrades conversation quality. I recommend targeting models with 128k+ windows for production agents with complex memory requirements.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+      </a>
+      <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">How Memory Works in DeerFlow</div>
+      </a>
+      <a href="/blog/rag-vs-memory/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
+          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
+          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

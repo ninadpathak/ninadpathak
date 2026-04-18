@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Memory Management Visual</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a0a; overflow: hidden; font-family: 'Courier New', monospace; }
+        #canvas { display: block; }
+        #info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ff5f1f;
+            font-size: 12px;
+            text-align: center;
+            pointer-events: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        #labels {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #ff5f1f;
+            font-size: 11px;
+            line-height: 1.8;
+            pointer-events: none;
+        }
+        .label { opacity: 0.7; }
+        .label.active { opacity: 1; color: #ffffff; }
+    </style>
+</head>
+<body>
+    <div id="labels">
+        <div class="label" id="l-evict">EVICT → removed from memory</div>
+        <div class="label" id="l-compress">COMPRESS → reduced size</div>
+        <div class="label" id="l-priority">PRIORITIZE → importance weighted</div>
+    </div>
+    <div id="info">DRAG TO ORBIT • SCROLL TO ZOOM</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const COLORS = {
+            dark: 0xff5f1f,
+            light: 0xd44000,
+            evict: 0xff2222,
+            compress: 0x22ff88,
+            priority: 0x4488ff
+        };
+
+        let scene, camera, renderer, cubes = [], clock;
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x0a0a0a, 0.015);
+
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 8, 22);
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setClearColor(0x0a0a0a);
+            document.body.appendChild(renderer.domElement);
+
+            const ambient = new THREE.AmbientLight(0x333333);
+            scene.add(ambient);
+            const point = new THREE.PointLight(0xff5f1f, 1, 80);
+            point.position.set(10, 15, 10);
+            scene.add(point);
+            const point2 = new THREE.PointLight(0xd44000, 0.5, 60);
+            point2.position.set(-10, 5, -10);
+            scene.add(point2);
+
+            createGrid();
+            createCubes();
+            setupOrbitControls();
+            clock = new THREE.Clock();
+
+            window.addEventListener('resize', onResize);
+            animate();
+        }
+
+        function createGrid() {
+            const grid = new THREE.GridHelper(40, 40, 0x222222, 0x111111);
+            grid.position.y = -3;
+            scene.add(grid);
+        }
+
+        function createWireframeBox(color, size, position) {
+            const geo = new THREE.BoxGeometry(size, size, size);
+            const edges = new THREE.EdgesGeometry(geo);
+            const mat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.8 });
+            return new THREE.LineSegments(edges, mat);
+        }
+
+        function createCubes() {
+            const positions = [
+                { x: -8, y: 1, z: 0 },
+                { x: -4, y: 2, z: 1 },
+                { x: 0, y: 3, z: 0 },
+                { x: 4, y: 2, z: -1 },
+                { x: 8, y: 1, z: 0 },
+            ];
+
+            positions.forEach((p, i) => {
+                const size = 2.5 - i * 0.2;
+                const cube = createWireframeBox(COLORS.dark, size, p);
+                cube.position.set(p.x, p.y, p.z);
+                cube.userData = {
+                    baseY: p.y,
+                    baseSize: size,
+                    baseColor: COLORS.dark,
+                    floatOffset: Math.random() * Math.PI * 2,
+                    floatSpeed: 0.5 + Math.random() * 0.3,
+                    rotationSpeed: 0.002 + Math.random() * 0.003,
+                    phase: i * 0.4
+                };
+                scene.add(cube);
+                cubes.push(cube);
+            });
+
+            // Priority indicator cubes (small, glowing)
+            for (let i = 0; i < 3; i++) {
+                const geo = new THREE.BoxGeometry(0.3, 0.3, 0.3);
+                const mat = new THREE.MeshBasicMaterial({ color: COLORS.priority, transparent: true, opacity: 0.6 });
+                const small = new THREE.Mesh(geo, mat);
+                small.position.set(6 + i * 1.2, 4.5, -3);
+                small.userData = { pulse: i };
+                scene.add(small);
+                cubes.push(small);
+            }
+
+            // Compressed indicator
+            const compressed = createWireframeBox(COLORS.compress, 1.2, { x: -6, y: 5, z: -3 });
+            scene.add(compressed);
+            cubes.push(compressed);
+        }
+
+        function setupOrbitControls() {
+            let isDragging = false;
+            let prevMouse = { x: 0, y: 0 };
+            let spherical = { theta: 0, phi: Math.PI / 4, radius: 26 };
+            let targetSpherical = { theta: 0, phi: Math.PI / 4, radius: 26 };
+
+            document.addEventListener('mousedown', (e) => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY }; });
+            document.addEventListener('mouseup', () => { isDragging = false; });
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const dx = e.clientX - prevMouse.x;
+                const dy = e.clientY - prevMouse.y;
+                targetSpherical.theta -= dx * 0.005;
+                targetSpherical.phi = Math.max(0.2, Math.min(Math.PI - 0.2, targetSpherical.phi + dy * 0.005));
+                prevMouse = { x: e.clientX, y: e.clientY };
+            });
+            document.addEventListener('wheel', (e) => {
+                targetSpherical.radius = Math.max(10, Math.min(50, targetSpherical.radius + e.deltaY * 0.05));
+            });
+
+            function updateCamera() {
+                spherical.theta += (targetSpherical.theta - spherical.theta) * 0.1;
+                spherical.phi += (targetSpherical.phi - spherical.phi) * 0.1;
+                spherical.radius += (targetSpherical.radius - spherical.radius) * 0.1;
+
+                camera.position.x = spherical.radius * Math.sin(spherical.phi) * Math.sin(spherical.theta);
+                camera.position.y = spherical.radius * Math.cos(spherical.phi);
+                camera.position.z = spherical.radius * Math.sin(spherical.phi) * Math.cos(spherical.theta);
+                camera.lookAt(0, 1, 0);
+            }
+
+            setInterval(updateCamera, 16);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const t = clock.getElapsedTime();
+
+            cubes.forEach((cube, i) => {
+                if (i < 5) {
+                    // Main wireframe cubes - floating, rotating
+                    cube.rotation.y += cube.userData.rotationSpeed;
+                    cube.rotation.x += cube.userData.rotationSpeed * 0.5;
+                    const floatY = Math.sin(t * cube.userData.floatSpeed + cube.userData.floatOffset) * 0.3;
+                    cube.position.y = cube.userData.baseY + floatY;
+
+                    // Pulse size based on phase
+                    const pulse = 1 + Math.sin(t * 1.5 + cube.userData.phase) * 0.05;
+                    cube.scale.set(pulse, pulse, pulse);
+
+                    // Color shift for eviction/compress/priority phases
+                    const phase = (t + cube.userData.phase) % 12;
+                    if (phase < 4) {
+                        cube.material.color.setHex(COLORS.dark);
+                    } else if (phase < 6) {
+                        cube.material.color.setHex(COLORS.evict);
+                    } else if (phase < 8) {
+                        cube.material.color.setHex(COLORS.compress);
+                    } else if (phase < 10) {
+                        cube.material.color.setHex(COLORS.priority);
+                    } else {
+                        cube.material.color.setHex(COLORS.dark);
+                    }
+                }
+            });
+
+            // Pulse the priority small cubes
+            cubes.slice(5).forEach((cube, i) => {
+                const s = 1 + Math.sin(t * 2 + i * 1.2) * 0.3;
+                cube.scale.set(s, s, s);
+                cube.position.y = 4.5 + Math.sin(t * 1.5 + i) * 0.2;
+            });
+
+            // Update labels
+            const phase = Math.floor(t / 3) % 4;
+            document.getElementById('l-evict').className = phase === 1 ? 'label active' : 'label';
+            document.getElementById('l-compress').className = phase === 2 ? 'label active' : 'label';
+            document.getElementById('l-priority').className = phase === 3 ? 'label active' : 'label';
+
+            renderer.render(scene, camera);
+        }
+
+        function onResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        init();
+    </script>
+</body>
+</html>

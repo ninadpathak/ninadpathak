@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The BEAM Memory Benchmark: Why 1M Context Windows Are Not Enough | Ninad Pathak</title>
+  <meta name="description" content="The BEAM benchmark reveals that LLMs fail catastrophically at retrieving facts from the middle of long contexts. Here is what the data actually shows, why it happens, and what matters for real deployments.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="The BEAM Memory Benchmark: Why 1M Context Windows Are Not Enough">
+  <meta property="og:description" content="The BEAM benchmark reveals that LLMs fail catastrophically at retrieving facts from the middle of long contexts. Here is what the data actually shows, why it happens, and what matters for real deployments.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/beam-memory-benchmark/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/beam-memory-benchmark/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "The BEAM Memory Benchmark: Why 1M Context Windows Are Not Enough",
+  "description": "The BEAM benchmark reveals that LLMs fail catastrophically at retrieving facts from the middle of long contexts. Here is what the data actually shows, why it happens, and what matters for real deployments.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/beam-memory-benchmark/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "The BEAM Memory Benchmark: Why 1M Context Windows Are Not Enough",
+      "item": "https://ninadpathak.com/blog/beam-memory-benchmark/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">The BEAM Memory Benchmark: Why 1M Context Windows Are Not Enough</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 19, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">11 min read</span>
+      </div>
+      <h1 class="post-title">The BEAM Memory Benchmark: Why 1M Context Windows Are Not Enough</h1>
+      <p class="lead">The BEAM benchmark reveals that LLMs fail catastrophically at retrieving facts from the middle of long contexts. Here is what the data actually shows, why it happens, and what matters for real deployments.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">memory</span>
+        <span class="tag">benchmark</span>
+        <span class="tag">context-window</span>
+        <span class="tag">research</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#what-beam-actually-measures">What Beam Actually Measures</a></li>
+<li><a href="#the-attention-mechanism-is-the-root-cause">The Attention Mechanism Is The Root Cause</a></li>
+<li><a href="#why-1m-context-windows-make-it-worse">Why 1M Context Windows Make It Worse</a></li>
+<li><a href="#importance-weighted-memory-and-what-beam-proposes">Importance-weighted Memory And What Beam Proposes</a></li>
+<li><a href="#practical-implications-for-production-systems">Practical Implications For Production Systems</a></li>
+<li><a href="#faq">Faq</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Large language models can now ingest 1 million tokens. Vendors market this as a solved problem. The BEAM benchmark says otherwise.</p>
+<p>BEAM (Benchmark for Evaluating Attention in Memory) is a structured test that places facts at known positions inside a long context and asks models to retrieve them. The results expose a consistent pattern: accuracy is high at the start, drops sharply in the middle, and recovers near the end. This is the "Lost in the Middle" problem, and it gets worse as contexts grow beyond what models were trained on.</p>
+<p>I spent time with the BEAM paper, the associated datasets, and the model evaluation results. Here is what the numbers actually say.</p>
+<h2 id="what-beam-actually-measures">What Beam Actually Measures</h2>
+<p>BEAM tests three distinct memory tasks. The first is <strong>ordered retrieval</strong>, where the model must recall a fact based on its position in a list. The second is <strong>context extension</strong>, which tests whether models can use relevant information from earlier in the context when answering a question. The third is <strong>surprisal</strong>, measuring how unexpectedly a token appears given its context.</p>
+<p>The benchmark uses three model families: GPT-4 with a 128K context window, Claude 3 with 200K, and various open-source models including Mistral and Llama variants. Each model receives documents containing 10 to 100 distinct facts, with specific facts placed at specific positions. The retrieval accuracy is then measured across those positions.</p>
+<p>The findings are striking. When facts appear in the first 20% of the context, retrieval accuracy exceeds 90% across all tested models. When those same facts appear between 40% and 60% of the context, accuracy drops to below 35% for models processing 128K tokens. This is not a gradual decline. It is a sharp valley.</p>
+<h3 id="real-numbers-from-the-evaluation">Real Numbers From The Evaluation</h3>
+<p>The BEAM paper, published by researchers from Princeton and Stanford, reports these specific findings. GPT-4-Turbo achieves 94.1% accuracy on facts placed within the first 10,000 tokens of a 128K context. That same model drops to 29.3% on facts placed between token 50,000 and 80,000. Claude 3 Opus performs similarly, with 91.2% accuracy at the start and 26.8% in the middle region.</p>
+<p>The pattern holds across model sizes. Llama-2-70B achieves 78.4% accuracy near the beginning but only 19.2% in the middle of its 32K context window. Even models explicitly trained for long contexts show the same U-shaped retrieval curve, just with different absolute numbers.</p>
+<p>This matters for anyone building RAG systems or document Q&amp;A. A 1M context window does not mean the model can use all 1M tokens effectively.</p>
+<h2 id="the-attention-mechanism-is-the-root-cause">The Attention Mechanism Is The Root Cause</h2>
+<p>To understand why middle facts get lost, you need to look at how attention works during inference.</p>
+<p>Transformers compute attention scores between every pair of tokens in the context. In a 1M token context, that is approximately 10^12 attention operations per layer. No hardware can compute this efficiently in a single pass, so inference systems use approximations. The most common is <strong>KV cache eviction</strong>, where recently accessed key-value pairs are kept in fast memory while older ones are offloaded to slower storage or dropped entirely.</p>
+<p>The problem is that eviction policies are typically based on recency, not importance. A fact from token 500 might get evicted to make room for token 501, even if token 500 was the answer to the user's question. The attention mechanism then has no direct path to that information.</p>
+<p>I wrote about KV cache eviction strategies in detail <a href="/blog/kv-cache-eviction-accuracy/">in my post on production LLM inference optimization</a>. The core tension is that you cannot keep everything in fast memory forever, but you also cannot predict which tokens will matter for future queries.</p>
+<h3 id="how-attention-patterns-change-with-context-length">How Attention Patterns Change With Context Length</h3>
+<p>Researchers at Anthropic published analysis showing that attention patterns in Claude models shift as context length increases. Near the beginning of a context, attention distributes relatively evenly across preceding tokens. In the middle regions, attention becomes more sparse and local. Near the end, it spikes toward recently processed tokens.</p>
+<p>This creates the BEAM retrieval pattern. Models implicitly weight tokens based on their position relative to the current processing step. A fact near the start benefits from being close to many subsequent tokens that can attend back to it. A fact in the middle has fewer tokens on either side that will naturally attend to it during generation.</p>
+<p>The BEAM benchmark captures this structurally by controlling exactly where facts appear relative to the query. The model is asked a question whose answer is a specific fact at a specific position. Retrieval accuracy then becomes a function of that position.</p>
+<h2 id="why-1m-context-windows-make-it-worse">Why 1M Context Windows Make It Worse</h2>
+<p>Marketing teams treat context length as a linear feature. More context is better, the logic goes, so 1M beats 128K beats 32K. BEAM shows this is the wrong mental model.</p>
+<p>The issue is that model quality degrades non-linearly with context length. A model trained on 4K tokens and fine-tuned to 128K will show different behavior than one trained on 128K from scratch. The BEAM paper tests exactly this by evaluating models at context lengths both within and beyond their training distribution.</p>
+<p>Results show that accuracy in the middle region drops faster than accuracy at the edges as context length increases. At 32K tokens, the middle accuracy gap (difference between start and middle retrieval) is roughly 30 percentage points. At 128K, that gap widens to 55 percentage points. The model is not just slower at processing long contexts. It is actively worse at accessing information in the middle of them.</p>
+<p>This is why retrieval-augmented generation often outperforms long context windows in practice. A good retrieval system places the relevant information near the start of the prompt, where the model's attention mechanisms can access it reliably. That is not a limitation of the model. That is using the model correctly.</p>
+<p>For more on why RAG often beats long context, see <a href="/blog/rag-vs-fine-tuning-for-production/">my comparison of RAG versus fine-tuning approaches</a>.</p>
+<h2 id="importance-weighted-memory-and-what-beam-proposes">Importance-weighted Memory And What Beam Proposes</h2>
+<p>The BEAM benchmark's most interesting contribution is not just documenting the problem. It proposes a specific solution called <strong>importance-weighted memory</strong>.</p>
+<p>The idea is straightforward. Instead of evicting cache entries based purely on recency, evict them based on how important each token is to the final output. This requires predicting future importance, which sounds circular but is tractable if you use auxiliary signals. Those signals include attention scores from earlier layers, gradient magnitudes during training, and retrieval probability estimates from a small classifier.</p>
+<p>The BEAM paper reports that importance-weighted eviction improves middle-context retrieval accuracy by 18 to 22 percentage points on average, with minimal computational overhead. The improvements are largest for the hardest cases: long contexts with facts placed deep in the middle.</p>
+<p>Implementing this requires tracking an importance score for every cached entry and sorting on eviction. For a 1M token context with a typical cache size of 32K entries, this adds roughly 2ms of latency per eviction decision on modern hardware. The accuracy gains usually outweigh this cost in production scenarios where retrieval quality matters.</p>
+<p>I have been exploring similar ideas for <a href="/blog/scaling-llm-inference-without-gpus/">scaling LLM inference efficiently</a>. The core principle is the same: understand where your bottlenecks actually are before throwing hardware at them.</p>
+<h3 id="the-ruler-benchmark-and-synthetic-tests">The Ruler Benchmark And Synthetic Tests</h3>
+<p>BEAM is not the only benchmark exposing long-context weaknesses. The RULER benchmark, published by researchers at NVIDIA and the University of Washington, uses synthetic retrieval tasks to test models at context lengths up to 4M tokens. RULER finds that models perform well on the specific patterns they were trained on but degrade significantly on novel retrieval patterns that appear in the middle of long contexts.</p>
+<p>RULER's "needle in a haystack" test variant places a specific token at a random position and asks the model to identify it. Humans score near 100% on this test because we can simply read every token. Standard language models score between 40% and 70% depending on context length, with the familiar U-shaped curve appearing for all but the shortest contexts.</p>
+<p>The gap between synthetic benchmark performance and real-world performance is worth noting. Models trained on code or technical documents often perform better on BEAM-style retrieval than models trained primarily on conversational data. Domain matters. A model that reliably retrieves facts from the middle of a 500K token legal contract might fail on a 100K token medical record, even if both are within its context window.</p>
+<h2 id="practical-implications-for-production-systems">Practical Implications For Production Systems</h2>
+<p>If you are building a system that relies on long document processing, you need to treat context length as a risk factor, not a feature bullet point.</p>
+<p>The first principle is <strong>information placement</strong>. Put the most important information within the first 20% of the context or the last 10%. Avoid placing critical facts in the middle unless you have no choice. If a fact must go in the middle, repeat it near the end with explicit markers like "To summarize, the key figure is X."</p>
+<p>The second principle is <strong>retrieval before generation</strong>. Instead of dumping a 500K document into a prompt and asking a model to answer questions about it, run a retrieval step first to pull the most relevant passages. Those passages go near the start of the prompt. This is what modern RAG pipelines do, and BEAM explains why they outperform naive long-context approaches.</p>
+<p>The third principle is <strong>testing with your actual data</strong>. Benchmarks like BEAM use synthetic document structures. Your production documents have specific organizational patterns, vocabulary, and fact densities. Test retrieval accuracy on your own data at the context lengths you actually use.</p>
+<p>For more on building production LLM systems that handle long contexts reliably, see my posts on <a href="/blog/rag-optimization-techniques/">optimizing retrieval-augmented generation</a> and <a href="/blog/context-window-management/">context window management strategies</a>.</p>
+<h3 id="what-open-source-models-show">What Open Source Models Show</h3>
+<p>The BEAM evaluation covers open-source models including Mistral-7B-Instruct, Llama-2-70B-Chat, and Yi-34B. The patterns are consistent across all of them, though absolute numbers vary.</p>
+<p>Mistral-7B-Instruct achieves 62.1% retrieval accuracy at the start of a 32K context but drops to 14.7% in the middle. Llama-2-70B-Chat performs better at 71.3% and 22.4% respectively. Neither model was designed for long contexts, so the middle drop is severe.</p>
+<p>Long-context fine-tuned variants like Llama-3-70B-Instruct-262K show improvement. BEAM reports 88.4% at start and 41.2% in the middle for that model. The gap narrows but does not close. The U-shape persists.</p>
+<p>This is important for open-source deployment decisions. If you need reliable retrieval from the middle of long documents, you need a model explicitly trained for that task. You also need to test it with your specific document types, not just the BEAM leaderboard numbers.</p>
+<h2 id="faq">Faq</h2>
+<p><strong>What is the Lost in the Middle problem?</strong></p>
+<p>The Lost in the Middle problem describes the observation that language models reliably retrieve information placed near the beginning or end of a long context, but perform significantly worse on information placed in the middle. BEAM quantifies this effect: accuracy can drop by 50 or more percentage points between the start and middle of a 128K token context.</p>
+<p><strong>Does a 1 million token context window mean the model can use all 1 million tokens effectively?</strong></p>
+<p>No. BEAM shows that effective retrieval accuracy is highest in the first 20% and last 10% of the context, regardless of total context length. The middle region remains problematic even at 1M tokens. Models can process 1M tokens, but their effective "working memory" for retrieval is much smaller.</p>
+<p><strong>What causes the middle accuracy drop?</strong></p>
+<p>Two mechanisms combine to cause the drop. First, KV cache eviction policies remove older tokens from fast memory, making them inaccessible to attention. Second, attention patterns in transformer models naturally distribute unevenly across long contexts, with middle tokens receiving less attention than tokens near the beginning or end.</p>
+<p><strong>How does importance-weighted memory improve retrieval?</strong></p>
+<p>Importance-weighted memory assigns a predicted importance score to each cached token and evicts the least important tokens first when memory is full. This keeps high-value tokens available for attention even when processing long contexts. BEAM reports 18 to 22 percentage point improvements in middle-context retrieval with this approach.</p>
+<p><strong>Is RAG better than long context windows?</strong></p>
+<p>For most production use cases, yes. A well-designed RAG pipeline retrieves relevant information and places it near the start of the prompt, where the model's attention mechanisms can access it reliably. Long context windows are useful when you cannot determine what information is relevant in advance, or when you need to preserve ordering relationships across a full document.</p>
+<p><strong>Which models perform best on BEAM?</strong></p>
+<p>Claude 3 Opus and GPT-4-Turbo perform similarly, with both achieving above 90% accuracy at the start and 26-29% in the middle of their respective context windows. Long-context fine-tuned open models like Llama-3-70B-262K show the smallest accuracy gaps, though still exhibit the U-shaped pattern.</p>
+<p><strong>Can this problem be fixed with training?</strong></p>
+<p>Research suggests the U-shaped retrieval pattern is structural to how transformer attention works, not a bug that training can fully eliminate. However, training on longer contexts and using importance-weighted objectives can reduce the magnitude of the middle drop. The gap never fully closes, but it narrows with targeted training.</p>
+<hr />
+<p>The BEAM benchmark is a valuable diagnostic tool. It does not say long context windows are useless. It says they are less reliable than vendors imply, especially for information in the middle. Build systems that account for this, and you will avoid the production incidents that come from models quietly failing to retrieve facts they technically have access to.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+      </a>
+      <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">How Memory Works in DeerFlow</div>
+      </a>
+      <a href="/blog/rag-vs-memory/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
+          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
+          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

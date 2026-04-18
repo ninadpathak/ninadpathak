@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG vs Memory Convergence</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    overflow: hidden;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  canvas { display: block; }
+  #label {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div id="label">DRAG TO ORBIT</div>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// Scene
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a0f);
+
+const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 200);
+camera.position.set(0, 6, 18);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.minDistance = 8;
+controls.maxDistance = 35;
+controls.target.set(0, 0, 0);
+
+// Lighting
+scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+dirLight.position.set(5, 10, 5);
+scene.add(dirLight);
+
+// Glow material factory
+function makeGlowMat(hex) {
+  return new THREE.MeshStandardMaterial({
+    color: hex,
+    emissive: hex,
+    emissiveIntensity: 1.8,
+    roughness: 0.2,
+    metalness: 0.5,
+  });
+}
+
+const RAG_COLOR = 0xff5f1f;
+const MEM_COLOR = 0xff5f1f;
+const LLM_COLOR = 0xff5f1f;
+const BG_COLOR = 0x1a0800;
+const TUBE_COLOR = 0xd44000;
+
+// ── RAG Pathway ──────────────────────────────────────────────────────────────
+function buildRAGPathway() {
+  const group = new THREE.Group();
+
+  // Database cylinder
+  const dbGeo = new THREE.CylinderGeometry(0.85, 0.85, 2.2, 24);
+  const dbMat = new THREE.MeshStandardMaterial({
+    color: 0xd44000, emissive: 0xd44000, emissiveIntensity: 0.6,
+    roughness: 0.3, metalness: 0.7,
+  });
+  const db = new THREE.Mesh(dbGeo, dbMat);
+  db.position.set(-8, 0, -4);
+  group.add(db);
+
+  // Database rings
+  for (let i = -3; i <= 3; i += 1.5) {
+    const ringGeo = new THREE.TorusGeometry(0.9, 0.05, 8, 24);
+    const ring = new THREE.Mesh(ringGeo, dbMat);
+    ring.position.copy(db.position);
+    ring.position.y = i * 0.35;
+    ring.rotation.x = Math.PI / 2;
+    group.add(ring);
+  }
+
+  // Query arrow (sphere + cone pointing in)
+  const qGeo = new THREE.SphereGeometry(0.45, 16, 16);
+  const qMat = makeGlowMat(0xff5f1f);
+  const qSphere = new THREE.Mesh(qGeo, qMat);
+  qSphere.position.set(-8, 3.5, -4);
+  group.add(qSphere);
+
+  const qConeGeo = new THREE.ConeGeometry(0.25, 0.7, 12);
+  const qCone = new THREE.Mesh(qConeGeo, qMat);
+  qCone.position.set(-8, 2.5, -4);
+  group.add(qCone);
+
+  // Label
+  group.userData.dbPos = db.position.clone();
+  group.userData.qPos = qSphere.position.clone();
+
+  return group;
+}
+
+// ── Memory Pathway ────────────────────────────────────────────────────────────
+function buildMemoryPathway() {
+  const group = new THREE.Group();
+
+  // Stacked conversation bubbles
+  const bubblePositions = [
+    { y: 3.2, rx: 0.15 },
+    { y: 1.8, rx: -0.1 },
+    { y: 0.4, rx: 0.08 },
+    { y: -1.0, rx: -0.12 },
+    { y: -2.4, rx: 0.05 },
+  ];
+
+  bubblePositions.forEach((bp, i) => {
+    const w = 2.2 + Math.sin(i) * 0.3;
+    const h = 0.55;
+    const d = 0.5;
+    const geo = new THREE.BoxGeometry(w, h, d);
+    const mat = new THREE.MeshStandardMaterial({
+      color: 0xd44000,
+      emissive: 0xd44000,
+      emissiveIntensity: i === 0 ? 1.2 : 0.5,
+      roughness: 0.4,
+      metalness: 0.3,
+      transparent: true,
+      opacity: 0.85,
+    });
+    const bubble = new THREE.Mesh(geo, mat);
+    bubble.position.set(8, bp.y, -4);
+    bubble.rotation.z = bp.rx;
+    group.add(bubble);
+  });
+
+  group.userData.bubbleY = bubblePositions[0].y;
+
+  return group;
+}
+
+// ── LLM Brain ────────────────────────────────────────────────────────────────
+function buildLLM() {
+  const group = new THREE.Group();
+
+  // Main sphere
+  const sphereGeo = new THREE.SphereGeometry(1.6, 32, 32);
+  const sphereMat = new THREE.MeshStandardMaterial({
+    color: 0xff5f1f,
+    emissive: 0xff5f1f,
+    emissiveIntensity: 1.5,
+    roughness: 0.15,
+    metalness: 0.8,
+  });
+  const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+  group.add(sphere);
+
+  // Neural net rings
+  const ringRadii = [2.1, 2.6, 3.1];
+  ringRadii.forEach((r, i) => {
+    const geo = new THREE.TorusGeometry(r, 0.03, 8, 64);
+    const mat = new THREE.MeshStandardMaterial({
+      color: 0xff5f1f,
+      emissive: 0xff5f1f,
+      emissiveIntensity: 0.6 - i * 0.15,
+      roughness: 0.3,
+      transparent: true,
+      opacity: 0.7 - i * 0.15,
+    });
+    const ring = new THREE.Mesh(geo, mat);
+    ring.rotation.x = Math.PI / 2 + (i - 1) * 0.3;
+    ring.rotation.y = i * 0.5;
+    group.add(ring);
+  });
+
+  // Orbiting dots (attention heads)
+  for (let i = 0; i < 6; i++) {
+    const dotGeo = new THREE.SphereGeometry(0.1, 8, 8);
+    const dotMat = makeGlowMat(0xff5f1f);
+    const dot = new THREE.Mesh(dotGeo, dotMat);
+    const angle = (i / 6) * Math.PI * 2;
+    dot.position.set(
+      Math.cos(angle) * 2.2,
+      Math.sin(angle * 1.7) * 0.6,
+      Math.sin(angle) * 2.2
+    );
+    group.add(dot);
+  }
+
+  return group;
+}
+
+// ── Connecting Tubes ──────────────────────────────────────────────────────────
+function buildTubes(from, to, color) {
+  const group = new THREE.Group();
+
+  const curve1 = new THREE.CatmullRomCurve3([
+    from.clone().add(new THREE.Vector3(2, 0, 1.5)),
+    new THREE.Vector3(0, 0, 0.8),
+    new THREE.Vector3(0, 0, 0),
+  ]);
+  const tube1 = new THREE.Mesh(
+    new THREE.TubeGeometry(curve1, 40, 0.07, 8, false),
+    new THREE.MeshStandardMaterial({
+      color, emissive: color, emissiveIntensity: 1.2,
+      roughness: 0.3, metalness: 0.5,
+    })
+  );
+  group.add(tube1);
+
+  const curve2 = new THREE.CatmullRomCurve3([
+    to.clone().add(new THREE.Vector3(-2, 0, 1.5)),
+    new THREE.Vector3(0, 0, 0.8),
+    new THREE.Vector3(0, 0, 0),
+  ]);
+  const tube2 = new THREE.Mesh(
+    new THREE.TubeGeometry(curve2, 40, 0.07, 8, false),
+    new THREE.MeshStandardMaterial({
+      color, emissive: color, emissiveIntensity: 1.2,
+      roughness: 0.3, metalness: 0.5,
+    })
+  );
+  group.add(tube2);
+
+  // Animated particles on tubes
+  const particleCount = 30;
+  const positions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount; i++) {
+    const t = i / particleCount;
+    const p = curve1.getPoint(t);
+    positions[i * 3] = p.x;
+    positions[i * 3 + 1] = p.y;
+    positions[i * 3 + 2] = p.z;
+  }
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const pMat = new THREE.PointsMaterial({
+    color: 0xff7030,
+    size: 0.15,
+    transparent: true,
+    opacity: 0.9,
+  });
+  group.add(new THREE.Points(pGeo, pMat));
+
+  return group;
+}
+
+// ── Labels ───────────────────────────────────────────────────────────────────
+function makeLabel(text, position, color = '#ff5f1f') {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 128;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'transparent';
+  ctx.clearRect(0, 0, 512, 128);
+  ctx.font = 'bold 42px Segoe UI, system-ui, sans-serif';
+  ctx.fillStyle = color;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, 256, 64);
+
+  const tex = new THREE.CanvasTexture(canvas);
+  const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+  const sprite = new THREE.Sprite(mat);
+  sprite.position.copy(position);
+  sprite.scale.set(5, 1.25, 1);
+  return sprite;
+}
+
+// ── Build Scene ───────────────────────────────────────────────────────────────
+const ragGroup = buildRAGPathway();
+const memGroup = buildMemoryPathway();
+const llmGroup = buildLLM();
+scene.add(ragGroup);
+scene.add(memGroup);
+scene.add(llmGroup);
+
+// RAG tube from database to LLM
+const ragStart = new THREE.Vector3(-8, 0, -4);
+const ragTube = buildTubes(ragStart, new THREE.Vector3(8, 0, -4), 0xff5f1f);
+scene.add(ragTube);
+
+// Memory tube from top bubble to LLM
+const memBubbleTop = new THREE.Vector3(8, 3.2, -4);
+const memTube = buildTubes(memBubbleTop, new THREE.Vector3(-8, 0, -4), 0xff5f1f);
+scene.add(memTube);
+
+// Labels
+scene.add(makeLabel('RAG PIPELINE', new THREE.Vector3(-8, -2.8, -4), '#d44000'));
+scene.add(makeLabel('MEMORY', new THREE.Vector3(8, -2.8, -4), '#d44000'));
+scene.add(makeLabel('LLM', new THREE.Vector3(0, 3.2, 0)));
+
+// Ground plane (subtle grid)
+const grid = new THREE.GridHelper(30, 30, 0x1a0800, 0x1a0800);
+grid.position.y = -5;
+scene.add(grid);
+
+// Particle field background
+const starGeo = new THREE.BufferGeometry();
+const starCount = 800;
+const starPos = new Float32Array(starCount * 3);
+for (let i = 0; i < starCount; i++) {
+  starPos[i * 3] = (Math.random() - 0.5) * 60;
+  starPos[i * 3 + 1] = (Math.random() - 0.5) * 40;
+  starPos[i * 3 + 2] = (Math.random() - 0.5) * 40;
+}
+starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+const stars = new THREE.Points(
+  starGeo,
+  new THREE.PointsMaterial({ color: 0x3a1500, size: 0.08 })
+);
+scene.add(stars);
+
+// ── Animation Loop ────────────────────────────────────────────────────────────
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // LLM brain pulse
+  const pulse = 1 + Math.sin(t * 1.8) * 0.05;
+  llmGroup.children[0].scale.setScalar(pulse);
+
+  // Rotate neural rings
+  llmGroup.children[1].rotation.z = t * 0.4;
+  llmGroup.children[2].rotation.z = -t * 0.3;
+  llmGroup.children[3].rotation.z = t * 0.2;
+
+  // Orbit attention dots
+  llmGroup.children.forEach((child, i) => {
+    if (i >= 4) {
+      const angle = t * 0.7 + ((i - 4) / 6) * Math.PI * 2;
+      child.position.x = Math.cos(angle) * 2.2;
+      child.position.z = Math.sin(angle) * 2.2;
+    }
+  });
+
+  // RAG database subtle rotation
+  ragGroup.children[0].rotation.y = t * 0.15;
+
+  // Memory bubble shimmer
+  memGroup.children.forEach((bubble, i) => {
+    const shimmer = 1 + Math.sin(t * 1.5 + i * 0.8) * 0.04;
+    bubble.scale.setScalar(shimmer);
+  });
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

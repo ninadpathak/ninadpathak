@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Context Windows vs Memory — Retrieval Decay</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d0d0d; color: #f0f0f0; font-family: 'Segoe UI', system-ui, sans-serif; overflow: hidden; }
+  canvas { display: block; }
+  .overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    pointer-events: none;
+  }
+  .overlay h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ff5f1f;
+    letter-spacing: 0.02em;
+  }
+  .overlay p {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 4px;
+  }
+  .legend {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+    pointer-events: none;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    color: #aaa;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .legend-dot.context { background: #ff5f1f; }
+  .legend-dot.memory  { background: #4fc3f7; }
+  .caption {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    color: #555;
+    text-align: center;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay">
+  <h1>Retrieval Accuracy Decay Over Time</h1>
+  <p>Context windows degrade — Memory systems maintain</p>
+</div>
+
+<div class="caption">
+  Drag to orbit &nbsp;|&nbsp; Scroll to zoom &nbsp;|&nbsp; Sequence position → 0 (latest) to 100 (oldest)
+</div>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-dot context"></div>
+    <span>Context Window Retrieval</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot memory"></div>
+    <span>Memory-Augmented Retrieval</span>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+// Scene setup
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0d0d0d);
+
+// Camera
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(0, 18, 35);
+camera.lookAt(0, 0, 0);
+
+// Renderer
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+document.body.appendChild(renderer.domElement);
+
+// Controls
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.minDistance = 10;
+controls.maxDistance = 80;
+controls.maxPolarAngle = Math.PI / 2.1;
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+scene.add(ambientLight);
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+dirLight.position.set(10, 20, 10);
+scene.add(dirLight);
+
+// Colors
+const CONTEXT_COLOR = 0xff5f1f;
+const MEMORY_COLOR  = 0x4fc3f7;
+const GRID_COLOR    = 0x1a1a1a;
+const AXIS_COLOR    = 0x333333;
+
+// Grid floor
+const gridHelper = new THREE.GridHelper(40, 20, GRID_COLOR, GRID_COLOR);
+scene.add(gridHelper);
+
+// Axes
+function makeLine(points, color) {
+  const geo = new THREE.BufferGeometry().setFromPoints(points);
+  const mat = new THREE.LineBasicMaterial({ color });
+  return new THREE.Line(geo, mat);
+}
+
+const xLen = 20, zLen = 20;
+// X axis (sequence position 0→100)
+scene.add(makeLine([new THREE.Vector3(0, 0.01, 0), new THREE.Vector3(xLen, 0.01, 0)], AXIS_COLOR));
+// Z axis (retrieval accuracy 0→1)
+scene.add(makeLine([new THREE.Vector3(0, 0.01, -zLen), new THREE.Vector3(0, 0.01, 0)], AXIS_COLOR));
+// Y axis (frequency)
+// Build decay curves
+const NUM_POINTS = 200;
+
+// Context window decay curve: fast drop, partial recovery, slow degradation
+// Models recall beginning/end well, lose middle — but overall accuracy drops with age
+// Modeled as: high at start (0.97), drops in middle (0.58), slight recovery at end (0.75), then slow decay
+function contextDecay(t) {
+  // t in [0,1] — 0 is most recent, 1 is oldest
+  // Classic positional decay + attention bias
+  let base = 0.97 - 0.35 * Math.pow(t, 0.7);
+  // "lost in the middle" bump at ~t=0.5 (not the actual peak, but shows the dip)
+  let middleDip = 0.12 * Math.exp(-Math.pow((t - 0.45) * 8, 2));
+  return Math.max(0.35, Math.min(0.97, base - middleDip + 0.05 * Math.sin(t * Math.PI)));
+}
+
+// Memory-augmented retrieval: flat, high, with slight decay
+function memoryDecay(t) {
+  // Memory system maintains accuracy regardless of position
+  // Slight decay only for very old entries (archival)
+  return 0.92 - 0.08 * Math.pow(t, 2.5);
+}
+
+// Generate curve points for a given decay function
+function buildCurve(decayFn, color, yOffset, zScale) {
+  const pts = [];
+  for (let i = 0; i <= NUM_POINTS; i++) {
+    const t = i / NUM_POINTS;
+    const accuracy = decayFn(t);
+    const x = t * xLen;
+    const y = accuracy * 8 + yOffset;
+    const z = -t * zLen;
+    pts.push(new THREE.Vector3(x, y, z));
+  }
+  const geo = new THREE.BufferGeometry().setFromPoints(pts);
+  const mat = new THREE.LineBasicMaterial({ color, linewidth: 2 });
+  const line = new THREE.Line(geo, mat);
+  return { line, points: pts };
+}
+
+// Scatter points along curves for visual richness
+function addScatterPoints(decayFn, color, yOffset, zScale, count = 80) {
+  const positions = [];
+  const colors = [];
+  const c = new THREE.Color(color);
+  for (let i = 0; i < count; i++) {
+    const t = Math.random();
+    const accuracy = decayFn(t) + (Math.random() - 0.5) * 0.04;
+    const x = t * xLen;
+    const y = accuracy * 8 + yOffset + (Math.random() - 0.5) * 0.3;
+    const z = -t * zLen;
+    positions.push(x, y, z);
+    const alpha = 0.3 + Math.random() * 0.4;
+    colors.push(c.r * alpha, c.g * alpha, c.b * alpha);
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  const mat = new THREE.PointsMaterial({ size: 0.15, vertexColors: true, transparent: true, opacity: 0.7 });
+  scene.add(new THREE.Points(geo, mat));
+}
+
+// Build both curves
+const ctx = buildCurve(contextDecay, CONTEXT_COLOR, 0.5, 10);
+scene.add(ctx.line);
+addScatterPoints(contextDecay, CONTEXT_COLOR, 0.5, 10);
+
+const mem = buildCurve(memoryDecay, MEMORY_COLOR, 0, 10);
+scene.add(mem.line);
+addScatterPoints(memoryDecay, MEMORY_COLOR, 0, 10);
+
+// Axis labels using sprites
+function makeTextSprite(text, position, size = 200) {
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+  ctx.font = 'bold 28px Segoe UI, sans-serif';
+  ctx.fillStyle = '#666';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, size / 2, 32);
+  const texture = new THREE.CanvasTexture(canvas);
+  const mat = new THREE.SpriteMaterial({ map: texture, transparent: true });
+  const sprite = new THREE.Sprite(mat);
+  sprite.position.copy(position);
+  sprite.scale.set(6, 1, 1);
+  return sprite;
+}
+
+scene.add(makeTextSprite('Sequence Position (oldest →)', new THREE.Vector3(xLen / 2, -1.5, 0)));
+scene.add(makeTextSprite('Retrieval Accuracy', new THREE.Vector3(-3.5, 4, -zLen / 2)));
+
+// Tick markers along X axis (position)
+for (let i = 0; i <= 4; i++) {
+  const t = i / 4;
+  const x = t * xLen;
+  const geo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(x, 0, 0),
+    new THREE.Vector3(x, -0.2, 0)
+  ]);
+  scene.add(new THREE.Line(geo, new THREE.LineBasicMaterial({ color: AXIS_COLOR })));
+
+  const lbl = (i * 25) + '';
+  const cvs = document.createElement('canvas');
+  cvs.width = 80; cvs.height = 40;
+  const c = cvs.getContext('2d');
+  c.font = '18px monospace'; c.fillStyle = '#555'; c.textAlign = 'center';
+  c.fillText(lbl + '% old', 40, 25);
+  const tex = new THREE.CanvasTexture(cvs);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true }));
+  sp.position.set(x, -1.2, 0);
+  sp.scale.set(2, 0.5, 1);
+  scene.add(sp);
+}
+
+// Tick markers along Z axis (accuracy)
+for (let i = 0; i <= 4; i++) {
+  const accuracy = i / 4;
+  const z = -accuracy * zLen;
+  const geo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 0, z),
+    new THREE.Vector3(-0.2, 0, z)
+  ]);
+  scene.add(new THREE.Line(geo, new THREE.LineBasicMaterial({ color: AXIS_COLOR })));
+
+  const cvs = document.createElement('canvas');
+  cvs.width = 80; cvs.height = 40;
+  const c = cvs.getContext('2d');
+  c.font = '18px monospace'; c.fillStyle = '#555'; c.textAlign = 'center';
+  c.fillText(Math.round(accuracy * 100) + '%', 40, 25);
+  const tex = new THREE.CanvasTexture(cvs);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true }));
+  sp.position.set(-1.2, 0, z);
+  sp.scale.set(2, 0.5, 1);
+  scene.add(sp);
+}
+
+// "Lost in the middle" annotation for context curve
+// Position: x=9, z close to curve
+const midX = 0.45 * xLen;
+const midAcc = contextDecay(0.45);
+const midY = midAcc * 8 + 0.5;
+const midZ = -0.45 * 10;
+
+function makeAnnotation(text, position) {
+  const cvs = document.createElement('canvas');
+  cvs.width = 320; cvs.height = 60;
+  const c = cvs.getContext('2d');
+  c.font = 'bold 22px Segoe UI, sans-serif';
+  c.fillStyle = '#ff5f1f';
+  c.textAlign = 'center';
+  c.fillText(text, 160, 28);
+  const tex = new THREE.CanvasTexture(cvs);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true }));
+  sp.position.copy(position);
+  sp.scale.set(8, 1.5, 1);
+  return sp;
+}
+
+scene.add(makeAnnotation('Lost in the Middle', new THREE.Vector3(midX, midY + 2.5, midZ)));
+
+// Annotation line
+const annLineGeo = new THREE.BufferGeometry().setFromPoints([
+  new THREE.Vector3(midX, midY, midZ),
+  new THREE.Vector3(midX, midY + 2, midZ)
+]);
+scene.add(new THREE.Line(annLineGeo, new THREE.LineBasicMaterial({ color: CONTEXT_COLOR, transparent: true, opacity: 0.5 })));
+
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+// Resize handler
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>

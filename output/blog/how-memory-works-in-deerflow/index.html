@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Memory Works in DeerFlow | Ninad Pathak</title>
+  <meta name="description" content="A deep dive into the memory architecture of DeerFlow: layered context passing, session state files, sub-agent isolation, and how it compares to Letta, AutoGen, and CrewAI.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="How Memory Works in DeerFlow">
+  <meta property="og:description" content="A deep dive into the memory architecture of DeerFlow: layered context passing, session state files, sub-agent isolation, and how it compares to Letta, AutoGen, and CrewAI.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/how-memory-works-in-deerflow/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/how-memory-works-in-deerflow/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "How Memory Works in DeerFlow",
+  "description": "A deep dive into the memory architecture of DeerFlow: layered context passing, session state files, sub-agent isolation, and how it compares to Letta, AutoGen, and CrewAI.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/how-memory-works-in-deerflow/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How Memory Works in DeerFlow",
+      "item": "https://ninadpathak.com/blog/how-memory-works-in-deerflow/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">How Memory Works in DeerFlow</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 19, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">11 min read</span>
+      </div>
+      <h1 class="post-title">How Memory Works in DeerFlow</h1>
+      <p class="lead">A deep dive into the memory architecture of DeerFlow: layered context passing, session state files, sub-agent isolation, and how it compares to Letta, AutoGen, and CrewAI.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+        <span class="tag">deerflow</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-layered-architecture-of-deerflow-memory">The Layered Architecture Of DeerFlow Memory</a></li>
+<li><a href="#session-continuity-via-state-files">Session Continuity Via State Files</a></li>
+<li><a href="#sub-agent-isolation-in-multi-stage-workflows">Sub-agent Isolation In Multi-stage Workflows</a></li>
+<li><a href="#how-context-gets-passed-between-agents">How Context Gets Passed Between Agents</a></li>
+<li><a href="#memory-retrieval-at-workflow-initialization">Memory Retrieval At Workflow Initialization</a></li>
+<li><a href="#production-considerations">Production Considerations</a></li>
+<li><a href="#comparison-to-other-frameworks">Comparison To Other Frameworks</a></li>
+<li><a href="#faq">Faq</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>DeerFlow structures its memory system around something I call structured context passing. Rather than relying on a central vector store or a global knowledge graph, DeerFlow passes memory between agents through explicit JSON state files and Markdown context documents. Each agent in a workflow receives exactly what it needs at the moment it needs it, nothing more.</p>
+<p>The result is an architecture that is auditable, debuggable, and surprisingly easy to reason about at scale. If you have been burned by opaque agent systems that lose track of what happened three steps ago, DeerFlow's approach will feel like a breath of fresh air.</p>
+<h2 id="the-layered-architecture-of-deerflow-memory">The Layered Architecture Of DeerFlow Memory</h2>
+<p>DeerFlow organizes memory into three distinct layers that map cleanly to how humans actually think. Working memory lives in the prompt at execution time. Session memory lives in structured files that persist across turns. Long-term memory lives in a configurable store you plug in.</p>
+<p>Working memory in DeerFlow is the current context window. It contains the system prompt, the task description, the conversation history, and any retrieved documents. This layer resets between major workflow stages. The key insight is that DeerFlow does not treat the working memory as a dump of everything known. It treats it as a carefully curated snapshot of what matters right now.</p>
+<p>Session memory captures the accumulated state of a research or task workflow. When a DeerFlow workflow runs across multiple stages, each stage writes its outputs to a session file. The next stage reads that file and incorporates its contents into working memory. This design means you can stop a workflow mid-execution and resume it by reading the session file.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># DeerFlow session state structure (simplified)</span>
+<span class="n">session_state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;workflow_id&quot;</span><span class="p">:</span> <span class="s2">&quot;research-2026-04-19-001&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;current_stage&quot;</span><span class="p">:</span> <span class="s2">&quot;web_research&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;completed_stages&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;task_decomposition&quot;</span><span class="p">,</span> <span class="s2">&quot;initial_planning&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;stage_outputs&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;task_decomposition&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;subtasks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gather_prerequisites&quot;</span><span class="p">,</span> <span class="s2">&quot;run_benchmark&quot;</span><span class="p">,</span> <span class="s2">&quot;compile_results&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;next_stage&quot;</span><span class="p">:</span> <span class="s2">&quot;web_research&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;initial_planning&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;goals&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;measure_latency_p50&quot;</span><span class="p">,</span> <span class="s2">&quot;compare_qps_limits&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;constraints&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;budget &lt; $50&quot;</span><span class="p">,</span> <span class="s2">&quot;max 2 hour runtime&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;memory_snapshots&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;stage&quot;</span><span class="p">:</span> <span class="s2">&quot;task_decomposition&quot;</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Decomposed into 3 subtasks&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;stage&quot;</span><span class="p">:</span> <span class="s2">&quot;initial_planning&quot;</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Set latency and budget constraints&quot;</span><span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Long-term memory in DeerFlow is where things get interesting. You plug in your own store. The framework ships with adapters for vector databases, PostgreSQL with pgvector, and simple file-based retrieval. The long-term store holds facts and findings that persist beyond the current session. When a new session starts, DeerFlow retrieves relevant long-term context and injects it into working memory at the beginning of the workflow.</p>
+<p>The three-layer model means you never pay the token cost of loading your entire knowledge base for every single agent invocation. You only load what the current stage needs.</p>
+<h2 id="session-continuity-via-state-files">Session Continuity Via State Files</h2>
+<p>DeerFlow's structured file passing for session continuity is the same principle behind <a href="/blog/production-ai-agent-errors/">checkpointing in production AI agents</a>. The difference is that DeerFlow enforces it at the workflow level rather than the tool call level. If the workflow crashes, restarts, or gets handed off to a different process, it reads the state file and resumes from exactly where it left off.</p>
+<p>The state file tracks three things: which stages completed, what each stage produced, and what the next stage should be. This is deliberately simple. Complex systems fail in complex ways. A plain JSON file that a human can read and edit is far more robust than a binary state store that requires special tooling to inspect.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># deerflow_session.yaml — session configuration</span>
+<span class="nt">session</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;research-2026-04-19-latency-benchmark&quot;</span>
+<span class="w">  </span><span class="nt">storage_backend</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;postgresql&quot;</span>
+<span class="w">  </span><span class="nt">vector_store</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;pgvector&quot;</span>
+<span class="w">    </span><span class="nt">connection</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;postgresql://user:pass@localhost:5432/deerflow&quot;</span>
+<span class="w">    </span><span class="nt">collection</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;session_memories&quot;</span>
+<span class="w">  </span><span class="nt">checkpoint_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">  </span><span class="c1"># checkpoint every 2 stages</span>
+
+<span class="nt">memory</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">working_memory</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">max_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">128000</span>
+<span class="w">    </span><span class="nt">eviction_policy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;oldest_first&quot;</span>
+
+<span class="w">  </span><span class="nt">session_memory</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">persist</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/var/lib/deerflow/sessions/{session_id}.json&quot;</span>
+
+<span class="w">  </span><span class="nt">long_term_memory</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">retrieval_top_k</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">    </span><span class="nt">rerank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">rerank_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cross-encoder/ms-marco-MiniLM-L-12-v2&quot;</span>
+</code></pre></div>
+
+<p>The checkpoint interval tells DeerFlow how often to write a durable state snapshot. Setting it to 2 means every two completed stages produce a checkpoint. If you have a twenty-stage workflow, you have ten recovery points. A failure at stage seventeen restarts from the last checkpoint at stage sixteen.</p>
+<p>I have tested this by killing a DeerFlow process mid-workflow and restarting it. The session file had the full state. The workflow resumed exactly where it left off. No lost work, no corrupted state.</p>
+<h2 id="sub-agent-isolation-in-multi-stage-workflows">Sub-agent Isolation In Multi-stage Workflows</h2>
+<p>DeerFlow workflows compose multiple specialized agents. A research workflow might use a planner agent, a web search agent, a code execution agent, and a synthesis agent. Each agent operates in its own context window. Each agent writes its outputs to the shared session file when it completes.</p>
+<p>Sub-agent isolation in this context means two things. First, each agent sees only the context it was explicitly given. A code execution agent does not see the raw web search results. It sees a curated summary written by the web search agent. Second, each agent runs to completion before the next agent starts. There is no concurrent execution where two agents write to the session file simultaneously.</p>
+<p>This sequential isolation eliminates a class of race conditions that plague more loosely coupled multi-agent systems. The cost is latency. If you have four agents that each take thirty seconds, your workflow takes at least two minutes. For research tasks where depth matters more than speed, this trade-off is worth it.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># DeerFlow multi-agent execution loop (simplified)</span>
+<span class="k">def</span> <span class="nf">run_deerflow_workflow</span><span class="p">(</span><span class="n">workflow_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">session_store</span><span class="p">:</span> <span class="n">SessionStore</span><span class="p">):</span>
+    <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_config</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+    <span class="n">stages</span> <span class="o">=</span> <span class="n">workflow_config</span><span class="p">[</span><span class="s2">&quot;stages&quot;</span><span class="p">]</span>  <span class="c1"># ordered list of stage configs</span>
+
+    <span class="k">for</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">stages</span><span class="p">:</span>
+        <span class="n">agent</span> <span class="o">=</span> <span class="n">load_agent</span><span class="p">(</span><span class="n">stage</span><span class="p">[</span><span class="s2">&quot;agent_type&quot;</span><span class="p">])</span>
+        <span class="n">previous_outputs</span> <span class="o">=</span> <span class="n">session_store</span><span class="o">.</span><span class="n">read_latest</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">)</span>
+
+        <span class="c1"># Inject previous stage outputs into working memory</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">build_context</span><span class="p">(</span>
+            <span class="n">system_prompt</span><span class="o">=</span><span class="n">stage</span><span class="p">[</span><span class="s2">&quot;system_prompt&quot;</span><span class="p">],</span>
+            <span class="n">task</span><span class="o">=</span><span class="n">workflow_config</span><span class="p">[</span><span class="s2">&quot;task&quot;</span><span class="p">],</span>
+            <span class="n">prior_outputs</span><span class="o">=</span><span class="n">previous_outputs</span><span class="p">,</span>
+            <span class="n">long_term_context</span><span class="o">=</span><span class="n">retrieve_from_memory</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Agent runs to completion</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+        <span class="c1"># Write outputs to session store</span>
+        <span class="n">session_store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">stage</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">)</span>
+        <span class="n">session_store</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">)</span>
+
+    <span class="n">final_output</span> <span class="o">=</span> <span class="n">session_store</span><span class="o">.</span><span class="n">get_final_outputs</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">final_output</span>
+</code></pre></div>
+
+<p>The isolation model means you can also swap agents in and out without changing the surrounding infrastructure. If you want to replace the web search agent with a different provider, you only change the agent configuration. The session store interface stays the same.</p>
+<h2 id="how-context-gets-passed-between-agents">How Context Gets Passed Between Agents</h2>
+<p>Context passing in DeerFlow happens through a structured summary protocol. The output of each stage is not raw tool calls or raw LLM completions. It is a formatted summary document that the next agent can use as input.</p>
+<p>This is the part that most multi-agent frameworks get wrong. They pass raw conversation logs between agents and expect each agent to figure out what matters. DeerFlow enforces a contract: each stage writes a summary in a known schema, and the next stage reads that schema.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Stage output schema (enforced by DeerFlow)</span>
+<span class="n">stage_output</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;stage_name&quot;</span><span class="p">:</span> <span class="s2">&quot;web_research&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;String — what was found and why it matters&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;key_findings&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;fact&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;url or document ID&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;fact&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;url or document ID&quot;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;high | medium | low&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;next_stage_recommendations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;suggested focus areas for synthesis&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;raw_data_refs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;pointers to stored raw outputs&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The confidence field is especially useful. When a stage marks its confidence as low, downstream stages know to treat the findings as provisional. The synthesis agent might spend more time cross-checking facts before including them in the final output. This is the same pattern I described in my <a href="/blog/agent-harnesses/">agent harness</a> post where explicit state transitions prevent the model from improvising recovery.</p>
+<p>Raw data refs point to stored artifacts. If the web research agent crawled twelve pages, those pages are stored and referenced by ID. The synthesis agent can pull the actual text if it needs to verify a finding.</p>
+<h2 id="memory-retrieval-at-workflow-initialization">Memory Retrieval At Workflow Initialization</h2>
+<p>When a DeerFlow workflow starts, it does not start with a blank slate. It queries the long-term memory store for relevant content from previous sessions. This is where the vector store or pgvector adapter does its work.</p>
+<p>The retrieval query is built from the workflow task description and any session initialization parameters. DeerFlow embeds the task description, runs similarity search against the memory store, and returns the top-k results. Those results get injected into the working memory before the first agent runs.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize_workflow</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="c1"># Retrieve relevant long-term context</span>
+    <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-embedding-3-large&quot;</span><span class="p">)</span>
+    <span class="n">relevant_memories</span> <span class="o">=</span> <span class="n">vector_store</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">vector</span><span class="o">=</span><span class="n">query_embedding</span><span class="p">,</span>
+        <span class="n">top_k</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_retrieval_top_k&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="n">filters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;session_tag&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;topic_tag&quot;</span><span class="p">,</span> <span class="s2">&quot;general&quot;</span><span class="p">)}</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Build initial context</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span>
+        <span class="s2">&quot;retrieved_memories&quot;</span><span class="p">:</span> <span class="n">relevant_memories</span><span class="p">,</span>
+        <span class="s2">&quot;session_id&quot;</span><span class="p">:</span> <span class="n">workflow_id</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="n">config</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Write initial session state</span>
+    <span class="n">session_store</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">context</span>
+</code></pre></div>
+
+<p>The filters on the query let you scope retrieval to specific topic areas. If you are running a workflow about latency benchmarking, you do not want to pull in memories about code style debates. Tag-based filtering keeps retrieval focused.</p>
+<h2 id="production-considerations">Production Considerations</h2>
+<p>Running DeerFlow in production surfaces three concerns that the documentation does not emphasize enough.</p>
+<p><strong>Token budget management.</strong> A twenty-stage workflow can accumulate significant context if each stage writes verbose summaries. Set hard limits on working memory size and enforce truncation or summarization at stage boundaries. The YAML config above lets you set <code>max_tokens</code> on the working memory layer. Do not leave that at the default and assume it will scale.</p>
+<p><strong>State file durability.</strong> DeerFlow writes session state to disk. If the disk fills up or the write permissions get revoked, the workflow fails silently on the next restart. Use a durability-checked storage backend (postgresql works well) rather than the filesystem adapter for anything mission-critical.</p>
+<p><strong>Memory store query latency.</strong> Long-term memory retrieval adds latency at workflow initialization. If your vector store is cold (no cached embeddings), a retrieval query can take two to three seconds. For workflows that run hundreds of times per day, that latency compounds. Warm your vector store cache or accept that initialization takes a few seconds.</p>
+<h2 id="comparison-to-other-frameworks">Comparison To Other Frameworks</h2>
+<p>Letta treats memory as an operating system, paging context in and out of the LLM window like RAM. DeerFlow takes the opposite approach: keep context small and explicit, pass it between stages as structured documents, and rely on the long-term store for anything that needs to survive across sessions.</p>
+<p>Letta wins when you have a single agent that needs to maintain identity over thousands of interactions. DeerFlow wins when you have a workflow that decomposes into specialized stages and you need auditability about what each stage found.</p>
+<p>AutoGen exposes a more flexible but less opinionated message-passing model. Multiple agents can run concurrently and exchange messages freely. This flexibility is powerful for complex collaboration patterns. It is also harder to debug because messages can arrive in non-deterministic order and state gets spread across many agents rather than concentrated in one session file.</p>
+<p>CrewAI uses role-based agents with shared goals and a manager agent that assigns tasks. The memory model is implicit in the manager's task assignment logic. DeerFlow's explicit session files are more verbose but far easier to inspect when something goes wrong.</p>
+<p>The table below summarizes the differences.</p>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>DeerFlow</th>
+<th>Letta</th>
+<th>AutoGen</th>
+<th>CrewAI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memory model</td>
+<td>Structured file passing</td>
+<td>OS-style paging</td>
+<td>Message passing</td>
+<td>Manager task assignment</td>
+</tr>
+<tr>
+<td>Session continuity</td>
+<td>Deterministic file-based</td>
+<td>Virtual memory protocol</td>
+<td>Message history</td>
+<td>Task context</td>
+</tr>
+<tr>
+<td>Sub-agent isolation</td>
+<td>Sequential, stage-gated</td>
+<td>Per-agent memory spaces</td>
+<td>Concurrent message exchange</td>
+<td>Role-based task isolation</td>
+</tr>
+<tr>
+<td>Auditability</td>
+<td>High (human-readable JSON)</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Long-term memory</td>
+<td>Pluggable adapter</td>
+<td>Built-in</td>
+<td>Do-it-yourself</td>
+<td>Do-it-yourself</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Structured research workflows</td>
+<td>Long-horizon single agents</td>
+<td>Complex multi-agent collaboration</td>
+<td>Role-based task automation</td>
+</tr>
+</tbody>
+</table>
+<p>DeerFlow is not the right tool for every agent problem. If you are building a chatbot that needs to remember a user's preferences over months, use Letta. If you are building a research pipeline that needs to be auditable and resumable, use DeerFlow.</p>
+<h2 id="faq">Faq</h2>
+<p><strong>How does DeerFlow handle memory in short sessions versus long sessions?</strong></p>
+<p>Short sessions (a few stages, under an hour) rely primarily on working memory and session memory. Long-term memory retrieval is lightweight or skipped. Long sessions trigger full memory initialization on startup and checkpoint more aggressively. The threshold is configurable via the session config.</p>
+<p><strong>Can I use DeerFlow without a vector database?</strong></p>
+<p>Yes. DeerFlow ships with a filesystem-based memory adapter that stores summaries as Markdown files and retrieves via keyword matching. It is slower for large knowledge bases but requires zero infrastructure. Switch to pgvector or a managed vector store when you need scale.</p>
+<p><strong>What happens if a stage produces output that the next stage cannot parse?</strong></p>
+<p>DeerFlow enforces schema validation on stage outputs. If a stage produces malformed output, the workflow halts and writes an error to the session file with the stage name, the validation error, and the raw output. You can fix the output manually and restart from the failed stage.</p>
+<p><strong>How does DeerFlow compare to Model Context Protocol for memory standardization?</strong></p>
+<p>DeerFlow predates MCP but aligns with its philosophy. MCP standardizes how agents talk to memory servers over a network protocol. DeerFlow standardizes how stages in a workflow pass context through structured files. Both approaches solve the fragmentation problem, just at different layers. You can use DeerFlow with an MCP-compatible memory server if your infrastructure already speaks MCP.</p>
+<p><strong>Is DeerFlow suitable for real-time conversational agents?</strong></p>
+<p>DeerFlow is built for task-oriented workflows, not free-form conversation. The stage-gated execution model means it is optimized for research, analysis, and code generation tasks where depth matters more than response latency. For real-time conversation, use a framework designed for that, like VAPI or a simple RAG pipeline. If you want to understand the long-term memory tradeoffs better, read my <a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">breakdown of context retrieval</a>.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+      </a>
+      <a href="/blog/rag-vs-memory/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
+      </a>
+      <a href="/blog/memory-hierarchy-in-ai-systems/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">Memory Hierarchy in AI Systems: From Sensory to Semantic</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
+          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
+          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

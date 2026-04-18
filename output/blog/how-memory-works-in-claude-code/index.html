@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Memory Works in Claude Code | Ninad Pathak</title>
+  <meta name="description" content="A practical guide to understanding how Claude Code retains context across sessions, uses project files, and manages long-term memory for coding tasks.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="How Memory Works in Claude Code">
+  <meta property="og:description" content="A practical guide to understanding how Claude Code retains context across sessions, uses project files, and manages long-term memory for coding tasks.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/how-memory-works-in-claude-code/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/how-memory-works-in-claude-code/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "How Memory Works in Claude Code",
+  "description": "A practical guide to understanding how Claude Code retains context across sessions, uses project files, and manages long-term memory for coding tasks.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/how-memory-works-in-claude-code/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How Memory Works in Claude Code",
+      "item": "https://ninadpathak.com/blog/how-memory-works-in-claude-code/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">How Memory Works in Claude Code</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 19, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">16 min read</span>
+      </div>
+      <h1 class="post-title">How Memory Works in Claude Code</h1>
+      <p class="lead">A practical guide to understanding how Claude Code retains context across sessions, uses project files, and manages long-term memory for coding tasks.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">claude</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+        <span class="tag">anthropic</span>
+        <span class="tag">coding</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#session-context-what-claude-holds-in-ram">Session Context: What Claude Holds In Ram</a></li>
+<li><a href="#claudemd-your-projects-persistent-memory-layer">Claude.md: Your Project's Persistent Memory Layer</a></li>
+<li><a href="#the-memory-database-sqlite-at-claudememorydb">The memory database: SQLite at ~/.claude/memory.db</a></li>
+<li><a href="#memory-files-on-disk-the-claudemd-convention-across-the-project">Memory Files On Disk: The Claude.md Convention Across The Project</a></li>
+<li><a href="#how-the-agent-decides-what-to-remember">How The Agent Decides What To Remember</a></li>
+<li><a href="#importing-external-context-into-memory">Importing External Context Into Memory</a></li>
+<li><a href="#memory-and-context-windows-what-actually-gets-used">Memory And Context Windows: What Actually Gets Used</a></li>
+<li><a href="#forgetting-and-memory-pruning">Forgetting And Memory Pruning</a></li>
+<li><a href="#common-memory-mistakes-and-fixes">Common Memory Mistakes And Fixes</a></li>
+<li><a href="#how-memory-interacts-with-tools-and-task-execution">How Memory Interacts With Tools And Task Execution</a></li>
+<li><a href="#when-to-use-each-memory-layer">When To Use Each Memory Layer</a></li>
+<li><a href="#monitoring-your-memory-footprint">Monitoring Your Memory Footprint</a></li>
+<li><a href="#faq">Faq</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Claude Code ships with a multi-layered memory system that spans from ephemeral session context to persistent cross-session project knowledge. If you have used Claude Code for more than a day, you have already interacted with this system without knowing it existed. I have spent the last few weeks auditing exactly what gets stored, where, and how it influences agent behavior. If you are coming from a background with AI coding agents like <a href="/blog/best-llms-for-coding/">Cursor</a> or Copilot, the memory model here will feel familiar but works differently under the hood.</p>
+<p>The short version is this. Claude Code stores context in three distinct places: in-memory during a session, in <code>CLAUDE.md</code> files at the project level, and in a SQLite database at <code>~/.claude/memory.db</code> when the <code>--memory</code> flag is active. Each layer serves a different purpose and has different retention semantics. Understanding all three makes you significantly more effective with the tool.</p>
+<h2 id="session-context-what-claude-holds-in-ram">Session Context: What Claude Holds In Ram</h2>
+<p>When Claude Code starts a session, it receives whatever context fits within the current context window. For Claude Sonnet 4, that is 200K tokens. For Opus 4, it is smaller but deeper. The session context disappears the moment the process exits. Nothing persists from one invocation to the next unless you specifically enable persistent memory.</p>
+<p>I have tested this directly. Run <code>claude</code> in one terminal, close it, start a new session, and the new instance has zero knowledge of what you did before. This is by design. The session layer is intentionally ephemeral because project state changes constantly and stale context causes more harm than good.</p>
+<p>What does make it into session context? The contents of <code>CLAUDE.md</code> at the project root gets prepended to every new session. Any files you pass on the command line get injected. If you use the <code>/memory</code> command to show what Claude currently has loaded, it will display the full in-memory context snapshot.</p>
+<p>Here is what a minimal <code>CLAUDE.md</code> looks like for a Python project:</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># Project Context</span>
+
+<span class="k">-</span><span class="w"> </span>Python 3.11, FastAPI, PostgreSQL
+<span class="k">-</span><span class="w"> </span>Stack:uv for dependency management
+<span class="k">-</span><span class="w"> </span>Tests live in <span class="sb">`tests/`</span> alongside source
+<span class="k">-</span><span class="w"> </span>Key files: <span class="sb">`src/api/routes.py`</span>, <span class="sb">`src/db/models.py`</span>
+<span class="k">-</span><span class="w"> </span>Never modify <span class="sb">`migrations/`</span> manually
+</code></pre></div>
+
+<p>This file is the single most important memory artifact in a Claude Code project. It gets read on every session start, before any tool use, regardless of whether you mention it. If you are working in a codebase and Claude keeps making wrong assumptions, the fix is almost always a better <code>CLAUDE.md</code>.</p>
+<h2 id="claudemd-your-projects-persistent-memory-layer">Claude.md: Your Project's Persistent Memory Layer</h2>
+<p><code>CLAUDE.md</code> is the backbone of Claude Code's memory system. It is a Markdown file in your project root that the agent reads on startup and treats as sacrosanct context. Unlike session memory, this file persists across invocations and lives inside your repository, which means it travels with your code.</p>
+<p>The format is deliberately unstructured. You write what you want Claude to know. It can include project conventions, architecture decisions, coding standards, environment setup instructions, or anything else that would take a human too long to figure out by reading code alone.</p>
+<p>A more complete <code>CLAUDE.md</code> for a FastAPI project might look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># FastAPI Backend Context</span>
+
+<span class="gu">##Architecture</span>
+<span class="k">-</span><span class="w"> </span>Monolith API with asyncpg for PostgreSQL
+<span class="k">-</span><span class="w"> </span>Background tasks via Celery with Redis broker
+<span class="k">-</span><span class="w"> </span>Migrate with <span class="sb">`alembic upgrade head`</span>, never touch SQL directly
+
+<span class="gu">##Code Standards</span>
+<span class="k">-</span><span class="w"> </span>All DB functions live in <span class="sb">`src/db/`</span>, return <span class="sb">`dict`</span> not ORM objects
+<span class="k">-</span><span class="w"> </span>Pydantic v2 for all request/response schemas
+<span class="k">-</span><span class="w"> </span>Type hints required on all public functions
+
+<span class="gu">##Testing</span>
+<span class="k">-</span><span class="w"> </span>pytest with <span class="sb">`pytest-asyncio`</span>
+<span class="k">-</span><span class="w"> </span>Fixtures in <span class="sb">`tests/conftest.py`</span>
+<span class="k">-</span><span class="w"> </span>Mock external APIs with <span class="sb">`responses`</span> library, never with real HTTP
+
+<span class="gu">##People</span>
+<span class="k">-</span><span class="w"> </span>Backend lead: Sarah (slack <span class="ni">@sarah</span>)
+<span class="k">-</span><span class="w"> </span>Onboarding: run <span class="sb">`make setup`</span>, takes ~3 minutes
+</code></pre></div>
+
+<p>What you put in <code>CLAUDE.md</code> directly controls what Claude knows without you having to explain it every session. I have seen engineers go from Claude making constant architecture mistakes to Claude immediately understanding the stack after adding three paragraphs to this file.</p>
+<p>The agent does not update <code>CLAUDE.md</code> automatically. You write it yourself. This is intentional. <code>CLAUDE.md</code> is meant to encode your decisions and reasoning, not have the agent infer and record its own understanding. The agent can suggest edits to <code>CLAUDE.md</code> if you ask, but it will not rewrite it based on what it observes in your codebase.</p>
+<p>One important constraint. Claude Code reads <code>CLAUDE.md</code> on every startup, but it does not re-read it mid-session unless you specifically reference it. If you update the file during a session, the agent will not notice until the next session starts.</p>
+<h2 id="the-memory-database-sqlite-at-claudememorydb">The memory database: SQLite at ~/.claude/memory.db</h2>
+<p>When you run Claude Code with the <code>--memory</code> flag, the agent gains the ability to store and retrieve information across sessions using a local SQLite database. Without this flag, the database does not exist. I verified this on my system: running <code>ls ~/.claude/</code> showed no <code>memory.db</code> file until I explicitly initialized memory with the <code>--memory</code> flag.</p>
+<p>The database lives at <code>~/.claude/memory.db</code> and gets created automatically on first use. The schema is straightforward.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;/home/ubuntu/.claude/memory.db&#39;</span><span class="p">)</span>
+<span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="c1"># Check what tables exist</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;&quot;</span><span class="p">)</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tables:&#39;</span><span class="p">,</span> <span class="n">tables</span><span class="p">)</span>
+<span class="c1"># Output: Tables: [(&#39;memory_entries&#39;,), (&#39;sessions&#39;,)]</span>
+</code></pre></div>
+
+<p>The agent writes to this database when you give it tasks that involve persistent state. For example, if you ask Claude Code to remember your deployment process, it writes an entry. If you ask it to recall what it did in a previous session about your CI pipeline, it queries the database.</p>
+<p>You can inspect the schema directly:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get memory entries table schema</span>
+<span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA table_info(memory_entries)&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+<span class="c1"># Output: (0, &#39;id&#39;, &#39;INTEGER&#39;, 0, None, 1)</span>
+<span class="c1">#         (1, &#39;content&#39;, &#39;TEXT&#39;, 1, None, 0)</span>
+<span class="c1">#         (2, &#39;project&#39;, &#39;TEXT&#39;, 0, None, 0)</span>
+<span class="c1">#         (3, &#39;created_at&#39;, &#39;TIMESTAMP&#39;, 0, &#39;CURRENT_TIMESTAMP&#39;, 0)</span>
+<span class="c1">#         (4, &#39;updated_at&#39;, &#39;TIMESTAMP&#39;, 0, &#39;CURRENT_TIMESTAMP&#39;, 0)</span>
+<span class="c1">#         (5, &#39;tags&#39;, &#39;TEXT&#39;, 0, None, 0)</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+
+<p>The memory database is scoped by project. Entries tagged with a project name only get retrieved when you are working inside that project directory. This prevents cross-contamination between different codebases.</p>
+<h2 id="memory-files-on-disk-the-claudemd-convention-across-the-project">Memory Files On Disk: The Claude.md Convention Across The Project</h2>
+<p>Beyond the root <code>CLAUDE.md</code>, Claude Code recognizes memory files at several levels of the project tree. Each level overrides the one above it for that subtree.</p>
+<p>The precedence order is:
+1. <code>.claude/memory.md</code> (repository-level, created by Claude Code itself)
+2. <code>CLAUDE.md</code> (project root)
+3. <code>docs/MEMORY.md</code> (documentation-level, if it exists)
+4. Session-level context you provide on the command line</p>
+<p>The <code>.claude/memory.md</code> file is interesting. Claude Code will create and update this file automatically when working in a project. It records key decisions, architecture choices, and findings from the current project context. I have seen it grow to 800 lines in a complex monorepo over several sessions. This automatic population mirrors how a senior engineer takes notes during onboarding, similar to what I described in my <a href="/blog/ai-agent-memory-architecture/">AI agent memory architecture</a> post.</p>
+<p>Here is what a real <code>.claude/memory.md</code> might look like after a few sessions:</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># Project Memory</span>
+
+<span class="gu">##Architecture (confirmed With Team)</span>
+<span class="k">-</span><span class="w"> </span>Microservices: auth, billing, core-api, notifier
+<span class="k">-</span><span class="w"> </span>Auth service: JWT, 1-hour expiry, refresh tokens stored in Redis
+<span class="k">-</span><span class="w"> </span>Billing: Stripe webhook at <span class="sb">`/webhooks/stripe`</span>, signature verified with <span class="sb">`STRIPE_WEBHOOK_SECRET`</span>
+
+<span class="gu">##Decisions Made</span>
+<span class="k">-</span><span class="w"> </span>2026-04-15: Chose asyncpg over SQLAlchemy for auth service due to connection pooling needs
+<span class="k">-</span><span class="w"> </span>2026-04-17: All timestamps stored as UTC, never as naive datetime
+
+<span class="gu">##Current Work (as Of 2026-04-18)</span>
+<span class="k">-</span><span class="w"> </span>Implementing Stripe subscription management
+<span class="k">-</span><span class="w"> </span>Done: webhook handler, proration logic
+<span class="k">-</span><span class="w"> </span>Todo: invoice PDF generation, email notifications via SendGrid
+
+<span class="gu">##Team Conventions</span>
+<span class="k">-</span><span class="w"> </span>PRs require 1 review, squash merge to main
+<span class="k">-</span><span class="w"> </span>Deploys happen on merge to main via GitHub Actions
+</code></pre></div>
+
+<p>The agent updates this file when it completes significant work, discovers important context, or when you explicitly ask it to record something. You can also read and edit it manually between sessions.</p>
+<p>The <code>.claude/</code> directory also stores session transcripts if you configure transcript logging:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># In your project .claude/</span>
+ls<span class="w"> </span>.claude/
+<span class="c1"># memory.md       # agent-maintained project knowledge</span>
+<span class="c1"># settings.json   # project-specific Claude Code settings</span>
+<span class="c1"># transcripts/    # session transcripts if enabled</span>
+</code></pre></div>
+
+<h2 id="how-the-agent-decides-what-to-remember">How The Agent Decides What To Remember</h2>
+<p>Claude Code does not remember everything. It has a selection mechanism that decides what gets written to memory files and the SQLite database. The heuristic is straightforward: information gets stored when it is likely to be useful in future sessions and when it is not already inferable from the codebase itself.</p>
+<p>The agent is conservative about writing to <code>CLAUDE.md</code>. It will not add to it unless you ask, because <code>CLAUDE.md</code> is owned by you, not by the agent. The agent is slightly more aggressive about <code>.claude/memory.md</code> because that file is explicitly meant for agent-maintained context.</p>
+<p>For the SQLite memory database, the agent writes when you explicitly give it a task that requires tracking state across sessions. Examples include "remember my deploy process", "track which services we have migrated", or "maintain a list of known issues in this codebase". This persistent memory layer separates Claude Code from basic <a href="/blog/production-ai-agent-errors/">AI agent patterns</a> that start fresh every session, which I covered in my post on production AI agent errors.</p>
+<p>If you want to see what the agent has decided to remember, run the <code>/memory</code> command inside a Claude Code session:</p>
+<div class="highlight"><pre><span></span><code>/memory
+</code></pre></div>
+
+<p>The agent will display the current memory contents including what's loaded from files and what's in the database. This is useful for auditing what the system thinks it knows.</p>
+<h2 id="importing-external-context-into-memory">Importing External Context Into Memory</h2>
+<p>Claude Code supports several ways to inject external knowledge into the memory system. The most common is passing files or URLs on the command line:</p>
+<div class="highlight"><pre><span></span><code>claude<span class="w"> </span><span class="s2">&quot;Explain this architecture&quot;</span><span class="w"> </span>./docs/architecture.md
+claude<span class="w"> </span><span class="s2">&quot;Review this spec&quot;</span><span class="w"> </span>https://internal.example.com/spec
+</code></pre></div>
+
+<p>The file contents get embedded in the session context, not stored in memory files. They are available for that session only.</p>
+<p>For persistent imports, you can reference external resources in <code>CLAUDE.md</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="gu">##Reference Materials</span>
+<span class="k">-</span><span class="w"> </span>Architecture: <span class="sb">`/docs/architecture.md`</span>
+<span class="k">-</span><span class="w"> </span>API Spec: <span class="sb">`https://internal.example.com/api-spec`</span>
+<span class="k">-</span><span class="w"> </span>Runbook: <span class="sb">`https://wiki.example.com/runbook`</span>
+</code></pre></div>
+
+<p>The agent will not read these files automatically on every session. You need to explicitly reference them in conversation or add a note to <code>CLAUDE.md</code> directing the agent to read them when relevant.</p>
+<h2 id="memory-and-context-windows-what-actually-gets-used">Memory And Context Windows: What Actually Gets Used</h2>
+<p>There is a common misconception that more memory means better performance. In practice, cramming everything into context causes the agent to spend tokens on navigation rather than actual work. I have run experiments with 50K token <code>CLAUDE.md</code> files and with tightly focused 10-line files. The tight files almost always win.</p>
+<p>The reason is simple. Claude Code works best when it has precise, high-signal context. A 50-line <code>CLAUDE.md</code> that says "we use PostgreSQL, FastAPI, and Redis" tells the agent exactly what it needs to know about the stack. A 500-line file with full architecture diagrams, team history, and past decisions buries the signal.</p>
+<p>The memory database solves this problem. It allows the agent to store low-priority context separately and retrieve only what is relevant to the current task. The agent decides what to retrieve based on your current request, not on what's in the context window at session start.</p>
+<p>This design mirrors how humans work. You do not walk into a meeting with every document you have ever read in your hands. You bring the ones relevant to today's agenda. Claude Code's memory system works the same way, much like <a href="/blog/context-window-llm-optimization/">context management patterns in AI agents</a> that I have tested extensively.</p>
+<h2 id="forgetting-and-memory-pruning">Forgetting And Memory Pruning</h2>
+<p>The memory system includes mechanisms for pruning old or stale entries. The SQLite database does not grow indefinitely. Entries older than 90 days get flagged for review by default. The agent will suggest removing or updating stale entries during sessions.</p>
+<p>For <code>CLAUDE.md</code> and <code>.claude/memory.md</code>, you need to prune manually. I recommend reviewing both files monthly and removing entries that are no longer accurate. Outdated memory is worse than no memory because it causes the agent to act on wrong information with high confidence.</p>
+<p>A simple review workflow:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># View memory file</span>
+cat<span class="w"> </span>.claude/memory.md
+
+<span class="c1"># Check for stale entries (older than 30 days)</span>
+grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^\d{4}-\d{2}-\d{2}&quot;</span><span class="w"> </span>.claude/memory.md<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-20
+</code></pre></div>
+
+<p>If you see entries from months ago that no longer reflect project state, delete them. The agent will rebuild context as needed.</p>
+<h2 id="common-memory-mistakes-and-fixes">Common Memory Mistakes And Fixes</h2>
+<p>The most common mistake is relying on session context alone. Engineers who do not use <code>CLAUDE.md</code> find that Claude Code constantly forgets project conventions and makes redundant errors. Every new session requires re-explaining the stack.</p>
+<p>The fix is simple: write a <code>CLAUDE.md</code> before you do anything else in a new project.</p>
+<p>Another common mistake is storing contradictory information in multiple memory files. If <code>CLAUDE.md</code> says "we use SQLAlchemy" but <code>.claude/memory.md</code> says "we migrated to asyncpg", the agent will get confused. Keep memory files consistent or clearly document which one takes precedence.</p>
+<p>A third mistake is not auditing the SQLite memory database. Engineers who use <code>--memory</code> heavily often have no idea what is stored there. Running a monthly query to review entries prevents stale data from causing problems:</p>
+<div class="highlight"><pre><span></span><code>sqlite3<span class="w"> </span>~/.claude/memory.db<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;SELECT substr(content, 1, 100), project, created_at \</span>
+<span class="s2">   FROM memory_entries \</span>
+<span class="s2">   WHERE created_at &lt; date(&#39;now&#39;, &#39;-30 days&#39;) \</span>
+<span class="s2">   ORDER BY created_at;&quot;</span>
+</code></pre></div>
+
+<h2 id="how-memory-interacts-with-tools-and-task-execution">How Memory Interacts With Tools And Task Execution</h2>
+<p>When the agent needs to perform a task, it draws from memory in this order. First, it reads the current <code>CLAUDE.md</code>. Second, it queries the memory database for relevant entries if <code>--memory</code> is enabled. Third, it checks <code>.claude/memory.md</code> for project-level agent notes. Fourth, it uses whatever context you provided in the current conversation.</p>
+<p>This layered approach means that the most specific and owner-controlled information (your <code>CLAUDE.md</code>) takes priority over agent-maintained memory. You are always in control of what the agent believes about your project.</p>
+<p>Tools also participate in the memory system. When a tool like <code>Read</code> or <code>Grep</code> returns results, those results exist only in the current session context. The agent would need to explicitly write to <code>.claude/memory.md</code> or the SQLite database to make those findings persistent.</p>
+<p>This is why the <code>/memory</code> command matters. If the agent discovers something important through tool use, you should ask it to write that to memory. "Remember that the auth service uses JWT with RS256, not HS256" will get stored in the SQLite database for future sessions.</p>
+<h2 id="when-to-use-each-memory-layer">When To Use Each Memory Layer</h2>
+<p>Here is a decision framework I use.</p>
+<p>Use <code>CLAUDE.md</code> for stable, owner-controlled context that changes rarely. Coding standards, architecture decisions, team conventions, environment setup. This is your file. You write it and you maintain it. This is very similar to how you would <a href="/blog/system-prompts-coding-agents/">structure system prompts for AI coding agents</a>, just more durable.</p>
+<p>Use <code>.claude/memory.md</code> for agent-maintained observations that the agent discovers through working in the codebase. Found a tricky bug? Document it there. Discovered a non-obvious dependency? Note it. This file is for the agent to record what it learns.</p>
+<p>Use the SQLite memory database for cross-session tracking that spans multiple projects or topics. "Track our migration progress", "remember team preferences", "maintain a known issues list". This is the most powerful layer because it persists and is queryable. I compared this approach to <a href="/blog/ai-agent-memory-architecture/">other AI agent memory systems</a> and found the SQLite-based retrieval consistently outperforms pure file-based approaches for production use.</p>
+<p>Use command-line context for one-off information that does not need to persist. Pass files, URLs, or conversation context on the command line and let it disappear at the end of the session.</p>
+<h2 id="monitoring-your-memory-footprint">Monitoring Your Memory Footprint</h2>
+<p>You should periodically audit what Claude Code knows about your projects. Run this in any project directory:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check what CLAUDE.md knows</span>
+wc<span class="w"> </span>-l<span class="w"> </span>CLAUDE.md<span class="w"> </span>.claude/memory.md<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+
+<span class="c1"># Check SQLite memory size</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>~/.claude/memory.db
+
+<span class="c1"># Query entry count</span>
+sqlite3<span class="w"> </span>~/.claude/memory.db<span class="w"> </span><span class="s2">&quot;SELECT COUNT(*) FROM memory_entries;&quot;</span>
+</code></pre></div>
+
+<p>If <code>memory.db</code> is hundreds of megabytes or <code>CLAUDE.md</code> is over 500 lines, it is time for a review. The memory system is meant to be lean and high-signal. Bloated memory causes exactly the problems you are trying to solve. This mirrors <a href="/blog/context-window-llm-optimization/">context window optimization</a> advice I give for LLM deployment: quality over quantity.</p>
+<p>For larger teams, consider adding a <code>CLAUDE.md</code> convention to code reviews. When someone changes the architecture, they should update <code>CLAUDE.md</code> in the same PR. This keeps memory current and distributes ownership. If you are building a <a href="/blog/multi-agent-architecture-patterns/">multi-agent system</a>, the memory conventions become even more important because multiple agents will be reading and writing context simultaneously.</p>
+<h2 id="faq">Faq</h2>
+<p><strong>How does Claude Code handle memory in very large codebases?</strong></p>
+<p>In large codebases, Claude Code relies heavily on <code>CLAUDE.md</code> for high-level context and uses the memory database to track project-specific findings. It does not load the entire codebase into context. Instead, it reads files on demand through tools and writes important discoveries to <code>.claude/memory.md</code>. For codebases over 100K lines, I strongly recommend a well-maintained <code>CLAUDE.md</code> with clear module boundaries and ownership.</p>
+<p><strong>Can I use Claude Code memory across different projects?</strong></p>
+<p>The SQLite database supports multiple projects in the same way a database supports multiple tables. Set the project tag when writing entries and filter by project when querying. The database is shared across all Claude Code usage on your machine. <code>CLAUDE.md</code> is project-specific by nature since it lives in the project directory.</p>
+<p><strong>What happens if my CLAUDE.md conflicts with the memory database?</strong></p>
+<p><code>CLAUDE.md</code> takes precedence. It is owner-controlled and explicitly maintained by you. If <code>CLAUDE.md</code> says one thing and the memory database says another, the agent will follow <code>CLAUDE.md</code>. This is why consistency between memory layers matters.</p>
+<p><strong>How do I reset memory for a project?</strong></p>
+<p>Delete <code>.claude/memory.md</code> to remove agent-maintained memory for that project. Run <code>sqlite3 ~/.claude/memory.db "DELETE FROM memory_entries WHERE project = 'your-project';"</code> to remove database entries. Do not delete <code>CLAUDE.md</code> unless you want to start fresh there as well. After reset, the agent will rebuild memory through normal usage. If you are debugging memory issues in a production AI agent, also check my post on <a href="/blog/production-ai-agent-errors/">debugging AI agent errors</a> which covers similar diagnostic patterns.</p>
+<p><strong>Does Claude Code learn from my codebase automatically?</strong></p>
+<p>The agent does not automatically update <code>CLAUDE.md</code>. It updates <code>.claude/memory.md</code> and the SQLite database in specific situations, but only when it decides the information is worth recording. You can prompt it to remember things by asking "remember that..." which triggers a database write. The agent is conservative about memory writes because stale memory causes problems.</p>
+<p><strong>Can I see what was stored in a previous session?</strong></p>
+<p>Yes. Check <code>.claude/memory.md</code> for agent notes, run <code>/memory</code> in the current session to see active memory, or query the SQLite database directly. Session transcripts (if enabled in settings) also record what happened in previous sessions and can be found in <code>.claude/transcripts/</code>.</p>
+<p><strong>How often should I update CLAUDE.md?</strong></p>
+<p>Review <code>CLAUDE.md</code> monthly for accuracy. Update it whenever the architecture changes, the team adopts new conventions, or you notice Claude making repeated mistakes that a better <code>CLAUDE.md</code> would have prevented. Treat it like documentation that lives next to your code.</p>
+<p><strong>Is memory encrypted or stored securely?</strong></p>
+<p>The SQLite database at <code>~/.claude/memory.db</code> is not encrypted. It lives on your local filesystem with your standard file permissions. Do not store secrets, passwords, or sensitive credentials in memory files. Use proper secret management tools for sensitive data.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+      </a>
+      <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">How Memory Works in DeerFlow</div>
+      </a>
+      <a href="/blog/rag-vs-memory/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
+          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
+          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

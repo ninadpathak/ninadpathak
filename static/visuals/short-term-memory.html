@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Short-Term Memory Visualizer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d0d0d; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
+  canvas { display: block; }
+  #info {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff5f1f;
+    font-size: 13px;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  #token-counter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #ff5f1f;
+    font-size: 14px;
+    font-family: monospace;
+  }
+</style>
+</head>
+<body>
+<div id="token-counter">TOKENS: <span id="count">0</span> / 128000</div>
+<div id="info">Drag to orbit &middot; Context window fills left to right, evicts oldest tokens</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// Setup
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0d0d0d);
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(0, 0, 8);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.autoRotate = false;
+
+// Colors
+const DARK_ORANGE = 0xff5f1f;
+const LIGHT_ORANGE = 0xd44000;
+
+// Box dimensions
+const BOX_WIDTH = 6;
+const BOX_HEIGHT = 2;
+const BOX_DEPTH = 1.5;
+const MAX_TOKENS = 60;
+const SLOT_WIDTH = BOX_WIDTH / MAX_TOKENS;
+
+// Create main context window box
+const boxGroup = new THREE.Group();
+
+// Wireframe box
+const wireGeo = new THREE.BoxGeometry(BOX_WIDTH, BOX_HEIGHT, BOX_DEPTH);
+const wireEdges = new THREE.EdgesGeometry(wireGeo);
+const wireLine = new THREE.LineSegments(
+  wireEdges,
+  new THREE.LineBasicMaterial({ color: DARK_ORANGE, linewidth: 2, transparent: true, opacity: 0.6 })
+);
+boxGroup.add(wireLine);
+
+// Solid faces (transparent)
+const solidGeo = new THREE.BoxGeometry(BOX_WIDTH, BOX_HEIGHT, BOX_DEPTH);
+const solidMat = new THREE.MeshBasicMaterial({
+  color: 0x1a0a00,
+  transparent: true,
+  opacity: 0.4,
+  side: THREE.BackSide
+});
+const solidMesh = new THREE.Mesh(solidGeo, solidMat);
+boxGroup.add(solidMesh);
+
+// Add glow plane at front
+const glowGeo = new THREE.PlaneGeometry(BOX_WIDTH, BOX_HEIGHT);
+const glowMat = new THREE.MeshBasicMaterial({
+  color: DARK_ORANGE,
+  transparent: true,
+  opacity: 0.03,
+  side: THREE.DoubleSide
+});
+const glowMesh = new THREE.Mesh(glowGeo, glowMat);
+glowMesh.position.z = BOX_DEPTH / 2 + 0.01;
+boxGroup.add(glowMesh);
+
+// Label: "CONTEXT WINDOW"
+const labelCanvas = document.createElement('canvas');
+labelCanvas.width = 512;
+labelCanvas.height = 64;
+const ctx = labelCanvas.getContext('2d');
+ctx.fillStyle = '#ff5f1f';
+ctx.font = 'bold 28px monospace';
+ctx.textAlign = 'center';
+ctx.fillText('CONTEXT WINDOW', 256, 40);
+const labelTex = new THREE.CanvasTexture(labelCanvas);
+const labelMesh = new THREE.Mesh(
+  new THREE.PlaneGeometry(2, 0.25),
+  new THREE.MeshBasicMaterial({ map: labelTex, transparent: true })
+);
+labelMesh.position.set(0, BOX_HEIGHT / 2 + 0.3, 0);
+boxGroup.add(labelMesh);
+
+// Token slots (grid inside box)
+const slotsGroup = new THREE.Group();
+boxGroup.add(slotsGroup);
+
+// Incoming tokens (left side - new tokens sliding in)
+const incomingGroup = new THREE.Group();
+incomingGroup.position.x = -BOX_WIDTH / 2 - 2;
+boxGroup.add(incomingGroup);
+
+// Evicted tokens (right side)
+const evictedGroup = new THREE.Group();
+evictedGroup.position.x = BOX_WIDTH / 2 + 2;
+boxGroup.add(evictedGroup);
+
+scene.add(boxGroup);
+
+// Token slot management
+const slots = [];
+const tokenObjects = [];
+const incomingTokens = [];
+const evictedTokens = [];
+
+function createSlot(index) {
+  const geo = new THREE.BoxGeometry(SLOT_WIDTH - 0.02, BOX_HEIGHT * 0.7, BOX_DEPTH * 0.6);
+  const mat = new THREE.MeshBasicMaterial({
+    color: 0x1a1008,
+    transparent: true,
+    opacity: 0.6,
+    wireframe: true
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  const x = -BOX_WIDTH / 2 + SLOT_WIDTH / 2 + index * SLOT_WIDTH;
+  const y = 0;
+  const z = 0;
+  mesh.position.set(x, y, z);
+  slotsGroup.add(mesh);
+  return { mesh, index, occupied: false, token: null };
+}
+
+for (let i = 0; i < MAX_TOKENS; i++) {
+  slots.push(createSlot(i));
+}
+
+function createToken(colorHex, label) {
+  const geo = new THREE.BoxGeometry(SLOT_WIDTH * 0.85, BOX_HEIGHT * 0.65, BOX_DEPTH * 0.55);
+  const mat = new THREE.MeshBasicMaterial({ color: colorHex, transparent: true, opacity: 0.9 });
+  const mesh = new THREE.Mesh(geo, mat);
+
+  // Label sprite
+  const c = document.createElement('canvas');
+  c.width = 64; c.height = 32;
+  const cx = c.getContext('2d');
+  cx.fillStyle = '#ffffff';
+  cx.font = 'bold 16px monospace';
+  cx.textAlign = 'center';
+  cx.fillText(label, 32, 22);
+  const tex = new THREE.CanvasTexture(c);
+  const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+  const sprite = new THREE.Sprite(spriteMat);
+  sprite.scale.set(0.3, 0.15, 0.1);
+  mesh.add(sprite);
+
+  return { mesh, label, color: colorHex };
+}
+
+function fillSlot(slotIndex, token) {
+  if (slots[slotIndex].occupied) return;
+  slots[slotIndex].occupied = true;
+  slots[slotIndex].token = token;
+  const x = -BOX_WIDTH / 2 + SLOT_WIDTH / 2 + slotIndex * SLOT_WIDTH;
+  token.mesh.position.set(x, 0, 0);
+  slotsGroup.add(token.mesh);
+  tokenObjects.push({ slotIndex, token });
+
+  // Flash effect
+  token.mesh.material.opacity = 1.0;
+}
+
+function evictOldest() {
+  if (tokenObjects.length === 0) return;
+
+  const oldest = tokenObjects.shift();
+  const slot = slots[oldest.slotIndex];
+  slot.occupied = false;
+  slot.token = null;
+
+  const evObj = evictedTokens.find(e => e.token === oldest.token);
+  if (evObj) {
+    evObj.evictionTime = Date.now();
+  } else {
+    evictedTokens.push({ token: oldest.token, evictionTime: Date.now() });
+  }
+
+  // Animate out to right
+  const targetX = BOX_WIDTH / 2 + 2 + Math.random() * 0.5;
+  const targetY = (Math.random() - 0.5) * 2;
+  const targetZ = (Math.random() - 0.5) * 1;
+
+  oldest.token.mesh.position.set(oldest.token.mesh.position.x, 0, 0);
+  oldest.token.mesh.material.color.setHex(LIGHT_ORANGE);
+
+  const startX = oldest.token.mesh.position.x;
+  const startTime = Date.now();
+
+  function animateEvict() {
+    const elapsed = (Date.now() - startTime) / 300;
+    if (elapsed < 1) {
+      oldest.token.mesh.position.x = startX + (targetX - startX) * elapsed;
+      oldest.token.mesh.position.y = targetY * elapsed;
+      oldest.token.mesh.material.opacity = 1 - elapsed * 0.5;
+      requestAnimationFrame(animateEvict);
+    } else {
+      slotsGroup.remove(oldest.token.mesh);
+      evictedGroup.add(oldest.token.mesh);
+      oldest.token.mesh.position.set(
+        (Math.random() - 0.5) * 2,
+        (Math.random() - 0.5) * 1.5,
+        (Math.random() - 0.5) * 0.8
+      );
+      oldest.token.mesh.material.opacity = 0.4;
+    }
+  }
+  animateEvict();
+}
+
+// Token type definitions
+const TOKEN_TYPES = [
+  { color: 0xff8c42, label: 'SYS' },
+  { color: 0xff6b35, label: 'USR' },
+  { color: 0xd44000, label: 'AST' },
+  { color: 0xcc5500, label: 'DOC' },
+  { color: 0xffa366, label: 'CTX' },
+];
+
+// Fill initial tokens
+let tokenCount = 0;
+let nextSlot = 0;
+
+function addRandomToken() {
+  if (nextSlot >= MAX_TOKENS) {
+    evictOldest();
+    // Shift all tokens left by one slot
+    tokenObjects.forEach((t, i) => {
+      const slotIndex = t.slotIndex - 1;
+      t.slotIndex = slotIndex;
+      const x = -BOX_WIDTH / 2 + SLOT_WIDTH / 2 + slotIndex * SLOT_WIDTH;
+      t.token.mesh.position.x = x;
+    });
+    // Re-add from rightmost slot
+    if (tokenObjects.length > 0) {
+      nextSlot = tokenObjects[tokenObjects.length - 1].slotIndex + 1;
+    } else {
+      nextSlot = 0;
+    }
+  }
+
+  const type = TOKEN_TYPES[Math.floor(Math.random() * TOKEN_TYPES.length)];
+  const token = createToken(type.color, type.label + tokenCount);
+  token.label = type.label;
+
+  fillSlot(nextSlot, token);
+  tokenCount++;
+  nextSlot++;
+
+  updateCounter();
+}
+
+function updateCounter() {
+  document.getElementById('count').textContent = tokenObjects.length;
+}
+
+// Add tokens over time
+let lastAdd = Date.now();
+const ADD_INTERVAL = 150;
+
+// Evict periodically
+let lastEvict = Date.now();
+const EVICT_INTERVAL = 3000;
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  const now = Date.now();
+
+  if (now - lastAdd > ADD_INTERVAL) {
+    addRandomToken();
+    lastAdd = now;
+  }
+
+  // Periodic eviction to simulate overflow
+  if (tokenObjects.length > MAX_TOKENS * 0.75 && now - lastEvict > EVICT_INTERVAL) {
+    evictOldest();
+    lastEvict = now;
+  }
+
+  // Pulse incoming zone
+  const pulse = Math.sin(now / 500) * 0.15 + 0.85;
+  incomingGroup.children.forEach(c => {
+    if (c.material) c.material.opacity = pulse;
+  });
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+// Create incoming indicator
+const incomingGeo = new THREE.BoxGeometry(0.3, 1, 1);
+const incomingMat = new THREE.MeshBasicMaterial({ color: DARK_ORANGE, transparent: true, opacity: 0.7 });
+const incomingBox = new THREE.Mesh(incomingGeo, incomingMat);
+incomingBox.position.x = -BOX_WIDTH / 2 - 1.5;
+incomingGroup.add(incomingBox);
+
+// Arrow label
+const arrowCanvas = document.createElement('canvas');
+arrowCanvas.width = 128;
+arrowCanvas.height = 64;
+const arrowCtx = arrowCanvas.getContext('2d');
+arrowCtx.fillStyle = '#ff5f1f';
+arrowCtx.font = 'bold 20px monospace';
+arrowCtx.textAlign = 'center';
+arrowCtx.fillText('NEW TOKENS', 64, 20);
+arrowCtx.fillText('ENTER -->', 64, 45);
+const arrowTex = new THREE.CanvasTexture(arrowCanvas);
+const arrowMesh = new THREE.Mesh(
+  new THREE.PlaneGeometry(1.8, 0.7),
+  new THREE.MeshBasicMaterial({ map: arrowTex, transparent: true })
+);
+arrowMesh.position.x = -BOX_WIDTH / 2 - 1.5;
+arrowMesh.position.y = -BOX_HEIGHT / 2 - 0.7;
+incomingGroup.add(arrowMesh);
+
+// Evicted label
+const evictedCanvas = document.createElement('canvas');
+evictedCanvas.width = 128;
+evictedCanvas.height = 64;
+const evCtx = evictedCanvas.getContext('2d');
+evCtx.fillStyle = '#d44000';
+evCtx.font = 'bold 18px monospace';
+evCtx.textAlign = 'center';
+evCtx.fillText('EVICTED -->', 64, 25);
+evCtx.font = '14px monospace';
+evCtx.fillText('overflow', 64, 45);
+const evTex = new THREE.CanvasTexture(evictedCanvas);
+const evMesh = new THREE.Mesh(
+  new THREE.PlaneGeometry(1.8, 0.7),
+  new THREE.MeshBasicMaterial({ map: evTex, transparent: true })
+);
+evMesh.position.x = BOX_WIDTH / 2 + 1.5;
+evMesh.position.y = -BOX_HEIGHT / 2 - 0.7;
+evictedGroup.add(evMesh);
+
+// Slight tilt for 3D effect
+boxGroup.rotation.x = 0.1;
+boxGroup.rotation.y = 0.15;
+
+animate();
+
+// Resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>

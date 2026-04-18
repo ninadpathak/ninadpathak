@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Memory Works in HyperAgents | Ninad Pathak</title>
+  <meta name="description" content="A deep dive into how HyperAgents retain context across interactions, layer memory architectures, and handle session continuity in production.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="How Memory Works in HyperAgents">
+  <meta property="og:description" content="A deep dive into how HyperAgents retain context across interactions, layer memory architectures, and handle session continuity in production.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/how-memory-works-in-hyperagents/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/how-memory-works-in-hyperagents/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "How Memory Works in HyperAgents",
+  "description": "A deep dive into how HyperAgents retain context across interactions, layer memory architectures, and handle session continuity in production.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/how-memory-works-in-hyperagents/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How Memory Works in HyperAgents",
+      "item": "https://ninadpathak.com/blog/how-memory-works-in-hyperagents/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">How Memory Works in HyperAgents</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 19, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">13 min read</span>
+      </div>
+      <h1 class="post-title">How Memory Works in HyperAgents</h1>
+      <p class="lead">A deep dive into how HyperAgents retain context across interactions, layer memory architectures, and handle session continuity in production.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+        <span class="tag">hyperagents</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#what-is-a-hyperagent-and-why-does-memory-matter">What Is a Hyperagent And Why Does Memory Matter</a></li>
+<li><a href="#the-three-layer-memory-architecture">The Three-layer Memory Architecture</a></li>
+<li><a href="#session-continuity-in-practice">Session Continuity In Practice</a></li>
+<li><a href="#tool-memory-and-intermediate-results">Tool Memory And Intermediate Results</a></li>
+<li><a href="#context-window-management">Context Window Management</a></li>
+<li><a href="#embedding-and-retrieval-for-context-injection">Embedding And Retrieval For Context Injection</a></li>
+<li><a href="#multi-agent-memory-sharing">Multi-agent Memory Sharing</a></li>
+<li><a href="#production-considerations">Production Considerations</a></li>
+<li><a href="#comparing-hyperagent-memory-to-standard-rag">Comparing Hyperagent Memory To Standard RAG</a></li>
+<li><a href="#related-articles">Related Articles</a></li>
+<li><a href="#faq">Faq</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <h2 id="what-is-a-hyperagent-and-why-does-memory-matter">What Is a Hyperagent And Why Does Memory Matter</h2>
+<p>A HyperAgent is not a single language model call. It is a composed system of models, tools, and a reasoning loop that can run for minutes or hours across many steps. When you build something that lives inside a long-running process, you quickly hit a wall: the model forgets. Context windows fill up. Sessions collapse. Without a memory architecture, every turn starts from scratch and every user experience degrades.</p>
+<p>Memory in HyperAgents solves this by giving the agent somewhere to store what it knows, what it has done, and what it still needs to do. The architecture I am describing here is the one I built into my own agent runner, and it has handled sessions with 500+ turns without degradation.</p>
+<h2 id="the-three-layer-memory-architecture">The Three-layer Memory Architecture</h2>
+<p>HyperAgents do not use a single memory store. They use three distinct layers, each with a different access pattern and purpose. Understanding what each layer does is the difference between an agent that feels smart and one that actually is.</p>
+<h3 id="layer-1-working-context-in-memory">Layer 1: Working Context (In-Memory)</h3>
+<p>The working context lives in RAM during a session. It holds the current conversation history, the agent's current goal, and a sliding window of recent tool results. This layer feeds directly into the model prompt on every call.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">WorkingContext</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_turns</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_results</span><span class="p">:</span> <span class="n">deque</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_turns</span> <span class="o">=</span> <span class="n">max_turns</span>
+
+    <span class="k">def</span> <span class="nf">add_turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="n">role</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">content</span><span class="p">})</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_turns</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The <code>max_turns</code> parameter controls how far back the agent can "see". Setting it to 50 gives you roughly 100K tokens of context history assuming average turns at 1K tokens each. On a model with a 128K context window, you have room to spare. On a 4K window, you need to be more aggressive.</p>
+<h3 id="layer-2-episodic-memory-durable-store">Layer 2: Episodic Memory (Durable Store)</h3>
+<p>Working context evaporates when the session ends. Episodic memory persists across sessions by writing structured summaries to disk or a database. Each episode captures what happened, what was decided, and what outstanding threads remain.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">EpisodicMemory</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store</span> <span class="o">=</span> <span class="n">SQLiteStore</span><span class="p">(</span><span class="n">store_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">start_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span> <span class="o">=</span> <span class="n">session_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;INSERT INTO sessions (id, started_at) VALUES (?, ?)&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">())</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">save_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">episode</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;INSERT INTO episodes</span>
+<span class="sd">               (session_id, turn, summary, decisions, open_threads, created_at)</span>
+<span class="sd">               VALUES (?, ?, ?, ?, ?, ?)&quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">,</span>
+                <span class="n">episode</span><span class="p">[</span><span class="s2">&quot;turn&quot;</span><span class="p">],</span>
+                <span class="n">episode</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">],</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">episode</span><span class="p">[</span><span class="s2">&quot;decisions&quot;</span><span class="p">]),</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">episode</span><span class="p">[</span><span class="s2">&quot;open_threads&quot;</span><span class="p">]),</span>
+                <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+</code></pre></div>
+
+<p>An episode gets written every N turns (I default to 10) or when the user goes quiet for more than 30 seconds. The summary is generated by a separate call to the LLM that condenses the last N turns into a 2-3 sentence synopsis. This keeps episodic storage small while retaining the shape of what happened.</p>
+<h3 id="layer-3-knowledge-base-long-term-store">Layer 3: Knowledge Base (Long-Term Store)</h3>
+<p>Knowledge base is where you put things the agent should know but does not need in every prompt. This includes factual knowledge, learned procedures, and accumulated user preferences. The agent queries this layer only when relevant, not on every turn.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">KnowledgeBase</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kb</span> <span class="o">=</span> <span class="n">ChromaDBClient</span><span class="p">(</span><span class="n">kb_path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">store_fact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kb</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span>
+            <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;facts&quot;</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kb</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;facts&quot;</span><span class="p">,</span>
+            <span class="n">query_texts</span><span class="o">=</span><span class="p">[</span><span class="n">query</span><span class="p">],</span>
+            <span class="n">n_results</span><span class="o">=</span><span class="n">top_k</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">doc</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>The retrieval step happens at the start of a new session when you load the user's history. You pull their last 10 episode summaries, rank them by recency, and inject the top 3 into the working context as a "here is where we left off" block.</p>
+<h2 id="session-continuity-in-practice">Session Continuity In Practice</h2>
+<p>Session continuity is where most agent frameworks fall apart. A user starts a task, goes to sleep, and comes back the next day expecting the agent to pick up exactly where it left off. Without explicit architecture, the agent has no idea what happened before.</p>
+<p>The continuity flow I use:</p>
+<ol>
+<li>On session resume, load the last episodic summary for this user.</li>
+<li>Inject it as a system message with a special prefix <code>[RESUMED_SESSION]</code>.</li>
+<li>Pull any open threads from the last episode and add them to the agent's goal state.</li>
+<li>Confirm back to the user with "Resuming from where we left off: [summary]".</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">resume_session</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WorkingContext</span><span class="p">:</span>
+    <span class="n">last_episodes</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="s2">&quot;SELECT * FROM episodes WHERE user_id = ? ORDER BY created_at DESC LIMIT 3&quot;</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">user_id</span><span class="p">,)</span>
+    <span class="p">)</span>
+
+    <span class="n">context</span> <span class="o">=</span> <span class="n">WorkingContext</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">add_turn</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;[RESUMED_SESSION] Last active: </span><span class="si">{</span><span class="n">last_episodes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;summary&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">goal</span> <span class="o">=</span> <span class="n">last_episodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;open_threads&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="k">return</span> <span class="n">context</span>
+</code></pre></div>
+
+<p>This approach handles the "I left off mid-task" problem cleanly. The agent sees the summary, knows what was unfinished, and can reorient immediately. No hallucination about what happened, no wasted turns re-discovering the context.</p>
+<h2 id="tool-memory-and-intermediate-results">Tool Memory And Intermediate Results</h2>
+<p>When a HyperAgent calls a tool, the result of that call is transient unless you capture it. If the agent calls a code execution tool and gets back a 500-line output, that output needs to live somewhere if the agent needs to reference it later.</p>
+<p>I use a tool result buffer that stores the last N tool calls with their outputs. When the context window gets tight, I compress older tool results into summaries rather than dropping them entirely.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ToolResultBuffer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_entries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span> <span class="n">deque</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">max_entries</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">compressed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="n">tool_name</span><span class="p">,</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">input_params</span><span class="p">,</span>
+            <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">output</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">compressed</span> <span class="k">else</span> <span class="n">compress</span><span class="p">(</span><span class="n">output</span><span class="p">),</span>
+            <span class="s2">&quot;compressed&quot;</span><span class="p">:</span> <span class="n">compressed</span>
+        <span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">compress_oldest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compression_model</span><span class="o">=</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">):</span>
+        <span class="n">oldest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">call_llm</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Compress this tool output to 3 sentences: </span><span class="si">{</span><span class="n">oldest</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="n">oldest</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary</span>
+        <span class="n">oldest</span><span class="p">[</span><span class="s2">&quot;compressed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p>The compression model can be a cheaper, smaller model since it only needs to extract gist-level information. gpt-4o-mini is more than sufficient for this. The compressed entry preserves the fact that something happened and what the outcome was, without storing 500 lines of raw output.</p>
+<h2 id="context-window-management">Context Window Management</h2>
+<p>Context windows are finite. A HyperAgent running 200 turns against a 128K context window will eventually fill up, especially with verbose tool outputs mixed in. The solution is not to avoid long sessions but to manage them actively.</p>
+<p>I use a tiered truncation strategy. At 70% context usage, the agent gets a warning and I trigger mid-level compression of older tool results. At 85%, I run full summarization of the oldest half of the conversation. At 95%, I force-persist the current state to episodic memory and start a new working context with only the last 5 turns plus the episode summary.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">check_context_pressure</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">WorkingContext</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">usage</span> <span class="o">=</span> <span class="n">count_tokens</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">messages</span> <span class="o">+</span> <span class="n">context</span><span class="o">.</span><span class="n">tool_results</span><span class="p">)</span>
+    <span class="n">max_ctx</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">:</span> <span class="mi">128000</span><span class="p">,</span> <span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">:</span> <span class="mi">128000</span><span class="p">,</span>
+               <span class="s2">&quot;claude-3-5-sonnet&quot;</span><span class="p">:</span> <span class="mi">200000</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="mi">128000</span><span class="p">)</span>
+
+    <span class="n">pressure</span> <span class="o">=</span> <span class="n">usage</span> <span class="o">/</span> <span class="n">max_ctx</span>
+
+    <span class="k">if</span> <span class="n">pressure</span> <span class="o">&gt;</span> <span class="mf">0.95</span><span class="p">:</span>
+        <span class="n">persist_and_reset</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pressure</span> <span class="o">&gt;</span> <span class="mf">0.85</span><span class="p">:</span>
+        <span class="n">summarize_oldest_turns</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pressure</span> <span class="o">&gt;</span> <span class="mf">0.70</span><span class="p">:</span>
+        <span class="n">compress_tool_results</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">oldest_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The key insight is that you do not want to wait until the context is full to act. The 70/85/95 thresholds give the system room to breathe and prevent forced truncation mid-turn.</p>
+<h2 id="embedding-and-retrieval-for-context-injection">Embedding And Retrieval For Context Injection</h2>
+<p>When a session resumes or when an agent needs to know something from three sessions ago, you cannot just dump all history into the prompt. You need to retrieve the relevant pieces.</p>
+<p>Embedding-based retrieval works well here. Each episodic summary gets embedded at save time and stored in a vector index. When you need to find relevant history, you embed the current conversation state and do a nearest-neighbor search against the summary index.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">retrieve_relevant_history</span><span class="p">(</span><span class="n">current_context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">current_context</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;SELECT e.* FROM episodes e</span>
+<span class="sd">           JOIN sessions s ON e.session_id = s.id</span>
+<span class="sd">           WHERE s.user_id = ?</span>
+<span class="sd">           ORDER BY cosine_distance(e.embedding, ?) ASC</span>
+<span class="sd">           LIMIT ?&quot;&quot;&quot;</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">query_embedding</span><span class="p">,</span> <span class="n">top_k</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span>
+</code></pre></div>
+
+<p>The embedding model matters. <code>text-embedding-3-small</code> from OpenAI gives good results at low cost. <code>bge-m3</code> from BAAI is a solid open-source alternative if you need to stay on-premises. Embed at save time, not at query time. The compression of compute is worth the storage overhead.</p>
+<h2 id="multi-agent-memory-sharing">Multi-agent Memory Sharing</h2>
+<p>When you have multiple HyperAgents working together on a problem, memory becomes a coordination problem. Agent A needs to know what Agent B concluded. Agent C needs the shared context from a previous joint session.</p>
+<p>I use a shared episodic store with a concept called "shared context episodes". When agents work together, they write to a shared session with their own episode streams. Other agents can read from that shared store by querying across agent IDs.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SharedMemoryStore</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">write_shared_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">episode</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;INSERT INTO shared_episodes</span>
+<span class="sd">               (agent_id, session_id, turn, summary, embedding, created_at)</span>
+<span class="sd">               VALUES (?, ?, ?, ?, ?, ?)&quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="n">agent_id</span><span class="p">,</span>
+                <span class="n">session_id</span><span class="p">,</span>
+                <span class="n">episode</span><span class="p">[</span><span class="s2">&quot;turn&quot;</span><span class="p">],</span>
+                <span class="n">episode</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">],</span>
+                <span class="n">embed</span><span class="p">(</span><span class="n">episode</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">]),</span>
+                <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">read_shared_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">requesting_agent</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;SELECT * FROM shared_episodes</span>
+<span class="sd">               WHERE session_id = ?</span>
+<span class="sd">               ORDER BY created_at ASC&quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">session_id</span><span class="p">,)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[{</span><span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;turn&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+</code></pre></div>
+
+<p>This enables a write-read pattern where agents contribute to a collective memory without stepping on each other's context. The embedding column exists specifically for cross-agent relevance queries.</p>
+<h2 id="production-considerations">Production Considerations</h2>
+<p>If you want to understand how this compares to other memory systems, see my post on <a href="/blog/context-windows-vs-memory/">context windows vs memory</a>. For a deeper look at memory hierarchy in AI systems, check out <a href="/blog/memory-hierarchy-in-ai-systems/">memory hierarchy in AI systems</a>.</p>
+<p>Memory architecture that looks clean in a notebook breaks in production if you do not account for latency, storage growth, and failure modes.</p>
+<p><strong>Write latency</strong> is the first trap. Writing to SQLite on every turn adds 5-10ms per operation. At 500 turns per session, that is 2.5-5 seconds of overhead spread across the session. For a smooth user experience, you want to batch writes or do them asynchronously. I use a background thread that flushes the episodic buffer every 30 seconds or every 10 turns, whichever comes first.</p>
+<p><strong>Storage growth</strong> is the second trap. Episodic summaries are small but they compound. With 100 users doing 10 sessions per day, you write 1000 episodes daily. At 500 bytes per summary, that is 500KB per day, or 180MB per year. Negligible. But if you store full tool result logs instead of summaries, that number jumps by two orders of magnitude. Be deliberate about what you store and for how long.</p>
+<p><strong>Failure recovery</strong> is the third trap. If the agent crashes mid-session, what survives? Working context is gone. Episodic memory on disk survives. Knowledge base survives. The failure mode you want to avoid is a crash that also corrupts the episodic store. Use append-only writes and validate integrity on startup.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">startup_health_check</span><span class="p">(</span><span class="n">store</span><span class="p">:</span> <span class="n">EpisodicMemory</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">latest</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;SELECT id FROM episodes ORDER BY id DESC LIMIT 1&quot;</span><span class="p">)</span>
+        <span class="n">store</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT COUNT(*) FROM episodes&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">DatabaseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Episodes store corrupted: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. Re-initializing.&quot;</span><span class="p">)</span>
+        <span class="n">store</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;VACUUM&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>VACUUM rebuilds the SQLite file and fixes most corruption scenarios. It is not guaranteed, but it handles the common case where a crash left the WAL in an inconsistent state.</p>
+<h2 id="comparing-hyperagent-memory-to-standard-rag">Comparing Hyperagent Memory To Standard RAG</h2>
+<p>Standard RAG (Retrieval-Augmented Generation) relies on a vector store and a fixed corpus. You index documents, the user asks a question, you retrieve relevant chunks, and the model answers. This works for static knowledge bases. It does not work for agentic workflows.</p>
+<p>HyperAgent memory differs in three fundamental ways. First, it is bidirectional. The agent writes to memory as it works, not just reads from it. Second, it is temporal. Memories are tagged with when they happened and what happened before and after. Third, it is goal-directed. Memory is not just about what the agent knows but what it is trying to accomplish and what remains.</p>
+<p>A standard RAG pipeline would not know that the agent is three steps into a six-step deployment. A HyperAgent memory system knows the full trajectory and can reconstruct it.</p>
+<h2 id="related-articles">Related Articles</h2>
+<ul>
+<li><a href="/blog/context-windows-vs-memory/">Context windows vs memory</a></li>
+<li><a href="/blog/ai-memory-management-for-llms/">AI memory management for LLMs</a></li>
+<li><a href="/blog/short-term-memory-for-ai-agents/">Short-term memory for AI agents</a></li>
+<li><a href="/blog/state-of-ai-agent-memory-2026/">State of AI agent memory 2026</a></li>
+</ul>
+<h2 id="faq">Faq</h2>
+<p><strong>How does HyperAgent memory differ from conversation history in a chat model?</strong></p>
+<p>Conversation history is raw. It contains every message in sequence. HyperAgent memory is structured and tiered. Raw history lives in working context. Structured summaries and decisions live in episodic memory. Facts and procedures live in the knowledge base. The tiering allows the agent to access the right information at the right time without drowning in noise.</p>
+<p><strong>Can memory be shared across different agent instances?</strong></p>
+<p>Yes. Shared episodic stores let multiple agent instances read and write to a common memory space. This is useful for multi-agent workflows where agents need to coordinate or build on each other's work.</p>
+<p><strong>What happens if the episodic store grows too large?</strong></p>
+<p>You can implement a retention policy that rolls off old episodes. I keep the last 30 sessions per user in full and compress anything older than 90 days into a single yearly summary. This keeps storage bounded while retaining enough history to handle the "where did we leave off" question.</p>
+<p><strong>How do you handle memory when switching between different LLMs?</strong></p>
+<p>The memory layer is model-agnostic. Working context is a list of messages in OpenAI SDK format by default, but you can translate to Anthropic format or any other provider's schema at the adapter layer. The episodic and knowledge layers are pure data and do not care which model is consuming them.</p>
+<p><strong>Is memory written synchronously or asynchronously?</strong></p>
+<p>Writes to the working context are synchronous (immediate). Writes to episodic memory are asynchronous via a background flush thread. This prevents memory writes from blocking the agent's main loop. The trade-off is that a crash can lose up to 30 seconds of recent episodes, which is acceptable for most production use cases.</p>
+<p><strong>How do you handle sensitive data in memory?</strong></p>
+<p>Episodic summaries should be generated with a system prompt that redacts sensitive fields (passwords, tokens, PII) before storage. The summary generation call runs through a sanitizer that replaces patterns like <code>[A-Za-z0-9+/]{32,}</code> with <code>[REDACTED]</code>. Actual tool outputs with sensitive data should be stored in memory only as compression summaries, never raw.</p>
+<p><strong>What context pressure thresholds do you recommend?</strong></p>
+<p>For models with 128K context, I use 70/85/95 as described above. For models with smaller windows (32K or below), you want tighter thresholds. Set your compression trigger at 60% and your forced persist at 80%. The goal is to always have headroom so a large tool result does not push you over the limit mid-turn.</p>
+<p><strong>Can the agent access memory mid-turn or only at turn boundaries?</strong></p>
+<p>Access is available at any point. The agent can query the knowledge base between tool calls or during planning phases. The working context is always available since it lives in the same process. Episodic retrieval typically happens at session start or when the agent explicitly calls a "recall" tool that queries the episodic store.</p>
+<p><strong>How does the agent know which memory layer to use?</strong></p>
+<p>Through the system prompt. The agent is instructed that recent turns and tool results live in working context, that session history is in episodic memory, and that factual knowledge is in the knowledge base. This is not enforced by the code but by the instruction. In practice, agents learn to query memory appropriately after a few sessions.</p>
+<hr />
+<p>The memory architecture in HyperAgents is the reason it works reliably across long sessions. Without it, you have a powerful but forgetful system. With it, you have something that can hold context, learn from experience, and pick up work where it left off. That is the difference between a demo and a product.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+      </a>
+      <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">How Memory Works in DeerFlow</div>
+      </a>
+      <a href="/blog/rag-vs-memory/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
+          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
+          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

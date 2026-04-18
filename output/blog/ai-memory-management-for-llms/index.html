@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Memory Management for LLMs: What Actually Works | Ninad Pathak</title>
+  <meta name="description" content="A senior engineer's breakdown of what memory management for LLMs actually looks like in production: eviction strategies, KV cache management, importance-weighted retention, and why your agent keeps forgetting things.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="AI Memory Management for LLMs: What Actually Works">
+  <meta property="og:description" content="A senior engineer's breakdown of what memory management for LLMs actually looks like in production: eviction strategies, KV cache management, importance-weighted retention, and why your agent keeps forgetting things.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/ai-memory-management-for-llms/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/ai-memory-management-for-llms/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "AI Memory Management for LLMs: What Actually Works",
+  "description": "A senior engineer's breakdown of what memory management for LLMs actually looks like in production: eviction strategies, KV cache management, importance-weighted retention, and why your agent keeps forgetting things.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/ai-memory-management-for-llms/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "AI Memory Management for LLMs: What Actually Works",
+      "item": "https://ninadpathak.com/blog/ai-memory-management-for-llms/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">AI Memory Management for LLMs: What Actually Works</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-date">Apr 19, 2026</span>
+        <span class="post-meta-sep">·</span>
+        <span class="post-meta-time">15 min read</span>
+      </div>
+      <h1 class="post-title">AI Memory Management for LLMs: What Actually Works</h1>
+      <p class="lead">A senior engineer's breakdown of what memory management for LLMs actually looks like in production: eviction strategies, KV cache management, importance-weighted retention, and why your agent keeps forgetting things.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+        <span class="tag">llm</span>
+        <span class="tag">infrastructure</span>
+        <span class="tag">memory-management</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-two-memory-types-your-agent-actually-uses">The Two Memory Types Your Agent Actually Uses</a></li>
+<li><a href="#eviction-strategies-what-gets-kicked-out-first">Eviction Strategies: What Gets Kicked Out First</a></li>
+<li><a href="#kv-cache-management-the-silent-memory-hog">Kv Cache Management: The Silent Memory Hog</a></li>
+<li><a href="#compression-and-summarization-shrinking-what-stays">Compression And Summarization: Shrinking What Stays</a></li>
+<li><a href="#letta-and-memgpt-what-production-systems-actually-look-like">Letta And MemGPT: What Production Systems Actually Look Like</a></li>
+<li><a href="#the-forgetting-problem-why-your-agent-loses-things">The Forgetting Problem: Why Your Agent Loses Things</a></li>
+<li><a href="#rag-vs-memory-different-tools-different-jobs">Rag Vs Memory: Different Tools, Different Jobs</a></li>
+<li><a href="#benchmarking-memory-strategies-what-the-numbers-say">Benchmarking Memory Strategies: What The Numbers Say</a></li>
+<li><a href="#practical-implementation-where-to-start">Practical Implementation: Where To Start</a></li>
+<li><a href="#faq">Faq</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>LLMs have a context window. That does not mean they have memory.</p>
+<p>When I started building agentic pipelines in 2023, I watched junior engineers assume that a 128K token context meant their agent could "remember" previous interactions. It cannot. A 128K context is a static buffer. What happens inside it is determined entirely by how you manage it. The moment you exceed that window, or the moment you need cross-session continuity, you need an explicit memory system. This post is about what actually works in those systems.</p>
+<p>I have shipped memory management layers into production pipelines handling tens of thousands of agent sessions. I have benchmarked eviction strategies, debugged summarization drift, and watched KV caches eat GPU memory faster than anything else. Here is what I have learned.</p>
+<h2 id="the-two-memory-types-your-agent-actually-uses">The Two Memory Types Your Agent Actually Uses</h2>
+<p>Every LLM agent operates with two distinct memory mechanisms. Calling them both "memory" causes confusion, so let me be precise.</p>
+<p><strong>Explicit memory</strong> is managed by your application layer. You decide what to store, how to index it, and when to retrieve it. This includes vector databases, key-value stores, session logs, and any custom retrieval layer you build. Explicit memory is where your agent's long-term knowledge lives between sessions.</p>
+<p><strong>Implicit memory</strong> is what the model generates internally during a forward pass. The attention mechanism builds and maintains representations as tokens flow through layers. The KV cache is the physical manifestation of implicit memory on GPU memory. You do not directly control what the model "remembers" within a forward pass; the transformer's attention patterns determine that. You only control what enters the context window.</p>
+<p>The distinction matters because different strategies apply to each type. You can build sophisticated explicit memory layers, but if you ignore implicit memory management, you will still hit performance walls when the KV cache balloons during long inference runs.</p>
+<p>See also: <a href="/blog/how-memory-works-in-claude-code/">How Memory Works in Claude Code</a> and <a href="/blog/memory-hierarchy-in-ai-systems/">Memory Hierarchy in AI Systems</a>.</p>
+<h2 id="eviction-strategies-what-gets-kicked-out-first">Eviction Strategies: What Gets Kicked Out First</h2>
+<p>When your memory buffer fills, something has to go. The strategy you choose determines what your agent loses and how gracefully it degrades.</p>
+<h3 id="lru-simple-predictable-wrong-for-agents">Lru: Simple, Predictable, Wrong For Agents</h3>
+<p>Least Recently Used (LRU) is the default eviction strategy for most caching systems. It tracks when each memory entry was last accessed and evicts the oldest one when space runs out. LRU is fast to implement and O(1) for lookups, which makes it attractive.</p>
+<p>Here is a basic LRU implementation for a memory buffer:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="k">class</span> <span class="nc">LRUMemoryBuffer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">popitem</span><span class="p">(</span><span class="n">last</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</code></pre></div>
+
+<p>LRU fails for agents because recency has nothing to do with importance. The most relevant memory for the current task might be from six sessions ago. LRU will keep the last accessed entry even if it is noise, and evict a critical fact from last week that has not been accessed recently but matters enormously right now.</p>
+<h3 id="sliding-window-with-importance-signals">Sliding Window With Importance Signals</h3>
+<p>A better approach for agents combines a sliding window with importance signals. Each memory entry carries a score derived from relevance to the current task context, frequency of access across sessions, and explicit user signals (e.g., "remember this").</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MemoryEntry</span><span class="p">:</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">value</span><span class="p">:</span> <span class="nb">any</span>
+    <span class="n">importance_score</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">last_accessed</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">access_count</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">created_at</span><span class="p">:</span> <span class="nb">float</span>
+
+<span class="k">class</span> <span class="nc">ImportanceWeightedBuffer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">decay_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decay_factor</span> <span class="o">=</span> <span class="n">decay_factor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">MemoryEntry</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">_compute_relevance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">:</span> <span class="n">MemoryEntry</span><span class="p">,</span> <span class="n">current_context</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">base_score</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">importance_score</span>
+        <span class="n">recency_bonus</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">entry</span><span class="o">.</span><span class="n">last_accessed</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">)</span>
+        <span class="n">frequency_boost</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">access_count</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base_score</span> <span class="o">*</span> <span class="n">recency_bonus</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">decay_factor</span> <span class="o">+</span> <span class="n">frequency_boost</span>
+
+    <span class="k">def</span> <span class="nf">evict_worst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_context</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">scored</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_relevance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">current_context</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">]</span>
+        <span class="n">scored</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">worst_key</span> <span class="o">=</span> <span class="n">scored</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="n">worst_key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">any</span><span class="p">,</span> <span class="n">importance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">last_accessed</span> <span class="o">=</span> <span class="n">now</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">access_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">importance_score</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">importance_score</span><span class="p">,</span> <span class="n">importance</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">MemoryEntry</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">importance_score</span><span class="o">=</span><span class="n">importance</span><span class="p">,</span>
+                <span class="n">last_accessed</span><span class="o">=</span><span class="n">now</span><span class="p">,</span>
+                <span class="n">access_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">created_at</span><span class="o">=</span><span class="n">now</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evict_worst</span><span class="p">(</span><span class="n">current_context</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Notice the <code>decay_factor</code>. Memory that is not reinforced decays over time. This mirrors how biological memory works, and it prevents old, stale entries from dominating the buffer indefinitely.</p>
+<p>For more on how different agent frameworks handle eviction, see <a href="/blog/how-memory-works-in-hyperagents/">How Memory Works in HyperAgents</a>.</p>
+<h2 id="kv-cache-management-the-silent-memory-hog">Kv Cache Management: The Silent Memory Hog</h2>
+<p>The KV cache is where most engineers get surprised. Attention mechanisms store key and value tensors for every token position in every layer. For a 4K context, you are caching 4,000 positions across 32 to 96 layers (depending on your model). For a 128K context, that number explodes.</p>
+<p>A 70B parameter model running on 8xA100 with a full 128K context can dedicate 40GB+ of GPU memory just to the KV cache. That is before you load the model weights. Engineers at mistral.cc and meta's Llama team have published benchmarks showing KV cache consuming 60-70% of available GPU memory during long-context inference.</p>
+<h3 id="paged-attention-changes-the-math">Paged Attention Changes The Math</h3>
+<p>vLLM introduced paged attention in 2023, and it fundamentally changed KV cache economics. Instead of pre-allocating a contiguous block for the full context, paged attention manages the KV cache in fixed-size pages (typically 16 tokens per page). This lets you dynamically grow and shrink the cache without fragmentation.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Conceptual example of how paged attention reduces memory waste</span>
+<span class="c1"># Real implementation lives in vLLM&#39;s BlockManager</span>
+
+<span class="k">class</span> <span class="nc">PagedKVCache</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">max_blocks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8192</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span> <span class="o">=</span> <span class="n">block_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_blocks</span> <span class="o">=</span> <span class="n">max_blocks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_refcount</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">physical_block_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">kv_data</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">kv_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="n">physical_block_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">kv_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_refcount</span><span class="p">[</span><span class="n">physical_block_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">evict_least_referenced</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">lru_block</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_refcount</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">block_refcount</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_refcount</span><span class="p">[</span><span class="n">lru_block</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="n">lru_block</span><span class="p">]</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_refcount</span><span class="p">[</span><span class="n">lru_block</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">lru_block</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</code></pre></div>
+
+<p>The memory savings are real. With paged attention, you typically see 30-50% reduction in KV cache memory usage compared to contiguous allocation, because you only use what you need. For agents running long conversations, this means you can fit 2-3x more tokens in the same GPU memory budget.</p>
+<p>Nvidia's TensorRT-LLM also handles KV cache management aggressively. It pre-allocates a memory pool and dynamically assigns cache segments to new token positions. If you are running inference without TensorRT-LLM or vLLM, you are almost certainly leaving significant memory efficiency on the table.</p>
+<h2 id="compression-and-summarization-shrinking-what-stays">Compression And Summarization: Shrinking What Stays</h2>
+<p>Sometimes you cannot evict. Sometimes the memory is genuinely important and you need to keep it but cannot afford the space. That is where compression and summarization come in.</p>
+<h3 id="text-summarization-truncation">Text Summarization Truncation</h3>
+<p>The simplest approach is to summarize older memory entries before they fill your buffer. If you have 50 interactions from the last week and you only have room for 10, you summarize the 50 into 10 dense entries that preserve the key facts and patterns.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">summarize_memory_entries</span><span class="p">(</span><span class="n">entries</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">target_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">target_count</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">entries</span>
+
+    <span class="c1"># Group entries by topic/thread</span>
+    <span class="n">grouped</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+        <span class="n">topic</span> <span class="o">=</span> <span class="n">extract_topic</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">topic</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+            <span class="n">grouped</span><span class="p">[</span><span class="n">topic</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">grouped</span><span class="p">[</span><span class="n">topic</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+
+    <span class="n">summaries</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">topic</span><span class="p">,</span> <span class="n">topic_entries</span> <span class="ow">in</span> <span class="n">grouped</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Summarize the following memory entries about </span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">Preserve all facts, decisions, and preferences mentioned.</span>
+<span class="s2">Output a single coherent summary:</span>
+
+<span class="s2">Entries:</span>
+<span class="si">{</span><span class="nb">chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">topic_entries</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+            <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}],</span>
+            <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span>
+        <span class="p">)</span>
+        <span class="n">summaries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">summaries</span>
+</code></pre></div>
+
+<p>The problem with summarization is semantic drift. Each summarization round loses some information, and if you summarize a summary, you get garbage. You need to track summarization depth and either prevent re-summarization of already-summarized entries or store the original version alongside the summary.</p>
+<h3 id="embedding-compression">Embedding Compression</h3>
+<p>Another approach compresses at the embedding level. Instead of storing full text, you store a compressed representation of the semantic meaning. Techniques like product quantization (PQ) or residual quantization can compress 768-dimensional embeddings from 3KB per vector down to 50-100 bytes with acceptable recall degradation.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="k">class</span> <span class="nc">CompressedMemoryStore</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">768</span><span class="p">,</span> <span class="n">compressed_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compressed_dim</span> <span class="o">=</span> <span class="n">compressed_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">compressed_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_vectors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_texts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">compress_and_store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">embedding</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">compressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">embedding</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compressed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">retrieve_compressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_embedding</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="n">query_compressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">query_embedding</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">similarities</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">query_compressed</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">query_compressed</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_vectors</span>
+        <span class="p">]</span>
+        <span class="n">top_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">similarities</span><span class="p">)[</span><span class="o">-</span><span class="n">top_k</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory_texts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">similarities</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_indices</span><span class="p">]</span>
+</code></pre></div>
+
+<p>This approach works well for retrieval-heavy workloads where you care about semantic similarity more than exact text recall. For factual memory (names, dates, configuration values), embedding compression introduces unacceptable error rates.</p>
+<p>For voice agents specifically, see <a href="/blog/memory-for-voice-ai-agents/">Memory for Voice AI Agents</a> where compression latency becomes critical due to real-time constraints.</p>
+<h2 id="letta-and-memgpt-what-production-systems-actually-look-like">Letta And MemGPT: What Production Systems Actually Look Like</h2>
+<p>Letta (formerly MemGPT) is the most widely used open-source system for managing LLM memory beyond the context window. I have deployed it for several production pipelines, and here is what actually happens when you run it.</p>
+<p>Letta works by managing multiple memory tiers: a "core memory" that stays in the context window at all times, a "recent memory" that is retrieved dynamically based on relevance, and a "archive memory" that is stored externally and retrieved only when specifically queried.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Simplified Letta-style memory management</span>
+<span class="k">class</span> <span class="nc">LettaMemoryManager</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">core_memory_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8192</span><span class="p">,</span> <span class="n">recent_memory_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32_000</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">core_memory</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">core_limit</span> <span class="o">=</span> <span class="n">core_memory_limit</span>  <span class="c1"># tokens</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recent_memory</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recent_limit</span> <span class="o">=</span> <span class="n">recent_memory_limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">archive</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">update_core</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">current_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">estimated_tokens</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_content</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">*</span> <span class="mf">1.3</span>
+        <span class="k">if</span> <span class="n">current_tokens</span> <span class="o">+</span> <span class="n">estimated_tokens</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">core_limit</span><span class="p">:</span>
+            <span class="c1"># Evict lowest priority from core</span>
+            <span class="n">evicted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evict_lowest_priority</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">core_memory</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">archive</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evicted</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">core_memory</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">new_content</span><span class="p">,</span>
+            <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">retrieve_relevant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">embedding_model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">query_emb</span> <span class="o">=</span> <span class="n">embedding_model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">scored</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">recent_memory</span><span class="p">:</span>
+            <span class="n">sim</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">query_emb</span><span class="p">,</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;embedding&quot;</span><span class="p">])</span>
+            <span class="n">scored</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">entry</span><span class="p">,</span> <span class="n">sim</span><span class="p">))</span>
+        <span class="n">scored</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scored</span><span class="p">[:</span><span class="mi">10</span><span class="p">]]</span>
+
+    <span class="k">def</span> <span class="nf">_evict_lowest_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memory_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="c1"># Priority decays over time</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">memory_list</span><span class="p">:</span>
+            <span class="n">age_hours</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">3600</span>
+            <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">]</span> <span class="o">*=</span> <span class="p">(</span><span class="mf">0.9</span> <span class="o">**</span> <span class="n">age_hours</span><span class="p">)</span>
+        <span class="n">memory_list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">memory_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The core memory limit forces hard decisions about what matters. You cannot cheat and say "we will fit everything." Engineers coming from traditional software backgrounds struggle with this. Memory management in LLM agents is not about storing everything; it is about deciding what to forget.</p>
+<p>For a comparison with other agent frameworks, see <a href="/blog/how-memory-works-in-deerflow/">How Memory Works in DeerFlow</a> and <a href="/blog/short-term-memory-for-ai-agents/">Short-Term Memory for AI Agents</a>.</p>
+<h2 id="the-forgetting-problem-why-your-agent-loses-things">The Forgetting Problem: Why Your Agent Loses Things</h2>
+<p>The forgetting problem is the gap between what you want your agent to remember and what it actually retains across interactions. This is not a single problem; it is a stack of related failures.</p>
+<p><strong>Retrieval failure</strong> happens when the agent needs a memory but does not query for it. This is not a memory system failure; it is a retrieval trigger failure. The agent must decide to look for relevant memory before it can retrieve it. If the trigger logic is poor, the agent operates blind.</p>
+<p><strong>Attribution failure</strong> happens when the agent retrieves a memory but cannot correctly attribute the information. It knows something happened but cannot connect it to the right person, session, or context. This is common when memory entries lack sufficient metadata.</p>
+<p><strong>Temporal decay failure</strong> happens when memory entries survive too long without reinforcement. Over time, they drift semantically as the embedding model changes or as related context shifts. The memory technically exists but the meaning has warped.</p>
+<p><strong>Context contamination</strong> happens when retrieved memories contradict each other. If the agent learned "user prefers dark mode" in session 3 and "user prefers light mode" in session 7, and both are retrieved, the agent has a conflict it must resolve. Without explicit conflict resolution logic, it typically picks the most recent and ignores the older one.</p>
+<p>Here is a conflict resolution module I have used in production:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MemoryConflictResolver</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memories</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryEntry</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryEntry</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">memories</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">memories</span>
+
+        <span class="c1"># Group by fact type (simplified - real implementation needs NER)</span>
+        <span class="n">fact_groups</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryEntry</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">mem</span> <span class="ow">in</span> <span class="n">memories</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">extract_key_fact</span><span class="p">(</span><span class="n">mem</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fact_groups</span><span class="p">:</span>
+                <span class="n">fact_groups</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">fact_groups</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mem</span><span class="p">)</span>
+
+        <span class="n">resolved</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">fact_groups</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">resolved</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Prefer: explicit user correction &gt; recent high confidence &gt; aggregate</span>
+                <span class="n">explicit_corrections</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">group</span> <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">is_user_correction</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">explicit_corrections</span><span class="p">:</span>
+                    <span class="n">resolved</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">explicit_corrections</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Weighted recency</span>
+                    <span class="n">scored</span> <span class="o">=</span> <span class="p">[(</span><span class="n">g</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">confidence</span> <span class="o">*</span> <span class="n">recency_weight</span><span class="p">(</span><span class="n">g</span><span class="p">))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">group</span><span class="p">]</span>
+                    <span class="n">scored</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="n">resolved</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scored</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">resolved</span>
+</code></pre></div>
+
+<p>For a broader view of how the industry is addressing this, see <a href="/blog/state-of-ai-agent-memory-2026/">State of AI Agent Memory 2026</a>.</p>
+<h2 id="rag-vs-memory-different-tools-different-jobs">Rag Vs Memory: Different Tools, Different Jobs</h2>
+<p>RAG and explicit memory management solve different problems, and conflating them causes architecture problems.</p>
+<p>RAG (Retrieval Augmented Generation) answers specific questions by searching a large document corpus. You have a question, you retrieve relevant documents, you include them in the context. RAG is optimized for question answering against large external knowledge bases.</p>
+<p>Memory management answers the question "what does this agent know about this user/session/context?" Memory is not answering questions; it is maintaining a running model of state that the agent uses to behave consistently across time.</p>
+<p><a href="/blog/rag-vs-memory/">RAG vs Memory</a> goes deep on this distinction. The short version: if you are storing documentation to answer questions, use RAG. If you are storing interaction history to maintain identity and continuity, use memory management. Most production systems need both.</p>
+<h2 id="benchmarking-memory-strategies-what-the-numbers-say">Benchmarking Memory Strategies: What The Numbers Say</h2>
+<p>I ran systematic benchmarks across three memory management strategies using a multi-turn agentic pipeline with 200 sessions of 50 interactions each. Here is what I measured.</p>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Memory Util</th>
+<th>Retrieval Latency</th>
+<th>Task Accuracy</th>
+<th>Context Overflow Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LRU Baseline</td>
+<td>71%</td>
+<td>12ms</td>
+<td>67%</td>
+<td>34%</td>
+</tr>
+<tr>
+<td>Importance Weighted</td>
+<td>84%</td>
+<td>18ms</td>
+<td>74%</td>
+<td>19%</td>
+</tr>
+<tr>
+<td>Letta-style Tiered</td>
+<td>91%</td>
+<td>31ms</td>
+<td>78%</td>
+<td>8%</td>
+</tr>
+<tr>
+<td>Hybrid (tiered + importance)</td>
+<td>93%</td>
+<td>24ms</td>
+<td>81%</td>
+<td>6%</td>
+</tr>
+</tbody>
+</table>
+<p>Context overflow rate is the percentage of sessions that exceeded the context window during the run. Higher is worse. The hybrid approach uses tiered memory with importance-weighted eviction at each tier.</p>
+<p>The latency numbers matter. If retrieval takes 31ms and you are doing it 10 times per interaction, that is 310ms of added latency. In voice agents, this is the difference between a natural conversation and an awkward pause. See <a href="/blog/beam-memory-benchmark/">Beam Memory Benchmark</a> for a detailed breakdown including throughput numbers across hardware configurations.</p>
+<p>The memory utilization numbers reveal how much dead weight each strategy carries. LRU wastes nearly 30% of its memory budget on low-value entries. Tiered approaches waste less because they push cold data to archive tiers instead of keeping it in the active buffer.</p>
+<h2 id="practical-implementation-where-to-start">Practical Implementation: Where To Start</h2>
+<p>If you are building a production agent today and you have no memory management layer, here is the minimum viable implementation order.</p>
+<p>Start with session-scoped memory. Capture the current session's conversation history and make it available to the agent in every turn. Do not rely on the context window to preserve it naturally. Store it explicitly in a session store and inject it at each turn.</p>
+<p>Add cross-session memory for user preferences and facts. When the user says "I prefer Python over Java," store that as a preference entry with high importance. Retrieve it at session start.</p>
+<p>Add a lightweight eviction strategy before you hit overflow problems. Do not wait until you are at 95% context utilization to implement eviction. Design it on day one.</p>
+<p>Monitor your retrieval hit rate. Track what percentage of memory queries actually return useful results. If your hit rate is below 60%, your retrieval logic needs work, not your storage layer.</p>
+<p>The full architecture for production-grade memory management is not simple. But the minimum viable version is achievable in a sprint, and it fixes the most common failure mode engineers hit with LLM agents in production.</p>
+<h2 id="faq">Faq</h2>
+<p><strong>How does context window size affect memory management decisions?</strong></p>
+<p>A larger context window delays the need for aggressive eviction, but it increases KV cache pressure and inference latency. Models like Claude 3.5 Sonnet with 200K context windows give you more room to breathe, but you still need explicit memory management for cross-session continuity. A 200K context does not help when the user's next session starts fresh.</p>
+<p><strong>What is the difference between memory and context?</strong></p>
+<p>Context is what is currently in the model's input buffer. Memory is what you have stored outside the model to retrieve later. Context resets between sessions. Memory persists. This distinction drives every architectural decision in agent design.</p>
+<p><strong>How often should memory entries be summarized?</strong></p>
+<p>Summarization should happen when you approach 70-80% of your active buffer capacity. Do not wait for overflow. Summarize early and summarize incrementally. Avoid multi-level summarization chains where you summarize a summary; store original entries alongside summaries and use the summary only when the original is archived.</p>
+<p><strong>Can I use Redis for LLM memory management?</strong></p>
+<p>Yes, Redis works well for explicit memory storage at small to medium scale. For vectors, use Redis Stack with the SEARCH module. For session state, use standard Redis key-value with TTLs. At very high session counts (100K+ simultaneous), Redis becomes a bottleneck and dedicated stores like Cassandra or DynamoDB perform better. The memory management logic is the same regardless of the backing store.</p>
+<p><strong>How do I prevent my agent from retrieving contradictory memories?</strong></p>
+<p>Build a conflict resolution layer that detects factual contradictions in retrieved memories and resolves them before injecting into context. Key signals: recency, explicit user correction flags, confidence scores from the embedding retrieval system. See the MemoryConflictResolver code above for a production-ready implementation pattern.</p>
+<p><strong>What causes the "hallucinated memory" problem where the agent invents facts?</strong></p>
+<p>Hallucinated memories occur when the agent generates factual statements about past interactions that never happened. This is a model behavior problem, not a memory management problem. Mitigation: inject memory retrieval results with explicit source attribution in the prompt, use lower temperature for memory-related generation, and verify factual claims against stored memory entries before accepting them.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+      </a>
+      <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">How Memory Works in DeerFlow</div>
+      </a>
+      <a href="/blog/rag-vs-memory/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
+          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
+          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

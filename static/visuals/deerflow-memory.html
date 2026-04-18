@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeerFlow Memory Architecture</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; overflow: hidden; font-family: 'Courier New', monospace; }
+  canvas { display: block; }
+  #info {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #888;
+    font-size: 12px;
+    text-align: center;
+  }
+  #title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff5f1f;
+    font-size: 16px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div id="title">DEERFLOW MEMORY ARCHITECTURE</div>
+<div id="info">DRAG TO ORBIT | SCROLL TO ZOOM</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+let scene, camera, renderer, controls;
+let boxes = [];
+let lines = [];
+
+const dark = 0xff5f1f;
+const light = 0xd44000;
+const muted = 0x333344;
+
+function init() {
+  scene = new THREE.Scene();
+
+  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 8, 22);
+  camera.lookAt(0, 0, 0);
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setClearColor(0x0a0a0f);
+  document.body.appendChild(renderer.domElement);
+
+  // Simple orbit controls implementation
+  controls = {
+    target: new THREE.Vector3(0, 0, 0),
+    spherical: new THREE.Spherical(22, Math.PI / 3, 0),
+    enabled: true
+  };
+
+  document.addEventListener('mousedown', () => { controls.enabled = true; });
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', () => {});
+  document.addEventListener('wheel', onWheel);
+
+  let isDragging = false;
+  let prevMouse = { x: 0, y: 0 };
+
+  document.addEventListener('mousedown', (e) => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY }; });
+  document.addEventListener('mouseup', () => { isDragging = false; });
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - prevMouse.x;
+    const dy = e.clientY - prevMouse.y;
+    controls.spherical.theta -= dx * 0.01;
+    controls.spherical.phi += dy * 0.01;
+    controls.spherical.phi = Math.max(0.1, Math.min(Math.PI - 0.1, controls.spherical.phi));
+    prevMouse = { x: e.clientX, y: e.clientY };
+    updateCamera();
+  });
+
+  createScene();
+  animate();
+}
+
+function updateCamera() {
+  const pos = new THREE.Vector3();
+  pos.setFromSpherical(controls.spherical);
+  pos.add(controls.target);
+  camera.position.copy(pos);
+  camera.lookAt(controls.target);
+}
+
+function onMouseMove(e) {}
+function onWheel(e) {
+  controls.spherical.radius += e.deltaY * 0.02;
+  controls.spherical.radius = Math.max(10, Math.min(50, controls.spherical.radius));
+  updateCamera();
+}
+
+function createLabel(text, position, color) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 512;
+  canvas.height = 128;
+  ctx.fillStyle = 'transparent';
+  ctx.fillRect(0, 0, 512, 128);
+  ctx.font = 'bold 24px Courier New';
+  ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
+  ctx.textAlign = 'center';
+  ctx.fillText(text, 256, 70);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  const material = new THREE.SpriteMaterial({ map: texture, transparent: true });
+  const sprite = new THREE.Sprite(material);
+  sprite.position.copy(position);
+  sprite.scale.set(6, 1.5, 1);
+  scene.add(sprite);
+  return sprite;
+}
+
+function createBox(x, y, z, w, h, d, color, opacity) {
+  const geometry = new THREE.BoxGeometry(w, h, d);
+  const material = new THREE.MeshBasicMaterial({
+    color: color,
+    transparent: true,
+    opacity: opacity
+  });
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set(x, y, z);
+  scene.add(mesh);
+
+  const edges = new THREE.EdgesGeometry(geometry);
+  const lineMat = new THREE.LineBasicMaterial({ color: color });
+  const wireframe = new THREE.LineSegments(edges, lineMat);
+  wireframe.position.set(x, y, z);
+  scene.add(wireframe);
+
+  return mesh;
+}
+
+function createLine(points, color) {
+  const geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const material = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.5 });
+  const line = new THREE.Line(geometry, material);
+  scene.add(line);
+  return line;
+}
+
+function createArrow(from, to, color) {
+  const dir = new THREE.Vector3().subVectors(to, from);
+  const length = dir.length();
+  const arrowHelper = new THREE.ArrowHelper(dir.normalize(), from, length, color, 1.5, 0.8);
+  scene.add(arrowHelper);
+}
+
+function createScene() {
+  // Long-term Memory (top layer)
+  const ltBox = createBox(-12, 6, 0, 5, 2.5, 3, light, 0.15);
+  boxes.push({ mesh: ltBox, label: 'LONG-TERM MEMORY', sublabel: 'Vector Store / pgvector' });
+  createLabel('LONG-TERM MEMORY', new THREE.Vector3(-12, 8.5, 0), light);
+  createLabel('Vector Store / pgvector', new THREE.Vector3(-12, 7.5, 0), muted);
+
+  // Retrieval connector
+  const retrieveBox = createBox(-6, 6, 0, 3, 1.5, 2, dark, 0.25);
+  boxes.push({ mesh: retrieveBox, label: 'retrieval' });
+  createLabel('RETRIEVAL', new THREE.Vector3(-6, 7.5, 0), dark);
+  createArrow(new THREE.Vector3(-9.5, 6, 0), new THREE.Vector3(-7.5, 6, 0), dark);
+
+  // Session Memory (middle)
+  const sessBox = createBox(0, 3, 0, 7, 2.5, 3.5, light, 0.18);
+  boxes.push({ mesh: sessBox, label: 'SESSION MEMORY' });
+  createLabel('SESSION MEMORY', new THREE.Vector3(0, 4.8, 0), light);
+  createLabel('JSON State Files', new THREE.Vector3(0, 3.8, 0), muted);
+
+  // Arrow from retrieval to session
+  createArrow(new THREE.Vector3(-4.5, 5.2, 0), new THREE.Vector3(-3.5, 4.2, 0), dark);
+
+  // Stage agents (stages flow left to right)
+  const stageColors = [dark, light, dark, light, dark];
+  const stageLabels = ['PLANNER', 'WEB SEARCH', 'CODE EXEC', 'SYNTHESIS', 'OUTPUT'];
+  const stageX = [-14, -8, -2, 4, 10];
+  const stageY = -2;
+  const stageZ = 0;
+
+  for (let i = 0; i < 5; i++) {
+    const box = createBox(stageX[i], stageY, stageZ, 4, 2, 2.5, stageColors[i], 0.2);
+    boxes.push({ mesh: box });
+    createLabel(stageLabels[i], new THREE.Vector3(stageX[i], stageY + 1.8, stageZ), stageColors[i]);
+  }
+
+  // Flow arrows between stages
+  for (let i = 0; i < 4; i++) {
+    const from = new THREE.Vector3(stageX[i] + 2, stageY, stageZ);
+    const to = new THREE.Vector3(stageX[i + 1] - 2, stageY, stageZ);
+    createArrow(from, to, dark);
+  }
+
+  // Arrow from session memory down to first stage
+  createArrow(new THREE.Vector3(0, 1.5, 0), new THREE.Vector3(-14, -1, 0), dark);
+
+  // Working Memory (bottom layer)
+  const wmBox = createBox(0, -7, 0, 16, 2, 3, dark, 0.25);
+  boxes.push({ mesh: wmBox, label: 'WORKING MEMORY' });
+  createLabel('WORKING MEMORY (Context Window)', new THREE.Vector3(0, -5.8, 0), dark);
+  createLabel('System Prompt + Task + Stage Outputs', new THREE.Vector3(0, -6.8, 0), muted);
+
+  // Arrow from last stage down to working memory
+  createArrow(new THREE.Vector3(10, -3, 0), new THREE.Vector3(5, -6, 0), dark);
+
+  // Output node
+  const outBox = createBox(16, -2, 0, 4, 2, 2.5, light, 0.2);
+  boxes.push({ mesh: outBox, label: 'OUTPUT' });
+  createLabel('FINAL OUTPUT', new THREE.Vector3(16, -0.8, 0), light);
+
+  // Arrow from synthesis to output
+  createArrow(new THREE.Vector3(6, -2, 0), new THREE.Vector3(14, -2, 0), light);
+
+  // Feedback loop arrow (long-term from output)
+  createArrow(new THREE.Vector3(18, -2, 0), new THREE.Vector3(20, -2, 5), muted);
+  createArrow(new THREE.Vector3(20, -2, 5), new THREE.Vector3(20, 7, 5), muted);
+  createArrow(new THREE.Vector3(20, 7, 5), new THREE.Vector3(-9.5, 7, 0), muted);
+
+  // Pipeline flow labels
+  const labelY = -12;
+  createLabel('WORKFLOW PIPELINE: Left to Right = Sequential Stage Execution', new THREE.Vector3(0, labelY, 0), muted);
+  createLabel('Top-Down: Memory Priority (Long-term -> Session -> Working)', new THREE.Vector3(0, labelY - 1, 0), muted);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+init();
+</script>
+</body>
+</html>

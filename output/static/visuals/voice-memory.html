@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice AI Memory Pipeline</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #fff;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  #info h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ff5f1f;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  #info p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+    letter-spacing: 0.03em;
+  }
+  #legend {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  #tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 20;
+    background: rgba(10,10,15,0.95);
+    border: 1px solid #ff5f1f;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #fff;
+    pointer-events: none;
+    display: none;
+    max-width: 220px;
+    line-height: 1.5;
+  }
+  #tooltip strong { color: #ff5f1f; }
+</style>
+</head>
+<body>
+<div id="info">
+  <h1>Voice AI Memory Pipeline</h1>
+  <p>Drag to orbit &middot; Scroll to zoom &middot; Click nodes for details</p>
+</div>
+<div id="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#ff5f1f"></div>User Speech</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d44000"></div>Agent Response</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3a3a4a"></div>Pipeline Layer</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff2222"></div>Interruption</div>
+</div>
+<div id="tooltip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function() {
+  const COLORS = {
+    user: 0xff5f1f,
+    agent: 0xd44000,
+    layer: 0x2a2a3a,
+    layerBorder: 0x44445a,
+    interruption: 0xff2222,
+    pipe: 0x555566,
+    bg: 0x0a0a0f,
+    grid: 0x1a1a2a,
+    text: 0xffffff,
+    muted: 0x888899,
+    wave: 0xff7030,
+    arrow: 0x666677,
+  };
+
+  let scene, camera, renderer, controls;
+  let nodes = {};
+  let animFrame = 0;
+  const tooltip = document.getElementById('tooltip');
+
+  function init() {
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(COLORS.bg);
+    scene.fog = new THREE.Fog(COLORS.bg, 40, 80);
+
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
+    camera.position.set(0, 8, 30);
+    camera.lookAt(0, 0, 0);
+
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 10;
+    controls.maxDistance = 60;
+    controls.maxPolarAngle = Math.PI * 0.85;
+
+    // Lighting
+    const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+    scene.add(ambient);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(10, 20, 10);
+    scene.add(dirLight);
+    const pointLight = new THREE.PointLight(COLORS.user, 0.5, 30);
+    pointLight.position.set(-5, 5, 5);
+    scene.add(pointLight);
+
+    // Grid
+    const gridHelper = new THREE.GridHelper(50, 50, COLORS.grid, COLORS.grid);
+    gridHelper.position.y = -4;
+    scene.add(gridHelper);
+
+    buildScene();
+    animate();
+
+    window.addEventListener('resize', onResize);
+    renderer.domElement.addEventListener('mousemove', onMouseMove);
+    renderer.domElement.addEventListener('click', onClick);
+  }
+
+  function makeMat(color, emissive, emissiveInt) {
+    return new THREE.MeshStandardMaterial({
+      color: color,
+      emissive: emissive || 0x000000,
+      emissiveIntensity: emissiveInt || 0,
+      metalness: 0.3,
+      roughness: 0.7,
+    });
+  }
+
+  function makeBox(w, h, d, color, emissive, emissiveInt) {
+    const geo = new THREE.BoxGeometry(w, h, d);
+    const mat = makeMat(color, emissive, emissiveInt);
+    return new THREE.Mesh(geo, mat);
+  }
+
+  function makeCylinder(r, h, color, emissive, emissiveInt) {
+    const geo = new THREE.CylinderGeometry(r, r, h, 16);
+    const mat = makeMat(color, emissive, emissiveInt);
+    return new THREE.Mesh(geo, mat);
+  }
+
+  function makeSphere(r, color, emissive, emissiveInt) {
+    const geo = new THREE.SphereGeometry(r, 16, 12);
+    const mat = makeMat(color, emissive, emissiveInt);
+    return new THREE.Mesh(geo, mat);
+  }
+
+  function makeTorus(r, tube, color) {
+    const geo = new THREE.TorusGeometry(r, tube, 8, 24);
+    const mat = makeMat(color);
+    return new THREE.Mesh(geo, mat);
+  }
+
+  function addLine(p1, p2, color, dashed) {
+    const mat = dashed
+      ? new THREE.LineDashedMaterial({ color, dashSize: 0.3, gapSize: 0.15, linewidth: 1 })
+      : new THREE.LineBasicMaterial({ color, linewidth: 1 });
+    const geo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(...p1),
+      new THREE.Vector3(...p2),
+    ]);
+    const line = new THREE.Line(geo, mat);
+    if (dashed) line.computeLineDistances();
+    scene.add(line);
+    return line;
+  }
+
+  function addArrow(from, to, color) {
+    const dir = new THREE.Vector3(to[0] - from[0], to[1] - from[1], to[2] - from[2]);
+    const len = dir.length();
+    const norm = dir.clone().normalize();
+    const origin = new THREE.Vector3(...from);
+    const arrow = new THREE.ArrowHelper(norm, origin, len, color, 0.4, 0.25);
+    scene.add(arrow);
+    return arrow;
+  }
+
+  function label(text, position, size) {
+    size = size || 0.4;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 512;
+    canvas.height = 128;
+    ctx.fillStyle = 'rgba(0,0,0,0)';
+    ctx.clearRect(0, 0, 512, 128);
+    ctx.font = 'bold 36px Segoe UI, sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, 256, 64);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.set(...position);
+    sprite.scale.set(size * 4, size, 1);
+    scene.add(sprite);
+    return sprite;
+  }
+
+  function sublabel(text, position, color, size) {
+    size = size || 0.25;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 512;
+    canvas.height = 96;
+    ctx.clearRect(0, 0, 512, 96);
+    ctx.font = '28px Segoe UI, sans-serif';
+    ctx.fillStyle = color || '#aaaaaa';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, 256, 48);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.set(...position);
+    sprite.scale.set(size * 5, size, 1);
+    scene.add(sprite);
+  }
+
+  function buildScene() {
+    // === LAYER BOXES (horizontal) ===
+    // Y positions: 3.5 (Audio), 1.5 (VAD/ASR), -0.5 (Memory), -2.5 (LLM), -4.5 (TTS)
+
+    const layerDefs = [
+      { y: 3.5, name: 'AUDIO INPUT', color: 0x1a1a2a, w: 22, h: 0.6, d: 4, labelColor: '#ff5f1f' },
+      { y: 1.8, name: 'VAD + ASR', color: 0x1a1a2a, w: 22, h: 0.6, d: 4, labelColor: '#ff5f1f' },
+      { y: 0.0, name: 'MEMORY PIPELINE', color: 0x1a1a2a, w: 22, h: 0.6, d: 4, labelColor: '#ff5f1f' },
+      { y: -1.8, name: 'LLM', color: 0x1a1a2a, w: 22, h: 0.6, d: 4, labelColor: '#ff5f1f' },
+      { y: -3.5, name: 'TTS OUTPUT', color: 0x1a1a2a, w: 22, h: 0.6, d: 4, labelColor: '#ff5f1f' },
+    ];
+
+    layerDefs.forEach(l => {
+      const mesh = makeBox(l.w, l.h, l.d, l.color);
+      mesh.position.set(0, l.y, 0);
+      scene.add(mesh);
+      label(l.name, [0, l.y + 0.7, 0]);
+    });
+
+    // === COMPONENT NODES on each layer ===
+    // Audio Input Layer (y=3.5)
+    const audioX = [-8, -4, 0, 4, 8];
+    audioX.forEach((x, i) => {
+      const sphere = makeSphere(0.4, COLORS.user);
+      sphere.position.set(x, 3.5, 0);
+      scene.add(sphere);
+      sublabel(i === 0 ? '16kHz PCM' : i === 1 ? 'Energy Calc' : i === 2 ? 'VAD Prob' : i === 3 ? 'Chunk Buffer' : 'Timestamp', [x, 3.5 - 0.9, 0], '#888899', 0.22);
+    });
+
+    // VAD + ASR Layer (y=1.8)
+    const asrX = [-8, -4, 0, 4, 8];
+    const asrLabels = ['Silero VAD', 'Speech/Non', 'Partial AST', 'Final AST', 'Deepgram WS'];
+    asrX.forEach((x, i) => {
+      const mesh = makeBox(1.5, 0.5, 1.5, COLORS.layer, i === 2 || i === 3 ? COLORS.user : 0, i === 2 || i === 3 ? 0.3 : 0);
+      mesh.position.set(x, 1.8, 0);
+      scene.add(mesh);
+      sublabel(asrLabels[i], [x, 1.8 - 0.8, 0], '#888899', 0.2);
+    });
+
+    // Memory Pipeline Layer (y=0.0)
+    const memX = [-8, -4, 0, 4, 8];
+    const memLabels = ['Turn Mgr', 'VAD State', 'Transcript Buf', 'Context Win', 'Retrieval'];
+    memX.forEach((x, i) => {
+      const mesh = makeBox(1.5, 0.5, 1.5, COLORS.layer, 0x3333ff, 0.1);
+      mesh.position.set(x, 0.0, 0);
+      scene.add(mesh);
+      sublabel(memLabels[i], [x, 0.0 - 0.8, 0], '#888899', 0.2);
+    });
+
+    // LLM Layer (y=-1.8)
+    const llmX = [-4, 0, 4];
+    const llmLabels = ['GPT-4o', 'Context Prefill', 'Stream Tokens'];
+    llmX.forEach((x, i) => {
+      const mesh = makeBox(2.0, 0.5, 2.0, COLORS.layer, i === 0 ? 0xaaaa44 : 0, i === 0 ? 0.2 : 0);
+      mesh.position.set(x, -1.8, 0);
+      scene.add(mesh);
+      sublabel(llmLabels[i], [x, -1.8 - 0.8, 0], '#888899', 0.2);
+    });
+
+    // TTS Layer (y=-3.5)
+    const ttsX = [-4, 0, 4];
+    const ttsLabels = ['Cartesia Stream', 'Audio Chunks', 'Interrupt Monitor'];
+    ttsX.forEach((x, i) => {
+      const mesh = makeBox(2.0, 0.5, 2.0, COLORS.layer, i === 2 ? COLORS.interruption : COLORS.agent, i === 2 ? 0.3 : 0.25);
+      mesh.position.set(x, -3.5, 0);
+      scene.add(mesh);
+      sublabel(ttsLabels[i], [x, -3.5 - 0.8, 0], '#888899', 0.2);
+    });
+
+    // === FLOW CONNECTIONS (vertical arrows between layers) ===
+    // Audio -> VAD/ASR
+    addArrow([-4, 3.2, 0], [-4, 2.3, 0], COLORS.arrow);
+    addArrow([0, 3.2, 0], [0, 2.3, 0], COLORS.arrow);
+    addArrow([4, 3.2, 0], [4, 2.3, 0], COLORS.arrow);
+
+    // VAD/ASR -> Memory
+    addArrow([0, 1.5, 0], [0, 0.5, 0], COLORS.arrow);
+    addArrow([-4, 1.5, 0], [-4, 0.5, 0], COLORS.arrow);
+
+    // Memory -> LLM
+    addArrow([0, -0.3, 0], [0, -1.5, 0], COLORS.arrow);
+
+    // LLM -> TTS
+    addArrow([0, -2.05, 0], [0, -3.2, 0], COLORS.arrow);
+
+    // === VOICE TURN WAVES (flowing along Z axis) ===
+    // User turn flowing down through pipeline
+    buildVoiceTurnFlow();
+
+    // === INTERRUPTION MARKER ===
+    buildInterruptionMarker();
+
+    // === PIPELINE SIDE LABELS ===
+    const sideLabels = [
+      { x: -14, y: 3.5, text: 'Audio\nPipeline', color: '#666677' },
+      { x: -14, y: 1.8, text: 'Speech\nRecognition', color: '#666677' },
+      { x: -14, y: 0.0, text: 'Memory\nState', color: '#666677' },
+      { x: -14, y: -1.8, text: 'Generation', color: '#666677' },
+      { x: -14, y: -3.5, text: 'Output +\nMonitor', color: '#666677' },
+    ];
+    sideLabels.forEach(sl => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 256; canvas.height = 128;
+      ctx.font = 'bold 32px Segoe UI';
+      ctx.fillStyle = sl.color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const lines = sl.text.split('\n');
+      lines.forEach((line, i) => ctx.fillText(line, 128, 40 + i * 40));
+      const tex = new THREE.CanvasTexture(canvas);
+      const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false });
+      const sprite = new THREE.Sprite(mat);
+      sprite.position.set(sl.x, sl.y, 0);
+      sprite.scale.set(5, 2.5, 1);
+      scene.add(sprite);
+    });
+
+    // === AUDIO WAVEFORM RIBBON (curved flowing through scene) ===
+    buildWaveformRibbon();
+  }
+
+  function buildVoiceTurnFlow() {
+    // Build 3 animated "voice turn" boxes flowing down through the layers
+    const turnColors = [COLORS.user, COLORS.agent, COLORS.user];
+    const turnTexts = ['USER TURN', 'AGENT RESPONSE', 'USER TURN 2'];
+    const turnX = [-2, 2, -1];
+    const turnStartY = 4.2;
+    const layerYs = [3.5, 1.8, 0.0, -1.8, -3.5];
+    const speeds = [0.004, 0.006, 0.005];
+
+    turnX.forEach((tx, ti) => {
+      const color = turnColors[ti];
+
+      // Main turn cylinder
+      const geo = new THREE.CylinderGeometry(0.25, 0.25, 7.5, 12);
+      const mat = new THREE.MeshStandardMaterial({
+        color: color,
+        emissive: color,
+        emissiveIntensity: 0.15,
+        metalness: 0.1,
+        roughness: 0.8,
+        transparent: true,
+        opacity: 0.7,
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(tx, (layerYs[0] + layerYs[layerYs.length - 1]) / 2, 1.5 + ti * 1.2);
+      mesh.userData = { type: 'voiceTurn', turnIndex: ti, speed: speeds[ti], baseY: turnStartY };
+      scene.add(mesh);
+
+      // Turn label
+      sublabel(turnTexts[ti], [tx, turnStartY + 0.8, 1.5 + ti * 1.2], '#ffffff', 0.22);
+
+      // "Complete" marker ring at bottom
+      const ring = makeTorus(0.45, 0.08, color);
+      ring.position.set(tx, layerYs[layerYs.length - 1] - 0.5, 1.5 + ti * 1.2);
+      ring.userData = { type: 'ring', pulse: 0 };
+      scene.add(ring);
+
+      // Arrow between turns (flow indicator)
+      if (ti < 2) {
+        addArrow([tx, layerYs[layerYs.length - 1] - 0.3, 1.5 + ti * 1.2],
+                 [turnX[ti + 1], layerYs[0] + 0.5, 1.5 + (ti + 1) * 1.2],
+                 0x444455);
+      }
+    });
+
+    // Audio wave decoration at top
+    for (let i = 0; i < 12; i++) {
+      const geo = new THREE.SphereGeometry(0.08 + Math.sin(i * 0.5) * 0.06, 6, 6);
+      const mat = new THREE.MeshStandardMaterial({
+        color: COLORS.user,
+        emissive: COLORS.user,
+        emissiveIntensity: 0.3,
+        transparent: true,
+        opacity: 0.5,
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(-8 + i * 1.4, 4.0, 1.5);
+      mesh.userData = { type: 'waveDecor', phase: i * 0.3, baseX: -8 + i * 1.4 };
+      scene.add(mesh);
+    }
+  }
+
+  function buildInterruptionMarker() {
+    // Red sphere and label at interruption point (between TTS output and upper layers)
+    const sphere = makeSphere(0.35, COLORS.interruption, COLORS.interruption, 0.5);
+    sphere.position.set(5, -2.5, 0.5);
+    sphere.userData = { type: 'interrupt', pulse: 0 };
+    scene.add(sphere);
+
+    sublabel('INTERRUPT', [5, -2.5 - 0.8, 0.5], '#ff2222', 0.22);
+
+    // Dashed arrow from interrupt to VAD (feedback loop)
+    const points = [];
+    for (let i = 0; i <= 20; i++) {
+      const t = i / 20;
+      points.push(new THREE.Vector3(
+        5 + t * 0,
+        -2.5 + t * 4.3,
+        0.5
+      ));
+    }
+    const geo = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineDashedMaterial({ color: COLORS.interruption, dashSize: 0.3, gapSize: 0.15 });
+    const line = new THREE.Line(geo, mat);
+    line.computeLineDistances();
+    scene.add(line);
+
+    // Arrowhead at top
+    addArrow([5, 1.8, 0.5], [5, 2.3, 0.5], COLORS.interruption);
+
+    // "RESET" label on feedback line
+    sublabel('Reset Decoder', [5.8, 0.0, 0.5], '#ff4444', 0.2);
+  }
+
+  function buildWaveformRibbon() {
+    // A curved ribbon of small spheres representing audio waveform
+    // flowing through the center of the scene
+    const N = 60;
+    for (let i = 0; i < N; i++) {
+      const t = i / (N - 1);
+      const x = Math.sin(t * Math.PI * 1.5) * 3;
+      const y = 4.5 - t * 9;
+      const z = 0.3;
+      const energy = Math.abs(Math.sin(t * 15) * Math.cos(t * 7));
+
+      const r = 0.05 + energy * 0.12;
+      const geo = new THREE.SphereGeometry(r, 6, 4);
+      const col = t < 0.5 ? COLORS.user : COLORS.agent;
+      const mat = new THREE.MeshStandardMaterial({
+        color: col,
+        emissive: col,
+        emissiveIntensity: 0.2 + energy * 0.3,
+        transparent: true,
+        opacity: 0.5 + energy * 0.4,
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(x, y, z);
+      mesh.userData = { type: 'waveform', phase: i * 0.2, baseY: y, baseX: x };
+      scene.add(mesh);
+    }
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    animFrame++;
+
+    const t = animFrame * 0.016;
+
+    // Animate waveform nodes
+    scene.children.forEach(child => {
+      if (child.userData.type === 'waveform') {
+        const wave = Math.sin(t * 2 + child.userData.phase) * 0.15;
+        child.position.x = child.userData.baseX + wave;
+        child.material.opacity = 0.4 + Math.sin(t * 3 + child.userData.phase) * 0.3;
+      }
+      if (child.userData.type === 'waveDecor') {
+        child.position.y = 4.0 + Math.sin(t * 2 + child.userData.phase) * 0.15;
+      }
+      if (child.userData.type === 'ring') {
+        const pulse = Math.sin(t * 2) * 0.1 + 1.0;
+        child.scale.setScalar(pulse);
+      }
+      if (child.userData.type === 'interrupt') {
+        const pulse = Math.sin(t * 4) * 0.15 + 1.0;
+        child.scale.setScalar(pulse);
+        child.material.emissiveIntensity = 0.3 + Math.sin(t * 4) * 0.2;
+      }
+    });
+
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  function onResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  function onMouseMove(event) {
+    const rect = renderer.domElement.getBoundingClientRect();
+    const mouse = new THREE.Vector2(
+      ((event.clientX - rect.left) / rect.width) * 2 - 1,
+      -((event.clientY - rect.top) / rect.height) * 2 + 1
+    );
+
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(scene.children, true);
+
+    let found = null;
+    for (const hit of intersects) {
+      if (hit.object.userData && hit.object.userData.type) {
+        found = hit.object.userData;
+        break;
+      }
+      if (hit.object.material && hit.object.material.emissive) {
+        found = { name: hit.object.material.color.getHexString() };
+        break;
+      }
+    }
+
+    if (found) {
+      tooltip.style.display = 'block';
+      tooltip.style.left = (event.clientX + 15) + 'px';
+      tooltip.style.top = (event.clientY + 15) + 'px';
+      tooltip.innerHTML = getTooltipHTML(found);
+      renderer.domElement.style.cursor = 'pointer';
+    } else {
+      tooltip.style.display = 'none';
+      renderer.domElement.style.cursor = 'default';
+    }
+  }
+
+  function onClick(event) {
+    const rect = renderer.domElement.getBoundingClientRect();
+    const mouse = new THREE.Vector2(
+      ((event.clientX - rect.left) / rect.width) * 2 - 1,
+      -((event.clientY - rect.top) / rect.height) * 2 + 1
+    );
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(scene.children, true);
+    if (intersects.length > 0) {
+      // Flash effect
+      const obj = intersects[0].object;
+      if (obj.material && obj.material.emissive) {
+        const orig = obj.material.emissiveIntensity;
+        obj.material.emissiveIntensity = 1.0;
+        setTimeout(() => { obj.material.emissiveIntensity = orig; }, 200);
+      }
+    }
+  }
+
+  function getTooltipHTML(data) {
+    if (data.type === 'voiceTurn') {
+      const labels = ['First user utterance enters pipeline', 'Agent generates response', 'Second user turn with context'];
+      return `<strong>Voice Turn ${data.turnIndex + 1}</strong><br>${labels[data.turnIndex] || 'Voice turn segment'}`;
+    }
+    if (data.type === 'interrupt') return `<strong>Interruption Point</strong><br>VAD detects user speech during agent output. Decoder reset signal sent.`;
+    if (data.type === 'ring') return `<strong>Turn Complete</strong><br>Turn committed to conversation history. Added to memory context.`;
+    if (data.type === 'waveform') return `<strong>Audio Frame</strong><br>Individual audio chunk flowing through pipeline. Energy-modulated size.`;
+    if (data.type === 'waveDecor') return `<strong>Audio Energy</strong><br>Visualization of audio energy at input layer.`;
+    return `<strong>Pipeline Component</strong><br>Click for details.`;
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
