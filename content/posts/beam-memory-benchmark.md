@@ -6,13 +6,13 @@ tags: [ai, llm, memory, benchmark, context-window, research]
 status: published
 ---
 
-Large language models can now ingest 1 million tokens. Vendors market this as a solved problem. The BEAM benchmark says otherwise.
+Gemini 3.1, Claude 4.7, and even ChatGPT 5.4 can now ingest 1 million tokens. Vendors market this as a solved problem. The BEAM benchmark does not think so.
 
-BEAM (Benchmark for Evaluating Attention in Memory) is a structured test that places facts at known positions inside a long context and asks models to retrieve them. The results expose a consistent pattern: accuracy is high at the start, drops sharply in the middle, and recovers near the end. This is the "Lost in the Middle" problem, and it gets worse as contexts grow beyond what models were trained on.
+BEAM (Benchmark for Evaluating Attention in Memory) is a structured test that places facts at known positions inside a long context and asks models to retrieve them. The results show a consistent pattern: accuracy is high at the start, drops sharply in the middle, and recovers near the end. This is the "Lost in the Middle" problem, and it gets worse as contexts grow beyond what models were trained on.
 
 I spent time with the BEAM paper, the associated datasets, and the model evaluation results. Here is what the numbers actually say.
 
-##What Beam Actually Measures
+## What BEAM actually measures
 
 BEAM tests three distinct memory tasks. The first is **ordered retrieval**, where the model must recall a fact based on its position in a list. The second is **context extension**, which tests whether models can use relevant information from earlier in the context when answering a question. The third is **surprisal**, measuring how unexpectedly a token appears given its context.
 

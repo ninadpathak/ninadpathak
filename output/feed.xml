@@ -48,12 +48,6 @@
       <pubDate>Apr 19, 2026</pubDate>
     </item>
     <item>
-      <title>Context Windows vs Memory: Why They Are Not the Same Thing</title>
-      <link>https://ninadpathak.com/blog/context-windows-vs-memory-not-the-same-thing/</link>
-      <description>A 1M token context window is not memory. Treating it like one is how you build expensive systems that still forget what they were doing last Tuesday.</description>
-      <pubDate>Apr 19, 2026</pubDate>
-    </item>
-    <item>
       <title>State of AI Agent Memory in 2026</title>
       <link>https://ninadpathak.com/blog/state-of-ai-agent-memory-2026/</link>
       <description>The memory stack for AI agents has exploded into a fragmented mess of competing approaches. Here is what actually works, what is still research, and why the next 18 months will sort the winners from the wreckage.</description>
@@ -124,6 +118,12 @@
       <link>https://ninadpathak.com/blog/local-wasm-vector-benchmarks/</link>
       <description>I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.</description>
       <pubDate>Apr 13, 2026</pubDate>
+    </item>
+    <item>
+      <title>Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomous Repository Refactoring</title>
+      <link>https://ninadpathak.com/blog/agentic-cli-benchmarks/</link>
+      <description>I ran a head-to-head benchmark of Claude Code and Gemini CLI on an M2 Air (16GB), testing their ability to autonomously refactor legacy code and resolve race conditions.</description>
+      <pubDate>Apr 12, 2026</pubDate>
     </item>
   </channel>
 </rss>

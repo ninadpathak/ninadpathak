@@ -216,7 +216,7 @@
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#what-beam-actually-measures">What Beam Actually Measures</a></li>
+<li><a href="#what-beam-actually-measures">What BEAM actually measures</a></li>
 <li><a href="#the-attention-mechanism-is-the-root-cause">The Attention Mechanism Is The Root Cause</a></li>
 <li><a href="#why-1m-context-windows-make-it-worse">Why 1M Context Windows Make It Worse</a></li>
 <li><a href="#importance-weighted-memory-and-what-beam-proposes">Importance-weighted Memory And What Beam Proposes</a></li>
@@ -227,10 +227,10 @@
 
       </nav>
       <div class="post-content">
-        <p>Large language models can now ingest 1 million tokens. Vendors market this as a solved problem. The BEAM benchmark says otherwise.</p>
-<p>BEAM (Benchmark for Evaluating Attention in Memory) is a structured test that places facts at known positions inside a long context and asks models to retrieve them. The results expose a consistent pattern: accuracy is high at the start, drops sharply in the middle, and recovers near the end. This is the "Lost in the Middle" problem, and it gets worse as contexts grow beyond what models were trained on.</p>
+        <p>Gemini 3.1, Claude 4.7, and even ChatGPT 5.4 can now ingest 1 million tokens. Vendors market this as a solved problem. The BEAM benchmark does not think so.</p>
+<p>BEAM (Benchmark for Evaluating Attention in Memory) is a structured test that places facts at known positions inside a long context and asks models to retrieve them. The results show a consistent pattern: accuracy is high at the start, drops sharply in the middle, and recovers near the end. This is the "Lost in the Middle" problem, and it gets worse as contexts grow beyond what models were trained on.</p>
 <p>I spent time with the BEAM paper, the associated datasets, and the model evaluation results. Here is what the numbers actually say.</p>
-<h2 id="what-beam-actually-measures">What Beam Actually Measures</h2>
+<h2 id="what-beam-actually-measures">What BEAM actually measures</h2>
 <p>BEAM tests three distinct memory tasks. The first is <strong>ordered retrieval</strong>, where the model must recall a fact based on its position in a list. The second is <strong>context extension</strong>, which tests whether models can use relevant information from earlier in the context when answering a question. The third is <strong>surprisal</strong>, measuring how unexpectedly a token appears given its context.</p>
 <p>The benchmark uses three model families: GPT-4 with a 128K context window, Claude 3 with 200K, and various open-source models including Mistral and Llama variants. Each model receives documents containing 10 to 100 distinct facts, with specific facts placed at specific positions. The retrieval accuracy is then measured across those positions.</p>
 <p>The findings are striking. When facts appear in the first 20% of the context, retrieval accuracy exceeds 90% across all tested models. When those same facts appear between 40% and 60% of the context, accuracy drops to below 35% for models processing 128K tokens. This is not a gradual decline. It is a sharp valley.</p>
