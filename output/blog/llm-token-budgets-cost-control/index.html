@@ -228,11 +228,11 @@
 
       </nav>
       <div class="post-content">
-        <p>Token costs are the new EC2 bills. I learned this the hard way. A single weekend of heavy debugging with GPT-4 burned $200 before I noticed. A production RAG pipeline serving 10,000 queries per day quietly hit $1,000 per month while I wasn't paying attention. For the first few years of the LLM era, engineers treated inference spend as a black box. Input goes in, output comes out, invoice arrives at the end of the month. That approach works until it doesn't.</p>
+        <p>Token costs are the new EC2 bills. I know this because I burnt $200 on GPT-4 in a single weekend debugging. A production RAG pipeline serving 10,000 queries per day can hit $1,000 per month without anyone noticing until the bill lands. For the first few years of the LLM era, engineers treated inference spend as a black box. Input goes in, output comes out, invoice arrives at the end of the month. That approach works until it doesn't.</p>
 <p>This guide is about making token costs visible, predictable, and controllable. No fluff. Real numbers.</p>
 <h2 id="what-a-token-actually-costs">What a token actually costs</h2>
-<p>Tokens are not bytes. I keep reminding myself this because it's counterintuitive. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.</p>
-<p>Here is the current pricing landscape as of Q2 2026, rounded to three significant figures:</p>
+<p>Tokens are not bytes. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.</p>
+<p>Here is the current pricing landscape as of Q2 2026, rounded to three significant figures. Numbers shift frequently — I check the API pricing pages before architecting around a specific rate. Always.</p>
 <table>
 <thead>
 <tr>
@@ -268,6 +268,11 @@
 <td>$14</td>
 </tr>
 <tr>
+<td>GPT-5.1</td>
+<td>$1.25</td>
+<td>$10</td>
+</tr>
+<tr>
 <td>Claude Opus 4.7</td>
 <td>$5</td>
 <td>$25</td>
@@ -294,7 +299,6 @@
 </tr>
 </tbody>
 </table>
-<p>Numbers shift frequently. I check the API pricing pages before architecting around a specific rate. Always.</p>
 <p>A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds. This is the math that bites you.</p>
 <h2 id="counting-tokens-before-you-spend-them">Counting tokens before you spend them</h2>
 <p>The most basic cost control technique is knowing how many tokens a request will consume before you send it. Every major SDK provides a token counting utility.</p>
@@ -454,7 +458,7 @@
 <p>Cache hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns. I have seen hit rates hit 60% in internal dev tooling where the same questions come up over and over.</p>
 <h2 id="output-token-control">Output token control</h2>
 <p>Input costs dominate for most applications. Output costs matter when your pipeline generates long responses. Code generation, document synthesis, and agentic reasoning all produce large outputs.</p>
-<p>Hard-limit output tokens. Set max_tokens conservatively. A question that can be answered in 50 tokens should never be allowed to generate 500 tokens at $0.15 per 1M.</p>
+<p>Hard-limit output tokens. Set max_tokens conservatively. A question that can be answered in 50 tokens should never be allowed to generate 500 tokens at $0.15 per 1M. I learned this after a single debug session produced $180 in output costs because nobody set a max_tokens limit.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">bounded_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_output</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">,</span>
@@ -464,7 +468,7 @@
     <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
 </code></pre></div>
 
-<p>The model will truncate if the answer requires more tokens. That is preferable to an unbounded bill. I learned this after a single debug session produced $180 in output costs because nobody set a max_tokens limit.</p>
+<p>The model will truncate if the answer requires more tokens. That is preferable to an unbounded bill.</p>
 <h2 id="monitoring-in-production">Monitoring in production</h2>
 <p>Cost control without monitoring is guesswork. Set up per-model, per-endpoint spend tracking.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
@@ -502,7 +506,7 @@
 <p>Most cost control advice focuses on individual request optimization. The harder problem is scale.</p>
 <p>A pipeline that costs $0.001 per request seems cheap. Run it 5 million times per month and it is $5,000. Add a second pipeline at $0.002 per request and you are at $15,000. Three pipelines, 20 million requests, different models across teams, and nobody has the full picture.</p>
 <p>The fix is centralized spend governance. Every LLM call in every service should route through a thin proxy that records token counts and cost. Aggregate by team, by product, by endpoint. Without this visibility, you are managing a budget by looking at your bank balance once a quarter.</p>
-<p>Build the proxy. Instrument every call. Tag every request with a cost center. This is not glamorous work. It is the work that separates teams that get surprised by their invoice from teams that set budgets and hit them.</p>
+<p>Build the proxy. Instrument every call. Tag every request with a cost center. This is not glamorous work. It is the work that separates teams that get surprised by their invoice from teams that set budgets and hit them. I have yet to see a team regret building this too early.</p>
 <h2 id="where-to-cut-first">Where to cut first</h2>
 <p>If you are starting from a position of no cost control, here is the priority order:</p>
 <ol>
@@ -514,7 +518,7 @@
 <li>Build a spend dashboard. Alert on anomalies before they compound.</li>
 </ol>
 <p>The goal is not to use fewer models. It is to use the right model for each task at the right price. That requires visibility, discipline, and the willingness to measure what you spend.</p>
-<p>Token budgets are not optional. They are the cost accounting layer that makes LLM applications sustainable. I have yet to see a team regret building this too early.</p>
+<p>Token budgets are not optional. They are the cost accounting layer that makes LLM applications sustainable.</p>
       </div>
     </div>
   </div>

@@ -92,7 +92,7 @@ Engineers need four types of documentation, and conflating them is a common fail
 
 **Explanation** explores a topic, discusses trade-offs, and provides context. "Why does eventual consistency make debugging harder?" is an explanation article. It does not give steps. It builds understanding.
 
-Most teams produce only reference documentation and wonder why their docs feel cold. Reference material is necessary but insufficient. Engineers need tutorials to get started, how-to guides to unblock themselves, and explanations to build judgment.
+Most teams produce only reference documentation and wonder why their docs feel cold. Reference material is necessary but insufficient. I have seen teams with great reference docs still have terrible developer experience because nobody wrote tutorials.
 
 ## Version control your documentation
 
