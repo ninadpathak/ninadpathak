@@ -268,10 +268,10 @@
 <p>The right evaluation pipeline combines automated metrics with human evaluation.</p>
 <h3 id="automated-metrics-you-can-run-in-ci">Automated Metrics You Can Run in CI</h3>
 <p>Set up automated scoring on every commit:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ragas</span> <span class="kn">import</span> <span class="n">evaluate</span>
-<span class="kn">from</span> <span class="nn">ragas.metrics</span> <span class="kn">import</span> <span class="n">faithfulness</span><span class="p">,</span> <span class="n">answer_relevancy</span><span class="p">,</span> <span class="n">context_precision</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">ragas</span><span class="w"> </span><span class="kn">import</span> <span class="n">evaluate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ragas.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">faithfulness</span><span class="p">,</span> <span class="n">answer_relevancy</span><span class="p">,</span> <span class="n">context_precision</span>
 
-<span class="k">def</span> <span class="nf">evaluate_rag_response</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">contexts</span><span class="p">,</span> <span class="n">ground_truth</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_rag_response</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">contexts</span><span class="p">,</span> <span class="n">ground_truth</span><span class="p">):</span>
     <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">faithfulness</span><span class="p">,</span>
         <span class="n">answer_relevancy</span><span class="p">,</span>
@@ -303,7 +303,7 @@
 <p>Binary factual checks are fast, consistent, and actionable. When I find errors, I escalate to detailed review.</p>
 <h3 id="evaluating-retrieval-in-isolation">Evaluating Retrieval in Isolation</h3>
 <p>Test retrieval separately before touching generation:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate_retrieval</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">k_values</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">evaluate_retrieval</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">k_values</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Measure retrieval quality independent of generation.&quot;&quot;&quot;</span>
 
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
@@ -472,9 +472,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/python-model-predict-function/" class="footer-link">Python model.predict(): The Function That Turns Data Into Decisions</a>
+          <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="footer-link">A Taxonomy of AI Agents That Actually Explains What You Are Building</a>
           <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
-          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
-          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
         </div>
       </div>
 

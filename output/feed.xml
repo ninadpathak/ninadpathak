@@ -6,6 +6,18 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Python model.predict(): The Function That Turns Data Into Decisions</title>
+      <link>https://ninadpathak.com/blog/python-model-predict-function/</link>
+      <description>A practical guide to model.predict() across scikit-learn, Keras, PyTorch, and XGBoost—what it does, how it behaves differently across frameworks, and the gotchas that will bite you in production.</description>
+      <pubDate>Apr 21, 2026</pubDate>
+    </item>
+    <item>
+      <title>A Taxonomy of AI Agents That Actually Explains What You Are Building</title>
+      <link>https://ninadpathak.com/blog/2026-04-21-the-taxonomy-of-ai-agents/</link>
+      <description>Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.</description>
+      <pubDate>Apr 21, 2026</pubDate>
+    </item>
+    <item>
       <title>Memory for Voice AI Agents: What Text Chatbots Cannot Do</title>
       <link>https://ninadpathak.com/blog/memory-for-voice-ai-agents/</link>
       <description>Voice AI agents live or die by how they manage memory across a real-time streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something different.</description>
@@ -112,18 +124,6 @@
       <link>https://ninadpathak.com/blog/uv-package-manager-benchmark/</link>
       <description>I benchmarked Astral uv against Poetry and pip on a 2026 AI dependency stack. Here is how Rust-native tooling reduces build times by 20x.</description>
       <pubDate>Apr 14, 2026</pubDate>
-    </item>
-    <item>
-      <title>100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head</title>
-      <link>https://ninadpathak.com/blog/local-wasm-vector-benchmarks/</link>
-      <description>I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.</description>
-      <pubDate>Apr 13, 2026</pubDate>
-    </item>
-    <item>
-      <title>Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomous Repository Refactoring</title>
-      <link>https://ninadpathak.com/blog/agentic-cli-benchmarks/</link>
-      <description>I ran a head-to-head benchmark of Claude Code and Gemini CLI on an M2 Air (16GB), testing their ability to autonomously refactor legacy code and resolve race conditions.</description>
-      <pubDate>Apr 12, 2026</pubDate>
     </item>
   </channel>
 </rss>

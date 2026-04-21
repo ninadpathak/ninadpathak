@@ -293,7 +293,7 @@
 <p>Sub-agent isolation in this context means two things. First, each agent sees only the context it was explicitly given. A code execution agent does not see the raw web search results. It sees a curated summary written by the web search agent. Second, each agent runs to completion before the next agent starts. There is no concurrent execution where two agents write to the session file simultaneously.</p>
 <p>This sequential isolation eliminates a class of race conditions that plague more loosely coupled multi-agent systems. The cost is latency. If you have four agents that each take thirty seconds, your workflow takes at least two minutes. For research tasks where depth matters more than speed, this trade-off is worth it.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># DeerFlow multi-agent execution loop (simplified)</span>
-<span class="k">def</span> <span class="nf">run_deerflow_workflow</span><span class="p">(</span><span class="n">workflow_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">session_store</span><span class="p">:</span> <span class="n">SessionStore</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_deerflow_workflow</span><span class="p">(</span><span class="n">workflow_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">session_store</span><span class="p">:</span> <span class="n">SessionStore</span><span class="p">):</span>
     <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_config</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
     <span class="n">stages</span> <span class="o">=</span> <span class="n">workflow_config</span><span class="p">[</span><span class="s2">&quot;stages&quot;</span><span class="p">]</span>  <span class="c1"># ordered list of stage configs</span>
 
@@ -343,7 +343,7 @@
 <h2 id="memory-retrieval-at-workflow-initialization">Memory Retrieval At Workflow Initialization</h2>
 <p>When a DeerFlow workflow starts, it does not start with a blank slate. It queries the long-term memory store for relevant content from previous sessions. This is where the vector store or pgvector adapter does its work.</p>
 <p>The retrieval query is built from the workflow task description and any session initialization parameters. DeerFlow embeds the task description, runs similarity search against the memory store, and returns the top-k results. Those results get injected into the working memory before the first agent runs.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initialize_workflow</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialize_workflow</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
     <span class="c1"># Retrieve relevant long-term context</span>
     <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-embedding-3-large&quot;</span><span class="p">)</span>
     <span class="n">relevant_memories</span> <span class="o">=</span> <span class="n">vector_store</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
@@ -453,6 +453,10 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-21</div>
+        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+      </a>
       <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
@@ -460,10 +464,6 @@
       <a href="/blog/rag-vs-memory/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
-      </a>
-      <a href="/blog/memory-hierarchy-in-ai-systems/" class="related-card">
-        <div class="related-card-date">2026-04-19</div>
-        <div class="related-card-title">Memory Hierarchy in AI Systems: From Sensory to Semantic</div>
       </a>
     </div>
   </div>
@@ -545,9 +545,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/python-model-predict-function/" class="footer-link">Python model.predict(): The Function That Turns Data Into Decisions</a>
+          <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="footer-link">A Taxonomy of AI Agents That Actually Explains What You Are Building</a>
           <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
-          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
-          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
         </div>
       </div>
 

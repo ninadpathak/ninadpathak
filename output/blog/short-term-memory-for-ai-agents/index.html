@@ -234,11 +234,11 @@
 <p>The context window is a contiguous token buffer that feeds into the transformer's attention mechanism. When you send a 128k token context to Claude or GPT-4o, the model does not "remember" everything equally. Attention scores distribute across all tokens, but research has consistently shown that performance degrades for information placed in the middle of long contexts.</p>
 <p>A context window has three properties you must track as an agent engineer. First, total capacity in tokens. GPT-4o supports 128k tokens. Claude 3.5 Sonnet supports 200k tokens. Gemini 1.5 Pro supports 1 million tokens. Second, current fill level, which is the sum of your system prompt, conversation history, retrieved documents, and scratchpad. Third, headroom, which is the remaining capacity for the next response and tool call arguments.</p>
 <p>I track fill level programmatically in every agent I build. Here is the pattern:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">estimate_tokens</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">estimate_tokens</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Rough token estimation. Use tiktoken for production.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span>  <span class="c1"># rough approximation for English</span>
 
-<span class="k">def</span> <span class="nf">build_context_window</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_context_window</span><span class="p">(</span>
     <span class="n">system_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">conversation_history</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
     <span class="n">retrieved_context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
@@ -282,18 +282,18 @@
 <p>The second solution is a priority queue for messages. You score each message by recency, user importance, and semantic relevance to the current task. Then you fill the context window with the highest-scoring items. This requires a retriever or an embedding model to compute relevance scores, which adds latency and cost.</p>
 <p>The third solution is summarization-based compression. You periodically summarize the conversation history into a condensed form that fits in fewer tokens. This preserves context across many turns but introduces summarization artifacts and latency. You also need a separate model or prompt to perform the summarization.</p>
 <p>I use a combination for production agents. Recency gets the highest weight, but I also boost messages that match keywords in the current user query. Here is a scoring function I use:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">Message</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Message</span><span class="p">:</span>
     <span class="n">role</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">content</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span>
     <span class="n">user_mentioned</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">def</span> <span class="nf">score_message</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">current_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">query_keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">score_message</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">current_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">query_keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Score a message for context window inclusion.</span>
 
@@ -315,7 +315,7 @@
 
     <span class="k">return</span> <span class="p">(</span><span class="n">recency_score</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">role_score</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">)</span> <span class="o">+</span> <span class="n">keyword_boost</span> <span class="o">+</span> <span class="n">mention_boost</span>
 
-<span class="k">def</span> <span class="nf">select_messages</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">select_messages</span><span class="p">(</span>
     <span class="n">messages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Message</span><span class="p">],</span>
     <span class="n">current_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
     <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -357,10 +357,10 @@
 <p>I track token usage per session in production. Every agent session gets a running tally of context window fill percentage, and I log warning events when fill exceeds 75 percent. That gives me data to tune the budget allocation over time.</p>
 <p>The overflow strategy matters more than the raw budget size. An agent with a 32k context window and smart eviction will outperform an agent with 128k and naive truncation. The eviction strategy determines which information survives.</p>
 <p>Your episodic memory layer should capture summaries of every session. I use a structured format:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">asdict</span>
 
 <span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">SessionSummary</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SessionSummary</span><span class="p">:</span>
     <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span>
@@ -370,7 +370,7 @@
     <span class="n">unresolved_issues</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">user_preferences</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 
-<span class="k">def</span> <span class="nf">summarize_session</span><span class="p">(</span><span class="n">messages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SessionSummary</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">summarize_session</span><span class="p">(</span><span class="n">messages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SessionSummary</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a session summary from message history.</span>
 
@@ -434,6 +434,10 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-21</div>
+        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+      </a>
       <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
@@ -441,10 +445,6 @@
       <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">How Memory Works in DeerFlow</div>
-      </a>
-      <a href="/blog/rag-vs-memory/" class="related-card">
-        <div class="related-card-date">2026-04-19</div>
-        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
       </a>
     </div>
   </div>
@@ -526,9 +526,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/python-model-predict-function/" class="footer-link">Python model.predict(): The Function That Turns Data Into Decisions</a>
+          <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="footer-link">A Taxonomy of AI Agents That Actually Explains What You Are Building</a>
           <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
-          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
-          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
         </div>
       </div>
 

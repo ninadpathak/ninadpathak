@@ -283,7 +283,7 @@
 <h2 id="the-memory-database-sqlite-at-claudememorydb">The memory database: SQLite at ~/.claude/memory.db</h2>
 <p>When you run Claude Code with the <code>--memory</code> flag, the agent gains the ability to store and retrieve information across sessions using a local SQLite database. Without this flag, the database does not exist. I verified this on my system: running <code>ls ~/.claude/</code> showed no <code>memory.db</code> file until I explicitly initialized memory with the <code>--memory</code> flag.</p>
 <p>The database lives at <code>~/.claude/memory.db</code> and gets created automatically on first use. The schema is straightforward.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
 
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;/home/ubuntu/.claude/memory.db&#39;</span><span class="p">)</span>
 <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
@@ -455,6 +455,10 @@ sqlite3<span class="w"> </span>~/.claude/memory.db<span class="w"> </span><span 
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-21</div>
+        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+      </a>
       <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
@@ -462,10 +466,6 @@ sqlite3<span class="w"> </span>~/.claude/memory.db<span class="w"> </span><span 
       <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">How Memory Works in DeerFlow</div>
-      </a>
-      <a href="/blog/rag-vs-memory/" class="related-card">
-        <div class="related-card-date">2026-04-19</div>
-        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
       </a>
     </div>
   </div>
@@ -547,9 +547,9 @@ sqlite3<span class="w"> </span>~/.claude/memory.db<span class="w"> </span><span 
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/python-model-predict-function/" class="footer-link">Python model.predict(): The Function That Turns Data Into Decisions</a>
+          <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="footer-link">A Taxonomy of AI Agents That Actually Explains What You Are Building</a>
           <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
-          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
-          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
         </div>
       </div>
 

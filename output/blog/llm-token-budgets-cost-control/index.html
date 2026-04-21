@@ -302,7 +302,7 @@
 <p>A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds. This is the math that bites you.</p>
 <h2 id="counting-tokens-before-you-spend-them">Counting tokens before you spend them</h2>
 <p>The most basic cost control technique is knowing how many tokens a request will consume before you send it. Every major SDK provides a token counting utility.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">anthropic</span> <span class="kn">import</span> <span class="n">Anthropic</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">anthropic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Anthropic</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">()</span>
 
@@ -320,7 +320,7 @@
 </code></pre></div>
 
 <p>OpenAI provides the same capability:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tiktoken</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">tiktoken</span>
 
 <span class="n">encoding</span> <span class="o">=</span> <span class="n">tiktoken</span><span class="o">.</span><span class="n">get_encoding</span><span class="p">(</span><span class="s2">&quot;claude&quot;</span><span class="p">)</span>
 <span class="n">tokens</span> <span class="o">=</span> <span class="n">encoding</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;Explain the difference between a mutex and a semaphore.&quot;</span><span class="p">)</span>
@@ -331,21 +331,21 @@
 <h2 id="building-a-token-budget-system">Building a token budget system</h2>
 <p>Raw token counting is table stakes. A real budget system needs three components: a budget allocation per time window, a running tally, and a circuit breaker when limits are hit.</p>
 <p>Here is a lightweight implementation I have used in production:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Lock</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lock</span>
 
 <span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">TokenBudget</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TokenBudget</span><span class="p">:</span>
     <span class="n">max_tokens_per_minute</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">window_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span>
 
-    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">used_tokens</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">window_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">consume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">consume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the tokens can be consumed, False if budget is exceeded.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
             <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -359,7 +359,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">used_tokens</span> <span class="o">+=</span> <span class="n">token_count</span>
             <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">def</span> <span class="nf">wait_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wait_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Seconds to wait until enough budget is available.&quot;&quot;&quot;</span>
         <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_start</span>
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_seconds</span> <span class="o">-</span> <span class="n">elapsed</span><span class="p">)</span>
@@ -368,7 +368,7 @@
 <p>Apply it to your LLM calls:</p>
 <div class="highlight"><pre><span></span><code><span class="n">budget</span> <span class="o">=</span> <span class="n">TokenBudget</span><span class="p">(</span><span class="n">max_tokens_per_minute</span><span class="o">=</span><span class="mi">500_000</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">llm_with_budget</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gpt-5.4&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">llm_with_budget</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gpt-5.4&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">estimated</span> <span class="o">=</span> <span class="n">estimate_tokens</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">budget</span><span class="o">.</span><span class="n">consume</span><span class="p">(</span><span class="n">estimated</span><span class="p">):</span>
@@ -384,8 +384,8 @@
 <p>The single most effective cost reduction technique is sending fewer tokens. Every token you remove from the input is a token you do not pay for twice.</p>
 <p>Three compression strategies work well in practice.</p>
 <p><strong>Truncation with semantic loss detection.</strong> Rather than blindly truncating context at a token limit, identify and preserve the most relevant chunks. Use an embedding similarity search to rank chunks before inclusion.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compress_context</span><span class="p">(</span><span class="n">chunks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="kn">from</span> <span class="nn">anthropic</span> <span class="kn">import</span> <span class="n">Anthropic</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compress_context</span><span class="p">(</span><span class="n">chunks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">anthropic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Anthropic</span>
     <span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">()</span>
 
     <span class="c1"># Score each chunk against the query</span>
@@ -410,7 +410,7 @@
 
 <p><strong>System prompt minimization.</strong> System prompts accumulate. A typical engineering team starts with a 200-token system prompt. Six months later it is 1,500 tokens and nobody remembers why half of it exists. I audit system prompts quarterly. Remove every instruction that the model follows without being told.</p>
 <p><strong>LLM distillation for routing.</strong> Route simple queries to cheap models. Route complex ones to premium models. The routing itself can be done by an LLM:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">route_query</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">route_query</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">routing_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    Classify this query as &#39;simple&#39; or &#39;complex&#39;.</span>
 <span class="s2">    Simple: factual recall, short answers, well-defined tasks.</span>
@@ -459,7 +459,7 @@
 <h2 id="output-token-control">Output token control</h2>
 <p>Input costs dominate for most applications. Output costs matter when your pipeline generates long responses. Code generation, document synthesis, and agentic reasoning all produce large outputs.</p>
 <p>Hard-limit output tokens. Set max_tokens conservatively. A question that can be answered in 50 tokens should never be allowed to generate 500 tokens at $0.15 per 1M. I learned this after a single debug session produced $180 in output costs because nobody set a max_tokens limit.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">bounded_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_output</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">bounded_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_output</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-20250514&quot;</span><span class="p">,</span>
         <span class="n">max_tokens</span><span class="o">=</span><span class="n">max_output</span><span class="p">,</span>
@@ -471,11 +471,11 @@
 <p>The model will truncate if the answer requires more tokens. That is preferable to an unbounded bill.</p>
 <h2 id="monitoring-in-production">Monitoring in production</h2>
 <p>Cost control without monitoring is guesswork. Set up per-model, per-endpoint spend tracking.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="k">class</span> <span class="nc">SpendTracker</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SpendTracker</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;llm_spend&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">daily_spend</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_prices</span> <span class="o">=</span> <span class="p">{</span>
@@ -486,7 +486,7 @@
             <span class="s2">&quot;gemini-3.1-pro&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mf">2.00</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mf">12.00</span><span class="p">},</span>
         <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">prices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_prices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
         <span class="n">cost</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_tokens</span> <span class="o">/</span> <span class="mi">1_000_000</span> <span class="o">*</span> <span class="n">prices</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">]</span> <span class="o">+</span>
                 <span class="n">output_tokens</span> <span class="o">/</span> <span class="mi">1_000_000</span> <span class="o">*</span> <span class="n">prices</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">])</span>
@@ -528,6 +528,10 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-21</div>
+        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+      </a>
       <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
@@ -535,10 +539,6 @@
       <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">How Memory Works in DeerFlow</div>
-      </a>
-      <a href="/blog/rag-vs-memory/" class="related-card">
-        <div class="related-card-date">2026-04-19</div>
-        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
       </a>
     </div>
   </div>
@@ -620,9 +620,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/python-model-predict-function/" class="footer-link">Python model.predict(): The Function That Turns Data Into Decisions</a>
+          <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="footer-link">A Taxonomy of AI Agents That Actually Explains What You Are Building</a>
           <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
-          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
-          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
         </div>
       </div>
 

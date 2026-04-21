@@ -249,23 +249,23 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
 <p>The capacity of short-term memory is your context window size. For GPT-4o, that is 128K tokens. For Claude 3.5 Sonnet, that is 200K tokens. For Gemini 1.5 Pro, that is 1 million tokens. The numbers keep growing, but the fundamental problem does not change: you cannot fit everything you want to remember into this window.</p>
 <p>The selection policy for what gets kept in short-term memory is where the engineering gets interesting. Most systems use recency as the primary signal. Newer content stays, older content gets evicted. But recency is a poor proxy for importance. A message from three turns ago that established a user preference is more important than a message from ten turns ago about an unrelated topic.</p>
 <p>Importance-weighted eviction performs significantly better than recency-only. Here is the pattern I use in production.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 
 <span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">MemoryItem</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MemoryItem</span><span class="p">:</span>
     <span class="n">content</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">importance</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">timestamp</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">access_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">def</span> <span class="nf">importance_score</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MemoryItem</span><span class="p">,</span> <span class="n">current_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">importance_score</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MemoryItem</span><span class="p">,</span> <span class="n">current_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="n">recency</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">current_time</span> <span class="o">-</span> <span class="n">item</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span> <span class="o">/</span> <span class="mi">300</span><span class="p">)</span>
     <span class="n">importance</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">importance</span>
     <span class="n">access</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">access_count</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
     <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">importance</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">recency</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">access</span>
 
-<span class="k">def</span> <span class="nf">select_for_context_window</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">select_for_context_window</span><span class="p">(</span>
     <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryItem</span><span class="p">],</span>
     <span class="n">budget</span><span class="p">:</span> <span class="nb">int</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MemoryItem</span><span class="p">]:</span>
@@ -280,8 +280,8 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
 <p>Episodic memory stores particular events or interactions. In an AI system, this maps to session logs, conversation transcripts, and event sequences. The defining characteristic is that episodic memory is indexed by time and context, not by semantic similarity.</p>
 <p>When a user asks "what did we discuss about the API design last Tuesday?", that is an episodic retrieval problem. The system needs to find the session from last Tuesday and extract the relevant portion. Vector similarity search on a flat embedding store is a poor fit for this. You need time-based indexing with semantic filtering on top.</p>
 <p>The implementation I use stores session summaries with timestamps and topic tags. Individual turns get embedded and stored with a session ID foreign key. Retrieval first narrows by time range and topic, then does semantic similarity within that subset.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sqlite3</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;episodic_memory.db&#39;</span><span class="p">)</span>
 <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
@@ -293,7 +293,7 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
 <span class="s2">&quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;my-project&#39;</span><span class="p">,</span> <span class="s1">&#39;Discussed API versioning strategy...&#39;</span><span class="p">,</span> <span class="s1">&#39;api,design,v1&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
 
 <span class="c1"># Retrieve sessions by time range and topic</span>
-<span class="k">def</span> <span class="nf">get_relevant_sessions</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">days_back</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_relevant_sessions</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">days_back</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">):</span>
     <span class="n">cutoff</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days_back</span><span class="p">)</span>
     <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">        SELECT summary, started_at FROM sessions</span>
@@ -323,22 +323,22 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
 <p>MemGPT takes a different approach, treating memory as a managed external store with explicit summary and retrieval steps. The self-managed memory loop is clever, but the inconsistency in production is real. I have seen the memory system discard critical context mid-session because the summary threshold was crossed at an awkward moment.</p>
 <p>The pattern I have converged on uses tiered summarization with importance-gated promotion. Items start in short-term memory. Every N turns, an importance score is computed. Items above a threshold get promoted to episodic memory as compressed summaries. Items below the threshold get discarded.</p>
 <p>Here is the core of the promotion logic.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">MemoryItem</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MemoryItem</span><span class="p">:</span>
     <span class="n">content</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">importance</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">turns_old</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">access_count</span><span class="p">:</span> <span class="nb">int</span>
 
-<span class="k">def</span> <span class="nf">should_promote_to_episodic</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MemoryItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">should_promote_to_episodic</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MemoryItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="c1"># Must be important AND accessed recently OR very old</span>
     <span class="n">importance_gate</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">importance</span> <span class="o">&gt;</span> <span class="mf">0.6</span>
     <span class="n">recency_gate</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">access_count</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">item</span><span class="o">.</span><span class="n">turns_old</span> <span class="o">&gt;=</span> <span class="mi">5</span>
     <span class="k">return</span> <span class="n">importance_gate</span> <span class="ow">and</span> <span class="n">recency_gate</span>
 
-<span class="k">def</span> <span class="nf">compress_for_episodic</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MemoryItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compress_for_episodic</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">MemoryItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="c1"># Summarize to 2-3 sentences</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">turns_old</span><span class="si">}</span><span class="s2"> turns ago]: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span>
 </code></pre></div>
@@ -364,6 +364,10 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-21</div>
+        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+      </a>
       <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
@@ -371,10 +375,6 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
       <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">How Memory Works in DeerFlow</div>
-      </a>
-      <a href="/blog/rag-vs-memory/" class="related-card">
-        <div class="related-card-date">2026-04-19</div>
-        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
       </a>
     </div>
   </div>
@@ -456,9 +456,9 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/python-model-predict-function/" class="footer-link">Python model.predict(): The Function That Turns Data Into Decisions</a>
+          <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="footer-link">A Taxonomy of AI Agents That Actually Explains What You Are Building</a>
           <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
-          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
-          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
         </div>
       </div>
 

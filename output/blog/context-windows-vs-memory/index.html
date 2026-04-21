@@ -268,9 +268,9 @@
 <p>One-shot document processing is another legitimate use. You have a 200-page PDF and you want the model to answer questions about it. Putting the entire document in context and asking questions is reasonable, provided the document fits and the questions require understanding the whole thing.</p>
 <p>In-context learning is the third case. When you give the model examples of the output format you want within the context itself, you are using context as a demonstration mechanism. This is powerful for tasks where you cannot fine-tune but need consistent output formatting.</p>
 <p>Here is the cost breakdown in Python. This is what paying for long context actually looks like in terms of FLOPs:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">math</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
-<span class="k">def</span> <span class="nf">estimate_attention_flops</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">estimate_attention_flops</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rough FLOPs for the attention computation in one transformer layer.</span>
 <span class="sd">    This covers Q, K, V projections and the attention matrix computation.</span>
@@ -368,6 +368,10 @@ Sequence length 131072: 573,939,298,771,456 FLOPs, ~1434.85ms
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-21</div>
+        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+      </a>
       <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
@@ -375,10 +379,6 @@ Sequence length 131072: 573,939,298,771,456 FLOPs, ~1434.85ms
       <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">How Memory Works in DeerFlow</div>
-      </a>
-      <a href="/blog/rag-vs-memory/" class="related-card">
-        <div class="related-card-date">2026-04-19</div>
-        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
       </a>
     </div>
   </div>
@@ -460,9 +460,9 @@ Sequence length 131072: 573,939,298,771,456 FLOPs, ~1434.85ms
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/python-model-predict-function/" class="footer-link">Python model.predict(): The Function That Turns Data Into Decisions</a>
+          <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="footer-link">A Taxonomy of AI Agents That Actually Explains What You Are Building</a>
           <a href="/blog/memory-for-voice-ai-agents/" class="footer-link">Memory for Voice AI Agents: What Text Chatbots Cannot Do</a>
-          <a href="/blog/how-memory-works-in-deerflow/" class="footer-link">How Memory Works in DeerFlow</a>
-          <a href="/blog/rag-vs-memory/" class="footer-link">RAG vs Memory: What AI Developers Need to Know</a>
         </div>
       </div>
 
