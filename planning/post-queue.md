@@ -70,6 +70,16 @@ Posts are published one per day. Claude picks the next post, runs the experiment
     - Primary Keyword: learnable reasoning tokens
     - HN Hook: Stop putting CoT at the start. I implemented dynamic thinking tokens and saved 20% on compute.
 
+31. **A Taxonomy of AI Agents That Actually Explains What You Are Building**
+    - Published: 2026-04-21
+    - Slug: the-taxonomy-of-ai-agents
+    - Cluster: AI Agents Hub (Cluster 1)
+
+32. **Why AI Agents Keep Failing in Production and What the Field Is Doing About It**
+    - Published: 2026-04-22
+    - Slug: why-ai-agents-keep-failing-in-production
+    - Cluster: AI Agents Hub (Cluster 1)
+
 ## Writing & Visual Rules (V4.0)
 
 - **Word Count**: 3000+ words.

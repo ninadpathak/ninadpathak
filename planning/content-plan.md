@@ -26,7 +26,7 @@ The authoritative center. Every AI agents article links here or to a related hub
 | 3 | **existing** | agent-harnesses | Agent Harnesses: What Holds an AI Agent Together | ai agent architecture | Hub pillar |
 | 4 | **existing** | agentic-cli-benchmarks | Agentic CLI Benchmarks: Claude Code vs Gemini CLI | agentic cli benchmarks | Hub pillar |
 | 5 | written: 2026-04-21 | the-taxonomy-of-ai-agents | A Taxonomy of AI Agents That Actually Explains What You Are Building | types of ai agents | Core hub article |
-| 6 | new | why-ai-agents-keep-failing-in-production | Why AI Agents Keep Failing in Production and What the Field Is Doing About It | ai agent failures production | Links to production-ai-agent-errors |
+| 6 | written: 2026-04-22 | why-ai-agents-keep-failing-in-production | Why AI Agents Keep Failing in Production and What the Field Is Doing About It | ai agent failures production | Links to production-ai-agent-errors |
 | 7 | new | agent-loop-anatomy | The Anatomy of an Agent Loop: Perceive, Think, Act, Remember | agent loop architecture | Links to agent-harnesses |
 | 8 | new | agent-vs-ai-assistant | When to Build an Agent and When to Build a Smarter Assistant | agent vs assistant | Hub intro for new readers |
 | 9 | new | the-agent-design-space | The Agent Design Space: A Map of What Engineers Are Actually Building | ai agent design patterns | Survey article, links to most spokes |

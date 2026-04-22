@@ -19,16 +19,16 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Time to First Token (ttft): the Metric That Determines Ai Snappiness | Ninad Pathak</title>
-  <meta name="description" content="Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.">
+  <title>Why AI Agents Keep Failing in Production and What the Field Is Doing About It | Ninad Pathak</title>
+  <meta name="description" content="I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="Time to First Token (ttft): the Metric That Determines Ai Snappiness">
-  <meta property="og:description" content="Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.">
-  <meta property="og:url"         content="https://ninadpathak.com/blog/time-to-first-token-ttft/">
+  <meta property="og:title"       content="Why AI Agents Keep Failing in Production and What the Field Is Doing About It">
+  <meta property="og:description" content="I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/2026-04-22-why-ai-agents-keep-failing-in-production/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Twitter -->
@@ -39,7 +39,7 @@
   <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://ninadpathak.com/blog/time-to-first-token-ttft/">
+  <link rel="canonical" href="https://ninadpathak.com/blog/2026-04-22-why-ai-agents-keep-failing-in-production/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -73,15 +73,15 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Time to First Token (ttft): the Metric That Determines Ai Snappiness",
-  "description": "Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.",
+  "headline": "Why AI Agents Keep Failing in Production and What the Field Is Doing About It",
+  "description": "I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
     "url": "https://ninadpathak.com"
   },
-  "datePublished": "2026-03-08",
-  "dateModified": "2026-03-08",
+  "datePublished": "2026-04-22",
+  "dateModified": "2026-04-22",
   "publisher": {
     "@type": "Organization",
     "name": "Ninad Pathak",
@@ -92,7 +92,7 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://ninadpathak.com/blog/time-to-first-token-ttft/"
+    "@id": "https://ninadpathak.com/blog/2026-04-22-why-ai-agents-keep-failing-in-production/"
   }
 }
 </script>
@@ -116,8 +116,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Time to First Token (ttft): the Metric That Determines Ai Snappiness",
-      "item": "https://ninadpathak.com/blog/time-to-first-token-ttft/"
+      "name": "Why AI Agents Keep Failing in Production and What the Field Is Doing About It",
+      "item": "https://ninadpathak.com/blog/2026-04-22-why-ai-agents-keep-failing-in-production/"
     }
   ]
 }
@@ -183,7 +183,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">Time to First Token (ttft): the Metric That Determines Ai Snappiness</li>
+      <li class="breadcrumb-item current" aria-current="page">Why AI Agents Keep Failing in Production and What the Field Is Doing About It</li>
     </ol>
   </div>
 </nav>
@@ -193,16 +193,16 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
-        <span class="post-meta-date">Mar 08, 2026</span>
+        <span class="post-meta-date">Apr 22, 2026</span>
         <span class="post-meta-sep">·</span>
-        <span class="post-meta-time">3 min read</span>
+        <span class="post-meta-time">4 min read</span>
       </div>
-      <h1 class="post-title">Time to First Token (ttft): the Metric That Determines Ai Snappiness</h1>
-      <p class="lead">Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.</p>
+      <h1 class="post-title">Why AI Agents Keep Failing in Production and What the Field Is Doing About It</h1>
+      <p class="lead">I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.</p>
       <div class="post-tags">
-        <span class="tag">ai</span>
-        <span class="tag">llm</span>
-        <span class="tag">infrastructure</span>
+        <span class="tag">ai agents</span>
+        <span class="tag">production</span>
+        <span class="tag">reliability</span>
       </div>
     </div>
   </header>
@@ -213,61 +213,50 @@
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#what-ttft-actually-measures">What TTFT actually measures</a></li>
-<li><a href="#ttft-is-not-the-same-as-throughput">TTFT is not the same as throughput</a></li>
-<li><a href="#model-size-is-the-first-real-lever">Model size is the first real lever</a></li>
-<li><a href="#a-practical-order-for-optimization">A practical order for optimization</a></li>
-<li><a href="#how-to-measure-without-fooling-yourself">How to measure without fooling yourself</a></li>
+<li><a href="#agents-fail-because-the-loop-is-not-where-you-think-it-is">Agents fail because the loop is not where you think it is</a></li>
+<li><a href="#context-window-exhaustion-is-the-silent-killer">Context window exhaustion is the silent killer</a></li>
+<li><a href="#multi-agent-systems-amplify-every-failure-mode">Multi-agent systems amplify every failure mode</a></li>
+<li><a href="#tool-use-introduces-failures-your-tests-never-catch">Tool use introduces failures your tests never catch</a></li>
+<li><a href="#what-the-field-is-doing-about-it">What the field is doing about it</a></li>
+<li><a href="#what-you-should-do-today">What you should do today</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>Interactive AI applications live or die by perceived latency. A model might generate 100 tokens per second. Such speed is irrelevant if the user waits five seconds for the stream to start. Time to First Token (TTFT) is the metric that determines if your application feels "alive" or broken.</p>
-<p>Understanding the components of TTFT is vital for performance engineering. It is not a single number. It is the result of a complex pipeline involving networking and queueing and model prefill.</p>
-<h2 id="what-ttft-actually-measures">What TTFT actually measures</h2>
-<p>TTFT measures the interval between a user sending a request and receiving the first generated token. This is different from "tokens per second," which measures the generation speed once the stream has started.</p>
-<p>Prefilling the prompt is the primary driver of TTFT. The model must process all input tokens to build the initial KV cache. Such computation is a "one-time tax" paid at the start of every request. Longer prompts lead directly to higher TTFT.</p>
-<h2 id="ttft-is-not-the-same-as-throughput">TTFT is not the same as throughput</h2>
-<p>High throughput is important for batch tasks like document parsing. Interactive chat requires low TTFT. You can often trade one for the other.</p>
-<p>Optimizing for throughput usually involves increasing batch sizes. Such a strategy allows the GPU to work more efficiently but increases the wait time for individual requests. Optimizing for TTFT requires smaller batches or dedicated compute resources to ensure immediate processing.</p>
-<h2 id="model-size-is-the-first-real-lever">Model size is the first real lever</h2>
-<p>The size of the model determines the baseline TTFT. A 7B parameter model will always generate the first token faster than a 400B model on identical hardware. This is because the smaller model requires fewer memory loads to process the input.</p>
-<p>Choosing a smaller "distilled" model is the most effective way to drop TTFT if your reasoning requirements allow it. Many teams use a small model for the initial response and a larger model for background tasks. Such an architecture provides immediate feedback to the user without sacrificing depth.</p>
-<h2 id="a-practical-order-for-optimization">A practical order for optimization</h2>
-<p>Follow this hierarchy when tasked with reducing latency in production.</p>
-<p><strong>Model Selection.</strong> Start by choosing the smallest model that meets your quality bar. This is the "low-hanging fruit" of latency work.</p>
-<p><strong>Prompt Caching.</strong> Use caching to eliminate the prefill tax for static context. This can drop TTFT by 80% for repeated prefixes.</p>
-<p><strong>Speculative Decoding.</strong> Use a draft model to speed up the verification step. Such a technique improves snappiness by predicting multiple tokens in parallel.</p>
-<p><strong>Quantization.</strong> Reduce the precision of model weights to speed up memory loads. Moving from FP16 to INT8 or FP8 provides a meaningful boost with minimal accuracy loss.</p>
-<h2 id="how-to-measure-without-fooling-yourself">How to measure without fooling yourself</h2>
-<p>Do not rely on averages. Latency is defined by the "tail." Measure your p95 and p99 TTFT to understand what your unluckiest users are experiencing.</p>
-<p>Track TTFT alongside prompt length. A p95 of 500ms is great for a 1k token prompt. Such a number is impossible for a 100k token prompt without caching. Successful engineers build dashboards that normalize latency metrics by context volume.</p>
-<p>Perception is reality in AI engineering. You win when the first token appears before the user has finished their thought. Focus on TTFT to build applications that feel like magic.</p>
+        <p>I keep seeing the same failures in production AI agents. Different companies, different frameworks, same root causes. The field is starting to converge on solutions, but most teams are still catching up.</p>
+<p>The failures cluster into four categories. I wrote about the specific error patterns in my post on <a href="/articles/production-ai-agent-errors">production AI agent errors</a> if you want the taxonomy. This piece is about why the failures happen in the first place and what actually helps.</p>
+<h2 id="agents-fail-because-the-loop-is-not-where-you-think-it-is">Agents fail because the loop is not where you think it is</h2>
+<p>Most engineers assume the agent loop runs in their code. It does not. The loop runs inside the model's forward pass. Your code orchestrates around it, but the decisions happen inside a black box you cannot inspect.</p>
+<p>This means two things. First, the model can drift mid-loop. I have seen agents start a task, get partway through, and then silently switch goal framings because the context shifted under it. Second, you cannot set a hard budget on loop iterations the way you would on a while loop in normal code.</p>
+<p>The <a href="/articles/the-taxonomy-of-ai-agents">taxonomy of AI agents I wrote</a> covers the structural difference between reflex agents and deliberative ones. The deliberative ones fail in different ways than the reflex ones. You need to know which category you are building.</p>
+<h2 id="context-window-exhaustion-is-the-silent-killer">Context window exhaustion is the silent killer</h2>
+<p>Agents accumulate state in the context window. The longer a session runs, the more tokens get spent on history, tool results, and intermediate reasoning. Eventually the context fills up.</p>
+<p>I have watched a customer support agent start responding correctly for the first 40 turns of a conversation. Then the context window starts compressing. The model loses access to the early part of the conversation. The agent begins giving contradictory answers because it literally cannot see what it said 30 turns ago.</p>
+<p><a href="/articles/short-term-memory-for-ai-agents">Short-term memory for AI agents</a> covers the mechanics of how this happens. The fix is not to give agents bigger context windows. The math on inference cost makes that prohibitive at scale. The fix is explicit memory management with eviction policies, which most frameworks implement badly or not at all.</p>
+<h2 id="multi-agent-systems-amplify-every-failure-mode">Multi-agent systems amplify every failure mode</h2>
+<p>When you split a task across multiple agents, you do not get one agent's reliability. You get the product of all their reliabilities. A system with five agents each running at 90% reliability gives you 59% overall reliability. That is not a production system.</p>
+<p>I keep seeing teams scale to multi-agent architectures because they want parallelism or role specialization. They do not budget for the coordination overhead. <a href="/articles/multi-agent-vs-single-agent-tradeoffs">Multi-agent versus single-agent tradeoffs</a> covers the real math on when this switch makes sense.</p>
+<p>The failure modes I see most in multi-agent systems are context pollution between agents, cascading errors where one agent's bad output poisons a downstream agent, and silent agreement on wrong answers where agents talk past each other and converge on a confident but incorrect answer.</p>
+<h2 id="tool-use-introduces-failures-your-tests-never-catch">Tool use introduces failures your tests never catch</h2>
+<p>Agents call tools. Tools fail. The failure modes are mundane but brutal in production.</p>
+<p>A tool call times out and the agent retries. The retry succeeds but the agent does not check whether the previous call actually went through, so it double-executes the action. A file gets written twice. An email gets sent twice. A database row gets updated twice.</p>
+<p><a href="/articles/prompt-injection-in-agent-systems">Prompt injection in agent systems</a> covers a different class of tool failure. Adversarial inputs can hijack tool calls through the agent's context. This is not a theoretical attack. I have seen it in the wild on agents that handle untrusted user input.</p>
+<p>The <a href="/articles/model-context-protocol-explained">Model Context Protocol</a> was designed partly to contain this class of failure, but protocol compliance varies across implementations.</p>
+<h2 id="what-the-field-is-doing-about-it">What the field is doing about it</h2>
+<p>The solutions are emerging but unevenly distributed.</p>
+<p>Circuit breakers for agents are starting to appear. <a href="/articles/agent-circuit-breakers">Agent circuit breakers</a> prevent cascade failures by halting the loop when error rates exceed thresholds. Most production teams do not have these yet, but the pattern is simple enough to implement yourself.</p>
+<p>Observability is improving. The <a href="/articles/agent-observability-stack">agent observability stack</a> I reviewed covers the tools that give you visibility into what the agent is actually doing inside the loop. Without this, you are flying blind.</p>
+<p>Context management is getting serious attention. Teams are moving away from naive context accumulation toward structured memory hierarchies with explicit eviction. The <a href="/articles/state-of-ai-agent-memory-2026">state of AI agent memory in 2026</a> covers where the patterns are converging.</p>
+<h2 id="what-you-should-do-today">What you should do today</h2>
+<p>If you are running agents in production and you have not read my post on <a href="/articles/production-ai-agent-errors">production AI agent errors</a>, start there. The specific error taxonomy is more useful than general advice.</p>
+<p>Add circuit breakers before you scale the agent count. Add observability before you add the next agent. These two investments prevent more production incidents than any amount of prompt tuning.</p>
+<p>The agents are not failing because the technology is immature. They are failing because the operational patterns around them are still being invented. Most of what I see in production is teams applying LLM-era intuition to what is fundamentally a distributed systems problem. The fixes exist. The hard part is knowing which ones apply to your situation.</p>
       </div>
     </div>
   </div>
 </article>
 
-<section class="post-related">
-  <div class="prose-container">
-    <h3>Related Posts</h3>
-    <div class="related-grid">
-      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
-        <div class="related-card-date">2026-04-21</div>
-        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
-      </a>
-      <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
-        <div class="related-card-date">2026-04-19</div>
-        <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
-      </a>
-      <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
-        <div class="related-card-date">2026-04-19</div>
-        <div class="related-card-title">How Memory Works in DeerFlow</div>
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- CTA -->
 <section class="section-block section-block-top-border">

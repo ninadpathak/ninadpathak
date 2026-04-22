@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Why AI Agents Keep Failing in Production and What the Field Is Doing About It</title>
+      <link>https://ninadpathak.com/blog/2026-04-22-why-ai-agents-keep-failing-in-production/</link>
+      <description>I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.</description>
+      <pubDate>Apr 22, 2026</pubDate>
+    </item>
+    <item>
       <title>Python model.predict(): The Function That Turns Data Into Decisions</title>
       <link>https://ninadpathak.com/blog/python-model-predict-function/</link>
       <description>A practical guide to model.predict() across scikit-learn, Keras, PyTorch, and XGBoost—what it does, how it behaves differently across frameworks, and the gotchas that will bite you in production.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/kv-cache-eviction-accuracy/</link>
       <description>VRAM is too expensive to waste on low-attention tokens. I benchmarked KV cache eviction strategies to treat LLM context like a managed heap, reaching 90% pruning with zero recall loss.</description>
       <pubDate>Apr 15, 2026</pubDate>
-    </item>
-    <item>
-      <title>From 4 Minutes to 12 Seconds: A Quantitative Audit of the uv Package Manager</title>
-      <link>https://ninadpathak.com/blog/uv-package-manager-benchmark/</link>
-      <description>I benchmarked Astral uv against Poetry and pip on a 2026 AI dependency stack. Here is how Rust-native tooling reduces build times by 20x.</description>
-      <pubDate>Apr 14, 2026</pubDate>
     </item>
   </channel>
 </rss>
