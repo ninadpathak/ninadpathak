@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</title>
+      <link>https://ninadpathak.com/blog/2026-04-23-agent-loop-anatomy/</link>
+      <description>The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.</description>
+      <pubDate>Apr 23, 2026</pubDate>
+    </item>
+    <item>
       <title>Why AI Agents Keep Failing in Production and What the Field Is Doing About It</title>
       <link>https://ninadpathak.com/blog/2026-04-22-why-ai-agents-keep-failing-in-production/</link>
       <description>I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/production-ai-agent-errors/</link>
       <description>Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.</description>
       <pubDate>Apr 16, 2026</pubDate>
-    </item>
-    <item>
-      <title>Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache Eviction</title>
-      <link>https://ninadpathak.com/blog/kv-cache-eviction-accuracy/</link>
-      <description>VRAM is too expensive to waste on low-attention tokens. I benchmarked KV cache eviction strategies to treat LLM context like a managed heap, reaching 90% pruning with zero recall loss.</description>
-      <pubDate>Apr 15, 2026</pubDate>
     </item>
   </channel>
 </rss>

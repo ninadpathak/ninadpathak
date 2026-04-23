@@ -27,7 +27,7 @@ The authoritative center. Every AI agents article links here or to a related hub
 | 4 | **existing** | agentic-cli-benchmarks | Agentic CLI Benchmarks: Claude Code vs Gemini CLI | agentic cli benchmarks | Hub pillar |
 | 5 | written: 2026-04-21 | the-taxonomy-of-ai-agents | A Taxonomy of AI Agents That Actually Explains What You Are Building | types of ai agents | Core hub article |
 | 6 | written: 2026-04-22 | why-ai-agents-keep-failing-in-production | Why AI Agents Keep Failing in Production and What the Field Is Doing About It | ai agent failures production | Links to production-ai-agent-errors |
-| 7 | new | agent-loop-anatomy | The Anatomy of an Agent Loop: Perceive, Think, Act, Remember | agent loop architecture | Links to agent-harnesses |
+| 7 | written: 2026-04-23 | agent-loop-anatomy | The Anatomy of an Agent Loop: Perceive, Think, Act, Remember | agent loop architecture | Links to agent-harnesses |
 | 8 | new | agent-vs-ai-assistant | When to Build an Agent and When to Build a Smarter Assistant | agent vs assistant | Hub intro for new readers |
 | 9 | new | the-agent-design-space | The Agent Design Space: A Map of What Engineers Are Actually Building | ai agent design patterns | Survey article, links to most spokes |
 | 10 | new | multi-agent-vs-single-agent-tradeoffs | Multi-Agent vs Single-Agent Systems: The Real Trade-offs | multi-agent systems | Links to production-ai-agent-errors (error propagation) |
@@ -42,16 +42,17 @@ The authoritative center. Every AI agents article links here or to a related hub
 
 | # | Status | Slug | Title | Primary Keyword | Internal Links |
 |---|--------|------|-------|-----------------|----------------|
-| 11 | new | asymmetric-retrieval-agent-memory | Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline | agent memory retrieval | Links to: state-of-ai-agent-memory-2026, hybrid-search-bm25-vector-search |
-| 12 | new | memory-serialization-between-sessions | Memory Serialization: How Agents Persist State Across Sessions | agent memory persistence | Links to: how-memory-works-in-claude-code, memory-hierarchy-in-ai-systems |
-| 13 | new | episodic-vs-semantic-vs-working-memory-agents | Episodic, Semantic, and Working Memory in AI Agents: A Practical Map | agent memory types | Links to: state-of-ai-agent-memory-2026, memory-hierarchy-in-ai-systems |
-| 14 | new | memory-versioning-and-audit-trails | Memory Versioning and Audit Trails for Regulated AI Agents | ai agent memory audit | Links to: state-of-ai-agent-memory-2026, production-ai-agent-errors |
-| 15 | new | contextual-compression-for-agent-memory | Contextual Compression for Agent Memory: What Stays and What Goes | agent memory compression | Links to: llm-context-windows-explained, memory-hierarchy-in-ai-systems |
-| 16 | new | agent-memory-for-customer-support | Building a Customer Support Agent with Persistent Memory: A Worked Example | customer support ai agent | Links to: memory-for-voice-ai-agents, state-of-ai-agent-memory-2026 |
-| 17 | new | memory-attribution-errors | Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures | agent memory errors | Links to: production-ai-agent-errors, episodic-vs-semantic-vs-working-memory-agents |
-| 18 | new | shared-vs-isolated-memory-multi-agent | Shared Memory vs Isolated Memory in Multi-Agent Workflows | multi-agent memory architecture | Links to: multi-agent-vs-single-agent-tradeoffs, memory-hierarchy-in-ai-systems |
-|| 19 | new | fine-tuning-vs-rag-for-agent-memory | Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense | agent memory fine-tuning rag | Links to: rag-vs-fine-tuning, state-of-ai-agent-memory-2026 |
-|| 19b | new | zero-search-vs-retrieval-memory-agents | Zero-Search Memory for AI Agents: A Practical Evaluation | zero-search memory AI agents | Links to: state-of-ai-agent-memory-2026, asymmetric-retrieval-agent-memory, context-windows-vs-memory |
+|| 11 | new | asymmetric-retrieval-agent-memory | Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline | agent memory retrieval | Links to: state-of-ai-agent-memory-2026, hybrid-search-bm25-vector-search |
+|| 11b | new | the-memory-hierarchy-why-rag-is-not-enough | The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory | rag vs agent memory | Links to: state-of-ai-agent-memory-2026, asymmetric-retrieval-agent-memory, rag-vs-fine-tuning | **Added: 2026-04-23 — HN trend on RAG-to-agent-memory evolution** |
+|| 12 | new | memory-serialization-between-sessions | Memory Serialization: How Agents Persist State Across Sessions | agent memory persistence | Links to: how-memory-works-in-claude-code, memory-hierarchy-in-ai-systems, the-memory-hierarchy-why-rag-is-not-enough | **Priority: moved up — direct response to HN "why do agents refuse to save observations"** |
+|| 13 | new | episodic-vs-semantic-vs-working-memory-agents | Episodic, Semantic, and Working Memory in AI Agents: A Practical Map | agent memory types | Links to: state-of-ai-agent-memory-2026, memory-hierarchy-in-ai-systems |
+|| 14 | new | memory-versioning-and-audit-trails | Memory Versioning and Audit Trails for Regulated AI Agents | ai agent memory audit | Links to: state-of-ai-agent-memory-2026, production-ai-agent-errors |
+|| 15 | new | contextual-compression-for-agent-memory | Contextual Compression for Agent Memory: What Stays and What Goes | agent memory compression | Links to: llm-context-windows-explained, memory-hierarchy-in-ai-systems |
+|| 16 | new | agent-memory-for-customer-support | Building a Customer Support Agent with Persistent Memory: A Worked Example | customer support ai agent | Links to: memory-for-voice-ai-agents, state-of-ai-agent-memory-2026 |
+|| 17 | new | memory-attribution-errors | Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures | agent memory errors | Links to: production-ai-agent-errors, episodic-vs-semantic-vs-working-memory-agents |
+|| 18 | new | shared-vs-isolated-memory-multi-agent | Shared Memory vs Isolated Memory in Multi-Agent Workflows | multi-agent memory architecture | Links to: multi-agent-vs-single-agent-tradeoffs, memory-hierarchy-in-ai-systems |
+||| 19 | new | fine-tuning-vs-rag-for-agent-memory | Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense | agent memory fine-tuning rag | Links to: rag-vs-fine-tuning, state-of-ai-agent-memory-2026 |
+||| 19b | new | zero-search-vs-retrieval-memory-agents | Zero-Search Memory for AI Agents: A Practical Evaluation | zero-search memory AI agents | Links to: state-of-ai-agent-memory-2026, asymmetric-retrieval-agent-memory, context-windows-vs-memory |
 
 ---
 
