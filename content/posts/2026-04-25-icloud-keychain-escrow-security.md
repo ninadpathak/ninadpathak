@@ -1,4 +1,11 @@
-# Apple's iCloud Keychain Escrow Security: How It Works and Why It Matters
+---
+title: "Apple's iCloud Keychain Escrow Security: How It Works and Why It Matters"
+date: "2026-04-25"
+slug: "icloud-keychain-escrow"
+description: "Apple's iCloud Keychain escrow uses a key-splitting architecture that makes escrow records cryptographically inaccessible without the device passcode. This is how it actually works."
+tags: ["security", "apple", "cryptography", "keychain"]
+status: published
+---
 
 When I enable iCloud Keychain on my iPhone, Apple asks me to set up a recovery mechanism — and tells me it cannot access my stored passwords if I forget my Apple ID password. That sounds like marketing language, but it's actually a precise description of how the escrow system works. Apple's design ensures that no single entity — not even Apple — holds everything needed to decrypt your keychain.
 

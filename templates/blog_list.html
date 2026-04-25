@@ -22,7 +22,7 @@
     {% if posts %}
       {% for post in posts %}
       <a href="/blog/{{ post.slug }}/" class="blog-row">
-        <div class="blog-row-date">{{ post.date | format_date_iso }}</div>
+        <div>
         <div>
           <div class="blog-row-title">{{ post.title }}</div>
           {% if post.description %}

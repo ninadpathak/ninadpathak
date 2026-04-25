@@ -1,6 +1,7 @@
 ---
 title: "Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby"
-date: 2026-04-25
+date: "2026-04-25"
+slug: "spinel-ruby-aot-compiler"
 description: "Spinel compiles Ruby to standalone native binaries with 11.6x speedups over miniruby. I dug into the architecture to understand why AOT beats JIT for long-running services."
 tags: ["ruby", "compilers", "performance", "yjit", "aot"]
 status: published
