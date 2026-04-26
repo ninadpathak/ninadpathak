@@ -6,6 +6,30 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>When to Build an Agent and When to Build a Smarter Assistant</title>
+      <link>https://ninadpathak.com/blog/agent-vs-ai-assistant/</link>
+      <description>The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.</description>
+      <pubDate>Apr 26, 2026</pubDate>
+    </item>
+    <item>
+      <title>Lambda Calculus as AI Reasoning Benchmark</title>
+      <link>https://ninadpathak.com/blog/lambda-calculus-ai-reasoning-benchmark/</link>
+      <description>I have used lambda calculus to test whether AI systems can actually reason through composition, or whether they are just pattern-matching their way to plausible outputs.</description>
+      <pubDate>Apr 25, 2026</pubDate>
+    </item>
+    <item>
+      <title>Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby</title>
+      <link>https://ninadpathak.com/blog/spinel-ruby-aot-compiler/</link>
+      <description>Spinel compiles Ruby to standalone native binaries with 11.6x speedups over miniruby. I dug into the architecture to understand why AOT beats JIT for long-running services.</description>
+      <pubDate>Apr 25, 2026</pubDate>
+    </item>
+    <item>
+      <title>Apple's iCloud Keychain Escrow Security: How It Works and Why It Matters</title>
+      <link>https://ninadpathak.com/blog/icloud-keychain-escrow/</link>
+      <description>Apple's iCloud Keychain escrow uses a key-splitting architecture that makes escrow records cryptographically inaccessible without the device passcode. This is how it actually works.</description>
+      <pubDate>Apr 25, 2026</pubDate>
+    </item>
+    <item>
       <title>The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</title>
       <link>https://ninadpathak.com/blog/2026-04-23-agent-loop-anatomy/</link>
       <description>The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.</description>
@@ -100,30 +124,6 @@
       <link>https://ninadpathak.com/blog/technical-writing-for-engineers/</link>
       <description>Most engineering documentation fails for the same reasons. Here is what actually moves the needle.</description>
       <pubDate>Apr 18, 2026</pubDate>
-    </item>
-    <item>
-      <title>LLM token budgets: a practical guide to cost control</title>
-      <link>https://ninadpathak.com/blog/llm-token-budgets-cost-control/</link>
-      <description>Real numbers, real pricing, and concrete strategies for keeping your LLM spend predictable.</description>
-      <pubDate>Apr 17, 2026</pubDate>
-    </item>
-    <item>
-      <title>RAG Evaluation Metrics: What Actually Matters</title>
-      <link>https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/</link>
-      <description>A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes.</description>
-      <pubDate>Apr 16, 2026</pubDate>
-    </item>
-    <item>
-      <title>The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1 Voice Agent</title>
-      <link>https://ninadpathak.com/blog/voice-ai-latency-gemini-benchmark/</link>
-      <description>I built a sub-second latency voice assistant and profiled every millisecond of the Audio-to-Audio request/response loop on a MacBook Air M2. Here is the bottleneck analysis.</description>
-      <pubDate>Apr 16, 2026</pubDate>
-    </item>
-    <item>
-      <title>What Nobody Tells You About Error Handling in Production AI Agents</title>
-      <link>https://ninadpathak.com/blog/production-ai-agent-errors/</link>
-      <description>Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.</description>
-      <pubDate>Apr 16, 2026</pubDate>
     </item>
   </channel>
 </rss>

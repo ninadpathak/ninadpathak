@@ -56,6 +56,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://ninadpathak.com/blog/agent-vs-ai-assistant/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/lambda-calculus-ai-reasoning-benchmark/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/spinel-ruby-aot-compiler/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/icloud-keychain-escrow/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://ninadpathak.com/blog/2026-04-23-agent-loop-anatomy/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

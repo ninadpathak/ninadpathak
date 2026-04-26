@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby | Ninad Pathak</title>
+  <meta name="description" content="Spinel compiles Ruby to standalone native binaries with 11.6x speedups over miniruby. I dug into the architecture to understand why AOT beats JIT for long-running services.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby">
+  <meta property="og:description" content="Spinel compiles Ruby to standalone native binaries with 11.6x speedups over miniruby. I dug into the architecture to understand why AOT beats JIT for long-running services.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/spinel-ruby-aot-compiler/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/spinel-ruby-aot-compiler/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby",
+  "description": "Spinel compiles Ruby to standalone native binaries with 11.6x speedups over miniruby. I dug into the architecture to understand why AOT beats JIT for long-running services.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-25",
+  "dateModified": "2026-04-25",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/spinel-ruby-aot-compiler/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby",
+      "item": "https://ninadpathak.com/blog/spinel-ruby-aot-compiler/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-time">6 min read</span>
+      </div>
+      <h1 class="post-title">Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby</h1>
+      <p class="lead">Spinel compiles Ruby to standalone native binaries with 11.6x speedups over miniruby. I dug into the architecture to understand why AOT beats JIT for long-running services.</p>
+      <div class="post-tags">
+        <span class="tag">ruby</span>
+        <span class="tag">compilers</span>
+        <span class="tag">performance</span>
+        <span class="tag">yjit</span>
+        <span class="tag">aot</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-fundamental-difference-aot-vs-jit">The fundamental difference: AOT vs JIT</a></li>
+<li><a href="#the-architecture-ruby-to-c-to-native">The architecture: Ruby to C to native</a></li>
+<li><a href="#whole-program-type-inference">Whole-program type inference</a></li>
+<li><a href="#what-spinel-does-not-support">What Spinel does not support</a></li>
+<li><a href="#what-this-means-for-production-ruby">What this means for production Ruby</a></li>
+<li><a href="#the-self-hosting-bootstrap-loop">The self-hosting bootstrap loop</a></li>
+<li><a href="#where-spinel-fits-in-the-ruby-performance-landscape">Where Spinel fits in the Ruby performance landscape</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Matz released Spinel on March 25, 2026. Within 24 hours it had 1,000 stars on GitHub. The HN thread had 87 comments and a score of 331. I cloned the repo and spent a weekend reading the code. This is what I found.</p>
+<h2 id="the-fundamental-difference-aot-vs-jit">The fundamental difference: AOT vs JIT</h2>
+<p>YJIT and MJIT are JIT compilers. They run inside the Ruby process, profiling method calls at runtime and compiling hot paths on the fly. Spinel is an ahead-of-time compiler. It produces a standalone native binary before the program ever runs. This distinction matters enormously for production deployment.</p>
+<p>A JIT compiler pays a warm-up cost every time a process starts. YJIT typically needs several thousand iterations before it identifies and compiles the hot paths in your application. MJIT has a similar problem: it compiles methods to native code in the background, but the first requests to a freshly forked worker still hit the interpreter. Spinel eliminates warm-up entirely. The compilation happens once, at build time. Your Puma worker starts fast and stays fast.</p>
+<p>AOT compilation also changes the deployment model. A Spinel binary has no runtime dependencies. It needs only libc and libm. A Docker image that runs CRuby with YJIT needs to ship the entire Ruby interpreter, the JVM for MJIT's C extension compilation, and all the supporting libraries. A Spinel binary is a single file you drop onto a bare Linux machine.</p>
+<h2 id="the-architecture-ruby-to-c-to-native">The architecture: Ruby to C to native</h2>
+<p>Spinel transforms Ruby source through three stages:</p>
+<div class="highlight"><pre><span></span><code>Ruby (.rb) → spinel_parse → AST text → spinel_codegen → C source → cc -O2 → Native binary
+</code></pre></div>
+
+<p>The parser uses Prism (the same parser Ruby 3.0 adopted). Spinel ships with a C binary (<code>spinel_parse</code>) that links libprism directly, so you do not need CRuby installed to parse. The fallback path uses the Prism gem with CRuby.</p>
+<p>The compiler backend (<code>spinel_codegen.rb</code>) is 21,109 lines of Ruby written in a restricted subset Spinel itself can compile: classes, <code>def</code>, <code>attr_accessor</code>, <code>if</code>/<code>case</code>/<code>while</code>, <code>each</code>/<code>map</code>/<code>select</code>, <code>yield</code>, <code>begin</code>/<code>rescue</code>. No metaprogramming, no <code>eval</code>, no <code>require</code> in the backend. This self-hosting property is how Matz verified the compiler itself works correctly: the bootstrap loop generates identical C output whether running on CRuby or on a previously compiled Spinel binary.</p>
+<p>The runtime lives in a single header file (<code>lib/sp_runtime.h</code>, 581 lines) plus <code>lib/sp_bigint.c</code> (5,394 lines) for arbitrary precision integers. The linker pulls only the parts the program actually uses.</p>
+<h2 id="whole-program-type-inference">Whole-program type inference</h2>
+<p>Spinel's headline performance claim is ~11.6x faster than miniruby across 55 benchmarks. The geometric mean across 28 computation-heavy benchmarks is even higher. The mechanism driving these speedups is whole-program type inference.</p>
+<p>YJIT and MJIT operate under runtime constraints. They do not know what types will flow through a method until the program actually runs. They use guards and type speculation to handle polymorphic code. Spinel analyzes the entire program before execution. It propagates types from call sites to method definitions, builds a call graph, and emits specialized C code for each concrete type combination it encounters.</p>
+<p>The result is direct, unboxed operations in generated C. A method that always receives two integers generates C code that calls <code>sp_add_int_int</code> directly. No method dispatch, no virtual machine lookup, no garbage collection for those values. The trade-off mirrors what I described in my post on <a href="/articles/prompt-caching-what-it-is-and-when-the-math-works">prompt caching</a>: the upfront cost of analysis pays back across all subsequent executions, whether that analysis is compile-time type inference or runtime token KV cache management.</p>
+<p>Value-type promotion extends this further. Classes with eight or fewer scalar fields and no inheritance are promoted to C structs allocated on the stack. A five-field Point class goes from 85ms of allocations to 2ms when the compiler can prove it never escapes the local scope. Programs that use only such value types emit no garbage collector at all.</p>
+<p>I saw this play out in the benchmarks. The <code>life</code> benchmark (Conway's Game of Life) runs 86.7x faster than miniruby. The <code>ackermann</code> benchmark runs 74.8x faster. These are programs with no I/O, no external dependencies, and deeply recursive call trees. Whole-program inference eliminates the entire Ruby VM overhead.</p>
+<h2 id="what-spinel-does-not-support">What Spinel does not support</h2>
+<p>No eval, no <code>instance_eval</code>, no <code>class_eval</code>. No <code>send</code>, no <code>method_missing</code>, no <code>define_method</code>. These restrictions are not accidental. Dynamic dispatch and metaprogramming make static type inference impossible or unsound. Spinel chooses soundness: if it cannot prove the type, it does not compile that path.</p>
+<p>No threads. <code>Thread</code> and <code>Mutex</code> are absent. Fiber is supported (via <code>ucontext_t</code>), but parallel threads are not. The GC is mark-and-sweep with non-recursive marking, which means it does not pause the world during collection the way a stop-the-world collector would.</p>
+<p>UTF-8 and ASCII only. No encoding support for other character sets.</p>
+<h2 id="what-this-means-for-production-ruby">What this means for production Ruby</h2>
+<p>CRuby with YJIT is the right choice for web servers where you want the flexibility of the full Ruby ecosystem, gems that use <code>eval</code>, and the ability to dynamically reload code in development. Spinel is for programs that run for hours or days doing computation-heavy work, where startup time matters, and where you want a single deployable binary.</p>
+<p>I think of the trade-off this way: if your Ruby program is a long-running service that spends most of its time executing a known set of hot paths, Spinel's self-hosting AOT compilation will outperform YJIT after the first hour. If you have short-lived processes that fork frequently ( Puma workers restarting every few minutes), the JIT warm-up cost amortizes poorly and Spinel wins immediately.</p>
+<p>The constraint that matters most is the no-metaprogramming rule. Rails uses <code>define_method</code> extensively. Many gems use <code>eval</code> for ERB templates or DSL parsing. Spinel will not compile a Rails application today. It works for standalone programs, scripts with clear type signatures, and computation-heavy utilities that do not need runtime feature flags.</p>
+<h2 id="the-self-hosting-bootstrap-loop">The self-hosting bootstrap loop</h2>
+<p>Spinel compiles its own backend. The bootstrap chain confirms correctness:</p>
+<div class="highlight"><pre><span></span><code>CRuby + spinel_parse.rb → AST
+CRuby + spinel_codegen.rb → gen1.c → bin1
+bin1 + AST → gen2.c → bin2
+bin2 + AST → gen3.c
+gen2.c == gen3.c   # loop closed
+</code></pre></div>
+
+<p>When <code>gen2.c</code> and <code>gen3.c</code> are byte-for-byte identical, the compiler is self-hosting correctly. Matz runs this check in the Makefile under <code>make bootstrap</code>. The <code>-Werror</code> flag on the generated C code ensures that any warnings in the bootstrap compiler become build failures, surfacing regressions immediately.</p>
+<h2 id="where-spinel-fits-in-the-ruby-performance-landscape">Where Spinel fits in the Ruby performance landscape</h2>
+<p>Ruby 3.2 shipped YJIT and improved MJIT. Both are production-ready and part of the standard toolchain. Spinel is not a replacement for either. It is a different point in the design space: static analysis beats dynamic profiling when you can afford to know your program completely before execution. My post on <a href="/articles/llm-token-budgets-cost-control">LLM token budgets</a> covers how the cost-per-token math shapes deployment decisions. Spinel's deployment model is a direct analog at the language runtime level.</p>
+<p>If you want to understand the memory trade-offs that drive performance in this class of tooling, I wrote about <a href="/articles/kv-cache-eviction-accuracy">KV cache eviction strategies</a> in the context of LLM inference. The core idea (managing a finite memory budget with importance-aware eviction) applies equally to how Spinel manages its value-type stack allocation versus heap allocation.</p>
+<p>For a broader view of how compilation strategies affect runtime performance, my post on <a href="/articles/speculative-decoding-explained">speculative decoding</a> covers how draft models and verification loops exploit memory-bandwidth trade-offs. Spinel's approach exploits a similar insight: the cost of interpretation is so high that compiling ahead of time pays back immediately for compute-bound programs.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/agent-vs-ai-assistant/" class="footer-link">When to Build an Agent and When to Build a Smarter Assistant</a>
+          <a href="/blog/lambda-calculus-ai-reasoning-benchmark/" class="footer-link">Lambda Calculus as AI Reasoning Benchmark</a>
+          <a href="/blog/spinel-ruby-aot-compiler/" class="footer-link">Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

@@ -28,7 +28,7 @@ The authoritative center. Every AI agents article links here or to a related hub
 | 5 | written: 2026-04-21 | the-taxonomy-of-ai-agents | A Taxonomy of AI Agents That Actually Explains What You Are Building | types of ai agents | Core hub article |
 | 6 | written: 2026-04-22 | why-ai-agents-keep-failing-in-production | Why AI Agents Keep Failing in Production and What the Field Is Doing About It | ai agent failures production | Links to production-ai-agent-errors |
 | 7 | written: 2026-04-23 | agent-loop-anatomy | The Anatomy of an Agent Loop: Perceive, Think, Act, Remember | agent loop architecture | Links to agent-harnesses |
-| 8 | new | agent-vs-ai-assistant | When to Build an Agent and When to Build a Smarter Assistant | agent vs assistant | Hub intro for new readers |
+| 8 | written: 2026-04-26 | agent-vs-ai-assistant | When to Build an Agent and When to Build a Smarter Assistant | agent vs assistant | Hub intro for new readers |
 | 9 | new | the-agent-design-space | The Agent Design Space: A Map of What Engineers Are Actually Building | ai agent design patterns | Survey article, links to most spokes |
 | 10 | new | multi-agent-vs-single-agent-tradeoffs | Multi-Agent vs Single-Agent Systems: The Real Trade-offs | multi-agent systems | Links to production-ai-agent-errors (error propagation) |
 
