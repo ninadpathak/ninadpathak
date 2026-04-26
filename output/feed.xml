@@ -12,6 +12,12 @@
       <pubDate>Apr 26, 2026</pubDate>
     </item>
     <item>
+      <title>The Agent Design Space: A Map of What Engineers Are Actually Building</title>
+      <link>https://ninadpathak.com/blog/the-agent-design-space/</link>
+      <description>After surveying production agents across industries, the design space clusters into patterns. Here is what I found.</description>
+      <pubDate>Apr 26, 2026</pubDate>
+    </item>
+    <item>
       <title>Lambda Calculus as AI Reasoning Benchmark</title>
       <link>https://ninadpathak.com/blog/lambda-calculus-ai-reasoning-benchmark/</link>
       <description>I have used lambda calculus to test whether AI systems can actually reason through composition, or whether they are just pattern-matching their way to plausible outputs.</description>
@@ -118,12 +124,6 @@
       <link>https://ninadpathak.com/blog/ai-memory-management-for-llms/</link>
       <description>A senior engineer's breakdown of what memory management for LLMs actually looks like in production: eviction strategies, KV cache management, importance-weighted retention, and why your agent keeps forgetting things.</description>
       <pubDate>Apr 19, 2026</pubDate>
-    </item>
-    <item>
-      <title>Technical Writing for Engineers: The 80/20 Guide</title>
-      <link>https://ninadpathak.com/blog/technical-writing-for-engineers/</link>
-      <description>Most engineering documentation fails for the same reasons. Here is what actually moves the needle.</description>
-      <pubDate>Apr 18, 2026</pubDate>
     </item>
   </channel>
 </rss>

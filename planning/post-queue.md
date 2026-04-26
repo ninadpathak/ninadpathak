@@ -80,6 +80,11 @@ Posts are published one per day. Claude picks the next post, runs the experiment
     - Slug: why-ai-agents-keep-failing-in-production
     - Cluster: AI Agents Hub (Cluster 1)
 
+33. **When to Build an Agent and When to Build a Smarter Assistant**
+    - Published: 2026-04-26
+    - Slug: agent-vs-ai-assistant
+    - Cluster: AI Agents Hub (Cluster 1)
+
 ## Writing & Visual Rules (V4.0)
 
 - **Word Count**: 3000+ words.

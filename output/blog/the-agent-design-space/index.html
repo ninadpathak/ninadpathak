@@ -19,16 +19,16 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prompt Caching: What It Is and When the Math Works | Ninad Pathak</title>
-  <meta name="description" content="Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.">
+  <title>The Agent Design Space: A Map of What Engineers Are Actually Building | Ninad Pathak</title>
+  <meta name="description" content="After surveying production agents across industries, the design space clusters into patterns. Here is what I found.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="Prompt Caching: What It Is and When the Math Works">
-  <meta property="og:description" content="Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.">
-  <meta property="og:url"         content="https://ninadpathak.com/blog/prompt-caching-what-it-is-and-when-the-math-works/">
+  <meta property="og:title"       content="The Agent Design Space: A Map of What Engineers Are Actually Building">
+  <meta property="og:description" content="After surveying production agents across industries, the design space clusters into patterns. Here is what I found.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/the-agent-design-space/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Twitter -->
@@ -39,7 +39,7 @@
   <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://ninadpathak.com/blog/prompt-caching-what-it-is-and-when-the-math-works/">
+  <link rel="canonical" href="https://ninadpathak.com/blog/the-agent-design-space/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -73,15 +73,15 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Prompt Caching: What It Is and When the Math Works",
-  "description": "Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.",
+  "headline": "The Agent Design Space: A Map of What Engineers Are Actually Building",
+  "description": "After surveying production agents across industries, the design space clusters into patterns. Here is what I found.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
     "url": "https://ninadpathak.com"
   },
-  "datePublished": "2026-03-13",
-  "dateModified": "2026-03-13",
+  "datePublished": "2026-04-26",
+  "dateModified": "2026-04-26",
   "publisher": {
     "@type": "Organization",
     "name": "Ninad Pathak",
@@ -92,7 +92,7 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://ninadpathak.com/blog/prompt-caching-what-it-is-and-when-the-math-works/"
+    "@id": "https://ninadpathak.com/blog/the-agent-design-space/"
   }
 }
 </script>
@@ -116,8 +116,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Prompt Caching: What It Is and When the Math Works",
-      "item": "https://ninadpathak.com/blog/prompt-caching-what-it-is-and-when-the-math-works/"
+      "name": "The Agent Design Space: A Map of What Engineers Are Actually Building",
+      "item": "https://ninadpathak.com/blog/the-agent-design-space/"
     }
   ]
 }
@@ -183,7 +183,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">Prompt Caching: What It Is and When the Math Works</li>
+      <li class="breadcrumb-item current" aria-current="page">The Agent Design Space: A Map of What Engineers Are Actually Building</li>
     </ol>
   </div>
 </nav>
@@ -193,14 +193,14 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
-        <span class="post-meta-time">3 min read</span>
+        <span class="post-meta-time">6 min read</span>
       </div>
-      <h1 class="post-title">Prompt Caching: What It Is and When the Math Works</h1>
-      <p class="lead">Prompt caching can reduce LLM costs by up to 90% and cut latency by half. Here is the engineering guide to how it works, why prefix matching matters, and how to calculate your ROI.</p>
+      <h1 class="post-title">The Agent Design Space: A Map of What Engineers Are Actually Building</h1>
+      <p class="lead">After surveying production agents across industries, the design space clusters into patterns. Here is what I found.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
-        <span class="tag">llm</span>
-        <span class="tag">infrastructure</span>
+        <span class="tag">agents</span>
+        <span class="tag">architecture</span>
       </div>
     </div>
   </header>
@@ -211,36 +211,43 @@
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#what-prompt-caching-actually-does">What prompt caching actually does</a></li>
-<li><a href="#the-important-detail-is-prefix-not-prompt">The important detail is prefix, not prompt</a></li>
-<li><a href="#when-the-math-actually-works">When the math actually works</a></li>
-<li><a href="#provider-differences">Provider differences</a></li>
-<li><a href="#a-practical-design-checklist">A practical design checklist</a></li>
+<li><a href="#the-patterns-that-show-up-in-production">The patterns that show up in production</a></li>
+<li><a href="#what-the-production-data-shows">What the production data shows</a></li>
+<li><a href="#where-agents-are-not-being-built">Where agents are not being built</a></li>
+<li><a href="#the-design-space-is-not-a-menu">The design space is not a menu</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>Inference costs are the primary bottleneck for scaling LLM applications. Standard API calls require the model to re-process the entire prompt for every request. Such repetition is wasteful when large portions of your context remain static across thousands of calls.</p>
-<p>Prompt caching solves this by persisting the intermediate state of the model's computation. It allows you to "reuse" the work done on previous prompts. Understanding the mechanics of prefix matching is the key to making this work in production.</p>
-<h2 id="what-prompt-caching-actually-does">What prompt caching actually does</h2>
-<p>Caching stores the Key-Value (KV) cache of a prompt prefix in memory or on disk. The KV cache represents the mathematical summary of all tokens processed so far. The model can skip the initial computation phase and jump straight to generating new tokens when a new prompt shares an identical prefix with a cached one.</p>
-<p>Such a strategy is particularly effective for systems with long system instructions or large retrieved datasets. You pay the full "prefill" price once. Subsequent requests only pay for the unique tokens added at the end. This changes the economics of long-context RAG and agentic workflows.</p>
-<h2 id="the-important-detail-is-prefix-not-prompt">The important detail is prefix, not prompt</h2>
-<p>Most developers assume caching works like a standard key-value store for the whole prompt. Real LLM caching is more granular. It works on the prefix. If your prompt consists of a system block, a knowledge block, and a user query, the cache hit occurs as long as the first two blocks are identical.</p>
-<p>Any change at the beginning of the prompt invalidates the entire cache for that request. Such sensitivity means you must order your prompt components from most static to most dynamic. Place your system instructions first. Follow them with your background data. Put the user's unique query at the very end.</p>
-<h2 id="when-the-math-actually-works">When the math actually works</h2>
-<p>Caching is not a free lunch. Providers often charge a small fee to store the cache or require a minimum token count to trigger the savings. You must have enough traffic to ensure that the cached prefix stays "warm" in the provider's memory.</p>
-<p>Calculations for ROI should consider the cache hit rate and the ratio of static to dynamic tokens. A system with a 10,000-token static prefix and a 100-token user query will see massive savings even at low volumes. A system where the prefix changes constantly will see zero benefit and might even incur higher costs due to storage fees.</p>
-<h2 id="provider-differences">Provider differences</h2>
-<p>OpenAI, Anthropic, and Gemini each implement caching with different rules. Some provide automatic caching based on common prefixes. Others require you to explicitly flag which blocks should be cached.</p>
-<p>Anthropic's implementation is currently the most flexible for developers. It allows you to place "cache breakpoints" at specific points in the prompt. This gives you granular control over what stays in memory. OpenAI's approach is more automated but offers less predictability for cost control.</p>
-<h2 id="a-practical-design-checklist">A practical design checklist</h2>
-<p>Follow these three rules when implementing prompt caching.</p>
-<p><strong>Order matters.</strong> Move all dynamic variables like timestamps or unique IDs to the end of the prompt.</p>
-<p><strong>Standardize prefixes.</strong> Ensure that minor whitespace changes or formatting differences do not break your cache hits.</p>
-<p><strong>Monitor hit rates.</strong> Track your actual cache performance in production. Use these metrics to adjust your prompt assembly logic.</p>
-<p>Prompt caching is the most effective way to scale LLM applications without a linear increase in cost. It rewards teams that treat their prompt engineering as a structured infrastructure task.</p>
+        <p>I spent three weeks reading production architecture posts, scraping GitHub for agent implementations, and talking to engineers who run agents at scale. The goal was to go beyond the taxonomy diagrams and find out what engineers are actually building.</p>
+<p>The answer is messier than the taxonomies suggest. Production agents do not map cleanly into types. They cluster into patterns based on the constraints that actually matter: how often the agent runs, what it can break, and how much a human can audit what it did.</p>
+<h2 id="the-patterns-that-show-up-in-production">The patterns that show up in production</h2>
+<p><strong>Retrieval-augmented single-loop agents</strong> are the most common. A user sends a request. The agent retrieves relevant context, reasons about it, calls a tool or two, and returns an answer. This is what most RAG applications look like when someone wraps them in an agent harness. The loop runs once. The failure modes are limited to bad retrieval and bad tool selection. Teams choose this when the task is bounded and the cost of a wrong answer is low.</p>
+<p>I covered the memory and retrieval foundations for this pattern in my posts on <a href="/articles/state-of-ai-agent-memory-2026">state-of-ai-agent-memory-2026</a> and <a href="/articles/hybrid-search-bm25-vector-search">hybrid-search-bm25-vector-search</a>. The retrieval piece is usually not the interesting part. The interesting part is what happens when retrieval fails silently and the agent proceeds on bad context.</p>
+<p><strong>Multi-turn conversational agents</strong> are the second major cluster. These agents maintain state across a single conversation session. They are retrieval-augmented but add a memory layer that tracks the conversation history and lets the agent reference earlier turns. Customer support bots and coding assistants dominate this category. The <a href="/articles/short-term-memory-for-ai-agents">short-term-memory-for-ai-agents</a> post covers the mechanisms used in practice.</p>
+<p>The failure mode I see most in this cluster is context pollution. Each turn appends to the conversation context. Without active compression or windowing, the agent eventually operates on a bloated context that includes stale or irrelevant earlier turns. This is not a hypothetical failure. I have seen it in production where a customer support agent starts giving answers that reference resolved tickets from three turns ago.</p>
+<p><strong>Workflow orchestration agents</strong> are agents that execute a defined sequence of steps, where each step might itself be an agent or a traditional program. The workflow is defined upfront. The agent handles routing, error recovery, and conditional branching. This is where the <a href="/articles/plan-and-execute-pattern">plan-and-execute pattern</a> shows up most often in production, usually in document processing pipelines, code review automation, and data transformation tasks.</p>
+<p>The error patterns here are different from single-loop agents. A workflow agent that fails midway needs to either checkpoint state or restart from a known good position. I wrote about <a href="/articles/agent-circuit-breakers">agent-circuit-breakers</a> as a pattern for preventing cascade failures in these systems. The circuit breaker pattern is less relevant in simple single-loop agents and critical in workflow orchestration.</p>
+<p><strong>Supervisor-delegation agents</strong> split a task across multiple specialized agents, with a supervisor agent handling the orchestration. The supervisor decides which sub-agent handles which part of the task, aggregates results, and handles conflicts between agent outputs. This is the most architecturally complex pattern I found in production.</p>
+<p>The <a href="/articles/supervisor-agent-pattern">supervisor-agent-pattern</a> post goes into where this works and where it breaks. The failure mode I want to name specifically: supervisor agents create hidden coordination costs that are easy to underestimate. Each sub-agent call adds latency and a potential failure point. When a supervisor decides to parallelize sub-agent calls, it faces the same challenges I covered in <a href="/articles/parallel-versus-sequential-tool-calls">parallel-versus-sequential-tool-calls</a>. The parallelism gains are real but so are the failure modes.</p>
+<p><strong>Persistent-goal agents</strong> run continuously, maintain state across days or weeks, and work toward goals that require multiple steps across multiple sessions. These are the agents that look least like software and most like automated employees. Bug triage agents, research synthesis agents, and monitoring agents occupy this space.</p>
+<p>This is where the <a href="/articles/agent-loop-anatomy">agent-loop-anatomy</a> matters most. A persistent-goal agent needs every component of that loop to be durable. If the perceive-think-act cycle drops state on restart, the agent loses track of its goal. If the memory layer serves stale data, the agent makes decisions on outdated premises.</p>
+<h2 id="what-the-production-data-shows">What the production data shows</h2>
+<p>Looking across the implementations I surveyed, three things stood out.</p>
+<p><strong>Most agents are simpler than the taxonomy suggests.</strong> The five-type taxonomy I published last week is a useful classification frame, but production agents rarely sit cleanly in one type. They are combinations of types with a dominant pattern. The most common production agent is a retrieval-augmented single-loop agent with multi-turn conversational memory. That is a Type 2-3 hybrid that does not exist cleanly in most taxonomies but shows up constantly.</p>
+<p><strong>The tool layer determines reliability more than the model.</strong> Teams that built fragile agents almost always had a tool schema problem, not a model problem. The <a href="/articles/tool-schema-design-for-reliability">tool-schema-design-for-reliability</a> post covers this in detail, but the short version: agents fail when the tool interface is underspecified, when error responses from tools are inconsistent, and when the agent has no schema for retrying a failed tool call.</p>
+<p><strong>Observability is the biggest gap.</strong> The second most common production failure, after tool schema problems, was that teams had no way to understand what their agent was doing mid-execution. The <a href="/articles/agent-observability-stack">agent-observability-stack</a> post covers the minimum viable observability layer. Most teams I surveyed had basic logging but no structured tracing of agent decisions, no way to replay a specific agent decision path, and no cost attribution per agentic action.</p>
+<h2 id="where-agents-are-not-being-built">Where agents are not being built</h2>
+<p>The survey also showed clear gaps. Areas where the demand exists but production-grade implementations are rare.</p>
+<p><strong>Cross-agent state synchronization</strong> is a gap. When multiple agents need to share state in real time, teams reach for shared databases or message queues, but there is no established pattern for doing this without creating tight coupling between agents. The <a href="/articles/message-passing-in-multi-agent-systems">message-passing-in-multi-agent-systems</a> post covers the patterns that exist, but most of them require significant custom plumbing.</p>
+<p><strong>Agent regression testing</strong> is nearly nonexistent. Most teams test agents the same way they test traditional software: unit tests for functions, integration tests for APIs. But an agent that passes a unit test can still fail in production because it encountered a new type of input. The <a href="/articles/agent-evals-that-actually-predict-production">agent-evals-that-actually-predict-production</a> post covers the eval frameworks that come closest to solving this.</p>
+<p><strong>Structured output reliability</strong> from agents is still a hard problem. Agents that must produce structured JSON or execute specific action schemas fail at higher rates than agents that produce freeform text. This is not a model capability problem as much as a prompt and schema design problem, covered in <a href="/articles/structured-outputs-llms-json-mode-function-calling">structured-outputs-llms-json-mode-function-calling</a>.</p>
+<h2 id="the-design-space-is-not-a-menu">The design space is not a menu</h2>
+<p>One thing I want to be clear about after this survey: the design space is not a menu where you pick the most impressive pattern. The patterns exist because the constraints that produce them are real.</p>
+<p>A reactive information agent is not a lesser version of a persistent-goal agent. It is the right architecture for a bounded task where the cost of failure is low and the task does not need to persist state. The mistake is not choosing a simpler pattern. The mistake is choosing a simpler pattern and then trying to stretch it beyond its intended scope.</p>
+<p>When I am sketching a new agent system, I start with the <a href="/articles/the-taxonomy-of-ai-agents">three questions in the taxonomy post</a>. Does it need to act or just generate? Does it need to persist state? Does the task complexity require multiple agents? Those three questions will narrow the design space faster than any framework diagram.</p>
+<p>The <a href="/articles/agent-harnesses">agent-harnesses</a> post covers the runtime layer that sits beneath whatever pattern you choose. Whatever architecture you land on, the harness is where reliability gets built or lost.</p>
       </div>
     </div>
   </div>
@@ -250,10 +257,6 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/the-agent-design-space/" class="related-card">
-        <div class="related-card-date">2026-04-26</div>
-        <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
-      </a>
       <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-21</div>
         <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
@@ -261,6 +264,10 @@
       <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
         <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+      </a>
+      <a href="/blog/how-memory-works-in-deerflow/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">How Memory Works in DeerFlow</div>
       </a>
     </div>
   </div>
