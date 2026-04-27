@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Multi-Agent vs Single-Agent Systems: The Real Trade-offs</title>
+      <link>https://ninadpathak.com/blog/multi-agent-vs-single-agent-tradeoffs/</link>
+      <description>The decision between one agent and many is not about capability. It is about failure modes, latency, and operational complexity.</description>
+      <pubDate>Apr 27, 2026</pubDate>
+    </item>
+    <item>
       <title>When to Build an Agent and When to Build a Smarter Assistant</title>
       <link>https://ninadpathak.com/blog/agent-vs-ai-assistant/</link>
       <description>The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.</description>
@@ -117,12 +123,6 @@
       <title>How Memory Works in HyperAgents</title>
       <link>https://ninadpathak.com/blog/how-memory-works-in-hyperagents/</link>
       <description>A deep dive into how HyperAgents retain context across interactions, layer memory architectures, and handle session continuity in production.</description>
-      <pubDate>Apr 19, 2026</pubDate>
-    </item>
-    <item>
-      <title>AI Memory Management for LLMs: What Actually Works</title>
-      <link>https://ninadpathak.com/blog/ai-memory-management-for-llms/</link>
-      <description>A senior engineer's breakdown of what memory management for LLMs actually looks like in production: eviction strategies, KV cache management, importance-weighted retention, and why your agent keeps forgetting things.</description>
       <pubDate>Apr 19, 2026</pubDate>
     </item>
   </channel>
