@@ -1,6 +1,6 @@
 # Content Plan: AI Agents Hub and Spoke (SEO-Optimized)
 
-**Last updated:** 2026-04-21
+**Last updated:** 2026-04-28
 **Goal:** 75 net-new articles across 9 topic clusters. Daily publishing starting now.
 
 ---
@@ -30,7 +30,7 @@ The authoritative center. Every AI agents article links here or to a related hub
 | 7 | written: 2026-04-23 | agent-loop-anatomy | The Anatomy of an Agent Loop: Perceive, Think, Act, Remember | agent loop architecture | Links to agent-harnesses |
 | 8 | written: 2026-04-26 | agent-vs-ai-assistant | When to Build an Agent and When to Build a Smarter Assistant | agent vs assistant | Hub intro for new readers |
 | 9 | written: 2026-04-26 | the-agent-design-space | The Agent Design Space: A Map of What Engineers Are Actually Building | ai agent design patterns | Survey article, links to most spokes |
-| 10 | new | multi-agent-vs-single-agent-tradeoffs | Multi-Agent vs Single-Agent Systems: The Real Trade-offs | multi-agent systems | Links to production-ai-agent-errors (error propagation) |
+| 10 | written: 2026-04-27 | multi-agent-vs-single-agent-tradeoffs | Multi-Agent vs Single-Agent Systems: The Real Trade-offs | multi-agent systems | Links to production-ai-agent-errors (error propagation) |
 
 ---
 
@@ -42,7 +42,7 @@ The authoritative center. Every AI agents article links here or to a related hub
 
 | # | Status | Slug | Title | Primary Keyword | Internal Links |
 |---|--------|------|-------|-----------------|----------------|
-|| 11 | new | asymmetric-retrieval-agent-memory | Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline | agent memory retrieval | Links to: state-of-ai-agent-memory-2026, hybrid-search-bm25-vector-search |
+|| 11 | written: 2026-04-28 | asymmetric-retrieval-agent-memory | Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline | agent memory retrieval | Links to: state-of-ai-agent-memory-2026, hybrid-search-bm25-vector-search |
 || 11b | new | the-memory-hierarchy-why-rag-is-not-enough | The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory | rag vs agent memory | Links to: state-of-ai-agent-memory-2026, asymmetric-retrieval-agent-memory, rag-vs-fine-tuning | **Added: 2026-04-23 — HN trend on RAG-to-agent-memory evolution** |
 || 12 | new | memory-serialization-between-sessions | Memory Serialization: How Agents Persist State Across Sessions | agent memory persistence | Links to: how-memory-works-in-claude-code, memory-hierarchy-in-ai-systems, the-memory-hierarchy-why-rag-is-not-enough | **Priority: moved up — direct response to HN "why do agents refuse to save observations"** |
 || 13 | new | episodic-vs-semantic-vs-working-memory-agents | Episodic, Semantic, and Working Memory in AI Agents: A Practical Map | agent memory types | Links to: state-of-ai-agent-memory-2026, memory-hierarchy-in-ai-systems |
@@ -193,11 +193,11 @@ The authoritative center. Every AI agents article links here or to a related hub
 
 ---
 
-## Cluster 10: Evaluation and Benchmarking (3 existing + 7 new)
+## Cluster 10: Evaluation and Benchmarking (3 existing + 8 new)
 
 **Existing:** agentic-cli-benchmarks, local-wasm-vector-benchmarks, beam-memory-benchmark
 
-**Gap topics (7):**
+**Gap topics (8):**
 
 | # | Status | Slug | Title | Primary Keyword | Internal Links |
 |---|--------|------|-------|-----------------|----------------|
@@ -208,6 +208,7 @@ The authoritative center. Every AI agents article links here or to a related hub
 | 84 | new | agent-success-rate-benchmarks | Agent Success Rate Benchmarks: Defining and Measuring What Success Looks Like | agent success rate metrics | Links to: agent-evals-that-actually-predict-production, agentic-cli-benchmarks |
 | 85 | new | human-in-the-loop-evaluation | Human-in-the-Loop Evaluation for AI Agents | human in the loop agent eval | Links to: agent-evals-that-actually-predict-production, agent-observability-stack |
 | 86 | new | regression-testing-for-agent-updates | Regression Testing for Agent Behavior After Model Updates | agent regression testing | Links to: agent-canary-deployments, agent-evals-that-actually-predict-production |
+| 92 | new | why-agent-benchmarks-lie | Why Agent Benchmarks Lie: What Trustworthy Evaluation Actually Looks Like | ai agent benchmark reliability | Links to: agent-evals-that-actually-predict-production, production-ai-agent-errors | **Added: 2026-04-28 — HN trend on benchmark exploitation; response to Berkeley RDI article** |
 
 ---
 

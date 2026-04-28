@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</title>
+      <link>https://ninadpathak.com/blog/2026-04-28-asymmetric-retrieval-agent-memory/</link>
+      <description>The retrieval patterns that work for a query do not work when the agent is the one retrieving, and this asymmetry silently breaks production RAG systems.</description>
+      <pubDate>Apr 28, 2026</pubDate>
+    </item>
+    <item>
       <title>Multi-Agent vs Single-Agent Systems: The Real Trade-offs</title>
       <link>https://ninadpathak.com/blog/multi-agent-vs-single-agent-tradeoffs/</link>
       <description>The decision between one agent and many is not about capability. It is about failure modes, latency, and operational complexity.</description>
@@ -117,12 +123,6 @@
       <title>How Memory Works in Claude Code</title>
       <link>https://ninadpathak.com/blog/how-memory-works-in-claude-code/</link>
       <description>A practical guide to understanding how Claude Code retains context across sessions, uses project files, and manages long-term memory for coding tasks.</description>
-      <pubDate>Apr 19, 2026</pubDate>
-    </item>
-    <item>
-      <title>How Memory Works in HyperAgents</title>
-      <link>https://ninadpathak.com/blog/how-memory-works-in-hyperagents/</link>
-      <description>A deep dive into how HyperAgents retain context across interactions, layer memory architectures, and handle session continuity in production.</description>
       <pubDate>Apr 19, 2026</pubDate>
     </item>
   </channel>
