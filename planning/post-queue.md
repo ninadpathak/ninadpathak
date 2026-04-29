@@ -102,3 +102,7 @@ Posts are published one per day. Claude picks the next post, runs the experiment
 - **Visuals**: 12+ per post. MUST be data-driven (charts, sequence diagrams, profiler screenshots).
 - **Casing**: Title Case for titles. Sentence case for headings.
 - **Proof**: Link to the benchmark script or repo for every article.
+
+## Published (2026)
+
+- 2026-04-29 | The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory | the-memory-hierarchy-why-rag-is-not-enough
