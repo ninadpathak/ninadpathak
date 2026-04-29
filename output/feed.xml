@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</title>
+      <link>https://ninadpathak.com/blog/the-memory-hierarchy-why-rag-is-not-enough/</link>
+      <description>RAG handles document retrieval well. It handles agent memory poorly, because agents need episodic recall, working context, and cross-session persistence that a vector store cannot provide.</description>
+      <pubDate>Apr 29, 2026</pubDate>
+    </item>
+    <item>
       <title>Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</title>
       <link>https://ninadpathak.com/blog/2026-04-28-asymmetric-retrieval-agent-memory/</link>
       <description>The retrieval patterns that work for a query do not work when the agent is the one retrieving, and this asymmetry silently breaks production RAG systems.</description>
@@ -117,12 +123,6 @@
       <title>State of AI Agent Memory in 2026</title>
       <link>https://ninadpathak.com/blog/state-of-ai-agent-memory-2026/</link>
       <description>The memory stack for AI agents has exploded into a fragmented mess of competing approaches. Here is what actually works, what is still research, and why the next 18 months will sort the winners from the wreckage.</description>
-      <pubDate>Apr 19, 2026</pubDate>
-    </item>
-    <item>
-      <title>How Memory Works in Claude Code</title>
-      <link>https://ninadpathak.com/blog/how-memory-works-in-claude-code/</link>
-      <description>A practical guide to understanding how Claude Code retains context across sessions, uses project files, and manages long-term memory for coding tasks.</description>
       <pubDate>Apr 19, 2026</pubDate>
     </item>
   </channel>

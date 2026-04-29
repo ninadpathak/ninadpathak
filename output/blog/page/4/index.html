@@ -19,8 +19,8 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flow Engineering for LLM Applications | AI Memory & Agent Glossary</title>
-  <meta name="description" content="Flow engineering involves designing iterative, multi-step LLM architectures rather than relying on a single zero-shot prompt.">
+  <title>Writing | Ninad Pathak</title>
+  <meta name="description" content="Technical articles on AI agents, DevTools, developer documentation, and content strategy. Written by a programmer-turned-writer.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
@@ -39,7 +39,7 @@
   <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://ninadpathak.com/">
+  <link rel="canonical" href="https://ninadpathak.com/blog/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -95,7 +95,7 @@
       <li><a href="/work/"      class="nav-link ">Work</a></li>
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
-      <li><a href="/blog/"      class="nav-link ">Writing</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -136,61 +136,52 @@
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
 
-<!-- Breadcrumb Navigation -->
-<nav aria-label="Breadcrumb" class="breadcrumb">
-  <div class="prose-container">
-    <ol class="breadcrumb-list">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item"><a href="/glossary/">Glossary</a></li>
-      <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">Flow Engineering</li>
-    </ol>
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Writing</div>
+    <h1>Thinking out loud.</h1>
+    <p class="lead">
+      Writing on AI infrastructure, developer tooling, and technical content strategy.
+      Practitioner-level posts from someone who builds the systems and writes about them.
+    </p>
   </div>
-</nav>
+</section>
 
-<article>
-  <header class="post-header">
-    <div class="prose-container">
-      <a href="/glossary/" class="back-link">← All glossary terms</a>
-      <div class="post-meta">
-        <span class="post-meta-date">Mar 22, 2026</span>
-      </div>
-      <h1 class="post-title">Flow Engineering</h1>
-      <p class="lead">The practice of designing deterministic, multi-step architectures where an LLM's output is iteratively refined, tested, and corrected through a predefined pipeline.</p>
-    </div>
-  </header>
+<section class="blog-list-section">
+  <div class="container">
+      <a href="/blog/speculative-decoding-explained/" class="blog-row">
+        <div>
+        <div>
+          <div class="blog-row-title">Speculative Decoding: How to Speed up Llm Inference for Free</div>
+          <div class="blog-row-desc">LLM inference is memory-bound, not compute-bound. Speculative decoding uses this fact to speed up generation by 2-3x using a smaller draft model to predict tokens for a larger one.</div>
+          <div class="blog-row-meta">
+            <span class="read-time">2 min read</span>
+            <span class="tag">ai</span>
+            <span class="tag">llm</span>
+            <span class="tag">infrastructure</span>
+          </div>
+        </div>
+      </a>
 
-  <div class="post-body">
-    <div class="prose-container">
-      <div class="post-content glossary-content">
-        <p>Popularized by projects like AlphaCodium, flow engineering assumes that LLMs are relatively weak at zero-shot, complex reasoning but exceptionally strong when forced to iterate. Instead of writing one massive prompt hoping for the perfect output, flow engineers design a state machine. The LLM is forced through a sequence: generating a plan, writing draft code, running that code against a compiler, reading the error trace, and attempting a fix. By rigidly structuring this 'flow', developers can dramatically increase the reliability and performance of an underlying model without needing to upgrade to a more expensive, larger parameter model.</p>
-        
-        <h2>How It Works</h2>
-        A classic flow engineering pipeline for code generation looks like:
-<ul>
-  <li><strong>Phase 1 (Reflection):</strong> The model reads the problem and outputs its understanding of the constraints.</li>
-  <li><strong>Phase 2 (Planning):</strong> The model outlines the algorithmic approach without writing syntax.</li>
-  <li><strong>Phase 3 (Generation):</strong> The model generates the actual code based strictly on the plan.</li>
-  <li><strong>Phase 4 (Execution & Critique):</strong> The code is run in a sandbox. A separate prompt passes the execution trace (success or stack trace) back to the model for refinement.</li>
-</ul>
+      <nav class="pagination">
+        <div class="pagination-inner">
+          <a href="/blog/page/3/" class="pagination-link prev">
+            <span class="arrow">←</span> Previous
+          </a>
 
-        <h2>Common Use Cases</h2>
-        <ul>
-          <li>Competitive programming and automated software engineering.</li>
-          <li>Complex data extraction where the schema must be validated iteratively.</li>
-          <li>High-stakes content generation requiring rigorous fact-checking loops.</li>
-        </ul>
+          <span class="pagination-info">
+            Page 4 of 4
+          </span>
 
-        <h2>Related Terms</h2>
-        <ul class="related-terms-list">
-          <li><a href="/glossary/agentic-engineering/">Agentic Engineering</a></li>
-          <li><a href="/glossary/test-time-compute/">Test-Time Compute (TTC)</a></li>
-        </ul>
-      </div>
-    </div>
+          <span class="pagination-link disabled next">
+            Next <span class="arrow">→</span>
+          </span>
+        </div>
+      </nav>
+
   </div>
-</article>
+</section>
+
 </main>
 
 <div class="booking-modal" id="bookingModal" aria-hidden="true">
