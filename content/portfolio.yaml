@@ -202,3 +202,48 @@ entries:
     client: "Firecrawl"
     category: "Developer Infrastructure"
     url: "https://www.firecrawl.dev/blog/selenium-web-scraping"
+
+  - title: "Agent Skills Explained: How SKILL.md Files Work and Why They're Everywhere"
+    client: "Firecrawl"
+    category: "DevTools"
+    url: "https://www.firecrawl.dev/blog/agent-skills-explained"
+
+  - title: "Claude Web Fetch vs Firecrawl— Which One Actually Works for Web Extraction?"
+    client: "Firecrawl"
+    category: "DevTools"
+    url: "https://www.firecrawl.dev/blog/claude-web-fetch-vs-firecrawl"
+
+  - title: "CMS Migration: A Developer's Guide to Doing It Right in 2026"
+    client: "Firecrawl"
+    category: "Developer Infrastructure"
+    url: "https://www.firecrawl.dev/blog/cms-migration-guide"
+
+  - title: "cURL Web Scraping Guide: How to Scrape Web Pages with cURL"
+    client: "Firecrawl"
+    category: "Developer Infrastructure"
+    url: "https://www.firecrawl.dev/blog/curl-web-scraping-guide"
+
+  - title: "Self-Hosting Mem0: A Complete Docker Deployment Guide"
+    client: "Mem0"
+    category: "Developer Infrastructure"
+    url: "https://mem0.ai/blog/self-hosting-mem0"
+
+  - title: "How to use stacked PRs to unblock your entire team"
+    client: "Graphite"
+    category: "DevTools"
+    url: "https://graphite.dev/blog/how-to-use-stacked-prs"
+
+  - title: "What's the best GitHub pull request merge strategy?"
+    client: "Graphite"
+    category: "DevTools"
+    url: "https://graphite.dev/blog/best-github-pull-request-merge-strategy"
+
+  - title: "How AI Testing Agents Accelerate QA"
+    client: "LambdaTest"
+    category: "AI Systems"
+    url: "https://www.testmu.ai/blog/ai-testing-agents-accelerate-qa"
+
+  - title: "AI Testing vs. Traditional Testing: Efficiency and Adaptability"
+    client: "LambdaTest"
+    category: "AI Systems"
+    url: "https://www.testmu.ai/blog/ai-testing-vs-traditional-testing"
