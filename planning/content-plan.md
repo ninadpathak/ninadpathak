@@ -1,6 +1,6 @@
 # Content Plan: AI Agents Hub and Spoke (SEO-Optimized)
 
-**Last updated:** 2026-04-28
+**Last updated:** 2026-05-04
 **Goal:** 75 net-new articles across 9 topic clusters. Daily publishing starting now.
 
 ---
@@ -45,7 +45,7 @@ The authoritative center. Every AI agents article links here or to a related hub
 || 11 | written: 2026-04-28 | asymmetric-retrieval-agent-memory | Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline | agent memory retrieval | Links to: state-of-ai-agent-memory-2026, hybrid-search-bm25-vector-search |
 || 11b | written: 2026-04-29 | the-memory-hierarchy-why-rag-is-not-enough | The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory | rag vs agent memory | Links to: state-of-ai-agent-memory-2026, asymmetric-retrieval-agent-memory, rag-vs-fine-tuning | **Added: 2026-04-23 — HN trend on RAG-to-agent-memory evolution** |
 || 12 | written: 2026-04-30 | memory-serialization-between-sessions | Memory Serialization: How Agents Persist State Across Sessions | agent memory persistence | Links to: how-memory-works-in-claude-code, memory-hierarchy-in-ai-systems, the-memory-hierarchy-why-rag-is-not-enough | **Priority: moved up — direct response to HN "why do agents refuse to save observations"** |
-|| 13 | new | episodic-vs-semantic-vs-working-memory-agents | Episodic, Semantic, and Working Memory in AI Agents: A Practical Map | agent memory types | Links to: state-of-ai-agent-memory-2026, memory-hierarchy-in-ai-systems |
+|| 13 | written: 2026-05-04 | episodic-vs-semantic-vs-working-memory-agents | Episodic, Semantic, and Working Memory in AI Agents: A Practical Map | agent memory types | Links to: state-of-ai-agent-memory-2026, memory-hierarchy-in-ai-systems |
 || 14 | new | memory-versioning-and-audit-trails | Memory Versioning and Audit Trails for Regulated AI Agents | ai agent memory audit | Links to: state-of-ai-agent-memory-2026, production-ai-agent-errors |
 || 15 | new | contextual-compression-for-agent-memory | Contextual Compression for Agent Memory: What Stays and What Goes | agent memory compression | Links to: llm-context-windows-explained, memory-hierarchy-in-ai-systems |
 || 16 | new | agent-memory-for-customer-support | Building a Customer Support Agent with Persistent Memory: A Worked Example | customer support ai agent | Links to: memory-for-voice-ai-agents, state-of-ai-agent-memory-2026 |
@@ -226,6 +226,7 @@ The authoritative center. Every AI agents article links here or to a related hub
 | 89 | new | debugging-agent-behaviors-in-production | Debugging Agent Behaviors in Production: Tools and Patterns | debugging ai agents production | Links to: agent-observability-stack, agent-latency-optimization |
 | 90 | new | developer-handoff-in-ai-features | Developer Handoff Patterns When Shipping AI Features | ai feature developer handoff | Links to: technical-writing-for-ai-products-the-new-rules, agent-observability-stack |
 | 91 | new | ai-assistants-in-legacy-codebase-migration | Using AI Assistants for Legacy Codebase Migration | ai legacy code migration | Links to: best-llms-for-coding, ai-code-review-automation |
+| 92 | **NEW 2026-05-04** | repo-agent-friendliness-benchmark | Repo Friendliness Score for AI Coding Agents: What Makes a Codebase Agent-Friendly? | ai coding agent repo friendliness | Links to: agentic-cli-benchmarks, evaluating-agent-frameworks-2026, best-llms-for-coding | **Added: 2026-05-04 — HN demand from agentfriendlycode.com; original benchmark data opportunity** |
 
 ---
 
