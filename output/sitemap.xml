@@ -56,6 +56,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://ninadpathak.com/blog/2026-05-05-memory-versioning-and-audit-trails/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ninadpathak.com/blog/episodic-vs-semantic-vs-working-memory-agents/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://ninadpathak.com/blog/hermes-md-git-commit-billing-bug/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
