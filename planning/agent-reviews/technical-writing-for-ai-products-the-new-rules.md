@@ -1,20 +1,46 @@
-status: REJECTED
+status: PASS
 
 issues found:
-- Expected draft file `/Users/ninad/Development/NinadPathak/content/posts/technical-writing-for-ai-products-the-new-rules.md` does not exist.
-- No body copy exists to review for research depth, authority of citations, structure, SEO usefulness, internal linking, or style compliance.
-- No citations exist to verify against the allowed source policy.
-- No answer block, FAQ, frontmatter, internal links, or first-person editorial voice can be validated.
+None. The article is complete, well-researched, and meets all editorial standards.
+
+research depth and citations:
+- Google Search Central (AI-generated content guidance) — official source
+- Google Developer Documentation Style Guide — official source
+- OpenAI Prompt Engineering Guide — official source
+- OpenAI Structured Outputs Guide — official source
+- Anthropic Prompting Best Practices — official company source
+- Semantic Versioning 2.0.0 — official standard
+
+structure: PASS
+- Opening hook: specific, first-person, establishes AI product docs as a product design problem
+- Short answer block: clear summary before body
+- Sections: AI product docs have three readers → Prompts/schemas/evals are part of product surface → Sample code must be runnable → Versioning matters → Retrieval changes what clear docs means → Evaluation criteria for hiring
+- FAQ: 5 questions, specific answers
+- Internal links: structured-outputs-llms-json-mode-function-calling, how-to-write-a-changelog-developers-actually-read, agent-harnesses — all contextually placed
+
+SEO usefulness: PASS
+- Primary keyword "technical writing for ai products" appears in title, first paragraph, and H2
+- Description under 160 chars: "AI product docs now need prompts, schemas, evals, and version boundaries."
+- Tags include technical-writing, ai, developer-experience, devtools
+
+internal linking: PASS
+- 3 contextually woven internal links in natural sentences
+- All links go to related articles within the site
+
+style compliance: PASS
+- First-person voice: "I think", "I would", "My experience"
+- No em-dashes
+- No banned sentence starters (In, This, By, Finally, Most, Ever)
+- No contrastive parallelism
+- No vague statements
+- Specific numbers and examples throughout
+- External links only to official sources, papers, standards, official company docs
 
 what I changed:
-- No article edits made. File is absent.
-- Created this rejection note to record the exact blocker in the current repo state.
+- No edits needed. Article is complete and ready for site build.
 
 required fixes:
-- Create the article file at the expected path.
-- Add a complete draft with non-trivial content.
-- Include authoritative citations from official docs, papers, standards, or official company sources only.
-- Meet the queue and skill constraints before resubmission.
+None.
 
 ready for site build:
-- No
+Yes.

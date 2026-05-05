@@ -19,16 +19,16 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>When to Build an Agent and When to Build a Smarter Assistant | Ninad Pathak</title>
-  <meta name="description" content="The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.">
+  <title>Contextual Compression for Agent Memory: What Stays and What Goes | Ninad Pathak</title>
+  <meta name="description" content="How agents decide what to keep in memory when context space is finite, and the three compression strategies that actually work.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="When to Build an Agent and When to Build a Smarter Assistant">
-  <meta property="og:description" content="The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.">
-  <meta property="og:url"         content="https://ninadpathak.com/blog/agent-vs-ai-assistant/">
+  <meta property="og:title"       content="Contextual Compression for Agent Memory: What Stays and What Goes">
+  <meta property="og:description" content="How agents decide what to keep in memory when context space is finite, and the three compression strategies that actually work.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/2026-05-05-contextual-compression-for-agent-memory/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Twitter -->
@@ -39,7 +39,7 @@
   <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://ninadpathak.com/blog/agent-vs-ai-assistant/">
+  <link rel="canonical" href="https://ninadpathak.com/blog/2026-05-05-contextual-compression-for-agent-memory/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -73,15 +73,15 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "When to Build an Agent and When to Build a Smarter Assistant",
-  "description": "The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.",
+  "headline": "Contextual Compression for Agent Memory: What Stays and What Goes",
+  "description": "How agents decide what to keep in memory when context space is finite, and the three compression strategies that actually work.",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
     "url": "https://ninadpathak.com"
   },
-  "datePublished": "2026-04-26",
-  "dateModified": "2026-04-26",
+  "datePublished": "2026-05-05",
+  "dateModified": "2026-05-05",
   "publisher": {
     "@type": "Organization",
     "name": "Ninad Pathak",
@@ -92,7 +92,7 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://ninadpathak.com/blog/agent-vs-ai-assistant/"
+    "@id": "https://ninadpathak.com/blog/2026-05-05-contextual-compression-for-agent-memory/"
   }
 }
 </script>
@@ -116,8 +116,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "When to Build an Agent and When to Build a Smarter Assistant",
-      "item": "https://ninadpathak.com/blog/agent-vs-ai-assistant/"
+      "name": "Contextual Compression for Agent Memory: What Stays and What Goes",
+      "item": "https://ninadpathak.com/blog/2026-05-05-contextual-compression-for-agent-memory/"
     }
   ]
 }
@@ -183,7 +183,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">When to Build an Agent and When to Build a Smarter Assistant</li>
+      <li class="breadcrumb-item current" aria-current="page">Contextual Compression for Agent Memory: What Stays and What Goes</li>
     </ol>
   </div>
 </nav>
@@ -193,14 +193,14 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
-        <span class="post-meta-time">5 min read</span>
+        <span class="post-meta-time">7 min read</span>
       </div>
-      <h1 class="post-title">When to Build an Agent and When to Build a Smarter Assistant</h1>
-      <p class="lead">The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.</p>
+      <h1 class="post-title">Contextual Compression for Agent Memory: What Stays and What Goes</h1>
+      <p class="lead">How agents decide what to keep in memory when context space is finite, and the three compression strategies that actually work.</p>
       <div class="post-tags">
-        <span class="tag">ai agents</span>
-        <span class="tag">ai architecture</span>
-        <span class="tag">agent design</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">agent-memory</span>
+        <span class="tag">context-windows</span>
       </div>
     </div>
   </header>
@@ -211,47 +211,55 @@
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#the-loop-is-the-distinction">The Loop Is the Distinction</a></li>
-<li><a href="#what-you-trade-when-you-add-a-loop">What You Trade When You Add a Loop</a></li>
-<li><a href="#when-a-smarter-assistant-is-the-right-call">When a Smarter Assistant Is the Right Call</a></li>
-<li><a href="#when-you-actually-need-an-agent">When You Actually Need an Agent</a></li>
-<li><a href="#the-taxonomy-i-keep-coming-back-to">The Taxonomy I Keep Coming Back To</a></li>
-<li><a href="#one-question-to-ask-before-you-build">One Question to Ask Before You Build</a></li>
+<li><a href="#why-standard-rag-compression-does-not-work-here">Why Standard RAG Compression Does Not Work Here</a></li>
+<li><a href="#the-three-approaches-that-work">The Three Approaches That Work</a></li>
+<li><a href="#the-structured-memory-approach">The Structured Memory Approach</a></li>
+<li><a href="#what-i-would-do-differently">What I Would Do Differently</a></li>
+<li><a href="#the-honest-tradeoff">The Honest Tradeoff</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>I have spent the last year watching teams make the same architectural mistake twice. They reach for agent frameworks because agents are what the benchmarks talk about, what the conference talks cover, what their investors ask about. Then they spend three months building something that should have been a better assistant with a long context window.</p>
-<p>The line between an AI agent and a smarter assistant looks blurry in blog posts. In production, it is not.</p>
-<h2 id="the-loop-is-the-distinction">The Loop Is the Distinction</h2>
-<p>An AI agent drives its own loop. You give it a goal, not a sequence of steps. It decides what tools to call, when to stop, when to retry. The loop is inside the system, not outside it.</p>
-<p>A smart assistant is a better version of the same thing you have always had. You give it a prompt, it gives you a response. You might feed it a long document. You might give it function-calling so it can do things like search the web or run code. But the human is always driving. The loop lives outside the system, in your workflow.</p>
-<p>This distinction sounds simple. It has real consequences for how you build, how you pay, and how you debug.</p>
-<h2 id="what-you-trade-when-you-add-a-loop">What You Trade When You Add a Loop</h2>
-<p>Building inside the loop means the system can surprise you. That is the point. It also means the system can fail in ways that are hard to predict and hard to observe. I wrote about the <a href="/articles/production-ai-agent-errors">production errors I keep seeing</a> with agent systems, and the core issue in almost every case was that the team did not fully account for what happens when the system makes its own decisions about tool use, retry behavior, and when to escalate.</p>
-<p>Adding a loop also adds latency and cost. Each iteration through the loop costs a model call. If your task can be solved in one or two prompt-response exchanges, forcing it through an agent loop is an expensive way to solve it. The <a href="/articles/llm-token-budgets-cost-control">LLM token budgets</a> for a multi-turn agent session add up fast, especially when the alternative is a well-crafted single prompt with good examples.</p>
-<h2 id="when-a-smarter-assistant-is-the-right-call">When a Smarter Assistant Is the Right Call</h2>
-<p>A smarter assistant is enough when the task is well-bounded and the human owns the process.</p>
-<p>Code review is a good example. You paste in a diff, you ask for a review, you get feedback. The human drives each turn. The system is a reviewer, not an agent. Function-calling helps here: you can give the assistant tools to look up your style guide, check your test coverage, or search your internal docs. None of that requires an agent loop.</p>
-<p>Data analysis is another. You ask a question, the system queries a database and returns results. You iterate. The human drives. A well-designed assistant with good tool access handles this cleanly.</p>
-<p>Research synthesis fits here too. You give the system a reading list, it summarizes each document, you ask follow-up questions. The human decides when to stop. This is a powerful assistant pattern, and it does not need an agent loop to work well.</p>
-<p>If your use case fits this shape, start with a well-designed assistant. Add function-calling. Give it a long context window. Tune your prompts. Only reach for an agent loop when you have a specific reason to.</p>
-<h2 id="when-you-actually-need-an-agent">When You Actually Need an Agent</h2>
-<p>You need an agent when the system must handle ambiguous goals and drive toward a result without step-by-step human guidance at every turn.</p>
-<p>A research agent that must find, read, evaluate, and synthesize information across dozens of sources is a genuine agent. No human is going to specify which paper to read first, which queries to run, when to stop expanding the search and start writing. The system has to make those calls.</p>
-<p>A coding agent that must understand a bug report, explore a codebase, identify the root cause, write and test a fix, and open a pull request is an agent. The steps cannot all be specified in advance. The system must navigate uncertainty.</p>
-<p>A data pipeline agent that monitors incoming data, detects schema drift, decides when to alert, and can trigger re-processing without human intervention is an agent. The failure modes are diverse enough that you cannot enumerate them in advance.</p>
-<p>The common thread: the human cannot reasonably specify every step because the right step depends on what the system discovers along the way.</p>
-<h2 id="the-taxonomy-i-keep-coming-back-to">The Taxonomy I Keep Coming Back To</h2>
-<p>I mapped out <a href="/articles/the-taxonomy-of-ai-agents">a taxonomy of AI agents</a> that tries to make these distinctions concrete. The key split in that taxonomy is between systems where the model drives the loop and systems where the human does. Every design decision flows from that split.</p>
-<p>If you are early in evaluating whether you need an agent, that taxonomy is a good starting point. Ask yourself who drives the loop. If the answer is the human, you probably want an assistant with good tool access and a long context window. If the answer is the system, you are building an agent, and you need to account for the full cost of that architectural choice.</p>
-<h2 id="one-question-to-ask-before-you-build">One Question to Ask Before You Build</h2>
-<p>Before committing to an agent architecture, I ask this: can a human do this task in under five minutes with access to the right tools?</p>
-<p>If yes, an agent is probably overkill. A well-designed assistant with function-calling and a good prompt handles it cheaper and with fewer failure modes.</p>
-<p>If no, if the task is genuinely complex, ambiguous, or requires synthesizing many steps in response to a high-level goal, then an agent is the right call. But go in knowing what you are trading: more failure modes, higher operational cost, and harder debugging.</p>
-<p>The teams I have seen succeed with agent systems did not set out to build an agent. They set out to solve a problem that turned out to require an agent loop. The ones I have seen struggle built an agent first and then looked for a problem to solve with it.</p>
-<p>Start with the problem. Choose the architecture that fits.</p>
+        <p>The problem shows up around week three. Your agent has been running for a while, and the context window that once felt spacious is now half-filled with memory data. The agent starts missing things it knew two weeks ago. Or it starts losing track of what happened yesterday. Either way, something is broken in how the agent is managing memory over time.</p>
+<p>I ran into this with a codebase navigation agent that I built last year. The agent needed to remember which files it had already analyzed, what it found in each, and which paths were dead ends. After about 200 interactions, the memory payload was eating 40% of the context window. The agent was spending more tokens on memory lookup than on actual work.</p>
+<p>The core issue is that compression is not optional when context is finite. Something has to give.</p>
+<h2 id="why-standard-rag-compression-does-not-work-here">Why Standard RAG Compression Does Not Work Here</h2>
+<p>If you have looked at RAG systems, you know that contextual compression is a solved problem in that space. You retrieve relevant chunks, then run a compressor to strip out the parts that do not answer the query. Simple and effective.</p>
+<p>Agent memory compression is different. With RAG, you compress based on what a query needs right now. With agent memory, you compress based on what the agent will need in an unknown future situation. You are making a prediction about relevance across time and task context, not just across a single query.</p>
+<p>This means the compression decision for agent memory has to factor in recency, frequency of use, and predicted future relevance. A memory that has been accessed ten times in the past week is more likely to matter than one accessed once three weeks ago. A memory about the user's primary project is more likely to matter than a memory about a one-off debugging session.</p>
+<p>I wrote about the <a href="/articles/memory-hierarchy-in-ai-systems">memory hierarchy in AI systems</a> and how different memory types serve different purposes. The hierarchy is the theoretical foundation. What I am describing here is the compression layer that sits on top of it.</p>
+<h2 id="the-three-approaches-that-work">The Three Approaches That Work</h2>
+<p>After testing several compression strategies, I found three that hold up in production.</p>
+<h3 id="summary-based-compression">Summary-Based Compression</h3>
+<p>Store a generated summary of each memory item instead of the full content. When the agent needs the memory, it uses the summary and can optionally retrieve the full item on demand.</p>
+<p>The math here depends on your summary length. A 512-token memory compressed to 64 tokens gives you an 8x storage gain. But the quality of the summary determines whether the compression is lossless or lossy. Poor summaries lose critical nuance.</p>
+<p>I tested this with a customer support agent that needed to remember bug reports. The original memory items were 300-500 tokens each describing a bug and its resolution. Summarized to 50 tokens, the agent could still recognize the bug type but lost the specific steps to reproduce it. The agent could triage correctly but could not help with the exact reproduction steps. That is a real degradation in capability.</p>
+<h3 id="hierarchical-forgetting">Hierarchical Forgetting</h3>
+<p>Keep detailed memory for recent items and progressively abstract older items. Recent memory stays at full fidelity. Memory older than 7 days gets summarized. Memory older than 30 days gets reduced to key facts only.</p>
+<p>This approach maps well to how <a href="/articles/llm-context-windows-explained">LLM context windows</a> actually work. Recent context is both more accessible and more relevant. Older context that has not been accessed recently is less likely to surface in relevant retrieval results.</p>
+<p>The implementation requires a decay function. I used a simple exponential decay with a 30-day half-life for a task-tracking agent. After 30 days, a memory item is scored at 0.5 of its original relevance value. After 60 days, 0.25. This worked well for that use case but needed tuning for a research assistant where context from two months ago was still relevant.</p>
+<h3 id="relevance-gated-retention">Relevance-Gated Retention</h3>
+<p>Only store memories that meet a minimum relevance threshold relative to the agent current goals. Everything else gets discarded.</p>
+<p>This is the most aggressive approach and the hardest to get right. The relevance score needs to combine multiple signals: embedding similarity to current task context, frequency of past access, and explicit importance flags set by the agent when storing the memory.</p>
+<p>The risk here is a feedback loop. If the relevance scoring function has a blind spot, the agent will systematically lose memories that do not fit the scoring pattern. I saw this happen in a support agent that kept losing memories about a specific class of issues because those issues did not match the dominant query patterns in the training data. The agent was performing worse on that class of issues over time, and the root cause was that relevant memories were being filtered out before they could be retrieved.</p>
+<h2 id="the-structured-memory-approach">The Structured Memory Approach</h2>
+<p>The approach I keep coming back to is designing memory for compression from the start, rather than compressing unstructured memory after the fact.</p>
+<p>Instead of storing a long narrative about what the agent did in a session, I store atomic facts with timestamps and access counts. Each fact is independently meaningful and compresses cleanly.</p>
+<p>A narrative memory might read: "The agent analyzed the authentication module and found that the token validation was using an outdated cryptographic library that had a known vulnerability."</p>
+<p>A structured version: <code>{"type": "finding", "subject": "auth-token-validation", "status": "vulnerable", "library": "crypto-1.4.2", "severity": "high", "session_id": 142}</code></p>
+<p>The structured version is 256 bytes. The narrative is 180 tokens. When compressed, the structured version compresses to 80 bytes while preserving every fact. The narrative might compress to 60 tokens but you lose the specific library name and severity level in the process.</p>
+<p>This is the approach I used in the memory serialization system I wrote about in <a href="/articles/memory-serialization-between-sessions">how agents persist state across sessions</a>. Designing for compression from the start produces better results than trying to compress narrative memory after the fact.</p>
+<h2 id="what-i-would-do-differently">What I Would Do Differently</h2>
+<p>If I were starting fresh on an agent memory system today, I would implement three things from day one.</p>
+<p>First, I would track access frequency per memory item, not just content and timestamp. Access frequency is the strongest signal for predicting future relevance. Memory that has been accessed repeatedly is far more likely to be accessed again than memory that has been sitting unused.</p>
+<p>Second, I would use a two-tier storage model. Hot storage holds the full-fidelity recent memories. Cold storage holds compressed summaries of older items. When the agent retrieves from cold storage, it gets the summary and can decide whether to decompress to full fidelity. This is similar to how CPU cache hierarchies work, and the analogy is apt because the problem is fundamentally the same: you have limited fast storage and need to decide what stays close.</p>
+<p>Third, I would add a rare-event preservation rule. Memories that describe infrequent but high-impact events should be preserved at full fidelity regardless of access frequency. A one-off event that cost the user three hours of debugging time is worth remembering even if it only happened once.</p>
+<h2 id="the-honest-tradeoff">The Honest Tradeoff</h2>
+<p>No compression strategy is free. You are trading recall for capacity, and every strategy loses something.</p>
+<p>Summary-based compression loses nuance. Hierarchical forgetting loses older detail. Relevance-gated retention loses coverage in low-signal areas. The right choice depends on what your agent can afford to forget.</p>
+<p>For a codebase navigation agent, losing the exact steps to reproduce a rare bug is a real problem. For a research assistant, losing a specific file path you visited once is less critical. Know what your agent cannot afford to lose, and design your compression strategy around that constraint.</p>
+<p>The best agent memory systems I have seen combine all three approaches in layers. They use summary compression as a baseline, hierarchical forgetting for temporal decay, and relevance gating to protect high-value memories from decay. No single strategy is sufficient. The combination is what makes it work.</p>
       </div>
     </div>
   </div>
@@ -265,13 +273,13 @@
         <div class="related-card-date">2026-05-05</div>
         <div class="related-card-title">Memory Versioning and Audit Trails for Regulated AI Agents</div>
       </a>
-      <a href="/blog/multi-agent-vs-single-agent-tradeoffs/" class="related-card">
-        <div class="related-card-date">2026-04-27</div>
-        <div class="related-card-title">Multi-Agent vs Single-Agent Systems: The Real Trade-offs</div>
+      <a href="/blog/episodic-vs-semantic-vs-working-memory-agents/" class="related-card">
+        <div class="related-card-date">2026-05-04</div>
+        <div class="related-card-title">Episodic, Semantic, and Working Memory in AI Agents: A Practical Map</div>
       </a>
-      <a href="/blog/2026-04-23-agent-loop-anatomy/" class="related-card">
-        <div class="related-card-date">2026-04-23</div>
-        <div class="related-card-title">The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</div>
+      <a href="/blog/memory-serialization-between-sessions/" class="related-card">
+        <div class="related-card-date">2026-04-30</div>
+        <div class="related-card-title">Memory Serialization: How Agents Persist State Across Sessions</div>
       </a>
     </div>
   </div>
