@@ -115,3 +115,4 @@ Posts are published one per day. Claude picks the next post, runs the experiment
     - Status: published
 
 2026-05-05 | Contextual Compression for Agent Memory: What Stays and What Goes | contextual-compression-for-agent-memory
+2026-05-06 | Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants | why-coding-agents-lose-their-memory
