@@ -54,6 +54,7 @@ The authoritative center. Every AI agents article links here or to a related hub
 | 11c | **NEW** | knowledge-graphs-for-agent-memory-the-practical-answer | Knowledge Graphs for Agent Memory: When They Help and When RAG Is Enough | knowledge graph agent memory | Links to: state-of-ai-agent-memory-2026, memory-hierarchy-in-ai-systems, rag-vs-fine-tuning, memory-serialization-between-sessions | **Added: 2026-04-30 — HN demand from Ask HN posts on KG for agent memory; direct answer to questions being asked** |
 | 19 | new | fine-tuning-vs-rag-for-agent-memory | Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense | agent memory fine-tuning rag | Links to: rag-vs-fine-tuning, state-of-ai-agent-memory-2026 |
 | 19b | new | zero-search-vs-retrieval-memory-agents | Zero-Search Memory for AI Agents: A Practical Evaluation | zero-search memory AI agents | Links to: state-of-ai-agent-memory-2026, asymmetric-retrieval-agent-memory, context-windows-vs-memory |
+| written: 2026-05-06 | why-coding-agents-lose-their-memory | Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants | ai coding agent memory persistence | Links to: memory-serialization-between-sessions, how-memory-works-in-claude-code, production-ai-agent-errors | **Written: 2026-05-06** |
 
 ---
 

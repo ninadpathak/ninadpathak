@@ -113,3 +113,5 @@ Posts are published one per day. Claude picks the next post, runs the experiment
     - Slug: episodic-vs-semantic-vs-working-memory-agents
     - Primary Keyword: agent memory types
     - Status: published
+
+2026-05-05 | Contextual Compression for Agent Memory: What Stays and What Goes | contextual-compression-for-agent-memory

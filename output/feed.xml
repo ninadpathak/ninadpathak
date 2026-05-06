@@ -6,6 +6,12 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</title>
+      <link>https://ninadpathak.com/blog/why-coding-agents-lose-their-memory/</link>
+      <description>The memory persistence patterns that actually work for AI coding assistants, and why most agents lose context between sessions.</description>
+      <pubDate>May 06, 2026</pubDate>
+    </item>
+    <item>
       <title>Memory Versioning and Audit Trails for Regulated AI Agents</title>
       <link>https://ninadpathak.com/blog/2026-05-05-memory-versioning-and-audit-trails/</link>
       <description>If your agent overwrites its memory, you cannot pass a compliance audit. How to build append-only memory versioning and trace agent reasoning.</description>
@@ -117,12 +123,6 @@
       <title>How Memory Works in DeerFlow</title>
       <link>https://ninadpathak.com/blog/how-memory-works-in-deerflow/</link>
       <description>A deep dive into the memory architecture of DeerFlow: layered context passing, session state files, sub-agent isolation, and how it compares to Letta, AutoGen, and CrewAI.</description>
-      <pubDate>Apr 19, 2026</pubDate>
-    </item>
-    <item>
-      <title>RAG vs Memory: What AI Developers Need to Know</title>
-      <link>https://ninadpathak.com/blog/rag-vs-memory/</link>
-      <description>Understand the fundamental differences between RAG and memory systems for LLM applications, when to use each, and how to combine them in production.</description>
       <pubDate>Apr 19, 2026</pubDate>
     </item>
   </channel>
