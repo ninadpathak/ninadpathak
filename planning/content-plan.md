@@ -48,8 +48,8 @@ The authoritative center. Every AI agents article links here or to a related hub
 || 13 | written: 2026-05-04 | episodic-vs-semantic-vs-working-memory-agents | Episodic, Semantic, and Working Memory in AI Agents: A Practical Map | agent memory types | Links to: state-of-ai-agent-memory-2026, memory-hierarchy-in-ai-systems |
 || 14 | written: 2026-05-05 | memory-versioning-and-audit-trails | Memory Versioning and Audit Trails for Regulated AI Agents | ai agent memory audit | Links to: state-of-ai-agent-memory-2026, production-ai-agent-errors |
 || 15 | written: 2026-05-05 | contextual-compression-for-agent-memory | Contextual Compression for Agent Memory: What Stays and What Goes | agent memory compression | Links to: llm-context-windows-explained, memory-hierarchy-in-ai-systems |
-|| 16 | new | agent-memory-for-customer-support | Building a Customer Support Agent with Persistent Memory: A Worked Example | customer support ai agent | Links to: memory-for-voice-ai-agents, state-of-ai-agent-memory-2026 |
-|| 17 | new | memory-attribution-errors | Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures | agent memory errors | Links to: production-ai-agent-errors, episodic-vs-semantic-vs-working-memory-agents |
+|| 16 | written: 2026-05-10 | agent-memory-for-customer-support | Building a Customer Support Agent with Persistent Memory: A Worked Example | customer support ai agent | https://ninadpathak.com/articles/agent-memory-for-customer-support |
+|| 17 | written: 2026-05-11 | memory-attribution-errors | Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures | agent memory errors | Links to: production-ai-agent-errors, episodic-vs-semantic-vs-working-memory-agents |
 || 18 | new | shared-vs-isolated-memory-multi-agent | Shared Memory vs Isolated Memory in Multi-Agent Workflows | multi-agent memory architecture | Links to: multi-agent-vs-single-agent-tradeoffs, memory-hierarchy-in-ai-systems |
 | 11c | **NEW** | knowledge-graphs-for-agent-memory-the-practical-answer | Knowledge Graphs for Agent Memory: When They Help and When RAG Is Enough | knowledge graph agent memory | Links to: state-of-ai-agent-memory-2026, memory-hierarchy-in-ai-systems, rag-vs-fine-tuning, memory-serialization-between-sessions | **Added: 2026-04-30 — HN demand from Ask HN posts on KG for agent memory; direct answer to questions being asked** |
 | 19 | new | fine-tuning-vs-rag-for-agent-memory | Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense | agent memory fine-tuning rag | Links to: rag-vs-fine-tuning, state-of-ai-agent-memory-2026 |
@@ -228,6 +228,69 @@ The authoritative center. Every AI agents article links here or to a related hub
 | 90 | new | developer-handoff-in-ai-features | Developer Handoff Patterns When Shipping AI Features | ai feature developer handoff | Links to: technical-writing-for-ai-products-the-new-rules, agent-observability-stack |
 | 91 | new | ai-assistants-in-legacy-codebase-migration | Using AI Assistants for Legacy Codebase Migration | ai legacy code migration | Links to: best-llms-for-coding, ai-code-review-automation |
 | 92 | **NEW 2026-05-04** | repo-agent-friendliness-benchmark | Repo Friendliness Score for AI Coding Agents: What Makes a Codebase Agent-Friendly? | ai coding agent repo friendliness | Links to: agentic-cli-benchmarks, evaluating-agent-frameworks-2026, best-llms-for-coding | **Added: 2026-05-04 — HN demand from agentfriendlycode.com; original benchmark data opportunity** |
+
+---
+
+## Cluster 12: Keyword Research Topics (Google Suggest Pipeline)
+
+**Generated:** 2026-05-06 via Google Suggest API + technical filtering
+**Method:** clients1.google.com/complete/search (ds=yt) — 287 technical keywords analyzed
+**Existing articles:** 67 | **New topics:** 50
+
+**Gap topics (50):**
+
+| # | Status | Slug | Title | Primary Keyword | Internal Links |
+|---|--------|------|-------|-----------------|----------------|
+| 93 | written | llm-inference-optimization | LLM Inference Optimization: What Actually Works in Production | llm inference optimization | https://ninadpathak.com/articles/llm-inference-optimization |
+| 94 | new | function-calling-openai | function calling openai | function calling openai | |
+| 95 | new | multi-agent-orchestration-in-copilot-studio | multi-agent orchestration in copilot studio | multi-agent orchestration in copilot studio | |
+| 96 | new | rag-retrieval-augmented-generation | rag retrieval augmented generation | rag retrieval augmented generation | |
+| 97 | new | agent-framework-microsoft | agent framework microsoft | agent framework microsoft | |
+| 98 | new | kv-cache-in-llm | kv cache in llm | kv cache in llm | |
+| 99 | new | flash-attention-explained | flash attention explained | flash attention explained | |
+| 100 | new | plan-and-execute-agent | plan and execute agent | plan and execute agent | |
+| 101 | new | supervisor-agent-langgraph | supervisor agent langgraph | supervisor agent langgraph | |
+| 102 | new | hybrid-search-rag | hybrid search rag | hybrid search rag | |
+| 103 | new | parent-document-retriever | parent document retriever | parent document retriever | |
+| 104 | new | prompt-injection-attack | prompt injection attack | prompt injection attack | |
+| 105 | new | chain-of-thought-cot-prompting | chain-of-thought (cot) prompting | chain-of-thought (cot) prompting | |
+| 106 | new | embedding-models | embedding models | embedding models | |
+| 107 | new | function-calling-llm | function calling llm | function calling llm | |
+| 108 | new | react-agent-langgraph | react agent langgraph | react agent langgraph | |
+| 109 | new | llm-inference-explained | llm inference explained | llm inference explained | |
+| 110 | new | batch-inference-databricks | batch inference databricks | batch inference databricks | |
+| 111 | new | mcp-server-and-ai-agents | mcp server and ai agents | mcp server and ai agents | |
+| 112 | new | structured-output-llm | structured output llm | structured output llm | |
+| 113 | new | rag-retrieval-techniques | rag retrieval techniques | rag retrieval techniques | |
+| 114 | new | llm-hallucination-detection | llm hallucination detection | llm hallucination detection | |
+| 115 | new | llm-hallucination-problem | llm hallucination problem | llm hallucination problem | |
+| 116 | new | episodic-memory-vs-semantic-memory | episodic memory vs semantic memory | episodic memory vs semantic memory | |
+| 117 | new | llm-inference-system-design | llm inference system design | llm inference system design | |
+| 118 | new | ai-agent-memory-n8n | ai agent memory n8n | ai agent memory n8n | |
+| 119 | new | function-calling-gemini | function calling gemini | function calling gemini | |
+| 120 | new | kv-cache-implementation | kv cache implementation | kv cache implementation | |
+| 121 | new | kv-cache-optimization | kv cache optimization | kv cache optimization | |
+| 122 | new | semantic-memory-vs-episodic-memory | semantic memory vs episodic memory | semantic memory vs episodic memory | |
+| 123 | new | agent-evaluation-framework | agent evaluation framework | agent evaluation framework | |
+| 124 | new | ai-agent-evaluation | ai agent evaluation | ai agent evaluation | |
+| 125 | new | llm-hallucination-examples | llm hallucination examples | llm hallucination examples | |
+| 126 | new | agent-framework-tutorial | agent framework tutorial | agent framework tutorial | |
+| 127 | new | knowledge-graph-rag-tutorial | knowledge graph rag tutorial | knowledge graph rag tutorial | |
+| 128 | new | flash-attention-from-scratch | flash attention from scratch | flash attention from scratch | |
+| 129 | new | flash-attention-2 | flash attention 2 | flash attention 2 | |
+| 130 | new | ai-agent-memory-management | ai agent memory management | ai agent memory management | |
+| 131 | new | multi-agent-orchestration-n8n | multi agent orchestration n8n | multi agent orchestration n8n | |
+| 132 | new | rag-retrieval-strategies | rag retrieval strategies | rag retrieval strategies | |
+| 133 | new | agent-framework-workflow | agent framework workflow | agent framework workflow | |
+| 134 | new | flash-attention-4 | flash attention 4 | flash attention 4 | |
+| 135 | new | speculative-decoding-vllm | speculative decoding vllm | speculative decoding vllm | |
+| 136 | new | quantization-llms-explained | quantization llms explained | quantization llms explained | |
+| 137 | new | batch-inference-bedrock | batch inference bedrock | batch inference bedrock | |
+| 138 | new | continuous-batching-vllm | continuous batching vllm | continuous batching vllm | |
+| 139 | new | plan-and-execute-ai-agent | plan and execute ai agent | plan and execute ai agent | |
+| 140 | new | supervisor-agent-n8n | supervisor agent n8n | supervisor agent n8n | |
+| 141 | new | tool-schematic-gratis | tool schematic gratis | tool schematic gratis | |
+| 142 | new | mcp-server-anthropic | mcp server anthropic | mcp server anthropic | |
 
 ---
 

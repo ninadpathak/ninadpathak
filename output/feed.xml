@@ -6,6 +6,24 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</title>
+      <link>https://ninadpathak.com/blog/memory-attribution-errors/</link>
+      <description>Memory attribution failures cause AI agents to act on outdated or misassigned context. Here is what I found examining the failure patterns.</description>
+      <pubDate>May 11, 2026</pubDate>
+    </item>
+    <item>
+      <title>Building a Customer Support Agent with Persistent Memory: A Worked Example</title>
+      <link>https://ninadpathak.com/blog/agent-memory-for-customer-support/</link>
+      <description>I built a customer support agent that actually remembers across sessions. Here is what I learned about memory architecture, serialization trade-offs, and the failure modes that will kill your deployment.</description>
+      <pubDate>May 10, 2026</pubDate>
+    </item>
+    <item>
+      <title>LLM Inference Optimization: What Actually Works in Production</title>
+      <link>https://ninadpathak.com/blog/llm-inference-optimization/</link>
+      <description>A practical breakdown of the inference optimization techniques that move the needle — batching, quantization, caching, and attention kernels — with concrete numbers and the tradeoffs between them.</description>
+      <pubDate>May 06, 2026</pubDate>
+    </item>
+    <item>
       <title>Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</title>
       <link>https://ninadpathak.com/blog/why-coding-agents-lose-their-memory/</link>
       <description>The memory persistence patterns that actually work for AI coding assistants, and why most agents lose context between sessions.</description>
@@ -106,24 +124,6 @@
       <link>https://ninadpathak.com/blog/python-model-predict-function/</link>
       <description>A practical guide to model.predict() across scikit-learn, Keras, PyTorch, and XGBoost—what it does, how it behaves differently across frameworks, and the gotchas that will bite you in production.</description>
       <pubDate>Apr 21, 2026</pubDate>
-    </item>
-    <item>
-      <title>A Taxonomy of AI Agents That Actually Explains What You Are Building</title>
-      <link>https://ninadpathak.com/blog/2026-04-21-the-taxonomy-of-ai-agents/</link>
-      <description>Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.</description>
-      <pubDate>Apr 21, 2026</pubDate>
-    </item>
-    <item>
-      <title>Memory for Voice AI Agents: What Text Chatbots Cannot Do</title>
-      <link>https://ninadpathak.com/blog/memory-for-voice-ai-agents/</link>
-      <description>Voice AI agents live or die by how they manage memory across a real-time streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something different.</description>
-      <pubDate>Apr 19, 2026</pubDate>
-    </item>
-    <item>
-      <title>How Memory Works in DeerFlow</title>
-      <link>https://ninadpathak.com/blog/how-memory-works-in-deerflow/</link>
-      <description>A deep dive into the memory architecture of DeerFlow: layered context passing, session state files, sub-agent isolation, and how it compares to Letta, AutoGen, and CrewAI.</description>
-      <pubDate>Apr 19, 2026</pubDate>
     </item>
   </channel>
 </rss>

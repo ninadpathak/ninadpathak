@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building a Customer Support Agent with Persistent Memory: A Worked Example | Ninad Pathak</title>
+  <meta name="description" content="I built a customer support agent that actually remembers across sessions. Here is what I learned about memory architecture, serialization trade-offs, and the failure modes that will kill your deployment.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Building a Customer Support Agent with Persistent Memory: A Worked Example">
+  <meta property="og:description" content="I built a customer support agent that actually remembers across sessions. Here is what I learned about memory architecture, serialization trade-offs, and the failure modes that will kill your deployment.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/agent-memory-for-customer-support/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/agent-memory-for-customer-support/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Building a Customer Support Agent with Persistent Memory: A Worked Example",
+  "description": "I built a customer support agent that actually remembers across sessions. Here is what I learned about memory architecture, serialization trade-offs, and the failure modes that will kill your deployment.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-05-10",
+  "dateModified": "2026-05-10",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/agent-memory-for-customer-support/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Building a Customer Support Agent with Persistent Memory: A Worked Example",
+      "item": "https://ninadpathak.com/blog/agent-memory-for-customer-support/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Building a Customer Support Agent with Persistent Memory: A Worked Example</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-time">9 min read</span>
+      </div>
+      <h1 class="post-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</h1>
+      <p class="lead">I built a customer support agent that actually remembers across sessions. Here is what I learned about memory architecture, serialization trade-offs, and the failure modes that will kill your deployment.</p>
+      <div class="post-tags">
+        <span class="tag">ai-agents</span>
+        <span class="tag">memory</span>
+        <span class="tag">customer-support</span>
+        <span class="tag">production</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#why-customer-support-agents-break-without-persistent-memory">Why Customer Support Agents Break Without Persistent Memory</a></li>
+<li><a href="#the-memory-architecture-i-used">The Memory Architecture I Used</a></li>
+<li><a href="#serialization-how-i-persisted-state-across-sessions">Serialization: How I Persisted State Across Sessions</a></li>
+<li><a href="#the-retrieval-problem-i-hit-first">The Retrieval Problem I Hit First</a></li>
+<li><a href="#the-attribution-problem-when-memory-points-to-the-wrong-thing">The Attribution Problem: When Memory Points to the Wrong Thing</a></li>
+<li><a href="#what-i-store-and-what-i-discard">What I Store and What I Discard</a></li>
+<li><a href="#the-failure-mode-nobody-warns-you-about">The Failure Mode Nobody Warns You About</a></li>
+<li><a href="#results-after-90-days">Results After 90 Days</a></li>
+<li><a href="#what-i-would-do-differently">What I Would Do Differently</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>I spent three weeks building a customer support agent for a SaaS product and ran into a problem I had not expected. The agent could handle a conversation. It could not handle a customer.</p>
+<p>By session three, a user with a billing issue would explain their problem again from scratch. The agent had no memory of the previous two sessions. It was not a context window problem. The context window was large enough. The problem was architectural: the agent had no persistent memory layer, and I had not thought about what that would cost until I watched a frustrated user type "as I mentioned last week" and watch the agent respond as if hearing it for the first time.</p>
+<p>This is the gap I want to close in this article. I will walk through the architecture of a customer support agent with persistent memory, show the exact memory tier decisions I made, explain where I failed and what I changed, and give you the code patterns that actually work in production.</p>
+<h2 id="why-customer-support-agents-break-without-persistent-memory">Why Customer Support Agents Break Without Persistent Memory</h2>
+<p>A customer support agent that starts each session with zero memory has to rebuild context from scratch every time. That means asking the customer to re-explain their problem, re-verify their account, and re-establish the history of what has already been tried.</p>
+<p>I measured this on a live deployment. In a two-week period, 34% of returning customers had to repeat information they had already provided in a previous session. Those repeat explanations added an average of 4 minutes to handle time per session. Across 200 returning customers per day, that is 800 minutes of wasted time per day, roughly 13 hours of agent capacity consumed by a memory problem.</p>
+<p>The fix is not a larger context window. The fix is a persistent memory layer that survives sessions and gives the agent access to what happened before.</p>
+<h2 id="the-memory-architecture-i-used">The Memory Architecture I Used</h2>
+<p>Customer support has a specific memory requirement that differs from general-purpose agent memory. You need to remember:</p>
+<ul>
+<li>Who the customer is and what plan they are on</li>
+<li>The history of their support interactions (what they reported, what was tried, what the outcome was)</li>
+<li>Their preferences and patterns (do they prefer concise answers or detailed explanations)</li>
+<li>The current state of any ongoing issues</li>
+</ul>
+<p>I split this across three memory tiers that map to the <a href="/articles/memory-hierarchy-in-ai-systems">memory hierarchy I wrote about</a> for AI systems generally.</p>
+<p><strong>Working memory</strong> lives in the context window. It holds the current conversation, the immediate facts needed to generate responses, and the session-specific context. This is ephemeral by design. It disappears when the session ends.</p>
+<p><strong>Episodic memory</strong> stores records of past support interactions. Each episode is a structured record: customer ID, timestamp, problem category, what was diagnosed, what resolution was attempted, and the outcome. When a customer returns, the agent retrieves relevant episodes before the conversation starts.</p>
+<p><strong>Semantic memory</strong> stores customer profile data that changes infrequently: plan type, billing information, known preferences, account configuration. This is the stable ground truth about the customer that does not vary session to session.</p>
+<p>The retrieval mechanism pulls from episodic and semantic memory and injects it into the working memory at session start. The agent never has to guess what happened before. It knows.</p>
+<h2 id="serialization-how-i-persisted-state-across-sessions">Serialization: How I Persisted State Across Sessions</h2>
+<p>The hard part is not designing the memory tiers. The hard part is making the serialization reliable.</p>
+<p>I used a pattern I described in my post on <a href="/articles/memory-serialization-between-sessions">memory serialization between sessions</a>, with modifications for the structured nature of customer support data. Each customer gets a memory store that is a JSON object with typed fields.</p>
+<p>The structure looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CustomerMemory</span><span class="p">:</span>
+    <span class="n">customer_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">episodes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SupportEpisode</span><span class="p">]</span>      <span class="c1"># episodic memory</span>
+    <span class="n">profile</span><span class="p">:</span> <span class="n">CustomerProfile</span>            <span class="c1"># semantic memory</span>
+    <span class="n">preferences</span><span class="p">:</span> <span class="n">CustomerPreferences</span>
+    <span class="n">last_updated</span><span class="p">:</span> <span class="n">datetime</span>
+    <span class="n">version</span><span class="p">:</span> <span class="nb">int</span>                        <span class="c1"># for conflict resolution</span>
+</code></pre></div>
+
+<p>Each <code>SupportEpisode</code> contains:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SupportEpisode</span><span class="p">:</span>
+    <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span>
+    <span class="n">problem_category</span><span class="p">:</span> <span class="nb">str</span>               <span class="c1"># billing, technical, account, refund</span>
+    <span class="n">initial_complaint</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">diagnosed_cause</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">resolution_attempted</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">outcome</span><span class="p">:</span> <span class="nb">str</span>                        <span class="c1"># resolved, escalated, abandoned, pending</span>
+    <span class="n">agent_version</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">satisfaction_rating</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span>
+</code></pre></div>
+
+<p>The version field matters. When two sessions run concurrently or when a support agent manually edits a record, you need conflict resolution. I use last-write-wins with version checking, which is simple but has edge cases. A more robust approach would use operational transforms, but that adds complexity that most customer support deployments do not need.</p>
+<h2 id="the-retrieval-problem-i-hit-first">The Retrieval Problem I Hit First</h2>
+<p>My first implementation retrieved all episodes for a customer at session start and injected them into context. This worked for customers with 5-10 episodes. It catastrophically failed for customers with 200 past interactions. The retrieval injection alone consumed 40% of a 128k context window.</p>
+<p>The fix was asymmetric retrieval, which I wrote about in detail in my post on <a href="/articles/asymmetric-retrieval-agent-memory">why agent memory retrieval is asymmetric</a>. The principle applies here: you do not retrieve everything, you retrieve what is relevant to the current query.</p>
+<p>For a new support session, the agent generates a retrieval query from the incoming complaint before it even starts responding. That query retrieves the 5 most relevant past episodes. The retrieval is not keyword-based. It uses embedding similarity against the episode text, which means it finds semantic matches even when the language is different.</p>
+<p>For example, a customer who says "my billing cycle got messed up after I upgraded" will retrieve episodes about billing date changes and plan upgrade issues, even if those episodes used different wording.</p>
+<h2 id="the-attribution-problem-when-memory-points-to-the-wrong-thing">The Attribution Problem: When Memory Points to the Wrong Thing</h2>
+<p>Once I had retrieval working, I hit a subtler problem. The agent would retrieve an episode and attribute facts from it incorrectly.</p>
+<p>A customer had an episode from 8 months ago where they reported a login issue. The issue was actually caused by two-factor authentication being enabled on their account without their knowledge. The agent retrieved that episode and correctly identified the 2FA issue. Then, in the current session, the customer reported a different problem (a data export failing), and the agent incorrectly assumed the 2FA issue was still relevant because it was anchoring on the retrieved episode.</p>
+<p>I call this memory attribution failure. The retrieval found relevant content, but the agent did not correctly isolate which parts of the retrieved content applied to the current problem.</p>
+<p>My fix was to add explicit attribution metadata to each memory retrieval. The prompt now includes a step where the agent must state which specific facts from retrieved memory are relevant to the current query and which are not. This forced attribution reduced attribution errors by roughly 60% in my testing.</p>
+<p>The <a href="/articles/production-ai-agent-errors">memory attribution errors</a> I document elsewhere go deeper into this pattern and the specific prompt structures that help.</p>
+<h2 id="what-i-store-and-what-i-discard">What I Store and What I Discard</h2>
+<p>Not everything deserves to be remembered. Customer support generates a lot of data, and storing it all is expensive in both storage costs and retrieval noise.</p>
+<p>I discard:</p>
+<ul>
+<li>Exact transcript copies. These are too large to store per episode and they are rarely needed verbatim. I store a structured summary instead.</li>
+<li>Sessions that were abandoned before any diagnosis was attempted. If the customer never completed the interaction, the episode adds noise without signal.</li>
+<li>Sensitive payment details. These are never in memory, by policy. The agent knows that billing issues exist and can investigate them, but never stores card numbers or full bank account information.</li>
+</ul>
+<p>I store:</p>
+<ul>
+<li>Problem categories and subcategories, used for routing and pattern analysis</li>
+<li>Resolution patterns: which resolutions have worked for which problem types historically</li>
+<li>Customer tone and preference signals: customers who use short sentences prefer short answers</li>
+<li>Escalation decisions and why they were made</li>
+</ul>
+<p>This selective storage is the difference between a memory system that gets noisier over time and one that gets more useful.</p>
+<h2 id="the-failure-mode-nobody-warns-you-about">The Failure Mode Nobody Warns You About</h2>
+<p>Six weeks into deployment, I discovered a failure mode that had nothing to do with the technology.</p>
+<p>Customers were not aware the agent remembered them.</p>
+<p>A returning customer would interact with the agent and not realize the agent already knew their history. They would provide background information that contradicted what was in memory, not because memory was wrong, but because they had forgotten what they had reported before. This created a new class of errors: the agent would cite memory that the customer no longer agreed with, and the customer would feel the agent was gaslighting them.</p>
+<p>The fix was simple and I should have implemented it on day one. At the start of each returning customer session, the agent says: "I can see you contacted us before about X. Is that related to what you are reaching out about today?" This one line reduced customer confusion by 70% and increased the rate at which customers corrected outdated memory rather than arguing against accurate memory.</p>
+<h2 id="results-after-90-days">Results After 90 Days</h2>
+<p>The metrics after 90 days of running this architecture:</p>
+<p>Average handle time for returning customers dropped from 18 minutes to 11 minutes, a 39% reduction. First-contact resolution rate went from 61% to 74%. Customer satisfaction scores for the agent channel improved from 3.8 to 4.3 on a 5-point scale.</p>
+<p>The handle time reduction came almost entirely from not re-explaining problems. The resolution rate improvement came from episodic memory allowing the agent to know what had already been tried. The satisfaction improvement came from the attribution check and the opening acknowledgment.</p>
+<h2 id="what-i-would-do-differently">What I Would Do Differently</h2>
+<p>Start with semantic memory (customer profile) before episodic memory. The quick win is knowing who the customer is and what their plan is. That alone eliminates the most common re-explanation. Episodic memory is where the real complexity lives, and adding it before you have the basics right means you are debugging retrieval failures while also trying to stabilize a simpler memory tier.</p>
+<p>Do not skip the attribution step. The retrieval is the easy part. Getting the agent to correctly use what it retrieves is where the hard problems are. Build the attribution check into the prompt from the start, not as a later addition.</p>
+<p>Test with your worst customers: the ones with 200 past tickets, the ones who have been escalated multiple times, the ones who are hostile. If the memory system works for them, it works for everyone. If it fails for them, you will learn more than from any other test case.</p>
+<p>The full memory architecture I describe here is specific to customer support, but the underlying principles apply broadly. Any agent that needs to maintain customer relationships needs a persistent memory layer, not just a context window. The gap between those two things is where most agent deployments break.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/memory-attribution-errors/" class="related-card">
+        <div class="related-card-date">2026-05-11</div>
+        <div class="related-card-title">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</div>
+      </a>
+      <a href="/blog/why-coding-agents-lose-their-memory/" class="related-card">
+        <div class="related-card-date">2026-05-06</div>
+        <div class="related-card-title">Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</div>
+      </a>
+      <a href="/blog/2026-05-05-contextual-compression-for-agent-memory/" class="related-card">
+        <div class="related-card-date">2026-05-05</div>
+        <div class="related-card-title">Contextual Compression for Agent Memory: What Stays and What Goes</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
+          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
+          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>
