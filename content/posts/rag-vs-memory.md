@@ -235,8 +235,6 @@ Build both from the start. The initial demo might only need one, but users will 
 
 The evaluation infrastructure matters more than the retrieval algorithm. You can tune chunk sizes and embedding models forever. None of it matters if you cannot measure whether your users are getting correct answers. Invest in evals first.
 
----
-
 
 
 ##Related Articles
@@ -269,8 +267,6 @@ Implement a three-layer truncation strategy: keep the last N turns verbatim, sum
 
 **Should I use conversation history as RAG context?**
 No. Conversation history belongs in the memory layer, not the RAG layer. RAG queries a static knowledge base. Feeding conversation history into the vector store creates retrieval noise and mixes session state with domain knowledge. Keep these pipelines separate.
-
----
 
 Related posts you might find useful:
 

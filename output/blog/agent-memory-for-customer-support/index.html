@@ -193,7 +193,7 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
-        <span class="post-meta-time">9 min read</span>
+        <span class="post-meta-time">10 min read</span>
       </div>
       <h1 class="post-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</h1>
       <p class="lead">I built a customer support agent that actually remembers across sessions. Here is what I learned about memory architecture, serialization trade-offs, and the failure modes that will kill your deployment.</p>
@@ -232,7 +232,7 @@
 <h2 id="why-customer-support-agents-break-without-persistent-memory">Why Customer Support Agents Break Without Persistent Memory</h2>
 <p>A customer support agent that starts each session with zero memory has to rebuild context from scratch every time. That means asking the customer to re-explain their problem, re-verify their account, and re-establish the history of what has already been tried.</p>
 <p>I measured this on a live deployment. In a two-week period, 34% of returning customers had to repeat information they had already provided in a previous session. Those repeat explanations added an average of 4 minutes to handle time per session. Across 200 returning customers per day, that is 800 minutes of wasted time per day, roughly 13 hours of agent capacity consumed by a memory problem.</p>
-<p>The fix is not a larger context window. The fix is a persistent memory layer that survives sessions and gives the agent access to what happened before.</p>
+<p>The fix is not a larger context window. The fix is a persistent memory layer that survives sessions and gives the agent access to what happened before. The <a href="/blog/state-of-ai-agent-memory-2026/">state of AI agent memory in 2026</a> documents how the tooling for this has matured, but the architectural decision of what to persist and what to discard still belongs to you as the system designer.</p>
 <h2 id="the-memory-architecture-i-used">The Memory Architecture I Used</h2>
 <p>Customer support has a specific memory requirement that differs from general-purpose agent memory. You need to remember:</p>
 <ul>
@@ -241,14 +241,21 @@
 <li>Their preferences and patterns (do they prefer concise answers or detailed explanations)</li>
 <li>The current state of any ongoing issues</li>
 </ul>
-<p>I split this across three memory tiers that map to the <a href="/articles/memory-hierarchy-in-ai-systems">memory hierarchy I wrote about</a> for AI systems generally.</p>
+<p>I split this across three memory tiers that map to the <a href="/blog/memory-hierarchy-in-ai-systems/">memory hierarchy I wrote about</a> for AI systems generally.</p>
 <p><strong>Working memory</strong> lives in the context window. It holds the current conversation, the immediate facts needed to generate responses, and the session-specific context. This is ephemeral by design. It disappears when the session ends.</p>
 <p><strong>Episodic memory</strong> stores records of past support interactions. Each episode is a structured record: customer ID, timestamp, problem category, what was diagnosed, what resolution was attempted, and the outcome. When a customer returns, the agent retrieves relevant episodes before the conversation starts.</p>
-<p><strong>Semantic memory</strong> stores customer profile data that changes infrequently: plan type, billing information, known preferences, account configuration. This is the stable ground truth about the customer that does not vary session to session.</p>
+<p><strong>Semantic memory</strong> stores customer profile data that changes infrequently: plan type, billing information, known preferences, account configuration. This is the stable ground truth about the customer that does not vary session to session. If you want a deeper map of how <a href="/blog/episodic-vs-semantic-vs-working-memory-agents/">episodic, semantic, and working memory</a> differ in agents, I covered the distinctions in detail elsewhere.</p>
 <p>The retrieval mechanism pulls from episodic and semantic memory and injects it into the working memory at session start. The agent never has to guess what happened before. It knows.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Persistent Memory Loop: Session 1 vs Session 5</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/support-memory-loop.html" title="Persistent memory loop for customer support agent: session 1 vs session 5 context richness" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="serialization-how-i-persisted-state-across-sessions">Serialization: How I Persisted State Across Sessions</h2>
 <p>The hard part is not designing the memory tiers. The hard part is making the serialization reliable.</p>
-<p>I used a pattern I described in my post on <a href="/articles/memory-serialization-between-sessions">memory serialization between sessions</a>, with modifications for the structured nature of customer support data. Each customer gets a memory store that is a JSON object with typed fields.</p>
+<p>I used a pattern I described in my post on <a href="/blog/memory-serialization-between-sessions/">memory serialization between sessions</a>, with modifications for the structured nature of customer support data. Each customer gets a memory store that is a JSON object with typed fields.</p>
 <p>The structure looks like this:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CustomerMemory</span><span class="p">:</span>
     <span class="n">customer_id</span><span class="p">:</span> <span class="nb">str</span>
@@ -275,7 +282,7 @@
 <p>The version field matters. When two sessions run concurrently or when a support agent manually edits a record, you need conflict resolution. I use last-write-wins with version checking, which is simple but has edge cases. A more robust approach would use operational transforms, but that adds complexity that most customer support deployments do not need.</p>
 <h2 id="the-retrieval-problem-i-hit-first">The Retrieval Problem I Hit First</h2>
 <p>My first implementation retrieved all episodes for a customer at session start and injected them into context. This worked for customers with 5-10 episodes. It catastrophically failed for customers with 200 past interactions. The retrieval injection alone consumed 40% of a 128k context window.</p>
-<p>The fix was asymmetric retrieval, which I wrote about in detail in my post on <a href="/articles/asymmetric-retrieval-agent-memory">why agent memory retrieval is asymmetric</a>. The principle applies here: you do not retrieve everything, you retrieve what is relevant to the current query.</p>
+<p>The fix was asymmetric retrieval, which I wrote about in detail in my post on <a href="/blog/asymmetric-retrieval-agent-memory/">why agent memory retrieval is asymmetric</a>. The principle applies here: you do not retrieve everything, you retrieve what is relevant to the current query.</p>
 <p>For a new support session, the agent generates a retrieval query from the incoming complaint before it even starts responding. That query retrieves the 5 most relevant past episodes. The retrieval is not keyword-based. It uses embedding similarity against the episode text, which means it finds semantic matches even when the language is different.</p>
 <p>For example, a customer who says "my billing cycle got messed up after I upgraded" will retrieve episodes about billing date changes and plan upgrade issues, even if those episodes used different wording.</p>
 <h2 id="the-attribution-problem-when-memory-points-to-the-wrong-thing">The Attribution Problem: When Memory Points to the Wrong Thing</h2>
@@ -283,7 +290,7 @@
 <p>A customer had an episode from 8 months ago where they reported a login issue. The issue was actually caused by two-factor authentication being enabled on their account without their knowledge. The agent retrieved that episode and correctly identified the 2FA issue. Then, in the current session, the customer reported a different problem (a data export failing), and the agent incorrectly assumed the 2FA issue was still relevant because it was anchoring on the retrieved episode.</p>
 <p>I call this memory attribution failure. The retrieval found relevant content, but the agent did not correctly isolate which parts of the retrieved content applied to the current problem.</p>
 <p>My fix was to add explicit attribution metadata to each memory retrieval. The prompt now includes a step where the agent must state which specific facts from retrieved memory are relevant to the current query and which are not. This forced attribution reduced attribution errors by roughly 60% in my testing.</p>
-<p>The <a href="/articles/production-ai-agent-errors">memory attribution errors</a> I document elsewhere go deeper into this pattern and the specific prompt structures that help.</p>
+<p>The <a href="/blog/production-ai-agent-errors/">memory attribution errors</a> I document elsewhere go deeper into this pattern and the specific prompt structures that help.</p>
 <h2 id="what-i-store-and-what-i-discard">What I Store and What I Discard</h2>
 <p>Not everything deserves to be remembered. Customer support generates a lot of data, and storing it all is expensive in both storage costs and retrieval noise.</p>
 <p>I discard:</p>
@@ -310,7 +317,7 @@
 <p>Average handle time for returning customers dropped from 18 minutes to 11 minutes, a 39% reduction. First-contact resolution rate went from 61% to 74%. Customer satisfaction scores for the agent channel improved from 3.8 to 4.3 on a 5-point scale.</p>
 <p>The handle time reduction came almost entirely from not re-explaining problems. The resolution rate improvement came from episodic memory allowing the agent to know what had already been tried. The satisfaction improvement came from the attribution check and the opening acknowledgment.</p>
 <h2 id="what-i-would-do-differently">What I Would Do Differently</h2>
-<p>Start with semantic memory (customer profile) before episodic memory. The quick win is knowing who the customer is and what their plan is. That alone eliminates the most common re-explanation. Episodic memory is where the real complexity lives, and adding it before you have the basics right means you are debugging retrieval failures while also trying to stabilize a simpler memory tier.</p>
+<p>Start with semantic memory (customer profile) before episodic memory. The quick win is knowing who the customer is and what their plan is. That alone eliminates the most common re-explanation. The patterns for managing <a href="/blog/short-term-memory-for-ai-agents/">short-term memory in AI agents</a> are relevant here too, because the working memory you assemble at session start from those tiers has to stay within the context window while still leaving room for the actual conversation. Episodic memory is where the real complexity lives, and adding it before you have the basics right means you are debugging retrieval failures while also trying to stabilize a simpler memory tier.</p>
 <p>Do not skip the attribution step. The retrieval is the easy part. Getting the agent to correctly use what it retrieves is where the hard problems are. Build the attribution check into the prompt from the start, not as a later addition.</p>
 <p>Test with your worst customers: the ones with 200 past tickets, the ones who have been escalated multiple times, the ones who are hostile. If the memory system works for them, it works for everyone. If it fails for them, you will learn more than from any other test case.</p>
 <p>The full memory architecture I describe here is specific to customer support, but the underlying principles apply broadly. Any agent that needs to maintain customer relationships needs a persistent memory layer, not just a context window. The gap between those two things is where most agent deployments break.</p>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shared vs Isolated Memory in Multi-Agent Systems</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;padding:16px 20px;gap:14px;}
+
+.header{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-3);text-align:center;}
+
+.panels{display:flex;gap:14px;width:100%;max-width:660px;}
+
+.panel{flex:1;border:1px solid var(--border);padding:10px 10px 12px;display:flex;flex-direction:column;gap:8px;}
+.panel-title{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.panel-title b{color:var(--text-1);}
+
+.agents{display:flex;gap:6px;justify-content:center;}
+.agent{border:1px solid var(--border);font-family:var(--mono);font-size:9px;padding:6px 8px;text-align:center;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-2);transition:border-color .25s,color .25s,background .25s;flex:1;}
+.agent.writing{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);}
+.agent.reading{border-color:var(--text-2);color:var(--text-2);background:var(--bg-2);}
+
+.mem-store{border:1px solid var(--border);text-align:center;padding:8px 4px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);transition:border-color .25s,color .25s;}
+.mem-store.active{border-color:var(--accent);color:var(--accent);}
+.mem-store small{display:block;font-size:7.5px;margin-top:3px;color:var(--text-3);}
+
+.connectors{display:flex;justify-content:space-around;font-family:var(--mono);font-size:10px;color:var(--text-3);margin:2px 0;}
+.conn{transition:color .25s;}
+.conn.lit{color:var(--accent);}
+
+.sync-row{display:flex;gap:4px;margin-top:4px;}
+.sync-item{flex:1;border:1px solid var(--border);font-family:var(--mono);font-size:7.5px;text-align:center;padding:5px 3px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.04em;transition:border-color .25s,color .25s,background .25s;}
+.sync-item.lit{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);}
+
+.warn{font-family:var(--mono);font-size:8px;color:var(--accent);border:1px dashed var(--accent);padding:4px 6px;text-align:center;display:none;}
+.warn.show{display:block;}
+
+.status{font-family:var(--mono);font-size:9.5px;color:var(--text-2);text-align:center;min-height:13px;}
+.status b{color:var(--accent);}
+
+@media (max-width:600px){
+  .panels{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="header">Shared vs Isolated Memory / Multi-Agent Comparison</div>
+
+  <div class="panels">
+    <!-- Shared memory -->
+    <div class="panel">
+      <div class="panel-title"><b>Shared</b> memory</div>
+      <div class="agents">
+        <div class="agent" id="sha">Agent A</div>
+        <div class="agent" id="shb">Agent B</div>
+        <div class="agent" id="shc">Agent C</div>
+      </div>
+      <div class="connectors">
+        <span class="conn" id="sha-c">|</span>
+        <span class="conn" id="shb-c">|</span>
+        <span class="conn" id="shc-c">|</span>
+      </div>
+      <div class="mem-store" id="sh-store">Shared Store<small id="sh-store-sub">all agents read + write</small></div>
+      <div class="warn" id="sh-warn">Race condition: B reads A's partial write</div>
+    </div>
+
+    <!-- Isolated memory -->
+    <div class="panel">
+      <div class="panel-title"><b>Isolated</b> memory</div>
+      <div class="agents">
+        <div class="agent" id="isa">Agent A</div>
+        <div class="agent" id="isb">Agent B</div>
+        <div class="agent" id="isc">Agent C</div>
+      </div>
+      <div class="sync-row">
+        <div class="sync-item" id="is-ma">mem-A</div>
+        <div class="sync-item" id="is-mb">mem-B</div>
+        <div class="sync-item" id="is-mc">mem-C</div>
+      </div>
+      <div class="mem-store" id="is-sync">Explicit Sync (confirmed facts only)<small id="is-sync-sub">pipeline orchestrator owns writes</small></div>
+    </div>
+  </div>
+
+  <div class="status" id="status">&nbsp;</div>
+</div>
+
+<script>
+var sha=document.getElementById('sha');
+var shb=document.getElementById('shb');
+var shc=document.getElementById('shc');
+var shac=document.getElementById('sha-c');
+var shbc=document.getElementById('shb-c');
+var shcc=document.getElementById('shc-c');
+var shStore=document.getElementById('sh-store');
+var shWarn=document.getElementById('sh-warn');
+var isa=document.getElementById('isa');
+var isb=document.getElementById('isb');
+var isc=document.getElementById('isc');
+var isma=document.getElementById('is-ma');
+var ismb=document.getElementById('is-mb');
+var ismc=document.getElementById('is-mc');
+var isSync=document.getElementById('is-sync');
+var status=document.getElementById('status');
+
+var step=0;
+function clear(){
+  [sha,shb,shc].forEach(function(x){x.className='agent';});
+  [shac,shbc,shcc].forEach(function(x){x.classList.remove('lit');});
+  shStore.classList.remove('active');
+  shWarn.classList.remove('show');
+  [isa,isb,isc].forEach(function(x){x.className='agent';});
+  [isma,ismb,ismc].forEach(function(x){x.classList.remove('lit');});
+  isSync.classList.remove('active');
+  status.innerHTML='&nbsp;';
+}
+var steps=[
+  function(){
+    sha.classList.add('writing');shac.classList.add('lit');shStore.classList.add('active');
+    isa.classList.add('writing');isma.classList.add('lit');
+    status.innerHTML='Agent A writes to its store';
+  },
+  function(){
+    shb.classList.add('reading');shbc.classList.add('lit');shStore.classList.add('active');
+    isb.classList.add('writing');ismb.classList.add('lit');
+    status.innerHTML='Agent B reads shared store (gets A\'s partial write) / B writes to its own store';
+  },
+  function(){
+    shWarn.classList.add('show');
+    isSync.classList.add('active');
+    status.innerHTML='shared: <b>race condition visible</b> / isolated: explicit sync of confirmed facts only';
+  },
+  function(){
+    shc.classList.add('reading');shcc.classList.add('lit');
+    isc.classList.add('writing');ismc.classList.add('lit');
+    status.innerHTML='Agent C reads / writes -- isolated path is clean and auditable';
+  }
+];
+function tick(){
+  if(step===0)clear();
+  steps[step]();
+  step++;
+  if(step>=steps.length){step=0;}
+}
+tick();
+setInterval(tick,1900);
+</script>
+</body>
+</html>

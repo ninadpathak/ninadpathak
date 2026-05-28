@@ -72,7 +72,7 @@ During the benchmark, I observed Claude Code triggering swap memory more frequen
   </div>
 </div>
 
-To prevent "Context Poisoning" (where irrelevant history from a previous task distracts the model), Gemini CLI uses an isolation pattern I call **Context Quarantine**. Each sub-task is given a fresh, pruned window, whereas Claude tends to keep the entire session history available for better cross-file reasoning.
+To prevent "Context Poisoning" (where irrelevant history from a previous task distracts the model), Gemini CLI uses an isolation pattern I call **Context Quarantine**. Each sub-task is given a fresh, pruned window. Claude keeps the entire session history available for better cross-file reasoning.
 
 ## Economic outcomes of local agentic loops
 
@@ -118,7 +118,7 @@ Claude Code. Its ability to reason across large, undocumented files and detect i
 You will hit the VRAM ceiling at approximately 150k context tokens. Beyond that, the OS will trigger swap memory, which significantly slows down the reasoning speed of the agent.
 
 **Can these agents work without an internet connection?**
-No. While they run in your local terminal, the reasoning is still performed on cloud-hosted models (Anthropic and Google). However, tools like **Gemma 4** are paving the way for fully local, private agentic loops.
+No. The reasoning runs on cloud-hosted models (Anthropic and Google), not locally. The terminal is just the interface. However, tools like **Gemma 4** are paving the way for fully local, private agentic loops.
 
 **What is the "Context Poisoning" problem?**
 In long sessions, irrelevant history can distract the model, leading to hallucinations. Gemini CLI fixes this by isolating task contexts, while Claude Code relies on its superior attention mechanism to filter the noise.

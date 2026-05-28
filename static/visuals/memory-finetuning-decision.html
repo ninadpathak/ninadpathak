@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fine-Tuning vs RAG Decision Quadrant</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:26px;}
+
+.grid-wrap{position:relative;width:360px;height:340px;}
+
+.quad-grid{
+  position:absolute;
+  left:34px;top:8px;right:0;bottom:34px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  border:1px solid var(--border);
+}
+
+.cell{
+  border:0.5px solid var(--border);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  text-align:center;
+  padding:8px 6px;
+  box-sizing:border-box;
+  transition:background 0.3s,border-color 0.3s;
+}
+
+.cell .verdict{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:0.04em;color:var(--text-1);}
+.cell .desc{font-family:var(--mono);font-size:8.5px;line-height:1.4;color:var(--text-3);max-width:130px;}
+
+.cell.active{background:color-mix(in srgb,var(--accent) 9%,transparent);border-color:var(--accent);}
+.cell.active .verdict{color:var(--accent);}
+
+.axis-x{
+  position:absolute;left:34px;right:0;bottom:8px;
+  text-align:center;
+  font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-3);
+}
+.axis-y{
+  position:absolute;left:4px;top:8px;bottom:34px;
+  width:22px;
+  display:flex;align-items:center;justify-content:center;
+}
+.axis-y span{transform:rotate(-90deg);white-space:nowrap;font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-3);}
+
+.tick{position:absolute;font-family:var(--mono);font-size:7.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);opacity:0.7;}
+.tick.x-lo{left:36px;bottom:22px;}
+.tick.x-hi{right:2px;bottom:22px;}
+.tick.y-lo{left:26px;bottom:34px;transform:rotate(-90deg);transform-origin:left bottom;}
+.tick.y-hi{left:26px;top:8px;transform:rotate(-90deg);transform-origin:left top;}
+
+.probe{
+  position:absolute;
+  width:13px;height:13px;
+  margin:-6.5px 0 0 -6.5px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent);
+  z-index:5;
+  transition:left 0.6s ease,top 0.6s ease;
+}
+.probe-label{
+  position:absolute;
+  left:34px;right:0;top:-20px;
+  z-index:6;
+  text-align:center;
+  font-family:var(--mono);font-size:9px;letter-spacing:0.06em;white-space:nowrap;color:var(--text-2);
+}
+.probe-label b{color:var(--accent);font-weight:700;}
+
+@media (max-width:600px){
+  .grid-wrap{width:310px;height:360px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="grid-wrap">
+    <div class="axis-y"><span>Behavior specialization</span></div>
+    <div class="axis-x">Knowledge change frequency</div>
+    <div class="tick y-lo">generic</div>
+    <div class="tick y-hi">specialized</div>
+    <div class="tick x-lo">static</div>
+    <div class="tick x-hi">constant flux</div>
+
+    <div class="quad-grid">
+      <!-- top-left: hi behavior, lo change -->
+      <div class="cell" data-q="0">
+        <div class="verdict">FINE-TUNE</div>
+        <div class="desc">Stable behavior baked into weights. Shorter prompts, consistent reasoning patterns.</div>
+      </div>
+      <!-- top-right: hi behavior, hi change -->
+      <div class="cell" data-q="1">
+        <div class="verdict">BOTH</div>
+        <div class="desc">Fine-tune for reasoning behavior, RAG for live knowledge. The reliable production default.</div>
+      </div>
+      <!-- bottom-left: lo behavior, lo change -->
+      <div class="cell" data-q="3">
+        <div class="verdict">BASE MODEL</div>
+        <div class="desc">Plain prompting is enough. No retrieval overhead, no training cost.</div>
+      </div>
+      <!-- bottom-right: lo behavior, hi change -->
+      <div class="cell" data-q="2">
+        <div class="verdict">RAG</div>
+        <div class="desc">Update knowledge in seconds via the vector index. Cited, auditable answers.</div>
+      </div>
+    </div>
+
+    <div class="probe" id="probe" style="left:178px;top:139px;"></div>
+    <div class="probe-label" id="plabel"></div>
+  </div>
+</div>
+
+<script>
+var cells=Array.from(document.querySelectorAll('.cell'));
+var byQ=function(q){return cells.find(function(c){return c.dataset.q==q;});};
+var label=document.getElementById('plabel');
+var probe=document.getElementById('probe');
+var seq=[
+  {q:0,t:'escalation protocol bot',x:178,y:139,v:'FINE-TUNE'},
+  {q:1,t:'support agent + live policy',x:211,y:139,v:'BOTH'},
+  {q:2,t:'product knowledge Q&A',x:211,y:173,v:'RAG'},
+  {q:3,t:'generic summarizer',x:178,y:173,v:'BASE MODEL'}
+];
+var i=0;
+function step(){
+  var s=seq[i];
+  cells.forEach(function(c){c.classList.remove('active');});
+  byQ(s.q).classList.add('active');
+  probe.style.left=s.x+'px';
+  probe.style.top=s.y+'px';
+  label.innerHTML='case: '+s.t+' &rarr; <b>'+s.v+'</b>';
+  i=(i+1)%seq.length;
+}
+step();
+setInterval(step,3000);
+</script>
+</body>
+</html>

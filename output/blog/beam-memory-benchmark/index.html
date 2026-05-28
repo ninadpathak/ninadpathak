@@ -294,7 +294,6 @@
 <p>Claude 3 Opus and GPT-4-Turbo perform similarly, with both achieving above 90% accuracy at the start and 26-29% in the middle of their respective context windows. Long-context fine-tuned open models like Llama-3-70B-262K show the smallest accuracy differences, though still exhibit the U-shaped pattern.</p>
 <p><strong>Can this problem be fixed with training?</strong></p>
 <p>Research suggests the U-shaped retrieval pattern is structural to how transformer attention works, not a bug that training can fully eliminate. However, training on longer contexts and using importance-weighted objectives can reduce the magnitude of the middle drop. The difference never fully closes, but it narrows with targeted training.</p>
-<hr />
 <p>The BEAM benchmark is a valuable diagnostic tool. It does not say long context windows are useless. It says they are less reliable than vendors imply, especially for information in the middle. Build systems that account for this, and you will avoid the production incidents that come from models quietly failing to retrieve facts they technically have access to.</p>
       </div>
     </div>

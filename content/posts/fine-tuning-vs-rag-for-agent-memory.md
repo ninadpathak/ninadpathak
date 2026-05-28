@@ -17,7 +17,7 @@ Fine-tuning modifies the model's weights. You train the model on examples and it
 
 RAG does not touch the model. You keep the model fixed and retrieve relevant context at inference time. The knowledge lives in your vector store or document index, and the model sees it only when you pass it in.
 
-For agent memory, this distinction matters more than in most applications. An agent operating in memory needs to retain three things simultaneously: factual knowledge about the domain, procedural knowledge about how to handle tasks, and episodic knowledge about what happened in specific sessions. Each of these has different update patterns and different failure costs.
+For agent memory, this distinction matters more than in most applications. An agent operating in memory needs to retain three things simultaneously: factual knowledge about the domain, procedural knowledge about how to handle tasks, and episodic knowledge about what happened in specific sessions. Each of these has different update patterns and different failure costs. The [practical map of episodic, semantic, and working memory in agents](/blog/episodic-vs-semantic-vs-working-memory-agents/) is useful background here, because the layer boundaries determine which memory problems are solvable with RAG and which require changing the model's weights.
 
 Factual knowledge about your product changes constantly. A pricing update, a new API endpoint, a changed workflow. Fine-tuning on this factual knowledge means retraining every time something changes. RAG means your index updates and the agent sees the new information next query.
 
@@ -25,17 +25,24 @@ Procedural knowledge about how to handle things is more stable. If you want the 
 
 Episodic knowledge is the hardest. What happened in this conversation, what preferences has the user expressed across sessions, what was the outcome of that troubleshooting step three weeks ago. This is not knowledge you would fine-tune on even if you could, because it is specific to this user or this interaction.
 
+<div class="visual-wrapper">
+  <div class="visual-title">Fine-Tune vs RAG Decision Quadrant</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/memory-finetuning-decision.html" title="Two-axis decision quadrant: knowledge freshness vs behavior specialization routing to fine-tune, RAG, or both" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## When RAG Is the Obvious Choice
 
 The clearest signal that RAG is right: your knowledge base changes faster than you can retrain.
 
 A customer support agent that needs to know about current product features, recent outages, and today's pricing is a RAG problem. Retraining every time any of those change is not feasible. The latency between a product update and the agent knowing about it matters. With RAG, that latency is zero. With fine-tuning, you are looking at hours at minimum and probably days.
 
-The retrieval infrastructure cost is real. You need an embedding model, a vector index, a retrieval pipeline, and reranking logic that keeps relevant results at the top. I have benchmarked this. Retrieval latency adds 40-120ms on top of inference for a typical setup. If your agent is latency-sensitive, that matters. If your agent is already doing multiple tool calls that take seconds, it probably does not.
+The retrieval infrastructure cost is real. You need an embedding model, a vector index, a retrieval pipeline, and reranking logic that keeps relevant results at the top. I have benchmarked this. Retrieval latency adds 40-120ms on top of inference for a typical setup. If your agent is latency-sensitive, that matters. If your agent is already doing multiple tool calls that take seconds, it probably does not. The [RAG evaluation metrics that actually matter](/blog/rag-evaluation-metrics-what-actually-matters/) are worth understanding before you build the pipeline, because the metrics you optimize for early will shape what the system gets good at.
 
 The other case for RAG: you need verifiable sources. When an agent cites policy, it should cite the actual document. RAG makes this possible because the retrieved context is in the prompt. Fine-tuning makes the knowledge implicit in the model's weights, and you cannot point to where it came from. For regulated industries, this is not a nice-to-have.
 
-I wrote about the retrieval accuracy problem in my post on [asymmetric retrieval in agent memory](/articles/asymmetric-retrieval-agent-memory). The short version: retrieval is harder than it looks, and bad retrieval will undermine your RAG pipeline faster than bad fine-tuning undermines your model.
+I wrote about the retrieval accuracy problem in my post on [asymmetric retrieval in agent memory](/blog/asymmetric-retrieval-agent-memory/). The short version: retrieval is harder than it looks, and bad retrieval will undermine your RAG pipeline faster than bad fine-tuning undermines your model.
 
 ## When Fine-Tuning Earns Its Cost
 
@@ -51,7 +58,7 @@ The other cost is subtler. Fine-tuning a model on a small dataset risks catastro
 
 ## The Memory Hierarchy Changes the Calculus
 
-When you look at agent memory through the [memory hierarchy lens](/articles/memory-hierarchy-in-ai-systems), the fine-tuning versus RAG decision maps to different layers.
+When you look at agent memory through the [memory hierarchy lens](/blog/memory-hierarchy-in-ai-systems/), the fine-tuning versus RAG decision maps to different layers.
 
 Working memory is episodic and short-lived. This is never a fine-tuning problem. No one fine-tunes a model on what happened in this conversation. RAG with a conversation window or session store handles this. The context window is your working memory, and you manage it with retrieval and eviction, not with weights.
 
@@ -87,6 +94,6 @@ What is your retraining budget? If you cannot afford to retrain monthly, RAG is 
 
 How critical is retrieval latency? If every millisecond matters and you cannot absorb 60ms of retrieval overhead, you need a different architecture. Most agentic workflows have tool call latencies of hundreds of milliseconds, so retrieval overhead is rarely the bottleneck.
 
-The honest answer for most agent memory use cases in 2026: RAG as the foundation, fine-tuning only for the reasoning patterns that do not stick through prompt engineering. Build the retrieval pipeline first. Add fine-tuning when you have real behavioral failures that RAG cannot fix.
+The honest answer for most agent memory use cases in 2026: RAG as the foundation, fine-tuning only for the reasoning patterns that do not stick through prompt engineering. [Anthropic's contextual retrieval](/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/) is worth reviewing before you finalize the RAG architecture, because contextual embeddings change the retrieval accuracy math enough to affect whether you even need fine-tuning for some reasoning tasks. Build the retrieval pipeline first. Add fine-tuning when you have real behavioral failures that RAG cannot fix.
 
-I covered the retrieval fundamentals in [RAG vs fine-tuning](/articles/rag-vs-fine-tuning) from a more general perspective. The agent memory context adds the constraint that episodic and working memory are non-negotiable RAG problems, which shifts the calculus toward RAG as the primary layer even for systems where fine-tuning has a legitimate role.
+I covered the retrieval fundamentals in [RAG vs fine-tuning](/blog/rag-vs-fine-tuning/) from a more general perspective. The agent memory context adds the constraint that episodic and working memory are non-negotiable RAG problems, which shifts the calculus toward RAG as the primary layer even for systems where fine-tuning has a legitimate role.

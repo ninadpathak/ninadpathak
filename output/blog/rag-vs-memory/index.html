@@ -405,7 +405,6 @@
 <p>RAG and memory are not competing approaches. They solve different problems. RAG extends what the model knows. Memory extends what the model remembers within a session.</p>
 <p>Build both from the start. The initial demo might only need one, but users will eventually ask for the other, and retrofitting is always more expensive than building right. The hybrid class above is a starting point, not a final design.</p>
 <p>The evaluation infrastructure matters more than the retrieval algorithm. You can tune chunk sizes and embedding models forever. None of it matters if you cannot measure whether your users are getting correct answers. Invest in evals first.</p>
-<hr />
 <h2 id="related-articles">Related Articles</h2>
 <ul>
 <li><a href="/blog/context-windows-vs-memory/">Context windows vs memory</a></li>
@@ -429,7 +428,6 @@ Yes, the mechanism is identical. Open-source models like Llama 3.1 70B and Mistr
 Implement a three-layer truncation strategy: keep the last N turns verbatim, summarize older turns into episodic summaries, and extract persistent facts into a structured semantic memory store. This mirrors the approach described in the production memory section above.</p>
 <p><strong>Should I use conversation history as RAG context?</strong>
 No. Conversation history belongs in the memory layer, not the RAG layer. RAG queries a static knowledge base. Feeding conversation history into the vector store creates retrieval noise and mixes session state with domain knowledge. Keep these pipelines separate.</p>
-<hr />
 <p>Related posts you might find useful:</p>
 <ul>
 <li><a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">How Anthropic's Contextual Retrieval Changes RAG Architecture</a></li>

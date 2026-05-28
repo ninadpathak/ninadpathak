@@ -222,44 +222,51 @@
 
       </nav>
       <div class="post-content">
-        <p>Inference is where LLM projects die. The model works in testing. In production, latency climbs, throughput craters, and your GPU budget evaporates. The gap between a proof-of-concept and a serving system that doesn't embarrass you in production is wide — and it gets wider as usage grows.</p>
+        <p>Inference is where LLM projects die. The model works in testing. In production, latency climbs, throughput craters, and your GPU budget evaporates. The gap between a proof-of-concept and a serving system that doesn't embarrass you in production is wide, and it gets wider as usage grows.</p>
 <p>I've spent time working with inference stacks across vLLM, TensorRT-LLM, and SGLang. The techniques that actually matter fall into four categories: batching, memory management, quantization, and attention kernels. Here's how they work and where they break.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Inference Optimization Stack</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/inference-optimization-stack.html" title="LLM inference optimization stack: batching, flash attention, KV cache, quantization, and speculative decoding with speedup contributions" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="batching-the-first-lever">Batching: The First Lever</h2>
-<p>The naive approach runs one request at a time. Your GPU sits idle while waiting for the next prompt. Batching solves this by packing multiple requests together — but how you batch matters enormously.</p>
+<p>The naive approach runs one request at a time. Your GPU sits idle while waiting for the next prompt. Batching solves this by packing multiple requests together, and how you batch matters enormously.</p>
 <p><strong>Static batching</strong> groups requests at the start of inference. It has a fatal flaw: you wait for the slowest request in the batch to finish before processing the next one. A single long completion blocks everything.</p>
 <p><strong>Continuous batching</strong> (also called iteration-level scheduling) addresses this. Requests enter and leave the batch dynamically, at each token generation step. New requests can slot in when earlier ones complete. This is what vLLM uses by default, and it's the reason vLLM typically delivers 10-20x higher throughput than naive batching for real-world request distributions.</p>
 <p>The tradeoff is memory. Continuous batching requires pre-allocating enough memory for the maximum batch size you want to support. If you set <code>max_num_seqs=256</code> but your workload never actually uses that many concurrent sequences, you're wasting VRAM that could go toward a larger context window or more model weights.</p>
 <h2 id="kv-cache-management">KV Cache Management</h2>
-<p>Every token your model generates needs to remember all previous tokens in the sequence. Storing these in GPU memory is the KV cache — and for long contexts, it becomes the dominant memory consumer.</p>
+<p>Every token your model generates needs to remember all previous tokens in the sequence. Storing these in GPU memory is the KV cache, and for long contexts, it becomes the dominant memory consumer.</p>
 <p>The raw math: a 70B model with a 128K context window at full precision needs roughly 64GB just for the KV cache on a single sequence. Run 16 concurrent sequences and you've consumed 1TB. This is why context length and throughput are in direct tension.</p>
-<p><strong>PagedAttention</strong> (vLLM's approach) manages the KV cache like virtual memory — non-contiguous physical blocks mapped to logical sequence positions. This eliminates fragmentation and allows near-perfect memory utilization. In practice, PagedAttention typically lets you serve 2-4x more concurrent sequences than naively managed KV caches with the same memory budget.</p>
-<p><strong>KV cache eviction</strong> becomes critical once memory is full. LRU is the default, but it ignores the fact that some keys are accessed far more frequently than others. Recent work on "importance-based" eviction ( evicting tokens the model attended less to ) shows modest improvements, but the gains are small enough that most systems stick with LRU simplicity. I looked at this in more detail when examining <a href="/articles/kv-cache-eviction-accuracy">KV cache eviction accuracy</a>.</p>
+<p><strong>PagedAttention</strong> (vLLM's approach) manages the KV cache like virtual memory, using non-contiguous physical blocks mapped to logical sequence positions. This eliminates fragmentation and allows near-perfect memory utilization. In practice, PagedAttention typically lets you serve 2-4x more concurrent sequences than naively managed KV caches with the same memory budget.</p>
+<p><strong>KV cache eviction</strong> becomes critical once memory is full. LRU is the default, but it ignores the fact that some keys are accessed far more frequently than others. Recent work on "importance-based" eviction ( evicting tokens the model attended less to ) shows modest improvements, but the gains are small enough that most systems stick with LRU simplicity. I looked at this in more detail when examining <a href="/blog/kv-cache-eviction-accuracy/">KV cache eviction accuracy</a>.</p>
 <h2 id="quantization-trading-precision-for-throughput">Quantization: Trading Precision for Throughput</h2>
-<p>Quantization reduces the numerical precision of weights and activations — typically from 16-bit or 32-bit floats to 8-bit or 4-bit integers. The goal is to fit more model parameters in the same VRAM, enabling larger batch sizes or smaller hardware.</p>
-<p><strong>FP8 quantization</strong> (8-bit floating point) is now well-supported in both Ampere and Hopper architectures. For most models, FP8 delivers near-identical output quality to BF16 with a 40-50% memory reduction. The speedup is real but modest — you still need to dequantize to compute, so the memory bandwidth savings are the primary benefit.</p>
-<p><strong>INT8 quantization</strong> using quantization-aware training or post-training calibration is more aggressive. For language tasks, it typically degrades quality by 1-3% on standard benchmarks, which is acceptable for many production use cases. For code generation, the degradation hits harder — I've seen 5-8% drops on HumanEval with naive INT8 approaches.</p>
+<p>Quantization reduces the numerical precision of weights and activations (typically from 16-bit or 32-bit floats to 8-bit or 4-bit integers). The goal is to fit more model parameters in the same VRAM, enabling larger batch sizes or smaller hardware.</p>
+<p><strong>FP8 quantization</strong> (8-bit floating point) is now well-supported in both Ampere and Hopper architectures. For most models, FP8 delivers near-identical output quality to BF16 with a 40-50% memory reduction. The speedup is real but modest, because you still need to dequantize to compute, so the memory bandwidth savings are the primary benefit.</p>
+<p><strong>INT8 quantization</strong> using quantization-aware training or post-training calibration is more aggressive. For language tasks, it typically degrades quality by 1-3% on standard benchmarks, which is acceptable for many production use cases. For code generation, the degradation hits harder. I've seen 5-8% drops on HumanEval with naive INT8 approaches.</p>
 <p><strong>GPTQ and AWQ</strong> are the two dominant post-training quantization methods. GPTQ is slower to apply but produces slightly better quality at 4-bit. AWQ is faster and preserves more quality at 4-bit for most tasks, which is why SGLang has defaulted to AWQ for its 4-bit quantization path.</p>
 <p>The rule I follow: use FP8 if your hardware supports it and you need zero quality compromise. Use INT8 if memory is the bottleneck and you can tolerate small quality losses. Use 4-bit only when you're severely memory-constrained and the quality tradeoff is acceptable for your use case.</p>
 <h2 id="attention-kernels-flash-attention-and-beyond">Attention Kernels: Flash Attention and Beyond</h2>
-<p>The standard attention implementation materializes the full attention matrix — O(n²) memory for sequence length n. For a 4,096 token context, that's 16M values. For 128K, it's 16B.</p>
-<p><strong>Flash Attention</strong> computes attention in tiles that fit in GPU SRAM, streaming through HBM with minimal memory usage. It achieves O(n) memory instead of O(n²) and is typically 2-4x faster for longer sequences. This is now a baseline expectation — any inference stack without Flash Attention is leaving significant performance on the table.</p>
+<p>The standard attention implementation materializes the full attention matrix: O(n²) memory for sequence length n. For a 4,096 token context, that's 16M values. For 128K, it's 16B.</p>
+<p><strong>Flash Attention</strong> computes attention in tiles that fit in GPU SRAM, streaming through HBM with minimal memory usage. It achieves O(n) memory instead of O(n²) and is typically 2-4x faster for longer sequences. Any inference stack without Flash Attention is leaving significant performance on the table, so this is now a baseline expectation.</p>
 <p><strong>Flash Attention 2</strong> improved the tile sizes for A100 and H100 architectures, delivering another 10-20% speedup over FA1 for many workloads. Flash Attention 3 (available on H100s with FP8 support) pushes this further with overlapping compute and memory operations.</p>
-<p><strong>PagedAttention</strong> I already mentioned in the KV cache context, but it's worth noting it combines with Flash Attention — vLLM uses PA by default with FA2 as its attention kernel.</p>
+<p><strong>PagedAttention</strong> I already mentioned in the KV cache context, but it's worth noting it combines with Flash Attention. vLLM uses PA by default with FA2 as its attention kernel.</p>
 <h2 id="what-i-actually-reach-for">What I Actually Reach For</h2>
 <p>When I'm optimizing a new inference deployment, I work in this order:</p>
 <ol>
-<li><strong>Enable continuous batching</strong> if not already on — this is the single biggest win for most workloads.</li>
-<li><strong>Flash Attention 2</strong> — upgrade from standard attention if not already present.</li>
-<li><strong>FP8 quantization</strong> — if VRAM is tight, apply it first and check quality before going to INT8.</li>
-<li><strong>PagedAttention</strong> — if running long contexts or high concurrency, this is essential.</li>
-<li><strong>INT8 or 4-bit</strong> — only if the above still don't get you enough headroom.</li>
+<li><strong>Enable continuous batching</strong> if not already on: this is the single biggest win for most workloads.</li>
+<li><strong>Flash Attention 2</strong>: upgrade from standard attention if not already present.</li>
+<li><strong>FP8 quantization</strong>: if VRAM is tight, apply it first and check quality before going to INT8.</li>
+<li><strong>PagedAttention</strong>: if running long contexts or high concurrency, this is essential.</li>
+<li><strong>INT8 or 4-bit</strong>: only if the above still don't get you enough headroom.</li>
 </ol>
-<p>Speculative decoding is worth adding once the baseline is fast enough. As I wrote in my <a href="/articles/speculative-decoding-explained">speculative decoding breakdown</a>, it delivers 2-3x token throughput gains for the right workload, but it requires two models and adds implementation complexity that matters when you're still chasing the fundamentals.</p>
-<p>The common mistake is jumping to the advanced stuff — setting up speculative decoding on a system that hasn't enabled continuous batching yet. The fundamentals deliver more than the sophisticated techniques do.</p>
+<p>Speculative decoding is worth adding once the baseline is fast enough. As I wrote in my <a href="/blog/speculative-decoding-explained/">speculative decoding breakdown</a>, it delivers 2-3x token throughput gains for the right workload, but it requires two models and adds implementation complexity that matters when you're still chasing the fundamentals.</p>
+<p>The common mistake is jumping to the advanced stuff, like setting up speculative decoding on a system that hasn't enabled continuous batching yet. The fundamentals deliver more than the sophisticated techniques do.</p>
 <h2 id="the-hardware-angle">The Hardware Angle</h2>
 <p>No software optimization compensates for wrong hardware choices. The inference stack matters, but so does whether you're on the right GPU.</p>
-<p>For batch inference with long sequences, H100s with NVLink matter — the high bandwidth between GPUs allows tensor parallelism to scale efficiently. A100s work well at smaller scales. RTX 4090s are excellent for single-GPU development and small-scale serving but lack the VRAM for large models at long context lengths.</p>
-<p>If you're on consumer hardware with limited VRAM, quantization becomes your primary lever rather than an optimization on top of already-sufficient memory.</p>
+<p>For batch inference with long sequences, H100s with NVLink matter, because the high bandwidth between GPUs allows tensor parallelism to scale efficiently. A100s work well at smaller scales. RTX 4090s are excellent for single-GPU development and small-scale serving but lack the VRAM for large models at long context lengths.</p>
+<p>If you're on consumer hardware with limited VRAM, quantization becomes your primary lever rather than an optimization on top of already-sufficient memory. For workloads with repeated system prompts or shared prefixes, <a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/">prompt caching</a> is worth understanding as a complementary technique: it reduces the compute cost of re-encoding tokens that don't change between requests, which compounds well with the batching and KV cache strategies above.</p>
       </div>
     </div>
   </div>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support Agent Persistent Memory Loop</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;padding:16px 20px;gap:14px;}
+
+.header{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-3);text-align:center;}
+
+.compare{display:flex;gap:14px;width:100%;max-width:660px;}
+
+.col{flex:1;display:flex;flex-direction:column;gap:8px;}
+
+.col-header{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);padding-bottom:4px;border-bottom:1px solid var(--border);}
+.col-header b{color:var(--text-1);}
+
+.loop-steps{display:flex;flex-direction:column;gap:6px;}
+
+.step{border:1px solid var(--border);padding:7px 10px;display:flex;align-items:center;gap:8px;transition:border-color .25s,background .25s;}
+.step.lit{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,transparent);}
+.step-icon{font-family:var(--mono);font-size:11px;width:16px;flex-shrink:0;color:var(--text-3);transition:color .25s;}
+.step.lit .step-icon{color:var(--accent);}
+.step-text{font-family:var(--mono);font-size:8.5px;color:var(--text-2);line-height:1.35;transition:color .25s;}
+.step.lit .step-text{color:var(--text-1);}
+.step-text small{display:block;font-size:7.5px;color:var(--text-3);margin-top:2px;}
+.step.lit .step-text small{color:var(--text-2);}
+
+.mem-bar{margin-top:4px;display:flex;flex-direction:column;gap:3px;}
+.mem-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);}
+.mem-track{height:6px;background:var(--border);width:100%;}
+.mem-fill{height:100%;background:var(--text-3);transition:width .6s ease,background .3s;}
+.mem-fill.rich{background:var(--accent);}
+
+.status{font-family:var(--mono);font-size:9.5px;color:var(--text-2);text-align:center;min-height:13px;}
+.status b{color:var(--accent);}
+
+@media (max-width:600px){
+  .compare{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="header">Persistent Memory Loop / Customer Support Agent</div>
+
+  <div class="compare">
+    <!-- Session 1 -->
+    <div class="col" id="col1">
+      <div class="col-header">Session <b>1</b> -- first contact</div>
+      <div class="loop-steps">
+        <div class="step" id="s1-a">
+          <div class="step-icon">1</div>
+          <div class="step-text">User message<small>billing issue description</small></div>
+        </div>
+        <div class="step" id="s1-b">
+          <div class="step-icon">2</div>
+          <div class="step-text">Check memory<small>empty -- no prior episodes</small></div>
+        </div>
+        <div class="step" id="s1-c">
+          <div class="step-icon">3</div>
+          <div class="step-text">Response<small>asks to re-explain problem</small></div>
+        </div>
+        <div class="step" id="s1-d">
+          <div class="step-icon">4</div>
+          <div class="step-text">Update memory<small>stores episode #1</small></div>
+        </div>
+      </div>
+      <div class="mem-bar">
+        <div class="mem-label">context richness</div>
+        <div class="mem-track"><div class="mem-fill" id="m1" style="width:12%"></div></div>
+      </div>
+    </div>
+
+    <!-- Session 5 -->
+    <div class="col" id="col5">
+      <div class="col-header">Session <b>5</b> -- returning user</div>
+      <div class="loop-steps">
+        <div class="step" id="s5-a">
+          <div class="step-icon">1</div>
+          <div class="step-text">User message<small>new billing question</small></div>
+        </div>
+        <div class="step" id="s5-b">
+          <div class="step-icon">2</div>
+          <div class="step-text">Check memory<small>4 prior episodes retrieved</small></div>
+        </div>
+        <div class="step" id="s5-c">
+          <div class="step-icon">3</div>
+          <div class="step-text">Response<small>recalls plan + history -- no re-explain</small></div>
+        </div>
+        <div class="step" id="s5-d">
+          <div class="step-icon">4</div>
+          <div class="step-text">Update memory<small>stores episode #5, prunes old</small></div>
+        </div>
+      </div>
+      <div class="mem-bar">
+        <div class="mem-label">context richness</div>
+        <div class="mem-track"><div class="mem-fill rich" id="m5" style="width:82%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status" id="status">&nbsp;</div>
+</div>
+
+<script>
+var ids1=['s1-a','s1-b','s1-c','s1-d'];
+var ids5=['s5-a','s5-b','s5-c','s5-d'];
+var msgs=[
+  'user sends message -- both sessions receive input',
+  'session 1: memory empty / session 5: 4 episodes loaded',
+  'session 1: must re-explain / session 5: <b>context intact</b>',
+  'both sessions write new episode to persistent store'
+];
+var step=0;
+function clear(){
+  ids1.concat(ids5).forEach(function(id){document.getElementById(id).classList.remove('lit');});
+  document.getElementById('status').innerHTML='&nbsp;';
+}
+function tick(){
+  if(step===0)clear();
+  document.getElementById(ids1[step]).classList.add('lit');
+  document.getElementById(ids5[step]).classList.add('lit');
+  document.getElementById('status').innerHTML=msgs[step];
+  step++;
+  if(step>=4){step=0;}
+}
+tick();
+setInterval(tick,1800);
+</script>
+</body>
+</html>

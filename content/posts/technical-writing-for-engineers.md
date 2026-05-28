@@ -37,7 +37,7 @@ Lead with the task. State what the reader will accomplish. Show the concrete ste
 
 Example of the wrong order:
 
-> "GraphQL is a query language for APIs. It was developed by Facebook in 2012 and open-sourced in 2015. Unlike REST, GraphQL allows clients to request exactly the data they need. This reduces over-fetching and gives frontend teams more autonomy. In this tutorial, we will cover how to set up a GraphQL server with Node.js."
+> "GraphQL is a query language for APIs. It was developed by Facebook in 2012 and open-sourced in 2015. GraphQL lets clients request exactly the data they need. This reduces over-fetching and gives frontend teams more autonomy. In this tutorial, we will cover how to set up a GraphQL server with Node.js."
 
 Example of the right order:
 

@@ -341,7 +341,6 @@
 <p>Standard RAG does not work for real-time voice agents due to retrieval latency. Vector similarity search over large embedding stores takes 40ms to 200ms, which consumes half the available A2A budget. The correct approach is to keep active context in-process on the inference server and update it incrementally. External retrieval only happens on session startup and topic switches.</p>
 <p><strong>How does TTS overlap with LLM generation in the pipeline?</strong></p>
 <p>TTS synthesis starts before LLM generation is complete. Tokens stream from the LLM as they are produced, and TTS synthesizes each token as it arrives. The pipeline is three stages deep: LLM generates tokens N to N+10 while TTS synthesizes tokens N-5 to N, and audio plays for tokens N-10 to N-5. This overlap is what enables the agent to start playing audio within 150ms of the first token being generated.</p>
-<hr />
 <p>For more on the latency pipeline that this memory system lives inside, see my benchmark post on <a href="/blog/voice-ai-latency-gemini-benchmark/">real-time voice agent latency</a>. For the LLM context window management that determines how much memory you can hold, see <a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">how Anthropic's contextual retrieval changes RAG architecture</a>. For the broader agent infrastructure context, see <a href="/blog/production-ai-agent-errors/">production AI agent errors: what actually fails</a>.</p>
       </div>
     </div>

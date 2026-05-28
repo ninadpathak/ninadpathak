@@ -49,7 +49,7 @@ I measured four primary metrics:
   </div>
 </div>
 
-SQLite-vec initializes significantly faster than PGlite. This is because SQLite-vec is a lean extension, whereas PGlite must initialize the entire Postgres runtime, including extension loading and process coordination simulation within the WASM environment.
+SQLite-vec initializes significantly faster than PGlite. This is because SQLite-vec is a lean extension. PGlite must initialize the entire Postgres runtime, including extension loading and process coordination simulation within the WASM environment.
 
 ## PGlite and the power of HNSW
 

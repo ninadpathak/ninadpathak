@@ -138,6 +138,4 @@ Claude 3 Opus and GPT-4-Turbo perform similarly, with both achieving above 90% a
 
 Research suggests the U-shaped retrieval pattern is structural to how transformer attention works, not a bug that training can fully eliminate. However, training on longer contexts and using importance-weighted objectives can reduce the magnitude of the middle drop. The difference never fully closes, but it narrows with targeted training.
 
----
-
 The BEAM benchmark is a valuable diagnostic tool. It does not say long context windows are useless. It says they are less reliable than vendors imply, especially for information in the middle. Build systems that account for this, and you will avoid the production incidents that come from models quietly failing to retrieve facts they technically have access to.

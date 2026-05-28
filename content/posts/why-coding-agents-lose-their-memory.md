@@ -17,7 +17,7 @@ This is not a Claude Code problem. Every coding agent I have tested works this w
 
 The gap comes from how these agents are architected. A coding agent running in a terminal operates in layers that have different retention semantics.
 
-The first layer is session context. Everything the agent knows about the current task lives in the context window of a running process. Close that process and the context is gone. This is not a bug. Stale context from old sessions causes more problems than forgotten context does, so engineers building these systems made ephemeral memory the default.
+The first layer is session context. Everything the agent knows about the current task lives in the context window of a running process. Close that process and the context is gone. This is not a bug. Stale context from old sessions causes more problems than forgotten context does, so engineers building these systems made ephemeral memory the default. The broader point about [why context windows and memory are not the same thing](/blog/context-windows-vs-memory/) is worth internalizing before you try to fix persistence issues, because the failure modes are different and so are the solutions.
 
 The second layer is project-level memory files. Claude Code uses `CLAUDE.md` in your project root. Cursor uses similar project memory conventions. These files persist across sessions and survive restarts, but the agent does not update them automatically.
 
@@ -25,9 +25,16 @@ The third layer is cross-session persistent memory. Claude Code has a SQLite dat
 
 The failure mode I see most often is an agent that has access to all three layers but the engineer does not know they exist. The agent looks like it has memory because you have been working with it for days. But the moment you restart the terminal, the session layer is gone. The project files still have what you wrote manually. The SQLite database, if it exists, has what the agent chose to record. The combination creates an experience that feels inconsistent.
 
+<div class="visual-wrapper">
+  <div class="visual-title">Context Window as Sliding Window</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/context-window-sliding.html" title="Context window sliding: old turns falling off the left edge while newest turns are appended on the right" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## How Memory Serialization Actually Works
 
-The serialization layer is where persistence either happens or does not. I covered serialization patterns in depth in [my post on memory serialization between sessions](/articles/memory-serialization-between-sessions), but the short version for coding agents is this.
+The serialization layer is where persistence either happens or does not. I covered serialization patterns in depth in [my post on memory serialization between sessions](/blog/memory-serialization-between-sessions/), but the short version for coding agents is this.
 
 When you run Claude Code with `--memory`, the agent gains the ability to write entries to a SQLite database. These entries are retrievable in future sessions and are scoped by project. If you are working in a repository called `api-gateway`, the agent stores findings tagged with that project. Switch to a different directory and those entries do not surface unless you specifically query for them.
 
@@ -63,7 +70,7 @@ The project file `CLAUDE.md` works differently. You write it. The agent reads it
 
 Context window exhaustion is the failure mode that bites most coding agents. When you are working on a large task, the agent accumulates file reads, tool results, and reasoning in the context window. A 200K token context window sounds large until you are in the middle of a 50-file migration. I hit the wall at roughly the 30-file mark when working with Claude Sonnet 4. The agent started dropping older file contents from context and making decisions based on incomplete information. No error. Just quietly wrong code.
 
-The fix is checkpointing. For long tasks, I write periodic summaries to `CLAUDE.md` or the SQLite database. The [short-term memory patterns for AI agents](/articles/short-term-memory-for-ai-agents) that I wrote about apply directly here. The context window is short-term memory. What you serialize to disk is long-term memory. The agent needs both, and you need to manage the boundary explicitly.
+The fix is checkpointing. For long tasks, I write periodic summaries to `CLAUDE.md` or the SQLite database. The [short-term memory patterns for AI agents](/blog/short-term-memory-for-ai-agents/) that I wrote about apply directly here. The context window is short-term memory. What you serialize to disk is long-term memory. The agent needs both, and you need to manage the boundary explicitly.
 
 Schema drift is a second failure mode. The SQLite memory database schema has not changed in the versions I tested, but the content the agent writes to it changes constantly. An entry written six months ago might use a format that the current agent interprets differently. I handle this by reviewing and pruning memory entries monthly. Entries older than 90 days get audited. If the content no longer reflects project reality, I delete it.
 
@@ -84,22 +91,22 @@ Verify the database is being written to. Run this between sessions.
 sqlite3 ~/.claude/memory.db "SELECT COUNT(*) FROM memory_entries;"
 ```
 
-A count of zero after a week of regular use means the agent is not writing anything. Either `--memory` is not active, or the agent is not deciding that anything is worth recording. If the latter, you need to prompt more explicitly. "Remember that the auth service uses JWT with RS256" triggers a database write.
+A count of zero after a week of regular use means the agent is not writing anything. Either `--memory` is not active, or the agent is not deciding that anything is worth recording. If the latter, you need to prompt more explicitly. "Remember that the auth service uses JWT with RS256" triggers a database write. The [practical guide to AI memory management for LLMs](/blog/ai-memory-management-for-llms/) covers the eviction and retention decisions behind what gets written and what gets dropped, which helps explain why some entries appear and others do not.
 
 Use `CLAUDE.md` for what you know the agent needs on every session. Architecture decisions, coding standards, team conventions, environment setup. These do not change often and the agent reads them automatically. This is the most reliable memory mechanism because it lives in version control with your code.
 
 The SQLite database is for cross-session tracking. I use it for migration status, known issues, and findings that span multiple projects. A customer support agent might track user preferences here. A coding agent tracks technical debt and architectural findings.
 
-Store full conversation logs separately if you need them. The [memory hierarchy for AI systems](/articles/memory-hierarchy-in-ai-systems) makes the case for separating structured state from raw log data. The log is append-only and grows unbounded. The structured state is what the agent uses to make decisions. I keep a sliding window of recent log entries for reconstruction and serialize the structured state independently.
+Store full conversation logs separately if you need them. The [memory hierarchy for AI systems](/blog/memory-hierarchy-in-ai-systems/) makes the case for separating structured state from raw log data. The log is append-only and grows unbounded. The structured state is what the agent uses to make decisions. I keep a sliding window of recent log entries for reconstruction and serialize the structured state independently.
 
 ## What This Means for Long-Running Codebase Work
 
 If you are working on a codebase over weeks or months, the memory architecture matters more than the model choice. A Sonnet 4 with good memory discipline outperforms an Opus 4 with none. The reason is straightforward: a model that can access relevant context from six months ago will make better decisions about a large refactoring than a model that starts fresh every session.
 
-The [episodic, semantic, and working memory map](/articles/episodic-vs-semantic-vs-working-memory-agents) I wrote covers this in detail. Episodic memory is what happened in specific sessions. Semantic memory is what the agent knows about the codebase as a whole. Working memory is what is active right now. Coding agents are good at working memory, poor at episodic memory without explicit serialization, and inconsistent at semantic memory unless you maintain the project files.
+The [episodic, semantic, and working memory map](/blog/episodic-vs-semantic-vs-working-memory-agents/) I wrote covers this in detail. Episodic memory is what happened in specific sessions. Semantic memory is what the agent knows about the codebase as a whole. Working memory is what is active right now. Coding agents are good at working memory, poor at episodic memory without explicit serialization, and inconsistent at semantic memory unless you maintain the project files.
 
 The practical implication is that you need to treat memory management as part of your workflow, not an optional feature. Before starting a large task, establish what the agent needs to know. During the task, serialize significant findings. After the task, verify that what you want remembered was actually written to a persistent layer.
 
-If you want to understand the broader context, [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026) covers the full landscape of memory approaches across different agent systems. The patterns are similar even if the implementations differ.
+If you want to understand the broader context, [state of AI agent memory in 2026](/blog/state-of-ai-agent-memory-2026/) covers the full landscape of memory approaches across different agent systems. The patterns are similar even if the implementations differ.
 
 The agents that ship with real memory discipline are still the exception. Most coding agents give you the tools and expect you to know how to use them. Once you understand how the persistence layers work, the forgetting problem is solvable. It just requires treating memory as something you architect, not something that happens automatically.

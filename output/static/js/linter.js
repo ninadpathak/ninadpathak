@@ -10,6 +10,35 @@
   // ─────────────────────────────────────────────────────────────────────
 
   var RULES = [
+    // ── House rules (errors) ──────────────────────────────────────────
+    {
+      id: 'em_dash',
+      severity: 'error',
+      label: 'Em dash',
+      terms: ['—'],
+      message: function () { return 'Em dashes are banned. Rewrite with a comma, period, or parentheses.'; }
+    },
+    {
+      id: 'contrastive',
+      severity: 'error',
+      label: 'Contrastive parallelism',
+      terms: ['unlike', 'whereas', 'on the other hand'],
+      message: function (w) { return '"' + w + '" — contrastive parallelism. Rewrite with evidence instead.'; }
+    },
+    {
+      id: 'hr_prose',
+      severity: 'error',
+      label: 'Horizontal line',
+      terms: ['---'],
+      message: function () { return 'Horizontal lines (---) are banned in prose. Use a heading or white space instead.'; }
+    },
+    {
+      id: 'banned_jargon',
+      severity: 'error',
+      label: 'Banned jargon',
+      terms: ['leverage', 'leverages', 'leveraging', 'synergy', 'synergies', 'unlock', 'unlocks', 'unlocking'],
+      message: function (w) { return '"' + w + '" is banned jargon. Say what you mean.'; }
+    },
     {
       id: 'condescension',
       severity: 'error',
@@ -191,6 +220,29 @@
             matched: m[0],
             excerpt: getExcerpt(text, m.index, m[0].length),
             message: rule.message(m[0])
+          });
+        }
+      });
+    });
+
+    // Banned sentence starters
+    var BANNED_STARTS = ['In ', 'This ', 'By ', 'Finally ', 'Most ', 'Ever '];
+    getSentences(text).forEach(function(s) {
+      var trimmed = s.replace(/^[*_"'\s]+/, '');
+      BANNED_STARTS.forEach(function(starter) {
+        if (trimmed.indexOf(starter) === 0) {
+          var idx = text.indexOf(s);
+          if (idx === -1) return;
+          allIssues.push({
+            id: 'issue-' + Math.random().toString(36).substr(2, 9),
+            index: idx,
+            length: starter.trim().length,
+            severity: 'error',
+            rule: 'banned_starter',
+            label: 'Banned sentence opener',
+            matched: starter.trim(),
+            excerpt: getExcerpt(text, idx, Math.min(s.length, 60)),
+            message: '"' + starter.trim() + '" cannot start a sentence. Rewrite to lead with the subject.'
           });
         }
       });

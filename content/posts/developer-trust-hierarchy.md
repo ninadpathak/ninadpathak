@@ -43,7 +43,7 @@ Hertzum (2002) established in *The importance of trust in software engineers' as
   </div>
 </div>
 
-While the general "Principle of Least Effort" suggests that people will choose the most accessible information source, engineers specifically choose the source they can verify most reliably.
+The "Principle of Least Effort" predicts that people choose the most accessible information source. Engineers break that pattern: they choose the source they can verify most reliably.
 
 ## Tier 1: the binary (source code and compiler)
 

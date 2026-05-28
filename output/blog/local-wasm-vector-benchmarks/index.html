@@ -264,7 +264,7 @@
   </div>
 </div>
 
-<p>SQLite-vec initializes significantly faster than PGlite. This is because SQLite-vec is a lean extension, whereas PGlite must initialize the entire Postgres runtime, including extension loading and process coordination simulation within the WASM environment.</p>
+<p>SQLite-vec initializes significantly faster than PGlite. This is because SQLite-vec is a lean extension. PGlite must initialize the entire Postgres runtime, including extension loading and process coordination simulation within the WASM environment.</p>
 <h2 id="pglite-and-the-power-of-hnsw">PGlite and the power of HNSW</h2>
 <p>PGlite brings the industry-standard <code>pgvector</code> implementation to the edge. Its primary advantage is the <strong>HNSW (Hierarchical Navigable Small World)</strong> index. HNSW is a graph-based algorithm that provides an approximate nearest neighbor (ANN) search with logarithmic complexity.</p>
 <div class="visual-wrapper">

@@ -278,7 +278,7 @@
   </div>
 </div>
 
-<p>To prevent "Context Poisoning" (where irrelevant history from a previous task distracts the model), Gemini CLI uses an isolation pattern I call <strong>Context Quarantine</strong>. Each sub-task is given a fresh, pruned window, whereas Claude tends to keep the entire session history available for better cross-file reasoning.</p>
+<p>To prevent "Context Poisoning" (where irrelevant history from a previous task distracts the model), Gemini CLI uses an isolation pattern I call <strong>Context Quarantine</strong>. Each sub-task is given a fresh, pruned window. Claude keeps the entire session history available for better cross-file reasoning.</p>
 <h2 id="economic-outcomes-of-local-agentic-loops">Economic outcomes of local agentic loops</h2>
 <p>The ROI of running these loops on local hardware (M2/M3) versus cloud APIs becomes clear at scale. Cloud APIs charge per token, which makes high-frequency agentic loops expensive. Local hardware, while limited by memory, offers a "zero-cost" inference floor for development tasks.</p>
 <div class="visual-wrapper">
@@ -337,7 +337,7 @@ Claude Code. Its ability to reason across large, undocumented files and detect i
 <p><strong>How does 16GB RAM affect agent performance?</strong>
 You will hit the VRAM ceiling at approximately 150k context tokens. Beyond that, the OS will trigger swap memory, which significantly slows down the reasoning speed of the agent.</p>
 <p><strong>Can these agents work without an internet connection?</strong>
-No. While they run in your local terminal, the reasoning is still performed on cloud-hosted models (Anthropic and Google). However, tools like <strong>Gemma 4</strong> are paving the way for fully local, private agentic loops.</p>
+No. The reasoning runs on cloud-hosted models (Anthropic and Google), not locally. The terminal is just the interface. However, tools like <strong>Gemma 4</strong> are paving the way for fully local, private agentic loops.</p>
 <p><strong>What is the "Context Poisoning" problem?</strong>
 In long sessions, irrelevant history can distract the model, leading to hallucinations. Gemini CLI fixes this by isolating task contexts, while Claude Code relies on its superior attention mechanism to filter the noise.</p>
 <p><strong>Should I allow YOLO mode in production repos?</strong>

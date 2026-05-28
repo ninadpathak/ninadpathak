@@ -328,6 +328,4 @@ Access is available at any point. The agent can query the knowledge base between
 
 Through the system prompt. The agent is instructed that recent turns and tool results live in working context, that session history is in episodic memory, and that factual knowledge is in the knowledge base. This is not enforced by the code but by the instruction. In practice, agents learn to query memory appropriately after a few sessions.
 
----
-
 The memory architecture in HyperAgents is the reason it works reliably across long sessions. Without it, you have a powerful but forgetful system. With it, you have something that can hold context, learn from experience, and pick up work where it left off. That is the difference between a demo and a product.

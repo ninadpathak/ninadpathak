@@ -49,7 +49,7 @@
     </item>
     <item>
       <title>Contextual Compression for Agent Memory: What Stays and What Goes</title>
-      <link>https://ninadpathak.com/blog/2026-05-05-contextual-compression-for-agent-memory/</link>
+      <link>https://ninadpathak.com/blog/contextual-compression-for-agent-memory/</link>
       <description>How agents decide what to keep in memory when context space is finite, and the three compression strategies that actually work.</description>
       <pubDate>May 05, 2026</pubDate>
     </item>

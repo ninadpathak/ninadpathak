@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM Inference Optimization Stack</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;padding:18px 22px;gap:14px;}
+
+.header{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-3);text-align:center;}
+
+.stack{width:100%;max-width:560px;display:flex;flex-direction:column;gap:7px;}
+
+.layer{border:1px solid var(--border);display:flex;align-items:center;gap:0;transition:border-color .3s,background .3s;cursor:default;}
+.layer.lit{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,transparent);}
+
+.layer-num{font-family:var(--mono);font-size:9px;color:var(--text-3);width:22px;text-align:center;flex-shrink:0;padding:10px 0;transition:color .3s;}
+.layer.lit .layer-num{color:var(--accent);}
+
+.layer-body{flex:1;padding:9px 10px 9px 6px;border-left:1px solid var(--border);transition:border-color .3s;}
+.layer.lit .layer-body{border-left-color:var(--accent);}
+
+.layer-name{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.06em;color:var(--text-1);text-transform:uppercase;transition:color .3s;}
+.layer.lit .layer-name{color:var(--accent);}
+.layer-desc{font-family:var(--mono);font-size:8px;color:var(--text-3);margin-top:3px;letter-spacing:0.02em;line-height:1.4;}
+
+.speedup{width:82px;flex-shrink:0;text-align:right;padding:10px 12px;display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+.speedup-val{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text-2);transition:color .3s;}
+.layer.lit .speedup-val{color:var(--accent);}
+.speedup-label{font-family:var(--mono);font-size:7px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);}
+
+.total-row{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border:1px solid var(--border);background:var(--bg-2);}
+.total-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);}
+.total-val{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--accent);}
+
+@media (max-width:600px){
+  .speedup{width:64px;padding:10px 8px;}
+  .speedup-val{font-size:11px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="header">Inference Optimization Stack / Layered Speedup</div>
+
+  <div class="stack">
+    <div class="layer" id="l0">
+      <div class="layer-num">1</div>
+      <div class="layer-body">
+        <div class="layer-name">Continuous Batching</div>
+        <div class="layer-desc">Requests enter/leave batch per token step. Eliminates idle GPU cycles from slow completions.</div>
+      </div>
+      <div class="speedup"><div class="speedup-val">10-20x</div><div class="speedup-label">throughput</div></div>
+    </div>
+
+    <div class="layer" id="l1">
+      <div class="layer-num">2</div>
+      <div class="layer-body">
+        <div class="layer-name">Flash Attention 2</div>
+        <div class="layer-desc">Tiles attention in SRAM. O(n) memory instead of O(n2). 2-4x faster on long sequences.</div>
+      </div>
+      <div class="speedup"><div class="speedup-val">2-4x</div><div class="speedup-label">attn speed</div></div>
+    </div>
+
+    <div class="layer" id="l2">
+      <div class="layer-num">3</div>
+      <div class="layer-body">
+        <div class="layer-name">KV Cache (Paged)</div>
+        <div class="layer-desc">Non-contiguous physical blocks mapped to logical positions. 2-4x more concurrent sequences per memory budget.</div>
+      </div>
+      <div class="speedup"><div class="speedup-val">2-4x</div><div class="speedup-label">concurrency</div></div>
+    </div>
+
+    <div class="layer" id="l3">
+      <div class="layer-num">4</div>
+      <div class="layer-body">
+        <div class="layer-name">Quantization (FP8)</div>
+        <div class="layer-desc">40-50% VRAM reduction at near-identical quality. Enables larger batch sizes on same hardware.</div>
+      </div>
+      <div class="speedup"><div class="speedup-val">40%</div><div class="speedup-label">VRAM saved</div></div>
+    </div>
+
+    <div class="layer" id="l4">
+      <div class="layer-num">5</div>
+      <div class="layer-body">
+        <div class="layer-name">Speculative Decoding</div>
+        <div class="layer-desc">Small draft model proposes tokens; large target verifies in parallel. Add last -- needs stable baseline.</div>
+      </div>
+      <div class="speedup"><div class="speedup-val">2-3x</div><div class="speedup-label">token/s</div></div>
+    </div>
+
+    <div class="total-row">
+      <div class="total-label">Apply in order 1 to 5</div>
+      <div class="total-val" id="total-val">baseline</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var layers=[0,1,2,3,4].map(function(i){return document.getElementById('l'+i);});
+var totalVal=document.getElementById('total-val');
+var totals=['10-20x','20-80x','40-320x','fits 2x more','full stack'];
+var step=0;
+function clear(){
+  layers.forEach(function(l){l.classList.remove('lit');});
+  totalVal.textContent='baseline';
+}
+function tick(){
+  if(step===0)clear();
+  layers[step].classList.add('lit');
+  totalVal.textContent=totals[step];
+  step++;
+  if(step>=5){step=0;}
+}
+tick();
+setInterval(tick,1700);
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Attribution Failure</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;padding:18px 24px;gap:16px;}
+
+.header{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-3);text-align:center;}
+
+.cards{display:flex;gap:14px;width:100%;max-width:620px;}
+
+.card{flex:1;border:1px solid var(--border);padding:12px;display:flex;flex-direction:column;gap:8px;transition:border-color .3s,background .3s;}
+.card.mismatch{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,transparent);}
+
+.card-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-3);display:flex;align-items:center;justify-content:space-between;}
+.card-label .badge{font-size:8px;padding:2px 6px;border:1px solid var(--border);color:var(--text-3);}
+.card.mismatch .badge{border-color:var(--accent);color:var(--accent);}
+
+.field{display:flex;flex-direction:column;gap:3px;}
+.field-key{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);}
+.field-val{font-family:var(--mono);font-size:10px;color:var(--text-1);line-height:1.35;}
+.field-val.stale{color:var(--accent);text-decoration:line-through;opacity:0.7;}
+.field-val.correct{color:var(--text-1);}
+
+.mismatch-flag{font-family:var(--mono);font-size:8.5px;color:var(--accent);border-top:1px solid var(--accent);padding-top:6px;margin-top:2px;display:none;}
+.card.mismatch .mismatch-flag{display:block;}
+
+.arrow-row{display:flex;align-items:center;justify-content:center;width:100%;max-width:620px;gap:12px;}
+.arrow-box{flex:1;border:1px solid var(--border);padding:8px 10px;font-family:var(--mono);font-size:8.5px;color:var(--text-2);text-align:center;transition:border-color .3s,color .3s;}
+.arrow-box.lit{border-color:var(--accent);color:var(--accent);}
+.arr{font-size:14px;color:var(--text-3);}
+
+.status{font-family:var(--mono);font-size:9.5px;color:var(--text-2);text-align:center;min-height:13px;}
+.status b{color:var(--accent);}
+
+@media (max-width:600px){
+  .cards{flex-direction:column;}
+  .arrow-row{flex-direction:column;gap:6px;}
+  .arr{transform:rotate(90deg);}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="header">Memory Attribution Failure / Stated vs Actual Source</div>
+
+  <div class="cards">
+    <div class="card" id="card-stated">
+      <div class="card-label">Agent stated source<span class="badge" id="badge-stated">retrieving...</span></div>
+      <div class="field">
+        <div class="field-key">Policy cited</div>
+        <div class="field-val" id="stated-policy">--</div>
+      </div>
+      <div class="field">
+        <div class="field-key">Date used</div>
+        <div class="field-val" id="stated-date">--</div>
+      </div>
+      <div class="field">
+        <div class="field-key">Source</div>
+        <div class="field-val" id="stated-src">--</div>
+      </div>
+    </div>
+
+    <div class="card" id="card-actual">
+      <div class="card-label">Actual memory source<span class="badge" id="badge-actual">in store</span></div>
+      <div class="field">
+        <div class="field-key">Policy in store</div>
+        <div class="field-val" id="actual-policy">--</div>
+      </div>
+      <div class="field">
+        <div class="field-key">Write timestamp</div>
+        <div class="field-val" id="actual-date">--</div>
+      </div>
+      <div class="field">
+        <div class="field-key">Valid until</div>
+        <div class="field-val" id="actual-until">--</div>
+      </div>
+      <div class="mismatch-flag" id="mismatch">MISMATCH -- policy superseded Q1 2026. Agent cited Q3 2025 version.</div>
+    </div>
+  </div>
+
+  <div class="arrow-row">
+    <div class="arrow-box" id="ab1">retrieval query</div>
+    <div class="arr">&rsaquo;</div>
+    <div class="arrow-box" id="ab2">embedding similarity match</div>
+    <div class="arr">&rsaquo;</div>
+    <div class="arrow-box" id="ab3">agent response</div>
+  </div>
+
+  <div class="status" id="status">&nbsp;</div>
+</div>
+
+<script>
+var statedPolicy=document.getElementById('stated-policy');
+var statedDate=document.getElementById('stated-date');
+var statedSrc=document.getElementById('stated-src');
+var actualPolicy=document.getElementById('actual-policy');
+var actualDate=document.getElementById('actual-date');
+var actualUntil=document.getElementById('actual-until');
+var cardStated=document.getElementById('card-stated');
+var cardActual=document.getElementById('card-actual');
+var badgeStated=document.getElementById('badge-stated');
+var mismatch=document.getElementById('mismatch');
+var ab=[1,2,3].map(function(i){return document.getElementById('ab'+i);});
+var status=document.getElementById('status');
+
+var step=0;
+function clear(){
+  cardStated.classList.remove('mismatch');
+  cardActual.classList.remove('mismatch');
+  ab.forEach(function(x){x.classList.remove('lit');});
+  statedPolicy.textContent='--';statedDate.textContent='--';statedSrc.textContent='--';
+  actualPolicy.textContent='--';actualDate.textContent='--';actualUntil.textContent='--';
+  badgeStated.textContent='retrieving...';
+  mismatch.style.display='none';
+  status.innerHTML='&nbsp;';
+}
+var steps=[
+  function(){ab[0].classList.add('lit');status.innerHTML='agent generates retrieval query for pricing policy';},
+  function(){ab[1].classList.add('lit');actualPolicy.textContent='$49/mo Pro plan (Q3 2025)';actualDate.textContent='2025-09-01';actualUntil.textContent='2025-12-31';status.innerHTML='embedding match -- older chunk scores higher due to richer context';},
+  function(){
+    ab[2].classList.add('lit');
+    statedPolicy.textContent='$49/mo Pro plan';
+    statedDate.textContent='current';
+    statedSrc.textContent='semantic memory';
+    badgeStated.textContent='responded';
+    status.innerHTML='agent cites Q3 2025 policy as current -- no freshness check';
+  },
+  function(){
+    cardStated.classList.add('mismatch');
+    cardActual.classList.add('mismatch');
+    mismatch.style.display='block';
+    status.innerHTML='<b>attribution failure</b> -- actual Q1 2026 price is $59/mo. Chunk had no validity window.';
+  }
+];
+function tick(){
+  if(step===0)clear();
+  steps[step]();
+  step++;
+  if(step>=steps.length){step=0;}
+}
+tick();
+setInterval(tick,2000);
+</script>
+</body>
+</html>

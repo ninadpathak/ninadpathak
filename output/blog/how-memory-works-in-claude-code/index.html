@@ -250,7 +250,7 @@
 
 <p>This file is the single most important memory artifact in a Claude Code project. It gets read on every session start, before any tool use, regardless of whether you mention it. If you are working in a codebase and Claude keeps making wrong assumptions, the fix is almost always a better <code>CLAUDE.md</code>.</p>
 <h2 id="claudemd-your-projects-persistent-memory-layer">Claude.md: Your Project's Persistent Memory Layer</h2>
-<p><code>CLAUDE.md</code> is the backbone of Claude Code's memory system. It is a Markdown file in your project root that the agent reads on startup and treats as sacrosanct context. Unlike session memory, this file persists across invocations and lives inside your repository, which means it travels with your code.</p>
+<p><code>CLAUDE.md</code> is the backbone of Claude Code's memory system. It is a Markdown file in your project root that the agent reads on startup and treats as sacrosanct context. The file persists across invocations and lives inside your repository, which means it travels with your code.</p>
 <p>The format is deliberately unstructured. You write what you want Claude to know. It can include project conventions, architecture decisions, coding standards, environment setup instructions, or anything else that would take a human too long to figure out by reading code alone.</p>
 <p>A more complete <code>CLAUDE.md</code> for a FastAPI project might look like this:</p>
 <div class="highlight"><pre><span></span><code><span class="gh"># FastAPI Backend Context</span>

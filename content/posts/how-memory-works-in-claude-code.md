@@ -34,7 +34,7 @@ This file is the single most important memory artifact in a Claude Code project.
 
 ##Claude.md: Your Project's Persistent Memory Layer
 
-`CLAUDE.md` is the backbone of Claude Code's memory system. It is a Markdown file in your project root that the agent reads on startup and treats as sacrosanct context. Unlike session memory, this file persists across invocations and lives inside your repository, which means it travels with your code.
+`CLAUDE.md` is the backbone of Claude Code's memory system. It is a Markdown file in your project root that the agent reads on startup and treats as sacrosanct context. The file persists across invocations and lives inside your repository, which means it travels with your code.
 
 The format is deliberately unstructured. You write what you want Claude to know. It can include project conventions, architecture decisions, coding standards, environment setup instructions, or anything else that would take a human too long to figure out by reading code alone.
 

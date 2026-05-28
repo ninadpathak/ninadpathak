@@ -1,6 +1,7 @@
 ---
 title: "Contextual Compression for Agent Memory: What Stays and What Goes"
 date: "2026-05-05"
+slug: "contextual-compression-for-agent-memory"
 description: "How agents decide what to keep in memory when context space is finite, and the three compression strategies that actually work."
 tags: ["ai-agents", "agent-memory", "context-windows"]
 status: published
@@ -12,15 +13,22 @@ I ran into this with a codebase navigation agent that I built last year. The age
 
 The core issue is that compression is not optional when context is finite. Something has to give.
 
+<div class="visual-wrapper">
+  <div class="visual-title">Contextual Compression Pipeline</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/context-compression.html" title="Token count before and after contextual compression" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## Why Standard RAG Compression Does Not Work Here
 
 If you have looked at RAG systems, you know that contextual compression is a solved problem in that space. You retrieve relevant chunks, then run a compressor to strip out the parts that do not answer the query. Simple and effective.
 
-Agent memory compression is different. With RAG, you compress based on what a query needs right now. With agent memory, you compress based on what the agent will need in an unknown future situation. You are making a prediction about relevance across time and task context, not just across a single query.
+Agent memory compression is different. With RAG, you compress based on what a query needs right now. With agent memory, you compress based on what the agent will need in an unknown future situation. You are making a prediction about relevance across time and task context, not just across a single query. The [three memory types in AI agents](/blog/episodic-vs-semantic-vs-working-memory-agents/) have very different compression tolerances: episodic memory loses precision on details, semantic memory risks stale facts, and working memory cannot be compressed at all without breaking the current task.
 
 This means the compression decision for agent memory has to factor in recency, frequency of use, and predicted future relevance. A memory that has been accessed ten times in the past week is more likely to matter than one accessed once three weeks ago. A memory about the user's primary project is more likely to matter than a memory about a one-off debugging session.
 
-I wrote about the [memory hierarchy in AI systems](/articles/memory-hierarchy-in-ai-systems) and how different memory types serve different purposes. The hierarchy is the theoretical foundation. What I am describing here is the compression layer that sits on top of it.
+I wrote about the [memory hierarchy in AI systems](/blog/memory-hierarchy-in-ai-systems/) and how different memory types serve different purposes. The hierarchy is the theoretical foundation. What I am describing here is the compression layer that sits on top of it.
 
 ## The Three Approaches That Work
 
@@ -38,7 +46,7 @@ I tested this with a customer support agent that needed to remember bug reports.
 
 Keep detailed memory for recent items and progressively abstract older items. Recent memory stays at full fidelity. Memory older than 7 days gets summarized. Memory older than 30 days gets reduced to key facts only.
 
-This approach maps well to how [LLM context windows](/articles/llm-context-windows-explained) actually work. Recent context is both more accessible and more relevant. Older context that has not been accessed recently is less likely to surface in relevant retrieval results.
+This approach maps well to how [LLM context windows](/blog/llm-context-windows-explained/) actually work. Recent context is both more accessible and more relevant. Older context that has not been accessed recently is less likely to surface in relevant retrieval results.
 
 The implementation requires a decay function. I used a simple exponential decay with a 30-day half-life for a task-tracking agent. After 30 days, a memory item is scored at 0.5 of its original relevance value. After 60 days, 0.25. This worked well for that use case but needed tuning for a research assistant where context from two months ago was still relevant.
 
@@ -62,13 +70,13 @@ A structured version: `{"type": "finding", "subject": "auth-token-validation", "
 
 The structured version is 256 bytes. The narrative is 180 tokens. When compressed, the structured version compresses to 80 bytes while preserving every fact. The narrative might compress to 60 tokens but you lose the specific library name and severity level in the process.
 
-This is the approach I used in the memory serialization system I wrote about in [how agents persist state across sessions](/articles/memory-serialization-between-sessions). Designing for compression from the start produces better results than trying to compress narrative memory after the fact.
+This is the approach I used in the memory serialization system I wrote about in [how agents persist state across sessions](/blog/memory-serialization-between-sessions/). Designing for compression from the start produces better results than trying to compress narrative memory after the fact.
 
 ## What I Would Do Differently
 
 If I were starting fresh on an agent memory system today, I would implement three things from day one.
 
-First, I would track access frequency per memory item, not just content and timestamp. Access frequency is the strongest signal for predicting future relevance. Memory that has been accessed repeatedly is far more likely to be accessed again than memory that has been sitting unused.
+First, I would track access frequency per memory item, not just content and timestamp. Access frequency is the strongest signal for predicting future relevance. Memory that has been accessed repeatedly is far more likely to be accessed again than memory that has been sitting unused. The [short-term memory patterns](/blog/short-term-memory-for-ai-agents/) I described elsewhere address the in-session side of this, but the same access-frequency intuition applies when deciding what to promote from short-term to long-term storage.
 
 Second, I would use a two-tier storage model. Hot storage holds the full-fidelity recent memories. Cold storage holds compressed summaries of older items. When the agent retrieves from cold storage, it gets the summary and can decide whether to decompress to full fidelity. This is similar to how CPU cache hierarchies work, and the analogy is apt because the problem is fundamentally the same: you have limited fast storage and need to decide what stays close.
 
@@ -76,7 +84,7 @@ Third, I would add a rare-event preservation rule. Memories that describe infreq
 
 ## The Honest Tradeoff
 
-No compression strategy is free. You are trading recall for capacity, and every strategy loses something.
+No compression strategy is free. You are trading recall for capacity, and every strategy loses something. The [state of AI agent memory in 2026](/blog/state-of-ai-agent-memory-2026/) shows this trade-off playing out across the whole memory tooling ecosystem, with most production teams settling on tiered storage rather than a single compression policy.
 
 Summary-based compression loses nuance. Hierarchical forgetting loses older detail. Relevance-gated retention loses coverage in low-signal areas. The right choice depends on what your agent can afford to forget.
 

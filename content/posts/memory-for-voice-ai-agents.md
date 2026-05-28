@@ -197,6 +197,4 @@ Standard RAG does not work for real-time voice agents due to retrieval latency. 
 
 TTS synthesis starts before LLM generation is complete. Tokens stream from the LLM as they are produced, and TTS synthesizes each token as it arrives. The pipeline is three stages deep: LLM generates tokens N to N+10 while TTS synthesizes tokens N-5 to N, and audio plays for tokens N-10 to N-5. This overlap is what enables the agent to start playing audio within 150ms of the first token being generated.
 
----
-
 For more on the latency pipeline that this memory system lives inside, see my benchmark post on [real-time voice agent latency](/blog/voice-ai-latency-gemini-benchmark/). For the LLM context window management that determines how much memory you can hold, see [how Anthropic's contextual retrieval changes RAG architecture](/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/). For the broader agent infrastructure context, see [production AI agent errors: what actually fails](/blog/production-ai-agent-errors/).
