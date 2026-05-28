@@ -46,7 +46,7 @@ Good tutorials and upgrade guides lower support load and accelerate activation. 
 
 Vercel's [documentation templates directory](https://vercel.com/templates/documentation) blurs the line between content and product starter kit. The page gives developers immediate ways to stand up documentation sites using Nextra or Docusaurus. Template directories perform acquisition work by meeting developers at the moment of implementation.
 
-Durable strategies in developer tools involve shortening the distance between intent and implementation. Docs, templates, examples, and reference material form a knowledge layer around the product. New competitors can clone features faster than they can clone a mature knowledge system with high accuracy and search footprint.
+Durable strategies in developer tools involve shortening the path between intent and implementation. Docs, templates, examples, and reference material form a knowledge layer around the product. New competitors can clone features faster than they can clone a mature knowledge system with high accuracy and search footprint.
 
 PostHog's handbook describes content as serving awareness and helping developers understand product capability. Public documentation of the strategy shows the company sees content as an operating system. The handbook lives at [posthog.com/handbook/content](https://posthog.com/handbook/content).
 
@@ -119,7 +119,7 @@ Write the Docs' 2024 salary survey offers a useful supporting signal. The field 
 
 ## What I would prioritize for a devtools company starting with a blank slate
 
-A new developer-tool company does not need fifty posts. It needs a compact stack of high-leverage content assets:
+A new developer-tool company does not need fifty posts. It needs a compact stack of high-impact content assets:
 
 1. one excellent quickstart that reaches first success fast
 2. one honest architecture or concepts page that explains the product model

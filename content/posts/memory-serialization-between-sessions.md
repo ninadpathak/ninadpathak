@@ -13,6 +13,13 @@ That experience taught me the fundamental rule of agent memory: a session that c
 
 This is the serialization problem. And it is harder than it looks.
 
+<div class="visual-wrapper">
+  <div class="visual-title">SERIALIZE / RESTART / RESTORE</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/memory-serialization.html" title="An agent serializing state to a store at session end and restoring it on restart, versus forgetting everything without serialization" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## The Three Approaches Engineers Actually Use
 
 I have seen three real patterns in production systems. Each one solves the problem but creates a different tradeoff.
@@ -72,9 +79,9 @@ Cloud-native serialization matters if you run multiple agent instances. SQLite w
 
 Serialization handles session continuity. It does not solve the retrieval problem. If you serialize a conversation but have no way to find the relevant parts quickly on retrieval, you end up with context that is technically there but practically unusable.
 
-The memory hierarchy matters here. Serialized state is one layer. How you index and retrieve from that state is another. [My post on the memory hierarchy](/articles/the-memory-hierarchy-why-rag-is-not-enough) goes into this in detail, but the short version is that serialization and retrieval are separate problems that need to be designed together.
+The memory hierarchy matters here. Serialized state is one layer. How you index and retrieve from that state is another. [My post on the memory hierarchy](/blog/the-memory-hierarchy-why-rag-is-not-enough/) goes into this in detail, but the short version is that serialization and retrieval are separate problems that need to be designed together.
 
-Agent memory retrieval is also asymmetric. What you serialize is not always what you retrieve. I wrote about this in my post on [asymmetric retrieval in agent memory](/articles/asymmetric-retrieval-agent-memory). The schema you design for serialization shapes what retrieval looks like, and if you get the schema wrong, the retrieval will be wrong in predictable ways.
+Agent memory retrieval is also asymmetric. What you serialize is not always what you retrieve. I wrote about this in my post on [asymmetric retrieval in agent memory](/blog/asymmetric-retrieval-agent-memory/). The schema you design for serialization shapes what retrieval looks like, and if you get the schema wrong, the retrieval will be wrong in predictable ways.
 
 The serialization format itself matters less than the discipline of using it consistently. JSON is fine for most cases. If you are writing to disk on every action for an agent handling 10,000 requests per minute, you need something faster. msgpack or Protocol Buffers cut serialization overhead by 5x in my benchmarks. But for the vast majority of agents, JSON with a clear schema is readable, debuggable, and sufficient.
 

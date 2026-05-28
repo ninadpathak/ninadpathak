@@ -131,11 +131,11 @@ If I had one week with a devtools startup whose docs were hurting conversion, I 
 | Release history | Separate breaking changes, deprecations, and migrations with dates and versions |
 | Troubleshooting | Cover top integration failures with symptom, cause, and fix |
 
-I would also instrument docs better. State of Docs shows a huge measurement gap between believing docs matter and proving where they matter. Teams need to know which pages start trials, which pages correlate with activation, and which pages generate support.
+I would also instrument docs better. State of Docs shows a huge measurement difference between believing docs matter and proving where they matter. Teams need to know which pages start trials, which pages correlate with activation, and which pages generate support.
 
 ## Strong docs allow smaller startups to compete with larger vendors
 
-Small companies can win against established vendors with documentation. I have seen that happen because docs compress the distance between product quality and buyer confidence. Great docs let a small team look operationally credible. 
+Small companies can win against established vendors with documentation. I have seen that happen because docs narrow the gulf between product quality and buyer confidence. Great docs let a small team look operationally credible. 
 
 Tailwind often comes up in docs discussions for a reason: the docs make the product legible immediately. Plenty of startups could borrow that lesson. Clear information architecture and tested examples create momentum. 
 

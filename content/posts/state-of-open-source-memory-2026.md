@@ -40,6 +40,13 @@ Working memory handles your immediate, high-stakes reasoning within the active w
 
 This tiered approach is the only way to scale without a linear token tax. It allows your agent to know things without having to read them every time. Differentiation in 2026 lives in the procedural layer where successful workflows are encoded as reusable skills.
 
+<div class="visual-wrapper">
+  <div class="visual-title">OPEN-SOURCE MEMORY LANDSCAPE</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/oss-memory-landscape.html" title="A landscape of open-source memory tools plotted by retrieval model and where state lives: Letta, Open Viking, Zep/Graphiti, Cognee, pgvector, Mem0" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## Letta is the operating system for your agent
 
 [Letta](https://letta.com) has become the Linux of the memory space. It treats the LLM as a processor and the context window as high-speed RAM. Everything else is paged out to an external disk.

@@ -32,13 +32,18 @@ That is still a harness. The question is whether it was designed intentionally. 
 
 A well-designed harness is not one monolithic block of logic. It has five distinct components. Each component has a specific responsibility.
 
-
+<div class="visual-wrapper">
+  <div class="visual-title">HARNESS LAYERS AROUND THE RAW LLM</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/agent-harness-layers.html" title="The agent harness as concentric infrastructure layers wrapping the raw LLM" loading="lazy"></iframe>
+  </div>
+</div>
 
 **Tool registry.** A catalog of available tools. Each tool is defined with a typed schema and a description the model can read. It includes an execution handler the harness calls when the model requests it. The harness intercepts tool call requests and routes them to the right handler. It returns results in the format the model expects. The non-obvious part is that the tool registry is also where you enforce per-tool permissions and rate limits. A web browsing tool with uncapped request volume is an incident waiting to happen.
 
 **Prompt assembler.** The harness constructs the full context window from multiple sources at inference time. These sources include the system prompt and any cached instructions. They include retrieved documents and conversation history. They include the current task state and pending tool results. The order of those components matters. How much of each to include also matters. The prompt assembler is where context engineering happens at runtime dynamically. It does not happen once at design time and never get revisited.
 
-**Execution loop.** The core of any harness. Send the current context to the model. Execute the tool if the response contains a tool call. Append the result and send it again. Surface the final answer if the response is complete. Enforce the stop conditions such as maximum iterations reached or context window full. Enforce explicit completion signals or unrecoverable errors. The loop is simple to describe and surprisingly easy to get wrong at scale. This is especially true when you need it to handle concurrent runs and partial failures without corrupting shared state.
+**Execution loop.** The core of any harness, and the place where the [perceive, think, act, remember phases of the agent loop](/blog/agent-loop-anatomy/) actually run. Send the current context to the model. Execute the tool if the response contains a tool call. Append the result and send it again. Surface the final answer if the response is complete. Enforce the stop conditions such as maximum iterations reached or context window full. Enforce explicit completion signals or unrecoverable errors. The loop is simple to describe and surprisingly easy to get wrong at scale. This is especially true when you need it to handle concurrent runs and partial failures without corrupting shared state.
 
 
 
@@ -62,7 +67,7 @@ Three patterns work in practice.
 
 **Phase-level persistence.** Write state at logical phase boundaries. Do this after research completes or after analysis completes. Do it before writing begins. This is simpler to implement but provides coarser recovery points. It is appropriate for tasks with clear phases that take roughly equal time.
 
-**Idempotent tool design.** Build tools so calling them twice produces the same result as calling them once. This eliminates an entire class of recovery errors when combined with step-level checkpointing. Re-run from the last checkpoint. Idempotent tools produce the same results. The agent continues from where it left off. This is harder to implement but the reliability improvement is substantial.
+**Idempotent tool design.** Build tools so calling them twice produces the same result as calling them once. This eliminates an entire class of [error patterns that break agents in production](/blog/production-ai-agent-errors/) when combined with step-level checkpointing. Re-run from the last checkpoint. Idempotent tools produce the same results. The agent continues from where it left off. This is harder to implement but the reliability improvement is substantial.
 
 The harness owns the checkpointing logic. The model has no concept of checkpoints. The application layer should not have to manage them. Taking that responsibility into the harness as a core function is what separates a harness built for production from one built to get a demo working.
 
@@ -121,7 +126,7 @@ Not every LLM application is an agent. A harness adds real complexity. Adding co
 
 Harness complexity is unnecessary when an application takes a single user input and calls the model once and returns a response. It is unnecessary when it calls the model a fixed number of times with a fixed sequence of prompts. It is unnecessary when it uses retrieval-augmented generation with a fixed retrieval step followed by a single synthesis step.
 
-A harness is necessary when the model decides which tools to call and in what order. It is necessary when tasks span more than a handful of API calls. It is necessary when partial failures need recovery without a full restart. It is necessary when auditability of what the agent did and why is a requirement.
+A harness is necessary when the model decides which tools to call and in what order, which is the property that separates an agent from a smarter assistant across [the broader taxonomy of AI agents](/blog/the-taxonomy-of-ai-agents/). It is necessary when tasks span more than a handful of API calls. It is necessary when partial failures need recovery without a full restart. It is necessary when auditability of what the agent did and why is a requirement.
 
 The rough line is clear. The harness is load-bearing infrastructure if the model controls the flow. The harness is overhead if the application controls the flow and the model is a subroutine.
 

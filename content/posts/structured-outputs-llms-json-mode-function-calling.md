@@ -13,7 +13,7 @@ title: 'Structured Outputs with Llms: Json Mode, Function Calling, and When to U
 
 Getting a reliable JSON object out of an LLM used to mean wrapping every call in a try/except, re-prompting on parse failures, and hoping your production traffic never hit the 3% of responses that came back malformed. Three mechanisms now exist to avoid that: JSON mode, function calling, and the newer structured outputs API. They are not interchangeable and choosing the wrong one shows up in token costs, latency, and edge-case failure rates.
 
-**Short answer:** Use structured outputs (strict mode with `json_schema`) for any schema you want guaranteed at the token level. Use function calling when you want the model to decide whether and when to invoke external tools. Avoid JSON mode in production; it only guarantees syntactically valid JSON, not schema compliance, and OpenAI now considers it legacy.
+**Short answer:** Use structured outputs (strict mode with `json_schema`) for any schema you want guaranteed at the token level. Use function calling when you want the model to decide whether and when to invoke external tools. Avoid JSON mode in production. It only guarantees syntactically valid JSON, not schema compliance, and OpenAI now considers it legacy.
 
 ## What JSON mode actually does (and does not do)
 
@@ -45,9 +45,16 @@ The model can return a regular text response, a single tool call, or multiple to
 
 Where structured outputs give you a guaranteed schema on every response, function calling gives you a conditional invocation pattern. The model may or may not call your function depending on whether it decides a tool is relevant.
 
-[OpenAI's function calling documentation](https://platform.openai.com/docs/guides/structured-outputs) now supports structured outputs inside function calls via the `strict: true` parameter. Arguments arrive as a parsed object rather than a JSON string, which removes one parsing step. Anthropic's `tool_use` blocks deliver parsed arguments as a JavaScript object natively; OpenAI historically returned a JSON string requiring a second parse.
+[OpenAI's function calling documentation](https://platform.openai.com/docs/guides/structured-outputs) now supports structured outputs inside function calls via the `strict: true` parameter. Arguments arrive as a parsed object rather than a JSON string, which removes one parsing step. Anthropic's `tool_use` blocks deliver parsed arguments as a JavaScript object natively. OpenAI historically returned a JSON string requiring a second parse.
 
-[Claude scored 8.4 on tool-use reliability metrics in Q1 2026 benchmarks](https://dev.to/supertrained/llm-apis-for-ai-agents-anthropic-vs-openai-vs-google-ai-an-score-data-3e1j), compared to Google at 7.9 and OpenAI at 6.3. The reliability gap matters for agentic workflows where a missed or malformed tool call breaks the execution chain. My own experience running multi-step agents on Claude 3.5 Sonnet matches that: tool argument parsing failures are rare enough that I stopped writing defensive fallback logic for them.
+[Claude scored 8.4 on tool-use reliability metrics in Q1 2026 benchmarks](https://dev.to/supertrained/llm-apis-for-ai-agents-anthropic-vs-openai-vs-google-ai-an-score-data-3e1j), compared to Google at 7.9 and OpenAI at 6.3. The reliability difference matters for agentic workflows where a missed or malformed tool call breaks the execution chain. My own experience running multi-step agents on Claude 3.5 Sonnet matches that: tool argument parsing failures are rare enough that I stopped writing defensive fallback logic for them.
+
+<div class="visual-wrapper">
+  <div class="visual-title">THREE MECHANISMS, ONE PROMPT</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/structured-outputs-comparison.html" title="The same extraction prompt feeding JSON mode, function calling, and structured outputs side by side, each producing a differently-shaped result with its reliability number" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## The overhead question you need to answer before choosing
 
@@ -75,7 +82,7 @@ The second failure mode is schema design. Constrained decoding enforces the sche
 
 Before the major providers shipped native structured outputs, developers built schema enforcement in libraries. [Instructor](https://python.useinstructor.com/integrations/anthropic/) wraps the Anthropic and OpenAI clients and uses tool definitions or system prompts to coerce models into schema-compliant output, then retries on validation failures using Pydantic validators. [Outlines](https://github.com/outlines-dev/outlines) applies constrained generation at the logit level for locally-run models.
 
-Instructor is still useful when you need schema validation logic that goes beyond what JSON Schema expresses: checking that a date field is in the future, that two numeric fields sum to 100, or that a string matches a regex the schema can't capture. The provider's native structured outputs guarantee schema shape; they don't guarantee semantic validity. Instructor can layer those additional checks and retry with the failure message included in the next prompt.
+Instructor is still useful when you need schema validation logic that goes beyond what JSON Schema expresses: checking that a date field is in the future, that two numeric fields sum to 100, or that a string matches a regex the schema can't capture. The provider's native structured outputs guarantee schema shape. They don't guarantee semantic validity. Instructor can layer those additional checks and retry with the failure message included in the next prompt.
 
 For self-hosted or open-weight models where the provider's constrained decoding isn't available, Outlines is the practical path to schema enforcement. Outlines works with transformers, llama.cpp, and vLLM backends.
 

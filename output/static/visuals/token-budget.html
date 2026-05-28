@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Token Budget: System + History + Retrieved + Output</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.stage {
+  width: 100%; height: 100vh; box-sizing: border-box;
+  padding: 18px 22px; display: flex; flex-direction: column;
+}
+.header {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-3); text-align: center; margin-bottom: 4px;
+}
+.sub {
+  font-family: var(--mono); font-size: 10.5px; text-align: center;
+  color: var(--text-2); margin-bottom: 16px;
+}
+.sub b { color: var(--accent); }
+
+.bar-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+
+.bar {
+  display: flex; width: 100%; height: 46px;
+  border: 1px solid var(--border); border-radius: 3px; overflow: hidden;
+}
+.seg {
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 9.5px; color: var(--text-3);
+  border-right: 1px solid var(--border);
+  background: var(--bg-2); position: relative; overflow: hidden;
+  white-space: nowrap;
+}
+.seg:last-child { border-right: none; }
+.seg.output { background: var(--accent); color: var(--bg-1); }
+@media (prefers-color-scheme: dark) { .seg.output { color: #111; } }
+.seg .pct { display: none; }
+
+/* legend */
+.legend {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 16px;
+  margin-top: 16px;
+}
+.li { font-family: var(--mono); font-size: 10px; color: var(--text-2); display: flex; align-items: center; gap: 6px; }
+.sw { width: 10px; height: 10px; border: 1px solid var(--border); background: var(--bg-2); border-radius: 2px; }
+.sw.out { background: var(--accent); border-color: var(--accent); }
+.li .tk { color: var(--text-3); }
+
+/* readout */
+.readout {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border: 1px solid var(--border); border-radius: 3px;
+  padding: 10px 14px; margin-top: 18px; background: var(--bg-2);
+}
+.readout .rl { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+.readout .cost { font-family: var(--mono); font-size: 22px; font-weight: 600; color: var(--accent); }
+.readout .rsub { font-family: var(--mono); font-size: 9px; color: var(--text-3); }
+
+.footnote {
+  font-family: var(--mono); font-size: 9.5px; color: var(--text-3);
+  text-align: center; letter-spacing: 0.05em; margin-top: 12px;
+}
+.footnote b { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 600px) {
+  .seg { font-size: 8px; }
+  .legend { gap: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="header">Token Budget / One Request, GPT-5.4 Nano</div>
+  <div class="sub"><b>1,500</b> tokens total &nbsp;/&nbsp; 1,000 input + 500 output</div>
+
+  <div class="bar-wrap">
+    <div class="bar">
+      <!-- input 1000 tk: system 300, history 400, retrieved 300 ; output 500 -->
+      <div class="seg" style="flex: 300">SYSTEM</div>
+      <div class="seg" style="flex: 400">HISTORY</div>
+      <div class="seg" style="flex: 300">RETRIEVED</div>
+      <div class="seg output" style="flex: 500">OUTPUT</div>
+    </div>
+    <div class="legend">
+      <div class="li"><span class="sw"></span>System prompt <span class="tk">300 tk</span></div>
+      <div class="li"><span class="sw"></span>History <span class="tk">400 tk</span></div>
+      <div class="li"><span class="sw"></span>Retrieved <span class="tk">300 tk</span></div>
+      <div class="li"><span class="sw out"></span>Output <span class="tk">500 tk</span></div>
+    </div>
+  </div>
+
+  <div class="readout">
+    <div>
+      <div class="rl">Cost per request</div>
+      <div class="rsub">input @ $0.20/1M &nbsp;/&nbsp; output @ $1.25/1M</div>
+    </div>
+    <div class="cost" id="cost">$0.000000</div>
+  </div>
+
+  <div class="footnote">Output tokens cost <b>6.25x</b> more than input. Cap <b>max_tokens</b> and the cheap segment stays cheap.</div>
+</div>
+<script>
+  // Cost = (1000/1e6 * 0.20) + (500/1e6 * 1.25) = 0.0002 + 0.000625 = $0.000825
+  // (Post's $0.00026 figure is at a smaller-input mix; here we show the full 1k/500 budget.)
+  var target = 0.000825;
+  var el = document.getElementById('cost');
+  var dur = 1100, t0 = null;
+  function tick(now) {
+    if (t0 === null) t0 = now;
+    var p = Math.min(1, (now - t0) / dur);
+    var v = target * p;
+    el.textContent = '$' + v.toFixed(6);
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  // re-run the count-up on a loop so the iframe always shows motion
+  setInterval(function(){ t0 = null; requestAnimationFrame(tick); }, 4200);
+</script>
+</body>
+</html>

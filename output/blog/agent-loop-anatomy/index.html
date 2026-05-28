@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Anatomy of an Agent Loop: Perceive, Think, Act, Remember | Ninad Pathak</title>
+  <meta name="description" content="The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="The Anatomy of an Agent Loop: Perceive, Think, Act, Remember">
+  <meta property="og:description" content="The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/agent-loop-anatomy/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/agent-loop-anatomy/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "The Anatomy of an Agent Loop: Perceive, Think, Act, Remember",
+  "description": "The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-23",
+  "dateModified": "2026-04-23",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/agent-loop-anatomy/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "The Anatomy of an Agent Loop: Perceive, Think, Act, Remember",
+      "item": "https://ninadpathak.com/blog/agent-loop-anatomy/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-time">7 min read</span>
+      </div>
+      <h1 class="post-title">The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</h1>
+      <p class="lead">The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.</p>
+      <div class="post-tags">
+        <span class="tag">ai agents</span>
+        <span class="tag">agent architecture</span>
+        <span class="tag">loop design</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#why-the-loop-has-four-phases-and-not-one">Why the loop has four phases and not one</a></li>
+<li><a href="#perceive-what-the-agent-sees-before-it-decides">Perceive: what the agent sees before it decides</a></li>
+<li><a href="#think-reasoning-over-the-perceived-state">Think: reasoning over the perceived state</a></li>
+<li><a href="#act-calling-tools-and-producing-outputs">Act: calling tools and producing outputs</a></li>
+<li><a href="#remember-updating-state-for-the-next-iteration">Remember: updating state for the next iteration</a></li>
+<li><a href="#where-it-breaks-down-in-practice">Where it breaks down in practice</a></li>
+<li><a href="#the-loop-is-a-design-tool">The loop is a design tool</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>I keep coming back to the agent loop when I am trying to figure out why a system misbehaves. The literature describes it as a single construct. The actual implementation has four separate phases, and a failure in any one of them looks like a failure in the whole thing.</p>
+<p>The four phases are perceive, think, act, and remember. Every agent loop runs some version of this sequence. The differences between agents are in what each phase contains and how much work it does.</p>
+<h2 id="why-the-loop-has-four-phases-and-not-one">Why the loop has four phases and not one</h2>
+<p>The instinct is to treat the agent as a single inference call that produces an action. That model breaks down the moment the agent needs to call a tool, wait for a result, and then decide what to do next. A single inference call cannot wait. It cannot observe the world and then act on what it observed.</p>
+<p>The loop exists because the agent needs a cycle it can repeat. Each cycle adds a little more to the task state. The loop terminates when the task is complete or when a stop condition is hit.</p>
+<p>I wrote about how different agent architectures handle this loop in my post on <a href="/blog/the-taxonomy-of-ai-agents/">the taxonomy of AI agents</a>. Reflex agents skip the think phase almost entirely. Deliberative agents spend significant compute in think before acting. That structural difference matters more than most framework documentation suggests.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">THE FOUR-PHASE AGENT LOOP</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/agent-loop-cycle.html" title="A continuous loop cycling through perceive, think, act, and remember, with a pulse traveling the circle and highlighting each phase in turn" loading="lazy"></iframe>
+  </div>
+</div>
+
+<h2 id="perceive-what-the-agent-sees-before-it-decides">Perceive: what the agent sees before it decides</h2>
+<p>Perceive is the phase where the agent reads its current context and forms an internal picture of the task state. This is not passive. The agent actively selects what to attend to in the context window.</p>
+<p>In practice, perceive means scanning the conversation history, any retrieved documents, tool results from the previous step, and the current task instruction. The agent builds a working representation of the situation.</p>
+<p>The failure mode here is context contamination. If the context window contains stale information from a previous step, the perceive phase can lock onto the wrong picture. I have seen this happen when a tool returns an error that gets ignored or overwritten by subsequent steps. The agent perceives the error as resolved when it is not.</p>
+<p>Structured logging in the <a href="/blog/agent-harnesses/">agent harness</a> is what lets you detect this. If you cannot see what the agent was attending to at each perceive step, you cannot diagnose why it made the wrong call.</p>
+<h2 id="think-reasoning-over-the-perceived-state">Think: reasoning over the perceived state</h2>
+<p>Think is where the agent reasons about what it has perceived and decides what to do next. This is the phase that varies most between agent implementations. Some agents use chain-of-thought prompting and generate visible reasoning tokens. Others treat think as a latent computation inside the model weights.</p>
+<p>The think phase is where the model evaluates whether it has enough information to act. It is also where the model decides which tool to call, if any, and with what arguments.</p>
+<p>Here is what surprises engineers new to agent design: the think phase cannot be observed directly in most frameworks. You get the output of think, not the process. This is fine in happy-path scenarios. It becomes a serious debugging problem when the agent makes a reasoning error that is only visible twenty steps later.</p>
+<p>Token budget management happens here too. The think phase consumes tokens. A deliberative agent that reasons extensively before acting will spend more per step than a reflex agent that acts on pattern matching. I covered token budget strategies in <a href="/blog/llm-token-budgets-cost-control/">LLM token budgets and cost control</a>. The think phase is usually where that budget gets eaten.</p>
+<h2 id="act-calling-tools-and-producing-outputs">Act: calling tools and producing outputs</h2>
+<p>Act is the phase where the agent does something. That something might be calling a tool, returning a text response to the user, or updating internal state. Act is the only phase that produces observable side effects.</p>
+<p>The act phase is where the loop interacts with the external world. A tool call passes arguments to an API and receives a result. The agent receives that result and feeds it back into the loop as a perceived input for the next cycle.</p>
+<p>Tool schema design determines whether the act phase succeeds or fails. A poorly designed schema produces malformed arguments that the tool rejects. A well-designed schema with clear types and validation catches argument errors before the tool is even called. <a href="/blog/structured-outputs-llms-json-mode-function-calling/">Tool schema design for reliability</a> goes deep on what makes schemas actually work in production.</p>
+<p>The act phase also has an implicit cost. Every tool call has latency. Some tool calls fail. The loop needs policies for both. Timeout enforcement and retry logic belong in the harness, not scattered in tool implementations.</p>
+<h2 id="remember-updating-state-for-the-next-iteration">Remember: updating state for the next iteration</h2>
+<p>Remember is the phase most agents get wrong. This is where the agent updates its internal state to reflect what just happened, so the next loop iteration has accurate context.</p>
+<p>The simplest version of remember is appending the last tool result to the conversation history. That works for short tasks. It breaks for long ones.</p>
+<p>The problem is that the context window has fixed capacity. Remembering everything means eventually forgetting something. The <a href="/blog/memory-hierarchy-in-ai-systems/">memory hierarchy in AI systems</a> covers the layered approach that actually solves this. Short-term working memory lives in the context window. Long-term facts get written to external storage and retrieved when relevant.</p>
+<p>The <a href="/blog/context-windows-vs-memory/">context windows vs memory</a> post makes the case that conflating these two is how you build expensive systems that still lose track of what they were doing. Remember is not just appending. It is deciding what to keep, what to compress, and what to evict.</p>
+<p>Checkpointing is the production version of remember. Writing state to durable storage after each successful act phase means the loop can recover from failures without restarting from scratch. This is not optional for agents that run longer than a few minutes.</p>
+<h2 id="where-it-breaks-down-in-practice">Where it breaks down in practice</h2>
+<p>The loop sounds clean when described as four phases. It stops being clean when you actually run it.</p>
+<p>Context window exhaustion happens in remember, not in perceive. By the time the agent cannot remember what it did ten steps ago, the problem was set in motion two dozen steps earlier. Teams that track context window usage in real time catch this before it produces incoherent outputs.</p>
+<p>Infinite loops happen in act. The agent calls a tool, gets a result that looks like it needs more work, calls the tool again with slightly different arguments, and repeats. The stop condition never triggers because the agent keeps perceiving the task as incomplete. Setting explicit iteration budgets and testing them is not optional.</p>
+<p>Tool result loss happens in remember. A tool call returns a result that the agent does not append to context. The next iteration proceeds as if the tool call never happened. This is usually a bug in how the harness handles tool results, not a model failure. Structured logging of every tool call and its result is the fix.</p>
+<p>The <a href="/blog/production-ai-agent-errors/">production AI agent errors</a> post has a fuller taxonomy of what goes wrong. The loop phases are the right frame for understanding those errors because each phase has its own failure modes.</p>
+<h2 id="the-loop-is-a-design-tool">The loop is a design tool</h2>
+<p>Once you see the four phases, you can evaluate any agent framework by asking what each phase contains and who controls it. Some frameworks give you fine-grained control over think. Others abstract it away. Some give you hooks in remember. Others hide state management entirely.</p>
+<p>The frameworks that win in production are the ones where each phase is observable and controllable. You cannot debug what you cannot see. You cannot improve what you cannot measure. Breaking the agent loop into four phases gives you four places to look when something goes wrong.</p>
+<p>Start with perceive. Check what the agent actually sees at the start of each iteration. Then check what it remembered from the previous iteration. Most agent bugs surface as perception or memory problems, not reasoning failures.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/memory-versioning-and-audit-trails/" class="related-card">
+        <div class="related-card-date">2026-05-05</div>
+        <div class="related-card-title">Memory Versioning and Audit Trails for Regulated AI Agents</div>
+      </a>
+      <a href="/blog/multi-agent-vs-single-agent-tradeoffs/" class="related-card">
+        <div class="related-card-date">2026-04-27</div>
+        <div class="related-card-title">Multi-Agent vs Single-Agent Systems: The Real Trade-offs</div>
+      </a>
+      <a href="/blog/agent-vs-ai-assistant/" class="related-card">
+        <div class="related-card-date">2026-04-26</div>
+        <div class="related-card-title">When to Build an Agent and When to Build a Smarter Assistant</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
+          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

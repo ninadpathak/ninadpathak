@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent Memory Hierarchy: What RAG Alone Misses</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:16px;gap:26px;}
+.stack{display:flex;flex-direction:column;gap:10px;width:100%;max-width:380px;flex:0 0 auto;}
+.hd{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);margin-bottom:2px;}
+
+.layer{border:1px solid var(--border);border-radius:4px;padding:11px 13px;box-sizing:border-box;position:relative;transition:border-color .3s linear,background .3s linear;}
+.layer .lbl{font-family:var(--mono);font-size:8px;letter-spacing:0.14em;color:var(--text-3);text-transform:uppercase;display:flex;justify-content:space-between;}
+.layer .name{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--text-1);margin:4px 0 4px;}
+.layer .desc{font-size:9px;color:var(--text-2);line-height:1.4;}
+
+/* RAG covers only the semantic layer */
+.tag{font-family:var(--mono);font-size:7.5px;letter-spacing:0.1em;padding:2px 5px;border-radius:3px;border:1px solid var(--border);color:var(--text-3);}
+.tag.rag{border-color:var(--accent);color:var(--accent);}
+.tag.gap{border-style:dashed;}
+
+.layer.covered{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--bg-1));}
+.layer.covered .name{color:var(--accent);}
+
+.legend{font-family:var(--mono);font-size:9px;max-width:170px;color:var(--text-3);line-height:1.6;flex:0 0 auto;}
+.legend .k{display:flex;align-items:center;gap:7px;margin-bottom:9px;}
+.legend .sw{width:13px;height:13px;border-radius:3px;flex:0 0 auto;}
+.legend .sw.r{border:1.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);}
+.legend .sw.m{border:1.5px dashed var(--text-3);}
+.legend .t{font-size:9px;color:var(--text-1);font-weight:700;}
+
+@media (max-width:600px){
+  .scene{flex-direction:column;gap:16px;}
+  .legend{max-width:380px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="stack">
+    <div class="hd">Agent Memory Hierarchy</div>
+
+    <div class="layer" data-rag="0">
+      <div class="lbl"><span>Layer 01</span><span class="tag gap">RAG MISSES</span></div>
+      <div class="name">Working context</div>
+      <div class="desc">What the agent reasons about right now. Lives in the context window. Lost on every reset.</div>
+    </div>
+
+    <div class="layer" data-rag="0">
+      <div class="lbl"><span>Layer 02</span><span class="tag gap">RAG MISSES</span></div>
+      <div class="name">Episodic recall</div>
+      <div class="desc">Attributed observations from past turns. Not documents. Time-sensitive. Needs a structured log.</div>
+    </div>
+
+    <div class="layer" data-rag="1">
+      <div class="lbl"><span>Layer 03</span><span class="tag rag">RAG COVERS</span></div>
+      <div class="name">Semantic / document layer</div>
+      <div class="desc">World knowledge + persistent facts. Vector search over embeddings. The layer RAG was built for.</div>
+    </div>
+
+    <div class="layer" data-rag="0">
+      <div class="lbl"><span>Layer 04</span><span class="tag gap">RAG MISSES</span></div>
+      <div class="name">Cross-session persistence</div>
+      <div class="desc">Facts that survive past the session. RAG pipelines are session-scoped and evaporate at the end.</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="k"><div class="sw r"></div><div><span class="t">RAG covers</span><br>1 of 4 layers</div></div>
+    <div class="k"><div class="sw m"></div><div><span class="t">RAG misses</span><br>working, episodic, cross-session</div></div>
+    <div style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px;">A vector store is one piece. The other three layers need a structured episodic store + working-context manager.</div>
+  </div>
+</div>
+
+<script>
+// Pulse down the stack. The semantic layer is the only one RAG covers;
+// hold a beat on it to make the 1-of-4 coverage obvious.
+const layers = Array.from(document.querySelectorAll('.layer'));
+// keep semantic layer persistently marked as the covered one
+layers.forEach(l=>{ if(l.dataset.rag==='1') l.classList.add('covered'); });
+let j=0;
+function sweep(){
+  layers.forEach(l=>l.style.boxShadow='');
+  layers[j].style.boxShadow='inset 3px 0 0 var(--accent)';
+  j=(j+1)%layers.length;
+}
+sweep();
+setInterval(sweep,1500);
+</script>
+</body>
+</html>

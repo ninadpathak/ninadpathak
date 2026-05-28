@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contextual Retrieval: Chunk Enrichment Before Embedding</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.wrap{width:100%;max-width:760px;padding:0 20px;box-sizing:border-box;}
+.cols{display:flex;gap:32px;align-items:stretch;}
+.col{flex:1;display:flex;flex-direction:column;}
+.hdr{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-3);margin-bottom:10px;text-align:center;}
+.card{border:1px solid var(--border);background:var(--bg-2);padding:0;display:flex;flex-direction:column;flex:1;}
+.context{font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--accent);border-bottom:1px dashed var(--accent);padding:10px 12px;background:rgba(212,64,0,0.06);overflow:hidden;}
+@media (prefers-color-scheme:dark){.context{background:rgba(255,95,31,0.08);}}
+.context.hidden{max-height:0;padding-top:0;padding-bottom:0;border-bottom:1px dashed var(--border);opacity:0;transition:all .5s ease;}
+.context.shown{max-height:80px;opacity:1;transition:all .5s ease;}
+.chunk-body{font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--text-2);padding:10px 12px;}
+.tag{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);padding:6px 12px;border-top:1px solid var(--border);}
+.metric{margin-top:18px;border:1px solid var(--border);padding:12px 14px;}
+.metric-row{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;color:var(--text-2);}
+.metric-row+.metric-row{margin-top:8px;}
+.metric-label{flex:0 0 168px;}
+.bar-track{flex:1;height:14px;background:var(--bg-2);border:1px solid var(--border);position:relative;}
+.bar-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text-3);}
+.bar-fill.acc{background:var(--accent);}
+.metric-val{flex:0 0 48px;text-align:right;}
+.metric-cap{font-family:var(--mono);font-size:9px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.1em;margin-top:12px;text-align:center;}
+
+@media (max-width:600px){
+.cols{flex-direction:column;gap:18px;}
+.metric-label{flex:0 0 130px;font-size:10px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="cols">
+    <div class="col">
+      <div class="hdr">Without Context</div>
+      <div class="card">
+        <div class="chunk-body">"The company's revenue grew by 3% over the previous quarter."</div>
+        <div class="tag">&rarr; embedding + BM25</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="hdr">With Prepended Context</div>
+      <div class="card">
+        <div class="context" id="ctx">This chunk is from ACME Corp's Q2 2023 10-Q filing, in the financial results section.</div>
+        <div class="chunk-body">"The company's revenue grew by 3% over the previous quarter."</div>
+        <div class="tag">&rarr; 50-100 token blurb, then embedding + BM25</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric">
+    <div class="metric-row">
+      <span class="metric-label">Embeddings + BM25</span>
+      <span class="bar-track"><span class="bar-fill acc" style="width:49%"></span></span>
+      <span class="metric-val">-49%</span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-label">+ Reranking</span>
+      <span class="bar-track"><span class="bar-fill acc" style="width:67%"></span></span>
+      <span class="metric-val">-67%</span>
+    </div>
+    <div class="metric-cap">Reduction in top-20 retrieval failure (1 - recall@20)</div>
+  </div>
+</div>
+<script>
+var ctx=document.getElementById('ctx');
+function loop(){
+  ctx.className='context hidden';
+  setTimeout(function(){ctx.className='context shown';},1400);
+}
+ctx.className='context shown';
+setInterval(loop,3200);
+setTimeout(loop,1600);
+</script>
+</body>
+</html>

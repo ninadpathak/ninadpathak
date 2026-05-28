@@ -8,7 +8,7 @@ status: published
 
 After two years of running AI agents in production, here is what I know: error handling is the difference between a system that survives reality and one that falls over the moment something goes wrong. The glamorous part is reasoning and tool use. The unglamorous part, the part that keeps your on-call phone from lighting up at 2 AM, is error handling.
 
-The failures are predictable. Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. I have hit all three myself, usually at the worst possible time.
+The failures are predictable, and they line up with [the broader pattern of why agents keep failing in production](/blog/why-ai-agents-keep-failing-in-production/). Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. I have hit all three myself, usually at the worst possible time.
 
 This is about the error patterns that actually break agents in production, and the concrete patterns that fix them. I am focusing on LLM-based agents that use tools to interact with external systems. That covers the majority of production agents I have encountered.
 
@@ -113,7 +113,7 @@ def handle_tool_error(state: AgentState, error: Exception, context: dict) -> Age
 
 ## Checkpointing for long-horizon tasks
 
-Agents running dozens of steps need state persistence. Without it, a failure at step 40 restarts from step 1. This is the most demoralizing thing to debug at 1 AM.
+Agents running dozens of steps need state persistence, which is one of the core responsibilities of a well-designed [agent harness, the infrastructure layer your agent actually needs](/blog/agent-harnesses/). Without it, a failure at step 40 restarts from step 1. This is the most demoralizing thing to debug at 1 AM.
 
 ```python
 import json
@@ -166,6 +166,13 @@ def llm_call_with_idempotency(prompt: str, operation_id: str) -> str:
 ## What actually breaks in practice
 
 Five failure modes show up consistently across production incidents.
+
+<div class="visual-wrapper">
+  <div class="visual-title">PRODUCTION AGENT ERROR TAXONOMY</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/agent-error-taxonomy.html" title="Taxonomy of production agent failure classes and how each is handled" loading="lazy"></iframe>
+  </div>
+</div>
 
 **Context window exhaustion**: the agent accumulates tool results until the context is full. Set a hard limit on total tool call history and fail explicitly when approaching the limit.
 

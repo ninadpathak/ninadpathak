@@ -19,9 +19,9 @@ A changelog nobody reads is infrastructure cost with no return. You pay someone 
 
 Developers skip changelogs because the format punishes them. A 400-line wall of bullet points with no version grouping, no breaking-change callouts, and no date stamps forces a linear scan through irrelevant details to find the one thing that might affect their integration. Most developers learn that the effort isn't worth it and start using changelogs as a post-incident reference only.
 
-The format also fails when it conflates what changed with why it matters. "Updated authentication handler" tells me nothing. "Authentication handler now rejects tokens with `exp` claims in the past — previously these were accepted with a 10-second grace window" tells me everything I need to decide whether to read further.
+The format also fails when it conflates what changed with why it matters. "Updated authentication handler" tells me nothing. "Authentication handler now rejects tokens with `exp` claims in the past (previously these were accepted with a 10-second grace window)" tells me everything I need to decide whether to read further.
 
-[Stripe's changelog approach](https://docs.stripe.com/changelog) separates technical details from the lead entry. Developers who need the quick summary get it immediately; those who need migration specifics click through. That separation is a design decision that comes from understanding that changelog readers are in two modes: skimming for impact, or deep-reading for migration path.
+[Stripe's changelog approach](https://docs.stripe.com/changelog) separates technical details from the lead entry. Developers who need the quick summary get it immediately. Those who need migration specifics click through. That separation is a design decision that comes from understanding that changelog readers are in two modes: skimming for impact, or deep-reading for migration path.
 
 ## The keepachangelog.com spec and why it became the standard
 
@@ -31,10 +31,17 @@ The six categories matter because they map to developer intent:
 - **Added** and **Changed** are features worth knowing about before upgrading
 - **Deprecated** tells you what to stop using before it disappears
 - **Removed** is the first thing to scan before any upgrade
-- **Fixed** is relevant if you hit the bug; skip otherwise
+- **Fixed** is relevant if you hit the bug, skip otherwise
 - **Security** gets read immediately by anyone running the library in production
 
 Developers learn to scan a version section in under 10 seconds using this structure. They look for Removed and Security first, then Deprecated, then Changed for anything in their integration surface. That pattern only works if the format is consistent across every release.
+
+<div class="visual-wrapper">
+  <div class="visual-title">Anatomy of a Changelog Entry</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/changelog-anatomy.html" title="A scannable changelog entry annotated with version, ISO date, grouped changes, a breaking-change label, and a migration link, versus an unscannable one" loading="lazy"></iframe>
+  </div>
+</div>
 
 The spec also includes an `Unreleased` section at the top for changes in the main branch that haven't shipped yet. Many teams skip this. Keeping an Unreleased section means contributors can document changes as they land, which eliminates the scramble to write the changelog right before a release and reduces the risk of undocumented changes.
 
@@ -44,7 +51,7 @@ The spec also includes an `Unreleased` section at the top for changes in the mai
 
 [Mintlify's analysis of developer brand changelogs](https://www.mintlify.com/blog/five-changelog-principles-from-best-developer-brands) recommends prefixing breaking changes with a visible label, something like `[BREAKING]` or bolded text, and positioning them at the top of the Removed or Changed section. Stripe's SDK changelogs use warning symbols and direct developers to review migration paths before upgrading.
 
-The entries themselves should front-load the consequence. Not: "Removed the `legacy_token` parameter." Instead: "Removed `legacy_token` parameter from authentication calls — replace with `api_key` before upgrading or requests will return 401."
+The entries themselves should front-load the consequence. Not: "Removed the `legacy_token` parameter." Instead: "Removed `legacy_token` parameter from authentication calls. Replace with `api_key` before upgrading or requests will return 401."
 
 A practical template for breaking change entries:
 
@@ -63,11 +70,11 @@ A yanked release is a version pulled after shipping because of a critical bug or
 
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) handles this with a `[YANKED]` label on the version entry plus a note explaining why. A developer who installed `2.3.1` and sees `2.3.1 - 2026-02-14 [YANKED]` with "Critical memory leak in connection pool, replaced by 2.3.2" gets the context they need immediately.
 
-Omitting yanked versions from changelogs treats the changelog as marketing material rather than a technical record. The changelog should be the complete truth about version history, including the versions you'd rather forget.
+Omitting yanked versions from changelogs treats the changelog as marketing material rather than a technical record, and engineers detect that shift immediately because of [the developer trust hierarchy that ranks practitioner writing over marketing](/blog/developer-trust-hierarchy/). The changelog should be the complete truth about version history, including the versions you'd rather forget.
 
 ## How Linear, Vercel, and Stripe handle release communication differently
 
-These three developer tools have different changelog philosophies, and each one reflects a different assumption about their audience.
+These three developer tools have different changelog philosophies, and each one reflects a different assumption about their audience, the same care that goes into [writing release notes that developers trust](/blog/writing-release-notes-that-developers-trust/).
 
 **Linear** uses an embedded product-focused approach. Their [weekly changelog](https://linear.app/changelog) combines short descriptions with native embedded videos. The format works because Linear's audience is a mix of developers and product managers, and the visual format reduces the reading burden. Linear stores minor bug fixes and API updates in collapsible sections to avoid diluting the signal from major feature releases.
 
@@ -83,15 +90,15 @@ The lesson across all three: match the format to your audience's upgrade stakes.
 
 That contract only works if you honor it in the changelog. A major version bump with no entry explaining what broke is a signal to developers that your versioning isn't trustworthy. A minor version bump that introduces a behavioral change without documentation is a breaking change without warning.
 
-[Zuplo's semantic versioning guide](https://zuplo.com/learning-center/semantic-api-versioning) recommends a minimum notice period of 3-6 months between a deprecation entry in the changelog and removal. Publishing the deprecation entry in a minor release, then removing in the next major, gives developers time to adapt. Most production integrations don't get touched between minor releases; the deprecation window needs to be long enough to catch development cycles.
+[Zuplo's semantic versioning guide](https://zuplo.com/learning-center/semantic-api-versioning) recommends a minimum notice period of 3-6 months between a deprecation entry in the changelog and removal. Publishing the deprecation entry in a minor release, then removing in the next major, gives developers time to adapt. Most production integrations don't get touched between minor releases, so the deprecation window needs to be long enough to catch development cycles.
 
 ## My take on why most changelogs fail
 
 Most changelog failures come from treating the document as a record of what was done rather than communication to someone who needs to make a decision. The writer of the entry knows the context: why the change was made, what it replaces, what the migration path is. The reader of the entry has none of that context and needs to decide whether this release is safe to take.
 
-That mental model shift changes the writing entirely. "Updated dependency X" is a record. "Updated X from 3.1 to 3.2 to address CVE-2026-0231 (CVSS 7.4); no API changes required" is communication.
+That mental model shift changes the writing entirely. "Updated dependency X" is a record. "Updated X from 3.1 to 3.2 to address CVE-2026-0231 (CVSS 7.4), no API changes required" is communication.
 
-The other consistent failure: no one owns the changelog. Developers merge PRs, releases ship, and no one maintains the changelog entry until it's time to cut a release. At that point, reconstructing a week's worth of merged changes from commit messages is painful enough that entries become abbreviated. The fix is requiring a changelog entry on every PR that touches the public surface area — not as a process burden, but as part of how the team communicates externally.
+The other consistent failure: no one owns the changelog. Developers merge PRs, releases ship, and no one maintains the changelog entry until it's time to cut a release. At that point, reconstructing a week's worth of merged changes from commit messages is painful enough that entries become abbreviated. The fix is requiring a changelog entry on every PR that touches the public surface area, not as a process burden, but as part of how the team communicates externally.
 
 The non-obvious insight: a good changelog is a forcing function for good API design. When you have to explain what changed and why to a developer who doesn't have your context, you notice quickly when a change is hard to explain clearly. Changes that are hard to document are often changes that should have been designed differently.
 

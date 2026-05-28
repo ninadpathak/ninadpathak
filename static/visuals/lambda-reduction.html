@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beta-Reduction Trace Across Three Difficulty Tiers</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.wrap{width:100%;max-width:620px;padding:0 20px;box-sizing:border-box;}
+.tiers{display:flex;gap:8px;margin-bottom:18px;}
+.tier{flex:1;border:1px solid var(--border);padding:8px 10px;background:var(--bg-2);opacity:0.45;transition:all .4s ease;}
+.tier.active{opacity:1;border-color:var(--accent);}
+.tier-name{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);}
+.tier.active .tier-name{color:var(--accent);}
+.tier-desc{font-family:var(--mono);font-size:10px;color:var(--text-2);margin-top:4px;}
+
+.trace{border:1px solid var(--border);padding:16px 18px;background:var(--bg-2);min-height:150px;box-sizing:border-box;}
+.trace-h{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);margin-bottom:12px;}
+.step{font-family:var(--mono);font-size:14px;line-height:1.9;color:var(--text-2);display:flex;align-items:baseline;gap:10px;opacity:0;transform:translateX(-6px);transition:all .35s ease;}
+.step.show{opacity:1;transform:translateX(0);}
+.step.current{color:var(--text-1);}
+.step.final{color:var(--accent);font-weight:bold;}
+.step .op{flex:0 0 22px;color:var(--text-3);font-size:12px;}
+.step.final .op{color:var(--accent);}
+.note{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);text-align:center;margin-top:14px;}
+
+@media (max-width:600px){
+.tiers{flex-direction:column;gap:6px;}
+.step{font-size:12px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tiers">
+    <div class="tier" id="t1"><div class="tier-name">Tier 1 / Direct</div><div class="tier-desc">single substitution</div></div>
+    <div class="tier" id="t2"><div class="tier-name">Tier 2 / Chained</div><div class="tier-desc">two application steps</div></div>
+    <div class="tier" id="t3"><div class="tier-name">Tier 3 / Combinator</div><div class="tier-desc">normalize or detect &infin;</div></div>
+  </div>
+
+  <div class="trace">
+    <div class="trace-h" id="traceh">Beta-Reduction Trace</div>
+    <div id="steps"></div>
+  </div>
+  <div class="note" id="note"></div>
+</div>
+<script>
+var tiers=[
+  {
+    tier:'t1',
+    head:'Tier 1 &middot; Direct Application',
+    steps:['(λx.x) y','β  y'],
+    note:'Identity applied to y. Correct normal form: y',
+    final:1
+  },
+  {
+    tier:'t2',
+    head:'Tier 2 &middot; Chained Application',
+    steps:['((λf.λx.f x) (λy.y)) z','β  (λx.(λy.y) x) z','β  (λy.y) z','β  z'],
+    note:'Two applications, bindings preserved. Normal form: z',
+    final:3
+  },
+  {
+    tier:'t3',
+    head:'Tier 3 &middot; Combinator (Ω)',
+    steps:['(λx. x x) (λx. x x)','β  (λx. x x) (λx. x x)','β  (λx. x x) (λx. x x)','→  does not normalize'],
+    note:'Ω reduces to itself forever. Correct answer: no normal form',
+    final:3
+  }
+];
+var stepsEl=document.getElementById('steps');
+var traceh=document.getElementById('traceh');
+var note=document.getElementById('note');
+var ti=0;
+
+function renderTier(){
+  var t=tiers[ti];
+  ['t1','t2','t3'].forEach(function(id){document.getElementById(id).className='tier';});
+  document.getElementById(t.tier).className='tier active';
+  traceh.innerHTML=t.head;
+  note.textContent='';
+  stepsEl.innerHTML='';
+  t.steps.forEach(function(s,i){
+    var d=document.createElement('div');
+    d.className='step';
+    var op=i===0?'':(i===t.final?'=':'⇒');
+    d.innerHTML='<span class="op">'+op+'</span><span class="expr">'+s+'</span>';
+    stepsEl.appendChild(d);
+  });
+  var els=stepsEl.querySelectorAll('.step');
+  els.forEach(function(el,i){
+    setTimeout(function(){
+      els.forEach(function(e){e.classList.remove('current');});
+      el.classList.add('show');
+      if(i===t.final){el.classList.add('final');}
+      else{el.classList.add('current');}
+      if(i===els.length-1){note.innerHTML=t.note;}
+    },600+i*750);
+  });
+}
+
+function loop(){
+  renderTier();
+  ti=(ti+1)%tiers.length;
+}
+loop();
+setInterval(loop,4600);
+</script>
+</body>
+</html>

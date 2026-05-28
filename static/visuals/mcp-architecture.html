@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP Architecture: Host, Client, Servers</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.stage {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.diagram {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-height: 0;
+}
+
+.node {
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  border-radius: 3px;
+  padding: 12px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s linear, background-color 0.2s linear;
+}
+.node .nlbl { display: block; font-size: 8.5px; color: var(--text-3); letter-spacing: 0.12em; margin-bottom: 5px; text-transform: uppercase; }
+.node .sub { display: block; font-size: 9px; color: var(--text-3); margin-top: 4px; }
+.node.lit { border-color: var(--accent); background: rgba(212,64,0,0.07); }
+@media (prefers-color-scheme: dark) { .node.lit { background: rgba(255,95,31,0.12); } }
+
+.servers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tools {
+  display: block;
+  font-size: 8.5px;
+  color: var(--text-3);
+  margin-top: 5px;
+  letter-spacing: 0.04em;
+}
+
+/* Link segments with a traveling packet */
+.link {
+  position: relative;
+  height: 1px;
+  background: var(--border);
+  flex: 1;
+  min-width: 40px;
+  margin: 0 4px;
+}
+.link.to-servers { display: flex; flex-direction: column; gap: 10px; background: none; height: auto; justify-content: center; }
+.seg { position: relative; height: 1px; background: var(--border); }
+
+.packet {
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+}
+
+.legend {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--text-3);
+  text-align: center;
+  letter-spacing: 0.06em;
+  margin-top: 14px;
+}
+.legend b { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 600px) {
+  .diagram { flex-direction: column; }
+  .link { width: 1px; min-width: 0; height: 28px; flex: none; margin: 4px 0; }
+  .link.to-servers { flex-direction: row; height: auto; gap: 16px; }
+  .seg { width: 1px; height: 28px; }
+  .servers { flex-direction: row; gap: 16px; }
+  .packet { top: auto; left: -3px; }
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="header">Model Context Protocol / JSON-RPC over a Client Bridge</div>
+  <div class="diagram">
+    <div class="node" id="host">
+      <span class="nlbl">Host</span>
+      AI Model
+      <span class="sub">Claude / IDE</span>
+    </div>
+
+    <div class="link" id="link-1">
+      <div class="packet" id="p1"></div>
+    </div>
+
+    <div class="node" id="client">
+      <span class="nlbl">MCP Client</span>
+      Connection<br>Bridge
+    </div>
+
+    <div class="link to-servers" id="link-2">
+      <div class="seg"><div class="packet" id="p2a"></div></div>
+      <div class="seg"><div class="packet" id="p2b"></div></div>
+      <div class="seg"><div class="packet" id="p2c"></div></div>
+    </div>
+
+    <div class="servers">
+      <div class="node srv" id="srv0">
+        <span class="nlbl">MCP Server</span>GitHub
+        <span class="tools">tools &middot; resources</span>
+      </div>
+      <div class="node srv" id="srv1">
+        <span class="nlbl">MCP Server</span>PostgreSQL
+        <span class="tools">tools &middot; resources</span>
+      </div>
+      <div class="node srv" id="srv2">
+        <span class="nlbl">MCP Server</span>Filesystem
+        <span class="tools">tools &middot; resources</span>
+      </div>
+    </div>
+  </div>
+  <div class="legend">request <b>&rarr;</b> tool call routed to one server &middot; result <b>&larr;</b> returned to the model</div>
+</div>
+
+<script>
+  const host = document.getElementById('host');
+  const client = document.getElementById('client');
+  const servers = [document.getElementById('srv0'), document.getElementById('srv1'), document.getElementById('srv2')];
+  const p1 = document.getElementById('p1');
+  const p2 = [document.getElementById('p2a'), document.getElementById('p2b'), document.getElementById('p2c')];
+
+  function lit(el, on) { el.classList.toggle('lit', on); }
+  const isMobile = () => window.matchMedia('(max-width: 600px)').matches;
+
+  // Animate a packet along a link segment. axis 'x' horizontal, 'y' vertical (mobile).
+  function travel(packet, fwd, dur, cb) {
+    const start = fwd ? 0 : 100;
+    const end = fwd ? 100 : 0;
+    const t0 = performance.now();
+    packet.style.opacity = '1';
+    function step(t) {
+      const k = Math.min(1, (t - t0) / dur);
+      const pos = start + (end - start) * k;
+      if (isMobile()) packet.style.top = `calc(${pos}% - 3px)`, packet.style.left = '-3px';
+      else packet.style.left = `calc(${pos}% - 3px)`, packet.style.top = '-3px';
+      if (k < 1) requestAnimationFrame(step);
+      else { packet.style.opacity = '0'; cb && cb(); }
+    }
+    requestAnimationFrame(step);
+  }
+
+  function reset() {
+    lit(host, false); lit(client, false);
+    servers.forEach(s => lit(s, false));
+  }
+
+  function cycle() {
+    reset();
+    const target = Math.floor(Math.random() * 3);
+    const D = 600;
+    // 1. Host emits request
+    lit(host, true);
+    travel(p1, true, D, () => {
+      // 2. Client routes to chosen server
+      lit(client, true);
+      travel(p2[target], true, D, () => {
+        // 3. Server executes
+        lit(servers[target], true);
+        setTimeout(() => {
+          // 4. Result returns: server -> client -> host
+          travel(p2[target], false, D, () => {
+            travel(p1, false, D, () => {
+              setTimeout(reset, 250);
+            });
+          });
+        }, 350);
+      });
+    });
+  }
+
+  cycle();
+  setInterval(cycle, 3400);
+</script>
+</body>
+</html>

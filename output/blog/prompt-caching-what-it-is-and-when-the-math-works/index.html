@@ -224,14 +224,21 @@
         <p>Inference costs are the primary bottleneck for scaling LLM applications. Standard API calls require the model to re-process the entire prompt for every request. Such repetition is wasteful when large portions of your context remain static across thousands of calls.</p>
 <p>Prompt caching solves this by persisting the intermediate state of the model's computation. It allows you to "reuse" the work done on previous prompts. Understanding the mechanics of prefix matching is the key to making this work in production.</p>
 <h2 id="what-prompt-caching-actually-does">What prompt caching actually does</h2>
-<p>Caching stores the Key-Value (KV) cache of a prompt prefix in memory or on disk. The KV cache represents the mathematical summary of all tokens processed so far. The model can skip the initial computation phase and jump straight to generating new tokens when a new prompt shares an identical prefix with a cached one.</p>
+<p>Caching stores the <a href="/blog/kv-cache-eviction-accuracy/">Key-Value (KV) cache of a prompt prefix</a> in memory or on disk. The KV cache represents the mathematical summary of all tokens processed so far. The model can skip the initial computation phase and jump straight to generating new tokens when a new prompt shares an identical prefix with a cached one, which is why caching is one of the strongest levers for <a href="/blog/time-to-first-token-ttft/">cutting time to first token</a>.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">PROMPT CACHING</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/prompt-caching.html" title="First call writes the cache for a static prefix, later calls hit it and skip prefill, dropping cost up to 90 percent and latency about 50 percent" loading="lazy"></iframe>
+  </div>
+</div>
+
 <p>Such a strategy is particularly effective for systems with long system instructions or large retrieved datasets. You pay the full "prefill" price once. Subsequent requests only pay for the unique tokens added at the end. This changes the economics of long-context RAG and agentic workflows.</p>
 <h2 id="the-important-detail-is-prefix-not-prompt">The important detail is prefix, not prompt</h2>
 <p>Most developers assume caching works like a standard key-value store for the whole prompt. Real LLM caching is more granular. It works on the prefix. If your prompt consists of a system block, a knowledge block, and a user query, the cache hit occurs as long as the first two blocks are identical.</p>
 <p>Any change at the beginning of the prompt invalidates the entire cache for that request. Such sensitivity means you must order your prompt components from most static to most dynamic. Place your system instructions first. Follow them with your background data. Put the user's unique query at the very end.</p>
 <h2 id="when-the-math-actually-works">When the math actually works</h2>
 <p>Caching is not a free lunch. Providers often charge a small fee to store the cache or require a minimum token count to trigger the savings. You must have enough traffic to ensure that the cached prefix stays "warm" in the provider's memory.</p>
-<p>Calculations for ROI should consider the cache hit rate and the ratio of static to dynamic tokens. A system with a 10,000-token static prefix and a 100-token user query will see massive savings even at low volumes. A system where the prefix changes constantly will see zero benefit and might even incur higher costs due to storage fees.</p>
+<p>Calculations for ROI should consider the cache hit rate and the ratio of static to dynamic tokens, and they fit naturally into a broader <a href="/blog/llm-token-budgets-cost-control/">practical approach to LLM cost control</a>. A system with a 10,000-token static prefix and a 100-token user query will see massive savings even at low volumes. A system where the prefix changes constantly will see zero benefit and might even incur higher costs due to storage fees.</p>
 <h2 id="provider-differences">Provider differences</h2>
 <p>OpenAI, Anthropic, and Gemini each implement caching with different rules. Some provide automatic caching based on common prefixes. Others require you to explicitly flag which blocks should be cached.</p>
 <p>Anthropic's implementation is currently the most flexible for developers. It allows you to place "cache breakpoints" at specific points in the prompt. This gives you granular control over what stays in memory. OpenAI's approach is more automated but offers less predictability for cost control.</p>
@@ -258,7 +265,7 @@
         <div class="related-card-date">2026-04-26</div>
         <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
       </a>
-      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-21</div>
         <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
       </a>
@@ -342,9 +349,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

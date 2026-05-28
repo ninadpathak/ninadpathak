@@ -149,6 +149,16 @@
 
 <section class="blog-list-section">
   <div class="container">
+      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="blog-row">
+        <div class="blog-row-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+        <div class="blog-row-desc">Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">8 min read</span>
+          <span class="tag">ai-agents</span>
+          <span class="tag">rag</span>
+          <span class="tag">fine-tuning</span>
+        </div>
+      </a>
       <a href="/blog/memory-attribution-errors/" class="blog-row">
         <div class="blog-row-title">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</div>
         <div class="blog-row-desc">Memory attribution failures cause AI agents to act on outdated or misassigned context. Here is what I found examining the failure patterns.</div>
@@ -157,6 +167,16 @@
           <span class="tag">ai-agents</span>
           <span class="tag">agent-memory</span>
           <span class="tag">production-errors</span>
+        </div>
+      </a>
+      <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="blog-row">
+        <div class="blog-row-title">Shared Memory vs Isolated Memory in Multi-Agent Workflows</div>
+        <div class="blog-row-desc">How to choose between shared and isolated memory architectures for multi-agent systems, with trade-offs from production deployments.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">6 min read</span>
+          <span class="tag">ai-agents</span>
+          <span class="tag">multi-agent</span>
+          <span class="tag">agent-memory</span>
         </div>
       </a>
       <a href="/blog/agent-memory-for-customer-support/" class="blog-row">
@@ -189,7 +209,7 @@
           <span class="tag">memory</span>
         </div>
       </a>
-      <a href="/blog/2026-05-05-memory-versioning-and-audit-trails/" class="blog-row">
+      <a href="/blog/memory-versioning-and-audit-trails/" class="blog-row">
         <div class="blog-row-title">Memory Versioning and Audit Trails for Regulated AI Agents</div>
         <div class="blog-row-desc">If your agent overwrites its memory, you cannot pass a compliance audit. How to build append-only memory versioning and trace agent reasoning.</div>
         <div class="blog-row-meta">
@@ -229,16 +249,6 @@
           <span class="tag">agent-architecture</span>
         </div>
       </a>
-      <a href="/blog/hermes-md-git-commit-billing-bug/" class="blog-row">
-        <div class="blog-row-title">The HERMES.md Bug That Silently Burned $200 in Claude Code Credits</div>
-        <div class="blog-row-desc">A case-sensitive string in git commit messages routes Claude Code API requests through extra usage billing instead of plan quota. Here is how it works and what it means for teams.</div>
-        <div class="blog-row-meta">
-          <span class="read-time">6 min read</span>
-          <span class="tag">claude</span>
-          <span class="tag">anthropic</span>
-          <span class="tag">billing</span>
-        </div>
-      </a>
       <a href="/blog/the-memory-hierarchy-why-rag-is-not-enough/" class="blog-row">
         <div class="blog-row-title">The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</div>
         <div class="blog-row-desc">RAG handles document retrieval well. It handles agent memory poorly, because agents need episodic recall, working context, and cross-session persistence that a vector store cannot provide.</div>
@@ -249,11 +259,11 @@
           <span class="tag">rag</span>
         </div>
       </a>
-      <a href="/blog/2026-04-28-asymmetric-retrieval-agent-memory/" class="blog-row">
+      <a href="/blog/asymmetric-retrieval-agent-memory/" class="blog-row">
         <div class="blog-row-title">Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</div>
         <div class="blog-row-desc">The retrieval patterns that work for a query do not work when the agent is the one retrieving, and this asymmetry silently breaks production RAG systems.</div>
         <div class="blog-row-meta">
-          <span class="read-time">5 min read</span>
+          <span class="read-time">6 min read</span>
           <span class="tag">ai-agents</span>
           <span class="tag">agent-memory</span>
           <span class="tag">rag</span>
@@ -269,6 +279,16 @@
           <span class="tag">agent architecture</span>
         </div>
       </a>
+      <a href="/blog/the-agent-design-space/" class="blog-row">
+        <div class="blog-row-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
+        <div class="blog-row-desc">After surveying production agents across industries, the design space clusters into patterns. Here is what I found.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">7 min read</span>
+          <span class="tag">ai</span>
+          <span class="tag">agents</span>
+          <span class="tag">architecture</span>
+        </div>
+      </a>
       <a href="/blog/agent-vs-ai-assistant/" class="blog-row">
         <div class="blog-row-title">When to Build an Agent and When to Build a Smarter Assistant</div>
         <div class="blog-row-desc">The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.</div>
@@ -277,16 +297,6 @@
           <span class="tag">ai agents</span>
           <span class="tag">ai architecture</span>
           <span class="tag">agent design</span>
-        </div>
-      </a>
-      <a href="/blog/the-agent-design-space/" class="blog-row">
-        <div class="blog-row-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
-        <div class="blog-row-desc">After surveying production agents across industries, the design space clusters into patterns. Here is what I found.</div>
-        <div class="blog-row-meta">
-          <span class="read-time">6 min read</span>
-          <span class="tag">ai</span>
-          <span class="tag">agents</span>
-          <span class="tag">architecture</span>
         </div>
       </a>
       <a href="/blog/lambda-calculus-ai-reasoning-benchmark/" class="blog-row">
@@ -299,27 +309,7 @@
           <span class="tag">formal methods</span>
         </div>
       </a>
-      <a href="/blog/spinel-ruby-aot-compiler/" class="blog-row">
-        <div class="blog-row-title">Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby</div>
-        <div class="blog-row-desc">Spinel compiles Ruby to standalone native binaries with 11.6x speedups over miniruby. I dug into the architecture to understand why AOT beats JIT for long-running services.</div>
-        <div class="blog-row-meta">
-          <span class="read-time">6 min read</span>
-          <span class="tag">ruby</span>
-          <span class="tag">compilers</span>
-          <span class="tag">performance</span>
-        </div>
-      </a>
-      <a href="/blog/icloud-keychain-escrow/" class="blog-row">
-        <div class="blog-row-title">Apple's iCloud Keychain Escrow Security: How It Works and Why It Matters</div>
-        <div class="blog-row-desc">Apple's iCloud Keychain escrow uses a key-splitting architecture that makes escrow records cryptographically inaccessible without the device passcode. This is how it actually works.</div>
-        <div class="blog-row-meta">
-          <span class="read-time">6 min read</span>
-          <span class="tag">security</span>
-          <span class="tag">apple</span>
-          <span class="tag">cryptography</span>
-        </div>
-      </a>
-      <a href="/blog/2026-04-23-agent-loop-anatomy/" class="blog-row">
+      <a href="/blog/agent-loop-anatomy/" class="blog-row">
         <div class="blog-row-title">The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</div>
         <div class="blog-row-desc">The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.</div>
         <div class="blog-row-meta">
@@ -329,7 +319,7 @@
           <span class="tag">loop design</span>
         </div>
       </a>
-      <a href="/blog/2026-04-22-why-ai-agents-keep-failing-in-production/" class="blog-row">
+      <a href="/blog/why-ai-agents-keep-failing-in-production/" class="blog-row">
         <div class="blog-row-title">Why AI Agents Keep Failing in Production and What the Field Is Doing About It</div>
         <div class="blog-row-desc">I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.</div>
         <div class="blog-row-meta">
@@ -339,14 +329,24 @@
           <span class="tag">reliability</span>
         </div>
       </a>
-      <a href="/blog/python-model-predict-function/" class="blog-row">
-        <div class="blog-row-title">Python model.predict(): The Function That Turns Data Into Decisions</div>
-        <div class="blog-row-desc">A practical guide to model.predict() across scikit-learn, Keras, PyTorch, and XGBoost—what it does, how it behaves differently across frameworks, and the gotchas that will bite you in production.</div>
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="blog-row">
+        <div class="blog-row-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+        <div class="blog-row-desc">Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.</div>
         <div class="blog-row-meta">
-          <span class="read-time">10 min read</span>
-          <span class="tag">python</span>
-          <span class="tag">machine-learning</span>
-          <span class="tag">scikit-learn</span>
+          <span class="read-time">6 min read</span>
+          <span class="tag">ai</span>
+          <span class="tag">agents</span>
+          <span class="tag">architecture</span>
+        </div>
+      </a>
+      <a href="/blog/memory-for-voice-ai-agents/" class="blog-row">
+        <div class="blog-row-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+        <div class="blog-row-desc">Voice AI agents live or die by how they manage memory across a real-time streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something different.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">17 min read</span>
+          <span class="tag">ai</span>
+          <span class="tag">voice</span>
+          <span class="tag">agents</span>
         </div>
       </a>
 
@@ -417,9 +417,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

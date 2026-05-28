@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lost in the Middle: U-Shaped Recall Across the Context Window</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.stage {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  margin-bottom: 14px;
+}
+.chart {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 0;
+}
+svg { width: 100%; height: 100%; max-width: 560px; overflow: visible; }
+
+.axis { stroke: var(--border); stroke-width: 1; }
+.gridline { stroke: var(--border); stroke-width: 1; stroke-dasharray: 2 4; opacity: 0.6; }
+.curve { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.dot { fill: var(--bg-1); stroke: var(--accent); stroke-width: 2; }
+.dot.sag { fill: var(--accent); }
+.alabel { font-family: var(--mono); font-size: 9px; fill: var(--text-3); letter-spacing: 0.06em; }
+.zone-label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; }
+.zone-good { fill: var(--accent); }
+.zone-bad { fill: var(--text-3); }
+.ytitle { font-family: var(--mono); font-size: 9px; fill: var(--text-3); letter-spacing: 0.06em; }
+
+.scan {
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0;
+}
+.footnote {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--text-3);
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin-top: 12px;
+}
+.footnote b { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="header">Lost in the Middle / Recall vs Position in Context</div>
+  <div class="chart">
+    <!-- viewBox: x 0..600, y 0..300. Plot area x:60..560, y:20..240 -->
+    <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid meet">
+      <!-- gridlines -->
+      <line class="gridline" x1="60" y1="20"  x2="560" y2="20"/>
+      <line class="gridline" x1="60" y1="130" x2="560" y2="130"/>
+      <!-- axes -->
+      <line class="axis" x1="60" y1="240" x2="560" y2="240"/>
+      <line class="axis" x1="60" y1="20"  x2="60"  y2="240"/>
+
+      <!-- y axis ticks -->
+      <text class="alabel" x="54" y="24"  text-anchor="end">HIGH</text>
+      <text class="alabel" x="54" y="244" text-anchor="end">LOW</text>
+      <text class="ytitle" x="18" y="135" text-anchor="middle" transform="rotate(-90 18 135)">RECALL ACCURACY</text>
+
+      <!-- U-shaped curve: high at start (y~36), sag in middle (y~205), high at end (y~46) -->
+      <path class="curve" d="M 60 36 C 160 70, 230 200, 310 205 C 390 210, 460 70, 560 46"/>
+
+      <!-- scan line, animated -->
+      <line class="scan" id="scan" x1="60" y1="20" x2="60" y2="240"/>
+
+      <!-- markers -->
+      <circle class="dot" cx="60"  cy="36"  r="4.5"/>
+      <circle class="dot sag" cx="310" cy="205" r="5"/>
+      <circle class="dot" cx="560" cy="46"  r="4.5"/>
+
+      <!-- x zone labels -->
+      <text class="zone-label zone-good" x="60"  y="262" text-anchor="start">START</text>
+      <text class="zone-label zone-bad"  x="310" y="262" text-anchor="middle">MIDDLE</text>
+      <text class="zone-label zone-good" x="560" y="262" text-anchor="end">END</text>
+
+      <text class="alabel" x="310" y="282" text-anchor="middle">TOKEN POSITION IN PROMPT</text>
+
+      <!-- callout near sag -->
+      <text class="zone-label zone-bad" x="310" y="190" text-anchor="middle">"lost"</text>
+    </svg>
+  </div>
+  <div class="footnote">Attention is a finite budget. Put critical data at the <b>boundaries</b>; the middle becomes a sea of noise.</div>
+</div>
+<script>
+  // Sweep a scan line left-to-right across the plot to draw the eye along the curve.
+  var scan = document.getElementById('scan');
+  var x0 = 60, x1 = 560, dur = 3200;
+  function frame(t0, now) {
+    var p = ((now - t0) % dur) / dur;
+    var x = x0 + (x1 - x0) * p;
+    scan.setAttribute('x1', x);
+    scan.setAttribute('x2', x);
+    // fade in/out at the ends, fully linear in between
+    var o = p < 0.08 ? p / 0.08 : (p > 0.92 ? (1 - p) / 0.08 : 1);
+    scan.style.opacity = (o * 0.5).toFixed(3);
+    requestAnimationFrame(function(n){ frame(t0, n); });
+  }
+  requestAnimationFrame(function(n){ frame(n, n); });
+</script>
+</body>
+</html>

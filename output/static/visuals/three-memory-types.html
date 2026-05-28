@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Memory Types</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:20px;}
+.row{display:flex;gap:14px;width:100%;max-width:720px;align-items:stretch;justify-content:center;}
+
+.card{flex:1;border:1px solid var(--border);background:var(--bg-1);display:flex;flex-direction:column;min-width:0;transition:border-color .3s linear;}
+.card.active{border-color:var(--accent);}
+
+.card .head{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text-2);display:flex;align-items:center;gap:6px;transition:color .3s linear,border-color .3s linear;}
+.card.active .head{color:var(--accent);border-bottom-color:var(--accent);}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--text-3);transition:background .3s linear;}
+.card.active .dot{background:var(--accent);}
+
+.card .body{padding:11px 10px;display:flex;flex-direction:column;gap:9px;flex:1;}
+.field{display:flex;flex-direction:column;gap:2px;}
+.field .k{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);}
+.field .v{font-size:11.5px;line-height:1.35;color:var(--text-1);}
+.field .v.mono{font-family:var(--mono);font-size:10px;color:var(--text-2);}
+
+.life{margin-top:auto;font-family:var(--mono);font-size:9px;letter-spacing:0.04em;color:var(--text-2);border-top:1px solid var(--border);padding-top:8px;display:flex;justify-content:space-between;align-items:center;}
+.life b{color:var(--accent);font-weight:700;}
+
+@media (max-width:600px){
+  .row{flex-direction:column;max-width:340px;gap:10px;}
+  .card .body{gap:7px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="row">
+
+    <div class="card" data-i="0">
+      <div class="head"><span class="dot"></span>Working</div>
+      <div class="body">
+        <div class="field"><span class="k">aka</span><span class="v">The scratchpad / now</span></div>
+        <div class="field"><span class="k">stores</span><span class="v">Current turn, active task, tools available</span></div>
+        <div class="field"><span class="k">backed by</span><span class="v mono">context window</span></div>
+        <div class="life"><span>lifespan</span><b>volatile</b></div>
+      </div>
+    </div>
+
+    <div class="card" data-i="1">
+      <div class="head"><span class="dot"></span>Episodic</div>
+      <div class="body">
+        <div class="field"><span class="k">aka</span><span class="v">What happened</span></div>
+        <div class="field"><span class="k">stores</span><span class="v">Specific events: task X failed Fri with error Y</span></div>
+        <div class="field"><span class="k">backed by</span><span class="v mono">event store, by time</span></div>
+        <div class="life"><span>lifespan</span><b>per-session log</b></div>
+      </div>
+    </div>
+
+    <div class="card" data-i="2">
+      <div class="head"><span class="dot"></span>Semantic</div>
+      <div class="body">
+        <div class="field"><span class="k">aka</span><span class="v">What is true</span></div>
+        <div class="field"><span class="k">stores</span><span class="v">Facts &amp; abstractions: list.sort() is stable</span></div>
+        <div class="field"><span class="k">backed by</span><span class="v mono">knowledge base</span></div>
+        <div class="life"><span>lifespan</span><b>durable</b></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const cards = Array.from(document.querySelectorAll('.card'));
+let i = 0;
+function step(){
+  cards.forEach(c => c.classList.remove('active'));
+  cards[i].classList.add('active');
+  i = (i + 1) % cards.length;
+}
+step();
+setInterval(step, 2200);
+</script>
+</body>
+</html>

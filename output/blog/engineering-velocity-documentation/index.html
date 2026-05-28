@@ -225,7 +225,7 @@
 
       </nav>
       <div class="post-content">
-        <p>Technical documentation is the single greatest force multiplier for engineering velocity. While most teams treat writing as a secondary administrative task, <a href="https://dora.dev/publications/">DORA research (Accelerate)</a> confirms that high-quality documentation makes a team 2.4x more likely to achieve elite software delivery performance. The impact is non-linear: technical practices like Continuous Integration provide a 34% performance lift with poor documentation, but that lift surges to 750% when supported by high-quality technical writing. Documentation is not a "clarity" exercise; it is a systemic optimization for engineering throughput.</p>
+        <p>Technical documentation is the single greatest force multiplier for engineering velocity. While most teams treat writing as a secondary administrative task, <a href="https://dora.dev/publications/">DORA research (Accelerate)</a> confirms that high-quality documentation makes a team 2.4x more likely to achieve elite software delivery performance. The impact is non-linear: technical practices like Continuous Integration provide a 34% performance lift with poor documentation, but that lift surges to 750% when supported by high-quality technical writing. Documentation is not a "clarity" exercise. It is a systemic optimization for engineering throughput.</p>
 <div class="visual-wrapper">
   <div class="visual-title">The DORA multiplier: capability amplification</div>
   <div class="visual-container">
@@ -243,8 +243,8 @@
   </div>
 </div>
 
-<p>A <a href="https://stripe.com/reports/developer-coefficient-2018">Stripe survey</a> found that developers spend an average of 17 hours per week on technical debt and maintenance. Poor documentation is cited as a primary friction point in this calculation. When information is unstated or buried in ephemeral Slack threads, the cost of discovery becomes linear with the size of the team. In an undocumented system, a team of 100 engineers is not 10x more productive than a team of 10; they are often less productive because the communication overhead of maintaining tribal knowledge consumes the surplus capacity.</p>
-<p><a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-debt-reclaiming-tech-equity-through-software-excellence">McKinsey research</a> on "Tech Equity" confirms that companies with significant documentation gaps take 18% longer to release new features. This delay is not caused by slow typing; it is caused by the "discovery latency" required to understand undocumented dependencies and side effects.</p>
+<p>A <a href="https://stripe.com/reports/developer-coefficient-2018">Stripe survey</a> found that developers spend an average of 17 hours per week on technical debt and maintenance. Poor documentation is cited as a primary friction point in this calculation. When information is unstated or buried in ephemeral Slack threads, the cost of discovery becomes linear with the size of the team. In an undocumented system, a team of 100 engineers is not 10x more productive than a team of 10. They are often less productive because the communication overhead of maintaining tribal knowledge consumes the surplus capacity.</p>
+<p><a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-debt-reclaiming-tech-equity-through-software-excellence">McKinsey research</a> on "Tech Equity" confirms that companies with significant documentation shortfalls take 18% longer to release new features. This delay is not caused by slow typing. It is caused by the "discovery latency" required to understand undocumented dependencies and side effects.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Research: tech debt and engineering excellence (McKinsey)</div>
   <div class="visual-container">
@@ -279,7 +279,7 @@
 <td>3.8x higher success rate</td>
 </tr>
 <tr>
-<td>Cloud Leverage</td>
+<td>Cloud Adoption</td>
 <td>2.5x more effectively utilized</td>
 </tr>
 <tr>
@@ -297,7 +297,7 @@
   </div>
 </div>
 
-<p>Throughput capacity is limited by the slowest component of the system. If your deployment pipeline takes 10 minutes, but understanding the "Auth Service" dependencies takes 4 hours of Slack interrogation, your true velocity is capped by the lack of documentation. Initiatives focused on intentional knowledge sharing—such as <a href="https://github.com/joelparkerhenderson/architecture-decision-record">Architecture Decision Records (ADRs)</a>—have been shown to boost engineering throughput by nearly 70%.</p>
+<p>Throughput capacity is limited by the slowest component of the system. If your deployment pipeline takes 10 minutes, but understanding the "Auth Service" dependencies takes 4 hours of Slack interrogation, your true velocity is capped by the lack of documentation. Initiatives focused on intentional knowledge sharing, such as <a href="https://github.com/joelparkerhenderson/architecture-decision-record">Architecture Decision Records (ADRs)</a>, have been shown to boost engineering throughput by nearly 70%.</p>
 <p><a href="https://octoverse.github.com/">GitHub's State of the Octoverse</a> reports consistently show that high-quality documentation can increase developer productivity by 50%. This productivity gain comes from the decentralization of truth. When the documentation is the source of truth, the "Bus Factor" of any individual component becomes secondary to the reliability of the written spec.</p>
 <div class="visual-wrapper">
   <div class="visual-title">GitHub Octoverse: productivity and documentation</div>
@@ -315,7 +315,7 @@
   </div>
 </div>
 
-<p>High-quality documentation minimizes this tax by providing answers at the point of need. This is why "Documentation as Code"—where docs live in the same repository as the source code—is so effective. It keeps the engineer in the "Flow State" by reducing the distance between the question and the answer. According to Stack Overflow data, 48% of developers experience weekly productivity issues specifically due to knowledge silos and the resulting context switches.</p>
+<p>High-quality documentation minimizes this tax by providing answers at the point of need. This is why "Documentation as Code" (where docs live in the same repository as the source code) is so effective. It keeps the engineer in the "Flow State" by shortening the path between the question and the answer. According to Stack Overflow data, 48% of developers experience weekly productivity issues specifically due to knowledge silos and the resulting context switches.</p>
 <h2 id="the-documentation-as-capability-framework">The documentation-as-capability framework</h2>
 <p>Google Cloud's Architecture Framework identifies documentation not as a support asset, but as a core operational capability.</p>
 <div class="visual-wrapper">
@@ -328,7 +328,7 @@
 <p>To achieve velocity gains, DORA research identifies eight key attributes of high-quality documentation that must be met:</p>
 <ol>
 <li><strong>Clarity</strong>: Easy to understand for the intended audience.</li>
-<li><strong>Findability</strong>: Answers are discoverable in under 60 seconds.</li>
+<li><strong>Findability</strong>: Answers are discoverable in under 60 seconds, which is one reason <a href="/blog/the-case-for-shorter-technical-documentation/">shorter technical documentation usually works better</a>.</li>
 <li><strong>Reliability</strong>: The information is technically accurate.</li>
 <li><strong>Updateability</strong>: The friction to revise a doc is lower than the friction to ignore it.</li>
 <li><strong>Relevance</strong>: Content is directly applicable to current workflows.</li>
@@ -339,9 +339,9 @@
 <h2 id="economic-outcomes-of-documentation-maturity">Economic outcomes of documentation maturity</h2>
 <p>The ROI of technical writing is often questioned by finance teams because it is a "soft" cost. However, the economic outcomes are quantifiable.</p>
 <h3 id="support-ticket-deflection">Support ticket deflection</h3>
-<p>High-quality documentation is a defensive asset. By reducing the documentation-to-support ratio, you allow your senior engineers to spend more time on high-leverage architectural work and less time on repetitive "how-to" questions. This is a direct shift from Opex (maintenance) to Capex (new feature value).</p>
+<p>High-quality documentation is a defensive asset. By reducing the documentation-to-support ratio, you allow your senior engineers to spend more time on high-impact architectural work and less time on repetitive "how-to" questions. This is a direct shift from Opex (maintenance) to Capex (new feature value).</p>
 <h3 id="onboarding-velocity">Onboarding velocity</h3>
-<p>The "Time to First Commit" for a new hire is a leading indicator of organizational health. Teams with elite documentation reduce this time by 40-60%. In a competitive hiring market, the ability to make a new engineer productive in their first week is a massive economic advantage.</p>
+<p>The "Time to First Commit" for a new hire is a leading indicator of organizational health. Teams with elite documentation reduce this time by 40-60%, which is exactly why <a href="/blog/developer-onboarding-docs-what-works-what-doesnt/">developer onboarding docs that actually work</a> pay back so quickly. In a competitive hiring market, the ability to make a new engineer productive in their first week is a massive economic advantage.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Architecture Decision Records (ADR) as truth</div>
   <div class="visual-container">
@@ -351,13 +351,13 @@
 
 <p>ADRs are a high-signal example of "Practitioner Writing" that outranks standard wikis. They document the "Why" behind a decision, preventing future engineers from refactoring a "bug" that was actually an intentional architectural trade-off.</p>
 <h2 id="engineering-documentation-as-infrastructure">Engineering documentation as infrastructure</h2>
-<p>Information architecture is the primary competitive moat for developer-first companies in 2026. Technical practitioners reward teams that integrate writing into the product roadmap. </p>
+<p>Information architecture is the primary competitive moat for developer-first companies in 2026, and <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/">durable technical content compounds into a long-term moat</a> for developer tools. Technical practitioners reward teams that integrate writing into the product roadmap. </p>
 <p>Low implementation friction turns a technical blog into infrastructure. Deep practitioner writing becomes a permanent part of the trusted toolkit. Useful content remains relevant because it provides immediate utility to the reader.</p>
 <h2 id="faq">FAQ</h2>
 <p><strong>How do we measure "documentation quality" objectively?</strong>
 Use the DORA attributes as a scorecard. Survey your engineers on "Time to Find Answer" and "Reliability of Source." Correlate these scores with your DORA velocity metrics (Lead Time and Change Failure Rate).</p>
 <p><strong>Is "Documentation as Code" required for these gains?</strong>
-It is the most reliable way to ensure documentation stays current. By treating docs like code—with PR reviews, linting, and automated testing—you reduce the "Updateability" friction that causes traditional wikis to rot.</p>
+It is the most reliable way to ensure documentation stays current. By treating docs like code, with PR reviews, linting, and automated testing, you reduce the "Updateability" friction that causes traditional wikis to rot.</p>
 <p><strong>Should engineers write all the documentation?</strong>
 No. Technical writers provide the structural expertise and editorial discipline. However, engineers must own the "Primary Source" truth. The most effective teams use a hybrid model where engineers draft the technical core and writers optimize for clarity, findability, and the Diátaxis framework.</p>
 <p><strong>What is the "Bus Factor" impact of documentation?</strong>
@@ -476,9 +476,9 @@ self-identified risks or weak spots: The 3000-word target requires deep elaborat
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

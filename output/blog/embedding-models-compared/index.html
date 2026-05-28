@@ -316,19 +316,19 @@
 </div>
 
 <p>These vectors are stored in a vector database alongside the original text and metadata. A user query arrives and is embedded using the same model. The vector database performs a nearest-neighbor search to find the chunks with the highest similarity.</p>
-<p>These chunks are then passed to an LLM as context for the final answer. The embedding model acts as the librarian. The LLM acts as the researcher.</p>
+<p>These chunks are then passed to an LLM as context for the final answer, and many production systems pair dense vectors with <a href="/blog/hybrid-search-bm25-vector-search/">BM25 sparse retrieval in a hybrid search setup</a> to catch exact keyword matches that pure semantic search misses. The embedding model acts as the librarian. The LLM acts as the researcher.</p>
 <p>Failures in this workflow usually happen at the librarian stage. Semantic search is only as good as the geometry of the underlying space. Searching fails when the embedding model cannot understand the semantic relationship between a query and a document.</p>
 <h2 id="api-latency-vs-self-hosted-model-performance">API latency vs self-hosted model performance</h2>
 <p>Embedding large datasets is an asynchronous batch process. Querying them is a synchronous user interaction. Latency matters.</p>
 <p>OpenAI and Cohere typically return vectors in 150ms to 300ms. Such response times are acceptable for many web applications. They might feel sluggish for interactive chat interfaces.</p>
-<p>Self-hosting models like BGE-M3 or Hugging Face's latest encoders can reduce latency to less than 50ms. You gain control over the hardware and eliminate the network hop to a provider's API. The cost is the operational overhead of managing GPU clusters.</p>
+<p>Self-hosting models like BGE-M3 or Hugging Face's latest encoders can reduce latency to less than 50ms, and pushing search even closer to the user with <a href="/blog/local-wasm-vector-benchmarks/">WASM vector databases running in the browser</a> can cut the network hop entirely. You gain control over the hardware and eliminate the network hop to a provider's API. The cost is the operational overhead of managing GPU clusters.</p>
 <p>Large-scale systems often use a hybrid approach. They use a provider's API for the initial embedding of the corpus. They then use a highly optimized, self-hosted model for real-time user queries.</p>
 <p>Such a strategy requires careful alignment to ensure both models project into a compatible space. Re-embedding a small set of results at query time is the most common way to handle this complexity. Consistency in your vector space is required for reliable retrieval.</p>
 <h2 id="accuracy-stability-in-long-context-models">Accuracy stability in long-context models</h2>
 <p>The maximum sequence length for most embedding models is 8192 tokens. Newer models from Jina and Nomic have pushed this to 32k or even 128k tokens. Such expansion sounds like an advantage for processing long documents without chunking.</p>
 <p>My tests show a significant decay in vector stability as the input grows. Embeddings are essentially a weighted average of token hidden states. The semantic signal becomes diluted when you cram 32k tokens into a single 1536-dimension vector.</p>
 <p>The model struggles to maintain the importance of specific facts buried in the middle of a long text. The "Lost in the Middle" phenomenon applies to embedding encoders just as much as to decoder LLMs. Recursive chunking with overlap remains the most reliable strategy for production RAG.</p>
-<p>Small, focused chunks preserve semantic density. You can then use cross-encoders for reranking. You can also implement a parent-document retrieval strategy to give the LLM broader context.</p>
+<p>Small, focused chunks preserve semantic density. You can then use cross-encoders for <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/">reranking your top-k results</a>. You can also implement a parent-document retrieval strategy to give the LLM broader context.</p>
 <p>The long context window on an embedding model is best used for processing large cohesive units like code files. It should not replace a robust chunking strategy. Granularity is your best defense against information loss.</p>
 <h2 id="searching-across-languages-with-vector-alignment">Searching across languages with vector alignment</h2>
 <p>Language-agnostic embeddings allow you to search in one language and retrieve results in another. A query in English can match a document in French if both project into the same neighborhood of the vector space. The alignment is achieved by training models on parallel corpora.</p>
@@ -362,6 +362,10 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="related-card">
+        <div class="related-card-date">2026-05-12</div>
+        <div class="related-card-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      </a>
       <a href="/blog/llm-inference-optimization/" class="related-card">
         <div class="related-card-date">2026-05-06</div>
         <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
@@ -369,10 +373,6 @@
       <a href="/blog/the-memory-hierarchy-why-rag-is-not-enough/" class="related-card">
         <div class="related-card-date">2026-04-29</div>
         <div class="related-card-title">The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</div>
-      </a>
-      <a href="/blog/2026-04-28-asymmetric-retrieval-agent-memory/" class="related-card">
-        <div class="related-card-date">2026-04-28</div>
-        <div class="related-card-title">Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</div>
       </a>
     </div>
   </div>
@@ -454,9 +454,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

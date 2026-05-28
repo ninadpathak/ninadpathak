@@ -21,7 +21,7 @@ Working memory is fast and volatile. It disappears when the context resets. I ra
 
 Working memory has hard limits. The context window caps it. When I push an agent toward 200 turns in a single session, I start seeing degradation even when retrieval is working perfectly. The model simply has too much to reason over.
 
-If you want to understand how context windows fit into this picture, I wrote about [LLM context windows explained](/articles/llm-context-windows-explained) and how they interact with different memory systems.
+If you want to understand how context windows fit into this picture, I wrote about [LLM context windows explained](/blog/llm-context-windows-explained/) and how they interact with different memory systems.
 
 ### Episodic memory: what happened
 
@@ -31,7 +31,7 @@ When a DevOps agent recalls that "the last deployment on Friday failed because t
 
 The failure mode I see most often is treating episodic memory like a database. Engineers build retrieval pipelines that query episodic storage with semantic similarity. The user asks "what went wrong with my deployments" and the agent returns semantically similar past events, most of which are irrelevant because the user wants a chronological account, not a topic cluster.
 
-I wrote about why this asymmetry breaks RAG pipelines in [asymmetric retrieval and why it breaks your agent memory](/articles/asymmetric-retrieval-agent-memory). The short version: episodic recall is directional in a way that semantic search cannot model.
+I wrote about why this asymmetry breaks RAG pipelines in [asymmetric retrieval and why it breaks your agent memory](/blog/asymmetric-retrieval-agent-memory/). The short version: episodic recall is directional in a way that semantic search cannot model.
 
 ### Semantic memory: what is true
 
@@ -41,7 +41,14 @@ A coding agent's semantic memory contains facts like "Python's list.sort() is st
 
 When semantic memory is wrong, the agent confidently misinforms. When episodic memory is wrong, the agent contradicts itself. The error signatures are completely different, and debugging them requires different tools.
 
-I keep coming back to the [memory hierarchy in AI systems](/articles/memory-hierarchy-in-ai-systems) when thinking about where semantic memory sits relative to retrieval. The hierarchy framing helps because it makes clear that semantic memory is a layer, not the whole system.
+I keep coming back to the [memory hierarchy in AI systems](/blog/memory-hierarchy-in-ai-systems/) when thinking about where semantic memory sits relative to retrieval. The hierarchy framing helps because it makes clear that semantic memory is a layer, not the whole system.
+
+<div class="visual-wrapper">
+  <div class="visual-title">THE THREE MEMORY TYPES</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/three-memory-types.html" title="Working, episodic, and semantic memory side by side: what each stores and its lifespan" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## Why agents get the types confused
 
@@ -85,4 +92,4 @@ These three failure modes look completely different. If you are debugging with a
 
 The three memory types are not academic distinctions. They correspond to different information, different retrieval mechanisms, and different failure modes. An agent that treats a learned fact the same as a past event will fail in predictable ways. An agent that routes information by type will be easier to debug and more reliable in production.
 
-I wrote this because the memory hierarchy framing in my earlier post did not go far enough in separating these types. The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026) covers the landscape. This post is about the specific architectural decisions that determine whether your agent's memory actually works.
+I wrote this because the memory hierarchy framing in my earlier post did not go far enough in separating these types. The [state of AI agent memory in 2026](/blog/state-of-ai-agent-memory-2026/) covers the landscape. This post is about the specific architectural decisions that determine whether your agent's memory actually works.

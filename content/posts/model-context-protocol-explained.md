@@ -34,15 +34,20 @@ Such modularity enables "dynamic tool discovery." An agent can query an MCP serv
 
 ## How the protocol works
 
-The communication flow is predictable. The host initiates a connection to the server. The server responds with a list of available resources and tools. Each tool includes a name and a description. It also includes a JSON Schema defining the required input arguments.
+The communication flow is predictable. The host initiates a connection to the server. The server responds with a list of available resources and tools. Each tool includes a name and a description. It also includes a JSON Schema defining the required input arguments, the same mechanism behind [structured outputs and function calling in LLMs](/blog/structured-outputs-llms-json-mode-function-calling/).
 
 The model generates a tool call based on these definitions. The host forwards this request to the MCP server. The server executes the function and returns the result. Such a structured loop minimizes the probability of hallucinated arguments. It provides a reliable boundary for security and rate limiting.
 
-
+<div class="visual-wrapper">
+  <div class="visual-title">REQUEST FLOW: HOST &rarr; CLIENT &rarr; SERVER &rarr; BACK</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/mcp-architecture.html" title="MCP request flowing from host through the client bridge to a server and back" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## MCP inside an agent harness
 
-MCP is most powerful when integrated into an agent harness. The harness manages the high-level reasoning loop. MCP handles the granular task of tool execution and data retrieval. This combination creates a robust production environment.
+MCP is most powerful when integrated into [an agent harness, the infrastructure layer your LLM agent actually needs](/blog/agent-harnesses/). The harness manages the high-level reasoning loop. MCP handles the granular task of tool execution and data retrieval. This combination creates a robust production environment.
 
 The harness uses MCP to fetch real-time context. It might query a database or pull the latest logs from a monitoring tool. Such data is then injected into the prompt assembler. MCP provides the pipes. The harness provides the brain.
 

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Drives the Loop</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:14px;}
+.cols{display:flex;gap:20px;width:100%;max-width:600px;align-items:stretch;}
+.col{flex:1;border:1px solid var(--border);border-radius:5px;background:var(--bg-2);padding:14px 12px;box-sizing:border-box;display:flex;flex-direction:column;}
+
+.hdr{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-3);}
+.sub{font-family:var(--mono);font-size:9px;letter-spacing:0.06em;color:var(--text-2);margin-top:4px;min-height:24px;line-height:1.4;}
+
+.driver{
+  margin:12px 0 14px;text-align:center;font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--border);border-radius:3px;
+  padding:6px;color:var(--text-3);transition:color 0.3s linear,border-color 0.3s linear,background 0.3s linear;
+}
+.col.agent .driver{color:var(--accent);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--bg-1));}
+
+.flow{display:flex;flex-direction:column;gap:0;flex:1;}
+.cell{
+  display:flex;align-items:center;gap:8px;padding:6px 0;
+  font-family:var(--mono);font-size:10px;
+}
+.dot{width:9px;height:9px;border-radius:50%;border:1px solid var(--text-3);flex:0 0 auto;background:var(--bg-1);transition:background 0.25s linear,border-color 0.25s linear,box-shadow 0.25s linear;}
+.cell .who{flex:0 0 42px;font-size:7.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);}
+.cell .act{flex:1;color:var(--text-2);}
+.connector{height:12px;border-left:1px dashed var(--border);margin-left:4px;}
+
+.cell.on .dot{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent);}
+.cell.on .act{color:var(--text-1);}
+.cell.on .who{color:var(--accent);}
+
+/* loop-back marker for the agent column */
+.loopback{
+  display:flex;align-items:center;gap:6px;margin-top:6px;
+  font-family:var(--mono);font-size:8px;letter-spacing:0.08em;color:var(--text-3);
+}
+.loopback .arc{flex:0 0 auto;color:var(--accent);font-size:11px;}
+
+@media (max-width:600px){
+  .cols{flex-direction:column;gap:14px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="cols">
+
+    <div class="col assistant" id="col-assistant">
+      <div class="hdr">Assistant</div>
+      <div class="sub">Loop lives OUTSIDE the system.</div>
+      <div class="driver">Human drives each turn</div>
+      <div class="flow">
+        <div class="cell" data-i="0"><span class="dot"></span><span class="who">human</span><span class="act">write prompt</span></div>
+        <div class="connector"></div>
+        <div class="cell" data-i="1"><span class="dot"></span><span class="who">system</span><span class="act">respond / call 1 tool</span></div>
+        <div class="connector"></div>
+        <div class="cell" data-i="2"><span class="dot"></span><span class="who">human</span><span class="act">read, decide next</span></div>
+        <div class="connector"></div>
+        <div class="cell" data-i="3"><span class="dot"></span><span class="who">human</span><span class="act">write next prompt</span></div>
+      </div>
+      <div class="loopback"><span class="arc">&crarr;</span> human decides when to stop</div>
+    </div>
+
+    <div class="col agent" id="col-agent">
+      <div class="hdr">Agent</div>
+      <div class="sub">Loop lives INSIDE the system.</div>
+      <div class="driver">Agent drives the loop</div>
+      <div class="flow">
+        <div class="cell" data-i="0"><span class="dot"></span><span class="who">human</span><span class="act">give a goal</span></div>
+        <div class="connector"></div>
+        <div class="cell" data-i="1"><span class="dot"></span><span class="who">agent</span><span class="act">plan / pick tool</span></div>
+        <div class="connector"></div>
+        <div class="cell" data-i="2"><span class="dot"></span><span class="who">agent</span><span class="act">act, observe result</span></div>
+        <div class="connector"></div>
+        <div class="cell" data-i="3"><span class="dot"></span><span class="who">agent</span><span class="act">retry / stop, self-decide</span></div>
+      </div>
+      <div class="loopback"><span class="arc">&crarr;</span> agent loops until goal met</div>
+    </div>
+
+  </div>
+</div>
+<script>
+const aCells=Array.from(document.querySelectorAll('#col-assistant .cell'));
+const gCells=Array.from(document.querySelectorAll('#col-agent .cell'));
+let i=0;
+function step(){
+  aCells.forEach(c=>c.classList.remove('on'));
+  gCells.forEach(c=>c.classList.remove('on'));
+  aCells[i].classList.add('on');
+  gCells[i].classList.add('on');
+  i=(i+1)%4;
+}
+step();
+setInterval(step,1300);
+</script>
+</body>
+</html>

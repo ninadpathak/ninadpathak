@@ -14,7 +14,7 @@ This guide is about making token costs visible, predictable, and controllable. N
 
 Tokens are not bytes. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.
 
-Here is the current pricing landscape as of Q2 2026, rounded to three significant figures. Numbers shift frequently — I check the API pricing pages before architecting around a specific rate. Always.
+Here is the current pricing landscape as of Q2 2026, rounded to three significant figures. Numbers shift frequently. I check the API pricing pages before architecting around a specific rate. Always.
 
 | Model | Input (per 1M tokens) | Output (per 1M tokens) |
 |---|---|---|
@@ -30,11 +30,18 @@ Here is the current pricing landscape as of Q2 2026, rounded to three significan
 | Gemini 3.1 Pro (<=200K ctx) | $2 | $12 |
 | Gemini 3.1 Pro (>200K ctx) | $4 | $18 |
 
-A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds. This is the math that bites you.
+A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds, and [bigger context windows are not always better for cost or accuracy](/blog/llm-context-windows-explained/). This is the math that bites you.
+
+<div class="visual-wrapper">
+  <div class="visual-title">TOKEN BUDGET</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/token-budget.html" title="A single request budget split into system prompt, history, retrieved context, and output, with a per-request cost readout" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## Counting tokens before you spend them
 
-The most basic cost control technique is knowing how many tokens a request will consume before you send it. Every major SDK provides a token counting utility.
+The most basic cost control technique is [counting how many tokens a request will consume before you send it](/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/). Every major SDK provides a token counting utility.
 
 ```python
 from anthropic import Anthropic
@@ -125,7 +132,7 @@ def llm_with_budget(prompt: str, model: str = "gpt-5.4") -> str:
 
 This keeps your spend rate bounded even if traffic spikes unexpectedly. I have watched this prevent a $2,000 weekend bill from becoming a $12,000 weekend bill.
 
-## Prompt compression: the high-leverage move
+## Prompt compression: the high-impact move
 
 The single most effective cost reduction technique is sending fewer tokens. Every token you remove from the input is a token you do not pay for twice.
 
@@ -185,7 +192,7 @@ The cost of the routing call is negligible. The savings from sending 80% of quer
 
 Token costs are incurred on every new request. If your application handles repetitive or similar queries, response caching can eliminate a large fraction of your bill.
 
-OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object and the model processes them at a deep discount, typically 90% off input token pricing.
+OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object and the model processes them at a deep discount, typically 90% off input token pricing. I dig into [when the prompt caching math actually pays off](/blog/prompt-caching-what-it-is-and-when-the-math-works/) separately.
 
 ```python
 # Anthropic caching example

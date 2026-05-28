@@ -250,7 +250,7 @@
 <li>Does the reader need to take action before or after upgrading?</li>
 <li>Is the risk level tied to a removal, a default change, or a new limit?</li>
 </ol>
-<p>"Updated authentication middleware" is a weak bullet. "Default token expiry reduced from 24 hours to 1 hour; update refresh logic before upgrading to prevent session drops" is a trust-building bullet. One describes the work. The other describes the consequence.</p>
+<p>"Updated authentication middleware" is a weak bullet. "Default token expiry reduced from 24 hours to 1 hour, so update refresh logic before upgrading to prevent session drops" is a trust-building bullet. One describes the work. The other describes the consequence.</p>
 <h2 id="security-disclosure-is-the-highest-form-of-trust">Security disclosure is the highest form of trust</h2>
 <p>Security notes are the most critical part of the document. Modern standards have moved security from a footnote to a primary section. Trust here requires total transparency, including CVE IDs and impact assessments.</p>
 <p>I look at how Kubernetes handles <a href="https://kubernetes.io/releases/notes">release notes</a> for examples of ecosystem-scale disclosure. They push readers toward searchable notes because large systems cannot rely on memory. Inclusion of a <strong>CVE (Common Vulnerabilities and Exposures) ID</strong> directly in the note allows security teams to cross-reference the fix with their own scanners.</p>
@@ -460,9 +460,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

@@ -10,13 +10,20 @@ LLMs have a context window. That does not mean they have memory. When I started 
 
 I have shipped memory management layers into production pipelines handling tens of thousands of agent sessions. I have benchmarked eviction strategies, debugged summarization drift, and watched KV caches eat GPU memory faster than anything else. Here is what I have learned.
 
+<div class="visual-wrapper">
+  <div class="visual-title">How LLM Memory Management Works</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/memory-management.html" title="LLM memory management eviction and retention" loading="lazy"></iframe>
+  </div>
+</div>
+
 ##The Two Memory Types Your Agent Actually Uses
 
 Every LLM agent operates with two distinct memory mechanisms. Calling them both "memory" causes confusion, so let me be precise.
 
 **Explicit memory** is managed by your application layer. You decide what to store, how to index it, and when to retrieve it. This includes vector databases, key-value stores, session logs, and any custom retrieval layer you build. Explicit memory is where your agent's long-term knowledge lives between sessions.
 
-**Implicit memory** is what the model generates internally during a forward pass. The attention mechanism builds and maintains representations as tokens flow through layers. The KV cache is the physical manifestation of implicit memory on GPU memory. You do not directly control what the model "remembers" within a forward pass; the transformer's attention patterns determine that. You only control what enters the context window.
+**Implicit memory** is what the model generates internally during a forward pass. The attention mechanism builds and maintains representations as tokens flow through layers. The KV cache is the physical manifestation of implicit memory on GPU memory. You do not directly control what the model "remembers" within a forward pass. The transformer's attention patterns determine that. You only control what enters the context window.
 
 The distinction matters because different strategies apply to each type. You can build sophisticated explicit memory layers, but if you ignore implicit memory management, you will still hit performance walls when the KV cache balloons during long inference runs.
 
@@ -290,15 +297,15 @@ class LettaMemoryManager:
         return memory_list.pop(0)
 ```
 
-The core memory limit forces hard decisions about what matters. You cannot cheat and say "we will fit everything." Engineers coming from traditional software backgrounds struggle with this. Memory management in LLM agents is not about storing everything; it is about deciding what to forget.
+The core memory limit forces hard decisions about what matters. You cannot cheat and say "we will fit everything." Engineers coming from traditional software backgrounds struggle with this. Memory management in LLM agents is not about storing everything. It is about deciding what to forget.
 
 For a comparison with other agent frameworks, see [How Memory Works in DeerFlow](/blog/how-memory-works-in-deerflow/) and [Short-Term Memory for AI Agents](/blog/short-term-memory-for-ai-agents/).
 
 ##The Forgetting Problem: Why Your Agent Loses Things
 
-The forgetting problem is the gap between what you want your agent to remember and what it actually retains across interactions. This is not a single problem; it is a stack of related failures.
+The forgetting problem is the difference between what you want your agent to remember and what it actually retains across interactions. This is not a single problem. It is a stack of related failures.
 
-**Retrieval failure** happens when the agent needs a memory but does not query for it. This is not a memory system failure; it is a retrieval trigger failure. The agent must decide to look for relevant memory before it can retrieve it. If the trigger logic is poor, the agent operates blind.
+**Retrieval failure** happens when the agent needs a memory but does not query for it. This is not a memory system failure. It is a retrieval trigger failure. The agent must decide to look for relevant memory before it can retrieve it. If the trigger logic is poor, the agent operates blind.
 
 **Attribution failure** happens when the agent retrieves a memory but cannot correctly attribute the information. It knows something happened but cannot connect it to the right person, session, or context. This is common when memory entries lack sufficient metadata.
 
@@ -348,7 +355,7 @@ RAG and explicit memory management solve different problems, and conflating them
 
 RAG (Retrieval Augmented Generation) answers specific questions by searching a large document corpus. You have a question, you retrieve relevant documents, you include them in the context. RAG is optimized for question answering against large external knowledge bases.
 
-Memory management answers the question "what does this agent know about this user/session/context?" Memory is not answering questions; it is maintaining a running model of state that the agent uses to behave consistently across time.
+Memory management answers the question "what does this agent know about this user/session/context?" Memory is not answering questions. It is maintaining a running model of state that the agent uses to behave consistently across time.
 
 [RAG vs Memory](/blog/rag-vs-memory/) goes deep on this distinction. The short version: if you are storing documentation to answer questions, use RAG. If you are storing interaction history to maintain identity and continuity, use memory management. Most production systems need both.
 
@@ -395,7 +402,7 @@ Context is what is currently in the model's input buffer. Memory is what you hav
 
 **How often should memory entries be summarized?**
 
-Summarization should happen when you approach 70-80% of your active buffer capacity. Do not wait for overflow. Summarize early and summarize incrementally. Avoid multi-level summarization chains where you summarize a summary; store original entries alongside summaries and use the summary only when the original is archived.
+Summarization should happen when you approach 70-80% of your active buffer capacity. Do not wait for overflow. Summarize early and summarize incrementally. Avoid multi-level summarization chains where you summarize a summary. Store original entries alongside summaries and use the summary only when the original is archived.
 
 **Can I use Redis for LLM memory management?**
 

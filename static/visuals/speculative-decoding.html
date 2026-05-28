@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speculative Decoding: Draft Proposes, Target Verifies in Parallel</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.stage {
+  width: 100%; height: 100vh; box-sizing: border-box;
+  padding: 18px 22px; display: flex; flex-direction: column;
+}
+.header {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-3); text-align: center; margin-bottom: 16px;
+}
+.lanes { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 18px; min-height: 0; }
+
+.lane { display: flex; align-items: center; gap: 12px; }
+.lane-label {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-3); width: 96px; flex-shrink: 0; text-align: right; line-height: 1.4;
+}
+.lane-label b { display: block; color: var(--text-1); font-size: 11px; }
+
+.toks { display: flex; gap: 6px; flex: 1; }
+.tok {
+  flex: 1; height: 34px; border: 1px solid var(--border); border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; color: var(--text-3);
+  background: var(--bg-1); transition: all 0.2s linear;
+}
+/* draft proposals */
+.tok.proposed { border-color: var(--text-2); color: var(--text-2); border-style: dashed; }
+/* target verdicts */
+.tok.accepted { border-color: var(--accent); color: var(--accent); background: var(--bg-2); border-style: solid; font-weight: 600; }
+.tok.rejected { border-color: var(--border); color: var(--text-3); text-decoration: line-through; opacity: 0.5; border-style: solid; }
+
+.verify-note {
+  font-family: var(--mono); font-size: 9px; color: var(--text-3);
+  text-align: center; margin-top: 2px; letter-spacing: 0.05em;
+}
+
+.stats { display: flex; justify-content: center; gap: 28px; margin-top: 18px; }
+.stat { text-align: center; }
+.stat .sv { font-family: var(--mono); font-size: 18px; font-weight: 600; color: var(--accent); }
+.stat .sl { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin-top: 2px; }
+
+.footnote {
+  font-family: var(--mono); font-size: 9.5px; color: var(--text-3);
+  text-align: center; letter-spacing: 0.05em; margin-top: 12px;
+}
+.footnote b { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 600px) {
+  .lane { flex-direction: column; align-items: stretch; gap: 6px; }
+  .lane-label { width: auto; text-align: left; }
+  .stats { gap: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="header">Speculative Decoding / Draft Proposes, Target Verifies</div>
+
+  <div class="lanes">
+    <div class="lane">
+      <div class="lane-label">small<b>DRAFT</b>fast</div>
+      <div class="toks" id="draft">
+        <div class="tok">t1</div><div class="tok">t2</div><div class="tok">t3</div>
+        <div class="tok">t4</div><div class="tok">t5</div>
+      </div>
+    </div>
+
+    <div class="lane">
+      <div class="lane-label">large<b>TARGET</b>parallel</div>
+      <div class="toks" id="target">
+        <div class="tok">t1</div><div class="tok">t2</div><div class="tok">t3</div>
+        <div class="tok">t4</div><div class="tok">t5</div>
+      </div>
+    </div>
+    <div class="verify-note">target checks all 5 in one parallel step / keeps the accepted prefix, discards the rest</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="sv" id="accepted">0</div><div class="sl">tokens kept / step</div></div>
+    <div class="stat"><div class="sv">2-3x</div><div class="sl">net speedup</div></div>
+  </div>
+
+  <div class="footnote">One target pass yields <b>multiple tokens</b> using idle compute. Higher acceptance rate = bigger win.</div>
+</div>
+<script>
+  var draft = document.getElementById('draft').children;
+  var target = document.getElementById('target').children;
+  var acc = document.getElementById('accepted');
+  var N = 5;
+
+  function reset(){
+    for (var i=0;i<N;i++){
+      draft[i].className = 'tok'; target[i].className = 'tok';
+    }
+    acc.textContent = '0';
+  }
+
+  function run(){
+    reset();
+    // 1) draft proposes N tokens sequentially
+    for (var i=0;i<N;i++){
+      (function(i){ setTimeout(function(){ draft[i].classList.add('proposed'); }, 150 + i*140); })(i);
+    }
+    // 2) target verifies in one parallel step; accept first K, reject the rest
+    var K = 3 + Math.floor(Math.random()*2); // 3 or 4 accepted (acceptance varies)
+    setTimeout(function(){
+      var kept = 0;
+      for (var i=0;i<N;i++){
+        if (i < K){ target[i].classList.add('accepted'); kept++; }
+        else { target[i].classList.add('rejected'); }
+      }
+      acc.textContent = String(kept);
+    }, 150 + N*140 + 300);
+  }
+
+  run();
+  setInterval(run, 3600);
+</script>
+</body>
+</html>

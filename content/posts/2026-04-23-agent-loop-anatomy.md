@@ -1,6 +1,7 @@
 ---
 title: "The Anatomy of an Agent Loop: Perceive, Think, Act, Remember"
 date: "2026-04-23"
+slug: "agent-loop-anatomy"
 description: "The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks."
 tags: ["ai agents", "agent architecture", "loop design"]
 status: published
@@ -16,7 +17,14 @@ The instinct is to treat the agent as a single inference call that produces an a
 
 The loop exists because the agent needs a cycle it can repeat. Each cycle adds a little more to the task state. The loop terminates when the task is complete or when a stop condition is hit.
 
-I wrote about how different agent architectures handle this loop in my post on [the taxonomy of AI agents](/articles/the-taxonomy-of-ai-agents). Reflex agents skip the think phase almost entirely. Deliberative agents spend significant compute in think before acting. That structural difference matters more than most framework documentation suggests.
+I wrote about how different agent architectures handle this loop in my post on [the taxonomy of AI agents](/blog/the-taxonomy-of-ai-agents/). Reflex agents skip the think phase almost entirely. Deliberative agents spend significant compute in think before acting. That structural difference matters more than most framework documentation suggests.
+
+<div class="visual-wrapper">
+  <div class="visual-title">THE FOUR-PHASE AGENT LOOP</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/agent-loop-cycle.html" title="A continuous loop cycling through perceive, think, act, and remember, with a pulse traveling the circle and highlighting each phase in turn" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## Perceive: what the agent sees before it decides
 
@@ -26,7 +34,7 @@ In practice, perceive means scanning the conversation history, any retrieved doc
 
 The failure mode here is context contamination. If the context window contains stale information from a previous step, the perceive phase can lock onto the wrong picture. I have seen this happen when a tool returns an error that gets ignored or overwritten by subsequent steps. The agent perceives the error as resolved when it is not.
 
-Structured logging in the [agent harness](/articles/agent-harnesses) is what lets you detect this. If you cannot see what the agent was attending to at each perceive step, you cannot diagnose why it made the wrong call.
+Structured logging in the [agent harness](/blog/agent-harnesses/) is what lets you detect this. If you cannot see what the agent was attending to at each perceive step, you cannot diagnose why it made the wrong call.
 
 ## Think: reasoning over the perceived state
 
@@ -36,7 +44,7 @@ The think phase is where the model evaluates whether it has enough information t
 
 Here is what surprises engineers new to agent design: the think phase cannot be observed directly in most frameworks. You get the output of think, not the process. This is fine in happy-path scenarios. It becomes a serious debugging problem when the agent makes a reasoning error that is only visible twenty steps later.
 
-Token budget management happens here too. The think phase consumes tokens. A deliberative agent that reasons extensively before acting will spend more per step than a reflex agent that acts on pattern matching. I covered token budget strategies in [LLM token budgets and cost control](/articles/llm-token-budgets-cost-control). The think phase is usually where that budget gets eaten.
+Token budget management happens here too. The think phase consumes tokens. A deliberative agent that reasons extensively before acting will spend more per step than a reflex agent that acts on pattern matching. I covered token budget strategies in [LLM token budgets and cost control](/blog/llm-token-budgets-cost-control/). The think phase is usually where that budget gets eaten.
 
 ## Act: calling tools and producing outputs
 
@@ -44,7 +52,7 @@ Act is the phase where the agent does something. That something might be calling
 
 The act phase is where the loop interacts with the external world. A tool call passes arguments to an API and receives a result. The agent receives that result and feeds it back into the loop as a perceived input for the next cycle.
 
-Tool schema design determines whether the act phase succeeds or fails. A poorly designed schema produces malformed arguments that the tool rejects. A well-designed schema with clear types and validation catches argument errors before the tool is even called. [Tool schema design for reliability](/articles/tool-schema-design-for-reliability) goes deep on what makes schemas actually work in production.
+Tool schema design determines whether the act phase succeeds or fails. A poorly designed schema produces malformed arguments that the tool rejects. A well-designed schema with clear types and validation catches argument errors before the tool is even called. [Tool schema design for reliability](/blog/structured-outputs-llms-json-mode-function-calling/) goes deep on what makes schemas actually work in production.
 
 The act phase also has an implicit cost. Every tool call has latency. Some tool calls fail. The loop needs policies for both. Timeout enforcement and retry logic belong in the harness, not scattered in tool implementations.
 
@@ -54,9 +62,9 @@ Remember is the phase most agents get wrong. This is where the agent updates its
 
 The simplest version of remember is appending the last tool result to the conversation history. That works for short tasks. It breaks for long ones.
 
-The problem is that the context window has fixed capacity. Remembering everything means eventually forgetting something. The [memory hierarchy in AI systems](/articles/memory-hierarchy-in-ai-systems) covers the layered approach that actually solves this. Short-term working memory lives in the context window. Long-term facts get written to external storage and retrieved when relevant.
+The problem is that the context window has fixed capacity. Remembering everything means eventually forgetting something. The [memory hierarchy in AI systems](/blog/memory-hierarchy-in-ai-systems/) covers the layered approach that actually solves this. Short-term working memory lives in the context window. Long-term facts get written to external storage and retrieved when relevant.
 
-The [context windows vs memory](/articles/context-windows-vs-memory) post makes the case that conflating these two is how you build expensive systems that still lose track of what they were doing. Remember is not just appending. It is deciding what to keep, what to compress, and what to evict.
+The [context windows vs memory](/blog/context-windows-vs-memory/) post makes the case that conflating these two is how you build expensive systems that still lose track of what they were doing. Remember is not just appending. It is deciding what to keep, what to compress, and what to evict.
 
 Checkpointing is the production version of remember. Writing state to durable storage after each successful act phase means the loop can recover from failures without restarting from scratch. This is not optional for agents that run longer than a few minutes.
 
@@ -70,7 +78,7 @@ Infinite loops happen in act. The agent calls a tool, gets a result that looks l
 
 Tool result loss happens in remember. A tool call returns a result that the agent does not append to context. The next iteration proceeds as if the tool call never happened. This is usually a bug in how the harness handles tool results, not a model failure. Structured logging of every tool call and its result is the fix.
 
-The [production AI agent errors](/articles/production-ai-agent-errors) post has a fuller taxonomy of what goes wrong. The loop phases are the right frame for understanding those errors because each phase has its own failure modes.
+The [production AI agent errors](/blog/production-ai-agent-errors/) post has a fuller taxonomy of what goes wrong. The loop phases are the right frame for understanding those errors because each phase has its own failure modes.
 
 ## The loop is a design tool
 

@@ -35,7 +35,7 @@ I tasked both agents with three specific objectives:
 
 ## Claude Code: supervised autonomy and architectural depth
 
-Claude Code (v2.1.92) operates with a high degree of skepticism. When I initiated the refactor, it didn't just replace callbacks with promises. It performed a dependency analysis and identified that `resetCounter()` needed to reset the promise queue itself—an edge case I hadn't explicitly prompted for.
+Claude Code (v2.1.92) operates with a high degree of skepticism. When I initiated the refactor, it didn't just replace callbacks with promises. It performed a dependency analysis and identified that `resetCounter()` needed to reset the promise queue itself, an edge case I hadn't explicitly prompted for.
 
 <div class="visual-wrapper">
   <div class="visual-title">The solution: atomic queuing and promise chains</div>
@@ -44,7 +44,7 @@ Claude Code (v2.1.92) operates with a high degree of skepticism. When I initiate
   </div>
 </div>
 
-Claude's execution philosophy relies on a "Supervised Autonomy" model. It presents a detailed plan before making multi-file edits, allowing the developer to audit the architectural intent. This reasoning depth comes at a premium—Claude's token usage is significantly higher than Gemini's, but the resulting code requires fewer manual correction loops.
+Claude's execution philosophy relies on a "Supervised Autonomy" model. It presents a detailed plan before making multi-file edits, allowing the developer to audit the architectural intent. This reasoning depth comes at a premium. Claude's token usage is significantly higher than Gemini's, but the resulting code requires fewer manual correction loops.
 
 <div class="visual-wrapper">
   <div class="visual-title">Claude Code: parallel subagent architecture</div>
@@ -72,7 +72,7 @@ During the benchmark, I observed Claude Code triggering swap memory more frequen
   </div>
 </div>
 
-To prevent "Context Poisoning"—where irrelevant history from a previous task distracts the model—Gemini CLI uses an isolation pattern I call **Context Quarantine**. Each sub-task is given a fresh, pruned window, whereas Claude tends to keep the entire session history available for better cross-file reasoning.
+To prevent "Context Poisoning" (where irrelevant history from a previous task distracts the model), Gemini CLI uses an isolation pattern I call **Context Quarantine**. Each sub-task is given a fresh, pruned window, whereas Claude tends to keep the entire session history available for better cross-file reasoning.
 
 ## Economic outcomes of local agentic loops
 
@@ -105,7 +105,7 @@ The impact of these tools on [engineering velocity](/blog/engineering-velocity-d
 
 ## Engineering documentation as infrastructure
 
-The competitive moat for developers in 2026 is the ability to orchestrate these agents effectively. Information architecture is no longer just for humans; it is the operating system for your agentic CLIs. 
+The competitive moat for developers in 2026 is the ability to orchestrate these agents effectively. Information architecture is no longer just for humans. It is the operating system for your agentic CLIs. 
 
 When you treat your repository as infrastructure and provide high-signal documentation (like ADRs), your agents become significantly more capable. Practitioner writing remains relevant because it provides the "intent" that agents use to resolve ambiguity.
 

@@ -278,6 +278,13 @@
 <p>What you put in <code>CLAUDE.md</code> directly controls what Claude knows without you having to explain it every session. I have seen engineers go from Claude making constant architecture mistakes to Claude immediately understanding the stack after adding three paragraphs to this file.</p>
 <p>The agent does not update <code>CLAUDE.md</code> automatically. You write it yourself. This is intentional. <code>CLAUDE.md</code> is meant to encode your decisions and reasoning, not have the agent infer and record its own understanding. The agent can suggest edits to <code>CLAUDE.md</code> if you ask, but it will not rewrite it based on what it observes in your codebase.</p>
 <p>One important constraint. Claude Code reads <code>CLAUDE.md</code> on every startup, but it does not re-read it mid-session unless you specifically reference it. If you update the file during a session, the agent will not notice until the next session starts.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Claude Code Memory Layers</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/claude-code-memory.html" title="Claude Code layered memory architecture" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="the-memory-database-sqlite-at-claudememorydb">The memory database: SQLite at ~/.claude/memory.db</h2>
 <p>When you run Claude Code with the <code>--memory</code> flag, the agent gains the ability to store and retrieve information across sessions using a local SQLite database. Without this flag, the database does not exist. I verified this on my system: running <code>ls ~/.claude/</code> showed no <code>memory.db</code> file until I explicitly initialized memory with the <code>--memory</code> flag.</p>
 <p>The database lives at <code>~/.claude/memory.db</code> and gets created automatically on first use. The schema is straightforward.</p>
@@ -317,7 +324,7 @@
 2. <code>CLAUDE.md</code> (project root)
 3. <code>docs/MEMORY.md</code> (documentation-level, if it exists)
 4. Session-level context you provide on the command line</p>
-<p>The <code>.claude/memory.md</code> file is interesting. Claude Code will create and update this file automatically when working in a project. It records key decisions, architecture choices, and findings from the current project context. I have seen it grow to 800 lines in a complex monorepo over several sessions. This automatic population mirrors how a senior engineer takes notes during onboarding, similar to what I described in my <a href="/blog/ai-agent-memory-architecture/">AI agent memory architecture</a> post.</p>
+<p>The <code>.claude/memory.md</code> file is interesting. Claude Code will create and update this file automatically when working in a project. It records key decisions, architecture choices, and findings from the current project context. I have seen it grow to 800 lines in a complex monorepo over several sessions. This automatic population mirrors how a senior engineer takes notes during onboarding, similar to what I described in my <a href="/blog/memory-hierarchy-in-ai-systems/">AI agent memory architecture</a> post.</p>
 <p>Here is what a real <code>.claude/memory.md</code> might look like after a few sessions:</p>
 <div class="highlight"><pre><span></span><code><span class="gh"># Project Memory</span>
 
@@ -377,7 +384,7 @@ claude<span class="w"> </span><span class="s2">&quot;Review this spec&quot;</spa
 <p>There is a common misconception that more memory means better performance. In practice, cramming everything into context causes the agent to spend tokens on navigation rather than actual work. I have run experiments with 50K token <code>CLAUDE.md</code> files and with tightly focused 10-line files. The tight files almost always win.</p>
 <p>The reason is simple. Claude Code works best when it has precise, high-signal context. A 50-line <code>CLAUDE.md</code> that says "we use PostgreSQL, FastAPI, and Redis" tells the agent exactly what it needs to know about the stack. A 500-line file with full architecture diagrams, team history, and past decisions buries the signal.</p>
 <p>The memory database solves this problem. It allows the agent to store low-priority context separately and retrieve only what is relevant to the current task. The agent decides what to retrieve based on your current request, not on what's in the context window at session start.</p>
-<p>This design mirrors how humans work. You do not walk into a meeting with every document you have ever read in your hands. You bring the ones relevant to today's agenda. Claude Code's memory system works the same way, much like <a href="/blog/context-window-llm-optimization/">context management patterns in AI agents</a> that I have tested extensively.</p>
+<p>This design mirrors how humans work. You do not walk into a meeting with every document you have ever read in your hands. You bring the ones relevant to today's agenda. Claude Code's memory system works the same way, much like <a href="/blog/context-windows-vs-memory/">context management patterns in AI agents</a> that I have tested extensively.</p>
 <h2 id="forgetting-and-memory-pruning">Forgetting And Memory Pruning</h2>
 <p>The memory system includes mechanisms for pruning old or stale entries. The SQLite database does not grow indefinitely. Entries older than 90 days get flagged for review by default. The agent will suggest removing or updating stale entries during sessions.</p>
 <p>For <code>CLAUDE.md</code> and <code>.claude/memory.md</code>, you need to prune manually. I recommend reviewing both files monthly and removing entries that are no longer accurate. Outdated memory is worse than no memory because it causes the agent to act on wrong information with high confidence.</p>
@@ -409,9 +416,9 @@ grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^\d
 <p>This is why the <code>/memory</code> command matters. If the agent discovers something important through tool use, you should ask it to write that to memory. "Remember that the auth service uses JWT with RS256, not HS256" will get stored in the SQLite database for future sessions.</p>
 <h2 id="when-to-use-each-memory-layer">When To Use Each Memory Layer</h2>
 <p>Here is a decision framework I use.</p>
-<p>Use <code>CLAUDE.md</code> for stable, owner-controlled context that changes rarely. Coding standards, architecture decisions, team conventions, environment setup. This is your file. You write it and you maintain it. This is very similar to how you would <a href="/blog/system-prompts-coding-agents/">structure system prompts for AI coding agents</a>, just more durable.</p>
+<p>Use <code>CLAUDE.md</code> for stable, owner-controlled context that changes rarely. Coding standards, architecture decisions, team conventions, environment setup. This is your file. You write it and you maintain it. This is very similar to how you would <a href="/blog/agent-harnesses/">structure system prompts for AI coding agents</a>, just more durable.</p>
 <p>Use <code>.claude/memory.md</code> for agent-maintained observations that the agent discovers through working in the codebase. Found a tricky bug? Document it there. Discovered a non-obvious dependency? Note it. This file is for the agent to record what it learns.</p>
-<p>Use the SQLite memory database for cross-session tracking that spans multiple projects or topics. "Track our migration progress", "remember team preferences", "maintain a known issues list". This is the most powerful layer because it persists and is queryable. I compared this approach to <a href="/blog/ai-agent-memory-architecture/">other AI agent memory systems</a> and found the SQLite-based retrieval consistently outperforms pure file-based approaches for production use.</p>
+<p>Use the SQLite memory database for cross-session tracking that spans multiple projects or topics. "Track our migration progress", "remember team preferences", "maintain a known issues list". This is the most powerful layer because it persists and is queryable. I compared this approach to <a href="/blog/state-of-ai-agent-memory-2026/">other AI agent memory systems</a> and found the SQLite-based retrieval consistently outperforms pure file-based approaches for production use.</p>
 <p>Use command-line context for one-off information that does not need to persist. Pass files, URLs, or conversation context on the command line and let it disappear at the end of the session.</p>
 <h2 id="monitoring-your-memory-footprint">Monitoring Your Memory Footprint</h2>
 <p>You should periodically audit what Claude Code knows about your projects. Run this in any project directory:</p>
@@ -425,8 +432,8 @@ ls<span class="w"> </span>-lh<span class="w"> </span>~/.claude/memory.db
 sqlite3<span class="w"> </span>~/.claude/memory.db<span class="w"> </span><span class="s2">&quot;SELECT COUNT(*) FROM memory_entries;&quot;</span>
 </code></pre></div>
 
-<p>If <code>memory.db</code> is hundreds of megabytes or <code>CLAUDE.md</code> is over 500 lines, it is time for a review. The memory system is meant to be lean and high-signal. Bloated memory causes exactly the problems you are trying to solve. This mirrors <a href="/blog/context-window-llm-optimization/">context window optimization</a> advice I give for LLM deployment: quality over quantity.</p>
-<p>For larger teams, consider adding a <code>CLAUDE.md</code> convention to code reviews. When someone changes the architecture, they should update <code>CLAUDE.md</code> in the same PR. This keeps memory current and distributes ownership. If you are building a <a href="/blog/multi-agent-architecture-patterns/">multi-agent system</a>, the memory conventions become even more important because multiple agents will be reading and writing context simultaneously.</p>
+<p>If <code>memory.db</code> is hundreds of megabytes or <code>CLAUDE.md</code> is over 500 lines, it is time for a review. The memory system is meant to be lean and high-signal. Bloated memory causes exactly the problems you are trying to solve. This mirrors <a href="/blog/llm-context-windows-explained/">context window optimization</a> advice I give for LLM deployment: quality over quantity.</p>
+<p>For larger teams, consider adding a <code>CLAUDE.md</code> convention to code reviews. When someone changes the architecture, they should update <code>CLAUDE.md</code> in the same PR. This keeps memory current and distributes ownership. If you are building a <a href="/blog/multi-agent-vs-single-agent-tradeoffs/">multi-agent system</a>, the memory conventions become even more important because multiple agents will be reading and writing context simultaneously.</p>
 <h2 id="faq">Faq</h2>
 <p><strong>How does Claude Code handle memory in very large codebases?</strong></p>
 <p>In large codebases, Claude Code relies heavily on <code>CLAUDE.md</code> for high-level context and uses the memory database to track project-specific findings. It does not load the entire codebase into context. Instead, it reads files on demand through tools and writes important discoveries to <code>.claude/memory.md</code>. For codebases over 100K lines, I strongly recommend a well-maintained <code>CLAUDE.md</code> with clear module boundaries and ownership.</p>
@@ -545,9 +552,9 @@ sqlite3<span class="w"> </span>~/.claude/memory.db<span class="w"> </span><span 
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

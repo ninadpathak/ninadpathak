@@ -227,9 +227,16 @@
 <p><strong>Short answer:</strong> Mixture of experts replaces each transformer block's feedforward layer with a bank of specialist subnetworks and routes each token through only a small subset. Inference compute scales with active parameters, not total parameters. DeepSeek V3 activates 37B parameters per token out of 671B total, doing roughly the same math per token as a 37B dense model. The catch: all 671B parameters must be loaded into GPU memory before inference begins.</p>
 <h2 id="how-moe-cuts-inference-compute">How MoE cuts inference compute</h2>
 <p>A dense transformer runs every token through every parameter. A 70B model means 70B parameters worth of compute per token, every time.</p>
-<p>A MoE model keeps attention layers unchanged but replaces each block's single feedforward network with a collection of expert networks, typically 8 to 256 per layer. A small learned router assigns each token to the top-K experts — usually 2 to 8. The token goes through only those experts. Everything else is skipped for that token.</p>
+<p>A MoE model keeps attention layers unchanged but replaces each block's single feedforward network with a collection of expert networks, typically 8 to 256 per layer. A small learned router assigns each token to the top-K experts, usually 2 to 8. The token goes through only those experts. Everything else is skipped for that token.</p>
 <p>DeepSeek V3 uses 256 routed experts per layer plus a few shared experts, activating 8 per token. Cameron Wolfe's <a href="https://cameronrwolfe.substack.com/p/moe-llms">technical breakdown of MoE LLMs</a> goes through the parameter math in detail. The <a href="https://arxiv.org/abs/2401.06066">DeepSeekMoE paper</a> and <a href="https://arxiv.org/abs/2405.04434">DeepSeek-V2 paper</a> cover the specific architectural choices behind V3.</p>
-<p>The reason this translates to cost savings is the memory bandwidth bottleneck I explained in <a href="/blog/speculative-decoding-explained/">my piece on speculative decoding</a>. LLM inference spends most of its time waiting for weight reads from DRAM, not running matrix multiplications. If you activate only 37B parameters per forward pass, you do only 37B parameters worth of that weight loading — not 671B worth. A 671B MoE model running 37B active parameters per token does roughly the same math per token as a 37B dense model.</p>
+<p>The reason this translates to cost savings is the memory bandwidth bottleneck I explained in <a href="/blog/speculative-decoding-explained/">my piece on speculative decoding</a>. LLM inference spends most of its time waiting for weight reads from DRAM, not running matrix multiplications. If you activate only 37B parameters per forward pass, you do only 37B parameters worth of that weight loading, not 671B worth. A 671B MoE model running 37B active parameters per token does roughly the same math per token as a 37B dense model.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">SPARSE EXPERT ROUTING: 8 OF 256 ACTIVATE PER TOKEN</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/moe-routing.html" title="MoE router activating only 8 of 256 experts per token" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="dense-vs-moe-across-the-dimensions-that-matter">Dense vs MoE across the dimensions that matter</h2>
 <table>
 <thead>
@@ -258,7 +265,7 @@
 <tr>
 <td>Fine-tuning</td>
 <td>Straightforward</td>
-<td>Harder — routing disrupts expert specialization</td>
+<td>Harder, routing disrupts expert specialization</td>
 </tr>
 <tr>
 <td>API cost at provider scale</td>
@@ -275,13 +282,13 @@
 <p>The DeepSeek-V2 paper compared their MoE model directly against their 67B dense model: 5.76x improvement in maximum generation throughput, 42.5% lower training cost, 93.3% reduction in KV cache size. That throughput multiplier is what makes the economics work at API scale. When many concurrent requests share the same loaded weights, per-token cost drops considerably.</p>
 <h2 id="the-memory-catch">The memory catch</h2>
 <p>The router decides which experts to send each token to based on the token itself, at inference time. Until the router runs, you do not know which experts you need. So all of them must be in GPU memory before processing begins.</p>
-<p>Running DeepSeek V3 requires holding 671B parameters in VRAM. In FP8 quantization, that is over 1.3TB. In BF16, more. NVIDIA's <a href="https://blogs.nvidia.com/blog/mixture-of-experts-frontier-models/">Blackwell MoE overview</a> cites 10x faster inference and 1/10 the token cost — those numbers are accurate, but they apply in the context of NVL72-class hardware.</p>
+<p>Running DeepSeek V3 requires holding 671B parameters in VRAM. In FP8 quantization, that is over 1.3TB. In BF16, more. NVIDIA's <a href="https://blogs.nvidia.com/blog/mixture-of-experts-frontier-models/">Blackwell MoE overview</a> cites 10x faster inference and 1/10 the token cost. Those numbers are accurate, but they apply in the context of NVL72-class hardware.</p>
 <p>When you call DeepSeek's API, you are benefiting from their hardware and from running at high enough throughput to amortize that footprint across many requests. Self-hosting means facing the same memory footprint as self-hosting a dense model of the same total size, with the compute advantage only materializing at high concurrent request volumes.</p>
 <h2 id="routing-is-where-most-of-the-training-difficulty-lives">Routing is where most of the training difficulty lives</h2>
 <p>Without an explicit mechanism to prevent it, the gating network converges on a few generalist experts and routes most tokens to them. This is expert collapse. If 240 of 256 experts never get used, you paid the memory cost for 256 and got the performance of 16.</p>
 <p>The standard fix is an auxiliary loss term that penalizes uneven expert utilization during training. <a href="https://arxiv.org/abs/2408.15664">2024 research</a> found that tuning this loss weight is a frustrating balancing act: too weak and you get collapse, too strong and the interference gradients hurt model quality. You trade one problem for another.</p>
 <p>DeepSeek's approach in V3 removes the auxiliary loss entirely, replacing it with per-expert bias terms on routing scores, dynamically updated based on recent utilization. Overloaded experts get their bias nudged down, reducing selection probability in future batches. It is a feedback control loop rather than a penalty. The <a href="https://huggingface.co/blog/NormalUhr/moe-balance">Hugging Face post on MoE load balancing</a> traces how balancing strategies have evolved. Cerebras's <a href="https://www.cerebras.ai/blog/moe-guide-router">router comparison</a> makes the case that routing algorithm choice affects final model quality more than most people expect.</p>
-<p>Expert specialization is also messier than the diagrams imply. Research teams have tried to interpret what individual experts learn. The results are distributed and noisy — not the clean "expert A handles Python, expert B handles French" story. Maarten Grootendorst's <a href="https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts">visual guide to MoE</a> is the most honest treatment I have seen at showing what routing actually looks like.</p>
+<p>Expert specialization is also messier than the diagrams imply. Research teams have tried to interpret what individual experts learn. The results are distributed and noisy, not the clean "expert A handles Python, expert B handles French" story. Maarten Grootendorst's <a href="https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts">visual guide to MoE</a> is the most honest treatment I have seen at showing what routing actually looks like.</p>
 <h2 id="when-moe-is-and-is-not-the-right-choice">When MoE is and is not the right choice</h2>
 <p>Fine-tuning is harder with MoE. Updating a dense model toward a target domain changes parameters uniformly. Updating a MoE model also shifts routing decisions, which can disrupt expert specialization built during pretraining. The mitigations exist but add complexity. If you need a domain-specific model and are not operating at massive scale, a dense base model is the simpler starting point.</p>
 <p>Benchmark numbers for MoE models are usually measured on tasks that favor routing stability: coding, math, structured reasoning. These have predictable token distributions and consistent expert selection. Open-ended generation, multilingual tasks, and domain-specific workloads with unusual token distributions tend to see more variable performance because routing is less stable on out-of-distribution inputs.</p>
@@ -315,7 +322,7 @@
         <div class="related-card-date">2026-04-26</div>
         <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
       </a>
-      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-21</div>
         <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
       </a>
@@ -399,9 +406,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

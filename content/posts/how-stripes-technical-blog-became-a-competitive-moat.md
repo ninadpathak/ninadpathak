@@ -69,6 +69,13 @@ A founder searching for “Stripe API upgrades,” an engineer searching for web
 
 One reason I think Stripe’s blog became a moat is that the archive keeps widening the company’s right to answer adjacent questions. Stripe no longer only answers “how do I take payments?” Stripe answers “how do I test, observe, version, reconcile, debug, and scale a financial workflow?” That is a much larger search and trust footprint.
 
+<div class="visual-wrapper">
+  <div class="visual-title">Why Content Compounds</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/content-moat-compounding.html" title="Compounding content archive widening a traffic and trust moat versus a flat one-off content line over time" loading="lazy"></iframe>
+  </div>
+</div>
+
 The 2025 annual letter gives useful scale context here too. Stripe says businesses on Stripe generated $1.9 trillion in 2025, equivalent to 1.6% of global GDP. Scale alone does not create a moat, but scale plus credible public explanation is powerful. Large scale lets Stripe publish insights that smaller competitors cannot easily match. Public explanation turns scale into persuasion.
 
 ## Good technical blogs reduce perceived integration risk

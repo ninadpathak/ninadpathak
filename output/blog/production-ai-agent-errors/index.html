@@ -226,7 +226,7 @@
       </nav>
       <div class="post-content">
         <p>After two years of running AI agents in production, here is what I know: error handling is the difference between a system that survives reality and one that falls over the moment something goes wrong. The glamorous part is reasoning and tool use. The unglamorous part, the part that keeps your on-call phone from lighting up at 2 AM, is error handling.</p>
-<p>The failures are predictable. Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. I have hit all three myself, usually at the worst possible time.</p>
+<p>The failures are predictable, and they line up with <a href="/blog/why-ai-agents-keep-failing-in-production/">the broader pattern of why agents keep failing in production</a>. Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. I have hit all three myself, usually at the worst possible time.</p>
 <p>This is about the error patterns that actually break agents in production, and the concrete patterns that fix them. I am focusing on LLM-based agents that use tools to interact with external systems. That covers the majority of production agents I have encountered.</p>
 <h2 id="the-core-problem-agents-are-undefined-state-machines">The core problem: agents are undefined state machines</h2>
 <p>Most agent implementations look like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs the error and tells the LLM something went wrong.</p>
@@ -309,7 +309,7 @@
 </code></pre></div>
 
 <h2 id="checkpointing-for-long-horizon-tasks">Checkpointing for long-horizon tasks</h2>
-<p>Agents running dozens of steps need state persistence. Without it, a failure at step 40 restarts from step 1. This is the most demoralizing thing to debug at 1 AM.</p>
+<p>Agents running dozens of steps need state persistence, which is one of the core responsibilities of a well-designed <a href="/blog/agent-harnesses/">agent harness, the infrastructure layer your agent actually needs</a>. Without it, a failure at step 40 restarts from step 1. This is the most demoralizing thing to debug at 1 AM.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -355,6 +355,13 @@
 
 <h2 id="what-actually-breaks-in-practice">What actually breaks in practice</h2>
 <p>Five failure modes show up consistently across production incidents.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">PRODUCTION AGENT ERROR TAXONOMY</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/agent-error-taxonomy.html" title="Taxonomy of production agent failure classes and how each is handled" loading="lazy"></iframe>
+  </div>
+</div>
+
 <p><strong>Context window exhaustion</strong>: the agent accumulates tool results until the context is full. Set a hard limit on total tool call history and fail explicitly when approaching the limit.</p>
 <p><strong>Tool schema drift</strong>: the LLM calls a tool with parameters that match an older version of the schema. Version your tool schemas and validate inputs against the expected version before executing.</p>
 <p><strong>Partial failure in parallel tool calls</strong>: the agent calls multiple tools simultaneously. Some succeed, some fail. Track each independently and do not assume all-or-nothing semantics.</p>
@@ -402,13 +409,13 @@
         <div class="related-card-date">2026-05-06</div>
         <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
       </a>
-      <a href="/blog/hermes-md-git-commit-billing-bug/" class="related-card">
-        <div class="related-card-date">2026-04-30</div>
-        <div class="related-card-title">The HERMES.md Bug That Silently Burned $200 in Claude Code Credits</div>
-      </a>
       <a href="/blog/the-agent-design-space/" class="related-card">
         <div class="related-card-date">2026-04-26</div>
         <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
+      </a>
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-21</div>
+        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
       </a>
     </div>
   </div>
@@ -490,9 +497,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

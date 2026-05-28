@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production Agent Error Taxonomy</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:14px;}
+.taxonomy{width:100%;max-width:560px;}
+.hd{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);text-align:center;margin-bottom:14px;}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.cell{border:1px solid var(--border);border-radius:4px;padding:11px 12px;box-sizing:border-box;background:var(--bg-1);transition:border-color .25s linear,background .25s linear,box-shadow .25s linear;position:relative;}
+.cell .cls{font-family:var(--mono);font-size:8px;letter-spacing:0.16em;color:var(--text-3);text-transform:uppercase;}
+.cell .name{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--text-1);margin:4px 0 6px;transition:color .25s linear;}
+.cell .fix{font-size:9.5px;line-height:1.45;color:var(--text-2);}
+.cell .fix b{font-family:var(--mono);font-weight:700;font-size:8.5px;letter-spacing:0.06em;color:var(--text-3);text-transform:uppercase;display:block;margin-bottom:2px;}
+
+.cell.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--bg-1));box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 14%,transparent);}
+.cell.active .name{color:var(--accent);}
+.cell.active .fix b{color:var(--accent);}
+
+@media (max-width:600px){
+  .grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="taxonomy">
+    <div class="hd">Classes of Production Agent Failure</div>
+    <div class="grid">
+      <div class="cell" data-i="0">
+        <div class="cls">Class 01 / Ambiguous</div>
+        <div class="name">Tool double-execution on retry</div>
+        <div class="fix"><b>Handled by</b>Idempotent tools or a dedup layer keyed on operation_id.</div>
+      </div>
+      <div class="cell" data-i="1">
+        <div class="cls">Class 02 / State</div>
+        <div class="name">Silent state corruption</div>
+        <div class="fix"><b>Handled by</b>Explicit state transitions + checkpoint before ambiguous retry.</div>
+      </div>
+      <div class="cell" data-i="2">
+        <div class="cls">Class 03 / Context</div>
+        <div class="name">Context window exhaustion</div>
+        <div class="fix"><b>Handled by</b>Hard limit on tool-call history, fail explicitly near the cap.</div>
+      </div>
+      <div class="cell" data-i="3">
+        <div class="cls">Class 04 / Schema</div>
+        <div class="name">Tool schema drift</div>
+        <div class="fix"><b>Handled by</b>Version schemas, validate inputs against expected version.</div>
+      </div>
+      <div class="cell" data-i="4">
+        <div class="cls">Class 05 / Parallel</div>
+        <div class="name">Partial failure in parallel calls</div>
+        <div class="fix"><b>Handled by</b>Track each call independently, no all-or-nothing assumption.</div>
+      </div>
+      <div class="cell" data-i="5">
+        <div class="cls">Class 06 / Observability</div>
+        <div class="name">Observability gaps</div>
+        <div class="fix"><b>Handled by</b>Log every tool call: input, output, latency, error.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Walk the taxonomy one failure class at a time; each frame pairs the
+// failure with its concrete fix from the post.
+const cells = Array.from(document.querySelectorAll('.cell'));
+let i = 0;
+function step(){
+  cells.forEach(c=>c.classList.remove('active'));
+  cells[i].classList.add('active');
+  i = (i+1)%cells.length;
+}
+step();
+setInterval(step,1900);
+</script>
+</body>
+</html>

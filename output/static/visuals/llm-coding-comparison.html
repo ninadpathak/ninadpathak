@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLMs for Coding: Comparison Matrix</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.scene {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-family: var(--mono);
+}
+.head .t {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.head .b {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.matrix {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.5fr repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 0;
+}
+.cell {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+}
+.cell:nth-child(5n) { border-right: none; }
+
+/* header row */
+.colhead {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  background: var(--bg-2);
+  text-align: center;
+  align-items: center;
+}
+.corner {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  background: var(--bg-2);
+}
+
+/* model name cell */
+.model { gap: 3px; }
+.model .name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: 0.01em;
+}
+.model .for {
+  font-family: var(--sans);
+  font-size: 8.5px;
+  color: var(--text-3);
+  line-height: 1.2;
+}
+
+/* value cells */
+.val {
+  align-items: center;
+  text-align: center;
+}
+.val .num {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-1);
+}
+.val .unit {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* rating dots */
+.dots { display: flex; gap: 3px; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+.dot.on { background: var(--text-2); }
+
+/* recommended row highlight */
+.row-pick .cell { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.row-pick .name { color: var(--accent); }
+.row-pick .val .num { color: var(--accent); }
+.row-pick .dot.on { background: var(--accent); }
+.pick-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-top: 2px;
+  width: fit-content;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+.foot {
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+  color: var(--text-3);
+}
+
+@media (max-width: 600px) {
+  .matrix { grid-template-columns: 1.3fr repeat(4, 1fr); }
+  .model .for { display: none; }
+  .head .b { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="head">
+    <span class="t">Coding LLMs / Comparison Matrix</span>
+    <span class="b">SWE-bench Verified, March 2026</span>
+  </div>
+
+  <div class="matrix">
+    <!-- header row -->
+    <div class="cell corner colhead" style="text-align:left;justify-content:center;align-items:flex-start;">Model</div>
+    <div class="cell colhead">SWE-bench</div>
+    <div class="cell colhead">Reasoning</div>
+    <div class="cell colhead">Context</div>
+    <div class="cell colhead">Cost</div>
+
+    <!-- Claude 4.6 Opus = pick -->
+    <div class="cell model" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
+      <span class="name" style="color:var(--accent);">Claude 4.6 Opus</span>
+      <span class="for">Agentic / autonomous coding</span>
+      <span class="pick-tag">RECOMMENDED</span>
+    </div>
+    <div class="cell val" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
+      <span class="num" style="color:var(--accent);">80.9%</span><span class="unit">leads</span>
+    </div>
+    <div class="cell val" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
+      <div class="dots"><span class="dot on" style="background:var(--accent);"></span><span class="dot on" style="background:var(--accent);"></span><span class="dot on" style="background:var(--accent);"></span><span class="dot on" style="background:var(--accent);"></span><span class="dot on" style="background:var(--accent);"></span></div>
+    </div>
+    <div class="cell val" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
+      <span class="num" style="color:var(--text-1);">200K</span><span class="unit">tokens</span>
+    </div>
+    <div class="cell val" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
+      <span class="num" style="color:var(--text-1);">$$$</span><span class="unit">premium</span>
+    </div>
+
+    <!-- Gemini 3.1 Pro -->
+    <div class="cell model">
+      <span class="name">Gemini 3.1 Pro</span>
+      <span class="for">Repo-scale context / logic</span>
+    </div>
+    <div class="cell val"><span class="num">high</span><span class="unit">strong</span></div>
+    <div class="cell val"><div class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></div></div>
+    <div class="cell val"><span class="num">2M</span><span class="unit">tokens</span></div>
+    <div class="cell val"><span class="num">$$$</span><span class="unit">premium</span></div>
+
+    <!-- DeepSeek V4 -->
+    <div class="cell model">
+      <span class="name">DeepSeek V4</span>
+      <span class="for">Cost-sensitive / high-volume</span>
+    </div>
+    <div class="cell val"><span class="num">~4.6</span><span class="unit">comparable</span></div>
+    <div class="cell val"><div class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></div></div>
+    <div class="cell val"><span class="num">large</span><span class="unit">moe</span></div>
+    <div class="cell val"><span class="num">$</span><span class="unit">cheapest</span></div>
+
+    <!-- GPT-5.4 Codex -->
+    <div class="cell model">
+      <span class="name">GPT-5.4 Codex</span>
+      <span class="for">Multi-step planning / stable</span>
+    </div>
+    <div class="cell val"><span class="num">solid</span><span class="unit">reliable</span></div>
+    <div class="cell val"><div class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></div></div>
+    <div class="cell val"><span class="num">large</span><span class="unit">tokens</span></div>
+    <div class="cell val"><span class="num">$$</span><span class="unit">mid</span></div>
+  </div>
+
+  <div class="foot">// dimensions per post. Opus leads SWE-bench Verified at 80.9%, the only repo-level metric that matters.</div>
+</div>
+</body>
+</html>

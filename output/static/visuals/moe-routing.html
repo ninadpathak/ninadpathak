@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoE Routing: 8 of 256 Experts Active</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.stage {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.params {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-align: center;
+  color: var(--text-2);
+  margin-bottom: 14px;
+}
+.params .total { color: var(--text-3); }
+.params .active { color: var(--accent); font-weight: 600; }
+
+.flow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 0;
+}
+
+/* Token */
+.token {
+  font-family: var(--mono);
+  font-size: 12px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 8px 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.token .lbl { display: block; font-size: 9px; color: var(--text-3); letter-spacing: 0.1em; margin-bottom: 3px; }
+
+/* Router */
+.router {
+  font-family: var(--mono);
+  font-size: 11px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  padding: 10px 12px;
+  border-radius: 3px;
+  text-align: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.router .rlbl { display: block; font-size: 9px; color: var(--text-3); letter-spacing: 0.1em; margin-bottom: 4px; }
+.router .topk { color: var(--accent); font-weight: 600; }
+.router.pulse { border-color: var(--accent); }
+
+.connector { font-family: var(--mono); color: var(--text-3); font-size: 18px; flex-shrink: 0; }
+
+/* Experts grid */
+.experts {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  flex: 1;
+  max-width: 360px;
+}
+.expert {
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-3);
+  background: var(--bg-1);
+  transition: border-color 0.25s linear, background-color 0.25s linear, color 0.25s linear;
+}
+.expert.active {
+  border-color: var(--accent);
+  background: rgba(212,64,0,0.08);
+  color: var(--accent);
+  font-weight: 600;
+}
+@media (prefers-color-scheme: dark) {
+  .expert.active { background: rgba(255,95,31,0.12); }
+}
+
+.footnote {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--text-3);
+  text-align: center;
+  letter-spacing: 0.06em;
+  margin-top: 12px;
+}
+.footnote b { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 600px) {
+  .flow { flex-direction: column; gap: 12px; }
+  .connector { transform: rotate(90deg); }
+  .experts { width: 100%; max-width: 280px; }
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="header">Mixture of Experts / Sparse Routing</div>
+  <div class="params">
+    <span class="total">671B total params</span> &nbsp;/&nbsp; <span class="active">37B active per token</span>
+  </div>
+  <div class="flow">
+    <div class="token"><span class="lbl">TOKEN</span>"context"</div>
+    <div class="connector">→</div>
+    <div class="router" id="router">
+      <span class="rlbl">ROUTER</span>
+      top-<span class="topk">8</span> / 256
+    </div>
+    <div class="connector">→</div>
+    <div class="experts" id="experts"></div>
+  </div>
+  <div class="footnote">256 routed experts per layer &middot; only <b>8 activate</b> &middot; the other 248 are skipped for this token</div>
+</div>
+
+<script>
+  // Show 32 expert cells as a representative slice of the 256-expert bank.
+  // Each routing cycle lights 8 of them (matching DeepSeek V3's top-8 routing).
+  const N = 32, K = 8;
+  const grid = document.getElementById('experts');
+  const router = document.getElementById('router');
+  const cells = [];
+  for (let i = 0; i < N; i++) {
+    const d = document.createElement('div');
+    d.className = 'expert';
+    d.textContent = 'E' + (i + 1);
+    grid.appendChild(d);
+    cells.push(d);
+  }
+
+  function pickK() {
+    const idx = new Set();
+    while (idx.size < K) idx.add(Math.floor(Math.random() * N));
+    return idx;
+  }
+
+  function cycle() {
+    cells.forEach(c => c.classList.remove('active'));
+    router.classList.remove('pulse');
+    void grid.offsetWidth;
+    router.classList.add('pulse');
+    const chosen = pickK();
+    // Light experts sequentially for a mechanical "routing" feel.
+    let order = [...chosen];
+    order.forEach((idx, n) => {
+      setTimeout(() => cells[idx].classList.add('active'), 120 + n * 90);
+    });
+  }
+
+  cycle();
+  setInterval(cycle, 2600);
+</script>
+</body>
+</html>

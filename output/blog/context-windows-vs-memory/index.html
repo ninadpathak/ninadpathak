@@ -232,6 +232,13 @@
       <div class="post-content">
         <p>You have a 1M token context window and your agent still forgets what the user said three turns ago. Your RAG pipeline returns stale results. Your agent loses track of what it was doing mid-task. Context windows and memory solve different problems at different cost profiles with different failure modes, and conflating them produces systems that are simultaneously over-engineered and under-equipped.</p>
 <p>I have watched engineers build elaborate pipelines around long context windows and then wonder why their system still "forgets." This is not a philosophical distinction. It is an engineering reality with concrete consequences for how you build, price, and debug AI systems.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Retrieval Decay: Context Window vs Memory</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/context-memory.html" title="Context window versus persistent memory retrieval decay" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="what-a-context-window-actually-is">What a context window actually is</h2>
 <p>A context window is the total amount of text a model can see in a single inference call. You pass in 500K tokens, the model processes all 500K, and produces an output. That processing happens in one forward pass through the transformer.</p>
 <p>The math behind this matters. Transformer attention is O(n^2) in sequence length. Double your context from 2K to 4K tokens, and you do not double the compute. You roughly quadruple it. This is why long context models are expensive in ways that are not obvious from the API pricing sheet. The actual FLOPs scale superlinearly.</p>
@@ -458,9 +465,9 @@ Sequence length 131072: 573,939,298,771,456 FLOPs, ~1434.85ms
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

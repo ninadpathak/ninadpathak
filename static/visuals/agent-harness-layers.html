@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent Harness as Concentric Layers</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;gap:28px;padding:16px;}
+
+.diagram{position:relative;width:360px;height:360px;flex:0 0 auto;}
+svg{position:absolute;inset:0;width:100%;height:100%;}
+
+.ring{fill:none;stroke:var(--border);stroke-width:1.5;}
+.ring-label{font-family:var(--mono);font-size:8.5px;letter-spacing:0.14em;fill:var(--text-3);text-transform:uppercase;}
+.core{fill:color-mix(in srgb,var(--accent) 10%,var(--bg-1));stroke:var(--accent);stroke-width:2;}
+.core-txt{font-family:var(--mono);font-weight:700;fill:var(--accent);text-anchor:middle;}
+.core-sub{font-family:var(--mono);fill:var(--text-3);text-anchor:middle;font-size:8px;letter-spacing:0.1em;}
+
+/* sweep pulse traveling the active ring */
+.sweep{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;opacity:0;transition:opacity .2s linear;}
+
+/* legend */
+.legend{font-family:var(--mono);max-width:230px;flex:0 0 auto;}
+.legend .hd{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px;}
+.row{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);transition:opacity .25s linear;}
+.row:last-child{border-bottom:none;}
+.dot{width:9px;height:9px;border:1.5px solid var(--text-3);border-radius:2px;margin-top:3px;flex:0 0 auto;transition:all .25s linear;}
+.row .nm{font-size:11px;font-weight:700;color:var(--text-1);}
+.row .ds{font-size:8.5px;color:var(--text-3);line-height:1.4;margin-top:2px;}
+.row.on .dot{border-color:var(--accent);background:var(--accent);}
+.row.on .nm{color:var(--accent);}
+
+@media (max-width:600px){
+  .scene{flex-direction:column;gap:18px;}
+  .diagram{width:300px;height:300px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="diagram">
+    <svg viewBox="0 0 360 360">
+      <!-- concentric rings, outermost first. center 180,180 -->
+      <circle class="ring" data-i="0" cx="180" cy="180" r="170"></circle>
+      <circle class="ring" data-i="1" cx="180" cy="180" r="138"></circle>
+      <circle class="ring" data-i="2" cx="180" cy="180" r="106"></circle>
+      <circle class="ring" data-i="3" cx="180" cy="180" r="74"></circle>
+      <!-- raw LLM core -->
+      <circle class="core" cx="180" cy="180" r="44"></circle>
+      <text class="core-txt" x="180" y="176" font-size="13">RAW</text>
+      <text class="core-txt" x="180" y="192" font-size="13">LLM</text>
+      <text class="core-sub" x="180" y="208">reasoning</text>
+
+      <!-- ring labels sitting on top of each ring -->
+      <text class="ring-label" data-i="0" x="180" y="16" text-anchor="middle">OBSERVER</text>
+      <text class="ring-label" data-i="1" x="180" y="48" text-anchor="middle">STATE MANAGER</text>
+      <text class="ring-label" data-i="2" x="180" y="80" text-anchor="middle">PROMPT ASSEMBLER</text>
+      <text class="ring-label" data-i="3" x="180" y="112" text-anchor="middle">EXECUTION LOOP</text>
+
+      <!-- animated sweeps, one per ring (rotating arc) -->
+      <circle class="sweep" data-i="0" cx="180" cy="180" r="170" stroke-dasharray="120 948" transform="rotate(-90 180 180)"></circle>
+      <circle class="sweep" data-i="1" cx="180" cy="180" r="138" stroke-dasharray="100 767" transform="rotate(-90 180 180)"></circle>
+      <circle class="sweep" data-i="2" cx="180" cy="180" r="106" stroke-dasharray="80 586" transform="rotate(-90 180 180)"></circle>
+      <circle class="sweep" data-i="3" cx="180" cy="180" r="74"  stroke-dasharray="60 405" transform="rotate(-90 180 180)"></circle>
+    </svg>
+  </div>
+
+  <div class="legend">
+    <div class="hd">Harness Layers</div>
+    <div class="row" data-i="3">
+      <div class="dot"></div>
+      <div><div class="nm">Execution loop</div><div class="ds">runs perceive/think/act/remember, enforces stop conditions + retries</div></div>
+    </div>
+    <div class="row" data-i="2">
+      <div class="dot"></div>
+      <div><div class="nm">Prompt assembler</div><div class="ds">builds context from system prompt, history, retrieved docs, tool results</div></div>
+    </div>
+    <div class="row" data-i="1">
+      <div class="dot"></div>
+      <div><div class="nm">State manager</div><div class="ds">tracks subtasks + decisions, checkpoints to durable storage</div></div>
+    </div>
+    <div class="row" data-i="0">
+      <div class="dot"></div>
+      <div><div class="nm">Observer</div><div class="ds">structured logging of every step, queryable by run ID</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Tool routing happens inside the loop; the four rings wrap the raw LLM.
+// Highlight each layer in turn, innermost-out, syncing legend + ring + sweep.
+const sweeps = Array.from(document.querySelectorAll('.sweep'));
+const labels = Array.from(document.querySelectorAll('.ring-label'));
+const rings  = Array.from(document.querySelectorAll('.ring'));
+const rows   = Array.from(document.querySelectorAll('.row'));
+const order = [3,2,1,0]; // inner to outer
+let k = 0;
+function setActive(i){
+  sweeps.forEach(s=>s.style.opacity=0);
+  labels.forEach(l=>l.style.fill='');
+  rings.forEach(r=>r.style.stroke='');
+  rows.forEach(r=>r.classList.remove('on'));
+  const idx = i;
+  sweeps.find(s=>+s.dataset.i===idx).style.opacity=1;
+  labels.find(l=>+l.dataset.i===idx).style.fill='var(--accent)';
+  rings.find(r=>+r.dataset.i===idx).style.stroke='var(--accent)';
+  rows.find(r=>+r.dataset.i===idx).classList.add('on');
+}
+function step(){ setActive(order[k]); k=(k+1)%order.length; }
+step();
+setInterval(step,1800);
+</script>
+</body>
+</html>

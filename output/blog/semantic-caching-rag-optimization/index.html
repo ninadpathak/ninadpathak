@@ -249,6 +249,13 @@
 </li>
 </ol>
 <p><a href="https://arxiv.org/abs/2411.05276">GPTCache</a> reports API call reduction of up to 68.8% across query categories, with cache hit rates from 61.6% to 68.8%. The system achieved positive hit rates exceeding 97%, meaning cached responses returned for genuine semantic matches were almost always appropriate. Speed improvement on hits is 2-10x depending on your LLM's baseline latency.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">SEMANTIC CACHE: HIT VS MISS</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/semantic-cache.html" title="An incoming query embedded and compared to the cache by similarity threshold, showing a HIT that returns the cached response versus a MISS that calls the LLM and stores the result" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="similarity-threshold-tuning-the-number-that-determines-everything">Similarity threshold tuning: the number that determines everything</h2>
 <p>The threshold is where most implementations go wrong. Set it too high and you get almost no cache hits. Set it too low and you return wrong answers for queries that only superficially resemble the cached one.</p>
 <p><a href="https://redis.io/blog/10-techniques-for-semantic-cache-optimization/">Redis LangCache documentation</a> recommends starting at 0.88 cosine similarity for an FAQ-style cache, then tuning down gradually as you observe false positive rates. A practical technique is confidence buffering: if your threshold is 0.90, only serve cache hits above 0.92. The buffer absorbs borderline cases without requiring you to tighten the primary threshold.</p>
@@ -256,7 +263,7 @@
 <p><a href="https://redis.io/blog/10-techniques-for-semantic-cache-optimization/">Redis recommends domain partitioning</a> as an explicit technique: don't mix customer support queries with product documentation queries in the same cache namespace. Different domains have different similarity distributions, and a threshold calibrated for one domain will over-fire or under-fire on another.</p>
 <h2 id="production-backends-why-sqlite-is-not-gptcaches-default-in-prod">Production backends: why SQLite is not GPTCache's default in prod</h2>
 <p>GPTCache uses SQLite as its default storage backend. SQLite doesn't handle concurrent writes well. Under production traffic with multiple workers, you'll see write contention, lock timeouts, and missed cache writes. The fix is straightforward: swap the backend to Redis or PostgreSQL.</p>
-<p><a href="https://redis.io/tutorials/semantic-caching-with-redis-langcache/">Redis</a> is the most common production backend for semantic caching. It keeps embeddings and responses in memory with optional persistence, supports native vector search, and handles the concurrent write load that kills SQLite. Redis LangCache is the managed option; RedisVL is the open-source library.</p>
+<p><a href="https://redis.io/tutorials/semantic-caching-with-redis-langcache/">Redis</a> is the most common production backend for semantic caching. It keeps embeddings and responses in memory with optional persistence, supports native vector search, and handles the concurrent write load that kills SQLite. Redis LangCache is the managed option. RedisVL is the open-source library.</p>
 <p>A production deployment I've seen in enterprise inventory management processed over 10,000 queries with an average latency of 8.2 seconds end-to-end and 94.3% semantic accuracy at cache hits. The latency figure includes the cache lookup (under 50ms for Redis) plus the fallback LLM call on misses.</p>
 <h2 id="cache-invalidation-where-semantic-caches-fail-quietly">Cache invalidation: where semantic caches fail quietly</h2>
 <p>Exact-match caches have clean invalidation: delete the key. Semantic caches don't have keys in the same sense. A stored query embedding represents a region of semantic space. Invalidating responses for a changed document means finding all cached queries that pointed to that document and removing them.</p>
@@ -301,6 +308,10 @@ GPTCache is an open-source Python library from Zilliz, designed to integrate dir
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="related-card">
+        <div class="related-card-date">2026-05-12</div>
+        <div class="related-card-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      </a>
       <a href="/blog/llm-inference-optimization/" class="related-card">
         <div class="related-card-date">2026-05-06</div>
         <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
@@ -308,10 +319,6 @@ GPTCache is an open-source Python library from Zilliz, designed to integrate dir
       <a href="/blog/the-memory-hierarchy-why-rag-is-not-enough/" class="related-card">
         <div class="related-card-date">2026-04-29</div>
         <div class="related-card-title">The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</div>
-      </a>
-      <a href="/blog/2026-04-28-asymmetric-retrieval-agent-memory/" class="related-card">
-        <div class="related-card-date">2026-04-28</div>
-        <div class="related-card-title">Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</div>
       </a>
     </div>
   </div>
@@ -393,9 +400,9 @@ GPTCache is an open-source Python library from Zilliz, designed to integrate dir
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

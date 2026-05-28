@@ -32,9 +32,16 @@ Running two retrievers is straightforward. Merging their ranked result lists is 
 
 A naive linear combination of scores fails because BM25 scores and embedding similarity scores exist on completely different scales. A BM25 score of 8.5 and a cosine similarity of 0.87 mean nothing relative to each other without normalization. Min-max normalization addresses this but requires knowing the score distribution for each retriever on each query, which means you can't compute the final score until all candidates are returned.
 
-Reciprocal Rank Fusion (RRF) avoids the normalization problem entirely. RRF scores each document by summing `1 / (k + rank)` across all result lists the document appears in, where `k=60` is a constant from [the original Cormack et al. SIGIR 2009 paper](https://opensearch.org/blog/introducing-reciprocal-rank-fusion-hybrid-search/). Rank position is all that matters; the underlying scores are discarded.
+Reciprocal Rank Fusion (RRF) avoids the normalization problem entirely. RRF scores each document by summing `1 / (k + rank)` across all result lists the document appears in, where `k=60` is a constant from [the original Cormack et al. SIGIR 2009 paper](https://opensearch.org/blog/introducing-reciprocal-rank-fusion-hybrid-search/). Rank position is all that matters. The underlying scores are discarded.
 
 The formula means a document ranked first in one list and missing from the other scores `1/(60+1) = 0.0164`. A document ranked first in both lists scores `0.0164 + 0.0164 = 0.0328` and will almost always win. A document ranked 100th in both lists scores `0.0099 + 0.0099 = 0.0198` and stays near the bottom. Documents that appear in only one list score modestly and get natural deranking relative to documents that both retrievers agreed on.
+
+<div class="visual-wrapper">
+  <div class="visual-title">FUSING TWO RANKED LISTS WITH RRF (k=60)</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/hybrid-search-fusion.html" title="BM25 and vector result lists fusing into one ranked list via reciprocal rank fusion" loading="lazy"></iframe>
+  </div>
+</div>
 
 The practical advantage of RRF: no tuning required for initial deployment. The `k=60` constant generalizes well across domains. You don't need labeled data to set weights. [Elasticsearch recommends RRF as the starting point](https://www.elastic.co/search-labs/blog/improving-information-retrieval-elastic-stack-hybrid) precisely because of this robustness.
 
@@ -70,7 +77,7 @@ results = collection.query.hybrid(
 
 RRF's rank-only approach discards information. When one retriever is much more confident about a document than the other, RRF treats a rank-1 result the same whether the underlying score was 0.99 or 0.55. Score-based fusion preserves that signal.
 
-Linear combination with min-max normalization can outperform RRF when the score distributions are stable and you have labeled data for weight tuning. [Elasticsearch's benchmarks](https://www.elastic.co/search-labs/blog/weighted-reciprocal-rank-fusion-rrf) found hybrid dismax with name boosting achieved a mean NDCG of 0.7497 versus RRF's 0.7068 on one e-commerce dataset, with the gap closing as document diversity increased.
+Linear combination with min-max normalization can outperform RRF when the score distributions are stable and you have labeled data for weight tuning. [Elasticsearch's benchmarks](https://www.elastic.co/search-labs/blog/weighted-reciprocal-rank-fusion-rrf) found hybrid dismax with name boosting achieved a mean NDCG of 0.7497 versus RRF's 0.7068 on one e-commerce dataset, with the difference closing as document diversity increased.
 
 My recommendation: start with RRF. It requires no labeled data, no score distribution assumptions, and no calibration. Move to weighted linear combination only when you have enough labeled queries to tune it properly and your benchmark results show it's worth the maintenance overhead.
 

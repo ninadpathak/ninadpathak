@@ -10,9 +10,9 @@ The transition from legacy Python package managers to `uv` represents the single
 
 In my audit of a monolithic repository with a modern AI dependency stack, `uv` reduced cold build times from 4 minutes to just 12 seconds. 
 
-This performance gap is not a minor optimization. It is the result of moving from sequential Python-based resolution to Rust-native parallelized solvers. 
+This performance difference is not a minor optimization. It is the result of moving from sequential Python-based resolution to Rust-native parallelized solvers. 
 
-By leveraging global deduplication and zero-copy reflinking, `uv` effectively eliminates the local environment "tax." This makes dependency management an invisible part of the development lifecycle.
+Relying on global deduplication and zero-copy reflinking, `uv` effectively eliminates the local environment "tax." This makes dependency management an invisible part of the development lifecycle.
 
 <div class="visual-wrapper">
   <div class="visual-title">Dependency resolution speed: cold cache benchmark</div>
@@ -31,7 +31,7 @@ For CI/CD optimization and developer experience, migrating to `uv` provides the 
 
 Dependency resolution is a constraint satisfaction problem. You have a list of requirements, each with its own version constraints and transitive dependencies. Finding a single set of versions that satisfies all constraints is mathematically complex.
 
-Legacy Python tools like Poetry or `pip-compile` use solvers written in Python. As the dependency tree grows—especially in the 2026 AI stack where packages like `torch`, `transformers`, and `langgraph` have deep, conflicting trees—the solver must perform extensive backtracking.
+Legacy Python tools like Poetry or `pip-compile` use solvers written in Python. As the dependency tree grows (especially in the 2026 AI stack where packages like `torch`, `transformers`, and `langgraph` have deep, conflicting trees), the solver must perform extensive backtracking.
 
 <div class="visual-wrapper">
   <div class="visual-title">Resolution complexity: PubGrub vs legacy</div>
@@ -61,7 +61,7 @@ The total transitive count exceeded 150 packages. I compared three scenarios:
   </div>
 </div>
 
-The "Warm" results are where `uv` changes the developer's mental model. A warm sync in `uv` takes 20ms—literally faster than the human perception of a keystroke. Legacy `pip` takes nearly 400ms just to verify that the environment is already correct. This makes `uv sync` something you can run on every git checkout without penalty.
+The "Warm" results are where `uv` changes the developer's mental model. A warm sync in `uv` takes 20ms, literally faster than the human perception of a keystroke. Legacy `pip` takes nearly 400ms just to verify that the environment is already correct. This makes `uv sync` something you can run on every git checkout without penalty.
 
 ## The global cache and zero-copy reflinking
 
@@ -76,7 +76,7 @@ One of the most insidious time-wasters in Python development is the repeated dow
   </div>
 </div>
 
-When you create a new virtual environment, `uv` does not copy files. On macOS, it uses **reflinking** (Copy-on-Write); on Linux, it uses **hardlinking**. This means your `.venv/site-packages` is essentially a set of pointers to the global cache.
+When you create a new virtual environment, `uv` does not copy files. On macOS, it uses **reflinking** (Copy-on-Write). On Linux, it uses **hardlinking**. This means your `.venv/site-packages` is essentially a set of pointers to the global cache.
 
 <div class="visual-wrapper">
   <div class="visual-title">Zero-copy link lifecycle</div>
@@ -85,11 +85,11 @@ When you create a new virtual environment, `uv` does not copy files. On macOS, i
   </div>
 </div>
 
-This architecture is why `uv` can "install" a multi-gigabyte dependency stack into a new environment in milliseconds. It isn't performing I/O; it is performing metadata operations on the filesystem.
+This architecture is why `uv` can "install" a multi-gigabyte dependency stack into a new environment in milliseconds. It isn't performing I/O. It is performing metadata operations on the filesystem.
 
 ## Memory efficiency and CI/CD stability
 
-High-performance resolution is not just about time; it is about resources. Poetry is notorious for high memory usage during resolution, often exceeding 1GB of RAM for massive trees. This frequently causes OOM (Out of Memory) failures on constrained CI/CD runners or small cloud instances.
+High-performance resolution is not just about time. It is about resources. Poetry is notorious for high memory usage during resolution, often exceeding 1GB of RAM for massive trees. This frequently causes OOM (Out of Memory) failures on constrained CI/CD runners or small cloud instances.
 
 <div class="visual-wrapper">
   <div class="visual-title">Peak memory footprint during resolution</div>

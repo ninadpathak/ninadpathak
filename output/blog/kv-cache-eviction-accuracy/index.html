@@ -193,7 +193,7 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
-        <span class="post-meta-time">15 min read</span>
+        <span class="post-meta-time">16 min read</span>
       </div>
       <h1 class="post-title">Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache Eviction</h1>
       <p class="lead">VRAM is too expensive to waste on low-attention tokens. I benchmarked KV cache eviction strategies to treat LLM context like a managed heap, reaching 90% pruning with zero recall loss.</p>
@@ -495,7 +495,7 @@ Modular GC policies are the focus of community-driven projects.
 Custom Python logic can be defined by users to decide which tokens stay in VRAM. 
 Plug-and-play eviction strategies across different model backends will be allowed by standardization of the "KV Interface." </p>
 <p>PagedAttention foundation in <a href="https://github.com/vllm-project/vllm">vLLM</a> is perfect for heap-based context management. 
-VRAM is already treated as a set of pages; eviction is just a matter of freeing those pages based on attention scores.</p>
+VRAM is already treated as a set of pages, and eviction is just a matter of freeing those pages based on attention scores.</p>
 <h2 id="practitioners-checklist-auditing-your-kv-cache">Practitioner's checklist: auditing your KV cache</h2>
 <p>Optimizing context memory requires following these steps:
 1. Profile Attention Entropy: Measure the cumulative attention distribution across your typical prompts.
@@ -509,7 +509,7 @@ Concurrent 32k-context users supported by a single A100 (80GB) increase from 4 t
 Cost-per-query drops proportionally. 
 Local-first applications benefit even more. 
 Running a 1M token session on an iPad Pro becomes possible when the "active heap" of context is limited to 4096 importance-ranked tokens. </p>
-<p>The "Lost in the Middle" problem is also partially mitigated. 
+<p>The <a href="/blog/llm-context-windows-explained/">"Lost in the Middle" problem where the center of a long context gets ignored</a> is also partially mitigated. 
 Focusing the limited attention budget on high-signal tokens is enabled by reducing KV cache noise. 
 Pruned caches can sometimes outperform full caches by eliminating distracting irrelevant history, according to benchmarks. </p>
 <h2 id="the-future-of-context-engineering">The future of context engineering</h2>
@@ -530,7 +530,7 @@ Softmax stability maintenance only requires 4 tokens in my tests. Full numerical
 <p><strong>What is the Attention Pillar phenomenon?</strong>
 Pillars are specific tokens that serve as anchors for the model's reasoning. Almost every subsequent token directs attention toward them. Core challenge of any importance-based eviction strategy is identifying and protecting these pillars. </p>
 <p><strong>Can I use this for RAG?</strong>
-Absolutely. Physical VRAM limits are avoided by pruning the KV cache, allowing you to feed much larger document chunks into the LLM during the retrieval phase. </p>
+Absolutely. Physical VRAM limits are avoided by pruning the KV cache, allowing you to feed much larger document chunks into the LLM during the retrieval phase. Pruning also pairs well with <a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/">prompt caching, which reuses the KV cache of a static prefix</a> across requests. </p>
 <h3 id="sources">Sources</h3>
 <ul>
 <li><a href="https://arxiv.org/abs/2306.14048">H2O: Heavy-Hitter Oracle for Efficient Generative Inference</a> - Foundational importance-based pruning paper.</li>
@@ -558,9 +558,9 @@ Absolutely. Physical VRAM limits are avoided by pruning the KV cache, allowing y
         <div class="related-card-date">2026-04-25</div>
         <div class="related-card-title">Lambda Calculus as AI Reasoning Benchmark</div>
       </a>
-      <a href="/blog/rag-vs-memory/" class="related-card">
+      <a href="/blog/context-windows-vs-memory/" class="related-card">
         <div class="related-card-date">2026-04-19</div>
-        <div class="related-card-title">RAG vs Memory: What AI Developers Need to Know</div>
+        <div class="related-card-title">Context Windows vs Memory: Why They Are Not the Same Thing</div>
       </a>
     </div>
   </div>
@@ -642,9 +642,9 @@ Absolutely. Physical VRAM limits are avoided by pruning the KV cache, allowing y
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

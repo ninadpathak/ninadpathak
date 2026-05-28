@@ -193,7 +193,7 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
-        <span class="post-meta-time">8 min read</span>
+        <span class="post-meta-time">9 min read</span>
       </div>
       <h1 class="post-title">RAG Evaluation Metrics: What Actually Matters</h1>
       <p class="lead">A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes.</p>
@@ -225,7 +225,7 @@
 
       </nav>
       <div class="post-content">
-        <p>Most RAG tutorials show you how to build one. Almost none teach you how to measure whether it's working. I built three RAG systems before this clicked for me. The gap between demo and production is real, and it is mostly an evaluation problem.</p>
+        <p>Most RAG tutorials show you how to build one. Almost none teach you how to measure whether it's working. I built three RAG systems before this clicked for me. The difference between demo and production is real, and it is mostly an evaluation problem.</p>
 <p>The core problem: RAG evaluation is genuinely hard. You're evaluating a pipeline that chains retrieval, passage selection, and generation. A failure at any stage compounds. A metric that looks good on one stage might be terrible for the whole system.</p>
 <p>This guide cuts through the noise. I cover the metrics that matter, why they matter, and how to actually use them.</p>
 <h2 id="the-rag-evaluation-stack">The RAG Evaluation Stack</h2>
@@ -239,7 +239,7 @@
 <p>Recall@K is a lower bound. A system can have perfect recall and still retrieve passages full of noise. You need more.</p>
 <p><strong>Precision@K</strong> measures how many of the top-K results are actually relevant. High precision means the model wastes less context budget on irrelevant material. Low precision dilutes the generation signal.</p>
 <p>The tradeoff between recall and precision depends on your context window. If you're context-rich, optimize recall. If you're context-constrained, precision matters more.</p>
-<p><strong>NDCG@K</strong> (Normalized Discounted Cumulative Gain) weights ranked results by relevance. A relevant document at rank 1 scores higher than the same document at rank 5. Use NDCG when rank order matters for your pipeline.</p>
+<p><strong>NDCG@K</strong> (Normalized Discounted Cumulative Gain) weights ranked results by relevance. A relevant document at rank 1 scores higher than the same document at rank 5. Use NDCG when rank order matters for your pipeline, which is exactly the case once you add <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/">a reranking stage to fix wrong top-k ordering</a>.</p>
 <h3 id="stage-2-passage-selection">Stage 2: Passage Selection</h3>
 <p>Retrieval finds candidate passages. Selection picks which ones to include in the context.</p>
 <p><strong>Context Precision</strong> measures whether relevant content ranks higher within a passage. A retrieved passage might be 80% relevant and 20% noise. Context precision penalizes passages with relevant content buried deep inside.</p>
@@ -337,7 +337,7 @@
 <p>If you're starting from scratch, optimize in this order:</p>
 <ol>
 <li>
-<p><strong>Retrieval recall first.</strong> No generation improvement fixes missing context. Measure what percentage of your knowledge base the system can actually surface for any given query.</p>
+<p><strong>Retrieval recall first.</strong> No generation improvement fixes missing context. Measure what percentage of your knowledge base the system can actually surface for any given query, and remember that techniques like <a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">Anthropic's contextual retrieval can cut top-20 retrieval failures by 49%</a>.</p>
 </li>
 <li>
 <p><strong>Context precision second.</strong> Once recall is solid, reduce noise. High precision means the generator spends its context budget on signal, not noise.</p>
@@ -349,7 +349,14 @@
 <p><strong>Answer relevancy fourth.</strong> Everything above this point measures parts of the system. Answer relevancy measures the whole thing working together.</p>
 </li>
 </ol>
-<p>The mistake most teams make is starting at step 4 without the foundation. They tune prompts, try different models, add retrieval augmentation, and waste time on generation tweaks while retrieval quietly fails.</p>
+<p>The mistake most teams make is starting at step 4 without the foundation. They tune prompts, try different models, add retrieval augmentation, and waste time on generation tweaks while retrieval quietly fails, often because <a href="/blog/embedding-models-compared/">the embedding model itself cannot tell the query and document apart geometrically</a>.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">RAG EVALUATION FUNNEL</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/rag-eval-metrics.html" title="A RAG evaluation funnel scoring context recall, context precision, faithfulness, and answer relevance against their thresholds" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="thresholds-that-work">Thresholds That Work</h2>
 <p>Based on production deployments I've seen:</p>
 <ul>
@@ -378,6 +385,10 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="related-card">
+        <div class="related-card-date">2026-05-12</div>
+        <div class="related-card-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      </a>
       <a href="/blog/llm-inference-optimization/" class="related-card">
         <div class="related-card-date">2026-05-06</div>
         <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
@@ -385,10 +396,6 @@
       <a href="/blog/the-memory-hierarchy-why-rag-is-not-enough/" class="related-card">
         <div class="related-card-date">2026-04-29</div>
         <div class="related-card-title">The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</div>
-      </a>
-      <a href="/blog/2026-04-28-asymmetric-retrieval-agent-memory/" class="related-card">
-        <div class="related-card-date">2026-04-28</div>
-        <div class="related-card-title">Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</div>
       </a>
     </div>
   </div>
@@ -470,9 +477,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

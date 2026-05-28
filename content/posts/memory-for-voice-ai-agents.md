@@ -12,6 +12,13 @@ I have been building real-time voice agents for six months. The hardest problem 
 
 This article explains how memory actually works in a production voice agent. I will cover the pipeline stages where state lives, how Voice Activity Detection shapes what gets remembered, the architecture for handling interruptions without losing context, and the latency constraints that force every design decision.
 
+<div class="visual-wrapper">
+  <div class="visual-title">The Voice AI Memory Pipeline</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/voice-memory.html" title="Voice AI agent memory pipeline" loading="lazy"></iframe>
+  </div>
+</div>
+
 ##The Fundamental Difference: Memory Latency Budget
 
 A text chatbot has time. When a user sends a message, the system can spend 500ms retrieving context, another 200ms fetching a system prompt, and still return a response within two seconds. Nobody notices. A voice agent has no such luxury.
@@ -48,7 +55,7 @@ The VAD decision is what determines when working memory gets crystallized. When 
 
 ##Turn-taking: The Protocol That Prevents Collisions
 
-Human conversation has an implicit protocol for turn-taking. One person speaks, the other listens, and there is a gap before the roles reverse. Voice agents must implement an explicit version of this protocol, and the protocol has memory implications.
+Human conversation has an implicit protocol for turn-taking. One person speaks, the other listens, and there is a pause before the roles reverse. Voice agents must implement an explicit version of this protocol, and the protocol has memory implications.
 
 Three states exist in a turn-taking system: user speaking, agent speaking, and transition. When the user is speaking, the agent must not produce audio. When the agent is speaking, VAD must be configured to ignore the user's speech to avoid self-interruption. During transition, the system must detect when the user wants to take back the turn and handle that gracefully.
 
@@ -106,7 +113,7 @@ I handle this with a state checkpoint pattern. Before each LLM turn starts, I ch
 
 Memory architecture in a voice agent is constrained by latency targets that are non-negotiable. Users perceive delays above 300ms as a conversation breakdown. Above 800ms, they assume the system is broken. These numbers force every memory design decision.
 
-The 300ms threshold comes from conversation science research on turn-taking gaps. In human conversations, the average gap between the end of one turn and the start of the next is 200ms. Anything above that threshold feels like hesitation. A voice agent that takes 400ms to start responding after the user finishes speaking will feel slow even if the response quality is excellent.
+The 300ms threshold comes from conversation science research on turn-taking pauses. In human conversations, the average pause between the end of one turn and the start of the next is 200ms. Anything above that threshold feels like hesitation. A voice agent that takes 400ms to start responding after the user finishes speaking will feel slow even if the response quality is excellent.
 
 Meeting the 300ms threshold requires keeping retrieved context fetch time below 100ms. This means the external memory store must be physically close to the inference server, typically co-located in the same datacenter. It also means the retrieval query must be fast, which rules out full-text search over large document stores. The practical solution is a key-value store with sub-millisecond read latency, populated by the conversation pipeline after each turn.
 
@@ -134,13 +141,13 @@ The architecture for cross-session memory uses the same retrieval pattern as in-
 
 My current implementation uses a simple document store keyed by user ID. Each session writes a JSON object with timestamped facts. On startup, I query the last 7 days of facts and filter by relevance to recent conversation patterns. The query latency is 20ms to 40ms on a local SQLite database with 50,000 fact records.
 
-The limitation is that this approach only captures explicitly tagged facts. It does not capture conversation style, relationship nuances, or implicit preferences that a human would remember. Closing this gap is an open research problem. The current best practice is to over-index on facts with a lower precision threshold, accepting some irrelevant retrieval in exchange for higher recall.
+The limitation is that this approach only captures explicitly tagged facts. It does not capture conversation style, relationship nuances, or implicit preferences that a human would remember. Closing this shortfall is an open research problem. The current best practice is to over-index on facts with a lower precision threshold, accepting some irrelevant retrieval in exchange for higher recall.
 
 ##What Text Chatbots Get Wrong About Voice Memory
 
 The standard RAG architecture for text chatbots assumes you have time to retrieve and time to read. You send a message, the system searches a vector store, the retrieved documents are injected into the prompt, and the LLM generates a response. The whole process takes 1 to 3 seconds and nobody minds.
 
-Voice agents cannot wait 1 to 3 seconds. A conversation turn must complete within 800ms or the gap becomes perceptible. This means retrieval must happen in parallel with generation, and the retrieved content must arrive before the first audio chunk is synthesized.
+Voice agents cannot wait 1 to 3 seconds. A conversation turn must complete within 800ms or the pause becomes perceptible. This means retrieval must happen in parallel with generation, and the retrieved content must arrive before the first audio chunk is synthesized.
 
 The second difference is turn granularity. Text chatbots operate on message granularity. A message comes in, the system retrieves context and generates a response, the response is a single block of text. Voice agents operate on token granularity. The system generates tokens one at a time, and each token can be interrupted before the full response is complete. Memory must be designed for partial, interruptible generation, not single-shot response.
 
@@ -192,4 +199,4 @@ TTS synthesis starts before LLM generation is complete. Tokens stream from the L
 
 ---
 
-For more on the latency pipeline that this memory system lives inside, see my benchmark post on [real-time voice agent latency](/articles/voice-ai-latency-gemini-benchmark/). For the LLM context window management that determines how much memory you can hold, see [how Anthropic's contextual retrieval changes RAG architecture](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/). For the broader agent infrastructure context, see [production AI agent errors: what actually fails](/articles/production-ai-agent-errors/).
+For more on the latency pipeline that this memory system lives inside, see my benchmark post on [real-time voice agent latency](/blog/voice-ai-latency-gemini-benchmark/). For the LLM context window management that determines how much memory you can hold, see [how Anthropic's contextual retrieval changes RAG architecture](/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/). For the broader agent infrastructure context, see [production AI agent errors: what actually fails](/blog/production-ai-agent-errors/).

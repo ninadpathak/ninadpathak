@@ -45,7 +45,7 @@ I wrote about changelog structure in [How to Write a Changelog That Developers A
 2. Does the reader need to take action before or after upgrading?
 3. Is the risk level tied to a removal, a default change, or a new limit?
 
-"Updated authentication middleware" is a weak bullet. "Default token expiry reduced from 24 hours to 1 hour; update refresh logic before upgrading to prevent session drops" is a trust-building bullet. One describes the work. The other describes the consequence.
+"Updated authentication middleware" is a weak bullet. "Default token expiry reduced from 24 hours to 1 hour, so update refresh logic before upgrading to prevent session drops" is a trust-building bullet. One describes the work. The other describes the consequence.
 
 ## Security disclosure is the highest form of trust
 

@@ -12,11 +12,18 @@ This is the default trajectory for most engineering teams. Documentation gets tr
 
 The 80/20 rule applies here. Twenty percent of documentation practices deliver eighty percent of the value. The rest is ceremony.
 
+<div class="visual-wrapper">
+  <div class="visual-title">The 80/20 of Doc Impact</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/docs-8020.html" title="Sorted impact bars showing the few documentation practices that move the needle versus the many that do not" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## The core problem
 
-Most technical writing fails because it is written for the wrong audience. The author writes to demonstrate understanding rather than transfer it. Every sentence is written from the author's perspective — what the author knows, what the author thinks is important, what the author remembers.
+Most technical writing fails because it is written for the wrong audience. The author writes to demonstrate understanding rather than transfer it. Every sentence is written from the author's perspective. What the author knows, what the author thinks is important, what the author remembers.
 
-The reader needs the opposite. The reader arrives with a specific gap. They do not care what you know. They care whether your documentation closes the gap between where they are and where they want to be.
+The reader needs the opposite. The reader arrives with a specific missing piece. They do not care what you know. They care whether your documentation closes the difference between where they are and where they want to be.
 
 This is a perspective shift that sounds simple but changes everything. When you write for the reader, you structure around questions, not topics. You anticipate confusion points before they happen. You provide working code before explaining edge cases. You prioritize the happy path and treat exceptions as secondary.
 
@@ -74,17 +81,17 @@ Engineers rarely read documentation from top to bottom. They scan. They look for
 
 Write for this behavior. Use headings that function as answers, not topics. "Timeouts cause memory leaks in long-running workers" is a better heading than "Timeout handling." The former tells the reader what they will learn. The latter tells them what the section is about.
 
-Use bullet points for lists of related things. Use numbered lists for sequential steps. Do not use bullet points for sequential steps — the ordering implied by a numbered list carries information.
+Use bullet points for lists of related things. Use numbered lists for sequential steps. Do not use bullet points for sequential steps. The ordering implied by a numbered list carries information.
 
-Use code blocks for code. Use bold for UI labels and filenames. Avoid italics in technical writing — they are harder to read at speed and add no information in this context.
+Use code blocks for code. Use bold for UI labels and filenames. Avoid italics in technical writing. They are harder to read at speed and add no information in this context.
 
-Keep paragraphs short. Two sentences maximum. This is not a style preference. It is functional. Short paragraphs break information into digestible chunks. When a paragraph exceeds three sentences, the reader has to work to identify which sentence carries the point.
+Keep paragraphs short. Two sentences maximum. There is a real functional reason behind it, the same one that drives [the case for shorter technical documentation](/blog/the-case-for-shorter-technical-documentation/). Short paragraphs break information into digestible chunks. When a paragraph exceeds three sentences, the reader has to work to identify which sentence carries the point.
 
 ## The four documentation types
 
 Engineers need four types of documentation, and conflating them is a common failure.
 
-**Tutorials** take a newcomer from zero to a working result. They are task-oriented and forgiving of complexity. Tutorials should say "here is how to build X" and hold the reader's hand through every step. The goal is success, not completeness.
+**Tutorials** take a newcomer from zero to a working result. They are task-oriented and forgiving of complexity. Tutorials should say "here is how to build X" and hold the reader's hand through every step, which is the whole craft of [writing a technical tutorial that actually teaches](/blog/how-to-write-a-technical-tutorial-that-actually-teaches/). The goal is success, not completeness.
 
 **How-to guides** solve a specific problem for someone who already knows the basics. "How to configure OAuth with an existing Next.js app" is a how-to guide. It assumes the reader understands OAuth conceptually but needs help with the implementation details.
 
@@ -104,7 +111,7 @@ Markdown in a Git repository solves all of this. Changes have authors and timest
 
 This also enables docs-as-code. Engineers can update documentation in the same PR as the code that changed. The documentation and the feature ship together. No more documentation sprints that never happen.
 
-The tooling cost is near zero. Every static site generator — Hugo, MkDocs, Docusaurus, Astro — supports Markdown. GitHub Pages, Netlify, Cloudflare Pages, and Vercel all serve static sites for free. There is no reason to accept documentation rot.
+The tooling cost is near zero. Every static site generator (Hugo, MkDocs, Docusaurus, Astro) supports Markdown. GitHub Pages, Netlify, Cloudflare Pages, and Vercel all serve static sites for free. There is no reason to accept documentation rot.
 
 ## Measure whether docs work
 
@@ -116,7 +123,7 @@ Good metrics: task completion rate, support ticket deflection, time-to-answer fo
 
 You can run a task completion survey at the bottom of every how-to guide. "Did this solve your problem? Yes / No." It takes five seconds for the reader. It gives you signal within days.
 
-Read the search queries that return no results on your internal search. Those are documentation gaps. When engineers search for something and find nothing, they ask a colleague or open a support ticket. Both outcomes are documentation failures.
+Read the search queries that return no results on your internal search. Those are documentation shortfalls. When engineers search for something and find nothing, they ask a colleague or open a support ticket. Both outcomes are documentation failures.
 
 ## The update discipline
 
@@ -130,7 +137,7 @@ Automate staleness detection where possible. Run scripts that flag docs older th
 
 Documentation debt is not just about missing content. It is also about content that should not exist.
 
-Delete onboarding documents that contradict the current codebase. Delete tutorials that reference deprecated API versions. Delete FAQ entries that are no longer questions anyone asks. Stale documentation is worse than no documentation because it sends engineers down wrong paths.
+Delete onboarding documents that contradict the current codebase, because stale guidance is one of the clearest signs of [developer onboarding docs that fail and the practices that actually work](/blog/developer-onboarding-docs-what-works-what-doesnt/). Delete tutorials that reference deprecated API versions. Delete FAQ entries that are no longer questions anyone asks. Stale documentation is worse than no documentation because it sends engineers down wrong paths.
 
 The test for keeping a document: does this help someone accomplish a task or understand a concept that exists in our current system? If not, cut it.
 

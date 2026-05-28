@@ -241,6 +241,13 @@
 <p>The open-source stack has moved past simple RAG pipelines. We are now building true <a href="https://en.wikipedia.org/wiki/Cognitive_architecture">cognitive architectures</a> that mimic the tiered systems of human thought. These frameworks treat memory as a structured resource rather than a flat text file.</p>
 <p>Working memory handles your immediate, high-stakes reasoning within the active window. Episodic memory captures the raw vibes and chronological logs of every user touchpoint. Semantic memory distills those logs into stable facts and world models.</p>
 <p>This tiered approach is the only way to scale without a linear token tax. It allows your agent to know things without having to read them every time. Differentiation in 2026 lives in the procedural layer where successful workflows are encoded as reusable skills.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">OPEN-SOURCE MEMORY LANDSCAPE</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/oss-memory-landscape.html" title="A landscape of open-source memory tools plotted by retrieval model and where state lives: Letta, Open Viking, Zep/Graphiti, Cognee, pgvector, Mem0" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="letta-is-the-operating-system-for-your-agent">Letta is the operating system for your agent</h2>
 <p><a href="https://letta.com">Letta</a> has become the Linux of the memory space. It treats the LLM as a processor and the context window as high-speed RAM. Everything else is paged out to an external disk.</p>
 <p>Your agent uses a virtual context to swap information in and out of its reasoning buffer. It autonomously triggers these swaps based on the current task requirements. This creates a system that feels consistently intelligent across thousands of interactions.</p>
@@ -302,7 +309,7 @@
         <div class="related-card-date">2026-04-26</div>
         <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
       </a>
-      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-21</div>
         <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
       </a>
@@ -386,9 +393,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

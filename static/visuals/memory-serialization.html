@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Serialization Across Sessions</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;padding:18px;gap:16px;}
+.lanes{display:flex;flex-direction:column;gap:14px;width:100%;max-width:660px;}
+
+.lane{border:1px solid var(--border);position:relative;padding:10px 12px 12px;}
+.lane .tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-3);margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;}
+.lane .tag b{font-weight:700;}
+.lane.good .tag b{color:var(--accent);}
+.lane.bad .tag b{color:var(--text-2);}
+
+.flow{display:flex;align-items:center;gap:6px;}
+.node{flex:1;border:1px solid var(--border);font-family:var(--mono);font-size:9px;line-height:1.3;text-align:center;padding:8px 4px;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-2);min-width:0;transition:border-color .25s linear,color .25s linear,background .25s linear;}
+.node small{display:block;font-size:7.5px;letter-spacing:0.06em;color:var(--text-3);text-transform:none;margin-top:3px;}
+.node.lit{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);}
+.node.lit small{color:var(--accent);}
+.node.dead{border-style:dashed;color:var(--text-3);}
+.arrow{font-family:var(--mono);font-size:12px;color:var(--text-3);flex:0 0 auto;transition:color .25s linear;}
+.arrow.lit{color:var(--accent);}
+
+.store{flex:0 0 auto;width:46px;border:1px solid var(--border);border-radius:3px;font-family:var(--mono);font-size:8px;text-align:center;padding:8px 2px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;transition:border-color .25s linear,color .25s linear;}
+.store.lit{border-color:var(--accent);color:var(--accent);}
+
+.recall{margin-top:9px;font-family:var(--mono);font-size:9.5px;letter-spacing:0.02em;color:var(--text-2);min-height:14px;}
+.recall b{color:var(--accent);font-weight:700;}
+.lane.bad .recall b{color:var(--text-3);}
+
+@media (max-width:600px){
+  .node{font-size:8px;padding:7px 2px;}
+  .node small{display:none;}
+  .store{width:40px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="lanes">
+
+    <div class="lane good" id="lane-good">
+      <div class="tag"><span>With serialization</span><b>state survives restart</b></div>
+      <div class="flow">
+        <div class="node" data-g="0">Session end<small>200 turns</small></div>
+        <div class="arrow" data-ga="0">&rsaquo;</div>
+        <div class="node" data-g="1">Serialize<small>state &rarr; JSON</small></div>
+        <div class="arrow" data-ga="1">&rsaquo;</div>
+        <div class="store" data-gs="0">store<br>S3</div>
+        <div class="arrow" data-ga="2">&rsaquo;</div>
+        <div class="node" data-g="2">Restart<small>new process</small></div>
+        <div class="arrow" data-ga="3">&rsaquo;</div>
+        <div class="node" data-g="3">Deserialize<small>restore + validate</small></div>
+      </div>
+      <div class="recall" id="recall-good">&nbsp;</div>
+    </div>
+
+    <div class="lane bad" id="lane-bad">
+      <div class="tag"><span>Without it</span><b>context lives only in RAM</b></div>
+      <div class="flow">
+        <div class="node" data-b="0">Session end<small>200 turns</small></div>
+        <div class="arrow" data-ba="0">&rsaquo;</div>
+        <div class="node dead" data-b="1">No write<small>nothing persisted</small></div>
+        <div class="arrow" data-ba="1">&rsaquo;</div>
+        <div class="store" data-bs="0">store<br>empty</div>
+        <div class="arrow" data-ba="2">&rsaquo;</div>
+        <div class="node" data-b="2">Restart<small>new process</small></div>
+        <div class="arrow" data-ba="3">&rsaquo;</div>
+        <div class="node dead" data-b="3">Back to zero<small>greets as new</small></div>
+      </div>
+      <div class="recall" id="recall-bad">&nbsp;</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const gNodes=[...document.querySelectorAll('[data-g]')];
+const gArr=[...document.querySelectorAll('[data-ga]')];
+const gStore=document.querySelector('[data-gs]');
+const bNodes=[...document.querySelectorAll('[data-b]')];
+const bArr=[...document.querySelectorAll('[data-ba]')];
+const bStore=document.querySelector('[data-bs]');
+const recallGood=document.getElementById('recall-good');
+const recallBad=document.getElementById('recall-bad');
+
+// timeline: lit elements per step (good lane indices 0..3 incl store at pos 1.5)
+function clear(){
+  [...gNodes,...bNodes].forEach(n=>n.classList.remove('lit'));
+  [...gArr,...bArr].forEach(a=>a.classList.remove('lit'));
+  gStore.classList.remove('lit');bStore.classList.remove('lit');
+  recallGood.innerHTML='&nbsp;';recallBad.innerHTML='&nbsp;';
+}
+const steps=[
+  ()=>{gNodes[0].classList.add('lit');bNodes[0].classList.add('lit');},
+  ()=>{gArr[0].classList.add('lit');gNodes[1].classList.add('lit');bArr[0].classList.add('lit');bNodes[1].classList.add('lit');},
+  ()=>{gArr[1].classList.add('lit');gStore.classList.add('lit');bArr[1].classList.add('lit');},
+  ()=>{gArr[2].classList.add('lit');gNodes[2].classList.add('lit');bArr[2].classList.add('lit');bNodes[2].classList.add('lit');},
+  ()=>{gArr[3].classList.add('lit');gNodes[3].classList.add('lit');bArr[3].classList.add('lit');bNodes[3].classList.add('lit');
+       recallGood.innerHTML='recall: <b>&#x2713; remembers prefs &amp; resolved issues</b>';
+       recallBad.innerHTML='recall: <b>&#x2717; forgot everything</b>';}
+];
+let s=0;
+function tick(){
+  if(s===0)clear();
+  steps[s]();
+  s++;
+  if(s>steps.length){s=0;}
+}
+tick();
+setInterval(tick,1400);
+</script>
+</body>
+</html>

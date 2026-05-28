@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Taxonomy of AI Agents That Actually Explains What You Are Building | Ninad Pathak</title>
+  <meta name="description" content="Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="A Taxonomy of AI Agents That Actually Explains What You Are Building">
+  <meta property="og:description" content="Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/the-taxonomy-of-ai-agents/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/the-taxonomy-of-ai-agents/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "A Taxonomy of AI Agents That Actually Explains What You Are Building",
+  "description": "Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-04-21",
+  "dateModified": "2026-04-21",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/the-taxonomy-of-ai-agents/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "A Taxonomy of AI Agents That Actually Explains What You Are Building",
+      "item": "https://ninadpathak.com/blog/the-taxonomy-of-ai-agents/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">A Taxonomy of AI Agents That Actually Explains What You Are Building</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-time">6 min read</span>
+      </div>
+      <h1 class="post-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</h1>
+      <p class="lead">Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">architecture</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-three-dimensions">The three dimensions</a></li>
+<li><a href="#type-1-reactive-information-agents">Type 1: Reactive information agents</a></li>
+<li><a href="#type-2-tool-using-agents">Type 2: Tool-using agents</a></li>
+<li><a href="#type-3-loop-agents">Type 3: Loop agents</a></li>
+<li><a href="#type-4-multi-agent-systems">Type 4: Multi-agent systems</a></li>
+<li><a href="#type-5-persistent-goal-agents">Type 5: Persistent-goal agents</a></li>
+<li><a href="#why-the-taxonomy-matters-for-your-architecture-decision">Why the taxonomy matters for your architecture decision</a></li>
+<li><a href="#the-taxonomy-i-actually-use">The taxonomy I actually use</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>Every few months someone publishes a new taxonomy of AI agents. The diagrams look clean. The categories feel comprehensive. Then you try to use one to decide whether your customer support bot should use a single-agent loop or a multi-agent hierarchy, and the taxonomy dissolves into hand-waving.</p>
+<p>I have spent the last year building agents for production use cases, reading the research papers that vendors cite selectively, and talking to teams whose agents either work reliably or fail in ways that are hard to debug. What I keep coming back to is a simpler classification scheme: one based on the <strong>degree of autonomy</strong>, the <strong>task type</strong>, and the <strong>operational scope</strong>.</p>
+<p>These three dimensions separate the agents that belong in your production pipeline from the ones that will generate expensive surprises.</p>
+<h2 id="the-three-dimensions">The three dimensions</h2>
+<p><strong>Autonomy</strong> answers the question: how many decisions does this agent make without a human in the loop? A fully autonomous agent plans and executes a sequence of actions to reach a goal. A guided agent picks the next action from a fixed menu. A reactive agent responds to a single input with a single output. The difference in cost and risk between these three modes is an order of magnitude.</p>
+<p><strong>Task type</strong> separates agents that retrieve and synthesize information from agents that take actions in external systems. Information agents answer questions, summarize documents, and generate content. Action agents modify state: they book meetings, send emails, update records, or trigger deployments. Most production agents do both, but the ratio matters for how you design the tool layer.</p>
+<p><strong>Operational scope</strong> determines whether the agent handles a single session or persists state across multiple interactions. A stateless agent treats every request as independent. A stateful agent maintains memory of past interactions within a conversation or across conversations. I wrote about why this distinction matters in practice in my post on <a href="/blog/state-of-ai-agent-memory-2026/">state-of-ai-agent-memory-2026</a>.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">AGENT TYPES BY AUTONOMY</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/agent-taxonomy.html" title="The five agent types arranged as a ladder by degree of autonomy" loading="lazy"></iframe>
+  </div>
+</div>
+
+<h2 id="type-1-reactive-information-agents">Type 1: Reactive information agents</h2>
+<p>These are the simplest agents. You send a prompt, the model generates a response. The only autonomy involved is the model's internal reasoning about which words to produce next.</p>
+<p>Most chatbots and assistants you see in production today are reactive information agents. They do not maintain state between calls. They do not use tools unless the tool call is part of the single request-response cycle. The <a href="/blog/agentic-cli-benchmarks/">agentic-cli-benchmarks</a> I published last month tested two agents in this category.</p>
+<p>The failure mode for reactive agents is straightforward: they hallucinate or produce generic responses when the answer is not in their training data. Retrieval augmentation helps, but at that point you are halfway to a more complex architecture.</p>
+<h2 id="type-2-tool-using-agents">Type 2: Tool-using agents</h2>
+<p>The next step up is an agent that can call external tools during a single interaction. The model decides which tool to call based on the input, the tool returns results, and the model incorporates those results into its final response.</p>
+<p>The critical design element here is the tool schema. I keep seeing teams treat tool schema design as an afterthought, which is why tool calls fail in production. The schema defines what the agent can do. If it is underspecified, the agent makes poor tool choices. If it is overspecified, the agent second-guesses itself and calls the wrong tool anyway. I have a whole post on <a href="/blog/structured-outputs-llms-json-mode-function-calling/">structured outputs and function-calling schemas</a> that goes into this.</p>
+<p>The <a href="/blog/model-context-protocol-explained/">model-context-protocol-explained</a> post covers how standardized tool schemas change the agent-to-tool interface. When your tool schemas are consistent, swapping tools or adding new ones stops being a fragile operation.</p>
+<h2 id="type-3-loop-agents">Type 3: Loop agents</h2>
+<p>Loop agents go beyond single request-response. They run a planning or action loop that iterates until a stopping condition is met. The <a href="/blog/agent-loop-anatomy/">agent-loop-anatomy</a> post breaks down what happens inside that loop: perceive, think, act, remember.</p>
+<p>The most common implementation is a ReAct-style loop: the agent reasons about the current state, takes an action, observes the result, and repeats. This is where agents start being agents rather than sophisticated autocomplete.</p>
+<p>The failure modes change here. A reactive agent produces a bad answer. A loop agent can produce a bad answer and then spend tokens pursuing that bad answer further. I documented the production errors I keep seeing in <a href="/blog/production-ai-agent-errors/">production-ai-agent-errors</a>, and tool-use failures in loop agents are a recurring theme in that data.</p>
+<h2 id="type-4-multi-agent-systems">Type 4: Multi-agent systems</h2>
+<p>The taxonomy gets interesting at the multi-agent level. Multiple agents coordinate, either through shared state or message passing, to handle tasks that are too complex for a single agent to handle reliably.</p>
+<p>I compared the trade-offs of multi-agent versus single-agent architectures in <a href="/blog/multi-agent-vs-single-agent-tradeoffs/">multi-agent versus single-agent architectures</a>. The short version: multi-agent systems can handle more complex tasks, but they introduce coordination overhead and failure modes that are harder to debug.</p>
+<p>The most common pattern I see in production is a supervisor agent that delegates sub-tasks to specialized agents. The supervisor-agent pattern covers where this works and where it breaks down.</p>
+<h2 id="type-5-persistent-goal-agents">Type 5: Persistent-goal agents</h2>
+<p>The most autonomous category. These agents maintain a long-running goal and work toward it across multiple sessions, potentially over days or weeks. They checkpoint their state, resume after interruptions, and adapt their plan based on new information.</p>
+<p>This is where the memory stack becomes critical, and where most teams underestimate the complexity. I covered the <a href="/blog/memory-hierarchy-in-ai-systems/">memory-hierarchy-in-ai-systems</a> that underpins this in an earlier post. Without the right memory architecture, persistent-goal agents either forget what they were doing or carry stale state that corrupts future decisions.</p>
+<h2 id="why-the-taxonomy-matters-for-your-architecture-decision">Why the taxonomy matters for your architecture decision</h2>
+<p>When someone asks me whether they should build an agent, I start by asking what they mean by agent. A Slack bot that responds to slash commands with LLM-generated text is a reactive information agent. It does not need a tool layer, a memory stack, or a loop architecture. Building all of that for a reactive use case is overengineering.</p>
+<p>The mistakes flow both directions. Teams that build a reactive chatbot and call it an agent will hit a wall when they need it to take actions across sessions. Teams that overengineer a multi-agent supervisor architecture for a use case that fits in a single tool-using loop will spend months debugging coordination failures that did not need to exist.</p>
+<p>The <a href="/blog/the-agent-design-space/">agent-design-space</a> survey I published covers what engineers are actually building across these categories. The data shows that most production deployments cluster in Types 2 and 3, with Type 4 reserved for the more complex workflows.</p>
+<h2 id="the-taxonomy-i-actually-use">The taxonomy I actually use</h2>
+<p>When I am sketching out a new agent system, I ask three questions in order:</p>
+<ol>
+<li>Does this agent need to take actions or just generate information? If it only generates text, a reactive or tool-using agent probably suffices.</li>
+<li>Does this agent need to maintain state across multiple interactions? If yes, you are now in the memory design business.</li>
+<li>Does the task complexity require multiple specialized agents working together? If yes, you are taking on multi-agent coordination costs that need to be justified by the task complexity.</li>
+</ol>
+<p>These three questions will sort most agent designs into one of the five types. The taxonomy is not perfect, and there are hybrid cases that do not fit cleanly. But it is a more useful frame than the category sprawl you see in most vendor documentation.</p>
+<p>If you want to go deeper on the architectural patterns that hold these agent types together, the <a href="/blog/agent-harnesses/">agent-harnesses</a> post covers what actually ties an AI agent together in production.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/llm-inference-optimization/" class="related-card">
+        <div class="related-card-date">2026-05-06</div>
+        <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
+      </a>
+      <a href="/blog/the-agent-design-space/" class="related-card">
+        <div class="related-card-date">2026-04-26</div>
+        <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
+      </a>
+      <a href="/blog/memory-for-voice-ai-agents/" class="related-card">
+        <div class="related-card-date">2026-04-19</div>
+        <div class="related-card-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
+          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

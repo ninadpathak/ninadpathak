@@ -226,8 +226,8 @@
       <div class="post-content">
         <p>The transition from legacy Python package managers to <code>uv</code> represents the single most significant productivity win for Python engineering teams in 2026.</p>
 <p>In my audit of a monolithic repository with a modern AI dependency stack, <code>uv</code> reduced cold build times from 4 minutes to just 12 seconds. </p>
-<p>This performance gap is not a minor optimization. It is the result of moving from sequential Python-based resolution to Rust-native parallelized solvers. </p>
-<p>By leveraging global deduplication and zero-copy reflinking, <code>uv</code> effectively eliminates the local environment "tax." This makes dependency management an invisible part of the development lifecycle.</p>
+<p>This performance difference is not a minor optimization. It is the result of moving from sequential Python-based resolution to Rust-native parallelized solvers. </p>
+<p>Relying on global deduplication and zero-copy reflinking, <code>uv</code> effectively eliminates the local environment "tax." This makes dependency management an invisible part of the development lifecycle.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Dependency resolution speed: cold cache benchmark</div>
   <div class="visual-container">
@@ -240,7 +240,7 @@
 <p>For CI/CD optimization and developer experience, migrating to <code>uv</code> provides the highest ROI of any toolchain change available today.</p>
 <h2 id="the-resolution-bottleneck-why-python-solvers-fail-at-scale">The resolution bottleneck: why Python solvers fail at scale</h2>
 <p>Dependency resolution is a constraint satisfaction problem. You have a list of requirements, each with its own version constraints and transitive dependencies. Finding a single set of versions that satisfies all constraints is mathematically complex.</p>
-<p>Legacy Python tools like Poetry or <code>pip-compile</code> use solvers written in Python. As the dependency tree grows—especially in the 2026 AI stack where packages like <code>torch</code>, <code>transformers</code>, and <code>langgraph</code> have deep, conflicting trees—the solver must perform extensive backtracking.</p>
+<p>Legacy Python tools like Poetry or <code>pip-compile</code> use solvers written in Python. As the dependency tree grows (especially in the 2026 AI stack where packages like <code>torch</code>, <code>transformers</code>, and <code>langgraph</code> have deep, conflicting trees), the solver must perform extensive backtracking.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Resolution complexity: PubGrub vs legacy</div>
   <div class="visual-container">
@@ -265,7 +265,7 @@
   </div>
 </div>
 
-<p>The "Warm" results are where <code>uv</code> changes the developer's mental model. A warm sync in <code>uv</code> takes 20ms—literally faster than the human perception of a keystroke. Legacy <code>pip</code> takes nearly 400ms just to verify that the environment is already correct. This makes <code>uv sync</code> something you can run on every git checkout without penalty.</p>
+<p>The "Warm" results are where <code>uv</code> changes the developer's mental model. A warm sync in <code>uv</code> takes 20ms, literally faster than the human perception of a keystroke. Legacy <code>pip</code> takes nearly 400ms just to verify that the environment is already correct. This makes <code>uv sync</code> something you can run on every git checkout without penalty.</p>
 <h2 id="the-global-cache-and-zero-copy-reflinking">The global cache and zero-copy reflinking</h2>
 <p>One of the most insidious time-wasters in Python development is the repeated downloading and unpacking of the same large wheels across multiple virtual environments. If you have five projects using <code>torch</code>, legacy tools will store five copies of that 1GB+ dependency on your disk.</p>
 <p><code>uv</code> uses a global, content-addressable cache. It downloads and unpacks each package version exactly once.</p>
@@ -276,7 +276,7 @@
   </div>
 </div>
 
-<p>When you create a new virtual environment, <code>uv</code> does not copy files. On macOS, it uses <strong>reflinking</strong> (Copy-on-Write); on Linux, it uses <strong>hardlinking</strong>. This means your <code>.venv/site-packages</code> is essentially a set of pointers to the global cache.</p>
+<p>When you create a new virtual environment, <code>uv</code> does not copy files. On macOS, it uses <strong>reflinking</strong> (Copy-on-Write). On Linux, it uses <strong>hardlinking</strong>. This means your <code>.venv/site-packages</code> is essentially a set of pointers to the global cache.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Zero-copy link lifecycle</div>
   <div class="visual-container">
@@ -284,9 +284,9 @@
   </div>
 </div>
 
-<p>This architecture is why <code>uv</code> can "install" a multi-gigabyte dependency stack into a new environment in milliseconds. It isn't performing I/O; it is performing metadata operations on the filesystem.</p>
+<p>This architecture is why <code>uv</code> can "install" a multi-gigabyte dependency stack into a new environment in milliseconds. It isn't performing I/O. It is performing metadata operations on the filesystem.</p>
 <h2 id="memory-efficiency-and-cicd-stability">Memory efficiency and CI/CD stability</h2>
-<p>High-performance resolution is not just about time; it is about resources. Poetry is notorious for high memory usage during resolution, often exceeding 1GB of RAM for massive trees. This frequently causes OOM (Out of Memory) failures on constrained CI/CD runners or small cloud instances.</p>
+<p>High-performance resolution is not just about time. It is about resources. Poetry is notorious for high memory usage during resolution, often exceeding 1GB of RAM for massive trees. This frequently causes OOM (Out of Memory) failures on constrained CI/CD runners or small cloud instances.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Peak memory footprint during resolution</div>
   <div class="visual-container">
@@ -328,17 +328,17 @@ self-identified risks or weak spots: The "Cold Sync" time of 170s in the benchma
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/hermes-md-git-commit-billing-bug/" class="related-card">
-        <div class="related-card-date">2026-04-30</div>
-        <div class="related-card-title">The HERMES.md Bug That Silently Burned $200 in Claude Code Credits</div>
-      </a>
       <a href="/blog/lambda-calculus-ai-reasoning-benchmark/" class="related-card">
         <div class="related-card-date">2026-04-25</div>
         <div class="related-card-title">Lambda Calculus as AI Reasoning Benchmark</div>
       </a>
-      <a href="/blog/python-model-predict-function/" class="related-card">
-        <div class="related-card-date">2026-04-21</div>
-        <div class="related-card-title">Python model.predict(): The Function That Turns Data Into Decisions</div>
+      <a href="/blog/production-ai-agent-errors/" class="related-card">
+        <div class="related-card-date">2026-04-16</div>
+        <div class="related-card-title">What Nobody Tells You About Error Handling in Production AI Agents</div>
+      </a>
+      <a href="/blog/voice-ai-latency-gemini-benchmark/" class="related-card">
+        <div class="related-card-date">2026-04-16</div>
+        <div class="related-card-title">The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1 Voice Agent</div>
       </a>
     </div>
   </div>
@@ -420,9 +420,9 @@ self-identified risks or weak spots: The "Cold Sync" time of 170s in the benchma
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

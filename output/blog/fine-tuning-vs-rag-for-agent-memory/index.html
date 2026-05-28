@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense | Ninad Pathak</title>
+  <meta name="description" content="Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense">
+  <meta property="og:description" content="Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense",
+  "description": "Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need.",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com"
+  },
+  "datePublished": "2026-05-12",
+  "dateModified": "2026-05-12",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense",
+      "item": "https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-time">8 min read</span>
+      </div>
+      <h1 class="post-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</h1>
+      <p class="lead">Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need.</p>
+      <div class="post-tags">
+        <span class="tag">ai-agents</span>
+        <span class="tag">rag</span>
+        <span class="tag">fine-tuning</span>
+        <span class="tag">agent-memory</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-fundamental-difference">The Fundamental Difference</a></li>
+<li><a href="#when-rag-is-the-obvious-choice">When RAG Is the Obvious Choice</a></li>
+<li><a href="#when-fine-tuning-earns-its-cost">When Fine-Tuning Earns Its Cost</a></li>
+<li><a href="#the-memory-hierarchy-changes-the-calculus">The Memory Hierarchy Changes the Calculus</a></li>
+<li><a href="#what-i-actually-see-in-production">What I Actually See in Production</a></li>
+<li><a href="#the-decision-framework">The Decision Framework</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>I ran into this decision three times in the past year. Each time the team had already committed to a particular approach before I got there. The first team had fine-tuned a 7B model on their internal documentation and spent months trying to figure out why the agent still hallucinated. The second team had built an elaborate RAG pipeline and could not understand why the agent could not follow their custom reasoning patterns. The third team got it right by accident.</p>
+<p>The right answer depends on what problem you are actually solving. Fine-tuning and RAG do not compete on the same axis. Conflating them leads to expensive mistakes.</p>
+<h2 id="the-fundamental-difference">The Fundamental Difference</h2>
+<p>Fine-tuning modifies the model's weights. You train the model on examples and it changes how the model reasoning behaves on unseen inputs. The knowledge is encoded in the weights, not in any external store.</p>
+<p>RAG does not touch the model. You keep the model fixed and retrieve relevant context at inference time. The knowledge lives in your vector store or document index, and the model sees it only when you pass it in.</p>
+<p>For agent memory, this distinction matters more than in most applications. An agent operating in memory needs to retain three things simultaneously: factual knowledge about the domain, procedural knowledge about how to handle tasks, and episodic knowledge about what happened in specific sessions. Each of these has different update patterns and different failure costs.</p>
+<p>Factual knowledge about your product changes constantly. A pricing update, a new API endpoint, a changed workflow. Fine-tuning on this factual knowledge means retraining every time something changes. RAG means your index updates and the agent sees the new information next query.</p>
+<p>Procedural knowledge about how to handle things is more stable. If you want the agent to follow a specific reasoning pattern or escalation flow, that is a behavior you want baked into the model. That is where fine-tuning earns its cost.</p>
+<p>Episodic knowledge is the hardest. What happened in this conversation, what preferences has the user expressed across sessions, what was the outcome of that troubleshooting step three weeks ago. This is not knowledge you would fine-tune on even if you could, because it is specific to this user or this interaction.</p>
+<h2 id="when-rag-is-the-obvious-choice">When RAG Is the Obvious Choice</h2>
+<p>The clearest signal that RAG is right: your knowledge base changes faster than you can retrain.</p>
+<p>A customer support agent that needs to know about current product features, recent outages, and today's pricing is a RAG problem. Retraining every time any of those change is not feasible. The latency between a product update and the agent knowing about it matters. With RAG, that latency is zero. With fine-tuning, you are looking at hours at minimum and probably days.</p>
+<p>The retrieval infrastructure cost is real. You need an embedding model, a vector index, a retrieval pipeline, and reranking logic that keeps relevant results at the top. I have benchmarked this. Retrieval latency adds 40-120ms on top of inference for a typical setup. If your agent is latency-sensitive, that matters. If your agent is already doing multiple tool calls that take seconds, it probably does not.</p>
+<p>The other case for RAG: you need verifiable sources. When an agent cites policy, it should cite the actual document. RAG makes this possible because the retrieved context is in the prompt. Fine-tuning makes the knowledge implicit in the model's weights, and you cannot point to where it came from. For regulated industries, this is not a nice-to-have.</p>
+<p>I wrote about the retrieval accuracy problem in my post on <a href="/articles/asymmetric-retrieval-agent-memory">asymmetric retrieval in agent memory</a>. The short version: retrieval is harder than it looks, and bad retrieval will undermine your RAG pipeline faster than bad fine-tuning undermines your model.</p>
+<h2 id="when-fine-tuning-earns-its-cost">When Fine-Tuning Earns Its Cost</h2>
+<p>The case for fine-tuning is narrower than the vendors making money from it would suggest.</p>
+<p>You need fine-tuning when the model behavior itself is wrong, not when the information is missing. If your base model does not follow your output format, does not reason about your domain correctly, or does not handle your edge cases, then retraining the model on examples of correct behavior is the solution. This is a weights problem, not a context problem.</p>
+<p>A practical example. We had an agent that consistently failed on multi-step API workflows. The model did not know the right sequence of operations, not because it lacked information, but because its prior training had taught it the wrong default sequence. Fine-tuning on 200 examples of correct workflows fixed this. RAG would not have helped because the information about correct sequences was not in any document we could retrieve.</p>
+<p>The cost is the other factor. A full fine-tuning run on a 7B model costs between $100-500 depending on the provider and the dataset size. That is per run. If your domain knowledge changes monthly, you are doing this monthly. Compare that to hosting a vector index on a small instance for $20/month.</p>
+<p>The other cost is subtler. Fine-tuning a model on a small dataset risks catastrophic forgetting. The model can lose capabilities from its pretraining if the fine-tuning set is too narrow or the training run is too long. I saw this happen. A team fine-tuned a model on their documentation and the agent lost its ability to do basic arithmetic. The documentation did not include arithmetic examples, and the training run was too aggressive. Guardrail tests caught it, but barely.</p>
+<h2 id="the-memory-hierarchy-changes-the-calculus">The Memory Hierarchy Changes the Calculus</h2>
+<p>When you look at agent memory through the <a href="/articles/memory-hierarchy-in-ai-systems">memory hierarchy lens</a>, the fine-tuning versus RAG decision maps to different layers.</p>
+<p>Working memory is episodic and short-lived. This is never a fine-tuning problem. No one fine-tunes a model on what happened in this conversation. RAG with a conversation window or session store handles this. The context window is your working memory, and you manage it with retrieval and eviction, not with weights.</p>
+<p>Semantic memory is the stable domain knowledge. This is where fine-tuning has the most legitimate use case. The model's understanding of your domain, the reasoning patterns it applies, the formats it produces. If this is wrong, you fix it with fine-tuning.</p>
+<p>But semantic memory also includes things that change. Your product has features. Your pricing works a certain way. These are semantic facts that belong in RAG, not in weights, because they change too often.</p>
+<p>The practical consequence: you almost never choose one or the other for your entire memory system. You need both. The question is which one handles the majority of your memory load, and that is almost always RAG, with fine-tuning added selectively for reasoning patterns that RAG cannot teach.</p>
+<h2 id="what-i-actually-see-in-production">What I Actually See in Production</h2>
+<p>The systems I have seen work well have RAG as the primary memory layer and fine-tuning doing specific calibration.</p>
+<p>The RAG pipeline handles current product information, user-specific preferences stored in a profile, and session history retrieved from a vector store. When the agent needs to know something, it retrieves it.</p>
+<p>The fine-tuning handles behavior. The model has been trained to follow a specific escalation protocol, to format outputs in a particular way, to apply certain reasoning steps before taking action. This is stable knowledge about how to operate, and it does not belong in a retrieval index.</p>
+<p>The failure mode I see most is teams trying to solve behavioral problems with RAG. They keep adding more documents to the index hoping the agent will read them and behave correctly. The agent reads them, sometimes, and still does not behave correctly, because the behavioral problem is in the weights, not in the context.</p>
+<p>The reverse failure is rarer but worse. Teams that fine-tune on domain facts and then cannot update those facts without retraining. The agent becomes brittle and expensive to maintain.</p>
+<h2 id="the-decision-framework">The Decision Framework</h2>
+<p>Here is how I think through it now.</p>
+<p>Is the knowledge changing frequently? Yes means RAG. No means fine-tuning is worth considering.</p>
+<p>Is the problem behavioral (how the model reasons) or factual (what the model knows)? Behavioral means fine-tuning. Factual means RAG.</p>
+<p>Do you need to cite sources? Yes means RAG. The model weights do not give you provenance.</p>
+<p>What is your retraining budget? If you cannot afford to retrain monthly, RAG is probably the foundation.</p>
+<p>How critical is retrieval latency? If every millisecond matters and you cannot absorb 60ms of retrieval overhead, you need a different architecture. Most agentic workflows have tool call latencies of hundreds of milliseconds, so retrieval overhead is rarely the bottleneck.</p>
+<p>The honest answer for most agent memory use cases in 2026: RAG as the foundation, fine-tuning only for the reasoning patterns that do not stick through prompt engineering. Build the retrieval pipeline first. Add fine-tuning when you have real behavioral failures that RAG cannot fix.</p>
+<p>I covered the retrieval fundamentals in <a href="/articles/rag-vs-fine-tuning">RAG vs fine-tuning</a> from a more general perspective. The agent memory context adds the constraint that episodic and working memory are non-negotiable RAG problems, which shifts the calculus toward RAG as the primary layer even for systems where fine-tuning has a legitimate role.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/memory-attribution-errors/" class="related-card">
+        <div class="related-card-date">2026-05-11</div>
+        <div class="related-card-title">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</div>
+      </a>
+      <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="related-card">
+        <div class="related-card-date">2026-05-11</div>
+        <div class="related-card-title">Shared Memory vs Isolated Memory in Multi-Agent Workflows</div>
+      </a>
+      <a href="/blog/agent-memory-for-customer-support/" class="related-card">
+        <div class="related-card-date">2026-05-10</div>
+        <div class="related-card-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
+          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

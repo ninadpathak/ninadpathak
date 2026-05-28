@@ -19,11 +19,18 @@ A smart assistant is a better version of the same thing you have always had. You
 
 This distinction sounds simple. It has real consequences for how you build, how you pay, and how you debug.
 
+<div class="visual-wrapper">
+  <div class="visual-title">WHO DRIVES THE LOOP</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/who-drives-the-loop.html" title="Assistant where the human drives each turn versus agent where the system drives its own loop" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## What You Trade When You Add a Loop
 
-Building inside the loop means the system can surprise you. That is the point. It also means the system can fail in ways that are hard to predict and hard to observe. I wrote about the [production errors I keep seeing](/articles/production-ai-agent-errors) with agent systems, and the core issue in almost every case was that the team did not fully account for what happens when the system makes its own decisions about tool use, retry behavior, and when to escalate.
+Building inside the loop means the system can surprise you. That is the point. It also means the system can fail in ways that are hard to predict and hard to observe. I wrote about the [production errors I keep seeing](/blog/production-ai-agent-errors/) with agent systems, and the core issue in almost every case was that the team did not fully account for what happens when the system makes its own decisions about tool use, retry behavior, and when to escalate.
 
-Adding a loop also adds latency and cost. Each iteration through the loop costs a model call. If your task can be solved in one or two prompt-response exchanges, forcing it through an agent loop is an expensive way to solve it. The [LLM token budgets](/articles/llm-token-budgets-cost-control) for a multi-turn agent session add up fast, especially when the alternative is a well-crafted single prompt with good examples.
+Adding a loop also adds latency and cost. Each iteration through the loop costs a model call. If your task can be solved in one or two prompt-response exchanges, forcing it through an agent loop is an expensive way to solve it. The [LLM token budgets](/blog/llm-token-budgets-cost-control/) for a multi-turn agent session add up fast, especially when the alternative is a well-crafted single prompt with good examples.
 
 ## When a Smarter Assistant Is the Right Call
 
@@ -51,7 +58,7 @@ The common thread: the human cannot reasonably specify every step because the ri
 
 ## The Taxonomy I Keep Coming Back To
 
-I mapped out [a taxonomy of AI agents](/articles/the-taxonomy-of-ai-agents) that tries to make these distinctions concrete. The key split in that taxonomy is between systems where the model drives the loop and systems where the human does. Every design decision flows from that split.
+I mapped out [a taxonomy of AI agents](/blog/the-taxonomy-of-ai-agents/) that tries to make these distinctions concrete. The key split in that taxonomy is between systems where the model drives the loop and systems where the human does. Every design decision flows from that split.
 
 If you are early in evaluating whether you need an agent, that taxonomy is a good starting point. Ask yourself who drives the loop. If the answer is the human, you probably want an assistant with good tool access and a long context window. If the answer is the system, you are building an agent, and you need to account for the full cost of that architectural choice.
 

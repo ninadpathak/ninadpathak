@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Append-Only Memory Versioning vs Overwrite</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:18px;}
+.cols{display:flex;gap:18px;width:100%;max-width:680px;}
+.col{flex:1;min-width:0;display:flex;flex-direction:column;gap:9px;}
+.col .head{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-3);display:flex;justify-content:space-between;}
+.col.append .head b{color:var(--accent);font-weight:700;}
+.col.overwrite .head b{color:var(--text-2);font-weight:700;}
+
+/* append-only stacked rows */
+.row{border:1px solid var(--border);padding:7px 9px;font-family:var(--mono);font-size:9px;line-height:1.35;color:var(--text-2);position:relative;opacity:0;transform:translateY(6px);transition:opacity .4s linear,transform .4s linear,border-color .3s linear,color .3s linear;}
+.row.show{opacity:1;transform:none;}
+.row .ver{font-size:10px;letter-spacing:0.06em;color:var(--text-1);display:flex;justify-content:space-between;}
+.row .val{margin-top:2px;}
+.row .meta{margin-top:3px;color:var(--text-3);font-size:7.5px;letter-spacing:0.03em;}
+.row.current{border-color:var(--accent);color:var(--accent);}
+.row.current .ver{color:var(--accent);}
+.row.superseded{opacity:.5;}
+.row.superseded .ver .vt{color:var(--text-3);}
+
+/* overwrite single mutating cell */
+.cell{border:1px solid var(--border);padding:9px;font-family:var(--mono);font-size:9px;line-height:1.4;color:var(--text-2);transition:border-color .3s linear;}
+.cell .ver{font-size:10px;color:var(--text-1);display:flex;justify-content:space-between;}
+.cell .val{margin-top:4px;color:var(--accent);font-weight:700;font-size:11px;transition:color .2s linear;}
+.cell.flash{border-color:var(--accent);}
+.history-gone{margin-top:9px;font-family:var(--mono);font-size:8.5px;line-height:1.5;color:var(--text-3);}
+.history-gone span{display:block;}
+.history-gone .x{color:var(--text-3);}
+.verdict{margin-top:auto;font-family:var(--mono);font-size:9px;letter-spacing:0.02em;padding-top:8px;border-top:1px solid var(--border);}
+.col.append .verdict{color:var(--accent);}
+.col.overwrite .verdict{color:var(--text-3);}
+
+@media (max-width:600px){
+  .cols{flex-direction:column;max-width:340px;gap:14px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="cols">
+
+    <div class="col append">
+      <div class="head"><span>Append-only ledger</span><b>INSERT</b></div>
+      <div class="row" data-v="1">
+        <div class="ver"><span>v1</span><span class="vt">valid_to: t2</span></div>
+        <div class="val">risk_tolerance: low</div>
+        <div class="meta">t1 &middot; trace_id: a91f</div>
+      </div>
+      <div class="row" data-v="2">
+        <div class="ver"><span>v2</span><span class="vt">valid_to: t3</span></div>
+        <div class="val">risk_tolerance: medium</div>
+        <div class="meta">t2 &middot; trace_id: c30d</div>
+      </div>
+      <div class="row" data-v="3">
+        <div class="ver"><span>v3</span><span class="vt">valid_to: null</span></div>
+        <div class="val">risk_tolerance: high</div>
+        <div class="meta">t3 &middot; trace_id: f7b2</div>
+      </div>
+      <div class="verdict" id="v-append">audit: full history queryable at any T</div>
+    </div>
+
+    <div class="col overwrite">
+      <div class="head"><span>Destructive overwrite</span><b>UPDATE</b></div>
+      <div class="cell" id="ow-cell">
+        <div class="ver"><span>row (mutable)</span><span id="ow-ver">v3</span></div>
+        <div class="val" id="ow-val">risk_tolerance: high</div>
+      </div>
+      <div class="history-gone" id="ow-gone">
+        <span class="x">v1 risk_tolerance: low / gone</span>
+        <span class="x">v2 risk_tolerance: medium / gone</span>
+      </div>
+      <div class="verdict" id="v-ow">audit: prior state destroyed, cannot time-travel</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const rows=[1,2,3].map(v=>document.querySelector('[data-v="'+v+'"]'));
+const owVer=document.getElementById('ow-ver');
+const owVal=document.getElementById('ow-val');
+const owCell=document.getElementById('ow-cell');
+const owGone=document.getElementById('ow-gone');
+const vals=[
+  {ver:'v1',val:'risk_tolerance: low'},
+  {ver:'v2',val:'risk_tolerance: medium'},
+  {ver:'v3',val:'risk_tolerance: high'}
+];
+let step=0; // 0..3 building, then hold, then reset
+
+function render(){
+  // append lane: reveal rows 0..step-1, mark current/superseded
+  rows.forEach((r,idx)=>{
+    r.classList.remove('current','superseded');
+    if(idx<step){r.classList.add('show');}
+    else{r.classList.remove('show');}
+    if(idx<step-1)r.classList.add('superseded');
+    if(idx===step-1)r.classList.add('current');
+  });
+  // overwrite lane: single cell shows latest, history listed as gone
+  if(step>0){
+    const cur=vals[step-1];
+    owVer.textContent=cur.ver;
+    owVal.textContent=cur.val;
+    owCell.classList.add('flash');
+    setTimeout(()=>owCell.classList.remove('flash'),250);
+    // gone = all earlier versions
+    owGone.innerHTML=vals.slice(0,step-1).map(v=>'<span class="x">'+v.ver+' '+v.val+' / gone</span>').join('')||'<span>&nbsp;</span>';
+  }else{
+    owGone.innerHTML='<span>&nbsp;</span>';
+  }
+}
+
+function tick(){
+  step++;
+  if(step>vals.length+1){step=0;render();return;}
+  if(step<=vals.length)render();
+}
+render();
+setInterval(tick,1500);
+</script>
+</body>
+</html>

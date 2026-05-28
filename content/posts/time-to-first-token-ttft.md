@@ -21,7 +21,14 @@ Understanding the components of TTFT is vital for performance engineering. It is
 
 TTFT measures the interval between a user sending a request and receiving the first generated token. This is different from "tokens per second," which measures the generation speed once the stream has started.
 
-Prefilling the prompt is the primary driver of TTFT. The model must process all input tokens to build the initial KV cache. Such computation is a "one-time tax" paid at the start of every request. Longer prompts lead directly to higher TTFT.
+Prefilling the prompt is the primary driver of TTFT. The model must process all input tokens to build the [initial KV cache](/blog/kv-cache-eviction-accuracy/). Such computation is a "one-time tax" paid at the start of every request. Longer prompts lead directly to higher TTFT.
+
+<div class="visual-wrapper">
+  <div class="visual-title">TTFT CHAIN</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/ttft-chain.html" title="The latency chain to the first token: network, queue, and prefill make up TTFT, then token generation continues as throughput" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## TTFT is not the same as throughput
 
@@ -45,9 +52,9 @@ Follow this hierarchy when tasked with reducing latency in production.
 
 **Model Selection.** Start by choosing the smallest model that meets your quality bar. This is the "low-hanging fruit" of latency work.
 
-**Prompt Caching.** Use caching to eliminate the prefill tax for static context. This can drop TTFT by 80% for repeated prefixes.
+**Prompt Caching.** Use [prompt caching to eliminate the prefill tax for static context](/blog/prompt-caching-what-it-is-and-when-the-math-works/). This can drop TTFT by 80% for repeated prefixes.
 
-**Speculative Decoding.** Use a draft model to speed up the verification step. Such a technique improves snappiness by predicting multiple tokens in parallel.
+**Speculative Decoding.** Use [a draft model to speed up LLM inference for free](/blog/speculative-decoding-explained/) at the verification step. Such a technique improves snappiness by predicting multiple tokens in parallel.
 
 **Quantization.** Reduce the precision of model weights to speed up memory loads. Moving from FP16 to INT8 or FP8 provides a meaningful boost with minimal accuracy loss.
 

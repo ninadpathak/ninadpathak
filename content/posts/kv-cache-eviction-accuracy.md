@@ -279,7 +279,7 @@ Custom Python logic can be defined by users to decide which tokens stay in VRAM.
 Plug-and-play eviction strategies across different model backends will be allowed by standardization of the "KV Interface." 
 
 PagedAttention foundation in [vLLM](https://github.com/vllm-project/vllm) is perfect for heap-based context management. 
-VRAM is already treated as a set of pages; eviction is just a matter of freeing those pages based on attention scores.
+VRAM is already treated as a set of pages, and eviction is just a matter of freeing those pages based on attention scores.
 
 ## Practitioner's checklist: auditing your KV cache
 
@@ -298,7 +298,7 @@ Cost-per-query drops proportionally.
 Local-first applications benefit even more. 
 Running a 1M token session on an iPad Pro becomes possible when the "active heap" of context is limited to 4096 importance-ranked tokens. 
 
-The "Lost in the Middle" problem is also partially mitigated. 
+The ["Lost in the Middle" problem where the center of a long context gets ignored](/blog/llm-context-windows-explained/) is also partially mitigated. 
 Focusing the limited attention budget on high-signal tokens is enabled by reducing KV cache noise. 
 Pruned caches can sometimes outperform full caches by eliminating distracting irrelevant history, according to benchmarks. 
 
@@ -327,7 +327,7 @@ Softmax stability maintenance only requires 4 tokens in my tests. Full numerical
 Pillars are specific tokens that serve as anchors for the model's reasoning. Almost every subsequent token directs attention toward them. Core challenge of any importance-based eviction strategy is identifying and protecting these pillars. 
 
 **Can I use this for RAG?**
-Absolutely. Physical VRAM limits are avoided by pruning the KV cache, allowing you to feed much larger document chunks into the LLM during the retrieval phase. 
+Absolutely. Physical VRAM limits are avoided by pruning the KV cache, allowing you to feed much larger document chunks into the LLM during the retrieval phase. Pruning also pairs well with [prompt caching, which reuses the KV cache of a static prefix](/blog/prompt-caching-what-it-is-and-when-the-math-works/) across requests. 
 
 ### Sources
 *   [H2O: Heavy-Hitter Oracle for Efficient Generative Inference](https://arxiv.org/abs/2306.14048) - Foundational importance-based pruning paper.

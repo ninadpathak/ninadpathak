@@ -226,26 +226,33 @@
 <p>The real question is what kind of failure you can afford.</p>
 <h2 id="what-you-actually-get-with-a-single-agent">What you actually get with a single agent</h2>
 <p>A single agent loop is synchronous by default. Perceive, think, act, remember. Repeat. When it works, it works cleanly. When it fails, you get one trace, one error, one place to look.</p>
-<p>I have run single-agent systems in production for months without incident. The failures I hit were almost always in <a href="/articles/production-ai-agent-errors">tool call reliability</a>, not in the loop architecture itself. The agent would try to use a tool that returned nothing, or a tool that timed out, and it would either recover or hang. The failure surface was contained.</p>
-<p>The hard limit I ran into was context. A single agent working on a complex task accumulates history inside its context window. After a certain point, the cost of passing that history to every reasoning step becomes prohibitive. The agent starts forgetting the beginning of the task by the time it reaches the end. This is not a software bug. It is a physics problem with the <a href="/articles/memory-hierarchy-in-ai-systems">memory hierarchy in AI systems</a>.</p>
+<p>I have run single-agent systems in production for months without incident. The failures I hit were almost always in <a href="/blog/production-ai-agent-errors/">tool call reliability</a>, not in the loop architecture itself. The agent would try to use a tool that returned nothing, or a tool that timed out, and it would either recover or hang. The failure surface was contained.</p>
+<p>The hard limit I ran into was context. A single agent working on a complex task accumulates history inside its context window. After a certain point, the cost of passing that history to every reasoning step becomes prohibitive. The agent starts forgetting the beginning of the task by the time it reaches the end. This is not a software bug. It is a physics problem with the <a href="/blog/memory-hierarchy-in-ai-systems/">memory hierarchy in AI systems</a>.</p>
 <p>A single agent also serializes your work. If the task requires doing X and Y and Z and X and Y and Z again, a single agent does them in sequence. You can batch prompts and get some throughput, but the agent loop itself is not concurrent.</p>
 <h2 id="where-multi-agent-systems-pay-off">Where multi-agent systems pay off</h2>
-<p>I moved to multi-agent architectures for two reasons. The first was specialization. A coding agent that also has to manage a file browser and a shell and a PR reviewer is juggling too many tool schemas. When I split those into separate agents, each one knew exactly what its tools did and the tool schemas stayed clean. This is the pattern behind what I later recognized as the <a href="/articles/the-agent-design-space">supervisor agent pattern</a> in production.</p>
+<p>I moved to multi-agent architectures for two reasons. The first was specialization. A coding agent that also has to manage a file browser and a shell and a PR reviewer is juggling too many tool schemas. When I split those into separate agents, each one knew exactly what its tools did and the tool schemas stayed clean. This is the pattern behind what I later recognized as the <a href="/blog/the-agent-design-space/">supervisor agent pattern</a> in production.</p>
 <p>The second reason was isolation. When a research agent goes off the rails, I do not want it to corrupt the state of a code generation agent working on the same task. Separate agents mean separate memory, separate context, separate failure boundaries.</p>
 <p>The speed gains are real but conditional. If two agents can work on independent sub-problems simultaneously, I see latency drop by roughly the sum of their individual times rather than the concatenation. For a task分解 into three parallel workstreams, this can mean a 3x improvement in wall-clock time. That math only holds if the work is actually parallelizable and the agents are not waiting on each other for shared state.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">SINGLE VS MULTI-AGENT</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/single-vs-multi-agent.html" title="Single-agent versus multi-agent topology with a tradeoff readout for reliability, latency, and failure surface" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="the-failure-modes-nobody-talks-about">The failure modes nobody talks about</h2>
 <p>Here is what the architecture debates skip over: multi-agent systems fail in transit. Between agents.</p>
 <p>A single agent fails inside a loop you control. A multi-agent system fails across message boundaries. The supervisor sends a task to a sub-agent and gets back something unexpected. The sub-agent completes its work but the memory update never reaches the shared store. The coordination agent dispatches tasks to three workers and one of them silently drops off the network.</p>
-<p>I ran into this repeatedly when building a pipeline that used <a href="/articles/the-agent-design-space">event-driven agent architectures</a>. The event bus was reliable in testing. In production, under load, message delivery became non-deterministic. Agents would complete work and publish results that nobody consumed because the consumer had restarted and re-subscribed. The system looked alive. The work was not happening.</p>
-<p>Error propagation is the other trap. In a single-agent system, an error stays local. In a multi-agent system, one agent's error can cascade if other agents trust its outputs without validation. I wrote about this in the context of <a href="/articles/production-ai-agent-errors">production AI agent errors</a> and it applies directly here. A planner agent that receives bad output from a research agent will build its entire subsequent plan on that bad foundation.</p>
+<p>I ran into this repeatedly when building a pipeline that used <a href="/blog/the-agent-design-space/">event-driven agent architectures</a>. The event bus was reliable in testing. In production, under load, message delivery became non-deterministic. Agents would complete work and publish results that nobody consumed because the consumer had restarted and re-subscribed. The system looked alive. The work was not happening.</p>
+<p>Error propagation is the other trap. In a single-agent system, an error stays local. In a multi-agent system, one agent's error can cascade if other agents trust its outputs without validation. I wrote about this in the context of <a href="/blog/production-ai-agent-errors/">production AI agent errors</a> and it applies directly here. A planner agent that receives bad output from a research agent will build its entire subsequent plan on that bad foundation.</p>
 <h2 id="memory-becomes-exponentially-more-complex">Memory becomes exponentially more complex</h2>
 <p>Single-agent memory is one problem. Multi-agent memory is several interconnected problems.</p>
 <p>If agents share memory, I have to reason about consistency. When Agent A writes to the shared store and Agent B reads from it, at what point does B see A's write? If I use event-driven message passing instead, each agent has its own view of state and I have to manage synchronization manually.</p>
 <p>The failure mode I hit was this: a planning agent would read the shared memory expecting the research agent to have finished and written its findings. The research agent had finished. It had written its findings to its own isolated memory, not the shared store. The planning agent proceeded with stale data.</p>
 <p>I eventually had to build explicit memory synchronization steps into the workflow. Each agent would confirm its writes had propagated before the next agent was allowed to proceed. This added latency and made the workflow less concurrent, which undercut the original reason for splitting into multiple agents.</p>
-<p>When I look at <a href="/articles/memory-hierarchy-in-ai-systems">shared vs isolated memory in multi-agent workflows</a>, the tradeoff is not which is better. It is which failure mode is easier to debug.</p>
+<p>When I look at <a href="/blog/memory-hierarchy-in-ai-systems/">shared vs isolated memory in multi-agent workflows</a>, the tradeoff is not which is better. It is which failure mode is easier to debug.</p>
 <h2 id="when-to-make-the-call">When to make the call</h2>
-<p>I use a simple heuristic. If the task has one clear goal and the steps to reach it are linear or lightly branched, a single agent with good <a href="/articles/llm-context-windows-explained">context window management</a> will get you there faster and with fewer surprises.</p>
+<p>I use a simple heuristic. If the task has one clear goal and the steps to reach it are linear or lightly branched, a single agent with good <a href="/blog/llm-context-windows-explained/">context window management</a> will get you there faster and with fewer surprises.</p>
 <p>If the task has multiple independent workstreams, requires different tool sets that do not share schemas, or needs true concurrency for latency reasons, I split into multiple agents.</p>
 <p>The decision is not architectural. It is operational. Ask yourself: what failure looks am I choosing between? A single agent that fails completely is often easier to recover from than a multi-agent system that fails partially and keeps running in a broken state.</p>
 <p>I have shipped both. The multi-agent systems felt more impressive going in. The single-agent systems were easier to debug when things went wrong.</p>
@@ -258,7 +265,7 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/2026-05-05-memory-versioning-and-audit-trails/" class="related-card">
+      <a href="/blog/memory-versioning-and-audit-trails/" class="related-card">
         <div class="related-card-date">2026-05-05</div>
         <div class="related-card-title">Memory Versioning and Audit Trails for Regulated AI Agents</div>
       </a>
@@ -266,7 +273,7 @@
         <div class="related-card-date">2026-04-26</div>
         <div class="related-card-title">When to Build an Agent and When to Build a Smarter Assistant</div>
       </a>
-      <a href="/blog/2026-04-23-agent-loop-anatomy/" class="related-card">
+      <a href="/blog/agent-loop-anatomy/" class="related-card">
         <div class="related-card-date">2026-04-23</div>
         <div class="related-card-title">The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</div>
       </a>
@@ -350,9 +357,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic Cache: Similarity Threshold, Hit vs Miss</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.wrap{width:100%;max-width:680px;padding:0 20px;box-sizing:border-box;}
+.title{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-3);text-align:center;margin-bottom:18px;}
+.flow{display:flex;align-items:center;gap:18px;}
+.box{flex:1;border:1px solid var(--border);padding:12px;background:var(--bg-2);min-height:108px;box-sizing:border-box;}
+.box-h{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);margin-bottom:10px;}
+.q{font-family:var(--mono);font-size:11px;color:var(--text-2);line-height:1.4;}
+.arrow{font-family:var(--mono);font-size:18px;color:var(--text-3);}
+
+.sim{font-family:var(--mono);text-align:center;}
+.sim-num{font-size:26px;color:var(--accent);font-weight:bold;}
+.sim-thresh{font-size:10px;color:var(--text-3);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}
+.scale{height:10px;border:1px solid var(--border);position:relative;margin-top:10px;background:var(--bg-1);}
+.scale .marker{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--accent);transition:left .8s ease;}
+.scale .tmark{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--text-1);opacity:0.5;left:88%;}
+
+.verdict{margin-top:18px;border:1px solid var(--border);padding:14px;text-align:center;transition:all .4s ease;}
+.verdict .label{font-family:var(--mono);font-size:16px;letter-spacing:0.1em;font-weight:bold;}
+.verdict .desc{font-family:var(--mono);font-size:10px;color:var(--text-2);margin-top:6px;}
+.verdict.hit{border-color:var(--accent);background:rgba(212,64,0,0.06);}
+.verdict.hit .label{color:var(--accent);}
+.verdict.miss{border-color:var(--border);}
+.verdict.miss .label{color:var(--text-3);}
+@media (prefers-color-scheme:dark){.verdict.hit{background:rgba(255,95,31,0.08);}}
+
+.savings{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);text-align:center;margin-top:12px;}
+.savings b{color:var(--accent);}
+
+@media (max-width:600px){
+.flow{flex-direction:column;gap:10px;}
+.arrow{transform:rotate(90deg);}
+.box{width:100%;min-height:0;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="title">Semantic Cache &middot; Cosine Similarity Threshold 0.88</div>
+  <div class="flow">
+    <div class="box">
+      <div class="box-h">Incoming Query</div>
+      <div class="q" id="query">"Can I return an item?"</div>
+    </div>
+    <div class="arrow">&rarr;</div>
+    <div class="box">
+      <div class="box-h">Nearest Cached Query</div>
+      <div class="sim">
+        <div class="sim-num" id="simnum">0.91</div>
+        <div class="sim-thresh">vs threshold 0.88</div>
+        <div class="scale"><span class="tmark"></span><span class="marker" id="marker" style="left:91%"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict hit" id="verdict">
+    <div class="label" id="vlabel">CACHE HIT</div>
+    <div class="desc" id="vdesc">Return stored response &middot; skip retrieval + LLM call</div>
+  </div>
+  <div class="savings">Cuts <b>40&ndash;70%</b> of LLM API calls on the right workloads</div>
+</div>
+<script>
+var states=[
+  {q:'"Can I return an item?"',sim:0.91,hit:true,desc:'Return stored response &middot; skip retrieval + LLM call'},
+  {q:'"What is your refund window?"',sim:0.74,hit:false,desc:'Run full RAG pipeline &middot; call LLM &middot; store result'},
+  {q:'"How do I send something back?"',sim:0.90,hit:true,desc:'Return stored response &middot; skip retrieval + LLM call'}
+];
+var i=0;
+var query=document.getElementById('query'),simnum=document.getElementById('simnum'),marker=document.getElementById('marker');
+var verdict=document.getElementById('verdict'),vlabel=document.getElementById('vlabel'),vdesc=document.getElementById('vdesc');
+function render(){
+  var s=states[i];
+  query.textContent=s.q;
+  simnum.textContent=s.sim.toFixed(2);
+  marker.style.left=(s.sim*100)+'%';
+  if(s.hit){verdict.className='verdict hit';vlabel.textContent='CACHE HIT';}
+  else{verdict.className='verdict miss';vlabel.textContent='CACHE MISS';}
+  vdesc.innerHTML=s.desc;
+  i=(i+1)%states.length;
+}
+render();
+setInterval(render,3000);
+</script>
+</body>
+</html>

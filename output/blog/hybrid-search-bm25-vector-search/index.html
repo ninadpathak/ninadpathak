@@ -236,8 +236,15 @@
 <h2 id="reciprocal-rank-fusion-the-merge-algorithm-that-doesnt-require-score-normalization">Reciprocal rank fusion: the merge algorithm that doesn't require score normalization</h2>
 <p>Running two retrievers is straightforward. Merging their ranked result lists is the hard part.</p>
 <p>A naive linear combination of scores fails because BM25 scores and embedding similarity scores exist on completely different scales. A BM25 score of 8.5 and a cosine similarity of 0.87 mean nothing relative to each other without normalization. Min-max normalization addresses this but requires knowing the score distribution for each retriever on each query, which means you can't compute the final score until all candidates are returned.</p>
-<p>Reciprocal Rank Fusion (RRF) avoids the normalization problem entirely. RRF scores each document by summing <code>1 / (k + rank)</code> across all result lists the document appears in, where <code>k=60</code> is a constant from <a href="https://opensearch.org/blog/introducing-reciprocal-rank-fusion-hybrid-search/">the original Cormack et al. SIGIR 2009 paper</a>. Rank position is all that matters; the underlying scores are discarded.</p>
+<p>Reciprocal Rank Fusion (RRF) avoids the normalization problem entirely. RRF scores each document by summing <code>1 / (k + rank)</code> across all result lists the document appears in, where <code>k=60</code> is a constant from <a href="https://opensearch.org/blog/introducing-reciprocal-rank-fusion-hybrid-search/">the original Cormack et al. SIGIR 2009 paper</a>. Rank position is all that matters. The underlying scores are discarded.</p>
 <p>The formula means a document ranked first in one list and missing from the other scores <code>1/(60+1) = 0.0164</code>. A document ranked first in both lists scores <code>0.0164 + 0.0164 = 0.0328</code> and will almost always win. A document ranked 100th in both lists scores <code>0.0099 + 0.0099 = 0.0198</code> and stays near the bottom. Documents that appear in only one list score modestly and get natural deranking relative to documents that both retrievers agreed on.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">FUSING TWO RANKED LISTS WITH RRF (k=60)</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/hybrid-search-fusion.html" title="BM25 and vector result lists fusing into one ranked list via reciprocal rank fusion" loading="lazy"></iframe>
+  </div>
+</div>
+
 <p>The practical advantage of RRF: no tuning required for initial deployment. The <code>k=60</code> constant generalizes well across domains. You don't need labeled data to set weights. <a href="https://www.elastic.co/search-labs/blog/improving-information-retrieval-elastic-stack-hybrid">Elasticsearch recommends RRF as the starting point</a> precisely because of this robustness.</p>
 <h2 id="benchmark-numbers-what-the-gains-actually-look-like">Benchmark numbers: what the gains actually look like</h2>
 <p><a href="https://www.elastic.co/search-labs/blog/improving-information-retrieval-elastic-stack-hybrid">Elastic's benchmarks</a> show RRF increasing average NDCG@10 by 1.4% over their Learned Sparse Encoder alone and 18% over BM25 alone across the BEIR benchmark suite.</p>
@@ -258,7 +265,7 @@
 <p><strong>Vespa</strong> combines BM25 and neural retrieval natively in its ranking framework. Vespa's advantage is that the fusion happens at the ranking expression level, which gives you fine-grained control over how features from both retrievers interact. The tradeoff is Vespa's steeper learning curve compared to managed services.</p>
 <h2 id="score-normalization-vs-rrf-when-to-switch">Score normalization vs RRF: when to switch</h2>
 <p>RRF's rank-only approach discards information. When one retriever is much more confident about a document than the other, RRF treats a rank-1 result the same whether the underlying score was 0.99 or 0.55. Score-based fusion preserves that signal.</p>
-<p>Linear combination with min-max normalization can outperform RRF when the score distributions are stable and you have labeled data for weight tuning. <a href="https://www.elastic.co/search-labs/blog/weighted-reciprocal-rank-fusion-rrf">Elasticsearch's benchmarks</a> found hybrid dismax with name boosting achieved a mean NDCG of 0.7497 versus RRF's 0.7068 on one e-commerce dataset, with the gap closing as document diversity increased.</p>
+<p>Linear combination with min-max normalization can outperform RRF when the score distributions are stable and you have labeled data for weight tuning. <a href="https://www.elastic.co/search-labs/blog/weighted-reciprocal-rank-fusion-rrf">Elasticsearch's benchmarks</a> found hybrid dismax with name boosting achieved a mean NDCG of 0.7497 versus RRF's 0.7068 on one e-commerce dataset, with the difference closing as document diversity increased.</p>
 <p>My recommendation: start with RRF. It requires no labeled data, no score distribution assumptions, and no calibration. Move to weighted linear combination only when you have enough labeled queries to tune it properly and your benchmark results show it's worth the maintenance overhead.</p>
 <h2 id="the-alpha-parameter-and-query-type-routing">The alpha parameter and query type routing</h2>
 <p>Not every query should use the same alpha. A query like "what are the differences between TCP and UDP?" benefits from semantic retrieval (alpha closer to 1). A query like "ERROR_CODE_4291 stack trace" benefits from keyword retrieval (alpha closer to 0).</p>
@@ -293,6 +300,10 @@ Dense multilingual models handle translation-equivalent queries better than BM25
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="related-card">
+        <div class="related-card-date">2026-05-12</div>
+        <div class="related-card-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      </a>
       <a href="/blog/llm-inference-optimization/" class="related-card">
         <div class="related-card-date">2026-05-06</div>
         <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
@@ -300,10 +311,6 @@ Dense multilingual models handle translation-equivalent queries better than BM25
       <a href="/blog/the-memory-hierarchy-why-rag-is-not-enough/" class="related-card">
         <div class="related-card-date">2026-04-29</div>
         <div class="related-card-title">The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</div>
-      </a>
-      <a href="/blog/2026-04-28-asymmetric-retrieval-agent-memory/" class="related-card">
-        <div class="related-card-date">2026-04-28</div>
-        <div class="related-card-title">Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</div>
       </a>
     </div>
   </div>
@@ -385,9 +392,9 @@ Dense multilingual models handle translation-equivalent queries better than BM25
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

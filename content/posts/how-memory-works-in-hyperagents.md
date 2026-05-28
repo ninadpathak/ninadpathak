@@ -6,6 +6,13 @@ tags: [ai, agents, memory, hyperagents, infrastructure]
 status: published
 ---
 
+<div class="visual-wrapper">
+  <div class="visual-title">HyperAgents Memory Architecture</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/hyperagents-memory.html" title="HyperAgents memory architecture" loading="lazy"></iframe>
+  </div>
+</div>
+
 ##What Is a Hyperagent And Why Does Memory Matter
 
 A HyperAgent is not a single language model call. It is a composed system of models, tools, and a reasoning loop that can run for minutes or hours across many steps. When you build something that lives inside a long-running process, you quickly hit a wall: the model forgets. Context windows fill up. Sessions collapse. Without a memory architecture, every turn starts from scratch and every user experience degrades.

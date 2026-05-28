@@ -38,6 +38,13 @@ The pipeline for semantic caching has four components:
 
 [GPTCache](https://arxiv.org/abs/2411.05276) reports API call reduction of up to 68.8% across query categories, with cache hit rates from 61.6% to 68.8%. The system achieved positive hit rates exceeding 97%, meaning cached responses returned for genuine semantic matches were almost always appropriate. Speed improvement on hits is 2-10x depending on your LLM's baseline latency.
 
+<div class="visual-wrapper">
+  <div class="visual-title">SEMANTIC CACHE: HIT VS MISS</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/semantic-cache.html" title="An incoming query embedded and compared to the cache by similarity threshold, showing a HIT that returns the cached response versus a MISS that calls the LLM and stores the result" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## Similarity threshold tuning: the number that determines everything
 
 The threshold is where most implementations go wrong. Set it too high and you get almost no cache hits. Set it too low and you return wrong answers for queries that only superficially resemble the cached one.
@@ -52,7 +59,7 @@ I've found that the threshold should vary by domain. Product documentation queri
 
 GPTCache uses SQLite as its default storage backend. SQLite doesn't handle concurrent writes well. Under production traffic with multiple workers, you'll see write contention, lock timeouts, and missed cache writes. The fix is straightforward: swap the backend to Redis or PostgreSQL.
 
-[Redis](https://redis.io/tutorials/semantic-caching-with-redis-langcache/) is the most common production backend for semantic caching. It keeps embeddings and responses in memory with optional persistence, supports native vector search, and handles the concurrent write load that kills SQLite. Redis LangCache is the managed option; RedisVL is the open-source library.
+[Redis](https://redis.io/tutorials/semantic-caching-with-redis-langcache/) is the most common production backend for semantic caching. It keeps embeddings and responses in memory with optional persistence, supports native vector search, and handles the concurrent write load that kills SQLite. Redis LangCache is the managed option. RedisVL is the open-source library.
 
 A production deployment I've seen in enterprise inventory management processed over 10,000 queries with an average latency of 8.2 seconds end-to-end and 94.3% semantic accuracy at cache hits. The latency figure includes the cache lookup (under 50ms for Redis) plus the fallback LLM call on misses.
 

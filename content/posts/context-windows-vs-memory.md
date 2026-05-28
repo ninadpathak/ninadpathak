@@ -10,6 +10,14 @@ You have a 1M token context window and your agent still forgets what the user sa
 
 I have watched engineers build elaborate pipelines around long context windows and then wonder why their system still "forgets." This is not a philosophical distinction. It is an engineering reality with concrete consequences for how you build, price, and debug AI systems.
 
+
+<div class="visual-wrapper">
+  <div class="visual-title">Retrieval Decay: Context Window vs Memory</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/context-memory.html" title="Context window versus persistent memory retrieval decay" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## What a context window actually is
 
 A context window is the total amount of text a model can see in a single inference call. You pass in 500K tokens, the model processes all 500K, and produces an output. That processing happens in one forward pass through the transformer.

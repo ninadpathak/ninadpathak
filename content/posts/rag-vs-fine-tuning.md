@@ -21,13 +21,20 @@ Start by asking what you are trying to change. Do you need the model to know new
 
 
 
-RAG is the superior choice for dynamic information. It allows you to update the model's "knowledge" in seconds by adding a document to a vector database. Fine-tuning requires a new training run every time your data changes. This makes it unsuitable for most business applications where data is in constant flux.
+RAG is the superior choice for dynamic information. It allows you to update the model's "knowledge" in seconds by adding a document to a vector database, though it is worth knowing [where RAG ends and persistent memory begins](/blog/rag-vs-memory/) before you commit to it as your only knowledge layer. Fine-tuning requires a new training run every time your data changes. This makes it unsuitable for most business applications where data is in constant flux.
+
+<div class="visual-wrapper">
+  <div class="visual-title">RAG VS FINE-TUNING DECISION QUADRANT</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/rag-finetuning-decision.html" title="A two-axis quadrant routing a use-case to RAG, fine-tuning, both, or the base model based on how often knowledge changes and how specialized the behavior is" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## What RAG is actually good at
 
 RAG excels at accuracy and auditability. The model can cite its sources because the information is provided in the prompt. You can see exactly which document was retrieved to generate a specific answer. Such transparency is critical for legal, medical, or financial applications.
 
-Implementing RAG requires a robust retrieval pipeline. You must handle chunking and embedding. You need a way to rerank results to ensure only the best context is sent to the LLM. RAG is about information retrieval as much as it is about text generation.
+Implementing RAG requires a robust retrieval pipeline. You must handle chunking and embedding. You need a way to [rerank results so only the best context reaches the LLM](/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/). RAG is about information retrieval as much as it is about text generation.
 
 ## What fine-tuning is actually good at
 
@@ -37,6 +44,6 @@ Such efficiency reduces latency and token costs. You "bake" the instructions int
 
 ## A practical rule for production
 
-The most successful production systems use both. They use fine-tuning to ensure the model always outputs data in the correct format. They use RAG to provide the real-time facts the model needs to be useful.
+The most successful production systems use both. They use fine-tuning to ensure the model always outputs data in the correct format, though [JSON mode and function calling](/blog/structured-outputs-llms-json-mode-function-calling/) often handle that formatting requirement without any training at all. They use RAG to provide the real-time facts the model needs to be useful.
 
 Treat fine-tuning as your architectural foundation. Use RAG as your data layer. Such a hybrid approach provides the highest level of reliability and flexibility. You get the best of both worlds: a model that behaves perfectly and knows everything about your latest business results.

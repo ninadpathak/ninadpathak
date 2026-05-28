@@ -51,7 +51,7 @@ A debugger's mindset persists in my writing for this reason. One recurring probl
 
 ## I left behind local optimization of prose
 
-Engineering often rewards local optimization—speeding up one specific function or cleaning up one specific module. Writing has similar local moves, such as perfecting a single sentence or adding a clever analogy. I found that local optimization in writing can easily damage the utility of the whole page.
+Engineering often rewards local optimization, speeding up one specific function or cleaning up one specific module. Writing has similar local moves, such as perfecting a single sentence or adding a clever analogy. I found that local optimization in writing can easily damage the utility of the whole page.
 
 <div class="visual-wrapper">
   <div class="visual-title">The Context Bridge</div>
@@ -83,7 +83,7 @@ Code enters a maintenance phase once it is shipped. Documentation follows the sa
 
 Search queries change over time. Product defaults drift. Screenshots become outdated as the UI evolves. I view a published tutorial as a living system that requires recurring validation. I also look for opportunities to link older posts to newer ones, turning the site into a network of information rather than a pile of isolated blog posts.
 
-One example from this site is [How to Write a Changelog That Developers Actually Read](/blog/how-to-write-a-changelog-developers-actually-read/). That post creates a stable reference point that I can link to in every subsequent piece about developer communication. Maintenance is not a chore; it is how you preserve the value of the technical assets you have already built.
+One example from this site is [How to Write a Changelog That Developers Actually Read](/blog/how-to-write-a-changelog-developers-actually-read/). That post creates a stable reference point that I can link to in every subsequent piece about developer communication. Maintenance is not a chore. It is how you preserve the value of the technical assets you have already built.
 
 ## I left behind a narrow definition of what is "technical"
 
@@ -108,9 +108,9 @@ Three major shifts stand out from my time in this role.
 
 First, feedback loops became more legible. A confusing page fails in visible ways that are often easier to observe than a latent bug in a distributed system. Readers drop off at specific steps. Support questions repeat the same patterns. When you are willing to look at the data, documentation failure is highly observable.
 
-Second, audience empathy moved from a "soft skill" to a core production requirement. An engineer can occasionally succeed while being impatient with a user's lack of context. A technical writer cannot. My job is to bridge that gap by becoming the "first user" of every feature.
+Second, audience empathy moved from a "soft skill" to a core production requirement. An engineer can occasionally succeed while being impatient with a user's lack of context. A technical writer cannot. My job is to bridge that difference by becoming the "first user" of every feature.
 
-Third, the leverage of my work shifted. A feature helps the users who find it. A well-written page can change the understanding of thousands of developers before they ever interact with your product. I focus on durable technical assets—changelogs, migration guides, and deep-dive tutorials—because they provide the highest return on investment for the team over the long term.
+Third, the reach of my work shifted. A feature helps the users who find it. A well-written page can change the understanding of thousands of developers before they ever interact with your product. I focus on durable technical assets (changelogs, migration guides, and deep-dive tutorials) because they provide the highest return on investment for the team over the long term.
 
 ## FAQ
 

@@ -10,6 +10,13 @@ Context windows are not memory. That is the first thing engineers get wrong when
 
 Every production AI agent I have shipped runs into the same failure mode eventually: it starts forgetting recent conversation turns, dropping critical instructions, or producing responses that ignore what the user just said. The root cause is almost always a misunderstanding of how short-term memory works inside the context window architecture.
 
+<div class="visual-wrapper">
+  <div class="visual-title">The Short-Term Memory Window</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/short-term-memory.html" title="Short-term memory window for AI agents" loading="lazy"></iframe>
+  </div>
+</div>
+
 ##What The Context Window Actually Is
 
 The context window is a contiguous token buffer that feeds into the transformer's attention mechanism. When you send a 128k token context to Claude or GPT-4o, the model does not "remember" everything equally. Attention scores distribute across all tokens, but research has consistently shown that performance degrades for information placed in the middle of long contexts.
@@ -146,7 +153,7 @@ The second layer is episodic memory, which stores summaries of past interactions
 
 The third layer is semantic memory, which is external knowledge retrieval. This is your RAG pipeline, your product documentation, your codebases. The agent retrieves relevant documents from this layer on each turn based on the current query.
 
-I have written about [how Anthropic's contextual retrieval changes RAG architecture](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/) and about [RAG evaluation metrics that actually matter](/articles/rag-evaluation-metrics-what-actually-matters/). Both posts are relevant here because the retrieval quality in your semantic memory layer directly affects how much you need to rely on raw context window capacity.
+I have written about [how Anthropic's contextual retrieval changes RAG architecture](/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/) and about [RAG evaluation metrics that actually matter](/blog/rag-evaluation-metrics-what-actually-matters/). Both posts are relevant here because the retrieval quality in your semantic memory layer directly affects how much you need to rely on raw context window capacity.
 
 The key insight is that these three layers are not separate systems. They are one memory hierarchy. Your context window is the top of that hierarchy. Semantic and episodic memory feed into it. When the context window is full, you evict from the bottom (old episodic memories) before you lose information from the top (current conversation).
 
@@ -216,7 +223,7 @@ Short-term and long-term memory are not competing systems. They are a hierarchy.
 
 The mistake is treating long-term memory as optional or secondary. If your agent only has access to the context window, it has no memory of previous sessions, no knowledge of the user's past preferences, and no ability to retrieve relevant documentation beyond what fits in the current context.
 
-I have written about [token counting and cost control](/articles/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/) and [prompt caching and when the math works](/articles/prompt-caching-what-it-is-and-when-the-math-works/). Both are relevant here because the memory architecture you design has direct cost implications. Every retrieval call, every summarization pass, and every context window refill costs money.
+I have written about [token counting and cost control](/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/) and [prompt caching and when the math works](/blog/prompt-caching-what-it-is-and-when-the-math-works/). Both are relevant here because the memory architecture you design has direct cost implications. Every retrieval call, every summarization pass, and every context window refill costs money.
 
 The pattern I follow: maximize context window efficiency first, then build episodic memory as a reliability layer, then invest in semantic retrieval quality. This sequence gives you the best return on engineering effort.
 
@@ -228,7 +235,6 @@ Context window management is not a solved problem. The approaches in this post r
 
 - [Context windows vs memory](/blog/context-windows-vs-memory/)
 - [AI memory management for LLMs](/blog/ai-memory-management-for-llms/)
-- [Short-term memory for AI agents](/blog/short-term-memory-for-ai-agents/)
 - [How memory works in HyperAgents](/blog/how-memory-works-in-hyperagents/)
 - [State of AI agent memory 2026](/blog/state-of-ai-agent-memory-2026/)
 

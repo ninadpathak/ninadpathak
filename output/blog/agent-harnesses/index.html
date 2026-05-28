@@ -193,7 +193,7 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
-        <span class="post-meta-time">9 min read</span>
+        <span class="post-meta-time">10 min read</span>
       </div>
       <h1 class="post-title">Agent Harnesses: the Infrastructure Layer Your Llm Agent Actually Needs</h1>
       <p class="lead">Every production AI agent needs a harness. Here is what one contains, why frameworks often are not enough, and how to build the layer that actually determines reliability.</p>
@@ -233,9 +233,16 @@
 <p>That is still a harness. The question is whether it was designed intentionally. It could have grown organically around a specific use case until it became impossible to test or extend.</p>
 <h2 id="the-five-components-every-harness-contains">The five components every harness contains</h2>
 <p>A well-designed harness is not one monolithic block of logic. It has five distinct components. Each component has a specific responsibility.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">HARNESS LAYERS AROUND THE RAW LLM</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/agent-harness-layers.html" title="The agent harness as concentric infrastructure layers wrapping the raw LLM" loading="lazy"></iframe>
+  </div>
+</div>
+
 <p><strong>Tool registry.</strong> A catalog of available tools. Each tool is defined with a typed schema and a description the model can read. It includes an execution handler the harness calls when the model requests it. The harness intercepts tool call requests and routes them to the right handler. It returns results in the format the model expects. The non-obvious part is that the tool registry is also where you enforce per-tool permissions and rate limits. A web browsing tool with uncapped request volume is an incident waiting to happen.</p>
 <p><strong>Prompt assembler.</strong> The harness constructs the full context window from multiple sources at inference time. These sources include the system prompt and any cached instructions. They include retrieved documents and conversation history. They include the current task state and pending tool results. The order of those components matters. How much of each to include also matters. The prompt assembler is where context engineering happens at runtime dynamically. It does not happen once at design time and never get revisited.</p>
-<p><strong>Execution loop.</strong> The core of any harness. Send the current context to the model. Execute the tool if the response contains a tool call. Append the result and send it again. Surface the final answer if the response is complete. Enforce the stop conditions such as maximum iterations reached or context window full. Enforce explicit completion signals or unrecoverable errors. The loop is simple to describe and surprisingly easy to get wrong at scale. This is especially true when you need it to handle concurrent runs and partial failures without corrupting shared state.</p>
+<p><strong>Execution loop.</strong> The core of any harness, and the place where the <a href="/blog/agent-loop-anatomy/">perceive, think, act, remember phases of the agent loop</a> actually run. Send the current context to the model. Execute the tool if the response contains a tool call. Append the result and send it again. Surface the final answer if the response is complete. Enforce the stop conditions such as maximum iterations reached or context window full. Enforce explicit completion signals or unrecoverable errors. The loop is simple to describe and surprisingly easy to get wrong at scale. This is especially true when you need it to handle concurrent runs and partial failures without corrupting shared state.</p>
 <p><strong>State manager.</strong> Agents that span more than a few API calls need somewhere to store their working state. They need to know what subtasks are complete and what data has been gathered. They need to track what decisions have been made. Some harnesses keep all of this inside the context window. This works for short tasks but breaks for long ones. Others write to external storage after each step to enable checkpoint-based recovery. That choice between in-context state and external state is the single biggest architectural decision in agent design. The harness is where that decision gets made.</p>
 <p><strong>Observer.</strong> Structured logging of every step. Know what was in the prompt and what the model returned. Know which tool was called and what it returned. Track how long each step took. Debugging a failed run means staring at an opaque error and guessing without observability. You can replay any run with it. You can pinpoint exactly where reasoning went wrong. You can build evaluation datasets from production traces. Observability is not a nice-to-have for production agents. It is load-bearing infrastructure.</p>
 <h2 id="checkpointing-the-part-most-harnesses-get-wrong">Checkpointing: the part most harnesses get wrong</h2>
@@ -245,7 +252,7 @@
 <p>Three patterns work in practice.</p>
 <p><strong>Step-level persistence.</strong> Write state after each tool call completes. This provides maximum recovery granularity at the cost of higher storage overhead. It is appropriate for long-running tasks with expensive tool calls.</p>
 <p><strong>Phase-level persistence.</strong> Write state at logical phase boundaries. Do this after research completes or after analysis completes. Do it before writing begins. This is simpler to implement but provides coarser recovery points. It is appropriate for tasks with clear phases that take roughly equal time.</p>
-<p><strong>Idempotent tool design.</strong> Build tools so calling them twice produces the same result as calling them once. This eliminates an entire class of recovery errors when combined with step-level checkpointing. Re-run from the last checkpoint. Idempotent tools produce the same results. The agent continues from where it left off. This is harder to implement but the reliability improvement is substantial.</p>
+<p><strong>Idempotent tool design.</strong> Build tools so calling them twice produces the same result as calling them once. This eliminates an entire class of <a href="/blog/production-ai-agent-errors/">error patterns that break agents in production</a> when combined with step-level checkpointing. Re-run from the last checkpoint. Idempotent tools produce the same results. The agent continues from where it left off. This is harder to implement but the reliability improvement is substantial.</p>
 <p>The harness owns the checkpointing logic. The model has no concept of checkpoints. The application layer should not have to manage them. Taking that responsibility into the harness as a core function is what separates a harness built for production from one built to get a demo working.</p>
 <h2 id="context-management-strategies-for-long-horizon-tasks">Context management strategies for long-horizon tasks</h2>
 <p>The context window is a fixed resource. Long-running agents consume it. The harness needs a deliberate policy for what happens when it gets full. Doing nothing is not a policy. It is a bug that surfaces at the worst possible moment.</p>
@@ -280,7 +287,7 @@
 <h2 id="when-you-do-not-need-a-harness">When you do not need a harness</h2>
 <p>Not every LLM application is an agent. A harness adds real complexity. Adding complexity to a system that does not need it is not good engineering.</p>
 <p>Harness complexity is unnecessary when an application takes a single user input and calls the model once and returns a response. It is unnecessary when it calls the model a fixed number of times with a fixed sequence of prompts. It is unnecessary when it uses retrieval-augmented generation with a fixed retrieval step followed by a single synthesis step.</p>
-<p>A harness is necessary when the model decides which tools to call and in what order. It is necessary when tasks span more than a handful of API calls. It is necessary when partial failures need recovery without a full restart. It is necessary when auditability of what the agent did and why is a requirement.</p>
+<p>A harness is necessary when the model decides which tools to call and in what order, which is the property that separates an agent from a smarter assistant across <a href="/blog/the-taxonomy-of-ai-agents/">the broader taxonomy of AI agents</a>. It is necessary when tasks span more than a handful of API calls. It is necessary when partial failures need recovery without a full restart. It is necessary when auditability of what the agent did and why is a requirement.</p>
 <p>The rough line is clear. The harness is load-bearing infrastructure if the model controls the flow. The harness is overhead if the application controls the flow and the model is a subroutine.</p>
 <h2 id="the-harness-is-not-glamorous">The harness is not glamorous</h2>
 <p>The agent harness is not where interesting AI capability lives. The interesting capability is what the agent can do. The harness determines whether that capability is reliable enough to run in production. It determines if it can survive failures and be debugged when something goes wrong.</p>
@@ -303,7 +310,7 @@
         <div class="related-card-date">2026-04-26</div>
         <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
       </a>
-      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-21</div>
         <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
       </a>
@@ -387,9 +394,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

@@ -10,6 +10,13 @@ DeerFlow structures its memory system around something I call structured context
 
 The result is an architecture that is auditable, debuggable, and surprisingly easy to reason about at scale. If you have been burned by opaque agent systems that lose track of what happened three steps ago, DeerFlow's approach will feel like a breath of fresh air.
 
+<div class="visual-wrapper">
+  <div class="visual-title">DeerFlow Memory Architecture</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/deerflow-memory.html" title="DeerFlow layered memory architecture" loading="lazy"></iframe>
+  </div>
+</div>
+
 ##The Layered Architecture Of DeerFlow Memory
 
 DeerFlow organizes memory into three distinct layers that map cleanly to how humans actually think. Working memory lives in the prompt at execution time. Session memory lives in structured files that persist across turns. Long-term memory lives in a configurable store you plug in.

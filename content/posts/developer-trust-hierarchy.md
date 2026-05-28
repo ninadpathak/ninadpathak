@@ -12,7 +12,7 @@ title: 'The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketi
   Content'
 ---
 
-Engineers prioritize information sources based on a hierarchy of verify-ability and perceived intent. This "Trust Hierarchy" places source code and raw reference documentation at the top, followed by practitioner writing (Staff/Principal engineers solving specific problems), and marketing-led content at the bottom. Technical audiences possess a high "nonsense detector" that filters for edge cases, performance trade-offs, and failure modes — details often stripped from marketing-approved drafts. To win developer trust, content must shift from driving awareness to reducing implementation friction.
+Engineers prioritize information sources based on a hierarchy of verify-ability and perceived intent. This "Trust Hierarchy" places source code and raw reference documentation at the top, followed by practitioner writing (Staff/Principal engineers solving specific problems), and marketing-led content at the bottom. Technical audiences possess a high "nonsense detector" that filters for edge cases, performance trade-offs, and failure modes. These are details often stripped from marketing-approved drafts. To win developer trust, content must shift from driving awareness to reducing implementation friction.
 
 <div class="visual-wrapper">
   <div class="visual-title">The Developer Trust Hierarchy</div>
@@ -71,7 +71,7 @@ Tier 2 represents the formal contract of the system. API references, JSON schema
 
 ## Tier 3: practitioner post-mortems and staff blogs
 
-Tier 3 is where the most valuable "Content" lives. This is practitioner writing: Staff or Principal engineers documenting how they solved a messy, specific problem. 
+Tier 3 is where the most valuable "Content" lives. Practitioner writing means Staff or Principal engineers documenting how they solved a messy, specific problem, the same dynamic that turned [Stripe's technical blog into a competitive moat](/blog/how-stripes-technical-blog-became-a-competitive-moat/). 
 
 <div class="visual-wrapper">
   <div class="visual-title">Tier 3: the post-mortem (Cloudflare)</div>
@@ -135,7 +135,7 @@ Organizations often fail by providing too much ambient detail. AWS is a common e
 
 ## Engineering documentation as infrastructure
 
-Information architecture is the primary competitive moat for developer-first companies in 2026. Technical practitioners reward teams that integrate writing into the product roadmap. 
+Information architecture is the primary competitive moat for developer-first companies in 2026, and [durable technical content compounds into a lasting moat](/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/) over time. Technical practitioners reward teams that integrate writing into the product roadmap, while teams that neglect it discover [how devtools startups lose deals over bad docs](/blog/why-devtools-startups-lose-deals-over-bad-docs/). 
 
 Low implementation friction turns a technical blog into infrastructure. Deep practitioner writing becomes a permanent part of the trusted toolkit. Useful content remains relevant because it provides immediate utility to the reader.
 
@@ -151,7 +151,7 @@ It is extremely difficult. High-trust content (Tier 3 and 4) requires the abilit
 Move away from vanity metrics like pageviews. Measure "Developer Success" indicators: reduction in support tickets for specific features, "Time to First Success" for new integrations, and the retention rates of users who consume deep technical content versus those who only see promotional material.
 
 **Should I stop doing "brand awareness" marketing entirely?**
-No. Tier 5 content is necessary for top-of-funnel awareness. However, it must be supported by a strong foundation of Tier 1 through Tier 4 assets. Brand awareness gets a developer to your site; Tier 3 practitioner writing and Tier 2 reference docs keep them there and close the deal.
+No. Tier 5 content is necessary for top-of-funnel awareness. However, it must be supported by a strong foundation of Tier 1 through Tier 4 assets. Brand awareness gets a developer to your site. Tier 3 practitioner writing and Tier 2 reference docs keep them there and close the deal.
 
 **What is the "stolen valor" of technical titles?**
 This refers to the practice of giving non-technical or marketing-focused roles titles like "Developer Advocate" or "Solutions Architect" to gain perceived credibility. Engineers detect this quickly when the technical depth of the content doesn't match the seniority of the title, which often results in a permanent loss of trust for the brand.

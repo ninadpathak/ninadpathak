@@ -228,6 +228,13 @@
       <div class="post-content">
         <p>DeerFlow structures its memory system around something I call structured context passing. Rather than relying on a central vector store or a global knowledge graph, DeerFlow passes memory between agents through explicit JSON state files and Markdown context documents. Each agent in a workflow receives exactly what it needs at the moment it needs it, nothing more.</p>
 <p>The result is an architecture that is auditable, debuggable, and surprisingly easy to reason about at scale. If you have been burned by opaque agent systems that lose track of what happened three steps ago, DeerFlow's approach will feel like a breath of fresh air.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">DeerFlow Memory Architecture</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/deerflow-memory.html" title="DeerFlow layered memory architecture" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="the-layered-architecture-of-deerflow-memory">The Layered Architecture Of DeerFlow Memory</h2>
 <p>DeerFlow organizes memory into three distinct layers that map cleanly to how humans actually think. Working memory lives in the prompt at execution time. Session memory lives in structured files that persist across turns. Long-term memory lives in a configurable store you plug in.</p>
 <p>Working memory in DeerFlow is the current context window. It contains the system prompt, the task description, the conversation history, and any retrieved documents. This layer resets between major workflow stages. The key insight is that DeerFlow does not treat the working memory as a dump of everything known. It treats it as a carefully curated snapshot of what matters right now.</p>
@@ -543,9 +550,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

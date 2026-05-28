@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent Loop Cycle</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.scene {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.loop {
+  position: relative;
+  width: 320px;
+  height: 320px;
+}
+
+svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.track { fill: none; stroke: var(--border); stroke-width: 1.5; }
+.flow {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 60 691;   /* segment + remainder of ~751 circumference */
+  stroke-linecap: round;
+  animation: travel 8s linear infinite;
+}
+@keyframes travel {
+  from { stroke-dashoffset: 751; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.arrow-head { fill: var(--text-3); }
+
+/* phase node boxes positioned around the circle (top, right, bottom, left) */
+.node {
+  position: absolute;
+  width: 104px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 9px 6px;
+  box-sizing: border-box;
+  transition: border-color 0.25s linear, background 0.25s linear, box-shadow 0.25s linear;
+}
+.node .num {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: var(--text-3);
+}
+.node .name {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 2px 0 3px;
+  color: var(--text-1);
+  transition: color 0.25s linear;
+}
+.node .sub {
+  font-family: var(--mono);
+  font-size: 8px;
+  line-height: 1.4;
+  color: var(--text-3);
+}
+
+.node.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-1));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.node.active .name { color: var(--accent); }
+
+.n-perceive { left: 50%; top: 12px; }
+.n-think    { left: 88%; top: 50%; }
+.n-act      { left: 50%; top: 88%; }
+.n-remember { left: 12%; top: 50%; }
+
+.center {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: var(--mono);
+}
+.center .ttl {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.center .cur {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .loop { width: 290px; height: 290px; }
+  .node { width: 96px; }
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="loop">
+    <svg viewBox="0 0 320 320">
+      <!-- circle r=120 centered at 160,160 -> circumference ~= 754 -->
+      <circle class="track" cx="160" cy="160" r="120"></circle>
+      <circle class="flow" cx="160" cy="160" r="120"
+              transform="rotate(-90 160 160)"></circle>
+      <!-- directional arrowheads on the track (clockwise) -->
+      <polygon class="arrow-head" points="280,160 273,154 273,166"></polygon>
+      <polygon class="arrow-head" points="160,280 154,273 166,273"></polygon>
+      <polygon class="arrow-head" points="40,160 47,154 47,166"></polygon>
+      <polygon class="arrow-head" points="160,40 166,47 154,47"></polygon>
+    </svg>
+
+    <div class="node n-perceive" data-i="0">
+      <div class="num">01</div>
+      <div class="name">PERCEIVE</div>
+      <div class="sub">read context, form task state</div>
+    </div>
+    <div class="node n-think" data-i="1">
+      <div class="num">02</div>
+      <div class="name">THINK</div>
+      <div class="sub">reason, pick tool + args</div>
+    </div>
+    <div class="node n-act" data-i="2">
+      <div class="num">03</div>
+      <div class="name">ACT</div>
+      <div class="sub">call tool, produce output</div>
+    </div>
+    <div class="node n-remember" data-i="3">
+      <div class="num">04</div>
+      <div class="name">REMEMBER</div>
+      <div class="sub">update state, checkpoint</div>
+    </div>
+
+    <div class="center">
+      <div class="ttl">Agent Loop</div>
+      <div class="cur" id="cur">PERCEIVE</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// The pulse travels the circle in 8s. Highlight each phase as the pulse
+// arrives at its node. Pulse starts at top (perceive) and moves clockwise:
+// perceive(top) -> think(right) -> act(bottom) -> remember(left).
+const nodes = Array.from(document.querySelectorAll('.node'));
+const cur = document.getElementById('cur');
+const names = ['PERCEIVE', 'THINK', 'ACT', 'REMEMBER'];
+let i = 0;
+function step() {
+  nodes.forEach(n => n.classList.remove('active'));
+  nodes[i].classList.add('active');
+  cur.textContent = names[i];
+  i = (i + 1) % nodes.length;
+}
+step();
+setInterval(step, 2000); // 8s loop / 4 phases
+</script>
+</body>
+</html>

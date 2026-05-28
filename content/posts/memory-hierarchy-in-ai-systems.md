@@ -1,7 +1,7 @@
 ---
 title: "Memory Hierarchy in AI Systems: From Sensory to Semantic"
 date: 2026-04-19
-description: "How layered memory architecture helps AI systems achieve long-term context, personalization, and continuous learning — and why flat memory fails."
+description: "How layered memory architecture helps AI systems achieve long-term context, personalization, and continuous learning, and why flat memory fails."
 tags: [ai, agents, memory, cognitive-architecture, infrastructure]
 status: published
 ---
@@ -9,6 +9,14 @@ status: published
 Human brains do not store every experience equally. They layer it: sensory input gets filtered into working memory, some of that gets compressed into long-term storage, and the rest evaporates. This is not a bug in human cognition. It is the feature that makes it scalable. AI systems work the same way, and the teams that understand this build agents that actually remember things. The teams that treat memory as a flat document store end up with systems that forget the moment context runs out.
 
 I have implemented layered memory architectures in three different agent systems over the past two years. The difference between a flat memory approach and a hierarchical one is the difference between an agent that degrades over a long session and one that stays sharp. The Atkinson-Shiffrin model from 1968 maps almost perfectly onto what modern AI memory systems are building, and that is not a coincidence.
+
+
+<div class="visual-wrapper">
+  <div class="visual-title">The Memory Hierarchy Pyramid</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/memory-hierarchy.html" title="Memory hierarchy pyramid from sensory to semantic" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## The Atkinson-Shiffrin model and its AI mapping
 
@@ -24,7 +32,7 @@ Long-Term Memory ->  Persistent store (vector DB, KG, function store)
 
 The key insight is that each layer has different retention characteristics. Sensory memory holds raw input for milliseconds. Short-term memory holds curated content for seconds to minutes. Long-term memory holds compressed representations for days to years. You need all three layers, and they need to interact through explicit policies, not through a single flat store.
 
-## Layer 1: Sensory memory — the input buffer
+## Layer 1: Sensory memory, the input buffer
 
 Sensory memory in AI systems is the raw input layer. For a voice agent, this is the audio stream before ASR transcription. For a text agent, this is the raw token sequence before any processing. For a multimodal agent, this might be video frames or sensor readings.
 
@@ -32,7 +40,7 @@ The retention time at this layer is effectively zero for practical purposes. The
 
 The mistake engineers make is trying to store too much at this layer. You cannot retain the full raw audio stream for a two-hour conversation. The cost would be astronomical and the retrieval value would be near zero. Instead, you summarize and compress at this boundary.
 
-## Layer 2: Short-term memory — working context
+## Layer 2: Short-term memory, working context
 
 Short-term memory in AI is the context window. It holds what the model is currently reasoning about. In a transformer, this is the full token sequence that gets attention computed across. In an agent, this also includes the working variables, retrieved documents, and intermediate outputs from tool calls.
 
@@ -71,9 +79,9 @@ def select_for_context_window(
 
 The important thing is that short-term memory is volatile. When the context window resets or the session ends, working context disappears unless you explicitly promote selected items to long-term memory.
 
-## Layer 3: Episodic memory — what happened
+## Layer 3: Episodic memory, what happened
 
-Episodic memory stores particular events or interactions. In an AI system, this maps to session logs, conversation transcripts, and event sequences. The defining characteristic is that episodic memory is indexed by time and context, not by semantic similarity.
+Episodic memory stores particular events or interactions, and it sits alongside the [episodic, semantic, and working memory types every agent juggles](/blog/episodic-vs-semantic-vs-working-memory-agents/). In an AI system, this maps to session logs, conversation transcripts, and event sequences. The defining characteristic is that episodic memory is indexed by time and context, not by semantic similarity.
 
 When a user asks "what did we discuss about the API design last Tuesday?", that is an episodic retrieval problem. The system needs to find the session from last Tuesday and extract the relevant portion. Vector similarity search on a flat embedding store is a poor fit for this. You need time-based indexing with semantic filtering on top.
 
@@ -107,7 +115,7 @@ def get_relevant_sessions(project: str, topic: str, days_back: int = 7):
 
 Episodic memory is what most teams mean when they say "conversation history." But conversation history is only useful when it can be retrieved efficiently. Storing it is not the hard part. Retrieving the right episode at the right time is.
 
-## Layer 4: Semantic memory — what is known
+## Layer 4: Semantic memory, what is known
 
 Semantic memory stores facts, concepts, and world knowledge separate from the specific episodes where they were learned. In AI systems, this maps to the trained model weights, the retrieved knowledge base, and the persistent facts that persist across sessions.
 
@@ -115,7 +123,7 @@ The key property of semantic memory is that it survives session boundaries and c
 
 The failure mode for semantic memory is staleness. Facts change. When your team switches from pytest to unittest, the semantic memory entry that says "uses pytest" is now wrong. Detecting and correcting staleness is an unsolved problem in production memory systems.
 
-## Layer 5: Procedural memory — how to do things
+## Layer 5: Procedural memory, how to do things
 
 Procedural memory stores skills and learned behaviors. In AI systems, this maps to system prompts, tool definitions, agent loop configurations, and the behavioral patterns encoded through fine-tuning or RLHF.
 
@@ -168,7 +176,7 @@ The compression is rough but the selectivity is high. Only genuinely important i
 
 **Why not just use a large context window instead of a memory hierarchy?**
 
-Context windows have a fixed capacity and a retrieval accuracy curve that degrades in the middle of long contexts. The BEAM benchmark shows this clearly. A 1 million token context window does not give you 1 million tokens of useful memory. It gives you about 200K tokens of usable context at high accuracy, with the rest being noise. Explicit memory systems that manage what gets stored and how it gets retrieved outperform brute-force context at scale.
+Context windows have a fixed capacity and a retrieval accuracy curve that degrades in the middle of long contexts. The [BEAM memory benchmark shows why 1M context windows are not enough](/blog/beam-memory-benchmark/) to solve this. A 1 million token context window does not give you 1 million tokens of useful memory. It gives you about 200K tokens of usable context at high accuracy, with the rest being noise. Explicit memory systems that manage what gets stored and how it gets retrieved outperform brute-force context at scale.
 
 **How do you handle memory conflicts?**
 
@@ -180,7 +188,7 @@ Memory systems that persist user data across sessions introduce privacy consider
 
 **How does this differ from RAG?**
 
-RAG is a retrieval mechanism for external knowledge. Memory hierarchy is an architecture for maintaining agent state across sessions. RAG answers the question "what does the model know?" Memory hierarchy answers "what does the agent remember?" They are complementary. RAG feeds external knowledge into the working context layer. Memory hierarchy manages everything the agent has experienced.
+RAG is a retrieval mechanism for external knowledge, and I have argued at length about [why RAG alone is not enough for agent memory](/blog/the-memory-hierarchy-why-rag-is-not-enough/). Memory hierarchy is an architecture for maintaining agent state across sessions. RAG answers the question "what does the model know?" Memory hierarchy answers "what does the agent remember?" They are complementary. RAG feeds external knowledge into the working context layer. Memory hierarchy manages everything the agent has experienced.
 
 **What is the biggest failure mode in layered memory systems?**
 

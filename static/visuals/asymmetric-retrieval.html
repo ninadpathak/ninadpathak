@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symmetric vs Asymmetric Retrieval</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;padding:16px;gap:18px;}
+.hd{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);}
+
+.rows{display:flex;flex-direction:column;gap:26px;width:100%;max-width:540px;}
+.track{display:flex;align-items:center;gap:0;}
+.caption{font-family:var(--mono);font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline;}
+.caption .status{font-size:8.5px;}
+
+.box{border:1px solid var(--border);border-radius:4px;padding:9px 11px;box-sizing:border-box;text-align:center;flex:0 0 auto;background:var(--bg-1);}
+.box .role{font-family:var(--mono);font-size:7.5px;letter-spacing:0.12em;color:var(--text-3);text-transform:uppercase;}
+.box .q{font-family:var(--mono);font-size:9.5px;color:var(--text-1);margin-top:3px;line-height:1.3;}
+.q-box{width:200px;}
+.d-box{width:160px;}
+
+/* the connecting space holds the embedding-space gap */
+.gap{flex:1 1 auto;position:relative;height:46px;margin:0 6px;}
+.gap svg{position:absolute;inset:0;width:100%;height:100%;}
+.link{fill:none;stroke-width:2;stroke-linecap:round;}
+.link.match{stroke:var(--accent);}
+.link.miss{stroke:var(--text-3);stroke-dasharray:5 5;}
+.gaplbl{position:absolute;left:50%;top:-4px;transform:translateX(-50%);font-family:var(--mono);font-size:7.5px;letter-spacing:0.1em;color:var(--text-3);background:var(--bg-1);padding:0 4px;}
+
+/* moving pulse along the link */
+.pulse{fill:var(--accent);}
+
+.sym .q-box{border-color:var(--accent);}
+.asym{position:relative;}
+
+.note{font-family:var(--mono);font-size:8.5px;color:var(--text-2);line-height:1.5;max-width:540px;text-align:center;border-top:1px solid var(--border);padding-top:12px;}
+.note b{color:var(--accent);}
+
+@media (max-width:600px){
+  .track{flex-direction:column;gap:8px;}
+  .q-box,.d-box{width:100%;}
+  .gap{width:100%;height:34px;margin:2px 0;}
+  .caption{flex-direction:column;gap:2px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="hd">Query-time vs Agent-time Retrieval</div>
+
+  <div class="rows">
+    <!-- SYMMETRIC: human query <-> doc, same register -->
+    <div class="sym">
+      <div class="caption"><span>Query-time / human</span><span class="status" style="color:var(--accent)">SYMMETRIC: MATCH</span></div>
+      <div class="track">
+        <div class="box q-box">
+          <div class="role">User query</div>
+          <div class="q">"deployment steps for service X?"</div>
+        </div>
+        <div class="gap">
+          <span class="gaplbl">embedding space</span>
+          <svg viewBox="0 0 160 46" preserveAspectRatio="none">
+            <line class="link match" x1="4" y1="23" x2="156" y2="23"></line>
+            <circle class="pulse" r="3.5" cx="4" cy="23">
+              <animate attributeName="cx" values="4;156" dur="2s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </div>
+        <div class="box d-box">
+          <div class="role">Stored doc</div>
+          <div class="q">"deployment steps: ..."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASYMMETRIC: agent query !<-> doc, different register, pipeline breaks -->
+    <div class="asym">
+      <div class="caption"><span>Agent-time / agent</span><span class="status" style="color:var(--text-3)">ASYMMETRIC: LOW OVERLAP</span></div>
+      <div class="track">
+        <div class="box q-box">
+          <div class="role">Agent query</div>
+          <div class="q">"what failed last time?"</div>
+        </div>
+        <div class="gap">
+          <span class="gaplbl">embedding space</span>
+          <svg viewBox="0 0 160 46" preserveAspectRatio="none">
+            <!-- bent / non-aligned path = misses in vector space -->
+            <path class="link miss" d="M4 14 C 60 14, 100 40, 156 40"></path>
+            <circle class="pulse" r="3.5" cx="4" cy="14">
+              <animateMotion dur="2.4s" repeatCount="indefinite" path="M0 0 C 56 0, 96 26, 152 26"/>
+            </circle>
+          </svg>
+        </div>
+        <div class="box d-box">
+          <div class="role">Stored doc</div>
+          <div class="q">"timeout configuration"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    Same vector DB, same embedding model. Agent queries are more specific and less semantically aligned with the docs that hold the answer. <b>Fix: hybrid BM25 + keyword boosting for entity terms</b> (recall +23% on agent queries vs +6% on human queries).
+  </div>
+</div>
+</body>
+</html>

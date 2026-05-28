@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation 80/20 Impact</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.scene {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.head { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); }
+.head .t { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-2); }
+.head .b { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+
+.bars { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 7px; min-height: 0; }
+.row { display: grid; grid-template-columns: 175px 1fr 38px; align-items: center; gap: 10px; }
+.label { font-family: var(--mono); font-size: 9.5px; color: var(--text-2); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track { height: 14px; background: var(--bg-2); border-radius: 2px; position: relative; overflow: hidden; }
+.fill { height: 100%; background: var(--text-3); border-radius: 2px; transform-origin: left; transform: scaleX(0); animation: grow 4s ease-out forwards; }
+.fill.hi { background: var(--accent); }
+.pct { font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--text-3); }
+.row.high .label { color: var(--text-1); font-weight: 700; }
+.row.high .pct { color: var(--accent); }
+
+@keyframes grow { to { transform: scaleX(1); } }
+
+.divider { display: flex; align-items: center; gap: 8px; margin: 2px 0; }
+.divider .ln { flex: 1; height: 1px; background: var(--border); }
+.divider .tx { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
+
+.foot { flex: 0 0 auto; font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.04em; color: var(--text-3); }
+
+@media (max-width: 600px) {
+  .row { grid-template-columns: 120px 1fr 32px; }
+  .label { font-size: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="head">
+    <span class="t">Doc Practices / Impact, Sorted</span>
+    <span class="b">the 80/20 of docs</span>
+  </div>
+
+  <div class="bars">
+    <!-- high-impact: the vital 20% -->
+    <div class="row high">
+      <span class="label">Write for the reader's gap</span>
+      <div class="track"><div class="fill hi" style="width:96%;animation-delay:0.1s"></div></div>
+      <span class="pct">96</span>
+    </div>
+    <div class="row high">
+      <span class="label">Code that copy-pastes &amp; runs</span>
+      <div class="track"><div class="fill hi" style="width:90%;animation-delay:0.25s"></div></div>
+      <span class="pct">90</span>
+    </div>
+    <div class="row high">
+      <span class="label">Lead with task, not concept</span>
+      <div class="track"><div class="fill hi" style="width:84%;animation-delay:0.4s"></div></div>
+      <span class="pct">84</span>
+    </div>
+    <div class="row high">
+      <span class="label">Docs in version control</span>
+      <div class="track"><div class="fill hi" style="width:78%;animation-delay:0.55s"></div></div>
+      <span class="pct">78</span>
+    </div>
+
+    <div class="divider"><span class="ln"></span><span class="tx">20% of practices &middot; 80% of value</span><span class="ln"></span></div>
+
+    <!-- low-impact: the trivial many -->
+    <div class="row">
+      <span class="label">Structure for scanning</span>
+      <div class="track"><div class="fill" style="width:34%;animation-delay:0.7s"></div></div>
+      <span class="pct">34</span>
+    </div>
+    <div class="row">
+      <span class="label">Precise naming</span>
+      <div class="track"><div class="fill" style="width:28%;animation-delay:0.8s"></div></div>
+      <span class="pct">28</span>
+    </div>
+    <div class="row">
+      <span class="label">Behavioral metrics</span>
+      <div class="track"><div class="fill" style="width:20%;animation-delay:0.9s"></div></div>
+      <span class="pct">20</span>
+    </div>
+    <div class="row">
+      <span class="label">Style guide / content calendar</span>
+      <div class="track"><div class="fill" style="width:11%;animation-delay:1.0s"></div></div>
+      <span class="pct">11</span>
+    </div>
+    <div class="row">
+      <span class="label">Doc coverage %</span>
+      <div class="track"><div class="fill" style="width:6%;animation-delay:1.1s"></div></div>
+      <span class="pct">6</span>
+    </div>
+  </div>
+
+  <div class="foot">// 20% of practices deliver 80% of the value. The rest is ceremony. Relative weighting, illustrative.</div>
+</div>
+</body>
+</html>

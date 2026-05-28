@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent Taxonomy Ladder</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:14px;}
+.ladder{width:100%;max-width:560px;display:flex;flex-direction:column-reverse;gap:7px;}
+
+.axis{
+  display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--text-3);margin-top:4px;padding:0 2px;
+}
+
+.rung{
+  display:flex;align-items:center;gap:12px;
+  border:1px solid var(--border);border-radius:4px;
+  background:var(--bg-2);
+  padding:8px 12px;box-sizing:border-box;
+  transition:border-color 0.3s linear,background 0.3s linear,box-shadow 0.3s linear;
+}
+/* autonomy increases up the ladder: indent each higher rung */
+.rung[data-i="0"]{margin-right:0;}
+.rung[data-i="1"]{margin-right:6%;}
+.rung[data-i="2"]{margin-right:12%;}
+.rung[data-i="3"]{margin-right:18%;}
+.rung[data-i="4"]{margin-right:24%;}
+
+.bar{
+  width:5px;align-self:stretch;border-radius:2px;
+  background:var(--text-3);min-height:30px;
+  transition:background 0.3s linear,box-shadow 0.3s linear;
+}
+.meta{flex:0 0 26px;text-align:center;}
+.meta .num{font-family:var(--mono);font-size:9px;color:var(--text-3);letter-spacing:0.1em;}
+.body{flex:1;min-width:0;}
+.name{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:0.02em;color:var(--text-1);transition:color 0.3s linear;}
+.desc{font-size:11px;color:var(--text-2);margin-top:1px;line-height:1.3;}
+.auto{
+  flex:0 0 auto;font-family:var(--mono);font-size:8px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--text-3);text-align:right;line-height:1.4;
+}
+
+.rung.active{
+  border-color:var(--accent);
+  background:color-mix(in srgb,var(--accent) 8%,var(--bg-1));
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 16%,transparent);
+}
+.rung.active .name{color:var(--accent);}
+.rung.active .bar{background:var(--accent);}
+
+@media (max-width:600px){
+  .rung{gap:8px;padding:7px 9px;}
+  .rung[data-i="1"],.rung[data-i="2"],.rung[data-i="3"],.rung[data-i="4"]{margin-right:0;}
+  .auto{display:none;}
+  .desc{font-size:10px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="ladder">
+    <div class="axis"><span>&darr; low autonomy</span><span>high autonomy &uarr;</span></div>
+
+    <div class="rung" data-i="0">
+      <div class="bar"></div>
+      <div class="meta"><div class="num">T1</div></div>
+      <div class="body">
+        <div class="name">REACTIVE INFORMATION</div>
+        <div class="desc">One input, one output. No tools, no state.</div>
+      </div>
+      <div class="auto">single<br>response</div>
+    </div>
+
+    <div class="rung" data-i="1">
+      <div class="bar"></div>
+      <div class="meta"><div class="num">T2</div></div>
+      <div class="body">
+        <div class="name">TOOL-USING</div>
+        <div class="desc">Calls tools inside one request/response cycle.</div>
+      </div>
+      <div class="auto">picks<br>tools</div>
+    </div>
+
+    <div class="rung" data-i="2">
+      <div class="bar"></div>
+      <div class="meta"><div class="num">T3</div></div>
+      <div class="body">
+        <div class="name">LOOP AGENT</div>
+        <div class="desc">ReAct loop: reason, act, observe, repeat.</div>
+      </div>
+      <div class="auto">drives<br>the loop</div>
+    </div>
+
+    <div class="rung" data-i="3">
+      <div class="bar"></div>
+      <div class="meta"><div class="num">T4</div></div>
+      <div class="body">
+        <div class="name">MULTI-AGENT SYSTEM</div>
+        <div class="desc">Agents coordinate via shared state or messages.</div>
+      </div>
+      <div class="auto">delegates<br>sub-tasks</div>
+    </div>
+
+    <div class="rung" data-i="4">
+      <div class="bar"></div>
+      <div class="meta"><div class="num">T5</div></div>
+      <div class="body">
+        <div class="name">PERSISTENT-GOAL</div>
+        <div class="desc">Long-running goal across sessions, checkpoints state.</div>
+      </div>
+      <div class="auto">runs for<br>days/weeks</div>
+    </div>
+  </div>
+</div>
+<script>
+const rungs=Array.from(document.querySelectorAll('.rung')).sort((a,b)=>a.dataset.i-b.dataset.i);
+let i=0;
+function step(){
+  rungs.forEach(r=>r.classList.remove('active'));
+  rungs[i].classList.add('active');
+  i=(i+1)%rungs.length;
+}
+step();
+setInterval(step,1600);
+</script>
+</body>
+</html>

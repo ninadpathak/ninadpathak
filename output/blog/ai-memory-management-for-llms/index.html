@@ -231,10 +231,17 @@
       <div class="post-content">
         <p>LLMs have a context window. That does not mean they have memory. When I started building agentic pipelines in 2023, I watched junior engineers assume that a 128K token context meant their agent could "remember" previous interactions. It cannot. A 128K context is a static buffer. What happens inside it is determined entirely by how you manage it. The moment you exceed that window, or the moment you need cross-session continuity, you need an explicit memory system.</p>
 <p>I have shipped memory management layers into production pipelines handling tens of thousands of agent sessions. I have benchmarked eviction strategies, debugged summarization drift, and watched KV caches eat GPU memory faster than anything else. Here is what I have learned.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">How LLM Memory Management Works</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/memory-management.html" title="LLM memory management eviction and retention" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="the-two-memory-types-your-agent-actually-uses">The Two Memory Types Your Agent Actually Uses</h2>
 <p>Every LLM agent operates with two distinct memory mechanisms. Calling them both "memory" causes confusion, so let me be precise.</p>
 <p><strong>Explicit memory</strong> is managed by your application layer. You decide what to store, how to index it, and when to retrieve it. This includes vector databases, key-value stores, session logs, and any custom retrieval layer you build. Explicit memory is where your agent's long-term knowledge lives between sessions.</p>
-<p><strong>Implicit memory</strong> is what the model generates internally during a forward pass. The attention mechanism builds and maintains representations as tokens flow through layers. The KV cache is the physical manifestation of implicit memory on GPU memory. You do not directly control what the model "remembers" within a forward pass; the transformer's attention patterns determine that. You only control what enters the context window.</p>
+<p><strong>Implicit memory</strong> is what the model generates internally during a forward pass. The attention mechanism builds and maintains representations as tokens flow through layers. The KV cache is the physical manifestation of implicit memory on GPU memory. You do not directly control what the model "remembers" within a forward pass. The transformer's attention patterns determine that. You only control what enters the context window.</p>
 <p>The distinction matters because different strategies apply to each type. You can build sophisticated explicit memory layers, but if you ignore implicit memory management, you will still hit performance walls when the KV cache balloons during long inference runs.</p>
 <p>See also: <a href="/blog/how-memory-works-in-claude-code/">How Memory Works in Claude Code</a> and <a href="/blog/memory-hierarchy-in-ai-systems/">Memory Hierarchy in AI Systems</a>.</p>
 <h2 id="eviction-strategies-what-gets-kicked-out-first">Eviction Strategies: What Gets Kicked Out First</h2>
@@ -470,11 +477,11 @@
         <span class="k">return</span> <span class="n">memory_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
 
-<p>The core memory limit forces hard decisions about what matters. You cannot cheat and say "we will fit everything." Engineers coming from traditional software backgrounds struggle with this. Memory management in LLM agents is not about storing everything; it is about deciding what to forget.</p>
+<p>The core memory limit forces hard decisions about what matters. You cannot cheat and say "we will fit everything." Engineers coming from traditional software backgrounds struggle with this. Memory management in LLM agents is not about storing everything. It is about deciding what to forget.</p>
 <p>For a comparison with other agent frameworks, see <a href="/blog/how-memory-works-in-deerflow/">How Memory Works in DeerFlow</a> and <a href="/blog/short-term-memory-for-ai-agents/">Short-Term Memory for AI Agents</a>.</p>
 <h2 id="the-forgetting-problem-why-your-agent-loses-things">The Forgetting Problem: Why Your Agent Loses Things</h2>
-<p>The forgetting problem is the gap between what you want your agent to remember and what it actually retains across interactions. This is not a single problem; it is a stack of related failures.</p>
-<p><strong>Retrieval failure</strong> happens when the agent needs a memory but does not query for it. This is not a memory system failure; it is a retrieval trigger failure. The agent must decide to look for relevant memory before it can retrieve it. If the trigger logic is poor, the agent operates blind.</p>
+<p>The forgetting problem is the difference between what you want your agent to remember and what it actually retains across interactions. This is not a single problem. It is a stack of related failures.</p>
+<p><strong>Retrieval failure</strong> happens when the agent needs a memory but does not query for it. This is not a memory system failure. It is a retrieval trigger failure. The agent must decide to look for relevant memory before it can retrieve it. If the trigger logic is poor, the agent operates blind.</p>
 <p><strong>Attribution failure</strong> happens when the agent retrieves a memory but cannot correctly attribute the information. It knows something happened but cannot connect it to the right person, session, or context. This is common when memory entries lack sufficient metadata.</p>
 <p><strong>Temporal decay failure</strong> happens when memory entries survive too long without reinforcement. Over time, they drift semantically as the embedding model changes or as related context shifts. The memory technically exists but the meaning has warped.</p>
 <p><strong>Context contamination</strong> happens when retrieved memories contradict each other. If the agent learned "user prefers dark mode" in session 3 and "user prefers light mode" in session 7, and both are retrieved, the agent has a conflict it must resolve. Without explicit conflict resolution logic, it typically picks the most recent and ignores the older one.</p>
@@ -514,7 +521,7 @@
 <h2 id="rag-vs-memory-different-tools-different-jobs">Rag Vs Memory: Different Tools, Different Jobs</h2>
 <p>RAG and explicit memory management solve different problems, and conflating them causes architecture problems.</p>
 <p>RAG (Retrieval Augmented Generation) answers specific questions by searching a large document corpus. You have a question, you retrieve relevant documents, you include them in the context. RAG is optimized for question answering against large external knowledge bases.</p>
-<p>Memory management answers the question "what does this agent know about this user/session/context?" Memory is not answering questions; it is maintaining a running model of state that the agent uses to behave consistently across time.</p>
+<p>Memory management answers the question "what does this agent know about this user/session/context?" Memory is not answering questions. It is maintaining a running model of state that the agent uses to behave consistently across time.</p>
 <p><a href="/blog/rag-vs-memory/">RAG vs Memory</a> goes deep on this distinction. The short version: if you are storing documentation to answer questions, use RAG. If you are storing interaction history to maintain identity and continuity, use memory management. Most production systems need both.</p>
 <h2 id="benchmarking-memory-strategies-what-the-numbers-say">Benchmarking Memory Strategies: What The Numbers Say</h2>
 <p>I ran systematic benchmarks across three memory management strategies using a multi-turn agentic pipeline with 200 sessions of 50 interactions each. Here is what I measured.</p>
@@ -575,7 +582,7 @@
 <p><strong>What is the difference between memory and context?</strong></p>
 <p>Context is what is currently in the model's input buffer. Memory is what you have stored outside the model to retrieve later. Context resets between sessions. Memory persists. This distinction drives every architectural decision in agent design.</p>
 <p><strong>How often should memory entries be summarized?</strong></p>
-<p>Summarization should happen when you approach 70-80% of your active buffer capacity. Do not wait for overflow. Summarize early and summarize incrementally. Avoid multi-level summarization chains where you summarize a summary; store original entries alongside summaries and use the summary only when the original is archived.</p>
+<p>Summarization should happen when you approach 70-80% of your active buffer capacity. Do not wait for overflow. Summarize early and summarize incrementally. Avoid multi-level summarization chains where you summarize a summary. Store original entries alongside summaries and use the summary only when the original is archived.</p>
 <p><strong>Can I use Redis for LLM memory management?</strong></p>
 <p>Yes, Redis works well for explicit memory storage at small to medium scale. For vectors, use Redis Stack with the SEARCH module. For session state, use standard Redis key-value with TTLs. At very high session counts (100K+ simultaneous), Redis becomes a bottleneck and dedicated stores like Cassandra or DynamoDB perform better. The memory management logic is the same regardless of the backing store.</p>
 <p><strong>How do I prevent my agent from retrieving contradictory memories?</strong></p>
@@ -683,9 +690,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

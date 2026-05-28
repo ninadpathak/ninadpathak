@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open-Source Memory Landscape 2026</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:24px;}
+.wrap{position:relative;width:360px;height:340px;}
+
+.plot{position:absolute;left:34px;top:22px;right:6px;bottom:34px;border:1px solid var(--border);}
+.plot::before,.plot::after{content:"";position:absolute;background:var(--border);}
+.plot::before{left:0;right:0;top:50%;height:1px;}
+.plot::after{top:0;bottom:0;left:50%;width:1px;}
+
+.axis-x{position:absolute;left:34px;right:6px;bottom:6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-3);}
+.axis-y{position:absolute;left:2px;top:22px;bottom:34px;width:18px;display:flex;align-items:center;justify-content:center;}
+.axis-y span{transform:rotate(-90deg);white-space:nowrap;font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-3);}
+.tick{position:absolute;font-family:var(--mono);font-size:7.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);opacity:.75;}
+.t-xl{left:38px;bottom:22px;}
+.t-xr{right:8px;bottom:22px;}
+.t-yb{left:24px;bottom:34px;transform:rotate(-90deg);transform-origin:left bottom;}
+.t-yt{left:24px;top:22px;transform:rotate(-90deg);transform-origin:left top;}
+
+.pt{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3px;z-index:2;cursor:default;}
+.pt .dot{width:9px;height:9px;border:1px solid var(--text-3);background:var(--bg-1);border-radius:50%;transition:border-color .3s linear,background .3s linear,box-shadow .3s linear;}
+.pt .name{font-family:var(--mono);font-size:8.5px;letter-spacing:0.03em;color:var(--text-2);white-space:nowrap;transition:color .3s linear;}
+.pt.active .dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 20%,transparent);}
+.pt.active .name{color:var(--accent);font-weight:700;}
+
+.caption{position:absolute;left:34px;right:6px;top:-2px;text-align:center;font-family:var(--mono);font-size:8.5px;letter-spacing:0.02em;color:var(--text-2);min-height:12px;}
+.caption b{color:var(--accent);font-weight:700;}
+
+@media (max-width:600px){
+  .wrap{width:300px;height:380px;}
+  .pt .name{font-size:8px;}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="wrap">
+    <div class="caption" id="cap">&nbsp;</div>
+    <div class="axis-y"><span>State location</span></div>
+    <div class="axis-x">Retrieval model</div>
+    <div class="tick t-xl">flat vector</div>
+    <div class="tick t-xr">graph / temporal</div>
+    <div class="tick t-yb">external store</div>
+    <div class="tick t-yt">in-context</div>
+
+    <div class="plot"></div>
+
+    <!-- positions are % within .plot via JS-friendly inline left/top -->
+    <div class="pt" data-i="0" style="left:78px;top:70px;"><span class="dot"></span><span class="name">Letta</span></div>
+    <div class="pt" data-i="1" style="left:118px;top:108px;"><span class="dot"></span><span class="name">Open&nbsp;Viking</span></div>
+    <div class="pt" data-i="2" style="left:266px;top:78px;"><span class="dot"></span><span class="name">Zep&nbsp;/&nbsp;Graphiti</span></div>
+    <div class="pt" data-i="3" style="left:288px;top:150px;"><span class="dot"></span><span class="name">Cognee</span></div>
+    <div class="pt" data-i="4" style="left:84px;top:230px;"><span class="dot"></span><span class="name">pgvector</span></div>
+    <div class="pt" data-i="5" style="left:150px;top:248px;"><span class="dot"></span><span class="name">Mem0</span></div>
+  </div>
+</div>
+
+<script>
+const pts=[...document.querySelectorAll('.pt')];
+const cap=document.getElementById('cap');
+const info=[
+  {n:'Letta',d:'virtual context paging / agent OS'},
+  {n:'Open Viking',d:'filesystem context mounting'},
+  {n:'Zep / Graphiti',d:'temporal knowledge graph'},
+  {n:'Cognee',d:'knowledge graph, multi-hop'},
+  {n:'pgvector',d:'simple vector store via MCP'},
+  {n:'Mem0',d:'memory layer, loggable extraction'}
+];
+let i=0;
+function step(){
+  pts.forEach(p=>p.classList.remove('active'));
+  pts[i].classList.add('active');
+  cap.innerHTML='<b>'+info[i].n+'</b> &middot; '+info[i].d;
+  i=(i+1)%pts.length;
+}
+step();
+setInterval(step,2200);
+</script>
+</body>
+</html>

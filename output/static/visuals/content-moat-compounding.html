@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compounding Content Moat</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.scene {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+}
+.head .t { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-2); }
+.legend { display: flex; gap: 14px; }
+.legend span { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); display: flex; align-items: center; gap: 5px; }
+.swatch { width: 14px; height: 2px; display: inline-block; }
+.swatch.acc { background: var(--accent); }
+.swatch.flat { background: var(--text-3); border-top: 1px dashed var(--text-3); height: 0; }
+
+.chart {
+  flex: 1;
+  position: relative;
+  border-left: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  min-height: 0;
+}
+.ylab, .xlab {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.ylab { left: 4px; top: 2px; }
+.xlab { right: 4px; bottom: 4px; }
+
+svg { width: 100%; height: 100%; display: block; }
+
+.grid { stroke: var(--border); stroke-width: 1; }
+.moat-band { fill: var(--accent); opacity: 0.10; }
+.flat-line { fill: none; stroke: var(--text-3); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.comp-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw 6s linear infinite; }
+@keyframes draw {
+  0% { stroke-dashoffset: 900; }
+  70% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; }
+}
+.band-reveal {
+  animation: bandgrow 6s linear infinite;
+  transform-origin: left center;
+}
+@keyframes bandgrow {
+  0% { transform: scaleX(0); opacity: 0; }
+  20% { opacity: 1; }
+  70% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+/* accumulating post ticks along the compounding curve */
+.post { fill: var(--accent); }
+.post-anim { opacity: 0; animation: pop 6s linear infinite; }
+@keyframes pop { 0%,5%{opacity:0;transform:scale(0);} 12%{opacity:1;transform:scale(1);} 100%{opacity:1;transform:scale(1);} }
+
+.moat-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  fill: var(--accent);
+  letter-spacing: 0.05em;
+}
+.flat-label {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  fill: var(--text-3);
+  letter-spacing: 0.05em;
+}
+
+.foot { flex: 0 0 auto; font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.04em; color: var(--text-3); }
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="head">
+    <span class="t">Content Moat / Compounding vs One-off</span>
+    <div class="legend">
+      <span><i class="swatch acc"></i>compounding archive</span>
+      <span><i class="swatch flat"></i>one-off content</span>
+    </div>
+  </div>
+
+  <div class="chart">
+    <span class="ylab">traffic + trust &uarr;</span>
+    <span class="xlab">years &rarr;</span>
+    <svg viewBox="0 0 600 300" preserveAspectRatio="none">
+      <!-- gridlines -->
+      <line class="grid" x1="0" y1="75" x2="600" y2="75"/>
+      <line class="grid" x1="0" y1="150" x2="600" y2="150"/>
+      <line class="grid" x1="0" y1="225" x2="600" y2="225"/>
+
+      <!-- widening moat band between flat line and compounding curve -->
+      <g class="band-reveal">
+        <path class="moat-band" d="M0,260 C150,250 300,210 450,120 C520,75 560,55 600,40 L600,255 C560,254 520,253 450,250 C300,250 150,255 0,258 Z"/>
+      </g>
+
+      <!-- flat one-off content line -->
+      <path class="flat-line" d="M0,258 C150,255 300,250 450,250 C520,250 560,254 600,255"/>
+
+      <!-- compounding curve (accelerating upward) -->
+      <path class="comp-line" d="M0,260 C150,250 300,210 450,120 C520,75 560,55 600,40"/>
+
+      <!-- accumulating posts along the curve -->
+      <circle class="post post-anim" style="animation-delay:0.4s" cx="40" cy="258" r="4"/>
+      <circle class="post post-anim" style="animation-delay:1.0s" cx="150" cy="250" r="4"/>
+      <circle class="post post-anim" style="animation-delay:1.6s" cx="260" cy="225" r="4"/>
+      <circle class="post post-anim" style="animation-delay:2.2s" cx="360" cy="170" r="4"/>
+      <circle class="post post-anim" style="animation-delay:2.8s" cx="450" cy="120" r="4"/>
+      <circle class="post post-anim" style="animation-delay:3.4s" cx="530" cy="68" r="4"/>
+      <circle class="post post-anim" style="animation-delay:4.0s" cx="592" cy="42" r="5"/>
+
+      <text class="moat-label" x="300" y="200">the moat widens</text>
+      <text class="flat-label" x="300" y="272">flat: resets each post</text>
+    </svg>
+  </div>
+
+  <div class="foot">// each post compounds: it keeps paying back years after publication. One-off content stays flat.</div>
+</div>
+</body>
+</html>

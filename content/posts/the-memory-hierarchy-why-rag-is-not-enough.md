@@ -6,7 +6,7 @@ tags: ["ai-agents", "agent-memory", "rag", "memory-hierarchy"]
 status: published
 ---
 
-I keep seeing the same pattern in agent architecture discussions. Someone builds a retrieval-augmented generation pipeline, calls it agent memory, and then wonders why their agent still loses track of what happened three turns ago. The gap between "RAG works" and "agent memory works" is real, and it is not a implementation detail. It is a fundamental architectural mismatch.
+I keep seeing the same pattern in agent architecture discussions. Someone builds a retrieval-augmented generation pipeline, calls it agent memory, and then wonders why their agent still loses track of what happened three turns ago. The difference between "RAG works" and "agent memory works" is real, and it is not a implementation detail. It is a fundamental architectural mismatch.
 
 RAG solves retrieval. Retrieval is one piece of what an agent needs to remember.
 
@@ -14,23 +14,30 @@ RAG solves retrieval. Retrieval is one piece of what an agent needs to remember.
 
 Agent memory is not one system. It is three distinct systems that happen to share a name.
 
+<div class="visual-wrapper">
+  <div class="visual-title">THE MEMORY HIERARCHY: WHAT RAG ALONE MISSES</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/rag-not-enough-hierarchy.html" title="Agent memory hierarchy showing which layers RAG covers and which it misses" loading="lazy"></iframe>
+  </div>
+</div>
+
 Working memory is what the agent is actively reasoning about right now. This lives in the context window. It is fast, ephemeral, and subject to eviction as soon as the context fills. Most agents lose working memory entirely on every new session.
 
 Episodic memory is what the agent learned in past interactions that is still relevant. "The user prefers concise responses." "This API endpoint requires an API key in the header." These are not document facts. These are observations the agent made and should retain. RAG does not handle episodic memory well because episodic facts are not embedded documents. They are attributed fragments of experience.
 
 Semantic memory is the world knowledge the language model was trained on, plus any persistent facts added through retrieval. This is where RAG actually works. You query a vector database, you get relevant documents, you inject them into context. The problem is that semantic memory is the easiest layer to build and the least interesting one for agents.
 
-I wrote about how these layers interact in my post on [memory-hierarchy-in-ai-systems](/articles/memory-hierarchy-in-ai-systems). The short version is that most agents over-invest in semantic memory (RAG) and under-invest in the other two layers.
+I wrote about how these layers interact in my post on [memory-hierarchy-in-ai-systems](/blog/memory-hierarchy-in-ai-systems/). The short version is that most agents over-invest in semantic memory (RAG) and under-invest in the other two layers.
 
 ## Why RAG breaks for episodic recall
 
 The core issue with using RAG for episodic memory is that episodic facts do not exist as documents. They exist as attributed observations inside conversations or inside tool execution logs. The embedding and retrieval model that works for finding relevant paragraphs in a technical manual fails completely when asked "what did the user tell me about their preferences in the last session?"
 
-The embedding model has no concept of attribution. It retrieves based on semantic similarity. If you ask "what are the user's preferences" and the last conversation contained "I prefer short responses and JSON format," the retrieval query and the stored content have low semantic overlap even though they are directly related. This is the asymmetry problem I documented in [asymmetric-retrieval-agent-memory](/articles/asymmetric-retrieval-agent-memory). RAG retrieval is optimized for query-document relevance. Agent recall is optimized for attribution-document relevance. These are not the same optimization target.
+The embedding model has no concept of attribution. It retrieves based on semantic similarity. If you ask "what are the user's preferences" and the last conversation contained "I prefer short responses and JSON format," the retrieval query and the stored content have low semantic overlap even though they are directly related. This is the asymmetry problem I documented in [asymmetric-retrieval-agent-memory](/blog/asymmetric-retrieval-agent-memory/). RAG retrieval is optimized for query-document relevance. Agent recall is optimized for attribution-document relevance. These are not the same optimization target.
 
 A secondary issue is that episodic facts are time-sensitive in ways that document facts are not. "The user prefers concise responses" might be true now but was not true three months ago. Vector retrieval has no native concept of recency bias or temporal decay. You can layer recency onto RAG, but it is a retrofit, not a feature.
 
-## The cross-session persistence gap
+## The cross-session persistence shortfall
 
 RAG pipelines are typically session-scoped. You query the vector store, you get results, the session ends, the results evaporate. For agents that need to remember across sessions, this is a fundamental limitation. The retrieval system does not know what happened in previous sessions unless you explicitly index session artifacts, and even then, the indexing strategy matters enormously.
 
@@ -40,7 +47,7 @@ This is architecturally different from RAG. RAG is retrieval by content similari
 
 ## Fine-tuning versus retrieval for memory
 
-The other approach people reach for is fine-tuning. If the agent needs to remember facts, maybe you fine-tune the model to encode those facts. I explored this in [rag-vs-fine-tuning](/articles/rag-vs-fine-tuning) and the conclusion is not clean.
+The other approach people reach for is fine-tuning. If the agent needs to remember facts, maybe you fine-tune the model to encode those facts. I explored this in [rag-vs-fine-tuning](/blog/rag-vs-fine-tuning/) and the conclusion is not clean.
 
 Fine-tuning works for injecting broad behavioral patterns. You can fine-tune a model to be more concise, more formal, more aligned with a specific writing style. Those are general capabilities. Fine-tuning does not work well for injecting specific attributed facts that change frequently. The cost of re-fine-tuning every time a user preference changes makes it impractical for episodic memory. Fine-tuning is also opaque. When the agent acts on a fine-tuned behavior, you cannot audit which training example caused the behavior or when it was last updated.
 

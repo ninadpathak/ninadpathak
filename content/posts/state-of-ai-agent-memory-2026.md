@@ -12,6 +12,14 @@ AI agent memory is the wildcard that determines whether your agent is a reliable
 
 I have spent the last two months building with Letta, MemGPT, and Mem0 in production contexts. I have also read the academic papers the marketing teams do not cite. This is what I found.
 
+
+<div class="visual-wrapper">
+  <div class="visual-title">The Agent Memory Constellation</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/state-memory.html" title="The 2026 AI agent memory constellation" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## Why agent memory is categorically different from RAG
 
 Retrieval-Augmented Generation solved document Question answering. You have a corpus, you embed it, you retrieve the relevant chunks, you pass them to the model. That problem is well-understood and reasonably solved.
@@ -30,7 +38,7 @@ At the bottom is the embedding and storage layer. This is where your memories li
 
 Above storage sits retrieval. This is where the fragmentation crisis is worst, but it is also where most of the interesting engineering is happening. Naive semantic search is the floor, not the ceiling. Hybrid search combining dense vectors with BM25 lexical matching is now table stakes for anything where recall quality matters.
 
-I wrote about hybrid search for production RAG systems in my piece on [BM25 and vector search combinations](/articles/hybrid-search-bm25-vector-search), and the same principles apply directly to agent memory retrieval. The difference is that agent memory retrieval needs to be faster and more contextual, because it happens inline with reasoning, not as a pre-retrieval step.
+I wrote about hybrid search for production RAG systems in my piece on [BM25 and vector search combinations](/blog/hybrid-search-bm25-vector-search/), and the same principles apply directly to agent memory retrieval. The difference is that agent memory retrieval needs to be faster and more contextual, because it happens inline with reasoning, not as a pre-retrieval step.
 
 The retrieval layer feeds into ranking and re-ranking. This is where MemGPT's architecture separates itself from simpler approaches. MemGPT uses a tiered memory architecture that explicitly manages what stays in the context window and what gets paged out. The LLM itself decides what to recall, which sounds elegant until you realize it means your LLM is spending tokens on memory management decisions.
 
@@ -58,7 +66,7 @@ In my testing, MemGPT's self-managed memory caused inconsistent behavior at high
 
 MemGPT's official documentation acknowledges that the system is designed for research and prototyping use cases. The team has been clear about this, but the marketing sometimes overstates production readiness. If you are evaluating MemGPT for a production workload, run your own stress tests with your actual agent logic before committing. The paper is worth reading. The codebase is worth experimenting with. The cloud product is not yet a reliable production backbone.
 
-I also have concerns about MemGPT's approach to memory versioning. When an agent updates a memory, the old version is simply overwritten. For agents where memory auditability matters, this is a significant gap. Regulators in financial services and healthcare are already asking for memory audit trails. Teams in those domains should treat MemGPT's memory model as a risk factor.
+I also have concerns about MemGPT's approach to memory versioning. When an agent updates a memory, the old version is simply overwritten. For agents where memory auditability matters, this is a significant shortfall. Regulators in financial services and healthcare are already asking for memory audit trails. Teams in those domains should treat MemGPT's memory model as a risk factor.
 
 ## Mem0: The fastest path to production memory
 
@@ -70,7 +78,7 @@ Mem0 supports hierarchical memory: user-level, session-level, and agent-level me
 
 I benchmarked Mem0 against a custom memory implementation built on top of Pinecone and found that Mem0 was 35 percent faster to integrate but 15 percent more expensive at 1 million memory operations per day. The cost difference narrows as your team size shrinks, because the integration time savings compound. For a two-person team building an AI-first product, Mem0's cost premium is almost certainly worth it.
 
-The gap between Mem0 and custom implementations narrows further as you move up the tier list. At 10 million operations per day, the economics flip. A team with a dedicated infrastructure engineer should seriously consider building on top of a pure vector store rather than paying Mem0's platform premium. The crossover point depends on your query patterns and your team's Postgres and vector database expertise.
+The difference between Mem0 and custom implementations narrows further as you move up the tier list. At 10 million operations per day, the economics flip. A team with a dedicated infrastructure engineer should seriously consider building on top of a pure vector store rather than paying Mem0's platform premium. The crossover point depends on your query patterns and your team's Postgres and vector database expertise.
 
 Mem0's retrieval quality is solid but not exceptional. The hybrid search implementation is competent rather than best-in-class. For most use cases, the retrieval quality is good enough. For retrieval-heavy applications where every percentage point of recall matters, you will want to evaluate whether Mem0's retrieval layer is a bottleneck before committing to it long-term.
 
@@ -92,13 +100,13 @@ LangChain has LangChain Memory. CrewAI has its own memory layer. AutoGen has mem
 
 This fragmentation has real costs. Switching costs lock teams into their initial framework choice. Evaluation becomes impossible across frameworks because each system measures memory quality differently. Research findings do not transfer because a technique that works in MemGPT's tiered memory model may not apply to Mem0's flat storage.
 
-I wrote about a similar fragmentation problem in [developer onboarding documentation](/articles/developer-onboarding-docs-what-works-what-doesnt), and the pattern is the same. When a problem space is new and fast-moving, everyone builds their own solution. When the space matures, standards emerge. The memory space is not mature yet.
+I wrote about a similar fragmentation problem in [developer onboarding documentation](/blog/developer-onboarding-docs-what-works-what-doesnt/), and the pattern is the same. When a problem space is new and fast-moving, everyone builds their own solution. When the space matures, standards emerge. The memory space is not mature yet.
 
 The fragmentation also makes debugging harder. When an agent makes a bad decision based on faulty memory, the error could be in retrieval, ranking, storage, consolidation, or the context assembly logic. In a monolithic memory system, you might trace it in an afternoon. In a multi-layer abstracted system with framework middleware in the middle, the same trace can take days.
 
 ## Mcp Changes The Memory Conversation
 
-The Model Context Protocol (MCP) is not primarily a memory protocol, but it has become one of the most important pieces of infrastructure for agent memory. I wrote a detailed breakdown of [how MCP works architecturally](/articles/model-context-protocol-explained), and I recommend reading that before designing any memory system on top of it.
+The Model Context Protocol (MCP) is not primarily a memory protocol, but it has become one of the most important pieces of infrastructure for agent memory. I wrote a detailed breakdown of [how MCP works architecturally](/blog/model-context-protocol-explained/), and I recommend reading that before designing any memory system on top of it.
 
 The core insight is that MCP provides a standardized interface for tools and data sources. Memory systems can expose themselves as MCP servers, which means any MCP-compliant agent can connect to any MCP-compliant memory system without custom code. This is the first real hope for cross-framework memory portability.
 
@@ -112,7 +120,7 @@ For teams building agent systems today, I recommend treating MCP as a required i
 
 You cannot improve what you cannot measure, and agent memory evaluation is hard in a way that RAG evaluation is not.
 
-RAG evaluation has established benchmarks. Retrieval quality has recall and MRR. Answer quality has faithfulness and relevance. There are off-the-shelf evaluation frameworks that work well enough for most teams. I covered [RAG evaluation metrics in depth](/articles/rag-evaluation-metrics-what-actually-matters), and those principles apply, but they only cover part of the agent memory problem.
+RAG evaluation has established benchmarks. Retrieval quality has recall and MRR. Answer quality has faithfulness and relevance. There are off-the-shelf evaluation frameworks that work well enough for most teams. I covered [RAG evaluation metrics in depth](/blog/rag-evaluation-metrics-what-actually-matters/), and those principles apply, but they only cover part of the agent memory problem.
 
 Agent memory evaluation needs to measure something different: does the agent make better decisions because of its memory? That question requires evaluating downstream outcomes, not just retrieval quality. A memory system can have perfect recall and still produce worse agent behavior if it retrieves the right facts in the wrong order, or if it updates memories in a way that introduces subtle contradictions.
 
@@ -140,7 +148,7 @@ Three things I am confident about for the memory space through 2027.
 
 First, MCP will become the de facto memory transport standard, and the remaining fragmentation will shift from the transport layer to the schema layer. Teams will be able to swap memory providers freely. They will still need to handle schema migration, which will remain a manual and painful process.
 
-Second, at least two of the current major memory platforms will collapse or get acquired. The space is overfunded relative to the actual market size, and the gap between platforms is not wide enough to sustain more than two or three winners. My guess is that one open-source platform and one cloud platform will dominate by end of 2027, but I would not bet heavily on which specific ones.
+Second, at least two of the current major memory platforms will collapse or get acquired. The space is overfunded relative to the actual market size, and the difference between platforms is not wide enough to sustain more than two or three winners. My guess is that one open-source platform and one cloud platform will dominate by end of 2027, but I would not bet heavily on which specific ones.
 
 Third, memory evaluation will become a first-class concern. As agents move from experimental to mission-critical, the teams deploying them will demand the same quality guarantees they demand from databases and message queues. This means standardized benchmarks, memory SLOs, and incident response procedures for memory failures. We are two to three years from this being standard practice, but the teams that start building evaluation infrastructure now will have a significant advantage.
 

@@ -99,7 +99,7 @@ In the 384-dimension test, SQLite-vec with binary quantization achieved a p99 la
 
 ## The precision tax: accuracy vs speed
 
-You cannot get something for nothing in AI engineering. Quantization improves speed but introduces a "recall gap"—the likelihood that the search results are slightly different from the true nearest neighbors.
+You cannot get something for nothing in AI engineering. Quantization improves speed at the cost of a recall penalty. The search results become slightly more likely to differ from the true nearest neighbors.
 
 <div class="visual-wrapper">
   <div class="visual-title">Recall accuracy: the quantization tradeoff</div>
@@ -108,11 +108,11 @@ You cannot get something for nothing in AI engineering. Quantization improves sp
   </div>
 </div>
 
-My benchmarks showed that `int8` quantization (8-bit) maintains 99.8% recall accuracy compared to raw `float32`. Binary quantization (1-bit) dropped accuracy to roughly 92%. For most RAG applications—where the goal is to find relevant context for an LLM—a 92% recall rate is more than sufficient, especially given the 10x speed boost.
+My benchmarks showed that `int8` quantization (8-bit) maintains 99.8% recall accuracy compared to raw `float32`. Binary quantization (1-bit) dropped accuracy to roughly 92%. For most RAG applications, where the goal is to find relevant context for an LLM, a 92% recall rate is more than sufficient, especially given the 10x speed boost.
 
 ## Dimensionality and the scaling wall
 
-The performance gap between these engines widens as vector dimensionality increases. Standard open-source models like `all-MiniLM` use 384 dimensions. Modern flagship models like OpenAI's `text-embedding-3-large` use 3072 dimensions.
+The performance difference between these engines widens as vector dimensionality increases. Standard open-source models like `all-MiniLM` use 384 dimensions. Modern flagship models like OpenAI's `text-embedding-3-large` use 3072 dimensions, a difference rooted in [how embedding models trade dimensionality for information density](/blog/embedding-models-compared/).
 
 <div class="visual-wrapper">
   <div class="visual-title">Latency scaling vs vector dimensions</div>
@@ -160,7 +160,7 @@ Selecting between these two engines is a decision about your application's data 
   </div>
 </div>
 
-PGlite is the correct choice for applications that need a real relational database. If your search results must be joined with complex metadata, filtered via JSONB, or synced with a backend Postgres instance, the PGlite bundle size is a small price to pay.
+PGlite is the correct choice for applications that need a real relational database. If your search results must be joined with complex metadata, filtered via JSONB, or [combined with BM25 full-text search in a hybrid retrieval setup](/blog/hybrid-search-bm25-vector-search/), or synced with a backend Postgres instance, the PGlite bundle size is a small price to pay.
 
 SQLite-vec is the correct choice for applications where vector search is a standalone feature. If you want a lightweight "command palette" search or a simple local documentation assistant, the speed and size of SQLite-vec make it the superior tool for the job.
 
@@ -182,7 +182,7 @@ Prolonged index building in PGlite can trigger thermal throttling, reducing the 
 Yes. Both run in iOS Safari and Android Chrome via WASM. SQLite-vec is particularly well-suited for mobile due to its low memory footprint and efficient use of CPU registers for binary math.
 
 **What is the "lost in the middle" problem for local RAG?**
-This is a context window limitation, not a database limitation. Even if your retrieval is perfect, providing too much context to a small local model can degrade its reasoning performance. Local RAG requires tighter top-K filtering than cloud RAG.
+This is a [context window limitation rather than a database limitation](/blog/llm-context-windows-explained/). Even if your retrieval is perfect, providing too much context to a small local model can degrade its reasoning performance. Local RAG requires tighter top-K filtering than cloud RAG.
 
 **Should I use HNSW or Flat scans for 50k vectors?**
 For 50k vectors, a flat scan in SQLite-vec is usually faster than building and traversing an HNSW index. The complexity crossover point where HNSW becomes objectively better is around 100k vectors for 384-dim data.

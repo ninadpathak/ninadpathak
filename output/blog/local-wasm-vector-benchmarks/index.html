@@ -303,7 +303,7 @@
 
 <p>In the 384-dimension test, SQLite-vec with binary quantization achieved a p99 latency of just 4ms. This is faster than PGlite's HNSW index (12ms) without the overhead of building a graph.</p>
 <h2 id="the-precision-tax-accuracy-vs-speed">The precision tax: accuracy vs speed</h2>
-<p>You cannot get something for nothing in AI engineering. Quantization improves speed but introduces a "recall gap"—the likelihood that the search results are slightly different from the true nearest neighbors.</p>
+<p>You cannot get something for nothing in AI engineering. Quantization improves speed at the cost of a recall penalty. The search results become slightly more likely to differ from the true nearest neighbors.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Recall accuracy: the quantization tradeoff</div>
   <div class="visual-container">
@@ -311,9 +311,9 @@
   </div>
 </div>
 
-<p>My benchmarks showed that <code>int8</code> quantization (8-bit) maintains 99.8% recall accuracy compared to raw <code>float32</code>. Binary quantization (1-bit) dropped accuracy to roughly 92%. For most RAG applications—where the goal is to find relevant context for an LLM—a 92% recall rate is more than sufficient, especially given the 10x speed boost.</p>
+<p>My benchmarks showed that <code>int8</code> quantization (8-bit) maintains 99.8% recall accuracy compared to raw <code>float32</code>. Binary quantization (1-bit) dropped accuracy to roughly 92%. For most RAG applications, where the goal is to find relevant context for an LLM, a 92% recall rate is more than sufficient, especially given the 10x speed boost.</p>
 <h2 id="dimensionality-and-the-scaling-wall">Dimensionality and the scaling wall</h2>
-<p>The performance gap between these engines widens as vector dimensionality increases. Standard open-source models like <code>all-MiniLM</code> use 384 dimensions. Modern flagship models like OpenAI's <code>text-embedding-3-large</code> use 3072 dimensions.</p>
+<p>The performance difference between these engines widens as vector dimensionality increases. Standard open-source models like <code>all-MiniLM</code> use 384 dimensions. Modern flagship models like OpenAI's <code>text-embedding-3-large</code> use 3072 dimensions, a difference rooted in <a href="/blog/embedding-models-compared/">how embedding models trade dimensionality for information density</a>.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Latency scaling vs vector dimensions</div>
   <div class="visual-container">
@@ -351,7 +351,7 @@
   </div>
 </div>
 
-<p>PGlite is the correct choice for applications that need a real relational database. If your search results must be joined with complex metadata, filtered via JSONB, or synced with a backend Postgres instance, the PGlite bundle size is a small price to pay.</p>
+<p>PGlite is the correct choice for applications that need a real relational database. If your search results must be joined with complex metadata, filtered via JSONB, or <a href="/blog/hybrid-search-bm25-vector-search/">combined with BM25 full-text search in a hybrid retrieval setup</a>, or synced with a backend Postgres instance, the PGlite bundle size is a small price to pay.</p>
 <p>SQLite-vec is the correct choice for applications where vector search is a standalone feature. If you want a lightweight "command palette" search or a simple local documentation assistant, the speed and size of SQLite-vec make it the superior tool for the job.</p>
 <h2 id="the-future-of-edge-retrieval">The future of edge retrieval</h2>
 <p>The 2026 technical landscape is defined by the decentralization of vector truth. As models become more efficient at running on local hardware (like the M2 Air), the bottleneck for AI applications has shifted from inference to retrieval.</p>
@@ -364,7 +364,7 @@ Prolonged index building in PGlite can trigger thermal throttling, reducing the 
 <p><strong>Do these databases work in mobile browsers?</strong>
 Yes. Both run in iOS Safari and Android Chrome via WASM. SQLite-vec is particularly well-suited for mobile due to its low memory footprint and efficient use of CPU registers for binary math.</p>
 <p><strong>What is the "lost in the middle" problem for local RAG?</strong>
-This is a context window limitation, not a database limitation. Even if your retrieval is perfect, providing too much context to a small local model can degrade its reasoning performance. Local RAG requires tighter top-K filtering than cloud RAG.</p>
+This is a <a href="/blog/llm-context-windows-explained/">context window limitation rather than a database limitation</a>. Even if your retrieval is perfect, providing too much context to a small local model can degrade its reasoning performance. Local RAG requires tighter top-K filtering than cloud RAG.</p>
 <p><strong>Should I use HNSW or Flat scans for 50k vectors?</strong>
 For 50k vectors, a flat scan in SQLite-vec is usually faster than building and traversing an HNSW index. The complexity crossover point where HNSW becomes objectively better is around 100k vectors for 384-dim data.</p>
 <!--
@@ -479,9 +479,9 @@ self-identified risks or weak spots: The 100k vector limit is a conservative pro
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

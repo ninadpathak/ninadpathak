@@ -18,16 +18,23 @@ I benchmarked the leading models across four distinct engineering personas. I lo
 
 ## Why SWE-bench Verified is the only metric that matters
 
-HumanEval and other snippet-based benchmarks are obsolete. They measure the ability to solve isolated coding problems that represent a tiny fraction of professional work. Professional engineering happens at the repository level.
+HumanEval and other snippet-based benchmarks are obsolete. They measure the ability to solve isolated coding problems that represent a tiny fraction of professional work. Professional engineering happens at the repository level, which is exactly what I tested in my [head-to-head benchmark of Claude Code and Gemini CLI on autonomous refactoring](/blog/agentic-cli-benchmarks/).
 
 SWE-bench Verified provides the most accurate signal today. It requires models to resolve real-world GitHub issues. They must navigate a codebase and identify the root cause of a bug. They have to write a fix and verify it against existing tests. Such a task reveals the models that can genuinely think like engineers. Claude 4.6 Opus currently leads this benchmark with a score of 80.9%.
+
+<div class="visual-wrapper">
+  <div class="visual-title">Coding LLMs Compared</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/llm-coding-comparison.html" title="Comparison matrix of leading coding LLMs across SWE-bench, reasoning, context, and cost" loading="lazy"></iframe>
+  </div>
+</div>
 
 
 ## For agentic and autonomous coding: Claude 4.6 Opus
 
 Claude 4.6 Opus is the gold standard for autonomous engineering agents. It displays a unique ability to reason through multi-step plans. It does not get lost when a tool call returns an unexpected error. Opus often pauses to correct its own assumptions when a build fails.
 
-Such reliability is why many agentic frameworks now default to Claude. The model handles "effort controls" that allow you to toggle reasoning depth based on task complexity. Claude is the best choice if you are building an agent that needs to manage multi-file pull requests independently.
+Such reliability is why many agentic frameworks now default to Claude. The model handles "effort controls" that allow you to toggle reasoning depth based on task complexity. Claude is the best choice if you are building an agent that needs to manage multi-file pull requests independently, though the model is only half the story without the [agent harness that supplies the infrastructure layer](/blog/agent-harnesses/) around it.
 
 
 ## For complex logic and repository-scale context: Gemini 3.1 Pro
@@ -39,7 +46,7 @@ Gemini maintains a massive lead with a two million token context window. This al
 
 ## For cost-sensitive production use: DeepSeek V4
 
-DeepSeek V4 has changed the economics of high-performance AI coding. It performs at a level comparable to Claude 4.6 while costing a fraction of the price. The model uses a Mixture-of-Experts architecture that prioritizes efficiency.
+DeepSeek V4 has changed the economics of high-performance AI coding. It performs at a level comparable to Claude 4.6 while costing a fraction of the price. The model uses a [Mixture-of-Experts architecture that is cheap to run but expensive to host](/blog/mixture-of-experts-explained/) and prioritizes efficiency.
 
 I use DeepSeek for high-volume tasks. These include automated code reviews and massive unit test generation. It also features "Engram Memory" which helps it remember your specific project style across sessions. You can run millions of tokens through DeepSeek for the price of a few thousand on a proprietary model. Such an advantage is vital for startups and internal devtools.
 
@@ -56,11 +63,11 @@ The choice of model matters less than the integration for real-time autocomplete
 
 Low latency is the most important metric for autocomplete. These systems use smaller models or speculative decoding to provide instant suggestions. They are the tools that most engineers use every hour to maintain their flow state.
 
-## The closing gap of open source
+## The closing difference of open source
 
 Open-source coding models are catching up rapidly. Llama 4.0 and Qwen 2.5 Coder are now legitimate alternatives to proprietary models. They allow you to host your own coding assistant. Such a capability is vital for companies with strict data privacy requirements.
 
-The gap in performance is closing every month. Open-source models now solve complex bugs and write clean logic. They benefit from the collective intelligence of the research community. I expect open-weights to become the default for most enterprise coding tasks by the end of 2026.
+The difference in performance is closing every month. Open-source models now solve complex bugs and write clean logic. They benefit from the collective intelligence of the research community. I expect open-weights to become the default for most enterprise coding tasks by the end of 2026.
 
 ## Summary decision framework
 

@@ -1,6 +1,7 @@
 ---
 title: "Memory Versioning and Audit Trails for Regulated AI Agents"
 date: "2026-05-05"
+slug: "memory-versioning-and-audit-trails"
 description: "If your agent overwrites its memory, you cannot pass a compliance audit. How to build append-only memory versioning and trace agent reasoning."
 tags: ["ai agents", "agent-memory", "compliance"]
 status: published
@@ -38,7 +39,14 @@ Instead of a table of facts, you have a table of events. Every row needs:
 
 When the agent needs to "forget" or "update" a memory, it inserts a new row and sets the `valid_to` timestamp on the old row. This allows point-in-time recovery. You can query the database for "what were the active memories for this user at `T=1`" by filtering `WHERE timestamp <= T1 AND (valid_to IS NULL OR valid_to > T1)`.
 
-If you are using a framework like [LangGraph](https://github.com/langchain-ai/langchain), you can leverage its built-in thread-level checkpointing to maintain some of this state. But thread checkpoints do not persist long-term semantic knowledge across separate sessions. For that, you need a dedicated memory ledger.
+If you are using a framework like [LangGraph](https://github.com/langchain-ai/langchain), you can use its built-in thread-level checkpointing to maintain some of this state. But thread checkpoints do not persist long-term semantic knowledge across separate sessions. For that, you need a dedicated memory ledger.
+
+<div class="visual-wrapper">
+  <div class="visual-title">APPEND-ONLY VS OVERWRITE</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/memory-versioning.html" title="An append-only versioned memory ledger (v1 to v2 to v3, never overwritten) with a full audit trail, versus a destructive UPDATE that destroys prior state" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## Linking memory to reasoning
 

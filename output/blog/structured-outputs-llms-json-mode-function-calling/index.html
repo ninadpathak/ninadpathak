@@ -226,7 +226,7 @@
       </nav>
       <div class="post-content">
         <p>Getting a reliable JSON object out of an LLM used to mean wrapping every call in a try/except, re-prompting on parse failures, and hoping your production traffic never hit the 3% of responses that came back malformed. Three mechanisms now exist to avoid that: JSON mode, function calling, and the newer structured outputs API. They are not interchangeable and choosing the wrong one shows up in token costs, latency, and edge-case failure rates.</p>
-<p><strong>Short answer:</strong> Use structured outputs (strict mode with <code>json_schema</code>) for any schema you want guaranteed at the token level. Use function calling when you want the model to decide whether and when to invoke external tools. Avoid JSON mode in production; it only guarantees syntactically valid JSON, not schema compliance, and OpenAI now considers it legacy.</p>
+<p><strong>Short answer:</strong> Use structured outputs (strict mode with <code>json_schema</code>) for any schema you want guaranteed at the token level. Use function calling when you want the model to decide whether and when to invoke external tools. Avoid JSON mode in production. It only guarantees syntactically valid JSON, not schema compliance, and OpenAI now considers it legacy.</p>
 <h2 id="what-json-mode-actually-does-and-does-not-do">What JSON mode actually does (and does not do)</h2>
 <p>JSON mode (<code>response_format: { type: "json_object" }</code>) tells the model its output must parse as valid JSON. That is the only guarantee. The fields, nesting, and types are entirely up to the model's interpretation of your prompt.</p>
 <p>A prompt asking for <code>{ "name": string, "score": number }</code> might return <code>{ "name": "Alice", "score": "high" }</code> under JSON mode, which is valid JSON and a schema violation at the same time. You still need to validate against your schema and retry on mismatch.</p>
@@ -242,8 +242,15 @@
 <p>Function calling solves a different problem. When you pass a function schema to a model, you're not asking it to format a response. You're asking it to decide whether a tool call is needed and, if so, which arguments to pass.</p>
 <p>The model can return a regular text response, a single tool call, or multiple tool calls. That decision is up to the model. That's the distinction that matters.</p>
 <p>Where structured outputs give you a guaranteed schema on every response, function calling gives you a conditional invocation pattern. The model may or may not call your function depending on whether it decides a tool is relevant.</p>
-<p><a href="https://platform.openai.com/docs/guides/structured-outputs">OpenAI's function calling documentation</a> now supports structured outputs inside function calls via the <code>strict: true</code> parameter. Arguments arrive as a parsed object rather than a JSON string, which removes one parsing step. Anthropic's <code>tool_use</code> blocks deliver parsed arguments as a JavaScript object natively; OpenAI historically returned a JSON string requiring a second parse.</p>
-<p><a href="https://dev.to/supertrained/llm-apis-for-ai-agents-anthropic-vs-openai-vs-google-ai-an-score-data-3e1j">Claude scored 8.4 on tool-use reliability metrics in Q1 2026 benchmarks</a>, compared to Google at 7.9 and OpenAI at 6.3. The reliability gap matters for agentic workflows where a missed or malformed tool call breaks the execution chain. My own experience running multi-step agents on Claude 3.5 Sonnet matches that: tool argument parsing failures are rare enough that I stopped writing defensive fallback logic for them.</p>
+<p><a href="https://platform.openai.com/docs/guides/structured-outputs">OpenAI's function calling documentation</a> now supports structured outputs inside function calls via the <code>strict: true</code> parameter. Arguments arrive as a parsed object rather than a JSON string, which removes one parsing step. Anthropic's <code>tool_use</code> blocks deliver parsed arguments as a JavaScript object natively. OpenAI historically returned a JSON string requiring a second parse.</p>
+<p><a href="https://dev.to/supertrained/llm-apis-for-ai-agents-anthropic-vs-openai-vs-google-ai-an-score-data-3e1j">Claude scored 8.4 on tool-use reliability metrics in Q1 2026 benchmarks</a>, compared to Google at 7.9 and OpenAI at 6.3. The reliability difference matters for agentic workflows where a missed or malformed tool call breaks the execution chain. My own experience running multi-step agents on Claude 3.5 Sonnet matches that: tool argument parsing failures are rare enough that I stopped writing defensive fallback logic for them.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">THREE MECHANISMS, ONE PROMPT</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/structured-outputs-comparison.html" title="The same extraction prompt feeding JSON mode, function calling, and structured outputs side by side, each producing a differently-shaped result with its reliability number" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="the-overhead-question-you-need-to-answer-before-choosing">The overhead question you need to answer before choosing</h2>
 <p>Schema complexity, call volume, and latency requirements should drive the choice, not preference.</p>
 <p>For data extraction at scale (entity extraction, document parsing, classification), structured outputs win because you pay the schema compilation cost once, and you never write retry logic for malformed responses. The 10-30% latency overhead is usually acceptable when the alternative is re-prompting.</p>
@@ -257,7 +264,7 @@
 <p>The second failure mode is schema design. Constrained decoding enforces the schema you gave it, not the schema you meant to give it. A missing field, an overly broad type, or an incorrect nesting structure produces responses that are schema-compliant but semantically wrong. The stricter your enforcement, the more carefully you need to design the schema upfront.</p>
 <h2 id="how-instructor-and-outlines-handle-this-for-older-models">How Instructor and Outlines handle this for older models</h2>
 <p>Before the major providers shipped native structured outputs, developers built schema enforcement in libraries. <a href="https://python.useinstructor.com/integrations/anthropic/">Instructor</a> wraps the Anthropic and OpenAI clients and uses tool definitions or system prompts to coerce models into schema-compliant output, then retries on validation failures using Pydantic validators. <a href="https://github.com/outlines-dev/outlines">Outlines</a> applies constrained generation at the logit level for locally-run models.</p>
-<p>Instructor is still useful when you need schema validation logic that goes beyond what JSON Schema expresses: checking that a date field is in the future, that two numeric fields sum to 100, or that a string matches a regex the schema can't capture. The provider's native structured outputs guarantee schema shape; they don't guarantee semantic validity. Instructor can layer those additional checks and retry with the failure message included in the next prompt.</p>
+<p>Instructor is still useful when you need schema validation logic that goes beyond what JSON Schema expresses: checking that a date field is in the future, that two numeric fields sum to 100, or that a string matches a regex the schema can't capture. The provider's native structured outputs guarantee schema shape. They don't guarantee semantic validity. Instructor can layer those additional checks and retry with the failure message included in the next prompt.</p>
 <p>For self-hosted or open-weight models where the provider's constrained decoding isn't available, Outlines is the practical path to schema enforcement. Outlines works with transformers, llama.cpp, and vLLM backends.</p>
 <h2 id="connecting-this-to-token-cost">Connecting this to token cost</h2>
 <p>Structured outputs add tokens for the schema itself and for the constrained generation. At high volume, that adds up. A pipeline running 100,000 extractions per day with a 500-token schema overhead pays for 50 million additional input tokens monthly.</p>
@@ -296,7 +303,7 @@ Mechanically similar: both compile a JSON Schema into a constrained grammar at i
         <div class="related-card-date">2026-04-26</div>
         <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
       </a>
-      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-21</div>
         <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
       </a>
@@ -380,9 +387,9 @@ Mechanically similar: both compile a JSON Schema into a constrained grammar at i
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

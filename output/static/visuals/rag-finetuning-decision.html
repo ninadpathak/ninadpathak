@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG vs Fine-tuning Decision Quadrant</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.scene {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 26px;
+}
+
+.grid-wrap {
+  position: relative;
+  width: 340px;
+  height: 320px;
+}
+
+.quad-grid {
+  position: absolute;
+  left: 30px; top: 8px; right: 0; bottom: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border: 1px solid var(--border);
+}
+
+.cell {
+  border: 0.5px solid var(--border);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+  padding: 6px;
+  box-sizing: border-box;
+  transition: background 0.3s linear, border-color 0.3s linear;
+}
+
+.cell .verdict {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-1);
+}
+.cell .desc {
+  font-family: var(--mono);
+  font-size: 9px;
+  line-height: 1.4;
+  color: var(--text-3);
+  max-width: 130px;
+}
+
+/* highlight the active quadrant */
+.cell.active {
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border-color: var(--accent);
+}
+.cell.active .verdict { color: var(--accent); }
+
+/* axis labels */
+.axis-x {
+  position: absolute;
+  left: 30px; right: 0; bottom: 6px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.axis-y {
+  position: absolute;
+  left: 4px; top: 8px; bottom: 30px;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.axis-y span {
+  transform: rotate(-90deg);
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.tick {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  opacity: 0.7;
+}
+.tick.x-lo { left: 32px; bottom: 18px; }
+.tick.x-hi { right: 2px; bottom: 18px; }
+.tick.y-lo { left: 22px; bottom: 30px; transform: rotate(-90deg); transform-origin: left bottom; }
+.tick.y-hi { left: 22px; top: 8px; transform: rotate(-90deg); transform-origin: left top; }
+
+/* moving probe dot */
+.probe {
+  position: absolute;
+  width: 13px; height: 13px;
+  margin: -6.5px 0 0 -6.5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+  z-index: 5;
+  left: 168px; top: 132px;
+  transition: left 0.6s ease, top 0.6s ease;
+}
+.probe-label {
+  position: absolute;
+  left: 30px; right: 0;
+  top: -20px;
+  z-index: 6;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: var(--text-2);
+}
+.probe-label b { color: var(--accent); font-weight: 700; }
+
+/* probe rides to the inner corner of each quadrant (near the routing hub at
+   center) so it never sits on top of the cell label text. Driven by JS so the
+   dot, the highlight, and the status label stay in sync. */
+
+@media (max-width: 600px) {
+  .grid-wrap { width: 300px; height: 360px; }
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="grid-wrap">
+    <div class="axis-y"><span>Behavior specialization</span></div>
+    <div class="axis-x">Knowledge change frequency</div>
+    <div class="tick y-lo">generic</div>
+    <div class="tick y-hi">specialized</div>
+    <div class="tick x-lo">static</div>
+    <div class="tick x-hi">constant flux</div>
+
+    <div class="quad-grid">
+      <!-- top-left: hi behavior, lo change -->
+      <div class="cell" data-q="0">
+        <div class="verdict">FINE-TUNE</div>
+        <div class="desc">Bake a fixed voice or schema into the weights. Shorter prompts, lower latency.</div>
+      </div>
+      <!-- top-right: hi behavior, hi change -->
+      <div class="cell" data-q="1">
+        <div class="verdict">BOTH</div>
+        <div class="desc">Fine-tune for behavior, RAG for live facts. The most reliable production setup.</div>
+      </div>
+      <!-- bottom-left: lo behavior, lo change -->
+      <div class="cell" data-q="3">
+        <div class="verdict">BASE MODEL</div>
+        <div class="desc">Plain prompting is enough. No retrieval, no training run.</div>
+      </div>
+      <!-- bottom-right: lo behavior, hi change -->
+      <div class="cell" data-q="2">
+        <div class="verdict">RAG</div>
+        <div class="desc">Update knowledge in seconds via the vector DB. Cited, auditable answers.</div>
+      </div>
+    </div>
+
+    <div class="probe" id="probe"></div>
+    <div class="probe-label" id="plabel"></div>
+  </div>
+</div>
+
+<script>
+// Dot, highlight, and status label are all driven from one timer so they
+// never drift. The dot moves to each quadrant's inner corner (the hub side).
+const cells = Array.from(document.querySelectorAll('.cell'));
+const byQ = q => cells.find(c => c.dataset.q == q);
+const label = document.getElementById('plabel');
+const probe = document.getElementById('probe');
+const seq = [
+  { q: 0, t: 'legal tone bot',       x: 168, y: 132, v: 'FINE-TUNE' },
+  { q: 1, t: 'support + live docs',  x: 202, y: 132, v: 'BOTH' },
+  { q: 2, t: 'news Q&A',             x: 202, y: 166, v: 'RAG' },
+  { q: 3, t: 'summarizer',           x: 168, y: 166, v: 'BASE MODEL' }
+];
+let i = 0;
+function step() {
+  const s = seq[i];
+  cells.forEach(c => c.classList.remove('active'));
+  byQ(s.q).classList.add('active');
+  probe.style.left = s.x + 'px';
+  probe.style.top  = s.y + 'px';
+  label.innerHTML = 'case: ' + s.t + ' → <b>' + s.v + '</b>';
+  i = (i + 1) % seq.length;
+}
+step();
+setInterval(step, 3000);
+</script>
+</body>
+</html>

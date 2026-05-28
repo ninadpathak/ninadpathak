@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hybrid Search: Reciprocal Rank Fusion</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.stage {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  margin-bottom: 4px;
+}
+.formula {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-align: center;
+  color: var(--text-2);
+  margin-bottom: 12px;
+}
+.formula b { color: var(--accent); }
+
+.board {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  min-height: 0;
+  align-items: start;
+}
+
+.lane { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.lane-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+  margin-bottom: 2px;
+}
+.lane-sub {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  color: var(--text-3);
+  text-align: center;
+  margin-top: -4px;
+  margin-bottom: 4px;
+}
+
+.row {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--bg-1);
+  padding: 6px 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.3s linear, background-color 0.3s linear, transform 0.5s ease, opacity 0.4s linear;
+}
+.rank { color: var(--text-3); font-size: 9px; width: 14px; flex-shrink: 0; }
+.doc { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sc { color: var(--text-3); font-size: 9px; margin-left: auto; flex-shrink: 0; }
+
+.row.win { border-color: var(--accent); background: rgba(212,64,0,0.07); color: var(--accent); }
+@media (prefers-color-scheme: dark) { .row.win { background: rgba(255,95,31,0.12); } }
+.row.dim { opacity: 0.4; }
+
+.fused .row .sc { color: var(--accent); }
+.fused .row.win .sc { color: var(--accent); font-weight: 600; }
+
+.merge-note {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--text-3);
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin-top: 10px;
+}
+.merge-note b { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 600px) {
+  .board { grid-template-columns: 1fr; gap: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="header">Hybrid Search / Reciprocal Rank Fusion (k=60)</div>
+  <div class="formula">RRF score = &Sigma; <b>1 / (60 + rank)</b> across both lists</div>
+  <div class="board">
+    <!-- BM25 lane -->
+    <div class="lane">
+      <div class="lane-title">BM25 &middot; sparse</div>
+      <div class="lane-sub">keyword / exact-match</div>
+      <div class="row" data-id="A"><span class="rank">1</span><span class="doc">doc A</span><span class="sc">8.5</span></div>
+      <div class="row" data-id="C"><span class="rank">2</span><span class="doc">doc C</span><span class="sc">6.1</span></div>
+      <div class="row" data-id="B"><span class="rank">3</span><span class="doc">doc B</span><span class="sc">4.8</span></div>
+      <div class="row" data-id="E"><span class="rank">4</span><span class="doc">doc E</span><span class="sc">3.2</span></div>
+    </div>
+    <!-- Vector lane -->
+    <div class="lane">
+      <div class="lane-title">Vector &middot; dense</div>
+      <div class="lane-sub">semantic / embedding</div>
+      <div class="row" data-id="B"><span class="rank">1</span><span class="doc">doc B</span><span class="sc">0.91</span></div>
+      <div class="row" data-id="A"><span class="rank">2</span><span class="doc">doc A</span><span class="sc">0.87</span></div>
+      <div class="row" data-id="D"><span class="rank">3</span><span class="doc">doc D</span><span class="sc">0.82</span></div>
+      <div class="row" data-id="C"><span class="rank">4</span><span class="doc">doc C</span><span class="sc">0.79</span></div>
+    </div>
+    <!-- Fused lane -->
+    <div class="lane fused" id="fused">
+      <div class="lane-title">Fused (RRF)</div>
+      <div class="lane-sub">rank-only merge</div>
+      <!-- populated by JS -->
+    </div>
+  </div>
+  <div class="merge-note" id="note">scores on different scales &mdash; RRF discards them, keeps only <b>rank</b></div>
+</div>
+
+<script>
+  // Two ranked lists. Compute RRF with k=60 and reveal the fused list.
+  const K = 60;
+  const bm25 = ['A', 'C', 'B', 'E'];
+  const vec  = ['B', 'A', 'D', 'C'];
+
+  function rrf(id) {
+    let s = 0;
+    const i = bm25.indexOf(id); if (i >= 0) s += 1 / (K + (i + 1));
+    const j = vec.indexOf(id);  if (j >= 0) s += 1 / (K + (j + 1));
+    return s;
+  }
+
+  const ids = [...new Set([...bm25, ...vec])];
+  const ranked = ids.map(id => ({ id, s: rrf(id) })).sort((a, b) => b.s - a.s);
+
+  const fused = document.getElementById('fused');
+  const note = document.getElementById('note');
+  const laneRows = Array.from(document.querySelectorAll('.lane:not(.fused) .row'));
+
+  // Build the fused rows once (hidden initially).
+  const fusedRows = ranked.map((r, idx) => {
+    const row = document.createElement('div');
+    row.className = 'row' + (idx === 0 ? ' win' : '');
+    row.dataset.id = r.id;
+    const inBoth = bm25.includes(r.id) && vec.includes(r.id);
+    row.innerHTML = `<span class="rank">${idx + 1}</span><span class="doc">doc ${r.id}${inBoth ? ' &#10003;' : ''}</span><span class="sc">${r.s.toFixed(4)}</span>`;
+    row.style.opacity = '0';
+    row.style.transform = 'translateY(6px)';
+    fused.appendChild(row);
+    return row;
+  });
+
+  function highlightSource(id, on) {
+    laneRows.forEach(r => {
+      if (r.dataset.id === id) r.classList.toggle('win', on);
+    });
+  }
+
+  function cycle() {
+    // reset
+    fusedRows.forEach(r => { r.style.opacity = '0'; r.style.transform = 'translateY(6px)'; });
+    laneRows.forEach(r => r.classList.remove('win', 'dim'));
+    note.innerHTML = 'scores on different scales &mdash; RRF discards them, keeps only <b>rank</b>';
+
+    // Sequentially fuse: highlight where each doc came from, then drop it into fused list.
+    ranked.forEach((r, idx) => {
+      setTimeout(() => {
+        highlightSource(r.id, true);
+        const row = fusedRows[idx];
+        row.style.opacity = '1';
+        row.style.transform = 'translateY(0)';
+        setTimeout(() => highlightSource(r.id, false), 600);
+      }, 500 + idx * 700);
+    });
+
+    // Final callout: top doc appeared in both lists.
+    setTimeout(() => {
+      note.innerHTML = 'doc A ranked highly in <b>both</b> lists &rarr; wins the fusion';
+    }, 500 + ranked.length * 700 + 200);
+  }
+
+  cycle();
+  setInterval(cycle, 5800);
+</script>
+</body>
+</html>

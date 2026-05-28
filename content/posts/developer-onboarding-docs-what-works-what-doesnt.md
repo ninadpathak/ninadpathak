@@ -99,7 +99,7 @@ That last line matters. Google recommends stating scope and non-scope. Onboardin
 
 ## Ownership and workflow belong in onboarding docs
 
-A new engineer can survive incomplete architecture notes. They struggle much harder with missing workflow rules. GitLab’s [docs-first culture](https://handbook.gitlab.com/handbook/people-group/general-onboarding/) is useful here because it treats documentation as the single source of truth and pushes contributors to link the docs instead of re-explaining things ad hoc. That discipline reduces the gap between “how the team says it works” and “how it actually works.”
+A new engineer can survive incomplete architecture notes. They struggle much harder with missing workflow rules. GitLab’s [docs-first culture](https://handbook.gitlab.com/handbook/people-group/general-onboarding/) is useful here because it treats documentation as the single source of truth and pushes contributors to link the docs instead of re-explaining things ad hoc. That discipline reduces the difference between “how the team says it works” and “how it actually works.”
 
 I want onboarding docs to define:
 

@@ -12,6 +12,14 @@ BEAM (Benchmark for Evaluating Attention in Memory) is a structured test that pl
 
 I spent time with the BEAM paper, the associated datasets, and the model evaluation results. Here is what the numbers actually say.
 
+
+<div class="visual-wrapper">
+  <div class="visual-title">Lost in the Middle: the BEAM Benchmark</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/beam-benchmark.html" title="BEAM benchmark retrieval accuracy by context position" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## What BEAM actually measures
 
 BEAM tests three distinct memory tasks. The first is **ordered retrieval**, where the model must recall a fact based on its position in a list. The second is **context extension**, which tests whether models can use relevant information from earlier in the context when answering a question. The third is **surprisal**, measuring how unexpectedly a token appears given its context.
@@ -52,11 +60,11 @@ Marketing teams treat context length as a linear feature. More context is better
 
 The issue is that model quality degrades non-linearly with context length. A model trained on 4K tokens and fine-tuned to 128K will show different behavior than one trained on 128K from scratch. The BEAM paper tests exactly this by evaluating models at context lengths both within and beyond their training distribution.
 
-Results show that accuracy in the middle region drops faster than accuracy at the edges as context length increases. At 32K tokens, the middle accuracy gap (difference between start and middle retrieval) is roughly 30 percentage points. At 128K, that gap widens to 55 percentage points. The model is not just slower at processing long contexts. It is actively worse at accessing information in the middle of them.
+Results show that accuracy in the middle region drops faster than accuracy at the edges as context length increases. At 32K tokens, the middle accuracy shortfall (difference between start and middle retrieval) is roughly 30 percentage points. At 128K, that shortfall widens to 55 percentage points. The model is not just slower at processing long contexts. It is actively worse at accessing information in the middle of them.
 
 This is why retrieval-augmented generation often outperforms long context windows in practice. A good retrieval system places the relevant information near the start of the prompt, where the model's attention mechanisms can access it reliably. That is not a limitation of the model. That is using the model correctly.
 
-For more on why RAG often beats long context, see [my comparison of RAG versus fine-tuning approaches](/blog/rag-vs-fine-tuning-for-production/).
+For more on why RAG often beats long context, see [my comparison of RAG versus fine-tuning approaches](/blog/rag-vs-fine-tuning/).
 
 ##Importance-weighted Memory And What Beam Proposes
 
@@ -68,7 +76,7 @@ The BEAM paper reports that importance-weighted eviction improves middle-context
 
 Implementing this requires tracking an importance score for every cached entry and sorting on eviction. For a 1M token context with a typical cache size of 32K entries, this adds roughly 2ms of latency per eviction decision on modern hardware. The accuracy gains usually outweigh this cost in production scenarios where retrieval quality matters.
 
-I have been exploring similar ideas for [scaling LLM inference efficiently](/blog/scaling-llm-inference-without-gpus/). The core principle is the same: understand where your bottlenecks actually are before throwing hardware at them.
+I have been exploring similar ideas for [scaling LLM inference efficiently](/blog/speculative-decoding-explained/). The core principle is the same: understand where your bottlenecks actually are before throwing hardware at them.
 
 ###The Ruler Benchmark And Synthetic Tests
 
@@ -76,7 +84,7 @@ BEAM is not the only benchmark exposing long-context weaknesses. The RULER bench
 
 RULER's "needle in a haystack" test variant places a specific token at a random position and asks the model to identify it. Humans score near 100% on this test because we can simply read every token. Standard language models score between 40% and 70% depending on context length, with the familiar U-shaped curve appearing for all but the shortest contexts.
 
-The gap between synthetic benchmark performance and real-world performance is worth noting. Models trained on code or technical documents often perform better on BEAM-style retrieval than models trained primarily on conversational data. Domain matters. A model that reliably retrieves facts from the middle of a 500K token legal contract might fail on a 100K token medical record, even if both are within its context window.
+The difference between synthetic benchmark performance and real-world performance is worth noting. Models trained on code or technical documents often perform better on BEAM-style retrieval than models trained primarily on conversational data. Domain matters. A model that reliably retrieves facts from the middle of a 500K token legal contract might fail on a 100K token medical record, even if both are within its context window.
 
 ##Practical Implications For Production Systems
 
@@ -88,7 +96,7 @@ The second principle is **retrieval before generation**. Instead of dumping a 50
 
 The third principle is **testing with your actual data**. Benchmarks like BEAM use synthetic document structures. Your production documents have specific organizational patterns, vocabulary, and fact densities. Test retrieval accuracy on your own data at the context lengths you actually use.
 
-For more on building production LLM systems that handle long contexts reliably, see my posts on [optimizing retrieval-augmented generation](/blog/rag-optimization-techniques/) and [context window management strategies](/blog/context-window-management/).
+For more on building production LLM systems that handle long contexts reliably, see my posts on [optimizing retrieval-augmented generation](/blog/semantic-caching-rag-optimization/) and [context window management strategies](/blog/context-windows-vs-memory/).
 
 ###What Open Source Models Show
 
@@ -96,7 +104,7 @@ The BEAM evaluation covers open-source models including Mistral-7B-Instruct, Lla
 
 Mistral-7B-Instruct achieves 62.1% retrieval accuracy at the start of a 32K context but drops to 14.7% in the middle. Llama-2-70B-Chat performs better at 71.3% and 22.4% respectively. Neither model was designed for long contexts, so the middle drop is severe.
 
-Long-context fine-tuned variants like Llama-3-70B-Instruct-262K show improvement. BEAM reports 88.4% at start and 41.2% in the middle for that model. The gap narrows but does not close. The U-shape persists.
+Long-context fine-tuned variants like Llama-3-70B-Instruct-262K show improvement. BEAM reports 88.4% at start and 41.2% in the middle for that model. The difference narrows but does not close. The U-shape persists.
 
 This is important for open-source deployment decisions. If you need reliable retrieval from the middle of long documents, you need a model explicitly trained for that task. You also need to test it with your specific document types, not just the BEAM leaderboard numbers.
 
@@ -124,11 +132,11 @@ For most production use cases, yes. A well-designed RAG pipeline retrieves relev
 
 **Which models perform best on BEAM?**
 
-Claude 3 Opus and GPT-4-Turbo perform similarly, with both achieving above 90% accuracy at the start and 26-29% in the middle of their respective context windows. Long-context fine-tuned open models like Llama-3-70B-262K show the smallest accuracy gaps, though still exhibit the U-shaped pattern.
+Claude 3 Opus and GPT-4-Turbo perform similarly, with both achieving above 90% accuracy at the start and 26-29% in the middle of their respective context windows. Long-context fine-tuned open models like Llama-3-70B-262K show the smallest accuracy differences, though still exhibit the U-shaped pattern.
 
 **Can this problem be fixed with training?**
 
-Research suggests the U-shaped retrieval pattern is structural to how transformer attention works, not a bug that training can fully eliminate. However, training on longer contexts and using importance-weighted objectives can reduce the magnitude of the middle drop. The gap never fully closes, but it narrows with targeted training.
+Research suggests the U-shaped retrieval pattern is structural to how transformer attention works, not a bug that training can fully eliminate. However, training on longer contexts and using importance-weighted objectives can reduce the magnitude of the middle drop. The difference never fully closes, but it narrows with targeted training.
 
 ---
 

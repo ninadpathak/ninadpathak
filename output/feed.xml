@@ -6,9 +6,21 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</title>
+      <link>https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/</link>
+      <description>Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need.</description>
+      <pubDate>May 12, 2026</pubDate>
+    </item>
+    <item>
       <title>Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</title>
       <link>https://ninadpathak.com/blog/memory-attribution-errors/</link>
       <description>Memory attribution failures cause AI agents to act on outdated or misassigned context. Here is what I found examining the failure patterns.</description>
+      <pubDate>May 11, 2026</pubDate>
+    </item>
+    <item>
+      <title>Shared Memory vs Isolated Memory in Multi-Agent Workflows</title>
+      <link>https://ninadpathak.com/blog/shared-vs-isolated-memory-multi-agent/</link>
+      <description>How to choose between shared and isolated memory architectures for multi-agent systems, with trade-offs from production deployments.</description>
       <pubDate>May 11, 2026</pubDate>
     </item>
     <item>
@@ -31,7 +43,7 @@
     </item>
     <item>
       <title>Memory Versioning and Audit Trails for Regulated AI Agents</title>
-      <link>https://ninadpathak.com/blog/2026-05-05-memory-versioning-and-audit-trails/</link>
+      <link>https://ninadpathak.com/blog/memory-versioning-and-audit-trails/</link>
       <description>If your agent overwrites its memory, you cannot pass a compliance audit. How to build append-only memory versioning and trace agent reasoning.</description>
       <pubDate>May 05, 2026</pubDate>
     </item>
@@ -54,12 +66,6 @@
       <pubDate>Apr 30, 2026</pubDate>
     </item>
     <item>
-      <title>The HERMES.md Bug That Silently Burned $200 in Claude Code Credits</title>
-      <link>https://ninadpathak.com/blog/hermes-md-git-commit-billing-bug/</link>
-      <description>A case-sensitive string in git commit messages routes Claude Code API requests through extra usage billing instead of plan quota. Here is how it works and what it means for teams.</description>
-      <pubDate>Apr 30, 2026</pubDate>
-    </item>
-    <item>
       <title>The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</title>
       <link>https://ninadpathak.com/blog/the-memory-hierarchy-why-rag-is-not-enough/</link>
       <description>RAG handles document retrieval well. It handles agent memory poorly, because agents need episodic recall, working context, and cross-session persistence that a vector store cannot provide.</description>
@@ -67,7 +73,7 @@
     </item>
     <item>
       <title>Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</title>
-      <link>https://ninadpathak.com/blog/2026-04-28-asymmetric-retrieval-agent-memory/</link>
+      <link>https://ninadpathak.com/blog/asymmetric-retrieval-agent-memory/</link>
       <description>The retrieval patterns that work for a query do not work when the agent is the one retrieving, and this asymmetry silently breaks production RAG systems.</description>
       <pubDate>Apr 28, 2026</pubDate>
     </item>
@@ -78,15 +84,15 @@
       <pubDate>Apr 27, 2026</pubDate>
     </item>
     <item>
-      <title>When to Build an Agent and When to Build a Smarter Assistant</title>
-      <link>https://ninadpathak.com/blog/agent-vs-ai-assistant/</link>
-      <description>The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.</description>
-      <pubDate>Apr 26, 2026</pubDate>
-    </item>
-    <item>
       <title>The Agent Design Space: A Map of What Engineers Are Actually Building</title>
       <link>https://ninadpathak.com/blog/the-agent-design-space/</link>
       <description>After surveying production agents across industries, the design space clusters into patterns. Here is what I found.</description>
+      <pubDate>Apr 26, 2026</pubDate>
+    </item>
+    <item>
+      <title>When to Build an Agent and When to Build a Smarter Assistant</title>
+      <link>https://ninadpathak.com/blog/agent-vs-ai-assistant/</link>
+      <description>The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.</description>
       <pubDate>Apr 26, 2026</pubDate>
     </item>
     <item>
@@ -96,34 +102,28 @@
       <pubDate>Apr 25, 2026</pubDate>
     </item>
     <item>
-      <title>Matz's Ruby AOT Compiler: How Spinel Differs from YJIT/MJIT and What It Means for Production Ruby</title>
-      <link>https://ninadpathak.com/blog/spinel-ruby-aot-compiler/</link>
-      <description>Spinel compiles Ruby to standalone native binaries with 11.6x speedups over miniruby. I dug into the architecture to understand why AOT beats JIT for long-running services.</description>
-      <pubDate>Apr 25, 2026</pubDate>
-    </item>
-    <item>
-      <title>Apple's iCloud Keychain Escrow Security: How It Works and Why It Matters</title>
-      <link>https://ninadpathak.com/blog/icloud-keychain-escrow/</link>
-      <description>Apple's iCloud Keychain escrow uses a key-splitting architecture that makes escrow records cryptographically inaccessible without the device passcode. This is how it actually works.</description>
-      <pubDate>Apr 25, 2026</pubDate>
-    </item>
-    <item>
       <title>The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</title>
-      <link>https://ninadpathak.com/blog/2026-04-23-agent-loop-anatomy/</link>
+      <link>https://ninadpathak.com/blog/agent-loop-anatomy/</link>
       <description>The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.</description>
       <pubDate>Apr 23, 2026</pubDate>
     </item>
     <item>
       <title>Why AI Agents Keep Failing in Production and What the Field Is Doing About It</title>
-      <link>https://ninadpathak.com/blog/2026-04-22-why-ai-agents-keep-failing-in-production/</link>
+      <link>https://ninadpathak.com/blog/why-ai-agents-keep-failing-in-production/</link>
       <description>I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.</description>
       <pubDate>Apr 22, 2026</pubDate>
     </item>
     <item>
-      <title>Python model.predict(): The Function That Turns Data Into Decisions</title>
-      <link>https://ninadpathak.com/blog/python-model-predict-function/</link>
-      <description>A practical guide to model.predict() across scikit-learn, Keras, PyTorch, and XGBoost—what it does, how it behaves differently across frameworks, and the gotchas that will bite you in production.</description>
+      <title>A Taxonomy of AI Agents That Actually Explains What You Are Building</title>
+      <link>https://ninadpathak.com/blog/the-taxonomy-of-ai-agents/</link>
+      <description>Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.</description>
       <pubDate>Apr 21, 2026</pubDate>
+    </item>
+    <item>
+      <title>Memory for Voice AI Agents: What Text Chatbots Cannot Do</title>
+      <link>https://ninadpathak.com/blog/memory-for-voice-ai-agents/</link>
+      <description>Voice AI agents live or die by how they manage memory across a real-time streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something different.</description>
+      <pubDate>Apr 19, 2026</pubDate>
     </item>
   </channel>
 </rss>

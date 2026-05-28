@@ -229,17 +229,24 @@
 <p>Working memory is what the model has right now. In an LLM, this is the context window. I think of it as the agent's immediate scratchpad: what was said in the last few turns, what the current task is, what tools are available.</p>
 <p>Working memory is fast and volatile. It disappears when the context resets. I ran into this explicitly when building a long-running customer support agent. Between turns, the agent would lose track of what the customer had already been told. The fix was not a better retrieval system. The fix was persisting a session summary back into working memory at the start of every turn.</p>
 <p>Working memory has hard limits. The context window caps it. When I push an agent toward 200 turns in a single session, I start seeing degradation even when retrieval is working perfectly. The model simply has too much to reason over.</p>
-<p>If you want to understand how context windows fit into this picture, I wrote about <a href="/articles/llm-context-windows-explained">LLM context windows explained</a> and how they interact with different memory systems.</p>
+<p>If you want to understand how context windows fit into this picture, I wrote about <a href="/blog/llm-context-windows-explained/">LLM context windows explained</a> and how they interact with different memory systems.</p>
 <h3 id="episodic-memory-what-happened">Episodic memory: what happened</h3>
 <p>Episodic memory stores specific experiences. I think of it as the agent's autobiographical record: this task was attempted on this date, failed with this error, the user corrected it this way.</p>
 <p>When a DevOps agent recalls that "the last deployment on Friday failed because the database migration timed out," that is episodic retrieval. The agent is pulling a specific event from its history, not a general fact about deployments.</p>
 <p>The failure mode I see most often is treating episodic memory like a database. Engineers build retrieval pipelines that query episodic storage with semantic similarity. The user asks "what went wrong with my deployments" and the agent returns semantically similar past events, most of which are irrelevant because the user wants a chronological account, not a topic cluster.</p>
-<p>I wrote about why this asymmetry breaks RAG pipelines in <a href="/articles/asymmetric-retrieval-agent-memory">asymmetric retrieval and why it breaks your agent memory</a>. The short version: episodic recall is directional in a way that semantic search cannot model.</p>
+<p>I wrote about why this asymmetry breaks RAG pipelines in <a href="/blog/asymmetric-retrieval-agent-memory/">asymmetric retrieval and why it breaks your agent memory</a>. The short version: episodic recall is directional in a way that semantic search cannot model.</p>
 <h3 id="semantic-memory-what-is-true">Semantic memory: what is true</h3>
 <p>Semantic memory stores facts, knowledge, and learned abstractions. This is what most people mean when they say "knowledge base" or "world model." It is not tied to a specific time or experience.</p>
 <p>A coding agent's semantic memory contains facts like "Python's list.sort() is stable" or "React components re-render when state changes." These are general truths that apply across contexts.</p>
 <p>When semantic memory is wrong, the agent confidently misinforms. When episodic memory is wrong, the agent contradicts itself. The error signatures are completely different, and debugging them requires different tools.</p>
-<p>I keep coming back to the <a href="/articles/memory-hierarchy-in-ai-systems">memory hierarchy in AI systems</a> when thinking about where semantic memory sits relative to retrieval. The hierarchy framing helps because it makes clear that semantic memory is a layer, not the whole system.</p>
+<p>I keep coming back to the <a href="/blog/memory-hierarchy-in-ai-systems/">memory hierarchy in AI systems</a> when thinking about where semantic memory sits relative to retrieval. The hierarchy framing helps because it makes clear that semantic memory is a layer, not the whole system.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">THE THREE MEMORY TYPES</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/three-memory-types.html" title="Working, episodic, and semantic memory side by side: what each stores and its lifespan" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="why-agents-get-the-types-confused">Why agents get the types confused</h2>
 <p>The problem is that most agent frameworks expose a single "memory" interface. You call <code>agent.add_to_memory(message)</code> and the framework decides what to do with it. That decision is often implicit, based on token budget or retrieval latency, not on the nature of the information.</p>
 <p>When I reviewed a popular agent framework last year, I found that every user message was being stored in episodic memory regardless of content. The agent's learned knowledge about Python, Git, and deployment pipelines was being treated the same as session logs. The retrieval results were noisy because episodic memory had been flooded with transient session data.</p>
@@ -262,7 +269,7 @@ Current working context, summaries of recent events: working memory, refreshed e
 <p>These three failure modes look completely different. If you are debugging with a single memory system, you cannot tell them apart. That is the real cost of the category error.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>The three memory types are not academic distinctions. They correspond to different information, different retrieval mechanisms, and different failure modes. An agent that treats a learned fact the same as a past event will fail in predictable ways. An agent that routes information by type will be easier to debug and more reliable in production.</p>
-<p>I wrote this because the memory hierarchy framing in my earlier post did not go far enough in separating these types. The <a href="/articles/state-of-ai-agent-memory-2026">state of AI agent memory in 2026</a> covers the landscape. This post is about the specific architectural decisions that determine whether your agent's memory actually works.</p>
+<p>I wrote this because the memory hierarchy framing in my earlier post did not go far enough in separating these types. The <a href="/blog/state-of-ai-agent-memory-2026/">state of AI agent memory in 2026</a> covers the landscape. This post is about the specific architectural decisions that determine whether your agent's memory actually works.</p>
       </div>
     </div>
   </div>
@@ -272,17 +279,17 @@ Current working context, summaries of recent events: working memory, refreshed e
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="related-card">
+        <div class="related-card-date">2026-05-12</div>
+        <div class="related-card-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      </a>
       <a href="/blog/memory-attribution-errors/" class="related-card">
         <div class="related-card-date">2026-05-11</div>
         <div class="related-card-title">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</div>
       </a>
-      <a href="/blog/agent-memory-for-customer-support/" class="related-card">
-        <div class="related-card-date">2026-05-10</div>
-        <div class="related-card-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</div>
-      </a>
-      <a href="/blog/why-coding-agents-lose-their-memory/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</div>
+      <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="related-card">
+        <div class="related-card-date">2026-05-11</div>
+        <div class="related-card-title">Shared Memory vs Isolated Memory in Multi-Agent Workflows</div>
       </a>
     </div>
   </div>
@@ -364,9 +371,9 @@ Current working context, summaries of recent events: working memory, refreshed e
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

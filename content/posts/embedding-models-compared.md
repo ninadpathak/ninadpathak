@@ -168,7 +168,7 @@ Building a search system with these models follows a predictable pipeline. You s
 
 These vectors are stored in a vector database alongside the original text and metadata. A user query arrives and is embedded using the same model. The vector database performs a nearest-neighbor search to find the chunks with the highest similarity.
 
-These chunks are then passed to an LLM as context for the final answer. The embedding model acts as the librarian. The LLM acts as the researcher.
+These chunks are then passed to an LLM as context for the final answer, and many production systems pair dense vectors with [BM25 sparse retrieval in a hybrid search setup](/blog/hybrid-search-bm25-vector-search/) to catch exact keyword matches that pure semantic search misses. The embedding model acts as the librarian. The LLM acts as the researcher.
 
 Failures in this workflow usually happen at the librarian stage. Semantic search is only as good as the geometry of the underlying space. Searching fails when the embedding model cannot understand the semantic relationship between a query and a document.
 
@@ -180,7 +180,7 @@ Embedding large datasets is an asynchronous batch process. Querying them is a sy
 
 OpenAI and Cohere typically return vectors in 150ms to 300ms. Such response times are acceptable for many web applications. They might feel sluggish for interactive chat interfaces.
 
-Self-hosting models like BGE-M3 or Hugging Face's latest encoders can reduce latency to less than 50ms. You gain control over the hardware and eliminate the network hop to a provider's API. The cost is the operational overhead of managing GPU clusters.
+Self-hosting models like BGE-M3 or Hugging Face's latest encoders can reduce latency to less than 50ms, and pushing search even closer to the user with [WASM vector databases running in the browser](/blog/local-wasm-vector-benchmarks/) can cut the network hop entirely. You gain control over the hardware and eliminate the network hop to a provider's API. The cost is the operational overhead of managing GPU clusters.
 
 Large-scale systems often use a hybrid approach. They use a provider's API for the initial embedding of the corpus. They then use a highly optimized, self-hosted model for real-time user queries.
 
@@ -196,7 +196,7 @@ My tests show a significant decay in vector stability as the input grows. Embedd
 
 The model struggles to maintain the importance of specific facts buried in the middle of a long text. The "Lost in the Middle" phenomenon applies to embedding encoders just as much as to decoder LLMs. Recursive chunking with overlap remains the most reliable strategy for production RAG.
 
-Small, focused chunks preserve semantic density. You can then use cross-encoders for reranking. You can also implement a parent-document retrieval strategy to give the LLM broader context.
+Small, focused chunks preserve semantic density. You can then use cross-encoders for [reranking your top-k results](/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/). You can also implement a parent-document retrieval strategy to give the LLM broader context.
 
 The long context window on an embedding model is best used for processing large cohesive units like code files. It should not replace a robust chunking strategy. Granularity is your best defense against information loss.
 

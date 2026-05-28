@@ -102,6 +102,13 @@ The full breakdown lives in [Appendix II](https://assets.anthropic.com/m/1632cde
 
 I trust the result as strong evidence. I would still run my own evals. Retrieval depends heavily on the corpus. Code, support content, legal docs, and internal knowledge bases all fail differently.
 
+<div class="visual-wrapper">
+  <div class="visual-title">CHUNK ENRICHMENT AND RETRIEVAL FAILURE REDUCTION</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/contextual-retrieval.html" title="A raw chunk versus a chunk with a prepended context blurb before embedding, and the 49% / 67% reduction in top-20 retrieval failure" loading="lazy"></iframe>
+  </div>
+</div>
+
 ## The interesting change happens before query time
 
 The reason I keep dwelling on this technique is simple: it moves work upstream.

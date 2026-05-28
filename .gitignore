@@ -7,3 +7,4 @@ venv/
 
 # NP topic queue — managed by hermes scraper, not committed
 sites/ninadpathak/topics.md
+.gstack/

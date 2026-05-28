@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TTFT Chain: Queue to Prefill to First Token, vs Throughput</title>
+<style>
+:root {
+  --bg-1: #ffffff; --bg-2: #efefed; --border: #e0e0dc;
+  --text-1: #0e0e0e; --text-2: #3a3a3a; --text-3: #888888;
+  --accent: #d44000;
+  --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg-1: #111111; --bg-2: #1a1a1a; --border: #1e1e1e;
+          --text-1: #f0f0f0; --text-2: #c2c2c2; --text-3: #6a6a6a;
+          --accent: #ff5f1f; }
+}
+body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
+
+.stage {
+  width: 100%; height: 100vh; box-sizing: border-box;
+  padding: 18px 22px; display: flex; flex-direction: column;
+}
+.header {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-3); text-align: center; margin-bottom: 16px;
+}
+.body-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+
+/* timeline */
+.timeline { display: flex; align-items: stretch; width: 100%; height: 44px; }
+.phase {
+  display: flex; align-items: center; justify-content: center; position: relative;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  border: 1px solid var(--border); border-right: none; background: var(--bg-2); color: var(--text-3);
+}
+.phase:first-child { border-radius: 3px 0 0 3px; }
+.phase.network { flex: 0.6; }
+.phase.queue   { flex: 1.4; }
+.phase.prefill { flex: 2.4; }
+
+/* the first-token marker fires at end of prefill */
+.fire {
+  flex: 0 0 0; position: relative;
+}
+.tick {
+  position: absolute; top: -6px; bottom: -6px; left: -1px; width: 2px; background: var(--accent);
+}
+.tick-label {
+  position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 9px; color: var(--accent); white-space: nowrap; font-weight: 600;
+}
+
+/* generation/throughput continues after first token */
+.gen {
+  flex: 3; border: 1px solid var(--border); border-left: 1px solid var(--accent);
+  border-radius: 0 3px 3px 0; background: var(--bg-1);
+  display: flex; align-items: center; gap: 5px; padding: 0 10px; overflow: hidden;
+}
+.gen .gl { font-family: var(--mono); font-size: 9px; color: var(--text-3); letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; }
+.gtok { width: 8px; height: 16px; background: var(--accent); opacity: 0; border-radius: 1px; }
+
+/* moving request dot */
+.runner {
+  position: absolute; top: 50%; left: 0; width: 10px; height: 10px; margin-top: -5px; margin-left: -5px;
+  background: var(--accent); border-radius: 50%;
+}
+
+.scale {
+  display: flex; justify-content: space-between; margin-top: 8px;
+  font-family: var(--mono); font-size: 9px; color: var(--text-3);
+}
+
+.brackets { display: flex; margin-top: 22px; width: 100%; }
+.bk { text-align: center; font-family: var(--mono); font-size: 9px; color: var(--text-3); letter-spacing: 0.05em; position: relative; }
+.bk::before { content: ''; position: absolute; top: -8px; left: 6%; right: 6%; height: 5px; border: 1px solid var(--border); border-bottom: none; }
+.bk.ttft { flex: 4.4; }
+.bk.ttft b { color: var(--accent); }
+.bk.tput { flex: 3; }
+
+.footnote {
+  font-family: var(--mono); font-size: 9.5px; color: var(--text-3);
+  text-align: center; letter-spacing: 0.05em; margin-top: 18px;
+}
+.footnote b { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 600px) {
+  .phase { font-size: 8px; }
+  .gen .gl { font-size: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="header">Time to First Token / The Latency Chain</div>
+
+  <div class="body-wrap">
+    <div class="timeline" id="timeline">
+      <div class="phase network">NET</div>
+      <div class="phase queue">QUEUE</div>
+      <div class="phase prefill">PREFILL (KV cache)</div>
+      <div class="fire"><div class="tick"></div><div class="tick-label">FIRST TOKEN</div></div>
+      <div class="gen" id="gen">
+        <span class="gl">stream / throughput &rarr;</span>
+        <div class="gtok"></div><div class="gtok"></div><div class="gtok"></div>
+        <div class="gtok"></div><div class="gtok"></div><div class="gtok"></div>
+        <div class="gtok"></div><div class="gtok"></div>
+      </div>
+      <div class="runner" id="runner"></div>
+    </div>
+
+    <div class="brackets">
+      <div class="bk ttft"><b>TTFT</b> = network + queue + prefill</div>
+      <div class="bk tput">throughput = tokens / sec after</div>
+    </div>
+  </div>
+
+  <div class="footnote">TTFT is dominated by <b>prefill</b>: longer prompts cost more. Caching the prefix can drop it ~80%.</div>
+</div>
+<script>
+  var runner = document.getElementById('runner');
+  var timeline = document.getElementById('timeline');
+  var gtoks = document.getElementById('gen').querySelectorAll('.gtok');
+  // The first-token tick sits at the end of prefill. flex shares: net .6 queue 1.4 prefill 2.4 fire 0 gen 3 => total 7.4
+  // fraction of width up to first token = (0.6+1.4+2.4)/7.4
+  var firstFrac = (0.6 + 1.4 + 2.4) / 7.4;
+
+  function run(){
+    gtoks.forEach(function(g){ g.style.transition='none'; g.style.opacity='0'; });
+    var W = timeline.clientWidth;
+    var ttftDur = 2000;   // ms to traverse queue+prefill to first token (mechanical, linear)
+    var t0 = null;
+    function move(now){
+      if (t0===null) t0=now;
+      var p = Math.min(1, (now-t0)/ttftDur);
+      runner.style.left = (W * firstFrac * p) + 'px';
+      if (p < 1) { requestAnimationFrame(move); }
+      else { runner.style.left = (W*firstFrac)+'px'; stream(); }
+    }
+    requestAnimationFrame(move);
+  }
+
+  function stream(){
+    // emit generation tokens one by one (throughput phase)
+    gtoks.forEach(function(g,i){
+      setTimeout(function(){ g.style.transition='opacity 0.12s linear'; g.style.opacity='1'; }, i*120);
+    });
+  }
+
+  run();
+  setInterval(run, 3800);
+</script>
+</body>
+</html>

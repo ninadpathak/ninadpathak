@@ -22,11 +22,18 @@ DeepSeek's API launched at roughly a tenth the price of comparable Anthropic and
 
 A dense transformer runs every token through every parameter. A 70B model means 70B parameters worth of compute per token, every time.
 
-A MoE model keeps attention layers unchanged but replaces each block's single feedforward network with a collection of expert networks, typically 8 to 256 per layer. A small learned router assigns each token to the top-K experts — usually 2 to 8. The token goes through only those experts. Everything else is skipped for that token.
+A MoE model keeps attention layers unchanged but replaces each block's single feedforward network with a collection of expert networks, typically 8 to 256 per layer. A small learned router assigns each token to the top-K experts, usually 2 to 8. The token goes through only those experts. Everything else is skipped for that token.
 
 DeepSeek V3 uses 256 routed experts per layer plus a few shared experts, activating 8 per token. Cameron Wolfe's [technical breakdown of MoE LLMs](https://cameronrwolfe.substack.com/p/moe-llms) goes through the parameter math in detail. The [DeepSeekMoE paper](https://arxiv.org/abs/2401.06066) and [DeepSeek-V2 paper](https://arxiv.org/abs/2405.04434) cover the specific architectural choices behind V3.
 
-The reason this translates to cost savings is the memory bandwidth bottleneck I explained in [my piece on speculative decoding](/blog/speculative-decoding-explained/). LLM inference spends most of its time waiting for weight reads from DRAM, not running matrix multiplications. If you activate only 37B parameters per forward pass, you do only 37B parameters worth of that weight loading — not 671B worth. A 671B MoE model running 37B active parameters per token does roughly the same math per token as a 37B dense model.
+The reason this translates to cost savings is the memory bandwidth bottleneck I explained in [my piece on speculative decoding](/blog/speculative-decoding-explained/). LLM inference spends most of its time waiting for weight reads from DRAM, not running matrix multiplications. If you activate only 37B parameters per forward pass, you do only 37B parameters worth of that weight loading, not 671B worth. A 671B MoE model running 37B active parameters per token does roughly the same math per token as a 37B dense model.
+
+<div class="visual-wrapper">
+  <div class="visual-title">SPARSE EXPERT ROUTING: 8 OF 256 ACTIVATE PER TOKEN</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/moe-routing.html" title="MoE router activating only 8 of 256 experts per token" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## Dense vs MoE across the dimensions that matter
 
@@ -35,7 +42,7 @@ The reason this translates to cost savings is the memory bandwidth bottleneck I 
 | Compute per token | ~67B params | ~37B params |
 | Memory to run (BF16) | ~134GB | ~1.3TB |
 | Training complexity | Standard | Significantly harder |
-| Fine-tuning | Straightforward | Harder — routing disrupts expert specialization |
+| Fine-tuning | Straightforward | Harder, routing disrupts expert specialization |
 | API cost at provider scale | Higher | Lower |
 | Self-hosting feasibility | 8x A100 | Multi-node cluster required |
 
@@ -45,7 +52,7 @@ The DeepSeek-V2 paper compared their MoE model directly against their 67B dense 
 
 The router decides which experts to send each token to based on the token itself, at inference time. Until the router runs, you do not know which experts you need. So all of them must be in GPU memory before processing begins.
 
-Running DeepSeek V3 requires holding 671B parameters in VRAM. In FP8 quantization, that is over 1.3TB. In BF16, more. NVIDIA's [Blackwell MoE overview](https://blogs.nvidia.com/blog/mixture-of-experts-frontier-models/) cites 10x faster inference and 1/10 the token cost — those numbers are accurate, but they apply in the context of NVL72-class hardware.
+Running DeepSeek V3 requires holding 671B parameters in VRAM. In FP8 quantization, that is over 1.3TB. In BF16, more. NVIDIA's [Blackwell MoE overview](https://blogs.nvidia.com/blog/mixture-of-experts-frontier-models/) cites 10x faster inference and 1/10 the token cost. Those numbers are accurate, but they apply in the context of NVL72-class hardware.
 
 When you call DeepSeek's API, you are benefiting from their hardware and from running at high enough throughput to amortize that footprint across many requests. Self-hosting means facing the same memory footprint as self-hosting a dense model of the same total size, with the compute advantage only materializing at high concurrent request volumes.
 
@@ -57,7 +64,7 @@ The standard fix is an auxiliary loss term that penalizes uneven expert utilizat
 
 DeepSeek's approach in V3 removes the auxiliary loss entirely, replacing it with per-expert bias terms on routing scores, dynamically updated based on recent utilization. Overloaded experts get their bias nudged down, reducing selection probability in future batches. It is a feedback control loop rather than a penalty. The [Hugging Face post on MoE load balancing](https://huggingface.co/blog/NormalUhr/moe-balance) traces how balancing strategies have evolved. Cerebras's [router comparison](https://www.cerebras.ai/blog/moe-guide-router) makes the case that routing algorithm choice affects final model quality more than most people expect.
 
-Expert specialization is also messier than the diagrams imply. Research teams have tried to interpret what individual experts learn. The results are distributed and noisy — not the clean "expert A handles Python, expert B handles French" story. Maarten Grootendorst's [visual guide to MoE](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts) is the most honest treatment I have seen at showing what routing actually looks like.
+Expert specialization is also messier than the diagrams imply. Research teams have tried to interpret what individual experts learn. The results are distributed and noisy, not the clean "expert A handles Python, expert B handles French" story. Maarten Grootendorst's [visual guide to MoE](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts) is the most honest treatment I have seen at showing what routing actually looks like.
 
 ## When MoE is and is not the right choice
 

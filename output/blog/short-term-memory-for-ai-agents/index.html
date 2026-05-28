@@ -228,6 +228,13 @@
       <div class="post-content">
         <p>Context windows are not memory. That is the first thing engineers get wrong when building AI agents. A context window is a fixed-size buffer. Memory is what you build on top of that buffer. Understanding the distinction will save you weeks of debugging flaky agents.</p>
 <p>Every production AI agent I have shipped runs into the same failure mode eventually: it starts forgetting recent conversation turns, dropping critical instructions, or producing responses that ignore what the user just said. The root cause is almost always a misunderstanding of how short-term memory works inside the context window architecture.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">The Short-Term Memory Window</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/short-term-memory.html" title="Short-term memory window for AI agents" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="what-the-context-window-actually-is">What The Context Window Actually Is</h2>
 <p>The context window is a contiguous token buffer that feeds into the transformer's attention mechanism. When you send a 128k token context to Claude or GPT-4o, the model does not "remember" everything equally. Attention scores distribute across all tokens, but research has consistently shown that performance degrades for information placed in the middle of long contexts.</p>
 <p>A context window has three properties you must track as an agent engineer. First, total capacity in tokens. GPT-4o supports 128k tokens. Claude 3.5 Sonnet supports 200k tokens. Gemini 1.5 Pro supports 1 million tokens. Second, current fill level, which is the sum of your system prompt, conversation history, retrieved documents, and scratchpad. Third, headroom, which is the remaining capacity for the next response and tool call arguments.</p>
@@ -347,7 +354,7 @@
 <p>A production agent memory system has three layers. The first layer is the context window, which is short-term memory. It holds the current conversation, active retrieved documents, and working scratchpad. Everything in this layer is "alive" for the current turn.</p>
 <p>The second layer is episodic memory, which stores summaries of past interactions. When a user reconnects after a week, the agent should know who they are and what they were working on. Episodic memory is built by summarizing past conversation sessions and storing those summaries in a database.</p>
 <p>The third layer is semantic memory, which is external knowledge retrieval. This is your RAG pipeline, your product documentation, your codebases. The agent retrieves relevant documents from this layer on each turn based on the current query.</p>
-<p>I have written about <a href="/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/">how Anthropic's contextual retrieval changes RAG architecture</a> and about <a href="/articles/rag-evaluation-metrics-what-actually-matters/">RAG evaluation metrics that actually matter</a>. Both posts are relevant here because the retrieval quality in your semantic memory layer directly affects how much you need to rely on raw context window capacity.</p>
+<p>I have written about <a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">how Anthropic's contextual retrieval changes RAG architecture</a> and about <a href="/blog/rag-evaluation-metrics-what-actually-matters/">RAG evaluation metrics that actually matter</a>. Both posts are relevant here because the retrieval quality in your semantic memory layer directly affects how much you need to rely on raw context window capacity.</p>
 <p>The key insight is that these three layers are not separate systems. They are one memory hierarchy. Your context window is the top of that hierarchy. Semantic and episodic memory feed into it. When the context window is full, you evict from the bottom (old episodic memories) before you lose information from the top (current conversation).</p>
 <h2 id="designing-your-memory-architecture">Designing Your Memory Architecture</h2>
 <p>Start with the token budget. Calculate the maximum tokens available for conversation history in your context window. Subtract your system prompt, your reserved headroom for responses, and any retrieved context you must include on every turn. What remains is your budget for conversation history.</p>
@@ -397,14 +404,13 @@
 <h2 id="relationship-to-long-term-memory">Relationship To Long-term Memory</h2>
 <p>Short-term and long-term memory are not competing systems. They are a hierarchy. The context window is the working table. Semantic and episodic stores are the filing cabinets. You pull relevant files from the cabinets onto the table, work with them there, and file updated versions back when the session ends.</p>
 <p>The mistake is treating long-term memory as optional or secondary. If your agent only has access to the context window, it has no memory of previous sessions, no knowledge of the user's past preferences, and no ability to retrieve relevant documentation beyond what fits in the current context.</p>
-<p>I have written about <a href="/articles/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/">token counting and cost control</a> and <a href="/articles/prompt-caching-what-it-is-and-when-the-math-works/">prompt caching and when the math works</a>. Both are relevant here because the memory architecture you design has direct cost implications. Every retrieval call, every summarization pass, and every context window refill costs money.</p>
+<p>I have written about <a href="/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/">token counting and cost control</a> and <a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/">prompt caching and when the math works</a>. Both are relevant here because the memory architecture you design has direct cost implications. Every retrieval call, every summarization pass, and every context window refill costs money.</p>
 <p>The pattern I follow: maximize context window efficiency first, then build episodic memory as a reliability layer, then invest in semantic retrieval quality. This sequence gives you the best return on engineering effort.</p>
 <p>Context window management is not a solved problem. The approaches in this post represent current practice, but the field is moving fast. The architectures that work in 2026 will look primitive by 2028. Build for replaceability, not permanence.</p>
 <h2 id="related-articles">Related Articles</h2>
 <ul>
 <li><a href="/blog/context-windows-vs-memory/">Context windows vs memory</a></li>
 <li><a href="/blog/ai-memory-management-for-llms/">AI memory management for LLMs</a></li>
-<li><a href="/blog/short-term-memory-for-ai-agents/">Short-term memory for AI agents</a></li>
 <li><a href="/blog/how-memory-works-in-hyperagents/">How memory works in HyperAgents</a></li>
 <li><a href="/blog/state-of-ai-agent-memory-2026/">State of AI agent memory 2026</a></li>
 </ul>
@@ -524,9 +530,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

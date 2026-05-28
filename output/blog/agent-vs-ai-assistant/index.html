@@ -228,9 +228,16 @@
 <p>An AI agent drives its own loop. You give it a goal, not a sequence of steps. It decides what tools to call, when to stop, when to retry. The loop is inside the system, not outside it.</p>
 <p>A smart assistant is a better version of the same thing you have always had. You give it a prompt, it gives you a response. You might feed it a long document. You might give it function-calling so it can do things like search the web or run code. But the human is always driving. The loop lives outside the system, in your workflow.</p>
 <p>This distinction sounds simple. It has real consequences for how you build, how you pay, and how you debug.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">WHO DRIVES THE LOOP</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/who-drives-the-loop.html" title="Assistant where the human drives each turn versus agent where the system drives its own loop" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="what-you-trade-when-you-add-a-loop">What You Trade When You Add a Loop</h2>
-<p>Building inside the loop means the system can surprise you. That is the point. It also means the system can fail in ways that are hard to predict and hard to observe. I wrote about the <a href="/articles/production-ai-agent-errors">production errors I keep seeing</a> with agent systems, and the core issue in almost every case was that the team did not fully account for what happens when the system makes its own decisions about tool use, retry behavior, and when to escalate.</p>
-<p>Adding a loop also adds latency and cost. Each iteration through the loop costs a model call. If your task can be solved in one or two prompt-response exchanges, forcing it through an agent loop is an expensive way to solve it. The <a href="/articles/llm-token-budgets-cost-control">LLM token budgets</a> for a multi-turn agent session add up fast, especially when the alternative is a well-crafted single prompt with good examples.</p>
+<p>Building inside the loop means the system can surprise you. That is the point. It also means the system can fail in ways that are hard to predict and hard to observe. I wrote about the <a href="/blog/production-ai-agent-errors/">production errors I keep seeing</a> with agent systems, and the core issue in almost every case was that the team did not fully account for what happens when the system makes its own decisions about tool use, retry behavior, and when to escalate.</p>
+<p>Adding a loop also adds latency and cost. Each iteration through the loop costs a model call. If your task can be solved in one or two prompt-response exchanges, forcing it through an agent loop is an expensive way to solve it. The <a href="/blog/llm-token-budgets-cost-control/">LLM token budgets</a> for a multi-turn agent session add up fast, especially when the alternative is a well-crafted single prompt with good examples.</p>
 <h2 id="when-a-smarter-assistant-is-the-right-call">When a Smarter Assistant Is the Right Call</h2>
 <p>A smarter assistant is enough when the task is well-bounded and the human owns the process.</p>
 <p>Code review is a good example. You paste in a diff, you ask for a review, you get feedback. The human drives each turn. The system is a reviewer, not an agent. Function-calling helps here: you can give the assistant tools to look up your style guide, check your test coverage, or search your internal docs. None of that requires an agent loop.</p>
@@ -244,7 +251,7 @@
 <p>A data pipeline agent that monitors incoming data, detects schema drift, decides when to alert, and can trigger re-processing without human intervention is an agent. The failure modes are diverse enough that you cannot enumerate them in advance.</p>
 <p>The common thread: the human cannot reasonably specify every step because the right step depends on what the system discovers along the way.</p>
 <h2 id="the-taxonomy-i-keep-coming-back-to">The Taxonomy I Keep Coming Back To</h2>
-<p>I mapped out <a href="/articles/the-taxonomy-of-ai-agents">a taxonomy of AI agents</a> that tries to make these distinctions concrete. The key split in that taxonomy is between systems where the model drives the loop and systems where the human does. Every design decision flows from that split.</p>
+<p>I mapped out <a href="/blog/the-taxonomy-of-ai-agents/">a taxonomy of AI agents</a> that tries to make these distinctions concrete. The key split in that taxonomy is between systems where the model drives the loop and systems where the human does. Every design decision flows from that split.</p>
 <p>If you are early in evaluating whether you need an agent, that taxonomy is a good starting point. Ask yourself who drives the loop. If the answer is the human, you probably want an assistant with good tool access and a long context window. If the answer is the system, you are building an agent, and you need to account for the full cost of that architectural choice.</p>
 <h2 id="one-question-to-ask-before-you-build">One Question to Ask Before You Build</h2>
 <p>Before committing to an agent architecture, I ask this: can a human do this task in under five minutes with access to the right tools?</p>
@@ -261,7 +268,7 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/2026-05-05-memory-versioning-and-audit-trails/" class="related-card">
+      <a href="/blog/memory-versioning-and-audit-trails/" class="related-card">
         <div class="related-card-date">2026-05-05</div>
         <div class="related-card-title">Memory Versioning and Audit Trails for Regulated AI Agents</div>
       </a>
@@ -269,7 +276,7 @@
         <div class="related-card-date">2026-04-27</div>
         <div class="related-card-title">Multi-Agent vs Single-Agent Systems: The Real Trade-offs</div>
       </a>
-      <a href="/blog/2026-04-23-agent-loop-anatomy/" class="related-card">
+      <a href="/blog/agent-loop-anatomy/" class="related-card">
         <div class="related-card-date">2026-04-23</div>
         <div class="related-card-title">The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</div>
       </a>
@@ -353,9 +360,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

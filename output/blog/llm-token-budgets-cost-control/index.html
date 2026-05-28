@@ -215,7 +215,7 @@
 <li><a href="#what-a-token-actually-costs">What a token actually costs</a></li>
 <li><a href="#counting-tokens-before-you-spend-them">Counting tokens before you spend them</a></li>
 <li><a href="#building-a-token-budget-system">Building a token budget system</a></li>
-<li><a href="#prompt-compression-the-high-leverage-move">Prompt compression: the high-leverage move</a></li>
+<li><a href="#prompt-compression-the-high-impact-move">Prompt compression: the high-impact move</a></li>
 <li><a href="#caching-when-the-math-works">Caching: when the math works</a></li>
 <li><a href="#output-token-control">Output token control</a></li>
 <li><a href="#monitoring-in-production">Monitoring in production</a></li>
@@ -230,7 +230,7 @@
 <p>This guide is about making token costs visible, predictable, and controllable. No fluff. Real numbers.</p>
 <h2 id="what-a-token-actually-costs">What a token actually costs</h2>
 <p>Tokens are not bytes. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.</p>
-<p>Here is the current pricing landscape as of Q2 2026, rounded to three significant figures. Numbers shift frequently — I check the API pricing pages before architecting around a specific rate. Always.</p>
+<p>Here is the current pricing landscape as of Q2 2026, rounded to three significant figures. Numbers shift frequently. I check the API pricing pages before architecting around a specific rate. Always.</p>
 <table>
 <thead>
 <tr>
@@ -297,9 +297,16 @@
 </tr>
 </tbody>
 </table>
-<p>A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds. This is the math that bites you.</p>
+<p>A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds, and <a href="/blog/llm-context-windows-explained/">bigger context windows are not always better for cost or accuracy</a>. This is the math that bites you.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">TOKEN BUDGET</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/token-budget.html" title="A single request budget split into system prompt, history, retrieved context, and output, with a per-request cost readout" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="counting-tokens-before-you-spend-them">Counting tokens before you spend them</h2>
-<p>The most basic cost control technique is knowing how many tokens a request will consume before you send it. Every major SDK provides a token counting utility.</p>
+<p>The most basic cost control technique is <a href="/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/">counting how many tokens a request will consume before you send it</a>. Every major SDK provides a token counting utility.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">anthropic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Anthropic</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">()</span>
@@ -378,7 +385,7 @@
 </code></pre></div>
 
 <p>This keeps your spend rate bounded even if traffic spikes unexpectedly. I have watched this prevent a $2,000 weekend bill from becoming a $12,000 weekend bill.</p>
-<h2 id="prompt-compression-the-high-leverage-move">Prompt compression: the high-leverage move</h2>
+<h2 id="prompt-compression-the-high-impact-move">Prompt compression: the high-impact move</h2>
 <p>The single most effective cost reduction technique is sending fewer tokens. Every token you remove from the input is a token you do not pay for twice.</p>
 <p>Three compression strategies work well in practice.</p>
 <p><strong>Truncation with semantic loss detection.</strong> Rather than blindly truncating context at a token limit, identify and preserve the most relevant chunks. Use an embedding similarity search to rank chunks before inclusion.</p>
@@ -427,7 +434,7 @@
 <p>The cost of the routing call is negligible. The savings from sending 80% of queries to the $0.20/$1.25 model instead of the $2.50/$15 model are not.</p>
 <h2 id="caching-when-the-math-works">Caching: when the math works</h2>
 <p>Token costs are incurred on every new request. If your application handles repetitive or similar queries, response caching can eliminate a large fraction of your bill.</p>
-<p>OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object and the model processes them at a deep discount, typically 90% off input token pricing.</p>
+<p>OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object and the model processes them at a deep discount, typically 90% off input token pricing. I dig into <a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/">when the prompt caching math actually pays off</a> separately.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Anthropic caching example</span>
 <span class="n">cache_key</span> <span class="o">=</span> <span class="n">compute_cache_key</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">conversation_topic</span><span class="p">)</span>
 
@@ -534,7 +541,7 @@
         <div class="related-card-date">2026-04-26</div>
         <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
       </a>
-      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-21</div>
         <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
       </a>
@@ -618,9 +625,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

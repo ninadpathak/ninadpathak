@@ -224,6 +224,13 @@
         <p>The first time I deployed an agent to production, I watched it handle 200 conversations perfectly. Then I restarted the service for a deployment at 2 AM. The next morning the agent greeted the same users as if it had never seen them before. No memory of preferences they had confirmed. No record of issues already resolved. Back to zero.</p>
 <p>That experience taught me the fundamental rule of agent memory: a session that cannot be serialized is a session that does not survive a restart. The entire conversation you just had, the facts you established, the reasoning you built across dozens of turns, lives only in the context window of a running process. Kill that process and you have nothing.</p>
 <p>This is the serialization problem. And it is harder than it looks.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">SERIALIZE / RESTART / RESTORE</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/memory-serialization.html" title="An agent serializing state to a store at session end and restoring it on restart, versus forgetting everything without serialization" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="the-three-approaches-engineers-actually-use">The Three Approaches Engineers Actually Use</h2>
 <p>I have seen three real patterns in production systems. Each one solves the problem but creates a different tradeoff.</p>
 <p><strong>Full state serialization</strong> means dumping the entire conversation history plus the system prompt into a structured format on disk. JSON works. So does msgpack if you want speed. The agent restarts, reads the file, and gets its full context back.</p>
@@ -263,8 +270,8 @@
 <p>Cloud-native serialization matters if you run multiple agent instances. SQLite works on a single instance. If you are running across containers or regions, the serialized state needs to go somewhere shared. I use S3 with JSON for most projects. The added latency for a GET on startup is typically under 50ms for a well-designed schema under 100KB.</p>
 <h2 id="what-serialization-cannot-solve">What Serialization Cannot Solve</h2>
 <p>Serialization handles session continuity. It does not solve the retrieval problem. If you serialize a conversation but have no way to find the relevant parts quickly on retrieval, you end up with context that is technically there but practically unusable.</p>
-<p>The memory hierarchy matters here. Serialized state is one layer. How you index and retrieve from that state is another. <a href="/articles/the-memory-hierarchy-why-rag-is-not-enough">My post on the memory hierarchy</a> goes into this in detail, but the short version is that serialization and retrieval are separate problems that need to be designed together.</p>
-<p>Agent memory retrieval is also asymmetric. What you serialize is not always what you retrieve. I wrote about this in my post on <a href="/articles/asymmetric-retrieval-agent-memory">asymmetric retrieval in agent memory</a>. The schema you design for serialization shapes what retrieval looks like, and if you get the schema wrong, the retrieval will be wrong in predictable ways.</p>
+<p>The memory hierarchy matters here. Serialized state is one layer. How you index and retrieve from that state is another. <a href="/blog/the-memory-hierarchy-why-rag-is-not-enough/">My post on the memory hierarchy</a> goes into this in detail, but the short version is that serialization and retrieval are separate problems that need to be designed together.</p>
+<p>Agent memory retrieval is also asymmetric. What you serialize is not always what you retrieve. I wrote about this in my post on <a href="/blog/asymmetric-retrieval-agent-memory/">asymmetric retrieval in agent memory</a>. The schema you design for serialization shapes what retrieval looks like, and if you get the schema wrong, the retrieval will be wrong in predictable ways.</p>
 <p>The serialization format itself matters less than the discipline of using it consistently. JSON is fine for most cases. If you are writing to disk on every action for an agent handling 10,000 requests per minute, you need something faster. msgpack or Protocol Buffers cut serialization overhead by 5x in my benchmarks. But for the vast majority of agents, JSON with a clear schema is readable, debuggable, and sufficient.</p>
 <h2 id="the-bottom-line">The Bottom Line</h2>
 <p>If you are building an agent that users interact with over days or weeks, serialization is not optional. It is the mechanism that makes long-term relationships possible. The pattern you choose shapes everything downstream: retrieval quality, context window utilization, latency on restart, and the agent's ability to actually use what it learned.</p>
@@ -278,17 +285,17 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="related-card">
+        <div class="related-card-date">2026-05-12</div>
+        <div class="related-card-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      </a>
       <a href="/blog/memory-attribution-errors/" class="related-card">
         <div class="related-card-date">2026-05-11</div>
         <div class="related-card-title">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</div>
       </a>
-      <a href="/blog/agent-memory-for-customer-support/" class="related-card">
-        <div class="related-card-date">2026-05-10</div>
-        <div class="related-card-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</div>
-      </a>
-      <a href="/blog/why-coding-agents-lose-their-memory/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</div>
+      <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="related-card">
+        <div class="related-card-date">2026-05-11</div>
+        <div class="related-card-title">Shared Memory vs Isolated Memory in Multi-Agent Workflows</div>
       </a>
     </div>
   </div>
@@ -370,9 +377,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

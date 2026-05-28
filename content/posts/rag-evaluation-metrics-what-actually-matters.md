@@ -6,7 +6,7 @@ tags: [rag, evaluation, llm, metrics]
 status: published
 ---
 
-Most RAG tutorials show you how to build one. Almost none teach you how to measure whether it's working. I built three RAG systems before this clicked for me. The gap between demo and production is real, and it is mostly an evaluation problem.
+Most RAG tutorials show you how to build one. Almost none teach you how to measure whether it's working. I built three RAG systems before this clicked for me. The difference between demo and production is real, and it is mostly an evaluation problem.
 
 The core problem: RAG evaluation is genuinely hard. You're evaluating a pipeline that chains retrieval, passage selection, and generation. A failure at any stage compounds. A metric that looks good on one stage might be terrible for the whole system.
 
@@ -32,7 +32,7 @@ Recall@K is a lower bound. A system can have perfect recall and still retrieve p
 
 The tradeoff between recall and precision depends on your context window. If you're context-rich, optimize recall. If you're context-constrained, precision matters more.
 
-**NDCG@K** (Normalized Discounted Cumulative Gain) weights ranked results by relevance. A relevant document at rank 1 scores higher than the same document at rank 5. Use NDCG when rank order matters for your pipeline.
+**NDCG@K** (Normalized Discounted Cumulative Gain) weights ranked results by relevance. A relevant document at rank 1 scores higher than the same document at rank 5. Use NDCG when rank order matters for your pipeline, which is exactly the case once you add [a reranking stage to fix wrong top-k ordering](/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/).
 
 ### Stage 2: Passage Selection
 
@@ -174,7 +174,7 @@ Your evaluation pipeline needs to detect distribution shift. Monitor retrieval r
 
 If you're starting from scratch, optimize in this order:
 
-1. **Retrieval recall first.** No generation improvement fixes missing context. Measure what percentage of your knowledge base the system can actually surface for any given query.
+1. **Retrieval recall first.** No generation improvement fixes missing context. Measure what percentage of your knowledge base the system can actually surface for any given query, and remember that techniques like [Anthropic's contextual retrieval can cut top-20 retrieval failures by 49%](/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/).
 
 2. **Context precision second.** Once recall is solid, reduce noise. High precision means the generator spends its context budget on signal, not noise.
 
@@ -182,7 +182,14 @@ If you're starting from scratch, optimize in this order:
 
 4. **Answer relevancy fourth.** Everything above this point measures parts of the system. Answer relevancy measures the whole thing working together.
 
-The mistake most teams make is starting at step 4 without the foundation. They tune prompts, try different models, add retrieval augmentation, and waste time on generation tweaks while retrieval quietly fails.
+The mistake most teams make is starting at step 4 without the foundation. They tune prompts, try different models, add retrieval augmentation, and waste time on generation tweaks while retrieval quietly fails, often because [the embedding model itself cannot tell the query and document apart geometrically](/blog/embedding-models-compared/).
+
+<div class="visual-wrapper">
+  <div class="visual-title">RAG EVALUATION FUNNEL</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/rag-eval-metrics.html" title="A RAG evaluation funnel scoring context recall, context precision, faithfulness, and answer relevance against their thresholds" loading="lazy"></iframe>
+  </div>
+</div>
 
 ## Thresholds That Work
 

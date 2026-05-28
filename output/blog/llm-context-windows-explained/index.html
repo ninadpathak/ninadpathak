@@ -226,13 +226,20 @@
 <p>The reality of production engineering is more complex. Larger windows introduce new failure modes. They change the economics of inference. Understanding these trade-offs is vital for building reliable AI applications.</p>
 <h2 id="why-the-middle-of-your-context-gets-ignored">Why the middle of your context gets ignored</h2>
 <p>Models do not pay equal attention to every part of the prompt. Research has identified a consistent U-shaped performance curve. Models are best at retrieving information located at the very beginning or the very end of the context. Information placed in the middle is often ignored or "lost."</p>
+<div class="visual-wrapper">
+  <div class="visual-title">LOST IN THE MIDDLE</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/lost-in-the-middle.html" title="U-shaped recall curve: high accuracy at the start and end of the context, sagging in the middle" loading="lazy"></iframe>
+  </div>
+</div>
+
 <p>Such a phenomenon occurs because the model's attention mechanism must distribute limited focus across many tokens. The early tokens set the stage. The late tokens provide the immediate context for the next word. The middle tokens become a sea of noise. You must place your most critical instructions and data at the boundaries if you use long contexts.</p>
 <h2 id="context-rot-the-volume-problem">Context rot: the volume problem</h2>
 <p>Performance degrades as you fill the window. Such decay is known as context rot. It is not just about where information is placed. It is about how much total information the model must process. Every additional token increases the probability of a reasoning error.</p>
 <p>A model might follow a complex instruction perfectly when the context is 2,000 tokens. That same model may hallucinate or ignore constraints when the context reaches 100,000 tokens. The "signal-to-noise ratio" drops as the volume of data grows. Successful engineers keep prompts as lean as possible even when the window is large.</p>
 <h2 id="what-long-context-actually-costs">What long context actually costs</h2>
 <p>Expansion comes with a financial and performance tax. Standard attention mechanisms have a quadratic relationship with context length. Doubling the context can quadruple the computational requirement. This leads to higher latency and increased cost per request.</p>
-<p>Prompt caching can mitigate some of these costs. However, the fundamental physics of attention remains a bottleneck. You must weigh the benefit of more context against the penalty of slower response times. Many interactive applications cannot afford the latency of a fully loaded 128k token window.</p>
+<p><a href="/blog/prompt-caching-what-it-is-and-when-the-math-works/">Prompt caching can mitigate some of these costs by reusing a static prefix</a>. However, the fundamental physics of attention remains a bottleneck. You must weigh the benefit of more context against the penalty of slower response times. Many interactive applications cannot afford the latency of a fully loaded 128k token window, since <a href="/blog/time-to-first-token-ttft/">a long prompt directly drives up time to first token</a>.</p>
 <h2 id="long-context-vs-rag-vs-hybrid">Long context vs RAG vs hybrid</h2>
 <p>Retrieval-Augmented Generation (RAG) was the standard way to handle large datasets before million-token windows existed. Some now argue that RAG is obsolete. Such a view ignores the operational reality of scale.</p>
 <p>RAG is still superior for navigating massive corpora that exceed even the largest windows. It is significantly cheaper than sending millions of tokens with every query. Long context is superior for tasks that require reasoning across all the data at once. This includes summarization or identifying subtle patterns across multiple files.</p>
@@ -242,7 +249,7 @@
 <p><strong>Boundaries matter.</strong> Place your task definition and target data at the ends of the prompt. Use the middle for supporting information that is less critical.</p>
 <p><strong>Measure recall.</strong> Do not assume the model "sees" everything you send. Run needle-in-a-haystack tests on your specific data types. Use these results to set your internal context limits.</p>
 <p><strong>Optimize through chunking.</strong> Break your data into logical units even if it all fits in one prompt. Use clear delimiters. Help the model's attention mechanism navigate the structure of your information.</p>
-<p>Massive windows are a powerful tool. They do not replace the need for careful context engineering. You must still treat token space as a scarce resource to ensure the highest level of reliability.</p>
+<p>Massive windows are a powerful tool. They do not replace the need for careful context engineering. You must still treat token space as a scarce resource to ensure the highest level of reliability, which is also the foundation of <a href="/blog/llm-token-budgets-cost-control/">keeping your LLM spend predictable with token budgets</a>.</p>
 <h2 id="questions">Questions</h2>
 <p><strong>Is million-token context useful for every app?</strong></p>
 <p>No. Most apps benefit more from low latency and high precision than from massive volume.</p>
@@ -267,7 +274,7 @@
         <div class="related-card-date">2026-04-26</div>
         <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
       </a>
-      <a href="/blog/2026-04-21-the-taxonomy-of-ai-agents/" class="related-card">
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
         <div class="related-card-date">2026-04-21</div>
         <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
       </a>
@@ -351,9 +358,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

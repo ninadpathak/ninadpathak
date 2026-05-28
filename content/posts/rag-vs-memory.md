@@ -10,9 +10,16 @@ Two architectural patterns dominate how LLM applications handle context: Retriev
 
 RAG pulls information from an external store at inference time. Memory keeps a running record of the conversation and injects it into the context window. The distinction sounds simple. The implementation details are where things go wrong.
 
+<div class="visual-wrapper">
+  <div class="visual-title">Where RAG and Memory Converge</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/rag-vs-memory.html" title="RAG versus memory convergence" loading="lazy"></iframe>
+  </div>
+</div>
+
 ##How RAG Actually Works
 
-RAG solves a specific problem: your LLM cannot know what it was not trained on. GPT-4o was not trained on your codebase, your product docs, or yesterday's Slack messages. RAG bridges that gap by retrieving relevant documents at query time and stuffing them into the prompt.
+RAG solves a specific problem: your LLM cannot know what it was not trained on. GPT-4o was not trained on your codebase, your product docs, or yesterday's Slack messages. RAG fills that missing piece by retrieving relevant documents at query time and stuffing them into the prompt.
 
 The pipeline has four stages. First, a chunking step splits your documents into pieces small enough to embed. Second, an embedding model converts each chunk into a dense vector. Third, those vectors live in a vector database like Pinecone, Weaviate, or pgvector. Fourth, at inference, the user's query gets embedded and similarity search finds the k nearest chunks. Those chunks get prepended to the prompt.
 
@@ -58,7 +65,7 @@ Memory is the right tool for anything that resembles a dialogue agent: a chatbot
 
 Memory also matters for long-running tasks. If your user asks the model to refactor a large module and the task takes 30 minutes across dozens of tool calls, memory is what keeps the model coherent at the end. Without memory, the model loses track of what it was doing and starts generating irrelevant code.
 
-If your application involves user preferences, session-specific context, or anything that should not be shared across users, you need memory isolation. Each user session gets its own memory store. This is not a feature you bolt on later; it is a fundamental security boundary.
+If your application involves user preferences, session-specific context, or anything that should not be shared across users, you need memory isolation. Each user session gets its own memory store. This is not a feature you bolt on later. It is a fundamental security boundary.
 
 ##The Hybrid Approach
 
@@ -214,7 +221,7 @@ The hybrid approach lets you keep memory lean. Most queries only need the last 1
 
 RAG fails when the chunking strategy does not match the query pattern. If users ask about paragraphs that span multiple chunks, the retrieval will return half the answer every time. This is a structural problem that reranking cannot fix. The solution is semantic chunking: split on meaningful boundaries (section headers, paragraph breaks) instead of fixed token counts.
 
-Memory fails when it grows unbounded. Without truncation, a long conversation eventually exceeds the context window and the model starts dropping old content. This is not a bug; it is a fundamental constraint of transformer architectures. Plan for it from day one.
+Memory fails when it grows unbounded. Without truncation, a long conversation eventually exceeds the context window and the model starts dropping old content. This is not a bug. It is a fundamental constraint of transformer architectures. Plan for it from day one.
 
 Memory also fails when sessions are not isolated. If you store memory in a shared Redis instance without proper key namespacing, one user's data leaks into another user's session. This is an authentication bypass equivalent in severity. Namespace every key by user ID and session ID.
 
@@ -267,8 +274,8 @@ No. Conversation history belongs in the memory layer, not the RAG layer. RAG que
 
 Related posts you might find useful:
 
-- [Building RAG Pipelines with LangChain and Pinecone](/posts/rag-pipelines-langchain-pinecone)
-- [Vector Database Comparison: Pinecone vs Weaviate vs pgvector](/posts/vector-databases-comparison)
-- [Evaluating LLM Applications: A Practical Guide](/posts/evaluating-llm-applications)
-- [Function Calling vs RAG: When to Use Each](/posts/function-calling-vs-rag)
-- [Context Window Management for Production Chatbots](/posts/context-window-management)
+- [How Anthropic's Contextual Retrieval Changes RAG Architecture](/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/)
+- [Vector Search in the Browser: PGlite vs SQLite-vec](/blog/local-wasm-vector-benchmarks/)
+- [RAG Evaluation Metrics: What Actually Matters](/blog/rag-evaluation-metrics-what-actually-matters/)
+- [Structured Outputs with LLMs: JSON Mode and Function Calling](/blog/structured-outputs-llms-json-mode-function-calling/)
+- [Context Windows vs Memory: Why They Are Not the Same](/blog/context-windows-vs-memory/)

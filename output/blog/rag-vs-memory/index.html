@@ -233,8 +233,15 @@
       <div class="post-content">
         <p>Two architectural patterns dominate how LLM applications handle context: Retrieval-Augmented Generation (RAG) and Memory systems. Developers constantly confuse them, and that confusion leads to systems that hallucinate, forget, or leak context. Here is what actually separates these approaches, and when to reach for each one.</p>
 <p>RAG pulls information from an external store at inference time. Memory keeps a running record of the conversation and injects it into the context window. The distinction sounds simple. The implementation details are where things go wrong.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Where RAG and Memory Converge</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/rag-vs-memory.html" title="RAG versus memory convergence" loading="lazy"></iframe>
+  </div>
+</div>
+
 <h2 id="how-rag-actually-works">How RAG Actually Works</h2>
-<p>RAG solves a specific problem: your LLM cannot know what it was not trained on. GPT-4o was not trained on your codebase, your product docs, or yesterday's Slack messages. RAG bridges that gap by retrieving relevant documents at query time and stuffing them into the prompt.</p>
+<p>RAG solves a specific problem: your LLM cannot know what it was not trained on. GPT-4o was not trained on your codebase, your product docs, or yesterday's Slack messages. RAG fills that missing piece by retrieving relevant documents at query time and stuffing them into the prompt.</p>
 <p>The pipeline has four stages. First, a chunking step splits your documents into pieces small enough to embed. Second, an embedding model converts each chunk into a dense vector. Third, those vectors live in a vector database like Pinecone, Weaviate, or pgvector. Fourth, at inference, the user's query gets embedded and similarity search finds the k nearest chunks. Those chunks get prepended to the prompt.</p>
 <p>Vector similarity search rarely returns perfect results. A query about "API rate limits" might surface chunks about authentication tokens if the embedding model thinks they are semantically similar. This is the dirty secret of RAG: retrieval noise is constant, and you need eval pipelines to measure it.</p>
 <p>Most developers pick a chunk size of 512 tokens and call it done. That is lazy. Overlapping chunks (256 token overlap) improve recall significantly. So does reranking with a cross-encoder model like <code>cross-encoder/ms-marco-MiniLM-L-6v2</code> after the initial vector search. These two tweaks alone can move your recall metric from 0.61 to 0.89 on standard benchmarks.</p>
@@ -257,7 +264,7 @@
 <h2 id="when-to-use-memory">When To Use Memory</h2>
 <p>Memory is the right tool for anything that resembles a dialogue agent: a chatbot, a coding assistant, a personal assistant. These applications derive their value from tracking state across turns.</p>
 <p>Memory also matters for long-running tasks. If your user asks the model to refactor a large module and the task takes 30 minutes across dozens of tool calls, memory is what keeps the model coherent at the end. Without memory, the model loses track of what it was doing and starts generating irrelevant code.</p>
-<p>If your application involves user preferences, session-specific context, or anything that should not be shared across users, you need memory isolation. Each user session gets its own memory store. This is not a feature you bolt on later; it is a fundamental security boundary.</p>
+<p>If your application involves user preferences, session-specific context, or anything that should not be shared across users, you need memory isolation. Each user session gets its own memory store. This is not a feature you bolt on later. It is a fundamental security boundary.</p>
 <h2 id="the-hybrid-approach">The Hybrid Approach</h2>
 <p>Production systems rarely use only RAG or only memory. The hybrid pattern combines both: memory handles conversation state while RAG handles domain knowledge.</p>
 <p>Here is a working implementation in Python:</p>
@@ -391,7 +398,7 @@
 <p>The hybrid approach lets you keep memory lean. Most queries only need the last 10-15 turns of working memory (roughly 2,000-3,000 tokens). RAG handles the heavy lifting of domain knowledge. The model does not need a full conversation transcript to answer "what is our refund policy?".</p>
 <h2 id="common-failure-modes">Common Failure Modes</h2>
 <p>RAG fails when the chunking strategy does not match the query pattern. If users ask about paragraphs that span multiple chunks, the retrieval will return half the answer every time. This is a structural problem that reranking cannot fix. The solution is semantic chunking: split on meaningful boundaries (section headers, paragraph breaks) instead of fixed token counts.</p>
-<p>Memory fails when it grows unbounded. Without truncation, a long conversation eventually exceeds the context window and the model starts dropping old content. This is not a bug; it is a fundamental constraint of transformer architectures. Plan for it from day one.</p>
+<p>Memory fails when it grows unbounded. Without truncation, a long conversation eventually exceeds the context window and the model starts dropping old content. This is not a bug. It is a fundamental constraint of transformer architectures. Plan for it from day one.</p>
 <p>Memory also fails when sessions are not isolated. If you store memory in a shared Redis instance without proper key namespacing, one user's data leaks into another user's session. This is an authentication bypass equivalent in severity. Namespace every key by user ID and session ID.</p>
 <p>Hybrid systems fail when RAG retrieval noise contaminates memory-grounded responses. If the vector store returns irrelevant chunks about a previous topic, the model may anchor on those chunks instead of the actual conversation. Use a two-pass approach: first pass determines whether the query is about domain knowledge (use RAG) or conversation state (use memory), and route accordingly.</p>
 <h2 id="what-this-means-for-your-architecture">What This Means For Your Architecture</h2>
@@ -425,11 +432,11 @@ No. Conversation history belongs in the memory layer, not the RAG layer. RAG que
 <hr />
 <p>Related posts you might find useful:</p>
 <ul>
-<li><a href="/posts/rag-pipelines-langchain-pinecone">Building RAG Pipelines with LangChain and Pinecone</a></li>
-<li><a href="/posts/vector-databases-comparison">Vector Database Comparison: Pinecone vs Weaviate vs pgvector</a></li>
-<li><a href="/posts/evaluating-llm-applications">Evaluating LLM Applications: A Practical Guide</a></li>
-<li><a href="/posts/function-calling-vs-rag">Function Calling vs RAG: When to Use Each</a></li>
-<li><a href="/posts/context-window-management">Context Window Management for Production Chatbots</a></li>
+<li><a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/">How Anthropic's Contextual Retrieval Changes RAG Architecture</a></li>
+<li><a href="/blog/local-wasm-vector-benchmarks/">Vector Search in the Browser: PGlite vs SQLite-vec</a></li>
+<li><a href="/blog/rag-evaluation-metrics-what-actually-matters/">RAG Evaluation Metrics: What Actually Matters</a></li>
+<li><a href="/blog/structured-outputs-llms-json-mode-function-calling/">Structured Outputs with LLMs: JSON Mode and Function Calling</a></li>
+<li><a href="/blog/context-windows-vs-memory/">Context Windows vs Memory: Why They Are Not the Same</a></li>
 </ul>
       </div>
     </div>
@@ -440,6 +447,10 @@ No. Conversation history belongs in the memory layer, not the RAG layer. RAG que
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="related-card">
+        <div class="related-card-date">2026-05-12</div>
+        <div class="related-card-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      </a>
       <a href="/blog/agent-memory-for-customer-support/" class="related-card">
         <div class="related-card-date">2026-05-10</div>
         <div class="related-card-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</div>
@@ -447,10 +458,6 @@ No. Conversation history belongs in the memory layer, not the RAG layer. RAG que
       <a href="/blog/llm-inference-optimization/" class="related-card">
         <div class="related-card-date">2026-05-06</div>
         <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
-      </a>
-      <a href="/blog/why-coding-agents-lose-their-memory/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</div>
       </a>
     </div>
   </div>
@@ -532,9 +539,9 @@ No. Conversation history belongs in the memory layer, not the RAG layer. RAG que
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 

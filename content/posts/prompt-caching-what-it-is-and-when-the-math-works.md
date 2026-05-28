@@ -17,9 +17,14 @@ Prompt caching solves this by persisting the intermediate state of the model's c
 
 ## What prompt caching actually does
 
-Caching stores the Key-Value (KV) cache of a prompt prefix in memory or on disk. The KV cache represents the mathematical summary of all tokens processed so far. The model can skip the initial computation phase and jump straight to generating new tokens when a new prompt shares an identical prefix with a cached one.
+Caching stores the [Key-Value (KV) cache of a prompt prefix](/blog/kv-cache-eviction-accuracy/) in memory or on disk. The KV cache represents the mathematical summary of all tokens processed so far. The model can skip the initial computation phase and jump straight to generating new tokens when a new prompt shares an identical prefix with a cached one, which is why caching is one of the strongest levers for [cutting time to first token](/blog/time-to-first-token-ttft/).
 
-
+<div class="visual-wrapper">
+  <div class="visual-title">PROMPT CACHING</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/prompt-caching.html" title="First call writes the cache for a static prefix, later calls hit it and skip prefill, dropping cost up to 90 percent and latency about 50 percent" loading="lazy"></iframe>
+  </div>
+</div>
 
 Such a strategy is particularly effective for systems with long system instructions or large retrieved datasets. You pay the full "prefill" price once. Subsequent requests only pay for the unique tokens added at the end. This changes the economics of long-context RAG and agentic workflows.
 
@@ -35,7 +40,7 @@ Caching is not a free lunch. Providers often charge a small fee to store the cac
 
 
 
-Calculations for ROI should consider the cache hit rate and the ratio of static to dynamic tokens. A system with a 10,000-token static prefix and a 100-token user query will see massive savings even at low volumes. A system where the prefix changes constantly will see zero benefit and might even incur higher costs due to storage fees.
+Calculations for ROI should consider the cache hit rate and the ratio of static to dynamic tokens, and they fit naturally into a broader [practical approach to LLM cost control](/blog/llm-token-budgets-cost-control/). A system with a 10,000-token static prefix and a 100-token user query will see massive savings even at low volumes. A system where the prefix changes constantly will see zero benefit and might even incur higher costs due to storage fees.
 
 ## Provider differences
 

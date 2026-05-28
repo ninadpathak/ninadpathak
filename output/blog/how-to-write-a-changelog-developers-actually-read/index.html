@@ -228,22 +228,29 @@
 <p><strong>Short answer:</strong> Structure every entry around the <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a> format: group by Added, Changed, Deprecated, Removed, Fixed, Security. Put breaking changes at the top of any version section with an explicit label. Keep the file in CHANGELOG.md, update it per release, and never combine multiple releases into a wall of bullet points without version headers.</p>
 <h2 id="why-developers-dont-read-changelogs-and-why-thats-usually-the-changelogs-fault">Why developers don't read changelogs (and why that's usually the changelog's fault)</h2>
 <p>Developers skip changelogs because the format punishes them. A 400-line wall of bullet points with no version grouping, no breaking-change callouts, and no date stamps forces a linear scan through irrelevant details to find the one thing that might affect their integration. Most developers learn that the effort isn't worth it and start using changelogs as a post-incident reference only.</p>
-<p>The format also fails when it conflates what changed with why it matters. "Updated authentication handler" tells me nothing. "Authentication handler now rejects tokens with <code>exp</code> claims in the past — previously these were accepted with a 10-second grace window" tells me everything I need to decide whether to read further.</p>
-<p><a href="https://docs.stripe.com/changelog">Stripe's changelog approach</a> separates technical details from the lead entry. Developers who need the quick summary get it immediately; those who need migration specifics click through. That separation is a design decision that comes from understanding that changelog readers are in two modes: skimming for impact, or deep-reading for migration path.</p>
+<p>The format also fails when it conflates what changed with why it matters. "Updated authentication handler" tells me nothing. "Authentication handler now rejects tokens with <code>exp</code> claims in the past (previously these were accepted with a 10-second grace window)" tells me everything I need to decide whether to read further.</p>
+<p><a href="https://docs.stripe.com/changelog">Stripe's changelog approach</a> separates technical details from the lead entry. Developers who need the quick summary get it immediately. Those who need migration specifics click through. That separation is a design decision that comes from understanding that changelog readers are in two modes: skimming for impact, or deep-reading for migration path.</p>
 <h2 id="the-keepachangelogcom-spec-and-why-it-became-the-standard">The keepachangelog.com spec and why it became the standard</h2>
 <p><a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a> established the format that most serious developer tools have converged on: entries grouped by version (newest first), dates in ISO 8601 format (YYYY-MM-DD), and change types categorized as Added, Changed, Deprecated, Removed, Fixed, or Security.</p>
 <p>The six categories matter because they map to developer intent:
 - <strong>Added</strong> and <strong>Changed</strong> are features worth knowing about before upgrading
 - <strong>Deprecated</strong> tells you what to stop using before it disappears
 - <strong>Removed</strong> is the first thing to scan before any upgrade
-- <strong>Fixed</strong> is relevant if you hit the bug; skip otherwise
+- <strong>Fixed</strong> is relevant if you hit the bug, skip otherwise
 - <strong>Security</strong> gets read immediately by anyone running the library in production</p>
 <p>Developers learn to scan a version section in under 10 seconds using this structure. They look for Removed and Security first, then Deprecated, then Changed for anything in their integration surface. That pattern only works if the format is consistent across every release.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Anatomy of a Changelog Entry</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/changelog-anatomy.html" title="A scannable changelog entry annotated with version, ISO date, grouped changes, a breaking-change label, and a migration link, versus an unscannable one" loading="lazy"></iframe>
+  </div>
+</div>
+
 <p>The spec also includes an <code>Unreleased</code> section at the top for changes in the main branch that haven't shipped yet. Many teams skip this. Keeping an Unreleased section means contributors can document changes as they land, which eliminates the scramble to write the changelog right before a release and reduces the risk of undocumented changes.</p>
 <h2 id="breaking-changes-need-a-higher-signal-level-than-a-category">Breaking changes need a higher signal level than a category</h2>
 <p>"Removed" as a category heading is not enough signal for a breaking change in a heavily-used API. A developer scanning a version section will still miss it if it's the fifth item in a list and the entry text doesn't lead with the impact.</p>
 <p><a href="https://www.mintlify.com/blog/five-changelog-principles-from-best-developer-brands">Mintlify's analysis of developer brand changelogs</a> recommends prefixing breaking changes with a visible label, something like <code>[BREAKING]</code> or bolded text, and positioning them at the top of the Removed or Changed section. Stripe's SDK changelogs use warning symbols and direct developers to review migration paths before upgrading.</p>
-<p>The entries themselves should front-load the consequence. Not: "Removed the <code>legacy_token</code> parameter." Instead: "Removed <code>legacy_token</code> parameter from authentication calls — replace with <code>api_key</code> before upgrading or requests will return 401."</p>
+<p>The entries themselves should front-load the consequence. Not: "Removed the <code>legacy_token</code> parameter." Instead: "Removed <code>legacy_token</code> parameter from authentication calls. Replace with <code>api_key</code> before upgrading or requests will return 401."</p>
 <p>A practical template for breaking change entries:</p>
 <div class="highlight"><pre><span></span><code>### Removed
 - **[BREAKING]** Removed `legacy_token` parameter from `/v2/auth`.
@@ -255,9 +262,9 @@
 <h2 id="yanked-releases-belong-in-the-changelog">Yanked releases belong in the changelog</h2>
 <p>A yanked release is a version pulled after shipping because of a critical bug or security issue. Many changelogs omit yanked versions, which means developers who installed the yanked version and search the changelog for context find nothing.</p>
 <p><a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a> handles this with a <code>[YANKED]</code> label on the version entry plus a note explaining why. A developer who installed <code>2.3.1</code> and sees <code>2.3.1 - 2026-02-14 [YANKED]</code> with "Critical memory leak in connection pool, replaced by 2.3.2" gets the context they need immediately.</p>
-<p>Omitting yanked versions from changelogs treats the changelog as marketing material rather than a technical record. The changelog should be the complete truth about version history, including the versions you'd rather forget.</p>
+<p>Omitting yanked versions from changelogs treats the changelog as marketing material rather than a technical record, and engineers detect that shift immediately because of <a href="/blog/developer-trust-hierarchy/">the developer trust hierarchy that ranks practitioner writing over marketing</a>. The changelog should be the complete truth about version history, including the versions you'd rather forget.</p>
 <h2 id="how-linear-vercel-and-stripe-handle-release-communication-differently">How Linear, Vercel, and Stripe handle release communication differently</h2>
-<p>These three developer tools have different changelog philosophies, and each one reflects a different assumption about their audience.</p>
+<p>These three developer tools have different changelog philosophies, and each one reflects a different assumption about their audience, the same care that goes into <a href="/blog/writing-release-notes-that-developers-trust/">writing release notes that developers trust</a>.</p>
 <p><strong>Linear</strong> uses an embedded product-focused approach. Their <a href="https://linear.app/changelog">weekly changelog</a> combines short descriptions with native embedded videos. The format works because Linear's audience is a mix of developers and product managers, and the visual format reduces the reading burden. Linear stores minor bug fixes and API updates in collapsible sections to avoid diluting the signal from major feature releases.</p>
 <p><strong>Vercel</strong> links aggressively to associated packages and documentation, and uses screenshots of the affected UI. Vercel's changelog assumes developers want to see the change, not just read about it. The density is higher than Linear's because the audience is more technical.</p>
 <p><strong>Stripe</strong> takes a more formal, API-documentation-style approach. Each changelog entry for API changes links to the specific endpoint in the reference docs. Breaking changes get migration guides. The format is less visually engaging but maximizes precision, which matches Stripe's audience: developers who need to make careful upgrade decisions because payment integrations have real financial consequences if they break.</p>
@@ -265,11 +272,11 @@
 <h2 id="semantic-versioning-as-a-communication-contract">Semantic versioning as a communication contract</h2>
 <p><a href="https://semver.org/">Semantic versioning</a> (MAJOR.MINOR.PATCH) is a promise: patch releases are safe to take automatically, minor releases add functionality without breaking existing integrations, and major releases may require migration.</p>
 <p>That contract only works if you honor it in the changelog. A major version bump with no entry explaining what broke is a signal to developers that your versioning isn't trustworthy. A minor version bump that introduces a behavioral change without documentation is a breaking change without warning.</p>
-<p><a href="https://zuplo.com/learning-center/semantic-api-versioning">Zuplo's semantic versioning guide</a> recommends a minimum notice period of 3-6 months between a deprecation entry in the changelog and removal. Publishing the deprecation entry in a minor release, then removing in the next major, gives developers time to adapt. Most production integrations don't get touched between minor releases; the deprecation window needs to be long enough to catch development cycles.</p>
+<p><a href="https://zuplo.com/learning-center/semantic-api-versioning">Zuplo's semantic versioning guide</a> recommends a minimum notice period of 3-6 months between a deprecation entry in the changelog and removal. Publishing the deprecation entry in a minor release, then removing in the next major, gives developers time to adapt. Most production integrations don't get touched between minor releases, so the deprecation window needs to be long enough to catch development cycles.</p>
 <h2 id="my-take-on-why-most-changelogs-fail">My take on why most changelogs fail</h2>
 <p>Most changelog failures come from treating the document as a record of what was done rather than communication to someone who needs to make a decision. The writer of the entry knows the context: why the change was made, what it replaces, what the migration path is. The reader of the entry has none of that context and needs to decide whether this release is safe to take.</p>
-<p>That mental model shift changes the writing entirely. "Updated dependency X" is a record. "Updated X from 3.1 to 3.2 to address CVE-2026-0231 (CVSS 7.4); no API changes required" is communication.</p>
-<p>The other consistent failure: no one owns the changelog. Developers merge PRs, releases ship, and no one maintains the changelog entry until it's time to cut a release. At that point, reconstructing a week's worth of merged changes from commit messages is painful enough that entries become abbreviated. The fix is requiring a changelog entry on every PR that touches the public surface area — not as a process burden, but as part of how the team communicates externally.</p>
+<p>That mental model shift changes the writing entirely. "Updated dependency X" is a record. "Updated X from 3.1 to 3.2 to address CVE-2026-0231 (CVSS 7.4), no API changes required" is communication.</p>
+<p>The other consistent failure: no one owns the changelog. Developers merge PRs, releases ship, and no one maintains the changelog entry until it's time to cut a release. At that point, reconstructing a week's worth of merged changes from commit messages is painful enough that entries become abbreviated. The fix is requiring a changelog entry on every PR that touches the public surface area, not as a process burden, but as part of how the team communicates externally.</p>
 <p>The non-obvious insight: a good changelog is a forcing function for good API design. When you have to explain what changed and why to a developer who doesn't have your context, you notice quickly when a change is hard to explain clearly. Changes that are hard to document are often changes that should have been designed differently.</p>
 <h2 id="faq">FAQ</h2>
 <p><strong>Should the changelog live in the repo or on a web page?</strong>
@@ -291,10 +298,6 @@ Only public surface area. Internal refactors, test updates, and CI changes are n
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/hermes-md-git-commit-billing-bug/" class="related-card">
-        <div class="related-card-date">2026-04-30</div>
-        <div class="related-card-title">The HERMES.md Bug That Silently Burned $200 in Claude Code Credits</div>
-      </a>
       <a href="/blog/technical-writing-for-engineers/" class="related-card">
         <div class="related-card-date">2026-04-18</div>
         <div class="related-card-title">Technical Writing for Engineers: The 80/20 Guide</div>
@@ -302,6 +305,10 @@ Only public surface area. Internal refactors, test updates, and CI changes are n
       <a href="/blog/production-ai-agent-errors/" class="related-card">
         <div class="related-card-date">2026-04-16</div>
         <div class="related-card-title">What Nobody Tells You About Error Handling in Production AI Agents</div>
+      </a>
+      <a href="/blog/uv-package-manager-benchmark/" class="related-card">
+        <div class="related-card-date">2026-04-14</div>
+        <div class="related-card-title">From 4 Minutes to 12 Seconds: A Quantitative Audit of the uv Package Manager</div>
       </a>
     </div>
   </div>
@@ -383,9 +390,9 @@ Only public surface area. Internal refactors, test updates, and CI changes are n
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
+          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
           <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/agent-memory-for-customer-support/" class="footer-link">Building a Customer Support Agent with Persistent Memory: A Worked Example</a>
-          <a href="/blog/llm-inference-optimization/" class="footer-link">LLM Inference Optimization: What Actually Works in Production</a>
+          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
         </div>
       </div>
 
