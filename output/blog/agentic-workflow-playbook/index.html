@@ -20,14 +20,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Agentic Workflow Playbook: From Prompt to Shipped PR | Ninad Pathak</title>
-  <meta name="description" content="The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.">
+  <meta name="description" content="The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me stepping in to frame the work and read the diff before it merges.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
   <meta property="og:title"       content="The Agentic Workflow Playbook: From Prompt to Shipped PR">
-  <meta property="og:description" content="The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.">
+  <meta property="og:description" content="The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me stepping in to frame the work and read the diff before it merges.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/agentic-workflow-playbook/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -74,10 +74,10 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "The Agentic Workflow Playbook: From Prompt to Shipped PR",
-  "description": "The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.",
+  "description": "The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me stepping in to frame the work and read the diff before it merges.",
   "image": "https://ninadpathak.com/static/og-image.png",
   "inLanguage": "en-US",
-  "wordCount": 1705,
+  "wordCount": 1740,
   "keywords": "ai, agents, developer-experience",
   "articleSection": "ai",
   "author": {
@@ -111,7 +111,7 @@
       "name": "What is an agentic workflow?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "An agentic workflow is a repeatable process where an AI agent does part of the work inside a structure you control. The agent runs its own loop on the task, and you stay in the loop at the points where being wrong is expensive, usually framing the work up front and reviewing the result."
+        "text": "An agentic workflow is a repeatable process where an AI agent does part of the work inside a structure you control. The agent runs its own loop on the task, and you step in where a mistake would cost something real, like a change to a billing flow or anything that runs against production, usually by framing the work up front and reading the diff before it merges."
       }
     },    {
       "@type": "Question",
@@ -250,7 +250,7 @@
         <span class="post-meta-time">9 min read</span>
       </div>
       <h1 class="post-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</h1>
-      <p class="lead">The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.</p>
+      <p class="lead">The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me stepping in to frame the work and read the diff before it merges.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
         <span class="tag">agents</span>
@@ -278,7 +278,7 @@
 
       </nav>
       <div class="post-content">
-        <p>I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my name on. The agent does the heavy lifting. I stay in the loop at the points where being wrong is expensive.</p>
+        <p>I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my name on. The agent does the heavy lifting. I step in at the moments a mistake would actually cost something, like when the change touches a payment path, or the agent is about to edit a database migration that runs against production.</p>
 <p>Almost all of the value in agentic work comes from the structure around the agent rather than the model. A strong model inside a sloppy process produces confident garbage. A modest model inside a tight process ships real work. The playbook below is the process I run, stage by stage, with the checkpoints where I step back in.</p>
 <h2 id="the-playbook-in-one-sentence">The playbook in one sentence</h2>
 <p>Frame the task, scope it down, let the agent work against an instrumented loop, review the diff like I do not trust it, then land it. Five stages, two of them mine and one of them the agent's, with scoping and landing as the seams between. The art is knowing which stage owns which decision.</p>
@@ -320,7 +320,7 @@
 <p>I run this loop several times a day. The model gets better every few months and the playbook does not change, because the playbook is about where human judgment belongs rather than about which model is best this quarter. The shape of what people build keeps shifting, and I mapped a lot of that in <a href="/blog/the-agent-design-space/">the agent design space</a>, but the outer loop has stayed the same since the first week I trusted an agent with real work. Get the structure right and the model becomes a detail you swap out.</p>
 <h2 id="faq">FAQ</h2>
 <p><strong>What is an agentic workflow?</strong></p>
-<p>An agentic workflow is a repeatable process where an AI agent does part of the work inside a structure you control. The agent runs its own loop on the task, and you stay in the loop at the points where being wrong is expensive, usually framing the work up front and reviewing the result.</p>
+<p>An agentic workflow is a repeatable process where an AI agent does part of the work inside a structure you control. The agent runs its own loop on the task, and you step in where a mistake would cost something real, like a change to a billing flow or anything that runs against production, usually by framing the work up front and reading the diff before it merges.</p>
 <p><strong>Do I need a powerful model to run this playbook?</strong></p>
 <p>No. The playbook is built so a modest model still produces reliable output, because the structure catches its mistakes. A stronger model finishes more in one pass, and the framing and review stages still matter more than the model choice.</p>
 <p><strong>How big should a single agent task be?</strong></p>

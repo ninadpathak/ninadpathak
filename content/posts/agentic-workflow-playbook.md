@@ -2,12 +2,12 @@
 title: "The Agentic Workflow Playbook: From Prompt to Shipped PR"
 date: 2026-06-14
 slug: "agentic-workflow-playbook"
-description: "The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive."
+description: "The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me stepping in to frame the work and read the diff before it merges."
 tags: [ai, agents, developer-experience]
 status: published
 ---
 
-I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my name on. The agent does the heavy lifting. I stay in the loop at the points where being wrong is expensive.
+I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my name on. The agent does the heavy lifting. I step in at the moments a mistake would actually cost something, like when the change touches a payment path, or the agent is about to edit a database migration that runs against production.
 
 Almost all of the value in agentic work comes from the structure around the agent rather than the model. A strong model inside a sloppy process produces confident garbage. A modest model inside a tight process ships real work. The playbook below is the process I run, stage by stage, with the checkpoints where I step back in.
 
@@ -84,7 +84,7 @@ I run this loop several times a day. The model gets better every few months and 
 
 **What is an agentic workflow?**
 
-An agentic workflow is a repeatable process where an AI agent does part of the work inside a structure you control. The agent runs its own loop on the task, and you stay in the loop at the points where being wrong is expensive, usually framing the work up front and reviewing the result.
+An agentic workflow is a repeatable process where an AI agent does part of the work inside a structure you control. The agent runs its own loop on the task, and you step in where a mistake would cost something real, like a change to a billing flow or anything that runs against production, usually by framing the work up front and reading the diff before it merges.
 
 **Do I need a powerful model to run this playbook?**
 

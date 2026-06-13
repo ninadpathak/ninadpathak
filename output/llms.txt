@@ -31,7 +31,7 @@ Technical writer and former engineer publishing in-depth, benchmark-backed writi
 
 ## Agent Architecture
 
-- [The Agentic Workflow Playbook: From Prompt to Shipped PR](https://ninadpathak.com/blog/agentic-workflow-playbook/): The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.
+- [The Agentic Workflow Playbook: From Prompt to Shipped PR](https://ninadpathak.com/blog/agentic-workflow-playbook/): The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me stepping in to frame the work and read the diff before it merges.
 - [How I Set Up a Coding Agent That Actually Finishes the Task](https://ninadpathak.com/blog/coding-agent-setup-that-works/): A coding agent succeeds or fails before it writes a line. Here is the setup I use, the rules file, repository context, tools, permissions, and guardrails, that turns a capable model into an agent I trust with real work.
 - [Wiring Tools into Your Agent with MCP: A Practical Setup](https://ninadpathak.com/blog/mcp-server-setup-guide/): A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe.
 - [The Agent Design Space: A Map of What Engineers Are Actually Building](https://ninadpathak.com/blog/the-agent-design-space/): After surveying production agents across industries, the design space clusters into patterns. Here is what I found.
