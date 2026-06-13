@@ -1,0 +1,71 @@
+slug: ai-workflows
+status: published
+title: "AI Workflows and Automation: Getting Real Work Done with Coding Agents"
+h1: "AI Workflows & Automation"
+description: "How to wire AI agents and coding assistants into real work: choosing models, setting up coding agents, connecting tools with MCP, and automating the busywork without losing control."
+intro: |
+  The promise of AI at work is not a smarter chatbot. It is the boring stuff done for
+  you, a refactor that spans forty files, a release note drafted from the diff, a
+  research pass that reads twenty sources while you do something else.
+
+  Getting there takes more than a good prompt. You need the right model for the job, an
+  agent setup that holds context across a long task, tools wired in so the agent can act,
+  and guardrails so it fails safely. The posts below are the practitioner's path into
+  that setup.
+
+  The work-faster thread is the newest on the site and it is still growing. Follow it for
+  the workflows I run myself, and the playbooks I am writing next.
+
+sections:
+  - heading: "Choosing your tools"
+    blurb: "Pick the model and the agent that fit the job before you automate anything."
+    posts:
+      - best-llms-for-coding
+      - agentic-cli-benchmarks
+  - heading: "Setting up coding agents"
+    blurb: "Make a coding agent hold context across a long task instead of forgetting halfway."
+    posts:
+      - coding-agent-setup-that-works
+      - how-memory-works-in-claude-code
+      - why-coding-agents-lose-their-memory
+      - agent-harnesses
+  - heading: "Wiring tools and context"
+    blurb: "Connect the agent to your real tools and data so it can act reliably."
+    posts:
+      - mcp-server-setup-guide
+      - model-context-protocol-explained
+      - structured-outputs-llms-json-mode-function-calling
+  - heading: "Designing the workflow"
+    blurb: "Decide what the agent owns, what stays manual, and how many agents you need."
+    posts:
+      - agentic-workflow-playbook
+      - agent-vs-ai-assistant
+      - the-agent-design-space
+      - multi-agent-vs-single-agent-tradeoffs
+  - heading: "Automating developer busywork"
+    blurb: "Concrete wins: faster tooling and content drafted from your own artifacts."
+    posts:
+      - uv-package-manager-benchmark
+      - how-to-write-a-changelog-developers-actually-read
+      - writing-release-notes-that-developers-trust
+
+faqs:
+  - q: "What is an AI workflow?"
+    a: "An AI workflow is a repeatable process where one or more AI agents do part of the work, wired into your real tools and data. It is the difference between asking a chatbot a question and handing an agent a task it completes end to end."
+  - q: "Which LLM should I use for coding agents?"
+    a: "It depends on the job. Use a fast cheap model for autocomplete and small edits, and a stronger model for architecture and repository-scale refactors. The best-LLMs-for-coding post gives a benchmark-backed breakdown."
+  - q: "How do I connect an AI agent to my tools?"
+    a: "The cleanest path today is the Model Context Protocol, which exposes tools and data through a common interface an agent can call. The MCP post explains how it works and why it beats one-off integrations."
+  - q: "Can I trust an agent to automate real work?"
+    a: "Only with guardrails. Give the agent clear tool schemas, scoped permissions, error handling, and a way to observe what it did. The agent-architecture posts cover how to make automation fail safely."
+
+bridges:
+  - title: "AI Agent Architecture"
+    url: "/ai-agent-architecture/"
+    blurb: "The patterns under the workflow"
+  - title: "AI Agent Memory"
+    url: "/ai-agent-memory/"
+    blurb: "Why agents lose the thread"
+  - title: "Technical Writing for DevTools"
+    url: "/technical-writing/"
+    blurb: "Automating the writing too"

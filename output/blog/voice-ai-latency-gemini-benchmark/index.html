@@ -75,10 +75,15 @@
   "@type": "TechArticle",
   "headline": "The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1 Voice Agent",
   "description": "I built a sub-second latency voice assistant and profiled every millisecond of the Audio-to-Audio request/response loop on a MacBook Air M2. Here is the bottleneck analysis.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 3994,
+  "keywords": "voice-ai, real-time, gemini, latency, benchmarking, webrtc, engineering",
+  "articleSection": "voice-ai",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-04-16",
   "dateModified": "2026-04-16",
@@ -94,6 +99,56 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/voice-ai-latency-gemini-benchmark/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the single biggest latency contributor in a voice agent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "VAD patience. A balanced 500ms silence trigger accounts for 36% of total A2A latency. Reducing it saves the most time but increases the false turn-end rate. There is no free optimization here."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Is Gemini 3.1 Flash Lite faster than GPT-4o Mini for voice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In my benchmarks, yes, marginally so. Gemini 3.1 Flash Lite achieved 320ms TTFT vs. GPT-4o Mini\u0027s 380ms on identical prompts. The difference is more pronounced on long context, where Gemini\u0027s TTFT scaling is flatter."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I run the entire voice agent pipeline locally?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Partially. VAD (Silero) and STT (Whisper) run locally. TTS can run locally with Piper or Coqui. The LLM is the bottleneck. Running a model small enough for local inference (7B parameters) produces significantly worse conversational quality. A hybrid approach (local VAD+STT, cloud LLM+TTS) is the current sweet spot."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How does packet loss affect voice agent latency?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On HTTP/2 streaming, a 2% packet loss rate causes p95 latency to spike from 890ms to 1,650ms due to TCP retransmission. WebRTC handles the same loss with p95 at 920ms because it skips lost packets rather than blocking."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the \"context quarantine\" pattern?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is a context pruning strategy that isolates the first 4 tokens (attention sinks), the most recent N turns (the active conversation), and a compressed semantic summary of older turns. It prevents the prompt from growing indefinitely while preserving the model\u0027s numerical stability."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should I use filler utterances?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. A 1,400ms silence is perceived as unresponsiveness. A 200ms \"Hmm, let me check\" bridges the silence and signals active processing. The ~50ms TTS cost is negligible compared to the UX improvement. \u003c!-- primary keyword: real-time voice AI latency sources used: - Google (2026). Gemini 3.1 Flash Lite Technical Documentation. - Silero VAD v5 Documentation (2026). - OpenAI (2026). Whisper Large V3 Model Card. - WebRTC Working Group (2025). SCTP over DTLS Specification. - Koike et al. (2024). \"Turn-taking in Human-Computer Conversation: A Survey.\" ACM Computing Surveys. - StreamingLLM Research (2023). Attention Sinks and Context Stability. - H2O: Heavy-Hitter Oracle (2023). KV Cache Eviction. research gap identified: Most voice AI benchmarks measure end-to-end latency as a single number. I have decomposed the A2A chain into seven independently measurable stages, including the VAD patience component and the LLM-to-TTS token buffer delay\u2014a level of granularity rarely published outside Google\u0027s internal papers. self-identified risks or weak spots: The 200-turn benchmark was run in a controlled environment (quiet room, wired Ethernet). Real-world conditions with variable background noise and Wi-Fi jitter will increase both VAD false positive rates and network latency variance. The thermal throttling profile is specific to the M2 Air; devices with active cooling will not exhibit this degradation pattern. --\u003e"
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +190,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +220,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +250,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-04-16">Apr 16, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">20 min read</span>
       </div>
       <h1 class="post-title">The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1 Voice Agent</h1>
@@ -672,6 +733,7 @@ self-identified risks or weak spots: The 200-turn benchmark was run in a control
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -681,9 +743,9 @@ self-identified risks or weak spots: The 200-turn benchmark was run in a control
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

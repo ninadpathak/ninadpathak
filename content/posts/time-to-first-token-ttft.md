@@ -8,7 +8,7 @@ tags:
 - ai
 - llm
 - infrastructure
-title: 'Time to First Token (ttft): the Metric That Determines Ai Snappiness'
+title: 'Time to First Token (TTFT): The Metric That Determines AI Snappiness'
 ---
 
 Interactive AI applications live or die by perceived latency. A model might generate 100 tokens per second. Such speed is irrelevant if the user waits five seconds for the stream to start. Time to First Token (TTFT) is the metric that determines if your application feels "alive" or broken.

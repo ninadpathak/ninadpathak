@@ -1075,15 +1075,29 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .post-meta {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-bottom: 1.25rem;
 }
-.post-meta-date  { font-family: var(--mono); font-size: 0.8125rem; color: var(--text-3); }
-.post-meta-sep   { color: var(--text-3); }
-.post-meta-time  { font-family: var(--mono); font-size: 0.8125rem; color: var(--text-3); }
+.post-meta-author { font-family: var(--mono); font-size: 0.8125rem; color: var(--text-3); }
+.post-meta-author a { color: var(--text-2); text-decoration: none; }
+.post-meta-author a:hover { color: var(--accent); }
+.post-meta-date    { font-family: var(--mono); font-size: 0.8125rem; color: var(--text-3); }
+.post-meta-updated { font-family: var(--mono); font-size: 0.8125rem; color: var(--text-3); }
+.post-meta-sep     { color: var(--text-3); }
+.post-meta-time    { font-family: var(--mono); font-size: 0.8125rem; color: var(--text-3); }
 
 .post-header h1 { margin-bottom: 1rem; }
 .post-header .lead { max-width: 62ch; }
+
+/* Pillar / topic hub pages */
+.pillar-intro { max-width: 62ch; margin-top: 1.5rem; color: var(--text-2); }
+.pillar-intro p { margin-bottom: 1rem; }
+.pillar-section { padding-top: 2.5rem; }
+.pillar-section-title { margin-bottom: 0.5rem; }
+.pillar-section-blurb { max-width: 62ch; color: var(--text-3); margin-bottom: 1.5rem; }
+.pillar-faq h3 { margin-top: 1.75rem; }
+.pillar-faq p { max-width: 68ch; }
 
 .post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
 

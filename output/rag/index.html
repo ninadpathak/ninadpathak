@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG and Retrieval: Building Pipelines That Return the Right Context | Ninad Pathak</title>
+  <meta name="description" content="A practitioner's guide to retrieval-augmented generation: embeddings, hybrid search, reranking, evaluation, and the optimizations that decide whether your RAG system works.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="RAG and Retrieval: Building Pipelines That Return the Right Context">
+  <meta property="og:description" content="A practitioner's guide to retrieval-augmented generation: embeddings, hybrid search, reranking, evaluation, and the optimizations that decide whether your RAG system works.">
+  <meta property="og:url"         content="https://ninadpathak.com/rag/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/rag/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "RAG and Retrieval: Building Pipelines That Return the Right Context",
+  "description": "A practitioner\u0027s guide to retrieval-augmented generation: embeddings, hybrid search, reranking, evaluation, and the optimizations that decide whether your RAG system works.",
+  "url": "https://ninadpathak.com/rag/",
+  "inLanguage": "en-US",
+  "isPartOf": { "@id": "https://ninadpathak.com/#website" },
+  "about": "RAG \u0026 Retrieval",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "url": "https://ninadpathak.com/blog/embedding-models-compared/",
+        "name": "Vector Embeddings: a Guide to the Geometry of Meaning in Ai"
+      },      {
+        "@type": "ListItem",
+        "position": 2,
+        "url": "https://ninadpathak.com/blog/rag-vs-fine-tuning/",
+        "name": "RAG vs Fine-Tuning: A Better Decision Framework"
+      },      {
+        "@type": "ListItem",
+        "position": 3,
+        "url": "https://ninadpathak.com/blog/rag-vs-memory/",
+        "name": "RAG vs Memory: What AI Developers Need to Know"
+      },      {
+        "@type": "ListItem",
+        "position": 4,
+        "url": "https://ninadpathak.com/blog/hybrid-search-bm25-vector-search/",
+        "name": "Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval"
+      },      {
+        "@type": "ListItem",
+        "position": 5,
+        "url": "https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/",
+        "name": "Reranking in RAG: Why Your Top-K Results Are Probably Wrong"
+      },      {
+        "@type": "ListItem",
+        "position": 6,
+        "url": "https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/",
+        "name": "How Anthropic\u0027s Contextual Retrieval Changes RAG Architecture"
+      },      {
+        "@type": "ListItem",
+        "position": 7,
+        "url": "https://ninadpathak.com/blog/semantic-caching-rag-optimization/",
+        "name": "Semantic Caching: The RAG Optimization Nobody Talks About"
+      },      {
+        "@type": "ListItem",
+        "position": 8,
+        "url": "https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/",
+        "name": "Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each"
+      },      {
+        "@type": "ListItem",
+        "position": 9,
+        "url": "https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/",
+        "name": "RAG Evaluation Metrics: What Actually Matters"
+      },      {
+        "@type": "ListItem",
+        "position": 10,
+        "url": "https://ninadpathak.com/blog/local-wasm-vector-benchmarks/",
+        "name": "100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head"
+      }    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ninadpathak.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Topics", "item": "https://ninadpathak.com/topics/" },
+    { "@type": "ListItem", "position": 3, "name": "RAG \u0026 Retrieval", "item": "https://ninadpathak.com/rag/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between RAG and fine-tuning?",
+      "acceptedAnswer": { "@type": "Answer", "text": "RAG adds knowledge at query time by retrieving documents into the prompt. Fine-tuning bakes behavior or knowledge into the model weights through training. RAG suits facts that change often, and fine-tuning suits stable behavior and format. The decision-framework post covers how to choose." }
+    },    {
+      "@type": "Question",
+      "name": "Why are my top-k retrieval results wrong?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Vector similarity ranks by semantic closeness, which is not the same as relevance to the question. The fix is a reranking step that re-scores candidates with a model built for relevance. The reranking post shows the measured difference." }
+    },    {
+      "@type": "Question",
+      "name": "What is hybrid search?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Hybrid search combines keyword retrieval (BM25) with dense vector search and fuses the rankings, usually with reciprocal rank fusion. It catches exact terms that embeddings miss and meaning that keywords miss." }
+    },    {
+      "@type": "Question",
+      "name": "How do I evaluate a RAG system?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Measure retrieval and generation separately. Track recall and precision on retrieval, and faithfulness and answer relevance on generation. The evaluation-metrics post covers which numbers actually predict production quality." }
+    }  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link ">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link active">Topics</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/topics/">Topics</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">RAG & Retrieval</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Topic</div>
+    <h1>RAG & Retrieval</h1>
+    <p class="lead">A practitioner's guide to retrieval-augmented generation: embeddings, hybrid search, reranking, evaluation, and the optimizations that decide whether your RAG system works.</p>
+    <div class="pillar-intro"><p>Retrieval-augmented generation is easy to demo and hard to ship. The demo works
+because the answer sits in the top result. Production breaks because the right chunk
+lands at rank 14, the embedding misses the intent, and nobody measured recall before
+launch.</p>
+<p>The posts below cover the retrieval stack end to end, from how embeddings encode
+meaning to reranking, hybrid search, caching, and the evaluation metrics that tell you
+whether any of it works.</p></div>
+  </div>
+</section>
+
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Foundations</h2>
+    <p class="pillar-section-blurb">How retrieval encodes meaning and where it fits next to fine-tuning and memory.</p>
+    <a href="/blog/embedding-models-compared/" class="blog-row">
+      <div class="blog-row-title">Vector Embeddings: a Guide to the Geometry of Meaning in Ai</div>
+      <div class="blog-row-desc">Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">15 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">rag</span>
+      </div>
+    </a>
+    <a href="/blog/rag-vs-fine-tuning/" class="blog-row">
+      <div class="blog-row-title">RAG vs Fine-Tuning: A Better Decision Framework</div>
+      <div class="blog-row-desc">Choosing between Retrieval-Augmented Generation (RAG) and Fine-Tuning is the most common architectural mistake in AI. Here is how to decide based on knowledge frequency, data privacy, and behavior requirements.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">3 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">rag</span>
+      </div>
+    </a>
+    <a href="/blog/rag-vs-memory/" class="blog-row">
+      <div class="blog-row-title">RAG vs Memory: What AI Developers Need to Know</div>
+      <div class="blog-row-desc">Understand the fundamental differences between RAG and memory systems for LLM applications, when to use each, and how to combine them in production.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">13 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Retrieval quality</h2>
+    <p class="pillar-section-blurb">Getting the right chunk to the top, not just a similar one.</p>
+    <a href="/blog/hybrid-search-bm25-vector-search/" class="blog-row">
+      <div class="blog-row-title">Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval</div>
+      <div class="blog-row-desc">Hybrid search combines BM25 sparse retrieval with dense vector search. Here's how reciprocal rank fusion works, what it costs, and when the combination actually beats either method alone.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">vector-search</span>
+      </div>
+    </a>
+    <a href="/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/" class="blog-row">
+      <div class="blog-row-title">Reranking in RAG: Why Your Top-K Results Are Probably Wrong</div>
+      <div class="blog-row-desc">Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">vector-search</span>
+      </div>
+    </a>
+    <a href="/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/" class="blog-row">
+      <div class="blog-row-title">How Anthropic's Contextual Retrieval Changes RAG Architecture</div>
+      <div class="blog-row-desc">Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49% with contextual embeddings plus contextual BM25. I walk through the mechanism, the benchmark, and the part of the RAG pipeline it changes.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Optimization and cost</h2>
+    <p class="pillar-section-blurb">Cutting latency and spend without hurting answer quality.</p>
+    <a href="/blog/semantic-caching-rag-optimization/" class="blog-row">
+      <div class="blog-row-title">Semantic Caching: The RAG Optimization Nobody Talks About</div>
+      <div class="blog-row-desc">Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </a>
+    <a href="/blog/structured-outputs-llms-json-mode-function-calling/" class="blog-row">
+      <div class="blog-row-title">Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each</div>
+      <div class="blog-row-desc">JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Evaluation</h2>
+    <p class="pillar-section-blurb">The metrics that separate a production RAG system from a demo.</p>
+    <a href="/blog/rag-evaluation-metrics-what-actually-matters/" class="blog-row">
+      <div class="blog-row-title">RAG Evaluation Metrics: What Actually Matters</div>
+      <div class="blog-row-desc">A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">rag</span>
+        <span class="tag">evaluation</span>
+        <span class="tag">llm</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Benchmarks</h2>
+    <p class="pillar-section-blurb">Real numbers on retrieval running close to the user.</p>
+    <a href="/blog/local-wasm-vector-benchmarks/" class="blog-row">
+      <div class="blog-row-title">100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head</div>
+      <div class="blog-row-desc">I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">vector-search</span>
+        <span class="tag">wasm</span>
+        <span class="tag">pglite</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <h2>Frequently asked questions</h2>
+    <div class="pillar-faq post-content">
+      <h3>What is the difference between RAG and fine-tuning?</h3>
+      <p>RAG adds knowledge at query time by retrieving documents into the prompt. Fine-tuning bakes behavior or knowledge into the model weights through training. RAG suits facts that change often, and fine-tuning suits stable behavior and format. The decision-framework post covers how to choose.</p>
+      <h3>Why are my top-k retrieval results wrong?</h3>
+      <p>Vector similarity ranks by semantic closeness, which is not the same as relevance to the question. The fix is a reranking step that re-scores candidates with a model built for relevance. The reranking post shows the measured difference.</p>
+      <h3>What is hybrid search?</h3>
+      <p>Hybrid search combines keyword retrieval (BM25) with dense vector search and fuses the rankings, usually with reciprocal rank fusion. It catches exact terms that embeddings miss and meaning that keywords miss.</p>
+      <h3>How do I evaluate a RAG system?</h3>
+      <p>Measure retrieval and generation separately. Track recall and precision on retrieval, and faithfulness and answer relevance on generation. The evaluation-metrics post covers which numbers actually predict production quality.</p>
+    </div>
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Related topics</h2>
+    <div class="related-grid">
+      <a href="/ai-agent-memory/" class="related-card">
+        <div class="related-card-title">AI Agent Memory</div>
+<div class="related-card-date">Where retrieval meets memory</div>      </a>
+      <a href="/llm-inference/" class="related-card">
+        <div class="related-card-title">LLM Inference & Cost</div>
+<div class="related-card-date">The cost of every token you retrieve</div>      </a>
+      <a href="/ai-agent-architecture/" class="related-card">
+        <div class="related-card-title">AI Agent Architecture</div>
+<div class="related-card-date">Feeding agents the right context</div>      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer who gets this?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

@@ -6,6 +6,24 @@
     <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
     <language>en-us</language>
     <item>
+      <title>The Agentic Workflow Playbook: From Prompt to Shipped PR</title>
+      <link>https://ninadpathak.com/blog/agentic-workflow-playbook/</link>
+      <description>The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.</description>
+      <pubDate>Jun 14, 2026</pubDate>
+    </item>
+    <item>
+      <title>How I Set Up a Coding Agent That Actually Finishes the Task</title>
+      <link>https://ninadpathak.com/blog/coding-agent-setup-that-works/</link>
+      <description>A coding agent succeeds or fails before it writes a line. Here is the setup I use, the rules file, repository context, tools, permissions, and guardrails, that turns a capable model into an agent I trust with real work.</description>
+      <pubDate>Jun 13, 2026</pubDate>
+    </item>
+    <item>
+      <title>Wiring Tools into Your Agent with MCP: A Practical Setup</title>
+      <link>https://ninadpathak.com/blog/mcp-server-setup-guide/</link>
+      <description>A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe.</description>
+      <pubDate>Jun 12, 2026</pubDate>
+    </item>
+    <item>
       <title>Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</title>
       <link>https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/</link>
       <description>Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need.</description>
@@ -106,24 +124,6 @@
       <link>https://ninadpathak.com/blog/agent-loop-anatomy/</link>
       <description>The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.</description>
       <pubDate>Apr 23, 2026</pubDate>
-    </item>
-    <item>
-      <title>Why AI Agents Keep Failing in Production and What the Field Is Doing About It</title>
-      <link>https://ninadpathak.com/blog/why-ai-agents-keep-failing-in-production/</link>
-      <description>I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.</description>
-      <pubDate>Apr 22, 2026</pubDate>
-    </item>
-    <item>
-      <title>A Taxonomy of AI Agents That Actually Explains What You Are Building</title>
-      <link>https://ninadpathak.com/blog/the-taxonomy-of-ai-agents/</link>
-      <description>Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.</description>
-      <pubDate>Apr 21, 2026</pubDate>
-    </item>
-    <item>
-      <title>Memory for Voice AI Agents: What Text Chatbots Cannot Do</title>
-      <link>https://ninadpathak.com/blog/memory-for-voice-ai-agents/</link>
-      <description>Voice AI agents live or die by how they manage memory across a real-time streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something different.</description>
-      <pubDate>Apr 19, 2026</pubDate>
     </item>
   </channel>
 </rss>

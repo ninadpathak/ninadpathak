@@ -75,10 +75,15 @@
   "@type": "TechArticle",
   "headline": "100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head",
   "description": "I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1848,
+  "keywords": "vector-search, wasm, pglite, sqlite-vec, edge-computing, technical-deep-dive",
+  "articleSection": "vector-search",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-04-13",
   "dateModified": "2026-04-13",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/local-wasm-vector-benchmarks/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I run PGlite and SQLite-vec in the same application?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Some teams use SQLite-vec for a fast, low-precision \"first pass\" search and then use PGlite for a high-precision \"refinement\" pass. This hybrid approach allows for sub-5ms UI updates followed by an accurate result set 15ms later."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How does thermal throttling on the M2 Air affect search speed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prolonged index building in PGlite can trigger thermal throttling, reducing the clock speed by up to 20%. Query-time latency is rarely affected because the operations are short-lived."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Do these databases work in mobile browsers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Both run in iOS Safari and Android Chrome via WASM. SQLite-vec is particularly well-suited for mobile due to its low memory footprint and efficient use of CPU registers for binary math."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the \"lost in the middle\" problem for local RAG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This is a context window limitation rather than a database limitation. Even if your retrieval is perfect, providing too much context to a small local model can degrade its reasoning performance. Local RAG requires tighter top-K filtering than cloud RAG."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should I use HNSW or Flat scans for 50k vectors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For 50k vectors, a flat scan in SQLite-vec is usually faster than building and traversing an HNSW index. The complexity crossover point where HNSW becomes objectively better is around 100k vectors for 384-dim data. \u003c!-- primary keyword: local WASM vector database benchmarks sources used: - Malkov, Y. A., \u0026 Yashunin, D. A. (2018). Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs. - J\u00e9gou, H., et al. (2011). Product Quantization for Nearest Neighbor Search. - PGlite Documentation (2026). - SQLite-vec GitHub Repository and Technical Specs (2026). - Mozilla (2025). WASM Memory Management Best Practices. research gap identified: I have bridged the gap between raw algorithmic complexity (O(N) vs O(log N)) and actual browser-side memory heap constraints, a connection rarely discussed in backend-centric vector DB posts. self-identified risks or weak spots: The 100k vector limit is a conservative production baseline; performance at 1M+ vectors would likely require advanced tiling or persistent storage strategies not covered in this post-mortem. --\u003e"
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +243,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-04-13">Apr 13, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">9 min read</span>
       </div>
       <h1 class="post-title">100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head</h1>
@@ -397,7 +451,7 @@ self-identified risks or weak spots: The 100k vector limit is a conservative pro
       </a>
       <a href="/blog/semantic-caching-rag-optimization/" class="related-card">
         <div class="related-card-date">2026-03-28</div>
-        <div class="related-card-title">Semantic Caching: the Rag Optimization Nobody Talks About</div>
+        <div class="related-card-title">Semantic Caching: The RAG Optimization Nobody Talks About</div>
       </a>
     </div>
   </div>
@@ -470,6 +524,7 @@ self-identified risks or weak spots: The 100k vector limit is a conservative pro
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -479,9 +534,9 @@ self-identified risks or weak spots: The 100k vector limit is a conservative pro
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

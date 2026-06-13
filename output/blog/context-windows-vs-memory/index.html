@@ -75,10 +75,15 @@
   "@type": "TechArticle",
   "headline": "Context Windows vs Memory: Why They Are Not the Same Thing",
   "description": "A 1M token context window is not memory. Treating it like one is how you build expensive systems that still forget what they were doing last Tuesday.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 3331,
+  "keywords": "ai, llm, memory, context-window, infrastructure",
+  "articleSection": "ai",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-04-19",
   "dateModified": "2026-04-19",
@@ -94,6 +99,56 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/context-windows-vs-memory/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is a longer context window always better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Longer context increases cost, latency, and the \"lost in the middle\" problem. A shorter, more targeted context with better retrieval outperforms a long context with mediocre retrieval in most production scenarios. The exception is tasks that genuinely require the full document, like summarizing a specific 200-page report."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I use a vector database as a memory system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A vector database is a retrieval mechanism, not a memory system. It can be part of your memory architecture for storing and retrieving embeddings of documents, conversation chunks, or knowledge base entries. But a complete memory system also needs structured storage for entity state, conversation metadata, user preferences, and temporal ordering. You need more than a vector store alone."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do I decide what goes into context vs memory?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Context gets what is needed for immediate reasoning and cannot be retrieved quickly enough from memory. Memory gets everything that needs to persist across interactions, everything that exceeds context capacity, and everything that benefits from compression or selective retrieval. A practical heuristic: if the model needs it in most interactions, it belongs in context or system prompt. If the model needs it occasionally or over long time horizons, it belongs in memory."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Does the KV cache count as memory?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. KV cache is an ephemeral per-request optimization that stores intermediate transformer computations in GPU VRAM to avoid recomputing them during autoregressive generation. It is discarded when the request ends and is not accessible across calls. Calling it memory is a category error."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the practical limit for context-only systems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Context-only systems become impractical around 100K to 200K tokens for most use cases, due to cost, latency, and retrieval quality degradation. Beyond that, you need a memory layer to maintain system quality and keep costs manageable. The exact threshold depends on your use case, but if you are routinely using more than 50K tokens per request, you should have a retrieval-augmented architecture in place."
+      }
+    },    {
+      "@type": "Question",
+      "name": "My agent keeps forgetting what it was doing. Is this a context problem or a memory problem?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Almost certainly a memory problem. Context windows are cleared between calls unless you explicitly carry state forward. If your agent is resetting on every turn, you are not persisting conversation state to a memory layer. The fix is not a larger context window. The fix is adding a memory layer that tracks the agent\u0027s state and injects it into context on each request."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +190,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +220,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +250,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-04-19">Apr 19, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">17 min read</span>
       </div>
       <h1 class="post-title">Context Windows vs Memory: Why They Are Not the Same Thing</h1>
@@ -373,17 +434,17 @@ Sequence length 131072: 573,939,298,771,456 FLOPs, ~1434.85ms
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/agent-memory-for-customer-support/" class="related-card">
-        <div class="related-card-date">2026-05-10</div>
-        <div class="related-card-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</div>
+      <a href="/blog/agentic-workflow-playbook/" class="related-card">
+        <div class="related-card-date">2026-06-14</div>
+        <div class="related-card-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</div>
       </a>
-      <a href="/blog/llm-inference-optimization/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
       </a>
-      <a href="/blog/why-coding-agents-lose-their-memory/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</div>
+      <a href="/blog/mcp-server-setup-guide/" class="related-card">
+        <div class="related-card-date">2026-06-12</div>
+        <div class="related-card-title">Wiring Tools into Your Agent with MCP: A Practical Setup</div>
       </a>
     </div>
   </div>
@@ -456,6 +517,7 @@ Sequence length 131072: 573,939,298,771,456 FLOPs, ~1434.85ms
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -465,9 +527,9 @@ Sequence length 131072: 573,939,298,771,456 FLOPs, ~1434.85ms
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

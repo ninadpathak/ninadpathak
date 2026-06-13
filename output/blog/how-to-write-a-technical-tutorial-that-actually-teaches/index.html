@@ -75,10 +75,15 @@
   "@type": "TechArticle",
   "headline": "How to Write a Technical Tutorial That Actually Teaches",
   "description": "I explain how I structure technical tutorials so readers finish with a working result, fewer hidden assumptions, and less time wasted on broken examples.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 2287,
+  "keywords": "technical-writing, tutorials, developer-experience",
+  "articleSection": "technical-writing",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-04-02",
   "dateModified": "2026-04-02",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long should a technical tutorial be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Length should be set by the workflow instead of an arbitrary word target. A tutorial that gets a reader from zero to a working result in 900 words is better than a 3,000-word sprawl full of side trips. My own bias is toward shorter tutorials with cleaner scope and stronger outward links to reference material."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should tutorials include full code listings or only key snippets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Full listings belong in tutorials when omission would make copy-paste fragile. Partial snippets work when the surrounding file is obvious and unchanged. MDN\u0027s guidance on runnable examples is the standard I use: if the reader needs more context to run the sample, I either provide it or label the snippet as partial."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Where should troubleshooting go in a tutorial?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Near the end for most pieces, with inline callouts only where a failure is common enough to block progress. Readers should not have to bounce to a separate doc for the top two failure modes of the main workflow. GitHub is right to treat troubleshooting as a core tutorial section rather than optional garnish."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should a tutorial explain every concept it touches?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Tutorials teach through guided execution. Reference pages and explanation pages exist for a reason. Diataxis is useful here because it gives you permission to stop a tutorial from becoming a second-rate encyclopedia."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the fastest way to improve a weak tutorial already getting traffic?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Run it from scratch on a clean machine and log every point of friction. That one pass usually tells you more than a week of abstract editorial debate. Missing prerequisites, stale code, and heading vagueness show up quickly when someone tries to finish the task for real."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +243,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-04-02">Apr 02, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">11 min read</span>
       </div>
       <h1 class="post-title">How to Write a Technical Tutorial That Actually Teaches</h1>
@@ -366,17 +420,17 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/technical-writing-for-engineers/" class="related-card">
-        <div class="related-card-date">2026-04-18</div>
-        <div class="related-card-title">Technical Writing for Engineers: The 80/20 Guide</div>
+      <a href="/blog/agentic-workflow-playbook/" class="related-card">
+        <div class="related-card-date">2026-06-14</div>
+        <div class="related-card-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</div>
       </a>
-      <a href="/blog/engineering-velocity-documentation/" class="related-card">
-        <div class="related-card-date">2026-04-11</div>
-        <div class="related-card-title">Quantifying the Engineering Velocity Impact of Technical Documentation</div>
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
       </a>
-      <a href="/blog/developer-trust-hierarchy/" class="related-card">
-        <div class="related-card-date">2026-04-10</div>
-        <div class="related-card-title">The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketing Content</div>
+      <a href="/blog/mcp-server-setup-guide/" class="related-card">
+        <div class="related-card-date">2026-06-12</div>
+        <div class="related-card-title">Wiring Tools into Your Agent with MCP: A Practical Setup</div>
       </a>
     </div>
   </div>
@@ -449,6 +503,7 @@
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -458,9 +513,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

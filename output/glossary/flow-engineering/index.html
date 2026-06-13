@@ -28,7 +28,7 @@
   <meta property="og:type"        content="website">
   <meta property="og:title"       content="Ninad Pathak | Technical Content for DevTools & B2B SaaS">
   <meta property="og:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
-  <meta property="og:url"         content="https://ninadpathak.com/">
+  <meta property="og:url"         content="https://ninadpathak.com/glossary/flow-engineering/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Twitter -->
@@ -39,7 +39,7 @@
   <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://ninadpathak.com/">
+  <link rel="canonical" href="https://ninadpathak.com/glossary/flow-engineering/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -69,20 +69,31 @@
   </script>
 
   <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com",
-    "jobTitle": "Technical Content Writer",
-    "description": "Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.",
-    "sameAs": [
-      "https://linkedin.com/in/ninadwites/",
-      "https://twitter.com/ninadwrites"
-    ]
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "name": "Flow Engineering",
+  "description": "The practice of designing deterministic, multi-step architectures where an LLM\u0027s output is iteratively refined, tested, and corrected through a predefined pipeline.",
+  "url": "https://ninadpathak.com/glossary/flow-engineering/",
+  "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "AI Memory & Agent Glossary",
+    "url": "https://ninadpathak.com/glossary/"
   }
-  </script>
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ninadpathak.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "https://ninadpathak.com/glossary/" },
+    { "@type": "ListItem", "position": 3, "name": "Flow Engineering", "item": "https://ninadpathak.com/glossary/flow-engineering/" }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -96,6 +107,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link ">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -125,6 +137,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -230,6 +243,7 @@
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -239,9 +253,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

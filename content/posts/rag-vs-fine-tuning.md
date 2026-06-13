@@ -8,7 +8,7 @@ tags:
 - ai
 - llm
 - rag
-title: 'Rag Vs Fine-tuning: a Better Decision Framework'
+title: 'RAG vs Fine-Tuning: A Better Decision Framework'
 ---
 
 The debate between RAG and fine-tuning is often framed as a competition. One is portrayed as the "easy" way to add data and the other as the "hard" way. Such a framing ignores the fundamental engineering difference between the two approaches.

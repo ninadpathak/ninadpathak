@@ -1,0 +1,62 @@
+slug: rag
+status: published
+title: "RAG and Retrieval: Building Pipelines That Return the Right Context"
+h1: "RAG & Retrieval"
+description: "A practitioner's guide to retrieval-augmented generation: embeddings, hybrid search, reranking, evaluation, and the optimizations that decide whether your RAG system works."
+intro: |
+  Retrieval-augmented generation is easy to demo and hard to ship. The demo works
+  because the answer sits in the top result. Production breaks because the right chunk
+  lands at rank 14, the embedding misses the intent, and nobody measured recall before
+  launch.
+
+  The posts below cover the retrieval stack end to end, from how embeddings encode
+  meaning to reranking, hybrid search, caching, and the evaluation metrics that tell you
+  whether any of it works.
+
+sections:
+  - heading: "Foundations"
+    blurb: "How retrieval encodes meaning and where it fits next to fine-tuning and memory."
+    posts:
+      - embedding-models-compared
+      - rag-vs-fine-tuning
+      - rag-vs-memory
+  - heading: "Retrieval quality"
+    blurb: "Getting the right chunk to the top, not just a similar one."
+    posts:
+      - hybrid-search-bm25-vector-search
+      - reranking-in-rag-why-your-top-k-results-are-probably-wrong
+      - how-anthropics-contextual-retrieval-changes-rag-architecture
+  - heading: "Optimization and cost"
+    blurb: "Cutting latency and spend without hurting answer quality."
+    posts:
+      - semantic-caching-rag-optimization
+      - structured-outputs-llms-json-mode-function-calling
+  - heading: "Evaluation"
+    blurb: "The metrics that separate a production RAG system from a demo."
+    posts:
+      - rag-evaluation-metrics-what-actually-matters
+  - heading: "Benchmarks"
+    blurb: "Real numbers on retrieval running close to the user."
+    posts:
+      - local-wasm-vector-benchmarks
+
+faqs:
+  - q: "What is the difference between RAG and fine-tuning?"
+    a: "RAG adds knowledge at query time by retrieving documents into the prompt. Fine-tuning bakes behavior or knowledge into the model weights through training. RAG suits facts that change often, and fine-tuning suits stable behavior and format. The decision-framework post covers how to choose."
+  - q: "Why are my top-k retrieval results wrong?"
+    a: "Vector similarity ranks by semantic closeness, which is not the same as relevance to the question. The fix is a reranking step that re-scores candidates with a model built for relevance. The reranking post shows the measured difference."
+  - q: "What is hybrid search?"
+    a: "Hybrid search combines keyword retrieval (BM25) with dense vector search and fuses the rankings, usually with reciprocal rank fusion. It catches exact terms that embeddings miss and meaning that keywords miss."
+  - q: "How do I evaluate a RAG system?"
+    a: "Measure retrieval and generation separately. Track recall and precision on retrieval, and faithfulness and answer relevance on generation. The evaluation-metrics post covers which numbers actually predict production quality."
+
+bridges:
+  - title: "AI Agent Memory"
+    url: "/ai-agent-memory/"
+    blurb: "Where retrieval meets memory"
+  - title: "LLM Inference & Cost"
+    url: "/llm-inference/"
+    blurb: "The cost of every token you retrieve"
+  - title: "AI Agent Architecture"
+    url: "/ai-agent-architecture/"
+    blurb: "Feeding agents the right context"

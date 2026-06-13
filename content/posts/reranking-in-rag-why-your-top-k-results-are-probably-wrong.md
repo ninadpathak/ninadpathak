@@ -9,7 +9,7 @@ tags:
 - rag
 - vector-search
 - infrastructure
-title: 'Reranking in Rag: Why Your Top-k Results Are Probably Wrong'
+title: 'Reranking in RAG: Why Your Top-K Results Are Probably Wrong'
 ---
 
 Vector databases are powerful tools for building retrieval-augmented generation systems. I have seen many engineering teams assume that dropping text into an embedding model and performing a cosine similarity search is the entire retrieval job. You retrieve the top five results. You inject them into your prompt. You expect the language model to synthesize a perfect answer.

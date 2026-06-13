@@ -2,6 +2,29 @@
 
 {% block title %}AI Memory & Agent Glossary | Ninad Pathak{% endblock %}
 {% block description %}A comprehensive, highly technical glossary of AI memory, RAG, and agentic framework terminology.{% endblock %}
+{% block canonical %}/glossary/{% endblock %}
+{% block og_url %}/glossary/{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "AI Memory & Agent Glossary",
+  "description": "Technical definitions for AI memory, vector search, RAG, and agent architectures.",
+  "url": "{{ site.url }}/glossary/",
+  "hasDefinedTerm": [
+{% for term in terms %}
+    {
+      "@type": "DefinedTerm",
+      "name": {{ term.name | tojson }},
+      "url": "{{ site.url }}/glossary/{{ term.slug }}/"
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 

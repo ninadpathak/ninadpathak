@@ -1,0 +1,61 @@
+slug: technical-writing
+status: published
+title: "Technical Writing for DevTools: Content Engineers Actually Trust"
+h1: "Technical Writing for DevTools"
+description: "How to write documentation, tutorials, and developer content that engineers respect and buyers act on. The craft, the business case, and what separates practitioner writing from marketing."
+intro: |
+  Developers can smell marketing in one sentence and they close the tab. Content that
+  earns their trust reads like it was written by someone who has shipped the thing,
+  because it was. That is the whole game for DevTools content.
+
+  I came to writing from engineering, so the posts here treat docs as a product surface,
+  not a chore. They cover the craft of writing for engineers, the business case that ties
+  docs to revenue, and the patterns behind the teams who do it well.
+
+sections:
+  - heading: "Writing for engineers"
+    blurb: "The craft of content that a technical reader will actually trust."
+    posts:
+      - technical-writing-for-engineers
+      - technical-writing-for-ai-products-the-new-rules
+      - the-case-for-shorter-technical-documentation
+  - heading: "Specific formats"
+    blurb: "How to handle the documents developers read most."
+    posts:
+      - developer-onboarding-docs-what-works-what-doesnt
+      - how-to-write-a-technical-tutorial-that-actually-teaches
+      - how-to-write-a-changelog-developers-actually-read
+      - writing-release-notes-that-developers-trust
+  - heading: "The business case"
+    blurb: "Why docs move revenue, retention, and developer trust."
+    posts:
+      - why-devtools-startups-lose-deals-over-bad-docs
+      - technical-content-as-a-moat-the-long-game-for-developer-tools
+      - how-stripes-technical-blog-became-a-competitive-moat
+      - engineering-velocity-documentation
+  - heading: "Trust and craft"
+    blurb: "What makes practitioner writing outrank marketing, and how I got here."
+    posts:
+      - developer-trust-hierarchy
+      - from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind
+
+faqs:
+  - q: "What makes technical writing good for a developer audience?"
+    a: "Accuracy first, then a clear path to a working result. Engineers trust writing that shows real commands, real output, and the parts that usually go wrong. Marketing language and vague benefits make them leave."
+  - q: "Why do DevTools companies lose deals over bad docs?"
+    a: "Developers evaluate tools by reading the docs before they ever talk to sales. If the docs are thin or wrong, the evaluation stalls and the deal dies quietly. The lose-deals post breaks down where this happens."
+  - q: "How is writing for AI products different?"
+    a: "AI product docs have to cover prompts, schemas, evals, and version boundaries that change fast. The new-rules post covers the structure I would use to keep them accurate as the product moves."
+  - q: "Should technical docs be short or thorough?"
+    a: "As short as possible while still getting the reader to a working result. Length for its own sake hides the important parts. The shorter-docs post makes the case with examples."
+
+bridges:
+  - title: "AI Workflows & Automation"
+    url: "/ai-workflows/"
+    blurb: "Automating the writing"
+  - title: "AI Agent Architecture"
+    url: "/ai-agent-architecture/"
+    blurb: "The systems you are documenting"
+  - title: "AI Agent Memory"
+    url: "/ai-agent-memory/"
+    blurb: "The deep end of the domain"

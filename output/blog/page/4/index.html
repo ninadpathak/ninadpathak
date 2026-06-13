@@ -73,10 +73,23 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://ninadpathak.com/#person",
     "name": "Ninad Pathak",
     "url": "https://ninadpathak.com",
     "jobTitle": "Technical Content Writer",
     "description": "Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.",
+    "knowsAbout": [
+      "Technical Writing",
+      "Developer Documentation",
+      "AI Agents",
+      "Agentic Workflows",
+      "AI Agent Memory",
+      "Retrieval-Augmented Generation (RAG)",
+      "Large Language Models",
+      "LLM Inference Optimization",
+      "Workflow Automation",
+      "DevTools Content Strategy"
+    ],
     "sameAs": [
       "https://linkedin.com/in/ninadwites/",
       "https://twitter.com/ninadwrites"
@@ -96,6 +109,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -125,6 +139,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -149,6 +164,36 @@
 
 <section class="blog-list-section">
   <div class="container">
+      <a href="/blog/state-of-open-source-memory-2026/" class="blog-row">
+        <div class="blog-row-title">The State of Open Source AI Memory in 2026: Beyond the Context Window Myth</div>
+        <div class="blog-row-desc">AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve identity fragmentation at production scale.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">8 min read</span>
+          <span class="tag">ai</span>
+          <span class="tag">agents</span>
+          <span class="tag">infrastructure</span>
+        </div>
+      </a>
+      <a href="/blog/embedding-models-compared/" class="blog-row">
+        <div class="blog-row-title">Vector Embeddings: a Guide to the Geometry of Meaning in Ai</div>
+        <div class="blog-row-desc">Everything in AI starts with a vector. Here is how embedding models turn human language into high-dimensional geometry, why dimensionality reduction matters, and how to choose between OpenAI, Cohere, and self-hosted models.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">15 min read</span>
+          <span class="tag">ai</span>
+          <span class="tag">llm</span>
+          <span class="tag">rag</span>
+        </div>
+      </a>
+      <a href="/blog/llm-context-windows-explained/" class="blog-row">
+        <div class="blog-row-title">Llm Context Windows Explained: Why More Is Not Always Better</div>
+        <div class="blog-row-desc">Context windows are expanding to millions of tokens. Here is why the middle of your context still gets ignored, what long context actually costs, and how to build production systems that use these massive windows effectively.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">4 min read</span>
+          <span class="tag">ai</span>
+          <span class="tag">llm</span>
+          <span class="tag">infrastructure</span>
+        </div>
+      </a>
       <a href="/blog/mixture-of-experts-explained/" class="blog-row">
         <div class="blog-row-title">Mixture of Experts: How Moe Models Are Cheap to Run but Expensive to Host</div>
         <div class="blog-row-desc">DeepSeek V3 has 671B parameters but only activates 37B per token. Here's how mixture of experts works, why it cuts inference costs, and the catch nobody puts in the headline.</div>
@@ -170,7 +215,7 @@
         </div>
       </a>
       <a href="/blog/best-llms-for-coding/" class="blog-row">
-        <div class="blog-row-title">The Best Llms for Coding in 2026: an Engineering Review</div>
+        <div class="blog-row-title">The Best LLMs for Coding in 2026: An Engineering Review</div>
         <div class="blog-row-desc">Not all models are created equal for software development. Here is a benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic logic, and repository-scale refactoring as of March 2026.</div>
         <div class="blog-row-meta">
           <span class="read-time">5 min read</span>
@@ -180,7 +225,7 @@
         </div>
       </a>
       <a href="/blog/model-context-protocol-explained/" class="blog-row">
-        <div class="blog-row-title">The Model Context Protocol (mcp) Explained: a Universal Language for Ai Tools</div>
+        <div class="blog-row-title">The Model Context Protocol (MCP) Explained: A Universal Language for AI Tools</div>
         <div class="blog-row-desc">Model Context Protocol (MCP) is the new standard for connecting AI models to data sources and tools. Here is why it matters, how it works, and why it is the missing link for agentic infrastructure.</div>
         <div class="blog-row-meta">
           <span class="read-time">4 min read</span>
@@ -200,7 +245,7 @@
         </div>
       </a>
       <a href="/blog/rag-vs-fine-tuning/" class="blog-row">
-        <div class="blog-row-title">Rag Vs Fine-tuning: a Better Decision Framework</div>
+        <div class="blog-row-title">RAG vs Fine-Tuning: A Better Decision Framework</div>
         <div class="blog-row-desc">Choosing between Retrieval-Augmented Generation (RAG) and Fine-Tuning is the most common architectural mistake in AI. Here is how to decide based on knowledge frequency, data privacy, and behavior requirements.</div>
         <div class="blog-row-meta">
           <span class="read-time">3 min read</span>
@@ -210,7 +255,7 @@
         </div>
       </a>
       <a href="/blog/time-to-first-token-ttft/" class="blog-row">
-        <div class="blog-row-title">Time to First Token (ttft): the Metric That Determines Ai Snappiness</div>
+        <div class="blog-row-title">Time to First Token (TTFT): The Metric That Determines AI Snappiness</div>
         <div class="blog-row-desc">Users do not care about total throughput. They care about how fast the first word appears. Here is the engineering guide to measuring and optimizing Time to First Token (TTFT) in production.</div>
         <div class="blog-row-meta">
           <span class="read-time">3 min read</span>
@@ -288,6 +333,7 @@
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -297,9 +343,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

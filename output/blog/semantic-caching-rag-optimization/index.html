@@ -19,14 +19,14 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semantic Caching: the Rag Optimization Nobody Talks About | Ninad Pathak</title>
+  <title>Semantic Caching: The RAG Optimization Nobody Talks About | Ninad Pathak</title>
   <meta name="description" content="Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="Semantic Caching: the Rag Optimization Nobody Talks About">
+  <meta property="og:title"       content="Semantic Caching: The RAG Optimization Nobody Talks About">
   <meta property="og:description" content="Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/semantic-caching-rag-optimization/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
@@ -73,12 +73,17 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Semantic Caching: the Rag Optimization Nobody Talks About",
-  "description": "Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.",
+  "headline": "Semantic Caching: The RAG Optimization Nobody Talks About",
+  "description": "Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here\u0027s how the mechanism works and where it fails.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1892,
+  "keywords": "ai, rag, infrastructure, vector-search",
+  "articleSection": "ai",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-03-28",
   "dateModified": "2026-03-28",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/semantic-caching-rag-optimization/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What similarity threshold should I start with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start at 0.88 cosine similarity for FAQ or documentation workloads. Use confidence buffering: only serve hits above 0.90 even if your threshold is 0.88. Lower thresholds (0.82-0.85) work for domains where phrasing varies widely but intent is narrow. Never go below 0.80 without labeling a validation set and measuring false positive rates."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I use semantic caching with streaming responses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, but with a tradeoff. Streaming responses require storing the full response before you can cache it, which means the first request for any query receives no latency benefit regardless of future cache hits. Some systems cache a non-streaming version and serve it on hits even if the original was streamed. Whether that\u0027s acceptable depends on your UX."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do I handle cache invalidation when my knowledge base changes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use event-based invalidation tied to your document versioning system. When a document is updated, delete or expire all cached queries whose stored embeddings have high similarity to the document\u0027s topic embedding. For practical implementation, Redis LangCache supports namespace-level invalidation that lets you flush all entries in a domain partition at once."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Does semantic caching work with multi-turn conversation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rarely. Multi-turn prompts include conversation history, which makes them nearly unique on each turn. Cache hit rates for conversational workloads are typically 5-15%, making the overhead of embedding lookups per turn a net negative. Use semantic caching for single-turn, intent-driven queries instead."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What\u0027s the difference between GPTCache and Redis LangCache?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPTCache is an open-source Python library from Zilliz, designed to integrate directly into LLM application code. Redis LangCache is a managed service from Redis with embedding controls, LLM-as-a-judge validation, adaptive TTL policies, and built-in observability. GPTCache gives you more control and costs you more operational work. Redis LangCache is faster to operationalize and has better support for production features like domain partitioning and confidence buffering."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -116,7 +164,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Semantic Caching: the Rag Optimization Nobody Talks About",
+      "name": "Semantic Caching: The RAG Optimization Nobody Talks About",
       "item": "https://ninadpathak.com/blog/semantic-caching-rag-optimization/"
     }
   ]
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -183,7 +233,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">Semantic Caching: the Rag Optimization Nobody Talks About</li>
+      <li class="breadcrumb-item current" aria-current="page">Semantic Caching: The RAG Optimization Nobody Talks About</li>
     </ol>
   </div>
 </nav>
@@ -193,9 +243,13 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-03-28">Mar 28, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">9 min read</span>
       </div>
-      <h1 class="post-title">Semantic Caching: the Rag Optimization Nobody Talks About</h1>
+      <h1 class="post-title">Semantic Caching: The RAG Optimization Nobody Talks About</h1>
       <p class="lead">Semantic caching returns cached LLM responses for semantically similar queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism works and where it fails.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
@@ -308,17 +362,17 @@ GPTCache is an open-source Python library from Zilliz, designed to integrate dir
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="related-card">
-        <div class="related-card-date">2026-05-12</div>
-        <div class="related-card-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      <a href="/blog/agentic-workflow-playbook/" class="related-card">
+        <div class="related-card-date">2026-06-14</div>
+        <div class="related-card-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</div>
       </a>
-      <a href="/blog/llm-inference-optimization/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
       </a>
-      <a href="/blog/the-memory-hierarchy-why-rag-is-not-enough/" class="related-card">
-        <div class="related-card-date">2026-04-29</div>
-        <div class="related-card-title">The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</div>
+      <a href="/blog/mcp-server-setup-guide/" class="related-card">
+        <div class="related-card-date">2026-06-12</div>
+        <div class="related-card-title">Wiring Tools into Your Agent with MCP: A Practical Setup</div>
       </a>
     </div>
   </div>
@@ -391,6 +445,7 @@ GPTCache is an open-source Python library from Zilliz, designed to integrate dir
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -400,9 +455,9 @@ GPTCache is an open-source Python library from Zilliz, designed to integrate dir
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

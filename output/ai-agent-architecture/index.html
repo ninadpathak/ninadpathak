@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent Architecture: Patterns for Systems That Actually Ship | Ninad Pathak</title>
+  <meta name="description" content="The patterns, trade-offs, and failure modes behind production AI agents. From the agent loop and tool calls to multi-agent design and error handling.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="AI Agent Architecture: Patterns for Systems That Actually Ship">
+  <meta property="og:description" content="The patterns, trade-offs, and failure modes behind production AI agents. From the agent loop and tool calls to multi-agent design and error handling.">
+  <meta property="og:url"         content="https://ninadpathak.com/ai-agent-architecture/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/ai-agent-architecture/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "AI Agent Architecture: Patterns for Systems That Actually Ship",
+  "description": "The patterns, trade-offs, and failure modes behind production AI agents. From the agent loop and tool calls to multi-agent design and error handling.",
+  "url": "https://ninadpathak.com/ai-agent-architecture/",
+  "inLanguage": "en-US",
+  "isPartOf": { "@id": "https://ninadpathak.com/#website" },
+  "about": "AI Agent Architecture",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "url": "https://ninadpathak.com/blog/the-taxonomy-of-ai-agents/",
+        "name": "A Taxonomy of AI Agents That Actually Explains What You Are Building"
+      },      {
+        "@type": "ListItem",
+        "position": 2,
+        "url": "https://ninadpathak.com/blog/agent-vs-ai-assistant/",
+        "name": "When to Build an Agent and When to Build a Smarter Assistant"
+      },      {
+        "@type": "ListItem",
+        "position": 3,
+        "url": "https://ninadpathak.com/blog/agent-loop-anatomy/",
+        "name": "The Anatomy of an Agent Loop: Perceive, Think, Act, Remember"
+      },      {
+        "@type": "ListItem",
+        "position": 4,
+        "url": "https://ninadpathak.com/blog/the-agent-design-space/",
+        "name": "The Agent Design Space: A Map of What Engineers Are Actually Building"
+      },      {
+        "@type": "ListItem",
+        "position": 5,
+        "url": "https://ninadpathak.com/blog/multi-agent-vs-single-agent-tradeoffs/",
+        "name": "Multi-Agent vs Single-Agent Systems: The Real Trade-offs"
+      },      {
+        "@type": "ListItem",
+        "position": 6,
+        "url": "https://ninadpathak.com/blog/shared-vs-isolated-memory-multi-agent/",
+        "name": "Shared Memory vs Isolated Memory in Multi-Agent Workflows"
+      },      {
+        "@type": "ListItem",
+        "position": 7,
+        "url": "https://ninadpathak.com/blog/model-context-protocol-explained/",
+        "name": "The Model Context Protocol (MCP) Explained: A Universal Language for AI Tools"
+      },      {
+        "@type": "ListItem",
+        "position": 8,
+        "url": "https://ninadpathak.com/blog/agent-harnesses/",
+        "name": "Agent Harnesses: the Infrastructure Layer Your Llm Agent Actually Needs"
+      },      {
+        "@type": "ListItem",
+        "position": 9,
+        "url": "https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/",
+        "name": "Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each"
+      },      {
+        "@type": "ListItem",
+        "position": 10,
+        "url": "https://ninadpathak.com/blog/why-ai-agents-keep-failing-in-production/",
+        "name": "Why AI Agents Keep Failing in Production and What the Field Is Doing About It"
+      },      {
+        "@type": "ListItem",
+        "position": 11,
+        "url": "https://ninadpathak.com/blog/production-ai-agent-errors/",
+        "name": "What Nobody Tells You About Error Handling in Production AI Agents"
+      },      {
+        "@type": "ListItem",
+        "position": 12,
+        "url": "https://ninadpathak.com/blog/memory-attribution-errors/",
+        "name": "Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures"
+      },      {
+        "@type": "ListItem",
+        "position": 13,
+        "url": "https://ninadpathak.com/blog/agentic-cli-benchmarks/",
+        "name": "Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomous Repository Refactoring"
+      }    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ninadpathak.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Topics", "item": "https://ninadpathak.com/topics/" },
+    { "@type": "ListItem", "position": 3, "name": "AI Agent Architecture", "item": "https://ninadpathak.com/ai-agent-architecture/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is an agent loop?",
+      "acceptedAnswer": { "@type": "Answer", "text": "An agent loop is the repeating cycle an agent runs: perceive the current state, decide the next step, act with a tool, and record the result. The loop continues until the task is complete or a stop condition fires. Almost all agent behavior is explained by how this loop is structured." }
+    },    {
+      "@type": "Question",
+      "name": "When should I use multiple agents instead of one?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Reach for multiple agents when the work splits into clearly separate roles that each need their own context and tools. The cost is coordination, latency, and new failure modes. For most tasks a single well-instrumented agent is simpler and more reliable." }
+    },    {
+      "@type": "Question",
+      "name": "Why do AI agents fail in production?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The common causes are brittle tool schemas, missing error handling, context that grows until it poisons reasoning, and no observability into what the agent did. The production-errors and why-agents-fail posts cover each pattern and the fixes." }
+    },    {
+      "@type": "Question",
+      "name": "What is the Model Context Protocol (MCP)?",
+      "acceptedAnswer": { "@type": "Answer", "text": "MCP is a standard for connecting AI models to external tools and data sources through a common interface. It lets you wire the same tool into many agents without rewriting integrations each time." }
+    }  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link ">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link active">Topics</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/topics/">Topics</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">AI Agent Architecture</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Topic</div>
+    <h1>AI Agent Architecture</h1>
+    <p class="lead">The patterns, trade-offs, and failure modes behind production AI agents. From the agent loop and tool calls to multi-agent design and error handling.</p>
+    <div class="pillar-intro"><p>An agent is a loop. It perceives, decides, acts, and remembers, then does it again
+until the work is done or it gives up. Everything hard about agents lives in how you
+wire that loop and what you do when a step fails.</p>
+<p>I have spent two years watching agents break in production and mapping the design
+space across real deployments. The posts here cover the anatomy of the loop, the
+choice between one agent and many, the harness that holds it together, and the errors
+nobody warns you about.</p></div>
+  </div>
+</section>
+
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Foundations</h2>
+    <p class="pillar-section-blurb">What an agent is, how the loop runs, and the shape of the design space.</p>
+    <a href="/blog/the-taxonomy-of-ai-agents/" class="blog-row">
+      <div class="blog-row-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+      <div class="blog-row-desc">Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">architecture</span>
+      </div>
+    </a>
+    <a href="/blog/agent-vs-ai-assistant/" class="blog-row">
+      <div class="blog-row-title">When to Build an Agent and When to Build a Smarter Assistant</div>
+      <div class="blog-row-desc">The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">5 min read</span>
+        <span class="tag">ai agents</span>
+        <span class="tag">ai architecture</span>
+        <span class="tag">agent design</span>
+      </div>
+    </a>
+    <a href="/blog/agent-loop-anatomy/" class="blog-row">
+      <div class="blog-row-title">The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</div>
+      <div class="blog-row-desc">The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">7 min read</span>
+        <span class="tag">ai agents</span>
+        <span class="tag">agent architecture</span>
+        <span class="tag">loop design</span>
+      </div>
+    </a>
+    <a href="/blog/the-agent-design-space/" class="blog-row">
+      <div class="blog-row-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
+      <div class="blog-row-desc">After surveying production agents across industries, the design space clusters into patterns. Here is what I found.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">7 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">architecture</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Single vs multi-agent</h2>
+    <p class="pillar-section-blurb">When more agents help and what the coordination costs you.</p>
+    <a href="/blog/multi-agent-vs-single-agent-tradeoffs/" class="blog-row">
+      <div class="blog-row-title">Multi-Agent vs Single-Agent Systems: The Real Trade-offs</div>
+      <div class="blog-row-desc">The decision between one agent and many is not about capability. It is about failure modes, latency, and operational complexity.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">5 min read</span>
+        <span class="tag">ai agents</span>
+        <span class="tag">multi-agent systems</span>
+        <span class="tag">agent architecture</span>
+      </div>
+    </a>
+    <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="blog-row">
+      <div class="blog-row-title">Shared Memory vs Isolated Memory in Multi-Agent Workflows</div>
+      <div class="blog-row-desc">How to choose between shared and isolated memory architectures for multi-agent systems, with trade-offs from production deployments.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">7 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">multi-agent</span>
+        <span class="tag">agent-memory</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Tools and infrastructure</h2>
+    <p class="pillar-section-blurb">The plumbing that lets an agent act reliably on the world.</p>
+    <a href="/blog/model-context-protocol-explained/" class="blog-row">
+      <div class="blog-row-title">The Model Context Protocol (MCP) Explained: A Universal Language for AI Tools</div>
+      <div class="blog-row-desc">Model Context Protocol (MCP) is the new standard for connecting AI models to data sources and tools. Here is why it matters, how it works, and why it is the missing link for agentic infrastructure.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">4 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </a>
+    <a href="/blog/agent-harnesses/" class="blog-row">
+      <div class="blog-row-title">Agent Harnesses: the Infrastructure Layer Your Llm Agent Actually Needs</div>
+      <div class="blog-row-desc">Every production AI agent needs a harness. Here is what one contains, why frameworks often are not enough, and how to build the layer that actually determines reliability.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">10 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </a>
+    <a href="/blog/structured-outputs-llms-json-mode-function-calling/" class="blog-row">
+      <div class="blog-row-title">Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each</div>
+      <div class="blog-row-desc">JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Reliability in production</h2>
+    <p class="pillar-section-blurb">The failure modes that break real deployments and how to handle them.</p>
+    <a href="/blog/why-ai-agents-keep-failing-in-production/" class="blog-row">
+      <div class="blog-row-title">Why AI Agents Keep Failing in Production and What the Field Is Doing About It</div>
+      <div class="blog-row-desc">I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">4 min read</span>
+        <span class="tag">ai agents</span>
+        <span class="tag">production</span>
+        <span class="tag">reliability</span>
+      </div>
+    </a>
+    <a href="/blog/production-ai-agent-errors/" class="blog-row">
+      <div class="blog-row-title">What Nobody Tells You About Error Handling in Production AI Agents</div>
+      <div class="blog-row-desc">Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">devtools</span>
+        <span class="tag">backend</span>
+      </div>
+    </a>
+    <a href="/blog/memory-attribution-errors/" class="blog-row">
+      <div class="blog-row-title">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</div>
+      <div class="blog-row-desc">Memory attribution failures cause AI agents to act on outdated or misassigned context. Here is what I found examining the failure patterns.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">agent-memory</span>
+        <span class="tag">production-errors</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Benchmarks</h2>
+    <p class="pillar-section-blurb">Head-to-head data on agents doing real work.</p>
+    <a href="/blog/agentic-cli-benchmarks/" class="blog-row">
+      <div class="blog-row-title">Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomous Repository Refactoring</div>
+      <div class="blog-row-desc">I ran a head-to-head benchmark of Claude Code and Gemini CLI on an M2 Air (16GB), testing their ability to autonomously refactor legacy code and resolve race conditions.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">agentic-cli</span>
+        <span class="tag">benchmarking</span>
+        <span class="tag">developer-productivity</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <h2>Frequently asked questions</h2>
+    <div class="pillar-faq post-content">
+      <h3>What is an agent loop?</h3>
+      <p>An agent loop is the repeating cycle an agent runs: perceive the current state, decide the next step, act with a tool, and record the result. The loop continues until the task is complete or a stop condition fires. Almost all agent behavior is explained by how this loop is structured.</p>
+      <h3>When should I use multiple agents instead of one?</h3>
+      <p>Reach for multiple agents when the work splits into clearly separate roles that each need their own context and tools. The cost is coordination, latency, and new failure modes. For most tasks a single well-instrumented agent is simpler and more reliable.</p>
+      <h3>Why do AI agents fail in production?</h3>
+      <p>The common causes are brittle tool schemas, missing error handling, context that grows until it poisons reasoning, and no observability into what the agent did. The production-errors and why-agents-fail posts cover each pattern and the fixes.</p>
+      <h3>What is the Model Context Protocol (MCP)?</h3>
+      <p>MCP is a standard for connecting AI models to external tools and data sources through a common interface. It lets you wire the same tool into many agents without rewriting integrations each time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Related topics</h2>
+    <div class="related-grid">
+      <a href="/ai-agent-memory/" class="related-card">
+        <div class="related-card-title">AI Agent Memory</div>
+<div class="related-card-date">How agents remember</div>      </a>
+      <a href="/ai-workflows/" class="related-card">
+        <div class="related-card-title">AI Workflows & Automation</div>
+<div class="related-card-date">Agents doing real work</div>      </a>
+      <a href="/rag/" class="related-card">
+        <div class="related-card-title">RAG & Retrieval</div>
+<div class="related-card-date">Feeding agents the right context</div>      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer who gets this?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

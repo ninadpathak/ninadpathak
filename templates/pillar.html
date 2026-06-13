@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}{{ pillar.title }} | Ninad Pathak{% endblock %}
+{% block description %}{{ pillar.description }}{% endblock %}
+{% block canonical %}/{{ pillar.slug }}/{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ pillar.title }}{% endblock %}
+{% block og_description %}{{ pillar.description }}{% endblock %}
+{% block og_url %}/{{ pillar.slug }}/{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ pillar.title | tojson }},
+  "description": {{ pillar.description | tojson }},
+  "url": "{{ site.url }}/{{ pillar.slug }}/",
+  "inLanguage": "en-US",
+  "isPartOf": { "@id": "{{ site.url }}/#website" },
+  "about": {{ pillar.h1 | tojson }},
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+{% for p in pillar.all_posts %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "url": "{{ site.url }}{{ p.url }}",
+        "name": {{ p.title | tojson }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Topics", "item": "{{ site.url }}/topics/" },
+    { "@type": "ListItem", "position": 3, "name": {{ pillar.h1 | tojson }}, "item": "{{ site.url }}/{{ pillar.slug }}/" }
+  ]
+}
+</script>
+{% if pillar.faqs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+{% for faq in pillar.faqs %}
+    {
+      "@type": "Question",
+      "name": {{ faq.q | tojson }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ faq.a | tojson }} }
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/topics/">Topics</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">{{ pillar.h1 }}</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Topic</div>
+    <h1>{{ pillar.h1 }}</h1>
+    <p class="lead">{{ pillar.description }}</p>
+    {% if pillar.intro_html %}
+    <div class="pillar-intro">{{ pillar.intro_html }}</div>
+    {% endif %}
+  </div>
+</section>
+
+{% for section in pillar.resolved_sections %}
+{% if section.posts %}
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">{{ section.heading }}</h2>
+    {% if section.blurb %}
+    <p class="pillar-section-blurb">{{ section.blurb }}</p>
+    {% endif %}
+    {% for p in section.posts %}
+    <a href="{{ p.url }}" class="blog-row">
+      <div class="blog-row-title">{{ p.title }}</div>
+      {% if p.description %}
+      <div class="blog-row-desc">{{ p.description }}</div>
+      {% endif %}
+      <div class="blog-row-meta">
+        <span class="read-time">{{ p.reading_time }} min read</span>
+        {% for tag in p.tags[:3] %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endfor %}
+
+{% if pillar.faqs %}
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <h2>Frequently asked questions</h2>
+    <div class="pillar-faq post-content">
+      {% for faq in pillar.faqs %}
+      <h3>{{ faq.q }}</h3>
+      <p>{{ faq.a }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if pillar.bridges %}
+<section class="blog-list-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Related topics</h2>
+    <div class="related-grid">
+      {% for b in pillar.bridges %}
+      <a href="{{ b.url }}" class="related-card">
+        <div class="related-card-title">{{ b.title }}</div>
+        {% if b.blurb %}<div class="related-card-date">{{ b.blurb }}</div>{% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer who gets this?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

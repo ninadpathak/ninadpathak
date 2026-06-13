@@ -1,0 +1,80 @@
+slug: ai-agent-memory
+status: published
+title: "AI Agent Memory: A Practical Guide to Persistence, Recall, and Forgetting"
+h1: "AI Agent Memory"
+description: "How production AI agents store, retrieve, and forget information. A practitioner's guide to memory architecture, from context windows to episodic recall, backed by benchmarks."
+intro: |
+  A context window is not memory. An agent that re-reads its entire history on every
+  turn pays for recall it does not get, and it still forgets what happened last Tuesday.
+  Real agent memory is a system with layers, eviction policies, and retrieval that
+  behaves differently from plain document search.
+
+  I have built memory into customer-support agents, profiled where it breaks, and read
+  the architectures behind Claude Code, DeerFlow, and HyperAgents. The posts below trace
+  the whole stack, from what memory even means for an agent to the failure modes that
+  take down a deployment. Start with the fundamentals, then follow the thread into
+  retrieval, persistence, and the state of the field in 2026.
+
+sections:
+  - heading: "Fundamentals"
+    blurb: "What agent memory is, the types that matter, and why a bigger context window does not solve it."
+    posts:
+      - ai-memory-management-for-llms
+      - short-term-memory-for-ai-agents
+      - context-windows-vs-memory
+      - episodic-vs-semantic-vs-working-memory-agents
+      - memory-hierarchy-in-ai-systems
+  - heading: "Memory vs retrieval"
+    blurb: "Where RAG stops being enough and how memory retrieval differs from document search."
+    posts:
+      - the-memory-hierarchy-why-rag-is-not-enough
+      - rag-vs-memory
+      - asymmetric-retrieval-agent-memory
+      - fine-tuning-vs-rag-for-agent-memory
+      - contextual-compression-for-agent-memory
+  - heading: "Persistence and state"
+    blurb: "Keeping memory alive across sessions, audits, and multiple agents."
+    posts:
+      - memory-serialization-between-sessions
+      - memory-versioning-and-audit-trails
+      - why-coding-agents-lose-their-memory
+      - shared-vs-isolated-memory-multi-agent
+      - memory-attribution-errors
+  - heading: "Applied and specialized"
+    blurb: "Memory under real constraints, from real-time voice to customer support."
+    posts:
+      - memory-for-voice-ai-agents
+      - agent-memory-for-customer-support
+  - heading: "How real systems do it"
+    blurb: "Teardowns of the memory architecture inside shipping agent frameworks."
+    posts:
+      - how-memory-works-in-claude-code
+      - how-memory-works-in-deerflow
+      - how-memory-works-in-hyperagents
+  - heading: "Benchmarks and state of the field"
+    blurb: "What the data shows and where the ecosystem is heading."
+    posts:
+      - beam-memory-benchmark
+      - state-of-ai-agent-memory-2026
+      - state-of-open-source-memory-2026
+
+faqs:
+  - q: "What is the difference between an agent's memory and its context window?"
+    a: "A context window is the text an agent can read in a single call. Memory is the system that decides what to put in that window, what to store outside it, and how to bring the right facts back later. A large window helps, but on its own it forgets everything between sessions and pays full price to re-read history every turn."
+  - q: "Is RAG enough for agent memory?"
+    a: "No. RAG retrieves documents well, but agent memory also needs episodic recall of past actions, working state for the current task, and the ability to update facts over time. Document retrieval handles one slice of that. The memory-hierarchy posts cover where it stops being enough."
+  - q: "Why do AI agents forget things between sessions?"
+    a: "Agents usually hold state only in the context window, so a restart wipes it. Persistence requires serializing memory to storage and reloading it on the next session. The serialization and coding-agent posts walk through the patterns that survive a restart."
+  - q: "What are the main types of AI agent memory?"
+    a: "Working memory for the current task, episodic memory for past events and actions, and semantic memory for durable facts. Production agents need all three, and most memory bugs come from mixing them up."
+
+bridges:
+  - title: "RAG & Retrieval"
+    url: "/rag/"
+    blurb: "How retrieval pipelines actually work"
+  - title: "AI Agent Architecture"
+    url: "/ai-agent-architecture/"
+    blurb: "The systems memory plugs into"
+  - title: "AI Workflows & Automation"
+    url: "/ai-workflows/"
+    blurb: "Putting agents to work"

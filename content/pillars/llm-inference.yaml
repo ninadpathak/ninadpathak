@@ -1,0 +1,64 @@
+slug: llm-inference
+status: published
+title: "LLM Inference, Cost, and Internals: The Engineering Behind Fast, Cheap Models"
+h1: "LLM Inference & Cost"
+description: "How LLMs actually run, and how to make them faster and cheaper. Context windows, token budgets, prompt caching, speculative decoding, TTFT, and KV-cache internals, all benchmarked."
+intro: |
+  Every LLM feature comes down to tokens moving through memory. Latency, cost, and
+  quality are all downstream of how many tokens you send, how the model caches them, and
+  how fast the first one comes back.
+
+  I benchmark this on a MacBook Air M2 with real workloads and real pricing. The posts
+  below explain the internals that drive your bill, then show the levers that cut it,
+  from prompt caching to speculative decoding.
+
+sections:
+  - heading: "Context and tokens"
+    blurb: "What you are actually paying for, and why bigger windows do not fix everything."
+    posts:
+      - llm-context-windows-explained
+      - context-windows-vs-memory
+      - token-counting-isnt-optional-a-practical-guide-to-llm-cost-control
+      - llm-token-budgets-cost-control
+  - heading: "Speed and cost levers"
+    blurb: "The techniques that cut latency and spend without changing the output."
+    posts:
+      - prompt-caching-what-it-is-and-when-the-math-works
+      - speculative-decoding-explained
+      - time-to-first-token-ttft
+      - llm-inference-optimization
+  - heading: "Internals"
+    blurb: "What happens inside the model and the cache while it runs."
+    posts:
+      - kv-cache-eviction-accuracy
+      - mixture-of-experts-explained
+  - heading: "Model selection and reasoning"
+    blurb: "Choosing the right model and testing whether it can actually reason."
+    posts:
+      - best-llms-for-coding
+      - lambda-calculus-ai-reasoning-benchmark
+  - heading: "Latency benchmarks"
+    blurb: "Profiling the full chain on real-time workloads."
+    posts:
+      - voice-ai-latency-gemini-benchmark
+
+faqs:
+  - q: "What is time to first token (TTFT)?"
+    a: "TTFT is how long a model takes to produce its first output token after a request. It is the latency users actually feel, because it controls how fast a response starts streaming. The TTFT post breaks down the chain that determines it."
+  - q: "How does prompt caching reduce cost?"
+    a: "Prompt caching stores the processed form of a repeated prefix so the model skips recomputing it. When a large system prompt or document is reused across calls, caching can cut both cost and latency sharply. The prompt-caching post shows when the math works."
+  - q: "Why does context in the middle of a long window get ignored?"
+    a: "Models attend unevenly across a long context and tend to lose facts placed in the middle. A larger window does not fix this on its own. The context-windows and BEAM benchmark posts show the measured drop."
+  - q: "What is speculative decoding?"
+    a: "Speculative decoding uses a small fast model to draft several tokens that a larger model then verifies in one pass. It speeds up generation without changing the output, because the large model still has the final say."
+
+bridges:
+  - title: "RAG & Retrieval"
+    url: "/rag/"
+    blurb: "Every retrieved token has a cost"
+  - title: "AI Agent Memory"
+    url: "/ai-agent-memory/"
+    blurb: "Memory is a token-budget problem"
+  - title: "AI Workflows & Automation"
+    url: "/ai-workflows/"
+    blurb: "Picking models for real work"

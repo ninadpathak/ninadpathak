@@ -75,10 +75,23 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "{{ site.url }}/#person",
     "name": "Ninad Pathak",
     "url": "{{ site.url }}",
     "jobTitle": "Technical Content Writer",
     "description": "{{ site.description }}",
+    "knowsAbout": [
+      "Technical Writing",
+      "Developer Documentation",
+      "AI Agents",
+      "Agentic Workflows",
+      "AI Agent Memory",
+      "Retrieval-Augmented Generation (RAG)",
+      "Large Language Models",
+      "LLM Inference Optimization",
+      "Workflow Automation",
+      "DevTools Content Strategy"
+    ],
     "sameAs": [
       "https://linkedin.com/in/ninadwites/",
       "https://twitter.com/ninadwrites"
@@ -99,6 +112,7 @@
       <li><a href="/portfolio/" class="nav-link {% if current_page == 'portfolio' %}active{% endif %}">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link {% if current_page == 'projects' %}active{% endif %}">Projects</a></li>
       <li><a href="/blog/"      class="nav-link {% if current_page == 'blog' %}active{% endif %}">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link {% if current_page == 'topics' %}active{% endif %}">Topics</a></li>
       <li><a href="/about/"     class="nav-link {% if current_page == 'about' %}active{% endif %}">About</a></li>
     </ul>
 
@@ -128,6 +142,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -178,6 +193,7 @@
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent Memory: A Practical Guide to Persistence, Recall, and Forgetting | Ninad Pathak</title>
+  <meta name="description" content="How production AI agents store, retrieve, and forget information. A practitioner's guide to memory architecture, from context windows to episodic recall, backed by benchmarks.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="AI Agent Memory: A Practical Guide to Persistence, Recall, and Forgetting">
+  <meta property="og:description" content="How production AI agents store, retrieve, and forget information. A practitioner's guide to memory architecture, from context windows to episodic recall, backed by benchmarks.">
+  <meta property="og:url"         content="https://ninadpathak.com/ai-agent-memory/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/ai-agent-memory/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "AI Agent Memory: A Practical Guide to Persistence, Recall, and Forgetting",
+  "description": "How production AI agents store, retrieve, and forget information. A practitioner\u0027s guide to memory architecture, from context windows to episodic recall, backed by benchmarks.",
+  "url": "https://ninadpathak.com/ai-agent-memory/",
+  "inLanguage": "en-US",
+  "isPartOf": { "@id": "https://ninadpathak.com/#website" },
+  "about": "AI Agent Memory",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "url": "https://ninadpathak.com/blog/ai-memory-management-for-llms/",
+        "name": "AI Memory Management for LLMs: What Actually Works"
+      },      {
+        "@type": "ListItem",
+        "position": 2,
+        "url": "https://ninadpathak.com/blog/short-term-memory-for-ai-agents/",
+        "name": "Short-Term Memory for AI Agents: A Practical Guide"
+      },      {
+        "@type": "ListItem",
+        "position": 3,
+        "url": "https://ninadpathak.com/blog/context-windows-vs-memory/",
+        "name": "Context Windows vs Memory: Why They Are Not the Same Thing"
+      },      {
+        "@type": "ListItem",
+        "position": 4,
+        "url": "https://ninadpathak.com/blog/episodic-vs-semantic-vs-working-memory-agents/",
+        "name": "Episodic, Semantic, and Working Memory in AI Agents: A Practical Map"
+      },      {
+        "@type": "ListItem",
+        "position": 5,
+        "url": "https://ninadpathak.com/blog/memory-hierarchy-in-ai-systems/",
+        "name": "Memory Hierarchy in AI Systems: From Sensory to Semantic"
+      },      {
+        "@type": "ListItem",
+        "position": 6,
+        "url": "https://ninadpathak.com/blog/the-memory-hierarchy-why-rag-is-not-enough/",
+        "name": "The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory"
+      },      {
+        "@type": "ListItem",
+        "position": 7,
+        "url": "https://ninadpathak.com/blog/rag-vs-memory/",
+        "name": "RAG vs Memory: What AI Developers Need to Know"
+      },      {
+        "@type": "ListItem",
+        "position": 8,
+        "url": "https://ninadpathak.com/blog/asymmetric-retrieval-agent-memory/",
+        "name": "Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline"
+      },      {
+        "@type": "ListItem",
+        "position": 9,
+        "url": "https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/",
+        "name": "Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense"
+      },      {
+        "@type": "ListItem",
+        "position": 10,
+        "url": "https://ninadpathak.com/blog/contextual-compression-for-agent-memory/",
+        "name": "Contextual Compression for Agent Memory: What Stays and What Goes"
+      },      {
+        "@type": "ListItem",
+        "position": 11,
+        "url": "https://ninadpathak.com/blog/memory-serialization-between-sessions/",
+        "name": "Memory Serialization: How Agents Persist State Across Sessions"
+      },      {
+        "@type": "ListItem",
+        "position": 12,
+        "url": "https://ninadpathak.com/blog/memory-versioning-and-audit-trails/",
+        "name": "Memory Versioning and Audit Trails for Regulated AI Agents"
+      },      {
+        "@type": "ListItem",
+        "position": 13,
+        "url": "https://ninadpathak.com/blog/why-coding-agents-lose-their-memory/",
+        "name": "Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants"
+      },      {
+        "@type": "ListItem",
+        "position": 14,
+        "url": "https://ninadpathak.com/blog/shared-vs-isolated-memory-multi-agent/",
+        "name": "Shared Memory vs Isolated Memory in Multi-Agent Workflows"
+      },      {
+        "@type": "ListItem",
+        "position": 15,
+        "url": "https://ninadpathak.com/blog/memory-attribution-errors/",
+        "name": "Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures"
+      },      {
+        "@type": "ListItem",
+        "position": 16,
+        "url": "https://ninadpathak.com/blog/memory-for-voice-ai-agents/",
+        "name": "Memory for Voice AI Agents: What Text Chatbots Cannot Do"
+      },      {
+        "@type": "ListItem",
+        "position": 17,
+        "url": "https://ninadpathak.com/blog/agent-memory-for-customer-support/",
+        "name": "Building a Customer Support Agent with Persistent Memory: A Worked Example"
+      },      {
+        "@type": "ListItem",
+        "position": 18,
+        "url": "https://ninadpathak.com/blog/how-memory-works-in-claude-code/",
+        "name": "How Memory Works in Claude Code"
+      },      {
+        "@type": "ListItem",
+        "position": 19,
+        "url": "https://ninadpathak.com/blog/how-memory-works-in-deerflow/",
+        "name": "How Memory Works in DeerFlow"
+      },      {
+        "@type": "ListItem",
+        "position": 20,
+        "url": "https://ninadpathak.com/blog/how-memory-works-in-hyperagents/",
+        "name": "How Memory Works in HyperAgents"
+      },      {
+        "@type": "ListItem",
+        "position": 21,
+        "url": "https://ninadpathak.com/blog/beam-memory-benchmark/",
+        "name": "The BEAM Memory Benchmark: Why 1M Context Windows Are Not Enough"
+      },      {
+        "@type": "ListItem",
+        "position": 22,
+        "url": "https://ninadpathak.com/blog/state-of-ai-agent-memory-2026/",
+        "name": "State of AI Agent Memory in 2026"
+      },      {
+        "@type": "ListItem",
+        "position": 23,
+        "url": "https://ninadpathak.com/blog/state-of-open-source-memory-2026/",
+        "name": "The State of Open Source AI Memory in 2026: Beyond the Context Window Myth"
+      }    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ninadpathak.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Topics", "item": "https://ninadpathak.com/topics/" },
+    { "@type": "ListItem", "position": 3, "name": "AI Agent Memory", "item": "https://ninadpathak.com/ai-agent-memory/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between an agent\u0027s memory and its context window?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A context window is the text an agent can read in a single call. Memory is the system that decides what to put in that window, what to store outside it, and how to bring the right facts back later. A large window helps, but on its own it forgets everything between sessions and pays full price to re-read history every turn." }
+    },    {
+      "@type": "Question",
+      "name": "Is RAG enough for agent memory?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. RAG retrieves documents well, but agent memory also needs episodic recall of past actions, working state for the current task, and the ability to update facts over time. Document retrieval handles one slice of that. The memory-hierarchy posts cover where it stops being enough." }
+    },    {
+      "@type": "Question",
+      "name": "Why do AI agents forget things between sessions?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Agents usually hold state only in the context window, so a restart wipes it. Persistence requires serializing memory to storage and reloading it on the next session. The serialization and coding-agent posts walk through the patterns that survive a restart." }
+    },    {
+      "@type": "Question",
+      "name": "What are the main types of AI agent memory?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Working memory for the current task, episodic memory for past events and actions, and semantic memory for durable facts. Production agents need all three, and most memory bugs come from mixing them up." }
+    }  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link ">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link active">Topics</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/topics/">Topics</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">AI Agent Memory</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Topic</div>
+    <h1>AI Agent Memory</h1>
+    <p class="lead">How production AI agents store, retrieve, and forget information. A practitioner's guide to memory architecture, from context windows to episodic recall, backed by benchmarks.</p>
+    <div class="pillar-intro"><p>A context window is not memory. An agent that re-reads its entire history on every
+turn pays for recall it does not get, and it still forgets what happened last Tuesday.
+Real agent memory is a system with layers, eviction policies, and retrieval that
+behaves differently from plain document search.</p>
+<p>I have built memory into customer-support agents, profiled where it breaks, and read
+the architectures behind Claude Code, DeerFlow, and HyperAgents. The posts below trace
+the whole stack, from what memory even means for an agent to the failure modes that
+take down a deployment. Start with the fundamentals, then follow the thread into
+retrieval, persistence, and the state of the field in 2026.</p></div>
+  </div>
+</section>
+
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Fundamentals</h2>
+    <p class="pillar-section-blurb">What agent memory is, the types that matter, and why a bigger context window does not solve it.</p>
+    <a href="/blog/ai-memory-management-for-llms/" class="blog-row">
+      <div class="blog-row-title">AI Memory Management for LLMs: What Actually Works</div>
+      <div class="blog-row-desc">A senior engineer's breakdown of what memory management for LLMs actually looks like in production: eviction strategies, KV cache management, importance-weighted retention, and why your agent keeps forgetting things.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">15 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+    <a href="/blog/short-term-memory-for-ai-agents/" class="blog-row">
+      <div class="blog-row-title">Short-Term Memory for AI Agents: A Practical Guide</div>
+      <div class="blog-row-desc">Context windows are not memory. Here is what every production AI agent engineer needs to understand about token budgets, overflow handling, and how short-term and long-term memory actually work together.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">11 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+    <a href="/blog/context-windows-vs-memory/" class="blog-row">
+      <div class="blog-row-title">Context Windows vs Memory: Why They Are Not the Same Thing</div>
+      <div class="blog-row-desc">A 1M token context window is not memory. Treating it like one is how you build expensive systems that still forget what they were doing last Tuesday.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">17 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+    <a href="/blog/episodic-vs-semantic-vs-working-memory-agents/" class="blog-row">
+      <div class="blog-row-title">Episodic, Semantic, and Working Memory in AI Agents: A Practical Map</div>
+      <div class="blog-row-desc">AI agents juggle three distinct memory types. Getting them wrong is the source of most agent memory failures I see in production.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">agent-memory</span>
+        <span class="tag">llm-architecture</span>
+      </div>
+    </a>
+    <a href="/blog/memory-hierarchy-in-ai-systems/" class="blog-row">
+      <div class="blog-row-title">Memory Hierarchy in AI Systems: From Sensory to Semantic</div>
+      <div class="blog-row-desc">How layered memory architecture helps AI systems achieve long-term context, personalization, and continuous learning, and why flat memory fails.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">11 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Memory vs retrieval</h2>
+    <p class="pillar-section-blurb">Where RAG stops being enough and how memory retrieval differs from document search.</p>
+    <a href="/blog/the-memory-hierarchy-why-rag-is-not-enough/" class="blog-row">
+      <div class="blog-row-title">The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</div>
+      <div class="blog-row-desc">RAG handles document retrieval well. It handles agent memory poorly, because agents need episodic recall, working context, and cross-session persistence that a vector store cannot provide.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">agent-memory</span>
+        <span class="tag">rag</span>
+      </div>
+    </a>
+    <a href="/blog/rag-vs-memory/" class="blog-row">
+      <div class="blog-row-title">RAG vs Memory: What AI Developers Need to Know</div>
+      <div class="blog-row-desc">Understand the fundamental differences between RAG and memory systems for LLM applications, when to use each, and how to combine them in production.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">13 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">rag</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+    <a href="/blog/asymmetric-retrieval-agent-memory/" class="blog-row">
+      <div class="blog-row-title">Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</div>
+      <div class="blog-row-desc">The retrieval patterns that work for a query do not work when the agent is the one retrieving, and this asymmetry silently breaks production RAG systems.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">agent-memory</span>
+        <span class="tag">rag</span>
+      </div>
+    </a>
+    <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="blog-row">
+      <div class="blog-row-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      <div class="blog-row-desc">Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">8 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">rag</span>
+        <span class="tag">fine-tuning</span>
+      </div>
+    </a>
+    <a href="/blog/contextual-compression-for-agent-memory/" class="blog-row">
+      <div class="blog-row-title">Contextual Compression for Agent Memory: What Stays and What Goes</div>
+      <div class="blog-row-desc">How agents decide what to keep in memory when context space is finite, and the three compression strategies that actually work.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">7 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">agent-memory</span>
+        <span class="tag">context-windows</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Persistence and state</h2>
+    <p class="pillar-section-blurb">Keeping memory alive across sessions, audits, and multiple agents.</p>
+    <a href="/blog/memory-serialization-between-sessions/" class="blog-row">
+      <div class="blog-row-title">Memory Serialization: How Agents Persist State Across Sessions</div>
+      <div class="blog-row-desc">Why agents forget everything on restart, and the serialization patterns that actually solve it</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">agent-memory</span>
+        <span class="tag">agent-architecture</span>
+      </div>
+    </a>
+    <a href="/blog/memory-versioning-and-audit-trails/" class="blog-row">
+      <div class="blog-row-title">Memory Versioning and Audit Trails for Regulated AI Agents</div>
+      <div class="blog-row-desc">If your agent overwrites its memory, you cannot pass a compliance audit. How to build append-only memory versioning and trace agent reasoning.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">ai agents</span>
+        <span class="tag">agent-memory</span>
+        <span class="tag">compliance</span>
+      </div>
+    </a>
+    <a href="/blog/why-coding-agents-lose-their-memory/" class="blog-row">
+      <div class="blog-row-title">Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</div>
+      <div class="blog-row-desc">The memory persistence patterns that actually work for AI coding assistants, and why most agents lose context between sessions.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">8 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">coding</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+    <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="blog-row">
+      <div class="blog-row-title">Shared Memory vs Isolated Memory in Multi-Agent Workflows</div>
+      <div class="blog-row-desc">How to choose between shared and isolated memory architectures for multi-agent systems, with trade-offs from production deployments.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">7 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">multi-agent</span>
+        <span class="tag">agent-memory</span>
+      </div>
+    </a>
+    <a href="/blog/memory-attribution-errors/" class="blog-row">
+      <div class="blog-row-title">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</div>
+      <div class="blog-row-desc">Memory attribution failures cause AI agents to act on outdated or misassigned context. Here is what I found examining the failure patterns.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">agent-memory</span>
+        <span class="tag">production-errors</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Applied and specialized</h2>
+    <p class="pillar-section-blurb">Memory under real constraints, from real-time voice to customer support.</p>
+    <a href="/blog/memory-for-voice-ai-agents/" class="blog-row">
+      <div class="blog-row-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+      <div class="blog-row-desc">Voice AI agents live or die by how they manage memory across a real-time streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something different.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">17 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">voice</span>
+        <span class="tag">agents</span>
+      </div>
+    </a>
+    <a href="/blog/agent-memory-for-customer-support/" class="blog-row">
+      <div class="blog-row-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</div>
+      <div class="blog-row-desc">I built a customer support agent that actually remembers across sessions. Here is what I learned about memory architecture, serialization trade-offs, and the failure modes that will kill your deployment.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">10 min read</span>
+        <span class="tag">ai-agents</span>
+        <span class="tag">memory</span>
+        <span class="tag">customer-support</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">How real systems do it</h2>
+    <p class="pillar-section-blurb">Teardowns of the memory architecture inside shipping agent frameworks.</p>
+    <a href="/blog/how-memory-works-in-claude-code/" class="blog-row">
+      <div class="blog-row-title">How Memory Works in Claude Code</div>
+      <div class="blog-row-desc">A practical guide to understanding how Claude Code retains context across sessions, uses project files, and manages long-term memory for coding tasks.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">16 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">claude</span>
+        <span class="tag">agents</span>
+      </div>
+    </a>
+    <a href="/blog/how-memory-works-in-deerflow/" class="blog-row">
+      <div class="blog-row-title">How Memory Works in DeerFlow</div>
+      <div class="blog-row-desc">A deep dive into the memory architecture of DeerFlow: layered context passing, session state files, sub-agent isolation, and how it compares to Letta, AutoGen, and CrewAI.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">11 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+    <a href="/blog/how-memory-works-in-hyperagents/" class="blog-row">
+      <div class="blog-row-title">How Memory Works in HyperAgents</div>
+      <div class="blog-row-desc">A deep dive into how HyperAgents retain context across interactions, layer memory architectures, and handle session continuity in production.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">13 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Benchmarks and state of the field</h2>
+    <p class="pillar-section-blurb">What the data shows and where the ecosystem is heading.</p>
+    <a href="/blog/beam-memory-benchmark/" class="blog-row">
+      <div class="blog-row-title">The BEAM Memory Benchmark: Why 1M Context Windows Are Not Enough</div>
+      <div class="blog-row-desc">The BEAM benchmark reveals that LLMs fail catastrophically at retrieving facts from the middle of long contexts. Here is what the data actually shows, why it happens, and what matters for real deployments.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">11 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">llm</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+    <a href="/blog/state-of-ai-agent-memory-2026/" class="blog-row">
+      <div class="blog-row-title">State of AI Agent Memory in 2026</div>
+      <div class="blog-row-desc">The memory stack for AI agents has exploded into a fragmented mess of competing approaches. Here is what actually works, what is still research, and why the next 18 months will sort the winners from the wreckage.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">18 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">memory</span>
+      </div>
+    </a>
+    <a href="/blog/state-of-open-source-memory-2026/" class="blog-row">
+      <div class="blog-row-title">The State of Open Source AI Memory in 2026: Beyond the Context Window Myth</div>
+      <div class="blog-row-desc">AI architecture has reached a plateau in model reasoning. The next frontier of differentiation lives in stateful memory systems that solve identity fragmentation at production scale.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">8 min read</span>
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">infrastructure</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <h2>Frequently asked questions</h2>
+    <div class="pillar-faq post-content">
+      <h3>What is the difference between an agent's memory and its context window?</h3>
+      <p>A context window is the text an agent can read in a single call. Memory is the system that decides what to put in that window, what to store outside it, and how to bring the right facts back later. A large window helps, but on its own it forgets everything between sessions and pays full price to re-read history every turn.</p>
+      <h3>Is RAG enough for agent memory?</h3>
+      <p>No. RAG retrieves documents well, but agent memory also needs episodic recall of past actions, working state for the current task, and the ability to update facts over time. Document retrieval handles one slice of that. The memory-hierarchy posts cover where it stops being enough.</p>
+      <h3>Why do AI agents forget things between sessions?</h3>
+      <p>Agents usually hold state only in the context window, so a restart wipes it. Persistence requires serializing memory to storage and reloading it on the next session. The serialization and coding-agent posts walk through the patterns that survive a restart.</p>
+      <h3>What are the main types of AI agent memory?</h3>
+      <p>Working memory for the current task, episodic memory for past events and actions, and semantic memory for durable facts. Production agents need all three, and most memory bugs come from mixing them up.</p>
+    </div>
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Related topics</h2>
+    <div class="related-grid">
+      <a href="/rag/" class="related-card">
+        <div class="related-card-title">RAG & Retrieval</div>
+<div class="related-card-date">How retrieval pipelines actually work</div>      </a>
+      <a href="/ai-agent-architecture/" class="related-card">
+        <div class="related-card-title">AI Agent Architecture</div>
+<div class="related-card-date">The systems memory plugs into</div>      </a>
+      <a href="/ai-workflows/" class="related-card">
+        <div class="related-card-title">AI Workflows & Automation</div>
+<div class="related-card-date">Putting agents to work</div>      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer who gets this?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

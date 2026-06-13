@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Five-Stage Agentic Workflow</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:24px;}
+.flow{display:flex;align-items:stretch;gap:0;max-width:860px;width:100%;}
+.stage{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 6px;}
+.box{width:100%;box-sizing:border-box;border:1.5px solid var(--border);border-radius:6px;padding:16px 8px;background:var(--bg-1);transition:all .3s linear;}
+.box.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--bg-1));}
+.num{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--text-3);transition:color .3s linear;}
+.box.on .num{color:var(--accent);}
+.nm{font-size:13px;font-weight:700;margin-top:6px;color:var(--text-1);}
+.ds{font-family:var(--mono);font-size:8.5px;color:var(--text-3);line-height:1.45;margin-top:7px;}
+.owner{margin-top:10px;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);}
+.owner.human{color:var(--accent);}
+.arrow{display:flex;align-items:center;justify-content:center;width:22px;flex:0 0 auto;color:var(--text-3);font-family:var(--mono);font-size:14px;}
+.hd{position:absolute;top:18px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);}
+@media (max-width:600px){
+  .flow{flex-direction:column;gap:0;}
+  .arrow{width:100%;height:18px;transform:rotate(90deg);}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="flow" id="flow">
+    <div class="stage"><div class="box" data-i="0"><div class="num">01</div><div class="nm">Frame</div><div class="ds">define done, the acceptance check, the constraints</div><div class="owner human">human</div></div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="stage"><div class="box" data-i="1"><div class="num">02</div><div class="nm">Scope</div><div class="ds">cut to a diff you can review in one sitting</div><div class="owner human">human</div></div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="stage"><div class="box" data-i="2"><div class="num">03</div><div class="nm">Work</div><div class="ds">agent runs its loop against an instrumented harness</div><div class="owner">agent</div></div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="stage"><div class="box" data-i="3"><div class="num">04</div><div class="nm">Review</div><div class="ds">read the diff, not the summary</div><div class="owner human">human</div></div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="stage"><div class="box" data-i="4"><div class="num">05</div><div class="nm">Land</div><div class="ds">commit, push, open the PR from the frame</div><div class="owner">shared</div></div></div>
+  </div>
+</div>
+<script>
+const boxes = Array.from(document.querySelectorAll('.box'));
+let k = 0;
+function step(){
+  boxes.forEach(b=>b.classList.remove('on'));
+  boxes[k].classList.add('on');
+  k = (k + 1) % boxes.length;
+}
+step();
+setInterval(step, 1400);
+</script>
+</body>
+</html>

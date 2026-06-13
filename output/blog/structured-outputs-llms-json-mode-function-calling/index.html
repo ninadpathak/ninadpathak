@@ -19,14 +19,14 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Structured Outputs with Llms: Json Mode, Function Calling, and When to Use Each | Ninad Pathak</title>
+  <title>Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each | Ninad Pathak</title>
   <meta name="description" content="JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="Structured Outputs with Llms: Json Mode, Function Calling, and When to Use Each">
+  <meta property="og:title"       content="Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each">
   <meta property="og:description" content="JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
@@ -73,12 +73,17 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Structured Outputs with Llms: Json Mode, Function Calling, and When to Use Each",
-  "description": "JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.",
+  "headline": "Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each",
+  "description": "JSON mode, function calling, and structured outputs solve different problems. Here\u0027s when each one actually makes sense and what they cost you.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1858,
+  "keywords": "ai, llm, infrastructure",
+  "articleSection": "ai",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-03-27",
   "dateModified": "2026-03-27",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does structured outputs mode cost more per API call?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, in two ways. First, the schema is included as input tokens on every request (roughly 50 tokens for a simple schema, 500 for a complex one). Second, constrained decoding adds 10-30% to generation latency on complex schemas. The first call with a new schema also pays a preprocessing penalty for schema compilation, though OpenAI caches compiled schemas for reuse."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I use function calling and structured outputs together?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. OpenAI supports strict: true inside function definitions, which applies constrained decoding to tool call arguments. You get the conditional invocation pattern of function calling with the schema reliability of structured outputs on the argument payload."
+      }
+    },    {
+      "@type": "Question",
+      "name": "When should I use JSON mode at all in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only for rapid prototyping or systems where schema compliance is not critical. OpenAI now treats it as legacy. Any production pipeline handling data extraction, classification, or agent outputs should use structured outputs instead."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What happens when the model refuses inside structured outputs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The API returns a refusal in a dedicated field outside the schema rather than in the parsed object. Your code needs to check for parsed.refusal explicitly. A pipeline that only checks the schema-compliant object will silently swallow refusals."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Does Anthropic\u0027s structured outputs work differently from OpenAI\u0027s?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mechanically similar: both compile a JSON Schema into a constrained grammar at inference time. The integration details differ. Anthropic requires the beta header anthropic-beta: structured-outputs-2025-11-13 and currently supports Claude Sonnet 4.5 and Opus 4.1. Both providers support Pydantic and Zod for schema definition."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -116,7 +164,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Structured Outputs with Llms: Json Mode, Function Calling, and When to Use Each",
+      "name": "Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each",
       "item": "https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/"
     }
   ]
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -183,7 +233,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">Structured Outputs with Llms: Json Mode, Function Calling, and When to Use Each</li>
+      <li class="breadcrumb-item current" aria-current="page">Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each</li>
     </ol>
   </div>
 </nav>
@@ -193,9 +243,13 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-03-27">Mar 27, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">9 min read</span>
       </div>
-      <h1 class="post-title">Structured Outputs with Llms: Json Mode, Function Calling, and When to Use Each</h1>
+      <h1 class="post-title">Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each</h1>
       <p class="lead">JSON mode, function calling, and structured outputs solve different problems. Here's when each one actually makes sense and what they cost you.</p>
       <div class="post-tags">
         <span class="tag">ai</span>
@@ -295,17 +349,17 @@ Mechanically similar: both compile a JSON Schema into a constrained grammar at i
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/llm-inference-optimization/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
+      <a href="/blog/agentic-workflow-playbook/" class="related-card">
+        <div class="related-card-date">2026-06-14</div>
+        <div class="related-card-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</div>
       </a>
-      <a href="/blog/the-agent-design-space/" class="related-card">
-        <div class="related-card-date">2026-04-26</div>
-        <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
       </a>
-      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
-        <div class="related-card-date">2026-04-21</div>
-        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+      <a href="/blog/mcp-server-setup-guide/" class="related-card">
+        <div class="related-card-date">2026-06-12</div>
+        <div class="related-card-title">Wiring Tools into Your Agent with MCP: A Practical Setup</div>
       </a>
     </div>
   </div>
@@ -378,6 +432,7 @@ Mechanically similar: both compile a JSON Schema into a constrained grammar at i
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -387,9 +442,9 @@ Mechanically similar: both compile a JSON Schema into a constrained grammar at i
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

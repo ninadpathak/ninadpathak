@@ -75,10 +75,15 @@
   "@type": "TechArticle",
   "headline": "Memory Versioning and Audit Trails for Regulated AI Agents",
   "description": "If your agent overwrites its memory, you cannot pass a compliance audit. How to build append-only memory versioning and trace agent reasoning.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1234,
+  "keywords": "ai agents, agent-memory, compliance",
+  "articleSection": "ai agents",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-05-05",
   "dateModified": "2026-05-05",
@@ -94,6 +99,42 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/memory-versioning-and-audit-trails/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long should we keep historical memory versions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Treat them like application logs. For standard debugging, 30 to 90 days is usually sufficient. For regulated environments (finance, healthcare), you must tie the retention policy to your standard data compliance rules, which can mean 7 years. You must also implement hard-delete workflows for GDPR/CCPA compliance, which breaks the immutability rule by legal necessity."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Doesn\u0027t keeping every version increase hallucination risk?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if your retrieval pipeline is sloppy. If you fail to filter out deprecated memories (validto IS NOT NULL), the agent will pull contradictory facts into its context window and hallucinate trying to reconcile them. Strict metadata filtering is mandatory."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can we just use git for this?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is an emerging pattern called Git-ContextController where agent state is literally committed to a git repository as text files. It works beautifully for local, single-tenant agents because you get diffs, branches, and time-travel for free. It scales poorly for high-throughput, multi-tenant cloud agents because of locking and concurrency issues."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What about cryptographic signing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you need non-repudiation (proving to a third party that the logs were not tampered with), you can cryptographically sign each memory row. You hash the payload, the timestamp, and the hash of the previous row. This creates a blockchain-like structure. It is overkill for 99% of applications, but necessary if your agent is making autonomous financial trades."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +176,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +206,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +236,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-05-05">May 05, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">6 min read</span>
       </div>
       <h1 class="post-title">Memory Versioning and Audit Trails for Regulated AI Agents</h1>
@@ -378,6 +425,7 @@ If you need non-repudiation (proving to a third party that the logs were not tam
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -387,9 +435,9 @@ If you need non-repudiation (proving to a third party that the logs were not tam
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

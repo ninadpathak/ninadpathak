@@ -75,10 +75,15 @@
   "@type": "TechArticle",
   "headline": "Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache Eviction",
   "description": "VRAM is too expensive to waste on low-attention tokens. I benchmarked KV cache eviction strategies to treat LLM context like a managed heap, reaching 90% pruning with zero recall loss.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 3120,
+  "keywords": "llm, kv-cache, memory-optimization, benchmarking, transformers, engineering",
+  "articleSection": "llm",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-04-15",
   "dateModified": "2026-04-15",
@@ -94,6 +99,56 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/kv-cache-eviction-accuracy/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does KV pruning affect fine-tuned models differently?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Distributed attention patterns are more common in models fine-tuned for long-context tasks. Recall maintenance requires a larger Heavy Hitter budget for these models than standard base models."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Is H2O compatible with FlashAttention?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Compatibility is limited. Contiguous memory blocks are required for FlashAttention. Hardware efficiency maintenance requires periodic compaction or block-sparse kernels."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How many sinks are actually needed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Softmax stability maintenance only requires 4 tokens in my tests. Full numerical stability across all layers might require up to 32 tokens for architectures like GPT-4."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the Attention Pillar phenomenon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pillars are specific tokens that serve as anchors for the model\u0027s reasoning. Almost every subsequent token directs attention toward them. Core challenge of any importance-based eviction strategy is identifying and protecting these pillars."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I use this for RAG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. Physical VRAM limits are avoided by pruning the KV cache, allowing you to feed much larger document chunks into the LLM during the retrieval phase. Pruning also pairs well with prompt caching, which reuses the KV cache of a static prefix across requests."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Sources",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "H2O: Heavy-Hitter Oracle for Efficient Generative Inference - Foundational importance-based pruning paper. Efficient Streaming Language Models with Attention Sinks - Research on softmax stability and sinks. SnapKV: LLM Knows What You Are Looking For - Retrieval-focused KV compression. FlashAttention-2: Faster Attention with Better Parallelism - Technical specs for hardware-aware attention. vLLM: High-Throughput Serving with PagedAttention - Implementation of memory-managed LLM inference. Llama 3 Technical Report - Architecture details on context handling. Unified Memory Management on Apple Silicon - Hardware constraints for local benchmarks."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +190,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +220,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +250,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-04-15">Apr 15, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">16 min read</span>
       </div>
       <h1 class="post-title">Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache Eviction</h1>
@@ -633,6 +694,7 @@ Absolutely. Physical VRAM limits are avoided by pruning the KV cache, allowing y
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -642,9 +704,9 @@ Absolutely. Physical VRAM limits are avoided by pruning the KV cache, allowing y
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

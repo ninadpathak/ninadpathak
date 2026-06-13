@@ -9,7 +9,7 @@ tags:
 - rag
 - infrastructure
 - vector-search
-title: How Anthropic's Contextual Retrieval Changes Rag Architecture
+title: How Anthropic's Contextual Retrieval Changes RAG Architecture
 ---
 
 Anthropic took a chunk like `"The company's revenue grew by 3% over the previous quarter."`, asked Claude to explain that chunk using the full document, then prepended the explanation before indexing it. That one step cut top-20 retrieval failure by **49%** when Anthropic combined contextual embeddings with contextual BM25, according to [their writeup](https://www.anthropic.com/engineering/contextual-retrieval).

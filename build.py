@@ -75,6 +75,68 @@ def estimate_reading_time(content: str) -> int:
     return max(1, round(words / 200))
 
 
+def count_words(content: str) -> int:
+    return len(content.split())
+
+
+def _clean_inline_md(text: str) -> str:
+    """Strip inline markdown so a string is safe/clean for JSON-LD text fields."""
+    text = text.strip()
+    # links: [label](url) -> label
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    # bold/italic markers and inline code backticks
+    text = re.sub(r"(\*\*|__|\*|_|`)", "", text)
+    # collapse whitespace
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def extract_faqs(md_content: str) -> list[dict]:
+    """Pull Q&A pairs from a markdown FAQ section.
+
+    Recognises a section heading like '## FAQ' or '## Frequently Asked Questions'
+    and parses questions written either as '### Question' or as a bold-only line
+    '**Question?**', with the following paragraphs as the answer. Returns a list of
+    {"question", "answer"} dicts (empty if no FAQ section is present).
+    """
+    lines = md_content.splitlines()
+    start = None
+    for i, line in enumerate(lines):
+        if re.match(r"^##\s+(FAQ|Frequently\s+Asked\s+Questions?)\s*$", line.strip(), re.IGNORECASE):
+            start = i + 1
+            break
+    if start is None:
+        return []
+
+    faqs = []
+    question = None
+    answer_parts: list[str] = []
+
+    def flush():
+        if question and answer_parts:
+            faqs.append({
+                "question": _clean_inline_md(question),
+                "answer": _clean_inline_md(" ".join(answer_parts)),
+            })
+
+    for line in lines[start:]:
+        stripped = line.strip()
+        # End of the FAQ section: next h2 (that isn't another question)
+        if re.match(r"^##\s+", stripped) and not re.match(r"^##\s+(FAQ|Frequently)", stripped, re.IGNORECASE):
+            break
+        # Question forms
+        m_h3 = re.match(r"^###\s+(.*\S)\s*$", stripped)
+        m_bold = re.match(r"^\*\*(.+?)\*\*:?\s*$", stripped)
+        if m_h3 or m_bold:
+            flush()
+            question = (m_h3 or m_bold).group(1)
+            answer_parts = []
+            continue
+        if question and stripped:
+            answer_parts.append(stripped)
+    flush()
+    return faqs
+
+
 def sort_key(post: dict):
     d = post.get("date")
     if isinstance(d, (datetime,)):
@@ -149,14 +211,17 @@ class SiteBuilder:
             posts.append({
                 "title": post.get("title", md_file.stem),
                 "date": post.get("date"),
+                "updated": post.get("updated") or post.get("date"),
                 "description": post.get("description", ""),
                 "tags": post.get("tags", []),
                 "status": status,
                 "content": html,
                 "slug": slug,
                 "reading_time": estimate_reading_time(post.content),
+                "word_count": count_words(post.content),
                 "url": f"/blog/{slug}/",
                 "toc": toc_html,
+                "faqs": extract_faqs(post.content),
             })
 
         return sorted(posts, key=sort_key, reverse=True)
@@ -210,6 +275,50 @@ class SiteBuilder:
                 "url": f"/{slug}/",
             })
         return pages
+
+    def load_pillars(self, posts) -> list[dict]:
+        """Load topic pillar/hub pages from content/pillars/*.yaml and resolve
+        their curated post-slug lists against the live post set."""
+        pillars_dir = Path("content/pillars")
+        if not pillars_dir.exists():
+            return []
+        by_slug = {p["slug"]: p for p in posts}
+
+        pillars = []
+        for f in sorted(pillars_dir.glob("*.yaml")):
+            data = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+            if data.get("status", "published") != "published" and not self.include_drafts:
+                continue
+
+            self.md.reset()
+            data["intro_html"] = self.md.convert(data["intro"]) if data.get("intro") else ""
+
+            resolved = []
+            all_posts = []
+            seen = set()
+            for sec in data.get("sections", []):
+                sec_posts = []
+                for slug in sec.get("posts", []):
+                    p = by_slug.get(slug)
+                    if not p:
+                        print(f"  ! pillar '{data['slug']}': unknown post slug '{slug}'")
+                        continue
+                    sec_posts.append(p)
+                    if slug not in seen:
+                        all_posts.append(p)
+                        seen.add(slug)
+                resolved.append({
+                    "heading": sec["heading"],
+                    "blurb": sec.get("blurb", ""),
+                    "posts": sec_posts,
+                })
+            data["resolved_sections"] = resolved
+            data["all_posts"] = all_posts
+            data["post_count"] = len(all_posts)
+            data["url"] = f"/{data['slug']}/"
+            data.setdefault("h1", data.get("title", data["slug"]))
+            pillars.append(data)
+        return pillars
 
     def load_glossary(self) -> list[dict]:
         glossary_path = Path("content/data/glossary.yaml")
@@ -364,6 +473,22 @@ class SiteBuilder:
                 legal_page=legal_page,
             )
 
+    def build_pillars(self, pillars):
+        if not pillars:
+            return
+        self.render(
+            "pillar_index.html", "topics/index.html",
+            page="topics",
+            pillars=pillars,
+        )
+        for pillar in pillars:
+            self.render(
+                "pillar.html",
+                f"{pillar['slug']}/index.html",
+                page="topics",
+                pillar=pillar,
+            )
+
     def build_glossary(self, terms):
         if not terms:
             return
@@ -384,32 +509,45 @@ class SiteBuilder:
                 term=term,
             )
 
-    def build_sitemap(self, posts, work_cases, glossary_terms):
+    def build_sitemap(self, posts, work_cases, glossary_terms, pillars=None):
         base = self.config["site"]["url"].rstrip("/")
+        pillars = pillars or []
+        # Site-freshness proxy: the most recent post's date drives lastmod on
+        # listing/static pages so crawlers re-fetch them when new content ships.
+        site_lastmod = format_date_iso(posts[0].get("updated") or posts[0].get("date")) if posts else None
+
+        # (path, priority, changefreq, lastmod)
         urls = [
-            ("", "1.0", "weekly"),
-            ("/blog/", "0.9", "daily"),
-            ("/work/", "0.8", "monthly"),
-            ("/portfolio/", "0.7", "monthly"),
-            ("/projects/", "0.7", "monthly"),
-            ("/about/", "0.6", "monthly"),
-            ("/contact/", "0.5", "yearly"),
-            ("/linter/", "0.9", "monthly"),
-            ("/privacy/", "0.3", "yearly"),
-            ("/terms/", "0.3", "yearly"),
-            ("/glossary/", "0.8", "weekly"),
+            ("", "1.0", "weekly", site_lastmod),
+            ("/blog/", "0.9", "daily", site_lastmod),
+            ("/topics/", "0.9", "weekly", site_lastmod),
+            ("/work/", "0.8", "monthly", None),
+            ("/portfolio/", "0.7", "monthly", None),
+            ("/projects/", "0.7", "monthly", None),
+            ("/about/", "0.6", "monthly", None),
+            ("/contact/", "0.5", "yearly", None),
+            ("/linter/", "0.9", "monthly", None),
+            ("/privacy/", "0.3", "yearly", None),
+            ("/terms/", "0.3", "yearly", None),
+            ("/glossary/", "0.8", "weekly", site_lastmod),
         ]
+        for pillar in pillars:
+            urls.append((pillar["url"], "0.9", "weekly", site_lastmod))
         for post in posts:
-            urls.append((post["url"], "0.9", "monthly"))
+            urls.append((post["url"], "0.9", "monthly", format_date_iso(post.get("updated") or post.get("date"))))
         for case in work_cases:
-            urls.append((case["url"], "0.8", "monthly"))
+            case_date = case.get("updated") or case.get("date")
+            urls.append((case["url"], "0.8", "monthly", format_date_iso(case_date) if case_date else None))
         for term in glossary_terms:
-            urls.append((term["url"], "0.8", "monthly"))
+            term_date = term.get("last_updated")
+            urls.append((term["url"], "0.8", "monthly", format_date_iso(term_date) if term_date else None))
 
         root = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
-        for path, priority, freq in urls:
+        for path, priority, freq, lastmod in urls:
             url_el = ET.SubElement(root, "url")
             ET.SubElement(url_el, "loc").text = base + path
+            if lastmod:
+                ET.SubElement(url_el, "lastmod").text = lastmod
             ET.SubElement(url_el, "changefreq").text = freq
             ET.SubElement(url_el, "priority").text = priority
 
@@ -441,6 +579,92 @@ class SiteBuilder:
         ET.indent(tree, space="  ")
         feed_path = self.output / "feed.xml"
         tree.write(feed_path, xml_declaration=True, encoding="utf-8")
+
+    def build_llms_txt(self, posts, glossary_terms, work_cases, pillars=None):
+        """Emit /llms.txt — a clean, link-first map of the site for AI crawlers
+        and answer engines. Follows the llms.txt convention (H1, summary
+        blockquote, then sectioned bullet links)."""
+        base = self.config["site"]["url"].rstrip("/")
+        site = self.config["site"]
+
+        # Tag -> cluster, first match wins (order defines precedence).
+        clusters = [
+            ("AI Agent Memory", {"memory"}),
+            ("Agent Architecture", {"agents", "agent"}),
+            ("RAG & Retrieval", {"rag", "retrieval", "embeddings", "search"}),
+            ("LLM Inference, Cost & Internals", {"inference", "llm", "cost", "tokens", "caching"}),
+            ("Engineering Benchmarks", {"benchmark", "benchmarks"}),
+            ("Technical Writing for DevTools", {"technical-writing", "documentation", "devtools", "writing"}),
+        ]
+
+        def cluster_for(post):
+            tags = {str(t).lower() for t in post.get("tags", [])}
+            for name, keys in clusters:
+                if tags & keys:
+                    return name
+            return "Other Writing"
+
+        grouped: dict[str, list[dict]] = {}
+        for post in posts:
+            grouped.setdefault(cluster_for(post), []).append(post)
+
+        lines = [
+            f"# {site['author']}",
+            "",
+            f"> {site['description']}",
+            "",
+            ("Technical writer and former engineer publishing in-depth, benchmark-backed "
+             "writing on AI agents, agent memory, RAG, LLM inference, and technical "
+             "content strategy for DevTools and B2B SaaS. Articles below are grouped by "
+             "topic; each links to the canonical URL."),
+            "",
+        ]
+
+        if pillars:
+            lines.append("## Topic Hubs")
+            lines.append("")
+            for pillar in pillars:
+                desc = (pillar.get("description") or "").strip().replace("\n", " ")
+                lines.append(f"- [{pillar['h1']}]({base}{pillar['url']}): {desc}")
+            lines.append("")
+
+        cluster_order = [name for name, _ in clusters] + ["Other Writing"]
+        for name in cluster_order:
+            items = grouped.get(name)
+            if not items:
+                continue
+            lines.append(f"## {name}")
+            lines.append("")
+            for post in items:
+                desc = (post.get("description") or "").strip().replace("\n", " ")
+                lines.append(f"- [{post['title']}]({base}{post['url']}): {desc}")
+            lines.append("")
+
+        if glossary_terms:
+            lines.append("## Glossary")
+            lines.append("")
+            for term in glossary_terms:
+                desc = (term.get("short_definition") or term.get("description") or "").strip().replace("\n", " ")
+                lines.append(f"- [{term['name']}]({base}{term['url']}): {desc}")
+            lines.append("")
+
+        if work_cases:
+            lines.append("## Work & Case Studies")
+            lines.append("")
+            for case in work_cases:
+                desc = (case.get("description") or case.get("summary") or "").strip().replace("\n", " ")
+                title = case.get("title", case["slug"])
+                lines.append(f"- [{title}]({base}{case['url']}): {desc}")
+            lines.append("")
+
+        lines.append("## Pages")
+        lines.append("")
+        lines.append(f"- [About]({base}/about/): Background, expertise, and how I work.")
+        lines.append(f"- [Glossary]({base}/glossary/): Technical definitions for AI memory, RAG, and agent terms.")
+        lines.append(f"- [Contact]({base}/contact/): Get in touch or book a call.")
+        lines.append("")
+
+        (self.output / "llms.txt").write_text("\n".join(lines), encoding="utf-8")
 
     def build_pygments_css(self):
         # Light mode: use 'default' style (good contrast on light backgrounds)
@@ -488,10 +712,12 @@ class SiteBuilder:
         projects = self.load_projects()
         legal_pages = self.load_legal_pages()
         glossary_terms = self.load_glossary()
+        pillars = self.load_pillars(posts)
 
         self.build_homepage(posts, work_cases)
         self.build_blog_list(posts)
         self.build_posts(posts)
+        self.build_pillars(pillars)
         self.build_work_list(work_cases)
         self.build_work_pages(work_cases)
         self.build_portfolio(portfolio)
@@ -502,11 +728,13 @@ class SiteBuilder:
         self.build_legal_pages(legal_pages)
         self.build_glossary(glossary_terms)
 
-        self.build_sitemap(posts, work_cases, glossary_terms)
+        self.build_sitemap(posts, work_cases, glossary_terms, pillars)
         self.build_rss(posts)
+        self.build_llms_txt(posts, glossary_terms, work_cases, pillars)
         self.build_pygments_css()
 
         print(f"  {len(posts)} blog post(s)")
+        print(f"  {len(pillars)} topic pillar(s)")
         print(f"  {len(work_cases)} case stud(ies)")
         print(f"  {len(projects)} project(s)")
         print(f"  {len(glossary_terms)} glossary term(s)")

@@ -3,6 +3,48 @@
 {% block title %}Ninad Pathak | Technical Content Writer for DevTools & B2B SaaS{% endblock %}
 {% block description %}Technical content writer for DevTools & B2B SaaS. 6+ years helping 30+ companies create docs, tutorials, and blog content engineers approve.{% endblock %}
 
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "{{ site.url }}/#website",
+  "url": "{{ site.url }}/",
+  "name": "{{ site.title }}",
+  "description": "{{ site.description }}",
+  "inLanguage": "en-US",
+  "publisher": { "@id": "{{ site.url }}/#person" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "{{ site.url }}/#person",
+  "name": "Ninad Pathak",
+  "url": "{{ site.url }}/",
+  "jobTitle": "Technical Content Writer",
+  "description": "{{ site.description }}",
+  "knowsAbout": [
+    "Technical Writing",
+    "Developer Documentation",
+    "AI Agents",
+    "Agentic Workflows",
+    "AI Agent Memory",
+    "Retrieval-Augmented Generation (RAG)",
+    "Large Language Models",
+    "LLM Inference Optimization",
+    "Workflow Automation",
+    "DevTools Content Strategy"
+  ],
+  "sameAs": [
+    "https://linkedin.com/in/ninadwites/",
+    "https://twitter.com/ninadwrites"
+  ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
 
 <!-- HERO -->

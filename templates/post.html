@@ -13,15 +13,22 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "{{ post.title }}",
-  "description": "{{ post.description }}",
+  "headline": {{ post.title | tojson }},
+  "description": {{ post.description | tojson }},
+  "image": "{{ site.url }}/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": {{ post.word_count }},
+{% if post.tags %}
+  "keywords": {{ post.tags | join(", ") | tojson }},
+  "articleSection": {{ post.tags[0] | tojson }},
+{% endif %}
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "{{ site.url }}"
+    "url": "{{ site.url }}/about/"
   },
   "datePublished": "{{ post.date | format_date_iso }}",
-  "dateModified": "{{ post.date | format_date_iso }}",
+  "dateModified": "{{ post.updated | format_date_iso }}",
   "publisher": {
     "@type": "Organization",
     "name": "Ninad Pathak",
@@ -36,6 +43,26 @@
   }
 }
 </script>
+{% if post.faqs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+{% for faq in post.faqs %}
+    {
+      "@type": "Question",
+      "name": {{ faq.question | tojson }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ faq.answer | tojson }}
+      }
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+  ]
+}
+</script>
+{% endif %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -84,6 +111,14 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="{{ post.date | format_date_iso }}">{{ post.date | format_date }}</time>
+        {% if post.updated and (post.updated | format_date_iso) != (post.date | format_date_iso) %}
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <span class="post-meta-updated">Updated <time datetime="{{ post.updated | format_date_iso }}">{{ post.updated | format_date }}</time></span>
+        {% endif %}
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">{{ post.reading_time }} min read</span>
       </div>
       <h1 class="post-title">{{ post.title }}</h1>

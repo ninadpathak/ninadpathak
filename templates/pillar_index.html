@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Topics | Ninad Pathak{% endblock %}
+{% block description %}In-depth topic hubs on AI agent memory, agent architecture, RAG, LLM inference, AI workflows and automation, and technical writing for DevTools.{% endblock %}
+{% block canonical %}/topics/{% endblock %}
+{% block og_url %}/topics/{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Topics",
+  "description": "In-depth topic hubs on AI agents, memory, RAG, inference, AI workflows, and technical writing.",
+  "url": "{{ site.url }}/topics/",
+  "isPartOf": { "@id": "{{ site.url }}/#website" },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+{% for pillar in pillars %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "url": "{{ site.url }}/{{ pillar.slug }}/",
+        "name": {{ pillar.h1 | tojson }}
+      }{% if not loop.last %},{% endif %}
+{% endfor %}
+    ]
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Topics</div>
+    <h1>Topic hubs</h1>
+    <p class="lead">
+      Curated entry points into the deepest threads on this site. Each hub gathers the
+      posts on one subject into a reading path, from fundamentals to production detail.
+    </p>
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    {% for pillar in pillars %}
+    <a href="/{{ pillar.slug }}/" class="blog-row">
+      <div class="blog-row-title">{{ pillar.h1 }}</div>
+      <div class="blog-row-desc">{{ pillar.description }}</div>
+      <div class="blog-row-meta">
+        <span class="read-time">{{ pillar.post_count }} posts</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

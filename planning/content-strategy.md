@@ -1,4 +1,10 @@
-# Content Strategy: ninadpathak.com (v5.0 — Topical Authority for DevTools SEO)
+# Content Strategy: ninadpathak.com (v6.0 — Pillar Hubs + Hybrid Positioning)
+
+> **v6.0 (2026-06-14):** Added a pillar/hub layer and a 7th cluster. See the
+> "Pillar hubs" and "Hybrid positioning" sections at the bottom. v5.0 cluster map and
+> rules below remain in force.
+
+
 
 **Goal:** Rank for the technical AI/LLM and developer-content queries that DevTools and
 B2B SaaS buyers (Heads of Content, DevRel leads, founders) search, and convert that
@@ -93,3 +99,46 @@ Every post's related/footer and at least one in-body link should be reachable, w
 hops, from a Cluster 6 (technical-writing) post. The reader who lands on a deep RAG benchmark
 from search should be one or two clicks from "why DevTools startups lose deals over bad docs"
 and the contact CTA. That is how topical authority turns into leads.
+
+---
+
+## Pillar hubs (v6.0)
+
+SEO and AI Overviews reward a clear topical hub for each head term. As of 2026-06-14 every
+cluster has a pillar page that gathers its spokes into one curated reading path. Pillars live
+at top-level slugs to maximize the head-term signal, with an index at `/topics/`.
+
+| Pillar | URL | Cluster |
+|--------|-----|---------|
+| AI Agent Memory | `/ai-agent-memory/` | 1 |
+| AI Agent Architecture | `/ai-agent-architecture/` | 2 |
+| RAG & Retrieval | `/rag/` | 3 |
+| LLM Inference & Cost | `/llm-inference/` | 4 |
+| AI Workflows & Automation | `/ai-workflows/` | 7 (new) |
+| Technical Writing for DevTools | `/technical-writing/` | 6 |
+
+**How pillars work (mechanics):** source is `content/pillars/*.yaml` (intro markdown,
+curated `sections` of post slugs, `faqs`, `bridges`). The build resolves slugs to live posts
+and warns on any unknown slug, so a pillar can never link to a post that does not exist. Each
+pillar emits `CollectionPage` + `ItemList` + `BreadcrumbList` + `FAQPage` schema, and is
+wired into the sitemap, `llms.txt` ("Topic Hubs"), and nav. Cluster 5 (Engineering
+Benchmarks) is not a standalone pillar — its posts are folded into the relevant topic hubs as
+credibility sections, since benchmarks support multiple topics.
+
+**Pillar maintenance:** when a new post ships, add its slug to the right section of the
+pillar YAML. Keep curated ordering (fundamentals → quality → production → benchmarks).
+
+---
+
+## Hybrid positioning (v6.0)
+
+Decision (2026-06-14): pursue **both** the infra moat and a practitioner cluster. Clusters
+1–5 prove I understand the internals. Cluster 7 (AI Workflows & Automation) targets the
+stated brand — AI workflows, automation, speeding up work, agentic setups — for a
+work-faster audience with higher commercial intent. The `/ai-workflows/` pillar bridges into
+the infra hubs so the depth backs the advice, and into `/technical-writing/` so automation
+readers reach the paid service.
+
+Cluster 7 definition, audience, keyword targets, and 12 sequenced article briefs live in
+`planning/ai-workflows-cluster.md`. Tier-1 anchors to write first: `coding-agent-setup-that-works`,
+`agentic-workflow-playbook`, `mcp-server-setup-guide`.

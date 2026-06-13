@@ -9,7 +9,7 @@ tags:
 - agents
 - infrastructure
 - mcp
-title: 'The Model Context Protocol (mcp) Explained: a Universal Language for Ai Tools'
+title: 'The Model Context Protocol (MCP) Explained: A Universal Language for AI Tools'
 ---
 
 Connecting AI models to external data has always been a messy engineering challenge. Every application needs its own set of connectors for GitHub or Google Drive. Every tool requires custom code to translate model requests into API calls. Such fragmentation slows down development and increases the risk of reasoning errors.

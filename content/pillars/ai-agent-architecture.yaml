@@ -1,0 +1,65 @@
+slug: ai-agent-architecture
+status: published
+title: "AI Agent Architecture: Patterns for Systems That Actually Ship"
+h1: "AI Agent Architecture"
+description: "The patterns, trade-offs, and failure modes behind production AI agents. From the agent loop and tool calls to multi-agent design and error handling."
+intro: |
+  An agent is a loop. It perceives, decides, acts, and remembers, then does it again
+  until the work is done or it gives up. Everything hard about agents lives in how you
+  wire that loop and what you do when a step fails.
+
+  I have spent two years watching agents break in production and mapping the design
+  space across real deployments. The posts here cover the anatomy of the loop, the
+  choice between one agent and many, the harness that holds it together, and the errors
+  nobody warns you about.
+
+sections:
+  - heading: "Foundations"
+    blurb: "What an agent is, how the loop runs, and the shape of the design space."
+    posts:
+      - the-taxonomy-of-ai-agents
+      - agent-vs-ai-assistant
+      - agent-loop-anatomy
+      - the-agent-design-space
+  - heading: "Single vs multi-agent"
+    blurb: "When more agents help and what the coordination costs you."
+    posts:
+      - multi-agent-vs-single-agent-tradeoffs
+      - shared-vs-isolated-memory-multi-agent
+  - heading: "Tools and infrastructure"
+    blurb: "The plumbing that lets an agent act reliably on the world."
+    posts:
+      - model-context-protocol-explained
+      - agent-harnesses
+      - structured-outputs-llms-json-mode-function-calling
+  - heading: "Reliability in production"
+    blurb: "The failure modes that break real deployments and how to handle them."
+    posts:
+      - why-ai-agents-keep-failing-in-production
+      - production-ai-agent-errors
+      - memory-attribution-errors
+  - heading: "Benchmarks"
+    blurb: "Head-to-head data on agents doing real work."
+    posts:
+      - agentic-cli-benchmarks
+
+faqs:
+  - q: "What is an agent loop?"
+    a: "An agent loop is the repeating cycle an agent runs: perceive the current state, decide the next step, act with a tool, and record the result. The loop continues until the task is complete or a stop condition fires. Almost all agent behavior is explained by how this loop is structured."
+  - q: "When should I use multiple agents instead of one?"
+    a: "Reach for multiple agents when the work splits into clearly separate roles that each need their own context and tools. The cost is coordination, latency, and new failure modes. For most tasks a single well-instrumented agent is simpler and more reliable."
+  - q: "Why do AI agents fail in production?"
+    a: "The common causes are brittle tool schemas, missing error handling, context that grows until it poisons reasoning, and no observability into what the agent did. The production-errors and why-agents-fail posts cover each pattern and the fixes."
+  - q: "What is the Model Context Protocol (MCP)?"
+    a: "MCP is a standard for connecting AI models to external tools and data sources through a common interface. It lets you wire the same tool into many agents without rewriting integrations each time."
+
+bridges:
+  - title: "AI Agent Memory"
+    url: "/ai-agent-memory/"
+    blurb: "How agents remember"
+  - title: "AI Workflows & Automation"
+    url: "/ai-workflows/"
+    blurb: "Agents doing real work"
+  - title: "RAG & Retrieval"
+    url: "/rag/"
+    blurb: "Feeding agents the right context"

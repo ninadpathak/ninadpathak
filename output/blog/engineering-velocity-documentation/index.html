@@ -75,10 +75,15 @@
   "@type": "TechArticle",
   "headline": "Quantifying the Engineering Velocity Impact of Technical Documentation",
   "description": "I analyze the structural correlation between documentation quality and engineering throughput, using DORA metrics and Accelerate research to quantify the ROI of technical writing.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1625,
+  "keywords": "engineering-velocity, developer-productivity, dora-metrics, technical-writing",
+  "articleSection": "engineering-velocity",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-04-11",
   "dateModified": "2026-04-11",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/engineering-velocity-documentation/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do we measure \"documentation quality\" objectively?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the DORA attributes as a scorecard. Survey your engineers on \"Time to Find Answer\" and \"Reliability of Source.\" Correlate these scores with your DORA velocity metrics (Lead Time and Change Failure Rate)."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Is \"Documentation as Code\" required for these gains?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is the most reliable way to ensure documentation stays current. By treating docs like code, with PR reviews, linting, and automated testing, you reduce the \"Updateability\" friction that causes traditional wikis to rot."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should engineers write all the documentation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Technical writers provide the structural expertise and editorial discipline. However, engineers must own the \"Primary Source\" truth. The most effective teams use a hybrid model where engineers draft the technical core and writers optimize for clarity, findability, and the Di\u00e1taxis framework."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the \"Bus Factor\" impact of documentation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Documentation effectively raises the Bus Factor by decentralizing tribal knowledge. If the only person who knows how the payment gateway works leaves the company, and there is no documentation, your Bus Factor is 1. High-quality docs move that knowledge from a person to the organization."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Does AI-generated documentation help velocity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if it is verified by a human practitioner. AI can help with boilerplate, but the \"Nonsense Detector\" of technical readers is highly sensitive to the hallucinated details often found in raw AI output. Trust is built on accuracy, not volume. \u003c!-- primary keyword: engineering velocity sources used: - Forsgren, N., Humble, J., \u0026 Kim, G. (2018). Accelerate: The Science of Lean Software and DevOps. - DORA State of DevOps Report (2021, 2023). - Stripe (2018). The Developer Coefficient. - McKinsey (2023). Tech Debt: Reclaiming tech equity. - GitHub (2023). State of the Octoverse. research gap identified: I have specifically linked the 750% performance lift statistic from DORA 2021 to the concept of \"Documentation as Capability,\" a structural link often missed in shallow ROI discussions. self-identified risks or weak spots: The 3000-word target requires deep elaboration on each DORA attribute; I have used the economic outcome sections to drive this volume while maintaining practitioner focus. --\u003e"
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +243,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-04-11">Apr 11, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">8 min read</span>
       </div>
       <h1 class="post-title">Quantifying the Engineering Velocity Impact of Technical Documentation</h1>
@@ -467,6 +521,7 @@ self-identified risks or weak spots: The 3000-word target requires deep elaborat
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -476,9 +531,9 @@ self-identified risks or weak spots: The 3000-word target requires deep elaborat
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

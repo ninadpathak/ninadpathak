@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiring Tools into Your Agent with MCP: A Practical Setup | Ninad Pathak</title>
+  <meta name="description" content="A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Wiring Tools into Your Agent with MCP: A Practical Setup">
+  <meta property="og:description" content="A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/mcp-server-setup-guide/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/mcp-server-setup-guide/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Wiring Tools into Your Agent with MCP: A Practical Setup",
+  "description": "A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1684,
+  "keywords": "ai, agents, developer-experience",
+  "articleSection": "ai",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com/about/"
+  },
+  "datePublished": "2026-06-12",
+  "dateModified": "2026-06-12",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/mcp-server-setup-guide/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Model Context Protocol?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MCP is a standard that connects AI agents to external tools and data through a common interface. The agent acts as a client, your tools run inside a server, and the protocol defines how they talk, so you can write a tool once and use it with any MCP-aware agent."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do I build an MCP server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Write your tool as a function, register it with the SDK, and run the server. The SDK reads the function\u0027s type hints to build the argument schema and uses the docstring as the description the agent sees, so a minimal server is only a few lines around the tool itself."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What transport should I use for a local setup?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The standard input and output transport, where the agent launches the server as a subprocess on the same machine. It is the simplest option and the right default for tools that live next to the agent. Use HTTP when the server runs as a shared service many agents connect to."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do I keep an agent from misusing a tool?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Give each tool one narrow job, validate every argument inside the server, and put write actions behind explicit approval. Let read-only tools run freely and require a human to confirm anything that changes data or reaches production."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Why use MCP instead of building tools into the agent directly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MCP makes the integration portable. A tool in an MCP server works with any MCP-aware agent without a custom rewrite, and you can maintain the tools separately from the agents that use them. For one throwaway tool it is overkill, and for a shared, growing set it pays off quickly."
+      }
+    }  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Wiring Tools into Your Agent with MCP: A Practical Setup",
+      "item": "https://ninadpathak.com/blog/mcp-server-setup-guide/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Wiring Tools into Your Agent with MCP: A Practical Setup</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-06-12">Jun 12, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <span class="post-meta-time">8 min read</span>
+      </div>
+      <h1 class="post-title">Wiring Tools into Your Agent with MCP: A Practical Setup</h1>
+      <p class="lead">A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#what-mcp-actually-gives-you">What MCP actually gives you</a></li>
+<li><a href="#the-shape-of-an-mcp-setup">The shape of an MCP setup</a></li>
+<li><a href="#building-a-minimal-server">Building a minimal server</a></li>
+<li><a href="#designing-the-tools-so-the-agent-calls-them-right">Designing the tools so the agent calls them right</a></li>
+<li><a href="#connecting-the-server-to-your-agent">Connecting the server to your agent</a></li>
+<li><a href="#guardrails-for-tool-access">Guardrails for tool access</a></li>
+<li><a href="#when-mcp-is-worth-it">When MCP is worth it</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>An agent that cannot touch the outside world is a very expensive autocomplete. Tools are what let it read a database, hit an API, or run a command, and the Model Context Protocol is the cleanest way I have found to wire those tools in. I went deep on the concept in <a href="/blog/model-context-protocol-explained/">the Model Context Protocol explained</a>. Here I want to show the practical setup, the parts you actually build and run.</p>
+<p>The promise of MCP is simple. You write a tool once, expose it through a standard interface, and any MCP-aware agent can call it without a custom integration. The same server that powers a coding agent today works with a different agent tomorrow. That portability is the reason I reach for it instead of bolting tools directly into one agent.</p>
+<h2 id="what-mcp-actually-gives-you">What MCP actually gives you</h2>
+<p>MCP is a protocol that sits between an agent and the tools it wants to use. The agent is the client. Your tool runs inside a server. The protocol defines how the two talk, so neither side needs to know the other's internals.</p>
+<p>The payoff is that the integration stops being one-off. Before MCP, every tool I wanted an agent to use meant gluing an API into that specific agent's tool-calling format. Each new agent meant doing it again. With MCP, the tool lives in a server that speaks the protocol, and the agent discovers what it offers at connection time.</p>
+<p>A server can expose three kinds of thing. Tools, which the agent calls to do work. Resources, which the agent reads for context. Prompts, which are reusable templates. For most setups the tools are the part that matters, so that is where I will spend the rest of this guide.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">THE MCP CLIENT-SERVER SETUP</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/mcp-setup-architecture.html" title="An agent acting as MCP client connecting over a transport to an MCP server, which exposes tools that reach a database and an external API, with request and response flowing along the link" loading="lazy"></iframe>
+  </div>
+</div>
+
+<h2 id="the-shape-of-an-mcp-setup">The shape of an MCP setup</h2>
+<p>Three pieces make up a working setup. The client is the agent, or the harness around it, that wants to call tools. The server is the process you write that exposes those tools. The transport is the channel between them.</p>
+<p>The transport is usually one of two things. A local server runs as a subprocess and talks over standard input and output, which is the common choice for tools that live on the same machine as the agent. A remote server talks over HTTP, which suits tools that run as a shared service many agents connect to. For a first setup, the local subprocess transport is the path of least resistance.</p>
+<p>The agent connects, asks the server what it offers, and gets back a list of tools with their names, descriptions, and argument schemas. From then on the agent can call any of those tools by name, and the server runs the real work and returns the result.</p>
+<h2 id="building-a-minimal-server">Building a minimal server</h2>
+<p>A working MCP server is smaller than people expect. The Python SDK does the protocol plumbing, so the code I write is mostly the tool itself. Here is a server that exposes one tool for looking up an order.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.fastmcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastMCP</span>
+
+<span class="n">mcp</span> <span class="o">=</span> <span class="n">FastMCP</span><span class="p">(</span><span class="s2">&quot;orders&quot;</span><span class="p">)</span>
+
+<span class="n">ORDERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;1001&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;shipped&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">:</span> <span class="s2">&quot;UPS&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;1002&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;processing&quot;</span><span class="p">,</span> <span class="s2">&quot;carrier&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="nd">@mcp</span><span class="o">.</span><span class="n">tool</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_order_status</span><span class="p">(</span><span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up the status of an order by its ID.&quot;&quot;&quot;</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">ORDERS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">order</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;No order found for </span><span class="si">{</span><span class="n">order_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">order</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">mcp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+
+<p>The decorator is doing the heavy work. It registers the function as a tool, reads its type hints to build the argument schema, and uses the docstring as the description the agent sees. The agent learns that an order ID is a string and that the tool returns a status, all from the function signature and a one-line docstring.</p>
+<p>Calling <code>mcp.run()</code> with no arguments starts the server on the standard input and output transport, ready for a local agent to connect as a subprocess. A real server swaps the dictionary for a database call or an API request, and the rest of the structure stays the same.</p>
+<h2 id="designing-the-tools-so-the-agent-calls-them-right">Designing the tools so the agent calls them right</h2>
+<p>A tool the agent calls wrong is worse than no tool at all. Good tool design is the part of MCP that decides whether the setup helps or hurts, and it comes down to the same principles I covered in <a href="/blog/structured-outputs-llms-json-mode-function-calling/">structured outputs and function calling</a>.</p>
+<p>The name and description are the agent's only guide to when a tool applies. I name tools for what they do in plain terms, <code>get_order_status</code> rather than <code>fetch_data</code>, and I write the description for the agent rather than for a human reading the source. The agent reads that description on every decision about which tool to call, so an ambiguous one produces wrong calls.</p>
+<p>The argument schema is the contract. Clear types and required fields let the agent build a valid call on the first try. A tool that takes a vague blob of text invites the agent to stuff the wrong thing into it. The tighter the schema, the fewer malformed calls I see.</p>
+<p>The return value matters as much as the input. I return structured data the agent can reason about, and I make errors explicit rather than silent. A tool that returns an error message the agent can read leads to a recovery. A tool that returns nothing on failure leads to the agent assuming success and moving on with a wrong picture.</p>
+<h2 id="connecting-the-server-to-your-agent">Connecting the server to your agent</h2>
+<p>The agent side is configuration, not code. An MCP client reads a config that tells it which servers to launch and how. For a local server the config names the command to run and its arguments.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;orders&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;orders_server.py&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>When the agent starts, it launches that command as a subprocess, connects over the transport, and asks the server for its tools. From the agent's point of view the order-status tool now sits alongside its built-in ones. The agent decides when to call it based on the name and description the server reported.</p>
+<p>The same server config works across MCP-aware agents, which is the portability paying off. I wire the server once and reuse it wherever I need those tools, including inside the harness I run around my coding agents, which I described in <a href="/blog/agent-harnesses/">agent harnesses</a>.</p>
+<h2 id="guardrails-for-tool-access">Guardrails for tool access</h2>
+<p>A tool gives the agent reach into real systems, so the guardrails are not optional. The first rule I follow is that a tool does exactly one thing with a narrow scope. A tool that can read one customer's order is safe. A tool that can run arbitrary database queries is a liability waiting for a confident wrong call.</p>
+<p>Read and write deserve different treatment. I let read tools run freely, because the worst case is wasted tokens. Write tools, anything that changes data or reaches a production system, sit behind explicit approval, so the agent proposes the action and a human confirms it before it runs.</p>
+<p>Validation lives in the server, not in the prompt. I never trust that the agent sent good arguments. The server checks them, rejects bad ones with a clear error, and never assumes the input is well-formed because a model produced it. Treating tool input as untrusted is the same discipline I would apply to any input crossing a boundary.</p>
+<h2 id="when-mcp-is-worth-it">When MCP is worth it</h2>
+<p>MCP earns its place the moment you want the same tools available to more than one agent, or you want tools you can maintain separately from the agent that uses them. A single throwaway script with one tool does not need it. A growing set of tools that several agents share is exactly what it was built for.</p>
+<p>The setup cost is real but small. A server is a few lines around the tool you were going to write anyway, and the config is a handful of lines on the agent side. What you get back is tools that outlive any single agent and an integration you write once. For anyone building real AI workflows, that portability is worth the small amount of structure it asks for up front.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>What is the Model Context Protocol?</strong></p>
+<p>MCP is a standard that connects AI agents to external tools and data through a common interface. The agent acts as a client, your tools run inside a server, and the protocol defines how they talk, so you can write a tool once and use it with any MCP-aware agent.</p>
+<p><strong>How do I build an MCP server?</strong></p>
+<p>Write your tool as a function, register it with the SDK, and run the server. The SDK reads the function's type hints to build the argument schema and uses the docstring as the description the agent sees, so a minimal server is only a few lines around the tool itself.</p>
+<p><strong>What transport should I use for a local setup?</strong></p>
+<p>The standard input and output transport, where the agent launches the server as a subprocess on the same machine. It is the simplest option and the right default for tools that live next to the agent. Use HTTP when the server runs as a shared service many agents connect to.</p>
+<p><strong>How do I keep an agent from misusing a tool?</strong></p>
+<p>Give each tool one narrow job, validate every argument inside the server, and put write actions behind explicit approval. Let read-only tools run freely and require a human to confirm anything that changes data or reaches production.</p>
+<p><strong>Why use MCP instead of building tools into the agent directly?</strong></p>
+<p>MCP makes the integration portable. A tool in an MCP server works with any MCP-aware agent without a custom rewrite, and you can maintain the tools separately from the agents that use them. For one throwaway tool it is overkill, and for a shared, growing set it pays off quickly.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/agentic-workflow-playbook/" class="related-card">
+        <div class="related-card-date">2026-06-14</div>
+        <div class="related-card-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</div>
+      </a>
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
+      </a>
+      <a href="/blog/llm-inference-optimization/" class="related-card">
+        <div class="related-card-date">2026-05-06</div>
+        <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Agentic Workflow Playbook: From Prompt to Shipped PR | Ninad Pathak</title>
+  <meta name="description" content="The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="The Agentic Workflow Playbook: From Prompt to Shipped PR">
+  <meta property="og:description" content="The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.">
+  <meta property="og:url"         content="https://ninadpathak.com/blog/agentic-workflow-playbook/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/blog/agentic-workflow-playbook/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "The Agentic Workflow Playbook: From Prompt to Shipped PR",
+  "description": "The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1705,
+  "keywords": "ai, agents, developer-experience",
+  "articleSection": "ai",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com/about/"
+  },
+  "datePublished": "2026-06-14",
+  "dateModified": "2026-06-14",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/blog/agentic-workflow-playbook/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is an agentic workflow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An agentic workflow is a repeatable process where an AI agent does part of the work inside a structure you control. The agent runs its own loop on the task, and you stay in the loop at the points where being wrong is expensive, usually framing the work up front and reviewing the result."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Do I need a powerful model to run this playbook?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The playbook is built so a modest model still produces reliable output, because the structure catches its mistakes. A stronger model finishes more in one pass, and the framing and review stages still matter more than the model choice."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How big should a single agent task be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Small enough that you can review the entire diff in one sitting, usually a few hundred lines across a handful of files. When the task is larger, split it into a sequence of scoped changes that each stand on their own and review each one."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Why review the diff instead of the agent\u0027s summary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The summary is what the agent believes it did. The diff is what it actually did. Agents are good at making tests pass and writing confident summaries, and the quiet mistakes, a swallowed error or a weakened test, only show up when you read the diff."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should I use multiple agents for a single feature?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually not. Coordination between agents adds latency and new failure modes, and most features ship faster with one well-instrumented agent. Reach for multiple agents only when the work splits into clearly separate roles that each need their own context and tools."
+      }
+    }  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "The Agentic Workflow Playbook: From Prompt to Shipped PR",
+      "item": "https://ninadpathak.com/blog/agentic-workflow-playbook/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">The Agentic Workflow Playbook: From Prompt to Shipped PR</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/blog/" class="back-link">← All posts</a>
+      <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-06-14">Jun 14, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <span class="post-meta-time">9 min read</span>
+      </div>
+      <h1 class="post-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</h1>
+      <p class="lead">The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me in the loop where being wrong is expensive.</p>
+      <div class="post-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#the-playbook-in-one-sentence">The playbook in one sentence</a></li>
+<li><a href="#stage-1-frame-the-task-before-the-agent-sees-it">Stage 1: Frame the task before the agent sees it</a></li>
+<li><a href="#stage-2-scope-the-change-to-something-reviewable">Stage 2: Scope the change to something reviewable</a></li>
+<li><a href="#stage-3-let-the-agent-work-against-an-instrumented-loop">Stage 3: Let the agent work against an instrumented loop</a></li>
+<li><a href="#stage-4-review-like-you-do-not-trust-it">Stage 4: Review like you do not trust it</a></li>
+<li><a href="#stage-5-land-it">Stage 5: Land it</a></li>
+<li><a href="#where-the-playbook-saves-me">Where the playbook saves me</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my name on. The agent does the heavy lifting. I stay in the loop at the points where being wrong is expensive.</p>
+<p>Almost all of the value in agentic work comes from the structure around the agent rather than the model. A strong model inside a sloppy process produces confident garbage. A modest model inside a tight process ships real work. The playbook below is the process I run, stage by stage, with the checkpoints where I step back in.</p>
+<h2 id="the-playbook-in-one-sentence">The playbook in one sentence</h2>
+<p>Frame the task, scope it down, let the agent work against an instrumented loop, review the diff like I do not trust it, then land it. Five stages, two of them mine and one of them the agent's, with scoping and landing as the seams between. The art is knowing which stage owns which decision.</p>
+<p>I think about the whole thing as a loop with a human at two of its phases. The agent runs its own perceive-think-act-remember cycle inside stage three, which I broke down in <a href="/blog/agent-loop-anatomy/">the anatomy of an agent loop</a>. My job is the outer loop around it, and that outer loop has barely changed across three generations of models.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">THE FIVE-STAGE AGENTIC WORKFLOW</div>
+  <div class="visual-container">
+    <iframe src="/static/visuals/agentic-workflow-pipeline.html" title="A five-stage horizontal pipeline from Frame to Land, with a pulse traveling through and human-checkpoint markers on the framing and review stages" loading="lazy"></iframe>
+  </div>
+</div>
+
+<h2 id="stage-1-frame-the-task-before-the-agent-sees-it">Stage 1: Frame the task before the agent sees it</h2>
+<p>The first stage has nothing to do with the agent. Framing is where I write down what done looks like, in plain terms, before a single token gets generated.</p>
+<p>A good frame answers three questions. What is the change. How will I know it worked. What must not break. Ten minutes here saves an hour of watching an agent solve the wrong problem with great enthusiasm.</p>
+<p>The failure I see most often is handing an agent a one-line request and expecting it to infer the constraints. "Add caching to the API" can mean six different things. The agent picks one, commits to it, and builds a whole structure around the wrong assumption. The cost of that wrong assumption compounds with every file it touches, because each later edit is consistent with the early mistake.</p>
+<p>I write the frame as a short brief the agent reads first. Goal, acceptance check, hard constraints, and the files I expect to be involved. The brief is not the prompt. The brief is the contract, and I hold the agent to it during review.</p>
+<h2 id="stage-2-scope-the-change-to-something-reviewable">Stage 2: Scope the change to something reviewable</h2>
+<p>The second stage is mine too. Scoping is where I cut the task down to a change I can actually review in one sitting.</p>
+<p>An agent will happily rewrite forty files in one pass. A forty-file diff is unreviewable, which means it is untrustable, which means it ships bugs. I scope the work so the diff stays in the range I can read carefully, usually a few hundred lines across a handful of files.</p>
+<p>When a task is genuinely large, I split it into a sequence of scoped changes that each stand on their own. Each one gets its own frame, its own agent run, its own review. The sequence builds toward the big change through steps I can verify one at a time. A migration across a codebase becomes twelve small reviewable diffs rather than one giant unreadable one.</p>
+<p>Scoping is also where I decide whether the task needs one agent or several. The honest answer is almost always one. I covered the real trade-offs in <a href="/blog/multi-agent-vs-single-agent-tradeoffs/">multi-agent versus single-agent systems</a>, and the short version is that coordination cost is real and most tasks do not need it.</p>
+<h2 id="stage-3-let-the-agent-work-against-an-instrumented-loop">Stage 3: Let the agent work against an instrumented loop</h2>
+<p>Now the agent runs. The third stage belongs to the agent, and the only thing I control here is what I built before it started.</p>
+<p>The agent reads the frame, reads the relevant files, and starts its loop. What matters is that I can see what it is doing. A run I cannot observe is a run I cannot trust. Structured logging of every tool call and its result is what lets me catch a wrong turn at step three instead of discovering it at step thirty.</p>
+<p>The instrumentation lives in the harness, not in the prompt. The harness enforces the iteration budget, the timeouts, and the retries, and it records the trace for me to read later. I wrote about what belongs in that layer in <a href="/blog/agent-harnesses/">agent harnesses</a>. A coding agent without a harness is a demo. A coding agent with one is a tool I can rely on.</p>
+<p>I do not babysit every step. I let the agent run to a natural checkpoint, a passing test or a completed sub-change, and then I look. The point of the instrumentation is that I can read back the whole trace when something is off, rather than staring at the agent live and hoping to catch the moment it goes wrong.</p>
+<h2 id="stage-4-review-like-you-do-not-trust-it">Stage 4: Review like you do not trust it</h2>
+<p>The fourth stage is the one people skip, and skipping it is why agentic work gets a bad name. Review is where I read the diff as if a stranger wrote it under deadline pressure.</p>
+<p>I do not read the agent's summary of what it did. I read the diff. The summary is the agent telling me what it believes it did. The diff is what it actually did. The two diverge more often than the confident tone suggests.</p>
+<p>My review checks the same things every time. Does the change match the acceptance check from stage one. Did it touch files outside the scope from stage two. Are there silent changes, a config flag flipped, an error swallowed, a test weakened so it passes. Agents are very good at making tests green, and not always by making the code correct.</p>
+<p>The errors that survive to this stage tend to be the quiet ones. A dependency added that did not need to be. An edge case handled by deleting the assertion that caught it. A retry wrapped around a call that should have failed loudly. I keep a running list from <a href="/blog/why-ai-agents-keep-failing-in-production/">why AI agents keep failing in production</a>, and most of those failures are visible in the diff once I actually read it line by line.</p>
+<h2 id="stage-5-land-it">Stage 5: Land it</h2>
+<p>The last stage is the cheapest when the first four were done well. Landing is commit, push, and open the PR, with the frame from stage one becoming the PR description.</p>
+<p>The frame doing double duty here is deliberate. The acceptance check I wrote before the agent started becomes the thing a reviewer verifies. The constraints become the things they know to watch. A PR that explains what done looks like is a PR that gets reviewed fast, because the reviewer is checking against a stated bar rather than guessing at intent.</p>
+<p>I let the agent draft the commit message and the PR body from the diff, then I edit. The draft is usually eighty percent right and saves the part of the job I find tedious. The edit is where I make sure the description matches what the diff actually does, not what the agent hoped it did.</p>
+<h2 id="where-the-playbook-saves-me">Where the playbook saves me</h2>
+<p>The playbook is not overhead. It is the thing that makes the agent worth using at all.</p>
+<p>The two stages I own, framing and review, are where my judgment lives. The stage the agent owns, the actual work, is where its speed lives. Scoping and landing are the seams that connect them. Skip framing and the agent solves the wrong problem. Skip review and the wrong solution ships. Keep all five and the agent becomes the fastest reliable contributor I work with.</p>
+<p>I run this loop several times a day. The model gets better every few months and the playbook does not change, because the playbook is about where human judgment belongs rather than about which model is best this quarter. The shape of what people build keeps shifting, and I mapped a lot of that in <a href="/blog/the-agent-design-space/">the agent design space</a>, but the outer loop has stayed the same since the first week I trusted an agent with real work. Get the structure right and the model becomes a detail you swap out.</p>
+<h2 id="faq">FAQ</h2>
+<p><strong>What is an agentic workflow?</strong></p>
+<p>An agentic workflow is a repeatable process where an AI agent does part of the work inside a structure you control. The agent runs its own loop on the task, and you stay in the loop at the points where being wrong is expensive, usually framing the work up front and reviewing the result.</p>
+<p><strong>Do I need a powerful model to run this playbook?</strong></p>
+<p>No. The playbook is built so a modest model still produces reliable output, because the structure catches its mistakes. A stronger model finishes more in one pass, and the framing and review stages still matter more than the model choice.</p>
+<p><strong>How big should a single agent task be?</strong></p>
+<p>Small enough that you can review the entire diff in one sitting, usually a few hundred lines across a handful of files. When the task is larger, split it into a sequence of scoped changes that each stand on their own and review each one.</p>
+<p><strong>Why review the diff instead of the agent's summary?</strong></p>
+<p>The summary is what the agent believes it did. The diff is what it actually did. Agents are good at making tests pass and writing confident summaries, and the quiet mistakes, a swallowed error or a weakened test, only show up when you read the diff.</p>
+<p><strong>Should I use multiple agents for a single feature?</strong></p>
+<p>Usually not. Coordination between agents adds latency and new failure modes, and most features ship faster with one well-instrumented agent. Reach for multiple agents only when the work splits into clearly separate roles that each need their own context and tools.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
+      </a>
+      <a href="/blog/mcp-server-setup-guide/" class="related-card">
+        <div class="related-card-date">2026-06-12</div>
+        <div class="related-card-title">Wiring Tools into Your Agent with MCP: A Practical Setup</div>
+      </a>
+      <a href="/blog/llm-inference-optimization/" class="related-card">
+        <div class="related-card-date">2026-05-06</div>
+        <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

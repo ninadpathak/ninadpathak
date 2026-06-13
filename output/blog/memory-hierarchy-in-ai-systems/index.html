@@ -75,10 +75,15 @@
   "@type": "TechArticle",
   "headline": "Memory Hierarchy in AI Systems: From Sensory to Semantic",
   "description": "How layered memory architecture helps AI systems achieve long-term context, personalization, and continuous learning, and why flat memory fails.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 2159,
+  "keywords": "ai, agents, memory, cognitive-architecture, infrastructure",
+  "articleSection": "ai",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-04-19",
   "dateModified": "2026-04-19",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/memory-hierarchy-in-ai-systems/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why not just use a large context window instead of a memory hierarchy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Context windows have a fixed capacity and a retrieval accuracy curve that degrades in the middle of long contexts. The BEAM memory benchmark shows why 1M context windows are not enough to solve this. A 1 million token context window does not give you 1 million tokens of useful memory. It gives you about 200K tokens of usable context at high accuracy, with the rest being noise. Explicit memory systems that manage what gets stored and how it gets retrieved outperform brute-force context at scale."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do you handle memory conflicts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Memory conflicts happen when new information contradicts old information. The approach I use is last-write-wins for factual claims, with explicit conflict flags for high-stakes contradictions. If a user says their name is Alice today and Bob yesterday, the system records both with timestamps and surfaces the recency to the agent for resolution."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What about privacy and memory?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Memory systems that persist user data across sessions introduce privacy considerations that flat context does not. The key is segmentation. User-specific memory should be stored with user isolation at the storage layer, not just at the application layer. I use project-scoped episodic stores where each project has its own database file. A project for work conversations never shares memory with a project for personal conversations."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How does this differ from RAG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "RAG is a retrieval mechanism for external knowledge, and I have argued at length about why RAG alone is not enough for agent memory. Memory hierarchy is an architecture for maintaining agent state across sessions. RAG answers the question \"what does the model know?\" Memory hierarchy answers \"what does the agent remember?\" They are complementary. RAG feeds external knowledge into the working context layer. Memory hierarchy manages everything the agent has experienced."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the biggest failure mode in layered memory systems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Staleness is the biggest failure mode. Memory systems that do not prune aggressively accumulate outdated information faster than they retrieve useful information. The fix is aggressive compression at the short-term to long-term boundary and explicit staleness thresholds that trigger deletion, not just compression."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +243,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-04-19">Apr 19, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">11 min read</span>
       </div>
       <h1 class="post-title">Memory Hierarchy in AI Systems: From Sensory to Semantic</h1>
@@ -369,17 +423,17 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/agent-memory-for-customer-support/" class="related-card">
-        <div class="related-card-date">2026-05-10</div>
-        <div class="related-card-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</div>
+      <a href="/blog/agentic-workflow-playbook/" class="related-card">
+        <div class="related-card-date">2026-06-14</div>
+        <div class="related-card-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</div>
       </a>
-      <a href="/blog/llm-inference-optimization/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
       </a>
-      <a href="/blog/why-coding-agents-lose-their-memory/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</div>
+      <a href="/blog/mcp-server-setup-guide/" class="related-card">
+        <div class="related-card-date">2026-06-12</div>
+        <div class="related-card-title">Wiring Tools into Your Agent with MCP: A Practical Setup</div>
       </a>
     </div>
   </div>
@@ -452,6 +506,7 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -461,9 +516,9 @@ Long-Term Memory -&gt;  Persistent store (vector DB, KG, function store)
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

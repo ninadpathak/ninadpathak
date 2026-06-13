@@ -8,7 +8,7 @@ tags:
 - ai
 - developer-experience
 - devtools
-title: 'Technical Writing for Ai Products: the New Rules'
+title: 'Technical Writing for AI Products: The New Rules'
 ---
 
 Technical writing for AI products has become a product design problem. A weak paragraph used to confuse a reader for five minutes. A weak prompt example or sloppy schema explanation now gets copied into production, fed to an agent, and multiplied across hundreds of calls before anyone notices the damage.

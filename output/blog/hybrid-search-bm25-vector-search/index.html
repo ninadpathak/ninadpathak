@@ -74,11 +74,16 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval",
-  "description": "Hybrid search combines BM25 sparse retrieval with dense vector search. Here's how reciprocal rank fusion works, what it costs, and when the combination actually beats either method alone.",
+  "description": "Hybrid search combines BM25 sparse retrieval with dense vector search. Here\u0027s how reciprocal rank fusion works, what it costs, and when the combination actually beats either method alone.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1826,
+  "keywords": "ai, rag, vector-search, infrastructure",
+  "articleSection": "ai",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-03-29",
   "dateModified": "2026-03-29",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/hybrid-search-bm25-vector-search/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should I always use hybrid search for RAG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For general-purpose document retrieval over mixed corpora, yes. For narrow semantic workloads where your queries are always natural language and your documents are prose, a well-tuned dense-only retriever can match hybrid performance with half the infrastructure cost. Benchmark your specific corpus before committing to the added complexity."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Is RRF always better than score normalization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "RRF is better when you don\u0027t have labeled data for weight calibration. Score normalization with tuned weights can outperform RRF, but only with enough annotated queries to validate the tuning. Elasticsearch\u0027s data suggests 40+ annotated queries as the practical minimum. Below that, use RRF."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is SPLADE and when should I use it instead of BM25?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SPLADE is a learned sparse model that produces sparse vector representations rather than BM25\u0027s explicit term statistics. SPLADE typically outperforms BM25 on semantic queries while retaining the exact-match properties of sparse retrieval. Use SPLADE if you want a stronger sparse component and are willing to run a model at query time. Use BM25 if you want zero ML inference cost on the sparse side."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What alpha value should I start with in Weaviate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start at 0.5 (balanced BM25 and vector) and evaluate on a representative query set. Move toward 1.0 (more vector) for semantic workloads, toward 0.0 (more BM25) for keyword-heavy workloads. Avoid spending time on fine-grained tuning until you\u0027ve measured that it moves your benchmark metric meaningfully."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Does hybrid search help with multi-lingual retrieval?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dense multilingual models handle translation-equivalent queries better than BM25. For multi-lingual corpora, the contribution of BM25 drops unless your queries and documents share the same language. In cross-lingual retrieval, a strong multilingual dense retriever with no BM25 typically outperforms hybrid."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +243,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-03-29">Mar 29, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">9 min read</span>
       </div>
       <h1 class="post-title">Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval</h1>
@@ -300,17 +354,17 @@ Dense multilingual models handle translation-equivalent queries better than BM25
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="related-card">
-        <div class="related-card-date">2026-05-12</div>
-        <div class="related-card-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</div>
+      <a href="/blog/agentic-workflow-playbook/" class="related-card">
+        <div class="related-card-date">2026-06-14</div>
+        <div class="related-card-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</div>
       </a>
-      <a href="/blog/llm-inference-optimization/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
       </a>
-      <a href="/blog/the-memory-hierarchy-why-rag-is-not-enough/" class="related-card">
-        <div class="related-card-date">2026-04-29</div>
-        <div class="related-card-title">The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</div>
+      <a href="/blog/mcp-server-setup-guide/" class="related-card">
+        <div class="related-card-date">2026-06-12</div>
+        <div class="related-card-title">Wiring Tools into Your Agent with MCP: A Practical Setup</div>
       </a>
     </div>
   </div>
@@ -383,6 +437,7 @@ Dense multilingual models handle translation-equivalent queries better than BM25
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -392,9 +447,9 @@ Dense multilingual models handle translation-equivalent queries better than BM25
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

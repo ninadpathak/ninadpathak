@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The MCP Client-Server Setup</title>
+<style>
+:root{--bg-1:#fff;--bg-2:#efefed;--border:#e0e0dc;--text-1:#0e0e0e;--text-2:#3a3a3a;--text-3:#888;--accent:#d44000;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
+@media (prefers-color-scheme:dark){:root{--bg-1:#111;--bg-2:#1a1a1a;--border:#1e1e1e;--text-1:#f0f0f0;--text-2:#c2c2c2;--text-3:#6a6a6a;--accent:#ff5f1f;}}
+body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
+.scene{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:20px;}
+.diagram{position:relative;width:100%;max-width:760px;}
+svg{width:100%;height:auto;display:block;}
+.node{fill:var(--bg-1);stroke:var(--border);stroke-width:1.5;}
+.node.accent{stroke:var(--accent);}
+.lbl{font-family:var(--mono);text-anchor:middle;fill:var(--text-1);font-weight:700;}
+.sub{font-family:var(--mono);text-anchor:middle;fill:var(--text-3);font-size:8px;letter-spacing:.08em;}
+.link{stroke:var(--border);stroke-width:1.5;fill:none;}
+.tlbl{font-family:var(--mono);text-anchor:middle;fill:var(--text-3);font-size:8px;letter-spacing:.14em;text-transform:uppercase;}
+.pulse{fill:var(--accent);}
+@media (max-width:600px){.sub{font-size:7px;}}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="diagram">
+    <svg viewBox="0 0 760 300">
+      <!-- transport link agent -> server -->
+      <line class="link" x1="190" y1="150" x2="320" y2="150"></line>
+      <text class="tlbl" x="255" y="138">transport</text>
+      <!-- server -> tools -->
+      <line class="link" x1="500" y1="120" x2="600" y2="80"></line>
+      <line class="link" x1="500" y1="180" x2="600" y2="220"></line>
+
+      <!-- agent (client) -->
+      <rect class="node accent" x="40" y="110" width="150" height="80" rx="8"></rect>
+      <text class="lbl" x="115" y="146" font-size="14">Agent</text>
+      <text class="sub" x="115" y="164">MCP client</text>
+
+      <!-- server -->
+      <rect class="node accent" x="320" y="100" width="180" height="100" rx="8"></rect>
+      <text class="lbl" x="410" y="138" font-size="14">MCP server</text>
+      <text class="sub" x="410" y="156">your tools live here</text>
+      <text class="sub" x="410" y="172">validate every call</text>
+
+      <!-- tool targets -->
+      <rect class="node" x="600" y="50" width="120" height="60" rx="8"></rect>
+      <text class="lbl" x="660" y="78" font-size="12">Database</text>
+      <text class="sub" x="660" y="94">read order</text>
+
+      <rect class="node" x="600" y="190" width="120" height="60" rx="8"></rect>
+      <text class="lbl" x="660" y="218" font-size="12">External API</text>
+      <text class="sub" x="660" y="234">write action</text>
+
+      <!-- animated pulse traveling the transport -->
+      <circle class="pulse" r="4" cx="190" cy="150">
+        <animate attributeName="cx" values="190;320;190" dur="3s" repeatCount="indefinite"></animate>
+        <animate attributeName="opacity" values="1;1;0.2;1" dur="3s" repeatCount="indefinite"></animate>
+      </circle>
+    </svg>
+  </div>
+</div>
+</body>
+</html>

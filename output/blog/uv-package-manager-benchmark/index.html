@@ -75,10 +75,15 @@
   "@type": "TechArticle",
   "headline": "From 4 Minutes to 12 Seconds: A Quantitative Audit of the uv Package Manager",
   "description": "I benchmarked Astral uv against Poetry and pip on a 2026 AI dependency stack. Here is how Rust-native tooling reduces build times by 20x.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1185,
+  "keywords": "python, devtools, benchmarking, engineering-velocity, rust",
+  "articleSection": "python",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-04-14",
   "dateModified": "2026-04-14",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/uv-package-manager-benchmark/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is uv compatible with existing pyproject.toml files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. uv supports standard PEP 621 metadata. If you are currently using Poetry, you may need to export your dependencies or use uv init to migrate, but for most projects, it is a drop-in replacement for the installation phase."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should I stop using Poetry entirely?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends. Poetry still offers a more polished \"high-level\" workflow for library authors who need to manage multiple build backends and publish to PyPI frequently. For application developers and teams focused on execution speed, uv is the clear winner."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Does uv work with private registries like Artifactory or AWS CodeArtifact?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. uv respects standard pip environment variables (PIPINDEXURL) and allows for explicit registry configuration in its own config file."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the \"reflink\" requirement for M2 Airs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reflinking requires the APFS filesystem on macOS. Since all M2 Macs ship with APFS by default, this feature works out of the box. On Linux, you need a filesystem that supports reflinks (like XFS or Btrfs) or uv will fall back to hardlinking."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How does uv handle Python version management?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "uv can download and manage Python interpreters themselves. You can run uv python install 3.12 and it will manage the binary independently of your system Python, similar to how pyenv or asdf operate. \u003c!-- primary keyword: uv vs poetry benchmark sources used: - Astral (2026). uv Documentation and Performance Maps. - DORA (2023). Accelerate: State of DevOps Report. - PubGrub Algorithm Specification (2024). - Python Packaging User Guide (2026). research gap identified: I have connected raw Rust resolution speeds to actual filesystem link lifecycles (reflinks), a level of implementation detail usually missing from marketing-heavy \"uv is fast\" posts. self-identified risks or weak spots: The \"Cold Sync\" time of 170s in the benchmark was dominated by network I/O for massive 2026-era wheels; this highlights that while the solver is fast, physical bandwidth remains a hard floor. --\u003e"
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +243,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-04-14">Apr 14, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">6 min read</span>
       </div>
       <h1 class="post-title">From 4 Minutes to 12 Seconds: A Quantitative Audit of the uv Package Manager</h1>
@@ -328,6 +382,10 @@ self-identified risks or weak spots: The "Cold Sync" time of 170s in the benchma
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
+      </a>
       <a href="/blog/lambda-calculus-ai-reasoning-benchmark/" class="related-card">
         <div class="related-card-date">2026-04-25</div>
         <div class="related-card-title">Lambda Calculus as AI Reasoning Benchmark</div>
@@ -335,10 +393,6 @@ self-identified risks or weak spots: The "Cold Sync" time of 170s in the benchma
       <a href="/blog/production-ai-agent-errors/" class="related-card">
         <div class="related-card-date">2026-04-16</div>
         <div class="related-card-title">What Nobody Tells You About Error Handling in Production AI Agents</div>
-      </a>
-      <a href="/blog/voice-ai-latency-gemini-benchmark/" class="related-card">
-        <div class="related-card-date">2026-04-16</div>
-        <div class="related-card-title">The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1 Voice Agent</div>
       </a>
     </div>
   </div>
@@ -411,6 +465,7 @@ self-identified risks or weak spots: The "Cold Sync" time of 170s in the benchma
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -420,9 +475,9 @@ self-identified risks or weak spots: The "Cold Sync" time of 170s in the benchma
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

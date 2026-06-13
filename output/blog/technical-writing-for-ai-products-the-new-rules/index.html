@@ -19,14 +19,14 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Technical Writing for Ai Products: the New Rules | Ninad Pathak</title>
+  <title>Technical Writing for AI Products: The New Rules | Ninad Pathak</title>
   <meta name="description" content="AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="Technical Writing for Ai Products: the New Rules">
+  <meta property="og:title"       content="Technical Writing for AI Products: The New Rules">
   <meta property="og:description" content="AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.">
   <meta property="og:url"         content="https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
@@ -73,12 +73,17 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Technical Writing for Ai Products: the New Rules",
+  "headline": "Technical Writing for AI Products: The New Rules",
   "description": "AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 2244,
+  "keywords": "technical-writing, ai, developer-experience, devtools",
+  "articleSection": "technical-writing",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-03-31",
   "dateModified": "2026-03-31",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is technical writing for AI products different from ordinary API documentation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI docs still need reference accuracy, but they also need to document behavior. That includes prompts, examples, schemas, refusals, model-version caveats, and evaluation criteria. Ordinary API docs can often stop at syntax plus semantics. AI docs usually fail if they stop there."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should a technical writer for an AI company know how to run evals?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, at least at a practical level. I do not expect every writer to design evaluation infrastructure, but I do expect them to understand what is being measured, what changed between versions, and which examples are part of the tested contract. A writer who cannot read eval outputs will struggle to document model behavior honestly."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Do AI product docs need more tutorials or more reference pages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both, but reference quality usually breaks first. Teams rush to publish glossy tutorials and skip the hard parts: parameter defaults, schema guarantees, refusal handling, and migration notes. I would fix reference and examples before adding another tutorial series."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should writers own prompt libraries and system prompts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shared ownership works best. Applied AI or engineering should own runtime behavior. Writers should own clarity, structure, consistency, and upgrade notes. That split fails when writers are blocked from seeing the actual prompts or when engineers treat prompt text as too informal to document. Prompt text is product logic in many AI systems."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the fastest way to tell whether an AI writer is strong?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ask them to rewrite one weak API page for an LLM feature. Give them the schema, a prompt template, three failure logs, and a model upgrade note. Strong writers get sharper. Weak writers get vaguer."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -116,7 +164,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Technical Writing for Ai Products: the New Rules",
+      "name": "Technical Writing for AI Products: The New Rules",
       "item": "https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/"
     }
   ]
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -183,7 +233,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/blog/">Blog</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">Technical Writing for Ai Products: the New Rules</li>
+      <li class="breadcrumb-item current" aria-current="page">Technical Writing for AI Products: The New Rules</li>
     </ol>
   </div>
 </nav>
@@ -193,9 +243,13 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-03-31">Mar 31, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">11 min read</span>
       </div>
-      <h1 class="post-title">Technical Writing for Ai Products: the New Rules</h1>
+      <h1 class="post-title">Technical Writing for AI Products: The New Rules</h1>
       <p class="lead">AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.</p>
       <div class="post-tags">
         <span class="tag">technical-writing</span>
@@ -337,17 +391,17 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/llm-inference-optimization/" class="related-card">
-        <div class="related-card-date">2026-05-06</div>
-        <div class="related-card-title">LLM Inference Optimization: What Actually Works in Production</div>
+      <a href="/blog/agentic-workflow-playbook/" class="related-card">
+        <div class="related-card-date">2026-06-14</div>
+        <div class="related-card-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</div>
       </a>
-      <a href="/blog/the-agent-design-space/" class="related-card">
-        <div class="related-card-date">2026-04-26</div>
-        <div class="related-card-title">The Agent Design Space: A Map of What Engineers Are Actually Building</div>
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
       </a>
-      <a href="/blog/the-taxonomy-of-ai-agents/" class="related-card">
-        <div class="related-card-date">2026-04-21</div>
-        <div class="related-card-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+      <a href="/blog/mcp-server-setup-guide/" class="related-card">
+        <div class="related-card-date">2026-06-12</div>
+        <div class="related-card-title">Wiring Tools into Your Agent with MCP: A Practical Setup</div>
       </a>
     </div>
   </div>
@@ -420,6 +474,7 @@
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -429,9 +484,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

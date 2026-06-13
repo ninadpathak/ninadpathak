@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Writing for DevTools: Content Engineers Actually Trust | Ninad Pathak</title>
+  <meta name="description" content="How to write documentation, tutorials, and developer content that engineers respect and buyers act on. The craft, the business case, and what separates practitioner writing from marketing.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Technical Writing for DevTools: Content Engineers Actually Trust">
+  <meta property="og:description" content="How to write documentation, tutorials, and developer content that engineers respect and buyers act on. The craft, the business case, and what separates practitioner writing from marketing.">
+  <meta property="og:url"         content="https://ninadpathak.com/technical-writing/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/technical-writing/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Technical Writing for DevTools: Content Engineers Actually Trust",
+  "description": "How to write documentation, tutorials, and developer content that engineers respect and buyers act on. The craft, the business case, and what separates practitioner writing from marketing.",
+  "url": "https://ninadpathak.com/technical-writing/",
+  "inLanguage": "en-US",
+  "isPartOf": { "@id": "https://ninadpathak.com/#website" },
+  "about": "Technical Writing for DevTools",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "url": "https://ninadpathak.com/blog/technical-writing-for-engineers/",
+        "name": "Technical Writing for Engineers: The 80/20 Guide"
+      },      {
+        "@type": "ListItem",
+        "position": 2,
+        "url": "https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/",
+        "name": "Technical Writing for AI Products: The New Rules"
+      },      {
+        "@type": "ListItem",
+        "position": 3,
+        "url": "https://ninadpathak.com/blog/the-case-for-shorter-technical-documentation/",
+        "name": "The Case for Shorter Technical Documentation"
+      },      {
+        "@type": "ListItem",
+        "position": 4,
+        "url": "https://ninadpathak.com/blog/developer-onboarding-docs-what-works-what-doesnt/",
+        "name": "Developer Onboarding Docs: What Works, What Doesn\u0027t"
+      },      {
+        "@type": "ListItem",
+        "position": 5,
+        "url": "https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/",
+        "name": "How to Write a Technical Tutorial That Actually Teaches"
+      },      {
+        "@type": "ListItem",
+        "position": 6,
+        "url": "https://ninadpathak.com/blog/how-to-write-a-changelog-developers-actually-read/",
+        "name": "How to Write a Changelog That Developers Actually Read"
+      },      {
+        "@type": "ListItem",
+        "position": 7,
+        "url": "https://ninadpathak.com/blog/writing-release-notes-that-developers-trust/",
+        "name": "Writing Release Notes That Developers Trust"
+      },      {
+        "@type": "ListItem",
+        "position": 8,
+        "url": "https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/",
+        "name": "Why Devtools Startups Lose Deals Over Bad Docs"
+      },      {
+        "@type": "ListItem",
+        "position": 9,
+        "url": "https://ninadpathak.com/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/",
+        "name": "Technical Content as a Moat: the Long Game for Developer Tools"
+      },      {
+        "@type": "ListItem",
+        "position": 10,
+        "url": "https://ninadpathak.com/blog/how-stripes-technical-blog-became-a-competitive-moat/",
+        "name": "How Stripe\u0027s Technical Blog Became a Competitive Moat"
+      },      {
+        "@type": "ListItem",
+        "position": 11,
+        "url": "https://ninadpathak.com/blog/engineering-velocity-documentation/",
+        "name": "Quantifying the Engineering Velocity Impact of Technical Documentation"
+      },      {
+        "@type": "ListItem",
+        "position": 12,
+        "url": "https://ninadpathak.com/blog/developer-trust-hierarchy/",
+        "name": "The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketing Content"
+      },      {
+        "@type": "ListItem",
+        "position": 13,
+        "url": "https://ninadpathak.com/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/",
+        "name": "From Engineer to Technical Writer: What I Kept and What I Left Behind"
+      }    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ninadpathak.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Topics", "item": "https://ninadpathak.com/topics/" },
+    { "@type": "ListItem", "position": 3, "name": "Technical Writing for DevTools", "item": "https://ninadpathak.com/technical-writing/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What makes technical writing good for a developer audience?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Accuracy first, then a clear path to a working result. Engineers trust writing that shows real commands, real output, and the parts that usually go wrong. Marketing language and vague benefits make them leave." }
+    },    {
+      "@type": "Question",
+      "name": "Why do DevTools companies lose deals over bad docs?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Developers evaluate tools by reading the docs before they ever talk to sales. If the docs are thin or wrong, the evaluation stalls and the deal dies quietly. The lose-deals post breaks down where this happens." }
+    },    {
+      "@type": "Question",
+      "name": "How is writing for AI products different?",
+      "acceptedAnswer": { "@type": "Answer", "text": "AI product docs have to cover prompts, schemas, evals, and version boundaries that change fast. The new-rules post covers the structure I would use to keep them accurate as the product moves." }
+    },    {
+      "@type": "Question",
+      "name": "Should technical docs be short or thorough?",
+      "acceptedAnswer": { "@type": "Answer", "text": "As short as possible while still getting the reader to a working result. Length for its own sake hides the important parts. The shorter-docs post makes the case with examples." }
+    }  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/blog/"      class="nav-link ">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link active">Topics</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/topics/">Topics</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Technical Writing for DevTools</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Topic</div>
+    <h1>Technical Writing for DevTools</h1>
+    <p class="lead">How to write documentation, tutorials, and developer content that engineers respect and buyers act on. The craft, the business case, and what separates practitioner writing from marketing.</p>
+    <div class="pillar-intro"><p>Developers can smell marketing in one sentence and they close the tab. Content that
+earns their trust reads like it was written by someone who has shipped the thing,
+because it was. That is the whole game for DevTools content.</p>
+<p>I came to writing from engineering, so the posts here treat docs as a product surface,
+not a chore. They cover the craft of writing for engineers, the business case that ties
+docs to revenue, and the patterns behind the teams who do it well.</p></div>
+  </div>
+</section>
+
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Writing for engineers</h2>
+    <p class="pillar-section-blurb">The craft of content that a technical reader will actually trust.</p>
+    <a href="/blog/technical-writing-for-engineers/" class="blog-row">
+      <div class="blog-row-title">Technical Writing for Engineers: The 80/20 Guide</div>
+      <div class="blog-row-desc">Most engineering documentation fails for the same reasons. Here is what actually moves the needle.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">10 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">developer-experience</span>
+        <span class="tag">engineering-culture</span>
+      </div>
+    </a>
+    <a href="/blog/technical-writing-for-ai-products-the-new-rules/" class="blog-row">
+      <div class="blog-row-title">Technical Writing for AI Products: The New Rules</div>
+      <div class="blog-row-desc">AI product docs now need prompts, schemas, evals, and version boundaries. I explain the rules I would use to judge a technical writer for an AI company.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">11 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">ai</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </a>
+    <a href="/blog/the-case-for-shorter-technical-documentation/" class="blog-row">
+      <div class="blog-row-title">The Case for Shorter Technical Documentation</div>
+      <div class="blog-row-desc">I think technical docs are often too long for the wrong reasons. Here’s why shorter docs usually work better, and where longer docs still earn their keep.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">8 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">documentation</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Specific formats</h2>
+    <p class="pillar-section-blurb">How to handle the documents developers read most.</p>
+    <a href="/blog/developer-onboarding-docs-what-works-what-doesnt/" class="blog-row">
+      <div class="blog-row-title">Developer Onboarding Docs: What Works, What Doesn't</div>
+      <div class="blog-row-desc">I’ve seen developer onboarding docs fail for the same reasons over and over. Here’s what actually helps a new engineer ship useful code in week one.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">10 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">developer-experience</span>
+        <span class="tag">documentation</span>
+      </div>
+    </a>
+    <a href="/blog/how-to-write-a-technical-tutorial-that-actually-teaches/" class="blog-row">
+      <div class="blog-row-title">How to Write a Technical Tutorial That Actually Teaches</div>
+      <div class="blog-row-desc">I explain how I structure technical tutorials so readers finish with a working result, fewer hidden assumptions, and less time wasted on broken examples.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">11 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">tutorials</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </a>
+    <a href="/blog/how-to-write-a-changelog-developers-actually-read/" class="blog-row">
+      <div class="blog-row-title">How to Write a Changelog That Developers Actually Read</div>
+      <div class="blog-row-desc">Most changelogs exist to satisfy a checkbox. Here's what makes developers actually read them, and how to structure entries so breaking changes land before they cause incidents.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">developer-experience</span>
+        <span class="tag">devtools</span>
+      </div>
+    </a>
+    <a href="/blog/writing-release-notes-that-developers-trust/" class="blog-row">
+      <div class="blog-row-title">Writing Release Notes That Developers Trust</div>
+      <div class="blog-row-desc">Developers trust release notes when they can make upgrade decisions fast. I explain the format, level of detail, and disclosure standard that earns that trust.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">developer-experience</span>
+        <span class="tag">releases</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">The business case</h2>
+    <p class="pillar-section-blurb">Why docs move revenue, retention, and developer trust.</p>
+    <a href="/blog/why-devtools-startups-lose-deals-over-bad-docs/" class="blog-row">
+      <div class="blog-row-title">Why Devtools Startups Lose Deals Over Bad Docs</div>
+      <div class="blog-row-desc">DevTools startups lose deals long before sales hears the objection. I explain how weak docs break evaluation, trials, and rollout confidence.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">devtools</span>
+        <span class="tag">documentation</span>
+      </div>
+    </a>
+    <a href="/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/" class="blog-row">
+      <div class="blog-row-title">Technical Content as a Moat: the Long Game for Developer Tools</div>
+      <div class="blog-row-desc">I explain why durable technical content compounds for developer tools, how strong docs and tutorials create distribution, and where teams usually waste the opportunity.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">8 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">developer-tools</span>
+        <span class="tag">content-strategy</span>
+      </div>
+    </a>
+    <a href="/blog/how-stripes-technical-blog-became-a-competitive-moat/" class="blog-row">
+      <div class="blog-row-title">How Stripe's Technical Blog Became a Competitive Moat</div>
+      <div class="blog-row-desc">I think Stripe’s technical blog compounds into a moat because it teaches, documents, and shapes developer trust long before a sales conversation starts.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">9 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">developer-marketing</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </a>
+    <a href="/blog/engineering-velocity-documentation/" class="blog-row">
+      <div class="blog-row-title">Quantifying the Engineering Velocity Impact of Technical Documentation</div>
+      <div class="blog-row-desc">I analyze the structural correlation between documentation quality and engineering throughput, using DORA metrics and Accelerate research to quantify the ROI of technical writing.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">8 min read</span>
+        <span class="tag">engineering-velocity</span>
+        <span class="tag">developer-productivity</span>
+        <span class="tag">dora-metrics</span>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="blog-list-section pillar-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Trust and craft</h2>
+    <p class="pillar-section-blurb">What makes practitioner writing outrank marketing, and how I got here.</p>
+    <a href="/blog/developer-trust-hierarchy/" class="blog-row">
+      <div class="blog-row-title">The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketing Content</div>
+      <div class="blog-row-desc">I analyze the structural reasons why engineers filter for technical depth and verify-ability, creating a 5-tier hierarchy of developer trust.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">6 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">developer-experience</span>
+        <span class="tag">content-strategy</span>
+      </div>
+    </a>
+    <a href="/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/" class="blog-row">
+      <div class="blog-row-title">From Engineer to Technical Writer: What I Kept and What I Left Behind</div>
+      <div class="blog-row-desc">I explain which engineering habits still make me better at technical writing, which ones I had to drop, and how the day-to-day work changed.</div>
+      <div class="blog-row-meta">
+        <span class="read-time">10 min read</span>
+        <span class="tag">technical-writing</span>
+        <span class="tag">career</span>
+        <span class="tag">developer-experience</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <h2>Frequently asked questions</h2>
+    <div class="pillar-faq post-content">
+      <h3>What makes technical writing good for a developer audience?</h3>
+      <p>Accuracy first, then a clear path to a working result. Engineers trust writing that shows real commands, real output, and the parts that usually go wrong. Marketing language and vague benefits make them leave.</p>
+      <h3>Why do DevTools companies lose deals over bad docs?</h3>
+      <p>Developers evaluate tools by reading the docs before they ever talk to sales. If the docs are thin or wrong, the evaluation stalls and the deal dies quietly. The lose-deals post breaks down where this happens.</p>
+      <h3>How is writing for AI products different?</h3>
+      <p>AI product docs have to cover prompts, schemas, evals, and version boundaries that change fast. The new-rules post covers the structure I would use to keep them accurate as the product moves.</p>
+      <h3>Should technical docs be short or thorough?</h3>
+      <p>As short as possible while still getting the reader to a working result. Length for its own sake hides the important parts. The shorter-docs post makes the case with examples.</p>
+    </div>
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    <h2 class="pillar-section-title">Related topics</h2>
+    <div class="related-grid">
+      <a href="/ai-workflows/" class="related-card">
+        <div class="related-card-title">AI Workflows & Automation</div>
+<div class="related-card-date">Automating the writing</div>      </a>
+      <a href="/ai-agent-architecture/" class="related-card">
+        <div class="related-card-title">AI Agent Architecture</div>
+<div class="related-card-date">The systems you are documenting</div>      </a>
+      <a href="/ai-agent-memory/" class="related-card">
+        <div class="related-card-title">AI Agent Memory</div>
+<div class="related-card-date">The deep end of the domain</div>      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer who gets this?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/glossary/" class="footer-link">Glossary</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

@@ -74,11 +74,16 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "How to Write a Changelog That Developers Actually Read",
-  "description": "Most changelogs exist to satisfy a checkbox. Here's what makes developers actually read them, and how to structure entries so breaking changes land before they cause incidents.",
+  "description": "Most changelogs exist to satisfy a checkbox. Here\u0027s what makes developers actually read them, and how to structure entries so breaking changes land before they cause incidents.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 1781,
+  "keywords": "technical-writing, developer-experience, devtools",
+  "articleSection": "technical-writing",
   "author": {
     "@type": "Person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com"
+    "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-03-30",
   "dateModified": "2026-03-30",
@@ -94,6 +99,49 @@
     "@type": "WebPage",
     "@id": "https://ninadpathak.com/blog/how-to-write-a-changelog-developers-actually-read/"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should the changelog live in the repo or on a web page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both, ideally. CHANGELOG.md in the repo satisfies developers who want it under version control alongside the code. A web page (or published GitHub releases) makes it discoverable without cloning. The canonical source should be the repo file. The web version is a rendering of it."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How detailed should a non-breaking change entry be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "One sentence that answers \"what changed and what does it let me do that I couldn\u0027t before?\" For a new feature: include the parameter name, the default value, and the simplest use case. For a fix: what was the incorrect behavior and what is the correct behavior now? Skip the internal implementation details."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What\u0027s the right release frequency for changelogs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Match your release cadence. Never accumulate multiple releases without entries. If you ship five patch releases and document them all at once, the developer who upgraded on patch 3 has no way to know what changed between 3 and 5. One entry per release, even if the entry is a single line."
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do you handle changelogs for libraries with many active versions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Maintain separate changelog sections per major version, or separate files. A developer on v2 should be able to read v2\u0027s history without wading through v3 changes that don\u0027t apply to them. Stripe handles this by filtering their changelog by API version."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should changelogs include internal changes or only public surface area?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only public surface area. Internal refactors, test updates, and CI changes are noise for someone deciding whether to upgrade. The changelog audience is integrators, not contributors. Keep internal changes in commit history and PR descriptions."
+      }
+    }  ]
 }
 </script>
 <script type="application/ld+json">
@@ -135,6 +183,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -164,6 +213,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -193,6 +243,10 @@
     <div class="prose-container">
       <a href="/blog/" class="back-link">← All posts</a>
       <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-03-30">Mar 30, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-time">9 min read</span>
       </div>
       <h1 class="post-title">How to Write a Changelog That Developers Actually Read</h1>
@@ -298,17 +352,17 @@ Only public surface area. Internal refactors, test updates, and CI changes are n
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/blog/technical-writing-for-engineers/" class="related-card">
-        <div class="related-card-date">2026-04-18</div>
-        <div class="related-card-title">Technical Writing for Engineers: The 80/20 Guide</div>
+      <a href="/blog/agentic-workflow-playbook/" class="related-card">
+        <div class="related-card-date">2026-06-14</div>
+        <div class="related-card-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</div>
       </a>
-      <a href="/blog/production-ai-agent-errors/" class="related-card">
-        <div class="related-card-date">2026-04-16</div>
-        <div class="related-card-title">What Nobody Tells You About Error Handling in Production AI Agents</div>
+      <a href="/blog/coding-agent-setup-that-works/" class="related-card">
+        <div class="related-card-date">2026-06-13</div>
+        <div class="related-card-title">How I Set Up a Coding Agent That Actually Finishes the Task</div>
       </a>
-      <a href="/blog/uv-package-manager-benchmark/" class="related-card">
-        <div class="related-card-date">2026-04-14</div>
-        <div class="related-card-title">From 4 Minutes to 12 Seconds: A Quantitative Audit of the uv Package Manager</div>
+      <a href="/blog/mcp-server-setup-guide/" class="related-card">
+        <div class="related-card-date">2026-06-12</div>
+        <div class="related-card-title">Wiring Tools into Your Agent with MCP: A Practical Setup</div>
       </a>
     </div>
   </div>
@@ -381,6 +435,7 @@ Only public surface area. Internal refactors, test updates, and CI changes are n
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -390,9 +445,9 @@ Only public surface area. Internal refactors, test updates, and CI changes are n
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

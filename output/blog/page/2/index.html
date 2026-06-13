@@ -73,10 +73,23 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://ninadpathak.com/#person",
     "name": "Ninad Pathak",
     "url": "https://ninadpathak.com",
     "jobTitle": "Technical Content Writer",
     "description": "Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.",
+    "knowsAbout": [
+      "Technical Writing",
+      "Developer Documentation",
+      "AI Agents",
+      "Agentic Workflows",
+      "AI Agent Memory",
+      "Retrieval-Augmented Generation (RAG)",
+      "Large Language Models",
+      "LLM Inference Optimization",
+      "Workflow Automation",
+      "DevTools Content Strategy"
+    ],
     "sameAs": [
       "https://linkedin.com/in/ninadwites/",
       "https://twitter.com/ninadwrites"
@@ -96,6 +109,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link active">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -125,6 +139,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -149,6 +164,36 @@
 
 <section class="blog-list-section">
   <div class="container">
+      <a href="/blog/why-ai-agents-keep-failing-in-production/" class="blog-row">
+        <div class="blog-row-title">Why AI Agents Keep Failing in Production and What the Field Is Doing About It</div>
+        <div class="blog-row-desc">I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">4 min read</span>
+          <span class="tag">ai agents</span>
+          <span class="tag">production</span>
+          <span class="tag">reliability</span>
+        </div>
+      </a>
+      <a href="/blog/the-taxonomy-of-ai-agents/" class="blog-row">
+        <div class="blog-row-title">A Taxonomy of AI Agents That Actually Explains What You Are Building</div>
+        <div class="blog-row-desc">Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">6 min read</span>
+          <span class="tag">ai</span>
+          <span class="tag">agents</span>
+          <span class="tag">architecture</span>
+        </div>
+      </a>
+      <a href="/blog/memory-for-voice-ai-agents/" class="blog-row">
+        <div class="blog-row-title">Memory for Voice AI Agents: What Text Chatbots Cannot Do</div>
+        <div class="blog-row-desc">Voice AI agents live or die by how they manage memory across a real-time streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something different.</div>
+        <div class="blog-row-meta">
+          <span class="read-time">17 min read</span>
+          <span class="tag">ai</span>
+          <span class="tag">voice</span>
+          <span class="tag">agents</span>
+        </div>
+      </a>
       <a href="/blog/state-of-ai-agent-memory-2026/" class="blog-row">
         <div class="blog-row-title">State of AI Agent Memory in 2026</div>
         <div class="blog-row-desc">The memory stack for AI agents has exploded into a fragmented mess of competing approaches. Here is what actually works, what is still research, and why the next 18 months will sort the winners from the wreckage.</div>
@@ -319,36 +364,6 @@
           <span class="tag">benchmarking</span>
         </div>
       </a>
-      <a href="/blog/local-wasm-vector-benchmarks/" class="blog-row">
-        <div class="blog-row-title">100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head</div>
-        <div class="blog-row-desc">I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications.</div>
-        <div class="blog-row-meta">
-          <span class="read-time">9 min read</span>
-          <span class="tag">vector-search</span>
-          <span class="tag">wasm</span>
-          <span class="tag">pglite</span>
-        </div>
-      </a>
-      <a href="/blog/agentic-cli-benchmarks/" class="blog-row">
-        <div class="blog-row-title">Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomous Repository Refactoring</div>
-        <div class="blog-row-desc">I ran a head-to-head benchmark of Claude Code and Gemini CLI on an M2 Air (16GB), testing their ability to autonomously refactor legacy code and resolve race conditions.</div>
-        <div class="blog-row-meta">
-          <span class="read-time">6 min read</span>
-          <span class="tag">agentic-cli</span>
-          <span class="tag">benchmarking</span>
-          <span class="tag">developer-productivity</span>
-        </div>
-      </a>
-      <a href="/blog/engineering-velocity-documentation/" class="blog-row">
-        <div class="blog-row-title">Quantifying the Engineering Velocity Impact of Technical Documentation</div>
-        <div class="blog-row-desc">I analyze the structural correlation between documentation quality and engineering throughput, using DORA metrics and Accelerate research to quantify the ROI of technical writing.</div>
-        <div class="blog-row-meta">
-          <span class="read-time">8 min read</span>
-          <span class="tag">engineering-velocity</span>
-          <span class="tag">developer-productivity</span>
-          <span class="tag">dora-metrics</span>
-        </div>
-      </a>
 
       <nav class="pagination">
         <div class="pagination-inner">
@@ -408,6 +423,7 @@
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -417,9 +433,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 

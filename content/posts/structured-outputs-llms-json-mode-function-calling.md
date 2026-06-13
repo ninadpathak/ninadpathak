@@ -7,7 +7,7 @@ tags:
 - ai
 - llm
 - infrastructure
-title: 'Structured Outputs with Llms: Json Mode, Function Calling, and When to Use
+title: 'Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use
   Each'
 ---
 

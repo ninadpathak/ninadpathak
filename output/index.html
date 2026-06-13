@@ -69,20 +69,45 @@
   </script>
 
   <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com",
-    "jobTitle": "Technical Content Writer",
-    "description": "Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.",
-    "sameAs": [
-      "https://linkedin.com/in/ninadwites/",
-      "https://twitter.com/ninadwrites"
-    ]
-  }
-  </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://ninadpathak.com/#website",
+  "url": "https://ninadpathak.com/",
+  "name": "Ninad Pathak",
+  "description": "Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.",
+  "inLanguage": "en-US",
+  "publisher": { "@id": "https://ninadpathak.com/#person" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://ninadpathak.com/#person",
+  "name": "Ninad Pathak",
+  "url": "https://ninadpathak.com/",
+  "jobTitle": "Technical Content Writer",
+  "description": "Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.",
+  "knowsAbout": [
+    "Technical Writing",
+    "Developer Documentation",
+    "AI Agents",
+    "Agentic Workflows",
+    "AI Agent Memory",
+    "Retrieval-Augmented Generation (RAG)",
+    "Large Language Models",
+    "LLM Inference Optimization",
+    "Workflow Automation",
+    "DevTools Content Strategy"
+  ],
+  "sameAs": [
+    "https://linkedin.com/in/ninadwites/",
+    "https://twitter.com/ninadwrites"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -96,6 +121,7 @@
       <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link ">Projects</a></li>
       <li><a href="/blog/"      class="nav-link ">Writing</a></li>
+      <li><a href="/topics/"    class="nav-link ">Topics</a></li>
       <li><a href="/about/"     class="nav-link ">About</a></li>
     </ul>
 
@@ -125,6 +151,7 @@
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
     <a href="/blog/"      class="mobile-nav-link">Writing</a>
+    <a href="/topics/"    class="mobile-nav-link">Topics</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -353,36 +380,36 @@
       <a href="/blog/" class="arrow-link">All posts →</a>
     </div>
 
+    <a href="/blog/agentic-workflow-playbook/" class="post-row">
+      <span class="post-row-date">2026-06-14</span>
+      <span class="post-row-title">The Agentic Workflow Playbook: From Prompt to Shipped PR</span>
+      <div class="post-row-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+      </div>
+    </a>
+    <a href="/blog/coding-agent-setup-that-works/" class="post-row">
+      <span class="post-row-date">2026-06-13</span>
+      <span class="post-row-title">How I Set Up a Coding Agent That Actually Finishes the Task</span>
+      <div class="post-row-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+      </div>
+    </a>
+    <a href="/blog/mcp-server-setup-guide/" class="post-row">
+      <span class="post-row-date">2026-06-12</span>
+      <span class="post-row-title">Wiring Tools into Your Agent with MCP: A Practical Setup</span>
+      <div class="post-row-tags">
+        <span class="tag">ai</span>
+        <span class="tag">agents</span>
+      </div>
+    </a>
     <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="post-row">
       <span class="post-row-date">2026-05-12</span>
       <span class="post-row-title">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</span>
       <div class="post-row-tags">
         <span class="tag">ai-agents</span>
         <span class="tag">rag</span>
-      </div>
-    </a>
-    <a href="/blog/memory-attribution-errors/" class="post-row">
-      <span class="post-row-date">2026-05-11</span>
-      <span class="post-row-title">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</span>
-      <div class="post-row-tags">
-        <span class="tag">ai-agents</span>
-        <span class="tag">agent-memory</span>
-      </div>
-    </a>
-    <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="post-row">
-      <span class="post-row-date">2026-05-11</span>
-      <span class="post-row-title">Shared Memory vs Isolated Memory in Multi-Agent Workflows</span>
-      <div class="post-row-tags">
-        <span class="tag">ai-agents</span>
-        <span class="tag">multi-agent</span>
-      </div>
-    </a>
-    <a href="/blog/agent-memory-for-customer-support/" class="post-row">
-      <span class="post-row-date">2026-05-10</span>
-      <span class="post-row-title">Building a Customer Support Agent with Persistent Memory: A Worked Example</span>
-      <div class="post-row-tags">
-        <span class="tag">ai-agents</span>
-        <span class="tag">memory</span>
       </div>
     </a>
   </div>
@@ -443,6 +470,7 @@
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
           <a href="/blog/" class="footer-link">Writing</a>
+          <a href="/topics/" class="footer-link">Topics</a>
           <a href="/contact/" class="footer-link">Contact</a>
           <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
@@ -452,9 +480,9 @@
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/blog/fine-tuning-vs-rag-for-agent-memory/" class="footer-link">Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</a>
-          <a href="/blog/memory-attribution-errors/" class="footer-link">Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</a>
-          <a href="/blog/shared-vs-isolated-memory-multi-agent/" class="footer-link">Shared Memory vs Isolated Memory in Multi-Agent Workflows</a>
+          <a href="/blog/agentic-workflow-playbook/" class="footer-link">The Agentic Workflow Playbook: From Prompt to Shipped PR</a>
+          <a href="/blog/coding-agent-setup-that-works/" class="footer-link">How I Set Up a Coding Agent That Actually Finishes the Task</a>
+          <a href="/blog/mcp-server-setup-guide/" class="footer-link">Wiring Tools into Your Agent with MCP: A Practical Setup</a>
         </div>
       </div>
 
