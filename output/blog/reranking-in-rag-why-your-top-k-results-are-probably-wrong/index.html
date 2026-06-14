@@ -77,7 +77,7 @@
   "description": "Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.",
   "image": "https://ninadpathak.com/static/og-image.png",
   "inLanguage": "en-US",
-  "wordCount": 1868,
+  "wordCount": 2206,
   "keywords": "ai, rag, vector-search, infrastructure",
   "articleSection": "ai",
   "author": {
@@ -204,7 +204,7 @@
         <span class="post-meta-sep" aria-hidden="true">·</span>
         <time class="post-meta-date" datetime="2026-03-21">Mar 21, 2026</time>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <span class="post-meta-time">9 min read</span>
+        <span class="post-meta-time">11 min read</span>
       </div>
       <h1 class="post-title">Reranking in RAG: Why Your Top-K Results Are Probably Wrong</h1>
       <p class="lead">Vector databases return results based on semantic similarity. I explain why that is rarely enough for production RAG and how a cross-encoder reranker fixes the problem.</p>
@@ -236,9 +236,9 @@
 
       </nav>
       <div class="post-content">
-        <p>Vector databases are powerful tools for building retrieval-augmented generation systems. I have seen many engineering teams assume that dropping text into an embedding model and performing a cosine similarity search is the entire retrieval job. You retrieve the top five results. You inject them into your prompt. You expect the language model to synthesize a perfect answer.</p>
-<p>That architecture almost always breaks down in production. I consistently notice accuracy issues when systems rely solely on single-stage dense retrieval. The top-k results from a vector database are often semantically related to the query but entirely irrelevant to the user's actual question.</p>
-<p>I want to explain exactly why this happens and how you can fix it. The solution requires adding a reranking stage to your retrieval pipeline. You will need to understand the structural limitations of bi-encoder models and the computational tradeoffs of cross-encoder architectures.</p>
+        <p>Vector databases are powerful tools for building retrieval-augmented generation systems. Plenty of engineering teams I have worked with assume that dropping text into an embedding model and running a cosine similarity search is the entire retrieval job. You retrieve the top five results. You inject them into your prompt. You expect the language model to synthesize a perfect answer.</p>
+<p>That architecture almost always breaks down in production. Whenever a system relies solely on single-stage dense retrieval, I start seeing the same class of accuracy issue: the top-k results from a vector database come back semantically related to the query but entirely useless for the user's actual question. A search for a refund policy returns three pages about shipping policy, because both live in the same neighborhood of "customer policy" text.</p>
+<p>Let me explain exactly why this happens and how you fix it. The repair is a reranking stage added to your retrieval pipeline. To use it well, you need to understand the structural limits of bi-encoder models and the compute tradeoffs of cross-encoder architectures.</p>
 <h2 id="the-structural-limitation-of-dense-embeddings">The structural limitation of dense embeddings</h2>
 <p>Every document you store in a vector database passes through an embedding model. I discussed the geometry of these spaces in <a href="/blog/embedding-models-compared/">Embedding models: the geometry of meaning across OpenAI, Cohere, and open-source</a>. The model compresses the entire semantic meaning of a chunk of text into a single array of floating-point numbers.</p>
 <div class="visual-wrapper">
@@ -248,16 +248,16 @@
   </div>
 </div>
 
-<p>The query undergoes the exact same process. The database then calculates the distance between the query vector and the document vectors.</p>
-<p>A fundamental problem exists here. The embedding model evaluates the query and the document in total isolation. The model never sees the query and the document together. We call this a bi-encoder architecture. The model generates a vector for the query. The model generates vectors for the documents. The database compares the vectors.</p>
-<p>Such an approach is extremely fast. You can pre-compute all document embeddings. You only need to embed the query at runtime. The distance calculation is computationally cheap.</p>
-<p>Speed comes at the cost of deep reasoning. The model compresses everything into one fixed-size representation. Nuanced relationships between specific words in the query and specific words in the document get lost during that compression.</p>
-<p>You ask a question about "how to configure a timeout for the postgres connection pool." The database might return a document about "how to configure a timeout for the redis connection pool." Both documents share massive semantic overlap. They both talk about configuring timeouts for connection pools. The embedding model plots them very close together in vector space.</p>
-<p>The language model receives the redis document. The language model generates a hallucinated answer or states it cannot find the information. Your retrieval system failed because semantic similarity does not equal relevance.</p>
+<p>Your query undergoes the exact same process, and the database then calculates the distance between the query vector and the document vectors.</p>
+<p>A fundamental problem hides in that setup. The embedding model evaluates the query and the document in total isolation, so it never sees the two together. We call this a bi-encoder architecture. The model generates a vector for the query, generates vectors for the documents, and the database compares the vectors after the fact.</p>
+<p>Such an approach is extremely fast. You pre-compute every document embedding once, embed only the query at runtime, and the distance calculation costs almost nothing. Think of two people describing a movie to a third party in separate rooms: neither hears the other, and you are left guessing whether they watched the same film by comparing their notes. That is the bi-encoder. Two notes, compared, with nobody in the room who read both at once.</p>
+<p>Speed buys that isolation at the cost of deep reasoning. The model compresses everything into one fixed-size representation, and the precise relationships between specific words in the query and specific words in the document get flattened out during that compression.</p>
+<p>Picture a question like "how to configure a timeout for the postgres connection pool." The database might hand back a document about "how to configure a timeout for the redis connection pool." Both documents share massive overlap. They both talk about configuring timeouts for connection pools, so the embedding model plots them as near neighbors in vector space.</p>
+<p>Your language model then receives the redis document and either hallucinates an answer or claims it cannot find the information. Retrieval failed because semantic similarity is not the same thing as relevance.</p>
 <h2 id="enter-the-cross-encoder">Enter the cross-encoder</h2>
-<p>I implement cross-encoders to solve this precise issue. A cross-encoder is a different type of machine learning model. It does not produce standalone embeddings.</p>
-<p>A cross-encoder takes two pieces of text simultaneously. You feed it the query and a single document as a single input. The model processes them together through its attention layers.</p>
-<p>Every token in the query can attend to every token in the document. The model can identify exact keyword matches. The model can understand complex logical connections between the two texts. The model outputs a single number. That number represents a highly accurate relevance score.</p>
+<p>I reach for cross-encoders to solve this precise issue. A cross-encoder is a different type of machine learning model, and it does not produce standalone embeddings at all.</p>
+<p>What it takes instead is two pieces of text simultaneously. You feed it the query and a single document as one combined input, and the model processes them together through its attention layers.</p>
+<p>Every token in the query can attend to every token in the document. The model spots exact keyword matches, follows the logical connection between the two texts, and outputs a single number that represents a highly accurate relevance score. To extend the earlier picture: the cross-encoder is the one reviewer who sits down with both the question and the candidate answer in front of them and reads them side by side before scoring.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Cross-Encoder Architecture</div>
   <div class="visual-container">
@@ -265,13 +265,13 @@
   </div>
 </div>
 
-<p>You cannot use a cross-encoder for your initial search. I will explain why. Running a cross-encoder requires passing the query and the document through a transformer model at runtime. Doing that for a million documents would take hours or days for a single search.</p>
-<p>We must combine both approaches. I build two-stage retrieval systems. The bi-encoder handles the initial wide net. The cross-encoder handles the final precision sorting.</p>
+<p>You cannot run a cross-encoder over your whole corpus for the initial search, and the reason is purely cost. Scoring a pair means pushing both texts through a transformer at query time. Do that for a million documents on a single user search and you are looking at hours, not milliseconds.</p>
+<p>Both approaches have to work together. I build two-stage retrieval systems where the bi-encoder casts the initial wide net and the cross-encoder does the final precision sorting on a much smaller set.</p>
 <h2 id="designing-a-two-stage-retrieval-pipeline">Designing a two-stage retrieval pipeline</h2>
-<p>The architecture looks like a funnel. You start with your massive corpus of documents.</p>
-<p>Stage one uses your standard vector database. You take the user's query and embed it using a fast bi-encoder. You run a vector search. You do not ask for the top five results. You ask for a much larger number. I typically retrieve the top one hundred or two hundred chunks from the database.</p>
-<p>Those one hundred chunks contain the correct answer somewhere inside them. The order of those one hundred chunks is likely wrong. The correct answer might sit at position forty-seven because the bi-encoder missed a subtle keyword connection.</p>
-<p>Stage two applies the cross-encoder. You take the original query. You pair it with each of the one hundred chunks retrieved in stage one. You send those one hundred pairs to your reranker model.</p>
+<p>The architecture looks like a funnel that starts with your massive corpus of documents. Wide at the top, narrow at the bottom, and each stage trades breadth for precision.</p>
+<p>Stage one runs on your standard vector database. You embed the user's query with a fast bi-encoder and run a vector search, but you do not ask for the top five results. You ask for a much larger number. I typically pull the top one hundred or two hundred chunks from the database.</p>
+<p>Somewhere inside those one hundred chunks sits the correct answer. The order is the problem. The right chunk might be sitting at position forty-seven because the bi-encoder missed a subtle keyword connection that pushed three near-duplicates above it.</p>
+<p>Stage two brings in the cross-encoder. You pair the original query with each of the one hundred chunks from stage one and send those one hundred pairs to your reranker model.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Bi-Encoder vs Cross-Encoder Sorting</div>
   <div class="visual-container">
@@ -279,12 +279,12 @@
   </div>
 </div>
 
-<p>The reranker scores each pair. You sort the one hundred chunks based on these new scores.</p>
-<p>You now take the top five or ten chunks from that newly sorted list. You pass only those highly relevant chunks to your language model for the final generation step. I covered the dangers of passing too much context in <a href="/blog/llm-context-windows-explained/">Your Context Window Has a Middle. Models Don't Read It.</a>. Providing a small, highly accurate set of chunks is critical for generation quality.</p>
+<p>The reranker scores each pair, and you re-sort the one hundred chunks by those new scores.</p>
+<p>From that newly sorted list you take only the top five or ten chunks and pass them to your language model for the final generation step. The dangers of passing too much context I covered in <a href="/blog/llm-context-windows-explained/">Your Context Window Has a Middle. Models Don't Read It.</a>. Handing the model a small, highly accurate set of chunks is what carries generation quality.</p>
 <h2 id="evaluating-the-latency-tradeoff">Evaluating the latency tradeoff</h2>
-<p>Adding a reranker introduces new latency to your pipeline. I always measure the impact of this additional compute step.</p>
+<p>Adding a reranker introduces new latency to your pipeline, and I always measure the cost of this extra compute step before shipping it.</p>
 <p>Retrieving one hundred vectors from a database takes milliseconds. Embedding the query takes perhaps fifty milliseconds. Your initial retrieval is very fast.</p>
-<p>Running one hundred pairs through a cross-encoder takes time. You are performing heavy transformer inference at runtime. Calling an external API like Cohere's Rerank endpoint will add network latency plus inference time. That can easily add hundreds of milliseconds to your total response time.</p>
+<p>The cross-encoder is where the clock starts ticking. Running one hundred pairs through it is heavy transformer inference at runtime, and calling an external API like Cohere's Rerank endpoint adds network latency on top of inference time. That single step can easily push hundreds of milliseconds onto your total response, the kind of pause a user feels as a beat of hesitation before the answer starts streaming.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Latency Tradeoff Comparison</div>
   <div class="visual-container">
@@ -292,13 +292,13 @@
   </div>
 </div>
 
-<p>You must balance accuracy against speed. I sometimes reduce the initial retrieval size to fifty chunks if latency becomes a critical bottleneck. You can also host a smaller, open-source reranker model on your own infrastructure to eliminate network round trips.</p>
-<p>Models like <code>bge-reranker-base</code> or <code>cross-encoder/ms-marco-MiniLM-L-6-v2</code> run very efficiently on small GPUs or even modern CPUs. I frequently deploy these models directly alongside the application server.</p>
-<p>You might wonder if the latency penalty is worth it. I consistently measure massive improvements in retrieval metrics after adding a reranker. Metrics like Mean Reciprocal Rank (MRR) or Normalized Discounted Cumulative Gain (NDCG) jump significantly. The user experience improves because the system stops providing confidently wrong answers based on loosely related documents.</p>
+<p>Accuracy and speed have to be balanced against each other. When latency becomes a hard bottleneck, say a chat interface where anything over a second feels broken, I cut the initial retrieval size from one hundred down to fifty chunks. Hosting a smaller open-source reranker on your own infrastructure also kills the network round trip entirely.</p>
+<p>Models like <code>bge-reranker-base</code> or <code>cross-encoder/ms-marco-MiniLM-L-6-v2</code> run efficiently on small GPUs or even modern CPUs, which is why I frequently deploy them directly alongside the application server rather than behind a separate service.</p>
+<p>Whether the latency penalty earns its keep is the obvious question. Every time I add a reranker, the retrieval metrics climb in a way I can see in the numbers. Mean Reciprocal Rank (MRR) and Normalized Discounted Cumulative Gain (NDCG) both jump. More to the point, the system stops handing users confident answers built on documents that were only loosely related to what they asked.</p>
 <h2 id="dealing-with-keyword-exactness">Dealing with keyword exactness</h2>
-<p>Vector search struggles with exact numbers, acronyms, and specific identifiers. I see this fail constantly in technical documentation search.</p>
-<p>A user searches for error code <code>E-4048</code>. The embedding model might split that into several tokens. The resulting vector represents a vague concept of an error code. The search returns documents containing <code>E-4049</code> or <code>E-4047</code> because they look semantically identical to the bi-encoder.</p>
-<p>The cross-encoder fixes this immediately. The cross-encoder sees <code>E-4048</code> in the query and looks for it specifically in the document. It understands that a one-character difference changes the relevance entirely.</p>
+<p>Exact numbers, acronyms, and specific identifiers are where vector search quietly falls apart, and I watch it fail constantly in technical documentation search.</p>
+<p>Take a user searching for error code <code>E-4048</code>. The embedding model might split that string into several tokens, and the resulting vector represents a vague concept of "an error code" rather than that exact one. The search then returns documents about <code>E-4049</code> or <code>E-4047</code>, because to the bi-encoder they look semantically identical.</p>
+<p>A cross-encoder fixes this on contact. Seeing <code>E-4048</code> in the query, it goes looking for that exact string in the document and treats a one-character difference as the relevance-killer it actually is.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Evaluating Keyword Exactness</div>
   <div class="visual-container">
@@ -306,11 +306,11 @@
   </div>
 </div>
 
-<p>You can also improve the first stage by using hybrid search. I often combine vector search with standard keyword search (BM25) to generate that initial list of one hundred candidates. The reranker then evaluates candidates from both sources. This ensures that exact keyword matches make it into the reranking pool even if the vector search missed them entirely.</p>
+<p>Improving the first stage with hybrid search helps here too. I often combine vector search with standard keyword search (BM25) to build that initial list of one hundred candidates, and the reranker then evaluates candidates from both sources. Pulling from both lists guarantees that exact keyword matches reach the reranking pool even when vector search missed them entirely.</p>
 <h2 id="comparing-models-and-providers">Comparing models and providers</h2>
-<p>The market provides excellent options for reranking. I have tested several approaches across different production workloads.</p>
-<p>Cohere provides a fantastic commercial API. Their <code>rerank-english-v3.0</code> and <code>rerank-multilingual-v3.0</code> models offer exceptional accuracy out of the box. You send them your query and a list of texts. They return the sorted indices and scores. The integration takes minutes.</p>
-<p>Open-source options require more infrastructure work but offer better unit economics at scale. The BAAI general embedding (BGE) family includes several powerful rerankers. I rely on <code>bge-reranker-large</code> for high-accuracy local deployments.</p>
+<p>The market offers excellent options for reranking, and I have tested several across different production workloads.</p>
+<p>Cohere ships a strong commercial API. Their <code>rerank-english-v3.0</code> and <code>rerank-multilingual-v3.0</code> models give you good accuracy out of the box. You send a query and a list of texts, they return the sorted indices and scores, and the integration is done in an afternoon.</p>
+<p>Open-source options ask for more infrastructure work and pay you back with better unit economics at scale. The BAAI general embedding (BGE) family includes several capable rerankers, and I lean on <code>bge-reranker-large</code> for high-accuracy local deployments where I want to avoid per-call API fees.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Comparing Models and Providers</div>
   <div class="visual-container">
@@ -318,10 +318,10 @@
   </div>
 </div>
 
-<p>You can also use a standard language model as a reranker. You pass the query and the document into a prompt and ask the model to output a score from one to ten. I generally avoid this approach. Generative models are slow. Parsing their output is fragile. Dedicated cross-encoders are smaller, faster, and trained specifically for the scoring task.</p>
+<p>A standard language model can also act as a reranker. You drop the query and the document into a prompt and ask the model to output a score from one to ten. I generally avoid this. Generative models are slow, parsing a number out of free-form text is fragile (one stray sentence of preamble and your regex breaks), and dedicated cross-encoders are smaller, faster, and trained for exactly this scoring task.</p>
 <h2 id="why-you-cannot-skip-the-reranker">Why you cannot skip the reranker</h2>
-<p>I hear arguments that newer, larger embedding models solve the relevance problem natively. Some teams believe that moving from a 384-dimensional vector to a 3072-dimensional vector eliminates the need for a second stage.</p>
-<p>My experience shows that dimensionality does not solve the fundamental architecture flaw. A bi-encoder still compresses two texts independently. You can give it more dimensions. You are still asking it to predict a relationship without looking at the two items together.</p>
+<p>A recurring argument I hear is that newer, larger embedding models solve relevance natively. Teams point at the jump from a 384-dimensional vector to a 3072-dimensional vector and conclude the second stage is now optional.</p>
+<p>Dimensionality does not touch the architecture flaw, though, and I have watched teams learn this the expensive way. A bi-encoder still compresses two texts independently. Give it eight times the dimensions and you are still asking it to guess a relationship without ever looking at the two items together. A bigger photograph of two rooms does not let you hear a conversation that never happened.</p>
 <div class="visual-wrapper">
   <div class="visual-title">The Problem with Dimension Scaling</div>
   <div class="visual-container">
@@ -329,12 +329,12 @@
   </div>
 </div>
 
-<p>I also hear arguments that massive context windows solve the problem. You might think you can just pass all one hundred retrieved chunks directly to the language model. You let the language model sort it out. I analyzed this approach when comparing <a href="/blog/rag-vs-fine-tuning/">Fine-Tuning vs RAG</a>. Stuffing the context window increases your inference costs linearly. It also increases latency dramatically. Time to first token degrades when you send eighty thousand tokens on every request.</p>
-<p>The language model will also lose track of information buried in that massive context. Providing five highly relevant chunks always yields better generation than providing one hundred marginally related chunks.</p>
+<p>The other argument I hear leans on massive context windows. The pitch is that you can pass all one hundred retrieved chunks straight to the language model and let it sort them out. I dug into that approach when comparing <a href="/blog/rag-vs-fine-tuning/">Fine-Tuning vs RAG</a>. Stuffing the context window grows your inference cost linearly and drags latency along with it. Time to first token degrades noticeably once you are sending eighty thousand tokens on every request, the difference between an answer that appears instantly and one the user waits on.</p>
+<p>Buried information also slips past the model in that much context. Five highly relevant chunks consistently produce better generation than one hundred marginally related ones, because the model is not forced to hunt for the signal you already could have isolated.</p>
 <h2 id="implementing-the-architecture">Implementing the architecture</h2>
-<p>You should map out your current retrieval pipeline. I recommend logging the initial retrieved chunks and their vector distance scores. You will quickly notice that the document you actually want often sits below the top five results.</p>
-<p>You can add a reranker with very few lines of code. Frameworks provide native wrappers for this. I prefer writing the integration manually to control the exact number of candidates passed between stages.</p>
-<p>You take the output of your vector database client. You format it into a list of strings. You pass that list and the query to your reranker. You slice the top results from the response. You pass those to your prompt builder.</p>
+<p>Start by mapping out your current retrieval pipeline. Log the initial retrieved chunks alongside their vector distance scores, and run a handful of real user queries through it. You will quickly catch the document you actually wanted sitting at position eight or twelve, below the five chunks you were shipping to the model.</p>
+<p>Adding a reranker costs you very few lines of code. Frameworks ship native wrappers for it, though I prefer writing the integration by hand so I control the exact number of candidates passed between stages.</p>
+<p>The flow itself is short. You take the output of your vector database client, format it into a list of strings, and pass that list plus the query to your reranker. You slice the top results off the response and hand them to your prompt builder.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Two-Stage Implementation Flow</div>
   <div class="visual-container">
@@ -342,8 +342,8 @@
   </div>
 </div>
 
-<p>The impact on system reliability is profound. The language model receives crisp, relevant context. Hallucinations drop. The system feels much more intelligent to the end user.</p>
-<p>You cannot build a production RAG system relying solely on cosine similarity. The math of vector spaces provides a great filtering mechanism. The math of vector spaces provides a terrible ranking mechanism. I always build with a two-stage pipeline to ensure the right information actually reaches the generation step.</p>
+<p>The effect on reliability runs deep. With crisp, relevant context in front of it, the language model hallucinates less and the whole system reads as noticeably sharper to the person on the other end.</p>
+<p>Cosine similarity alone will not carry a production RAG system. Vector distance is a great mechanism for filtering a million documents down to a hundred candidates, and a poor mechanism for ranking those hundred in the order a human would. Two stages, every time, so the right information actually reaches the generation step.</p>
       </div>
     </div>
   </div>

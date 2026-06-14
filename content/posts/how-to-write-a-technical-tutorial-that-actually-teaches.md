@@ -10,13 +10,13 @@ tags:
 title: How to Write a Technical Tutorial That Actually Teaches
 ---
 
-Readers quit tutorials for boring reasons. A command fails. A prerequisite was implied instead of stated. A code sample proves a feature exists yet never helps anyone build something real. I think weak tutorials usually fail long before the final paragraph because the writer optimized for coverage instead of successful completion.
+Readers quit tutorials for boring reasons. A command fails. A prerequisite was implied instead of stated, like a tutorial that runs `docker compose up` in step two without ever telling you Docker needs to be installed. A code sample proves a feature exists yet never helps anyone build something real. Weak tutorials usually fail long before the final paragraph because the writer optimized for coverage instead of successful completion.
 
 **Short answer:** I write technical tutorials around one concrete outcome, one clearly defined reader, and one verified path from blank project to working result. That means listing prerequisites precisely, showing code readers can actually run, cutting side quests, linking outward instead of duplicating reference material, and treating every confusing step as a product bug in the tutorial itself.
 
 ## A tutorial is a guided build
 
-Diataxis separates documentation into tutorials, how-to guides, reference, and explanation because readers arrive with different needs and should not be forced through the wrong format. A tutorial exists for guided learning through action, while a reference exists for lookup and a how-to guide exists for solving a narrower task with less hand-holding. That distinction matters more than most teams admit because many so-called tutorials are really product tours with code blocks pasted into them. The [Diataxis framework](https://diataxis.fr/) makes that separation explicit.
+Diataxis separates documentation into tutorials, how-to guides, reference, and explanation because readers arrive with different needs and should not be forced through the wrong format. A tutorial exists for guided learning through action. A reference exists for lookup, and a how-to guide solves a narrower task with less hand-holding. That distinction matters more than most teams admit because many so-called tutorials are really product tours with code blocks pasted between marketing paragraphs. The [Diataxis framework](https://diataxis.fr/) makes that separation explicit.
 
 <div class="visual-wrapper">
   <div class="visual-title">The Diataxis Framework</div>
@@ -25,9 +25,9 @@ Diataxis separates documentation into tutorials, how-to guides, reference, and e
   </div>
 </div>
 
-GitHub makes a similar point in its docs model. Their guidance says tutorials should help someone with basic product familiarity solve a real problem through a full workflow, include troubleshooting, and give readers concrete next steps after completion. GitHub also says products with tutorials should already have a quickstart, which is a useful constraint because it stops teams from using tutorials as the place where all first-time setup confusion goes to hide. I think that rule is right. A tutorial should build on existing confidence from a quickstart. See GitHub's [tutorial content type guidance](https://docs.github.com/en/enterprise-server@3.20/contributing/style-guide-and-content-model/tutorial-content-type).
+GitHub makes a similar point in its docs model. Their guidance says tutorials should help someone with basic product familiarity solve a real problem through a full workflow, include troubleshooting, and give readers concrete next steps after completion. Products with tutorials, GitHub adds, should already have a quickstart, which is a useful constraint because it stops teams from using tutorials as the place where all first-time setup confusion goes to hide. I think that rule is right. A tutorial should build on confidence the reader already earned in a quickstart, the way a recipe assumes you can already boil water. See GitHub's [tutorial content type guidance](https://docs.github.com/en/enterprise-server@3.20/contributing/style-guide-and-content-model/tutorial-content-type).
 
-That distinction changed how I write. Early in my career, I wrote pieces that tried to teach the whole product surface in one pass. Readers reached the end with plenty of nouns in their head and very little muscle memory. My drafts improved once I started asking a simpler question: what working thing will the reader have on their machine ninety minutes from now?
+That distinction changed how I write. Early in my career, I wrote pieces that tried to teach the whole product surface in one pass, the kind of post that lists every CLI flag before the reader has run a single command. Readers reached the end with plenty of nouns in their head and very little muscle memory. My drafts improved once I started asking a simpler question: what working thing will the reader have on their machine ninety minutes from now?
 
 ## Define the reader with enough precision to remove hidden assumptions
 
@@ -47,15 +47,15 @@ My process starts with a brutally specific reader profile:
 3. Goal state: "deploy a basic API that persists comments"
 4. Things I will not explain: "how HTTP works, what JSON is, how to install Git"
 
-That list shapes every paragraph that follows. Google says audience definition should account for role, proximity to the subject, and what the audience still needs to learn. I use the same frame because it gives me permission to leave some things out. Tutorials get bloated when the writer fears excluding anyone. Exclusion is exactly what keeps the learning path usable.
+Every paragraph that follows gets shaped by that list. Google says audience definition should account for role, proximity to the subject, and what the audience still needs to learn. I use the same frame because it gives me permission to leave some things out. Tutorials get bloated when the writer fears excluding anyone, so they pad the intro with a paragraph explaining what an API is to a reader who already ships them daily. Exclusion is exactly what keeps the learning path usable.
 
-Readers usually forgive depth they can skip. Readers rarely forgive missing setup assumptions they had no way to infer.
+Depth they can skip is easy to forgive. A missing setup assumption they had no way to infer, like an undocumented environment variable the whole script depends on, is what makes a reader close the tab.
 
 ## Choose one end state and make it visible early
 
 GitHub's tutorial guidance recommends stating what someone will build and showing an example of a successful result. That advice sounds small. I think it is load-bearing.
 
-A tutorial without a visible end state feels like unpaid labor. Readers keep executing steps without knowing whether the payoff matches their use case. Twilio's [SMS quickstart](https://www.twilio.com/docs/messaging/quickstart) works because the goal is concrete from the first section: send and receive text messages with a specific product path. Cloudflare's [Workers tutorials index](https://developers.cloudflare.com/workers/tutorials/) does the same thing at catalog level by naming the artifact, the difficulty, and the freshness of each tutorial.
+A tutorial without a visible end state feels like unpaid labor. Readers keep executing steps without knowing whether the payoff matches their use case, copying commands the way you sign a contract you have not read. Twilio's [SMS quickstart](https://www.twilio.com/docs/messaging/quickstart) works because the goal is concrete from the first section: send and receive text messages with a specific product path. Cloudflare's [Workers tutorials index](https://developers.cloudflare.com/workers/tutorials/) does the same thing at catalog level by naming the artifact, the difficulty, and the freshness of each tutorial.
 
 Whenever I draft a tutorial, I make the outcome visible in the opening:
 
@@ -64,7 +64,7 @@ Whenever I draft a tutorial, I make the outcome visible in the opening:
 - what the reader should already know
 - what the finished result looks like
 
-That opening does two jobs. Search engines can understand the page faster, and a human can decide whether to commit the next half hour. I covered a similar DX problem in [How to Write a Changelog That Developers Actually Read](/blog/how-to-write-a-changelog-developers-actually-read/): engineers keep reading when the page tells them quickly whether the next section is worth their time.
+Two jobs get done by that opening. Search engines can understand the page faster, and a human can decide whether to commit the next half hour. I covered a similar DX problem in [How to Write a Changelog That Developers Actually Read](/blog/how-to-write-a-changelog-developers-actually-read/): engineers keep reading when the page tells them quickly whether the next section is worth their time.
 
 ## Prerequisites should reduce failure, not satisfy a template
 
@@ -74,16 +74,16 @@ Weak tutorials list prerequisites like corporate boilerplate:
 - some knowledge of APIs
 - an account
 
-Those bullets help nobody. GitHub explicitly says the introduction should clarify audience, prerequisites, and prior knowledge. Twilio's quickstart goes further and lists the runtime, local tooling, SDK dependency, and account setup in a way that maps cleanly to the work ahead. That level of specificity saves support time because the reader can self-select out before step three.
+Those bullets help nobody. A reader cannot tell whether "some knowledge of APIs" means they should know what a status code is or whether they need to have written an OAuth flow before. GitHub explicitly says the introduction should clarify audience, prerequisites, and prior knowledge. Twilio's quickstart goes further and lists the runtime, local tooling, SDK dependency, and account setup in a way that maps cleanly to the work ahead. That level of specificity saves support time because the reader can self-select out before step three.
 
 I now write prerequisites in two layers:
 
 1. Conceptual prerequisites
 2. Machine prerequisites
 
-Conceptual prerequisites describe what the reader must already understand. Machine prerequisites describe exactly what must already exist on the reader's system. That second layer should include versions when they matter, credentials when they matter, and region or plan constraints when they matter.
+Conceptual prerequisites describe what the reader must already understand. Machine prerequisites describe exactly what must already exist on the reader's system, down to "Node.js 20 or later" rather than a bare "Node.js installed" that lets a reader on version 14 hit a syntax error in step one. That second layer should include versions when they matter, credentials when they matter, and region or plan constraints when they matter.
 
-GitLab's docs workflow argues that documentation quality improves when engineers think early about the examples a user will want and verify them alongside the feature. I have seen that firsthand. Tutorial breakage usually traces back to an example that nobody reran after the product changed. GitLab's [documentation workflow](https://docs.gitlab.com/development/documentation/workflow/) treats docs as part of the definition of done for user-facing changes. More teams should copy that.
+GitLab's docs workflow argues that documentation quality improves when engineers think early about the examples a user will want and verify them alongside the feature. I have seen that firsthand. Tutorial breakage usually traces back to an example that nobody reran after the product changed, like a snippet that calls an endpoint the team renamed two releases ago. GitLab's [documentation workflow](https://docs.gitlab.com/development/documentation/workflow/) treats docs as part of the definition of done for user-facing changes. More teams should copy that.
 
 My take is blunt: a missing prerequisite is a failed test case.
 
@@ -91,7 +91,7 @@ My take is blunt: a missing prerequisite is a failed test case.
 
 MDN's code example guidance contains the sentence every tutorial writer should tape above the monitor: readers will copy and paste examples into their own code and may put them into production. MDN then draws the obvious consequence. Examples should be usable, follow accepted best practices, and avoid insecure or bloated patterns. Read the full guidance at [MDN's code example guide](https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Code_style_guide).
 
-That rule changes the standard for tutorial code. A code block in a tutorial is software someone will try under deadline pressure.
+The standard for tutorial code shifts once you accept that rule. A code block in a tutorial is software someone will try under deadline pressure, then quietly ship if it works.
 
 My code example checklist is simple:
 
@@ -101,22 +101,22 @@ My code example checklist is simple:
 4. Supporting files must exist in the repo or article when required.
 5. Output screenshots or sample responses must reflect the current product.
 
-Twilio does one thing here that I respect: it allows faster setup, then immediately warns readers not to keep credentials hardcoded in production and shows the environment variable pattern. That sequence respects the tutorial's teaching goal without pretending shortcuts are safe forever. Plenty of tutorials hide production tradeoffs until the end, which is late enough to teach the wrong habit.
+Twilio does one thing here that I respect: it allows faster setup, then immediately warns readers not to keep credentials hardcoded in production and shows the environment variable pattern. That sequence respects the tutorial's teaching goal without pretending shortcuts are safe forever. Plenty of tutorials hide production tradeoffs until the end, dropping the "of course, never commit your API key" note three steps after the reader already pasted it into a file they pushed to GitHub.
 
-I have shipped tutorials where I only noticed a broken step during the final clean-room test on a laptop with none of my usual tooling installed. Those sessions are humbling. They are also where the tutorial becomes real.
+Some of my own tutorials only revealed a broken step during the final clean-room test on a laptop with none of my usual tooling installed. One assumed a global `ts-node` I had forgotten was even on my machine, so the very first command failed for anyone following along. Those sessions are humbling. They are also where the tutorial becomes real.
 
 ## Heading structure carries more teaching weight than people think
 
 Google's style guide says task-based headings should start with a bare infinitive such as "Create an instance" rather than an "-ing" form such as "Creating an instance." Microsoft says procedural headings should concisely describe what the instructions help customers do. Both guides are pushing toward the same outcome: headings that expose action clearly and make scanning reliable. See Google's [headings guidance](https://developers.google.com/style/headings) and Microsoft's [step-by-step instruction guidance](https://learn.microsoft.com/en-us/style-guide/procedures-instructions/writing-step-by-step-instructions).
 
-I agree with both, partly for pedagogy and partly for SEO. Headings in strong tutorials carry a second interface for the page:
+I agree with both, partly for pedagogy and partly for SEO. Strong tutorial headings carry a second interface for the page:
 
 - search engines extract them
 - answer engines quote them
 - readers skim them before committing
 - frustrated readers jump between them when a step breaks
 
-Heading quality often tells me whether a tutorial will teach well before I read the body. Vague headings usually mean vague sequencing.
+Heading quality often tells me whether a tutorial will teach well before I read the body. A table of contents reading "Setup," "Configuration," and "Usage" warns me the author never decided what the reader actually does, where "Create the database table" and "Send your first request" would have told me the sequence was real. Vague headings usually mean vague sequencing.
 
 ## Teaching requires sequencing pressure, not encyclopedic completeness
 
@@ -129,11 +129,11 @@ Microsoft recommends one action per step, numbered procedures for multi-step flo
   </div>
 </div>
 
-I cut aggressively in tutorial drafts. Reference material goes to docs links. Deep conceptual explanation goes to a dedicated section or another post. Optional branches get labeled as optional or removed outright. Readers who are trying to finish a build rarely need a detour into system architecture during step six.
+Cutting aggressively in drafts is most of my editing time. Reference material goes to docs links. Deep conceptual explanation goes to a dedicated section or another post. Optional branches get labeled as optional or removed outright. A reader trying to deploy a comments API rarely needs a three-paragraph detour into how eventual consistency works during step six.
 
-That does not mean tutorials should be shallow. Depth belongs in the choice of workflow, the reasoning behind key decisions, and the troubleshooting that anticipates where readers get stuck. GitHub recommends a troubleshooting section for tutorials, and I think teams underinvest there because troubleshooting feels less glamorous than the happy path. Yet the troubleshooting section often contains the highest teaching value on the page.
+That does not mean tutorials should be shallow. Depth belongs in the choice of workflow, the reasoning behind key decisions, and the troubleshooting that anticipates where readers get stuck. GitHub recommends a troubleshooting section for tutorials, and I think teams underinvest there because troubleshooting feels less glamorous than the happy path. The troubleshooting section, though, often contains the highest teaching value on the page.
 
-My favorite non-obvious sign of a mature tutorial is a short section that says, in plain language, "if you hit this symptom, here is what likely went wrong." That shows the author has watched someone actually use the tutorial.
+My favorite sign of a mature tutorial is a short section that says, in plain language, "if you see a 403 here, you probably skipped the token scope in step two." A line that specific only gets written after the author has watched someone actually use the tutorial and fail at exactly that point.
 
 ## Verify the workflow on a clean machine or the tutorial is unfinished
 
@@ -153,13 +153,13 @@ That pass catches three recurring tutorial bugs:
 - filenames that changed during revision but not in prose
 - outputs that differ slightly from the current product and make readers doubt the whole workflow
 
-Writers often think the draft is finished once the prose reads well. My experience says the draft becomes trustworthy only after the verification pass produces no surprises. If you need someone to write this kind of piece for your team, [my work page](/work) shows the kind of technical depth I aim for across developer content.
+Writers often think the draft is finished once the prose reads well. My experience says the draft becomes trustworthy only after the verification pass produces no surprises, the first run where I get from empty folder to working endpoint without once muttering "oh, you also need to." If you need someone to write this kind of piece for your team, [my work page](/work) shows the kind of technical depth I aim for across developer content.
 
 ## Good tutorials leave readers with transferable judgment
 
 A reader should finish a tutorial with more than a deployed demo. They should also understand a few decisions well enough to adapt the pattern later.
 
-That is where many tutorials miss the last mile. They lead the reader through commands and never explain why one path was chosen over another. GitHub's model for tutorials includes next steps and best-practice discussion for exactly this reason. A tutorial that only yields replication creates dependency on the writer. A tutorial that adds a small amount of judgment creates independence.
+Many tutorials miss that last mile. They lead the reader through commands and never explain why one path was chosen over another, why the example reaches for a queue instead of a cron job, say, when both would work. GitHub's model for tutorials includes next steps and best-practice discussion for exactly this reason. A tutorial that only yields replication leaves the reader dependent on the writer for the next variation. A tutorial that hands over a little judgment lets them adapt the pattern alone.
 
 I try to leave readers with three forms of transfer:
 

@@ -77,7 +77,7 @@
   "description": "A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe.",
   "image": "https://ninadpathak.com/static/og-image.png",
   "inLanguage": "en-US",
-  "wordCount": 1684,
+  "wordCount": 1898,
   "keywords": "ai, agents, developer-experience",
   "articleSection": "ai",
   "author": {
@@ -247,7 +247,7 @@
         <span class="post-meta-sep" aria-hidden="true">·</span>
         <time class="post-meta-date" datetime="2026-06-12">Jun 12, 2026</time>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <span class="post-meta-time">8 min read</span>
+        <span class="post-meta-time">9 min read</span>
       </div>
       <h1 class="post-title">Wiring Tools into Your Agent with MCP: A Practical Setup</h1>
       <p class="lead">A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe.</p>
@@ -279,11 +279,11 @@
       </nav>
       <div class="post-content">
         <p>An agent that cannot touch the outside world is a very expensive autocomplete. Tools are what let it read a database, hit an API, or run a command, and the Model Context Protocol is the cleanest way I have found to wire those tools in. I went deep on the concept in <a href="/blog/model-context-protocol-explained/">the Model Context Protocol explained</a>. Here I want to show the practical setup, the parts you actually build and run.</p>
-<p>The promise of MCP is simple. You write a tool once, expose it through a standard interface, and any MCP-aware agent can call it without a custom integration. The same server that powers a coding agent today works with a different agent tomorrow. That portability is the reason I reach for it instead of bolting tools directly into one agent.</p>
+<p>Write a tool once, expose it through a standard interface, and any MCP-aware agent can call it without a custom integration. A server I built to query our order database for a coding agent kept working untouched when I pointed a separate research agent at it the next week. That portability is the reason I reach for it instead of bolting tools directly into one agent.</p>
 <h2 id="what-mcp-actually-gives-you">What MCP actually gives you</h2>
-<p>MCP is a protocol that sits between an agent and the tools it wants to use. The agent is the client. Your tool runs inside a server. The protocol defines how the two talk, so neither side needs to know the other's internals.</p>
-<p>The payoff is that the integration stops being one-off. Before MCP, every tool I wanted an agent to use meant gluing an API into that specific agent's tool-calling format. Each new agent meant doing it again. With MCP, the tool lives in a server that speaks the protocol, and the agent discovers what it offers at connection time.</p>
-<p>A server can expose three kinds of thing. Tools, which the agent calls to do work. Resources, which the agent reads for context. Prompts, which are reusable templates. For most setups the tools are the part that matters, so that is where I will spend the rest of this guide.</p>
+<p>Sitting between an agent and the tools it wants to use, MCP is a protocol with two ends. The agent is the client, your tool runs inside a server, and the protocol defines how the two talk, so neither side needs to know the other's internals. It works the way a wall socket does. The lamp does not care what power plant is behind the outlet, and the grid does not care what you plug in, because the plug shape is the contract both sides agree on.</p>
+<p>The payoff is that the integration stops being one-off. Every tool I wanted an agent to use once meant gluing an API into that specific agent's tool-calling format, and each new agent meant doing it again. With MCP, the tool lives in a server that speaks the protocol, and the agent discovers what it offers at connection time.</p>
+<p>A server can expose three kinds of thing. Tools, which the agent calls to do work. Resources, which the agent reads for context. Prompts, which are reusable templates. Tools are the part that matters for most setups, so that is where I will spend the rest of this guide.</p>
 <div class="visual-wrapper">
   <div class="visual-title">THE MCP CLIENT-SERVER SETUP</div>
   <div class="visual-container">
@@ -293,10 +293,10 @@
 
 <h2 id="the-shape-of-an-mcp-setup">The shape of an MCP setup</h2>
 <p>Three pieces make up a working setup. The client is the agent, or the harness around it, that wants to call tools. The server is the process you write that exposes those tools. The transport is the channel between them.</p>
-<p>The transport is usually one of two things. A local server runs as a subprocess and talks over standard input and output, which is the common choice for tools that live on the same machine as the agent. A remote server talks over HTTP, which suits tools that run as a shared service many agents connect to. For a first setup, the local subprocess transport is the path of least resistance.</p>
+<p>Two transports cover almost everything. A local server runs as a subprocess and talks over standard input and output, which is the common choice for tools that live on the same machine as the agent, like a script that reads files in the repo you are working in. When the server runs as a shared service many agents connect to, say an internal search tool the whole team's agents hit, it talks over HTTP instead. Reach for the local subprocess transport on a first setup, since it needs no ports, no auth, and no deploy.</p>
 <p>The agent connects, asks the server what it offers, and gets back a list of tools with their names, descriptions, and argument schemas. From then on the agent can call any of those tools by name, and the server runs the real work and returns the result.</p>
 <h2 id="building-a-minimal-server">Building a minimal server</h2>
-<p>A working MCP server is smaller than people expect. The Python SDK does the protocol plumbing, so the code I write is mostly the tool itself. Here is a server that exposes one tool for looking up an order.</p>
+<p>A working MCP server is smaller than people expect. Since the Python SDK does the protocol plumbing, the code I write is mostly the tool itself. Here is a server that exposes one tool for looking up an order.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.fastmcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastMCP</span>
 
 <span class="n">mcp</span> <span class="o">=</span> <span class="n">FastMCP</span><span class="p">(</span><span class="s2">&quot;orders&quot;</span><span class="p">)</span>
@@ -318,15 +318,15 @@
     <span class="n">mcp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>
 
-<p>The decorator is doing the heavy work. It registers the function as a tool, reads its type hints to build the argument schema, and uses the docstring as the description the agent sees. The agent learns that an order ID is a string and that the tool returns a status, all from the function signature and a one-line docstring.</p>
-<p>Calling <code>mcp.run()</code> with no arguments starts the server on the standard input and output transport, ready for a local agent to connect as a subprocess. A real server swaps the dictionary for a database call or an API request, and the rest of the structure stays the same.</p>
+<p>That decorator does most of the work. It registers the function as a tool, reads its type hints to build the argument schema, and uses the docstring as the description the agent sees. From the function signature and a one-line docstring alone, the agent learns that an order ID is a string and that the tool returns a status.</p>
+<p>Calling <code>mcp.run()</code> with no arguments starts the server on the standard input and output transport, ready for a local agent to connect as a subprocess. To turn this into something real, I swap the hardcoded dictionary for a database query or an API request, like a SELECT against the orders table or a GET to a fulfillment endpoint, and the rest of the structure stays the same.</p>
 <h2 id="designing-the-tools-so-the-agent-calls-them-right">Designing the tools so the agent calls them right</h2>
-<p>A tool the agent calls wrong is worse than no tool at all. Good tool design is the part of MCP that decides whether the setup helps or hurts, and it comes down to the same principles I covered in <a href="/blog/structured-outputs-llms-json-mode-function-calling/">structured outputs and function calling</a>.</p>
-<p>The name and description are the agent's only guide to when a tool applies. I name tools for what they do in plain terms, <code>get_order_status</code> rather than <code>fetch_data</code>, and I write the description for the agent rather than for a human reading the source. The agent reads that description on every decision about which tool to call, so an ambiguous one produces wrong calls.</p>
-<p>The argument schema is the contract. Clear types and required fields let the agent build a valid call on the first try. A tool that takes a vague blob of text invites the agent to stuff the wrong thing into it. The tighter the schema, the fewer malformed calls I see.</p>
-<p>The return value matters as much as the input. I return structured data the agent can reason about, and I make errors explicit rather than silent. A tool that returns an error message the agent can read leads to a recovery. A tool that returns nothing on failure leads to the agent assuming success and moving on with a wrong picture.</p>
+<p>A tool the agent calls wrong is worse than no tool at all. Whether the setup helps or hurts comes down to tool design, and it draws on the same principles I covered in <a href="/blog/structured-outputs-llms-json-mode-function-calling/">structured outputs and function calling</a>.</p>
+<p>The name and description are the agent's only guide to when a tool applies. I name tools for what they do in plain terms, <code>get_order_status</code> rather than <code>fetch_data</code>, and I write the description for the agent rather than for a human reading the source. Since the agent reads that description on every decision about which tool to call, an ambiguous one like "handles order stuff" produces wrong calls.</p>
+<p>Think of the argument schema as the contract. Clear types and required fields let the agent build a valid call on the first try. A tool that takes a single <code>query</code> string of free text invites the agent to stuff a customer name where an order ID belongs. The tighter the schema, the fewer malformed calls I see.</p>
+<p>What the tool returns matters as much as what it takes. I return structured data the agent can reason about, and I make errors explicit rather than silent. A tool that returns <code>{"error": "no order found for 9999"}</code> gives the agent something to recover from, like telling the user the ID was wrong. A tool that returns an empty response on failure leads to the agent assuming success and moving on with a wrong picture.</p>
 <h2 id="connecting-the-server-to-your-agent">Connecting the server to your agent</h2>
-<p>The agent side is configuration, not code. An MCP client reads a config that tells it which servers to launch and how. For a local server the config names the command to run and its arguments.</p>
+<p>The agent side is configuration, not code. An MCP client reads a config that tells it which servers to launch and how. A local server gets named in the config along with the command to run and its arguments.</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;orders&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -337,14 +337,14 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<p>When the agent starts, it launches that command as a subprocess, connects over the transport, and asks the server for its tools. From the agent's point of view the order-status tool now sits alongside its built-in ones. The agent decides when to call it based on the name and description the server reported.</p>
-<p>The same server config works across MCP-aware agents, which is the portability paying off. I wire the server once and reuse it wherever I need those tools, including inside the harness I run around my coding agents, which I described in <a href="/blog/agent-harnesses/">agent harnesses</a>.</p>
+<p>When the agent starts, it launches that command as a subprocess, connects over the transport, and asks the server for its tools. From the agent's point of view the order-status tool now sits alongside its built-in ones, no different from its file-read or web-search capability. Based on the name and description the server reported, the agent decides when to call it.</p>
+<p>That same server config works across MCP-aware agents, which is the portability paying off. I wire the server once and reuse it wherever I need those tools, including inside the harness I run around my coding agents, which I described in <a href="/blog/agent-harnesses/">agent harnesses</a>.</p>
 <h2 id="guardrails-for-tool-access">Guardrails for tool access</h2>
-<p>A tool gives the agent reach into real systems, so the guardrails are not optional. The first rule I follow is that a tool does exactly one thing with a narrow scope. A tool that can read one customer's order is safe. A tool that can run arbitrary database queries is a liability waiting for a confident wrong call.</p>
-<p>Read and write deserve different treatment. I let read tools run freely, because the worst case is wasted tokens. Write tools, anything that changes data or reaches a production system, sit behind explicit approval, so the agent proposes the action and a human confirms it before it runs.</p>
-<p>Validation lives in the server, not in the prompt. I never trust that the agent sent good arguments. The server checks them, rejects bad ones with a clear error, and never assumes the input is well-formed because a model produced it. Treating tool input as untrusted is the same discipline I would apply to any input crossing a boundary.</p>
+<p>A tool gives the agent reach into real systems, so the guardrails are not optional. My first rule is that a tool does exactly one thing with a narrow scope. A tool that reads one customer's order by ID is safe. A tool that runs arbitrary SQL is a liability waiting for a confident wrong call, the kind where the agent decides a <code>DELETE</code> will tidy up some stale rows.</p>
+<p>Read and write deserve different treatment. I let read tools run freely, because the worst case is a few wasted tokens on a lookup that returned nothing useful. Write tools, anything that changes data or reaches a production system, sit behind explicit approval, so the agent proposes the action and I confirm it before it runs. I step in where a wrong call costs something real, like the agent about to mark fifty orders as refunded or push a row into the production billing table.</p>
+<p>Validation lives in the server, not in the prompt. I never trust that the agent sent good arguments. The server checks them, rejects bad ones with a clear error, and never assumes the input is well-formed just because a model produced it. An order ID that should be five digits gets rejected when the agent sends a paragraph of text instead. Treating tool input as untrusted is the same discipline I would apply to a form field a stranger types into.</p>
 <h2 id="when-mcp-is-worth-it">When MCP is worth it</h2>
-<p>MCP earns its place the moment you want the same tools available to more than one agent, or you want tools you can maintain separately from the agent that uses them. A single throwaway script with one tool does not need it. A growing set of tools that several agents share is exactly what it was built for.</p>
+<p>MCP earns its place the moment you want the same tools available to more than one agent, or you want tools you can maintain separately from the agent that uses them. A single throwaway script with one tool does not need it. A growing set of tools that several agents share, say an order lookup, a customer search, and a refund-status check that both your support agent and your ops agent reach for, is exactly what it was built for.</p>
 <p>The setup cost is real but small. A server is a few lines around the tool you were going to write anyway, and the config is a handful of lines on the agent side. What you get back is tools that outlive any single agent and an integration you write once. For anyone building real AI workflows, that portability is worth the small amount of structure it asks for up front.</p>
 <h2 id="faq">FAQ</h2>
 <p><strong>What is the Model Context Protocol?</strong></p>

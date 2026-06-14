@@ -6,9 +6,9 @@ tags: [ai, agents, memory, context-window, infrastructure]
 status: published
 ---
 
-Context windows are not memory. That is the first thing engineers get wrong when building AI agents. A context window is a fixed-size buffer. Memory is what you build on top of that buffer. Understanding the distinction will save you weeks of debugging flaky agents.
+Context windows are not memory, and that is the first thing engineers get wrong when building AI agents. A context window is a fixed-size buffer. Memory is what you build on top of that buffer, the way a desk surface is not the same thing as a filing system even though both hold paper. Understanding the distinction will save you weeks of debugging flaky agents.
 
-Every production AI agent I have shipped runs into the same failure mode eventually: it starts forgetting recent conversation turns, dropping critical instructions, or producing responses that ignore what the user just said. The root cause is almost always a misunderstanding of how short-term memory works inside the context window architecture.
+Every production AI agent I have shipped runs into the same failure mode eventually. It starts forgetting recent conversation turns, dropping a critical instruction the user gave ten messages back, or answering as if the last thing the user typed never happened. Almost always the cause traces back to a misunderstanding of how short-term memory works inside the context window architecture.
 
 <div class="visual-wrapper">
   <div class="visual-title">The Short-Term Memory Window</div>
@@ -19,9 +19,9 @@ Every production AI agent I have shipped runs into the same failure mode eventua
 
 ##What The Context Window Actually Is
 
-The context window is a contiguous token buffer that feeds into the transformer's attention mechanism. When you send a 128k token context to Claude or GPT-4o, the model does not "remember" everything equally. Attention scores distribute across all tokens, but research has consistently shown that performance degrades for information placed in the middle of long contexts.
+The context window is a contiguous token buffer that feeds into the transformer's attention mechanism. Send a 128k token context to Claude or GPT-4o and the model does not "remember" everything equally. Attention scores distribute across all tokens, and research has consistently shown that performance degrades for information placed in the middle of long contexts. I have watched an agent flawlessly cite a config value from the very top of a 90k-token prompt and then completely miss a constraint buried around token 50,000.
 
-A context window has three properties you must track as an agent engineer. First, total capacity in tokens. GPT-4o supports 128k tokens. Claude 3.5 Sonnet supports 200k tokens. Gemini 1.5 Pro supports 1 million tokens. Second, current fill level, which is the sum of your system prompt, conversation history, retrieved documents, and scratchpad. Third, headroom, which is the remaining capacity for the next response and tool call arguments.
+Three properties of a context window need tracking as an agent engineer. There is total capacity in tokens: GPT-4o supports 128k tokens, Claude 3.5 Sonnet supports 200k tokens, Gemini 1.5 Pro supports 1 million tokens. There is current fill level, the sum of your system prompt, conversation history, retrieved documents, and scratchpad. And there is headroom, the remaining capacity for the next response and tool call arguments.
 
 I track fill level programmatically in every agent I build. Here is the pattern:
 
@@ -68,17 +68,17 @@ def build_context_window(
     return messages
 ```
 
-This is a sliding window over your conversation history. It guarantees you never overflow the context window, but it has a brutal limitation: it discards the oldest messages indiscriminately. If a user asked something critical forty turns ago and you have been chatting about unrelated things since, that information is gone.
+A sliding window over your conversation history is what that code implements. It guarantees you never overflow the context window, and it carries a brutal limitation: it discards the oldest messages indiscriminately. Say a user told you "the production database is the read replica, never write to it" forty turns ago, and the chat has wandered through unrelated questions since. That instruction is gone, and the agent has no idea it ever existed.
 
 ##Token Budgets And Overflow Handling
 
-The overflow problem has three canonical solutions. The first is naive truncation, which is what most chatbot backends do. You cut the oldest messages until the context fits. This is simple to implement and destroys agent reliability in multi-turn conversations.
+Three canonical solutions exist for the overflow problem. Naive truncation comes first, the approach most chatbot backends reach for. You cut the oldest messages until the context fits. Cheap to implement, and it quietly destroys agent reliability in multi-turn conversations.
 
-The second solution is a priority queue for messages. You score each message by recency, user importance, and semantic relevance to the current task. Then you fill the context window with the highest-scoring items. This requires a retriever or an embedding model to compute relevance scores, which adds latency and cost.
+A priority queue for messages is the second option. You score each message by recency, user importance, and semantic relevance to the current task, then fill the context window with the highest-scoring items. Computing those relevance scores means running a retriever or an embedding model, which adds latency and cost on every turn.
 
-The third solution is summarization-based compression. You periodically summarize the conversation history into a condensed form that fits in fewer tokens. This preserves context across many turns but introduces summarization artifacts and latency. You also need a separate model or prompt to perform the summarization.
+Summarization-based compression is the third. You periodically fold the conversation history into a condensed form that fits in fewer tokens, which preserves context across many turns at the price of summarization artifacts and extra latency. A separate model or prompt has to do the summarizing.
 
-I use a combination for production agents. Recency gets the highest weight, but I also boost messages that match keywords in the current user query. Here is a scoring function I use:
+For production agents I use a combination. Recency gets the highest weight, and I also boost messages that match keywords in the current user query, so that a turn where the user said "always deploy to staging first" resurfaces the moment they ask about deployment again. Here is a scoring function I use:
 
 ```python
 from datetime import datetime, timedelta
@@ -143,29 +143,29 @@ def select_messages(
     return selected
 ```
 
-This gives you an importance-weighted buffer that adapts to the current conversation. It is not perfect, but it preserves critical messages better than pure recency.
+What you get is an importance-weighted buffer that adapts to the current conversation. It is not perfect, and it preserves critical messages far better than pure recency does.
 
 ##The Architecture Of Agent Memory Systems
 
-A production agent memory system has three layers. The first layer is the context window, which is short-term memory. It holds the current conversation, active retrieved documents, and working scratchpad. Everything in this layer is "alive" for the current turn.
+A production agent memory system has three layers. The context window sits at the first layer as short-term memory. It holds the current conversation, active retrieved documents, and working scratchpad. Everything in this layer is "alive" for the current turn.
 
-The second layer is episodic memory, which stores summaries of past interactions. When a user reconnects after a week, the agent should know who they are and what they were working on. Episodic memory is built by summarizing past conversation sessions and storing those summaries in a database.
+Episodic memory forms the second layer, storing summaries of past interactions. When a user reconnects after a week, the agent should know who they are and what they were working on, the way a good account manager glances at last quarter's notes before a call. You build episodic memory by summarizing past conversation sessions and storing those summaries in a database.
 
-The third layer is semantic memory, which is external knowledge retrieval. This is your RAG pipeline, your product documentation, your codebases. The agent retrieves relevant documents from this layer on each turn based on the current query.
+Semantic memory makes up the third layer, the external knowledge retrieval side: your RAG pipeline, your product documentation, your codebases. The agent retrieves relevant documents from this layer on each turn based on the current query.
 
 I have written about [how Anthropic's contextual retrieval changes RAG architecture](/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/) and about [RAG evaluation metrics that actually matter](/blog/rag-evaluation-metrics-what-actually-matters/). Both posts are relevant here because the retrieval quality in your semantic memory layer directly affects how much you need to rely on raw context window capacity.
 
-The key insight is that these three layers are not separate systems. They are one memory hierarchy. Your context window is the top of that hierarchy. Semantic and episodic memory feed into it. When the context window is full, you evict from the bottom (old episodic memories) before you lose information from the top (current conversation).
+Treating these three layers as separate systems is the mistake. They are one memory hierarchy. Your context window is the top of it, and semantic and episodic memory feed into it from below. When the context window fills up, you evict from the bottom (old episodic memories) before you lose information from the top (the current conversation).
 
 ##Designing Your Memory Architecture
 
 Start with the token budget. Calculate the maximum tokens available for conversation history in your context window. Subtract your system prompt, your reserved headroom for responses, and any retrieved context you must include on every turn. What remains is your budget for conversation history.
 
-Once you have that number, work backwards. If you have 32k tokens for conversation history and your average turn is 500 tokens, you can retain roughly 64 conversation turns. That sounds like a lot until you have a twenty-turn debugging session with a user and then need to reference something from turn five.
+Once you have that number, work backwards. With 32k tokens for conversation history and an average turn of 500 tokens, you can retain roughly 64 conversation turns. That sounds generous right up until a twenty-turn debugging session where the agent needs the exact stack trace the user pasted back at turn five.
 
-I track token usage per session in production. Every agent session gets a running tally of context window fill percentage, and I log warning events when fill exceeds 75 percent. That gives me data to tune the budget allocation over time.
+Token usage per session is something I track in production. Every agent session gets a running tally of context window fill percentage, and I log a warning event when fill crosses 75 percent. That stream of data is what lets me tune the budget allocation over time.
 
-The overflow strategy matters more than the raw budget size. An agent with a 32k context window and smart eviction will outperform an agent with 128k and naive truncation. The eviction strategy determines which information survives.
+Raw budget size matters less than the overflow strategy. An agent with a 32k context window and smart eviction will outperform an agent with 128k and naive truncation. Which information survives comes down entirely to the eviction strategy.
 
 Your episodic memory layer should capture summaries of every session. I use a structured format:
 
@@ -201,33 +201,33 @@ def summarize_session(messages: list[dict]) -> SessionSummary:
     )
 ```
 
-This summary goes into your episodic store. When the user starts a new session, you retrieve relevant past sessions and inject their summaries into the context window before the conversation begins.
+That summary goes into your episodic store. When the user starts a new session, you retrieve the relevant past sessions and inject their summaries into the context window before the conversation begins, so the agent opens already knowing the user prefers TypeScript examples and left a migration half-finished last Thursday.
 
 ##Common Failure Modes
 
-The most common failure mode I see is context window exhaustion without warning. The agent receives a long prompt, consumes most of the context window, and then the next user message causes an overflow. The system either errors or silently truncates, and the user loses context.
+Context window exhaustion without warning is the failure mode I see most. The agent receives a long prompt, consumes most of the context window, and the next user message tips it into overflow. The system either throws an error or silently truncates, and the user loses context mid-task with no explanation.
 
-The fix is to monitor fill level before every LLM call. If fill exceeds a threshold like 80 percent, trigger eviction or summarization before proceeding. Do not wait for the overflow to happen.
+Monitoring fill level before every LLM call is the fix. Once fill crosses a threshold like 80 percent, trigger eviction or summarization before proceeding rather than waiting for the overflow to land.
 
-The second failure mode is semantic retrieval that conflicts with recent conversation context. The user says "use the new API endpoint instead" and the agent retrieves documents about the old endpoint because the retrieved context is based on keywords, not conversation state. The agent then ignores the user's instruction and follows the old documentation.
+Semantic retrieval that conflicts with recent conversation context is the second one. The user says "use the new v2 API endpoint instead," and the retriever, matching on keywords rather than conversation state, pulls back the docs for the deprecated v1 endpoint. The agent dutifully ignores the user's instruction and follows the old documentation.
 
-You can address this by prepending recent conversation turns to your retrieval query. The retrieval query becomes "previous instruction: use new API endpoint instead, plus user query: how do I authenticate" instead of just the authentication query.
+Prepending recent conversation turns to your retrieval query addresses this. The query sent to the retriever becomes "previous instruction: use new v2 API endpoint instead, plus user query: how do I authenticate" rather than the bare authentication question, so conversation state steers the retrieval.
 
-The third failure mode is summarization degradation. After multiple summarization rounds, the conversation history becomes a sequence of increasingly abstracted summaries. Specific details get dropped. The agent loses track of exact values, names, or decisions made in earlier turns.
+Summarization degradation is the third failure mode. After several summarization rounds, the conversation history turns into a sequence of increasingly abstracted summaries. Specific details drop out. The agent loses the exact port number, the customer's name, or the decision the user locked in six turns ago, because each pass smooths another detail away.
 
-Track the number of summarization passes each message has undergone. After two or three passes, consider freezing the original message into the episodic store rather than continuing to compress it.
+Track the number of summarization passes each message has been through. Once a message has survived two or three passes, freeze the original into the episodic store rather than compressing it again, the same way you would photocopy a fading receipt before it becomes illegible.
 
 ##Relationship To Long-term Memory
 
-Short-term and long-term memory are not competing systems. They are a hierarchy. The context window is the working table. Semantic and episodic stores are the filing cabinets. You pull relevant files from the cabinets onto the table, work with them there, and file updated versions back when the session ends.
+Short-term and long-term memory are not competing systems. They form a hierarchy. The context window is the working table, and the semantic and episodic stores are the filing cabinets. You pull the relevant files from the cabinets onto the table, work with them there, and file the updated versions back when the session ends.
 
-The mistake is treating long-term memory as optional or secondary. If your agent only has access to the context window, it has no memory of previous sessions, no knowledge of the user's past preferences, and no ability to retrieve relevant documentation beyond what fits in the current context.
+Treating long-term memory as optional or secondary is the mistake. Give your agent nothing but the context window and it has no memory of previous sessions, no knowledge that this user always wants metric units, and no way to retrieve documentation beyond what already fits in the current context.
 
-I have written about [token counting and cost control](/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/) and [prompt caching and when the math works](/blog/prompt-caching-what-it-is-and-when-the-math-works/). Both are relevant here because the memory architecture you design has direct cost implications. Every retrieval call, every summarization pass, and every context window refill costs money.
+I have written about [token counting and cost control](/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/) and [prompt caching and when the math works](/blog/prompt-caching-what-it-is-and-when-the-math-works/). Both are relevant here because the memory architecture you design carries direct cost implications. Every retrieval call, every summarization pass, and every context window refill bills against your account.
 
-The pattern I follow: maximize context window efficiency first, then build episodic memory as a reliability layer, then invest in semantic retrieval quality. This sequence gives you the best return on engineering effort.
+My own ordering goes like this. Maximize context window efficiency first, then build episodic memory as a reliability layer, then invest in semantic retrieval quality. Following that sequence gives you the best return on engineering effort, because each step removes the failure that would otherwise dominate the next.
 
-Context window management is not a solved problem. The approaches in this post represent current practice, but the field is moving fast. The architectures that work in 2026 will look primitive by 2028. Build for replaceability, not permanence.
+Context window management is not a solved problem. The approaches in this post reflect current practice, and the field is moving fast. The architectures that work in 2026 will look primitive by 2028. Build for replaceability, not permanence.
 
 
 

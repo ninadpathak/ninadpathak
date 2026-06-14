@@ -6,7 +6,7 @@ tags: [vector-search, wasm, pglite, sqlite-vec, edge-computing, technical-deep-d
 status: published
 ---
 
-Sub-100ms vector search in the browser has moved from a research novelty to a production requirement for local-first AI applications. In my 2026 benchmark of 100,000 vectors on a 16GB MacBook Air M2, PGlite (pgvector) and SQLite-vec emerged as the dominant contenders with a clear architectural split. PGlite offers the full power of HNSW indexing and Postgres relational parity at the cost of a 3.2MB bundle. SQLite-vec provides a lean 800KB footprint and superior quantized brute-force speed. For high-dimension vectors (3072+), PGlite's HNSW implementation is mandatory for acceptable performance. For standard 384-dimension models, SQLite-vec's binary quantization achieves <5ms latency, effectively turning the browser into a high-performance retrieval engine.
+Sub-100ms vector search in the browser has moved from a research novelty to a production requirement for local-first AI applications. Benchmarking 100,000 vectors on a 16GB MacBook Air M2, I watched PGlite (pgvector) and SQLite-vec separate along a clear architectural split. PGlite offers the full power of HNSW indexing and Postgres relational parity at the cost of a 3.2MB bundle. SQLite-vec provides a lean 800KB footprint and superior quantized brute-force speed. Once you push past 3072 dimensions, PGlite's HNSW implementation becomes mandatory for acceptable performance. For standard 384-dimension models, SQLite-vec's binary quantization achieves <5ms latency, effectively turning the browser into a high-performance retrieval engine.
 
 <div class="visual-wrapper">
   <div class="visual-title">WASM bundle size: footprint analysis</div>
@@ -19,9 +19,9 @@ Sub-100ms vector search in the browser has moved from a research novelty to a pr
 
 ## The architectural shift to the browser
 
-Local-first software requires moving the database to the user's device. For years, this meant trading away the advanced retrieval capabilities of backend systems like pgvector or Pinecone. The arrival of high-performance WebAssembly (WASM) builds for PGlite and SQLite-vec has eliminated this trade-off.
+Local-first software requires moving the database to the user's device. For years, that meant trading away the advanced retrieval capabilities of backend systems like pgvector or Pinecone. The arrival of high-performance WebAssembly (WASM) builds for PGlite and SQLite-vec has erased that trade-off.
 
-Technical teams are rejecting the latency tax of cloud-based RAG. A typical cloud retrieval loop involves a 200ms round-trip to a vector database, followed by another 500ms for LLM generation. By performing retrieval in the browser, you eliminate the first half of that latency chain.
+Teams I talk to keep refusing to pay the latency tax of cloud-based RAG. Picture a search-as-you-type box in a notes app: a typical cloud retrieval loop spends 200ms on a round-trip to a vector database, then another 500ms for LLM generation, so every keystroke that triggers a search feels a beat behind the user. Moving retrieval into the browser removes the first half of that latency chain entirely, and the box starts keeping up with the typist.
 
 <div class="visual-wrapper">
   <div class="visual-title">Local-first WASM lifecycle: the loading sequence</div>
@@ -30,11 +30,11 @@ Technical teams are rejecting the latency tax of cloud-based RAG. A typical clou
   </div>
 </div>
 
-Implementing vector search in WASM involves managing three distinct environments: the main thread, the Web Worker, and the WASM memory heap. PGlite runs a full Postgres instance within this heap, while SQLite-vec acts as a highly optimized C extension for the SQLite engine.
+Implementing vector search in WASM means juggling three distinct environments: the main thread, the Web Worker, and the WASM memory heap. PGlite runs a full Postgres instance inside that heap. SQLite-vec acts as a highly optimized C extension bolted onto the SQLite engine, closer to a single sharp tool than a whole workshop.
 
 ## Benchmark setup: MacBook Air M2 (16GB)
 
-I ran these tests on a baseline 16GB M2 Air to simulate the hardware available to a typical professional user. The dataset consisted of 100,000 synthetic vectors generated from the `all-MiniLM-L6-v2` model (384 dimensions) and the `text-embedding-3-large` model (3072 dimensions).
+Running these tests on a baseline 16GB M2 Air let me approximate the hardware sitting on a typical professional user's desk, not a maxed-out workstation. The dataset consisted of 100,000 synthetic vectors generated from the `all-MiniLM-L6-v2` model (384 dimensions) and the `text-embedding-3-large` model (3072 dimensions).
 
 I measured four primary metrics:
 1.  **Bundle weight**: The cost of downloading the engine.
@@ -49,7 +49,7 @@ I measured four primary metrics:
   </div>
 </div>
 
-SQLite-vec initializes significantly faster than PGlite. This is because SQLite-vec is a lean extension. PGlite must initialize the entire Postgres runtime, including extension loading and process coordination simulation within the WASM environment.
+SQLite-vec initializes significantly faster than PGlite, and the reason is structural: it loads as one lean extension. PGlite has to spin up the entire Postgres runtime first, including extension loading and a simulation of the process coordination Postgres normally hands to the operating system, all inside the WASM sandbox before it can answer a single query.
 
 ## PGlite and the power of HNSW
 
@@ -62,9 +62,9 @@ PGlite brings the industry-standard `pgvector` implementation to the edge. Its p
   </div>
 </div>
 
-For a 100k vector dataset, a flat scan (brute force) must perform 100,000 dot product operations per query. This is O(N) complexity. PGlite's HNSW index reduces the number of comparisons by several orders of magnitude, providing sub-15ms latency even as the dataset grows.
+For a 100k vector dataset, a flat scan (brute force) has to perform 100,000 dot product operations per query, which is O(N) complexity. PGlite's HNSW index cuts the number of comparisons by several orders of magnitude and holds sub-15ms latency even as the dataset grows. The graph works like the express layers of a subway map: instead of stopping at every station, a query hops along sparse long-distance edges first, then drops down to local stops only near the answer.
 
-However, HNSW comes with a "build tax." Building an HNSW index in the browser is a CPU-intensive task that can peg a single core for several minutes for large datasets.
+HNSW carries a "build tax," though. Building the index in the browser is CPU-intensive enough to peg a single core for several minutes on large datasets.
 
 <div class="visual-wrapper">
   <div class="visual-title">CPU usage: the HNSW build peak</div>
@@ -73,11 +73,11 @@ However, HNSW comes with a "build tax." Building an HNSW index in the browser is
   </div>
 </div>
 
-In my tests, building a 100k index in PGlite consumed 100% of the allocated Web Worker core for nearly 45 seconds. For dynamic data that changes frequently, this build time becomes a significant UX bottleneck.
+Building a 100k index in PGlite consumed 100% of the allocated Web Worker core for nearly 45 seconds in my runs. That build time turns into a real UX bottleneck for dynamic data, say a chat app that re-indexes every time the user imports a new folder of messages, where the spinner stalls for most of a minute before search comes back online.
 
 ## SQLite-vec and the speed of quantization
 
-SQLite-vec takes a different approach. Instead of complex graph indexes, it optimizes for **extremely fast brute-force scans** through vector quantization. Quantization reduces the precision of each dimension to save memory and speed up mathematical operations.
+SQLite-vec bets on a different idea. Rather than building complex graph indexes, it optimizes for **extremely fast brute-force scans** through vector quantization. Quantization shaves the precision off each dimension to save memory and speed up the arithmetic.
 
 <div class="visual-wrapper">
   <div class="visual-title">Binary quantization: mapping and reduction</div>
@@ -86,7 +86,7 @@ SQLite-vec takes a different approach. Instead of complex graph indexes, it opti
   </div>
 </div>
 
-Binary quantization is the most aggressive form of this optimization. It reduces each 32-bit floating point dimension to a single bit based on whether the value is positive or negative. This results in a 32x reduction in memory footprint and allows the CPU to use XOR-based Hamming distance instead of expensive floating-point dot products.
+Binary quantization is the most aggressive form of this optimization. Each 32-bit floating point dimension collapses to a single bit based on whether the value is positive or negative, like throwing away the exact GPS coordinates and keeping only which side of the street something sits on. That collapse buys a 32x reduction in memory footprint and lets the CPU swap expensive floating-point dot products for XOR-based Hamming distance, which counts mismatched bits in a single cheap instruction.
 
 <div class="visual-wrapper">
   <div class="visual-title">p99 query latency: 100k vector head-to-head</div>
@@ -95,11 +95,11 @@ Binary quantization is the most aggressive form of this optimization. It reduces
   </div>
 </div>
 
-In the 384-dimension test, SQLite-vec with binary quantization achieved a p99 latency of just 4ms. This is faster than PGlite's HNSW index (12ms) without the overhead of building a graph.
+SQLite-vec with binary quantization hit a p99 latency of just 4ms in the 384-dimension test. That beats PGlite's HNSW index at 12ms, and it gets there without ever paying to build a graph.
 
 ## The precision tax: accuracy vs speed
 
-You cannot get something for nothing in AI engineering. Quantization improves speed at the cost of a recall penalty. The search results become slightly more likely to differ from the true nearest neighbors.
+Nothing in AI engineering comes free. Quantization buys speed and pays for it with a recall penalty, so the results drift slightly away from the true nearest neighbors. A query that should surface the three most relevant support docs might return two of them plus a near-miss fourth.
 
 <div class="visual-wrapper">
   <div class="visual-title">Recall accuracy: the quantization tradeoff</div>
@@ -108,11 +108,11 @@ You cannot get something for nothing in AI engineering. Quantization improves sp
   </div>
 </div>
 
-My benchmarks showed that `int8` quantization (8-bit) maintains 99.8% recall accuracy compared to raw `float32`. Binary quantization (1-bit) dropped accuracy to roughly 92%. For most RAG applications, where the goal is to find relevant context for an LLM, a 92% recall rate is more than sufficient, especially given the 10x speed boost.
+My benchmarks showed `int8` quantization (8-bit) holding 99.8% recall accuracy against raw `float32`. Binary quantization (1-bit) dropped accuracy to roughly 92%. For most RAG applications, where the job is feeding an LLM enough relevant context to answer, a 92% recall rate is plenty, and the 10x speed boost is the thing the user actually feels.
 
 ## Dimensionality and the scaling wall
 
-The performance difference between these engines widens as vector dimensionality increases. Standard open-source models like `all-MiniLM` use 384 dimensions. Modern flagship models like OpenAI's `text-embedding-3-large` use 3072 dimensions, a difference rooted in [how embedding models trade dimensionality for information density](/blog/embedding-models-compared/).
+As vector dimensionality climbs, the performance gulf between these engines widens. Standard open-source models like `all-MiniLM` use 384 dimensions. Flagship models such as OpenAI's `text-embedding-3-large` reach 3072 dimensions, a jump rooted in [how embedding models trade dimensionality for information density](/blog/embedding-models-compared/).
 
 <div class="visual-wrapper">
   <div class="visual-title">Latency scaling vs vector dimensions</div>
@@ -121,11 +121,11 @@ The performance difference between these engines widens as vector dimensionality
   </div>
 </div>
 
-Brute-force scans scale linearly with dimensions. A 3072-dimension scan is 8x slower than a 384-dimension scan. At high dimensions, SQLite-vec's brute-force performance begins to degrade past the 100ms mark. PGlite's HNSW index remains relatively stable because the graph structure allows it to bypass most vectors regardless of their dimensionality.
+Brute-force scans scale linearly with dimensions, so a 3072-dimension scan runs 8x slower than a 384-dimension one. SQLite-vec's brute-force performance starts slipping past the 100ms mark at those high dimensions. PGlite's HNSW index stays relatively flat, because the graph lets a query skip most vectors no matter how wide each vector is. Dimensionality stretches the cost of comparing two vectors, and HNSW simply compares far fewer of them.
 
 ## Memory constraints in the WASM heap
 
-Memory is the ultimate hard ceiling for browser-based databases. Most browsers cap the WASM heap at 4GB.
+Memory is the ceiling you eventually hit with any browser-based database, and there is no negotiating with it. Browsers cap the WASM heap at 4GB.
 
 <div class="visual-wrapper">
   <div class="visual-title">Memory footprint: heap analysis</div>
@@ -134,11 +134,11 @@ Memory is the ultimate hard ceiling for browser-based databases. Most browsers c
   </div>
 </div>
 
-HNSW indexes are memory-intensive. They require storing both the original vectors and the graph of edges connecting them. For 100k vectors, PGlite consumed 180MB of the WASM heap. SQLite-vec, using a flat buffer of binary-quantized vectors, consumed only 45MB. If you are building an application that must run on mobile devices with limited RAM, the SQLite-vec footprint is significantly more attractive.
+HNSW indexes are memory-hungry by design, since they store both the original vectors and the graph of edges wiring them together. For 100k vectors, PGlite consumed 180MB of the WASM heap. SQLite-vec, holding a flat buffer of binary-quantized vectors, took only 45MB. Anyone shipping to mobile devices with limited RAM, where a background tab can get evicted the moment it gets greedy, will find the SQLite-vec footprint far more attractive.
 
 ## Economic outcomes of edge retrieval
 
-The ROI of moving retrieval to the edge is measured in both latency and cloud spend. Every search performed in the browser is a search you don't have to pay a SaaS provider to execute.
+Moving retrieval to the edge pays off in two currencies: latency and cloud spend. Every search the browser runs is a search you never bill to a SaaS provider, and at a few hundred thousand queries a day that line item stops being a rounding error.
 
 <div class="visual-wrapper">
   <div class="visual-title">Operational cost: edge vs cloud RAG</div>
@@ -147,11 +147,11 @@ The ROI of moving retrieval to the edge is measured in both latency and cloud sp
   </div>
 </div>
 
-Edge retrieval provides a "zero-marginal-cost" tier for your AI application. You can offer high-frequency retrieval and complex RAG workflows to millions of users without scaling your backend infrastructure. This shift effectively moves your retrieval compute budget from your AWS bill to the user's electricity bill.
+Edge retrieval gives your AI application a "zero-marginal-cost" tier. You can serve high-frequency retrieval and complex RAG workflows to millions of users without scaling backend infrastructure at all. Your retrieval compute budget quietly migrates off the AWS bill and onto the user's electricity bill.
 
 ## Choosing the right architecture
 
-Selecting between these two engines is a decision about your application's data model and scale.
+Picking between these two engines comes down to your application's data model and scale.
 
 <div class="visual-wrapper">
   <div class="visual-title">Architectural decision matrix</div>
@@ -162,18 +162,18 @@ Selecting between these two engines is a decision about your application's data 
 
 PGlite is the correct choice for applications that need a real relational database. If your search results must be joined with complex metadata, filtered via JSONB, or [combined with BM25 full-text search in a hybrid retrieval setup](/blog/hybrid-search-bm25-vector-search/), or synced with a backend Postgres instance, the PGlite bundle size is a small price to pay.
 
-SQLite-vec is the correct choice for applications where vector search is a standalone feature. If you want a lightweight "command palette" search or a simple local documentation assistant, the speed and size of SQLite-vec make it the superior tool for the job.
+Reach for SQLite-vec when vector search is a standalone feature rather than part of a relational web. A lightweight "command palette" that fuzzy-matches actions, or a local documentation assistant that answers from a few thousand bundled pages, plays directly to the speed and size of SQLite-vec.
 
 ## The future of edge retrieval
 
-The 2026 technical landscape is defined by the decentralization of vector truth. As models become more efficient at running on local hardware (like the M2 Air), the bottleneck for AI applications has shifted from inference to retrieval.
+Vector truth is decentralizing across the 2026 landscape. As models get better at running on local hardware like the M2 Air, the bottleneck for AI applications has slid from inference to retrieval.
 
-By implementing either PGlite or SQLite-vec, you remove the primary friction point in the user's loop. Technical practitioners recognize that the fastest request is the one that never leaves the machine. Local-first vector databases are not just an optimization. They are the new baseline for responsive, private, and scalable AI software.
+Shipping either PGlite or SQLite-vec pulls the biggest friction point out of the user's loop. Seasoned practitioners already know the fastest request is the one that never leaves the machine. Local-first vector databases have graduated from a nice optimization to the new baseline for responsive, private, and scalable AI software.
 
 ## FAQ
 
 **Can I run PGlite and SQLite-vec in the same application?**
-Yes. Some teams use SQLite-vec for a fast, low-precision "first pass" search and then use PGlite for a high-precision "refinement" pass. This hybrid approach allows for sub-5ms UI updates followed by an accurate result set 15ms later.
+Yes. Some teams run SQLite-vec for a fast, low-precision "first pass" search, then hand the candidates to PGlite for a high-precision "refinement" pass. That two-stage setup paints sub-5ms UI updates immediately and settles on an accurate result set about 15ms later, so the interface never feels like it stalled.
 
 **How does thermal throttling on the M2 Air affect search speed?**
 Prolonged index building in PGlite can trigger thermal throttling, reducing the clock speed by up to 20%. Query-time latency is rarely affected because the operations are short-lived.
@@ -182,7 +182,7 @@ Prolonged index building in PGlite can trigger thermal throttling, reducing the 
 Yes. Both run in iOS Safari and Android Chrome via WASM. SQLite-vec is particularly well-suited for mobile due to its low memory footprint and efficient use of CPU registers for binary math.
 
 **What is the "lost in the middle" problem for local RAG?**
-This is a [context window limitation rather than a database limitation](/blog/llm-context-windows-explained/). Even if your retrieval is perfect, providing too much context to a small local model can degrade its reasoning performance. Local RAG requires tighter top-K filtering than cloud RAG.
+That one is a [context window limitation rather than a database limitation](/blog/llm-context-windows-explained/). Even with flawless retrieval, packing too much context into a small local model degrades its reasoning, since the relevant passage gets buried among the filler. Local RAG calls for tighter top-K filtering than cloud RAG, pulling back 3 to 5 chunks where a cloud pipeline might throw in 20.
 
 **Should I use HNSW or Flat scans for 50k vectors?**
 For 50k vectors, a flat scan in SQLite-vec is usually faster than building and traversing an HNSW index. The complexity crossover point where HNSW becomes objectively better is around 100k vectors for 384-dim data.

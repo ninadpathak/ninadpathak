@@ -8,7 +8,7 @@ status: published
 
 Sub-second Audio-to-Audio (A2A) latency for conversational AI has moved from a research constraint to a production requirement. The difference between "technically impressive" and "feels like talking to a human" is measured in milliseconds, not model quality.
 
-In my latency audit of a real-time voice agent built on Gemini 3.1 Flash Lite, the total A2A loop ranged from 420ms to 1,800ms depending on transport protocol, audio chunking strategy, and network conditions. The 800ms barrier (the threshold where users perceive a conversational turn as "instant") is achievable but requires optimizing every stage of the pipeline: Speech-to-Text (STT), LLM inference, Text-to-Speech (TTS), and the network transport layer between them. The bottleneck is never where you expect it to be.
+My latency audit of a real-time voice agent built on Gemini 3.1 Flash Lite showed the total A2A loop ranging from 420ms to 1,800ms depending on transport protocol, audio chunking strategy, and network conditions. Reaching the 800ms barrier (the threshold where users perceive a conversational turn as "instant") means optimizing every stage of the pipeline: Speech-to-Text (STT), LLM inference, Text-to-Speech (TTS), and the network transport layer between them. Going in, I assumed the LLM would dominate the budget. It did not. The slowest stage was the one I had not bothered to instrument at all, the few hundred milliseconds the agent spends waiting to confirm the human has actually finished talking.
 
 <div class="visual-wrapper">
   <div class="visual-title">A2A latency chain: end-to-end waterfall</div>
@@ -29,7 +29,7 @@ Audio Input → VAD → STT → LLM → TTS → Audio Output
 
 Voice Activity Detection (VAD) determines when the user has stopped speaking. STT converts the audio stream to text. The LLM generates a response. TTS converts that response back to audio. The user hears the result.
 
-Every stage introduces at least one buffering decision: how much audio to accumulate before sending it, how many tokens to generate before starting TTS, how large each network packet should be. These decisions are not about model quality. They are about the engineering of time.
+Each stage introduces at least one buffering decision: how much audio to accumulate before sending it, how many tokens to generate before starting TTS, how large each network packet should be. None of these decisions touch model quality. They are about the engineering of time. A relay race is decided less by who runs the fastest leg than by how cleanly each runner passes the baton, and a voice pipeline behaves the same way: four fast stages can still feel sluggish when every handoff between them leaks 30 to 50ms.
 
 <div class="visual-wrapper">
   <div class="visual-title">The A2A request lifecycle: stage-by-stage breakdown</div>
@@ -38,7 +38,7 @@ Every stage introduces at least one buffering decision: how much audio to accumu
   </div>
 </div>
 
-The latency chain is serial, not parallel. Each stage must complete, or at least reach a stable checkpoint, before the next can begin. If STT takes 180ms, LLM TTFT takes 320ms, and TTS takes 150ms, the theoretical minimum is 650ms. In practice, it is always higher because of the network and buffering overhead I profiled below.
+Each stage in this serial chain must complete, or at least reach a stable checkpoint, before the next can begin. Given STT at 180ms, LLM TTFT at 320ms, and TTS at 150ms, the theoretical floor is 650ms. The real number always lands higher because of the network and buffering overhead I profiled below.
 
 ## Benchmark setup: MacBook Air M2 (16GB)
 
@@ -63,7 +63,7 @@ I tested two transport protocols: HTTP/2 streaming (the default SDK behavior) an
 
 ## The VAD tax: when does the user actually stop speaking?
 
-Voice Activity Detection is the unsung hero (and villain) of voice agent latency. A VAD model must decide whether a pause in speech is a mid-sentence hesitation or a genuine turn boundary. Get it wrong and you either interrupt the user (rude) or wait too long (slow).
+Voice Activity Detection is the unsung hero (and villain) of voice agent latency. A VAD model must decide whether a pause in speech is a mid-sentence hesitation or a genuine turn boundary. Someone saying "the invoice total is... let me check... $4,200" pauses for almost a second in the middle of one thought. Guess wrong and you either cut them off at "the invoice total is" (rude) or sit through the full pause every time (slow).
 
 I used Silero VAD v5, a lightweight ONNX model that runs locally. On the M2 Air, Silero processes audio in 32ms frames and makes a speech/non-speech decision in under 2ms per frame. The model itself is not the bottleneck. The *patience threshold* is.
 
@@ -72,7 +72,7 @@ I tested three patience settings:
 - **Balanced (500ms silence trigger)**: Average VAD latency of 510ms. False turn-end rate of 6%.
 - **Conservative (800ms silence trigger)**: Average VAD latency of 810ms. False turn-end rate of 1%.
 
-The balanced setting is the only one that works for production. But 510ms of VAD latency before the STT pipeline even starts means you have already consumed 510ms of your 800ms budget. This is the first reason sub-800ms A2A latency is so difficult to achieve.
+Only the balanced setting holds up in production. Burning 510ms of VAD latency before the STT pipeline even starts means you have already spent 510ms of your 800ms budget on doing nothing but waiting to be sure the human is done talking. A bank support line that cuts the caller off at "I want to dispute a" before they reach "charge from last Tuesday" loses the whole turn, so the conservative impulse is understandable, and that single fact is the first reason sub-800ms A2A latency is so difficult to achieve.
 
 <div class="visual-wrapper">
   <div class="visual-title">VAD patience vs. false turn-end rate</div>
@@ -83,9 +83,9 @@ The balanced setting is the only one that works for production. But 510ms of VAD
 
 ## STT processing: the chunking bottleneck
 
-Once VAD triggers, the accumulated audio is sent to the STT engine. I tested two STT backends: Google's Cloud Speech-to-Text (via the Gemini SDK's built-in audio handling) and OpenAI's Whisper Large V3 (self-hosted via `faster-whisper`).
+Once VAD triggers, the accumulated audio is sent to the STT engine. Two STT backends went through the same test: Google's Cloud Speech-to-Text (via the Gemini SDK's built-in audio handling) and OpenAI's Whisper Large V3 (self-hosted via `faster-whisper`).
 
-The chunking strategy matters enormously. Sending 200ms audio frames means the STT engine receives a new packet every 200ms and must maintain rolling state. Sending the full utterance on VAD trigger means one larger payload but no state management overhead.
+How you chunk the audio matters enormously. Sending 200ms audio frames means the STT engine receives a new packet every 200ms and must maintain rolling state. Sending the full utterance on VAD trigger means one larger payload but no state management overhead.
 
 | Chunking Strategy | Cloud STT Latency (p50) | Whisper Local (p50) |
 |---|---|---|
@@ -95,7 +95,7 @@ The chunking strategy matters enormously. Sending 200ms audio frames means the S
 
 Cloud STT adds a network round-trip per chunk. With 200ms frames, that is five round-trips per second of audio. Even at 12ms ping, the cumulative HTTP overhead adds up. Whisper local eliminates the network hop entirely but consumes ~400MB of RAM and triggers memory pressure on the M2 when running alongside the LLM.
 
-The VAD-triggered full utterance strategy is the fastest because it makes exactly one STT call. But it requires VAD to be accurate. When VAD fires too early, the STT receives an incomplete sentence and produces a partial transcript. The LLM then responds to a truncated query.
+Fastest of the three is the VAD-triggered full utterance strategy, because it makes exactly one STT call. Accuracy from the VAD becomes the price of admission, though. When VAD fires too early, STT receives an incomplete sentence and produces a partial transcript, so the LLM ends up answering "what is the refund policy for" instead of "what is the refund policy for an annual plan I cancelled mid-cycle," which is a different question with a different answer.
 
 ## The LLM TTFT: Gemini 3.1 Flash Lite under the microscope
 
@@ -106,7 +106,7 @@ I measured TTFT across three scenarios:
 2. **Short context (5 turns)**: TTFT: 340ms (p50), 510ms (p95).
 3. **Long context (50 turns, ~15k tokens)**: TTFT: 520ms (p50), 780ms (p95).
 
-The "200ms" claim is achievable only for trivially short prompts with warm model instances. In a real conversational agent where the prompt grows with each turn, TTFT degrades linearly with context length.
+That "200ms" claim holds up only for trivially short prompts with warm model instances. Inside a real conversational agent, where the prompt grows by a few hundred tokens with every exchange, TTFT degrades roughly linearly with context length.
 
 <div class="visual-wrapper">
   <div class="visual-title">LLM TTFT scaling with context window size</div>
@@ -115,15 +115,15 @@ The "200ms" claim is achievable only for trivially short prompts with warm model
   </div>
 </div>
 
-This is the same context window problem I covered in [my KV cache eviction benchmark](/blog/kv-cache-eviction-accuracy/). Gemini's attention mechanism must process every token in the prompt before generating the first response token. A 50-turn conversation with 15k tokens requires the model to attend over 15,000 key-value pairs before producing a single output token.
+Behind that curve sits the same context window problem I covered in [my KV cache eviction benchmark](/blog/kv-cache-eviction-accuracy/). Gemini's attention mechanism must process every token in the prompt before generating the first response token. A 50-turn conversation with 15k tokens requires the model to attend over 15,000 key-value pairs before producing a single output token.
 
-The mitigation is context pruning. If I evict the oldest 30% of the conversation history (keeping only the first 4 tokens as attention sinks and the most recent 10 turns), TTFT drops from 520ms back to 380ms. The accuracy cost is measurable but acceptable for casual conversation. For technical queries where earlier context matters, pruning causes the model to lose track of constraints.
+The mitigation is context pruning. Evicting the oldest 30% of the conversation history (keeping only the first 4 tokens as attention sinks and the most recent 10 turns) drops TTFT from 520ms back to 380ms. The accuracy cost is measurable but acceptable for casual conversation. For technical queries where earlier context matters, pruning causes the model to lose track of constraints, like a user who set a $50 budget cap ten turns ago and now gets recommendations well over it.
 
 ## The TTS synthesis delay
 
 Text-to-Speech is the final stage. I tested two TTS engines: Google's Cloud TTS (via the Gemini SDK) and OpenAI's `tts-1-hd` API. Both operate on a streaming basis, beginning to emit audio bytes as soon as the first sentence is generated.
 
-The critical metric here is *time to first audio byte* (TTFAB). This is not the time to synthesize the full response. It is the time from text receipt to the first playable audio sample.
+The critical metric here is *time to first audio byte* (TTFAB), which is not the time to synthesize the full response. It is the time from text receipt to the first playable audio sample.
 
 | TTS Engine | TTFAB (short response) | TTFAB (long response) |
 |---|---|---|
@@ -132,9 +132,9 @@ The critical metric here is *time to first audio byte* (TTFAB). This is not the 
 
 Google's TTS is faster because it uses a lighter phoneme-to-waveform pipeline. OpenAI's `tts-1-hd` produces more natural prosody but adds ~60ms of preprocessing overhead.
 
-The TTS engine also needs a minimum text buffer before it can start synthesizing. Google Cloud TTS requires at least one complete sentence (roughly 15-20 tokens). This means the LLM must generate 15-20 tokens *before* TTS can begin. At Gemini 3.1 Flash Lite's generation speed of ~80 tokens/second, that is an additional 190ms of delay before TTFAB even starts.
+The TTS engine also needs a minimum text buffer before it can start synthesizing. Google Cloud TTS requires at least one complete sentence (roughly 15-20 tokens), which forces the LLM to generate 15-20 tokens *before* TTS can begin. At Gemini 3.1 Flash Lite's generation speed of ~80 tokens/second, that is an additional 190ms of delay before TTFAB even starts.
 
-This is the hidden coupling between LLM generation and TTS synthesis. They are not truly parallel. TTS is blocked on LLM producing a complete linguistic unit.
+A hidden coupling lives between LLM generation and TTS synthesis here. They are not truly parallel. TTS is blocked on the LLM producing a complete linguistic unit, the way a typesetter cannot set a line until the writer has finished the sentence, not just the first few words.
 
 ## The 800ms barrier: a full budget breakdown
 
@@ -193,11 +193,11 @@ Sentence-level speculation is the only strategy that works in production. It sav
 
 Most voice agent tutorials use HTTP/2 streaming because it is the default in every SDK. HTTP/2 multiplexes streams over a single TCP connection, which is efficient for high-throughput data but suboptimal for low-latency audio.
 
-The problem is TCP head-of-line blocking. If one audio chunk is lost and requires retransmission, all subsequent chunks are delayed until the retransmission completes. In a real-time voice pipeline, a lost packet adds 200-500ms of stall time, far worse than the 12ms of network latency.
+The problem is TCP head-of-line blocking. If one audio chunk is lost and requires retransmission, all subsequent chunks are delayed until the retransmission completes. Inside a real-time voice pipeline, a lost packet adds 200-500ms of stall time, far worse than the 12ms of network latency.
 
 WebRTC uses UDP with a custom reliability layer (SCTP over DTLS). Lost audio packets are simply skipped rather than retransmitted. The audio stream continues with a minor glitch rather than a full stall.
 
-In my benchmark across 200 turns with artificially induced 2% packet loss:
+Across 200 turns with artificially induced 2% packet loss, the two protocols diverged sharply:
 - **HTTP/2 streaming**: p50 latency of 890ms, p95 latency of 1,650ms (spikes from retransmission).
 - **WebRTC DataChannel**: p50 latency of 810ms, p95 latency of 920ms (minor glitches but no stalls).
 
@@ -209,14 +209,14 @@ The downside is implementation complexity. WebRTC requires a signaling server, I
 
 A 1,400ms response time means 1.4 seconds of silence after the user stops speaking. Human conversation has a median turn-taking interval of 200-300ms. A 1,400ms silence feels like the agent is ignoring you.
 
-Production voice agents use "filler utterances" to bridge the silence: "Hmm," "Let me think," "One second." These fillers serve two purposes: they signal that the agent is still processing, and they buy time for the pipeline to complete.
+To bridge that silence, production voice agents use "filler utterances": "Hmm," "Let me think," "One second." These fillers serve two purposes. They signal that the agent is still processing, and they buy time for the pipeline to complete.
 
 I tested three filler strategies:
 - **Fixed filler** (always "Hmm"): Predictable but robotic. Users reported it felt "fake" after 2-3 turns.
 - **Adaptive filler** (chooses from a set based on context): Better UX. "Let me check" for factual queries, "Interesting" for opinions.
 - **No filler**: Users interrupted the agent 40% more often, perceiving the silence as a system failure.
 
-The adaptive filler strategy is the only one that maintains a natural conversational rhythm. But it adds ~50ms of TTS overhead to synthesize the filler itself. This is a net positive because it reduces the *perceived* latency even as it increases the *measured* latency.
+The adaptive filler strategy is the only one that maintains a natural conversational rhythm, though it adds ~50ms of TTS overhead to synthesize the filler itself. That trade nets out positive, since the filler reduces the *perceived* latency even as it increases the *measured* latency. A waiter who says "let me check on that" buys the kitchen time without the table feeling abandoned, and the filler does the same job for the pipeline.
 
 ## Thermal throttling on the M2 Air: the slow death
 
@@ -228,7 +228,7 @@ The impact on latency is gradual but measurable:
 - **Turn 40-50**: VAD at 45ms/frame, total A2A at 1,540ms.
 - **Turn 60+**: VAD at 52ms/frame, total A2A at 1,610ms.
 
-The local components (VAD, local STT, context management) are the most affected by throttling. The cloud components (LLM, Cloud TTS) are unaffected because they run on Google's hardware. But the total loop still degrades because the local stages are on the critical path.
+Throttling hits the local components hardest (VAD, local STT, context management). The cloud components (LLM, Cloud TTS) stay flat because they run on Google's hardware. The total loop still degrades, since the local stages sit on the critical path and nothing downstream can start until they finish.
 
 <div class="visual-wrapper">
   <div class="visual-title">Thermal throttling: latency degradation over time</div>
@@ -243,13 +243,13 @@ For production deployments, this means a local-first voice agent on consumer har
 
 As I documented in my [open source AI memory review](/blog/state-of-open-source-memory-2026/), raw context windows are a poor substitute for structured memory. The same principle applies to voice agents. A 50-turn conversation with full history forces the LLM to process 15,000+ tokens of prior conversation before generating each response.
 
-The latency impact is direct. Gemini 3.1 Flash Lite's TTFT scales from 320ms (clean) to 520ms (15k tokens). That is 200ms of additional silence after every user turn, purely because the model is re-reading everything you have already said.
+Gemini 3.1 Flash Lite's TTFT scales from 320ms (clean) to 520ms (15k tokens), a direct hit. That is 200ms of additional silence after every user turn, purely because the model is re-reading everything you have already said.
 
 Implementing a context quarantine (keeping only the first 4 tokens as attention sinks, the most recent 10 turns, and a semantic summary of older turns) reduces the effective context to ~5k tokens. TTFT drops to 380ms. The 140ms savings is meaningful but comes at the cost of long-term consistency. If the user says "remember I mentioned my budget is $50" at turn 3 and asks about it at turn 40, the pruned context will have lost that detail.
 
 ## The economics of sub-800ms voice AI
 
-Every optimization has a cost. Here is the tradeoff matrix I built for reaching the 800ms target:
+No optimization comes free. Here is the tradeoff matrix I built for reaching the 800ms target:
 
 | Optimization | Latency Saved | Cost/Risk |
 |---|---|---|
@@ -259,7 +259,7 @@ Every optimization has a cost. Here is the tradeoff matrix I built for reaching 
 | WebRTC transport | -80ms | +200 lines of code |
 | Adaptive filler (perception trick) | 0ms measured, -200ms perceived | +50ms actual TTS cost |
 
-The only combination that reaches sub-800ms is: aggressive VAD (200ms) + context pruning (5k tokens) + speculative TTS. This saves 520ms from the baseline 1,415ms, bringing it to 895ms. Adding the adaptive filler reduces *perceived* latency to approximately 700ms.
+The only combination that reaches sub-800ms is: aggressive VAD (200ms) + context pruning (5k tokens) + speculative TTS. Stacking those three saves 520ms from the baseline 1,415ms, bringing it to 895ms. Adding the adaptive filler reduces *perceived* latency to approximately 700ms.
 
 The cost: the agent interrupts the user 18% of the time, forgets details from earlier in the conversation, and occasionally generates backtracked audio. Whether this is acceptable depends on your use case. A customer support bot can tolerate these tradeoffs. A medical consultation assistant cannot.
 
@@ -289,7 +289,7 @@ Not everything worked. Here is what broke during testing:
 
 The 800ms barrier is not a model problem. It is a systems engineering problem. Gemini 3.1 Flash Lite, GPT-4o Mini, and Claude Haiku all have TTFT in the 200-400ms range. The difference between a "fast" and "slow" voice agent is not the LLM. It is the VAD configuration, the chunking strategy, the transport protocol, and the TTS pipeline.
 
-The next frontier is **full-duplex voice**: the ability for the agent to listen while it speaks, detecting user interruptions and backing off mid-sentence. This requires a fundamentally different architecture where STT, LLM, and TTS run in parallel rather than serially. Google's Gemini Live API already supports this at the model level, but the latency budget for full-duplex is even tighter because the agent must react to interruptions in under 300ms.
+The next frontier is **full-duplex voice**: the ability for the agent to listen while it speaks, detecting user interruptions and backing off mid-sentence. Pulling that off demands a fundamentally different architecture where STT, LLM, and TTS run in parallel rather than serially. Google's Gemini Live API already supports this at the model level, but the latency budget for full-duplex is even tighter because the agent must react to interruptions in under 300ms, roughly the time it takes a person to say "wait, no" and expect the other side to stop.
 
 I covered the broader [KV cache management problem](/blog/kv-cache-eviction-accuracy/) that affects all LLM-based systems. Voice agents are simply the most latency-sensitive application of these infrastructure constraints. Every millisecond saved in the context window is a millisecond closer to a conversation that feels human.
 

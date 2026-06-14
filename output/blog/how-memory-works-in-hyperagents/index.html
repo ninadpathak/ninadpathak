@@ -77,7 +77,7 @@
   "description": "A deep dive into how HyperAgents retain context across interactions, layer memory architectures, and handle session continuity in production.",
   "image": "https://ninadpathak.com/static/og-image.png",
   "inLanguage": "en-US",
-  "wordCount": 2608,
+  "wordCount": 2907,
   "keywords": "ai, agents, memory, hyperagents, infrastructure",
   "articleSection": "ai",
   "author": {
@@ -204,7 +204,7 @@
         <span class="post-meta-sep" aria-hidden="true">·</span>
         <time class="post-meta-date" datetime="2026-04-19">Apr 19, 2026</time>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <span class="post-meta-time">13 min read</span>
+        <span class="post-meta-time">15 min read</span>
       </div>
       <h1 class="post-title">How Memory Works in HyperAgents</h1>
       <p class="lead">A deep dive into how HyperAgents retain context across interactions, layer memory architectures, and handle session continuity in production.</p>
@@ -248,12 +248,12 @@
 </div>
 
 <h2 id="what-is-a-hyperagent-and-why-does-memory-matter">What Is a Hyperagent And Why Does Memory Matter</h2>
-<p>A HyperAgent is not a single language model call. It is a composed system of models, tools, and a reasoning loop that can run for minutes or hours across many steps. When you build something that lives inside a long-running process, you quickly hit a wall: the model forgets. Context windows fill up. Sessions collapse. Without a memory architecture, every turn starts from scratch and every user experience degrades.</p>
-<p>Memory in HyperAgents solves this by giving the agent somewhere to store what it knows, what it has done, and what it still needs to do. The architecture I am describing here is the one I built into my own agent runner, and it has handled sessions with 500+ turns without degradation.</p>
+<p>A HyperAgent is not a single language model call. It is a composed system of models, tools, and a reasoning loop that can run for minutes or hours across many steps. Build something that lives inside a long-running process and you quickly hit a wall: the model forgets. Context windows fill up. Sessions collapse. Lacking a memory architecture, every turn starts from scratch and every user experience degrades. I watched one of my early agents spend three turns re-reading the same config file because it had already pushed the earlier read out of its context window.</p>
+<p>Giving the agent somewhere to store what it knows, what it has done, and what it still needs to do is what memory in HyperAgents actually buys you. The architecture I am describing here is the one I built into my own agent runner, and it has handled sessions with 500+ turns without degradation.</p>
 <h2 id="the-three-layer-memory-architecture">The Three-layer Memory Architecture</h2>
-<p>HyperAgents do not use a single memory store. They use three distinct layers, each with a different access pattern and purpose. Understanding what each layer does is the difference between an agent that feels smart and one that actually is.</p>
+<p>HyperAgents do not use a single memory store. They use three distinct layers, each with a different access pattern and purpose. Knowing what each layer does is the difference between an agent that feels smart and one that actually is. Picture the layers the way an operating system stacks storage: CPU registers for what you need this instant, RAM for the active session, disk for everything you might recall later. Each tier trades speed for capacity, and you reach for the slow one only when the fast one cannot hold the answer.</p>
 <h3 id="layer-1-working-context-in-memory">Layer 1: Working Context (In-Memory)</h3>
-<p>The working context lives in RAM during a session. It holds the current conversation history, the agent's current goal, and a sliding window of recent tool results. This layer feeds directly into the model prompt on every call.</p>
+<p>Living in RAM during a session, the working context holds the current conversation history, the agent's current goal, and a sliding window of recent tool results. Every model call reads from this layer directly, so whatever sits here is what the agent can reason over right now.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WorkingContext</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_turns</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -267,9 +267,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
 
-<p>The <code>max_turns</code> parameter controls how far back the agent can "see". Setting it to 50 gives you roughly 100K tokens of context history assuming average turns at 1K tokens each. On a model with a 128K context window, you have room to spare. On a 4K window, you need to be more aggressive.</p>
+<p>How far back the agent can "see" is set by the <code>max_turns</code> parameter. Setting it to 50 gives you roughly 100K tokens of context history assuming average turns at 1K tokens each. On a model with a 128K context window, you have room to spare. Running against a 4K window, you need to be more aggressive, dropping <code>max_turns</code> to something like 6 and leaning harder on the lower layers.</p>
 <h3 id="layer-2-episodic-memory-durable-store">Layer 2: Episodic Memory (Durable Store)</h3>
-<p>Working context evaporates when the session ends. Episodic memory persists across sessions by writing structured summaries to disk or a database. Each episode captures what happened, what was decided, and what outstanding threads remain.</p>
+<p>Working context evaporates when the session ends. Episodic memory persists across sessions by writing structured summaries to disk or a database. Each episode captures what happened, what was decided, and what outstanding threads remain, the way a good standup note records "shipped the auth refactor, decided to defer rate limiting, still need to fix the flaky test" rather than replaying every keystroke.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">EpisodicMemory</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">store</span> <span class="o">=</span> <span class="n">SQLiteStore</span><span class="p">(</span><span class="n">store_path</span><span class="p">)</span>
@@ -298,9 +298,9 @@
         <span class="p">)</span>
 </code></pre></div>
 
-<p>An episode gets written every N turns (I default to 10) or when the user goes quiet for more than 30 seconds. The summary is generated by a separate call to the LLM that condenses the last N turns into a 2-3 sentence synopsis. This keeps episodic storage small while retaining the shape of what happened.</p>
+<p>An episode gets written every N turns (I default to 10) or when the user goes quiet for more than 30 seconds. A separate call to the LLM generates the summary, condensing the last N turns into a 2-3 sentence synopsis. Storing the synopsis instead of the transcript keeps episodic storage small while retaining the shape of what happened.</p>
 <h3 id="layer-3-knowledge-base-long-term-store">Layer 3: Knowledge Base (Long-Term Store)</h3>
-<p>Knowledge base is where you put things the agent should know but does not need in every prompt. This includes factual knowledge, learned procedures, and accumulated user preferences. The agent queries this layer only when relevant, not on every turn.</p>
+<p>Knowledge base is where you put things the agent should know but does not need in every prompt: factual knowledge, learned procedures, and accumulated user preferences such as "this user always wants TypeScript, never JavaScript" or "deploy targets are us-east-1 by default". The agent queries this layer only when relevant, not on every turn.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">KnowledgeBase</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kb</span> <span class="o">=</span> <span class="n">ChromaDBClient</span><span class="p">(</span><span class="n">kb_path</span><span class="p">)</span>
@@ -324,7 +324,7 @@
 
 <p>The retrieval step happens at the start of a new session when you load the user's history. You pull their last 10 episode summaries, rank them by recency, and inject the top 3 into the working context as a "here is where we left off" block.</p>
 <h2 id="session-continuity-in-practice">Session Continuity In Practice</h2>
-<p>Session continuity is where most agent frameworks fall apart. A user starts a task, goes to sleep, and comes back the next day expecting the agent to pick up exactly where it left off. Without explicit architecture, the agent has no idea what happened before.</p>
+<p>Session continuity is where most agent frameworks fall apart. A user kicks off a multi-step data migration at 6pm, closes the laptop, and comes back the next morning expecting the agent to pick up exactly where it left off. Absent explicit architecture, the agent has no idea what happened before and cheerfully starts the migration over from row one.</p>
 <p>The continuity flow I use:</p>
 <ol>
 <li>On session resume, load the last episodic summary for this user.</li>
@@ -346,10 +346,10 @@
     <span class="k">return</span> <span class="n">context</span>
 </code></pre></div>
 
-<p>This approach handles the "I left off mid-task" problem cleanly. The agent sees the summary, knows what was unfinished, and can reorient immediately. No hallucination about what happened, no wasted turns re-discovering the context.</p>
+<p>Handling the "I left off mid-task" problem this way keeps the resume clean. The agent sees the summary, knows what was unfinished, and can reorient immediately. No hallucination about what happened, no wasted turns re-discovering the context.</p>
 <h2 id="tool-memory-and-intermediate-results">Tool Memory And Intermediate Results</h2>
-<p>When a HyperAgent calls a tool, the result of that call is transient unless you capture it. If the agent calls a code execution tool and gets back a 500-line output, that output needs to live somewhere if the agent needs to reference it later.</p>
-<p>I use a tool result buffer that stores the last N tool calls with their outputs. When the context window gets tight, I compress older tool results into summaries rather than dropping them entirely.</p>
+<p>When a HyperAgent calls a tool, the result of that call is transient unless you capture it. Say the agent runs a code execution tool and gets back a 500-line stack trace plus test output. That blob needs to live somewhere the moment the agent might want to quote a specific line of it later.</p>
+<p>I use a tool result buffer that stores the last N tool calls with their outputs. As the context window gets tight, I compress older tool results into summaries rather than dropping them entirely.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ToolResultBuffer</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_entries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span> <span class="n">deque</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">max_entries</span><span class="p">)</span>
@@ -371,10 +371,10 @@
         <span class="n">oldest</span><span class="p">[</span><span class="s2">&quot;compressed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 </code></pre></div>
 
-<p>The compression model can be a cheaper, smaller model since it only needs to extract gist-level information. gpt-4o-mini is more than sufficient for this. The compressed entry preserves the fact that something happened and what the outcome was, without storing 500 lines of raw output.</p>
+<p>A cheaper, smaller model handles the compression fine, since it only needs to extract gist-level information. gpt-4o-mini is more than sufficient for this. The compressed entry preserves the fact that something happened and what the outcome was, for example "ran the test suite, 3 of 47 failed, all in the billing module", without storing 500 lines of raw output.</p>
 <h2 id="context-window-management">Context Window Management</h2>
-<p>Context windows are finite. A HyperAgent running 200 turns against a 128K context window will eventually fill up, especially with verbose tool outputs mixed in. The solution is not to avoid long sessions but to manage them actively.</p>
-<p>I use a tiered truncation strategy. At 70% context usage, the agent gets a warning and I trigger mid-level compression of older tool results. At 85%, I run full summarization of the oldest half of the conversation. At 95%, I force-persist the current state to episodic memory and start a new working context with only the last 5 turns plus the episode summary.</p>
+<p>Context windows are finite. A HyperAgent running 200 turns against a 128K context window will eventually fill up, especially with verbose tool outputs mixed in. Managing long sessions actively beats trying to avoid them, because the useful work is in the long sessions.</p>
+<p>I use a tiered truncation strategy. At 70% context usage, the agent gets a warning and I trigger mid-level compression of older tool results. Once usage crosses 85%, I run full summarization of the oldest half of the conversation. At 95%, I force-persist the current state to episodic memory and start a new working context with only the last 5 turns plus the episode summary.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_context_pressure</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">WorkingContext</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="n">usage</span> <span class="o">=</span> <span class="n">count_tokens</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">messages</span> <span class="o">+</span> <span class="n">context</span><span class="o">.</span><span class="n">tool_results</span><span class="p">)</span>
     <span class="n">max_ctx</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">:</span> <span class="mi">128000</span><span class="p">,</span> <span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">:</span> <span class="mi">128000</span><span class="p">,</span>
@@ -390,10 +390,10 @@
         <span class="n">compress_tool_results</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">oldest_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 
-<p>The key insight is that you do not want to wait until the context is full to act. The 70/85/95 thresholds give the system room to breathe and prevent forced truncation mid-turn.</p>
+<p>Waiting until the context is full to act is the mistake I made first, and it bit me when a single large tool result blew past the limit mid-turn and the call failed outright. The 70/85/95 thresholds give the system room to breathe and prevent forced truncation mid-turn.</p>
 <h2 id="embedding-and-retrieval-for-context-injection">Embedding And Retrieval For Context Injection</h2>
 <p>When a session resumes or when an agent needs to know something from three sessions ago, you cannot just dump all history into the prompt. You need to retrieve the relevant pieces.</p>
-<p>Embedding-based retrieval works well here. Each episodic summary gets embedded at save time and stored in a vector index. When you need to find relevant history, you embed the current conversation state and do a nearest-neighbor search against the summary index.</p>
+<p>Embedding-based retrieval works well here. Each episodic summary gets embedded at save time and stored in a vector index. To find relevant history, you embed the current conversation state and do a nearest-neighbor search against the summary index, the same move a librarian makes when you describe a book you half-remember and they walk you to the right shelf instead of reciting the whole catalog.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">retrieve_relevant_history</span><span class="p">(</span><span class="n">current_context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
     <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">current_context</span><span class="p">)</span>
 
@@ -408,10 +408,10 @@
     <span class="k">return</span> <span class="n">results</span>
 </code></pre></div>
 
-<p>The embedding model matters. <code>text-embedding-3-small</code> from OpenAI gives good results at low cost. <code>bge-m3</code> from BAAI is a solid open-source alternative if you need to stay on-premises. Embed at save time, not at query time. The compression of compute is worth the storage overhead.</p>
+<p>The embedding model matters. <code>text-embedding-3-small</code> from OpenAI gives good results at low cost. <code>bge-m3</code> from BAAI is a solid open-source alternative if you need to stay on-premises. Embed at save time, not at query time. Paying the embedding cost once on write beats recomputing it on every read, and the extra storage is cheap by comparison.</p>
 <h2 id="multi-agent-memory-sharing">Multi-agent Memory Sharing</h2>
-<p>When you have multiple HyperAgents working together on a problem, memory becomes a coordination problem. Agent A needs to know what Agent B concluded. Agent C needs the shared context from a previous joint session.</p>
-<p>I use a shared episodic store with a concept called "shared context episodes". When agents work together, they write to a shared session with their own episode streams. Other agents can read from that shared store by querying across agent IDs.</p>
+<p>When you have multiple HyperAgents working together on a problem, memory becomes a coordination problem. A research agent finishes gathering sources and a writer agent needs to know what it found. A third agent rejoining a project needs the shared context from a previous joint session.</p>
+<p>I use a shared episodic store with a concept called "shared context episodes". Working together, agents write to a shared session with their own episode streams. Other agents read from that shared store by querying across agent IDs, the way a team channel lets anyone scroll back through what colleagues posted without sitting in every meeting themselves.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SharedMemoryStore</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
@@ -441,13 +441,13 @@
         <span class="k">return</span> <span class="p">[{</span><span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;turn&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
 </code></pre></div>
 
-<p>This enables a write-read pattern where agents contribute to a collective memory without stepping on each other's context. The embedding column exists specifically for cross-agent relevance queries.</p>
+<p>The pattern lets agents contribute to a collective memory without stepping on each other's context. The embedding column exists specifically for cross-agent relevance queries, so the writer agent can pull "everything the researcher logged about pricing" rather than reading all of it.</p>
 <h2 id="production-considerations">Production Considerations</h2>
 <p>If you want to understand how this compares to other memory systems, see my post on <a href="/blog/context-windows-vs-memory/">context windows vs memory</a>. For a deeper look at memory hierarchy in AI systems, check out <a href="/blog/memory-hierarchy-in-ai-systems/">memory hierarchy in AI systems</a>.</p>
 <p>Memory architecture that looks clean in a notebook breaks in production if you do not account for latency, storage growth, and failure modes.</p>
 <p><strong>Write latency</strong> is the first trap. Writing to SQLite on every turn adds 5-10ms per operation. At 500 turns per session, that is 2.5-5 seconds of overhead spread across the session. For a smooth user experience, you want to batch writes or do them asynchronously. I use a background thread that flushes the episodic buffer every 30 seconds or every 10 turns, whichever comes first.</p>
 <p><strong>Storage growth</strong> is the second trap. Episodic summaries are small but they compound. With 100 users doing 10 sessions per day, you write 1000 episodes daily. At 500 bytes per summary, that is 500KB per day, or 180MB per year. Negligible. But if you store full tool result logs instead of summaries, that number jumps by two orders of magnitude. Be deliberate about what you store and for how long.</p>
-<p><strong>Failure recovery</strong> is the third trap. If the agent crashes mid-session, what survives? Working context is gone. Episodic memory on disk survives. Knowledge base survives. The failure mode you want to avoid is a crash that also corrupts the episodic store. Use append-only writes and validate integrity on startup.</p>
+<p><strong>Failure recovery</strong> is the third trap. Should the agent crash mid-session, what survives? Working context is gone. Episodic memory on disk survives. Knowledge base survives. The failure mode you want to avoid is a crash mid-write that leaves the episodic store half-flushed and corrupt, taking the only durable record down with it. Use append-only writes and validate integrity on startup.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">startup_health_check</span><span class="p">(</span><span class="n">store</span><span class="p">:</span> <span class="n">EpisodicMemory</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">latest</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;SELECT id FROM episodes ORDER BY id DESC LIMIT 1&quot;</span><span class="p">)</span>
@@ -459,8 +459,8 @@
 
 <p>VACUUM rebuilds the SQLite file and fixes most corruption scenarios. It is not guaranteed, but it handles the common case where a crash left the WAL in an inconsistent state.</p>
 <h2 id="comparing-hyperagent-memory-to-standard-rag">Comparing Hyperagent Memory To Standard RAG</h2>
-<p>Standard RAG (Retrieval-Augmented Generation) relies on a vector store and a fixed corpus. You index documents, the user asks a question, you retrieve relevant chunks, and the model answers. This works for static knowledge bases. It does not work for agentic workflows.</p>
-<p>HyperAgent memory differs in three fundamental ways. First, it is bidirectional. The agent writes to memory as it works, not just reads from it. Second, it is temporal. Memories are tagged with when they happened and what happened before and after. Third, it is goal-directed. Memory is not just about what the agent knows but what it is trying to accomplish and what remains.</p>
+<p>Standard RAG (Retrieval-Augmented Generation) relies on a vector store and a fixed corpus. You index documents, the user asks a question, you retrieve relevant chunks, and the model answers. That pattern serves static knowledge bases well. Agentic workflows break it.</p>
+<p>HyperAgent memory differs in three fundamental ways. First, it is bidirectional. The agent writes to memory as it works, then reads its own notes back later. Second, it is temporal. Memories are tagged with when they happened and what happened before and after. Third, it is goal-directed. Memory tracks what the agent is trying to accomplish and what remains, alongside what it knows.</p>
 <p>A standard RAG pipeline would not know that the agent is three steps into a six-step deployment. A HyperAgent memory system knows the full trajectory and can reconstruct it.</p>
 <h2 id="related-articles">Related Articles</h2>
 <ul>
@@ -471,15 +471,15 @@
 </ul>
 <h2 id="faq">Faq</h2>
 <p><strong>How does HyperAgent memory differ from conversation history in a chat model?</strong></p>
-<p>Conversation history is raw. It contains every message in sequence. HyperAgent memory is structured and tiered. Raw history lives in working context. Structured summaries and decisions live in episodic memory. Facts and procedures live in the knowledge base. The tiering allows the agent to access the right information at the right time without drowning in noise.</p>
+<p>Conversation history is raw. It contains every message in sequence. HyperAgent memory is structured and tiered. Raw history lives in working context. Structured summaries and decisions live in episodic memory. Facts and procedures live in the knowledge base. Tiering it this way lets the agent reach the right information at the right time without drowning in noise.</p>
 <p><strong>Can memory be shared across different agent instances?</strong></p>
-<p>Yes. Shared episodic stores let multiple agent instances read and write to a common memory space. This is useful for multi-agent workflows where agents need to coordinate or build on each other's work.</p>
+<p>Yes. Shared episodic stores let multiple agent instances read and write to a common memory space, which helps multi-agent workflows where agents need to coordinate or build on each other's work.</p>
 <p><strong>What happens if the episodic store grows too large?</strong></p>
-<p>You can implement a retention policy that rolls off old episodes. I keep the last 30 sessions per user in full and compress anything older than 90 days into a single yearly summary. This keeps storage bounded while retaining enough history to handle the "where did we leave off" question.</p>
+<p>You can implement a retention policy that rolls off old episodes. I keep the last 30 sessions per user in full and compress anything older than 90 days into a single yearly summary. Rolling off this way keeps storage bounded while retaining enough history to handle the "where did we leave off" question.</p>
 <p><strong>How do you handle memory when switching between different LLMs?</strong></p>
 <p>The memory layer is model-agnostic. Working context is a list of messages in OpenAI SDK format by default, but you can translate to Anthropic format or any other provider's schema at the adapter layer. The episodic and knowledge layers are pure data and do not care which model is consuming them.</p>
 <p><strong>Is memory written synchronously or asynchronously?</strong></p>
-<p>Writes to the working context are synchronous (immediate). Writes to episodic memory are asynchronous via a background flush thread. This prevents memory writes from blocking the agent's main loop. The trade-off is that a crash can lose up to 30 seconds of recent episodes, which is acceptable for most production use cases.</p>
+<p>Writes to the working context are synchronous (immediate). Writes to episodic memory are asynchronous via a background flush thread, which keeps memory writes from blocking the agent's main loop. The trade-off is that a crash can lose up to 30 seconds of recent episodes, which is acceptable for most production use cases.</p>
 <p><strong>How do you handle sensitive data in memory?</strong></p>
 <p>Episodic summaries should be generated with a system prompt that redacts sensitive fields (passwords, tokens, PII) before storage. The summary generation call runs through a sanitizer that replaces patterns like <code>[A-Za-z0-9+/]{32,}</code> with <code>[REDACTED]</code>. Actual tool outputs with sensitive data should be stored in memory only as compression summaries, never raw.</p>
 <p><strong>What context pressure thresholds do you recommend?</strong></p>
@@ -487,7 +487,7 @@
 <p><strong>Can the agent access memory mid-turn or only at turn boundaries?</strong></p>
 <p>Access is available at any point. The agent can query the knowledge base between tool calls or during planning phases. The working context is always available since it lives in the same process. Episodic retrieval typically happens at session start or when the agent explicitly calls a "recall" tool that queries the episodic store.</p>
 <p><strong>How does the agent know which memory layer to use?</strong></p>
-<p>Through the system prompt. The agent is instructed that recent turns and tool results live in working context, that session history is in episodic memory, and that factual knowledge is in the knowledge base. This is not enforced by the code but by the instruction. In practice, agents learn to query memory appropriately after a few sessions.</p>
+<p>Through the system prompt. The agent is instructed that recent turns and tool results live in working context, that session history is in episodic memory, and that factual knowledge is in the knowledge base. The instruction carries this, not the code. Agents learn to query memory appropriately after a few sessions in practice.</p>
 <p>The memory architecture in HyperAgents is the reason it works reliably across long sessions. Without it, you have a powerful but forgetful system. With it, you have something that can hold context, learn from experience, and pick up work where it left off. That is the difference between a demo and a product.</p>
       </div>
     </div>

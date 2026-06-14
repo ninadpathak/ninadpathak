@@ -6,7 +6,7 @@ tags: [agentic-cli, benchmarking, developer-productivity, m2-air, technical-deep
 status: published
 ---
 
-Claude Code and Gemini CLI have moved from simple chat interfaces to autonomous repository orchestrators. While both achieve ~80% on SWE-bench Verified, they diverge in execution philosophy: Claude Code uses supervised autonomy through parallel subagents, while Gemini CLI employs verified autonomy with its automated conductor feedback loop. In my 16GB M2 Air benchmark, Claude Code excelled at ambiguous architectural refactors, while Gemini CLI won on large-scale system migrations and multimodal design implementation. The choice is no longer about model intelligence, but about the specific autonomous lifecycle you want to manage.
+Claude Code and Gemini CLI have both moved from chat interfaces into something closer to repository orchestrators that plan, edit, and verify on their own. Each lands around 80% on SWE-bench Verified, so raw model intelligence stopped being the interesting question for me. Their execution philosophies are what actually differ. Claude Code runs a supervised model that spawns parallel subagents and asks me to sign off on the plan, and Gemini CLI runs a verified model that throws code at the wall and lets its automated conductor loop catch what breaks. Refactoring an ambiguous architecture on my 16GB M2 Air, Claude Code pulled ahead. For large system migrations and multimodal design work, Gemini CLI did. What I am really choosing between is the autonomous lifecycle I want to babysit.
 
 <div class="visual-wrapper">
   <div class="visual-title">Agentic CLI success rates: logic vs scale</div>
@@ -15,11 +15,11 @@ Claude Code and Gemini CLI have moved from simple chat interfaces to autonomous 
   </div>
 </div>
 
-**Short answer:** Claude Code is the superior tool for deep logic and ambiguous architectural changes, demonstrated by its ability to detect and fix race conditions that other agents miss. Gemini CLI is the faster, more cost-effective choice for system-wide migrations and visual bug fixes due to its multimodal capabilities and lower token pricing. On a 16GB M2 Air, Claude Code maintained higher reasoning stability under heavy context load, while Gemini CLI offered better integration with automated verification tools.
+**Short answer:** for deep logic and ambiguous architectural changes, reach for Claude Code. It caught and fixed a race condition the other agent walked right past. Gemini CLI is the faster, cheaper pick for system-wide migrations and visual bug fixes, helped by its multimodal input and lower token pricing. Under heavy context load on the 16GB M2 Air, Claude Code held its reasoning together better, and Gemini CLI plugged into automated verification tools more cleanly.
 
 ## The experiment setup: MacBook Air M2 (16GB)
 
-To move beyond the marketing claims, I constructed a standardized benchmark environment. The target was a legacy Node.js application containing a specific, unstated race condition: a global counter that read its state, paused for a random timeout, and then incremented. This pattern ensures that 10 concurrent calls will almost always lose 90% of their updates.
+Marketing claims were never going to settle this for me, so I built a standardized environment instead. My target was a legacy Node.js application with one planted, unstated race condition: a global counter that read its current value, paused for a random timeout, and only then wrote the incremented number back. Picture two people editing the same spreadsheet cell from memory after a coffee break. Whoever saves last wins, and everyone else's change vanishes. Fire 10 concurrent calls at that counter and it loses roughly 90% of the updates, every run.
 
 <div class="visual-wrapper">
   <div class="visual-title">The problem: async race conditions in legacy code</div>
@@ -35,7 +35,7 @@ I tasked both agents with three specific objectives:
 
 ## Claude Code: supervised autonomy and architectural depth
 
-Claude Code (v2.1.92) operates with a high degree of skepticism. When I initiated the refactor, it didn't just replace callbacks with promises. It performed a dependency analysis and identified that `resetCounter()` needed to reset the promise queue itself, an edge case I hadn't explicitly prompted for.
+Skepticism is the word I keep coming back to with Claude Code (v2.1.92). Kicking off the refactor, it didn't just swap callbacks for promises and call it done. It traced the dependencies first and flagged that `resetCounter()` had to clear the promise queue itself, otherwise a reset mid-flight would leave stale work in line. That edge case never appeared in my prompt. The agent went looking for it.
 
 <div class="visual-wrapper">
   <div class="visual-title">The solution: atomic queuing and promise chains</div>
@@ -44,7 +44,7 @@ Claude Code (v2.1.92) operates with a high degree of skepticism. When I initiate
   </div>
 </div>
 
-Claude's execution philosophy relies on a "Supervised Autonomy" model. It presents a detailed plan before making multi-file edits, allowing the developer to audit the architectural intent. This reasoning depth comes at a premium. Claude's token usage is significantly higher than Gemini's, but the resulting code requires fewer manual correction loops.
+"Supervised Autonomy" is the model Claude leans on. Before it touches multiple files, it lays out a detailed plan I can read and approve, so I get to audit the architectural intent before any code moves. That depth carries a real cost in tokens. Claude burns noticeably more of them than Gemini does, and what I get back is code that needs fewer manual correction loops to ship.
 
 <div class="visual-wrapper">
   <div class="visual-title">Claude Code: parallel subagent architecture</div>
@@ -55,15 +55,15 @@ Claude's execution philosophy relies on a "Supervised Autonomy" model. It presen
 
 ## Gemini CLI: verified autonomy and multimodal validation
 
-Gemini CLI (v0.36.0) takes a more aggressive, "YOLO" approach to automation. By using the `-y` flag, I allowed Gemini to autonomously iterate through the refactor. Its primary strength is the **Conductor** loop, which automatically runs tests and linters after every edit.
+Gemini CLI (v0.36.0) automates with a more aggressive, "YOLO" temperament. Passing the `-y` flag let Gemini iterate through the refactor without stopping to ask me anything. Its standout feature is the **Conductor** loop, which runs the tests and linters after every single edit and feeds the failures straight back to the model.
 
-While Gemini's first-pass solution was robust, it initially missed the edge case of resetting the global lock state. However, its speed was undeniable. Gemini completed the full migration and test suite 40% faster than Claude, largely due to its "lite" context management which loads only the necessary procedural skills for each sub-task.
+Gemini's first pass held up well on the core logic, though it skipped the same edge case Claude caught: resetting the global lock state. Speed was where it left no doubt. Gemini finished the full migration and test suite about 40% faster than Claude, mostly thanks to its "lite" context management, which loads only the procedural skills each sub-task needs instead of the whole session. Think of it as a chef who clears the cutting board between dishes rather than cooking around the last meal's mess.
 
 ## Hardware constraints: the 16GB unified memory ceiling
 
-Running these agentic loops locally on an M2 Air (16GB) reveals the true bottleneck: context-driven memory pressure. Both agents maintain 1M+ token windows, which translates to a significant RAM footprint when multiple subagents are spawned.
+Running these agentic loops locally on an M2 Air (16GB) surfaces the real bottleneck, and it isn't the CPU. Memory pressure from context is what bites. Both agents hold 1M+ token windows, and that footprint balloons in RAM the moment several subagents spin up at once.
 
-During the benchmark, I observed Claude Code triggering swap memory more frequently than Gemini. This is likely due to Claude's "Parallel Subagent" architecture, which requires maintaining multiple independent reasoning trajectories in the context window.
+Throughout the benchmark I watched Claude Code hit swap more often than Gemini did. Blame the "Parallel Subagent" architecture, which keeps several independent reasoning trajectories alive in the context window at the same time. Each one is like a separate browser profile loaded into memory, and three of them open at once is what tips a 16GB machine into swapping to disk.
 
 <div class="visual-wrapper">
   <div class="visual-title">Agent memory quarantine: context isolation</div>
@@ -76,7 +76,7 @@ To prevent "Context Poisoning" (where irrelevant history from a previous task di
 
 ## Economic outcomes of local agentic loops
 
-The ROI of running these loops on local hardware (M2/M3) versus cloud APIs becomes clear at scale. Cloud APIs charge per token, which makes high-frequency agentic loops expensive. Local hardware, while limited by memory, offers a "zero-cost" inference floor for development tasks.
+Scale is where the difference between local hardware (M2/M3) and cloud APIs stops being abstract. Cloud APIs bill per token, so a tight agentic loop that edits, tests, and re-edits a file forty times in an afternoon turns into a line item you notice. Local hardware caps you at whatever your memory allows, and below that ceiling the inference is effectively free for routine development work.
 
 <div class="visual-wrapper">
   <div class="visual-title">Agentic ROI: local M2 vs cloud API</div>
@@ -87,7 +87,7 @@ The ROI of running these loops on local hardware (M2/M3) versus cloud APIs becom
 
 ## Success rate and DORA implications
 
-The impact of these tools on [engineering velocity](/blog/engineering-velocity-documentation/) is measurable. By automating the "discovery" and "implementation" phases of a refactor, these agents reduce the "Lead Time for Changes" by up to 85%.
+What these tools do to [engineering velocity](/blog/engineering-velocity-documentation/) shows up in the numbers, not just the vibe. Hand off the "discovery" and "implementation" phases of a refactor, the two stages where I usually lose an afternoon reading unfamiliar files, and the agents cut "Lead Time for Changes" by up to 85%.
 
 <div class="visual-wrapper">
   <div class="visual-title">DORA multiplier: capability amplification through agents</div>
@@ -105,9 +105,9 @@ The impact of these tools on [engineering velocity](/blog/engineering-velocity-d
 
 ## Engineering documentation as infrastructure
 
-The competitive moat for developers in 2026 is the ability to orchestrate these agents effectively. Information architecture is no longer just for humans. It is the operating system for your agentic CLIs. 
+Orchestrating these agents well is the developer skill that separates people in 2026, more than any one model choice. The way I structure a repo's documentation now serves two readers, and the agent is the demanding one. Clear information architecture has become the operating system my CLIs boot from.
 
-When you treat your repository as infrastructure and provide high-signal documentation (like ADRs), your agents become significantly more capable. Practitioner writing remains relevant because it provides the "intent" that agents use to resolve ambiguity.
+Treat the repository as infrastructure and feed it high-signal documentation, and the agents get markedly sharper. A single ADR that records why we chose optimistic locking over a mutex, for instance, is the difference between an agent that reaches for the pattern we already standardized on and one that reinvents a worse version of it. Practitioner writing keeps earning its place because it carries the intent agents lean on to resolve ambiguity.
 
 ## FAQ
 
@@ -121,7 +121,7 @@ You will hit the VRAM ceiling at approximately 150k context tokens. Beyond that,
 No. The reasoning runs on cloud-hosted models (Anthropic and Google), not locally. The terminal is just the interface. However, tools like **Gemma 4** are paving the way for fully local, private agentic loops.
 
 **What is the "Context Poisoning" problem?**
-In long sessions, irrelevant history can distract the model, leading to hallucinations. Gemini CLI fixes this by isolating task contexts, while Claude Code relies on its superior attention mechanism to filter the noise.
+Long sessions let irrelevant history pile up and pull the model off course, which shows up as hallucinations. Gemini CLI handles it by walling off each task in its own context. Claude Code takes the other route and trusts its attention mechanism to filter the noise from one long shared history.
 
 **Should I allow YOLO mode in production repos?**
 Only if you have a robust "Verified Autonomy" loop. Gemini's Conductor or Claude's supervised planning are essential to prevent agents from introducing subtle logic bugs while fixing others.

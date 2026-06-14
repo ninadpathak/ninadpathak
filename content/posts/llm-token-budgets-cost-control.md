@@ -6,15 +6,15 @@ tags: [ai, cost, backend, llm]
 status: published
 ---
 
-Token costs are the new EC2 bills. I know this because I burnt $200 on GPT-4 in a single weekend debugging. A production RAG pipeline serving 10,000 queries per day can hit $1,000 per month without anyone noticing until the bill lands. For the first few years of the LLM era, engineers treated inference spend as a black box. Input goes in, output comes out, invoice arrives at the end of the month. That approach works until it doesn't.
+Token costs are the new EC2 bills. I learned that the expensive way after burning $200 on GPT-4 over a single weekend, chasing a bug with a loop that re-sent the whole conversation on every retry. A production RAG pipeline serving 10,000 queries per day can quietly climb to $1,000 per month, and nobody notices until the invoice lands. For the first few years of the LLM era, most engineers I worked with treated inference spend as a black box. Input goes in, output comes out, invoice arrives at month end. That approach holds right up until traffic doubles or someone ships a chattier prompt.
 
-This guide is about making token costs visible, predictable, and controllable. No fluff. Real numbers.
+What follows is how I make token costs visible, predictable, and controllable. No fluff. Real numbers.
 
 ## What a token actually costs
 
-Tokens are not bytes. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email is 75-100 tokens. The model sees everything as tokens, and you pay per token.
+Tokens are not bytes. English text averages about 4 characters per token. A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email runs 75 to 100 tokens. The model sees everything as tokens, and you pay per token, every time the model reads or writes one.
 
-Here is the current pricing landscape as of Q2 2026, rounded to three significant figures. Numbers shift frequently. I check the API pricing pages before architecting around a specific rate. Always.
+As of Q2 2026, here is the current pricing landscape, rounded to three significant figures. Numbers shift frequently, sometimes mid-quarter, so I check the API pricing pages before architecting around a specific rate. Always.
 
 | Model | Input (per 1M tokens) | Output (per 1M tokens) |
 |---|---|---|
@@ -30,7 +30,7 @@ Here is the current pricing landscape as of Q2 2026, rounded to three significan
 | Gemini 3.1 Pro (<=200K ctx) | $2 | $12 |
 | Gemini 3.1 Pro (>200K ctx) | $4 | $18 |
 
-A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds small until you multiply it by 50,000 requests per day. Then it is $13 per day, or $390 per month. Context compounds, and [bigger context windows are not always better for cost or accuracy](/blog/llm-context-windows-explained/). This is the math that bites you.
+A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds like a rounding error until you multiply it by 50,000 requests per day, which lands at $13 per day, or $390 per month. Context compounds too, and [bigger context windows are not always better for cost or accuracy](/blog/llm-context-windows-explained/). A chatbot that grows its system prompt and replays the full history on every turn pays for those same tokens again on each message, so a 20-message conversation can cost twenty times what the first reply did.
 
 <div class="visual-wrapper">
   <div class="visual-title">TOKEN BUDGET</div>
@@ -41,7 +41,7 @@ A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That
 
 ## Counting tokens before you spend them
 
-The most basic cost control technique is [counting how many tokens a request will consume before you send it](/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/). Every major SDK provides a token counting utility.
+Counting how many tokens a request will consume before you send it is [the most basic cost control technique there is](/blog/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/). Every major SDK ships a token counting utility for exactly this.
 
 ```python
 from anthropic import Anthropic
@@ -71,13 +71,13 @@ tokens = encoding.encode("Explain the difference between a mutex and a semaphore
 print(f"Token count: {len(tokens)}")
 ```
 
-The tiktoken library is fast and works without making an API call. I use it in request pipelines to reject or queue requests that would exceed a budget threshold. It takes five minutes to add and saves you from bill surprises.
+Fast and entirely offline, the tiktoken library needs no API call to do its job. I wire it into request pipelines to reject or queue anything that would blow past a budget threshold, like a user pasting a 40-page PDF into a chat box and expecting a free summary. Wiring it in takes about five minutes and spares you the end-of-month surprise.
 
 ## Building a token budget system
 
-Raw token counting is table stakes. A real budget system needs three components: a budget allocation per time window, a running tally, and a circuit breaker when limits are hit.
+Raw token counting is table stakes. A real budget system needs three components working together: a budget allocation per time window, a running tally, and a circuit breaker that trips when limits are hit. Think of it like the fuel gauge, odometer, and engine cutoff on a rental scooter, where the cutoff is what stops you from running the tank dry without realizing it.
 
-Here is a lightweight implementation I have used in production:
+Here is a lightweight implementation I have run in production:
 
 ```python
 import time
@@ -130,15 +130,15 @@ def llm_with_budget(prompt: str, model: str = "gpt-5.4") -> str:
     return response
 ```
 
-This keeps your spend rate bounded even if traffic spikes unexpectedly. I have watched this prevent a $2,000 weekend bill from becoming a $12,000 weekend bill.
+Spend rate stays bounded even when traffic spikes without warning, say a launch post hitting the front page of a forum and sending 10x the usual load at your endpoint. I have watched a budget cap like this keep a $2,000 weekend bill from ballooning into a $12,000 one.
 
 ## Prompt compression: the high-impact move
 
-The single most effective cost reduction technique is sending fewer tokens. Every token you remove from the input is a token you do not pay for twice.
+Sending fewer tokens is the single most effective cost reduction technique I know. Every token you strip from the input is a token you never pay for, and in a multi-turn chat you avoid paying for it on every subsequent turn too.
 
-Three compression strategies work well in practice.
+Three compression strategies earn their keep in practice.
 
-**Truncation with semantic loss detection.** Rather than blindly truncating context at a token limit, identify and preserve the most relevant chunks. Use an embedding similarity search to rank chunks before inclusion.
+**Truncation with semantic loss detection.** Rather than chopping context at a token limit and hoping the useful part survived, identify and keep the most relevant chunks. An embedding similarity search ranks chunks before inclusion, so a question about refund policy pulls the refund docs instead of whichever paragraph happened to come first.
 
 ```python
 def compress_context(chunks: list[str], query: str, max_tokens: int) -> list[str]:
@@ -165,9 +165,9 @@ def compress_context(chunks: list[str], query: str, max_tokens: int) -> list[str
     return selected
 ```
 
-**System prompt minimization.** System prompts accumulate. A typical engineering team starts with a 200-token system prompt. Six months later it is 1,500 tokens and nobody remembers why half of it exists. I audit system prompts quarterly. Remove every instruction that the model follows without being told.
+**System prompt minimization.** System prompts accumulate like commented-out code nobody dares delete. A team I worked with started with a 200-token system prompt, and six months later it had grown to 1,500 tokens, half of it instructions like "be helpful" that the model already does and nobody could explain. Auditing system prompts quarterly catches this. I cut every instruction the model follows without being told, then re-test to confirm nothing regressed.
 
-**LLM distillation for routing.** Route simple queries to cheap models. Route complex ones to premium models. The routing itself can be done by an LLM:
+**LLM distillation for routing.** Send simple queries to cheap models and complex ones to premium models, and let an LLM make the call:
 
 ```python
 def route_query(query: str) -> str:
@@ -186,13 +186,13 @@ def route_query(query: str) -> str:
     return "gpt-5.4"
 ```
 
-The cost of the routing call is negligible. The savings from sending 80% of queries to the $0.20/$1.25 model instead of the $2.50/$15 model are not.
+The routing call itself costs almost nothing. Sending 80% of queries to the $0.20/$1.25 model instead of the $2.50/$15 one, though, is where the bill actually drops.
 
-## Caching: when the math works
+## Caching: when it pays off
 
-Token costs are incurred on every new request. If your application handles repetitive or similar queries, response caching can eliminate a large fraction of your bill.
+Token costs land on every new request. For applications fielding repetitive or near-identical queries, response caching can wipe out a large fraction of the bill.
 
-OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object and the model processes them at a deep discount, typically 90% off input token pricing. I dig into [when the prompt caching math actually pays off](/blog/prompt-caching-what-it-is-and-when-the-math-works/) separately.
+OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object, and the model processes them at a deep discount, typically 90% off input token pricing. The savings only materialize once the same prefix gets reused enough times to cover the small premium charged to write the cache, so I dig into [when prompt caching actually pays off](/blog/prompt-caching-what-it-is-and-when-the-math-works/) separately.
 
 ```python
 # Anthropic caching example
@@ -220,13 +220,13 @@ else:
     redis.setex(cache_key, 3600, extract_tokens(response))
 ```
 
-Cache hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns. I have seen hit rates hit 60% in internal dev tooling where the same questions come up over and over.
+Hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns. On an internal dev-docs assistant where engineers kept asking the same "how do I deploy" and "where do logs go" questions, I have seen hit rates reach 60%.
 
 ## Output token control
 
-Input costs dominate for most applications. Output costs matter when your pipeline generates long responses. Code generation, document synthesis, and agentic reasoning all produce large outputs.
+Input costs dominate for most applications, yet output costs take over the moment your pipeline starts generating long responses. Code generation, document synthesis, and agentic reasoning loops all spill out large outputs.
 
-Hard-limit output tokens. Set max_tokens conservatively. A question that can be answered in 50 tokens should never be allowed to generate 500 tokens at $0.15 per 1M. I learned this after a single debug session produced $180 in output costs because nobody set a max_tokens limit.
+Hard-limit output tokens and set max_tokens conservatively. A question answerable in 50 tokens should never be free to ramble for 500 at $0.15 per 1M. I learned this after a single debug session ran up $180 in output costs because nobody had set a max_tokens limit and the model kept "thinking out loud" on every retry.
 
 ```python
 def bounded_completion(prompt: str, max_output: int = 150) -> str:
@@ -238,11 +238,11 @@ def bounded_completion(prompt: str, max_output: int = 150) -> str:
     return response.content[0].text
 ```
 
-The model will truncate if the answer requires more tokens. That is preferable to an unbounded bill.
+A longer answer gets truncated when it overruns the limit, which beats an unbounded bill every time.
 
 ## Monitoring in production
 
-Cost control without monitoring is guesswork. Set up per-model, per-endpoint spend tracking.
+Cost control without monitoring is guesswork. Set up per-model, per-endpoint spend tracking so you can see which service is the one quietly draining the budget.
 
 ```python
 import logging
@@ -275,29 +275,29 @@ class SpendTracker:
         )
 ```
 
-Route the logs to your metrics system. Alert when daily spend exceeds a threshold. Set weekly budget caps that trigger circuit breakers rather than surprise invoices.
+Route the logs to your metrics system, alert when daily spend crosses a threshold, and set weekly budget caps that trip circuit breakers instead of mailing you a surprise invoice.
 
 ## The multiplier problem
 
-Most cost control advice focuses on individual request optimization. The harder problem is scale.
+Most cost control advice fixates on optimizing a single request. Scale is the problem that actually hurts.
 
-A pipeline that costs $0.001 per request seems cheap. Run it 5 million times per month and it is $5,000. Add a second pipeline at $0.002 per request and you are at $15,000. Three pipelines, 20 million requests, different models across teams, and nobody has the full picture.
+Run a pipeline that costs $0.001 per request 5 million times a month and you are at $5,000. A second pipeline at $0.002 per request pushes you to $15,000. Stack three pipelines, 20 million requests, and a different model behind each team, and suddenly nobody owns the full picture.
 
-The fix is centralized spend governance. Every LLM call in every service should route through a thin proxy that records token counts and cost. Aggregate by team, by product, by endpoint. Without this visibility, you are managing a budget by looking at your bank balance once a quarter.
+Centralized spend governance is the fix. Every LLM call in every service should route through a thin proxy that records token counts and cost, aggregated by team, by product, by endpoint. Skip that visibility and you are managing a budget the way you would manage groceries by glancing at your bank balance once a quarter.
 
-Build the proxy. Instrument every call. Tag every request with a cost center. This is not glamorous work. It is the work that separates teams that get surprised by their invoice from teams that set budgets and hit them. I have yet to see a team regret building this too early.
+Build the proxy, instrument every call, and tag every request with a cost center. None of it is glamorous. It is the work that separates teams blindsided by their invoice from teams that set budgets and hit them. I have yet to watch a team regret building it too early.
 
 ## Where to cut first
 
-If you are starting from a position of no cost control, here is the priority order:
+Starting from zero cost control, here is the priority order I would follow:
 
 1. Enable token counting on every request. You cannot manage what you cannot measure.
 2. Route simple queries to cheap models. A 60% routing ratio to GPT-5.4 Nano instead of GPT-5.4 saves 92% on input token costs.
-3. Audit system prompts. Halve them first. Measure the difference.
+3. Audit system prompts. Halve them first, then measure the difference.
 4. Enable caching. Target 30%+ cache hit rate on high-volume endpoints.
-5. Set hard output token limits. This alone can cut output costs by 20-40%.
+5. Set hard output token limits. That single change can cut output costs by 20-40%.
 6. Build a spend dashboard. Alert on anomalies before they compound.
 
-The goal is not to use fewer models. It is to use the right model for each task at the right price. That requires visibility, discipline, and the willingness to measure what you spend.
+The goal is not to use fewer models. It is to use the right model for each task at the right price, which takes visibility, discipline, and the willingness to measure what you spend.
 
 Token budgets are not optional. They are the cost accounting layer that makes LLM applications sustainable.

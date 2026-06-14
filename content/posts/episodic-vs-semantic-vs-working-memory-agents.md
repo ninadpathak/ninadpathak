@@ -7,41 +7,41 @@ tags: ["ai-agents", "agent-memory", "llm-architecture"]
 status: published
 ---
 
-I spent two weeks debugging an agent that kept forgetting what it had just done. The logs looked fine. The retrieval pipeline was fast. The context window was spacious. The problem turned out to be a category error: the agent was storing episodic memories in a semantic memory system, and semantic facts in episodic storage. Everything was there. Nothing was useful.
+For two weeks I debugged an agent that kept forgetting what it had just done. The logs looked fine, the retrieval pipeline was fast, and the context window was spacious. The problem was a category error: the agent was storing episodic memories in a semantic memory system, and semantic facts in episodic storage. Everything was there. Nothing was useful. When I asked it what it had changed in the last hour, it answered with a vector-similarity dump of every config edit it had ever made, ranked by topic instead of by time.
 
-That distinction is what I want to map out here, because it is the root of most agent memory failures I see in code reviews and production postmortems.
+That distinction is what I want to map out here, because it sits underneath most agent memory failures I see in code reviews and production postmortems.
 
 ## The three memory types your agent is actually running
 
 ### Working memory: the scratchpad
 
-Working memory is what the model has right now. In an LLM, this is the context window. I think of it as the agent's immediate scratchpad: what was said in the last few turns, what the current task is, what tools are available.
+Whatever the model has right now is working memory. For an LLM, that means the context window. I think of it as the agent's immediate scratchpad: what was said in the last few turns, what the current task is, what tools are available.
 
-Working memory is fast and volatile. It disappears when the context resets. I ran into this explicitly when building a long-running customer support agent. Between turns, the agent would lose track of what the customer had already been told. The fix was not a better retrieval system. The fix was persisting a session summary back into working memory at the start of every turn.
+Fast and volatile, working memory disappears when the context resets. I ran into that wall building a long-running customer support agent. Between turns, the agent would lose track of what the customer had already been told and re-offer a refund it had offered two messages earlier. A better retrieval system did nothing for it. What worked was persisting a one-paragraph session summary back into working memory at the start of every turn.
 
-Working memory has hard limits. The context window caps it. When I push an agent toward 200 turns in a single session, I start seeing degradation even when retrieval is working perfectly. The model simply has too much to reason over.
+The context window also caps how much working memory you get. Pushing an agent toward 200 turns in a single session, I start seeing degradation even when retrieval is working perfectly, because the model has too much to reason over at once. It is like trying to keep a forty-item grocery list in your head while someone keeps adding to it: past a point you stop holding the early items at all.
 
 If you want to understand how context windows fit into this picture, I wrote about [LLM context windows explained](/blog/llm-context-windows-explained/) and how they interact with different memory systems.
 
 ### Episodic memory: what happened
 
-Episodic memory stores specific experiences. I think of it as the agent's autobiographical record: this task was attempted on this date, failed with this error, the user corrected it this way.
+Specific experiences live in episodic memory. I think of it as the agent's autobiographical record: this task was attempted on this date, failed with this error, the user corrected it this way.
 
-When a DevOps agent recalls that "the last deployment on Friday failed because the database migration timed out," that is episodic retrieval. The agent is pulling a specific event from its history, not a general fact about deployments.
+When a DevOps agent recalls that "the last deployment on Friday failed because the database migration timed out," that is episodic retrieval. The agent is pulling a single event out of its history rather than a general fact about deployments.
 
-The failure mode I see most often is treating episodic memory like a database. Engineers build retrieval pipelines that query episodic storage with semantic similarity. The user asks "what went wrong with my deployments" and the agent returns semantically similar past events, most of which are irrelevant because the user wants a chronological account, not a topic cluster.
+Treating episodic memory like a database is the failure mode I run into most. Engineers build retrieval pipelines that query episodic storage with semantic similarity, so when the user asks "what went wrong with my deployments" the agent returns semantically similar past events. Almost all of them are useless here, because the user wants a chronological account of the last few runs and gets a topic cluster spanning six months instead.
 
-I wrote about why this asymmetry breaks RAG pipelines in [asymmetric retrieval and why it breaks your agent memory](/blog/asymmetric-retrieval-agent-memory/). The short version: episodic recall is directional in a way that semantic search cannot model.
+Why that asymmetry breaks RAG pipelines is something I covered in [asymmetric retrieval and why it breaks your agent memory](/blog/asymmetric-retrieval-agent-memory/). Episodic recall is directional in a way that semantic search has no way to model.
 
 ### Semantic memory: what is true
 
-Semantic memory stores facts, knowledge, and learned abstractions. This is what most people mean when they say "knowledge base" or "world model." It is not tied to a specific time or experience.
+Facts, knowledge, and learned abstractions live in semantic memory. Plenty of people mean exactly this when they say "knowledge base" or "world model." Nothing in it is tied to a specific time or experience.
 
-A coding agent's semantic memory contains facts like "Python's list.sort() is stable" or "React components re-render when state changes." These are general truths that apply across contexts.
+A coding agent's semantic memory holds facts like "Python's list.sort() is stable" or "React components re-render when state changes." Those are general truths that apply across contexts, with no date attached.
 
-When semantic memory is wrong, the agent confidently misinforms. When episodic memory is wrong, the agent contradicts itself. The error signatures are completely different, and debugging them requires different tools.
+A wrong semantic memory makes the agent confidently misinform you, citing a function signature that changed three versions ago. A wrong episodic memory makes the agent contradict itself, insisting it already ran the test suite when it never did. The error signatures look nothing alike, and debugging them takes different tools.
 
-I keep coming back to the [memory hierarchy in AI systems](/blog/memory-hierarchy-in-ai-systems/) when thinking about where semantic memory sits relative to retrieval. The hierarchy framing helps because it makes clear that semantic memory is a layer, not the whole system.
+Whenever I reason about where semantic memory sits relative to retrieval, I come back to the [memory hierarchy in AI systems](/blog/memory-hierarchy-in-ai-systems/). The hierarchy framing helps because it makes one thing obvious: semantic memory is a single layer, the slow-changing reference shelf the agent reads from, far from the whole system. Treating it as the whole system is how teams end up dumping yesterday's task logs into the same store as their hard-won API facts and wondering why answers drift.
 
 <div class="visual-wrapper">
   <div class="visual-title">THE THREE MEMORY TYPES</div>
@@ -52,44 +52,44 @@ I keep coming back to the [memory hierarchy in AI systems](/blog/memory-hierarch
 
 ## Why agents get the types confused
 
-The problem is that most agent frameworks expose a single "memory" interface. You call `agent.add_to_memory(message)` and the framework decides what to do with it. That decision is often implicit, based on token budget or retrieval latency, not on the nature of the information.
+Most agent frameworks expose a single "memory" interface and call it done. You hand it `agent.add_to_memory(message)` and the framework decides what to do with the message. That decision usually rides on token budget or retrieval latency, never on what kind of information you just handed it.
 
-When I reviewed a popular agent framework last year, I found that every user message was being stored in episodic memory regardless of content. The agent's learned knowledge about Python, Git, and deployment pipelines was being treated the same as session logs. The retrieval results were noisy because episodic memory had been flooded with transient session data.
+Reviewing a widely used agent framework last year, I found every user message getting stored in episodic memory regardless of content. The agent's learned knowledge about Python, Git, and deployment pipelines sat in the same bucket as "ok thanks, try that again." Retrieval came back noisy because episodic memory had been flooded with transient chatter.
 
-The fix was a content-type router: factual statements and learned patterns went into semantic memory, session events and task outcomes went into episodic memory. The framework did not expose this distinction, so we patched it at the tool layer.
+We fixed it with a content-type router. Factual statements and learned patterns went into semantic memory, session events and task outcomes went into episodic memory. The framework gave us no hook for that distinction, so we patched it at the tool layer.
 
 ## What this means for your retrieval pipeline
 
-If your agent retrieves from a single vector store, you are almost certainly mixing memory types. Semantic queries like "what is the architecture" return episodic results. Episodic queries like "what happened in the last session" return semantically similar but temporally irrelevant results.
+An agent that retrieves from a single vector store is almost certainly mixing memory types. A semantic query like "what is the architecture" comes back with episodic results, and an episodic query like "what happened in the last session" comes back with semantically similar events from weeks ago that have nothing to do with last night.
 
-I found that splitting retrieval by memory type improved accuracy significantly. Semantic queries went to a knowledge base with relatively static embeddings, updated weekly. Episodic queries went to an event store with recency weighting, queried by time range or session ID rather than embedding similarity.
+Splitting retrieval by memory type moved accuracy a long way for me. Semantic queries went to a knowledge base with relatively static embeddings, refreshed weekly. Episodic queries went to an event store with recency weighting, fetched by time range or session ID rather than embedding similarity.
 
-This is not a novel architecture. It is how human memory works. We do not use the same cognitive process to recall a phone number as we use to recall what we did yesterday.
+None of that is a novel architecture. It mirrors how human memory works. You do not run the same cognitive process to recall a phone number that you run to recall what you ate yesterday.
 
 ## A practical implementation pattern
 
-Here is the pattern I settled on after testing several variations.
+After testing several variations, here is the pattern I settled on.
 
-Three separate storage systems with a routing layer in front. The router inspects each piece of information before storing it and decides which system handles it.
+Three separate storage systems sit behind a routing layer. The router inspects each piece of information before storing it and decides which system handles it.
 
 Factual knowledge that the agent has confirmed: semantic store.
 Task outcomes, user corrections, session events: episodic store.
 Current working context, summaries of recent events: working memory, refreshed every turn.
 
-The routing rules are not perfect. I still see cross-contamination. But the error surface is dramatically smaller than a single-store approach, and the failure modes are easier to debug.
+My routing rules are far from perfect, and I still catch cross-contamination, like a learned API quirk landing in the episodic store because the user happened to phrase it as a complaint. Even so, the error surface shrinks dramatically against a single-store approach, and the failure modes get easier to debug.
 
 ## The failure signatures to watch for
 
-When working memory is too small, the agent loses track of the current task mid-execution. This is the most common failure I see in agent demos. The fix is usually not a better model. It is a session summary that gets prepended to the context every turn.
+Working memory that is too small shows up as the agent losing track of the current task mid-execution, abandoning step three of a five-step migration to re-ask what it was doing. That is the most common failure I see in agent demos. A better model rarely fixes it. A session summary prepended to the context every turn usually does.
 
-When episodic memory retrieval is wrong, the agent contradicts itself across sessions. It says it completed a task it never finished, or claims a previous approach failed when it actually succeeded. This is a retrieval ranking problem, not a storage problem.
+Wrong episodic retrieval shows up as the agent contradicting itself across sessions. It claims it finished a task it never finished, or reports that a previous approach failed when that approach actually shipped. You are looking at a retrieval ranking problem here, never a storage problem.
 
-When semantic memory is wrong, the agent generates plausible-sounding incorrect information with high confidence. The user catches this before the agent does. The fix requires updating the knowledge base, not the retrieval system.
+Wrong semantic memory shows up as plausible, confident, incorrect information, the kind of answer that reads clean until you check the docs. The user catches it before the agent does. Updating the knowledge base fixes it. Touching the retrieval system does nothing.
 
-These three failure modes look completely different. If you are debugging with a single memory system, you cannot tell them apart. That is the real cost of the category error.
+Those three failure modes look nothing alike. Debugging with a single memory system, you cannot tell them apart, and that blindness is the real cost of the category error.
 
 ## Conclusion
 
-The three memory types are not academic distinctions. They correspond to different information, different retrieval mechanisms, and different failure modes. An agent that treats a learned fact the same as a past event will fail in predictable ways. An agent that routes information by type will be easier to debug and more reliable in production.
+These three memory types are no academic distinction. They carry different information, lean on different retrieval mechanisms, and break in different ways. An agent that files a learned fact the same way it files a past event will fail in predictable ways. An agent that routes information by type stays easier to debug and more reliable in production.
 
-I wrote this because the memory hierarchy framing in my earlier post did not go far enough in separating these types. The [state of AI agent memory in 2026](/blog/state-of-ai-agent-memory-2026/) covers the landscape. This post is about the specific architectural decisions that determine whether your agent's memory actually works.
+My earlier hierarchy post did not go far enough in pulling these types apart, which is why I wrote this one. The [state of AI agent memory in 2026](/blog/state-of-ai-agent-memory-2026/) covers the wider landscape. What I cared about here is the set of architectural decisions that determine whether your agent's memory actually works.

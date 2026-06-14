@@ -6,19 +6,19 @@ tags: [ai, devtools, backend, sre]
 status: published
 ---
 
-After two years of running AI agents in production, here is what I know: error handling is the difference between a system that survives reality and one that falls over the moment something goes wrong. The glamorous part is reasoning and tool use. The unglamorous part, the part that keeps your on-call phone from lighting up at 2 AM, is error handling.
+Two years of running AI agents in production taught me that error handling separates a system that survives reality from one that falls over the moment something goes wrong. Reasoning and tool use get all the attention. Error handling, the part that keeps your on-call phone quiet at 2 AM, gets almost none.
 
-The failures are predictable, and they line up with [the broader pattern of why agents keep failing in production](/blog/why-ai-agents-keep-failing-in-production/). Agents loop indefinitely because a tool returned an unexpected format. Agents silently drop steps because a downstream API throttled for 200 milliseconds. Agents corrupt state because they retried a non-idempotent operation without checking whether it already succeeded. I have hit all three myself, usually at the worst possible time.
+The failures are predictable, and they line up with [the broader pattern of why agents keep failing in production](/blog/why-ai-agents-keep-failing-in-production/). An agent loops forever because a tool returned JSON wrapped in a markdown code fence and the parser choked. Another silently drops a step because a downstream API throttled for 200 milliseconds and the agent treated the empty response as "done." A third corrupts state because it retried a charge endpoint without checking whether the first attempt had already gone through. I have hit all three myself, usually at the worst possible time.
 
-This is about the error patterns that actually break agents in production, and the concrete patterns that fix them. I am focusing on LLM-based agents that use tools to interact with external systems. That covers the majority of production agents I have encountered.
+What follows are the error patterns that actually break agents in production, and the concrete patterns that fix them. My focus is LLM-based agents that call tools to interact with external systems, which covers the majority of production agents I have run into.
 
 ## The core problem: agents are undefined state machines
 
-Most agent implementations look like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs the error and tells the LLM something went wrong.
+Nearly every agent implementation I have seen looks like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs the error and tells the LLM something went wrong.
 
-This fails because tool failure leaves the agent in an undefined state. The LLM decided to call that tool based on everything it knew. Returning an error string leaves the LLM to improvise recovery. Sometimes it recovers. Often it retries the same tool with slightly different arguments. Occasionally it calls a completely different tool that assumes the first succeeded, and now you have a cascading failure that is hard to trace back.
+Tool failure leaves the agent in an undefined state, and that is where things fall apart. The LLM picked that tool based on everything it knew at the time. Hand it back a raw error string and it improvises a recovery. Sometimes it recovers cleanly. More often it retries the same tool with the arguments nudged slightly, say swapping `user_id` for `userId` because the error mentioned a missing field. Occasionally it moves on to a different tool that assumes the first one succeeded, like calling `send_invoice` after `create_charge` actually failed, and now you have a cascading failure that takes an hour to trace back.
 
-The fix is to classify errors before deciding how to respond. This five-minute classification function has saved me more debugging time than anything else in my agent infrastructure.
+Classifying errors before you decide how to respond is what breaks the cycle. A short classification function, the kind you can write over a coffee, has saved me more debugging time than anything else in my agent infrastructure.
 
 ## Classify errors first
 
@@ -28,7 +28,7 @@ Three categories cover most cases.
 
 **Permanent**: missing parameters, invalid API keys, nonexistent resources. Retrying these wastes time and causes cascading failures. Fail fast.
 
-**Ambiguous**: the request timed out, but you do not know if the server processed it. This is the hardest category. It requires idempotency-aware retry logic.
+**Ambiguous**: the request timed out, and you have no idea whether the server processed it. Picture submitting a payment, getting no response, and not knowing if the customer was charged. That uncertainty is what makes this category demand idempotency-aware retry logic.
 
 ```python
 from enum import Enum
@@ -56,7 +56,7 @@ def classify_error(error: Exception, response: httpx.Response = None) -> ErrorCa
 
 ## Idempotent tool design
 
-Agents retry. When a tool call fails ambiguously, the agent calls it again. If the tool is not idempotent, the retry causes duplicate side effects.
+Agents retry. When a tool call fails ambiguously, the agent calls it again, and a tool that is not idempotent turns that retry into duplicate side effects: two welcome emails, two records, two charges.
 
 Design tools to be safe to call twice.
 
@@ -73,7 +73,7 @@ def create_user(email: str) -> dict:
     return api.post("/users", {"email": email})
 ```
 
-For tools that cannot be made naturally idempotent, use a deduplication layer. I have seen this prevent duplicate payment processing twice. It is not optional.
+When a tool cannot be made naturally idempotent, a deduplication layer keyed on the operation ID does the job. The dedup cache works like a coat check ticket: the first call hands back a stub, and every later call with the same ticket gets the original result instead of running the operation again. I have watched this exact pattern stop a retrying agent from double-charging a customer, which is reason enough to treat it as mandatory rather than nice-to-have.
 
 ```python
 def execute_with_deduplication(tool_fn, operation_id: str, **kwargs):
@@ -86,7 +86,7 @@ def execute_with_deduplication(tool_fn, operation_id: str, **kwargs):
 
 ## Explicit state transitions
 
-When a tool fails, the agent needs an explicit recovery path, not just an error string. The code decides the recovery strategy. The LLM receives a clean state transition and acts accordingly.
+When a tool fails, the agent needs an explicit recovery path rather than a raw error string to puzzle over. Your code, not the model, decides the recovery strategy. The LLM then receives a clean state transition, something like "retrying, attempt 2 of 3," and acts on that instead of guessing.
 
 ```python
 class AgentState(Enum):
@@ -113,7 +113,7 @@ def handle_tool_error(state: AgentState, error: Exception, context: dict) -> Age
 
 ## Checkpointing for long-horizon tasks
 
-Agents running dozens of steps need state persistence, which is one of the core responsibilities of a well-designed [agent harness, the infrastructure layer your agent actually needs](/blog/agent-harnesses/). Without it, a failure at step 40 restarts from step 1. This is the most demoralizing thing to debug at 1 AM.
+Agents running dozens of steps need state persistence, which is one of the core responsibilities of a well-designed [agent harness, the infrastructure layer your agent actually needs](/blog/agent-harnesses/). Lose that, and a failure at step 40 of a data migration restarts from step 1, redoing 39 steps that already committed. Few things are more demoralizing to debug at 1 AM than watching an agent cheerfully redo work it already finished.
 
 ```python
 import json
@@ -143,7 +143,7 @@ Write checkpoints after each successful step. On restart, restore from the most 
 
 ## Timeout strategy
 
-LLM API timeouts are ambiguous. The request might have been processed. Set conservative timeouts and use idempotency keys.
+LLM API timeouts sit squarely in the ambiguous bucket, since a request that times out at the client may still have been processed on the provider's side and billed to you. Set conservative timeouts and pass idempotency keys so a retry collapses onto the same completion instead of generating and charging for a second one.
 
 ```python
 import httpx
@@ -174,15 +174,15 @@ Five failure modes show up consistently across production incidents.
   </div>
 </div>
 
-**Context window exhaustion**: the agent accumulates tool results until the context is full. Set a hard limit on total tool call history and fail explicitly when approaching the limit.
+**Context window exhaustion**: the agent piles up tool results, say twenty paginated API responses, until the context is full and the next call rejects. Set a hard limit on total tool call history and fail explicitly when you approach it rather than letting the provider error out mid-task.
 
-**Tool schema drift**: the LLM calls a tool with parameters that match an older version of the schema. Version your tool schemas and validate inputs against the expected version before executing.
+**Tool schema drift**: the LLM calls a tool with parameters from an older version of the schema, passing `customer` long after you renamed the field to `customer_id`. Version your tool schemas and validate inputs against the expected version before executing.
 
-**Partial failure in parallel tool calls**: the agent calls multiple tools simultaneously. Some succeed, some fail. Track each independently and do not assume all-or-nothing semantics.
+**Partial failure in parallel tool calls**: the agent fires off five tools at once, three succeed and two fail. Track each one independently and never assume all-or-nothing semantics, because the agent will happily build its next step on the three that worked.
 
-**Ambiguous timeouts**: a timeout fires but the server might have processed the request. If the operation is not idempotent, you risk duplication. Always use idempotency keys for non-idempotent operations.
+**Ambiguous timeouts**: a timeout fires while the server may have processed the request anyway. Non-idempotent operations then risk duplication, so always attach idempotency keys to them.
 
-**Observability gaps**: without structured logs of tool inputs and outputs, debugging a failed agent run is archaeology. Log every tool call with its input, output, latency, and error.
+**Observability gaps**: without structured logs of tool inputs and outputs, debugging a failed run turns into archaeology, sifting through stack traces to reconstruct what the agent even tried. Log every tool call with its input, output, latency, and error.
 
 ```python
 def logged_tool_call(tool_name: str, tool_fn, **kwargs):
@@ -210,14 +210,14 @@ def logged_tool_call(tool_name: str, tool_fn, **kwargs):
 
 Five things will break your agent in production if you skip them.
 
-Classify errors before deciding how to respond. Returning raw errors to the LLM is not error handling.
+Classify errors before deciding how to respond, because returning raw errors to the LLM and hoping it sorts them out is not error handling.
 
-Design tools to be idempotent or use a deduplication layer. Non-idempotent tools will be called twice.
+Whether through naturally idempotent design or a deduplication layer, make every tool safe to call twice. Non-idempotent tools get called twice eventually.
 
-Checkpoint long-horizon tasks. A failure at step 40 that restarts from step 1 is not acceptable.
+Checkpoint long-horizon tasks so a failure at step 40 resumes near step 40. Restarting from step 1 is not acceptable.
 
-Set explicit timeout and retry policies. Default timeouts are not tuned for your use case.
+Explicit timeout and retry policies matter more than any default the SDK ships with, since those defaults were never tuned for your latency or your cost ceiling.
 
-Log every tool call with inputs, outputs, latency, and errors. Without observability, debugging is archaeology.
+Log every tool call with inputs, outputs, latency, and errors. Skip the observability and your next debugging session becomes archaeology.
 
-These patterns apply regardless of which LLM or framework you use. The error modes are the same across providers.
+These patterns hold regardless of which LLM or framework you reach for, because the error modes stay the same across providers.
