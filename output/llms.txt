@@ -6,8 +6,9 @@ Technical writer and former engineer publishing in-depth, benchmark-backed writi
 
 ## Documentation
 
-- [How to Organize Documentation That Has Drifted](https://ninadpathak.com/articles/how-to-organize-a-documentation-site/): Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.
+- [SEO for Technical Documentation: The Complete Developer Docs Checklist](https://ninadpathak.com/articles/seo-for-technical-documentation/): Audit developer documentation for crawlability, canonicals, sitemaps, page identity, internal links, versioning, and measurable search demand.
 - [Documentation Review Checklist Before You Publish](https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/): Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.
+- [How to Organize Documentation That Has Drifted](https://ninadpathak.com/articles/how-to-organize-a-documentation-site/): Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.
 - [Writing Release Notes That Developers Trust](https://ninadpathak.com/articles/writing-release-notes-that-developers-trust/): Write release notes that let developers assess upgrade risk, understand product impact, and migrate without surprises.
 - [How to Write a Technical Tutorial That Actually Teaches](https://ninadpathak.com/articles/how-to-write-a-technical-tutorial-that-actually-teaches/): Write a technical tutorial that takes one reader from a clear starting point to a tested, useful result.
 - [Developer Onboarding Docs: What Works, What Doesn't](https://ninadpathak.com/articles/developer-onboarding-docs-what-works-what-doesnt/): Write developer onboarding docs that help a new engineer set up the product, understand the workflow, and ship a safe first change.

@@ -6,15 +6,21 @@
     <description>Developer relations content, documentation, tutorials, and technical articles that help developer products earn trust and adoption.</description>
     <language>en-us</language>
     <item>
-      <title>How to Organize Documentation That Has Drifted</title>
-      <link>https://ninadpathak.com/articles/how-to-organize-a-documentation-site/</link>
-      <description>Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.</description>
+      <title>SEO for Technical Documentation: The Complete Developer Docs Checklist</title>
+      <link>https://ninadpathak.com/articles/seo-for-technical-documentation/</link>
+      <description>Audit developer documentation for crawlability, canonicals, sitemaps, page identity, internal links, versioning, and measurable search demand.</description>
       <pubDate>Jul 30, 2026</pubDate>
     </item>
     <item>
       <title>Documentation Review Checklist Before You Publish</title>
       <link>https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/</link>
       <description>Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.</description>
+      <pubDate>Jul 30, 2026</pubDate>
+    </item>
+    <item>
+      <title>How to Organize Documentation That Has Drifted</title>
+      <link>https://ninadpathak.com/articles/how-to-organize-a-documentation-site/</link>
+      <description>Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.</description>
       <pubDate>Jul 30, 2026</pubDate>
     </item>
     <item>

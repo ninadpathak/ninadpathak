@@ -20,10 +20,13 @@ checklist:
   - "Keep version and language variants explicit in URLs and navigation."
   - "Test sitemaps, redirects, broken links, and accidental soft 404 responses."
 planned:
-  - "SEO for Technical Documentation: The Complete Developer Docs Checklist"
   - "How to Audit Broken Links, Redirects, and Canonicals in Docs"
   - "How to Document Multiple Product Versions"
-sections: []
+sections:
+  - heading: "Audit search visibility"
+    blurb: "Trace one documentation task from discovery and crawling through canonicalization, usefulness, and Search Console measurement."
+    posts:
+      - seo-for-technical-documentation
 faqs:
   - q: "Should product documentation be optimized for search?"
     a: "Yes, when the query represents a product or problem task the documentation genuinely solves. Optimization should improve the page's clarity, access, and structure rather than add generic keyword copy."
