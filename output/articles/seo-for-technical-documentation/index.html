@@ -20,14 +20,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEO for Technical Documentation: The Complete Developer Docs Checklist | Ninad Pathak</title>
-  <meta name="description" content="Audit developer documentation for crawlability, canonicals, sitemaps, page identity, internal links, versioning, and measurable search demand.">
+  <meta name="description" content="Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
   <meta property="og:title"       content="SEO for Technical Documentation: The Complete Developer Docs Checklist">
-  <meta property="og:description" content="Audit developer documentation for crawlability, canonicals, sitemaps, page identity, internal links, versioning, and measurable search demand.">
+  <meta property="og:description" content="Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.">
   <meta property="og:url"         content="https://ninadpathak.com/articles/seo-for-technical-documentation/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -74,10 +74,10 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "SEO for Technical Documentation: The Complete Developer Docs Checklist",
-  "description": "Audit developer documentation for crawlability, canonicals, sitemaps, page identity, internal links, versioning, and measurable search demand.",
+  "description": "Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.",
   "image": "https://ninadpathak.com/static/og-image.png",
   "inLanguage": "en-US",
-  "wordCount": 3550,
+  "wordCount": 2381,
   "keywords": "documentation-seo, technical-writing, developer-experience",
   "articleSection": "documentation-seo",
   "author": {
@@ -202,10 +202,10 @@
         <span class="post-meta-sep" aria-hidden="true">·</span>
         <time class="post-meta-date" datetime="2026-07-30">Jul 30, 2026</time>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <span class="post-meta-time">18 min read</span>
+        <span class="post-meta-time">12 min read</span>
       </div>
       <h1 class="post-title">SEO for Technical Documentation: The Complete Developer Docs Checklist</h1>
-      <p class="lead">Audit developer documentation for crawlability, canonicals, sitemaps, page identity, internal links, versioning, and measurable search demand.</p>
+      <p class="lead">Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.</p>
       <div class="post-tags">
         <span class="tag">documentation-seo</span>
         <span class="tag">technical-writing</span>
@@ -219,105 +219,126 @@
       <aside class="article-summary" aria-labelledby="article-summary-title">
         <div class="article-summary-label" id="article-summary-title">The short version</div>
         <ul>
-          <li>Give each developer task one canonical page before optimizing metadata.</li>
-          <li>Verify discovery, crawling, indexing, and page identity as separate layers.</li>
-          <li>Test the rendered page and preserve evidence instead of trusting a green SEO score.</li>
-          <li>Measure query-to-page performance in Search Console after release.</li>
+          <li>Give each developer task one canonical page.</li>
+          <li>Check discovery, crawling, indexing, and page quality separately.</li>
+          <li>Test source HTML and rendered output before publication.</li>
+          <li>Compare Search Console and Semrush data before explaining a ranking change.</li>
         </ul>
       </aside>
       <nav class="toc" aria-label="Table of contents">
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#start-with-the-search-task-not-the-keyword">Start with the search task, not the keyword</a><ul>
-<li><a href="#name-the-query-and-the-successful-outcome">Name the query and the successful outcome</a></li>
-<li><a href="#check-whether-the-answer-already-exists">Check whether the answer already exists</a></li>
+<li><a href="#technical-documentation-seo-what-to-audit">Technical documentation SEO: what to audit</a></li>
+<li><a href="#search-intent-and-page-ownership">Search intent and page ownership</a></li>
+<li><a href="#internal-links-and-xml-sitemaps">Internal links and XML sitemaps</a><ul>
+<li><a href="#crawlable-internal-links">Crawlable internal links</a></li>
+<li><a href="#xml-sitemap-checks">XML sitemap checks</a></li>
 </ul>
 </li>
-<li><a href="#audit-the-system-in-six-layers">Audit the system in six layers</a></li>
-<li><a href="#make-every-important-page-discoverable">Make every important page discoverable</a><ul>
-<li><a href="#use-links-a-crawler-can-follow">Use links a crawler can follow</a></li>
-<li><a href="#build-a-hub-with-a-clear-job">Build a hub with a clear job</a></li>
-<li><a href="#keep-the-sitemap-canonical">Keep the sitemap canonical</a></li>
+<li><a href="#crawling-rendering-and-indexing">Crawling, rendering, and indexing</a><ul>
+<li><a href="#http-response-and-rendered-html">HTTP response and rendered HTML</a></li>
+<li><a href="#robotstxt-and-noindex">robots.txt and noindex</a></li>
 </ul>
 </li>
-<li><a href="#verify-what-the-server-and-browser-return">Verify what the server and browser return</a><ul>
-<li><a href="#check-the-response-before-the-layout">Check the response before the layout</a></li>
-<li><a href="#separate-robotstxt-from-noindex">Separate robots.txt from noindex</a></li>
-<li><a href="#inspect-the-rendered-result">Inspect the rendered result</a></li>
+<li><a href="#canonical-urls-and-documentation-versions">Canonical URLs and documentation versions</a></li>
+<li><a href="#page-titles-headings-and-task-content">Page titles, headings, and task content</a></li>
+<li><a href="#documentation-seo-audit-script">Documentation SEO audit script</a><ul>
+<li><a href="#cloudflare-workers-audit-result">Cloudflare Workers audit result</a></li>
+<li><a href="#audit-failure-test">Audit failure test</a></li>
+<li><a href="#audit-script-limitations">Audit script limitations</a></li>
 </ul>
 </li>
-<li><a href="#align-every-canonical-signal">Align every canonical signal</a><ul>
-<li><a href="#use-a-self-canonical-on-the-preferred-page">Use a self-canonical on the preferred page</a></li>
-<li><a href="#give-each-version-a-policy">Give each version a policy</a></li>
+<li><a href="#search-console-and-semrush-monitoring">Search Console and Semrush monitoring</a><ul>
+<li><a href="#current-keyword-demand">Current keyword demand</a></li>
+<li><a href="#how-to-investigate-growth-or-decline">How to investigate growth or decline</a></li>
 </ul>
 </li>
-<li><a href="#make-page-identity-impossible-to-miss">Make page identity impossible to miss</a><ul>
-<li><a href="#match-title-h1-url-and-opening">Match title, H1, URL, and opening</a></li>
-<li><a href="#keep-headings-useful-outside-the-sidebar">Keep headings useful outside the sidebar</a></li>
-</ul>
-</li>
-<li><a href="#protect-the-developer-task-from-seo-work">Protect the developer task from SEO work</a><ul>
-<li><a href="#put-proof-near-the-claim">Put proof near the claim</a></li>
-<li><a href="#keep-content-current-through-triggers">Keep content current through triggers</a></li>
-</ul>
-</li>
-<li><a href="#run-a-documentation-seo-audit-you-can-inspect">Run a documentation SEO audit you can inspect</a><ul>
-<li><a href="#cloudflares-live-developer-docs-page-passed-the-source-audit">Cloudflare's live developer docs page passed the source audit</a></li>
-<li><a href="#a-broken-fixture-failed-for-the-right-reasons">A broken fixture failed for the right reasons</a></li>
-<li><a href="#know-what-the-script-cant-prove">Know what the script can't prove</a></li>
-</ul>
-</li>
-<li><a href="#inspect-the-rendered-page-not-just-the-audit-output">Inspect the rendered page, not just the audit output</a></li>
-<li><a href="#measure-search-behavior-after-publication">Measure search behavior after publication</a><ul>
-<li><a href="#check-the-first-four-signals">Check the first four signals</a></li>
-<li><a href="#use-a-query-page-review-table">Use a query-page review table</a></li>
-</ul>
-</li>
-<li><a href="#the-complete-developer-docs-seo-checklist">The complete developer docs SEO checklist</a><ul>
-<li><a href="#intent-and-ownership">Intent and ownership</a></li>
-<li><a href="#discovery">Discovery</a></li>
-<li><a href="#crawling-and-rendering">Crawling and rendering</a></li>
+<li><a href="#technical-documentation-seo-checklist">Technical documentation SEO checklist</a><ul>
+<li><a href="#search-intent">Search intent</a></li>
+<li><a href="#discovery-and-crawling">Discovery and crawling</a></li>
 <li><a href="#indexing-and-canonicalization">Indexing and canonicalization</a></li>
-<li><a href="#page-identity-and-usefulness">Page identity and usefulness</a></li>
-<li><a href="#media-accessibility-and-experience">Media, accessibility, and experience</a></li>
-<li><a href="#release-and-measurement">Release and measurement</a></li>
+<li><a href="#page-quality">Page quality</a></li>
+<li><a href="#measurement">Measurement</a></li>
 </ul>
 </li>
-<li><a href="#what-id-fix-first">What I'd fix first</a></li>
+<li><a href="#start-with-one-documentation-path">Start with one documentation path</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>A documentation page can answer a developer's question perfectly and still disappear from search. The usual failure isn't a missing keyword.</p>
-<p>It's an orphaned URL, conflicting canonical, hidden rendered content, stale version, or title that doesn't name the task.</p>
-<p>I treat documentation SEO as a release path. A page has to be discoverable, crawlable, indexable, unambiguous, useful, and measurable in that order.</p>
-<p>The checklist shows how I audit that path. It also includes a small Python auditor I ran against a public developer documentation page, plus the evidence needed to decide whether a warning is blocking publication.</p>
-<h2 id="start-with-the-search-task-not-the-keyword">Start with the search task, not the keyword</h2>
-<p>Developer searches are unusually specific. People search for an error message, command, parameter, integration, version boundary, or outcome they need to reach.</p>
-<p>That makes the first SEO decision editorial rather than technical: which page should own the answer?</p>
-<h3 id="name-the-query-and-the-successful-outcome">Name the query and the successful outcome</h3>
-<p>Write one sentence that connects the likely search to what the reader can do after landing. For this article, the sentence is: someone auditing developer documentation can identify and repair the conditions that prevent a useful task page from being discovered and understood.</p>
-<p>The query doesn't have to appear in every heading. It has to match the page's actual job.</p>
+        <p>Useful documentation can still be difficult to find. The usual causes are missing internal links, blocked crawling, conflicting canonicals, stale version pages, or titles that do not name the developer's task.</p>
+<p>I audit technical documentation in this order: search intent, discovery, crawling, indexing, canonicalization, page quality, and measurement. The sequence matters because a title rewrite cannot repair a page that Google cannot find or index.</p>
+<h2 id="technical-documentation-seo-what-to-audit">Technical documentation SEO: what to audit</h2>
+<p>A single SEO score hides the failure. Split the audit into checks that produce clear evidence and can be assigned to the right owner.</p>
 <table>
 <thead>
 <tr>
-<th>Search shape</th>
+<th>Area</th>
+<th>Question</th>
+<th>Blocking evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search intent</td>
+<td>Does this page own one developer task?</td>
+<td>Another page already answers the same query better</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>Can a crawler reach the URL through links?</td>
+<td>No crawlable internal link from an indexable page</td>
+</tr>
+<tr>
+<td>Crawling</td>
+<td>Can the server return the page and its required resources?</td>
+<td>Blocked URL, redirect loop, repeated <code>5xx</code>, inaccessible HTML</td>
+</tr>
+<tr>
+<td>Indexing</td>
+<td>Is the page eligible for search?</td>
+<td><code>noindex</code>, soft 404, duplicate without a clear canonical</td>
+</tr>
+<tr>
+<td>Canonicalization</td>
+<td>Do all URL signals identify the same page?</td>
+<td>Canonical, sitemap, redirect, and internal links disagree</td>
+</tr>
+<tr>
+<td>Page quality</td>
+<td>Can the reader identify and complete the task?</td>
+<td>Generic title, stale version, missing prerequisites, broken example</td>
+</tr>
+<tr>
+<td>Measurement</td>
+<td>Can the team see what happened after release?</td>
+<td>No Search Console baseline, Semrush snapshot, or page owner</td>
+</tr>
+</tbody>
+</table>
+<p>Run the checks in that order. Stop at the first blocking failure, fix it, and then continue.</p>
+<h2 id="search-intent-and-page-ownership">Search intent and page ownership</h2>
+<p>Developer searches usually contain a task, command, error, product, parameter, or version. The page should name that task and show the state a reader can reach.</p>
+<table>
+<thead>
+<tr>
+<th>Search</th>
 <th>Page that should own it</th>
-<th>Proof of success</th>
+<th>Successful outcome</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>cloudflare workers deploy</code></td>
-<td>Task guide</td>
+<td>Deployment guide</td>
 <td>A Worker reaches a live URL</td>
 </tr>
 <tr>
 <td><code>stripe 401 invalid api key</code></td>
-<td>Troubleshooting page</td>
-<td>The request succeeds after the exact cause is fixed</td>
+<td>Authentication troubleshooting page</td>
+<td>The request succeeds after the cause is fixed</td>
 </tr>
 <tr>
 <td><code>kubectl logs flags</code></td>
@@ -327,7 +348,7 @@
 <tr>
 <td><code>oauth refresh token expiry</code></td>
 <td>Concept plus implementation guide</td>
-<td>The reader handles expiry without losing access</td>
+<td>The application renews access safely</td>
 </tr>
 <tr>
 <td><code>migrate sdk v2 to v3</code></td>
@@ -336,129 +357,76 @@
 </tr>
 </tbody>
 </table>
-<p>A broad marketing page shouldn't compete with the documentation page for an implementation query. The marketing page can explain why the capability matters, while the documentation owns how the developer completes the work.</p>
-<h3 id="check-whether-the-answer-already-exists">Check whether the answer already exists</h3>
-<p>Search the documentation, marketing site, support center, changelog, and old versions before creating a page. Compare reader intent, not just title wording.</p>
-<p>If two pages complete the same task, choose a canonical answer, move the useful material into it, and redirect or clearly demote the weaker page. The <a href="/articles/how-to-organize-a-documentation-site/">documentation organization guide</a> covers that cleanup in detail.</p>
-<h2 id="audit-the-system-in-six-layers">Audit the system in six layers</h2>
-<p>A single SEO score hides the reason a page fails. I split the audit into six layers because each layer needs different evidence and a different owner.</p>
-<table>
-<thead>
-<tr>
-<th>Layer</th>
-<th>Question</th>
-<th>Blocking evidence</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Discovery</td>
-<td>Can a crawler find the URL?</td>
-<td>No internal link from a crawlable page</td>
-</tr>
-<tr>
-<td>Crawling</td>
-<td>Can it request the page and its essential resources?</td>
-<td>Blocked URL, redirect loop, repeated <code>5xx</code>, inaccessible HTML</td>
-</tr>
-<tr>
-<td>Indexing</td>
-<td>Is the page eligible to enter the index?</td>
-<td><code>noindex</code>, soft 404, duplicate without a clear canonical</td>
-</tr>
-<tr>
-<td>Identity</td>
-<td>Is the page's task obvious?</td>
-<td>Generic title, conflicting H1, wrong canonical, stale version label</td>
-</tr>
-<tr>
-<td>Usefulness</td>
-<td>Can the reader complete the task?</td>
-<td>Missing prerequisites, broken example, no recovery path</td>
-</tr>
-<tr>
-<td>Measurement</td>
-<td>Can the team see what happened after release?</td>
-<td>No Search Console property, no query-page baseline, no owner</td>
-</tr>
-</tbody>
-</table>
-<p>Don't move straight to title rewrites when discovery or indexing is broken. A better headline can't rescue a URL Google never receives as an indexable page.</p>
-<h2 id="make-every-important-page-discoverable">Make every important page discoverable</h2>
-<p>Google's <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">SEO Starter Guide</a> says that links are a primary way its crawlers find pages. A sitemap can assist discovery, but it doesn't replace an internal route.</p>
-<p>Every page you care about should have at least one crawlable link from a relevant hub, guide, or sibling page. The link should exist because a reader needs the next step, not because a footer widget needs more destinations.</p>
-<h3 id="use-links-a-crawler-can-follow">Use links a crawler can follow</h3>
-<p>Google's <a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">crawlable-link guidance</a> recommends an <code>&lt;a&gt;</code> element with an <code>href</code> that resolves to a web address. Click handlers, empty anchors, and JavaScript-only navigation make discovery less reliable and keyboard access worse.</p>
-<p>Use descriptive anchor text that still makes sense outside the sentence. “Webhook signature troubleshooting” sets an expectation.</p>
-<p>“Click here” doesn't.</p>
-<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Crawlable and descriptive --&gt;</span>
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/docs/webhooks/verify-signatures/&quot;</span><span class="p">&gt;</span>
+<p>Search the documentation, marketing site, support center, changelog, and older versions before creating another page. If two pages complete the same task, choose one canonical owner, move the useful material into it, and redirect or demote the weaker page.</p>
+<p>The <a href="/articles/how-to-organize-a-documentation-site/">documentation organization guide</a> covers that consolidation work in detail.</p>
+<h2 id="internal-links-and-xml-sitemaps">Internal links and XML sitemaps</h2>
+<p>Google's <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">SEO Starter Guide</a> identifies links as a primary way crawlers discover pages. An XML sitemap helps discovery, but it does not replace a useful internal route.</p>
+<p>Every important page should have at least one link from a relevant hub, guide, or sibling page. The link should help a reader move to a prerequisite, detail, or next task.</p>
+<h3 id="crawlable-internal-links">Crawlable internal links</h3>
+<p>Google's <a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">crawlable-link guidance</a> recommends an <code>&lt;a&gt;</code> element with an <code>href</code> that resolves to a web address. JavaScript click handlers and empty anchors are less dependable for crawling and keyboard navigation.</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/docs/webhooks/verify-signatures/&quot;</span><span class="p">&gt;</span>
   Verify webhook signatures
 <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-
-<span class="cm">&lt;!-- A click target, but not a dependable crawlable link --&gt;</span>
-<span class="p">&lt;</span><span class="nt">span</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;openWebhookGuide()&quot;</span><span class="p">&gt;</span>Read more<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 </code></pre></div>
 
-<h3 id="build-a-hub-with-a-clear-job">Build a hub with a clear job</h3>
-<p>A hub should orient the reader, explain which route to choose, and link to the pages that complete that route. A card wall with twelve equal destinations still leaves the decision to the reader.</p>
-<p>The article sits in the site's <a href="/articles/">technical article library</a> and uses the <code>documentation-seo</code> tag to separate discoverability work from broader documentation practice. Its internal links then connect the reader to focused guides instead of repeating the same copy.</p>
-<h3 id="keep-the-sitemap-canonical">Keep the sitemap canonical</h3>
+<p>Use anchor text that identifies the destination without surrounding context. “Verify webhook signatures” is more useful than “Read more.”</p>
+<h3 id="xml-sitemap-checks">XML sitemap checks</h3>
 <p>Google's <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">sitemap guidance</a> recommends fully qualified canonical URLs. Include only the URLs you want search engines to consider for results.</p>
-<p>Submitting a sitemap is a hint, not a guarantee of crawling or indexing. Google also ignores <code>&lt;priority&gt;</code> and <code>&lt;changefreq&gt;</code>, so don't spend release time tuning decorative values.</p>
 <p>Check that:</p>
 <ul>
 <li>The sitemap returns <code>200</code> and valid XML.</li>
-<li>Every URL is absolute and uses the preferred host and protocol.</li>
+<li>Every URL uses the preferred host and protocol.</li>
 <li>Redirects, <code>404</code> pages, parameter variants, and noncanonical duplicates are absent.</li>
-<li><code>&lt;lastmod&gt;</code> changes only when the page meaningfully changes.</li>
+<li><code>&lt;lastmod&gt;</code> changes only after a meaningful page update.</li>
 <li>The sitemap is declared in <code>robots.txt</code> or submitted through Search Console.</li>
 </ul>
-<h2 id="verify-what-the-server-and-browser-return">Verify what the server and browser return</h2>
-<p>A page can look correct in a browser even when its source HTML has no title, content, links, or canonical. JavaScript may add those later, and rendering may fail differently for a crawler.</p>
-<p>Inspect both the initial response and the rendered page. Google's <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">JavaScript SEO guidance</a> supports rendered content, but clear source metadata and crawlable links remove avoidable ambiguity.</p>
-<h3 id="check-the-response-before-the-layout">Check the response before the layout</h3>
-<p>Start with the URL and headers:</p>
+<p>Google ignores <code>&lt;priority&gt;</code> and <code>&lt;changefreq&gt;</code>, so those fields should not consume release time.</p>
+<h2 id="crawling-rendering-and-indexing">Crawling, rendering, and indexing</h2>
+<p>Inspect the server response before reviewing the layout. A page can look correct after JavaScript runs even when the initial HTML lacks content, links, or canonical metadata.</p>
+<h3 id="http-response-and-rendered-html">HTTP response and rendered HTML</h3>
+<p>Start with the final URL and headers:</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>--silent<span class="w"> </span>--show-error<span class="w"> </span>--location<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--dump-header<span class="w"> </span>headers.txt<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--output<span class="w"> </span>page.html<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://docs.example.com/api/authentication/
 </code></pre></div>
 
-<p>Verify the final URL, status code, content type, <code>X-Robots-Tag</code>, redirect chain, and cache behavior. A branded error template that returns <code>200</code> is still a soft 404 candidate.</p>
-<h3 id="separate-robotstxt-from-noindex">Separate <code>robots.txt</code> from <code>noindex</code></h3>
-<p><code>robots.txt</code> controls crawling. A <code>noindex</code> directive controls indexing, but Google has to crawl the page to see a page-level directive.</p>
-<p>Don't block a duplicate in <code>robots.txt</code> and assume that makes another URL canonical. Use redirects or canonical signals for consolidation, and use <code>noindex</code> only when the page should not appear in search.</p>
-<h3 id="inspect-the-rendered-result">Inspect the rendered result</h3>
-<p>Open the page in a clean browser context and verify that the task content, headings, navigation, code, and links appear without requiring an accidental logged-in state. Use Search Console URL Inspection when you need Google's indexed or live-test view.</p>
-<p>The rendered page is also where you'll catch consent overlays, hydration failures, empty navigation, broken code tabs, and content that appears only after an interaction a crawler won't perform.</p>
-<h2 id="align-every-canonical-signal">Align every canonical signal</h2>
-<p>Versioned documentation creates legitimate duplication. Having similar pages is not the mistake.</p>
-<p>The mistake is sending conflicting signals about which page represents each version and task.</p>
-<p>Google describes redirects and <code>rel="canonical"</code> as strong canonicalization signals. It treats sitemap inclusion as weaker.</p>
-<p>Its <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">canonicalization guidance</a> also recommends linking internally to the preferred canonical URL. For every indexable page, compare the final response URL, source <code>rel="canonical"</code>, sitemap URL, internal-link destinations, <code>hreflang</code> cluster, structured-data URL, and Open Graph URL, then require them to point to the same preferred page unless the difference is deliberate and documented.</p>
-<h3 id="use-a-self-canonical-on-the-preferred-page">Use a self-canonical on the preferred page</h3>
-<p>A self-referencing canonical makes the page's preference explicit. Use an absolute URL in valid source HTML and keep JavaScript from rewriting it to a staging host, parameter variant, or old version.</p>
+<p>Verify the status code, content type, redirect chain, <code>X-Robots-Tag</code>, and cache behavior. A branded error page that returns <code>200</code> may be treated as a soft 404.</p>
+<p>Then open the page in a clean browser context. Confirm that the task content, title, headings, navigation, code, links, and canonical appear without a logged-in state or extra interaction.</p>
+<p>Google's <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">JavaScript SEO guidance</a> explains how rendering affects indexing. Search Console URL Inspection shows Google's indexed view and live-test result.</p>
+<h3 id="robotstxt-and-noindex"><code>robots.txt</code> and <code>noindex</code></h3>
+<p><code>robots.txt</code> controls crawling. A page-level or header-level <code>noindex</code> controls indexing, but Google must crawl the page to see that directive.</p>
+<p>Do not block a duplicate in <code>robots.txt</code> and treat that as canonicalization. Use redirects or canonical signals for duplicate consolidation, and reserve <code>noindex</code> for pages that should not appear in search.</p>
+<h2 id="canonical-urls-and-documentation-versions">Canonical URLs and documentation versions</h2>
+<p>Redirects and <code>rel="canonical"</code> are strong canonicalization signals. Sitemap inclusion is weaker, so the signals should agree rather than compete.</p>
+<p>For every indexable page, compare:</p>
+<ul>
+<li>Final response URL</li>
+<li>Source <code>rel="canonical"</code></li>
+<li>XML sitemap URL</li>
+<li>Internal-link destinations</li>
+<li><code>hreflang</code> URLs when present</li>
+<li>Structured-data URL</li>
+<li>Open Graph URL</li>
+</ul>
+<p>The preferred page should use an absolute self-referencing canonical. Google's <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">canonicalization guidance</a> also recommends linking internally to the preferred canonical URL.</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">link</span>
   <span class="na">rel</span><span class="o">=</span><span class="s">&quot;canonical&quot;</span>
   <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://docs.example.com/api/authentication/&quot;</span>
 <span class="p">&gt;</span>
 </code></pre></div>
 
-<p>A canonical is a signal, not an instruction that repairs every conflict. Redirects, internal links, sitemap entries, and page content still need to agree.</p>
-<h3 id="give-each-version-a-policy">Give each version a policy</h3>
-<p>Choose one of three approaches before publishing several versions:</p>
+<p>Versioned documentation needs an explicit policy:</p>
 <ul>
-<li><strong>Current version only:</strong> Redirect retired task pages when old instructions are no longer useful.</li>
-<li><strong>Multiple supported versions:</strong> Keep each version indexable with distinct URLs, labels, navigation, and self-canonicals.</li>
-<li><strong>Historical versions:</strong> Keep them accessible, but decide whether they should be indexed based on active support and search needs.</li>
+<li><strong>Current version only:</strong> Redirect retired task pages when the old instructions are no longer useful.</li>
+<li><strong>Multiple supported versions:</strong> Give each version a distinct URL, visible label, navigation path, and self-canonical.</li>
+<li><strong>Historical versions:</strong> Keep them accessible, then decide whether they should remain indexable based on support and search demand.</li>
 </ul>
-<p>Never canonicalize version 2 to version 3 when the instructions materially differ. That tells search engines the pages are interchangeable when a developer could break an integration by following the wrong one.</p>
-<h2 id="make-page-identity-impossible-to-miss">Make page identity impossible to miss</h2>
-<p>A search result, browser tab, navigation tree, and copied URL all need to identify the same task. Generic labels such as “Overview,” “Configuration,” and “Usage” lose meaning outside their section.</p>
-<p>The <a href="https://developers.google.com/search/docs/appearance/title-link">Google title-link guidance</a> recommends a distinct, concise, accurate <code>&lt;title&gt;</code> for every page. Google may also use the H1, prominent text, <code>og:title</code>, and anchor text when generating the result title.</p>
-<h3 id="match-title-h1-url-and-opening">Match title, H1, URL, and opening</h3>
-<p>These fields don't need identical wording, but they should name the same task:</p>
+<p>Do not canonicalize an older version to the current version when the instructions materially differ. The pages are not interchangeable if following the wrong one can break an integration.</p>
+<h2 id="page-titles-headings-and-task-content">Page titles, headings, and task content</h2>
+<p>A search result, browser tab, documentation tree, and copied URL should identify the same task. Generic labels such as “Overview,” “Configuration,” and “Usage” lose meaning outside their section.</p>
+<p>The <a href="https://developers.google.com/search/docs/appearance/title-link">Google title-link guidance</a> recommends a distinct, concise, accurate <code>&lt;title&gt;</code>. Google may also use the H1, prominent text, <code>og:title</code>, and anchor text when generating a result title.</p>
+<p>Use the same task across the URL, title, H1, description, and opening:</p>
 <div class="highlight"><pre><span></span><code>URL:         /docs/webhooks/verify-signatures/
 &lt;title&gt;:     Verify webhook signatures | Orbit Docs
 H1:          Verify webhook signatures
@@ -466,197 +434,173 @@ Description: Validate Orbit webhook signatures and reject replayed requests.
 Opening:     Use the signing secret and timestamp header to verify each payload.
 </code></pre></div>
 
-<p>The description should help a searcher decide whether the page solves the problem. It is not a hidden bag of keywords.</p>
-<h3 id="keep-headings-useful-outside-the-sidebar">Keep headings useful outside the sidebar</h3>
-<p>A heading outline should reveal the route even when the navigation disappears. Prefer “Create an API key” and “Recover from an expired key” over “Setup” and “Errors.”</p>
-<p>Heading order supports navigation and accessibility, but don't invent extra headings to hit a count. Google explicitly says there is no magical number or order of headings for ranking.</p>
-<h2 id="protect-the-developer-task-from-seo-work">Protect the developer task from SEO work</h2>
-<p>The strongest objection to documentation SEO is correct: documentation should not turn into a marketing landing page. The fix is to constrain optimization to the task the documentation already owes the reader.</p>
-<p>Don't add a long definition before the command, repeat a phrase in every heading, or insert an FAQ that restates the guide. Those changes increase page weight while delaying the answer.</p>
-<h3 id="put-proof-near-the-claim">Put proof near the claim</h3>
-<p>Developer documentation earns trust through runnable examples, exact output, version boundaries, and recovery steps. These details also help search systems identify which precise questions the page answers.</p>
-<p>For each procedure, include:</p>
-<ul>
-<li>Required access, plan, region, runtime, and versions</li>
-<li>A complete command or request</li>
-<li>Expected response or visible success state</li>
-<li>Exact failure symptoms and recovery</li>
-<li>Cleanup or rollback when the action changes state</li>
-</ul>
-<p>The <a href="/articles/how-to-write-a-technical-tutorial-that-actually-teaches/">technical tutorial guide</a> shows how to test that path from a clean environment. The <a href="/articles/documentation-review-checklist-before-you-publish/">publication review checklist</a> separates technical, editorial, accessibility, and release approval.</p>
-<h3 id="keep-content-current-through-triggers">Keep content current through triggers</h3>
-<p>“Review annually” is too weak for version-sensitive docs. Attach review to events such as an SDK release, renamed field, changed permission, UI move, deprecation, repeated support query, or ranking page losing clicks after a product change.</p>
-<p>Show an updated date only when the body changed meaningfully. Automating a fresh timestamp without revisiting the instructions creates false confidence and an inaccurate sitemap signal.</p>
-<h2 id="run-a-documentation-seo-audit-you-can-inspect">Run a documentation SEO audit you can inspect</h2>
-<p>I built a small standard-library Python auditor for this article. It checks one page's response, <code>robots.txt</code> access, index directives, title, description, canonical, H1, language, internal links, anchor text, image alt attributes, and sitemap membership.</p>
-<p>Download <a href="/static/tools/docs-seo-audit.py">the documentation SEO audit script</a>, then run it against a page:</p>
+<p>Headings should expose the procedure when the sidebar is absent. “Create an API key” and “Recover from an expired key” are clearer than “Setup” and “Errors.”</p>
+<p>A useful task page also includes the required access and versions, a complete command or request, expected output, exact failure symptoms, recovery, and cleanup. The <a href="/articles/how-to-write-a-technical-tutorial-that-actually-teaches/">technical tutorial guide</a> shows how to test that path from a clean environment.</p>
+<p>Review version-sensitive pages when an SDK release, renamed field, changed permission, UI move, deprecation, support pattern, or ranking loss makes the instructions stale. Change the updated date only when the page itself changed meaningfully.</p>
+<h2 id="documentation-seo-audit-script">Documentation SEO audit script</h2>
+<p>I built a small standard-library Python auditor for this guide. It checks one page's response, <code>robots.txt</code> access, index directives, title, description, canonical, H1, language, internal links, anchor text, image alt attributes, and sitemap membership.</p>
+<p>Download <a href="/static/tools/docs-seo-audit.py">the documentation SEO audit script</a>, then run:</p>
 <div class="highlight"><pre><span></span><code>python3<span class="w"> </span>docs-seo-audit.py<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://developers.cloudflare.com/workers/get-started/guide/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--json<span class="w"> </span>cloudflare-docs-audit.json
 </code></pre></div>
 
-<p>The script makes read-only requests and uses only Python's standard library. It emits both a human-readable report and a JSON receipt suitable for CI or review.</p>
-<h3 id="cloudflares-live-developer-docs-page-passed-the-source-audit">Cloudflare's live developer docs page passed the source audit</h3>
+<p>The command makes read-only requests and returns a human-readable report plus a JSON receipt.</p>
+<h3 id="cloudflare-workers-audit-result">Cloudflare Workers audit result</h3>
 <p>I ran the auditor against Cloudflare's Workers CLI getting-started guide. It returned 12 passes, zero warnings, and zero errors.</p>
-<div class="visual-wrapper">
-  <div class="visual-title">Source-HTML audit of the Cloudflare Workers CLI guide</div>
-  <div class="visual-container">
-    <img src="/static/images/articles/seo-for-technical-documentation/cloudflare-docs-seo-audit.png" alt="Terminal receipt showing 12 passing documentation SEO checks for the Cloudflare Workers CLI guide, including canonical, title, links, image alt attributes, and sitemap membership" loading="lazy">
-  </div>
-</div>
-<p class="visual-caption">The receipt records the URL and evidence for each check. A passing source audit still needs rendered-page and Search Console verification.</p>
-
-<p>The same page makes its local route visible in the interface. The global directory, Workers sidebar, breadcrumbs, page title, on-page outline, prerequisites, and first task each answer a different navigation question.</p>
-<div class="visual-wrapper">
-  <div class="visual-title">Task identity and navigation in Cloudflare Workers docs</div>
-  <div class="visual-container">
-    <img src="/static/images/articles/seo-for-technical-documentation/cloudflare-workers-docs-page.png" alt="Cloudflare Workers CLI guide showing global navigation, the Workers sidebar, breadcrumbs, the CLI page title, prerequisites, and an on-this-page outline" loading="lazy">
-  </div>
-</div>
-<p class="visual-caption">The page is not relying on search metadata alone. Its rendered hierarchy keeps the current task legible inside the wider documentation system.</p>
-
-<h3 id="a-broken-fixture-failed-for-the-right-reasons">A broken fixture failed for the right reasons</h3>
-<p>I also ran the script against a deliberately broken local HTML fixture. The fixture had <code>noindex</code>, an empty title, no canonical, two H1 elements, no crawlable internal links, and an image without an <code>alt</code> attribute.</p>
-<div class="visual-wrapper">
-  <div class="visual-title">The same audit rejects a broken test fixture</div>
-  <div class="visual-container">
-    <img src="/static/images/articles/seo-for-technical-documentation/broken-docs-seo-audit.png" alt="Terminal receipt showing two errors and eight warnings for a deliberately broken documentation fixture, including noindex, missing title, missing canonical, two H1 elements, and missing image alt text" loading="lazy">
-  </div>
-</div>
-<p class="visual-caption">The controlled failure test is not a claim about another site. It proves the auditor exits unsuccessfully when it finds blocking index or title problems.</p>
-
-<p>The two errors are release blockers. The warnings need judgment because a missing sitemap entry, absent description, or multiple H1s is not automatically a ranking penalty.</p>
-<h3 id="know-what-the-script-cant-prove">Know what the script can't prove</h3>
-<p>The auditor inspects one page's source HTML. It doesn't crawl the whole documentation site, execute JavaScript, test Core Web Vitals, confirm Google's selected canonical, or prove that the page deserves to rank.</p>
-<p>Use it as a repeatable first gate. Follow with rendered-browser inspection, a link crawl, Search Console URL Inspection, field performance data, and a human task-completion review.</p>
-<h2 id="inspect-the-rendered-page-not-just-the-audit-output">Inspect the rendered page, not just the audit output</h2>
-<p>Google frames SEO as helping search engines understand content and helping users decide whether to visit. Its own Starter Guide exposes that job through a clear title, contextual navigation, and an outline that separates discovery, organization, search appearance, media, and measurement.</p>
-<div class="visual-wrapper">
-  <div class="visual-title">Google's SEO Starter Guide keeps the page task and system visible</div>
-  <div class="visual-container">
-    <img src="/static/images/articles/seo-for-technical-documentation/google-search-seo-starter-guide.png" alt="Google Search Central SEO Starter Guide showing the page title, definition of SEO, documentation sidebar, breadcrumbs, and an on-this-page outline" loading="lazy">
-  </div>
-</div>
-<p class="visual-caption">The screenshot is source evidence, not a design endorsement. It shows how the page identifies its task while preserving local, section, and page-level navigation.</p>
-
-<p>A rendered review should include desktop and narrow viewports, keyboard navigation, code overflow, copy controls, heading anchors, image zoom behavior, and any banner or feedback component that can cover the instructions.</p>
-<h2 id="measure-search-behavior-after-publication">Measure search behavior after publication</h2>
-<p>Publication is the start of the measurement loop. Search Console usually reports with a delay, and Google's Starter Guide notes that search changes can take from hours to several months to show an effect.</p>
-<p>Record a baseline and compare query-to-page pairs rather than site-wide traffic alone. A documentation page succeeds when it attracts the right technical task and helps the reader continue, not when it collects unrelated impressions.</p>
-<h3 id="check-the-first-four-signals">Check the first four signals</h3>
-<ol>
-<li><strong>Index state:</strong> Is the submitted URL indexed, and did Google select the intended canonical?</li>
-<li><strong>Query fit:</strong> Do impressions come from the task, errors, products, and versions the page actually covers?</li>
-<li><strong>Page choice:</strong> Is Google ranking this page or a weaker marketing, support, or old-version URL?</li>
-<li><strong>Post-click behavior:</strong> Do readers continue into setup, code, API reference, product use, or support resolution?</li>
-</ol>
-<p>Search Console can answer the first three. Product analytics, documentation feedback, support data, and successful API or CLI activity are needed for the fourth.</p>
-<h3 id="use-a-query-page-review-table">Use a query-page review table</h3>
+<p><img alt="Terminal receipt showing 12 passing documentation SEO checks for the Cloudflare Workers CLI guide, including canonical, title, links, image alt attributes, and sitemap membership" src="/static/images/articles/seo-for-technical-documentation/cloudflare-docs-seo-audit.png" /></p>
+<p><em>The receipt records the URL and evidence for each source-HTML check.</em></p>
+<p>The rendered page also exposes its place in the wider documentation system through the global directory, Workers sidebar, breadcrumbs, page title, outline, prerequisites, and first task.</p>
+<p><img alt="Cloudflare Workers CLI guide showing global navigation, the Workers sidebar, breadcrumbs, the CLI page title, prerequisites, and an on-this-page outline" src="/static/images/articles/seo-for-technical-documentation/cloudflare-workers-docs-page.png" /></p>
+<p><em>The page keeps the current task visible inside the wider product documentation.</em></p>
+<h3 id="audit-failure-test">Audit failure test</h3>
+<p>I ran the same script against a deliberately broken local fixture. The fixture had <code>noindex</code>, an empty title, no canonical, two H1 elements, no crawlable internal links, and an image without an <code>alt</code> attribute.</p>
+<p><img alt="Terminal receipt showing two errors and eight warnings for a deliberately broken documentation fixture, including noindex, missing title, missing canonical, two H1 elements, and missing image alt text" src="/static/images/articles/seo-for-technical-documentation/broken-docs-seo-audit.png" /></p>
+<p><em>The script exits unsuccessfully when it finds blocking index or title problems.</em></p>
+<h3 id="audit-script-limitations">Audit script limitations</h3>
+<p>The script inspects one page's source HTML. It does not crawl the entire site, execute JavaScript, test Core Web Vitals, confirm Google's selected canonical, or prove that the page deserves to rank.</p>
+<p>Use it as the first gate. Follow it with rendered-browser inspection, a link crawl, Search Console URL Inspection, field performance data, and a human task-completion review.</p>
+<h2 id="search-console-and-semrush-monitoring">Search Console and Semrush monitoring</h2>
+<p>Search Console reports what happened on NinadPathak.com. Semrush adds estimated search demand, keyword difficulty, SERP composition, and external ranking context.</p>
+<p>Keep the two sources separate. Search Console is the primary record for clicks, impressions, CTR, and Google position on the verified property, while Semrush helps explain changes in the wider search market.</p>
+<h3 id="current-keyword-demand">Current keyword demand</h3>
+<p>The Semrush US database on July 30, 2026 showed the following estimates:</p>
 <table>
 <thead>
 <tr>
-<th>Signal</th>
-<th>What I look for</th>
-<th>Likely action</th>
+<th>Keyword</th>
+<th style="text-align: right;">Monthly volume</th>
+<th style="text-align: right;">Keyword difficulty</th>
+<th>Intent</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>High impressions, low position</td>
-<td>The page is relevant but not yet competitive</td>
-<td>Improve task coverage, proof, links, and authority</td>
+<td><code>technical SEO checklist</code></td>
+<td style="text-align: right;">3,600</td>
+<td style="text-align: right;">34</td>
+<td>Informational</td>
 </tr>
 <tr>
-<td>Good position, low CTR</td>
-<td>Search result may not promise the right outcome</td>
-<td>Compare title, snippet, intent, and competing results</td>
+<td><code>technical documentation template</code></td>
+<td style="text-align: right;">480</td>
+<td style="text-align: right;">26</td>
+<td>Informational</td>
 </tr>
 <tr>
-<td>Wrong page ranks</td>
-<td>Intent ownership or canonical signals are unclear</td>
-<td>Consolidate, redirect, retitle, or strengthen internal links</td>
+<td><code>developer documentation</code></td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">41</td>
+<td>Informational</td>
 </tr>
 <tr>
-<td>Clicks fall after release</td>
-<td>Product, version, SERP, or demand may have changed</td>
-<td>Check changelog, queries, canonical, index state, and competitors</td>
+<td><code>technical documentation best practices</code></td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">25</td>
+<td>Informational</td>
 </tr>
 <tr>
-<td>No impressions</td>
-<td>Discovery, indexing, demand, or page identity may be weak</td>
-<td>Inspect URL, sitemap, links, and actual query language</td>
+<td><code>documentation SEO</code></td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td>Not classified</td>
+</tr>
+<tr>
+<td><code>technical documentation SEO</code></td>
+<td style="text-align: right;">0 reported</td>
+<td style="text-align: right;">0</td>
+<td>Not classified</td>
 </tr>
 </tbody>
 </table>
-<p>Don't declare failure from a short initial window. Set review points that match the site's crawl rate and query volume, then preserve the baseline so an update can be judged against evidence.</p>
-<h2 id="the-complete-developer-docs-seo-checklist">The complete developer docs SEO checklist</h2>
-<p>Use this as a release gate, not as a score to maximize.</p>
-<h3 id="intent-and-ownership">Intent and ownership</h3>
+<p>Semrush reported little measurable demand for the exact topic phrase. The broader technical SEO checklist query has much more, but that does not justify turning the page into a generic website audit because the reader task is still developer documentation.</p>
+<p>Use the broader terms to understand competing SERPs and supporting sections. Keep the page's primary promise specific enough to earn the documentation query.</p>
+<h3 id="how-to-investigate-growth-or-decline">How to investigate growth or decline</h3>
+<p>Compare the same page and query over equivalent windows before naming a cause. Record the observation first, then test explanations.</p>
+<table>
+<thead>
+<tr>
+<th>Observation</th>
+<th>Evidence to check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Impressions rise, position is stable</td>
+<td>Semrush volume trend, seasonality, product demand, new query variants</td>
+</tr>
+<tr>
+<td>Position rises, impressions are stable</td>
+<td>Competing pages, backlinks, internal links, SERP composition, content changes</td>
+</tr>
+<tr>
+<td>CTR falls, position is stable</td>
+<td>Title and snippet changes, search intent, rich results, competing result promises</td>
+</tr>
+<tr>
+<td>The wrong page ranks</td>
+<td>Canonical signals, internal links, overlapping intent, redirects, old versions</td>
+</tr>
+<tr>
+<td>Clicks drop after a release</td>
+<td>Index state, product changes, stale instructions, competitors, demand trend</td>
+</tr>
+<tr>
+<td>No impressions</td>
+<td>Discovery, indexing, measured demand, title clarity, query mismatch</td>
+</tr>
+</tbody>
+</table>
+<p>A correlation is not a cause. Keep seasonality, competitor movement, technical faults, and content updates as hypotheses until the evidence supports one.</p>
+<h2 id="technical-documentation-seo-checklist">Technical documentation SEO checklist</h2>
+<h3 id="search-intent">Search intent</h3>
 <ul>
 <li>[ ] The page names one reader, task, and successful outcome.</li>
-<li>[ ] Site search and web search show no stronger existing answer for the same intent.</li>
+<li>[ ] Site search and web search show no stronger page for the same intent.</li>
 <li>[ ] Marketing, support, reference, tutorial, and version pages have distinct jobs.</li>
-<li>[ ] One page is recorded as the canonical owner of the task.</li>
-<li>[ ] The page belongs to a useful hub or reader route.</li>
+<li>[ ] One canonical page owns the task.</li>
 </ul>
-<h3 id="discovery">Discovery</h3>
+<h3 id="discovery-and-crawling">Discovery and crawling</h3>
 <ul>
-<li>[ ] At least one relevant, indexable page links to this page.</li>
-<li>[ ] Links use <code>&lt;a href&gt;</code> and resolve without requiring a click handler.</li>
-<li>[ ] Anchor text describes the destination naturally.</li>
-<li>[ ] The page is not trapped behind search, authentication, or client state.</li>
-<li>[ ] The canonical URL appears in a valid sitemap when the site uses one.</li>
-</ul>
-<h3 id="crawling-and-rendering">Crawling and rendering</h3>
-<ul>
-<li>[ ] The URL reaches the intended page without a loop or accidental chain.</li>
+<li>[ ] At least one relevant indexable page links to the URL.</li>
+<li>[ ] Links use <code>&lt;a href&gt;</code> and resolve without a click handler.</li>
+<li>[ ] The canonical URL appears in the XML sitemap.</li>
 <li>[ ] The final response returns the correct status and HTML content type.</li>
 <li>[ ] <code>robots.txt</code> allows required crawling.</li>
-<li>[ ] CSS, JavaScript, images, and fonts needed to understand the page are accessible.</li>
-<li>[ ] The initial and rendered HTML contain the task content, title, links, and canonical.</li>
-<li>[ ] Error and empty states return honest status codes instead of soft <code>200</code> pages.</li>
+<li>[ ] Initial and rendered HTML contain the task content, links, and canonical.</li>
+<li>[ ] Error pages return honest status codes instead of soft <code>200</code> responses.</li>
 </ul>
 <h3 id="indexing-and-canonicalization">Indexing and canonicalization</h3>
 <ul>
 <li>[ ] No accidental page-level or header-level <code>noindex</code> exists.</li>
 <li>[ ] The preferred page has an absolute self-referencing canonical.</li>
 <li>[ ] Redirects, internal links, sitemap entries, and structured data use the same URL.</li>
-<li>[ ] Parameters, print views, trailing-slash variants, and duplicate formats are handled deliberately.</li>
-<li>[ ] Language and version pages have an explicit indexing and canonical policy.</li>
-<li>[ ] Search Console confirms the intended canonical after Google processes the page.</li>
+<li>[ ] Parameters, print views, and trailing-slash variants are handled deliberately.</li>
+<li>[ ] Language and version pages have a documented indexing policy.</li>
+<li>[ ] Search Console confirms the intended canonical after processing.</li>
 </ul>
-<h3 id="page-identity-and-usefulness">Page identity and usefulness</h3>
+<h3 id="page-quality">Page quality</h3>
 <ul>
-<li>[ ] <code>&lt;title&gt;</code>, H1, URL, description, and opening describe the same task.</li>
+<li>[ ] URL, <code>&lt;title&gt;</code>, H1, description, and opening name the same task.</li>
 <li>[ ] The title is unique, concise, current, and free of boilerplate stuffing.</li>
-<li>[ ] Headings expose the procedure or argument when read alone.</li>
-<li>[ ] Prerequisites and supported versions appear before the first dependent step.</li>
-<li>[ ] Commands and code run in the promised environment.</li>
+<li>[ ] Headings expose the procedure when read without the sidebar.</li>
+<li>[ ] Prerequisites and supported versions appear before dependent steps.</li>
+<li>[ ] Commands and examples run in the promised environment.</li>
 <li>[ ] Expected output, failure symptoms, recovery, and cleanup are present.</li>
-<li>[ ] The page links to prerequisites, reference detail, and the next useful task.</li>
+<li>[ ] Images have contextual alt text and useful captions.</li>
+<li>[ ] Code, tables, navigation, and overlays work at narrow widths and browser zoom.</li>
 </ul>
-<h3 id="media-accessibility-and-experience">Media, accessibility, and experience</h3>
+<h3 id="measurement">Measurement</h3>
 <ul>
-<li>[ ] Images prove a control, state, comparison, or result.</li>
-<li>[ ] Every meaningful image has contextual alt text and a useful caption.</li>
-<li>[ ] Code, tables, and navigation work at narrow widths and browser zoom.</li>
-<li>[ ] Keyboard focus, landmarks, headings, and link text remain understandable.</li>
-<li>[ ] Core Web Vitals field data is reviewed when enough field observations exist.</li>
-<li>[ ] Consent, feedback, search, and chat overlays don't cover the task.</li>
+<li>[ ] Search Console page-query data is saved before and after changes.</li>
+<li>[ ] A dated Semrush snapshot records volume, difficulty, intent, trend, and ranking context.</li>
+<li>[ ] Growth and decline are reported separately from proposed causes.</li>
+<li>[ ] The page has an owner and product-triggered update conditions.</li>
+<li>[ ] Review dates match the site's crawl rate and query volume.</li>
 </ul>
-<h3 id="release-and-measurement">Release and measurement</h3>
-<ul>
-<li>[ ] The rendered production-equivalent page has been reviewed.</li>
-<li>[ ] Internal and external links have been checked from the output.</li>
-<li>[ ] The sitemap, canonical, schema, social metadata, and final URL agree.</li>
-<li>[ ] Search Console access, URL Inspection, and a query-page baseline are ready.</li>
-<li>[ ] The page has a named owner and product-triggered update conditions.</li>
-<li>[ ] Review dates are set for indexing, early query fit, and longer-term performance.</li>
-</ul>
-<h2 id="what-id-fix-first">What I'd fix first</h2>
-<p>If a documentation site has hundreds of pages, I wouldn't begin by rewriting every title. I'd choose one high-value reader route and repair it end to end.</p>
-<p>Start with a setup, authentication, deployment, troubleshooting, or migration path that affects product use. Fix its canonical ownership, internal links, response behavior, rendered content, task proof, and measurement before expanding the audit.</p>
-<p>That gives the team a working standard instead of a spreadsheet full of disconnected warnings. The next page can reuse the same checks, receipts, and release gate with less guesswork.</p>
+<h2 id="start-with-one-documentation-path">Start with one documentation path</h2>
+<p>Choose one setup, authentication, deployment, troubleshooting, or migration path that affects product use. Repair its page ownership, internal links, response behavior, rendered content, canonical signals, task proof, and measurement before expanding the audit.</p>
+<p>That gives the team one verified release standard that can be reused across the rest of the documentation site.</p>
       </div>
     </div>
   </div>
