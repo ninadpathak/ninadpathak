@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Writing Format Map</title>
+<style>
+:root {
+    --bg-1: #ffffff;
+    --bg-2: #efefed;
+    --border: #e0e0dc;
+    --text-1: #0e0e0e;
+    --text-2: #3a3a3a;
+    --text-3: #888888;
+    --accent: #d44000;
+    --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Courier New', monospace;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-1: #111111;
+        --bg-2: #1a1a1a;
+        --border: #1e1e1e;
+        --text-1: #f0f0f0;
+        --text-2: #c2c2c2;
+        --text-3: #6a6a6a;
+        --accent: #ff5f1f;
+    }
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--bg-1);
+    font-family: var(--sans);
+    color: var(--text-1);
+    overflow: hidden;
+}
+
+.map {
+    min-height: 100vh;
+    padding: 18px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 14px;
+}
+
+.header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.eyebrow,
+.legend,
+.stage-label,
+.job {
+    font-family: var(--mono);
+}
+
+.eyebrow {
+    color: var(--text-2);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.legend {
+    color: var(--text-3);
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.stages {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    min-height: 0;
+}
+
+.stage {
+    border: 1px solid var(--border);
+    background: var(--bg-1);
+    padding: 10px;
+    display: grid;
+    grid-template-rows: auto repeat(3, 1fr);
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: enter 400ms ease forwards;
+}
+
+.stage:nth-child(2) { animation-delay: 100ms; }
+.stage:nth-child(3) { animation-delay: 200ms; }
+.stage:nth-child(4) { animation-delay: 300ms; }
+
+.stage-label {
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--border);
+}
+
+.format {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+.name {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.job {
+    color: var(--text-3);
+    font-size: 9px;
+    line-height: 1.35;
+}
+
+.footer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.signal {
+    height: 3px;
+    background: var(--border);
+    overflow: hidden;
+}
+
+.signal::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transform: translateX(-100%);
+    animation: scan 2.8s linear infinite;
+}
+
+.signal:nth-child(2)::after { animation-delay: 700ms; }
+.signal:nth-child(3)::after { animation-delay: 1400ms; }
+.signal:nth-child(4)::after { animation-delay: 2100ms; }
+
+@keyframes enter {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scan {
+    0% { transform: translateX(-100%); }
+    35%, 100% { transform: translateX(100%); }
+}
+
+@media (max-width: 600px) {
+    body { overflow: auto; }
+    .map { padding: 12px; }
+    .header { align-items: flex-start; flex-direction: column; gap: 4px; }
+    .stages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer { grid-template-columns: repeat(2, 1fr); }
+    .name { font-size: 11px; }
+    .job { font-size: 8px; }
+}
+</style>
+</head>
+<body>
+<main class="map">
+    <header class="header">
+        <div class="eyebrow">Reader job → correct document</div>
+        <div class="legend">12 formats / 4 stages</div>
+    </header>
+
+    <section class="stages" aria-label="Technical writing formats grouped by reader job">
+        <article class="stage">
+            <div class="stage-label">01 / Learn</div>
+            <div class="format">
+                <div class="name">Quickstart</div>
+                <div class="job">PROVE THE PRODUCT WORKS</div>
+            </div>
+            <div class="format">
+                <div class="name">Tutorial</div>
+                <div class="job">LEARN THROUGH A BUILD</div>
+            </div>
+            <div class="format">
+                <div class="name">Explanation</div>
+                <div class="job">BUILD A MENTAL MODEL</div>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-label">02 / Ship</div>
+            <div class="format">
+                <div class="name">How-to guide</div>
+                <div class="job">COMPLETE ONE TASK</div>
+            </div>
+            <div class="format">
+                <div class="name">API reference</div>
+                <div class="job">LOOK UP THE CONTRACT</div>
+            </div>
+            <div class="format">
+                <div class="name">Troubleshooting</div>
+                <div class="job">DIAGNOSE AND RECOVER</div>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-label">03 / Operate</div>
+            <div class="format">
+                <div class="name">Runbook</div>
+                <div class="job">RESPOND CONSISTENTLY</div>
+            </div>
+            <div class="format">
+                <div class="name">Onboarding docs</div>
+                <div class="job">REACH USEFUL WORK</div>
+            </div>
+            <div class="format">
+                <div class="name">Release notes</div>
+                <div class="job">UPGRADE SAFELY</div>
+            </div>
+        </article>
+
+        <article class="stage">
+            <div class="stage-label">04 / Decide</div>
+            <div class="format">
+                <div class="name">Comparison</div>
+                <div class="job">CHOOSE AN OPTION</div>
+            </div>
+            <div class="format">
+                <div class="name">Best practices</div>
+                <div class="job">APPLY JUDGMENT</div>
+            </div>
+            <div class="format">
+                <div class="name">Case study</div>
+                <div class="job">EVALUATE EVIDENCE</div>
+            </div>
+        </article>
+    </section>
+
+    <div class="footer" aria-hidden="true">
+        <div class="signal"></div>
+        <div class="signal"></div>
+        <div class="signal"></div>
+        <div class="signal"></div>
+    </div>
+</main>
+</body>
+</html>

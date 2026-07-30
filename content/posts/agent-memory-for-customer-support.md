@@ -4,7 +4,7 @@ date: "2026-05-10"
 slug: "agent-memory-for-customer-support"
 description: "I built a customer support agent that actually remembers across sessions. Here is what I learned about memory architecture, serialization trade-offs, and the failure modes that will kill your deployment."
 tags: ["ai-agents", "memory", "customer-support", "production"]
-status: published
+status: retired
 ---
 
 I spent three weeks building a customer support agent for a SaaS product and ran into a problem I had not expected. The agent could handle a conversation. It could not handle a customer.

@@ -4,7 +4,7 @@ date: "2026-04-23"
 slug: "agent-loop-anatomy"
 description: "The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks."
 tags: ["ai agents", "agent architecture", "loop design"]
-status: published
+status: retired
 ---
 
 Whenever a system I built starts misbehaving, I come back to the agent loop. The literature describes it as a single construct. The actual implementation has four separate phases, and a failure in any one of them looks like a failure in the whole thing. An agent that loops forever, an agent that ignores a tool error, an agent that forgets what it was doing halfway through a task: those are three different broken phases that all read as "the agent is dumb" until you take the loop apart.

@@ -1,162 +1,331 @@
 ---
 date: 2026-04-03
-description: Developers trust release notes when they can make upgrade decisions fast.
-  I explain the format, level of detail, and disclosure standard that earns that trust.
+updated: 2026-07-30
+slug: writing-release-notes-that-developers-trust
+description: Write release notes that let developers assess upgrade risk, understand product impact, and migrate without surprises.
 status: published
 tags:
 - technical-writing
 - developer-experience
 - releases
 title: Writing Release Notes That Developers Trust
+takeaways:
+- Put compatibility, affected users, and required action on the first screen.
+- Separate product impact from launch language and implementation detail.
+- Use visuals only when they clarify changed behavior or a migration.
+- Automate the release inventory, then edit it for risk and consequence.
 ---
 
-For the people who carry pager risk, release notes are operational guidance. Software teams often treat them as a marketing chore or a list of Jira tickets, yet for the developer integrating the code, these notes are a risk-assessment tool. Publishing on a predictable schedule earns nothing on its own. Trust comes from the specific disclosure of impact, security, and migration cost, the kind of detail an on-call engineer needs at 6pm before pushing an upgrade to a payment service that handles every checkout on the site.
+It is late in the release cycle and someone wants to upgrade the SDK before the weekend. The team needs to know whether the API changed, whether CI needs a new runtime, and whether rollback is still possible.
 
-**Short answer:** Release notes that developers trust identify impact before hype and isolate breaking changes from additive features. They must tie every change to a versioned release artifact and provide a clear technical path for migration. Modern standards such as [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/) provide the structure, but trust requires editorial judgment to explain *why* a change matters to the system's stability.
+The feature list does not answer those questions, so people open diffs and pull requests. The method below puts the upgrade decision on the first screen of the release notes.
 
-## Release notes are separate from launch announcements
+## Release notes and changelogs do different jobs
 
-Launch announcements explain why a product matters to the market. Release notes explain what changed in the binary and who gets affected. Keeping these documents apart matters because they serve different cognitive modes. Triaging an upgrade or debugging a regression at 2am, a developer reading release notes scrolls fast to find whether the new version is what broke their checkout flow. A queryable record is what they want, not a narrative that buries the one line they came for.
+If you look at the two side by side, the changelog is the chronological record across versions. Release notes slow down on one release and explain its value, impact, and migration work.
 
-GitHub's [about releases documentation](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) defines releases as versioned artifacts. These artifacts map to tags and assets. Keep a Changelog argues that changelogs are for humans, not machines, which means the entries need to be grouped by type: Added, Changed, Deprecated, Removed, Fixed, and Security.
+The two can share source material without becoming the same document.
 
-Flooding notes with "improved performance" filler while a breaking API change sits buried halfway down a list of refactors is something I have watched teams do over and over. Once a developer misses a critical change, say a renamed config key that silently disabled their rate limiter, because the notes were padded with marketing adjectives, they stop reading the prose and start grepping the diff instead. That switch is hard to reverse. A team that has trained its users to ignore the changelog and read the commits has lost the cheapest channel it had for warning them. Trust is a cumulative asset, and teams burn through it every time they prioritize hype over consequence.
+| Changelog | Release notes |
+|---|---|
+| Covers many versions | Focuses on one release |
+| Uses concise categorized entries | Adds context, examples, and migration guidance |
+| Optimized for lookup | Optimized for an upgrade decision |
+| Usually maintained as a continuous file | Published as a versioned page or release |
 
-## The first screen must quantify upgrade risk
+[GitHub's releases documentation](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) connects releases to Git tags, notes, and downloadable assets. That versioned artifact is the anchor a developer needs, while the prose explains what the artifact changes.
 
-Risk-reward calculation is what a developer is doing when they open a release note. Knowing whether the merge is safe matters before they commit an afternoon to it, the way a pilot scans the instrument panel before deciding the flight is a go rather than reading the maintenance log front to back. An opening block that answers four specific fields before any prose begins lets that reader make the call in seconds.
+### Keep launch copy out of the risk summary
 
-- Release version and date.
-- One-sentence summary of the release intent.
-- A dedicated "Breaking Changes" section that explicitly says "None" when true.
-- Links to migration docs or rollback procedures.
+A launch post can tell a story about the problem, market, and product direction. Release notes should first identify observable behavior and affected users.
 
-Stripe's [changelog](https://docs.stripe.com/changelog) follows this pattern by tying entries to specific API versions, so an engineer pinned to an older version can read only the deltas that apply to them. GitHub's [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) also assume a structured category model. Structure allows for scanning, which is the primary way engineers consume technical updates under pressure.
+“Our fastest release yet” has no operational meaning. “Batch exports now finish up to 30 minutes after creation and send a webhook when the file is ready” describes behavior a developer can design around.
 
-Explicitly stating "No breaking changes" is a trust signal. Silence creates ambiguity, since the reader cannot tell whether the section is empty because nothing broke or because nobody bothered to check. An absent warning is not the same as a clean bill of health, and a reader should not have to treat it as one.
+> If a sentence cannot help someone decide, migrate, verify, or troubleshoot, it does not belong above the technical changes.
 
-## Category discipline reduces the cost of scanning
+## Put upgrade risk on the first screen
 
-Keep a Changelog categories exist to map changes to risk profiles, and that mapping is the whole point of the discipline. Added and Changed items are usually safe. Deprecated, Removed, and Fixed items require attention. Security items require immediate action. The categories work like aisle signs in a hardware store: a reader skips straight to the section that matches the job they are doing instead of walking every row.
+The opening should feel more like a status panel. You shouldn’t have to inspect every feature section to discover a runtime requirement or removed option.
 
-Changelog structure is something I covered in [How to Write a Changelog That Developers Actually Read](/blog/how-to-write-a-changelog-developers-actually-read/), but release notes take it a step further by focusing on the immediate release. Before publication, I run every bullet point through a mental filter.
+### Name five things immediately
 
-1. Does this describe a change in runtime behavior, build behavior, or only internal tooling?
-2. Does the reader need to take action before or after upgrading?
-3. Is the risk level tied to a removal, a default change, or a new limit?
+Lead with:
 
-"Updated authentication middleware" is a weak bullet. "Default token expiry reduced from 24 hours to 1 hour, so update refresh logic before upgrading to prevent session drops" is a trust-building bullet. One describes the work. The other describes the consequence the reader will feel in production. A developer can act on the second line without opening the PR, which is the entire reason the note exists.
+1. **Version and release date**
+2. **Compatibility statement**
+3. **Affected products, APIs, SDKs, or environments**
+4. **Required action and deadline**
+5. **Links to migration and rollback instructions**
 
-## Security disclosure is the highest form of trust
+A compact summary can look like this:
 
-Of every section in the document, the security note is the one a reader will paste into a ticket and act on within the hour. Modern standards have moved security from a footnote to a primary section. Trust here demands total transparency, including CVE IDs and impact assessments.
+```text
+Version:        4.0.0 — 30 July 2026
+Compatibility:  Breaking changes in authentication and pagination
+Affected:       REST API and JavaScript SDK users
+Action:         Migrate before 30 September 2026
+Rollback:       v3 remains supported until the migration deadline
+```
 
-For examples of ecosystem-scale disclosure, I look at how Kubernetes handles its [release notes](https://kubernetes.io/releases/notes). They push readers toward searchable notes because a project that ships to millions of clusters cannot rely on anyone remembering which patch fixed what. Putting a **CVE (Common Vulnerabilities and Exposures) ID** directly in the note lets a security team paste it into their scanner and confirm the fix maps to the alert they are already chasing.
+The block sets the reading order. Migration details still follow, but nobody has to discover the risk halfway down the page.
 
-Regulations now make this transparency a legal requirement. The **EU Cyber Resilience Act (2025)** mandates vulnerability management and secure-by-default development for digital products. Public companies in the US must also navigate the **SEC 4-Day Rule**, which requires disclosing material cybersecurity incidents within four business days via Form 8-K. Release notes have become part of the legal record of a company's security posture.
+### Say who is not affected
 
-A trend toward including a **Software Bill of Materials (SBOM)** with each release is something I see more often now. An SBOM works like the ingredients panel on a packaged food: a nested list of every dependency baked into the build, down to the transitive ones a team rarely thinks about. When a vulnerability lands in something like a logging library, a user can search the SBOM and confirm in seconds whether the affected version shipped to them. Providing an SBOM link in the release notes signals that the team takes supply-chain security seriously.
+Scope reduces unnecessary alarm. If a change affects only self-hosted deployments, say that cloud customers do not need to act.
 
-## Breaking changes need an exhaustive disclosure standard
+Negative scope is especially useful when a product has several SDKs, API versions, regions, or deployment models. It prevents every customer from interpreting a broad warning as their own emergency.
 
-GitHub supports custom categories for [release configuration](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) via `.github/release.yml`, which lets teams isolate high-risk items automatically. Even with the tooling in place, I watch teams undercut their own trust here by reaching for euphemisms.
+## Write impact, not implementation
 
-"Behavior adjustment" is a euphemism for a breaking change. "Important update" is a euphemism for a breaking change. Product teams often prefer softer language to avoid scaring users, but engineers find this evasive. I prefer strong, clear labels. A breaking change note must answer five questions.
+Pull request titles make sense from the team’s side of the work. Release notes have to turn them around and show what changed for the person using the product.
 
-- What changed exactly?
-- Which specific versions or configurations are affected?
-- When does the old behavior cease to function?
-- What is the precise migration step to fix it?
-- Where is the long-form migration guide?
+### Turn internal changes into decisions
 
-Surprise is the enemy of trust. Developers can forgive a difficult migration if they were given the information needed to plan for it, the way a tenant tolerates a building's water shutoff that was posted a week in advance and resents the one that hits mid-shower. They rarely forgive a surprise breakage caused by vague documentation.
+| Internal language | Release-note language |
+|---|---|
+| Refactored token validation | Expired tokens now return `401` immediately; clients that relied on the previous grace period must refresh sooner. |
+| Added queue backpressure | Requests above the queue limit now return `429` with a `Retry-After` header. |
+| Upgraded database driver | No application change is required, but self-hosted deployments now require PostgreSQL 15 or later. |
+| Fixed CSV bug | CSV exports now preserve leading zeroes in string columns such as postal codes. |
 
-## Automation is a starting point, not a final product
+The right-hand column lets a developer recognize their system and choose an action. Concrete terms such as the error code, field, and runtime also make the entry easier to find later.
 
-GitHub's generated notes are helpful for pulling pull request titles and contributors into a draft. Collection gets faster, though the output still falls short of trust-grade notes on its own. A pull request title often reflects the implementation details ("Refactor auth logic") rather than the user impact ("Added support for OIDC providers").
+### Separate breaking changes from new capability
 
-I use automation to collect the facts.
+Put migration work before the feature tour. Breaking changes, deprecations, security impact, and supported-environment changes need their own section.
 
-- PR titles and IDs.
-- Associated labels.
-- Contributor handles.
-- Version tags.
+Within that section, use the same order for every item:
 
-I do not use automation for the impact line. That sentence needs a human who understands the customer's environment. A machine can tell you that a dependency was bumped. A writer tells you that the bump fixes a memory leak in high-concurrency environments.
+- Previous behavior
+- New behavior
+- Affected users
+- Required change
+- Verification step
+- Rollback or support path
 
-## Human-first release notes focus on metrics and use cases
+Consistency makes long notes easier to scan. Future writers are less likely to dilute a structure with an obvious place for each fact.
 
-Figma and Vercel have shifted toward "Human-First" release notes. Figma uses categorized tags so developers can filter by workflow, such as "Dev Mode" or "Prototyping." Vercel and Raycast focus on **performance metrics** rather than generic adjectives.
+### Be precise about security
 
-"Improved API speed" is a claim. "Reduced API response time by 35% for datasets over 1MB" is a fact. Developers trust facts. When you quantify the improvement, you provide the engineer with the data they need to justify the upgrade to their own stakeholders.
+Say which versions are affected, what users should do, and where the advisory lives. Avoid vague phrases such as “security improvements,” because they tell a reader neither the urgency nor the scope.
 
-I also value visuals when they clarify technical changes. GIFs are useful for UI updates, but code blocks are essential for API changes. A release note that shows the "Before" and "After" code for a breaking change reduces the mental load of the migration.
+Coordinate security wording with the security owner and link to the canonical advisory for updates. Leave out exploit detail that creates additional risk.
 
-## Release notes reflect a team's empathy for the operator
+## Show the changed behavior
 
-Commercial consequences follow this distinction. Release notes are often the only recurring technical communication a user receives from a company after the initial sale. If those notes are vague or promotional, the user assumes the rest of the documentation is also unreliable. Support costs rise as users fail to navigate upgrades.
+Visuals help when they make a changed state or workflow quicker to understand. A focused before-and-after can do that, but a decorative dashboard screenshot usually can’t.
 
-One of the projects I am frequently asked to lead for DevTools companies is the repair of release communication. The problem usually isn't just the prose. The problem is the internal definition of what a release note is. Once the team views the note as operational guidance for a peer, the quality of the writing improves immediately.
+### Use before-and-after examples
 
-## My default release note template
+For an API change, a focused request or response diff is usually better than a full screenshot:
 
-The [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) project provides a standard for these categories: Added, Changed, Deprecated, Removed, Fixed, and Security. I follow this standard because it aligns with how developers categorize risk.
+```diff
+- { "next_page": 3 }
++ { "next_cursor": "eyJpZCI6IjEwMDAifQ==" }
+```
+
+For an interface change, crop the screenshot to the changed region and call out the control or state the reader needs to notice. The caption should explain the consequence, not repeat the image title.
+
+### Skip visuals for routine inventory
+
+A decorative dashboard screenshot does not make a dependency update easier to understand. It adds page weight and another asset that can become stale.
+
+Ask whether the visual helps someone migrate or verify behavior. If it does neither, let the prose carry the point.
+
+## Let the version and prose make the same promise
+
+[Semantic Versioning](https://semver.org/) uses `MAJOR.MINOR.PATCH` to signal compatibility. Major releases contain incompatible API changes, minor releases add backward-compatible functionality, and patch releases contain backward-compatible fixes.
+
+The notes have to agree with the version. A breaking runtime change inside a patch release makes both signals unreliable.
 
 <div class="visual-wrapper">
-  <div class="visual-title">Keep a Changelog Standard</div>
+  <div class="visual-title">Semantic Versioning at a glance</div>
   <div class="visual-container">
-    <img src="/static/images/visuals/keep-a-changelog.png" alt="Keep a Changelog Standard" loading="lazy">
+    <img src="/static/images/visuals/semver.png" alt="Semantic Versioning website showing the major, minor, and patch version number format" loading="lazy">
   </div>
 </div>
+<p class="visual-caption">The version number is the first compatibility signal. Release notes must explain that signal and disclose any narrower exception that the number cannot express.</p>
 
-[Semantic Versioning (SemVer)](https://semver.org/) adds another layer of communication by encoding the magnitude of change into the version number itself.
+### Explain support windows with dates
+
+State the first version that deprecates the behavior, the expected removal version, and a calendar date when possible. “Deprecated soon” leaves the migration schedule open-ended.
+
+If the schedule changes, update the canonical release page and link later notes back to it. Developers need one source they can trust while planning work.
+
+### Include rollback limits
+
+If a database migration, state change, or new file format prevents a clean downgrade, say so before the upgrade steps. A rollback instruction that no longer works is worse than no instruction because it creates false confidence.
+
+State what can be reversed, how long the previous version remains supported, and which data needs a backup. These details often matter more than the feature description.
+
+## Automate collection, keep judgment human
+
+Release tooling can already collect pull requests, contributors, labels, and links. GitHub's [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) can even use `.github/release.yml` to define categories and exclusions.
+
+Automation saves collection time, but the inventory remains a draft. It cannot reliably combine three pull requests into one user-facing change or spot migration work behind an innocent title.
+
+### Build the notes during development
+
+Ask the author of a user-visible change to record:
+
+- The previous and new behavior
+- The affected user or environment
+- Compatibility and migration impact
+- Documentation that must change
+- A verification or test result
+- Screenshots or examples when behavior is visual
+
+Capture this in the pull request or an Unreleased entry while the details are current. The release editor can organize and simplify the existing context.
+
+### Give one editor the full page
+
+Individual engineers can verify their sections, but one person should edit the complete release for hierarchy, duplicate entries, tone, and missing links. Without that pass, the notes read like several teams pasted their sprint summaries together.
+
+Edit from highest risk to lowest risk: breaking changes, security and support changes, fixes, new capability, and minor improvements.
+
+## A release-note structure that works
+
+The exact labels can change, but the reading order should remain predictable:
+
+1. **Release summary:** version, date, compatibility, scope, and action.
+2. **Breaking changes:** migration, verification, deadline, and rollback.
+3. **Security and support:** advisories, runtime requirements, and end-of-support dates.
+4. **Fixes:** corrected behavior and affected users.
+5. **New capabilities:** what is available and how to try it.
+6. **Known issues:** symptoms, workarounds, and tracking links.
+7. **Resources:** migration guide, reference changes, assets, and support.
 
 <div class="visual-wrapper">
-  <div class="visual-title">Semantic Versioning (SemVer)</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/semver.png" alt="Semantic Versioning" loading="lazy">
+  <div class="visual-title">Release information by depth</div>
+  <div class="visual-container visual-container--interactive">
+    <iframe src="/static/visuals/release-hierarchy.html" title="Interactive hierarchy showing a release summary, categorized impact, and deeper migration details" loading="lazy"></iframe>
   </div>
 </div>
+<p class="visual-caption">The page should reveal information in layers: decision first, impact second, and implementation detail last. Readers can stop when they have enough evidence.</p>
 
-I use a four-layer hierarchy for release notes prioritization:
+### Final trust check
 
-<div class="visual-wrapper">
-  <div class="visual-title">Impact Prioritization</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/release-hierarchy.html" title="Release Impact Layers" loading="lazy"></iframe>
-  </div>
-</div>
+- Can a developer identify upgrade risk from the first screen?
+- Are affected and unaffected users both clear?
+- Does every breaking change include an action and verification step?
+- Do the version number and compatibility claim agree?
+- Does every deadline include a calendar date?
+- Are screenshots current and necessary?
+- Do migration, advisory, rollback, and reference links work?
+- Can someone find the same release again by version?
 
-| Field | Requirement |
-| --- | --- |
-| Version and Date | Linked to the Git tag |
-| Executive Summary | One sentence on why this version exists |
-| Breaking Changes | Explicit list with migration links |
-| Security Fixes | Must include CVE IDs and severity |
-| Added Features | Focused on new capabilities, not internal refactors |
-| Deprecations | Warnings for future removals |
-| Action Required | Clear instructions on what to do next |
+Trust comes from repeating this disclosure standard every time. One vague release can make the next careful one harder to believe.
 
-This format works for SDKs, APIs, and CLI tools. It forces the writer to confront the "Action Required" field, which is often what developers are looking for first.
+## Worked example: write the notes for a breaking SDK release
 
-## FAQ
+Take the same hypothetical `4.0.0` release used in the [changelog example](/articles/how-to-write-a-changelog-developers-actually-read/). The changelog records pagination, runtime, webhook retry, validation, and login changes in compact form.
 
-**What is the difference between a changelog and release notes?**
+Release notes turn that record into an upgrade plan. They need more context than the changelog, especially around order, verification, and rollback.
 
-A changelog is a chronological record of every change made to the project. Release notes are a curated, reader-focused explanation of a specific version's impact. A changelog is the "what," while release notes are the "so what."
+### Open with the decision
 
-**Should I include every bug fix in the release notes?**
+The first screen could read:
 
-No. I exclude minor internal refactors that have no user-visible impact. I include fixes only when the previous incorrect behavior was significant enough for a reader to recognize.
+```text
+SDK 4.0.0 — 30 July 2026
 
-**How do I handle security fixes without tipping off attackers?**
+Upgrade effort: Medium
+Compatibility: Breaking changes to pagination and Node.js support
+Affected: JavaScript SDK users and REST integrations using `page`
+Deadline: Version 3 security support ends 30 September 2026
+Action: Upgrade to Node.js 20 and migrate list endpoints to cursors
+Rollback: Safe until the first v4 cursor is stored; see rollback limits
+```
 
-Follow the standard disclosure process. Release the fix first, then publish the detailed security note with the CVE ID once the majority of users have had a chance to upgrade. Precision is more important than speed in the disclosure text itself.
+“Medium” is only useful because the following fields explain it. A standalone effort badge would replace one vague label with another.
 
-**Is Semantic Versioning required for trust?**
+### Explain the migration in dependency order
 
-SemVer is a powerful tool for communicating risk. If you use it, you must follow it strictly. Breaking the SemVer contract by introducing a breaking change in a patch release destroys trust faster than having no versioning system at all.
+Runtime comes before package installation, and package installation comes before code changes. Put the migration steps in that order:
 
-**What is the most common mistake in release notes?**
+1. Confirm that development, CI, and production run Node.js 20 or later.
+2. Upgrade the SDK in a branch and run the existing integration tests.
+3. Replace numeric `page` parameters with the returned `next_cursor`.
+4. Make webhook handlers idempotent before enabling the new retry behavior.
+5. Deploy to a test environment and compare pagination results.
+6. Roll out gradually while monitoring `400` and `401` responses.
 
-Prioritizing the "Added" section over the "Breaking Changes" or "Security" sections. Marketing teams want to talk about new features. Developers want to talk about what might break their production environment. Trust is built by prioritizing the developer's needs.
+The dependency order gives the reader one safe path across several product changes. Team ownership has no place in that sequence.
+
+### Show the change where prose is weak
+
+The pagination section should include a focused before-and-after:
+
+```diff
+- const orders = await client.orders.list({ page: 3, limit: 50 });
++ const orders = await client.orders.list({ cursor, limit: 50 });
++ cursor = orders.nextCursor;
+```
+
+Then explain the behavior prose cannot show:
+
+- Cursors follow creation-time order.
+- A cursor is valid for 24 hours.
+- Changing filters invalidates the previous cursor.
+- The SDK returns `nextCursor: null` on the final page.
+
+The code proves the surface change, while the bullets define the operational constraints. Neither is complete alone.
+
+### State the rollback boundary
+
+Suppose version 4 cursors cannot be passed to version 3. The notes should say that rolling back the SDK is safe only before the application persists or exposes a v4 cursor.
+
+A practical rollback block might say:
+
+> Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back; after that point, disable pagination writes and contact support before downgrading.
+
+An explicit rollback boundary may prompt the engineering team to add a compatibility layer. Finding that risk before release leaves time to reduce it.
+
+### Separate known issues from migration work
+
+If the release has a known issue with cursors on empty filtered results, give it a visible section:
+
+```text
+Known issue: A filtered list with zero results can return an empty string
+for `nextCursor`; the expected value is `null`.
+
+Workaround: Treat both values as the end of the list.
+Tracking: SDK-917
+Fixed in: Planned for 4.0.1
+```
+
+Give this its own Known issues section. Include a searchable symptom, workaround, tracking reference, and expected resolution.
+
+### Finish with verification
+
+The release note should leave the reader with checks they can run:
+
+- CI and production report Node.js 20 or later.
+- The application no longer sends a numeric `page` parameter.
+- A full pagination test returns every record exactly once.
+- Duplicate webhook delivery does not create duplicate work.
+- Monitoring shows no unexplained increase in `400`, `401`, or `429` responses.
+
+Verification turns the notes into an upgrade tool. Without it, the page explains the change but leaves success undefined.
+
+## Release notes FAQ
+
+**How long should release notes be?**
+
+Use as much space as the upgrade decision requires, then stop. A small patch may need five precise bullets, while a major version may need a summary plus a separate migration guide.
+
+**Should release notes include every pull request?**
+
+No. Include work that changes user-visible behavior, compatibility, security, supported environments, or documented workflows.
+
+**Where should release notes be published?**
+
+Publish them at a stable, versioned URL that developers can search and link to. You can mirror a concise version in GitHub Releases or a package registry, but keep one canonical page.
+
+**What makes release notes trustworthy?**
+
+Consistent disclosure of impact, required action, deadlines, and known limitations. Developers trust notes when past releases helped them upgrade without surprises.
+
+**Can AI write release notes from commit history?**
+
+AI can cluster changes and produce a first draft, but commit history rarely contains complete user impact or migration context. A person who understands the release must verify compatibility, scope, security wording, and every required action.

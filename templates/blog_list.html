@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Writing | Ninad Pathak{% endblock %}
-{% block description %}Technical articles on AI agents, DevTools, developer documentation, and content strategy. Written by a programmer-turned-writer.{% endblock %}
-{% block canonical %}/blog/{% endblock %}
+{% block title %}Articles on DevRel, Documentation, and Technical Writing | Ninad Pathak{% endblock %}
+{% block description %}Personal writing on developer relations, documentation, technical content, code examples, and explaining developer products clearly.{% endblock %}
+{% block canonical %}/articles/{% endblock %}
 
 {% block content %}
 
 <section class="page-intro">
   <div class="container">
-    <div class="label">// Writing</div>
-    <h1>Thinking out loud.</h1>
+    <div class="label">// Articles</div>
+    <h1>Writing about developer products.</h1>
     <p class="lead">
-      Writing on AI infrastructure, developer tooling, and technical content strategy.
-      Practitioner-level posts from someone who builds the systems and writes about them.
+      I write about DevRel, documentation, technical content, and the work behind
+      making developer products easier to understand.
     </p>
   </div>
 </section>
@@ -21,7 +21,7 @@
   <div class="container">
     {% if posts %}
       {% for post in posts %}
-      <a href="/blog/{{ post.slug }}/" class="blog-row">
+      <a href="/articles/{{ post.slug }}/" class="blog-row">
         <div class="blog-row-title">{{ post.title }}</div>
         {% if post.description %}
         <div class="blog-row-desc">{{ post.description }}</div>

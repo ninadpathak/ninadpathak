@@ -7,7 +7,7 @@ tags:
 - ai
 - llm
 - infrastructure
-status: published
+status: retired
 ---
 
 Inference is where LLM projects die. The model works in testing. Push it to production and latency climbs, throughput craters, and your GPU budget evaporates. A demo that answers one question in 400ms can turn into a serving system that buckles at 50 concurrent users, and the problem only worsens as traffic grows.

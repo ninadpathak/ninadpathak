@@ -4,7 +4,7 @@ date: 2026-06-13
 slug: "coding-agent-setup-that-works"
 description: "A coding agent succeeds or fails before it writes a line. Here is the setup I use, the rules file, repository context, tools, permissions, and guardrails, that turns a capable model into an agent I trust with real work."
 tags: [ai, agents, devtools, developer-experience]
-status: published
+status: retired
 ---
 
 A coding agent fails or succeeds before it writes a line. The difference is the setup, the context I hand it and the limits I put around it. I have watched the same model produce careful, correct work in one repository and confident nonsense in another. The model was identical. The setup was not.

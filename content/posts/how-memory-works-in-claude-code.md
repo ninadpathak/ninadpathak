@@ -3,7 +3,7 @@ title: "How Memory Works in Claude Code"
 date: 2026-04-19
 description: "A practical guide to understanding how Claude Code retains context across sessions, uses project files, and manages long-term memory for coding tasks."
 tags: [ai, claude, agents, memory, anthropic, coding]
-status: published
+status: retired
 ---
 
 Claude Code ships with a multi-layered memory system that spans from ephemeral session context to persistent cross-session project knowledge. Anyone who has used Claude Code for more than a day has already interacted with this system without knowing it existed. I spent the last few weeks auditing exactly what gets stored, where, and how it influences agent behavior. Coming from AI coding agents like [Cursor](/blog/best-llms-for-coding/) or Copilot, you will find the memory model here familiar in shape and different under the hood.

@@ -3,7 +3,7 @@ title: "100ms Vector Search in the Browser: PGlite vs. SQLite-vec Head-to-Head"
 date: 2026-04-13
 description: "I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest WASM vector database for local-first AI applications."
 tags: [vector-search, wasm, pglite, sqlite-vec, edge-computing, technical-deep-dive]
-status: published
+status: retired
 ---
 
 Sub-100ms vector search in the browser has moved from a research novelty to a production requirement for local-first AI applications. Benchmarking 100,000 vectors on a 16GB MacBook Air M2, I watched PGlite (pgvector) and SQLite-vec separate along a clear architectural split. PGlite offers the full power of HNSW indexing and Postgres relational parity at the cost of a 3.2MB bundle. SQLite-vec provides a lean 800KB footprint and superior quantized brute-force speed. Once you push past 3072 dimensions, PGlite's HNSW implementation becomes mandatory for acceptable performance. For standard 384-dimension models, SQLite-vec's binary quantization achieves <5ms latency, effectively turning the browser into a high-performance retrieval engine.

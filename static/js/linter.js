@@ -196,6 +196,29 @@
     return issues;
   }
 
+  function findLongParagraphs(text) {
+    var issues = [];
+    var blocks = text.split(/\n\s*\n/);
+    var cursor = 0;
+    blocks.forEach(function(block) {
+      var idx = text.indexOf(block, cursor);
+      if (idx === -1) idx = cursor;
+      cursor = idx + block.length;
+      var trimmed = block.trim();
+      if (!trimmed || /^(#{1,6}\s|>|[-+*]\s|\d+[.)]\s|\||```|~~~)/.test(trimmed)) return;
+      var sentenceCount = getSentences(trimmed).length;
+      if (sentenceCount > 2) {
+        issues.push({
+          index: idx,
+          length: block.length,
+          matched: block,
+          sentenceCount: sentenceCount
+        });
+      }
+    });
+    return issues;
+  }
+
   // ─────────────────────────────────────────────────────────────────────
   // CORE LINT
   // ─────────────────────────────────────────────────────────────────────
@@ -247,6 +270,37 @@
         }
       });
     });
+
+    // More than two sentences in a prose paragraph
+    findLongParagraphs(text).forEach(function(lp) {
+      allIssues.push({
+        id: 'issue-' + Math.random().toString(36).substr(2, 9),
+        index: lp.index,
+        length: lp.length,
+        severity: 'error',
+        rule: 'paragraph_length',
+        label: 'Paragraph over two sentences',
+        matched: lp.matched,
+        excerpt: getExcerpt(text, lp.index, Math.min(lp.length, 80)),
+        message: lp.sentenceCount + ' sentences in one paragraph. Split it after the second sentence.'
+      });
+    });
+
+    // Personal blog voice
+    var firstPersonSignals = text.match(/\b(I|I'm|I've|I'd|I'll|me|my|mine)\b/gi) || [];
+    if ((text.match(/\b\w+\b/g) || []).length >= 100 && firstPersonSignals.length === 0) {
+      allIssues.push({
+        id: 'issue-' + Math.random().toString(36).substr(2, 9),
+        index: 0,
+        length: Math.min(text.length, 80),
+        severity: 'info',
+        rule: 'personal_voice',
+        label: 'Missing personal voice',
+        matched: text.substring(0, Math.min(text.length, 80)),
+        excerpt: getExcerpt(text, 0, Math.min(text.length, 80)),
+        message: 'No first-person references found. Add one only if a real opinion, decision, or experience would make the article more useful.'
+      });
+    }
 
     // Passive voice
     findPassiveVoice(text).forEach(function(pv) {

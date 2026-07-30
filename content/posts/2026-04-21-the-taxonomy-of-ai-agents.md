@@ -4,7 +4,7 @@ date: 2026-04-21
 slug: "the-taxonomy-of-ai-agents"
 description: "Most AI agent taxonomies are either too academic or too vague to be useful. Here is the classification I use when I need to decide what kind of agent to build."
 tags: [ai, agents, architecture]
-status: published
+status: retired
 ---
 
 Every few months someone publishes a new taxonomy of AI agents. The diagrams look clean, the categories feel comprehensive, and then you try to use one to decide whether your customer support bot should run a single-agent loop or a multi-agent hierarchy, and the taxonomy dissolves into hand-waving.

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html {
+      background: #f8f8f6;
+      color-scheme: light;
+    }
+    html[data-theme="dark"] {
+      background: #090909;
+      color-scheme: dark;
+    }
+    html.theme-preload *,
+    html.theme-preload *::before,
+    html.theme-preload *::after {
+      transition: none !important;
+    }
+  </style>
+  <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation Review Checklist Before You Publish | Ninad Pathak</title>
+  <meta name="description" content="Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Documentation Review Checklist Before You Publish">
+  <meta property="og:description" content="Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.">
+  <meta property="og:url"         content="https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/">
+  <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@ninadwrites">
+  <meta name="twitter:title"       content="Ninad Pathak">
+  <meta name="twitter:description" content="Developer relations content, documentation, tutorials, and technical articles that help developer products earn trust and adoption.">
+  <meta name="twitter:image"       content="https://ninadpathak.com/static/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/highlight.css">
+  <link rel="stylesheet" href="/static/css/visuals.css">
+  <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Ninad Pathak" href="/feed.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-23WKEJ8P2N');
+  </script>
+
+  <!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Documentation Review Checklist Before You Publish",
+  "description": "Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.",
+  "image": "https://ninadpathak.com/static/og-image.png",
+  "inLanguage": "en-US",
+  "wordCount": 3076,
+  "keywords": "technical-writing, documentation-workflow, docs-as-code",
+  "articleSection": "technical-writing",
+  "author": {
+    "@type": "Person",
+    "name": "Ninad Pathak",
+    "url": "https://ninadpathak.com/about/"
+  },
+  "datePublished": "2026-07-30",
+  "dateModified": "2026-07-30",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ninad Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ninadpathak.com/static/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ninadpathak.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ninadpathak.com/articles/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Documentation Review Checklist Before You Publish",
+      "item": "https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">ninad pathak</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/work/"      class="nav-link ">Work</a></li>
+      <li><a href="/portfolio/" class="nav-link ">Portfolio</a></li>
+      <li><a href="/projects/"  class="nav-link ">Projects</a></li>
+      <li><a href="/articles/"  class="nav-link active">Articles</a></li>
+      <li><a href="/about/"     class="nav-link ">About</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg class="i-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun"  width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="https://zcal.co/i/AGG1iJtv" class="nav-cta booking-modal-trigger" rel="noopener">Book a Call</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-top">
+    <a href="/" class="nav-logo">ninad pathak</a>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links">
+    <a href="/work/"      class="mobile-nav-link">Work</a>
+    <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
+    <a href="/projects/"  class="mobile-nav-link">Projects</a>
+    <a href="/articles/"  class="mobile-nav-link">Articles</a>
+    <a href="/about/"     class="mobile-nav-link">About</a>
+    <a href="/contact/"   class="mobile-nav-link">Contact</a>
+  </nav>
+  <div class="mobile-nav-footer">
+    <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="main" tabindex="-1">
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/articles/">Articles</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Documentation Review Checklist Before You Publish</li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <a href="/articles/" class="back-link">← All articles</a>
+      <div class="post-meta">
+        <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <time class="post-meta-date" datetime="2026-07-30">Jul 30, 2026</time>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <span class="post-meta-time">15 min read</span>
+      </div>
+      <h1 class="post-title">Documentation Review Checklist Before You Publish</h1>
+      <p class="lead">Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.</p>
+      <div class="post-tags">
+        <span class="tag">technical-writing</span>
+        <span class="tag">documentation-workflow</span>
+        <span class="tag">docs-as-code</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      <aside class="article-summary" aria-labelledby="article-summary-title">
+        <div class="article-summary-label" id="article-summary-title">The short version</div>
+        <ul>
+          <li>Review technical accuracy, reader success, and presentation in separate passes.</li>
+          <li>Run every procedure and code sample in the environment the page promises.</li>
+          <li>Inspect the rendered page before approval.</li>
+          <li>Assign clear owners for technical, editorial, and release approval.</li>
+        </ul>
+      </aside>
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">Contents</div>
+        <div class="toc">
+<ul>
+<li><a href="#confirm-the-page-has-a-clear-job">Confirm the page has a clear job</a><ul>
+<li><a href="#name-the-reader-and-the-task">Name the reader and the task</a></li>
+<li><a href="#check-for-overlap">Check for overlap</a></li>
+<li><a href="#verify-the-content-type">Verify the content type</a></li>
+</ul>
+</li>
+<li><a href="#review-technical-accuracy">Review technical accuracy</a><ul>
+<li><a href="#test-the-documented-behavior">Test the documented behavior</a></li>
+<li><a href="#challenge-hidden-assumptions">Challenge hidden assumptions</a></li>
+<li><a href="#check-risk-and-recovery">Check risk and recovery</a></li>
+</ul>
+</li>
+<li><a href="#run-every-procedure-and-example">Run every procedure and example</a><ul>
+<li><a href="#start-clean">Start clean</a></li>
+<li><a href="#check-the-complete-path">Check the complete path</a></li>
+<li><a href="#test-the-failure-path">Test the failure path</a></li>
+</ul>
+</li>
+<li><a href="#review-structure-and-readability">Review structure and readability</a><ul>
+<li><a href="#scan-headings-on-their-own">Scan headings on their own</a></li>
+<li><a href="#check-paragraph-and-sentence-load">Check paragraph and sentence load</a></li>
+<li><a href="#use-lists-and-tables-deliberately">Use lists and tables deliberately</a></li>
+</ul>
+</li>
+<li><a href="#inspect-links-visuals-and-accessibility">Inspect links, visuals, and accessibility</a><ul>
+<li><a href="#check-every-link-in-context">Check every link in context</a></li>
+<li><a href="#make-every-visual-prove-something">Make every visual prove something</a></li>
+<li><a href="#preserve-semantic-structure">Preserve semantic structure</a></li>
+</ul>
+</li>
+<li><a href="#review-the-rendered-page">Review the rendered page</a><ul>
+<li><a href="#use-a-preview-build">Use a preview build</a></li>
+<li><a href="#check-the-complete-page-frame">Check the complete page frame</a></li>
+</ul>
+</li>
+<li><a href="#check-search-and-retrieval-signals">Check search and retrieval signals</a><ul>
+<li><a href="#confirm-the-canonical-answer">Confirm the canonical answer</a></li>
+<li><a href="#use-concrete-language">Use concrete language</a></li>
+</ul>
+</li>
+<li><a href="#align-the-page-with-the-release">Align the page with the release</a><ul>
+<li><a href="#match-product-state">Match product state</a></li>
+<li><a href="#assign-maintenance-ownership">Assign maintenance ownership</a></li>
+</ul>
+</li>
+<li><a href="#split-approval-by-responsibility">Split approval by responsibility</a></li>
+<li><a href="#worked-example-review-an-api-authentication-guide">Worked example: review an API authentication guide</a><ul>
+<li><a href="#pass-one-verify-the-product">Pass one: verify the product</a></li>
+<li><a href="#pass-two-run-the-reader-path">Pass two: run the reader path</a></li>
+<li><a href="#pass-three-add-the-failure-path">Pass three: add the failure path</a></li>
+<li><a href="#pass-four-edit-the-page-as-a-route">Pass four: edit the page as a route</a></li>
+<li><a href="#pass-five-inspect-the-publication-frame">Pass five: inspect the publication frame</a></li>
+<li><a href="#classify-comments-by-severity">Classify comments by severity</a></li>
+</ul>
+</li>
+<li><a href="#automate-the-mechanical-checks">Automate the mechanical checks</a><ul>
+<li><a href="#good-candidates-for-automation">Good candidates for automation</a></li>
+<li><a href="#keep-judgment-out-of-brittle-rules">Keep judgment out of brittle rules</a></li>
+<li><a href="#report-failures-where-authors-can-act">Report failures where authors can act</a></li>
+</ul>
+</li>
+<li><a href="#documentation-review-checklist">Documentation review checklist</a><ul>
+<li><a href="#purpose-and-scope">Purpose and scope</a></li>
+<li><a href="#technical-verification">Technical verification</a></li>
+<li><a href="#editorial-quality">Editorial quality</a></li>
+<li><a href="#published-experience">Published experience</a></li>
+</ul>
+</li>
+<li><a href="#documentation-review-faq">Documentation review FAQ</a></li>
+</ul>
+</div>
+
+      </nav>
+      <div class="post-content">
+        <p>The pull request is ready for review, and the comments are all about headings, wording, and screenshot placement. Nobody has copied the command from the rendered page or checked whether the new permission exists in production.</p>
+<p>Then the page ships with a clean title and a broken path. The checklist separates product behavior, the reader’s route, and the rendered page.</p>
+<h2 id="confirm-the-page-has-a-clear-job">Confirm the page has a clear job</h2>
+<p>Before getting into individual sentences, check whether the page should exist in this form at all. A precise duplicate is still a duplicate.</p>
+<h3 id="name-the-reader-and-the-task">Name the reader and the task</h3>
+<p>Write down who the page is for and what they should be able to do after reading it. If two reviewers give different answers, the title and introduction need work.</p>
+<p>Check that the page begins at the reader’s real starting point. An administrator configuring single sign-on and a developer calling the authentication API should not be pushed through the same assumptions.</p>
+<h3 id="check-for-overlap">Check for overlap</h3>
+<p>Search the site for the primary task, product name, error text, and likely synonyms. Decide whether the draft replaces, updates, or links to an existing page.</p>
+<p>When two pages satisfy the same intent, consolidate the useful material and redirect the weaker URL. Publishing another answer because the first is inconvenient to edit creates a maintenance problem.</p>
+<h3 id="verify-the-content-type">Verify the content type</h3>
+<p>A tutorial guides a complete learning path, and a how-to page solves a known task. Reference records exact behavior, and explanation makes a concept or decision understandable.</p>
+<p>If the draft keeps switching modes, split the secondary material or link to it. The <a href="/articles/how-to-write-a-technical-tutorial-that-actually-teaches/">technical tutorial guide</a> covers the difference in more detail.</p>
+<h2 id="review-technical-accuracy">Review technical accuracy</h2>
+<p>I’d do the subject-matter pass before polishing sentences. There’s no point refining a paragraph that describes an obsolete API.</p>
+<h3 id="test-the-documented-behavior">Test the documented behavior</h3>
+<p>Verify the page against the current product. Check names, defaults, permissions, supported versions, error behavior, and any state the user cannot easily reverse.</p>
+<p>For a UI procedure, follow the exact labels and path in the released interface. For an API or CLI page, run the request or command with the documented inputs.</p>
+<h3 id="challenge-hidden-assumptions">Challenge hidden assumptions</h3>
+<p>Look for access, software, data, and configuration the author already had. These are common omissions:</p>
+<ul>
+<li>Required account tier or role</li>
+<li>Runtime and package versions</li>
+<li>Environment variables and secrets</li>
+<li>Billing or region restrictions</li>
+<li>Existing resources or sample data</li>
+<li>Feature flags and rollout state</li>
+<li>Operating system or shell differences</li>
+</ul>
+<p>Move a prerequisite before the first step that depends on it. If obtaining access can take time, say so near the start.</p>
+<h3 id="check-risk-and-recovery">Check risk and recovery</h3>
+<p>Mark steps that delete data, rotate credentials, change production traffic, create billable resources, or prevent rollback. Add a warning before the action and explain the safer test path where one exists.</p>
+<p>Troubleshooting should identify a symptom, diagnostic check, likely cause, and recovery. “Try again” is not recovery guidance.</p>
+<h2 id="run-every-procedure-and-example">Run every procedure and example</h2>
+<p>Code can look perfectly reasonable and still fail as soon as someone copies it. Run it from the rendered page in the same environment you promised the reader.</p>
+<h3 id="start-clean">Start clean</h3>
+<p>Use a fresh project, container, virtual machine, or test account. Existing credentials, cached packages, and globally installed tools can hide missing steps.</p>
+<p>Record the versions used during the test. Version-sensitive pages should expose that information in the document or its maintenance metadata.</p>
+<h3 id="check-the-complete-path">Check the complete path</h3>
+<p>For each procedure, confirm:</p>
+<ul>
+<li>Steps begin from the documented starting state.</li>
+<li>Commands work in the named shell.</li>
+<li>File paths and working directories are explicit.</li>
+<li>Sample values are safe to copy.</li>
+<li>Responses and screenshots match the current product.</li>
+<li>Each stage has an observable success check.</li>
+<li>Cleanup removes test data, credentials, and billable resources.</li>
+</ul>
+<p>One successful final screenshot is not enough. A reader needs to know whether step three worked before attempting step four.</p>
+<h3 id="test-the-failure-path">Test the failure path</h3>
+<p>Trigger the error the page claims to solve. Confirm the message, status code, exit code, and recovery step.</p>
+<p>If the product fails differently across versions or environments, document the boundary. A “Common issues” section still needs symptoms that help the reader choose the right recovery path.</p>
+<h2 id="review-structure-and-readability">Review structure and readability</h2>
+<p>Once the technical path works, read the page like someone deciding whether to follow it. The title, opening, headings, lists, code, and visuals should make the route visible before every paragraph is read.</p>
+<h3 id="scan-headings-on-their-own">Scan headings on their own</h3>
+<p>Hide the paragraphs and read only the heading outline. It should describe the task or argument without a sequence of labels such as Overview, Setup, Configuration, Usage, and Conclusion.</p>
+<p>Google’s <a href="https://developers.google.com/style/headings">heading guidance</a> recommends descriptive, sentence-case headings, task verbs for procedures, noun phrases for concepts, and a logical H1–H3 hierarchy. Heading levels describe structure, and CSS handles appearance.</p>
+<h3 id="check-paragraph-and-sentence-load">Check paragraph and sentence load</h3>
+<p>Give each paragraph one job and keep it to no more than two sentences on this site. Split setup, consequence, and exception when they compete inside the same block.</p>
+<p>Short does not mean choppy. Vary sentence length, use specific transitions, and remove throat-clearing phrases that repeat the heading.</p>
+<h3 id="use-lists-and-tables-deliberately">Use lists and tables deliberately</h3>
+<p>Use a numbered list when order matters and bullets when it does not. A table earns its space when readers need to compare the same fields across several options.</p>
+<p>Introduce a dense list or table so the reader knows what to look for. Avoid turning every group of three ideas into a card, callout, or checklist.</p>
+<h2 id="inspect-links-visuals-and-accessibility">Inspect links, visuals, and accessibility</h2>
+<p>A page is more than its prose. Links, screenshots, headings, code formatting, and landmarks determine whether people can navigate and use it.</p>
+<h3 id="check-every-link-in-context">Check every link in context</h3>
+<p>Open internal and external links from the rendered page. Confirm that anchors reach the intended section, redirects are intentional, and link text describes the destination without relying on “here.”</p>
+<p>Add links where a reader needs prerequisite knowledge, reference detail, or a next step. Remove links that interrupt the task without helping it.</p>
+<h3 id="make-every-visual-prove-something">Make every visual prove something</h3>
+<p>A screenshot should help a reader find a control, recognize a state, compare behavior, or verify a result. Crop irrelevant interface chrome and keep enough surrounding context to show where the state belongs.</p>
+<p>Write alt text for the information conveyed by the image, then add a caption that explains what to notice. Those two pieces should not repeat each other word for word.</p>
+<h3 id="preserve-semantic-structure">Preserve semantic structure</h3>
+<p>W3C’s <a href="https://www.w3.org/WAI/tutorials/page-structure/">page structure tutorial</a> explains how headings and landmarks help screen-reader, keyboard, mobile, and search users navigate. Use one descriptive H1, nest headings logically, label navigation regions, and retain visible focus states.</p>
+<p>Check color contrast, keyboard access, table headers, code overflow, zoom, and meaningful alt text. Accessibility cannot be recovered with an automated score alone.</p>
+<h2 id="review-the-rendered-page">Review the rendered page</h2>
+<p>The Markdown can look tidy even when the published page is a mess. Long headings wrap, tables overflow, code loses characters, images dominate the screen, and generated anchors collide.</p>
+<h3 id="use-a-preview-build">Use a preview build</h3>
+<p>Open the exact output that will be deployed and review it at desktop and narrow viewport widths. Follow the table of contents, copy code, open images, and test the previous and next routes.</p>
+<p>GitLab can create <a href="https://docs.gitlab.com/development/documentation/review_apps/">documentation review apps</a> for merge requests, which lets reviewers inspect the rendered change before it reaches the main site. The broader <a href="https://docs.gitlab.com/development/documentation/workflow/">GitLab documentation workflow</a> includes technical, writing, and maintainer review around the product change.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Documentation review inside GitLab's workflow</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/gitlab-docs-workflow.png" alt="GitLab documentation workflow page showing authoring, review, product manager, developer, and technical writer responsibilities" loading="lazy">
+  </div>
+</div>
+<p class="visual-caption">GitLab places review inside the product workflow and splits responsibility across developers, maintainers, product managers, and technical writers. One writer is not expected to verify everything at the end.</p>
+
+<h3 id="check-the-complete-page-frame">Check the complete page frame</h3>
+<p>Inspect more than the article body:</p>
+<ul>
+<li>Title, description, canonical URL, and publication date</li>
+<li>Breadcrumbs and local navigation</li>
+<li>Table of contents and heading anchors</li>
+<li>Header and footer collisions</li>
+<li>Related links and article cards</li>
+<li>Structured data and social preview</li>
+<li>Cookie, banner, and feedback overlays</li>
+</ul>
+<p>A component can work on most pages and still fail on the longest title or widest code sample. Include the awkward page in the review set.</p>
+<h2 id="check-search-and-retrieval-signals">Check search and retrieval signals</h2>
+<p>SEO review should make the page easier to identify, not stuff it with alternate phrases. Match the title, description, H1, introduction, and URL to one clear reader intent.</p>
+<h3 id="confirm-the-canonical-answer">Confirm the canonical answer</h3>
+<p>Make sure the page has a self-referencing canonical and is allowed to be indexed. Update or redirect older pages that compete for the same question.</p>
+<p>Link to the new page from its section parent and relevant sibling articles. A page that exists only in the sitemap is technically published but practically orphaned.</p>
+<h3 id="use-concrete-language">Use concrete language</h3>
+<p>Name product fields, commands, error messages, file formats, versions, and outcomes precisely. These details help humans scan and give search and retrieval systems better evidence about when the page answers a question.</p>
+<p>An FAQ earns its place when adjacent questions need short answers but do not deserve separate pages. Repeating the article with question marks adds nothing.</p>
+<h2 id="align-the-page-with-the-release">Align the page with the release</h2>
+<p>Documentation can pass every editorial check and still ship at the wrong time. Confirm which version contains the behavior and whether the page should appear before, with, or after the release.</p>
+<h3 id="match-product-state">Match product state</h3>
+<p>Check feature flags, preview labels, availability, plans, regions, and supported versions. A page about unreleased behavior needs explicit status and should not displace the current answer in search.</p>
+<p>For breaking changes, connect the task page to the <a href="/articles/how-to-write-a-changelog-developers-actually-read/">changelog</a> and <a href="/articles/writing-release-notes-that-developers-trust/">release notes</a>. The compatibility statement must agree everywhere.</p>
+<h3 id="assign-maintenance-ownership">Assign maintenance ownership</h3>
+<p>Record the team or person responsible for the page and the events that should trigger review. Product changes, dependency releases, UI renames, policy changes, and repeated support questions are stronger triggers than a decorative “review annually” note.</p>
+<p>Assign ownership for the next update before publication. Accuracy continues after the release.</p>
+<h2 id="split-approval-by-responsibility">Split approval by responsibility</h2>
+<p>One reviewer should not pretend to verify everything. Assign the checks to people who can make the relevant claim.</p>
+<table>
+<thead>
+<tr>
+<th>Reviewer</th>
+<th>Owns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Engineer or subject-matter expert</td>
+<td>Product behavior, code, versions, risk, and recovery</td>
+</tr>
+<tr>
+<td>Technical writer or editor</td>
+<td>Reader fit, structure, terminology, clarity, and links</td>
+</tr>
+<tr>
+<td>Accessibility reviewer or trained contributor</td>
+<td>Semantics, keyboard use, visuals, contrast, and alternatives</td>
+</tr>
+<tr>
+<td>Product or release owner</td>
+<td>Scope, availability, timing, migration, and support status</td>
+</tr>
+<tr>
+<td>Maintainer</td>
+<td>Build, metadata, navigation, redirects, and deployment readiness</td>
+</tr>
+</tbody>
+</table>
+<p>Small teams can combine roles while keeping the questions separate. The request example still needs an engineer to execute it and an editor to check the reader’s route.</p>
+<h2 id="worked-example-review-an-api-authentication-guide">Worked example: review an API authentication guide</h2>
+<p>Suppose a draft begins with this instruction:</p>
+<blockquote>
+<p>Generate an API key in Settings, add it to your request, and run the example below. The API returns your account.</p>
+</blockquote>
+<p>The prose is short and grammatical. It is also missing the permission, navigation path, header format, base URL, safe secret handling, expected response, failure behavior, and key-revocation step.</p>
+<h3 id="pass-one-verify-the-product">Pass one: verify the product</h3>
+<p>The technical reviewer follows the current interface and discovers that only workspace owners can create keys. The control moved from Settings to Developer settings, and new keys are shown only once.</p>
+<p>Those facts change the procedure:</p>
+<ol>
+<li>Sign in as a workspace owner.</li>
+<li>Go to <strong>Developer settings → API keys</strong>.</li>
+<li>Select <strong>Create key</strong>.</li>
+<li>Enter a name and choose the required scopes.</li>
+<li>Copy the key before closing the dialog.</li>
+</ol>
+<p>The reviewer also checks that the API accepts <code>Authorization: Bearer</code>; the older draft used <code>X-API-Key</code>. Treat that as a blocking accuracy problem.</p>
+<h3 id="pass-two-run-the-reader-path">Pass two: run the reader path</h3>
+<p>The reviewer starts in a clean shell and copies the rendered example:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">ORBIT_API_KEY</span><span class="o">=</span><span class="s2">&quot;replace-with-your-test-key&quot;</span>
+
+curl<span class="w"> </span>--fail-with-body<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--request<span class="w"> </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--url<span class="w"> </span><span class="s2">&quot;https://api.orbit.example/v1/account&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--header<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$ORBIT_API_KEY</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<p>The draft had placed the raw key directly in shell history. The revised example uses an environment variable and points readers to the production secret-management guidance.</p>
+<p>The successful response needs enough detail to verify:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;acct_01J2M7X8Q4&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Docs sandbox&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The guide should tell the reader to confirm that <code>mode</code> is <code>test</code>. Receiving any JSON object is not proof that the correct workspace or environment is active.</p>
+<h3 id="pass-three-add-the-failure-path">Pass three: add the failure path</h3>
+<p>Remove one character from the key and run the request again. The current API returns:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">2</span> <span class="m">401</span>
+<span class="na">content-type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invalid_api_key&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The API key is invalid or has been revoked.&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Now the troubleshooting note can distinguish an invalid key from a valid key missing the required scope, which returns <code>403 insufficient_scope</code>. Without reproducing both states, the guide might tell every reader to regenerate credentials.</p>
+<h3 id="pass-four-edit-the-page-as-a-route">Pass four: edit the page as a route</h3>
+<p>The editorial reviewer changes a topic outline such as Setup, Usage, Errors, and Security into task headings:</p>
+<ul>
+<li>Create a test API key</li>
+<li>Send an authenticated request</li>
+<li>Fix an invalid or under-scoped key</li>
+<li>Store the key outside source control</li>
+<li>Revoke the test key</li>
+</ul>
+<p>The opening now states the audience, permission, and result. A warning appears before the key is created, and the cleanup step appears before the page sends the reader elsewhere.</p>
+<h3 id="pass-five-inspect-the-publication-frame">Pass five: inspect the publication frame</h3>
+<p>The rendered review catches three issues that were invisible in the source:</p>
+<ul>
+<li>The wide JSON response overflows on a phone.</li>
+<li>The Developer settings anchor points to the old Setup heading.</li>
+<li>The code-copy button includes the shell prompt, causing the pasted command to fail.</li>
+</ul>
+<p>The canonical still points to an older authentication page, which would tell search engines that the old answer is preferred. The reviewer fixes the canonical, redirects the duplicate page, and adds a link from the API section landing page.</p>
+<h3 id="classify-comments-by-severity">Classify comments by severity</h3>
+<p>Not every review comment should block publication. Use a shared severity model:</p>
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Blocker</td>
+<td>Could cause failure, loss, exposure, or an unusable task</td>
+<td>Wrong authentication header</td>
+</tr>
+<tr>
+<td>Major</td>
+<td>A substantial group cannot complete or understand the task</td>
+<td>Owner permission is omitted</td>
+</tr>
+<tr>
+<td>Minor</td>
+<td>The task works but the page is less clear or consistent</td>
+<td>Heading does not match local style</td>
+</tr>
+<tr>
+<td>Follow-up</td>
+<td>Valuable improvement outside the release scope</td>
+<td>Add examples for another SDK</td>
+</tr>
+</tbody>
+</table>
+<p>Severity keeps a launch decision from becoming a contest between strongly worded comments. A comma and an unsafe command no longer carry equal weight.</p>
+<h2 id="automate-the-mechanical-checks">Automate the mechanical checks</h2>
+<p>Human reviewers should spend their attention on product truth, reader decisions, and risk. Machines are better at repeatable checks with deterministic answers.</p>
+<h3 id="good-candidates-for-automation">Good candidates for automation</h3>
+<p>Run these checks in continuous integration:</p>
+<ul>
+<li>Markdown and frontmatter syntax</li>
+<li>Internal link and anchor resolution</li>
+<li>Duplicate titles, slugs, and heading IDs</li>
+<li>Missing alt attributes</li>
+<li>Heading-level jumps</li>
+<li>Forbidden or deprecated product terms</li>
+<li>Code formatting and selected executable examples</li>
+<li>Build success and broken templates</li>
+<li>Canonical, sitemap, and robots rules</li>
+<li>Redirect loops and chains</li>
+</ul>
+<p>Some external link checks need retries and allowlists because websites block automated requests. A third-party marketing page that occasionally returns <code>403</code> should not make the whole documentation build unreliable.</p>
+<h3 id="keep-judgment-out-of-brittle-rules">Keep judgment out of brittle rules</h3>
+<p>A linter can flag passive voice, long sentences, or first-person pronouns. Treat those subjective style patterns as prompts for review.</p>
+<p>Hard gates should protect rules with unambiguous value, such as valid Markdown and working internal links. An earlier version of this site forced a minimum number of first-person references, and sentences started serving the counter instead of the article.</p>
+<h3 id="report-failures-where-authors-can-act">Report failures where authors can act</h3>
+<p>Name the file, line, rule, and repair in every automated failure. “Documentation quality failed” sends the author hunting through logs and makes the tool feel arbitrary.</p>
+<p>When possible, show a local command that reproduces the failure. Authors fix checks faster when the local and continuous-integration behavior match.</p>
+<h2 id="documentation-review-checklist">Documentation review checklist</h2>
+<h3 id="purpose-and-scope">Purpose and scope</h3>
+<ul>
+<li>The reader and intended outcome are explicit.</li>
+<li>The page has one primary intent and no competing duplicate.</li>
+<li>The content type matches the reader’s need.</li>
+<li>Prerequisites and non-goals are clear.</li>
+</ul>
+<h3 id="technical-verification">Technical verification</h3>
+<ul>
+<li>Product names, UI labels, defaults, and permissions are current.</li>
+<li>Commands and code run in the documented environment.</li>
+<li>Expected output and success checks are accurate.</li>
+<li>Risky actions include warnings, recovery, and rollback limits.</li>
+<li>Errors and troubleshooting steps have been reproduced.</li>
+</ul>
+<h3 id="editorial-quality">Editorial quality</h3>
+<ul>
+<li>The opening gives the reader a useful starting point.</li>
+<li>H2 and H3 headings describe the route and follow a logical hierarchy.</li>
+<li>Paragraphs contain no more than two sentences.</li>
+<li>Lists, tables, notes, and code blocks have a clear purpose.</li>
+<li>Terminology and voice stay consistent.</li>
+</ul>
+<h3 id="published-experience">Published experience</h3>
+<ul>
+<li>Internal, external, and anchor links work.</li>
+<li>Screenshots are current, focused, captioned, and accessible.</li>
+<li>The page works with keyboard navigation, zoom, and narrow screens.</li>
+<li>Metadata, canonical, structured data, and indexability are correct.</li>
+<li>Navigation, related links, redirects, and release timing are ready.</li>
+</ul>
+<h2 id="documentation-review-faq">Documentation review FAQ</h2>
+<p><strong>Who should review technical documentation?</strong></p>
+<p>Use a subject-matter expert for behavior and code, an editor for reader success and structure, and a maintainer or release owner for publication state. One person can hold several roles on a small team, but each review question still needs an answer.</p>
+<p><strong>Should documentation block a product release?</strong></p>
+<p>Missing or inaccurate instructions should block a release when users cannot adopt, operate, migrate, or recover safely without them. Minor editorial improvements can follow through a tracked change when the published page remains correct and usable.</p>
+<p><strong>Can automated checks replace documentation review?</strong></p>
+<p>No. Automation can catch broken links, invalid markup, style patterns, spelling, and build failures, but it cannot reliably verify product behavior or whether the page solves the reader’s task.</p>
+<p><strong>How often should published documentation be reviewed?</strong></p>
+<p>Review it when the product, dependency, interface, or supported workflow changes. Add scheduled checks for high-traffic and high-risk pages, but do not treat a date alone as proof of freshness.</p>
+<p><strong>What should happen when a review finds major problems?</strong></p>
+<p>Publish when the technical path and claims are verified. A scheduled slot can move to the next prepared article.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="post-related">
+  <div class="prose-container">
+    <h3>Related Posts</h3>
+    <div class="related-grid">
+      <a href="/articles/how-to-organize-a-documentation-site/" class="related-card">
+        <div class="related-card-date">2026-07-30</div>
+        <div class="related-card-title">How to Organize Documentation That Has Drifted</div>
+      </a>
+      <a href="/articles/writing-release-notes-that-developers-trust/" class="related-card">
+        <div class="related-card-date">2026-04-03</div>
+        <div class="related-card-title">Writing Release Notes That Developers Trust</div>
+      </a>
+      <a href="/articles/how-to-write-a-technical-tutorial-that-actually-teaches/" class="related-card">
+        <div class="related-card-date">2026-04-02</div>
+        <div class="related-card-title">How to Write a Technical Tutorial That Actually Teaches</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-block section-block-top-border">
+  <div class="prose-container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-title-compact">Need a technical writer?</h2>
+        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize-iframe') {
+      const iframes = document.querySelectorAll('iframe');
+      for (let i = 0; i < iframes.length; i++) {
+        if (iframes[i].contentWindow === e.source) {
+          iframes[i].style.height = e.data.height + 'px';
+          break;
+        }
+      }
+    }
+  }, false);
+</script>
+</main>
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-modal-backdrop" data-booking-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="booking-modal-header">
+      <div>
+        <div class="booking-modal-label">// Book a Call</div>
+        <h2 id="bookingModalTitle">30-minute intro call</h2>
+      </div>
+      <button class="booking-modal-close" id="bookingModalClose" aria-label="Close booking modal">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="booking-modal-body">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/AGG1iJtv">30 Minute Sync - Schedule a meeting</a>
+      </div>
+      <p class="booking-modal-fallback">If the embedded calendar does not load, <a href="https://zcal.co/i/AGG1iJtv" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">ninad pathak</div>
+        <p class="footer-desc">Developer relations content for technical products: documentation, tutorials, code examples, and articles that earn trust and adoption.</p>
+      </div>
+
+      <nav class="footer-group" aria-label="Important links">
+        <div class="footer-heading">Important links</div>
+        <div class="footer-links">
+          <a href="/work/" class="footer-link">Work</a>
+          <a href="/portfolio/" class="footer-link">Portfolio</a>
+          <a href="/projects/" class="footer-link">Projects</a>
+          <a href="/articles/" class="footer-link">Articles</a>
+          <a href="/contact/" class="footer-link">Contact</a>
+          <a href="/feed.xml" class="footer-link">RSS</a>
+        </div>
+      </nav>
+
+      <div class="footer-group">
+        <div class="footer-heading">Latest posts</div>
+        <div class="footer-links">
+          <a href="/articles/how-to-organize-a-documentation-site/" class="footer-link">How to Organize Documentation That Has Drifted</a>
+          <a href="/articles/documentation-review-checklist-before-you-publish/" class="footer-link">Documentation Review Checklist Before You Publish</a>
+          <a href="/articles/writing-release-notes-that-developers-trust/" class="footer-link">Writing Release Notes That Developers Trust</a>
+        </div>
+      </div>
+
+      <nav class="footer-group" aria-label="Company links">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="/about/" class="footer-link">About</a>
+          <a href="/terms/" class="footer-link">Terms</a>
+          <a href="/privacy/" class="footer-link">Privacy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-copy">© 2026 Ninad Pathak</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+
+    
+    
+    </body>
+
+
+
+</html>

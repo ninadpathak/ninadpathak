@@ -1,5 +1,10 @@
 jinja2
 markdown
-python-frontmatter
+# 1.1+ requires Python 3.10's typing.TypeGuard. Cloudflare's Python 3.9
+# build image and the local build both need the last compatible release.
+python-frontmatter>=1.0,<1.1
 pyyaml
 pygments
+# Python 3.11 provides tomllib in the standard library; older supported
+# environments use this compatible backport.
+tomli>=2.0; python_version < "3.11"

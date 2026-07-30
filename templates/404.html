@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Page not found | Ninad Pathak{% endblock %}
+{% block description %}The requested page could not be found.{% endblock %}
+{% block robots %}noindex, follow{% endblock %}
+{% block canonical %}/404.html{% endblock %}
+{% block og_url %}/404.html{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// 404</div>
+    <h1>This page is no longer here.</h1>
+    <p class="lead">The content may have been retired during the documentation-library rebuild, or the address may be incorrect.</p>
+    <div class="hero-actions">
+      <a href="/articles/" class="btn btn-primary">Browse articles →</a>
+      <a href="/projects/" class="btn btn-outline">View projects</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

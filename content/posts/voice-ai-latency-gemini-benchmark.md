@@ -3,7 +3,7 @@ title: "The 800ms Barrier: Profiling the Latency Chain of a Real-Time Gemini 3.1
 date: 2026-04-16
 description: "I built a sub-second latency voice assistant and profiled every millisecond of the Audio-to-Audio request/response loop on a MacBook Air M2. Here is the bottleneck analysis."
 tags: [voice-ai, real-time, gemini, latency, benchmarking, webrtc, engineering]
-status: published
+status: retired
 ---
 
 Sub-second Audio-to-Audio (A2A) latency for conversational AI has moved from a research constraint to a production requirement. The difference between "technically impressive" and "feels like talking to a human" is measured in milliseconds, not model quality.

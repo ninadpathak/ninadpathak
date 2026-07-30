@@ -3,7 +3,7 @@ title: "Technical Writing for Engineers: The 80/20 Guide"
 date: 2026-04-18
 description: Most engineering documentation fails for the same reasons. Here is what actually moves the needle.
 tags: [technical-writing, developer-experience, engineering-culture]
-status: published
+status: review
 ---
 
 Documentation debt accumulates silently. It starts when a project ships without a README, compounds when features get added but never explained, and becomes critical when a new engineer joins and spends three days reconstructing knowledge that lived in one person's head. I watched this play out at my last job. The senior engineer who built the entire auth system left, and the three people who inherited it spent two weeks rebuilding things like the token refresh flow and the permission model, none of which was written down anywhere.

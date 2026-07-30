@@ -4,7 +4,7 @@ date: "2026-05-11"
 slug: "shared-vs-isolated-memory-multi-agent"
 description: "How to choose between shared and isolated memory architectures for multi-agent systems, with trade-offs from production deployments."
 tags: ["ai-agents", "multi-agent", "agent-memory", "agent-architecture"]
-status: published
+status: retired
 ---
 
 A memory architecture decision on a multi-agent pipeline tripped me up repeatedly last year. Three agents needed to coordinate on a document processing task: one extracted structured fields from contracts, one validated those fields against business rules, one wrote the final summary. Shared memory was my first choice because it seemed efficient. The [taxonomy of AI agents](/blog/the-taxonomy-of-ai-agents/) is useful context here, since the right memory architecture depends heavily on whether your agents are orchestrators, specialists, or peers, and those roles have different read-write relationships with shared state. Letting the agents see each other's context produced cross-contamination almost immediately. The validator would inherit the extractor's half-finished state and reject fields that were still being populated, treating a blank as a failed check. Switching to isolated memory made each agent reliable, and then the pipeline lost coherence. The summary agent would describe a contract clause the validator had already flagged as invalid, because it had no record of that flag.

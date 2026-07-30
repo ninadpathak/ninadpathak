@@ -3,7 +3,7 @@ title: "The BEAM Memory Benchmark: Why 1M Context Windows Are Not Enough"
 date: 2026-04-19
 description: "The BEAM benchmark reveals that LLMs fail catastrophically at retrieving facts from the middle of long contexts. Here is what the data actually shows, why it happens, and what matters for real deployments."
 tags: [ai, llm, memory, benchmark, context-window, research]
-status: published
+status: retired
 ---
 
 Gemini 3.1, Claude 4.7, and even ChatGPT 5.4 can now ingest 1 million tokens. Vendors market this as a solved problem. The BEAM benchmark does not think so.

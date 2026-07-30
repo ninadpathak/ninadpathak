@@ -3,7 +3,7 @@ date: 2026-03-12
 description: Not all models are created equal for software development. Here is a
   benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic
   logic, and repository-scale refactoring as of March 2026.
-status: published
+status: retired
 tags:
 - ai
 - llm

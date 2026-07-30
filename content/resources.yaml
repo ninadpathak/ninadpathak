@@ -1,0 +1,15 @@
+status: draft
+title: "Resources"
+description: "Reusable templates, playbooks, ebooks, and courses for developer relations and technical writing work."
+url: "/resources/"
+groups:
+  - name: "Templates and playbooks"
+    planned:
+      - "Technical documentation repository template"
+      - "API documentation template"
+      - "Documentation review checklist"
+      - "SEO content brief for technical articles"
+  - name: "Books and courses"
+    planned:
+      - "Developer documentation field guide"
+      - "Writing runnable technical tutorials"

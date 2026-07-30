@@ -4,7 +4,7 @@ date: "2026-05-04"
 slug: "episodic-vs-semantic-vs-working-memory-agents"
 description: "AI agents juggle three distinct memory types. Getting them wrong is the source of most agent memory failures I see in production."
 tags: ["ai-agents", "agent-memory", "llm-architecture"]
-status: published
+status: retired
 ---
 
 For two weeks I debugged an agent that kept forgetting what it had just done. The logs looked fine, the retrieval pipeline was fast, and the context window was spacious. The problem was a category error: the agent was storing episodic memories in a semantic memory system, and semantic facts in episodic storage. Everything was there. Nothing was useful. When I asked it what it had changed in the last hour, it answered with a vector-similarity dump of every config edit it had ever made, ranked by topic instead of by time.

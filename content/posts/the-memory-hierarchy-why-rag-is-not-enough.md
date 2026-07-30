@@ -3,7 +3,7 @@ title: "The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory"
 date: "2026-04-29"
 description: "RAG handles document retrieval well. It handles agent memory poorly, because agents need episodic recall, working context, and cross-session persistence that a vector store cannot provide."
 tags: ["ai-agents", "agent-memory", "rag", "memory-hierarchy"]
-status: published
+status: retired
 ---
 
 The same pattern keeps showing up in agent architecture discussions. Someone builds a retrieval-augmented generation pipeline, calls it agent memory, and then wonders why their agent still loses track of what happened three turns ago. I watched one team wire a customer-support agent to a vector store full of past tickets, then get baffled when it re-asked a user for an account ID the user had typed two messages earlier. The difference between "RAG works" and "agent memory works" is real, and it is not an implementation detail. It is a fundamental architectural mismatch.

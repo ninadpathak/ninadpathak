@@ -1,120 +1,279 @@
 ---
 date: 2026-03-30
-description: Most changelogs exist to satisfy a checkbox. Here's what makes developers
-  actually read them, and how to structure entries so breaking changes land before
-  they cause incidents.
+updated: 2026-07-30
+slug: how-to-write-a-changelog-developers-actually-read
+description: Write a changelog that helps developers assess an upgrade, find breaking changes, and understand what each release means for their code.
 status: published
 tags:
 - technical-writing
 - developer-experience
 - devtools
 title: How to Write a Changelog That Developers Actually Read
+takeaways:
+- Lead with upgrade impact, not an undifferentiated list of commits.
+- Group releases by version, date, and consistent change categories.
+- Describe the consequence of each change and link to migration details.
+- Keep an Unreleased section and update it as the product changes.
 ---
 
-A changelog nobody reads is infrastructure cost with no return. You pay someone to write it, you maintain the format, and developers still get surprised by breaking changes because they skimmed the entry or never opened the file. I once shipped a patch upgrade for a logging library and broke production because a "minor" config rename sat as the eighth bullet under Changed, unlabeled. Getting developers to read changelogs requires two things: a format that makes the critical information findable in seconds, and enough signal-to-noise ratio that they trust the document is worth their attention.
+You are about to approve a dependency bump and someone asks, “Is this actually safe to ship?” The changelog says “improved pagination,” “updated authentication,” and “internal maintenance.”
 
-**Short answer:** Structure every entry around the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format: group by Added, Changed, Deprecated, Removed, Fixed, Security. Put breaking changes at the top of any version section with an explicit label. Keep the file in CHANGELOG.md, update it per release, and never combine multiple releases into a wall of bullet points without version headers.
+Now the team is opening pull requests to find out whether a config key changed. The approach below makes the changelog answer the upgrade question before that conversation starts.
 
-## Why developers don't read changelogs (and why that's usually the changelog's fault)
+## Start with the upgrade decision
 
-Developers skip changelogs because the format punishes them. A 400-line wall of bullet points with no version grouping, no breaking-change callouts, and no date stamps forces a linear scan through irrelevant details to find the one thing that might affect their integration. Having scanned a few of these and found nothing useful, most developers conclude the effort isn't worth it and start treating the changelog as a post-incident reference only, opened after something already broke.
+That means version, date, breaking changes, security impact, and required action all need to be easy to spot. A developer shouldn’t have to infer the risk from the eighth bullet.
 
-The format also fails when it conflates what changed with why it matters. "Updated authentication handler" tells me nothing. "Authentication handler now rejects tokens with `exp` claims in the past (previously these were accepted with a 10-second grace window)" tells me everything I need to decide whether to read further.
+The beginning of a release entry should answer:
 
-Separating technical details from the lead entry is what [Stripe's changelog approach](https://docs.stripe.com/changelog) does well. Developers who need the quick summary get it immediately. Those who need migration specifics click through. That separation comes from understanding that changelog readers arrive in one of two modes: skimming for impact, or deep-reading for a migration path. A single flat entry serves neither, the way a restaurant menu that prints the full recipe under each dish helps nobody actually order.
+- What version shipped, and when?
+- Is the release compatible with the previous version?
+- Which users, APIs, or environments are affected?
+- Is action required before or after upgrading?
+- Where are the migration instructions?
 
-## The keepachangelog.com spec and why it became the standard
+“Updated authentication handler” answers none of those questions. “Expired access tokens are now rejected immediately, so remove any client-side grace-period logic before upgrading” tells the reader what changed and why it matters.
 
-[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) established the format that most serious developer tools have converged on: entries grouped by version (newest first), dates in ISO 8601 format (YYYY-MM-DD), and change types categorized as Added, Changed, Deprecated, Removed, Fixed, or Security.
+### Write the consequence before the implementation
 
-The six categories matter because they map to developer intent:
-- **Added** and **Changed** are features worth knowing about before upgrading
-- **Deprecated** tells you what to stop using before it disappears
-- **Removed** is the first thing to scan before any upgrade
-- **Fixed** is relevant if you hit the bug, skip otherwise
-- **Security** gets read immediately by anyone running the library in production
+Internally, the change may be a refactor, a new cache, or a renamed class. From the user’s side, it might mean a faster response, a changed error, or nothing observable at all.
 
-With this structure, developers learn to scan a version section in under 10 seconds. They look for Removed and Security first, then Deprecated, then Changed for anything in their integration surface. My own eye goes Security, Removed, Deprecated, in that order, before I read a single word of the feature additions. That pattern only works if the format is consistent across every release, because the moment one release buries Security under Added, the reader stops trusting the column order and reverts to reading everything.
+Lead with the consequence and include implementation detail only when it helps someone diagnose or adapt. The project log becomes a product record.
+
+### Make required action impossible to miss
+
+Use a consistent label for breaking changes and required migrations. A generic “Changed” heading is too quiet for work that can break an integration.
+
+> **Breaking:** `client.retryCount` has been replaced by `client.retry.maxAttempts`. Rename the field before upgrading or the client will use the default of three attempts.
+
+The label catches attention, while the second sentence gives a consequence and a next step. A link can carry the full migration procedure.
+
+## Use one repeatable release structure
+
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) recommends a human-readable file with releases in reverse chronological order, ISO-formatted dates, and consistent categories. Its Unreleased section captures changes before release day.
+
+Its categories are simple because they map to the questions developers ask:
+
+| Category | What the reader learns |
+|---|---|
+| Added | Which new capability is available |
+| Changed | Which existing behavior now works differently |
+| Deprecated | What to stop using before it is removed |
+| Removed | What no longer exists |
+| Fixed | Which known behavior is corrected |
+| Security | Which security exposure or hardening matters |
+
+You don’t have to force an empty heading into every release. Keep the vocabulary consistent and use only the categories that have something meaningful in them.
 
 <div class="visual-wrapper">
-  <div class="visual-title">Anatomy of a Changelog Entry</div>
+  <div class="visual-title">The Keep a Changelog structure</div>
   <div class="visual-container">
-    <iframe src="/static/visuals/changelog-anatomy.html" title="A scannable changelog entry annotated with version, ISO date, grouped changes, a breaking-change label, and a migration link, versus an unscannable one" loading="lazy"></iframe>
+    <img src="/static/images/visuals/keep-a-changelog.png" alt="Keep a Changelog website showing its guidance for human-readable and chronologically organized changelogs" loading="lazy">
   </div>
 </div>
+<p class="visual-caption">Versions, dates, and change types make the file predictable for someone assessing a release. The Git history can remain in Git.</p>
 
-An `Unreleased` section at the top, for changes merged to the main branch that haven't shipped yet, rounds out the spec. Many teams skip this. Keeping an Unreleased section means contributors document changes as they land, which kills the Friday-afternoon scramble of reconstructing a release from a week of commit messages and cuts the risk of a change shipping with no entry at all.
+### Keep an Unreleased section
 
-## Breaking changes need a higher signal level than a category
+An Unreleased section is the working area for changes that users will eventually need to understand. Contributors can add an entry with the product change while reviewers still remember the impact.
 
-As a category heading for a breaking change in a heavily-used API, "Removed" carries almost no signal on its own. A developer scanning a version section will still miss it when it sits as the fifth item in a list and the entry text opens with the mechanic instead of the impact.
+At release time, move those entries under a version and date. The release process becomes an editorial pass through material that already has context.
 
-[Mintlify's analysis of developer brand changelogs](https://www.mintlify.com/blog/five-changelog-principles-from-best-developer-brands) recommends prefixing breaking changes with a visible label, something like `[BREAKING]` or bolded text, and positioning them at the top of the Removed or Changed section. Stripe's SDK changelogs use warning symbols and direct developers to review migration paths before upgrading.
+### Mark yanked releases without erasing them
 
-Front-loading the consequence is what the entries themselves should do. A line reading "Removed the `legacy_token` parameter" makes me hunt for what it costs me. A line reading "Removed `legacy_token` parameter from authentication calls, replace with `api_key` before upgrading or requests will return 401" tells me in one read whether I can ignore this release or have to stop and migrate.
+If a release is withdrawn, keep its entry and mark it as yanked. Explain why it should not be used and which version contains the fix or replacement.
 
-A practical template for breaking change entries:
+Deleting the entry creates a gap for anyone who already installed that version. A changelog is a record, including when the record is uncomfortable.
 
+## Make the version number agree with the prose
+
+[Semantic Versioning](https://semver.org/) communicates the compatibility promise through `MAJOR.MINOR.PATCH`. A major version contains incompatible API changes, a minor version adds backward-compatible functionality, and a patch contains backward-compatible fixes.
+
+The changelog must make the same promise. A breaking configuration change described inside a patch release creates more confusion than precise prose can repair.
+
+### Treat deprecation as a sequence
+
+A deprecation entry needs four facts: what is deprecated, what replaces it, when removal is expected, and how to migrate. Repeat the warning in later releases as the removal date approaches.
+
+When the feature is removed, link back to the first deprecation entry. The sequence gives users evidence that the change was announced and time to act.
+
+### Describe compatibility in plain language
+
+Spell out whether existing code continues to work, even when the version number already signals compatibility. Name any exception beside that statement.
+
+For example:
+
+> This release is backward compatible for REST API users. The JavaScript SDK now requires Node.js 20 or later.
+
+Compare that with “runtime support modernized,” which leaves the compatibility question unanswered. Precision builds trust faster than polish.
+
+## Write entries around user impact
+
+Brief works when it remains specific. Behavior, affected user, and action give you enough structure without turning each entry into a mini article.
+
+### Rewrite vague entries
+
+| Weak entry | Useful entry |
+|---|---|
+| Improved retries | The client now retries `429` responses up to three times with exponential backoff; disable this with `retry.maxAttempts: 0`. |
+| Fixed login bug | Fixed OAuth login failures for accounts whose email address contains a plus sign. |
+| Updated pagination | List endpoints now return a cursor in `next_page`; integrations using numeric page offsets must migrate before v4. |
+| Security improvements | Requests with invalid webhook signatures now return `401` before the handler processes them. |
+
+The rewritten entries let readers decide whether the change applies to them. They also contain the option, endpoint, error code, or environment someone is likely to search for later.
+
+### Add links that finish the job
+
+The changelog points readers to the migration guide, updated reference page, security advisory, or issue when they need more detail. Keep the release entry focused on the decision at hand.
+
+Use descriptive link text so the destination is clear out of context. “Migrate from numeric pagination to cursors” is stronger than “learn more.”
+
+<div class="visual-wrapper">
+  <div class="visual-title">Anatomy of a scannable changelog entry</div>
+  <div class="visual-container visual-container--interactive">
+    <iframe src="/static/visuals/changelog-anatomy.html" title="Interactive comparison of a scannable changelog entry and an unstructured list of changes" loading="lazy"></iframe>
+  </div>
+</div>
+<p class="visual-caption">A strong entry exposes version, date, category, impact, and migration path in layers. A reader can stop after the first useful answer or continue into the details.</p>
+
+## Make the changelog part of the release workflow
+
+If the changelog is assembled during a quarterly cleanup, half the context is already gone. Capture the impact as the code changes, when the tradeoffs are still fresh.
+
+### Add an entry with the pull request
+
+Ask contributors to add an Unreleased entry when a change affects documented behavior. The reviewer can then compare the code, documentation, and changelog claim in the same context.
+
+Not every commit deserves an entry. Internal refactors, test changes, and dependency updates belong only when users see a consequence.
+
+### Automate collection, not judgment
+
+GitHub can create [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) from merged pull requests and contributors. Labels and a `.github/release.yml` file can organize or exclude entries.
+
+Generated notes provide raw material. An editor still has to find migration work, combine duplicates, rewrite internal titles, and move risk to the top.
+
+### Give the file an owner
+
+The release manager can own completeness, while technical writers or developer advocates own clarity and links. Product engineers should verify the technical claim for changes they implemented.
+
+Ownership should be visible in the release checklist. “Someone will update the changelog” is how the task moves to the final hour and turns into copied pull request titles.
+
+## Changelog checklist
+
+- The version and date are correct.
+- Releases appear newest first.
+- Breaking changes and required actions are visible before routine improvements.
+- Each entry describes observable impact.
+- Deprecated and removed features include alternatives.
+- Security entries are specific without exposing unsafe detail.
+- Migration, reference, and advisory links resolve.
+- The version number matches the compatibility claim.
+- The Unreleased section remains ready for the next change.
+
+Scan the rendered page using only headings, labels, and the first line of each bullet. If the upgrade risk is still unclear, the hierarchy needs another pass.
+
+## Worked example: turn pull requests into a release entry
+
+Suppose a release contains these merged pull requests:
+
+```text
+#842 Refactor cursor helper
+#847 Add max page size validation
+#851 Update Node matrix
+#856 Retry webhook delivery
+#861 Remove legacy page parameter
+#864 Fix email normalization
 ```
-### Removed
-- **[BREAKING]** Removed `legacy_token` parameter from `/v2/auth`.
-  Replace with `api_key` parameter. All requests using `legacy_token`
-  will return HTTP 401 after upgrading. See migration guide: [link]
+
+Copying those titles would be quick and almost useless. The list does not say that pagination is breaking, Node.js support changed, or webhook deliveries now behave differently.
+
+### Gather the missing facts
+
+Before writing, ask the owners for the behavior behind each change:
+
+| Pull request | User-facing fact |
+|---|---|
+| Cursor helper and legacy parameter | `page` is removed; list endpoints accept `cursor` only |
+| Page size validation | Requests above 100 items return `400`; the API no longer silently caps them. |
+| Node matrix | Node.js 18 support is removed; Node.js 20 is the minimum |
+| Webhook retry | Failed deliveries retry three times over 15 minutes |
+| Email normalization | Login now accepts uppercase characters in email addresses |
+
+The cursor helper and removed parameter form one breaking pagination change. The refactor disappears because users cannot observe it.
+
+### Write the scannable version
+
+The resulting entry could read:
+
+```markdown
+## [4.0.0] - 2026-07-30
+
+### Breaking
+
+- List endpoints no longer accept the `page` parameter. Replace numeric
+  pagination with `cursor`; see the [pagination migration guide].
+- The JavaScript SDK now requires Node.js 20 or later. Upgrade the runtime
+  before installing version 4.
+
+### Changed
+
+- List requests with `limit` values above 100 now return `400
+  invalid_page_size`. Previous versions silently reduced the value to 100.
+- Failed webhook deliveries now retry three times over 15 minutes. Endpoints
+  may receive the same event more than once, so handlers must remain idempotent.
+
+### Fixed
+
+- Email login now treats the domain and local-part casing consistently, fixing
+  failures for addresses entered with uppercase characters.
 ```
 
-For a breaking change, the migration link is not optional. A developer who needs to migrate and finds no path forward will open a support ticket or file a GitHub issue, and answering ten of those one by one in a thread costs your team far more time than writing the migration guide once.
+The breaking changes appear before routine behavior, and every bullet names a field, limit, runtime, error, or action. A developer can recognize their integration without opening the pull requests.
 
-## Yanked releases belong in the changelog
+### Link to the work that cannot fit
 
-A yanked release is a version pulled after shipping because of a critical bug or security issue, the kind of thing where a corrupt build or a leaked credential makes leaving it on the registry worse than removing it. Many changelogs omit yanked versions entirely, so a developer who already installed the yanked version and searches the changelog for context finds nothing and has to reverse-engineer why their pinned dependency vanished.
+The pagination bullet should link to a migration page containing before-and-after requests:
 
-[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) handles this with a `[YANKED]` label on the version entry plus a note explaining why. A developer who installed `2.3.1` and sees `2.3.1 - 2026-02-14 [YANKED]` with "Critical memory leak in connection pool, replaced by 2.3.2" gets the context they need immediately.
+```http
+GET /v3/orders?page=3&limit=50
+```
 
-Leaving yanked versions out turns the changelog into marketing material rather than a technical record, and engineers detect that shift immediately because of [the developer trust hierarchy that ranks practitioner writing over marketing](/blog/developer-trust-hierarchy/). A changelog should be the complete history of every version, including the ones you'd rather forget shipped.
+```http
+GET /v4/orders?cursor=eyJpZCI6IjEwMDAifQ==&limit=50
+```
 
-## How Linear, Vercel, and Stripe handle release communication differently
+The migration page can explain cursor storage, ordering, and expiry. The changelog identifies the change and sends the affected reader there.
 
-These three developer tools have different changelog philosophies, and each one reflects a different assumption about their audience, the same care that goes into [writing release notes that developers trust](/blog/writing-release-notes-that-developers-trust/).
+### Check the release against its version
 
-**Linear** uses an embedded product-focused approach. Their [weekly changelog](https://linear.app/changelog) combines short descriptions with native embedded videos. The format works because Linear's audience is a mix of developers and product managers, and the visual format reduces the reading burden. Linear stores minor bug fixes and API updates in collapsible sections to avoid diluting the signal from major feature releases.
+Removing an input and a supported runtime warrants a major version under Semantic Versioning. Calling the release `3.8.2` would contradict the compatibility promise before anyone reads the notes.
 
-**Vercel** links aggressively to associated packages and documentation, and uses screenshots of the affected UI. Vercel's changelog assumes developers want to see the change, not just read about it. The density is higher than Linear's because the audience is more technical.
+Either preserve compatibility or change the version. A note cannot turn a breaking patch into a safe patch.
 
-**Stripe** takes a more formal, API-documentation-style approach. Each changelog entry for API changes links to the specific endpoint in the reference docs. Breaking changes get migration guides. The format is less visually engaging but maximizes precision, which matches Stripe's audience: developers who need to make careful upgrade decisions because payment integrations have real financial consequences if they break.
+### Preserve the history after a correction
 
-Across all three, the lesson holds: match the format to your audience's upgrade stakes. Low-stakes tooling, where a bad upgrade means a quick rollback, can afford a visual narrative format. High-stakes infrastructure, where a bad upgrade can drop payments or take down auth, needs precision and migration paths.
+Suppose the release later proves that webhook retries can happen over 20 minutes. Correct the entry and record the clarification in the next release so readers can see the change.
 
-## Semantic versioning as a communication contract
+Readers need the canonical page to become accurate, but teams also need an audit trail when the published behavior changed. A repository commit provides that trail, and the next changelog entry makes the correction visible to people who do not watch the file.
 
-[Semantic versioning](https://semver.org/) (MAJOR.MINOR.PATCH) is a promise: patch releases are safe to take automatically, minor releases add functionality without breaking existing integrations, and major releases may require migration.
+## Changelog FAQ
 
-Honoring that contract in the changelog is what makes it real. A major version bump with no entry explaining what broke tells developers your version numbers are decoration, and from then on they read every release as if it might break, which defeats the point of semver. Worse is the minor bump that quietly changes a default timeout or an error code without documentation, because that is a breaking change wearing the costume of a safe upgrade.
+**What is the difference between a changelog and release notes?**
 
-A minimum notice period of 3-6 months between a deprecation entry and the actual removal is what [Zuplo's semantic versioning guide](https://zuplo.com/learning-center/semantic-api-versioning) recommends. Publishing the deprecation entry in a minor release, then removing in the next major, gives developers time to adapt. Plenty of production integrations sit untouched for a quarter or more between minor upgrades, so the deprecation window has to be long enough that a team on a slow upgrade cadence still sees the warning before the thing disappears under them.
+A changelog is the durable, chronological record of product changes across versions. Release notes can provide a richer explanation for one release, including context, screenshots, migration guidance, and rollout information.
 
-## My take on why most changelogs fail
+**Should every commit appear in a changelog?**
 
-Treating the document as a record of what was done, rather than a message to someone who has to make a decision, is where most changelog failures begin. Whoever writes the entry holds all the context: why the change was made, what it replaces, where the migration path leads. Whoever reads it holds none of that and has to decide whether this release is safe to pull into a running system.
+No. Include changes that affect user-visible behavior, compatibility, security, supported environments, or documented workflows.
 
-Once you hold that distinction in your head, the writing changes entirely. "Updated dependency X" is a record. "Updated X from 3.1 to 3.2 to address CVE-2026-0231 (CVSS 7.4), no API changes required" is communication, because it answers the only two questions the reader has: do I need this, and will it break me.
+**Where should a changelog live?**
 
-Ownership is the other failure I see again and again. Developers merge PRs, releases ship, and nobody touches the changelog until it's time to cut a release, at which point someone is squinting at a week of commit messages trying to remember what a squashed merge actually changed. Requiring a changelog entry on every PR that touches the public surface area fixes this, and I frame it to teams not as a process tax but as the same discipline as writing a commit message: part of how the change gets communicated outward.
+Keep a `CHANGELOG.md` file in the repository when developers consume the project from source or package registries. You can also render it on the documentation site, but both views should come from one canonical source.
 
-A good changelog also doubles as a forcing function for good API design, which is the part teams rarely expect. Having to explain a change in plain language to a developer who lacks your context, you notice fast when a change is hard to describe clearly. A rename that takes three sentences to justify, or a parameter whose new behavior you can't state without a caveat, is usually a design that should have been reconsidered before it ever reached the changelog.
+**How detailed should a changelog entry be?**
 
-## FAQ
+Give enough detail to identify who is affected, what changed, and whether action is required. Link to a dedicated guide when safe migration needs several steps or substantial code.
 
-**Should the changelog live in the repo or on a web page?**
-Both, ideally. CHANGELOG.md in the repo satisfies developers who want it under version control alongside the code. A web page (or published GitHub releases) makes it discoverable without cloning. The canonical source should be the repo file. The web version is a rendering of it.
+**Can generated release notes replace a changelog?**
 
-**How detailed should a non-breaking change entry be?**
-One sentence that answers "what changed and what does it let me do that I couldn't before?" For a new feature: include the parameter name, the default value, and the simplest use case. For a fix: what was the incorrect behavior and what is the correct behavior now? Skip the internal implementation details.
-
-**What's the right release frequency for changelogs?**
-Match your release cadence. Never accumulate multiple releases without entries. If you ship five patch releases and document them all at once, the developer who upgraded on patch 3 has no way to know what changed between 3 and 5. One entry per release, even if the entry is a single line.
-
-**How do you handle changelogs for libraries with many active versions?**
-Maintain separate changelog sections per major version, or separate files. A developer on v2 should be able to read v2's history without wading through v3 changes that don't apply to them. Stripe handles this by filtering their changelog by API version.
-
-**Should changelogs include internal changes or only public surface area?**
-Only public surface area. Internal refactors, test updates, and CI changes are noise for someone deciding whether to upgrade. The changelog audience is integrators, not contributors. Keep internal changes in commit history and PR descriptions.
+They can collect merged work, but they cannot reliably explain user impact. Use automation to assemble candidates and human review to produce the actual record.

@@ -3,7 +3,7 @@ title: "State of AI Agent Memory in 2026"
 date: 2026-04-19
 description: "The memory stack for AI agents has exploded into a fragmented mess of competing approaches. Here is what actually works, what is still research, and why the next 18 months will sort the winners from the wreckage."
 tags: [ai, agents, memory, infrastructure, 2026]
-status: published
+status: retired
 ---
 
 The phone rings at 3 AM. Your AI agent sent 4,000 emails to the wrong customers because it forgot which product launch was real and which was a test scenario from three weeks ago. That failure is not hypothetical. I have spoken to four engineering teams who have lived through some version of it in the past six months, and in one case the agent had confidently merged a staging customer list into the live one because nothing in its memory marked the staging data as disposable.

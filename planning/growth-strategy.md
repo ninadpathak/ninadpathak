@@ -1,5 +1,9 @@
 # NinadPathak.com Growth Strategy: Path to 10,000 Monthly Visits
 
+> **Superseded 2026-07-29:** Use
+> [`documentation-authority-plan.md`](documentation-authority-plan.md) as the canonical
+> strategy. The traffic targets and publishing sequence below are historical.
+
 **Last updated:** 2026-04-21
 **Current baseline:** ~50 posts, existing organic traffic base
 **Goal:** 10,000 monthly visits in 5 months (approx. 333% growth)

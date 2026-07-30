@@ -4,7 +4,7 @@ date: "2026-05-05"
 slug: "contextual-compression-for-agent-memory"
 description: "How agents decide what to keep in memory when context space is finite, and the three compression strategies that actually work."
 tags: ["ai-agents", "agent-memory", "context-windows"]
-status: published
+status: retired
 ---
 
 Around week three, the problem shows up. After running long enough, the context window that once felt spacious has filled halfway with memory data, and the agent starts missing things it knew two weeks ago, or it loses track of what happened yesterday. Either way, something has broken in how the agent manages memory over time.

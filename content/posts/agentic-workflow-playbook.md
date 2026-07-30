@@ -4,7 +4,7 @@ date: 2026-06-14
 slug: "agentic-workflow-playbook"
 description: "The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me stepping in to frame the work and read the diff before it merges."
 tags: [ai, agents, developer-experience]
-status: published
+status: retired
 ---
 
 I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my name on. The agent does the heavy lifting. I step in at the moments a mistake would actually cost something, like when the change touches a payment path, or the agent is about to edit a database migration that runs against production.

@@ -3,7 +3,7 @@ title: "Context Windows vs Memory: Why They Are Not the Same Thing"
 date: "2026-04-19"
 description: "A 1M token context window is not memory. Treating it like one is how you build expensive systems that still forget what they were doing last Tuesday."
 tags: [ai, llm, memory, context-window, infrastructure]
-status: published
+status: retired
 ---
 
 You have a 1M token context window and your agent still forgets what the user said three turns ago. Your RAG pipeline returns stale results. Your agent loses track of what it was doing mid-task. Context windows and memory solve different problems at different cost profiles with different failure modes, and conflating them produces systems that are somehow over-engineered and under-equipped at the same time.

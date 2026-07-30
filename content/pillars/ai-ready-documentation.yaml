@@ -1,0 +1,40 @@
+slug: ai-ready-documentation
+status: published
+title: "AI-Ready Documentation: Structure Content for Reliable Retrieval"
+h1: "AI-Ready Documentation"
+description: "Structure and test documentation so search, RAG systems, and AI assistants can retrieve the right answer with its product and version context intact."
+intro: |
+  AI-ready documentation is not a layer of phrases added for language models. It is
+  documentation whose sections have clear scope, stable headings, explicit version
+  context, usable links, and enough local meaning to survive retrieval outside the page.
+
+  The work here separates measured retrieval behavior from speculation. Experiments
+  publish their corpus, queries, labels, method, and raw results—including null results.
+checklist_heading: "Prepare documentation for retrieval"
+checklist:
+  - "Make each section answer a specific question without depending on a vague heading."
+  - "Preserve product, version, language, document type, and source URL as metadata."
+  - "Keep exact error text, identifiers, and commands available to lexical search."
+  - "Chunk at structural boundaries and inspect the resulting content before embedding it."
+  - "Require answers to cite the exact source and refuse when evidence is missing."
+  - "Evaluate retrieval, answer quality, citations, freshness, and refusal separately."
+planned:
+  - "Free llms.txt Generator and Checker for Documentation Sites"
+  - "Does llms.txt Improve AI Visibility? A Controlled Documentation Test"
+  - "Semantic Chunking for Documentation RAG: A Reproducible Benchmark"
+sections: []
+faqs:
+  - q: "Does llms.txt guarantee that AI tools will cite a documentation site?"
+    a: "No. It is a proposed discovery format, not a ranking or inclusion guarantee. Any claim about its effect should be tested against observable crawler and citation behavior."
+  - q: "What makes documentation easier for a RAG system to retrieve?"
+    a: "Clear section boundaries, specific headings, local context, stable metadata, exact terminology, and a chunking strategy tested against real questions all improve the odds of retrieving the right evidence."
+bridges:
+  - title: "Documentation SEO"
+    url: "/documentation-seo/"
+    blurb: "Make the same pages crawlable and discoverable"
+  - title: "Developer Documentation"
+    url: "/documentation/"
+    blurb: "Write useful source material first"
+  - title: "API Documentation"
+    url: "/api-documentation/"
+    blurb: "Preserve endpoint and version context"

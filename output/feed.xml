@@ -3,127 +3,43 @@
   <channel>
     <title>Ninad Pathak</title>
     <link>https://ninadpathak.com</link>
-    <description>Programmer-turned-writer helping DevTools and SaaS companies create technical content their engineering teams actually approve.</description>
+    <description>Developer relations content, documentation, tutorials, and technical articles that help developer products earn trust and adoption.</description>
     <language>en-us</language>
     <item>
-      <title>The Agentic Workflow Playbook: From Prompt to Shipped PR</title>
-      <link>https://ninadpathak.com/blog/agentic-workflow-playbook/</link>
-      <description>The repeatable five-stage process I run to take a task from vague intent to a pull request I trust, with an AI agent doing the heavy lifting and me stepping in to frame the work and read the diff before it merges.</description>
-      <pubDate>Jun 14, 2026</pubDate>
+      <title>How to Organize Documentation That Has Drifted</title>
+      <link>https://ninadpathak.com/articles/how-to-organize-a-documentation-site/</link>
+      <description>Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.</description>
+      <pubDate>Jul 30, 2026</pubDate>
     </item>
     <item>
-      <title>How I Set Up a Coding Agent That Actually Finishes the Task</title>
-      <link>https://ninadpathak.com/blog/coding-agent-setup-that-works/</link>
-      <description>A coding agent succeeds or fails before it writes a line. Here is the setup I use, the rules file, repository context, tools, permissions, and guardrails, that turns a capable model into an agent I trust with real work.</description>
-      <pubDate>Jun 13, 2026</pubDate>
+      <title>Documentation Review Checklist Before You Publish</title>
+      <link>https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/</link>
+      <description>Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.</description>
+      <pubDate>Jul 30, 2026</pubDate>
     </item>
     <item>
-      <title>Wiring Tools into Your Agent with MCP: A Practical Setup</title>
-      <link>https://ninadpathak.com/blog/mcp-server-setup-guide/</link>
-      <description>A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe.</description>
-      <pubDate>Jun 12, 2026</pubDate>
+      <title>Writing Release Notes That Developers Trust</title>
+      <link>https://ninadpathak.com/articles/writing-release-notes-that-developers-trust/</link>
+      <description>Write release notes that let developers assess upgrade risk, understand product impact, and migrate without surprises.</description>
+      <pubDate>Apr 03, 2026</pubDate>
     </item>
     <item>
-      <title>Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense</title>
-      <link>https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/</link>
-      <description>Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need.</description>
-      <pubDate>May 12, 2026</pubDate>
+      <title>How to Write a Technical Tutorial That Actually Teaches</title>
+      <link>https://ninadpathak.com/articles/how-to-write-a-technical-tutorial-that-actually-teaches/</link>
+      <description>Write a technical tutorial that takes one reader from a clear starting point to a tested, useful result.</description>
+      <pubDate>Apr 02, 2026</pubDate>
     </item>
     <item>
-      <title>Why Your Agent Remembers the Wrong Thing: Memory Attribution Failures</title>
-      <link>https://ninadpathak.com/blog/memory-attribution-errors/</link>
-      <description>Memory attribution failures cause AI agents to act on outdated or misassigned context. Here is what I found examining the failure patterns.</description>
-      <pubDate>May 11, 2026</pubDate>
+      <title>Developer Onboarding Docs: What Works, What Doesn't</title>
+      <link>https://ninadpathak.com/articles/developer-onboarding-docs-what-works-what-doesnt/</link>
+      <description>Write developer onboarding docs that help a new engineer set up the product, understand the workflow, and ship a safe first change.</description>
+      <pubDate>Apr 01, 2026</pubDate>
     </item>
     <item>
-      <title>Shared Memory vs Isolated Memory in Multi-Agent Workflows</title>
-      <link>https://ninadpathak.com/blog/shared-vs-isolated-memory-multi-agent/</link>
-      <description>How to choose between shared and isolated memory architectures for multi-agent systems, with trade-offs from production deployments.</description>
-      <pubDate>May 11, 2026</pubDate>
-    </item>
-    <item>
-      <title>Building a Customer Support Agent with Persistent Memory: A Worked Example</title>
-      <link>https://ninadpathak.com/blog/agent-memory-for-customer-support/</link>
-      <description>I built a customer support agent that actually remembers across sessions. Here is what I learned about memory architecture, serialization trade-offs, and the failure modes that will kill your deployment.</description>
-      <pubDate>May 10, 2026</pubDate>
-    </item>
-    <item>
-      <title>LLM Inference Optimization: What Actually Works in Production</title>
-      <link>https://ninadpathak.com/blog/llm-inference-optimization/</link>
-      <description>A practical breakdown of the inference optimization techniques that move the needle — batching, quantization, caching, and attention kernels — with concrete numbers and the tradeoffs between them.</description>
-      <pubDate>May 06, 2026</pubDate>
-    </item>
-    <item>
-      <title>Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants</title>
-      <link>https://ninadpathak.com/blog/why-coding-agents-lose-their-memory/</link>
-      <description>The memory persistence patterns that actually work for AI coding assistants, and why most agents lose context between sessions.</description>
-      <pubDate>May 06, 2026</pubDate>
-    </item>
-    <item>
-      <title>Memory Versioning and Audit Trails for Regulated AI Agents</title>
-      <link>https://ninadpathak.com/blog/memory-versioning-and-audit-trails/</link>
-      <description>If your agent overwrites its memory, you cannot pass a compliance audit. How to build append-only memory versioning and trace agent reasoning.</description>
-      <pubDate>May 05, 2026</pubDate>
-    </item>
-    <item>
-      <title>Contextual Compression for Agent Memory: What Stays and What Goes</title>
-      <link>https://ninadpathak.com/blog/contextual-compression-for-agent-memory/</link>
-      <description>How agents decide what to keep in memory when context space is finite, and the three compression strategies that actually work.</description>
-      <pubDate>May 05, 2026</pubDate>
-    </item>
-    <item>
-      <title>Episodic, Semantic, and Working Memory in AI Agents: A Practical Map</title>
-      <link>https://ninadpathak.com/blog/episodic-vs-semantic-vs-working-memory-agents/</link>
-      <description>AI agents juggle three distinct memory types. Getting them wrong is the source of most agent memory failures I see in production.</description>
-      <pubDate>May 04, 2026</pubDate>
-    </item>
-    <item>
-      <title>Memory Serialization: How Agents Persist State Across Sessions</title>
-      <link>https://ninadpathak.com/blog/memory-serialization-between-sessions/</link>
-      <description>Why agents forget everything on restart, and the serialization patterns that actually solve it</description>
-      <pubDate>Apr 30, 2026</pubDate>
-    </item>
-    <item>
-      <title>The Memory Hierarchy: Why RAG Alone Is Not Enough for Agent Memory</title>
-      <link>https://ninadpathak.com/blog/the-memory-hierarchy-why-rag-is-not-enough/</link>
-      <description>RAG handles document retrieval well. It handles agent memory poorly, because agents need episodic recall, working context, and cross-session persistence that a vector store cannot provide.</description>
-      <pubDate>Apr 29, 2026</pubDate>
-    </item>
-    <item>
-      <title>Why Agent Memory Retrieval Is Asymmetric and Why It Breaks Your RAG Pipeline</title>
-      <link>https://ninadpathak.com/blog/asymmetric-retrieval-agent-memory/</link>
-      <description>The retrieval patterns that work for a query do not work when the agent is the one retrieving, and this asymmetry silently breaks production RAG systems.</description>
-      <pubDate>Apr 28, 2026</pubDate>
-    </item>
-    <item>
-      <title>Multi-Agent vs Single-Agent Systems: The Real Trade-offs</title>
-      <link>https://ninadpathak.com/blog/multi-agent-vs-single-agent-tradeoffs/</link>
-      <description>The decision between one agent and many is not about capability. It is about failure modes, latency, and operational complexity.</description>
-      <pubDate>Apr 27, 2026</pubDate>
-    </item>
-    <item>
-      <title>The Agent Design Space: A Map of What Engineers Are Actually Building</title>
-      <link>https://ninadpathak.com/blog/the-agent-design-space/</link>
-      <description>After surveying production agents across industries, the design space clusters into patterns. Here is what I found.</description>
-      <pubDate>Apr 26, 2026</pubDate>
-    </item>
-    <item>
-      <title>When to Build an Agent and When to Build a Smarter Assistant</title>
-      <link>https://ninadpathak.com/blog/agent-vs-ai-assistant/</link>
-      <description>The difference between an AI agent and a smart assistant comes down to one thing: who drives the loop.</description>
-      <pubDate>Apr 26, 2026</pubDate>
-    </item>
-    <item>
-      <title>Lambda Calculus as AI Reasoning Benchmark</title>
-      <link>https://ninadpathak.com/blog/lambda-calculus-ai-reasoning-benchmark/</link>
-      <description>I have used lambda calculus to test whether AI systems can actually reason through composition, or whether they are just pattern-matching their way to plausible outputs.</description>
-      <pubDate>Apr 25, 2026</pubDate>
-    </item>
-    <item>
-      <title>The Anatomy of an Agent Loop: Perceive, Think, Act, Remember</title>
-      <link>https://ninadpathak.com/blog/agent-loop-anatomy/</link>
-      <description>The agent loop is not one thing. It is four distinct phases that run in sequence, and understanding each one is how you debug what breaks.</description>
-      <pubDate>Apr 23, 2026</pubDate>
+      <title>How to Write a Changelog That Developers Actually Read</title>
+      <link>https://ninadpathak.com/articles/how-to-write-a-changelog-developers-actually-read/</link>
+      <description>Write a changelog that helps developers assess an upgrade, find breaking changes, and understand what each release means for their code.</description>
+      <pubDate>Mar 30, 2026</pubDate>
     </item>
   </channel>
 </rss>

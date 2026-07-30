@@ -3,7 +3,7 @@ title: "LLM token budgets: a practical guide to cost control"
 date: 2026-04-17
 description: "Real numbers, real pricing, and concrete strategies for keeping your LLM spend predictable."
 tags: [ai, cost, backend, llm]
-status: published
+status: retired
 ---
 
 Token costs are the new EC2 bills. I learned that the expensive way after burning $200 on GPT-4 over a single weekend, chasing a bug with a loop that re-sent the whole conversation on every retry. A production RAG pipeline serving 10,000 queries per day can quietly climb to $1,000 per month, and nobody notices until the invoice lands. For the first few years of the LLM era, most engineers I worked with treated inference spend as a black box. Input goes in, output comes out, invoice arrives at month end. That approach holds right up until traffic doubles or someone ships a chattier prompt.

@@ -4,7 +4,7 @@ date: 2026-06-12
 slug: "mcp-server-setup-guide"
 description: "A hands-on guide to connecting an AI agent to your own tools and data with the Model Context Protocol. The client-server shape, a minimal working server, tool design, and the guardrails that keep it safe."
 tags: [ai, agents, developer-experience]
-status: published
+status: retired
 ---
 
 An agent that cannot touch the outside world is a very expensive autocomplete. Tools are what let it read a database, hit an API, or run a command, and the Model Context Protocol is the cleanest way I have found to wire those tools in. I went deep on the concept in [the Model Context Protocol explained](/blog/model-context-protocol-explained/). Here I want to show the practical setup, the parts you actually build and run.

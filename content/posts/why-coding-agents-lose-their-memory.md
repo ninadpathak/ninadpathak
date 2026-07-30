@@ -4,7 +4,7 @@ date: "2026-05-06"
 slug: "why-coding-agents-lose-their-memory"
 description: "The memory persistence patterns that actually work for AI coding assistants, and why most agents lose context between sessions."
 tags: ["ai-agents", "coding", "memory", "claude-code"]
-status: published
+status: retired
 ---
 
 The first time I watched a coding agent forget a six-hour refactoring session, I assumed it was a bug. It was not. The forgetting was the designed behavior of a system that treats memory as optional.

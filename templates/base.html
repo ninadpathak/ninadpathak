@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{{ site.title }} | {{ site.tagline }}{% endblock %}</title>
   <meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="robots" content="{% block robots %}index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1{% endblock %}">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
@@ -82,15 +82,17 @@
     "description": "{{ site.description }}",
     "knowsAbout": [
       "Technical Writing",
+      "Developer Relations",
+      "Developer Education",
+      "Developer Experience",
       "Developer Documentation",
-      "AI Agents",
-      "Agentic Workflows",
-      "AI Agent Memory",
-      "Retrieval-Augmented Generation (RAG)",
-      "Large Language Models",
-      "LLM Inference Optimization",
-      "Workflow Automation",
-      "DevTools Content Strategy"
+      "API Documentation",
+      "Docs as Code",
+      "Documentation SEO",
+      "Code Examples",
+      "Technical Tutorials",
+      "AI-Ready Documentation",
+      "Technical Content Strategy"
     ],
     "sameAs": [
       "https://linkedin.com/in/ninadwites/",
@@ -111,8 +113,7 @@
       <li><a href="/work/"      class="nav-link {% if current_page == 'work' %}active{% endif %}">Work</a></li>
       <li><a href="/portfolio/" class="nav-link {% if current_page == 'portfolio' %}active{% endif %}">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link {% if current_page == 'projects' %}active{% endif %}">Projects</a></li>
-      <li><a href="/blog/"      class="nav-link {% if current_page == 'blog' %}active{% endif %}">Writing</a></li>
-      <li><a href="/topics/"    class="nav-link {% if current_page == 'topics' %}active{% endif %}">Topics</a></li>
+      <li><a href="/articles/"  class="nav-link {% if current_page == 'articles' %}active{% endif %}">Articles</a></li>
       <li><a href="/about/"     class="nav-link {% if current_page == 'about' %}active{% endif %}">About</a></li>
     </ul>
 
@@ -141,8 +142,7 @@
     <a href="/work/"      class="mobile-nav-link">Work</a>
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
-    <a href="/blog/"      class="mobile-nav-link">Writing</a>
-    <a href="/topics/"    class="mobile-nav-link">Topics</a>
+    <a href="/articles/"  class="mobile-nav-link">Articles</a>
     <a href="/about/"     class="mobile-nav-link">About</a>
     <a href="/contact/"   class="mobile-nav-link">Contact</a>
   </nav>
@@ -183,7 +183,7 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="footer-logo">ninad pathak</div>
-        <p class="footer-desc">Technical content for DevTools and B2B SaaS teams that need accuracy, depth, and a clear point of view.</p>
+        <p class="footer-desc">Developer relations content for technical products: documentation, tutorials, code examples, and articles that earn trust and adoption.</p>
       </div>
 
       <nav class="footer-group" aria-label="Important links">
@@ -192,10 +192,8 @@
           <a href="/work/" class="footer-link">Work</a>
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
-          <a href="/blog/" class="footer-link">Writing</a>
-          <a href="/topics/" class="footer-link">Topics</a>
+          <a href="/articles/" class="footer-link">Articles</a>
           <a href="/contact/" class="footer-link">Contact</a>
-          <a href="/glossary/" class="footer-link">Glossary</a>
           <a href="/feed.xml" class="footer-link">RSS</a>
         </div>
       </nav>

@@ -4,7 +4,7 @@ date: "2026-04-22"
 slug: "why-ai-agents-keep-failing-in-production"
 description: "I have spent two years watching agents fail in production. Here is what I keep seeing and what the field is starting to do about it."
 tags: ["ai agents", "production", "reliability"]
-status: published
+status: retired
 ---
 
 Across two years of debugging production AI agents, I keep landing on the same handful of failures. Different companies, different frameworks, same root causes. The field is starting to converge on solutions, and most teams are still catching up.

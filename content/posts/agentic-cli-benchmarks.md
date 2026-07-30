@@ -3,7 +3,7 @@ title: "Beyond the Chatbox: Benchmarking Claude Code vs. Gemini CLI for Autonomo
 date: 2026-04-12
 description: "I ran a head-to-head benchmark of Claude Code and Gemini CLI on an M2 Air (16GB), testing their ability to autonomously refactor legacy code and resolve race conditions."
 tags: [agentic-cli, benchmarking, developer-productivity, m2-air, technical-deep-dive]
-status: published
+status: retired
 ---
 
 Claude Code and Gemini CLI have both moved from chat interfaces into something closer to repository orchestrators that plan, edit, and verify on their own. Each lands around 80% on SWE-bench Verified, so raw model intelligence stopped being the interesting question for me. Their execution philosophies are what actually differ. Claude Code runs a supervised model that spawns parallel subagents and asks me to sign off on the plan, and Gemini CLI runs a verified model that throws code at the wall and lets its automated conductor loop catch what breaks. Refactoring an ambiguous architecture on my 16GB M2 Air, Claude Code pulled ahead. For large system migrations and multimodal design work, Gemini CLI did. What I am really choosing between is the autonomous lifecycle I want to babysit.

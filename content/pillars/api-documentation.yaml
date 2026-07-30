@@ -1,0 +1,40 @@
+slug: api-documentation
+status: published
+title: "API Documentation: Reference, Guides, and Working Requests"
+h1: "API Documentation"
+description: "Build API documentation that takes a developer from authentication to a successful request—and helps them recover when it fails."
+intro: |
+  An endpoint reference is only one part of API documentation. Developers also need a
+  path through authentication, complete requests, realistic responses, errors,
+  pagination, webhooks, SDK behavior, and version changes.
+
+  The guides in this hub use one coherent sample API so examples can be run and compared
+  instead of treated as decorative snippets.
+checklist_heading: "Before you publish an API"
+checklist:
+  - "Document authentication before the first endpoint example."
+  - "Provide one complete request and response that works with replaceable credentials."
+  - "Explain every error developers can reasonably recover from."
+  - "Show pagination, limits, ordering, retries, and idempotency where they apply."
+  - "Test generated reference output against the source OpenAPI document."
+  - "Connect breaking changes and deprecations to a migration path."
+sections: []
+planned:
+  - "API Documentation Best Practices: Reference, Guides, and Working Requests"
+  - "API Documentation Examples: What the Best Developer Portals Get Right"
+  - "API Documentation Tools: A Hands-On Comparison for Small Teams"
+faqs:
+  - q: "What is the difference between API reference and API guides?"
+    a: "Reference records the behavior of endpoints, fields, schemas, and errors. Guides connect those pieces into a task such as authenticating, syncing data, or handling a webhook."
+  - q: "Can OpenAPI generate complete API documentation?"
+    a: "It can generate a strong reference baseline, but it does not replace onboarding, task guides, integration decisions, troubleshooting, or tested end-to-end examples."
+bridges:
+  - title: "Developer Documentation"
+    url: "/documentation/"
+    blurb: "Plan the complete documentation system"
+  - title: "Docs as Code"
+    url: "/docs-as-code/"
+    blurb: "Test and publish API docs through Git"
+  - title: "Technical Content"
+    url: "/technical-content/"
+    blurb: "Turn API knowledge into useful tutorials"

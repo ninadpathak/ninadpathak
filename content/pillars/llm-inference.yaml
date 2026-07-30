@@ -1,5 +1,5 @@
 slug: llm-inference
-status: published
+status: review
 title: "LLM Inference, Cost, and Internals: The Engineering Behind Fast, Cheap Models"
 h1: "LLM Inference & Cost"
 description: "How LLMs actually run, and how to make them faster and cheaper. Context windows, token budgets, prompt caching, speculative decoding, TTFT, and KV-cache internals, all benchmarked."

@@ -4,7 +4,7 @@ date: "2026-04-25"
 slug: "lambda-calculus-ai-reasoning-benchmark"
 description: "I have used lambda calculus to test whether AI systems can actually reason through composition, or whether they are just pattern-matching their way to plausible outputs."
 tags: ["ai reasoning", "benchmarking", "formal methods", "evaluation"]
-status: published
+status: retired
 ---
 
 To find out whether an AI system can actually reason through composition or whether it is just pattern-matching its way to a plausible output, I hand it lambda calculus. What comes back is more diagnostic than any multiple-choice benchmark I have run, because a wrong substitution has nowhere to hide.

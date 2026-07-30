@@ -3,7 +3,7 @@ title: "Short-Term Memory for AI Agents: A Practical Guide"
 date: 2026-04-19
 description: "Context windows are not memory. Here is what every production AI agent engineer needs to understand about token budgets, overflow handling, and how short-term and long-term memory actually work together."
 tags: [ai, agents, memory, context-window, infrastructure]
-status: published
+status: retired
 ---
 
 Context windows are not memory, and that is the first thing engineers get wrong when building AI agents. A context window is a fixed-size buffer. Memory is what you build on top of that buffer, the way a desk surface is not the same thing as a filing system even though both hold paper. Understanding the distinction will save you weeks of debugging flaky agents.

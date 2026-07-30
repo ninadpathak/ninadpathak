@@ -4,7 +4,7 @@ date: "2026-04-28"
 slug: "asymmetric-retrieval-agent-memory"
 description: "The retrieval patterns that work for a query do not work when the agent is the one retrieving, and this asymmetry silently breaks production RAG systems."
 tags: ["ai-agents", "agent-memory", "rag", "retrieval"]
-status: published
+status: retired
 ---
 
 I spent three weeks debugging a retrieval pipeline that worked perfectly in testing and fell apart in production. The vector search was fine. The chunking strategy was fine. The embedding model was fine. What actually broke was that retrieval behaves differently when an agent is doing the retrieving versus when a human user is doing the querying.

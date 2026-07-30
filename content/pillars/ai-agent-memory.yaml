@@ -1,5 +1,5 @@
 slug: ai-agent-memory
-status: published
+status: review
 title: "AI Agent Memory: A Practical Guide to Persistence, Recall, and Forgetting"
 h1: "AI Agent Memory"
 description: "How production AI agents store, retrieve, and forget information. A practitioner's guide to memory architecture, from context windows to episodic recall, backed by benchmarks."

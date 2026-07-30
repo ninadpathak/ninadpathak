@@ -3,7 +3,7 @@ title: "RAG vs Memory: What AI Developers Need to Know"
 date: 2026-04-19
 description: "Understand the fundamental differences between RAG and memory systems for LLM applications, when to use each, and how to combine them in production."
 tags: [ai, rag, memory, llm, infrastructure]
-status: published
+status: retired
 ---
 
 Two architectural patterns dominate how LLM applications handle context: Retrieval-Augmented Generation (RAG) and Memory systems. Developers constantly confuse them, and that confusion ships systems that hallucinate, forget, or leak context across users. I have watched a support bot answer a question about one customer's invoice using a chunk retrieved for a completely different customer, and the root cause was someone treating memory like RAG. Here is what separates these approaches, and when I reach for each one.

@@ -1,3 +1,17 @@
+# Consolidated content library
+/blog /articles/ 301
+/blog/ /articles/ 301
+/blog/* /articles/:splat 301
+/topics /articles/ 301
+/topics/ /articles/ 301
+/technical-writing/ /articles/ 301
+/documentation/ /articles/ 301
+/api-documentation/ /articles/ 301
+/docs-as-code/ /articles/ 301
+/documentation-seo/ /articles/ 301
+/ai-ready-documentation/ /articles/ 301
+/technical-content/ /articles/ 301
+
 # Japanese Keyword Hack Recovery
 # Telling Google these pages are permanently gone (410)
 /wp-admin/* 410

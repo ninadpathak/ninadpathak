@@ -3,7 +3,7 @@ title: "Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache 
 date: 2026-04-15
 description: "VRAM is too expensive to waste on low-attention tokens. I benchmarked KV cache eviction strategies to treat LLM context like a managed heap, reaching 90% pruning with zero recall loss."
 tags: [llm, kv-cache, memory-optimization, benchmarking, transformers, engineering]
-status: published
+status: retired
 ---
 
 VRAM capacity dictates the boundary of what a Large Language Model (LLM) can actually do for you. The naive way to expand a context window is to scale hardware until you hit the physical ceiling of the GPU, then buy a bigger GPU. Transformers store Key-Value (KV) pairs for every token processed during a session, and those pairs add up fast. A 128k context window for a Llama 3 70B model requires roughly 20GB of dedicated VRAM for the KV cache alone. Push that to a 1M token window and the requirement passes 160GB. Because standard attention carries quadratic complexity, memory pressure grows faster than the reasoning value of the tokens you keep adding. For a lot of engineering teams, throwing more cluster at the problem stopped being a strategy somewhere around the point the monthly GPU bill outran the product roadmap.

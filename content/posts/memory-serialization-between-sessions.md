@@ -4,7 +4,7 @@ date: "2026-04-30"
 slug: "memory-serialization-between-sessions"
 description: "Why agents forget everything on restart, and the serialization patterns that actually solve it"
 tags: ["ai-agents", "agent-memory", "agent-architecture"]
-status: published
+status: retired
 ---
 
 The first time I deployed an agent to production, I watched it handle 200 conversations perfectly. Then I restarted the service for a routine deployment at 2 AM. The next morning the agent greeted the same users as if it had never seen them, asking one person their timezone for the second time after they had spelled it out the day before. No memory of preferences they had confirmed. No record of issues already resolved. Back to zero.

@@ -4,7 +4,7 @@ date: "2026-05-05"
 slug: "memory-versioning-and-audit-trails"
 description: "If your agent overwrites its memory, you cannot pass a compliance audit. How to build append-only memory versioning and trace agent reasoning."
 tags: ["ai agents", "agent-memory", "compliance"]
-status: published
+status: retired
 ---
 
 An AI agent that hallucinates in a consumer app is annoying. The same hallucination inside a financial compliance review or a healthcare diagnostic pipeline becomes a liability event. Someone signs off on the agent's output, and that signature is now attached to a wrong answer nobody can explain.

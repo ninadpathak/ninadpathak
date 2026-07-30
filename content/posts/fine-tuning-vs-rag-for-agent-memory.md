@@ -4,7 +4,7 @@ date: "2026-05-12"
 slug: "fine-tuning-vs-rag-for-agent-memory"
 description: "Fine-tuning and RAG solve different parts of the agent memory problem. Here is how to decide which one you actually need."
 tags: ["ai-agents", "rag", "fine-tuning", "agent-memory"]
-status: published
+status: retired
 ---
 
 Three times in the past year I walked into this decision already made. Each team had committed to a particular approach before I got there. The first had fine-tuned a 7B model on their internal documentation and spent months trying to figure out why the agent still hallucinated pricing tiers that had been deprecated. The second had built an elaborate RAG pipeline and could not understand why the agent would never follow their custom refund-escalation sequence, no matter how many policy docs they fed it. The third team got it right by accident.

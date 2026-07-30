@@ -1,0 +1,46 @@
+slug: docs-as-code
+status: published
+title: "Docs as Code: Git Workflows, Testing, and Maintenance"
+h1: "Docs as Code"
+description: "Use Git, previews, automated checks, and explicit ownership to keep documentation accurate as the product changes."
+intro: |
+  Docs as code is useful when it shortens the distance between a product change and the
+  documentation that explains it. Git alone does not provide that outcome. The workflow
+  also needs previews, focused review, automated mechanical checks, ownership, and a
+  release trigger.
+
+  This hub covers that operating system, including the places where automation should
+  stop and a technical reviewer must make the decision.
+checklist_heading: "Build the smallest reliable workflow"
+checklist:
+  - "Store reviewable source files beside the code or in a repository with clear ownership."
+  - "Generate a preview for every documentation pull request."
+  - "Check links, Markdown structure, spelling rules, and the production build in CI."
+  - "Test executable examples separately from prose checks."
+  - "Connect product releases to documentation issues and named maintainers."
+  - "Preserve URLs, metadata, and redirects during platform migrations."
+sections:
+  - heading: "Release communication"
+    blurb: "Keep developers informed when behavior changes."
+    posts:
+      - how-to-write-a-changelog-developers-actually-read
+      - writing-release-notes-that-developers-trust
+planned:
+  - "Docs as Code: A Working Git-Based Documentation Workflow"
+  - "Documentation Maintenance: A Workflow That Keeps Docs Current"
+  - "Documentation Testing: What You Can Validate in CI"
+faqs:
+  - q: "What does docs as code mean?"
+    a: "It means managing documentation changes with engineering practices such as version control, pull requests, previews, automated checks, and repeatable builds."
+  - q: "Does docs as code require documentation to live in the product repository?"
+    a: "No. A separate repository can work well if product changes still trigger documentation work and reviewers can inspect both the source change and rendered result."
+bridges:
+  - title: "Developer Documentation"
+    url: "/documentation/"
+    blurb: "Decide what the workflow must produce"
+  - title: "API Documentation"
+    url: "/api-documentation/"
+    blurb: "Generate and review API reference"
+  - title: "Documentation SEO"
+    url: "/documentation-seo/"
+    blurb: "Protect URLs and crawlability"

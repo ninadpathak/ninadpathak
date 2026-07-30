@@ -1,0 +1,46 @@
+slug: documentation
+status: published
+title: "Developer Documentation: Plan, Structure, Write, and Maintain It"
+h1: "Developer Documentation"
+description: "A practical starting point for teams that need to organize, write, review, and maintain useful developer documentation."
+intro: |
+  Good documentation is not a pile of pages. It is a product surface that helps a
+  developer recognize the right task, complete it, recover from failure, and understand
+  what to do next.
+
+  This library is for the engineer, product manager, DevRel lead, or marketer who owns
+  documentation alongside another job. Start with the checklist below, then use the
+  focused guides for the part of the system that is slowing users down.
+checklist_heading: "Start with the documentation system"
+checklist:
+  - "Name the user and the exact task the documentation must help them complete."
+  - "Separate tutorials, task guides, reference information, and conceptual explanation."
+  - "Create navigation from reader tasks rather than your internal product architecture."
+  - "Test commands and code examples from a clean environment."
+  - "Assign an owner and an update trigger to every page that can become stale."
+  - "Measure failed searches, task completion, stale pages, and example failures."
+sections:
+  - heading: "Write and test the path"
+    blurb: "Start with onboarding and tutorials—the places where missing assumptions become visible fastest."
+    posts:
+      - developer-onboarding-docs-what-works-what-doesnt
+      - how-to-write-a-technical-tutorial-that-actually-teaches
+planned:
+  - "Technical Documentation Template: From Empty Repository to Published Guide"
+  - "Technical Documentation Best Practices, Tested on Real Developer Docs"
+  - "How to Organize a Documentation Site"
+faqs:
+  - q: "What should developer documentation include?"
+    a: "At minimum, give users a clear starting path, task-based guides, accurate reference information, runnable examples, troubleshooting help, and version context. The exact mix depends on the product and the jobs developers need to complete."
+  - q: "How should a small team start improving its documentation?"
+    a: "Choose one important user task, follow the current documentation from a clean environment, record every missing assumption and failure, then repair that path before reorganizing the entire site."
+bridges:
+  - title: "API Documentation"
+    url: "/api-documentation/"
+    blurb: "Build reference, guides, and working requests"
+  - title: "Docs as Code"
+    url: "/docs-as-code/"
+    blurb: "Keep documentation testable and current"
+  - title: "Documentation SEO"
+    url: "/documentation-seo/"
+    blurb: "Make useful docs discoverable"

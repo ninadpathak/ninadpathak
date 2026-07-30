@@ -3,7 +3,7 @@ title: "Memory for Voice AI Agents: What Text Chatbots Cannot Do"
 date: 2026-04-19
 description: "Voice AI agents live or die by how they manage memory across a real-time streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something different."
 tags: [ai, voice, agents, memory, voice-ai, infrastructure]
-status: published
+status: retired
 ---
 
 Voice agents and text chatbots fail differently. A text chatbot that loses context produces a confusing paragraph the user can reread and shrug off. A voice agent that loses context produces dead air, then a response about a topic the caller abandoned two sentences ago, and the call quietly falls apart. The failure mode is catastrophic in a way text never is.

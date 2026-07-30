@@ -3,7 +3,7 @@ date: 2026-03-13
 description: DeepSeek V3 has 671B parameters but only activates 37B per token. Here's
   how mixture of experts works, why it cuts inference costs, and the catch nobody
   puts in the headline.
-status: published
+status: retired
 tags:
 - ai
 - llm

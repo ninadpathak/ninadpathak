@@ -4,7 +4,7 @@ date: "2026-05-11"
 slug: "memory-attribution-errors"
 description: "Memory attribution failures cause AI agents to act on outdated or misassigned context. Here is what I found examining the failure patterns."
 tags: ["ai-agents", "agent-memory", "production-errors"]
-status: published
+status: retired
 ---
 
 I spent three days chasing a bug where a customer support agent kept quoting a pricing policy from six months back, the kind that still listed a discount tier we had retired. The logs showed the correct policy sitting right there in the context window. The retrieval system had surfaced it. The model kept citing an older version stored in episodic memory anyway, the way a colleague half-remembers a meeting and confidently repeats the thing that got walked back ten minutes later. I call this a memory attribution failure.

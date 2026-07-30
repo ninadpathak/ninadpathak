@@ -1,5 +1,9 @@
 # Content Strategy: ninadpathak.com (v6.0 — Pillar Hubs + Hybrid Positioning)
 
+> **Superseded 2026-07-29:** Use
+> [`documentation-authority-plan.md`](documentation-authority-plan.md) as the canonical
+> strategy. This file remains for historical context.
+
 > **v6.0 (2026-06-14):** Added a pillar/hub layer and a 7th cluster. See the
 > "Pillar hubs" and "Hybrid positioning" sections at the bottom. v5.0 cluster map and
 > rules below remain in force.

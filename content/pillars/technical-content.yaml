@@ -1,0 +1,47 @@
+slug: technical-content
+status: published
+title: "Technical Content: Tutorials, Code Examples, and SEO Briefs"
+h1: "Technical Content"
+description: "Plan and produce technical blog posts that solve developer problems, contain tested evidence, and connect naturally to the product and its documentation."
+intro: |
+  A technical article earns attention when it helps a developer understand or complete
+  something difficult. The search query gives you the problem; it does not provide the
+  experience, test environment, code, examples, or judgment that make the answer worth
+  publishing.
+
+  This hub covers evidence-led tutorials, code examples, benchmarks, teardowns, briefs,
+  maintenance, and measurement for DevTools and technical B2B SaaS teams.
+checklist_heading: "Before drafting a technical article"
+checklist:
+  - "State the developer problem and what the reader will be able to do afterward."
+  - "Inspect current results and identify the missing evidence or usable artifact."
+  - "Choose a format that matches the proof available: tutorial, benchmark, teardown, or guide."
+  - "Run every command and snippet in a clean, recorded environment."
+  - "Separate observed results, sourced facts, and opinion."
+  - "Set an update trigger for dependencies, product behavior, rankings, and broken links."
+sections:
+  - heading: "Useful technical formats"
+    blurb: "Teach a task and communicate product changes with tested detail."
+    posts:
+      - how-to-write-a-technical-tutorial-that-actually-teaches
+      - how-to-write-a-changelog-developers-actually-read
+      - writing-release-notes-that-developers-trust
+planned:
+  - "SEO Content Brief Template for Technical Blog Posts"
+  - "How to Write Code Examples for Technical Content"
+  - "Should This Be Documentation or a Blog Post?"
+faqs:
+  - q: "What makes a technical blog post credible?"
+    a: "The article should expose the work behind its claims: tested code, environment details, expected output, failure cases, primary sources, and a clear line between observation and opinion."
+  - q: "Should a product answer live in documentation or a blog post?"
+    a: "Durable guidance required to use the product belongs in documentation. A blog post is better for discovery, broader problem education, experiments, comparisons, and timely analysis."
+bridges:
+  - title: "Developer Documentation"
+    url: "/documentation/"
+    blurb: "Put durable product guidance in the right place"
+  - title: "Documentation SEO"
+    url: "/documentation-seo/"
+    blurb: "Improve discovery without weakening the answer"
+  - title: "API Documentation"
+    url: "/api-documentation/"
+    blurb: "Turn real integration work into useful content"

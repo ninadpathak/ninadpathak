@@ -2,7 +2,7 @@
 date: 2026-04-04
 description: I think technical docs are often too long for the wrong reasons. Here’s
   why shorter docs usually work better, and where longer docs still earn their keep.
-status: published
+status: review
 tags:
 - technical-writing
 - documentation

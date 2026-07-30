@@ -3,7 +3,7 @@ date: 2026-03-09
 description: Choosing between Retrieval-Augmented Generation (RAG) and Fine-Tuning
   is the most common architectural mistake in AI. Here is how to decide based on knowledge
   frequency, data privacy, and behavior requirements.
-status: published
+status: retired
 tags:
 - ai
 - llm

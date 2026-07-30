@@ -4,7 +4,7 @@ date: 2026-04-26
 slug: "the-agent-design-space"
 description: "After surveying production agents across industries, the design space clusters into patterns. Here is what I found."
 tags: [ai, agents, architecture]
-status: published
+status: retired
 ---
 
 Three weeks of reading production architecture posts, scraping GitHub for agent implementations, and talking to engineers who run agents at scale taught me one thing the taxonomy diagrams miss: I wanted to know what engineers are actually building, not what the boxes say they should build.

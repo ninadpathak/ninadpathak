@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Ninad Pathak | Static Site Generator
-Requires Python 3.11+
+Requires Python 3.9+
 
 Usage:
   python build.py           Build site to /output
@@ -22,14 +22,14 @@ from pathlib import Path
 try:
     import tomllib
 except ImportError:
-    print("Error: Python 3.11+ required (for tomllib).")
-    sys.exit(1)
+    import tomli as tomllib
 
 import frontmatter
 import markdown
 import yaml
 from jinja2 import Environment, FileSystemLoader
 from pygments.formatters import HtmlFormatter
+from rule_checker import paragraph_sentence_violations
 
 # Always resolve paths relative to this script's directory
 ROOT = Path(__file__).parent.resolve()
@@ -181,7 +181,7 @@ class SiteBuilder:
                     "guess_lang": False,
                 },
                 "toc": {
-                    "toc_depth": "2-2",
+                    "toc_depth": "2-3",
                 },
             },
         )
@@ -202,6 +202,15 @@ class SiteBuilder:
             if status != "published" and not self.include_drafts:
                 continue
 
+            paragraph_issues = paragraph_sentence_violations(post.content)
+            if paragraph_issues:
+                details = "\n".join(
+                    f"    line {line}: {count} sentences — {snippet}"
+                    for line, count, snippet in paragraph_issues
+                )
+                raise ValueError(
+                    f"{md_file} violates the two-sentence paragraph rule:\n{details}"
+                )
             self.md.reset()
             html = self.md.convert(post.content)
             # Extract TOC from markdown if available
@@ -214,12 +223,13 @@ class SiteBuilder:
                 "updated": post.get("updated") or post.get("date"),
                 "description": post.get("description", ""),
                 "tags": post.get("tags", []),
+                "takeaways": post.get("takeaways", []),
                 "status": status,
                 "content": html,
                 "slug": slug,
                 "reading_time": estimate_reading_time(post.content),
                 "word_count": count_words(post.content),
-                "url": f"/blog/{slug}/",
+                "url": f"/articles/{slug}/",
                 "toc": toc_html,
                 "faqs": extract_faqs(post.content),
             })
@@ -315,7 +325,7 @@ class SiteBuilder:
             data["resolved_sections"] = resolved
             data["all_posts"] = all_posts
             data["post_count"] = len(all_posts)
-            data["url"] = f"/{data['slug']}/"
+            data["url"] = f"/articles/#{data['slug']}"
             data.setdefault("h1", data.get("title", data["slug"]))
             pillars.append(data)
         return pillars
@@ -326,7 +336,10 @@ class SiteBuilder:
             return []
         with open(glossary_path, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
-        
+
+        if data.get("status", "published") != "published":
+            return []
+
         terms = data.get("terms", [])
         for term in terms:
             term["url"] = f"/glossary/{term['slug']}/"
@@ -374,22 +387,22 @@ class SiteBuilder:
 
             # Determine output path
             if page_num == 1:
-                output_path = "blog/index.html"
+                output_path = "articles/index.html"
             else:
-                output_path = f"blog/page/{page_num}/index.html"
+                output_path = f"articles/page/{page_num}/index.html"
 
             # Pagination URLs
             prev_url = None
             if page_num > 1:
-                prev_url = "/blog/" if page_num == 2 else f"/blog/page/{page_num - 1}/"
+                prev_url = "/articles/" if page_num == 2 else f"/articles/page/{page_num - 1}/"
 
             next_url = None
             if page_num < total_pages:
-                next_url = f"/blog/page/{page_num + 1}/"
+                next_url = f"/articles/page/{page_num + 1}/"
 
             self.render(
                 "blog_list.html", output_path,
-                page="blog",
+                page="articles",
                 posts=page_posts,
                 current_page_num=page_num,
                 total_pages=total_pages,
@@ -407,8 +420,8 @@ class SiteBuilder:
             ][:3]
             self.render(
                 "post.html",
-                f"blog/{post['slug']}/index.html",
-                page="blog",
+                f"articles/{post['slug']}/index.html",
+                page="articles",
                 post=post,
                 related=related,
             )
@@ -458,6 +471,12 @@ class SiteBuilder:
             page="contact",
         )
 
+    def build_404(self):
+        self.render(
+            "404.html", "404.html",
+            page="404",
+        )
+
     def build_linter(self):
         self.render(
             "linter.html", "linter/index.html",
@@ -471,22 +490,6 @@ class SiteBuilder:
                 f"{legal_page['slug']}/index.html",
                 page=legal_page["slug"],
                 legal_page=legal_page,
-            )
-
-    def build_pillars(self, pillars):
-        if not pillars:
-            return
-        self.render(
-            "pillar_index.html", "topics/index.html",
-            page="topics",
-            pillars=pillars,
-        )
-        for pillar in pillars:
-            self.render(
-                "pillar.html",
-                f"{pillar['slug']}/index.html",
-                page="topics",
-                pillar=pillar,
             )
 
     def build_glossary(self, terms):
@@ -519,8 +522,7 @@ class SiteBuilder:
         # (path, priority, changefreq, lastmod)
         urls = [
             ("", "1.0", "weekly", site_lastmod),
-            ("/blog/", "0.9", "daily", site_lastmod),
-            ("/topics/", "0.9", "weekly", site_lastmod),
+            ("/articles/", "0.9", "daily", site_lastmod),
             ("/work/", "0.8", "monthly", None),
             ("/portfolio/", "0.7", "monthly", None),
             ("/projects/", "0.7", "monthly", None),
@@ -529,10 +531,9 @@ class SiteBuilder:
             ("/linter/", "0.9", "monthly", None),
             ("/privacy/", "0.3", "yearly", None),
             ("/terms/", "0.3", "yearly", None),
-            ("/glossary/", "0.8", "weekly", site_lastmod),
         ]
-        for pillar in pillars:
-            urls.append((pillar["url"], "0.9", "weekly", site_lastmod))
+        if glossary_terms:
+            urls.append(("/glossary/", "0.8", "weekly", site_lastmod))
         for post in posts:
             urls.append((post["url"], "0.9", "monthly", format_date_iso(post.get("updated") or post.get("date"))))
         for case in work_cases:
@@ -589,12 +590,12 @@ class SiteBuilder:
 
         # Tag -> cluster, first match wins (order defines precedence).
         clusters = [
-            ("AI Agent Memory", {"memory"}),
-            ("Agent Architecture", {"agents", "agent"}),
-            ("RAG & Retrieval", {"rag", "retrieval", "embeddings", "search"}),
-            ("LLM Inference, Cost & Internals", {"inference", "llm", "cost", "tokens", "caching"}),
-            ("Engineering Benchmarks", {"benchmark", "benchmarks"}),
-            ("Technical Writing for DevTools", {"technical-writing", "documentation", "devtools", "writing"}),
+            ("Documentation", {"documentation", "technical-writing"}),
+            ("API Documentation", {"api-documentation", "api"}),
+            ("Docs as Code", {"docs-as-code", "documentation-workflow"}),
+            ("Documentation SEO", {"documentation-seo", "seo"}),
+            ("AI-Ready Documentation", {"ai-ready-documentation", "retrieval"}),
+            ("Technical Content", {"technical-content", "tutorials", "developer-experience"}),
         ]
 
         def cluster_for(post):
@@ -614,19 +615,11 @@ class SiteBuilder:
             f"> {site['description']}",
             "",
             ("Technical writer and former engineer publishing in-depth, benchmark-backed "
-             "writing on AI agents, agent memory, RAG, LLM inference, and technical "
-             "content strategy for DevTools and B2B SaaS. Articles below are grouped by "
+             "writing on developer documentation, API docs, docs-as-code, documentation "
+             "SEO, AI retrieval, and technical content. Articles below are grouped by "
              "topic; each links to the canonical URL."),
             "",
         ]
-
-        if pillars:
-            lines.append("## Topic Hubs")
-            lines.append("")
-            for pillar in pillars:
-                desc = (pillar.get("description") or "").strip().replace("\n", " ")
-                lines.append(f"- [{pillar['h1']}]({base}{pillar['url']}): {desc}")
-            lines.append("")
 
         cluster_order = [name for name, _ in clusters] + ["Other Writing"]
         for name in cluster_order:
@@ -660,7 +653,8 @@ class SiteBuilder:
         lines.append("## Pages")
         lines.append("")
         lines.append(f"- [About]({base}/about/): Background, expertise, and how I work.")
-        lines.append(f"- [Glossary]({base}/glossary/): Technical definitions for AI memory, RAG, and agent terms.")
+        lines.append(f"- [Articles]({base}/articles/): Documentation, DevRel, tutorials, technical writing, and developer education.")
+        lines.append(f"- [Projects]({base}/projects/): Working tools and software.")
         lines.append(f"- [Contact]({base}/contact/): Get in touch or book a call.")
         lines.append("")
 
@@ -717,13 +711,13 @@ class SiteBuilder:
         self.build_homepage(posts, work_cases)
         self.build_blog_list(posts)
         self.build_posts(posts)
-        self.build_pillars(pillars)
         self.build_work_list(work_cases)
         self.build_work_pages(work_cases)
         self.build_portfolio(portfolio)
         self.build_projects(projects)
         self.build_about()
         self.build_contact()
+        self.build_404()
         self.build_linter()
         self.build_legal_pages(legal_pages)
         self.build_glossary(glossary_terms)
@@ -734,7 +728,7 @@ class SiteBuilder:
         self.build_pygments_css()
 
         print(f"  {len(posts)} blog post(s)")
-        print(f"  {len(pillars)} topic pillar(s)")
+        print(f"  {len(pillars)} article focus area(s)")
         print(f"  {len(work_cases)} case stud(ies)")
         print(f"  {len(projects)} project(s)")
         print(f"  {len(glossary_terms)} glossary term(s)")

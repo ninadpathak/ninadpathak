@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Six-month documentation authority publishing calendar for NinadPathak.com.">
+  <title>NinadPathak.com — Documentation Authority Calendar</title>
+  <style>
+    :root {
+      --ink: #171714;
+      --muted: #6d6b62;
+      --paper: #f4f1e8;
+      --panel: #fffdf7;
+      --line: #d9d4c7;
+      --red: #d7462e;
+      --red-dark: #9d2f1d;
+      --blue: #275f81;
+      --green: #47784c;
+      --amber: #a26816;
+      --shadow: 0 18px 50px rgba(48, 42, 29, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(23, 23, 20, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 100% 32px;
+      font: 15px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, input, select { font: inherit; }
+
+    button, select {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      background: var(--panel);
+    }
+
+    button { cursor: pointer; }
+    button:hover { border-color: var(--ink); }
+    button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 3px solid rgba(39, 95, 129, .28);
+      outline-offset: 2px;
+    }
+
+    .shell {
+      width: min(1480px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 56px;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+      padding: 28px 0 24px;
+      border-top: 6px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--red-dark);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 920px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 6vw, 76px);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: .96;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .cadence {
+      min-width: 220px;
+      padding-left: 24px;
+      border-left: 1px solid var(--line);
+    }
+
+    .cadence strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .cadence span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1px;
+      margin: 24px 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      min-height: 112px;
+      padding: 20px;
+      background: var(--panel);
+    }
+
+    .stat strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .progress {
+      height: 5px;
+      margin-top: 14px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #e8e3d7;
+    }
+
+    .progress i {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: var(--red);
+      transition: width .25s ease;
+    }
+
+    .controls {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      display: grid;
+      grid-template-columns: minmax(260px, 1.7fr) repeat(3, minmax(150px, .65fr)) auto;
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(244, 241, 232, .94);
+      box-shadow: 0 12px 28px rgba(48, 42, 29, .08);
+      backdrop-filter: blur(12px);
+    }
+
+    .search-wrap { position: relative; }
+
+    .search-wrap span {
+      position: absolute;
+      top: 10px;
+      left: 13px;
+      color: var(--muted);
+    }
+
+    input[type="search"] {
+      width: 100%;
+      min-height: 42px;
+      padding: 8px 12px 8px 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+    }
+
+    select { width: 100%; padding: 7px 34px 7px 11px; }
+
+    .reset {
+      padding: 7px 16px;
+      white-space: nowrap;
+    }
+
+    .results-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 18px 2px 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th {
+      padding: 13px 12px;
+      border-bottom: 1px solid var(--ink);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: #faf6eb; }
+    tbody tr.is-published { background: #f2f7ef; }
+
+    .date {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .date strong {
+      display: block;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .title-button {
+      min-height: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      font-weight: 750;
+      text-align: left;
+    }
+
+    .title-button:hover { color: var(--red-dark); }
+
+    .reader-job {
+      display: -webkit-box;
+      margin-top: 5px;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 12px;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 4px 8px;
+      border: 1px solid currentColor;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .tier-anchor { color: var(--red-dark); background: #fff0eb; }
+    .tier-practical { color: var(--blue); background: #edf7fb; }
+    .tier-focused { color: var(--green); background: #f0f7ef; }
+
+    .status-select {
+      min-height: 34px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .empty {
+      padding: 72px 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    dialog {
+      width: min(720px, calc(100% - 28px));
+      max-height: calc(100vh - 40px);
+      padding: 0;
+      overflow: auto;
+      border: 1px solid var(--ink);
+      border-radius: 14px;
+      background: var(--panel);
+      color: var(--ink);
+      box-shadow: 0 30px 90px rgba(23, 23, 20, .28);
+    }
+
+    dialog::backdrop {
+      background: rgba(23, 23, 20, .62);
+      backdrop-filter: blur(3px);
+    }
+
+    .dialog-inner { padding: 30px; }
+
+    .dialog-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .dialog-top h2 {
+      margin: 7px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 5vw, 43px);
+      font-weight: 500;
+      letter-spacing: -.025em;
+      line-height: 1.06;
+    }
+
+    .close {
+      min-width: 42px;
+      padding: 6px 12px;
+      font-size: 20px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .detail-block {
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .detail-block.full { grid-column: 1 / -1; }
+
+    .detail-block h3 {
+      margin: 0 0 7px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .detail-block p { margin: 0; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .summary { grid-template-columns: repeat(3, 1fr); }
+      .controls { grid-template-columns: 1fr 1fr; }
+      .search-wrap { grid-column: 1 / -1; }
+      .reset { width: 100%; }
+      .col-cluster { display: none; }
+      table col:nth-child(4) { width: 0 !important; }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 20px, 1480px); padding-top: 12px; }
+      .masthead { grid-template-columns: 1fr; }
+      .cadence { padding: 0; border-left: 0; }
+      .summary { grid-template-columns: 1fr 1fr; }
+      .stat { min-height: 98px; padding: 16px; }
+      .controls { position: static; grid-template-columns: 1fr; }
+      .search-wrap { grid-column: auto; }
+      .table-wrap { border: 0; overflow: visible; background: transparent; box-shadow: none; }
+      table, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      tbody { display: grid; gap: 10px; }
+      tbody tr {
+        position: relative;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+      }
+      td { padding: 4px 0; border: 0; }
+      td:nth-child(1) { display: inline-block; margin-right: 10px; }
+      td:nth-child(3) { display: inline-block; }
+      td:nth-child(5) { margin-top: 8px; }
+      .col-cluster { display: block; color: var(--muted); font-size: 12px; }
+      .status-select { width: 100%; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .detail-block.full { grid-column: auto; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">NinadPathak.com · Working calendar</p>
+        <h1>Documentation authority, one useful answer at a time.</h1>
+        <p class="intro">A six-month publishing system for practical documentation, API docs, docs-as-code, search, AI retrieval, and evidence-led technical content.</p>
+      </div>
+      <div class="cadence" aria-label="Publishing cadence">
+        <strong>1 / 2 days</strong>
+        <span>90 releases · Aug 2026–Jan 2027</span>
+      </div>
+    </header>
+
+    <section class="summary" aria-label="Calendar summary">
+      <div class="stat"><strong id="totalCount">90</strong><span>Total releases</span></div>
+      <div class="stat"><strong id="anchorCount">18</strong><span>Evidence anchors</span></div>
+      <div class="stat"><strong id="readyCount">0</strong><span>Ready</span></div>
+      <div class="stat"><strong id="publishedCount">0</strong><span>Published</span></div>
+      <div class="stat">
+        <strong id="completionCount">0%</strong>
+        <span>Completion</span>
+        <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Calendar filters">
+      <label class="search-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input id="search" type="search" placeholder="Search titles, reader jobs, clusters…" aria-label="Search calendar">
+      </label>
+      <label>
+        <select id="monthFilter" aria-label="Filter by month">
+          <option value="">All months</option>
+        </select>
+      </label>
+      <label>
+        <select id="clusterFilter" aria-label="Filter by cluster">
+          <option value="">All clusters</option>
+        </select>
+      </label>
+      <label>
+        <select id="statusFilter" aria-label="Filter by status">
+          <option value="">All statuses</option>
+          <option>Planned</option>
+          <option>Researching</option>
+          <option>Drafting</option>
+          <option>Review</option>
+          <option>Ready</option>
+          <option>Published</option>
+          <option>Paused</option>
+        </select>
+      </label>
+      <button class="reset" id="resetFilters" type="button">Reset filters</button>
+    </section>
+
+    <div class="results-line">
+      <span id="resultsCount">90 of 90 releases</span>
+      <span>Click a title for the complete brief</span>
+    </div>
+
+    <section class="table-wrap" aria-label="Publishing plan">
+      <table>
+        <colgroup>
+          <col style="width: 104px">
+          <col>
+          <col style="width: 106px">
+          <col style="width: 180px">
+          <col style="width: 150px">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Release</th>
+            <th>Tier</th>
+            <th class="col-cluster">Cluster</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="calendarBody"></tbody>
+      </table>
+      <div class="empty" id="emptyState" hidden>No releases match these filters.</div>
+    </section>
+
+    <footer>
+      <span>Strategy source: documentation-authority-plan.md · Semrush US research, 29 July 2026</span>
+      <span>Progress is saved in this browser. Nothing here publishes to the website.</span>
+    </footer>
+  </main>
+
+  <dialog id="detailDialog">
+    <div class="dialog-inner">
+      <div class="dialog-top">
+        <div>
+          <span class="pill" id="dialogTier">Anchor</span>
+          <h2 id="dialogTitle"></h2>
+        </div>
+        <button class="close" id="closeDialog" type="button" aria-label="Close details">×</button>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-block">
+          <h3>Publish date</h3>
+          <p id="dialogDate"></p>
+        </div>
+        <div class="detail-block">
+          <h3>Authority cluster</h3>
+          <p id="dialogCluster"></p>
+        </div>
+        <div class="detail-block full">
+          <h3>Reader job</h3>
+          <p id="dialogJob"></p>
+        </div>
+        <div class="detail-block full">
+          <h3>Proof required</h3>
+          <p id="dialogEvidence"></p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const months = [
+      {
+        month: "August 2026",
+        cluster: "Documentation foundations",
+        releases: [
+          ["SEO for Technical Documentation: The Complete Developer Docs Checklist", "Build or repair a documentation site's organic discoverability.", "Audit 20 real DevTools documentation sites; publish the method and anonymized results."],
+          ["Technical Documentation Template: From Empty Repository to Published Guide", "Start a documentation project from a usable structure.", "Publish a GitHub template with Markdown, navigation, frontmatter, review checks, and a deployable example."],
+          ["Technical Documentation Best Practices, Tested on Real Developer Docs", "Improve documentation using practices grounded in actual failures.", "Show before-and-after examples, broken workflows, and primary-source references."],
+          ["What Is Technical Documentation, and What Should It Include?", "Understand the deliverables before starting.", "Use concrete product examples and distinguish documentation from adjacent content."],
+          ["Types of Technical Documentation: Choose the Right Format", "Match tutorials, how-to guides, reference, and explanation to a task.", "Map real reader situations to document types with inspectable examples."],
+          ["Internal vs. External Documentation: What Belongs Where", "Separate team knowledge from customer-facing docs.", "Provide a decision matrix and realistic boundary cases."],
+          ["How to Organize a Documentation Site", "Turn an unstructured page list into usable navigation.", "Reorganize a sample docs set and explain each structural choice."],
+          ["Documentation Information Architecture for Developer Products", "Design hierarchy, labels, and cross-links.", "Publish a card-sort or task-mapping example for a developer product."],
+          ["Documentation Style Guide Template for Developer Teams", "Standardize terminology, voice, code, and UI references.", "Provide a downloadable, filled-in template with engineering-focused examples."],
+          ["Documentation Review Checklist Before You Publish", "Run an editorial, technical, and usability review.", "Provide a checklist tested against a complete sample page."],
+          ["Documentation Accessibility Checklist", "Make headings, code, links, tables, and visuals accessible.", "Reference current standards and demonstrate fixes on representative docs components."],
+          ["How to Write Task-Based Documentation Headings", "Replace vague topic labels with scannable reader tasks.", "Show a before-and-after heading rewrite across one complete page."],
+          ["What a Documentation Homepage Must Help Users Do", "Design a useful entry point rather than a card wall.", "Compare real homepages against a task-based rubric."],
+          ["How to Audit Broken Links, Redirects, and Canonicals in Docs", "Find crawl and migration defects.", "Include repeatable commands, expected output, and fixes from a sample site."],
+          ["How to Document Multiple Product Versions", "Prevent users and search engines from landing on the wrong version.", "Show URL, canonical, navigation, and deprecation patterns with a working example."]
+        ]
+      },
+      {
+        month: "September 2026",
+        cluster: "API documentation",
+        releases: [
+          ["API Documentation Best Practices: Reference, Guides, and Working Requests", "Build an API docs system that gets developers to successful requests.", "Document a sample API with auth, endpoints, errors, pagination, webhooks, and runnable requests."],
+          ["API Documentation Examples: What the Best Developer Portals Get Right", "Learn from developer portals without copying surface-level design.", "Test 8–10 portals with screenshots, a repeatable rubric, and task-completion checks."],
+          ["API Documentation Tools: A Hands-On Comparison for Small Teams", "Choose an API documentation tool based on actual workflow needs.", "Publish the same API in five tools and score setup, OpenAPI, examples, search, Git, SEO, and export."],
+          ["API Documentation Template: The Pages Every API Needs", "Start an API docs project from a complete outline.", "Provide a downloadable outline populated with one coherent sample API."],
+          ["What Is API Documentation? Reference, Guides, and Examples", "Understand the components of an API docs system.", "Use one API to demonstrate the role of each component."],
+          ["API Reference vs. API Guides: Where Each Answer Belongs", "Stop forcing every task into endpoint reference pages.", "Classify realistic content examples and show the resulting navigation."],
+          ["How to Document API Authentication", "Explain keys, OAuth, scopes, expiry, and failed authentication.", "Include working and failing requests plus safe credential handling."],
+          ["How to Document API Errors", "Turn codes and messages into actionable recovery steps.", "Create an error model with exact messages, causes, fixes, and retry guidance."],
+          ["How to Document API Pagination", "Show cursors, limits, ordering, and complete iteration.", "Include runnable requests that traverse every page and handle edge cases."],
+          ["How to Document Webhooks", "Cover payloads, signing, retries, ordering, and testing.", "Build and verify a signed sample webhook flow, including failure behavior."],
+          ["How to Write API Code Examples Developers Can Run", "Produce complete requests with expected responses.", "Test every snippet from a clean environment and publish setup and cleanup steps."],
+          ["REST API Documentation Example: A Complete Endpoint", "See one endpoint documented from authentication through errors.", "Publish the endpoint, request, response, schema, errors, and tested examples."],
+          ["OpenAPI Documentation Best Practices", "Improve descriptions, examples, schemas, and generated output.", "Show a weak and improved OpenAPI document with rendered output."],
+          ["Interactive API Documentation: When Try-It Consoles Help", "Decide when interactivity improves or harms the workflow.", "Test representative consoles for auth, safety, errors, mobile use, and accessibility."],
+          ["API Documentation Checklist Before Release", "Verify coverage, accuracy, examples, and version behavior.", "Run the checklist against the sample API and show the defects it catches."]
+        ]
+      },
+      {
+        month: "October 2026",
+        cluster: "Docs as code",
+        releases: [
+          ["Docs as Code: A Working Git-Based Documentation Workflow", "Implement a reliable Git-based documentation workflow.", "Publish a repo with branches, previews, reviews, linting, link checks, and Cloudflare Pages deployment."],
+          ["Technical Documentation Software: How to Choose Without Replatforming Twice", "Choose a platform based on the team's actual constraints.", "Use a decision matrix covering Git, APIs, localization, SEO, portability, and maintenance cost."],
+          ["Documentation Maintenance: A Workflow That Keeps Docs Current", "Keep documentation aligned with product releases.", "Provide issue templates, ownership matrix, freshness metadata, triggers, reports, and review schedule."],
+          ["Docs-as-Code Tools: The Minimum Stack You Actually Need", "Choose authoring, preview, linting, and deployment tools.", "Assemble and run a minimal stack in the sample repository."],
+          ["Docs-as-Code Example Repository, Explained File by File", "Understand a working repository without copying blindly.", "Publish and annotate every important file in a functioning repo."],
+          ["Documentation Workflow From Issue to Published Page", "Define ownership and handoffs.", "Walk one real sample change through issue, branch, review, preview, and release."],
+          ["Documentation Automation That Is Safe to Trust", "Automate mechanical work without inventing content.", "Separate deterministic checks from assisted drafting and demonstrate failure controls."],
+          ["Automated API Documentation From OpenAPI", "Generate reference while preserving human-written guidance.", "Build generated reference plus hand-written task guides from the same sample API."],
+          ["Documentation Testing: What You Can Validate in CI", "Test links, structure, spelling, code, and builds.", "Provide a working CI pipeline with intentional failures and expected output."],
+          ["Documentation Linting With Vale and Markdownlint", "Enforce useful rules without fighting every sentence.", "Publish focused configurations and explain every non-default rule."],
+          ["How to Add a Broken-Link Check to Documentation CI", "Catch dead internal and external links before release.", "Add a repeatable link check with caching, exclusions, and failure output."],
+          ["Preview Deployments for Documentation Pull Requests", "Let reviewers inspect the rendered change.", "Configure previews and demonstrate the complete review loop."],
+          ["Documentation Versioning in Git", "Align product, branch, and published documentation versions.", "Implement and compare realistic versioning patterns in the sample repo."],
+          ["Documentation Ownership: A Practical Maintainer Model", "Assign accountable owners without creating a bottleneck.", "Provide a RACI-like model tied to paths and release triggers."],
+          ["Documentation Migration Checklist", "Move platforms without losing URLs, metadata, or search equity.", "Demonstrate an inventory, mapping, redirects, validation, and rollback plan."]
+        ]
+      },
+      {
+        month: "November 2026",
+        cluster: "Documentation formats",
+        releases: [
+          ["Technical Documentation Examples: Tutorials, How-To Guides, Reference, and Explanation", "See four complete documentation formats for the same product.", "Publish four original documents around one sample product; test Diátaxis against actual tasks."],
+          ["Troubleshooting Guide Template: Write Answers Developers Can Actually Use", "Create troubleshooting content that leads to resolution.", "Include decision tree, exact errors, commands, expected output, rollback, and escalation criteria."],
+          ["Developer Onboarding Checklist for API and DevTools Products", "Find and remove friction from first-use documentation.", "Time a new user on a sample integration, record failures, and show the revised path."],
+          ["Tutorial vs. How-To vs. Reference vs. Explanation", "Choose the right document type for the reader task.", "Classify ambiguous examples and explain the consequences of each choice."],
+          ["How to Write a Technical Tutorial That Survives Copy-Paste", "Build and test a complete learning path.", "Run every step from a clean environment and include expected results and recovery."],
+          ["How-To Documentation Template", "Write a focused procedure for a known goal.", "Provide a downloadable template plus a fully worked example."],
+          ["Reference Documentation Template", "Record parameters, behavior, constraints, and examples consistently.", "Populate the template with a coherent product surface and edge cases."],
+          ["How to Write Explanation Documentation", "Teach concepts and tradeoffs without hiding task pages.", "Write one explanation and show how it links to related procedural docs."],
+          ["Release Notes Best Practices for Developer Products", "Communicate impact, required action, and migration details.", "Rewrite representative weak release notes and validate links and affected versions."],
+          ["Changelog Best Practices: Structure, Links, and Automation", "Maintain a useful chronological product record.", "Implement a changelog flow with categories, links, and automation boundaries."],
+          ["How to Write an API Changelog", "Track breaking changes, deprecations, and new behavior.", "Publish examples for additive, breaking, deprecated, and corrected API changes."],
+          ["SDK Documentation Best Practices", "Document installation, initialization, methods, and language differences.", "Document one small SDK with tested setup and language-specific examples."],
+          ["CLI Documentation Best Practices", "Cover commands, flags, output, exit codes, and shell examples.", "Build docs for a sample CLI and test commands across normal and failure paths."],
+          ["README Best Practices for Developer Tools", "Move users from repository landing page to first success.", "Rewrite a sample README and time the setup path before and after."],
+          ["How to Document Error Messages", "Connect exact messages to causes, fixes, and escalation.", "Create a searchable error catalog backed by reproducible failure cases."]
+        ]
+      },
+      {
+        month: "December 2026",
+        cluster: "AI-ready documentation",
+        releases: [
+          ["Free llms.txt Generator and Checker for Documentation Sites", "Generate and validate an llms.txt file without inflated promises.", "Expose every rule and validate examples for three documentation-site structures."],
+          ["Does llms.txt Improve AI Visibility? A Controlled Documentation Test", "Understand whether llms.txt changes crawler or citation behavior.", "Pre-register matched tests, log access and citations, and publish null results if needed."],
+          ["Semantic Chunking for Documentation RAG: A Reproducible Benchmark", "Choose a retrieval chunking strategy using real evidence.", "Publish corpus, code, queries, labels, raw data, and evaluation notebook across four methods."],
+          ["What Is llms.txt, and What Is It Not?", "Understand the proposal without inflated promises.", "Trace the specification and separate observed behavior from assumptions."],
+          ["llms.txt Format and Implementation Guide", "Create and validate a file manually.", "Publish valid examples, validation rules, common failures, and a working implementation."],
+          ["robots.txt for AI Crawlers: A Documentation-Site Guide", "Decide which crawlers can access which content.", "Use current primary sources and test representative directives."],
+          ["AI-Ready Documentation Checklist", "Improve structure and retrievability without keyword theater.", "Run the checklist on a sample corpus and show measurable structural changes."],
+          ["Document Chunking Strategies for RAG", "Choose a chunking method for a documentation corpus.", "Implement representative strategies on the same content and expose outputs."],
+          ["Heading-Aware Chunking for Technical Documentation", "Preserve task and section context during retrieval.", "Publish working chunker code and inspect chunks from complex pages."],
+          ["Fixed-Token vs. Recursive vs. Semantic Chunking", "Understand operational tradeoffs before benchmarking.", "Compare output shape, cost, context preservation, and failure modes on one corpus."],
+          ["Metadata for Documentation RAG", "Attach product, version, language, and page-type filters.", "Design a schema and demonstrate filtered retrieval across conflicting versions."],
+          ["Hybrid Search for Documentation", "Combine exact error-code matching with semantic retrieval.", "Run lexical, vector, and hybrid queries against the same corpus."],
+          ["Reranking Documentation Search Results", "Improve ordering after initial retrieval.", "Publish test queries, candidate results, reranked results, and relevance labels."],
+          ["How to Evaluate a Documentation Chatbot", "Build answer, citation, refusal, and freshness tests.", "Provide an evaluation set, scoring rubric, failure taxonomy, and repeatable runner."],
+          ["AI Chatbot for Documentation: A Reference Architecture", "Connect ingestion, retrieval, generation, citations, and feedback.", "Build a small reference system and document boundaries, observability, and failure handling."]
+        ]
+      },
+      {
+        month: "January 2027",
+        cluster: "Technical content",
+        releases: [
+          ["Code Documentation Best Practices: Comments, Examples, and Reference Pages", "Choose what belongs in code, comments, examples, and external docs.", "Publish one small codebase documented badly and well, with generated reference and copy-paste tests."],
+          ["SEO Content Brief Template for Technical Blog Posts", "Plan a technical article around intent, proof, and maintainability.", "Provide the SERP analysis, reader task, test plan, validation rules, link map, and update trigger."],
+          ["Documentation Metrics: How to Measure Whether the Docs Work", "Measure task success and documentation quality without vanity metrics.", "Provide implementation examples for success, failed search, freshness, example failures, and conversion."],
+          ["How to Write a Technical Blog Post for Developers", "Turn a technical reader task into a credible article.", "Build one complete article from research question through tested draft."],
+          ["Technical Blog Examples: Tutorials, Benchmarks, and Teardowns", "Choose a format based on the evidence available.", "Publish original miniature examples and a decision framework."],
+          ["How to Write Code Examples for Technical Content", "Make snippets complete, focused, and testable.", "Show before-and-after examples and verify every final snippet."],
+          ["Runnable Code Examples: A Validation Workflow", "Test dependencies, setup, output, cleanup, and failure paths.", "Publish a reusable validation workflow and a sample repository."],
+          ["Should This Be Documentation or a Blog Post?", "Put durable product guidance and discovery content in the right place.", "Use a decision tree and classify real ambiguous examples."],
+          ["Technical Content Marketing for Developer Products", "Build trust and demand without disguising marketing as engineering.", "Map useful formats to buyer problems and provide evidence standards."],
+          ["B2B SaaS Technical Content Strategy", "Connect problem-led content, product proof, and conversion.", "Build a worked strategy for a fictional developer SaaS with explicit assumptions."],
+          ["Blog SEO Checklist for Technical Articles", "Validate intent, structure, metadata, links, and page experience.", "Run the checklist against a rendered article and show the resulting changes."],
+          ["How to Write a Developer Tutorial With a Real Test Environment", "Design a reproducible build rather than decorative code.", "Create a containerized test environment, commands, expected output, and cleanup."],
+          ["Technical Content Maintenance: When and How to Update", "Set triggers for versions, rankings, links, and factual changes.", "Provide an inventory, triggers, ownership fields, and update decision rules."],
+          ["How to Measure Technical Content Performance", "Track qualified discovery, product usage, links, and assisted leads.", "Publish event and reporting examples without inventing benchmark values."],
+          ["How to Turn Documentation Research Into a Technical Blog Post", "Reuse evidence without duplicating the documentation page.", "Transform one research artifact into distinct docs and blog outputs with a link map."]
+        ]
+      }
+    ];
+
+    const STORAGE_KEY = "ninad-documentation-calendar-v1";
+    const statusOptions = ["Planned", "Researching", "Drafting", "Review", "Ready", "Published", "Paused"];
+    const savedStatuses = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    const releases = [];
+
+    months.forEach((group, monthIndex) => {
+      group.releases.forEach((release, slotIndex) => {
+        const day = 1 + (slotIndex * 2);
+        const date = new Date(2026, 7 + monthIndex, day, 12);
+        const tier = slotIndex < 3 ? "Anchor" : slotIndex < 8 ? "Practical" : "Focused";
+        releases.push({
+          id: `${monthIndex + 1}-${slotIndex + 1}`,
+          date,
+          month: group.month,
+          cluster: group.cluster,
+          tier,
+          title: release[0],
+          job: release[1],
+          evidence: release[2]
+        });
+      });
+    });
+
+    const body = document.getElementById("calendarBody");
+    const emptyState = document.getElementById("emptyState");
+    const search = document.getElementById("search");
+    const monthFilter = document.getElementById("monthFilter");
+    const clusterFilter = document.getElementById("clusterFilter");
+    const statusFilter = document.getElementById("statusFilter");
+    const dialog = document.getElementById("detailDialog");
+
+    months.forEach(({ month }) => monthFilter.add(new Option(month, month)));
+    [...new Set(months.map(({ cluster }) => cluster))].forEach(cluster => clusterFilter.add(new Option(cluster, cluster)));
+
+    const statusFor = id => savedStatuses[id] || "Planned";
+
+    function updateSummary() {
+      const published = releases.filter(item => statusFor(item.id) === "Published").length;
+      const ready = releases.filter(item => statusFor(item.id) === "Ready").length;
+      const completion = Math.round((published / releases.length) * 100);
+      document.getElementById("totalCount").textContent = releases.length;
+      document.getElementById("anchorCount").textContent = releases.filter(item => item.tier === "Anchor").length;
+      document.getElementById("readyCount").textContent = ready;
+      document.getElementById("publishedCount").textContent = published;
+      document.getElementById("completionCount").textContent = `${completion}%`;
+      document.getElementById("progressBar").style.width = `${completion}%`;
+    }
+
+    function openDetails(item) {
+      const tier = document.getElementById("dialogTier");
+      tier.textContent = item.tier;
+      tier.className = `pill tier-${item.tier.toLowerCase()}`;
+      document.getElementById("dialogTitle").textContent = item.title;
+      document.getElementById("dialogDate").textContent = item.date.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+      document.getElementById("dialogCluster").textContent = item.cluster;
+      document.getElementById("dialogJob").textContent = item.job;
+      document.getElementById("dialogEvidence").textContent = item.evidence;
+      dialog.showModal();
+    }
+
+    function render() {
+      const query = search.value.trim().toLowerCase();
+      const filtered = releases.filter(item => {
+        const haystack = `${item.title} ${item.job} ${item.evidence} ${item.cluster} ${item.tier}`.toLowerCase();
+        return (!query || haystack.includes(query))
+          && (!monthFilter.value || item.month === monthFilter.value)
+          && (!clusterFilter.value || item.cluster === clusterFilter.value)
+          && (!statusFilter.value || statusFor(item.id) === statusFilter.value);
+      });
+
+      body.replaceChildren();
+      filtered.forEach(item => {
+        const row = document.createElement("tr");
+        if (statusFor(item.id) === "Published") row.classList.add("is-published");
+
+        const dateCell = document.createElement("td");
+        dateCell.className = "date";
+        dateCell.innerHTML = `<strong>${item.date.getDate()}</strong>${item.date.toLocaleDateString("en-IN", { month: "short", year: "numeric" })}`;
+
+        const titleCell = document.createElement("td");
+        const titleButton = document.createElement("button");
+        titleButton.className = "title-button";
+        titleButton.type = "button";
+        titleButton.textContent = item.title;
+        titleButton.addEventListener("click", () => openDetails(item));
+        const job = document.createElement("span");
+        job.className = "reader-job";
+        job.textContent = item.job;
+        titleCell.append(titleButton, job);
+
+        const tierCell = document.createElement("td");
+        tierCell.innerHTML = `<span class="pill tier-${item.tier.toLowerCase()}">${item.tier}</span>`;
+
+        const clusterCell = document.createElement("td");
+        clusterCell.className = "col-cluster";
+        clusterCell.textContent = item.cluster;
+
+        const statusCell = document.createElement("td");
+        const select = document.createElement("select");
+        select.className = "status-select";
+        select.setAttribute("aria-label", `Status for ${item.title}`);
+        statusOptions.forEach(status => select.add(new Option(status, status, false, status === statusFor(item.id))));
+        select.addEventListener("change", () => {
+          savedStatuses[item.id] = select.value;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(savedStatuses));
+          updateSummary();
+          render();
+        });
+        statusCell.append(select);
+        row.append(dateCell, titleCell, tierCell, clusterCell, statusCell);
+        body.append(row);
+      });
+
+      emptyState.hidden = filtered.length !== 0;
+      document.getElementById("resultsCount").textContent = `${filtered.length} of ${releases.length} releases`;
+    }
+
+    [search, monthFilter, clusterFilter, statusFilter].forEach(control => control.addEventListener("input", render));
+    document.getElementById("resetFilters").addEventListener("click", () => {
+      search.value = "";
+      monthFilter.value = "";
+      clusterFilter.value = "";
+      statusFilter.value = "";
+      render();
+      search.focus();
+    });
+    document.getElementById("closeDialog").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", event => {
+      const box = dialog.getBoundingClientRect();
+      const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
+      if (outside) dialog.close();
+    });
+
+    updateSummary();
+    render();
+  </script>
+</body>
+</html>

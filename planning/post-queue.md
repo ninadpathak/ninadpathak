@@ -1,5 +1,9 @@
 # Daily Post Queue (v4.1 - Experiment & Benchmark Driven)
 
+> **Superseded 2026-07-29:** Do not execute this daily queue. Use
+> [`documentation-authority-plan.md`](documentation-authority-plan.md), which uses an
+> every-other-day publishing pipeline with separate anchor, practical, and focused tiers.
+
 Posts are published one per day. Claude picks the next post, runs the experiment, writes the post-mortem, builds, and pushes.
 
 ## Queue (ordered)

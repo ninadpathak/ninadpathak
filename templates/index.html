@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block title %}Ninad Pathak | Technical Content Writer for DevTools & B2B SaaS{% endblock %}
-{% block description %}Technical content writer for DevTools & B2B SaaS. 6+ years helping 30+ companies create docs, tutorials, and blog content engineers approve.{% endblock %}
+{% block title %}Ninad Pathak | Developer Relations Content for DevTools & SaaS{% endblock %}
+{% block description %}I help DevRel and developer marketing teams create documentation, tutorials, code examples, and technical articles that earn trust and adoption.{% endblock %}
 
 {% block schema %}
 <script type="application/ld+json">
@@ -27,15 +27,17 @@
   "description": "{{ site.description }}",
   "knowsAbout": [
     "Technical Writing",
+    "Developer Relations",
+    "Developer Education",
+    "Developer Experience",
     "Developer Documentation",
-    "AI Agents",
-    "Agentic Workflows",
-    "AI Agent Memory",
-    "Retrieval-Augmented Generation (RAG)",
-    "Large Language Models",
-    "LLM Inference Optimization",
-    "Workflow Automation",
-    "DevTools Content Strategy"
+    "API Documentation",
+    "Docs as Code",
+    "Documentation SEO",
+    "Code Examples",
+    "Technical Tutorials",
+    "AI-Ready Documentation",
+    "Technical Content Strategy"
   ],
   "sameAs": [
     "https://linkedin.com/in/ninadwites/",
@@ -52,12 +54,13 @@
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="container hero-content-wrap">
     <div class="hero-copy">
-      <div class="label hero-label">Technical Content Writer</div>
-      <h1>Technical content your engineers<br> won't <em>cringe</em> at</h1>
+      <div class="label hero-label">Developer relations content</div>
+      <h1>Developer content built to be <em>used</em>, found, and trusted.</h1>
       <p class="lead">
-        I write technical content for DevTools and B2B SaaS teams that want depth,
-        clarity, and zero hand-holding from engineering. If it needs to be
-        technically right and commercially useful, that's my lane.
+        I help DevRel and developer marketing teams turn product knowledge into
+        documentation, tutorials, code examples, and technical articles. The work is
+        technically credible, search-aware, and structured so people and AI systems can
+        find the right answer.
       </p>
       <div class="hero-actions">
         <a href="/work/" class="btn btn-primary">See My Work →</a>
@@ -143,13 +146,13 @@
     <div class="section-header">
       <div class="section-header-left">
         <div class="label">// What I do</div>
-        <h2>Technical writing with engineering depth</h2>
+        <h2>Technical education across the developer journey</h2>
       </div>
       <div class="section-header-right">
         <p class="lead">
-          I started as a programmer. When I write a tutorial, I run the code.
-          When the docs conflict with actual behavior, I test both and write
-          what works. Your engineers get content they don't have to fix.
+          I started as a programmer and moved into technical writing and DevRel.
+          Whether the deliverable is a docs site, launch tutorial, integration guide,
+          or search-led article, I test the product and build around the developer's job.
         </p>
       </div>
     </div>
@@ -157,18 +160,18 @@
     <div class="services-list">
       <div class="service-item">
         <div class="service-num">01</div>
-        <div class="service-title">Technical Tutorials & Guides</div>
-        <p class="service-desc">Implementation-level documentation. Step-by-step guides where the code works and the concepts are explained without condescension.</p>
+        <div class="service-title">Documentation & Developer Education</div>
+        <p class="service-desc">Information architecture, onboarding, API guides, tutorials, troubleshooting, and runnable examples that help developers reach first success.</p>
       </div>
       <div class="service-item">
         <div class="service-num">02</div>
-        <div class="service-title">Developer-Facing Blog Content</div>
-        <p class="service-desc">Long-form technical articles for engineering audiences. AI agents, DevTools reviews, API comparisons, and framework deep-dives.</p>
+        <div class="service-title">Technical Content for DevRel</div>
+        <p class="service-desc">Launch content, technical articles, integration guides, benchmarks, and code-led stories that give developer audiences a reason to care.</p>
       </div>
       <div class="service-item">
         <div class="service-num">03</div>
-        <div class="service-title">SEO Content Strategy</div>
-        <p class="service-desc">Topical authority and organic traffic for B2B SaaS. I've taken multiple properties from zero to 100K+ monthly visits.</p>
+        <div class="service-title">Organic Discovery & Content Strategy</div>
+        <p class="service-desc">Search intent, documentation SEO, topic architecture, distribution, and AI retrieval—so useful developer content continues working after launch day.</p>
       </div>
     </div>
   </div>
@@ -247,14 +250,14 @@
   <div class="container">
     <div class="section-row">
       <div>
-        <div class="label">// Recent Writing</div>
-        <h2>Thinking out loud</h2>
+        <div class="label">// Documentation articles</div>
+        <h2>Answers you can build from</h2>
       </div>
-      <a href="/blog/" class="arrow-link">All posts →</a>
+      <a href="/articles/" class="arrow-link">All articles →</a>
     </div>
 
     {% for post in recent_posts %}
-    <a href="/blog/{{ post.slug }}/" class="post-row">
+    <a href="/articles/{{ post.slug }}/" class="post-row">
       <span class="post-row-date">{{ post.date | format_date_iso }}</span>
       <span class="post-row-title">{{ post.title }}</span>
       <div class="post-row-tags">
@@ -273,8 +276,8 @@
   <div class="container">
     <div class="cta-inner">
       <div>
-        <h2>Working on something engineers need to understand?</h2>
-        <p>Let's talk about your content. I reply within 24 hours.</p>
+        <h2>Building a developer product people need to understand and adopt?</h2>
+        <p>Let's turn the product knowledge into content developers can use.</p>
       </div>
       <div class="cta-actions">
         <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a 30-min Call →</a>

@@ -3,7 +3,7 @@ title: "Quantifying the Engineering Velocity Impact of Technical Documentation"
 date: 2026-04-11
 description: "I analyze the structural correlation between documentation quality and engineering throughput, using DORA metrics and Accelerate research to quantify the ROI of technical writing."
 tags: [engineering-velocity, developer-productivity, dora-metrics, technical-writing]
-status: published
+status: review
 ---
 
 Of every investment I have watched move engineering velocity, technical documentation is the one most teams underrate. Writing tends to get filed under secondary administrative work, and yet [DORA research (Accelerate)](https://dora.dev/publications/) confirms that high-quality documentation makes a team 2.4x more likely to achieve elite software delivery performance. The effect compounds rather than adding up linearly. Technical practices like Continuous Integration provide a 34% performance lift with poor documentation, and that same lift surges to 750% when supported by high-quality technical writing. I have stopped thinking of documentation as a clarity exercise. It behaves like a systemic optimization for engineering throughput, the kind of thing that quietly raises the ceiling on everything else a team does.

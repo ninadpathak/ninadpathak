@@ -3,7 +3,7 @@ title: "AI Memory Management for LLMs: What Actually Works"
 date: 2026-04-19
 description: "A senior engineer's breakdown of what memory management for LLMs actually looks like in production: eviction strategies, KV cache management, importance-weighted retention, and why your agent keeps forgetting things."
 tags: [ai, agents, memory, llm, infrastructure, memory-management]
-status: published
+status: retired
 ---
 
 Having a context window does not mean an LLM has memory. When I started building agentic pipelines in 2023, I watched junior engineers assume that a 128K token context meant their agent could "remember" previous interactions. It cannot. A 128K context is a static buffer, and what happens inside it is determined entirely by how you manage it. The moment you exceed that window, or the moment you need a customer support agent to recall what a user told it yesterday, you need an explicit memory system.

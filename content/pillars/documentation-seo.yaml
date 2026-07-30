@@ -1,0 +1,41 @@
+slug: documentation-seo
+status: published
+title: "Documentation SEO: Make Developer Docs Discoverable"
+h1: "Documentation SEO"
+description: "Help search engines discover, understand, and rank documentation without compromising the developer experience."
+intro: |
+  Documentation SEO starts with the same requirement as useful docs: one page should
+  answer one recognizable task. Search engines cannot rescue duplicated, inaccessible,
+  stale, or structurally ambiguous documentation.
+
+  This hub focuses on the technical and editorial work around server-rendered content,
+  canonicals, version URLs, internal links, titles, sitemaps, redirects, and pages that
+  remain understandable outside their original navigation context.
+checklist_heading: "Check the page before chasing a keyword"
+checklist:
+  - "Confirm the page returns the intended status code and indexable HTML."
+  - "Give one reader task its own stable URL, title, description, and H1."
+  - "Use a self-referencing canonical unless a deliberate duplicate has a better source."
+  - "Link from the relevant hub and from genuinely related task pages."
+  - "Keep version and language variants explicit in URLs and navigation."
+  - "Test sitemaps, redirects, broken links, and accidental soft 404 responses."
+planned:
+  - "SEO for Technical Documentation: The Complete Developer Docs Checklist"
+  - "How to Audit Broken Links, Redirects, and Canonicals in Docs"
+  - "How to Document Multiple Product Versions"
+sections: []
+faqs:
+  - q: "Should product documentation be optimized for search?"
+    a: "Yes, when the query represents a product or problem task the documentation genuinely solves. Optimization should improve the page's clarity, access, and structure rather than add generic keyword copy."
+  - q: "Why does Google index the marketing site but not the docs?"
+    a: "Common causes include client-only rendering, weak internal links, duplicate or conflicting canonicals, blocked crawling, unstable version URLs, thin generated pages, and soft 404 behavior."
+bridges:
+  - title: "Developer Documentation"
+    url: "/documentation/"
+    blurb: "Start with the reader task"
+  - title: "AI-Ready Documentation"
+    url: "/ai-ready-documentation/"
+    blurb: "Structure answers for reliable retrieval"
+  - title: "Technical Content"
+    url: "/technical-content/"
+    blurb: "Create discovery content around technical problems"

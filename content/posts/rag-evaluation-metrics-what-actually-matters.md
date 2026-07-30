@@ -3,7 +3,7 @@ title: "RAG Evaluation Metrics: What Actually Matters"
 date: 2026-04-16
 description: "A practical guide to RAGAs, recall, precision, and the metrics that separate production RAG systems from prototypes."
 tags: [rag, evaluation, llm, metrics]
-status: published
+status: review
 ---
 
 Building a RAG system is the part every tutorial covers. Measuring whether it works is the part almost none of them touch. I built three RAG systems before any of this clicked for me, and the difference between a slick demo and something I'd trust in production came down to evaluation almost every time.

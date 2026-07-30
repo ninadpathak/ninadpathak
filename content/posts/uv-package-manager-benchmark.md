@@ -3,7 +3,7 @@ title: "From 4 Minutes to 12 Seconds: A Quantitative Audit of the uv Package Man
 date: 2026-04-14
 description: "I benchmarked Astral uv against Poetry and pip on a 2026 AI dependency stack. Here is how Rust-native tooling reduces build times by 20x."
 tags: [python, devtools, benchmarking, engineering-velocity, rust]
-status: published
+status: retired
 ---
 
 Moving a Python team off legacy package managers and onto `uv` has been the single most significant productivity win I have shipped in 2026. I have watched engineers stop tabbing away to Slack during a `poetry install` because there is no longer enough time to read a message.

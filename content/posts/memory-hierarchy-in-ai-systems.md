@@ -3,7 +3,7 @@ title: "Memory Hierarchy in AI Systems: From Sensory to Semantic"
 date: 2026-04-19
 description: "How layered memory architecture helps AI systems achieve long-term context, personalization, and continuous learning, and why flat memory fails."
 tags: [ai, agents, memory, cognitive-architecture, infrastructure]
-status: published
+status: retired
 ---
 
 Human brains do not store every experience equally. They layer it: sensory input gets filtered into working memory, some of that gets compressed into long-term storage, and the rest evaporates. Forgetting the color of every car you passed on the drive home is the feature that makes the whole system scalable, not a defect in it. AI systems work the same way, and the teams that understand this build agents that actually remember things. Treating memory as a flat document store gets you a system that forgets a user's name the moment the context window fills with the next ten tool calls.

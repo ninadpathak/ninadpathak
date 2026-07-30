@@ -4,7 +4,7 @@ date: "2026-04-27"
 slug: "multi-agent-vs-single-agent-tradeoffs"
 description: "The decision between one agent and many is not about capability. It is about failure modes, latency, and operational complexity."
 tags: ["ai agents", "multi-agent systems", "agent architecture"]
-status: published
+status: retired
 ---
 
 The first time I split a single agent into two, I thought I was solving a parallelism problem. What I actually did was create two new failure modes I did not have before.

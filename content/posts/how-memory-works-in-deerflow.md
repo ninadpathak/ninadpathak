@@ -3,7 +3,7 @@ title: "How Memory Works in DeerFlow"
 date: 2026-04-19
 description: "A deep dive into the memory architecture of DeerFlow: layered context passing, session state files, sub-agent isolation, and how it compares to Letta, AutoGen, and CrewAI."
 tags: [ai, agents, memory, deerflow, infrastructure]
-status: published
+status: retired
 ---
 
 Structured context passing is what I call the way DeerFlow organizes memory. Rather than relying on a central vector store or a global knowledge graph, DeerFlow passes memory between agents through explicit JSON state files and Markdown context documents. Each agent in a workflow receives exactly what it needs at the moment it needs it, nothing more.

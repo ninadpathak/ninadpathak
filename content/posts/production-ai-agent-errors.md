@@ -3,7 +3,7 @@ title: "What Nobody Tells You About Error Handling in Production AI Agents"
 date: 2026-04-16
 description: "Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them."
 tags: [ai, devtools, backend, sre]
-status: published
+status: retired
 ---
 
 Two years of running AI agents in production taught me that error handling separates a system that survives reality from one that falls over the moment something goes wrong. Reasoning and tool use get all the attention. Error handling, the part that keeps your on-call phone quiet at 2 AM, gets almost none.
