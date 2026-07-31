@@ -32,9 +32,11 @@ A page succeeds when search engines can discover and interpret it, the right dev
 | Page quality | Can the reader identify and complete the task? | Generic title, stale version, missing prerequisites, broken example |
 | Measurement | Can the team see what happened after release? | No baseline, change annotation, or page owner |
 
-Let the first blocking failure determine the next move. Once that layer works, continue until the page can be discovered, indexed, understood, and used to complete the promised task.
+## Step-by-step SEO audit for documentation sites
 
-## Search intent and page ownership
+Work through these eight checks in order. Fix the first blocking failure before moving to the next check.
+
+### 1. Search intent and page ownership
 
 Make page ownership the first thing in your audit because developer searches usually contain a task, command, error, product, parameter, or version. The page that owns the query should name that task and make the successful state easy to recognize.
 
@@ -50,13 +52,13 @@ If two pages complete the same task, compare the documentation, marketing site, 
 
 The [documentation organization guide](/articles/how-to-organize-a-documentation-site/) covers that consolidation work in detail.
 
-## Internal links and XML sitemaps
+### 2. Internal links and XML sitemaps
 
 Google's [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) identifies links as a primary way crawlers discover pages. Trace every important documentation URL back to a relevant hub, guide, or sibling page instead of treating its XML sitemap entry as the entire discovery strategy.
 
 The internal route has to make sense for a person too. A useful link carries the reader toward a prerequisite, a deeper explanation, or the next task rather than existing only because an audit wanted another inbound link.
 
-### Crawlable internal links
+#### Crawlable internal links
 
 Google's [crawlable-link guidance](https://developers.google.com/search/docs/crawling-indexing/links-crawlable) recommends an `<a>` element with an `href` that resolves to a web address. Look for that ordinary HTML before trusting a navigation path, since JavaScript click handlers and empty anchors are less dependable for crawling and keyboard navigation.
 
@@ -68,7 +70,7 @@ Google's [crawlable-link guidance](https://developers.google.com/search/docs/cra
 
 The anchor should still identify the destination when someone reads it without the surrounding sentence. “Verify webhook signatures” carries the task on its own, while “Read more” asks both the reader and the crawler to infer it.
 
-### XML sitemap checks
+#### XML sitemap checks
 
 Treat the sitemap as a record of the URLs the site actually wants search engines to consider. Google's [sitemap guidance](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap) recommends fully qualified canonical URLs, which makes the following signals straightforward to compare:
 
@@ -80,11 +82,11 @@ Treat the sitemap as a record of the URLs the site actually wants search engines
 
 Google ignores `<priority>` and `<changefreq>`, so those fields do not need release time.
 
-## Crawling, rendering, and indexing
+### 3. Crawling, rendering, and indexing
 
 The browser can make a broken page look healthy after JavaScript has run. Read the server response before reviewing the layout because it shows whether the content, links, and canonical metadata exist without asking a renderer to repair the page.
 
-### HTTP response and rendered HTML
+#### HTTP response and rendered HTML
 
 For the Cloudflare audit, I started with the final URL and headers:
 
@@ -101,13 +103,13 @@ Open the page in a clean browser context and compare the rendered result with th
 
 Google's [JavaScript SEO guidance](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics) explains how rendering affects indexing. Search Console URL Inspection shows Google's indexed view and live-test result.
 
-### `robots.txt` and `noindex`
+#### `robots.txt` and `noindex`
 
 `robots.txt` controls crawling, while a page-level or header-level `noindex` controls indexing. The distinction matters because Google still has to crawl a page before it can see the indexing directive.
 
 Resolve duplicates through redirects or canonical signals rather than hiding them in `robots.txt`. A `noindex` directive fits pages that should remain accessible but should not appear in search.
 
-## Canonical URLs and documentation versions
+### 4. Canonical URLs and documentation versions
 
 Redirects and `rel="canonical"` are strong canonicalization signals. Sitemap inclusion is weaker, so compare the signals together because disagreement usually reveals that templates, navigation, and deployment rules are describing different preferred URLs.
 
@@ -138,7 +140,7 @@ Versioned documentation is where policy becomes more important than a universal 
 
 If the instructions materially differ, keep the older page distinct rather than canonicalizing it to the current version. The pages are not interchangeable when following the wrong one can break an integration, and the URL policy should preserve that distinction.
 
-## Page titles, headings, and task content
+### 5. Page titles, headings, and task content
 
 Labels such as “Overview,” “Configuration,” and “Usage” lose meaning when they leave their section. A useful label should still identify the task in a search result, browser tab, documentation tree, or copied URL.
 
@@ -160,29 +162,29 @@ The task is complete only when the page carries a reader through the required ac
 
 Return version-sensitive pages to the review queue when an SDK release, renamed field, changed permission, UI move, deprecation, support pattern, or ranking loss makes the instructions suspect. The updated date should change when the page itself changes meaningfully, not merely because the review took place.
 
-## Performance, mobile, and structured data
+### 6. Performance, mobile, and structured data
 
 Documentation sites reuse a small number of templates across many URLs, which makes template choice part of the evidence. Sample a task guide, API reference, search-results page, and versioned page because a fast homepage says little about how those heavier layouts behave.
 
-### Core Web Vitals
+#### Core Web Vitals
 
 Field data shows whether visitors experienced a problem, while lab tests reproduce it on the affected template. Documentation regressions often come from client-side search, syntax highlighting, large navigation trees, embedded consoles, chat widgets, and layout shifts when code or fonts load.
 
 Those three measurements become useful when they sit beside the element or script responsible. Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift should lead to a specific template change and another test of the same page, not another generic score on a release checklist.
 
-### Mobile documentation pages
+#### Mobile documentation pages
 
 Test a narrow viewport and browser zoom because code, tables, and navigation often fail there before the prose does. The page passes when code blocks and tables scroll inside their container, while drawers, copy controls, search, feedback, and chat overlays leave the task visible.
 
 The same pass follows a few heading anchors and looks at long endpoint names near sticky navigation. These details matter even when most developers first discover the page on desktop because the template and indexing signals still serve every device.
 
-### HTTPS and structured data
+#### HTTPS and structured data
 
 A clean documentation path loads the canonical page and its required resources over HTTPS without mixed content. Route HTTP and alternate-host requests to the preferred URL before those variants spread through internal links or the sitemap.
 
 Structured data should follow the visible page rather than inventing a richer result. When `Article` or `TechArticle` and `BreadcrumbList` fit, compare the URL, headline, dates, author, and breadcrumb path with the canonical page before validating the markup.
 
-## Documentation SEO audit script
+### 7. Run the documentation SEO audit script
 
 I built a small standard-library Python auditor for this guide. It checks one page's response, `robots.txt` access, index directives, title, description, canonical, H1, language, internal links, anchor text, image alt attributes, and sitemap membership.
 
@@ -196,7 +198,7 @@ python3 docs-seo-audit.py \
 
 The command makes read-only requests and returns a human-readable report plus a JSON receipt.
 
-### Cloudflare Workers audit result
+#### Cloudflare Workers audit result
 
 I ran the auditor against Cloudflare's Workers CLI getting-started guide. It returned 12 passes, zero warnings, and zero errors.
 
@@ -210,7 +212,7 @@ The rendered page also exposes its place in the wider documentation system throu
 
 *The page keeps the current task visible inside the wider product documentation.*
 
-### Audit failure test
+#### Audit failure test
 
 I ran the same script against a deliberately broken local fixture. The fixture had `noindex`, an empty title, no canonical, two H1 elements, no crawlable internal links, and an image without an `alt` attribute.
 
@@ -218,13 +220,13 @@ I ran the same script against a deliberately broken local fixture. The fixture h
 
 *The script exits unsuccessfully when it finds blocking index or title problems.*
 
-### Audit script limitations
+#### Audit script limitations
 
 The script inspects one page's source HTML. It does not crawl the entire site, execute JavaScript, test Core Web Vitals, confirm Google's selected canonical, or prove that the page deserves to rank.
 
 Use the script as the first gate because it turns obvious source-level failures into an inspectable receipt. The wider audit still needs a rendered-browser review, a link crawl, Search Console URL Inspection, field performance data, and a human attempt to complete the task.
 
-## Measure documentation search performance
+### 8. Measure documentation search performance
 
 A baseline gives the team a point of comparison before a title, canonical, internal-link path, template, or version policy changes. Save the page and query data with the release date, then compare equivalent windows after search engines have had time to recrawl the page.
 
