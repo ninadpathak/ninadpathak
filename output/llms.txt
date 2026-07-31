@@ -6,7 +6,7 @@ Technical writer and former engineer publishing in-depth, benchmark-backed writi
 
 ## Documentation
 
-- [SEO for Technical Documentation: The Complete Developer Docs Checklist](https://ninadpathak.com/articles/seo-for-technical-documentation/): Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.
+- [Technical SEO Checklist for Documentation Sites](https://ninadpathak.com/articles/seo-for-technical-documentation/): Audit developer documentation for crawling, rendering, indexing, canonicals, internal links, sitemaps, Core Web Vitals, structured data, and visibility.
 - [Documentation Review Checklist Before You Publish](https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/): Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.
 - [How to Organize Documentation That Has Drifted](https://ninadpathak.com/articles/how-to-organize-a-documentation-site/): Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.
 - [Writing Release Notes That Developers Trust](https://ninadpathak.com/articles/writing-release-notes-that-developers-trust/): Write release notes that let developers assess upgrade risk, understand product impact, and migrate without surprises.

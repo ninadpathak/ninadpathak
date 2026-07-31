@@ -1,16 +1,16 @@
 ---
 date: 2026-07-30
-updated: 2026-07-30
+updated: 2026-07-31
 slug: seo-for-technical-documentation
-description: Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.
+description: Audit developer documentation for crawling, rendering, indexing, canonicals, internal links, sitemaps, Core Web Vitals, structured data, and visibility.
 status: published
 tags:
 - documentation-seo
 - technical-writing
 - developer-experience
-title: 'SEO for Technical Documentation: The Complete Developer Docs Checklist'
+title: 'Technical SEO Checklist for Documentation Sites'
 takeaways:
-- Give each developer task one canonical page.
+- Run the technical SEO audit in dependency order instead of chasing one score.
 - Check discovery, crawling, indexing, and page quality separately.
 - Test source HTML and rendered output before publication.
 - Compare Search Console and Semrush data before explaining a ranking change.
@@ -18,9 +18,9 @@ takeaways:
 
 Useful documentation can still be difficult to find. The usual causes are missing internal links, blocked crawling, conflicting canonicals, stale version pages, or titles that do not name the developer's task.
 
-I audit technical documentation in this order: search intent, discovery, crawling, indexing, canonicalization, page quality, and measurement. The sequence matters because a title rewrite cannot repair a page that Google cannot find or index.
+I run the technical SEO audit in this order: search intent, discovery, crawling, indexing, canonicalization, page quality, performance, and measurement. The sequence matters because a title rewrite cannot repair a page that Google cannot find or index.
 
-## Technical documentation SEO: what to audit
+## Technical SEO audit checklist: what to check
 
 A single SEO score hides the failure. Split the audit into checks that produce clear evidence and can be assigned to the right owner.
 
@@ -164,6 +164,28 @@ A useful task page also includes the required access and versions, a complete co
 
 Review version-sensitive pages when an SDK release, renamed field, changed permission, UI move, deprecation, support pattern, or ranking loss makes the instructions stale. Change the updated date only when the page itself changed meaningfully.
 
+## Performance, mobile, and structured data
+
+Documentation sites reuse a small number of templates across many URLs. Test a representative task guide, API reference, search-results page, and versioned page instead of treating the homepage as proof that every template works.
+
+### Core Web Vitals
+
+Use field data when enough visits exist, then use lab tests to reproduce template problems. Documentation-specific regressions often come from client-side search, syntax highlighting, large navigation trees, embedded consoles, chat widgets, and layout shifts when code or fonts load.
+
+Record Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift for the affected template. Tie any fix to the element or script responsible rather than adding a generic performance score to the release checklist.
+
+### Mobile documentation pages
+
+Open the rendered page at a narrow viewport and browser zoom. Code blocks and tables should scroll inside their container without creating page-level horizontal overflow, and navigation drawers, copy controls, search, feedback, and chat overlays should not cover the task.
+
+Check that heading anchors land below sticky navigation and that long endpoint names remain readable. Mobile failures matter even when most developers first discover the page on desktop because the same template and indexing signals serve every device.
+
+### HTTPS and structured data
+
+Every canonical documentation URL and required resource should load over HTTPS without mixed content. Redirect HTTP and alternate-host requests to one preferred URL before they enter internal links or the sitemap.
+
+Use `Article` or `TechArticle` and `BreadcrumbList` structured data only when the visible page supports those properties. The structured-data URL, headline, dates, author, and breadcrumb path should match the canonical page, then pass Google's Rich Results Test or Schema Markup Validator.
+
 ## Documentation SEO audit script
 
 I built a small standard-library Python auditor for this guide. It checks one page's response, `robots.txt` access, index directives, title, description, canonical, H1, language, internal links, anchor text, image alt attributes, and sitemap membership.
@@ -219,15 +241,15 @@ The Semrush US database on July 30, 2026 showed the following estimates:
 | Keyword | Monthly volume | Keyword difficulty | Intent |
 |---|---:|---:|---|
 | `technical SEO checklist` | 3,600 | 34 | Informational |
-| `technical documentation template` | 480 | 26 | Informational |
-| `developer documentation` | 170 | 41 | Informational |
+| `technical SEO audit checklist` | 2,400 | 32 | Informational |
+| `tech SEO checklist` | 1,000 | 31 | Informational |
 | `technical documentation best practices` | 140 | 25 | Informational |
 | `documentation SEO` | 10 | 0 | Not classified |
 | `technical documentation SEO` | 0 reported | 0 | Not classified |
 
-Semrush reported little measurable demand for the exact topic phrase. The broader technical SEO checklist query has much more, but that does not justify turning the page into a generic website audit because the reader task is still developer documentation.
+Semrush reported little measurable demand for the exact documentation SEO phrases. The checklist variants have substantially more demand, so this page now names that intent directly while keeping the audit specific to developer documentation.
 
-Use the broader terms to understand competing SERPs and supporting sections. Keep the page's primary promise specific enough to earn the documentation query.
+The current organic results for `technical SEO checklist` are led by broad site-audit guides from Semrush, CognitiveSEO, AIOSEO, Big Drop, and DashThis. The documentation-specific audit covers the expected crawl, index, canonical, performance, mobile, and structured-data checks, then differentiates on documentation versions, task routes, rendered code, navigation, and query-to-page measurement.
 
 ### How to investigate growth or decline
 
@@ -244,7 +266,7 @@ Compare the same page and query over equivalent windows before naming a cause. R
 
 A correlation is not a cause. Keep seasonality, competitor movement, technical faults, and content updates as hypotheses until the evidence supports one.
 
-## Technical documentation SEO checklist
+## Technical SEO checklist for documentation sites
 
 ### Search intent
 
@@ -282,6 +304,14 @@ A correlation is not a cause. Keep seasonality, competitor movement, technical f
 - [ ] Expected output, failure symptoms, recovery, and cleanup are present.
 - [ ] Images have contextual alt text and useful captions.
 - [ ] Code, tables, navigation, and overlays work at narrow widths and browser zoom.
+
+### Performance and structured data
+
+- [ ] Field and lab performance checks cover representative documentation templates.
+- [ ] Client-side search, syntax highlighting, consoles, fonts, and widgets do not block the task.
+- [ ] Code blocks and tables do not create page-level horizontal overflow.
+- [ ] Every canonical page and required resource loads over HTTPS without mixed content.
+- [ ] `Article` or `TechArticle` and `BreadcrumbList` fields match visible content and the canonical URL.
 
 ### Measurement
 

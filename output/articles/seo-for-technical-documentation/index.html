@@ -19,15 +19,15 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEO for Technical Documentation: The Complete Developer Docs Checklist | Ninad Pathak</title>
-  <meta name="description" content="Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.">
+  <title>Technical SEO Checklist for Documentation Sites | Ninad Pathak</title>
+  <meta name="description" content="Audit developer documentation for crawling, rendering, indexing, canonicals, internal links, sitemaps, Core Web Vitals, structured data, and visibility.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="SEO for Technical Documentation: The Complete Developer Docs Checklist">
-  <meta property="og:description" content="Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.">
+  <meta property="og:title"       content="Technical SEO Checklist for Documentation Sites">
+  <meta property="og:description" content="Audit developer documentation for crawling, rendering, indexing, canonicals, internal links, sitemaps, Core Web Vitals, structured data, and visibility.">
   <meta property="og:url"         content="https://ninadpathak.com/articles/seo-for-technical-documentation/">
   <meta property="og:image"       content="https://ninadpathak.com/static/og-image.png">
 
@@ -73,11 +73,11 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "SEO for Technical Documentation: The Complete Developer Docs Checklist",
-  "description": "Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.",
+  "headline": "Technical SEO Checklist for Documentation Sites",
+  "description": "Audit developer documentation for crawling, rendering, indexing, canonicals, internal links, sitemaps, Core Web Vitals, structured data, and visibility.",
   "image": "https://ninadpathak.com/static/og-image.png",
   "inLanguage": "en-US",
-  "wordCount": 2381,
+  "wordCount": 2763,
   "keywords": "documentation-seo, technical-writing, developer-experience",
   "articleSection": "documentation-seo",
   "author": {
@@ -86,7 +86,7 @@
     "url": "https://ninadpathak.com/about/"
   },
   "datePublished": "2026-07-30",
-  "dateModified": "2026-07-30",
+  "dateModified": "2026-07-31",
   "publisher": {
     "@type": "Organization",
     "name": "Ninad Pathak",
@@ -121,7 +121,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "SEO for Technical Documentation: The Complete Developer Docs Checklist",
+      "name": "Technical SEO Checklist for Documentation Sites",
       "item": "https://ninadpathak.com/articles/seo-for-technical-documentation/"
     }
   ]
@@ -188,7 +188,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/articles/">Articles</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">SEO for Technical Documentation: The Complete Developer Docs Checklist</li>
+      <li class="breadcrumb-item current" aria-current="page">Technical SEO Checklist for Documentation Sites</li>
     </ol>
   </div>
 </nav>
@@ -202,10 +202,12 @@
         <span class="post-meta-sep" aria-hidden="true">·</span>
         <time class="post-meta-date" datetime="2026-07-30">Jul 30, 2026</time>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <span class="post-meta-time">12 min read</span>
+        <span class="post-meta-updated">Updated <time datetime="2026-07-31">Jul 31, 2026</time></span>
+        <span class="post-meta-sep" aria-hidden="true">·</span>
+        <span class="post-meta-time">14 min read</span>
       </div>
-      <h1 class="post-title">SEO for Technical Documentation: The Complete Developer Docs Checklist</h1>
-      <p class="lead">Audit technical documentation for search intent, internal links, crawling, indexing, canonicals, versions, page titles, and measurable search performance.</p>
+      <h1 class="post-title">Technical SEO Checklist for Documentation Sites</h1>
+      <p class="lead">Audit developer documentation for crawling, rendering, indexing, canonicals, internal links, sitemaps, Core Web Vitals, structured data, and visibility.</p>
       <div class="post-tags">
         <span class="tag">documentation-seo</span>
         <span class="tag">technical-writing</span>
@@ -219,7 +221,7 @@
       <aside class="article-summary" aria-labelledby="article-summary-title">
         <div class="article-summary-label" id="article-summary-title">The short version</div>
         <ul>
-          <li>Give each developer task one canonical page.</li>
+          <li>Run the technical SEO audit in dependency order instead of chasing one score.</li>
           <li>Check discovery, crawling, indexing, and page quality separately.</li>
           <li>Test source HTML and rendered output before publication.</li>
           <li>Compare Search Console and Semrush data before explaining a ranking change.</li>
@@ -229,7 +231,7 @@
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#technical-documentation-seo-what-to-audit">Technical documentation SEO: what to audit</a></li>
+<li><a href="#technical-seo-audit-checklist-what-to-check">Technical SEO audit checklist: what to check</a></li>
 <li><a href="#search-intent-and-page-ownership">Search intent and page ownership</a></li>
 <li><a href="#internal-links-and-xml-sitemaps">Internal links and XML sitemaps</a><ul>
 <li><a href="#crawlable-internal-links">Crawlable internal links</a></li>
@@ -243,6 +245,12 @@
 </li>
 <li><a href="#canonical-urls-and-documentation-versions">Canonical URLs and documentation versions</a></li>
 <li><a href="#page-titles-headings-and-task-content">Page titles, headings, and task content</a></li>
+<li><a href="#performance-mobile-and-structured-data">Performance, mobile, and structured data</a><ul>
+<li><a href="#core-web-vitals">Core Web Vitals</a></li>
+<li><a href="#mobile-documentation-pages">Mobile documentation pages</a></li>
+<li><a href="#https-and-structured-data">HTTPS and structured data</a></li>
+</ul>
+</li>
 <li><a href="#documentation-seo-audit-script">Documentation SEO audit script</a><ul>
 <li><a href="#cloudflare-workers-audit-result">Cloudflare Workers audit result</a></li>
 <li><a href="#audit-failure-test">Audit failure test</a></li>
@@ -254,11 +262,12 @@
 <li><a href="#how-to-investigate-growth-or-decline">How to investigate growth or decline</a></li>
 </ul>
 </li>
-<li><a href="#technical-documentation-seo-checklist">Technical documentation SEO checklist</a><ul>
+<li><a href="#technical-seo-checklist-for-documentation-sites">Technical SEO checklist for documentation sites</a><ul>
 <li><a href="#search-intent">Search intent</a></li>
 <li><a href="#discovery-and-crawling">Discovery and crawling</a></li>
 <li><a href="#indexing-and-canonicalization">Indexing and canonicalization</a></li>
 <li><a href="#page-quality">Page quality</a></li>
+<li><a href="#performance-and-structured-data">Performance and structured data</a></li>
 <li><a href="#measurement">Measurement</a></li>
 </ul>
 </li>
@@ -269,8 +278,8 @@
       </nav>
       <div class="post-content">
         <p>Useful documentation can still be difficult to find. The usual causes are missing internal links, blocked crawling, conflicting canonicals, stale version pages, or titles that do not name the developer's task.</p>
-<p>I audit technical documentation in this order: search intent, discovery, crawling, indexing, canonicalization, page quality, and measurement. The sequence matters because a title rewrite cannot repair a page that Google cannot find or index.</p>
-<h2 id="technical-documentation-seo-what-to-audit">Technical documentation SEO: what to audit</h2>
+<p>I run the technical SEO audit in this order: search intent, discovery, crawling, indexing, canonicalization, page quality, performance, and measurement. The sequence matters because a title rewrite cannot repair a page that Google cannot find or index.</p>
+<h2 id="technical-seo-audit-checklist-what-to-check">Technical SEO audit checklist: what to check</h2>
 <p>A single SEO score hides the failure. Split the audit into checks that produce clear evidence and can be assigned to the right owner.</p>
 <table>
 <thead>
@@ -437,6 +446,17 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 <p>Headings should expose the procedure when the sidebar is absent. “Create an API key” and “Recover from an expired key” are clearer than “Setup” and “Errors.”</p>
 <p>A useful task page also includes the required access and versions, a complete command or request, expected output, exact failure symptoms, recovery, and cleanup. The <a href="/articles/how-to-write-a-technical-tutorial-that-actually-teaches/">technical tutorial guide</a> shows how to test that path from a clean environment.</p>
 <p>Review version-sensitive pages when an SDK release, renamed field, changed permission, UI move, deprecation, support pattern, or ranking loss makes the instructions stale. Change the updated date only when the page itself changed meaningfully.</p>
+<h2 id="performance-mobile-and-structured-data">Performance, mobile, and structured data</h2>
+<p>Documentation sites reuse a small number of templates across many URLs. Test a representative task guide, API reference, search-results page, and versioned page instead of treating the homepage as proof that every template works.</p>
+<h3 id="core-web-vitals">Core Web Vitals</h3>
+<p>Use field data when enough visits exist, then use lab tests to reproduce template problems. Documentation-specific regressions often come from client-side search, syntax highlighting, large navigation trees, embedded consoles, chat widgets, and layout shifts when code or fonts load.</p>
+<p>Record Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift for the affected template. Tie any fix to the element or script responsible rather than adding a generic performance score to the release checklist.</p>
+<h3 id="mobile-documentation-pages">Mobile documentation pages</h3>
+<p>Open the rendered page at a narrow viewport and browser zoom. Code blocks and tables should scroll inside their container without creating page-level horizontal overflow, and navigation drawers, copy controls, search, feedback, and chat overlays should not cover the task.</p>
+<p>Check that heading anchors land below sticky navigation and that long endpoint names remain readable. Mobile failures matter even when most developers first discover the page on desktop because the same template and indexing signals serve every device.</p>
+<h3 id="https-and-structured-data">HTTPS and structured data</h3>
+<p>Every canonical documentation URL and required resource should load over HTTPS without mixed content. Redirect HTTP and alternate-host requests to one preferred URL before they enter internal links or the sitemap.</p>
+<p>Use <code>Article</code> or <code>TechArticle</code> and <code>BreadcrumbList</code> structured data only when the visible page supports those properties. The structured-data URL, headline, dates, author, and breadcrumb path should match the canonical page, then pass Google's Rich Results Test or Schema Markup Validator.</p>
 <h2 id="documentation-seo-audit-script">Documentation SEO audit script</h2>
 <p>I built a small standard-library Python auditor for this guide. It checks one page's response, <code>robots.txt</code> access, index directives, title, description, canonical, H1, language, internal links, anchor text, image alt attributes, and sitemap membership.</p>
 <p>Download <a href="/static/tools/docs-seo-audit.py">the documentation SEO audit script</a>, then run:</p>
@@ -482,15 +502,15 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 <td>Informational</td>
 </tr>
 <tr>
-<td><code>technical documentation template</code></td>
-<td style="text-align: right;">480</td>
-<td style="text-align: right;">26</td>
+<td><code>technical SEO audit checklist</code></td>
+<td style="text-align: right;">2,400</td>
+<td style="text-align: right;">32</td>
 <td>Informational</td>
 </tr>
 <tr>
-<td><code>developer documentation</code></td>
-<td style="text-align: right;">170</td>
-<td style="text-align: right;">41</td>
+<td><code>tech SEO checklist</code></td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">31</td>
 <td>Informational</td>
 </tr>
 <tr>
@@ -513,8 +533,8 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 </tr>
 </tbody>
 </table>
-<p>Semrush reported little measurable demand for the exact topic phrase. The broader technical SEO checklist query has much more, but that does not justify turning the page into a generic website audit because the reader task is still developer documentation.</p>
-<p>Use the broader terms to understand competing SERPs and supporting sections. Keep the page's primary promise specific enough to earn the documentation query.</p>
+<p>Semrush reported little measurable demand for the exact documentation SEO phrases. The checklist variants have substantially more demand, so this page now names that intent directly while keeping the audit specific to developer documentation.</p>
+<p>The current organic results for <code>technical SEO checklist</code> are led by broad site-audit guides from Semrush, CognitiveSEO, AIOSEO, Big Drop, and DashThis. The documentation-specific audit covers the expected crawl, index, canonical, performance, mobile, and structured-data checks, then differentiates on documentation versions, task routes, rendered code, navigation, and query-to-page measurement.</p>
 <h3 id="how-to-investigate-growth-or-decline">How to investigate growth or decline</h3>
 <p>Compare the same page and query over equivalent windows before naming a cause. Record the observation first, then test explanations.</p>
 <table>
@@ -552,7 +572,7 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 </tbody>
 </table>
 <p>A correlation is not a cause. Keep seasonality, competitor movement, technical faults, and content updates as hypotheses until the evidence supports one.</p>
-<h2 id="technical-documentation-seo-checklist">Technical documentation SEO checklist</h2>
+<h2 id="technical-seo-checklist-for-documentation-sites">Technical SEO checklist for documentation sites</h2>
 <h3 id="search-intent">Search intent</h3>
 <ul>
 <li>[ ] The page names one reader, task, and successful outcome.</li>
@@ -589,6 +609,14 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 <li>[ ] Expected output, failure symptoms, recovery, and cleanup are present.</li>
 <li>[ ] Images have contextual alt text and useful captions.</li>
 <li>[ ] Code, tables, navigation, and overlays work at narrow widths and browser zoom.</li>
+</ul>
+<h3 id="performance-and-structured-data">Performance and structured data</h3>
+<ul>
+<li>[ ] Field and lab performance checks cover representative documentation templates.</li>
+<li>[ ] Client-side search, syntax highlighting, consoles, fonts, and widgets do not block the task.</li>
+<li>[ ] Code blocks and tables do not create page-level horizontal overflow.</li>
+<li>[ ] Every canonical page and required resource loads over HTTPS without mixed content.</li>
+<li>[ ] <code>Article</code> or <code>TechArticle</code> and <code>BreadcrumbList</code> fields match visible content and the canonical URL.</li>
 </ul>
 <h3 id="measurement">Measurement</h3>
 <ul>
@@ -701,7 +729,7 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
       <div class="footer-group">
         <div class="footer-heading">Latest posts</div>
         <div class="footer-links">
-          <a href="/articles/seo-for-technical-documentation/" class="footer-link">SEO for Technical Documentation: The Complete Developer Docs Checklist</a>
+          <a href="/articles/seo-for-technical-documentation/" class="footer-link">Technical SEO Checklist for Documentation Sites</a>
           <a href="/articles/documentation-review-checklist-before-you-publish/" class="footer-link">Documentation Review Checklist Before You Publish</a>
           <a href="/articles/how-to-organize-a-documentation-site/" class="footer-link">How to Organize Documentation That Has Drifted</a>
         </div>
