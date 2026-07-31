@@ -18,13 +18,9 @@ takeaways:
 
 I built the audit for this guide around two pages: a working Cloudflare documentation guide and a deliberately broken local fixture. The contrast was useful because both pages had visible content, yet only one gave a crawler and a developer a dependable path through the task.
 
-That is the outcome I care about in documentation SEO. A page has succeeded when search engines can discover and interpret it, the right developer recognizes the task from the result, and the instructions carry that person to a working state.
-
-I generally follow the same order when I audit a documentation path: search intent, discovery, crawling, indexing, canonicalization, page quality, performance, and measurement. Each stage depends on the one before it, so a title rewrite cannot rescue a page that Google cannot find or index.
+A page succeeds when search engines can discover and interpret it, the right developer recognizes the task from the result, and the instructions carry that person to a working state. That is what this audit checks through search intent, discovery, crawling, indexing, canonicalization, page quality, performance, and measurement.
 
 ## Technical SEO audit checklist: what to check
-
-A single SEO score rarely reveals where a documentation page failed. Separate the audit into checks that produce visible evidence and point toward the person who can fix the problem.
 
 | Area | Question | Blocking evidence |
 |---|---|---|
@@ -82,7 +78,7 @@ Treat the sitemap as a record of the URLs the site actually wants search engines
 - `<lastmod>` changes only after a meaningful page update.
 - The sitemap is declared in `robots.txt` or submitted through Search Console.
 
-When those signals agree, the sitemap reinforces the navigation and canonical policy instead of contradicting them. Google ignores `<priority>` and `<changefreq>`, so those fields do not need release time.
+Google ignores `<priority>` and `<changefreq>`, so those fields do not need release time.
 
 ## Crawling, rendering, and indexing
 
@@ -125,7 +121,7 @@ Include:
 - Structured-data URL
 - Open Graph URL
 
-This part is healthy when the preferred page has an absolute self-referencing canonical and every supporting signal points to it. Google's [canonicalization guidance](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) also recommends linking internally to that preferred URL.
+The preferred page needs an absolute self-referencing canonical, with every supporting signal pointing to it. Google's [canonicalization guidance](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) also recommends linking internally to that preferred URL.
 
 ```html
 <link
@@ -144,7 +140,7 @@ If the instructions materially differ, keep the older page distinct rather than 
 
 ## Page titles, headings, and task content
 
-A search result, browser tab, documentation tree, and copied URL should identify the same task. Labels such as “Overview,” “Configuration,” and “Usage” expose the mismatch when they leave their section and stop meaning anything on their own.
+Labels such as “Overview,” “Configuration,” and “Usage” lose meaning when they leave their section. A useful label should still identify the task in a search result, browser tab, documentation tree, or copied URL.
 
 The [Google title-link guidance](https://developers.google.com/search/docs/appearance/title-link) recommends a distinct, concise, accurate `<title>`. Google may also use the H1, prominent text, `og:title`, and anchor text when generating a result title.
 
@@ -176,7 +172,7 @@ Those three measurements become useful when they sit beside the element or scrip
 
 ### Mobile documentation pages
 
-My mobile pass uses a narrow viewport and browser zoom because code, tables, and navigation often fail there before the prose does. The page has passed when code blocks and tables scroll inside their container, while drawers, copy controls, search, feedback, and chat overlays leave the task visible.
+Test a narrow viewport and browser zoom because code, tables, and navigation often fail there before the prose does. The page passes when code blocks and tables scroll inside their container, while drawers, copy controls, search, feedback, and chat overlays leave the task visible.
 
 The same pass follows a few heading anchors and looks at long endpoint names near sticky navigation. These details matter even when most developers first discover the page on desktop because the template and indexing signals still serve every device.
 
@@ -190,7 +186,7 @@ Structured data should follow the visible page rather than inventing a richer re
 
 I built a small standard-library Python auditor for this guide. It checks one page's response, `robots.txt` access, index directives, title, description, canonical, H1, language, internal links, anchor text, image alt attributes, and sitemap membership.
 
-The [documentation SEO audit script](/static/tools/docs-seo-audit.py) is available as a standalone file. I ran it against the Cloudflare guide with this command:
+The [documentation SEO audit script](/static/tools/docs-seo-audit.py) runs as a standalone file:
 
 ```bash
 python3 docs-seo-audit.py \
@@ -234,11 +230,9 @@ A baseline gives the team a point of comparison before a title, canonical, inter
 
 Clicks, impressions, CTR, average position, index state, and the URL selected for the query each describe a different part of the result. The process has worked when the team can explain what moved, test the likely cause against the page and competing results, and choose the next change without guessing.
 
-For someone applying the same approach, the baseline is not the outcome. The outcome is a documentation page whose search visibility can be connected to specific editorial or technical decisions and improved with evidence.
-
 ## Technical SEO checklist for documentation sites
 
-The checklist turns the audit into a repeatable release check. Each item points to evidence described earlier and a state you can verify rather than a score you have to trust.
+Use this checklist during the release review.
 
 ### Search intent
 
@@ -295,6 +289,4 @@ The checklist turns the audit into a repeatable release check. Each item points 
 
 ## Start with one documentation path
 
-Begin with one setup, authentication, deployment, troubleshooting, or migration path that affects product use. Working through its page ownership, internal links, response behavior, rendered content, canonical signals, task proof, and measurement reveals where the wider documentation system breaks.
-
-The audit has succeeded when that path can be found, understood, completed, and measured from beginning to end. At that point, the team has more than a story about what changed and more than a checklist of tasks: it has one verified release standard that can be reused across the rest of the documentation site.
+Begin with one setup, authentication, deployment, troubleshooting, or migration path that affects product use. Complete and measure that path before expanding the audit to the rest of the documentation site.

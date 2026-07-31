@@ -77,7 +77,7 @@
   "description": "Technical SEO for developer documentation: crawling, rendering, indexing, canonicals, internal links, Core Web Vitals, structured data, and search visibility.",
   "image": "https://ninadpathak.com/static/og-image.png",
   "inLanguage": "en-US",
-  "wordCount": 2953,
+  "wordCount": 2724,
   "keywords": "documentation-seo, technical-writing, developer-experience",
   "articleSection": "documentation-seo",
   "author": {
@@ -204,7 +204,7 @@
         <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-updated">Updated <time datetime="2026-07-31">Jul 31, 2026</time></span>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <span class="post-meta-time">15 min read</span>
+        <span class="post-meta-time">14 min read</span>
       </div>
       <h1 class="post-title">Technical SEO Checklist for Documentation Sites</h1>
       <p class="lead">Technical SEO for developer documentation: crawling, rendering, indexing, canonicals, internal links, Core Web Vitals, structured data, and search visibility.</p>
@@ -274,10 +274,8 @@
       </nav>
       <div class="post-content">
         <p>I built the audit for this guide around two pages: a working Cloudflare documentation guide and a deliberately broken local fixture. The contrast was useful because both pages had visible content, yet only one gave a crawler and a developer a dependable path through the task.</p>
-<p>That is the outcome I care about in documentation SEO. A page has succeeded when search engines can discover and interpret it, the right developer recognizes the task from the result, and the instructions carry that person to a working state.</p>
-<p>I generally follow the same order when I audit a documentation path: search intent, discovery, crawling, indexing, canonicalization, page quality, performance, and measurement. Each stage depends on the one before it, so a title rewrite cannot rescue a page that Google cannot find or index.</p>
+<p>A page succeeds when search engines can discover and interpret it, the right developer recognizes the task from the result, and the instructions carry that person to a working state. That is what this audit checks through search intent, discovery, crawling, indexing, canonicalization, page quality, performance, and measurement.</p>
 <h2 id="technical-seo-audit-checklist-what-to-check">Technical SEO audit checklist: what to check</h2>
-<p>A single SEO score rarely reveals where a documentation page failed. Separate the audit into checks that produce visible evidence and point toward the person who can fix the problem.</p>
 <table>
 <thead>
 <tr>
@@ -385,7 +383,7 @@
 <li><code>&lt;lastmod&gt;</code> changes only after a meaningful page update.</li>
 <li>The sitemap is declared in <code>robots.txt</code> or submitted through Search Console.</li>
 </ul>
-<p>When those signals agree, the sitemap reinforces the navigation and canonical policy instead of contradicting them. Google ignores <code>&lt;priority&gt;</code> and <code>&lt;changefreq&gt;</code>, so those fields do not need release time.</p>
+<p>Google ignores <code>&lt;priority&gt;</code> and <code>&lt;changefreq&gt;</code>, so those fields do not need release time.</p>
 <h2 id="crawling-rendering-and-indexing">Crawling, rendering, and indexing</h2>
 <p>The browser can make a broken page look healthy after JavaScript has run. Read the server response before reviewing the layout because it shows whether the content, links, and canonical metadata exist without asking a renderer to repair the page.</p>
 <h3 id="http-response-and-rendered-html">HTTP response and rendered HTML</h3>
@@ -414,7 +412,7 @@
 <li>Structured-data URL</li>
 <li>Open Graph URL</li>
 </ul>
-<p>This part is healthy when the preferred page has an absolute self-referencing canonical and every supporting signal points to it. Google's <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">canonicalization guidance</a> also recommends linking internally to that preferred URL.</p>
+<p>The preferred page needs an absolute self-referencing canonical, with every supporting signal pointing to it. Google's <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">canonicalization guidance</a> also recommends linking internally to that preferred URL.</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">link</span>
   <span class="na">rel</span><span class="o">=</span><span class="s">&quot;canonical&quot;</span>
   <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://docs.example.com/api/authentication/&quot;</span>
@@ -429,7 +427,7 @@
 </ul>
 <p>If the instructions materially differ, keep the older page distinct rather than canonicalizing it to the current version. The pages are not interchangeable when following the wrong one can break an integration, and the URL policy should preserve that distinction.</p>
 <h2 id="page-titles-headings-and-task-content">Page titles, headings, and task content</h2>
-<p>A search result, browser tab, documentation tree, and copied URL should identify the same task. Labels such as “Overview,” “Configuration,” and “Usage” expose the mismatch when they leave their section and stop meaning anything on their own.</p>
+<p>Labels such as “Overview,” “Configuration,” and “Usage” lose meaning when they leave their section. A useful label should still identify the task in a search result, browser tab, documentation tree, or copied URL.</p>
 <p>The <a href="https://developers.google.com/search/docs/appearance/title-link">Google title-link guidance</a> recommends a distinct, concise, accurate <code>&lt;title&gt;</code>. Google may also use the H1, prominent text, <code>og:title</code>, and anchor text when generating a result title.</p>
 <p>Strong task pages repeat the same task across the URL, title, H1, description, and opening without repeating the same sentence:</p>
 <div class="highlight"><pre><span></span><code>URL:         /docs/webhooks/verify-signatures/
@@ -448,14 +446,14 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 <p>Field data shows whether visitors experienced a problem, while lab tests reproduce it on the affected template. Documentation regressions often come from client-side search, syntax highlighting, large navigation trees, embedded consoles, chat widgets, and layout shifts when code or fonts load.</p>
 <p>Those three measurements become useful when they sit beside the element or script responsible. Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift should lead to a specific template change and another test of the same page, not another generic score on a release checklist.</p>
 <h3 id="mobile-documentation-pages">Mobile documentation pages</h3>
-<p>My mobile pass uses a narrow viewport and browser zoom because code, tables, and navigation often fail there before the prose does. The page has passed when code blocks and tables scroll inside their container, while drawers, copy controls, search, feedback, and chat overlays leave the task visible.</p>
+<p>Test a narrow viewport and browser zoom because code, tables, and navigation often fail there before the prose does. The page passes when code blocks and tables scroll inside their container, while drawers, copy controls, search, feedback, and chat overlays leave the task visible.</p>
 <p>The same pass follows a few heading anchors and looks at long endpoint names near sticky navigation. These details matter even when most developers first discover the page on desktop because the template and indexing signals still serve every device.</p>
 <h3 id="https-and-structured-data">HTTPS and structured data</h3>
 <p>A clean documentation path loads the canonical page and its required resources over HTTPS without mixed content. Route HTTP and alternate-host requests to the preferred URL before those variants spread through internal links or the sitemap.</p>
 <p>Structured data should follow the visible page rather than inventing a richer result. When <code>Article</code> or <code>TechArticle</code> and <code>BreadcrumbList</code> fit, compare the URL, headline, dates, author, and breadcrumb path with the canonical page before validating the markup.</p>
 <h2 id="documentation-seo-audit-script">Documentation SEO audit script</h2>
 <p>I built a small standard-library Python auditor for this guide. It checks one page's response, <code>robots.txt</code> access, index directives, title, description, canonical, H1, language, internal links, anchor text, image alt attributes, and sitemap membership.</p>
-<p>The <a href="/static/tools/docs-seo-audit.py">documentation SEO audit script</a> is available as a standalone file. I ran it against the Cloudflare guide with this command:</p>
+<p>The <a href="/static/tools/docs-seo-audit.py">documentation SEO audit script</a> runs as a standalone file:</p>
 <div class="highlight"><pre><span></span><code>python3<span class="w"> </span>docs-seo-audit.py<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://developers.cloudflare.com/workers/get-started/guide/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--json<span class="w"> </span>cloudflare-docs-audit.json
@@ -479,9 +477,8 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 <h2 id="measure-documentation-search-performance">Measure documentation search performance</h2>
 <p>A baseline gives the team a point of comparison before a title, canonical, internal-link path, template, or version policy changes. Save the page and query data with the release date, then compare equivalent windows after search engines have had time to recrawl the page.</p>
 <p>Clicks, impressions, CTR, average position, index state, and the URL selected for the query each describe a different part of the result. The process has worked when the team can explain what moved, test the likely cause against the page and competing results, and choose the next change without guessing.</p>
-<p>For someone applying the same approach, the baseline is not the outcome. The outcome is a documentation page whose search visibility can be connected to specific editorial or technical decisions and improved with evidence.</p>
 <h2 id="technical-seo-checklist-for-documentation-sites">Technical SEO checklist for documentation sites</h2>
-<p>The checklist turns the audit into a repeatable release check. Each item points to evidence described earlier and a state you can verify rather than a score you have to trust.</p>
+<p>Use this checklist during the release review.</p>
 <h3 id="search-intent">Search intent</h3>
 <ul>
 <li>[ ] The page names one reader, task, and successful outcome.</li>
@@ -536,8 +533,7 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 <li>[ ] Review dates match the site's crawl rate and query volume.</li>
 </ul>
 <h2 id="start-with-one-documentation-path">Start with one documentation path</h2>
-<p>Begin with one setup, authentication, deployment, troubleshooting, or migration path that affects product use. Working through its page ownership, internal links, response behavior, rendered content, canonical signals, task proof, and measurement reveals where the wider documentation system breaks.</p>
-<p>The audit has succeeded when that path can be found, understood, completed, and measured from beginning to end. At that point, the team has more than a story about what changed and more than a checklist of tasks: it has one verified release standard that can be reused across the rest of the documentation site.</p>
+<p>Begin with one setup, authentication, deployment, troubleshooting, or migration path that affects product use. Complete and measure that path before expanding the audit to the rest of the documentation site.</p>
       </div>
     </div>
   </div>
