@@ -1,39 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %}Free llms.txt Generator and Validator | Ninad Pathak{% endblock %}
-{% block description %}Create a valid llms.txt file for your website. Generate, preview, copy, and download the file in your browser. Free and private.{% endblock %}
+{% block title %}Automated llms.txt Generator | Ninad Pathak{% endblock %}
+{% block description %}Scan your sitemap, review page titles and descriptions, and generate an editable llms.txt file. Free, fast, and no signup required.{% endblock %}
 {% block canonical %}/llms-txt-generator/{% endblock %}
 {% block og_url %}/llms-txt-generator/{% endblock %}
-{% block og_title %}Free llms.txt Generator and Validator{% endblock %}
-{% block og_description %}Build a clean llms.txt file in your browser, then copy or download it. No signup and no data leaves your device.{% endblock %}
-{% block tw_title %}Free llms.txt Generator and Validator{% endblock %}
-{% block tw_desc %}Build, validate, copy, and download a clean llms.txt file in your browser.{% endblock %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="/static/css/llms-generator.css">
-{% endblock %}
+{% block og_title %}Automated llms.txt Generator{% endblock %}
+{% block og_description %}Discover pages from your sitemap, edit the metadata, and download a clean llms.txt file.{% endblock %}
+{% block tw_title %}Automated llms.txt Generator{% endblock %}
+{% block tw_desc %}Scan a sitemap, review its pages, and generate an editable llms.txt file.{% endblock %}
 
 {% block schema %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "llms.txt Generator",
+  "name": "Automated llms.txt Generator",
   "url": "{{ site.url }}/llms-txt-generator/",
-  "description": "Create, preview, copy, and download a clean llms.txt file in the browser.",
+  "description": "Scan a website sitemap, review page metadata, and generate an editable llms.txt file.",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Ninad Pathak",
-    "url": "{{ site.url }}/about/"
-  }
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" }
 }
 </script>
 <script type="application/ld+json">
@@ -43,27 +31,18 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is an llms.txt file?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "An llms.txt file is a proposed Markdown-formatted map that summarizes a website and links to its most useful pages for language-model systems."
-      }
+      "name": "How does the llms.txt generator find pages?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It checks robots.txt for declared sitemaps, falls back to sitemap.xml, follows sitemap indexes, and reads page titles, canonical URLs, and meta descriptions." }
     },
     {
       "@type": "Question",
       "name": "Where should llms.txt be published?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Publish it at the root of the canonical website, such as https://example.com/llms.txt, and return it as plain text with a 200 status."
-      }
+      "acceptedAnswer": { "@type": "Answer", "text": "Publish it at the root of the canonical website, such as https://example.com/llms.txt, and return it as plain text with a 200 status." }
     },
     {
       "@type": "Question",
       "name": "Does llms.txt control AI crawlers?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Use robots.txt and access controls for crawler permissions. llms.txt is a discovery and context file, not an access-control mechanism."
-      }
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Use robots.txt and access controls for crawler permissions. llms.txt is a discovery and context file, not an access-control mechanism." }
     }
   ]
 }
@@ -71,105 +50,104 @@
 {% endblock %}
 
 {% block content %}
-<section class="page-intro llms-hero">
+<section class="page-intro">
   <div class="container">
-    <div class="label">// Free browser tool</div>
-    <h1>llms.txt Generator</h1>
-    <p class="lead">Create a concise map of your website for AI systems. Everything runs in your browser, so the URLs and descriptions you enter stay on your device.</p>
+    <div class="label">Free website tool</div>
+    <h1>Generate llms.txt from your website</h1>
+    <p class="lead">Enter a domain. The generator finds its sitemap, reads each page’s title and description, and gives you an editable draft.</p>
   </div>
 </section>
 
-<section class="llms-tool-section">
+<section class="tool-section">
   <div class="container">
-    <div class="llms-tool-grid">
-      <form class="llms-panel" id="llmsGeneratorForm">
-        <div class="llms-panel-header">
-          <span>website.config</span>
-          <button type="button" class="llms-text-button" id="llmsLoadSample">load sample</button>
-        </div>
+    <form class="scan-form" id="llmsScanForm">
+      <label class="form-field form-field-grow" for="llmsSiteUrl">
+        <span>Website URL</span>
+        <input id="llmsSiteUrl" name="siteUrl" type="url" inputmode="url" autocomplete="url" placeholder="https://example.com" required>
+      </label>
+      <button class="btn btn-primary scan-submit" id="llmsScan" type="submit">Scan website →</button>
+    </form>
+    <p class="tool-hint">Checks robots.txt and XML sitemaps, then reads up to 100 public HTML pages. A scan can take several seconds.</p>
+    <div class="tool-status" id="llmsStatus" role="status" aria-live="polite"></div>
 
-        <div class="llms-form-body">
-          <div class="llms-field-row">
-            <label class="llms-field">
+    <div class="tool-workspace" id="llmsWorkspace" hidden>
+      <section class="tool-panel" aria-labelledby="siteDetailsTitle">
+        <div class="tool-panel-header">
+          <span id="siteDetailsTitle">site.config</span>
+          <span id="llmsScanSummary">0 pages</span>
+        </div>
+        <div class="tool-panel-body">
+          <div class="form-grid">
+            <label class="form-field">
               <span>Website name</span>
-              <input id="llmsSiteName" name="siteName" type="text" autocomplete="organization" placeholder="Acme Developer Docs" required>
+              <input id="llmsSiteName" type="text" autocomplete="organization" required>
             </label>
-            <label class="llms-field">
+            <label class="form-field">
               <span>Canonical website URL</span>
-              <input id="llmsSiteUrl" name="siteUrl" type="url" inputmode="url" placeholder="https://docs.example.com" required>
+              <input id="llmsCanonicalUrl" type="url" inputmode="url" required>
             </label>
           </div>
-
-          <label class="llms-field">
+          <label class="form-field">
             <span>One-sentence summary</span>
-            <textarea id="llmsSiteDescription" name="siteDescription" rows="3" placeholder="Developer documentation for the Acme API and SDKs." required></textarea>
+            <textarea id="llmsSiteDescription" rows="2" required></textarea>
           </label>
-
-          <label class="llms-field">
-            <span>Important pages</span>
-            <span class="llms-field-help">One page per line: <code>Title | URL | Description</code></span>
-            <textarea id="llmsPrimaryLinks" name="primaryLinks" rows="8" placeholder="Quickstart | /quickstart/ | Make your first API request.&#10;API Reference | /api/ | Endpoints, parameters, and response schemas." required></textarea>
-          </label>
-
-          <label class="llms-field">
-            <span>Optional pages</span>
-            <span class="llms-field-help">Add lower-priority examples, changelogs, or background material.</span>
-            <textarea id="llmsOptionalLinks" name="optionalLinks" rows="5" placeholder="Changelog | /changelog/ | Product and API changes."></textarea>
-          </label>
-
-          <div class="llms-form-actions">
-            <button class="btn btn-primary" type="submit">Generate llms.txt →</button>
-            <button class="btn btn-outline" type="reset" id="llmsClear">Clear</button>
-          </div>
-          <div class="llms-status" id="llmsStatus" role="status" aria-live="polite"></div>
         </div>
-      </form>
+      </section>
 
-      <section class="llms-panel llms-output-panel" aria-labelledby="llmsOutputTitle">
-        <div class="llms-panel-header">
+      <section class="tool-panel" aria-labelledby="pagesTitle">
+        <div class="tool-panel-header">
+          <span id="pagesTitle">discovered.pages</span>
+          <div class="tool-panel-actions">
+            <button type="button" class="text-action" id="llmsSelectAll">select all</button>
+            <button type="button" class="text-action" id="llmsSelectNone">select none</button>
+            <button type="button" class="text-action" id="llmsAddPage">add page</button>
+          </div>
+        </div>
+        <div class="page-list" id="llmsPages"></div>
+      </section>
+
+      <div class="tool-actions">
+        <button class="btn btn-primary" type="button" id="llmsGenerate">Generate llms.txt →</button>
+        <span class="tool-hint" id="llmsSelectionCount">0 pages selected</span>
+      </div>
+
+      <section class="tool-panel" id="llmsOutputPanel" aria-labelledby="llmsOutputTitle" hidden>
+        <div class="tool-panel-header">
           <span id="llmsOutputTitle">llms.txt</span>
-          <div class="llms-output-actions">
-            <button type="button" class="llms-text-button" id="llmsCopy" disabled>copy</button>
-            <button type="button" class="llms-text-button" id="llmsDownload" disabled>download</button>
+          <div class="tool-panel-actions">
+            <button type="button" class="text-action" id="llmsCopy">copy</button>
+            <button type="button" class="text-action" id="llmsDownload">download</button>
           </div>
         </div>
-        <pre class="llms-output" id="llmsOutput" tabindex="0">Your generated file will appear here.</pre>
-        <div class="llms-validation" id="llmsValidation">
-          <span class="llms-validation-dot" aria-hidden="true"></span>
-          Waiting for input
-        </div>
+        <textarea class="code-output" id="llmsOutput" aria-label="Generated llms.txt content" spellcheck="false"></textarea>
+        <div class="tool-panel-footer" id="llmsValidation">Edit the file directly before copying or downloading it.</div>
       </section>
     </div>
   </div>
 </section>
 
-<section class="llms-guide-section">
+<section class="guide-section">
   <div class="prose-container">
-    <div class="label">// Implementation guide</div>
-    <h2>How to publish the generated file</h2>
-    <ol class="llms-steps">
+    <div class="label">Implementation guide</div>
+    <h2>Review before you publish</h2>
+    <p>The sitemap gives you coverage, while the editor gives you control. Remove duplicate, account, search, tag, and other low-value pages. Keep the routes that explain the product, answer important questions, or help someone complete a task.</p>
+
+    <ol class="numbered-steps">
+      <li><strong>Review the scan.</strong> Edit titles and descriptions, choose a section, and exclude pages that add little context.</li>
       <li><strong>Download the file.</strong> Keep the filename exactly <code>llms.txt</code>.</li>
-      <li><strong>Place it at the website root.</strong> The public address should look like <code>https://example.com/llms.txt</code>.</li>
-      <li><strong>Check the response.</strong> The URL should return <code>200</code>, serve readable plain text, and avoid redirects.</li>
-      <li><strong>Maintain it with the site.</strong> Update links when canonical URLs move, important pages change, or a section is retired.</li>
+      <li><strong>Publish it at the website root.</strong> The public URL should be <code>https://example.com/llms.txt</code>.</li>
+      <li><strong>Maintain it with the site.</strong> Regenerate it when important pages or canonical URLs change.</li>
     </ol>
 
-    <h2>What belongs in llms.txt</h2>
-    <p>Include the pages that explain the product, help someone complete a task, or provide authoritative reference material. Use canonical URLs and descriptions that say what a reader will find.</p>
-    <p>Leave out duplicate routes, search results, account pages, thin tag archives, and URLs blocked from crawling. A shorter curated file is easier to maintain than an export of every sitemap URL.</p>
-
-    <h2>What llms.txt does not do</h2>
-    <p>The file does not grant or deny crawler access, replace structured data, or guarantee that an AI product will use the site. Keep <code>robots.txt</code>, the XML sitemap, canonical tags, and normal internal links working.</p>
-
     <h2>Frequently asked questions</h2>
-    <div class="llms-faq">
+    <div class="faq-list">
       <details>
-        <summary>What is an llms.txt file?</summary>
-        <p>An llms.txt file is a proposed Markdown-formatted map that summarizes a website and links to its most useful pages for language-model systems.</p>
+        <summary>How does the generator find pages?</summary>
+        <p>It checks sitemap declarations in <code>robots.txt</code>, falls back to <code>/sitemap.xml</code>, follows sitemap indexes, and reads metadata from each public HTML page.</p>
       </details>
       <details>
-        <summary>Where should llms.txt be published?</summary>
-        <p>Publish it at the root of the canonical website, such as <code>https://example.com/llms.txt</code>, and make sure the URL returns a plain-text <code>200</code> response.</p>
+        <summary>What happens when a site has more than 100 pages?</summary>
+        <p>The scan stops at 100 pages to keep the tool responsive. That is enough for a curated llms.txt draft; large sites should keep only their most authoritative pages.</p>
       </details>
       <details>
         <summary>Does llms.txt control AI crawlers?</summary>

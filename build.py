@@ -739,14 +739,14 @@ class SiteBuilder:
 
         if Path("static").exists():
             shutil.copytree("static", self.output / "static")
-            # Copy robots.txt to root if it exists
-            robots_src = Path("static") / "robots.txt"
-            robots_dst = self.output / "robots.txt"
-            if robots_src.exists():
-                shutil.copy2(robots_src, robots_dst)
+            # Copy platform control files to the deployment root.
+            for control_file in ("robots.txt", "_routes.json"):
+                control_src = Path("static") / control_file
+                if control_src.exists():
+                    shutil.copy2(control_src, self.output / control_file)
             # Cloudflare reads deployment controls only from the output root.
             # Remove source copies from /static after copying/generating them.
-            for control_file in ("robots.txt", "_redirects"):
+            for control_file in ("robots.txt", "_redirects", "_routes.json"):
                 copied_control = self.output / "static" / control_file
                 if copied_control.exists():
                     copied_control.unlink()

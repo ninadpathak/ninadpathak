@@ -10,6 +10,7 @@ Personal portfolio and blog. Built with a custom Python static site generator â€
 - **CSS**: Vanilla, no build step
 - **JS**: Vanilla, no frameworks
 - **Hosting**: Cloudflare Pages
+- **Serverless tools**: Cloudflare Pages Functions
 
 ## Setup
 
@@ -101,6 +102,9 @@ templates/            # Jinja2 templates
 static/
   css/main.css
   js/main.js
+
+functions/
+  api/discover-site.js # Sitemap and page metadata scanner
 
 content/
   about.md

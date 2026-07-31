@@ -195,7 +195,18 @@ def main():
             if len(parts) != 3 or parts[2] not in {"301", "302", "303", "307", "308"}:
                 errors.append(f"_redirects line {number}: unsupported Cloudflare Pages rule: {line}")
 
-    for duplicate in (OUTPUT / "static" / "robots.txt", OUTPUT / "static" / "_redirects"):
+    routes_path = OUTPUT / "_routes.json"
+    if not routes_path.exists():
+        errors.append("missing Cloudflare Pages _routes.json")
+    else:
+        try:
+            routes = json.loads(routes_path.read_text(encoding="utf-8"))
+            if routes.get("version") != 1 or routes.get("include") != ["/api/*"]:
+                errors.append("_routes.json must limit Pages Functions to /api/*")
+        except json.JSONDecodeError as exc:
+            errors.append(f"invalid _routes.json: {exc}")
+
+    for duplicate in (OUTPUT / "static" / "robots.txt", OUTPUT / "static" / "_redirects", OUTPUT / "static" / "_routes.json"):
         if duplicate.exists():
             errors.append(f"deployment control file is misplaced: {duplicate.relative_to(OUTPUT)}")
 
