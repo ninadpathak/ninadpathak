@@ -63,7 +63,7 @@
     <form class="scan-form" id="llmsScanForm">
       <label class="form-field form-field-grow" for="llmsSiteUrl">
         <span>Website URL</span>
-        <input id="llmsSiteUrl" name="siteUrl" type="url" inputmode="url" autocomplete="url" placeholder="https://example.com" required>
+        <input id="llmsSiteUrl" name="siteUrl" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="example.com" required>
       </label>
       <button class="btn btn-primary scan-submit" id="llmsScan" type="submit">Scan website →</button>
     </form>
@@ -98,8 +98,8 @@
         <div class="tool-panel-header">
           <span id="pagesTitle">discovered.pages</span>
           <div class="tool-panel-actions">
-            <button type="button" class="text-action" id="llmsSelectAll">select all</button>
-            <button type="button" class="text-action" id="llmsSelectNone">select none</button>
+            <button type="button" class="btn btn-outline" id="llmsSelectAll">Select all</button>
+            <button type="button" class="btn btn-outline" id="llmsSelectNone">Select none</button>
             <button type="button" class="text-action" id="llmsAddPage">add page</button>
           </div>
         </div>

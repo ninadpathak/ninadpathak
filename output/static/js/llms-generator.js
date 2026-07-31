@@ -24,6 +24,14 @@
     return String(value || '').trim().replace(/\s+/g, ' ');
   }
 
+  function normalizeWebsiteUrl(value) {
+    var normalized = cleanText(value);
+    if (!/^https?:\/\//i.test(normalized)) normalized = 'https://' + normalized;
+    var parsed = new URL(normalized);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') throw new Error('Enter a valid website address.');
+    return parsed.toString();
+  }
+
   function setStatus(message, kind) {
     status.textContent = message;
     status.className = 'tool-status' + (kind ? ' tool-status-' + kind : '');
@@ -110,6 +118,15 @@
 
   scanForm.addEventListener('submit', function (event) {
     event.preventDefault();
+    var websiteUrl;
+    try {
+      websiteUrl = normalizeWebsiteUrl(sourceUrl.value);
+      sourceUrl.value = websiteUrl.replace(/\/$/, '');
+    } catch (error) {
+      setStatus(error.message, 'error');
+      sourceUrl.focus();
+      return;
+    }
     scanButton.disabled = true;
     scanButton.textContent = 'Scanning…';
     setStatus('Finding sitemaps and reading page metadata. Keep this tab open.', 'loading');
@@ -117,7 +134,7 @@
     outputPanel.hidden = true;
 
     var discovery;
-    postJson({ url: sourceUrl.value }).then(function (result) {
+    postJson({ url: websiteUrl }).then(function (result) {
       discovery = result;
       return fetchMetadata(result.site.url, result.urls);
     }).then(function (metadata) {

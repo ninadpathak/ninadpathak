@@ -952,7 +952,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
    SHARED TOOL UI
    Panels, fields, editable lists, and output surfaces used by site tools.
    ===================================================================== */
-.tool-section { padding: 0 0 5rem; }
+.tool-section { padding: 2.5rem 0 5rem; }
 
 .scan-form {
   display: flex;
@@ -1052,6 +1052,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .tool-panel-body { padding: 1.25rem; }
 .tool-panel-body .form-field:last-child { margin-bottom: 0; }
 .tool-panel-actions { display: flex; align-items: center; gap: 1rem; }
+.tool-panel-actions .btn { padding: 0.5rem 0.75rem; font-size: 0.75rem; }
 
 .text-action {
   color: var(--accent);
@@ -1166,7 +1167,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   .page-row-controls select { width: auto; }
   .tool-panel-header { align-items: flex-start; flex-direction: column; }
   .tool-panel-actions { flex-wrap: wrap; }
-  .tool-section { padding-bottom: 4rem; }
+  .tool-section { padding: 2rem 0 4rem; }
   .guide-section { padding: 4rem 0; }
 }
 
