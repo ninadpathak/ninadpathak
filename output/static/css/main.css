@@ -984,7 +984,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   background: var(--bg);
   color: var(--text-1);
   padding: 0.7rem 0.75rem;
-  font: 0.8125rem/1.55 var(--mono);
+  font: 0.875rem/1.55 var(--sans);
 }
 
 .form-field textarea,
@@ -1006,11 +1006,12 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 }
 
 .tool-hint,
-.tool-status,
-.tool-panel-footer {
+.tool-status {
   color: var(--text-3);
-  font: 0.75rem/1.5 var(--mono);
+  font: 0.8125rem/1.5 var(--sans);
 }
+
+.tool-panel-footer { color: var(--text-3); font: 0.75rem/1.5 var(--mono); }
 
 .tool-hint { margin-top: 0.65rem; }
 .tool-status { min-height: 1.5rem; margin-top: 0.75rem; }
@@ -1054,11 +1055,11 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 .tool-panel-body { padding: 1.25rem; }
 .tool-panel-body .form-field:last-child { margin-bottom: 0; }
 .tool-panel-actions { display: flex; align-items: center; gap: 1rem; }
-.tool-panel-actions .btn { padding: 0.5rem 0.75rem; font-size: 0.75rem; }
+.tool-panel-actions .btn { padding: 0.5rem 0.75rem; font-family: var(--sans); font-size: 0.75rem; }
 
 .text-action {
   color: var(--accent);
-  font: 0.72rem var(--mono);
+  font: 500 0.75rem var(--sans);
 }
 
 .text-action:hover { text-decoration: underline; }
@@ -1088,7 +1089,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
 }
 
 .page-row-controls select { padding: 0.45rem; font-size: 0.7rem; }
-.check-field { display: flex; align-items: center; gap: 0.5rem; color: var(--text-2); font: 0.72rem var(--mono); }
+.check-field { display: flex; align-items: center; gap: 0.5rem; color: var(--text-2); font: 500 0.75rem var(--sans); }
 .check-field input { accent-color: var(--accent); }
 
 .page-row-fields {
@@ -1118,6 +1119,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   padding: 1.25rem;
   background: var(--bg-1);
   color: var(--text-2);
+  font-family: var(--mono);
   font-size: 0.8rem;
 }
 
