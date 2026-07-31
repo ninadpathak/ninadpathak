@@ -13,7 +13,7 @@ takeaways:
 - Run the technical SEO audit in dependency order instead of chasing one score.
 - Check discovery, crawling, indexing, and page quality separately.
 - Test source HTML and rendered output before publication.
-- Compare Search Console and Semrush data before explaining a ranking change.
+- Record index state and search performance before and after meaningful changes.
 ---
 
 Useful documentation can still be difficult to find. The usual causes are missing internal links, blocked crawling, conflicting canonicals, stale version pages, or titles that do not name the developer's task.
@@ -32,7 +32,7 @@ A single SEO score hides the failure. Split the audit into checks that produce c
 | Indexing | Is the page eligible for search? | `noindex`, soft 404, duplicate without a clear canonical |
 | Canonicalization | Do all URL signals identify the same page? | Canonical, sitemap, redirect, and internal links disagree |
 | Page quality | Can the reader identify and complete the task? | Generic title, stale version, missing prerequisites, broken example |
-| Measurement | Can the team see what happened after release? | No Search Console baseline, Semrush snapshot, or page owner |
+| Measurement | Can the team see what happened after release? | No baseline, change annotation, or page owner |
 
 Run the checks in that order. Stop at the first blocking failure, fix it, and then continue.
 
@@ -228,43 +228,11 @@ The script inspects one page's source HTML. It does not crawl the entire site, e
 
 Use it as the first gate. Follow it with rendered-browser inspection, a link crawl, Search Console URL Inspection, field performance data, and a human task-completion review.
 
-## Search Console and Semrush monitoring
+## Measure documentation search performance
 
-Search Console reports what happened on NinadPathak.com. Semrush adds estimated search demand, keyword difficulty, SERP composition, and external ranking context.
+Export the page and query baseline before changing a title, canonical, internal-link path, template, or version policy. Compare equivalent windows after search engines have recrawled the page, and annotate the release date so the team can connect a movement to a specific change.
 
-Keep the two sources separate. Search Console is the primary record for clicks, impressions, CTR, and Google position on the verified property, while Semrush helps explain changes in the wider search market.
-
-### Current keyword demand
-
-The Semrush US database on July 30, 2026 showed the following estimates:
-
-| Keyword | Monthly volume | Keyword difficulty | Intent |
-|---|---:|---:|---|
-| `technical SEO checklist` | 3,600 | 34 | Informational |
-| `technical SEO audit checklist` | 2,400 | 32 | Informational |
-| `tech SEO checklist` | 1,000 | 31 | Informational |
-| `technical documentation best practices` | 140 | 25 | Informational |
-| `documentation SEO` | 10 | 0 | Not classified |
-| `technical documentation SEO` | 0 reported | 0 | Not classified |
-
-Semrush reported little measurable demand for the exact documentation SEO phrases. The checklist variants have substantially more demand, so this page now names that intent directly while keeping the audit specific to developer documentation.
-
-The current organic results for `technical SEO checklist` are led by broad site-audit guides from Semrush, CognitiveSEO, AIOSEO, Big Drop, and DashThis. The documentation-specific audit covers the expected crawl, index, canonical, performance, mobile, and structured-data checks, then differentiates on documentation versions, task routes, rendered code, navigation, and query-to-page measurement.
-
-### How to investigate growth or decline
-
-Compare the same page and query over equivalent windows before naming a cause. Record the observation first, then test explanations.
-
-| Observation | Evidence to check |
-|---|---|
-| Impressions rise, position is stable | Semrush volume trend, seasonality, product demand, new query variants |
-| Position rises, impressions are stable | Competing pages, backlinks, internal links, SERP composition, content changes |
-| CTR falls, position is stable | Title and snippet changes, search intent, rich results, competing result promises |
-| The wrong page ranks | Canonical signals, internal links, overlapping intent, redirects, old versions |
-| Clicks drop after a release | Index state, product changes, stale instructions, competitors, demand trend |
-| No impressions | Discovery, indexing, measured demand, title clarity, query mismatch |
-
-A correlation is not a cause. Keep seasonality, competitor movement, technical faults, and content updates as hypotheses until the evidence supports one.
+Review clicks, impressions, CTR, average position, index state, and the URL selected for the query. A movement does not identify its cause, so verify the page, competing results, product changes, seasonality, and technical signals before deciding what to fix.
 
 ## Technical SEO checklist for documentation sites
 
@@ -315,9 +283,9 @@ A correlation is not a cause. Keep seasonality, competitor movement, technical f
 
 ### Measurement
 
-- [ ] Search Console page-query data is saved before and after changes.
-- [ ] A dated Semrush snapshot records volume, difficulty, intent, trend, and ranking context.
-- [ ] Growth and decline are reported separately from proposed causes.
+- [ ] Page-query performance and index state are saved before and after changes.
+- [ ] Publish and update dates are annotated beside the measurement window.
+- [ ] Growth and decline are recorded separately from proposed causes.
 - [ ] The page has an owner and product-triggered update conditions.
 - [ ] Review dates match the site's crawl rate and query volume.
 

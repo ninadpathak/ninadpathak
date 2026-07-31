@@ -77,7 +77,7 @@
   "description": "Audit developer documentation for crawling, rendering, indexing, canonicals, internal links, sitemaps, Core Web Vitals, structured data, and visibility.",
   "image": "https://ninadpathak.com/static/og-image.png",
   "inLanguage": "en-US",
-  "wordCount": 2763,
+  "wordCount": 2452,
   "keywords": "documentation-seo, technical-writing, developer-experience",
   "articleSection": "documentation-seo",
   "author": {
@@ -204,7 +204,7 @@
         <span class="post-meta-sep" aria-hidden="true">·</span>
         <span class="post-meta-updated">Updated <time datetime="2026-07-31">Jul 31, 2026</time></span>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <span class="post-meta-time">14 min read</span>
+        <span class="post-meta-time">12 min read</span>
       </div>
       <h1 class="post-title">Technical SEO Checklist for Documentation Sites</h1>
       <p class="lead">Audit developer documentation for crawling, rendering, indexing, canonicals, internal links, sitemaps, Core Web Vitals, structured data, and visibility.</p>
@@ -224,7 +224,7 @@
           <li>Run the technical SEO audit in dependency order instead of chasing one score.</li>
           <li>Check discovery, crawling, indexing, and page quality separately.</li>
           <li>Test source HTML and rendered output before publication.</li>
-          <li>Compare Search Console and Semrush data before explaining a ranking change.</li>
+          <li>Record index state and search performance before and after meaningful changes.</li>
         </ul>
       </aside>
       <nav class="toc" aria-label="Table of contents">
@@ -257,11 +257,7 @@
 <li><a href="#audit-script-limitations">Audit script limitations</a></li>
 </ul>
 </li>
-<li><a href="#search-console-and-semrush-monitoring">Search Console and Semrush monitoring</a><ul>
-<li><a href="#current-keyword-demand">Current keyword demand</a></li>
-<li><a href="#how-to-investigate-growth-or-decline">How to investigate growth or decline</a></li>
-</ul>
-</li>
+<li><a href="#measure-documentation-search-performance">Measure documentation search performance</a></li>
 <li><a href="#technical-seo-checklist-for-documentation-sites">Technical SEO checklist for documentation sites</a><ul>
 <li><a href="#search-intent">Search intent</a></li>
 <li><a href="#discovery-and-crawling">Discovery and crawling</a></li>
@@ -323,7 +319,7 @@
 <tr>
 <td>Measurement</td>
 <td>Can the team see what happened after release?</td>
-<td>No Search Console baseline, Semrush snapshot, or page owner</td>
+<td>No baseline, change annotation, or page owner</td>
 </tr>
 </tbody>
 </table>
@@ -480,98 +476,9 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 <h3 id="audit-script-limitations">Audit script limitations</h3>
 <p>The script inspects one page's source HTML. It does not crawl the entire site, execute JavaScript, test Core Web Vitals, confirm Google's selected canonical, or prove that the page deserves to rank.</p>
 <p>Use it as the first gate. Follow it with rendered-browser inspection, a link crawl, Search Console URL Inspection, field performance data, and a human task-completion review.</p>
-<h2 id="search-console-and-semrush-monitoring">Search Console and Semrush monitoring</h2>
-<p>Search Console reports what happened on NinadPathak.com. Semrush adds estimated search demand, keyword difficulty, SERP composition, and external ranking context.</p>
-<p>Keep the two sources separate. Search Console is the primary record for clicks, impressions, CTR, and Google position on the verified property, while Semrush helps explain changes in the wider search market.</p>
-<h3 id="current-keyword-demand">Current keyword demand</h3>
-<p>The Semrush US database on July 30, 2026 showed the following estimates:</p>
-<table>
-<thead>
-<tr>
-<th>Keyword</th>
-<th style="text-align: right;">Monthly volume</th>
-<th style="text-align: right;">Keyword difficulty</th>
-<th>Intent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>technical SEO checklist</code></td>
-<td style="text-align: right;">3,600</td>
-<td style="text-align: right;">34</td>
-<td>Informational</td>
-</tr>
-<tr>
-<td><code>technical SEO audit checklist</code></td>
-<td style="text-align: right;">2,400</td>
-<td style="text-align: right;">32</td>
-<td>Informational</td>
-</tr>
-<tr>
-<td><code>tech SEO checklist</code></td>
-<td style="text-align: right;">1,000</td>
-<td style="text-align: right;">31</td>
-<td>Informational</td>
-</tr>
-<tr>
-<td><code>technical documentation best practices</code></td>
-<td style="text-align: right;">140</td>
-<td style="text-align: right;">25</td>
-<td>Informational</td>
-</tr>
-<tr>
-<td><code>documentation SEO</code></td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">0</td>
-<td>Not classified</td>
-</tr>
-<tr>
-<td><code>technical documentation SEO</code></td>
-<td style="text-align: right;">0 reported</td>
-<td style="text-align: right;">0</td>
-<td>Not classified</td>
-</tr>
-</tbody>
-</table>
-<p>Semrush reported little measurable demand for the exact documentation SEO phrases. The checklist variants have substantially more demand, so this page now names that intent directly while keeping the audit specific to developer documentation.</p>
-<p>The current organic results for <code>technical SEO checklist</code> are led by broad site-audit guides from Semrush, CognitiveSEO, AIOSEO, Big Drop, and DashThis. The documentation-specific audit covers the expected crawl, index, canonical, performance, mobile, and structured-data checks, then differentiates on documentation versions, task routes, rendered code, navigation, and query-to-page measurement.</p>
-<h3 id="how-to-investigate-growth-or-decline">How to investigate growth or decline</h3>
-<p>Compare the same page and query over equivalent windows before naming a cause. Record the observation first, then test explanations.</p>
-<table>
-<thead>
-<tr>
-<th>Observation</th>
-<th>Evidence to check</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Impressions rise, position is stable</td>
-<td>Semrush volume trend, seasonality, product demand, new query variants</td>
-</tr>
-<tr>
-<td>Position rises, impressions are stable</td>
-<td>Competing pages, backlinks, internal links, SERP composition, content changes</td>
-</tr>
-<tr>
-<td>CTR falls, position is stable</td>
-<td>Title and snippet changes, search intent, rich results, competing result promises</td>
-</tr>
-<tr>
-<td>The wrong page ranks</td>
-<td>Canonical signals, internal links, overlapping intent, redirects, old versions</td>
-</tr>
-<tr>
-<td>Clicks drop after a release</td>
-<td>Index state, product changes, stale instructions, competitors, demand trend</td>
-</tr>
-<tr>
-<td>No impressions</td>
-<td>Discovery, indexing, measured demand, title clarity, query mismatch</td>
-</tr>
-</tbody>
-</table>
-<p>A correlation is not a cause. Keep seasonality, competitor movement, technical faults, and content updates as hypotheses until the evidence supports one.</p>
+<h2 id="measure-documentation-search-performance">Measure documentation search performance</h2>
+<p>Export the page and query baseline before changing a title, canonical, internal-link path, template, or version policy. Compare equivalent windows after search engines have recrawled the page, and annotate the release date so the team can connect a movement to a specific change.</p>
+<p>Review clicks, impressions, CTR, average position, index state, and the URL selected for the query. A movement does not identify its cause, so verify the page, competing results, product changes, seasonality, and technical signals before deciding what to fix.</p>
 <h2 id="technical-seo-checklist-for-documentation-sites">Technical SEO checklist for documentation sites</h2>
 <h3 id="search-intent">Search intent</h3>
 <ul>
@@ -620,9 +527,9 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 </ul>
 <h3 id="measurement">Measurement</h3>
 <ul>
-<li>[ ] Search Console page-query data is saved before and after changes.</li>
-<li>[ ] A dated Semrush snapshot records volume, difficulty, intent, trend, and ranking context.</li>
-<li>[ ] Growth and decline are reported separately from proposed causes.</li>
+<li>[ ] Page-query performance and index state are saved before and after changes.</li>
+<li>[ ] Publish and update dates are annotated beside the measurement window.</li>
+<li>[ ] Growth and decline are recorded separately from proposed causes.</li>
 <li>[ ] The page has an owner and product-triggered update conditions.</li>
 <li>[ ] Review dates match the site's crawl rate and query volume.</li>
 </ul>
