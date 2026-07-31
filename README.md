@@ -20,6 +20,10 @@ python3 build.py
 
 Output goes to `output/`. That's the folder to deploy.
 
+Every build runs `seo_audit.py` before it exits. Deployment stops if a generated page
+has a broken internal link, missing metadata, duplicate canonical, invalid JSON-LD,
+missing sitemap entry, missing `llms.txt` target, or malformed Cloudflare redirect.
+
 To preview locally:
 
 ```bash

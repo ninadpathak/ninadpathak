@@ -3,6 +3,7 @@
 {% block title %}Projects | Ninad Pathak{% endblock %}
 {% block description %}A collection of tools, libraries, and experiments built by Ninad Pathak.{% endblock %}
 {% block canonical %}/projects/{% endblock %}
+{% block og_url %}/projects/{% endblock %}
 
 {% block content %}
 
@@ -28,18 +29,18 @@
           <div class="project-card-status">{{ project.status }}</div>
           {% endif %}
         </div>
-        
+
         <h2 class="project-card-title">{{ project.title }}</h2>
         <p class="project-card-desc">{{ project.description }}</p>
-        
+
         <div class="project-card-stack">
           {% for tech in project.tech_stack %}
           <span class="tech-tag">{{ tech }}</span>
           {% endfor %}
         </div>
-        
+
         <div class="project-card-footer">
-          <a href="{{ project.url }}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Visit Project →</a>
+          <a href="{{ project.url }}" class="btn btn-outline btn-sm"{% if project.url.startswith('http') %} target="_blank" rel="noopener"{% endif %}>Visit Project →</a>
         </div>
       </div>
       {% endfor %}

@@ -1,4 +1,12 @@
 projects:
+  - title: "llms.txt Generator"
+    description: "Create a clean llms.txt file for a website, preview it, copy it, and download it without sending site data to a server."
+    url: "/llms-txt-generator/"
+    tech_stack:
+      - "Vanilla JS"
+      - "Local-only"
+    category: "SEO / AI Retrieval"
+    status: "Live"
   - title: "Technical Writing Linter"
     description: "A specialized tool for technical writers and DevTools teams to flag patterns that make readers close the tab: condescension, AI signals, and fluff."
     url: "/linter/"

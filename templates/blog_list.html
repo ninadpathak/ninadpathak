@@ -2,7 +2,8 @@
 
 {% block title %}Articles on DevRel, Documentation, and Technical Writing | Ninad Pathak{% endblock %}
 {% block description %}Personal writing on developer relations, documentation, technical content, code examples, and explaining developer products clearly.{% endblock %}
-{% block canonical %}/articles/{% endblock %}
+{% block canonical %}{% if current_page_num > 1 %}/articles/page/{{ current_page_num }}/{% else %}/articles/{% endif %}{% endblock %}
+{% block og_url %}{% if current_page_num > 1 %}/articles/page/{{ current_page_num }}/{% else %}/articles/{% endif %}{% endblock %}
 
 {% block content %}
 

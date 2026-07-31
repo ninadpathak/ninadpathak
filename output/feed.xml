@@ -9,43 +9,50 @@
       <title>Technical SEO Checklist for Documentation Sites</title>
       <link>https://ninadpathak.com/articles/seo-for-technical-documentation/</link>
       <description>Technical SEO for developer documentation: crawling, rendering, indexing, canonicals, internal links, Core Web Vitals, structured data, and search visibility.</description>
-      <pubDate>Jul 30, 2026</pubDate>
-    </item>
-    <item>
-      <title>Documentation Review Checklist Before You Publish</title>
-      <link>https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/</link>
-      <description>Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.</description>
-      <pubDate>Jul 30, 2026</pubDate>
+      <pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://ninadpathak.com/articles/seo-for-technical-documentation/</guid>
     </item>
     <item>
       <title>How to Organize Documentation That Has Drifted</title>
       <link>https://ninadpathak.com/articles/how-to-organize-a-documentation-site/</link>
       <description>Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.</description>
-      <pubDate>Jul 30, 2026</pubDate>
+      <pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://ninadpathak.com/articles/how-to-organize-a-documentation-site/</guid>
+    </item>
+    <item>
+      <title>Documentation Review Checklist Before You Publish</title>
+      <link>https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/</link>
+      <description>Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.</description>
+      <pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/</guid>
     </item>
     <item>
       <title>Writing Release Notes That Developers Trust</title>
       <link>https://ninadpathak.com/articles/writing-release-notes-that-developers-trust/</link>
       <description>Write release notes that let developers assess upgrade risk, understand product impact, and migrate without surprises.</description>
-      <pubDate>Apr 03, 2026</pubDate>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://ninadpathak.com/articles/writing-release-notes-that-developers-trust/</guid>
     </item>
     <item>
       <title>How to Write a Technical Tutorial That Actually Teaches</title>
       <link>https://ninadpathak.com/articles/how-to-write-a-technical-tutorial-that-actually-teaches/</link>
       <description>Write a technical tutorial that takes one reader from a clear starting point to a tested, useful result.</description>
-      <pubDate>Apr 02, 2026</pubDate>
+      <pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://ninadpathak.com/articles/how-to-write-a-technical-tutorial-that-actually-teaches/</guid>
     </item>
     <item>
       <title>Developer Onboarding Docs: What Works, What Doesn't</title>
       <link>https://ninadpathak.com/articles/developer-onboarding-docs-what-works-what-doesnt/</link>
       <description>Write developer onboarding docs that help a new engineer set up the product, understand the workflow, and ship a safe first change.</description>
-      <pubDate>Apr 01, 2026</pubDate>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://ninadpathak.com/articles/developer-onboarding-docs-what-works-what-doesnt/</guid>
     </item>
     <item>
       <title>How to Write a Changelog That Developers Actually Read</title>
       <link>https://ninadpathak.com/articles/how-to-write-a-changelog-developers-actually-read/</link>
       <description>Write a changelog that helps developers assess an upgrade, find breaking changes, and understand what each release means for their code.</description>
-      <pubDate>Mar 30, 2026</pubDate>
+      <pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://ninadpathak.com/articles/how-to-write-a-changelog-developers-actually-read/</guid>
     </item>
   </channel>
 </rss>

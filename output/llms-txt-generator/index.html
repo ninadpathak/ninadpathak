@@ -19,16 +19,16 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Ninad Pathak</title>
-  <meta name="description" content="Book a call with Ninad Pathak, technical content writer for DevTools and B2B SaaS companies. I reply within 24 hours.">
+  <title>Free llms.txt Generator and Validator | Ninad Pathak</title>
+  <meta name="description" content="Create a valid llms.txt file for your website. Generate, preview, copy, and download the file in your browser. Free and private.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website">
-  <meta property="og:title"       content="Ninad Pathak | Developer Relations Content for DevTools & SaaS">
-  <meta property="og:description" content="Developer relations content, documentation, tutorials, and technical articles that help developer products earn trust and adoption.">
-  <meta property="og:url"         content="https://ninadpathak.com/contact/">
+  <meta property="og:title"       content="Free llms.txt Generator and Validator">
+  <meta property="og:description" content="Build a clean llms.txt file in your browser, then copy or download it. No signup and no data leaves your device.">
+  <meta property="og:url"         content="https://ninadpathak.com/llms-txt-generator/">
   <meta property="og:image"       content="https://ninadpathak.com/static/favicon.png">
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
@@ -37,12 +37,12 @@
   <!-- Twitter -->
   <meta name="twitter:card"        content="summary">
   <meta name="twitter:site"        content="@ninadwrites">
-  <meta name="twitter:title"       content="Ninad Pathak">
-  <meta name="twitter:description" content="Developer relations content, documentation, tutorials, and technical articles that help developer products earn trust and adoption.">
+  <meta name="twitter:title"       content="Free llms.txt Generator and Validator">
+  <meta name="twitter:description" content="Build, validate, copy, and download a clean llms.txt file in your browser.">
   <meta name="twitter:image"       content="https://ninadpathak.com/static/favicon.png">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://ninadpathak.com/contact/">
+  <link rel="canonical" href="https://ninadpathak.com/llms-txt-generator/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -57,6 +57,7 @@
   <link rel="stylesheet" href="/static/css/main.css">
   <link rel="stylesheet" href="/static/css/highlight.css">
   <link rel="stylesheet" href="/static/css/visuals.css">
+<link rel="stylesheet" href="/static/css/llms-generator.css">
   <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
 
   <!-- RSS -->
@@ -72,35 +73,60 @@
   </script>
 
   <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "llms.txt Generator",
+  "url": "https://ninadpathak.com/llms-txt-generator/",
+  "description": "Create, preview, copy, and download a clean llms.txt file in the browser.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
     "@type": "Person",
-    "@id": "https://ninadpathak.com/#person",
     "name": "Ninad Pathak",
-    "url": "https://ninadpathak.com",
-    "jobTitle": "Technical Content Writer",
-    "description": "Developer relations content, documentation, tutorials, and technical articles that help developer products earn trust and adoption.",
-    "knowsAbout": [
-      "Technical Writing",
-      "Developer Relations",
-      "Developer Education",
-      "Developer Experience",
-      "Developer Documentation",
-      "API Documentation",
-      "Docs as Code",
-      "Documentation SEO",
-      "Code Examples",
-      "Technical Tutorials",
-      "AI-Ready Documentation",
-      "Technical Content Strategy"
-    ],
-    "sameAs": [
-      "https://linkedin.com/in/ninadwites/",
-      "https://twitter.com/ninadwrites"
-    ]
+    "url": "https://ninadpathak.com/about/"
   }
-  </script>
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is an llms.txt file?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An llms.txt file is a proposed Markdown-formatted map that summarizes a website and links to its most useful pages for language-model systems."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where should llms.txt be published?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Publish it at the root of the canonical website, such as https://example.com/llms.txt, and return it as plain text with a 200 status."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does llms.txt control AI crawlers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Use robots.txt and access controls for crawler permissions. llms.txt is a discovery and context file, not an access-control mechanism."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -153,80 +179,115 @@
 
 <!-- CONTENT -->
 <main id="main" tabindex="-1">
-
-<section class="page-intro">
+<section class="page-intro llms-hero">
   <div class="container">
-    <div class="label">// Contact</div>
-    <h1>Let's talk.</h1>
-    <p class="lead">
-      If you're building something technical and need content that engineers
-      actually respect, I'd love to hear about it.
-    </p>
+    <div class="label">// Free browser tool</div>
+    <h1>llms.txt Generator</h1>
+    <p class="lead">Create a concise map of your website for AI systems. Everything runs in your browser, so the URLs and descriptions you enter stay on your device.</p>
   </div>
 </section>
 
-<section>
+<section class="llms-tool-section">
   <div class="container">
-    <div class="contact-layout">
-
-      <!-- Left: info -->
-      <div>
-        <div class="contact-methods">
-          <div>
-            <div class="contact-method-label">// Email</div>
-            <a href="mailto:hello@ninadpathak.com" class="contact-method-val">hello@ninadpathak.com</a>
-          </div>
-          <div>
-            <div class="contact-method-label">// LinkedIn</div>
-            <a href="https://linkedin.com/in/ninadwites/" class="contact-method-val" target="_blank" rel="noopener">linkedin.com/in/ninadwites</a>
-          </div>
-          <div>
-            <div class="contact-method-label">// Twitter / X</div>
-            <a href="https://twitter.com/ninadwrites" class="contact-method-val" target="_blank" rel="noopener">@ninadwrites</a>
-          </div>
-          <div>
-            <div class="contact-method-label">// Response Time</div>
-            <span class="contact-method-val contact-method-val-static">Within 24 hours</span>
-          </div>
+    <div class="llms-tool-grid">
+      <form class="llms-panel" id="llmsGeneratorForm">
+        <div class="llms-panel-header">
+          <span>website.config</span>
+          <button type="button" class="llms-text-button" id="llmsLoadSample">load sample</button>
         </div>
 
-        <div class="expect-list">
-          <h4>// What to expect on the call</h4>
-          <div class="expect-item">We'll talk about your content goals and what's blocking you.</div>
-          <div class="expect-item">I'll share how I'd approach your specific challenges.</div>
-          <div class="expect-item">You'll leave with a clear picture of how we can work together, no pressure.</div>
-          <div class="expect-item">The call is 30 minutes. I won't waste your time.</div>
-        </div>
-      </div>
+        <div class="llms-form-body">
+          <div class="llms-field-row">
+            <label class="llms-field">
+              <span>Website name</span>
+              <input id="llmsSiteName" name="siteName" type="text" autocomplete="organization" placeholder="Acme Developer Docs" required>
+            </label>
+            <label class="llms-field">
+              <span>Canonical website URL</span>
+              <input id="llmsSiteUrl" name="siteUrl" type="url" inputmode="url" placeholder="https://docs.example.com" required>
+            </label>
+          </div>
 
-      <!-- Right: booking -->
-      <div>
-        <div class="contact-booking-box">
-          <div class="contact-booking-label">// Book a Call</div>
-          <div class="contact-booking-title">30-minute intro call</div>
-          <p class="contact-booking-desc">
-            Let's see if we're a good fit. Tell me about your product,
-            your audience, and what kind of content you need.
-          </p>
-          <a href="https://zcal.co/i/AGG1iJtv" class="btn btn-primary btn-block booking-modal-trigger" rel="noopener">
-            Open Booking Calendar →
-          </a>
-        </div>
+          <label class="llms-field">
+            <span>One-sentence summary</span>
+            <textarea id="llmsSiteDescription" name="siteDescription" rows="3" placeholder="Developer documentation for the Acme API and SDKs." required></textarea>
+          </label>
 
-        <!-- Who I work best with -->
-        <div class="contact-secondary-box">
-          <div class="contact-method-label contact-subsection-label">// I work best with</div>
-          <div class="expect-item">DevTools companies whose audience is developers</div>
-          <div class="expect-item">B2B SaaS companies that need technical depth, not surface-level content</div>
-          <div class="expect-item">Teams who value accuracy over output volume</div>
-          <div class="expect-item">Founders who want content their engineering team won't cringe at</div>
-        </div>
-      </div>
+          <label class="llms-field">
+            <span>Important pages</span>
+            <span class="llms-field-help">One page per line: <code>Title | URL | Description</code></span>
+            <textarea id="llmsPrimaryLinks" name="primaryLinks" rows="8" placeholder="Quickstart | /quickstart/ | Make your first API request.&#10;API Reference | /api/ | Endpoints, parameters, and response schemas." required></textarea>
+          </label>
 
+          <label class="llms-field">
+            <span>Optional pages</span>
+            <span class="llms-field-help">Add lower-priority examples, changelogs, or background material.</span>
+            <textarea id="llmsOptionalLinks" name="optionalLinks" rows="5" placeholder="Changelog | /changelog/ | Product and API changes."></textarea>
+          </label>
+
+          <div class="llms-form-actions">
+            <button class="btn btn-primary" type="submit">Generate llms.txt →</button>
+            <button class="btn btn-outline" type="reset" id="llmsClear">Clear</button>
+          </div>
+          <div class="llms-status" id="llmsStatus" role="status" aria-live="polite"></div>
+        </div>
+      </form>
+
+      <section class="llms-panel llms-output-panel" aria-labelledby="llmsOutputTitle">
+        <div class="llms-panel-header">
+          <span id="llmsOutputTitle">llms.txt</span>
+          <div class="llms-output-actions">
+            <button type="button" class="llms-text-button" id="llmsCopy" disabled>copy</button>
+            <button type="button" class="llms-text-button" id="llmsDownload" disabled>download</button>
+          </div>
+        </div>
+        <pre class="llms-output" id="llmsOutput" tabindex="0">Your generated file will appear here.</pre>
+        <div class="llms-validation" id="llmsValidation">
+          <span class="llms-validation-dot" aria-hidden="true"></span>
+          Waiting for input
+        </div>
+      </section>
     </div>
   </div>
 </section>
 
+<section class="llms-guide-section">
+  <div class="prose-container">
+    <div class="label">// Implementation guide</div>
+    <h2>How to publish the generated file</h2>
+    <ol class="llms-steps">
+      <li><strong>Download the file.</strong> Keep the filename exactly <code>llms.txt</code>.</li>
+      <li><strong>Place it at the website root.</strong> The public address should look like <code>https://example.com/llms.txt</code>.</li>
+      <li><strong>Check the response.</strong> The URL should return <code>200</code>, serve readable plain text, and avoid redirects.</li>
+      <li><strong>Maintain it with the site.</strong> Update links when canonical URLs move, important pages change, or a section is retired.</li>
+    </ol>
+
+    <h2>What belongs in llms.txt</h2>
+    <p>Include the pages that explain the product, help someone complete a task, or provide authoritative reference material. Use canonical URLs and descriptions that say what a reader will find.</p>
+    <p>Leave out duplicate routes, search results, account pages, thin tag archives, and URLs blocked from crawling. A shorter curated file is easier to maintain than an export of every sitemap URL.</p>
+
+    <h2>What llms.txt does not do</h2>
+    <p>The file does not grant or deny crawler access, replace structured data, or guarantee that an AI product will use the site. Keep <code>robots.txt</code>, the XML sitemap, canonical tags, and normal internal links working.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="llms-faq">
+      <details>
+        <summary>What is an llms.txt file?</summary>
+        <p>An llms.txt file is a proposed Markdown-formatted map that summarizes a website and links to its most useful pages for language-model systems.</p>
+      </details>
+      <details>
+        <summary>Where should llms.txt be published?</summary>
+        <p>Publish it at the root of the canonical website, such as <code>https://example.com/llms.txt</code>, and make sure the URL returns a plain-text <code>200</code> response.</p>
+      </details>
+      <details>
+        <summary>Does llms.txt control AI crawlers?</summary>
+        <p>No. Use <code>robots.txt</code> and access controls for crawler permissions. llms.txt is a discovery and context file.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script src="/static/js/llms-generator.js"></script>
 </main>
 
 <div class="booking-modal" id="bookingModal" aria-hidden="true">
