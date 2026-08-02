@@ -6,10 +6,11 @@ Technical writer and former engineer publishing in-depth, benchmark-backed writi
 
 ## Documentation
 
+- [Technical Documentation Best Practices, Tested on Real Developer Docs](https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/): A practical documentation review built from how Stripe, FastAPI, and GitHub make reader tasks, failures, and limits visible.
 - [Technical Documentation Template: From Empty Repository to Published Guide](https://ninadpathak.com/articles/technical-documentation-template/): A tested technical documentation template with task pages, validation, a strict MkDocs build, and a GitHub Pages workflow.
 - [Technical SEO Checklist for Documentation Sites](https://ninadpathak.com/articles/seo-for-technical-documentation/): Technical SEO for developer documentation: crawling, rendering, indexing, canonicals, internal links, Core Web Vitals, structured data, and search visibility.
-- [How to Organize Documentation That Has Drifted](https://ninadpathak.com/articles/how-to-organize-a-documentation-site/): Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.
 - [Documentation Review Checklist Before You Publish](https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/): Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.
+- [How to Organize Documentation That Has Drifted](https://ninadpathak.com/articles/how-to-organize-a-documentation-site/): Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.
 - [Writing Release Notes That Developers Trust](https://ninadpathak.com/articles/writing-release-notes-that-developers-trust/): Write release notes that let developers assess upgrade risk, understand product impact, and migrate without surprises.
 - [How to Write a Technical Tutorial That Actually Teaches](https://ninadpathak.com/articles/how-to-write-a-technical-tutorial-that-actually-teaches/): Write a technical tutorial that takes one reader from a clear starting point to a tested, useful result.
 - [Developer Onboarding Docs: What Works, What Doesn't](https://ninadpathak.com/articles/developer-onboarding-docs-what-works-what-doesnt/): Write developer onboarding docs that help a new engineer set up the product, understand the workflow, and ship a safe first change.
