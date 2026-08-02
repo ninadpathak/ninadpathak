@@ -16,7 +16,9 @@ Good technical documentation doesn't become useful when every endpoint has a pag
 
 I reviewed three documentation systems that make those jobs unusually clear: [FastAPI's error-handling guide](https://fastapi.tiangolo.com/tutorial/handling-errors/), [Stripe's idempotency reference](https://docs.stripe.com/api/idempotent_requests), and [GitHub's REST API rate-limit guide](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api). They cover different products, but they converge on the same rule: the documentation has to describe the state change and its boundary together.
 
-## Start with the task, not the product map
+## Technical documentation best practices that improve reader outcomes
+
+### Start with the task, not the product map
 
 A new reader doesn't arrive looking for your internal taxonomy. They arrive with a job such as “return a useful 404,” “retry a network failure safely,” or “find out why this request stopped working.”
 
@@ -35,7 +37,7 @@ Use that test when you review a page:
 
 A page can include more detail later. It should not make the reader infer the first successful state.
 
-## Put failure handling beside the risky action
+### Put failure handling beside the risky action
 
 The weakest documentation teaches the happy path, then hides recovery in a distant FAQ. That structure looks clean until a developer gets a timeout, a duplicate request, or a rate-limit response in production.
 
@@ -52,7 +54,7 @@ Write error guidance where the action appears when the answer changes the implem
 
 That is not extra support content. It is part of the interface a client is implementing.
 
-## Make limits observable before they become incidents
+### Make limits observable before they become incidents
 
 Rate limits are another documentation test. A vague warning that an API “may throttle traffic” doesn't help a developer decide whether to queue work, slow down, or investigate an account configuration.
 
@@ -71,7 +73,7 @@ The strongest objection is that this makes a quickstart longer. It can, especial
 
 Keep the first path short when the failure mode is genuinely obvious. Once retries, permissions, asynchronous work, or quotas can change the result, brevity becomes concealment.
 
-## Give each page an owner
+### Give each page an owner
 
 Documentation starts to drift when tutorials, reference pages, release notes, and support articles all explain the same behavior differently. The fix is not more navigation.
 
