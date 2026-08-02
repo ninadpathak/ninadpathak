@@ -6,6 +6,13 @@
     <description>Developer relations content, documentation, tutorials, and technical articles that help developer products earn trust and adoption.</description>
     <language>en-us</language>
     <item>
+      <title>Technical Documentation Template: From Empty Repository to Published Guide</title>
+      <link>https://ninadpathak.com/articles/technical-documentation-template/</link>
+      <description>A tested technical documentation template with task pages, validation, a strict MkDocs build, and a GitHub Pages workflow.</description>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://ninadpathak.com/articles/technical-documentation-template/</guid>
+    </item>
+    <item>
       <title>Technical SEO Checklist for Documentation Sites</title>
       <link>https://ninadpathak.com/articles/seo-for-technical-documentation/</link>
       <description>Technical SEO for developer documentation: crawling, rendering, indexing, canonicals, internal links, Core Web Vitals, structured data, and search visibility.</description>

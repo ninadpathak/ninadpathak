@@ -522,7 +522,6 @@ class SiteBuilder:
     def build_sitemap(self, posts, work_cases, glossary_terms, pillars=None):
         base = self.config["site"]["url"].rstrip("/")
         pillars = pillars or []
-        build_date = date.today().isoformat()
         # Site-freshness proxy: the most recent post's date drives lastmod on
         # listing/static pages so crawlers re-fetch them when new content ships.
         site_lastmod = format_date_iso(posts[0].get("updated") or posts[0].get("date")) if posts else None
@@ -537,7 +536,7 @@ class SiteBuilder:
             ("/about/", "0.6", "monthly", None),
             ("/contact/", "0.5", "yearly", None),
             ("/linter/", "0.9", "monthly", None),
-            ("/llms-txt-generator/", "0.9", "monthly", build_date),
+            ("/llms-txt-generator/", "0.9", "monthly", None),
             ("/privacy/", "0.3", "yearly", None),
             ("/terms/", "0.3", "yearly", None),
         ]

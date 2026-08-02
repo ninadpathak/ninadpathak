@@ -4,6 +4,13 @@
 (function () {
   'use strict';
 
+  function trackEvent(name, parameters) {
+    if (typeof window.gtag !== 'function') return;
+    window.gtag('event', name, parameters || {});
+  }
+
+  window.trackSiteEvent = trackEvent;
+
   // ----------------------------------------------------------------
   // Theme toggle
   // ----------------------------------------------------------------
@@ -69,6 +76,11 @@
     triggers.forEach(function (trigger) {
       trigger.addEventListener('click', function (e) {
         e.preventDefault();
+        trackEvent('generate_lead', {
+          lead_source: 'booking_modal',
+          link_text: trigger.textContent.trim(),
+          page_path: window.location.pathname
+        });
         openModal();
       });
     });
@@ -329,6 +341,23 @@
 
     requestAnimationFrame(tick);
   }());
+
+  // ----------------------------------------------------------------
+  // Conversion CTA tracking
+  // ----------------------------------------------------------------
+  document.addEventListener('click', function (event) {
+    const link = event.target.closest('a.btn, a.arrow-link');
+    if (!link || link.classList.contains('booking-modal-trigger')) return;
+
+    const destination = link.getAttribute('href');
+    if (!['/work/', '/portfolio/', '/contact/'].includes(destination)) return;
+
+    trackEvent('cta_click', {
+      cta_destination: destination,
+      link_text: link.textContent.trim(),
+      page_path: window.location.pathname
+    });
+  });
 
   // ----------------------------------------------------------------
   // Active nav link

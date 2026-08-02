@@ -20,6 +20,10 @@
   };
   var pages = [];
 
+  function trackEvent(name, parameters) {
+    if (typeof window.trackSiteEvent === 'function') window.trackSiteEvent(name, parameters);
+  }
+
   function cleanText(value) {
     return String(value || '').trim().replace(/\s+/g, ' ');
   }
@@ -157,9 +161,15 @@
       var detail = result.sitemapFound ? ' from the website sitemap' : ' from the homepage because no sitemap was found';
       if (result.truncated) detail += ' (limited to ' + result.limit + ')';
       setStatus('Found ' + pages.length + ' editable page' + (pages.length === 1 ? '' : 's') + detail + '.', 'success');
+      trackEvent('llms_scan_complete', {
+        page_count: pages.length,
+        sitemap_found: result.sitemapFound,
+        truncated: result.truncated
+      });
       workspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }).catch(function (error) {
       setStatus(error.message + ' Check the URL and confirm the site is publicly reachable.', 'error');
+      trackEvent('llms_scan_error');
     }).finally(function () {
       scanButton.disabled = false;
       scanButton.textContent = 'Scan website →';
@@ -220,6 +230,7 @@
       output.value = lines.join('\n').trim() + '\n';
       outputPanel.hidden = false;
       document.getElementById('llmsValidation').textContent = selected.length + ' unique canonical page links. Edit the text directly if you want a final pass.';
+      trackEvent('llms_generate', { page_count: selected.length });
       outputPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (error) {
       setStatus(error.message, 'error');
@@ -229,10 +240,12 @@
   document.getElementById('llmsCopy').addEventListener('click', function () {
     navigator.clipboard.writeText(output.value).then(function () {
       setStatus('Copied llms.txt to the clipboard.', 'success');
+      trackEvent('llms_copy');
     }).catch(function () { setStatus('Clipboard access was blocked. Select the generated text and copy it manually.', 'error'); });
   });
 
   document.getElementById('llmsDownload').addEventListener('click', function () {
+    trackEvent('llms_download');
     var blobUrl = URL.createObjectURL(new Blob([output.value], { type: 'text/plain;charset=utf-8' }));
     var link = document.createElement('a');
     link.href = blobUrl;
