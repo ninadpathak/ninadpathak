@@ -2111,6 +2111,12 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: 0.875r
   box-shadow: 0 20px 40px rgba(0,0,0,0.05);
 }
 
+.visual-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .visual-container iframe {
   width: 100% !important;
   height: 100% !important;
