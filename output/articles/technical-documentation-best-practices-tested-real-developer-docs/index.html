@@ -20,14 +20,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Technical Documentation Best Practices, Tested on Real Developer Docs | Ninad Pathak</title>
-  <meta name="description" content="A practical documentation review built from how Stripe, FastAPI, and GitHub make reader tasks, failures, and limits visible.">
+  <meta name="description" content="Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
   <meta property="og:title"       content="Technical Documentation Best Practices, Tested on Real Developer Docs">
-  <meta property="og:description" content="A practical documentation review built from how Stripe, FastAPI, and GitHub make reader tasks, failures, and limits visible.">
+  <meta property="og:description" content="Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.">
   <meta property="og:url"         content="https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/">
   <meta property="og:image"       content="https://ninadpathak.com/static/favicon.png">
   <meta property="og:image:width" content="512">
@@ -77,10 +77,10 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "Technical Documentation Best Practices, Tested on Real Developer Docs",
-  "description": "A practical documentation review built from how Stripe, FastAPI, and GitHub make reader tasks, failures, and limits visible.",
+  "description": "Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.",
   "image": "https://ninadpathak.com/static/favicon.png",
   "inLanguage": "en-US",
-  "wordCount": 773,
+  "wordCount": 855,
   "keywords": "documentation, technical-writing, developer-experience",
   "articleSection": "documentation",
   "author": {
@@ -208,7 +208,7 @@
         <span class="post-meta-time">4 min read</span>
       </div>
       <h1 class="post-title">Technical Documentation Best Practices, Tested on Real Developer Docs</h1>
-      <p class="lead">A practical documentation review built from how Stripe, FastAPI, and GitHub make reader tasks, failures, and limits visible.</p>
+      <p class="lead">Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.</p>
       <div class="post-tags">
         <span class="tag">documentation</span>
         <span class="tag">technical-writing</span>
@@ -222,35 +222,36 @@
       <aside class="article-summary" aria-labelledby="article-summary-title">
         <div class="article-summary-label" id="article-summary-title">The short version</div>
         <ul>
-          <li>Give each page one reader task and one observable success state.</li>
-          <li>Put failure handling beside the action that can fail.</li>
-          <li>Use limits and recovery steps as part of the interface, not as footnotes.</li>
+          <li>Give every page one reader task and an observable success state.</li>
+          <li>Put recovery guidance beside the action that can fail.</li>
+          <li>Make limits inspectable and assign each reader question to one page owner.</li>
         </ul>
       </aside>
       <nav class="toc" aria-label="Table of contents">
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#technical-documentation-best-practices-that-improve-reader-outcomes">Technical documentation best practices that improve reader outcomes</a><ul>
-<li><a href="#start-with-the-task-not-the-product-map">Start with the task, not the product map</a></li>
-<li><a href="#put-failure-handling-beside-the-risky-action">Put failure handling beside the risky action</a></li>
+<li><a href="#technical-documentation-best-practices-that-help-readers-finish-a-task">Technical documentation best practices that help readers finish a task</a><ul>
+<li><a href="#start-with-a-task-and-a-success-state">Start with a task and a success state</a></li>
+<li><a href="#put-recovery-next-to-the-action-that-can-fail">Put recovery next to the action that can fail</a></li>
 <li><a href="#make-limits-observable-before-they-become-incidents">Make limits observable before they become incidents</a></li>
-<li><a href="#give-each-page-an-owner">Give each page an owner</a></li>
+<li><a href="#give-every-reader-question-one-owner">Give every reader question one owner</a></li>
 </ul>
 </li>
+<li><a href="#use-the-review-card-before-you-publish">Use the review card before you publish</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>Good technical documentation doesn't become useful when every endpoint has a page. It becomes useful when a developer can complete a task, recognize the result, and recover when the first attempt fails.</p>
-<p>I reviewed three documentation systems that make those jobs unusually clear: <a href="https://fastapi.tiangolo.com/tutorial/handling-errors/">FastAPI's error-handling guide</a>, <a href="https://docs.stripe.com/api/idempotent_requests">Stripe's idempotency reference</a>, and <a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api">GitHub's REST API rate-limit guide</a>. They cover different products, but they converge on the same rule: the documentation has to describe the state change and its boundary together.</p>
-<h2 id="technical-documentation-best-practices-that-improve-reader-outcomes">Technical documentation best practices that improve reader outcomes</h2>
-<h3 id="start-with-the-task-not-the-product-map">Start with the task, not the product map</h3>
-<p>A new reader doesn't arrive looking for your internal taxonomy. They arrive with a job such as “return a useful 404,” “retry a network failure safely,” or “find out why this request stopped working.”</p>
-<p>FastAPI's error guide starts with a missing item and shows the response state directly. The important design choice isn't the <code>HTTPException</code> import.</p>
-<p>The reader sees the condition, status code, and response body in one small path. That gives the page a finish line.</p>
-<p>Use that test when you review a page:</p>
+        <p>A documentation page can be accurate and still fail the moment a reader leaves the happy path. The useful test is smaller: can someone complete one task, recognize the result, and recover from the failure most likely to interrupt it?</p>
+<p>The review uses <a href="https://fastapi.tiangolo.com/tutorial/handling-errors/">FastAPI’s error-handling guide</a>, <a href="https://docs.stripe.com/api/idempotent_requests">Stripe’s idempotency reference</a>, and <a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api">GitHub’s REST API rate-limit guide</a>. A live source check returned <code>200</code> for all three pages and confirmed the terms this review discusses: <code>HTTPException</code>, <code>Idempotency-Key</code>, and <code>x-ratelimit-remaining</code>.</p>
+<p><a href="/static/templates/documentation-review-card.md">Download the documentation task review card</a> and use it on a single important page before you expand a docs section. It turns a vague request for “better docs” into evidence a writer, engineer, and maintainer can inspect together.</p>
+<h2 id="technical-documentation-best-practices-that-help-readers-finish-a-task">Technical documentation best practices that help readers finish a task</h2>
+<h3 id="start-with-a-task-and-a-success-state">Start with a task and a success state</h3>
+<p>Readers do not arrive to learn an internal content model. They arrive with a job: return a useful error, retry a request safely, or understand why a request stopped working.</p>
+<p>FastAPI’s guide starts with an error response before it introduces <code>HTTPException</code>. Its useful choice is the connection between condition, HTTP status, and response body, which lets the reader identify the state they created.</p>
+<p>A documentation page should make one finish line visible:</p>
 <table>
 <thead>
 <tr>
@@ -262,59 +263,61 @@
 <tbody>
 <tr>
 <td>Tutorial</td>
-<td>Complete the first useful action</td>
-<td>A command, request, or screen state the reader can recognize</td>
+<td>Complete a first useful action</td>
+<td>A command, response, or screen state</td>
 </tr>
 <tr>
 <td>How-to</td>
 <td>Change one system behavior</td>
-<td>The exact input and the expected result</td>
+<td>The input and expected result</td>
 </tr>
 <tr>
 <td>Reference</td>
 <td>Resolve a stable question</td>
-<td>A field, default, constraint, or type with its boundary</td>
+<td>A field, default, constraint, or type</td>
 </tr>
 <tr>
 <td>Troubleshooting</td>
 <td>Recover from a known failure</td>
-<td>Symptom, diagnostic check, cause, and recovery</td>
+<td>Symptom, diagnostic, cause, and recovery</td>
 </tr>
 </tbody>
 </table>
-<p>A page can include more detail later. It should not make the reader infer the first successful state.</p>
-<h3 id="put-failure-handling-beside-the-risky-action">Put failure handling beside the risky action</h3>
-<p>The weakest documentation teaches the happy path, then hides recovery in a distant FAQ. That structure looks clean until a developer gets a timeout, a duplicate request, or a rate-limit response in production.</p>
-<p>Stripe's idempotency documentation makes retry behavior part of the request contract. An idempotency key lets a client repeat a request after a connection failure without accidentally creating the object twice, provided the request is retried with the same key and parameters.</p>
-<p>The boundary matters as much as the recommendation. A reader needs to know what retry is safe, what input identifies the operation, and which mismatch invalidates that assumption.</p>
-<p>Write error guidance where the action appears when the answer changes the implementation. For an API request, that normally means showing:</p>
+<p>A reference page can stay compact instead of carrying a full end-to-end scenario. It still needs to identify the question it owns and the boundary that changes the answer.</p>
+<h3 id="put-recovery-next-to-the-action-that-can-fail">Put recovery next to the action that can fail</h3>
+<p>The most expensive documentation gap is often distance. A reader sees a happy-path request in one guide, hits a timeout, and has to search a separate FAQ to learn whether retrying will duplicate work.</p>
+<p>Stripe’s idempotency reference makes retry behavior part of the request contract. The relevant reader decision is not simply “add a header.”</p>
+<p>The decision is whether the same operation can be retried safely, what identifies that operation, and when changed parameters break the assumption.</p>
+<p>Use the same structure for any action with a meaningful failure mode:</p>
 <ol>
-<li>the expected success response</li>
-<li>the failure shape or status range</li>
-<li>the retry, backoff, or repair decision</li>
-<li>the condition that makes the repair unsafe</li>
+<li>Show the expected success state.</li>
+<li>Name the response, error, or condition that signals failure.</li>
+<li>Explain the repair, retry, or backoff decision.</li>
+<li>State the condition that makes that repair unsafe.</li>
 </ol>
-<p>That is not extra support content. It is part of the interface a client is implementing.</p>
+<p>A common objection is that this makes a quickstart longer. That is true for a simple, reversible task with an obvious error.</p>
+<p>Once permissions, retries, asynchronous work, or quotas can change the outcome, leaving recovery elsewhere is not brevity. It is an undocumented implementation decision.</p>
 <h3 id="make-limits-observable-before-they-become-incidents">Make limits observable before they become incidents</h3>
-<p>Rate limits are another documentation test. A vague warning that an API “may throttle traffic” doesn't help a developer decide whether to queue work, slow down, or investigate an account configuration.</p>
-<p>GitHub's REST API documentation names the relevant headers and distinguishes primary from secondary limits. Its troubleshooting guide also connects a limit response to an observable state such as <code>x-ratelimit-remaining: 0</code>.</p>
-<p>That detail turns a support symptom into a check a developer can automate.</p>
-<p>Your own limit pages should answer four questions without sending the reader hunting across product marketing and support articles:</p>
+<p>A warning that an API “may throttle traffic” cannot help a client decide whether to queue work, slow down, or investigate configuration. The page needs a signal the client can inspect.</p>
+<p>GitHub’s rate-limit documentation distinguishes rate-limit behavior and exposes headers such as <code>x-ratelimit-remaining</code>. That gives a developer an observable state to log or automate instead of a generic support symptom.</p>
+<p>For each limit, answer these questions in the same place:</p>
 <ul>
-<li>Which resource is limited?</li>
-<li>How can the client observe the remaining capacity?</li>
-<li>What response or error marks exhaustion?</li>
-<li>What should the client do next, and when should it not retry?</li>
+<li>What resource is limited?</li>
+<li>Which header, field, dashboard value, or response shows remaining capacity?</li>
+<li>What state marks exhaustion?</li>
+<li>What should the client do next?</li>
+<li>When should the client stop retrying or escalate?</li>
 </ul>
-<p>The strongest objection is that this makes a quickstart longer. It can, especially for a small product with one uncomplicated endpoint.</p>
-<p>Keep the first path short when the failure mode is genuinely obvious. Once retries, permissions, asynchronous work, or quotas can change the result, brevity becomes concealment.</p>
-<h3 id="give-each-page-an-owner">Give each page an owner</h3>
-<p>Documentation starts to drift when tutorials, reference pages, release notes, and support articles all explain the same behavior differently. The fix is not more navigation.</p>
-<p>It is deciding which page owns which reader question.</p>
-<p>Use the <a href="/articles/how-to-organize-a-documentation-site/">documentation organization guide</a> to settle overlapping page roles before you add new sections. Then use the <a href="/articles/documentation-review-checklist-before-you-publish/">documentation review checklist</a> before release to confirm that each page still has a reader task, evidence, and a useful last move.</p>
-<p>A useful documentation review ends with a smaller, sharper system. Keep the page that can prove a reader task.</p>
-<p>Move duplicate detail to the page that owns it. Add failure guidance wherever the action can fail.</p>
-<p>That is how documentation becomes dependable under pressure, not just readable in a calm demo.</p>
+<p>Use the review card’s limit table to make this operational. If the writer cannot fill the signal and recovery columns, the documentation has not yet given the reader enough control.</p>
+<h3 id="give-every-reader-question-one-owner">Give every reader question one owner</h3>
+<p>Documentation drifts when tutorials, reference pages, release notes, and support articles all explain the same behavior differently. More navigation does not fix that conflict.</p>
+<p>Assign one page to own the task, then link outward for prerequisites, stable parameter detail, and deeper recovery. The <a href="/articles/how-to-organize-a-documentation-site/">documentation organization guide</a> explains how to split those page roles, while the <a href="/articles/documentation-review-checklist-before-you-publish/">documentation review checklist</a> covers the release checks that follow.</p>
+<p>The owner should also know what invalidates the page: a changed permission, renamed control, new response shape, revised quota, or support issue that reveals an absent recovery path. A review date alone cannot keep documentation current.</p>
+<h2 id="use-the-review-card-before-you-publish">Use the review card before you publish</h2>
+<p>The card is deliberately small. It asks for a reader, starting state, task, success state, risky action, failure signal, recovery boundary, limit signal, and page owner.</p>
+<p>Run it on the highest-risk page first, not every page at once. A payment request, authentication guide, migration path, or quota-sensitive endpoint is a better starting point than a low-stakes glossary entry.</p>
+<p>The point is not to make documentation longer. It is to stop forcing a reader to infer the state that determines whether the next action is safe.</p>
+<p><a href="/static/templates/documentation-review-card.md">Download the review card</a>, fill it against one rendered page, and turn the unanswered cells into the next documentation change.</p>
       </div>
     </div>
   </div>

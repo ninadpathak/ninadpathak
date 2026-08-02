@@ -6,7 +6,7 @@ Technical writer and former engineer publishing in-depth, benchmark-backed writi
 
 ## Documentation
 
-- [Technical Documentation Best Practices, Tested on Real Developer Docs](https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/): A practical documentation review built from how Stripe, FastAPI, and GitHub make reader tasks, failures, and limits visible.
+- [Technical Documentation Best Practices, Tested on Real Developer Docs](https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/): Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.
 - [Technical Documentation Template: From Empty Repository to Published Guide](https://ninadpathak.com/articles/technical-documentation-template/): A tested technical documentation template with task pages, validation, a strict MkDocs build, and a GitHub Pages workflow.
 - [Technical SEO Checklist for Documentation Sites](https://ninadpathak.com/articles/seo-for-technical-documentation/): Technical SEO for developer documentation: crawling, rendering, indexing, canonicals, internal links, Core Web Vitals, structured data, and search visibility.
 - [Documentation Review Checklist Before You Publish](https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/): Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.
