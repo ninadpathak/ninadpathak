@@ -2,99 +2,107 @@
 title: "Types of Technical Documentation: Choose the Right Format"
 date: 2026-08-05
 updated: 2026-08-05
-description: "Choose tutorials, how-to guides, reference, and explanation by the reader's next job, then keep each page focused enough to finish it."
+description: "Learn when a tutorial, how-to guide, reference page, or explanation is the useful document for a reader’s next task."
 tags: ["documentation", "technical-writing", "developer-experience"]
 takeaways:
-  - "Choose a format from the reader's next job, not the label your team already uses."
-  - "A tutorial teaches a path, a how-to changes one known state, reference answers an exact question, and explanation builds a model."
-  - "Keep formats connected by links, but do not make one page perform all four jobs."
+  - "A documentation type is a promise about the help a page provides next."
+  - "The same product capability can need a tutorial, how-to guide, reference page, and explanation at different moments."
+  - "Choose the document from the reader’s unfinished question, then make its boundary visible."
 status: published
 slug: "types-of-technical-documentation"
 ---
 
-Technical documentation has many forms, but the name on a page is a poor starting point. Start with the question a reader needs answered before they can move.
+A tutorial, how-to guide, reference page, and explanation can describe the same product capability without doing the same work. The useful type is the one that answers the reader’s unfinished question before they have to guess, search again, or turn a conceptual page into an improvised procedure.
 
-A tutorial, how-to guide, reference page, and explanation can all cover the same product. They differ in the kind of help the reader needs at that moment.
+## A documentation type is a promise
 
-## Choose a documentation format by the reader's next job
+A page’s label matters less than its promise. If it calls itself a tutorial, the reader should leave with a working capability, not a catalogue of settings.
 
-| If the reader needs to... | Use this format | The page succeeds when... | Do not use it when... |
-| --- | --- | --- | --- |
-| Learn a capability through a guided path | Tutorial | They finish a working result and can adapt a nearby variation | They already know the system and need one focused change |
-| Complete one known task | How-to guide | They reach the stated outcome from a known starting condition | They need to learn the underlying model first |
-| Look up an exact name, type, default, or limit | Reference | They find the answer without inferring it from prose | They need an end-to-end path or a design rationale |
-| Understand how or why a system behaves a certain way | Explanation | They can reason about the mechanism and its tradeoffs | They only need the next command or field value |
+Reference should let the reader find an exact fact without reading a story around it.
 
-The [Diátaxis framework](https://diataxis.fr/) makes this distinction through tutorials, how-to guides, reference, and explanation. It is useful because it separates learning, task completion, lookup, and understanding instead of treating every page as a smaller version of a user manual.
+The [Diátaxis framework](https://diataxis.fr/) names four useful promises: tutorials help someone learn, how-to guides help them complete a known task, reference gives precise facts, and explanation builds understanding. Those distinctions hold because each reader arrives with a different amount of context and needs a different kind of help.
 
-## A tutorial teaches a path, not a collection of steps
+A product can need all four. The mistake is asking one page to perform all four jobs, then leaving the reader unable to tell which part is safe to follow.
 
-A tutorial is for a reader who cannot yet complete the work alone. It should begin from a stated starting point, move through a supported sequence, show checkpoints, and leave the reader with a result they can inspect.
+## Follow one integration from first attempt to production change
 
-For example, a webhook tutorial might take a developer from a new project to a verified event. It can introduce signing only when that decision becomes necessary, then show the expected event or response that proves the path worked.
+Consider a developer adding a webhook to an application. The endpoint, signature, and event payload may appear in every document below, but the reader’s question changes as their work progresses.
 
-A long setup guide is not automatically a tutorial. If it only lists configuration options without helping the reader build capability, it is closer to reference or a collection of how-to pages.
+### A tutorial makes the first success repeatable
 
-The [technical tutorial guide](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/) covers the test that matters: a reader should be able to finish the path in a clean environment and know what a successful result looks like.
+At the start, the reader may not know which event to choose, where the endpoint belongs, or how a successful delivery should appear. A tutorial gives them one supported path from a stated starting point to a visible result.
 
-## A how-to guide changes one known state
+It can introduce signature verification when the reader reaches that decision, then show the event or response that confirms the integration worked. The sequence teaches capability, which is different from listing every possible configuration.
 
-A how-to guide is for a reader who already understands the product well enough to name the job. They need a reliable route from a known condition to a new one.
+A long setup page is not automatically a tutorial. If it presents options without helping the reader reach a first outcome, it is closer to reference or a set of how-to guides.
 
-“Rotate an API key,” “enable audit logs,” and “add a webhook endpoint” are how-to jobs. Each page needs prerequisites, a focused procedure, the success state, and the condition that makes recovery or retry unsafe.
+### A how-to guide changes one known condition
 
-The competent objection is that narrow guides can create too many pages. That is true if each one only renames the same procedure.
+Later, the same reader may know the integration already works and need to rotate a signing secret. They need the safe path from an existing configuration to a changed one, not another introduction to webhooks.
 
-Split a guide when the starting state, required permissions, success check, or failure boundary changes. Otherwise, keep related steps together and use headings that let the reader find the one action they need.
+That is a how-to guide. State the required starting condition, the focused procedure, the success check, and the condition that makes a retry or recovery unsafe.
 
-## Reference answers an exact question without a story
+Do not create a new page every time a button label changes. Split a guide when the starting state, permission model, success check, or recovery boundary changes.
 
-Reference is the lookup layer. A reader often arrives from an editor, terminal, error message, or code review with a precise question and little patience for an introduction.
+Otherwise, keep related changes together under headings that let the reader find the action they came for.
 
-A configuration reference should show names, accepted values, defaults, constraints, and exceptions. API reference should make methods, parameters, response fields, and errors easy to scan.
+### Reference removes inference from exact details
 
-Google's [API reference guidance](https://developers.google.com/style/api-reference-comments) calls out the same need for precise descriptions of methods, parameters, returns, and exceptions.
+During implementation, the reader may need to know the accepted signature algorithm, a payload field’s type, or the limit on a retry setting. That question needs an answer that is easy to scan and stable enough to depend on, not a guided narrative.
 
-Reference can include an example when an exact value is still hard to interpret. It should not turn that example into a full learning path.
+Reference owns names, values, defaults, constraints, exceptions, and the contract that code must satisfy. Google’s [API reference guidance](https://developers.google.com/style/api-reference-comments) similarly focuses on methods, parameters, returns, and exceptions because those details are not safe to infer from a prose example.
 
-Link to a tutorial or how-to guide when the reader needs context beyond the stable contract.
+An example still belongs in reference when it makes a value understandable. It should stop before it becomes a second tutorial hidden inside an API page.
 
-## Explanation builds the model behind a decision
+### Explanation lets the reader reason beyond one page
 
-Explanation helps when a reader asks why a system is designed a certain way or which tradeoff applies to their case. It gives them a model they can carry into nearby decisions.
+A reader can configure retries correctly and still ask why the system uses exponential backoff, or why event delivery is at least once rather than exactly once. Those are explanation questions.
 
-A page about rate limiting can explain quotas, burst behavior, and backoff so a developer can reason about a new endpoint. It should link to the request guide or reference page where they configure the behavior, rather than hiding every operational detail in the conceptual page.
+Explanation gives the reader a model for the mechanism and its tradeoffs. It should make the next task easier, then link to the how-to guide or reference page where the reader applies the model.
 
-Explanation is allowed to take time, but it should still have a boundary. Once the reader can understand the mechanism and choose the next relevant task page, the rest belongs in a deeper explanation or a distinct system-design document.
+That boundary is important. Explanation can take time when the idea needs it, but it should not bury a required field value or deployment step inside a conceptual discussion.
 
-## Keep formats connected without mixing their jobs
+## Start with the reader’s unfinished sentence
 
-Documentation types are not four isolated shelves. One product task often moves through them.
+Before writing, complete the sentence the page must answer. The wording usually tells you which format the reader needs.
 
-A developer might begin with a tutorial, return later to reference for a parameter, open an explanation when a design choice becomes unclear, and use a how-to guide to change production behavior. The goal is not a perfect taxonomy but a page that answers its question completely enough for the reader to know where to go next.
+- “I want to learn how this capability works” points to a tutorial.
+- “I need to change this existing configuration” points to a how-to guide.
+- “What value, limit, type, or error applies here?” points to reference.
+- “Why does the system behave this way?” points to explanation.
 
-This also means a format is not the same as a delivery channel. A documentation site, README, knowledge base, or internal handbook can contain each of these formats.
+This is not a rigid classification exercise. A page may link into another format when the reader needs more context, but its primary promise should stay clear.
 
-An internal page may need a runbook or onboarding guide as well, but the same test still applies: what does the reader need to accomplish after reading?
+A tutorial can link to reference for exact options. A how-to guide can link to explanation when a design decision changes the safe path.
 
-## Test the format before you draft the page
+## Use the boundary to decide what stays out
+
+A focused document is not a thin document. It can define the problem, show an example, explain a limitation, and point to the next useful page when each passage changes what the reader understands or can do.
+
+What it should not do is repeat the same definition in several forms, surround a direct answer with empty setup, or expand into unrelated product background. The extra material earns its place when it turns a definition into a usable picture, a procedure into a safe choice, or a claim into something the reader can check.
+
+For example, a tutorial about webhook verification should explain what it proves, show the verification step, and name the failure condition. It does not need to document every event field.
+
+That material belongs in reference, where a reader can return to it without retracing the tutorial.
+
+## Test the document choice before drafting
 
 <!-- receipt-backed-first-person -->
 
-I ran a small [documentation format selector](/static/templates/documentation-format-selector.py) against four reader needs and saved its [raw test receipt](/static/templates/documentation-format-selector-receipt.txt). It maps learning to tutorial, a known task to how-to, exact lookup to reference, and a mental-model question to explanation.
+I ran a small [documentation format selector](/static/templates/documentation-format-selector.py) for this article and saved its [raw test receipt](/static/templates/documentation-format-selector-receipt.txt). It maps learning to tutorial, a known task to how-to, exact lookup to reference, and a mental-model question to explanation.
 
 ```bash
 python3 documentation-format-selector.py --need lookup
 ```
 
-The selector's three tests passed, and its output makes the contract visible before a draft starts. It cannot decide what your product supports or whether a page is accurate, so treat it as a planning check rather than a substitute for product review.
+The selector’s three tests passed. It makes the choice and completion condition visible before a draft starts, but it cannot decide what your product supports or whether the finished page is accurate.
 
 <div class="visual-wrapper">
   <div class="visual-title">Documentation format selector validation</div>
   <div class="visual-container">
-    <img src="/static/images/articles/types-of-technical-documentation/documentation-format-selector.png" alt="Terminal output showing three passing tests and documentation format choices for tutorial, how-to guide, reference, and explanation">
+    <img src="/static/images/articles/types-of-technical-documentation/documentation-format-selector.png?v=939750bd" alt="Terminal output showing three passing tests and format choices for tutorial, how-to guide, reference, and explanation" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">The selector makes the reader state, completion signal, and required page contents explicit for four common documentation formats.</p>
+<p class="visual-caption">The selector records the reader need, chosen format, and completion condition for four common documentation forms.</p>
 
-Use the selector before you open a blank page. Then use the [technical documentation template](/articles/technical-documentation-template/) to give the chosen page a home, and use the [technical documentation best practices](/articles/technical-documentation-best-practices-tested-real-developer-docs/) to test whether the finished page can carry its promised task.
+Use the [technical documentation template](/articles/technical-documentation-template/) when you are ready to give the chosen page a home. Then use the [technical documentation best practices](/articles/technical-documentation-best-practices-tested-real-developer-docs/) to test whether that page carries its promise for someone doing the task.
