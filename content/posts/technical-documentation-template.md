@@ -1,28 +1,44 @@
 ---
-title: "Technical Documentation Template: From Empty Repository to Published Guide"
+title: "Technical Documentation Template: A Tested Starter for Product Docs"
 date: 2026-08-01
-updated: 2026-08-01
-description: "A tested technical documentation template with task pages, validation, a strict MkDocs build, and a GitHub Pages workflow."
+updated: 2026-08-05
+description: "Download a tested technical documentation template, learn what each page must prove, and turn its placeholders into trustworthy product docs."
 tags: ["documentation", "docs-as-code", "technical-writing"]
 takeaways:
-  - "Start with a small set of reader tasks instead of a long list of document types."
-  - "Keep navigation, local links, and page ownership testable in the repository."
-  - "Build the documentation before deployment and publish only the generated site."
+  - "A documentation template should define page jobs and evidence requirements, not only headings."
+  - "Start with one tested reader task, then add reference and troubleshooting pages as the product creates those needs."
+  - "Validate navigation and local links before publishing a generated documentation site."
 status: published
 slug: "technical-documentation-template"
 ---
 
-I built this starter from an empty directory, then ran its validator and a strict MkDocs build in a fresh Python environment. You can [download the technical documentation template](/static/templates/technical-documentation-template.zip) and replace the five placeholder pages with the tasks your product actually supports.
+<!-- receipt-backed-first-person -->
 
-The useful part isn't the number of pages. It's the contract each page makes: a reader can find the first task, run a complete example, check a field in reference material, or recover from a recognizable failure.
+I built this starter from an empty directory, then ran its validator and a strict MkDocs build in a fresh Python environment. You can [download the technical documentation template](/static/templates/technical-documentation-template.zip) and replace its five placeholders with evidence from your product.
 
-## Start with a small documentation system
+The useful extra is not another blank outline. The template makes each page responsible for a reader job and gives you a check before publication.
 
-A template should make the first path complete without pretending every product needs the same taxonomy. Start with a small system that has room for real product decisions.
+## What a technical documentation template should include
 
-The starter separates a landing page, getting-started path, task guide, configuration reference, and troubleshooting page. Those pages answer different questions.
+A technical documentation template is a reusable starting structure for product or engineering documentation. It should tell a contributor where a reader begins, where they complete a task, where they look up stable details, and where they recover from a known failure.
 
-[Divio's documentation system](https://documentation.divio.com/) makes a similar distinction between tutorials, how-to guides, explanation, and reference. The starter doesn't attempt to fill every quadrant on day one, but it keeps the first task guide separate from the reference material it depends on.
+A table of contents alone cannot do that work. It can label a page “Getting started” without establishing prerequisites, a tested command, an expected result, or a recovery path.
+
+The starter contains five pages because they create a complete first route without pretending every product needs the same collection.
+
+| Page | Reader job | Evidence to add before publishing |
+| --- | --- | --- |
+| index.md | Choose the first useful task | A direct route to the right starting page |
+| getting-started.md | Complete first setup | Prerequisites, a tested command, expected output |
+| guides/send-a-request.md | Perform one bounded task | A full request and response or observable state |
+| reference/configuration.md | Look up stable details | Names, types, defaults, and constraints |
+| troubleshooting.md | Recover from a known failure | Symptom, diagnostic check, cause, and recovery |
+
+[Diátaxis](https://diataxis.fr/) separates tutorials, how-to guides, reference, and explanation because readers arrive with different needs. This template starts with a smaller product-docs system, then leaves room to add explanation when a concept needs more than instructions.
+
+## Download the template and inspect its structure
+
+The archive contains Markdown source, MkDocs configuration, a validator, and a GitHub Actions deployment workflow.
 
 ```text
 technical-documentation-template/
@@ -38,64 +54,52 @@ technical-documentation-template/
 └── requirements.txt
 ```
 
-The landing page should route a new reader to the first useful action. The task guide should show one complete request and a result the reader can recognize, while the reference page defines stable fields without forcing a first-time reader through every option.
+This layout keeps navigation, source, validation, and deployment close together. The documentation is not just a folder of Markdown files.
 
-## Copy the template and name the first successful task
+It is a small publishing system with inputs and checks.
 
-Download and unpack the archive, then create a clean Python environment before you edit the placeholders.
+[MkDocs](https://www.mkdocs.org/getting-started/) uses the same basic split: a configuration file defines the site, a docs directory contains the source, and a build produces static output. Keeping those roles separate makes a broken link or missing navigation target easier to locate.
 
-```bash
-unzip technical-documentation-template.zip
-cd technical-documentation-template
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install -r requirements.txt
-```
+## Turn placeholders into a tested first task
 
-The template pins MkDocs and keeps `mkdocs.yml` beside the Markdown source. [MkDocs' getting-started guide](https://www.mkdocs.org/getting-started/) describes the same basic split: one configuration file and a `docs/` directory, followed by navigation and a static build.
+Start with the smallest action that proves your product is usable. For an API, that could be an authenticated request returning a known response.
 
-Replace `Example API` in `mkdocs.yml` before you write prose. Then replace the placeholder health request in `docs/getting-started.md` with a request you have actually run against a safe test environment.
+For a CLI, it could be installation followed by one safe command. For an internal service, it might be a local development setup that reaches a health endpoint.
 
-```yaml
-site_name: Example API
-nav:
-  - Home: index.md
-  - Get started: getting-started.md
-  - Guides:
-      - Send a request: guides/send-a-request.md
-  - Reference:
-      - Configuration: reference/configuration.md
-  - Troubleshooting: troubleshooting.md
-```
+Write the getting-started page around that outcome. State what the reader needs before beginning, give the exact action, show the expected state, and link to the next task.
 
-A navigation label is part of the public interface. “Get started” tells a reader where to begin, and “Configuration” tells that reader where stable names and defaults belong.
+A webhook product provides a concrete example. A vague template might say, “Configure a webhook endpoint.”
 
-## Give every page one job
+A useful task page instead identifies the event, endpoint URL, signing-secret requirement, request body, successful response, and how to inspect a failed delivery. Each item answers a different question the reader encounters while completing the task.
 
-The starter's five pages are deliberately narrow. Add a page only when it owns a distinct reader decision that would otherwise make an existing page harder to scan or test.
+Do not move every option into the getting-started page. Put stable names, types, defaults, and constraints in reference.
 
-| Page | Reader job | Evidence to add before publishing |
-| --- | --- | --- |
-| `index.md` | Choose the first task | A direct link to the right starting page |
-| `getting-started.md` | Complete first setup | Prerequisites, a tested command, expected output |
-| `guides/send-a-request.md` | Perform one task | A full request and response or observable state |
-| `reference/configuration.md` | Look up stable details | Names, types, defaults, and constraints |
-| `troubleshooting.md` | Recover from a known failure | Symptom, diagnostic check, cause, and recovery |
+Stripe’s [API reference](https://docs.stripe.com/api) is useful to study because readers can move from an object to endpoints and fields without having to follow a tutorial first.
 
-This is where many downloaded templates become misleading. A page named `Getting started` is not a setup guide until the required access, real command, expected result, and recovery path have been verified together.
+## Give each page one owner and one update trigger
 
-If your existing documentation has already accumulated overlapping pages, settle page ownership before adding more navigation. The [documentation organization guide](/articles/how-to-organize-a-documentation-site/) covers that cleanup, and the [tutorial guide](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/) explains how to test a reader path rather than just describe it.
+A template stays useful when placeholder text is replaced with product evidence and maintained as the product changes.
 
-## Validate the repository before you build it
+Give every page an owner and name the change that requires review. An API schema change should trigger reference review.
 
-The validator checks that every navigation target exists. It also checks that each Markdown page has one H1 and that local Markdown links resolve.
+A revised onboarding path should trigger getting-started review. A recurring support issue should create or update troubleshooting guidance.
+
+This rule is more useful than adding pages by habit. A page belongs in the documentation set when it owns a reader decision that would otherwise make another page harder to scan, update, or verify.
+
+Use the [documentation organization guide](/articles/how-to-organize-a-documentation-site/) when existing pages overlap. Use the [technical documentation types guide](/articles/types-of-technical-documentation/) when you need to decide whether the missing page is a tutorial, how-to guide, reference page, explanation, or an operational document.
+
+## Validate the template before you publish it
+
+The starter validator checks that every navigation target exists, each Markdown page has one H1, and local Markdown links resolve.
 
 ```bash
 python scripts/validate_docs.py
 mkdocs build --strict
 ```
 
-The validator is intentionally modest. It cannot prove that your API endpoint works, that a permission is correct, or that a screenshot matches the current UI, so those still need product-level review.
+The validation is deliberately narrow. It cannot prove that a live API endpoint works, a permission is correct, or a screenshot matches the current interface.
+
+Those claims still need product-level checks.
 
 <div class="visual-wrapper">
   <div class="visual-title">Template validation and strict build receipt</div>
@@ -105,13 +109,13 @@ The validator is intentionally modest. It cannot prove that your API endpoint wo
 </div>
 <p class="visual-caption">The starter passed its repository checks and produced a static site in a fresh environment.</p>
 
-I kept the validator close to the source because a broken navigation target is cheaper to catch before a deployment. The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) extends that local check into a reader-facing review of links, visuals, accessibility, and the rendered page.
+I kept the validator beside the source because navigation defects are cheaper to catch before deployment. The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) adds a reader-facing review of links, visuals, accessibility, and the rendered page.
 
-## Publish generated files through GitHub Pages
+## Publish the generated site, not your working files
 
-The included workflow installs the pinned requirements, runs the validator, builds `site/` with `--strict`, uploads that directory as the Pages artifact, and deploys it. Turn on **GitHub Actions** as the publishing source in your repository before you expect the workflow to make a public site.
+The included workflow installs pinned requirements, runs the validator, builds the site directory with strict checks, uploads that directory as the Pages artifact, and deploys it. Enable **GitHub Actions** as the publishing source before expecting a public site.
 
-[GitHub's Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) confirms that a site can come from a custom Actions workflow and that static-site generators can publish their generated files. The same documentation warns that a Pages change can take up to ten minutes to appear, so verify the public URL after the workflow completes instead of treating a green build as a public release.
+[GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) confirms that static-site generators can publish through a custom Actions workflow. Verify the public URL after the workflow finishes rather than treating a green build as a public release.
 
 ```yaml
 - run: python scripts/validate_docs.py
@@ -121,12 +125,14 @@ The included workflow installs the pinned requirements, runs the validator, buil
     path: site
 ```
 
-Don't add production credentials or private example data to this repository. GitHub notes that Pages sites are public on the internet, even when a plan allows the repository itself to be private.
+Do not put production credentials, private examples, or customer data in the repository. Pages content is public on the internet even when a plan permits a private repository.
 
-## Keep the template smaller than the product
+## Add pages when a reader need appears
 
-A template is useful because it gives the first contributor a route through the work. It becomes harmful when placeholder pages survive long enough to look like product claims.
+Begin with one tested path. Add reference when users need stable details without reading a guide.
 
-Use the starter to establish page jobs and checks, then let real reader tasks decide what comes next. When the first path is verified, use the [technical documentation SEO checklist](/articles/seo-for-technical-documentation/) to make its canonical page discoverable without turning every page into the same search target.
+Add troubleshooting when a failure has a recognizable symptom and recovery. Add explanation when readers need to understand a design choice before they can apply it safely.
 
-The archive is meant to be edited. Start with one tested task, keep its references and failures close, and publish the generated site only after the repository and the rendered guide agree.
+That is how the template stays smaller than the product while still growing with it. The archive gives you the first structure and verification loop.
+
+Product evidence decides what belongs in it next.
