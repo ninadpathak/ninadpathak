@@ -20,14 +20,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What Is Technical Documentation, and What Should It Include? | Ninad Pathak</title>
-  <meta name="description" content="Choose the smallest technical documentation package that helps a developer evaluate, start, use, recover from, and maintain a product.">
+  <meta name="description" content="Technical documentation helps a developer decide, start, use, and recover from a product. Choose each page by the task it owns.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
   <meta property="og:title"       content="What Is Technical Documentation, and What Should It Include?">
-  <meta property="og:description" content="Choose the smallest technical documentation package that helps a developer evaluate, start, use, recover from, and maintain a product.">
+  <meta property="og:description" content="Technical documentation helps a developer decide, start, use, and recover from a product. Choose each page by the task it owns.">
   <meta property="og:url"         content="https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/">
   <meta property="og:image"       content="https://ninadpathak.com/static/favicon.png">
   <meta property="og:image:width" content="512">
@@ -77,10 +77,10 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "What Is Technical Documentation, and What Should It Include?",
-  "description": "Choose the smallest technical documentation package that helps a developer evaluate, start, use, recover from, and maintain a product.",
+  "description": "Technical documentation helps a developer decide, start, use, and recover from a product. Choose each page by the task it owns.",
   "image": "https://ninadpathak.com/static/favicon.png",
   "inLanguage": "en-US",
-  "wordCount": 1109,
+  "wordCount": 1088,
   "keywords": "documentation, technical-writing, developer-experience",
   "articleSection": "documentation",
   "author": {
@@ -205,10 +205,10 @@
         <span class="post-meta-sep" aria-hidden="true">·</span>
         <time class="post-meta-date" datetime="2026-08-05">Aug 05, 2026</time>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <span class="post-meta-time">6 min read</span>
+        <span class="post-meta-time">5 min read</span>
       </div>
       <h1 class="post-title">What Is Technical Documentation, and What Should It Include?</h1>
-      <p class="lead">Choose the smallest technical documentation package that helps a developer evaluate, start, use, recover from, and maintain a product.</p>
+      <p class="lead">Technical documentation helps a developer decide, start, use, and recover from a product. Choose each page by the task it owns.</p>
       <div class="post-tags">
         <span class="tag">documentation</span>
         <span class="tag">technical-writing</span>
@@ -222,18 +222,18 @@
       <aside class="article-summary" aria-labelledby="article-summary-title">
         <div class="article-summary-label" id="article-summary-title">The short version</div>
         <ul>
-          <li>Technical documentation is a set of reader promises, not a pile of pages.</li>
-          <li>Start with orientation, one verified success path, and the stable details that path depends on.</li>
-          <li>Give every deliverable one owner and one product change that triggers its review.</li>
+          <li>Technical documentation gives each reader task one useful home.</li>
+          <li>Start with orientation, one verified success path, and the reference that path needs.</li>
+          <li>Give every document an owner and a product change that triggers review.</li>
         </ul>
       </aside>
       <nav class="toc" aria-label="Table of contents">
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#start-with-a-reader-task-not-a-document-list">Start with a reader task, not a document list</a></li>
-<li><a href="#build-the-smallest-package-that-lets-a-real-user-succeed">Build the smallest package that lets a real user succeed</a></li>
-<li><a href="#give-each-deliverable-a-boundary">Give each deliverable a boundary</a></li>
+<li><a href="#what-technical-documentation-should-include">What technical documentation should include</a></li>
+<li><a href="#build-the-smallest-package-that-lets-someone-succeed">Build the smallest package that lets someone succeed</a></li>
+<li><a href="#give-each-document-a-boundary">Give each document a boundary</a></li>
 <li><a href="#make-coverage-inspectable-before-writing-prose">Make coverage inspectable before writing prose</a></li>
 <li><a href="#assign-an-owner-and-an-update-trigger">Assign an owner and an update trigger</a></li>
 </ul>
@@ -241,26 +241,24 @@
 
       </nav>
       <div class="post-content">
-        <p>Technical documentation is the material that lets a specific reader understand, use, integrate with, or safely operate a system. A page earns its place when it answers one of those jobs with enough evidence that the reader can take the next step without guessing.</p>
-<p>The useful question before you start writing is smaller: which reader needs to do what?</p>
-<p>Name the reader, the task, the prerequisite knowledge, and the observable result. Google’s <a href="https://developers.google.com/tech-writing/one/documents">technical-writing guidance</a> makes the same case for defining scope, non-scope, and audience before expanding the draft.</p>
-<h2 id="start-with-a-reader-task-not-a-document-list">Start with a reader task, not a document list</h2>
-<p>A product team can list tutorials, guides, reference pages, FAQs, release notes, diagrams, and onboarding material in an afternoon. That list does not tell a developer which page will help them send the first request, find an exact field, or recover from a failed integration.</p>
-<p>Start with a reader route instead. An evaluator needs to know the product boundary, a new integrator needs a safe first result, and an existing user needs stable detail or recovery guidance.</p>
+        <p>Technical documentation is the material that helps someone understand, use, integrate with, or safely operate a system. It works when a reader can take the next step without guessing.</p>
+<p>Think of it as a route through a product. A tutorial gets someone moving, reference answers an exact question, explanation gives a decision context, and troubleshooting helps when the route breaks.</p>
+<h2 id="what-technical-documentation-should-include">What technical documentation should include</h2>
+<p>Start with the reader task, not a list of page types. A developer evaluating a product needs different information from someone sending a first API request or investigating an error.</p>
 <table>
 <thead>
 <tr>
 <th>Reader task</th>
-<th>Deliverable that owns it</th>
+<th>Document that owns it</th>
 <th>What must be visible</th>
-<th>What proves it is enough</th>
+<th>What shows it is enough</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Decide whether the product fits</td>
 <td>Orientation or README</td>
-<td>Scope, non-scope, supported use cases, and the starting link</td>
+<td>Scope, non-scope, supported use cases, and a starting link</td>
 <td>The reader can name the first relevant path</td>
 </tr>
 <tr>
@@ -271,21 +269,21 @@
 </tr>
 <tr>
 <td>Understand a system choice</td>
-<td>Concept explanation</td>
-<td>Terms, model, constraints, and links to the task pages</td>
+<td>Explanation</td>
+<td>Terms, model, constraints, and links to task pages</td>
 <td>The reader can explain the choice before implementing it</td>
 </tr>
 <tr>
 <td>Change an existing behavior</td>
-<td>Task guide</td>
+<td>How-to guide</td>
 <td>Starting state, procedure, success state, and recovery boundary</td>
 <td>The reader can perform the change safely</td>
 </tr>
 <tr>
-<td>Resolve a precise question</td>
+<td>Look up an exact question</td>
 <td>Reference</td>
 <td>Names, types, defaults, constraints, and exceptions</td>
-<td>The reader can look up the answer without inference</td>
+<td>The reader can find the answer without inference</td>
 </tr>
 <tr>
 <td>Diagnose a failure</td>
@@ -294,46 +292,52 @@
 <td>The reader can choose the next safe action</td>
 </tr>
 <tr>
-<td>Respond to change</td>
-<td>Release or change note</td>
+<td>Respond to a product change</td>
+<td>Release note or migration guide</td>
 <td>Impact, required action, version or date, and a migration path</td>
 <td>The reader can decide whether action is required</td>
 </tr>
 </tbody>
 </table>
-<p>The <a href="https://diataxis.fr/">Diátaxis framework</a> separates tutorials, how-to guides, reference, and explanation because they meet different reader needs. The labels matter less than the boundary: one page should not try to teach a beginner, document every field, explain the architecture, and debug production failures at the same time.</p>
-<h2 id="build-the-smallest-package-that-lets-a-real-user-succeed">Build the smallest package that lets a real user succeed</h2>
-<p>A small team does not need seven finished document types before launch. It does need enough material for the first reader to understand the product, reach one verified result, and find the stable details or recovery guidance that result depends on.</p>
-<p>For a new API, that usually means orientation, a quickstart, and reference for the endpoint or SDK the quickstart uses. Add troubleshooting when a failed setup has a meaningful diagnostic path, then add release material when product changes can alter an existing integration.</p>
-<p>For a CLI, orientation should explain the tool’s job and supported environments. The quickstart should produce one visible command result, and the reference should own commands, flags, exit behavior, and configuration rather than hiding those details in a tutorial.</p>
-<p>For an internal platform, the first package may prioritize access, a supported setup path, ownership, and the operational rules that change a team’s safe next action. Do not turn that into a public-style product portal if the reader’s actual job is provisioning, deployment, or incident recovery.</p>
-<h2 id="give-each-deliverable-a-boundary">Give each deliverable a boundary</h2>
-<p>An orientation page helps a reader decide where to begin. It should not become a complete implementation guide.</p>
-<p>A quickstart proves one supported path. It should link to reference material when the reader needs exact options, and it should link to troubleshooting when the failure path would interrupt the first result.</p>
-<p>A concept page explains the model behind a choice. It should not force a reader to learn every concept before they can run a small task.</p>
-<p>A task guide changes one behavior from a known starting state. Keep the details that are stable across many tasks in reference, and keep recurring failure patterns in troubleshooting.</p>
-<p>Reference is where public API surface belongs. Google’s <a href="https://developers.google.com/style/api-reference-comments">API reference guidance</a> calls out methods, parameters, returns, and exceptions because an implementer needs exact behavior, not a narrative approximation.</p>
-<p>Troubleshooting needs a recognizable symptom, a diagnostic check, a likely cause, a safe recovery, and a boundary for escalation. A generic “contact support” line does not help a reader distinguish a transient failure from an unsafe retry.</p>
-<p>Release notes explain changed behavior and required action. They should link to the canonical guide or migration page instead of duplicating the full instructions.</p>
+<p>The idea is, one page should not teach a beginner, document every field, explain the architecture, and debug production failures. Split those jobs so each page can answer its question completely.</p>
+<p>The <a href="https://diataxis.fr/">Diátaxis framework</a> separates tutorials, how-to guides, reference, and explanation for the same reason. The names help, but the reader task decides whether a page belongs in one category or another.</p>
+<h2 id="build-the-smallest-package-that-lets-someone-succeed">Build the smallest package that lets someone succeed</h2>
+<p>A small team does not need seven finished document types before launch. It needs enough material for the first reader to understand the product, finish one supported task, and locate the stable details or recovery guidance that task depends on.</p>
+<p>For an API, that often means an orientation page, a quickstart, and reference for the endpoint or SDK used in that quickstart. Add troubleshooting when a failed setup has a meaningful diagnostic path, then add release material when product changes can affect an existing integration.</p>
+<p>For a CLI, orientation should explain the tool’s job and supported environments. The quickstart should produce one visible command result, while reference owns commands, flags, exit behavior, and configuration.</p>
+<p>An internal platform may need a different starting package. Access, a supported setup path, ownership, and the operating rules that change a team’s next action can matter before a public-style product portal.</p>
+<p>Google’s <a href="https://developers.google.com/tech-writing/one/documents">technical writing guidance</a> recommends defining scope, non-scope, and audience before expanding a draft. That decision keeps a page from collecting unrelated jobs as it grows.</p>
+<h2 id="give-each-document-a-boundary">Give each document a boundary</h2>
+<p>An orientation page helps a reader decide where to begin. It should answer what the product does, who it is for, what it does not cover, and where the first supported task starts.</p>
+<p>A quickstart proves one supported path. It should link to reference when exact options matter and to troubleshooting when a failure would block the first result.</p>
+<p>An explanation page gives a model for a design choice. It should make the next task easier without forcing the reader to learn every concept before they can do useful work.</p>
+<p>A how-to guide changes one behavior from a known starting state. Keep details that remain stable across many tasks in reference, and keep recurring failures in troubleshooting.</p>
+<p>Reference owns the public API surface. Google’s <a href="https://developers.google.com/style/api-reference-comments">API reference guidance</a> calls out methods, parameters, returns, and exceptions because implementation depends on exact behavior rather than narrative approximation.</p>
+<p>Troubleshooting starts from a recognizable symptom and gives a diagnostic check, likely cause, safe recovery, and escalation boundary. A generic support link cannot tell someone whether a retry is safe.</p>
+<p>Release notes explain changed behavior and required action. They should link to the canonical guide or migration page instead of repeating every instruction.</p>
 <h2 id="make-coverage-inspectable-before-writing-prose">Make coverage inspectable before writing prose</h2>
-<p>I built a small <a href="/static/templates/documentation-deliverables-manifest.yaml">documentation deliverables manifest</a> around a fictional webhook API, then ran its validator in the site repository. Each row gives one reader task a deliverable, a success signal, an owner, and a product change that should trigger review.</p>
+<!-- receipt-backed-first-person -->
+
+<p>A document list can hide missing ownership. I ran a small <a href="/static/templates/documentation-deliverables-manifest.yaml">documentation deliverables manifest</a> for a webhook API example so every planned page has one reader task, success signal, owner, review trigger, and deferral condition.</p>
 <div class="highlight"><pre><span></span><code>.venv/bin/python<span class="w"> </span>static/templates/validate_documentation_deliverables.py
 </code></pre></div>
 
-<p>The manifest is deliberately not a documentation-site template. It is a planning artifact that exposes missing ownership before a team fills a repository with pages that overlap or go stale.</p>
+<p>The validator passed with seven owned reader tasks. That result does not tell you whether every paragraph is good, but it does expose a missing task owner before a repository fills with overlapping pages.</p>
 <div class="visual-wrapper">
   <div class="visual-title">Documentation deliverables manifest validation</div>
   <div class="visual-container">
     <img src="/static/images/articles/what-is-technical-documentation-and-what-should-it-include/documentation-deliverables-manifest.png" alt="Terminal output showing a documentation deliverables manifest with seven owned reader tasks passed validation" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">The validator checks that each planned deliverable has a reader task, completion signal, owner, update trigger, and deferral condition.</p>
+<p class="visual-caption">The validator checks each planned deliverable for a reader task, completion signal, owner, update trigger, and deferral condition.</p>
 
+<p>Use this kind of check before writing a documentation site from scratch. It is planning evidence, not a replacement for task testing, source checks, or editorial review.</p>
 <h2 id="assign-an-owner-and-an-update-trigger">Assign an owner and an update trigger</h2>
-<p>A review date alone does not keep documentation current. Give each deliverable an owner and a change that makes a review necessary, such as a schema change, a changed permission, a new release behavior, a recurring support issue, or an incident.</p>
-<p>GitLab’s <a href="https://docs.gitlab.com/development/documentation/">documentation guidance</a> treats docs as maintained product material for configuring, using, and troubleshooting a system. That is the useful standard: documentation changes with the product behavior that made the old answer unsafe or incomplete.</p>
-<p>If you already have a documentation project, use a <a href="/articles/technical-documentation-template/">technical documentation template</a> to turn these decisions into a tested repository. After choosing a page, <a href="/articles/technical-documentation-best-practices-tested-real-developer-docs/">test whether it helps readers finish a task</a> before you call it complete.</p>
-<p>For a page that is ready to ship, use the <a href="/articles/documentation-review-checklist-before-you-publish/">documentation review checklist</a>. If your real problem is duplicate or stale answers, start by <a href="/articles/how-to-organize-a-documentation-site/">organizing documentation that has drifted</a> instead of adding another page.</p>
+<p>A review date alone does not keep documentation current. Give each deliverable an owner and a product change that requires review, such as a schema change, permission change, new release behavior, support issue, or incident.</p>
+<p>GitLab’s <a href="https://docs.gitlab.com/development/documentation/">documentation guidance</a> treats documentation as maintained product material for configuring, using, and troubleshooting a system. Update the page when product behavior makes its existing instructions unsafe or incomplete.</p>
+<p>A useful review trigger connects the document to the change that can invalidate it. A schema change should prompt reference review, a revised onboarding flow should prompt quickstart review, and a recurring failure should prompt troubleshooting work.</p>
+<p>Use a <a href="/articles/technical-documentation-template/">technical documentation template</a> when you are ready to turn these decisions into a repository. Then <a href="/articles/technical-documentation-best-practices-tested-real-developer-docs/">test whether a page helps someone finish a task</a> before calling it complete.</p>
+<p>Use the <a href="/articles/documentation-review-checklist-before-you-publish/">documentation review checklist</a> before publication. If duplicate or stale answers are the problem, start by <a href="/articles/how-to-organize-a-documentation-site/">organizing documentation that has drifted</a> instead of adding another page.</p>
       </div>
     </div>
   </div>
