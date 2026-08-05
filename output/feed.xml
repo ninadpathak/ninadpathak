@@ -6,6 +6,13 @@
     <description>Developer relations content, documentation, tutorials, and technical articles that help developer products earn trust and adoption.</description>
     <language>en-us</language>
     <item>
+      <title>What Is Technical Documentation, and What Should It Include?</title>
+      <link>https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/</link>
+      <description>Choose the smallest technical documentation package that helps a developer evaluate, start, use, recover from, and maintain a product.</description>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/</guid>
+    </item>
+    <item>
       <title>Technical Documentation Best Practices, Tested on Real Developer Docs</title>
       <link>https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/</link>
       <description>Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.</description>

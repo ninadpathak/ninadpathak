@@ -19,16 +19,16 @@
   <script>(function(){var d=document.documentElement;d.classList.add('theme-preload');var t='light';try{t=localStorage.getItem('np-theme')||'light';}catch(e){}d.setAttribute('data-theme',t);d.style.backgroundColor=t==='dark'?'#090909':'#f8f8f6';d.style.colorScheme=t==='dark'?'dark':'light';})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Technical Documentation Best Practices, Tested on Real Developer Docs | Ninad Pathak</title>
-  <meta name="description" content="Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.">
+  <title>What Is Technical Documentation, and What Should It Include? | Ninad Pathak</title>
+  <meta name="description" content="Choose the smallest technical documentation package that helps a developer evaluate, start, use, recover from, and maintain a product.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="article">
-  <meta property="og:title"       content="Technical Documentation Best Practices, Tested on Real Developer Docs">
-  <meta property="og:description" content="Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.">
-  <meta property="og:url"         content="https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/">
+  <meta property="og:title"       content="What Is Technical Documentation, and What Should It Include?">
+  <meta property="og:description" content="Choose the smallest technical documentation package that helps a developer evaluate, start, use, recover from, and maintain a product.">
+  <meta property="og:url"         content="https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/">
   <meta property="og:image"       content="https://ninadpathak.com/static/favicon.png">
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
@@ -42,7 +42,7 @@
   <meta name="twitter:image"       content="https://ninadpathak.com/static/favicon.png">
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/">
+  <link rel="canonical" href="https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
@@ -76,11 +76,11 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Technical Documentation Best Practices, Tested on Real Developer Docs",
-  "description": "Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.",
+  "headline": "What Is Technical Documentation, and What Should It Include?",
+  "description": "Choose the smallest technical documentation package that helps a developer evaluate, start, use, recover from, and maintain a product.",
   "image": "https://ninadpathak.com/static/favicon.png",
   "inLanguage": "en-US",
-  "wordCount": 855,
+  "wordCount": 1109,
   "keywords": "documentation, technical-writing, developer-experience",
   "articleSection": "documentation",
   "author": {
@@ -88,8 +88,8 @@
     "name": "Ninad Pathak",
     "url": "https://ninadpathak.com/about/"
   },
-  "datePublished": "2026-08-02",
-  "dateModified": "2026-08-02",
+  "datePublished": "2026-08-05",
+  "dateModified": "2026-08-05",
   "publisher": {
     "@type": "Organization",
     "name": "Ninad Pathak",
@@ -100,7 +100,7 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/"
+    "@id": "https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/"
   }
 }
 </script>
@@ -124,8 +124,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Technical Documentation Best Practices, Tested on Real Developer Docs",
-      "item": "https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/"
+      "name": "What Is Technical Documentation, and What Should It Include?",
+      "item": "https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/"
     }
   ]
 }
@@ -191,7 +191,7 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/articles/">Articles</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
-      <li class="breadcrumb-item current" aria-current="page">Technical Documentation Best Practices, Tested on Real Developer Docs</li>
+      <li class="breadcrumb-item current" aria-current="page">What Is Technical Documentation, and What Should It Include?</li>
     </ol>
   </div>
 </nav>
@@ -203,12 +203,12 @@
       <div class="post-meta">
         <span class="post-meta-author">By <a href="/about/" rel="author">Ninad Pathak</a></span>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <time class="post-meta-date" datetime="2026-08-02">Aug 02, 2026</time>
+        <time class="post-meta-date" datetime="2026-08-05">Aug 05, 2026</time>
         <span class="post-meta-sep" aria-hidden="true">·</span>
-        <span class="post-meta-time">4 min read</span>
+        <span class="post-meta-time">6 min read</span>
       </div>
-      <h1 class="post-title">Technical Documentation Best Practices, Tested on Real Developer Docs</h1>
-      <p class="lead">Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support.</p>
+      <h1 class="post-title">What Is Technical Documentation, and What Should It Include?</h1>
+      <p class="lead">Choose the smallest technical documentation package that helps a developer evaluate, start, use, recover from, and maintain a product.</p>
       <div class="post-tags">
         <span class="tag">documentation</span>
         <span class="tag">technical-writing</span>
@@ -222,102 +222,118 @@
       <aside class="article-summary" aria-labelledby="article-summary-title">
         <div class="article-summary-label" id="article-summary-title">The short version</div>
         <ul>
-          <li>Give every page one reader task and an observable success state.</li>
-          <li>Put recovery guidance beside the action that can fail.</li>
-          <li>Make limits inspectable and assign each reader question to one page owner.</li>
+          <li>Technical documentation is a set of reader promises, not a pile of pages.</li>
+          <li>Start with orientation, one verified success path, and the stable details that path depends on.</li>
+          <li>Give every deliverable one owner and one product change that triggers its review.</li>
         </ul>
       </aside>
       <nav class="toc" aria-label="Table of contents">
         <div class="toc-title">Contents</div>
         <div class="toc">
 <ul>
-<li><a href="#technical-documentation-best-practices-that-help-readers-finish-a-task">Technical documentation best practices that help readers finish a task</a><ul>
-<li><a href="#start-with-a-task-and-a-success-state">Start with a task and a success state</a></li>
-<li><a href="#put-recovery-next-to-the-action-that-can-fail">Put recovery next to the action that can fail</a></li>
-<li><a href="#make-limits-observable-before-they-become-incidents">Make limits observable before they become incidents</a></li>
-<li><a href="#give-every-reader-question-one-owner">Give every reader question one owner</a></li>
-</ul>
-</li>
-<li><a href="#use-the-review-card-before-you-publish">Use the review card before you publish</a></li>
+<li><a href="#start-with-a-reader-task-not-a-document-list">Start with a reader task, not a document list</a></li>
+<li><a href="#build-the-smallest-package-that-lets-a-real-user-succeed">Build the smallest package that lets a real user succeed</a></li>
+<li><a href="#give-each-deliverable-a-boundary">Give each deliverable a boundary</a></li>
+<li><a href="#make-coverage-inspectable-before-writing-prose">Make coverage inspectable before writing prose</a></li>
+<li><a href="#assign-an-owner-and-an-update-trigger">Assign an owner and an update trigger</a></li>
 </ul>
 </div>
 
       </nav>
       <div class="post-content">
-        <p>A documentation page can be accurate and still fail the moment a reader leaves the happy path. The useful test is smaller: can someone complete one task, recognize the result, and recover from the failure most likely to interrupt it?</p>
-<p>The review uses <a href="https://fastapi.tiangolo.com/tutorial/handling-errors/">FastAPI’s error-handling guide</a>, <a href="https://docs.stripe.com/api/idempotent_requests">Stripe’s idempotency reference</a>, and <a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api">GitHub’s REST API rate-limit guide</a>. A live source check returned <code>200</code> for all three pages and confirmed the terms this review discusses: <code>HTTPException</code>, <code>Idempotency-Key</code>, and <code>x-ratelimit-remaining</code>.</p>
-<p><a href="/static/templates/documentation-review-card.md">Download the documentation task review card</a> and use it on a single important page before you expand a docs section. It turns a vague request for “better docs” into evidence a writer, engineer, and maintainer can inspect together.</p>
-<h2 id="technical-documentation-best-practices-that-help-readers-finish-a-task">Technical documentation best practices that help readers finish a task</h2>
-<h3 id="start-with-a-task-and-a-success-state">Start with a task and a success state</h3>
-<p>Readers do not arrive to learn an internal content model. They arrive with a job: return a useful error, retry a request safely, or understand why a request stopped working.</p>
-<p>FastAPI’s guide starts with an error response before it introduces <code>HTTPException</code>. Its useful choice is the connection between condition, HTTP status, and response body, which lets the reader identify the state they created.</p>
-<p>A documentation page should make one finish line visible:</p>
+        <p>Technical documentation is the material that lets a specific reader understand, use, integrate with, or safely operate a system. A page earns its place when it answers one of those jobs with enough evidence that the reader can take the next step without guessing.</p>
+<p>The useful question before you start writing is smaller: which reader needs to do what?</p>
+<p>Name the reader, the task, the prerequisite knowledge, and the observable result. Google’s <a href="https://developers.google.com/tech-writing/one/documents">technical-writing guidance</a> makes the same case for defining scope, non-scope, and audience before expanding the draft.</p>
+<h2 id="start-with-a-reader-task-not-a-document-list">Start with a reader task, not a document list</h2>
+<p>A product team can list tutorials, guides, reference pages, FAQs, release notes, diagrams, and onboarding material in an afternoon. That list does not tell a developer which page will help them send the first request, find an exact field, or recover from a failed integration.</p>
+<p>Start with a reader route instead. An evaluator needs to know the product boundary, a new integrator needs a safe first result, and an existing user needs stable detail or recovery guidance.</p>
 <table>
 <thead>
 <tr>
-<th>Page type</th>
 <th>Reader task</th>
-<th>What proves completion</th>
+<th>Deliverable that owns it</th>
+<th>What must be visible</th>
+<th>What proves it is enough</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Tutorial</td>
-<td>Complete a first useful action</td>
-<td>A command, response, or screen state</td>
+<td>Decide whether the product fits</td>
+<td>Orientation or README</td>
+<td>Scope, non-scope, supported use cases, and the starting link</td>
+<td>The reader can name the first relevant path</td>
 </tr>
 <tr>
-<td>How-to</td>
-<td>Change one system behavior</td>
-<td>The input and expected result</td>
+<td>Complete a first integration</td>
+<td>Quickstart or tutorial</td>
+<td>Prerequisites, one supported path, expected output, and a failure link</td>
+<td>The reader reaches a recognizable result</td>
 </tr>
 <tr>
+<td>Understand a system choice</td>
+<td>Concept explanation</td>
+<td>Terms, model, constraints, and links to the task pages</td>
+<td>The reader can explain the choice before implementing it</td>
+</tr>
+<tr>
+<td>Change an existing behavior</td>
+<td>Task guide</td>
+<td>Starting state, procedure, success state, and recovery boundary</td>
+<td>The reader can perform the change safely</td>
+</tr>
+<tr>
+<td>Resolve a precise question</td>
 <td>Reference</td>
-<td>Resolve a stable question</td>
-<td>A field, default, constraint, or type</td>
+<td>Names, types, defaults, constraints, and exceptions</td>
+<td>The reader can look up the answer without inference</td>
 </tr>
 <tr>
+<td>Diagnose a failure</td>
 <td>Troubleshooting</td>
-<td>Recover from a known failure</td>
-<td>Symptom, diagnostic, cause, and recovery</td>
+<td>Symptom, diagnostic check, cause, recovery, and escalation boundary</td>
+<td>The reader can choose the next safe action</td>
+</tr>
+<tr>
+<td>Respond to change</td>
+<td>Release or change note</td>
+<td>Impact, required action, version or date, and a migration path</td>
+<td>The reader can decide whether action is required</td>
 </tr>
 </tbody>
 </table>
-<p>A reference page can stay compact instead of carrying a full end-to-end scenario. It still needs to identify the question it owns and the boundary that changes the answer.</p>
-<h3 id="put-recovery-next-to-the-action-that-can-fail">Put recovery next to the action that can fail</h3>
-<p>The most expensive documentation gap is often distance. A reader sees a happy-path request in one guide, hits a timeout, and has to search a separate FAQ to learn whether retrying will duplicate work.</p>
-<p>Stripe’s idempotency reference makes retry behavior part of the request contract. The relevant reader decision is not simply “add a header.”</p>
-<p>The decision is whether the same operation can be retried safely, what identifies that operation, and when changed parameters break the assumption.</p>
-<p>Use the same structure for any action with a meaningful failure mode:</p>
-<ol>
-<li>Show the expected success state.</li>
-<li>Name the response, error, or condition that signals failure.</li>
-<li>Explain the repair, retry, or backoff decision.</li>
-<li>State the condition that makes that repair unsafe.</li>
-</ol>
-<p>A common objection is that this makes a quickstart longer. That is true for a simple, reversible task with an obvious error.</p>
-<p>Once permissions, retries, asynchronous work, or quotas can change the outcome, leaving recovery elsewhere is not brevity. It is an undocumented implementation decision.</p>
-<h3 id="make-limits-observable-before-they-become-incidents">Make limits observable before they become incidents</h3>
-<p>A warning that an API “may throttle traffic” cannot help a client decide whether to queue work, slow down, or investigate configuration. The page needs a signal the client can inspect.</p>
-<p>GitHub’s rate-limit documentation distinguishes rate-limit behavior and exposes headers such as <code>x-ratelimit-remaining</code>. That gives a developer an observable state to log or automate instead of a generic support symptom.</p>
-<p>For each limit, answer these questions in the same place:</p>
-<ul>
-<li>What resource is limited?</li>
-<li>Which header, field, dashboard value, or response shows remaining capacity?</li>
-<li>What state marks exhaustion?</li>
-<li>What should the client do next?</li>
-<li>When should the client stop retrying or escalate?</li>
-</ul>
-<p>Use the review card’s limit table to make this operational. If the writer cannot fill the signal and recovery columns, the documentation has not yet given the reader enough control.</p>
-<h3 id="give-every-reader-question-one-owner">Give every reader question one owner</h3>
-<p>Documentation drifts when tutorials, reference pages, release notes, and support articles all explain the same behavior differently. More navigation does not fix that conflict.</p>
-<p>Assign one page to own the task, then link outward for prerequisites, stable parameter detail, and deeper recovery. The <a href="/articles/how-to-organize-a-documentation-site/">documentation organization guide</a> explains how to split those page roles, while the <a href="/articles/documentation-review-checklist-before-you-publish/">documentation review checklist</a> covers the release checks that follow.</p>
-<p>The owner should also know what invalidates the page: a changed permission, renamed control, new response shape, revised quota, or support issue that reveals an absent recovery path. A review date alone cannot keep documentation current.</p>
-<h2 id="use-the-review-card-before-you-publish">Use the review card before you publish</h2>
-<p>The card is deliberately small. It asks for a reader, starting state, task, success state, risky action, failure signal, recovery boundary, limit signal, and page owner.</p>
-<p>Run it on the highest-risk page first, not every page at once. A payment request, authentication guide, migration path, or quota-sensitive endpoint is a better starting point than a low-stakes glossary entry.</p>
-<p>The point is not to make documentation longer. It is to stop forcing a reader to infer the state that determines whether the next action is safe.</p>
-<p><a href="/static/templates/documentation-review-card.md">Download the review card</a>, fill it against one rendered page, and turn the unanswered cells into the next documentation change.</p>
+<p>The <a href="https://diataxis.fr/">Diátaxis framework</a> separates tutorials, how-to guides, reference, and explanation because they meet different reader needs. The labels matter less than the boundary: one page should not try to teach a beginner, document every field, explain the architecture, and debug production failures at the same time.</p>
+<h2 id="build-the-smallest-package-that-lets-a-real-user-succeed">Build the smallest package that lets a real user succeed</h2>
+<p>A small team does not need seven finished document types before launch. It does need enough material for the first reader to understand the product, reach one verified result, and find the stable details or recovery guidance that result depends on.</p>
+<p>For a new API, that usually means orientation, a quickstart, and reference for the endpoint or SDK the quickstart uses. Add troubleshooting when a failed setup has a meaningful diagnostic path, then add release material when product changes can alter an existing integration.</p>
+<p>For a CLI, orientation should explain the tool’s job and supported environments. The quickstart should produce one visible command result, and the reference should own commands, flags, exit behavior, and configuration rather than hiding those details in a tutorial.</p>
+<p>For an internal platform, the first package may prioritize access, a supported setup path, ownership, and the operational rules that change a team’s safe next action. Do not turn that into a public-style product portal if the reader’s actual job is provisioning, deployment, or incident recovery.</p>
+<h2 id="give-each-deliverable-a-boundary">Give each deliverable a boundary</h2>
+<p>An orientation page helps a reader decide where to begin. It should not become a complete implementation guide.</p>
+<p>A quickstart proves one supported path. It should link to reference material when the reader needs exact options, and it should link to troubleshooting when the failure path would interrupt the first result.</p>
+<p>A concept page explains the model behind a choice. It should not force a reader to learn every concept before they can run a small task.</p>
+<p>A task guide changes one behavior from a known starting state. Keep the details that are stable across many tasks in reference, and keep recurring failure patterns in troubleshooting.</p>
+<p>Reference is where public API surface belongs. Google’s <a href="https://developers.google.com/style/api-reference-comments">API reference guidance</a> calls out methods, parameters, returns, and exceptions because an implementer needs exact behavior, not a narrative approximation.</p>
+<p>Troubleshooting needs a recognizable symptom, a diagnostic check, a likely cause, a safe recovery, and a boundary for escalation. A generic “contact support” line does not help a reader distinguish a transient failure from an unsafe retry.</p>
+<p>Release notes explain changed behavior and required action. They should link to the canonical guide or migration page instead of duplicating the full instructions.</p>
+<h2 id="make-coverage-inspectable-before-writing-prose">Make coverage inspectable before writing prose</h2>
+<p>I built a small <a href="/static/templates/documentation-deliverables-manifest.yaml">documentation deliverables manifest</a> around a fictional webhook API, then ran its validator in the site repository. Each row gives one reader task a deliverable, a success signal, an owner, and a product change that should trigger review.</p>
+<div class="highlight"><pre><span></span><code>.venv/bin/python<span class="w"> </span>static/templates/validate_documentation_deliverables.py
+</code></pre></div>
+
+<p>The manifest is deliberately not a documentation-site template. It is a planning artifact that exposes missing ownership before a team fills a repository with pages that overlap or go stale.</p>
+<div class="visual-wrapper">
+  <div class="visual-title">Documentation deliverables manifest validation</div>
+  <div class="visual-container">
+    <img src="/static/images/articles/what-is-technical-documentation-and-what-should-it-include/documentation-deliverables-manifest.png" alt="Terminal output showing a documentation deliverables manifest with seven owned reader tasks passed validation" loading="lazy">
+  </div>
+</div>
+<p class="visual-caption">The validator checks that each planned deliverable has a reader task, completion signal, owner, update trigger, and deferral condition.</p>
+
+<h2 id="assign-an-owner-and-an-update-trigger">Assign an owner and an update trigger</h2>
+<p>A review date alone does not keep documentation current. Give each deliverable an owner and a change that makes a review necessary, such as a schema change, a changed permission, a new release behavior, a recurring support issue, or an incident.</p>
+<p>GitLab’s <a href="https://docs.gitlab.com/development/documentation/">documentation guidance</a> treats docs as maintained product material for configuring, using, and troubleshooting a system. That is the useful standard: documentation changes with the product behavior that made the old answer unsafe or incomplete.</p>
+<p>If you already have a documentation project, use a <a href="/articles/technical-documentation-template/">technical documentation template</a> to turn these decisions into a tested repository. After choosing a page, <a href="/articles/technical-documentation-best-practices-tested-real-developer-docs/">test whether it helps readers finish a task</a> before you call it complete.</p>
+<p>For a page that is ready to ship, use the <a href="/articles/documentation-review-checklist-before-you-publish/">documentation review checklist</a>. If your real problem is duplicate or stale answers, start by <a href="/articles/how-to-organize-a-documentation-site/">organizing documentation that has drifted</a> instead of adding another page.</p>
       </div>
     </div>
   </div>
@@ -327,9 +343,9 @@
   <div class="prose-container">
     <h3>Related Posts</h3>
     <div class="related-grid">
-      <a href="/articles/what-is-technical-documentation-and-what-should-it-include/" class="related-card">
-        <div class="related-card-date">2026-08-05</div>
-        <div class="related-card-title">What Is Technical Documentation, and What Should It Include?</div>
+      <a href="/articles/technical-documentation-best-practices-tested-real-developer-docs/" class="related-card">
+        <div class="related-card-date">2026-08-02</div>
+        <div class="related-card-title">Technical Documentation Best Practices, Tested on Real Developer Docs</div>
       </a>
       <a href="/articles/technical-documentation-template/" class="related-card">
         <div class="related-card-date">2026-08-01</div>
