@@ -14,11 +14,8 @@ slug: "types-of-technical-documentation"
 
 Technical documentation is not one thing. It is the set of documents that help someone use a product, understand a system, operate it safely, or change it without losing important context.
 
-Most lists stop after naming a few familiar formats. That answers only half the question.
 
-You also need to know who each document helps, what a good version looks like, and where it belongs in the larger documentation system.
-
-## Start with three audiences, not one long list
+## The three audiences for technical documentation
 
 The most useful classification separates technical documentation by the person who needs it. ClickHelp makes a similar distinction between process documents and user documents, while Squarespace Engineering frames documentation around reader behavior, patience, experience, and goal.
 
