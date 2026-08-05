@@ -140,16 +140,20 @@ def extract_faqs(md_content: str) -> list[dict]:
 
 def sort_key(post: dict):
     d = post.get("date")
-    if isinstance(d, (datetime,)):
-        return d.date()
-    if isinstance(d, date):
-        return d
-    if isinstance(d, str):
+    if isinstance(d, datetime):
+        published = d.date()
+    elif isinstance(d, date):
+        published = d
+    elif isinstance(d, str):
         try:
-            return datetime.strptime(d, "%Y-%m-%d").date()
+            published = datetime.strptime(d, "%Y-%m-%d").date()
         except ValueError:
-            pass
-    return date.min
+            published = date.min
+    else:
+        published = date.min
+    # Date ties are common. A stable slug tie-breaker keeps generated pages
+    # identical across filesystems and CI runners.
+    return published, post.get("slug", "")
 
 
 # ---------------------------------------------------------------------------

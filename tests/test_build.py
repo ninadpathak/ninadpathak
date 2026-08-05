@@ -27,8 +27,15 @@ class BuildHelperTests(unittest.TestCase):
         self.assertEqual(format_date_iso(datetime(2026, 7, 31, 12, 30)), "2026-07-31")
 
     def test_sort_key_falls_back_for_invalid_dates(self):
-        self.assertEqual(sort_key({"date": "2026-07-31"}), date(2026, 7, 31))
-        self.assertEqual(sort_key({"date": "not-a-date"}), date.min)
+        self.assertEqual(sort_key({"date": "2026-07-31", "slug": "alpha"}), (date(2026, 7, 31), "alpha"))
+        self.assertEqual(sort_key({"date": "not-a-date", "slug": "zeta"}), (date.min, "zeta"))
+
+    def test_sort_key_breaks_same_date_ties_by_slug(self):
+        posts = [
+            {"date": "2026-07-31", "slug": "zeta"},
+            {"date": "2026-07-31", "slug": "alpha"},
+        ]
+        self.assertEqual([post["slug"] for post in sorted(posts, key=sort_key, reverse=True)], ["zeta", "alpha"])
 
     def test_extract_faqs_supports_heading_and_bold_questions(self):
         markdown = """## FAQ
