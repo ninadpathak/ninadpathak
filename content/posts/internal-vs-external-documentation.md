@@ -28,8 +28,11 @@ Ask four questions:
 4. Who owns the source of truth, and which product or process change makes it stale?
 
 <figure class="post-figure">
-  <img src="/static/images/articles/internal-vs-external-documentation/documentation-placement-decision-tree.svg?v=mermaid1" alt="Mermaid decision tree with distinct Yes and No branches that route a page to internal, review, split, or external documentation" loading="lazy">
-  <figcaption>Each Yes and No branch ends at one distinct documentation placement.</figcaption>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/static/images/articles/internal-vs-external-documentation/documentation-placement-decision-tree-mobile.png?v=html1">
+    <img src="/static/images/articles/internal-vs-external-documentation/documentation-placement-decision-tree.png?v=html1" alt="Decision tree with separate Yes and No paths that place documentation in internal, review, split, or external guidance" loading="lazy">
+  </picture>
+  <figcaption>Each branch has one explicit destination.</figcaption>
 </figure>
 
 ## Internal vs. external documentation comparison
