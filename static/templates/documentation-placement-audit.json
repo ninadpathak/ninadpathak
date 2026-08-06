@@ -1,0 +1,69 @@
+{
+  "project": "Example developer platform",
+  "artifacts": [
+    {
+      "artifact": "Public API authentication guide",
+      "external_reader_task": true,
+      "sensitive_internal_context": false,
+      "internal_operator_task": false,
+      "owner": "Developer experience",
+      "update_trigger": "Authentication contract or SDK change"
+    },
+    {
+      "artifact": "On-call recovery runbook",
+      "external_reader_task": false,
+      "sensitive_internal_context": true,
+      "internal_operator_task": true,
+      "owner": "Site reliability engineering",
+      "update_trigger": "Service topology or recovery procedure change"
+    },
+    {
+      "artifact": "Production incident record",
+      "external_reader_task": true,
+      "sensitive_internal_context": true,
+      "internal_operator_task": true,
+      "owner": "Incident commander",
+      "update_trigger": "Incident review or corrective-action change"
+    },
+    {
+      "artifact": "Architecture decision record",
+      "external_reader_task": false,
+      "sensitive_internal_context": false,
+      "internal_operator_task": true,
+      "owner": "Platform architecture",
+      "update_trigger": "Superseding architecture decision"
+    },
+    {
+      "artifact": "Developer quickstart",
+      "external_reader_task": true,
+      "sensitive_internal_context": false,
+      "internal_operator_task": false,
+      "owner": "Developer experience",
+      "update_trigger": "Setup path, dependency, or API change"
+    },
+    {
+      "artifact": "Employee environment setup",
+      "external_reader_task": false,
+      "sensitive_internal_context": true,
+      "internal_operator_task": true,
+      "owner": "Engineering productivity",
+      "update_trigger": "Internal tooling or access-policy change"
+    },
+    {
+      "artifact": "System architecture explanation",
+      "external_reader_task": true,
+      "sensitive_internal_context": true,
+      "internal_operator_task": true,
+      "owner": "Platform architecture",
+      "update_trigger": "Public contract or private topology change"
+    },
+    {
+      "artifact": "Release note",
+      "external_reader_task": true,
+      "sensitive_internal_context": false,
+      "internal_operator_task": false,
+      "owner": "Product documentation",
+      "update_trigger": "Externally visible product change"
+    }
+  ]
+}

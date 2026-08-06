@@ -75,6 +75,8 @@ A migration guide should provide the affected starting state, replacement path, 
 
 Product documentation is only one part of technical documentation. Teams also need durable records that explain why a system exists in its current form and how to maintain it.
 
+Use the [internal vs. external documentation decision](/articles/internal-vs-external-documentation/) to keep private operating context separate from the public task or contract.
+
 ### 7. Architecture and design documents
 
 Architecture documents describe the system’s components, boundaries, data flows, dependencies, and important decisions. A design document is often narrower, explaining a proposed change before implementation begins.

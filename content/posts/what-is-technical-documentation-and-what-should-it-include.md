@@ -44,6 +44,8 @@ For a CLI, orientation should explain the tool’s job and supported environment
 
 An internal platform may need a different starting package. Access, a supported setup path, ownership, and the operating rules that change a team’s next action can matter before a public-style product portal.
 
+Use the [internal vs. external documentation decision](/articles/internal-vs-external-documentation/) when the same subject needs both private operating context and a public task-focused treatment.
+
 Google’s [technical writing guidance](https://developers.google.com/tech-writing/one/documents) recommends defining scope, non-scope, and audience before expanding a draft. That decision keeps a page from collecting unrelated jobs as it grows.
 
 ## Give each document a boundary

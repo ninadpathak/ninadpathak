@@ -1,0 +1,9 @@
+artifact,placement,reason,owner,update_trigger
+Public API authentication guide,external,"An external reader needs this information to evaluate, use, integrate with, or recover the product.",Developer experience,Authentication contract or SDK change
+On-call recovery runbook,internal,The artifact exists for internal operation or contains context that should not cross the public boundary.,Site reliability engineering,Service topology or recovery procedure change
+Production incident record,split,"External readers need an answer, but internal operating or sensitive context needs a separate private source.",Incident commander,Incident review or corrective-action change
+Architecture decision record,internal,The artifact exists for internal operation or contains context that should not cross the public boundary.,Platform architecture,Superseding architecture decision
+Developer quickstart,external,"An external reader needs this information to evaluate, use, integrate with, or recover the product.",Developer experience,"Setup path, dependency, or API change"
+Employee environment setup,internal,The artifact exists for internal operation or contains context that should not cross the public boundary.,Engineering productivity,Internal tooling or access-policy change
+System architecture explanation,split,"External readers need an answer, but internal operating or sensitive context needs a separate private source.",Platform architecture,Public contract or private topology change
+Release note,external,"An external reader needs this information to evaluate, use, integrate with, or recover the product.",Product documentation,Externally visible product change
