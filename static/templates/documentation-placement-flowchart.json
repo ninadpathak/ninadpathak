@@ -1,0 +1,44 @@
+{
+  "title": "Documentation placement decision tree",
+  "mobile_viewport": 390,
+  "nodes": [
+    {
+      "id": "reader-task",
+      "layer": 0,
+      "title": "Does an external reader need this information to complete a supported task?",
+      "kind": "decision"
+    },
+    {
+      "id": "internal-context",
+      "layer": 1,
+      "title": "No. Does an approved operator need it, or does it contain private context?",
+      "kind": "decision"
+    },
+    {
+      "id": "public-context",
+      "layer": 1,
+      "title": "Yes. Does private operating context remain necessary after the public task is clear?",
+      "kind": "decision"
+    },
+    {
+      "id": "internal",
+      "layer": 2,
+      "title": "Internal",
+      "body": "Private operation, decisions, or sensitive context.",
+      "kind": "outcome"
+    },
+    {
+      "id": "split",
+      "layer": 2,
+      "title": "Split",
+      "body": "Public task page plus a private operating record.",
+      "kind": "outcome"
+    }
+  ],
+  "edges": [
+    {"from": "reader-task", "to": "internal-context"},
+    {"from": "reader-task", "to": "public-context"},
+    {"from": "internal-context", "to": "internal"},
+    {"from": "public-context", "to": "split"}
+  ]
+}
