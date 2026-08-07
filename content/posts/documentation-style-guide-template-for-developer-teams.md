@@ -8,7 +8,7 @@ takeaways:
   - "A documentation style guide needs named decisions and change owners, not tone preferences."
   - "Code and UI rules need a starting state and a verification source."
 status: published
-slug: "documentation-style-guide-template-for-developer-teams"
+slug: "documentation-style-guide-template"
 ---
 
 Documentation drifts when a feature changes and the name in the UI no longer matches the command in the guide. Tone alone cannot fix a decision that nobody can inspect or update.
