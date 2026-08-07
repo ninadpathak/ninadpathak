@@ -343,7 +343,20 @@ def check_post(path):
             issues.append(('error', 'jargon', None,
                             f'Forbidden word "{m.group(0)}" (use: {suggestion}): ...{snippet}...'))
 
-    # ── 9. Frontmatter: missing explicit slug ──────────────────────────
+    # ── 9. Rule-of-three language ─────────────────────────────────────
+    # A factual count, version, identifier, or explicit factual trio must
+    # carry a nearby invisible evidence receipt. Versions such as Python 3.13
+    # are excluded because the numeric token is part of the version.
+    for m in re.finditer(r'\bthree\b|(?<![\d.])3(?![\d.])', prose, re.I):
+        receipt_window = prose[max(0, m.start() - 300):m.start()]
+        if '<!-- evidence-three:' in receipt_window:
+            continue
+        start = max(0, m.start() - 30)
+        snippet = prose[start:m.start() + 70].replace('\n', ' ').strip()
+        issues.append(('error', 'rule-of-three', None,
+                       f'"{m.group(0)}" needs an evidenced count or an explicit factual trio: ...{snippet}...'))
+
+    # ── 10. Frontmatter: missing explicit slug ─────────────────────────
     try:
         post = fm_lib.load(path)
         if not post.get('slug'):
@@ -354,7 +367,7 @@ def check_post(path):
     except Exception:
         pass
 
-    # ── 10. Missing visual embed ───────────────────────────────────────
+    # ── 11. Missing visual embed ───────────────────────────────────────
     if 'static/visuals' not in text:
         issues.append(('info', 'no-visual', None, 'No visual embed found'))
 

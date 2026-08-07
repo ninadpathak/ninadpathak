@@ -5,10 +5,10 @@ import re
 import sys
 
 REQUIRED_HEADINGS = (
-    "## 1. Product names and terminology",
-    "## 2. Voice, headings, and procedures",
-    "## 3. Code and command examples",
-    "## 4. UI references and release checks",
+    "## Product names and terminology",
+    "## Voice, headings, and procedures",
+    "## Code and command examples",
+    "## UI references and release checks",
 )
 REQUIRED_MARKERS = (
     "| Concept | Approved term | Avoid | Definition | Owner | Last verified |",

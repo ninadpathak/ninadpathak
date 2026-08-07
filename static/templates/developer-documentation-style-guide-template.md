@@ -2,7 +2,7 @@
 
 Use this template to make product names, UI labels, code, and release language consistent across your docs. Replace every bracketed value before you publish.
 
-## 1. Product names and terminology
+## Product names and terminology
 
 | Concept | Approved term | Avoid | Definition | Owner | Last verified |
 | --- | --- | --- | --- | --- | --- |
@@ -16,7 +16,7 @@ Rules:
 - Add a deprecated term only when readers will still encounter it in an interface, error, migration, or API.
 - Link to the page that owns a term whose definition needs more than one sentence.
 
-## 2. Voice, headings, and procedures
+## Voice, headings, and procedures
 
 Write for the action the reader needs to complete. State the expected result before background that does not change the next step.
 
@@ -29,7 +29,7 @@ Write for the action the reader needs to complete. State the expected result bef
 
 Use sentence-case headings that name a task or a subject. Keep one page responsible for one reader question, then link to prerequisite, reference, or recovery pages.
 
-## 3. Code and command examples
+## Code and command examples
 
 Record the environment that produced each example.
 
@@ -50,7 +50,7 @@ Record the environment that produced each example.
 
 Explain what the command changes and show the output or state that proves it worked. Do not publish a snippet that depends on hidden files, credentials, or global packages.
 
-## 4. UI references and release checks
+## UI references and release checks
 
 Use the label visible in the released interface. Describe the reader goal first when a control name alone does not explain the outcome.
 
