@@ -27,12 +27,12 @@ Ask four questions:
 3. Does an internal operator need implementation context that an external reader does not?
 4. Who owns the source of truth, and which product or process change makes it stale?
 
-<figure class="post-figure">
+<figure class="flowchart-image">
   <picture>
-    <source media="(max-width: 600px)" srcset="/static/images/articles/internal-vs-external-documentation/documentation-placement-decision-tree-mobile.png?v=html1">
-    <img src="/static/images/articles/internal-vs-external-documentation/documentation-placement-decision-tree.png?v=html1" alt="Decision tree with separate Yes and No paths that place documentation in internal, review, split, or external guidance" loading="lazy">
+    <source media="(max-width: 600px)" srcset="/static/images/articles/internal-vs-external-documentation/documentation-placement-flowchart-mobile.svg">
+    <img src="/static/images/articles/internal-vs-external-documentation/documentation-placement-flowchart.svg" width="672" height="472" alt="Documentation placement flowchart. If no external reader needs the information, keep it internal when an operator needs it or review whether the page has a task. If an external reader needs it, split public and private context when both remain necessary; otherwise publish it externally." loading="lazy" decoding="async">
   </picture>
-  <figcaption>Each branch has one explicit destination.</figcaption>
+  <figcaption>Each path ends in internal, review, split, or external documentation without crossing connector lines.</figcaption>
 </figure>
 
 ## Internal vs. external documentation comparison

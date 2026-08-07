@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="342" height="804" viewBox="0 0 342 804" role="img" aria-labelledby="title description">
+  <title id="title">Documentation placement decision tree for mobile screens</title>
+  <desc id="description">A stacked decision tree routes documentation to internal, review, split, or external destinations.</desc>
+  <style>
+    :root{--bg:#f8f8f6;--surface:#ffffff;--surface-muted:#efefed;--border:#e0e0dc;--border-strong:#c8c8c4;--ink:#0e0e0e;--text:#3a3a3a;--muted:#888888;--accent:#d44000}
+    @media(prefers-color-scheme:dark){:root{--bg:#090909;--surface:#111111;--surface-muted:#1a1a1a;--border:#1e1e1e;--border-strong:#2c2c2c;--ink:#f0f0f0;--text:#c2c2c2;--muted:#6a6a6a;--accent:#ff5f1f}}
+    .canvas{fill:var(--bg)}.card{fill:var(--surface);stroke:var(--border-strong);stroke-width:1}.outcome{fill:var(--surface-muted);stroke:var(--border);stroke-width:1}.accent{fill:var(--accent)}.connector{fill:none;stroke:var(--border-strong);stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}.label-bg{fill:var(--bg)}.kicker,.route{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11px;font-weight:600;letter-spacing:1px}.kicker{fill:var(--muted)}.route{fill:var(--accent)}.question,.result{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:var(--ink);font-weight:600}.question{font-size:15px}.result{font-size:17px}.detail{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:var(--text);font-size:11px}
+  </style>
+  <rect class="canvas" width="342" height="804"/>
+
+  <rect class="card" x="16" y="20" width="310" height="92" rx="4"/>
+  <rect class="accent" x="16" y="20" width="310" height="3"/>
+  <text class="kicker" x="34" y="48">START</text>
+  <text class="question" x="34" y="76">Does an external reader need this</text>
+  <text class="question" x="34" y="97">information for a supported task?</text>
+
+  <path class="connector" d="M171 112V126H334V434H171V450M171 126V146"/>
+  <rect class="label-bg" x="152" y="122" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="171" y="138">NO</text>
+  <rect class="label-bg" x="295" y="115" width="42" height="22"/>
+  <text class="route" text-anchor="middle" x="316" y="131">YES</text>
+  <rect class="card" x="16" y="146" width="310" height="92" rx="4"/>
+  <rect class="accent" x="16" y="146" width="310" height="3"/>
+  <text class="kicker" x="34" y="174">PRIVATE PATH</text>
+  <text class="question" x="34" y="202">Does an operator need it, or does it</text>
+  <text class="question" x="34" y="223">contain private context?</text>
+
+  <path class="connector" d="M171 238V272H89V300M171 272H253V300"/>
+  <rect class="label-bg" x="70" y="261" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="89" y="277">YES</text>
+  <rect class="label-bg" x="234" y="261" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="253" y="277">NO</text>
+  <rect class="outcome" x="16" y="300" width="146" height="104" rx="4"/>
+  <rect class="accent" x="16" y="300" width="146" height="4"/>
+  <text class="result" x="32" y="338">Internal</text>
+  <text class="detail" x="32" y="364">Private task or context</text>
+  <rect class="outcome" x="180" y="300" width="146" height="104" rx="4"/>
+  <rect class="accent" x="180" y="300" width="146" height="4"/>
+  <text class="result" x="196" y="338">Review</text>
+  <text class="detail" x="196" y="364">No owned task yet</text>
+
+  <rect class="card" x="16" y="450" width="310" height="92" rx="4"/>
+  <rect class="accent" x="16" y="450" width="310" height="3"/>
+  <text class="kicker" x="34" y="478">PUBLIC PATH</text>
+  <text class="question" x="34" y="506">Does private operating context remain</text>
+  <text class="question" x="34" y="527">after the public task is clear?</text>
+
+  <path class="connector" d="M171 542V576H89V604M171 576H253V604"/>
+  <rect class="label-bg" x="70" y="565" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="89" y="581">YES</text>
+  <rect class="label-bg" x="234" y="565" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="253" y="581">NO</text>
+  <rect class="outcome" x="16" y="604" width="146" height="104" rx="4"/>
+  <rect class="accent" x="16" y="604" width="146" height="4"/>
+  <text class="result" x="32" y="642">Split</text>
+  <text class="detail" x="32" y="668">Public task + private</text>
+  <text class="detail" x="32" y="685">record</text>
+  <rect class="outcome" x="180" y="604" width="146" height="104" rx="4"/>
+  <rect class="accent" x="180" y="604" width="146" height="4"/>
+  <text class="result" x="196" y="642">External</text>
+  <text class="detail" x="196" y="668">Supported public task</text>
+
+  <text class="kicker" text-anchor="middle" x="171" y="758">ONE TASK · ONE DESTINATION</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="672" height="472" viewBox="0 0 672 472" role="img" aria-labelledby="title description">
+  <title id="title">Documentation placement decision tree</title>
+  <desc id="description">A decision tree routes documentation to internal, review, split, or external destinations.</desc>
+  <style>
+    :root{--bg:#f8f8f6;--surface:#ffffff;--surface-muted:#efefed;--border:#e0e0dc;--border-strong:#c8c8c4;--ink:#0e0e0e;--text:#3a3a3a;--muted:#888888;--accent:#d44000}
+    @media(prefers-color-scheme:dark){:root{--bg:#090909;--surface:#111111;--surface-muted:#1a1a1a;--border:#1e1e1e;--border-strong:#2c2c2c;--ink:#f0f0f0;--text:#c2c2c2;--muted:#6a6a6a;--accent:#ff5f1f}}
+    .canvas{fill:var(--bg)}.card{fill:var(--surface);stroke:var(--border-strong);stroke-width:1}.outcome{fill:var(--surface-muted);stroke:var(--border);stroke-width:1}.accent{fill:var(--accent)}.connector{fill:none;stroke:var(--border-strong);stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}.label-bg{fill:var(--bg)}.kicker,.route{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11px;font-weight:600;letter-spacing:1.1px}.kicker{fill:var(--muted)}.route{fill:var(--accent)}.question,.result{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:var(--ink);font-weight:600}.question{font-size:16px}.result{font-size:18px}.detail{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:var(--text);font-size:12px}
+  </style>
+  <rect class="canvas" width="672" height="472"/>
+
+  <path class="connector" d="M336 100V132H174V156M336 132H498V156"/>
+  <path class="connector" d="M174 252V286H92V320M174 286H256V320"/>
+  <path class="connector" d="M498 252V286H416V320M498 286H580V320"/>
+
+  <rect class="card" x="84" y="24" width="504" height="76" rx="4"/>
+  <rect class="accent" x="84" y="24" width="504" height="3"/>
+  <text class="kicker" x="108" y="51">START</text>
+  <text class="question" x="108" y="78">Does an external reader need this information for a supported task?</text>
+
+  <rect class="label-bg" x="155" y="121" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="174" y="137">NO</text>
+  <rect class="label-bg" x="477" y="121" width="42" height="22"/>
+  <text class="route" text-anchor="middle" x="498" y="137">YES</text>
+
+  <rect class="card" x="24" y="156" width="300" height="96" rx="4"/>
+  <rect class="accent" x="24" y="156" width="300" height="3"/>
+  <text class="kicker" x="44" y="184">PRIVATE PATH</text>
+  <text class="question" x="44" y="212">Does an operator need it, or does it</text>
+  <text class="question" x="44" y="234">contain private context?</text>
+
+  <rect class="card" x="348" y="156" width="300" height="96" rx="4"/>
+  <rect class="accent" x="348" y="156" width="300" height="3"/>
+  <text class="kicker" x="368" y="184">PUBLIC PATH</text>
+  <text class="question" x="368" y="212">Does private operating context remain</text>
+  <text class="question" x="368" y="234">after the public task is clear?</text>
+
+  <rect class="label-bg" x="73" y="275" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="92" y="291">YES</text>
+  <rect class="label-bg" x="237" y="275" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="256" y="291">NO</text>
+  <rect class="label-bg" x="397" y="275" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="416" y="291">YES</text>
+  <rect class="label-bg" x="561" y="275" width="38" height="22"/>
+  <text class="route" text-anchor="middle" x="580" y="291">NO</text>
+
+  <rect class="outcome" x="24" y="320" width="136" height="112" rx="4"/>
+  <rect class="accent" x="24" y="320" width="136" height="4"/>
+  <text class="result" x="40" y="358">Internal</text>
+  <text class="detail" x="40" y="384">Private task</text>
+  <text class="detail" x="40" y="402">or context</text>
+
+  <rect class="outcome" x="188" y="320" width="136" height="112" rx="4"/>
+  <rect class="accent" x="188" y="320" width="136" height="4"/>
+  <text class="result" x="204" y="358">Review</text>
+  <text class="detail" x="204" y="384">No owned reader</text>
+  <text class="detail" x="204" y="402">task yet</text>
+
+  <rect class="outcome" x="348" y="320" width="136" height="112" rx="4"/>
+  <rect class="accent" x="348" y="320" width="136" height="4"/>
+  <text class="result" x="364" y="358">Split</text>
+  <text class="detail" x="364" y="384">Public task +</text>
+  <text class="detail" x="364" y="402">private record</text>
+
+  <rect class="outcome" x="512" y="320" width="136" height="112" rx="4"/>
+  <rect class="accent" x="512" y="320" width="136" height="4"/>
+  <text class="result" x="528" y="358">External</text>
+  <text class="detail" x="528" y="384">Supported</text>
+  <text class="detail" x="528" y="402">public task</text>
+</svg>

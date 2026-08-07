@@ -11,6 +11,7 @@ Usage:
 
 import os
 import re
+import struct
 import sys
 import shutil
 import http.server
@@ -78,6 +79,62 @@ def estimate_reading_time(content: str) -> int:
 
 def count_words(content: str) -> int:
     return len(content.split())
+
+
+def _png_dimensions(path: Path):
+    """Return a PNG's intrinsic dimensions without adding an image dependency."""
+    try:
+        with path.open("rb") as image:
+            header = image.read(24)
+    except OSError:
+        return None
+
+    if len(header) < 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    return struct.unpack(">II", header[16:24])
+
+
+def optimize_content_images(html: str) -> str:
+    """Add lazy decoding and intrinsic sizing to local PNGs in rendered content."""
+    image_pattern = re.compile(r"<img\b[^>]*>", re.IGNORECASE)
+    source_pattern = re.compile(r"\bsrc\s*=\s*(['\"])(.*?)\1", re.IGNORECASE)
+
+    def optimize(match: re.Match) -> str:
+        tag = match.group(0)
+        source_match = source_pattern.search(tag)
+        if not source_match:
+            return tag
+
+        source = source_match.group(2).split("?", 1)[0].split("#", 1)[0]
+        if not source.startswith("/static/"):
+            return tag
+
+        attributes = []
+        if not re.search(r"\bloading\s*=", tag, re.IGNORECASE):
+            attributes.append('loading="lazy"')
+        if not re.search(r"\bdecoding\s*=", tag, re.IGNORECASE):
+            attributes.append('decoding="async"')
+
+        if not re.search(r"\b(?:width|height)\s*=", tag, re.IGNORECASE):
+            image_path = (ROOT / source.lstrip("/")).resolve()
+            try:
+                image_path.relative_to((ROOT / "static").resolve())
+            except ValueError:
+                image_path = None
+
+            dimensions = _png_dimensions(image_path) if image_path else None
+            if dimensions:
+                width, height = dimensions
+                attributes.extend((f'width="{width}"', f'height="{height}"'))
+
+        if not attributes:
+            return tag
+
+        suffix = " />" if tag.endswith("/>") else ">"
+        body = tag[:-2].rstrip() if tag.endswith("/>") else tag[:-1].rstrip()
+        return f"{body} {' '.join(attributes)}{suffix}"
+
+    return image_pattern.sub(optimize, html)
 
 
 def _clean_inline_md(text: str) -> str:
@@ -217,7 +274,7 @@ class SiteBuilder:
                     f"{md_file} violates the two-sentence paragraph rule:\n{details}"
                 )
             self.md.reset()
-            html = self.md.convert(post.content)
+            html = optimize_content_images(self.md.convert(post.content))
             # Extract TOC from markdown if available
             toc_html = getattr(self.md, 'toc', '') if hasattr(self.md, 'toc') else ''
             slug = post.get("slug") or slugify(md_file.stem)
@@ -237,6 +294,9 @@ class SiteBuilder:
                 "url": f"/articles/{slug}/",
                 "toc": toc_html,
                 "faqs": extract_faqs(post.content),
+                "has_code": 'class="highlight"' in html,
+                "has_visuals": "<iframe" in html,
+                "has_flowchart": 'class="flowchart' in html,
             })
 
         return sorted(posts, key=sort_key, reverse=True)
@@ -247,7 +307,7 @@ class SiteBuilder:
         for md_file in sorted(work_dir.glob("*.md")):
             post = frontmatter.load(md_file)
             self.md.reset()
-            html = self.md.convert(post.content)
+            html = optimize_content_images(self.md.convert(post.content))
             slug = md_file.stem
             cases.append({
                 **post.metadata,
@@ -269,7 +329,7 @@ class SiteBuilder:
     def load_md_content(self, path: str) -> tuple[dict, str]:
         post = frontmatter.load(path)
         self.md.reset()
-        return post.metadata, self.md.convert(post.content)
+        return post.metadata, optimize_content_images(self.md.convert(post.content))
 
     def load_legal_pages(self) -> list[dict]:
         pages = []

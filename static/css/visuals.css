@@ -1,10 +1,10 @@
 /* Visual Container Styles */
 .visual-wrapper {
-  margin: 3rem 0;
+  margin: var(--space-12) 0;
   width: 100%;
   border: 1px solid var(--border);
   background: var(--bg-1);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -12,14 +12,14 @@
 
 .visual-title {
   font-family: var(--mono);
-  font-size: 0.75rem;
+  font-size: var(--font-size-sm);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--accent);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1.5rem 1.5rem 0;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-6) 0;
 }
 
 .visual-title::before {

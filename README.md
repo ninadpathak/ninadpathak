@@ -115,6 +115,19 @@ content/
 output/              # Generated site (gitignored)
 ```
 
+## Design system
+
+The shared design primitives live in `:root` at the top of `static/css/main.css`.
+Use the existing color, typography, spacing, radius, shadow, and focus tokens instead
+of adding raw values to a component. Reuse base classes such as `.container`,
+`.prose-container`, `.label`, `.btn`, `.section-row`, and `.arrow-link` before creating
+a new structural class.
+
+Keep page-specific CSS out of the global bundle. The linter owns `linter.css`, while
+article syntax highlighting and visual-embed styles are included only when the rendered
+article needs them. Static decision trees use the reusable classes in `flowcharts.css`;
+the build includes that stylesheet only for articles containing a `.flowchart`.
+
 ## Deploying to Cloudflare Pages
 
 Set the build command to `python3 build.py` and the output directory to `output`.

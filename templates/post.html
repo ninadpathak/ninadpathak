@@ -8,6 +8,12 @@
 {% block og_description %}{{ post.description }}{% endblock %}
 {% block og_url %}/articles/{{ post.slug }}/{% endblock %}
 
+{% block extra_css %}
+{% if post.has_code %}<link rel="stylesheet" href="/static/css/highlight.css">{% endif %}
+{% if post.has_visuals %}<link rel="stylesheet" href="/static/css/visuals.css">{% endif %}
+{% if post.has_flowchart %}<link rel="stylesheet" href="/static/css/flowcharts.css">{% endif %}
+{% endblock %}
+
 {% block schema %}
 <script type="application/ld+json">
 {

@@ -2,6 +2,12 @@
 
 `flowchart_generator.py` turns a structured JSON chart into deterministic SVG, 2× PNG, and a geometry receipt.
 
+For an in-article decision tree, prefer the semantic component in
+`static/css/flowcharts.css`; it inherits light/dark theme tokens and remains
+selectable and responsive. Use this generator when the diagram also needs to exist
+as a downloadable or portable asset. Never capture either version as a browser
+screenshot.
+
 ## Design contract
 
 The generator reads the light-theme token values and prose geometry from `static/css/main.css`.

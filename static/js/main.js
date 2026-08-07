@@ -11,6 +11,31 @@
 
   window.trackSiteEvent = trackEvent;
 
+  function getFocusableElements(container) {
+    return Array.from(container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), ' +
+      'textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(function (element) {
+      return !element.hasAttribute('hidden') && element.getAttribute('aria-hidden') !== 'true';
+    });
+  }
+
+  function keepFocusInside(event, container) {
+    if (event.key !== 'Tab') return;
+    const focusable = getFocusableElements(container);
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
   // ----------------------------------------------------------------
   // Theme toggle
   // ----------------------------------------------------------------
@@ -60,17 +85,33 @@
     const closeBtn = document.getElementById('bookingModalClose');
     const triggers = document.querySelectorAll('.booking-modal-trigger');
     if (!modal || !triggers.length) return;
+    let previousFocus = null;
+
+    function loadBookingWidget() {
+      if (document.getElementById('zcalEmbedScript')) return;
+      const script = document.createElement('script');
+      script.id = 'zcalEmbedScript';
+      script.src = 'https://static.zcal.co/embed/v1/embed.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
 
     function openModal() {
+      previousFocus = document.activeElement;
+      modal.removeAttribute('inert');
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      loadBookingWidget();
+      if (closeBtn) closeBtn.focus();
     }
 
     function closeModal() {
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
+      modal.setAttribute('inert', '');
       document.body.style.overflow = '';
+      if (previousFocus) previousFocus.focus();
     }
 
     triggers.forEach(function (trigger) {
@@ -94,7 +135,9 @@
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape') closeModal();
+      else keepFocusInside(e, modal);
     });
   });
 
@@ -109,17 +152,21 @@
     if (!hamburger || !mobileNav) return;
 
     function openNav() {
+      mobileNav.removeAttribute('inert');
       mobileNav.classList.add('open');
       mobileNav.setAttribute('aria-hidden', 'false');
       hamburger.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      if (closeBtn) closeBtn.focus();
     }
 
     function closeNav() {
       mobileNav.classList.remove('open');
       mobileNav.setAttribute('aria-hidden', 'true');
+      mobileNav.setAttribute('inert', '');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      hamburger.focus();
     }
 
     hamburger.addEventListener('click', openNav);
@@ -132,7 +179,9 @@
 
     // Close on Escape
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeNav();
+      if (!mobileNav.classList.contains('open')) return;
+      if (e.key === 'Escape') closeNav();
+      else keepFocusInside(e, mobileNav);
     });
   });
 
@@ -188,12 +237,22 @@
     ].join(';');
     document.body.appendChild(bar);
 
-    window.addEventListener('scroll', function () {
+    let scrollUpdatePending = false;
+
+    function updateScrollProgress() {
       const scrollTop  = window.scrollY;
       const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
       const progress   = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       bar.style.width  = Math.min(100, progress) + '%';
+      scrollUpdatePending = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (scrollUpdatePending) return;
+      scrollUpdatePending = true;
+      window.requestAnimationFrame(updateScrollProgress);
     }, { passive: true });
+    updateScrollProgress();
   });
 
   // ----------------------------------------------------------------
@@ -203,6 +262,9 @@
     var canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
 
+    var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (motionQuery.matches) canvas.hidden = true;
+
     var ctx      = canvas.getContext('2d');
     var hero     = canvas.closest('.hero');
     var heroCopy = hero ? hero.querySelector('.hero-copy') : null;
@@ -210,6 +272,17 @@
     var CW       = 16;
     var CH       = 22;
     var cells    = [];
+    var exclusionRect = null;
+    var resizeFrame = null;
+
+    motionQuery.addEventListener('change', function (event) {
+      canvas.hidden = event.matches;
+      if (event.matches) stopAnimation();
+      else {
+        resize();
+        startAnimation();
+      }
+    });
 
     function buildCells() {
       var cols = Math.ceil(canvas.width / CW);
@@ -236,9 +309,20 @@
       canvas.width  = hero.offsetWidth;
       canvas.height = hero.offsetHeight;
       buildCells();
+      exclusionRect = getExclusionRect();
     }
+
+    function queueResize() {
+      if (resizeFrame !== null) return;
+      resizeFrame = window.requestAnimationFrame(function () {
+        resizeFrame = null;
+        resize();
+      });
+    }
+
     resize();
-    window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('resize', queueResize, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueResize);
 
     function getExclusionRect() {
       if (!heroCopy) return null;
@@ -279,15 +363,29 @@
     }
 
     var last = null;
+    var animationFrame = null;
+    var isIntersecting = true;
+
+    function startAnimation() {
+      if (animationFrame !== null || document.hidden || !isIntersecting || motionQuery.matches) return;
+      animationFrame = window.requestAnimationFrame(tick);
+    }
+
+    function stopAnimation() {
+      if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+      last = null;
+    }
 
     function tick(ts) {
+      animationFrame = null;
+      if (document.hidden || !isIntersecting) return;
       if (!last) last = ts;
       var dt  = Math.min(ts - last, 64); // cap at ~2 frames to avoid jumps after tab switch
       last    = ts;
 
       var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
       var rgb    = isDark ? '255,95,31' : '140,45,0';
-      var exclusionRect = getExclusionRect();
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.font         = (CH - 6) + "px 'JetBrains Mono', monospace";
@@ -336,10 +434,24 @@
         }
       }
 
-      requestAnimationFrame(tick);
+      animationFrame = window.requestAnimationFrame(tick);
     }
 
-    requestAnimationFrame(tick);
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        isIntersecting = entries[0].isIntersecting;
+        if (isIntersecting) startAnimation();
+        else stopAnimation();
+      });
+      observer.observe(hero);
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stopAnimation();
+      else startAnimation();
+    });
+
+    startAnimation();
   }());
 
   // ----------------------------------------------------------------

@@ -26,7 +26,84 @@ Visuals are embedded into Markdown posts using a strict HTML container structure
 
 ---
 
-## 2. Standalone Visual Files
+## 2. Static Flowcharts
+
+Use semantic HTML and `static/css/flowcharts.css` for decision trees and process
+flows that live inside an article. This is the default because the diagram remains
+sharp, accessible, responsive, theme-aware, and editable without regenerating an
+image. The build includes the stylesheet only when an article contains
+`class="flowchart"`.
+
+Reuse this component vocabulary:
+
+```html
+<figure class="flowchart" aria-labelledby="flowchart-title">
+  <figcaption class="flowchart-caption" id="flowchart-title">
+    <span class="flowchart-caption-label">// Decision name</span>
+    <strong>One sentence describing the decision</strong>
+    <small>Optional instruction for using the chart.</small>
+  </figcaption>
+  <div class="flowchart-body">
+    <div class="flowchart-root">
+      <div class="flowchart-node">...</div>
+    </div>
+    <div class="flowchart-branches">
+      <section class="flowchart-branch">
+        <span class="flowchart-edge-label">Yes</span>
+        <div class="flowchart-node">...</div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-node flowchart-outcome">...</div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <p class="flowchart-note">Optional qualification or source note.</p>
+</figure>
+```
+
+**Flowchart rules:**
+- Use `.flowchart-node`, `.flowchart-branch`, `.flowchart-outcomes`, and
+  `.flowchart-outcome`; do not create diagram-specific card classes.
+- Keep each level to two branches. Split a more complex decision into multiple
+  charts instead of shrinking text or crossing connector lines.
+- Put decision labels in `.flowchart-edge-label` and keep them to one or two words.
+- Use text, never screenshots of text. The chart must remain understandable in the
+  document outline and selectable by the reader.
+- Do not add raw colors, font sizes, spacing, radii, or shadows. The component must
+  use the tokens from `main.css`, and the design-system tests enforce that contract.
+- At 640px and below, branches stack vertically. Check that the reading order still
+  matches the decision order before publishing.
+
+Use `static/templates/flowchart_generator.py` only when a downloadable SVG or PNG
+artifact is required. It reads the same site tokens and rejects off-palette output.
+Do not publish a browser screenshot of either implementation.
+
+When an article specifically needs an image, use a responsive SVG pair inside the
+same component stylesheet:
+
+```html
+<figure class="flowchart-image">
+  <picture>
+    <source media="(max-width: 600px)" srcset="/static/images/.../flowchart-mobile.svg">
+    <img src="/static/images/.../flowchart.svg"
+         width="672" height="472"
+         alt="Describe the complete decision path and outcomes."
+         loading="lazy" decoding="async">
+  </picture>
+  <figcaption>One sentence explaining how to use the chart.</figcaption>
+</figure>
+```
+
+The desktop artboard is 672px wide and the mobile artboard is 342px wide, matching
+the real prose slots. Each SVG must define the light and dark site palettes with a
+`prefers-color-scheme` rule, use 1px neutral connectors, use the accent only for
+route labels and the top edge of a card, and keep outcome copy short. Render and
+inspect both artboards before publishing; labels may sit on an opaque background,
+but they must never touch a card or connector.
+
+---
+
+## 3. Standalone Visual Files
 
 The actual visuals are self-contained HTML files stored in `static/visuals/`. They must contain their own CSS and JS. 
 
@@ -76,7 +153,7 @@ body {
 
 ---
 
-## 3. 3D Requirements (Three.js)
+## 4. 3D Requirements (Three.js)
 
 When building 3D visuals using Three.js:
 1. Use `THREE.WebGLRenderer({ antialias: true, alpha: true })`.
@@ -94,7 +171,7 @@ When building 3D visuals using Three.js:
 
 ---
 
-## 4. Mobile Responsiveness
+## 5. Mobile Responsiveness
 
 Visuals must not break on mobile devices. Because they are loaded via iframes, the responsive logic must exist *inside* the standalone visual HTML file.
 
