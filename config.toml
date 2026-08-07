@@ -11,6 +11,20 @@ author = "Ninad Pathak"
 obsidian_path = ""
 posts_per_page = 20
 
+[[content.categories]]
+slug = "ai-memory"
+title = "AI Memory"
+description = "Practical architecture, evaluation, and implementation guidance for AI agent memory."
+intro = "I write about the systems that let agents remember useful state without turning retrieval into an untestable black box."
+tag_matches = ["memory", "agent-memory", "memory-hierarchy", "memory-management", "agent-architecture", "llm-architecture"]
+
+[[content.categories]]
+slug = "technical-documentation"
+title = "Technical Documentation"
+description = "Technical documentation systems, developer education, and documentation operations."
+intro = "Practical guidance for documentation that helps developers reach a working result."
+tag_matches = ["documentation", "technical-writing", "developer-experience", "api-documentation", "docs-as-code", "documentation-workflow"]
+
 [contact]
 booking_url = "https://zcal.co/i/AGG1iJtv"
 linkedin = "https://linkedin.com/in/ninadwrites"

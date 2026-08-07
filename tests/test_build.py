@@ -80,6 +80,56 @@ Ignored.
         self.assertEqual(rendered.count("loading="), 1)
 
 
+class CategoryArchiveTests(unittest.TestCase):
+    def test_category_loader_assigns_each_post_once_and_uses_explicit_category(self):
+        builder = SiteBuilder.__new__(SiteBuilder)
+        builder.config = {
+            "content": {
+                "categories": [
+                    {
+                        "slug": "ai-memory",
+                        "title": "AI Memory",
+                        "description": "Memory systems for AI agents.",
+                        "tag_matches": ["memory", "agent-memory"],
+                    },
+                    {
+                        "slug": "technical-documentation",
+                        "title": "Technical Documentation",
+                        "description": "Developer documentation.",
+                        "tag_matches": ["documentation"],
+                    },
+                ]
+            }
+        }
+        posts = [
+            {"slug": "agent-memory", "tags": ["agent-memory", "documentation"]},
+            {"slug": "docs", "tags": ["documentation"]},
+            {"slug": "explicit", "category": "technical-documentation", "tags": ["memory"]},
+        ]
+
+        categories = builder.load_categories(posts)
+
+        self.assertEqual([category["slug"] for category in categories], ["ai-memory", "technical-documentation"])
+        self.assertEqual([post["slug"] for post in categories[0]["posts"]], ["agent-memory"])
+        self.assertEqual([post["slug"] for post in categories[1]["posts"]], ["docs", "explicit"])
+        self.assertEqual(posts[0]["category"]["url"], "/articles/ai-memory/")
+        self.assertEqual(posts[2]["category"]["slug"], "technical-documentation")
+
+    def test_sitemap_includes_category_archives(self):
+        builder = SiteBuilder.__new__(SiteBuilder)
+        builder.config = {"site": {"url": "https://example.com"}}
+        categories = [{"slug": "ai-memory", "url": "/articles/ai-memory/", "posts": []}]
+
+        with tempfile.TemporaryDirectory() as directory:
+            builder.output = Path(directory)
+            builder.build_sitemap([], [], [], categories=categories)
+            root = ET.parse(builder.output / "sitemap.xml").getroot()
+            namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+            urls = {node.find("s:loc", namespace).text for node in root.findall("s:url", namespace)}
+
+        self.assertIn("https://example.com/articles/ai-memory/", urls)
+
+
 class SitemapTests(unittest.TestCase):
     def test_static_tool_page_does_not_get_build_date_as_lastmod(self):
         builder = SiteBuilder.__new__(SiteBuilder)

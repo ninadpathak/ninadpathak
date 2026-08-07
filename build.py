@@ -285,6 +285,7 @@ class SiteBuilder:
                 "updated": post.get("updated") or post.get("date"),
                 "description": post.get("description", ""),
                 "tags": post.get("tags", []),
+                "declared_category": post.get("category", ""),
                 "takeaways": post.get("takeaways", []),
                 "status": status,
                 "content": html,
@@ -300,6 +301,39 @@ class SiteBuilder:
             })
 
         return sorted(posts, key=sort_key, reverse=True)
+
+    def load_categories(self, posts: list[dict]) -> list[dict]:
+        """Resolve one editorial category per post without changing article URLs."""
+        configured = self.config["content"].get("categories", [])
+        categories = []
+        by_slug = {}
+        for raw in configured:
+            category = {
+                "slug": raw["slug"],
+                "title": raw["title"],
+                "description": raw["description"],
+                "intro": raw.get("intro", raw["description"]),
+                "tag_matches": {str(tag).lower() for tag in raw.get("tag_matches", [])},
+                "posts": [],
+            }
+            category["url"] = f"/articles/{category['slug']}/"
+            categories.append(category)
+            by_slug[category["slug"]] = category
+
+        for post in posts:
+            explicit = post.get("declared_category", post.get("category", ""))
+            if isinstance(explicit, dict):
+                explicit = explicit.get("slug", "")
+            category = by_slug.get(str(explicit)) if explicit else None
+            if category is None:
+                post_tags = {str(tag).lower() for tag in post.get("tags", [])}
+                category = next((candidate for candidate in categories if post_tags & candidate["tag_matches"]), None)
+            if category is not None:
+                category["posts"].append(post)
+                post["category"] = category
+            else:
+                post["category"] = None
+        return categories
 
     def load_work(self) -> list[dict]:
         work_dir = Path("content/work")
@@ -440,7 +474,7 @@ class SiteBuilder:
             featured_cases=work_cases[:3],
         )
 
-    def build_blog_list(self, posts):
+    def build_blog_list(self, posts, categories):
         posts_per_page = 20
         total_pages = (len(posts) + posts_per_page - 1) // posts_per_page if posts else 1
 
@@ -469,10 +503,21 @@ class SiteBuilder:
                 "blog_list.html", output_path,
                 page="articles",
                 posts=page_posts,
+                categories=categories,
                 current_page_num=page_num,
                 total_pages=total_pages,
                 prev_url=prev_url,
                 next_url=next_url,
+            )
+
+    def build_category_archives(self, categories):
+        for category in categories:
+            self.render(
+                "category_archive.html",
+                f"articles/{category['slug']}/index.html",
+                page="articles",
+                category=category,
+                posts=category["posts"],
             )
 
     def build_posts(self, posts):
@@ -583,9 +628,10 @@ class SiteBuilder:
                 term=term,
             )
 
-    def build_sitemap(self, posts, work_cases, glossary_terms, pillars=None):
+    def build_sitemap(self, posts, work_cases, glossary_terms, pillars=None, categories=None):
         base = self.config["site"]["url"].rstrip("/")
         pillars = pillars or []
+        categories = categories or []
         # Site-freshness proxy: the most recent post's date drives lastmod on
         # listing/static pages so crawlers re-fetch them when new content ships.
         site_lastmod = format_date_iso(posts[0].get("updated") or posts[0].get("date")) if posts else None
@@ -609,6 +655,10 @@ class SiteBuilder:
         article_page_count = (len(posts) + 19) // 20
         for page_num in range(2, article_page_count + 1):
             urls.append((f"/articles/page/{page_num}/", "0.6", "daily", site_lastmod))
+        for category in categories:
+            category_posts = category.get("posts", [])
+            lastmod = format_date_iso(category_posts[0].get("updated") or category_posts[0].get("date")) if category_posts else None
+            urls.append((category["url"], "0.8", "weekly", lastmod))
         for post in posts:
             urls.append((post["url"], "0.9", "monthly", format_date_iso(post.get("updated") or post.get("date"))))
         for case in work_cases:
@@ -824,9 +874,11 @@ class SiteBuilder:
         legal_pages = self.load_legal_pages()
         glossary_terms = self.load_glossary()
         pillars = self.load_pillars(posts)
+        categories = self.load_categories(posts)
 
         self.build_homepage(posts, work_cases)
-        self.build_blog_list(posts)
+        self.build_blog_list(posts, categories)
+        self.build_category_archives(categories)
         self.build_posts(posts)
         self.build_work_list(work_cases)
         self.build_work_pages(work_cases)
@@ -840,7 +892,7 @@ class SiteBuilder:
         self.build_legal_pages(legal_pages)
         self.build_glossary(glossary_terms)
 
-        self.build_sitemap(posts, work_cases, glossary_terms, pillars)
+        self.build_sitemap(posts, work_cases, glossary_terms, pillars, categories)
         self.build_rss(posts)
         self.build_llms_txt(posts, glossary_terms, work_cases, pillars)
         self.build_redirects(posts)

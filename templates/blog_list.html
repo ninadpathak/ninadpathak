@@ -20,6 +20,13 @@
 
 <section class="blog-list-section">
   <div class="container">
+    {% if categories %}
+    <nav class="post-tags" aria-label="Article categories">
+      {% for category in categories %}
+      <a class="tag" href="{{ category.url }}">{{ category.title }} ({{ category.posts | length }})</a>
+      {% endfor %}
+    </nav>
+    {% endif %}
     {% if posts %}
       {% for post in posts %}
       <a href="/articles/{{ post.slug }}/" class="blog-row">
