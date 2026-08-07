@@ -65,14 +65,6 @@ The template places a compact environment table before the command so a reviewer
 
 I ran the included validator against the downloadable template in a fresh Python 3.13.5 environment. It confirmed the required sections, evidence markers, and editable cells that a team must replace with product facts.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Style-guide template validation receipt</div>
-  <div class="visual-container">
-    <img src="/static/images/articles/documentation-style-guide-template-for-developer-teams/style-guide-template-validator.png" alt="Terminal receipt showing that the documentation style-guide template validator passed" loading="lazy">
-  </div>
-</div>
-<p class="visual-caption">The validator checks the terminology, code-evidence, UI-reference, and release-check parts of the template.</p>
-
 The checker cannot tell whether an API response still matches production or whether a screenshot shows the current interface. It fails when someone removes the fields that make those claims inspectable.
 
 ## Keep UI references tied to a released interface
