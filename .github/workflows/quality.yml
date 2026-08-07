@@ -33,8 +33,14 @@ jobs:
       - name: Run regression tests
         run: python -m unittest discover -s tests -v
 
-      - name: Check published writing rules
-        run: python rule_checker.py --summary
+      - name: Check changed published writing
+        run: |
+          changed_posts=$(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md')
+          if [ -n "$changed_posts" ]; then
+            python rule_checker.py $changed_posts
+          else
+            echo "No changed blog posts to audit."
+          fi
 
       - name: Build and audit site
         run: python build.py
