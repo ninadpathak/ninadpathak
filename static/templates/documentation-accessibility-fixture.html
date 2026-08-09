@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8"><title>Accessible documentation fixture</title></head>
+  <body>
+    <main>
+      <h1>Configure a test workspace</h1>
+      <p>Complete this task in a disposable workspace.</p>
+      <h2>Send the request</h2>
+      <pre><code class="language-bash">curl --fail-with-body https://example.test/health</code></pre>
+      <p><a href="/articles/documentation-review-checklist-before-you-publish/">Read the documentation review checklist</a>.</p>
+      <h2>Verify the response</h2>
+      <table>
+        <thead><tr><th scope="col">Signal</th><th scope="col">Expected value</th></tr></thead>
+        <tbody><tr><td>HTTP status</td><td>200</td></tr></tbody>
+      </table>
+      <img src="workflow.png" alt="Terminal response showing HTTP status 200 for the health request">
+    </main>
+  </body>
+</html>
