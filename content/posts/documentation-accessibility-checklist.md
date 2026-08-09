@@ -1,24 +1,24 @@
 ---
-title: "Documentation Accessibility Checklist"
+title: "Accessibility Testing for Documentation: A Release Checklist"
 date: 2026-08-09
 updated: 2026-08-09
-description: "Use a practical documentation accessibility checklist for headings, code, links, tables, visuals, keyboard access, and rendered-page review."
+description: "Test developer documentation for release-blocking accessibility failures in structure, code, links, visuals, keyboard use, and rendered output."
 tags: ["documentation", "accessibility", "developer-experience"]
 takeaways:
-  - "Semantic structure gives documentation a route that assistive technology can navigate."
-  - "A documentation-specific checker catches repeatable markup defects before human review."
-  - "Keyboard and screen-reader checks remain necessary after automated validation."
+  - "Accessibility testing catches documentation failures that a visual review can miss."
+  - "A documentation-specific checker removes repeatable structural defects before manual testing."
+  - "Keyboard, zoom, and screen-reader checks decide whether a reader can complete the task."
 status: published
 slug: "documentation-accessibility-checklist"
 ---
 
-Documentation can look finished yet force a reader to reconstruct its structure. A bold heading, a link named “here,” or a screenshot holding the only success signal turns a task page into a visual-only path.
+Accessibility testing matters for documentation because a page can look finished and still leave a reader unable to complete its task. A bold heading, a link named “here,” or a screenshot holding the only success signal can turn setup instructions into a visual-only path.
 
-I built and ran a [documentation accessibility checker](/static/templates/check_documentation_accessibility.py) against a broken fixture and its repaired version. It checks structural failures so the human review can focus on the experience a parser cannot judge.
+Use this release checklist when you need to decide what to automate, what needs manual testing, and which failure should block a documentation deploy. I built and ran a [documentation accessibility checker](/static/templates/check_documentation_accessibility.py) against a broken fixture and its repaired version so the human review can focus on the experience a parser cannot judge.
 
-## Documentation accessibility checklist
+## Accessibility testing checklist for a documentation release
 
-Use this table during authoring and again on the rendered page. The checks point to the information a reader needs, not to a generic compliance score.
+Run this table against generated HTML and the rendered page. It separates repeatable source failures from the reader-path checks that only a person can complete.
 
 | Page element | What must survive | Quick check |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ Use this table during authoring and again on the rendered page. The checks point
 
 The script is deliberately narrow. It flags missing image alternatives, vague links, heading jumps, tables without header cells, and code elements without a language class.
 
-## Review documentation structure before visual styling
+## Test documentation structure before visual styling
 
 A documentation page needs structure that exists in the document model, not only in its theme. [Google’s accessibility guidance](https://developers.google.com/style/accessibility) recommends descriptive headings in a logical hierarchy, and [Harvard’s structural guidance](https://accessibility.huit.harvard.edu/identify-headings-lists-and-tables) makes the consequence clear: assistive technologies can navigate structure only when the markup carries it.
 
@@ -49,7 +49,7 @@ Use a list when several items belong together and a table only when readers need
 
 [Microsoft State University’s checklist](https://webaccess.msu.edu/tutorials/basics/checklist) recommends simple tables with row and column headers. If the relationships cannot be stated clearly in headers, split the table or use prose and a list instead.
 
-## Make code and links usable outside a visual scan
+## Test code and links on the reader’s path
 
 A code block is part of the interface. The reader should be able to copy it, recognize its language, understand the required state, and confirm what a successful result looks like.
 
@@ -72,7 +72,7 @@ A link list is often how people scan a technical page. “Click here” becomes 
 
 Name unusual behavior near the link when it changes the next move. A download, external application, same-page jump, or new tab should not be a surprise.
 
-## Give visuals and tables an equivalent path
+## Test visual information has an equivalent text path
 
 An alternative is not a caption copied into an `alt` attribute. It is the information someone needs when they cannot use the visual presentation.
 
@@ -88,11 +88,11 @@ A red error state must also say that the request failed. Color can reinforce a l
 
 Use the [WCAG 2.2 Quick Reference](https://www.w3.org/WAI/WCAG22/quickref/) to inspect the relevant success criteria for text alternatives, information and relationships, contrast, keyboard operation, and link purpose. The standard is a reference point, not a replacement for trying the page’s real task.
 
-## Test the rendered documentation page
+## Run automated checks before manual documentation testing
 
 Automation can confirm markup patterns. It cannot tell whether focus is easy to find, whether a code sample wraps into unreadable fragments, or whether the page still makes sense at high zoom.
 
-### Run the checker before human review
+### Automate repeatable source failures
 
 I used the checker below on a fixture with one page title, ordered headings, a declared Bash block, descriptive link text, table headers, and an image alternative. The run passed after I restored those contracts.
 
@@ -106,14 +106,14 @@ I used the checker below on a fixture with one page title, ordered headings, a d
 
 Run it against generated HTML, not only the source Markdown. The rendered page is where plugins, templates, syntax highlighters, and image components can change the structure you intended.
 
-### Follow the reader’s route with a keyboard
+### Test the reader’s route with a keyboard and zoom
 
 Tab through the page from the browser address bar. The current control should stay visible, links and controls should work without a pointer, and the order should match the reading order.
 
 Then zoom until the page reflows and read the page with a screen reader when possible. The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) covers the wider release review, including links, metadata, and the rendered frame.
 
-## Keep the accessibility check with the documentation source
+## Make accessibility testing a documentation release gate
 
-Put this checklist beside the page template and run the checker in the same preview step that validates links and examples. The [documentation style guide template](/articles/documentation-style-guide-template/) can record the owner and release trigger for rules that change with the product.
+Put this checklist beside the page template and run the checker in the same preview step that validates links and examples. The [documentation style guide template](/articles/documentation-style-guide-template/) can record the owner, release trigger, and manual-test boundary for rules that change with the product.
 
 Accessibility gets cheaper when it is part of the authoring contract rather than a repair after launch. Start with one task page, preserve the semantics that explain its route, and let the rendered review show what the source alone cannot prove.
