@@ -14,7 +14,7 @@ slug: "documentation-accessibility-checklist"
 
 Accessibility testing matters for documentation because a page can look finished and still leave a reader unable to complete its task. A bold heading, a link named “here,” or a screenshot holding the only success signal can turn setup instructions into a visual-only path.
 
-Use this release checklist when you need to decide what to automate, what needs manual testing, and which failure should block a documentation deploy. I built and ran a [documentation accessibility checker](/static/templates/check_documentation_accessibility.py) against a broken fixture and its repaired version so the human review can focus on the experience a parser cannot judge.
+Use this release checklist when you need to decide what to automate, what needs manual testing, and which failure should block a documentation deploy. I built and ran a [documentation accessibility checker](/static/downloads/documentation-accessibility-checker.zip) against a broken fixture and its repaired version so the human review can focus on the experience a parser cannot judge.
 
 ## Accessibility testing checklist for a documentation release
 
@@ -29,7 +29,7 @@ Run this table against generated HTML and the rendered page. It separates repeat
 | Visual | Information beyond pixels | Meaningful images have useful alternatives, decorative images have empty alternatives, and complex visuals have nearby equivalent detail |
 | Rendered page | Keyboard and zoom use | Focus remains visible, interactive controls work from a keyboard, and reflow does not hide the task |
 
-<p><a class="btn btn-primary" href="/static/templates/check_documentation_accessibility.py">Download the documentation accessibility checker</a></p>
+<p><a class="btn btn-primary" href="/static/downloads/documentation-accessibility-checker.zip" download>Download the documentation accessibility checker (.zip)</a></p>
 
 The script is deliberately narrow. It flags missing image alternatives, vague links, heading jumps, tables without header cells, and code elements without a language class.
 
