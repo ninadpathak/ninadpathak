@@ -43,20 +43,6 @@
   overflow: hidden;
 }
 
-/* Exact 13-inch MacBook Air Retina viewport, never stretched or cropped. */
-.visual-container--macbook-air-terminal {
-  height: auto;
-  aspect-ratio: 2560 / 1664;
-  background: #0d0f14;
-}
-
-.visual-container--macbook-air-terminal img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 /* Fallback for smaller screens */
 @media (max-width: 768px) {
   .visual-container {

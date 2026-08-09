@@ -98,8 +98,8 @@ I used the checker below on a fixture with one page title, ordered headings, a d
 
 <div class="visual-wrapper">
   <div class="visual-title">Documentation accessibility checker on the repaired fixture</div>
-  <div class="visual-container visual-container--macbook-air-terminal">
-    <img src="/static/images/articles/documentation-accessibility-checklist/checker-pass.png" alt="MacBook Air terminal window showing python3 check_documentation_accessibility.py rendered-page.html and a passing structural accessibility result" loading="lazy">
+  <div class="visual-container" style="height: auto; aspect-ratio: 2560 / 1664; background: #0d0f14; overflow: hidden;">
+    <img src="/static/images/articles/documentation-accessibility-checklist/checker-pass.png" alt="MacBook Air terminal window showing python3 check_documentation_accessibility.py rendered-page.html and a passing structural accessibility result" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: contain;">
   </div>
 </div>
 <p class="visual-caption">The checker reports a passed structural check for the repaired fixture. It does not claim to test keyboard operation, color contrast, or screen-reader output.</p>
