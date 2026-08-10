@@ -255,6 +255,7 @@ def get_prose(text):
     body = re.sub(r'<!--.*?-->', '', body, flags=re.S)
     body = re.sub(r'```.*?```', '', body, flags=re.S)
     body = re.sub(r'`[^`]+`', '', body)
+    body = re.sub(r'\]\([^)]*\)', ']', body)
     body = re.sub(r'<div class="visual-wrapper">.*?</div>\s*</div>', '', body, flags=re.S)
     body = re.sub(r'<[^>]+>', '', body)
     return body
@@ -368,7 +369,7 @@ def check_post(path):
         pass
 
     # ── 11. Missing visual embed ───────────────────────────────────────
-    if 'static/visuals' not in text:
+    if 'static/visuals' not in text and 'static/images/' not in text:
         issues.append(('info', 'no-visual', None, 'No visual embed found'))
 
     return issues

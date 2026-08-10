@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1344" height="640" viewBox="0 0 1344 640" role="img" aria-labelledby="title desc">
+  <title id="title">A task-based heading names action, object, and successful state</title>
+  <desc id="desc">The vague heading Setup becomes Configure the client with an API key. Colored labels identify action, object, and success state.</desc>
+  <rect width="1344" height="640" fill="#f8f8f6"/>
+  <rect x="72" y="96" width="1200" height="448" rx="12" fill="#ffffff" stroke="#e0e0dc" stroke-width="3"/>
+  <text x="120" y="170" font-family="Inter, Arial, sans-serif" font-size="28" fill="#3a3a3a">A heading should expose the next useful move.</text>
+  <text x="120" y="255" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600" fill="#888888">Vague label</text>
+  <rect x="120" y="280" width="480" height="82" rx="8" fill="#efefed"/>
+  <text x="152" y="333" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="600" fill="#3a3a3a">Setup</text>
+  <path d="M650 322h66" stroke="#d44000" stroke-width="5" stroke-linecap="round"/>
+  <path d="M700 304l24 18-24 18" fill="none" stroke="#d44000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="768" y="255" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600" fill="#3a3a3a">Reader task</text>
+  <rect x="768" y="280" width="448" height="168" rx="8" fill="#fdf1ec" stroke="#d44000" stroke-width="3"/>
+  <text x="802" y="335" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="600" fill="#0e0e0e">Configure the client</text>
+  <text x="802" y="380" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="600" fill="#0e0e0e">with an API key</text>
+  <rect x="802" y="478" width="136" height="38" rx="19" fill="#d44000"/>
+  <text x="828" y="504" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#ffffff">ACTION</text>
+  <rect x="954" y="478" width="134" height="38" rx="19" fill="#3a3a3a"/>
+  <text x="980" y="504" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#ffffff">OBJECT</text>
+  <rect x="1104" y="478" width="96" height="38" rx="19" fill="#888888"/>
+  <text x="1116" y="504" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#ffffff">CONTEXT</text>
+</svg>
