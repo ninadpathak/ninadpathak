@@ -2,110 +2,106 @@
 title: "How to Write Task-Based Documentation Headings"
 date: 2026-08-10
 updated: 2026-08-10
-description: "Turn vague documentation labels into headings that reveal the reader’s next task, decision, or recovery path."
+description: "Write documentation headings that tell a reader which task, decision, concept, or recovery path a section covers."
 tags: ["technical-writing", "documentation", "developer-experience"]
 takeaways:
-  - "A heading should name the action, decision, concept, or recovery path in its section."
-  - "Heading levels describe content structure, not visual styling."
-  - "Read the outline without body copy to test whether a skimming reader can find the next move."
+  - "Use a task heading when a section tells the reader how to reach a specific result."
+  - "Use a descriptive noun phrase when a section explains a concept or documents a reference item."
+  - "Review the heading outline separately from the body copy before publishing."
 status: published
 slug: "how-to-write-task-based-documentation-headings"
 ---
 
-A heading called “Setup” asks the reader to open the section before it reveals what setup means. That small delay gets expensive in a long guide, especially when the reader has returned to fix a failed request or complete one unfinished step.
+A heading should tell a scanning reader what the section contains. For a procedure, name the result or task.
 
-Task-based headings make the route visible before the body copy begins. They name the work, the thing being changed, or the condition the reader needs to recover from.
+For a concept, name the concept. For a failure, name the condition and the recovery path.
+
+That is the whole rule. Task-based headings are not a mandate to put a verb in every heading.
 
 <div class="visual-wrapper">
-  <div class="visual-title">A vague label versus a reader task</div>
+  <div class="visual-title">An illustrative heading rewrite</div>
   <picture>
-    <img src="/static/images/articles/how-to-write-task-based-documentation-headings/task-heading-anatomy.svg" width="1344" height="640" alt="A diagram changes the vague heading Setup into Configure the client with an API key, then labels the reader task with action, object, and context." loading="lazy" decoding="async">
+    <img src="/static/images/articles/how-to-write-task-based-documentation-headings/task-heading-anatomy.svg" width="1344" height="640" alt="An illustrative example rewrites the label Setup as Configure the client with an API key, identifying an action, object, and context." loading="lazy" decoding="async">
   </picture>
 </div>
-<p class="visual-caption">The better heading gives a skimming reader an action, the thing it applies to, and enough context to decide whether the section is relevant.</p>
+<p class="visual-caption">This example shows the difference between a topic label and a heading that states the work the section covers.</p>
 
-## Give each section one reader job
+## Match the heading to the section's job
 
-A heading is a navigation label, a link target, and a promise about the content below it. [Google’s documentation style guide](https://developers.google.com/style/headings) recommends descriptive, unique headings and says that a tutorial title should be task-based when the document’s primary purpose is to guide work.
+A heading is a navigation label, a link target, and a promise about the content below it. [Google's documentation style guide](https://developers.google.com/style/headings) recommends descriptive, unique headings and task-based tutorial titles when a document primarily guides work.
 
-Start by naming the job the section performs. A procedure moves the reader through work, an explanation resolves a concept, reference identifies a specific object, and recovery helps the reader respond to a condition.
+Start by deciding what the section does. A procedure helps a reader reach a result, while an explanation answers a conceptual question.
 
-| Section job | Weak label | Heading that exposes the job |
+A reference section identifies a field, object, or API behavior. A recovery section handles a known failure condition.
+
+| Section job | Generic label | Illustrative rewrite |
 | --- | --- | --- |
 | Procedure | Setup | Create the project and install the CLI |
 | Configuration | Configuration | Configure the client with an API key |
 | Verification | Testing | Verify the endpoint accepts a signed test event |
 | Recovery | Errors | Recover when signature verification fails |
-| Explanation | Authentication | Understand how token scopes limit an integration |
-| Reference | Options | Choose a retry policy for background jobs |
+| Explanation | Authentication | Token scopes and integration access |
+| Reference | Options | Retry policy options for background jobs |
 
-The rewrites do not need to be longer for their own sake. They need to remove the question that forces a reader to inspect the paragraph before deciding whether the section helps.
+The right-hand column is not a universal template. It shows how the heading can name the reader's task or the subject of the section instead of only naming a broad topic.
 
-## Name action, object, and context when the section guides work
+## Write task headings for procedural sections
 
-A procedure heading often needs a verb because it represents work that changes state. “Configure the client with an API key” tells the reader what to do, what they will touch, and the constraint that makes the step specific.
+Use a task heading when the section tells the reader how to change a system or reach a checked result. The heading should usually make the outcome visible before the reader opens the section.
 
-The context can be a prerequisite, a target environment, a decision boundary, or a failure condition. Add it only when it changes what the reader should do next.
+For example, `Configure the client with an API key` tells the reader what they will do and what it applies to. `Configuration` tells them only that the topic is configuration.
 
-Use the reader’s goal before naming the product control. [Diátaxis describes how-to guides as goal-oriented directions](https://diataxis.fr/how-to-guides/) that should be framed around a person’s task or problem, not a system walking through its own controls.
+Add context when it changes the next action. An environment, prerequisite, failure condition, or target object belongs in the heading only if omitting it would make the task ambiguous.
 
-That distinction keeps headings from becoming a menu transcription. “Set the `retry_after` field” may be accurate, yet “Delay retries after a rate-limit response” explains why a reader would open the section.
+[Diátaxis describes how-to guides as goal-oriented directions](https://diataxis.fr/how-to-guides/). That is a useful check for documentation headings: prefer the reader's goal over a list of product controls.
 
-## Use noun phrases for concepts and references
+For example, `Delay retries after a rate-limit response` explains the intended behavior. `Set the retry_after field` can be correct, but it makes the reader inspect the section before learning why that setting matters.
 
-A task verb is useful when a section changes something. It becomes awkward when the page needs to define a concept or identify a field, so use a noun phrase that names the subject and its boundary instead.
+## Use descriptive noun phrases for concepts and references
 
-“Token scopes and integration access” gives a reader more help than “Overview.” “Webhook signature headers” gives them a better anchor than “Details.”
+A verb makes sense when the reader is meant to act. It becomes awkward when the section exists to explain a concept or document a specific item.
 
-The test is simple: can a reader predict the section’s content from its label alone? If the only answer is “some information about this topic,” the heading still depends on surrounding prose to do its job.
+Use a descriptive noun phrase for those sections. `Token scopes and integration access` gives the reader a clear subject and boundary. `Overview` does not.
 
-## Keep hierarchy separate from wording
+The same rule applies to reference material. `Webhook signature headers` is a useful anchor because it names the object being documented. `Details` forces the reader to open the section to learn what those details are about.
 
-<!-- evidence-three: W3C is the named source institution in the linked tutorial. -->
-A precise sentence is not automatically a good heading if it appears at the wrong level. [The WAI headings tutorial](https://www.w3.org/WAI/tutorials/page-structure/headings/) explains that heading ranks communicate the organization of a page and create in-page navigation for browsers and assistive technologies.
+A practical test is simple: can someone predict the section's subject from the heading alone? If the best answer is only "information about this topic," the label needs more work.
 
-Use one page title for the page’s primary job. Use major section headings for its main tasks or concepts, then use nested subheadings to break a complex stage into smaller work that belongs beneath it.
+## Keep heading hierarchy separate from heading wording
 
-Do not choose a heading level for its size. Styling can change the visual presentation, but a skipped level changes the document structure a screen reader and a table of contents need to interpret.
+A precise heading can still be placed at the wrong level. [The World Wide Web Consortium's headings tutorial](https://www.w3.org/WAI/tutorials/page-structure/headings/) explains that heading ranks communicate page structure and support in-page navigation for browsers and assistive technology.
 
-## Test the outline before polishing paragraphs
+Use one page title for the page's primary job. Use major section headings for the main tasks or concepts, then nest headings only for work that belongs within a parent section.
 
-Hide the body copy and read the Markdown headings from top to bottom. A useful outline exposes where the reader begins, which work follows, where a choice appears, and how they can verify or recover.
+Do not choose a heading level because of its visual size. CSS can change how a heading looks.
 
-I used the tiny audit below on a webhook outline during this article’s preparation. It catches a deliberately narrow group of labels, so use it as a prompt for review rather than proof that every heading is good.
+Its level still changes the document outline and navigation structure.
 
-```python
-import re
-from pathlib import Path
+## Review the outline before the prose
 
-VAGUE = {"overview", "setup", "configuration", "usage", "examples", "errors", "conclusion"}
-HEADING = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
+Read the headings without the body copy. The review asks a narrower question than an editorial review: does the outline show the tasks, concepts, decisions, and recovery paths that the page promises to cover?
 
-for line in Path("webhook-guide-outline.md").read_text().splitlines():
-    match = HEADING.match(line)
-    if match:
-        text = match.group(2)
-        status = "REWRITE" if text.lower() in VAGUE else "OK"
-        print(f"{status:7} {text}")
-```
-
-The first fixture contained `Setup` and `Errors`, and the audit flagged both labels. Replacing them with “Create the endpoint that receives events” and “Recover when signature verification fails” produced an outline where every heading named a subject or a reader task.
+A procedural guide might have an outline like this:
 
 ```text
-OK      Configure webhooks
-OK      Create the endpoint that receives events
-OK      Verify the endpoint accepts a signed test event
-OK      Recover when signature verification fails
-
-Outline names a subject or reader task at every level.
+Configure webhooks
+Create the endpoint that receives events
+Verify the endpoint accepts a signed test event
+Recover when signature verification fails
 ```
 
-The script cannot judge whether “Configure the client” is the right task for your reader. That call still needs product knowledge, a clear starting state, and the same rendered-page review you would apply to any [documentation release checklist](/articles/documentation-review-checklist-before-you-publish/).
+This is an example outline, not a claim about every webhook guide. It works because each heading names a distinct part of the reader's path.
 
-## Rewrite headings where readers lose their place
+Compare it with labels such as `Setup`, `Testing`, and `Errors`. Those labels may be acceptable inside a tightly scoped interface, but they do not describe a task or subject by themselves.
 
-Start with the points where a reader has the strongest reason to scan: the first action, a prerequisite, a verification step, a risky decision, and a likely recovery path. Those labels determine whether the rest of the guide feels like a route or a pile of topics.
+## Rewrite headings where the reader needs to choose a next step
 
-A full tutorial needs the broader path from starting state to checked result. The [technical tutorial guide](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/) covers that structure, including runnable examples and visible checkpoints.
+Start with the headings that carry the most navigation work: the first action, prerequisites, verification, risky decisions, and recovery. Those sections are where a reader is most likely to scan for a specific answer.
 
-For an existing page, change one outline before rewriting its prose. The section label should tell the reader why the paragraph exists, and the paragraph should then deliver exactly that work.
+Do not rewrite every heading into an imperative. A section that explains token scopes should say so.
+
+A section that documents a request field should name that field. A section that guides a reader through a result should state the result.
+
+For a full tutorial structure, see [How to Write a Technical Tutorial That Actually Teaches](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/). Before publishing, use the [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) to check the rendered outline, links, and navigation.
+
+The useful standard is not "every heading starts with a verb." It is simpler: a reader should be able to tell why a section exists before they have to read it.
