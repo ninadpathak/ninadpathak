@@ -325,6 +325,11 @@ entries:
     url: "https://www.firecrawl.dev/blog/scrapingbee-alternatives"
 
   # OpenComputer — agent sandbox guides
+  - title: "Building a Greptile Clone with Claude and OpenComputer"
+    client: "OpenComputer"
+    category: "DevTools"
+    url: "https://opencomputer.dev/blog/pr-review-agent"
+
   - title: "Claude Agent SDK: Where Does the Agent Actually Run?"
     client: "OpenComputer"
     category: "AI Systems"
