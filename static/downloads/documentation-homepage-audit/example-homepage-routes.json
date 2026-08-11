@@ -1,0 +1,8 @@
+{
+  "routes": [
+    {"job": "first action", "label": "Send your first request", "url": "/docs/quickstart/", "audience": "new integrator"},
+    {"job": "returning task", "label": "API reference", "url": "/docs/api/", "audience": "implementer"},
+    {"job": "recovery", "label": "Troubleshoot failed requests", "url": "/docs/troubleshooting/", "audience": "implementer"},
+    {"job": "exploration", "label": "Browse product guides", "url": "/docs/guides/", "audience": "evaluator"}
+  ]
+}
