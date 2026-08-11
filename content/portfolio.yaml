@@ -247,3 +247,105 @@ entries:
     client: "LambdaTest"
     category: "AI Systems"
     url: "https://www.testmu.ai/blog/ai-testing-vs-traditional-testing"
+
+  # Firecrawl — new pieces
+  - title: "What Is an Agent Harness? The Infrastructure That Makes AI Agents Actually Work"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/what-is-an-agent-harness"
+
+  - title: "What is Agentic Search (and Why Cached Results Aren't Enough)"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/what-is-agentic-search"
+
+  - title: "AI Agent Sandbox: How to Safely Run Autonomous Agents in 2026"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/ai-agent-sandbox"
+
+  - title: "10 Best AI Voice Agent Platforms in 2026"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/ai-voice-agent-platforms"
+
+  - title: "Antigravity Skills Worth Installing in 2026"
+    client: "Firecrawl"
+    category: "DevTools"
+    url: "https://www.firecrawl.dev/blog/antigravity-skills"
+
+  - title: "API for AI Agents: Types, Integration Patterns, and Tools That Actually Work"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/api-for-ai-agents"
+
+  - title: "Best Search Tools for AI Agents in 2026"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/best-search-tools-for-agents"
+
+  - title: "Grounding Your LLM with Live Web Data: A Developer's Guide"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/llm-grounding"
+
+  - title: "OpenClaw vs Hermes Agent: Which One Should You Actually Run?"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/openclaw-vs-hermes"
+
+  - title: "Playwright vs Puppeteer: Which Browser Automation Tool Should You Choose in 2026?"
+    client: "Firecrawl"
+    category: "Developer Infrastructure"
+    url: "https://www.firecrawl.dev/blog/playwright-vs-puppeteer"
+
+  - title: "How To Scrape A Website To Markdown For LLMs And AI Agents"
+    client: "Firecrawl"
+    category: "Developer Infrastructure"
+    url: "https://www.firecrawl.dev/blog/scrape-a-website-to-markdown"
+
+  - title: "Training Data vs. Retrieved Data vs. Live Web Data: What Makes Your AI Agent Smarter"
+    client: "Firecrawl"
+    category: "AI Systems"
+    url: "https://www.firecrawl.dev/blog/training-vs-retrieved-vs-live-web-data"
+
+  - title: "How to Build a Competitor Feature Alert System Using Firecrawl Monitor"
+    client: "Firecrawl"
+    category: "Developer Infrastructure"
+    url: "https://www.firecrawl.dev/blog/competitor-feature-alert-system-firecrawl-monitor"
+
+  - title: "5 Best Nimbleway Alternatives in 2026"
+    client: "Firecrawl"
+    category: "Developer Infrastructure"
+    url: "https://www.firecrawl.dev/blog/nimbleway-alternatives"
+
+  - title: "5 Best ScrapingBee Alternatives for Web Scraping in 2026"
+    client: "Firecrawl"
+    category: "Developer Infrastructure"
+    url: "https://www.firecrawl.dev/blog/scrapingbee-alternatives"
+
+  # OpenComputer — agent sandbox guides
+  - title: "Claude Agent SDK: Where Does the Agent Actually Run?"
+    client: "OpenComputer"
+    category: "AI Systems"
+    url: "https://opencomputer.dev/guides/claude-agent-sdk-sandbox"
+
+  - title: "GitHub Codespaces vs Gitpod for Autonomous AI Agents"
+    client: "OpenComputer"
+    category: "Developer Infrastructure"
+    url: "https://opencomputer.dev/guides/codespaces-gitpod-agents"
+
+  - title: "E2B Alternatives for AI Agent Sandboxes (2026)"
+    client: "OpenComputer"
+    category: "Developer Infrastructure"
+    url: "https://opencomputer.dev/guides/e2b-alternatives"
+
+  - title: "Podman vs Docker for Running Untrusted Code"
+    client: "OpenComputer"
+    category: "Developer Infrastructure"
+    url: "https://opencomputer.dev/guides/podman-vs-docker-untrusted-code"
+
+  - title: "Python Sandbox: Every Approach, Honestly Ranked"
+    client: "OpenComputer"
+    category: "Developer Infrastructure"
+    url: "https://opencomputer.dev/guides/python-sandbox"
