@@ -1,0 +1,26 @@
+{
+  "current_version": "v3",
+  "routes": [
+    {
+      "path": "/docs/v3/authentication/",
+      "version": "v3",
+      "status": "supported",
+      "canonical": "/docs/v3/authentication/",
+      "redirect_to": ""
+    },
+    {
+      "path": "/docs/v2/authentication/",
+      "version": "v2",
+      "status": "supported",
+      "canonical": "/docs/v3/authentication/",
+      "redirect_to": ""
+    },
+    {
+      "path": "/docs/v1/authentication/",
+      "version": "v1",
+      "status": "retired",
+      "canonical": "/docs/v1/authentication/",
+      "redirect_to": ""
+    }
+  ]
+}
