@@ -1,0 +1,19 @@
+{
+  "quickstart": {
+    "credentials": "test key and scope",
+    "request": "copyable GET request",
+    "expected_response": "recognizable JSON object",
+    "next_route": "endpoint reference"
+  },
+  "reference": {
+    "endpoint": "GET /v1/projects",
+    "parameters": "limit and cursor",
+    "responses": "success schema",
+    "errors": "status and diagnostic field"
+  },
+  "recovery": {
+    "failure": "401 response",
+    "cause": "missing or invalid credential",
+    "action": "replace the test key and retry"
+  }
+}
