@@ -1,8 +1,8 @@
 ---
 category: ai-engineering
 date: '2026-04-19'
-description: A 1M token context window is not memory. Treating it like one is how
-  you build expensive systems that still forget what they were doing last Tuesday.
+description: Context is a per-request reasoning budget. Memory is persistent state
+  retrieved into a later request. Long input capacity does not make them interchangeable.
 status: published
 tags:
 - ai
@@ -11,352 +11,166 @@ tags:
 - context-window
 - infrastructure
 title: 'Context Windows vs Memory: Why They Are Not the Same Thing'
+updated: '2026-08-18'
 ---
 
-You have a 1M token context window and your agent still forgets what the user said three turns ago. Your RAG pipeline returns stale results.
+A model can accept a long prompt and still fail to use the fact that answers the question. It can also answer perfectly during one request and know nothing about that exchange when the next request begins.
 
-Your agent loses track of what it was doing mid-task. Context windows and memory solve different problems at different cost profiles with different failure modes, and conflating them produces systems that are somehow over-engineered and under-equipped at the same time.
+Those failures have different causes. Context is a per-request reasoning budget, and memory is persistent state that a system stores and retrieves into a later request.
 
-I have watched engineers build elaborate pipelines around long context windows and then wonder why their system still "forgets." The confusion is not a philosophical one.
+| Property | Context window | Memory system |
+|---|---|---|
+| Scope | One request | Multiple requests or sessions |
+| Contents | Instructions, user input, retrieved evidence, and working state | Facts, events, preferences, summaries, and other durable state |
+| Selection | Prompt construction | Write, retrieval, ranking, expiry, and conflict policies |
+| Common failure | Relevant evidence is absent or used poorly | The wrong state is stored, retrieved, or allowed to outlive its validity |
 
-It is an engineering reality with concrete consequences for how you build, price, and debug AI systems.
+The distinction is the starting point for architecture decisions. A larger context window changes how much a model can receive at once, but it does not create persistence or guarantee recall.
 
+## Context is the model's per-request workspace
 
-<div class="visual-wrapper">
-  <div class="visual-title">Retrieval Decay: Context Window vs Memory</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/context-memory.html" title="Context window versus persistent memory retrieval decay" loading="lazy"></iframe>
-  </div>
-</div>
+A context window bounds the token sequence available to a model during a request. That sequence may include system instructions, conversation turns supplied again by the application, retrieved passages, tool results, and room for the response.
 
-## What a context window actually is
+The model does not independently carry that sequence into the next request. If an application appears to remember earlier turns, the application or serving layer has supplied the relevant state again.
 
-A context window is the total amount of text a model can see in a single inference call. You pass in 500K tokens, the model processes all 500K, and produces an output.
+### Accepted input and usable evidence are different limits
 
-That processing happens in one forward pass through the transformer.
+An API accepting a token sequence proves that the input passed a capacity boundary. It does not prove that the model will use every relevant item equally well for a particular task.
 
-The arithmetic behind this matters. Transformer attention is O(n^2) in sequence length.
+Document position, distractors, prompt structure, model version, and task type can all affect the answer. Long context windows can lose information in the middle, so advertised capacity is not a recall guarantee.
 
-Double your context from 2K to 4K tokens, and you do not double the compute. You roughly quadruple it.
+### Context is appropriate for immediate reasoning
 
-That quadratic cost is why long context models are expensive in ways that are not obvious from the API pricing sheet. The actual FLOPs scale superlinearly.
+Context is the right place for evidence the model must compare in the current request. A code-editing task may need the target function, its interface, relevant tests, and the instruction that defines the change at the same time.
 
-Pouring your entire data store into the context window and calling it done does not survive contact with scale. The economics break first, and the retrieval quality breaks right behind them.
+One-shot document analysis and in-context examples fit the same pattern. The input is useful now, and no later request should depend on the model retaining it without an explicit storage step.
 
-Context is also ephemeral in a specific sense. When the inference call ends, the context is gone.
+## Memory preserves state beyond one request
 
-There is no persistence unless you build it explicitly. A new request starts with a blank slate every time unless you carry state forward yourself.
+A memory system records information outside the model invocation so that a later request can recover it. The store might be relational, key-value, vector, graph-based, append-only, or a combination chosen for the state being kept.
 
-## What memory actually is
+Persistence alone is not enough. The application still needs policies for what to write, how to retrieve it, which version is current, when to expire it, and how to place selected state into context.
 
-Memory, in the AI systems sense, is persistent state that survives across inference calls. It lives in a database, a vector store, a key-value cache, a knowledge graph, or some combination of these.
+### Conversation replay is context construction, not model memory
 
-The model does not retain it automatically. You have to fetch it, format it, and inject it into the next context window yourself.
+A chat interface often resends prior turns on every request. That can provide continuity, but the continuity comes from replaying stored history into the current context.
 
-Where most junior engineers get confused is right here. They think the model "remembers" what was said earlier in the conversation because they can reference it in their system prompt.
+Once the history grows beyond the available budget, the application must select, summarize, or retrieve from it. [Contextual compression for agent memory](/articles/contextual-compression-for-agent-memory/) covers that selection problem without treating every old token as equally useful.
 
-What actually happens is that you, the developer, are stuffing that history back into the context window on every request. The model has no memory between calls.
+### Persistent state needs more than similarity search
 
-It has context, and context is not the same thing.
+A vector database can retrieve semantically related passages, but similarity is only one part of memory. Account state, temporal order, permissions, validity periods, and entity identity often need structured fields and explicit filters.
 
-Memory systems solve the persistence problem. They give you a way to store facts, conversation state, user preferences, and world knowledge across time.
+The useful question is not whether a vector store counts as memory. It is whether the complete storage and retrieval path can return the right state, for the right entity, at the right time.
 
-They let your system learn. A context window without a memory layer is a system that resets completely on every interaction.
+## Lost in the Middle shows why position matters
 
-Memory is infrastructure, not magic, and that framing changes how you build it. When I look at what actually works in production AI systems, the memory layer is almost always boring technology doing mundane work: Postgres for structured data, a vector database for embeddings, Redis for fast key-value state, plain old append-only logs.
+The [Lost in the Middle paper](https://arxiv.org/abs/2307.03172) tested multi-document question answering and key-value retrieval while changing where the relevant information appeared. The authors observed that performance was often strongest when relevant information appeared near the beginning or end and weaker when it appeared in the middle, including for explicitly long-context models.
 
-The excitement is in how these pieces are combined, not in any single memory technology being fundamentally different.
+That result is more precise than saying long prompts always fail. It shows that accepted length and robust use are separate properties, and that position can change retrieval reliability.
 
-## The core difference in one sentence
+### A document can fit and still be used poorly
 
-Context is what the model can see right now. Memory is what the model has seen before.
+Suppose a contract fits inside the advertised window and the clause needed for an answer sits halfway through it. Capacity says the clause can be submitted, but the Lost in the Middle result says its position can still affect whether the model uses it.
 
-The first is a per-request budget. The second is a persistent store.
+Moving the clause, changing the distractors, or changing the question may alter performance. A single successful request therefore does not validate the rest of the window or the rest of the corpus.
 
-The distinction sounds obvious when stated plainly, but it gets violated constantly in production systems. I see it most often in two patterns.
+### Retrieval reduces the search space but does not create persistence
 
-The first is engineers who use long context as a substitute for a retrieval system. They dump everything into the context window because it is easier than building a proper memory pipeline.
+Retrieval can select a smaller set of passages before generation and place the strongest evidence where the prompt makes it easy to use. That is a context-construction improvement, even when the passages came from a persistent store.
 
-Things hold together until the context window fills up, costs spiral, and retrieval quality collapses because the model cannot find relevant information in a sea of noise.
+The store solves availability across requests. The retriever and prompt builder decide which stored material becomes evidence for the current request.
 
-The second pattern is engineers who try to use a vector database as a context window substitute. They embed everything, retrieve the top-k results, and stuff those into context.
+## RULER tests effective context across task types
 
-Lacking a memory layer that understands conversation state, entity tracking, and temporal ordering, that approach produces systems that return technically relevant but contextually wrong results. A support bot pulls the right refund policy chunk but applies the policy for a different product tier, because nothing told it which account it was talking to.
+The [RULER repository](https://github.com/NVIDIA/RULER) provides configurable synthetic examples for evaluating long-context models across sequence lengths and task complexity. Its tasks cover retrieval, multi-hop tracing, aggregation, and question answering rather than relying on a single needle-in-a-haystack check.
 
-## The lost in the middle problem
+RULER's paper distinguishes a claimed context length from an effective context length measured against its task suite. The distinction matters because a model can accept an input at a given length and still fall below a chosen performance threshold as the sequence grows.
 
-Long context is not a reliable retrieval mechanism, regardless of how many tokens you have available. That claim is not my opinion.
+### Sequence-length sweeps expose where performance changes
 
-It is an empirical result that has been replicated across multiple research groups.
+A useful long-context evaluation repeats the same task family at multiple sequence lengths. That reveals whether a model that succeeds on a short instance remains reliable as distractor material and reasoning distance increase.
 
-The "lost in the middle" problem, documented by Liu et al. and confirmed by others, shows that LLMs reliably recall information at the beginning and end of a long context. Information in the middle gets lost, forgotten, or ignored.
+RULER also makes task complexity configurable. Multiple needles, variable-tracking hops, aggregation settings, and question-answering inputs test different behaviors that one simple retrieval example cannot cover.
 
-The behavior is not a bug in current models. It is a structural property of how transformers handle long sequences.
+### Synthetic results narrow candidates rather than approve a deployment
 
-The effect is similar to skimming a long contract: the first clause and signature line stay visible while a clause buried in the middle is easier to miss.
+RULER itself describes its tasks as a test bed, not a replacement for realistic evaluation. Synthetic benchmark results can eliminate weak candidates and reveal length-related failure modes, but they do not reproduce a specific application's evidence, prompts, or serving path.
 
-Apply that to your RAG pipeline and the failure mode gets obvious. You retrieve 20 chunks, stuff them into context sorted by relevance score, and wonder why your system still gives wrong answers.
+The deployed model, serving setup, document structure, and query set still require a target-corpus test. A candidate should be exercised with the exact model identifier and configuration, representative documents, real query shapes, relevant positions, and an answer check tied to the product's failure cost.
 
-The relevant information is probably in the middle of your context window, where the model is least likely to notice it.
+## Context and memory work as one request loop
 
-A proper memory system solves this differently. Rather than retrieving a large context and hoping the model finds what it needs, you retrieve exactly what the model needs and put it in the most reliable position in the context.
+A practical system uses the two layers in sequence. It reads durable state, selects what the current task needs, constructs the context, invokes the model, and then decides whether any result deserves a durable write.
 
-Retrieval quality starts to matter more than retrieval quantity. One well-chosen chunk at the start of context beats 20 poorly-chosen chunks in arbitrary order.
+That final write must be deliberate. Saving every generated sentence creates a larger store, but it does not make future retrieval more accurate or the stored claims more trustworthy.
 
-## KV cache is not memory either
+### The memory layer handles lifecycle and inclusion
 
-Before moving on, I need to address a conflation I see increasingly often: KV cache being called "memory."
+Memory policy decides which observations qualify for storage, how versions and conflicts are represented, and when old state expires. Retrieval policy then selects candidate memories using filters, recency, similarity, rules, or other signals appropriate to the job.
 
-KV cache is a transformer optimization. During autoregressive generation, the model recomputes attention over all previous tokens on every step.
+[AI memory management for LLMs](/articles/ai-memory-management-for-llms/) develops those inclusion, retrieval, and lifecycle decisions across the wider memory stack. The context window receives only the subset selected for the present request.
 
-Doing that fresh each time is expensive. The KV cache stores the key and value matrices from prior transformer layers so they do not have to be recomputed on each step.
+### The context layer handles the current reasoning task
 
-It lives in GPU VRAM and is discarded when the inference call ends.
+Prompt construction decides how much retrieved material to include, how to order it, and how much budget to reserve for instructions, tool results, and the response. More retrieved text can introduce distractors even when every passage is topically related.
 
-Think of KV cache as a chef's mise en place: the prepped ingredients laid out on the counter for the dish being cooked right now, cleared away the moment service ends. It speeds up the work in front of you, and it tells you nothing about what was cooked yesterday.
+Test the assembled prompt, not just retrieval hit rate. The end-to-end question is whether the model uses the selected evidence to produce an acceptable answer under the actual budget.
 
-KV cache is per-request ephemeral state. It is not accessible across calls.
+## KV cache is not durable memory
 
-It is not persistent memory. It is a performance optimization for a single inference pass.
+### KV cache reuses computation rather than facts
 
-I wrote about KV cache eviction strategies in detail before. The short version: KV cache is a scarce resource, VRAM is finite, and how you manage it determines your throughput.
+A transformer KV cache stores intermediate key and value tensors so autoregressive generation can reuse work from earlier tokens. It is serving state associated with token processing, not an application record of facts, preferences, or events.
 
-Treat it as a memory layer and you will build systems that confuse caching with persistence.
+Serving-layer prefix caching may reuse token-prefix computation across requests, but that optimization still does not provide semantic retrieval, identity, validity, or lifecycle rules. KV-cache eviction is therefore a separate inference-management problem from deciding what an agent should remember next week.
 
-The relationship between context, KV cache, and memory is additive, not substitutive. You need all three, for different purposes.
+### Keep context, KV cache, and memory separate
 
-Context holds what the model reasons over right now. KV cache makes that reasoning fast.
+Context contains the material available for the current reasoning step. KV cache accelerates computation over token prefixes, subject to the serving implementation.
 
-Memory holds what the model needs access to across time.
+Memory persists application state and makes selected state available to later requests. Using “memory” for every layer hides where information was lost and makes debugging harder.
 
-## When to use context windows
+## Choose the architecture from the state boundary
 
-Context windows are the right tool in specific situations.
+Start by asking how long the information must survive and which request will need it. If the answer is only the current request, place the smallest sufficient evidence in context.
 
-Short-term reasoning is the clearest case. When you need a model to work through a multi-step problem in one call, putting all the relevant information in context lets the model attend to everything simultaneously.
+If the information must survive a new request, process restart, or user session, store it outside the invocation and define how it returns. Context size does not remove that state boundary.
 
-Code generation for a single file is a good example. The model needs to see the function signature, the imports, the type definitions, all at once, the same way you keep the whole function on screen while you edit it.
+### Test long-context retrieval on the target corpus
 
-Context was designed for exactly this.
+Create fixtures from representative documents and questions, then vary the position of the answer-bearing evidence and add realistic distractors. Sweep the sequence lengths the application expects rather than testing only the advertised maximum.
 
-One-shot document processing is another legitimate use. You have a 200-page PDF and you want the model to answer questions about it.
+Score whether the answer uses the required evidence, not merely whether the request completes. Repeat the test for the deployed model and serving configuration because a paper or leaderboard result describes its own setup.
 
-Putting the entire document in context and asking questions is reasonable, provided the document fits and the questions require understanding the whole thing.
+### Test memory as a read-write lifecycle
 
-A third case is in-context learning. When you give the model examples of the output format you want within the context itself, you are using context as a demonstration mechanism.
+Evaluate writes, retrieval, conflicts, updates, deletion, and isolation between entities. A memory test should catch stale facts, missing state, cross-user leakage, and irrelevant material that consumes context without helping the answer.
 
-Showing three examples of the exact JSON shape you expect, right before the real input, beats describing that shape in prose, and it works for tasks where you cannot fine-tune but still need consistent output formatting.
-
-Here is the cost breakdown in Python, showing what paying for long context actually looks like in terms of FLOPs:
-
-```python
-import math
-
-def estimate_attention_flops(sequence_length, num_layers, hidden_size, num_heads):
-    """
-    Rough FLOPs for the attention computation in one transformer layer.
-    This covers Q, K, V projections and the attention matrix computation.
-    """
-    # Q, K, V projections: 3 * (sequence_length * hidden_size * hidden_size)
-    projection_flops = 3 * sequence_length * hidden_size * hidden_size
-
-    # Attention scores: Q @ K^T (sequence_length * hidden_size) @ (hidden_size * sequence_length)
-    attention_score_flops = 2 * sequence_length * hidden_size * sequence_length
-
-    # Softmax (approximate)
-    softmax_flops = sequence_length * sequence_length
-
-    # Weighted sum: attention_scores @ V
-    weighted_sum_flops = 2 * sequence_length * sequence_length * hidden_size
-
-    # Output projection
-    output_flops = sequence_length * hidden_size * hidden_size
-
-    layer_flops = projection_flops + attention_score_flops + softmax_flops + weighted_sum_flops + output_flops
-    total_flops = num_layers * layer_flops
-
-    return total_flops
-
-# Compare costs at different context sizes
-# Llama 3.1 8B parameters: 32 layers, 4096 hidden size, 32 heads
-num_layers = 32
-hidden_size = 4096
-num_heads = 32
-
-for seq_len in [512, 2048, 8192, 32768, 131072]:
-    flops = estimate_attention_flops(seq_len, num_layers, hidden_size, num_heads)
-    # Rough GPU throughput: 400 TFLOPS on RTX 4090
-    gpu_tflops = 400
-    time_seconds = (flops / (gpu_tflops * 1e12))
-    print(f"Sequence length {seq_len:>6}: {flops:>15,.0f} FLOPs, ~{time_seconds*1000:.2f}ms on 400 TFLOPS GPU")
-```
-
-Running this gives you a concrete picture:
-
-```
-Sequence length     512:      34,865,346,560 FLOPs, ~0.09ms on 400 TFLOPS GPU
-Sequence length   2048:     559,522,992,128 FLOPs, ~1.40ms
-Sequence length   8192:   8,960,563,884,032 FLOPs, ~22.40ms
-Sequence length  32768: 143,483,546,390,528 FLOPs, ~358.71ms
-Sequence length 131072: 573,939,298,771,456 FLOPs, ~1434.85ms
-```
-
-That last line, 131K tokens, is 1.4 seconds of GPU compute on high-end hardware just for the attention layers. That is before you account for the feed-forward network, the data movement, the token generation, or any batching.
-
-A 1M token context at this scale would be measured in seconds per request, not milliseconds. You do not want to pay that cost for information retrieval when a vector search at microsecond latency would do.
-
-## When to use memory systems
-
-Memory is the right tool when you need to persist state across interactions, build on prior work, or scale beyond what a single context window can hold.
-
-Conversation history is the obvious example. A chatbot that cannot remember what you asked three messages ago is not a chatbot, it is a glorified autocomplete.
-
-Storing conversation history in a memory system and injecting relevant turns into context is how you make multi-turn work without burning through your context budget.
-
-Long-term user preferences are another case. When your system needs to know that one user prefers concise answers, that another works in finance and wants the technical detail spelled out, or that a third should never be recommended dairy because of an allergy, that information lives in memory.
-
-It is too specific to fit in a system prompt and too persistent to re-extract on every call.
-
-Knowledge bases that exceed your context window are a third case. With 10M documents and a 200K token context, you cannot dump everything in.
-
-You need a retrieval system that finds the relevant subset and presents it to the model. That retrieval system is a memory layer, and the presentation to the model is a context injection.
-
-Entity tracking across sessions is the underappreciated one. An agent managing a software migration over three weeks needs to know that the team chose Postgres over DynamoDB in week one, that the auth rewrite was deferred to a later phase, and that one service is still owned by a contractor.
-
-None of that lives in any document. It accumulates over time through memory.
-
-Strip the memory layer out and your agent starts every session with no knowledge of prior work.
-
-## Why massive context is not a memory substitute
-
-The engineering temptation is to solve the memory problem by making context so large that memory feels unnecessary. OpenAI has 200K tokens.
-
-Anthropic has 200K tokens. Gemini has 2M tokens.
-
-Problem solved, right?
-
-Wrong, for four reasons.
-
-First, cost scales superlinearly, as the FLOPs analysis shows. A 2M token context costs roughly 400x more to process than a 32K token context.
-
-Your infrastructure bill will reflect that gap. Retrieval from a vector store costs roughly the same regardless of corpus size, because you fetch a small fixed slice.
-
-The economics of context-first systems break at scale.
-
-Second, retrieval quality degrades with context volume. The model attention mechanism is not a database index.
-
-It is a learned pattern recognition system, and it is biased toward the beginning and end of context. As you add more tokens, the signal-to-noise ratio in the middle drops.
-
-The model becomes less likely to find the specific fact you need even when it sits right there in the context.
-
-Third, context is per-session. Nothing in the context window survives to the next request unless you explicitly carry it forward.
-
-A system that needs to learn over time, accumulate user preferences, or track long-running projects needs persistent memory to do it. The context window does not.
-
-You do, through your memory infrastructure.
-
-Fourth, latency compounds. A 2M token context takes significant time to process even on fast hardware.
-
-Your end-to-end request latency is bounded below by how long it takes to run attention over the full context. A retrieval-augmented system that fetches 2K tokens of highly relevant context will consistently outperform a brute-force long-context system on latency, often by an order of magnitude.
-
-The evidence for this lives in production systems. Every high-scale AI product I have examined uses retrieval over brute-force context.
-
-Retrieval wins not for any philosophical reason, but because it is faster, cheaper, and more reliable at scale. GitHub Copilot does not put your entire codebase in context.
-
-It retrieves the relevant files and functions. Claude Code uses MCP (which I wrote about before) to access external tools and state rather than to expand context.
-
-The pattern is consistent: retrieval plus targeted context beats dumping everything into context.
-
-## How they work together
-
-The systems that work in production use context and memory as complementary layers, not competing ones.
-
-A typical architecture looks like this. The memory layer stores conversation history, user preferences, extracted entities, and domain knowledge.
-
-On each request, the system retrieves the relevant subset from memory and constructs a context window that is targeted, small, and high-signal. The model processes this context and produces an output.
-
-The output is then written back to the memory layer, updating the system's state for the next call.
-
-The memory layer does the heavy lifting on scale. The context layer does the heavy lifting on reasoning.
-
-Each is doing what it is designed to do.
-
-I have benchmarked this pattern against context-only approaches. At 100 conversations with 50 turns each, a context-only system using full conversation history degrades in quality and spikes in latency as context grows.
-
-A retrieval-augmented system that stores history in memory and retrieves the last 5 relevant turns keeps context size flat, latency stable, and quality consistent. The memory-plus-retrieval approach wins on every metric that matters at scale.
-
-The memory layer also enables something context alone cannot: selective forgetting. A good memory system can be designed to retain recent interactions at full fidelity, compress older ones into summaries, and archive or discard information that is no longer relevant, the way you keep this week's tickets open and let last quarter's collapse into a one-line changelog.
-
-Context windows have no such control. Every token in context is treated with equal attention weight, even one that mattered for 50 messages and will never matter again.
-
-## What this means for your architecture
-
-Building a production AI system that treats the context window as your primary memory mechanism means building on a foundation that will not hold at scale.
-
-Your context window is a workspace. It is fast, expensive, and ephemeral.
-
-Your memory layer is a store. It is slower, cheaper, and persistent.
-
-Design your system to use each for what it is good at.
-
-To get concrete: invest in a memory architecture that can store, retrieve, and expire state over time. A complex stack is not required.
-
-A vector store for embeddings, a key-value store for structured state, and a session table in Postgres will get you a long way. The hard work lives in the retrieval logic, not the storage.
-
-Use context windows to hold exactly what the model needs to reason well right now. Keep that window small and targeted.
-
-Retrieve what is relevant, compress what can be compressed, and let the memory layer handle the rest.
-
-Measure retrieval quality first. Before you think about expanding context, make sure your retrieval is returning the right information.
-
-Long context amplifies retrieval quality, including the retrieval quality of your mistakes. A bad retriever with a large context window is a bad system that costs more.
-
-
-
-Once a context window fills, the next decision is not simply what to delete. [Contextual compression for agent memory](/articles/contextual-compression-for-agent-memory/) explains how to decide what survives without treating every old token as equally useful.
-
-## Related articles
-
-For a conceptual treatment of the long-context problem, read [the BEAM memory article](/articles/beam-memory-benchmark/); it does not provide reproducible benchmark data. For implementation patterns, read [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).
-
-For understanding memory in specific agent frameworks, see [how memory works in Claude Code](/articles/how-memory-works-in-claude-code/) and [how memory works in HyperAgents](/articles/how-memory-works-in-hyperagents/).
+Framework-specific storage details differ, but the boundary remains the same. [Memory in Claude Code](/articles/how-memory-works-in-claude-code/) and [memory in HyperAgents](/articles/how-memory-works-in-hyperagents/) show how separate systems expose persistent state to later work.
 
 ## FAQ
 
 **Is a longer context window always better?**
 
-No. Longer context increases cost, latency, and the "lost in the middle" problem.
+No. A larger accepted input can help tasks that need more evidence at once, but it can also add cost, latency, and distractors depending on the model and serving setup.
 
-A shorter, more targeted context with better retrieval outperforms a long context with mediocre retrieval in most production scenarios. The exception is tasks that genuinely require the full document, like summarizing a specific 200-page report.
+Evaluate the task at the lengths and positions it will encounter. The maximum accepted length alone does not establish reliable retrieval.
 
-**Can I use a vector database as a memory system?**
+**Can a vector database be the memory layer?**
 
-A vector database is a retrieval mechanism, not a memory system. It can be part of your memory architecture for storing and retrieving embeddings of documents, conversation chunks, or knowledge base entries.
+It can be one component of the layer. Semantic retrieval is useful for unstructured passages, but structured state, identity, time, permissions, and version rules may require other storage and filters.
 
-But a complete memory system also needs structured storage for entity state, conversation metadata, user preferences, and temporal ordering. You need more than a vector store alone.
+**How should information be split between context and memory?**
 
-**How do I decide what goes into context vs memory?**
+Put the evidence needed for the current reasoning step in context. Put state that must survive beyond the request in a persistent store, then retrieve only the relevant subset when a later request needs it.
 
-Context gets what is needed for immediate reasoning and cannot be retrieved quickly enough from memory. Memory gets everything that needs to persist across interactions, everything that exceeds context capacity, and everything that benefits from compression or selective retrieval.
+**Why can a model miss information that fits in its context window?**
 
-A practical heuristic: if the model needs it in most interactions, it belongs in context or system prompt. If the model needs it occasionally or over long time horizons, it belongs in memory.
+Accepted capacity does not imply uniform use of every position. Lost in the Middle demonstrates positional effects, and RULER tests how retrieval and reasoning behavior changes across tasks and sequence lengths.
 
-**Does the KV cache count as memory?**
+**Does KV cache give an agent memory between sessions?**
 
-No. KV cache is an ephemeral per-request optimization that stores intermediate transformer computations in GPU VRAM to avoid recomputing them during autoregressive generation.
+No. KV cache is a token-processing optimization, and application memory is durable state with selection and lifecycle rules.
 
-It is discarded when the request ends and is not accessible across calls. Calling it memory is a category error.
-
-**What is the practical limit for context-only systems?**
-
-Context-only systems become impractical around 100K to 200K tokens for most use cases, due to cost, latency, and retrieval quality degradation. Beyond that, you need a memory layer to maintain system quality and keep costs manageable.
-
-The exact threshold depends on your use case, but if you are routinely using more than 50K tokens per request, you should have a retrieval-augmented architecture in place.
-
-**My agent keeps forgetting what it was doing. Is this a context problem or a memory problem?**
-
-Almost certainly a memory problem. Context windows are cleared between calls unless you explicitly carry state forward.
-
-If your agent is resetting on every turn, you are not persisting conversation state to a memory layer. The fix is not a larger context window.
-
-The fix is adding a memory layer that tracks the agent's state and injects it into context on each request.
+An application must still store the information and retrieve it into a later context.
