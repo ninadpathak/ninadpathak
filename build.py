@@ -820,7 +820,7 @@ class SiteBuilder:
             lines.append("## Glossary")
             lines.append("")
             for term in glossary_terms:
-                desc = (term.get("opening_definition") or term.get("short_definition") or term.get("description") or "").strip().replace("\n", " ")
+                desc = (term.get("opening_definition") or term.get("description") or "").strip().replace("\n", " ")
                 lines.append(f"- [{term['name']}]({base}{term['url']}): {desc}")
             lines.append("")
 

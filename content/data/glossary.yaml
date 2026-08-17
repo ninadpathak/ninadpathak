@@ -8,14 +8,29 @@ terms:
     <p>The phrase gained currency as LLM applications moved beyond one prompt and one response. Once an application retrieves documents, records tool observations, carries state across turns, and applies permission rules, prompt wording is only one input among several.</p>
     <p>Context engineering names the work of assembling that complete input environment.</p>
     <p>The problem is selection, not merely capacity. A larger context window can hold more tokens, but irrelevant history, conflicting instructions, stale state, and badly ordered evidence can still make the model less reliable.</p>
-    <h2>Prompt engineering controls instructions; context engineering controls evidence</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">ASSEMBLY</span><strong>Context is selected for one task step</strong><small>Availability does not justify inclusion.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Start from the current decision</strong><small>Name the evidence the model needs now.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">relevant and current</span><div class="flowchart-node"><strong>Include with provenance</strong><small>Preserve source, scope, and effective version.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">irrelevant or stale</span><div class="flowchart-node"><strong>Exclude from this turn</strong><small>Keep noise and conflicts out of the model input.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">fits policy</span><div class="flowchart-node"><strong>Order the evidence</strong><small>Place instructions and data in explicit roles.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">conflicts</span><div class="flowchart-node"><strong>Resolve before assembly</strong><small>Do not ask the model to guess authority.</small></div></div>
+        </div>
+        <p class="flowchart-note">A context window is capacity. Context engineering decides what earns space inside it.</p>
+      </div>
+    </div>
+    <h3>Prompt engineering controls instructions; context engineering controls evidence</h3>
     <p>Prompt engineering focuses on how a task is expressed. Retrieval-augmented generation selects outside documents, while memory decides what persists across interactions.</p>
     <p>Context engineering coordinates those pieces and determines what the model sees for this specific step.</p>
     <p>The <a href="/articles/context-windows-vs-memory/">context windows versus memory guide</a> explains why capacity and persistence are separate concerns. The <a href="/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/">contextual retrieval analysis</a> shows one index-time technique for giving retrieved chunks enough surrounding meaning.</p>
-    <h2>Assembly needs provenance and a deletion rule</h2>
+    <h3>Assembly needs provenance and a deletion rule</h3>
     <p>Each context item should have a source, a reason for inclusion, and a condition that makes it stale. Tool results may last for one step, account preferences may persist across sessions, and system constraints may apply to every turn.</p>
     <p>When inputs conflict, the application should not rely on the model to infer which one is authoritative. It should resolve version and permission conflicts before assembly, then preserve source labels so the answer can be checked.</p>
-    <h2>A support answer fails when two true facts collide</h2>
+    <h3>A support answer fails when two true facts collide</h3>
     <p>Suppose a customer asks how to cancel a subscription. Retrieval returns the current cancellation policy and an older enterprise contract with different terms.</p>
     <p>Good context assembly filters by account plan and effective date, labels the source, and places the applicable policy next to the task.</p>
     <p>Context engineering applies when the answer depends on choosing and combining inputs. It does not apply to every formatting preference, and its common misuse is filling the window because space is available.</p>
@@ -23,28 +38,6 @@ terms:
   title: 'Context Engineering: Structuring LLM Data Environments'
   description: Context engineering is the systematic discipline of designing, structuring, and managing
     the information provided to an LLM to maximize reasoning accuracy.
-  short_definition: The systematic discipline of designing, structuring, and managing the information
-    provided to a Large Language Model (LLM) to maximize its reasoning capability and accuracy.
-  long_definition: Moving beyond 'prompt engineering' (which focuses on wording and instruction), context
-    engineering focuses on the architecture of the data environment itself. As context windows have grown
-    to support over a million tokens, the bottleneck is no longer how much an LLM can read, but how it
-    pays attention to what it reads. Context engineering involves designing the retrieval pipelines (RAG),
-    managing state/memory over multi-turn conversations, preventing 'context poisoning' (where irrelevant
-    data derails reasoning), and structuring inputs (like XML or JSON) so the model can consistently parse
-    high-signal data without getting 'lost in the middle'.
-  how_it_works: "Context engineers typically build a pipeline that looks like this:\n<ul>\n  <li><strong>Retrieval\
-    \ Strategy:</strong> Selecting the exact snippets of code, docs, or database records needed for the\
-    \ task.</li>\n  <li><strong>Formatting:</strong> Wrapping that data in strict, predictable formats\
-    \ (e.g., XML tags like <code>&lt;context&gt;</code> and <code>&lt;instructions&gt;</code>) to separate\
-    \ data from behavioral commands.</li>\n  <li><strong>Pruning:</strong> Actively stripping out 'noisy'\
-    \ tokens, standardizing syntax, and removing irrelevant conversation history before passing it to\
-    \ the model.</li>\n  <li><strong>Assembly:</strong> Ordering the information based on the specific\
-    \ LLM's attention bias (e.g., placing the most critical instructions at the very beginning or the\
-    \ very end of the prompt).</li>\n</ul>"
-  use_cases:
-  - Building production-grade RAG applications that require near-zero hallucination rates.
-  - Designing multi-agent systems where agents must pass structured context to one another.
-  - Injecting large, messy codebases into an LLM while maintaining high instructional adherence.
   related_terms:
   - name: Agentic Engineering
     slug: agentic-engineering
@@ -75,38 +68,28 @@ terms:
         <p class="flowchart-note">The risk begins at execution, not at the number of models in the system.</p>
       </div>
     </div>
-    <h2>The adjacent terms describe parts, not the whole discipline</h2>
+    <h3>The adjacent terms describe parts, not the whole discipline</h3>
     <p><a href="/glossary/tool-calling/">Tool calling</a> is the interface that lets a model request an operation. <a href="/glossary/flow-engineering/">Flow engineering</a> defines a controlled sequence of model and program steps, while an agentic router chooses among destinations.</p>
     <p>Agentic engineering covers the larger system: state, permissions, recovery, observability, evaluation, and the point at which a human must intervene.</p>
     <p>Multi-agent design is also not a requirement. One model with a shell tool and a verification loop is agentic; five models that only debate before returning text may not be.</p>
-    <h2>A repository repair shows what the discipline changes</h2>
+    <h3>The loop needs explicit state and a bounded action set</h3>
+    <p>An agent needs a state representation that distinguishes the goal, completed work, current evidence, and unresolved decisions. A transcript can contain that information, but it does not make the distinctions reliable or easy to inspect.</p>
+    <p>The action set should be narrower than everything the runtime can technically execute. Read access, mutation, external communication, and irreversible operations deserve different policies because their failure costs are not interchangeable.</p>
+    <h2>Autonomy is an operating boundary, not a product label</h2>
+    <p>The useful design question is what the model may decide without another approval. That boundary determines which actions need reversible execution, which observations need durable logs, and where the system must stop.</p>
+    <p>A narrow autonomous loop can be safer and more useful than a broad assistant that asks for vague blanket permission. Scope is part of the design, not an obstacle added after the agent works.</p>
+    <h3>A repository repair shows what the discipline changes</h3>
     <p>Consider a coding agent asked to rename an API. The model can search for call sites, edit the implementation, run tests, read a failure, and correct the missed fixture.</p>
     <p>The engineering work lies in limiting writable paths, preserving the test output as evidence, preventing an endless retry loop, and requiring a diff for review.</p>
     <p>The <a href="/articles/agentic-workflow-playbook/">agentic workflow playbook</a> develops that example into a shipped-work process. Agentic engineering does not apply when a deterministic script already knows every step, and the common misuse is adding a planner or extra agent where ordinary control flow would be cheaper and easier to test.</p>
+    <h3>Completion must be demonstrated outside the model</h3>
+    <p>An agent saying that a task is complete is only another model output. Completion evidence comes from the environment: a passing pre-existing test, a clean diff against the requested scope, or a returned record that proves the external operation occurred.</p>
+    <p>A self-authored fixture does not close the loop because it tests the agent’s assumptions against a test built from those same assumptions. The verifier must have an independent reason to reject a wrong result.</p>
+    <h3>Completion must be demonstrated outside the model</h3>
+    <p>An agent saying that a task is complete is only another model output. Completion evidence comes from the environment: a passing test that existed before the change, a clean diff against the requested scope, or a returned record that proves the external operation occurred.</p>
+    <p>A self-authored fixture does not close the loop because it tests the agent’s assumptions against a test built from those same assumptions. The verifier must have an independent reason to reject a wrong result.</p>
   title: What is Agentic Engineering in AI?
-  description: Agentic engineering is the discipline of orchestrating multiple AI agents to perform complex,
-    multi-step tasks autonomously.
-  short_definition: The discipline of designing, orchestrating, and evaluating systems where AI agents
-    autonomously plan and execute multi-step workflows.
-  long_definition: Agentic engineering represents a paradigm shift from using LLMs as single-turn answering
-    machines to utilizing them as active participants in software architecture. Instead of relying on
-    a single, massive prompt to output a final result, agentic engineering breaks complex objectives down
-    into a Directed Acyclic Graph (DAG) of smaller tasks. The engineer's job shifts from writing code
-    to building the orchestration layer—defining the agents, granting them specific tools (APIs, execution
-    environments), setting up the communication protocols between them, and implementing robust error
-    recovery and verification loops.
-  how_it_works: "An agentic system is typically built using the following components:\n<ul>\n  <li><strong>The\
-    \ Router:</strong> A lightweight classifier that receives a user query and routes it to the most capable\
-    \ specialized agent.</li>\n  <li><strong>The Planner:</strong> An agent responsible solely for taking\
-    \ an objective and breaking it down into a step-by-step sequential plan.</li>\n  <li><strong>Tool\
-    \ Calling:</strong> Agents use structured outputs to execute external functions, such as running a\
-    \ Python script, querying a database, or searching the web.</li>\n  <li><strong>Verification Loops:</strong>\
-    \ Before declaring a task complete, a separate 'Critic' or 'Verifier' agent reviews the output against\
-    \ the original constraints and sends it back if it fails.</li>\n</ul>"
-  use_cases:
-  - Automating complex CI/CD pipelines and code reviews (e.g., SWE-agent).
-  - Building autonomous research assistants that can browse the web, synthesize data, and write reports.
-  - Creating dynamic customer support systems capable of executing database transactions safely.
+  description: Agentic engineering covers systems where a model chooses actions, uses tools, and continues through a bounded workflow.
   related_terms:
   - name: Flow Engineering
     slug: flow-engineering
@@ -120,38 +103,33 @@ terms:
     <h2>AlphaCodium gave the pattern a memorable name</h2>
     <p>The term was popularized by the <a href="https://arxiv.org/abs/2401.08500">AlphaCodium work on code generation</a>, which used a staged process rather than asking a model to solve a programming problem in one pass. The broader idea is simple: move reliability work out of a heroic prompt and into an observable sequence.</p>
     <p>A flow can collect requirements, draft an artifact, run a deterministic check, return the failure, and ask for a bounded revision. The checker adds information only when it tests something the generation step did not assume.</p>
-    <h2>Deterministic orchestration separates a flow from an agent</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">CONTROL FLOW</span><strong>A useful flow changes state through tested artifacts</strong><small>The checker must be independent of the draft.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Generate an inspectable artifact</strong><small>A plan, patch, extraction, or answer enters the next stage.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">check passes</span><div class="flowchart-node"><strong>Advance the workflow</strong><small>Preserve the artifact and its evidence.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">check fails</span><div class="flowchart-node"><strong>Return the actual failure</strong><small>The repair stage receives new information.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">repairable</span><div class="flowchart-node"><strong>Revise within a limit</strong><small>Retry only the failed artifact or stage.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">blocked</span><div class="flowchart-node"><strong>Stop with evidence</strong><small>Escalate instead of inventing success.</small></div></div>
+        </div>
+        <p class="flowchart-note">A validator that checks a fixture authored by the same run does not add evidence to the flow.</p>
+      </div>
+    </div>
+    <h3>Deterministic orchestration separates a flow from an agent</h3>
     <p>In a flow, application code usually determines the next stage. In an agentic loop, the model may choose the next action from the current state.</p>
     <p>Chain-of-thought is internal reasoning, while flow engineering produces external artifacts and transitions that the host can inspect.</p>
-    <h2>A schema repair flow has an honest stopping condition</h2>
+    <h3>A schema repair flow has an honest stopping condition</h3>
     <p>For structured extraction, one stage produces JSON, a validator checks it against a schema, and a repair stage receives the actual validation errors. The workflow stops when validation passes or a retry limit is reached.</p>
     <p>The <a href="/articles/agentic-workflow-playbook/">agentic workflow playbook</a> shows a larger delivery flow with human review. Flow engineering is unnecessary when a deterministic parser already solves the task, and the common misuse is adding model stages that merely restate the same unchecked output.</p>
-    <h2>The artifact between stages is the real interface</h2>
+    <h3>The artifact between stages is the real interface</h3>
     <p>A useful flow specifies what each stage receives, what it must return, and which failure moves the process elsewhere. Passing a free-form transcript between every stage makes the sequence difficult to test and allows an early error to spread invisibly.</p>
     <p>Structured artifacts such as a requirements list, patch, test report, or citation map make the handoff inspectable. The flow earns its extra calls only when a later stage can reject or improve an earlier artifact using new information.</p>
   title: Flow Engineering for LLM Applications
   description: Flow engineering involves designing iterative, multi-step LLM architectures rather than
     relying on a single zero-shot prompt.
-  short_definition: The practice of designing deterministic, multi-step architectures where an LLM's output
-    is iteratively refined, tested, and corrected through a predefined pipeline.
-  long_definition: 'Popularized by projects like AlphaCodium, flow engineering assumes that LLMs are relatively
-    weak at zero-shot, complex reasoning but exceptionally strong when forced to iterate. Instead of writing
-    one massive prompt hoping for the perfect output, flow engineers design a state machine. The LLM is
-    forced through a sequence: generating a plan, writing draft code, running that code against a compiler,
-    reading the error trace, and attempting a fix. By rigidly structuring this ''flow'', developers can
-    dramatically increase the reliability and performance of an underlying model without needing to upgrade
-    to a more expensive, larger parameter model.'
-  how_it_works: "A classic flow engineering pipeline for code generation looks like:\n<ul>\n  <li><strong>Phase\
-    \ 1 (Reflection):</strong> The model reads the problem and outputs its understanding of the constraints.</li>\n\
-    \  <li><strong>Phase 2 (Planning):</strong> The model outlines the algorithmic approach without writing\
-    \ syntax.</li>\n  <li><strong>Phase 3 (Generation):</strong> The model generates the actual code based\
-    \ strictly on the plan.</li>\n  <li><strong>Phase 4 (Execution & Critique):</strong> The code is run\
-    \ in a sandbox. A separate prompt passes the execution trace (success or stack trace) back to the\
-    \ model for refinement.</li>\n</ul>"
-  use_cases:
-  - Competitive programming and automated software engineering.
-  - Complex data extraction where the schema must be validated iteratively.
-  - High-stakes content generation requiring rigorous fact-checking loops.
   related_terms:
   - name: Agentic Engineering
     slug: agentic-engineering
@@ -165,36 +143,32 @@ terms:
     <h2>Inference became a scaling axis of its own</h2>
     <p>Model development long emphasized training compute, but researchers also found gains from spending more work on a particular problem after training. Test-time compute covers several mechanisms, so it should not be reduced to one product’s hidden reasoning tokens.</p>
     <p>A system might sample several candidate answers and select one, search a tree of partial solutions, run a verifier, or allocate a larger reasoning budget. Each method spends extra resources at request time and needs a rule for when to stop.</p>
-    <h2>More compute is useful only when the selection signal is useful</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">BUDGET POLICY</span><strong>Extra inference work needs a selection signal</strong><small>More tokens alone do not prove a better answer.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Attempt the task at the base budget</strong><small>Collect an answer and any available verification result.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">verified</span><div class="flowchart-node"><strong>Return the result</strong><small>Additional compute has no identified job.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">unresolved</span><div class="flowchart-node"><strong>Allocate another search step</strong><small>Sample, branch, or verify against new evidence.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">improves</span><div class="flowchart-node"><strong>Keep the stronger candidate</strong><small>The evaluator distinguishes the result.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">budget ends</span><div class="flowchart-node"><strong>Stop or expose uncertainty</strong><small>Do not convert extra work into false confidence.</small></div></div>
+        </div>
+        <p class="flowchart-note">The policy connects difficulty, verification, cost, and a stopping condition.</p>
+      </div>
+    </div>
+    <h3>More compute is useful only when the selection signal is useful</h3>
     <p>For a code-generation task, producing four candidates helps only if compilation, tests, or another credible evaluator can distinguish them. Sampling four answers and choosing the most confident wording may multiply cost without adding evidence.</p>
     <p>Test-time compute differs from fine-tuning because the weights do not change, and from speculative decoding because speculative decoding aims to produce the same distribution faster rather than reason longer. The <a href="/articles/llm-inference-optimization/">LLM inference optimization guide</a> places both techniques on the same serving stack.</p>
-    <h2>Routine requests should not inherit the hardest budget</h2>
+    <h3>Routine requests should not inherit the hardest budget</h3>
     <p>Test-time compute applies to tasks where additional search or verification can change the outcome. It does not justify routing every request through the maximum budget, and the common misuse is reporting more generated tokens as if they were proof of better reasoning.</p>
-    <h2>A compute policy needs a difficulty signal</h2>
+    <h3>A compute policy needs a difficulty signal</h3>
     <p>A practical system can begin with a modest budget, escalate after a failed verifier, and stop when the expected benefit no longer justifies another attempt. The signal might be a deterministic test, disagreement among candidates, or an explicit uncertainty condition.</p>
     <p>Latency and cost belong in the policy alongside answer quality. Without a representative evaluation set, there is no evidence that the extra branch, sample, or reasoning pass improves the task that users actually submit.</p>
   title: What is Test-Time Compute in AI Reasoning?
   description: Test-Time Compute (TTC) refers to dynamically allocating more computational resources to
     an AI model during inference to improve complex reasoning.
-  short_definition: The practice of allocating more computational resources during inference (the 'test
-    time') to allow an AI model to perform internal reasoning, planning, and self-correction before outputting
-    an answer.
-  long_definition: Historically, the intelligence of an AI model was determined entirely by 'Training
-    Compute'—the amount of processing power used to train the base model. Test-Time Compute (TTC), popularized
-    by models like OpenAI's o1, shifts this paradigm by scaling compute dynamically when a question is
-    asked. By allowing the model to generate thousands of internal 'Chain of Thought' tokens, simulate
-    different strategies, backtrack from dead ends, and verify its own logic *before* returning a response
-    to the user, TTC dramatically improves performance on hard logic, math, and coding problems without
-    requiring a larger base model.
-  how_it_works: "TTC is typically implemented through:\n<ul>\n  <li><strong>Hidden Chain of Thought:</strong>\
-    \ The model generates a long, internal monologue of reasoning steps that the end-user does not see.</li>\n\
-    \  <li><strong>Tree of Thoughts (ToT):</strong> The model branches out into multiple possible solution\
-    \ paths, evaluates the viability of each, and prunes the paths that lead to dead ends.</li>\n  <li><strong>Dynamic\
-    \ Compute Allocation:</strong> Easy questions bypass TTC and return instantly, while hard questions\
-    \ trigger massive internal token generation.</li>\n</ul>"
-  use_cases:
-  - Solving advanced mathematical proofs and competitive programming challenges.
-  - Medical and legal diagnostics where step-by-step logical deduction is required.
   related_terms: []
   last_updated: '2026-08-17'
 - name: Model Context Protocol (MCP)
@@ -204,35 +178,33 @@ terms:
     <h2>Anthropic introduced MCP to reduce bespoke integrations</h2>
     <p>Anthropic released <a href="https://modelcontextprotocol.io/docs/getting-started/intro">MCP in 2024 as an open protocol</a> for connecting AI assistants to data and tools. Before a shared protocol, each host and integration could require its own discovery format, transport assumptions, and invocation code.</p>
     <p>An MCP host manages the user-facing application. A client inside that host maintains a connection to a server, and the server advertises capabilities such as tools and resources through the protocol.</p>
-    <h2>Protocol compatibility does not create a trust boundary</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">PROTOCOL ROLES</span><strong>The host controls a client connection to an MCP server</strong><small>Discovery and invocation cross a boundary the host still governs.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Host opens an MCP client connection</strong><small>The host supplies user context, policy, and consent.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">read</span><div class="flowchart-node"><strong>Request a resource</strong><small>The server returns data for context.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">act</span><div class="flowchart-node"><strong>Invoke a tool</strong><small>The server may read or change external state.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">allowed</span><div class="flowchart-node"><strong>Return the server result</strong><small>The host labels and records the response.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">restricted</span><div class="flowchart-node"><strong>Deny or request approval</strong><small>Protocol compatibility does not override policy.</small></div></div>
+        </div>
+        <p class="flowchart-note">MCP standardizes the exchange. Credentials and operating-system permissions enforce the boundary.</p>
+      </div>
+    </div>
+    <h3>Protocol compatibility does not create a trust boundary</h3>
     <p><a href="/glossary/tool-calling/">Tool calling</a> describes how a model requests an operation. MCP can carry the tool descriptions and requests, but the host still decides which server to connect to, what credentials it receives, and whether a proposed action may run.</p>
     <p>A REST API exposes application endpoints; MCP exposes model-oriented capabilities and discovery conventions.</p>
-    <h2>A read-only repository server makes the boundary concrete</h2>
+    <h3>A read-only repository server makes the boundary concrete</h3>
     <p>An IDE host can connect to an MCP server that exposes <code>search_files</code> and <code>read_file</code>. The host may approve that server for one repository and withhold write tools entirely.</p>
     <p>The protocol describes the exchange, while operating-system permissions and host policy enforce the limit.</p>
     <p>The <a href="/articles/model-context-protocol-explained/">MCP architecture guide</a> explains the roles, and the <a href="/articles/mcp-server-setup-guide/">practical MCP setup</a> covers implementation and guardrails. The common misuse is calling MCP a universal security layer or assuming a compatible server is therefore trustworthy.</p>
-    <h2>Resources and tools carry different risk</h2>
+    <h3>Resources and tools carry different risk</h3>
     <p>A resource supplies context for the host to read, while a tool asks the server to perform an operation. Reading can still expose sensitive data, but a tool may also mutate state or trigger an external side effect.</p>
     <p>That distinction should shape consent, logging, and credential scope. A host that displays every capability as an equivalent menu item hides the most important fact about an integration: what can change when the model selects it.</p>
   title: 'Model Context Protocol (MCP): The USB Port for AI'
-  description: MCP is an open standard introduced by Anthropic to connect AI assistants to local and remote
-    data sources seamlessly.
-  short_definition: An open-source, standardized protocol that acts as a universal API allowing AI models
-    to securely connect to, read from, and interact with external data sources and tools.
-  long_definition: Before MCP, developers had to write custom API integrations for every single tool they
-    wanted an AI agent to use (e.g., GitHub, Slack, and Google Drive required three different codebases).
-    Introduced by Anthropic in late 2024, the Model Context Protocol (MCP) establishes a universal standard—often
-    described as the 'USB-C port for AI'. If a data source exposes an MCP Server, any MCP-compatible AI
-    client (like Claude Desktop) can instantly discover the available data, read files, and execute tools
-    without bespoke integration code.
-  how_it_works: "MCP operates on a client-server architecture:\n<ul>\n  <li><strong>MCP Hosts:</strong>\
-    \ The application the user interacts with (e.g., Claude Desktop, an IDE).</li>\n  <li><strong>MCP\
-    \ Clients:</strong> The bridge within the Host application that initiates the protocol connection.</li>\n\
-    \  <li><strong>MCP Servers:</strong> Lightweight programs connected to specific data sources (e.g.,\
-    \ a Postgres database) that expose resources and tools via the standard protocol.</li>\n</ul>"
-  use_cases:
-  - Giving local AI IDEs instant, read-only access to proprietary enterprise databases.
-  - Building universal enterprise search agents that can query Jira, Confluence, and GitHub simultaneously.
+  description: MCP is an open protocol for connecting AI applications to servers that expose tools, resources, and prompts.
   related_terms:
   - name: Context Engineering
     slug: context-engineering
@@ -246,37 +218,33 @@ terms:
     <h2>A similarity decision replaces an exact-key decision</h2>
     <p>An ordinary cache retrieves a value by an exact key. A semantic cache embeds the new request, searches earlier request vectors, and reuses a result when the best match passes an application-defined acceptance rule.</p>
     <p>The pattern addresses repeated natural-language questions that differ in phrasing. It also creates a new failure mode: two nearby vectors can represent requests whose correct answers differ.</p>
-    <h2>Password instructions can be reusable; account status cannot</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">CACHE DECISION</span><strong>Similarity proposes reuse; application rules approve it</strong><small>Identity and freshness cannot be reduced to vector distance.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Embed the incoming request</strong><small>Search earlier request representations.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">candidate match</span><div class="flowchart-node"><strong>Check reuse conditions</strong><small>Compare tenant, version, permissions, and source state.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">no candidate</span><div class="flowchart-node"><strong>Generate a fresh result</strong><small>Store it with provenance and invalidation keys.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">eligible</span><div class="flowchart-node"><strong>Return the cached response</strong><small>The old answer is still valid for this request.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">unsafe</span><div class="flowchart-node"><strong>Treat it as a miss</strong><small>A near vector does not make two decisions equivalent.</small></div></div>
+        </div>
+        <p class="flowchart-note">False reuse is usually more damaging than a cache miss, so evaluate the two errors separately.</p>
+      </div>
+    </div>
+    <h3>Password instructions can be reusable; account status cannot</h3>
     <p>A request for password-reset steps and a request for where to change a password may safely share a public help-center answer. A question about an account suspension cannot reuse another user’s response merely because the questions are semantically similar.</p>
     <p>The cache key therefore needs more than an embedding. Tenant, permissions, product version, locale, source freshness, and response type may all belong in the eligibility check.</p>
-    <h2>Semantic caching is not prompt caching or retrieval</h2>
+    <h3>Semantic caching is not prompt caching or retrieval</h3>
     <p>Prompt caching reuses computation for an identical input prefix, while semantic caching may return an earlier application result for different text. Retrieval fetches evidence for a new answer; a semantic cache may bypass generation altogether.</p>
     <p>The <a href="/articles/semantic-caching-rag-optimization/">semantic caching guide</a> develops the design and failure cases, while the <a href="/articles/prompt-caching-what-it-is-and-when-the-math-works/">prompt caching guide</a> covers the distinct provider-side mechanism. The common misuse is choosing one global similarity threshold without evaluating false hits on the decisions the application actually makes.</p>
-    <h2>Invalidation is harder than matching</h2>
+    <h3>Invalidation is harder than matching</h3>
     <p>A cached answer may cease to be correct even when an incoming question remains similar. Source documents change, policies expire, and personalized facts move independently of the request wording.</p>
     <p>Entries therefore need provenance and an invalidation key tied to the data behind the response. Evaluation should count harmful false hits separately from harmless misses because reusing the wrong answer is usually worse than paying to generate a fresh one.</p>
   title: 'Semantic Caching: Reducing LLM Costs and Latency'
   description: Semantic caching intercepts prompts and returns cached responses for queries that have
     similar meaning, saving LLM API costs.
-  short_definition: An optimization technique that stores previous LLM responses and uses vector similarity
-    to return those cached answers for new queries that have the same semantic meaning, bypassing the
-    LLM entirely.
-  long_definition: Traditional caching (like Redis) requires an exact string match to return a cached
-    result. If a user asks 'How do I reset my password?' and later asks 'What is the process to change
-    my password?', a traditional cache misses. Semantic caching solves this by embedding the incoming
-    user query into a vector and performing a fast nearest-neighbor search against previously answered
-    queries. If the similarity score exceeds a defined threshold, the system immediately returns the cached
-    response. This drastically reduces API costs, cuts latency to milliseconds, and protects backend LLMs
-    from repetitive load.
-  how_it_works: "A typical semantic cache pipeline:\n<ul>\n  <li><strong>Embedding:</strong> The incoming\
-    \ user query is embedded into a dense vector using a fast, cheap model.</li>\n  <li><strong>Vector\
-    \ Search:</strong> The vector is compared against a database of previous queries using Cosine Similarity.</li>\n\
-    \  <li><strong>Threshold Check:</strong> If the similarity score is above 0.95, the cached LLM response\
-    \ is returned instantly.</li>\n  <li><strong>Cache Miss:</strong> If no match is found, the query\
-    \ goes to the expensive LLM, and the new response is cached.</li>\n</ul>"
-  use_cases:
-  - Customer support chatbots dealing with high volumes of repetitive questions.
-  - Reducing API costs for enterprise RAG deployments.
   related_terms:
   - name: KV Cache Eviction
     slug: kv-cache-eviction
@@ -291,37 +259,33 @@ terms:
     <p>Aditya Kusupati and coauthors <a href="https://arxiv.org/abs/2205.13147">introduced Matryoshka Representation Learning in 2022</a>. The method trains predictive representations at multiple prefix lengths, borrowing its name from nesting dolls.</p>
     <p>Earlier dimensions must carry a useful coarse representation while later dimensions add detail.</p>
     <p>A system can index a shorter prefix for a broad candidate search and retain the longer vector for a more precise second pass. That flexibility comes from the training objective, not from the array-slicing operation itself.</p>
-    <h2>Truncation, quantization, and dimensionality reduction are not interchangeable</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">NESTED RESOLUTION</span><strong>One trained vector supports coarse and detailed retrieval</strong><small>Each useful prefix begins at the first dimension.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Encode once with an MRL model</strong><small>The training objective organizes nested prefixes.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">short prefix</span><div class="flowchart-node"><strong>Retrieve broad candidates</strong><small>Use less storage and distance-computation work.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">long prefix</span><div class="flowchart-node"><strong>Preserve more detail</strong><small>Retain later dimensions for finer distinctions.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">two stage</span><div class="flowchart-node"><strong>Search, then rescore</strong><small>Apply the longer representation to a smaller set.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">one stage</span><div class="flowchart-node"><strong>Choose one evaluated prefix</strong><small>Match the dimension to the deployment budget.</small></div></div>
+        </div>
+        <p class="flowchart-note">A conventional embedding does not acquire this property when its trailing dimensions are deleted.</p>
+      </div>
+    </div>
+    <h3>Truncation, quantization, and dimensionality reduction are not interchangeable</h3>
     <p>Truncation discards trailing dimensions. <a href="/glossary/product-quantization/">Product quantization</a> compresses vector subspaces into codebook identifiers, while a separately learned dimensionality-reduction transform maps vectors into a new space.</p>
     <p>Each changes storage and retrieval behavior differently.</p>
-    <h2>A two-stage catalog search shows the intended use</h2>
+    <p>An MRL prefix remains in the coordinate system the model was trained to organize. That training property is why prefix truncation can be evaluated as a deliberate operating point rather than an arbitrary loss of dimensions.</p>
+    <h3>A two-stage catalog search shows the intended use</h3>
     <p>A catalog can search compact prefixes to retrieve a broad candidate set, then rescore those candidates with longer embeddings from the same MRL model. The design makes sense only after recall is evaluated at both stages on representative queries.</p>
     <p>The <a href="/articles/embedding-models-compared/">embedding model guide</a> covers model selection and vector dimensions. The common misuse is chopping any embedding to a convenient size and assuming the result preserves meaning because an MRL-trained model could do so.</p>
-    <h2>The prefix length becomes a deployment parameter</h2>
+    <h3>The prefix length becomes a deployment parameter</h3>
     <p>Choosing a shorter prefix can reduce index storage and distance-computation work, but the effect depends on the model, corpus, and retrieval task. A product-name lookup may tolerate a compact representation that loses distinctions needed for legal or scientific search.</p>
     <p>The useful comparison holds the model and evaluation queries constant, then measures recall as dimensions are removed. A smaller vector is not automatically cheaper end to end if lower recall forces a much larger candidate set or reranking stage.</p>
   title: Matryoshka Representation Learning (MRL) in Vector Search
-  description: MRL is a training technique that allows vector embeddings to be truncated without losing
-    their core semantic meaning.
-  short_definition: A technique for training embedding models so that the most critical semantic information
-    is front-loaded into the earliest dimensions of the vector, allowing the vector to be truncated to
-    save space without catastrophic accuracy loss.
-  long_definition: In standard embedding models, semantic meaning is distributed equally across all dimensions
-    (e.g., all 1,536 dimensions in an OpenAI vector). If you truncate the vector to save database space,
-    the representation is destroyed. Matryoshka Representation Learning (MRL) forces the model to learn
-    representations at multiple granularities simultaneously during training—like Russian nesting dolls.
-    This guarantees that the first 256 dimensions contain a highly compressed, accurate summary of the
-    full 1536 dimensions. Engineers can use this to perform massive, fast, cheap vector searches using
-    the small dimensions, and then rerank the top results using the full dimensions.
-  how_it_works: "<ul>\n  <li><strong>Training:</strong> The model's loss function evaluates the accuracy\
-    \ of the embedding not just at its full size, but at mathematically smaller subsets (e.g., 2048, 1024,\
-    \ 512, 256 dimensions).</li>\n  <li><strong>Truncation at Index Time:</strong> Developers can simply\
-    \ slice off the end of the array (e.g., `vector[:256]`) before storing it in a vector database, cutting\
-    \ storage costs by 80%.</li>\n  <li><strong>Multi-stage Retrieval:</strong> A fast coarse search is\
-    \ done on the 256-dimension vectors, followed by rescoring using the full vectors.</li>\n</ul>"
-  use_cases:
-  - Dramatically reducing memory overhead in large-scale vector databases.
-  - Deploying vector search on edge devices with limited memory constraints.
+  description: MRL trains useful embedding prefixes so one vector can support retrieval at several evaluated dimensionalities.
   related_terms:
   - name: Cross-Encoder Reranking
     slug: cross-encoder-reranking
@@ -335,37 +299,32 @@ terms:
     <h2>Joint attention spends more work on fewer candidates</h2>
     <p>A cross-encoder places the query and one candidate in the same model input. Because their tokens can interact through attention, the model can judge details that a single geometric comparison between independently produced vectors may hide.</p>
     <p>The cost is repeated inference: every query-candidate pair needs a forward pass. That makes cross-encoders natural rerankers and poor first-stage retrievers for a large collection.</p>
-    <h2>A negated requirement can reverse the vector order</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">TWO-STAGE SEARCH</span><strong>Retrieve broadly, then score query-document pairs together</strong><small>The reranker spends more work only on the candidate set.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Fast retrieval returns candidates</strong><small>The first stage protects corpus-scale search cost.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">query</span><div class="flowchart-node"><strong>Repeat the same query</strong><small>Pair it with each candidate passage.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">candidate</span><div class="flowchart-node"><strong>Read the passage jointly</strong><small>Let tokens interact inside the cross-encoder.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">high score</span><div class="flowchart-node"><strong>Move the passage upward</strong><small>Send the best evidence to the next stage.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">missing candidate</span><div class="flowchart-node"><strong>Return to retrieval</strong><small>Reranking cannot score what it never received.</small></div></div>
+        </div>
+        <p class="flowchart-note">Candidate recall and reranker ordering are separate measurements with separate fixes.</p>
+      </div>
+    </div>
+    <h3>A negated requirement can reverse the vector order</h3>
     <p>For the query “authentication without API keys,” a semantically similar API-key guide may rank above a page about workload identity. A cross-encoder can inspect the negation and the candidate text together, then move the workload-identity page upward.</p>
     <p>A <a href="/glossary/bi-encoder/">bi-encoder</a> creates reusable vectors for candidate retrieval. A large generative model can also score documents, but generation is not required for the pairwise relevance task.</p>
-    <h2>The candidate set limits what reranking can repair</h2>
+    <h3>The candidate set limits what reranking can repair</h3>
     <p>The <a href="/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/">RAG reranking guide</a> explains the two-stage architecture. Cross-encoder reranking does not apply if the relevant document never enters the candidate set, and the common misuse is tuning the reranker while ignoring first-stage recall.</p>
-    <h2>Reranking depth is a budget decision</h2>
+    <p>A useful diagnosis records the relevant document’s position before and after reranking. That separates a reranker that fails to reorder a good candidate from a retriever that never supplied one.</p>
+    <h3>Reranking depth is a budget decision</h3>
     <p>Scoring more candidates gives the cross-encoder more opportunities to recover the best passage, but the request cost grows with the number and length of pairs. Documents may need trimming or passage-level scoring to fit the model input.</p>
     <p>Evaluation should separate candidate recall from reranker ordering. If the answer-bearing passage appears in the candidate set but finishes too low, the reranker is implicated; if it never appears, changing the cross-encoder cannot fix the retrieval failure.</p>
   title: Cross-Encoder Reranking in RAG Systems
-  description: A cross-encoder processes a user query and a document simultaneously to output a highly
-    accurate relevance score, used in the final stage of RAG.
-  short_definition: An architecture where an embedding model processes both the user's query and a target
-    document simultaneously through its attention layers to generate a highly precise relevance score.
-  long_definition: In standard vector search (Bi-Encoders), the user query and the document are embedded
-    separately and compared using simple geometry (Cosine Similarity). While incredibly fast, this misses
-    deep linguistic nuances because the words in the query never interact with the words in the document
-    during processing. A Cross-Encoder passes the query and the document *together* into a Transformer
-    model (e.g., `[CLS] Query [SEP] Document [SEP]`). The self-attention mechanism compares every word
-    in the query against every word in the document simultaneously, producing a single, highly accurate
-    similarity score. Because this is computationally expensive, it is used strictly as a 'Reranker'—re-evaluating
-    only the top 50 results retrieved by the faster Bi-Encoder.
-  how_it_works: "<ul>\n  <li><strong>Stage 1 (Retrieval):</strong> A fast Bi-Encoder retrieves the top\
-    \ 100 potential documents from a vector database of millions.</li>\n  <li><strong>Stage 2 (Concatenation):</strong>\
-    \ The system pairs the exact user query with each of the 100 documents.</li>\n  <li><strong>Stage\
-    \ 3 (Cross-Encoding):</strong> A Cross-Encoder model processes each pair, allowing deep contextual\
-    \ interactions between the query and document tokens.</li>\n  <li><strong>Stage 4 (Reranking):</strong>\
-    \ The model outputs a float score (0 to 1) for each pair. The list is sorted, and the absolute top\
-    \ 5 results are sent to the LLM.</li>\n</ul>"
-  use_cases:
-  - Fixing 'Top-K' retrieval failures in enterprise RAG pipelines.
-  - Improving search relevance for highly technical or domain-specific language where exact phrasing matters.
+  description: A cross-encoder reads a query and candidate together to score relevance after first-stage retrieval.
   related_terms:
   - name: Bi-Encoder Architecture
     slug: bi-encoder
@@ -379,41 +338,35 @@ terms:
     <h2>Jina AI moved the split after contextual encoding</h2>
     <p>Florian Günther and coauthors <a href="https://arxiv.org/abs/2409.04701">described late chunking in 2024</a> to preserve document-wide context in chunk embeddings. In an early-chunking pipeline, splitting happens before the transformer sees the text.</p>
     <p>Late chunking lets the transformer contextualize tokens across the longer document first, then pools token ranges that correspond to chunk boundaries.</p>
-    <h2>A pronoun reveals what early chunking loses</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">ORDER OF OPERATIONS</span><strong>Late chunking moves pooling after contextual encoding</strong><small>The boundary can stay the same while the chunk vector changes.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Start with one logical document</strong><small>Keep the token-to-source-span mapping.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">early</span><div class="flowchart-node"><strong>Split, then encode</strong><small>Each chunk enters the model alone.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">late</span><div class="flowchart-node"><strong>Encode, then pool</strong><small>Tokens see the longer document first.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">isolated</span><div class="flowchart-node"><strong>Local chunk vector</strong><small>Meaning comes only from the split span.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">contextualized</span><div class="flowchart-node"><strong>Context-aware chunk vector</strong><small>Pooling retains document-level token context.</small></div></div>
+        </div>
+        <p class="flowchart-note">Late chunking changes embedding order. It does not decide which text boundaries are useful.</p>
+      </div>
+    </div>
+    <h3>A pronoun reveals what early chunking loses</h3>
     <p>Consider a section that begins, “It retries the request with exponential backoff.” If the product component named in the preceding section is absent from the chunk, an isolated embedding may represent retries but not what performs them.</p>
     <p>Encoding both sections together can carry that antecedent into the later chunk’s token representations.</p>
     <p><a href="/glossary/semantic-chunking/">Semantic chunking</a> chooses boundaries according to topical change. Late chunking changes when embeddings are computed.</p>
     <p>The two techniques can coexist because they solve different problems.</p>
-    <h2>Long-document support is a condition, not a footnote</h2>
+    <h3>Long-document support is a condition, not a footnote</h3>
     <p>The <a href="/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/">contextual retrieval analysis</a> covers a different method that prepends generated context before indexing each chunk. Late chunking is unsuitable when documents exceed the embedding model’s usable context or when each record is already self-contained.</p>
     <p>The common misuse is calling any post-embedding text split late chunking, even though the chunk vectors were never pooled from contextualized token representations.</p>
-    <h2>Document boundaries still need a policy</h2>
+    <h3>Document boundaries still need a policy</h3>
     <p>Encoding an entire file is not always the right unit. A long collection of unrelated tickets may fit the model window but gain nothing from sharing context, while one chapter split across files may need a larger logical boundary.</p>
     <p>The pipeline must also map each pooled vector back to its exact source span. Without that mapping, retrieval may find a context-aware vector but the application cannot quote or cite the text that the vector represents.</p>
   title: 'Late Chunking: Context-Aware Vector Embeddings'
   description: Late chunking embeds an entire document first before splitting it into chunks, preserving
     global context in vector search.
-  short_definition: A RAG optimization where an entire document is processed by the embedding model first
-    to capture global context, and only then split into individual searchable chunks.
-  long_definition: 'Standard RAG pipelines use ''Early Chunking'': they arbitrarily slice a PDF into 500-word
-    blocks, and then embed each block separately. This destroys context—a chunk in the middle of chapter
-    3 might lose all reference to the main subject established in chapter 1, making it un-findable in
-    a vector search. Late Chunking (pioneered by models like Jina AI''s v2/v3 architecture) solves this
-    by passing the *entire* document (up to 8k or 32k tokens) through the Transformer model. The model
-    computes contextualized representations for every single token based on the whole document. Only after
-    this global contextualization occurs are the tokens pooled together into smaller 500-word chunks for
-    storage.'
-  how_it_works: "<ul>\n  <li><strong>Global Processing:</strong> A long-context embedding model reads\
-    \ the entire document in one pass.</li>\n  <li><strong>Token-Level Embedding:</strong> The model generates\
-    \ an embedding for every single token, enriched by the context of the entire text.</li>\n  <li><strong>Boundary\
-    \ Definition:</strong> The text is split into chunks (e.g., by paragraph or sentence).</li>\n  <li><strong>Mean\
-    \ Pooling:</strong> The token embeddings within each boundary are averaged together to create the\
-    \ final chunk vector. The resulting vector inherently 'knows' the broader context of the document\
-    \ it came from.</li>\n</ul>"
-  use_cases:
-  - Processing complex financial reports or legal contracts where individual clauses depend heavily on
-    the overarching document theme.
-  - Solving the 'lost in the middle' retrieval problem in traditional RAG.
   related_terms:
   - name: Semantic Chunking
     slug: semantic-chunking
@@ -427,38 +380,33 @@ terms:
     <h2>Microsoft’s GraphRAG work targeted corpus-level questions</h2>
     <p>Microsoft Research <a href="https://www.microsoft.com/en-us/research/project/graphrag/overview/">developed GraphRAG</a> to answer questions that require understanding a dataset as a whole, not merely retrieving a few passages similar to a query. Its pipeline extracts a graph from text, identifies communities, and builds summaries that can support broader questions.</p>
     <p>The term is now used loosely across products, so an implementation should state what its nodes and edges mean, how they were extracted, and which retrieval path uses them.</p>
-    <h2>A relationship question shows why chunks can be insufficient</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">GRAPH PIPELINE</span><strong>GraphRAG derives a retrieval structure from source text</strong><small>Every node, edge, and summary needs a path back to evidence.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Extract claims and entities</strong><small>Preserve the supporting source spans.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">local question</span><div class="flowchart-node"><strong>Follow a focused neighborhood</strong><small>Retrieve relationships around named entities.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">global question</span><div class="flowchart-node"><strong>Use community summaries</strong><small>Combine themes across graph regions.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">supported</span><div class="flowchart-node"><strong>Answer with provenance</strong><small>Trace graph-derived claims to the corpus.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">uncertain</span><div class="flowchart-node"><strong>Inspect extraction errors</strong><small>Check entity resolution and edge direction.</small></div></div>
+        </div>
+        <p class="flowchart-note">The graph is an index derived from documents, not an independent source of truth.</p>
+      </div>
+    </div>
+    <h3>A relationship question shows why chunks can be insufficient</h3>
     <p>Suppose incident reports mention a service, its owning team, a dependency, and a sequence of failures across separate documents. Vector search may retrieve individually similar reports.</p>
     <p>A graph can connect the service to the dependency and the team, making the cross-document path explicit.</p>
-    <h2>GraphRAG is not a knowledge graph with an LLM attached</h2>
+    <h3>GraphRAG is not a knowledge graph with an LLM attached</h3>
     <p>A knowledge graph may contain curated facts independent of retrieval-augmented generation. Ordinary RAG can answer local factual questions directly from passages, while GraphRAG adds extraction cost and another layer whose errors must be traced back to source text.</p>
     <p>The <a href="/articles/rag-evaluation-metrics-what-actually-matters/">RAG evaluation guide</a> explains why retrieval and answer quality need separate checks. GraphRAG does not apply when direct passage retrieval already answers the task, and the common misuse is treating an extracted edge as a verified fact rather than a claim that still needs provenance.</p>
-    <h2>Extraction quality governs every later graph query</h2>
+    <h3>Extraction quality governs every later graph query</h3>
     <p>Entity resolution must decide whether two names refer to the same thing, and relationship extraction must preserve the source that supports each edge. A confident community summary cannot repair a graph that merged two products or reversed a dependency.</p>
     <p>A useful evaluation samples nodes, edges, and summaries against the underlying documents before measuring answer quality. Graph structure is valuable when it exposes a path the question needs, not merely because it produces an impressive visualization.</p>
   title: 'GraphRAG: Knowledge Graphs for Retrieval Augmented Generation'
   description: GraphRAG combines vector search with Knowledge Graphs to allow LLMs to reason across complex
     relationships and entire datasets.
-  short_definition: An advanced retrieval technique that extracts entities and relationships from documents
-    to build a Knowledge Graph, allowing an LLM to answer complex queries that span across multiple disparate
-    documents.
-  long_definition: Traditional RAG uses vector similarity to find specific text snippets. If a user asks
-    a global question like, 'What are the common themes among all the product complaints last quarter?',
-    standard RAG fails because no single text chunk contains that summary. GraphRAG (Knowledge Graph Retrieval-Augmented
-    Generation), popularized by Microsoft Research, solves this by running an LLM over the entire dataset
-    during the ingestion phase. It extracts 'entities' (e.g., Product X, Bug Y) and their 'relationships'
-    (e.g., 'causes'), constructing a massive network graph. When the user queries the system, it traverses
-    this graph to pull in connected nodes, enabling true multi-hop reasoning and holistic summarization.
-  how_it_works: "<ul>\n  <li><strong>Indexing Phase:</strong> An LLM processes the source documents and\
-    \ extracts structured nodes (Entities) and edges (Relationships).</li>\n  <li><strong>Community Detection:</strong>\
-    \ The graph is clustered into hierarchical 'communities' based on closely related nodes.</li>\n  <li><strong>Pre-Summarization:</strong>\
-    \ The LLM generates a summary for each community ahead of time.</li>\n  <li><strong>Retrieval Phase:</strong>\
-    \ When a query is made, the system matches it to the relevant community summaries and graph nodes,\
-    \ passing a holistic, interconnected context to the final LLM.</li>\n</ul>"
-  use_cases:
-  - Answering 'sensemaking' questions that require connecting dots across hundreds of documents.
-  - Enterprise search where relationships between employees, projects, and codebases are more important
-    than exact keyword matches.
   related_terms:
   - name: Context Engineering
     slug: context-engineering
@@ -487,35 +435,27 @@ terms:
         <p class="flowchart-note">A model can ask to delete a record. Only the host should decide whether that request is allowed.</p>
       </div>
     </div>
-    <h2>Function calling, structured output, and MCP solve different boundaries</h2>
+    <h3>Function calling, structured output, and MCP solve different boundaries</h3>
     <p>Function calling is a provider name for tool calling. <a href="/glossary/json-mode-vs-structured-outputs/">Structured output</a> constrains the shape of a response but does not imply that any function will run.</p>
     <p>The <a href="/glossary/model-context-protocol/">Model Context Protocol</a> standardizes how clients discover and invoke tools across a connection; it does not replace the tool-call loop inside the host.</p>
-    <h2>A safe weather lookup has two validation layers</h2>
+    <h3>Tool selection and argument generation are separate failures</h3>
+    <p>A model can choose the wrong tool with perfectly valid arguments, or choose the right tool with a malformed identifier. Logs and evaluations should preserve both decisions so a routing failure is not mistaken for a schema failure.</p>
+    <p>The host can also remove tools that are irrelevant to the current step. A smaller allowed set reduces accidental selection and prevents a later prompt from reaching capabilities the task never needed.</p>
+    <h2>The host owns safety after the model chooses a tool</h2>
+    <p>The same tool schema can serve a harmless lookup and a destructive operation, so syntax alone cannot set the policy. The host needs rules for identity, argument ranges, side effects, confirmation, retries, and result handling.</p>
+    <p>Those rules should be enforced before execution and recorded with the request. A model explanation of why an action seems safe is not a substitute for the policy decision.</p>
+    <h3>A safe weather lookup has two validation layers</h3>
     <p>Suppose a model returns <code>{"city":"Pune","units":"metric"}</code> for a <code>get_weather</code> tool. Schema validation can reject an unknown unit, while application policy can reject a location the user is not authorized to query.</p>
     <p>A valid JSON object is not proof that the request is safe.</p>
     <p>The <a href="/articles/model-context-protocol-explained/">MCP architecture guide</a> shows how this boundary extends across clients and servers. Tool calling is unnecessary for facts already present in context, and its common misuse is treating a schema-valid request as permission to execute it.</p>
+    <h3>Retries must account for side effects</h3>
+    <p>A timed-out weather lookup can usually be repeated. A timed-out payment or ticket-creation call may already have succeeded, so a blind retry can duplicate the action.</p>
+    <p>Mutation tools need an idempotency strategy or a read-after-write check that resolves an uncertain result. Returning the tool error to the model without that protection shifts a distributed-systems problem into generated text.</p>
+    <h3>Tool results are untrusted context too</h3>
+    <p>A tool can return malformed data, stale records, or text containing instructions that should never override the host policy. The application should label the result as data, validate the expected shape, and limit what the next model turn may do with it.</p>
   title: Tool Calling (Function Calling) in LLMs
   description: Tool calling allows LLMs to interact with external APIs by reliably outputting structured
     JSON arguments.
-  short_definition: A capability fine-tuned into modern LLMs that allows them to intelligently select
-    an external tool and output the exact JSON arguments required to execute it.
-  long_definition: LLMs natively output unstructured text. Tool Calling (originally introduced as Function
-    Calling by OpenAI) is the process of providing an LLM with a schema of available tools (like a weather
-    API or a database query function). The model evaluates the user's prompt, determines if one of the
-    tools is necessary to fulfill the request, and instead of replying with conversational text, it halts
-    generation and outputs a perfectly structured JSON object matching the tool's expected arguments.
-    The application executes the external code using those arguments and feeds the result back into the
-    model to generate the final human-readable response.
-  how_it_works: "<ul>\n  <li><strong>Schema Injection:</strong> The developer passes a JSON Schema outlining\
-    \ the available tools (e.g., `get_weather(location, unit)`) alongside the system prompt.</li>\n  <li><strong>Model\
-    \ Decision:</strong> The LLM decides it cannot answer the user query based on internal weights and\
-    \ chooses to invoke a tool.</li>\n  <li><strong>JSON Output:</strong> The model outputs a specific\
-    \ token (like `<tool_call>`) followed by `{\"location\": \"Seattle\", \"unit\": \"celsius\"}`.</li>\n\
-    \  <li><strong>Execution:</strong> The developer's backend intercepts this, runs the actual Python\
-    \ code, and appends the result (e.g., `15°C`) to the message history for the LLM to read.</li>\n</ul>"
-  use_cases:
-  - Empowering autonomous agents to interact with the real world (sending emails, modifying databases).
-  - Fetching real-time data that an LLM could not possibly know (stock prices, current news).
   related_terms:
   - name: Agentic Engineering
     slug: agentic-engineering
@@ -530,38 +470,33 @@ terms:
     <p>Woosuk Kwon and coauthors <a href="https://arxiv.org/abs/2309.06180">introduced PagedAttention with vLLM in 2023</a>. Autoregressive serving keeps key and value tensors for earlier tokens, but request lengths are unpredictable.</p>
     <p>Reserving one contiguous region for each sequence wastes memory through over-allocation and fragmentation.</p>
     <p>PagedAttention divides the cache into fixed-size blocks and maps logical blocks for each sequence to available physical blocks. New blocks can be allocated as a sequence grows, and shared prefixes can refer to shared physical data where the runtime supports it.</p>
-    <h2>The page table changes placement, not attention</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">MEMORY MAP</span><strong>Logical cache blocks map onto available physical blocks</strong><small>A sequence no longer needs one contiguous reservation.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>A sequence needs another KV block</strong><small>The runtime consults its block table.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">free block</span><div class="flowchart-node"><strong>Map new storage</strong><small>The physical block may sit anywhere in the pool.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">shared prefix</span><div class="flowchart-node"><strong>Reference existing storage</strong><small>The runtime avoids duplicating identical prefix data.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">grows</span><div class="flowchart-node"><strong>Append a logical block</strong><small>The sequence keeps its logical order.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">finishes</span><div class="flowchart-node"><strong>Return blocks to the pool</strong><small>Other requests can reuse the memory.</small></div></div>
+        </div>
+        <p class="flowchart-note">The table handles placement. The attention calculation still reads the same logical sequence.</p>
+      </div>
+    </div>
+    <h3>The page table changes placement, not attention</h3>
     <p><a href="/glossary/kv-cache-eviction/">KV-cache eviction</a> discards cached token state under a memory limit. PagedAttention manages where retained state lives.</p>
     <p>Prompt caching reuses prefix computation across requests, while PagedAttention is a serving-time memory layout that can help implement such sharing.</p>
-    <h2>Uneven chat lengths create the practical case</h2>
+    <p>Neither mechanism decides which earlier tokens remain semantically important. Paging can reduce placement waste while the full logical cache continues to grow.</p>
+    <h3>Uneven chat lengths create the practical case</h3>
     <p>A batch may contain one short completion and one conversation that continues for many tokens. Block allocation lets the longer request grow without reserving its maximum possible contiguous cache in advance.</p>
     <p>The <a href="/articles/llm-inference-optimization/">inference optimization guide</a> places memory management beside batching and decoding techniques. The common misuse is claiming PagedAttention improves model quality; its purpose is to use serving memory more efficiently while preserving the same attention computation.</p>
-    <h2>Block size creates its own tradeoff</h2>
+    <h3>Block size creates its own tradeoff</h3>
     <p>Smaller blocks can reduce unused space at the end of a sequence but require more block-table entries and management work. Larger blocks reduce bookkeeping while increasing internal waste for short or recently finished sequences.</p>
     <p>The best choice depends on the serving runtime and request-length distribution. A throughput claim without batch behavior and memory utilization does not show whether paging, scheduling, or another change produced the result.</p>
   title: 'PagedAttention: Optimizing LLM Memory Serving'
-  description: PagedAttention is the memory management algorithm behind vLLM that fragments the KV cache
-    to eliminate memory waste.
-  short_definition: An attention algorithm inspired by operating system memory paging that non-contiguously
-    stores an LLM's KV cache, dramatically increasing the throughput of AI servers.
-  long_definition: During LLM inference, the model stores the state of previously processed tokens in
-    the Key-Value (KV) cache to avoid recalculating them. Historically, AI serving frameworks allocated
-    a large, contiguous block of GPU memory for the maximum possible length of the request. Because request
-    lengths are unpredictable, this led to massive internal memory fragmentation and wasted capacity (often
-    up to 60% of GPU memory sitting idle). PagedAttention, introduced by the vLLM project, solves this
-    by breaking the KV cache into fixed-size 'blocks' or 'pages' that can be stored non-contiguously anywhere
-    in the GPU memory. This allows the server to dynamically allocate exact memory as the sequence grows,
-    sharing blocks across multiple concurrent requests.
-  how_it_works: "<ul>\n  <li><strong>Virtual Memory:</strong> Like an OS, PagedAttention uses a block\
-    \ table to map virtual logical blocks of tokens to physical blocks in the GPU memory.</li>\n  <li><strong>Dynamic\
-    \ Allocation:</strong> Memory is allocated on-demand, block by block, rather than pre-allocating the\
-    \ theoretical maximum.</li>\n  <li><strong>Copy-on-Write:</strong> When using techniques like parallel\
-    \ sampling or beam search, multiple requests can share the exact same physical memory blocks for their\
-    \ common prompt prefixes, only allocating new blocks when the generated text diverges.</li>\n</ul>"
-  use_cases:
-  - Maximizing throughput and reducing costs for high-traffic LLM inference APIs.
-  - Efficiently serving complex agentic workflows that require multiple parallel completions from the
-    same base prompt.
+  description: PagedAttention maps logical KV-cache blocks onto non-contiguous physical memory during model serving.
   related_terms:
   - name: KV Cache Eviction
     slug: kv-cache-eviction
@@ -575,38 +510,32 @@ terms:
     <h2>The cache grows once per generated token</h2>
     <p>During autoregressive generation, the model retains key and value tensors from earlier tokens so it does not recompute them for every next token. That cache grows with sequence length and consumes serving memory that could otherwise hold more requests.</p>
     <p>Eviction policies keep a subset of token states according to recency, attention-derived importance, fixed landmarks, or another rule. The engineering question is which information can be removed without damaging the tasks the system must perform.</p>
-    <h2>Eviction, compression, and paging solve different constraints</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">EVICTION DECISION</span><strong>Memory pressure forces a prediction about future attention</strong><small>Removed states cannot support later tokens.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>The KV cache reaches its budget</strong><small>The policy scores retained token states.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">retain</span><div class="flowchart-node"><strong>Keep selected states</strong><small>Recent, fixed, or high-scoring tokens remain available.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">evict</span><div class="flowchart-node"><strong>Remove selected states</strong><small>The serving runtime releases their memory.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">not needed</span><div class="flowchart-node"><strong>Memory saved</strong><small>Generation continues without a visible loss.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">needed later</span><div class="flowchart-node"><strong>Information loss</strong><small>The model can no longer attend to the removed state.</small></div></div>
+        </div>
+        <p class="flowchart-note">Every eviction policy is a forecast. Task-level evaluation tests whether that forecast is useful.</p>
+      </div>
+    </div>
+    <h3>Eviction, compression, and paging solve different constraints</h3>
     <p><a href="/glossary/pagedattention/">PagedAttention</a> changes how retained cache blocks are placed. Quantization stores cache values with fewer bits, while eviction removes token states entirely.</p>
     <p>A smaller context input can avoid creating some states in the first place, but that is context selection rather than cache eviction.</p>
-    <h2>A name at the start of a conversation is a hard test</h2>
+    <h3>A name at the start of a conversation is a hard test</h3>
     <p>If a long support conversation introduces an account identifier early and asks for it again much later, an eviction policy that keeps only recent tokens may lose the relevant state. A credible evaluation varies the position and type of required evidence instead of verifying a fixture constructed to match the policy.</p>
     <p>The <a href="/articles/kv-cache-eviction-accuracy/">KV-cache eviction analysis</a> explains the accuracy risks without presenting an unsupported hardware benchmark. The common misuse is publishing a memory or latency gain without the model, sequence distribution, hardware, policy settings, and task-level quality result needed to interpret it.</p>
-    <h2>Attention weight is not the same as future importance</h2>
+    <h3>Attention weight is not the same as future importance</h3>
     <p>A token that receives little attention now may become essential after the topic changes or the user refers back to it. Policies based on recent attention therefore make a prediction about future use, not an objective judgment that a token is irrelevant.</p>
     <p>Evaluation should include delayed references, information near different positions, and tasks that depend on several separated facts. A policy that succeeds only when the fixture places important tokens where the policy already prefers carries no evidence beyond its construction.</p>
   title: KV Cache Eviction Policies
-  description: KV Cache eviction drops low-impact tokens from an LLM's memory to handle infinite context
-    windows on limited GPU hardware.
-  short_definition: Algorithms that selectively delete less important tokens from an LLM's Key-Value cache
-    during inference to prevent GPU memory exhaustion during long conversations.
-  long_definition: As context windows push past 100k tokens, the memory required to store the Key-Value
-    (KV) cache grows linearly and quickly overwhelms even the largest GPUs. KV Cache Eviction policies
-    dynamically prune this memory during generation. Based on the observation that attention within an
-    LLM is extremely sparse (a model only actually 'looks at' a fraction of the previous tokens to predict
-    the next one), these policies drop tokens that receive low attention scores. Techniques like 'Heavy
-    Hitter Oracle' (H2O) retain only the most critical tokens (like the system prompt and the most recent
-    turns), effectively simulating an infinite context window within a strict memory budget.
-  how_it_works: "<ul>\n  <li><strong>Attention Scoring:</strong> During generation, the algorithm monitors\
-    \ the attention weights across all tokens in the cache.</li>\n  <li><strong>Heavy Hitters:</strong>\
-    \ Tokens that consistently accumulate high attention scores (often the initial instructions or specific\
-    \ entities) are marked as 'Heavy Hitters' and preserved.</li>\n  <li><strong>Eviction:</strong> Tokens\
-    \ with near-zero attention scores are permanently evicted from the GPU memory.</li>\n  <li><strong>Rolling\
-    \ Window:</strong> A fixed sliding window preserves the absolute most recent tokens to maintain immediate\
-    \ fluency.</li>\n</ul>"
-  use_cases:
-  - Running infinite-length chatbots or agents on consumer-grade GPUs (e.g., LocalLLaMA).
-  - Processing massive codebases or books where only specific variables and structural boundaries actually
-    matter for the final output.
+  description: KV-cache eviction removes selected token states when a serving system cannot retain the full cache.
   related_terms:
   - name: PagedAttention
     slug: pagedattention
@@ -621,35 +550,32 @@ terms:
     <p>A semantic chunker commonly embeds sentences or groups of sentences, compares neighboring representations, and splits where similarity drops. Other implementations use an LLM or discourse model to identify boundaries.</p>
     <p>The name describes the goal, not one standardized algorithm.</p>
     <p>The technique addresses a failure of fixed windows: a boundary can cut a condition away from the instruction it qualifies or combine two unrelated sections merely because they fit the same size limit.</p>
-    <h2>An API warning belongs with the step it limits</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">BOUNDARY TEST</span><strong>Split where the subject changes, then check the retrieval unit</strong><small>Semantic similarity proposes a boundary; downstream retrieval validates it.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Compare neighboring sentence groups</strong><small>Use the chosen semantic-change signal.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">same thought</span><div class="flowchart-node"><strong>Keep the group together</strong><small>The statements support one retrieval unit.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">topic break</span><div class="flowchart-node"><strong>Place a boundary</strong><small>The next group starts a new candidate chunk.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">too large</span><div class="flowchart-node"><strong>Apply a size guardrail</strong><small>Coherence does not make an unbounded chunk useful.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">retrievable</span><div class="flowchart-node"><strong>Index with source context</strong><small>Preserve the heading and source span.</small></div></div>
+        </div>
+        <p class="flowchart-note">A readable chunk is not automatically a good search result. Test whether real queries retrieve it.</p>
+      </div>
+    </div>
+    <h3>An API warning belongs with the step it limits</h3>
     <p>Imagine a procedure whose final sentence warns that token rotation invalidates active sessions. A fixed boundary may place the warning in the next chunk, while a semantic boundary can keep the consequence with the rotation step.</p>
     <p><a href="/glossary/late-chunking/">Late chunking</a> changes when embeddings are computed, not how boundaries are chosen. Recursive chunking follows structural separators, and simple overlap repeats text across adjacent chunks.</p>
-    <h2>Coherence does not excuse unbounded chunks</h2>
+    <h3>Coherence does not excuse unbounded chunks</h3>
     <p>The <a href="/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/">contextual retrieval analysis</a> shows how chunk context can be improved at index time. Semantic chunking does not apply when each database record is already atomic, and the common misuse is letting one broad topic produce a chunk too large for precise retrieval.</p>
-    <h2>Boundary quality must be tested through retrieval</h2>
+    <h3>Boundary quality must be tested through retrieval</h3>
     <p>A chunk can read coherently and still be a poor retrieval unit. It may contain several answers, omit a heading that disambiguates the subject, or exceed the amount of text the downstream model can use effectively.</p>
     <p>A representative query set should reveal whether the answer-bearing passage is retrieved and whether the returned chunk includes enough context to support an answer. Average chunk length alone cannot establish that the boundaries are useful.</p>
   title: Semantic Chunking vs. Naive Chunking in RAG
   description: Semantic chunking splits documents dynamically based on sentence embedding distance rather
     than arbitrary character limits.
-  short_definition: A method of splitting text for vector databases that evaluates the embedding distance
-    between sentences, ensuring that logically coherent thoughts are kept together in a single chunk.
-  long_definition: Traditional 'naive' chunking splits documents by an arbitrary character count (e.g.,
-    500 tokens). This often slices a complex paragraph in half, destroying the context and guaranteeing
-    poor vector retrieval. Semantic chunking solves this by using a lightweight embedding model to measure
-    the 'distance' between consecutive sentences. If the distance suddenly spikes, the system recognizes
-    a shift in topic and draws the chunk boundary there. This results in dynamically sized chunks that
-    map perfectly to the original author's logical boundaries, drastically reducing hallucinations during
-    the generation phase of RAG.
-  how_it_works: "<ul>\n  <li><strong>Sentence Splitting:</strong> The document is broken down into individual\
-    \ sentences.</li>\n  <li><strong>Embedding:</strong> Each sentence is individually embedded into a\
-    \ vector.</li>\n  <li><strong>Distance Calculation:</strong> The system calculates the cosine distance\
-    \ between Sentence A and Sentence B, then B and C.</li>\n  <li><strong>Boundary Creation:</strong>\
-    \ When the distance between two sentences exceeds a predefined threshold (e.g., 95th percentile),\
-    \ a chunk boundary is placed between them.</li>\n</ul>"
-  use_cases:
-  - Processing highly unstructured documents like transcripts or chat logs where formatting cues are missing.
-  - Improving recall accuracy in RAG systems built on dense academic papers.
   related_terms:
   - name: Late Chunking
     slug: late-chunking
@@ -664,38 +590,34 @@ terms:
     <p>Luyu Gao and coauthors <a href="https://arxiv.org/abs/2212.10496">introduced HyDE in 2022</a> for zero-shot dense retrieval. A user query may be too short or phrased unlike the documents that answer it.</p>
     <p>Generating a plausible document gives the encoder a richer representation that may sit closer to relevant corpus passages.</p>
     <p>The system embeds the generated text, retrieves real documents, and answers from those sources. The hypothetical text has done its job once it has improved the search query.</p>
-    <h2>Acronym-heavy documentation creates a useful case</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">QUERY TRANSFORMATION</span><strong>HyDE uses generated prose to find real documents</strong><small>The hypothetical document never becomes answer evidence.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Start with a short user query</strong><small>The wording may not resemble corpus passages.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">generate</span><div class="flowchart-node"><strong>Draft an answer-like document</strong><small>Introduce likely domain language and structure.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">embed</span><div class="flowchart-node"><strong>Encode the hypothetical text</strong><small>Use its vector as the retrieval query.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">retrieve</span><div class="flowchart-node"><strong>Return real source documents</strong><small>Rank the corpus against the generated representation.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">answer</span><div class="flowchart-node"><strong>Discard the hypothetical claims</strong><small>Ground the response in retrieved evidence only.</small></div></div>
+        </div>
+        <p class="flowchart-note">HyDE succeeds or fails as retrieval. Fluent invented text is not a useful outcome by itself.</p>
+      </div>
+    </div>
+    <h3>Acronym-heavy documentation creates a useful case</h3>
     <p>For “why does my login expire?”, a hypothetical passage might mention session lifetime, refresh tokens, and token revocation. Those terms can retrieve the correct authentication documentation even when the original question contains none of them.</p>
-    <h2>Query expansion may generate terms; HyDE generates a document</h2>
+    <p>The hypothetical passage should resemble the kind of document the index contains. Generating a conversational answer for a corpus of terse reference entries can create a new representation mismatch instead of closing the old one.</p>
+    <h3>Query expansion may generate terms; HyDE generates a document</h3>
     <p>Traditional query expansion adds related words or alternate queries. HyDE generates answer-shaped prose and embeds it.</p>
     <p>Self-querying retrieval instead extracts structured filters and a semantic query from the request.</p>
     <p>The <a href="/articles/hybrid-search-bm25-vector-search/">hybrid search guide</a> covers another way to handle vocabulary mismatch. HyDE is a poor fit when invented specifics can pull retrieval toward the wrong domain, and the common misuse is quoting the hypothetical document as though a source had said it.</p>
-    <h2>The generated text must remain outside the evidence set</h2>
+    <h3>The generated text must remain outside the evidence set</h3>
     <p>A safe implementation labels the hypothetical document internally and keeps it separate from retrieved sources. If the generation invents a product name or technical term, retrieval may follow that invention and return a coherent but irrelevant neighborhood.</p>
     <p>Evaluation should compare retrieval with and without HyDE on the same queries, then inspect both gains and regressions. The method earns its extra model call only when it improves access to real answer-bearing documents.</p>
   title: 'HyDE: Hypothetical Document Embeddings for Zero-Shot Retrieval'
   description: HyDE improves vector search by using an LLM to generate a fake perfect answer before searching
     the vector database.
-  short_definition: A zero-shot retrieval technique where a user's question is first answered by an LLM
-    (hallucinating a hypothetical document), and that hallucinated answer is embedded and used to search
-    the vector database.
-  long_definition: In standard vector search, you are comparing a short, interrogative user query ('How
-    do I configure Redis?') against long, declarative document chunks. These two text formats live in
-    different parts of the embedding space, causing low similarity scores. Hypothetical Document Embeddings
-    (HyDE) fixes this asymmetry. When a user asks a question, an LLM is prompted to write a fake, hypothetical
-    answer based purely on its internal weights. This hallucinated document is mathematically much closer
-    to the actual, factual documents stored in the vector database. The system embeds the fake document,
-    retrieves the factual documents, and then generates the final, grounded response.
-  how_it_works: "<ul>\n  <li><strong>Generation:</strong> The user query is sent to an Instruct LLM.</li>\n\
-    \  <li><strong>Hallucination:</strong> The LLM generates a hypothetical, plausible-sounding (but potentially\
-    \ factually incorrect) document that answers the query.</li>\n  <li><strong>Embedding:</strong> The\
-    \ hypothetical document is encoded into a dense vector.</li>\n  <li><strong>Retrieval:</strong> The\
-    \ vector database retrieves the actual, factual documents that are semantically closest to the hallucinated\
-    \ text.</li>\n</ul>"
-  use_cases:
-  - Searching dense technical documentation where the user's vocabulary doesn't match the documentation's
-    vocabulary.
-  - Zero-shot domain retrieval where the embedding model hasn't been fine-tuned on the specific jargon.
   related_terms:
   - name: Bi-Encoder Architecture
     slug: bi-encoder
@@ -709,37 +631,33 @@ terms:
     <h2>The model translates intent into two search channels</h2>
     <p>A request can contain both a topic and exact constraints. Self-querying retrieval separates them: descriptive language becomes the vector or text query, while explicit constraints become fields in a filter expression.</p>
     <p>The pattern became common in retrieval frameworks as LLMs made natural-language parsing flexible, but the host must restrict the filter grammar and validate field names, operators, and values.</p>
-    <h2>“EU incidents after July” should not be one embedding</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">QUERY PARSE</span><strong>Separate meaning from exact constraints</strong><small>The model proposes a structured search request; the host validates it.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Read the natural-language request</strong><small>Identify topical language and filterable constraints.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">meaning</span><div class="flowchart-node"><strong>Build the semantic query</strong><small>Keep the subject that retrieval should match.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">constraint</span><div class="flowchart-node"><strong>Build typed filters</strong><small>Map dates, regions, and products to allowed fields.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">valid</span><div class="flowchart-node"><strong>Execute constrained retrieval</strong><small>Search only records allowed by the filter.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">ambiguous</span><div class="flowchart-node"><strong>Ask or reject</strong><small>Do not invent a precise interpretation.</small></div></div>
+        </div>
+        <p class="flowchart-note">Generated filters narrow retrieval. They must never replace access-control enforcement.</p>
+      </div>
+    </div>
+    <h3>“EU incidents after July” should not be one embedding</h3>
     <p>For that request, “incidents” belongs in semantic retrieval, while region equals EU and date after July belong in structured filters. Embedding the entire sentence leaves exact constraints to vector geometry, which is not designed to enforce them.</p>
     <p>Metadata filtering written directly by application code is preferable when the UI already supplies exact fields. <a href="/glossary/tool-calling/">Tool calling</a> may carry the generated search request, but self-querying retrieval describes the translation step.</p>
-    <h2>Schema quality sets the ceiling</h2>
+    <h3>Schema quality sets the ceiling</h3>
     <p>The <a href="/articles/hybrid-search-bm25-vector-search/">hybrid search guide</a> explains how semantic and lexical retrieval can be combined after filtering. Self-querying does not apply when metadata is incomplete or access control is being delegated to model output.</p>
     <p>The common misuse is treating a generated filter as authorization rather than as untrusted input to a policy-enforcing search layer.</p>
-    <h2>The allowed query language should be smaller than the database language</h2>
+    <h3>The allowed query language should be smaller than the database language</h3>
     <p>The model usually needs a restricted set of fields and operators, not arbitrary SQL or a vendor’s full filter syntax. A typed intermediate representation lets the host reject unknown fields and compile allowed expressions safely.</p>
     <p>Ambiguous dates, units, and names need an explicit policy. The system can ask for clarification rather than silently translating “recent” or “enterprise” into a filter that looks precise but was never specified.</p>
   title: 'Self-Querying Retrieval: Combining Metadata and Vector Search'
   description: Self-querying retrieval uses an LLM to dynamically write database filters (SQL/NoSQL) alongside
     generating a vector search query.
-  short_definition: An intelligent retrieval mechanism where an LLM parses a user's natural language query
-    to automatically extract exact metadata filters (like dates or authors) while simultaneously performing
-    a semantic vector search.
-  long_definition: Vector similarity is terrible at exact matches. If a user asks, 'Find me marketing
-    reports from 2024 about AI,' a pure vector search might return a highly relevant AI report from 2022
-    because '2024' is just a minor token. Self-Querying Retrieval solves this by placing an LLM in front
-    of the database. The LLM reads the user's intent and translates it into a structured query. It strips
-    out 'from 2024' to build a deterministic metadata filter (e.g., `WHERE year = 2024`) and uses the
-    remaining phrase ('marketing reports about AI') to perform the semantic vector search. The results
-    must pass both the hard filter and the semantic similarity threshold.
-  how_it_works: "<ul>\n  <li><strong>Schema Injection:</strong> The LLM is provided with the exact schema\
-    \ of the vector database's metadata (e.g., `year: int`, `department: string`).</li>\n  <li><strong>Parsing:</strong>\
-    \ The LLM analyzes the user prompt and extracts relevant constraints based on the schema.</li>\n \
-    \ <li><strong>Query Construction:</strong> The system builds a composite database query utilizing\
-    \ both the structured filters and the dense vector representation of the semantic intent.</li>\n</ul>"
-  use_cases:
-  - E-commerce search where users mix semantic desires ('a comfortable shoe') with hard constraints ('under
-    $100', 'size 10').
-  - Enterprise document retrieval requiring strict access control and date-range filtering.
   related_terms:
   - name: Tool Calling
     slug: tool-calling
@@ -768,35 +686,23 @@ terms:
         <p class="flowchart-note">Independent encoding buys reuse and speed by giving up token-level query-document interaction.</p>
       </div>
     </div>
-    <h2>Bi-encoders retrieve; cross-encoders judge pairs</h2>
+    <h3>Bi-encoders retrieve; cross-encoders judge pairs</h3>
     <p>A <a href="/glossary/cross-encoder-reranking/">cross-encoder</a> reads a query and candidate together, so its attention layers can model their exact interaction. That usually makes it useful for reranking a small candidate set but too expensive for a first pass over a large corpus.</p>
     <p>HNSW is different again: it is an index that searches vectors, not the model that creates them.</p>
-    <h2>The query and document may need different instructions</h2>
+    <h3>Pre-encoding moves document work out of the request path</h3>
+    <p>The document side can be encoded when content enters the index and reused across many searches. Query latency then includes one query encoding, index search, and any later reranking rather than one model pass for every document.</p>
+    <p>That reuse is the bi-encoder’s scaling advantage. It also means a model or preprocessing change requires re-encoding the collection before query and document vectors are comparable again.</p>
+    <h2>Retrieval quality depends on the role of each input</h2>
+    <p>Queries and documents often have different lengths and purposes. A retrieval setup should preserve that asymmetry during encoding and evaluate the ranking on the question types the application actually receives.</p>
+    <p>Model documentation may prescribe distinct query and passage prefixes or separate encoders. Omitting that contract can make a capable model look weak because the deployment no longer matches its training setup.</p>
+    <h3>The query and document may need different instructions</h3>
     <p>For the query “how do I rotate an API key?”, a bi-encoder can retrieve a credential-rotation guide even when that guide uses different wording. An asymmetric retrieval model may encode the short question and the longer document with different prefixes or encoders because they play different roles.</p>
     <p>The <a href="/articles/embedding-models-compared/">embedding model guide</a> explains the vector representation underneath this search. A bi-encoder is a poor final judge when a tiny qualifier changes relevance, and the common misuse is reading a high cosine similarity as a calibrated probability that a document answers the query.</p>
+    <h3>Hard negatives teach the boundary the retriever keeps missing</h3>
+    <p>A random unrelated document is easy to rank below a relevant one. A versioned page for the wrong release or a guide that discusses API keys when the query excludes them is a harder and more useful negative.</p>
+    <p>Evaluation should include those near misses and report whether the answer-bearing document enters the candidate set. A reranker cannot repair a document that the bi-encoder never retrieves.</p>
   title: What is a Bi-Encoder Architecture in NLP?
-  description: A Bi-Encoder architecture embeds queries and documents separately, enabling massive, pre-computed
-    vector searches.
-  short_definition: A neural network architecture where two separate inputs (like a query and a document)
-    are passed through an embedding model independently to create two distinct vectors that can be compared
-    mathematically.
-  long_definition: 'The foundation of modern semantic search is the Bi-Encoder. Unlike Cross-Encoders
-    which process two texts together, a Bi-Encoder processes text in isolation. You pass a Wikipedia article
-    through the model, and it outputs a vector. Months later, a user types a query; that query is passed
-    through the same model to output a second vector. The system then calculates the cosine similarity
-    between the two vectors. Because the document vectors can be pre-computed and stored offline in a
-    database (like Pinecone or Milvus), Bi-Encoders can search through millions of documents in milliseconds.
-    The trade-off is accuracy: because the query and document never ''see'' each other during the neural
-    network processing, deep contextual relationships are lost.'
-  how_it_works: "<ul>\n  <li><strong>Offline Indexing:</strong> Millions of documents are individually\
-    \ passed through the Transformer model to generate dense vectors. These are stored in a vector index.</li>\n\
-    \  <li><strong>Online Querying:</strong> A user query is passed through the same Transformer model\
-    \ to generate a single vector.</li>\n  <li><strong>Distance Calculation:</strong> The database performs\
-    \ Approximate Nearest Neighbor (ANN) search to find the document vectors with the highest cosine similarity\
-    \ to the query vector.</li>\n</ul>"
-  use_cases:
-  - The primary retrieval mechanism (Stage 1) in almost all RAG applications.
-  - Semantic deduplication of massive datasets.
+  description: A bi-encoder embeds queries and documents independently so document vectors can be indexed and reused.
   related_terms:
   - name: Cross-Encoder Reranking
     slug: cross-encoder-reranking
@@ -810,38 +716,32 @@ terms:
     <h2>Subspace codebooks replace floating-point coordinates</h2>
     <p>Product quantization divides each vector into equal subspaces. A clustering step learns a codebook for each subspace, and an indexed vector stores the nearest centroid identifier from every codebook instead of all original coordinates.</p>
     <p>At search time, the system estimates distances through lookup tables built from the query and those centroids. Compression saves memory and bandwidth at the cost of quantization error.</p>
-    <h2>A toy code shows the storage shape</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">ENCODING SHAPE</span><strong>Product quantization replaces sub-vectors with centroid identifiers</strong><small>The stored code is compact because the codebooks carry the coordinate values.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Split one vector into sub-vectors</strong><small>Each position corresponds to one learned subspace.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">train</span><div class="flowchart-node"><strong>Learn each codebook</strong><small>Cluster representative sub-vectors into centroids.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">encode</span><div class="flowchart-node"><strong>Choose nearest centroids</strong><small>Store their identifiers instead of full coordinates.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">search</span><div class="flowchart-node"><strong>Build distance lookups</strong><small>Compare the query with codebook centroids.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">rank</span><div class="flowchart-node"><strong>Estimate vector distance</strong><small>Combine the selected subspace distances.</small></div></div>
+        </div>
+        <p class="flowchart-note">The compressed code preserves an approximation. Recall testing measures the information the approximation lost.</p>
+      </div>
+    </div>
+    <h3>A toy code shows the storage shape</h3>
     <p>If a vector is divided into four sub-vectors and each codebook has entries addressed by one byte, the compressed representation contains four centroid identifiers plus any index overhead. The example explains the shape, not a universal compression ratio, because production choices depend on dimension, codebook size, and metadata.</p>
-    <h2>PQ compresses vectors; HNSW navigates neighbors</h2>
+    <h3>PQ compresses vectors; HNSW navigates neighbors</h3>
     <p><a href="/glossary/hierarchical-navigable-small-world-hnsw/">HNSW</a> is a graph index, while PQ is an encoding. Matryoshka representation learning trains useful vector prefixes, and scalar quantization reduces the precision of individual values.</p>
     <p>The <a href="/articles/embedding-models-compared/">embedding model guide</a> explains why dimension and model behavior must be evaluated together. Product quantization is unnecessary when full vectors fit comfortably in memory, and the common misuse is reporting space savings without measuring recall on the compressed index.</p>
-    <h2>Codebooks inherit the distribution they learned</h2>
+    <h3>Codebooks inherit the distribution they learned</h3>
     <p>A codebook trained on one embedding model or domain may represent a changed distribution poorly. Replacing the embedding model, normalizing vectors differently, or adding a distinct document population can make the old centroids a worse approximation.</p>
     <p>Migration planning should therefore include codebook retraining and side-by-side recall checks. Keeping original vectors elsewhere may also be necessary when the system needs exact reranking or future re-encoding.</p>
   title: Product Quantization (PQ) for Vector Compression
   description: Product Quantization is an algorithmic technique used to compress dense vectors, reducing
     memory usage in large-scale databases.
-  short_definition: A highly efficient lossy compression algorithm used in vector databases to drastically
-    reduce the memory footprint of embeddings while maintaining fast nearest-neighbor search capabilities.
-  long_definition: Storing 100 million dense vectors (like OpenAI's 1536-dimensional float32 arrays) requires
-    hundreds of gigabytes of expensive RAM. Product Quantization (PQ) is the mathematical solution to
-    this infrastructure bottleneck. Instead of storing the exact 1536-dimensional point in space, PQ splits
-    the vector into smaller sub-vectors. It then runs a clustering algorithm (like k-means) on these sub-vectors
-    to find a predefined set of 'centroids' (a codebook). Every vector is then replaced by the short ID
-    of the centroid it is closest to. This reduces the memory footprint of a vector by up to 97%, allowing
-    massive vector indexes to fit entirely in memory for millisecond retrieval times, at the cost of a
-    slight drop in recall accuracy.
-  how_it_works: "<ul>\n  <li><strong>Vector Splitting:</strong> A high-dimensional vector is divided into\
-    \ equal-sized sub-vectors.</li>\n  <li><strong>Codebook Generation:</strong> The system trains a k-means\
-    \ clustering model on the sub-vectors to create a 'codebook' of representative points.</li>\n  <li><strong>Quantization:</strong>\
-    \ The actual vector values are discarded and replaced with the integer ID of the nearest codebook\
-    \ entry.</li>\n  <li><strong>Asymmetric Distance Computation (ADC):</strong> During a search, the\
-    \ uncompressed user query vector is compared against the compressed document vectors using a pre-calculated\
-    \ distance lookup table, ensuring rapid execution.</li>\n</ul>"
-  use_cases:
-  - Scaling vector databases from millions to billions of documents without proportionally scaling RAM
-    costs.
-  - Deploying semantic search capabilities on edge devices or mobile phones.
   related_terms:
   - name: Matryoshka Representation Learning (MRL)
     slug: matryoshka-representation-learning
@@ -870,36 +770,23 @@ terms:
         <p class="flowchart-note">The operational choice is not “HNSW or accuracy.” It is where to set the recall, latency, memory, and build-time tradeoff.</p>
       </div>
     </div>
-    <h2>The index is not the embedding model</h2>
+    <h3>The index is not the embedding model</h3>
     <p>A <a href="/glossary/bi-encoder/">bi-encoder</a> creates vectors; HNSW searches them. Product quantization compresses vectors and may be combined with an index, while exact k-nearest-neighbor search compares the query against the full collection.</p>
     <p>These components answer different questions and should not be presented as interchangeable vector databases.</p>
-    <h2>A filtered support search exposes the tradeoff</h2>
+    <h3>Graph construction creates the routes search will later follow</h3>
+    <p>When a vector enters the index, HNSW searches for nearby existing points and connects the new node according to construction settings and neighbor-selection rules. Those choices determine which shortcuts remain available at query time.</p>
+    <p>A weakly built graph cannot always be repaired by exploring more candidates during search. Construction quality, insertion order, deleted nodes, and later updates belong in the evaluation when the index changes over time.</p>
+    <h2>Choosing HNSW means choosing a recall budget</h2>
+    <p>HNSW exposes construction and search controls that change graph density, build work, memory use, and the number of candidates explored. Their names vary by implementation, but no setting can be interpreted without a recall target and a representative query set.</p>
+    <h3>A filtered support search exposes the tradeoff</h3>
     <p>Imagine an index of support articles where the query must match both semantic meaning and a product-version filter. If filtering leaves few eligible graph nodes, an aggressive search setting can miss the best valid result.</p>
     <p>Increasing search breadth may recover it, but the right setting must be measured on representative queries rather than copied from a vendor default.</p>
     <p>The <a href="/articles/local-wasm-vector-benchmarks/">browser vector-search analysis</a> discusses index choices without treating its earlier benchmark framing as proof. HNSW is unnecessary for a small collection that exact search handles comfortably, and its common misuse is quoting a latency number without the dataset, hardware, recall target, index parameters, and filter behavior that produced it.</p>
+    <h3>Exact search supplies the baseline HNSW needs</h3>
+    <p>Before tuning an approximate index, run exact search on the evaluation queries and record the true nearest neighbors. HNSW recall is the share of those neighbors recovered under a particular search setting.</p>
+    <p>Exact search can also be the production choice for a collection that fits the latency and cost budget. An approximate index adds build time, memory, and operational settings, so scale alone does not make it necessary.</p>
   title: 'HNSW Algorithm: Fast Vector Search Explained'
-  description: HNSW is the dominant graph-based algorithm used by vector databases to perform fast approximate
-    nearest neighbor (ANN) searches.
-  short_definition: A graph-based algorithm that organizes vector embeddings into multiple layers, enabling
-    sub-millisecond Approximate Nearest Neighbor (ANN) search across billions of data points.
-  long_definition: Performing an exact search (k-NN) on a vector database requires comparing the user's
-    query against every single document vector in the system. This 'brute force' approach does not scale.
-    Hierarchical Navigable Small World (HNSW) is the algorithmic engine that powers almost every modern
-    vector database (Pinecone, Weaviate, Qdrant). It builds a multi-layered graph where the bottom layer
-    contains every single vector connected to its nearest neighbors. The higher layers contain progressively
-    fewer vectors with longer links—acting like an express highway system. When a query is made, HNSW
-    starts at the sparse top layer, quickly zooms into the general neighborhood of the query, and then
-    drops down to the dense bottom layer to find the exact nearest neighbors.
-  how_it_works: "<ul>\n  <li><strong>Graph Construction:</strong> Vectors are inserted into a multi-layered\
-    \ graph. Short connections reside at the bottom (local roads), and long connections reside at the\
-    \ top (highways).</li>\n  <li><strong>Routing Phase:</strong> A search begins at the top layer. The\
-    \ algorithm traverses the graph to find the node closest to the query vector.</li>\n  <li><strong>Descent:</strong>\
-    \ Once it can no longer get closer on the top layer, it drops down to the next layer and repeats the\
-    \ process.</li>\n  <li><strong>Local Search:</strong> At the bottom layer, a localized search occurs\
-    \ among the dense neighborhood to return the final 'Approximate' Nearest Neighbors.</li>\n</ul>"
-  use_cases:
-  - Powering low-latency semantic search in production RAG systems.
-  - Real-time recommendation engines for e-commerce and streaming platforms.
+  description: HNSW is a multilayer graph index for approximate nearest-neighbor search over vectors.
   related_terms:
   - name: Product Quantization (PQ)
     slug: product-quantization
@@ -927,36 +814,24 @@ terms:
         <p class="flowchart-note">A fixed sequence of calls is a workflow. ReAct specifically makes the next step depend on the latest observation.</p>
       </div>
     </div>
-    <h2>ReAct is not a synonym for chain of thought or tool calling</h2>
+    <h3>ReAct is not a synonym for chain of thought or tool calling</h3>
     <p>Chain-of-thought prompting elicits intermediate reasoning but may never touch an external system. <a href="/glossary/tool-calling/">Tool calling</a> supplies an action interface but does not define the surrounding decision loop.</p>
     <p>Plan-and-Solve creates a plan before execution, whereas ReAct can revise its direction after each observation.</p>
-    <h2>A documentation lookup shows when the loop earns its cost</h2>
+    <h3>The trajectory matters more than a narrated thought</h3>
+    <p>The inspectable ReAct structure is the sequence of action requests and returned observations. A free-form reasoning trace may sound explanatory, but it is not required to prove which source was read or which operation changed state.</p>
+    <p>Production systems can keep concise decision labels and structured state without exposing private reasoning text. What matters is whether each action follows from the available evidence and changes the task state.</p>
+    <h2>An observation is useful only when it changes the next step</h2>
+    <p>A ReAct loop should record the current question, the selected action, the returned observation, and the reason another action is needed. Repeating the same search with slightly different wording is not progress unless the new result resolves a named uncertainty.</p>
+    <h3>A documentation lookup shows when the loop earns its cost</h3>
     <p>Suppose an agent must identify the current authentication parameter in an API. It searches the official reference, observes two versioned pages, checks the version in the user’s configuration, then answers from the matching page.</p>
     <p>Each observation removes an ambiguity that the initial prompt could not resolve.</p>
     <p>The <a href="/articles/agent-loop-anatomy/">agent-loop anatomy</a> covers the production controls around this pattern. ReAct is unnecessary when one deterministic query returns the needed fact, and the common misuse is exposing verbose reasoning text as if it were an audit trail.</p>
     <p>Tool inputs, observations, and state transitions are the inspectable evidence.</p>
+    <h3>Stopping rules prevent a failed search from becoming a loop</h3>
+    <p>The host can cap actions, detect repeated calls, reject unchanged state, and ask the user when required information is unavailable. Those controls belong outside the model because a prompt asking the model to stop responsibly is not an enforcement mechanism.</p>
+    <p>ReAct does not fit a task with a known fixed sequence and deterministic checks. In that case, a workflow makes the route visible and prevents the model from spending actions rediscovering it.</p>
   title: 'ReAct Prompting: Reason and Act Framework'
-  description: ReAct is a prompting paradigm that forces an LLM to explicitly output its reasoning trace
-    before executing an action or tool call.
-  short_definition: An agentic framework that strictly interleaves internal reasoning (Chain of Thought)
-    with external actions (Tool Calling), allowing an LLM to solve complex, multi-step problems autonomously.
-  long_definition: If you ask an LLM a complex question that requires an external tool, it will often
-    hallucinate an answer immediately or execute the wrong tool. The ReAct (Reason + Act) paradigm, introduced
-    by researchers at Princeton and Google, forces the model into a strict cognitive loop. The model is
-    prompted to first output a `Thought:` detailing its current understanding of the problem and what
-    it needs to do next. Only then does it output an `Action:` (like querying a database). Once the database
-    returns an `Observation:`, the model loops back to `Thought:`. This explicit externalization of the
-    planning process drastically reduces hallucinations and gives developers a clear trace of the agent's
-    logic.
-  how_it_works: "The agent is trapped in a loop until it outputs an answer:\n<ul>\n  <li><strong>Thought:</strong>\
-    \ The agent assesses the current state. (e.g., 'I need to find the CEO's email. I should search the\
-    \ directory.')</li>\n  <li><strong>Action:</strong> The agent calls a tool. (e.g., <code>search_directory(\"\
-    CEO\")</code>)</li>\n  <li><strong>Observation:</strong> The system returns the tool's output. (e.g.,\
-    \ 'Result: jane.doe@company.com')</li>\n  <li><strong>Thought:</strong> The agent evaluates the observation.\
-    \ (e.g., 'I have the email. I can answer the user now.')</li>\n</ul>"
-  use_cases:
-  - Building autonomous web-research agents.
-  - Creating conversational interfaces for complex internal databases.
+  description: ReAct interleaves model decisions with actions and observations that can change the next step.
   related_terms:
   - name: Agentic Engineering
     slug: agentic-engineering
@@ -985,35 +860,24 @@ terms:
         <p class="flowchart-note">Planning reduces omission risk. It does not validate a false premise or repair a bad intermediate result by itself.</p>
       </div>
     </div>
-    <h2>The framework differs from adaptive agent planning</h2>
+    <h3>The framework differs from adaptive agent planning</h3>
     <p>ReAct alternates decisions with new observations and can change course during execution. Plan-and-Solve front-loads decomposition, so it fits stable problems better.</p>
     <p>A workflow engine goes further by encoding the steps in software rather than asking a model to invent them each time.</p>
-    <h2>A migration checklist is a good fit; incident response is not</h2>
+    <h3>Decomposition should expose dependencies before solving begins</h3>
+    <p>A useful plan shows that one result is needed before another step can start. It also separates facts supplied by the task from intermediate values the model must derive.</p>
+    <p>That structure makes a missing prerequisite visible before the final answer. A numbered list without dependencies can still omit the step whose output the rest of the solution assumes.</p>
+    <h2>A plan earns its place by making omissions reviewable</h2>
+    <p>The plan should name the required intermediate artifacts and the dependencies between them. A list of generic verbs such as analyze, implement, and verify adds ceremony without showing what could be skipped.</p>
+    <p>Review is most useful before expensive or irreversible execution begins. The reviewer can reject the route while the plan is still cheap to change.</p>
+    <h3>A migration checklist is a good fit; incident response is not</h3>
     <p>For an API migration, the model can first list the affected endpoints, authentication changes, compatibility checks, code edits, and tests, then work through that ordered plan. The plan makes a skipped compatibility check visible.</p>
     <p>An outage investigation is different because each log or metric changes the next question. The <a href="/articles/agentic-workflow-playbook/">agentic workflow playbook</a> shows where planning fits inside a broader delivery process.</p>
     <p>The common misuse is treating a polished plan as verification; every executed step still needs evidence.</p>
+    <h3>Plan repair should preserve completed evidence</h3>
+    <p>If execution exposes a false assumption, the system should revise the affected steps rather than regenerate the entire plan and lose the state of completed work. Each step needs a status and an artifact that supports that status.</p>
+    <p>This is where Plan-and-Solve differs from a prose outline. The plan participates in control flow, so changes to it must be traceable to an observation or a failed check.</p>
   title: Plan-and-Solve Architecture for AI Agents
-  description: Plan-and-Solve is an agentic architecture that replaces the step-by-step ReAct loop with
-    a comprehensive upfront planning phase.
-  short_definition: An agentic architecture where a complex objective is broken down into a complete,
-    sequential list of sub-tasks before any actual execution or tool calling begins.
-  long_definition: While ReAct prompting is great for dynamic problems, it is inherently short-sighted.
-    The agent decides its next action based only on its immediate observation, which often leads to infinite
-    loops or losing track of the overarching goal. The Plan-and-Solve architecture splits cognitive labor
-    into two distinct phases. First, a 'Planner' model receives the user's objective and outputs a rigid,
-    step-by-step plan (often a Directed Acyclic Graph of dependencies). Second, a 'Worker' model simply
-    executes those steps sequentially, passing the output of step 1 as the input to step 2. This significantly
-    reduces API costs and prevents the agent from spiraling off-topic.
-  how_it_works: "<ul>\n  <li><strong>Planning Phase:</strong> An LLM writes out a numbered list of sub-tasks\
-    \ required to fulfill the user's request.</li>\n  <li><strong>Execution Loop:</strong> A separate\
-    \ prompt (or separate specialized agent) is given Task 1 and the necessary tools.</li>\n  <li><strong>State\
-    \ Management:</strong> The results of Task 1 are appended to the system memory. Task 2 is then executed\
-    \ using the context gained from Task 1.</li>\n  <li><strong>Completion:</strong> Once all tasks in\
-    \ the plan are crossed off, a final response is generated.</li>\n</ul>"
-  use_cases:
-  - Automated software engineering where file creation, coding, and testing must happen in a specific
-    order.
-  - Complex data analysis pipelines requiring multiple distinct API queries.
+  description: Plan-and-Solve asks a model to decompose a task before carrying out the planned steps.
   related_terms:
   - name: Agentic Engineering
     slug: agentic-engineering
@@ -1028,38 +892,32 @@ terms:
     <p>Several research groups developed speculative decoding methods around 2022 and 2023 to reduce the sequential cost of autoregressive generation. A small model or another draft mechanism proposes a run of tokens.</p>
     <p>The target model evaluates that run in one pass, accepts a valid prefix under the decoding rule, and resumes from the first rejection.</p>
     <p>The method can be lossless with respect to the target distribution when the acceptance and correction procedure is implemented correctly. A plain small-model fallback does not provide that guarantee.</p>
-    <h2>Acceptance rate determines whether the draft helps</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">DRAFT AND VERIFY</span><strong>The target model accepts a prefix, not an unchecked completion</strong><small>Rejection returns generation to the target distribution.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Draft several candidate tokens</strong><small>A faster process proposes the next run.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">accepted prefix</span><div class="flowchart-node"><strong>Advance several positions</strong><small>Keep the proposals accepted by the target check.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">first rejection</span><div class="flowchart-node"><strong>Correct at the target model</strong><small>Discard the unsupported remainder of the draft.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">high acceptance</span><div class="flowchart-node"><strong>Fewer sequential target steps</strong><small>The draft work can repay its overhead.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">low acceptance</span><div class="flowchart-node"><strong>Little or no gain</strong><small>Draft and verification work may dominate.</small></div></div>
+        </div>
+        <p class="flowchart-note">The acceptance procedure is the algorithm. Guessing with a small model is not sufficient.</p>
+      </div>
+    </div>
+    <h3>Acceptance rate determines whether the draft helps</h3>
     <p>A draft model that predicts common boilerplate well may advance several tokens per target-model verification. If the domain, language, or style makes its proposals diverge, frequent rejection can erase the benefit.</p>
     <p>Quantization reduces numeric precision, batching combines requests, and test-time compute spends more work to improve an answer. Speculative decoding instead tries to produce target-model tokens with fewer sequential target passes.</p>
-    <h2>The benchmark needs the whole serving context</h2>
+    <h3>The benchmark needs the whole serving context</h3>
     <p>The <a href="/articles/speculative-decoding-explained/">speculative decoding guide</a> explains the mechanism and evaluation variables. The technique is a poor fit when the target model is already small or verification overhead dominates.</p>
     <p>The common misuse is publishing one speedup without the draft and target models, hardware, batch size, prompt and output lengths, acceptance behavior, and decoding settings.</p>
-    <h2>Serving load can change the result</h2>
+    <h3>Serving load can change the result</h3>
     <p>A technique that improves single-request latency may compete for compute that a busy server could use for batching other requests. Draft-model memory also reduces the capacity available to the target model and its KV cache.</p>
     <p>The relevant evaluation matches the production objective: time to first token, time per output token, total request latency, or throughput under load. “Faster” is incomplete until the metric and workload are named.</p>
   title: 'Speculative Decoding: Accelerating LLM Inference'
-  description: Speculative decoding uses a tiny, fast model to guess the next tokens, which a massive
-    model then verifies in parallel.
-  short_definition: An inference optimization technique that accelerates text generation by using a small,
-    fast 'draft' model to predict multiple upcoming tokens, which are then verified simultaneously by
-    the main, larger model.
-  long_definition: LLM generation is memory-bandwidth bound. Producing text token-by-token is incredibly
-    slow because the GPU has to load the entire massive model's weights into memory just to calculate
-    a single word. Speculative Decoding breaks this sequential bottleneck. A tiny, highly efficient 'draft'
-    model (e.g., 1B parameters) rapidly guesses the next 5 to 10 tokens. These guessed tokens are then
-    passed to the main, massive 'target' model (e.g., 70B parameters). The massive model evaluates all
-    5 tokens in parallel in a single forward pass. If it agrees with the draft model's logic, it accepts
-    the tokens instantly, essentially generating 5 words for the computational time of 1.
-  how_it_works: "<ul>\n  <li><strong>Drafting:</strong> A fast, small model generates a sequence of <em>k</em>\
-    \ speculative tokens.</li>\n  <li><strong>Verification:</strong> The large target model processes\
-    \ these <em>k</em> tokens in parallel.</li>\n  <li><strong>Acceptance:</strong> The target model compares\
-    \ the draft's probabilities against its own. It accepts tokens up to the point where the draft made\
-    \ a mistake.</li>\n  <li><strong>Correction:</strong> At the point of the mistake, the target model\
-    \ discards the remaining draft tokens and generates the correct token itself, then the loop restarts.</li>\n\
-    </ul>"
-  use_cases:
-  - Reducing latency and Time to First Token (TTFT) in real-time conversational agents.
-  - Increasing serving throughput for massive open-source models without sacrificing output quality.
+  description: Speculative decoding proposes draft tokens and verifies them with the target model to reduce sequential generation steps.
   related_terms:
   - name: PagedAttention
     slug: pagedattention
@@ -1088,33 +946,23 @@ terms:
         <p class="flowchart-note">A routing label is not a security decision unless the host enforces the corresponding permissions.</p>
       </div>
     </div>
-    <h2>A router is not a planner or a mixture-of-experts gate</h2>
+    <h3>A router is not a planner or a mixture-of-experts gate</h3>
     <p>A planner decomposes one task into steps. A tool selector chooses an operation inside an agent loop.</p>
     <p>A mixture-of-experts gate activates internal model components, while an agentic router chooses among externally visible execution paths.</p>
-    <h2>Support triage makes the failure cost visible</h2>
+    <p>These layers may coexist, but their metrics differ. A router is judged by destination choice, a planner by the adequacy of its decomposition, and an executor by the result it produces.</p>
+    <h3>Rules should win when the boundary is already explicit</h3>
+    <p>If a request carries a product identifier, region, or user-selected workflow, ordinary code can route it without a model. A learned classifier earns its cost only for ambiguity the available fields do not resolve.</p>
+    <p>Hybrid routing often uses rules for permissions and known cases, then a model for the remainder. That keeps safety decisions deterministic while preserving flexibility for natural-language intent.</p>
+    <h2>Routing errors have asymmetric costs</h2>
+    <p>Sending a simple question to an expensive general model wastes money, but sending a refund request to an under-authorized answer bot can block the user. Evaluation should weight each error by what the wrong destination can do, not report accuracy alone.</p>
+    <h3>Support triage makes the failure cost visible</h3>
     <p>A billing question can go to a read-only account agent, while a refund request must take a path with stronger authentication and an approval step. Routing both to the same broad agent increases its permissions and makes failures harder to contain.</p>
     <p>The <a href="/articles/multi-agent-vs-single-agent-tradeoffs/">single-agent versus multi-agent analysis</a> helps decide whether those destinations should exist at all. The common misuse is adding an LLM classifier where a stable field or explicit user choice would route more reliably.</p>
+    <h3>A fallback path must preserve the original request</h3>
+    <p>When the router is uncertain, it can ask a clarifying question, choose a constrained general path, or escalate to a human. Silently choosing the top label hides uncertainty and makes later failures look like executor failures.</p>
+    <p>The fallback should receive the original request and the router’s evidence, not only its predicted label. That preserves the information needed to correct a bad route.</p>
   title: 'Agentic Routers: Optimizing Multi-Agent Workflows'
-  description: An agentic router acts as a traffic controller, directing user queries to the cheapest
-    or most specialized model in a compound AI system.
-  short_definition: A lightweight classifier model or programmatic logic layer that analyzes an incoming
-    user query and routes it to the specific AI agent, tool, or LLM best suited to handle it.
-  long_definition: In a Compound AI System, sending every user query to the most expensive, massive model
-    (like GPT-4 or Claude 3.5 Sonnet) is an architectural failure that destroys unit economics. An Agentic
-    Router sits at the very edge of the application. When a user sends a prompt, the Router evaluates
-    its complexity and intent. If the user asks 'Reset my password', the router sends it to a fast, cheap
-    8B parameter model or a deterministic script. If the user asks 'Debug this Python memory leak', the
-    router forwards it to the massive, expensive coding model. Routers ensure high system reliability
-    while minimizing API costs and latency.
-  how_it_works: "<ul>\n  <li><strong>Intent Classification:</strong> The router uses a fast embedding\
-    \ model or a small LLM to classify the query into predefined categories.</li>\n  <li><strong>Semantic\
-    \ Routing:</strong> If vector similarity is used, the query is routed based on its proximity to known\
-    \ problem clusters in the database.</li>\n  <li><strong>Fallback Logic:</strong> If an invoked agent\
-    \ fails to solve the problem, the router catches the failure and dynamically re-routes the task to\
-    \ a stronger, slower agent.</li>\n</ul>"
-  use_cases:
-  - Managing multi-agent customer support systems to protect margins.
-  - Building robust MoE (Mixture of Experts) style architectures at the application layer.
+  description: An agentic router directs a request to a model, agent, tool, workflow, or human path under an explicit policy.
   related_terms:
   - name: Semantic Caching
     slug: semantic-caching
@@ -1128,38 +976,33 @@ terms:
     <p>Provider APIs first offered JSON-focused generation to prevent prose around a machine-readable response. Schema-constrained structured outputs tightened the contract by limiting generation to shapes allowed by a developer-supplied schema.</p>
     <p>JSON mode can return <code>{"temperature":"warm"}</code> when the application expects a numeric Celsius field. The text parses, but it violates the application contract.</p>
     <p>A schema can require <code>temperature_c</code> as a number and reject undeclared fields.</p>
-    <h2>Function calling adds an operation to the schema</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">OUTPUT CONTRACT</span><strong>Choose the constraint that matches the consumer</strong><small>Parsing and schema adherence are different guarantees.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>What must the application consume?</strong><small>Define the contract before choosing a model setting.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">any JSON</span><div class="flowchart-node"><strong>Use JSON mode</strong><small>Require syntax the parser can read.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">fixed shape</span><div class="flowchart-node"><strong>Use structured outputs</strong><small>Supply the supported schema and required fields.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">schema valid</span><div class="flowchart-node"><strong>Check business rules</strong><small>Validate permissions, identifiers, and factual meaning.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">refusal or cutoff</span><div class="flowchart-node"><strong>Handle outside the object path</strong><small>Inspect completion state before parsing.</small></div></div>
+        </div>
+        <p class="flowchart-note">A valid object can still contain the wrong facts. The schema proves shape, not truth.</p>
+      </div>
+    </div>
+    <h3>Function calling adds an operation to the schema</h3>
     <p><a href="/glossary/tool-calling/">Tool calling</a> uses structured arguments to request a named operation. A structured response may simply be returned to the application without invoking anything.</p>
     <p>Validation after generation is another option, but it may require repair or retry when the model produces an invalid shape.</p>
-    <h2>Schema compliance is not semantic correctness</h2>
+    <h3>Schema compliance is not semantic correctness</h3>
     <p>A response can match every type and still contain the wrong customer identifier or an unsupported conclusion. The host must validate permissions, ranges, referential integrity, and business rules that JSON Schema does not prove.</p>
     <p>The <a href="/articles/structured-outputs-llms-json-mode-function-calling/">structured outputs guide</a> compares the API patterns in depth. JSON mode is enough when any valid JSON value is acceptable, while structured outputs fit stable contracts.</p>
     <p>The common misuse is presenting schema compliance as proof that the underlying facts are correct.</p>
-    <h2>Refusals and incomplete generations need a separate path</h2>
+    <h3>Refusals and incomplete generations need a separate path</h3>
     <p>An API may return a refusal or stop before completing a schema-constrained object. Application code should inspect the provider’s finish state and refusal representation before attempting to parse ordinary output.</p>
     <p>Schema versions also need coordination with consumers. Tightening an enum or making a field required can break a downstream client even when the model follows the new contract perfectly.</p>
   title: JSON Mode vs. Structured Outputs in LLMs
-  description: Understanding the technical difference between requesting JSON from an LLM and enforcing
-    guaranteed structured outputs via constrained decoding.
-  short_definition: JSON Mode heavily biases an LLM to produce valid JSON syntax, whereas Structured Outputs
-    mathematically constrain the model's token generation to guarantee the output perfectly matches a
-    specific JSON Schema.
-  long_definition: For years, engineers struggled to parse LLM text into backend systems. The first solution
-    was 'JSON Mode'—a system prompt flag that heavily weighted the model's probability distribution toward
-    generating brackets and quotes. While it rarely produced invalid syntax, JSON Mode offered no guarantees
-    about the keys and values inside the object; the model could still invent its own schema. 'Structured
-    Outputs' (or Constrained Decoding) is a lower-level architectural upgrade. The inference engine converts
-    the developer's exact JSON Schema into a formal grammar or state machine. During generation, any token
-    that would violate the schema (e.g., trying to output a string when an integer is required) is mathematically
-    masked out. Structured Outputs guarantee 100% schema adherence.
-  how_it_works: "<ul>\n  <li><strong>JSON Mode:</strong> The developer begs the model in the prompt to\
-    \ return JSON. The model usually complies, but might inject conversational filler.</li>\n  <li><strong>Structured\
-    \ Outputs:</strong> The developer provides a strict JSON Schema API object. The inference server compiles\
-    \ this schema into a Finite State Machine. The LLM is physically incapable of generating tokens outside\
-    \ the permitted grammar paths.</li>\n</ul>"
-  use_cases:
-  - Extracting clean data tables from messy, unstructured PDF invoices.
-  - Feeding LLM decisions directly into rigid SQL databases or strongly-typed frontend components.
+  description: JSON mode targets valid JSON syntax, while structured outputs constrain a response to a supported schema.
   related_terms:
   - name: Tool Calling
     slug: tool-calling
@@ -1173,37 +1016,32 @@ terms:
     <h2>Stanford NLP shifted prompt work into program optimization</h2>
     <p>Omar Khattab and collaborators <a href="https://arxiv.org/abs/2310.03714">introduced DSPy</a> to replace manual prompt tweaking with declarative modules and optimizers. A developer defines the input-output signature and composes operations, then a DSPy optimizer uses examples and a metric to produce instructions, demonstrations, or other parameters for that program.</p>
     <p>The framework addresses a maintenance problem: handwritten prompts become brittle when models, modules, or task requirements change. Recompiling against an evaluation set can adapt the program without editing every instruction by hand.</p>
-    <h2>A support classifier needs a metric before an optimizer</h2>
+    <div class="flowchart">
+      <div class="flowchart-caption"><span class="flowchart-caption-label">OPTIMIZATION LOOP</span><strong>DSPy searches program parameters against an explicit metric</strong><small>The examples and metric define what improvement means.</small></div>
+      <div class="flowchart-body">
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Define modules and signatures</strong><small>Specify the inputs, outputs, and program composition.</small></div></div>
+        <div class="flowchart-branches">
+          <div class="flowchart-branch"><span class="flowchart-edge-label">examples</span><div class="flowchart-node"><strong>Run candidate programs</strong><small>Use development cases to produce outputs.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">metric</span><div class="flowchart-node"><strong>Score the behavior</strong><small>Reward the properties the task actually needs.</small></div></div>
+        </div>
+        <div class="flowchart-outcomes">
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">optimize</span><div class="flowchart-node"><strong>Select instructions or demonstrations</strong><small>Keep the candidate that improves the objective.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">verify</span><div class="flowchart-node"><strong>Test on held-out cases</strong><small>Reject gains that only fit the development set.</small></div></div>
+        </div>
+        <p class="flowchart-note">DSPy can optimize only what the examples and metric make visible.</p>
+      </div>
+    </div>
+    <h3>A support classifier needs a metric before an optimizer</h3>
     <p>A DSPy program might map a ticket to a category and urgency. The development examples provide expected labels, while the metric rewards correct category and applies a stronger penalty when urgent tickets are missed.</p>
     <p>The optimizer can only improve what that metric and dataset reveal.</p>
-    <h2>DSPy is not an agent framework or automatic truth machine</h2>
+    <h3>DSPy is not an agent framework or automatic truth machine</h3>
     <p><a href="/glossary/flow-engineering/">Flow engineering</a> describes a staged system architecture, while DSPy supplies abstractions for composing and optimizing model calls within such a system. Fine-tuning changes model weights through training; many DSPy optimizers instead search instructions and demonstrations, though the framework can support weight optimization too.</p>
     <p>The <a href="/articles/rag-evaluation-metrics-what-actually-matters/">evaluation metrics guide</a> explains why the objective must reflect the real task. DSPy is unnecessary for a one-off prompt with no evaluation set, and the common misuse is celebrating a higher development score without checking held-out cases for overfitting.</p>
-    <h2>Compilation is an experiment with dependencies</h2>
+    <h3>Compilation is an experiment with dependencies</h3>
     <p>A compiled DSPy program depends on the optimizer, model, training examples, metric, and search budget used to produce it. Changing the model can change which demonstrations and instructions work, so the compiled artifact should be versioned with those inputs.</p>
     <p>Human review still matters when the metric captures only part of quality. A support answer can satisfy an exact-match label while using a tone, source, or explanation that the scoring function never examined.</p>
   title: 'DSPy: Programming AI Language Models'
-  description: DSPy is a framework that treats LLM prompts as compiled code, using machine learning to
-    optimize prompts automatically.
-  short_definition: An open-source framework developed by Stanford that replaces manual prompt engineering
-    with programmatic compilation, allowing developers to write declarative logic that automatically optimizes
-    the prompts sent to an LLM.
-  long_definition: Building complex LLM applications historically required developers to painstakingly
-    tweak the wording of their prompts (e.g., 'Think step by step', 'You are an expert'). If the underlying
-    model was changed, all the hardcoded prompts broke. DSPy shifts this paradigm by abstracting the prompt
-    away entirely. Developers define modules (like `Retrieve`, `ChainOfThought`) and provide a small dataset
-    of desired inputs and outputs. The DSPy 'Compiler' then runs hundreds of variations, scoring the outputs,
-    and automatically discovering the mathematically optimal prompt instructions for that specific LLM
-    and task. It treats prompting as an optimization problem, not an art form.
-  how_it_works: "<ul>\n  <li><strong>Signatures:</strong> The developer defines the input/output behavior\
-    \ without writing instructions (e.g., <code>question -> answer</code>).</li>\n  <li><strong>Modules:</strong>\
-    \ The developer stitches together pre-built reasoning architectures.</li>\n  <li><strong>Teleprompters\
-    \ (Optimizers):</strong> The developer provides a metric (like accuracy). DSPy automatically rewrites\
-    \ the internal prompts and updates the system weights until the metric is maximized.</li>\n</ul>"
-  use_cases:
-  - Building highly robust RAG pipelines that survive underlying model deprecations.
-  - Systematically improving the accuracy of complex extraction tasks without manually guessing prompt
-    words.
+  description: DSPy expresses LLM programs as modules and optimizes their parameters against examples and a metric.
   related_terms:
   - name: Context Engineering
     slug: context-engineering

@@ -54,7 +54,7 @@ class GlossaryIntegrityTests(unittest.TestCase):
         """
         placeholders = []
         for term in self.terms:
-            for field in ("short_definition", "long_definition"):
+            for field in ("opening_definition", "body_html"):
                 value = str(term.get(field, "")).strip()
                 if not value or "TODO" in value:
                     placeholders.append(f"{term['slug']}.{field}")
