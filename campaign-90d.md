@@ -300,6 +300,36 @@ A diagram earns its place by showing a shape the prose cannot. When the shape is
 
 The slop reviewer now reads **rendered output rather than markdown**, because a reviewer reading source would have passed the broken page.
 
+### The funnel breaks at position, not at indexing and not at CTR
+
+Measured 2026-08-17 across the full 17-month Search Console span, non-brand and with the machine fan-out removed. This settles what the campaign should be optimising and rules out two things it has been treating as candidates.
+
+| Position | Human impressions | Clicks | CTR |
+|---|---:|---:|---:|
+| 1–3 | 105 | 4 | 3.81% |
+| 4–10 | 815 | 10 | 1.23% |
+| 11–20 | 1,201 | 6 | 0.50% |
+| 21–30 | 1,145 | 2 | 0.17% |
+| **31–50** | **9,321** | **1** | **0.01%** |
+| 51+ | 3,032 | 0 | 0.00% |
+| **Total** | **15,619** | **23** | **0.15%** |
+
+**Only 5.9% of human impressions have ever been in the top 10.** Seventy-nine per cent sat at position 31 or worse, where 9,321 impressions produced a single click — which is what position 31+ does, regardless of the title.
+
+Three things this rules out:
+
+- **Not an indexing problem.** The leading indicators put the earn rate at 86–91% across every cluster, and time to first impression has gone **96 days in 2026-Q1 → 66 in Q2 → 4 in Q3**. Pages get found and shown.
+- **Not a CTR problem.** The original brief read "impressions 4×'d, clicks flat" as titles and snippets. It was never that. Where the site does reach the top 10, CTR is 1.2–3.8% — low for those positions and consistent with an AI Overview taking the click, but the volume is 5.9% of the total, so fixing it cannot move a number that is zero.
+- **Not a cluster-mix problem.** Two independent instruments now agree. The band gives centrals of 435/413/366 across 40/55/70% cluster-3 share, and within a shared publishing era the clusters land within ten days of each other on indexing speed. **The allocation work was low-leverage and is closed.**
+
+What it leaves is position, and what moves position on a domain like this is authority and depth rather than volume: consolidating thin pages into ones that own a job, and earning links. The referring-domain baseline is **zero**, which is the binding constraint and the one the campaign has least ability to move.
+
+**Only 15 pages have ever earned a human click, and 23 human clicks exist across the entire 17-month record.** The pages carrying the most human impressions are the dead 2025 productivity comparisons — `todoist-vs-any-do` at 2,278 impressions and zero clicks — which is the same pattern at a larger scale: impressions are cheap on this domain and position is not.
+
+#### One thing the leading indicators cannot answer, stated rather than guessed
+
+Seventy-six pages were substantially rewritten in the last seven days. Three have an observable day, and **all three had zero impressions before the rewrite**, so nothing can distinguish "the rewrite did nothing" from "we cannot see yet." **Zero informative comparisons.** The first useful one needs a rewritten page that was already earning. That is the honest state, not a null result, and it is why the revision cohort stays in the daily record instead of being called either way.
+
 ### A link profile is a diagnostic for editorial substance
 
 Added 2026-08-17, and it changes what internal linking is for. **If every outbound link on a page fails the subject-of-the-sentence test, the page is telling you it has no natural neighbours.** The cause is almost always that the page holds an abstraction while other pages own each concrete piece of its argument, and an abstraction has no neighbours, so every link has to be manufactured. **Review the page. Do not replace the links.**
