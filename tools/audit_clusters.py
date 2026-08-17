@@ -90,6 +90,17 @@ def main() -> int:
         print("no published posts found — run from the repo root")
         return 1
 
+    # Inbound counts include links that only exist in templates — the homepage cluster
+    # nav, the tool pages — and those are only visible in the built site. Without a build
+    # this reports every page as an orphan, which is a confidently wrong answer rather
+    # than a missing one. It failed CI that way once, because CI ran it before build.py.
+    # Refuse instead of guessing.
+    if not (OUTPUT / "sitemap.xml").is_file():
+        print("output/ is missing or unbuilt — run `python build.py` first.")
+        print("Inbound links from templates live only in the built site, so without it")
+        print("every page would be reported as an orphan. Refusing to report.")
+        return 2
+
     undeclared = [s for s, p in posts.items() if not p["cluster"]]
     inbound: dict[str, int] = collections.Counter()
     template_inbound: dict[str, int] = collections.Counter()

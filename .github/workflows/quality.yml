@@ -83,15 +83,6 @@ jobs:
           fi
           echo "No new rule_checker errors introduced."
 
-      # Orphans and thin-outbound pages are both at zero now that the retrofit in
-      # planning/internal-link-retrofit.md has landed, so this can gate. It fails on a
-      # post with no declared cluster or no inbound link. It does NOT fail on a
-      # cross-cluster link: the one legitimate exception is when the link is the subject
-      # of the sentence, which cannot be judged mechanically, so those are reported for a
-      # reviewer rather than blocked.
-      - name: Guard cluster isolation and inbound linking
-        run: python tools/audit_clusters.py --strict
-
       # The defect class that has dominated this campaign is a first-person claim or a
       # measurement the site cannot evidence. 116 candidates sit across 54 of 89 posts, so
       # this cannot gate on an absolute count. It gates on regressions, same as the writing
@@ -132,6 +123,23 @@ jobs:
 
       - name: Build and audit site
         run: python build.py
+
+      # MUST RUN AFTER build.py. This reads output/ to count inbound links that come
+      # from templates rather than article bodies — the homepage cluster nav, the tool
+      # pages. Without a build, output/ does not exist, every page looks orphaned, and the
+      # gate fails for a reason that has nothing to do with the commit. It passed locally
+      # only because a stale build was sitting there, which is exactly the kind of gate
+      # this campaign has learned not to trust.
+      #
+      # Orphans and thin-outbound pages are both at zero now that the retrofit in
+      # planning/internal-link-retrofit.md has landed, so this can gate. It fails on a
+      # post with no declared cluster or no inbound link. It does NOT fail on a
+      # cross-cluster link: the one legitimate exception is when the link is the subject
+      # of the sentence, which cannot be judged mechanically, so those are reported for a
+      # reviewer rather than blocked.
+      - name: Guard cluster isolation and inbound linking
+        run: python tools/audit_clusters.py --strict
+
 
       # `output/` is untracked and .gitignored — Cloudflare Pages generates it at build
       # time — so the old "verify generated output is committed" step diffed nothing and
