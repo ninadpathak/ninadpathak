@@ -35,13 +35,17 @@ engineers, owned by live `technical-writing-for-engineers`.
 
 Do **not** build a demo repository. The ground already exists and is inspectable: this site's own
 Python codebase. `build.py`, `rule_checker.py`, `seo_audit.py` and `tools/` carry real docstrings,
-real inline comments, and a README, and the decisions about what went where were made for real
-reasons.
+real inline comments, and a README. Those present-tense placements are the evidence.
 
-Point at that. Say what he puts in a docstring versus what he moved out into a written page, and
-why. An opinion honestly held about his own code is not falsifiable in the damaging sense.
+Point at that. Explain the boundary he uses now: what belongs in a docstring, what the generated
+reference can derive, and what needs a written guide. A current first-person judgment about his
+own code is supportable. A historical claim such as "I moved this out" or a claim about why a
+past decision was made needs a cited file revision, commit, issue, or other inspectable record.
+If the history does not record the reason, describe the current choice and rationale without
+inventing an event or past motivation.
 
-Do not claim a client codebase, a team convention, or a measurement he did not take.
+Do not claim a client codebase, a team convention, a measurement he did not take, or a development
+history that the repository does not show.
 
 ## Internal links, verified in the built sitemap 2026-08-17
 
@@ -52,7 +56,8 @@ Outbound, at least two:
 Inbound retrofit, required, and `tools/check_link_retrofit.py` blocks the publish without it:
 - Edit `/articles/technical-writing-for-engineers/`. It is the same cluster and its reader is an
   engineer being asked to write. A sentence about what belongs in code rather than prose is the
-  natural place.
+  natural place. Keep the retrofit sentence factual and about the boundary; do not inherit or rely
+  on any unsupported first-person anecdote already present on that page.
 
 ## Gate
 
