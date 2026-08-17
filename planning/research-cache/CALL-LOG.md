@@ -376,3 +376,27 @@ rule plus supported-generator homepage validation, reported in separate strata.
 
 Output: `planning/research/code-sample-census/RESOLUTION-2026-08-17.md` and
 `data/docs-resolution-2026-08-17.json`.
+
+---
+
+## Code-sample census execution batch 3 — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 0.** No Ahrefs, Semrush, search API, or model API.
+
+The replacement resolver reused the frozen 100-record PyPI metadata artifact.
+Free network work: 7 declared-homepage validation reads; **55 GitHub repository
+API reads** across one interrupted attempt and the complete rerun (29 distinct
+repositories in the completed result); and 18 repository-homepage validation
+reads. The GitHub unauthenticated allowance ended at 57/60 used, so no further
+GitHub API work should run before reset. This is a free rate limit, not campaign
+spend or an authentication blocker.
+
+Result: **63 label-resolved + 5 homepage-resolved + 12 repository-homepage-
+resolved = 80/100**, with 20 unresolved and no search-engine or hand-picked
+backfill. The repository route accepts only a PyPI-declared GitHub repository,
+the repository's own `homepage`, and a supported docs generator.
+
+Decision: do not crawl yet. All 80 roots still need live redirect/generator
+inspection, and related-package corpora need an overlap rule before page
+sampling. Outputs: `docs-resolution-v2-2026-08-17.json` and
+`docs-resolution-v3-2026-08-17.json`.

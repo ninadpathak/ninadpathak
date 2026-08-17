@@ -1,0 +1,2256 @@
+{
+  "errors": [],
+  "fetched_at": "2026-08-17T18:14:56+00:00",
+  "metadata_snapshot": "planning/research/code-sample-census/data/docs-resolution-2026-08-17.json",
+  "rows": [
+    {
+      "canonical_name": "boto3",
+      "downloads": 3372563837,
+      "last_serial": 40034881,
+      "project": "boto3",
+      "project_urls": {
+        "Documentation": "https://docs.aws.amazon.com/boto3/latest/",
+        "Homepage": "https://github.com/boto/boto3",
+        "Source": "https://github.com/boto/boto3"
+      },
+      "rank": 1,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://docs.aws.amazon.com/boto3/latest/"
+      },
+      "source_sha256": "43893494bef70c1f1ef580a9e759b437f88452190b6de6ab3bca1f880f18a5fd",
+      "source_url": "https://pypi.org/pypi/boto3/json",
+      "version": "1.43.72"
+    },
+    {
+      "canonical_name": "packaging",
+      "downloads": 2250987240,
+      "last_serial": 39691657,
+      "project": "packaging",
+      "project_urls": {
+        "Documentation": "https://packaging.pypa.io/",
+        "Source": "https://github.com/pypa/packaging"
+      },
+      "rank": 2,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://packaging.pypa.io/"
+      },
+      "source_sha256": "9d7a2885e9e79296598f8c943e0a94c2468e21c800abd26ed13c633465a78835",
+      "source_url": "https://pypi.org/pypi/packaging/json",
+      "version": "26.3"
+    },
+    {
+      "canonical_name": "typing-extensions",
+      "downloads": 1900146292,
+      "last_serial": 38587266,
+      "project": "typing-extensions",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/python/typing_extensions/issues",
+        "Changes": "https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+        "Documentation": "https://typing-extensions.readthedocs.io/",
+        "Home": "https://github.com/python/typing_extensions",
+        "Q & A": "https://github.com/python/typing/discussions",
+        "Repository": "https://github.com/python/typing_extensions"
+      },
+      "rank": 3,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://typing-extensions.readthedocs.io/"
+      },
+      "source_sha256": "2e567d7ca1b1c70a8e8f23b7204a8bd51b0bacd39e2fe53b33b153cff255ac68",
+      "source_url": "https://pypi.org/pypi/typing-extensions/json",
+      "version": "4.16.0"
+    },
+    {
+      "canonical_name": "certifi",
+      "downloads": 1879397228,
+      "homepage_candidate": null,
+      "last_serial": 39243739,
+      "project": "certifi",
+      "project_urls": {
+        "Homepage": "https://github.com/certifi/python-certifi",
+        "Source": "https://github.com/certifi/python-certifi"
+      },
+      "rank": 4,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "3b94efeb879dddf7172a6ab03cd53b68e76f046c11893249d6c17e99a0293a3c",
+      "source_url": "https://pypi.org/pypi/certifi/json",
+      "version": "2026.7.22"
+    },
+    {
+      "canonical_name": "urllib3",
+      "downloads": 1833380899,
+      "last_serial": 36836170,
+      "project": "urllib3",
+      "project_urls": {
+        "Changelog": "https://github.com/urllib3/urllib3/blob/main/CHANGES.rst",
+        "Code": "https://github.com/urllib3/urllib3",
+        "Documentation": "https://urllib3.readthedocs.io",
+        "Issue tracker": "https://github.com/urllib3/urllib3/issues"
+      },
+      "rank": 5,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://urllib3.readthedocs.io"
+      },
+      "source_sha256": "9dd6118e8e32259fb3e012ae5facda8dc0a3cace92519363bd10d97457c58b00",
+      "source_url": "https://pypi.org/pypi/urllib3/json",
+      "version": "2.7.0"
+    },
+    {
+      "canonical_name": "idna",
+      "downloads": 1779906504,
+      "homepage_candidate": null,
+      "last_serial": 37646424,
+      "project": "idna",
+      "project_urls": {
+        "Changelog": "https://github.com/kjd/idna/blob/master/HISTORY.md",
+        "Issue tracker": "https://github.com/kjd/idna/issues",
+        "Source": "https://github.com/kjd/idna"
+      },
+      "rank": 6,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "75640abafc887a7ab989f6abb18dd3238dcf0455e8a57bbbd280264b35beec3d",
+      "source_url": "https://pypi.org/pypi/idna/json",
+      "version": "3.18"
+    },
+    {
+      "canonical_name": "requests",
+      "downloads": 1745088880,
+      "last_serial": 37059094,
+      "project": "requests",
+      "project_urls": {
+        "Documentation": "https://requests.readthedocs.io",
+        "Source": "https://github.com/psf/requests"
+      },
+      "rank": 7,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://requests.readthedocs.io"
+      },
+      "source_sha256": "bcfc6a202592e4e90f5a28ff002694eaa7c58ba741b76077f432b8bee1480111",
+      "source_url": "https://pypi.org/pypi/requests/json",
+      "version": "2.34.2"
+    },
+    {
+      "canonical_name": "charset-normalizer",
+      "downloads": 1686029103,
+      "last_serial": 40047220,
+      "project": "charset-normalizer",
+      "project_urls": {
+        "Changelog": "https://github.com/jawah/charset_normalizer/blob/master/CHANGELOG.md",
+        "Code": "https://github.com/jawah/charset_normalizer",
+        "Documentation": "https://charset-normalizer.readthedocs.io/",
+        "Issue tracker": "https://github.com/jawah/charset_normalizer/issues"
+      },
+      "rank": 8,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://charset-normalizer.readthedocs.io/"
+      },
+      "source_sha256": "e253a5f40b3258ff3310ddce6b40e6b5a7852f404261c2cffa6d969d8c014e07",
+      "source_url": "https://pypi.org/pypi/charset-normalizer/json",
+      "version": "3.5.1"
+    },
+    {
+      "canonical_name": "setuptools",
+      "downloads": 1553594324,
+      "last_serial": 39828918,
+      "project": "setuptools",
+      "project_urls": {
+        "Changelog": "https://setuptools.pypa.io/en/stable/history.html",
+        "Documentation": "https://setuptools.pypa.io/",
+        "Source": "https://github.com/pypa/setuptools"
+      },
+      "rank": 9,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://setuptools.pypa.io/"
+      },
+      "source_sha256": "b17d794d3d3176216e3aabb872735d5e2d7aa16f62b374694af32ee6287ca73f",
+      "source_url": "https://pypi.org/pypi/setuptools/json",
+      "version": "84.0.0"
+    },
+    {
+      "canonical_name": "cryptography",
+      "downloads": 1467349376,
+      "last_serial": 39562018,
+      "project": "cryptography",
+      "project_urls": {
+        "changelog": "https://cryptography.io/en/latest/changelog/",
+        "documentation": "https://cryptography.io/",
+        "homepage": "https://github.com/pyca/cryptography",
+        "issues": "https://github.com/pyca/cryptography/issues",
+        "source": "https://github.com/pyca/cryptography/"
+      },
+      "rank": 10,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://cryptography.io/"
+      },
+      "source_sha256": "5fcaafaffcfe03d62c6add2adfd22346f6a956c0c93d1c954666bbb88e4db23d",
+      "source_url": "https://pypi.org/pypi/cryptography/json",
+      "version": "50.0.0"
+    },
+    {
+      "canonical_name": "botocore",
+      "downloads": 1362437086,
+      "homepage_candidate": null,
+      "last_serial": 40034875,
+      "project": "botocore",
+      "project_urls": {
+        "Homepage": "https://github.com/boto/botocore"
+      },
+      "rank": 11,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "50125fd46d6a11ac62eb6c64081b0739f3eb4e527c2b5bd19c81447bf4070131",
+      "source_url": "https://pypi.org/pypi/botocore/json",
+      "version": "1.43.72"
+    },
+    {
+      "canonical_name": "cffi",
+      "downloads": 1301227331,
+      "last_serial": 39662188,
+      "project": "cffi",
+      "project_urls": {
+        "Changelog": "https://cffi.readthedocs.io/en/latest/whatsnew.html",
+        "Contact": "https://groups.google.com/forum/#!forum/python-cffi",
+        "Documentation": "https://cffi.readthedocs.io/",
+        "Download": "https://github.com/python-cffi/cffi/releases",
+        "Issue Tracker": "https://github.com/python-cffi/cffi/issues",
+        "Source Code": "https://github.com/python-cffi/cffi"
+      },
+      "rank": 12,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://cffi.readthedocs.io/"
+      },
+      "source_sha256": "ea59a663b5779e4e6bca654cfa65fcbae449a08ecd5ed576b6cbbed0c77d90fc",
+      "source_url": "https://pypi.org/pypi/cffi/json",
+      "version": "2.1.1"
+    },
+    {
+      "canonical_name": "pluggy",
+      "downloads": 1263128957,
+      "homepage_candidate": null,
+      "last_serial": 29066319,
+      "project": "pluggy",
+      "project_urls": {},
+      "rank": 13,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "61d625a54043b8181d28ea7a583a7542c7f45f065e8efa3964804cd7f42ff0f4",
+      "source_url": "https://pypi.org/pypi/pluggy/json",
+      "version": "1.6.0"
+    },
+    {
+      "canonical_name": "Pygments",
+      "downloads": 1236679233,
+      "last_serial": 40098558,
+      "project": "pygments",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/pygments/pygments/issues",
+        "Changelog": "https://github.com/pygments/pygments/blob/master/CHANGES",
+        "Documentation": "https://pygments.org/docs",
+        "Homepage": "https://pygments.org",
+        "Source": "https://github.com/pygments/pygments"
+      },
+      "rank": 14,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://pygments.org/docs"
+      },
+      "source_sha256": "d48c0f74c08c450aeabfd5e90fc93b01ec127074c0f3e22cfe74a968c4299771",
+      "source_url": "https://pypi.org/pypi/pygments/json",
+      "version": "2.21.0"
+    },
+    {
+      "canonical_name": "PyYAML",
+      "downloads": 1204265871,
+      "last_serial": 31526105,
+      "project": "pyyaml",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/yaml/pyyaml/issues",
+        "CI": "https://github.com/yaml/pyyaml/actions",
+        "Documentation": "https://pyyaml.org/wiki/PyYAMLDocumentation",
+        "Download": "https://pypi.org/project/PyYAML/",
+        "Homepage": "https://pyyaml.org/",
+        "Mailing lists": "http://lists.sourceforge.net/lists/listinfo/yaml-core",
+        "Source Code": "https://github.com/yaml/pyyaml"
+      },
+      "rank": 15,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://pyyaml.org/wiki/PyYAMLDocumentation"
+      },
+      "source_sha256": "d0c463a86ed24144dd112fd1fe43b7c208e52c7d3903c2f51c84acfb5b10c749",
+      "source_url": "https://pypi.org/pypi/pyyaml/json",
+      "version": "6.0.3"
+    },
+    {
+      "canonical_name": "python-dateutil",
+      "downloads": 1167587676,
+      "last_serial": 22120696,
+      "project": "python-dateutil",
+      "project_urls": {
+        "Documentation": "https://dateutil.readthedocs.io/en/stable/",
+        "Homepage": "https://github.com/dateutil/dateutil",
+        "Source": "https://github.com/dateutil/dateutil"
+      },
+      "rank": 16,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://dateutil.readthedocs.io/en/stable/"
+      },
+      "source_sha256": "e349319900745aba59298740d979d985441745cd2d0cc111b38c6b2a46880c41",
+      "source_url": "https://pypi.org/pypi/python-dateutil/json",
+      "version": "2.9.0.post0"
+    },
+    {
+      "canonical_name": "six",
+      "downloads": 1163414239,
+      "homepage_candidate": null,
+      "last_serial": 26356948,
+      "project": "six",
+      "project_urls": {
+        "Homepage": "https://github.com/benjaminp/six"
+      },
+      "rank": 17,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "5d33fd0c1128bc0266f96f36ced03c47abefa31a29ed185d24b490e108bd04e8",
+      "source_url": "https://pypi.org/pypi/six/json",
+      "version": "1.17.0"
+    },
+    {
+      "canonical_name": "numpy",
+      "downloads": 1152300360,
+      "last_serial": 39847699,
+      "project": "numpy",
+      "project_urls": {
+        "documentation": "https://numpy.org/doc/",
+        "download": "https://pypi.org/project/numpy/#files",
+        "homepage": "https://numpy.org",
+        "release notes": "https://numpy.org/doc/stable/release",
+        "source": "https://github.com/numpy/numpy",
+        "tracker": "https://github.com/numpy/numpy/issues"
+      },
+      "rank": 18,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://numpy.org/doc/"
+      },
+      "source_sha256": "e868364cd700cc99bef71bdab807da9bd4b4b33b476bede36a9f305b41e3a937",
+      "source_url": "https://pypi.org/pypi/numpy/json",
+      "version": "2.5.2"
+    },
+    {
+      "canonical_name": "pydantic",
+      "downloads": 1130712479,
+      "last_serial": 39762887,
+      "project": "pydantic",
+      "project_urls": {
+        "Changelog": "https://docs.pydantic.dev/latest/changelog/",
+        "Documentation": "https://docs.pydantic.dev",
+        "Funding": "https://github.com/sponsors/samuelcolvin",
+        "Homepage": "https://github.com/pydantic/pydantic",
+        "Source": "https://github.com/pydantic/pydantic"
+      },
+      "rank": 19,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://docs.pydantic.dev"
+      },
+      "source_sha256": "96e0fb5754b6c90b7482de09f9d885646d71102335afe9a464a3cf9e90de7f35",
+      "source_url": "https://pypi.org/pypi/pydantic/json",
+      "version": "2.13.4"
+    },
+    {
+      "canonical_name": "aiobotocore",
+      "downloads": 1119835363,
+      "last_serial": 39588892,
+      "project": "aiobotocore",
+      "project_urls": {
+        "Documentation": "https://aiobotocore.aio-libs.org",
+        "Repository": "https://github.com/aio-libs/aiobotocore"
+      },
+      "rank": 20,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://aiobotocore.aio-libs.org"
+      },
+      "source_sha256": "09cb2a04c06a99dc87634838b5411721bcdadeeb1e257ea41e859ab4c8bcf6b5",
+      "source_url": "https://pypi.org/pypi/aiobotocore/json",
+      "version": "3.9.0"
+    },
+    {
+      "canonical_name": "click",
+      "downloads": 1114526340,
+      "last_serial": 38356435,
+      "project": "click",
+      "project_urls": {
+        "Changes": "https://click.palletsprojects.com/page/changes/",
+        "Chat": "https://discord.gg/pallets",
+        "Documentation": "https://click.palletsprojects.com/",
+        "Donate": "https://palletsprojects.com/donate",
+        "Source": "https://github.com/pallets/click/"
+      },
+      "rank": 21,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://click.palletsprojects.com/"
+      },
+      "source_sha256": "46f89f391dfb04a326e0ad5c21c41c28454c705d9827aef585d3930b7f2a7687",
+      "source_url": "https://pypi.org/pypi/click/json",
+      "version": "8.4.2"
+    },
+    {
+      "canonical_name": "pycparser",
+      "downloads": 1089332889,
+      "homepage_candidate": null,
+      "last_serial": 33708266,
+      "project": "pycparser",
+      "project_urls": {
+        "Homepage": "https://github.com/eliben/pycparser"
+      },
+      "rank": 22,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "076817acef0f1ba0e933facfc57beb220a96ce534fd5f794aa87bad8704994ac",
+      "source_url": "https://pypi.org/pypi/pycparser/json",
+      "version": "3.0"
+    },
+    {
+      "canonical_name": "pytest",
+      "downloads": 1074089987,
+      "homepage_candidate": "https://docs.pytest.org/en/latest/",
+      "last_serial": 38199665,
+      "project": "pytest",
+      "project_urls": {
+        "Changelog": "https://docs.pytest.org/en/stable/changelog.html",
+        "Contact": "https://docs.pytest.org/en/stable/contact.html",
+        "Funding": "https://docs.pytest.org/en/stable/sponsor.html",
+        "Homepage": "https://docs.pytest.org/en/latest/",
+        "Source": "https://github.com/pytest-dev/pytest",
+        "Tracker": "https://github.com/pytest-dev/pytest/issues"
+      },
+      "rank": 23,
+      "resolution": "homepage-resolved",
+      "selected_docs": {
+        "bytes": 31975,
+        "content_type": "text/html",
+        "declared_url": "https://docs.pytest.org/en/latest/",
+        "etag": "W/\"182d51bcc1fee0487dc26dd8eaef7e11\"",
+        "generator": "sphinx",
+        "last_modified": "Sun, 14 Jun 2026 06:09:55 GMT",
+        "response_sha256": "5f092b0d1fe41430023a654b84b4ec801046d823ecc2e733680c592295d936ca",
+        "url": "https://docs.pytest.org/en/latest/"
+      },
+      "source_sha256": "203f15ce63523ec5dbbf3462328c7e26d9903240a5f7b1782d36b8f9f388bfac",
+      "source_url": "https://pypi.org/pypi/pytest/json",
+      "version": "9.1.1"
+    },
+    {
+      "canonical_name": "anyio",
+      "downloads": 1058997365,
+      "last_serial": 38924845,
+      "project": "anyio",
+      "project_urls": {
+        "Changelog": "https://anyio.readthedocs.io/en/stable/versionhistory.html",
+        "Documentation": "https://anyio.readthedocs.io/en/latest/",
+        "Issue tracker": "https://github.com/agronholm/anyio/issues",
+        "Source code": "https://github.com/agronholm/anyio"
+      },
+      "rank": 24,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://anyio.readthedocs.io/en/latest/"
+      },
+      "source_sha256": "c233bcc2f7a86ebe50344f8ee2d01002cecce806ff83bde90d9ffcceebc3ff7f",
+      "source_url": "https://pypi.org/pypi/anyio/json",
+      "version": "4.14.2"
+    },
+    {
+      "canonical_name": "pydantic_core",
+      "downloads": 1040013198,
+      "homepage_candidate": null,
+      "last_serial": 39762811,
+      "project": "pydantic-core",
+      "project_urls": {
+        "Funding": "https://github.com/sponsors/samuelcolvin",
+        "Homepage": "https://github.com/pydantic",
+        "Source": "https://github.com/pydantic/pydantic/tree/main/pydantic-core"
+      },
+      "rank": 25,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "a7ef3092330c89ddaa976ec9ff65ecef52340efef3763ec2b399568955f85ca3",
+      "source_url": "https://pypi.org/pypi/pydantic-core/json",
+      "version": "2.48.0"
+    },
+    {
+      "canonical_name": "iniconfig",
+      "downloads": 1027612446,
+      "homepage_candidate": null,
+      "last_serial": 31878540,
+      "project": "iniconfig",
+      "project_urls": {
+        "Homepage": "https://github.com/pytest-dev/iniconfig"
+      },
+      "rank": 26,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "53b903cfe8147a2473a4d25cf53a8bb9aff1cacbec3ac9b91bf21ebbdd8155b0",
+      "source_url": "https://pypi.org/pypi/iniconfig/json",
+      "version": "2.3.0"
+    },
+    {
+      "canonical_name": "annotated-types",
+      "downloads": 959676203,
+      "homepage_candidate": null,
+      "last_serial": 39309454,
+      "project": "annotated-types",
+      "project_urls": {
+        "Changelog": "https://github.com/annotated-types/annotated-types/releases",
+        "Homepage": "https://github.com/annotated-types/annotated-types",
+        "Source": "https://github.com/annotated-types/annotated-types"
+      },
+      "rank": 27,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "bbe701554fc03915c80b90d54d2af7b15fa716679967376e86f222ea7fc80181",
+      "source_url": "https://pypi.org/pypi/annotated-types/json",
+      "version": "0.8.0"
+    },
+    {
+      "canonical_name": "h11",
+      "downloads": 934180372,
+      "homepage_candidate": null,
+      "last_serial": 28687432,
+      "project": "h11",
+      "project_urls": {
+        "Homepage": "https://github.com/python-hyper/h11"
+      },
+      "rank": 28,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "82edaa88c2cda51615d444a45e725eeaa7693f6821ab1422de1f031753d9556c",
+      "source_url": "https://pypi.org/pypi/h11/json",
+      "version": "0.16.0"
+    },
+    {
+      "canonical_name": "attrs",
+      "downloads": 931971965,
+      "last_serial": 35282081,
+      "project": "attrs",
+      "project_urls": {
+        "Changelog": "https://www.attrs.org/en/stable/changelog.html",
+        "Documentation": "https://www.attrs.org/",
+        "Funding": "https://github.com/sponsors/hynek",
+        "GitHub": "https://github.com/python-attrs/attrs",
+        "Tidelift": "https://tidelift.com/subscription/pkg/pypi-attrs?utm_source=pypi-attrs&utm_medium=pypi"
+      },
+      "rank": 29,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://www.attrs.org/"
+      },
+      "source_sha256": "2e33bd22386702899e76471b04f3211f7e108ee96b288699e58fd4bc2f01c1d6",
+      "source_url": "https://pypi.org/pypi/attrs/json",
+      "version": "26.1.0"
+    },
+    {
+      "canonical_name": "fsspec",
+      "downloads": 894977544,
+      "last_serial": 39457940,
+      "project": "fsspec",
+      "project_urls": {
+        "Changelog": "https://filesystem-spec.readthedocs.io/en/latest/changelog.html",
+        "Documentation": "https://filesystem-spec.readthedocs.io/en/latest/",
+        "Homepage": "https://github.com/fsspec/filesystem_spec"
+      },
+      "rank": 30,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://filesystem-spec.readthedocs.io/en/latest/"
+      },
+      "source_sha256": "221a9673484efec3bdd780ed504dd0660e1e38809443107cb90d67c07aedc44c",
+      "source_url": "https://pypi.org/pypi/fsspec/json",
+      "version": "2026.7.0"
+    },
+    {
+      "canonical_name": "protobuf",
+      "downloads": 872495534,
+      "homepage_candidate": "https://developers.google.com/protocol-buffers/",
+      "homepage_error": "ValueError: unsupported documentation generator",
+      "last_serial": 39661564,
+      "project": "protobuf",
+      "project_urls": {
+        "Homepage": "https://developers.google.com/protocol-buffers/"
+      },
+      "rank": 31,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "8a2e69300ddd53aa61f93d1500bcac8d82d09e65f1576fdeaabf898ece3315ba",
+      "source_url": "https://pypi.org/pypi/protobuf/json",
+      "version": "7.35.1"
+    },
+    {
+      "canonical_name": "s3transfer",
+      "downloads": 856956349,
+      "homepage_candidate": null,
+      "last_serial": 39270405,
+      "project": "s3transfer",
+      "project_urls": {
+        "Homepage": "https://github.com/boto/s3transfer"
+      },
+      "rank": 32,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "6b256dd72646fe5473d993d9e1d610f390570a257c1e997704bf4d1e914dc396",
+      "source_url": "https://pypi.org/pypi/s3transfer/json",
+      "version": "0.19.2"
+    },
+    {
+      "canonical_name": "grpcio-status",
+      "downloads": 856746560,
+      "last_serial": 39300510,
+      "project": "grpcio-status",
+      "project_urls": {
+        "Documentation": "https://grpc.github.io/grpc/python/grpc_status.html",
+        "Homepage": "https://grpc.io"
+      },
+      "rank": 33,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://grpc.github.io/grpc/python/grpc_status.html"
+      },
+      "source_sha256": "2a49ea9f35a34cad2918847fef61fecfcd978837f6480e149d8b6a736289b7f7",
+      "source_url": "https://pypi.org/pypi/grpcio-status/json",
+      "version": "1.83.0"
+    },
+    {
+      "canonical_name": "typing-inspection",
+      "downloads": 855640243,
+      "last_serial": 39950099,
+      "project": "typing-inspection",
+      "project_urls": {
+        "Changelog": "https://github.com/pydantic/typing-inspection/blob/main/HISTORY.md",
+        "Documentation": "https://pydantic.github.io/typing-inspection/dev/",
+        "Homepage": "https://github.com/pydantic/typing-inspection",
+        "Source": "https://github.com/pydantic/typing-inspection"
+      },
+      "rank": 34,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://pydantic.github.io/typing-inspection/dev/"
+      },
+      "source_sha256": "01f2c8a64e34ff03f674ac255b8bf5dd43d175d701059d9420cc9509c3c0edf0",
+      "source_url": "https://pypi.org/pypi/typing-inspection/json",
+      "version": "0.4.4"
+    },
+    {
+      "canonical_name": "httpx",
+      "downloads": 824509626,
+      "last_serial": 39954652,
+      "project": "httpx",
+      "project_urls": {
+        "Changelog": "https://github.com/encode/httpx/blob/master/CHANGELOG.md",
+        "Documentation": "https://www.python-httpx.org",
+        "Homepage": "https://github.com/encode/httpx",
+        "Source": "https://github.com/encode/httpx"
+      },
+      "rank": 35,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://www.python-httpx.org"
+      },
+      "source_sha256": "40c203965020f6dc188d06a729de747758c2b9686f6c5cdd75cad775da2ab4c2",
+      "source_url": "https://pypi.org/pypi/httpx/json",
+      "version": "0.28.1"
+    },
+    {
+      "canonical_name": "MarkupSafe",
+      "downloads": 812777124,
+      "last_serial": 31494714,
+      "project": "markupsafe",
+      "project_urls": {
+        "Changes": "https://markupsafe.palletsprojects.com/page/changes/",
+        "Chat": "https://discord.gg/pallets",
+        "Documentation": "https://markupsafe.palletsprojects.com/",
+        "Donate": "https://palletsprojects.com/donate",
+        "Source": "https://github.com/pallets/markupsafe/"
+      },
+      "rank": 36,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://markupsafe.palletsprojects.com/"
+      },
+      "source_sha256": "fac672c0454096fe3135eee8d3bf9c314d933ab66adb3fc8a97cb83f90315ac0",
+      "source_url": "https://pypi.org/pypi/markupsafe/json",
+      "version": "3.0.3"
+    },
+    {
+      "canonical_name": "httpcore",
+      "downloads": 811877182,
+      "last_serial": 28705351,
+      "project": "httpcore",
+      "project_urls": {
+        "Documentation": "https://www.encode.io/httpcore",
+        "Homepage": "https://www.encode.io/httpcore/",
+        "Source": "https://github.com/encode/httpcore"
+      },
+      "rank": 37,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://www.encode.io/httpcore"
+      },
+      "source_sha256": "d73786f0235ce97aa3239d411456be526320325e3b259b6fd25a0ce93775771c",
+      "source_url": "https://pypi.org/pypi/httpcore/json",
+      "version": "1.0.9"
+    },
+    {
+      "canonical_name": "platformdirs",
+      "downloads": 780344153,
+      "last_serial": 40003820,
+      "project": "platformdirs",
+      "project_urls": {
+        "Changelog": "https://platformdirs.readthedocs.io/en/latest/changelog.html",
+        "Documentation": "https://platformdirs.readthedocs.io",
+        "Homepage": "https://github.com/tox-dev/platformdirs",
+        "Source": "https://github.com/tox-dev/platformdirs",
+        "Tracker": "https://github.com/tox-dev/platformdirs/issues"
+      },
+      "rank": 38,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://platformdirs.readthedocs.io"
+      },
+      "source_sha256": "fcb05a3e0966e7000c39f8d6280b827070f515546657e7db61e7d7663a60f5b3",
+      "source_url": "https://pypi.org/pypi/platformdirs/json",
+      "version": "4.11.3"
+    },
+    {
+      "canonical_name": "python-dotenv",
+      "downloads": 777769655,
+      "homepage_candidate": null,
+      "last_serial": 40081157,
+      "project": "python-dotenv",
+      "project_urls": {
+        "Source": "https://github.com/theskumar/python-dotenv"
+      },
+      "rank": 39,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "9140a7167760b44ef7c2f897352e2b869e82b457b51df5ed4f99df6ec51808f6",
+      "source_url": "https://pypi.org/pypi/python-dotenv/json",
+      "version": "1.2.3"
+    },
+    {
+      "canonical_name": "pandas",
+      "downloads": 773975410,
+      "last_serial": 39275101,
+      "project": "pandas",
+      "project_urls": {
+        "documentation": "https://pandas.pydata.org/docs/",
+        "homepage": "https://pandas.pydata.org",
+        "repository": "https://github.com/pandas-dev/pandas"
+      },
+      "rank": 40,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://pandas.pydata.org/docs/"
+      },
+      "source_sha256": "def430f070766d7d545517b3c2a08afbb59f865c4297281d00fafcc4e25a123f",
+      "source_url": "https://pypi.org/pypi/pandas/json",
+      "version": "3.0.5"
+    },
+    {
+      "canonical_name": "pathspec",
+      "downloads": 741329582,
+      "last_serial": 36489432,
+      "project": "pathspec",
+      "project_urls": {
+        "Change Log": "https://python-path-specification.readthedocs.io/en/latest/changes.html",
+        "Documentation": "https://python-path-specification.readthedocs.io/en/latest/index.html",
+        "Issue Tracker": "https://github.com/cpburnz/python-pathspec/issues",
+        "Source Code": "https://github.com/cpburnz/python-pathspec"
+      },
+      "rank": 41,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://python-path-specification.readthedocs.io/en/latest/index.html"
+      },
+      "source_sha256": "df109cf06c88402cc0907de428b352e676ce059ed5eb51c87a8732c0fb9e90a6",
+      "source_url": "https://pypi.org/pypi/pathspec/json",
+      "version": "1.1.1"
+    },
+    {
+      "canonical_name": "Jinja2",
+      "downloads": 729199588,
+      "last_serial": 27788726,
+      "project": "jinja2",
+      "project_urls": {
+        "Changes": "https://jinja.palletsprojects.com/changes/",
+        "Chat": "https://discord.gg/pallets",
+        "Documentation": "https://jinja.palletsprojects.com/",
+        "Donate": "https://palletsprojects.com/donate",
+        "Source": "https://github.com/pallets/jinja/"
+      },
+      "rank": 42,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://jinja.palletsprojects.com/"
+      },
+      "source_sha256": "f944a0ab4808f42bd0523158b2a78d2638eee650f664ccd9a9a3d6630a298bd4",
+      "source_url": "https://pypi.org/pypi/jinja2/json",
+      "version": "3.1.6"
+    },
+    {
+      "canonical_name": "litellm",
+      "downloads": 722884872,
+      "last_serial": 40066296,
+      "project": "litellm",
+      "project_urls": {
+        "Documentation": "https://docs.litellm.ai",
+        "Homepage": "https://litellm.ai",
+        "Repository": "https://github.com/BerriAI/litellm"
+      },
+      "rank": 43,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://docs.litellm.ai"
+      },
+      "source_sha256": "def6a72650fb1deefe5672d3abd12aedd4b6cc3aa3e0bbfd8f9bf9848d4aa673",
+      "source_url": "https://pypi.org/pypi/litellm/json",
+      "version": "1.97.0"
+    },
+    {
+      "canonical_name": "filelock",
+      "downloads": 719918755,
+      "last_serial": 39992826,
+      "project": "filelock",
+      "project_urls": {
+        "Documentation": "https://py-filelock.readthedocs.io",
+        "Homepage": "https://github.com/tox-dev/py-filelock",
+        "Source": "https://github.com/tox-dev/py-filelock",
+        "Tracker": "https://github.com/tox-dev/py-filelock/issues"
+      },
+      "rank": 44,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://py-filelock.readthedocs.io"
+      },
+      "source_sha256": "defcd503d27c6475d994e896fd487d313ee2c40680cc34db524b824af3460200",
+      "source_url": "https://pypi.org/pypi/filelock/json",
+      "version": "3.32.3"
+    },
+    {
+      "canonical_name": "PyJWT",
+      "downloads": 692363170,
+      "homepage_candidate": null,
+      "last_serial": 37287959,
+      "project": "pyjwt",
+      "project_urls": {
+        "Homepage": "https://github.com/jpadilla/pyjwt"
+      },
+      "rank": 45,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "234063801bf9572e3dcc7dcdd18d222d3a47d778c66e5d123055c320d4cfc098",
+      "source_url": "https://pypi.org/pypi/pyjwt/json",
+      "version": "2.13.0"
+    },
+    {
+      "canonical_name": "pip",
+      "downloads": 684434681,
+      "last_serial": 39699919,
+      "project": "pip",
+      "project_urls": {
+        "Changelog": "https://pip.pypa.io/en/stable/news/",
+        "Documentation": "https://pip.pypa.io",
+        "Homepage": "https://pip.pypa.io/",
+        "Source": "https://github.com/pypa/pip"
+      },
+      "rank": 46,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://pip.pypa.io"
+      },
+      "source_sha256": "6e11a831a6a7c5aac56ee8634c4041a4d86b19380f43879a76a1903dcde9d814",
+      "source_url": "https://pypi.org/pypi/pip/json",
+      "version": "26.2.1"
+    },
+    {
+      "canonical_name": "s3fs",
+      "downloads": 676590468,
+      "homepage_candidate": null,
+      "last_serial": 39459212,
+      "project": "s3fs",
+      "project_urls": {
+        "Homepage": "http://github.com/fsspec/s3fs/"
+      },
+      "rank": 47,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "01d0704a21bce81d6de66c65fb6c90164afc9d9f56b8720f1909c7d9e5b9f4d0",
+      "source_url": "https://pypi.org/pypi/s3fs/json",
+      "version": "2026.7.0"
+    },
+    {
+      "canonical_name": "tqdm",
+      "downloads": 665150953,
+      "homepage_candidate": "https://tqdm.github.io",
+      "last_serial": 39413017,
+      "project": "tqdm",
+      "project_urls": {
+        "changelog": "https://tqdm.github.io/releases",
+        "homepage": "https://tqdm.github.io",
+        "repository": "https://github.com/tqdm/tqdm",
+        "wiki": "https://github.com/tqdm/tqdm/wiki"
+      },
+      "rank": 48,
+      "resolution": "homepage-resolved",
+      "selected_docs": {
+        "bytes": 35737,
+        "content_type": "text/html",
+        "declared_url": "https://tqdm.github.io",
+        "etag": "\"6a674509-8b99\"",
+        "generator": "mkdocs",
+        "last_modified": "Mon, 27 Jul 2026 11:46:17 GMT",
+        "response_sha256": "c01ddefc412fc0a2d0a2102f88fc572c4dfe340afea441d8d48100bf0d3ec255",
+        "url": "https://tqdm.github.io"
+      },
+      "source_sha256": "9b4651e5f642d4a70255332a09a1917f9a879f42571556b63f27d6c8f9cdb29f",
+      "source_url": "https://pypi.org/pypi/tqdm/json",
+      "version": "4.70.0"
+    },
+    {
+      "canonical_name": "starlette",
+      "downloads": 652072272,
+      "last_serial": 39828917,
+      "project": "starlette",
+      "project_urls": {
+        "Changelog": "https://starlette.dev/release-notes/",
+        "Documentation": "https://starlette.dev/",
+        "Funding": "https://github.com/sponsors/Kludex",
+        "Homepage": "https://github.com/Kludex/starlette",
+        "Source": "https://github.com/Kludex/starlette"
+      },
+      "rank": 49,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://starlette.dev/"
+      },
+      "source_sha256": "b0ac2d679358518c5d21945c0851406e9a0420dd1694be00164e3fa5868b8b49",
+      "source_url": "https://pypi.org/pypi/starlette/json",
+      "version": "1.6.0"
+    },
+    {
+      "canonical_name": "uvicorn",
+      "downloads": 645435111,
+      "homepage_candidate": "https://uvicorn.dev/",
+      "last_serial": 39994317,
+      "project": "uvicorn",
+      "project_urls": {
+        "Changelog": "https://uvicorn.dev/release-notes",
+        "Funding": "https://github.com/sponsors/encode",
+        "Homepage": "https://uvicorn.dev/",
+        "Source": "https://github.com/Kludex/uvicorn"
+      },
+      "rank": 50,
+      "resolution": "homepage-resolved",
+      "selected_docs": {
+        "bytes": 48458,
+        "content_type": "text/html",
+        "declared_url": "https://uvicorn.dev/",
+        "etag": null,
+        "generator": "mkdocs",
+        "last_modified": null,
+        "response_sha256": "20644b172ebc5d377a7cb46a0e4f6099f9f338bf066b2bf73db5c73990eed418",
+        "url": "https://uvicorn.dev/"
+      },
+      "source_sha256": "e17f1e0e8dfcb68b999fc8c849b1e0e989f234c37a4f23197a102f3448cf4dab",
+      "source_url": "https://pypi.org/pypi/uvicorn/json",
+      "version": "0.52.3"
+    },
+    {
+      "canonical_name": "aiohttp",
+      "downloads": 644742521,
+      "last_serial": 39279204,
+      "project": "aiohttp",
+      "project_urls": {
+        "CI: GitHub Actions": "https://github.com/aio-libs/aiohttp/actions?query=workflow%3ACI",
+        "Chat: Matrix": "https://matrix.to/#/#aio-libs:matrix.org",
+        "Chat: Matrix Space": "https://matrix.to/#/#aio-libs-space:matrix.org",
+        "Coverage: codecov": "https://codecov.io/github/aio-libs/aiohttp",
+        "Docs: Changelog": "https://docs.aiohttp.org/en/stable/changes.html",
+        "Docs: RTD": "https://docs.aiohttp.org",
+        "GitHub: issues": "https://github.com/aio-libs/aiohttp/issues",
+        "GitHub: repo": "https://github.com/aio-libs/aiohttp",
+        "Homepage": "https://github.com/aio-libs/aiohttp"
+      },
+      "rank": 51,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Docs: RTD",
+        "normalized_label": "docs rtd",
+        "priority": 3,
+        "url": "https://docs.aiohttp.org"
+      },
+      "source_sha256": "4349424b614e9ecd3bfe1625fb725429c4d17a838ba5f966e53bff2ba121e66d",
+      "source_url": "https://pypi.org/pypi/aiohttp/json",
+      "version": "3.14.3"
+    },
+    {
+      "canonical_name": "jmespath",
+      "downloads": 627353503,
+      "homepage_candidate": null,
+      "last_serial": 33736438,
+      "project": "jmespath",
+      "project_urls": {
+        "Homepage": "https://github.com/jmespath/jmespath.py"
+      },
+      "rank": 52,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "71681ffd05727061175915a932239f581fbb5123257b38cde7ee9ff9a603df59",
+      "source_url": "https://pypi.org/pypi/jmespath/json",
+      "version": "1.1.0"
+    },
+    {
+      "canonical_name": "yarl",
+      "downloads": 626755003,
+      "last_serial": 39168459,
+      "project": "yarl",
+      "project_urls": {
+        "CI: GitHub Workflows": "https://github.com/aio-libs/yarl/actions?query=branch:master",
+        "Chat: Matrix": "https://matrix.to/#/#aio-libs:matrix.org",
+        "Chat: Matrix Space": "https://matrix.to/#/#aio-libs-space:matrix.org",
+        "Code of Conduct": "https://github.com/aio-libs/.github/blob/master/CODE_OF_CONDUCT.md",
+        "Coverage: codecov": "https://codecov.io/github/aio-libs/yarl",
+        "Docs: Changelog": "https://yarl.aio-libs.org/en/latest/changes/",
+        "Docs: RTD": "https://yarl.aio-libs.org",
+        "GitHub: issues": "https://github.com/aio-libs/yarl/issues",
+        "GitHub: repo": "https://github.com/aio-libs/yarl",
+        "Homepage": "https://github.com/aio-libs/yarl"
+      },
+      "rank": 53,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Docs: RTD",
+        "normalized_label": "docs rtd",
+        "priority": 3,
+        "url": "https://yarl.aio-libs.org"
+      },
+      "source_sha256": "5f40cdad50e0eb6643a3897e24192f7eac27bc64db17412b2a8c98ee622f4bd4",
+      "source_url": "https://pypi.org/pypi/yarl/json",
+      "version": "1.24.5"
+    },
+    {
+      "canonical_name": "rpds-py",
+      "downloads": 626295912,
+      "last_serial": 38515126,
+      "project": "rpds-py",
+      "project_urls": {
+        "Documentation": "https://rpds.readthedocs.io/",
+        "Funding": "https://github.com/sponsors/Julian",
+        "Homepage": "https://github.com/crate-py/rpds",
+        "Issues": "https://github.com/crate-py/rpds/issues/",
+        "Source": "https://github.com/crate-py/rpds",
+        "Tidelift": "https://tidelift.com/subscription/pkg/pypi-rpds-py?utm_source=pypi-rpds-py&utm_medium=referral&utm_campaign=pypi-link",
+        "Upstream": "https://github.com/orium/rpds"
+      },
+      "rank": 54,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://rpds.readthedocs.io/"
+      },
+      "source_sha256": "a2a4311810f8a6b9c90514101be847a404ae63ca4cca6de2c05020b78475a35a",
+      "source_url": "https://pypi.org/pypi/rpds-py/json",
+      "version": "2026.6.3"
+    },
+    {
+      "canonical_name": "markdown-it-py",
+      "downloads": 620845364,
+      "last_serial": 36827879,
+      "project": "markdown-it-py",
+      "project_urls": {
+        "Documentation": "https://markdown-it-py.readthedocs.io",
+        "Homepage": "https://github.com/executablebooks/markdown-it-py"
+      },
+      "rank": 55,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://markdown-it-py.readthedocs.io"
+      },
+      "source_sha256": "093d54bb83e6c89afa23d4a62bc054a390b94888729f1589c0c0d2e1950db1b8",
+      "source_url": "https://pypi.org/pypi/markdown-it-py/json",
+      "version": "4.2.0"
+    },
+    {
+      "canonical_name": "rich",
+      "downloads": 620242902,
+      "last_serial": 36031239,
+      "project": "rich",
+      "project_urls": {
+        "Documentation": "https://rich.readthedocs.io/en/latest/",
+        "Homepage": "https://github.com/Textualize/rich"
+      },
+      "rank": 56,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://rich.readthedocs.io/en/latest/"
+      },
+      "source_sha256": "f1746d8854449e5787bc506d4f15f3d84bed1dea878a1b5ba171bc3793a0e1bb",
+      "source_url": "https://pypi.org/pypi/rich/json",
+      "version": "15.0.0"
+    },
+    {
+      "canonical_name": "jsonschema",
+      "downloads": 608545471,
+      "last_serial": 33402435,
+      "project": "jsonschema",
+      "project_urls": {
+        "Changelog": "https://github.com/python-jsonschema/jsonschema/blob/main/CHANGELOG.rst",
+        "Documentation": "https://python-jsonschema.readthedocs.io/",
+        "Funding": "https://github.com/sponsors/Julian",
+        "Homepage": "https://github.com/python-jsonschema/jsonschema",
+        "Issues": "https://github.com/python-jsonschema/jsonschema/issues/",
+        "Source": "https://github.com/python-jsonschema/jsonschema",
+        "Tidelift": "https://tidelift.com/subscription/pkg/pypi-jsonschema?utm_source=pypi-jsonschema&utm_medium=referral&utm_campaign=pypi-link"
+      },
+      "rank": 57,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://python-jsonschema.readthedocs.io/"
+      },
+      "source_sha256": "697a0d4384e479461a5c84357a5d0d495dd1aeec1f42ad13ae7209112faaaec9",
+      "source_url": "https://pypi.org/pypi/jsonschema/json",
+      "version": "4.26.0"
+    },
+    {
+      "canonical_name": "multidict",
+      "downloads": 597683608,
+      "last_serial": 33802820,
+      "project": "multidict",
+      "project_urls": {
+        "CI: GitHub": "https://github.com/aio-libs/multidict/actions",
+        "Chat: Matrix": "https://matrix.to/#/#aio-libs:matrix.org",
+        "Chat: Matrix Space": "https://matrix.to/#/#aio-libs-space:matrix.org",
+        "Code of Conduct": "https://github.com/aio-libs/.github/blob/master/CODE_OF_CONDUCT.md",
+        "Coverage: codecov": "https://codecov.io/github/aio-libs/multidict",
+        "Docs: Changelog": "https://multidict.aio-libs.org/en/latest/changes/",
+        "Docs: RTD": "https://multidict.aio-libs.org",
+        "GitHub: issues": "https://github.com/aio-libs/multidict/issues",
+        "GitHub: repo": "https://github.com/aio-libs/multidict",
+        "Homepage": "https://github.com/aio-libs/multidict"
+      },
+      "rank": 58,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Docs: RTD",
+        "normalized_label": "docs rtd",
+        "priority": 3,
+        "url": "https://multidict.aio-libs.org"
+      },
+      "source_sha256": "50885d7cce1116af0a44f2f5ce10b869a1bbfd76b4e706f89744af12ad600e7e",
+      "source_url": "https://pypi.org/pypi/multidict/json",
+      "version": "6.7.1"
+    },
+    {
+      "canonical_name": "fastapi",
+      "downloads": 594353062,
+      "last_serial": 39495828,
+      "project": "fastapi",
+      "project_urls": {
+        "Changelog": "https://fastapi.tiangolo.com/release-notes/",
+        "Documentation": "https://fastapi.tiangolo.com/",
+        "Homepage": "https://github.com/fastapi/fastapi",
+        "Issues": "https://github.com/fastapi/fastapi/issues",
+        "Repository": "https://github.com/fastapi/fastapi"
+      },
+      "rank": 59,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://fastapi.tiangolo.com/"
+      },
+      "source_sha256": "5ab86ffe97a080cf738190eee44c7608633e848f7d7eed19c10326ce88d65d96",
+      "source_url": "https://pypi.org/pypi/fastapi/json",
+      "version": "0.141.1"
+    },
+    {
+      "canonical_name": "propcache",
+      "downloads": 589101186,
+      "last_serial": 36877626,
+      "project": "propcache",
+      "project_urls": {
+        "CI: GitHub Workflows": "https://github.com/aio-libs/propcache/actions?query=branch:master",
+        "Chat: Matrix": "https://matrix.to/#/#aio-libs:matrix.org",
+        "Chat: Matrix Space": "https://matrix.to/#/#aio-libs-space:matrix.org",
+        "Code of Conduct": "https://github.com/aio-libs/.github/blob/master/CODE_OF_CONDUCT.md",
+        "Coverage: codecov": "https://codecov.io/github/aio-libs/propcache",
+        "Docs: Changelog": "https://propcache.readthedocs.io/en/latest/changes/",
+        "Docs: RTD": "https://propcache.readthedocs.io",
+        "GitHub: issues": "https://github.com/aio-libs/propcache/issues",
+        "GitHub: repo": "https://github.com/aio-libs/propcache",
+        "Homepage": "https://github.com/aio-libs/propcache"
+      },
+      "rank": 60,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Docs: RTD",
+        "normalized_label": "docs rtd",
+        "priority": 3,
+        "url": "https://propcache.readthedocs.io"
+      },
+      "source_sha256": "eaba42bd171484e5f7b21ffd1d72c7de4f3a7a95680fbc8ef44e37ca61089d3d",
+      "source_url": "https://pypi.org/pypi/propcache/json",
+      "version": "0.5.2"
+    },
+    {
+      "canonical_name": "google-auth",
+      "downloads": 576428487,
+      "homepage_candidate": null,
+      "last_serial": 39746160,
+      "project": "google-auth",
+      "project_urls": {
+        "Homepage": "https://github.com/googleapis/google-cloud-python/tree/main/packages/google-auth"
+      },
+      "rank": 61,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "7d3aef28d64aedf3f97282f841c369338cba4f7a8c5914a8f7735d51d06dcceb",
+      "source_url": "https://pypi.org/pypi/google-auth/json",
+      "version": "2.56.3"
+    },
+    {
+      "canonical_name": "wheel",
+      "downloads": 573224626,
+      "last_serial": 39931460,
+      "project": "wheel",
+      "project_urls": {
+        "Changelog": "https://wheel.readthedocs.io/en/stable/news.html",
+        "Documentation": "https://wheel.readthedocs.io/",
+        "Issue Tracker": "https://github.com/pypa/wheel/issues",
+        "Source": "https://github.com/pypa/wheel"
+      },
+      "rank": 62,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://wheel.readthedocs.io/"
+      },
+      "source_sha256": "113f8abc907676e530c9dca238f3b2bd26e2b142747d16d7d4775810e1155980",
+      "source_url": "https://pypi.org/pypi/wheel/json",
+      "version": "0.48.0"
+    },
+    {
+      "canonical_name": "websockets",
+      "downloads": 571762060,
+      "last_serial": 39556960,
+      "project": "websockets",
+      "project_urls": {
+        "Changelog": "https://websockets.readthedocs.io/en/stable/project/changelog.html",
+        "Documentation": "https://websockets.readthedocs.io/",
+        "Funding": "https://tidelift.com/subscription/pkg/pypi-websockets?utm_source=pypi-websockets&utm_medium=referral&utm_campaign=readme",
+        "Homepage": "https://github.com/python-websockets/websockets",
+        "Tracker": "https://github.com/python-websockets/websockets/issues"
+      },
+      "rank": 63,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://websockets.readthedocs.io/"
+      },
+      "source_sha256": "24ff7d966c6b57f391d598da9eae9f55736b1ae00af206c16829f3c4fb577eb8",
+      "source_url": "https://pypi.org/pypi/websockets/json",
+      "version": "17.0.1"
+    },
+    {
+      "canonical_name": "pyasn1",
+      "downloads": 567503754,
+      "last_serial": 38800966,
+      "project": "pyasn1",
+      "project_urls": {
+        "Changelog": "https://pyasn1.readthedocs.io/en/latest/changelog.html",
+        "Documentation": "https://pyasn1.readthedocs.io",
+        "Homepage": "https://github.com/pyasn1/pyasn1",
+        "Issues": "https://github.com/pyasn1/pyasn1/issues",
+        "Source": "https://github.com/pyasn1/pyasn1"
+      },
+      "rank": 64,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://pyasn1.readthedocs.io"
+      },
+      "source_sha256": "b59f8b9f479772a75a4ae6e8f98f85728327305cabb493753ee40f0b339525c5",
+      "source_url": "https://pypi.org/pypi/pyasn1/json",
+      "version": "0.6.4"
+    },
+    {
+      "canonical_name": "referencing",
+      "downloads": 561830305,
+      "last_serial": 31774579,
+      "project": "referencing",
+      "project_urls": {
+        "Changelog": "https://referencing.readthedocs.io/en/stable/changes/",
+        "Documentation": "https://referencing.readthedocs.io/",
+        "Funding": "https://github.com/sponsors/Julian",
+        "Homepage": "https://github.com/python-jsonschema/referencing",
+        "Issues": "https://github.com/python-jsonschema/referencing/issues/",
+        "Source": "https://github.com/python-jsonschema/referencing",
+        "Tidelift": "https://tidelift.com/subscription/pkg/pypi-referencing?utm_source=pypi-referencing&utm_medium=referral&utm_campaign=pypi-link"
+      },
+      "rank": 65,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://referencing.readthedocs.io/"
+      },
+      "source_sha256": "8cade92a4e786c196bbfad784526a6344d77f0d4ff54970e8ed448085c4556d6",
+      "source_url": "https://pypi.org/pypi/referencing/json",
+      "version": "0.37.0"
+    },
+    {
+      "canonical_name": "aiohappyeyeballs",
+      "downloads": 558479645,
+      "last_serial": 38566794,
+      "project": "aiohappyeyeballs",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/aio-libs/aiohappyeyeballs/issues",
+        "Changelog": "https://github.com/aio-libs/aiohappyeyeballs/blob/main/CHANGELOG.md",
+        "Documentation": "https://aiohappyeyeballs.readthedocs.io",
+        "Repository": "https://github.com/aio-libs/aiohappyeyeballs"
+      },
+      "rank": 66,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://aiohappyeyeballs.readthedocs.io"
+      },
+      "source_sha256": "ac9cfd69ef859eea4633bb00bda590e6d0f20bddd4b9b5080da105840d283f97",
+      "source_url": "https://pypi.org/pypi/aiohappyeyeballs/json",
+      "version": "2.7.1"
+    },
+    {
+      "canonical_name": "frozenlist",
+      "downloads": 558383920,
+      "last_serial": 31631696,
+      "project": "frozenlist",
+      "project_urls": {
+        "CI: Github Actions": "https://github.com/aio-libs/frozenlist/actions",
+        "Chat: Matrix": "https://matrix.to/#/#aio-libs:matrix.org",
+        "Chat: Matrix Space": "https://matrix.to/#/#aio-libs-space:matrix.org",
+        "Code of Conduct": "https://github.com/aio-libs/.github/blob/master/CODE_OF_CONDUCT.md",
+        "Coverage: codecov": "https://codecov.io/github/aio-libs/frozenlist",
+        "Docs: Changelog": "https://github.com/aio-libs/frozenlist/blob/master/CHANGES.rst#changelog",
+        "Docs: RTD": "https://frozenlist.aio-libs.org",
+        "GitHub: issues": "https://github.com/aio-libs/frozenlist/issues",
+        "GitHub: repo": "https://github.com/aio-libs/frozenlist",
+        "Homepage": "https://github.com/aio-libs/frozenlist"
+      },
+      "rank": 67,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Docs: RTD",
+        "normalized_label": "docs rtd",
+        "priority": 3,
+        "url": "https://frozenlist.aio-libs.org"
+      },
+      "source_sha256": "2748fe0068bba93ad0262a2246bb9c1bd1ddc3e1f1a5cd43dacda2373c9173eb",
+      "source_url": "https://pypi.org/pypi/frozenlist/json",
+      "version": "1.8.0"
+    },
+    {
+      "canonical_name": "jsonschema-specifications",
+      "downloads": 557554251,
+      "last_serial": 31113907,
+      "project": "jsonschema-specifications",
+      "project_urls": {
+        "Documentation": "https://jsonschema-specifications.readthedocs.io/",
+        "Funding": "https://github.com/sponsors/Julian",
+        "Homepage": "https://github.com/python-jsonschema/jsonschema-specifications",
+        "Issues": "https://github.com/python-jsonschema/jsonschema-specifications/issues/",
+        "Source": "https://github.com/python-jsonschema/jsonschema-specifications",
+        "Tidelift": "https://tidelift.com/subscription/pkg/pypi-jsonschema-specifications?utm_source=pypi-jsonschema-specifications&utm_medium=referral&utm_campaign=pypi-link"
+      },
+      "rank": 68,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://jsonschema-specifications.readthedocs.io/"
+      },
+      "source_sha256": "325493907e2e79ab6279d22ea3526ff2dd615d6f35e1ac4040619d7d89e35019",
+      "source_url": "https://pypi.org/pypi/jsonschema-specifications/json",
+      "version": "2025.9.1"
+    },
+    {
+      "canonical_name": "mdurl",
+      "downloads": 555527209,
+      "homepage_candidate": null,
+      "last_serial": 14755633,
+      "project": "mdurl",
+      "project_urls": {
+        "Homepage": "https://github.com/executablebooks/mdurl"
+      },
+      "rank": 69,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "94e52e3e2762e1f295ad5fca55265aa255c1f6b859f6efb67dbab77cb438f57d",
+      "source_url": "https://pypi.org/pypi/mdurl/json",
+      "version": "0.1.2"
+    },
+    {
+      "canonical_name": "pillow",
+      "downloads": 546955901,
+      "last_serial": 38557547,
+      "project": "pillow",
+      "project_urls": {
+        "Changelog": "https://github.com/python-pillow/Pillow/releases",
+        "Documentation": "https://pillow.readthedocs.io",
+        "Funding": "https://tidelift.com/subscription/pkg/pypi-pillow?utm_source=pypi-pillow&utm_medium=pypi",
+        "Homepage": "https://python-pillow.github.io",
+        "Mastodon": "https://fosstodon.org/@pillow",
+        "Release notes": "https://pillow.readthedocs.io/en/stable/releasenotes/index.html",
+        "Source": "https://github.com/python-pillow/Pillow"
+      },
+      "rank": 70,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://pillow.readthedocs.io"
+      },
+      "source_sha256": "81b232ef242999ca15e2979a8edf4df719134e0ec6283f2008497016ceacdb72",
+      "source_url": "https://pypi.org/pypi/pillow/json",
+      "version": "12.3.0"
+    },
+    {
+      "canonical_name": "pytz",
+      "downloads": 546647882,
+      "homepage_candidate": "http://pythonhosted.org/pytz",
+      "last_serial": 39364553,
+      "project": "pytz",
+      "project_urls": {
+        "Download": "https://pypi.org/project/pytz/",
+        "Homepage": "http://pythonhosted.org/pytz",
+        "Issues": "https://github.com/stub42/pytz/issues",
+        "Source": "https://github.com/stub42/pytz.git"
+      },
+      "rank": 71,
+      "resolution": "homepage-resolved",
+      "selected_docs": {
+        "bytes": 68848,
+        "content_type": "text/html",
+        "declared_url": "http://pythonhosted.org/pytz",
+        "etag": null,
+        "generator": "sphinx",
+        "last_modified": null,
+        "response_sha256": "8c74d3baea89bfa505968d53b04a6384eaf079ffdd4828746a9086dd3fd38adf",
+        "url": "https://pythonhosted.org/pytz/"
+      },
+      "source_sha256": "569ad660e42e3069d9e9bf456014af2987ce80683aebbad0a6a4513a29786552",
+      "source_url": "https://pypi.org/pypi/pytz/json",
+      "version": "2026.3.post1"
+    },
+    {
+      "canonical_name": "aiosignal",
+      "downloads": 543163289,
+      "last_serial": 29967904,
+      "project": "aiosignal",
+      "project_urls": {
+        "CI: GitHub Actions": "https://github.com/aio-libs/aiosignal/actions",
+        "Chat: Gitter": "https://gitter.im/aio-libs/Lobby",
+        "Coverage: codecov": "https://codecov.io/github/aio-libs/aiosignal",
+        "Docs: RTD": "https://docs.aiosignal.org",
+        "GitHub: issues": "https://github.com/aio-libs/aiosignal/issues",
+        "GitHub: repo": "https://github.com/aio-libs/aiosignal",
+        "Homepage": "https://github.com/aio-libs/aiosignal"
+      },
+      "rank": 72,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Docs: RTD",
+        "normalized_label": "docs rtd",
+        "priority": 3,
+        "url": "https://docs.aiosignal.org"
+      },
+      "source_sha256": "4eaec6269f56ef326bf2caa1368d035d7f9b8f364ea8e3274a208aa67ff5a028",
+      "source_url": "https://pypi.org/pypi/aiosignal/json",
+      "version": "1.4.0"
+    },
+    {
+      "canonical_name": "virtualenv",
+      "downloads": 541831168,
+      "last_serial": 39895530,
+      "project": "virtualenv",
+      "project_urls": {
+        "Documentation": "https://virtualenv.pypa.io",
+        "Homepage": "https://github.com/pypa/virtualenv",
+        "Source": "https://github.com/pypa/virtualenv",
+        "Tracker": "https://github.com/pypa/virtualenv/issues"
+      },
+      "rank": 73,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://virtualenv.pypa.io"
+      },
+      "source_sha256": "075a5078480eca5dd5b632a6df6af590c96d32f6b277cfdf97d8d12c18d116b3",
+      "source_url": "https://pypi.org/pypi/virtualenv/json",
+      "version": "21.7.4"
+    },
+    {
+      "canonical_name": "importlib-metadata",
+      "downloads": 537748496,
+      "homepage_candidate": null,
+      "last_serial": 35322449,
+      "project": "importlib-metadata",
+      "project_urls": {
+        "Source": "https://github.com/python/importlib_metadata"
+      },
+      "rank": 74,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "a485bd12681714fee0aa3ff37ba3a821a1e52a40c1a1839a602180186f2b2634",
+      "source_url": "https://pypi.org/pypi/importlib-metadata/json",
+      "version": "9.0.0"
+    },
+    {
+      "canonical_name": "opentelemetry-semantic-conventions",
+      "downloads": 537585338,
+      "homepage_candidate": null,
+      "last_serial": 39064251,
+      "project": "opentelemetry-semantic-conventions",
+      "project_urls": {
+        "Homepage": "https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-semantic-conventions",
+        "Repository": "https://github.com/open-telemetry/opentelemetry-python"
+      },
+      "rank": 75,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "ce63dc2e284b0e80b1c34b6e09a28b8fd0fa7b61bedc6145609fda561a5a7aa7",
+      "source_url": "https://pypi.org/pypi/opentelemetry-semantic-conventions/json",
+      "version": "0.65b0"
+    },
+    {
+      "canonical_name": "textual",
+      "downloads": 537231678,
+      "last_serial": 38514489,
+      "project": "textual",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/Textualize/textual/issues",
+        "Documentation": "https://textual.textualize.io/",
+        "Homepage": "https://github.com/Textualize/textual",
+        "Repository": "https://github.com/Textualize/textual"
+      },
+      "rank": 76,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://textual.textualize.io/"
+      },
+      "source_sha256": "6f24f7a980c1d67be322e0e198fe57bee223a1dc03fc4090a81436ce3ed7d0a9",
+      "source_url": "https://pypi.org/pypi/textual/json",
+      "version": "8.2.8"
+    },
+    {
+      "canonical_name": "trove-classifiers",
+      "downloads": 528329436,
+      "homepage_candidate": null,
+      "last_serial": 37617973,
+      "project": "trove-classifiers",
+      "project_urls": {
+        "Homepage": "https://github.com/pypa/trove-classifiers"
+      },
+      "rank": 77,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "5021a5f3c880269f6be2e85ee7f2f06ad52f7f733389504766b66f98c8536d23",
+      "source_url": "https://pypi.org/pypi/trove-classifiers/json",
+      "version": "2026.6.1.19"
+    },
+    {
+      "canonical_name": "googleapis-common-protos",
+      "downloads": 527771951,
+      "homepage_candidate": null,
+      "last_serial": 39746207,
+      "project": "googleapis-common-protos",
+      "project_urls": {
+        "Repository": "https://github.com/googleapis/google-cloud-python/tree/main/packages/googleapis-common-protos"
+      },
+      "rank": 78,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "1823ed8bfef2450b8afae47c9b48507ba62411aadfefe1462de3d84c30bb515e",
+      "source_url": "https://pypi.org/pypi/googleapis-common-protos/json",
+      "version": "1.75.1"
+    },
+    {
+      "canonical_name": "zipp",
+      "downloads": 527293253,
+      "homepage_candidate": null,
+      "last_serial": 37175256,
+      "project": "zipp",
+      "project_urls": {
+        "Source": "https://github.com/jaraco/zipp"
+      },
+      "rank": 79,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "ff1e2bf6824e93c21f87bd5129cba77314c48aff3cc33149b08dafa7f025e57c",
+      "source_url": "https://pypi.org/pypi/zipp/json",
+      "version": "4.1.0"
+    },
+    {
+      "canonical_name": "sniffio",
+      "downloads": 504698027,
+      "last_serial": 22034184,
+      "project": "sniffio",
+      "project_urls": {
+        "Changelog": "https://sniffio.readthedocs.io/en/latest/history.html",
+        "Documentation": "https://sniffio.readthedocs.io/",
+        "Homepage": "https://github.com/python-trio/sniffio"
+      },
+      "rank": 80,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://sniffio.readthedocs.io/"
+      },
+      "source_sha256": "e9af8ee27171c4cbf1086c7fef5119e266a219b0cac54fee61609de1eab103d9",
+      "source_url": "https://pypi.org/pypi/sniffio/json",
+      "version": "1.3.1"
+    },
+    {
+      "canonical_name": "tzdata",
+      "downloads": 502893466,
+      "last_serial": 38848962,
+      "project": "tzdata",
+      "project_urls": {
+        "Bug Reports": "https://github.com/python/tzdata/issues",
+        "Documentation": "https://tzdata.python.org",
+        "Homepage": "https://github.com/python/tzdata",
+        "Source": "https://github.com/python/tzdata"
+      },
+      "rank": 81,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://tzdata.python.org"
+      },
+      "source_sha256": "1d20b1d51d74f06e61cd337cd746ccda24d17f6361bb70c236c55e4afcb8978f",
+      "source_url": "https://pypi.org/pypi/tzdata/json",
+      "version": "2026.3"
+    },
+    {
+      "canonical_name": "annotated-doc",
+      "downloads": 494813486,
+      "last_serial": 39452931,
+      "project": "annotated-doc",
+      "project_urls": {
+        "Changelog": "https://github.com/fastapi/annotated-doc/release-notes.md",
+        "Documentation": "https://github.com/fastapi/annotated-doc",
+        "Homepage": "https://github.com/fastapi/annotated-doc",
+        "Issues": "https://github.com/fastapi/annotated-doc/issues",
+        "Repository": "https://github.com/fastapi/annotated-doc"
+      },
+      "rank": 82,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://github.com/fastapi/annotated-doc"
+      },
+      "source_sha256": "c101949aac4f010748b3dd5171cb7c9bc934363b414cfff6e0089fcdd64966f9",
+      "source_url": "https://pypi.org/pypi/annotated-doc/json",
+      "version": "0.0.5"
+    },
+    {
+      "canonical_name": "opentelemetry-sdk",
+      "downloads": 493664021,
+      "homepage_candidate": null,
+      "last_serial": 39064248,
+      "project": "opentelemetry-sdk",
+      "project_urls": {
+        "Homepage": "https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-sdk",
+        "Repository": "https://github.com/open-telemetry/opentelemetry-python"
+      },
+      "rank": 83,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "9816125edeb981ec107fca977368db93a77e8139513dd3133762a864416ea3a5",
+      "source_url": "https://pypi.org/pypi/opentelemetry-sdk/json",
+      "version": "1.44.0"
+    },
+    {
+      "canonical_name": "huggingface-hub",
+      "downloads": 490452833,
+      "homepage_candidate": null,
+      "last_serial": 39792235,
+      "project": "huggingface-hub",
+      "project_urls": {
+        "Homepage": "https://github.com/huggingface/huggingface_hub"
+      },
+      "rank": 84,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "99e73fbcea4b883c8724a08dd08a64fe4b8b36e30db2791fcad0a0f32d4e5817",
+      "source_url": "https://pypi.org/pypi/huggingface-hub/json",
+      "version": "1.27.0"
+    },
+    {
+      "canonical_name": "wrapt",
+      "downloads": 490228002,
+      "last_serial": 40052919,
+      "project": "wrapt",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/GrahamDumpleton/wrapt/issues/",
+        "Changelog": "https://wrapt.readthedocs.io/en/latest/changes.html",
+        "Documentation": "https://wrapt.readthedocs.io/",
+        "Homepage": "https://github.com/GrahamDumpleton/wrapt"
+      },
+      "rank": 85,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://wrapt.readthedocs.io/"
+      },
+      "source_sha256": "dd6fe39e625c2b0a2fa4bbe1ca5058ce5c6d90c5e8bb287837a647dfdad63986",
+      "source_url": "https://pypi.org/pypi/wrapt/json",
+      "version": "2.3.0"
+    },
+    {
+      "canonical_name": "hatchling",
+      "downloads": 488018483,
+      "homepage_candidate": "https://hatch.pypa.io/latest/",
+      "last_serial": 39902566,
+      "project": "hatchling",
+      "project_urls": {
+        "History": "https://hatch.pypa.io/dev/history/hatchling/",
+        "Homepage": "https://hatch.pypa.io/latest/",
+        "Source": "https://github.com/pypa/hatch/tree/master/backend",
+        "Sponsor": "https://github.com/sponsors/ofek",
+        "Tracker": "https://github.com/pypa/hatch/issues"
+      },
+      "rank": 86,
+      "resolution": "homepage-resolved",
+      "selected_docs": {
+        "bytes": 69967,
+        "content_type": "text/html",
+        "declared_url": "https://hatch.pypa.io/latest/",
+        "etag": "\"6a7e2f75-1114f\"",
+        "generator": "mkdocs",
+        "last_modified": "Thu, 13 Aug 2026 20:56:21 GMT",
+        "response_sha256": "9126838e661636e7e00b58d672f549e0bc4563c29ef5fe943cbc9f399741c1e0",
+        "url": "https://hatch.pypa.io/latest/"
+      },
+      "source_sha256": "6e3e2b4705673a58089000916ec2369ea1344ef85bda631d591f60f22f09a846",
+      "source_url": "https://pypi.org/pypi/hatchling/json",
+      "version": "1.32.0"
+    },
+    {
+      "canonical_name": "greenlet",
+      "downloads": 482207598,
+      "last_serial": 39881458,
+      "project": "greenlet",
+      "project_urls": {
+        "Changelog": "https://greenlet.readthedocs.io/en/latest/changes.html",
+        "Documentation": "https://greenlet.readthedocs.io",
+        "Homepage": "https://greenlet.readthedocs.io",
+        "Issues": "https://github.com/python-greenlet/greenlet/issues",
+        "Repository": "https://github.com/python-greenlet/greenlet"
+      },
+      "rank": 87,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://greenlet.readthedocs.io"
+      },
+      "source_sha256": "02e21f6956e4bdbed261f0e824cac7df73a1bcfdd6cadac9c6c81fe71f6b2f13",
+      "source_url": "https://pypi.org/pypi/greenlet/json",
+      "version": "3.5.5"
+    },
+    {
+      "canonical_name": "opentelemetry-api",
+      "downloads": 479239967,
+      "homepage_candidate": null,
+      "last_serial": 39064199,
+      "project": "opentelemetry-api",
+      "project_urls": {
+        "Homepage": "https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-api",
+        "Repository": "https://github.com/open-telemetry/opentelemetry-python"
+      },
+      "rank": 88,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "7a93a12593bc3edfc79b304f46f8cabbc5c6e1e2ba049b012d796ac6077f00a4",
+      "source_url": "https://pypi.org/pypi/opentelemetry-api/json",
+      "version": "1.44.0"
+    },
+    {
+      "canonical_name": "pydantic-settings",
+      "downloads": 478089093,
+      "last_serial": 39786999,
+      "project": "pydantic-settings",
+      "project_urls": {
+        "Changelog": "https://github.com/pydantic/pydantic-settings/releases",
+        "Documentation": "https://docs.pydantic.dev/dev-v2/concepts/pydantic_settings/",
+        "Funding": "https://github.com/sponsors/samuelcolvin",
+        "Homepage": "https://github.com/pydantic/pydantic-settings",
+        "Source": "https://github.com/pydantic/pydantic-settings"
+      },
+      "rank": 89,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://docs.pydantic.dev/dev-v2/concepts/pydantic_settings/"
+      },
+      "source_sha256": "2d816cebf798a870966ffa5199994d306845e99b5494672d170c3aec731c21e3",
+      "source_url": "https://pypi.org/pypi/pydantic-settings/json",
+      "version": "2.15.0"
+    },
+    {
+      "canonical_name": "google-api-core",
+      "downloads": 476876874,
+      "last_serial": 39746157,
+      "project": "google-api-core",
+      "project_urls": {
+        "Documentation": "https://googleapis.dev/python/google-api-core/latest/",
+        "Homepage": "https://github.com/googleapis/google-cloud-python/tree/main/packages/google-api-core",
+        "Repository": "https://github.com/googleapis/google-cloud-python"
+      },
+      "rank": 90,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://googleapis.dev/python/google-api-core/latest/"
+      },
+      "source_sha256": "98a9c885a0aee60f38a32f841bfacc69846f0a042d270bb104ffe043353f67bc",
+      "source_url": "https://pypi.org/pypi/google-api-core/json",
+      "version": "2.34.0"
+    },
+    {
+      "canonical_name": "pyasn1-modules",
+      "downloads": 461618760,
+      "homepage_candidate": null,
+      "last_serial": 28216751,
+      "project": "pyasn1-modules",
+      "project_urls": {
+        "Changelog": "https://github.com/pyasn1/pyasn1-modules/blob/master/CHANGES.txt",
+        "Homepage": "https://github.com/pyasn1/pyasn1-modules",
+        "Issues": "https://github.com/pyasn1/pyasn1-modules/issues",
+        "Source": "https://github.com/pyasn1/pyasn1-modules"
+      },
+      "rank": 91,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "618d353092173845f809c3cb48afd5c2d1c1040607b8a5860d3d61aed9684b77",
+      "source_url": "https://pypi.org/pypi/pyasn1-modules/json",
+      "version": "0.4.2"
+    },
+    {
+      "canonical_name": "regex",
+      "downloads": 456361267,
+      "homepage_candidate": null,
+      "last_serial": 39141564,
+      "project": "regex",
+      "project_urls": {
+        "Homepage": "https://github.com/mrabarnett/mrab-regex"
+      },
+      "rank": 92,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "5dff4ca0e6055cef5b0cf3e0d19d1671c0dedae81379cfc43178c9fb5fb4e25d",
+      "source_url": "https://pypi.org/pypi/regex/json",
+      "version": "2026.7.19"
+    },
+    {
+      "canonical_name": "soupsieve",
+      "downloads": 449931774,
+      "homepage_candidate": null,
+      "last_serial": 39774130,
+      "project": "soupsieve",
+      "project_urls": {
+        "Homepage": "https://github.com/facelessuser/soupsieve"
+      },
+      "rank": 93,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "745df9a983f4db3878bc220307ab75bfde3ea80d20fefa953fb4f7f25c94047d",
+      "source_url": "https://pypi.org/pypi/soupsieve/json",
+      "version": "2.9.2"
+    },
+    {
+      "canonical_name": "pyarrow",
+      "downloads": 448392348,
+      "last_serial": 39876459,
+      "project": "pyarrow",
+      "project_urls": {
+        "Documentation": "https://arrow.apache.org/docs/python",
+        "Homepage": "https://arrow.apache.org/",
+        "Issues": "https://github.com/apache/arrow/issues",
+        "Repository": "https://github.com/apache/arrow"
+      },
+      "rank": 94,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://arrow.apache.org/docs/python"
+      },
+      "source_sha256": "79aafde47addc897e093b72915143f2aa8d8426dd89ea24b7292af277487cc6f",
+      "source_url": "https://pypi.org/pypi/pyarrow/json",
+      "version": "25.0.1"
+    },
+    {
+      "canonical_name": "tenacity",
+      "downloads": 447047056,
+      "homepage_candidate": null,
+      "last_serial": 34127578,
+      "project": "tenacity",
+      "project_urls": {
+        "Homepage": "https://github.com/jd/tenacity"
+      },
+      "rank": 95,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "08a5a9d0922fa5b3d768334a980600cda5cfcca0a16e3f1f2f714c615fb172be",
+      "source_url": "https://pypi.org/pypi/tenacity/json",
+      "version": "9.1.4"
+    },
+    {
+      "canonical_name": "grpcio",
+      "downloads": 441302950,
+      "last_serial": 39300271,
+      "project": "grpcio",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/grpc/grpc/issues",
+        "Documentation": "https://grpc.github.io/grpc/python",
+        "Homepage": "https://grpc.io",
+        "Source Code": "https://github.com/grpc/grpc"
+      },
+      "rank": 96,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://grpc.github.io/grpc/python"
+      },
+      "source_sha256": "cd81ce77f59691f04c1444634f5103318a94a4bf32d2b35a7b2493266c31df38",
+      "source_url": "https://pypi.org/pypi/grpcio/json",
+      "version": "1.83.0"
+    },
+    {
+      "canonical_name": "beautifulsoup4",
+      "downloads": 438583279,
+      "homepage_candidate": "https://www.crummy.com/software/BeautifulSoup/bs4/",
+      "homepage_error": "URLError: <urlopen error timed out>",
+      "last_serial": 37799658,
+      "project": "beautifulsoup4",
+      "project_urls": {
+        "Download": "https://www.crummy.com/software/BeautifulSoup/bs4/download/",
+        "Homepage": "https://www.crummy.com/software/BeautifulSoup/bs4/"
+      },
+      "rank": 97,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "0434c8678c65c3db2eb58edc7bd4a7c2d81170ba9d6cab9d81718eab19b3dfb5",
+      "source_url": "https://pypi.org/pypi/beautifulsoup4/json",
+      "version": "4.15.0"
+    },
+    {
+      "canonical_name": "python-multipart",
+      "downloads": 438557009,
+      "last_serial": 37717882,
+      "project": "python-multipart",
+      "project_urls": {
+        "Changelog": "https://github.com/Kludex/python-multipart/blob/master/CHANGELOG.md",
+        "Documentation": "https://kludex.github.io/python-multipart/",
+        "Homepage": "https://github.com/Kludex/python-multipart",
+        "Source": "https://github.com/Kludex/python-multipart"
+      },
+      "rank": 98,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "Documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://kludex.github.io/python-multipart/"
+      },
+      "source_sha256": "ebff10e4e7b3813346e7ea814024598d7c23faf9fbeb1c31fe2a5ffd24ada2c2",
+      "source_url": "https://pypi.org/pypi/python-multipart/json",
+      "version": "0.0.32"
+    },
+    {
+      "canonical_name": "distro",
+      "downloads": 434843825,
+      "homepage_candidate": null,
+      "last_serial": 21189519,
+      "project": "distro",
+      "project_urls": {
+        "Homepage": "https://github.com/python-distro/distro"
+      },
+      "rank": 99,
+      "resolution": "unresolved",
+      "selected_docs": null,
+      "source_sha256": "6d851ddb94a0f56275d3e8ade724cb379758d00b9905b770b5b35024abfd9585",
+      "source_url": "https://pypi.org/pypi/distro/json",
+      "version": "1.9.0"
+    },
+    {
+      "canonical_name": "scipy",
+      "downloads": 429829044,
+      "last_serial": 38206214,
+      "project": "scipy",
+      "project_urls": {
+        "documentation": "https://docs.scipy.org/doc/scipy/",
+        "download": "https://github.com/scipy/scipy/releases",
+        "homepage": "https://scipy.org/",
+        "source": "https://github.com/scipy/scipy",
+        "tracker": "https://github.com/scipy/scipy/issues"
+      },
+      "rank": 100,
+      "resolution": "label-resolved",
+      "selected_docs": {
+        "candidate_count": 1,
+        "label": "documentation",
+        "normalized_label": "documentation",
+        "priority": 0,
+        "url": "https://docs.scipy.org/doc/scipy/"
+      },
+      "source_sha256": "12d658909db80cd2182a8b8479bfdca1f81eaa956d22a01e21c6ba654f0b6a8e",
+      "source_url": "https://pypi.org/pypi/scipy/json",
+      "version": "1.18.0"
+    }
+  ],
+  "sample_path": "planning/research/code-sample-census/data/sample-frame-2026-08-16.csv",
+  "sample_sha256": "3e02205ba1202e69a273a29e5b59755e75da2a906adb35248ee26e23da93f332",
+  "selection_rule": {
+    "homepage": "non-code-host Homepage accepted only when a supported docs generator is detected",
+    "label": "documentation/docs token excluding changelog, history, release, contact, funding"
+  },
+  "stage": "documentation-url-resolution",
+  "study": "code-sample-validity-census",
+  "summary": {
+    "fetch_errors": 0,
+    "frame_rows": 100,
+    "homepage_attempts": 7,
+    "homepage_errors": 2,
+    "homepage_resolved": 5,
+    "label_resolved": 63,
+    "metadata_fetched": 100,
+    "unresolved": 32
+  }
+}

@@ -68,7 +68,9 @@ docs under `Homepage` or `Docs: RTD`; see `RESOLUTION-2026-08-17.md`. It is
 falsified as the final primary rule. No search-engine lookup or hand-picked
 replacement is allowed. The replacement must mechanically test qualified docs
 labels and supported-generator homepages, preserve resolution strata, and pass
-inspection before any code crawl.
+inspection before any code crawl. The replacement resolves 80/100 in three
+strata (63 label, 5 declared homepage, 12 repository homepage). All 80 roots must
+still pass live redirect/generator inspection before page sampling starts.
 
 ## Page sampling
 

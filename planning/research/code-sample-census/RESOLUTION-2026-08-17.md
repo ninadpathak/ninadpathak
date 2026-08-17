@@ -56,3 +56,28 @@ The next batch must remain mechanical and report each stage separately:
 No search-engine discovery and no hand-picked replacement enters the primary
 sample. A manual sensitivity appendix remains permissible if separately labelled.
 
+## Replacement-rule result
+
+The replacement was run against the frozen metadata without re-fetching PyPI:
+
+| Resolution stratum | Projects |
+|---|---:|
+| Qualified documentation labels | 63 |
+| Generator-verified declared homepages | 5 |
+| Generator-verified GitHub repository homepages | 12 |
+| Unresolved | 20 |
+
+This reaches 80/100 without search discovery or hand selection. The repository
+route uses only a PyPI-declared GitHub repository, that repository's own public
+`homepage` field, and the same supported-generator check. The 20 unresolved are
+preserved, not backfilled.
+
+The result is materially less selective, but it does **not** unlock page crawling
+yet. Label-resolved URLs have not all been fetched through the generator gate,
+and three documentation hosts cover related package pairs (Pydantic,
+grpcio/grpcio-status, and pyasn1/pyasn1-modules). The next gate must fetch all 80
+roots, record redirects and generator distribution, and define whether related
+packages share or partition a documentation corpus before sampling pages.
+
+Artifacts: `data/docs-resolution-v2-2026-08-17.json` (68-project intermediate)
+and `data/docs-resolution-v3-2026-08-17.json` (80-project result).

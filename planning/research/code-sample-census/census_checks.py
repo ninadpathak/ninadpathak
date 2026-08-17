@@ -179,6 +179,37 @@ class DocumentationResolutionTests(unittest.TestCase):
         b = dict(reversed(list(a.items())))
         self.assertEqual(self.module.choose_docs_url(a), self.module.choose_docs_url(b))
 
+    def test_docs_rtd_wins_without_selecting_changelog(self):
+        selected = self.module.choose_docs_url(
+            {
+                "Docs: Changelog": "https://example.test/changes/",
+                "Docs: RTD": "https://example.test/docs/",
+            }
+        )
+        self.assertEqual(selected["label"], "Docs: RTD")
+        self.assertEqual(selected["priority"], 3)
+        self.assertEqual(selected["candidate_count"], 1)
+
+    def test_only_negative_docs_labels_do_not_resolve(self):
+        self.assertIsNone(self.module.choose_docs_url({"Docs: Changelog": "https://example.test/changes/"}))
+
+    def test_homepage_rejects_code_hosts(self):
+        self.assertIsNone(self.module.choose_homepage({"Homepage": "https://github.com/acme/pkg"}))
+        self.assertEqual(
+            self.module.choose_homepage({"Homepage": "https://docs.example.test/pkg"}),
+            "https://docs.example.test/pkg",
+        )
+
+    def test_github_repository_is_normalized_to_root(self):
+        urls = {
+            "Homepage": "https://github.com/acme/pkg/tree/main/python",
+            "Source": "https://github.com/acme/pkg.git",
+        }
+        self.assertEqual(self.module.choose_github_repo(urls), "https://github.com/acme/pkg")
+
+    def test_non_github_source_is_not_a_repository_candidate(self):
+        self.assertIsNone(self.module.choose_github_repo({"Source": "https://gitlab.com/acme/pkg"}))
+
 
 if __name__ == "__main__":
     unittest.main()
