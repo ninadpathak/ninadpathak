@@ -142,11 +142,17 @@ CLUSTERS: list[tuple[int, str, str]] = [
     (2, "developer-experience", "Developer experience & DevRel"),
     (3, "ai-engineering", "AI agents, memory, RAG, inference"),
     (4, "ai-search-optimization", "AI Overviews & AI-search citation"),
-    (5, "reddit-marketing", "Reddit marketing"),
-    (6, "community-building", "Forums & community building"),
-    (7, "technical-events", "Technical & community events"),
+    (5, "distribution", "Distribution: Reddit, forums, communities, events"),
 ]
+# Merged into cluster 5 on 2026-08-17. Kept mapped rather than deleted so a historical URL
+# resolves to a cluster instead of falling into "no cluster"; all three were verified to
+# have zero impressions across the whole 2025-04 to 2026-08 record before being retired.
+RETIRED_CLUSTER_SLUGS = {"reddit-marketing": "distribution",
+                         "community-building": "distribution",
+                         "technical-events": "distribution"}
 CLUSTER_BY_SLUG = {slug: num for num, slug, _ in CLUSTERS}
+CLUSTER_BY_SLUG.update({old: CLUSTER_BY_SLUG["distribution"]
+                        for old in RETIRED_CLUSTER_SLUGS})
 CLUSTER_LABEL = {num: label for num, _, label in CLUSTERS}
 # campaign-90d.md section 3 assigns the shipped tools to the cluster-4 owner page.
 TOOL_PATHS = {"/linter/": "ai-search-optimization",
@@ -331,11 +337,12 @@ def page_cluster(url: str, slug_clusters: dict[str, str]) -> str | None:
     slug = post_slug(url)
     if slug is None:
         return None
-    if slug in slug_clusters:
-        return slug_clusters[slug]
+    category = slug_clusters.get(slug)
+    if category:
+        return RETIRED_CLUSTER_SLUGS.get(category, category)
     # A cluster owner page is /articles/<category>/ and has no post of its own.
     if slug in CLUSTER_BY_SLUG:
-        return slug
+        return RETIRED_CLUSTER_SLUGS.get(slug, slug)
     return None
 
 

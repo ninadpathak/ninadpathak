@@ -63,6 +63,7 @@ KNOWN_SECTIONS = {
     "rag", "ai-crawler-checker", "ai-overviews-checker", "llms-txt-validator",
     "developer-experience", "technical-documentation", "reddit-marketing",
     "community-building", "technical-events", "ai-search-optimization",
+    "distribution",
     # Pre-2026 site sections, all confirmed legitimate by inspection. Each of these was
     # a false positive in an earlier pass of this analysis: `/category/`, `/tags/`,
     # `/productivity/` and `/project/` are the old blog's own taxonomy and content.

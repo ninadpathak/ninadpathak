@@ -31,3 +31,8 @@ echo "=== $(date -u +%Y-%m-%dT%H:%M:%SZ) daily cycle ==="
 # split between launchd and the script. A failure here must not affect the exit status of
 # the daily checks above — the scoreboard reports, it does not gate.
 "$PY" tools/gsc_scoreboard.py --weekly || echo "NOTE: scoreboard did not run"
+
+# Attribution runs daily, unlike the scoreboard: days-to-first-impression is only correct
+# if somebody is looking every day. Sampling weekly would round every answer to the
+# nearest seven days and lose the distinction between a page indexed on day 1 and day 6.
+"$PY" tools/gsc_attribution.py || echo "NOTE: attribution did not run"

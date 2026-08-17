@@ -390,8 +390,8 @@ class TestClusterMapping(unittest.TestCase):
 
     def test_owner_page_maps_to_its_own_cluster(self):
         self.assertEqual(
-            gr.page_cluster("https://ninadpathak.com/articles/reddit-marketing/", self.SLUGS),
-            "reddit-marketing")
+            gr.page_cluster("https://ninadpathak.com/articles/distribution/", self.SLUGS),
+            "distribution")
 
     def test_shipped_tools_belong_to_cluster_four(self):
         for path in ("/linter/", "/llms-txt-generator/"):
@@ -401,8 +401,8 @@ class TestClusterMapping(unittest.TestCase):
 
     def test_missing_trailing_slash_still_matches(self):
         self.assertEqual(
-            gr.page_cluster("https://ninadpathak.com/articles/reddit-marketing", self.SLUGS),
-            "reddit-marketing")
+            gr.page_cluster("https://ninadpathak.com/articles/distribution", self.SLUGS),
+            "distribution")
 
     def test_pages_outside_any_cluster_return_none(self):
         for url in ("https://ninadpathak.com/",
@@ -445,9 +445,10 @@ class TestPathSplit(unittest.TestCase):
 class TestClusterRollup(unittest.TestCase):
     SLUGS = {"a": "ai-engineering", "b": "ai-engineering", "c": "technical-documentation"}
 
-    def test_all_seven_clusters_always_appear(self):
+    def test_every_cluster_always_appears(self):
+        """Five since the 2026-08-17 Distribution merge folded three into one."""
         got = gr.cluster_rollup([], self.SLUGS)
-        self.assertEqual([c["cluster"] for c in got], [1, 2, 3, 4, 5, 6, 7])
+        self.assertEqual([c["cluster"] for c in got], [1, 2, 3, 4, 5])
 
     def test_empty_cluster_reports_zero_not_absent(self):
         got = {c["cluster"]: c for c in gr.cluster_rollup([], self.SLUGS)}
@@ -479,3 +480,32 @@ class TestClusterRollup(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestRetiredClusterSlugs(unittest.TestCase):
+    """Reddit, community and events merged into Distribution on 2026-08-17.
+
+    All three were verified to have zero impressions across the entire 2025-04 to 2026-08
+    record before retirement, so no redirects were needed. They stay mapped rather than
+    deleted so a historical URL resolves to the merged cluster instead of silently
+    becoming "no cluster" and quietly leaving the rollup.
+    """
+
+    def test_a_retired_owner_page_maps_to_distribution(self):
+        for old in ("reddit-marketing", "community-building", "technical-events"):
+            self.assertEqual(
+                gr.page_cluster(f"https://ninadpathak.com/articles/{old}/", {}),
+                "distribution", old)
+
+    def test_a_post_still_tagged_with_a_retired_category_maps_to_distribution(self):
+        slugs = {"some-reddit-post": "reddit-marketing"}
+        self.assertEqual(
+            gr.page_cluster("https://ninadpathak.com/articles/some-reddit-post/", slugs),
+            "distribution")
+
+    def test_retired_slugs_do_not_add_rollup_rows(self):
+        rows = [row("https://ninadpathak.com/articles/technical-events/", 0, 5, 9.0)]
+        got = gr.cluster_rollup(rows, {})
+        self.assertEqual([c["cluster"] for c in got], [1, 2, 3, 4, 5])
+        five = next(c for c in got if c["cluster"] == 5)
+        self.assertEqual(five["impressions"], 5)
