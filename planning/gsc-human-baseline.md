@@ -1,6 +1,6 @@
 # Human-only Search Console baseline
 
-Appended by `tools/gsc_human_baseline.py`. Separates machine query fan-out
+Maintained by `tools/gsc_human_baseline.py`, one authoritative section per date. Separates machine query fan-out
 from people and reports the human-only series monthly. Read the denominator
 note in each run: shares are measured within the named-query subset, the
 sitewide machine share is a range rather than a number, and the human series

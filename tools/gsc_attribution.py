@@ -51,7 +51,6 @@ import argparse
 import datetime as dt
 import json
 import pathlib
-import re
 import subprocess
 import sys
 from urllib.parse import urlsplit
@@ -59,6 +58,7 @@ from urllib.parse import urlsplit
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gsc_report as gr  # noqa: E402
+import report_log as rl  # noqa: E402
 
 LOG = gr.ROOT / "planning" / "attribution.md"
 TRACK_FROM = dt.date(2026, 8, 14)
@@ -82,11 +82,6 @@ TOOLS = {
     "templates/ai_overviews_checker.html": "/ai-overviews-checker/",
     "templates/ai_crawler_checker.html": "/ai-crawler-checker/",
 }
-DATED_SECTION = re.compile(
-    r"(?m)^## (?P<date>\d{4}-\d{2}-\d{2}) — attribution since \d{4}-\d{2}-\d{2}\s*$"
-)
-
-
 def git(*args: str) -> str:
     p = subprocess.run(("git", *args), cwd=gr.ROOT, capture_output=True, text=True)
     return p.stdout.strip()
@@ -646,22 +641,7 @@ def upsert_dated_report(existing: str, report: str, generated: str) -> str:
     first same-day section and remove any later duplicates while preserving every other
     date and all nested headings.
     """
-    matches = list(DATED_SECTION.finditer(existing))
-    targets = [
-        (match.start(), matches[index + 1].start()
-         if index + 1 < len(matches) else len(existing))
-        for index, match in enumerate(matches)
-        if match.group("date") == generated
-    ]
-    clean_report = report.strip() + "\n"
-    if not targets:
-        return existing.rstrip() + "\n\n" + clean_report
-
-    updated = existing
-    first_start = targets[0][0]
-    for start, end in reversed(targets):
-        updated = updated[:start] + (clean_report if start == first_start else "") + updated[end:]
-    return updated.rstrip() + "\n"
+    return rl.upsert_dated_report(existing, report, generated)
 
 
 def main() -> int:

@@ -1,6 +1,6 @@
 # Position analysis
 
-Appended by `tools/gsc_position.py`. The funnel breaks at position, so this asks
+Maintained by `tools/gsc_position.py`, one authoritative section per date. The funnel breaks at position, so this asks
 what moves it and refuses to answer past the sample.
 
 Position is measured per (page, query) pair, never per page: a page's average

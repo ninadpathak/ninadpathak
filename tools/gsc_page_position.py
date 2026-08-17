@@ -58,6 +58,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gsc_report as gr  # noqa: E402
 import gsc_collapse_forensics as fx  # noqa: E402
+import report_log as rl  # noqa: E402
 
 LOG = gr.ROOT / "planning" / "page-position.md"
 WINDOW_DAYS = 90
@@ -322,7 +323,8 @@ def main() -> int:
     if not LOG.exists():
         LOG.write_text(
             "# Page position, point in time\n\n"
-            "Appended by `tools/gsc_page_position.py`. Every other Search Console tool here is\n"
+            "Maintained by `tools/gsc_page_position.py`, one authoritative section per date. "
+            "Every other Search Console tool here is\n"
             "differential, so a page holding a steady position is invisible to all of them —\n"
             "and absence from a movement report was once read as absence of a position, which\n"
             "sent a merge in the wrong direction.\n\n"
@@ -331,8 +333,11 @@ def main() -> int:
             "`never-impressed`, which is the only one meaning no position. A position is never\n"
             "printed without the query count it is averaged over.\n",
             encoding="utf-8")
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(report)
+    LOG.write_text(
+        rl.upsert_dated_report(LOG.read_text(encoding="utf-8"), report,
+                               data["generated"]),
+        encoding="utf-8",
+    )
     return 0
 
 

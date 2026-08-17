@@ -1,6 +1,6 @@
 # Day-90 band derivations
 
-Appended by `tools/gsc_band.py`, one dated section per re-derivation. The band
+Maintained by `tools/gsc_band.py`, one authoritative section per date. The band
 has been restated three times because premises under it changed, so each entry
 records the inputs that moved and why. **Never compare a band figure against a
 number quoted before its own date.**

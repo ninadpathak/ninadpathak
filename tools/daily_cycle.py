@@ -4,13 +4,13 @@
 The campaign's judgment work belongs to an agent session. This does not attempt any
 of it. It runs the parts that are mechanical, cannot be wrong, and are the parts most
 likely to be skipped: pull Search Console, confirm the day's publish landed, run the
-publish gate, and append a dated row to a log that survives the session.
+publish gate, and upsert a dated row to a log that survives the session.
 
 Written because the director's daily cycle was a session-only cron that auto-expires
 after seven days, so a 90-day campaign had no durable measurement at all. See
 campaign-90d.md.
 
-    tools/daily_cycle.py                 # check and append to planning/daily-cycle.md
+    tools/daily_cycle.py                 # check and upsert planning/daily-cycle.md
     tools/daily_cycle.py --dry-run       # print, write nothing
 
 Needs GOOGLE_APPLICATION_CREDENTIALS or the workspace service-account file, plus
@@ -29,6 +29,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+import report_log as rl
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "sc-domain:ninadpathak.com"
 CRED_DEFAULT = pathlib.Path(
@@ -38,6 +40,8 @@ LOG = ROOT / "planning" / "daily-cycle.md"
 # Search Console lags roughly three days; asking for yesterday returns zeros and
 # reads as a collapse. Anchor the window on a date that actually has data.
 GSC_LAG_DAYS = 3
+CAMPAIGN_TZ = dt.timezone(dt.timedelta(hours=5, minutes=30))
+PUBLISH_TIME_UTC = dt.time(hour=4, minute=30, tzinfo=dt.timezone.utc)
 
 
 def run(*cmd: str, cwd: pathlib.Path = ROOT) -> tuple[int, str]:
@@ -527,14 +531,22 @@ def publish_gate() -> list[str]:
     return failures
 
 
-def todays_publish() -> str:
+def todays_publish(now: dt.datetime | None = None) -> str:
+    """Return shipped, not-due, or missing without alarming before the 04:30 UTC slot."""
+    now = now or dt.datetime.now(dt.timezone.utc)
+    if now.tzinfo is None:
+        raise ValueError("todays_publish requires a timezone-aware datetime")
     run("git", "fetch", "origin", "main", "--quiet")
     _, log = run("git", "log", "origin/main", "--format=%h|%ad|%s", "--date=short", "-20")
-    today = dt.date.today().isoformat()
+    campaign_day = now.astimezone(CAMPAIGN_TZ).date()
+    today = campaign_day.isoformat()
     for line in log.splitlines():
         parts = line.split("|", 2)
         if len(parts) == 3 and parts[1] == today and "content: publish" in parts[2]:
             return f"shipped {parts[0]} {parts[2]}"
+    due = dt.datetime.combine(campaign_day, PUBLISH_TIME_UTC)
+    if now.astimezone(dt.timezone.utc) < due:
+        return "NOT DUE — scheduled for 04:30 UTC"
     return "NO PUBLISH FOUND on origin/main for today"
 
 
@@ -632,7 +644,8 @@ def main() -> int:
     if not LOG.exists():
         LOG.write_text(
             "# Daily cycle log\n\n"
-            "Appended by `tools/daily_cycle.py`. Deterministic checks only — no judgment,\n"
+            "Maintained by `tools/daily_cycle.py`, one authoritative section per day. "
+            "Deterministic checks only — no judgment,\n"
             "no interpretation. This exists so the campaign keeps a measurement record even\n"
             "when no agent session is running. Search Console lags about three days, so each\n"
             "row's window ends three days before its date.\n\n"
@@ -642,8 +655,11 @@ def main() -> int:
             "estimate bounded in neither direction — it undercounts by excluding the withheld\n"
             "tail and overcounts by detecting fan-out only within each 28-day window.\n",
             encoding="utf-8")
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(row)
+    LOG.write_text(
+        rl.upsert_dated_report(LOG.read_text(encoding="utf-8"), row,
+                               dt.date.today().isoformat()),
+        encoding="utf-8",
+    )
 
     # Waiting is not a failure. Only alarm once the grace window has passed. A broken
     # tool Function is always a failure: it has no grace window, because the page it sits

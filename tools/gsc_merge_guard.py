@@ -43,6 +43,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gsc_collapse_forensics as fx  # noqa: E402
 import gsc_report as gr  # noqa: E402
+import report_log as rl  # noqa: E402
 
 AUDIT = gr.ROOT / "planning" / "cluster-3-consolidation-audit.md"
 LOG = gr.ROOT / "planning" / "merge-guard.md"
@@ -58,11 +59,6 @@ ROW_RE = re.compile(
     r"^\| `(?P<source>[^`]+)` \| [^|]+ \| [^|]+ \| "
     r"`(?P<target>[^`]+)` \| (?P<carry>.+) \|$"
 )
-DATED_SECTION = re.compile(
-    r"(?m)^## (?P<date>\d{4}-\d{2}-\d{2}) — pre-merge Search Console guard\s*$"
-)
-
-
 def parse_dispositions(text: str) -> list[dict]:
     """Parse only the merge table, not later keep tables or prose examples."""
     marker = "### Merge, 21 pages"
@@ -368,22 +364,7 @@ def render(data: dict) -> str:
 
 def upsert_dated_report(existing: str, report: str, generated: str) -> str:
     """Keep one authoritative run per date; retries are not independent observations."""
-    matches = list(DATED_SECTION.finditer(existing))
-    targets = [
-        (match.start(), matches[index + 1].start()
-         if index + 1 < len(matches) else len(existing))
-        for index, match in enumerate(matches)
-        if match.group("date") == generated
-    ]
-    clean_report = report.strip() + "\n"
-    if not targets:
-        return existing.rstrip() + "\n\n" + clean_report
-
-    updated = existing
-    first_start = targets[0][0]
-    for start, end in reversed(targets):
-        updated = updated[:start] + (clean_report if start == first_start else "") + updated[end:]
-    return updated.rstrip() + "\n"
+    return rl.upsert_dated_report(existing, report, generated)
 
 
 def main() -> int:
@@ -453,7 +434,8 @@ def main() -> int:
     if not LOG.exists():
         LOG.write_text(
             "# Pre-merge Search Console guard\n\n"
-            "Appended by `tools/gsc_merge_guard.py`. It tests whether planned merge sources and\n"
+            "Maintained by `tools/gsc_merge_guard.py`, one authoritative section per date. "
+            "It tests whether planned merge sources and\n"
             "targets share named first-party search demand, while preserving withheld demand as\n"
             "unknown. It does not decide content equivalence.\n",
             encoding="utf-8")

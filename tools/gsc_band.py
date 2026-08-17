@@ -6,7 +6,7 @@ each time because a premise under it changed rather than because the arithmetic 
 It is a tool now so the next restatement is reproducible and the old premise is visible
 next to the new number.
 
-    tools/gsc_band.py                 # re-derive, append to planning/band.md
+    tools/gsc_band.py                 # re-derive, upsert planning/band.md
     tools/gsc_band.py --dry-run
     tools/gsc_band.py --rows 60 --c3-share 0.55
 
@@ -52,6 +52,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gsc_report as gr  # noqa: E402
+import report_log as rl  # noqa: E402
 
 LOG = gr.ROOT / "planning" / "band.md"
 UNIVERSE = gr.ROOT / "planning" / "research-cache" / "DERIVED-full-universe.json"
@@ -422,7 +423,8 @@ def main() -> int:
     if not LOG.exists():
         LOG.write_text(
             "# Day-90 band derivations\n\n"
-            "Appended by `tools/gsc_band.py`, one dated section per re-derivation. The band\n"
+            "Maintained by `tools/gsc_band.py`, one authoritative section per date. "
+            "The band\n"
             "has been restated three times because premises under it changed, so each entry\n"
             "records the inputs that moved and why. **Never compare a band figure against a\n"
             "number quoted before its own date.**\n\n"
@@ -430,8 +432,11 @@ def main() -> int:
             "scoreboard measures. An earlier derivation mixed in sitewide clicks including\n"
             "brand, which made the band and its own yardstick different quantities.\n",
             encoding="utf-8")
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(report)
+    LOG.write_text(
+        rl.upsert_dated_report(LOG.read_text(encoding="utf-8"), report,
+                               data["generated"]),
+        encoding="utf-8",
+    )
     return 0
 
 

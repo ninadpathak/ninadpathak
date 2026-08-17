@@ -74,7 +74,7 @@ Its limits, stated plainly because they matter:
     A query for an unrelated person's name is not brand and will show up; that is honest
     rather than tidy.
 
-    tools/gsc_report.py                  # report, and append to planning/gsc-report.md
+    tools/gsc_report.py                  # report, and upsert planning/gsc-report.md
     tools/gsc_report.py --dry-run        # print, write nothing
     tools/gsc_report.py --json out.json  # machine-readable alongside the markdown
 
@@ -93,6 +93,8 @@ import pathlib
 import re
 import sys
 from urllib.parse import urlsplit
+
+import report_log as rl
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "sc-domain:ninadpathak.com"
@@ -801,7 +803,8 @@ def main() -> int:
     if not LOG.exists():
         LOG.write_text(
             "# Search Console report\n\n"
-            "Appended by `tools/gsc_report.py`. Movement, decay, and striking distance,\n"
+            "Maintained by `tools/gsc_report.py`, one authoritative section per day. "
+            "Movement, decay, and striking distance,\n"
             "per cluster. Search Console lags about three days, so every window ends three\n"
             "days before its date, and every query-dimension figure is a floor rather than\n"
             "a total because low-volume queries are withheld.\n\n"
@@ -809,8 +812,11 @@ def main() -> int:
             "heuristic documented in the tool's docstring. Families are collapsed and\n"
             "reported, never silently dropped.\n",
             encoding="utf-8")
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(report)
+    LOG.write_text(
+        rl.upsert_dated_report(LOG.read_text(encoding="utf-8"), report,
+                               data["generated"]),
+        encoding="utf-8",
+    )
     return 0
 
 

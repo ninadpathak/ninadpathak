@@ -1,6 +1,6 @@
 # Page position, point in time
 
-Appended by `tools/gsc_page_position.py`. Every other Search Console tool here is
+Maintained by `tools/gsc_page_position.py`, one authoritative section per date. Every other Search Console tool here is
 differential, so a page holding a steady position is invisible to all of them —
 and absence from a movement report was once read as absence of a position, which
 sent a merge in the wrong direction.
@@ -159,3 +159,142 @@ on impressions and average position, while the hierarchy page's only advantage i
 
 **Decision:** keep `ai-memory-management-for-llms` as the owner and merge
 `memory-hierarchy-in-ai-systems` into it. Do not ship the reverse redirect.
+
+## 2026-08-18 — page position, point in time
+
+Window 2026-07-19 to 2026-08-15 (28d), ending 3 days back because Search Console lags. Human queries only: brand, machine fan-out and injected spam pages excluded.
+
+**Query counts and human impressions are FLOORS, not counts.** Search Console withholds low-volume queries — the page+query pull sees 390 of 1855 page-dimension impressions (21.0%), so a page ranks for more queries than are named here. Sitewide impressions and clicks come from the page dimension and are complete.
+
+| State | Meaning |
+|---|---|
+| `measured` | human queries named; position reported with its query count |
+| `no-human-queries` | has impressions, but every named query is brand, machine or spam |
+| `withheld` | has impressions; Search Console names none of the queries. **A position exists and cannot be seen** |
+| `never-impressed` | no impressions at all. **The only state that means no position** |
+
+90 published pages: **20** `measured`, **0** `no-human-queries`, **40** `withheld`, **30** `never-impressed`.
+
+### Pages with a measured human position
+
+| Page | Cluster | Position (queries) | Human impr | Impr | Clicks | Top query |
+|---|---|---|---:|---:|---:|---|
+| llm-context-windows-explained | ai-engineering | 5.0 (n=1) | 1 | 5 | 0 | long context windows |
+| fine-tuning-vs-rag-for-agent-memory | ai-engineering | 6.6 (n=1) | 14 | 33 | 0 | ai agent memory vs fine-tuning for |
+| how-anthropics-contextual-retrieval-chan | ai-engineering | 7.0 (n=1) | 1 | 740 | 0 | ans |
+| how-stripes-technical-blog-became-a-comp | developer-experience | 8.0 (n=1) | 1 | 17 | 0 | stripe tech blog |
+| agent-loop-anatomy | ai-engineering | 10.0 (n=1) | 1 | 12 | 0 | perceive think act |
+| hybrid-search-bm25-vector-search | ai-engineering | 10.0 (n=1) | 1 | 22 | 0 | hybrid retrieval combining bm25 an |
+| why-ai-agents-keep-failing-in-production | ai-engineering | 10.2 (n=1) | 4 | 4 | 0 | how do companies debug ai agents t |
+| production-ai-agent-errors | ai-engineering | 10.6 (n=1) | 11 | 11 | 0 | how do you handle errors when ai a |
+| why-coding-agents-lose-their-memory | ai-engineering | 12.0 (n=1) | 1 | 15 | 0 | why do i have to keep re-explainin |
+| how-to-write-a-technical-tutorial-that-a | technical-documentation | 21.6 (n=3) | 5 | 18 | 0 | technical tutorial |
+| reranking-in-rag-why-your-top-k-results- | ai-engineering | 42.3 (n=3) | 3 | 19 | 0 | how reranking works in rag |
+| seo-for-technical-documentation | technical-documentation | 58.2 (n=2) | 6 | 10 | 0 | seo documentation |
+| writing-release-notes-that-developers-tr | technical-documentation | 64.0 (n=1) | 1 | 11 | 0 | who writes release notes |
+| asymmetric-retrieval-agent-memory | ai-engineering | 72.0 (n=1) | 1 | 12 | 0 | hybrid retrieval for agent memory |
+| technical-documentation-template | technical-documentation | 75.2 (n=2) | 25 | 35 | 0 | code documentation template |
+| best-llms-for-coding | ai-engineering | 76.0 (n=3) | 3 | 3 | 0 | llm coding |
+| types-of-technical-documentation | technical-documentation | 84.8 (n=4) | 10 | 14 | 0 | technical documentation |
+| developer-onboarding-docs-what-works-wha | technical-documentation | 85.0 (n=1) | 1 | 13 | 0 | developer onboarding documentation |
+| internal-vs-external-documentation | technical-documentation | 85.0 (n=1) | 1 | 4 | 0 | internal documentation |
+| what-is-technical-documentation-and-what | technical-documentation | 85.7 (n=1) | 3 | 4 | 0 | technical documentation |
+
+### Has impressions, queries withheld — position exists, unseen — 40
+
+These are the pages the old inference got wrong. They rank for something; Search Console simply will not say what.
+
+| Page | Cluster | Impr | Clicks |
+|---|---|---:|---:|
+| embedding-models-compared | ai-engineering | 55 | 0 |
+| state-of-ai-agent-memory-2026 | ai-engineering | 24 | 0 |
+| voice-ai-latency-gemini-benchmark | ai-engineering | 23 | 0 |
+| rag-vs-memory | ai-engineering | 22 | 0 |
+| ai-memory-management-for-llms | ai-engineering | 21 | 0 |
+| the-taxonomy-of-ai-agents | ai-engineering | 19 | 0 |
+| short-term-memory-for-ai-agents | ai-engineering | 16 | 0 |
+| local-wasm-vector-benchmarks | ai-engineering | 13 | 0 |
+| contextual-compression-for-agent-memory | ai-engineering | 10 | 0 |
+| semantic-caching-rag-optimization | ai-engineering | 10 | 0 |
+| agentic-workflow-playbook | ai-engineering | 9 | 0 |
+| beam-memory-benchmark | ai-engineering | 9 | 0 |
+| technical-writing-for-ai-products-the-new-ru | developer-experience | 8 | 1 |
+| lambda-calculus-ai-reasoning-benchmark | ai-engineering | 6 | 0 |
+| multi-agent-vs-single-agent-tradeoffs | ai-engineering | 5 | 0 |
+| memory-versioning-and-audit-trails | ai-engineering | 5 | 0 |
+| kv-cache-eviction-accuracy | ai-engineering | 5 | 0 |
+| memory-hierarchy-in-ai-systems | ai-engineering | 5 | 0 |
+| shared-vs-isolated-memory-multi-agent | ai-engineering | 5 | 0 |
+| agentic-cli-benchmarks | ai-engineering | 4 | 0 |
+| engineering-velocity-documentation | developer-experience | 4 | 0 |
+| model-context-protocol-explained | ai-engineering | 4 | 0 |
+| technical-documentation-best-practices-teste | technical-documentation | 4 | 0 |
+| the-memory-hierarchy-why-rag-is-not-enough | ai-engineering | 4 | 0 |
+| how-to-organize-a-documentation-site | technical-documentation | 3 | 0 |
+| agent-harnesses | ai-engineering | 2 | 0 |
+| how-memory-works-in-hyperagents | ai-engineering | 2 | 0 |
+| llm-inference-optimization | ai-engineering | 2 | 0 |
+| memory-attribution-errors | ai-engineering | 2 | 0 |
+| mixture-of-experts-explained | ai-engineering | 2 | 0 |
+| technical-writing-for-engineers | developer-experience | 2 | 0 |
+| the-agent-design-space | ai-engineering | 2 | 0 |
+| agent-vs-ai-assistant | ai-engineering | 1 | 0 |
+| context-windows-vs-memory | ai-engineering | 1 | 0 |
+| documentation-review-checklist-before-you-pu | technical-documentation | 1 | 0 |
+| how-memory-works-in-deerflow | ai-engineering | 1 | 0 |
+| llm-token-budgets-cost-control | ai-engineering | 1 | 0 |
+| memory-for-voice-ai-agents | ai-engineering | 1 | 0 |
+| structured-outputs-llms-json-mode-function-c | ai-engineering | 1 | 0 |
+| the-case-for-shorter-technical-documentation | technical-documentation | 1 | 0 |
+
+### Has impressions, but no human query behind them — 0
+
+Ranking for brand, machine fan-out or an injected page is not ranking for a reader.
+
+None.
+
+### No impressions in the window — the only 'no position' state — 30
+
+| Page | Cluster | Impr | Clicks |
+|---|---|---:|---:|
+| agent-memory-for-customer-support | ai-engineering | 0 | 0 |
+| ai-crawlers-robots-txt-training-vs-citation | ai-search-optimization | 0 | 0 |
+| api-documentation-best-practices-reference-g | technical-documentation | 0 | 0 |
+| api-documentation-examples-what-the-best-dev | technical-documentation | 0 | 0 |
+| api-documentation-template-the-pages-every-a | technical-documentation | 0 | 0 |
+| api-documentation-tools-hands-on-comparison- | technical-documentation | 0 | 0 |
+| coding-agent-setup-that-works | ai-engineering | 0 | 0 |
+| developer-trust-hierarchy | developer-experience | 0 | 0 |
+| documentation-accessibility-checklist | technical-documentation | 0 | 0 |
+| documentation-style-guide-template | technical-documentation | 0 | 0 |
+| episodic-vs-semantic-vs-working-memory-agent | ai-engineering | 0 | 0 |
+| from-engineer-to-technical-writer-what-i-kep | developer-experience | 0 | 0 |
+| how-memory-works-in-claude-code | ai-engineering | 0 | 0 |
+| how-to-document-multiple-product-versions | technical-documentation | 0 | 0 |
+| how-to-write-a-changelog-developers-actually | technical-documentation | 0 | 0 |
+| how-to-write-task-based-documentation-headin | technical-documentation | 0 | 0 |
+| llms-txt-examples-real-files-audited | ai-search-optimization | 0 | 0 |
+| mcp-server-setup-guide | ai-engineering | 0 | 0 |
+| memory-serialization-between-sessions | ai-engineering | 0 | 0 |
+| prompt-caching-what-it-is-and-when-the-math- | ai-engineering | 0 | 0 |
+| rag-evaluation-metrics-what-actually-matters | ai-engineering | 0 | 0 |
+| rag-vs-fine-tuning | ai-engineering | 0 | 0 |
+| speculative-decoding-explained | ai-engineering | 0 | 0 |
+| state-of-open-source-memory-2026 | ai-engineering | 0 | 0 |
+| technical-writing-examples | technical-documentation | 0 | 0 |
+| time-to-first-token-ttft | ai-engineering | 0 | 0 |
+| token-counting-isnt-optional-a-practical-gui | ai-engineering | 0 | 0 |
+| what-a-documentation-homepage-must-help-user | technical-documentation | 0 | 0 |
+| what-makes-a-page-extractable-by-answer-engi | ai-search-optimization | 0 | 0 |
+| why-devtools-startups-lose-deals-over-bad-do | developer-experience | 0 | 0 |
+
+### Requested pages in detail
+
+
+**`fine-tuning-vs-rag-for-agent-memory`** — state `measured`, position 6.6 (n=1), 14 human impressions of 33 total, 0 clicks.
+
+| Query | Impr | Clicks | Position |
+|---|---:|---:|---:|
+| ai agent memory vs fine-tuning for domain-spec | 14 | 0 | 6.6 |
+
+The position above is averaged over these 1 named queries and no others.

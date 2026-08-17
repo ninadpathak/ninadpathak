@@ -48,6 +48,7 @@ from urllib.parse import urlsplit
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gsc_report as gr  # noqa: E402
+import report_log as rl  # noqa: E402
 
 LOG = gr.ROOT / "planning" / "gsc-collapse-forensics.md"
 
@@ -310,13 +311,17 @@ def main() -> int:
     if not LOG.exists():
         LOG.write_text(
             "# Collapse forensics\n\n"
-            "Appended by `tools/gsc_collapse_forensics.py`. Decomposes a traffic drop into\n"
+            "Maintained by `tools/gsc_collapse_forensics.py`, one authoritative section per "
+            "date. Decomposes a traffic drop into\n"
             "step-or-slope, page, query, device and country, and flags URL paths belonging\n"
             "to no version of the site. Search Analytics cannot see manual actions,\n"
             "security issues, or algorithm updates, so causes are named as inferences.\n",
             encoding="utf-8")
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(report)
+    LOG.write_text(
+        rl.upsert_dated_report(LOG.read_text(encoding="utf-8"), report,
+                               data["generated"]),
+        encoding="utf-8",
+    )
     return 0
 
 
