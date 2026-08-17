@@ -171,3 +171,13 @@ correction was wrong. The llms.txt sub-cluster is the healthiest part of cluster
 `broken link checker` is **8,100/mo** and is tool intent, not article intent. The site already
 ships five tools and this is the largest single tool-intent keyword found so far in the niche.
 Row 41's brief explicitly declines to chase it with prose.
+
+## 2026-08-17 sixth cycle — fortnight three verification (Semrush)
+
+| # | Tool | Query | Rows | Finding |
+|---:|---|---|---:|---|
+| S15 | phrase_these | 10 fortnight-three targets | 7 | `developer onboarding checklist` 70 and `documentation automation` 170 are the only real ones. `readme best practices` 20, `developer community platform` 20, `how to build a developer community` 20. Three returned nothing at all. |
+
+`online community management` shows 390 but is general community-management intent, not developer
+community, and sits next to the HOA and property-management contamination already swept from
+cluster 6. Not targeted.

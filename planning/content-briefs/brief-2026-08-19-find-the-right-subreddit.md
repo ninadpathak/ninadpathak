@@ -49,6 +49,6 @@ piece as its actual subject. If that sentence cannot be written honestly, raise 
 forcing the link.
 
 Outbound: rows 22, 23 and 24 are not published yet. Until they are, link outbound to
-`/articles/technical-content-as-a-moat-the-long-game-for-developer-tools/` only if the sentence is
+`/articles/how-stripes-technical-blog-became-a-competitive-moat/` only if the sentence is
 genuinely about distribution, and otherwise report that the two-outbound minimum cannot be met
 honestly and stop. **Do not invent a link to satisfy the gate.**
