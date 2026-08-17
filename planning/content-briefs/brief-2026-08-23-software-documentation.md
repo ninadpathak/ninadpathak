@@ -13,7 +13,8 @@
 | Intent | Informational |
 | AI Overview | yes |
 
-Absorbs `program documentation` (400 / KD 3), same parent. Row 26 owns the definitional query.
+Absorbs `program documentation` (400 / KD 3), same parent, and the definitional query from the
+superseded row-26 brief. No second software-documentation definition page will ship.
 
 ## Reader task
 
@@ -22,13 +23,13 @@ type has to prove.
 
 ## Owns
 
-The type-and-audience map for software documentation specifically.
+The self-contained definition plus the type-and-audience map for software documentation.
 
 ## Must not repeat
 
-The bare definition (row 26, next day). The eight-type taxonomy, owned by live
-`types-of-technical-documentation`. The template, owned by live `technical-documentation-template`.
-The boundary is narrow, so state it in the brief before drafting.
+The eight-type taxonomy, owned by live `types-of-technical-documentation`. The template, owned by
+live `technical-documentation-template`. Define software documentation here, then distinguish its
+audiences and proof obligations without rebuilding either neighbouring page.
 
 ## Evidence — Experience B
 

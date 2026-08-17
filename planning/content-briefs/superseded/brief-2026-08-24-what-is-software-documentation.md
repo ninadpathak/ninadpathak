@@ -1,5 +1,9 @@
 # Brief: What Is Software Documentation?
 
+> **SUPERSEDED 2026-08-17.** The guarded queue assigns order 26 and this date to the
+> troubleshooting-guide template. Row 25 absorbs this definition so no competing software-
+> documentation URL is published.
+
 **Slot:** 2026-08-24 | Order 26 | **Cluster:** Documentation
 **Experience: C — first person is BANNED. No artifact. Researched explainer.**
 
