@@ -178,6 +178,28 @@ class ExperienceClaimTests(unittest.TestCase):
     def test_a_duration_with_a_first_person_marker_is_a_claim(self):
         self.assertTrue(self.flagged("I spent six months of evenings on the linter."))
 
+    def test_first_person_duration_without_of_is_a_claim(self):
+        self.assertTrue(self.flagged(
+            "I spent three weeks debugging a retrieval pipeline."))
+
+    def test_possessive_experience_is_a_claim(self):
+        self.assertTrue(self.flagged(
+            "Across my own testing, lexical retrieval improved recall."))
+
+    def test_have_debugged_is_a_claim(self):
+        self.assertTrue(self.flagged(
+            "Every agent memory system I have debugged had the same problem."))
+
+    def test_indirect_experience_phrasings_are_claims(self):
+        self.assertTrue(self.flagged("There is a second failure I keep hitting."))
+        self.assertTrue(self.flagged("A support agent I was working on made this concrete."))
+        self.assertTrue(self.flagged("The failure I see most often happens after a demo."))
+        self.assertTrue(self.flagged(
+            "Three patterns have consistently worked for me in retrieval."))
+        self.assertTrue(self.flagged(
+            "Concretely, that has meant adding a query expansion step."))
+        self.assertTrue(self.flagged("The actual fix was preserving the error term."))
+
     def test_stated_judgment_is_still_not_flagged(self):
         """my approach / my focus are positions, not events."""
         self.assertFalse(self.flagged("My approach is to keep it short."))

@@ -55,10 +55,17 @@ MEASUREMENT = re.compile(
 # running AI agents in production taught me that..." scored zero candidates. A duration or a
 # scale attached to personal experience is the same falsifiable claim as "I measured", just
 # phrased around the verb.
-# Phrases that assert personal experience on their own.
+# Phrases that assert personal experience on their own. A correction review found an
+# entire article written around retrospective forms that the original "I <verb>" pattern
+# could not see: "across my own testing", "I keep hitting", and "I have debugged".
 EXPERIENCE_CLAIM = re.compile(
     r"\btaught me\b|\bin my experience\b"
-    r"|\bI have (?:built|shipped|run|seen|reviewed|audited)\b"
+    r"|\bI have (?:built|shipped|run|seen|reviewed|audited|debugged)\b"
+    r"|\bI (?:keep|kept) (?:hitting|seeing|finding)\b"
+    r"|\bI (?:see|saw) most often\b|\bI (?:was|am) working on\b"
+    r"|\b(?:across|from|in) my (?:own )?(?:testing|benchmarks?|audits?|measurements?|experiments?|work)\b"
+    r"|\bpatterns? (?:has|have) consistently\b.{0,50}\bfor me\b"
+    r"|\bconcretely,? that has meant\b|\bthe actual fix was\b"
     r"|\bevery time I\b|\bwhen I was\b|\bmy (?:clients?|team|company|employer)\b",
     re.IGNORECASE)
 
@@ -71,6 +78,10 @@ DURATION = re.compile(
     r"\b(?:a|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+"
     r"(?:years?|months?|weeks?)\s+of\b"
     r"|\bafter (?:years|months) of\b", re.IGNORECASE)
+FIRST_PERSON_DURATION = re.compile(
+    r"\b(?:I|we)\s+(?:spent|worked for|debugged for|tested for|ran for)\s+"
+    r"(?:a|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+"
+    r"(?:years?|months?|weeks?|days?|hours?)\b", re.IGNORECASE)
 FIRST_PERSON_MARKER = re.compile(r"\b(?:I|my|me|we|our)\b", re.IGNORECASE)
 
 # Named hardware or a named model with a version is where an unbacked benchmark hides.
@@ -104,8 +115,11 @@ def classify(line: str) -> list[str]:
     person = bool(FIRST_PERSON_ACTION.search(line))
     measured = bool(MEASUREMENT.search(line))
     kit = bool(NAMED_KIT.search(line))
-    experience = bool(EXPERIENCE_CLAIM.search(line)) or bool(
-        DURATION.search(line) and FIRST_PERSON_MARKER.search(line))
+    experience = (
+        bool(EXPERIENCE_CLAIM.search(line))
+        or bool(FIRST_PERSON_DURATION.search(line))
+        or bool(DURATION.search(line) and FIRST_PERSON_MARKER.search(line))
+    )
 
     if person and measured:
         reasons.append("first-person measurement")
