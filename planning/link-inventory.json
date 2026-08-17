@@ -1,5 +1,5 @@
 {
- "refreshed": "2026-08-17T16:05:01Z",
+ "refreshed": "2026-08-17T16:16:12Z",
  "domain": "ninadpathak.com",
  "authoritative_referring_domains": {
   "value": null,
@@ -38,7 +38,13 @@
    "/guides/css-grid-layouts-webflow-table/",
    "/marketing/wordpress-6-3-update/"
   ],
-  "target_tool_paths": []
+  "target_tool_paths": [],
+  "reactions_total": 22,
+  "comments_total": 2,
+  "posts_with_zero_reactions": 9,
+  "referring_domains_contributed": 1,
+  "links_are_followed": true,
+  "referrer_suppressed_on_most_links": true
  },
  "sources": [
   {

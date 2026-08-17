@@ -224,3 +224,25 @@ was not re-bought.
 
 Outputs: `planning/research/LLMS-TXT-GENERATOR-VOLUME-2026-08-17.md`,
 `tools/link_inventory.py`, `planning/link-inventory.json`, `tests/test_link_inventory.py`.
+
+---
+
+## Syndication audit — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 0.** Read-only: nothing posted to dev.to, cron untouched.
+
+| Instrument | Use | Cost |
+|---|---|---|
+| dev.to public API | 96 articles, canonical targets, reactions, comments | free |
+| Live fetch of a dev.to post | Link mechanics: canonical tag, rel attributes, followed vs nofollow | free |
+| HTTP status checks on 14 canonical targets | Found 3 pointing at 404s, 2 at the homepage | free |
+| WebSearch exact-phrase | Whether either copy ranks | free |
+| Repo frontmatter | Cron pacing against publish dates | free |
+
+Key mechanical finding: **dev.to applies no `rel=nofollow`.** External anchors carry
+`noopener`, `noreferrer`, or no rel — none of which is nofollow. About four followed links per
+post. Three of four carry `noreferrer`, so click-through referrals are structurally
+unmeasurable in analytics.
+
+Output: `planning/research/SYNDICATION-AUDIT-2026-08-17.md`, plus engagement and the
+one-referring-domain ceiling now reported by `tools/link_inventory.py` on every run.

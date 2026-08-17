@@ -75,6 +75,11 @@ CAVEAT = ("A rel=canonical is counted separately from an href and the two are ne
           "A canonical consolidates a duplicate; an href passes an endorsement. They are "
           "different things.")
 
+# Hosts that syndicated articles legitimately canonicalise to instead of this domain.
+# Reviewed 2026-08-17: pathak.ventures essays point at their own property, correctly. A host
+# appearing here is silent; a host NOT here is raised, so a genuine future leak still surfaces.
+RESOLVED_ELSEWHERE_HOSTS = {"pathak.ventures"}
+
 TOOL_PATHS = ("/linter/", "/llms-txt-generator/", "/llms-txt-validator/",
               "/ai-overviews-checker/", "/ai-crawler-checker/")
 
@@ -129,6 +134,11 @@ def fetch_devto() -> dict:
             break
         articles += batch
 
+    # Engagement, because a syndication channel that earns nothing is a reader channel at
+    # best. Reaction and comment counts are public on the dev.to API.
+    reactions = comments = 0
+    zero_reaction = 0
+
     ours, elsewhere, missing = [], [], []
     for article in articles:
         canonical = article.get("canonical_url") or ""
@@ -138,6 +148,13 @@ def fetch_devto() -> dict:
         if not canonical:
             missing.append(record)
         elif DOMAIN in canonical:
+            rx = article.get("public_reactions_count") or article.get("positive_reactions_count") or 0
+            record["reactions"] = rx
+            record["comments"] = article.get("comments_count") or 0
+            reactions += rx
+            comments += record["comments"]
+            if rx == 0:
+                zero_reaction += 1
             ours.append(record)
         else:
             elsewhere.append(record)
@@ -157,6 +174,19 @@ def fetch_devto() -> dict:
         }),
         "target_paths": paths,
         "target_tool_paths": [p for p in paths if p in TOOL_PATHS],
+        "reactions_total": reactions,
+        "comments_total": comments,
+        "posts_with_zero_reactions": zero_reaction,
+        # The ceiling that decides whether syndication can serve the metric the campaign
+        # chose. However many posts dev.to carries, it is one host, so it contributes one
+        # referring domain and cannot contribute a second. Measured 2026-08-17: dev.to sets
+        # the canonical correctly and applies no rel=nofollow, so the links are followed —
+        # about four per post, one attribution link plus in-body links. Three of the four
+        # carry rel=noreferrer, which suppresses the Referer header, so any click-through
+        # lands in analytics as direct traffic rather than as a dev.to referral.
+        "referring_domains_contributed": 1,
+        "links_are_followed": True,
+        "referrer_suppressed_on_most_links": True,
     }
 
 
@@ -277,10 +307,29 @@ def evaluate(baseline: dict, today: dt.date = None) -> dict:
         tool_targets = devto.get("target_tool_paths") or []
         lines.append(f"dev.to canonicals pointing at a tool page: "
                      f"{len(tool_targets)}{' — ' + ', '.join(tool_targets) if tool_targets else ' (none)'}")
-        if devto.get("canonical_elsewhere", 0) > devto.get("canonical_to_us", 0):
-            lines.append("NOTE: more syndicated articles point their canonical at another "
-                         "property than at this one. That is a routing decision worth "
-                         "confirming is deliberate.")
+        if devto.get("reactions_total") is not None:
+            posts = devto.get("canonical_to_us") or 0
+            lines.append(
+                f"dev.to engagement on those posts: {devto['reactions_total']} reactions, "
+                f"{devto.get('comments_total', 0)} comments, "
+                f"{devto.get('posts_with_zero_reactions', 0)} of {posts} with zero reactions")
+        # Stated every run, because it is the fact that decides whether this channel can
+        # serve the metric the tools are now judged on.
+        lines.append("dev.to contributes 1 referring domain however many posts it carries. "
+                     "Its links are followed (no rel=nofollow), but most carry rel=noreferrer, "
+                     "so click-throughs appear as direct traffic rather than as referrals.")
+        # Checked and closed 2026-08-17: the articles canonicalising elsewhere are
+        # pathak.ventures essays pointing at their own property, which is correct. Every
+        # ninadpathak article points here. Recorded so it is not investigated twice.
+        elsewhere_hosts = set(devto.get("elsewhere_hosts") or [])
+        if elsewhere_hosts and elsewhere_hosts <= RESOLVED_ELSEWHERE_HOSTS:
+            lines.append(f"the {devto.get('canonical_elsewhere', 0)} canonicalised elsewhere "
+                         f"are {', '.join(sorted(elsewhere_hosts))} essays pointing at their "
+                         f"own property — checked and closed 2026-08-17, not a leak")
+        elif elsewhere_hosts:
+            lines.append(f"NEW canonical target(s) not previously reviewed: "
+                         f"{', '.join(sorted(elsewhere_hosts - RESOLVED_ELSEWHERE_HOSTS))}. "
+                         f"Worth confirming the routing is deliberate.")
 
     verified, lost = [], []
     for source in baseline.get("sources") or []:

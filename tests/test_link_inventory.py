@@ -114,17 +114,41 @@ class DevtoSyndicationTests(unittest.TestCase):
         self.assertIn("82 canonicalised elsewhere", text)
         self.assertIn("pathak.ventures", text)
 
-    def test_a_majority_pointing_elsewhere_raises_a_note(self):
-        """82 of 96 syndicated articles pointing at another property is worth saying."""
+    def test_a_reviewed_elsewhere_host_is_reported_as_closed_not_reraised(self):
+        """pathak.ventures essays point at their own property. Checked 2026-08-17. A closed
+        question must not be re-opened on every run."""
         text = "\n".join(li.evaluate(baseline())["lines"])
-        self.assertIn("point their canonical at another", text)
+        self.assertIn("checked and closed", text)
+        self.assertNotIn("Worth confirming the routing is deliberate", text)
 
-    def test_a_majority_pointing_here_raises_no_note(self):
-        data = baseline(devto_syndication={"articles": 96, "canonical_to_us": 90,
-                                           "canonical_elsewhere": 6, "elsewhere_hosts": [],
+    def test_an_unreviewed_elsewhere_host_is_raised(self):
+        """The closed question must not silence a genuine future leak."""
+        data = baseline(devto_syndication={"articles": 96, "canonical_to_us": 14,
+                                           "canonical_elsewhere": 82,
+                                           "elsewhere_hosts": ["pathak.ventures", "medium.com"],
                                            "target_paths": [], "target_tool_paths": []})
         text = "\n".join(li.evaluate(data)["lines"])
-        self.assertNotIn("point their canonical at another", text)
+        self.assertIn("NEW canonical target", text)
+        self.assertIn("medium.com", text)
+        self.assertNotIn("pathak.ventures essays", text)
+
+    def test_engagement_is_reported_so_a_dead_channel_is_visible(self):
+        data = baseline(devto_syndication={"articles": 96, "canonical_to_us": 14,
+                                           "canonical_elsewhere": 0, "elsewhere_hosts": [],
+                                           "target_paths": [], "target_tool_paths": [],
+                                           "reactions_total": 22, "comments_total": 2,
+                                           "posts_with_zero_reactions": 9})
+        text = "\n".join(li.evaluate(data)["lines"])
+        self.assertIn("22 reactions", text)
+        self.assertIn("9 of 14 with zero reactions", text)
+
+    def test_the_one_referring_domain_ceiling_is_stated_every_run(self):
+        """However many posts dev.to carries, it is one host. This is the fact that decides
+        whether syndication can serve the metric the tools are judged on."""
+        text = "\n".join(li.evaluate(baseline())["lines"])
+        self.assertIn("1 referring domain", text)
+        self.assertIn("no rel=nofollow", text)
+        self.assertIn("noreferrer", text)
 
     def test_a_tool_canonical_is_counted_per_tool(self):
         data = baseline(devto_syndication={"articles": 1, "canonical_to_us": 1,
