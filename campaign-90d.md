@@ -219,12 +219,27 @@ Read 2026-08-17 in a logged-out browser session, one row per keyword, and it cha
 
 And the site's own history is the strongest evidence available. `tools/gsc_attribution.py`, built the same day:
 
-| Tool | Observable days | First impression | First human impression | Impressions ever |
-|---|---:|---|---|---:|
-| `/linter/` | 153 | 65d | **not yet, 153d** | 9 |
-| `/llms-txt-generator/` | 14 | **not yet, 14d** | not yet, 14d | **0** |
+| Tool | Observable days | First impression | Named-query impressions | Named-human interval | Impressions ever |
+|---|---:|---|---:|---:|---:|
+| `/linter/` | 153 | 65d | 0 | **0–9** | 9 |
+| `/llms-txt-generator/` | 14 | **not yet, 14d** | 0 | 0–0 | **0** |
 
-Two tools live long enough to judge have produced nine impressions and no clicks between them. In fairness the other three shipped days ago and their zeros are expected rather than evidence.
+Only `/linter/` has the 30 days of age required for the aged comparison. It has produced
+nine page-level impressions and no clicks, but GSC withholds every query behind those nine:
+the visible named-human floor is zero and the defensible ceiling is nine. That is not proof
+of zero human demand. The generator has 14 observable days and no page impression; the
+other three shipped inside the three-day lag, so their zeros are expected rather than
+evidence.
+
+**Attribution reliability correction, 2026-08-17.** The first report had been appended
+four times on the same day, making one lagged observation look like four. The writer now
+upserts one section per date and collapses old duplicates. Both GSC pulls paginate past the
+25,000-row API limit. Across all tracked pages, named-query rows expose **642 of 4,667
+page-level impressions (13.8%)**; 4,025 are withheld. The named-human count is therefore a
+floor of 320 with a defensible **320–4,345** interval, where the ceiling assumes every
+withheld impression was human and is an error bound, not an estimate. The tool decision
+still rests on page-level scarcity and the falsified SERP premise—not on a claim that all
+nine tool impressions were non-human.
 
 #### Decisions taken
 
