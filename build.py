@@ -435,97 +435,25 @@ class SiteBuilder:
             pillars.append(data)
         return pillars
 
-    def load_glossary(self, posts: list[dict] | None = None) -> list[dict]:
-        """Load glossary terms and resolve their article links against live posts.
-
-        Every slug in a term's `related_articles` is checked against the posts the
-        build is actually emitting. An unknown slug is dropped with a warning rather
-        than rendered, so the glossary can never introduce a dead internal link.
-        Terms still carrying a TODO placeholder are held back unless --drafts.
-        """
+    def load_glossary(self) -> list[dict]:
         glossary_path = Path("content/data/glossary.yaml")
         if not glossary_path.exists():
             return []
         with open(glossary_path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f) or {}
+            data = yaml.safe_load(f)
 
-        if data.get("status", "published") != "published" and not self.include_drafts:
+        if data.get("status", "published") != "published":
             return []
 
-        by_slug = {p["slug"]: p for p in (posts or [])}
-        category_titles = {c["slug"]: c["title"] for c in data.get("categories", [])}
-
-        def is_placeholder(term):
-            """A term is unfinished while its prose is still a TODO marker."""
-            fields = (term.get("short_definition"), term.get("long_definition"))
-            return any(str(v or "").lstrip().startswith("TODO") for v in fields)
-
-        terms = []
-        held = 0
-        for term in data.get("terms", []):
-            if term.get("status", "published") != "published" and not self.include_drafts:
-                continue
-            # Placeholder prose never reaches the live build. No flag to remember:
-            # the term publishes itself once the definition is written.
-            if is_placeholder(term) and not self.include_drafts:
-                held += 1
-                continue
-
+        terms = data.get("terms", [])
+        for term in terms:
             term["url"] = f"/glossary/{term['slug']}/"
-<<<<<<< HEAD
             # Same class-based detection the post template uses, for the same reason.
             body = str(term.get("body_html", "")) + str(term.get("how_it_works", ""))
             term["needs_flowcharts"] = 'class="flowchart' in body
             term["needs_visuals"] = ('class="visual-' in body) or ("<iframe" in body)
             
-=======
-            term["category_title"] = category_titles.get(
-                term.get("category", ""), term.get("category", "")
-            )
-
-            resolved = []
-            for slug in term.get("related_articles", []) or []:
-                post = by_slug.get(slug)
-                if not post:
-                    print(f"  ! glossary '{term['slug']}': unknown post slug '{slug}'")
-                    continue
-                resolved.append(post)
-            term["resolved_articles"] = resolved
-
-            terms.append(term)
-
-        if held:
-            print(f"  i glossary: {held} term(s) held back, definition still a TODO placeholder")
-
-        # Reverse index so an article can list the terms that point at it.
-        for term in terms:
-            for post in term["resolved_articles"]:
-                post.setdefault("glossary_terms", []).append(term)
-
->>>>>>> 68094868 (Add 90-day SEO/AI strategy, keyword research, and glossary + CTA plumbing)
         return terms
-
-    def group_glossary(self, terms: list[dict]) -> list[dict]:
-        """Group terms into their configured categories for the index page."""
-        glossary_path = Path("content/data/glossary.yaml")
-        data = yaml.safe_load(glossary_path.read_text(encoding="utf-8")) or {}
-        groups = []
-        for category in data.get("categories", []):
-            members = [t for t in terms if t.get("category") == category["slug"]]
-            if members:
-                groups.append({**category, "terms": members})
-        uncategorised = [
-            t for t in terms
-            if t.get("category") not in {c["slug"] for c in data.get("categories", [])}
-        ]
-        if uncategorised:
-            groups.append({
-                "slug": "other",
-                "title": "Other terms",
-                "blurb": "",
-                "terms": uncategorised,
-            })
-        return groups
 
     # ------------------------------------------------------------------
     # Render helper
@@ -535,7 +463,6 @@ class SiteBuilder:
         template = self.env.get_template(template_name)
         ctx["site"] = self.config["site"]
         ctx["contact"] = self.config["contact"]
-        ctx["cta"] = self.config.get("cta", {})
         ctx["current_page"] = page
         ctx["build_year"] = datetime.now().year
         ctx["latest_posts"] = getattr(self, "latest_posts", [])
@@ -737,12 +664,11 @@ class SiteBuilder:
         if not terms:
             return
             
-        # Build index, grouped by category rather than as one flat list
+        # Build index
         self.render(
             "glossary_index.html", "glossary/index.html",
             page="glossary",
             terms=terms,
-            groups=self.group_glossary(terms),
         )
         
         # Build individual term pages
@@ -1027,7 +953,7 @@ class SiteBuilder:
         portfolio = self.load_portfolio()
         projects = self.load_projects()
         legal_pages = self.load_legal_pages()
-        glossary_terms = self.load_glossary(posts)
+        glossary_terms = self.load_glossary()
         pillars = self.load_pillars(posts)
         categories = self.load_categories(posts)
 
