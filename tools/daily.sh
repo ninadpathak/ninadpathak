@@ -42,6 +42,11 @@ echo "=== $(date -u +%Y-%m-%dT%H:%M:%SZ) daily cycle ==="
 # autumn 2025 spam injection sit unnoticed for ten months.
 "$PY" tools/gsc_leading.py || echo "NOTE: leading indicators did not run"
 
+# Position analysis is weekly, not daily: (page, query) trends need weeks of span to move
+# at all, and rerunning nightly would append near-identical sections. It shares the
+# scoreboard's weekday so both land together.
+"$PY" tools/gsc_position.py --weekly || echo "NOTE: position analysis did not run"
+
 # The band is re-derived on demand, not on a schedule: it changes when a premise changes,
 # and a nightly rerun would append identical sections and bury the ones that moved. Run
 # tools/gsc_band.py by hand after any decision that touches the calendar, the row count,
