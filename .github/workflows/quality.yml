@@ -145,7 +145,7 @@ jobs:
             echo "::error::unevidenced claim candidates rose from $before to $after. Each is a candidate, not a verdict — classify KEEP, REWRITE or CUT per CHARTER 2c."
             exit 1
           fi
-          echo "No new unevidenced claim candidates introduced.
+          echo "No new unevidenced claim candidates introduced."
 
       # MUST RUN AFTER build.py. This reads output/ to count inbound links that come
       # from templates rather than article bodies — the homepage cluster nav, the tool
@@ -194,4 +194,3 @@ jobs:
       # `output/` is untracked and .gitignored — Cloudflare Pages generates it at build
       # time — so the old "verify generated output is committed" step diffed nothing and
       # passed unconditionally. Removed rather than left in place looking like a check.
-
