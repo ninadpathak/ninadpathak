@@ -1,66 +1,46 @@
 ---
 category: ai-engineering
 date: 2026-04-15
-description: VRAM is too expensive to waste on low-attention tokens. I benchmarked
-  KV cache eviction strategies to treat LLM context like a managed heap, reaching
-  90% pruning with zero recall loss.
+description: A research-led comparison of KV-cache eviction strategies, including
+  their accuracy risks and implementation trade-offs.
 status: published
 tags:
 - llm
 - kv-cache
 - memory-optimization
-- benchmarking
 - transformers
 - engineering
-title: 'Context Engineering as Heap Management: Measuring Accuracy vs. KV Cache Eviction'
+title: 'Context Engineering as Heap Management: Accuracy Risks in KV Cache Eviction'
 ---
 
 VRAM capacity dictates the boundary of what a Large Language Model (LLM) can actually do for you. The naive way to expand a context window is to scale hardware until you hit the physical ceiling of the GPU, then buy a bigger GPU.
 
-Transformers store Key-Value (KV) pairs for every token processed during a session, and those pairs add up fast. A 128k context window for a Llama 3 70B model requires roughly 20GB of dedicated VRAM for the KV cache alone.
-
-Push that to a 1M token window and the requirement passes 160GB. Because standard attention carries quadratic complexity, memory pressure grows faster than the reasoning value of the tokens you keep adding.
+KV-cache memory grows with sequence length, layer count, KV-head count, head dimension, batch size, and precision. Calculate it from the deployed model's actual configuration before setting a context limit.
 
 For a lot of engineering teams, throwing more cluster at the problem stopped being a strategy somewhere around the point the monthly GPU bill outran the product roadmap.
 
-Importance-based pruning has to replace the volume-heavy approach to context engineering, because attention is naturally sparse to begin with. Research on Heavy Hitter Oracles (H2O) and Attention Sinks shows that a tiny fraction of tokens drive next-token prediction while the rest mostly sit there consuming memory.
+H2O and StreamingLLM show that retaining high-importance tokens and attention sinks can reduce KV-cache pressure, with quality depending on the model and task.
 
-Treat the KV cache as a managed heap and near-infinite sequences on consumer hardware come within reach. Garbage-collecting unimportant tokens in real time holds performance steady without bloating the footprint.
 
-I wanted a number for this, so I benchmarked exactly how much context I could throw away before the model started losing facts.
-
-<div class="visual-wrapper">
-  <div class="visual-title">KV cache memory scaling: 128k context footprint</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/kv-cache-vram-scaling.html" title="KV Cache Memory Scaling" loading="lazy"></iframe>
-  </div>
-</div>
-
-**Short answer:** Standard context management wastes silicon. My importance-aware eviction tests using H2O preserved 100% of retrieval accuracy while pruning 80% of the KV cache.
-
-Sliding window strategies like StreamingLLM maintain fluency but fail at middle-context retrieval tasks. Custom garbage collectors for KV caches allow massive context sessions on a 16GB M2 Air without triggering swap death.
+The discussion explains the mechanisms and published research behind KV-cache eviction. It does not report a model or hardware benchmark.
 
 ## The architecture of the memory wall: why KV caches explode
 
 As tokens enter the model, they get transformed into Query, Key, and Value vectors. Caching the K and V vectors avoids recomputing them at every later generation step, which is the whole reason the cache exists.
 
-Each layer in a 70B parameter model contains 80 heads, each head carries a dimension of 128, and FP16 precision spends 4 bytes per element to store these vectors. Total VRAM usage follows the formula `2 * layers * num_heads * head_dim * precision * seq_len`.
+For a decoder-only transformer, KV-cache size is determined by layers, KV heads, head dimension, bytes per value, sequence length, and batch size.
 
-Profiling a Llama 3 70B deployment with 80 layers and 8 heads, I measured roughly 160KB per token. Run a session out to 100,000 tokens and you have spent 16GB of VRAM before a single model weight is loaded.
 
 High-density deployments live and die on the throughput-versus-memory tradeoff. Bigger caches mean fewer concurrent users per GPU, full stop.
 
-Low-latency requirements force you to keep the cache in fast memory, since disk-based offloading drags in a 100x latency penalty that kills real-time generation outright. Smarter eviction beats faster swapping the same way a smaller working set beats a faster pager: you avoid the round trip entirely instead of speeding it up.
-
-Treating the KV cache as a managed heap let me serve five times as many users on a single A100.
 
 ## The garbage collectors: H2O vs. StreamingLLM vs. Random
 
 Managed heaps in software engineering rest on identifying unreachable or low-utility objects and reclaiming their space. Managed context in LLMs rests on the same move applied to low-attention tokens.
 
-To find the accuracy-to-memory frontier, I evaluated three distinct eviction strategies head to head.
+The comparison covers sliding-window, importance-based, and random eviction.
 
-H2O reads attention scores as a utility metric. Heavy Hitters are the tokens that pull high cumulative attention from the tokens that come after them, and my implementation pinned these in the cache.
+H2O uses accumulated attention as a utility signal and protects high-scoring tokens when the budget fills.
 
 When the budget fills up, tokens with low cumulative scores get evicted, which mirrors how a frequency-based collector keeps the hot objects and drops the cold ones. The [original H2O paper](https://arxiv.org/abs/2306.14048) showed that LLMs hold their performance on only 20% of the KV cache as long as the heavy hitters stay protected.
 
@@ -68,9 +48,6 @@ StreamingLLM takes a different read: the first few tokens and the most recent to
 
 [StreamingLLM research](https://arxiv.org/abs/2309.17453) proved that "Attention Sinks" (the first 4 tokens) are mandatory for keeping perplexity from exploding.
 
-Random selection was my baseline control, the way you would run an A/A test before trusting an A/B one. The control group answers a single question: how much does raw volume matter against semantic importance?
-
-I expected random eviction to fail badly, and the data backed that up. Semantic importance is the only metric that buys you cache longevity.
 
 <div class="visual-wrapper">
   <div class="visual-title">The Attention Sink: why the first 4 tokens matter</div>
@@ -79,34 +56,10 @@ I expected random eviction to fail badly, and the data backed that up. Semantic 
   </div>
 </div>
 
-## The experiment: measuring retrieval accuracy at the limit
+## What the included simulation does
 
-Quantifying the impact of aggressive pruning called for a synthetic benchmark I could control end to end. My environment was a MacBook Air M2 simulating a 4096-token sequence.
+The included NumPy script simulates a 4,096-token sequence. It does not run a language model or measure hardware, and its needle is selected from the same high-weight tokens that H2O is designed to retain.
 
-Picture dropping a single house key into a 4096-page book at a random page, then tearing out chapters and asking whether you can still find the key. The key here is a needle token (a specific fact), planted at a random position, and the question is whether the attention mechanism can still "see" it after I prune the cache by 10% all the way up to 90%.
-
-| Pruning Ratio | H2O Accuracy | StreamingLLM | Random |
-|---|---|---|---|
-| 10% | 100.0% | 90.0% | 91.0% |
-| 30% | 100.0% | 62.0% | 76.0% |
-| 50% | 100.0% | 51.0% | 52.0% |
-| 70% | 100.0% | 40.0% | 34.0% |
-| 90% | 100.0% | 14.0% | 5.0% |
-
-Identify the Heavy Hitters correctly and H2O barely flinches as context shrinks. StreamingLLM and Random eviction both degrade roughly linearly, and they shed facts from the middle of the context first, exactly where you tend to bury the detail that matters.
-
-With H2O I held 100% accuracy at a 90% pruning ratio, the one condition being that the needle token was itself a heavy hitter.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Accuracy vs. Pruning Ratio: The H2O Advantage</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/wasm-vdb-accuracy.html" title="Accuracy vs Pruning" loading="lazy"></iframe>
-  </div>
-</div>
-
-Heavy Hitter tokens in my test usually made up only 5% of the sequence. Caching just that 5% plus the 4 initial tokens and a small local window gave me perfect recall.
-
-Put plainly, the empirical evidence says about 90% of your VRAM is currently holding tokens the model never looks at again. You can reproduce this on your own local hardware with my [benchmark script](/static/js/kv_cache_benchmark.py).
 
 ## Attention entropy: an information theoretic perspective
 
@@ -114,13 +67,10 @@ Attention scores follow a power-law distribution, with many tokens contributing 
 
 High-entropy layers (usually the early ones) need larger caches to hold structural coherence, and low-entropy layers tolerate aggressive pruning. The same Zipf's law shape shows up everywhere: a small subset of tokens carries the bulk of the reasoning value, the way a handful of words account for most of the text in any natural-language corpus.
 
-Measuring attention entropy across all 80 layers of a Llama 3 model, I watched early layers spread their attention wide to map out basic syntax while deeper layers converged on a few high-signal tokens. My layer-wise pruning strategy followed that shape directly: 40% of the cache budget to the first 10 layers, only 10% to the final 10.
-
-That adaptive split bought another 15% drop in total memory usage.
 
 ## Attention decay: a 3D view of importance
 
-Plot the attention matrix in 3D and the peaks of importance jump out of the surface. Initial tokens raise a massive sink that stabilizes the softmax calculation.
+Attention-sink research shows that retaining initial tokens can stabilize streaming generation. The visualization is illustrative and does not report measurements from this article.
 
 Local tokens form a diagonal ridge that represents the immediate context. Heavy hitters punch up as vertical pillars of high attention that run across the entire sequence, visible from one end to the other.
 
@@ -131,9 +81,9 @@ Local tokens form a diagonal ridge that represents the immediate context. Heavy 
   </div>
 </div>
 
-Eviction strategies that fail to preserve these pillars produce hallucinations. Once the pillars are gone, attention entropy climbs, which a 3D heatmap of attention decay makes obvious, and rising entropy tracks directly with falling retrieval accuracy.
+Attention-sink research shows that dropping tokens the model still needs can destabilize generation. The heatmap is an illustration, not observed attention data.
 
-More than once I've watched a team chase a "hallucination spike" through their prompt templates and sampling settings when the real cause was an eviction policy quietly dropping the pillar tokens.
+A bad eviction policy can resemble a prompting or sampling failure when it drops tokens the model still needs.
 
 ## Bitmasking vs. Indexing: The implementation bottleneck
 
@@ -145,7 +95,7 @@ Bitmasking stays cheap on compute, the catch being that VRAM is not actually fre
 
 Dynamic Indexing takes the opposite trade: reallocate the KV tensors at a smaller size and copy the live Heavy Hitters into a fresh contiguous block. Reallocation hands VRAM back right away.
 
-The copy costs you a latency penalty that scales with the number of layers, so the frequency of compaction has to be balanced against your memory ceiling. My preferred middle ground is "Threshold Reallocation," where compaction fires only once the bitmask hits 50% sparsity, the same instinct as defragging a disk only after it gets half-fragmented rather than after every file delete.
+Compaction should run only after fragmentation is high enough to justify the copy cost.
 
 ## Memory coalescing and kernel fusion: the hardware wall
 
@@ -155,7 +105,6 @@ As fragmentation rises, memory bandwidth utilization falls. Sparse KV layouts th
 
 [FlashAttention-2](https://arxiv.org/abs/2307.08691) lifted throughput substantially and still wants contiguous memory for its tiling optimization.
 
-Part of my experimentation was a custom Triton kernel that uses an indirection table for KV lookups. It ran about 20% slower than full FlashAttention yet fit 10x larger contexts on the same hardware.
 
 You pay a small throughput tax up front to dodge the far larger latency tax of an out-of-memory crash or a swap stall.
 
@@ -165,7 +114,6 @@ Multi-GPU deployments complicate garbage collection. Pipeline parallelism splits
 
 Attention patterns swing hard across layers: early layers fixate on structural syntax and attention sinks, deep layers track semantic relationships and heavy hitters. A global eviction strategy has to account for that layer-specific behavior, handing early layers a larger sink budget and deep layers more heavy-hitter slots.
 
-Across my distributed tests, "Local Layer Pruning" beat "Global Sequence Pruning" cleanly. Each device should set its own eviction threshold from its local attention entropy.
 
 Centralizing that decision turns every eviction into a synchronization point, and those communication bottlenecks stall the whole generation loop.
 
@@ -175,7 +123,6 @@ Not every KV pair earns the same precision. Heavy Hitters drive model accuracy, 
 
 Background tokens that barely move the attention sum can be downsampled, and Int4 or Int8 quantization on those non-heavy-hitter tokens buys a second memory win on top of eviction. Hybrid caches that pair eviction with variable precision wring real utility out of every VRAM block, the way a photo archive keeps the keepers at full resolution and the throwaways as thumbnails.
 
-My implementation kept the top 5% of tokens in FP16 and dropped the remaining 95% to 4-bit quantization. Combined with an 80% eviction ratio, total memory usage fell 92% against a full FP16 cache, and recall on the LongBench benchmark stayed within 1% of the baseline.
 
 ## Case study: Llama 3 vs. Mistral attention patterns
 
@@ -185,7 +132,6 @@ Mistral 7B holds a constant memory footprint through Sliding Window Attention. P
 
 Any eviction strategy has to start from the specific model's attention entropy.
 
-My experience has Llama 3 70B surviving a 90% prune intact, where Mistral 7B starts losing coherence past 70%. How "garbage collectable" a context is comes straight from the architecture of the attention heads.
 
 Whenever I pick a pruning threshold for a model I haven't run before, I profile its attention map first.
 
@@ -207,37 +153,30 @@ Softmax needs a denominator that sums over all historical tokens, so yanking the
 
 Retain the first four tokens and the softmax stays numerically stable no matter how deep you prune.
 
-Ablation studies showed perplexity jumping 400% after 1000 tokens of generation once I removed just the first token. The mathematical foundations of the entire attention mechanism lean on those sinks.
+The StreamingLLM paper shows that removing attention sinks destabilizes generation as the stream grows.
 
 Sinks are not optional.
 
 ## Generational garbage collection: optimizing sorting overhead
 
-Ranking 100,000 tokens on every generation step burns serious CPU. Generational tracking solves it by moving tokens through tiers instead of re-sorting the whole pile.
+Ranking every cached token on every generation step burns CPU. Generational tracking reduces that work by moving tokens through tiers instead of re-sorting the whole set.
 
 New tokens land in a young-generation cache with a short sliding window. Frequent attention targets get promoted to an intermediate tier.
 
 Persistent heavy hitters settle into a rarely pruned long-term cache. Layering the cache this way shrinks the count of tokens you have to sort on any given step.
 
-A three-tier cache cut my sorting overhead by 80%. Plenty of tokens die young, the way most allocations in a typical program never survive past one collection.
 
 The few that graduate to the long-term cache tend to live for the whole session. Java's generational collector and V8's both run on this exact observation.
 
-## Detailed benchmark setup: MacBook Air M2 (16GB)
+## Local hardware constraints
 
-My test environment was a baseline 16GB M2 Air running a quantized Llama 3 8B model. Thermal throttling kicked in after 4 minutes of continuous 100k-token processing, clock speeds slid from 3.5GHz to 2.8GHz, and per-token latency rose 22%.
-
-Standard management hit the swap-death threshold at 145,000 context tokens. Managed eviction took the same machine to 1,000,000 tokens without ever crossing 12GB of total system RAM.
 
 Stability broke down once the system started paging out model weights to make room for KV cache bitmasks, which is the worst possible thing to evict. Local LLM development is a game of VRAM accounting, line by line.
 
-Every megabyte I saved in the cache was another megabyte left for higher-precision weights.
+Cache memory saved can instead be used for model weights or concurrency.
 
 ## State of open source memory 2026: vLLM vs. TensorRT-LLM
 
-Frameworks are folding importance-aware eviction in as a core feature. vLLM 0.8.0 shipped "HeapContext" to run H2O-style pruning at the PagedAttention level. TensorRT-LLM uses hardware-specific kernel fusion to compact in-flight.
-
-Community-driven projects are pushing toward modular GC policies, where you define custom Python logic to decide which tokens stay in VRAM. Once the "KV Interface" gets standardized, plug-and-play eviction strategies will travel across model backends without a rewrite.
 
 The PagedAttention foundation in [vLLM](https://github.com/vllm-project/vllm) is a clean fit for heap-based context management. VRAM is already carved into pages, so eviction comes down to freeing the pages whose tokens score low on attention.
 
@@ -252,13 +191,9 @@ Optimizing context memory requires following these steps:
 
 ## Economic outcomes of importance-based pruning
 
-Cut VRAM usage by 80% and capacity climbs 5x. A single A100 (80GB) goes from 4 concurrent 32k-context users to 20 at the same latency floor, and cost-per-query drops right along with it.
-
-Local-first applications gain even more from this. Cap the "active heap" of context at 4096 importance-ranked tokens and a 1M token session becomes feasible on something as small as an iPad Pro.
 
 There's a quality bonus too: the ["Lost in the Middle" problem where the center of a long context gets ignored](/articles/llm-context-windows-explained/) eases off. Stripping noise out of the KV cache lets the model spend its limited attention budget on high-signal tokens.
 
-Benchmarks show pruned caches sometimes beating full caches outright, because clearing out distracting irrelevant history is itself a form of help.
 
 ## The future of context engineering
 
@@ -266,7 +201,7 @@ Sequence length is going to stay a headline metric for model capability. The "Br
 
 Sustainable AI scaling runs on dynamic, importance-aware eviction instead. We should stop treating context as a static buffer you fill and forget.
 
-Context behaves like a dynamic heap, and the next frontier of AI infrastructure is managing it with the same rigor an operating system applies to its own heap. Samples of how I've turned dense inference infrastructure like this into high-signal content for DevTools companies live on [my work page](/work).
+Context behaves like a dynamic heap, and managing it deserves the same rigor as other memory systems. [My work page](/work) shows how I explain dense infrastructure topics for developer-tool companies.
 
 ## FAQ
 
@@ -274,7 +209,6 @@ Context behaves like a dynamic heap, and the next frontier of AI infrastructure 
 
 **Is H2O compatible with FlashAttention?** Only partly. FlashAttention wants contiguous memory blocks, so keeping its hardware efficiency means running periodic compaction or block-sparse kernels alongside the eviction.
 
-**How many sinks are actually needed?** Holding softmax stability took only 4 tokens in my tests. Full numerical stability across every layer can want up to 32 tokens for architectures like GPT-4.
 
 **What is the Attention Pillar phenomenon?** Pillars are specific tokens that anchor the model's reasoning, the ones almost every later token points back at. Spotting and protecting those pillars is the core challenge of any importance-based eviction strategy.
 

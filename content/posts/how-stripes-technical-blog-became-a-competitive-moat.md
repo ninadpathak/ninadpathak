@@ -86,7 +86,7 @@ Moat logic shows up here in a specific way:
 
 Stripe’s public changelog strengthens the same loop. Developers can inspect dated changes, breaking updates, and product-level evolution in a consistent public record.
 
-A team pinning an API version can see exactly what shifted between releases instead of discovering it in a 2am incident. That kind of changelog reduces the fear that usually comes with depending on a fast-moving API vendor.
+A team pinning an API version can see what changed between releases instead of discovering it during an incident. That kind of changelog reduces the fear that usually comes with depending on a fast-moving API vendor.
 
 I argued in [my changelog post](/articles/how-to-write-a-changelog-developers-actually-read/) that changelogs are a trust instrument. Stripe proves the point at scale.
 
@@ -127,7 +127,7 @@ That is exactly how a moat works. It changes perceived risk before a formal eval
 
 Where Stripe’s blog earns its keep is the anxious middle of implementation. The posts about avoiding silent errors, preparing for API upgrades, testing subscriptions, using sandboxes, and debugging with Workbench all target a specific fear: “What happens when the integration gets messy?”
 
-Picture the engineer at 11pm whose webhook fired twice and double-charged a customer, googling the exact symptom. A company that shows up reliably in that moment earns more than traffic.
+Picture an engineer whose webhook fired twice and double-charged a customer, searching for the exact symptom during an incident. A company that shows up reliably in that moment earns more than traffic.
 
 It earns default consideration.
 
@@ -149,7 +149,7 @@ Stripe’s edge comes from repeated high-signal choices:
 - obvious links into docs and implementation paths
 - a public archive that stays useful over time
 
-Stripe also avoids one trap I see everywhere in technical marketing. Too many companies publish “best practices” posts that function as SEO wrappers for product mentions.
+Stripe also avoids a common technical-marketing trap: a “best practices” post that is only an SEO wrapper for product mentions.
 
 Stripe’s better posts function independently as explanations. Product fit shows up naturally because the company actually owns the problem space it is describing.
 

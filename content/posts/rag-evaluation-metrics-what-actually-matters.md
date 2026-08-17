@@ -14,13 +14,11 @@ title: 'RAG Evaluation Metrics: What Actually Matters'
 
 Building a RAG system is the part every tutorial covers. Measuring whether it works is the part almost none of them touch.
 
-I built three RAG systems before any of this clicked for me, and the difference between a slick demo and something I'd trust in production came down to evaluation almost every time.
 
 RAG evaluation is genuinely hard because you're scoring a pipeline that chains retrieval, passage selection, and generation. A failure at any stage compounds into the next.
 
-I once shipped a system where retrieval scored beautifully in isolation and the whole thing still gave wrong answers, because a metric that looks great on one stage can be useless for the system as a whole.
 
-What follows are the metrics I actually rely on, why each one earns its place, and how to wire them into a pipeline you can trust.
+The useful metrics separate retrieval, context selection, and answer quality so a failure can be traced to the stage that produced it. The guide does not report article-specific benchmark results.
 
 ## The RAG Evaluation Stack
 
@@ -30,7 +28,7 @@ Three distinct failure modes live inside a RAG system, and an evaluation strateg
 
 Everything downstream is capped by retrieval quality. When the retrieved passages don't contain the answer, no amount of clever prompting will conjure it.
 
-I've watched a generator get blamed for hallucinating when the real problem was that the supporting passage never made it into the top results at all.
+A generator can be blamed for hallucination when the supporting passage never reached the top results.
 
 **Recall@K** measures what fraction of all relevant passages appear in the top-K results. For a question with multiple supporting facts spread across documents, recall tells you whether the system even has access to the information it needs.
 
@@ -42,7 +40,7 @@ Treat recall@K as a lower bound and nothing more. A system can score perfect rec
 
 **Precision@K** measures how many of the top-K results are actually relevant. High precision means the model wastes less of its context budget on irrelevant material, and low precision dilutes the signal the generator has to work with.
 
-Whether you tilt toward recall or precision depends on your context window. Context-rich setups, say a model with a 200K-token window answering from a handful of short docs, can afford to over-retrieve and let recall win.
+A larger context window can tolerate more retrieved passages, while a tight latency or token budget puts more pressure on precision.
 
 When you're squeezing ten passages into a tight budget for a latency-sensitive chatbot, precision earns its keep.
 
@@ -60,7 +58,7 @@ Comparing the retrieved context against a ground-truth answer is what **Context 
 
 Cutting corners here is where many tutorials go wrong. They test retrieval against a document store rather than against the context fed to the generator, and those two things diverge constantly.
 
-I learned this the slow way, building eval pipelines that scored both and watching them disagree on a query where the right document existed but my chunking had split the answer across two passages that never landed together.
+Retrieval and assembled-context scores can disagree when chunking splits supporting facts across passages that never reach the generator together.
 
 ### Stage 3: Response Quality
 
@@ -74,9 +72,7 @@ Answer Relevancy measures whether the response actually addresses the question. 
 
 Context Relevancy measures whether the retrieved context is useful for answering the question. High context relevancy means the passages selected actually contain information needed to construct the answer.
 
-RAGAs scores range from 0 to 1. Production systems I've seen tend to land between 0.4 and 0.7 on faithfulness.
-
-Scores above 0.6 typically indicate a system worth deploying, and above 0.75 is strong.
+RAGAs metrics use bounded scores, but a deployment threshold must come from labeled examples and the cost of each failure type. Do not copy a universal cutoff.
 
 ### The Hallucination Problem
 
@@ -96,15 +92,13 @@ They're also nearly useless for RAG evaluation.
 
 Two answers can mean the exact same thing and score 0.3 on BLEU, and two answers can say flatly opposite things and score 0.7 on ROUGE. These metrics measure text similarity, not whether the answer is correct.
 
-Because BLEU and ROUGE are trivial to measure, teams quietly start optimizing for them, and the system learns to produce text that games the metric without getting any more correct. I've watched this happen twice, once on a support bot whose ROUGE score climbed for a month while user complaints climbed right alongside it.
-
-Debugging that is no fun.
+Optimizing BLEU or ROUGE can improve surface overlap without improving factual correctness. Treat that divergence as a metric-design failure.
 
 **Perplexity** on the generated text misleads in the same way. Low perplexity means the model is confident in its phrasing, and a confidently wrong answer sails right past a perplexity-based check.
 
 ## Building a Practical Evaluation Pipeline
 
-A pipeline I trust combines automated metrics with human evaluation, each covering what the other misses.
+A practical pipeline combines automated metrics with human evaluation, each covering what the other misses.
 
 ### Automated Metrics You Can Run in CI
 
@@ -136,9 +130,9 @@ def evaluate_rag_response(question, answer, contexts, ground_truth):
     }
 ```
 
-RAGAs supports this out of the box. Feed it a dataset of question/answer/context triples and it returns scored results.
+The code above is an implementation sketch, not a runnable evaluation artifact. A real pipeline still needs a versioned dataset, current RAGAs API integration, judge configuration, and stored outputs.
 
-One thing to budget for: RAGAs itself calls an LLM to grade each response, so running a frontier model as your judge across ten thousand eval rows gets expensive fast. I route the bulk through a cheaper judge like Claude Haiku for triage and only escalate the borderline cases, the ones scoring near my threshold, to a stronger model or a human.
+LLM-based grading also adds cost. Route or sample evaluations according to risk, and send borderline cases to a stronger judge or a human reviewer.
 
 ### Human Evaluation Traps
 
@@ -184,7 +178,7 @@ def evaluate_retrieval(test_dataset, k_values=[1, 3, 5, 10]):
     return pd.DataFrame(results)
 ```
 
-Running this costs nothing and finishes in seconds, and it gives you reliable signal about retrieval quality before you sink a week into generation tweaks that can't fix a retrieval problem anyway.
+Retrieval scoring can run without generation, which makes it useful for isolating index and ranking failures before tuning the answer model.
 
 ## The Most Common Failure Mode
 
@@ -194,7 +188,7 @@ Distribution shift is the culprit. Test datasets sit frozen while production que
 
 A FAQ bot tuned on last quarter's questions starts fielding queries about a feature that shipped two weeks ago and has no good passage to retrieve.
 
-Detecting that drift is something your eval pipeline has to do on its own. I monitor retrieval recall quarterly and re-run human evaluation on sampled production queries monthly, so a sliding score surfaces as a trend line before it surfaces as a support ticket.
+Monitor retrieval and answer quality on a recurring sample of production queries so distribution shift appears in the evaluation record before it becomes a support pattern.
 
 ## What to Actually Optimize
 
@@ -208,7 +202,7 @@ If you're starting from scratch, optimize in this order:
 
 4. **Answer relevancy fourth.** Everything above this point measures parts of the system. Answer relevancy measures the whole thing working together.
 
-Starting at step 4 without the foundation underneath is the mistake I see most teams make. They tune prompts, swap models, bolt on retrieval augmentation, and burn weeks polishing generation while retrieval quietly fails, often because [the embedding model itself cannot tell the query and document apart geometrically](/articles/embedding-models-compared/).
+Starting with answer relevancy alone hides upstream failures. Teams can spend weeks tuning prompts while retrieval quietly misses the supporting passage, sometimes because [the embedding model cannot separate the query and document geometrically](/articles/embedding-models-compared/).
 
 <div class="visual-wrapper">
   <div class="visual-title">RAG EVALUATION FUNNEL</div>
@@ -217,16 +211,9 @@ Starting at step 4 without the foundation underneath is the mistake I see most t
   </div>
 </div>
 
-## Thresholds That Work
+## Setting thresholds
 
-Drawn from the production deployments I've worked on, these are the lines where I stop and fix something:
-
-- **Retrieval Recall@5 < 0.7**: Retrieval needs work before anything else matters.
-- **Context Precision@5 < 0.5**: Too much noise in retrieved passages for the generator to reliably extract signal.
-- **Faithfulness < 0.5**: The model is hallucinating frequently, which points at generation rather than retrieval.
-- **Answer Relevancy < 0.6**: Either retrieval is missing context, or generation isn't using what it has.
-
-None of these thresholds are universal, so adjust them to your domain. A medical RAG system needs far tighter faithfulness than a brainstorming assistant, where an invented detail is a feature.
+Set thresholds from labeled queries, reviewer agreement, and the cost of false positives and false negatives in the target domain. A medical or legal system will need different operating points from a brainstorming assistant.
 
 A legal RAG tool that misses one controlling statute can sink a brief, so it demands higher recall than a product FAQ bot where a near-miss answer still helps.
 
@@ -236,7 +223,7 @@ Metrics don't capture everything. A system that scores well on RAGAs can still h
 
 Capturing user feedback at scale is what closes that loop. Thumbs up and down on answers, a "this was helpful" button, and the follow-up questions themselves, which tell you whether the first answer actually resolved the need or just stalled it.
 
-That feedback is also how I build a human-labeled eval set, rotated quarterly so it tracks real usage. The labeled data becomes the foundation for fine-tuning the generator, choosing between models, and catching regressions that automated metrics sail right past.
+User feedback can become a human-labeled evaluation set when it is sampled, reviewed, and versioned. Refresh that set as the product and query distribution change.
 
 ## The Real Takeaway
 
@@ -246,6 +233,4 @@ A multi-layered strategy is the answer. Automated metrics catch regressions, hum
 
 Score retrieval, generation, and end-to-end quality as separate things, because a failure in retrieval compounds through generation and the end-to-end number alone won't tell you where it started. Fix the foundation before polishing the surface.
 
-Every team I've seen ship a RAG system worth trusting treated evaluation as a first-class concern rather than an afterthought. They wrote the eval pipeline before the retrieval system, set thresholds and rejected anything that fell short, and kept watching the metrics in production so drift turned into a fix instead of an outage.
-
-Two systems ago I would have given a lot for someone to spell this out for me. Tutorials almost never reach this point, so now you have the part they skip.
+A RAG system worth trusting treats evaluation as a first-class concern. Version the dataset, store the outputs, and keep monitoring production drift so failures turn into traceable fixes.

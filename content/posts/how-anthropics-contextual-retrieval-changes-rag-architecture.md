@@ -1,9 +1,8 @@
 ---
 category: ai-engineering
 date: 2026-03-26
-description: Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49%
-  with contextual embeddings plus contextual BM25. I walk through the mechanism, the
-  benchmark, and the part of the RAG pipeline it changes.
+description: The mechanism changes what gets indexed before the RAG pipeline runs
+  a query.
 status: published
 tags:
 - ai
@@ -27,7 +26,7 @@ Anthropic pushed on the other end, before anyone runs a single query. I think th
 
 ## The chunk is usually the problem
 
-A raw chunk carries less meaning than the document it came from. That sounds obvious, yet I still see people treat the chunk as if it were a clean unit of knowledge.
+A common indexing mistake is to treat the chunk as a clean unit of knowledge.
 
 It rarely is.
 
@@ -73,7 +72,7 @@ Techniques like this are the ones I trust, because I can reason about them end t
 
 Semantic search gets more context. Lexical search gets more terms.
 
-A reranker, when I add one, starts from a stronger candidate pool. It works the way labeling a moving box does.
+A reranker then starts from a stronger candidate pool. It works the way labeling a moving box does.
 
 The contents stay the same. Writing "kitchen, top shelf, fragile" on the side tells you what is inside without opening it.
 
@@ -142,7 +141,7 @@ Code, support tickets, legal docs, and a messy internal wiki all fail differentl
 
 The reason I keep dwelling on this technique is that it moves work upstream.
 
-Almost every RAG conversation I sit in revolves around the live request path, which makes sense because query-time mistakes are the ones you can see in a trace. People talk about embeddings, rerankers, top-K, prompt assembly, and model choice because those components touch the final answer directly.
+RAG discussions often concentrate on the live request path because query-time mistakes are visible in a trace. People talk about embeddings, rerankers, top-K, prompt assembly, and model choice because those components touch the final answer directly.
 
 The index is what I care about, because bad candidate generation poisons everything downstream of it. A reranker cannot rescue a chunk that never made it into the candidate pool.
 
@@ -161,7 +160,7 @@ Those are indexing questions. I think that is the real contribution here.
 
 ## Prompt caching is what makes the idea practical
 
-Without prompt caching, Contextual Retrieval would get expensive fast. Picture contextualizing a 100-page filing split into 400 chunks: the naive version resends all 100 pages 400 times, once per chunk, just to write 400 little blurbs.
+Without prompt caching, contextualizing every chunk resends the same source document for each chunk.
 
 The preprocessing job repeats the same pattern over and over:
 
@@ -172,7 +171,7 @@ Anthropic points directly to [prompt caching](https://docs.anthropic.com/en/docs
 
 The same cost logic shows up in my piece on [Prompt Caching](/articles/prompt-caching-what-it-is-and-when-the-math-works/). Anthropic's docs say prompt caching can cut latency by **more than 2x** and reduce costs by **up to 90%** in the right setup.
 
-Those numbers matter here because the contextualization expense lands up front, at ingestion. Query-time retrieval barely moves unless I add reranking.
+Those numbers matter here because the contextualization expense lands up front, at ingestion. Query-time retrieval barely changes unless reranking is added.
 
 Discipline still applies to the ingestion cost. Every chunk gets longer.
 
@@ -217,15 +216,13 @@ I would also skip Contextual Retrieval when:
 
 Before I reach for a contextualizer, metadata is the first thing I check. A solid chunk schema with titles, section names, repo paths, service names, and version tags may already recover enough context on its own.
 
-Contextual Retrieval earns its keep when the raw chunk still reads as anonymous even after I have attached every field I have, which is exactly when a free-text blurb can say what no structured field captured.
+Contextual Retrieval earns its keep when the raw chunk still reads as anonymous after available metadata has been attached.
 
 ## Reranking still matters
 
-Reranking solves a different problem. Contextual Retrieval changes what I store, and reranking changes how I sort what I retrieved.
+Reranking solves a different problem. Contextual Retrieval changes what gets stored, and reranking changes how retrieved candidates are sorted.
 
-Both failure modes are ones I have watched happen. The first system retrieves the right answer somewhere in the top 100 and buries it under cleaner-looking weaker chunks, so the model never sees it inside a top-20 cut.
-
-A reranker rescues that one. The second system never surfaces the right chunk at all, because it lost too much identity when I split it out of the source document, and no amount of reordering fixes a candidate pool that does not contain the answer.
+One failure mode retrieves the right chunk but ranks it below the candidates passed to the model. Another never retrieves the right chunk because chunking removed too much identity from it.
 
 Contextual Retrieval rescues that one.
 

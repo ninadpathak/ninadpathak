@@ -13,11 +13,6 @@ tags:
 title: 'Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense'
 ---
 
-Three times in the past year I walked into this decision already made. Each team had committed to a particular approach before I got there.
-
-The first had fine-tuned a 7B model on their internal documentation and spent months trying to figure out why the agent still hallucinated pricing tiers that had been deprecated. The second had built an elaborate RAG pipeline and could not understand why the agent would never follow their custom refund-escalation sequence, no matter how many policy docs they fed it.
-
-The third team got it right by accident.
 
 Which approach wins depends on what problem you are actually solving. Fine-tuning and RAG do not compete on the same axis, and conflating them leads to expensive mistakes that take months to surface.
 
@@ -58,13 +53,12 @@ The clearest signal that RAG is right: your knowledge base changes faster than y
 
 A customer support agent that needs current product features, last night's outage status, and today's pricing is a RAG problem, full stop. Retraining every time any of those move is not feasible.
 
-What burns you is the lag between a product update shipping and the agent knowing about it, and with RAG that lag is roughly zero. Go the fine-tuning route and you are looking at hours at minimum, probably days, during which the agent quotes prices that no longer exist.
+RAG can expose an updated index on the next query. Fine-tuning requires another training and deployment cycle before the model reflects the change.
 
 Standing up retrieval is not free either. You need an embedding model, a vector index, a retrieval pipeline, and reranking logic that keeps the relevant chunk at the top.
 
-I have benchmarked this on a typical setup, and retrieval adds 40-120ms on top of inference. For an agent answering a single question under a tight SLA, that overhead shows up.
 
-For an agent already firing three tool calls that each take a second or two, no one will ever notice it. The [RAG evaluation metrics that actually matter](/articles/rag-evaluation-metrics-what-actually-matters/) are worth understanding before you build the pipeline, because the metrics you optimize for early will shape what the system gets good at.
+Compare retrieval overhead with the tool-call and inference traces from the target workflow. The [RAG evaluation metrics that actually matter](/articles/rag-evaluation-metrics-what-actually-matters/) are worth understanding before you build the pipeline, because the metrics you optimize for early will shape what the system gets good at.
 
 Verifiable sources make the second case for RAG. When an agent cites a refund policy, it should cite the actual clause, with a link a support lead can click.
 
@@ -82,21 +76,12 @@ Reach for it when the model's behavior is wrong, not when information is missing
 
 Adding more documents to a prompt cannot fix how a model defaults to reasoning, because that lives in the weights, not the context.
 
-Here is the case that convinced me. We had an agent that kept botching a multi-step API workflow, calling the charge endpoint before it had created the customer record.
+For example, an agent may call a charge endpoint before creating the customer record. That is a behavior problem, so training examples of the correct sequence may help where retrieving another document would not.
 
-The model was not short on information, its prior training had simply taught it a different default ordering. Two hundred examples of the correct sequence, fine-tuned in, and the failures stopped.
-
-RAG would have done nothing here, because the correct ordering lived in no document we could retrieve, only in the model's habits.
-
-Cost is the next factor. A full fine-tuning run on a 7B model runs between $100 and $500 depending on the provider and the dataset size, and that is per run.
-
-Domain knowledge that shifts every month means you pay that every month, against roughly $20 a month to host a vector index on a small instance.
+Fine-tuning cost varies by provider, model, and dataset, and changing facts force another training run. A retrieval index can be updated without retraining the model.
 
 There is a subtler cost. Fine-tuning on a narrow dataset risks catastrophic forgetting, where the model sheds capabilities from its pretraining because the fine-tuning set was too thin or the run too long.
 
-I watched it happen to a team that fine-tuned on their documentation and shipped an agent that could no longer do basic arithmetic. Their docs contained no arithmetic, the run was too aggressive, and the model overwrote what it already knew.
-
-Guardrail tests caught it, but only just.
 
 ## The Memory Hierarchy Changes the Trade-Off
 
@@ -120,7 +105,7 @@ The real question is which one carries the bulk of the memory load, and the answ
 
 ## What I Actually See in Production
 
-Every system I have seen hold up under real traffic puts RAG at the primary memory layer and uses fine-tuning for narrow calibration.
+A practical default is RAG for changing knowledge, with fine-tuning reserved for narrow behavior calibration.
 
 The retrieval pipeline carries current product information, the user's stored preferences, and session history pulled from a vector store. When the agent needs to know something, it looks it up.
 
@@ -128,7 +113,7 @@ Fine-tuning, in those same systems, carries behavior. The model has been trained
 
 Knowledge about how to operate is stable, and it has no business living in a retrieval index.
 
-The failure mode I run into most is teams trying to fix behavior with RAG. They keep stuffing the index with more documents, hoping the agent will read its way into behaving correctly.
+Adding more documents to RAG will not reliably correct behavior learned in model weights.
 
 The agent does read them, sometimes, and still misbehaves, because the broken behavior sits in the weights and no amount of context reaches it. Imagine handing a driver who keeps turning the wrong way down one-way streets a thicker map.
 
@@ -154,9 +139,9 @@ The model weights do not give you provenance.
 
 What is your retraining budget? If you cannot afford to retrain monthly, RAG is probably the foundation.
 
-How critical is retrieval latency? When every millisecond counts and you cannot absorb 60ms of overhead, you need a different architecture.
+If retrieval latency breaks the service-level objective, test a different retrieval path or architecture rather than assuming a universal overhead.
 
-Tool calls in most agentic workflows already run into the hundreds of milliseconds, so retrieval is rarely the part that slows you down.
+Compare retrieval time with the actual tool-call and inference traces from the target workflow.
 
 For most agent memory use cases in 2026, the honest answer is RAG as the foundation, with fine-tuning reserved for the reasoning patterns that refuse to stick through prompt engineering. [Anthropic's contextual retrieval](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/) is worth reviewing before you finalize the architecture, because contextual embeddings lift retrieval accuracy enough to change whether you need fine-tuning for some reasoning tasks at all.
 
