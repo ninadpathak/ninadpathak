@@ -171,12 +171,16 @@ jobs:
       - name: Guard stylesheet coverage
         run: python tools/audit_stylesheets.py --strict
 
-      # Reported, not gated, until the glossary diagram rework lands. All 25 glossary
-      # entries currently share ONE diagram skeleton — 5 nodes, 2 branches, 2 outcomes —
-      # so --strict fails today, and adding a gate that cannot go green is the mistake
-      # this repo has made three times. Promote to --strict once the rework is in.
-      - name: Report diagram structural convergence
-        run: python tools/audit_structure.py
+      # Promoted to --strict on 2026-08-17 once the rework landed: the glossary went from
+      # 25 pages sharing ONE skeleton to 7 pages carrying 7 distinct shapes, 28% coverage.
+      # It was deliberately report-only until it could pass, because a gate that cannot go
+      # green stops being read — a mistake this repo made three times before.
+      #
+      # Note when reading its output: branches=2 on every diagram is a CSS constraint, not
+      # convergence. flowcharts.css uses `grid-template-columns: repeat(2, ...)`, so a
+      # two-way split is the only branch shape the stylesheet supports.
+      - name: Guard diagram structural diversity
+        run: python tools/audit_structure.py --strict
 
 
       # `output/` is untracked and .gitignored — Cloudflare Pages generates it at build
