@@ -68,8 +68,11 @@ class TestVerdictAtZero(unittest.TestCase):
             self.assertNotIn(hedge, s.lower())
 
     def test_zero_verdict_names_the_band_ceiling_gap(self):
+        # Derived from the constants, not pinned: the band gets re-derived and a literal
+        # here would break on every restatement while testing nothing extra.
         s = sb.verdict({}, {"clicks": 0}, dt.date(2026, 8, 17))["sentence"]
-        self.assertIn("8.5x", s)          # 10,000 / 1,176
+        expected = f"{sb.TARGET_MONTHLY / sb.BAND_HIGH:.1f}x"
+        self.assertIn(expected, s)
         self.assertIn(str(sb.BAND_LOW), s)
 
     def test_days_remaining_are_counted_to_day_90(self):
@@ -138,14 +141,23 @@ class TestTopMovement(unittest.TestCase):
 
 
 class TestBandConstantsMatchTheCampaignDoc(unittest.TestCase):
-    """The band was cut from 350-1,350 to 306-1,176 after the contamination sweep.
+    """The band has been restated three times as premises under it changed.
 
     A scoreboard measuring against a stale band is worse than one measuring against none,
-    so the live figures are pinned here and campaign-90d.md is the source of truth.
+    so the live figures are pinned here and `tools/gsc_band.py` is the derivation.
     """
 
-    def test_band_is_the_post_sweep_band(self):
-        self.assertEqual((sb.BAND_LOW, sb.BAND_HIGH), (306, 1176))
+    def test_band_is_the_re_derived_band(self):
+        self.assertEqual((sb.BAND_LOW, sb.BAND_HIGH), (149, 1525))
+        self.assertEqual(sb.BAND_CENTRAL, 413)
+
+    def test_the_central_sits_inside_the_band(self):
+        self.assertLess(sb.BAND_LOW, sb.BAND_CENTRAL)
+        self.assertLess(sb.BAND_CENTRAL, sb.BAND_HIGH)
+
+    def test_the_re_derivation_date_is_recorded(self):
+        """A reader must be able to tell which premise a band figure belongs to."""
+        self.assertEqual(sb.BAND_REDERIVED, "2026-08-17")
 
     def test_target_and_day_90(self):
         self.assertEqual(sb.TARGET_MONTHLY, 10_000)

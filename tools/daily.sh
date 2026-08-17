@@ -36,3 +36,8 @@ echo "=== $(date -u +%Y-%m-%dT%H:%M:%SZ) daily cycle ==="
 # if somebody is looking every day. Sampling weekly would round every answer to the
 # nearest seven days and lose the distinction between a page indexed on day 1 and day 6.
 "$PY" tools/gsc_attribution.py || echo "NOTE: attribution did not run"
+
+# The band is re-derived on demand, not on a schedule: it changes when a premise changes,
+# and a nightly rerun would append identical sections and bury the ones that moved. Run
+# tools/gsc_band.py by hand after any decision that touches the calendar, the row count,
+# the cluster mix, or what counts as a click.

@@ -50,9 +50,16 @@ import gsc_report as gr  # noqa: E402
 
 LOG = gr.ROOT / "planning" / "scoreboard.md"
 
-# campaign-90d.md, fourth-cycle refresh: the band was cut from 350-1,350 after a sweep
-# found the keyword universe 12.6% contaminated. Both ends are monthly human clicks.
-BAND_LOW, BAND_HIGH = 306, 1176
+# Both ends are monthly human non-brand clicks. Re-derived by tools/gsc_band.py on
+# 2026-08-17, replacing 306-1,176: the tools-led premise under that band failed when live
+# SERP reads found three of six build-a-tool keywords carry an AI Overview, tools moved to
+# being measured on referring domains rather than sessions, the row count fell 71 to 60,
+# and the old legacy term was in the wrong units - it added sitewide clicks including brand
+# to a band compared against human non-brand clicks. Central estimate moved 741 to 413.
+# See planning/band.md for the derivation and its uncertainty decomposition.
+BAND_LOW, BAND_HIGH = 149, 1525
+BAND_CENTRAL = 413
+BAND_REDERIVED = "2026-08-17"
 TARGET_MONTHLY = 10_000
 DAY_90 = dt.date(2026, 11, 15)
 WEEK = 7
@@ -270,9 +277,17 @@ def render(d: dict) -> str:
                  f"of queries produces a different average. This site has already been "
                  f"misread once this way — an average position rising 23.1 to 7.2 in 2025 "
                  f"was the deep-position tail vanishing, not a gain.\n")
-    L.append(f"Against the day-90 band of **{BAND_LOW}–{BAND_HIGH:,} human clicks/month**: "
-             f"the trailing 28 days produced **{tr['clicks']}**. "
+    L.append(f"Against the day-90 band of **{BAND_LOW}–{BAND_HIGH:,} human clicks/month** "
+             f"(central {BAND_CENTRAL}): the trailing 28 days produced **{tr['clicks']}**. "
              f"{d['band_position']}\n")
+    L.append(f"**The band was re-derived on {BAND_REDERIVED}** and replaced 306–1,176. The "
+             f"premise under the old one was a tools-led calendar in a protected niche, and "
+             f"live SERP reads found the protected niche does not exist. Tools are now "
+             f"measured on referring domains rather than sessions, sixty rows remain rather "
+             f"than seventy-one, and the old legacy term added sitewide clicks including "
+             f"brand to a band judged on human non-brand clicks. The central estimate moved "
+             f"741 → 413. **Do not compare this week's figure against a band quoted before "
+             f"{BAND_REDERIVED}** — see `planning/band.md`.\n")
 
     # 2 -------------------------------------------------------------------
     v = d["verdict"]
