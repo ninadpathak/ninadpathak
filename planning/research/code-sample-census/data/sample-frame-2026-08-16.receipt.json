@@ -1,0 +1,26 @@
+{
+  "study": "code-sample-validity-census",
+  "source": "ClickPy mirror of PyPI Linehaul download data",
+  "endpoint": "https://sql-clickhouse.clickhouse.com/",
+  "fetched_at": "2026-08-17T18:03:50+00:00",
+  "window_days": 30,
+  "end_date": "2026-08-16",
+  "start_date": "2026-07-18",
+  "limit": 100,
+  "query": "SELECT\n    project,\n    sum(count) AS downloads\nFROM pypi.pypi_downloads_per_day\nWHERE date BETWEEN toDate('2026-07-18') AND toDate('2026-08-16')\nGROUP BY project\nORDER BY downloads DESC, project ASC\nLIMIT 100\nFORMAT CSVWithNames\n",
+  "response_sha256": "3e02205ba1202e69a273a29e5b59755e75da2a906adb35248ee26e23da93f332",
+  "row_count": 100,
+  "first_project": {
+    "project": "boto3",
+    "downloads": 3372563837
+  },
+  "last_project": {
+    "project": "scipy",
+    "downloads": 429829044
+  },
+  "validation": {
+    "unique_projects": true,
+    "downloads_descending": true,
+    "project_tiebreak_ascending": true
+  }
+}

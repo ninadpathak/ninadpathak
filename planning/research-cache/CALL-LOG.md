@@ -327,3 +327,31 @@ return no code at all (Stripe), and documentation deliberately publishes invalid
 illustrate errors (pydantic's single syntax failure).
 
 Output: `planning/research/EXPERIMENT-CANDIDATES-2026-08-17.md`.
+
+---
+
+## Code-sample census execution batch 1 — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 0.** No Ahrefs, Semrush, model API, or paid dataset call.
+
+| Free instrument | Calls | Use |
+|---|---:|---|
+| ClickPy public ClickHouse | 3 | Latest available date, frozen top-100 frame, immediate byte-for-byte reproduction |
+| Live primary documentation | 7 | Five generator pilot pages plus two repeat HTTPX fetches |
+| GitHub public API/raw source | 3 | Current HTTPX source and file-specific commit history |
+| Official primary/reference pages | 4 | PyPI BigQuery schema, Python Packaging download caveats, live HTTPX page, exact fixing commit |
+
+The original frame wording `most-used` was falsified by PyPI's own caveats and
+corrected to `most-downloaded`. The explicit-language-class rule was also
+falsified: current Requests and HTTPX quickstarts use default/generic highlight
+containers for Python console examples. The instrument now admits deterministic
+`>>>` evidence only for supported Sphinx/MkDocs pages and parses console input
+separately from output.
+
+Pilot: 87 included blocks across Requests, HTTPX, Flask, and Pydantic; one raw
+failure. It is a real published HTTPX syntax error, already fixed in repository
+commit `def4778d622e` on 2025-10-16 but still served by the live docs whose
+response was last modified 2025-09-11. This adds `deployment-drift` to the
+failure taxonomy.
+
+Output: `planning/research/code-sample-census/`.

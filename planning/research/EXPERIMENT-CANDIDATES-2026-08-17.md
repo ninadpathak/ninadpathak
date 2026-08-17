@@ -7,6 +7,16 @@ in technical writing into a number nobody has published, it needs no model API a
 no non-determinism, and I have already spiked the extraction and found the confound that
 would have sunk it.
 
+> **Execution amendment, 2026-08-17:** The live implementation spike found two errors in the
+> proposal before the full crawl. PyPI downloads are not usage, so the frame is now the 100
+> **most-downloaded** projects over a frozen 30-day window, never "most-used." Requests and
+> HTTPX currently render Python console examples under `highlight-default` / generic
+> `highlight`, so an explicit `python` class alone would exclude the flagship examples. The
+> preregistered method now admits deterministic `>>>` console evidence for Sphinx and MkDocs,
+> parses only the console inputs, excludes unknown generators, and fixes a 50-page hash sample
+> per docs site. Full protocol and pilot instrument:
+> `planning/research/code-sample-census/README.md`.
+
 **Four candidates died in falsification before these three survived.** Those are in §5,
 because which questions are closed is as useful as which are open.
 
