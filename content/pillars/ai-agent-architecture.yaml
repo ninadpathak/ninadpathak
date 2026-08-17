@@ -1,5 +1,5 @@
 slug: ai-agent-architecture
-status: review
+status: published
 title: "AI Agent Architecture: Patterns for Systems That Actually Ship"
 h1: "AI Agent Architecture"
 description: "The patterns, trade-offs, and failure modes behind production AI agents. From the agent loop and tool calls to multi-agent design and error handling."

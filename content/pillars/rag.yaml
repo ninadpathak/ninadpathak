@@ -1,5 +1,5 @@
 slug: rag
-status: review
+status: published
 title: "RAG and Retrieval: Building Pipelines That Return the Right Context"
 h1: "RAG & Retrieval"
 description: "A practitioner's guide to retrieval-augmented generation: embeddings, hybrid search, reranking, evaluation, and the optimizations that decide whether your RAG system works."

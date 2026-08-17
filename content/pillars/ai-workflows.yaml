@@ -1,5 +1,5 @@
 slug: ai-workflows
-status: review
+status: published
 title: "AI Workflows and Automation: Getting Real Work Done with Coding Agents"
 h1: "AI Workflows & Automation"
 description: "How to wire AI agents and coding assistants into real work: choosing models, setting up coding agents, connecting tools with MCP, and automating the busywork without losing control."
@@ -45,7 +45,6 @@ sections:
   - heading: "Automating developer busywork"
     blurb: "Concrete wins: faster tooling and content drafted from your own artifacts."
     posts:
-      - uv-package-manager-benchmark
       - how-to-write-a-changelog-developers-actually-read
       - writing-release-notes-that-developers-trust
 

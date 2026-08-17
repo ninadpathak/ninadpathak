@@ -3,7 +3,7 @@ date: 2026-03-26
 description: Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49%
   with contextual embeddings plus contextual BM25. I walk through the mechanism, the
   benchmark, and the part of the RAG pipeline it changes.
-status: review
+status: published
 tags:
 - ai
 - rag
@@ -14,19 +14,31 @@ title: How Anthropic's Contextual Retrieval Changes RAG Architecture
 
 Anthropic took a chunk like `"The company's revenue grew by 3% over the previous quarter."`, asked Claude to explain that chunk using the full document, then prepended the explanation before indexing it. That one step cut top-20 retrieval failure by **49%** when Anthropic combined contextual embeddings with contextual BM25, according to [their writeup](https://www.anthropic.com/engineering/contextual-retrieval).
 
-What I like about that result is how clean the mechanism is. No new retrieval model. No weird ranking trick. No attempt to hide the failure behind a bigger context window. Anthropic changed the chunk before retrieval ever started.
+What I like about that result is how clean the mechanism is. No new retrieval model.
 
-That is the part I keep coming back to. Retrieval work usually piles up at query time, where teams swap embedding models, add rerankers, widen top-K, and keep pushing on the same end of the system. Anthropic pushed on the other end, before anyone runs a single query. I think that is why the idea matters.
+No weird ranking trick. No attempt to hide the failure behind a bigger context window.
+
+Anthropic changed the chunk before retrieval ever started.
+
+That is the part I keep coming back to. Retrieval work usually piles up at query time, where teams swap embedding models, add rerankers, widen top-K, and keep pushing on the same end of the system.
+
+Anthropic pushed on the other end, before anyone runs a single query. I think that is why the idea matters.
 
 ## The chunk is usually the problem
 
-A raw chunk carries less meaning than the document it came from. That sounds obvious, yet I still see people treat the chunk as if it were a clean unit of knowledge. It rarely is.
+A raw chunk carries less meaning than the document it came from. That sounds obvious, yet I still see people treat the chunk as if it were a clean unit of knowledge.
 
-Take a sentence about revenue growth. Split it away from the filing and it loses the company and the quarter, so a query like "Acme Q3 revenue" no longer has an obvious thing to match against. A setup step loses the product surface it configures. A function body loses the file and module that tell me why it exists. A paragraph about retries loses the service boundary that makes it relevant, which means it reads the same whether it belongs to the payments worker or the email queue.
+It rarely is.
+
+Take a sentence about revenue growth. Split it away from the filing and it loses the company and the quarter, so a query like "Acme Q3 revenue" no longer has an obvious thing to match against.
+
+A setup step loses the product surface it configures. A function body loses the file and module that tell me why it exists.
+
+A paragraph about retries loses the service boundary that makes it relevant, which means it reads the same whether it belongs to the payments worker or the email queue.
 
 Retrieval quality drops right there, at the seam where the chunk got cut out.
 
-Context decay is something I wrote about in [LLM Context Windows Explained](/blog/llm-context-windows-explained/), and the same idea shows up earlier in the pipeline. Small chunks improve recall because they are easier to match, and the same smallness strips away the frame that made the text identifiable in the first place.
+Context decay is something I wrote about in [LLM Context Windows Explained](/articles/llm-context-windows-explained/), and the same idea shows up earlier in the pipeline. Small chunks improve recall because they are easier to match, and the same smallness strips away the frame that made the text identifiable in the first place.
 
 That tradeoff sits in the middle of production RAG, and most teams pick a chunk size by feel and then live with whatever it costs them.
 
@@ -48,25 +60,39 @@ Claude sees:
 - the full document
 - one chunk from that document
 
-Claude then writes a short explanation of what the chunk is about given the full document, something like "This is from Acme's Q3 2024 10-Q, in the section on segment revenue." Anthropic says that explanation usually runs **50 to 100 tokens**. The explanation gets prepended to the raw chunk, and the enriched text goes into both the embedding model and the BM25 index.
+Claude then writes a short explanation of what the chunk is about given the full document, something like "This is from Acme's Q3 2024 10-Q, in the section on segment revenue." Anthropic says that explanation usually runs **50 to 100 tokens**.
+
+The explanation gets prepended to the raw chunk, and the enriched text goes into both the embedding model and the BM25 index.
 
 Anthropic calls the two retrieval pieces **Contextual Embeddings** and **Contextual BM25**.
 
 That is the whole trick.
 
-Techniques like this are the ones I trust, because I can reason about them end to end. The indexed chunk becomes more legible. Semantic search gets more context. Lexical search gets more terms. A reranker, when I add one, starts from a stronger candidate pool. It works the way labeling a moving box does. The contents stay the same. Writing "kitchen, top shelf, fragile" on the side tells you what is inside without opening it.
+Techniques like this are the ones I trust, because I can reason about them end to end. The indexed chunk becomes more legible.
+
+Semantic search gets more context. Lexical search gets more terms.
+
+A reranker, when I add one, starts from a stronger candidate pool. It works the way labeling a moving box does.
+
+The contents stay the same. Writing "kitchen, top shelf, fragile" on the side tells you what is inside without opening it.
 
 ## Contextual Retrieval fixes a real retrieval failure
 
 Embedding search and BM25 fail in different ways.
 
-Embeddings handle paraphrase well, and they struggle when a chunk needs document-level framing before the semantic representation becomes useful. BM25 handles exact terms well, and it struggles when the query and the text use different words for the same thing. Search "how do I rotate API keys" against a chunk that only says "call `refresh()` on the credential object" and BM25 has nothing to grab.
+Embeddings handle paraphrase well, and they struggle when a chunk needs document-level framing before the semantic representation becomes useful. BM25 handles exact terms well, and it struggles when the query and the text use different words for the same thing.
 
-Contextual Retrieval helps both. The prepended explanation gives embeddings more signal and gives BM25 more exact vocabulary. A chunk about quarterly growth can now carry words like the company name, the quarter, the filing type, or the section purpose even when the original text never spelled any of them out.
+Search "how do I rotate API keys" against a chunk that only says "call `refresh()` on the credential object" and BM25 has nothing to grab.
+
+Contextual Retrieval helps both. The prepended explanation gives embeddings more signal and gives BM25 more exact vocabulary.
+
+A chunk about quarterly growth can now carry words like the company name, the quarter, the filing type, or the section purpose even when the original text never spelled any of them out.
 
 That is why I do not read this as a replacement for hybrid search. I read it as a way to give hybrid search better input.
 
-My [reranking piece](/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/) makes the case that vector similarity is a decent filter and a weak ranker. Contextual Retrieval fixes something earlier. It makes the filter more likely to surface the right chunk at all.
+My [reranking piece](/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/) makes the case that vector similarity is a decent filter and a weak ranker. Contextual Retrieval fixes something earlier.
+
+It makes the filter more likely to surface the right chunk at all.
 
 ## The benchmark is three benchmark claims
 
@@ -84,7 +110,11 @@ I read those as three separate claims:
 - **49%** lower failure once contextual BM25 joins the stack
 - **67%** lower failure once reranking joins too
 
-I trust that breakdown more than a single aggregate number because it shows where the improvement comes from. Contextualization helps. Hybrid retrieval still helps on top of it. Reranking still helps on top of that. Anthropic did not publish a benchmark saying one clever chunking trick made the rest of the stack irrelevant, and that restraint is part of why I believe the rest of the numbers.
+I trust that breakdown more than a single aggregate number because it shows where the improvement comes from. Contextualization helps.
+
+Hybrid retrieval still helps on top of it. Reranking still helps on top of that.
+
+Anthropic did not publish a benchmark saying one clever chunking trick made the rest of the stack irrelevant, and that restraint is part of why I believe the rest of the numbers.
 
 Anthropic also shares details that matter:
 
@@ -96,7 +126,9 @@ Anthropic also shares details that matter:
 
 The full breakdown lives in [Appendix II](https://assets.anthropic.com/m/1632cded0a125333/original/Contextual-Retrieval-Appendix-2.pdf).
 
-Strong evidence is how I read the result, and I would still run my own evals before betting an ingestion budget on it. Retrieval depends heavily on the corpus. Code, support tickets, legal docs, and a messy internal wiki all fail differently, and a 49% number measured on one will not carry over cleanly to another.
+Strong evidence is how I read the result, and I would still run my own evals before betting an ingestion budget on it. Retrieval depends heavily on the corpus.
+
+Code, support tickets, legal docs, and a messy internal wiki all fail differently, and a 49% number measured on one will not carry over cleanly to another.
 
 <div class="visual-wrapper">
   <div class="visual-title">CHUNK ENRICHMENT AND RETRIEVAL FAILURE REDUCTION</div>
@@ -111,7 +143,9 @@ The reason I keep dwelling on this technique is that it moves work upstream.
 
 Almost every RAG conversation I sit in revolves around the live request path, which makes sense because query-time mistakes are the ones you can see in a trace. People talk about embeddings, rerankers, top-K, prompt assembly, and model choice because those components touch the final answer directly.
 
-The index is what I care about, because bad candidate generation poisons everything downstream of it. A reranker cannot rescue a chunk that never made it into the candidate pool. The model cannot cite a paragraph it never saw. A flawless answerer sitting on top of a weak index still hands back weak answers, the same way a brilliant lawyer loses when the right document never made it into the case file.
+The index is what I care about, because bad candidate generation poisons everything downstream of it. A reranker cannot rescue a chunk that never made it into the candidate pool.
+
+The model cannot cite a paragraph it never saw. A flawless answerer sitting on top of a weak index still hands back weak answers, the same way a brilliant lawyer loses when the right document never made it into the case file.
 
 Contextual Retrieval changes that part of the system. The chunk stops being a bare slice of source text and becomes an enriched retrieval artifact.
 
@@ -135,15 +169,23 @@ The preprocessing job repeats the same pattern over and over:
 
 Anthropic points directly to [prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) as the practical answer, which tracks with how I already think about token costs. Static prefixes should be reused, and Anthropic applies that rule during ingestion rather than generation.
 
-The same cost logic shows up in my piece on [Prompt Caching](/blog/prompt-caching-what-it-is-and-when-the-math-works/). Anthropic's docs say prompt caching can cut latency by **more than 2x** and reduce costs by **up to 90%** in the right setup. Those numbers matter here because the contextualization expense lands up front, at ingestion. Query-time retrieval barely moves unless I add reranking.
+The same cost logic shows up in my piece on [Prompt Caching](/articles/prompt-caching-what-it-is-and-when-the-math-works/). Anthropic's docs say prompt caching can cut latency by **more than 2x** and reduce costs by **up to 90%** in the right setup.
 
-Discipline still applies to the ingestion cost. Every chunk gets longer. Embedding cost rises. BM25 index size rises. Storage rises. I would only pay that bill where a retrieval miss actually hurts, like a support bot citing the wrong refund policy or a code assistant pulling a deprecated function from the wrong service.
+Those numbers matter here because the contextualization expense lands up front, at ingestion. Query-time retrieval barely moves unless I add reranking.
+
+Discipline still applies to the ingestion cost. Every chunk gets longer.
+
+Embedding cost rises. BM25 index size rises.
+
+Storage rises. I would only pay that bill where a retrieval miss actually hurts, like a support bot citing the wrong refund policy or a code assistant pulling a deprecated function from the wrong service.
 
 ## Code looks like the cleanest use case
 
 Anthropic includes codebases in the evaluation set, and code is where I think this idea looks strongest.
 
-Code chunks lose identity faster than almost anything else. A helper named `format()` tells me very little on its own. A short logging block can look semantically identical to a dozen others across several services. A line that sets `max_retries = 3` might belong to the exact payment module I am hunting for, or to a background job that happens to use the same pattern, and the chunk alone gives me no way to tell.
+Code chunks lose identity faster than almost anything else. A helper named `format()` tells me very little on its own.
+
+A short logging block can look semantically identical to a dozen others across several services. A line that sets `max_retries = 3` might belong to the exact payment module I am hunting for, or to a background job that happens to use the same pattern, and the chunk alone gives me no way to tell.
 
 Contextualization puts some of that identity back:
 
@@ -172,13 +214,19 @@ I would also skip Contextual Retrieval when:
 - metadata already carries most of the missing frame
 - ingestion cost matters more than small recall gains
 
-Before I reach for a contextualizer, metadata is the first thing I check. A solid chunk schema with titles, section names, repo paths, service names, and version tags may already recover enough context on its own. Contextual Retrieval earns its keep when the raw chunk still reads as anonymous even after I have attached every field I have, which is exactly when a free-text blurb can say what no structured field captured.
+Before I reach for a contextualizer, metadata is the first thing I check. A solid chunk schema with titles, section names, repo paths, service names, and version tags may already recover enough context on its own.
+
+Contextual Retrieval earns its keep when the raw chunk still reads as anonymous even after I have attached every field I have, which is exactly when a free-text blurb can say what no structured field captured.
 
 ## Reranking still matters
 
 Reranking solves a different problem. Contextual Retrieval changes what I store, and reranking changes how I sort what I retrieved.
 
-Both failure modes are ones I have watched happen. The first system retrieves the right answer somewhere in the top 100 and buries it under cleaner-looking weaker chunks, so the model never sees it inside a top-20 cut. A reranker rescues that one. The second system never surfaces the right chunk at all, because it lost too much identity when I split it out of the source document, and no amount of reordering fixes a candidate pool that does not contain the answer. Contextual Retrieval rescues that one.
+Both failure modes are ones I have watched happen. The first system retrieves the right answer somewhere in the top 100 and buries it under cleaner-looking weaker chunks, so the model never sees it inside a top-20 cut.
+
+A reranker rescues that one. The second system never surfaces the right chunk at all, because it lost too much identity when I split it out of the source document, and no amount of reordering fixes a candidate pool that does not contain the answer.
+
+Contextual Retrieval rescues that one.
 
 Anthropic's results show the combination works well, which matches what I would expect. Better chunk representation and better ranking go after different parts of retrieval, so stacking them compounds instead of overlapping.
 
@@ -210,4 +258,6 @@ I would also test generation three ways:
 
 The best retrieval artifact is not always the best generation artifact. A chunk can retrieve beautifully and still carry a synthetic preface I would rather the answer model treat as a finding aid than as a quotable source, since the blurb is Claude's paraphrase and not the original text.
 
-So much RAG work feels like tuning around a weak core, sanding rerankers and prompts to compensate for an index that lost the plot at chunking time. Contextual Retrieval improves the core itself. That is why I expect it to stick.
+So much RAG work feels like tuning around a weak core, sanding rerankers and prompts to compensate for an index that lost the plot at chunking time. Contextual Retrieval improves the core itself.
+
+That is why I expect it to stick.

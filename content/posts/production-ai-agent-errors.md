@@ -1,14 +1,25 @@
 ---
-title: "What Nobody Tells You About Error Handling in Production AI Agents"
 date: 2026-04-16
-description: "Hard-won lessons from running AI agents in production: the error patterns that actually break systems, and the patterns that fix them."
-tags: [ai, devtools, backend, sre]
-status: retired
+description: 'Hard-won lessons from running AI agents in production: the error patterns
+  that actually break systems, and the patterns that fix them.'
+status: published
+tags:
+- ai
+- devtools
+- backend
+- sre
+title: What Nobody Tells You About Error Handling in Production AI Agents
 ---
 
-Two years of running AI agents in production taught me that error handling separates a system that survives reality from one that falls over the moment something goes wrong. Reasoning and tool use get all the attention. Error handling, the part that keeps your on-call phone quiet at 2 AM, gets almost none.
+Two years of running AI agents in production taught me that error handling separates a system that survives reality from one that falls over the moment something goes wrong. Reasoning and tool use get all the attention.
 
-The failures are predictable, and they line up with [the broader pattern of why agents keep failing in production](/blog/why-ai-agents-keep-failing-in-production/). An agent loops forever because a tool returned JSON wrapped in a markdown code fence and the parser choked. Another silently drops a step because a downstream API throttled for 200 milliseconds and the agent treated the empty response as "done." A third corrupts state because it retried a charge endpoint without checking whether the first attempt had already gone through. I have hit all three myself, usually at the worst possible time.
+Error handling, the part that keeps your on-call phone quiet at 2 AM, gets almost none.
+
+The failures are predictable, and they line up with [the broader pattern of why agents keep failing in production](/articles/why-ai-agents-keep-failing-in-production/). An agent loops forever because a tool returned JSON wrapped in a markdown code fence and the parser choked.
+
+Another silently drops a step because a downstream API throttled for 200 milliseconds and the agent treated the empty response as "done." A third corrupts state because it retried a charge endpoint without checking whether the first attempt had already gone through.
+
+I have hit all three myself, usually at the worst possible time.
 
 What follows are the error patterns that actually break agents in production, and the concrete patterns that fix them. My focus is LLM-based agents that call tools to interact with external systems, which covers the majority of production agents I have run into.
 
@@ -16,7 +27,11 @@ What follows are the error patterns that actually break agents in production, an
 
 Nearly every agent implementation I have seen looks like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs the error and tells the LLM something went wrong.
 
-Tool failure leaves the agent in an undefined state, and that is where things fall apart. The LLM picked that tool based on everything it knew at the time. Hand it back a raw error string and it improvises a recovery. Sometimes it recovers cleanly. More often it retries the same tool with the arguments nudged slightly, say swapping `user_id` for `userId` because the error mentioned a missing field. Occasionally it moves on to a different tool that assumes the first one succeeded, like calling `send_invoice` after `create_charge` actually failed, and now you have a cascading failure that takes an hour to trace back.
+Tool failure leaves the agent in an undefined state, and that is where things fall apart. The LLM picked that tool based on everything it knew at the time.
+
+Hand it back a raw error string and it improvises a recovery. Sometimes it recovers cleanly.
+
+More often it retries the same tool with the arguments nudged slightly, say swapping `user_id` for `userId` because the error mentioned a missing field. Occasionally it moves on to a different tool that assumes the first one succeeded, like calling `send_invoice` after `create_charge` actually failed, and now you have a cascading failure that takes an hour to trace back.
 
 Classifying errors before you decide how to respond is what breaks the cycle. A short classification function, the kind you can write over a coffee, has saved me more debugging time than anything else in my agent infrastructure.
 
@@ -26,9 +41,13 @@ Three categories cover most cases.
 
 **Transient**: timeouts, rate limits, overloaded servers. These are candidates for retry with backoff.
 
-**Permanent**: missing parameters, invalid API keys, nonexistent resources. Retrying these wastes time and causes cascading failures. Fail fast.
+**Permanent**: missing parameters, invalid API keys, nonexistent resources. Retrying these wastes time and causes cascading failures.
 
-**Ambiguous**: the request timed out, and you have no idea whether the server processed it. Picture submitting a payment, getting no response, and not knowing if the customer was charged. That uncertainty is what makes this category demand idempotency-aware retry logic.
+Fail fast.
+
+**Ambiguous**: the request timed out, and you have no idea whether the server processed it. Picture submitting a payment, getting no response, and not knowing if the customer was charged.
+
+That uncertainty is what makes this category demand idempotency-aware retry logic.
 
 ```python
 from enum import Enum
@@ -73,7 +92,9 @@ def create_user(email: str) -> dict:
     return api.post("/users", {"email": email})
 ```
 
-When a tool cannot be made naturally idempotent, a deduplication layer keyed on the operation ID does the job. The dedup cache works like a coat check ticket: the first call hands back a stub, and every later call with the same ticket gets the original result instead of running the operation again. I have watched this exact pattern stop a retrying agent from double-charging a customer, which is reason enough to treat it as mandatory rather than nice-to-have.
+When a tool cannot be made naturally idempotent, a deduplication layer keyed on the operation ID does the job. The dedup cache works like a coat check ticket: the first call hands back a stub, and every later call with the same ticket gets the original result instead of running the operation again.
+
+I have watched this exact pattern stop a retrying agent from double-charging a customer, which is reason enough to treat it as mandatory rather than nice-to-have.
 
 ```python
 def execute_with_deduplication(tool_fn, operation_id: str, **kwargs):
@@ -86,7 +107,9 @@ def execute_with_deduplication(tool_fn, operation_id: str, **kwargs):
 
 ## Explicit state transitions
 
-When a tool fails, the agent needs an explicit recovery path rather than a raw error string to puzzle over. Your code, not the model, decides the recovery strategy. The LLM then receives a clean state transition, something like "retrying, attempt 2 of 3," and acts on that instead of guessing.
+When a tool fails, the agent needs an explicit recovery path rather than a raw error string to puzzle over. Your code, not the model, decides the recovery strategy.
+
+The LLM then receives a clean state transition, something like "retrying, attempt 2 of 3," and acts on that instead of guessing.
 
 ```python
 class AgentState(Enum):
@@ -113,7 +136,9 @@ def handle_tool_error(state: AgentState, error: Exception, context: dict) -> Age
 
 ## Checkpointing for long-horizon tasks
 
-Agents running dozens of steps need state persistence, which is one of the core responsibilities of a well-designed [agent harness, the infrastructure layer your agent actually needs](/blog/agent-harnesses/). Lose that, and a failure at step 40 of a data migration restarts from step 1, redoing 39 steps that already committed. Few things are more demoralizing to debug at 1 AM than watching an agent cheerfully redo work it already finished.
+Agents running dozens of steps need state persistence, which is one of the core responsibilities of a well-designed [agent harness, the infrastructure layer your agent actually needs](/articles/agent-harnesses/). Lose that, and a failure at step 40 of a data migration restarts from step 1, redoing 39 steps that already committed.
+
+Few things are more demoralizing to debug at 1 AM than watching an agent cheerfully redo work it already finished.
 
 ```python
 import json

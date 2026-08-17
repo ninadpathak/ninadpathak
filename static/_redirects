@@ -12,3 +12,17 @@
 /technical-content/ /articles/ 301
 /articles/documentation-style-guide-template-for-developer-teams /articles/documentation-style-guide-template/ 301
 /articles/documentation-style-guide-template-for-developer-teams/ /articles/documentation-style-guide-template/ 301
+# AI-cluster focus areas: collapsed into the /articles/ index during the
+# July 30 refocus. Redirected until each cluster gets its own owner page.
+/ai-agent-memory /articles/ 301
+/ai-agent-memory/ /articles/ 301
+/ai-agent-architecture /articles/ 301
+/ai-agent-architecture/ /articles/ 301
+/ai-workflows /articles/ 301
+/ai-workflows/ /articles/ 301
+/llm-inference /articles/ 301
+/llm-inference/ /articles/ 301
+/rag /articles/ 301
+/rag/ /articles/ 301
+/glossary /articles/ 301
+/glossary/ /articles/ 301
