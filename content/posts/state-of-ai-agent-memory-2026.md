@@ -64,13 +64,19 @@ The LLM itself decides what to recall, which sounds elegant until you realize it
 
 Cross-encoder and late-interaction reranking can improve multi-constraint retrieval at additional compute cost. Measure recall and latency on a labeled memory corpus before adding either one.
 
-### Open-source systems expose three consequential design choices
+### Research systems differ in control, representation, and deployment
 
-The first choice is who controls movement between active context and stored memory. Model-managed systems let the agent decide what to recall or archive, while application-managed systems make those transitions explicit in code and easier to audit.
+Research on AI memory systems in 2026 is easier to compare through design decisions than project names. Those decisions remain useful when a framework changes its API or a hosted product changes ownership.
 
-The second is the shape of the store. A flat fact store is simple to inspect, a tiered store distinguishes always-present state from recall and archive, and a graph can preserve relationships and changes that vector similarity alone cannot express.
+The control plane decides who moves information between active context and stored memory. Model-managed systems let the agent choose what to recall or archive, while application-managed systems express those transitions in code.
 
-The third is the deployment boundary. Self-hosting keeps memory data and migration decisions under the team's control, but it also makes indexing, access control, backups, and evaluation the team's operational responsibility.
+A hybrid can let the model propose a change and require the host to validate it.
+
+The representation determines which questions the store can answer directly. A flat fact store favors simple inspection, tiers separate always-present state from recall and archive, temporal graphs preserve changing relationships, and mounted hierarchies narrow retrieval by location before ranking.
+
+The deployment boundary assigns operational responsibility. Self-hosting keeps memory data and migration decisions under the team's control, while also making indexing, access control, backups, and evaluation the team's work.
+
+These choices should be compared with the same memory operations and task-level evaluation. A system that retrieves a fact accurately may still fail if it cannot supersede that fact, explain its source, or keep one subject's memory outside another subject's context.
 
 ## Current systems make those choices concrete
 
