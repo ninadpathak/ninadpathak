@@ -61,7 +61,9 @@ assumed. Artifact required, and it must pass the information test.
 API internals, team ownership models, a production documentation chatbot, vendor tooling he does
 not run. First person banned, researched explainer, no artifact.
 
-Result: **25 A, 24 B, 22 C** across the 71 Planned rows.
+Result of this first pass: **25 A, 24 B, 22 C** across the 71 Planned rows. The reweight in the
+second half of this document revised it to **33 A, 22 B, 16 C**, and superseded several of the
+row-level calls named below. Where the two disagree, the reweight section is current.
 
 The deliberate calls worth naming:
 
@@ -86,24 +88,27 @@ The deliberate calls worth naming:
 groupings moved to a new `Subcluster` column so nothing was lost and the within-documentation
 structure survives for planning.
 
-| Cluster | Rows |
-|---|---:|
-| Documentation | 60 |
-| DevRel & DX | 15 |
-| AI Engineering | 9 |
-| AI Search | 6 |
-| Reddit Marketing | 0 |
-| Community Building | 0 |
-| Events | 0 |
+Intermediate state, before the reweight below replaced it. Kept because the zero rows are the
+finding that justified the reweight:
+
+| Cluster | Rows, first pass | Rows, after reweight |
+|---|---:|---:|
+| Documentation | 60 | 18 |
+| DevRel & DX | 15 | 3 |
+| AI Engineering | 9 | 12 |
+| AI Search | 6 | 6 |
+| Reddit Marketing | 0 | 11 |
+| Community Building | 0 | 10 |
+| Events | 0 | 11 |
 
 Rows 63 and 68 to 75 moved out of "AI-ready documentation" into **AI Engineering**, because
 chunking, hybrid search, reranking, and chatbot architecture are retrieval engineering rather
 than AI-search optimisation. The six llms.txt and AI-crawler rows stayed in **AI Search**.
 
-**Finding: three of the seven clusters have zero rows.** The queue cannot grow Reddit marketing,
+**Finding that drove the reweight: three of the seven clusters had zero rows.** The queue could not grow Reddit marketing,
 community building, or events because it contains nothing about them. The queue is fixed at 90
-rows and no candidate enters the release calendar without an explicit promotion instruction, so
-this is reported rather than acted on. It is the strongest argument for the next queue revision.
+rows, so rather than adding rows, 32 existing Planned rows were repurposed into those clusters. See
+the reweight section below.
 
 Link scope is now `Cluster`, not `Subcluster`. A cross-cluster link is permitted only when the
 connection is the subject of the sentence.
