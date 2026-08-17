@@ -1,0 +1,208 @@
+# ninadpathak.com 90-day organic search campaign
+
+**Campaign window:** 17 August to 15 November 2026
+**Target:** 10,000 organic visits per month by day 90
+**Baseline, 2026-08-17:** 16 clicks/month (July), of which ~12 are the brand query `ninad pathak`. Non-brand human clicks are approximately zero.
+**Measurement source of truth:** Google Search Console, `sc-domain:ninadpathak.com`, read with the workspace service account. First-party, free, no Ahrefs units.
+**Governing charter:** `~/.claude/orchestration/ninadpathak-seo/CHARTER.md`. Where this document and the charter disagree, the charter wins and this document gets corrected.
+
+This file is the campaign's durable memory. It lives in the repo, not only in an orchestration folder, so every agent and every future session reads the same source of truth from the checkout. Measurement refreshes are **appended in place with their date**, never rewritten, so the document carries its own history.
+
+---
+
+## 1. Honest position, and what the numbers actually said
+
+The brief handed to this campaign said impressions had roughly 4×'d while clicks stayed flat, and read that as a title-and-snippet problem. It was checked before being acted on, and it was not that.
+
+| Month | Clicks | Impressions | CTR | Avg position |
+|---|---|---|---|---|
+| 2026-05 | 13 | 825 | 1.58% | 19.6 |
+| 2026-06 | 14 | 1,754 | 0.80% | 17.7 |
+| 2026-07 | 16 | 2,476 | 0.65% | 13.1 |
+| 2026-08 (1–15) | 8 | 971 | 0.82% | 16.0 |
+
+Three findings, all verified on 2026-08-17:
+
+**The impression growth was not human.** 2,263 of the 5,300 impressions between 1 June and 15 August landed on one URL, `/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/`, at average position 8.3 with zero clicks. The queries reaching it are forty-plus permutations of a single keyword salad: `anthropic contextual retrieval bm25 embeddings reranking official`, `…official contextual embeddings bm25 reranking`, `…bm25 embeddings reranking official 2024`. Position 8–10, zero clicks, every variant. That is machine query fan-out, not people. Optimising titles and snippets against it would have been weeks of wasted work.
+
+**Every non-brand impression the domain had ever earned was pointing at a 404.** Commit `b846597d`, 2026-07-30, "Refocus site for documentation authority," set `status: retired` or `status: review` on 68 posts and six topic hubs. `build.py` deliberately writes no redirect for a removed URL, on the reasonable general principle that a soft 404 is worse than a real one. Applied to a page at position 8.1 carrying 86% of the site's July impressions, it was wrong. Fixed 2026-08-17, see the execution log.
+
+**The documentation pivot had no search footprint.** All 21 live `/articles/` pages combined: 106 impressions, 1 click, average position 49 in August.
+
+**All real clicks are brand.** `ninad pathak`, 12 clicks at position 2.8.
+
+### Why the target is honest but very unlikely
+
+The first research pass priced the documentation niche at **68,870 searches/month across 350 keywords**. Ten thousand visits would mean capturing 14.5% of every search in the entire niche, from position 49, in ninety days, against Postman and Swagger. That is not a pessimistic reading; it is the ceiling of the measured universe.
+
+The niche was widened on 2026-08-17 (see section 3) precisely because of that arithmetic, so the denominator has changed. The revised band is recorded as a dated refresh in the execution log rather than asserted here. What does not change: the distance to 10,000 is reported every week, plainly, and the trajectory is described as reaching it or not reaching it. Activity is never presented as progress.
+
+---
+
+## 2. Tool-first directive
+
+Build genuinely useful public tools wherever the SERP shows a calculation, checking, validation, or planning job. Tools earn links and citations that articles do not, they win tool-intent SERPs without domain authority, and `static/css/linter.css` is already a complete "input → graded findings" kit, so a new tool costs zero CSS.
+
+A tool must work in the browser with no login and no lead capture, expose its method and assumptions, avoid invented precision, and never transmit what the user pastes into it. Deterministic tests are required.
+
+`/linter/` and `/llms-txt-generator/` already exist. The generator has earned **three impressions in its entire life** — not because it is bad, but because nothing links to it, it carries no schema, and its title and description were never written for search. That is the campaign's clearest example of an asset left on the floor, and it is being fixed first.
+
+The `llms.txt` family is the priority land grab: `llms.txt` 3,100, `what is llms.txt` 1,800, `llms.txt file` 500, `llms.txt standard` 450, `llms.txt what is it` 350, `websites using llms.txt` 350, plus tail. Roughly 7,000 searches/month on an emerging spec where the site already ships a tool.
+
+---
+
+## 3. The niche, and the cluster map
+
+Settled 2026-08-17. The July 30 narrowing to pure documentation was too narrow and the arithmetic proved it. Scope is now the whole of what Ninad actually does — one person's job: getting a technical product understood and adopted. Distribution is not off-topic for a technical writer; it is half the work.
+
+**All-encompassing in scope, strictly clustered in structure.** Breadth without clustering reads as an unfocused personal blog to Google and to a reader, and dilutes every topic.
+
+| # | Cluster | Owns | Owner page |
+|---|---|---|---|
+| 1 | Technical documentation and docs operations | The commercial cluster, tied to the consulting offer | `/articles/technical-documentation/` |
+| 2 | Developer experience and DevRel for DevTools and B2B SaaS | Content that makes a developer product adoptable | needs one |
+| 3 | AI agent architecture, agent memory, RAG, LLM inference | The revived cluster; the only search equity the domain has earned | needs one |
+| 4 | Optimising for AI Overviews and AI search citation | The tools cluster: `/linter/`, `/llms-txt-generator/`, the validator | needs one |
+| 5 | Marketing and reaching people on Reddit | Distribution, first-hand | needs one |
+| 6 | Finding and building an audience on forums and communities | Distribution, first-hand | needs one |
+| 7 | Creating and running events | Distribution, first-hand | needs one |
+
+Clusters 5, 6, and 7 are new scope and they matter for a reason beyond volume: they are things Ninad genuinely does, so they pass the falsifiability test in section 4 where invented documentation war stories do not.
+
+### Cluster isolation — a hard structural rule
+
+1. Every piece belongs to **exactly one** cluster, named in its queue row. A page in two clusters owns neither.
+2. Each cluster has one owner page covering the whole job, plus supporting pages owning one sub-job each, linking back to the owner and sideways to genuine siblings.
+3. **Clusters do not link across boundaries.** A documentation piece does not link to a Reddit piece or an events piece. The single exception is when the link is the actual subject of the sentence — a documentation piece may link to a blog-writing piece if it is specifically discussing blogs as supporting material for docs. Convenience, "related reading", and keyword proximity never qualify.
+4. When a cross-cluster link genuinely earns its place it goes in the body sentence that makes the connection explicit, never in a sidebar or footer list.
+5. Audit this map every cycle.
+
+**Known structural debt:** the July 30 refocus collapsed all twelve topic pillars into anchors on one page, `/articles/#<slug>`. An anchor cannot own a cluster — no unique URL, no unique title, no unique canonical, so twelve clusters share one ranking surface and none of them ranks. Five AI hub slugs and `/glossary/` were redirected on 2026-08-17 to stop them 404ing. Promoting each cluster owner back to a standalone page is queued work, and cluster isolation cannot actually be enforced until it lands.
+
+---
+
+## 4. The voice standard
+
+Ninad is a former engineer who became a technical writer. He has shipped documentation for developer products and built this site's tooling. Judgment earned from that work is fair game. Events and measurements he did not make are not.
+
+**The test every first-person claim must pass: could a reader who knows the subject point at this sentence and say "that is bullshit"?** If yes, it does not ship. Not softened, not hedged — removed.
+
+**Unfalsifiable-safe is not the goal.** "I have reviewed a lot of API docs" is safe and worthless. The goal is claims that are both specific and true.
+
+| | Example | Why |
+|---|---|---|
+| **PASSES** | "A reference page that documents an endpoint's parameters but not its failure modes is the most common gap I look for, because it is the one that generates support tickets." | A stated judgment about what he looks for and why. Specific, useful, and not a claim about an event that can be checked and found absent. |
+| **PASSES** | "Anthropic reported contextual retrieval cutting failed retrievals by 49%." | Attributed to its real source. The number is checkable and correctly owned. |
+| **FAILS** | "The latency cost runs 30ms to 50ms per turn on Gemini 3.1 Flash Lite for the summarization pass." | A specific measurement presented as his own. If he did not run it, one reader with a stopwatch destroys trust in every other number on the site. |
+| **FAILS** | "My current implementation uses a document store keyed by user ID, and SQLite on local NVMe handles 50,000 fact records." | A named implementation and a throughput figure for a system no reader can inspect. Bare numbers with no artifact are the worst case. |
+| **FAILS** | "I built a small tool selector." | Technically true and carries no information. The script exists so a first-person sentence has something legal to point at. |
+
+**Silence beats invention.** A researched explainer that makes no personal claim at all is a fully legitimate article and an explicit third path. Say so plainly in the piece rather than manufacturing a story to satisfy a template.
+
+An article's evidence artifact must clear one question: **does it test anything the article did not already assume?** A checker that verifies a fixture the same run authored carries zero information. That question rejected all five articles reviewed on 2026-08-17.
+
+---
+
+## 5. Target classes
+
+Never publish a thin page to hit a calendar slot. Every target query carries a class:
+
+- **A** — top 10 by day 90. Low difficulty, clear intent, an owner page that covers the whole job.
+- **B** — top 20 by day 90.
+- **C** — top 50 plus sustained non-brand impressions by day 90.
+- **G** — must clear an evidence gate before publishing at all. A page with no first-hand ground, no artifact, and nothing to add stays unpublished.
+
+Class assignments live with the keyword universe, not here, so they can be revised without editing this document.
+
+---
+
+## 6. Research credit policy
+
+Before any paid lookup, **search the saved research first**: `planning/research-cache/`, `planning/semrush-opportunity-backlog.csv`, `planning/addressable-universe.md`, `planning/90-day-seo-ai-strategy.md`.
+
+A new paid request requires a **named keyword and the decision it will change**. Do not poll on a content or tool cycle. Do not refresh a frozen historical baseline.
+
+Every call is appended to `planning/research-cache/CALL-LOG.md` with UTC timestamp, tool, query summary, row count, units, and cache filename — **including any empty response**, so the same keyword is never bought twice. Raw JSON is saved beside it.
+
+Ahrefs `keywords-explorer-matching-terms` in terms mode with four or five seeds per call is the efficient shape. Brand Radar is unavailable on this subscription (`Missing addon`), so the AI-search half of the strategy is built on the `serp_features` AI Overview flag plus free SERP and page reads. The strategy says so rather than implying it has citation data.
+
+---
+
+## 7. Internal linking
+
+1. **Links come from the freshly built sitemap, never from memory.** Run `python build.py`, then read `output/llms.txt` and `output/sitemap.xml`. `llms.txt` is the better instrument: every live article grouped by topic with its canonical URL and a one-line description, which is what lets a writer pick a link that genuinely belongs in the sentence.
+2. Every piece has at least one **inbound** link from an existing page and at least two outbound.
+3. **Retrofit as you go.** When a piece publishes, update the existing pages that should now point at it. A link added in one direction only is half a link. This is a per-cycle job, not a cleanup.
+4. Links go inside sentences where they help a reader go deeper. Never a "Related posts" dump. Never "click here", "this article", or a bare keyword as anchor text.
+5. Respect cluster isolation, section 3.
+
+---
+
+## 8. Publish gate
+
+Every piece clears all of these, and each is **verified rather than trusted** — a gate that fails silently is worse than no gate:
+
+1. `python build.py` passes.
+2. `rule_checker.py` adds no new errors.
+3. Every internal link resolves to a URL present in the built `output/sitemap.xml`.
+4. `git diff --stat main -- static/css/` is **empty**. No new CSS, ever.
+5. The topic appears nowhere in `output/llms.txt` or the queue's Published rows.
+6. Reviewed by the **opposite model** from the one that wrote it. Hermes writes with `gpt-5.6-terra`; the slop review is Codex `gpt-5.6-sol`; strategy and code are Claude. A model never grades its own family's output.
+7. The piece has its inbound retrofit, not just outbound links.
+8. Its cluster is named and it belongs to exactly one.
+
+---
+
+## 9. Explicit limits
+
+Stated plainly, because a campaign that hides its uncertainty cannot be corrected:
+
+- **No honest campaign can guarantee 10,000 visits/month by 2026-11-15.** The measured universe, the domain's near-zero authority, and an average position of 49 on the current content all argue against it. The target is not abandoned and distance to it is reported weekly, but it is not promised.
+- **Publication is not a ranking.** Nothing in the execution log counts as a result until Search Console shows impressions and positions for it.
+- **AI-search citation cannot be measured on this subscription.** Brand Radar is not entitled. Claims about AI Overview presence rest on the `serp_features` flag and manual SERP reads, and are labelled as such.
+- **A revived page is not yet a repaired page.** The AI cluster was restored from 404 on 2026-08-17 because a page at position 8 can be repaired in place while a 404 earns nothing and decays. It carries 349 `rule_checker` errors and several first-person claims that fail section 4. Repair is in flight, in Search Console value order, and the debt is stated rather than quietly carried.
+- Ranking movement depends on recrawl and indexation, neither of which is controllable. Timelines assume Google behaves as it did during the campaign's baseline period.
+
+---
+
+## 10. Execution log
+
+Dated entries, appended in place. Each says what changed, what it is expected to do, and how it will be judged.
+
+### 2026-08-17 — 404 recovery, and the diagnosis that redirected the campaign
+
+Commit `4862c2d5` on `main`.
+
+- Verified the handed-down framing before acting on it. "Impressions 4×'d with flat clicks, so fix titles and snippets" was wrong: the impression growth is machine query fan-out against a dead URL, forty-plus permutations of one keyword salad at position 8–10 with zero clicks across every variant. Chasing CTR there would have cost weeks.
+- Found that 68 pages and six topic hubs were returning hard 404s, and that those dead URLs carried 86% of July's impressions.
+- Restored 67 posts and six hubs to `status: published`. Only `uv-package-manager-benchmark` stays retired, because no cluster owns Python packaging. `/blog/<slug>/` now 301s to `/articles/<slug>/` for all of them. Verified live: the position-8.1 URL returns 301 → 200.
+- Redirected the five AI hub slugs and `/glossary/` instead of 404ing them.
+- Built `tools/reflow_paragraphs.py`. `build.py` hard-fails any post whose paragraphs exceed two sentences, a rule added after these articles were written, and all 67 failed it with 700+ violations. That mechanical failure, not an editorial judgment, is why the set sat retired. The tool wraps the formatter already in `rule_checker.py`; it regroups existing sentences and rewrites no prose.
+- Built `tools/fix_internal_links.py`. Repointed 294 legacy `/blog/` body links across 68 files, taking the build's broken-internal-link count from 292 to 0 and clearing the 31-hard-404 debt from the August audit.
+- Corrected `text-embedding-3d-small` to `text-embedding-3-small`, the wrong OpenAI identifier flagged as highest priority in the August audit, on a page that was about to go live at position 28.
+- Sitemap 39 → 109 URLs. Build green, SEO audit passes, no CSS touched.
+
+Expected first-order impact: recovery of already-earned positions rather than new demand. The flagship's impressions are machine traffic and will not convert to human clicks, so the honest expectation is hundreds of visits, not thousands — the human value is in the pages at positions 20–28 on real queries (`embedding models compared`, `hybrid search bm25 vector search`, `kv cache eviction`) and in restoring the domain's topical association. Judge it on non-brand clicks in Search Console from week commencing 2026-08-24, not on the sitemap count.
+
+### 2026-08-17 — slop review: 0 of 5 Hermes articles pass
+
+`planning/slop-review-2026-08-17.md`, produced by Codex `gpt-5.6-sol` because Claude commissioned the work and a model must never grade its own family's output.
+
+Every one of the last five published articles was rejected. Six named generator defects, each traced to a specific instruction:
+
+- **G1 unconditional artifact** — "build, run, or audit a real evidence artifact" every run produces a toy checker even when the subject needs research or judgment.
+- **G2 mandatory first person** — turns pipeline activity into claims in Ninad's voice.
+- **G3 mandatory evidence ceremony** — forces exact commands, exact PASS strings, and pixel-specified screenshots into prose.
+- **G4 fixed cold-run structure, no rolling structure log** — all five converge on an identical skeleton: generic failure mode, "I built", framework table, authored fixture, PASS, terminal screenshot at the same `2560/1664` dimensions, two-link conclusion.
+- **G5 objection slot** — "The strongest objection is that…" appears in four of five, in the same position. A prompt slot showing through the prose.
+- **G6 link quota without retrofit** — the internal-link rule is being satisfied outbound-only. Nothing updates an existing page to give the new article its inbound link, so every piece ships half-linked. This defect was found by the reviewer, not briefed to it.
+
+The single question that killed all five artifacts: does the artifact test anything the article did not already assume? In every case the script checked fields the same run chose, against a fixture the same run authored.
+
+Fixes are being made in the generator — the publish prompt and all three copies of the `ninadpathak-content` and `devtools-blog-craft` skills — not in the five outputs. Judge it on whether the defects recur in pieces published after the edits land.
+
+### 2026-08-17 — no-new-CSS violation, held out of the deploy
+
+Commit `7e875cda` on `seo/90day-strategy` added 103 lines and nine classes to `static/css/main.css` for glossary and post-terms display, against standing order 4. The glossary is not shipping — all 16 terms are held back on TODO placeholder prose — so the CSS is currently dead weight on every page load.
+
+Decision: that commit was kept off `main` and only the recovery was cherry-picked, so production carries no unused CSS. The glossary revival must reduce those nine classes to existing utilities or justify each one before it ships. Recorded rather than silently carried.
