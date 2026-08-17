@@ -141,7 +141,6 @@ correction was wrong. The llms.txt sub-cluster is the healthiest part of cluster
 
 Finding written up in `planning/cluster-intent-check-2026-08-17.md`.
 
-## 2026-08-17 cluster 4 verification (Semrush; Ahrefs still returning "MCP token is invalid")
 
 | # | Tool | Query | Database | Rows | Finding |
 |---:|---|---|---|---:|---|
