@@ -50,6 +50,22 @@ MEASUREMENT = re.compile(
     r"|\b\d+\s+(?:of|out of)\s+\d+\b"
     r"|\bp\d{2}\b", re.IGNORECASE)
 
+# Three unsupported-result shapes escaped the general measurement rule because they did
+# not use first person or name hardware: a vendor price, a latency range, and a claimed
+# score change. Each is still a candidate that needs a source or an artifact. Keeping the
+# patterns narrow avoids turning every ordinary integer into a review item.
+BARE_PRICE = re.compile(
+    r"(?:[$€£]\s*\d+(?:[.,]\d+)?|\b\d+(?:[.,]\d+)?\s*(?:USD|dollars?))",
+    re.IGNORECASE)
+BARE_PERFORMANCE_RANGE = re.compile(
+    r"\b\d+(?:[.,]\d+)?\s*[-–]\s*\d+(?:[.,]\d+)?\s*"
+    r"(?:ms|s|sec|seconds?|us|µs|ns|MB|KB|GB|TB|tokens?/s|req/s|qps)\b",
+    re.IGNORECASE)
+BARE_RESULT_CHANGE = re.compile(
+    r"\b(?:from|between)\s+\d+(?:[.,]\d+)?%?\s+(?:to|and)\s+"
+    r"\d+(?:[.,]\d+)?%?\b",
+    re.IGNORECASE)
+
 # Experience claimed without the words "I did". The first-person-verb pattern misses these
 # entirely, and one of them opens the highest-human-demand page on the site: "Two years of
 # running AI agents in production taught me that..." scored zero candidates. A duration or a
@@ -135,6 +151,12 @@ def classify(line: str) -> list[str]:
         reasons.append("experience claim without a first-person verb")
     if UNBACKED_LINK.search(line):
         reasons.append("cites an article with no reproducible artifact")
+    if BARE_PRICE.search(line):
+        reasons.append("bare price or cost figure")
+    if BARE_PERFORMANCE_RANGE.search(line):
+        reasons.append("bare performance range")
+    if BARE_RESULT_CHANGE.search(line):
+        reasons.append("bare before-and-after result")
     return reasons
 
 

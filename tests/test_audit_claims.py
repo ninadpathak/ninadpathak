@@ -217,5 +217,33 @@ class ExperienceClaimTests(unittest.TestCase):
         self.assertFalse(self.flagged("My focus is LLM-based agents that call tools."))
 
 
+class UnsupportedNumericResultTests(unittest.TestCase):
+    """Bare commercial and performance results require review without first person."""
+
+    @classmethod
+    def setUpClass(cls):
+        from importlib.util import module_from_spec, spec_from_file_location
+        spec = spec_from_file_location("audit_claims_numbers", TOOL)
+        cls.mod = module_from_spec(spec)
+        spec.loader.exec_module(cls.mod)
+
+    def test_vendor_price_is_a_candidate(self):
+        reasons = self.mod.classify("The managed tier costs about $70/month.")
+        self.assertIn("bare price or cost figure", reasons)
+
+    def test_latency_range_is_a_candidate(self):
+        reasons = self.mod.classify("Vector search takes 40-120ms on this index.")
+        self.assertIn("bare performance range", reasons)
+
+    def test_unattributed_score_change_is_a_candidate(self):
+        reasons = self.mod.classify(
+            "These two tweaks move recall from 0.61 to 0.89 on standard benchmarks.")
+        self.assertIn("bare before-and-after result", reasons)
+
+    def test_ordinary_architecture_number_is_not_promoted(self):
+        self.assertEqual(
+            self.mod.classify("The request loop has five explicit stages."), [])
+
+
 if __name__ == "__main__":
     unittest.main()
