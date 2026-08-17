@@ -1,0 +1,73 @@
+{
+ "refreshed": "2026-08-17T16:05:01Z",
+ "domain": "ninadpathak.com",
+ "authoritative_referring_domains": {
+  "value": null,
+  "source": "Search Console > Links > Top linking sites",
+  "read_on": null,
+  "read_by": null,
+  "note": "Fill this in by hand. The Search Console API exposes no links resource, and the signed-in browser account lacks access to sc-domain:ninadpathak.com, so no automated path exists. Until this is filled in, the campaign has no referring-domain number at all and the report says so."
+ },
+ "cannot_measure": {
+  "gsc_links_api": "No links resource. Enumerating searchconsole v1 returns searchanalytics, sitemaps, sites, urlInspection, urlTestingTools and nothing else. Verified 2026-08-17.",
+  "gsc_links_ui": "Signed-in browser account ninad@manicule.dev returns 'you don't have access to this property'. Verified 2026-08-17.",
+  "ga4_referrals": "Analytics Admin API disabled on the credential's project (HTTP 403). Verified 2026-08-17.",
+  "ahrefs": "Token dead since 2026-08-17.",
+  "linkedin": "HTTP 999 to automated fetches."
+ },
+ "devto_syndication": {
+  "articles": 96,
+  "canonical_to_us": 14,
+  "canonical_elsewhere": 82,
+  "canonical_missing": 0,
+  "elsewhere_hosts": [
+   "pathak.ventures"
+  ],
+  "target_paths": [
+   "//",
+   "/ai/creative-writing-vs-ai-text-generation/",
+   "/articles/documentation-accessibility-checklist/",
+   "/articles/documentation-style-guide-template/",
+   "/articles/how-to-write-task-based-documentation-headings/",
+   "/articles/internal-vs-external-documentation/",
+   "/articles/seo-for-technical-documentation/",
+   "/articles/technical-documentation-best-practices-tested-real-developer-docs/",
+   "/articles/technical-documentation-template/",
+   "/articles/types-of-technical-documentation/",
+   "/articles/what-is-technical-documentation-and-what-should-it-include/",
+   "/guides/css-grid-layouts-webflow-table/",
+   "/marketing/wordpress-6-3-update/"
+  ],
+  "target_tool_paths": []
+ },
+ "sources": [
+  {
+   "id": "github-profile",
+   "url": "https://github.com/ninadpathak",
+   "note": "GitHub profile. Verified to carry the domain on 2026-08-17.",
+   "status": 200,
+   "href_links": 1,
+   "mentions": 4,
+   "links_to_us": true,
+   "tool_links": []
+  },
+  {
+   "id": "devto-profile",
+   "url": "https://dev.to/ninadpathak",
+   "note": "DEV Community profile page. Carried no link to the domain on 2026-08-17; the links live on the individual articles as canonicals, not on the profile.",
+   "status": 200,
+   "href_links": 0,
+   "mentions": 0,
+   "links_to_us": false,
+   "tool_links": []
+  }
+ ],
+ "unfetchable_sources": [
+  {
+   "id": "linkedin-profile",
+   "url": "https://www.linkedin.com/in/ninadwrites/",
+   "reason": "LinkedIn returns HTTP 999 to automated fetches. Verify by hand."
+  }
+ ],
+ "caveat": "A rel=canonical is counted separately from an href and the two are never added. A canonical consolidates a duplicate; an href passes an endorsement. They are different things."
+}

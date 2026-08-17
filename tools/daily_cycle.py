@@ -398,6 +398,23 @@ def functions_check() -> list[str]:
     return problems
 
 
+def link_inventory_check() -> tuple[list[str], str]:
+    """Report what links to this domain and to each tool.
+
+    The campaign now measures the five tools on referring domains rather than sessions, and
+    nothing reported that number until this existed. It is a metric, not a gate: a baseline
+    cannot regress, so nothing here fails the run except the baseline being absent entirely.
+    See tools/link_inventory.py for what cannot be measured and how that was established.
+    """
+    sys.path.insert(0, str(ROOT / "tools"))
+    try:
+        import link_inventory
+    except ImportError as exc:
+        return [f"link_inventory unavailable: {exc}"], f"unavailable: {exc}"
+    outcome = link_inventory.check()
+    return outcome["failures"], link_inventory.summary_line(outcome)
+
+
 def url_inventory_check() -> tuple[list[str], str]:
     """Fail when the build stops producing a URL Search Console still sends traffic to.
 
@@ -519,6 +536,8 @@ def main() -> int:
     functions = functions_check()
     deploy = deploy_check()
     _, url_summary = url_inventory_check()
+    link_failures, link_summary = link_inventory_check()
+    gate += link_failures
     lag = deploy_lag_seconds()
     # A mismatch is only an alarm once production has had the grace window to catch up.
     deploy_waiting = bool(deploy) and lag is not None and lag < DEPLOY_GRACE_SECONDS
@@ -574,6 +593,7 @@ def main() -> int:
            f"- Publish gate: {'PASS' if not gate else 'FAIL — ' + '; '.join(gate)}\n"
            f"- Deploy: {_deploy_line(deploy, deploy_waiting, lag)}\n"
            f"- URL inventory: {url_summary}\n"
+           f"- Referring domains: {link_summary}\n"
            f"- Tool Functions: {'all answering' if not functions else 'BROKEN — ' + '; '.join(functions)}\n"
            f"- Corpus health: {corpus_health()}\n")
 

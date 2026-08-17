@@ -203,3 +203,24 @@ Only Semrush code **52 = AI Overview** is authoritatively documented; codes 6, 7
 20, 21 and 36 were left undecoded rather than guessed.
 
 Output: `planning/research/TOOL-SERP-VERIFICATION-2026-08-17.md`.
+
+---
+
+## Volume arbitration and link baseline — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 0.** The Semrush figure under dispute was already bought on the earlier pass and
+was not re-bought.
+
+| Instrument | Result | Cost |
+|---|---|---|
+| Google Trends public endpoint | **HTTP 429.** The one free quantitative arbiter, closed. | free |
+| Google autocomplete | Ordinal evidence: `generator` is the top modifier in the llms.txt family. | free |
+| Search Console API | Zero `llms.txt` queries in the entire recorded history, so no first-party signal either way. | free |
+| Search Console **Links report** | **Unreachable.** No links resource exists in the API — verified by enumerating the whole v1 service. The UI has it, but the signed-in browser account lacks access to the property. | free |
+| GA4 Admin API | **HTTP 403, disabled on the credential's project.** | free |
+| dev.to public API | 96 articles; 14 canonicalised here, 82 to pathak.ventures, 0 to any tool page. | free |
+| LinkedIn | **HTTP 999** to automated fetches. | free |
+| Ahrefs | Still dead. Not retried, per instruction. | — |
+
+Outputs: `planning/research/LLMS-TXT-GENERATOR-VOLUME-2026-08-17.md`,
+`tools/link_inventory.py`, `planning/link-inventory.json`, `tests/test_link_inventory.py`.
