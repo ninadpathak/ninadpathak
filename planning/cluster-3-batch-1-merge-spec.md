@@ -46,6 +46,41 @@ worked on went from snappy to painful". An event claim with no measurement and n
 Weaker than the above, but it is a claim about something that happened. It is a KEEP page, so it
 belongs in a voice-repair pass rather than here.
 
+## AMENDMENT 2026-08-17: merges 2, 3 and 4 reverse direction
+
+**Found by the position analysis, before execution.** The spec below merges
+`memory-hierarchy-in-ai-systems` into `ai-memory-management-for-llms`. That is backwards.
+
+The spec merges `memory-hierarchy-in-ai-systems` into `ai-memory-management-for-llms`. It was
+chosen as the target on **word count**, which is not a ranking variable at all.
+
+**Correction to my own first statement of this, 2026-08-17.** I originally wrote that
+`ai-memory-management-for-llms` "does not appear anywhere in the Search Console report", and
+inferred it had no measurable position. That inference is unsound: the report's tables are *what
+moved* and *what decayed*, so a stable page is absent by design rather than by weakness. I could
+not find a per-page position for it in any current tool.
+
+What is actually measured:
+
+| | `memory-hierarchy-in-ai-systems` | `ai-memory-management-for-llms` |
+|---|---|---|
+| Position | **18.2, measured** | unknown, not measured |
+| Impressions | 15 | **48** |
+| Inbound links | **13** | 8 |
+
+Impressions favour the original target. Inbound links and the only known position favour the
+reversal. **The reversal still holds, on a narrower argument than I first gave:** merging an
+unmeasured page into one measured at 18.2 is the lower-risk direction, and merging a measured 18.2
+page into an unmeasured one is the risk. Inbound links agree at 13 against 8. Word count, the
+original basis, agrees with neither.
+
+**`memory-hierarchy-in-ai-systems` becomes the memory owner.** It absorbs
+`ai-memory-management-for-llms`, `the-memory-hierarchy-why-rag-is-not-enough`, and
+`memory-attribution-errors`. Redirect direction reverses accordingly, and the redirect block below
+must be regenerated before the batch runs.
+
+Read the merges below with that substitution applied.
+
 ## The merges
 
 All targets verified **terminal** (no target is itself a merge source) and present in the built
