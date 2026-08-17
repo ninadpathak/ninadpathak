@@ -49,21 +49,26 @@ hand-classified as `broken`, `deliberate-invalid-example`, `context-fragment`, o
 time, and validation facts next to the CSV. The fixed SQL is also stored in
 `sample-frame.sql`.
 
+`resolve_docs_urls.py` applies the documentation-label rule below to every
+project in that frame and preserves the relevant PyPI metadata plus the hash of
+each full API response.
+
 ## Documentation-site resolution
 
 For each frozen project, fetch and preserve `https://pypi.org/pypi/<name>/json`.
-Choose a documentation root mechanically from `info.project_urls` after label
-normalization:
+The first pilot chose a documentation root mechanically from
+`info.project_urls` after label normalization:
 
 1. exact label `documentation`;
 2. exact label `docs`;
 3. labels ending in `documentation` or `docs`.
 
-No homepage fallback and no search-engine lookup is allowed in the primary
-sample. Projects without a mechanically declared documentation URL are counted
-as `no-declared-docs`, not silently replaced or hand-resolved. A separately
-labelled sensitivity appendix may report manual resolutions, but it cannot
-change the primary estimate.
+That rule resolved only 57/100 and systematically excluded projects with real
+docs under `Homepage` or `Docs: RTD`; see `RESOLUTION-2026-08-17.md`. It is
+falsified as the final primary rule. No search-engine lookup or hand-picked
+replacement is allowed. The replacement must mechanically test qualified docs
+labels and supported-generator homepages, preserve resolution strata, and pass
+inspection before any code crawl.
 
 ## Page sampling
 
@@ -138,4 +143,3 @@ The live feasibility read on 2026-08-17 corrected two predecessor assumptions:
   generator in v1, not evidence that the page has no code.
 
 These corrections reduce false claims before the paid-in-time crawl begins.
-

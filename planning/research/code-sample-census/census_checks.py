@@ -144,5 +144,41 @@ class SampleFrameTests(unittest.TestCase):
         self.assertIn("project ASC", query)
 
 
+class DocumentationResolutionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        module_path = STUDY_DIR / "resolve_docs_urls.py"
+        spec = importlib.util.spec_from_file_location("resolve_docs_urls", module_path)
+        cls.module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        sys.modules[spec.name] = cls.module
+        spec.loader.exec_module(cls.module)
+
+    def test_selection_priority_is_deterministic(self):
+        urls = {
+            "API Docs": "https://example.test/api/",
+            "Docs": "https://example.test/docs/",
+            "Documentation": "https://example.test/documentation/",
+        }
+        selected = self.module.choose_docs_url(urls)
+        self.assertEqual(selected["label"], "Documentation")
+        self.assertEqual(selected["priority"], 0)
+        self.assertEqual(selected["candidate_count"], 3)
+
+    def test_normalizes_punctuation_and_case(self):
+        selected = self.module.choose_docs_url({"Project Documentation": "https://example.test/"})
+        self.assertEqual(selected["normalized_label"], "project documentation")
+        self.assertEqual(selected["priority"], 2)
+
+    def test_homepage_and_invalid_urls_are_not_fallbacks(self):
+        urls = {"Homepage": "https://example.test/", "Docs": "javascript:alert(1)"}
+        self.assertIsNone(self.module.choose_docs_url(urls))
+
+    def test_candidate_order_does_not_depend_on_mapping_order(self):
+        a = {"API Docs": "https://b.test/", "User Docs": "https://a.test/"}
+        b = dict(reversed(list(a.items())))
+        self.assertEqual(self.module.choose_docs_url(a), self.module.choose_docs_url(b))
+
+
 if __name__ == "__main__":
     unittest.main()

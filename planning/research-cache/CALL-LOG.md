@@ -355,3 +355,24 @@ response was last modified 2025-09-11. This adds `deployment-drift` to the
 failure taxonomy.
 
 Output: `planning/research/code-sample-census/`.
+
+---
+
+## Code-sample census execution batch 2 — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 0.** One hundred free PyPI JSON API reads; no retry, error, paid
+tool, model API, search API, Ahrefs, or Semrush call.
+
+The frozen top-100 frame resolved under the preregistered exact/suffix
+`Documentation` / `Docs` label rule at **57 declared docs / 43 unmatched / 0
+fetch errors**. The missing 43 include pytest and Uvicorn (docs under
+`Homepage`) plus six aio-libs projects using `Docs: RTD`. The missingness is
+therefore systematic metadata convention, not absence of documentation.
+
+Decision: full crawling did not start. The resolution rule is falsified because
+it would plausibly select better-maintained projects on the same maintenance
+quality the study wants to measure. Replacement is a mechanical qualified-label
+rule plus supported-generator homepage validation, reported in separate strata.
+
+Output: `planning/research/code-sample-census/RESOLUTION-2026-08-17.md` and
+`data/docs-resolution-2026-08-17.json`.
