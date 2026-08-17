@@ -1,6 +1,6 @@
 # Brief: How to Find the Right Subreddit for a Developer Product
 
-**Slot:** 2026-08-19 | Order 21 | **Type:** NEW | **Cluster:** Reddit marketing
+**Slot:** 2026-08-19 | Order 21 | **Type:** NEW | **Cluster:** Distribution | **Subcluster:** Reddit
 **Experience: A** — this is his own distribution work.
 
 ## Keyword, and an honest warning about it
@@ -39,16 +39,25 @@ performance, a ban, or a conversion number that has no receipt.
 
 ## Internal links
 
-**Cluster problem, read this.** Reddit marketing has zero published articles, so there is no
-same-cluster page to retrofit from. This is the first piece in a new cluster.
+**Cluster-opening problem, read this.** Distribution has zero published articles, so there is no
+same-cluster page to retrofit from. This is the first piece in the merged Distribution cluster.
 
-Take the inbound from `/articles/why-devtools-startups-lose-deals-over-bad-docs/`. That is a
-cross-cluster link and it is permitted only if the connection is the subject of its sentence: a
-sentence about developers evaluating a tool in public before sales ever hears from them has this
-piece as its actual subject. If that sentence cannot be written honestly, raise it rather than
-forcing the link.
+Take the inbound from `/articles/developer-trust-hierarchy/`. That page already explains how
+engineers judge information sources and promotional intent; subreddit selection is the subject
+only in a sentence about choosing the public communities where that trust test happens. This is a
+cross-cluster exception and must stay in that body sentence, not a related-reading list. If the
+connection cannot be written honestly, raise it rather than forcing the link.
 
-Outbound: rows 22, 23 and 24 are not published yet. Until they are, link outbound to
-`/articles/how-stripes-technical-blog-became-a-competitive-moat/` only if the sentence is
-genuinely about distribution, and otherwise report that the two-outbound minimum cannot be met
-honestly and stop. **Do not invent a link to satisfy the gate.**
+Rows 22, 23 and 24 are not published yet. The two existing outbound destinations, verified in the
+built sitemap on 2026-08-17, are:
+
+- `/articles/technical-writing-for-engineers/` — only where the selection method first defines
+  which kind of developer the product needs to reach; audience definition is the sentence's
+  subject
+- `/articles/developer-trust-hierarchy/` — only where the selection method tests whether a
+  community rewards verifiable practitioner evidence or promotional framing; trust is the
+  sentence's subject
+
+Both are cross-cluster exceptions, so neither may become a convenience link or a footer list.
+After the Reddit siblings ship, replace these only where a same-cluster destination genuinely
+serves the sentence better.

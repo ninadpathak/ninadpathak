@@ -1,6 +1,6 @@
 # Brief: Reddit Self-Promotion Rules, Read Properly
 
-**Slot:** 2026-08-20 | Order 22 | **Cluster:** Reddit marketing | **Experience: A**
+**Slot:** 2026-08-20 | Order 22 | **Cluster:** Distribution | **Subcluster:** Reddit | **Experience: A**
 
 ## Keyword
 
@@ -31,7 +31,14 @@ a hard no. Not a ban he did not receive, not a removal he did not get.
 
 ## Internal links
 
-Inbound: `/articles/why-devtools-startups-lose-deals-over-bad-docs/` if row 21 has not shipped,
-otherwise the row 21 piece, which is same-cluster and preferable.
-Outbound: row 21 once live. If the two-outbound minimum cannot be met honestly, report it and stop
-rather than inventing a link.
+Inbound: the row 21 piece, which is same-cluster and should be live. If row 21 did not publish,
+report the missing predecessor rather than manufacturing an unrelated retrofit.
+
+Outbound:
+
+- row 21, for choosing the community before reading its rules
+- `/articles/developer-trust-hierarchy/`, only in the sentence explaining why promotional intent
+  changes how engineers judge a source; this is a subject-earned cross-cluster exception
+
+Both destinations were verified in the built sitemap on 2026-08-17. Do not add a third link merely
+to make the cluster look connected.
