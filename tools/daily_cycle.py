@@ -421,6 +421,37 @@ def url_inventory_check() -> tuple[list[str], str]:
     return outcome["failures"], url_inventory.summary_line(outcome)
 
 
+def corpus_health() -> str:
+    """Three numbers that should fall over the campaign, in one line.
+
+    Each has a tool that reports it and a backlog behind it. Without a daily record the
+    burn-down is invisible and gets rediscovered instead of tracked: the claim sweep went
+    118 to 50 in an afternoon and nothing would have shown that tomorrow.
+
+    Reports counts only. Every one of these is a candidate for a reviewer, not a verdict.
+    """
+    python = str(ROOT / ".venv" / "bin" / "python")
+    if not pathlib.Path(python).exists():
+        python = sys.executable
+
+    def count(tool, pattern):
+        code, out = run(python, f"tools/{tool}")
+        if code != 0:
+            return "?"
+        match = re.search(pattern, out, re.M)
+        return match.group(1) if match else "?"
+
+    claims = count("audit_claims.py", r"^(\d+) candidate claim")
+    headings = count("audit_headings.py", r"^(\d+) issue\(s\)")
+
+    code, out = run(python, "rule_checker.py", "--summary")
+    match = re.search(r"^TOTAL: (\d+) errors", out, re.M)
+    rules = match.group(1) if match else "?"
+
+    return (f"{claims} unevidenced-claim candidate(s), {headings} heading issue(s), "
+            f"{rules} rule_checker error(s) — all candidates for review, not verdicts")
+
+
 def publish_gate() -> list[str]:
     """The mechanical half of the publish gate in campaign-90d.md section 8."""
     failures = []
@@ -543,7 +574,8 @@ def main() -> int:
            f"- Publish gate: {'PASS' if not gate else 'FAIL — ' + '; '.join(gate)}\n"
            f"- Deploy: {_deploy_line(deploy, deploy_waiting, lag)}\n"
            f"- URL inventory: {url_summary}\n"
-           f"- Tool Functions: {'all answering' if not functions else 'BROKEN — ' + '; '.join(functions)}\n")
+           f"- Tool Functions: {'all answering' if not functions else 'BROKEN — ' + '; '.join(functions)}\n"
+           f"- Corpus health: {corpus_health()}\n")
 
     print(row)
     if args.dry_run:
