@@ -182,6 +182,11 @@
 }
 
 .flowchart-outcome .flowchart-edge-label {
+  /* A span is inline by default, and vertical margin on an inline box does nothing.
+     Without this the margin-bottom below was inert: the stylesheet asked for space and
+     the browser silently discarded it. Found by reading computed style in a browser,
+     which is the half of the render gate that source review cannot replace. */
+  display: block;
   margin-bottom: var(--space-1);
 }
 

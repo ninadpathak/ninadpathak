@@ -182,6 +182,14 @@ jobs:
       - name: Guard diagram structural diversity
         run: python tools/audit_structure.py --strict
 
+      # audit_stylesheets.py proves a page LINKS the stylesheet it needs. This proves the
+      # rules inside it do something. `.flowchart-outcome .flowchart-edge-label` set
+      # margin-bottom on a <span>, and vertical margin on an inline box does nothing — the
+      # stylesheet asked for 4px and the browser discarded it, with every other audit green.
+      # Found by reading computed style in a browser, then made mechanical here.
+      - name: Guard against inert CSS declarations
+        run: python tools/audit_inert_css.py --strict
+
 
       # `output/` is untracked and .gitignored — Cloudflare Pages generates it at build
       # time — so the old "verify generated output is committed" step diffed nothing and
