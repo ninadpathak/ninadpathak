@@ -1,6 +1,6 @@
 # Pre-merge Search Console guard
 
-Appended by `tools/gsc_merge_guard.py`. It tests whether planned merge sources and
+Maintained by `tools/gsc_merge_guard.py`, one authoritative section per date. It tests whether planned merge sources and
 targets share named first-party search demand, while preserving withheld demand as
 unknown. It does not decide content equivalence.
 

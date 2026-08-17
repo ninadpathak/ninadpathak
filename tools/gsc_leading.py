@@ -58,6 +58,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gsc_report as gr  # noqa: E402
 import gsc_attribution as at  # noqa: E402
+import report_log as rl  # noqa: E402
 
 LOG = gr.ROOT / "planning" / "leading-indicators.md"
 HISTORY_START = dt.date(2025, 4, 1)
@@ -436,7 +437,8 @@ def main() -> int:
     if not LOG.exists():
         LOG.write_text(
             "# Leading indicators\n\n"
-            "Appended by `tools/gsc_leading.py`, daily. The earliest signals that move on\n"
+            "Maintained by `tools/gsc_leading.py`, one authoritative section per day. "
+            "The earliest signals that move on\n"
             "this domain, so the first one arrives as news rather than as a retrospective\n"
             "discovery — the autumn 2025 spam injection went unnoticed for ten months\n"
             "because nothing read the record that showed it.\n\n"
@@ -447,8 +449,11 @@ def main() -> int:
             "A section reading \"no data yet\" is working. A zero would mean \"nothing\n"
             "happened\"; these sections say \"we cannot see yet\" and how long until they can.\n",
             encoding="utf-8")
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(report)
+    LOG.write_text(
+        rl.upsert_dated_report(LOG.read_text(encoding="utf-8"), report,
+                               data["generated"]),
+        encoding="utf-8",
+    )
     return 0
 
 

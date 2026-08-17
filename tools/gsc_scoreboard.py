@@ -12,7 +12,7 @@ read in a minute is a scoreboard nobody reads.
     4. Human impressions per cluster, so a cluster earning nothing is visible.
     5. One sentence on whether the trajectory reaches the target, with the arithmetic.
 
-    tools/gsc_scoreboard.py              # append a dated section to planning/scoreboard.md
+    tools/gsc_scoreboard.py              # upsert a dated section in planning/scoreboard.md
     tools/gsc_scoreboard.py --dry-run    # print, write nothing
     tools/gsc_scoreboard.py --json PATH
 
@@ -47,6 +47,7 @@ from urllib.parse import urlsplit
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gsc_report as gr  # noqa: E402
+import report_log as rl  # noqa: E402
 
 LOG = gr.ROOT / "planning" / "scoreboard.md"
 
@@ -451,7 +452,8 @@ def main() -> int:
     if not LOG.exists():
         LOG.write_text(
             "# Weekly scoreboard\n\n"
-            "Appended by `tools/gsc_scoreboard.py`, one dated section per run. The five\n"
+            "Maintained by `tools/gsc_scoreboard.py`, one authoritative section per date. "
+            "The five\n"
             "figures the campaign is judged on and nothing else — the other Search Console\n"
             "tools answer everything wider.\n\n"
             "Read the labels. **MEASURED** is a complete sitewide total. **FLOOR** comes\n"
@@ -461,8 +463,11 @@ def main() -> int:
             "blobs, then machine query fan-out. Where a number cannot be computed honestly\n"
             "it says so — there are no placeholders here.\n",
             encoding="utf-8")
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(report)
+    LOG.write_text(
+        rl.upsert_dated_report(LOG.read_text(encoding="utf-8"), report,
+                               data["generated"]),
+        encoding="utf-8",
+    )
     return 0
 
 

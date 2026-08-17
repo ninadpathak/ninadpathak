@@ -50,6 +50,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gsc_report as gr  # noqa: E402
+import report_log as rl  # noqa: E402
 
 ROOT = gr.ROOT
 LOG = ROOT / "planning" / "gsc-human-baseline.md"
@@ -253,14 +254,18 @@ def main() -> int:
     if not LOG.exists():
         LOG.write_text(
             "# Human-only Search Console baseline\n\n"
-            "Appended by `tools/gsc_human_baseline.py`. Separates machine query fan-out\n"
+            "Maintained by `tools/gsc_human_baseline.py`, one authoritative section per "
+            "date. Separates machine query fan-out\n"
             "from people and reports the human-only series monthly. Read the denominator\n"
             "note in each run: shares are measured within the named-query subset, the\n"
             "sitewide machine share is a range rather than a number, and the human series\n"
             "is a floor because Search Console withholds low-volume queries.\n",
             encoding="utf-8")
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(report)
+    LOG.write_text(
+        rl.upsert_dated_report(LOG.read_text(encoding="utf-8"), report,
+                               data["generated"]),
+        encoding="utf-8",
+    )
     return 0
 
 
