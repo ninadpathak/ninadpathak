@@ -357,7 +357,7 @@ Recorded because it is the clearest return the diagnostic has produced, and beca
 
 Cluster-3 batch 1 was specced, sequenced first deliberately — memory core, the most inbound links and impressions, where a mistake costs most — and about to run. Its merge target had been chosen on **word count**. Once human impressions were bucketed by position it was obvious that word count is not a ranking variable and position is, so the target was reversed: `memory-hierarchy-in-ai-systems` becomes the owner and absorbs the other three.
 
-**Had batch 1 executed before the measurement, it would have permanently redirected the better-ranking page into the worse one**, on live URLs, in the batch chosen for going first. The amendment sits at the top of the spec rather than buried in it.
+**Corrected the same day, and the correction matters more than the original claim:** I wrote that batch 1 would have redirected the better-ranking page into the worse one. That was an unsound inference. The other page has **no known position** — it is absent from the movement report by design, because that report shows what moved and what decayed, and a stable page appears in neither. Nothing in the toolchain exposed a per-page position for a page that had not moved. On impressions the *original* target was ahead, 48 to 15. **The reversal survives on a narrower argument: merging an unmeasured page into one measured at 18.2 is the lower-risk direction, and the reverse is the risk.** Inbound links agree at 13 against 8. Word count, the original basis, agrees with neither. The amendment sits at the top of the spec rather than buried in it.
 
 The general rule: **measure before consolidating, not after.** A merge is irreversible in practice — the source 301s and its history transfers — so the ranking evidence has to exist before the redirect, not be reconstructed from it.
 
@@ -378,6 +378,51 @@ The clearest sign the rule landed rather than the labels changing: **`bi-encoder
 One thing recorded so nobody misreads the output: **`branches=2` on every remaining diagram is a CSS constraint, not residual convergence.** `flowcharts.css` uses `grid-template-columns: repeat(2, ...)`, so a two-way split is the only branch shape the stylesheet supports.
 
 Also confirmed: the conditional stylesheet link works as intended rather than blanket-linking. `/glossary/context-engineering/` no longer carries a diagram and no longer loads `flowcharts.css`; HNSW carries both.
+
+### Three corrections to my own records, and a lottery ticket declined
+
+#### The human click count was inflated by spam-page traffic
+
+`tools/gsc_position.py` applies a filter I had not: it excludes pages outside this site's URL structure, which drops **9 clicks and 1,032 impressions on the injected `/products/` spam pages**. Those were real people, but not readers of this site.
+
+So the figure recorded earlier — 23 human clicks across the 17-month record — is wrong. **The real count on this site's own pages is about 14.** The picture is worse than reported, not better, and the earlier number should not be quoted.
+
+#### "What moves position" was an inference past the evidence
+
+The position-bucket finding stands: 5.9% of human impressions have ever been in the top 10 and the funnel breaks at position. What I added to it — that depth and authority are what move position here — was not measured. It has now been tested, and it does not hold:
+
+| | Ever top-20 | 31+ only |
+|---|---:|---:|
+| Pages | 14 | 18 |
+| Inbound body links, median | 4.0 | 4.0 |
+| Word count, median | 1,996 | 1,797 |
+| Age in days, median | 132 | 118 |
+| Human clicks | 0 | 0 |
+
+**No feature the campaign can control separates the two groups.** Inbound links are identical, word count and age are within a third, and both groups are dominated by the same cluster. Underpowered at n=14 against n=18, but the honest reading is not "we cannot tell" — it is that the levers being pulled show no measured relationship to whether a page reached the top 20.
+
+Of 90 published posts, **33 have ever had a human impression and zero have ever had a human click.**
+
+#### Does position improve over time? The sample is not ready to be asked
+
+| Cohort | Pairs | Median Δ | Improved | Worsened | Flat |
+|---|---:|---:|---:|---:|---:|
+| Campaign content | **2** | −2.8 | 1 | 1 | 0 |
+| Legacy URLs | 245 | +1.0 | 79 | 57 | 109 |
+
+**The campaign's own content cannot answer this at n=2** — one up, one down, both edited during the window, so neither is a clean experiment. That is the sample saying it is not ready, not a null result.
+
+On legacy URLs the median pair is essentially flat across its own span, closer to a random walk than a climb. **Read as a prior rather than a finding: pages land near where they will stay, and publishing more pages at position 40 should not be expected to fix itself with time.** It cannot be transferred to campaign content with confidence — different pages, different cluster, and a domain whose indexing behaviour has measurably changed since.
+
+Two methodological points worth keeping. **Position is measured per (page, query) pair**, so a page's average position moves when its query mix moves, with no ranking change at all. And **82 of 84 large movers are unattributable**, because legacy URLs have no source file to check for intervention. The largest sustained gain in the entire record — `/todoist-vs-any-do/` from 44.9 to 1.0 over 358 days on 465 impressions — happened on a page no campaign work has ever touched.
+
+#### Reference infrastructure: declined, with a measured replacement
+
+Every coordination-problem slot in this niche is already owned: documentation taxonomy by **Diátaxis** at 2,240 referring domains, changelog format by **keepachangelog** at 587,776 files, versioning by **semver** at 956,416, commit convention by **conventional commits** at 285,696. The slots that remain open are open because they are not coordination problems. **It is a lottery ticket and it does not get twenty rows.**
+
+The mechanism matters for what replaces it: those specs earn links through **embedded attribution, not admiration** — a file references the spec, and the reference ships with the file. Nothing this site can publish gets embedded in other people's repositories.
+
+**The replacement is measured rather than aspirational: one original experiment by an independent author with zero domain authority earned 85 referring domains.** An experiment nobody has run is the one asset a DR-26 site can own, and it is the only route to the referring-domain baseline of zero that has evidence behind it.
 
 ### A link profile is a diagnostic for editorial substance
 
