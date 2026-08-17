@@ -8,21 +8,6 @@ terms:
     <p>The phrase gained currency as LLM applications moved beyond one prompt and one response. Once an application retrieves documents, records tool observations, carries state across turns, and applies permission rules, prompt wording is only one input among several.</p>
     <p>Context engineering names the work of assembling that complete input environment.</p>
     <p>The problem is selection, not merely capacity. A larger context window can hold more tokens, but irrelevant history, conflicting instructions, stale state, and badly ordered evidence can still make the model less reliable.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">ASSEMBLY</span><strong>Context is selected for one task step</strong><small>Availability does not justify inclusion.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Start from the current decision</strong><small>Name the evidence the model needs now.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">relevant and current</span><div class="flowchart-node"><strong>Include with provenance</strong><small>Preserve source, scope, and effective version.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">irrelevant or stale</span><div class="flowchart-node"><strong>Exclude from this turn</strong><small>Keep noise and conflicts out of the model input.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">fits policy</span><div class="flowchart-node"><strong>Order the evidence</strong><small>Place instructions and data in explicit roles.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">conflicts</span><div class="flowchart-node"><strong>Resolve before assembly</strong><small>Do not ask the model to guess authority.</small></div></div>
-        </div>
-        <p class="flowchart-note">A context window is capacity. Context engineering decides what earns space inside it.</p>
-      </div>
-    </div>
     <h3>Prompt engineering controls instructions; context engineering controls evidence</h3>
     <p>Prompt engineering focuses on how a task is expressed. Retrieval-augmented generation selects outside documents, while memory decides what persists across interactions.</p>
     <p>Context engineering coordinates those pieces and determines what the model sees for this specific step.</p>
@@ -53,21 +38,6 @@ terms:
     <p>It is controlling a loop whose next step depends on a model judgment and whose actions may alter files, databases, tickets, or external services.</p>
     <p>A chatbot can answer a question without being an agent. An agentic system receives a goal, selects an action, observes the result, and decides whether to continue.</p>
     <p>That loop is the boundary between ordinary LLM application development and agentic engineering.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">BOUNDARY</span><strong>Does the model control the next action?</strong><small>Generation alone is not agency.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Model produces an output</strong><small>What can that output do?</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">display only</span><div class="flowchart-node"><strong>LLM application</strong><small>The host returns text or structured data.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">changes state</span><div class="flowchart-node"><strong>Agentic system</strong><small>The host executes an action and returns an observation.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">stop</span><div class="flowchart-node"><strong>One response</strong><small>No control loop is required.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">continue</span><div class="flowchart-node"><strong>Bounded loop</strong><small>Policy, permissions, and completion checks become engineering concerns.</small></div></div>
-        </div>
-        <p class="flowchart-note">The risk begins at execution, not at the number of models in the system.</p>
-      </div>
-    </div>
     <h3>The adjacent terms describe parts, not the whole discipline</h3>
     <p><a href="/glossary/tool-calling/">Tool calling</a> is the interface that lets a model request an operation. <a href="/glossary/flow-engineering/">Flow engineering</a> defines a controlled sequence of model and program steps, while an agentic router chooses among destinations.</p>
     <p>Agentic engineering covers the larger system: state, permissions, recovery, observability, evaluation, and the point at which a human must intervene.</p>
@@ -103,21 +73,6 @@ terms:
     <h2>AlphaCodium gave the pattern a memorable name</h2>
     <p>The term was popularized by the <a href="https://arxiv.org/abs/2401.08500">AlphaCodium work on code generation</a>, which used a staged process rather than asking a model to solve a programming problem in one pass. The broader idea is simple: move reliability work out of a heroic prompt and into an observable sequence.</p>
     <p>A flow can collect requirements, draft an artifact, run a deterministic check, return the failure, and ask for a bounded revision. The checker adds information only when it tests something the generation step did not assume.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">CONTROL FLOW</span><strong>A useful flow changes state through tested artifacts</strong><small>The checker must be independent of the draft.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Generate an inspectable artifact</strong><small>A plan, patch, extraction, or answer enters the next stage.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">check passes</span><div class="flowchart-node"><strong>Advance the workflow</strong><small>Preserve the artifact and its evidence.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">check fails</span><div class="flowchart-node"><strong>Return the actual failure</strong><small>The repair stage receives new information.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">repairable</span><div class="flowchart-node"><strong>Revise within a limit</strong><small>Retry only the failed artifact or stage.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">blocked</span><div class="flowchart-node"><strong>Stop with evidence</strong><small>Escalate instead of inventing success.</small></div></div>
-        </div>
-        <p class="flowchart-note">A validator that checks a fixture authored by the same run does not add evidence to the flow.</p>
-      </div>
-    </div>
     <h3>Deterministic orchestration separates a flow from an agent</h3>
     <p>In a flow, application code usually determines the next stage. In an agentic loop, the model may choose the next action from the current state.</p>
     <p>Chain-of-thought is internal reasoning, while flow engineering produces external artifacts and transitions that the host can inspect.</p>
@@ -143,21 +98,6 @@ terms:
     <h2>Inference became a scaling axis of its own</h2>
     <p>Model development long emphasized training compute, but researchers also found gains from spending more work on a particular problem after training. Test-time compute covers several mechanisms, so it should not be reduced to one product’s hidden reasoning tokens.</p>
     <p>A system might sample several candidate answers and select one, search a tree of partial solutions, run a verifier, or allocate a larger reasoning budget. Each method spends extra resources at request time and needs a rule for when to stop.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">BUDGET POLICY</span><strong>Extra inference work needs a selection signal</strong><small>More tokens alone do not prove a better answer.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Attempt the task at the base budget</strong><small>Collect an answer and any available verification result.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">verified</span><div class="flowchart-node"><strong>Return the result</strong><small>Additional compute has no identified job.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">unresolved</span><div class="flowchart-node"><strong>Allocate another search step</strong><small>Sample, branch, or verify against new evidence.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">improves</span><div class="flowchart-node"><strong>Keep the stronger candidate</strong><small>The evaluator distinguishes the result.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">budget ends</span><div class="flowchart-node"><strong>Stop or expose uncertainty</strong><small>Do not convert extra work into false confidence.</small></div></div>
-        </div>
-        <p class="flowchart-note">The policy connects difficulty, verification, cost, and a stopping condition.</p>
-      </div>
-    </div>
     <h3>More compute is useful only when the selection signal is useful</h3>
     <p>For a code-generation task, producing four candidates helps only if compilation, tests, or another credible evaluator can distinguish them. Sampling four answers and choosing the most confident wording may multiply cost without adding evidence.</p>
     <p>Test-time compute differs from fine-tuning because the weights do not change, and from speculative decoding because speculative decoding aims to produce the same distribution faster rather than reason longer. The <a href="/articles/llm-inference-optimization/">LLM inference optimization guide</a> places both techniques on the same serving stack.</p>
@@ -178,21 +118,6 @@ terms:
     <h2>Anthropic introduced MCP to reduce bespoke integrations</h2>
     <p>Anthropic released <a href="https://modelcontextprotocol.io/docs/getting-started/intro">MCP in 2024 as an open protocol</a> for connecting AI assistants to data and tools. Before a shared protocol, each host and integration could require its own discovery format, transport assumptions, and invocation code.</p>
     <p>An MCP host manages the user-facing application. A client inside that host maintains a connection to a server, and the server advertises capabilities such as tools and resources through the protocol.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">PROTOCOL ROLES</span><strong>The host controls a client connection to an MCP server</strong><small>Discovery and invocation cross a boundary the host still governs.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Host opens an MCP client connection</strong><small>The host supplies user context, policy, and consent.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">read</span><div class="flowchart-node"><strong>Request a resource</strong><small>The server returns data for context.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">act</span><div class="flowchart-node"><strong>Invoke a tool</strong><small>The server may read or change external state.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">allowed</span><div class="flowchart-node"><strong>Return the server result</strong><small>The host labels and records the response.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">restricted</span><div class="flowchart-node"><strong>Deny or request approval</strong><small>Protocol compatibility does not override policy.</small></div></div>
-        </div>
-        <p class="flowchart-note">MCP standardizes the exchange. Credentials and operating-system permissions enforce the boundary.</p>
-      </div>
-    </div>
     <h3>Protocol compatibility does not create a trust boundary</h3>
     <p><a href="/glossary/tool-calling/">Tool calling</a> describes how a model requests an operation. MCP can carry the tool descriptions and requests, but the host still decides which server to connect to, what credentials it receives, and whether a proposed action may run.</p>
     <p>A REST API exposes application endpoints; MCP exposes model-oriented capabilities and discovery conventions.</p>
@@ -218,21 +143,6 @@ terms:
     <h2>A similarity decision replaces an exact-key decision</h2>
     <p>An ordinary cache retrieves a value by an exact key. A semantic cache embeds the new request, searches earlier request vectors, and reuses a result when the best match passes an application-defined acceptance rule.</p>
     <p>The pattern addresses repeated natural-language questions that differ in phrasing. It also creates a new failure mode: two nearby vectors can represent requests whose correct answers differ.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">CACHE DECISION</span><strong>Similarity proposes reuse; application rules approve it</strong><small>Identity and freshness cannot be reduced to vector distance.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Embed the incoming request</strong><small>Search earlier request representations.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">candidate match</span><div class="flowchart-node"><strong>Check reuse conditions</strong><small>Compare tenant, version, permissions, and source state.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">no candidate</span><div class="flowchart-node"><strong>Generate a fresh result</strong><small>Store it with provenance and invalidation keys.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">eligible</span><div class="flowchart-node"><strong>Return the cached response</strong><small>The old answer is still valid for this request.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">unsafe</span><div class="flowchart-node"><strong>Treat it as a miss</strong><small>A near vector does not make two decisions equivalent.</small></div></div>
-        </div>
-        <p class="flowchart-note">False reuse is usually more damaging than a cache miss, so evaluate the two errors separately.</p>
-      </div>
-    </div>
     <h3>Password instructions can be reusable; account status cannot</h3>
     <p>A request for password-reset steps and a request for where to change a password may safely share a public help-center answer. A question about an account suspension cannot reuse another user’s response merely because the questions are semantically similar.</p>
     <p>The cache key therefore needs more than an embedding. Tenant, permissions, product version, locale, source freshness, and response type may all belong in the eligibility check.</p>
@@ -259,21 +169,6 @@ terms:
     <p>Aditya Kusupati and coauthors <a href="https://arxiv.org/abs/2205.13147">introduced Matryoshka Representation Learning in 2022</a>. The method trains predictive representations at multiple prefix lengths, borrowing its name from nesting dolls.</p>
     <p>Earlier dimensions must carry a useful coarse representation while later dimensions add detail.</p>
     <p>A system can index a shorter prefix for a broad candidate search and retain the longer vector for a more precise second pass. That flexibility comes from the training objective, not from the array-slicing operation itself.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">NESTED RESOLUTION</span><strong>One trained vector supports coarse and detailed retrieval</strong><small>Each useful prefix begins at the first dimension.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Encode once with an MRL model</strong><small>The training objective organizes nested prefixes.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">short prefix</span><div class="flowchart-node"><strong>Retrieve broad candidates</strong><small>Use less storage and distance-computation work.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">long prefix</span><div class="flowchart-node"><strong>Preserve more detail</strong><small>Retain later dimensions for finer distinctions.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">two stage</span><div class="flowchart-node"><strong>Search, then rescore</strong><small>Apply the longer representation to a smaller set.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">one stage</span><div class="flowchart-node"><strong>Choose one evaluated prefix</strong><small>Match the dimension to the deployment budget.</small></div></div>
-        </div>
-        <p class="flowchart-note">A conventional embedding does not acquire this property when its trailing dimensions are deleted.</p>
-      </div>
-    </div>
     <h3>Truncation, quantization, and dimensionality reduction are not interchangeable</h3>
     <p>Truncation discards trailing dimensions. <a href="/glossary/product-quantization/">Product quantization</a> compresses vector subspaces into codebook identifiers, while a separately learned dimensionality-reduction transform maps vectors into a new space.</p>
     <p>Each changes storage and retrieval behavior differently.</p>
@@ -299,21 +194,6 @@ terms:
     <h2>Joint attention spends more work on fewer candidates</h2>
     <p>A cross-encoder places the query and one candidate in the same model input. Because their tokens can interact through attention, the model can judge details that a single geometric comparison between independently produced vectors may hide.</p>
     <p>The cost is repeated inference: every query-candidate pair needs a forward pass. That makes cross-encoders natural rerankers and poor first-stage retrievers for a large collection.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">TWO-STAGE SEARCH</span><strong>Retrieve broadly, then score query-document pairs together</strong><small>The reranker spends more work only on the candidate set.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Fast retrieval returns candidates</strong><small>The first stage protects corpus-scale search cost.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">query</span><div class="flowchart-node"><strong>Repeat the same query</strong><small>Pair it with each candidate passage.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">candidate</span><div class="flowchart-node"><strong>Read the passage jointly</strong><small>Let tokens interact inside the cross-encoder.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">high score</span><div class="flowchart-node"><strong>Move the passage upward</strong><small>Send the best evidence to the next stage.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">missing candidate</span><div class="flowchart-node"><strong>Return to retrieval</strong><small>Reranking cannot score what it never received.</small></div></div>
-        </div>
-        <p class="flowchart-note">Candidate recall and reranker ordering are separate measurements with separate fixes.</p>
-      </div>
-    </div>
     <h3>A negated requirement can reverse the vector order</h3>
     <p>For the query “authentication without API keys,” a semantically similar API-key guide may rank above a page about workload identity. A cross-encoder can inspect the negation and the candidate text together, then move the workload-identity page upward.</p>
     <p>A <a href="/glossary/bi-encoder/">bi-encoder</a> creates reusable vectors for candidate retrieval. A large generative model can also score documents, but generation is not required for the pairwise relevance task.</p>
@@ -338,21 +218,6 @@ terms:
     <h2>Jina AI moved the split after contextual encoding</h2>
     <p>Florian Günther and coauthors <a href="https://arxiv.org/abs/2409.04701">described late chunking in 2024</a> to preserve document-wide context in chunk embeddings. In an early-chunking pipeline, splitting happens before the transformer sees the text.</p>
     <p>Late chunking lets the transformer contextualize tokens across the longer document first, then pools token ranges that correspond to chunk boundaries.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">ORDER OF OPERATIONS</span><strong>Late chunking moves pooling after contextual encoding</strong><small>The boundary can stay the same while the chunk vector changes.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Start with one logical document</strong><small>Keep the token-to-source-span mapping.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">early</span><div class="flowchart-node"><strong>Split, then encode</strong><small>Each chunk enters the model alone.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">late</span><div class="flowchart-node"><strong>Encode, then pool</strong><small>Tokens see the longer document first.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">isolated</span><div class="flowchart-node"><strong>Local chunk vector</strong><small>Meaning comes only from the split span.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">contextualized</span><div class="flowchart-node"><strong>Context-aware chunk vector</strong><small>Pooling retains document-level token context.</small></div></div>
-        </div>
-        <p class="flowchart-note">Late chunking changes embedding order. It does not decide which text boundaries are useful.</p>
-      </div>
-    </div>
     <h3>A pronoun reveals what early chunking loses</h3>
     <p>Consider a section that begins, “It retries the request with exponential backoff.” If the product component named in the preceding section is absent from the chunk, an isolated embedding may represent retries but not what performs them.</p>
     <p>Encoding both sections together can carry that antecedent into the later chunk’s token representations.</p>
@@ -380,21 +245,6 @@ terms:
     <h2>Microsoft’s GraphRAG work targeted corpus-level questions</h2>
     <p>Microsoft Research <a href="https://www.microsoft.com/en-us/research/project/graphrag/overview/">developed GraphRAG</a> to answer questions that require understanding a dataset as a whole, not merely retrieving a few passages similar to a query. Its pipeline extracts a graph from text, identifies communities, and builds summaries that can support broader questions.</p>
     <p>The term is now used loosely across products, so an implementation should state what its nodes and edges mean, how they were extracted, and which retrieval path uses them.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">GRAPH PIPELINE</span><strong>GraphRAG derives a retrieval structure from source text</strong><small>Every node, edge, and summary needs a path back to evidence.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Extract claims and entities</strong><small>Preserve the supporting source spans.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">local question</span><div class="flowchart-node"><strong>Follow a focused neighborhood</strong><small>Retrieve relationships around named entities.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">global question</span><div class="flowchart-node"><strong>Use community summaries</strong><small>Combine themes across graph regions.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">supported</span><div class="flowchart-node"><strong>Answer with provenance</strong><small>Trace graph-derived claims to the corpus.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">uncertain</span><div class="flowchart-node"><strong>Inspect extraction errors</strong><small>Check entity resolution and edge direction.</small></div></div>
-        </div>
-        <p class="flowchart-note">The graph is an index derived from documents, not an independent source of truth.</p>
-      </div>
-    </div>
     <h3>A relationship question shows why chunks can be insufficient</h3>
     <p>Suppose incident reports mention a service, its owning team, a dependency, and a sequence of failures across separate documents. Vector search may retrieve individually similar reports.</p>
     <p>A graph can connect the service to the dependency and the team, making the cross-document path explicit.</p>
@@ -421,18 +271,14 @@ terms:
     <p>Tool calling became a common API capability when model providers exposed function descriptions and JSON Schema parameters alongside a prompt. The capability solved a concrete boundary problem: a model can propose an operation, but only application code has credentials, network access, and authority to perform it.</p>
     <p>The host sends the available tool names and schemas. The model returns a tool choice and arguments, the host validates and executes them, and the tool result enters the next model turn.</p>
     <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">REQUEST LOOP</span><strong>Who owns each step in a tool call?</strong><small>The trust boundary stays in application code.</small></div>
+      <div class="flowchart-caption"><span class="flowchart-caption-label">HOST DECISION</span><strong>A tool request crosses an execution boundary</strong><small>The model proposes. The host decides.</small></div>
       <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>User asks for an external action</strong><small>The model receives schemas for allowed tools.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Model returns a tool name and arguments</strong><small>The request is untrusted structured output.</small></div></div>
         <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">answerable</span><div class="flowchart-node"><strong>Return text</strong><small>No external operation is needed.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">tool needed</span><div class="flowchart-node"><strong>Return name and arguments</strong><small>This is still untrusted model output.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">invalid or forbidden</span><div class="flowchart-node"><strong>Reject the request</strong><small>Return an error without executing the operation.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">valid and allowed</span><div class="flowchart-node"><strong>Execute through the host</strong><small>Record the policy decision and side effect.</small></div></div>
         </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">invalid</span><div class="flowchart-node"><strong>Reject or repair</strong><small>The host enforces schema and policy.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">valid</span><div class="flowchart-node"><strong>Execute and observe</strong><small>The result returns to the model or user.</small></div></div>
-        </div>
-        <p class="flowchart-note">A model can ask to delete a record. Only the host should decide whether that request is allowed.</p>
+        <p class="flowchart-note">Schema validity answers whether the request is shaped correctly. Host policy answers whether it may run.</p>
       </div>
     </div>
     <h3>Function calling, structured output, and MCP solve different boundaries</h3>
@@ -471,18 +317,19 @@ terms:
     <p>Reserving one contiguous region for each sequence wastes memory through over-allocation and fragmentation.</p>
     <p>PagedAttention divides the cache into fixed-size blocks and maps logical blocks for each sequence to available physical blocks. New blocks can be allocated as a sequence grows, and shared prefixes can refer to shared physical data where the runtime supports it.</p>
     <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">MEMORY MAP</span><strong>Logical cache blocks map onto available physical blocks</strong><small>A sequence no longer needs one contiguous reservation.</small></div>
+      <div class="flowchart-caption"><span class="flowchart-caption-label">BLOCK MAPPING</span><strong>Logical sequence order no longer requires contiguous storage</strong><small>The block table preserves the sequence while physical blocks move independently.</small></div>
       <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>A sequence needs another KV block</strong><small>The runtime consults its block table.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>A sequence fills its current logical block</strong><small>The runtime requests capacity for more KV state.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>The block table finds physical storage</strong><small>The next block may live anywhere in the available pool.</small></div></div>
         <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">free block</span><div class="flowchart-node"><strong>Map new storage</strong><small>The physical block may sit anywhere in the pool.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">shared prefix</span><div class="flowchart-node"><strong>Reference existing storage</strong><small>The runtime avoids duplicating identical prefix data.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">new tokens</span><div class="flowchart-node"><strong>Map another physical block</strong><small>Append it to the sequence's logical order.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">shared prefix</span><div class="flowchart-node"><strong>Reference existing blocks</strong><small>Avoid storing the same retained prefix twice.</small></div></div>
         </div>
         <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">grows</span><div class="flowchart-node"><strong>Append a logical block</strong><small>The sequence keeps its logical order.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">finishes</span><div class="flowchart-node"><strong>Return blocks to the pool</strong><small>Other requests can reuse the memory.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">request continues</span><div class="flowchart-node"><strong>Read through the mapping</strong><small>Attention sees one logical sequence.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">request ends</span><div class="flowchart-node"><strong>Release its block references</strong><small>Reusable blocks return to the pool.</small></div></div>
         </div>
-        <p class="flowchart-note">The table handles placement. The attention calculation still reads the same logical sequence.</p>
+        <p class="flowchart-note">Paging changes placement and reuse. It does not remove retained token state or alter attention semantics.</p>
       </div>
     </div>
     <h3>The page table changes placement, not attention</h3>
@@ -511,18 +358,17 @@ terms:
     <p>During autoregressive generation, the model retains key and value tensors from earlier tokens so it does not recompute them for every next token. That cache grows with sequence length and consumes serving memory that could otherwise hold more requests.</p>
     <p>Eviction policies keep a subset of token states according to recency, attention-derived importance, fixed landmarks, or another rule. The engineering question is which information can be removed without damaging the tasks the system must perform.</p>
     <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">EVICTION DECISION</span><strong>Memory pressure forces a prediction about future attention</strong><small>Removed states cannot support later tokens.</small></div>
+      <div class="flowchart-caption"><span class="flowchart-caption-label">EVICTION FORECAST</span><strong>The policy predicts which retained state will matter later</strong><small>A removed token cannot support a future decoding step.</small></div>
       <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>The KV cache reaches its budget</strong><small>The policy scores retained token states.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>The KV cache reaches its memory budget</strong><small>Keeping every prior token state is no longer possible.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>The policy scores retained states</strong><small>It may use recency, attention, landmarks, or a learned signal.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>The runtime separates candidates</strong><small>The score becomes a keep-or-remove decision.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Generation continues under the smaller cache</strong><small>Later tokens reveal whether the forecast was sound.</small></div></div>
         <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">retain</span><div class="flowchart-node"><strong>Keep selected states</strong><small>Recent, fixed, or high-scoring tokens remain available.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">evict</span><div class="flowchart-node"><strong>Remove selected states</strong><small>The serving runtime releases their memory.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">removed state stays irrelevant</span><div class="flowchart-node"><strong>Memory pressure falls</strong><small>The task continues without needing the discarded state.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">removed state becomes relevant</span><div class="flowchart-node"><strong>Task quality can fall</strong><small>The model can no longer attend to that information.</small></div></div>
         </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">not needed</span><div class="flowchart-node"><strong>Memory saved</strong><small>Generation continues without a visible loss.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">needed later</span><div class="flowchart-node"><strong>Information loss</strong><small>The model can no longer attend to the removed state.</small></div></div>
-        </div>
-        <p class="flowchart-note">Every eviction policy is a forecast. Task-level evaluation tests whether that forecast is useful.</p>
+        <p class="flowchart-note">An eviction policy is useful only when task-level tests challenge the states it prefers to remove.</p>
       </div>
     </div>
     <h3>Eviction, compression, and paging solve different constraints</h3>
@@ -551,18 +397,16 @@ terms:
     <p>The name describes the goal, not one standardized algorithm.</p>
     <p>The technique addresses a failure of fixed windows: a boundary can cut a condition away from the instruction it qualifies or combine two unrelated sections merely because they fit the same size limit.</p>
     <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">BOUNDARY TEST</span><strong>Split where the subject changes, then check the retrieval unit</strong><small>Semantic similarity proposes a boundary; downstream retrieval validates it.</small></div>
+      <div class="flowchart-caption"><span class="flowchart-caption-label">BOUNDARY DECISION</span><strong>Semantic change proposes where one retrieval unit ends</strong><small>The downstream query set still decides whether the split is useful.</small></div>
       <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Compare neighboring sentence groups</strong><small>Use the chosen semantic-change signal.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Read neighboring sentence groups</strong><small>Preserve their headings and source positions.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Compare their meaning</strong><small>Use the selected embedding, discourse, or model signal.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Apply a size guardrail</strong><small>Coherence does not justify an unbounded chunk.</small></div></div>
         <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">same thought</span><div class="flowchart-node"><strong>Keep the group together</strong><small>The statements support one retrieval unit.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">topic break</span><div class="flowchart-node"><strong>Place a boundary</strong><small>The next group starts a new candidate chunk.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">same thought</span><div class="flowchart-node"><strong>Keep the groups together</strong><small>The statements remain one candidate retrieval unit.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">topic changes</span><div class="flowchart-node"><strong>Place a boundary</strong><small>The next group starts a separate candidate chunk.</small></div></div>
         </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">too large</span><div class="flowchart-node"><strong>Apply a size guardrail</strong><small>Coherence does not make an unbounded chunk useful.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">retrievable</span><div class="flowchart-node"><strong>Index with source context</strong><small>Preserve the heading and source span.</small></div></div>
-        </div>
-        <p class="flowchart-note">A readable chunk is not automatically a good search result. Test whether real queries retrieve it.</p>
+        <p class="flowchart-note">A coherent chunk can still fail retrieval. Evaluate the boundary with real questions.</p>
       </div>
     </div>
     <h3>An API warning belongs with the step it limits</h3>
@@ -590,21 +434,6 @@ terms:
     <p>Luyu Gao and coauthors <a href="https://arxiv.org/abs/2212.10496">introduced HyDE in 2022</a> for zero-shot dense retrieval. A user query may be too short or phrased unlike the documents that answer it.</p>
     <p>Generating a plausible document gives the encoder a richer representation that may sit closer to relevant corpus passages.</p>
     <p>The system embeds the generated text, retrieves real documents, and answers from those sources. The hypothetical text has done its job once it has improved the search query.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">QUERY TRANSFORMATION</span><strong>HyDE uses generated prose to find real documents</strong><small>The hypothetical document never becomes answer evidence.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Start with a short user query</strong><small>The wording may not resemble corpus passages.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">generate</span><div class="flowchart-node"><strong>Draft an answer-like document</strong><small>Introduce likely domain language and structure.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">embed</span><div class="flowchart-node"><strong>Encode the hypothetical text</strong><small>Use its vector as the retrieval query.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">retrieve</span><div class="flowchart-node"><strong>Return real source documents</strong><small>Rank the corpus against the generated representation.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">answer</span><div class="flowchart-node"><strong>Discard the hypothetical claims</strong><small>Ground the response in retrieved evidence only.</small></div></div>
-        </div>
-        <p class="flowchart-note">HyDE succeeds or fails as retrieval. Fluent invented text is not a useful outcome by itself.</p>
-      </div>
-    </div>
     <h3>Acronym-heavy documentation creates a useful case</h3>
     <p>For “why does my login expire?”, a hypothetical passage might mention session lifetime, refresh tokens, and token revocation. Those terms can retrieve the correct authentication documentation even when the original question contains none of them.</p>
     <p>The hypothetical passage should resemble the kind of document the index contains. Generating a conversational answer for a corpus of terse reference entries can create a new representation mismatch instead of closing the old one.</p>
@@ -631,21 +460,6 @@ terms:
     <h2>The model translates intent into two search channels</h2>
     <p>A request can contain both a topic and exact constraints. Self-querying retrieval separates them: descriptive language becomes the vector or text query, while explicit constraints become fields in a filter expression.</p>
     <p>The pattern became common in retrieval frameworks as LLMs made natural-language parsing flexible, but the host must restrict the filter grammar and validate field names, operators, and values.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">QUERY PARSE</span><strong>Separate meaning from exact constraints</strong><small>The model proposes a structured search request; the host validates it.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Read the natural-language request</strong><small>Identify topical language and filterable constraints.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">meaning</span><div class="flowchart-node"><strong>Build the semantic query</strong><small>Keep the subject that retrieval should match.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">constraint</span><div class="flowchart-node"><strong>Build typed filters</strong><small>Map dates, regions, and products to allowed fields.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">valid</span><div class="flowchart-node"><strong>Execute constrained retrieval</strong><small>Search only records allowed by the filter.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">ambiguous</span><div class="flowchart-node"><strong>Ask or reject</strong><small>Do not invent a precise interpretation.</small></div></div>
-        </div>
-        <p class="flowchart-note">Generated filters narrow retrieval. They must never replace access-control enforcement.</p>
-      </div>
-    </div>
     <h3>“EU incidents after July” should not be one embedding</h3>
     <p>For that request, “incidents” belongs in semantic retrieval, while region equals EU and date after July belong in structured filters. Embedding the entire sentence leaves exact constraints to vector geometry, which is not designed to enforce them.</p>
     <p>Metadata filtering written directly by application code is preferable when the UI already supplies exact fields. <a href="/glossary/tool-calling/">Tool calling</a> may carry the generated search request, but self-querying retrieval describes the translation step.</p>
@@ -671,24 +485,18 @@ terms:
     <h2>Independent encoding makes large retrieval sets practical</h2>
     <p>Bi-encoders became central to semantic search through work such as Sentence-BERT, which adapted transformer representations for efficient similarity comparison. A document vector can be computed once and indexed.</p>
     <p>At query time, the system encodes only the query and searches the stored vectors.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">RETRIEVAL</span><strong>Separate encoders create comparable vectors</strong><small>The candidates do not pass through the model again for every query.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Search request arrives</strong><small>The document collection is already encoded.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">query</span><div class="flowchart-node"><strong>Query encoder</strong><small>Produces one vector at request time.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">documents</span><div class="flowchart-node"><strong>Document encoder</strong><small>Produces reusable vectors at index time.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">compare</span><div class="flowchart-node"><strong>Nearest neighbors</strong><small>A vector index returns a candidate set.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">refine</span><div class="flowchart-node"><strong>Optional reranker</strong><small>A slower model examines the best candidates together with the query.</small></div></div>
-        </div>
-        <p class="flowchart-note">Independent encoding buys reuse and speed by giving up token-level query-document interaction.</p>
-      </div>
-    </div>
     <h3>Bi-encoders retrieve; cross-encoders judge pairs</h3>
     <p>A <a href="/glossary/cross-encoder-reranking/">cross-encoder</a> reads a query and candidate together, so its attention layers can model their exact interaction. That usually makes it useful for reranking a small candidate set but too expensive for a first pass over a large corpus.</p>
     <p>HNSW is different again: it is an index that searches vectors, not the model that creates them.</p>
+    <table>
+      <thead><tr><th>Decision</th><th>Bi-encoder</th><th>Cross-encoder</th></tr></thead>
+      <tbody>
+        <tr><td>How inputs are read</td><td>Query and document are encoded separately</td><td>Query and document are read together</td></tr>
+        <tr><td>What can be reused</td><td>Document vectors can be stored in an index</td><td>Each query-document pair needs a new model pass</td></tr>
+        <tr><td>Where it fits</td><td>First-stage retrieval over many candidates</td><td>Reranking a small retrieved set</td></tr>
+        <tr><td>Primary failure</td><td>The relevant document never enters the candidate set</td><td>The reranker cannot recover a candidate it never received</td></tr>
+      </tbody>
+    </table>
     <h3>Pre-encoding moves document work out of the request path</h3>
     <p>The document side can be encoded when content enters the index and reused across many searches. Query latency then includes one query encoding, index search, and any later reranking rather than one model pass for every document.</p>
     <p>That reuse is the bi-encoder’s scaling advantage. It also means a model or preprocessing change requires re-encoding the collection before query and document vectors are comparable again.</p>
@@ -716,21 +524,6 @@ terms:
     <h2>Subspace codebooks replace floating-point coordinates</h2>
     <p>Product quantization divides each vector into equal subspaces. A clustering step learns a codebook for each subspace, and an indexed vector stores the nearest centroid identifier from every codebook instead of all original coordinates.</p>
     <p>At search time, the system estimates distances through lookup tables built from the query and those centroids. Compression saves memory and bandwidth at the cost of quantization error.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">ENCODING SHAPE</span><strong>Product quantization replaces sub-vectors with centroid identifiers</strong><small>The stored code is compact because the codebooks carry the coordinate values.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Split one vector into sub-vectors</strong><small>Each position corresponds to one learned subspace.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">train</span><div class="flowchart-node"><strong>Learn each codebook</strong><small>Cluster representative sub-vectors into centroids.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">encode</span><div class="flowchart-node"><strong>Choose nearest centroids</strong><small>Store their identifiers instead of full coordinates.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">search</span><div class="flowchart-node"><strong>Build distance lookups</strong><small>Compare the query with codebook centroids.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">rank</span><div class="flowchart-node"><strong>Estimate vector distance</strong><small>Combine the selected subspace distances.</small></div></div>
-        </div>
-        <p class="flowchart-note">The compressed code preserves an approximation. Recall testing measures the information the approximation lost.</p>
-      </div>
-    </div>
     <h3>A toy code shows the storage shape</h3>
     <p>If a vector is divided into four sub-vectors and each codebook has entries addressed by one byte, the compressed representation contains four centroid identifiers plus any index overhead. The example explains the shape, not a universal compression ratio, because production choices depend on dimension, codebook size, and metadata.</p>
     <h3>PQ compresses vectors; HNSW navigates neighbors</h3>
@@ -756,18 +549,20 @@ terms:
     <p>Yury Malkov and Dmitry Yashunin <a href="https://arxiv.org/abs/1603.09320">introduced HNSW in their 2016 paper</a> as a multilayer proximity graph. The design addressed a scaling problem in nearest-neighbor search: comparing a query with every vector gives exact results, but the work grows directly with the collection.</p>
     <p>HNSW assigns some points to sparse upper layers and keeps progressively more points in lower layers. Search starts high, makes large moves toward the query, then descends and refines the candidate set in denser layers.</p>
     <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">SEARCH PATH</span><strong>Coarse navigation first, local search second</strong><small>The graph avoids a full scan but does not promise the exact nearest neighbor.</small></div>
+      <div class="flowchart-caption"><span class="flowchart-caption-label">LAYERED SEARCH</span><strong>HNSW descends from sparse shortcuts into dense local neighbors</strong><small>Each layer narrows the region explored at the next one.</small></div>
       <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Enter at a sparse upper layer</strong><small>Begin from the graph entry point.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Enter at a sparse upper layer</strong><small>Start from the graph's entry point.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Follow links toward the query</strong><small>Use long-range edges to cross the vector space.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Descend into a denser layer</strong><small>Carry the nearest current candidate downward.</small></div></div>
         <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">better neighbor</span><div class="flowchart-node"><strong>Move across the layer</strong><small>Follow an edge closer to the query.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">local minimum</span><div class="flowchart-node"><strong>Descend one layer</strong><small>Continue from the best point found so far.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">closer neighbor found</span><div class="flowchart-node"><strong>Continue graph traversal</strong><small>Expand the candidate neighborhood.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">local minimum reached</span><div class="flowchart-node"><strong>Finish the layer</strong><small>Keep the strongest candidates found so far.</small></div></div>
         </div>
         <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">narrow search</span><div class="flowchart-node"><strong>Lower recall, less work</strong><small>A smaller candidate beam explores fewer paths.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">wide search</span><div class="flowchart-node"><strong>Higher recall, more work</strong><small>A larger candidate beam explores more paths.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">more layers remain</span><div class="flowchart-node"><strong>Descend again</strong><small>Refine the search in a denser graph.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">base layer reached</span><div class="flowchart-node"><strong>Return approximate neighbors</strong><small>Rank the explored candidate set by distance.</small></div></div>
         </div>
-        <p class="flowchart-note">The operational choice is not “HNSW or accuracy.” It is where to set the recall, latency, memory, and build-time tradeoff.</p>
+        <p class="flowchart-note">The hierarchy reduces the region searched. It does not guarantee the exact nearest neighbors.</p>
       </div>
     </div>
     <h3>The index is not the embedding model</h3>
@@ -799,21 +594,6 @@ terms:
   body_html: |
     <h2>ReAct joined reasoning traces to environmental feedback</h2>
     <p>Shunyu Yao and coauthors <a href="https://arxiv.org/abs/2210.03629">introduced ReAct in a 2022 paper</a> to combine two capabilities that had often been studied separately: reasoning over a task and acting to gather information. An action produces an observation, and that observation changes the next reasoning step.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">CONTROL LOOP</span><strong>A ReAct trajectory alternates decisions and evidence</strong><small>The observation must influence what happens next.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Task and current context</strong><small>The model decides whether it has enough evidence.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">enough</span><div class="flowchart-node"><strong>Answer</strong><small>Stop without another action.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">missing evidence</span><div class="flowchart-node"><strong>Choose an action</strong><small>Search, inspect, calculate, or call another allowed tool.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">observation</span><div class="flowchart-node"><strong>Update the task state</strong><small>Use the result in the next decision.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">failure</span><div class="flowchart-node"><strong>Recover or stop</strong><small>A bounded policy handles errors and limits.</small></div></div>
-        </div>
-        <p class="flowchart-note">A fixed sequence of calls is a workflow. ReAct specifically makes the next step depend on the latest observation.</p>
-      </div>
-    </div>
     <h3>ReAct is not a synonym for chain of thought or tool calling</h3>
     <p>Chain-of-thought prompting elicits intermediate reasoning but may never touch an external system. <a href="/glossary/tool-calling/">Tool calling</a> supplies an action interface but does not define the surrounding decision loop.</p>
     <p>Plan-and-Solve creates a plan before execution, whereas ReAct can revise its direction after each observation.</p>
@@ -845,21 +625,6 @@ terms:
     <h2>Plan-and-Solve targets missing-step errors</h2>
     <p>Lei Wang and coauthors <a href="https://arxiv.org/abs/2305.04091">introduced Plan-and-Solve prompting in 2023</a> as an extension of zero-shot chain-of-thought prompting. Their diagnosis was specific: a model can make calculation or semantic mistakes, but it can also fail simply because it leaves out a necessary reasoning step.</p>
     <p>Planning makes the intended decomposition explicit before execution begins.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">DECOMPOSITION</span><strong>Plan first when the task has dependent steps</strong><small>The plan is a checklist for execution, not evidence that the answer is correct.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Read the complete task</strong><small>Identify the required result and constraints.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">stable path</span><div class="flowchart-node"><strong>Write the subtask plan</strong><small>Order dependencies before solving them.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">unknown path</span><div class="flowchart-node"><strong>Gather evidence first</strong><small>Use an adaptive loop when observations determine the route.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">execute</span><div class="flowchart-node"><strong>Solve each subtask</strong><small>Carry forward the intermediate results.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">verify</span><div class="flowchart-node"><strong>Check the final result</strong><small>Compare the answer with the original constraints.</small></div></div>
-        </div>
-        <p class="flowchart-note">Planning reduces omission risk. It does not validate a false premise or repair a bad intermediate result by itself.</p>
-      </div>
-    </div>
     <h3>The framework differs from adaptive agent planning</h3>
     <p>ReAct alternates decisions with new observations and can change course during execution. Plan-and-Solve front-loads decomposition, so it fits stable problems better.</p>
     <p>A workflow engine goes further by encoding the steps in software rather than asking a model to invent them each time.</p>
@@ -893,18 +658,18 @@ terms:
     <p>The target model evaluates that run in one pass, accepts a valid prefix under the decoding rule, and resumes from the first rejection.</p>
     <p>The method can be lossless with respect to the target distribution when the acceptance and correction procedure is implemented correctly. A plain small-model fallback does not provide that guarantee.</p>
     <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">DRAFT AND VERIFY</span><strong>The target model accepts a prefix, not an unchecked completion</strong><small>Rejection returns generation to the target distribution.</small></div>
+      <div class="flowchart-caption"><span class="flowchart-caption-label">DRAFT AND VERIFY</span><strong>The target model verifies a proposed token run in parallel</strong><small>Acceptance advances the sequence; rejection returns control to the target.</small></div>
       <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Draft several candidate tokens</strong><small>A faster process proposes the next run.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>A faster process drafts several tokens</strong><small>The draft is a proposal, not final output.</small></div></div>
         <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">accepted prefix</span><div class="flowchart-node"><strong>Advance several positions</strong><small>Keep the proposals accepted by the target check.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">first rejection</span><div class="flowchart-node"><strong>Correct at the target model</strong><small>Discard the unsupported remainder of the draft.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">target accepts prefix</span><div class="flowchart-node"><strong>Commit accepted tokens</strong><small>Advance by more than one sequential target step.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">target rejects token</span><div class="flowchart-node"><strong>Stop at the first rejection</strong><small>Discard the unsupported remainder of the draft.</small></div></div>
         </div>
         <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">high acceptance</span><div class="flowchart-node"><strong>Fewer sequential target steps</strong><small>The draft work can repay its overhead.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">low acceptance</span><div class="flowchart-node"><strong>Little or no gain</strong><small>Draft and verification work may dominate.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">sequence continues</span><div class="flowchart-node"><strong>Draft the next run</strong><small>Repeat from the updated prefix.</small></div></div>
+          <div class="flowchart-outcome"><span class="flowchart-edge-label">correction required</span><div class="flowchart-node"><strong>Use the target-model token</strong><small>Resume drafting from the corrected prefix.</small></div></div>
         </div>
-        <p class="flowchart-note">The acceptance procedure is the algorithm. Guessing with a small model is not sufficient.</p>
+        <p class="flowchart-note">The verification rule preserves the target distribution. A faster draft alone does not.</p>
       </div>
     </div>
     <h3>Acceptance rate determines whether the draft helps</h3>
@@ -932,18 +697,15 @@ terms:
     <p>Agentic routing is an architectural pattern rather than a single named algorithm. It emerged as LLM systems gained specialized models, tools, and agents that should not all receive every request.</p>
     <p>The router solves selection; the chosen destination performs the work.</p>
     <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">ROUTING POLICY</span><strong>Send the request to the narrowest capable path</strong><small>Capability and permission matter before model preference.</small></div>
+      <div class="flowchart-caption"><span class="flowchart-caption-label">ROUTE OR ESCALATE</span><strong>The router chooses a policy-compatible destination</strong><small>Execution begins only after selection.</small></div>
       <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Classify the request and risk</strong><small>Inspect intent, required data, and allowed actions.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Read the request and known policy fields</strong><small>Preserve identity, permissions, and the original task.</small></div></div>
+        <div class="flowchart-root"><div class="flowchart-node"><strong>Resolve explicit routes first</strong><small>Use ordinary code when a stable field already decides.</small></div></div>
         <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">known path</span><div class="flowchart-node"><strong>Choose a specialist</strong><small>Use deterministic rules where the boundary is clear.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">ambiguous</span><div class="flowchart-node"><strong>Clarify or use a general path</strong><small>Do not hide uncertainty behind a confident label.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">destination is supported</span><div class="flowchart-node"><strong>Dispatch with the original request</strong><small>The selected executor receives the evidence behind the route.</small></div></div>
+          <div class="flowchart-branch"><span class="flowchart-edge-label">route is uncertain</span><div class="flowchart-node"><strong>Clarify or escalate</strong><small>Do not hide uncertainty behind the top predicted label.</small></div></div>
         </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">allowed</span><div class="flowchart-node"><strong>Dispatch with scoped context</strong><small>Pass only the data and tools the destination needs.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">restricted</span><div class="flowchart-node"><strong>Escalate or refuse</strong><small>Routing must not bypass authorization.</small></div></div>
-        </div>
-        <p class="flowchart-note">A routing label is not a security decision unless the host enforces the corresponding permissions.</p>
+        <p class="flowchart-note">The router owns destination choice. The selected model, tool, workflow, or person owns execution.</p>
       </div>
     </div>
     <h3>A router is not a planner or a mixture-of-experts gate</h3>
@@ -976,21 +738,15 @@ terms:
     <p>Provider APIs first offered JSON-focused generation to prevent prose around a machine-readable response. Schema-constrained structured outputs tightened the contract by limiting generation to shapes allowed by a developer-supplied schema.</p>
     <p>JSON mode can return <code>{"temperature":"warm"}</code> when the application expects a numeric Celsius field. The text parses, but it violates the application contract.</p>
     <p>A schema can require <code>temperature_c</code> as a number and reject undeclared fields.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">OUTPUT CONTRACT</span><strong>Choose the constraint that matches the consumer</strong><small>Parsing and schema adherence are different guarantees.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>What must the application consume?</strong><small>Define the contract before choosing a model setting.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">any JSON</span><div class="flowchart-node"><strong>Use JSON mode</strong><small>Require syntax the parser can read.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">fixed shape</span><div class="flowchart-node"><strong>Use structured outputs</strong><small>Supply the supported schema and required fields.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">schema valid</span><div class="flowchart-node"><strong>Check business rules</strong><small>Validate permissions, identifiers, and factual meaning.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">refusal or cutoff</span><div class="flowchart-node"><strong>Handle outside the object path</strong><small>Inspect completion state before parsing.</small></div></div>
-        </div>
-        <p class="flowchart-note">A valid object can still contain the wrong facts. The schema proves shape, not truth.</p>
-      </div>
-    </div>
+    <table>
+      <thead><tr><th>Requirement</th><th>JSON mode</th><th>Structured outputs</th></tr></thead>
+      <tbody>
+        <tr><td>Valid JSON syntax</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Required fields and types</td><td>Application must validate them</td><td>Generation is constrained to the supported schema</td></tr>
+        <tr><td>Enum and nesting contract</td><td>Not guaranteed by JSON syntax</td><td>Constrained when the provider supports those schema features</td></tr>
+        <tr><td>Factual correctness</td><td>Not guaranteed</td><td>Not guaranteed</td></tr>
+      </tbody>
+    </table>
     <h3>Function calling adds an operation to the schema</h3>
     <p><a href="/glossary/tool-calling/">Tool calling</a> uses structured arguments to request a named operation. A structured response may simply be returned to the application without invoking anything.</p>
     <p>Validation after generation is another option, but it may require repair or retry when the model produces an invalid shape.</p>
@@ -1016,21 +772,6 @@ terms:
     <h2>Stanford NLP shifted prompt work into program optimization</h2>
     <p>Omar Khattab and collaborators <a href="https://arxiv.org/abs/2310.03714">introduced DSPy</a> to replace manual prompt tweaking with declarative modules and optimizers. A developer defines the input-output signature and composes operations, then a DSPy optimizer uses examples and a metric to produce instructions, demonstrations, or other parameters for that program.</p>
     <p>The framework addresses a maintenance problem: handwritten prompts become brittle when models, modules, or task requirements change. Recompiling against an evaluation set can adapt the program without editing every instruction by hand.</p>
-    <div class="flowchart">
-      <div class="flowchart-caption"><span class="flowchart-caption-label">OPTIMIZATION LOOP</span><strong>DSPy searches program parameters against an explicit metric</strong><small>The examples and metric define what improvement means.</small></div>
-      <div class="flowchart-body">
-        <div class="flowchart-root"><div class="flowchart-node"><strong>Define modules and signatures</strong><small>Specify the inputs, outputs, and program composition.</small></div></div>
-        <div class="flowchart-branches">
-          <div class="flowchart-branch"><span class="flowchart-edge-label">examples</span><div class="flowchart-node"><strong>Run candidate programs</strong><small>Use development cases to produce outputs.</small></div></div>
-          <div class="flowchart-branch"><span class="flowchart-edge-label">metric</span><div class="flowchart-node"><strong>Score the behavior</strong><small>Reward the properties the task actually needs.</small></div></div>
-        </div>
-        <div class="flowchart-outcomes">
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">optimize</span><div class="flowchart-node"><strong>Select instructions or demonstrations</strong><small>Keep the candidate that improves the objective.</small></div></div>
-          <div class="flowchart-outcome"><span class="flowchart-edge-label">verify</span><div class="flowchart-node"><strong>Test on held-out cases</strong><small>Reject gains that only fit the development set.</small></div></div>
-        </div>
-        <p class="flowchart-note">DSPy can optimize only what the examples and metric make visible.</p>
-      </div>
-    </div>
     <h3>A support classifier needs a metric before an optimizer</h3>
     <p>A DSPy program might map a ticket to a category and urgency. The development examples provide expected labels, while the metric rewards correct category and applies a stronger penalty when urgent tickets are missed.</p>
     <p>The optimizer can only improve what that metric and dataset reveal.</p>
