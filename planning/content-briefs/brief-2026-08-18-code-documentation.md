@@ -62,3 +62,23 @@ Inbound retrofit, required, and `tools/check_link_retrofit.py` blocks the publis
 ## Gate
 
 `.venv/bin/python tools/check_link_retrofit.py --slug code-documentation` must exit 0.
+
+Pre-grade this article before it can ship:
+
+- **G1 — artifact:** no artifact is required. If research uncovers a genuinely useful one, it must
+  test an external fact or reader input; a checker that merely accepts a fixture written to satisfy
+  the same checker is a failure.
+- **G2 — first person:** every first-person sentence must be either a present-tense, inspectable
+  judgment about this repository or supported by a cited revision. Pipeline activity, client work,
+  team conventions, durations, measurements, and unrecorded past motives are failures.
+- **G3 — evidence ceremony:** do not add a command transcript, PASS string, screenshot, or receipt
+  unless it helps the reader decide where documentation belongs. Research receipts stay private.
+- **G4/G5 — shape:** compare the outline to the five-entry structure log. Do not reuse its opening
+  move or skeleton, and do not add a stock objection section when the decision has no real objection.
+- **G6 — linking:** keep the two subject-earned outbound destinations above and ship the required
+  inbound retrofit in the same commit. A quota link or outbound-only result fails.
+- **Heading and render:** use h3s only where they form real children of one h2 idea. After the build,
+  pass the strict cluster, stylesheet, and structure audits, inspect relevant computed styles on the
+  rendered page, and inspect a screenshot for layout. Add no CSS.
+- **Claims and prose:** changed-page claim and rule-checker counts may not regress. The repository
+  evidence must support the final wording, not merely the topic.
