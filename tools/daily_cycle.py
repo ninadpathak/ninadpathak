@@ -153,6 +153,88 @@ def shadowing_redirects() -> list[str]:
     return problems
 
 
+# A commit is not a deploy, and a deploy is not a working page. On 2026-08-17 eight
+# commits sat on origin/main while production kept serving an older build, and the only
+# reason it was noticed was a manual spot check. These are URLs that must serve 200 for
+# the site to be in the state the repo claims. Anything the repo builds but production
+# does not serve is a stalled or failed deploy, which is silent by default: Cloudflare
+# Pages keeps the previous deploy live when a build fails.
+LIVE_URLS = (
+    "/",
+    "/articles/",
+    "/glossary/",
+    "/linter/",
+    "/llms-txt-generator/",
+    "/llms-txt-validator/",
+    "/ai-overviews-checker/",
+    "/ai-crawler-checker/",
+    "/articles/ai-search-optimization/",
+    "/articles/ai-engineering/",
+    "/articles/technical-documentation/",
+)
+
+
+def deploy_check() -> list[str]:
+    """Compare what the local build produces against what production actually serves.
+
+    Reports the sitemap URL count on both sides, because a stale count is the earliest
+    and cheapest signal that a deploy did not land.
+    """
+    problems = []
+    local_sitemap = ROOT / "output" / "sitemap.xml"
+    local_count = None
+    if local_sitemap.exists():
+        local_count = local_sitemap.read_text(encoding="utf-8", errors="replace").count("<loc>")
+
+    class NoRedirect(urllib.request.HTTPRedirectHandler):
+        """Do not follow redirects.
+
+        Following them is what would have hidden the /glossary/ near-miss: a page the
+        build produces, shadowed by a stale redirect, resolves to 200 at the redirect
+        target and looks healthy. For a URL this build generates, a 3xx is a failure.
+        """
+
+        def redirect_request(self, req, fp, code, msg, headers, newurl):
+            return None
+
+    opener = urllib.request.build_opener(NoRedirect)
+
+    def fetch(path):
+        request = urllib.request.Request(
+            "https://ninadpathak.com" + path,
+            headers={"User-Agent": "ninadpathak-daily-cycle/1.0 (+https://ninadpathak.com)"})
+        try:
+            with opener.open(request, timeout=25) as r:
+                return r.status, r.read()
+        except urllib.error.HTTPError as exc:
+            return exc.code, b""
+        except (urllib.error.URLError, OSError) as exc:
+            return None, str(exc).encode()
+
+    status, body = fetch("/sitemap.xml")
+    if status != 200:
+        problems.append(f"live /sitemap.xml returned {status}")
+    elif local_count is not None:
+        live_count = body.decode("utf-8", "replace").count("<loc>")
+        if live_count != local_count:
+            problems.append(
+                f"DEPLOY STALE: live sitemap has {live_count} URLs, local build has "
+                f"{local_count}. Production is not serving what main builds.")
+
+    for path in LIVE_URLS:
+        # Only assert on URLs this build actually produces, so the check does not fail
+        # on a page that was legitimately removed.
+        built = ROOT / "output" / path.strip("/") / "index.html"
+        if path != "/" and not built.is_file():
+            continue
+        status, _ = fetch(path)
+        if status != 200:
+            detail = " (a redirect is shadowing a page the build generates)" if status and 300 <= status < 400 else ""
+            problems.append(f"live {path} returned {status} but the build produces it{detail}")
+
+    return problems
+
+
 def publish_gate() -> list[str]:
     """The mechanical half of the publish gate in campaign-90d.md section 8."""
     failures = []
@@ -201,6 +283,7 @@ def main() -> int:
     gsc = gsc_totals(start_28.isoformat(), end.isoformat())
     gate = publish_gate()
     gate += robots_check()
+    deploy = deploy_check()
     publish = todays_publish()
 
     if gsc is None:
@@ -220,7 +303,8 @@ def main() -> int:
            f"- Publish: {publish}\n"
            f"- {gsc_line}\n"
            f"- Distance to 10,000/month on non-brand clicks: **{distance}**\n"
-           f"- Publish gate: {'PASS' if not gate else 'FAIL — ' + '; '.join(gate)}\n")
+           f"- Publish gate: {'PASS' if not gate else 'FAIL — ' + '; '.join(gate)}\n"
+           f"- Deploy: {'LIVE, matches the build' if not deploy else 'STALE or FAILED — ' + '; '.join(deploy)}\n")
 
     print(row)
     if args.dry_run:
@@ -238,7 +322,7 @@ def main() -> int:
     with LOG.open("a", encoding="utf-8") as f:
         f.write(row)
 
-    return 1 if gate or "NO PUBLISH" in publish else 0
+    return 1 if gate or deploy or "NO PUBLISH" in publish else 0
 
 
 if __name__ == "__main__":
