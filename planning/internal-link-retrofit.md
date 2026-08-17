@@ -148,3 +148,13 @@ Both now need outbound targets, in the same cluster:
 
 Revised totals: **20 orphans, 11 outbound-deficient pages, 16 cross-cluster links remaining**, all
 16 judged legitimate on the subject test.
+
+
+## Void entries cleared, 2026-08-17
+
+The moat consolidation is deployed and verified: the 301 serves on both `/articles/` and `/blog/`
+forms, the sitemap dropped to 143, and both carried-over ideas landed in the Stripe page rather
+than being lost in the merge (defensive depth after acquisition, and content separated from product
+truth). The three entries in this plan that referenced the retired URL are therefore closed, not
+pending. Nothing in this document should now be executed against
+`technical-content-as-a-moat-the-long-game-for-developer-tools`.
