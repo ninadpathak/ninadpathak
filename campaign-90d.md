@@ -267,6 +267,39 @@ The link inventory flagged that of 96 syndicated dev.to articles, 14 canonicalis
 
 What is worth noting: **zero dev.to canonicals point at a tool page**, and only 14 of 90 published articles are syndicated at all.
 
+### Two defects on one element: unstyled, and identically shaped
+
+Both found on the live glossary on 2026-08-17, both by looking at the rendered page rather than the source, and neither catchable any other way.
+
+#### It shipped unstyled, and source review passed it
+
+`/glossary/context-engineering/` rendered its flowchart as run-together text: *"ASSEMBLYContext is selected for one task stepAvailability does not justify inclusion."* The markup was **correct**. The page loaded only `main.css`, so every `span`, `strong` and `small` rendered inline and concatenated.
+
+Full extent: **31 pages, three stylesheets, three separate root causes.** 25 glossary pages because `glossary_term.html` had no `extra_css` block at all. 5 article pages because `post.html` gated `visuals.css` on `"<iframe" in html`, missing a `.visual-container` that wraps an `<img>`. And `/llms-txt-generator/`, which uses the `.tool-panel` kit and never linked `linter.css` in its entire life. All fixed at source, detection now keyed on the **class** rather than the embed type; styled pages went flowcharts 1 → 26, visuals 67 → 72, linter 3 → 4.
+
+**"No new CSS" clarified, and it matters:** the rule forbids *authoring* styles — no new stylesheet, no new class names, no framework, no novel inline styling. It does not forbid linking a stylesheet that already exists in the repo. That is the reuse the rule exists to encourage, and it leaves `static/css/` untouched, so the publish-gate check stays correct as written.
+
+#### Every diagram was the same diagram
+
+All 25 entries shared **one** skeleton: identical ordered class sequence, exactly 5 nodes, 2 branches and 2 outcomes, only the strings differing. Every term had a diagram, when most should have none.
+
+A diagram earns its place by showing a shape the prose cannot. When the shape is the same for "context engineering", "semantic caching" and "model context protocol", the shape tells the reader nothing — it is a frame with words dropped into it, and pages that look identical read as programmatic output.
+
+**This is template convergence, the defect this campaign diagnosed in the Hermes writer and then reproduced by hand within the same afternoon.** The slop reviewer's brief already required comparing structure across the last five pieces; it did not catch it. That is the argument for mechanical checks over judgement calls, and it is why both of these are now tools rather than instructions.
+
+#### The rule, and the two gates
+
+**The shape comes from the subject.** Branching decision → branches. Sequence → a linear chain. Hierarchy → nesting. **Comparison → a table, not a flowchart.** Node count, depth and direction vary because the ideas vary, and if two pages in a cluster produce the same skeleton at least one is wrong. **Most pages need no diagram**, and `flowcharts.css` is not a house style.
+
+- `tools/audit_stylesheets.py --strict` — every page that uses a class links the stylesheet defining it, and every required stylesheet exists in the build so a correct link cannot 404. **Gating in CI and in the publish gate.** Verified by reverting the fix and watching it report 25 pages and exit 1.
+- `tools/audit_structure.py` — extracts the shape and reports **CONVERGED** when a group shares a skeleton, **SATURATED** when more than half a group carries a diagram. Reported in CI now, promotes to a hard gate once the rework lands, because it fails today and a gate that cannot go green is a mistake this repo has already made three times.
+
+#### The render gate, now three states
+
+**"Committed" is not "live", and "live" is not "correct."** In all three skill copies at v1.10.0 and in the publish prompt: run the stylesheet audit after the build; confirm every needed stylesheet returns 200, because a link to a 404 looks identical in source; then read a **computed style** on a representative element — **a `.flowchart-node` at `display: inline` is broken, `grid` or `flex` or `block` is fine**. That read is cheaper than a screenshot and catches this class exactly. A screenshot is for layout judgement only. After the fix that element read `display: grid` with a 3px accent border, verified in Chrome.
+
+The slop reviewer now reads **rendered output rather than markdown**, because a reviewer reading source would have passed the broken page.
+
 ### A link profile is a diagnostic for editorial substance
 
 Added 2026-08-17, and it changes what internal linking is for. **If every outbound link on a page fails the subject-of-the-sentence test, the page is telling you it has no natural neighbours.** The cause is almost always that the page holds an abstraction while other pages own each concrete piece of its argument, and an abstraction has no neighbours, so every link has to be manufactured. **Review the page. Do not replace the links.**
