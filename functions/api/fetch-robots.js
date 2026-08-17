@@ -150,7 +150,7 @@ export async function onRequestPost(context) {
         requestedUrl: target,
         finalUrl: url.toString(),
         status: response.status,
-        error: `robots.txt returned HTTP ${response.status}. A server error is not the same as an absent file, and crawler behaviour on a 5xx varies.`,
+        error: `robots.txt returned HTTP ${response.status}, so it was not read. A non-200 robots.txt is not a valid one, and some sites answer unrecognised clients this way deliberately: stackoverflow.com returns 418 to a client it does not know. What a crawler is served may differ from this.`,
       });
     }
 

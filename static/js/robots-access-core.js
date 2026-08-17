@@ -495,6 +495,13 @@
     }
 
     notes.push({
+      id: "response-varies-by-requester",
+      severity: "info",
+      message: "A site can serve different robots.txt content, or a non-200 status, depending on who asks. Verified 2026-08-17: stackoverflow.com/robots.txt answered an unrecognised client with HTTP 418 and a \"Disallow: /\" body, which is not what it serves a crawler it recognises. Rules fetched by any third party describe what that fetcher was given.",
+      basis: "First-party observation, 2026-08-17."
+    });
+
+    notes.push({
       id: "edge-blocking",
       severity: "info",
       message: "This reads the file only. A CDN or WAF can block a crawler at the edge whatever the file says, and a crawler can ignore the file. Confirm at the edge before concluding a crawler has access.",

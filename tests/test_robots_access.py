@@ -339,6 +339,14 @@ class ReportingTests(unittest.TestCase):
         result = run_check("Sitemap: https://example.com/sitemap.xml\n")
         self.assertIn("no-groups", [n["id"] for n in result["notes"]])
 
+    def test_requester_variance_caveat_is_always_reported(self):
+        """Verified 2026-08-17: stackoverflow.com answers an unrecognised client
+        with HTTP 418 and a "Disallow: /" body. What we fetch is not necessarily
+        what a crawler is served, and the tool must say so."""
+        for source in ("", NINAD_ROBOTS, "User-agent: *\nAllow: /\n"):
+            note_ids = [n["id"] for n in run_check(source)["notes"]]
+            self.assertIn("response-varies-by-requester", note_ids)
+
     def test_every_note_carries_a_basis(self):
         for source in ("", NINAD_ROBOTS, "Disallow: /\n"):
             for note in run_check(source)["notes"]:
