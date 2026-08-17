@@ -70,8 +70,17 @@ jobs:
               befores="$befores $base/$f"
             fi
           done
+          # No `cd` into the scratch tree: rule_checker.py lives at the repo root, and
+          # running it from elsewhere made python fail, the sed match come back empty, and
+          # ${before:-0} swallow the error as a baseline of zero. That reported "errors
+          # increased from 0 to 100" on a commit that REMOVED errors. The paths in
+          # $befores are absolute, so the repo root is the correct cwd.
           if [ -n "$befores" ]; then
-            before=$(cd "$base" && count $befores); before=${before:-0}
+            before=$(count $befores)
+            if [ -z "$before" ]; then
+              echo "::error::could not compute a baseline for $changed — refusing to guess"
+              exit 1
+            fi
           else
             before=0
           fi
@@ -111,7 +120,15 @@ jobs:
               befores="$befores $base/$f"
             fi
           done
-          if [ -n "$befores" ]; then before=$(claims $befores); before=${before:-0}; else before=0; fi
+          if [ -n "$befores" ]; then
+            before=$(claims $befores)
+            if [ -z "$before" ]; then
+              echo "::error::could not compute a claim baseline — refusing to guess"
+              exit 1
+            fi
+          else
+            before=0
+          fi
 
           echo "unevidenced-claim candidates on changed posts: before=$before after=$after"
           python tools/audit_claims.py --paths $changed || true
