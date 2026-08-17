@@ -14,6 +14,7 @@ import importlib.util
 import pathlib
 import sys
 import unittest
+from unittest import mock
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 spec = importlib.util.spec_from_file_location("daily_cycle", ROOT / "tools" / "daily_cycle.py")
@@ -63,6 +64,34 @@ class DeployLagTests(unittest.TestCase):
         # These would produce phantom lag on every campaign-document edit.
         self.assertNotIn('"planning/"', source)
         self.assertNotIn('"campaign-90d.md"', source)
+
+
+class PublishGateOrderTests(unittest.TestCase):
+    def test_build_precedes_every_check_that_reads_generated_output(self):
+        events = []
+
+        def run(*command, **_kwargs):
+            if command[-1] == "build.py":
+                events.append("build")
+                return 0, "SEO audit passed"
+            return 0, ""
+
+        def shadowing():
+            events.append("redirects")
+            return []
+
+        def stylesheets():
+            events.append("stylesheets")
+            return []
+
+        with mock.patch.object(daily_cycle, "run", side_effect=run), \
+             mock.patch.object(daily_cycle, "shadowing_redirects", side_effect=shadowing), \
+             mock.patch.object(daily_cycle, "unstyled_pages", side_effect=stylesheets), \
+             mock.patch.object(daily_cycle, "url_inventory_check", return_value=([], "")):
+            self.assertEqual(daily_cycle.publish_gate(), [])
+
+        self.assertLess(events.index("build"), events.index("redirects"))
+        self.assertLess(events.index("build"), events.index("stylesheets"))
 
 
 if __name__ == "__main__":

@@ -493,8 +493,6 @@ def unstyled_pages() -> list[str]:
 def publish_gate() -> list[str]:
     """The mechanical half of the publish gate in campaign-90d.md section 8."""
     failures = []
-    failures += shadowing_redirects()
-    failures += unstyled_pages()
 
     python = str(ROOT / ".venv" / "bin" / "python")
     if not pathlib.Path(python).exists():
@@ -508,6 +506,13 @@ def publish_gate() -> list[str]:
         failures.append(f"{broken} broken internal link(s)")
     if "SEO audit passed" not in out:
         failures.append("SEO audit did not pass")
+
+    # Both checks inspect generated output. Running them before the build makes a
+    # fast-forwarded Phantom checkout report defects from the previous commit, then
+    # silently repair its output later in this same gate. Build first so one invocation
+    # reports one coherent source/output state.
+    failures += shadowing_redirects()
+    failures += unstyled_pages()
 
     # Standing order 4: no new CSS, ever.
     code, css = run("git", "diff", "--stat", "origin/main", "--", "static/css/")
