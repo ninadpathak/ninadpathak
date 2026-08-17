@@ -46,6 +46,23 @@ worked on went from snappy to painful". An event claim with no measurement and n
 Weaker than the above, but it is a claim about something that happened. It is a KEEP page, so it
 belongs in a voice-repair pass rather than here.
 
+## AMENDMENT 2026-08-17: merges 2, 3 and 4 reverse direction
+
+**Found by the position analysis, before execution.** The spec below merges
+`memory-hierarchy-in-ai-systems` into `ai-memory-management-for-llms`. That is backwards.
+
+`memory-hierarchy-in-ai-systems` sits at **position 18.2** with **13 inbound links**.
+`ai-memory-management-for-llms` does not appear in the Search Console report at all and has 8
+inbound. The target was chosen on word count, and position is now the measured constraint while
+word count is not a ranking variable at all.
+
+**`memory-hierarchy-in-ai-systems` becomes the memory owner.** It absorbs
+`ai-memory-management-for-llms`, `the-memory-hierarchy-why-rag-is-not-enough`, and
+`memory-attribution-errors`. Redirect direction reverses accordingly, and the redirect block below
+must be regenerated before the batch runs.
+
+Read the merges below with that substitution applied.
+
 ## The merges
 
 All targets verified **terminal** (no target is itself a merge source) and present in the built
