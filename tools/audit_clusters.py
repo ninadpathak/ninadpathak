@@ -30,8 +30,23 @@ import sys
 import frontmatter
 
 POSTS = pathlib.Path("content/posts")
+OUTPUT = pathlib.Path("output")
 # Body links to another article. Captures the anchor text so a crossing can be judged.
 LINK = re.compile(r"\[([^\]]+)\]\(/articles/([a-z0-9][a-z0-9\-\.]*)/?\)")
+HREF = re.compile(r'href="/articles/([a-z0-9][a-z0-9\-\.]*)/"')
+
+# Listing pages link every post they list, so counting them would make every page look
+# connected. CHARTER 2e is explicit that a related-posts dump is not a link, so inbound
+# connectivity is measured from editorial pages only: article bodies, tool pages, and
+# hand-written pages. These are the built paths that are listings.
+def is_listing(path: pathlib.Path) -> bool:
+    rel = path.relative_to(OUTPUT).as_posix()
+    if rel in ("index.html", "articles/index.html"):
+        return True
+    if rel.startswith("articles/page/"):
+        return True
+    # A category archive is output/articles/<slug>/index.html where <slug> is a cluster.
+    return False
 
 
 def load() -> dict[str, dict]:
@@ -70,6 +85,7 @@ def main() -> int:
 
     undeclared = [s for s, p in posts.items() if not p["cluster"]]
     inbound: dict[str, int] = collections.Counter()
+    template_inbound: dict[str, int] = collections.Counter()
     outbound: dict[str, int] = collections.Counter()
     crossings = []
 
@@ -84,6 +100,29 @@ def main() -> int:
                 crossings.append((slug, src, target, dst, anchor,
                                   sentence_around(post["content"], anchor)))
 
+    # Inbound links that do not come from an article body — tool pages, hand-written
+    # pages, anything in the built site that is not a listing. Without these, a page
+    # linked only from /llms-txt-validator/ reads as an orphan when it is not.
+    clusters = {p["cluster"] for p in posts.values() if p["cluster"]}
+    if OUTPUT.exists():
+        for page in OUTPUT.rglob("*.html"):
+            if is_listing(page):
+                continue
+            rel = page.relative_to(OUTPUT).as_posix()
+            source_slug = rel[len("articles/"):-len("/index.html")] if rel.startswith("articles/") and rel.endswith("/index.html") else None
+            if source_slug in posts or source_slug in clusters:
+                continue  # article bodies and category archives already handled above
+            try:
+                html = page.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            for target in set(HREF.findall(html)):
+                if target in posts:
+                    template_inbound[target] += 1
+
+    for slug, n in template_inbound.items():
+        inbound[slug] += n
+
     sizes = collections.Counter(p["cluster"] or "(undeclared)" for p in posts.values())
     print(f"{len(posts)} published posts across {len(sizes)} clusters\n")
     for cluster, n in sizes.most_common():
@@ -96,6 +135,8 @@ def main() -> int:
     orphans = [s for s in posts if inbound[s] == 0]
     thin = [s for s in posts if outbound[s] < 2]
     print(f"\n--- no inbound link: {len(orphans)} ---")
+    print("Counts article bodies plus non-listing built pages. Listings are excluded:")
+    print("CHARTER 2e says a related-posts dump is not a link.")
     for slug in orphans:
         print(f"  [{posts[slug]['cluster']}] {slug}")
     print(f"\n--- fewer than 2 outbound links: {len(thin)} ---")
