@@ -645,3 +645,87 @@ The 118 candidates classify as:
 - **CUT: 7**
 
 The scanner produced **36 false positives**, all counted within KEEP. Most are unbacked-article links used as reading rather than evidence; the rest are FAQ headings, a heading matched by a verb, or first-person text inside an example quote.
+
+## Tightened-scanner completion pass
+
+After the scanner learned to suppress headings, standalone FAQ questions, and reading-list bullets, it returned 59 candidates across 42 posts. This pass reopened every earlier KEEP rather than inheriting the decision.
+
+### CUT (5)
+
+- **`agentic-workflow-playbook.md` L7:** Remove “The playbook below is the process I run...” because the next heading and summary already do that work.
+- **`agentic-workflow-playbook.md` L62:** Remove “Now the agent runs...” because the next sentence starts the stage without the transition or the unsupported claim about what Ninad built.
+- **`agentic-workflow-playbook.md` L122:** Remove the several-times-a-day claim and the claim about model generations. The next paragraph already makes the useful point about the outer loop.
+- **`voice-ai-latency-gemini-benchmark.md` L145:** Remove the repeated KV-cache link and the unsupported claim that voice is the most latency-sensitive application. The article already links to the mechanism earlier.
+- **`technical-content-as-a-moat-the-long-game-for-developer-tools.md` L105:** Retire the whole page rather than preserve a generic organizational claim. Its two distinct ideas move to the sourced Stripe case study.
+
+### REWRITE (6)
+
+- **`from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md` L64:** “Those local wins can quietly wreck the usefulness of the whole page.”
+- **`why-coding-agents-lose-their-memory.md` L114:** “Diagnose it with a specific test: start a session, do meaningful work, close the terminal, open a new session, and ask the agent what it remembers. An answer of nothing means the persistence layer is not working.”
+- **`hybrid-search-bm25-vector-search.md` L150:** “The [embedding models guide](/articles/embedding-models-compared/) explains the model-selection trade-offs behind the dense retriever. Read it as background, not benchmark evidence that BM25 can rescue a weak retriever.”
+- **`rag-evaluation-metrics-what-actually-matters.md` L191:** “Starting with answer relevancy alone hides upstream failures. The [embedding models guide](/articles/embedding-models-compared/) explains one possible failure in the retrieval layer, but it does not provide benchmark evidence for a particular model.”
+- **`speculative-decoding-explained.md` L5:** “Large models are ‘memory-bound.’ During single-token generation, moving model weights from high-bandwidth memory can constrain throughput.” Follow with: “[KV-cache eviction](/articles/kv-cache-eviction-accuracy/) addresses a related memory constraint but does not provide measured gains.”
+- **`time-to-first-token-ttft.md` L23:** “Prefilling contributes to TTFT because the model processes the input before it emits the first token. The [KV-cache article](/articles/kv-cache-eviction-accuracy/) explains the state built during that phase, not a universal latency result.”
+
+### KEEP: earned and verifiable (12)
+
+- **`agentic-workflow-playbook.md` L1:** Ninad's current agent workflow is visible in the repository and its review history.
+- **`from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md` L1 and L13:** The career transition is true, and command verification is the site's documented working standard.
+- **`episodic-vs-semantic-vs-working-memory-agents.md` L35:** This is an earned judgment about a failure pattern, not a claimed measurement.
+- **`seo-for-technical-documentation.md` L1 and L171:** The auditor exists, targets an external page, and reproduced its stated result in the earlier audit.
+- **`api-documentation-template-the-pages-every-api-needs.md` L1:** The linked page outline exists in the repository.
+- **`coding-agent-setup-that-works.md` L118:** The linked workflow and fixed setup describe the current working process.
+- **`documentation-style-guide-template.md` L3:** The attached template exists in the repository.
+- **`llms-txt-examples-real-files-audited.md` L1:** The live validator is Ninad's tool and the sentence accurately limits its claim.
+- **`technical-documentation-template.md` L5:** The five-page template and validator exist in the repository.
+- **`what-makes-a-page-extractable-by-answer-engines.md` L3:** The live checker runs nine named checks and distinguishes requirements from heuristics.
+
+### KEEP: contextual false positives (36)
+
+The following 31 links point to conceptual background, an architecture survey, or further reading. None is used as reproducible proof:
+
+- `voice-ai-latency-gemini-benchmark.md` L50 and L116
+- `the-taxonomy-of-ai-agents.md` L23 and L38
+- `best-llms-for-coding.md` L11 and L95
+- `episodic-vs-semantic-vs-working-memory-agents.md` L124
+- `local-wasm-vector-benchmarks.md` L83
+- `memory-attribution-errors.md` L64 and L98
+- `state-of-ai-agent-memory-2026.md` L160 and L194
+- `the-agent-design-space.md` L15 and L84
+- `why-coding-agents-lose-their-memory.md` L167
+- `why-ai-agents-keep-failing-in-production.md` L88
+- `lambda-calculus-ai-reasoning-benchmark.md` L86
+- `asymmetric-retrieval-agent-memory.md` L70
+- `contextual-compression-for-agent-memory.md` L114
+- `agent-memory-for-customer-support.md` L19
+- `ai-memory-management-for-llms.md` L380
+- `beam-memory-benchmark.md` L21
+- `context-windows-vs-memory.md` L305
+- `fine-tuning-vs-rag-for-agent-memory.md` L45
+- `llm-inference-optimization.md` L46
+- `memory-for-voice-ai-agents.md` L252
+- `memory-hierarchy-in-ai-systems.md` L221
+- `prompt-caching-what-it-is-and-when-the-math-works.md` L11
+- `reranking-in-rag-why-your-top-k-results-are-probably-wrong.md` L17
+- `short-term-memory-for-ai-agents.md` L170
+- `technical-writing-examples.md` L139
+
+Four candidates match only the first-person wording of an FAQ question: `voice-ai-latency-gemini-benchmark.md` L157, `local-wasm-vector-benchmarks.md` L126, `mixture-of-experts-explained.md` L115, and `model-context-protocol-explained.md` L102. The remaining false positive is `how-memory-works-in-claude-code.md` L174, where “we migrated” appears inside an inline-code example.
+
+Two safe suppression rules follow from those five cases:
+
+1. Strip a leading bold FAQ question before applying the first-person-action pattern, then scan the answer that follows it.
+2. Strip inline-code spans before applying the first-person-action pattern.
+
+Neither rule suppresses a prose claim. No safe regex can suppress the 31 contextual links without also hiding a link used as proof, so those stay in the human-review queue.
+
+### Completion-pass totals
+
+- **KEEP: 48**
+- **REWRITE: 6**
+- **CUT: 5**
+- **False positives: 36**, included within KEEP
+
+## Moat-page consolidation
+
+The Stripe case study now carries both ideas the retired page owned: documentation as defensive depth after acquisition, and the loss of product truth when content is separated from product and engineering. The retired article and legacy blog routes redirect to `/articles/how-stripes-technical-blog-became-a-competitive-moat/`, its two corpus links now point to that case study, and the pillar no longer lists the retired slug.

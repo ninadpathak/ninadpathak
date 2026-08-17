@@ -75,7 +75,7 @@ Documentation gets stronger when it explains how a failure becomes visible and w
 
 Engineering often rewards local optimization, shaving milliseconds off one function or tidying one module. Writing offers the same little wins, polishing a single sentence or slipping in a clever analogy.
 
-I found that those local wins can quietly wreck the usefulness of the whole page.
+Those local wins can quietly wreck the usefulness of the whole page.
 
 <div class="visual-wrapper">
   <div class="visual-title">The Context Bridge</div>

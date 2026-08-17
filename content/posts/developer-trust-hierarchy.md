@@ -158,7 +158,7 @@ Completeness without a path through it leaves the reader more lost than a thinne
 
 ## Engineering documentation as infrastructure
 
-Information architecture is the primary competitive moat for developer-first companies in 2026, and [durable technical content compounds into a lasting moat](/articles/technical-content-as-a-moat-the-long-game-for-developer-tools/) over time. Technical practitioners reward teams that fold writing into the product roadmap.
+Information architecture is the primary competitive moat for developer-first companies in 2026, and [Stripe's technical blog shows how that advantage compounds](/articles/how-stripes-technical-blog-became-a-competitive-moat/) over time. Technical practitioners reward teams that fold writing into the product roadmap.
 
 Teams that neglect it eventually discover [how devtools startups lose deals over bad docs](/articles/why-devtools-startups-lose-deals-over-bad-docs/).
 

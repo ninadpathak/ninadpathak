@@ -16,7 +16,9 @@ Inference speed is the biggest hurdle I keep running into with interactive LLM a
 
 The first instinct I had, and the one I see most teams reach for, was to throw more GPUs at the problem. That instinct ignores the physics of how these models actually run, and it costs a fortune for a speedup that never quite arrives.
 
-Large models are "memory-bound." When I generate a single token, the GPU spends most of its time waiting for the model's weights to travel from high-bandwidth memory into the compute units, the same memory wall that makes [KV cache eviction such a high-value optimization](/articles/kv-cache-eviction-accuracy/).
+Large models are "memory-bound." During single-token generation, moving model weights from high-bandwidth memory can constrain throughput.
+
+[KV-cache eviction](/articles/kv-cache-eviction-accuracy/) addresses a related memory constraint but does not provide measured gains.
 
 The arithmetic of turning those weights into one token finishes almost instantly, then the cores sit idle waiting for the next batch of weights. Picture a chef with a tiny cutting board who has to walk to a pantry across the building for each ingredient.
 

@@ -127,7 +127,7 @@ Entries older than 90 days get audited. When the content no longer reflects proj
 
 Cross-session continuity breaks in a third way I did not anticipate. A coding agent can have good memory within a session and zero memory across sessions when the persistence layer is not connected properly.
 
-To diagnose it I run a specific test: start a session, do meaningful work, close the terminal, open a new session, and ask the agent what it remembers. An answer of nothing means the persistence layer is not working.
+Diagnose it with a specific test: start a session, do meaningful work, close the terminal, open a new session, and ask the agent what it remembers. An answer of nothing means the persistence layer is not working.
 
 ## The Practical Fixes That Actually Work
 

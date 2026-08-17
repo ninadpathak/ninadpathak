@@ -203,7 +203,7 @@ If you're starting from scratch, optimize in this order:
 
 4. **Answer relevancy fourth.** Everything above this point measures parts of the system. Answer relevancy measures the whole thing working together.
 
-Starting with answer relevancy alone hides upstream failures. Teams can spend weeks tuning prompts while retrieval quietly misses the supporting passage, sometimes because [the embedding model cannot separate the query and document geometrically](/articles/embedding-models-compared/).
+Starting with answer relevancy alone hides upstream failures. The [embedding models guide](/articles/embedding-models-compared/) explains one possible failure in the retrieval layer, but it does not provide benchmark evidence for a particular model.
 
 <div class="visual-wrapper">
   <div class="visual-title">RAG EVALUATION FUNNEL</div>

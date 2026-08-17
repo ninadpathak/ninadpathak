@@ -19,8 +19,6 @@ The agent does the heavy lifting. I step in at the moments a mistake would actua
 
 Almost all of the value in agentic work comes from the structure around the agent rather than the model. A strong model inside a sloppy process produces confident garbage, and a modest model inside a tight process ships real work.
 
-The playbook below is the process I run, stage by stage, with the checkpoints where I step back in.
-
 ## The playbook in one sentence
 
 Frame the task, scope it down, let the agent work against an instrumented loop, review the diff like I do not trust it, then land it. Five stages, two of them mine and one of them the agent's, with scoping and landing as the seams between.
@@ -73,8 +71,6 @@ Scoping is also where I decide whether the task needs one agent or several. The 
 I covered the real trade-offs in [multi-agent versus single-agent systems](/articles/multi-agent-vs-single-agent-tradeoffs/), and the short version is that coordination cost is real and most tasks do not need it.
 
 ## Stage 3: Let the agent work against an instrumented loop
-
-Now the agent runs. The third stage belongs to the agent, and the only thing I control here is what I built before it started.
 
 After reading the frame and the relevant files, the agent starts its loop. What matters is that I can see what it is doing.
 
@@ -133,8 +129,6 @@ The two stages I own, framing and review, are where my judgment lives. The stage
 Scoping and landing are the seams that connect them. Skip framing and the agent solves the wrong problem.
 
 Skip review and the wrong solution ships. Keep all five and the agent becomes the fastest reliable contributor I work with.
-
-I run this loop several times a day. The model gets better every few months and the playbook does not change, because the playbook is about where human judgment belongs rather than about which model is best this quarter.
 
 The shape of what people build keeps shifting, and I mapped a lot of that in [the agent design space](/articles/the-agent-design-space/), but the outer loop has stayed the same since the first week I trusted an agent with real work. Get the structure right and the model becomes a detail you swap out.
 

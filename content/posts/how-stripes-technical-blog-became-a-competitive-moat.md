@@ -138,6 +138,14 @@ Stripe’s content does that for payment integrations, the way a good flight man
 
 They explain failure modes, migration costs, debugging paths, and state transitions.
 
+## Documentation creates defensive depth after acquisition
+
+Acquisition is only the first job. Documentation becomes defensive depth when it helps an existing customer absorb change without reopening the vendor decision.
+
+Stripe's [API upgrade guidance](https://docs.stripe.com/upgrades) does that work. A team facing an API change can see the migration path, test against a pinned version, and plan the change before an incident forces it.
+
+That lowers the operational risk of staying with the product. The guide earns its defensive value when a customer can handle change without spending the same afternoon evaluating a replacement.
+
 ## Quality signals matter more than polished brand voice
 
 Stripe’s moat did not come from sounding polished. Plenty of polished company blogs go nowhere.
@@ -161,6 +169,12 @@ Authoritative content does not get you there on its own.
 ## What other companies get wrong when they copy the format
 
 Teams often copy the visible surface of Stripe’s blog and miss the machinery underneath.
+
+Separating content from product truth causes more damage. A content team can meet its publishing schedule even as tutorials drift behind API changes.
+
+Stripe's strongest posts work because their authors can explain state transitions, migrations, and failure modes from inside the problem. Editorial polish cannot recover details that the publishing process never collected.
+
+That separation also costs the team building the product. The analysis of [documentation and engineering velocity](/articles/engineering-velocity-documentation/) explains what maintained knowledge changes inside engineering work.
 
 Long engineering posts go up without a docs system worth linking to, so a reader who gets excited has nowhere to land. Architecture stories that impress peers at conferences do little for the buyer or the implementer trying to ship next week.
 

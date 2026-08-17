@@ -34,7 +34,7 @@ When I talk about TTFT I mean the interval between a user sending a request and 
 
 A model can post a gorgeous tokens-per-second figure and still feel sluggish to type at, because the user judges responsiveness almost entirely by that first word.
 
-Prefilling the prompt is the part that dominates TTFT in my experience. Before the model can emit a single token it has to read every input token and build the [initial KV cache](/articles/kv-cache-eviction-accuracy/), and that work is a one-time tax paid at the start of every request.
+Prefilling contributes to TTFT because the model processes the input before it emits the first token. The [KV-cache article](/articles/kv-cache-eviction-accuracy/) explains the state built during that phase, not a universal latency result.
 
 Because the cost scales with prompt length, a request carrying a 200-token question returns far faster than the same request after I have stuffed 40k tokens of retrieved documents in front of it. A support assistant I worked on went from snappy to painful purely because someone padded the system prompt with a second page of tone-of-voice instructions, doubling its size overnight and adding a beat of dead air before every reply.
 

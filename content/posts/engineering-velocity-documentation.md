@@ -170,7 +170,7 @@ ADRs are a high-signal example of practitioner writing that outranks the standar
 
 ## Engineering documentation as infrastructure
 
-Information architecture has become the primary competitive moat for developer-first companies in 2026, and [durable technical content compounds into a long-term moat](/articles/technical-content-as-a-moat-the-long-game-for-developer-tools/) for developer tools. Practitioners reward the teams that put writing on the product roadmap instead of leaving it for a quarter that never arrives.
+Information architecture has become the primary competitive moat for developer-first companies in 2026, and [Stripe's technical blog shows how that advantage compounds](/articles/how-stripes-technical-blog-became-a-competitive-moat/). Practitioners reward the teams that put writing on the product roadmap instead of leaving it for a quarter that never arrives.
 
 When a doc lets a developer wire up your SDK in ten minutes instead of an afternoon, that page stops being content and starts being infrastructure. Deep practitioner writing earns a permanent spot in the trusted toolkit the way a reliable library does.
 

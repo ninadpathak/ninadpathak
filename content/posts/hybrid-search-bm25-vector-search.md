@@ -162,7 +162,7 @@ Paying for that requires real infrastructure. You're running two indexes for BM2
 
 Latency roughly doubles against single-retriever approaches before any reranking enters the picture. For a search box that needs to feel instant under a user's keystrokes, that doubling is the difference between fast and noticeably laggy.
 
-I covered embedding model selection in [Embedding Models Compared](/articles/embedding-models-compared/), which is relevant here: the dense retriever quality has a floor effect on hybrid search. A weak dense retriever won't be salvaged by BM25.
+The [embedding models guide](/articles/embedding-models-compared/) explains the model-selection trade-offs behind the dense retriever. Read it as background, not benchmark evidence that BM25 can rescue a weak retriever.
 
 The combination amplifies both retrievers' strengths, not their weaknesses.
 

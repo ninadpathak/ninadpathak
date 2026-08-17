@@ -159,8 +159,6 @@ The next frontier is **full-duplex voice**: the ability for the agent to listen 
 
 Full-duplex systems also need a measured interruption target because the agent must stop output promptly when the caller speaks.
 
-I covered the broader [KV cache management problem](/articles/kv-cache-eviction-accuracy/) that affects all LLM-based systems. Voice agents are simply the most latency-sensitive application of these infrastructure constraints.
-
 Every millisecond saved in the context window is a millisecond closer to a conversation that feels human.
 
 Teams building voice-first products need clear architectural documentation and implementation guides. [My work page](/work) shows how I explain complex infrastructure for developer-tool companies.
