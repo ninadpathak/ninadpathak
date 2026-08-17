@@ -160,6 +160,35 @@ The remediation set is posts carrying **30 or more impressions at position 20 or
 
 One thing the audit found that the rule did not anticipate: only **4 posts have no table, diagram or visual at all**, so tables are common and diagrams are absent. The gap is not that the writing lacks structure, it is that structure is always expressed as a table. That is what the never-used `flowcharts.css` system is for.
 
+### Cluster 3 consolidates 57 posts to 36, entirely by merge
+
+Approved 2026-08-17. Cluster 3 holds the most volume in the niche, the worst KD≤20 share at 40%, the heaviest AI Overview saturation at 65%, and zero human clicks. Adding to it was the wrong move; the audit that decided what to consolidate is the work nothing had scheduled.
+
+**Nothing is retired.** All 21 reductions are merges into targets verified terminal and present in the built sitemap, so no URL loses its earning ability — each source 301s to a page that actually answers what it promised. The retrofit sits **inside each merge commit** rather than after it, because the merged sources carry 69 inbound links and a split commit would orphan them while `audit_clusters --strict` is a CI gate.
+
+Sequenced into five batches by target owner, **memory core first** because it carries the most inbound links and impressions — the opposite of the comfortable order, and the right one: it exercises the gates where a mistake costs most.
+
+The audit also corrected two of its own draft numbers before commit, an inbound-link count of 108 that was really 69 and a keep table that double-counted the repointed page. Its own words, which belong here: **an audit about unevidenced claims does not get to ship an unevidenced number.**
+
+**Recorded caveat: consolidation makes cluster 3 defensible, not competitive.** Thirty-six posts at 65% AI Overview saturation is still large in a hostile field. The twelve planned cluster-3 rows still collapse to about six and the freed slots stay empty.
+
+### The glossary got deeper and stayed flat
+
+First pass deployed, and it is better than what was live — but measured against the standard rather than against its own report, it fails two of four requirements. The measurement is on the **25 rendered pages**, not the YAML, because the YAML is not what a reader or a crawler receives.
+
+| | Before | After |
+|---|---:|---:|
+| Median rendered words | 273 | **371** |
+| Pages with any `h3` | 0 | **0** |
+| `h2`s per page | 3 | 3–4 |
+| Pages with a diagram | 0 | 7 of 25 |
+
+**Passed:** `opening_definition` is 40 to 80 words on every term, self-contained, with no pronoun pointing back at the title. That is the most citable unit on the page. And seven flowcharts using the existing classes are the **first use of that system anywhere on the site**.
+
+**Failed:** every one of the 25 pages has zero `h3`s and three or four `h2`s in the same shape, which is both the flat-structure defect and the fixed-template defect the instruction named — twenty-five terms sharing a heading tree means twenty-four are padded. And the +36% is smaller than the raw field count suggests because `short_definition` and `use_cases` **render nowhere**: 50 occurrences of content no reader sees. Content nobody sees is not depth, and dead fields are debt.
+
+Sent back for a second pass. The lesson worth keeping: **measure the rendered page, not the source data.** A three-times increase in a YAML file was a 36% increase for a reader.
+
 ### A link profile is a diagnostic for editorial substance
 
 Added 2026-08-17, and it changes what internal linking is for. **If every outbound link on a page fails the subject-of-the-sentence test, the page is telling you it has no natural neighbours.** The cause is almost always that the page holds an abstraction while other pages own each concrete piece of its argument, and an abstraction has no neighbours, so every link has to be manufactured. **Review the page. Do not replace the links.**
