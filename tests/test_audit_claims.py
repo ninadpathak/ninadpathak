@@ -140,5 +140,49 @@ class ReviewerIdentifiedRefinementTests(unittest.TestCase):
         self.assertTrue(self.flagged("I measured 40ms running `npm test` on an RTX 4090."))
 
 
+class ExperienceClaimTests(unittest.TestCase):
+    """Experience asserted without the words "I did" was invisible to the scanner.
+
+    The opening line of the highest-human-demand page on the site — "Two years of running AI
+    agents in production taught me that..." — scored zero candidates, because the
+    first-person-verb pattern only matches "I <verb>". A duration or a scale attached to
+    personal experience is the same falsifiable claim, phrased around the verb instead of
+    through it. Closing the gap took candidates from 50 to 83.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from importlib.util import module_from_spec, spec_from_file_location
+        spec = spec_from_file_location("audit_claims_exp", TOOL)
+        cls.mod = module_from_spec(spec)
+        spec.loader.exec_module(cls.mod)
+
+    def flagged(self, line):
+        return bool(self.mod.classify(line))
+
+    def test_duration_plus_taught_me_is_a_claim(self):
+        self.assertTrue(self.flagged(
+            "Two years of running AI agents in production taught me that error handling matters."))
+
+    def test_in_my_experience_is_a_claim(self):
+        self.assertTrue(self.flagged("In my experience the reference page ages worst."))
+
+    def test_a_duration_about_something_else_is_not_a_claim(self):
+        """The distinction that keeps the detector usable.
+
+        A span of time is only an experience claim when it is someone's own span.
+        """
+        self.assertFalse(self.flagged("The model takes three years of training data."))
+        self.assertFalse(self.flagged("A benchmark over six months of logs shows the drift."))
+
+    def test_a_duration_with_a_first_person_marker_is_a_claim(self):
+        self.assertTrue(self.flagged("I spent six months of evenings on the linter."))
+
+    def test_stated_judgment_is_still_not_flagged(self):
+        """my approach / my focus are positions, not events."""
+        self.assertFalse(self.flagged("My approach is to keep it short."))
+        self.assertFalse(self.flagged("My focus is LLM-based agents that call tools."))
+
+
 if __name__ == "__main__":
     unittest.main()

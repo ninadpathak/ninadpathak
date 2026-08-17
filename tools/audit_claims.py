@@ -50,6 +50,29 @@ MEASUREMENT = re.compile(
     r"|\b\d+\s+(?:of|out of)\s+\d+\b"
     r"|\bp\d{2}\b", re.IGNORECASE)
 
+# Experience claimed without the words "I did". The first-person-verb pattern misses these
+# entirely, and one of them opens the highest-human-demand page on the site: "Two years of
+# running AI agents in production taught me that..." scored zero candidates. A duration or a
+# scale attached to personal experience is the same falsifiable claim as "I measured", just
+# phrased around the verb.
+# Phrases that assert personal experience on their own.
+EXPERIENCE_CLAIM = re.compile(
+    r"\btaught me\b|\bin my experience\b"
+    r"|\bI have (?:built|shipped|run|seen|reviewed|audited)\b"
+    r"|\bevery time I\b|\bwhen I was\b|\bmy (?:clients?|team|company|employer)\b",
+    re.IGNORECASE)
+
+# A span of time is only an experience claim when it is someone's own span. "The model takes
+# three years of training data" is a fact about a model; "three years of running agents"
+# beside a first-person pronoun is a claim about Ninad. Requiring the pronoun on the same
+# line keeps the first out and the second in — a distinction found by testing the detector
+# against a sentence I wrote to break it.
+DURATION = re.compile(
+    r"\b(?:a|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+"
+    r"(?:years?|months?|weeks?)\s+of\b"
+    r"|\bafter (?:years|months) of\b", re.IGNORECASE)
+FIRST_PERSON_MARKER = re.compile(r"\b(?:I|my|me|we|our)\b", re.IGNORECASE)
+
 # Named hardware or a named model with a version is where an unbacked benchmark hides.
 NAMED_KIT = re.compile(
     r"\b(?:RTX|GTX|A100|H100|H200|M1|M2|M3|M4|EPYC|Xeon|Ryzen)\b"
@@ -81,6 +104,8 @@ def classify(line: str) -> list[str]:
     person = bool(FIRST_PERSON_ACTION.search(line))
     measured = bool(MEASUREMENT.search(line))
     kit = bool(NAMED_KIT.search(line))
+    experience = bool(EXPERIENCE_CLAIM.search(line)) or bool(
+        DURATION.search(line) and FIRST_PERSON_MARKER.search(line))
 
     if person and measured:
         reasons.append("first-person measurement")
@@ -90,6 +115,8 @@ def classify(line: str) -> list[str]:
         reasons.append("first-person action")
     if measured and kit and not person:
         reasons.append("bare measurement on named kit")
+    if experience:
+        reasons.append("experience claim without a first-person verb")
     if UNBACKED_LINK.search(line):
         reasons.append("cites an article with no reproducible artifact")
     return reasons
