@@ -1,0 +1,1240 @@
+{
+  "generated": "2026-08-17",
+  "method": "parent topic first, live SERP where ambiguous, keep on doubt",
+  "paid_calls": 0,
+  "serp_decisions": {
+    "community management": {
+      "verdict": "REMOVE",
+      "evidence": "SERP 2026-08-17: Community Management Services Inc, CMS Orlando 'HOA & Condo Association Management Experts', Community Management Advisors, CMC 'HOA Property Management', CMA Community Association, Professional Community Management. A definition result states 'community management (also called property management)'. Entirely HOA/property. This is cluster 6's head term."
+    },
+    "community management services": {
+      "verdict": "REMOVE",
+      "evidence": "SERP 2026-08-17: The Management Trust 'HOA Services', Yelp Property Management, CMA Community Association Management, CMC 'HOA Property Management', Associa, condomanagement.com. Entirely HOA/property."
+    },
+    "community management software": {
+      "verdict": "KEEP",
+      "evidence": "SERP 2026-08-17: majority on-niche \u2014 Glue Up, Sprinklr, Bevy, G2's 'Online Community Management' category, BuddyBoss. PayHOA and association-management results are a minority. Kept, partially contaminated."
+    },
+    "online community engagement": {
+      "verdict": "REMOVE",
+      "evidence": "SERP 2026-08-17: Granicus (government software), Simply Stakeholders, Local Housing Solutions (housing policy), an NCBI COVID paper. This is the civic/public-consultation sense, a separate industry. Higher Logic is the only on-niche result."
+    },
+    "reddit seo": {
+      "verdict": "KEEP",
+      "evidence": "SERP 2026-08-17: Search Engine Land, Siege Media, SEO Sherpa, Sprout Social, Semrush \u2014 all about optimising brand presence on Reddit for search. Genuinely on-niche despite parent topic 'latest seo'. A removal that parent topic alone would have made wrongly."
+    },
+    "developer portal": {
+      "verdict": "KEEP",
+      "evidence": "SERP 2026-08-17: OpsLevel, Zuplo, Pronovix, Port.io, Azure API Management, getDX \u2014 developer portals as a docs and platform engineering concept. Parent topic 'discord developer portal' is misleading. A second removal that parent topic alone would have made wrongly."
+    },
+    "audit documentation example": {
+      "verdict": "REMOVE",
+      "evidence": "SERP 2026-08-17: PCAOB AS 1215, wallstreetmojo, wikiaccounting, accountinguide, Vaia accounting. 'work papers or working papers', depreciation, inventory counts. ISA 230 assurance sense."
+    },
+    "chatgpt seo": {
+      "verdict": "KEEP",
+      "evidence": "SERP 2026-08-17: mixed but majority the right sense \u2014 SEO Sherpa 'Optimize Your Content for AI Search', Semrush 'How to Show Up in ChatGPT Responses', directom 'How To Optimize For ChatGPT'. The head terms are citation-optimisation. Only the explicit prompt sub-family is the inverted job."
+    },
+    "how to host a virtual event": {
+      "verdict": "REMOVE",
+      "evidence": "SERP 2026-08-17: Zoom Webinars, Lucidspark, Whova, ON24, wiz-team, Wharton IT. 'speaker fees, attendee gifts, video and audio equipment', 'attendee acquisition and marketing'. Corporate webinar/events industry, not community or technical events."
+    }
+  },
+  "contested_kept": {
+    "crypto community building": "A different vertical, but the job is the same growth work.",
+    "circle online community": "Branded platform query; a practitioner researches Circle.",
+    "best forum software": "On-niche, though 'forum software' skews to legacy vendors.",
+    "best ai agent projects from 2025 hackathons": "Parent topic 'hackathon agency' is event services, but the keyword is genuinely about AI agent projects. Possible cluster-7 misassignment rather than contamination.",
+    "how to make a subreddit": "Creating a subreddit is a real Reddit-marketing action; the consumer-discovery rule deliberately does not catch the create/start family.",
+    "subreddit stats": "Analyst and marketer tooling rather than consumer browsing."
+  },
+  "removals_by_reason": {
+    "1:accounting-audit": {
+      "keywords": [
+        {
+          "keyword": "audit documentation software",
+          "volume": 100,
+          "parent_topic": "auditing software for accountants"
+        },
+        {
+          "keyword": "audit documentation example",
+          "volume": 40,
+          "parent_topic": "audit documentation"
+        }
+      ],
+      "volume": 140,
+      "reason": "ISA 230 / PCAOB assurance workpapers, not developer documentation. Parent topic 'auditing software for accountants' names the industry outright; SERP confirmed."
+    },
+    "1:hr-disciplinary": {
+      "keywords": [
+        {
+          "keyword": "employee conversation documentation template",
+          "volume": 60,
+          "parent_topic": "employee conversation documentation template"
+        },
+        {
+          "keyword": "employee behavior documentation template",
+          "volume": 60,
+          "parent_topic": "employee documentation template"
+        },
+        {
+          "keyword": "employee documentation template",
+          "volume": 50,
+          "parent_topic": "employee documentation template"
+        }
+      ],
+      "volume": 170,
+      "reason": "HR performance and disciplinary paperwork, not product documentation."
+    },
+    "1:lending-finance": {
+      "keywords": [
+        {
+          "keyword": "loan documentation software",
+          "volume": 150,
+          "parent_topic": "loan document software"
+        }
+      ],
+      "volume": 150,
+      "reason": "Loan origination document management."
+    },
+    "1:medical-records": {
+      "keywords": [
+        {
+          "keyword": "hospital documentation software",
+          "volume": 200,
+          "parent_topic": "medical document management software"
+        }
+      ],
+      "volume": 200,
+      "reason": "Clinical and hospital records management, a regulated separate industry."
+    },
+    "2:adobe-experience-manager": {
+      "keywords": [
+        {
+          "keyword": "adobe experience manager developer guide",
+          "volume": 200,
+          "parent_topic": "adobe experience manager developer guide"
+        },
+        {
+          "keyword": "adobe experience manager developer certification",
+          "volume": 150,
+          "parent_topic": "aem developer certification"
+        },
+        {
+          "keyword": "adobe experience manager developer training",
+          "volume": 150,
+          "parent_topic": "adobe experience manager tutorial pdf"
+        },
+        {
+          "keyword": "adobe experience manager developer",
+          "volume": 100,
+          "parent_topic": "adobe aem"
+        }
+      ],
+      "volume": 600,
+      "reason": "Adobe Experience Manager product training and certification. Token match on 'experience' plus 'developer'."
+    },
+    "2:no-experience-jobseeker": {
+      "keywords": [
+        {
+          "keyword": "software developer no experience",
+          "volume": 30,
+          "parent_topic": "software engineer no experience"
+        },
+        {
+          "keyword": "web developer cover letter no experience",
+          "volume": 30,
+          "parent_topic": "web developer cover letter"
+        }
+      ],
+      "volume": 60,
+      "reason": "Job-seeker queries matching on the token 'experience'."
+    },
+    "2:real-estate-developer": {
+      "keywords": [
+        {
+          "keyword": "home developer marketing agency",
+          "volume": 200,
+          "parent_topic": "home builder marketing agency"
+        },
+        {
+          "keyword": "real estate developer marketing",
+          "volume": 150,
+          "parent_topic": "real estate development marketing"
+        },
+        {
+          "keyword": "how to become a real estate developer with no experience",
+          "volume": 100,
+          "parent_topic": "how to become a real estate developer"
+        }
+      ],
+      "volume": 450,
+      "reason": "Property and construction 'developer'. Pure token match on developer/development."
+    },
+    "2:salesforce-marketing-cloud-cert": {
+      "keywords": [
+        {
+          "keyword": "salesforce marketing cloud developer",
+          "volume": 100,
+          "parent_topic": "salesforce marketing cloud developer"
+        },
+        {
+          "keyword": "marketing cloud developer",
+          "volume": 90,
+          "parent_topic": "salesforce marketing cloud developer"
+        },
+        {
+          "keyword": "marketing-cloud-developer dumps",
+          "volume": 60,
+          "parent_topic": "marketing-cloud-developer dumps"
+        },
+        {
+          "keyword": "marketing cloud developer certification",
+          "volume": 30,
+          "parent_topic": "salesforce marketing cloud developer"
+        }
+      ],
+      "volume": 280,
+      "reason": "Salesforce Marketing Cloud Developer certification, including exam dumps. Token match on 'marketing' plus 'developer'."
+    },
+    "2:vendor-navigational": {
+      "keywords": [
+        {
+          "keyword": "user experience developer",
+          "volume": 70,
+          "parent_topic": "ux developer"
+        },
+        {
+          "keyword": "apple worldwide developer relations certification authority",
+          "volume": 40,
+          "parent_topic": "apple worldwide developer relations certification authority"
+        },
+        {
+          "keyword": "pinterest marketing developer partners",
+          "volume": 30,
+          "parent_topic": "pinterest marketing"
+        }
+      ],
+      "volume": 140,
+      "reason": "Navigational or partner-programme pages for unrelated products."
+    },
+    "2:web-marketing-developer-roles": {
+      "keywords": [
+        {
+          "keyword": "email marketing developer",
+          "volume": 90,
+          "parent_topic": "email developer jobs"
+        },
+        {
+          "keyword": "digital marketing web developer",
+          "volume": 80,
+          "parent_topic": "digital marketing web developer"
+        },
+        {
+          "keyword": "digital marketing developer",
+          "volume": 70,
+          "parent_topic": "digital marketing web developer"
+        },
+        {
+          "keyword": "marketing web developer",
+          "volume": 50,
+          "parent_topic": "marketing web developer"
+        },
+        {
+          "keyword": "marketing developer",
+          "volume": 40,
+          "parent_topic": "developer marketing"
+        },
+        {
+          "keyword": "web developer and marketing",
+          "volume": 30,
+          "parent_topic": "marketing web developer"
+        }
+      ],
+      "volume": 360,
+      "reason": "Hiring and role queries for web or email developers at marketing agencies, not developer marketing as a discipline."
+    },
+    "3:insurance-agent": {
+      "keywords": [
+        {
+          "keyword": "ai insurance agent",
+          "volume": 350,
+          "parent_topic": "ai insurance agent"
+        }
+      ],
+      "volume": 350,
+      "reason": "Insurance sales agents. Token match on 'agent'."
+    },
+    "4:ai-overview-suppression": {
+      "keywords": [
+        {
+          "keyword": "hide google ai overviews",
+          "volume": 700,
+          "parent_topic": "hide google ai overviews"
+        }
+      ],
+      "volume": 700,
+      "reason": "Consumers wanting to switch AI Overviews off. Opposite intent, and a browser extension market."
+    },
+    "4:chatgpt-as-seo-copywriter": {
+      "keywords": [
+        {
+          "keyword": "chatgpt seo prompts",
+          "volume": 200,
+          "parent_topic": "chatgpt seo prompts"
+        },
+        {
+          "keyword": "seo prompts for chatgpt",
+          "volume": 150,
+          "parent_topic": "chatgpt seo prompts"
+        },
+        {
+          "keyword": "chatgpt prompts for seo",
+          "volume": 100,
+          "parent_topic": "seo prompts for chatgpt"
+        },
+        {
+          "keyword": "seo prompt for chatgpt",
+          "volume": 100,
+          "parent_topic": "chatgpt seo prompts"
+        },
+        {
+          "keyword": "50 smart seo prompts for chatgpt",
+          "volume": 60,
+          "parent_topic": "50 smart seo prompts for chatgpt"
+        },
+        {
+          "keyword": "best chatgpt prompts for seo",
+          "volume": 50,
+          "parent_topic": "seo prompts for chatgpt"
+        },
+        {
+          "keyword": "prompt chatgpt seo",
+          "volume": 50,
+          "parent_topic": "chatgpt seo prompts"
+        },
+        {
+          "keyword": "chatgpt prompt for seo",
+          "volume": 50,
+          "parent_topic": "chatgpt seo prompts"
+        },
+        {
+          "keyword": "chatgpt prompts seo",
+          "volume": 50,
+          "parent_topic": "chat gpt prompts for seo"
+        },
+        {
+          "keyword": "chatgpt prompts for seo content writing",
+          "volume": 30,
+          "parent_topic": "seo based content writing"
+        },
+        {
+          "keyword": "chatgpt seo plugin",
+          "volume": 30,
+          "parent_topic": "seo core ai plugin"
+        }
+      ],
+      "volume": 870,
+      "reason": "Prompt templates for using ChatGPT to do traditional SEO copywriting. The inverse job: this cluster is about being cited BY assistants, not using one to write meta descriptions."
+    },
+    "4:non-english": {
+      "keywords": [
+        {
+          "keyword": "chatgpt para seo",
+          "volume": 90,
+          "parent_topic": "seo for chatgpt"
+        }
+      ],
+      "volume": 90,
+      "reason": "Spanish-language query in a US English universe."
+    },
+    "5:ad-blocking": {
+      "keywords": [
+        {
+          "keyword": "how to block ads on reddit app",
+          "volume": 70,
+          "parent_topic": "how to block reddit ads"
+        },
+        {
+          "keyword": "block reddit ads",
+          "volume": 60,
+          "parent_topic": "how to block reddit ads"
+        },
+        {
+          "keyword": "how to block ads on reddit",
+          "volume": 50,
+          "parent_topic": "how to block ads on reddit"
+        },
+        {
+          "keyword": "block ads reddit",
+          "volume": 40,
+          "parent_topic": "r/adblock"
+        }
+      ],
+      "volume": 220,
+      "reason": "People blocking Reddit ads. Opposite intent to advertising on Reddit."
+    },
+    "5:consumer-subreddit-discovery": {
+      "keywords": [
+        {
+          "keyword": "subreddit",
+          "volume": 4700,
+          "parent_topic": "subreddit"
+        },
+        {
+          "keyword": "what is a subreddit",
+          "volume": 1400,
+          "parent_topic": "what is a subreddit"
+        },
+        {
+          "keyword": "subreddit list",
+          "volume": 1200,
+          "parent_topic": "subreddit list"
+        },
+        {
+          "keyword": "reddit subreddit",
+          "volume": 800,
+          "parent_topic": "reddit subreddit"
+        },
+        {
+          "keyword": "subreddit meaning",
+          "volume": 800,
+          "parent_topic": "subreddit meaning"
+        },
+        {
+          "keyword": "what is subreddit",
+          "volume": 400,
+          "parent_topic": "what is a subreddit"
+        },
+        {
+          "keyword": "subreddit finder",
+          "volume": 400,
+          "parent_topic": "subreddit"
+        },
+        {
+          "keyword": "subreddit search",
+          "volume": 350,
+          "parent_topic": "subreddit"
+        },
+        {
+          "keyword": "subreddit viewer",
+          "volume": 300,
+          "parent_topic": "reddit viewer"
+        },
+        {
+          "keyword": "how to search within a subreddit",
+          "volume": 250,
+          "parent_topic": "reddit subreddits search"
+        },
+        {
+          "keyword": "similar subreddit",
+          "volume": 150,
+          "parent_topic": "similar subreddits"
+        },
+        {
+          "keyword": "subreddit search engine",
+          "volume": 150,
+          "parent_topic": "reddit subreddits"
+        },
+        {
+          "keyword": "similar subreddit finder",
+          "volume": 90,
+          "parent_topic": "similar subreddits"
+        },
+        {
+          "keyword": "reddit subreddit list",
+          "volume": 90,
+          "parent_topic": "list of subreddits"
+        },
+        {
+          "keyword": "reddit subreddit search",
+          "volume": 40,
+          "parent_topic": "reddit subreddits search"
+        }
+      ],
+      "volume": 11120,
+      "reason": "Consumer Reddit browsing: finding, viewing, listing and defining subreddits. Reddit's own properties own these and they carry no marketing intent."
+    },
+    "5:junk-token": {
+      "keywords": [
+        {
+          "keyword": "progressive growth reddit",
+          "volume": 800,
+          "parent_topic": "progressivegrowth2"
+        },
+        {
+          "keyword": "reddit progressive growth",
+          "volume": 700,
+          "parent_topic": "progressivegrowth2"
+        },
+        {
+          "keyword": "reddit progressive growth 2",
+          "volume": 70,
+          "parent_topic": "progressivegrowth2"
+        }
+      ],
+      "volume": 1570,
+      "reason": "A Reddit username or subreddit string, not a topic."
+    },
+    "5:reddit-as-source-for-other-topics": {
+      "keywords": [
+        {
+          "keyword": "seo reddit",
+          "volume": 450,
+          "parent_topic": "latest seo"
+        },
+        {
+          "keyword": "youtube ads reddit",
+          "volume": 200,
+          "parent_topic": "reddit youtube ads"
+        },
+        {
+          "keyword": "affiliate marketing reddit",
+          "volume": 200,
+          "parent_topic": "reddit affiliate marketing"
+        },
+        {
+          "keyword": "facebook ads reddit",
+          "volume": 100,
+          "parent_topic": "facebook ads news"
+        },
+        {
+          "keyword": "squarespace seo reddit",
+          "volume": 100,
+          "parent_topic": "is squarespace good for seo"
+        },
+        {
+          "keyword": "twitch ads reddit",
+          "volume": 100,
+          "parent_topic": "twitch ads"
+        }
+      ],
+      "volume": 1150,
+      "reason": "'reddit' is the source being consulted, not the subject. Parent topics point at other ad platforms and generic SEO."
+    },
+    "5:reddit-product-navigation": {
+      "keywords": [
+        {
+          "keyword": "reddit ads login",
+          "volume": 350,
+          "parent_topic": "reddit ads"
+        },
+        {
+          "keyword": "reddit ads logo",
+          "volume": 200,
+          "parent_topic": "reddit ads"
+        },
+        {
+          "keyword": "reddit ads account",
+          "volume": 200,
+          "parent_topic": "reddit ads"
+        },
+        {
+          "keyword": "reddit ads help center",
+          "volume": 150,
+          "parent_topic": "reddit ads help center"
+        },
+        {
+          "keyword": "reddit ads help",
+          "volume": 100,
+          "parent_topic": "reddit ads help"
+        }
+      ],
+      "volume": 1000,
+      "reason": "Navigation to Reddit's own ad product: login, logo, account, help. A third party cannot rank and they convert to nothing."
+    },
+    "6:civic-community-engagement": {
+      "keywords": [
+        {
+          "keyword": "online community engagement tools",
+          "volume": 150,
+          "parent_topic": "platforms for community engagement"
+        },
+        {
+          "keyword": "online community engagement",
+          "volume": 150,
+          "parent_topic": "online community engagement activities"
+        },
+        {
+          "keyword": "online community engagement activities",
+          "volume": 100,
+          "parent_topic": "online community engagement activities"
+        },
+        {
+          "keyword": "online community engagement strategy",
+          "volume": 100,
+          "parent_topic": "online community engagement strategy"
+        },
+        {
+          "keyword": "online community engagement ideas",
+          "volume": 100,
+          "parent_topic": "online community engagement ideas"
+        },
+        {
+          "keyword": "benefits of online community engagement",
+          "volume": 100,
+          "parent_topic": "benefits of online community engagement"
+        },
+        {
+          "keyword": "online community engagement platform",
+          "volume": 90,
+          "parent_topic": "publicinput"
+        }
+      ],
+      "volume": 790,
+      "reason": "Public consultation and civic engagement, a separate government-software industry. Parent topic 'publicinput' names a civic-tech vendor; SERP confirmed."
+    },
+    "6:classroom-and-dictionary": {
+      "keywords": [
+        {
+          "keyword": "community building synonym",
+          "volume": 150,
+          "parent_topic": "community building synonym"
+        },
+        {
+          "keyword": "community building examples",
+          "volume": 90,
+          "parent_topic": "building community in the classroom"
+        }
+      ],
+      "volume": 240,
+      "reason": "Classroom teaching practice and a dictionary lookup."
+    },
+    "6:community-manager-jobs": {
+      "keywords": [
+        {
+          "keyword": "online community manager",
+          "volume": 90,
+          "parent_topic": "online community manager jobs"
+        }
+      ],
+      "volume": 90,
+      "reason": "Job-seeker queries."
+    },
+    "6:corporate-team-building": {
+      "keywords": [
+        {
+          "keyword": "community building activities",
+          "volume": 800,
+          "parent_topic": "team building activities"
+        },
+        {
+          "keyword": "community building games",
+          "volume": 200,
+          "parent_topic": "team building activities"
+        },
+        {
+          "keyword": "community building questions",
+          "volume": 100,
+          "parent_topic": "team building questions"
+        }
+      ],
+      "volume": 1100,
+      "reason": "Corporate team-building and icebreakers, a distinct market from audience and community building."
+    },
+    "6:discord-navigational": {
+      "keywords": [
+        {
+          "keyword": "discord community guidelines",
+          "volume": 700,
+          "parent_topic": "discord rules"
+        },
+        {
+          "keyword": "discord community server",
+          "volume": 350,
+          "parent_topic": "discord login"
+        },
+        {
+          "keyword": "discord community manager",
+          "volume": 200,
+          "parent_topic": "discord jobs"
+        },
+        {
+          "keyword": "discord community servers",
+          "volume": 80,
+          "parent_topic": "discord login"
+        }
+      ],
+      "volume": 1330,
+      "reason": "Discord's own policy and login pages, and Discord job queries."
+    },
+    "6:hoa-property-management": {
+      "keywords": [
+        {
+          "keyword": "community management",
+          "volume": 2600,
+          "parent_topic": "hoa"
+        },
+        {
+          "keyword": "community management services",
+          "volume": 500,
+          "parent_topic": "community management service"
+        },
+        {
+          "keyword": "residential community management software",
+          "volume": 150,
+          "parent_topic": "hoa management software"
+        },
+        {
+          "keyword": "community management service",
+          "volume": 100,
+          "parent_topic": "cms hoa"
+        }
+      ],
+      "volume": 3350,
+      "reason": "HOA, condo association and residential property management. Parent topics 'hoa', 'hoa management software', 'cms hoa', 'townsq' name the industry; SERP confirmed on the head term."
+    },
+    "6:off-niche-vertical-communities": {
+      "keywords": [
+        {
+          "keyword": "aarp online community",
+          "volume": 200,
+          "parent_topic": "aarp virtual community center"
+        },
+        {
+          "keyword": "online marketing community",
+          "volume": 200,
+          "parent_topic": "digital marketing community"
+        },
+        {
+          "keyword": "small business online community",
+          "volume": 150,
+          "parent_topic": "small business communities"
+        },
+        {
+          "keyword": "online artistic community",
+          "volume": 150,
+          "parent_topic": "online artistic community"
+        },
+        {
+          "keyword": "online learning community",
+          "volume": 150,
+          "parent_topic": "virtual learning community"
+        },
+        {
+          "keyword": "online gaming community",
+          "volume": 100,
+          "parent_topic": "gaming community"
+        },
+        {
+          "keyword": "online writing community",
+          "volume": 100,
+          "parent_topic": "shut up and write"
+        },
+        {
+          "keyword": "online health community",
+          "volume": 100,
+          "parent_topic": "online health community"
+        },
+        {
+          "keyword": "online fitness community",
+          "volume": 90,
+          "parent_topic": "online fitness community"
+        },
+        {
+          "keyword": "online trading community",
+          "volume": 90,
+          "parent_topic": "trading"
+        }
+      ],
+      "volume": 1330,
+      "reason": "Consumers looking for a community to join in an unrelated vertical, rather than practitioners building one."
+    },
+    "7:commercial-event-industry": {
+      "keywords": [
+        {
+          "keyword": "virtual event marketing",
+          "volume": 600,
+          "parent_topic": "virtual events"
+        },
+        {
+          "keyword": "virtual event roi",
+          "volume": 600,
+          "parent_topic": "virtual event roi"
+        },
+        {
+          "keyword": "virtual event planning",
+          "volume": 500,
+          "parent_topic": "virtual event planning"
+        },
+        {
+          "keyword": "virtual event management",
+          "volume": 400,
+          "parent_topic": "virtual event management"
+        },
+        {
+          "keyword": "how to plan a virtual event",
+          "volume": 350,
+          "parent_topic": "how to host a virtual event"
+        },
+        {
+          "keyword": "virtual event ideas",
+          "volume": 300,
+          "parent_topic": "virtual events examples"
+        },
+        {
+          "keyword": "virtual event marketing strategy",
+          "volume": 300,
+          "parent_topic": "virtual event marketing strategy"
+        },
+        {
+          "keyword": "virtual event trends",
+          "volume": 300,
+          "parent_topic": "virtual event trends"
+        },
+        {
+          "keyword": "best virtual event platforms",
+          "volume": 250,
+          "parent_topic": "virtual events"
+        },
+        {
+          "keyword": "virtual event planner",
+          "volume": 250,
+          "parent_topic": "virtual event planner"
+        },
+        {
+          "keyword": "what is a virtual event",
+          "volume": 250,
+          "parent_topic": "virtual event marketing"
+        },
+        {
+          "keyword": "best virtual event platform",
+          "volume": 250,
+          "parent_topic": "virtual events"
+        },
+        {
+          "keyword": "virtual event checklist",
+          "volume": 250,
+          "parent_topic": "virtual events checklist"
+        },
+        {
+          "keyword": "virtual event engagement",
+          "volume": 200,
+          "parent_topic": "virtual event attendee engagement"
+        },
+        {
+          "keyword": "virtual networking event",
+          "volume": 200,
+          "parent_topic": "online networking event"
+        },
+        {
+          "keyword": "zoom virtual event",
+          "volume": 200,
+          "parent_topic": "virtual event management"
+        },
+        {
+          "keyword": "best time to host a virtual event",
+          "volume": 200,
+          "parent_topic": "how to host a virtual event"
+        },
+        {
+          "keyword": "virtual product launch event",
+          "volume": 200,
+          "parent_topic": "product launch virtual event"
+        },
+        {
+          "keyword": "hybrid virtual event platform",
+          "volume": 200,
+          "parent_topic": "hybrid events management"
+        },
+        {
+          "keyword": "virtual event feedback survey",
+          "volume": 200,
+          "parent_topic": "event survey questions"
+        },
+        {
+          "keyword": "top virtual event platforms",
+          "volume": 200,
+          "parent_topic": "virtual event software"
+        },
+        {
+          "keyword": "virtual event platform features",
+          "volume": 200,
+          "parent_topic": "goldcast pricing"
+        },
+        {
+          "keyword": "virtual event statistics",
+          "volume": 200,
+          "parent_topic": "virtual event statistics"
+        },
+        {
+          "keyword": "best virtual event technology",
+          "volume": 200,
+          "parent_topic": "virtual event platforms"
+        },
+        {
+          "keyword": "virtual event planning template",
+          "volume": 200,
+          "parent_topic": "virtual event agenda"
+        },
+        {
+          "keyword": "virtual event registration",
+          "volume": 200,
+          "parent_topic": "event registration"
+        },
+        {
+          "keyword": "virtual event landing page",
+          "volume": 200,
+          "parent_topic": "landing page for event"
+        },
+        {
+          "keyword": "hybrid virtual and in person event",
+          "volume": 200,
+          "parent_topic": "hybrid virtual and in person event"
+        },
+        {
+          "keyword": "virtual event branding",
+          "volume": 200,
+          "parent_topic": "event branding services"
+        },
+        {
+          "keyword": "run of show template for virtual event",
+          "volume": 200,
+          "parent_topic": "virtual run of show template"
+        },
+        {
+          "keyword": "virtual event management conference software",
+          "volume": 200,
+          "parent_topic": "event management software"
+        },
+        {
+          "keyword": "what is virtual event",
+          "volume": 150,
+          "parent_topic": "virtual events"
+        },
+        {
+          "keyword": "types of virtual event",
+          "volume": 150,
+          "parent_topic": "how to host a virtual event"
+        },
+        {
+          "keyword": "virtual event technology",
+          "volume": 150,
+          "parent_topic": "virtual events technology"
+        },
+        {
+          "keyword": "virtual event planning checklist",
+          "volume": 150,
+          "parent_topic": "virtual event checklist"
+        },
+        {
+          "keyword": "virtual event strategy",
+          "volume": 150,
+          "parent_topic": "virtual events"
+        },
+        {
+          "keyword": "virtual event promotion",
+          "volume": 150,
+          "parent_topic": "virtual event marketing"
+        },
+        {
+          "keyword": "virtual event checklist template",
+          "volume": 150,
+          "parent_topic": "virtual event agenda"
+        },
+        {
+          "keyword": "virtual event management tools",
+          "volume": 150,
+          "parent_topic": "virtual events"
+        },
+        {
+          "keyword": "virtual event engagement ideas",
+          "volume": 150,
+          "parent_topic": "virtual event ideas"
+        },
+        {
+          "keyword": "virtual event sponsorship ideas",
+          "volume": 150,
+          "parent_topic": "sponsorship ideas"
+        },
+        {
+          "keyword": "virtual event planning company",
+          "volume": 150,
+          "parent_topic": "virtual event services"
+        },
+        {
+          "keyword": "what is virtual event planning",
+          "volume": 150,
+          "parent_topic": "virtual event planning"
+        },
+        {
+          "keyword": "virtual event budget template",
+          "volume": 150,
+          "parent_topic": "event budget template"
+        },
+        {
+          "keyword": "virtual product launch event ideas",
+          "volume": 150,
+          "parent_topic": "product launch event examples"
+        },
+        {
+          "keyword": "virtual event planning best practices",
+          "volume": 150,
+          "parent_topic": "virtual event planning best practices"
+        },
+        {
+          "keyword": "virtual event sponsorship opportunities",
+          "volume": 150,
+          "parent_topic": "virtual event sponsorship packages"
+        },
+        {
+          "keyword": "post virtual event survey questions for attendees",
+          "volume": 150,
+          "parent_topic": "post event survey questions"
+        },
+        {
+          "keyword": "virtual event management companies",
+          "volume": 150,
+          "parent_topic": "virtual event planning"
+        },
+        {
+          "keyword": "virtual event planning timeline",
+          "volume": 150,
+          "parent_topic": "virtual event timeline"
+        },
+        {
+          "keyword": "virtual event budget",
+          "volume": 150,
+          "parent_topic": "virtual event budget"
+        },
+        {
+          "keyword": "virtual reality event platform",
+          "volume": 150,
+          "parent_topic": "moot up"
+        },
+        {
+          "keyword": "virtual event software platform",
+          "volume": 150,
+          "parent_topic": "virtual event software"
+        },
+        {
+          "keyword": "virtual corporate event",
+          "volume": 150,
+          "parent_topic": "virtual event experience"
+        },
+        {
+          "keyword": "virtual event platform comparison",
+          "volume": 150,
+          "parent_topic": "virtual event platform"
+        },
+        {
+          "keyword": "what is a virtual event platform",
+          "volume": 150,
+          "parent_topic": "virtual event management"
+        },
+        {
+          "keyword": "virtual event planning guide",
+          "volume": 150,
+          "parent_topic": "virtual events"
+        },
+        {
+          "keyword": "virtual event platform market",
+          "volume": 100,
+          "parent_topic": "virtual event platform market"
+        },
+        {
+          "keyword": "virtual event marketing ideas",
+          "volume": 100,
+          "parent_topic": "how to promote a virtual event"
+        },
+        {
+          "keyword": "virtual event ideas for companies",
+          "volume": 100,
+          "parent_topic": "virtual event ideas"
+        },
+        {
+          "keyword": "virtual event engagement tools",
+          "volume": 100,
+          "parent_topic": "virtual event software"
+        },
+        {
+          "keyword": "virtual event management platform",
+          "volume": 100,
+          "parent_topic": "virtual event software"
+        },
+        {
+          "keyword": "sample virtual event sponsorship packages",
+          "volume": 100,
+          "parent_topic": "sponsorship packages for virtual events"
+        },
+        {
+          "keyword": "virtual event sponsorship packages",
+          "volume": 100,
+          "parent_topic": "virtual event sponsorship opportunities"
+        },
+        {
+          "keyword": "corporate virtual event ideas",
+          "volume": 100,
+          "parent_topic": "virtual conference ideas"
+        },
+        {
+          "keyword": "virtual event platform pricing",
+          "volume": 100,
+          "parent_topic": "virtual events"
+        },
+        {
+          "keyword": "pre virtual event survey questions",
+          "volume": 100,
+          "parent_topic": "pre event survey questions"
+        },
+        {
+          "keyword": "virtual event planning companies",
+          "volume": 100,
+          "parent_topic": "virtual event services"
+        },
+        {
+          "keyword": "community event ticketing system",
+          "volume": 100,
+          "parent_topic": "ticketsource"
+        },
+        {
+          "keyword": "virtual networking event ideas",
+          "volume": 100,
+          "parent_topic": "networking activities"
+        },
+        {
+          "keyword": "virtual corporate event ideas",
+          "volume": 100,
+          "parent_topic": "virtual team building activities"
+        },
+        {
+          "keyword": "virtual event sponsorship",
+          "volume": 100,
+          "parent_topic": "virtual sponsorship packages"
+        },
+        {
+          "keyword": "virtual event management software",
+          "volume": 100,
+          "parent_topic": "event management software"
+        },
+        {
+          "keyword": "virtual event planning platform",
+          "volume": 100,
+          "parent_topic": "virtual events"
+        },
+        {
+          "keyword": "virtual event run of show template",
+          "volume": 100,
+          "parent_topic": "run of show template"
+        },
+        {
+          "keyword": "virtual event survey questions",
+          "volume": 90,
+          "parent_topic": "event survey questions"
+        },
+        {
+          "keyword": "virtual event agenda",
+          "volume": 90,
+          "parent_topic": "virtual event agenda"
+        },
+        {
+          "keyword": "virtual event sponsorship package",
+          "volume": 90,
+          "parent_topic": "virtual event sponsorship opportunities"
+        },
+        {
+          "keyword": "virtual event management services",
+          "volume": 90,
+          "parent_topic": "virtual event services"
+        },
+        {
+          "keyword": "virtual event sponsorship examples",
+          "volume": 90,
+          "parent_topic": "sample virtual event sponsorship packages"
+        },
+        {
+          "keyword": "post virtual event survey questions",
+          "volume": 90,
+          "parent_topic": "post event survey questions"
+        },
+        {
+          "keyword": "virtual networking event platform",
+          "volume": 90,
+          "parent_topic": "virtual event platforms"
+        }
+      ],
+      "volume": 14530,
+      "reason": "Corporate and webinar events industry: platforms, software, ROI, attendee acquisition, registration, ticketing, sponsorship, trade shows, run-of-show. SERP on the head term returns Zoom, ON24 and Whova. seo-90day owns the row-level pass; this rule exists to size the correction, not to settle it."
+    }
+  },
+  "per_cluster": {
+    "1": {
+      "before_keywords": 322,
+      "before_volume": 63730,
+      "removed_keywords": 7,
+      "removed_volume": 660,
+      "after_keywords": 315,
+      "after_volume": 63070,
+      "kd20_after_keywords": 176,
+      "kd20_after_volume": 26780
+    },
+    "2": {
+      "before_keywords": 56,
+      "before_volume": 7930,
+      "removed_keywords": 22,
+      "removed_volume": 1890,
+      "after_keywords": 34,
+      "after_volume": 6040,
+      "kd20_after_keywords": 30,
+      "kd20_after_volume": 5140
+    },
+    "3": {
+      "before_keywords": 347,
+      "before_volume": 150140,
+      "removed_keywords": 1,
+      "removed_volume": 350,
+      "after_keywords": 346,
+      "after_volume": 149790,
+      "kd20_after_keywords": 189,
+      "kd20_after_volume": 54150
+    },
+    "4": {
+      "before_keywords": 58,
+      "before_volume": 23880,
+      "removed_keywords": 13,
+      "removed_volume": 1660,
+      "after_keywords": 45,
+      "after_volume": 22220,
+      "kd20_after_keywords": 27,
+      "kd20_after_volume": 9880
+    },
+    "5": {
+      "before_keywords": 78,
+      "before_volume": 33360,
+      "removed_keywords": 33,
+      "removed_volume": 15060,
+      "after_keywords": 45,
+      "after_volume": 18300,
+      "kd20_after_keywords": 37,
+      "kd20_after_volume": 15460
+    },
+    "6": {
+      "before_keywords": 94,
+      "before_volume": 24140,
+      "removed_keywords": 31,
+      "removed_volume": 8230,
+      "after_keywords": 63,
+      "after_volume": 15910,
+      "kd20_after_keywords": 52,
+      "kd20_after_volume": 11210
+    },
+    "7": {
+      "before_keywords": 174,
+      "before_volume": 33000,
+      "removed_keywords": 82,
+      "removed_volume": 14530,
+      "after_keywords": 92,
+      "after_volume": 18470,
+      "kd20_after_keywords": 45,
+      "kd20_after_volume": 11170
+    }
+  },
+  "totals": {
+    "before_keywords": 1129,
+    "before_volume": 336180,
+    "removed_keywords": 189,
+    "removed_volume": 42380,
+    "after_keywords": 940,
+    "after_volume": 293800
+  }
+}

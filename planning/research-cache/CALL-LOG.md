@@ -74,3 +74,37 @@ workspace usage went 36,604 → 62,144, so these 7 calls cost 25,540 units.**
   SERP and page reads, and the strategy says so explicitly rather than implying it had
   citation data.
 - No call took `ninadpathak.com` or any Ninad property as an argument.
+
+---
+
+## Contamination sweep — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 0.** Nothing was bought for this pass.
+
+| Instrument | Calls | Cost | Notes |
+|---|---:|---|---|
+| Ahrefs | 0 | — | Unusable. `Access denied: MCP token is invalid` on every endpoint, including the free `subscription-info-limits-and-usage`. Reproduced independently; it is the token, not a quota. Raised to Ninad. |
+| Semrush | 0 | — | Available and tested working, but not needed. Volume figures were not in question; meaning was. |
+| WebSearch SERP reads | 9 | free | The correct instrument for this job: the question is what a SERP shows, not what a volume number says. |
+| Banked parent topics | — | free | Already in `DERIVED-full-universe.json` from the original paid pull. The primary tell, at no cost. |
+
+SERP reads made, all 2026-08-17, all free, each recorded with its verdict in
+`_contamination_sweep.py` under `DECISIONS`:
+
+1. `community management` → REMOVE (entirely HOA/property)
+2. `community management software` → KEEP (majority on-niche)
+3. `community management services` → REMOVE (entirely HOA/property)
+4. `online community engagement` → REMOVE (civic/public consultation)
+5. `reddit seo` → KEEP (genuine Reddit-marketing practice)
+6. `developer portal` → KEEP (genuine docs-ops concept)
+7. `audit documentation example` → REMOVE (PCAOB/ISA 230 accounting)
+8. `chatgpt seo` → KEEP (majority citation-optimisation sense)
+9. `how to host a virtual event` → REMOVE (corporate webinar industry)
+10. `subreddit` → REMOVE (consumer navigation; Reddit Help, Wikipedia, Dictionary.com)
+
+Reads 5 and 6 each reversed a removal that the parent topic alone would have made
+wrongly, which is the argument for keeping the SERP step rather than trusting the
+parent-topic field on its own.
+
+Outputs: `_contamination_sweep.py`, `DERIVED-contamination-sweep.json`,
+`planning/research/CONTAMINATION-SWEEP-2026-08-17.md`.
