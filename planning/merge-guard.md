@@ -112,7 +112,7 @@ Current window 2026-05-18 to 2026-08-15 (90d); history 2025-04-04 to 2026-08-15.
 | Source → target | Disposition | Execution | Current source | 90d position | Historical human queries | Exact shared | Verdict |
 |---|---|---|---|---|---:|---:|---|
 | `state-of-open-source-memory-2026` → `state-of-ai-agent-memory-2026` | merge | `already-merged` | `measured`; 35 impr | 9.9 (35 impr) | 1 | 0 | `review-source-demand` |
-| `beam-memory-benchmark` → `context-windows-vs-memory` | merge | `pending` | `withheld`; 15 impr | 12.9 (15 impr) | 0 | 0 | `withheld-source-demand` |
+| `beam-memory-benchmark` → `context-windows-vs-memory` | merge | `already-merged` | `withheld`; 15 impr | 12.9 (15 impr) | 0 | 0 | `withheld-source-demand` |
 | `memory-hierarchy-in-ai-systems` → `ai-memory-management-for-llms` | merge | `already-merged` | `measured`; 15 impr | 28.7 (15 impr) | 1 | 0 | `review-source-demand` |
 | `the-memory-hierarchy-why-rag-is-not-enough` → `ai-memory-management-for-llms` | merge | `already-merged` | `withheld`; 13 impr | 8.2 (13 impr) | 0 | 0 | `withheld-source-demand` |
 | `asymmetric-retrieval-agent-memory` → `rag-vs-memory` | merge | `pending` | `measured`; 12 impr | 18.3 (12 impr) | 1 | 0 | `review-source-demand` |
