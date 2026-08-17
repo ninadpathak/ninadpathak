@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ term.title }} | AI Memory & Agent Glossary{% endblock %}
+{% block title %}{{ term.title }} | Documentation Glossary{% endblock %}
 {% block description %}{{ term.description }}{% endblock %}
 {% block canonical %}/glossary/{{ term.slug }}/{% endblock %}
 {% block og_url %}/glossary/{{ term.slug }}/{% endblock %}
@@ -15,7 +15,7 @@
   "url": "{{ site.url }}/glossary/{{ term.slug }}/",
   "inDefinedTermSet": {
     "@type": "DefinedTermSet",
-    "name": "AI Memory & Agent Glossary",
+    "name": "Documentation Glossary",
     "url": "{{ site.url }}/glossary/"
   }
 }
@@ -66,12 +66,12 @@
         <p>{{ term.long_definition }}</p>
         
         {% if term.how_it_works %}
-        <h2>How It Works</h2>
+        <h2>How it works</h2>
         {{ term.how_it_works | safe }}
         {% endif %}
 
         {% if term.use_cases %}
-        <h2>Common Use Cases</h2>
+        <h2>Common use cases</h2>
         <ul>
           {% for use_case in term.use_cases %}
           <li>{{ use_case }}</li>
@@ -79,8 +79,22 @@
         </ul>
         {% endif %}
 
+        {# Term-to-article links. build.py has already dropped any slug that does not
+           resolve to a live post, so nothing here can 404. #}
+        {% if term.resolved_articles %}
+        <h2>Where this comes up</h2>
+        <ul class="glossary-articles-list">
+          {% for post in term.resolved_articles %}
+          <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+            {% if post.description %}<span class="glossary-article-desc">{{ post.description }}</span>{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
         {% if term.related_terms %}
-        <h2>Related Terms</h2>
+        <h2>Related terms</h2>
         <ul class="related-terms-list">
           {% for related in term.related_terms %}
           <li><a href="/glossary/{{ related.slug }}/">{{ related.name }}</a></li>
@@ -91,4 +105,6 @@
     </div>
   </div>
 </article>
+
+{% include "_cta.html" %}
 {% endblock %}

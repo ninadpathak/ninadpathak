@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block title %}AI Memory & Agent Glossary | Ninad Pathak{% endblock %}
-{% block description %}A comprehensive, highly technical glossary of AI memory, RAG, and agentic framework terminology.{% endblock %}
+{% block title %}Documentation Glossary | Ninad Pathak{% endblock %}
+{% block description %}Definitions for documentation, docs-as-code, API documentation, and AI retrieval terms, each linked to the article that goes deeper.{% endblock %}
 {% block canonical %}/glossary/{% endblock %}
 {% block og_url %}/glossary/{% endblock %}
 
@@ -10,8 +10,8 @@
 {
   "@context": "https://schema.org",
   "@type": "DefinedTermSet",
-  "name": "AI Memory & Agent Glossary",
-  "description": "Technical definitions for AI memory, vector search, RAG, and agent architectures.",
+  "name": "Documentation Glossary",
+  "description": "Definitions for technical documentation, docs operations, API documentation, and AI retrieval.",
   "url": "{{ site.url }}/glossary/",
   "hasDefinedTerm": [
 {% for term in terms %}
@@ -24,34 +24,68 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "{{ site.url }}/glossary/" }
+  ]
+}
+</script>
 {% endblock %}
 
 {% block content %}
 
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">Glossary</li>
+    </ol>
+  </div>
+</nav>
+
 <section class="page-intro">
   <div class="container">
     <div class="label">Glossary</div>
-    <h1>AI Memory & Agent Glossary</h1>
+    <h1>Documentation Glossary</h1>
     <p class="lead">
-      Technical definitions for AI memory, vector search, and agent architectures. Built for engineers.
+      {# TODO: intro copy. One or two sentences on what these definitions are for. #}
+      TODO: glossary intro copy.
     </p>
   </div>
 </section>
 
+{# Grouped by category rather than rendered as one flat list. Each group is its own
+   section so the page reads as a structured reference, not a dump. #}
 <section class="blog-list-section">
   <div class="container">
-    <div class="glossary-list">
-      {% for term in terms %}
-      <a href="/glossary/{{ term.slug }}/" class="blog-row" style="text-decoration: none;">
-        <div class="blog-row-date">Definition</div>
-        <div>
-          <div class="blog-row-title">{{ term.name }}</div>
-          <div class="blog-row-desc">{{ term.short_definition }}</div>
-        </div>
-      </a>
-      {% endfor %}
+    {% for group in groups %}
+    <div class="glossary-group">
+      <h2 class="glossary-group-title" id="{{ group.slug }}">{{ group.title }}</h2>
+      {% if group.blurb %}<p class="glossary-group-blurb">{{ group.blurb }}</p>{% endif %}
+      <div class="glossary-list">
+        {% for term in group.terms %}
+        {# The eyebrow carries the article count rather than the word "Definition" on
+           every row. Repeating one label 16 times gives every row equal weight and
+           tells the reader nothing they cannot see from the group heading. #}
+        <a href="/glossary/{{ term.slug }}/" class="blog-row" style="text-decoration: none;">
+          <div class="blog-row-date">{{ term.resolved_articles | length }} article{% if term.resolved_articles | length != 1 %}s{% endif %}</div>
+          <div>
+            <div class="blog-row-title">{{ term.name }}</div>
+            <div class="blog-row-desc">{{ term.short_definition }}</div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
     </div>
+    {% endfor %}
   </div>
 </section>
+
+{% include "_cta.html" %}
 
 {% endblock %}
