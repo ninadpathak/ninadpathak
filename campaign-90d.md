@@ -47,7 +47,13 @@ A tool must work in the browser with no login and no lead capture, expose its me
 
 `/linter/` and `/llms-txt-generator/` already exist. The generator has earned **three impressions in its entire life** — not because it is bad, but because nothing links to it, it carries no schema, and its title and description were never written for search. That is the campaign's clearest example of an asset left on the floor, and it is being fixed first.
 
-The `llms.txt` family is the priority land grab: `llms.txt` 3,100, `what is llms.txt` 1,800, `llms.txt file` 500, `llms.txt standard` 450, `llms.txt what is it` 350, `websites using llms.txt` 350, plus tail. Roughly 7,000 searches/month on an emerging spec where the site already ships a tool.
+**Tools are protected from the thing that is eating everyone else's traffic.** All fifteen highest-value keywords in the seven-cluster niche carry a Google AI Overview. None of the nine build-a-tool keywords do. AI Overviews cost roughly 35% of clicks on the SERPs that have them, and 49.2% of this niche's SERPs have one. That makes tool intent the only traffic profile in the niche that an AI Overview does not tax — a structural advantage, not a temporary one.
+
+Build order, by evidence:
+
+1. **AI Overviews checker** — `ai overviews checker`, 700/month, **KD 0, no AI Overview on the SERP**. The cleanest opportunity in the entire dataset. KD zero at 700/month with no AIO competition does not appear twice.
+2. **llms.txt validator** — validation is a different intent from generation and deserves its own URL. The tool-intent subset of the llms.txt family is 550/month. An earlier draft of this document sized it at ~7,000, which was the whole family including a KD-56 head term; that was wrong and the correction is in the 2026-08-17 refresh.
+3. **Discoverability for what already exists**, which is where the generator's three lifetime impressions came from.
 
 ---
 
@@ -57,15 +63,15 @@ Settled 2026-08-17. The July 30 narrowing to pure documentation was too narrow a
 
 **All-encompassing in scope, strictly clustered in structure.** Breadth without clustering reads as an unfocused personal blog to Google and to a reader, and dilutes every topic.
 
-| # | Cluster | Owns | Owner page |
-|---|---|---|---|
-| 1 | Technical documentation and docs operations | The commercial cluster, tied to the consulting offer | `/articles/technical-documentation/` |
-| 2 | Developer experience and DevRel for DevTools and B2B SaaS | Content that makes a developer product adoptable | needs one |
-| 3 | AI agent architecture, agent memory, RAG, LLM inference | The revived cluster; the only search equity the domain has earned | needs one |
-| 4 | Optimising for AI Overviews and AI search citation | The tools cluster: `/linter/`, `/llms-txt-generator/`, the validator | needs one |
-| 5 | Marketing and reaching people on Reddit | Distribution, first-hand | needs one |
-| 6 | Finding and building an audience on forums and communities | Distribution, first-hand | needs one |
-| 7 | Creating and running events | Distribution, first-hand | needs one |
+| # | Cluster | Owns | Owner page | Posts |
+|---|---|---|---|---:|
+| 1 | Technical documentation and docs operations | The commercial cluster, tied to the consulting offer | `/articles/technical-documentation/` | 23 |
+| 2 | Developer experience and DevRel for DevTools and B2B SaaS | Content that makes a developer product adoptable | `/articles/developer-experience/` | 8 |
+| 3 | AI agent architecture, agent memory, RAG, LLM inference | The revived cluster; the only search equity the domain has earned | `/articles/ai-engineering/` | 57 |
+| 4 | Optimising for AI Overviews and AI search citation | The tools cluster: `/linter/`, `/llms-txt-generator/`, the AI Overviews checker, the llms.txt validator | `/articles/ai-search-optimization/` | 0 |
+| 5 | Marketing and reaching people on Reddit | Distribution, first-hand | `/articles/reddit-marketing/` | 0 |
+| 6 | Finding and building an audience on forums and communities | Distribution, first-hand | `/articles/community-building/` | 0 |
+| 7 | Creating and running events | Distribution, first-hand | `/articles/technical-events/` | 0 |
 
 Clusters 5, 6, and 7 are new scope and they matter for a reason beyond volume: they are things Ninad genuinely does, so they pass the falsifiability test in section 4 where invented documentation war stories do not.
 
@@ -77,7 +83,7 @@ Clusters 5, 6, and 7 are new scope and they matter for a reason beyond volume: t
 4. When a cross-cluster link genuinely earns its place it goes in the body sentence that makes the connection explicit, never in a sidebar or footer list.
 5. Audit this map every cycle.
 
-**Known structural debt:** the July 30 refocus collapsed all twelve topic pillars into anchors on one page, `/articles/#<slug>`. An anchor cannot own a cluster — no unique URL, no unique title, no unique canonical, so twelve clusters share one ranking surface and none of them ranks. Five AI hub slugs and `/glossary/` were redirected on 2026-08-17 to stop them 404ing. Promoting each cluster owner back to a standalone page is queued work, and cluster isolation cannot actually be enforced until it lands.
+**Known structural debt:** the July 30 refocus collapsed all twelve topic pillars into anchors on one page, `/articles/#<slug>`. An anchor cannot own a cluster — no unique URL, no unique title, no unique canonical, so twelve clusters shared one ranking surface and none of them ranked. Five AI hub slugs and `/glossary/` were redirected on 2026-08-17 to stop them 404ing, and every cluster now has a real owner page. The four clusters with no content yet are declared here but render nothing until they have some, so an empty owner page cannot ship.
 
 ---
 
