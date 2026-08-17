@@ -63,15 +63,35 @@ Settled 2026-08-17. The July 30 narrowing to pure documentation was too narrow a
 
 **All-encompassing in scope, strictly clustered in structure.** Breadth without clustering reads as an unfocused personal blog to Google and to a reader, and dilutes every topic.
 
-| # | Cluster | Owns | Owner page | Posts |
-|---|---|---|---|---:|
-| 1 | Technical documentation and docs operations | The commercial cluster, tied to the consulting offer | `/articles/technical-documentation/` | 23 |
-| 2 | Developer experience and DevRel for DevTools and B2B SaaS | Content that makes a developer product adoptable | `/articles/developer-experience/` | 8 |
-| 3 | AI agent architecture, agent memory, RAG, LLM inference | The revived cluster; the only search equity the domain has earned | `/articles/ai-engineering/` | 57 |
-| 4 | Optimising for AI Overviews and AI search citation | The tools cluster: `/linter/`, `/llms-txt-generator/`, the AI Overviews checker, the llms.txt validator | `/articles/ai-search-optimization/` | 0 |
-| 5 | Marketing and reaching people on Reddit | Distribution, first-hand | `/articles/reddit-marketing/` | 0 |
-| 6 | Finding and building an audience on forums and communities | Distribution, first-hand | `/articles/community-building/` | 0 |
-| 7 | Creating and running events | Distribution, first-hand | `/articles/technical-events/` | 0 |
+Volumes are **post-sweep** (`planning/research/CONTAMINATION-SWEEP-2026-08-17.md`), after the
+llms.txt reassignment below. **Total 293,800/mo across 940 keywords, not the 336,180 quoted
+before the sweep.** Do not quote the old figure again.
+
+| # | Cluster | Vol/mo | Owns | Owner page | Posts |
+|---|---|---:|---|---|---:|
+| 1 | Technical documentation and docs operations | **54,310** | The commercial cluster, tied to the consulting offer | `/articles/technical-documentation/` | 23 |
+| 2 | Developer experience and DevRel for DevTools and B2B SaaS | 6,040 | Content that makes a developer product adoptable | `/articles/developer-experience/` | 8 |
+| 3 | AI agent architecture, agent memory, RAG, LLM inference | 149,790 | The revived cluster; the only search equity the domain has earned | `/articles/ai-engineering/` | 57 |
+| 4 | Optimising for AI Overviews and AI search citation | **30,980** | The tools cluster: `/linter/`, `/llms-txt-generator/`, the AI Overviews checker, the llms.txt validator | `/articles/ai-search-optimization/` | 3 |
+| 5 | Marketing and reaching people on Reddit | 18,300 *(floor)* | Distribution, first-hand | `/articles/reddit-marketing/` | 0 |
+| 6 | Finding and building an audience on forums and communities | 15,910 *(floor)* | Distribution, first-hand | `/articles/community-building/` | 0 |
+| 7 | Creating and running events | 18,470 *(floor)* | Distribution, first-hand | `/articles/technical-events/` | 0 |
+| | **Total** | **293,800** | | | **91** |
+
+**Clusters 5, 6 and 7 are floors, not measurements.** They hit the 250-row API cap before the
+sweep ran, so their true keyword sets are larger than recorded. Cleaning a floor leaves a floor:
+the sweep removed 45%, 34% and 44% of their volume respectively, which makes the recorded number
+more accurate without making it complete. Treat them as lower bounds and do not size a calendar
+from them. Their intent problem is separate and worse, and is recorded in §10.
+
+**llms.txt moved from cluster 1 to cluster 4 on 2026-08-17.** The sweep found 53 keywords with no
+parent topic totalling 8,760/mo, and correctly established that a missing parent is **not**
+evidence of contamination: they are all llms.txt terms, legitimate, simply too new for the index
+to have assigned parents. By subject they belong to AI-search citation, which owns all four live
+tools and both new articles. Leaving them in documentation would put the tools cluster's demand
+inside the commercial cluster and leave neither owning it, which is the page-in-two-clusters
+failure the isolation rule exists to prevent. Cluster 1 goes 63,070 to 54,310 and cluster 4 goes
+22,220 to 30,980, making it the **second-largest cluster** in the niche.
 
 Clusters 5, 6, and 7 are new scope and they matter for a reason beyond volume: they are things Ninad genuinely does, so they pass the falsifiability test in section 4 where invented documentation war stories do not.
 

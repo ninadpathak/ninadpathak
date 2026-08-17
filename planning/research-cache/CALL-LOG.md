@@ -129,3 +129,45 @@ Finding written up in `planning/cluster-intent-check-2026-08-17.md`.
 from Ahrefs and used it to argue the canonical plan's Month 5 anchor was built on a bad number.
 Semrush puts it at **2,400**, which matches what the canonical plan said. The plan was right and my
 correction was wrong. The llms.txt sub-cluster is the healthiest part of cluster 4.
+
+## 2026-08-17 intent check (Semrush, after Ahrefs token failure)
+
+| # | UTC | Tool | Query | Rows | Note |
+|---:|---|---|---|---:|---|
+| - | 2026-08-17 | ahrefs keywords-explorer-matching-terms | reddit marketing seed set | FAILED | `Access denied: MCP token is invalid`. Ahrefs unavailable mid-session; fell back to Semrush per standing order 8. |
+| S1 | 2026-08-17 | semrush phrase_related | "reddit marketing", us, Nq>100, Kd<35 | 25 | Head is account-buying and ad-platform navigation, not content intent. |
+| S2 | 2026-08-17 | semrush phrase_fullsearch | "promote on reddit", us | 40 | Developer-relevant content intent totals ~100/mo. Row 20's target is 20/mo. |
+| S3 | 2026-08-17 | semrush phrase_fullsearch | "developer community", us | 25 | Returns municipal housing and community development. Cluster 6 contaminated at the head. |
+
+Finding written up in `planning/cluster-intent-check-2026-08-17.md`.
+
+## 2026-08-17 cluster 4 verification (Semrush; Ahrefs still returning "MCP token is invalid")
+
+| # | Tool | Query | Database | Rows | Finding |
+|---:|---|---|---|---:|---|
+| S4 | phrase_organic | `code documentation` | us | 10 | Clean. IBM, GitHub, Heretto, Codacy. Dedicated pages for the term = parent topic owns itself. Used for row 20. |
+| S5 | phrase_fullsearch | `developer conference` | us | 25 | Navigational brand traffic: WWDC 5,400, GDC 2,400, NVIDIA, Roblox, Esri. Cluster 7 contaminated. |
+| S6 | phrase_fullsearch | `conference talk proposal` | us | 4 | **All variants 0/mo.** No how-to intent under cluster 7. |
+| S7 | phrase_fullsearch | `call for papers` | us | 20 | 1,300 but academic navigation: NeurIPS, ICML, ICLR, upenn. Not writable. |
+| S8 | phrase_fullsearch | `answer engine optimization` | us | 30 | Real and rising. AEO 4,400, what-is 480, aeo-vs-geo 210. |
+| S9 | phrase_organic | `answer engine optimization` | us | 10 | Clean SERP: HubSpot, Coursera, Forbes, Ahrefs, CXL. Real AEO intent, hard competition. |
+| S10 | phrase_kdi | 15 cluster-4 head terms | us | 15 | **KD 35-68 across the board.** AEO 52, GEO 68, chatgpt seo 61, llms.txt 49. None are KD<=20. |
+| S11 | phrase_fullsearch | `ai overviews`, Nq>80 KD<25 | us | 30 | KD<=20 tail is rank-tracker SaaS intent plus `company overview` token matches. ~4 usable. |
+| S12 | phrase_fullsearch | `llms.txt` | us | 30 | **Clean and strong.** llms.txt 3,600, generator 2,400, file 1,900, what-is 1,000, examples 480. |
+
+**Correction to an earlier correction.** On 2026-08-17 I reported `llms.txt generator` at 300/mo
+from Ahrefs and used it to argue the canonical plan's Month 5 anchor was built on a bad number.
+Semrush puts it at **2,400**, which matches what the canonical plan said. The plan was right and my
+correction was wrong. The llms.txt sub-cluster is the healthiest part of cluster 4.
+
+## 2026-08-17 fifth cycle — fortnight two verification (Semrush; Ahrefs still dead)
+
+| # | Tool | Query | Rows | Finding |
+|---:|---|---|---:|---|
+| S13 | phrase_these | 12 docs-as-code sub-topics | 8 | Near-zero across the block: docs as code tools 20, documentation testing 20, documentation versioning 10, documentation migration 20, automated api documentation 30. Four returned nothing. |
+| S14 | phrase_organic | `ai overview tracker` | 8 | Tool pages rank, including two FREE tools (Advanced Web Ranking, Seobility) plus one how-to post. Confirms the tool-first directive for this intent. |
+
+**Adjacent finding, recorded for the tool directive rather than acted on as prose:**
+`broken link checker` is **8,100/mo** and is tool intent, not article intent. The site already
+ships five tools and this is the largest single tool-intent keyword found so far in the niche.
+Row 41's brief explicitly declines to chase it with prose.
