@@ -21,7 +21,7 @@ No weird ranking trick. No attempt to hide the failure behind a bigger context w
 
 Anthropic changed the chunk before retrieval ever started.
 
-That is the part I keep coming back to. Retrieval work usually piles up at query time, where teams swap embedding models, add rerankers, widen top-K, and keep pushing on the same end of the system.
+That is the part I keep coming back to. [Context engineering](/glossary/context-engineering/) for retrieval usually piles work up at query time, where teams swap embedding models, add rerankers, widen top-K, and keep pushing on the same end of the system.
 
 Anthropic pushed on the other end, before anyone runs a single query. I think that is why the idea matters.
 
@@ -41,7 +41,7 @@ Retrieval quality drops right there, at the seam where the chunk got cut out.
 
 Context decay is something I wrote about in [LLM Context Windows Explained](/articles/llm-context-windows-explained/), and the same idea shows up earlier in the pipeline. Small chunks improve recall because they are easier to match, and the same smallness strips away the frame that made the text identifiable in the first place.
 
-That tradeoff sits in the middle of production RAG, and most teams pick a chunk size by feel and then live with whatever it costs them.
+That tradeoff sits in the middle of production RAG, and most teams pick a chunk size by feel and then live with whatever it costs them. [Semantic chunking](/glossary/semantic-chunking/) makes the boundary follow a change in meaning instead of a fixed size, but it still has to be evaluated through retrieval.
 
 ## Anthropic's move is simple
 
@@ -54,7 +54,7 @@ The standard pipeline looks like this:
 5. retrieve at query time
 6. rerank or generate
 
-Anthropic inserts one extra step after chunking.
+Anthropic inserts one extra step after chunking. [Late chunking](/glossary/late-chunking/) changes a different part of the order by contextualizing document tokens before pooling them into chunk vectors.
 
 Claude sees:
 

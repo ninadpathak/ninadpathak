@@ -14,7 +14,7 @@ title: 'Structured Outputs with LLMs: JSON Mode, Function Calling, and When to U
 
 Getting a reliable JSON object out of an LLM used to mean wrapping every call in a try/except, re-prompting on parse failures, and hoping your production traffic never hit the 3% of responses that came back malformed. I once shipped an invoice-parsing job that quietly dropped about one document in thirty because a `total` field came back as the string `"N/A"` instead of a number, and nobody noticed until a finance report didn't reconcile.
 
-Three mechanisms now exist to avoid that class of bug: JSON mode, function calling, and the newer structured outputs API. They are not interchangeable, and picking the wrong one shows up in token costs, latency, and the failure rate on exactly the edge cases you didn't test.
+Three mechanisms now exist to avoid that class of bug: [JSON mode and structured outputs](/glossary/json-mode-vs-structured-outputs/), plus function calling. They are not interchangeable, and picking the wrong one shows up in token costs, latency, and the failure rate on exactly the edge cases you didn't test.
 
 **Short answer:** Use structured outputs (strict mode with `json_schema`) for any schema you want guaranteed at the token level. Use function calling when you want the model to decide whether and when to invoke external tools.
 
@@ -62,7 +62,7 @@ Gemini supports structured outputs across all actively supported models, and [Ge
 
 Function calling solves a different problem. When you pass a function schema to a model, you're not asking it to format a response.
 
-You're asking it to decide whether a tool call is needed and, if so, which arguments to pass. Ask "what's the weather in Paris?" with a `get_weather` tool available and the model returns a tool call.
+You're asking it to decide whether [a tool call](/glossary/tool-calling/) is needed and, if so, which arguments to pass. Ask "what's the weather in Paris?" with a `get_weather` tool available and the model returns a tool call.
 
 Ask "what's a nice thing to say to a coworker?" and it just answers in text, because no tool applies.
 

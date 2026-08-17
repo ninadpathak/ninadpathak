@@ -25,7 +25,7 @@ Frame the task, scope it down, let the agent work against an instrumented loop, 
 
 The art is knowing which stage owns which decision.
 
-I think about the whole thing as a loop with a human at two of its phases. The agent runs its own perceive-think-act-remember cycle inside stage three, which I broke down in [the anatomy of an agent loop](/articles/agent-loop-anatomy/).
+I think about the whole thing as [flow engineering](/glossary/flow-engineering/) with a human at two of its phases. The agent runs its own perceive-think-act-remember cycle inside stage three, which I broke down in [the anatomy of an agent loop](/articles/agent-loop-anatomy/).
 
 My job is the outer loop around it, and that outer loop has barely changed across three generations of models.
 
@@ -64,7 +64,7 @@ I scope the work so the diff stays in the range I can read carefully, usually a 
 
 When a task is genuinely large, I split it into a sequence of scoped changes that each stand on their own. Each one gets its own frame, its own agent run, its own review.
 
-The sequence builds toward the big change through steps I can verify one at a time. A migration across a codebase becomes twelve small reviewable diffs rather than one giant unreadable one.
+The sequence builds toward the big change through steps I can verify one at a time. A migration across a codebase becomes twelve small reviewable diffs through the same plan-before-execution separation formalized by [Plan-and-Solve](/glossary/plan-and-solve-framework/).
 
 Scoping is also where I decide whether the task needs one agent or several. The honest answer is almost always one.
 

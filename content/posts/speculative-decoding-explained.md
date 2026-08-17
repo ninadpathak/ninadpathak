@@ -24,7 +24,7 @@ The arithmetic of turning those weights into one token finishes almost instantly
 
 The chopping takes seconds. The walking takes minutes.
 
-Speculative decoding is how I put that idle compute to work without adding a single GPU.
+[Speculative decoding](/glossary/speculative-decoding/) is how I put that idle compute to work without adding a single GPU.
 
 The numbers make the imbalance concrete. A model serving a single request often pushes the GPU's compute units to a few percent utilization even as memory bandwidth pegs near its ceiling, the inverse of what you see during training.
 

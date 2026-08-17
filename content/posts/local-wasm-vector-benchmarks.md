@@ -54,7 +54,7 @@ SQLite-vec loads as an extension, while PGlite starts a Postgres runtime inside 
 
 PGlite brings the industry-standard `pgvector` implementation to the edge. Its primary advantage is the **HNSW (Hierarchical Navigable Small World)** index.
 
-HNSW is a graph-based algorithm that provides an approximate nearest neighbor (ANN) search with logarithmic complexity.
+[HNSW](/glossary/hierarchical-navigable-small-world-hnsw/) is a graph-based index for approximate nearest-neighbor search, using graph navigation instead of comparing the query with every stored vector.
 
 <div class="visual-wrapper">
   <div class="visual-title">Search complexity: flat vs indexing</div>

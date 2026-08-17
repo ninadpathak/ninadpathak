@@ -133,7 +133,7 @@ You must carefully validate the performance impact when using reduced vectors in
 
 ## Building flexible vectors with Matryoshka embeddings
 
-The most significant innovation in embedding geometry recently is the Matryoshka Representation Learning (MRL) technique. These models are trained so that the most important information is stored in the first few dimensions.
+The most significant innovation in embedding geometry recently is [Matryoshka Representation Learning (MRL)](/glossary/matryoshka-representation-learning/). These models are trained so that the most important information is stored in the first few dimensions.
 
 The vector acts like a Russian nesting doll.
 
@@ -156,7 +156,7 @@ The mathematical elegance of MRL comes from a multi-scale loss function that pen
 
 Storage layers can exploit the same property.
 
-Full vectors live on high-latency disk. Only the truncated Matryoshka heads stay in low-latency RAM for the initial candidate selection.
+Full vectors live on high-latency disk. Only the truncated Matryoshka heads stay in low-latency RAM for the initial [bi-encoder retrieval](/glossary/bi-encoder/) candidate selection.
 
 That layered split is the current gold standard for large-scale retrieval.
 
@@ -212,7 +212,7 @@ One million vectors would require 6GB of memory.
 
 Scalar quantization reduces each component from 32 bits to 8 bits, cutting raw vector storage by 75%. Measure recall loss on the target corpus.
 
-The model maps the range of floating-point values onto a 256-level integer scale, much like saving a photo at lower color depth while the picture stays recognizable. The result is the industry standard for production systems today.
+The model maps the range of floating-point values onto a 256-level integer scale, much like saving a photo at lower color depth while the picture stays recognizable. [Product quantization](/glossary/product-quantization/) takes a different route by replacing vector subspaces with identifiers from learned centroid codebooks.
 
 Binary quantization (BQ) goes further.
 

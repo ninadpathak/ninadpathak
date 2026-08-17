@@ -48,7 +48,7 @@ Two reasons pushed me toward multi-agent architectures. Specialization came firs
 
 A coding agent that also has to drive a file browser, a shell, and a PR reviewer is holding twenty-odd tool schemas in its head at once, and it starts misfiring: calling the shell when it meant to read a file, passing a diff to the wrong tool. Splitting those into separate agents let each one carry a handful of tools it understood cold.
 
-That is the pattern I later recognized as the [supervisor agent pattern](/articles/the-agent-design-space/) in production.
+That is the pattern I later recognized as the [supervisor agent pattern](/articles/the-agent-design-space/) in production. The supervisor becomes an [agentic router](/glossary/agentic-router/) when it chooses which specialist receives each request.
 
 Isolation was the second reason. A research agent that goes off the rails and starts hallucinating sources should not be able to corrupt the state of a code generation agent working the same ticket.
 

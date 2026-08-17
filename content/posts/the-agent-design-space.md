@@ -14,7 +14,7 @@ title: 'The Agent Design Space: A Map of What Engineers Are Actually Building'
 
 Three weeks of reading production architecture posts, scraping GitHub for agent implementations, and talking to engineers who run agents at scale taught me one thing the taxonomy diagrams miss: I wanted to know what engineers are actually building, not what the boxes say they should build.
 
-The real design space is messier than the taxonomies suggest. Production agents do not map cleanly into types.
+The real design space of [agentic engineering](/glossary/agentic-engineering/) is messier than the taxonomies suggest. Production agents do not map cleanly into types.
 
 They cluster around the constraints that decide everything else: how often the agent runs, what it can break when it gets something wrong, and how much a human can audit after the fact.
 

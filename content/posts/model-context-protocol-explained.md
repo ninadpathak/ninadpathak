@@ -17,7 +17,7 @@ Wiring an AI model up to external data has always been a messy engineering chore
 
 Every one of those integrations needed custom glue to translate a model request into an actual API call, and every new tool meant starting that work over from scratch. That fragmentation slows you down and quietly raises the odds that the model reasons over malformed or half-translated data.
 
-The Model Context Protocol (MCP) attacks the problem from the other side by giving everyone one standard to write against. Any AI host can talk to any data server through a single shared language, so the connector you build for one agent works for the next one without changes.
+[The Model Context Protocol (MCP)](/glossary/model-context-protocol/) attacks the problem from the other side by giving everyone one standard to write against. Any AI host can talk to any data server through a single shared language, so the connector you build for one agent works for the next one without changes.
 
 I think of MCP as the plumbing layer that the current generation of agents has been missing.
 

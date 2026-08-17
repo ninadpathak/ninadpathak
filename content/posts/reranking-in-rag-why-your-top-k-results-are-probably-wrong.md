@@ -62,7 +62,7 @@ Your language model then receives the redis document and either hallucinates an 
 
 ## Enter the cross-encoder
 
-I reach for cross-encoders to solve this precise issue. A cross-encoder is a different type of machine learning model, and it does not produce standalone embeddings at all.
+I reach for [cross-encoder reranking](/glossary/cross-encoder-reranking/) to solve this precise issue. A cross-encoder is a different type of machine learning model, and it does not produce standalone embeddings at all.
 
 What it takes instead is two pieces of text simultaneously. You feed it the query and a single document as one combined input, and the model processes them together through its attention layers.
 

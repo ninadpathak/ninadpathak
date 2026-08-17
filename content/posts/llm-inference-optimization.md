@@ -52,7 +52,7 @@ Run the numbers and the pressure is obvious. A 70B model with a 128K context win
 
 Sixteen concurrent sequences consume 1TB, which no single GPU holds. Context length and throughput pull against each other for exactly this reason: every extra token of context steals room you could have spent on another concurrent user.
 
-**PagedAttention** (vLLM's approach) manages the KV cache the way an operating system manages RAM, mapping non-contiguous physical blocks to logical sequence positions instead of demanding one long contiguous slab per request. Fragmentation disappears, and memory utilization gets close to perfect.
+[PagedAttention](/glossary/pagedattention/) (vLLM's approach) manages the KV cache the way an operating system manages RAM, mapping non-contiguous physical blocks to logical sequence positions instead of demanding one long contiguous slab per request. Fragmentation disappears, and memory utilization gets close to perfect.
 
 PagedAttention typically lets you serve 2-4x more concurrent sequences than naively managed KV caches on the same memory budget.
 
@@ -104,7 +104,7 @@ When I'm optimizing a new inference deployment, I work in this order:
 4. **PagedAttention**: if running long contexts or high concurrency, this is essential.
 5. **INT8 or 4-bit**: only if the above still don't get you enough headroom.
 
-Speculative decoding earns its place once the baseline is fast enough. As I wrote in my [speculative decoding breakdown](/articles/speculative-decoding-explained/), it delivers 2-3x token throughput gains for the right workload, though it requires running two models and adds implementation complexity you don't want to carry while the basics are still unsettled.
+[Speculative decoding](/articles/speculative-decoding-explained/) earns its place once the baseline is fast enough. It differs from [test-time compute](/glossary/test-time-compute/), which spends more inference work to improve or select an answer rather than producing the target distribution with fewer sequential steps.
 
 Jumping to the advanced stuff is the common mistake, like wiring up speculative decoding on a server that hasn't even enabled continuous batching yet. It's the equivalent of bolting on a turbocharger and leaving the handbrake engaged.
 

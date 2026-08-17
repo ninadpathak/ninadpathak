@@ -35,7 +35,7 @@ Conversational categories drop to 5-15%.
 
 Replacing string equality with embedding similarity is what makes the difference. The cache becomes a vector store of prior queries, and a hit occurs when a new query lands within a configurable similarity radius of a stored one.
 
-Think of an exact-match cache as a filing cabinet where the folder label has to be spelled character for character, against a semantic cache that files by what the question is about.
+Think of an exact-match cache as a filing cabinet where the folder label has to be spelled character for character, against [semantic caching](/glossary/semantic-caching/) that files by what the question is about.
 
 ## How the mechanism works
 

@@ -23,7 +23,7 @@ For a lot of engineering teams, throwing more cluster at the problem stopped bei
 H2O and StreamingLLM show that retaining high-importance tokens and attention sinks can reduce KV-cache pressure, with quality depending on the model and task.
 
 
-The discussion explains the mechanisms and published research behind KV-cache eviction. It does not report a model or hardware benchmark.
+The discussion explains the mechanisms and published research behind [KV-cache eviction](/glossary/kv-cache-eviction/). It does not report a model or hardware benchmark.
 
 ## The architecture of the memory wall: why KV caches explode
 
