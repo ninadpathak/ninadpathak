@@ -11,7 +11,9 @@ that looked like findings:
     on a sample of one tool. Medians within INDISTINGUISHABLE_DAYS are one figure.
 
 The three-state reporting is also pinned. A missing measurement must never render as a
-zero, because a zero reads as "it happened on day zero".
+zero, because a zero reads as "it happened on day zero". Pagination, exact withholding
+bounds, and one authoritative same-day report are pinned too: truncation or duplicate
+sections would turn one incomplete observation into a confident-looking trend.
 """
 
 from __future__ import annotations
@@ -20,6 +22,7 @@ import datetime as dt
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "tools"))
@@ -31,6 +34,106 @@ def series(pairs: dict[str, tuple[float, float]]) -> dict[str, dict]:
     """{date: (impressions, clicks)} -> the shape the module consumes."""
     return {d: {"impressions": i, "clicks": c, "position": 10.0}
             for d, (i, c) in pairs.items()}
+
+
+class FakeSearchAnalytics:
+    def __init__(self, pages):
+        self.pages = pages
+        self.calls = []
+        self.body = None
+
+    def query(self, siteUrl, body):
+        self.calls.append(body["startRow"])
+        self.body = body
+        return self
+
+    def execute(self):
+        start = self.body["startRow"]
+        return {"rows": self.pages.get(start, [])}
+
+
+class FakeService:
+    def __init__(self, pages):
+        self.api = FakeSearchAnalytics(pages)
+
+    def searchanalytics(self):
+        return self.api
+
+
+class TestCompletePull(unittest.TestCase):
+    def test_fetch_rows_paginates_past_the_api_row_limit(self):
+        svc = FakeService({
+            0: [{"keys": ["a"]}, {"keys": ["b"]}],
+            2: [{"keys": ["c"]}],
+        })
+        got = at.fetch_rows(svc, {"dimensions": ["page"]}, row_limit=2)
+        self.assertEqual([row["keys"][0] for row in got], ["a", "b", "c"])
+        self.assertEqual(svc.api.calls, [0, 2])
+
+
+class TestWithholdingBounds(unittest.TestCase):
+    def test_build_exposes_exact_floor_ceiling_and_coverage(self):
+        url = "https://ninadpathak.com/test-tool/"
+        pages = [{
+            "kind": "tool", "url": url, "slug": "test-tool",
+            "cluster": "ai-search-optimization", "shipped": "2026-08-01",
+            "rewritten": None, "basis": "new", "title": "/test-tool/",
+        }]
+        page_daily = {url: {
+            "2026-08-05": {"clicks": 0, "impressions": 10, "position": 12.0}
+        }}
+        query_daily = {
+            "named": {url: {
+                "2026-08-05": {"clicks": 0, "impressions": 4}
+            }},
+            "human": {url: {
+                "2026-08-05": {"clicks": 0, "impressions": 2}
+            }},
+        }
+        with mock.patch.object(at, "tracked_pages", return_value=pages), \
+             mock.patch.object(at, "daily_by_page", return_value=page_daily), \
+             mock.patch.object(at, "daily_queries_by_page", return_value=query_daily):
+            data = at.build(None, dt.date(2026, 8, 1), dt.date(2026, 8, 10))
+
+        page = data["pages"][0]
+        self.assertEqual(page["named_query_impressions"], 4)
+        self.assertEqual(page["human_impressions"], 2)
+        self.assertEqual(page["withheld_impressions"], 6)
+        self.assertEqual(page["human_impressions_upper"], 8)
+        self.assertEqual(page["query_coverage_pct"], 40.0)
+        self.assertEqual(data["coverage"], {
+            "page_impressions": 10,
+            "named_query_impressions": 4,
+            "pct": 40.0,
+            "human_floor": 2,
+            "human_upper": 8,
+            "withheld_impressions": 6,
+        })
+
+    def test_render_calls_the_ceiling_an_error_bound_not_an_estimate(self):
+        url = "https://ninadpathak.com/test-tool/"
+        pages = [{
+            "kind": "tool", "url": url, "slug": "test-tool",
+            "cluster": "ai-search-optimization", "shipped": "2026-08-01",
+            "rewritten": None, "basis": "new", "title": "/test-tool/",
+        }]
+        page_daily = {url: {
+            "2026-08-05": {"clicks": 0, "impressions": 10, "position": 12.0}
+        }}
+        query_daily = {
+            "named": {url: {"2026-08-05": {"clicks": 0, "impressions": 4}}},
+            "human": {url: {"2026-08-05": {"clicks": 0, "impressions": 2}}},
+        }
+        with mock.patch.object(at, "tracked_pages", return_value=pages), \
+             mock.patch.object(at, "daily_by_page", return_value=page_daily), \
+             mock.patch.object(at, "daily_queries_by_page", return_value=query_daily):
+            data = at.build(None, dt.date(2026, 8, 1), dt.date(2026, 8, 10))
+        data["verdict"] = at.verdict(data)
+        data["aged_verdict"] = at.aged_verdict(data)
+        report = at.render(data)
+        self.assertIn("2–8", report)
+        self.assertIn("error bound, not an estimate", report)
+        self.assertIn("6 are withheld", report)
 
 
 class TestDescribeThreeStates(unittest.TestCase):
@@ -179,6 +282,51 @@ class TestToolsAreAllTracked(unittest.TestCase):
 
     def test_the_tool_set_is_not_silently_empty(self):
         self.assertGreaterEqual(len(at.TOOLS), 4)
+
+
+class TestDatedReportIsIdempotent(unittest.TestCase):
+    def test_same_date_is_replaced_not_appended(self):
+        existing = (
+            "# Attribution\n\n"
+            "## 2026-08-16 — attribution since 2026-08-14\nold day\n\n"
+            "## 2026-08-17 — attribution since 2026-08-14\nstale\n"
+        )
+        report = "## 2026-08-17 — attribution since 2026-08-14\nfresh\n"
+
+        got = at.upsert_dated_report(existing, report, "2026-08-17")
+
+        self.assertEqual(got.count("## 2026-08-17 — attribution since"), 1)
+        self.assertIn("fresh", got)
+        self.assertNotIn("stale", got)
+        self.assertIn("old day", got)
+
+    def test_preexisting_same_date_duplicates_collapse_to_one(self):
+        existing = (
+            "# Attribution\n\n"
+            "## 2026-08-17 — attribution since 2026-08-14\nfirst\n\n"
+            "## 2026-08-17 — attribution since 2026-08-14\nsecond\n"
+        )
+        report = "## 2026-08-17 — attribution since 2026-08-14\nauthoritative\n"
+
+        got = at.upsert_dated_report(existing, report, "2026-08-17")
+
+        self.assertEqual(got.count("## 2026-08-17 — attribution since"), 1)
+        self.assertIn("authoritative", got)
+        self.assertNotIn("first", got)
+        self.assertNotIn("second", got)
+
+    def test_new_date_preserves_nested_headings(self):
+        existing = (
+            "# Attribution\n\n"
+            "## 2026-08-16 — attribution since 2026-08-14\n"
+            "### The bet: do tools reach search sooner than articles?\nlimits\n"
+        )
+        report = "## 2026-08-17 — attribution since 2026-08-14\nnew\n"
+
+        got = at.upsert_dated_report(existing, report, "2026-08-17")
+
+        self.assertIn("### The bet: do tools reach search sooner", got)
+        self.assertEqual(got.count("— attribution since"), 2)
 
 
 if __name__ == "__main__":
