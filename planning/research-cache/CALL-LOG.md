@@ -181,3 +181,25 @@ Row 41's brief explicitly declines to chase it with prose.
 `online community management` shows 390 but is general community-management intent, not developer
 community, and sits next to the HOA and property-management contamination already swept from
 cluster 6. Not targeted.
+
+---
+
+## Tool SERP verification — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 1.**
+
+| Instrument | Report | Lines | Cost | Notes |
+|---|---|---:|---|---|
+| Semrush | `phrase_these` | 7 | 10 units/line = **70 units** | Volume, KD and SERP-feature codes for the seven target tool keywords, as a cross-check on the live SERP reads. Found an 8x volume disagreement with Ahrefs on `llms.txt generator` (300 vs 2,400). |
+| Live Google SERP reads | — | 7 | free | The primary instrument. Real browser session. |
+| Search Console | — | 5 | free | Our positions, and the tool pages' full history. |
+| Ahrefs | — | 0 | — | Still dead. `Access denied: MCP token is invalid`. |
+
+Google served `/sorry/index` bot detection on the first attempt. **No attempt was made to
+solve or bypass the CAPTCHA.** A plain query URL worked on retry and every read came from
+that. Had it not, the question would have been reported as unanswerable.
+
+Only Semrush code **52 = AI Overview** is authoritatively documented; codes 6, 7, 9, 14, 15,
+20, 21 and 36 were left undecoded rather than guessed.
+
+Output: `planning/research/TOOL-SERP-VERIFICATION-2026-08-17.md`.
