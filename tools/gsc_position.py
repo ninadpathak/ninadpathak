@@ -74,6 +74,9 @@ UNDERPOWERED = 30
 WRITE_WEEKDAY = 0
 POST_URL = re.compile(r"/(?:articles|blog)/([^/]+)/")
 BODY_LINK = re.compile(r"\[([^\]]+)\]\(/articles/([a-z0-9][a-z0-9\-\.]*)/?\)")
+DATED_SECTION = re.compile(
+    r"(?m)^## (?P<date>\d{4}-\d{2}-\d{2}) — what moves position\s*$"
+)
 
 
 def pull_human(svc, start: dt.date, end: dt.date) -> list[dict]:
@@ -465,6 +468,32 @@ def limits(d: dict) -> list[str]:
     return out
 
 
+def upsert_dated_report(existing: str, report: str, generated: str) -> str:
+    """Keep exactly one position section for a generated date.
+
+    The weekly job can be invoked more than once by a manual check, launchd retry, or a
+    resumed campaign cycle. Appending on every invocation makes two slightly different
+    GSC pulls look like two independent observations. Replace the first same-day section
+    and remove any later duplicates while preserving every other dated section.
+    """
+    matches = list(DATED_SECTION.finditer(existing))
+    targets = [
+        (match.start(), matches[i + 1].start() if i + 1 < len(matches) else len(existing))
+        for i, match in enumerate(matches)
+        if match.group("date") == generated
+    ]
+    clean_report = report.strip() + "\n"
+    if not targets:
+        return existing.rstrip() + "\n\n" + clean_report
+
+    updated = existing
+    first_start = targets[0][0]
+    for start, end in reversed(targets):
+        replacement = clean_report if start == first_start else ""
+        updated = updated[:start] + replacement + updated[end:]
+    return updated.rstrip() + "\n"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -520,8 +549,11 @@ def main() -> int:
             "produced two false readings on this campaign. Clicks on the injected\n"
             "`/products/` spam pages are excluded — real people, but not readers of this site.\n",
             encoding="utf-8")
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(report)
+    LOG.write_text(
+        upsert_dated_report(LOG.read_text(encoding="utf-8"), report,
+                            data["generated"]),
+        encoding="utf-8",
+    )
     return 0
 
 

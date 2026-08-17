@@ -187,5 +187,50 @@ class TestLimitsAlwaysStateTheSample(unittest.TestCase):
         self.assertNotIn("an empty one", out)
 
 
+class TestDatedReportIsIdempotent(unittest.TestCase):
+    def test_same_date_is_replaced_not_appended(self):
+        existing = (
+            "# Position analysis\n\n"
+            "## 2026-08-10 — what moves position\nold week\n\n"
+            "## 2026-08-17 — what moves position\nstale run\n"
+        )
+        report = "\n## 2026-08-17 — what moves position\nfresh run\n"
+
+        got = gp.upsert_dated_report(existing, report, "2026-08-17")
+
+        self.assertEqual(got.count("## 2026-08-17 — what moves position"), 1)
+        self.assertIn("fresh run", got)
+        self.assertNotIn("stale run", got)
+        self.assertIn("old week", got)
+
+    def test_preexisting_same_date_duplicates_collapse_to_one(self):
+        existing = (
+            "# Position analysis\n\n"
+            "## 2026-08-17 — what moves position\nfirst\n\n"
+            "## 2026-08-17 — what moves position\nsecond\n"
+        )
+        report = "## 2026-08-17 — what moves position\nauthoritative\n"
+
+        got = gp.upsert_dated_report(existing, report, "2026-08-17")
+
+        self.assertEqual(got.count("## 2026-08-17 — what moves position"), 1)
+        self.assertIn("authoritative", got)
+        self.assertNotIn("first", got)
+        self.assertNotIn("second", got)
+
+    def test_a_new_date_appends_without_touching_nested_headings(self):
+        existing = (
+            "# Position analysis\n\n"
+            "## 2026-08-10 — what moves position\n"
+            "### Where the sample is too small\nlimits\n"
+        )
+        report = "## 2026-08-17 — what moves position\nnew week\n"
+
+        got = gp.upsert_dated_report(existing, report, "2026-08-17")
+
+        self.assertIn("### Where the sample is too small\nlimits", got)
+        self.assertEqual(got.count("— what moves position"), 2)
+
+
 if __name__ == "__main__":
     unittest.main()
