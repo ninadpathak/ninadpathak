@@ -124,9 +124,39 @@ def robots_check() -> list[str]:
     return problems
 
 
+def shadowing_redirects() -> list[str]:
+    """A redirect must never point away from a page that actually exists.
+
+    Cloudflare's _redirects takes precedence over a static file, so a rule added while a
+    URL was dead keeps firing after the page comes back and sends every visitor and
+    crawler away from it. That happened to /glossary/ on 2026-08-17: it was redirected
+    while 404ing at position 8.6, then republished, and the redirect would have shadowed
+    it. Every recovery of a dead URL can reintroduce this, so it is checked, not
+    remembered.
+    """
+    redirects = ROOT / "static" / "_redirects"
+    output = ROOT / "output"
+    if not redirects.exists() or not output.exists():
+        return []
+
+    problems = []
+    for line in redirects.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        source = line.split()[0]
+        if not source.startswith("/"):
+            continue
+        candidate = output / source.strip("/") / "index.html"
+        if source != "/" and candidate.is_file():
+            problems.append(f"redirect {source} shadows a real page at {candidate.relative_to(ROOT)}")
+    return problems
+
+
 def publish_gate() -> list[str]:
     """The mechanical half of the publish gate in campaign-90d.md section 8."""
     failures = []
+    failures += shadowing_redirects()
 
     python = str(ROOT / ".venv" / "bin" / "python")
     if not pathlib.Path(python).exists():
