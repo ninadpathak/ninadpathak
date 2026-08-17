@@ -1,7 +1,7 @@
 # Brief: How to Write a Reddit Post That Survives the Mod Queue
 
-**Slot:** 2026-08-22 | Order 24 | **Cluster:** Reddit marketing | **Experience: A**
-**Last Reddit row.** The cluster ends here at four pieces.
+**Slot:** 2026-08-22 | Order 24 | **Cluster:** Distribution | **Subcluster:** Reddit | **Experience: A**
+**Last Reddit row.** The subcluster ends here at four pieces; the Distribution cluster continues.
 
 ## Keyword
 

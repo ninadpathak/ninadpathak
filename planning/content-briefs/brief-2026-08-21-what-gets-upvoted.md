@@ -1,6 +1,6 @@
 # Brief: What Gets Upvoted in Developer Subreddits
 
-**Slot:** 2026-08-21 | Order 23 | **Cluster:** Reddit marketing | **Experience: A**
+**Slot:** 2026-08-21 | Order 23 | **Cluster:** Distribution | **Subcluster:** Reddit | **Experience: A**
 
 ## Keyword
 
