@@ -123,7 +123,8 @@ slop reviewer will reject it.
   date when `updated` is missing, so a false freshness date is worse than none.
 - **`takeaways`**, which the template renders as the "short version" block. Three, each a standalone
   claim rather than a topic label.
-- **Repoint the outbound link** to `/articles/memory-attribution-errors/` once batch 1 lands.
+- **Preserve the completed batch-1 repoint** to `/articles/ai-memory-management-for-llms/`;
+  `/articles/memory-attribution-errors/` is a merged source and must not return to the draft.
 - **Two outbound links minimum** must survive the batch-3 merge, since one of the three current
   targets is being absorbed into this page and one is being retired. `agent-harnesses` survives;
   a second live target is needed. `tools/check_link_retrofit.py` enforces this.
