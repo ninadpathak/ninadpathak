@@ -108,6 +108,12 @@ robots-denied exclusion; see `POPULATION-DISCOVERY-2026-08-18.md`.
 The cap makes the result a page sample, not a census of every block on every
 documentation site. The publication must use that wording.
 
+Fallback response bytes are stored as deterministic gzip blobs addressed by
+their uncompressed SHA-256. `FALLBACK-PILOT-2026-08-18.md` measures 1.48 MB
+compressed for 10.37 MB of successful HTML across the first five fallback
+projects, and records the two instrument-accounting corrections made before the
+full run.
+
 ## Inclusion and parsing
 
 The extractor is generator-aware. Unknown generators are excluded and counted;

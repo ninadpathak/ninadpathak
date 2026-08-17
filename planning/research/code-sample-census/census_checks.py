@@ -361,5 +361,32 @@ class SitemapCoverageTests(unittest.TestCase):
         )
 
 
+class FallbackCrawlerTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        module_path = STUDY_DIR / "crawl_fallback_pages.py"
+        spec = importlib.util.spec_from_file_location("crawl_fallback_pages", module_path)
+        cls.module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        sys.modules[spec.name] = cls.module
+        spec.loader.exec_module(cls.module)
+
+    def test_links_are_sorted_deduplicated_and_scope_limited(self):
+        raw = b'<a href="b.html">B</a><a href="a.html#x">A</a><a href="b.html">B2</a><a href="/outside/">X</a>'
+        self.assertEqual(
+            self.module.eligible_links(raw, "https://e.test/docs/", "https://e.test/docs/"),
+            ["https://e.test/docs/a.html", "https://e.test/docs/b.html"],
+        )
+
+    def test_content_addressed_gzip_is_deterministic(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as directory:
+            first = self.module.write_blob(b"<html>same</html>", Path(directory))
+            second = self.module.write_blob(b"<html>same</html>", Path(directory))
+            self.assertEqual(first, second)
+            self.assertEqual(len(list(Path(directory).glob("*/*.html.gz"))), 1)
+
+
 if __name__ == "__main__":
     unittest.main()

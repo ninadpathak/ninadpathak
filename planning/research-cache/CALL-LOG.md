@@ -440,3 +440,20 @@ children and hit the 200-document cap; its partial result is not used for Boto3.
 
 Outputs: `planning/research/code-sample-census/POPULATION-DISCOVERY-2026-08-18.md`,
 `data/page-populations-2026-08-18.json`, and the v1/v2 sitemap coverage artifacts.
+
+---
+
+## Code-sample census execution batch 6 — 2026-08-18, agent `seo-currency`
+
+**Paid calls: 0.** No Ahrefs, Semrush, GitHub API, search API, model API, or paid
+dataset call.
+
+The deterministic first-five fallback pilot made 130 public documentation page
+attempts and two robots reads. A correction run reused all 130 page records and
+made zero page reads plus two robots reads: **134 free HTTP attempts total**.
+
+Result: 127 selected page attachments, 130 unique records, 126 successful
+content-addressed gzip blobs, and 1,478,948 compressed bytes from 10,365,300 raw
+HTML bytes. Two corpora hit the 50-attempt cap; three exhausted earlier. The v2
+artifact corrects capped/complete classification and exception accounting before
+scale-up. Output: `planning/research/code-sample-census/FALLBACK-PILOT-2026-08-18.md`.
