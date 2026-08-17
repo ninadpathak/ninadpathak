@@ -252,6 +252,36 @@ The homepage then got the retrofit that 2e requires. It carries 310 impressions,
 
 Judge all of this on whether the cluster owner pages accumulate non-brand impressions of their own, not on the fact that they exist.
 
+### 2026-08-17 (second cycle) — the pipeline is fixed, and the liability is wider than the AI cluster
+
+**Voice repair deployed.** 16 articles, **1,349 deletions against 675 insertions** — the right ratio when the finding is invented evidence rather than bad writing. `rule_checker` 349 → 284 errors. The audit covered 235 claim units at 54 keep / 115 rewrite / 66 cut.
+
+**Every benchmark article checked has no reproducible artifact.** The extension pass asked one question of eight more articles — does an artifact exist, in this repo or at a linked public location, that produces the numbers the article states — and the answer was **no, eight times out of eight**: BEAM, local WASM, agentic CLI, lambda calculus, RAG evaluation metrics, state of AI agent memory, state of open-source memory, embedding models. Benchmark framing removed from all of them rather than unpublishing, because they hold real positions and a 404 earns nothing. Two now point at genuinely reproducible public work instead: NVIDIA RULER and LongMemEval.
+
+**The two tools are live and verified working.** `/ai-overviews-checker/` and `/llms-txt-validator/`, 89 unit tests between them, 133 of 134 in the suite passing (the failure is a missing local `rsvg-convert` binary, unrelated). The checker was smoke-tested in a real browser: loads clean, no console errors, and its sample run reports "8 checks applied, 2 not applicable" — it says which checks it could not apply instead of padding a score. That honesty is why the page is trustworthy and it is a standing requirement for every tool.
+
+**New finding, and it widens the problem: the voice liability is not confined to the revived AI cluster.** A scan of the non-AI clusters found **ten documentation-cluster articles carrying the identical defect** — "I ran the checker against a fixture containing…" — which is the fixture-verifies-its-own-fixture pattern that carries zero information. The slop review found it in five articles; it is in at least fifteen. It is the Hermes generator's signature, so the generator fix matters more than the cleanup, but the cleanup now extends to cluster 1.
+
+**Cluster isolation is now auditable, and it is failing.** `tools/audit_clusters.py`, first run over 88 posts:
+
+- **20 posts have no inbound link at all — 23% of the site.** Five were published by Hermes in the last week, which is generator defect G6 appearing in the data rather than in a review.
+- 9 posts have fewer than two outbound links, 5 of them zero.
+- 22 cross-cluster links need the subject-of-the-sentence test, which cannot be decided mechanically, so the tool reports each with its sentence and never auto-fixes one.
+
+**Generator fixes verified independently, not taken on report.** Checked on Phantom directly: backups exist, the artifact conditional is in the prompt, the "does the artifact test anything the article did not already assume" question is present in **all three** skill copies, and the queue carries new `Subcluster` and `Experience` columns without repurposing `Tier`. Nothing was deleted on the box — 6 stale workspaces, 9 backups, 37 cron jobs all intact.
+
+**Calendar reweighted by volume x winnability.** Out of 71 Planned rows: documentation 18, AI engineering 12, Reddit 11, events 11, community 10, AI search 6, DevEx 3. Clusters 5-7 take 32 rows, 45% of the calendar, and 16 of those are Experience A. The whole API block at rows 20-30 moved out, because rows 22-25 were precisely the fixture-checker risks and that block was simultaneously the weakest and the most dangerous content on the schedule. Experience distribution moved to 33 A / 22 B / 16 C, which is a consequence of moving rows to where Ninad has real ground rather than of generosity.
+
+**A sitewide cosmetic defect, fixed.** `.label::before` in `main.css` emits `//` and 21 template labels hardcoded another, so every page on the site rendered `// // About`, `// // Tool`, `// // Portfolio`. The fix had existed on a branch for hours and never reached `main`. Fixed at the template layer, no CSS touched.
+
+**Search Console.** Nothing has moved and nothing could have — the recovery is hours old. Striking distance is the useful read, and it is thin: only **three genuinely human queries** sit within reach — `stripe tech blog` at position 17.7, `single agent vs multi agent` at 26.7, and `engineer to technical writer` at 16.2. Everything else in the top 20 is the machine keyword-salad fan-out or the brand query. That is a direct confirmation of the day-90 band and of why tools, not articles, are the lever.
+
+Three decisions taken:
+
+1. **`seo-for-technical-documentation` stays in cluster 1.** It was the cheap way to bring cluster 4's owner page to life, and it is the wrong one: the piece is a traditional technical SEO checklist for docs sites, it genuinely belongs to documentation, and moving a live post between clusters to make a page appear is gaming the structure rather than building it. Cluster 4 gets a real seed article instead — the llms.txt evidence piece, which is also the only legitimate home for in-sentence links to both llms.txt tools. The tool agent was right to refuse to invent those links: zero live articles mention llms.txt or AI Overviews anywhere, and *that*, not the linking, is why the generator earned three impressions in its life.
+2. **Commit `7e875cda` is dropped, not merged.** Every file it touched already exists on `main` through later commits; its only unique contribution was 103 lines of unused glossary CSS against standing order 4. Superseded rather than lost.
+3. **The director works in a separate `main` worktree from now on.** Agents own the shared checkout, and an agent mid-rebase left conflict markers in `config.toml` that made `build.py` fail for everyone in that tree. Separating the deploy checkout removes the collision entirely.
+
 ### 2026-08-17 — no-new-CSS violation, held out of the deploy
 
 Commit `7e875cda` on `seo/90day-strategy` added 103 lines and nine classes to `static/css/main.css` for glossary and post-terms display, against standing order 4. The glossary is not shipping — all 16 terms are held back on TODO placeholder prose — so the CSS is currently dead weight on every page load.
