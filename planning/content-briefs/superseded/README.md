@@ -41,3 +41,9 @@ They died in three waves on the same day:
 Several are still good *ideas* and some may return as queue rows once their demand is verified.
 The merges into the IA page and the FAQ frontmatter pass are both real work that nothing else
 currently schedules. Treat this folder as a source of candidates, never as instructions.
+
+## Superseded 2026-08-17 by the position-based requeue
+
+`brief-2026-08-24-what-is-software-documentation.md` lost its slot when the guarded queue kept the
+KD-5 troubleshooting-guide target at order 26. Its definition was folded into the surviving
+software-documentation brief at order 25, so publishing it separately would create a competing URL.

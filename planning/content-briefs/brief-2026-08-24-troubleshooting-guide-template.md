@@ -1,7 +1,6 @@
 # Brief: Troubleshooting Guide Template: Write Answers Developers Can Actually Use
 
-**Slot:** 2026-09-14 | Order 47 | **Cluster:** Documentation | **Experience: B**
-**Closes the fortnight.**
+**Slot:** 2026-08-24 | Order 26 | **Cluster:** Documentation | **Experience: B**
 
 ## Keyword
 
@@ -24,7 +23,8 @@ The troubleshooting format: symptom, diagnostic, cause, recovery, escalation.
 ## Must not repeat
 
 Format selection, owned by the live `types-of-technical-documentation`. The general template,
-owned by the live `technical-documentation-template`. Error message copy, owned by row 60.
+owned by the live `technical-documentation-template`. Error-message copy is a section here, not a
+promised separate row: the old row 60 is skipped.
 
 ## Evidence — Experience B
 

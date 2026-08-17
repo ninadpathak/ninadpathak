@@ -1,11 +1,17 @@
 # Content briefs
 
-One brief per calendar slot in `planning/90-day-seo-ai-strategy.md`. The Codex writer
-works only from these, so a vague brief produces a vague article.
+These are supporting research briefs, not the calendar. The only active calendar is the guarded
+Hermes queue at `/root/.hermes/knowledge/ninadpathak/content-queue.csv`. Its title, Reader Outcome,
+Tier, Cluster, Subcluster, Experience, and Release Date are fixed for a run.
 
-Named `brief-YYYY-MM-DD-<slug>.md` by publication date. The four 2026-07 briefs in this
-folder predate the documentation-only decision and use an older format. Follow the
-2026-08 briefs, not those.
+Hermes writes from the live queue and its publishing skill. A reviewer or replacement writer may
+use a brief only after confirming its date, order, title, and Experience match the live Planned
+row. A mismatch makes the brief stale, never the queue. Move stale briefs to `superseded/` rather
+than keeping two instructions for one date.
+
+Named `brief-YYYY-MM-DD-<slug>.md` by publication date. The four 2026-07 briefs in this folder use
+an older format. The broad niche and the position-based requeue also superseded some later briefs,
+so recency alone is not proof that a brief is active.
 
 ## Every brief carries
 

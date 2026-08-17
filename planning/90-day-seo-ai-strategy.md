@@ -1,9 +1,15 @@
 # 90-Day Keyword and AI-Search Strategy
 
+> **HISTORICAL BASELINE — DO NOT EXECUTE.** This document predates the broad-niche decision, the
+> Hermes guarded queue, and the position-based requeue. `campaign-90d.md` and
+> `/root/.hermes/knowledge/ninadpathak/content-queue.csv` are authoritative. The original calendar
+> is preserved in `planning/research-cache/content-queue-pre-hermes-2026-08-17.csv` as evidence of
+> how the campaign changed, not as a second queue.
+
 **Window:** 2026-08-17 to 2026-11-14
 **Branch:** `seo/90day-strategy`
 **Research:** Ahrefs US, collected 2026-08-17, cached in `planning/research-cache/`
-**Status:** extends `documentation-authority-plan.md`. It does not replace it.
+**Status:** superseded 2026-08-17 by `campaign-90d.md` and the guarded Hermes queue.
 
 ## What this document adds
 
@@ -348,8 +354,9 @@ The August audit's open items are assigned to specific days rather than left to 
 
 ### Weeks 1 to 13
 
-Full slot-by-slot detail lives in `planning/content-queue.csv`, which this calendar
-extends. Weeks 1 and 2 have briefs written and are the immediate work.
+The slot-by-slot table below is historical. Its matching CSV moved to
+`planning/research-cache/content-queue-pre-hermes-2026-08-17.csv`; never use it to select or
+schedule work. Active selection comes only from the guarded Hermes queue.
 
 **Week 1, Aug 17 to 23. Fix the foundation before adding to it.**
 
