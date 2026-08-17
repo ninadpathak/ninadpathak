@@ -280,6 +280,17 @@ def _names_its_trio(prose, after):
     if re.match(r'[^\n]{0,80}:?\s*\n+\s*(?:[-*+]\s|1[.)]\s)', tail):
         return True
 
+    # A trio enumerated across the following sentences rather than after a colon:
+    # "three layers. The bottom measures retrieval, the middle tests consistency, the top
+    # checks behaviour." Good prose does this and the escape-hatch receipt should not be
+    # required for it. Needs three DISTINCT positional markers, so it cannot be satisfied
+    # by rewording — you have to actually name three things in order.
+    positional = re.findall(
+        r'\b(first|second|third|bottom|middle|top|one|another|finally|lastly|then|next)\b',
+        tail[:400], re.I)
+    if len({p.lower() for p in positional}) >= 3:
+        return True
+
     match = _TRIO_INTRO.match(tail)
     if not match:
         return False
@@ -387,7 +398,25 @@ def check_post(path):
     #
     # Versions such as Python 3.13 are excluded because the numeric token is part of
     # the version.
-    for m in re.finditer(r'\bthree\b|(?<![\d.])3(?![\d.])', prose, re.I):
+    # The bare digit 3 has three shapes that are not rule-of-three at all, each found by
+    # the gate failing on legitimate prose: a RANGE like "2-3x more tokens", a UNIT like
+    # "3KB per vector" or "3ms", and an IDENTIFIER like "session 3" or "attempt 3". The
+    # existing lookaround already excluded version numbers such as Python 3.13.
+    #   - range:      a preceding hyphen after a digit
+    #   - unit:       an immediately following unit letter
+    #   - identifier: a preceding noun that labels rather than counts
+    bare_three = (
+        r'(?<![\d.\-])'          # not part of a version, decimal, or range
+        r'3'
+        r'(?![\d.]|\s*(?:x\b|[KMGT]?B\b|m?s\b|%|ms\b))'
+    )
+    identifier = re.compile(
+        r'\b(?:session|attempt|step|phase|stage|level|version|round|batch|figure|'
+        r'chapter|part|tier|day|week|month|item|line|column|table)\s+$', re.I)
+
+    for m in re.finditer(r'\bthree\b|' + bare_three, prose, re.I):
+        if identifier.search(prose[max(0, m.start() - 24):m.start()]):
+            continue
         receipt_window = prose[max(0, m.start() - 300):m.start()]
         if '<!-- evidence-three:' in receipt_window:
             continue

@@ -54,3 +54,80 @@ class NamesItsTrioTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BareDigitShapeTests(unittest.TestCase):
+    """A bare 3 has three shapes that are not rule-of-three, each found by CI failing.
+
+    The gate blocked legitimate merge prose on "2-3x more tokens", "3KB per vector" and
+    "session 3", none of which counts anything rhetorically. Version numbers such as
+    Python 3.13 were already excluded; ranges, units and identifiers were not.
+    """
+
+    def check(self, text):
+        import re
+        import rule_checker
+        source = pathlib.Path(rule_checker.__file__).read_text(encoding="utf-8")
+        # The pattern is built inline in check_post, so assert through the public path.
+        path = pathlib.Path(__file__).resolve().parent / "_three_fixture.md"
+        path.write_text(f"---\nstatus: published\nslug: f\n---\n\n{text}\n", encoding="utf-8")
+        try:
+            return [i for i in rule_checker.check_post(path) if i[1] == "rule-of-three"]
+        finally:
+            path.unlink(missing_ok=True)
+
+    def test_a_range_is_not_a_trio(self):
+        self.assertEqual(self.check("You can fit 2-3x more tokens in the same budget."), [])
+
+    def test_a_unit_is_not_a_trio(self):
+        self.assertEqual(self.check("Compressed from 3KB per vector to 100 bytes."), [])
+        self.assertEqual(self.check("Summarisation adds 3ms of latency per turn."), [])
+
+    def test_an_identifier_is_not_a_trio(self):
+        self.assertEqual(self.check('It stored "dark mode" in session 3 and "light" in session 7.'), [])
+
+    def test_a_version_is_still_not_a_trio(self):
+        self.assertEqual(self.check("Validated in a fresh Python 3.13 environment."), [])
+
+    def test_rhetorical_three_is_still_caught(self):
+        self.assertTrue(self.check("It repeats the same idea three different ways on one page."))
+
+
+class PositionalEnumerationTests(unittest.TestCase):
+    """A trio enumerated across sentences is still a named trio.
+
+    "three layers. The bottom measures retrieval, the middle tests consistency, the top
+    checks behaviour." Good prose does this, and requiring the evidence-receipt escape
+    hatch for it would push writers toward the hatch instead of toward naming things.
+
+    It needs three DISTINCT positional markers, so it cannot be satisfied by rewording —
+    you have to actually name three things in order. The narrowness is the point: adding
+    it removed 6 sitewide findings, not 60.
+    """
+
+    def check(self, text):
+        import rule_checker
+        path = pathlib.Path(__file__).resolve().parent / "_three_pos_fixture.md"
+        path.write_text(f"---\nstatus: published\nslug: f\n---\n\n{text}\n", encoding="utf-8")
+        try:
+            return [i for i in rule_checker.check_post(path) if i[1] == "rule-of-three"]
+        finally:
+            path.unlink(missing_ok=True)
+
+    def test_bottom_middle_top_enumeration_passes(self):
+        self.assertEqual(self.check(
+            "A useful evaluation has three layers. The bottom measures retrieval quality. "
+            "The middle tests memory consistency. The top checks agent behaviour."), [])
+
+    def test_first_second_third_enumeration_passes(self):
+        self.assertEqual(self.check(
+            "Open-source systems expose three consequential design choices. The first is who "
+            "controls memory. The second is where it is stored. The third is who can read it."), [])
+
+    def test_two_markers_is_not_enough(self):
+        self.assertTrue(self.check(
+            "It has three parts. The first is retrieval. The second is storage."))
+
+    def test_rhetorical_three_with_no_enumeration_still_fires(self):
+        self.assertTrue(self.check(
+            "Repeating the same idea three different ways on one page only adds noise."))
