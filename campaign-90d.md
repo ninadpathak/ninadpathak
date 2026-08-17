@@ -116,6 +116,200 @@ The rule is in all three copies of the Hermes `ninadpathak-content` skill at ver
 
 ---
 
+## 3a. Order of operations across the clusters
+
+Added 2026-08-17. The queue is date-sorted, which is a schedule and not a sequence. This section
+says what has to exist before the next thing can land, and which rows are therefore blocked on
+which. It governs the remaining **60 Planned rows**.
+
+### The constraint that sets the whole order
+
+The domain went through a **spam injection and a full rebuild inside twelve months**: 440 injected
+pages, 829 impressions in October 2025, Japanese-language sections. Foreign impressions hit zero
+from April 2026 and the last 90 days are clean.
+
+Two consequences bind the sequencing.
+
+**Any historical position improvement on this domain is suspect until the denominator is checked.**
+The move from average position 23.1 to 7.2 is a composition artifact: the deep-position tail was
+deleted and brand queries were left behind. It is not a gain and must not be cited as one.
+
+**This is neither a fresh domain nor a domain with clean accumulated trust.** It carries a
+compromise and a rebuild. New pages should be expected to earn slowly, which means the order should
+front-load the things that do not depend on accumulated domain trust: **tools, which rank on
+utility and links rather than history, and pages built to be cited rather than ranked.** That
+single fact is why cluster 4 goes first.
+
+---
+
+### Cluster 4, AI search — the priority lever, and it goes first
+
+**Why first.** No build-a-tool keyword in this niche carries an AI Overview, while all 15 top
+keywords do. Tool intent is the only demand profile an AI Overview does not tax, and it is also the
+profile least dependent on domain trust. Cluster 4 is 30,980/mo and already holds five live tools.
+
+**It is currently a pile, not a cluster.** Five tools, three articles, and no page that covers the
+whole job. The clearest evidence: `/llms-txt-generator/` has earned **three impressions in its
+entire life**, not because it is bad but because nothing links to it.
+
+**The minimum set that makes it a cluster, in dependency order:**
+
+| # | What it delivers | Row | Blocked on |
+|---|---|---|---|
+| 1 | **Tool routing.** Gives a live tool its first real inbound link from an article. | **36** (check AI Overviews → `/ai-overviews-checker/`) | nothing. Ship earliest. |
+| 2 | **The owner.** One page covering the whole job, that every other page links back to. | **35** (AEO anchor) | nothing |
+| 3 | **The definitional spine.** Stops the cluster arguing with itself about terms. | **38** (AEO/GEO/SEO) | 35 |
+| 4 | **The standard.** What is actually agreed in llms.txt. | **39** | nothing |
+| 5 | **Tool routing, second pair.** Routes the generator and validator. | **57** (llms.txt format guide) | 39 |
+| 6 | **Structured-data sub-job.** | **40** (schema markup) | 35 |
+| 7 | **Evidence.** | **50** (visibility test) | **time, not content** |
+
+**The blocking relationships that matter:**
+
+- **36 must not wait.** It is the only row that fixes an orphaned tool, it is Experience A, and it
+  depends on nothing. It is currently 09-03, one day after the owner. That is acceptable but it
+  should never slip behind 35 if the anchor is delayed.
+- **57 is blocked on 39**, because a format guide that contradicts the standard page is worse than
+  no format guide. 39 is 09-06 and 57 is 09-24, so this holds.
+- **50 is blocked on an observation window, not on a page.** Its brief already authorises publishing
+  the pre-registration instead of a conclusion. That is the correct outcome, not a fallback.
+- **40 is blocked on 35** only for its framing, and can move if the anchor slips.
+
+**What "behaves like a cluster" means concretely here:** every one of the five tools has at least
+one inbound link from an article that explains when to use it, and every article links back to the
+owner. Rows 36 and 57 deliver four of the five. `/linter/` and `/ai-crawler-checker/` are not yet
+routed by any planned row, and that is the gap this sequence leaves open. **Flagged rather than
+filled:** it needs either a row or a retrofit, and a retrofit is cheaper.
+
+---
+
+### Cluster 3, AI engineering — consolidate, do not add
+
+**The honest answer is that addition is wrong here, and the evidence is not close.**
+
+57 live posts. 149,790/mo, the largest cluster by volume. **65% AI Overview saturation, the worst
+of any cluster, and only 40% of its volume at KD≤20, also the worst.** High volume, high friction,
+and the highest tax on any new page.
+
+The GSC picture is decisive. 44 cluster-3 pages sit at average position 11.5 on 1,191 impressions,
+which reads like a goldmine and is not: those impressions are the `anthropic contextual retrieval`
+28-variant fan-out and its relatives. **No human is behind them.** Meanwhile the site's three real
+striking-distance queries are all cluster 3, and all three map to pages that already exist.
+
+Adding 12 posts to 57 that are not earning does not fix a cluster that is not earning. It makes it
+larger.
+
+**What the 12 planned rows actually contain:**
+
+- **Five chunking and retrieval variants** — rows 63, 68, 69, 70, 71. This is precisely the
+  "keyword variations that belong on the same page" failure. Only 63 carries an artifact.
+  **Collapse into 63 and skip 68, 70, 71.** Keep 69 only if heading-aware chunking survives its own
+  parent-topic check against 63.
+- **Two documentation-chatbot rows** — 74 and 75, both `C`, overlapping each other.
+  **Collapse into one or skip both.**
+- **Five genuine gaps** — rows 72, 73, 76, 77, 78: tool schema design, agent evals, observability,
+  prompt injection, circuit breakers. All five are listed in `planning/content-roadmap.md` as posts
+  that existing published articles already link toward and that were never written. They are
+  demand-backed by the corpus itself rather than by a keyword tool. Keep all five.
+
+**Net: cluster 3 goes from 12 planned rows to about 6**, and the freed slots do not get refilled
+with more cluster-3 content.
+
+**What replaces the addition:** a consolidation pass over the existing 57. Nothing in the plan
+currently schedules one, and it is the highest-value work available in the largest cluster. It is
+not briefed here because it needs a page-level audit first, of the kind that produced the
+`technical-content-as-a-moat` verdict. **That audit is the next structural job after this section.**
+
+---
+
+### Cluster 1, Documentation — order serves the offer, not the volume
+
+**Yes. Its order must serve the consulting offer, and that changes the sequence.**
+
+26 planned rows, the largest remaining block, and the only cluster tied to money. A buyer evaluating
+a documentation consultant does not read a definitional explainer. They look for evidence that the
+person has done the work: a template they can open, an audit with a method, a tested comparison, a
+worked example with its failures visible.
+
+**So the ordering rule for cluster 1 is: artifacts before explainers.**
+
+- **Front:** the docs-as-code trio (31, 32, 33) and the artifact rows around it — 34, 41, 42, 45,
+  47, 48, 52. These are Experience A, they point at this site's own tooling and its own migration,
+  and they are what a buyer inspects. **Already front-loaded, which is correct.**
+- **Middle:** the format and operations rows that show range — 43, 51, 54, 55, 58.
+- **Back:** the definitional and `C`-tier rows — 26 (what is software documentation) and its
+  relatives. They serve volume, not the offer, and moving them later costs nothing because nothing
+  is blocked on them.
+
+**Blocking inside cluster 1 is mostly one-directional and already respected:** 29 (worked example)
+and 30 (tooling) are blocked on 20 (the decision rule), because an example of a rule not yet stated
+is just code. 52 (repository tour) is blocked on 31 (the workflow it tours). 47's troubleshooting
+template is blocked on nothing and can move freely.
+
+**One ordering defect to fix:** row 26 is a `C`-tier definitional page scheduled for 08-24, ahead of
+most of the artifact rows. It should trade places with a later artifact row. Not urgent enough to
+churn the queue for, but it should not be repeated in the next fortnight's planning.
+
+---
+
+### Clusters 5, 6 and 7 — not viable as clusters. Merge them into one.
+
+**The honest answer is that at 4, 5 and 3 rows they cannot function as clusters, and pretending
+otherwise will produce three owner pages that own nothing.**
+
+A cluster needs an owner page covering a whole job, supporting pages each owning a sub-job, and
+enough mass for the supporting pages to link to each other. Three to five near-zero-volume pieces
+deliver none of that. The evidence is already in the briefs: **row 49's brief had to carry a stop
+instruction** because it opens a cluster with no published siblings and may not be able to meet the
+two-outbound minimum honestly. That is a structural failure, not a writing problem.
+
+Their content is still worth publishing. All twelve rows are Experience A or B on ground Ninad
+genuinely has, and they pass the falsifiability standard where invented documentation war stories
+do not. The problem is the container, not the pieces.
+
+**Decision: merge 5, 6 and 7 into a single cluster, Distribution.**
+
+| | Before | After |
+|---|---|---|
+| Clusters | 3 | **1** |
+| Rows | 4 + 5 + 3 | **12** |
+| Volume (all floors) | 18,300 + 15,910 + 18,470 | **52,680/mo** |
+| Owner pages needed | 3, none earnable | **1, earnable at 12 pieces** |
+
+The job is coherent and states in one sentence: **getting a technical product in front of the
+developers who would use it.** Reddit, forums and events are three venues for one job, which is
+exactly what a cluster is, and splitting them was an artifact of how the niche was first written
+down rather than a real boundary.
+
+**What this fixes immediately:** twelve pieces can interlink without a cross-cluster exception, so
+row 49's stop instruction becomes unnecessary. An owner page becomes earnable. And the isolation
+rule stops forcing three-page clusters to link only inward to two siblings.
+
+**What it does not fix:** the volume is still floors from a capped pull, and the head terms of all
+three were contaminated. Distribution is a **credibility cluster, not a traffic cluster.** Size it
+that way. Twelve rows is the ceiling, not a starting allocation, and it should not grow on the
+strength of a floor figure.
+
+**Consequence for the cluster map in §3:** seven clusters become five. That is a real change to the
+niche definition settled on 2026-08-17, and it is proposed here rather than applied, because §3 is
+the settled scope and this section is the sequencing that tests it. The merge is the recommendation.
+
+---
+
+### The resulting order, in one table
+
+| Priority | Cluster | Rows | Why here |
+|---:|---|---:|---|
+| 1 | AI search | 7 | Tool intent is untaxed by AI Overviews and least dependent on the damaged domain trust. Fixes five orphaned tools. |
+| 2 | Documentation | 26 | The commercial cluster. Artifacts first, explainers last. |
+| 3 | AI engineering | ~6, down from 12 | Consolidation beats addition at 57 posts and 65% AIO. Freed slots are not refilled. |
+| 4 | Distribution (5+6+7 merged) | 12 | Credibility, not traffic. Viable as one cluster, not as three. |
+| 5 | DevEx and DevRel | 3 | Smallest at 6,040/mo. Search Console reports 4 of its pages, carrying 1 click on 32 impressions. Kept, not grown. |
+
+**Rows freed by the cluster-3 collapse: about 6.** They should stay empty or be spent on the
+cluster-3 consolidation audit, not refilled with new cluster-3 posts. An empty slot is a scheduling
+problem; a thin article in a saturated cluster is a permanent one.
+
 ## 4. The voice standard
 
 Ninad is a former engineer who became a technical writer. He has shipped documentation for developer products and built this site's tooling. Judgment earned from that work is fair game. Events and measurements he did not make are not.
