@@ -115,7 +115,7 @@ Current window 2026-05-18 to 2026-08-15 (90d); history 2025-04-04 to 2026-08-15.
 | `beam-memory-benchmark` → `context-windows-vs-memory` | merge | `already-merged` | `withheld`; 15 impr | 12.9 (15 impr) | 0 | 0 | `withheld-source-demand` |
 | `memory-hierarchy-in-ai-systems` → `ai-memory-management-for-llms` | merge | `already-merged` | `measured`; 15 impr | 28.7 (15 impr) | 1 | 0 | `review-source-demand` |
 | `the-memory-hierarchy-why-rag-is-not-enough` → `ai-memory-management-for-llms` | merge | `already-merged` | `withheld`; 13 impr | 8.2 (13 impr) | 0 | 0 | `withheld-source-demand` |
-| `asymmetric-retrieval-agent-memory` → `rag-vs-memory` | merge | `pending` | `measured`; 12 impr | 18.3 (12 impr) | 1 | 0 | `review-source-demand` |
+| `asymmetric-retrieval-agent-memory` → `rag-vs-memory` | merge | `already-merged` | `measured`; 12 impr | 18.3 (12 impr) | 1 | 0 | `review-source-demand` |
 | `how-memory-works-in-hyperagents` → `how-memory-works-in-deerflow` | merge | `pending` | `withheld`; 11 impr | 11.2 (11 impr) | 0 | 0 | `withheld-source-demand` |
 | `contextual-compression-for-agent-memory` → `short-term-memory-for-ai-agents` | merge | `pending` | `withheld`; 10 impr | 12.0 (10 impr) | 0 | 0 | `withheld-source-demand` |
 | `agentic-cli-benchmarks` → `best-llms-for-coding` | merge | `pending` | `withheld`; 10 impr | 12.5 (10 impr) | 0 | 0 | `withheld-source-demand` |
