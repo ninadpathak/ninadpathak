@@ -1,7 +1,7 @@
 # Claim-candidate review: repaired-scanner delta
 
-**Reviewed:** 2026-08-17  
-**Detector change:** `643d2e7f`  
+**Reviewed:** 2026-08-17
+**Detector change:** `643d2e7f`
 **Scope:** only candidates newly exposed by the repaired indirect-experience patterns
 
 ## Result
