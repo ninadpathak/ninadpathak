@@ -226,7 +226,7 @@ Clusters 5, 6, and 7 hit the API's 250-row cap. Those three are floors, not meas
 
 **The earlier documentation figure was itself wrong.** `DERIVED-clean-universe.json` carried about 28 nursing-charting keywords (`picc line documentation example`, `perrla documentation example`) plus a junk `test.com` term at 3,000/month. Documentation is 63,730, not 68,870 — the number this campaign was reoriented on was 7.5% overstated. Recorded because a research bank that is trusted without being checked is worse than no bank.
 
-**Revised day-90 band: 350 to 1,350 clicks/month, central estimate ~710.** Down from the documentation-only 700–2,400, despite a 4.9× larger universe. The reason matters more than the number: **volume was never the constraint.** Seventy-one planned pages inside ninety days buys only 22.2 mature-equivalent pages once cohort maturity is applied (0.55 / 0.30 / 0.08). At DR 26 — the site is not zero-authority, as previously assumed — with P(top 3) at 0.15 and P(4–10) at 0.30, and an AI Overview haircut of 49.2% of SERPs losing about 35% of clicks (×0.828), the campaign contributes 334 / 685 / 1,295 and the recovered legacy set adds 15 / 25 / 40.
+**Revised day-90 band: 350 to 1,350 clicks/month, central estimate ~710.** *(Corrected later the same day to 306–1,176 after the contamination sweep cut the universe 12.6%. See the fourth-cycle refresh.)* Down from the documentation-only 700–2,400, despite a 4.9× larger universe. The reason matters more than the number: **volume was never the constraint.** Seventy-one planned pages inside ninety days buys only 22.2 mature-equivalent pages once cohort maturity is applied (0.55 / 0.30 / 0.08). At DR 26 — the site is not zero-authority, as previously assumed — with P(top 3) at 0.15 and P(4–10) at 0.30, and an AI Overview haircut of 49.2% of SERPs losing about 35% of clicks (×0.828), the campaign contributes 334 / 685 / 1,295 and the recovered legacy set adds 15 / 25 / 40.
 
 **Against the 10,000 target, the central estimate is 7%.** Reaching 10,000 by publishing would need about 450 clicks per page across 22.2 mature-equivalent pages, which is roughly 25,000 addressable searches per page. The best 150 keywords in the entire niche average 740. **That is a 34× throughput gap, not a volume gap, and no choice of niche closes it.** Widening the niche bought winnability, not reach.
 
@@ -328,6 +328,42 @@ Because two independent agents hit contamination inside one hour, a full sweep o
 The MCP token is invalid — reproduced on the free `subscription-info-limits-and-usage` endpoint, so it is the token and not a quota. Escalated; credentials are out of the director's scope. Semrush is confirmed working and standing order 8 covers the split.
 
 The pattern worth keeping: the blocked call was a re-pull of clusters 5–7 past a 250-row cap. Rather than treating it as a blocker, the argument was checked — the cap ordered by volume descending, so truncation only ever removed keywords **below** the target-set cut-offs. The band stands at 350–1,350, central ~710. Cluster totals stay labelled as floors rather than quietly restated as facts, and the correction was appended as an appendix rather than rewritten into the original section. **When something is unavailable, establish whether it changes the answer before treating it as a blocker.**
+
+### 2026-08-17 (fourth cycle) — corrected universe, corrected band, and the site's first zero-orphan state
+
+**The keyword universe was contaminated by 12.6%, and the band moves with it.** A full sweep by parent topic plus free SERP reads cut the seven-cluster total from 336,180/mo to **293,800/mo**, and the day-90 band from 350–1,350 to **306–1,176 clicks/month**. Same order of magnitude, so the strategy does not change; the number is corrected because a band resting on an inflated denominator is worse than no band. Clusters 5–7 were floors before the sweep and remain floors after, so 293,800 is more likely to fall again than recover.
+
+The sweep cost **zero paid calls** — ten free SERP reads plus parent topics already banked from the original paid pull. Two of the ten reads *reversed* a removal that the parent-topic field alone would have made wrongly, which is the argument for keeping the SERP step rather than trusting parent topic on its own. It is a reproducible script, so the next pass re-runs it rather than re-deriving it.
+
+**A missing parent topic is not evidence of contamination.** Worth stating because the method leans on that field: all 53 no-parent cluster-1 keywords are llms.txt terms totalling 8,760/mo. They are legitimate, just too new for the index to have assigned parents. By subject they belong to cluster 4 rather than cluster 1, which would make cluster 1 ~54,310 and **cluster 4 ~30,980** — the second-largest cluster, and the one holding the four live tools.
+
+**Cluster 7 is contaminated too.** `developer conference` is navigational brand traffic — WWDC 5,400, GDC 2,400, NVIDIA, Roblox — and every variant of `conference talk proposal` returns 0/mo. There is no how-to intent under it. Eight rows were skipped rather than filled, taking Planned from 71 to 63. An empty slot is a scheduling problem; a thin article is a permanent one.
+
+**Zero orphans, for the first time.** The retrofit landed: 18 posts with no inbound link and 8 with fewer than two outbound are both now at **0**, across 91 published posts. `tools/audit_clusters.py --strict` therefore went into CI as a gate, having been deliberately kept out while it would have failed on arrival. It still does not block a cross-cluster link, because the legitimate exception — the link being the subject of the sentence — cannot be judged mechanically; those are reported for a reviewer. 21 remain.
+
+**Two cluster-4 articles shipped**, and their job was structural as much as editorial: the AI Overviews checker and the AI crawler checker were both orphans, and the campaign's own evidence says tools are the only lever an AI Overview does not tax. Reviewed as Claude, since Codex wrote them. Each carries exactly one first-person claim and both are true and checkable by any reader — that the live robots.txt was read on a stated date, and that the checker on this site was built.
+
+### The claim sweep, and why hand-picked lists were the wrong instrument
+
+Two voice-repair passes ran against lists assembled by hand: the top ten by Search Console value, then eight benchmark articles. Both were productive. Both were incomplete, and reviewing an unrelated commit turned up claims outside either list — a cost measured on a named RTX 4090, an assistant described as built with a two-model handoff, and an article citing a benchmark that a later audit had already found unbacked.
+
+`tools/audit_claims.py` replaces the list with a sweep, and the result is the honest scale of the problem: **116 candidate claims across 54 of 89 published posts.** The two hand-picked passes had covered 26. It flags first-person actions, first-person measurements, bare measurements beside named hardware or models, and any link to one of the ten articles established to have no reproducible artifact. It decides nothing — every hit is a candidate for a reviewer to classify KEEP, REWRITE or CUT, and the reviewer is Codex because Claude commissioned the content.
+
+### Production was behind main, and that is now detected rather than noticed
+
+Ten commits sat on `origin/main` while production served an older build. Cloudflare Pages keeps the previous deploy live when a build fails, so a stalled deploy is silent by default and the repo looks correct while the site is not.
+
+Ruled out, in order, before concluding: the build is fine (a pristine clone of `main` builds on Python 3.9 with only `requirements.txt` — 144 URLs, audit passes); CI was green on the affected commits; it is not a dashboard redirect rule (`/glossary/` returned a 301 with `content-type: text/plain`, which is Pages `_redirects` behaviour, from a rule that exists only in the previously deployed build); and all four Pages Functions parse and execute cleanly. What remains needs the Cloudflare Pages build log, which is outside the director's access.
+
+`tools/daily_cycle.py` now compares the local build's sitemap count against production and asserts a list of URLs serve 200, **without following redirects** — following them is what would have hidden the `/glossary/` shadowing, because a shadowed page resolves 200 at the redirect target and looks healthy.
+
+One operational change taken from it: **commits get batched into one push per cycle.** Fifteen deploys in an afternoon is wasteful regardless of whether a build cap caused this, and it makes each deploy verifiable instead of a blur.
+
+### CI could not go green, which is the same failure class as a silent gate
+
+Two bugs, both structural. The rule-of-three check offered two ways to pass in its error message — an evidence receipt or an explicit factual trio — and only implemented the receipt, so it fired on sentences that named all three of their items. Fixing that removed 29 false positives, 280 → 251, with nine tests pinning both directions. Then the CI step itself failed on **inherited** debt rather than regressions, so touching any older post turned CI red while ~250 pre-existing errors sit across the archive. Hermes edits a post daily, so red was the default state, and a gate that cannot go green stops being read. CI now compares changed files against their previous versions and fails only if the count rises, which is what the publish gate in section 8 always said.
+
+Also removed a "verify generated output is committed" step: `output/` is untracked and generated at build time, so it diffed nothing and passed unconditionally. A check that cannot fail reads as coverage and is worse than no check.
 
 ### 2026-08-17 — no-new-CSS violation, held out of the deploy
 

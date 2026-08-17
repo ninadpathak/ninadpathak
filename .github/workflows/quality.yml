@@ -83,10 +83,14 @@ jobs:
           fi
           echo "No new rule_checker errors introduced."
 
-      # Deliberately not gating on `tools/audit_clusters.py --strict` yet: 18 posts still
-      # have no inbound link, so it exits 1 today and would redden CI on arrival, which is
-      # the same mistake the step above fixes. Add it once the orphan retrofit in
-      # planning/internal-link-retrofit.md has landed.
+      # Orphans and thin-outbound pages are both at zero now that the retrofit in
+      # planning/internal-link-retrofit.md has landed, so this can gate. It fails on a
+      # post with no declared cluster or no inbound link. It does NOT fail on a
+      # cross-cluster link: the one legitimate exception is when the link is the subject
+      # of the sentence, which cannot be judged mechanically, so those are reported for a
+      # reviewer rather than blocked.
+      - name: Guard cluster isolation and inbound linking
+        run: python tools/audit_clusters.py --strict
 
       - name: Build and audit site
         run: python build.py
