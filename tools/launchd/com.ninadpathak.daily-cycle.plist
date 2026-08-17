@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Durable daily campaign check for ninadpathak.com.
+
+  The director's daily cycle used to be a session-only cron that auto-expires after
+  seven days, so a 90-day campaign had no measurement that survived a session ending.
+  This runs the deterministic half on a schedule that does not depend on any agent
+  being alive. Judgment stays with a session; this only records facts.
+
+  Install:
+    cp tools/launchd/com.ninadpathak.daily-cycle.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.ninadpathak.daily-cycle.plist
+
+  Uninstall:
+    launchctl bootout gui/$(id -u)/com.ninadpathak.daily-cycle
+
+  Runs at 11:17 local, after Hermes publishes at 04:30 UTC, and off the hour on purpose.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ninadpathak.daily-cycle</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/ninad/Development/ninadpathak/.venv/bin/python</string>
+        <string>/Users/ninad/Development/ninadpathak/tools/daily_cycle.py</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/ninad/Development/ninadpathak</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>GOOGLE_APPLICATION_CREDENTIALS</key>
+        <string>/Users/ninad/Development/.google-service-account/google-workspace-service-account.json</string>
+    </dict>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key><integer>11</integer>
+        <key>Minute</key><integer>17</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/Users/ninad/Development/ninadpathak/planning/daily-cycle.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/ninad/Development/ninadpathak/planning/daily-cycle.err.log</string>
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>
