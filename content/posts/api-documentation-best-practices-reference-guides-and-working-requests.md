@@ -15,10 +15,10 @@ takeaways:
   success.
 - Validate the documentation package before a portal makes missing recovery look complete.
 title: 'API Documentation Best Practices: Reference, Guides, and Working Requests'
-updated: 2026-08-14
+updated: 2026-08-17
 ---
 
-An API portal can list every endpoint and still leave a developer unable to send a request. I built a small [package checker](/static/tools/check_api_docs_package.py) for this article because the missing work is usually distributed across a quickstart, reference, and error guidance, which makes an incomplete path look finished in a navigation tree.
+An API portal can list every endpoint and still leave a developer unable to send a request. The missing work is usually distributed across a quickstart, reference, and error guidance, which makes an incomplete path look finished in a navigation tree.
 
 The reader outcome is concrete: someone with a test credential can make one request, inspect its exact contract, and recover from a predictable failure. That path is the unit to design and test before adding more endpoints.
 
@@ -60,24 +60,6 @@ A guide connects those details into a task. Authentication belongs in both place
 The strongest objection is that an OpenAPI-generated reference should eliminate this split. Generated reference can remain more complete as endpoints change, yet it cannot decide which object proves a new integration works, whether a retry is safe, or which production choices belong after the first response.
 
 Keep the generated contract close to the source and keep the guide close to the reader's task. That boundary becomes more important as an API gains pagination, webhooks, SDKs, version changes, and different authentication modes.
-
-## Test the documentation package for a complete request path
-
-I ran the package checker against a fixture containing a quickstart, reference, and error entry. It confirms that the docs name the prerequisites, request, expected response, endpoint, authentication, parameters, responses, failure status, cause, and recovery path.
-
-```bash
-python3 check_api_docs_package.py api-docs-package.json
-```
-
-The command returned `PASS: quickstart, reference, and error recovery form a complete request path`. It cannot prove that an API key has the right permission or that the live endpoint is healthy, so run the actual request in a safe environment before publishing the guide.
-
-<div class="visual-wrapper">
-  <div class="visual-title">API documentation package check</div>
-  <div class="visual-container" style="height: auto; aspect-ratio: 2560 / 1664; background: #0d0f14; overflow: hidden;">
-    <img src="/static/images/articles/api-documentation-best-practices-reference-guides-and-working-requests/api-docs-package-check.png" alt="MacBook Air terminal showing a passing API documentation package check" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: contain;">
-  </div>
-</div>
-<p class="visual-caption">The check makes missing first-success, contract, or recovery coverage visible before a reader has to find the omission.</p>
 
 ## Link the API documentation route to its next decision
 

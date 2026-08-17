@@ -67,24 +67,6 @@ Cloudflare publishes a distinct [API reference](https://developers.cloudflare.co
 
 Webhooks and version changes often arrive later because they do not block the first demo. They become expensive omissions once integrations depend on event verification, replay behavior, deprecated fields, or a migration date, so give them a page owner before the outline grows.
 
-## Validate the outline before you fill every endpoint
-
-I ran the included checker against the downloadable outline in a fresh Python environment. It verifies that the plan owns the homepage, first request, credentials, contract, failure path, event behavior, and version changes before a navigation tree can hide a missing decision.
-
-```bash
-python3 check_api_documentation_page_outline.py api-documentation-page-outline.md
-```
-
-The command returned `PASS: homepage, quickstart, authentication, reference, recovery, events, and changes are owned`. It cannot prove that the API itself is healthy or that the prose matches a live schema, so use it to review the documentation boundary and run the actual quickstart with a safe credential.
-
-<div class="visual-wrapper">
-  <div class="visual-title">API documentation outline check</div>
-  <div class="visual-container" style="height: auto; aspect-ratio: 2560 / 1664; background: #0d0f14; overflow: hidden;">
-    <img src="/static/images/articles/api-documentation-template-the-pages-every-api-needs/api-documentation-outline-check.png" alt="MacBook Air terminal showing the passing API documentation outline check" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: contain;">
-  </div>
-</div>
-<p class="visual-caption">The checker makes a missing reader decision visible before it becomes a missing documentation page.</p>
-
 ## Use the template to create a working API docs route
 
 The [API documentation best-practices guide](/articles/api-documentation-best-practices-reference-guides-and-working-requests/) explains the first-request path in more detail. The [developer portal examples guide](/articles/api-documentation-examples-what-the-best-developer-portals-get-right/) helps you inspect whether a portal keeps that path visible once the reference grows.

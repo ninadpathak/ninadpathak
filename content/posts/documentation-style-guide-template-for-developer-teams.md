@@ -13,7 +13,7 @@ takeaways:
 - A documentation style guide needs named decisions and change owners, not tone preferences.
 - Code and UI rules need a starting state and a verification source.
 title: Documentation Style Guide Template for Developer Teams
-updated: 2026-08-07
+updated: 2026-08-17
 ---
 
 Documentation drifts when a feature changes and the name in the UI no longer matches the command in the guide. Tone alone cannot fix a decision that nobody can inspect or update.
@@ -26,7 +26,7 @@ I built the attached template to make decisions and their supporting evidence vi
 
 Keep the file beside the product source. When a feature is renamed or a command changes, review the matching row in the same pull request instead of relying on someone to remember a separate editorial process.
 
-The first useful use is one guide that changes often. Fill its bracketed fields with product facts, run the checker, and let the next release show which parts of the template need more detail.
+The first useful use is one guide that changes often. Fill its bracketed fields with product facts, then let the next release show which parts of the template need more detail.
 
 ## Define terminology that readers can verify
 
@@ -68,10 +68,6 @@ The template places a compact environment table before the command so a reviewer
 
 [Google’s code-syntax guidance](https://developers.google.com/style/code-syntax) covers the presentation of code and command syntax. The local rule here is narrower: when product behavior can change, place the verification source and failure boundary beside the example.
 
-I ran the included validator against the downloadable template in a fresh Python 3.13.5 environment. It confirmed the required sections, evidence markers, and editable cells that a team must replace with product facts.
-
-The checker cannot tell whether an API response still matches production or whether a screenshot shows the current interface. It fails when someone removes the fields that make those claims inspectable.
-
 ## Keep UI references tied to a released interface
 
 UI documentation fails when a writer describes a control from memory. The prose can be polished and still send someone to a label that was renamed, moved, or placed behind a permission.
@@ -88,4 +84,4 @@ A style guide can become bureaucracy. That happens when it turns into a catalog 
 
 Keep rules that stop readers from choosing the wrong term, running an incomplete command, following a stale interface path, or missing the page that owns a question. Each row needs an owner and an update trigger such as a renamed feature, revised permission, changed response shape, or a support issue that exposed an ambiguous page.
 
-Download the template, fill it against a frequently edited guide, and run [the included checker](/static/templates/check_documentation_style_guide.py) before asking the rest of the team to adopt it.
+Download the template and fill it against a frequently edited guide before asking the rest of the team to adopt it.

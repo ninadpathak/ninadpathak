@@ -15,11 +15,11 @@ takeaways:
   move through Git.
 - Keep the OpenAPI contract and task guidance connected without pretending one tool
   writes both well.
-title: 'API Documentation Tools: A Hands-On Comparison for Small Teams'
-updated: 2026-08-16
+title: 'API Documentation Tools: A Workflow Comparison for Small Teams'
+updated: 2026-08-17
 ---
 
-Small teams don't need a portal with every switch turned on. I built a small [tool selector](/static/tools/api_docs_tool_selector.py) for this comparison because the first choice that changes the outcome is where your API contract lives and how a change gets reviewed.
+Small teams don't need a portal with every switch turned on. The first choice that changes the outcome is where the API contract lives and how a change gets reviewed.
 
 A polished portal can't repair a workflow where the OpenAPI file, guide copy, and release decision disagree. Pick the tool that keeps those states close enough to inspect before your team spends time on navigation or theming.
 
@@ -55,32 +55,6 @@ The strongest objection is that any Git-hosted reference can be reviewed in a pu
 Mintlify is the better shape when the API reference is only one route through onboarding, conceptual guides, SDK documentation, and troubleshooting. The portal becomes useful because it can keep those pages close to the reference without forcing every reader task into an endpoint table.
 
 Don't treat that as permission to write the contract in prose. A guide should select a safe first request and explain the result, while the reference owns exact fields, parameters, constraints, and response behavior.
-
-## Test the decision against your team's API documentation workflow
-
-I ran the selector against a fixture where an OpenAPI file lives in a repository, changes receive pull-request review, and CI publishes the result. It returned `Swagger UI or Redocly`, which is the right starting point for that narrow workflow rather than a universal winner.
-
-Download the selector and its fixture into an empty directory before you run the same check. The fixture is deliberately small, so you can replace its values with the boundary your team actually needs to decide.
-
-```bash
-curl -O https://ninadpathak.com/static/tools/api_docs_tool_selector.py
-curl -O https://ninadpathak.com/static/tools/api_docs_small_team_fixture.json
-mv api_docs_small_team_fixture.json small-team-fixture.json
-```
-
-```bash
-python3 api_docs_tool_selector.py small-team-fixture.json
-```
-
-The command checks only the workflow boundary, not pricing, migration effort, accessibility, or a vendor's current plan. Use it to expose the decision your team is making, then test the chosen tool against one real endpoint and one guide before moving a whole portal.
-
-<div class="visual-wrapper">
-  <div class="visual-title">API documentation tool selector</div>
-  <div class="visual-container" style="height: auto; aspect-ratio: 2560 / 1664; background: #0d0f14; overflow: hidden;">
-    <img src="/static/images/articles/api-documentation-tools-hands-on-comparison-small-teams/api-docs-tool-selector.png" alt="MacBook Air terminal showing an API documentation tool selector choosing Swagger UI or Redocly for a pull-request workflow" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: contain;">
-  </div>
-</div>
-<p class="visual-caption">The selector makes the source-of-truth decision visible before a team compares portal polish.</p>
 
 ## Connect the tool choice to the API documentation path
 

@@ -15,10 +15,10 @@ takeaways:
 - Redirect retired instructions only when the target can still complete the same reader
   task.
 title: How to Document Multiple Product Versions
-updated: 2026-08-12
+updated: 2026-08-17
 ---
 
-A version switcher can make incompatible instructions look like interchangeable pages. I built a [version-route audit download](/static/downloads/documentation-version-route-audit/docs-version-route-audit.py) because a current page, a supported older page, and a retired page need different URL behavior before a canonical tag or redirect can be correct.
+A version switcher can make incompatible instructions look like interchangeable pages. A current page, a supported older page, and a retired page need different URL behavior before a canonical tag or redirect can be correct.
 
 The policy is simple: keep instructions reachable and self-canonical while the product version remains supported. Redirect a retired task only when the destination still gives the reader a valid path, and preserve a historical version when its instructions remain useful evidence rather than a trap.
 
@@ -58,24 +58,6 @@ A supported version needs a stable URL, a visible label, and its own self-refere
 A permanent redirect is a strong signal that the target replaces the original URL. Google's [redirect documentation](https://developers.google.com/search/docs/crawling-indexing/301-redirects) describes redirects as a canonicalization signal, so send a retired documentation URL to a target that can actually replace its reader outcome.
 
 Redirecting `/docs/v1/authentication/` to a general release note fails that test. Redirect it to the equivalent current authentication guide only when the current guide includes the migration boundary, or keep a historical page that says why the old path no longer works.
-
-## Test the version route inventory
-
-A version policy turns into a release gate when the routes are stored as data. I ran the script against a fixture that rejects a supported page with another version's canonical and a retired page without an inventory target, then reran it after repairing the route policy.
-
-```bash
-python3 docs-version-route-audit.py version-routes-pass.json
-```
-
-The expected result is a `PASS` line naming the route count. The script checks route policy, not whether an SDK call still succeeds, so pair it with runnable examples and a release review.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Version route audit on a repaired documentation fixture</div>
-  <div class="visual-container" style="height: auto; aspect-ratio: 2560 / 1664; background: #0d0f14; overflow: hidden;">
-    <img src="/static/images/articles/how-to-document-multiple-product-versions/version-route-audit.png" alt="MacBook Air terminal window showing a passing version route audit for three documentation routes" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: contain;">
-  </div>
-</div>
-<p class="visual-caption">The receipt confirms that current, supported, and retired routes follow the declared policy.</p>
 
 ## Link readers to the right documentation version
 

@@ -9,6 +9,7 @@ tags:
 - documentation
 - developer-experience
 title: The Case for Shorter Technical Documentation
+updated: 2026-08-17
 ---
 
 Technical documentation often suffers from information obesity. Fearing the support ticket that an omission might trigger, teams expand a manual to cover every possible edge case.
@@ -52,7 +53,7 @@ Carroll argued that users are naturally active and want to poke at the system ra
 
 Minimalism does not mean a lack of information. It means a better choice of information.
 
-Action-oriented design reduces onboarding time by up to 30% because it focuses on real tasks. I follow four specific minimalist principles in my work.
+I follow four minimalist principles in my work.
 
 1. Focus on the user's immediate goal.
 2. Cut verbiage that describes obvious UI elements.
@@ -67,17 +68,15 @@ I am after essentialism, retaining only what serves a crucial function.
 
 Progressive disclosure is the primary tool for keeping documentation short without losing depth. It defers advanced or rarely used information to secondary screens or layers, the way a camera ships with a one-page quickstart in the box and a 200-page manual on the support site.
 
-The happy path stays clear of edge cases that only 5% of users will ever encounter.
+The happy path stays clear of edge cases that belong in reference or troubleshooting.
 
-I structure information into three levels of disclosure.
+I separate the primary task from supporting context and deep reference.
 
 - **Level 1:** Essential instructions for the primary task.
 - **Level 2:** Contextual sidebars explaining "Why this matters" or common pitfalls.
 - **Level 3:** Deep technical references and edge-case documentation.
 
-Explainable AI (XAI) research uses this layering to explain complex model decisions. The system provides a high-level summary first, with the deep technical breakdown available on demand.
-
-UX research suggests keeping these levels below three. Once you pass three layers, the cognitive cost of navigation starts to outweigh the benefit of reduced clutter, and readers lose track of where the answer lives.
+The layers are useful only when each one gives the reader a clear route back to the task. Hiding detail without providing that route merely moves the confusion into navigation.
 
 To implement this I reach for HTML `<details>` tags or contextual "Read More" toggles. The page stays visually short for the majority of readers, and the detailed technical specifications stay one click away for the power users who need them.
 
@@ -121,9 +120,9 @@ GitLab and Google both emphasize that concise language improves translation qual
 
 A phrase like "spin up an instance" can survive in English and turn into nonsense in five other languages, so trimming the idioms reduces the risk of dangerous errors in localized documentation.
 
-Clear, shorter docs also perform better in internal search and AI retrieval systems. A bloated page buries the exact sentence that should have been indexed under 800 words of preamble.
+Clear, shorter docs also make exact answers easier to find within a page. A bloated page can bury the sentence a reader needs under unrelated preamble.
 
-I ran into exactly that while writing [Agent harnesses](/articles/agent-harnesses/). Infrastructure topics attract vague abstractions, and a clean sequence of focused sections turned out to be far more useful for retrieval than a sprawling essay.
+Infrastructure topics attract vague abstractions, so I organized [Agent harnesses](/articles/agent-harnesses/) as focused sections rather than one sprawling essay.
 
 Readers with cognitive disabilities benefit too. Dense, long-form prose creates a barrier to entry that a modular, structured approach avoids.
 
@@ -171,7 +170,7 @@ Documentation is a tool, and a tool works best when it is lean and pointed at on
 
 **How short should a technical doc actually be?**
 
-There is no universal word count. A quickstart might be 600 words, while a deep migration guide might need 3,000.
+There is no universal word count. A quickstart may be brief, while a deep migration guide needs enough space to cover every consequential decision.
 
 The target is the smallest amount of information that allows the reader to succeed without guesswork.
 

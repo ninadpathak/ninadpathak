@@ -9,6 +9,7 @@ tags:
 - career
 - developer-experience
 title: 'From Engineer to Technical Writer: What I Kept and What I Left Behind'
+updated: 2026-08-17
 ---
 
 Moving from engineering to technical writing did not feel like abandoning a technical career. I simply swapped the artifact I shipped.
@@ -28,10 +29,6 @@ When a draft says `npm run build` emits a dist folder with three files, I run it
 Some of the strongest technical teams bake this mindset into their formal workflows. GitLab treats documentation as a mandatory part of the "definition of done" for any user-facing change.
 
 Their [documentation workflow](https://docs.gitlab.com/development/documentation/workflow/) requires that developers draft the initial docs and that these undergo a technical review before merging. I agree with their stance that generative AI cannot replace the subject matter expertise required for these verification passes.
-
-My whole production cycle bends around this habit. Writing about [Structured Outputs With LLMs](/articles/structured-outputs-llms-json-mode-function-calling/) meant more than paraphrasing a release note.
-
-I fed the API a schema nested four levels deep with an optional enum buried at the bottom, just to watch where the guarantee actually held and where it quietly degraded to "best effort." Writers without a coding background can build this discipline over time, though engineers arrive with the scars from untested code already installed.
 
 ## I kept systems thinking and documentation architecture
 
@@ -70,9 +67,9 @@ Repeating the same idea three different ways on one page only adds noise for a r
 
 Looking for failure modes is an engineer's reflex, and technical writing rewards it. Documentation tends to describe the "happy path," the run where every step succeeds on the first try, and real software almost never behaves that politely.
 
-A debugger's mindset persists in my writing for that reason. AI content keeps neglecting control flow and observability, which is exactly the frustration that produced my post on [Agent harnesses](/articles/agent-harnesses/).
+A debugger's mindset persists in my writing for that reason. My post on [Agent harnesses](/articles/agent-harnesses/) focuses on control flow and observability because prompting advice often skips retry loops and recovery.
 
-Plenty of material covered how to prompt an agent, and almost none of it covered what to do when the agent caught itself in a retry loop, burning tokens on the same failing call forever. The best documentation comes from someone who already watched the thing crash and wrote down the recovery.
+Documentation gets stronger when it explains how a failure becomes visible and what ends it.
 
 ## I left behind local optimization of prose
 
@@ -88,8 +85,6 @@ I found that those local wins can quietly wreck the usefulness of the whole page
 </div>
 
 A sentence can be grammatically perfect and still wrong for its audience. A section can be technically brilliant and still derail the flow of a tutorial.
-
-Some of the cleanest paragraphs I have written ended up deleted, because a sharp three-page aside on rate-limit internals was weight the reader had to carry without ever needing it to finish the task.
 
 Microsoft's [style and voice quick start](https://learn.microsoft.com/en-us/contribute/content/style-quick-start) emphasizes empathy and conciseness. They advise writers to focus on the customer's intent and reach for everyday words.
 
@@ -149,15 +144,15 @@ If you are looking for this kind of depth for your own team, [my work page](/wor
 
 Three major shifts stand out from my time in this role.
 
-Feedback loops got more legible, for one. A confusing page fails in visible ways that beat chasing a latent bug in a distributed system: readers drop off at step four, and the same support ticket arrives a dozen times asking why the API key field is empty.
+Feedback loops got more legible, for one. A confusing page fails in visible ways: readers leave before finishing the task, and support sees the same missing step again.
 
 Documentation failure is highly observable once you are willing to read the analytics.
 
 Audience empathy was the second shift, moving from a "soft skill" to a core production requirement. An engineer can occasionally ship and stay impatient with a user's missing context.
 
-A technical writer never gets that pass. My job is to bridge that divide by becoming the first user of every feature, clicking through the onboarding with the fresh confusion of someone who has read nothing.
+A technical writer never gets that pass. The job requires approaching onboarding as a first-time user and naming the context the product assumes.
 
-The reach of my work changed too. A feature helps the users who manage to find it, and one well-built page can reshape how thousands of developers understand a product before they ever sign up.
+The reach of my work changed too. A feature helps users who find it, while one well-built page can shape how developers understand the product before signup.
 
 I pour my time into durable assets, the changelogs, migration guides, and deep-dive tutorials, because their return compounds for the team over years rather than a single release.
 
@@ -171,13 +166,13 @@ The trap is writing from their own private context and leaving the reader strand
 
 **Which engineering skill was the most useful for me?**
 
-Empirical verification. Refusing to publish a command, flag, or output I haven't run on my own machine prevents the most common trust-killing errors, like a copied snippet that fails because the API renamed a parameter last quarter.
+Empirical verification. Run every command, flag, and claimed output before publication so copied examples do not fail on behavior the product has already changed.
 
 **What was the hardest habit to break?**
 
-I had to stop compressing my explanations too early. I used to write for the person who already understood 90% of the system.
+I had to stop compressing my explanations too early. I used to write for the person who already understood most of the system.
 
-I had to learn to write for the person who is missing the exact 10% that makes the whole system fail.
+I had to learn to write for the reader missing the context that makes it work.
 
 **Does technical writing involve less technical work than engineering?**
 

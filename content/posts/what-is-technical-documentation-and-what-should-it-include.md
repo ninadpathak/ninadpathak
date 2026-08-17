@@ -14,7 +14,7 @@ takeaways:
 - Start with orientation, one verified success path, and the reference that path needs.
 - Give every document an owner and a product change that triggers review.
 title: What Is Technical Documentation, and What Should It Include?
-updated: 2026-08-05
+updated: 2026-08-17
 ---
 
 Technical documentation is the material that helps someone understand, use, integrate with, or safely operate a system. It works when a reader can take the next step without guessing.
@@ -68,28 +68,6 @@ Reference owns the public API surface. Google’s [API reference guidance](https
 Troubleshooting starts from a recognizable symptom and gives a diagnostic check, likely cause, safe recovery, and escalation boundary. A generic support link cannot tell someone whether a retry is safe.
 
 Release notes explain changed behavior and required action. They should link to the canonical guide or migration page instead of repeating every instruction.
-
-## Make coverage inspectable before writing prose
-
-<!-- receipt-backed-first-person -->
-
-A document list can hide missing ownership. I ran a small [documentation deliverables manifest](/static/templates/documentation-deliverables-manifest.yaml) for a webhook API example so every planned page has one reader task, success signal, owner, review trigger, and deferral condition.
-
-```bash
-.venv/bin/python static/templates/validate_documentation_deliverables.py
-```
-
-The validator passed with seven owned reader tasks. That result does not tell you whether every paragraph is good, but it does expose a missing task owner before a repository fills with overlapping pages.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Documentation deliverables manifest validation</div>
-  <div class="visual-container">
-    <img src="/static/images/articles/what-is-technical-documentation-and-what-should-it-include/documentation-deliverables-manifest.png?v=0c2f9fe6" alt="Terminal output showing a documentation deliverables manifest with seven owned reader tasks passed validation" loading="lazy">
-  </div>
-</div>
-<p class="visual-caption">The validator checks each planned deliverable for a reader task, completion signal, owner, update trigger, and deferral condition.</p>
-
-Use this kind of check before writing a documentation site from scratch. It is planning evidence, not a replacement for task testing, source checks, or editorial review.
 
 ## Assign an owner and an update trigger
 

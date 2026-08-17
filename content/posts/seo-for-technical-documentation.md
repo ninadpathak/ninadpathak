@@ -15,10 +15,10 @@ takeaways:
 - Source HTML and rendered output can fail independently.
 - A before-and-after record connects search movement to meaningful changes.
 title: Technical SEO Checklist for Documentation Sites
-updated: 2026-07-31
+updated: 2026-08-17
 ---
 
-I built the audit for this guide around two pages: a working Cloudflare documentation guide and a deliberately broken local fixture. The contrast was useful because both pages had visible content, yet only one gave a crawler and a developer a dependable path through the task.
+I built the audit for this guide around Cloudflare's live Workers CLI guide. Its source and rendered page show which checks a reader can rerun and which still need browser or Search Console evidence.
 
 A page succeeds when search engines can discover and interpret it, the right developer recognizes the task from the result, and the instructions carry that person to a working state. That is what this audit checks through search intent, discovery, crawling, indexing, canonicalization, page quality, performance, and measurement.
 
@@ -90,7 +90,7 @@ The browser can make a broken page look healthy after JavaScript has run. Read t
 
 #### HTTP response and rendered HTML
 
-For the Cloudflare audit, I started with the final URL and headers:
+Start with the final URL and headers:
 
 ```bash
 curl --silent --show-error --location \
@@ -202,7 +202,7 @@ The command makes read-only requests and returns a human-readable report plus a 
 
 #### Cloudflare Workers audit result
 
-I ran the auditor against Cloudflare's Workers CLI getting-started guide. It returned 12 passes, zero warnings, and zero errors.
+A rerun against Cloudflare's Workers CLI getting-started guide on 17 August 2026 returned 12 passes, zero warnings, and zero errors.
 
 ![Terminal receipt showing 12 passing documentation SEO checks for the Cloudflare Workers CLI guide, including canonical, title, links, image alt attributes, and sitemap membership](/static/images/articles/seo-for-technical-documentation/cloudflare-docs-seo-audit.png)
 
@@ -213,14 +213,6 @@ The rendered page also exposes its place in the wider documentation system throu
 ![Cloudflare Workers CLI guide showing global navigation, the Workers sidebar, breadcrumbs, the CLI page title, prerequisites, and an on-this-page outline](/static/images/articles/seo-for-technical-documentation/cloudflare-workers-docs-page.png)
 
 *The page keeps the current task visible inside the wider product documentation.*
-
-#### Audit failure test
-
-I ran the same script against a deliberately broken local fixture. The fixture had `noindex`, an empty title, no canonical, two H1 elements, no crawlable internal links, and an image without an `alt` attribute.
-
-![Terminal receipt showing two errors and eight warnings for a deliberately broken documentation fixture, including noindex, missing title, missing canonical, two H1 elements, and missing image alt text](/static/images/articles/seo-for-technical-documentation/broken-docs-seo-audit.png)
-
-*The script exits unsuccessfully when it finds blocking index or title problems.*
 
 #### Audit script limitations
 

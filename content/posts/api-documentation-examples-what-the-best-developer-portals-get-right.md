@@ -17,10 +17,10 @@ takeaways:
 - Reference becomes easier to use when it connects back to the task that made a detail
   matter.
 title: 'API Documentation Examples: What the Best Developer Portals Get Right'
-updated: 2026-08-15
+updated: 2026-08-17
 ---
 
-A polished API portal can still make a developer guess which credential to create, which request proves access, and where an error belongs. I built a small [portal-path checker](/static/tools/check_developer_portal_path.py) to keep the comparison honest: a portal earns its example status when a reader can follow one inspectable path from access to recovery.
+A polished API portal can still make a developer guess which credential to create, which request proves access, and where an error belongs. A portal earns its example status when a reader can follow one inspectable path from access to recovery.
 
 The useful question isn't which portal has the most attractive navigation. It's whether the portal connects a first request to the exact reference details and failure guidance that make the next request safe.
 
@@ -56,24 +56,6 @@ A successful request is only half the evidence. A developer portal earns trust w
 Keep the recovery route close to the reference for the failure it explains. A generic support link forces the reader to repeat context, and a status-specific route can name whether the next move is changing a credential, correcting a parameter, waiting for a limit window, or contacting support with a request identifier.
 
 Cloudflare's [API documentation](https://developers.cloudflare.com/api/) exposes its API reference as a distinct route, which gives task guides a stable target for exact operations. The portal still needs to connect that reference back to the task where an authentication or response detail becomes necessary.
-
-## Test a developer portal example before copying it
-
-I ran the checker below against a compact portal-path fixture. It only verifies the editorial path, so it cannot tell you whether a live credential has permission or whether an endpoint is healthy.
-
-```bash
-python3 check_developer_portal_path.py portal-path.json
-```
-
-The command returned `PASS: the portal connects credentials, a working request, exact behavior, and recovery.` Use it as a review card before borrowing a portal pattern, then run the real request in a safe environment before you publish the guide.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Developer portal path check</div>
-  <div class="visual-container" style="height: auto; aspect-ratio: 2560 / 1664; background: #0d0f14; overflow: hidden;">
-    <img src="/static/images/articles/api-documentation-examples-what-the-best-developer-portals-get-right/developer-portal-path-check.png" alt="MacBook Air terminal showing a passing developer portal path check" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: contain;">
-  </div>
-</div>
-<p class="visual-caption">The check names the evidence a reader needs to complete a first request and recover from a predictable failure.</p>
 
 ## Use developer portal examples without copying their surface
 

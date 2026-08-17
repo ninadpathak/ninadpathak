@@ -350,3 +350,122 @@ The first question for each extension article is whether a repository artifact o
 - `lambda-calculus-ai-reasoning-benchmark`: benchmark promise removed; page becomes a guide to using lambda calculus as a reasoning exercise.
 - `local-wasm-vector-benchmarks`: benchmark promise already removed in the first pass.
 - `rag-evaluation-metrics-what-actually-matters`, `state-of-ai-agent-memory-2026`, `state-of-open-source-memory-2026`, and `embedding-models-compared`: their titles do not promise article-run benchmarks. Unsupported personal measurements still require removal, while attributable public benchmark discussion may remain.
+
+## Documentation-cluster extension: self-confirming artifacts
+
+The test for this extension is whether an artifact confronts the article with evidence it did not supply itself. A checker that looks for the headings, fields, or answer encoded in its own fixture does not meet that test.
+
+### 1. `api-documentation-best-practices-reference-guides-and-working-requests.md`
+
+**Artifact verdict:** Does not survive. `check_api_docs_package.py` checks a hand-authored JSON object for the same fields the article declares necessary, so its `PASS` line adds no independent evidence.
+
+- **REWRITE | original L21:** “I built a small package checker” turns an editorial premise into a personal test claim. Replacement: “An API portal can list every endpoint and still leave a developer unable to send a request. The missing work is usually distributed across a quickstart, reference, and error guidance, which makes an incomplete path look finished in a navigation tree.”
+- **CUT | original L64-80:** Remove the heading, fixture description, command, exact `PASS` string, screenshot, and caption. The run verifies only the fixture the article authored.
+
+### 2. `api-documentation-examples-what-the-best-developer-portals-get-right.md`
+
+**Artifact verdict:** Does not survive. `check_developer_portal_path.py` checks a local fixture for the exact editorial fields the comparison already assumes.
+
+- **REWRITE | original L23:** Remove the invented need for a checker. Replacement: “A polished API portal can still make a developer guess which credential to create, which request proves access, and where an error belongs. A portal earns its example status when a reader can follow one inspectable path from access to recovery.”
+- **CUT | original L60-76:** Remove the complete checker section, including the command, result, screenshot, and caption.
+
+### 3. `api-documentation-template-the-pages-every-api-needs.md`
+
+**Artifact verdict:** The downloadable outline survives as a useful template. Its checker does not, because it searches that same outline for a hard-coded list of headings.
+
+- **KEEP | original L22:** “I built this API documentation page outline” is verifiable authorship of a real downloadable artifact, and the artifact is useful without claiming that it proves itself correct.
+- **CUT | original L70-86:** Remove the outline-validation section, exact `PASS` string, screenshot, and caption.
+
+### 4. `api-documentation-tools-hands-on-comparison-small-teams.md`
+
+**Artifact verdict:** Does not survive. The selector maps a fixture's `source_of_truth` value directly to a hard-coded product label; it neither exercises the tools nor compares their workflows.
+
+- **REWRITE | original L18:** The title promises hands-on evidence the page does not contain. Replacement: “API Documentation Tools: A Workflow Comparison for Small Teams.”
+- **REWRITE | original L22:** Remove the selector as evidence. Replacement: “Small teams don't need a portal with every switch turned on. The first choice that changes the outcome is where the API contract lives and how a change gets reviewed.”
+- **CUT | original L59-83:** Remove the selector fixture, download commands, result, screenshot, and caption.
+
+### 5. `documentation-style-guide-template-for-developer-teams.md`
+
+**Artifact verdict:** The style-guide template survives as a usable editorial scaffold. Its validator does not survive as evidence because it checks the template for its own hard-coded headings and markers.
+
+- **KEEP | original L21:** “I built the attached template” is verifiable authorship of the downloadable file.
+- **REWRITE | original L29:** The checker adds no information. Replacement: “The first useful use is one guide that changes often. Fill its bracketed fields with product facts, then let the next release show which parts of the template need more detail.”
+- **CUT | original L71-73:** Remove the fresh Python 3.13.5 claim and the validator result. The version is irrelevant to the reader task, and the result is self-confirming.
+- **REWRITE | original L91:** Replacement: “Download the template and fill it against a frequently edited guide before asking the rest of the team to adopt it.”
+
+### 6. `how-to-document-multiple-product-versions.md`
+
+**Artifact verdict:** Does not survive. The route audit correctly implements its declared policy, but the supplied pass and fail inventories were authored to trigger those same branches and do not test a real documentation site.
+
+- **REWRITE | original L21:** Replacement: “A version switcher can make incompatible instructions look like interchangeable pages. A current page, a supported older page, and a retired page need different URL behavior before a canonical tag or redirect can be correct.”
+- **CUT | original L62-78:** Remove the fixture audit section, command, expected `PASS` line, screenshot, and caption.
+- **CUT | reported 30-site measurement:** “Measured across 30 developer docs sites on 2026-08-14, 11 had no version selector at all” has no source list, capture, dataset, or method in the repository. The sentence is absent from the deployed article revision but remained in the live AI Overviews checker sample, so it was removed there rather than preserved as a hedge.
+
+### 7. `seo-for-technical-documentation.md`
+
+**Artifact verdict:** The Cloudflare audit survives. `static/tools/docs-seo-audit.py` exists, targets a live external page, emits inspectable checks, and reproduced 12 passes with zero warnings and zero errors on 17 August 2026. The broken local fixture does not survive because it contains the failures the same run is supposed to discover.
+
+- **REWRITE | original L21:** Replacement: “I built the audit for this guide around Cloudflare's live Workers CLI guide. Its source and rendered page show which checks a reader can rerun and which still need browser or Search Console evidence.”
+- **REWRITE | original L93:** The example command uses a placeholder URL, not the Cloudflare target. Replacement: “Start with the final URL and headers:”
+- **KEEP | original L191-201:** The repository contains the linked standard-library auditor, its documented checks match the code, and the published command is rerunnable.
+- **REWRITE | original L205:** Attribute the result to a dated rerun rather than an unverifiable personal event. Replacement: “A rerun against Cloudflare's Workers CLI getting-started guide on 17 August 2026 returned 12 passes, zero warnings, and zero errors.”
+- **CUT | original L217-223:** Remove the deliberately broken local fixture, its result, screenshot, and caption.
+- **KEEP | original L225-229:** The limitations accurately state what the script cannot establish and stop the source-level checks from being presented as a ranking or task-success score.
+
+### 8. `what-is-technical-documentation-and-what-should-it-include.md`
+
+**Artifact verdict:** Does not survive. The manifest and validator share the same required fields, so seven passing entries prove only that the authored fixture contains seven authored records.
+
+- **CUT | original L72-92:** Remove the entire manifest-validation section, including the first-person run, exact count, command, screenshot, and claim that it exposes missing ownership.
+
+### 9. `the-case-for-shorter-technical-documentation.md`
+
+**Artifact verdict:** No evidence artifact exists. The cognitive-load visual is an illustration, not a measurement, and the article must not turn bare percentages or an editorial preference into observed results.
+
+- **KEEP | original L18:** “why I keep arguing for it” is an earned editorial opinion.
+- **REWRITE | original L55:** The claim that action-oriented design reduces onboarding time by up to 30 percent is bare. Replacement: “I follow four minimalist principles in my work.”
+- **KEEP | original L64:** “I am after essentialism” is a judgment about the author's editing standard.
+- **REWRITE | original L70:** The five-percent edge-case claim is bare. Replacement: “The happy path stays clear of edge cases that belong in reference or troubleshooting.”
+- **REWRITE | original L72-80:** Three levels may remain an editorial structure, but the XAI and UX claims do not support a universal limit. Replacement: “I separate the primary task from supporting context and deep reference.” Follow with: “The layers are useful only when each one gives the reader a clear route back to the task. Hiding detail without providing that route merely moves the confusion into navigation.”
+- **KEEP | original L102-116:** The webhook-page behavior and three-sentence opening are clearly framed as personal reading and editing preferences, not measured outcomes.
+- **REWRITE | original L124-126:** The article does not measure search or retrieval performance. Replacement: “Clear, shorter docs also make exact answers easier to find within a page. A bloated page can bury the sentence a reader needs under unrelated preamble.” Follow with: “Infrastructure topics attract vague abstractions, so I organized [Agent harnesses](/articles/agent-harnesses/) as focused sections rather than one sprawling essay.”
+- **KEEP | original L134-143:** The case for longer migration guides, specifications, architecture references, and runbooks is editorial judgment tied to the decisions those formats must preserve.
+- **KEEP | original L147-152:** The four editing questions are a stated review practice and make no result claim.
+- **KEEP | original L160:** The changelog link supports a stated editorial position, not a measurement.
+- **KEEP | original L164-168:** Preferring modular pages is an opinion earned from the author's work.
+- **REWRITE | original L174:** The 600-word and 3,000-word examples add arbitrary precision. Replacement: “There is no universal word count. A quickstart may be brief, while a deep migration guide needs enough space to cover every consequential decision.”
+- **KEEP | original L188:** Wanting fewer mixed-purpose pages is an editorial preference.
+
+### 10. `from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md`
+
+**Artifact verdict:** No artifact backs the Structured Outputs test or its claimed failure boundary. The career history and editorial judgments remain valid first-person material, but the fabricated test event and fabricated anecdotes do not.
+
+- **KEEP | original L14-20:** The career transition and its central distinction are the author's lived professional history.
+- **KEEP | original L24-30:** Verifying a draft command and agreeing with GitLab's review standard describe an earned working principle.
+- **CUT | original L32-34:** Remove the claim that Ninad tested a four-level schema with an optional enum and observed a guarantee degrade to best effort. No input, request, output, model version, or repository artifact exists.
+- **KEEP | original L42-53:** The information-architecture questions and use of Diataxis are editorial practices, not performance claims.
+- **KEEP | original L63-67:** Spelling out prerequisites and avoiding repeated definitions are earned writing judgments.
+- **REWRITE | original L71-75:** “almost none” and “someone who already watched the thing crash” invent a survey and event. Replacement: “A debugger's mindset persists in my writing for that reason. My post on [Agent harnesses](/articles/agent-harnesses/) focuses on control flow and observability because prompting advice often skips retry loops and recovery.” Follow with: “Documentation gets stronger when it explains how a failure becomes visible and what ends it.”
+- **KEEP | original L79-81:** The danger of local prose optimization is an earned editorial judgment.
+- **CUT | original L92:** Remove the sharp three-page rate-limit aside. It is a specific event with no support and contributes nothing beyond the surrounding point.
+- **KEEP | original L102-109:** Git, linting, CI, and review gates are real tools and practices in the repository workflow.
+- **KEEP | original L111-113:** The Write the Docs survey figures are attributed to the linked survey.
+- **KEEP | original L119-125:** Maintenance cost and internal linking describe current site practice that the repository can verify.
+- **KEEP | original L131-146:** The difficulty of technical writing and the listed skills are professional judgments, while the career-path statement is linked to Google's material.
+- **REWRITE | original L152:** The precise reader drop-off and repeated ticket are unsupported. Replacement: “Feedback loops got more legible, for one. A confusing page fails in visible ways: readers leave before finishing the task, and support sees the same missing step again.”
+- **REWRITE | original L158:** “first user of every feature” is an absolute personal claim. Replacement: “A technical writer never gets that pass. The job requires approaching onboarding as a first-time user and naming the context the product assumes.”
+- **REWRITE | original L160:** The claim about thousands of developers is an unsupported scale. Replacement: “The reach of my work changed too. A feature helps users who find it, while one well-built page can shape how developers understand the product before signup.”
+- **KEEP | original L162:** Choosing durable documentation assets is a stated professional preference.
+- **REWRITE | original L174:** The absolute claim that Ninad refuses to publish anything untested conflicts with unsupported material found on the site. Replacement: “Empirical verification. Run every command, flag, and claimed output before publication so copied examples do not fail on behavior the product has already changed.”
+- **REWRITE | original L178-180:** The 90/10 split is invented precision. Replacement: “I had to stop compressing my explanations too early. I used to write for the person who already understood most of the system.” Follow with: “I had to learn to write for the reader missing the context that makes it work.”
+- **KEEP | original L184-190:** Reading code, testing APIs, researching, editing, and designing information systems are ordinary descriptions of the role.
+
+### Documentation-extension totals
+
+The extension contains **55 classified claim units**:
+
+- **KEEP: 23**
+- **REWRITE: 21**
+- **CUT: 11**
+
+Only three artifacts survive the test: the API documentation page outline as a template, the documentation style guide as a template, and the external Cloudflare Workers audit as reproducible evidence. None of the other checkers or fixtures tests a proposition that its own input did not already assume.
