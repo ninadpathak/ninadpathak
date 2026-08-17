@@ -330,6 +330,27 @@ What it leaves is position, and what moves position on a domain like this is aut
 
 Seventy-six pages were substantially rewritten in the last seven days. Three have an observable day, and **all three had zero impressions before the rewrite**, so nothing can distinguish "the rewrite did nothing" from "we cannot see yet." **Zero informative comparisons.** The first useful one needs a rewritten page that was already earning. That is the honest state, not a null result, and it is why the revision cohort stays in the daily record instead of being called either way.
 
+### dev.to is a preservation channel, not a link channel — question closed
+
+Audited 2026-08-17 by reading a live syndicated post's markup rather than assuming what DEV does.
+
+**The fact that decides it: DEV is one host, so 96 posts contribute exactly one referring domain.** If the tools are judged on referring domains, syndication is structurally incapable of moving that number past one. No amount of volume changes it.
+
+Two assumptions corrected, one in each direction:
+
+- **DEV links are not nofollow.** Every external anchor carries `rel="noopener noreferrer"`, `rel="noopener"`, or no rel at all — there is no `nofollow` and no `ugc` anywhere on the page, and each post carries **four followed links** back here.
+- **But `rel="noreferrer"` on three of the four suppresses the `Referer` header**, which is why no referral traffic has ever appeared in analytics. The links pass endorsement and hide the visit.
+
+**Verdict: leave it on, stop looking at it.** It preserves work at zero marginal effort and it is not the metric the tools were re-based onto.
+
+Two cheap fixes taken, and one deliberately refused:
+
+1. **Done.** The syndication script now appends one **subject-matched tool link** per post, as a clearly labelled footer resource rather than a body sentence — a convenience link dressed as a citation is exactly what the site's own linking rules reject. Four distinct footers across four tag families. It takes the tool link count off zero from a DR-91 domain, and it will be reported as *links*, never as a referring domain.
+2. **Needs Ninad.** Two 2023 posts carry canonicals pointing at the homepage, which tells Google an article is a duplicate of a homepage. Both are one-field edits, but editing published posts on an external platform is not mine to do.
+3. **Refused, on purpose.** Three canonicals point at 404s and they stay broken. Those URLs are on the write-off allowlist, and **Google ignoring the canonical is what let the DEV copy survive and rank.** Repointing them at anything would be worse than leaving them wrong.
+
+Where the attention goes instead: the referring-domain metric needs *other people's* domains, and the two things that earn those are named reference infrastructure — the `keepachangelog.com` pattern, 2,220 referring domains on effectively no traffic — and content people cite.
+
 ### A link profile is a diagnostic for editorial substance
 
 Added 2026-08-17, and it changes what internal linking is for. **If every outbound link on a page fails the subject-of-the-sentence test, the page is telling you it has no natural neighbours.** The cause is almost always that the page holds an abstraction while other pages own each concrete piece of its argument, and an abstraction has no neighbours, so every link has to be manufactured. **Review the page. Do not replace the links.**
