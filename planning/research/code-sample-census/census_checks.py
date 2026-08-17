@@ -278,5 +278,88 @@ class DocumentationRootInspectionTests(unittest.TestCase):
         self.assertEqual([item["project"] for item in groups[0]["projects"]], ["alpha", "beta"])
 
 
+class PagePopulationDiscoveryTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        module_path = STUDY_DIR / "discover_page_populations.py"
+        spec = importlib.util.spec_from_file_location("discover_page_populations", module_path)
+        cls.module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        sys.modules[spec.name] = cls.module
+        spec.loader.exec_module(cls.module)
+
+    def test_page_normalization_removes_query_fragment_and_assets(self):
+        self.assertEqual(
+            self.module.normalize_page_url("HTTPS://Docs.Example.test:443/guide/?v=1#part"),
+            "https://docs.example.test/guide/",
+        )
+        self.assertIsNone(self.module.normalize_page_url("https://docs.example.test/app.js?v=1"))
+
+    def test_index_and_contents_files_scope_to_their_directory(self):
+        self.assertEqual(
+            self.module.root_scope("https://docs.example.test/en/latest/contents.html"),
+            {"kind": "prefix", "path": "/en/latest/"},
+        )
+        self.assertTrue(
+            self.module.in_root_scope(
+                "https://docs.example.test/en/latest/api.html",
+                "https://docs.example.test/en/latest/contents.html",
+            )
+        )
+
+    def test_specific_html_root_does_not_claim_sibling_pages(self):
+        root = "https://docs.example.test/python/grpc_status.html"
+        self.assertTrue(self.module.in_root_scope(root, root))
+        self.assertFalse(self.module.in_root_scope("https://docs.example.test/python/grpc.html", root))
+
+    def test_sitemap_directives_are_case_insensitive_and_deduplicated(self):
+        raw = b"User-agent: *\nSitemap: /sitemap.xml\nSITEMAP: /sitemap.xml\n"
+        self.assertEqual(
+            self.module.sitemap_directives(raw, "https://docs.example.test/robots.txt"),
+            ["https://docs.example.test/sitemap.xml"],
+        )
+
+    def test_namespaced_sitemap_index_and_urlset_parse(self):
+        index = b'<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://e.test/a.xml</loc></sitemap></sitemapindex>'
+        pages = b'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://e.test/a</loc></url></urlset>'
+        self.assertEqual(self.module.parse_sitemap(index, "https://e.test/index.xml"), ("sitemapindex", ["https://e.test/a.xml"]))
+        self.assertEqual(self.module.parse_sitemap(pages, "https://e.test/a.xml"), ("urlset", ["https://e.test/a"]))
+
+
+class SitemapCoverageTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        module_path = STUDY_DIR / "validate_sitemap_coverage.py"
+        spec = importlib.util.spec_from_file_location("validate_sitemap_coverage", module_path)
+        cls.module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        sys.modules[spec.name] = cls.module
+        spec.loader.exec_module(cls.module)
+
+    def test_graph_reports_index_children_missing_from_bounded_fetch(self):
+        records = {
+            "https://e.test/index.xml": {
+                "kind": "sitemapindex",
+                "locations": ["https://e.test/a.xml", "https://e.test/b.xml"],
+            },
+            "https://e.test/a.xml": {"kind": "urlset", "locations": []},
+        }
+        fetched, missing = self.module.sitemap_graph(["https://e.test/index.xml"], records)
+        self.assertEqual(fetched, {"https://e.test/index.xml", "https://e.test/a.xml"})
+        self.assertEqual(missing, {"https://e.test/b.xml"})
+
+    def test_unfetched_conventional_seed_is_not_an_index_truncation(self):
+        fetched, missing = self.module.sitemap_graph(["https://e.test/sitemap.xml"], {})
+        self.assertEqual(fetched, set())
+        self.assertEqual(missing, set())
+
+    def test_landing_links_keep_only_normalized_in_scope_pages(self):
+        raw = b'<a href="guide/?x=1#top">Guide</a><a href="/other/">Other</a><a href="app.js">JS</a>'
+        self.assertEqual(
+            self.module.landing_links(raw, "https://e.test/docs/", "https://e.test/docs/"),
+            ["https://e.test/docs/guide/"],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

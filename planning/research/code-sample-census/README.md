@@ -98,6 +98,13 @@ whose independent deterministic sample selected it. This matters for the three
 observed shared hosts (`pyasn1`, gRPC, and Pydantic); a unique-corpus sensitivity
 result is reported alongside the project-weighted result.
 
+The live discovery batch falsified an implicit assumption in step 2: a valid
+sitemap may list only documentation versions, not pages. Every apparent sitemap
+population is therefore challenged against the eligible links on its own landing
+page. Any missing landing link routes that project to the separately reported BFS
+fallback. The frozen result is six sitemap projects, 69 crawl fallbacks, and one
+robots-denied exclusion; see `POPULATION-DISCOVERY-2026-08-18.md`.
+
 The cap makes the result a page sample, not a census of every block on every
 documentation site. The publication must use that wording.
 

@@ -1,0 +1,2961 @@
+{
+  "coverage_snapshot": "planning/research/code-sample-census/data/sitemap-coverage-2026-08-18.json",
+  "coverage_snapshot_sha256": "fdc45fd61c81a8ac35d144ea7d3b1aa553cdd5a43a7bbe0f4d3a11fbb8cc771a",
+  "fetched_at": "2026-08-17T18:37:14+00:00",
+  "input_path": "planning/research/code-sample-census/data/page-populations-2026-08-18.json",
+  "input_sha256": "fe12e1a2370e1ecfa0f8252777d856e3c91944774b7cb4f9224b70e087a7286a",
+  "origin_graphs": {
+    "http://multipart.fastapiexpert.com": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "http://multipart.fastapiexpert.com/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://aiobotocore.aio-libs.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://aiobotocore.aio-libs.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://aiohappyeyeballs.aio-libs.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://aiohappyeyeballs.aio-libs.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://anyio.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://anyio.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://arrow.apache.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://arrow.apache.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://cffi.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://cffi.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://charset-normalizer.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://charset-normalizer.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://click.palletsprojects.com": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://click.palletsprojects.com/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://cryptography.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://cryptography.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://dateutil.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://dateutil.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://distro.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://distro.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://docs.aiohttp.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://docs.aiohttp.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://docs.aws.amazon.com": {
+      "reachable_fetched_documents": 200,
+      "referenced_unfetched_documents": 10494,
+      "referenced_unfetched_examples": [
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_Panorama/sitemap.xml",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_PaymentCryptography/sitemap.xml",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_Personalize/sitemap.xml",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_Pinpoint/sitemap.xml",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_PinpointEmail/sitemap.xml",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_Pipes/sitemap.xml",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_Proton/sitemap.xml",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_QBusiness/sitemap.xml",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_QuickSight/sitemap.xml",
+        "https://docs.aws.amazon.com/AWSCloudFormation/latest/site_map/AWS_RAM/sitemap.xml"
+      ],
+      "seeds": [
+        "https://docs.aws.amazon.com/sitemap.xml",
+        "https://docs.aws.amazon.com/sitemap_index.xml"
+      ],
+      "truncated": true
+    },
+    "https://docs.litellm.ai": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://docs.litellm.ai/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://docs.pytest.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://docs.pytest.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://docs.scipy.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://docs.scipy.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://facelessuser.github.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://facelessuser.github.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://fastapi.tiangolo.com": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://fastapi.tiangolo.com/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://filesystem-spec.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://filesystem-spec.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://frozenlist.aio-libs.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://frozenlist.aio-libs.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://googleapis.dev": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://googleapis.dev/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://greenlet.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://greenlet.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://grpc.github.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://grpc.github.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://h11.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://h11.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://hatch.pypa.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://hatch.pypa.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://importlib-metadata.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://importlib-metadata.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://jinja.palletsprojects.com": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://jinja.palletsprojects.com/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://jmespath.org": {
+      "reachable_fetched_documents": 0,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://jmespath.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://jsonschema-specifications.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://jsonschema-specifications.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://markdown-it-py.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://markdown-it-py.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://markupsafe.palletsprojects.com": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://markupsafe.palletsprojects.com/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://multidict.aio-libs.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://multidict.aio-libs.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://numpy.org": {
+      "reachable_fetched_documents": 5,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://numpy.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://packaging.pypa.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://packaging.pypa.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://pandas.pydata.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://pandas.pydata.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://pillow.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://pillow.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://pip.pypa.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://pip.pypa.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://platformdirs.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://platformdirs.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://propcache.aio-libs.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://propcache.aio-libs.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://py-filelock.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://py-filelock.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://pyasn1.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://pyasn1.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://pydantic.dev": {
+      "reachable_fetched_documents": 2,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://pydantic.dev/docs/sitemap.xml",
+        "https://pydantic.dev/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://pydantic.github.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://pydantic.github.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://pygments.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://pygments.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://pyjwt.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://pyjwt.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://python-jsonschema.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://python-jsonschema.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://python-path-specification.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://python-path-specification.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://pythonhosted.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://pythonhosted.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://referencing.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://referencing.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://requests.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://requests.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://rich.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://rich.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://rpds.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://rpds.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://s3fs.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://s3fs.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://saurabh-kumar.com": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://saurabh-kumar.com/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://setuptools.pypa.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://setuptools.pypa.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://six.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://six.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://sniffio.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://sniffio.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://starlette.dev": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://starlette.dev/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://tenacity.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://tenacity.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://textual.textualize.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://textual.textualize.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://tqdm.github.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://tqdm.github.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://typing-extensions.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://typing-extensions.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://tzdata.python.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://tzdata.python.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://urllib3.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://urllib3.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://uvicorn.dev": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://uvicorn.dev/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://virtualenv.pypa.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://virtualenv.pypa.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://websockets.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://websockets.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://wheel.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://wheel.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://wrapt.readthedocs.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://wrapt.readthedocs.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://www.attrs.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://www.attrs.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://www.encode.io": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://www.encode.io/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://www.python-httpx.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://www.python-httpx.org/sitemap.xml"
+      ],
+      "truncated": false
+    },
+    "https://yarl.aio-libs.org": {
+      "reachable_fetched_documents": 1,
+      "referenced_unfetched_documents": 0,
+      "referenced_unfetched_examples": [],
+      "seeds": [
+        "https://yarl.aio-libs.org/sitemap.xml"
+      ],
+      "truncated": false
+    }
+  },
+  "rows": [
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 21,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 19110,
+        "content_type": "text/html",
+        "etag": "W/\"35b4a8a1ff72705a456ad645cbb4a3fb\"",
+        "final_url": "https://packaging.pypa.io/en/stable/",
+        "last_modified": "Mon, 03 Aug 2026 20:00:05 GMT",
+        "redirects": [],
+        "requested_url": "https://packaging.pypa.io/en/stable/",
+        "response_sha256": "5a7e7717d8b21ade8fbf25ad5889efc3dd11ae7ea300f84cfc74ddc8475c4eda",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://packaging.pypa.io/en/stable/changelog.html",
+        "https://packaging.pypa.io/en/stable/dependency_groups.html",
+        "https://packaging.pypa.io/en/stable/development/getting-started.html",
+        "https://packaging.pypa.io/en/stable/development/index.html",
+        "https://packaging.pypa.io/en/stable/development/release-process.html",
+        "https://packaging.pypa.io/en/stable/development/reviewing-patches.html",
+        "https://packaging.pypa.io/en/stable/development/submitting-patches.html",
+        "https://packaging.pypa.io/en/stable/direct_url.html",
+        "https://packaging.pypa.io/en/stable/errors.html",
+        "https://packaging.pypa.io/en/stable/licenses.html",
+        "https://packaging.pypa.io/en/stable/markers.html",
+        "https://packaging.pypa.io/en/stable/metadata.html",
+        "https://packaging.pypa.io/en/stable/pylock.html",
+        "https://packaging.pypa.io/en/stable/ranges.html",
+        "https://packaging.pypa.io/en/stable/requirements.html",
+        "https://packaging.pypa.io/en/stable/security.html",
+        "https://packaging.pypa.io/en/stable/specifiers.html",
+        "https://packaging.pypa.io/en/stable/tags.html",
+        "https://packaging.pypa.io/en/stable/utils.html",
+        "https://packaging.pypa.io/en/stable/version.html"
+      ],
+      "origin_truncated": false,
+      "project": "packaging",
+      "rank": 2,
+      "root_url": "https://packaging.pypa.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-not-falsified",
+      "eligible_landing_links": 1,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 218083,
+        "content_type": "text/html",
+        "etag": "W/\"72a9ddc2c002678965f6f666c0ee0048\"",
+        "final_url": "https://typing-extensions.readthedocs.io/en/latest/",
+        "last_modified": "Thu, 02 Jul 2026 18:25:38 GMT",
+        "redirects": [],
+        "requested_url": "https://typing-extensions.readthedocs.io/en/latest/",
+        "response_sha256": "756c21a3830a6e7bb4a0852199bce316c2eac0218193d41738d53840c92c81f9",
+        "status": 200
+      },
+      "missing_landing_links": [],
+      "origin_truncated": false,
+      "project": "typing-extensions",
+      "rank": 3,
+      "root_url": "https://typing-extensions.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 20,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 25275,
+        "content_type": "text/html",
+        "etag": "W/\"fce47908c2c42009b9e31e629f0d1c65\"",
+        "final_url": "https://urllib3.readthedocs.io/en/stable/",
+        "last_modified": "Thu, 07 May 2026 16:09:14 GMT",
+        "redirects": [],
+        "requested_url": "https://urllib3.readthedocs.io/en/stable/",
+        "response_sha256": "b6c7d23fb96b534d42cf625bb9687c261b269dac97f91416afb646c8fffcb720",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://urllib3.readthedocs.io/en/stable/advanced-usage.html",
+        "https://urllib3.readthedocs.io/en/stable/changelog.html",
+        "https://urllib3.readthedocs.io/en/stable/contributing.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/contrib/emscripten.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/contrib/index.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/contrib/pyopenssl.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/contrib/socks.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/index.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/urllib3.connection.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/urllib3.connectionpool.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/urllib3.exceptions.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/urllib3.fields.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/urllib3.poolmanager.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/urllib3.request.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/urllib3.response.html",
+        "https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html",
+        "https://urllib3.readthedocs.io/en/stable/sponsors.html",
+        "https://urllib3.readthedocs.io/en/stable/user-guide.html",
+        "https://urllib3.readthedocs.io/en/stable/v2-migration-guide.html"
+      ],
+      "origin_truncated": false,
+      "project": "urllib3",
+      "rank": 5,
+      "root_url": "https://urllib3.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 15,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 22611,
+        "content_type": "text/html",
+        "etag": "W/\"383c984ddcaea61767644a6b6133b3ea\"",
+        "final_url": "https://requests.readthedocs.io/en/latest/",
+        "last_modified": "Thu, 14 May 2026 19:23:44 GMT",
+        "redirects": [],
+        "requested_url": "https://requests.readthedocs.io/en/latest/",
+        "response_sha256": "996cf5462aff70ae64b0e48f1d4296d3a1fdc523002b5eb904c63fb6c23273b0",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://requests.readthedocs.io/en/latest/api/",
+        "https://requests.readthedocs.io/en/latest/community/faq/",
+        "https://requests.readthedocs.io/en/latest/community/out-there/",
+        "https://requests.readthedocs.io/en/latest/community/recommended/",
+        "https://requests.readthedocs.io/en/latest/community/release-process/",
+        "https://requests.readthedocs.io/en/latest/community/support/",
+        "https://requests.readthedocs.io/en/latest/community/updates/",
+        "https://requests.readthedocs.io/en/latest/community/vulnerabilities/",
+        "https://requests.readthedocs.io/en/latest/dev/authors/",
+        "https://requests.readthedocs.io/en/latest/dev/contributing/",
+        "https://requests.readthedocs.io/en/latest/user/advanced/",
+        "https://requests.readthedocs.io/en/latest/user/authentication/",
+        "https://requests.readthedocs.io/en/latest/user/install/",
+        "https://requests.readthedocs.io/en/latest/user/quickstart/"
+      ],
+      "origin_truncated": false,
+      "project": "requests",
+      "rank": 7,
+      "root_url": "https://requests.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 16,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 33582,
+        "content_type": "text/html",
+        "etag": "W/\"a81bbeaf3136c2c31813db92f82b6388\"",
+        "final_url": "https://charset-normalizer.readthedocs.io/en/stable/",
+        "last_modified": "Sat, 15 Aug 2026 06:32:25 GMT",
+        "redirects": [],
+        "requested_url": "https://charset-normalizer.readthedocs.io/en/stable/",
+        "response_sha256": "dd35edc5c93f96bdd272a1964f33a5a736d86e9800d0a2492a4c43f1e38a8a6e",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://charset-normalizer.readthedocs.io/en/stable/api.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/community/faq.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/community/featured.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/community/speedup.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/community/why_migrate.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/genindex.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/py-modindex.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/search.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/user/advanced_search.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/user/cli.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/user/getstarted.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/user/handling_result.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/user/miscellaneous.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/user/new_encoding.html",
+        "https://charset-normalizer.readthedocs.io/en/stable/user/support.html"
+      ],
+      "origin_truncated": false,
+      "project": "charset-normalizer",
+      "rank": 8,
+      "root_url": "https://charset-normalizer.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 47,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 25272,
+        "content_type": "text/html",
+        "etag": "W/\"37c030be823cc5fa721a09048053445d\"",
+        "final_url": "https://setuptools.pypa.io/en/latest/",
+        "last_modified": "Fri, 07 Aug 2026 00:36:18 GMT",
+        "redirects": [],
+        "requested_url": "https://setuptools.pypa.io/en/latest/",
+        "response_sha256": "65c7415b67a26ab5c3491783fd86b119730b2618c4dbd8d7018c333ecdae232c",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://setuptools.pypa.io/en/latest/artwork.html",
+        "https://setuptools.pypa.io/en/latest/build_meta.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/changed_keywords.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/commands.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/dependency_links.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils-legacy.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/apiref.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/builtdist.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/commandref.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/configfile.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/examples.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/extending.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/index.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/introduction.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/setupscript.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/distutils/sourcedist.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/easy_install.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/functionalities.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/index.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/pkg_resources.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/python_eggs.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/resource_extraction.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/sdist-reproducibility.html",
+        "https://setuptools.pypa.io/en/latest/deprecated/zip_safe.html",
+        "https://setuptools.pypa.io/en/latest/development/developer-guide.html",
+        "https://setuptools.pypa.io/en/latest/development/index.html",
+        "https://setuptools.pypa.io/en/latest/development/releases.html",
+        "https://setuptools.pypa.io/en/latest/history.html",
+        "https://setuptools.pypa.io/en/latest/references/keywords.html",
+        "https://setuptools.pypa.io/en/latest/roadmap.html",
+        "https://setuptools.pypa.io/en/latest/setuptools.html",
+        "https://setuptools.pypa.io/en/latest/userguide/datafiles.html",
+        "https://setuptools.pypa.io/en/latest/userguide/declarative_config.html",
+        "https://setuptools.pypa.io/en/latest/userguide/dependency_management.html",
+        "https://setuptools.pypa.io/en/latest/userguide/development_mode.html",
+        "https://setuptools.pypa.io/en/latest/userguide/distribution.html",
+        "https://setuptools.pypa.io/en/latest/userguide/entry_point.html",
+        "https://setuptools.pypa.io/en/latest/userguide/ext_modules.html",
+        "https://setuptools.pypa.io/en/latest/userguide/extension.html",
+        "https://setuptools.pypa.io/en/latest/userguide/index.html",
+        "https://setuptools.pypa.io/en/latest/userguide/interfaces.html",
+        "https://setuptools.pypa.io/en/latest/userguide/license_migration.html",
+        "https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html",
+        "https://setuptools.pypa.io/en/latest/userguide/package_discovery.html",
+        "https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html",
+        "https://setuptools.pypa.io/en/latest/userguide/quickstart.html"
+      ],
+      "origin_truncated": false,
+      "project": "setuptools",
+      "rank": 9,
+      "root_url": "https://setuptools.pypa.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 46,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 45099,
+        "content_type": "text/html",
+        "etag": "W/\"7c6bb25142e31096621a1be0058799de\"",
+        "final_url": "https://cryptography.io/en/latest/",
+        "last_modified": "Mon, 17 Aug 2026 10:24:11 GMT",
+        "redirects": [],
+        "requested_url": "https://cryptography.io/en/latest/",
+        "response_sha256": "3a742d85bc326ad8aabdbadfd1dfd19a73dd01446064a4f64bed68b226924f76",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://cryptography.io/en/latest/api-stability/",
+        "https://cryptography.io/en/latest/changelog/",
+        "https://cryptography.io/en/latest/cobblestone/",
+        "https://cryptography.io/en/latest/community/",
+        "https://cryptography.io/en/latest/development/",
+        "https://cryptography.io/en/latest/development/c-bindings/",
+        "https://cryptography.io/en/latest/development/getting-started/",
+        "https://cryptography.io/en/latest/development/reviewing-patches/",
+        "https://cryptography.io/en/latest/development/submitting-patches/",
+        "https://cryptography.io/en/latest/development/test-vectors/",
+        "https://cryptography.io/en/latest/doing-a-release/",
+        "https://cryptography.io/en/latest/exceptions/",
+        "https://cryptography.io/en/latest/faq/",
+        "https://cryptography.io/en/latest/fernet/",
+        "https://cryptography.io/en/latest/glossary/",
+        "https://cryptography.io/en/latest/hazmat/asn1/",
+        "https://cryptography.io/en/latest/hazmat/asn1/reference/",
+        "https://cryptography.io/en/latest/hazmat/asn1/tutorial/",
+        "https://cryptography.io/en/latest/hazmat/decrepit/",
+        "https://cryptography.io/en/latest/hazmat/decrepit/ciphers/",
+        "https://cryptography.io/en/latest/hazmat/decrepit/modes/",
+        "https://cryptography.io/en/latest/hazmat/primitives/",
+        "https://cryptography.io/en/latest/hazmat/primitives/aead/",
+        "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/",
+        "https://cryptography.io/en/latest/hazmat/primitives/constant-time/",
+        "https://cryptography.io/en/latest/hazmat/primitives/cryptographic-hashes/",
+        "https://cryptography.io/en/latest/hazmat/primitives/hpke/",
+        "https://cryptography.io/en/latest/hazmat/primitives/key-derivation-functions/",
+        "https://cryptography.io/en/latest/hazmat/primitives/keywrap/",
+        "https://cryptography.io/en/latest/hazmat/primitives/mac/",
+        "https://cryptography.io/en/latest/hazmat/primitives/padding/",
+        "https://cryptography.io/en/latest/hazmat/primitives/symmetric-encryption/",
+        "https://cryptography.io/en/latest/hazmat/primitives/twofactor/",
+        "https://cryptography.io/en/latest/installation/",
+        "https://cryptography.io/en/latest/limitations/",
+        "https://cryptography.io/en/latest/openssl/",
+        "https://cryptography.io/en/latest/random-numbers/",
+        "https://cryptography.io/en/latest/security/",
+        "https://cryptography.io/en/latest/statements/",
+        "https://cryptography.io/en/latest/x509/",
+        "https://cryptography.io/en/latest/x509/certificate-transparency/",
+        "https://cryptography.io/en/latest/x509/ocsp/",
+        "https://cryptography.io/en/latest/x509/reference/",
+        "https://cryptography.io/en/latest/x509/tutorial/",
+        "https://cryptography.io/en/latest/x509/verification/"
+      ],
+      "origin_truncated": false,
+      "project": "cryptography",
+      "rank": 10,
+      "root_url": "https://cryptography.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 10,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 12972,
+        "content_type": "text/html",
+        "etag": "W/\"8ead620689aaacd764eafaeca99b430f\"",
+        "final_url": "https://cffi.readthedocs.io/en/stable/",
+        "last_modified": "Mon, 03 Aug 2026 21:23:47 GMT",
+        "redirects": [],
+        "requested_url": "https://cffi.readthedocs.io/en/stable/",
+        "response_sha256": "e1328809de7f8091d6cd573b3fb4d5a410a43e66b34f54d6dbd8c1cf760927b6",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://cffi.readthedocs.io/en/stable/cdef.html",
+        "https://cffi.readthedocs.io/en/stable/cffi-gen-src.html",
+        "https://cffi.readthedocs.io/en/stable/embedding.html",
+        "https://cffi.readthedocs.io/en/stable/goals.html",
+        "https://cffi.readthedocs.io/en/stable/installation.html",
+        "https://cffi.readthedocs.io/en/stable/overview.html",
+        "https://cffi.readthedocs.io/en/stable/ref.html",
+        "https://cffi.readthedocs.io/en/stable/using.html",
+        "https://cffi.readthedocs.io/en/stable/whatsnew.html"
+      ],
+      "origin_truncated": false,
+      "project": "cffi",
+      "rank": 12,
+      "root_url": "https://cffi.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 15,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 24371,
+        "content_type": "text/html",
+        "etag": "W/\"995a7894a1092598ab28661259ffccf1\"",
+        "final_url": "https://dateutil.readthedocs.io/en/stable/",
+        "last_modified": "Fri, 01 Mar 2024 03:44:31 GMT",
+        "redirects": [],
+        "requested_url": "https://dateutil.readthedocs.io/en/stable/",
+        "response_sha256": "edb10d14a7ee03a417b26b69e2777d78587622fd431c659a0bee5c38059e7778",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://dateutil.readthedocs.io/en/stable/changelog.html",
+        "https://dateutil.readthedocs.io/en/stable/easter.html",
+        "https://dateutil.readthedocs.io/en/stable/examples.html",
+        "https://dateutil.readthedocs.io/en/stable/exercises/index.html",
+        "https://dateutil.readthedocs.io/en/stable/genindex.html",
+        "https://dateutil.readthedocs.io/en/stable/parser.html",
+        "https://dateutil.readthedocs.io/en/stable/py-modindex.html",
+        "https://dateutil.readthedocs.io/en/stable/relativedelta.html",
+        "https://dateutil.readthedocs.io/en/stable/rrule.html",
+        "https://dateutil.readthedocs.io/en/stable/search.html",
+        "https://dateutil.readthedocs.io/en/stable/tz.html",
+        "https://dateutil.readthedocs.io/en/stable/tzwin.html",
+        "https://dateutil.readthedocs.io/en/stable/utils.html",
+        "https://dateutil.readthedocs.io/en/stable/zoneinfo.html"
+      ],
+      "origin_truncated": false,
+      "project": "python-dateutil",
+      "rank": 16,
+      "root_url": "https://dateutil.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 3,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 123980,
+        "content_type": "text/html",
+        "etag": "W/\"c7c2d3a93ce3af550991edb9dac9b8a2\"",
+        "final_url": "https://six.readthedocs.io/",
+        "last_modified": "Wed, 05 May 2021 14:17:22 GMT",
+        "redirects": [],
+        "requested_url": "https://six.readthedocs.io/",
+        "response_sha256": "c29cf140da490b7bf593603a1b4cc3c5e3507f4020cf33339432dd830eb22492",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://six.readthedocs.io/genindex.html",
+        "https://six.readthedocs.io/search.html"
+      ],
+      "origin_truncated": false,
+      "project": "six",
+      "rank": 17,
+      "root_url": "https://six.readthedocs.io/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 6,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 41997,
+        "content_type": "text/html",
+        "etag": null,
+        "final_url": "https://pydantic.dev/docs/",
+        "last_modified": null,
+        "redirects": [],
+        "requested_url": "https://pydantic.dev/docs/",
+        "response_sha256": "aba69147034968a7123b0522946005b04d257bb6c3ccf5db5e57497b87ce86b1",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://pydantic.dev/docs/ai/",
+        "https://pydantic.dev/docs/logfire/"
+      ],
+      "origin_truncated": false,
+      "project": "pydantic",
+      "rank": 19,
+      "root_url": "https://pydantic.dev/docs/",
+      "sitemap_population_size": 1740
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 13,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 16818,
+        "content_type": "text/html",
+        "etag": "W/\"93a83717fcdd764fe440615a5870152c\"",
+        "final_url": "https://aiobotocore.aio-libs.org/en/latest/",
+        "last_modified": "Sat, 01 Aug 2026 11:42:40 GMT",
+        "redirects": [],
+        "requested_url": "https://aiobotocore.aio-libs.org/en/latest/",
+        "response_sha256": "b88ae1f920e86ba84dd9944f14d88ade9b8b46fd845aa11399b5adc887204078",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://aiobotocore.aio-libs.org/en/latest/contributing.html",
+        "https://aiobotocore.aio-libs.org/en/latest/examples.html",
+        "https://aiobotocore.aio-libs.org/en/latest/examples/cognito_idp/forgot_password.html",
+        "https://aiobotocore.aio-libs.org/en/latest/examples/dynamo_db/insertions.html",
+        "https://aiobotocore.aio-libs.org/en/latest/examples/dynamo_db/tables.html",
+        "https://aiobotocore.aio-libs.org/en/latest/examples/s3/basic_usage.html",
+        "https://aiobotocore.aio-libs.org/en/latest/examples/sqs/producer_consumer.html",
+        "https://aiobotocore.aio-libs.org/en/latest/examples/sqs/queue.html",
+        "https://aiobotocore.aio-libs.org/en/latest/genindex.html",
+        "https://aiobotocore.aio-libs.org/en/latest/py-modindex.html",
+        "https://aiobotocore.aio-libs.org/en/latest/search.html",
+        "https://aiobotocore.aio-libs.org/en/latest/tutorial.html"
+      ],
+      "origin_truncated": false,
+      "project": "aiobotocore",
+      "rank": 20,
+      "root_url": "https://aiobotocore.aio-libs.org/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 38,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 15424,
+        "content_type": "text/html",
+        "etag": "W/\"4242aeef4de9f835add983a9a837b2bc\"",
+        "final_url": "https://click.palletsprojects.com/en/stable/",
+        "last_modified": "Fri, 17 Jul 2026 20:39:03 GMT",
+        "redirects": [],
+        "requested_url": "https://click.palletsprojects.com/en/stable/",
+        "response_sha256": "832b601886840f318d05e11c6da20f62c656eec3a1182ac6dc761909f3ba067d",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://click.palletsprojects.com/en/stable/advanced/",
+        "https://click.palletsprojects.com/en/stable/api/",
+        "https://click.palletsprojects.com/en/stable/arguments/",
+        "https://click.palletsprojects.com/en/stable/changes/",
+        "https://click.palletsprojects.com/en/stable/click-concepts/",
+        "https://click.palletsprojects.com/en/stable/command-line-reference/",
+        "https://click.palletsprojects.com/en/stable/commands-and-groups/",
+        "https://click.palletsprojects.com/en/stable/commands/",
+        "https://click.palletsprojects.com/en/stable/complex/",
+        "https://click.palletsprojects.com/en/stable/contrib/",
+        "https://click.palletsprojects.com/en/stable/contributing/",
+        "https://click.palletsprojects.com/en/stable/design-opinions/",
+        "https://click.palletsprojects.com/en/stable/documentation/",
+        "https://click.palletsprojects.com/en/stable/entry-points/",
+        "https://click.palletsprojects.com/en/stable/exceptions/",
+        "https://click.palletsprojects.com/en/stable/extending-click/",
+        "https://click.palletsprojects.com/en/stable/faqs/",
+        "https://click.palletsprojects.com/en/stable/genindex/",
+        "https://click.palletsprojects.com/en/stable/handling-files/",
+        "https://click.palletsprojects.com/en/stable/license/",
+        "https://click.palletsprojects.com/en/stable/option-decorators/",
+        "https://click.palletsprojects.com/en/stable/options/",
+        "https://click.palletsprojects.com/en/stable/parameter-types/",
+        "https://click.palletsprojects.com/en/stable/parameters/",
+        "https://click.palletsprojects.com/en/stable/prompts/",
+        "https://click.palletsprojects.com/en/stable/quickstart/",
+        "https://click.palletsprojects.com/en/stable/setuptools/",
+        "https://click.palletsprojects.com/en/stable/shell-completion/",
+        "https://click.palletsprojects.com/en/stable/standalone-apps/",
+        "https://click.palletsprojects.com/en/stable/support-multiple-versions/",
+        "https://click.palletsprojects.com/en/stable/testing/",
+        "https://click.palletsprojects.com/en/stable/unicode-support/",
+        "https://click.palletsprojects.com/en/stable/upgrade-guides/",
+        "https://click.palletsprojects.com/en/stable/utils/",
+        "https://click.palletsprojects.com/en/stable/virtualenv/",
+        "https://click.palletsprojects.com/en/stable/why/",
+        "https://click.palletsprojects.com/en/stable/wincmd/"
+      ],
+      "origin_truncated": false,
+      "project": "click",
+      "rank": 21,
+      "root_url": "https://click.palletsprojects.com/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 57,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 31975,
+        "content_type": "text/html",
+        "etag": "W/\"182d51bcc1fee0487dc26dd8eaef7e11\"",
+        "final_url": "https://docs.pytest.org/en/latest/",
+        "last_modified": "Sun, 14 Jun 2026 06:09:55 GMT",
+        "redirects": [],
+        "requested_url": "https://docs.pytest.org/en/latest/",
+        "response_sha256": "5f092b0d1fe41430023a654b84b4ec801046d823ecc2e733680c592295d936ca",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://docs.pytest.org/en/latest/backwards-compatibility.html",
+        "https://docs.pytest.org/en/latest/changelog.html",
+        "https://docs.pytest.org/en/latest/contact.html",
+        "https://docs.pytest.org/en/latest/contributing.html",
+        "https://docs.pytest.org/en/latest/example/customdirectory.html",
+        "https://docs.pytest.org/en/latest/example/index.html",
+        "https://docs.pytest.org/en/latest/example/markers.html",
+        "https://docs.pytest.org/en/latest/example/nonpython.html",
+        "https://docs.pytest.org/en/latest/example/parametrize.html",
+        "https://docs.pytest.org/en/latest/example/pythoncollection.html",
+        "https://docs.pytest.org/en/latest/example/reportingdemo.html",
+        "https://docs.pytest.org/en/latest/example/simple.html",
+        "https://docs.pytest.org/en/latest/example/special.html",
+        "https://docs.pytest.org/en/latest/explanation/anatomy.html",
+        "https://docs.pytest.org/en/latest/explanation/ci.html",
+        "https://docs.pytest.org/en/latest/explanation/fixtures.html",
+        "https://docs.pytest.org/en/latest/explanation/flaky.html",
+        "https://docs.pytest.org/en/latest/explanation/goodpractices.html",
+        "https://docs.pytest.org/en/latest/explanation/index.html",
+        "https://docs.pytest.org/en/latest/explanation/pythonpath.html",
+        "https://docs.pytest.org/en/latest/explanation/types.html",
+        "https://docs.pytest.org/en/latest/getting-started.html",
+        "https://docs.pytest.org/en/latest/how-to/assert.html",
+        "https://docs.pytest.org/en/latest/how-to/bash-completion.html",
+        "https://docs.pytest.org/en/latest/how-to/cache.html",
+        "https://docs.pytest.org/en/latest/how-to/capture-stdout-stderr.html",
+        "https://docs.pytest.org/en/latest/how-to/capture-warnings.html",
+        "https://docs.pytest.org/en/latest/how-to/doctest.html",
+        "https://docs.pytest.org/en/latest/how-to/existingtestsuite.html",
+        "https://docs.pytest.org/en/latest/how-to/failures.html",
+        "https://docs.pytest.org/en/latest/how-to/fixtures.html",
+        "https://docs.pytest.org/en/latest/how-to/index.html",
+        "https://docs.pytest.org/en/latest/how-to/logging.html",
+        "https://docs.pytest.org/en/latest/how-to/mark.html",
+        "https://docs.pytest.org/en/latest/how-to/monkeypatch.html",
+        "https://docs.pytest.org/en/latest/how-to/output.html",
+        "https://docs.pytest.org/en/latest/how-to/parametrize.html",
+        "https://docs.pytest.org/en/latest/how-to/plugins.html",
+        "https://docs.pytest.org/en/latest/how-to/skipping.html",
+        "https://docs.pytest.org/en/latest/how-to/subtests.html",
+        "https://docs.pytest.org/en/latest/how-to/tmp_path.html",
+        "https://docs.pytest.org/en/latest/how-to/unittest.html",
+        "https://docs.pytest.org/en/latest/how-to/usage.html",
+        "https://docs.pytest.org/en/latest/how-to/writing_hook_functions.html",
+        "https://docs.pytest.org/en/latest/how-to/writing_plugins.html",
+        "https://docs.pytest.org/en/latest/how-to/xunit_setup.html",
+        "https://docs.pytest.org/en/latest/license.html",
+        "https://docs.pytest.org/en/latest/reference/customize.html",
+        "https://docs.pytest.org/en/latest/reference/exit-codes.html",
+        "https://docs.pytest.org/en/latest/reference/fixtures.html",
+        "https://docs.pytest.org/en/latest/reference/index.html",
+        "https://docs.pytest.org/en/latest/reference/plugin_list.html",
+        "https://docs.pytest.org/en/latest/reference/reference.html",
+        "https://docs.pytest.org/en/latest/sponsor.html",
+        "https://docs.pytest.org/en/latest/talks.html",
+        "https://docs.pytest.org/en/latest/tidelift.html"
+      ],
+      "origin_truncated": false,
+      "project": "pytest",
+      "rank": 23,
+      "root_url": "https://docs.pytest.org/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 23,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 29520,
+        "content_type": "text/html",
+        "etag": "W/\"05e2cc37ca6b5b39ea69328b267163a9\"",
+        "final_url": "https://anyio.readthedocs.io/en/latest/",
+        "last_modified": "Mon, 17 Aug 2026 17:19:48 GMT",
+        "redirects": [],
+        "requested_url": "https://anyio.readthedocs.io/en/latest/",
+        "response_sha256": "994bc19d2d3cb05626d5e43b6b06b09afe51106d254f2f8855ad17d0915b746e",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://anyio.readthedocs.io/en/latest/api.html",
+        "https://anyio.readthedocs.io/en/latest/basics.html",
+        "https://anyio.readthedocs.io/en/latest/cancellation.html",
+        "https://anyio.readthedocs.io/en/latest/contextmanagers.html",
+        "https://anyio.readthedocs.io/en/latest/contributing.html",
+        "https://anyio.readthedocs.io/en/latest/faq.html",
+        "https://anyio.readthedocs.io/en/latest/fileio.html",
+        "https://anyio.readthedocs.io/en/latest/migration.html",
+        "https://anyio.readthedocs.io/en/latest/networking.html",
+        "https://anyio.readthedocs.io/en/latest/signals.html",
+        "https://anyio.readthedocs.io/en/latest/streams.html",
+        "https://anyio.readthedocs.io/en/latest/subinterpreters.html",
+        "https://anyio.readthedocs.io/en/latest/subprocesses.html",
+        "https://anyio.readthedocs.io/en/latest/support.html",
+        "https://anyio.readthedocs.io/en/latest/synchronization.html",
+        "https://anyio.readthedocs.io/en/latest/tasks.html",
+        "https://anyio.readthedocs.io/en/latest/tempfile.html",
+        "https://anyio.readthedocs.io/en/latest/testing.html",
+        "https://anyio.readthedocs.io/en/latest/threads.html",
+        "https://anyio.readthedocs.io/en/latest/typedattrs.html",
+        "https://anyio.readthedocs.io/en/latest/versionhistory.html",
+        "https://anyio.readthedocs.io/en/latest/why.html"
+      ],
+      "origin_truncated": false,
+      "project": "anyio",
+      "rank": 24,
+      "root_url": "https://anyio.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-not-falsified",
+      "eligible_landing_links": 8,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 90798,
+        "content_type": "text/html",
+        "etag": null,
+        "final_url": "https://pydantic.dev/docs/validation/latest/get-started/",
+        "last_modified": null,
+        "redirects": [],
+        "requested_url": "https://pydantic.dev/docs/validation/latest/get-started/",
+        "response_sha256": "3bc95df771c52cfaebbad80a871fb5893ffc2ead46703ba889dc08709c5e591e",
+        "status": 200
+      },
+      "missing_landing_links": [],
+      "origin_truncated": false,
+      "project": "pydantic-core",
+      "rank": 25,
+      "root_url": "https://pydantic.dev/docs/validation/latest/get-started/",
+      "sitemap_population_size": 8
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 6,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 12602,
+        "content_type": "text/html",
+        "etag": "W/\"420d52dcc0467b430e1b68686e47f171\"",
+        "final_url": "https://h11.readthedocs.io/en/latest/",
+        "last_modified": "Thu, 24 Apr 2025 03:37:12 GMT",
+        "redirects": [],
+        "requested_url": "https://h11.readthedocs.io/en/latest/",
+        "response_sha256": "1855c89acbd834a674dd1b0dbedd511824c143723bd7883e78df7cb134a5aa45",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://h11.readthedocs.io/en/latest/api.html",
+        "https://h11.readthedocs.io/en/latest/basic-usage.html",
+        "https://h11.readthedocs.io/en/latest/changes.html",
+        "https://h11.readthedocs.io/en/latest/examples.html",
+        "https://h11.readthedocs.io/en/latest/supported-http.html"
+      ],
+      "origin_truncated": false,
+      "project": "h11",
+      "rank": 28,
+      "root_url": "https://h11.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 17,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 34479,
+        "content_type": "text/html",
+        "etag": "W/\"ae72dc5320262b4a5fa742ea6868ad12\"",
+        "final_url": "https://www.attrs.org/en/stable/",
+        "last_modified": "Thu, 19 Mar 2026 14:06:38 GMT",
+        "redirects": [],
+        "requested_url": "https://www.attrs.org/en/stable/",
+        "response_sha256": "946ee2031ceabdb10442a3012b153507a4af86e2c4b41e2c7b359448b88a650d",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://www.attrs.org/en/stable/api-attr.html",
+        "https://www.attrs.org/en/stable/api.html",
+        "https://www.attrs.org/en/stable/changelog.html",
+        "https://www.attrs.org/en/stable/comparison.html",
+        "https://www.attrs.org/en/stable/examples.html",
+        "https://www.attrs.org/en/stable/extending.html",
+        "https://www.attrs.org/en/stable/genindex.html",
+        "https://www.attrs.org/en/stable/glossary.html",
+        "https://www.attrs.org/en/stable/hashing.html",
+        "https://www.attrs.org/en/stable/how-does-it-work.html",
+        "https://www.attrs.org/en/stable/init.html",
+        "https://www.attrs.org/en/stable/license.html",
+        "https://www.attrs.org/en/stable/names.html",
+        "https://www.attrs.org/en/stable/overview.html",
+        "https://www.attrs.org/en/stable/types.html",
+        "https://www.attrs.org/en/stable/why.html"
+      ],
+      "origin_truncated": false,
+      "project": "attrs",
+      "rank": 29,
+      "root_url": "https://www.attrs.org/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 10,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 14133,
+        "content_type": "text/html",
+        "etag": "W/\"a6da768b64a9577b0acb6a8c00143a2d\"",
+        "final_url": "https://filesystem-spec.readthedocs.io/en/latest/",
+        "last_modified": "Mon, 27 Jul 2026 15:06:31 GMT",
+        "redirects": [],
+        "requested_url": "https://filesystem-spec.readthedocs.io/en/latest/",
+        "response_sha256": "23c0c794327ab20d244ffc89e5542df5b67a10553b5dc03708748b11fe4ff629",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://filesystem-spec.readthedocs.io/en/latest/api.html",
+        "https://filesystem-spec.readthedocs.io/en/latest/async.html",
+        "https://filesystem-spec.readthedocs.io/en/latest/changelog.html",
+        "https://filesystem-spec.readthedocs.io/en/latest/code-of-conduct.html",
+        "https://filesystem-spec.readthedocs.io/en/latest/copying.html",
+        "https://filesystem-spec.readthedocs.io/en/latest/developer.html",
+        "https://filesystem-spec.readthedocs.io/en/latest/features.html",
+        "https://filesystem-spec.readthedocs.io/en/latest/intro.html",
+        "https://filesystem-spec.readthedocs.io/en/latest/usage.html"
+      ],
+      "origin_truncated": false,
+      "project": "fsspec",
+      "rank": 30,
+      "root_url": "https://filesystem-spec.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-not-falsified",
+      "eligible_landing_links": 23,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 31898,
+        "content_type": "text/html",
+        "etag": "\"68c2ac65-7c9a\"",
+        "final_url": "https://www.python-httpx.org",
+        "last_modified": "Thu, 11 Sep 2025 11:03:01 GMT",
+        "redirects": [],
+        "requested_url": "https://www.python-httpx.org",
+        "response_sha256": "1d26f6cab2beafb77f1dee7c26c24a835b5a9ba65f06e2feedb9267a5c49f957",
+        "status": 200
+      },
+      "missing_landing_links": [],
+      "origin_truncated": false,
+      "project": "httpx",
+      "rank": 35,
+      "root_url": "https://www.python-httpx.org",
+      "sitemap_population_size": 23
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 8,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 10599,
+        "content_type": "text/html",
+        "etag": "W/\"ecc3173f3a1148e41fca7e48d0710eb8\"",
+        "final_url": "https://markupsafe.palletsprojects.com/en/stable/",
+        "last_modified": "Sat, 27 Sep 2025 18:38:56 GMT",
+        "redirects": [],
+        "requested_url": "https://markupsafe.palletsprojects.com/en/stable/",
+        "response_sha256": "1042f15aa8fc94dfb597f5f6a0f6b5a302742f4fd82c6e02b0757604ed1c3078",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://markupsafe.palletsprojects.com/en/stable/changes/",
+        "https://markupsafe.palletsprojects.com/en/stable/escaping/",
+        "https://markupsafe.palletsprojects.com/en/stable/formatting/",
+        "https://markupsafe.palletsprojects.com/en/stable/genindex/",
+        "https://markupsafe.palletsprojects.com/en/stable/html/",
+        "https://markupsafe.palletsprojects.com/en/stable/license/",
+        "https://markupsafe.palletsprojects.com/en/stable/py-modindex/"
+      ],
+      "origin_truncated": false,
+      "project": "markupsafe",
+      "rank": 36,
+      "root_url": "https://markupsafe.palletsprojects.com/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 11,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 21066,
+        "content_type": "text/html",
+        "etag": "W/\"f9f5b80d2a3e971ebe481be8243ce248\"",
+        "final_url": "https://platformdirs.readthedocs.io/en/latest/",
+        "last_modified": "Mon, 17 Aug 2026 17:48:21 GMT",
+        "redirects": [],
+        "requested_url": "https://platformdirs.readthedocs.io/en/latest/",
+        "response_sha256": "f0bf6eeb15c703f38ccacee8a867a280ea33dfd9053482a8a6333793f4dfecf6",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://platformdirs.readthedocs.io/en/latest/",
+        "https://platformdirs.readthedocs.io/en/latest/py-modindex.html"
+      ],
+      "origin_truncated": false,
+      "project": "platformdirs",
+      "rank": 38,
+      "root_url": "https://platformdirs.readthedocs.io/en/latest/",
+      "sitemap_population_size": 17
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 8,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 12269,
+        "content_type": "text/html",
+        "etag": "W/\"ec4c00633b2bd6c21e217c5c6e7366e7\"",
+        "final_url": "https://python-path-specification.readthedocs.io/en/latest/index.html",
+        "last_modified": "Mon, 25 May 2026 03:03:08 GMT",
+        "redirects": [],
+        "requested_url": "https://python-path-specification.readthedocs.io/en/latest/index.html",
+        "response_sha256": "3dba8e80494d53b0212ea0ffae9031240095ed100d0045c5169182d23d785a7a",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://python-path-specification.readthedocs.io/en/latest/api.html",
+        "https://python-path-specification.readthedocs.io/en/latest/changes.html",
+        "https://python-path-specification.readthedocs.io/en/latest/genindex.html",
+        "https://python-path-specification.readthedocs.io/en/latest/index.html",
+        "https://python-path-specification.readthedocs.io/en/latest/py-modindex.html",
+        "https://python-path-specification.readthedocs.io/en/latest/readme.html",
+        "https://python-path-specification.readthedocs.io/en/latest/search.html",
+        "https://python-path-specification.readthedocs.io/en/latest/upgrading.html"
+      ],
+      "origin_truncated": false,
+      "project": "pathspec",
+      "rank": 41,
+      "root_url": "https://python-path-specification.readthedocs.io/en/latest/index.html",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 15,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 18054,
+        "content_type": "text/html",
+        "etag": "W/\"0ea3b320397bfc6aab4a844bb0422db1\"",
+        "final_url": "https://jinja.palletsprojects.com/en/stable/",
+        "last_modified": "Thu, 12 Jun 2025 21:00:04 GMT",
+        "redirects": [],
+        "requested_url": "https://jinja.palletsprojects.com/en/stable/",
+        "response_sha256": "17cc0e25360784a5a755ac2a3ad89d5e339c45879e234c70733c0ade71e68ada",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://jinja.palletsprojects.com/en/stable/api/",
+        "https://jinja.palletsprojects.com/en/stable/changes/",
+        "https://jinja.palletsprojects.com/en/stable/extensions/",
+        "https://jinja.palletsprojects.com/en/stable/faq/",
+        "https://jinja.palletsprojects.com/en/stable/genindex/",
+        "https://jinja.palletsprojects.com/en/stable/integration/",
+        "https://jinja.palletsprojects.com/en/stable/intro/",
+        "https://jinja.palletsprojects.com/en/stable/license/",
+        "https://jinja.palletsprojects.com/en/stable/nativetypes/",
+        "https://jinja.palletsprojects.com/en/stable/py-modindex/",
+        "https://jinja.palletsprojects.com/en/stable/sandbox/",
+        "https://jinja.palletsprojects.com/en/stable/switching/",
+        "https://jinja.palletsprojects.com/en/stable/templates/",
+        "https://jinja.palletsprojects.com/en/stable/tricks/"
+      ],
+      "origin_truncated": false,
+      "project": "jinja2",
+      "rank": 42,
+      "root_url": "https://jinja.palletsprojects.com/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 18,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 203910,
+        "content_type": "text/html",
+        "etag": "\"020e64e3db88fbde4207d2efdc16619e\"",
+        "final_url": "https://docs.litellm.ai",
+        "last_modified": "Mon, 17 Aug 2026 08:03:06 GMT",
+        "redirects": [],
+        "requested_url": "https://docs.litellm.ai",
+        "response_sha256": "d3703129d060c6379dbcace31f5be75106514ff00642f1303cf21c4cecbb5768",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://docs.litellm.ai/release_notes"
+      ],
+      "origin_truncated": false,
+      "project": "litellm",
+      "rank": 43,
+      "root_url": "https://docs.litellm.ai",
+      "sitemap_population_size": 1180
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 7,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 17472,
+        "content_type": "text/html",
+        "etag": "W/\"bc96f9733bc72ae0a5b6e2201a98fe21\"",
+        "final_url": "https://pyjwt.readthedocs.io/en/stable/",
+        "last_modified": "Thu, 21 May 2026 19:56:56 GMT",
+        "redirects": [],
+        "requested_url": "https://pyjwt.readthedocs.io/en/stable/",
+        "response_sha256": "30454866d2f4fb656866cae93368da0ee601c492aab2662f20909b20b797e131",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://pyjwt.readthedocs.io/en/stable/algorithms.html",
+        "https://pyjwt.readthedocs.io/en/stable/api.html",
+        "https://pyjwt.readthedocs.io/en/stable/changelog.html",
+        "https://pyjwt.readthedocs.io/en/stable/faq.html",
+        "https://pyjwt.readthedocs.io/en/stable/installation.html",
+        "https://pyjwt.readthedocs.io/en/stable/usage.html"
+      ],
+      "origin_truncated": false,
+      "project": "pyjwt",
+      "rank": 45,
+      "root_url": "https://pyjwt.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 72,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 26484,
+        "content_type": "text/html",
+        "etag": "W/\"d8b98936ed95caceaa0fe8ff39b3bd1d\"",
+        "final_url": "https://pip.pypa.io/en/stable/",
+        "last_modified": "Tue, 04 Aug 2026 22:50:11 GMT",
+        "redirects": [],
+        "requested_url": "https://pip.pypa.io/en/stable/",
+        "response_sha256": "349476ac3bf6026955cc3f86616b53b7b3d508725fa111dd1e59e1f01fded85e",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://pip.pypa.io/en/stable/cli/",
+        "https://pip.pypa.io/en/stable/cli/pip/",
+        "https://pip.pypa.io/en/stable/cli/pip_cache/",
+        "https://pip.pypa.io/en/stable/cli/pip_check/",
+        "https://pip.pypa.io/en/stable/cli/pip_config/",
+        "https://pip.pypa.io/en/stable/cli/pip_debug/",
+        "https://pip.pypa.io/en/stable/cli/pip_download/",
+        "https://pip.pypa.io/en/stable/cli/pip_freeze/",
+        "https://pip.pypa.io/en/stable/cli/pip_hash/",
+        "https://pip.pypa.io/en/stable/cli/pip_index/",
+        "https://pip.pypa.io/en/stable/cli/pip_inspect/",
+        "https://pip.pypa.io/en/stable/cli/pip_install/",
+        "https://pip.pypa.io/en/stable/cli/pip_list/",
+        "https://pip.pypa.io/en/stable/cli/pip_lock/",
+        "https://pip.pypa.io/en/stable/cli/pip_search/",
+        "https://pip.pypa.io/en/stable/cli/pip_show/",
+        "https://pip.pypa.io/en/stable/cli/pip_uninstall/",
+        "https://pip.pypa.io/en/stable/cli/pip_wheel/",
+        "https://pip.pypa.io/en/stable/copyright/",
+        "https://pip.pypa.io/en/stable/development/",
+        "https://pip.pypa.io/en/stable/development/architecture/",
+        "https://pip.pypa.io/en/stable/development/architecture/anatomy/",
+        "https://pip.pypa.io/en/stable/development/architecture/command-line-interface/",
+        "https://pip.pypa.io/en/stable/development/architecture/configuration-files/",
+        "https://pip.pypa.io/en/stable/development/architecture/overview/",
+        "https://pip.pypa.io/en/stable/development/architecture/package-finding/",
+        "https://pip.pypa.io/en/stable/development/architecture/upgrade-options/",
+        "https://pip.pypa.io/en/stable/development/ci/",
+        "https://pip.pypa.io/en/stable/development/contributing/",
+        "https://pip.pypa.io/en/stable/development/getting-started/",
+        "https://pip.pypa.io/en/stable/development/issue-triage/",
+        "https://pip.pypa.io/en/stable/development/release-process/",
+        "https://pip.pypa.io/en/stable/development/vendoring-policy/",
+        "https://pip.pypa.io/en/stable/getting-started/",
+        "https://pip.pypa.io/en/stable/installation/",
+        "https://pip.pypa.io/en/stable/news/",
+        "https://pip.pypa.io/en/stable/reference/",
+        "https://pip.pypa.io/en/stable/reference/build-system/",
+        "https://pip.pypa.io/en/stable/reference/inspect-report/",
+        "https://pip.pypa.io/en/stable/reference/installation-report/",
+        "https://pip.pypa.io/en/stable/reference/requirement-specifiers/",
+        "https://pip.pypa.io/en/stable/reference/requirements-file-format/",
+        "https://pip.pypa.io/en/stable/topics/",
+        "https://pip.pypa.io/en/stable/topics/authentication/",
+        "https://pip.pypa.io/en/stable/topics/caching/",
+        "https://pip.pypa.io/en/stable/topics/configuration/",
+        "https://pip.pypa.io/en/stable/topics/dependency-resolution/",
+        "https://pip.pypa.io/en/stable/topics/https-certificates/",
+        "https://pip.pypa.io/en/stable/topics/local-project-installs/",
+        "https://pip.pypa.io/en/stable/topics/more-dependency-resolution/",
+        "https://pip.pypa.io/en/stable/topics/python-option/",
+        "https://pip.pypa.io/en/stable/topics/repeatable-installs/",
+        "https://pip.pypa.io/en/stable/topics/secure-installs/",
+        "https://pip.pypa.io/en/stable/topics/vcs-support/",
+        "https://pip.pypa.io/en/stable/topics/workflow/",
+        "https://pip.pypa.io/en/stable/user_guide/",
+        "https://pip.pypa.io/en/stable/ux-research-design/",
+        "https://pip.pypa.io/en/stable/ux-research-design/contribute/",
+        "https://pip.pypa.io/en/stable/ux-research-design/guidance/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/about-our-users/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/ci-cd/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/improving-pips-documentation/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/mental-models/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/override-conflicting-dependencies/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/personas/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/pip-force-reinstall/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/pip-search/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/pip-upgrade-conflict/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/prioritizing-features/",
+        "https://pip.pypa.io/en/stable/ux-research-design/research-results/users-and-security/"
+      ],
+      "origin_truncated": false,
+      "project": "pip",
+      "rank": 46,
+      "root_url": "https://pip.pypa.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 9,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 42406,
+        "content_type": "text/html",
+        "etag": "W/\"f860cf519680657fd9a1a557bab1c3ae\"",
+        "final_url": "https://s3fs.readthedocs.io/en/latest/",
+        "last_modified": "Wed, 03 Dec 2025 15:38:41 GMT",
+        "redirects": [],
+        "requested_url": "https://s3fs.readthedocs.io/en/latest/",
+        "response_sha256": "f49dd3861ccd93c3a30060ef6b20a7ec714b8dad85bd1f50cfa95ec68e14eeba",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://s3fs.readthedocs.io/en/latest/api.html",
+        "https://s3fs.readthedocs.io/en/latest/changelog.html",
+        "https://s3fs.readthedocs.io/en/latest/code-of-conduct.html",
+        "https://s3fs.readthedocs.io/en/latest/development.html",
+        "https://s3fs.readthedocs.io/en/latest/genindex.html",
+        "https://s3fs.readthedocs.io/en/latest/install.html",
+        "https://s3fs.readthedocs.io/en/latest/py-modindex.html",
+        "https://s3fs.readthedocs.io/en/latest/search.html"
+      ],
+      "origin_truncated": false,
+      "project": "s3fs",
+      "rank": 47,
+      "root_url": "https://s3fs.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 33,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 35737,
+        "content_type": "text/html",
+        "etag": "\"6a674509-8b99\"",
+        "final_url": "https://tqdm.github.io",
+        "last_modified": "Mon, 27 Jul 2026 11:46:17 GMT",
+        "redirects": [],
+        "requested_url": "https://tqdm.github.io",
+        "response_sha256": "c01ddefc412fc0a2d0a2102f88fc572c4dfe340afea441d8d48100bf0d3ec255",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://tqdm.github.io/PyData2019/slides.html",
+        "https://tqdm.github.io/merch",
+        "https://tqdm.github.io/releases",
+        "https://tqdm.github.io/tqdm",
+        "https://tqdm.github.io/video"
+      ],
+      "origin_truncated": false,
+      "project": "tqdm",
+      "rank": 48,
+      "root_url": "https://tqdm.github.io",
+      "sitemap_population_size": 28
+    },
+    {
+      "coverage_status": "coverage-not-falsified",
+      "eligible_landing_links": 24,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 44135,
+        "content_type": "text/html",
+        "etag": null,
+        "final_url": "https://starlette.dev/",
+        "last_modified": null,
+        "redirects": [],
+        "requested_url": "https://starlette.dev/",
+        "response_sha256": "a1451dc62d448c6ec03784d7859d6b546a60bd435793d34bd721202dbef08b79",
+        "status": 200
+      },
+      "missing_landing_links": [],
+      "origin_truncated": false,
+      "project": "starlette",
+      "rank": 49,
+      "root_url": "https://starlette.dev/",
+      "sitemap_population_size": 24
+    },
+    {
+      "coverage_status": "coverage-not-falsified",
+      "eligible_landing_links": 14,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 48099,
+        "content_type": "text/html",
+        "etag": null,
+        "final_url": "https://uvicorn.dev/",
+        "last_modified": null,
+        "redirects": [],
+        "requested_url": "https://uvicorn.dev/",
+        "response_sha256": "825108c736b2d09c844301c94bf48cc31f07cb83192525448e40646d3fb25b95",
+        "status": 200
+      },
+      "missing_landing_links": [],
+      "origin_truncated": false,
+      "project": "uvicorn",
+      "rank": 50,
+      "root_url": "https://uvicorn.dev/",
+      "sitemap_population_size": 14
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 35,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 29550,
+        "content_type": "text/html",
+        "etag": "W/\"a0b429b1291506fc75993a991e3ba7d3\"",
+        "final_url": "https://docs.aiohttp.org/en/stable/",
+        "last_modified": "Wed, 22 Jul 2026 22:17:26 GMT",
+        "redirects": [],
+        "requested_url": "https://docs.aiohttp.org/en/stable/",
+        "response_sha256": "ae8dd73b80b9375dfc65a65f573d80e9e9da98cda5c20d5aaaea135d6713bf98",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://docs.aiohttp.org/en/stable/abc.html",
+        "https://docs.aiohttp.org/en/stable/built_with.html",
+        "https://docs.aiohttp.org/en/stable/changes.html",
+        "https://docs.aiohttp.org/en/stable/client.html",
+        "https://docs.aiohttp.org/en/stable/client_advanced.html",
+        "https://docs.aiohttp.org/en/stable/client_middleware_cookbook.html",
+        "https://docs.aiohttp.org/en/stable/client_quickstart.html",
+        "https://docs.aiohttp.org/en/stable/client_reference.html",
+        "https://docs.aiohttp.org/en/stable/contributing.html",
+        "https://docs.aiohttp.org/en/stable/deployment.html",
+        "https://docs.aiohttp.org/en/stable/essays.html",
+        "https://docs.aiohttp.org/en/stable/external.html",
+        "https://docs.aiohttp.org/en/stable/faq.html",
+        "https://docs.aiohttp.org/en/stable/glossary.html",
+        "https://docs.aiohttp.org/en/stable/http_request_lifecycle.html",
+        "https://docs.aiohttp.org/en/stable/logging.html",
+        "https://docs.aiohttp.org/en/stable/misc.html",
+        "https://docs.aiohttp.org/en/stable/multipart.html",
+        "https://docs.aiohttp.org/en/stable/multipart_reference.html",
+        "https://docs.aiohttp.org/en/stable/powered_by.html",
+        "https://docs.aiohttp.org/en/stable/streams.html",
+        "https://docs.aiohttp.org/en/stable/structures.html",
+        "https://docs.aiohttp.org/en/stable/testing.html",
+        "https://docs.aiohttp.org/en/stable/third_party.html",
+        "https://docs.aiohttp.org/en/stable/threat_model.html",
+        "https://docs.aiohttp.org/en/stable/tracing_reference.html",
+        "https://docs.aiohttp.org/en/stable/utilities.html",
+        "https://docs.aiohttp.org/en/stable/web.html",
+        "https://docs.aiohttp.org/en/stable/web_advanced.html",
+        "https://docs.aiohttp.org/en/stable/web_lowlevel.html",
+        "https://docs.aiohttp.org/en/stable/web_quickstart.html",
+        "https://docs.aiohttp.org/en/stable/web_reference.html",
+        "https://docs.aiohttp.org/en/stable/websocket_utilities.html",
+        "https://docs.aiohttp.org/en/stable/whats_new_3_0.html"
+      ],
+      "origin_truncated": false,
+      "project": "aiohttp",
+      "rank": 51,
+      "root_url": "https://docs.aiohttp.org/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 8,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 74116,
+        "content_type": "text/html",
+        "etag": "W/\"673c6981a6cd304ee77c2523592fe94b\"",
+        "final_url": "https://yarl.aio-libs.org/en/latest/",
+        "last_modified": "Mon, 20 Jul 2026 00:59:58 GMT",
+        "redirects": [],
+        "requested_url": "https://yarl.aio-libs.org/en/latest/",
+        "response_sha256": "659e1e0f48219d60530057108d0d61fb88486eadee8d62e1f9dffb393faceb29",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://yarl.aio-libs.org/en/latest/api/",
+        "https://yarl.aio-libs.org/en/latest/changes/",
+        "https://yarl.aio-libs.org/en/latest/contributing/guidelines/",
+        "https://yarl.aio-libs.org/en/latest/contributing/release_guide/",
+        "https://yarl.aio-libs.org/en/latest/genindex/",
+        "https://yarl.aio-libs.org/en/latest/py-modindex/",
+        "https://yarl.aio-libs.org/en/latest/search/"
+      ],
+      "origin_truncated": false,
+      "project": "yarl",
+      "rank": 53,
+      "root_url": "https://yarl.aio-libs.org/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 2,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 22865,
+        "content_type": "text/html",
+        "etag": "W/\"1ed2d5731b4bc625cfac247e49fec5b4\"",
+        "final_url": "https://rpds.readthedocs.io/en/latest/",
+        "last_modified": "Mon, 06 May 2024 13:17:30 GMT",
+        "redirects": [],
+        "requested_url": "https://rpds.readthedocs.io/en/latest/",
+        "response_sha256": "984cc37e5e35b8a28fc2290986837ab8115fb50fdf49d4c4d19a9be3b479d609",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://rpds.readthedocs.io/en/latest/api/"
+      ],
+      "origin_truncated": false,
+      "project": "rpds-py",
+      "rank": 54,
+      "root_url": "https://rpds.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 40,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 27143,
+        "content_type": "text/html",
+        "etag": "W/\"7b3348843138e3228c1912f7dc4a5fe2\"",
+        "final_url": "https://markdown-it-py.readthedocs.io/en/latest/",
+        "last_modified": "Fri, 08 Aug 2025 11:20:51 GMT",
+        "redirects": [],
+        "requested_url": "https://markdown-it-py.readthedocs.io/en/latest/",
+        "response_sha256": "976fbfc1022c71998ee868e9a0ddd2f4fc46152a8b8900ecffd297df7036e92f",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://markdown-it-py.readthedocs.io/en/latest/_sources/index.md",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.cli.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.cli.parse.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.common.entities.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.common.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.common.html_blocks.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.common.html_re.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.common.normalize_url.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.common.utils.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.helpers.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.helpers.parse_link_destination.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.helpers.parse_link_label.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.helpers.parse_link_title.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.main.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.parser_block.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.parser_core.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.parser_inline.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.presets.commonmark.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.presets.default.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.presets.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.presets.zero.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.renderer.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.ruler.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.rules_block.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.rules_block.state_block.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.rules_core.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.rules_core.state_core.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.rules_inline.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.rules_inline.state_inline.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.token.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.tree.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/api/markdown_it.utils.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/architecture.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/contributing.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/performance.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/plugins.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/security.html",
+        "https://markdown-it-py.readthedocs.io/en/latest/using.html"
+      ],
+      "origin_truncated": false,
+      "project": "markdown-it-py",
+      "rank": 55,
+      "root_url": "https://markdown-it-py.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 65,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 23150,
+        "content_type": "text/html",
+        "etag": "W/\"afd11e42260de30cd23792ba9aa91af6\"",
+        "final_url": "https://rich.readthedocs.io/en/latest/",
+        "last_modified": "Fri, 29 Aug 2025 18:00:27 GMT",
+        "redirects": [],
+        "requested_url": "https://rich.readthedocs.io/en/latest/",
+        "response_sha256": "3fd641e1bfaae4fe23f1e8876eca15b05d19eb05c1d033116c01359f15d8ed9f",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://rich.readthedocs.io/en/latest/appendix.html",
+        "https://rich.readthedocs.io/en/latest/appendix/box.html",
+        "https://rich.readthedocs.io/en/latest/appendix/colors.html",
+        "https://rich.readthedocs.io/en/latest/columns.html",
+        "https://rich.readthedocs.io/en/latest/console.html",
+        "https://rich.readthedocs.io/en/latest/genindex.html",
+        "https://rich.readthedocs.io/en/latest/group.html",
+        "https://rich.readthedocs.io/en/latest/highlighting.html",
+        "https://rich.readthedocs.io/en/latest/introduction.html",
+        "https://rich.readthedocs.io/en/latest/layout.html",
+        "https://rich.readthedocs.io/en/latest/live.html",
+        "https://rich.readthedocs.io/en/latest/logging.html",
+        "https://rich.readthedocs.io/en/latest/markdown.html",
+        "https://rich.readthedocs.io/en/latest/markup.html",
+        "https://rich.readthedocs.io/en/latest/padding.html",
+        "https://rich.readthedocs.io/en/latest/panel.html",
+        "https://rich.readthedocs.io/en/latest/pretty.html",
+        "https://rich.readthedocs.io/en/latest/progress.html",
+        "https://rich.readthedocs.io/en/latest/prompt.html",
+        "https://rich.readthedocs.io/en/latest/protocol.html",
+        "https://rich.readthedocs.io/en/latest/py-modindex.html",
+        "https://rich.readthedocs.io/en/latest/reference.html",
+        "https://rich.readthedocs.io/en/latest/reference/abc.html",
+        "https://rich.readthedocs.io/en/latest/reference/align.html",
+        "https://rich.readthedocs.io/en/latest/reference/bar.html",
+        "https://rich.readthedocs.io/en/latest/reference/color.html",
+        "https://rich.readthedocs.io/en/latest/reference/columns.html",
+        "https://rich.readthedocs.io/en/latest/reference/console.html",
+        "https://rich.readthedocs.io/en/latest/reference/emoji.html",
+        "https://rich.readthedocs.io/en/latest/reference/highlighter.html",
+        "https://rich.readthedocs.io/en/latest/reference/init.html",
+        "https://rich.readthedocs.io/en/latest/reference/json.html",
+        "https://rich.readthedocs.io/en/latest/reference/layout.html",
+        "https://rich.readthedocs.io/en/latest/reference/live.html",
+        "https://rich.readthedocs.io/en/latest/reference/logging.html",
+        "https://rich.readthedocs.io/en/latest/reference/markdown.html",
+        "https://rich.readthedocs.io/en/latest/reference/markup.html",
+        "https://rich.readthedocs.io/en/latest/reference/measure.html",
+        "https://rich.readthedocs.io/en/latest/reference/padding.html",
+        "https://rich.readthedocs.io/en/latest/reference/panel.html",
+        "https://rich.readthedocs.io/en/latest/reference/pretty.html",
+        "https://rich.readthedocs.io/en/latest/reference/progress.html",
+        "https://rich.readthedocs.io/en/latest/reference/progress_bar.html",
+        "https://rich.readthedocs.io/en/latest/reference/prompt.html",
+        "https://rich.readthedocs.io/en/latest/reference/protocol.html",
+        "https://rich.readthedocs.io/en/latest/reference/rule.html",
+        "https://rich.readthedocs.io/en/latest/reference/segment.html",
+        "https://rich.readthedocs.io/en/latest/reference/spinner.html",
+        "https://rich.readthedocs.io/en/latest/reference/status.html",
+        "https://rich.readthedocs.io/en/latest/reference/style.html",
+        "https://rich.readthedocs.io/en/latest/reference/styled.html",
+        "https://rich.readthedocs.io/en/latest/reference/syntax.html",
+        "https://rich.readthedocs.io/en/latest/reference/table.html",
+        "https://rich.readthedocs.io/en/latest/reference/text.html",
+        "https://rich.readthedocs.io/en/latest/reference/theme.html",
+        "https://rich.readthedocs.io/en/latest/reference/traceback.html",
+        "https://rich.readthedocs.io/en/latest/reference/tree.html",
+        "https://rich.readthedocs.io/en/latest/search.html",
+        "https://rich.readthedocs.io/en/latest/style.html",
+        "https://rich.readthedocs.io/en/latest/syntax.html",
+        "https://rich.readthedocs.io/en/latest/tables.html",
+        "https://rich.readthedocs.io/en/latest/text.html",
+        "https://rich.readthedocs.io/en/latest/traceback.html",
+        "https://rich.readthedocs.io/en/latest/tree.html"
+      ],
+      "origin_truncated": false,
+      "project": "rich",
+      "rank": 56,
+      "root_url": "https://rich.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 11,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 35895,
+        "content_type": "text/html",
+        "etag": "W/\"fa25b2b2fb707d92bc0a7bad08deadb3\"",
+        "final_url": "https://python-jsonschema.readthedocs.io/en/stable/",
+        "last_modified": "Wed, 07 Jan 2026 13:22:54 GMT",
+        "redirects": [],
+        "requested_url": "https://python-jsonschema.readthedocs.io/en/stable/",
+        "response_sha256": "b667a135fdef55245a0453265eca47e70ede7569ba059cef82d34b3f85d6670c",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://python-jsonschema.readthedocs.io/en/stable/api/",
+        "https://python-jsonschema.readthedocs.io/en/stable/api/jsonschema/exceptions/",
+        "https://python-jsonschema.readthedocs.io/en/stable/api/jsonschema/protocols/",
+        "https://python-jsonschema.readthedocs.io/en/stable/api/jsonschema/validators/",
+        "https://python-jsonschema.readthedocs.io/en/stable/creating/",
+        "https://python-jsonschema.readthedocs.io/en/stable/errors/",
+        "https://python-jsonschema.readthedocs.io/en/stable/faq/",
+        "https://python-jsonschema.readthedocs.io/en/stable/genindex/",
+        "https://python-jsonschema.readthedocs.io/en/stable/referencing/",
+        "https://python-jsonschema.readthedocs.io/en/stable/validate/"
+      ],
+      "origin_truncated": false,
+      "project": "jsonschema",
+      "rank": 57,
+      "root_url": "https://python-jsonschema.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 7,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 36369,
+        "content_type": "text/html",
+        "etag": "W/\"2e8148ee4e6bbe80684d34f84025613e\"",
+        "final_url": "https://multidict.aio-libs.org/en/stable/",
+        "last_modified": "Mon, 26 Jan 2026 01:16:40 GMT",
+        "redirects": [],
+        "requested_url": "https://multidict.aio-libs.org/en/stable/",
+        "response_sha256": "386a62eca3fdba1a13dfee89f1c0ba2d726c8b4f6deaa411cf225b75d57de9d2",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://multidict.aio-libs.org/en/stable/benchmark/",
+        "https://multidict.aio-libs.org/en/stable/changes/",
+        "https://multidict.aio-libs.org/en/stable/genindex/",
+        "https://multidict.aio-libs.org/en/stable/multidict/",
+        "https://multidict.aio-libs.org/en/stable/py-modindex/",
+        "https://multidict.aio-libs.org/en/stable/search/"
+      ],
+      "origin_truncated": false,
+      "project": "multidict",
+      "rank": 58,
+      "root_url": "https://multidict.aio-libs.org/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 163,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 153352,
+        "content_type": "text/html",
+        "etag": null,
+        "final_url": "https://fastapi.tiangolo.com/",
+        "last_modified": null,
+        "redirects": [],
+        "requested_url": "https://fastapi.tiangolo.com/",
+        "response_sha256": "ccee68a4865df73b0962297f504907c016902fdf54f6c72aa807d315ebb2d463",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://fastapi.tiangolo.com/de/",
+        "https://fastapi.tiangolo.com/es/",
+        "https://fastapi.tiangolo.com/fr/",
+        "https://fastapi.tiangolo.com/hi/",
+        "https://fastapi.tiangolo.com/ja/",
+        "https://fastapi.tiangolo.com/ko/",
+        "https://fastapi.tiangolo.com/pt/",
+        "https://fastapi.tiangolo.com/ru/",
+        "https://fastapi.tiangolo.com/tr/",
+        "https://fastapi.tiangolo.com/uk/",
+        "https://fastapi.tiangolo.com/zh-hant/",
+        "https://fastapi.tiangolo.com/zh/"
+      ],
+      "origin_truncated": false,
+      "project": "fastapi",
+      "rank": 59,
+      "root_url": "https://fastapi.tiangolo.com/",
+      "sitemap_population_size": 151
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 8,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 19219,
+        "content_type": "text/html",
+        "etag": "W/\"35f70162954f13713273a57fc3e021fa\"",
+        "final_url": "https://propcache.aio-libs.org/en/latest/",
+        "last_modified": "Sun, 17 May 2026 19:37:35 GMT",
+        "redirects": [],
+        "requested_url": "https://propcache.aio-libs.org/en/latest/",
+        "response_sha256": "3d02aa2f99f2e39144ab9e20f16b6b9c429ad4c026339604f58f3ff6a92946c9",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://propcache.aio-libs.org/en/latest/api/",
+        "https://propcache.aio-libs.org/en/latest/changes/",
+        "https://propcache.aio-libs.org/en/latest/contributing/guidelines/",
+        "https://propcache.aio-libs.org/en/latest/contributing/release_guide/",
+        "https://propcache.aio-libs.org/en/latest/genindex/",
+        "https://propcache.aio-libs.org/en/latest/py-modindex/",
+        "https://propcache.aio-libs.org/en/latest/search/"
+      ],
+      "origin_truncated": false,
+      "project": "propcache",
+      "rank": 60,
+      "root_url": "https://propcache.aio-libs.org/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 13,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 8341,
+        "content_type": "text/html",
+        "etag": "W/\"2c435ea235b1b4d5a175c43297eb5977\"",
+        "final_url": "https://wheel.readthedocs.io/en/stable/",
+        "last_modified": "Tue, 11 Aug 2026 21:56:40 GMT",
+        "redirects": [],
+        "requested_url": "https://wheel.readthedocs.io/en/stable/",
+        "response_sha256": "112957bc548ecfc28ee0641f24ecab96dfc729b2c91917ce09b143c9ae931572",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://wheel.readthedocs.io/en/stable/development.html",
+        "https://wheel.readthedocs.io/en/stable/genindex.html",
+        "https://wheel.readthedocs.io/en/stable/installing.html",
+        "https://wheel.readthedocs.io/en/stable/news.html",
+        "https://wheel.readthedocs.io/en/stable/quickstart.html",
+        "https://wheel.readthedocs.io/en/stable/reference/index.html",
+        "https://wheel.readthedocs.io/en/stable/reference/wheel_convert.html",
+        "https://wheel.readthedocs.io/en/stable/reference/wheel_info.html",
+        "https://wheel.readthedocs.io/en/stable/reference/wheel_pack.html",
+        "https://wheel.readthedocs.io/en/stable/reference/wheel_tags.html",
+        "https://wheel.readthedocs.io/en/stable/reference/wheel_unpack.html",
+        "https://wheel.readthedocs.io/en/stable/user_guide.html"
+      ],
+      "origin_truncated": false,
+      "project": "wheel",
+      "rank": 62,
+      "root_url": "https://wheel.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 65,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 40696,
+        "content_type": "text/html",
+        "etag": "W/\"e219213247d0daf5b0ca13401824481f\"",
+        "final_url": "https://websockets.readthedocs.io/en/stable/",
+        "last_modified": "Thu, 30 Jul 2026 21:44:42 GMT",
+        "redirects": [],
+        "requested_url": "https://websockets.readthedocs.io/en/stable/",
+        "response_sha256": "bcecfd4cddc96c657941488b28c4286b63ca1b9e1e75da64e2e436d305eaa4ea",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://websockets.readthedocs.io/en/stable/deploy/fly.html",
+        "https://websockets.readthedocs.io/en/stable/deploy/haproxy.html",
+        "https://websockets.readthedocs.io/en/stable/deploy/heroku.html",
+        "https://websockets.readthedocs.io/en/stable/deploy/index.html",
+        "https://websockets.readthedocs.io/en/stable/deploy/koyeb.html",
+        "https://websockets.readthedocs.io/en/stable/deploy/kubernetes.html",
+        "https://websockets.readthedocs.io/en/stable/deploy/nginx.html",
+        "https://websockets.readthedocs.io/en/stable/deploy/render.html",
+        "https://websockets.readthedocs.io/en/stable/deploy/supervisor.html",
+        "https://websockets.readthedocs.io/en/stable/faq/asyncio.html",
+        "https://websockets.readthedocs.io/en/stable/faq/client.html",
+        "https://websockets.readthedocs.io/en/stable/faq/connection.html",
+        "https://websockets.readthedocs.io/en/stable/faq/index.html",
+        "https://websockets.readthedocs.io/en/stable/faq/misc.html",
+        "https://websockets.readthedocs.io/en/stable/faq/server.html",
+        "https://websockets.readthedocs.io/en/stable/howto/autoreload.html",
+        "https://websockets.readthedocs.io/en/stable/howto/debugging.html",
+        "https://websockets.readthedocs.io/en/stable/howto/django.html",
+        "https://websockets.readthedocs.io/en/stable/howto/encryption.html",
+        "https://websockets.readthedocs.io/en/stable/howto/extensions.html",
+        "https://websockets.readthedocs.io/en/stable/howto/index.html",
+        "https://websockets.readthedocs.io/en/stable/howto/patterns.html",
+        "https://websockets.readthedocs.io/en/stable/howto/sansio.html",
+        "https://websockets.readthedocs.io/en/stable/howto/upgrade.html",
+        "https://websockets.readthedocs.io/en/stable/intro/examples.html",
+        "https://websockets.readthedocs.io/en/stable/intro/index.html",
+        "https://websockets.readthedocs.io/en/stable/intro/tutorial1.html",
+        "https://websockets.readthedocs.io/en/stable/intro/tutorial2.html",
+        "https://websockets.readthedocs.io/en/stable/intro/tutorial3.html",
+        "https://websockets.readthedocs.io/en/stable/project/changelog.html",
+        "https://websockets.readthedocs.io/en/stable/project/contributing.html",
+        "https://websockets.readthedocs.io/en/stable/project/index.html",
+        "https://websockets.readthedocs.io/en/stable/project/license.html",
+        "https://websockets.readthedocs.io/en/stable/project/sponsoring.html",
+        "https://websockets.readthedocs.io/en/stable/project/support.html",
+        "https://websockets.readthedocs.io/en/stable/project/tidelift.html",
+        "https://websockets.readthedocs.io/en/stable/reference/asyncio/client.html",
+        "https://websockets.readthedocs.io/en/stable/reference/asyncio/server.html",
+        "https://websockets.readthedocs.io/en/stable/reference/datastructures.html",
+        "https://websockets.readthedocs.io/en/stable/reference/exceptions.html",
+        "https://websockets.readthedocs.io/en/stable/reference/extensions.html",
+        "https://websockets.readthedocs.io/en/stable/reference/features.html",
+        "https://websockets.readthedocs.io/en/stable/reference/index.html",
+        "https://websockets.readthedocs.io/en/stable/reference/legacy/client.html",
+        "https://websockets.readthedocs.io/en/stable/reference/legacy/server.html",
+        "https://websockets.readthedocs.io/en/stable/reference/sansio/client.html",
+        "https://websockets.readthedocs.io/en/stable/reference/sansio/server.html",
+        "https://websockets.readthedocs.io/en/stable/reference/sync/client.html",
+        "https://websockets.readthedocs.io/en/stable/reference/sync/server.html",
+        "https://websockets.readthedocs.io/en/stable/reference/trio/client.html",
+        "https://websockets.readthedocs.io/en/stable/reference/trio/server.html",
+        "https://websockets.readthedocs.io/en/stable/reference/types.html",
+        "https://websockets.readthedocs.io/en/stable/reference/variables.html",
+        "https://websockets.readthedocs.io/en/stable/topics/authentication.html",
+        "https://websockets.readthedocs.io/en/stable/topics/broadcast.html",
+        "https://websockets.readthedocs.io/en/stable/topics/compression.html",
+        "https://websockets.readthedocs.io/en/stable/topics/index.html",
+        "https://websockets.readthedocs.io/en/stable/topics/keepalive.html",
+        "https://websockets.readthedocs.io/en/stable/topics/logging.html",
+        "https://websockets.readthedocs.io/en/stable/topics/memory.html",
+        "https://websockets.readthedocs.io/en/stable/topics/performance.html",
+        "https://websockets.readthedocs.io/en/stable/topics/proxies.html",
+        "https://websockets.readthedocs.io/en/stable/topics/routing.html",
+        "https://websockets.readthedocs.io/en/stable/topics/security.html"
+      ],
+      "origin_truncated": false,
+      "project": "websockets",
+      "rank": 63,
+      "root_url": "https://websockets.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 6,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 14247,
+        "content_type": "text/html",
+        "etag": "W/\"8a988fb657025db1e4bfbc7e26058254\"",
+        "final_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "last_modified": "Wed, 13 Jul 2022 21:28:16 GMT",
+        "redirects": [],
+        "requested_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "response_sha256": "bd0ce0e529b58aeab2ef34aaaa9275288d595b15ef2e51965302bb9dccdff969",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://pyasn1.readthedocs.io/en/latest/changelog.html",
+        "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "https://pyasn1.readthedocs.io/en/latest/download.html",
+        "https://pyasn1.readthedocs.io/en/latest/example-use-case.html",
+        "https://pyasn1.readthedocs.io/en/latest/license.html",
+        "https://pyasn1.readthedocs.io/en/latest/pyasn1/contents.html"
+      ],
+      "origin_truncated": false,
+      "project": "pyasn1",
+      "rank": 64,
+      "root_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 6,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 18872,
+        "content_type": "text/html",
+        "etag": "W/\"47e93259fc2281073292c056753340e6\"",
+        "final_url": "https://referencing.readthedocs.io/en/stable/",
+        "last_modified": "Mon, 13 Oct 2025 15:22:47 GMT",
+        "redirects": [],
+        "requested_url": "https://referencing.readthedocs.io/en/stable/",
+        "response_sha256": "da17b656f762d74e23fd46a4b78f5bec43cc223a89ea44afd247803ed9f6a536",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://referencing.readthedocs.io/en/stable/api/",
+        "https://referencing.readthedocs.io/en/stable/changes/",
+        "https://referencing.readthedocs.io/en/stable/compatibility/",
+        "https://referencing.readthedocs.io/en/stable/intro/",
+        "https://referencing.readthedocs.io/en/stable/schema-packages/"
+      ],
+      "origin_truncated": false,
+      "project": "referencing",
+      "rank": 65,
+      "root_url": "https://referencing.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 6,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 30459,
+        "content_type": "text/html",
+        "etag": "W/\"620738d933457722eef90937c4f7558b\"",
+        "final_url": "https://aiohappyeyeballs.aio-libs.org/en/latest/",
+        "last_modified": "Wed, 01 Jul 2026 17:09:32 GMT",
+        "redirects": [],
+        "requested_url": "https://aiohappyeyeballs.aio-libs.org/en/latest/",
+        "response_sha256": "271bf445a22d86c4ea4deed062945d6cbbd02c707d030ad15831e5e39835e209",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://aiohappyeyeballs.aio-libs.org/en/latest/api_reference.html",
+        "https://aiohappyeyeballs.aio-libs.org/en/latest/changelog.html",
+        "https://aiohappyeyeballs.aio-libs.org/en/latest/contributing.html",
+        "https://aiohappyeyeballs.aio-libs.org/en/latest/installation.html",
+        "https://aiohappyeyeballs.aio-libs.org/en/latest/usage.html"
+      ],
+      "origin_truncated": false,
+      "project": "aiohappyeyeballs",
+      "rank": 66,
+      "root_url": "https://aiohappyeyeballs.aio-libs.org/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 6,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 18158,
+        "content_type": "text/html",
+        "etag": "W/\"2186b4f1f21589d2fe43268da1edfa13\"",
+        "final_url": "https://frozenlist.aio-libs.org/en/latest/",
+        "last_modified": "Wed, 03 Jun 2026 23:52:43 GMT",
+        "redirects": [],
+        "requested_url": "https://frozenlist.aio-libs.org/en/latest/",
+        "response_sha256": "f4c051542a542474e99992103cb3a955a0531a5fc98946e495a7884b82a1a008",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://frozenlist.aio-libs.org/en/latest/changes/",
+        "https://frozenlist.aio-libs.org/en/latest/contributing/guidelines/",
+        "https://frozenlist.aio-libs.org/en/latest/contributing/release_guide/",
+        "https://frozenlist.aio-libs.org/en/latest/genindex/",
+        "https://frozenlist.aio-libs.org/en/latest/search/"
+      ],
+      "origin_truncated": false,
+      "project": "frozenlist",
+      "rank": 67,
+      "root_url": "https://frozenlist.aio-libs.org/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 2,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 20201,
+        "content_type": "text/html",
+        "etag": "W/\"4fa9258c9d2bda3ab735beafa201bcb9\"",
+        "final_url": "https://jsonschema-specifications.readthedocs.io/en/latest/",
+        "last_modified": "Sat, 25 Jul 2026 14:39:02 GMT",
+        "redirects": [],
+        "requested_url": "https://jsonschema-specifications.readthedocs.io/en/latest/",
+        "response_sha256": "ddfed1adb3ea5317d33cae10442f20efa08b09b3b45024214ec84b443e45639d",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://jsonschema-specifications.readthedocs.io/en/latest/api/"
+      ],
+      "origin_truncated": false,
+      "project": "jsonschema-specifications",
+      "rank": 68,
+      "root_url": "https://jsonschema-specifications.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 131,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 56641,
+        "content_type": "text/html",
+        "etag": "W/\"86c4c17767f4875a7c8e2b5cfe3f9e9c\"",
+        "final_url": "https://pillow.readthedocs.io/en/stable/",
+        "last_modified": "Wed, 01 Jul 2026 09:49:55 GMT",
+        "redirects": [],
+        "requested_url": "https://pillow.readthedocs.io/en/stable/",
+        "response_sha256": "09f183a737dc39918f7a074957fc33d8cf897bb5ea54143efe8b0b61dc45e2e4",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://pillow.readthedocs.io/en/stable/PIL.html",
+        "https://pillow.readthedocs.io/en/stable/about.html",
+        "https://pillow.readthedocs.io/en/stable/deprecations.html",
+        "https://pillow.readthedocs.io/en/stable/genindex.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/appendices.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/concepts.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/index.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/overview.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/security.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/text-anchors.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/third-party-plugins.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/tutorial.html",
+        "https://pillow.readthedocs.io/en/stable/handbook/writing-your-own-image-plugin.html",
+        "https://pillow.readthedocs.io/en/stable/installation/basic-installation.html",
+        "https://pillow.readthedocs.io/en/stable/installation/building-from-source.html",
+        "https://pillow.readthedocs.io/en/stable/installation/index.html",
+        "https://pillow.readthedocs.io/en/stable/installation/platform-support.html",
+        "https://pillow.readthedocs.io/en/stable/installation/python-support.html",
+        "https://pillow.readthedocs.io/en/stable/porting.html",
+        "https://pillow.readthedocs.io/en/stable/py-modindex.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ExifTags.html",
+        "https://pillow.readthedocs.io/en/stable/reference/Image.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageChops.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageCms.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageColor.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageDraw.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageEnhance.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageFile.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageFilter.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageFont.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageGrab.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageMath.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageMorph.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageOps.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImagePalette.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImagePath.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageQt.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageSequence.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageShow.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageStat.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageText.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageTk.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageTransform.html",
+        "https://pillow.readthedocs.io/en/stable/reference/ImageWin.html",
+        "https://pillow.readthedocs.io/en/stable/reference/JpegPresets.html",
+        "https://pillow.readthedocs.io/en/stable/reference/PSDraw.html",
+        "https://pillow.readthedocs.io/en/stable/reference/PixelAccess.html",
+        "https://pillow.readthedocs.io/en/stable/reference/TiffTags.html",
+        "https://pillow.readthedocs.io/en/stable/reference/arrow_support.html",
+        "https://pillow.readthedocs.io/en/stable/reference/block_allocator.html",
+        "https://pillow.readthedocs.io/en/stable/reference/c_extension_debugging.html",
+        "https://pillow.readthedocs.io/en/stable/reference/features.html",
+        "https://pillow.readthedocs.io/en/stable/reference/index.html",
+        "https://pillow.readthedocs.io/en/stable/reference/internal_design.html",
+        "https://pillow.readthedocs.io/en/stable/reference/internal_modules.html",
+        "https://pillow.readthedocs.io/en/stable/reference/limits.html",
+        "https://pillow.readthedocs.io/en/stable/reference/open_files.html",
+        "https://pillow.readthedocs.io/en/stable/reference/plugins.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/10.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/10.0.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/10.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/10.2.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/10.3.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/10.4.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/11.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/11.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/11.2.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/11.3.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/12.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/12.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/12.1.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/12.2.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/12.3.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/2.3.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/2.3.2.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/2.5.2.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/2.6.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/2.7.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/2.8.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/3.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/3.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/3.1.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/3.1.2.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/3.2.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/3.3.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/3.3.2.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/3.4.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/4.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/4.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/4.1.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/4.2.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/4.2.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/4.3.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/5.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/5.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/5.2.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/5.3.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/5.4.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/5.4.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/6.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/6.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/6.2.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/6.2.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/6.2.2.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/7.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/7.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/7.1.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/7.1.2.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/7.2.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.0.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.1.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.1.2.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.2.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.3.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.3.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.3.2.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/8.4.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/9.0.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/9.0.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/9.1.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/9.1.1.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/9.2.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/9.3.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/9.4.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/9.5.0.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/index.html",
+        "https://pillow.readthedocs.io/en/stable/releasenotes/versioning.html"
+      ],
+      "origin_truncated": false,
+      "project": "pillow",
+      "rank": 70,
+      "root_url": "https://pillow.readthedocs.io/en/stable/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 15,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 23455,
+        "content_type": "text/html",
+        "etag": "W/\"d1fa1881eef35fa24899713528016c77\"",
+        "final_url": "https://virtualenv.pypa.io/en/latest/",
+        "last_modified": "Sat, 15 Aug 2026 07:18:51 GMT",
+        "redirects": [],
+        "requested_url": "https://virtualenv.pypa.io/en/latest/",
+        "response_sha256": "d7cf15ac62799bf94204a09cd8f15b23a46ac009b924fd5c12b1debc3c14c174",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://virtualenv.pypa.io/en/latest/changelog.html",
+        "https://virtualenv.pypa.io/en/latest/development.html",
+        "https://virtualenv.pypa.io/en/latest/explanation.html",
+        "https://virtualenv.pypa.io/en/latest/how-to/install.html",
+        "https://virtualenv.pypa.io/en/latest/how-to/usage.html",
+        "https://virtualenv.pypa.io/en/latest/plugin/api.html",
+        "https://virtualenv.pypa.io/en/latest/plugin/architecture.html",
+        "https://virtualenv.pypa.io/en/latest/plugin/how-to.html",
+        "https://virtualenv.pypa.io/en/latest/plugin/index.html",
+        "https://virtualenv.pypa.io/en/latest/plugin/tutorial.html",
+        "https://virtualenv.pypa.io/en/latest/reference/api.html",
+        "https://virtualenv.pypa.io/en/latest/reference/cli.html",
+        "https://virtualenv.pypa.io/en/latest/reference/compatibility.html",
+        "https://virtualenv.pypa.io/en/latest/tutorial/getting-started.html"
+      ],
+      "origin_truncated": false,
+      "project": "virtualenv",
+      "rank": 73,
+      "root_url": "https://virtualenv.pypa.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 7,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 18832,
+        "content_type": "text/html",
+        "etag": "W/\"9e657191f5ff0cfbbfb18259d5b394ed\"",
+        "final_url": "https://importlib-metadata.readthedocs.io/en/latest/",
+        "last_modified": "Thu, 16 Jul 2026 01:37:16 GMT",
+        "redirects": [],
+        "requested_url": "https://importlib-metadata.readthedocs.io/en/latest/",
+        "response_sha256": "fba0d34299325711daae716c8a04e446cefa1e89e95aee4a9d8dff80b9645221",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://importlib-metadata.readthedocs.io/en/latest/api.html",
+        "https://importlib-metadata.readthedocs.io/en/latest/genindex.html",
+        "https://importlib-metadata.readthedocs.io/en/latest/history.html",
+        "https://importlib-metadata.readthedocs.io/en/latest/migration.html",
+        "https://importlib-metadata.readthedocs.io/en/latest/py-modindex.html",
+        "https://importlib-metadata.readthedocs.io/en/latest/search.html"
+      ],
+      "origin_truncated": false,
+      "project": "importlib-metadata",
+      "rank": 74,
+      "root_url": "https://importlib-metadata.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-not-falsified",
+      "eligible_landing_links": 243,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 1165706,
+        "content_type": "text/html",
+        "etag": "\"6a044c3e-11c98a\"",
+        "final_url": "https://textual.textualize.io/",
+        "last_modified": "Wed, 13 May 2026 10:02:38 GMT",
+        "redirects": [],
+        "requested_url": "https://textual.textualize.io/",
+        "response_sha256": "5fe641dcb2a0ba932430f11debe7e2f6415bb10bc973f0e4c61b1beeaa19fe67",
+        "status": 200
+      },
+      "missing_landing_links": [],
+      "origin_truncated": false,
+      "project": "textual",
+      "rank": 76,
+      "root_url": "https://textual.textualize.io/",
+      "sitemap_population_size": 301
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 5,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 16956,
+        "content_type": "text/html",
+        "etag": "W/\"06c30fc1fa960098fb124ddaa28f06cf\"",
+        "final_url": "https://sniffio.readthedocs.io/en/latest/",
+        "last_modified": "Fri, 06 Mar 2026 12:22:44 GMT",
+        "redirects": [],
+        "requested_url": "https://sniffio.readthedocs.io/en/latest/",
+        "response_sha256": "db0b88a825d3231a30cbc0e66cb2e3df0a140bf6adec3961541f1e7f47bb3791",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://sniffio.readthedocs.io/en/latest/genindex.html",
+        "https://sniffio.readthedocs.io/en/latest/history.html",
+        "https://sniffio.readthedocs.io/en/latest/py-modindex.html",
+        "https://sniffio.readthedocs.io/en/latest/search.html"
+      ],
+      "origin_truncated": false,
+      "project": "sniffio",
+      "rank": 80,
+      "root_url": "https://sniffio.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 5,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 24817,
+        "content_type": "text/html",
+        "etag": "W/\"ef93a37ca46fa5bfaf3e6dbe22dadad1\"",
+        "final_url": "https://tzdata.python.org",
+        "last_modified": "Fri, 24 Apr 2026 17:30:59 GMT",
+        "redirects": [],
+        "requested_url": "https://tzdata.python.org",
+        "response_sha256": "2db22fc9735cb25f767822207a7275203aa6526b08e2ec178c41968b02ea4c49",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://tzdata.python.org/genindex.html",
+        "https://tzdata.python.org/maintaining.html",
+        "https://tzdata.python.org/py-modindex.html",
+        "https://tzdata.python.org/search.html"
+      ],
+      "origin_truncated": false,
+      "project": "tzdata",
+      "rank": 81,
+      "root_url": "https://tzdata.python.org",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 12,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 11567,
+        "content_type": "text/html",
+        "etag": "W/\"68b9ea9933a6172d6a19d751642a8dce\"",
+        "final_url": "https://wrapt.readthedocs.io/en/master/",
+        "last_modified": "Tue, 28 Jul 2026 05:15:43 GMT",
+        "redirects": [],
+        "requested_url": "https://wrapt.readthedocs.io/en/master/",
+        "response_sha256": "5559e49f38f1b59015e088c39d8ff533cb6f1c646d7dc4c7851a37b60d8d5b13",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://wrapt.readthedocs.io/en/master/api.html",
+        "https://wrapt.readthedocs.io/en/master/benchmarks.html",
+        "https://wrapt.readthedocs.io/en/master/bundled.html",
+        "https://wrapt.readthedocs.io/en/master/changes.html",
+        "https://wrapt.readthedocs.io/en/master/decorators.html",
+        "https://wrapt.readthedocs.io/en/master/examples.html",
+        "https://wrapt.readthedocs.io/en/master/issues.html",
+        "https://wrapt.readthedocs.io/en/master/monkey.html",
+        "https://wrapt.readthedocs.io/en/master/quick-start.html",
+        "https://wrapt.readthedocs.io/en/master/typing.html",
+        "https://wrapt.readthedocs.io/en/master/wrappers.html"
+      ],
+      "origin_truncated": false,
+      "project": "wrapt",
+      "rank": 85,
+      "root_url": "https://wrapt.readthedocs.io/en/master/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 18,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 28138,
+        "content_type": "text/html",
+        "etag": "W/\"cdb831423df1cdbf7116cd1a71f77221\"",
+        "final_url": "https://greenlet.readthedocs.io/en/latest/",
+        "last_modified": "Mon, 10 Aug 2026 13:24:12 GMT",
+        "redirects": [],
+        "requested_url": "https://greenlet.readthedocs.io/en/latest/",
+        "response_sha256": "fb179b893ddb483d5f1954634382da2c5d44fe61012003979e51ef68b29d9de4",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://greenlet.readthedocs.io/en/latest/api.html",
+        "https://greenlet.readthedocs.io/en/latest/c_api.html",
+        "https://greenlet.readthedocs.io/en/latest/caveats.html",
+        "https://greenlet.readthedocs.io/en/latest/changes.html",
+        "https://greenlet.readthedocs.io/en/latest/contextvars.html",
+        "https://greenlet.readthedocs.io/en/latest/creating_executing_greenlets.html",
+        "https://greenlet.readthedocs.io/en/latest/development.html",
+        "https://greenlet.readthedocs.io/en/latest/genindex.html",
+        "https://greenlet.readthedocs.io/en/latest/greenlet.html",
+        "https://greenlet.readthedocs.io/en/latest/greenlet_gc.html",
+        "https://greenlet.readthedocs.io/en/latest/gui_example.html",
+        "https://greenlet.readthedocs.io/en/latest/history.html",
+        "https://greenlet.readthedocs.io/en/latest/py-modindex.html",
+        "https://greenlet.readthedocs.io/en/latest/python_threads.html",
+        "https://greenlet.readthedocs.io/en/latest/search.html",
+        "https://greenlet.readthedocs.io/en/latest/switching.html",
+        "https://greenlet.readthedocs.io/en/latest/tracing.html"
+      ],
+      "origin_truncated": false,
+      "project": "greenlet",
+      "rank": 87,
+      "root_url": "https://greenlet.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 6,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 14247,
+        "content_type": "text/html",
+        "etag": "W/\"8a988fb657025db1e4bfbc7e26058254\"",
+        "final_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "last_modified": "Wed, 13 Jul 2022 21:28:16 GMT",
+        "redirects": [],
+        "requested_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "response_sha256": "bd0ce0e529b58aeab2ef34aaaa9275288d595b15ef2e51965302bb9dccdff969",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://pyasn1.readthedocs.io/en/latest/changelog.html",
+        "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "https://pyasn1.readthedocs.io/en/latest/download.html",
+        "https://pyasn1.readthedocs.io/en/latest/example-use-case.html",
+        "https://pyasn1.readthedocs.io/en/latest/license.html",
+        "https://pyasn1.readthedocs.io/en/latest/pyasn1/contents.html"
+      ],
+      "origin_truncated": false,
+      "project": "pyasn1-modules",
+      "rank": 91,
+      "root_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 3,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 56598,
+        "content_type": "text/html",
+        "etag": "W/\"ebf45f981f2a2f3aa637c5fbf8dbd71b\"",
+        "final_url": "https://tenacity.readthedocs.io/en/latest/",
+        "last_modified": "Mon, 14 Aug 2023 13:22:05 GMT",
+        "redirects": [],
+        "requested_url": "https://tenacity.readthedocs.io/en/latest/",
+        "response_sha256": "5686185039f9fdbabb83fd9264fed03f18fb5c3ebfb43d99cc25a9df315dacff",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://tenacity.readthedocs.io/en/latest/api.html",
+        "https://tenacity.readthedocs.io/en/latest/changelog.html"
+      ],
+      "origin_truncated": false,
+      "project": "tenacity",
+      "rank": 95,
+      "root_url": "https://tenacity.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    },
+    {
+      "coverage_status": "coverage-failed",
+      "eligible_landing_links": 4,
+      "fetch": {
+        "attempts": 1,
+        "bytes": 135310,
+        "content_type": "text/html",
+        "etag": "W/\"eb1a959bef3ec5c5475dc2b16b80b70a\"",
+        "final_url": "https://distro.readthedocs.io/en/latest/",
+        "last_modified": "Mon, 29 Jun 2026 09:01:01 GMT",
+        "redirects": [],
+        "requested_url": "https://distro.readthedocs.io/en/latest/",
+        "response_sha256": "b711eceb4c2475962bf004711700b5d4c6bdfe20af41a2e7a261e510907da352",
+        "status": 200
+      },
+      "missing_landing_links": [
+        "https://distro.readthedocs.io/en/latest/_modules/distro/distro.html",
+        "https://distro.readthedocs.io/en/latest/genindex.html",
+        "https://distro.readthedocs.io/en/latest/py-modindex.html"
+      ],
+      "origin_truncated": false,
+      "project": "distro",
+      "rank": 99,
+      "root_url": "https://distro.readthedocs.io/en/latest/",
+      "sitemap_population_size": 1
+    }
+  ],
+  "stage": "sitemap-coverage-challenge",
+  "study": "code-sample-validity-census",
+  "summary": {
+    "coverage": {
+      "coverage-failed": 52,
+      "coverage-not-falsified": 6
+    },
+    "network_attempts_this_run": 0,
+    "redirect_hops": 0,
+    "request_attempts": 58,
+    "sitemap_roots_challenged": 58
+  }
+}
