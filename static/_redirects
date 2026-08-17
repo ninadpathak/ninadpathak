@@ -43,3 +43,6 @@
 /blog/memory-attribution-errors/ /articles/ai-memory-management-for-llms/ 301
 /articles/agent-memory-for-customer-support/ /articles/state-of-ai-agent-memory-2026/ 301
 /blog/agent-memory-for-customer-support/ /articles/state-of-ai-agent-memory-2026/ 301
+# Cluster-3 decision-framework merge: preserve the measured agent-memory owner.
+/articles/rag-vs-fine-tuning/ /articles/fine-tuning-vs-rag-for-agent-memory/ 301
+/blog/rag-vs-fine-tuning/ /articles/fine-tuning-vs-rag-for-agent-memory/ 301

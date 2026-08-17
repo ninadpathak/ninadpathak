@@ -48,7 +48,7 @@ Marketing context length describes how much input a model accepts. RULER disting
 
 Retrieval can still help because it selects a smaller set of relevant passages before generation. The benefit comes from reducing the amount of irrelevant input the model must navigate.
 
-For more on why RAG often beats long context, see [my comparison of RAG versus fine-tuning approaches](/articles/rag-vs-fine-tuning/).
+For more on why RAG often beats long context, see [my comparison of fine-tuning and RAG for agent memory](/articles/fine-tuning-vs-rag-for-agent-memory/).
 
 
 ## RULER and synthetic tests

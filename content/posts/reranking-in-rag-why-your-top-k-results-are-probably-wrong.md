@@ -198,7 +198,7 @@ Give it eight times the dimensions and you are still asking it to guess a relati
 
 The other argument I hear leans on massive context windows. The pitch is that you can pass all one hundred retrieved chunks straight to the language model and let it sort them out.
 
-I dug into that approach when comparing [Fine-Tuning vs RAG](/articles/rag-vs-fine-tuning/). Stuffing the context window grows your inference cost linearly and drags latency along with it.
+I dug into that approach when comparing [fine-tuning and RAG for agent memory](/articles/fine-tuning-vs-rag-for-agent-memory/). Stuffing the context window grows your inference cost linearly and drags latency along with it.
 
 Time to first token degrades noticeably once you are sending eighty thousand tokens on every request, the difference between an answer that appears instantly and one the user waits on.
 

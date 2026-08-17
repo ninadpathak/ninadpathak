@@ -147,4 +147,4 @@ For most agent memory use cases in 2026, the honest answer is RAG as the foundat
 
 Build the retrieval pipeline first, then add fine-tuning once you have real behavioral failures that retrieval cannot reach.
 
-I covered the retrieval fundamentals in [RAG vs fine-tuning](/articles/rag-vs-fine-tuning/) from a more general angle. Agent memory adds one constraint the general case does not: episodic and working memory are RAG problems with no second option, and that alone pushes RAG to the primary layer even in systems where fine-tuning earns a real role.
+Agent memory adds one constraint the general case does not: episodic and working memory are retrieval-and-state problems, not training-data problems. That pushes RAG and explicit state management to the primary layer even in systems where fine-tuning earns a real role.
