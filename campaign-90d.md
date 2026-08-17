@@ -139,6 +139,27 @@ The DOM in the skill is **verified by rendering it in a browser, not derived fro
 
 **Important links are destinations, not an inventory.** The footer listed five tools individually, splitting link equity five ways and diluting further with each addition. It now carries one `Tools` link to `/tools/`, which lists and describes each tool and is the tools cluster's owner page. A footer or nav slot holds a top-level destination a reader actually wants; the inventory lives on the page behind it.
 
+### The heading rule was 71% unmet the hour it landed
+
+`tools/audit_headings.py`, built 2026-08-17 immediately after the nested-heading rule became binding, because a craft rule with no instrument decays. First run over 90 published posts: **119 issues across 80 of them.**
+
+| Issue | Count |
+|---|---:|
+| Entirely flat — every heading an `h2`, no chain has steps | **64** |
+| A heading over fewer than 40 words of prose | 48 |
+| An `h2` owning exactly one `h3` | 7 |
+| A skipped heading level | 0 |
+
+Both cluster-4 articles written that same day are flat, because they were drafted before the skill reached v1.8.0. The flagship at position 8.3 is flat across 10 `h2`s.
+
+**Remediation is scoped by evidence, not by the audit count.** Restructuring 80 posts that earn nothing is worth less than making the next 60 pieces right, and the generator is already fixed. 61 of the 80 draw some impressions, but most of that is the `anthropic contextual retrieval` fan-out with no human behind it, so raw impressions is the wrong filter.
+
+The remediation set is posts carrying **30 or more impressions at position 20 or better** — roughly fifteen pages, plus the flagship because position 8.3 is the best asset on the site even though its traffic is machine. Everything else is fixed forward: the skill is at v1.8.0 and new work inherits the rule.
+
+**Deliberately not a CI gate yet.** Failing 64 of 90 posts on arrival is the mistake this campaign made twice in one day — with the cluster audit before it could pass, and with the rule_checker gate failing on inherited debt. It gates on regressions once the backlog is closer, the way the claim and rule_checker gates now do.
+
+One thing the audit found that the rule did not anticipate: only **4 posts have no table, diagram or visual at all**, so tables are common and diagrams are absent. The gap is not that the writing lacks structure, it is that structure is always expressed as a table. That is what the never-used `flowcharts.css` system is for.
+
 ### A link profile is a diagnostic for editorial substance
 
 Added 2026-08-17, and it changes what internal linking is for. **If every outbound link on a page fails the subject-of-the-sentence test, the page is telling you it has no natural neighbours.** The cause is almost always that the page holds an abstraction while other pages own each concrete piece of its argument, and an abstraction has no neighbours, so every link has to be manufactured. **Review the page. Do not replace the links.**
