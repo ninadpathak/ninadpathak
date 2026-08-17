@@ -92,6 +92,44 @@ jobs:
       - name: Guard cluster isolation and inbound linking
         run: python tools/audit_clusters.py --strict
 
+      # The defect class that has dominated this campaign is a first-person claim or a
+      # measurement the site cannot evidence. 116 candidates sit across 54 of 89 posts, so
+      # this cannot gate on an absolute count. It gates on regressions, same as the writing
+      # check above: a changed post may not introduce more candidates than it had before.
+      # Hermes publishes daily and pushes straight to main, so this is the only automatic
+      # check standing between a new article and production.
+      - name: Check changed posts for new unevidenced claims
+        run: |
+          changed=$(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md')
+          if [ -z "$changed" ]; then
+            echo "No changed blog posts to audit."
+            exit 0
+          fi
+
+          claims() { python tools/audit_claims.py --paths "$@" 2>/dev/null \
+            | sed -n 's/^\([0-9]*\) candidate claim.*/\1/p' | head -1; }
+
+          after=$(claims $changed); after=${after:-0}
+
+          base=$(mktemp -d)
+          befores=""
+          for f in $changed; do
+            if git cat-file -e "HEAD^:$f" 2>/dev/null; then
+              mkdir -p "$base/$(dirname "$f")"
+              git show "HEAD^:$f" > "$base/$f"
+              befores="$befores $base/$f"
+            fi
+          done
+          if [ -n "$befores" ]; then before=$(claims $befores); before=${before:-0}; else before=0; fi
+
+          echo "unevidenced-claim candidates on changed posts: before=$before after=$after"
+          python tools/audit_claims.py --paths $changed || true
+          if [ "$after" -gt "$before" ]; then
+            echo "::error::unevidenced claim candidates rose from $before to $after. Each is a candidate, not a verdict — classify KEEP, REWRITE or CUT per CHARTER 2c."
+            exit 1
+          fi
+          echo "No new unevidenced claim candidates introduced.
+
       - name: Build and audit site
         run: python build.py
 

@@ -113,9 +113,18 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--slug")
     ap.add_argument("--count", action="store_true")
+    ap.add_argument("--paths", nargs="*", default=None,
+                    help="restrict to these post files, for a CI regression check")
     args = ap.parse_args()
 
-    reports = [r for r in (scan(p) for p in sorted(POSTS.glob("*.md"))) if r]
+    # `--paths` with no values means "no posts", not "every post". Falling through to a
+    # full scan there would make a CI regression check silently compare the whole site
+    # against one file and report a number that means nothing.
+    if args.paths is not None:
+        candidates = [pathlib.Path(x) for x in args.paths if x.endswith(".md")]
+    else:
+        candidates = sorted(POSTS.glob("*.md"))
+    reports = [r for r in (scan(p) for p in candidates if p.exists()) if r]
     if args.slug:
         reports = [r for r in reports if r["slug"] == args.slug]
 
