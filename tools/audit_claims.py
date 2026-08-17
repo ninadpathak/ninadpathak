@@ -60,7 +60,9 @@ MEASUREMENT = re.compile(
 # could not see: "across my own testing", "I keep hitting", and "I have debugged".
 EXPERIENCE_CLAIM = re.compile(
     r"\btaught me\b|\bin my experience\b"
-    r"|\bI have (?:built|shipped|run|seen|reviewed|audited|debugged)\b"
+    r"|\bI have (?:built|shipped|run|seen|reviewed|audited|debugged|benchmarked|"
+    r"measured|tested|timed|profiled|examined|watched|deployed|instrumented|traced|"
+    r"logged|reproduced|verified|counted|surveyed|interviewed|migrated|rewritten|found)\b"
     r"|\bI (?:keep|kept) (?:hitting|seeing|finding)\b"
     r"|\bI (?:see|saw) most often\b|\bI (?:was|am) working on\b"
     r"|\b(?:across|from|in) my (?:own )?(?:testing|benchmarks?|audits?|measurements?|experiments?|work)\b"

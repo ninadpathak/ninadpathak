@@ -190,6 +190,17 @@ class ExperienceClaimTests(unittest.TestCase):
         self.assertTrue(self.flagged(
             "Every agent memory system I have debugged had the same problem."))
 
+    def test_have_benchmarked_is_a_claim_without_a_number(self):
+        """A claimed experiment is falsifiable even when its result is qualitative."""
+        self.assertTrue(self.flagged(
+            "I have benchmarked this pattern against context-only approaches."))
+
+    def test_have_watched_and_examined_are_past_evidence_claims(self):
+        self.assertTrue(self.flagged(
+            "I have watched engineers build pipelines around long context windows."))
+        self.assertTrue(self.flagged(
+            "Every high-scale AI product I have examined uses retrieval."))
+
     def test_indirect_experience_phrasings_are_claims(self):
         self.assertTrue(self.flagged("There is a second failure I keep hitting."))
         self.assertTrue(self.flagged("A support agent I was working on made this concrete."))
