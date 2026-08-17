@@ -150,7 +150,10 @@ CLUSTER_BY_SLUG = {slug: num for num, slug, _ in CLUSTERS}
 CLUSTER_LABEL = {num: label for num, _, label in CLUSTERS}
 # campaign-90d.md section 3 assigns the shipped tools to the cluster-4 owner page.
 TOOL_PATHS = {"/linter/": "ai-search-optimization",
-              "/llms-txt-generator/": "ai-search-optimization"}
+              "/llms-txt-generator/": "ai-search-optimization",
+              "/llms-txt-validator/": "ai-search-optimization",
+              "/ai-overviews-checker/": "ai-search-optimization",
+              "/ai-crawler-checker/": "ai-search-optimization"}
 
 # build.py routes posts to /articles/<slug>/, but Search Console still reports most of
 # this site's traffic under the pre-migration /blog/<slug>/ path - 51 of 54 /blog/ pages

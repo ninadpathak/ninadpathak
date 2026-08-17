@@ -25,3 +25,9 @@ echo "=== $(date -u +%Y-%m-%dT%H:%M:%SZ) daily cycle ==="
 
 "$PY" tools/url_inventory.py || echo "NOTE: url_inventory reported findings"
 "$PY" tools/daily_cycle.py
+
+# The scoreboard is weekly, not daily. It is called every run with --weekly and writes
+# only on its configured weekday, so the cadence lives in one place instead of being
+# split between launchd and the script. A failure here must not affect the exit status of
+# the daily checks above — the scoreboard reports, it does not gate.
+"$PY" tools/gsc_scoreboard.py --weekly || echo "NOTE: scoreboard did not run"

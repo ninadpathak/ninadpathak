@@ -818,9 +818,14 @@ position and nothing else, so:
 
 1. **It cannot see a manual action, a security issue, or an algorithm update.** The
    Manual Actions and Security Issues reports in the Search Console UI are the only thing
-   that settles whether a penalty was applied, and whether one is still in force. **That
-   is the one check worth doing by hand** — it is the only way to rule out lingering
-   suppression, and this analysis cannot.
+   that settles whether a penalty was applied, and whether one is still in force. There
+   is **no API surface for either**, and the UI needs an interactive Google login rather
+   than the service account, so no agent on this campaign can close it — the director
+   confirmed this independently and it is surfaced to Ninad as a 30-second check only he
+   can do. **Treat it as confirmation, not as a live suspicion.** The evidence already
+   says nothing is suppressing the domain now: foreign impressions hit zero from April
+   2026, the injected URLs 404, and every path segment earning impressions in the last 90
+   days is legitimate. Nobody should route around this gap or spend cycles on it.
 2. **Co-timing is not causation.** The injection first registers in the same week the
    corpus collapses, with four clean weeks before it and inverse trajectories for four
    weeks after. That is strong. It is still consistent with either the spam triggering a
