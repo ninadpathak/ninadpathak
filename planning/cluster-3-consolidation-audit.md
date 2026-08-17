@@ -120,9 +120,49 @@ Each owns a reader job no sibling owns. Sorted by lifetime impressions.
 
 ---
 
+## First-party pre-merge guard, 2026-08-17
+
+`tools/gsc_merge_guard.py` now measures every disposition before a redirect can erase the source's
+independent history. It uses the page dimension for complete impressions and page+query for named
+human demand, joining `/blog/` and `/articles/` as one page identity and excluding brand, machine
+fan-out, pasted blobs, and injected spam.
+
+The result does **not** independently validate any merge: zero of 20 source-target pairs share an
+exact named human query. That is a lower bound, not proof of zero overlap. Across the merge pages,
+GSC names queries behind only 128 of 713 historical page-dimension impressions (**18.0% coverage**).
+The correct reading is:
+
+| Guard state | Dispositions | Meaning |
+|---|---:|---|
+| `review-source-demand` | **6** | source has named human demand not observed on target; carry the job explicitly |
+| `withheld-source-demand` | **10** | source has impressions but GSC withholds every human query; overlap is unknown |
+| `no-source-demand-observed` | **4** | source has no impressions in the full available history; editorial overlap remains the basis |
+| `retire-no-demand-observed` | **1** | the one retirement has no impressions in the full history |
+| `shared-named-demand` | **0** | no pair has positive exact-query overlap evidence |
+
+Six visible source jobs require a preservation check before their redirect:
+
+| Source | Named source demand not observed on target | Floor | Merge requirement |
+|---|---|---:|---|
+| `state-of-open-source-memory-2026` | `ai memory systems research 2026` | 2 impr @ 8.5 | keep the current-year open-source design distinctions in the state owner |
+| `memory-hierarchy-in-ai-systems` | `inclusion property in memory hierarchy` | 1 impr @ 87.0 | likely off-target and too thin to chase; retain the layered model for the article's actual job |
+| `asymmetric-retrieval-agent-memory` | `hybrid retrieval for agent memory` | 1 impr @ 72.0 | preserve asymmetric/hybrid retrieval as an explicit mechanism |
+| `time-to-first-token-ttft` | three TTFT variants | 7 impr; best pos 31.5 | keep TTFT named and explained inside the inference owner |
+| `llm-context-windows-explained` | `long context windows` | 1 impr @ 5.0 | preserve the long-window job and lost-in-the-middle limit |
+| `why-ai-agents-keep-failing-in-production` | `how do companies debug ai agents that fail in production?` | 4 impr @ 10.2 | answer this operational question directly in `production-ai-agent-errors` |
+
+The audit's content comparison still supplies the merge rationale. GSC supplies the veto and
+preservation layer: visible source jobs survive, withheld demand stays unknown, and no absence is
+reported as evidence of equivalence. The full reproducible output is `planning/merge-guard.md`.
+
+---
+
 ## Execution constraints, all three learned expensively
 
-**1. Nothing is retired, so no URL loses its destination.** 16 of the 21 merged sources still draw impressions. Every one redirects to a **genuinely equivalent page**, never to the `/articles/` listing, because seven hub redirects pointing at the bare listing were soft 404s.
+**1. No URL is abandoned.** Twenty sources merge; `agent-memory-for-customer-support` retires
+because its only supposed surviving idea was fabricated. Sixteen of the 21 sources still draw
+impressions. Every source receives a terminal redirect, never the bare `/articles/` listing,
+because seven hub redirects pointing at that listing were soft 404s.
 
 One redirect chain was found and resolved before it shipped: `the-memory-hierarchy-why-rag-is-not-enough` pointed at `memory-hierarchy-in-ai-systems`, which is itself merging into `ai-memory-management-for-llms`. It now points directly at the final destination. **All 21 targets are terminal.**
 
@@ -134,9 +174,9 @@ One redirect chain was found and resolved before it shipped: `the-memory-hierarc
 
 ## Sequencing
 
-Twenty-one merges is not one commit. Group them by target so each commit leaves the tree green:
+Twenty-one reductions are not one commit. Group them by target so each commit leaves the tree green:
 
-| Batch | Merges | Target owner |
+| Batch | Dispositions | Target owner |
 |---|---:|---|
 | 1. Memory core | 6 | `ai-memory-management-for-llms`, `state-of-ai-agent-memory-2026` |
 | 2. Memory satellites | 4 | `short-term-memory-for-ai-agents`, `rag-vs-memory`, `memory-serialization-between-sessions`, `how-memory-works-in-deerflow` |
