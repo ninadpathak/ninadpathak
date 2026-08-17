@@ -103,6 +103,20 @@ Clusters 5, 6, and 7 are new scope and they matter for a reason beyond volume: t
 4. When a cross-cluster link genuinely earns its place it goes in the body sentence that makes the connection explicit, never in a sidebar or footer list.
 5. Audit this map every cycle.
 
+### Depth, heading structure, and the components already built
+
+Added 2026-08-17. Four requirements, all binding on the writer and in all three Hermes skill copies at v1.8.0 plus the publish prompt.
+
+**Nested headings, because this is what an answer engine extracts.** A flat run of `h2`s gives an extractor no way to tell where one idea ends, so boundaries land arbitrarily. Each `h2` is one complete chain of thought — a whole stage of the argument, not a paragraph label. The `h3`s under it are the steps within that chain. The next `h2` starts the next chain. Never skip a level, never head a single short paragraph, and **never leave an `h2` with exactly one `h3`** — if there is only one sub-step, it is not a sub-step. Put a question or decision in the heading and answer it immediately in a passage that names its own subject and conditions; that passage is what gets quoted. Google reads the outline for scope, answer engines lift the passage — flat structure loses both.
+
+**The diagram system has never been used once.** `static/css/flowcharts.css` is a complete 14-class system, and only `.flowchart-image`, its SVG figure wrapper, appears anywhere on the site. That is why the newer documentation articles read flatter than the older AI-cluster posts. Standing order 4 forbids new CSS; it does not forbid using what is built. Where a piece explains a flow, a decision, a hierarchy or a comparison, build the diagram — relationships made explicit are strong AI-search assets, because an extractor can lift a structure it can see.
+
+The DOM in the skill is **verified by rendering it in a browser, not derived from the class list**, and that mattered: `.flowchart-branch` and `.flowchart-outcome` are positioning wrappers only, so each needs a `.flowchart-node` nested inside. Putting `strong` and `small` directly in an outcome renders them run together with no card, because only `.flowchart-node` styles them. Documenting the class list alone would have had every writer producing that.
+
+**Glossary entries earn citation by being the best available answer, not by existing.** A 273-word entry under a fixed "How It Works / Common Use Cases / Related Terms" tree is a template wearing a definition. Each entry needs a self-contained 40-to-80-word opening definition that survives being lifted off the page with no pronoun pointing back at the title, then real depth — origin, what problem it was coined to solve, how it differs from the adjacent terms people confuse it with named explicitly, when it does not apply, the common misuse and why. **At least one concrete worked example, and examples are the priority: a definition plus a real example is worth three definitions.** Headings come from the term, never a template. A term that cannot support depth gets **merged into a related entry rather than shipped as a stub** — twenty-six strong entries beat forty thin ones, and thin entries drag the cluster.
+
+**Important links are destinations, not an inventory.** The footer listed five tools individually, splitting link equity five ways and diluting further with each addition. It now carries one `Tools` link to `/tools/`, which lists and describes each tool and is the tools cluster's owner page. A footer or nav slot holds a top-level destination a reader actually wants; the inventory lives on the page behind it.
+
 ### A link profile is a diagnostic for editorial substance
 
 Added 2026-08-17, and it changes what internal linking is for. **If every outbound link on a page fails the subject-of-the-sentence test, the page is telling you it has no natural neighbours.** The cause is almost always that the page holds an abstraction while other pages own each concrete piece of its argument, and an abstraction has no neighbours, so every link has to be manufactured. **Review the page. Do not replace the links.**
