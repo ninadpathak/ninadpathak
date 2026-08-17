@@ -43,7 +43,7 @@ Simple as the split sounds, it has real consequences for how you build, how you 
 
 ## What You Trade When You Add a Loop
 
-Building inside the loop means the system can surprise you, which is the point, and it also means the system can fail in ways that are hard to predict and hard to observe. I wrote about the [production errors I keep seeing](/articles/production-ai-agent-errors/) with agent systems, and the root cause in almost every case was that the team did not fully account for what happens when the system makes its own decisions about tool use, retry behavior, and when to escalate.
+Building inside the loop means the system can surprise you, which is the point, and it also means the system can fail in ways that are hard to predict and hard to observe. The [production error patterns](/articles/production-ai-agent-errors/) show why tool use, retry behavior, and escalation need explicit limits when the system makes those decisions.
 
 For example, an agent without a retry limit may keep calling a flaky search tool after a transient timeout. The problem is the missing stop condition, not the model's ability to issue the call.
 

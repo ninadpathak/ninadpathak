@@ -46,7 +46,7 @@ How will I know it worked. What must not break.
 
 Ten minutes spent here saves an hour of watching an agent solve the wrong problem with great enthusiasm.
 
-Handing an agent a one-line request and expecting it to infer the constraints is the failure I see most often. "Add caching to the API" can mean an in-memory layer, a Redis tier, HTTP cache headers, or memoized database reads, and the agent picks one, commits to it, and builds a whole structure around the wrong assumption.
+A one-line request leaves the agent to infer constraints that should have been stated. "Add caching to the API" can mean an in-memory layer, a Redis tier, HTTP cache headers, or memoized database reads, and the agent picks one, commits to it, and builds a whole structure around the wrong assumption.
 
 That wrong assumption compounds with every file it touches, because each later edit is consistent with the early mistake.
 

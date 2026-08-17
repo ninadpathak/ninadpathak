@@ -59,7 +59,7 @@ One step up sits an agent that can call external tools during a single interacti
 
 Ask "what's the weather in Lisbon," it calls a weather lookup, and it answers with the number that came back instead of inventing one.
 
-What makes or breaks this type is the tool schema. I keep seeing teams treat schema design as an afterthought, then wonder why tool calls fail in production.
+What makes or breaks this type is the tool schema. Define it before the agent loop, because the schema controls what the model can select and which arguments it must supply.
 
 The schema is the agent's job description. Underspecify it and the agent makes poor tool choices, the way a contractor handed "fix the kitchen" might rewire an outlet you never asked about.
 

@@ -46,7 +46,7 @@ Cross-session persistent memory is the third layer. Claude Code has a SQLite dat
 
 The database only exists once you run the agent with the `--memory` flag. Without that flag, nothing is created, and every session starts fresh.
 
-What I see most often is an agent that has access to all three layers and an engineer who does not know they exist. The agent looks like it has memory because you have been working with it for days.
+An agent can have access to working context, project files, and persistent memory while its operator treats them as one system. The agent looks like it has memory because you have been working with it for days.
 
 Restart the terminal, though, and the session layer is gone. The project files still hold what you wrote manually.
 
