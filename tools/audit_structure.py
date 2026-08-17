@@ -122,11 +122,14 @@ def main() -> int:
             print("      of pages. This reads as a house style applied everywhere.")
             problems += 1
 
-    if not problems:
-        print("\nno group shares a diagram skeleton, and none is saturated")
+    # Always print the count line, including on a clean run. Printing prose instead made
+    # the daily corpus-health line report "?" for a healthy state, which reads as unknown
+    # when it means none — the same failure as a gate that cannot go green.
+    print(f"\n{problems} structural problem(s).", end=" ")
+    if problems:
+        print("A shape that does not come from the subject tells the reader nothing.")
     else:
-        print(f"\n{problems} structural problem(s). A shape that does not come from the "
-              f"subject tells the reader nothing.")
+        print("No group shares a diagram skeleton, and none is saturated.")
     return 1 if (args.strict and problems) else 0
 
 
