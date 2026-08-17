@@ -4,7 +4,13 @@
 
 **Evidence:** `tools/url_inventory.py` (1,047 URLs), `tools/gsc_report.py`, `tools/audit_claims.py --count`, inbound and outbound link counts from the built output.
 
-**Recommendation: consolidate 57 posts to 36.** 21 merges, no retirements.
+**Recommendation: consolidate 57 posts to 36.** 21 dispositions: 20 merges and 1 retirement.
+
+**Corrected during batch 1.** `agent-memory-for-customer-support` was specified as a merge. Reading
+the source showed its only surviving idea is a fabricated case study, so it retires with nothing
+carried over. The count of 36 is unchanged; what changes is that one page contributes nothing to
+its target. `tools/audit_claims.py` flagged none of the six invented figures, which is a scanner
+blind spot for first-person metrics worth closing separately.
 
 ---
 
@@ -60,7 +66,7 @@ Each row names the target and what survives from the source. The moat consolidat
 | `memory-attribution-errors` | 4 | 2 | `ai-memory-management-for-llms` | attribution as a named failure class with its symptoms |
 | `agent-vs-ai-assistant` | 4 | 0 | `the-taxonomy-of-ai-agents` | the outer boundary: who drives the loop |
 | `why-ai-agents-keep-failing-in-production` | 4 | 1 | `production-ai-agent-errors` | the failure survey that frames the error patterns |
-| `agent-memory-for-customer-support` | 0 | 1 | `state-of-ai-agent-memory-2026` | the support workload as a worked domain example |
+| `agent-memory-for-customer-support` | 0 | 1 | `state-of-ai-agent-memory-2026` | **CORRECTED 2026-08-17: nothing survives. RETIRE.** Its worked example is a fabricated case study (18 to 11 minutes, 61% to 74%, CSAT 3.8 to 4.3, "after 90 days of running this architecture"). Carrying it would import invented metrics. See the batch-1 spec. |
 | `token-counting-isnt-optional-a-practical-guide-to-llm-cost-control` | 0 | 0 | `llm-token-budgets-cost-control` | tokenisation mechanics and why JSON is expensive |
 | `rag-vs-fine-tuning` | 0 | 0 | `fine-tuning-vs-rag-for-agent-memory` | the general decision framework, which the memory page narrows |
 | `mcp-server-setup-guide` | 0 | 0 | `model-context-protocol-explained` | the hands-on setup path |
