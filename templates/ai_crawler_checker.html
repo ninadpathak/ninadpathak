@@ -1,0 +1,319 @@
+{% extends "base.html" %}
+
+{#
+  ============================================================================
+  Cluster 4 — ai-search-optimization ("Optimising for AI Overviews and AI
+  search citation"). Sibling tools: /ai-overviews-checker/, /llms-txt-validator/,
+  /llms-txt-generator/, /linter/.
+
+  TODO(copy) — the marked slots below need commissioned copy. Everything here is
+  functional and accurate, so the built page is shippable as-is; these TODOs stay
+  in the template where users never see them.
+  Brief: planning/research/TOOL-COPY-BRIEF.md (append a section for this tool).
+
+  Keyword targets, Semrush US, pulled 2026-08-17:
+    oai-searchbot 720/mo · claudebot 3,600/mo · robots.txt checker 2,400/mo
+    robots.txt validator 1,600/mo · robots txt tester 880/mo · gptbot 390/mo
+    google-extended 260/mo · ai crawlers 170/mo · perplexitybot 70/mo
+    claude-searchbot 20/mo · ai crawler checker 20/mo
+  Do NOT position this as a generic robots.txt tester: that intent is served by
+  entrenched incumbents. The wedge is the citation-versus-training split.
+  ============================================================================
+#}
+
+{# TODO(copy) 1: <title>, 50-60 chars. Should carry "AI crawler" and "robots.txt". #}
+{% block title %}AI Crawler Access Checker for robots.txt | Ninad Pathak{% endblock %}
+
+{# TODO(copy) 2: meta description, 140-155 chars. Lead with the citation-vs-training
+   distinction, because that is the differentiator. #}
+{% block description %}Check whether your robots.txt lets AI assistants cite you, separately from whether it lets them train on you. Runs in the browser. No signup.{% endblock %}
+
+{% block canonical %}/ai-crawler-checker/{% endblock %}
+{% block og_url %}/ai-crawler-checker/{% endblock %}
+
+{# TODO(copy) 3: og:title, under 60 chars #}
+{% block og_title %}AI Crawler Access Checker{% endblock %}
+
+{# TODO(copy) 4: og:description, 110-130 chars #}
+{% block og_description %}See which AI platforms your robots.txt lets cite you, and which it only blocks from training. Free and browser-based.{% endblock %}
+
+{# TODO(copy) 5: twitter:title, under 60 chars #}
+{% block tw_title %}AI Crawler Access Checker{% endblock %}
+
+{# TODO(copy) 6: twitter:description, under 120 chars #}
+{% block tw_desc %}Check whether your robots.txt blocks AI citation or only AI training. Free, browser-based, no signup.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/linter.css">
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["SoftwareApplication", "WebApplication"],
+  "name": "AI Crawler Access Checker",
+  "url": "{{ site.url }}/ai-crawler-checker/",
+  "description": "Evaluates a robots.txt file against the crawlers each AI platform uses, separating the agents that govern citation in answers from the agents that govern model training.",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "Checker",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Check a pasted robots.txt entirely in the browser",
+    "Fetch and check the robots.txt published on a live domain",
+    "Separates citation crawlers from training crawlers per platform",
+    "Applies RFC 9309 group selection, so only the most specific matching group counts",
+    "Applies RFC 9309 rule precedence, where the longest match wins and Allow breaks ties",
+    "Explains which rule governed each verdict and on which line",
+    "Checks any path, not only the site root",
+    "Reports Content-Signal declarations and Sitemap lines",
+    "States that a CDN or WAF can block a crawler regardless of robots.txt"
+  ],
+  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
+  "publisher": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}" },
+  "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
+  "isRelatedTo": [
+    {
+      "@type": ["SoftwareApplication", "WebApplication"],
+      "name": "AI Overviews Checker",
+      "url": "{{ site.url }}/ai-overviews-checker/"
+    },
+    {
+      "@type": ["SoftwareApplication", "WebApplication"],
+      "name": "llms.txt Validator",
+      "url": "{{ site.url }}/llms-txt-validator/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between OAI-SearchBot and GPTBot?",
+      "acceptedAnswer": { "@type": "Answer", "text": "OAI-SearchBot decides whether ChatGPT may surface a site in its search features. GPTBot decides whether the content may be used to train OpenAI's foundation models. They are separate, so a site can allow citation while opting out of training. OpenAI states that a site blocking OAI-SearchBot will not be shown in ChatGPT search answers, though it can still appear as a navigational link." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does blocking ClaudeBot stop Claude citing my site?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. ClaudeBot governs training. Anthropic states that blocking it leaves Claude-SearchBot and Claude-User unaffected, so the site can still be accessed for search results and user queries while being excluded from future model training." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does blocking Google-Extended remove my site from AI Overviews?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Google-Extended controls Gemini apps and Vertex AI grounding and model improvement. AI Overviews and AI Mode are part of Google Search and use Googlebot, so blocking Google-Extended does not affect them." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does a named user-agent group override the wildcard group?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Robots Exclusion Protocol, RFC 9309, specifies that only the single most specific matching user-agent group applies to a crawler. A group naming a crawler replaces the asterisk group for that crawler rather than adding to it, which is the most common source of accidental access mistakes." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my pasted robots.txt uploaded anywhere?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. A pasted file is evaluated by JavaScript in the page and is never transmitted. Only the check-a-domain path contacts the server, because a browser cannot read another origin's robots.txt, and that request carries the domain and nothing else." }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">Tool</div>
+    {# TODO(copy) 7: H1. Should read naturally while carrying "AI crawler" and robots.txt. #}
+    <h1>AI Crawler Access Checker</h1>
+    {# TODO(copy) 8: lead paragraph, 2 sentences. Sentence one: what it answers.
+       Sentence two: that citation and training are separate controls. #}
+    <p class="lead">Paste a robots.txt or enter a domain. This reports which AI platforms your file lets cite you, separately from which it lets train on you, and names the rule behind every verdict.</p>
+  </div>
+</section>
+
+<section class="tool-section">
+  <div class="container">
+    <form class="scan-form" id="robotsDomainForm">
+      <label class="form-field form-field-grow" for="robotsDomain">
+        <span>Check a live domain</span>
+        <input id="robotsDomain" name="domain" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="example.com">
+      </label>
+      <label class="form-field" for="robotsPath">
+        <span>Path to test</span>
+        <input id="robotsPath" name="path" type="text" autocapitalize="none" spellcheck="false" value="/" placeholder="/">
+      </label>
+      <button class="btn btn-primary scan-submit" type="submit">Fetch robots.txt &rarr;</button>
+    </form>
+    {# TODO(copy) 9: one-sentence hint below the form. #}
+    <p class="tool-hint">Rules can differ by path, so a site open at the root may still block a crawler from its docs. Pasting a file instead keeps it in your browser.</p>
+    <div class="tool-status" id="robotsDomainStatus" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="linter-section">
+  <div class="container">
+    <div class="linter-layout">
+
+      <div class="linter-panel">
+        <div class="linter-panel-header">
+          <span class="linter-file-label">robots.txt</span>
+          <div class="linter-panel-header-actions">
+            <span class="linter-shortcut">&#8984;&crarr; to run</span>
+            <button class="linter-sample-btn" type="button" id="robotsSample">load sample</button>
+          </div>
+        </div>
+
+        <div class="linter-editor-container">
+          <div
+            id="robotsInput"
+            class="linter-editor"
+            contenteditable="true"
+            spellcheck="false"
+            role="textbox"
+            aria-multiline="true"
+            aria-label="robots.txt contents"
+          ></div>
+        </div>
+
+        <div class="linter-panel-footer">
+          <span class="linter-char-count" id="robotsCharCount">0 lines</span>
+          <button class="btn btn-primary" type="button" id="robotsRunBtn">Check access &rarr;</button>
+        </div>
+      </div>
+
+      <div class="linter-panel">
+        <div class="linter-panel-header">
+          <span class="linter-file-label">access.log</span>
+          <div class="linter-panel-header-actions">
+            <button class="linter-action-btn" type="button" id="robotsClear">clear</button>
+            <button class="linter-action-btn" type="button" id="robotsCopy">copy</button>
+          </div>
+        </div>
+
+        <div class="linter-results-container">
+          <div class="linter-empty" id="robotsEmpty">
+            <div class="linter-empty-inner">
+              <div class="linter-empty-icon">{ }</div>
+              {# TODO(copy) 10: empty-state line #}
+              <p>Results appear here once you check a file.</p>
+            </div>
+          </div>
+
+          <div class="linter-results-content" id="robotsResults" hidden>
+            <div class="lint-score-bar" id="robotsScoreBar">
+              <div class="lint-score-left">
+                <div class="lint-score-number" id="robotsScoreNumber">--</div>
+                <div>
+                  <span class="lint-grade" id="robotsPosture">-</span>
+                  <span class="lint-grade-desc" id="robotsPostureDesc"></span>
+                </div>
+              </div>
+              <div class="lint-score-stats" id="robotsStats"></div>
+            </div>
+
+            <div id="robotsFindings"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="linter-rules-section">
+  <div class="container">
+    <div class="linter-rules-header">
+      <div class="label">Method</div>
+      {# TODO(copy) 11: H2 for the method section #}
+      <h2>How this reaches its verdict</h2>
+    </div>
+    <div class="linter-rules-grid">
+
+      <div>
+        <div class="lint-severity-badge lint-severity-error">citation versus training</div>
+        {# TODO(copy) 12: review for voice only. Every claim here is sourced and
+           load-bearing. Do not soften, and do not add any claim that llms.txt or
+           schema affects citation. #}
+        <ul class="linter-rule-list">
+          <li><strong>ChatGPT</strong> &mdash; <code>OAI-SearchBot</code> governs citation, <code>GPTBot</code> governs training. OpenAI states a site blocking the first "will not be shown in ChatGPT search answers".</li>
+          <li><strong>Claude</strong> &mdash; <code>Claude-SearchBot</code> governs search, <code>ClaudeBot</code> governs training. Anthropic states that blocking <code>ClaudeBot</code> leaves the other two unaffected.</li>
+          <li><strong>Perplexity</strong> &mdash; <code>PerplexityBot</code> surfaces and links sites, and Perplexity states it is not used for foundation-model training.</li>
+          <li><strong>Google</strong> &mdash; AI Overviews and AI Mode are part of Search and use <code>Googlebot</code>. <code>Google-Extended</code> covers Gemini apps and Vertex AI grounding, and does <em>not</em> affect Search.</li>
+          <li><strong>Apple</strong> &mdash; <code>Applebot</code> powers search features, <code>Applebot-Extended</code> is a training opt-out only.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="lint-severity-badge lint-severity-warning">matching rules</div>
+        <ul class="linter-rule-list">
+          <li><strong>Only the most specific group applies.</strong> RFC 9309 selects one user-agent group per crawler. A group naming a crawler <em>replaces</em> the <code>*</code> group for it rather than adding to it. This is the most common cause of accidental access mistakes.</li>
+          <li><strong>Same-token groups are merged.</strong> Two <code>User-agent: Googlebot</code> blocks are treated as one, which real files rely on.</li>
+          <li><strong>The longest matching rule wins,</strong> and <code>Allow</code> breaks a tie of equal length.</li>
+          <li><strong>An empty <code>Disallow</code> permits everything,</strong> and a rule placed before any <code>User-agent</code> line is ignored.</li>
+          <li><strong>Wildcards are honoured.</strong> <code>*</code> matches any sequence and <code>$</code> anchors the end of a path.</li>
+          <li><strong>Matching is case-insensitive</strong> on the user-agent token.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="lint-severity-badge lint-severity-info">assumptions and limits</div>
+        <ul class="linter-rule-list">
+          <li><strong>This reads the file, not the network.</strong> A CDN or WAF can block a crawler at the edge whatever robots.txt says, and a crawler can ignore the file. Confirm at the edge before concluding a crawler has access.</li>
+          <li><strong>A training opt-out is not a defect.</strong> It is an editorial choice, so it is reported separately and never counted against the headline.</li>
+          <li><strong>No score.</strong> The headline is a count of citation crawlers allowed. There is no correct number of permitted crawlers, so weighting one would invent a judgement.</li>
+          <li><strong>An absent robots.txt allows everything.</strong> A 404 is a real answer, not an error.</li>
+          <li><strong>Agent lists change.</strong> Every entry names the document it came from and the date it was read.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="guide-section">
+  <div class="prose-container">
+    <div class="label">Reference</div>
+    {# TODO(copy) 13: this whole section, roughly 300-450 words. Cover: why the
+       citation/training split exists, why the most-specific-group rule catches
+       people out, and that robots.txt is advisory rather than enforcement.
+       Do not claim any file or markup improves AI visibility. See
+       planning/research/seo-state-of-play-2026-08.md sections 2.2 and 2.6. #}
+    <h2>Two controls, not one</h2>
+    <p>Every major AI platform ships at least two crawlers: one that decides whether it may quote a page in an answer, and one that decides whether the page may train a model. They are separate lines in robots.txt, and a file can permit the first while refusing the second.</p>
+    <p>The mistake this tool exists to catch runs in both directions. A file can block citation while its owner believes it only opted out of training, and a file can look hostile to AI while in fact allowing every assistant to quote it.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-list">
+      <details>
+        <summary>What is the difference between OAI-SearchBot and GPTBot?</summary>
+        <p><code>OAI-SearchBot</code> governs whether ChatGPT may surface a site in search. <code>GPTBot</code> governs training. Blocking <code>GPTBot</code> alone does not affect citation.</p>
+      </details>
+      <details>
+        <summary>Does blocking ClaudeBot stop Claude citing my site?</summary>
+        <p>No. Anthropic states that blocking <code>ClaudeBot</code> leaves <code>Claude-SearchBot</code> and <code>Claude-User</code> unaffected.</p>
+      </details>
+      <details>
+        <summary>Does blocking Google-Extended remove me from AI Overviews?</summary>
+        <p>No. AI Overviews and AI Mode are part of Search and use <code>Googlebot</code>. <code>Google-Extended</code> covers Gemini apps and Vertex AI grounding.</p>
+      </details>
+      <details>
+        <summary>Why did a named group override my wildcard rules?</summary>
+        <p>RFC 9309 applies only the single most specific matching group. Naming a crawler replaces the <code>*</code> group for that crawler rather than adding to it.</p>
+      </details>
+      <details>
+        <summary>Is my pasted file uploaded?</summary>
+        <p>No. A pasted file is evaluated in the page and never transmitted. Only the check-a-domain path contacts the server, carrying the domain alone.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script src="/static/js/robots-access-core.js"></script>
+<script src="/static/js/robots-access.js"></script>
+{% endblock %}

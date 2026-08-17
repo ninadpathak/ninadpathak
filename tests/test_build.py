@@ -177,6 +177,7 @@ class SitemapTests(unittest.TestCase):
         self.assertIn("https://example.com/llms-txt-generator/", locations)
         self.assertIn("https://example.com/llms-txt-validator/", locations)
         self.assertIn("https://example.com/ai-overviews-checker/", locations)
+        self.assertIn("https://example.com/ai-crawler-checker/", locations)
         self.assertIn("https://example.com/linter/", locations)
 
 
@@ -265,6 +266,47 @@ class ToolDiscoverabilityTests(unittest.TestCase):
         self.assertIn("/api/fetch-page", network_calls[0])
         for forbidden in ("sendBeacon", "localStorage", "sessionStorage", "new WebSocket"):
             self.assertNotIn(forbidden, script)
+
+    def test_ai_crawler_checker_is_wired_everywhere(self):
+        build = (self.repo_root / "build.py").read_text(encoding="utf-8")
+        self.assertIn("build_ai_crawler_checker", build)
+        self.assertIn('("/ai-crawler-checker/", "0.9", "monthly", None)', build)
+        self.assertIn("{base}/ai-crawler-checker/", build)
+
+        base_html = (self.repo_root / "templates" / "base.html").read_text(encoding="utf-8")
+        self.assertIn('href="/ai-crawler-checker/"', base_html)
+
+        projects = (self.repo_root / "content" / "projects.yaml").read_text(encoding="utf-8")
+        self.assertIn('url: "/ai-crawler-checker/"', projects)
+
+    def test_crawler_checker_declares_software_application_schema(self):
+        markup = (self.repo_root / "templates" / "ai_crawler_checker.html").read_text(encoding="utf-8")
+        self.assertIn("SoftwareApplication", markup)
+        self.assertIn("isAccessibleForFree", markup)
+
+    def test_crawler_checker_declares_its_cluster(self):
+        markup = (self.repo_root / "templates" / "ai_crawler_checker.html").read_text(encoding="utf-8")
+        self.assertIn("ai-search-optimization", markup)
+
+    def test_crawler_checker_states_the_edge_blocking_limit(self):
+        """It must never imply robots.txt is enforcement."""
+        markup = (self.repo_root / "templates" / "ai_crawler_checker.html").read_text(encoding="utf-8")
+        self.assertIn("WAF", markup)
+
+    def test_crawler_checker_paste_path_never_transmits_input(self):
+        script = (self.repo_root / "static" / "js" / "robots-access.js").read_text(encoding="utf-8")
+        network_calls = [line for line in script.splitlines() if "fetch(" in line]
+        self.assertEqual(len(network_calls), 1, network_calls)
+        self.assertIn("/api/fetch-robots", network_calls[0])
+        for forbidden in ("sendBeacon", "localStorage", "sessionStorage", "new WebSocket"):
+            self.assertNotIn(forbidden, script)
+
+    def test_no_template_hardcodes_the_label_slash_prefix(self):
+        """.label::before already emits "//", so a hardcoded one renders "// //".
+        Fixed on main across 21 templates; this stops it coming back."""
+        for template in sorted((self.repo_root / "templates").glob("*.html")):
+            markup = template.read_text(encoding="utf-8")
+            self.assertNotIn('class="label">//', markup, template.name)
 
     def test_no_tool_page_adds_inline_css(self):
         """Standing order 4: no new CSS, ever."""

@@ -622,6 +622,12 @@ class SiteBuilder:
             page="ai-overviews-checker",
         )
 
+    def build_ai_crawler_checker(self):
+        self.render(
+            "ai_crawler_checker.html", "ai-crawler-checker/index.html",
+            page="ai-crawler-checker",
+        )
+
     def build_legal_pages(self, legal_pages):
         for legal_page in legal_pages:
             self.render(
@@ -672,6 +678,7 @@ class SiteBuilder:
             ("/llms-txt-generator/", "0.9", "monthly", None),
             ("/llms-txt-validator/", "0.9", "monthly", None),
             ("/ai-overviews-checker/", "0.9", "monthly", None),
+            ("/ai-crawler-checker/", "0.9", "monthly", None),
             ("/privacy/", "0.3", "yearly", None),
             ("/terms/", "0.3", "yearly", None),
         ]
@@ -815,6 +822,7 @@ class SiteBuilder:
         # able to find them without reading the whole Pages list.
         lines.append("## Tools")
         lines.append("")
+        lines.append(f"- [AI Crawler Access Checker]({base}/ai-crawler-checker/): Check which AI platforms a robots.txt lets cite a site, separately from which it lets train on it.")
         lines.append(f"- [AI Overviews Checker]({base}/ai-overviews-checker/): Check whether a page's answers can be extracted by AI Overviews and answer engines, with the source behind each check.")
         lines.append(f"- [llms.txt Generator]({base}/llms-txt-generator/): Scan a sitemap and generate an editable llms.txt file in the browser.")
         lines.append(f"- [llms.txt Validator]({base}/llms-txt-validator/): Check an llms.txt file against the llms.txt v2 spec and get graded findings.")
@@ -929,6 +937,7 @@ class SiteBuilder:
         self.build_llms_txt_generator()
         self.build_llms_txt_validator()
         self.build_ai_overviews_checker()
+        self.build_ai_crawler_checker()
         self.build_legal_pages(legal_pages)
         self.build_glossary(glossary_terms)
 

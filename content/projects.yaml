@@ -1,4 +1,14 @@
 projects:
+  # TODO(copy) D: description for the crawler checker. One sentence, sibling
+  # register. Must not imply robots.txt is enforcement rather than advisory.
+  - title: "AI Crawler Access Checker"
+    description: "Check which AI platforms a robots.txt lets cite a site, separately from which it lets train on it, with the governing rule named for every verdict."
+    url: "/ai-crawler-checker/"
+    tech_stack:
+      - "Vanilla JS"
+      - "RFC 9309 matching"
+    category: "SEO / AI Retrieval"
+    status: "Live"
   - title: "AI Overviews Checker"
     description: "Test a page against nine sourced checks for snippet eligibility and extractable answers, without turning the result into a placement prediction."
     url: "/ai-overviews-checker/"
