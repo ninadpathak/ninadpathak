@@ -137,3 +137,25 @@ None.
 | token-counting-isnt-optional-a-practical-gui | ai-engineering | 0 | 0 |
 | what-a-documentation-homepage-must-help-user | technical-documentation | 0 | 0 |
 | what-makes-a-page-extractable-by-answer-engi | ai-search-optimization | 0 | 0 |
+
+## Batch-1 owner decision — 2026-08-17
+
+The point-in-time instrument resolves the stable-page blind spot that reversed the first memory
+merge. The two candidates were rerun on identical first-party GSC windows:
+
+| Basis | `ai-memory-management-for-llms` | `memory-hierarchy-in-ai-systems` |
+|---|---:|---:|
+| 28d page dimension, all queries | **20.4 on 22 impressions** | 18.2 on 5 impressions |
+| 28d named-human state | `withheld` | `withheld` |
+| 90d page dimension, all queries | **22.7 on 48 impressions** | 28.7 on 15 impressions |
+| 90d named-human floor | **37.0 (n=1)** | 87.0 (n=1) |
+
+The named-human rows are floors: the page+query pull covers 1,142 of 6,480 page-dimension
+impressions (17.6%), and one named query per page is too thin for a precise human-position claim.
+The page-dimension averages are query-mix sensitive. Even with those limits, the reversal's premise
+is false: `ai-memory-management-for-llms` was stable, not unmeasured. Its 90-day evidence is stronger
+on impressions and average position, while the hierarchy page's only advantage is 2.2 places over
+28 days on five impressions.
+
+**Decision:** keep `ai-memory-management-for-llms` as the owner and merge
+`memory-hierarchy-in-ai-systems` into it. Do not ship the reverse redirect.
