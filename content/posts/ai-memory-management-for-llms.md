@@ -52,15 +52,21 @@ See also: [How Memory Works in Claude Code](/articles/how-memory-works-in-claude
 
 ### Five layers answer five different memory questions
 
-The Atkinson-Shiffrin model separates sensory input, short-term storage, and long-term storage. An agent system needs a more operational version of that hierarchy: an input buffer for the current event, working context for active reasoning, episodic memory for what happened, semantic memory for what is known, and procedural memory for how the agent should act.
+The Atkinson-Shiffrin model separates sensory input, short-term storage, and long-term storage. An agent system needs a more operational version of that hierarchy: a sensory input buffer for the current event, working context for active reasoning, episodic memory for what happened, semantic memory for what is known, and procedural memory for how the agent should act.
 
-Each layer has a different retrieval key. Working context follows the current task, episodic memory needs time and source, semantic memory needs subject and validity, and procedural memory is expressed through instructions, tool schemas, and policies.
+Each layer answers a different question. The input buffer asks what just arrived, working context asks what the current step needs, episodic memory records what happened, semantic memory holds facts that remain valid, and procedural memory defines how the system may act.
 
-### Hierarchy keeps retrieval scoped
+### Inclusion, retrieval, and lifecycle need separate policies
 
-A flat store puts a current instruction, an old session event, and a durable product fact on the same retrieval surface. A hierarchy lets the system search the layer that fits the question and decide explicitly which information should move from a transient layer into a persistent one.
+An inclusion policy decides whether an observation should move beyond the input buffer or working context. Source authority, subject, scope, and expected future use belong in that decision.
 
-That separation matters when facts conflict or expire. Promotion, eviction, and compression become layer transitions with rules, not one similarity score deciding what the agent remembers.
+For example, a tool's progress message can expire with the current step, while a user-approved deployment constraint may deserve an attributed persistent record. Storing both without a selection rule turns raw activity into durable memory.
+
+A retrieval policy starts with the layer that owns the question. Episodic recall filters by subject, session, and time before semantic similarity, while semantic memory also needs validity and version constraints.
+
+A lifecycle policy defines promotion, supersession, expiry, eviction, deletion, and compression. Compression should retain the original record or a path back to it when the result may support a consequential decision.
+
+Keeping these jobs separate makes failures traceable. The system can show whether a bad result came from admitting the wrong record, retrieving outside its scope, or retaining it after it became stale.
 
 ## Eviction strategies decide what gets kicked out first
 
