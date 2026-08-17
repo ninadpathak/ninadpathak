@@ -103,6 +103,15 @@ Clusters 5, 6, and 7 are new scope and they matter for a reason beyond volume: t
 4. When a cross-cluster link genuinely earns its place it goes in the body sentence that makes the connection explicit, never in a sidebar or footer list.
 5. Audit this map every cycle.
 
+### A link profile is a diagnostic for editorial substance
+
+Added 2026-08-17, and it changes what internal linking is for. **If every outbound link on a page fails the subject-of-the-sentence test, the page is telling you it has no natural neighbours.** The cause is almost always that the page holds an abstraction while other pages own each concrete piece of its argument, and an abstraction has no neighbours, so every link has to be manufactured. **Review the page. Do not replace the links.**
+
+It was found the hard way. `technical-content-as-a-moat-the-long-game-for-developer-tools` had three outbound links; all three failed the test, and stripping them left zero. It also had no inbound links, no impressions, no entry in the movement table, and no update since April, in the smallest cluster on the site. Manufactured links were the only thing making it look connected. It is being consolidated into the page that owns the concrete version of its argument, carrying over the two ideas that page does not already have.
+
+The rule is in all three copies of the Hermes `ninadpathak-content` skill at version 1.7.0, so the writer applies it rather than only the reviewer catching it.
+
+
 **Known structural debt:** the July 30 refocus collapsed all twelve topic pillars into anchors on one page, `/articles/#<slug>`. An anchor cannot own a cluster — no unique URL, no unique title, no unique canonical, so twelve clusters shared one ranking surface and none of them ranked. Five AI hub slugs and `/glossary/` were redirected on 2026-08-17 to stop them 404ing, and every cluster now has a real owner page. The four clusters with no content yet are declared here but render nothing until they have some, so an empty owner page cannot ship.
 
 ---
