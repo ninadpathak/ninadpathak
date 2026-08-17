@@ -250,11 +250,12 @@
               "error"
             );
           } else {
-            setDomainStatus(
-              "Loaded " + body.finalUrl + " (" + body.bytes + " bytes, content-type " +
-              (body.contentType || "not set") + ").",
-              "success"
-            );
+            var note = "Loaded " + body.finalUrl + " (" + body.bytes + " bytes, content-type " +
+              (body.contentType || "not set") + ").";
+            if (body.leftOriginalSite) {
+              note += " That is a different site from the domain you entered, so the file below belongs to the redirect target.";
+            }
+            setDomainStatus(note, "success");
           }
           run();
         })

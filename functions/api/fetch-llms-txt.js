@@ -6,8 +6,9 @@
  * browser and are never sent here or anywhere else.
  *
  * Security posture is copied from discover-site.js deliberately: the same
- * public-URL validation, manual redirect handling with host pinning, fetch
- * timeout, and body-size ceiling. Do not relax these independently.
+ * public-URL validation, manual redirect handling, fetch timeout, and body-size
+ * ceiling. Do not relax these independently. The one intentional divergence is
+ * the redirect host policy, explained above validatePublicUrl.
  */
 
 const MAX_BODY_BYTES = 1_000_000;
@@ -34,7 +35,17 @@ function isPrivateIpv4(hostname) {
     (parts[0] === 192 && parts[1] === 168);
 }
 
-function validatePublicUrl(value, expectedHost) {
+/*
+ * The private/local guard is absolute and applies to every hop. Host identity is
+ * handled separately, because pinning the host outright breaks the most common
+ * real case: apex-to-www. Verified 2026-08-17, mintlify.com/llms.txt returns 307
+ * to www.mintlify.com/llms.txt, and docs.anthropic.com/llms.txt returns 301 to
+ * platform.claude.com/llms.txt. Rejecting either would fail the tool on files
+ * that plainly exist, so a cross-host redirect is followed and reported rather
+ * than refused. Following a redirect between public hosts is not the SSRF risk;
+ * reaching a private address is, and that stays blocked.
+ */
+function validatePublicUrl(value) {
   let url;
   try {
     url = new URL(value);
@@ -47,14 +58,23 @@ function validatePublicUrl(value, expectedHost) {
       host.endsWith(".internal") || host.includes(":") || isPrivateIpv4(host)) {
     throw new Error("Private and local network addresses cannot be scanned.");
   }
-  if (expectedHost && host !== expectedHost) throw new Error("The website redirected to a different domain.");
   url.hash = "";
   return url;
 }
 
+/* True when two hosts are the same site: identical, or one is a subdomain of the
+ * other. Deliberately conservative and PSL-free, so it treats a move to a
+ * different registrable domain as off-site and lets the caller say so. */
+function isSameSite(a, b) {
+  if (!a || !b) return false;
+  if (a === b) return true;
+  return a.endsWith("." + b) || b.endsWith("." + a);
+}
+
 async function safeFetch(input, expectedHost) {
-  let url = validatePublicUrl(input, expectedHost);
+  let url = validatePublicUrl(input);
   const chain = [];
+  let leftOriginalSite = false;
   for (let redirect = 0; redirect < 4; redirect += 1) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
@@ -70,10 +90,12 @@ async function safeFetch(input, expectedHost) {
     }
     if (response.status >= 300 && response.status < 400 && response.headers.get("location")) {
       chain.push({ from: url.toString(), status: response.status });
-      url = validatePublicUrl(new URL(response.headers.get("location"), url).toString(), expectedHost);
+      const next = validatePublicUrl(new URL(response.headers.get("location"), url).toString());
+      if (expectedHost && !isSameSite(next.hostname.toLowerCase(), expectedHost)) leftOriginalSite = true;
+      url = next;
       continue;
     }
-    return { response, url, chain };
+    return { response, url, chain, leftOriginalSite };
   }
   throw new Error("Too many redirects.");
 }
@@ -118,7 +140,7 @@ export async function onRequestPost(context) {
       ? initial.toString()
       : new URL("/llms.txt", initial).toString();
 
-    const { response, url, chain } = await safeFetch(target, initial.hostname);
+    const { response, url, chain, leftOriginalSite } = await safeFetch(target, initial.hostname);
     const contentType = (response.headers.get("content-type") || "").toLowerCase();
 
     if (!response.ok) {
@@ -129,6 +151,7 @@ export async function onRequestPost(context) {
         status: response.status,
         contentType,
         redirected: chain.length > 0,
+        leftOriginalSite: Boolean(leftOriginalSite),
         error: `No llms.txt at that URL. It returned HTTP ${response.status}.`,
       });
     }
@@ -142,6 +165,7 @@ export async function onRequestPost(context) {
       status: response.status,
       contentType,
       redirected: chain.length > 0,
+      leftOriginalSite: Boolean(leftOriginalSite),
       bytes: new TextEncoder().encode(text).length,
       servedAsHtml: looksLikeHtml(text),
       content: text,
