@@ -4,6 +4,30 @@
 **Status: prepared, mechanical merge not committed.** One carried-prose revision was committed to
 the wrong source path in `ab04412c`; it must be transplanted into the final owner inside this batch.
 
+## PRESERVATION STOP 2026-08-18: `6eb21923` is not an executable merge
+
+Do not cherry-pick `6eb21923` as batch 1. Despite its `content: complete memory owner merge`
+subject, it changes only `content/posts/memory-hierarchy-in-ai-systems.md` (11 insertions and one
+deletion). It leaves both final owners, the redirect map, and publication state unchanged. Editing
+the page that must become a source cannot count as carrying its job into the owner.
+
+The integrated first-party guard also makes two target-level checks mandatory before any batch-1
+redirect:
+
+- `ai-memory-management-for-llms` must demonstrably answer the layered-memory job represented by
+  `inclusion property in memory hierarchy`; the five-layer model and its retrieval/lifecycle
+  consequences must live in this final owner, not only in `memory-hierarchy-in-ai-systems`.
+- `state-of-ai-agent-memory-2026` must preserve the `ai memory systems research 2026` job through
+  the source's durable design distinctions. Do not carry the fabricated customer-support metrics or
+  turn the page into an unverified vendor roundup.
+
+Zero shared named queries does not waive either check. Merge-page query coverage is 18.0%, ten
+sources have withheld demand, and six have visible source-only demand. Until both owner revisions
+pass a human preservation review in the same atomic commit as link retrofits and redirects, every
+batch-1 source remains published and every redirect remains forbidden. The separately reviewed
+claim-neutral rewrites from child commit `a0795136` may be integrated without importing
+`6eb21923`.
+
 Batch 1 first because it carries the most inbound links and the most impressions in the cluster.
 That is where a mistake is most expensive and where the gates should be exercised earliest.
 
@@ -176,9 +200,11 @@ House rules apply. Nothing from `agent-memory-for-customer-support` is carried.
 
 ## Gate order for the commit
 
-1. `.venv/bin/python build.py`
-2. `.venv/bin/python tools/audit_clusters.py --strict`
-3. `.venv/bin/python tools/daily_cycle.py --dry-run`
-4. `.venv/bin/python -m unittest discover -s tests`
+1. `.venv/bin/python tools/gsc_merge_guard.py --dry-run` and read every batch-1 source-demand row.
+2. Review the rendered owner revisions against the two mandatory jobs in the preservation stop.
+3. `.venv/bin/python build.py`
+4. `.venv/bin/python tools/audit_clusters.py --strict`
+5. `.venv/bin/python tools/daily_cycle.py --dry-run`
+6. `.venv/bin/python -m unittest discover -s tests`
 
 Build before audit. The audit reads `output/` and refuses to report without it.
