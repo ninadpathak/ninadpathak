@@ -355,6 +355,46 @@ def deploy_check() -> list[str]:
     return problems
 
 
+# Each tool page is static and will render whatever happens to the Pages Function behind
+# it, so a Function that 404s is invisible from the page. That combination nearly shipped.
+# The repo-side half is asserted in tests/test_tool_e2e.py; this is the production half,
+# which only a live probe can answer.
+TOOL_FUNCTIONS = (
+    ("/llms-txt-generator/", "/api/discover-site"),
+    ("/llms-txt-validator/", "/api/fetch-llms-txt"),
+    ("/ai-overviews-checker/", "/api/fetch-page"),
+    ("/ai-crawler-checker/", "/api/fetch-robots"),
+)
+
+
+def functions_check() -> list[str]:
+    """Confirm every Pages Function a tool depends on still answers in production.
+
+    A 400 or 422 is a pass: the endpoint is alive and validating its input. Only 404, 5xx
+    or an unreachable host mean the tool is broken behind a page that still looks fine.
+    """
+    problems = []
+    for page, endpoint in TOOL_FUNCTIONS:
+        request = urllib.request.Request(
+            "https://ninadpathak.com" + endpoint,
+            data=b'{"url":"example.com"}',
+            headers={"content-type": "application/json",
+                     "user-agent": "ninadpathak-daily-cycle/1.0 (+https://ninadpathak.com)"})
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                status = response.status
+        except urllib.error.HTTPError as exc:
+            status = exc.code
+        except (urllib.error.URLError, OSError) as exc:
+            problems.append(f"{endpoint} unreachable ({exc}) — {page} renders without it")
+            continue
+        if status == 404:
+            problems.append(f"{endpoint} returns 404 but {page} still renders")
+        elif status >= 500:
+            problems.append(f"{endpoint} returns {status} but {page} still renders")
+    return problems
+
+
 def url_inventory_check() -> tuple[list[str], str]:
     """Fail when the build stops producing a URL Search Console still sends traffic to.
 
@@ -442,6 +482,7 @@ def main() -> int:
     gate = publish_gate()
     gate += robots_check()
     gate += foreign_urls(start_28.isoformat(), end.isoformat())
+    functions = functions_check()
     deploy = deploy_check()
     _, url_summary = url_inventory_check()
     lag = deploy_lag_seconds()
@@ -498,7 +539,8 @@ def main() -> int:
            + f"- Distance to 10,000/month: **{distance}**\n"
            f"- Publish gate: {'PASS' if not gate else 'FAIL — ' + '; '.join(gate)}\n"
            f"- Deploy: {_deploy_line(deploy, deploy_waiting, lag)}\n"
-           f"- URL inventory: {url_summary}\n")
+           f"- URL inventory: {url_summary}\n"
+           f"- Tool Functions: {'all answering' if not functions else 'BROKEN — ' + '; '.join(functions)}\n")
 
     print(row)
     if args.dry_run:
@@ -521,8 +563,11 @@ def main() -> int:
     with LOG.open("a", encoding="utf-8") as f:
         f.write(row)
 
-    # Waiting is not a failure. Only alarm once the grace window has passed.
-    return 1 if gate or (deploy and not deploy_waiting) or "NO PUBLISH" in publish else 0
+    # Waiting is not a failure. Only alarm once the grace window has passed. A broken
+    # tool Function is always a failure: it has no grace window, because the page it sits
+    # behind renders regardless and gives no sign anything is wrong.
+    return 1 if (gate or functions or (deploy and not deploy_waiting)
+                 or "NO PUBLISH" in publish) else 0
 
 
 if __name__ == "__main__":
