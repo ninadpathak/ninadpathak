@@ -418,3 +418,25 @@ No alternate URL was searched or substituted. The three shared-host pairs now
 have a frozen global canonical-page deduplication rule before sitemap discovery.
 Output: `planning/research/code-sample-census/ROOT-INSPECTION-2026-08-17.md`
 and `data/docs-root-inspection-2026-08-17.json`.
+
+---
+
+## Code-sample census execution batch 5 — 2026-08-18, agent `seo-currency`
+
+**Paid calls: 0.** No Ahrefs, Semrush, GitHub API, search API, model API, or paid
+dataset call.
+
+Population discovery made 73 robots reads and 276 sitemap reads. A separate
+coverage challenge made 58 landing-page reads. Total: **407 free public HTTP
+attempts** and two redirect hops; no retries were required. A corrected v2
+coverage artifact reused the first 58-response snapshot and made zero additional
+network calls.
+
+The first pass appeared to yield 58 sitemap populations, but 52 omitted at least
+one eligible page linked directly from their own root. They are demoted to the
+preregistered BFS fallback rather than augmented after inspection. Final route:
+6 sitemap, 69 crawl fallback, 1 robots-denied. The AWS sitemap index named 10,692
+children and hit the 200-document cap; its partial result is not used for Boto3.
+
+Outputs: `planning/research/code-sample-census/POPULATION-DISCOVERY-2026-08-18.md`,
+`data/page-populations-2026-08-18.json`, and the v1/v2 sitemap coverage artifacts.
