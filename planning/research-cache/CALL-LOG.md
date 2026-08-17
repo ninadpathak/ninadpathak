@@ -302,3 +302,28 @@ contract tests cover top-level and nested references, page/domain divergence, UR
 cache collisions, no-credential and dry-run refusal, cached no-spend reads, approved fetch logging,
 and strict failure on an empty API response. Acquisition remains unchanged and no endpoint was
 called during verification.
+
+---
+
+## Experiment design and falsification — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 0.** No Semrush, no Ahrefs (still dead), no model API. All free instruments.
+
+| Instrument | Use |
+|---|---|
+| WebSearch | Falsifying seven candidate experiments against prior work |
+| Live extraction spike | Ran a real code-block extractor against requests, httpx, flask, pydantic and Stripe docs to test feasibility before proposing the method |
+
+Four candidates falsified and dropped: crawler-access census (Inspeccia 1,567 files; the
+GPTBot-vs-OAI-SearchBot split already published), position-controlled AIO citation predictors
+(Anthony Lee, SSRN April 2026, 250 queries / 10,293 pages / 66 features), what-assistants-cite
+(glotier, LLM Pulse, Profound), and LLM-completes-task-from-docs (NovelAPIBench, TaskBench,
+arXiv 2509.20172, all with with/without-docs controls).
+
+The spike found three confounds that changed the surviving design: extraction is
+generator-specific (Sphinx puts the language class on an ancestor div, so a naive extractor
+found 0 Python blocks on the requests quickstart out of 36 pre-blocks), JS-rendered docs
+return no code at all (Stripe), and documentation deliberately publishes invalid code to
+illustrate errors (pydantic's single syntax failure).
+
+Output: `planning/research/EXPERIMENT-CANDIDATES-2026-08-17.md`.
