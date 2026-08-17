@@ -10,4 +10,3 @@ GROUP BY project
 ORDER BY downloads DESC, project ASC
 LIMIT 100
 FORMAT CSVWithNames
-

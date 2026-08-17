@@ -1,7 +1,7 @@
 # Documentation-resolution gate — 2026-08-17
 
-**Decision:** do not start the 100-project crawl  
-**Paid calls:** 0  
+**Decision:** do not start the 100-project crawl
+**Paid calls:** 0
 **PyPI JSON records fetched:** 100/100, zero errors
 
 ## The preregistered rule failed

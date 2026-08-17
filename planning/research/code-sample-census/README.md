@@ -1,8 +1,8 @@
 # Code-sample validity census: execution protocol
 
-**Status:** pilot instrument in progress  
-**Protocol frozen:** 2026-08-17  
-**Study owner:** `seo-currency`  
+**Status:** pilot instrument in progress
+**Protocol frozen:** 2026-08-17
+**Study owner:** `seo-currency`
 **Paid calls:** 0
 
 This directory turns candidate 1 in
