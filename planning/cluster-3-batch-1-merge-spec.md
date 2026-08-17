@@ -1,7 +1,8 @@
 # Cluster 3, batch 1: memory core — merge specification
 
 **Date:** 2026-08-17 · **Audit:** `planning/cluster-3-consolidation-audit.md`
-**Status: prepared, not committed.** The prose is Codex's and the merge cannot ship without it.
+**Status: prepared, mechanical merge not committed.** One carried-prose revision was committed to
+the wrong source path in `ab04412c`; it must be transplanted into the final owner inside this batch.
 
 Batch 1 first because it carries the most inbound links and the most impressions in the cluster.
 That is where a mistake is most expensive and where the gates should be exercised earliest.
@@ -46,40 +47,22 @@ worked on went from snappy to painful". An event claim with no measurement and n
 Weaker than the above, but it is a claim about something that happened. It is a KEEP page, so it
 belongs in a voice-repair pass rather than here.
 
-## AMENDMENT 2026-08-17: merges 2, 3 and 4 reverse direction
+## FINAL AMENDMENT 2026-08-17: keep the original owner
 
-**Found by the position analysis, before execution.** The spec below merges
-`memory-hierarchy-in-ai-systems` into `ai-memory-management-for-llms`. That is backwards.
+**The reversal in `e457d0ae` is superseded by the point-in-time page-position measurement.** The
+earlier movement-only report made a stable page invisible; absence from that report was not an
+unknown position.
 
-The spec merges `memory-hierarchy-in-ai-systems` into `ai-memory-management-for-llms`. It was
-chosen as the target on **word count**, which is not a ranking variable at all.
+On identical bases, `ai-memory-management-for-llms` is at 20.4 on 22 impressions over 28 days and
+22.7 on 48 impressions over 90 days. `memory-hierarchy-in-ai-systems` is at 18.2 on only 5
+impressions over 28 days and 28.7 on 15 impressions over 90 days. On named human queries the owner
+is at 37.0 and the hierarchy page at 87.0, one query each. The hierarchy page has more inbound
+links, 13 to 8, but the batch itself transfers those links, so that input is near-circular.
 
-**Correction to my own first statement of this, 2026-08-17.** I originally wrote that
-`ai-memory-management-for-llms` "does not appear anywhere in the Search Console report", and
-inferred it had no measurable position. That inference is unsound: the report's tables are *what
-moved* and *what decayed*, so a stable page is absent by design rather than by weakness. I could
-not find a per-page position for it in any current tool.
-
-What is actually measured:
-
-| | `memory-hierarchy-in-ai-systems` | `ai-memory-management-for-llms` |
-|---|---|---|
-| Position | **18.2, measured** | unknown, not measured |
-| Impressions | 15 | **48** |
-| Inbound links | **13** | 8 |
-
-Impressions favour the original target. Inbound links and the only known position favour the
-reversal. **The reversal still holds, on a narrower argument than I first gave:** merging an
-unmeasured page into one measured at 18.2 is the lower-risk direction, and merging a measured 18.2
-page into an unmeasured one is the risk. Inbound links agree at 13 against 8. Word count, the
-original basis, agrees with neither.
-
-**`memory-hierarchy-in-ai-systems` becomes the memory owner.** It absorbs
-`ai-memory-management-for-llms`, `the-memory-hierarchy-why-rag-is-not-enough`, and
-`memory-attribution-errors`. Redirect direction reverses accordingly, and the redirect block below
-must be regenerated before the batch runs.
-
-Read the merges below with that substitution applied.
+**`ai-memory-management-for-llms` remains the memory owner.** The merge and redirect directions
+below are final as written. Commit `ab04412c` revised `memory-hierarchy-in-ai-systems` with the
+carried material but did not retire or redirect anything. Salvage that prose into the owner during
+this atomic batch; do not discard it and do not treat the content-only commit as an executed merge.
 
 ## The merges
 
