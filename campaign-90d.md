@@ -33,7 +33,7 @@ Three findings, all verified on 2026-08-17:
 
 ### Why the target is honest but very unlikely
 
-The first research pass priced the documentation niche at **68,870 searches/month across 350 keywords**. Ten thousand visits would mean capturing 14.5% of every search in the entire niche, from position 49, in ninety days, against Postman and Swagger. That is not a pessimistic reading; it is the ceiling of the measured universe.
+The first research pass priced the documentation niche at 68,870 searches/month across 350 keywords. That figure was later found to be 7.5% overstated by contaminated rows, and the real documentation number is 63,730 — see the 2026-08-17 measurement refresh in section 10. Ten thousand visits would mean capturing 14.5% of every search in the entire niche, from position 49, in ninety days, against Postman and Swagger. That is not a pessimistic reading; it is the ceiling of the measured universe.
 
 The niche was widened on 2026-08-17 (see section 3) precisely because of that arithmetic, so the denominator has changed. The revised band is recorded as a dated refresh in the execution log rather than asserted here. What does not change: the distance to 10,000 is reported every week, plainly, and the trajectory is described as reaching it or not reaching it. Activity is never presented as progress.
 
@@ -200,6 +200,51 @@ Every one of the last five published articles was rejected. Six named generator 
 The single question that killed all five artifacts: does the artifact test anything the article did not already assume? In every case the script checked fields the same run chose, against a fixture the same run authored.
 
 Fixes are being made in the generator — the publish prompt and all three copies of the `ninadpathak-content` and `devtools-blog-craft` skills — not in the five outputs. Judge it on whether the defects recur in pieces published after the edits land.
+
+### 2026-08-17 — measurement refresh: the full-niche universe, and the revised band
+
+`planning/addressable-universe.md` on branch `seo/analytics`. Seven paid Ahrefs calls, 25,540 units, one under budget. Cluster 1 was reused from the bank, not re-bought.
+
+| # | Cluster | Keywords | Volume/mo | KD≤20 kws | KD≤20 vol | KD≤20 share | SERPs with AI Overview |
+|---|---|---:|---:|---:|---:|---:|---:|
+| 1 | Technical documentation and docs ops | 322 | 63,730 | 220 | 31,730 | 50% | 111 |
+| 2 | Developer experience and DevRel | 56 | 7,930 | 54 | 7,190 | 91% | 26 |
+| 3 | AI agents, memory, RAG, inference | 347 | 150,140 | 217 | 60,650 | 40% | 226 |
+| 4 | AI Overviews and AI-search citation | 58 | 23,880 | 42 | 11,890 | 50% | 40 |
+| 5 | Reddit marketing | 78 | 33,360 | 70 | 28,970 | 87% | 38 |
+| 6 | Forums and community building | 94 | 24,140 | 82 | 18,440 | 76% | 51 |
+| 7 | Technical and community events | 174 | 33,000 | 133 | 25,290 | 77% | 64 |
+| | **Total** | **1,129** | **336,180** | **818** | **184,160** | **55%** | **556** |
+
+Clusters 5, 6, and 7 hit the API's 250-row cap. Those three are floors, not measurements.
+
+**The earlier documentation figure was itself wrong.** `DERIVED-clean-universe.json` carried about 28 nursing-charting keywords (`picc line documentation example`, `perrla documentation example`) plus a junk `test.com` term at 3,000/month. Documentation is 63,730, not 68,870 — the number this campaign was reoriented on was 7.5% overstated. Recorded because a research bank that is trusted without being checked is worse than no bank.
+
+**Revised day-90 band: 350 to 1,350 clicks/month, central estimate ~710.** Down from the documentation-only 700–2,400, despite a 4.9× larger universe. The reason matters more than the number: **volume was never the constraint.** Seventy-one planned pages inside ninety days buys only 22.2 mature-equivalent pages once cohort maturity is applied (0.55 / 0.30 / 0.08). At DR 26 — the site is not zero-authority, as previously assumed — with P(top 3) at 0.15 and P(4–10) at 0.30, and an AI Overview haircut of 49.2% of SERPs losing about 35% of clicks (×0.828), the campaign contributes 334 / 685 / 1,295 and the recovered legacy set adds 15 / 25 / 40.
+
+**Against the 10,000 target, the central estimate is 7%.** Reaching 10,000 by publishing would need about 450 clicks per page across 22.2 mature-equivalent pages, which is roughly 25,000 addressable searches per page. The best 150 keywords in the entire niche average 740. **That is a 34× throughput gap, not a volume gap, and no choice of niche closes it.** Widening the niche bought winnability, not reach.
+
+Three decisions taken on this evidence:
+
+1. **Tools are the only lever with a defensible traffic profile, and the reason is structural.** All fifteen highest-value keywords in the niche carry an AI Overview. None of the nine build-a-tool keywords do. Tool intent is protected from the single largest threat to every article the campaign could publish. `ai overviews checker` — 700/month, KD 0, no AI Overview — is now the top build target, ahead of the llms.txt validator. A correction to an earlier claim in this document: the llms.txt family was sized at ~7,000/month, but that included the KD-56 head term; the tool-intent subset is 550/month. Still worth owning, no longer the headline.
+2. **The calendar is reweighted by volume × winnability, not evenly across seven clusters.** Cluster 2 does not get a seventh of it: 2.4% of the universe and nothing in the niche top 15. Clusters 5, 6, and 7 are weighted up — 76–87% of their keywords are KD≤20 against documentation's 50% and AI engineering's 40%, and they are the clusters where Ninad has genuine first-hand ground, which makes Experience tier A actually available. Cluster 3 holds 45% of all volume but is the hardest and 65% AI-Overview-saturated, so its 217 KD≤20 keywords are the target and its head terms are not. Cluster 1 keeps a real allocation regardless of the arithmetic because it is tied to the consulting offer.
+3. **`traffic_potential` is not used in any estimate.** Ahrefs reports the #1 ranking page's total traffic, so `nfl streams subreddit` scored 481,000 because that page is reddit.com. Using it would have inflated the band roughly tenfold. Recorded so nobody reintroduces it.
+
+Brand Radar remains unentitled — confirmed again, `Missing addon`. The management endpoint listing a report is misleading. No AI-citation data is claimed anywhere in this campaign; AI exposure means the `serp_features` flag, which says a SERP has an AI Overview, never who is cited in it.
+
+### 2026-08-17 — cluster owner pages, and the homepage retrofit
+
+Commits `fbdcddef` and `1fa28ac2` on `main`.
+
+Cluster isolation could not be enforced, because no cluster had a page to own. The July 30 refocus collapsed all twelve topic pillars into anchors on one URL, `/articles/#<slug>` — no unique URL, title, or canonical, so twelve clusters shared one ranking surface. The category mechanism that already existed for exactly one category now covers all seven clusters, rendering `/articles/<slug>/` with its own title, description, canonical, and `CollectionPage` schema. No template work and no new CSS.
+
+Assignment is explicit, not inferred: tag matching put 85 of 88 posts in the wrong cluster, because `developer-experience` and `infrastructure` straddle boundaries and the builder takes the first match. Every published post now declares `category:` in frontmatter. Current distribution is 57 ai-engineering, 23 technical-documentation, 8 developer-experience; the other four clusters are declared ahead of their content and render nothing until they have some.
+
+Two generator fixes so declaring a cluster early cannot ship an empty page — that failure is exactly how an empty `/articles/ai-memory/` shipped and had to be removed by hand. Empty categories are now skipped in the build, excluded from the sitemap, and filtered out of the `/articles/` nav, which had been emitting four broken internal links on every paginated page.
+
+The homepage then got the retrofit that 2e requires. It carries 310 impressions, 28 clicks, and 9% CTR at position 6.8 — more clicks than the rest of the site combined — and it linked to no cluster owner at all, so the owner pages inherited their only inbound links from paginated lists. It now links every non-empty cluster. `/linter/` went into the footer, which is part of why the linter had no inbound link anywhere on the site.
+
+Judge all of this on whether the cluster owner pages accumulate non-brand impressions of their own, not on the fact that they exist.
 
 ### 2026-08-17 — no-new-CSS violation, held out of the deploy
 
