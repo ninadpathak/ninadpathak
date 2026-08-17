@@ -189,6 +189,126 @@ class TestClassifyClose(unittest.TestCase):
         self.assertEqual(counted, result["in_range"])
 
 
+class TestDecorationDiversity(unittest.TestCase):
+    """The test that separates mechanical redecoration from a popular subject.
+
+    Without it, core-anchored grouping cannot tell one core being permuted from many
+    people asking genuinely different questions that happen to share three words.
+    """
+
+    CORE = {"anthropic", "contextual", "retrieval"}
+
+    def test_fan_out_scores_low(self):
+        self.assertLessEqual(gr.decoration_diversity(FANOUT, self.CORE),
+                             gr.MAX_DECORATION_DIVERSITY)
+
+    def test_a_genuine_topic_scores_high(self):
+        """Same three shared words, but every query asks something different."""
+        genuine = [
+            "anthropic contextual retrieval latency overhead production",
+            "anthropic contextual retrieval cost per million chunks",
+            "anthropic contextual retrieval versus hyde comparison",
+            "anthropic contextual retrieval implementation python tutorial",
+        ]
+        self.assertGreater(gr.decoration_diversity(genuine, self.CORE),
+                           gr.MAX_DECORATION_DIVERSITY)
+
+    def test_no_decoration_is_not_treated_as_narrow(self):
+        self.assertEqual(gr.decoration_diversity(["anthropic contextual retrieval"],
+                                                 self.CORE), 1.0)
+
+
+class TestFamiliesAreCoreAnchored(unittest.TestCase):
+    """Regression guard for the failure that made the first sitewide measurement wrong.
+
+    Single-link Jaccard clustering chained A~B~C into one group when A and C shared
+    nothing, producing families with an empty core and filing real human comparison
+    queries as machine traffic. Every family must now have a real shared core.
+    """
+
+    def test_every_family_has_a_non_empty_core(self):
+        queries = FANOUT + HUMAN + [
+            "notion vs todoist", "ticktick vs todoist", "things 3 vs microsoft todo",
+            "grid table css", "css grid table", "best content marketing book",
+        ]
+        for fam in gr.find_families(queries):
+            self.assertGreaterEqual(len(gr.family_core(fam)), gr.MIN_CORE_TOKENS,
+                                    f"family with thin core: {fam[:3]}")
+
+    def test_unrelated_comparison_queries_do_not_chain_into_one_family(self):
+        queries = ["notion vs todoist", "ticktick vs todoist", "asana vs todoist",
+                   "notion vs asana", "grid table css", "css grid table"]
+        for fam in gr.find_families(queries):
+            self.assertGreaterEqual(len(gr.family_core(fam)), gr.MIN_CORE_TOKENS)
+
+
+class TestPartitionQueries(unittest.TestCase):
+    def rows(self):
+        return ([row(q, 0, 10, 9.0) for q in FANOUT]
+                + [row(q, 1, 20, 8.0) for q in HUMAN]
+                + [row("ninad pathak", 5, 30, 1.2)]
+                + [row("how does hnsw work? ￼ pasted", 0, 1, 9.0)])
+
+    def test_every_row_lands_in_exactly_one_bucket(self):
+        p = gr.partition_queries(self.rows())
+        total = len(p["human"]) + len(p["machine"]) + len(p["brand"]) + len(p["blob"])
+        self.assertEqual(total, len(self.rows()))
+
+    def test_brand_wins_over_every_other_test(self):
+        p = gr.partition_queries(self.rows())
+        self.assertEqual([r["keys"][0] for r in p["brand"]], ["ninad pathak"])
+
+    def test_machine_and_human_are_separated(self):
+        p = gr.partition_queries(self.rows())
+        self.assertEqual({r["keys"][0] for r in p["machine"]}, set(FANOUT))
+        self.assertEqual({r["keys"][0] for r in p["human"]}, set(HUMAN))
+
+    def test_precomputed_model_catches_a_family_too_small_to_detect_locally(self):
+        """A month holding two members of a known fan-out must not score them human."""
+        sparse = [row(FANOUT[0], 0, 5, 9.0), row(FANOUT[1], 0, 5, 9.0)]
+        alone = gr.partition_queries(sparse)
+        self.assertEqual(len(alone["machine"]), 0)  # under MIN_FAMILY_SIZE locally
+        withmodel = gr.partition_queries(sparse, machine_queries=set(FANOUT))
+        self.assertEqual(len(withmodel["machine"]), 2)
+
+    def test_summarise_weights_position_by_impressions(self):
+        s = gr.summarise([row("a", 1, 90, 10.0), row("b", 0, 10, 20.0)])
+        self.assertEqual((s["clicks"], s["impressions"], s["position"]), (1, 100, 11.0))
+
+    def test_summarise_of_nothing_has_no_position(self):
+        self.assertIsNone(gr.summarise([])["position"])
+
+
+class TestNonPostGrouping(unittest.TestCase):
+    def test_known_sections_get_their_own_label(self):
+        cases = {"https://ninadpathak.com/": "homepage",
+                 "https://ninadpathak.com/about/": "/about/ (bio)",
+                 "https://ninadpathak.com/work/kiwisizing/": "/work/ (case studies)"}
+        for url, label in cases.items():
+            self.assertEqual(gr.non_post_group(url), label)
+
+    def test_glossary_is_labelled_as_republished(self):
+        label = gr.non_post_group("https://ninadpathak.com/glossary/late-chunking/")
+        self.assertIn("glossary", label)
+        self.assertIn("republished", label)
+
+    def test_unknown_section_falls_back_to_its_path(self):
+        self.assertEqual(gr.non_post_group("https://ninadpathak.com/whatever/x/"),
+                         "/whatever/")
+
+    def test_non_post_pages_get_one_row_each_not_one_bucket(self):
+        rows = [row("https://ninadpathak.com/", 5, 50, 4.0),
+                row("https://ninadpathak.com/about/", 3, 40, 8.0),
+                row("https://ninadpathak.com/glossary/a/", 1, 30, 7.0),
+                row("https://ninadpathak.com/glossary/b/", 1, 20, 9.0)]
+        got = gr.cluster_rollup(rows, {})
+        tail = [c for c in got if c["cluster"] is None]
+        self.assertEqual(len(tail), 3)
+        self.assertEqual([c["impressions"] for c in tail], [50, 50, 40])
+        glossary = next(c for c in tail if "glossary" in c["label"])
+        self.assertEqual(glossary["pages"], 2)
+
+
 class TestWindows(unittest.TestCase):
     def test_windows_end_three_days_back_and_do_not_overlap(self):
         start, end, pstart, pend = gr.windows(dt.date(2026, 8, 17))

@@ -370,3 +370,67 @@ Also removed a "verify generated output is committed" step: `output/` is untrack
 Commit `7e875cda` on `seo/90day-strategy` added 103 lines and nine classes to `static/css/main.css` for glossary and post-terms display, against standing order 4. The glossary is not shipping — all 16 terms are held back on TODO placeholder prose — so the CSS is currently dead weight on every page load.
 
 Decision: that commit was kept off `main` and only the recovery was cherry-picked, so production carries no unused CSS. The glossary revival must reduce those nine classes to existing utilities or justify each one before it ships. Recorded rather than silently carried.
+
+### 2026-08-17 — the impression growth that framed this campaign was not human growth
+
+Every impression figure the campaign had reported was contaminated by query traffic with
+no person behind it, and the contamination rate was only known inside positions 4–30.
+It has now been measured across the full history by `tools/gsc_human_baseline.py`, which
+shares its classifier with `tools/gsc_report.py`.
+
+**Read the denominator before the finding.** Search Console withholds low-volume queries,
+so the query dimension covers only **48.9%** of sitewide impressions. Machine share can
+only be measured inside that named subset. The sitewide share is a range —
+**1.8% to 52.9%** of all impressions — where the lower bound assumes every withheld
+impression is human and the upper assumes every one is machine. There is no point
+estimate and the midpoint is not one.
+
+**Machine fan-out is 3.6% of named impressions across the whole span** — 599 of 16,416,
+in 123 queries. Sitewide that is small. The concentration is what matters: it is **57% of
+named impressions in August 2026** and 34.5% in July, against 1–4% in every month of 2025.
+
+**The 4× growth story does not survive.** Site impressions did rise 652 → 2,476 from
+March to July 2026, which is real. Underneath it:
+
+| March → July 2026 | Change |
+|---|---|
+| Site impressions | 652 → 2,476 (**×3.8**) |
+| Named impressions | 473 → 330 (**×0.70**) |
+| **Human impressions** | 437 → **152** (**×0.35, down 65%**) |
+| Machine fan-out impressions | 4 → 114 (×28.5) |
+| Withheld by Search Console | 179 → 2,146 (×12) |
+
+One page accounts for it. `/blog/how-anthropics-contextual-retrieval-changed…` recorded
+zero impressions before May 2026, then 157, 495, 1,210, 558 — reaching **49% of all site
+impressions in July and 59% in August**. Its 69 identifiable queries are one fan-out
+family permuting `anthropic contextual retrieval`, at a uniform position 8.7, with **zero
+clicks across all 69**. Because that page's named queries are entirely fan-out while most
+of its impressions are withheld, the withheld surge is very likely more of the same
+family, each variant too small to be named. That is an inference from page-level
+concentration, not a query-level proof, and Search Console withholding makes the proof
+impossible.
+
+**The click record is the blunt version.** Across the full span there were 20 human clicks
+on named queries, all of them in 2025. **Since October 2025 there has not been a single
+human click on a named non-brand query — ten consecutive months.** Of 72 named clicks in
+the span, 49 are brand. The homepage alone carries 9 of the site's 11 clicks in the current
+28-day window.
+
+**What follows.** Charter section 4 said fixing what already ranks may beat anything else,
+written before anyone knew the impressions were machine. It is now stronger than that:
+there is no human ranking demand to fix on the page carrying half the site's impressions.
+The twelve expansion slots repointed at cluster 4 were repointed correctly. Impressions are
+retired as a campaign metric — human clicks and human impressions are the series, and
+`tools/daily_cycle.py` now logs them beside the sitewide and non-brand figures with their
+qualifiers attached.
+
+**The measurement's own limits, because they are not small.** The first version of this
+analysis reported 64% of named impressions as machine and was wrong. It clustered queries
+by transitive similarity, which chained unrelated queries into groups with no shared core
+and filed real human comparison queries — `notion vs todoist`, `ticktick vs todoist`,
+`grid table css` — as bot traffic. Families are now anchored on an explicit shared core and
+accepted only when their decoration vocabulary is narrow, and a regression test asserts no
+family can have an empty core. Residual false positives remain in the small families
+(`top content marketing books` is a person, and one Todoist family even has a click), which
+means 3.6% is an upper estimate rather than a floor. The human series is itself a floor,
+because the withheld tail is excluded entirely and some of it is certainly human.

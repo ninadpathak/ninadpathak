@@ -71,21 +71,46 @@ def gsc_totals(start: str, end: str) -> dict | None:
     total = query([])
     if not total:
         return {"clicks": 0, "impressions": 0, "position": 0.0,
-                "nonbrand_clicks": 0, "nonbrand_impressions": 0}
+                "nonbrand_clicks": 0, "nonbrand_impressions": 0,
+                "human_clicks": 0, "human_impressions": 0,
+                "machine_clicks": 0, "machine_impressions": 0, "named_impressions": 0}
     t = total[0]
 
     # Search Console withholds low-volume queries, so the query dimension does not sum
     # to the sitewide total. These two figures are therefore floors taken from named
     # queries only, never a full non-brand total. Labelled as such where they print.
     brand = re.compile(r"ninad|pathak", re.IGNORECASE)
+    rows = query(["query"])
     nb_clicks = nb_impr = 0
-    for row in query(["query"]):
+    for row in rows:
         if not brand.search(row["keys"][0]):
             nb_clicks += row["clicks"]
             nb_impr += row["impressions"]
 
+    # Non-brand still includes machine query fan-out, which is not a person. Over
+    # 2025-04 to 2026-08 that fan-out was only 3.6% of named impressions sitewide, but
+    # it was 57% of them in August 2026 and 66% of the site's entire impression growth
+    # came from one page whose every identifiable query was fan-out with zero clicks.
+    # A non-brand number alone therefore cannot tell whether anything shipped works.
+    # See planning/gsc-human-baseline.md and gsc_report.py for the separator.
+    human = machine = machine_clicks = human_clicks = 0
+    named_impr = int(sum(r["impressions"] for r in rows))
+    try:
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+        import gsc_report
+        parts = gsc_report.partition_queries(rows)
+        human = int(sum(r["impressions"] for r in parts["human"]))
+        human_clicks = int(sum(r["clicks"] for r in parts["human"]))
+        machine = int(sum(r["impressions"] for r in parts["machine"]))
+        machine_clicks = int(sum(r["clicks"] for r in parts["machine"]))
+    except ImportError:
+        human = human_clicks = machine = machine_clicks = -1
+
     return {"clicks": t["clicks"], "impressions": t["impressions"], "position": t["position"],
-            "nonbrand_clicks": nb_clicks, "nonbrand_impressions": nb_impr}
+            "nonbrand_clicks": nb_clicks, "nonbrand_impressions": nb_impr,
+            "human_clicks": human_clicks, "human_impressions": human,
+            "machine_clicks": machine_clicks, "machine_impressions": machine,
+            "named_impressions": named_impr}
 
 
 # Standing order 1 is to grow the site in Google *and* in AI search, and robots.txt here
@@ -287,22 +312,52 @@ def main() -> int:
     publish = todays_publish()
 
     if gsc is None:
-        gsc_line = "Search Console UNAVAILABLE (missing credential or google-api-python-client)"
+        gsc_lines = ["Search Console UNAVAILABLE (missing credential or "
+                     "google-api-python-client)"]
         distance = "unknown"
     else:
-        gsc_line = (f"28d to {end}: {gsc['clicks']} clicks / {gsc['impressions']} impressions, "
-                    f"avg pos {gsc['position']:.1f}. Non-brand floor (named queries only, "
-                    f"Search Console withholds the long tail): "
-                    f"{gsc['nonbrand_clicks']} clicks / {gsc['nonbrand_impressions']} impressions")
+        gsc_lines = [
+            f"28d to {end}: {gsc['clicks']} clicks / {gsc['impressions']} impressions, "
+            f"avg pos {gsc['position']:.1f}",
+            f"Non-brand floor (named queries only, Search Console withholds the long "
+            f"tail): {gsc['nonbrand_clicks']} clicks / "
+            f"{gsc['nonbrand_impressions']} impressions",
+        ]
+        if gsc["human_impressions"] < 0:
+            gsc_lines.append("Human-only UNAVAILABLE (gsc_report.py not importable)")
+        else:
+            gsc_lines.append(
+                f"Human-only estimate (non-brand minus machine query fan-out): "
+                f"{gsc['human_clicks']} clicks / {gsc['human_impressions']} impressions. "
+                f"Fan-out removed: {gsc['machine_clicks']} clicks / "
+                f"{gsc['machine_impressions']} impressions of "
+                f"{gsc['named_impressions']} named")
+            # Say exactly what this number is, in both directions, every single time.
+            # A cleaner figure that loses its qualifiers becomes a worse figure than the
+            # one it replaced.
+            gsc_lines.append(
+                "Human-only is an **estimate, not a bound**: it undercounts because the "
+                "withheld long tail is excluded entirely, and overcounts because fan-out "
+                "is only detected within this 28d window, so a family with fewer than "
+                "three variants here still counts as human")
+
         # The target is 10,000/month. Report the multiple still needed, never a percentage
-        # of a percentage, and report it against non-brand because brand is not the campaign.
+        # of a percentage, and report it against human because neither brand nor a bot is
+        # the campaign.
+        hc = gsc["human_clicks"]
         nb = gsc["nonbrand_clicks"]
-        distance = f"{10000 / nb:.0f}x away" if nb else "no non-brand clicks in any named query"
+        if hc > 0:
+            distance = f"{10000 / hc:.0f}x away on human clicks"
+        elif nb > 0:
+            distance = (f"no human clicks in any named query; {nb} non-brand click(s) "
+                        f"exist but are fan-out or undetected")
+        else:
+            distance = "no non-brand clicks in any named query"
 
     row = (f"\n## {dt.date.today().isoformat()}\n\n"
            f"- Publish: {publish}\n"
-           f"- {gsc_line}\n"
-           f"- Distance to 10,000/month on non-brand clicks: **{distance}**\n"
+           + "".join(f"- {line}\n" for line in gsc_lines)
+           + f"- Distance to 10,000/month: **{distance}**\n"
            f"- Publish gate: {'PASS' if not gate else 'FAIL — ' + '; '.join(gate)}\n"
            f"- Deploy: {'LIVE, matches the build' if not deploy else 'STALE or FAILED — ' + '; '.join(deploy)}\n")
 
@@ -317,7 +372,12 @@ def main() -> int:
             "Appended by `tools/daily_cycle.py`. Deterministic checks only — no judgment,\n"
             "no interpretation. This exists so the campaign keeps a measurement record even\n"
             "when no agent session is running. Search Console lags about three days, so each\n"
-            "row's window ends three days before its date.\n",
+            "row's window ends three days before its date.\n\n"
+            "Three click figures appear per row and they are not interchangeable. Sitewide\n"
+            "includes brand and machine traffic. Non-brand is a floor from named queries and\n"
+            "still contains machine query fan-out. Human-only removes that fan-out and is an\n"
+            "estimate bounded in neither direction — it undercounts by excluding the withheld\n"
+            "tail and overcounts by detecting fan-out only within each 28-day window.\n",
             encoding="utf-8")
     with LOG.open("a", encoding="utf-8") as f:
         f.write(row)

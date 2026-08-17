@@ -38,17 +38,23 @@ The heuristic is deliberately structural rather than a keyword blocklist:
 
   1. BLOB     more than MAX_QUERY_WORDS words, or containing an object-replacement or
               control character. These are pasted passages, not queries.
-  2. FAMILY   single-link clustering of content-token sets at Jaccard >= JACCARD_THRESHOLD.
-              A group of MIN_FAMILY_SIZE or more is treated as one fan-out family and
-              collapsed to a single reported line, never silently dropped.
-  3. ABSORB   two looser passes pull in decorated stragglers that carry enough novel
-              tokens to fall under the primary threshold: a query joins a family if it
-              reaches JACCARD_ABSORB against any member, or if it contains one of the
-              family's signature phrases - a contiguous SIGNATURE_NGRAM-token run shared
-              by at least SIGNATURE_SHARE of the members, which is what a generator
-              holding a stem looks like. Neither pass will absorb a query that adds
-              fewer than CORE_EXTRA_TOKENS tokens to that stem, because the bare stem is
-              a real head term and must survive.
+  2. FAMILY   core-anchored grouping. A family is every query containing one shared core
+              of MIN_CORE_TOKENS content tokens, decorated by at least CORE_EXTRA_TOKENS
+              further tokens, where MIN_FAMILY_SIZE or more queries qualify. A query that
+              IS the bare core is left alone, because that one is the head term.
+  3. NARROW   a candidate is only accepted if its decoration vocabulary is narrow -
+              `decoration_diversity` below MAX_DECORATION_DIVERSITY. Fan-out redecorates
+              one core from a small closed vocabulary; a popular subject many people
+              phrase alike brings fresh words with every query. Without this test the
+              two are indistinguishable.
+
+An earlier version of this clustered by transitive Jaccard similarity instead, and it
+failed badly enough to be worth recording: single-link clustering chains A~B~C into one
+group when A and C share nothing, so over the full query history it produced four
+"families" with an empty shared core and filed real human comparison queries
+(`notion vs todoist`, `ticktick vs todoist`, `grid table css`) as machine traffic. That
+would have reported roughly 64% of named impressions as machine when the true figure is
+far lower. Anchoring on an explicit core makes an empty core impossible by construction.
 
 Its limits, stated plainly because they matter:
 
@@ -80,6 +86,7 @@ from __future__ import annotations
 import argparse
 import collections
 import datetime as dt
+import itertools
 import json
 import os
 import pathlib
@@ -108,15 +115,22 @@ CLOSE_RANGE = (4.0, 30.0)
 
 # Fan-out detection. See module docstring for what each one does and why.
 MAX_QUERY_WORDS = 15
-JACCARD_THRESHOLD = 0.6
-# Looser threshold used only to absorb stragglers into an already-formed family.
-JACCARD_ABSORB = 0.4
 MIN_FAMILY_SIZE = 3
-MIN_FAMILY_TOKENS = 4
-CORE_EXTRA_TOKENS = 2
-# A contiguous run this long, shared by most of a family, is a held generator stem.
-SIGNATURE_NGRAM = 3
-SIGNATURE_SHARE = 0.5
+# A family is anchored on a shared core of at least this many content tokens. Anchoring
+# on an explicit core rather than on transitive similarity is deliberate: single-link
+# clustering chains A~B~C into one group when A and C share nothing, and on this site's
+# full history that produced four "families" with an empty shared core, wrongly filing
+# real human comparison queries (`notion vs todoist`, `grid table css`) as machine.
+MIN_CORE_TOKENS = 3
+# A member must decorate the core. A query that IS the bare core is the head term.
+CORE_EXTRA_TOKENS = 1
+# Distinct decoration tokens per decoration slot. Machine fan-out redecorates one core
+# from a small closed vocabulary, so this ratio is low; a genuine topic where every
+# query asks something different scores high. This is what separates fan-out from a
+# popular subject that many people phrase similarly.
+MAX_DECORATION_DIVERSITY = 0.35
+# Guard against combinatorial blowup on long queries.
+MAX_CORE_SEARCH_TOKENS = 12
 
 # Same brand test as daily_cycle.py, so the two tools agree on what brand means.
 BRAND = re.compile(r"ninad|pathak", re.IGNORECASE)
@@ -147,6 +161,20 @@ TOOL_PATHS = {"/linter/": "ai-search-optimization",
 POST_PATH_PREFIXES = ("/articles/", "/blog/")
 CANONICAL_POST_PREFIX = "/articles/"
 
+# Non-post URLs, each reported as its own row. /glossary/ was republished on 2026-08-17
+# with 25 terms, 24 of which had indexed URLs still ranking at positions 7 to 76, so it
+# is a live surface again rather than the 404 it had been.
+NON_POST_LABELS = {
+    "about": "/about/ (bio)",
+    "contact": "/contact/",
+    "work": "/work/ (case studies)",
+    "portfolio": "/portfolio/",
+    "projects": "/projects/",
+    "glossary": "/glossary/ (25 terms, republished 2026-08-17)",
+    "topics": "/topics/",
+    "static": "/static/ (assets, should not rank)",
+}
+
 STOPWORDS = {
     "a", "an", "the", "and", "or", "but", "if", "then", "than", "that", "this", "these",
     "those", "is", "are", "was", "were", "be", "been", "being", "do", "does", "did",
@@ -169,19 +197,13 @@ def tokens(query: str) -> list[str]:
 
 
 def content_token_list(query: str) -> list[str]:
-    """Topic-bearing tokens in the order written, for phrase signatures."""
+    """Topic-bearing tokens in the order written."""
     return [t for t in tokens(query) if t not in STOPWORDS]
 
 
 def content_tokens(query: str) -> set[str]:
     """Tokens carrying topic meaning. Order is discarded, which is the point."""
     return set(content_token_list(query))
-
-
-def ngrams(query: str, n: int = SIGNATURE_NGRAM) -> set[tuple[str, ...]]:
-    """Contiguous content-token n-grams, for detecting a held stem."""
-    t = content_token_list(query)
-    return {tuple(t[i:i + n]) for i in range(len(t) - n + 1)}
 
 
 def stopword_ratio(query: str) -> float:
@@ -201,72 +223,63 @@ def jaccard(a: set[str], b: set[str]) -> float:
     return len(a & b) / len(union) if union else 0.0
 
 
-def find_families(queries: list[str]) -> list[list[str]]:
-    """Single-link clusters of permutation variants, largest first.
+def decoration_diversity(members: list[str], core: set[str]) -> float:
+    """Distinct decoration tokens per decoration slot.
 
-    Two passes, per the module docstring: Jaccard clustering, then core containment to
-    absorb decorated stragglers that fell under the threshold.
+    Machine fan-out redecorates one core from a small closed vocabulary, so the same
+    handful of tokens recur across every variant and this ratio is low. A genuine
+    subject that many people phrase similarly scores high, because each query brings
+    words of its own. Returns 1.0 when there is no decoration to judge.
+    """
+    slots = 0
+    vocabulary: set[str] = set()
+    for q in members:
+        extra = content_tokens(q) - core
+        slots += len(extra)
+        vocabulary |= extra
+    return len(vocabulary) / slots if slots else 1.0
+
+
+def find_families(queries: list[str]) -> list[list[str]]:
+    """Core-anchored fan-out families, largest first.
+
+    Each family is every query containing one shared core of at least MIN_CORE_TOKENS
+    content tokens, decorated by at least CORE_EXTRA_TOKENS further tokens. Anchoring on
+    an explicit core, rather than on transitive pairwise similarity, is what keeps
+    unrelated queries out: single-link clustering chains A~B~C together when A and C
+    share nothing at all.
+
+    A candidate only becomes a family if its decoration vocabulary is narrow enough
+    (see `decoration_diversity`). That test is what distinguishes one core being
+    mechanically redecorated from a popular subject many people happen to phrase alike,
+    and it is the reason a family is never accepted on similarity alone.
     """
     sets = {q: content_tokens(q) for q in queries}
-    eligible = sorted(q for q in queries if len(sets[q]) >= MIN_FAMILY_TOKENS)
+    eligible = sorted(q for q in queries
+                      if len(sets[q]) >= MIN_CORE_TOKENS + CORE_EXTRA_TOKENS)
 
-    parent = {q: q for q in eligible}
-
-    def find(x: str) -> str:
-        while parent[x] != x:
-            parent[x] = parent[parent[x]]
-            x = parent[x]
-        return x
-
-    def union(a: str, b: str) -> None:
-        ra, rb = find(a), find(b)
-        if ra != rb:
-            parent[rb] = ra
-
-    for i, a in enumerate(eligible):
-        for b in eligible[i + 1:]:
-            if jaccard(sets[a], sets[b]) >= JACCARD_THRESHOLD:
-                union(a, b)
-
-    grouped: dict[str, list[str]] = collections.defaultdict(list)
+    # Every core-sized token subset, and which queries could sit under it.
+    candidates: dict[tuple[str, ...], list[str]] = collections.defaultdict(list)
     for q in eligible:
-        grouped[find(q)].append(q)
-    families = [sorted(v) for v in grouped.values() if len(v) >= MIN_FAMILY_SIZE]
+        tokens_sorted = sorted(sets[q])[:MAX_CORE_SEARCH_TOKENS]
+        for combo in itertools.combinations(tokens_sorted, MIN_CORE_TOKENS):
+            candidates[combo].append(q)
 
-    # Straggler absorption. A decorated variant can fall under the primary threshold
-    # simply by carrying novel tokens, so two looser passes pull it in. Both refuse to
-    # absorb a query that adds nothing to the stem, because that one is the head term.
-    claimed = {q for fam in families for q in fam}
-    for fam in families:
-        signatures = signature_phrases(fam)
-        for q in queries:
-            if q in claimed or q in fam:
-                continue
-            qt = sets[q]
-            near = any(jaccard(qt, sets[m]) >= JACCARD_ABSORB for m in fam if m in sets)
-            stem = ngrams(q) & signatures
-            if not (near or stem):
-                continue
-            floor = max(sig_len for sig_len in (len(s) for s in stem)) if stem else 0
-            if len(qt) < floor + CORE_EXTRA_TOKENS:
-                continue
-            fam.append(q)
-            claimed.add(q)
-    for fam in families:
-        fam.sort()
+    # Greedy: the broadest core first, so a family is not split across sub-cores.
+    ordered = sorted(candidates.items(), key=lambda kv: (-len(kv[1]), kv[0]))
+    claimed: set[str] = set()
+    families: list[list[str]] = []
+    for combo, members in ordered:
+        core = set(combo)
+        available = [q for q in members if q not in claimed]
+        if len(available) < MIN_FAMILY_SIZE:
+            continue
+        if decoration_diversity(available, core) > MAX_DECORATION_DIVERSITY:
+            continue
+        families.append(sorted(available))
+        claimed.update(available)
 
     return sorted(families, key=lambda f: -len(f))
-
-
-def signature_phrases(family: list[str]) -> set[tuple[str, ...]]:
-    """Contiguous n-grams shared by most of a family — the generator's held stem."""
-    if not family:
-        return set()
-    counts: collections.Counter = collections.Counter()
-    for q in family:
-        counts.update(ngrams(q))
-    need = max(2, int(len(family) * SIGNATURE_SHARE))
-    return {gram for gram, n in counts.items() if n >= need}
 
 
 def family_core(family: list[str]) -> set[str]:
@@ -415,10 +428,78 @@ def decaying(rows: list[dict], min_prior_impressions: int = MIN_PRIOR_IMPRESSION
                                       r["position_delta"] or 0))
 
 
+def partition_queries(rows: list[dict],
+                      machine_queries: set[str] | None = None) -> dict:
+    """Split query rows into brand, blob, machine fan-out, and human.
+
+    The single classifier both the striking-distance shortlist and the human-only
+    baseline run through, so the two can never disagree about what counts as a person.
+
+    Order matters and is deliberate: brand first (a brand query is brand whatever else
+    it looks like), then blobs, then fan-out families over what remains. Whatever
+    survives all three is treated as human.
+
+    Pass `machine_queries` to classify against a family model derived from a wider set
+    of queries than `rows`. Family detection needs MIN_FAMILY_SIZE variants to see a
+    family at all, so a month holding only two members of a fan-out would otherwise
+    score them as human. The baseline tool builds the model once over the full history
+    and reuses it for every month.
+    """
+    brand = [r for r in rows if BRAND.search(r["keys"][0])]
+    rest = [r for r in rows if not BRAND.search(r["keys"][0])]
+
+    blob = [r for r in rest if is_blob(r["keys"][0])]
+    rest = [r for r in rest if not is_blob(r["keys"][0])]
+
+    if machine_queries is None:
+        families = find_families([r["keys"][0] for r in rest])
+        claimed = {q for fam in families for q in fam}
+    else:
+        families = []
+        claimed = {r["keys"][0] for r in rest if r["keys"][0] in machine_queries}
+
+    machine = [r for r in rest if r["keys"][0] in claimed]
+    human = [r for r in rest if r["keys"][0] not in claimed]
+
+    return {"brand": brand, "blob": blob, "machine": machine, "human": human,
+            "families": families}
+
+
+def summarise(rows: list[dict]) -> dict:
+    """Clicks, impressions and impression-weighted average position for a bucket."""
+    impressions = sum(r["impressions"] for r in rows)
+    clicks = sum(r["clicks"] for r in rows)
+    weighted = (sum(r["position"] * r["impressions"] for r in rows) / impressions
+                if impressions else None)
+    return {"queries": len(rows), "clicks": int(clicks), "impressions": int(impressions),
+            "position": round(weighted, 1) if weighted is not None else None}
+
+
+def describe_families(families: list[list[str]], by_query: dict[str, dict]) -> list[dict]:
+    """One reported line per fan-out family, largest impressions first."""
+    out = []
+    for fam in families:
+        members = [by_query[q] for q in fam if q in by_query]
+        if not members:
+            continue
+        impressions = sum(m["impressions"] for m in members)
+        weighted = (sum(m["position"] * m["impressions"] for m in members) / impressions
+                    if impressions else 0.0)
+        out.append({
+            "variants": len(members),
+            "core": sorted(family_core(fam)),
+            "impressions": int(impressions),
+            "clicks": int(sum(m["clicks"] for m in members)),
+            "position": round(weighted, 1),
+            "example": max(members, key=lambda m: m["impressions"])["keys"][0],
+        })
+    return sorted(out, key=lambda f: -f["impressions"])
+
+
 def classify_close(rows: list[dict],
                    close_range: tuple[float, float] = CLOSE_RANGE,
                    min_impressions: int = MIN_CLOSE_IMPRESSIONS) -> dict:
-    """Split striking-distance queries into human, fan-out families, blobs, and brand.
+    """Striking-distance queries, fan-out separated out.
 
     Returns every bucket. Nothing is discarded silently - the caller reports the
     families and the counts alongside the human list.
@@ -426,40 +507,12 @@ def classify_close(rows: list[dict],
     lo, hi = close_range
     in_range = [r for r in rows if lo <= r["position"] <= hi]
 
-    brand = [r for r in in_range if BRAND.search(r["keys"][0])]
-    rest = [r for r in in_range if not BRAND.search(r["keys"][0])]
+    parts = partition_queries(in_range)
+    family_rows = describe_families(parts["families"], index_rows(parts["machine"]))
 
-    blobs = [r for r in rest if is_blob(r["keys"][0])]
-    rest = [r for r in rest if not is_blob(r["keys"][0])]
-
-    by_query = index_rows(rest)
-    families = find_families(list(by_query))
-
-    family_rows = []
-    claimed: set[str] = set()
-    for fam in families:
-        members = [by_query[q] for q in fam if q in by_query]
-        if not members:
-            continue
-        claimed.update(q for q in fam if q in by_query)
-        impressions = sum(m["impressions"] for m in members)
-        clicks = sum(m["clicks"] for m in members)
-        weighted = (sum(m["position"] * m["impressions"] for m in members) / impressions
-                    if impressions else 0.0)
-        family_rows.append({
-            "variants": len(members),
-            "core": sorted(family_core(fam)),
-            "impressions": int(impressions),
-            "clicks": int(clicks),
-            "position": round(weighted, 1),
-            "example": max(members, key=lambda m: m["impressions"])["keys"][0],
-        })
-    family_rows.sort(key=lambda f: -f["impressions"])
-
-    human = [r for r in rest if r["keys"][0] not in claimed]
+    human = sorted(parts["human"], key=lambda r: -r["impressions"])
     thin = [r for r in human if r["impressions"] < min_impressions]
     human = [r for r in human if r["impressions"] >= min_impressions]
-    human.sort(key=lambda r: -r["impressions"])
 
     return {
         "in_range": len(in_range),
@@ -470,46 +523,64 @@ def classify_close(rows: list[dict],
                   for r in human],
         "families": family_rows,
         "excluded": {
-            "brand": len(brand), "blob": len(blobs),
-            "fan_out": len(claimed), "below_impression_floor": len(thin),
+            "brand": len(parts["brand"]), "blob": len(parts["blob"]),
+            "fan_out": len(parts["machine"]), "below_impression_floor": len(thin),
         },
         "excluded_impressions": {
-            "brand": int(sum(r["impressions"] for r in brand)),
-            "blob": int(sum(r["impressions"] for r in blobs)),
+            "brand": int(sum(r["impressions"] for r in parts["brand"])),
+            "blob": int(sum(r["impressions"] for r in parts["blob"])),
             "fan_out": int(sum(f["impressions"] for f in family_rows)),
             "below_impression_floor": int(sum(r["impressions"] for r in thin)),
         },
     }
 
 
+def non_post_group(url: str) -> str:
+    """Label for a page that belongs to no content cluster.
+
+    One "no cluster" bucket held 48 pages carrying 10 of the site's 11 clicks, which made
+    the rollup unable to show where traffic actually comes from. These are ordinary
+    non-post URLs and each kind gets its own row.
+    """
+    path = urlsplit(url).path
+    segments = [s for s in path.split("/") if s]
+    if not segments:
+        return "homepage"
+    first = segments[0]
+    return NON_POST_LABELS.get(first, f"/{first}/")
+
+
 def cluster_rollup(page_rows: list[dict], slug_clusters: dict[str, str]) -> list[dict]:
-    """Impressions, clicks and impression-weighted position for each of the seven clusters."""
-    buckets: dict[str | None, dict] = {}
+    """Impressions, clicks and impression-weighted position per cluster.
+
+    The seven content clusters always appear, so one earning nothing is visible rather
+    than absent. Pages in no cluster are broken out by kind rather than lumped together.
+    """
+    def blank():
+        return {"clicks": 0.0, "impressions": 0.0, "weighted": 0.0, "pages": 0}
+
+    buckets: dict[str, dict] = {}
+    non_post: dict[str, dict] = {}
     for row in page_rows:
         category = page_cluster(row["keys"][0], slug_clusters)
-        b = buckets.setdefault(category, {"clicks": 0.0, "impressions": 0.0,
-                                          "weighted": 0.0, "pages": 0})
-        b["clicks"] += row["clicks"]
-        b["impressions"] += row["impressions"]
-        b["weighted"] += row["position"] * row["impressions"]
-        b["pages"] += 1
+        target = (buckets.setdefault(category, blank()) if category
+                  else non_post.setdefault(non_post_group(row["keys"][0]), blank()))
+        target["clicks"] += row["clicks"]
+        target["impressions"] += row["impressions"]
+        target["weighted"] += row["position"] * row["impressions"]
+        target["pages"] += 1
 
-    out = []
-    for num, slug, label in CLUSTERS:
-        b = buckets.get(slug, {"clicks": 0.0, "impressions": 0.0, "weighted": 0.0, "pages": 0})
-        out.append({
-            "cluster": num, "slug": slug, "label": label, "pages": b["pages"],
-            "clicks": int(b["clicks"]), "impressions": int(b["impressions"]),
-            "position": round(b["weighted"] / b["impressions"], 1) if b["impressions"] else None,
-        })
-    b = buckets.get(None)
-    if b:
-        out.append({
-            "cluster": None, "slug": "(no cluster)", "label": "Pages in no cluster",
-            "pages": b["pages"], "clicks": int(b["clicks"]),
-            "impressions": int(b["impressions"]),
-            "position": round(b["weighted"] / b["impressions"], 1) if b["impressions"] else None,
-        })
+    def finish(entry, cluster, slug, label):
+        return {"cluster": cluster, "slug": slug, "label": label, "pages": entry["pages"],
+                "clicks": int(entry["clicks"]), "impressions": int(entry["impressions"]),
+                "position": (round(entry["weighted"] / entry["impressions"], 1)
+                             if entry["impressions"] else None)}
+
+    out = [finish(buckets.get(slug, blank()), num, slug, label)
+           for num, slug, label in CLUSTERS]
+    out += [finish(entry, None, label, label)
+            for label, entry in sorted(non_post.items(),
+                                       key=lambda kv: -kv[1]["impressions"])]
     return out
 
 
