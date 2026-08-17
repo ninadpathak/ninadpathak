@@ -11,7 +11,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "name": {{ term.name | tojson }},
-  "description": {{ (term.short_definition or term.description) | tojson }},
+  "description": {{ (term.opening_definition or term.short_definition or term.description) | tojson }},
   "url": "{{ site.url }}/glossary/{{ term.slug }}/",
   "inDefinedTermSet": {
     "@type": "DefinedTermSet",
@@ -56,13 +56,16 @@
         <span class="post-meta-date">{{ term.last_updated | format_date }}</span>
       </div>
       <h1 class="post-title">{{ term.name }}</h1>
-      <p class="lead">{{ term.short_definition }}</p>
+      <p class="lead">{{ term.opening_definition or term.short_definition }}</p>
     </div>
   </header>
 
   <div class="post-body">
     <div class="prose-container">
       <div class="post-content glossary-content">
+        {% if term.body_html %}
+        {{ term.body_html | safe }}
+        {% else %}
         <p>{{ term.long_definition }}</p>
         
         {% if term.how_it_works %}
@@ -78,9 +81,10 @@
           {% endfor %}
         </ul>
         {% endif %}
+        {% endif %}
 
         {% if term.related_terms %}
-        <h2>Related Terms</h2>
+        <p><strong>Continue with these glossary entries:</strong></p>
         <ul class="related-terms-list">
           {% for related in term.related_terms %}
           <li><a href="/glossary/{{ related.slug }}/">{{ related.name }}</a></li>

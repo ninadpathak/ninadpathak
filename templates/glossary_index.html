@@ -46,7 +46,7 @@
         <div class="blog-row-date">Definition</div>
         <div>
           <div class="blog-row-title">{{ term.name }}</div>
-          <div class="blog-row-desc">{{ term.short_definition }}</div>
+          <div class="blog-row-desc">{{ term.opening_definition or term.short_definition }}</div>
         </div>
       </a>
       {% endfor %}
