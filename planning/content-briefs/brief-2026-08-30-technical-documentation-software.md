@@ -35,11 +35,18 @@ Code reference generators (row 30). The Git workflow itself (row 31, the day bef
 
 ## Evidence — Experience A
 
-He chose to build a custom Python generator rather than adopt a platform, and that decision is
-real, documented in the repository, and defensible either way. The honest first-person content is
-the constraint that drove it and what it cost him.
+This repository currently uses a custom Python generator rather than a documentation platform.
+That implementation and its maintenance surface are inspectable. The repository does **not**
+record a platform evaluation, so do not claim he compared alternatives, name a past constraint as
+the cause, or assign time/cost to the choice without a commit, issue, or other record.
 
-A decision matrix is legitimate here only if its rows come from constraints he actually weighed.
+The honest first-person content is his present selection rule: which constraints he would test now,
+which current repository properties matter to him, and which maintenance obligations are visible
+in the code. Label present judgment as judgment rather than turning it into a past decision story.
+
+A decision matrix is legitimate here only if its rows come from current, inspectable constraints
+or explicitly sourced platform capabilities. Do not imply those rows reproduce an undocumented
+historical evaluation.
 **Title honesty:** the title promises no hands-on comparison, so none is required. Do not add one
 to feel rigorous.
 

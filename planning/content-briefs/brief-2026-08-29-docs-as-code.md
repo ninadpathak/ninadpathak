@@ -39,13 +39,15 @@ owned by live `documentation-review-checklist-before-you-publish`.
 - `rule_checker.py` enforces house style and exits non-zero, so a violating post cannot ship
 - `build.py` runs an SEO audit at build time and fails the build on paragraph-length violations
 - `tools/check_link_retrofit.py` blocks a publish whose internal links are one-directional
-- `tests/` currently passes 133 of 134, the one failure being a missing system binary
+- CI runs the repository test suite after the build; report the publish run's actual pass/skip
+  counts rather than copying a count from this brief
 - `python build.py` regenerates `sitemap.xml` and `llms.txt` from source
 - Cloudflare Pages deploys on push to `main`
 
 Use it as the worked example **including what it does badly**. The honest material includes gates
 that failed silently until they were made to print, which is a better story than a clean pipeline
-and it is true.
+and is recorded in repository history. Cite the workflow or commit that establishes any past
+failure; do not reconstruct a historical incident from the current code alone.
 
 Do not invent CI stages this repository does not have. Where a stage is recommended but absent
 here, say so and show the config that would add it.
