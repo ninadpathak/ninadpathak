@@ -3,24 +3,24 @@
 # return a real 404 instead of redirecting to a missing /articles/ page.
 /topics /articles/ 301
 /topics/ /articles/ 301
-/technical-writing/ /articles/ 301
-/documentation/ /articles/ 301
-/api-documentation/ /articles/ 301
-/docs-as-code/ /articles/ 301
-/documentation-seo/ /articles/ 301
-/ai-ready-documentation/ /articles/ 301
-/technical-content/ /articles/ 301
+/technical-writing/ /articles/developer-experience/ 301
+/documentation/ /articles/technical-documentation/ 301
+/api-documentation/ /articles/technical-documentation/ 301
+/docs-as-code/ /articles/technical-documentation/ 301
+/documentation-seo/ /articles/ai-search-optimization/ 301
+/ai-ready-documentation/ /articles/ai-search-optimization/ 301
+/technical-content/ /articles/developer-experience/ 301
 /articles/documentation-style-guide-template-for-developer-teams /articles/documentation-style-guide-template/ 301
 /articles/documentation-style-guide-template-for-developer-teams/ /articles/documentation-style-guide-template/ 301
 # AI-cluster focus areas: collapsed into the /articles/ index during the
 # July 30 refocus. Redirected until each cluster gets its own owner page.
-/ai-agent-memory /articles/ 301
-/ai-agent-memory/ /articles/ 301
-/ai-agent-architecture /articles/ 301
-/ai-agent-architecture/ /articles/ 301
-/ai-workflows /articles/ 301
-/ai-workflows/ /articles/ 301
-/llm-inference /articles/ 301
-/llm-inference/ /articles/ 301
-/rag /articles/ 301
-/rag/ /articles/ 301
+/ai-agent-memory /articles/ai-engineering/ 301
+/ai-agent-memory/ /articles/ai-engineering/ 301
+/ai-agent-architecture /articles/ai-engineering/ 301
+/ai-agent-architecture/ /articles/ai-engineering/ 301
+/ai-workflows /articles/ai-engineering/ 301
+/ai-workflows/ /articles/ai-engineering/ 301
+/llm-inference /articles/ai-engineering/ 301
+/llm-inference/ /articles/ai-engineering/ 301
+/rag /articles/ai-engineering/ 301
+/rag/ /articles/ai-engineering/ 301

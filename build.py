@@ -278,6 +278,7 @@ class SiteBuilder:
             # Extract TOC from markdown if available
             toc_html = getattr(self.md, 'toc', '') if hasattr(self.md, 'toc') else ''
             slug = post.get("slug") or slugify(md_file.stem)
+            source_stem = md_file.stem
 
             posts.append({
                 "title": post.get("title", md_file.stem),
@@ -288,6 +289,7 @@ class SiteBuilder:
                 "declared_category": post.get("category", ""),
                 "takeaways": post.get("takeaways", []),
                 "status": status,
+                "source_stem": source_stem,
                 "content": html,
                 "slug": slug,
                 "reading_time": estimate_reading_time(post.content),
@@ -855,6 +857,15 @@ class SiteBuilder:
             slug = post["slug"]
             lines.append(f"/blog/{slug} /articles/{slug}/ 301")
             lines.append(f"/blog/{slug}/ /articles/{slug}/ 301")
+
+            # A post whose filename differs from its slug had a second legacy URL that
+            # nothing redirected. Nine date-prefixed files were in that state, and
+            # /blog/2026-04-21-the-taxonomy-of-ai-agents/ was still taking 41 impressions
+            # into a 404. Emit the stem form too whenever it differs.
+            stem = post.get("source_stem")
+            if stem and stem != slug:
+                lines.append(f"/blog/{stem} /articles/{slug}/ 301")
+                lines.append(f"/blog/{stem}/ /articles/{slug}/ 301")
 
         redirects_src = Path("static/_redirects")
         if redirects_src.exists():
