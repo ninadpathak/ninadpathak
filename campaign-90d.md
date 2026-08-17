@@ -246,7 +246,14 @@ nine tool impressions were non-human.
 1. **Tool building stops at five.** Not because tools are a bad format — the format half of the bet survives — but because the demand is not there. The whole build-a-tool subset is ~1,800/mo after the contamination cut, ~1,100/mo of it already shipped, and every remaining candidate was already rejected on constraint grounds. **There were never sixty rows in it.**
 2. **The five stay, and stay as tools.** Six of seven SERPs are tool-answered.
 3. **Tools are measured on referring domains and on the first-hand articles they make possible, not on sessions.** `keepachangelog.com` holds 2,220 referring domains on effectively no traffic. That reframes the tools rather than killing them, and it is falsifiable.
-4. **The calendar moves to where the site actually ranks.** The only two genuinely human long-tail queries the domain holds are operational cluster-3 questions at positions 10.6 and 10.2. Thin, conversational rather than head terms, and the only measured human demand on this domain. Cluster 3 is also the one cluster the contamination sweep found clean while four others lost 24–45%.
+4. **Defend the pages where the site actually ranks.** Three genuinely human queries are
+   in striking distance, not two. `fine-tuning-vs-rag-for-agent-memory` owns
+   `ai agent memory vs fine-tuning for domain-specific knowledge retention` at position
+   6.6 on a 14-impression named-human floor; the page already exists, so this is a refresh
+   and preservation job, not a new calendar row. The two operational production-error
+   questions remain at positions 10.6 and 10.2 and map to pages the consolidation plan
+   already holds. All three are thin long tails, not head terms. Cluster 3 is also the one
+   cluster the contamination sweep found clean while four others lost 24–45%.
 5. **Take the free win.** Google surfaces *"Does LLMs.txt actually work?"* as a People-also-ask question on a SERP already targeted. Measured demand for an evidence article, and it needs no tool to rank.
 
 #### Two method rules this produced
