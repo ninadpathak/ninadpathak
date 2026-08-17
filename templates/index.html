@@ -256,6 +256,17 @@
       <a href="/articles/" class="arrow-link">All articles →</a>
     </div>
 
+    {# Cluster owner pages. The homepage is the strongest page on the site, so every
+       cluster gets its inbound link from here rather than only from paginated lists.
+       Empty clusters render no page, so they are filtered out. #}
+    {% if categories %}
+    <nav class="post-tags" aria-label="Article topics">
+      {% for category in categories if category.posts %}
+      <a class="tag" href="{{ category.url }}">{{ category.title }}</a>
+      {% endfor %}
+    </nav>
+    {% endif %}
+
     {% for post in recent_posts %}
     <a href="/articles/{{ post.slug }}/" class="post-row">
       <span class="post-row-date">{{ post.date | format_date_iso }}</span>

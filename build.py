@@ -466,12 +466,13 @@ class SiteBuilder:
     # Page builders
     # ------------------------------------------------------------------
 
-    def build_homepage(self, posts, work_cases):
+    def build_homepage(self, posts, work_cases, categories=None):
         self.render(
             "index.html", "index.html",
             page="home",
             recent_posts=posts[:4],
             featured_cases=work_cases[:3],
+            categories=categories or [],
         )
 
     def build_blog_list(self, posts, categories):
@@ -889,7 +890,7 @@ class SiteBuilder:
         pillars = self.load_pillars(posts)
         categories = self.load_categories(posts)
 
-        self.build_homepage(posts, work_cases)
+        self.build_homepage(posts, work_cases, categories)
         self.build_blog_list(posts, categories)
         self.build_category_archives(categories)
         self.build_posts(posts)
