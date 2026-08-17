@@ -34,6 +34,13 @@ OUTPUT = pathlib.Path("output")
 # Body links to another article. Captures the anchor text so a crossing can be judged.
 LINK = re.compile(r"\[([^\]]+)\]\(/articles/([a-z0-9][a-z0-9\-\.]*)/?\)")
 HREF = re.compile(r'href="/articles/([a-z0-9][a-z0-9\-\.]*)/"')
+# Outbound links to non-article internal destinations: the tools and hand-written pages.
+# A link to /llms-txt-validator/ sends a reader somewhere genuinely useful, so it counts
+# toward CHARTER 2e's two-outbound minimum even though it is not an article.
+INTERNAL = re.compile(r"\[([^\]]+)\]\((/[a-z0-9][a-z0-9/\-\.]*)/?\)")
+NON_ARTICLE_TARGETS = ("/linter/", "/llms-txt-generator/", "/llms-txt-validator/",
+                       "/ai-overviews-checker/", "/glossary/", "/work/", "/projects/",
+                       "/portfolio/", "/about/")
 
 # Listing pages link every post they list, so counting them would make every page look
 # connected. CHARTER 2e is explicit that a related-posts dump is not a link, so inbound
@@ -90,6 +97,9 @@ def main() -> int:
     crossings = []
 
     for slug, post in posts.items():
+        for _anchor, target in INTERNAL.findall(post["content"]):
+            if target.rstrip("/") + "/" in NON_ARTICLE_TARGETS:
+                outbound[slug] += 1
         for anchor, target in LINK.findall(post["content"]):
             if target == slug or target not in posts:
                 continue
@@ -140,6 +150,8 @@ def main() -> int:
     for slug in orphans:
         print(f"  [{posts[slug]['cluster']}] {slug}")
     print(f"\n--- fewer than 2 outbound links: {len(thin)} ---")
+    print("Counts links to articles and to the tools and standing pages, since a link to")
+    print("a tool sends a reader somewhere useful and satisfies 2e just as well.")
     for slug in thin:
         print(f"  [{posts[slug]['cluster']}] {slug}  ({outbound[slug]} out)")
 
