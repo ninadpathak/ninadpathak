@@ -76,4 +76,3 @@ truncation. It reuses the 58-response snapshot and has SHA-256
 Global canonical-page deduplication still applies after the independent project
 samples are selected. Syntax parsing remains locked until the selected page
 manifest and response receipts are frozen.
-
