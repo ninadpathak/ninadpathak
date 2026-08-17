@@ -282,6 +282,53 @@ Three decisions taken:
 2. **Commit `7e875cda` is dropped, not merged.** Every file it touched already exists on `main` through later commits; its only unique contribution was 103 lines of unused glossary CSS against standing order 4. Superseded rather than lost.
 3. **The director works in a separate `main` worktree from now on.** Agents own the shared checkout, and an agent mid-rebase left conflict markers in `config.toml` that made `build.py` fail for everyone in that tree. Separating the deploy checkout removes the collision entirely.
 
+### 2026-08-17 (third cycle) — the glossary recovery, and the finding that killed a twelve-article plan
+
+**The glossary was one line away from live the whole time.** `content/data/glossary.yaml` line 1 read `status: retired`, and `load_glossary` returns an empty list on that, so all 25 terms were unreachable. The terms are complete — real short and long definitions, a how-it-works section, use cases, related terms, and **zero TODO placeholders**. Meanwhile Google had **24 of those URLs indexed and ranking**, at positions from 7.4 to 76, drawing roughly 380 impressions over three and a half months, every one of them landing on a 404.
+
+Checked the thing that would have made the recovery worthless: every one of the 24 indexed slugs is present in the rebuilt set, so this is recovery rather than 25 new pages competing with 24 dead ones. The terms make no first-person claims at all, which clears the voice standard by the third path it explicitly allows. Publishing immediately failed the SEO audit on two `related_terms` pointing at terms that do not exist; both removed, and `tests/test_glossary_integrity.py` now fails on a dangling related term, a duplicate slug, or a placeholder definition.
+
+**A near-miss worth recording, because it is a whole class of defect.** `/glossary/` had been redirected to `/articles/` earlier the same day to stop it 404ing. Cloudflare's `_redirects` takes precedence over a static file, so once the glossary republished, that redirect would have sent every visitor and crawler away from the page it was meant to protect — including the `/glossary/` URL sitting at position 8.6. **A redirect added to cover a dead page has to come out when the page comes back.** Every future dead-URL recovery can reintroduce this, so `daily_cycle.py` now fails the gate on any redirect whose source resolves to a real built page. Verified by reintroducing the bug and watching the gate catch it.
+
+Sitemap 116 → 142 URLs.
+
+### The premise in charter section 4 is dead, and this is where it is recorded
+
+Section 4 says *fixing what already ranks may beat anything else on the board*. That was written before the machine query fan-out was identified, and once `tools/gsc_report.py` shipped it became measurable. The scoreboard:
+
+**46 queries sit in positions 4–30 carrying 204 impressions. Of those, 28 are machine fan-out variants of a single keyword salad (149 impressions), 3 are brand, 1 is a pasted blob, and 9 fall below a 3-impression floor. Human queries in reach: five — and two of those are junk** (`roman hresko` is a different person's name, `technical tutorial` has 3 impressions).
+
+So the site has roughly **three real striking-distance queries**. The 44 AI-cluster pages sitting at average position 11.5 on 1,191 impressions look like a goldmine and are not: those impressions are the `anthropic contextual retrieval` fan-out. Expanding them would be optimising for a crawler that does not click.
+
+That correction cancelled twelve queue rows mid-plan. They had been reassigned to "expansion slots on pages already ranking at GSC positions 8–28" — a reasonable idea under section 4, resting on a scoreboard that did not exist yet. When the scoreboard arrived it showed almost nothing there. The twelve rows are repointed at cluster 4, which is the priority lever on evidence, has verified volume (23,880/mo, 42 keywords at KD≤20), holds one post, and already contains four live tools for articles to point at.
+
+### The methodological finding, which cost twelve articles before it was caught
+
+**Cluster-level volume × winnability is the right instrument for sizing a niche and the wrong one for choosing articles.** The morning's reweight sent 45% of the calendar to Reddit, community and events on the strength of 76–91% KD≤20 winnability. Checking individual keywords against their parent topic before writing briefs showed why those shares were so high:
+
+- Reddit marketing's head is `buy reddit account` (3,600) and `readvertising` (4,400). Actual content intent in that space totals about 100/mo, and the row scheduled to publish the next morning targeted a 20/mo keyword whose long tail is OnlyFans and music promotion.
+- `developer community` returns community development block grants and departments of housing. 59% of that cluster had already been stripped as HOA and property management, and the contamination survived at the head under a different phrase.
+- Independently, and within the same hour, the tool-selection pass found that `audit documentation software` and `audit documentation example` are the **accounting** sense — ISA 230 assurance workpapers — not developer documentation.
+
+Both cluster totals were accurate. Both were misleading. **High winnability can mean nobody in this niche contests those keywords because they are not this niche.** Parent topic is the per-keyword check that catches it, and it is cheap. Allocation corrected: Reddit 11 → 4, community 10 → 5. Cluster 7 probed on the same basis. Row 20 repointed before it could publish.
+
+Because two independent agents hit contamination inside one hour, a full sweep of the banked universe is in flight. The 336,180/mo total and everything resting on it are treated as provisional until it lands.
+
+### Also this cycle
+
+- **Third tool live**: `/ai-crawler-checker/`. The build-a-tool shortlist is now exhausted — the remaining six candidates were rejected with dated SERP evidence, three of them on constraint-incompatibility rather than difficulty, including `ai documentation generator` which cannot be built at any effort level without transmitting the user's code.
+- **All four tools verified working, not assumed.** The AI Overviews checker runs 8/8 in a browser with no console errors and honestly reports "2 not applicable". The llms.txt validator was tested end to end against a live domain: it fetched a real 28,458-byte file through the Cloudflare function, parsed 8 sections and 102 links, and graded it A with zero findings.
+- **Documentation-cluster voice repair**: 55 claim units at 23 keep / 21 rewrite / 11 cut, `rule_checker` 284 → 280. The Cloudflare Workers SEO audit was **kept** after the script was rerun and reproduced 12 passes — the standard removes what cannot be evidenced, not everything first-person. The reviewer also caught that a cut 30-site measurement had survived inside the AI Overviews checker's sample data.
+- **Six illegitimate cross-cluster links removed**, 22 → 16. The tell is now stated in all three skill copies as a test rather than a phrase list: *delete the link and the sentence should break*. Stripping them revealed that `technical-content-as-a-moat-the-long-game-for-developer-tools` has **zero** outbound links — all three of its links were convenience links. The page was never connected to the site, it only looked connected, and it is queued for review as a page.
+- **`rsvg-convert` installed.** The suite had carried one permanently red test from a missing binary, which is how a real failure hides behind a known one. 234 passing, zero failures.
+- **Cluster audit corrected twice**, both times because the instrument overstated the problem: it now counts inbound links from the built site rather than article bodies only, and counts links to tools as outbound. Orphans 21 → 18, thin outbound 10 → 8. Cluster 4 has one post and therefore no article siblings, so an audit that demanded article-to-article links would have forced the exact cluster-isolation breach the rule forbids.
+
+### Ahrefs is dead, and it changed nothing
+
+The MCP token is invalid — reproduced on the free `subscription-info-limits-and-usage` endpoint, so it is the token and not a quota. Escalated; credentials are out of the director's scope. Semrush is confirmed working and standing order 8 covers the split.
+
+The pattern worth keeping: the blocked call was a re-pull of clusters 5–7 past a 250-row cap. Rather than treating it as a blocker, the argument was checked — the cap ordered by volume descending, so truncation only ever removed keywords **below** the target-set cut-offs. The band stands at 350–1,350, central ~710. Cluster totals stay labelled as floors rather than quietly restated as facts, and the correction was appended as an appendix rather than rewritten into the original section. **When something is unavailable, establish whether it changes the answer before treating it as a blocker.**
+
 ### 2026-08-17 — no-new-CSS violation, held out of the deploy
 
 Commit `7e875cda` on `seo/90day-strategy` added 103 lines and nine classes to `static/css/main.css` for glossary and post-terms display, against standing order 4. The glossary is not shipping — all 16 terms are held back on TODO placeholder prose — so the CSS is currently dead weight on every page load.
