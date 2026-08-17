@@ -47,7 +47,7 @@ A tool must work in the browser with no login and no lead capture, expose its me
 
 `/linter/` and `/llms-txt-generator/` already exist. The generator has earned **three impressions in its entire life** — not because it is bad, but because nothing links to it, it carries no schema, and its title and description were never written for search. That is the campaign's clearest example of an asset left on the floor, and it is being fixed first.
 
-**Tools are protected from the thing that is eating everyone else's traffic.** All fifteen highest-value keywords in the seven-cluster niche carry a Google AI Overview. None of the nine build-a-tool keywords do. AI Overviews cost roughly 35% of clicks on the SERPs that have them, and 49.2% of this niche's SERPs have one. That makes tool intent the only traffic profile in the niche that an AI Overview does not tax — a structural advantage, not a temporary one.
+**~~Tools are protected from the thing that is eating everyone else's traffic.~~ FALSIFIED 2026-08-17 — see the tool-bet verification below.** The claim was that all fifteen highest-value keywords in the niche carry a Google AI Overview while none of the nine build-a-tool keywords do. Read on live SERPs, **three of the six readable build-a-tool keywords now carry an AI Overview, and the flagship carries one reproducibly.** The claim came from keyword-tool feature flags, which were wrong on three of four rows in both directions. AI Overviews cost roughly 35% of clicks on the SERPs that have them, and 49.2% of this niche's SERPs have one. That makes tool intent the only traffic profile in the niche that an AI Overview does not tax — a structural advantage, not a temporary one.
 
 Build order, by evidence:
 
@@ -188,6 +188,50 @@ First pass deployed, and it is better than what was live — but measured agains
 **Failed:** every one of the 25 pages has zero `h3`s and three or four `h2`s in the same shape, which is both the flat-structure defect and the fixed-template defect the instruction named — twenty-five terms sharing a heading tree means twenty-four are padded. And the +36% is smaller than the raw field count suggests because `short_definition` and `use_cases` **render nowhere**: 50 occurrences of content no reader sees. Content nobody sees is not depth, and dead fields are debt.
 
 Sent back for a second pass. The lesson worth keeping: **measure the rendered page, not the source data.** A three-times increase in a YAML file was a 36% increase for a reader.
+
+### The tool-first bet, verified on live SERPs, and half of it is wrong
+
+Read 2026-08-17 in a logged-out browser session, one row per keyword, and it changes the plan. **The half that fails is the half the strategy rested on.**
+
+`addressable-universe.md` §5a said: *"Not one of these nine SERPs shows an AI Overview. Tool queries are structurally protected from the thing suppressing clicks everywhere else in this niche."* That was the strongest argument in the campaign for weighting toward tools.
+
+| Keyword | Ahrefs dataset | Semrush code 52 | **Live SERP** |
+|---|---|---|---|
+| ai overviews checker | no AIO | present | **AIO present** (read twice, reproducible) |
+| llms.txt validator | no AIO | absent | **AIO present** |
+| llms.txt checker | no AIO | absent | **AIO present** |
+| llms.txt generator | no AIO | present | no AIO |
+
+**Three of six readable build-a-tool keywords carry an AI Overview, and the flagship carries one reproducibly, plus a video carousel and a paid ad.** Whether the SERPs changed inside a month or the dataset was wrong when pulled cannot be settled — Ahrefs is dead, so there is no before-and-after on one instrument. **Both readings are bad for the bet:** if the SERPs moved, tool intent was temporarily unoccupied rather than structurally protected; if the dataset was wrong, the premise was never true.
+
+**The half that survives: page shape.** Six of seven SERPs are tool-answered, so a tool page is the correct format for these queries. **The tools must not be rewritten as articles.** Only `technical writing linter` is article-answered, and it is the one where the site ranks.
+
+**The premise nobody had stated is the one that bites.** Every one of these SERPs is won by either an SEO SaaS platform using a free tool as a lead magnet — Semrush, SE Ranking, Sitechecker, SEOptimer, Rank Math, Writesonic — or an exact-match single-purpose domain: `llmstxtvalidator.org`, `llmstxtgenerate.com`, `aicrawlercheck.com`. This site is neither.
+
+And the site's own history is the strongest evidence available. `tools/gsc_attribution.py`, built the same day:
+
+| Tool | Observable days | First impression | First human impression | Impressions ever |
+|---|---:|---|---|---:|
+| `/linter/` | 153 | 65d | **not yet, 153d** | 9 |
+| `/llms-txt-generator/` | 14 | **not yet, 14d** | not yet, 14d | **0** |
+
+Two tools live long enough to judge have produced nine impressions and no clicks between them. In fairness the other three shipped days ago and their zeros are expected rather than evidence.
+
+#### Decisions taken
+
+1. **Tool building stops at five.** Not because tools are a bad format — the format half of the bet survives — but because the demand is not there. The whole build-a-tool subset is ~1,800/mo after the contamination cut, ~1,100/mo of it already shipped, and every remaining candidate was already rejected on constraint grounds. **There were never sixty rows in it.**
+2. **The five stay, and stay as tools.** Six of seven SERPs are tool-answered.
+3. **Tools are measured on referring domains and on the first-hand articles they make possible, not on sessions.** `keepachangelog.com` holds 2,220 referring domains on effectively no traffic. That reframes the tools rather than killing them, and it is falsifiable.
+4. **The calendar moves to where the site actually ranks.** The only two genuinely human long-tail queries the domain holds are operational cluster-3 questions at positions 10.6 and 10.2. Thin, conversational rather than head terms, and the only measured human demand on this domain. Cluster 3 is also the one cluster the contamination sweep found clean while four others lost 24–45%.
+5. **Take the free win.** Google surfaces *"Does LLMs.txt actually work?"* as a People-also-ask question on a SERP already targeted. Measured demand for an evidence article, and it needs no tool to rank.
+
+#### Two method rules this produced
+
+**Keyword-tool feature flags are not evidence.** They disagreed with the live SERP on three of four rows, in both directions — Ahrefs said no AI Overview where there is one, Semrush claimed one where there is not. Read the SERP. And Semrush and Ahrefs disagree **eightfold** on `llms.txt generator` volume, 300 against 2,400; that gets resolved before anyone plans on it.
+
+**Re-read these seven SERPs monthly.** Coverage moved enough in a month to invalidate a strategy premise, so a single reading has a shelf life.
+
+Two things the verification refused to do, both correct. Google served a bot-detection page on the first attempt and **the CAPTCHA was not bypassed** — a plain query on a normal session worked on retry, and had it not, the question would have been reported unanswerable. And only Semrush code 52 was decoded, because it is documented; codes 6, 7, 9, 14, 15, 20, 21 and 36 were left undecoded rather than guessed.
 
 ### A link profile is a diagnostic for editorial substance
 
