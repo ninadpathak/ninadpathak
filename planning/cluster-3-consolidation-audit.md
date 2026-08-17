@@ -202,9 +202,14 @@ The 12 planned cluster-3 rows should still collapse to about 6, and the freed sl
 
 The tool-first premise died the same day, and the twelve expansion rows repointed at cluster 4 on
 that reasoning came back for re-decision. The evidence offered for redirecting them was cluster 3's
-operational long-tail: the only two genuinely human queries this domain holds, `how do you handle
-errors when ai agents make mistakes in production` at position 10.6, and `how do companies debug ai
-agents that fail in production` at 10.2.
+operational long-tail. This paragraph originally called the two production-error questions the
+only genuinely human queries the domain held. The same first-party report exposed a third real job:
+`ai agent memory vs fine-tuning for domain-specific knowledge retention`, held by
+`fine-tuning-vs-rag-for-agent-memory` at position 6.7 on 15 named impressions. The 2026-08-18
+point-in-time rerun keeps it at 6.6 on 14 named-human impressions of 33 page impressions. The other
+two remain `how do you handle errors when ai agents make mistakes in production` at position 10.6,
+and `how do companies debug ai agents that fail in production` at 10.2. Query figures are floors;
+the 28-day page+query pull exposes 390 of 1,855 page impressions (21.0%).
 
 That looks like it contradicts this audit, which says cluster 3 is over-populated. It does not, and
 the reconciliation is that **the two findings are about different shapes.** What is over-populated
@@ -215,17 +220,20 @@ something is broken.
 **Fewer, better, operational. But the honest row count that justifies is zero new rows, and here is
 why.**
 
-**Both queries already map to pages the plan holds.** `how do companies debug ai agents that fail in
+**All three queries already map to pages the plan holds.** The fine-tuning job is already owned by
+the retained `fine-tuning-vs-rag-for-agent-memory`; it needs preservation and refresh review, not a
+new row. `how do companies debug ai agents that fail in
 production` is order 76, The Agent Observability Stack, whose stated reader outcome is "see what an
 agent did, in enough detail to debug a bad run". `how do you handle errors when ai agents make
 mistakes in production` is order 78, Circuit Breakers for AI Agents, "stop a failing agent loop
 before it burns budget or corrupts state". Both were already in the keep set, and both are
 demand-backed by the corpus rather than by a keyword tool.
 
-**The queries also already rank.** Position 10.2 and 10.6 is page one to two on an existing page,
-`production-ai-agent-errors`, which holds 17 inbound links and is the batch-3 merge target absorbing
-`why-ai-agents-keep-failing-in-production`. Writing new pages for queries an existing page already
-ranks for is cannibalization, which is the rule this campaign enforces everywhere else.
+**The queries also already rank.** The 10.6 query belongs to `production-ai-agent-errors`; the 10.2
+query belongs to `why-ai-agents-keep-failing-in-production`. The former holds 17 inbound links and
+is the batch-3 target absorbing the latter, so the merge must preserve both query jobs. Writing a
+third page for demand these pages already hold would be cannibalization, which is the rule this
+campaign enforces everywhere else.
 
 So the operational demand is served by **expanding a page that already ranks**, and that expansion
 is the batch-3 merge rather than a new row. The merge brief carries the requirement: the merged page
