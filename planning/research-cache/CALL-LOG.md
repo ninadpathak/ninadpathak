@@ -288,3 +288,17 @@ Output: `planning/research/REFERENCE-INFRASTRUCTURE-2026-08-17.md`.
 
 No DataForSEO calls were made: no account exists. `tools/ai_overview_citations.py` refuses to
 spend without `--decision` and reports cost in dry-run.
+
+### Contract verification — 2026-08-17 (0 paid calls)
+
+The first implementation compared **domains** while its stated decision compared **pages**. A
+domain whose `/tool` ranks and whose different `/research` page is cited therefore counted as
+100% overlap. That can reverse the campaign decision the instrument exists to support.
+
+The decision metric now compares normalized page URLs. Domain overlap remains visible only as a
+secondary near-miss and is explicitly labelled as such. Cache identities also carry a digest so
+slug collisions such as `llms.txt` and `llms txt` cannot reuse one paid payload. Fifteen offline
+contract tests cover top-level and nested references, page/domain divergence, URL normalization,
+cache collisions, no-credential and dry-run refusal, cached no-spend reads, approved fetch logging,
+and strict failure on an empty API response. Acquisition remains unchanged and no endpoint was
+called during verification.
