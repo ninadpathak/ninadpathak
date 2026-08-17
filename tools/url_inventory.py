@@ -268,14 +268,14 @@ def load_inventory(path: pathlib.Path = None) -> dict:
 
 
 def load_allowlist(path: pathlib.Path = None) -> dict:
-    """Retired URLs, as {"exact": {path: entry}, "prefixes": [(prefix, entry)]}.
+    """Recorded retirements and human-approved equivalent redirects.
 
     A retired URL is a recorded decision, not a silent omission, so an entry with no
     `reason` is rejected rather than honoured. Failing loudly on a reasonless write-off is
     the whole point of the file.
     """
     path = path or ALLOWLIST
-    empty = {"exact": {}, "prefixes": [], "problems": []}
+    empty = {"exact": {}, "prefixes": [], "redirects": {}, "problems": []}
     if not path.exists():
         return empty
     import yaml
@@ -292,7 +292,21 @@ def load_allowlist(path: pathlib.Path = None) -> dict:
             exact[_norm(entry["path"])] = entry
         elif entry.get("prefix"):
             prefixes.append((_norm(entry["prefix"]), entry))
-    return {"exact": exact, "prefixes": prefixes, "problems": problems}
+    equivalent_redirects = {}
+    for entry in data.get("equivalent_redirects", []) or []:
+        if not isinstance(entry, dict):
+            continue
+        source = entry.get("path")
+        target = entry.get("target")
+        reason = str(entry.get("reason", "")).strip()
+        if not source or not target or not reason:
+            problems.append(
+                f"equivalent redirect {source or '?'} needs path, target, and reason"
+            )
+            continue
+        equivalent_redirects[_norm(source)] = {**entry, "target": _norm(target)}
+    return {"exact": exact, "prefixes": prefixes,
+            "redirects": equivalent_redirects, "problems": problems}
 
 
 def _allowed_entry(path: str, allowed: dict):
@@ -390,13 +404,24 @@ def classify(inventory: dict, built: set, redirects: dict, allowed: dict) -> dic
         if hit:
             target = redirects["exact"][hit]
             target_norm = _norm(target) if target.startswith("/") else target
+            approved = next(
+                (allowed.get("redirects", {}).get(v) for v in _variants(path)
+                 if allowed.get("redirects", {}).get(v)),
+                None,
+            )
+            approved_equivalent = bool(
+                approved and target.startswith("/")
+                and approved.get("target") == target_norm
+            )
             record = {**row, "target": target,
                       "target_is_built": bool(_variants(target_norm) & built)
                       if target.startswith("/") else True,
-                      "target_is_listing": target_norm.rstrip("/") + "/" in LISTING_TARGETS}
+                      "target_is_listing": target_norm.rstrip("/") + "/" in LISTING_TARGETS,
+                      "equivalence_approved": approved_equivalent}
             # A redirect to a bare listing is what Google calls a soft 404. Equivalence
             # cannot be judged mechanically, so this is reported, not failed.
-            if record["target_is_listing"] or not record["target_is_built"]:
+            if ((record["target_is_listing"] and not approved_equivalent)
+                    or not record["target_is_built"]):
                 soft404.append(record)
             else:
                 redirected.append(record)
@@ -478,8 +503,13 @@ def report(inventory: dict, result: dict, age: int) -> list:
                          f"{row['clicks_total']} clicks all time")
 
     if result["redirected"]:
+        approved = sum(1 for row in result["redirected"]
+                       if row.get("equivalence_approved"))
+        unreviewed = len(result["redirected"]) - approved
         lines.append(f"redirected: {len(result['redirected'])} URL(s) point at a page that "
-                     f"exists. Equivalence is not machine-checkable and was not checked.")
+                     f"exists; {approved} listing redirect(s) were human-approved as "
+                     f"equivalent and {unreviewed} specific-page redirect(s) remain "
+                     f"mechanically valid but editorially unverified.")
     if result["retired"]:
         lines.append(f"retired by decision: {len(result['retired'])} URL(s) on the allowlist")
         # An allowlist is where leaks would go to hide. A retired URL still earning

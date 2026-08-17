@@ -46,8 +46,9 @@ def row(path, total=10, alarm=0, watch=0, clicks=0) -> dict:
             "impressions_watch": watch, "impressions_alarm": alarm, "clicks_alarm": 0}
 
 
-def allow(exact=None, prefixes=None, problems=None) -> dict:
-    return {"exact": exact or {}, "prefixes": prefixes or [], "problems": problems or []}
+def allow(exact=None, prefixes=None, redirects=None, problems=None) -> dict:
+    return {"exact": exact or {}, "prefixes": prefixes or [],
+            "redirects": redirects or {}, "problems": problems or []}
 
 
 NO_REDIRECTS = {"exact": {}, "wildcard": []}
@@ -193,6 +194,42 @@ class ClassificationTests(unittest.TestCase):
             allow())
         self.assertEqual(result["alarm"], [])
 
+    def test_a_human_approved_listing_redirect_is_not_reported_forever(self):
+        result = ui.classify(
+            inventory(row("/blog/", watch=35)),
+            {"/articles/"},
+            {"exact": {"/blog/": "/articles/"}, "wildcard": []},
+            allow(redirects={"/blog/": {
+                "target": "/articles/", "reason": "listing replaced listing"
+            }}),
+        )
+        self.assertEqual(result["soft404"], [])
+        self.assertEqual([r["path"] for r in result["redirected"]], ["/blog/"])
+        self.assertTrue(result["redirected"][0]["equivalence_approved"])
+
+    def test_redirect_approval_does_not_survive_a_target_change(self):
+        result = ui.classify(
+            inventory(row("/blog/", watch=35)),
+            {"/articles/"},
+            {"exact": {"/blog/": "/articles/"}, "wildcard": []},
+            allow(redirects={"/blog/": {
+                "target": "/tools/", "reason": "old decision"
+            }}),
+        )
+        self.assertEqual([r["path"] for r in result["soft404"]], ["/blog/"])
+
+    def test_equivalent_redirect_without_a_reason_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = pathlib.Path(tmp) / "allow.yaml"
+            path.write_text(
+                "equivalent_redirects:\n"
+                "  - path: /blog/\n"
+                "    target: /articles/\n"
+            )
+            got = ui.load_allowlist(path)
+        self.assertEqual(got["redirects"], {})
+        self.assertEqual(len(got["problems"]), 1)
+
     def test_redirect_matches_across_slash_variants(self):
         result = ui.classify(
             inventory(row("/blog/a", alarm=5)),
@@ -261,7 +298,7 @@ class AllowlistTests(unittest.TestCase):
     def test_the_shipped_allowlist_cites_evidence_and_a_date(self):
         import yaml
         data = yaml.safe_load(ui.ALLOWLIST.read_text(encoding="utf-8"))
-        for entry in data["retired"]:
+        for entry in data["retired"] + data["equivalent_redirects"]:
             label = entry.get("path") or entry.get("prefix")
             self.assertTrue(str(entry.get("evidence", "")).strip(), f"{label} has no evidence")
             self.assertTrue(str(entry.get("decided", "")).strip(), f"{label} has no decided date")

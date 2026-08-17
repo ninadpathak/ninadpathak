@@ -1,4 +1,4 @@
-# Retired URLs — write-offs, recorded as decisions
+# Retired URLs and equivalent redirects — recorded decisions
 #
 # Read by tools/url_inventory.py. A URL listed here is one the site deliberately no
 # longer serves and does not intend to redirect. Listing it stops the guard reporting it
@@ -19,7 +19,7 @@
 #
 # THE EVIDENCE FOR THIS SEED
 #
-# Search Console span 2025-04-21 to 2026-08-14. Every URL below had
+# Search Console span 2025-04-21 to 2026-08-14. Every retired URL below had
 # ZERO impressions in the 84 days ending 2026-08-14. Google has dropped them, so
 # restoring the URLs now would start from zero rather than recover anything. That is the
 # basis for writing them off rather than redirecting them, and it is a measurement, not an
@@ -35,6 +35,26 @@
 # 66 clicks, the single best-performing URL this domain has ever had. It is still written
 # off, because it has had zero impressions in 84 days and it is a CSS tutorial with no
 # relationship to technical documentation, developer experience, or AI search.
+
+# Listing redirects are reported as possible soft 404s until a person confirms that the
+# old and new destinations serve the same navigational job. The target is pinned so a
+# later redirect change reopens the warning instead of inheriting an obsolete approval.
+equivalent_redirects:
+  - path: "/blog/"
+    target: "/articles/"
+    reason: "The retired blog index and current articles index are both the complete post archive."
+    evidence: "35 impressions in the 84 days to 2026-08-14; target is built and lists the migrated posts"
+    decided: "2026-08-17"
+  - path: "/blog"
+    target: "/articles/"
+    reason: "Slashless variant of the retired blog index; same archive replacement."
+    evidence: "0 impressions in the 84 days to 2026-08-14; target is built"
+    decided: "2026-08-17"
+  - path: "/topics/"
+    target: "/articles/"
+    reason: "The retired topic archive and current article index both route readers across the site's post collection."
+    evidence: "20 impressions in the 84 days to 2026-08-14; target is built and exposes the current cluster owners"
+    decided: "2026-08-17"
 
 retired:
   # ---------------------------------------------------------------------------
