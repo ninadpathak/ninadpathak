@@ -162,6 +162,19 @@
       <div class="post-content">
         {{ post.content }}
       </div>
+      {# Article-to-glossary backlink. Generated from the reverse index build.py builds
+         when a glossary term names this post in its related_articles, so the link runs
+         both ways without editing 17 Markdown files. #}
+      {% if post.glossary_terms %}
+      <aside class="post-terms" aria-labelledby="post-terms-title">
+        <div class="post-terms-label" id="post-terms-title">Terms defined on this site</div>
+        <ul class="post-terms-list">
+          {% for term in post.glossary_terms %}
+          <li><a href="{{ term.url }}">{{ term.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </aside>
+      {% endif %}
     </div>
   </div>
 </article>
@@ -182,20 +195,7 @@
 </section>
 {% endif %}
 
-<!-- CTA -->
-<section class="section-block section-block-top-border">
-  <div class="prose-container">
-    <div class="cta-inner">
-      <div>
-        <h2 class="cta-title-compact">Need a technical writer?</h2>
-        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
-      </div>
-      <div class="cta-actions">
-        <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
-      </div>
-    </div>
-  </div>
-</section>
+{% include "_cta.html" %}
 
 <script>
   window.addEventListener('message', function(e) {
