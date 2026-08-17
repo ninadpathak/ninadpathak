@@ -1,14 +1,15 @@
 ---
 category: ai-engineering
 date: 2026-04-12
-description: A workflow comparison of Claude Code and Gemini CLI for repository
-  refactoring, verification, and human review.
+description: A workflow comparison of Claude Code and Gemini CLI for repository refactoring,
+  verification, and human review.
 status: published
 tags:
 - agentic-cli
 - developer-productivity
 - technical-deep-dive
-title: 'Claude Code vs. Gemini CLI for Repository Refactoring'
+title: Claude Code vs. Gemini CLI for Repository Refactoring
+updated: '2026-08-17'
 ---
 
 Claude Code and Gemini CLI can both inspect a repository, edit files, and run verification commands. The useful comparison is how each tool exposes plans, permissions, tool calls, and failures during a refactor.

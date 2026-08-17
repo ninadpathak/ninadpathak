@@ -11,8 +11,8 @@ tags:
 - fine-tuning
 - agent-memory
 title: 'Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense'
+updated: '2026-08-17'
 ---
-
 
 Which approach wins depends on what problem you are actually solving. Fine-tuning and RAG do not compete on the same axis, and conflating them leads to expensive mistakes that take months to surface.
 

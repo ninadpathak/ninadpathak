@@ -10,7 +10,8 @@ tags:
 - memory
 - context-window
 - research
-title: 'Why Long Context Windows Still Lose Information in the Middle'
+title: Why Long Context Windows Still Lose Information in the Middle
+updated: '2026-08-17'
 ---
 
 A model accepting a long prompt does not guarantee that it can use every part of that prompt equally well. [Lost in the Middle](https://arxiv.org/abs/2307.03172) documented a positional pattern in which relevant information is used less reliably when it sits between the beginning and end.

@@ -11,6 +11,7 @@ tags:
 - rag
 - vector-search
 title: 'Vector Embeddings: a Guide to the Geometry of Meaning in Ai'
+updated: '2026-08-17'
 ---
 
 Every interaction with a modern language model begins with a conversion. You provide text, and the system translates that text into a list of numbers.

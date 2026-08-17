@@ -12,6 +12,7 @@ tags:
 - edge-computing
 - technical-deep-dive
 title: 'Vector Search in the Browser: PGlite vs. SQLite-vec'
+updated: '2026-08-17'
 ---
 
 PGlite and SQLite-vec take different approaches to vector search in the browser. PGlite brings Postgres features and indexed search, while SQLite-vec keeps the runtime and data model closer to SQLite.

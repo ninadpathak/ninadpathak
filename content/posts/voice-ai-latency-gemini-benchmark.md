@@ -11,7 +11,8 @@ tags:
 - latency
 - webrtc
 - engineering
-title: 'How to Trace Latency in a Real-Time Voice Agent'
+title: How to Trace Latency in a Real-Time Voice Agent
+updated: '2026-08-17'
 ---
 
 Voice latency is the sum of endpointing, transcription, model inference, speech synthesis, buffering, and transport. The guide explains that chain without claiming a reproducible benchmark.

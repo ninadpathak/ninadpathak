@@ -9,6 +9,7 @@ tags:
 - developer-marketing
 - developer-experience
 title: How Stripe's Technical Blog Became a Competitive Moat
+updated: '2026-08-17'
 ---
 
 Stripe built a strong technical blog by creating an acquisition surface, a trust layer, and a product education system. These assets keep paying back years after publication.

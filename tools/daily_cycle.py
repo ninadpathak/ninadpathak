@@ -25,6 +25,8 @@ import pathlib
 import re
 import subprocess
 import sys
+import urllib.error
+import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "sc-domain:ninadpathak.com"
@@ -86,6 +88,42 @@ def gsc_totals(start: str, end: str) -> dict | None:
             "nonbrand_clicks": nb_clicks, "nonbrand_impressions": nb_impr}
 
 
+# Standing order 1 is to grow the site in Google *and* in AI search, and robots.txt here
+# is Cloudflare-managed, so it can change without anyone touching the repo. The posture
+# that serves a traffic goal is: block training crawlers, allow the crawlers that produce
+# citations. Training ingestion earns no traffic and no attribution; citation does. These
+# are the agents that must stay allowed.
+CITATION_CRAWLERS = ("Googlebot", "OAI-SearchBot", "PerplexityBot",
+                     "Claude-SearchBot", "Claude-User")
+
+
+def robots_check() -> list[str]:
+    """Confirm no citation crawler has been blocked, and that the sitemap is declared."""
+    # Cloudflare varies robots.txt by User-Agent. The default `Python-urllib/x.y` UA is
+    # treated as an unwanted bot and served only the managed block, without the site's
+    # own `Sitemap:` line, which reads as a missing sitemap when nothing is wrong.
+    # Googlebot and ordinary browsers get the full file. Identify honestly instead.
+    request = urllib.request.Request(
+        "https://ninadpathak.com/robots.txt",
+        headers={"User-Agent": "ninadpathak-daily-cycle/1.0 (+https://ninadpathak.com)"})
+    try:
+        with urllib.request.urlopen(request, timeout=20) as r:
+            robots = r.read().decode("utf-8", "replace")
+    except (urllib.error.URLError, OSError) as exc:
+        return [f"robots.txt unreachable: {exc}"]
+
+    problems = []
+    if "Sitemap:" not in robots:
+        problems.append("robots.txt declares no Sitemap")
+
+    for agent in CITATION_CRAWLERS:
+        block = re.search(rf"^User-agent:\s*{re.escape(agent)}\s*$(.*?)(?=^User-agent:|\Z)",
+                          robots, re.M | re.S)
+        if block and re.search(r"^Disallow:\s*/\s*$", block.group(1), re.M):
+            problems.append(f"{agent} is BLOCKED — this is a citation crawler")
+    return problems
+
+
 def publish_gate() -> list[str]:
     """The mechanical half of the publish gate in campaign-90d.md section 8."""
     failures = []
@@ -132,6 +170,7 @@ def main() -> int:
 
     gsc = gsc_totals(start_28.isoformat(), end.isoformat())
     gate = publish_gate()
+    gate += robots_check()
     publish = todays_publish()
 
     if gsc is None:

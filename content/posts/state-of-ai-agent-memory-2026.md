@@ -1,8 +1,8 @@
 ---
 category: ai-engineering
 date: 2026-04-19
-description: Agent memory spans working state, episodic history, retrieval, and
-  consistency controls. The right architecture depends on the agent's task and risk.
+description: Agent memory spans working state, episodic history, retrieval, and consistency
+  controls. The right architecture depends on the agent's task and risk.
 status: published
 tags:
 - ai
@@ -11,6 +11,7 @@ tags:
 - infrastructure
 - 2026
 title: State of AI Agent Memory in 2026
+updated: '2026-08-17'
 ---
 
 An agent can act on stale or contradictory state without realizing that its memory is wrong. The architecture therefore needs provenance, update rules, and evaluation, not only storage.

@@ -1,8 +1,8 @@
 ---
 category: ai-engineering
 date: '2026-04-25'
-description: Lambda calculus exposes substitution, scope, and composition errors in AI
-  outputs through problems with mechanically checkable answers.
+description: Lambda calculus exposes substitution, scope, and composition errors in
+  AI outputs through problems with mechanically checkable answers.
 slug: lambda-calculus-ai-reasoning-benchmark
 status: published
 tags:
@@ -10,6 +10,7 @@ tags:
 - formal methods
 - evaluation
 title: Lambda Calculus as an AI Reasoning Exercise
+updated: '2026-08-17'
 ---
 
 Lambda calculus exposes whether an AI system can preserve bindings through composition. The exercise here does not report results from a versioned benchmark artifact.

@@ -13,6 +13,7 @@ tags:
 - voice-ai
 - infrastructure
 title: 'Memory for Voice AI Agents: What Text Chatbots Cannot Do'
+updated: '2026-08-17'
 ---
 
 Voice agents and text chatbots fail differently. A text chatbot that loses context produces a confusing paragraph the user can reread and shrug off.

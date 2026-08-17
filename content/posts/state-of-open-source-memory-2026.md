@@ -11,6 +11,7 @@ tags:
 - infrastructure
 - open-source
 title: 'The State of Open Source AI Memory in 2026: Beyond the Context Window Myth'
+updated: '2026-08-17'
 ---
 
 I keep coming back to that legendary [Hacker News thread](https://news.ycombinator.com/item?id=8863) where a commenter dismissed Dropbox as a trivial rsync clone, arguing that anyone with a few spare hours could rebuild it from shell scripts and a mount point. That take aged poorly because the actual challenge lived in the invisible orchestration of state across a messy network full of conflicting edits and flaky connections.

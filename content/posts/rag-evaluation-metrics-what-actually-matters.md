@@ -10,6 +10,7 @@ tags:
 - llm
 - metrics
 title: 'RAG Evaluation Metrics: What Actually Matters'
+updated: '2026-08-17'
 ---
 
 Building a RAG system is the part every tutorial covers. Measuring whether it works is the part almost none of them touch.

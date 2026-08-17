@@ -12,6 +12,7 @@ tags:
 - anthropic
 - coding
 title: How Memory Works in Claude Code
+updated: '2026-08-17'
 ---
 
 Claude Code carries instructions across sessions through `CLAUDE.md` files and auto memory. Conversation context itself remains session-bound.

@@ -11,6 +11,7 @@ tags:
 - agent-memory
 - agent-architecture
 title: Shared Memory vs Isolated Memory in Multi-Agent Workflows
+updated: '2026-08-17'
 ---
 
 Consider a three-stage document pipeline: one agent extracts fields, one validates them, and one writes the summary. Shared memory looks efficient until concurrent writes make the result hard to audit.

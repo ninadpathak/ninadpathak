@@ -11,6 +11,7 @@ tags:
 - transformers
 - engineering
 title: 'Context Engineering as Heap Management: Accuracy Risks in KV Cache Eviction'
+updated: '2026-08-17'
 ---
 
 VRAM capacity dictates the boundary of what a Large Language Model (LLM) can actually do for you. The naive way to expand a context window is to scale hardware until you hit the physical ceiling of the GPU, then buy a bigger GPU.
