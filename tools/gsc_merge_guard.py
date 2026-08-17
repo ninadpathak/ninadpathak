@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """First-party Search Console guard for planned page merges.
 
-The cluster-3 consolidation audit proposes twenty merges and one retirement. Those
+The cluster-3 consolidation audit proposes nineteen merges and one retirement. Those
 redirects are irreversible in practice, but the audit's overlap evidence is editorial:
 no reproducible instrument checks whether source and target have shared search demand,
 whether the source owns demand the target has never shown, or whether Search Console
@@ -59,13 +59,16 @@ ROW_RE = re.compile(
     r"^\| `(?P<source>[^`]+)` \| [^|]+ \| [^|]+ \| "
     r"`(?P<target>[^`]+)` \| (?P<carry>.+) \|$"
 )
+MERGE_SECTION_RE = re.compile(r"^### Merge, \d+ pages$", re.MULTILINE)
+
+
 def parse_dispositions(text: str) -> list[dict]:
     """Parse only the merge table, not later keep tables or prose examples."""
-    marker = "### Merge, 21 pages"
     end_marker = "### Keep but repoint"
-    if marker not in text or end_marker not in text:
+    marker = MERGE_SECTION_RE.search(text)
+    if marker is None or end_marker not in text[marker.end():]:
         return []
-    section = text.split(marker, 1)[1].split(end_marker, 1)[0]
+    section = text[marker.end():].split(end_marker, 1)[0]
     out = []
     for line in section.splitlines():
         match = ROW_RE.match(line)

@@ -103,11 +103,11 @@ Current window 2026-05-18 to 2026-08-15 (90d); history 2025-04-04 to 2026-08-15.
 **Named queries, human impressions and overlap counts are FLOORS.** Exact shared queries are positive evidence of overlap; no observed overlap is not evidence of distinct intent because Search Console withholds low-volume queries. Page impressions and clicks are complete.
 
 - Current sitewide query coverage: 1156 of 6510 page-dimension impressions (17.8%).
-- Current merge pages query coverage: 128 of 710 page-dimension impressions (18.0%).
+- Current merge pages query coverage: 128 of 653 page-dimension impressions (19.6%).
 - Historical sitewide query coverage: 17043 of 36567 page-dimension impressions (46.6%).
-- Historical merge pages query coverage: 128 of 713 page-dimension impressions (18.0%).
+- Historical merge pages query coverage: 128 of 656 page-dimension impressions (19.5%).
 
-**4** `no-source-demand-observed`, **1** `retire-no-demand-observed`, **6** `review-source-demand`, **10** `withheld-source-demand`.
+**4** `no-source-demand-observed`, **1** `retire-no-demand-observed`, **6** `review-source-demand`, **9** `withheld-source-demand`.
 
 | Source → target | Disposition | Execution | Current source | 90d position | Historical human queries | Exact shared | Verdict |
 |---|---|---|---|---|---:|---:|---|
@@ -116,7 +116,6 @@ Current window 2026-05-18 to 2026-08-15 (90d); history 2025-04-04 to 2026-08-15.
 | `memory-hierarchy-in-ai-systems` → `ai-memory-management-for-llms` | merge | `already-merged` | `measured`; 15 impr | 28.7 (15 impr) | 1 | 0 | `review-source-demand` |
 | `the-memory-hierarchy-why-rag-is-not-enough` → `ai-memory-management-for-llms` | merge | `already-merged` | `withheld`; 13 impr | 8.2 (13 impr) | 0 | 0 | `withheld-source-demand` |
 | `asymmetric-retrieval-agent-memory` → `rag-vs-memory` | merge | `already-merged` | `measured`; 12 impr | 18.3 (12 impr) | 1 | 0 | `review-source-demand` |
-| `how-memory-works-in-hyperagents` → `how-memory-works-in-deerflow` | merge | `pending` | `withheld`; 11 impr | 11.2 (11 impr) | 0 | 0 | `withheld-source-demand` |
 | `contextual-compression-for-agent-memory` → `short-term-memory-for-ai-agents` | merge | `pending` | `withheld`; 10 impr | 12.0 (10 impr) | 0 | 0 | `withheld-source-demand` |
 | `agentic-cli-benchmarks` → `best-llms-for-coding` | merge | `pending` | `withheld`; 10 impr | 12.5 (10 impr) | 0 | 0 | `withheld-source-demand` |
 | `the-agent-design-space` → `the-taxonomy-of-ai-agents` | merge | `pending` | `withheld`; 8 impr | 12.6 (8 impr) | 0 | 0 | `withheld-source-demand` |

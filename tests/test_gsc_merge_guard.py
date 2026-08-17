@@ -37,7 +37,7 @@ def query(slug, text, impressions=3, position=15, prefix="/blog/"):
 class TestAuditParser(unittest.TestCase):
     def test_parses_merge_and_retirement_only_from_disposition_table(self):
         text = """before
-### Merge, 21 pages
+### Merge, 2 pages
 | `source-a` | 5 | 0 | `target-a` | carry this |
 | `source-b` | 0 | 1 | `target-b` | **CORRECTED: RETIRE.** |
 ### Keep but repoint
@@ -48,12 +48,16 @@ class TestAuditParser(unittest.TestCase):
         self.assertEqual(got[0]["disposition"], "merge")
         self.assertEqual(got[1]["disposition"], "retire")
 
-    def test_real_audit_has_twenty_merges_and_one_retirement(self):
+    def test_real_audit_has_nineteen_merges_and_one_retirement(self):
         got = mg.parse_dispositions(mg.AUDIT.read_text())
-        self.assertEqual(len(got), 21)
-        self.assertEqual(sum(row["disposition"] == "merge" for row in got), 20)
+        self.assertEqual(len(got), 20)
+        self.assertEqual(sum(row["disposition"] == "merge" for row in got), 19)
         self.assertEqual(sum(row["disposition"] == "retire" for row in got), 1)
-        self.assertEqual(len({row["source"] for row in got}), 21)
+        self.assertEqual(len({row["source"] for row in got}), 20)
+        self.assertNotIn(
+            "how-memory-works-in-hyperagents",
+            {row["source"] for row in got},
+        )
 
     def test_real_audit_sources_and_targets_exist_even_after_status_changes(self):
         rows = mg.parse_dispositions(mg.AUDIT.read_text())

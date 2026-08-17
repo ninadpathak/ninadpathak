@@ -4,13 +4,23 @@
 
 **Evidence:** `tools/url_inventory.py` (1,047 URLs), `tools/gsc_report.py`, `tools/audit_claims.py --count`, inbound and outbound link counts from the built output.
 
-**Recommendation: consolidate 57 posts to 36.** 21 dispositions: 20 merges and 1 retirement.
+**Recommendation: consolidate 57 posts to 37.** 20 dispositions: 19 merges and 1 retirement.
 
 **Corrected during batch 1.** `agent-memory-for-customer-support` was specified as a merge. Reading
 the source showed its only surviving idea is a fabricated case study, so it retires with nothing
-carried over. The count of 36 is unchanged; what changes is that one page contributes nothing to
+carried over. What changes is that one page contributes nothing to
 its target. `tools/audit_claims.py` flagged none of the six invented figures, which is a scanner
 blind spot for first-person metrics worth closing separately.
+
+**Corrected during batch 2.** `how-memory-works-in-hyperagents` and
+`how-memory-works-in-deerflow` are distinct branded intents, not two versions of one reader job.
+The source has 11 complete page impressions at position 11.2 and every query is withheld; the
+target has 46 complete page impressions at position 22.1 and every query is withheld. Meta's
+Hyperagents work is a self-referential self-improvement system; DeerFlow 2.0 is ByteDance's
+separate super-agent harness and a ground-up rewrite of its own v1. The planned cross-brand
+redirect is cancelled. Both URLs remain published and require independent primary-source
+rewrites under `planning/framework-memory-owner-correction.md`. This raises the retained count
+from 36 to 37.
 
 ---
 
@@ -32,19 +42,21 @@ Four posts have ever produced a click: `shared-vs-isolated-memory-multi-agent` (
 
 ---
 
-## Why 36 and not 20
+## Why 37 and not 20
 
 The click data would justify a far deeper cut. It should not be used that way, and this is the one place I am arguing against the evidence in front of me.
 
 **The domain was spam-compromised and fully rebuilt inside twelve months.** Zero clicks on a page is not proof the page cannot earn. It is proof the cluster has not had a fair trial. Merging on demonstrated topic overlap is defensible on its own terms and survives whatever the domain does next. Retiring on click data from a rebuilt domain would be reading a broken instrument.
 
-So every disposition below is **merge, not retire**, and each one is justified by overlap with a named sibling rather than by its traffic. Nothing in this audit is retired. Traffic is used only to choose which side of a merge survives.
+So each merge below requires demonstrated topic overlap with a named sibling rather than traffic
+alone. The one retirement is a never-impressed fabricated case study, not a traffic cut. Traffic
+is used only to choose which side of a valid merge survives.
 
 ---
 
 ## Dispositions
 
-### Merge, 21 pages
+### Merge, 20 pages
 
 Each row names the target and what survives from the source. The moat consolidation is the template: a consolidation that drops the only ideas worth keeping is a deletion wearing a redirect.
 
@@ -55,7 +67,6 @@ Each row names the target and what survives from the source. The moat consolidat
 | `memory-hierarchy-in-ai-systems` | 15 | 1 | `ai-memory-management-for-llms` | the layered model, after it has absorbed the RAG-is-not-enough argument |
 | `the-memory-hierarchy-why-rag-is-not-enough` | 13 | 0 | `ai-memory-management-for-llms` | the argument for why RAG alone fails as memory, which the hierarchy page states but does not argue |
 | `asymmetric-retrieval-agent-memory` | 12 | 1 | `rag-vs-memory` | why agent-side retrieval is asymmetric, which is the mechanism behind the comparison |
-| `how-memory-works-in-hyperagents` | 11 | 0 | `how-memory-works-in-deerflow` | the third framework as a comparison column |
 | `contextual-compression-for-agent-memory` | 10 | 1 | `short-term-memory-for-ai-agents` | the compression decision when the window fills |
 | `agentic-cli-benchmarks` | 10 | 0 | `best-llms-for-coding` | the CLI harness comparison as a section |
 | `the-agent-design-space` | 8 | 2 | `the-taxonomy-of-ai-agents` | the design-space axes, which are the taxonomy stated as choices |
@@ -76,7 +87,18 @@ Each row names the target and what survives from the source. The moat consolidat
 
 - **`embedding-models-compared`** (120 impressions). titled "Vector Embeddings: a Guide to the Geometry of Meaning" but ranks and earns on embedding-model comparison. Retitle and retarget to the comparison query it already serves.
 
-### Keep as is, 35 pages
+### Keep but rewrite, 2 pages
+
+- **`how-memory-works-in-hyperagents`** (11 impressions, position 11.2; all queries withheld).
+  Keep the URL for the distinct Meta Hyperagents research intent. Replace the generic invented
+  three-layer agent-memory architecture with what the paper and official implementation actually
+  establish about DGM-H, its editable task/meta program, archive and emergent persistent memory.
+- **`how-memory-works-in-deerflow`** (46 impressions, position 22.1; all queries withheld).
+  Keep the independent DeerFlow intent. Replace the invented JSON-stage/session-file architecture
+  with the current DeerFlow 2.0 runtime memory contract, and distinguish 2.0 from the unrelated
+  1.x implementation.
+
+### Keep as is, 34 pages
 
 Each owns a reader job no sibling owns. Sorted by lifetime impressions.
 
@@ -97,7 +119,6 @@ Each owns a reader job no sibling owns. Sorted by lifetime impressions.
 | `voice-ai-latency-gemini-benchmark` | 71 | 1 | 3 | 3 | Original latency benchmark. |
 | `episodic-vs-semantic-vs-working-memory-agents` | 65 | 6 | 4 | 2 | Owns the memory-type taxonomy. |
 | `ai-memory-management-for-llms` | 48 | 8 | 8 | 1 | Largest page in the cluster and becomes the memory owner. |
-| `how-memory-works-in-deerflow` | 46 | 1 | 3 | 0 | Second vendor teardown, absorbs the third. |
 | `semantic-caching-rag-optimization` | 46 | 1 | 2 | 0 | Distinct optimisation nobody else covers here. |
 | `short-term-memory-for-ai-agents` | 46 | 10 | 8 | 1 | Owns working memory, absorbs compression. |
 | `agentic-workflow-playbook` | 45 | 1 | 5 | 1 | Owns the repeatable workflow. |
@@ -159,12 +180,12 @@ reported as evidence of equivalence. The full reproducible output is `planning/m
 
 ## Execution constraints, all three learned expensively
 
-**1. No URL is abandoned.** Twenty sources merge; `agent-memory-for-customer-support` retires
-because its only supposed surviving idea was fabricated. Sixteen of the 21 sources still draw
+**1. No URL is abandoned.** Nineteen sources merge; `agent-memory-for-customer-support` retires
+because its only supposed surviving idea was fabricated. Fifteen of the 20 sources still draw
 impressions. Every source receives a terminal redirect, never the bare `/articles/` listing,
 because seven hub redirects pointing at that listing were soft 404s.
 
-One redirect chain was found and resolved before it shipped: `the-memory-hierarchy-why-rag-is-not-enough` pointed at `memory-hierarchy-in-ai-systems`, which is itself merging into `ai-memory-management-for-llms`. It now points directly at the final destination. **All 21 targets are terminal.**
+One redirect chain was found and resolved before it shipped: `the-memory-hierarchy-why-rag-is-not-enough` pointed at `memory-hierarchy-in-ai-systems`, which is itself merging into `ai-memory-management-for-llms`. It now points directly at the final destination. **All 19 redirect targets are terminal.**
 
 **2. The retrofit is part of the merge, not a follow-up.** `tools/audit_clusters.py --strict` is a CI gate and a merge orphans whatever linked to the merged page. The merged sources carry 69 inbound links between them, so each merge commit repoints those links in the same change.
 
@@ -174,12 +195,12 @@ One redirect chain was found and resolved before it shipped: `the-memory-hierarc
 
 ## Sequencing
 
-Twenty-one reductions are not one commit. Group them by target so each commit leaves the tree green:
+Twenty reductions are not one commit. Group them by target so each commit leaves the tree green:
 
 | Batch | Dispositions | Target owner |
 |---|---:|---|
 | 1. Memory core | 6 | `ai-memory-management-for-llms`, `state-of-ai-agent-memory-2026` |
-| 2. Memory satellites | 4 | `short-term-memory-for-ai-agents`, `rag-vs-memory`, `memory-serialization-between-sessions`, `how-memory-works-in-deerflow` |
+| 2. Memory satellites | 3 | `short-term-memory-for-ai-agents`, `rag-vs-memory`, `memory-serialization-between-sessions` |
 | 3. Architecture | 3 | `the-taxonomy-of-ai-agents`, `production-ai-agent-errors` |
 | 4. Inference and cost | 5 | `llm-inference-optimization`, `context-windows-vs-memory`, `llm-token-budgets-cost-control` |
 | 5. Tooling | 3 | `model-context-protocol-explained`, `best-llms-for-coding`, `why-coding-agents-lose-their-memory` |
