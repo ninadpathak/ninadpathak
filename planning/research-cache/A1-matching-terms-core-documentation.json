@@ -1,0 +1,5435 @@
+[
+ {
+  "keyword": "technical documentation",
+  "volume": 3100,
+  "difficulty": 12,
+  "cpc": 250,
+  "traffic_potential": 300,
+  "parent_topic": "technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "test.com product documentation features",
+  "volume": 3000,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "test.com product documentation features",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "software documentation",
+  "volume": 700,
+  "difficulty": 25,
+  "cpc": 90,
+  "traffic_potential": 600,
+  "parent_topic": "software documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "process documentation template",
+  "volume": 600,
+  "difficulty": 3,
+  "cpc": 250,
+  "traffic_potential": 800,
+  "parent_topic": "process documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "technical documentation template",
+  "volume": 500,
+  "difficulty": 0,
+  "cpc": 180,
+  "traffic_potential": 150,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "clinical documentation software",
+  "volume": 500,
+  "difficulty": 3,
+  "cpc": 45,
+  "traffic_potential": 450,
+  "parent_topic": "clinical documentation improvement software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "what is software documentation",
+  "volume": 500,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "what is software documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "it documentation software",
+  "volume": 500,
+  "difficulty": 2,
+  "cpc": 800,
+  "traffic_potential": 600,
+  "parent_topic": "it documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "project documentation template",
+  "volume": 450,
+  "difficulty": 3,
+  "cpc": 250,
+  "traffic_potential": 1800,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "video_th",
+   "question",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "cheat sheet hospice documentation template",
+  "volume": 450,
+  "difficulty": 0,
+  "cpc": 90,
+  "traffic_potential": 200,
+  "parent_topic": "cheat sheet hospice documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "process documentation software",
+  "volume": 450,
+  "difficulty": 2,
+  "cpc": 1100,
+  "traffic_potential": 600,
+  "parent_topic": "process documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "documentation template",
+  "volume": 400,
+  "difficulty": 7,
+  "cpc": 160,
+  "traffic_potential": 1800,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "product documentation",
+  "volume": 400,
+  "difficulty": 0,
+  "cpc": 500,
+  "traffic_potential": 100,
+  "parent_topic": "product documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "documentation software",
+  "volume": 400,
+  "difficulty": 4,
+  "cpc": 300,
+  "traffic_potential": 1200,
+  "parent_topic": "technical documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "technical documentation example",
+  "volume": 350,
+  "difficulty": 2,
+  "cpc": 120,
+  "traffic_potential": 1900,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "technical documentation software",
+  "volume": 350,
+  "difficulty": 4,
+  "cpc": 140,
+  "traffic_potential": 1200,
+  "parent_topic": "documentation tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "clinical documentation improvement software",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": 90,
+  "traffic_potential": 500,
+  "parent_topic": "clinical documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "api documentation example",
+  "volume": 300,
+  "difficulty": 2,
+  "cpc": 150,
+  "traffic_potential": 400,
+  "parent_topic": "api documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "network documentation software",
+  "volume": 250,
+  "difficulty": 1,
+  "cpc": 400,
+  "traffic_potential": 150,
+  "parent_topic": "network documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "construction photo documentation software",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 350,
+  "parent_topic": null,
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "physical therapy documentation software",
+  "volume": 250,
+  "difficulty": 10,
+  "cpc": 40,
+  "traffic_potential": 900,
+  "parent_topic": "physical therapy ehr software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "what is technical documentation",
+  "volume": 250,
+  "difficulty": 2,
+  "cpc": 40,
+  "traffic_potential": 100,
+  "parent_topic": "technical documentation service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "documentation example",
+  "volume": 250,
+  "difficulty": 8,
+  "cpc": 250,
+  "traffic_potential": 300,
+  "parent_topic": "technical documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "technical documentation services",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": 900,
+  "traffic_potential": 60,
+  "parent_topic": "technical documentation services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "api documentation template",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 200,
+  "parent_topic": "api documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "construction documentation software",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": 130,
+  "traffic_potential": 800,
+  "parent_topic": "construction document management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "sop documentation template",
+  "volume": 200,
+  "difficulty": 7,
+  "cpc": 250,
+  "traffic_potential": 2100,
+  "parent_topic": "sop's",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software documentation tools",
+  "volume": 200,
+  "difficulty": 6,
+  "cpc": 250,
+  "traffic_potential": 1200,
+  "parent_topic": "documentation tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "pt documentation software",
+  "volume": 200,
+  "difficulty": 35,
+  "cpc": 45,
+  "traffic_potential": 53000,
+  "parent_topic": "webpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "technical documentation service",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 900,
+  "traffic_potential": 90,
+  "parent_topic": "technical documentation services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "documentation automation software",
+  "volume": 200,
+  "difficulty": 8,
+  "cpc": 50,
+  "traffic_potential": 700,
+  "parent_topic": "document automation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "documentation management software",
+  "volume": 200,
+  "difficulty": 24,
+  "cpc": 100,
+  "traffic_potential": 9600,
+  "parent_topic": "document control software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "head to toe assessment documentation example",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 60,
+  "traffic_potential": 400,
+  "parent_topic": "head to toe assessment example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "servicenow product documentation",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": 800,
+  "traffic_potential": 1400,
+  "parent_topic": "servicenow documentation",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "network documentation template",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 100,
+  "parent_topic": "network documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "code documentation example",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 400,
+  "traffic_potential": 70,
+  "parent_topic": "code documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "hospital documentation software",
+  "volume": 200,
+  "difficulty": 6,
+  "cpc": 450,
+  "traffic_potential": 0,
+  "parent_topic": "medical document management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "loan documentation software",
+  "volume": 150,
+  "difficulty": 24,
+  "cpc": 1500,
+  "traffic_potential": 150,
+  "parent_topic": "loan document software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "technical documentation writer",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 150,
+  "parent_topic": "documentation writer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "software technical documentation example",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 250,
+  "traffic_potential": 300,
+  "parent_topic": "it documentation examples",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "occupational therapy documentation software",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 700,
+  "traffic_potential": 100,
+  "parent_topic": "occupational therapy software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "chiropractic documentation software",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 1400,
+  "traffic_potential": 350,
+  "parent_topic": "paydc",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "best process documentation software",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 300,
+  "traffic_potential": 600,
+  "parent_topic": "process documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ivdr technical documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "ivdr technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "confluence for technical documentation",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 250,
+  "traffic_potential": 70,
+  "parent_topic": "confluence for technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical documentation tools",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 600,
+  "traffic_potential": 1200,
+  "parent_topic": "technical documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "legal documentation software",
+  "volume": 150,
+  "difficulty": 9,
+  "cpc": 1500,
+  "traffic_potential": 400,
+  "parent_topic": "legal document creation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "unwitnessed fall documentation example",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 900,
+  "traffic_potential": 600,
+  "parent_topic": "unwitnessed fall documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical documentation template word",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 70,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "technical writing and documentation",
+  "volume": 150,
+  "difficulty": 11,
+  "cpc": 450,
+  "traffic_potential": 2000,
+  "parent_topic": "technical writing course",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "image",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "business process documentation software",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 1500,
+  "traffic_potential": 250,
+  "parent_topic": "process documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "documentation control software",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 1000,
+  "traffic_potential": 70,
+  "parent_topic": "document controller software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "creating software documentation",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": 500,
+  "traffic_potential": 100,
+  "parent_topic": "creating software documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "software documentation management",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": 600,
+  "traffic_potential": 9200,
+  "parent_topic": "document management platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical documentation sample",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 250,
+  "traffic_potential": 1600,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "iv site documentation example",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 80,
+  "parent_topic": "iv site documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best physical therapy documentation software",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 1100,
+  "traffic_potential": 700,
+  "parent_topic": "pt emr software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "physical therapy electronic documentation software",
+  "volume": 150,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 1100,
+  "parent_topic": "physical therapy documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "rest api documentation example",
+  "volume": 150,
+  "difficulty": 7,
+  "cpc": 140,
+  "traffic_potential": 400,
+  "parent_topic": "api documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "home health documentation software",
+  "volume": 150,
+  "difficulty": 41,
+  "cpc": 500,
+  "traffic_potential": 5000,
+  "parent_topic": "kinnser wellsky",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "discussion",
+   "question",
+   "sitelink",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "product documentation best practices",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "product documentation best practices",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "writing technical documentation",
+  "volume": 150,
+  "difficulty": 11,
+  "cpc": 450,
+  "traffic_potential": 500,
+  "parent_topic": "how to write technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "user documentation software",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 400,
+  "traffic_potential": 1400,
+  "parent_topic": "user documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "ems documentation software",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "ems reporting software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "msp documentation software",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 1200,
+  "traffic_potential": 20,
+  "parent_topic": "msp documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "how to create technical documentation",
+  "volume": 150,
+  "difficulty": 11,
+  "cpc": 200,
+  "traffic_potential": 100,
+  "parent_topic": "technical documentation writing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software documentation template",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 1900,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "product documentation software",
+  "volume": 150,
+  "difficulty": 7,
+  "cpc": 500,
+  "traffic_potential": 500,
+  "parent_topic": "writing technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software documentation services",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 500,
+  "traffic_potential": 90,
+  "parent_topic": "technical documentation services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "technical documentation solutions",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 300,
+  "traffic_potential": 10,
+  "parent_topic": "technical documentation solutions",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "physical exam documentation example",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 200,
+  "traffic_potential": 1100,
+  "parent_topic": "physical exam template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "business process documentation template",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 150,
+  "parent_topic": "business process document template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "rest api documentation template",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 170,
+  "traffic_potential": 200,
+  "parent_topic": "api documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "behavioral health documentation software",
+  "volume": 100,
+  "difficulty": 26,
+  "cpc": 1200,
+  "traffic_potential": 65000,
+  "parent_topic": "therapy notes",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "software documentation types",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": 350,
+  "traffic_potential": 500,
+  "parent_topic": "software documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical documentation translation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 600,
+  "traffic_potential": 30,
+  "parent_topic": "technical documentation translation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "documentation in software engineering",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": 500,
+  "traffic_potential": 450,
+  "parent_topic": "what is software documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "news",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "workflow documentation template",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 300,
+  "traffic_potential": 700,
+  "parent_topic": "process documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical documentation templates",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 190,
+  "traffic_potential": 1800,
+  "parent_topic": "documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image",
+   "question",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "documentation creation software",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": 250,
+  "traffic_potential": 150,
+  "parent_topic": "code documentation tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "software technical documentation",
+  "volume": 100,
+  "difficulty": 23,
+  "cpc": 500,
+  "traffic_potential": 1800,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "software technical documentation sample",
+  "volume": 100,
+  "difficulty": 5,
+  "cpc": 250,
+  "traffic_potential": 1800,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "template for process documentation",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 0,
+  "traffic_potential": 800,
+  "parent_topic": "process documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "speech therapy documentation software",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 700,
+  "traffic_potential": 70,
+  "parent_topic": "best speech therapy software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "technical documentation outsourcing",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "technical documentation outsourcing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "types of software documentation",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": 350,
+  "traffic_potential": 350,
+  "parent_topic": "what is software documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to write technical documentation",
+  "volume": 100,
+  "difficulty": 11,
+  "cpc": 170,
+  "traffic_potential": 500,
+  "parent_topic": "how to create technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "documentation management software comparison",
+  "volume": 100,
+  "difficulty": 37,
+  "cpc": 900,
+  "traffic_potential": 2800,
+  "parent_topic": "document management software",
+  "intents": null,
+  "serp_features": [
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "best documentation software",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 600,
+  "traffic_potential": 1300,
+  "parent_topic": "documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "app documentation template",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 160,
+  "traffic_potential": 1800,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "free process documentation template",
+  "volume": 100,
+  "difficulty": 5,
+  "cpc": 250,
+  "traffic_potential": 700,
+  "parent_topic": "process documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "video_th",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "audit documentation software",
+  "volume": 100,
+  "difficulty": 12,
+  "cpc": 800,
+  "traffic_potential": 900,
+  "parent_topic": "auditing software for accountants",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software documentation examples",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": 180,
+  "traffic_potential": 350,
+  "parent_topic": "software development documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "internal documentation software",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 1100,
+  "traffic_potential": 40,
+  "parent_topic": "business process documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "soap documentation example",
+  "volume": 100,
+  "difficulty": 17,
+  "cpc": 50,
+  "traffic_potential": 17000,
+  "parent_topic": "soap notes",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "change management documentation template",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 190,
+  "traffic_potential": 1300,
+  "parent_topic": "change management plan",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical documentation writing",
+  "volume": 100,
+  "difficulty": 23,
+  "cpc": 200,
+  "traffic_potential": 400,
+  "parent_topic": "how to create technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "confluence documentation template",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 250,
+  "traffic_potential": 2400,
+  "parent_topic": "confluence templates",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "sitelink",
+   "image",
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "developer documentation template",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 200,
+  "traffic_potential": 1600,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "technical documentation standards",
+  "volume": 100,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "technical documentation standards",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "code documentation template",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 100,
+  "parent_topic": "code documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "therapy documentation software",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 1500,
+  "traffic_potential": 46000,
+  "parent_topic": "therapy notes",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "product documentation tools",
+  "volume": 100,
+  "difficulty": 8,
+  "cpc": 700,
+  "traffic_potential": 200,
+  "parent_topic": "documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "workflow documentation software",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 250,
+  "traffic_potential": 600,
+  "parent_topic": "process documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best technical documentation tools",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 500,
+  "traffic_potential": 1400,
+  "parent_topic": "documentation tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "respiratory documentation example",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 500,
+  "traffic_potential": 150,
+  "parent_topic": "respiratory documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "manufacturing documentation software",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "manufacturing documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "process documentation template word",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": 250,
+  "traffic_potential": 700,
+  "parent_topic": "process documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software development documentation best practices",
+  "volume": 100,
+  "difficulty": 17,
+  "cpc": 400,
+  "traffic_potential": 400,
+  "parent_topic": "technical documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "it infrastructure documentation template",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "it infrastructure documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "sop documentation software",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 600,
+  "traffic_potential": 1900,
+  "parent_topic": "ai sop generator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "healthcare documentation software",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 9,
+  "traffic_potential": 450,
+  "parent_topic": "ehr apps",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "product management documentation",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 80,
+  "parent_topic": "product management documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "documentation software for physical therapy",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 1600,
+  "traffic_potential": 700,
+  "parent_topic": "pt emr software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "mar documentation example",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 170,
+  "traffic_potential": 600,
+  "parent_topic": "mar meaning medical",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "how to write software documentation",
+  "volume": 90,
+  "difficulty": 21,
+  "cpc": 200,
+  "traffic_potential": 500,
+  "parent_topic": "writing technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video"
+  ]
+ },
+ {
+  "keyword": "requirements documentation software",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": 300,
+  "traffic_potential": 500,
+  "parent_topic": "software requirements document",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software documentation example",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": 250,
+  "traffic_potential": 1800,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "code documentation software",
+  "volume": 90,
+  "difficulty": 10,
+  "cpc": 500,
+  "traffic_potential": 1100,
+  "parent_topic": "user documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "software development documentation",
+  "volume": 90,
+  "difficulty": 22,
+  "cpc": 700,
+  "traffic_potential": 250,
+  "parent_topic": "software development documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_top",
+   "sitelink",
+   "question",
+   "news",
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "application documentation template",
+  "volume": 90,
+  "difficulty": 3,
+  "cpc": 160,
+  "traffic_potential": 1600,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software for documentation",
+  "volume": 90,
+  "difficulty": 8,
+  "cpc": 0,
+  "traffic_potential": 1200,
+  "parent_topic": "documentation tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "meat documentation example",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "meat documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "process documentation template free",
+  "volume": 90,
+  "difficulty": 6,
+  "cpc": 250,
+  "traffic_potential": 800,
+  "parent_topic": "process documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical process documentation",
+  "volume": 90,
+  "difficulty": 3,
+  "cpc": 500,
+  "traffic_potential": 1500,
+  "parent_topic": "process documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "api documentation software",
+  "volume": 90,
+  "difficulty": 8,
+  "cpc": 1,
+  "traffic_potential": 20000,
+  "parent_topic": "swagger",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "types of technical documentation",
+  "volume": 90,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "technical document",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "wound care documentation software",
+  "volume": 90,
+  "difficulty": 11,
+  "cpc": 1200,
+  "traffic_potential": 450,
+  "parent_topic": "intellicure",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "software documentation sample",
+  "volume": 90,
+  "difficulty": 3,
+  "cpc": 200,
+  "traffic_potential": 1800,
+  "parent_topic": "documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "eu mdr technical documentation",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": 250,
+  "traffic_potential": 80,
+  "parent_topic": "eu mdr technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "technical documentation best practices",
+  "volume": 90,
+  "difficulty": 16,
+  "cpc": 300,
+  "traffic_potential": 450,
+  "parent_topic": "technical documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "writing documentation for software",
+  "volume": 90,
+  "difficulty": 20,
+  "cpc": 200,
+  "traffic_potential": 350,
+  "parent_topic": "how to write technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "best it documentation software",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": 450,
+  "traffic_potential": 600,
+  "parent_topic": "it documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "create technical documentation",
+  "volume": 80,
+  "difficulty": 12,
+  "cpc": 350,
+  "traffic_potential": 500,
+  "parent_topic": "how to create technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "software documentation best practices",
+  "volume": 80,
+  "difficulty": 17,
+  "cpc": 250,
+  "traffic_potential": 500,
+  "parent_topic": "product documentation best practices",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical documentation tool",
+  "volume": 80,
+  "difficulty": 6,
+  "cpc": 300,
+  "traffic_potential": 1200,
+  "parent_topic": "documentation tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "software documentation writing",
+  "volume": 80,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "software documentation writer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "software architecture documentation",
+  "volume": 80,
+  "difficulty": 2,
+  "cpc": 400,
+  "traffic_potential": 60,
+  "parent_topic": "software architecture documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "technical documentation sample pdf",
+  "volume": 80,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "technical document example pdf",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "nursing behavior documentation example",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": 120,
+  "traffic_potential": 150,
+  "parent_topic": "behavior nursing notes examples",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "picc line documentation example",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "picc line documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "image",
+   "video_th",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "product documentation template",
+  "volume": 80,
+  "difficulty": 5,
+  "cpc": 250,
+  "traffic_potential": 1300,
+  "parent_topic": "prd template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "technical documentation for software",
+  "volume": 80,
+  "difficulty": 24,
+  "cpc": 0,
+  "traffic_potential": 450,
+  "parent_topic": "how to write technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "discussion",
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "group home documentation software",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "group home management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "create software documentation",
+  "volume": 80,
+  "difficulty": 24,
+  "cpc": 400,
+  "traffic_potential": 150,
+  "parent_topic": "code documentation tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "software documentation standards",
+  "volume": 80,
+  "difficulty": 19,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "writing technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_top",
+   "sitelink",
+   "question",
+   "video",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "technical documentation examples",
+  "volume": 80,
+  "difficulty": 4,
+  "cpc": 250,
+  "traffic_potential": 1800,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "software development documentation template",
+  "volume": 80,
+  "difficulty": 2,
+  "cpc": 200,
+  "traffic_potential": 1800,
+  "parent_topic": "documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image_th",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "procedure documentation template",
+  "volume": 80,
+  "difficulty": 1,
+  "cpc": 180,
+  "traffic_potential": 700,
+  "parent_topic": "process documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "modern software documentation",
+  "volume": 80,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "it documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "software engineering documentation",
+  "volume": 80,
+  "difficulty": 23,
+  "cpc": 200,
+  "traffic_potential": 100,
+  "parent_topic": "software documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online documentation software",
+  "volume": 80,
+  "difficulty": 9,
+  "cpc": 800,
+  "traffic_potential": 1200,
+  "parent_topic": "it documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "ros documentation example",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1400,
+  "parent_topic": "review of systems template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best software documentation tools",
+  "volume": 70,
+  "difficulty": 7,
+  "cpc": 600,
+  "traffic_potential": 1200,
+  "parent_topic": "documentation tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "software documentation design",
+  "volume": 70,
+  "difficulty": 8,
+  "cpc": 160,
+  "traffic_potential": 1300,
+  "parent_topic": "design document",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "product documentation servicenow",
+  "volume": 70,
+  "difficulty": 1,
+  "cpc": 900,
+  "traffic_potential": 1300,
+  "parent_topic": "servicenow documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "wound dressing documentation example",
+  "volume": 70,
+  "difficulty": 3,
+  "cpc": 130,
+  "traffic_potential": 300,
+  "parent_topic": "wound documentation sample",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "writing software documentation",
+  "volume": 70,
+  "difficulty": 12,
+  "cpc": 300,
+  "traffic_potential": 100,
+  "parent_topic": "creating software documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "news",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "skin tear documentation example",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "skin tear documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "wound documentation example",
+  "volume": 70,
+  "difficulty": 2,
+  "cpc": 120,
+  "traffic_potential": 80,
+  "parent_topic": "nursing notes wound documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "software documentation writer",
+  "volume": 70,
+  "difficulty": 2,
+  "cpc": 300,
+  "traffic_potential": 10,
+  "parent_topic": "software documentation writer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "as built documentation software",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 10,
+  "parent_topic": "as built documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "clinical documentation improvement software vendors",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 150,
+  "parent_topic": "clinical documentation improvement software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "urinary catheter documentation example",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "urinary catheter documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "neurological assessment documentation example",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "neurological assessment documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "example of documentation",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 70,
+  "traffic_potential": 13000,
+  "parent_topic": "technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "snippet",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "internal documentation in software engineering",
+  "volume": 60,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "what is software documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "free physical therapy documentation software",
+  "volume": 60,
+  "difficulty": 6,
+  "cpc": 1000,
+  "traffic_potential": 70,
+  "parent_topic": "ezpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "product development documentation",
+  "volume": 60,
+  "difficulty": 1,
+  "cpc": 300,
+  "traffic_potential": 4100,
+  "parent_topic": "product requirements document",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "technical documentation specialist",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 50,
+  "traffic_potential": 30,
+  "parent_topic": "technical documentation specialist",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "incident response documentation template",
+  "volume": 60,
+  "difficulty": 2,
+  "cpc": 300,
+  "traffic_potential": 350,
+  "parent_topic": "incident response plan template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "image",
+   "question",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "project documentation software",
+  "volume": 60,
+  "difficulty": 10,
+  "cpc": 400,
+  "traffic_potential": 1100,
+  "parent_topic": "user documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical product documentation",
+  "volume": 60,
+  "difficulty": 8,
+  "cpc": 600,
+  "traffic_potential": 20,
+  "parent_topic": "technical product documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "patient documentation example",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 30,
+  "parent_topic": "nursing documentation examples",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "design documentation example",
+  "volume": 60,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "design document",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "eos process documentation example",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "eos process documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "employee conversation documentation template",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 180,
+  "traffic_potential": 20,
+  "parent_topic": "employee conversation documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "head to toe documentation example",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "head to toe assessment documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image_th",
+   "image",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "website documentation template",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 200,
+  "parent_topic": "documentation website template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image_th",
+   "image",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "physical therapy documentation software reviews",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 800,
+  "parent_topic": "therapy practice management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "printable chronic care management documentation template",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 90,
+  "parent_topic": "chronic care management template pdf",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "image",
+   "sitelink",
+   "question",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "automation documentation template",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 190,
+  "traffic_potential": 20,
+  "parent_topic": "automation documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "hr documentation template",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 800,
+  "parent_topic": "hr templates",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "physical assessment documentation example",
+  "volume": 60,
+  "difficulty": 4,
+  "cpc": 150,
+  "traffic_potential": 900,
+  "parent_topic": "physical exam template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "free documentation management software",
+  "volume": 60,
+  "difficulty": 1,
+  "cpc": 350,
+  "traffic_potential": 4500,
+  "parent_topic": "document control systems",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "content management system for technical documentation",
+  "volume": 60,
+  "difficulty": 2,
+  "cpc": 900,
+  "traffic_potential": 10,
+  "parent_topic": "content management system for technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "software design documentation template",
+  "volume": 60,
+  "difficulty": 6,
+  "cpc": 250,
+  "traffic_potential": 1200,
+  "parent_topic": "design document",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "technical documentation design",
+  "volume": 60,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "technical design document",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "export documentation software",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 50,
+  "parent_topic": "export documentation software usa",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "sitelink",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "procedure documentation software",
+  "volume": 60,
+  "difficulty": 2,
+  "cpc": 350,
+  "traffic_potential": 600,
+  "parent_topic": "process documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "soap note documentation example",
+  "volume": 60,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 22000,
+  "parent_topic": "soap note",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "wound vac documentation example",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "wound vac orders",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "employee behavior documentation template",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 70,
+  "parent_topic": "employee documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "software documentation requirements",
+  "volume": 60,
+  "difficulty": 10,
+  "cpc": 300,
+  "traffic_potential": 1300,
+  "parent_topic": "technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "nursing head to toe assessment documentation example",
+  "volume": 50,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "head to toe assessment example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "online help documentation software",
+  "volume": 50,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 1100,
+  "parent_topic": "it documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software specification documentation",
+  "volume": 50,
+  "difficulty": 38,
+  "cpc": 450,
+  "traffic_potential": 2100,
+  "parent_topic": "what is srs",
+  "intents": null,
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "restraint documentation example",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "you have a doctor's order for restraints",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software requirements documentation",
+  "volume": 50,
+  "difficulty": 5,
+  "cpc": 0,
+  "traffic_potential": 500,
+  "parent_topic": "requirements documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "review of systems documentation example",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "review of systems template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "confluence technical documentation template",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 150,
+  "parent_topic": "confluence for technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "wound care documentation template",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 80,
+  "traffic_potential": 600,
+  "parent_topic": "wound care documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "export documentation software usa",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "export documentation software usa",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best practices for technical documentation",
+  "volume": 50,
+  "difficulty": 11,
+  "cpc": 400,
+  "traffic_potential": 500,
+  "parent_topic": "technical documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "confluence technical documentation",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 50,
+  "parent_topic": "confluence for technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "example of api documentation",
+  "volume": 50,
+  "difficulty": 7,
+  "cpc": 170,
+  "traffic_potential": 400,
+  "parent_topic": "api documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "question"
+  ]
+ },
+ {
+  "keyword": "server documentation template",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 160,
+  "traffic_potential": 10,
+  "parent_topic": "server documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "image",
+   "question",
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "90833 documentation example",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "90833 cpt code description",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "free documentation software",
+  "volume": 50,
+  "difficulty": 5,
+  "cpc": 400,
+  "traffic_potential": 100,
+  "parent_topic": "online documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "software documentation tool",
+  "volume": 50,
+  "difficulty": 7,
+  "cpc": 500,
+  "traffic_potential": 1300,
+  "parent_topic": "technical documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical documentation management software",
+  "volume": 50,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 6400,
+  "parent_topic": "document management platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "process documentation example",
+  "volume": 50,
+  "difficulty": 6,
+  "cpc": 250,
+  "traffic_potential": 700,
+  "parent_topic": "process documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "sample api documentation template",
+  "volume": 50,
+  "difficulty": 1,
+  "cpc": 200,
+  "traffic_potential": 200,
+  "parent_topic": "api documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "software documentation automation",
+  "volume": 50,
+  "difficulty": null,
+  "cpc": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "review of systems example documentation",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "review of systems template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "language provider technical documentation",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "language provider technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "confluence templates for technical documentation",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 150,
+  "parent_topic": "confluence for technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "musculoskeletal documentation example",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "musculoskeletal assessment documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "technical documentation for software development",
+  "volume": 50,
+  "difficulty": 22,
+  "cpc": 300,
+  "traffic_potential": 1800,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "best export documentation software",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "export document software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "business documentation software",
+  "volume": 50,
+  "difficulty": 4,
+  "cpc": 60,
+  "traffic_potential": 600,
+  "parent_topic": "process documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "documentation template word",
+  "volume": 50,
+  "difficulty": 17,
+  "cpc": 60,
+  "traffic_potential": 21000,
+  "parent_topic": "word templates",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "system documentation template",
+  "volume": 50,
+  "difficulty": 2,
+  "cpc": 190,
+  "traffic_potential": 1700,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "nursing documentation template",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 160,
+  "traffic_potential": 1600,
+  "parent_topic": "nursing notes template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "payroll documentation template",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 350,
+  "traffic_potential": 2200,
+  "parent_topic": "payroll template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "service provider technical documentation",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "technical documentation services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "company documentation software",
+  "volume": 50,
+  "difficulty": 4,
+  "cpc": 1100,
+  "traffic_potential": 600,
+  "parent_topic": "process documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "employee documentation template",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 160,
+  "traffic_potential": 80,
+  "parent_topic": "employee documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "writing technical documentation for software",
+  "volume": 50,
+  "difficulty": 7,
+  "cpc": 350,
+  "traffic_potential": 450,
+  "parent_topic": "how to create technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "how to create technical documentation for software",
+  "volume": 50,
+  "difficulty": null,
+  "cpc": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "software documentation templates",
+  "volume": 50,
+  "difficulty": 1,
+  "cpc": 200,
+  "traffic_potential": 1800,
+  "parent_topic": "documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "best software for documentation",
+  "volume": 40,
+  "difficulty": 8,
+  "cpc": 600,
+  "traffic_potential": 1200,
+  "parent_topic": "documentation tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "perrla documentation example",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "how to document perrla",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "web api documentation example",
+  "volume": 40,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 400,
+  "parent_topic": "api documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "picc line removal documentation example",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "picc line removal nursing documentation sample",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "image",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "software documentation software",
+  "volume": 40,
+  "difficulty": 8,
+  "cpc": 250,
+  "traffic_potential": 1200,
+  "parent_topic": "technical documentation software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "urgent care documentation template",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 10,
+  "parent_topic": "urgent care documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "hospice documentation template",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 45,
+  "traffic_potential": 90,
+  "parent_topic": "hospice documentation sample",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "kpi documentation template",
+  "volume": 40,
+  "difficulty": 4,
+  "cpc": 0,
+  "traffic_potential": 150,
+  "parent_topic": "kpi template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "template for documentation",
+  "volume": 40,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "technical documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_top",
+   "question",
+   "sitelink",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "documentation example with pictures",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "documentation example with pictures",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "creating technical documentation",
+  "volume": 40,
+  "difficulty": 12,
+  "cpc": 450,
+  "traffic_potential": 450,
+  "parent_topic": "how to write technical documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "blood draw documentation example",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "venipuncture documentation examples",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "image",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "nursing assessment documentation example",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 15,
+  "traffic_potential": 600,
+  "parent_topic": "unwitnessed fall documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "audit documentation example",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 130,
+  "traffic_potential": 100,
+  "parent_topic": "audit documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "training documentation software",
+  "volume": 40,
+  "difficulty": 2,
+  "cpc": 450,
+  "traffic_potential": 20,
+  "parent_topic": "training manual software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "soap documentation template",
+  "volume": 40,
+  "difficulty": 18,
+  "cpc": 130,
+  "traffic_potential": 700,
+  "parent_topic": "soap note template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software development life cycle documentation",
+  "volume": 40,
+  "difficulty": 30,
+  "cpc": 190,
+  "traffic_potential": 11000,
+  "parent_topic": "sdlc",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "export documentation software in excel",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "export documentation software in excel",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "skin assessment nursing documentation example",
+  "volume": 40,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "nursing skin assessment example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ }
+]

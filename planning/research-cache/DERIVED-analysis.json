@@ -1,0 +1,1333 @@
+{
+ "clusters": [
+  {
+   "cluster": 1,
+   "name": "Technical documentation & docs ops",
+   "kws": 322,
+   "volume": 63730,
+   "kd20_kws": 220,
+   "kd20_vol": 31730,
+   "aio": 111
+  },
+  {
+   "cluster": 2,
+   "name": "Developer experience & DevRel",
+   "kws": 56,
+   "volume": 7930,
+   "kd20_kws": 54,
+   "kd20_vol": 7190,
+   "aio": 26
+  },
+  {
+   "cluster": 3,
+   "name": "AI agents, memory, RAG, inference",
+   "kws": 347,
+   "volume": 150140,
+   "kd20_kws": 217,
+   "kd20_vol": 60650,
+   "aio": 226
+  },
+  {
+   "cluster": 4,
+   "name": "AI Overviews & AI-search citation",
+   "kws": 58,
+   "volume": 23880,
+   "kd20_kws": 42,
+   "kd20_vol": 11890,
+   "aio": 40
+  },
+  {
+   "cluster": 5,
+   "name": "Reddit marketing",
+   "kws": 78,
+   "volume": 33360,
+   "kd20_kws": 70,
+   "kd20_vol": 28970,
+   "aio": 38
+  },
+  {
+   "cluster": 6,
+   "name": "Forums & community building",
+   "kws": 94,
+   "volume": 24140,
+   "kd20_kws": 82,
+   "kd20_vol": 18440,
+   "aio": 51
+  },
+  {
+   "cluster": 7,
+   "name": "Technical & community events",
+   "kws": 174,
+   "volume": 33000,
+   "kd20_kws": 133,
+   "kd20_vol": 25290,
+   "aio": 64
+  }
+ ],
+ "top15": [
+  {
+   "keyword": "reddit ads",
+   "cluster": 5,
+   "volume": 8300,
+   "kd": 12,
+   "winnability": 0.45,
+   "score": 3735,
+   "intent": "informational,commercial,branded",
+   "aio": true
+  },
+  {
+   "keyword": "pinecone vector database",
+   "cluster": 3,
+   "volume": 4400,
+   "kd": 8,
+   "winnability": 0.65,
+   "score": 2860,
+   "intent": "informational,commercial,branded",
+   "aio": true
+  },
+  {
+   "keyword": "subreddit",
+   "cluster": 5,
+   "volume": 4700,
+   "kd": 14,
+   "winnability": 0.45,
+   "score": 2115,
+   "intent": "informational",
+   "aio": true
+  },
+  {
+   "keyword": "how to build an ai agent",
+   "cluster": 3,
+   "volume": 4200,
+   "kd": 12,
+   "winnability": 0.45,
+   "score": 1890,
+   "intent": "informational",
+   "aio": true
+  },
+  {
+   "keyword": "what is a hackathon",
+   "cluster": 7,
+   "volume": 2700,
+   "kd": 4,
+   "winnability": 0.65,
+   "score": 1755,
+   "intent": "informational",
+   "aio": true
+  },
+  {
+   "keyword": "technical documentation",
+   "cluster": 1,
+   "volume": 3100,
+   "kd": 12,
+   "winnability": 0.45,
+   "score": 1395,
+   "intent": "informational",
+   "aio": true
+  },
+  {
+   "keyword": "community management",
+   "cluster": 6,
+   "volume": 2600,
+   "kd": 13,
+   "winnability": 0.45,
+   "score": 1170,
+   "intent": "informational,commercial,local",
+   "aio": true
+  },
+  {
+   "keyword": "what is a vector database",
+   "cluster": 3,
+   "volume": 11000,
+   "kd": 39,
+   "winnability": 0.1,
+   "score": 1100,
+   "intent": "informational",
+   "aio": true
+  },
+  {
+   "keyword": "agentic workflow",
+   "cluster": 3,
+   "volume": 2200,
+   "kd": 20,
+   "winnability": 0.45,
+   "score": 990,
+   "intent": "informational",
+   "aio": true
+  },
+  {
+   "keyword": "how to organize a community event",
+   "cluster": 7,
+   "volume": 1400,
+   "kd": 3,
+   "winnability": 0.65,
+   "score": 910,
+   "intent": "informational",
+   "aio": true
+  },
+  {
+   "keyword": "community event",
+   "cluster": 7,
+   "volume": 1200,
+   "kd": 2,
+   "winnability": 0.65,
+   "score": 780,
+   "intent": "informational,local",
+   "aio": true
+  },
+  {
+   "keyword": "what is an mcp server",
+   "cluster": 3,
+   "volume": 7200,
+   "kd": 40,
+   "winnability": 0.1,
+   "score": 720,
+   "intent": "informational",
+   "aio": true
+  },
+  {
+   "keyword": "qdrant vector database",
+   "cluster": 3,
+   "volume": 1600,
+   "kd": 11,
+   "winnability": 0.45,
+   "score": 720,
+   "intent": "informational,branded",
+   "aio": true
+  },
+  {
+   "keyword": "top answer engine optimization for ai solutions",
+   "cluster": 4,
+   "volume": 1600,
+   "kd": 18,
+   "winnability": 0.45,
+   "score": 720,
+   "intent": "informational,commercial",
+   "aio": true
+  },
+  {
+   "keyword": "chatgpt seo tool",
+   "cluster": 4,
+   "volume": 1100,
+   "kd": 4,
+   "winnability": 0.65,
+   "score": 715,
+   "intent": "informational,commercial,branded",
+   "aio": true
+  }
+ ],
+ "tools": [
+  {
+   "keyword": "ai search optimization tools",
+   "cluster": 1,
+   "volume": 1900,
+   "kd": 45,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "generative engine optimization tools",
+   "cluster": 4,
+   "volume": 1300,
+   "kd": 38,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "chatgpt seo tool",
+   "cluster": 4,
+   "volume": 1100,
+   "kd": 4,
+   "job": "tool",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "generative engine optimization tool",
+   "cluster": 4,
+   "volume": 900,
+   "kd": 39,
+   "job": "tool",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "answer engine optimization tools",
+   "cluster": 4,
+   "volume": 800,
+   "kd": 26,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "ai overviews checker",
+   "cluster": 4,
+   "volume": 700,
+   "kd": 0,
+   "job": "checker",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "process documentation template",
+   "cluster": 1,
+   "volume": 600,
+   "kd": 3,
+   "job": "template",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "technical documentation template",
+   "cluster": 1,
+   "volume": 500,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "project documentation template",
+   "cluster": 1,
+   "volume": 450,
+   "kd": 3,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "documentation template",
+   "cluster": 1,
+   "volume": 400,
+   "kd": 7,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "documentation tools",
+   "cluster": 1,
+   "volume": 400,
+   "kd": 3,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "ai search engine optimization tools",
+   "cluster": 1,
+   "volume": 400,
+   "kd": 33,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "api documentation tool",
+   "cluster": 1,
+   "volume": 350,
+   "kd": 34,
+   "job": "tool",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "generative engine optimization tools comparison",
+   "cluster": 4,
+   "volume": 350,
+   "kd": 8,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "online documentation tools",
+   "cluster": 1,
+   "volume": 300,
+   "kd": 5,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "llms.txt generator",
+   "cluster": 1,
+   "volume": 300,
+   "kd": null,
+   "job": "generator",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "most popular answer engine optimization tools",
+   "cluster": 4,
+   "volume": 300,
+   "kd": 16,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "ai documentation generator",
+   "cluster": 1,
+   "volume": 250,
+   "kd": 37,
+   "job": "generator",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "api documentation template",
+   "cluster": 1,
+   "volume": 200,
+   "kd": 1,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "sop documentation template",
+   "cluster": 1,
+   "volume": 200,
+   "kd": 7,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "software documentation tools",
+   "cluster": 1,
+   "volume": 200,
+   "kd": 6,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "network documentation template",
+   "cluster": 1,
+   "volume": 200,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "best api documentation tools",
+   "cluster": 1,
+   "volume": 200,
+   "kd": 7,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "process documentation tools",
+   "cluster": 1,
+   "volume": 200,
+   "kd": 2,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "code documentation tools",
+   "cluster": 1,
+   "volume": 200,
+   "kd": 7,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "community management tools",
+   "cluster": 6,
+   "volume": 200,
+   "kd": 1,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "virtual event planning template",
+   "cluster": 7,
+   "volume": 200,
+   "kd": 3,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "run of show template for virtual event",
+   "cluster": 7,
+   "volume": 200,
+   "kd": 1,
+   "job": "template",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "technical documentation tools",
+   "cluster": 1,
+   "volume": 150,
+   "kd": 4,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "software documentation template",
+   "cluster": 1,
+   "volume": 150,
+   "kd": 1,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "business process documentation template",
+   "cluster": 1,
+   "volume": 150,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "best api documentation tool",
+   "cluster": 1,
+   "volume": 150,
+   "kd": 7,
+   "job": "tool",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "openapi client generator",
+   "cluster": 1,
+   "volume": 150,
+   "kd": 35,
+   "job": "generator",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "openapi documentation generator",
+   "cluster": 1,
+   "volume": 150,
+   "kd": 23,
+   "job": "generator",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "data mapping documentation tools",
+   "cluster": 1,
+   "volume": 150,
+   "kd": 0,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "automated documentation tools",
+   "cluster": 1,
+   "volume": 150,
+   "kd": 5,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "documentation automation tools",
+   "cluster": 1,
+   "volume": 150,
+   "kd": 10,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "llms.txt checker",
+   "cluster": 1,
+   "volume": 150,
+   "kd": null,
+   "job": "checker",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "developer experience tools",
+   "cluster": 2,
+   "volume": 150,
+   "kd": 7,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "best tools for monitoring ai overviews",
+   "cluster": 4,
+   "volume": 150,
+   "kd": 8,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "best generative engine optimization tools",
+   "cluster": 4,
+   "volume": 150,
+   "kd": 3,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "online community engagement tools",
+   "cluster": 6,
+   "volume": 150,
+   "kd": 3,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "community management tool",
+   "cluster": 6,
+   "volume": 150,
+   "kd": 2,
+   "job": "tool",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "virtual event checklist template",
+   "cluster": 7,
+   "volume": 150,
+   "kd": 1,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "virtual event management tools",
+   "cluster": 7,
+   "volume": 150,
+   "kd": 34,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "virtual event budget template",
+   "cluster": 7,
+   "volume": 150,
+   "kd": 1,
+   "job": "template",
+   "calc": true,
+   "aio": false
+  },
+  {
+   "keyword": "virtual event tools",
+   "cluster": 7,
+   "volume": 150,
+   "kd": 38,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "rest api documentation template",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 3,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "workflow documentation template",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 3,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "template for process documentation",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 4,
+   "job": "template",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "app documentation template",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 2,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "free process documentation template",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 5,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "audit documentation software",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 12,
+   "job": "audit",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "change management documentation template",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 3,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "developer documentation template",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 2,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "code documentation template",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "product documentation tools",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 8,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "best technical documentation tools",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 2,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "it infrastructure documentation template",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "it documentation tools",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 3,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "documentation management tools",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 7,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "business process documentation tools",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 1,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "documentation tools for developers",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 6,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "best documentation tools",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 6,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "collaborative documentation tools",
+   "cluster": 1,
+   "volume": 100,
+   "kd": 4,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "llms.txt validator",
+   "cluster": 1,
+   "volume": 100,
+   "kd": null,
+   "job": "validator",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "virtual event engagement tools",
+   "cluster": 7,
+   "volume": 100,
+   "kd": 2,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "virtual event email template",
+   "cluster": 7,
+   "volume": 100,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "virtual event run of show template",
+   "cluster": 7,
+   "volume": 100,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "application documentation template",
+   "cluster": 1,
+   "volume": 90,
+   "kd": 3,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "process documentation template free",
+   "cluster": 1,
+   "volume": 90,
+   "kd": 6,
+   "job": "template",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "developer documentation tools",
+   "cluster": 1,
+   "volume": 90,
+   "kd": 8,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "virtual event plan template",
+   "cluster": 7,
+   "volume": 90,
+   "kd": 3,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "technical documentation tool",
+   "cluster": 1,
+   "volume": 80,
+   "kd": 6,
+   "job": "tool",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "product documentation template",
+   "cluster": 1,
+   "volume": 80,
+   "kd": 5,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "software development documentation template",
+   "cluster": 1,
+   "volume": 80,
+   "kd": 2,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "procedure documentation template",
+   "cluster": 1,
+   "volume": 80,
+   "kd": 1,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "database documentation tools",
+   "cluster": 1,
+   "volume": 80,
+   "kd": 0,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "best software documentation tools",
+   "cluster": 1,
+   "volume": 70,
+   "kd": 7,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "best documentation tools for developers",
+   "cluster": 1,
+   "volume": 70,
+   "kd": 8,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "free api documentation tools",
+   "cluster": 1,
+   "volume": 70,
+   "kd": 40,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "incident response documentation template",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 2,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "employee conversation documentation template",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "website documentation template",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "printable chronic care management documentation template",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "automation documentation template",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "software design documentation template",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 6,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "employee behavior documentation template",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "network documentation tools",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 1,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "internal documentation tools",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 5,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "project documentation tools",
+   "cluster": 1,
+   "volume": 60,
+   "kd": 3,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "server documentation template",
+   "cluster": 1,
+   "volume": 50,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "software documentation tool",
+   "cluster": 1,
+   "volume": 50,
+   "kd": 7,
+   "job": "tool",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "sample api documentation template",
+   "cluster": 1,
+   "volume": 50,
+   "kd": 1,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "system documentation template",
+   "cluster": 1,
+   "volume": 50,
+   "kd": 2,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "employee documentation template",
+   "cluster": 1,
+   "volume": 50,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "documentation tools open source",
+   "cluster": 1,
+   "volume": 50,
+   "kd": 35,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "urgent care documentation template",
+   "cluster": 1,
+   "volume": 40,
+   "kd": 0,
+   "job": "template",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "kpi documentation template",
+   "cluster": 1,
+   "volume": 40,
+   "kd": 4,
+   "job": "template",
+   "calc": true,
+   "aio": false
+  },
+  {
+   "keyword": "template for documentation",
+   "cluster": 1,
+   "volume": 40,
+   "kd": 5,
+   "job": "template",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "audit documentation example",
+   "cluster": 1,
+   "volume": 40,
+   "kd": 0,
+   "job": "audit",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "documentation software tools",
+   "cluster": 1,
+   "volume": 40,
+   "kd": 4,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "open source documentation tools",
+   "cluster": 1,
+   "volume": 40,
+   "kd": 8,
+   "job": "tools",
+   "calc": false,
+   "aio": true
+  },
+  {
+   "keyword": "business analyst documentation tools",
+   "cluster": 1,
+   "volume": 30,
+   "kd": 0,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "free documentation tools for developers",
+   "cluster": 1,
+   "volume": 30,
+   "kd": 6,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  },
+  {
+   "keyword": "software documentation tools open source",
+   "cluster": 1,
+   "volume": 30,
+   "kd": 11,
+   "job": "tools",
+   "calc": false,
+   "aio": false
+  }
+ ],
+ "band": {
+  "dr": 26,
+  "new_pages": 71,
+  "mature_equiv": 22.2,
+  "tail_mult": 2.5,
+  "aio_share": 0.492,
+  "aio_haircut": 0.35,
+  "probs_kd20": {
+   "top3": 0.15,
+   "p4_10": 0.3,
+   "p11_20": 0.25
+  },
+  "ctr": {
+   "low": {
+    "top3": 0.08,
+    "p4_10": 0.02,
+    "p11_20": 0.004
+   },
+   "mid": {
+    "top3": 0.12,
+    "p4_10": 0.03,
+    "p11_20": 0.006
+   },
+   "high": {
+    "top3": 0.16,
+    "p4_10": 0.04,
+    "p11_20": 0.008
+   }
+  },
+  "selection": {
+   "low": [
+    "mean of best 400 KD<=20",
+    382
+   ],
+   "mid": [
+    "mean of best 250 KD<=20",
+    522.6
+   ],
+   "high": [
+    "mean of best 150 KD<=20",
+    740.3333333333334
+   ]
+  },
+  "cohorts": [
+   [
+    "published day 1-30",
+    24,
+    0.55
+   ],
+   [
+    "published day 31-60",
+    24,
+    0.3
+   ],
+   [
+    "published day 61-90",
+    23,
+    0.08
+   ]
+  ],
+  "legacy": {
+   "low": 15,
+   "mid": 25,
+   "high": 40
+  },
+  "result": {
+   "low": {
+    "selection": "mean of best 400 KD<=20",
+    "head_vol_per_page": 382,
+    "page_vol": 955,
+    "per_page_full": 18.15,
+    "detail": [
+     {
+      "cohort": "published day 1-30",
+      "pages": 24,
+      "maturity": 0.55,
+      "subtotal": 240
+     },
+     {
+      "cohort": "published day 31-60",
+      "pages": 24,
+      "maturity": 0.3,
+      "subtotal": 131
+     },
+     {
+      "cohort": "published day 61-90",
+      "pages": 23,
+      "maturity": 0.08,
+      "subtotal": 33
+     }
+    ],
+    "campaign_raw": 404,
+    "campaign_after_aio": 334,
+    "legacy": 15,
+    "site_total": 349
+   },
+   "mid": {
+    "selection": "mean of best 250 KD<=20",
+    "head_vol_per_page": 523,
+    "page_vol": 1306,
+    "per_page_full": 37.24,
+    "detail": [
+     {
+      "cohort": "published day 1-30",
+      "pages": 24,
+      "maturity": 0.55,
+      "subtotal": 492
+     },
+     {
+      "cohort": "published day 31-60",
+      "pages": 24,
+      "maturity": 0.3,
+      "subtotal": 268
+     },
+     {
+      "cohort": "published day 61-90",
+      "pages": 23,
+      "maturity": 0.08,
+      "subtotal": 69
+     }
+    ],
+    "campaign_raw": 828,
+    "campaign_after_aio": 685,
+    "legacy": 25,
+    "site_total": 710
+   },
+   "high": {
+    "selection": "mean of best 150 KD<=20",
+    "head_vol_per_page": 740,
+    "page_vol": 1851,
+    "per_page_full": 70.33,
+    "detail": [
+     {
+      "cohort": "published day 1-30",
+      "pages": 24,
+      "maturity": 0.55,
+      "subtotal": 928
+     },
+     {
+      "cohort": "published day 31-60",
+      "pages": 24,
+      "maturity": 0.3,
+      "subtotal": 506
+     },
+     {
+      "cohort": "published day 61-90",
+      "pages": 23,
+      "maturity": 0.08,
+      "subtotal": 129
+     }
+    ],
+    "campaign_raw": 1564,
+    "campaign_after_aio": 1295,
+    "legacy": 40,
+    "site_total": 1335
+   }
+  }
+ }
+}

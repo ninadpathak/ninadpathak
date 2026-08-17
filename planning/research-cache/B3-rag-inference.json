@@ -1,0 +1,5252 @@
+[
+ {
+  "keyword": "what is a vector database",
+  "volume": 11000,
+  "difficulty": 39,
+  "cpc": 15,
+  "traffic_potential": 8600,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "pinecone vector database",
+  "volume": 4400,
+  "difficulty": 8,
+  "cpc": 180,
+  "traffic_potential": 21000,
+  "parent_topic": "pinecone",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "rag pipeline",
+  "volume": 2600,
+  "difficulty": 42,
+  "cpc": 190,
+  "traffic_potential": 1100,
+  "parent_topic": "rag pipeline",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "qdrant vector database",
+  "volume": 1600,
+  "difficulty": 11,
+  "cpc": 60,
+  "traffic_potential": 2300,
+  "parent_topic": "qdrant",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "retrieval-augmented generation paper 2020 lewis et al.",
+  "volume": 1600,
+  "difficulty": 17,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "retrieval-augmented generation paper 2020 lewis et al.",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chroma vector database",
+  "volume": 1000,
+  "difficulty": 24,
+  "cpc": 250,
+  "traffic_potential": 6000,
+  "parent_topic": "chromadb",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "milvus vector database",
+  "volume": 1000,
+  "difficulty": 41,
+  "cpc": 160,
+  "traffic_potential": 2400,
+  "parent_topic": "milvus",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "weaviate vector database",
+  "volume": 1000,
+  "difficulty": 0,
+  "cpc": 350,
+  "traffic_potential": 1000,
+  "parent_topic": "weaviate vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database news today",
+  "volume": 1000,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "vector database news",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database news",
+  "volume": 900,
+  "difficulty": 23,
+  "cpc": 1500,
+  "traffic_potential": 600,
+  "parent_topic": "vector database news",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openai embeddings",
+  "volume": 900,
+  "difficulty": 33,
+  "cpc": 900,
+  "traffic_potential": 1900,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "llm inference",
+  "volume": 800,
+  "difficulty": 6,
+  "cpc": 130,
+  "traffic_potential": 450,
+  "parent_topic": "llm inference",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "image",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "rag retrieval augmented generation",
+  "volume": 800,
+  "difficulty": 39,
+  "cpc": 200,
+  "traffic_potential": 26000,
+  "parent_topic": "rag",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database updates",
+  "volume": 800,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "aws vector database",
+  "volume": 800,
+  "difficulty": 22,
+  "cpc": 900,
+  "traffic_potential": 600,
+  "parent_topic": "aws vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "what is vector database",
+  "volume": 600,
+  "difficulty": 38,
+  "cpc": 20,
+  "traffic_potential": 13000,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chromadb vector database",
+  "volume": 600,
+  "difficulty": 17,
+  "cpc": 300,
+  "traffic_potential": 5900,
+  "parent_topic": "chromadb",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector database example",
+  "volume": 500,
+  "difficulty": 15,
+  "cpc": 25,
+  "traffic_potential": 40,
+  "parent_topic": "vector database example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "image"
+  ]
+ },
+ {
+  "keyword": "rag vector database",
+  "volume": 400,
+  "difficulty": 12,
+  "cpc": 250,
+  "traffic_potential": 150,
+  "parent_topic": "rag vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "best vector database 2026",
+  "volume": 400,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "vector database updates",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is a vector database?",
+  "volume": 400,
+  "difficulty": 39,
+  "cpc": null,
+  "traffic_potential": 13000,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "what are embeddings",
+  "volume": 350,
+  "difficulty": 42,
+  "cpc": 10,
+  "traffic_potential": 1300,
+  "parent_topic": "embedding model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "postgres vector database",
+  "volume": 350,
+  "difficulty": 8,
+  "cpc": 250,
+  "traffic_potential": 6900,
+  "parent_topic": "pgvector",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "llm embeddings",
+  "volume": 350,
+  "difficulty": 8,
+  "cpc": 250,
+  "traffic_potential": 350,
+  "parent_topic": "llm embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "clip embeddings",
+  "volume": 300,
+  "difficulty": 11,
+  "cpc": null,
+  "traffic_potential": 2300,
+  "parent_topic": "clip model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is llm inference",
+  "volume": 300,
+  "difficulty": 2,
+  "cpc": 180,
+  "traffic_potential": 400,
+  "parent_topic": "llm inference",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector database vs graph database",
+  "volume": 250,
+  "difficulty": 4,
+  "cpc": 10,
+  "traffic_potential": 250,
+  "parent_topic": "graph database vs vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "what are word embeddings",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": 15,
+  "traffic_potential": 250,
+  "parent_topic": "word embeddings explained",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "supabase vector database",
+  "volume": 250,
+  "difficulty": 8,
+  "cpc": 30,
+  "traffic_potential": 250,
+  "parent_topic": "supabase vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "redis vector database",
+  "volume": 250,
+  "difficulty": 7,
+  "cpc": 250,
+  "traffic_potential": 200,
+  "parent_topic": "redis vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "azure vector database",
+  "volume": 250,
+  "difficulty": 4,
+  "cpc": 350,
+  "traffic_potential": 150,
+  "parent_topic": "azure vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "openai embeddings api",
+  "volume": 250,
+  "difficulty": 33,
+  "cpc": 150,
+  "traffic_potential": 1900,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "llm inference optimization",
+  "volume": 250,
+  "difficulty": 1,
+  "cpc": 200,
+  "traffic_potential": 200,
+  "parent_topic": "inference optimization",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "what are embeddings in ai",
+  "volume": 250,
+  "difficulty": 42,
+  "cpc": 15,
+  "traffic_potential": 1200,
+  "parent_topic": "what are embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "rope embeddings",
+  "volume": 250,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "rope embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "best vector database",
+  "volume": 250,
+  "difficulty": 11,
+  "cpc": 250,
+  "traffic_potential": 1200,
+  "parent_topic": "open source vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th",
+   "discussion",
+   "news"
+  ]
+ },
+ {
+  "keyword": "llm vector database",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 300,
+  "traffic_potential": 150,
+  "parent_topic": "vector database llm",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "semantic embeddings",
+  "volume": 200,
+  "difficulty": 27,
+  "cpc": 300,
+  "traffic_potential": 20,
+  "parent_topic": "semantic embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database aws",
+  "volume": 200,
+  "difficulty": 14,
+  "cpc": 300,
+  "traffic_potential": 500,
+  "parent_topic": "aws vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "news"
+  ]
+ },
+ {
+  "keyword": "rotary positional embeddings",
+  "volume": 200,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "rope embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai vector database",
+  "volume": 200,
+  "difficulty": 30,
+  "cpc": 400,
+  "traffic_potential": 600,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "what are vector embeddings",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 15,
+  "traffic_potential": 1400,
+  "parent_topic": "vector embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector embeddings explained",
+  "volume": 200,
+  "difficulty": 26,
+  "cpc": 9,
+  "traffic_potential": 1500,
+  "parent_topic": "vector embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database llm",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 250,
+  "traffic_potential": 60,
+  "parent_topic": "vector database for llm",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "inference llm",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 200,
+  "traffic_potential": 400,
+  "parent_topic": "llm inference",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "image"
+  ]
+ },
+ {
+  "keyword": "graph embeddings",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 150,
+  "traffic_potential": 70,
+  "parent_topic": "graph embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "vector database use cases",
+  "volume": 200,
+  "difficulty": 6,
+  "cpc": 250,
+  "traffic_potential": 80,
+  "parent_topic": "vector database use cases",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "knowledge graph vs vector database",
+  "volume": 200,
+  "difficulty": 5,
+  "cpc": 130,
+  "traffic_potential": 300,
+  "parent_topic": "vector database vs graph database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai embeddings",
+  "volume": 200,
+  "difficulty": 30,
+  "cpc": 90,
+  "traffic_potential": 1500,
+  "parent_topic": "embedding model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database companies",
+  "volume": 200,
+  "difficulty": 37,
+  "cpc": 300,
+  "traffic_potential": 1100,
+  "parent_topic": "open source vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openai embeddings pricing",
+  "volume": 200,
+  "difficulty": 12,
+  "cpc": 250,
+  "traffic_potential": 9200,
+  "parent_topic": "openai pricing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "graph database vs vector database",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 80,
+  "traffic_potential": 300,
+  "parent_topic": "vector database vs graph database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "news",
+   "video_th",
+   "question",
+   "discussion",
+   "image"
+  ]
+ },
+ {
+  "keyword": "vector database architecture diagram",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 800,
+  "traffic_potential": 600,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink",
+   "paid_bottom",
+   "paid_sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "rag embeddings",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 140,
+  "traffic_potential": 60,
+  "parent_topic": "rag embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "retrieval-augmented generation for knowledge-intensive nlp tasks",
+  "volume": 150,
+  "difficulty": 16,
+  "cpc": 400,
+  "traffic_potential": 450,
+  "parent_topic": "retrieval-augmented generation paper 2020 lewis et al.",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database rag",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 300,
+  "traffic_potential": 100,
+  "parent_topic": "rag vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "how does a vector database work",
+  "volume": 150,
+  "difficulty": 14,
+  "cpc": 300,
+  "traffic_potential": 13000,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "text embeddings",
+  "volume": 150,
+  "difficulty": 37,
+  "cpc": 1500,
+  "traffic_potential": 400,
+  "parent_topic": "text embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "postgresql vector database",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": 250,
+  "traffic_potential": 6900,
+  "parent_topic": "pgvector",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector store database",
+  "volume": 150,
+  "difficulty": 34,
+  "cpc": 450,
+  "traffic_potential": 1300,
+  "parent_topic": "open source vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "whats a vector database",
+  "volume": 150,
+  "difficulty": 40,
+  "cpc": 300,
+  "traffic_potential": 8700,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "open ai embeddings",
+  "volume": 150,
+  "difficulty": 13,
+  "cpc": 250,
+  "traffic_potential": 1900,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "local vector database",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 250,
+  "traffic_potential": 80,
+  "parent_topic": "local vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "vector database vs relational database",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 500,
+  "traffic_potential": 70,
+  "parent_topic": "vector database vs relational database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "question",
+   "discussion",
+   "news"
+  ]
+ },
+ {
+  "keyword": "cohere embeddings",
+  "volume": 150,
+  "difficulty": 28,
+  "cpc": 600,
+  "traffic_potential": 80,
+  "parent_topic": "cohere embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "is elasticsearch a vector database",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "active retrieval augmented generation",
+  "volume": 150,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "active retrieval augmented generation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "ollama embeddings",
+  "volume": 150,
+  "difficulty": 13,
+  "cpc": 250,
+  "traffic_potential": 60,
+  "parent_topic": "ollama embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to create vector embeddings",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 110,
+  "traffic_potential": 60,
+  "parent_topic": "how to create vector embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "vector store vs vector database",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "vector store",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vector database examples",
+  "volume": 150,
+  "difficulty": 20,
+  "cpc": 200,
+  "traffic_potential": 11000,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "image",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vector database architecture",
+  "volume": 150,
+  "difficulty": 7,
+  "cpc": 200,
+  "traffic_potential": 600,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "multimodal embeddings",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": 300,
+  "traffic_potential": 40,
+  "parent_topic": "multimodal embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "vector database visualization",
+  "volume": 150,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "vector database visualization",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vector search database",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 1200,
+  "parent_topic": "vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database ai",
+  "volume": 150,
+  "difficulty": 44,
+  "cpc": 400,
+  "traffic_potential": 200,
+  "parent_topic": "ai vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "vector database tutorial",
+  "volume": 150,
+  "difficulty": 7,
+  "cpc": 50,
+  "traffic_potential": 500,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "gemini embeddings",
+  "volume": 150,
+  "difficulty": 21,
+  "cpc": 700,
+  "traffic_potential": 60,
+  "parent_topic": "gemini embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "news",
+   "video_th",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "vector database icon",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 500,
+  "parent_topic": "database icon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector vs graph database",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 110,
+  "traffic_potential": 400,
+  "parent_topic": "knowledge graph vs vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector embedding database",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 3900,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "graph vs vector database",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 500,
+  "traffic_potential": 400,
+  "parent_topic": "knowledge graph vs vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "retrieval augmented generation example",
+  "volume": 100,
+  "difficulty": 41,
+  "cpc": 150,
+  "traffic_potential": 80,
+  "parent_topic": "retrieval augmented generation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database comparison",
+  "volume": 100,
+  "difficulty": 11,
+  "cpc": 400,
+  "traffic_potential": 150,
+  "parent_topic": "vector db comparison",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "image embeddings",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 5,
+  "traffic_potential": 90,
+  "parent_topic": "image embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "bert embeddings",
+  "volume": 100,
+  "difficulty": 13,
+  "cpc": 6,
+  "traffic_potential": 80,
+  "parent_topic": "bert embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "vector database explained",
+  "volume": 100,
+  "difficulty": 29,
+  "cpc": 50,
+  "traffic_potential": 13000,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_top",
+   "news",
+   "video_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector database search",
+  "volume": 100,
+  "difficulty": 42,
+  "cpc": 200,
+  "traffic_potential": 7100,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "retrieval augmented generation vs fine tuning",
+  "volume": 100,
+  "difficulty": 16,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "rag vs fine tuning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "news",
+   "question"
+  ]
+ },
+ {
+  "keyword": "embedded vector database",
+  "volume": 100,
+  "difficulty": 12,
+  "cpc": 300,
+  "traffic_potential": 20,
+  "parent_topic": "what is vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "snowflake vector database",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 350,
+  "traffic_potential": 90,
+  "parent_topic": "snowflake vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "python vector database",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "vector database python",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "vespa vector database",
+  "volume": 100,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "vespa ai",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "glove embeddings",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 5,
+  "traffic_potential": 300,
+  "parent_topic": "glove embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "most popular vector database",
+  "volume": 100,
+  "difficulty": 15,
+  "cpc": 170,
+  "traffic_potential": 450,
+  "parent_topic": "vector databases list",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "word embeddings in nlp",
+  "volume": 100,
+  "difficulty": 20,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "word embeddings nlp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "vector search embeddings",
+  "volume": 100,
+  "difficulty": 23,
+  "cpc": null,
+  "traffic_potential": 400,
+  "parent_topic": "vector embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector based database",
+  "volume": 100,
+  "difficulty": 37,
+  "cpc": null,
+  "traffic_potential": 3600,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "elasticsearch vector database",
+  "volume": 100,
+  "difficulty": 5,
+  "cpc": 250,
+  "traffic_potential": 500,
+  "parent_topic": "vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "vector database for llm",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "vector database for llm",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "opensearch vector database",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 160,
+  "traffic_potential": 150,
+  "parent_topic": "aws vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "neo4j vector database",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "neo4j vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "elastic search vector database",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "elasticsearch vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "langchain vector database",
+  "volume": 100,
+  "difficulty": 8,
+  "cpc": 350,
+  "traffic_potential": 100,
+  "parent_topic": "langchain vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "video_th",
+   "image_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "oracle vector database",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": 450,
+  "traffic_potential": 90,
+  "parent_topic": "ai vector search",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "embeddings openai",
+  "volume": 100,
+  "difficulty": 31,
+  "cpc": null,
+  "traffic_potential": 1900,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "comfyui embeddings",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "comfyui embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "bge embeddings",
+  "volume": 100,
+  "difficulty": 30,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "bge-m3 embedding model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector database vendors",
+  "volume": 100,
+  "difficulty": 18,
+  "cpc": 450,
+  "traffic_potential": 1300,
+  "parent_topic": "open source vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "latest news in california about sparse embeddings",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "latest news in california about sparse embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector database azure",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 300,
+  "traffic_potential": 150,
+  "parent_topic": "azure vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "embedding vector database",
+  "volume": 90,
+  "difficulty": 14,
+  "cpc": 300,
+  "traffic_potential": 100,
+  "parent_topic": "vector database embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "serverless vector database",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "serverless vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openai embeddings models",
+  "volume": 90,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 1900,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "best open source vector database",
+  "volume": 90,
+  "difficulty": 44,
+  "cpc": null,
+  "traffic_potential": 1000,
+  "parent_topic": "vector databases",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "ml embeddings",
+  "volume": 90,
+  "difficulty": 36,
+  "cpc": null,
+  "traffic_potential": 1400,
+  "parent_topic": "embedding model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "in memory vector database",
+  "volume": 90,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "in memory vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "chatgpt vector database",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 40,
+  "parent_topic": "chatgpt vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector database indexing",
+  "volume": 90,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "what is a vector index",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is a vector database for llm",
+  "volume": 90,
+  "difficulty": 7,
+  "cpc": 300,
+  "traffic_potential": 6700,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vector database benchmarks",
+  "volume": 90,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "vector database benchmarks",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "vector database pinecone",
+  "volume": 90,
+  "difficulty": 6,
+  "cpc": 350,
+  "traffic_potential": 21000,
+  "parent_topic": "pinecone",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "fastest vector database",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 100,
+  "parent_topic": "milvus vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector database embeddings",
+  "volume": 90,
+  "difficulty": 20,
+  "cpc": null,
+  "traffic_potential": 1500,
+  "parent_topic": "vector embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "video",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how are embeddings created",
+  "volume": 90,
+  "difficulty": 31,
+  "cpc": null,
+  "traffic_potential": 400,
+  "parent_topic": "text embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "word embeddings nlp",
+  "volume": 90,
+  "difficulty": 21,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "word embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vector database python",
+  "volume": 80,
+  "difficulty": 7,
+  "cpc": 500,
+  "traffic_potential": 10,
+  "parent_topic": "python vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database benchmark",
+  "volume": 80,
+  "difficulty": 16,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "vector database benchmark",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "knowledge graph embeddings",
+  "volume": 80,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "knowledge graph machine learning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "mongodb vector database",
+  "volume": 80,
+  "difficulty": 16,
+  "cpc": 450,
+  "traffic_potential": 150,
+  "parent_topic": "mongodb vector search",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "embeddings in machine learning",
+  "volume": 80,
+  "difficulty": 39,
+  "cpc": null,
+  "traffic_potential": 1500,
+  "parent_topic": "embedding model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "langchain embeddings",
+  "volume": 80,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 60,
+  "parent_topic": "langchain embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database wikipedia",
+  "volume": 80,
+  "difficulty": 13,
+  "cpc": 350,
+  "traffic_potential": 1700,
+  "parent_topic": "vector db",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "embeddings vs vectors",
+  "volume": 80,
+  "difficulty": 15,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "feature embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hypothetical document embeddings",
+  "volume": 80,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "hypothetical document embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "embeddings models",
+  "volume": 80,
+  "difficulty": 35,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "chatgpt embeddings",
+  "volume": 80,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "semantic search vector database",
+  "volume": 80,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "semantic search vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "what is embeddings",
+  "volume": 80,
+  "difficulty": 36,
+  "cpc": null,
+  "traffic_potential": 1400,
+  "parent_topic": "embedding model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database for ai",
+  "volume": 80,
+  "difficulty": 21,
+  "cpc": 300,
+  "traffic_potential": 3300,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "elastic vector database",
+  "volume": 70,
+  "difficulty": 1,
+  "cpc": 350,
+  "traffic_potential": 50,
+  "parent_topic": "elastic vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "openai retrieval augmented generation",
+  "volume": 70,
+  "difficulty": 32,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "openai rag",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "langchain retrieval augmented generation",
+  "volume": 70,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "langchain rag",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "video_th",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "claude embeddings",
+  "volume": 70,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "claude embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "contextual embeddings",
+  "volume": 70,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "contextual embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th",
+   "video"
+  ]
+ },
+ {
+  "keyword": "what are ai embeddings",
+  "volume": 70,
+  "difficulty": 31,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "embedding model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "databricks vector database",
+  "volume": 70,
+  "difficulty": 1,
+  "cpc": 800,
+  "traffic_potential": 1600,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "pinecone vector database alternatives",
+  "volume": 70,
+  "difficulty": 11,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "pinecone alternatives",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "embeddings vector database",
+  "volume": 70,
+  "difficulty": 26,
+  "cpc": 300,
+  "traffic_potential": 1500,
+  "parent_topic": "vector embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "rotary embeddings",
+  "volume": 70,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "rotary positional embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "retrieval augmented generation openai",
+  "volume": 70,
+  "difficulty": 15,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "retrieval augmented generation openai",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "database vector",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": 160,
+  "traffic_potential": 4700,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "e5 embeddings",
+  "volume": 60,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "e5 embedding model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "how do embeddings work",
+  "volume": 60,
+  "difficulty": 42,
+  "cpc": null,
+  "traffic_potential": 400,
+  "parent_topic": "text embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "vector database semantic search",
+  "volume": 60,
+  "difficulty": 4,
+  "cpc": 250,
+  "traffic_potential": 10,
+  "parent_topic": "semantic search vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "postgres vector embeddings",
+  "volume": 60,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 4100,
+  "parent_topic": "pgvector",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "huggingface embeddings",
+  "volume": 60,
+  "difficulty": 28,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "what are llm embeddings",
+  "volume": 60,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "llm embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is pinecone vector database",
+  "volume": 60,
+  "difficulty": 40,
+  "cpc": 300,
+  "traffic_potential": 6600,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "chroma embeddings",
+  "volume": 60,
+  "difficulty": 27,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "chromadb embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "what are openai embeddings",
+  "volume": 60,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "openai embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "hugging face embeddings",
+  "volume": 60,
+  "difficulty": 35,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "huggingface embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "retrieval augmented generation tutorial",
+  "volume": 60,
+  "difficulty": 24,
+  "cpc": 190,
+  "traffic_potential": 40,
+  "parent_topic": "retrieval augmented generation tutorial",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "embeddings database",
+  "volume": 60,
+  "difficulty": 13,
+  "cpc": null,
+  "traffic_potential": 1400,
+  "parent_topic": "vector embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "llm inference cost",
+  "volume": 50,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "llm inference cost",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "vector database list",
+  "volume": 50,
+  "difficulty": 15,
+  "cpc": null,
+  "traffic_potential": 1400,
+  "parent_topic": "open source vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database postgres",
+  "volume": 50,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "postgres vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "golang vector database",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 350,
+  "traffic_potential": 40,
+  "parent_topic": "golang vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "genai embeddings",
+  "volume": 50,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "gemini embedding 2",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "anthropic embeddings",
+  "volume": 50,
+  "difficulty": 32,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "claude embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openai embeddings model",
+  "volume": 50,
+  "difficulty": 27,
+  "cpc": 1500,
+  "traffic_potential": 2000,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "mistral embeddings",
+  "volume": 50,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "mistral embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "time series embeddings",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "time series embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vector database options",
+  "volume": 50,
+  "difficulty": 11,
+  "cpc": 300,
+  "traffic_potential": 700,
+  "parent_topic": "best vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "azure openai embeddings",
+  "volume": 50,
+  "difficulty": 6,
+  "cpc": 450,
+  "traffic_potential": 90,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "document embeddings",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "document embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "amazon vector database",
+  "volume": 50,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "aws vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "search embeddings",
+  "volume": 40,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "search embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to create a vector database",
+  "volume": 40,
+  "difficulty": 6,
+  "cpc": 300,
+  "traffic_potential": 20,
+  "parent_topic": "how to build a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "news",
+   "video_th",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "semantic search embeddings",
+  "volume": 40,
+  "difficulty": 11,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "search embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "bedrock embeddings",
+  "volume": 40,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "titan embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "faiss embeddings",
+  "volume": 40,
+  "difficulty": 33,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "faiss embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database similarity search",
+  "volume": 40,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "similarity search",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "gcp vector database",
+  "volume": 40,
+  "difficulty": 2,
+  "cpc": 450,
+  "traffic_potential": 300,
+  "parent_topic": "vector search",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "elasticsearch embeddings",
+  "volume": 40,
+  "difficulty": 1,
+  "cpc": 350,
+  "traffic_potential": 20,
+  "parent_topic": "elasticsearch embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vector database databricks",
+  "volume": 40,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "what are embeddings in nlp",
+  "volume": 40,
+  "difficulty": 31,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "word embeddings nlp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openai api embeddings",
+  "volume": 40,
+  "difficulty": 28,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "openai embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "rust vector database",
+  "volume": 40,
+  "difficulty": 30,
+  "cpc": 130,
+  "traffic_potential": 15000,
+  "parent_topic": "qdrant",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "mysql vector database",
+  "volume": 40,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "mysql vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how are word embeddings created",
+  "volume": 40,
+  "difficulty": 31,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "word embeddings explained",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what are text embeddings",
+  "volume": 40,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 400,
+  "parent_topic": "text embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database elasticsearch",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "what is a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "chat gpt embeddings",
+  "volume": 40,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "vector database chroma",
+  "volume": 40,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 5900,
+  "parent_topic": "chromadb",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "vector database generative ai",
+  "volume": 40,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "llm vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "pine cone vector database",
+  "volume": 40,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 21000,
+  "parent_topic": "pinecone",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to use openai embeddings",
+  "volume": 40,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "pinecone embeddings",
+  "volume": 40,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "vector embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th",
+   "news",
+   "image_th",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "word embeddings explained",
+  "volume": 40,
+  "difficulty": 19,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "what is word embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "google vector database",
+  "volume": 40,
+  "difficulty": 3,
+  "cpc": 800,
+  "traffic_potential": 350,
+  "parent_topic": "vector search",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "rag retrieval augmented generation langchain",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 800,
+  "parent_topic": "langchain rag",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "bert word embeddings",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "bert embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "how to build a vector database",
+  "volume": 30,
+  "difficulty": 4,
+  "cpc": 350,
+  "traffic_potential": 30,
+  "parent_topic": "how to create a vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "jina embeddings",
+  "volume": 30,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "jina embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openai embeddings tutorial",
+  "volume": 30,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openai embeddings example",
+  "volume": 30,
+  "difficulty": 32,
+  "cpc": null,
+  "traffic_potential": 1900,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openai text embeddings",
+  "volume": 30,
+  "difficulty": 16,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "openai embedding models",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "google cloud vector database",
+  "volume": 30,
+  "difficulty": 7,
+  "cpc": 700,
+  "traffic_potential": 300,
+  "parent_topic": "vector search",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "openai vector database",
+  "volume": 30,
+  "difficulty": 3,
+  "cpc": 400,
+  "traffic_potential": 20,
+  "parent_topic": "chatgpt vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector database in azure",
+  "volume": 30,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "azure vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "stable diffusion embeddings",
+  "volume": 30,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "stable diffusion embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to generate embeddings",
+  "volume": 30,
+  "difficulty": 37,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "vector embedding",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "embeddings vector",
+  "volume": 30,
+  "difficulty": 43,
+  "cpc": null,
+  "traffic_potential": 1400,
+  "parent_topic": "vector embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "product embeddings",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "product embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "clip image embeddings",
+  "volume": 30,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 9800,
+  "parent_topic": "clip",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "retrieval augmented generation langchain",
+  "volume": 30,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "langchain rag",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "llama embeddings",
+  "volume": 30,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "ollama embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "elmo embeddings",
+  "volume": 30,
+  "difficulty": 34,
+  "cpc": 8,
+  "traffic_potential": 100,
+  "parent_topic": "elmo model",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "word embeddings example",
+  "volume": 30,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "word embeddings nlp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "self hosted vector database",
+  "volume": 30,
+  "difficulty": 12,
+  "cpc": 450,
+  "traffic_potential": 80,
+  "parent_topic": "local vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to create embeddings",
+  "volume": 30,
+  "difficulty": 30,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "embeddings llm",
+  "volume": 30,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "llm embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vector database image",
+  "volume": 30,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "vector database image",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "glove word embeddings",
+  "volume": 30,
+  "difficulty": 17,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "glove embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "titan embeddings",
+  "volume": 30,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "bedrock embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "nlp embeddings",
+  "volume": 30,
+  "difficulty": 33,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "word embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "cosine similarity embeddings",
+  "volume": 30,
+  "difficulty": 19,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "cosine similarity embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "fasttext embeddings",
+  "volume": 30,
+  "difficulty": 45,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "fasttext",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "transformer embeddings",
+  "volume": 30,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "transformer embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "embeddings icon",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "embedding icon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "vector index vs vector database",
+  "volume": 30,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "vector index vs vector database",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "amazon titan embeddings",
+  "volume": 30,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "titan embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chromadb embeddings",
+  "volume": 30,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "chroma embeddings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ }
+]

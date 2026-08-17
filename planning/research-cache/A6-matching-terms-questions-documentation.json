@@ -1,0 +1,82 @@
+[
+ {
+  "keyword": "what is api documentation",
+  "volume": 600,
+  "difficulty": 39,
+  "traffic_potential": 2500,
+  "parent_topic": "api documentation",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "what is technical documentation",
+  "volume": 250,
+  "difficulty": 2,
+  "traffic_potential": 100,
+  "parent_topic": "technical documentation service",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "how to create technical documentation",
+  "volume": 150,
+  "difficulty": 11,
+  "traffic_potential": 100,
+  "parent_topic": "technical documentation writing",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "how to write technical documentation",
+  "volume": 100,
+  "difficulty": 11,
+  "traffic_potential": 500,
+  "parent_topic": "how to create technical documentation",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "how to write api documentation",
+  "volume": 90,
+  "difficulty": 37,
+  "traffic_potential": 2500,
+  "parent_topic": "api documentation",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "how to read api documentation",
+  "volume": 90,
+  "difficulty": 1,
+  "traffic_potential": 40,
+  "parent_topic": "how to read api documentation",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "how to create technical documentation for software",
+  "volume": 50,
+  "difficulty": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "how to create swagger documentation for rest api",
+  "volume": 40,
+  "difficulty": 26,
+  "traffic_potential": 3500,
+  "parent_topic": "swagger ui",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "how to write an api documentation",
+  "volume": 30,
+  "difficulty": 37,
+  "traffic_potential": 2500,
+  "parent_topic": "api documentation",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "how to create api documentation",
+  "volume": 20,
+  "difficulty": 21,
+  "traffic_potential": 250,
+  "parent_topic": "how to document an api",
+  "has_ai_overview": 0
+ }
+]

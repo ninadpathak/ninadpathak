@@ -1,0 +1,1428 @@
+[
+ {
+  "keyword": "developer experience",
+  "volume": 900,
+  "difficulty": 12,
+  "cpc": 300,
+  "traffic_potential": 450,
+  "parent_topic": "developer experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "devrel",
+  "volume": 700,
+  "difficulty": 31,
+  "cpc": 45,
+  "traffic_potential": 800,
+  "parent_topic": "devrel",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "developer marketing",
+  "volume": 600,
+  "difficulty": 2,
+  "cpc": 700,
+  "traffic_potential": 300,
+  "parent_topic": "developer marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "developer advocate",
+  "volume": 350,
+  "difficulty": 2,
+  "cpc": 25,
+  "traffic_potential": 350,
+  "parent_topic": "developer advocate",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "developer relations",
+  "volume": 250,
+  "difficulty": 2,
+  "cpc": 25,
+  "traffic_potential": 100,
+  "parent_topic": "developer relations",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "home developer marketing agency",
+  "volume": 200,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "home builder marketing agency",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "what is devrel",
+  "volume": 200,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 800,
+  "parent_topic": "devrel",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "developer experience engineer",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 300,
+  "traffic_potential": 40,
+  "parent_topic": "developer experience engineer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "adobe experience manager developer guide",
+  "volume": 200,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "adobe experience manager developer guide",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "developer advocate jobs",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 50,
+  "traffic_potential": 90,
+  "parent_topic": "developer advocate jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "developer experience metrics",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 600,
+  "traffic_potential": 20,
+  "parent_topic": "developer experience metrics",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "dx developer experience",
+  "volume": 200,
+  "difficulty": 9,
+  "cpc": 1700,
+  "traffic_potential": 15000,
+  "parent_topic": "dx",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "software developer experience",
+  "volume": 200,
+  "difficulty": 7,
+  "cpc": 800,
+  "traffic_potential": 90,
+  "parent_topic": "software developer experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "devrel meaning",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "devrel meaning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "what is developer experience",
+  "volume": 150,
+  "difficulty": 10,
+  "cpc": 400,
+  "traffic_potential": 450,
+  "parent_topic": "developer experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "improve developer experience",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 300,
+  "traffic_potential": 150,
+  "parent_topic": "developer experience tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video"
+  ]
+ },
+ {
+  "keyword": "developer relations jobs",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 45,
+  "traffic_potential": 70,
+  "parent_topic": "developer relations jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "developer experience tools",
+  "volume": 150,
+  "difficulty": 7,
+  "cpc": 700,
+  "traffic_potential": 150,
+  "parent_topic": "developer experience tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "adobe experience manager developer certification",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "aem developer certification",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "real estate developer marketing",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 450,
+  "traffic_potential": 90,
+  "parent_topic": "real estate development marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "developer experience best practices",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 400,
+  "traffic_potential": 60,
+  "parent_topic": "developer experience best practices",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "adobe experience manager developer training",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "adobe experience manager tutorial pdf",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "what is a developer advocate",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "developer advocate",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "salesforce marketing cloud developer",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 600,
+  "traffic_potential": 100,
+  "parent_topic": "salesforce marketing cloud developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "developer experience survey",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 400,
+  "traffic_potential": 40,
+  "parent_topic": "developer experience survey",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "improving developer experience",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 350,
+  "traffic_potential": 90,
+  "parent_topic": "improving developer experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "sitelink",
+   "question",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "adobe experience manager developer",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 450,
+  "traffic_potential": 800,
+  "parent_topic": "adobe aem",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "developer experience platform",
+  "volume": 100,
+  "difficulty": 13,
+  "cpc": 800,
+  "traffic_potential": 15000,
+  "parent_topic": "dx",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "developer relations engineer",
+  "volume": 100,
+  "difficulty": 8,
+  "cpc": 900,
+  "traffic_potential": 100,
+  "parent_topic": "developer relations engineer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "how to improve developer experience",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 300,
+  "traffic_potential": 100,
+  "parent_topic": "developer experience tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "how to become a real estate developer with no experience",
+  "volume": 100,
+  "difficulty": 5,
+  "cpc": 250,
+  "traffic_potential": 800,
+  "parent_topic": "how to become a real estate developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "developer marketing strategy",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 10,
+  "parent_topic": "developer marketing strategy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "devex developer experience",
+  "volume": 90,
+  "difficulty": 15,
+  "cpc": 300,
+  "traffic_potential": 450,
+  "parent_topic": "developer experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "developer experience strategy",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": 350,
+  "traffic_potential": 30,
+  "parent_topic": "developer experience strategy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "email marketing developer",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 500,
+  "traffic_potential": 30,
+  "parent_topic": "email developer jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "marketing cloud developer",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 40,
+  "parent_topic": "salesforce marketing cloud developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "discussion",
+   "video"
+  ]
+ },
+ {
+  "keyword": "what is developer marketing",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "what is developer marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "digital marketing web developer",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "digital marketing web developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "devrel jobs",
+  "volume": 80,
+  "difficulty": 20,
+  "cpc": 50,
+  "traffic_potential": 20,
+  "parent_topic": "developer relations jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "developer experience team",
+  "volume": 80,
+  "difficulty": 9,
+  "cpc": 200,
+  "traffic_potential": 70,
+  "parent_topic": "developer experience engineer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "developer advocate salary",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "developer advocate salary",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "user experience developer",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": 450,
+  "traffic_potential": 200,
+  "parent_topic": "ux developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "digital marketing developer",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 20,
+  "parent_topic": "digital marketing web developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "marketing-cloud-developer dumps",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "marketing-cloud-developer dumps",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "developer marketing alliance",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "developer marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "marketing web developer",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 90,
+  "parent_topic": "marketing web developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "discussion",
+   "news"
+  ]
+ },
+ {
+  "keyword": "developer experience dx",
+  "volume": 50,
+  "difficulty": 5,
+  "cpc": 450,
+  "traffic_potential": 15000,
+  "parent_topic": "dx",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "api developer experience",
+  "volume": 50,
+  "difficulty": 1,
+  "cpc": 300,
+  "traffic_potential": 20,
+  "parent_topic": "api developer experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "how to become a developer advocate",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "developer evangelist",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "developer advocate role",
+  "volume": 40,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "developer advocate",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "software developer jobs no experience",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 100,
+  "parent_topic": "software developer jobs no experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "developer advocate job description",
+  "volume": 40,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "developer advocate",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "junior web developer jobs no experience",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 100,
+  "traffic_potential": 30,
+  "parent_topic": "junior web developer jobs no experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "apple worldwide developer relations certification authority",
+  "volume": 40,
+  "difficulty": 23,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "apple worldwide developer relations certification authority",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "marketing developer",
+  "volume": 40,
+  "difficulty": 1,
+  "cpc": 700,
+  "traffic_potential": 40,
+  "parent_topic": "developer marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is developer advocate",
+  "volume": 40,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "developer advocate",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "web developer experience",
+  "volume": 30,
+  "difficulty": 1,
+  "cpc": 600,
+  "traffic_potential": 100,
+  "parent_topic": "being a web developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "entry level software developer jobs no experience remote",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": 150,
+  "traffic_potential": 250,
+  "parent_topic": "entry level remote programming jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "what does a developer advocate do",
+  "volume": 30,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "developer advocate",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "pinterest marketing developer partners",
+  "volume": 30,
+  "difficulty": 1,
+  "cpc": 0,
+  "traffic_potential": 100,
+  "parent_topic": "pinterest marketing",
+  "intents": null,
+  "serp_features": [
+   "question",
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "software developer no experience",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": 400,
+  "traffic_potential": 60,
+  "parent_topic": "software engineer no experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "marketing cloud developer certification",
+  "volume": 30,
+  "difficulty": 1,
+  "cpc": 200,
+  "traffic_potential": 90,
+  "parent_topic": "salesforce marketing cloud developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "developer experience jobs",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 0,
+  "parent_topic": "developer job boards",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "web developer and marketing",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 80,
+  "parent_topic": "marketing web developer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question",
+   "discussion",
+   "knowledge_panel",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "web developer cover letter no experience",
+  "volume": 30,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "web developer cover letter",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "developer advocate jobs remote",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "developer advocate jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "salesforce marketing cloud developer jobs",
+  "volume": 30,
+  "difficulty": 2,
+  "cpc": 70,
+  "traffic_potential": 40,
+  "parent_topic": "salesforce marketing cloud developer jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ }
+]

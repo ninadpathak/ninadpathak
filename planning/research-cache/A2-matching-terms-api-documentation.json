@@ -1,0 +1,5079 @@
+[
+ {
+  "keyword": "discord developer portal",
+  "volume": 21000,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 23000,
+  "parent_topic": "discord developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "api documentation",
+  "volume": 3700,
+  "difficulty": 42,
+  "cpc": 350,
+  "traffic_potential": 2500,
+  "parent_topic": "api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "telegram bot api setwebhook documentation",
+  "volume": 2600,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 2500,
+  "parent_topic": "telegram bot api setwebhook documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "fedex developer portal",
+  "volume": 1900,
+  "difficulty": 0,
+  "cpc": 900,
+  "traffic_potential": 2100,
+  "parent_topic": "fedex api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "developer portal",
+  "volume": 1600,
+  "difficulty": 27,
+  "cpc": 900,
+  "traffic_potential": 26000,
+  "parent_topic": "discord developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "telegram bot api sendmessage documentation",
+  "volume": 1300,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 2500,
+  "parent_topic": "telegram bot api setwebhook documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "heygen api documentation",
+  "volume": 900,
+  "difficulty": 16,
+  "cpc": 4,
+  "traffic_potential": 350,
+  "parent_topic": "heygen api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "coingecko api documentation",
+  "volume": 800,
+  "difficulty": 23,
+  "cpc": null,
+  "traffic_potential": 1000,
+  "parent_topic": "coingecko api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi key",
+  "volume": 700,
+  "difficulty": 37,
+  "cpc": 400,
+  "traffic_potential": 16000,
+  "parent_topic": "openai platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "what is api documentation",
+  "volume": 600,
+  "difficulty": 39,
+  "cpc": 5,
+  "traffic_potential": 2500,
+  "parent_topic": "api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "image",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "similarweb api documentation",
+  "volume": 600,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "similarweb api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "five9 api documentation",
+  "volume": 600,
+  "difficulty": 0,
+  "cpc": 1900,
+  "traffic_potential": 200,
+  "parent_topic": "five9 api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "pipedrive api documentation",
+  "volume": 600,
+  "difficulty": 18,
+  "cpc": 160,
+  "traffic_potential": 800,
+  "parent_topic": "pipedrive api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "jira api documentation",
+  "volume": 600,
+  "difficulty": 42,
+  "cpc": 300,
+  "traffic_potential": 800,
+  "parent_topic": "jira api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "developer portal discord",
+  "volume": 600,
+  "difficulty": 12,
+  "cpc": 350,
+  "traffic_potential": 26000,
+  "parent_topic": "discord developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "shopify api documentation",
+  "volume": 500,
+  "difficulty": 30,
+  "cpc": 600,
+  "traffic_potential": 5200,
+  "parent_topic": "shopify api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ups developer portal",
+  "volume": 500,
+  "difficulty": 2,
+  "cpc": 400,
+  "traffic_potential": 1100,
+  "parent_topic": "ups api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi editor",
+  "volume": 500,
+  "difficulty": 39,
+  "cpc": 200,
+  "traffic_potential": 8700,
+  "parent_topic": "swagger editor",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "github api documentation",
+  "volume": 450,
+  "difficulty": 4,
+  "cpc": 200,
+  "traffic_potential": 500,
+  "parent_topic": "github rest api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "discord bot developer portal",
+  "volume": 400,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 8300,
+  "parent_topic": "discord developer",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "workday api documentation",
+  "volume": 400,
+  "difficulty": 2,
+  "cpc": 400,
+  "traffic_potential": 600,
+  "parent_topic": "workday api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "internal developer portal",
+  "volume": 400,
+  "difficulty": 4,
+  "cpc": 1000,
+  "traffic_potential": 700,
+  "parent_topic": "internal developer platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "freelancer.com api documentation",
+  "volume": 400,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "freelancer api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "airtable api documentation",
+  "volume": 400,
+  "difficulty": 0,
+  "cpc": 1400,
+  "traffic_potential": 3200,
+  "parent_topic": "airtable api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "claude api documentation",
+  "volume": 350,
+  "difficulty": 34,
+  "cpc": 500,
+  "traffic_potential": 1000,
+  "parent_topic": "claude documentation",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "api reference",
+  "volume": 350,
+  "difficulty": 2,
+  "cpc": 250,
+  "traffic_potential": 1400,
+  "parent_topic": "openai api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "linkedin api documentation",
+  "volume": 350,
+  "difficulty": 20,
+  "cpc": 800,
+  "traffic_potential": 4800,
+  "parent_topic": "linkedin api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "gohighlevel api documentation",
+  "volume": 350,
+  "difficulty": 20,
+  "cpc": 250,
+  "traffic_potential": 600,
+  "parent_topic": "gohighlevel api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "api documentation tool",
+  "volume": 350,
+  "difficulty": 34,
+  "cpc": 450,
+  "traffic_potential": 21000,
+  "parent_topic": "swagger",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "nintendo developer portal",
+  "volume": 350,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "nintendo developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "quickbooks api documentation",
+  "volume": 350,
+  "difficulty": 1,
+  "cpc": 450,
+  "traffic_potential": 4200,
+  "parent_topic": "quickbooks api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "intuit developer portal",
+  "volume": 350,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 1700,
+  "parent_topic": "intuit developer",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "springdoc-openapi-starter-webmvc-ui",
+  "volume": 350,
+  "difficulty": 11,
+  "cpc": 250,
+  "traffic_potential": 400,
+  "parent_topic": "springdoc-openapi-starter-webmvc-ui",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "api developer portal",
+  "volume": 300,
+  "difficulty": 4,
+  "cpc": 2000,
+  "traffic_potential": 150,
+  "parent_topic": "api developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "zoom api documentation",
+  "volume": 300,
+  "difficulty": 29,
+  "cpc": 350,
+  "traffic_potential": 1800,
+  "parent_topic": "zoom api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi schema",
+  "volume": 300,
+  "difficulty": 27,
+  "cpc": 250,
+  "traffic_potential": 5100,
+  "parent_topic": "openapi",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "netsuite api documentation",
+  "volume": 300,
+  "difficulty": 6,
+  "cpc": 700,
+  "traffic_potential": 900,
+  "parent_topic": "netsuite api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "zoominfo api documentation",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": 1000,
+  "traffic_potential": 400,
+  "parent_topic": "zoominfo api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "api documentation example",
+  "volume": 300,
+  "difficulty": 2,
+  "cpc": 150,
+  "traffic_potential": 400,
+  "parent_topic": "api documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "wordpress rest api documentation",
+  "volume": 300,
+  "difficulty": 15,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "wordpress api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "asana api documentation",
+  "volume": 300,
+  "difficulty": 26,
+  "cpc": 450,
+  "traffic_potential": 150,
+  "parent_topic": "api asana",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "clickup api documentation",
+  "volume": 300,
+  "difficulty": 1,
+  "cpc": 130,
+  "traffic_potential": 450,
+  "parent_topic": "clickup api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "notion api documentation",
+  "volume": 300,
+  "difficulty": 14,
+  "cpc": 1,
+  "traffic_potential": 3000,
+  "parent_topic": "notion api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "gong api documentation",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": 1300,
+  "traffic_potential": 350,
+  "parent_topic": "gong api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "openapi viewer",
+  "volume": 300,
+  "difficulty": 37,
+  "cpc": 300,
+  "traffic_potential": 8800,
+  "parent_topic": "swagger editor",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "openapi-generator-cli",
+  "volume": 250,
+  "difficulty": 16,
+  "cpc": 250,
+  "traffic_potential": 10,
+  "parent_topic": "openapi generator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi 3.1 specification",
+  "volume": 250,
+  "difficulty": 40,
+  "cpc": null,
+  "traffic_potential": 4600,
+  "parent_topic": "openapi",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi-generator",
+  "volume": 250,
+  "difficulty": 42,
+  "cpc": 200,
+  "traffic_potential": 800,
+  "parent_topic": "openapi generator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "backstage developer portal",
+  "volume": 250,
+  "difficulty": 42,
+  "cpc": 300,
+  "traffic_potential": 1800,
+  "parent_topic": "spotify backstage",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "discord developer portal login",
+  "volume": 250,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 7200,
+  "parent_topic": "discord developer",
+  "intents": {
+   "informational": false,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "monday.com api documentation",
+  "volume": 250,
+  "difficulty": 9,
+  "cpc": 400,
+  "traffic_potential": 10,
+  "parent_topic": "monday api playground",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "quickbooks online api documentation",
+  "volume": 250,
+  "difficulty": 1,
+  "cpc": 400,
+  "traffic_potential": 3400,
+  "parent_topic": "quickbooks api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "jira rest api documentation",
+  "volume": 250,
+  "difficulty": 12,
+  "cpc": 350,
+  "traffic_potential": 800,
+  "parent_topic": "jira api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "spotify api documentation",
+  "volume": 250,
+  "difficulty": 35,
+  "cpc": null,
+  "traffic_potential": 7800,
+  "parent_topic": "spotify api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi vs swagger",
+  "volume": 250,
+  "difficulty": 1,
+  "cpc": 170,
+  "traffic_potential": 250,
+  "parent_topic": "openapi vs swagger",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "servicenow api documentation",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": 450,
+  "traffic_potential": 1000,
+  "parent_topic": "servicenow api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "swagger vs openapi",
+  "volume": 250,
+  "difficulty": 2,
+  "cpc": 170,
+  "traffic_potential": 250,
+  "parent_topic": "openapi vs swagger",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "walmart developer portal",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": 500,
+  "traffic_potential": 1600,
+  "parent_topic": "walmart api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "sendgrid api documentation",
+  "volume": 250,
+  "difficulty": 28,
+  "cpc": 300,
+  "traffic_potential": 2700,
+  "parent_topic": "sendgrid api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "apollo.io api documentation",
+  "volume": 250,
+  "difficulty": 31,
+  "cpc": 700,
+  "traffic_potential": 1000,
+  "parent_topic": "apollo api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "rippling api documentation",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "rippling api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openapi validator",
+  "volume": 200,
+  "difficulty": 25,
+  "cpc": 250,
+  "traffic_potential": 8800,
+  "parent_topic": "swagger editor",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "whatsapp api documentation",
+  "volume": 200,
+  "difficulty": 29,
+  "cpc": 300,
+  "traffic_potential": 2200,
+  "parent_topic": "whatsapp business api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best api documentation tools",
+  "volume": 200,
+  "difficulty": 7,
+  "cpc": 350,
+  "traffic_potential": 19000,
+  "parent_topic": "swagger",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "confluence api documentation",
+  "volume": 200,
+  "difficulty": 6,
+  "cpc": 200,
+  "traffic_potential": 250,
+  "parent_topic": "confluence api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "api documentation template",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 200,
+  "parent_topic": "api documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "fedex api documentation",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 450,
+  "traffic_potential": 2000,
+  "parent_topic": "fedex api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "google calendar api documentation",
+  "volume": 200,
+  "difficulty": 14,
+  "cpc": 400,
+  "traffic_potential": 900,
+  "parent_topic": "google calendar api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "sharepoint api documentation",
+  "volume": 200,
+  "difficulty": 14,
+  "cpc": 200,
+  "traffic_potential": 70,
+  "parent_topic": "sharepoint api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ukg api documentation",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 1300,
+  "traffic_potential": 500,
+  "parent_topic": "ukg api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "procore api documentation",
+  "volume": 200,
+  "difficulty": 7,
+  "cpc": 600,
+  "traffic_potential": 150,
+  "parent_topic": "procore api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "adobe aem api documentation",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "aem api integration",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "adp api documentation",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": 2500,
+  "traffic_potential": 700,
+  "parent_topic": "adp api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "docusign api documentation",
+  "volume": 200,
+  "difficulty": 30,
+  "cpc": 300,
+  "traffic_potential": 1300,
+  "parent_topic": "docusign api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi-generator-maven-plugin",
+  "volume": 200,
+  "difficulty": 11,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "openapi-generator-maven-plugin",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "servicenow developer portal",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 1600,
+  "traffic_potential": 8500,
+  "parent_topic": "servicenow developer",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "woocommerce rest api documentation",
+  "volume": 200,
+  "difficulty": 11,
+  "cpc": 100,
+  "traffic_potential": 450,
+  "parent_topic": "woocommerce rest api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "whatsapp business api documentation",
+  "volume": 200,
+  "difficulty": 45,
+  "cpc": 80,
+  "traffic_potential": 1900,
+  "parent_topic": "whatsapp integration",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "zoho books api documentation",
+  "volume": 200,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "zoho books api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "zoho crm api documentation",
+  "volume": 200,
+  "difficulty": 6,
+  "cpc": 170,
+  "traffic_potential": 900,
+  "parent_topic": "zoho crm api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "schwab developer portal",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "schwab api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "what is a developer portal",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 3000,
+  "traffic_potential": 200,
+  "parent_topic": "what is a developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openapi 3.1",
+  "volume": 200,
+  "difficulty": 36,
+  "cpc": 450,
+  "traffic_potential": 5300,
+  "parent_topic": "openapi",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "doordash developer portal",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 3000,
+  "traffic_potential": 150,
+  "parent_topic": "doordash api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "adobe analytics api documentation",
+  "volume": 200,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "adobe analytics api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "paylocity api documentation",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "paylocity api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "dialpad api documentation",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 450,
+  "traffic_potential": 100,
+  "parent_topic": "dialpad api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "adobe target api documentation",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "adobe target api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "java api documentation",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 10,
+  "traffic_potential": 2900,
+  "parent_topic": "java api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "instagram api documentation",
+  "volume": 200,
+  "difficulty": 4,
+  "cpc": 150,
+  "traffic_potential": 4600,
+  "parent_topic": "instagram api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "twilio api documentation",
+  "volume": 200,
+  "difficulty": 21,
+  "cpc": 350,
+  "traffic_potential": 800,
+  "parent_topic": "twilio integration",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "teams developer portal",
+  "volume": 200,
+  "difficulty": 14,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "microsoft developer login",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "google places api documentation",
+  "volume": 200,
+  "difficulty": 38,
+  "cpc": 150,
+  "traffic_potential": 900,
+  "parent_topic": "google places api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "azure developer portal",
+  "volume": 200,
+  "difficulty": 11,
+  "cpc": 500,
+  "traffic_potential": 250,
+  "parent_topic": "api developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "athena developer portal",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 350,
+  "parent_topic": "athena developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "semrush api documentation",
+  "volume": 200,
+  "difficulty": 16,
+  "cpc": 4500,
+  "traffic_potential": 250,
+  "parent_topic": "semrush api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "trello api documentation",
+  "volume": 200,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "trello api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "servicetitan api documentation",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 150,
+  "parent_topic": "service titan api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "klaviyo api documentation",
+  "volume": 200,
+  "difficulty": 14,
+  "cpc": 1100,
+  "traffic_potential": 400,
+  "parent_topic": "klaviyo api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "procore developer portal",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 450,
+  "traffic_potential": 150,
+  "parent_topic": "procore api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "paycor developer portal",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 1000,
+  "traffic_potential": 200,
+  "parent_topic": "paycor integrations",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "graph api documentation",
+  "volume": 150,
+  "difficulty": 40,
+  "cpc": 30,
+  "traffic_potential": 350,
+  "parent_topic": "microsoft graph api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "apigee developer portal",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 130,
+  "traffic_potential": 70,
+  "parent_topic": "apigee developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "servicenow rest api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "servicenow api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "google ads api documentation",
+  "volume": 150,
+  "difficulty": 8,
+  "cpc": 250,
+  "traffic_potential": 150,
+  "parent_topic": "google keywords api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "greenhouse api documentation",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 350,
+  "traffic_potential": 90,
+  "parent_topic": "greenhouse api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "interactive brokers api documentation",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": 300,
+  "traffic_potential": 50,
+  "parent_topic": "interactive brokers api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "kubernetes api reference",
+  "volume": 150,
+  "difficulty": 44,
+  "cpc": 300,
+  "traffic_potential": 100,
+  "parent_topic": "kubernetes api reference",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openapi tools",
+  "volume": 150,
+  "difficulty": 37,
+  "cpc": 300,
+  "traffic_potential": 500,
+  "parent_topic": "openapi editor",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi enum",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 1000,
+  "traffic_potential": 90,
+  "parent_topic": "openapi enum",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "ironclad api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 90,
+  "traffic_potential": 100,
+  "parent_topic": "ironclad api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "availity developer portal",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "availity developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "openapi best practices",
+  "volume": 150,
+  "difficulty": 9,
+  "cpc": 200,
+  "traffic_potential": 100,
+  "parent_topic": "openapi best practices",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "best api documentation tool",
+  "volume": 150,
+  "difficulty": 7,
+  "cpc": 600,
+  "traffic_potential": 19000,
+  "parent_topic": "swagger",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "sdk documentation",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 350,
+  "traffic_potential": 60,
+  "parent_topic": "sdk documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi oneof",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "openapi oneof",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "mailgun api documentation",
+  "volume": 150,
+  "difficulty": 10,
+  "cpc": 110,
+  "traffic_potential": 100,
+  "parent_topic": "mailgun api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "openapi yaml",
+  "volume": 150,
+  "difficulty": 40,
+  "cpc": 150,
+  "traffic_potential": 5300,
+  "parent_topic": "openapi",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "clio api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "clio api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "coupa api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "coupa api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "payment api documentation",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 400,
+  "parent_topic": "payments api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "yelp fusion api documentation",
+  "volume": 150,
+  "difficulty": 28,
+  "cpc": null,
+  "traffic_potential": 2200,
+  "parent_topic": "yelp api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi spec example",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "openapi spec example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "gmail api documentation",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 1600,
+  "traffic_potential": 600,
+  "parent_topic": "gmail api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "openapi client generator",
+  "volume": 150,
+  "difficulty": 35,
+  "cpc": 120,
+  "traffic_potential": 800,
+  "parent_topic": "openapi generator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "discussion",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "impact api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 8500,
+  "traffic_potential": 80,
+  "parent_topic": "impact api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "stoplight api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 900,
+  "traffic_potential": 250,
+  "parent_topic": "stoplight.io",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "quickbooks developer portal",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 1800,
+  "parent_topic": "intuit developer",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "workfront api documentation",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "workfront api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "on24 api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "on24 api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "generate openapi spec from code",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "generate openapi spec from code",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "pitchbook api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 1000,
+  "traffic_potential": 150,
+  "parent_topic": "pitchbook api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "amazon sp-api documentation",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 180,
+  "traffic_potential": 1400,
+  "parent_topic": "amazon apis",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit api documentation",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 600,
+  "traffic_potential": 90,
+  "parent_topic": "reddit api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi json",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 180,
+  "traffic_potential": 5100,
+  "parent_topic": "openapi",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi documentation",
+  "volume": 150,
+  "difficulty": 43,
+  "cpc": 180,
+  "traffic_potential": 250,
+  "parent_topic": "openapi docs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "canvas api documentation",
+  "volume": 150,
+  "difficulty": 10,
+  "cpc": 8,
+  "traffic_potential": 500,
+  "parent_topic": "canvas api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "developer portal open source",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 300,
+  "traffic_potential": 1700,
+  "parent_topic": "spotify backstage",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "workday rest api documentation",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 300,
+  "traffic_potential": 400,
+  "parent_topic": "workday rest api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "freshdesk api documentation",
+  "volume": 150,
+  "difficulty": 15,
+  "cpc": 1000,
+  "traffic_potential": 500,
+  "parent_topic": "freshdesk api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "wrike api documentation",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "wrike api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "square api documentation",
+  "volume": 150,
+  "difficulty": 36,
+  "cpc": 70,
+  "traffic_potential": 250,
+  "parent_topic": "square api docs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "openapi examples",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 400,
+  "traffic_potential": 70,
+  "parent_topic": "openapi examples",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "crowdstrike api documentation",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 600,
+  "traffic_potential": 200,
+  "parent_topic": "crowdstrike api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "spotify developer portal",
+  "volume": 150,
+  "difficulty": 29,
+  "cpc": 500,
+  "traffic_potential": 2900,
+  "parent_topic": "spotify developer",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "appfolio api documentation",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "appfolio api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "write api documentation",
+  "volume": 150,
+  "difficulty": 24,
+  "cpc": 120,
+  "traffic_potential": 250,
+  "parent_topic": "how to document an api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "marketo api documentation",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 1800,
+  "traffic_potential": 150,
+  "parent_topic": "marketo api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "monday api documentation",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 400,
+  "traffic_potential": 500,
+  "parent_topic": "monday api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "visa developer portal",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 2,
+  "traffic_potential": 50,
+  "parent_topic": "visa api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "8x8 api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "8x8 api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "paycom api documentation",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 600,
+  "traffic_potential": 250,
+  "parent_topic": "paycom api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi-typescript",
+  "volume": 150,
+  "difficulty": 32,
+  "cpc": 600,
+  "traffic_potential": 250,
+  "parent_topic": "openapi-typescript",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "rest api documentation example",
+  "volume": 150,
+  "difficulty": 7,
+  "cpc": 140,
+  "traffic_potential": 400,
+  "parent_topic": "api documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "figma api documentation",
+  "volume": 150,
+  "difficulty": 26,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "figma api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "github rest api documentation",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 7300,
+  "parent_topic": "github api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "sentinelone api documentation",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 400,
+  "traffic_potential": 100,
+  "parent_topic": "sentinelone api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "api endpoint documentation",
+  "volume": 150,
+  "difficulty": 21,
+  "cpc": 180,
+  "traffic_potential": 200,
+  "parent_topic": "openapi documentation generator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "freshservice api documentation",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 800,
+  "traffic_potential": 250,
+  "parent_topic": "freshservice api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "acumatica api documentation",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 400,
+  "traffic_potential": 70,
+  "parent_topic": "acumatica api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "zoho api documentation",
+  "volume": 150,
+  "difficulty": 40,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "zoho api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "follow up boss api documentation",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 15,
+  "traffic_potential": 100,
+  "parent_topic": "follow up boss api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "discord portal developer",
+  "volume": 150,
+  "difficulty": 11,
+  "cpc": 450,
+  "traffic_potential": 25000,
+  "parent_topic": "discord developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openapi-python-client",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "openapi-python-client",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "api developer portal open source",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 450,
+  "traffic_potential": 100,
+  "parent_topic": "api developer portal open source",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "api documentation best practices",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 800,
+  "traffic_potential": 2500,
+  "parent_topic": "api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "video"
+  ]
+ },
+ {
+  "keyword": "api documentation examples",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 170,
+  "traffic_potential": 400,
+  "parent_topic": "api documentation example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "azure api management documentation",
+  "volume": 150,
+  "difficulty": 43,
+  "cpc": 300,
+  "traffic_potential": 300,
+  "parent_topic": "azure apim",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "woocommerce api documentation",
+  "volume": 150,
+  "difficulty": 32,
+  "cpc": 500,
+  "traffic_potential": 700,
+  "parent_topic": "woocommerce api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "bitbucket api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 2500,
+  "traffic_potential": 600,
+  "parent_topic": "bitbucket api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "mlb stats api documentation",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "mlb stats api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi security",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 600,
+  "traffic_potential": 100,
+  "parent_topic": "openapi securityschemes",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "amazon ecommerce api documentation",
+  "volume": 150,
+  "difficulty": 40,
+  "cpc": 1000,
+  "traffic_potential": 1200,
+  "parent_topic": "amazon seller api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "kraken api documentation",
+  "volume": 150,
+  "difficulty": 28,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "kraken api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "mexc api documentation",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "mexc api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "printify api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 190,
+  "traffic_potential": 150,
+  "parent_topic": "printify api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "qualtrics api documentation",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 2500,
+  "traffic_potential": 600,
+  "parent_topic": "qualtrics api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openapi spec validator",
+  "volume": 150,
+  "difficulty": 25,
+  "cpc": 450,
+  "traffic_potential": 30,
+  "parent_topic": "openapi spec validator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "lever api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "lever api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "gusto api documentation",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "gusto api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "spyfu api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 500,
+  "traffic_potential": 50,
+  "parent_topic": "spyfu api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "clover api documentation",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "clover api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "google maps api documentation",
+  "volume": 150,
+  "difficulty": 37,
+  "cpc": 4,
+  "traffic_potential": 60,
+  "parent_topic": "google maps api docs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "tradestation api documentation",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 25,
+  "traffic_potential": 150,
+  "parent_topic": "tradestation api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "hostaway api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 1100,
+  "traffic_potential": 150,
+  "parent_topic": "hostaway api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "tradingview api documentation",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 14000,
+  "parent_topic": "tradingview api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "sendgrid email api documentation",
+  "volume": 150,
+  "difficulty": 31,
+  "cpc": 400,
+  "traffic_potential": 2300,
+  "parent_topic": "sendgrid api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "google trends api documentation",
+  "volume": 150,
+  "difficulty": 35,
+  "cpc": 150,
+  "traffic_potential": 700,
+  "parent_topic": "google trends api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "toast api documentation",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 450,
+  "traffic_potential": 400,
+  "parent_topic": "toast api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "concur api documentation",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 30,
+  "parent_topic": "concur api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "bamboohr api documentation",
+  "volume": 150,
+  "difficulty": 13,
+  "cpc": 190,
+  "traffic_potential": 350,
+  "parent_topic": "bamboohr api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "go high level api documentation",
+  "volume": 150,
+  "difficulty": 16,
+  "cpc": 8,
+  "traffic_potential": 600,
+  "parent_topic": "gohighlevel api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "eventbrite api documentation",
+  "volume": 150,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "eventbrite api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi documentation generator",
+  "volume": 150,
+  "difficulty": 23,
+  "cpc": 200,
+  "traffic_potential": 100,
+  "parent_topic": "openapi spec generator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "openapi example",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 300,
+  "traffic_potential": 350,
+  "parent_topic": "openapi spec example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "rest api documentation template",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 170,
+  "traffic_potential": 200,
+  "parent_topic": "api documentation template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "brandwatch api documentation",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 400,
+  "traffic_potential": 40,
+  "parent_topic": "brandwatch api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "athena api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 600,
+  "traffic_potential": 200,
+  "parent_topic": "athena api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "efax api documentation",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 400,
+  "traffic_potential": 90,
+  "parent_topic": "efax api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "google news api documentation",
+  "volume": 100,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 1000,
+  "parent_topic": "google news api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "sage intacct api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 200,
+  "parent_topic": "sage intacct api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "ebay developer portal",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1000,
+  "parent_topic": "ebay developer",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "zuora api reference",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "zuora documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "business central api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "microsoft dynamics api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "amazon developer portal",
+  "volume": 100,
+  "difficulty": 10,
+  "cpc": 120,
+  "traffic_potential": 1800,
+  "parent_topic": "amazon developer",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "clearbit api documentation",
+  "volume": 100,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "clearbit api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "postman api documentation",
+  "volume": 100,
+  "difficulty": 21,
+  "cpc": 300,
+  "traffic_potential": 40,
+  "parent_topic": "postman api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi additionalproperties",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "openapi additionalproperties",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "tiktok api documentation",
+  "volume": 100,
+  "difficulty": 30,
+  "cpc": 400,
+  "traffic_potential": 70,
+  "parent_topic": "tiktok api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "zoho desk api documentation",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "zoho desk api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "api management developer portal",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 300,
+  "traffic_potential": 250,
+  "parent_topic": "azure developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "bybit api documentation",
+  "volume": 100,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "bybit api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "ebay api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 1100,
+  "parent_topic": "ebay api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "port developer portal",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 1100,
+  "traffic_potential": 1000,
+  "parent_topic": "port.io",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "generate openapi spec",
+  "volume": 100,
+  "difficulty": 19,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "generate openapi spec",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "facebook api documentation",
+  "volume": 100,
+  "difficulty": 45,
+  "cpc": 150,
+  "traffic_potential": 350,
+  "parent_topic": "facebook api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "google analytics api documentation",
+  "volume": 100,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "google analytics api get keywords",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "springdoc-openapi",
+  "volume": 100,
+  "difficulty": 21,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "springdoc-openapi-ui",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "activecampaign api documentation",
+  "volume": 100,
+  "difficulty": 26,
+  "cpc": 400,
+  "traffic_potential": 150,
+  "parent_topic": "activecampaign api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "resy api documentation",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "resy api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "adp developer portal",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "adp api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "kong developer portal",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 350,
+  "traffic_potential": 20,
+  "parent_topic": "kong developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "openapi versions",
+  "volume": 100,
+  "difficulty": 40,
+  "cpc": null,
+  "traffic_potential": 5300,
+  "parent_topic": "openapi",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "yardi api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 300,
+  "traffic_potential": 200,
+  "parent_topic": "yardi api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "braze api documentation",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": 10,
+  "traffic_potential": 150,
+  "parent_topic": "braze api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "live chat api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "api.livechatinc.com",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "magento2 api documentation",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "magento 2 api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "best api documentation",
+  "volume": 100,
+  "difficulty": 34,
+  "cpc": 350,
+  "traffic_potential": 250,
+  "parent_topic": "api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "developer portal software",
+  "volume": 100,
+  "difficulty": 5,
+  "cpc": 800,
+  "traffic_potential": 1700,
+  "parent_topic": "spotify backstage",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openapi spec generator",
+  "volume": 100,
+  "difficulty": 42,
+  "cpc": 200,
+  "traffic_potential": 450,
+  "parent_topic": "openapi generator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "openapi types",
+  "volume": 100,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "swagger data types",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "qbo api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 3400,
+  "parent_topic": "quickbooks api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "adobe sign api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 60,
+  "parent_topic": "adobe sign api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "openapi format",
+  "volume": 100,
+  "difficulty": 35,
+  "cpc": null,
+  "traffic_potential": 5300,
+  "parent_topic": "openapi",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "cvent api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "cvent api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "connectwise api documentation",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 200,
+  "parent_topic": "connectwise api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "avalara api documentation",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 600,
+  "traffic_potential": 100,
+  "parent_topic": "avalara api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "power bi rest api documentation",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "power bi rest api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "sms api documentation",
+  "volume": 100,
+  "difficulty": 24,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "sms api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "walmart api documentation",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 800,
+  "parent_topic": "walmart api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "workday soap api documentation",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 450,
+  "traffic_potential": 450,
+  "parent_topic": "workday web services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "zuora api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "zuora api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openapi json schema example",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "openapi json schema example",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "jamf api documentation",
+  "volume": 100,
+  "difficulty": 8,
+  "cpc": 300,
+  "traffic_potential": 250,
+  "parent_topic": "jamf api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "alpaca api documentation",
+  "volume": 100,
+  "difficulty": 23,
+  "cpc": 1400,
+  "traffic_potential": 50,
+  "parent_topic": "alpaca api docs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "databricks api documentation",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": 500,
+  "traffic_potential": 250,
+  "parent_topic": "databricks rest api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "geotab api documentation",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "geotab api",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "microsoft teams developer portal",
+  "volume": 100,
+  "difficulty": 21,
+  "cpc": 800,
+  "traffic_potential": 80,
+  "parent_topic": "microsoft teams developer portal",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "ahrefs api documentation",
+  "volume": 100,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 4000,
+  "parent_topic": "ahrefs api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "bing search api documentation",
+  "volume": 100,
+  "difficulty": 11,
+  "cpc": 300,
+  "traffic_potential": 150,
+  "parent_topic": "bing search api documentation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ }
+]

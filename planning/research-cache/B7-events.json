@@ -1,0 +1,5206 @@
+[
+ {
+  "keyword": "what is a hackathon",
+  "volume": 2700,
+  "difficulty": 4,
+  "cpc": 7,
+  "traffic_potential": 1000,
+  "parent_topic": "what is a hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "how to organize a community event",
+  "volume": 1400,
+  "difficulty": 3,
+  "cpc": 70,
+  "traffic_potential": 400,
+  "parent_topic": "how to organize a community event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "community event",
+  "volume": 1200,
+  "difficulty": 2,
+  "cpc": 25,
+  "traffic_potential": 800,
+  "parent_topic": "community events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "hackathon meaning",
+  "volume": 1200,
+  "difficulty": 22,
+  "cpc": 5,
+  "traffic_potential": 1100,
+  "parent_topic": "hackathons",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "knowledge_card",
+   "question",
+   "sitelink",
+   "video",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event production",
+  "volume": 1000,
+  "difficulty": 0,
+  "cpc": 80,
+  "traffic_potential": 600,
+  "parent_topic": "virtual event production",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "smart india hackathon 2025 problem statements",
+  "volume": 800,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "smart india hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "what is hackathon",
+  "volume": 700,
+  "difficulty": 9,
+  "cpc": 7,
+  "traffic_potential": 1600,
+  "parent_topic": "what is a hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event marketing",
+  "volume": 600,
+  "difficulty": 0,
+  "cpc": 50,
+  "traffic_potential": 1300,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video"
+  ]
+ },
+ {
+  "keyword": "virtual event services",
+  "volume": 600,
+  "difficulty": 22,
+  "cpc": 80,
+  "traffic_potential": 1400,
+  "parent_topic": "virtual event services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "local_pack",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event roi",
+  "volume": 600,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "virtual event roi",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event production company",
+  "volume": 600,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 600,
+  "parent_topic": "virtual event production",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "local_pack",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event planning",
+  "volume": 500,
+  "difficulty": 28,
+  "cpc": 200,
+  "traffic_potential": 900,
+  "parent_topic": "virtual event planning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event solutions",
+  "volume": 500,
+  "difficulty": 28,
+  "cpc": 60,
+  "traffic_potential": 800,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "community event ideas",
+  "volume": 400,
+  "difficulty": 5,
+  "cpc": 35,
+  "traffic_potential": 500,
+  "parent_topic": "community event ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event management",
+  "volume": 400,
+  "difficulty": 24,
+  "cpc": 70,
+  "traffic_potential": 1500,
+  "parent_topic": "virtual event management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to plan a virtual event",
+  "volume": 350,
+  "difficulty": 38,
+  "cpc": 180,
+  "traffic_potential": 900,
+  "parent_topic": "how to host a virtual event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "google hackathon",
+  "volume": 350,
+  "difficulty": 11,
+  "cpc": 130,
+  "traffic_potential": 1000,
+  "parent_topic": "google event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "hackathon ideas",
+  "volume": 350,
+  "difficulty": 0,
+  "cpc": 130,
+  "traffic_potential": 600,
+  "parent_topic": "hackathon ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "whats a hackathon",
+  "volume": 350,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "hack-a-thon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event production services",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 300,
+  "parent_topic": "virtual event production",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "virtual event ideas",
+  "volume": 300,
+  "difficulty": 4,
+  "cpc": 250,
+  "traffic_potential": 1800,
+  "parent_topic": "virtual events examples",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event production companies",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 100,
+  "parent_topic": "virtual event video production",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "hackathon nyc",
+  "volume": 300,
+  "difficulty": 1,
+  "cpc": 140,
+  "traffic_potential": 90,
+  "parent_topic": "nyc hackathons",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event marketing strategy",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "virtual event marketing strategy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event trends",
+  "volume": 300,
+  "difficulty": 15,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "virtual event trends",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best virtual event platforms",
+  "volume": 250,
+  "difficulty": 17,
+  "cpc": 200,
+  "traffic_potential": 9300,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event planner",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 600,
+  "parent_topic": "virtual event planner",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "mit hackathon",
+  "volume": 250,
+  "difficulty": 25,
+  "cpc": 20,
+  "traffic_potential": 700,
+  "parent_topic": "hackmit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "what is a virtual event",
+  "volume": 250,
+  "difficulty": 26,
+  "cpc": 30,
+  "traffic_potential": 700,
+  "parent_topic": "virtual event marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best virtual event platform",
+  "volume": 250,
+  "difficulty": 23,
+  "cpc": 200,
+  "traffic_potential": 9400,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event checklist",
+  "volume": 250,
+  "difficulty": 1,
+  "cpc": 600,
+  "traffic_potential": 400,
+  "parent_topic": "virtual events checklist",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image"
+  ]
+ },
+ {
+  "keyword": "virtual event engagement",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 25,
+  "traffic_potential": 150,
+  "parent_topic": "virtual event attendee engagement",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "virtual event provider",
+  "volume": 200,
+  "difficulty": 30,
+  "cpc": 2500,
+  "traffic_potential": 2900,
+  "parent_topic": "virtual event platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "generative ai hackathon ideas",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "generative ai hackathon ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual networking event",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": 180,
+  "traffic_potential": 0,
+  "parent_topic": "online networking event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "stanford hackathon",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 1700,
+  "parent_topic": "treehacks",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "zoom virtual event",
+  "volume": 200,
+  "difficulty": 36,
+  "cpc": 30,
+  "traffic_potential": 1100,
+  "parent_topic": "virtual event management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "worldwide developer conference 2016",
+  "volume": 200,
+  "difficulty": 26,
+  "cpc": 0,
+  "traffic_potential": 150,
+  "parent_topic": "wwdc 2016",
+  "intents": null,
+  "serp_features": [
+   "question",
+   "knowledge_panel",
+   "image"
+  ]
+ },
+ {
+  "keyword": "furniture and things community event center",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "furniture and things community event center",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "best time to host a virtual event",
+  "volume": 200,
+  "difficulty": 30,
+  "cpc": 120,
+  "traffic_potential": 1000,
+  "parent_topic": "how to host a virtual event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "microsoft hackathon",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 400,
+  "traffic_potential": 60,
+  "parent_topic": "microsoft hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual product launch event",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "product launch virtual event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event solution",
+  "volume": 200,
+  "difficulty": 10,
+  "cpc": 50,
+  "traffic_potential": 800,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "hybrid virtual event platform",
+  "volume": 200,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "hybrid events management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event feedback survey",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 2300,
+  "parent_topic": "event survey questions",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hackathon san francisco",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 20,
+  "traffic_potential": 400,
+  "parent_topic": "hackathon san francisco",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "top virtual event platforms",
+  "volume": 200,
+  "difficulty": 28,
+  "cpc": 30,
+  "traffic_potential": 8500,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event platform features",
+  "volume": 200,
+  "difficulty": 16,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "goldcast pricing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community event ideas for kids",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "community event ideas for kids",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event statistics",
+  "volume": 200,
+  "difficulty": 37,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "virtual event statistics",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event companies",
+  "volume": 200,
+  "difficulty": 21,
+  "cpc": 700,
+  "traffic_potential": 7300,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "how to organize a hackathon",
+  "volume": 200,
+  "difficulty": 13,
+  "cpc": 250,
+  "traffic_potential": 250,
+  "parent_topic": "how to organize a hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "best virtual event technology",
+  "volume": 200,
+  "difficulty": 21,
+  "cpc": null,
+  "traffic_potential": 9000,
+  "parent_topic": "virtual event platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "sitelink",
+   "question",
+   "discussion",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "virtual event producer",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 80,
+  "parent_topic": "virtual event producer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "princeton hackathon",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "hackprinceton",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event planning template",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 200,
+  "traffic_potential": 600,
+  "parent_topic": "virtual event agenda",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "image_th",
+   "sitelink",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "virtual event planner jobs",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 15,
+  "traffic_potential": 600,
+  "parent_topic": "virtual event planner jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual hiring event",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 110,
+  "traffic_potential": 2200,
+  "parent_topic": "jobfairx",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event registration",
+  "volume": 200,
+  "difficulty": 31,
+  "cpc": 450,
+  "traffic_potential": 5000,
+  "parent_topic": "event registration",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event landing page",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "landing page for event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "hybrid virtual and in person event",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "hybrid virtual and in person event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video"
+  ]
+ },
+ {
+  "keyword": "virtual event branding",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "event branding services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "run of show template for virtual event",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "virtual run of show template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image"
+  ]
+ },
+ {
+  "keyword": "anthropic hackathon",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 300,
+  "traffic_potential": 30,
+  "parent_topic": "anthropic hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "virtual event management conference software",
+  "volume": 200,
+  "difficulty": 40,
+  "cpc": null,
+  "traffic_potential": 12000,
+  "parent_topic": "event management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "what is virtual event",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "what is a hackathon?",
+  "volume": 150,
+  "difficulty": 11,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "what is a hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "types of virtual event",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 130,
+  "traffic_potential": 700,
+  "parent_topic": "how to host a virtual event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event technology",
+  "volume": 150,
+  "difficulty": 23,
+  "cpc": 120,
+  "traffic_potential": 80,
+  "parent_topic": "virtual events technology",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "ideas for hackathon",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 160,
+  "traffic_potential": 900,
+  "parent_topic": "hackathon ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "nyu hackathon",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "nyu hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event planning checklist",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 90,
+  "parent_topic": "virtual event checklist",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event strategy",
+  "volume": 150,
+  "difficulty": 10,
+  "cpc": 5500,
+  "traffic_potential": 2700,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community event ideas for families",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 20,
+  "traffic_potential": 800,
+  "parent_topic": "community event ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "image"
+  ]
+ },
+ {
+  "keyword": "virtual event promotion",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "virtual event marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "virtual event guide",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 3200,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event checklist template",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "virtual event agenda",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event agency",
+  "volume": 150,
+  "difficulty": 20,
+  "cpc": 600,
+  "traffic_potential": 350,
+  "parent_topic": "virtual events company",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "hackathon definition",
+  "volume": 150,
+  "difficulty": 28,
+  "cpc": 25,
+  "traffic_potential": 7600,
+  "parent_topic": "hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "columbia hackathon",
+  "volume": 150,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "columbia hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "virtual event management tools",
+  "volume": 150,
+  "difficulty": 34,
+  "cpc": null,
+  "traffic_potential": 9300,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event engagement ideas",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 1500,
+  "parent_topic": "virtual event ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "harvard hackathon",
+  "volume": 150,
+  "difficulty": 23,
+  "cpc": 300,
+  "traffic_potential": 90,
+  "parent_topic": "harvard hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "product launch virtual event",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 0,
+  "traffic_potential": 150,
+  "parent_topic": "virtual product launch event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event sponsorship ideas",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "sponsorship ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event metrics",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "virtual event metrics",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event themes",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1900,
+  "parent_topic": "virtual conference ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event planning company",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 1000,
+  "traffic_potential": 1400,
+  "parent_topic": "virtual event services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event hosting platforms",
+  "volume": 150,
+  "difficulty": 43,
+  "cpc": 4500,
+  "traffic_potential": 8900,
+  "parent_topic": "virtual event platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual hackathon platform",
+  "volume": 150,
+  "difficulty": 19,
+  "cpc": null,
+  "traffic_potential": 4600,
+  "parent_topic": "devpost",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "ai hackathon ideas",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "hackathon winners",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "uidai hackathon",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video"
+  ]
+ },
+ {
+  "keyword": "virtual event sponsors",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "virtual event sponsorship",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hackathon project ideas",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 350,
+  "traffic_potential": 500,
+  "parent_topic": "hackathon ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event manager",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 60,
+  "parent_topic": "virtual event manager",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event video production",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "virtual event production company",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "what is virtual event planning",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": 250,
+  "traffic_potential": 900,
+  "parent_topic": "virtual event planning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event budget template",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "event budget template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "mercer island community and event center",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 80,
+  "traffic_potential": 100,
+  "parent_topic": "mercer island community and event center",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "virtual event apps",
+  "volume": 150,
+  "difficulty": 33,
+  "cpc": 1100,
+  "traffic_potential": 8900,
+  "parent_topic": "virtual event platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "mlh hackathon",
+  "volume": 150,
+  "difficulty": 25,
+  "cpc": 1100,
+  "traffic_potential": 2900,
+  "parent_topic": "mlh",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual product launch event ideas",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "product launch event examples",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual fundraising event",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 200,
+  "traffic_potential": 350,
+  "parent_topic": "virtual fundraising events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual alumni event ideas",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 80,
+  "parent_topic": "virtual alumni event ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event planning best practices",
+  "volume": 150,
+  "difficulty": 17,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "virtual event planning best practices",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event kits",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 3000,
+  "traffic_potential": 10,
+  "parent_topic": "virtual event kits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "cmu hackathon",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "cmu hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is a hackathon event",
+  "volume": 150,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 1000,
+  "parent_topic": "what is a hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "plan a virtual event",
+  "volume": 150,
+  "difficulty": 8,
+  "cpc": 500,
+  "traffic_potential": 2800,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event sponsorship opportunities",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "virtual event sponsorship packages",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hackathon for beginners",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 200,
+  "parent_topic": "hackathon for beginners",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "post virtual event survey questions for attendees",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 160,
+  "traffic_potential": 2700,
+  "parent_topic": "post event survey questions",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "innovation hackathon",
+  "volume": 150,
+  "difficulty": 15,
+  "cpc": 250,
+  "traffic_potential": 0,
+  "parent_topic": "asu hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to survey virtual event attendees",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "how to survey virtual event attendees",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event timeline",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 400,
+  "traffic_potential": 100,
+  "parent_topic": "virtual event planning timeline",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "developer conference",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 1200,
+  "parent_topic": "developer conferences",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event planners",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 150,
+  "traffic_potential": 600,
+  "parent_topic": "virtual event planner",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event management companies",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 900,
+  "traffic_potential": 900,
+  "parent_topic": "virtual event planning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "berkeley hackathon",
+  "volume": 150,
+  "difficulty": 30,
+  "cpc": 250,
+  "traffic_potential": 150,
+  "parent_topic": "berkeley hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event planning timeline",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "virtual event timeline",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "nonprofit virtual event",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 110,
+  "traffic_potential": 150,
+  "parent_topic": "nonprofit virtual event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to promote a virtual event",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 90,
+  "traffic_potential": 250,
+  "parent_topic": "virtual event promotion",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event gifts",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "virtual event gifts",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "roblox developer conference",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 70,
+  "traffic_potential": 40,
+  "parent_topic": "roblox rdc",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "hackathon projects",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 200,
+  "traffic_potential": 150,
+  "parent_topic": "hackathon projects",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event examples",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 15,
+  "traffic_potential": 1800,
+  "parent_topic": "virtual event ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "aws hackathon",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 1400,
+  "traffic_potential": 10,
+  "parent_topic": "aws hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "cvent virtual event",
+  "volume": 150,
+  "difficulty": 16,
+  "cpc": 800,
+  "traffic_potential": 800,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event budget",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "virtual event budget",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual reality event platform",
+  "volume": 150,
+  "difficulty": 41,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "moot up",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "georgia tech hackathon",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "georgia tech hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event software platform",
+  "volume": 150,
+  "difficulty": 45,
+  "cpc": 4000,
+  "traffic_potential": 8000,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "yahoo mobile developer conference",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 2000,
+  "traffic_potential": 0,
+  "parent_topic": "yahoo mobile developer suite",
+  "intents": null,
+  "serp_features": [
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "virtual fundraising event ideas",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 110,
+  "traffic_potential": 450,
+  "parent_topic": "virtual fundraising ideas for nonprofits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event theme ideas",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "virtual event theme ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event gamification",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "virtual event gamification",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to make virtual event interactive",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "virtual conference ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event company",
+  "volume": 150,
+  "difficulty": 36,
+  "cpc": 190,
+  "traffic_potential": 8900,
+  "parent_topic": "virtual event platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_top",
+   "local_pack",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event activities",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 400,
+  "traffic_potential": 400,
+  "parent_topic": "virtual event activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual corporate event",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 500,
+  "parent_topic": "virtual event experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event tools",
+  "volume": 150,
+  "difficulty": 38,
+  "cpc": 2500,
+  "traffic_potential": 8500,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event platform comparison",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 1400,
+  "traffic_potential": 9000,
+  "parent_topic": "virtual event platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "live virtual event",
+  "volume": 150,
+  "difficulty": 38,
+  "cpc": 400,
+  "traffic_potential": 300,
+  "parent_topic": "virtual conference event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "what is a virtual event platform",
+  "volume": 150,
+  "difficulty": 44,
+  "cpc": null,
+  "traffic_potential": 1500,
+  "parent_topic": "virtual event management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event planning guide",
+  "volume": 150,
+  "difficulty": 32,
+  "cpc": null,
+  "traffic_potential": 3200,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event program",
+  "volume": 100,
+  "difficulty": 23,
+  "cpc": 1800,
+  "traffic_potential": 200,
+  "parent_topic": "digital program",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "nyc hackathon",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 140,
+  "traffic_potential": 900,
+  "parent_topic": "hackathons near me",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event jobs",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 25,
+  "traffic_potential": 100,
+  "parent_topic": "virtual events jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event platform market",
+  "volume": 100,
+  "difficulty": 16,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "virtual event platform market",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hackathon 2024",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "hackathons 2024",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event swag",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "virtual swag ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event marketing ideas",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "how to promote a virtual event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event ideas for companies",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 250,
+  "traffic_potential": 1700,
+  "parent_topic": "virtual event ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event engagement tools",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 8500,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event management platform",
+  "volume": 100,
+  "difficulty": 40,
+  "cpc": 1100,
+  "traffic_potential": 8300,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "sample virtual event sponsorship packages",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "sponsorship packages for virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual team event ideas",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 200,
+  "traffic_potential": 2200,
+  "parent_topic": "virtual team building activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event streaming",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event games",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 350,
+  "traffic_potential": 1400,
+  "parent_topic": "virtual games",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "question",
+   "sitelink",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "virtual event sponsorship packages",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 250,
+  "parent_topic": "virtual event sponsorship opportunities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hackathon for beginners 2023",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 150,
+  "parent_topic": "hackathon for beginners",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "hardware hackathon",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 500,
+  "traffic_potential": 40,
+  "parent_topic": "hardware hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "hackathon atlanta",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 35,
+  "traffic_potential": 100,
+  "parent_topic": "ai atl",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "christmas community event ideas",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 45,
+  "traffic_potential": 100,
+  "parent_topic": "community christmas events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "virtual event manager jobs",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 8,
+  "traffic_potential": 60,
+  "parent_topic": "virtual event manager",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "creating a virtual event",
+  "volume": 100,
+  "difficulty": 41,
+  "cpc": 180,
+  "traffic_potential": 1200,
+  "parent_topic": "how to host a virtual event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event rfp",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "virtual event rfp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "best virtual event",
+  "volume": 100,
+  "difficulty": 10,
+  "cpc": 450,
+  "traffic_potential": 2800,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event platforms for nonprofits",
+  "volume": 100,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "virtual event platforms for nonprofits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "ucla hackathon",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 1100,
+  "traffic_potential": 900,
+  "parent_topic": "la hacks",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "corporate virtual event ideas",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "virtual conference ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event kpis",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "virtual event metrics",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event types",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "types of virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community christmas event ideas",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 45,
+  "traffic_potential": 200,
+  "parent_topic": "christmas event ideas community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "solana hackathon",
+  "volume": 100,
+  "difficulty": 30,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "solana hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "san francisco hackathon",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 20,
+  "traffic_potential": 400,
+  "parent_topic": "hackathon san francisco",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event platform pricing",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 9300,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "pre virtual event survey questions",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "pre event survey questions",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "virtual event coordinator",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 150,
+  "traffic_potential": 60,
+  "parent_topic": "virtual event coordinator jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event networking",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "digital networking events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to do a virtual event",
+  "volume": 100,
+  "difficulty": 39,
+  "cpc": 200,
+  "traffic_potential": 900,
+  "parent_topic": "how to host a virtual event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "hackathon prizes",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "hackathon prizes",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "virtual event theme",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "virtual conference ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event bags",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 500,
+  "traffic_potential": 50,
+  "parent_topic": "virtual event bags",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual magician for corporate event",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 600,
+  "traffic_potential": 80,
+  "parent_topic": "virtual magician for corporate event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to run a virtual event",
+  "volume": 100,
+  "difficulty": 43,
+  "cpc": null,
+  "traffic_potential": 1000,
+  "parent_topic": "how to host a virtual event",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event planning companies",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 1400,
+  "parent_topic": "virtual event services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chocolate tasting virtual event",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 500,
+  "traffic_potential": 200,
+  "parent_topic": "virtual chocolate tasting",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "hackathon ideas for company",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "hackathon ideas for company",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event email template",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "request for participation in an event email template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community event ticketing system",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 5100,
+  "parent_topic": "ticketsource",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "organize hackathon",
+  "volume": 100,
+  "difficulty": 21,
+  "cpc": 800,
+  "traffic_potential": 150,
+  "parent_topic": "how to organize a hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual networking event ideas",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 400,
+  "parent_topic": "networking activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "virtual event program needs",
+  "volume": 100,
+  "difficulty": 26,
+  "cpc": null,
+  "traffic_potential": 2800,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "open ai hackathon",
+  "volume": 100,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "open ai hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community event examples",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 90,
+  "traffic_potential": 800,
+  "parent_topic": "community event ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "virtual event formats",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "event format",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual company event ideas",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 300,
+  "traffic_potential": 1800,
+  "parent_topic": "virtual conference ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual cooking event",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 350,
+  "traffic_potential": 250,
+  "parent_topic": "virtual cooking classes team building",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "company hackathon",
+  "volume": 100,
+  "difficulty": 45,
+  "cpc": 400,
+  "traffic_potential": 40,
+  "parent_topic": "company hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual corporate event ideas",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 200,
+  "traffic_potential": 2100,
+  "parent_topic": "virtual team building activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hackathon ideas for beginners",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 80,
+  "traffic_potential": 800,
+  "parent_topic": "hackathon ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "christmas event ideas community",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 4,
+  "traffic_potential": 150,
+  "parent_topic": "community christmas event ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image_th",
+   "question",
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "measure virtual event success",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "virtual event roi",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "virtual event sponsorship",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "virtual sponsorship packages",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event place",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event app",
+  "volume": 100,
+  "difficulty": 39,
+  "cpc": 1000,
+  "traffic_potential": 9000,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hackathon tips",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "hackathon tips",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "hackathon boston",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 60,
+  "parent_topic": "hackathons boston",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "how does a hackathon work",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": 50,
+  "traffic_potential": 150,
+  "parent_topic": "how do hackathons work",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "mother's day community event ideas",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": 30,
+  "parent_topic": "mothers day event ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to host a hackathon",
+  "volume": 100,
+  "difficulty": 12,
+  "cpc": 170,
+  "traffic_potential": 1200,
+  "parent_topic": "hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual event analytics",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 15,
+  "traffic_potential": 10,
+  "parent_topic": "virtual event analytics",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event management software",
+  "volume": 100,
+  "difficulty": 43,
+  "cpc": 1500,
+  "traffic_potential": 12000,
+  "parent_topic": "event management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event planning platform",
+  "volume": 100,
+  "difficulty": 36,
+  "cpc": null,
+  "traffic_potential": 9100,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event success metrics",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "virtual event metrics",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event run of show template",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "run of show template",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "purdue hackathon",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 40,
+  "parent_topic": "purdue hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event best practices",
+  "volume": 100,
+  "difficulty": 13,
+  "cpc": 80,
+  "traffic_potential": 90,
+  "parent_topic": "virtual event best practices",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "corporate virtual event",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 700,
+  "traffic_potential": 1100,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event consultant",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "virtual event planner",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event host",
+  "volume": 100,
+  "difficulty": 35,
+  "cpc": 1900,
+  "traffic_potential": 8500,
+  "parent_topic": "virtual event software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event survey questions",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": 200,
+  "traffic_potential": 2300,
+  "parent_topic": "event survey questions",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "sas hackathon",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "sas hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual event agenda",
+  "volume": 90,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "virtual event agenda",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event sponsorship package",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 250,
+  "parent_topic": "virtual event sponsorship opportunities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event management services",
+  "volume": 90,
+  "difficulty": 20,
+  "cpc": 1300,
+  "traffic_potential": 1400,
+  "parent_topic": "virtual event services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "tech meetup",
+  "volume": 90,
+  "difficulty": 23,
+  "cpc": 40,
+  "traffic_potential": 90,
+  "parent_topic": "tech meetup",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event experience",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": 130,
+  "traffic_potential": 500,
+  "parent_topic": "virtual event experience",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "hackathon bay area",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 140,
+  "traffic_potential": 50,
+  "parent_topic": "hackathon bay area",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community event planning",
+  "volume": 90,
+  "difficulty": 3,
+  "cpc": 120,
+  "traffic_potential": 10,
+  "parent_topic": "community event planner",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "question",
+   "sitelink",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "how to get sponsors for a virtual event",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "virtual event sponsorship opportunities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "virtual event plan template",
+  "volume": 90,
+  "difficulty": 3,
+  "cpc": 250,
+  "traffic_potential": 500,
+  "parent_topic": "virtual event agenda",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hackathon team names",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "tech team names",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "image"
+  ]
+ },
+ {
+  "keyword": "planning a virtual event",
+  "volume": 90,
+  "difficulty": 20,
+  "cpc": 800,
+  "traffic_potential": 2800,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event promo",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "virtual events",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "hackathon judge",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "hackathon judge",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "virtual chocolate making event",
+  "volume": 90,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "virtual chocolate tasting",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "web developer conference 2016",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": 1000,
+  "traffic_potential": 50,
+  "parent_topic": "web developer conference 2016",
+  "intents": null,
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "design hackathon",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "ux design hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "virtual event sponsorship examples",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "sample virtual event sponsorship packages",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "post virtual event survey questions",
+  "volume": 90,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 2400,
+  "parent_topic": "post event survey questions",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "virtual event training",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "microsoft virtual training days",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "virtual networking event platform",
+  "volume": 90,
+  "difficulty": 40,
+  "cpc": null,
+  "traffic_potential": 9200,
+  "parent_topic": "virtual event platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "hackathon winners",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "ai hackathon ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community event flyer",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 2,
+  "traffic_potential": 1700,
+  "parent_topic": "event flyer templates",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "what's a hackathon",
+  "volume": 90,
+  "difficulty": 26,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "what is a hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is hackathon meaning",
+  "volume": 90,
+  "difficulty": 29,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "sf hackathon",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": 30,
+  "traffic_potential": 400,
+  "parent_topic": "hackathon san francisco",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "what is a hackathon in business",
+  "volume": 90,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 9100,
+  "parent_topic": "hackathon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ }
+]

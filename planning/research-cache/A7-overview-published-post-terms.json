@@ -1,0 +1,114 @@
+[
+ {
+  "keyword": "technical documentation template",
+  "volume": 500,
+  "difficulty": 0,
+  "traffic_potential": 150,
+  "parent_topic": "technical documentation template",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "documentation review checklist",
+  "volume": 0,
+  "difficulty": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "internal vs external documentation",
+  "volume": 0,
+  "difficulty": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "technical tutorial",
+  "volume": 10,
+  "difficulty": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "release notes best practices",
+  "volume": 50,
+  "difficulty": 4,
+  "traffic_potential": 200,
+  "parent_topic": "release notes",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "how to organize documentation",
+  "volume": 0,
+  "difficulty": 0,
+  "traffic_potential": 0,
+  "parent_topic": "how to organize documentation",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "changelog best practices",
+  "volume": 30,
+  "difficulty": 3,
+  "traffic_potential": 1100,
+  "parent_topic": "changelogs",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "what is technical documentation",
+  "volume": 250,
+  "difficulty": 2,
+  "traffic_potential": 100,
+  "parent_topic": "technical documentation service",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "types of technical documentation",
+  "volume": 90,
+  "difficulty": 4,
+  "traffic_potential": 250,
+  "parent_topic": "technical document",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "documentation versioning",
+  "volume": 10,
+  "difficulty": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "documentation style guide",
+  "volume": 30,
+  "difficulty": 38,
+  "traffic_potential": 100,
+  "parent_topic": "google style guide",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "technical documentation best practices",
+  "volume": 90,
+  "difficulty": 16,
+  "traffic_potential": 450,
+  "parent_topic": "technical documentation software",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "documentation accessibility",
+  "volume": 30,
+  "difficulty": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "developer onboarding documentation",
+  "volume": 150,
+  "difficulty": 2,
+  "traffic_potential": 50,
+  "parent_topic": "developer onboarding documentation",
+  "has_ai_overview": 0
+ }
+]

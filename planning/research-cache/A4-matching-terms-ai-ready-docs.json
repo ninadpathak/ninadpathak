@@ -1,0 +1,178 @@
+[
+ {
+  "keyword": "ai search optimization",
+  "volume": 3500,
+  "difficulty": 48,
+  "traffic_potential": 13000,
+  "parent_topic": "ai search optimization",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai search optimization tools",
+  "volume": 1900,
+  "difficulty": 45,
+  "traffic_potential": 15000,
+  "parent_topic": "ai seo optimization",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai search optimization services",
+  "volume": 600,
+  "difficulty": 1,
+  "traffic_potential": 10,
+  "parent_topic": "ai search optimization services",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai governance documentation",
+  "volume": 500,
+  "difficulty": 49,
+  "traffic_potential": 1100,
+  "parent_topic": "ai governance implementation",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai search engine optimization tools",
+  "volume": 400,
+  "difficulty": 33,
+  "traffic_potential": 26000,
+  "parent_topic": "seo optimization tools",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "perplexity ai api documentation",
+  "volume": 400,
+  "difficulty": 48,
+  "traffic_potential": 3100,
+  "parent_topic": "perplexity api",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "semantic chunking",
+  "volume": 350,
+  "difficulty": 5,
+  "traffic_potential": 150,
+  "parent_topic": "semantic chunking",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "easiest ai search optimization software to use",
+  "volume": 250,
+  "difficulty": 6,
+  "traffic_potential": 350,
+  "parent_topic": "best seo tool for b2b",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai documentation generator",
+  "volume": 250,
+  "difficulty": 37,
+  "traffic_potential": 150,
+  "parent_topic": "ai documentation generator",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai code documentation",
+  "volume": 200,
+  "difficulty": 7,
+  "traffic_potential": 100,
+  "parent_topic": "code documentation ai",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "scribe ai documentation",
+  "volume": 200,
+  "difficulty": 47,
+  "traffic_potential": 3600,
+  "parent_topic": "scribe ai",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "documentation ai",
+  "volume": 150,
+  "difficulty": 0,
+  "traffic_potential": 150,
+  "parent_topic": "ai documentation",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai for physical therapy documentation",
+  "volume": 150,
+  "difficulty": 1,
+  "traffic_potential": 30,
+  "parent_topic": "ai for physical therapy documentation",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "code documentation ai",
+  "volume": 150,
+  "difficulty": 7,
+  "traffic_potential": 100,
+  "parent_topic": "code documentation ai",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "ai for documentation",
+  "volume": 100,
+  "difficulty": 50,
+  "traffic_potential": 60,
+  "parent_topic": "documentation ai",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai generated documentation",
+  "volume": 100,
+  "difficulty": 33,
+  "traffic_potential": 250,
+  "parent_topic": "ai documentation generator",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai process documentation",
+  "volume": 90,
+  "difficulty": 9,
+  "traffic_potential": 50,
+  "parent_topic": "ai process documentation",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "ai documentation writer",
+  "volume": 50,
+  "difficulty": 29,
+  "traffic_potential": 100,
+  "parent_topic": "ai for documentation",
+  "has_ai_overview": 1
+ },
+ {
+  "keyword": "kore ai documentation",
+  "volume": 30,
+  "difficulty": 4,
+  "traffic_potential": 30,
+  "parent_topic": "kore.ai documentation",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "vertex ai documentation",
+  "volume": 30,
+  "difficulty": 12,
+  "traffic_potential": 800,
+  "parent_topic": "google vertex ai",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "document ai documentation",
+  "volume": 30,
+  "difficulty": 38,
+  "traffic_potential": 800,
+  "parent_topic": "document ai news",
+  "has_ai_overview": 0
+ },
+ {
+  "keyword": "scribe: ai documentation, sops & screenshots",
+  "volume": 20,
+  "difficulty": 12,
+  "traffic_potential": 2800,
+  "parent_topic": "scribe",
+  "has_ai_overview": 0
+ }
+]

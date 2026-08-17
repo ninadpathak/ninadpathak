@@ -1,0 +1,1397 @@
+[
+ {
+  "keyword": "ai search optimization tools",
+  "volume": 1900,
+  "difficulty": 45,
+  "cpc": 1300,
+  "traffic_potential": 15000,
+  "parent_topic": "ai seo optimization",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "generative engine optimization services",
+  "volume": 1700,
+  "difficulty": 31,
+  "cpc": 1500,
+  "traffic_potential": 1200,
+  "parent_topic": "generative engine optimization services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "top answer engine optimization for ai solutions",
+  "volume": 1600,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": 3700,
+  "parent_topic": "answer engine optimization",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "generative engine optimization tools",
+  "volume": 1300,
+  "difficulty": 38,
+  "cpc": 40,
+  "traffic_potential": 1200,
+  "parent_topic": "generative engine optimization tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "generative engine optimization agency",
+  "volume": 1200,
+  "difficulty": 16,
+  "cpc": 1800,
+  "traffic_potential": 1400,
+  "parent_topic": "generative engine optimization services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chatgpt seo tool",
+  "volume": 1100,
+  "difficulty": 4,
+  "cpc": 300,
+  "traffic_potential": 150,
+  "parent_topic": "chatgpt seo tool",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to rank in ai overviews",
+  "volume": 1000,
+  "difficulty": 39,
+  "cpc": 500,
+  "traffic_potential": 450,
+  "parent_topic": "how to rank in ai overviews",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "ai overviews tracker",
+  "volume": 900,
+  "difficulty": 38,
+  "cpc": 600,
+  "traffic_potential": 1200,
+  "parent_topic": "ai overview tracker",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "generative engine optimization tool",
+  "volume": 900,
+  "difficulty": 39,
+  "cpc": 900,
+  "traffic_potential": 250,
+  "parent_topic": "generative engine optimization tools comparison",
+  "intents": {},
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "chatgpt seo",
+  "volume": 800,
+  "difficulty": 13,
+  "cpc": 600,
+  "traffic_potential": 80,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "answer engine optimization tools",
+  "volume": 800,
+  "difficulty": 26,
+  "cpc": 1000,
+  "traffic_potential": 900,
+  "parent_topic": "answer engine optimization tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "answer engine optimization services",
+  "volume": 700,
+  "difficulty": 26,
+  "cpc": 1100,
+  "traffic_potential": 1000,
+  "parent_topic": "aeo services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "hide google ai overviews",
+  "volume": 700,
+  "difficulty": 42,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "hide google ai overviews",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai overviews checker",
+  "volume": 700,
+  "difficulty": 0,
+  "cpc": 300,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "intents": {},
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chatgpt for seo",
+  "volume": 700,
+  "difficulty": 11,
+  "cpc": 700,
+  "traffic_potential": 1800,
+  "parent_topic": "chatgpt for seo",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "aeo answer engine optimization",
+  "volume": 600,
+  "difficulty": 39,
+  "cpc": 700,
+  "traffic_potential": 1200,
+  "parent_topic": "answer engine optimization",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai search optimization services",
+  "volume": 600,
+  "difficulty": 1,
+  "cpc": 1900,
+  "traffic_potential": 10,
+  "parent_topic": "ai search optimization services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is answer engine optimization",
+  "volume": 600,
+  "difficulty": 38,
+  "cpc": 120,
+  "traffic_potential": 800,
+  "parent_topic": "answer engine optimization aeo",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to track ai overviews",
+  "volume": 600,
+  "difficulty": 34,
+  "cpc": 900,
+  "traffic_potential": 1400,
+  "parent_topic": "ai overview tracking",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "video",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "seo for chatgpt",
+  "volume": 600,
+  "difficulty": 19,
+  "cpc": 600,
+  "traffic_potential": 1700,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai overviews tracking",
+  "volume": 600,
+  "difficulty": 30,
+  "cpc": 700,
+  "traffic_potential": 1400,
+  "parent_topic": "ai overview tracking",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "seo ai overviews",
+  "volume": 500,
+  "difficulty": 44,
+  "cpc": 1000,
+  "traffic_potential": 4700,
+  "parent_topic": "ai overview",
+  "intents": {},
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "answer engine optimization agency",
+  "volume": 500,
+  "difficulty": 6,
+  "cpc": 1400,
+  "traffic_potential": 150,
+  "parent_topic": "best answer engine optimization services",
+  "intents": {},
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "rank in ai overviews",
+  "volume": 500,
+  "difficulty": 42,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "optimize for ai overviews",
+  "intents": {},
+  "serp_features": [
+   "question",
+   "news",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "optimize for ai overviews",
+  "volume": 500,
+  "difficulty": 35,
+  "cpc": 1100,
+  "traffic_potential": 12000,
+  "parent_topic": "ai search optimization",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai search engine optimization tools",
+  "volume": 400,
+  "difficulty": 33,
+  "cpc": 900,
+  "traffic_potential": 26000,
+  "parent_topic": "seo optimization tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "generative engine optimization tools comparison",
+  "volume": 350,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "search engine optimization platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video"
+  ]
+ },
+ {
+  "keyword": "ai answer engine optimization",
+  "volume": 300,
+  "difficulty": 13,
+  "cpc": 1300,
+  "traffic_potential": 300,
+  "parent_topic": "aeo meaning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best answer engine optimization services",
+  "volume": 300,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "engine optimization companies",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "most popular answer engine optimization tools",
+  "volume": 300,
+  "difficulty": 16,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "aeo tool",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "easiest ai search optimization software to use",
+  "volume": 250,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "best seo tool for b2b",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video",
+   "question"
+  ]
+ },
+ {
+  "keyword": "top solutions for ai visibility and generative engine optimization",
+  "volume": 200,
+  "difficulty": 11,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "best generative engine optimization tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "top-rated generative engine optimization for ai",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "best generative engine optimization tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "seo with chatgpt",
+  "volume": 200,
+  "difficulty": 15,
+  "cpc": 100,
+  "traffic_potential": 1500,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chatgpt seo prompts",
+  "volume": 200,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "chatgpt seo prompts",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "chatgpt seo use cases",
+  "volume": 200,
+  "difficulty": 13,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to use chatgpt for seo",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 450,
+  "traffic_potential": 1400,
+  "parent_topic": "chatgpt seo",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "best tools for monitoring ai overviews",
+  "volume": 150,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "what are the best ai search monitoring tools",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "seo prompts for chatgpt",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 500,
+  "traffic_potential": 450,
+  "parent_topic": "chatgpt seo prompts",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "discussion",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "top-rated answer engine optimization service",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "best answer engine optimization services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "is chatgpt bad for seo",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1500,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "best generative engine optimization tools",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 1000,
+  "traffic_potential": 200,
+  "parent_topic": "engine optimization software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "chatgpt seo optimization",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 700,
+  "traffic_potential": 1600,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "bing chatgpt seo",
+  "volume": 150,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "bing chatgpt seo",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how will chatgpt affect seo",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 1500,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "seo chatgpt",
+  "volume": 100,
+  "difficulty": 15,
+  "cpc": 600,
+  "traffic_potential": 1500,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chatgpt prompts for seo",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 350,
+  "traffic_potential": 400,
+  "parent_topic": "seo prompts for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "seo prompt for chatgpt",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "chatgpt seo prompts",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "seo and chatgpt",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": 60,
+  "traffic_potential": 1500,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chatgpt for content and seo",
+  "volume": 100,
+  "difficulty": 15,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "is chatgpt good for seo",
+  "volume": 100,
+  "difficulty": 14,
+  "cpc": null,
+  "traffic_potential": 1500,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chatgpt and seo",
+  "volume": 90,
+  "difficulty": 22,
+  "cpc": 600,
+  "traffic_potential": 1200,
+  "parent_topic": "chatgpt seo tool",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chatgpt para seo",
+  "volume": 90,
+  "difficulty": 20,
+  "cpc": null,
+  "traffic_potential": 800,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "video_th",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "can you use chatgpt for seo",
+  "volume": 80,
+  "difficulty": 15,
+  "cpc": 30,
+  "traffic_potential": 1500,
+  "parent_topic": "seo for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "discussion",
+   "question",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "50 smart seo prompts for chatgpt",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "50 smart seo prompts for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best chatgpt prompts for seo",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "seo prompts for chatgpt",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "chatgpt seo content",
+  "volume": 50,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "chatgpt seo tool",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "video_th",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "prompt chatgpt seo",
+  "volume": 50,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "chatgpt seo prompts",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "chatgpt prompt for seo",
+  "volume": 50,
+  "difficulty": 13,
+  "cpc": 70,
+  "traffic_potential": 450,
+  "parent_topic": "chatgpt seo prompts",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "chatgpt prompts seo",
+  "volume": 50,
+  "difficulty": 13,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "chat gpt prompts for seo",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "chatgpt prompts for seo content writing",
+  "volume": 30,
+  "difficulty": 3,
+  "cpc": 250,
+  "traffic_potential": 100,
+  "parent_topic": "seo based content writing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "chatgpt seo plugin",
+  "volume": 30,
+  "difficulty": 5,
+  "cpc": 180,
+  "traffic_potential": 150,
+  "parent_topic": "seo core ai plugin",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "image_th",
+   "sitelink",
+   "question",
+   "paid_bottom"
+  ]
+ }
+]
