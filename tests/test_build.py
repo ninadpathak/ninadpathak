@@ -115,19 +115,33 @@ class CategoryArchiveTests(unittest.TestCase):
         self.assertEqual(posts[0]["category"]["url"], "/articles/ai-memory/")
         self.assertEqual(posts[2]["category"]["slug"], "technical-documentation")
 
-    def test_sitemap_includes_category_archives(self):
+    def _sitemap_urls_for(self, categories):
         builder = SiteBuilder.__new__(SiteBuilder)
         builder.config = {"site": {"url": "https://example.com"}}
-        categories = [{"slug": "ai-memory", "url": "/articles/ai-memory/", "posts": []}]
-
         with tempfile.TemporaryDirectory() as directory:
             builder.output = Path(directory)
             builder.build_sitemap([], [], [], categories=categories)
             root = ET.parse(builder.output / "sitemap.xml").getroot()
             namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-            urls = {node.find("s:loc", namespace).text for node in root.findall("s:url", namespace)}
+            return {node.find("s:loc", namespace).text for node in root.findall("s:url", namespace)}
 
-        self.assertIn("https://example.com/articles/ai-memory/", urls)
+    def test_sitemap_includes_category_archives(self):
+        # A category is only rendered, and so only listed, once it has a post.
+        # The fixture carries one for that reason.
+        categories = [{
+            "slug": "ai-memory",
+            "url": "/articles/ai-memory/",
+            "posts": [{"date": date(2026, 7, 31)}],
+        }]
+        self.assertIn("https://example.com/articles/ai-memory/", self._sitemap_urls_for(categories))
+
+    def test_sitemap_omits_a_category_with_no_posts(self):
+        """An empty category renders no page, so listing it would be a soft 404."""
+        categories = [{"slug": "ai-search-optimization", "url": "/articles/ai-search-optimization/", "posts": []}]
+        self.assertNotIn(
+            "https://example.com/articles/ai-search-optimization/",
+            self._sitemap_urls_for(categories),
+        )
 
 
 class SitemapTests(unittest.TestCase):
@@ -162,6 +176,7 @@ class SitemapTests(unittest.TestCase):
 
         self.assertIn("https://example.com/llms-txt-generator/", locations)
         self.assertIn("https://example.com/llms-txt-validator/", locations)
+        self.assertIn("https://example.com/ai-overviews-checker/", locations)
         self.assertIn("https://example.com/linter/", locations)
 
 
@@ -210,6 +225,53 @@ class ToolDiscoverabilityTests(unittest.TestCase):
         self.assertIn("/static/css/linter.css", markup)
         self.assertNotIn("<style", markup)
         self.assertNotIn("style=", markup)
+
+    def test_ai_overviews_checker_is_wired_everywhere(self):
+        """Primary tool target: "ai overviews checker", 700/mo, KD 0, no AI
+        Overview on its SERP as of the 2026-08-17 recompute."""
+        build = (self.repo_root / "build.py").read_text(encoding="utf-8")
+        self.assertIn("build_ai_overviews_checker", build)
+        self.assertIn('("/ai-overviews-checker/", "0.9", "monthly", None)', build)
+        self.assertIn("{base}/ai-overviews-checker/", build)
+
+        base_html = (self.repo_root / "templates" / "base.html").read_text(encoding="utf-8")
+        self.assertIn('href="/ai-overviews-checker/"', base_html)
+
+        projects = (self.repo_root / "content" / "projects.yaml").read_text(encoding="utf-8")
+        self.assertIn('url: "/ai-overviews-checker/"', projects)
+
+    def test_checker_declares_software_application_schema(self):
+        markup = (self.repo_root / "templates" / "ai_overviews_checker.html").read_text(encoding="utf-8")
+        self.assertIn("SoftwareApplication", markup)
+        self.assertIn("isAccessibleForFree", markup)
+
+    def test_checker_reuses_linter_css_and_adds_none(self):
+        markup = (self.repo_root / "templates" / "ai_overviews_checker.html").read_text(encoding="utf-8")
+        self.assertIn("/static/css/linter.css", markup)
+        self.assertNotIn("<style", markup)
+        self.assertNotIn("style=", markup)
+
+    def test_checker_never_promises_ai_overview_placement(self):
+        """Google states there are no special optimisations for AI Overviews, so
+        the page must not imply placement can be engineered."""
+        markup = (self.repo_root / "templates" / "ai_overviews_checker.html").read_text(encoding="utf-8").lower()
+        for forbidden in ("guarantee", "get into ai overviews", "rank in ai overviews", "boost your ai overview"):
+            self.assertNotIn(forbidden, markup, forbidden)
+
+    def test_checker_paste_path_never_transmits_input(self):
+        script = (self.repo_root / "static" / "js" / "aio-checker.js").read_text(encoding="utf-8")
+        network_calls = [line for line in script.splitlines() if "fetch(" in line]
+        self.assertEqual(len(network_calls), 1, network_calls)
+        self.assertIn("/api/fetch-page", network_calls[0])
+        for forbidden in ("sendBeacon", "localStorage", "sessionStorage", "new WebSocket"):
+            self.assertNotIn(forbidden, script)
+
+    def test_no_tool_page_adds_inline_css(self):
+        """Standing order 4: no new CSS, ever."""
+        for template in ("linter.html", "llms_txt_generator.html", "llms_txt_validator.html",
+                         "ai_overviews_checker.html"):
+            markup = (self.repo_root / "templates" / template).read_text(encoding="utf-8")
+            self.assertNotIn("<style", markup, template)
 
     def test_paste_path_never_transmits_input(self):
         """Privacy contract: only the domain lookup may touch the network."""

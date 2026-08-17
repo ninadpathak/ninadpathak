@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+
+{#
+  ============================================================================
+  TODO(copy) — ALL prose on this page is placeholder and must be commissioned.
+  Every slot carrying a TODO(copy) marker is factual scaffolding written only so
+  the page builds and functions. None of it is search copy.
+  Full brief with keyword targets and character limits:
+  planning/research/TOOL-COPY-BRIEF.md
+  Primary keyword: "ai overviews checker" (700/mo, KD 0, no AI Overview on the
+  SERP as of the 2026-08-17 recompute).
+  ============================================================================
+#}
+
+{# TODO(copy) 1: <title>, 50-60 chars, must contain "AI Overviews checker" #}
+{% block title %}AI Overviews Checker | Ninad Pathak{% endblock %}
+
+{# TODO(copy) 2: meta description, 140-155 chars. Must not promise AI Overview
+   placement: Google states there are no special optimisations for it. #}
+{% block description %}Check how extractable a page is for AI Overviews and answer engines. Nine structural checks, each with its source. Runs in the browser. No signup.{% endblock %}
+
+{% block canonical %}/ai-overviews-checker/{% endblock %}
+{% block og_url %}/ai-overviews-checker/{% endblock %}
+
+{# TODO(copy) 3: og:title, under 60 chars #}
+{% block og_title %}AI Overviews Checker{% endblock %}
+
+{# TODO(copy) 4: og:description, 110-130 chars #}
+{% block og_description %}Nine structural checks on whether a page's answers can be lifted cleanly by an answer engine. Each check cites its source.{% endblock %}
+
+{# TODO(copy) 5: twitter:title, under 60 chars #}
+{% block tw_title %}AI Overviews Checker{% endblock %}
+
+{# TODO(copy) 6: twitter:description, under 120 chars #}
+{% block tw_desc %}Check whether a page's answers can be lifted cleanly by an answer engine. Free, browser-based, no signup.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/linter.css">
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["SoftwareApplication", "WebApplication"],
+  "name": "AI Overviews Checker",
+  "url": "{{ site.url }}/ai-overviews-checker/",
+  "description": "Checks whether a page's answers are structured to be extracted by AI Overviews and other answer engines, and cites the source behind each check.",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "Checker",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Check a pasted page entirely in the browser",
+    "Fetch and check a live URL, including its X-Robots-Tag header",
+    "Snippet eligibility, the one documented requirement for AI features",
+    "Whether a direct answer opens the page before supporting detail",
+    "Whether headings ask or assert rather than label a topic",
+    "Whether each section opens by naming its subject",
+    "Whether a definition can be lifted cleanly",
+    "Whether claims carry a nearby source, a date, and a unit",
+    "Whether the page states where it does not apply",
+    "Every check reports the dated source it rests on"
+  ],
+  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
+  "publisher": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}" },
+  "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
+  "isRelatedTo": [
+    {
+      "@type": ["SoftwareApplication", "WebApplication"],
+      "name": "llms.txt Validator",
+      "url": "{{ site.url }}/llms-txt-validator/"
+    },
+    {
+      "@type": ["SoftwareApplication", "WebApplication"],
+      "name": "Technical Writing Linter",
+      "url": "{{ site.url }}/linter/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can any tool predict whether a page will appear in an AI Overview?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Google states there are no additional requirements to appear in AI Overviews or AI Mode, and no special optimisations necessary. A tool that reports a probability is inventing one. This checker examines whether a page's answers are structured to be lifted as self-contained passages, which is the mechanism behind any extracted answer, and it says what each check rests on." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does structured data help a page appear in AI Overviews?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Google's generative-AI guidance states that structured data is not required and that there is no special schema.org markup to add. This tool reports whether JSON-LD is present as information only, because schema still matters for rich results in ordinary search." }
+    },
+    {
+      "@type": "Question",
+      "name": "What actually stops a page appearing in AI Overviews?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Snippet eligibility. Google's guidance states that to be eligible for generative AI features a page must be indexed and eligible to be shown with a snippet. A nosnippet directive, a restrictive max-snippet, or noindex removes that eligibility, whether it arrives in a meta tag or in the X-Robots-Tag header." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is pasted content uploaded anywhere?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Pasted content is checked by JavaScript in the page and is never transmitted. Only the check-a-URL path contacts the server, because a browser cannot read another origin's HTML, and that request carries the URL and nothing else." }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Tool</div>
+    {# TODO(copy) 7: H1, must contain "AI Overviews checker" #}
+    <h1>AI Overviews Checker</h1>
+    {# TODO(copy) 8: lead paragraph, 2 sentences. State plainly that this measures
+       extractability and does not predict placement. #}
+    <p class="lead">Paste a page or enter a URL. Nine structural checks report whether an answer engine could lift this page's answers cleanly, and each one names the source it rests on.</p>
+  </div>
+</section>
+
+<section class="tool-section">
+  <div class="container">
+    <form class="scan-form" id="aioUrlForm">
+      <label class="form-field form-field-grow" for="aioUrl">
+        <span>Check a live page</span>
+        <input id="aioUrl" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="example.com/docs/page">
+      </label>
+      <button class="btn btn-primary scan-submit" type="submit">Fetch and check &rarr;</button>
+    </form>
+    {# TODO(copy) 9: one-sentence hint below the URL field #}
+    <p class="tool-hint">Fetching a URL reads its HTML and response headers, which is the only way to check snippet eligibility. Pasting content instead keeps it in your browser.</p>
+    <div class="tool-status" id="aioUrlStatus" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="linter-section">
+  <div class="container">
+    <div class="linter-layout">
+
+      <div class="linter-panel">
+        <div class="linter-panel-header">
+          <span class="linter-file-label">page.html</span>
+          <div class="linter-panel-header-actions">
+            <span class="linter-shortcut">&#8984;&crarr; to run</span>
+            <button class="linter-sample-btn" type="button" id="aioSample">load sample</button>
+          </div>
+        </div>
+
+        <div class="linter-editor-container">
+          <div
+            id="aioInput"
+            class="linter-editor"
+            contenteditable="true"
+            spellcheck="false"
+            role="textbox"
+            aria-multiline="true"
+            aria-label="Page content or HTML source"
+          ></div>
+        </div>
+
+        <div class="linter-panel-footer">
+          <span class="linter-char-count" id="aioCharCount">0 words</span>
+          <button class="btn btn-primary" type="button" id="aioRunBtn">Run checks &rarr;</button>
+        </div>
+      </div>
+
+      <div class="linter-panel">
+        <div class="linter-panel-header">
+          <span class="linter-file-label">checks.log</span>
+          <div class="linter-panel-header-actions">
+            <button class="linter-action-btn" type="button" id="aioClear">clear</button>
+            <button class="linter-action-btn" type="button" id="aioCopy">copy</button>
+          </div>
+        </div>
+
+        <div class="linter-results-container">
+          <div class="linter-empty" id="aioEmpty">
+            <div class="linter-empty-inner">
+              <div class="linter-empty-icon">{ }</div>
+              {# TODO(copy) 10: empty-state line #}
+              <p>Results appear here once you run the checks.</p>
+            </div>
+          </div>
+
+          <div class="linter-results-content" id="aioResults" hidden>
+            <div class="lint-score-bar" id="aioScoreBar">
+              <div class="lint-score-left">
+                <div class="lint-score-number" id="aioScoreNumber">--</div>
+                <div>
+                  <span class="lint-grade" id="aioBand">-</span>
+                  <span class="lint-grade-desc" id="aioBandDesc"></span>
+                </div>
+              </div>
+              <div class="lint-score-stats" id="aioStats"></div>
+            </div>
+
+            <div id="aioFindings"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="linter-rules-section">
+  <div class="container">
+    <div class="linter-rules-header">
+      <div class="label">// Method</div>
+      {# TODO(copy) 11: H2 for the method section #}
+      <h2>What each check is based on</h2>
+    </div>
+    <div class="linter-rules-grid">
+
+      <div>
+        <div class="lint-severity-badge lint-severity-error">documented requirement</div>
+        {# TODO(copy) 12: review for voice only. The claims below are load-bearing
+           and each is sourced. Do not soften them and do not add any claim that
+           llms.txt, schema, or markup improves AI Overview placement. #}
+        <ul class="linter-rule-list">
+          <li><strong>Snippets are not blocked</strong> &mdash; Google's generative-AI guidance, updated 10 July 2026, states that to be eligible for generative AI features a page must be indexed and eligible to be shown with a snippet. A <code>nosnippet</code> directive, a non-negative <code>max-snippet</code>, or <code>noindex</code> removes that eligibility, in a meta tag or in the <code>X-Robots-Tag</code> header. This is the only check here that restates a requirement.</li>
+          <li><strong>Structured data</strong> &mdash; Reported as information, never as a requirement. The same guidance states structured data is not required and there is no special schema.org markup to add. It still matters for rich results in ordinary search.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="lint-severity-badge lint-severity-warning">structural heuristic</div>
+        <ul class="linter-rule-list">
+          <li><strong>A direct answer opens the page</strong> &mdash; Nielsen Norman Group, 11 February 2018: the most important information, or the conclusion, comes first. A page opening on scene-setting offers an engine scene-setting to quote.</li>
+          <li><strong>Headings ask or assert</strong> &mdash; Nielsen Norman Group, 25 August 2019: reading headings alone is the most effective way people scan a page, and the F-pattern is what happens when subheadings are absent. A heading read in isolation has to carry the point.</li>
+          <li><strong>Sections open by naming their subject</strong> &mdash; A snippet is a passage, so a passage that leans on the sentence before it cannot be lifted intact.</li>
+          <li><strong>A definition can be lifted cleanly</strong> &mdash; Definitional answers are assembled from short self-contained sentences, observed in SERP pulls for this niche on 17 August 2026.</li>
+          <li><strong>The page and its claims are dated</strong> &mdash; The low-authority page Google cited in its AI Overview for <code>docs as code</code> carried both a publish date and a visible revision date, recorded 17 August 2026.</li>
+          <li><strong>Quantified claims name a source</strong> &mdash; The Quality Rater Guidelines of 10 September 2025 name a lack of effort and first-hand experience a Low-quality criterion, illustrated by content paraphrased from elsewhere.</li>
+          <li><strong>Numbers say what they count</strong> &mdash; A quantity with no unit, period, or noun stops meaning anything once the page around it is gone.</li>
+          <li><strong>The page states where it does not apply</strong> &mdash; Trust is the most important E-E-A-T component in the same guidelines, and the cited page above devoted a section to answering specific objections.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="lint-severity-badge lint-severity-info">assumptions</div>
+        <ul class="linter-rule-list">
+          <li><strong>No placement prediction.</strong> Google states there are no additional requirements to appear in AI Overviews and no special optimisations necessary. Nothing here forecasts inclusion.</li>
+          <li><strong>No weighted score.</strong> Checks are counted, not weighted, because no published calibration would justify weights. The bands are coarse deliberately.</li>
+          <li><strong>Heuristics can be wrong.</strong> Every check marked as a heuristic is a text pattern that will misread some valid pages. Each one shows the passage it objected to so the judgement stays yours.</li>
+          <li><strong>Paste mode cannot see headers.</strong> Snippet eligibility and structured data need the HTML and the response headers, so they are skipped unless you check a URL or paste full HTML source.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="guide-section">
+  <div class="prose-container">
+    <div class="label">Reference</div>
+    {# TODO(copy) 13: this whole section, roughly 300-450 words. Cover: what
+       extractability means, why snippet eligibility is the only hard gate, and
+       why a scored prediction would be dishonest. Do not claim placement can be
+       engineered. See planning/research/seo-state-of-play-2026-08.md sections
+       2.1 and 2.2. #}
+    <h2>Extractability is not a ranking factor</h2>
+    <p>An answer engine quotes a passage, not a page. Everything this tool checks follows from that one fact: a passage that names its subject, states its claim, and carries its own date and units can be lifted intact, and a passage that depends on the paragraph above it cannot.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-list">
+      <details>
+        <summary>Can any tool predict AI Overview placement?</summary>
+        <p>No. Google states there are no additional requirements to appear in AI Overviews or AI Mode, and no special optimisations necessary. A tool reporting a probability is inventing it.</p>
+      </details>
+      <details>
+        <summary>Does schema markup help?</summary>
+        <p>Not for generative AI features. Google's guidance states structured data is not required and there is no special markup to add. It still earns rich results in ordinary search, so it is reported here as information.</p>
+      </details>
+      <details>
+        <summary>What actually blocks a page?</summary>
+        <p>Snippet eligibility. A <code>nosnippet</code> directive, a non-negative <code>max-snippet</code>, or <code>noindex</code> makes a page ineligible, whether it arrives in a meta tag or the <code>X-Robots-Tag</code> header.</p>
+      </details>
+      <details>
+        <summary>Is pasted content uploaded?</summary>
+        <p>No. Pasted content is checked in the page and never transmitted. Only the check-a-URL path contacts the server, carrying the URL alone.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script src="/static/js/aio-checker-core.js"></script>
+<script src="/static/js/aio-checker.js"></script>
+{% endblock %}

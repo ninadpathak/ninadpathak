@@ -1,4 +1,14 @@
 projects:
+  # TODO(copy) C: description for the checker, one sentence, same register as its
+  # siblings. Must not imply it predicts AI Overview placement.
+  - title: "AI Overviews Checker"
+    description: "Check whether a page's answers are structured to be extracted by AI Overviews and answer engines, with the dated source behind every check."
+    url: "/ai-overviews-checker/"
+    tech_stack:
+      - "Vanilla JS"
+      - "Browser-only checks"
+    category: "SEO / AI Retrieval"
+    status: "Live"
   # TODO(copy) A: this description previously ended "without sending site data to a
   # server". That is false and falsifiable with devtools open: scanning POSTs the
   # domain and the discovered page URLs to /api/discover-site, because a browser
