@@ -502,3 +502,82 @@ family can have an empty core. Residual false positives remain in the small fami
 (`top content marketing books` is a person, and one Todoist family even has a click), which
 means 3.6% is an upper estimate rather than a floor. The human series is itself a floor,
 because the withheld tail is excluded entirely and some of it is certainly human.
+
+### 2026-08-17 — the autumn 2025 collapse: a spam injection on the domain, closed
+
+The human collapse did not begin with the March 2026 rebuild. It began in the **week of
+2025-09-08**, five months earlier, and it coincides with several hundred URLs appearing on
+ninadpathak.com that belong to no version of this site. Method and re-run instructions:
+`tools/gsc_collapse_forensics.py`, output in `planning/gsc-collapse-forensics.md`.
+
+**It is a step, not a slope.** Daily impressions ran 100–120 through 2025-09-05, then 63,
+72, 70, 59, 56 on 09-06 to 09-10, then 30, 19, 9, 10 on 09-11 to 09-14. Legitimate
+impressions by week: 791 → **260** → 56 → 10. The largest single-week loss is
+2025-09-01 → 2025-09-08, down 531 impressions (67%).
+
+**What appeared in that exact week.** Foreign URLs recorded **zero** impressions in every
+week through 2025-09-01, then 18 impressions on 16 pages in the week of 2025-09-08, rising
+to 233 pages and 381 impressions per week by 2025-09-29. At peak, 398 distinct
+`/products/<numeric-id>` pages, plus `/shop/`, `/cart/`, `/contents/`, `/hg/`, `/pw/` and
+`/jukyuban/`. The queries they ranked for name it: `ルイヴィトン スカーフ` (Louis Vuitton
+scarf), `ノーザリー 黒色`, `ネイルズ ストーリア`, `nettspend mowalola`. Japanese
+counterfeit-goods and streetwear spam. Japan appeared as a new country in the same period.
+
+**The legitimate corpus was not demoted — it stopped appearing.** Comparing 28 days before
+(2025-08-09) with 28 days after (2025-10-13):
+
+| | Before | After |
+|---|---:|---:|
+| Pages with impressions | 22 | 3 of those 22 survived |
+| Non-brand queries | 119 | 15, and **only one** in common |
+| Impressions on queries that vanished | 1,569 | — |
+
+The one query present in both windows is `ninad pathak`. 75% of the vanished impressions
+sat at positions 21–50; every surviving impression sat at positions 1–10. **Average
+position "improving" from 23.1 to 7.2 is a composition artifact**, not a gain: the
+deep-position long tail disappeared and left brand behind. `/guides/css-grid-layouts-webflow-table/`
+(962 impressions), `/marketing-research/stripe-documentation-case-study/` (762) and
+`/marketing-research/asana-marketing-case-study/` (713) all went to zero.
+
+**Not device-specific and not geographic.** Desktop fell 2,974 → 175 (−94%), mobile
+318 → 120 (−62%); usa 2,172 → 100, gbr 177 → 0. A rendering or mobile break would hit one
+and not the other. This hit everything.
+
+**And the apparent recovery was not one.** The sitewide series shows a rebound to ~80–100
+impressions/day around 2025-10-03. That was the spam peaking, not the site returning.
+Legitimate impressions over the same fortnight were 11 and 35. Reading the sitewide number
+alone would have suggested the site healed and then relapsed; it never healed.
+
+**The domain is clean now.** Foreign impressions: 826 in October 2025, 155 in November, 32
+in January 2026, 26 in March, and **zero from April 2026 onward**. Sampled injected URLs
+return 404. In the last 90 days every path segment receiving impressions is legitimate and
+exactly one query contains CJK characters — the pasted-blob artifact already classified as
+a blob, not spam. A daily guard now flags foreign URLs in `tools/daily_cycle.py`, because
+this was found ten months late and the pages 404 to a direct request, so only Search
+Console could have shown it.
+
+**Named as inferences, not findings.** Search Analytics reports impressions, clicks and
+position and nothing else, so:
+
+1. **It cannot see a manual action, a security issue, or an algorithm update.** The
+   Manual Actions and Security Issues reports in the Search Console UI are the only thing
+   that settles whether a penalty was applied, and whether one is still in force. **That
+   is the one check worth doing by hand** — it is the only way to rule out lingering
+   suppression, and this analysis cannot.
+2. **Co-timing is not causation.** The injection first registers in the same week the
+   corpus collapses, with four clean weeks before it and inverse trajectories for four
+   weeks after. That is strong. It is still consistent with either the spam triggering a
+   demotion, or a single compromise both injecting spam and breaking the real pages.
+   The data does not separate those two, and neither should be asserted.
+3. **The injection vector is unknown.** Hacked hosting, a compromised CMS, an abused
+   proxy or redirect, a DNS interlude — Search Console shows the symptom, never the entry
+   point.
+
+**What this closes and what it does not.** The autumn 2025 collapse is explained and the
+condition that caused it is gone, so it is not suppressing the campaign today; the March
+2026 rebuild is a separate, later event that killed roughly 30 legacy URLs and is already
+written off. What it does not close is whether a penalty from that episode still applies,
+and that is a UI check rather than an API one. One correction to a claim made earlier in
+this document: legitimate-URL impressions have recovered well past the 2025 nadir — 164 in
+October 2025 to 2,737 in July 2026 — but that recovery is the machine fan-out documented
+above, not people. Human impressions went 3,362 in June 2025 to 46 in August 2026.

@@ -26,6 +26,7 @@ import re
 import subprocess
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -147,6 +148,52 @@ def robots_check() -> list[str]:
         if block and re.search(r"^Disallow:\s*/\s*$", block.group(1), re.M):
             problems.append(f"{agent} is BLOCKED — this is a citation crawler")
     return problems
+
+
+def foreign_urls(start: str, end: str) -> list[str]:
+    """Flag URLs on this domain that belong to no version of this site.
+
+    In September 2025 something served 398 `/products/<numeric-id>` pages plus `/shop/`,
+    `/cart/` and `/jukyuban/` on ninadpathak.com, ranking for Japanese counterfeit-goods
+    queries. In the same week the legitimate corpus fell from 791 impressions to 262 and
+    then to 14, and it never recovered — 119 non-brand queries became one. That episode
+    was only found ten months later by reading history.
+
+    It is checked daily now because the cost of noticing late is the entire non-brand
+    corpus, and because Search Console is the only place it is visible: the pages return
+    404 to a direct request today, so a crawl of the live site would not have caught it.
+    """
+    try:
+        from google.oauth2 import service_account
+        from googleapiclient.discovery import build
+    except ImportError:
+        return []
+    cred = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS") or str(CRED_DEFAULT)
+    if not pathlib.Path(cred).exists():
+        return []
+    try:
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+        import gsc_collapse_forensics as forensics
+    except ImportError:
+        return []
+
+    creds = service_account.Credentials.from_service_account_file(
+        cred, scopes=["https://www.googleapis.com/auth/webmasters.readonly"])
+    svc = build("searchconsole", "v1", credentials=creds, cache_discovery=False)
+    body = {"startDate": start, "endDate": end, "dimensions": ["page"], "rowLimit": 25000}
+    rows = svc.searchanalytics().query(siteUrl=SITE, body=body).execute().get("rows", [])
+
+    bad = [r for r in rows if forensics.is_foreign(r["keys"][0])]
+    if not bad:
+        return []
+    bad.sort(key=lambda r: -r["impressions"])
+    sections = sorted({forensics.section(r["keys"][0]) for r in bad})
+    total = int(sum(r["impressions"] for r in bad))
+    return [f"FOREIGN URLs in Search Console: {len(bad)} page(s), {total} impressions, "
+            f"section(s) {', '.join(sections)} — e.g. "
+            f"{urllib.parse.urlsplit(bad[0]['keys'][0]).path}. This is how the "
+            f"September 2025 injection looked. Check Security Issues in the Search "
+            f"Console UI."]
 
 
 def shadowing_redirects() -> list[str]:
@@ -394,6 +441,7 @@ def main() -> int:
     gsc = gsc_totals(start_28.isoformat(), end.isoformat())
     gate = publish_gate()
     gate += robots_check()
+    gate += foreign_urls(start_28.isoformat(), end.isoformat())
     deploy = deploy_check()
     _, url_summary = url_inventory_check()
     lag = deploy_lag_seconds()
