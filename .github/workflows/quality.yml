@@ -163,6 +163,14 @@ jobs:
       - name: Guard cluster isolation and inbound linking
         run: python tools/audit_clusters.py --strict
 
+      # MUST RUN AFTER build.py, like the cluster guard, because it reads output/.
+      # 25 glossary pages shipped with perfect flowchart markup and no flowcharts.css, so
+      # every span and strong rendered inline and ran together. Source review passed it:
+      # only a rendered page shows a missing stylesheet. This is the cheap deterministic
+      # half of that check and it catches exactly this failure.
+      - name: Guard stylesheet coverage
+        run: python tools/audit_stylesheets.py --strict
+
 
       # `output/` is untracked and .gitignored — Cloudflare Pages generates it at build
       # time — so the old "verify generated output is committed" step diffed nothing and

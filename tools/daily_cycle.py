@@ -469,10 +469,30 @@ def corpus_health() -> str:
             f"{rules} rule_checker error(s) — all candidates for review, not verdicts")
 
 
+def unstyled_pages() -> list[str]:
+    """A page using a CSS class without linking its stylesheet renders as run-together text.
+
+    Delegates to tools/audit_stylesheets.py so the rule lives in one place. 31 pages were
+    in this state on 2026-08-17 across three stylesheets and three separate root causes,
+    and every one of them had correct markup.
+    """
+    python = str(ROOT / ".venv" / "bin" / "python")
+    if not pathlib.Path(python).exists():
+        python = sys.executable
+    code, out = run(python, "tools/audit_stylesheets.py", "--strict")
+    if code == 0:
+        return []
+    if code == 2:
+        return ["stylesheet coverage unknown: output/ is unbuilt"]
+    first = next((l for l in out.splitlines() if l.startswith("UNSTYLED")), "pages are unstyled")
+    return [first]
+
+
 def publish_gate() -> list[str]:
     """The mechanical half of the publish gate in campaign-90d.md section 8."""
     failures = []
     failures += shadowing_redirects()
+    failures += unstyled_pages()
 
     python = str(ROOT / ".venv" / "bin" / "python")
     if not pathlib.Path(python).exists():

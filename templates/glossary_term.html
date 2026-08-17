@@ -2,6 +2,15 @@
 
 {% block title %}{{ term.title }} | AI Memory & Agent Glossary{% endblock %}
 {% block description %}{{ term.description }}{% endblock %}
+{# Glossary bodies carry flowchart and visual markup, and this template linked neither
+   stylesheet, so 25 term pages rendered every span, strong and small inline and ran them
+   together. "No new CSS" forbids AUTHORING styles; linking a stylesheet that already
+   exists in the repo is the reuse the rule is there to encourage. #}
+{% block extra_css %}
+{% if term.needs_flowcharts %}<link rel="stylesheet" href="/static/css/flowcharts.css">{% endif %}
+{% if term.needs_visuals %}<link rel="stylesheet" href="/static/css/visuals.css">{% endif %}
+{% endblock %}
+
 {% block canonical %}/glossary/{{ term.slug }}/{% endblock %}
 {% block og_url %}/glossary/{{ term.slug }}/{% endblock %}
 

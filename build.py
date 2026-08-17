@@ -298,7 +298,11 @@ class SiteBuilder:
                 "toc": toc_html,
                 "faqs": extract_faqs(post.content),
                 "has_code": 'class="highlight"' in html,
-                "has_visuals": "<iframe" in html,
+                # Detect by CLASS, not by embed type. Gating visuals.css on "<iframe"
+                # missed five published pages that wrap an <img> or <picture> in a
+                # .visual-container, and they shipped unstyled. The class is what needs
+                # the stylesheet; the element inside it is irrelevant.
+                "has_visuals": ('class="visual-' in html) or ("<iframe" in html),
                 "has_flowchart": 'class="flowchart' in html,
             })
 
@@ -444,6 +448,10 @@ class SiteBuilder:
         terms = data.get("terms", [])
         for term in terms:
             term["url"] = f"/glossary/{term['slug']}/"
+            # Same class-based detection the post template uses, for the same reason.
+            body = str(term.get("body_html", "")) + str(term.get("how_it_works", ""))
+            term["needs_flowcharts"] = 'class="flowchart' in body
+            term["needs_visuals"] = ('class="visual-' in body) or ("<iframe" in body)
             
         return terms
 
