@@ -402,7 +402,7 @@ Also removed a "verify generated output is committed" step: `output/` is untrack
 |---|---:|---:|---:|---:|---:|
 | 2025-04 | 3,822 | 2,532 | 3 | 44.2 | 1.7% |
 | 2025-06 | 6,499 | 3,362 | 1 | 38.6 | 3.8% |
-| 2025-10 | 904 | 221 | 6 | 15.9 | 0.0% |
+| 2025-10 | 904 | 221 | 6 | 15.9 | 0.0% | *(the apparent position gain is a composition artifact — see the seventh-cycle refresh)* |
 | 2026-03 | 652 | 437 | 0 | 77.4 | 0.8% |
 | 2026-07 | 2,476 | 152 | 0 | 41.1 | 34.5% |
 | 2026-08 | 946 | 46 | 0 | 56.7 | 57.1% |
@@ -432,6 +432,31 @@ The post-deploy check added earlier this day cried wolf: a mismatch read while a
 It now reports three states. **LIVE** when production matches the build. **WAITING** for a mismatch inside a fifteen-minute grace window measured from the newest commit that changed something the build actually renders — documentation-only commits do not start that clock, so editing this file cannot produce a phantom lag. **ALARM** only past the window. Seven tests pin the distinction.
 
 The general lesson, since it will recur: **when a check disagrees with what you believe you shipped, establish whether the check is sound before acting on it.** The same discipline that was applied correctly to the Ahrefs failure — proving the missing data could not change the conclusion before treating it as a blocker — was not applied here, and it cost a detour.
+
+### 2026-08-17 (seventh cycle) — the autumn 2025 collapse was a spam injection
+
+**Cause found.** `tools/gsc_collapse_forensics.py` traced it: the largest weekly fall was the week of 2025-09-05, legitimate impressions 517 → 77, a loss of 440 in one week. Same-week onset of foreign-language URLs, four clean weeks before, inverse trajectories for four weeks after. At its October peak the injection ran to **440 pages and 829 impressions** across sections `contents`, `hg`, `home`, `jukyuban`, `products`, `pw`, `shop` — Japanese-language shopping spam.
+
+**It is gone.** Foreign impressions ran 826 in October 2025, 155 in November, 32 in January 2026, 26 in March, and **zero from April 2026 onward.** Sampled injected URLs return 404. The last 90 days contain no foreign path segment at all.
+
+**The vector was almost certainly the WordPress installation, and the rebuild eliminated it.** The 2025 URL set carries unmistakable WordPress fingerprints — `/category/` taxonomy paths, `/2022/` and `/2023/` date permalinks, a `/wordpress-6-3-update/` post — and 417 of the injected pages sat under a single fabricated `/products/` section, which is the standard shape of a compromised-CMS shopping-spam hack. Every WordPress endpoint now 404s: `/wp-login.php`, `/wp-admin/`, `/xmlrpc.php`, `/wp-content/uploads/`, `/wp-json/wp/v2/users`. The site serves as static files from Cloudflare Pages with no PHP, no database, no admin login and no plugins, so content can only change through the git repository. That is a different and far harder threat model, and it carries an audit trail. **Recorded as a closed risk of a known class rather than an unknown vector that might recur.**
+
+**Two corrections this produces, both to readings recorded earlier in this document.**
+
+First, and it matters because it appears in an earlier refresh: **"human position improved from 44.2 to 15.9 over 2025" is a composition artifact, not a gain.** The deep-position tail was wiped out and brand queries were left behind, so the average improved while the site lost everything that made it. Any historical position improvement on this domain has to be checked against whether the denominator changed.
+
+Second, the October 2025 rebound visible in the sitewide series **was the spam peaking, not the site recovering.** Legitimate impressions in those two weeks were 11 and 35. The real corpus never recovered; it fell monotonically.
+
+**What the evidence cannot settle, stated rather than smoothed over.** Co-timing is not causation: the pattern is consistent with the spam triggering a demotion, or with one compromise both injecting spam and breaking the real pages. Neither is asserted. And Search Analytics reports impressions, clicks and position only, so it cannot see a manual action or security issue — the Manual Actions and Security Issues reports in the Search Console UI are the only way to rule out a penalty still in force, and that needs an interactive login rather than the service account. It is a 30-second check, it is the last open question on "is anything still suppressing this domain", and the evidence already answers no.
+
+**Guarded against a repeat.** `daily_cycle.py` now flags foreign URLs on every run. Verified rather than assumed: silent on the clean 28-day window, and against October 2025 it correctly reports 440 pages and 829 impressions with the section list. This went unnoticed for ten months precisely because the injected pages 404 to a direct request — only Search Console could ever have revealed them, and nothing was reading it.
+
+### Also this cycle
+
+- **Fortnight three briefed**: 41 consecutive days from 08-18 to 09-29, no gaps, all 79 link targets verified. Two rows killed on verification. Order 61 was "Free llms.txt Generator and Checker" — **already delivered as software**, so an article restating it would compete with the tool it should route to. Order 64 duplicated an already-briefed row.
+- **Two briefs carry a stop instruction rather than a workaround.** Row 49 opens a cluster with no published siblings and may not meet the two-outbound minimum honestly. Row 50's controlled test cannot be manufactured in one run, so it may publish a **pre-registration instead of a conclusion** — honest, where a conclusion would be fabrication. Offering the honest alternative inside the brief means the writer does not have to invent one under deadline.
+- **Two redirect leaks recovered.** Seven hub redirects pointed at the bare `/articles/` listing, a soft 404, carrying 87 impressions; 17 rules repointed at the cluster owner pages that now exist. And nine date-prefixed posts had a second legacy URL with no redirect at all — one taking 41 impressions into a 404 — fixed in `build_redirects` so future filename/slug divergence is covered.
+- **The URL inventory guard** tracks 1,047 URLs since 2025-04-21, checkable without credentials, and `tools/daily.sh` refreshes it before building and checking. It needs credentials to refresh but not to check, and unrefreshed it fails its own freshness gate, which is the failure it exists to prevent.
 
 ### 2026-08-17 — no-new-CSS violation, held out of the deploy
 
