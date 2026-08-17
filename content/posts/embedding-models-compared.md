@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-15
 description: Everything in AI starts with a vector. Here is how embedding models turn
   human language into high-dimensional geometry, why dimensionality reduction matters,

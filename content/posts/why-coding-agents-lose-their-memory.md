@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-05-06'
 description: The memory persistence patterns that actually work for AI coding assistants,
   and why most agents lose context between sessions.

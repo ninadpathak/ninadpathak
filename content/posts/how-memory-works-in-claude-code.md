@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-19
 description: A practical guide to understanding how Claude Code retains context across
   sessions, uses project files, and manages long-term memory for coding tasks.

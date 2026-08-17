@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-05-12'
 description: Fine-tuning and RAG solve different parts of the agent memory problem.
   Here is how to decide which one you actually need.

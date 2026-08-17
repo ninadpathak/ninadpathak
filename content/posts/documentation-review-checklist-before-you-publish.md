@@ -1,18 +1,20 @@
 ---
+category: technical-documentation
 date: 2026-07-30
+description: Review technical documentation for accuracy, task completion, code, structure,
+  accessibility, links, metadata, and release readiness before publishing.
 slug: documentation-review-checklist-before-you-publish
-description: Review technical documentation for accuracy, task completion, code, structure, accessibility, links, metadata, and release readiness before publishing.
 status: published
 tags:
 - technical-writing
 - documentation-workflow
 - docs-as-code
-title: Documentation Review Checklist Before You Publish
 takeaways:
 - Review technical accuracy, reader success, and presentation in separate passes.
 - Run every procedure and code sample in the environment the page promises.
 - Inspect the rendered page before approval.
 - Assign clear owners for technical, editorial, and release approval.
+title: Documentation Review Checklist Before You Publish
 ---
 
 The pull request is ready for review, and the comments are all about headings, wording, and screenshot placement. Nobody has copied the command from the rendered page or checked whether the new permission exists in production.

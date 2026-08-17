@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-26
 description: Anthropic says Contextual Retrieval cut top-20 retrieval failure by 49%
   with contextual embeddings plus contextual BM25. I walk through the mechanism, the

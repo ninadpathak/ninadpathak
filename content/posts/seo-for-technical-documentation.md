@@ -1,19 +1,21 @@
 ---
+category: technical-documentation
 date: 2026-07-30
-updated: 2026-07-31
+description: 'Technical SEO for developer documentation: crawling, rendering, indexing,
+  canonicals, internal links, Core Web Vitals, structured data, and search visibility.'
 slug: seo-for-technical-documentation
-description: 'Technical SEO for developer documentation: crawling, rendering, indexing, canonicals, internal links, Core Web Vitals, structured data, and search visibility.'
 status: published
 tags:
 - documentation-seo
 - technical-writing
 - developer-experience
-title: 'Technical SEO Checklist for Documentation Sites'
 takeaways:
 - A useful technical SEO audit follows dependency order instead of chasing one score.
 - Discovery, crawling, indexing, and page quality need separate evidence.
 - Source HTML and rendered output can fail independently.
 - A before-and-after record connects search movement to meaningful changes.
+title: Technical SEO Checklist for Documentation Sites
+updated: 2026-07-31
 ---
 
 I built the audit for this guide around two pages: a working Cloudflare documentation guide and a deliberately broken local fixture. The contrast was useful because both pages had visible content, yet only one gave a crawler and a developer a dependable path through the task.

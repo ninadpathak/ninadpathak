@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-19
 description: The memory stack for AI agents has exploded into a fragmented mess of
   competing approaches. Here is what actually works, what is still research, and why

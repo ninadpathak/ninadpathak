@@ -1,15 +1,22 @@
 ---
-title: "API Documentation Tools: A Hands-On Comparison for Small Teams"
+category: technical-documentation
 date: 2026-08-16
-updated: 2026-08-16
-description: "Choose an API documentation tool by matching its source of truth, review path, and publishing model to your small team's workflow."
-tags: ["api-documentation", "developer-experience", "docs-as-code"]
-takeaways:
-  - "Choose the source of truth before comparing portal features."
-  - "A pull-request review path matters more than a polished preview when API changes move through Git."
-  - "Keep the OpenAPI contract and task guidance connected without pretending one tool writes both well."
+description: Choose an API documentation tool by matching its source of truth, review
+  path, and publishing model to your small team's workflow.
+slug: api-documentation-tools-hands-on-comparison-small-teams
 status: published
-slug: "api-documentation-tools-hands-on-comparison-small-teams"
+tags:
+- api-documentation
+- developer-experience
+- docs-as-code
+takeaways:
+- Choose the source of truth before comparing portal features.
+- A pull-request review path matters more than a polished preview when API changes
+  move through Git.
+- Keep the OpenAPI contract and task guidance connected without pretending one tool
+  writes both well.
+title: 'API Documentation Tools: A Hands-On Comparison for Small Teams'
+updated: 2026-08-16
 ---
 
 Small teams don't need a portal with every switch turned on. I built a small [tool selector](/static/tools/api_docs_tool_selector.py) for this comparison because the first choice that changes the outcome is where your API contract lives and how a change gets reviewed.

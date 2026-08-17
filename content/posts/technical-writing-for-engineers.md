@@ -1,4 +1,5 @@
 ---
+category: developer-experience
 date: 2026-04-18
 description: Most engineering documentation fails for the same reasons. Here is what
   actually moves the needle.

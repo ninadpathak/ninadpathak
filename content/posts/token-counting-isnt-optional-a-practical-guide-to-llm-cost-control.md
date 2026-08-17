@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-22
 description: I explain the mechanics of LLM tokenization, why JSON burns your API
   budget, and how to architect systems for strict token efficiency.

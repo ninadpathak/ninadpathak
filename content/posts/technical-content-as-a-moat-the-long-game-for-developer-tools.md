@@ -1,4 +1,5 @@
 ---
+category: developer-experience
 date: 2026-04-08
 description: I explain why durable technical content compounds for developer tools,
   how strong docs and tutorials create distribution, and where teams usually waste

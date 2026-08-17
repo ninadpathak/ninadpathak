@@ -1,19 +1,22 @@
 ---
+category: technical-documentation
 date: 2026-04-01
-updated: 2026-07-30
+description: Write developer onboarding docs that help a new engineer set up the product,
+  understand the workflow, and ship a safe first change.
 slug: developer-onboarding-docs-what-works-what-doesnt
-description: Write developer onboarding docs that help a new engineer set up the product, understand the workflow, and ship a safe first change.
 status: published
 tags:
 - technical-writing
 - developer-experience
 - documentation
-title: 'Developer Onboarding Docs: What Works, What Doesn''t'
 takeaways:
-- Design the page around a safe first change and link outward to company context as needed.
+- Design the page around a safe first change and link outward to company context as
+  needed.
 - Give the reader one tested setup path with a clear success check.
 - Put ownership, help, and recovery steps next to the work they affect.
 - Review onboarding docs whenever the product or development workflow changes.
+title: 'Developer Onboarding Docs: What Works, What Doesn''t'
+updated: 2026-07-30
 ---
 
 On day two, your new engineer is asking which Node version to use, whether Docker is required, and where the test credentials live. The answers are scattered across a Slack thread, the README, and the setup script.

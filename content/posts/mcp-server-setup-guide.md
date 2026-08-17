@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-06-12
 description: A hands-on guide to connecting an AI agent to your own tools and data
   with the Model Context Protocol. The client-server shape, a minimal working server,

@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-29
 description: Hybrid search combines BM25 sparse retrieval with dense vector search.
   Here's how reciprocal rank fusion works, what it costs, and when the combination

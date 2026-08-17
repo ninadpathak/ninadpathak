@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-13
 description: I benchmarked PGlite and SQLite-vec on a MacBook Air M2 to find the fastest
   WASM vector database for local-first AI applications.

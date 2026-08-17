@@ -1,18 +1,21 @@
 ---
+category: technical-documentation
 date: 2026-07-30
+description: Reorganize documentation that has drifted after product releases, version
+  changes, renamed features, and duplicate pages without losing useful URLs.
 slug: how-to-organize-a-documentation-site
-description: Reorganize documentation that has drifted after product releases, version changes, renamed features, and duplicate pages without losing useful URLs.
 status: published
 tags:
 - technical-writing
 - information-architecture
 - documentation
-title: How to Organize Documentation That Has Drifted
 takeaways:
 - Start by inventorying duplicate answers, stale versions, and orphan pages.
-- Organize around the reader’s current task and record release history where it helps with upgrades.
+- Organize around the reader’s current task and record release history where it helps
+  with upgrades.
 - Choose one canonical home for each question before you redesign navigation.
 - Use redirects and release triggers so the cleanup survives the next product change.
+title: How to Organize Documentation That Has Drifted
 ---
 
 Your documentation started with a limited set of pages tied to a limited set of features. Over time, new features were built, older versions stayed around for compatibility, and the original pages kept collecting links and traffic.

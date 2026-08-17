@@ -511,7 +511,17 @@ class SiteBuilder:
             )
 
     def build_category_archives(self, categories):
+        """Render one cluster owner page per non-empty category.
+
+        A category with no posts used to still emit a page and a sitemap entry, which
+        is how an empty /articles/ai-memory/ shipped and had to be removed by hand on
+        2026-08-17. Clusters are declared ahead of their content now, so skip the empty
+        ones until they have something to own.
+        """
         for category in categories:
+            if not category["posts"]:
+                print(f"  i category '{category['slug']}': no posts yet, not built")
+                continue
             self.render(
                 "category_archive.html",
                 f"articles/{category['slug']}/index.html",
@@ -657,7 +667,10 @@ class SiteBuilder:
             urls.append((f"/articles/page/{page_num}/", "0.6", "daily", site_lastmod))
         for category in categories:
             category_posts = category.get("posts", [])
-            lastmod = format_date_iso(category_posts[0].get("updated") or category_posts[0].get("date")) if category_posts else None
+            if not category_posts:
+                # No page is rendered for an empty category, so it must not be listed.
+                continue
+            lastmod = format_date_iso(category_posts[0].get("updated") or category_posts[0].get("date"))
             urls.append((category["url"], "0.8", "weekly", lastmod))
         for post in posts:
             urls.append((post["url"], "0.9", "monthly", format_date_iso(post.get("updated") or post.get("date"))))

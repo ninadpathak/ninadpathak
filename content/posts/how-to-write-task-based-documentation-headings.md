@@ -1,15 +1,21 @@
 ---
-title: "How to Write Task-Based Documentation Headings"
+category: technical-documentation
 date: 2026-08-10
-updated: 2026-08-10
-description: "Write documentation headings that tell a reader which task, decision, concept, or recovery path a section covers."
-tags: ["technical-writing", "documentation", "developer-experience"]
-takeaways:
-  - "Use a task heading when a section tells the reader how to reach a specific result."
-  - "Use a descriptive noun phrase when a section explains a concept or documents a reference item."
-  - "Review the heading outline separately from the body copy before publishing."
+description: Write documentation headings that tell a reader which task, decision,
+  concept, or recovery path a section covers.
+slug: how-to-write-task-based-documentation-headings
 status: published
-slug: "how-to-write-task-based-documentation-headings"
+tags:
+- technical-writing
+- documentation
+- developer-experience
+takeaways:
+- Use a task heading when a section tells the reader how to reach a specific result.
+- Use a descriptive noun phrase when a section explains a concept or documents a reference
+  item.
+- Review the heading outline separately from the body copy before publishing.
+title: How to Write Task-Based Documentation Headings
+updated: 2026-08-10
 ---
 
 A heading should tell a scanning reader what the section contains. For a procedure, name the result or task.

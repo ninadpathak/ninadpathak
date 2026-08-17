@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-26
 description: After surveying production agents across industries, the design space
   clusters into patterns. Here is what I found.

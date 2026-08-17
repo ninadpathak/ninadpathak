@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-04-19'
 description: A 1M token context window is not memory. Treating it like one is how
   you build expensive systems that still forget what they were doing last Tuesday.

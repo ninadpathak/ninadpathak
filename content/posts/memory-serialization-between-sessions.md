@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-04-30'
 description: Why agents forget everything on restart, and the serialization patterns
   that actually solve it

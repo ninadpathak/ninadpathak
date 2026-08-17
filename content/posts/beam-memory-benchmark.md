@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-19
 description: The BEAM benchmark reveals that LLMs fail catastrophically at retrieving
   facts from the middle of long contexts. Here is what the data actually shows, why

@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-28
 description: Semantic caching returns cached LLM responses for semantically similar
   queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism

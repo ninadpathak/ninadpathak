@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-27
 description: JSON mode, function calling, and structured outputs solve different problems.
   Here's when each one actually makes sense and what they cost you.

@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-16
 description: A practical guide to RAGAs, recall, precision, and the metrics that separate
   production RAG systems from prototypes.

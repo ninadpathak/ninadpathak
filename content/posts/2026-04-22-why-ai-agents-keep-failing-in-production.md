@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-04-22'
 description: I have spent two years watching agents fail in production. Here is what
   I keep seeing and what the field is starting to do about it.

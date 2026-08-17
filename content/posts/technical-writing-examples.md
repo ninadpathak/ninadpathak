@@ -1,4 +1,5 @@
 ---
+category: technical-documentation
 date: 2026-07-29
 description: Twelve technical writing examples from software teams, with the reader
   need, structure, and quality bar behind each format.

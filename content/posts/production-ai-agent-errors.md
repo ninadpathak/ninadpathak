@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-16
 description: 'Hard-won lessons from running AI agents in production: the error patterns
   that actually break systems, and the patterns that fix them.'

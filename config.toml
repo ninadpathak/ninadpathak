@@ -11,19 +11,77 @@ author = "Ninad Pathak"
 obsidian_path = ""
 posts_per_page = 20
 
+# CLUSTER OWNER PAGES
+#
+# One category per cluster in campaign-90d.md section 3, and each one renders a real
+# page at /articles/<slug>/ with its own title, description, canonical, and
+# CollectionPage schema. That page is the cluster's owner.
+#
+# Before this, all twelve topic pillars were anchors on one URL (/articles/#<slug>),
+# which meant twelve clusters shared one ranking surface and none of them could own a
+# head term. The ai-memory category was also removed on 2026-08-17 for matching zero
+# published posts while still emitting an empty page into the sitemap. That was the
+# right call for an empty category and the wrong conclusion about the niche; the niche
+# was widened the same day. See CHARTER.md section 2c-bis.
+#
+# ORDER MATTERS: build.py takes the first category whose tag_matches intersect a post's
+# tags, so the most specific cluster comes first. Tag matching is only the fallback.
+# Cluster isolation requires every piece to declare exactly one cluster, so posts carry
+# an explicit `category:` in their frontmatter and that always wins.
+#
+# TODO (copy, for the Codex writer): `description` and `intro` below are scope
+# definitions written by the director to set the cluster boundary, not finished page
+# copy, and they are visible on each owner page. Rewrite them so each one states the
+# reader's job in that cluster and reads like the rest of the site. House rules apply.
+
 [[content.categories]]
-slug = "ai-memory"
-title = "AI Memory"
-description = "Practical architecture, evaluation, and implementation guidance for AI agent memory."
-intro = "I write about the systems that let agents remember useful state without turning retrieval into an untestable black box."
-tag_matches = ["memory", "agent-memory", "memory-hierarchy", "memory-management", "agent-architecture", "llm-architecture"]
+slug = "ai-search-optimization"
+title = "AI Search and Citation"
+description = "Getting technical content found and cited by AI Overviews, ChatGPT, and other answer engines."
+intro = "How answer engines pick sources, and what a documentation site can control."
+tag_matches = ["ai-search", "ai-overviews", "llms-txt", "answer-engines", "documentation-seo", "generative-engine-optimization"]
+
+[[content.categories]]
+slug = "ai-engineering"
+title = "AI Agents, Memory, and Retrieval"
+description = "Agent architecture, agent memory, retrieval-augmented generation, and LLM inference, with the benchmarks behind them."
+intro = "How production AI systems store, retrieve, and forget, and where each layer breaks."
+tag_matches = ["ai-agents", "ai agents", "agents", "agent-memory", "agent-architecture", "agent architecture", "agent design", "multi-agent", "multi-agent systems", "rag", "retrieval", "memory", "memory-hierarchy", "memory-management", "memory-optimization", "vector-search", "llm", "llm-architecture", "inference", "kv-cache", "context-window", "context-windows", "transformers", "fine-tuning", "mcp", "ai reasoning", "voice-ai", "agentic-cli", "infrastructure"]
+
+[[content.categories]]
+slug = "reddit-marketing"
+title = "Reaching Developers on Reddit"
+description = "Finding, reading, and participating in the Reddit communities where developer products get discussed."
+intro = "What works on Reddit when the product is technical and the audience distrusts marketing."
+tag_matches = ["reddit", "reddit-marketing"]
+
+[[content.categories]]
+slug = "community-building"
+title = "Communities and Forums"
+description = "Finding an audience in forums, Discords, and communities, and earning a place in them."
+intro = "Where technical audiences already gather, and how to show up without being ejected."
+tag_matches = ["community", "community-building", "forums", "discord"]
+
+[[content.categories]]
+slug = "technical-events"
+title = "Running Technical Events"
+description = "Planning, running, and following up on meetups, workshops, and developer events."
+intro = "What it takes to run an event technical people are glad they attended."
+tag_matches = ["events", "meetups", "workshops", "conferences"]
+
+[[content.categories]]
+slug = "developer-experience"
+title = "Developer Experience and DevRel"
+description = "Content, positioning, and developer-facing craft for DevTools and B2B SaaS companies."
+intro = "Why developers trust some technical content and bounce off the rest."
+tag_matches = ["developer-experience", "devtools", "developer-tools", "developer-marketing", "developer-productivity", "content-strategy", "engineering-culture", "career"]
 
 [[content.categories]]
 slug = "technical-documentation"
 title = "Technical Documentation"
 description = "Technical documentation systems, developer education, and documentation operations."
 intro = "Practical guidance for documentation that helps developers reach a working result."
-tag_matches = ["documentation", "technical-writing", "developer-experience", "api-documentation", "docs-as-code", "documentation-workflow"]
+tag_matches = ["documentation", "technical-writing", "api-documentation", "docs-as-code", "documentation-workflow", "information-architecture", "accessibility"]
 
 [contact]
 booking_url = "https://zcal.co/i/AGG1iJtv"

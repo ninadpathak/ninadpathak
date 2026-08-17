@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-11
 description: Model Context Protocol (MCP) is the new standard for connecting AI models
   to data sources and tools. Here is why it matters, how it works, and why it is the

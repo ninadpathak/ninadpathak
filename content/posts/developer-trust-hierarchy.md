@@ -1,4 +1,5 @@
 ---
+category: developer-experience
 date: 2026-04-10
 description: I analyze the structural reasons why engineers filter for technical depth
   and verify-ability, creating a 5-tier hierarchy of developer trust.

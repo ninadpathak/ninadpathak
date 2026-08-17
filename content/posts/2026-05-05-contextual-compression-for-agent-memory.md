@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-05-05'
 description: How agents decide what to keep in memory when context space is finite,
   and the three compression strategies that actually work.

@@ -1,15 +1,23 @@
 ---
-title: "API Documentation Examples: What the Best Developer Portals Get Right"
+category: technical-documentation
 date: 2026-08-15
-updated: 2026-08-15
-description: "Study developer portal examples by tracing the path from credentials to a working request, exact behavior, and recovery."
-tags: ["api-documentation", "developer-experience", "technical-writing"]
-takeaways:
-  - "A useful portal makes the first request, its contract, and its recovery path easy to inspect."
-  - "Examples earn trust when they expose the prerequisites and the result a reader should recognize."
-  - "Reference becomes easier to use when it connects back to the task that made a detail matter."
+description: Study developer portal examples by tracing the path from credentials
+  to a working request, exact behavior, and recovery.
+slug: api-documentation-examples-what-the-best-developer-portals-get-right
 status: published
-slug: "api-documentation-examples-what-the-best-developer-portals-get-right"
+tags:
+- api-documentation
+- developer-experience
+- technical-writing
+takeaways:
+- A useful portal makes the first request, its contract, and its recovery path easy
+  to inspect.
+- Examples earn trust when they expose the prerequisites and the result a reader should
+  recognize.
+- Reference becomes easier to use when it connects back to the task that made a detail
+  matter.
+title: 'API Documentation Examples: What the Best Developer Portals Get Right'
+updated: 2026-08-15
 ---
 
 A polished API portal can still make a developer guess which credential to create, which request proves access, and where an error belongs. I built a small [portal-path checker](/static/tools/check_developer_portal_path.py) to keep the comparison honest: a portal earns its example status when a reader can follow one inspectable path from access to recovery.

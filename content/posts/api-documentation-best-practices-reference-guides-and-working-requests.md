@@ -1,15 +1,21 @@
 ---
-title: "API Documentation Best Practices: Reference, Guides, and Working Requests"
+category: technical-documentation
 date: 2026-08-14
-updated: 2026-08-14
-description: "Build API documentation that carries developers from credentials to a successful request, exact reference details, and actionable recovery."
-tags: ["api-documentation", "developer-experience", "technical-writing"]
-takeaways:
-  - "A working request needs a guide, reference, and recovery path with distinct jobs."
-  - "OpenAPI can supply a contract baseline, but tested task guidance still owns first success."
-  - "Validate the documentation package before a portal makes missing recovery look complete."
+description: Build API documentation that carries developers from credentials to a
+  successful request, exact reference details, and actionable recovery.
+slug: api-documentation-best-practices-reference-guides-and-working-requests
 status: published
-slug: "api-documentation-best-practices-reference-guides-and-working-requests"
+tags:
+- api-documentation
+- developer-experience
+- technical-writing
+takeaways:
+- A working request needs a guide, reference, and recovery path with distinct jobs.
+- OpenAPI can supply a contract baseline, but tested task guidance still owns first
+  success.
+- Validate the documentation package before a portal makes missing recovery look complete.
+title: 'API Documentation Best Practices: Reference, Guides, and Working Requests'
+updated: 2026-08-14
 ---
 
 An API portal can list every endpoint and still leave a developer unable to send a request. I built a small [package checker](/static/tools/check_api_docs_package.py) for this article because the missing work is usually distributed across a quickstart, reference, and error guidance, which makes an incomplete path look finished in a navigation tree.

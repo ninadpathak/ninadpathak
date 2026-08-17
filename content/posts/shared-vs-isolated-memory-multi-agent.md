@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-05-11'
 description: How to choose between shared and isolated memory architectures for multi-agent
   systems, with trade-offs from production deployments.

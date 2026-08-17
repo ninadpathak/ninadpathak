@@ -1,15 +1,21 @@
 ---
-title: "How to Document Multiple Product Versions"
+category: technical-documentation
 date: 2026-08-12
-updated: 2026-08-12
-description: "Document supported, retired, and historical product versions with stable URLs, version labels, canonicals, redirects, and tested route policies."
-tags: ["documentation", "developer-experience", "documentation-seo"]
-takeaways:
-  - "A version label is a support promise, not a navigation decoration."
-  - "Supported versions need distinct, self-canonical URLs when their instructions differ."
-  - "Redirect retired instructions only when the target can still complete the same reader task."
+description: Document supported, retired, and historical product versions with stable
+  URLs, version labels, canonicals, redirects, and tested route policies.
+slug: how-to-document-multiple-product-versions
 status: published
-slug: "how-to-document-multiple-product-versions"
+tags:
+- documentation
+- developer-experience
+- documentation-seo
+takeaways:
+- A version label is a support promise, not a navigation decoration.
+- Supported versions need distinct, self-canonical URLs when their instructions differ.
+- Redirect retired instructions only when the target can still complete the same reader
+  task.
+title: How to Document Multiple Product Versions
+updated: 2026-08-12
 ---
 
 A version switcher can make incompatible instructions look like interchangeable pages. I built a [version-route audit download](/static/downloads/documentation-version-route-audit/docs-version-route-audit.py) because a current page, a supported older page, and a retired page need different URL behavior before a canonical tag or redirect can be correct.

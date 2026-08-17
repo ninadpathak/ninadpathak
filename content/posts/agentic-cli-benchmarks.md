@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-12
 description: I ran a head-to-head benchmark of Claude Code and Gemini CLI on an M2
   Air (16GB), testing their ability to autonomously refactor legacy code and resolve

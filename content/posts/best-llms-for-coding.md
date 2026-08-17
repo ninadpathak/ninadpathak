@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-12
 description: Not all models are created equal for software development. Here is a
   benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic

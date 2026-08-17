@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-21
 description: Vector databases return results based on semantic similarity. I explain
   why that is rarely enough for production RAG and how a cross-encoder reranker fixes

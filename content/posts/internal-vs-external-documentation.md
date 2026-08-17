@@ -1,15 +1,23 @@
 ---
-title: "Internal vs. External Documentation: What Belongs Where"
+category: technical-documentation
 date: 2026-08-06
-updated: 2026-08-06
-description: "Compare internal and external documentation, decide where each page belongs, and split shared subjects without exposing private operating context."
-tags: ["documentation", "technical-writing", "developer-experience"]
-takeaways:
-  - "Choose internal or external documentation by the reader's task, not by the file's technical depth."
-  - "Split incidents, architecture, authentication, and releases when public guidance and private operating context have different audiences."
-  - "Give every page an owner and an update trigger so public product guidance and private operating knowledge stay aligned."
+description: Compare internal and external documentation, decide where each page belongs,
+  and split shared subjects without exposing private operating context.
+slug: internal-vs-external-documentation
 status: published
-slug: "internal-vs-external-documentation"
+tags:
+- documentation
+- technical-writing
+- developer-experience
+takeaways:
+- Choose internal or external documentation by the reader's task, not by the file's
+  technical depth.
+- Split incidents, architecture, authentication, and releases when public guidance
+  and private operating context have different audiences.
+- Give every page an owner and an update trigger so public product guidance and private
+  operating knowledge stay aligned.
+title: 'Internal vs. External Documentation: What Belongs Where'
+updated: 2026-08-06
 ---
 
 Internal documentation helps your team operate the system. External documentation helps customers, partners, and public developers use the supported product.

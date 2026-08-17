@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-05-10'
 description: I built a customer support agent that actually remembers across sessions.
   Here is what I learned about memory architecture, serialization trade-offs, and

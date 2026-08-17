@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-15
 description: VRAM is too expensive to waste on low-attention tokens. I benchmarked
   KV cache eviction strategies to treat LLM context like a managed heap, reaching

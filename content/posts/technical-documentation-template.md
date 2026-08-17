@@ -1,15 +1,23 @@
 ---
-title: "Technical Documentation Template: Build Product Docs With a Tested Structure"
+category: technical-documentation
 date: 2026-08-01
-updated: 2026-08-05
-description: "Download a technical documentation template, learn what each page must prove, and turn its placeholders into trustworthy product docs."
-tags: ["documentation", "docs-as-code", "technical-writing"]
-takeaways:
-  - "A documentation template should define page jobs and evidence requirements, not only headings."
-  - "Start with one tested reader task, then add reference and troubleshooting pages as the product creates those needs."
-  - "Validate navigation and local links before publishing a generated documentation site."
+description: Download a technical documentation template, learn what each page must
+  prove, and turn its placeholders into trustworthy product docs.
+slug: technical-documentation-template
 status: published
-slug: "technical-documentation-template"
+tags:
+- documentation
+- docs-as-code
+- technical-writing
+takeaways:
+- A documentation template should define page jobs and evidence requirements, not
+  only headings.
+- Start with one tested reader task, then add reference and troubleshooting pages
+  as the product creates those needs.
+- Validate navigation and local links before publishing a generated documentation
+  site.
+title: 'Technical Documentation Template: Build Product Docs With a Tested Structure'
+updated: 2026-08-05
 ---
 
 Creating documentation often forces several decisions at once: where readers begin, how they complete the first task, where exact details belong, and how they recover when a step fails. A template reduces that first pass to a structure you can inspect and adapt.

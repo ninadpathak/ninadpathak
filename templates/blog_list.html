@@ -22,7 +22,7 @@
   <div class="container">
     {% if categories %}
     <nav class="post-tags" aria-label="Article categories">
-      {% for category in categories %}
+      {% for category in categories if category.posts %}
       <a class="tag" href="{{ category.url }}">{{ category.title }} ({{ category.posts | length }})</a>
       {% endfor %}
     </nav>

@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-04-25'
 description: I have used lambda calculus to test whether AI systems can actually reason
   through composition, or whether they are just pattern-matching their way to plausible

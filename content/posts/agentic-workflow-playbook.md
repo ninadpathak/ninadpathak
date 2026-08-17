@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-06-14
 description: The repeatable five-stage process I run to take a task from vague intent
   to a pull request I trust, with an AI agent doing the heavy lifting and me stepping

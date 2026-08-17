@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-05-11'
 description: Memory attribution failures cause AI agents to act on outdated or misassigned
   context. Here is what I found examining the failure patterns.

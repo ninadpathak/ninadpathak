@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-06-13
 description: A coding agent succeeds or fails before it writes a line. Here is the
   setup I use, the rules file, repository context, tools, permissions, and guardrails,

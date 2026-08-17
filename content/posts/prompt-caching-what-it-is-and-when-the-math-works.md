@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-13
 description: Prompt caching can reduce LLM costs by up to 90% and cut latency by half.
   Here is the engineering guide to how it works, why prefix matching matters, and

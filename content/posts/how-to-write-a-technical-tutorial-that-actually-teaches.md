@@ -1,19 +1,21 @@
 ---
+category: technical-documentation
 date: 2026-04-02
-updated: 2026-07-30
+description: Write a technical tutorial that takes one reader from a clear starting
+  point to a tested, useful result.
 slug: how-to-write-a-technical-tutorial-that-actually-teaches
-description: Write a technical tutorial that takes one reader from a clear starting point to a tested, useful result.
 status: published
 tags:
 - technical-writing
 - tutorials
 - developer-experience
-title: How to Write a Technical Tutorial That Actually Teaches
 takeaways:
 - Choose one reader, one starting state, and one result they can verify.
 - Build the working path before writing the explanation around it.
 - Use task-based headings, runnable code, and visible checkpoints.
 - Test every step in a clean environment before publishing.
+title: How to Write a Technical Tutorial That Actually Teaches
+updated: 2026-07-30
 ---
 
 Someone is following your tutorial exactly as written when step three fails. The missing piece is usually a permission, a package version, a running service, or a file the page never mentioned.

@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-19
 description: 'A senior engineer''s breakdown of what memory management for LLMs actually
   looks like in production: eviction strategies, KV cache management, importance-weighted

@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-19
 description: A deep dive into how HyperAgents retain context across interactions,
   layer memory architectures, and handle session continuity in production.

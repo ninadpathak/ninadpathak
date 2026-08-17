@@ -1,19 +1,21 @@
 ---
+category: technical-documentation
 date: 2026-04-03
-updated: 2026-07-30
+description: Write release notes that let developers assess upgrade risk, understand
+  product impact, and migrate without surprises.
 slug: writing-release-notes-that-developers-trust
-description: Write release notes that let developers assess upgrade risk, understand product impact, and migrate without surprises.
 status: published
 tags:
 - technical-writing
 - developer-experience
 - releases
-title: Writing Release Notes That Developers Trust
 takeaways:
 - Put compatibility, affected users, and required action on the first screen.
 - Separate product impact from launch language and implementation detail.
 - Use visuals only when they clarify changed behavior or a migration.
 - Automate the release inventory, then edit it for risk and consequence.
+title: Writing Release Notes That Developers Trust
+updated: 2026-07-30
 ---
 
 It is late in the release cycle and someone wants to upgrade the SDK before the weekend. The team needs to know whether the API changed, whether CI needs a new runtime, and whether rollback is still possible.

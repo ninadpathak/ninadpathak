@@ -1,15 +1,21 @@
 ---
-title: "What a Documentation Homepage Must Help Users Do"
+category: technical-documentation
 date: 2026-08-11
-updated: 2026-08-11
-description: "Design a documentation homepage around first actions, returning tasks, recovery paths, and clear routes instead of an equal-weight card wall."
-tags: ["documentation", "developer-experience", "information-architecture"]
-takeaways:
-  - "A documentation homepage is a routing interface, not a visual inventory."
-  - "Give new users, returning implementers, people in recovery, and evaluators distinct next moves."
-  - "Test route labels, destinations, and audience before treating cards as navigation."
+description: Design a documentation homepage around first actions, returning tasks,
+  recovery paths, and clear routes instead of an equal-weight card wall.
+slug: what-a-documentation-homepage-must-help-users-do
 status: published
-slug: "what-a-documentation-homepage-must-help-users-do"
+tags:
+- documentation
+- developer-experience
+- information-architecture
+takeaways:
+- A documentation homepage is a routing interface, not a visual inventory.
+- Give new users, returning implementers, people in recovery, and evaluators distinct
+  next moves.
+- Test route labels, destinations, and audience before treating cards as navigation.
+title: What a Documentation Homepage Must Help Users Do
+updated: 2026-08-11
 ---
 
 A documentation homepage has a narrow job: help someone choose a useful next move before they understand the whole product. I reviewed [Stripe](https://docs.stripe.com/), [GitLab](https://docs.gitlab.com/), [GitHub](https://docs.github.com/), [Chrome](https://developer.chrome.com/docs), and [Google Maps](https://developers.google.com/maps/documentation) documentation homepages while building the route audit below, and the layouts vary far more than the underlying behavior.

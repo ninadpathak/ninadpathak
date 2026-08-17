@@ -1,15 +1,22 @@
 ---
-title: "API Documentation Template: The Pages Every API Needs"
+category: technical-documentation
 date: 2026-08-17
-updated: 2026-08-17
-description: "Download an API documentation template that assigns every page a reader job, from the first request through reference, recovery, events, and changes."
-tags: ["api-documentation", "developer-experience", "technical-writing"]
-takeaways:
-  - "A useful API docs project gives each reader decision a named page owner."
-  - "A quickstart proves first access, reference records exact behavior, and recovery pages explain failed requests."
-  - "Use one outline to connect authentication, events, and version changes before navigation hides missing work."
+description: Download an API documentation template that assigns every page a reader
+  job, from the first request through reference, recovery, events, and changes.
+slug: api-documentation-template-the-pages-every-api-needs
 status: published
-slug: "api-documentation-template-the-pages-every-api-needs"
+tags:
+- api-documentation
+- developer-experience
+- technical-writing
+takeaways:
+- A useful API docs project gives each reader decision a named page owner.
+- A quickstart proves first access, reference records exact behavior, and recovery
+  pages explain failed requests.
+- Use one outline to connect authentication, events, and version changes before navigation
+  hides missing work.
+title: 'API Documentation Template: The Pages Every API Needs'
+updated: 2026-08-17
 ---
 
 An API docs project usually starts with a reference generator or an empty navigation tree. I built this [API documentation page outline](/static/templates/api-documentation-page-outline.md) to start somewhere more useful: a developer should be able to choose a safe request, recognize its result, inspect exact behavior, and recover when the request fails.

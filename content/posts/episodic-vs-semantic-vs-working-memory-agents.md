@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-05-04'
 description: AI agents juggle three distinct memory types. Getting them wrong is the
   source of most agent memory failures I see in production.

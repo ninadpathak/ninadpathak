@@ -1,15 +1,22 @@
 ---
-title: "Accessibility Testing for Documentation: A Release Checklist"
+category: technical-documentation
 date: 2026-08-09
-updated: 2026-08-09
-description: "Test developer documentation for release-blocking accessibility failures in structure, code, links, visuals, keyboard use, and rendered output."
-tags: ["documentation", "accessibility", "developer-experience"]
-takeaways:
-  - "Accessibility testing catches documentation failures that a visual review can miss."
-  - "A documentation-specific checker removes repeatable structural defects before manual testing."
-  - "Keyboard, zoom, and screen-reader checks decide whether a reader can complete the task."
+description: Test developer documentation for release-blocking accessibility failures
+  in structure, code, links, visuals, keyboard use, and rendered output.
+slug: documentation-accessibility-checklist
 status: published
-slug: "documentation-accessibility-checklist"
+tags:
+- documentation
+- accessibility
+- developer-experience
+takeaways:
+- Accessibility testing catches documentation failures that a visual review can miss.
+- A documentation-specific checker removes repeatable structural defects before manual
+  testing.
+- Keyboard, zoom, and screen-reader checks decide whether a reader can complete the
+  task.
+title: 'Accessibility Testing for Documentation: A Release Checklist'
+updated: 2026-08-09
 ---
 
 Accessibility testing matters for documentation because a page can look finished and still leave a reader unable to complete its task. A bold heading, a link named “here,” or a screenshot holding the only success signal can turn setup instructions into a visual-only path.

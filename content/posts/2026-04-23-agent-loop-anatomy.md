@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-04-23'
 description: The agent loop is not one thing. It is four distinct phases that run
   in sequence, and understanding each one is how you debug what breaks.

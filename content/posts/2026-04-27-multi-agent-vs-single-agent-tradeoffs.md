@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-04-27'
 description: The decision between one agent and many is not about capability. It is
   about failure modes, latency, and operational complexity.

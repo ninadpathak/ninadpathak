@@ -1,15 +1,20 @@
 ---
-title: "Technical Documentation Best Practices, Tested on Real Developer Docs"
+category: technical-documentation
 date: 2026-08-02
-updated: 2026-08-02
-description: "Use a tested review card to make documentation tasks, failure states, limits, and ownership clear before readers need support."
-tags: ["documentation", "technical-writing", "developer-experience"]
-takeaways:
-  - "Give every page one reader task and an observable success state."
-  - "Put recovery guidance beside the action that can fail."
-  - "Make limits inspectable and assign each reader question to one page owner."
+description: Use a tested review card to make documentation tasks, failure states,
+  limits, and ownership clear before readers need support.
+slug: technical-documentation-best-practices-tested-real-developer-docs
 status: published
-slug: "technical-documentation-best-practices-tested-real-developer-docs"
+tags:
+- documentation
+- technical-writing
+- developer-experience
+takeaways:
+- Give every page one reader task and an observable success state.
+- Put recovery guidance beside the action that can fail.
+- Make limits inspectable and assign each reader question to one page owner.
+title: Technical Documentation Best Practices, Tested on Real Developer Docs
+updated: 2026-08-02
 ---
 
 A documentation page can be accurate and still fail the moment a reader leaves the happy path. The useful test is smaller: can someone complete one task, recognize the result, and recover from the failure most likely to interrupt it?

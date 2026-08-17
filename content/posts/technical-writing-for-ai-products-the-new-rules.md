@@ -1,4 +1,5 @@
 ---
+category: developer-experience
 date: 2026-03-31
 description: AI product docs now need prompts, schemas, evals, and version boundaries.
   I explain the rules I would use to judge a technical writer for an AI company.

@@ -1,4 +1,5 @@
 ---
+category: developer-experience
 date: 2026-04-06
 description: DevTools startups lose deals long before sales hears the objection. I
   explain how weak docs break evaluation, trials, and rollout confidence.

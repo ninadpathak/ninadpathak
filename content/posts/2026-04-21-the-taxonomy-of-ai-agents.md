@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-21
 description: Most AI agent taxonomies are either too academic or too vague to be useful.
   Here is the classification I use when I need to decide what kind of agent to build.

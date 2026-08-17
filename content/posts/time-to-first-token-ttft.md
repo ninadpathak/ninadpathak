@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-08
 description: Users do not care about total throughput. They care about how fast the
   first word appears. Here is the engineering guide to measuring and optimizing Time

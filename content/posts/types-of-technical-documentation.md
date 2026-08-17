@@ -1,15 +1,22 @@
 ---
-title: "Types of Technical Documentation: 8 Essential Types, Plus Agent Instructions"
+category: technical-documentation
 date: 2026-08-05
-updated: 2026-08-05
-description: "Understand the main types of technical documentation, study useful examples, and build a documentation system for users, teams, and coding agents."
-tags: ["documentation", "technical-writing", "developer-experience"]
-takeaways:
-  - "Technical documentation includes user guides, tutorials, how-to guides, reference, troubleshooting, release notes, runbooks, and architecture documents."
-  - "A document type earns its place when it serves a distinct reader or operator need."
-  - "Agent instructions add a new audience to a documentation system without replacing human-facing docs."
+description: Understand the main types of technical documentation, study useful examples,
+  and build a documentation system for users, teams, and coding agents.
+slug: types-of-technical-documentation
 status: published
-slug: "types-of-technical-documentation"
+tags:
+- documentation
+- technical-writing
+- developer-experience
+takeaways:
+- Technical documentation includes user guides, tutorials, how-to guides, reference,
+  troubleshooting, release notes, runbooks, and architecture documents.
+- A document type earns its place when it serves a distinct reader or operator need.
+- Agent instructions add a new audience to a documentation system without replacing
+  human-facing docs.
+title: 'Types of Technical Documentation: 8 Essential Types, Plus Agent Instructions'
+updated: 2026-08-05
 ---
 
 Technical documentation is not one thing. It is the set of documents that help someone use a product, understand a system, operate it safely, or change it without losing important context.

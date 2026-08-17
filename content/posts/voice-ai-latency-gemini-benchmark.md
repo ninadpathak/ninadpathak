@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-16
 description: I built a sub-second latency voice assistant and profiled every millisecond
   of the Audio-to-Audio request/response loop on a MacBook Air M2. Here is the bottleneck

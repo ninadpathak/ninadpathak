@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-17
 description: Real numbers, real pricing, and concrete strategies for keeping your
   LLM spend predictable.

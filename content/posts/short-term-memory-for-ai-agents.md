@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-19
 description: Context windows are not memory. Here is what every production AI agent
   engineer needs to understand about token budgets, overflow handling, and how short-term

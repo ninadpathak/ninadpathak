@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-19
 description: How layered memory architecture helps AI systems achieve long-term context,
   personalization, and continuous learning, and why flat memory fails.

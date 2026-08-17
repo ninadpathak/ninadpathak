@@ -1,14 +1,19 @@
 ---
-title: "Documentation Style Guide Template for Developer Teams"
+category: technical-documentation
 date: 2026-08-07
-updated: 2026-08-07
-description: "Download a documentation style guide template that records terminology, code evidence, UI references, and who updates each decision."
-tags: ["documentation", "technical-writing", "developer-experience"]
-takeaways:
-  - "A documentation style guide needs named decisions and change owners, not tone preferences."
-  - "Code and UI rules need a starting state and a verification source."
+description: Download a documentation style guide template that records terminology,
+  code evidence, UI references, and who updates each decision.
+slug: documentation-style-guide-template
 status: published
-slug: "documentation-style-guide-template"
+tags:
+- documentation
+- technical-writing
+- developer-experience
+takeaways:
+- A documentation style guide needs named decisions and change owners, not tone preferences.
+- Code and UI rules need a starting state and a verification source.
+title: Documentation Style Guide Template for Developer Teams
+updated: 2026-08-07
 ---
 
 Documentation drifts when a feature changes and the name in the UI no longer matches the command in the guide. Tone alone cannot fix a decision that nobody can inspect or update.

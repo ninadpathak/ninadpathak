@@ -1,4 +1,5 @@
 ---
+category: developer-experience
 date: 2026-04-11
 description: I analyze the structural correlation between documentation quality and
   engineering throughput, using DORA metrics and Accelerate research to quantify the

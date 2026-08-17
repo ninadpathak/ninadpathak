@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-19
 description: 'A deep dive into the memory architecture of DeerFlow: layered context
   passing, session state files, sub-agent isolation, and how it compares to Letta,

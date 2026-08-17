@@ -1,4 +1,5 @@
 ---
+category: developer-experience
 date: 2026-04-07
 description: I think Stripe’s technical blog compounds into a moat because it teaches,
   documents, and shapes developer trust long before a sales conversation starts.

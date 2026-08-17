@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-04-26'
 description: 'The difference between an AI agent and a smart assistant comes down
   to one thing: who drives the loop.'

@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: '2026-05-06'
 description: A practical breakdown of the inference optimization techniques that move
   the needle — batching, quantization, caching, and attention kernels — with concrete

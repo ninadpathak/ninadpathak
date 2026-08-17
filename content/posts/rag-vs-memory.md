@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-04-19
 description: Understand the fundamental differences between RAG and memory systems
   for LLM applications, when to use each, and how to combine them in production.

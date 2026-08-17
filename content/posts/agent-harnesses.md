@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-10
 description: Every production AI agent needs a harness. Here is what one contains,
   why frameworks often are not enough, and how to build the layer that actually determines

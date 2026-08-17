@@ -1,19 +1,21 @@
 ---
+category: technical-documentation
 date: 2026-03-30
-updated: 2026-07-30
+description: Write a changelog that helps developers assess an upgrade, find breaking
+  changes, and understand what each release means for their code.
 slug: how-to-write-a-changelog-developers-actually-read
-description: Write a changelog that helps developers assess an upgrade, find breaking changes, and understand what each release means for their code.
 status: published
 tags:
 - technical-writing
 - developer-experience
 - devtools
-title: How to Write a Changelog That Developers Actually Read
 takeaways:
 - Lead with upgrade impact, not an undifferentiated list of commits.
 - Group releases by version, date, and consistent change categories.
 - Describe the consequence of each change and link to migration details.
 - Keep an Unreleased section and update it as the product changes.
+title: How to Write a Changelog That Developers Actually Read
+updated: 2026-07-30
 ---
 
 You are about to approve a dependency bump and someone asks, “Is this actually safe to ship?” The changelog says “improved pagination,” “updated authentication,” and “internal maintenance.”

@@ -1,4 +1,5 @@
 ---
+category: ai-engineering
 date: 2026-03-14
 description: Context windows are expanding to millions of tokens. Here is why the
   middle of your context still gets ignored, what long context actually costs, and

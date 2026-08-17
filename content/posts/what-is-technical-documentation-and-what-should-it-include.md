@@ -1,15 +1,20 @@
 ---
-title: "What Is Technical Documentation, and What Should It Include?"
+category: technical-documentation
 date: 2026-08-05
-updated: 2026-08-05
-description: "Technical documentation helps a developer decide, start, use, and recover from a product. Choose each page by the task it owns."
-tags: ["documentation", "technical-writing", "developer-experience"]
-takeaways:
-  - "Technical documentation gives each reader task one useful home."
-  - "Start with orientation, one verified success path, and the reference that path needs."
-  - "Give every document an owner and a product change that triggers review."
+description: Technical documentation helps a developer decide, start, use, and recover
+  from a product. Choose each page by the task it owns.
+slug: what-is-technical-documentation-and-what-should-it-include
 status: published
-slug: "what-is-technical-documentation-and-what-should-it-include"
+tags:
+- documentation
+- technical-writing
+- developer-experience
+takeaways:
+- Technical documentation gives each reader task one useful home.
+- Start with orientation, one verified success path, and the reference that path needs.
+- Give every document an owner and a product change that triggers review.
+title: What Is Technical Documentation, and What Should It Include?
+updated: 2026-08-05
 ---
 
 Technical documentation is the material that helps someone understand, use, integrate with, or safely operate a system. It works when a reader can take the next step without guessing.
