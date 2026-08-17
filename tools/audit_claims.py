@@ -87,6 +87,26 @@ def classify(line: str) -> list[str]:
     return reasons
 
 
+def _is_navigation(line: str) -> bool:
+    """Lines that match syntactically but assert nothing.
+
+    A reviewer classified 36 of 118 candidates as false positives, and they clustered into
+    three shapes. Markdown headings like "What I Found Works" are editorial navigation, not
+    evidence of a test event. FAQ questions like "Can I run this locally?" are questions,
+    not claims. And a bullet in a reading list points at further reading rather than
+    offering it as proof.
+    """
+    stripped = line.strip()
+    if stripped.startswith("#"):
+        return True
+    if stripped.endswith("?"):
+        return True
+    # A list item whose whole content is a link and a short gloss is a reading pointer.
+    if re.match(r"^[-*+]\s*\[[^\]]+\]\([^)]+\)\s*[:\u2014-]?\s*.{0,90}$", stripped):
+        return True
+    return False
+
+
 def scan(path: pathlib.Path):
     data = frontmatter.load(path)
     if data.get("status") != "published":
@@ -98,6 +118,8 @@ def scan(path: pathlib.Path):
             in_fence = not in_fence
             continue
         if in_fence:
+            continue
+        if _is_navigation(line):
             continue
         reasons = classify(line)
         if reasons:

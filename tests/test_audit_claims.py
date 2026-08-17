@@ -64,5 +64,45 @@ class AuditClaimsContractTests(unittest.TestCase):
         self.assertTrue(module.classify("I ran the checker against the fixture."))
 
 
+class NavigationSuppressionTests(unittest.TestCase):
+    """36 of 118 candidates were false positives, clustered into three shapes.
+
+    Headings, FAQ questions and reading-list bullets match the patterns syntactically
+    while asserting nothing. Suppressing them is what keeps a reviewer's time on real
+    claims rather than on navigation.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from importlib.util import module_from_spec, spec_from_file_location
+        spec = spec_from_file_location("audit_claims_nav", TOOL)
+        cls.mod = module_from_spec(spec)
+        spec.loader.exec_module(cls.mod)
+
+    def test_headings_are_navigation(self):
+        self.assertTrue(self.mod._is_navigation("## What I Found Works"))
+        self.assertTrue(self.mod._is_navigation("### The Failure Modes I Check"))
+
+    def test_faq_questions_are_navigation(self):
+        self.assertTrue(self.mod._is_navigation("Can I run this locally?"))
+        self.assertTrue(self.mod._is_navigation("How did I measure 40ms?"))
+
+    def test_reading_list_bullet_is_navigation(self):
+        self.assertTrue(self.mod._is_navigation(
+            "- [open-source AI memory review](/articles/state-of-open-source-memory-2026/) — an architecture survey"))
+
+    def test_a_real_claim_in_prose_is_not_navigation(self):
+        self.assertFalse(self.mod._is_navigation(
+            "I measured this on a Llama 3.1 8B model running locally."))
+        self.assertFalse(self.mod._is_navigation(
+            "I ran the checker against the included fixture and it returned PASS."))
+
+    def test_a_claim_that_merely_mentions_a_link_is_not_suppressed(self):
+        """A sentence using a link as proof must still be flagged."""
+        self.assertFalse(self.mod._is_navigation(
+            "That is exactly what I tested in my [head-to-head benchmark](/articles/agentic-cli-benchmarks/), "
+            "which showed the smaller model winning on repository-level edits."))
+
+
 if __name__ == "__main__":
     unittest.main()
