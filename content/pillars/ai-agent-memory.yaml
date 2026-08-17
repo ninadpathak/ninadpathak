@@ -23,11 +23,9 @@ sections:
       - short-term-memory-for-ai-agents
       - context-windows-vs-memory
       - episodic-vs-semantic-vs-working-memory-agents
-      - memory-hierarchy-in-ai-systems
   - heading: "Memory vs retrieval"
     blurb: "Where RAG stops being enough and how memory retrieval differs from document search."
     posts:
-      - the-memory-hierarchy-why-rag-is-not-enough
       - rag-vs-memory
       - asymmetric-retrieval-agent-memory
       - fine-tuning-vs-rag-for-agent-memory
@@ -39,12 +37,10 @@ sections:
       - memory-versioning-and-audit-trails
       - why-coding-agents-lose-their-memory
       - shared-vs-isolated-memory-multi-agent
-      - memory-attribution-errors
   - heading: "Applied and specialized"
     blurb: "Memory under real constraints, from real-time voice to customer support."
     posts:
       - memory-for-voice-ai-agents
-      - agent-memory-for-customer-support
   - heading: "How real systems do it"
     blurb: "Teardowns of the memory architecture inside shipping agent frameworks."
     posts:
@@ -56,7 +52,6 @@ sections:
     posts:
       - beam-memory-benchmark
       - state-of-ai-agent-memory-2026
-      - state-of-open-source-memory-2026
 
 faqs:
   - q: "What is the difference between an agent's memory and its context window?"

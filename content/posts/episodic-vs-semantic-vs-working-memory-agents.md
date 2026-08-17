@@ -64,7 +64,7 @@ A wrong semantic memory makes the agent confidently misinform you, citing a func
 
 The error signatures look nothing alike, and debugging them takes different tools.
 
-Whenever I reason about where semantic memory sits relative to retrieval, I come back to the [memory hierarchy in AI systems](/articles/memory-hierarchy-in-ai-systems/). The hierarchy framing helps because it makes one thing obvious: semantic memory is a single layer, the slow-changing reference shelf the agent reads from, far from the whole system.
+Whenever I reason about where semantic memory sits relative to retrieval, I come back to the [layered memory model for AI systems](/articles/ai-memory-management-for-llms/). The hierarchy framing helps because it makes one thing obvious: semantic memory is a single layer, the slow-changing reference shelf the agent reads from, far from the whole system.
 
 Treating it as the whole system is how teams end up dumping yesterday's task logs into the same store as their hard-won API facts and wondering why answers drift.
 

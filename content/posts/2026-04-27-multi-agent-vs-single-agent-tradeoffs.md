@@ -36,7 +36,7 @@ A single agent working a complex task accumulates its whole history inside the c
 
 Past a certain point, paying to feed that history into every reasoning step costs more than the step is worth, and the agent starts forgetting how the task began by the time it reaches the end. None of that is a software bug.
 
-It is a physics problem rooted in the [memory hierarchy in AI systems](/articles/memory-hierarchy-in-ai-systems/).
+It is a physics problem rooted in the [layered memory model for AI systems](/articles/ai-memory-management-for-llms/).
 
 Serialization is the other constraint. A single agent does its steps in order, so if a task means scrape ten pages, summarize each, then compare them, the agent grinds through all ten scrapes one at a time before it touches the comparison.
 

@@ -95,7 +95,7 @@ The most autonomous category. These agents hold a long-running goal and work tow
 
 An agent assigned to "migrate this service off the deprecated payments API" might run for a week: opening pull requests, waiting on CI, and picking the work back up the next morning. They checkpoint their state, resume after interruptions, and adapt the plan as new information arrives.
 
-Memory stops being optional here, and it is where most teams underestimate the complexity. The [memory-hierarchy-in-ai-systems](/articles/memory-hierarchy-in-ai-systems/) that underpins this got its own earlier post.
+Memory stops being optional here, and it is where most teams underestimate the complexity. The [layered memory model for AI systems](/articles/ai-memory-management-for-llms/) separates current context from persistent state.
 
 Get the memory architecture wrong and persistent-goal agents either forget what they were doing or drag stale state forward that corrupts every later decision, like resuming a migration against a schema that changed two days ago.
 

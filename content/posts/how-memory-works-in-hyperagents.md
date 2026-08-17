@@ -290,7 +290,7 @@ The pattern lets agents contribute to a collective memory without stepping on ea
 
 ##Production Considerations
 
-If you want to understand how this compares to other memory systems, see my post on [context windows vs memory](/articles/context-windows-vs-memory/). For a deeper look at memory hierarchy in AI systems, check out [memory hierarchy in AI systems](/articles/memory-hierarchy-in-ai-systems/).
+If you want to understand how this compares to other memory systems, see my post on [context windows vs memory](/articles/context-windows-vs-memory/). For a deeper look at the layers, check out [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).
 
 Memory architecture that looks clean in a notebook breaks in production if you do not account for latency, storage growth, and failure modes.
 

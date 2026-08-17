@@ -85,7 +85,7 @@ There is a subtler cost. Fine-tuning on a narrow dataset risks catastrophic forg
 
 ## The Memory Hierarchy Changes the Trade-Off
 
-Looking at agent memory through the [memory hierarchy lens](/articles/memory-hierarchy-in-ai-systems/), the fine-tuning versus RAG decision maps cleanly onto different layers.
+Looking at agent memory through the [memory hierarchy lens](/articles/ai-memory-management-for-llms/), the fine-tuning versus RAG decision maps cleanly onto different layers.
 
 Working memory is episodic and short-lived, and it is never a fine-tuning problem. No one retrains a model on what a user said two turns ago.
 

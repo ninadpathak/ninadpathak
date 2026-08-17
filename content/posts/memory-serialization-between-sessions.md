@@ -128,7 +128,7 @@ Serialize a conversation with no way to find the relevant parts quickly, and you
 
 The memory hierarchy matters here. Serialized state is one layer.
 
-How you index and retrieve from that state is another. [My post on the memory hierarchy](/articles/the-memory-hierarchy-why-rag-is-not-enough/) goes into this in detail, and the short version is that serialization and retrieval are separate problems you have to design together.
+How you index and retrieve from that state is another. [My post on AI memory management](/articles/ai-memory-management-for-llms/) goes into this in detail, and the short version is that serialization and retrieval are separate problems you have to design together.
 
 Agent memory retrieval is also asymmetric. What you serialize is not always what you retrieve.
 

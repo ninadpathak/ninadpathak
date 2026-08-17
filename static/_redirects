@@ -32,3 +32,14 @@
 /glossary/dspy/ /glossary/flow-engineering/ 301
 /glossary/graphrag /glossary/context-engineering/ 301
 /glossary/graphrag/ /glossary/context-engineering/ 301
+# Cluster-3 batch 1: retired sources point directly to their reviewed final owners.
+/articles/state-of-open-source-memory-2026/ /articles/state-of-ai-agent-memory-2026/ 301
+/blog/state-of-open-source-memory-2026/ /articles/state-of-ai-agent-memory-2026/ 301
+/articles/memory-hierarchy-in-ai-systems/ /articles/ai-memory-management-for-llms/ 301
+/blog/memory-hierarchy-in-ai-systems/ /articles/ai-memory-management-for-llms/ 301
+/articles/the-memory-hierarchy-why-rag-is-not-enough/ /articles/ai-memory-management-for-llms/ 301
+/blog/the-memory-hierarchy-why-rag-is-not-enough/ /articles/ai-memory-management-for-llms/ 301
+/articles/memory-attribution-errors/ /articles/ai-memory-management-for-llms/ 301
+/blog/memory-attribution-errors/ /articles/ai-memory-management-for-llms/ 301
+/articles/agent-memory-for-customer-support/ /articles/state-of-ai-agent-memory-2026/ 301
+/blog/agent-memory-for-customer-support/ /articles/state-of-ai-agent-memory-2026/ 301

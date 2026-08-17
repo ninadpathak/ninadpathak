@@ -4,7 +4,7 @@ date: '2026-04-29'
 description: RAG handles document retrieval well. It handles agent memory poorly,
   because agents need episodic recall, working context, and cross-session persistence
   that a vector store cannot provide.
-status: published
+status: merged
 tags:
 - ai-agents
 - agent-memory

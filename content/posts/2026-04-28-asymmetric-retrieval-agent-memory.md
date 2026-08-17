@@ -94,7 +94,7 @@ Agent memory also changes meaning as the task advances. Retrieval needs enough s
 
 An application may store a record under the goal "provision a new tenant database." A later task to migrate an existing tenant needs some of the same information, but the new query may not share the stored goal language.
 
-A [layered memory hierarchy](/articles/memory-hierarchy-in-ai-systems/) separates current task state from persistent records so retrieval can use both. The hierarchy does not solve query mismatch by itself.
+A [layered memory hierarchy](/articles/ai-memory-management-for-llms/) separates current task state from persistent records so retrieval can use both. The hierarchy does not solve query mismatch by itself.
 
 It makes the relevant state available to the retrieval step.
 

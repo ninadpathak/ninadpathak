@@ -3,7 +3,7 @@ category: ai-engineering
 date: 2026-04-19
 description: How layered AI memory separates working context, episodic history, semantic
   facts, procedures, and the KV cache, and why RAG alone is incomplete.
-status: published
+status: merged
 tags:
 - ai
 - agents

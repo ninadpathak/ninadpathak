@@ -158,7 +158,7 @@ The SQLite database is for cross-session tracking. I use it for migration status
 
 A customer support agent might track user preferences here. A coding agent tracks technical debt and architectural findings.
 
-Store full conversation logs separately if you need them. The [memory hierarchy for AI systems](/articles/memory-hierarchy-in-ai-systems/) makes the case for separating structured state from raw log data.
+Store full conversation logs separately if you need them. The [layered memory model for AI systems](/articles/ai-memory-management-for-llms/) makes the case for separating structured state from raw log data.
 
 The log is append-only and grows unbounded. The structured state is what the agent uses to make decisions.
 

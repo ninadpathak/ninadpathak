@@ -232,7 +232,7 @@ def logged_tool_call(tool_name: str, tool_fn, **kwargs):
         raise
 ```
 
-Some failures come from retrieving a valid memory for the wrong subject. [Memory attribution errors](/articles/memory-attribution-errors/) separates that identity failure from a generic retrieval miss.
+Some failures come from retrieving a valid memory for the wrong subject. [AI memory management for LLMs](/articles/ai-memory-management-for-llms/) separates that attribution failure from a generic retrieval miss.
 
 ## The non-negotiables
 

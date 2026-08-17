@@ -45,7 +45,7 @@ Recency, frequency of use, and predicted future relevance all have to feed into 
 
 Knowledge about the user's primary project earns its space in a way that a memory about a one-off debugging session for a side repo does not.
 
-Different memory types serve different purposes, which I covered in the [memory hierarchy in AI systems](/articles/memory-hierarchy-in-ai-systems/). That hierarchy is the foundation.
+Different memory types serve different purposes, which I covered in [AI memory management for LLMs](/articles/ai-memory-management-for-llms/). That hierarchy is the foundation.
 
 The compression layer I am describing here sits on top of it and decides how much of each tier survives.
 

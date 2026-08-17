@@ -103,7 +103,7 @@ It breaks for long ones.
 
 A fixed-capacity context window is the root of the problem. Remembering everything means eventually forgetting something.
 
-The [memory hierarchy in AI systems](/articles/memory-hierarchy-in-ai-systems/) covers the layered approach that actually solves this. Short-term working memory lives in the context window.
+[AI memory management for LLMs](/articles/ai-memory-management-for-llms/) covers the layered approach that actually solves this. Short-term working memory lives in the context window.
 
 Long-term facts get written to external storage and retrieved when relevant.
 

@@ -69,7 +69,7 @@ A parallel research workflow is a useful counterexample: several agents can expl
 
 The trade-off agent needed to see that the failure-case agent had already ruled out an approach so it could stop scoring that approach and spend its budget elsewhere. With isolated memory, each agent would have finished its research blind to what the others discovered, and the synthesis step would have stitched together three answers that never accounted for one another.
 
-The [memory hierarchy in AI systems](/articles/memory-hierarchy-in-ai-systems/) article covers how to organize memory layers in agentic systems, and whatever you choose for multi-agent memory should fit within that broader hierarchy. Shared memory in a multi-agent context is usually a working memory layer that all agents can read and write.
+The [memory hierarchy in AI systems](/articles/ai-memory-management-for-llms/) article covers how to organize memory layers in agentic systems, and whatever you choose for multi-agent memory should fit within that broader hierarchy. Shared memory in a multi-agent context is usually a working memory layer that all agents can read and write.
 
 There is also the "late-arriving information" problem, which shared memory handles better. Suppose the summary agent needs a caveat the extractor discovered but that never made it into the artifact handed to the validator.
 
