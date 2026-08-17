@@ -47,7 +47,7 @@ Even when the full history fits in the context window, replaying it on every res
 
 Cheaper than that is **conversation log storage**, where you write every message to a database as it happens. On restart, you retrieve the recent messages and hand the agent the raw log.
 
-Plenty of teams I have watched reach for this first, usually a Postgres table with a row per message and a session id.
+A common first approach is a Postgres table with one row per message and a session identifier.
 
 Reconstruction from a raw log is where it gets imprecise. The agent still has to work out what matters, what to act on first, what to ignore.
 
@@ -132,7 +132,7 @@ How you index and retrieve from that state is another. [My post on AI memory man
 
 Agent memory retrieval is also asymmetric. What you serialize is not always what you retrieve.
 
-I wrote about this in my post on [asymmetric retrieval in agent memory](/articles/asymmetric-retrieval-agent-memory/). The schema you design for serialization shapes what retrieval looks like, and if you get the schema wrong, the retrieval will be wrong in predictable ways.
+[RAG versus memory](/articles/rag-vs-memory/) shows how task-state queries and stored-record language diverge. The schema used for serialization shapes retrieval, and a schema that drops identity, time, or event type creates predictable retrieval errors.
 
 The serialization format itself matters less than the discipline of using it consistently. JSON is fine for most cases.
 

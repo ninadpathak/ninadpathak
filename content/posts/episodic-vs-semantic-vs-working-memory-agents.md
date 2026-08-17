@@ -30,11 +30,11 @@ I think of it as the agent's immediate scratchpad: what was said in the last few
 
 Fast and volatile, working memory disappears when the context resets. Any long-running agent hits that boundary unless it persists state elsewhere.
 
-Between turns, the agent would lose track of what the customer had already been told and re-offer a refund it had offered two messages earlier. A better retrieval system did nothing for it.
+Without persisted working state, an agent can lose track of what the customer has already been told and repeat an offer from an earlier turn. A better document retriever cannot restore state that was never saved.
 
-What worked was persisting a one-paragraph session summary back into working memory at the start of every turn.
+Persisting a bounded session summary gives the next turn an explicit record to use.
 
-The context window also caps how much working memory you get. Pushing an agent toward 200 turns in a single session, I start seeing degradation even when retrieval is working perfectly, because the model has too much to reason over at once.
+The context window also caps how much working memory is available. As a session grows, test whether early constraints still influence later answers instead of assuming that a successful request proves the full history remains usable.
 
 It is like trying to keep a forty-item grocery list in your head while someone keeps adding to it: past a point you stop holding the early items at all.
 
@@ -46,11 +46,11 @@ Specific experiences live in episodic memory. I think of it as the agent's autob
 
 When a DevOps agent recalls that "the last deployment on Friday failed because the database migration timed out," that is episodic retrieval. The agent is pulling a single event out of its history rather than a general fact about deployments.
 
-Treating episodic memory like a database is the failure mode I run into most. Engineers build retrieval pipelines that query episodic storage with semantic similarity, so when the user asks "what went wrong with my deployments" the agent returns semantically similar past events.
+Treating episodic memory like a topic database creates a retrieval mismatch. A semantic query for "what went wrong with my deployments" can return similar past events when the user needs the latest runs in chronological order.
 
 Almost all of them are useless here, because the user wants a chronological account of the last few runs and gets a topic cluster spanning six months instead.
 
-Why that asymmetry breaks RAG pipelines is something I covered in [asymmetric retrieval and why it breaks your agent memory](/articles/asymmetric-retrieval-agent-memory/). Episodic recall is directional in a way that semantic search has no way to model.
+[RAG versus memory](/articles/rag-vs-memory/) explains why agent-query asymmetry breaks retrieval when task state and stored records use different language. Episodic recall is directional in a way that semantic search alone cannot model.
 
 ### Semantic memory: what is true
 
@@ -115,9 +115,9 @@ My routing rules are far from perfect, and I still catch cross-contamination, li
 
 ## The failure signatures to watch for
 
-Working memory that is too small shows up as the agent losing track of the current task mid-execution, abandoning step three of a five-step migration to re-ask what it was doing. That is the most common failure I see in agent demos.
+Working memory that is too small shows up as the agent losing track of the current task mid-execution, abandoning one step of a migration to re-ask what it was doing.
 
-A better model rarely fixes it. A session summary prepended to the context every turn usually does.
+A larger model does not recreate missing state. A validated session summary can make that state explicit on the next turn.
 
 Wrong episodic retrieval shows up as the agent contradicting itself across sessions. It claims it finished a task it never finished, or reports that a previous approach failed when that approach actually shipped.
 
@@ -135,6 +135,6 @@ These three memory types are no academic distinction. They carry different infor
 
 An agent that files a learned fact the same way it files a past event will fail in predictable ways. An agent that routes information by type stays easier to debug and more reliable in production.
 
-My earlier hierarchy post did not go far enough in pulling these types apart, which is why I wrote this one. For a broader inventory of memory approaches, read [the state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/).
+[AI memory management for LLMs](/articles/ai-memory-management-for-llms/) develops the wider hierarchy, including the inclusion, retrieval, and lifecycle rules that connect these memory types.
 
 What I cared about here is the set of architectural decisions that determine whether your agent's memory actually works.

@@ -27,7 +27,6 @@ sections:
     blurb: "Where RAG stops being enough and how memory retrieval differs from document search."
     posts:
       - rag-vs-memory
-      - asymmetric-retrieval-agent-memory
       - fine-tuning-vs-rag-for-agent-memory
       - contextual-compression-for-agent-memory
   - heading: "Persistence and state"

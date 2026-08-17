@@ -49,3 +49,6 @@
 # Cluster-3 context evidence merge: the reviewed owner carries Lost in the Middle and RULER.
 /articles/beam-memory-benchmark/ /articles/context-windows-vs-memory/ 301
 /blog/beam-memory-benchmark/ /articles/context-windows-vs-memory/ 301
+# Cluster-3 memory-satellite merge: preserve asymmetric and hybrid retrieval at the owner.
+/articles/asymmetric-retrieval-agent-memory/ /articles/rag-vs-memory/ 301
+/blog/asymmetric-retrieval-agent-memory/ /articles/rag-vs-memory/ 301

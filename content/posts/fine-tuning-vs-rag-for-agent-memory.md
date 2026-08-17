@@ -58,7 +58,7 @@ RAG can expose an updated index on the next query. Fine-tuning requires another 
 Standing up retrieval is not free either. You need an embedding model, a vector index, a retrieval pipeline, and reranking logic that keeps the relevant chunk at the top.
 
 
-Compare retrieval overhead with the tool-call and inference traces from the target workflow. The [RAG evaluation metrics that actually matter](/articles/rag-evaluation-metrics-what-actually-matters/) are worth understanding before you build the pipeline, because the metrics you optimize for early will shape what the system gets good at.
+Compare retrieval overhead with the tool-call and inference traces from the target workflow. Define retrieval recall and evidence-use checks before building the pipeline so the evaluation measures the failure the product needs to prevent.
 
 Verifiable sources make the second case for RAG. When an agent cites a refund policy, it should cite the actual clause, with a link a support lead can click.
 
@@ -66,7 +66,7 @@ RAG makes that possible because the retrieved context sits right there in the pr
 
 For a bank or an insurer, citing the source document is not a nice-to-have, it is the thing a compliance review will ask for first.
 
-I wrote about the retrieval accuracy problem in my post on [asymmetric retrieval in agent memory](/articles/asymmetric-retrieval-agent-memory/). The short version: retrieval is harder than it looks, and bad retrieval will undermine your RAG pipeline faster than bad fine-tuning undermines your model.
+[RAG versus memory](/articles/rag-vs-memory/) now treats agent-query asymmetry as part of the retrieval boundary. If the expected records do not reach the prompt, the model cannot ground the answer in them.
 
 ## When Fine-Tuning Earns Its Cost
 

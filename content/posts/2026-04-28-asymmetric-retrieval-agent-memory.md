@@ -4,7 +4,7 @@ date: '2026-04-28'
 description: The retrieval patterns that work for a query do not work when the agent
   is the one retrieving, and this asymmetry silently breaks production RAG systems.
 slug: asymmetric-retrieval-agent-memory
-status: published
+status: merged
 tags:
 - ai-agents
 - agent-memory
