@@ -2,18 +2,18 @@ slug: ai-agent-memory
 status: published
 title: "AI Agent Memory: A Practical Guide to Persistence, Recall, and Forgetting"
 h1: "AI Agent Memory"
-description: "How production AI agents store, retrieve, and forget information. A practitioner's guide to memory architecture, from context windows to episodic recall, backed by benchmarks."
+description: "How production AI agents store, retrieve, and forget information. A guide to memory architecture, from context windows to episodic recall and persistent state."
 intro: |
   A context window is not memory. An agent that re-reads its entire history on every
-  turn pays for recall it does not get, and it still forgets what happened last Tuesday.
+  turn pays to process that history again without guaranteeing recall, and it still
+  forgets what happened last Tuesday.
   Real agent memory is a system with layers, eviction policies, and retrieval that
   behaves differently from plain document search.
 
-  I have built memory into customer-support agents, profiled where it breaks, and read
-  the architectures behind Claude Code, DeerFlow, and HyperAgents. The posts below trace
-  the whole stack, from what memory even means for an agent to the failure modes that
-  take down a deployment. Start with the fundamentals, then follow the thread into
-  retrieval, persistence, and the state of the field in 2026.
+  The posts below trace the whole stack, from what memory means for an agent to the
+  failure modes that take down a deployment. Start with the fundamentals, then follow
+  the thread into retrieval, persistence, framework implementations, and the state of
+  the field in 2026.
 
 sections:
   - heading: "Fundamentals"
@@ -47,10 +47,9 @@ sections:
       - how-memory-works-in-claude-code
       - how-memory-works-in-deerflow
       - how-memory-works-in-hyperagents
-  - heading: "Benchmarks and state of the field"
-    blurb: "What the data shows and where the ecosystem is heading."
+  - heading: "State of the field"
+    blurb: "Where agent-memory architectures and tooling are heading."
     posts:
-      - beam-memory-benchmark
       - state-of-ai-agent-memory-2026
 
 faqs:

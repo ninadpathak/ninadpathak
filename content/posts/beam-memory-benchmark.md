@@ -3,7 +3,7 @@ category: ai-engineering
 date: 2026-04-19
 description: Long-context models can still miss information placed in the middle of
   a prompt. RULER and Lost in the Middle show how to test that failure.
-status: published
+status: merged
 tags:
 - ai
 - llm

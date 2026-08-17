@@ -227,9 +227,9 @@ The stack becomes easier to judge inside one workload. A support workflow forces
 
 ## Related articles
 
-This cluster of articles covers the full AI memory stack. For understanding context windows vs memory, see [context windows vs memory](/articles/context-windows-vs-memory/).
+This cluster of articles covers the full AI memory stack. [Context windows vs memory](/articles/context-windows-vs-memory/) explains the boundary and includes long-context evaluation with Lost in the Middle and RULER.
 
-For long-context evaluation, read [why long context windows still lose information in the middle](/articles/beam-memory-benchmark/). For implementation patterns, see [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).
+For implementation patterns, see [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).
 
 For short-term memory specifically, see [short-term memory for AI agents](/articles/short-term-memory-for-ai-agents/).
 
