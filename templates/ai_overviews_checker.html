@@ -1,38 +1,19 @@
 {% extends "base.html" %}
 
-{#
-  ============================================================================
-  TODO(copy) — ALL prose on this page is placeholder and must be commissioned.
-  Every slot carrying a TODO(copy) marker is factual scaffolding written only so
-  the page builds and functions. None of it is search copy.
-  Full brief with keyword targets and character limits:
-  planning/research/TOOL-COPY-BRIEF.md
-  Primary keyword: "ai overviews checker" (700/mo, KD 0, no AI Overview on the
-  SERP as of the 2026-08-17 recompute).
-  ============================================================================
-#}
+{% block title %}AI Overviews Checker: Test Extractability | Ninad Pathak{% endblock %}
 
-{# TODO(copy) 1: <title>, 50-60 chars, must contain "AI Overviews checker" #}
-{% block title %}AI Overviews Checker | Ninad Pathak{% endblock %}
-
-{# TODO(copy) 2: meta description, 140-155 chars. Must not promise AI Overview
-   placement: Google states there are no special optimisations for it. #}
-{% block description %}Check how extractable a page is for AI Overviews and answer engines. Nine structural checks, each with its source. Runs in the browser. No signup.{% endblock %}
+{% block description %}Check a page with nine sourced structural checks for snippet eligibility and extractability. Runs in your browser and never predicts AI Overview placement.{% endblock %}
 
 {% block canonical %}/ai-overviews-checker/{% endblock %}
 {% block og_url %}/ai-overviews-checker/{% endblock %}
 
-{# TODO(copy) 3: og:title, under 60 chars #}
-{% block og_title %}AI Overviews Checker{% endblock %}
+{% block og_title %}AI Overviews Checker: Test Extractability{% endblock %}
 
-{# TODO(copy) 4: og:description, 110-130 chars #}
-{% block og_description %}Nine structural checks on whether a page's answers can be lifted cleanly by an answer engine. Each check cites its source.{% endblock %}
+{% block og_description %}Check page extractability with nine sourced structural checks. The tool reports what it finds, not a placement prediction.{% endblock %}
 
-{# TODO(copy) 5: twitter:title, under 60 chars #}
-{% block tw_title %}AI Overviews Checker{% endblock %}
+{% block tw_title %}AI Overviews Checker: Test Extractability{% endblock %}
 
-{# TODO(copy) 6: twitter:description, under 120 chars #}
-{% block tw_desc %}Check whether a page's answers can be lifted cleanly by an answer engine. Free, browser-based, no signup.{% endblock %}
+{% block tw_desc %}Check page extractability with nine sourced structural checks. No placement prediction.{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="/static/css/linter.css">
@@ -116,11 +97,8 @@
 <section class="page-intro">
   <div class="container">
     <div class="label">Tool</div>
-    {# TODO(copy) 7: H1, must contain "AI Overviews checker" #}
     <h1>AI Overviews Checker</h1>
-    {# TODO(copy) 8: lead paragraph, 2 sentences. State plainly that this measures
-       extractability and does not predict placement. #}
-    <p class="lead">Paste a page or enter a URL. Nine structural checks report whether an answer engine could lift this page's answers cleanly, and each one names the source it rests on.</p>
+    <p class="lead">The AI Overviews Checker tests a page against nine sourced checks for snippet eligibility and extractable answers. It measures page structure and does not predict AI Overview placement.</p>
   </div>
 </section>
 
@@ -133,8 +111,7 @@
       </label>
       <button class="btn btn-primary scan-submit" type="submit">Fetch and check &rarr;</button>
     </form>
-    {# TODO(copy) 9: one-sentence hint below the URL field #}
-    <p class="tool-hint">Fetching a URL reads its HTML and response headers, which is the only way to check snippet eligibility. Pasting content instead keeps it in your browser.</p>
+    <p class="tool-hint">Fetching a URL is the only way to check snippet eligibility because the tool needs its HTML and response headers; pasted content stays in your browser.</p>
     <div class="tool-status" id="aioUrlStatus" role="status" aria-live="polite"></div>
   </div>
 </section>
@@ -183,8 +160,7 @@
           <div class="linter-empty" id="aioEmpty">
             <div class="linter-empty-inner">
               <div class="linter-empty-icon">{ }</div>
-              {# TODO(copy) 10: empty-state line #}
-              <p>Results appear here once you run the checks.</p>
+              <p>Run the checks to inspect this page.</p>
             </div>
           </div>
 
@@ -213,33 +189,29 @@
   <div class="container">
     <div class="linter-rules-header">
       <div class="label">Method</div>
-      {# TODO(copy) 11: H2 for the method section #}
-      <h2>What each check is based on</h2>
+      <h2>The evidence behind each check</h2>
     </div>
     <div class="linter-rules-grid">
 
       <div>
         <div class="lint-severity-badge lint-severity-error">documented requirement</div>
-        {# TODO(copy) 12: review for voice only. The claims below are load-bearing
-           and each is sourced. Do not soften them and do not add any claim that
-           llms.txt, schema, or markup improves AI Overview placement. #}
         <ul class="linter-rule-list">
-          <li><strong>Snippets are not blocked</strong> &mdash; Google's generative-AI guidance, updated 10 July 2026, states that to be eligible for generative AI features a page must be indexed and eligible to be shown with a snippet. A <code>nosnippet</code> directive, a non-negative <code>max-snippet</code>, or <code>noindex</code> removes that eligibility, in a meta tag or in the <code>X-Robots-Tag</code> header. This is the only check here that restates a requirement.</li>
-          <li><strong>Structured data</strong> &mdash; Reported as information, never as a requirement. The same guidance states structured data is not required and there is no special schema.org markup to add. It still matters for rich results in ordinary search.</li>
+          <li><strong>Snippets are not blocked.</strong> Google's generative AI guidance, updated 10 July 2026, says a page must be indexed and eligible for a Google Search snippet before it can be eligible for generative AI features. A <code>nosnippet</code> directive, a non-negative <code>max-snippet</code>, or <code>noindex</code> removes that eligibility, whether it appears in a meta tag or an <code>X-Robots-Tag</code> header.</li>
+          <li><strong>Structured data.</strong> The tool reports its presence as information, not as an AI Overview requirement. Google's guidance says structured data is not required for generative AI search and there is no special schema.org markup to add, though it can still support ordinary rich results.</li>
         </ul>
       </div>
 
       <div>
         <div class="lint-severity-badge lint-severity-warning">structural heuristic</div>
         <ul class="linter-rule-list">
-          <li><strong>A direct answer opens the page</strong> &mdash; Nielsen Norman Group, 11 February 2018: the most important information, or the conclusion, comes first. A page opening on scene-setting offers an engine scene-setting to quote.</li>
-          <li><strong>Headings ask or assert</strong> &mdash; Nielsen Norman Group, 25 August 2019: reading headings alone is the most effective way people scan a page, and the F-pattern is what happens when subheadings are absent. A heading read in isolation has to carry the point.</li>
-          <li><strong>Sections open by naming their subject</strong> &mdash; A snippet is a passage, so a passage that leans on the sentence before it cannot be lifted intact.</li>
-          <li><strong>A definition can be lifted cleanly</strong> &mdash; Definitional answers are assembled from short self-contained sentences, observed in SERP pulls for this niche on 17 August 2026.</li>
-          <li><strong>The page and its claims are dated</strong> &mdash; The low-authority page Google cited in its AI Overview for <code>docs as code</code> carried both a publish date and a visible revision date, recorded 17 August 2026.</li>
-          <li><strong>Quantified claims name a source</strong> &mdash; The Quality Rater Guidelines of 10 September 2025 name a lack of effort and first-hand experience a Low-quality criterion, illustrated by content paraphrased from elsewhere.</li>
-          <li><strong>Numbers say what they count</strong> &mdash; A quantity with no unit, period, or noun stops meaning anything once the page around it is gone.</li>
-          <li><strong>The page states where it does not apply</strong> &mdash; Trust is the most important E-E-A-T component in the same guidelines, and the cited page above devoted a section to answering specific objections.</li>
+          <li><strong>A direct answer opens the page.</strong> Nielsen Norman Group wrote on 11 February 2018 that the most important information, or the conclusion, should come first. An opening that only sets the scene gives a reader or an engine no answer to take away.</li>
+          <li><strong>Headings ask or assert.</strong> Nielsen Norman Group wrote on 25 August 2019 that reading headings alone is the most effective way people scan a page. A heading read on its own should carry a question or a claim.</li>
+          <li><strong>Sections open by naming their subject.</strong> A passage that relies on the previous paragraph for its subject cannot stand on its own. This is a structural heuristic, not a placement signal.</li>
+          <li><strong>A definition can be lifted cleanly.</strong> Definitional answers appeared as short, self-contained sentences in the niche SERPs recorded on 17 August 2026. The check looks for that shape without claiming Google rewards it.</li>
+          <li><strong>The page and its claims are dated.</strong> A page cited in the <code>docs as code</code> AI Overview carried a publication date and a visible revision date when the result was recorded on 17 August 2026. That observation supports showing dates, not a claim that dates cause citation.</li>
+          <li><strong>Quantified claims name a source.</strong> Google's Quality Rater Guidelines dated 10 September 2025 treat a lack of effort and first-hand experience as a Low-quality criterion. A nearby source lets a reader inspect the evidence behind a number.</li>
+          <li><strong>Numbers say what they count.</strong> A number loses its meaning outside the page when it does not name its unit, period, or subject.</li>
+          <li><strong>The page states where it does not apply.</strong> The same Quality Rater Guidelines call trust the most important part of E-E-A-T. A stated limitation gives the reader a boundary they can check.</li>
         </ul>
       </div>
 
@@ -260,27 +232,34 @@
 <section class="guide-section">
   <div class="prose-container">
     <div class="label">Reference</div>
-    {# TODO(copy) 13: this whole section, roughly 300-450 words. Cover: what
-       extractability means, why snippet eligibility is the only hard gate, and
-       why a scored prediction would be dishonest. Do not claim placement can be
-       engineered. See planning/research/seo-state-of-play-2026-08.md sections
-       2.1 and 2.2. #}
     <h2>Extractability is not a ranking factor</h2>
-    <p>An answer engine quotes a passage, not a page. Everything this tool checks follows from that one fact: a passage that names its subject, states its claim, and carries its own date and units can be lifted intact, and a passage that depends on the paragraph above it cannot.</p>
+    <p>Extractability describes whether a passage still makes sense after it is lifted out of its page. A useful passage names its subject, states the answer, and keeps the source, date, and unit close enough for a reader to verify the claim.</p>
+
+    <p>That structure helps people scan and quote a page, but Google does not call it a ranking factor. The checks here inspect the text that is present; they do not measure authority, query relevance, or the systems Google uses to assemble an AI Overview.</p>
+
+    <h2>Snippet eligibility is the only hard gate checked here</h2>
+    <p>Google's generative AI guidance, updated 10 July 2026, says a page must be indexed and eligible to appear in Google Search with a snippet. That makes snippet eligibility a documented requirement, unlike the tool's structural heuristics.</p>
+
+    <p>A live URL check can read the HTML and the <code>X-Robots-Tag</code> response header, so it can detect directives that block or restrict snippets. Paste mode cannot see response headers and skips the checks that need them.</p>
+
+    <h2>Why this checker does not predict placement</h2>
+    <p>Google states that AI Overviews and AI Mode have no additional requirements and need no special optimisation. It also says structured data is not required for generative AI search, so the presence of schema is reported as information rather than evidence of likely placement.</p>
+
+    <p>The result is a count of checks, not a calibrated probability. I would need published outcome data showing how much each check changes placement before a weighted score could mean anything, and that evidence does not exist for this tool.</p>
 
     <h2>Frequently asked questions</h2>
     <div class="faq-list">
       <details>
         <summary>Can any tool predict AI Overview placement?</summary>
-        <p>No. Google states there are no additional requirements to appear in AI Overviews or AI Mode, and no special optimisations necessary. A tool reporting a probability is inventing it.</p>
+        <p>No. Google states there are no additional requirements for AI Overviews or AI Mode and no special optimisation is necessary. This tool reports page structure and snippet eligibility, not a probability.</p>
       </details>
       <details>
         <summary>Does schema markup help?</summary>
-        <p>Not for generative AI features. Google's guidance states structured data is not required and there is no special markup to add. It still earns rich results in ordinary search, so it is reported here as information.</p>
+        <p>Google's guidance says structured data is not required for generative AI search and there is no special markup to add. Schema can still support ordinary rich results, so the checker reports its presence as information.</p>
       </details>
       <details>
         <summary>What actually blocks a page?</summary>
-        <p>Snippet eligibility. A <code>nosnippet</code> directive, a non-negative <code>max-snippet</code>, or <code>noindex</code> makes a page ineligible, whether it arrives in a meta tag or the <code>X-Robots-Tag</code> header.</p>
+        <p>A page must be indexed and eligible for a Google Search snippet before it can be eligible for Google's generative AI features. The live URL check looks for directives that remove or restrict that eligibility.</p>
       </details>
       <details>
         <summary>Is pasted content uploaded?</summary>

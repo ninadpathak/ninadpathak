@@ -1,35 +1,19 @@
 {% extends "base.html" %}
 
-{#
-  ============================================================================
-  TODO(copy) — ALL prose on this page is placeholder and must be commissioned.
-  Every slot below carrying a TODO(copy) marker is factual scaffolding written
-  only so the page builds and functions. None of it is search copy.
-  The exact brief, with keyword targets and character limits, is in
-  planning/research/LLMS-TXT-COPY-BRIEF.md.
-  ============================================================================
-#}
+{% block title %}llms.txt Validator: Check Your File | Ninad Pathak{% endblock %}
 
-{# TODO(copy) 1: <title>, 50-60 chars, primary target "llms.txt validator" #}
-{% block title %}llms.txt Validator | Ninad Pathak{% endblock %}
-
-{# TODO(copy) 2: meta description, 140-155 chars #}
-{% block description %}Check an llms.txt file against the llms.txt v2 spec. Paste the file or enter a domain, and get graded findings. Runs in the browser. No signup.{% endblock %}
+{% block description %}Validate llms.txt against the v2 proposal. Paste a file or fetch one from a domain, then separate spec requirements from conventions in your browser.{% endblock %}
 
 {% block canonical %}/llms-txt-validator/{% endblock %}
 {% block og_url %}/llms-txt-validator/{% endblock %}
 
-{# TODO(copy) 3: og:title, under 60 chars #}
-{% block og_title %}llms.txt Validator{% endblock %}
+{% block og_title %}llms.txt Validator: Check Your File{% endblock %}
 
-{# TODO(copy) 4: og:description, 110-130 chars #}
-{% block og_description %}Validate an llms.txt file against the spec. Paste a file or check a live domain, and get graded findings.{% endblock %}
+{% block og_description %}Validate llms.txt against the v2 proposal. Separate required structure from conventions before you publish the file.{% endblock %}
 
-{# TODO(copy) 5: twitter:title, under 60 chars #}
-{% block tw_title %}llms.txt Validator{% endblock %}
+{% block tw_title %}llms.txt Validator: Check Your File{% endblock %}
 
-{# TODO(copy) 6: twitter:description, under 120 chars #}
-{% block tw_desc %}Validate an llms.txt file against the spec. Free, browser-based, no signup.{% endblock %}
+{% block tw_desc %}Check llms.txt against the v2 proposal. See which findings come from the spec and which are conventions.{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="/static/css/linter.css">
@@ -100,10 +84,8 @@
 <section class="page-intro">
   <div class="container">
     <div class="label">Tool</div>
-    {# TODO(copy) 7: H1, must contain "llms.txt validator" #}
     <h1>llms.txt Validator</h1>
-    {# TODO(copy) 8: lead paragraph, 2 sentences #}
-    <p class="lead">Paste an llms.txt file or enter a domain. Get graded findings against the llms.txt v2 spec, with each one marked as a spec requirement or a convention.</p>
+    <p class="lead">The llms.txt validator checks a pasted file or one fetched from a domain against the v2 proposal. Every finding says whether it comes from the specification or from a convention.</p>
   </div>
 </section>
 
@@ -116,8 +98,7 @@
       </label>
       <button class="btn btn-primary scan-submit" type="submit">Fetch llms.txt &rarr;</button>
     </form>
-    {# TODO(copy) 9: one-sentence hint below the domain field #}
-    <p class="tool-hint">Fetches the file at the domain root and loads it below. Pasting a file instead keeps it in your browser.</p>
+    <p class="tool-hint">A domain check fetches its root <code>/llms.txt</code> file; pasted text stays in your browser.</p>
     <div class="tool-status" id="validatorDomainStatus" role="status" aria-live="polite"></div>
   </div>
 </section>
@@ -166,8 +147,7 @@
           <div class="linter-empty" id="validatorEmpty">
             <div class="linter-empty-inner">
               <div class="linter-empty-icon">{ }</div>
-              {# TODO(copy) 10: empty-state line #}
-              <p>Findings appear here once you validate a file.</p>
+              <p>Validate a file to see its findings.</p>
             </div>
           </div>
 
@@ -196,48 +176,44 @@
   <div class="container">
     <div class="linter-rules-header">
       <div class="label">Rules</div>
-      {# TODO(copy) 11: H2 for the rules reference #}
-      <h2>What gets checked</h2>
+      <h2>Requirements and conventions checked</h2>
     </div>
     <div class="linter-rules-grid">
 
       <div>
         <div class="lint-severity-badge lint-severity-error">error</div>
-        {# TODO(copy) 12: rule descriptions below are factual and may stand, but
-           review for voice. The rule names themselves must not change: they are
-           asserted by tests/test_llms_txt_validator.py. #}
         <ul class="linter-rule-list">
-          <li><strong>Missing H1</strong> &mdash; The spec calls an H1 naming the project or site its only required section.</li>
-          <li><strong>Second H1</strong> &mdash; One H1 per file. File-list sections are delimited by H2.</li>
-          <li><strong>Content before the H1</strong> &mdash; The order is fixed: optional byte-order mark, H1, then the summary.</li>
-          <li><strong>Headings in the detail region</strong> &mdash; Between the summary and the first H2, the spec allows any markdown except headings.</li>
-          <li><strong>Nested headings in a section</strong> &mdash; File lists sit under H2 only.</li>
-          <li><strong>List item without a link</strong> &mdash; Each file-list item requires a markdown hyperlink.</li>
-          <li><strong>Malformed link</strong> &mdash; The required form is a name in brackets followed immediately by a URL in parentheses.</li>
-          <li><strong>Empty link name or URL</strong> &mdash; Both halves of the hyperlink carry meaning for an agent.</li>
+          <li><strong>Missing H1.</strong> The proposal calls an H1 naming the project or site its only required section.</li>
+          <li><strong>Second H1.</strong> The file has one H1; file-list sections use H2 headings.</li>
+          <li><strong>Content before the H1.</strong> The defined order starts with an optional byte-order mark and then the H1.</li>
+          <li><strong>Headings in the detail region.</strong> Between the summary and the first H2, the proposal permits any Markdown except headings.</li>
+          <li><strong>Nested headings in a section.</strong> File lists sit directly under H2 headings.</li>
+          <li><strong>List item without a link.</strong> Each item in a file-list section contains a Markdown link.</li>
+          <li><strong>Malformed link.</strong> The expected form puts a name in brackets immediately before a URL in parentheses.</li>
+          <li><strong>Empty link name or URL.</strong> A link needs both a label and a destination.</li>
         </ul>
       </div>
 
       <div>
         <div class="lint-severity-badge lint-severity-warning">warning</div>
         <ul class="linter-rule-list">
-          <li><strong>No summary blockquote</strong> &mdash; Permitted, and it is what an agent reads to interpret the rest of the file.</li>
-          <li><strong>Summary not next to the H1</strong> &mdash; The spec places the blockquote before any free-form detail.</li>
-          <li><strong>Relative URL</strong> &mdash; An agent may read the file without knowing its base.</li>
-          <li><strong>Insecure URL</strong> &mdash; A link over http rather than https.</li>
-          <li><strong>Duplicate URL</strong> &mdash; The same target twice spends an agent's context twice.</li>
-          <li><strong>Empty section</strong> &mdash; An H2 with no list items gives an agent nothing to fetch.</li>
-          <li><strong>Repeated section name</strong> &mdash; Two sections with one name should be merged.</li>
-          <li><strong>Optional section out of place</strong> &mdash; By convention it holds links an agent can skip, so it belongs last.</li>
-          <li><strong>Prose inside a file-list section</strong> &mdash; Detail belongs above the first H2.</li>
+          <li><strong>No summary blockquote.</strong> The summary is optional, but it gives an agent context for the links below it.</li>
+          <li><strong>Summary not next to the H1.</strong> The proposal places the blockquote before any free-form detail.</li>
+          <li><strong>Relative URL.</strong> An agent may read the file without knowing the base URL needed to resolve it.</li>
+          <li><strong>Insecure URL.</strong> The link uses <code>http</code> rather than <code>https</code>.</li>
+          <li><strong>Duplicate URL.</strong> The same destination appears more than once.</li>
+          <li><strong>Empty section.</strong> The H2 has no links for an agent to fetch.</li>
+          <li><strong>Repeated section name.</strong> Two H2 sections use the same name.</li>
+          <li><strong>Optional section out of place.</strong> Convention reserves this section for links an agent can skip, so it belongs last.</li>
+          <li><strong>Prose inside a file-list section.</strong> Free-form detail belongs before the first H2.</li>
         </ul>
       </div>
 
       <div>
         <div class="lint-severity-badge lint-severity-info">info</div>
         <ul class="linter-rule-list">
-          <li><strong>Link without notes</strong> &mdash; Notes are optional in the spec, and they tell an agent why a link is worth fetching.</li>
-          <li><strong>Byte-order mark present</strong> &mdash; Explicitly permitted, and not required.</li>
+          <li><strong>Link without notes.</strong> Notes are optional, but they can tell an agent what it will find at the link.</li>
+          <li><strong>Byte-order mark present.</strong> The proposal permits a byte-order mark but does not require one.</li>
         </ul>
       </div>
 
@@ -248,38 +224,40 @@
 <section class="guide-section">
   <div class="prose-container">
     <div class="label">Reference</div>
-    {# TODO(copy) 13: this whole section, roughly 250-400 words. It must cover the
-       spec's ordered structure and the fact that only the H1 is required. Do not
-       claim llms.txt improves AI visibility: Google's generative-AI guidance
-       (updated 2026-07-10) states Google Search ignores these files. See
-       planning/research/seo-state-of-play-2026-08.md section 2.2. #}
     <h2>What the spec requires</h2>
-    <p>The llms.txt v2 proposal defines an ordered structure. Only the first heading is required, which means most files are technically valid and still leave an agent guessing.</p>
+    <p>The llms.txt v2 proposal defines an ordered Markdown file that points an agent to useful pages. Only the H1 naming the project or site is required, so a file can satisfy the proposal while offering little context.</p>
+
+    <p>Everything after the H1 is optional. The proposed order is a blockquote summary, free-form detail without headings, and H2 sections containing lists of links.</p>
 
     <ol class="numbered-steps">
-      <li><strong>An H1 naming the project or site.</strong> The only required section.</li>
-      <li><strong>A blockquote summary.</strong> Short, and carrying what a reader needs to interpret the rest of the file.</li>
-      <li><strong>Free-form detail.</strong> Any markdown except headings.</li>
-      <li><strong>H2 file-list sections.</strong> Each item a markdown link, optionally followed by a colon and notes.</li>
+      <li><strong>An H1 naming the project or site.</strong> This is the only required part.</li>
+      <li><strong>A blockquote summary.</strong> It gives an agent the context needed to interpret the file.</li>
+      <li><strong>Free-form detail.</strong> This region may contain any Markdown except headings.</li>
+      <li><strong>H2 file-list sections.</strong> Each item is a Markdown link, optionally followed by a colon and notes.</li>
     </ol>
+
+    <h2>What validation does not prove</h2>
+    <p>A valid llms.txt file does not prove that an AI system will fetch it, use it, or cite the pages it lists. Validation only tells you how the file compares with the proposal and with clearly labelled conventions.</p>
+
+    <p>Google's generative AI guidance, updated 10 July 2026, says Google Search does not use AI text files and that creating one will neither help nor harm visibility or rankings. Use this validator when you have chosen to publish llms.txt, not as evidence that the file improves AI visibility.</p>
 
     <h2>Frequently asked questions</h2>
     <div class="faq-list">
       <details>
         <summary>What does the spec actually require?</summary>
-        <p>One H1 naming the project or site. Everything else is permitted rather than mandatory, so this validator reports most issues as warnings and marks each finding as resting on the spec or on convention.</p>
+        <p>Only one H1 naming the project or site is required. The validator labels every other finding so you can distinguish the proposal's structure from a convention.</p>
       </details>
       <details>
         <summary>Is a pasted file uploaded anywhere?</summary>
-        <p>No. Pasted text is validated in the page and never transmitted. The domain check is the only request that leaves the browser, and it carries the domain alone.</p>
+        <p>No. The page validates pasted text in your browser. A domain check sends the domain to the site's fetch endpoint because the browser cannot read another origin directly.</p>
       </details>
       <details>
         <summary>Where should the file live?</summary>
-        <p>At <code>/llms.txt</code>, or at any subpath such as <code>/docs/llms.txt</code>. A file covers the URLs beneath its own path.</p>
+        <p>Publish it at <code>/llms.txt</code>, or at a subpath such as <code>/docs/llms.txt</code>. A file applies to URLs beneath its own path.</p>
       </details>
       <details>
         <summary>Does llms.txt control AI crawlers?</summary>
-        <p>No. It is read on demand for context, not for access control. Crawler permissions belong in <code>robots.txt</code>, where the citation and training user agents differ per platform.</p>
+        <p>No. The file offers context and links; it does not grant or deny crawler access. Put crawler permissions in <code>robots.txt</code>.</p>
       </details>
     </div>
   </div>

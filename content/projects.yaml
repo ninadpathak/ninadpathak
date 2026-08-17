@@ -1,33 +1,22 @@
 projects:
-  # TODO(copy) C: description for the checker, one sentence, same register as its
-  # siblings. Must not imply it predicts AI Overview placement.
   - title: "AI Overviews Checker"
-    description: "Check whether a page's answers are structured to be extracted by AI Overviews and answer engines, with the dated source behind every check."
+    description: "Test a page against nine sourced checks for snippet eligibility and extractable answers, without turning the result into a placement prediction."
     url: "/ai-overviews-checker/"
     tech_stack:
       - "Vanilla JS"
       - "Browser-only checks"
     category: "SEO / AI Retrieval"
     status: "Live"
-  # TODO(copy) A: this description previously ended "without sending site data to a
-  # server". That is false and falsifiable with devtools open: scanning POSTs the
-  # domain and the discovered page URLs to /api/discover-site, because a browser
-  # cannot read another origin's sitemap. Per charter 2c the claim was removed
-  # rather than softened. Needs a replacement clause that is accurate about what
-  # is and is not transmitted. Also drop or justify the "Local-only" tech tag,
-  # which carries the same implication.
   - title: "llms.txt Generator"
-    description: "Scan a website's sitemap, review each page's title and description, then preview, copy, and download an editable llms.txt file."
+    description: "Send a domain and its discovered page URLs to the site scanner, then review, edit, copy, or download the generated llms.txt file in your browser."
     url: "/llms-txt-generator/"
     tech_stack:
       - "Vanilla JS"
       - "Cloudflare Pages Function"
     category: "SEO / AI Retrieval"
     status: "Live"
-  # TODO(copy) B: description for the validator, one sentence, same register as
-  # its siblings. Must not imply llms.txt improves AI visibility.
   - title: "llms.txt Validator"
-    description: "Check an llms.txt file against the llms.txt v2 spec and get graded findings, with each one marked as a spec requirement or a convention."
+    description: "Check a pasted or fetched llms.txt file against the v2 proposal, with every finding labelled as a requirement or a convention."
     url: "/llms-txt-validator/"
     tech_stack:
       - "Vanilla JS"
