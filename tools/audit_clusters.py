@@ -166,6 +166,34 @@ def main() -> int:
     for slug in thin:
         print(f"  [{posts[slug]['cluster']}] {slug}  ({outbound[slug]} out)")
 
+    # The glossary is 25 substantial pages, 24 of them indexed with real positions, and it
+    # was invisible to this audit because the audit only reads content/posts. It shipped
+    # completely orphaned: not in nav or footer, and no page outside /glossary/ linked to it.
+    # Report it rather than leaving a whole section unchecked.
+    glossary_index = OUTPUT / "glossary" / "index.html"
+    if glossary_index.is_file():
+        terms = sorted(d.name for d in (OUTPUT / "glossary").iterdir()
+                       if d.is_dir() and (d / "index.html").is_file())
+        linked_from = set()
+        for page in OUTPUT.rglob("*.html"):
+            rel = page.relative_to(OUTPUT).as_posix()
+            if rel.startswith("glossary/") or is_listing(page):
+                continue
+            try:
+                html = page.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            for target in set(re.findall(r'href="/glossary/([a-z0-9-]+)/"', html)):
+                linked_from.add(target)
+        unlinked = [term for term in terms if term not in linked_from]
+        print(f"\n--- glossary: {len(terms)} term(s), "
+              f"{len(terms) - len(unlinked)} linked from outside the glossary ---")
+        if unlinked:
+            print("Terms nothing outside /glossary/ links to. A term page nobody references")
+            print("from a body sentence is a page that ranks for nothing:")
+            for term in unlinked:
+                print(f"  {term}")
+
     print(f"\n--- cross-cluster links: {len(crossings)} ---")
     print("Each needs the subject-of-the-sentence test applied by a reader. Not auto-fixable.")
     for src, sc, dst, dc, anchor, sentence in crossings:

@@ -213,6 +213,19 @@ class ToolDiscoverabilityTests(unittest.TestCase):
         self.assertIn('slug = "llms-txt-generator"', config)
         self.assertIn('slug = "llms-txt-validator"', config)
 
+    def test_footer_reaches_the_glossary(self):
+        """25 term pages, 24 of them indexed, shipped completely orphaned.
+
+        Not in nav, not in the footer, and no page outside /glossary/ linked to any term.
+        The section was reachable only from the sitemap and llms.txt, which is exactly the
+        failure that left the llms.txt generator with three lifetime impressions. One
+        footer destination fixes the section; body links to individual terms are separate
+        work and are reported by tools/audit_clusters.py.
+        """
+        base_html = (self.repo_root / "templates" / "base.html").read_text(encoding="utf-8")
+        self.assertIn('href="/glossary/"', base_html,
+                      "the glossary needs one footer destination or the whole section is orphaned")
+
     def test_tools_index_lists_every_built_tool(self):
         """The inventory in config.toml must match the tools the build actually renders."""
         # Same fallback build.py uses: tomllib is 3.11+, and the Cloudflare build image
