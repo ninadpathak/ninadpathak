@@ -69,8 +69,10 @@ falsified as the final primary rule. No search-engine lookup or hand-picked
 replacement is allowed. The replacement must mechanically test qualified docs
 labels and supported-generator homepages, preserve resolution strata, and pass
 inspection before any code crawl. The replacement resolves 80/100 in three
-strata (63 label, 5 declared homepage, 12 repository homepage). All 80 roots must
-still pass live redirect/generator inspection before page sampling starts.
+strata (63 label, 5 declared homepage, 12 repository homepage). Live inspection
+then leaves 76 crawl-eligible roots: two declared URLs fail and two successful
+pages have unsupported generators. The four exclusions are not search-backfilled;
+see `ROOT-INSPECTION-2026-08-17.md`.
 
 ## Page sampling
 
@@ -89,6 +91,12 @@ The full run must freeze this stage before parsing any result:
    sorted links and cap at 50 pages. Report sitemap and crawl populations
    separately because their selection mechanisms differ.
 6. Freeze response bytes, final URL, status, content type, fetch time, and SHA-256.
+
+Across projects, canonical page URLs are deduplicated before fetching and before
+the pooled block-weighted calculation. A page remains attached to every project
+whose independent deterministic sample selected it. This matters for the three
+observed shared hosts (`pyasn1`, gRPC, and Pydantic); a unique-corpus sensitivity
+result is reported alongside the project-weighted result.
 
 The cap makes the result a page sample, not a census of every block on every
 documentation site. The publication must use that wording.

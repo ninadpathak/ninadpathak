@@ -211,5 +211,72 @@ class DocumentationResolutionTests(unittest.TestCase):
         self.assertIsNone(self.module.choose_github_repo({"Source": "https://gitlab.com/acme/pkg"}))
 
 
+class DocumentationRootInspectionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        module_path = STUDY_DIR / "inspect_docs_roots.py"
+        spec = importlib.util.spec_from_file_location("inspect_docs_roots", module_path)
+        cls.module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        sys.modules[spec.name] = cls.module
+        spec.loader.exec_module(cls.module)
+
+    def test_selected_url_requires_a_resolved_object(self):
+        self.assertEqual(
+            self.module.selected_url({"selected_docs": {"url": "https://docs.example.test/"}}),
+            "https://docs.example.test/",
+        )
+        with self.assertRaises(ValueError):
+            self.module.selected_url({"selected_docs": None})
+
+    def test_relative_canonical_is_resolved_against_final_url(self):
+        soup = extractor.BeautifulSoup(
+            '<html><head><link rel="canonical alternate" href="../guide/"></head></html>',
+            "html.parser",
+        )
+        self.assertEqual(
+            self.module.canonical_url(soup, "https://docs.example.test/pkg/index.html"),
+            "https://docs.example.test/guide/",
+        )
+
+    def test_shared_hosts_are_candidates_not_automatic_deduplication(self):
+        rows = [
+            {
+                "rank": 3,
+                "project": "beta",
+                "inspection": {
+                    "final_host": "docs.example.test",
+                    "canonical_host": None,
+                    "final_url": "https://docs.example.test/beta/",
+                    "canonical_url": None,
+                },
+            },
+            {
+                "rank": 1,
+                "project": "alpha",
+                "inspection": {
+                    "final_host": "docs.example.test",
+                    "canonical_host": "docs.example.test",
+                    "final_url": "https://docs.example.test/alpha/",
+                    "canonical_url": "https://docs.example.test/alpha/",
+                },
+            },
+            {
+                "rank": 2,
+                "project": "solo",
+                "inspection": {
+                    "final_host": "solo.example.test",
+                    "canonical_host": None,
+                    "final_url": "https://solo.example.test/",
+                    "canonical_url": None,
+                },
+            },
+        ]
+        groups = self.module.candidate_shared_hosts(rows)
+        self.assertEqual(len(groups), 1)
+        self.assertEqual(groups[0]["host"], "docs.example.test")
+        self.assertEqual([item["project"] for item in groups[0]["projects"]], ["alpha", "beta"])
+
+
 if __name__ == "__main__":
     unittest.main()

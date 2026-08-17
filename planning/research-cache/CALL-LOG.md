@@ -400,3 +400,21 @@ Decision: do not crawl yet. All 80 roots still need live redirect/generator
 inspection, and related-package corpora need an overlap rule before page
 sampling. Outputs: `docs-resolution-v2-2026-08-17.json` and
 `docs-resolution-v3-2026-08-17.json`.
+
+---
+
+## Code-sample census execution batch 4 — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 0.** No Ahrefs, Semrush, GitHub API, search API, model API, or paid
+dataset call.
+
+The root-validity batch made **82 free public documentation HTTP attempts**:
+one initial request for each of 80 selected roots plus two retries for the sole
+DNS failure. Redirect following recorded 45 hops. Seventy-eight roots returned
+HTML, 76 exposed one of the frozen supported generators, two returned
+unsupported pages, and two failed (dead DNS and a 404 after redirect).
+
+No alternate URL was searched or substituted. The three shared-host pairs now
+have a frozen global canonical-page deduplication rule before sitemap discovery.
+Output: `planning/research/code-sample-census/ROOT-INSPECTION-2026-08-17.md`
+and `data/docs-root-inspection-2026-08-17.json`.

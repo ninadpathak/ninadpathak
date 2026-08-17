@@ -41,8 +41,9 @@ That also drops API spend to roughly zero across all three, so the real cost is 
 
 ### The exact question
 
-**Of the Python code samples published in the documentation of the N most-used Python
-packages, what fraction is not valid Python?** Secondary: of the fraction that is invalid, how
+**Of the Python code samples published in the documentation of the N most-downloaded Python
+packages, what fraction is not valid Python?** PyPI downloads are the reproducible popularity
+frame, not evidence of usage or quality. Secondary: of the fraction that is invalid, how
 much is deliberate (illustrating an error) versus broken.
 
 ### Why this one

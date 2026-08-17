@@ -1,0 +1,2157 @@
+{
+  "candidate_shared_hosts": [
+    {
+      "host": "grpc.github.io",
+      "projects": [
+        {
+          "canonical_url": null,
+          "final_url": "https://grpc.github.io/grpc/python/grpc_status.html",
+          "project": "grpcio-status",
+          "rank": 33
+        },
+        {
+          "canonical_url": null,
+          "final_url": "https://grpc.github.io/grpc/python/",
+          "project": "grpcio",
+          "rank": 96
+        }
+      ]
+    },
+    {
+      "host": "pyasn1.readthedocs.io",
+      "projects": [
+        {
+          "canonical_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+          "final_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+          "project": "pyasn1",
+          "rank": 64
+        },
+        {
+          "canonical_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+          "final_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+          "project": "pyasn1-modules",
+          "rank": 91
+        }
+      ]
+    },
+    {
+      "host": "pydantic.dev",
+      "projects": [
+        {
+          "canonical_url": "https://pydantic.dev/docs/",
+          "final_url": "https://pydantic.dev/docs/",
+          "project": "pydantic",
+          "rank": 19
+        },
+        {
+          "canonical_url": "https://pydantic.dev/docs/validation/latest/get-started/",
+          "final_url": "https://pydantic.dev/docs/validation/latest/get-started/",
+          "project": "pydantic-core",
+          "rank": 25
+        }
+      ]
+    }
+  ],
+  "fetched_at": "2026-08-17T18:24:59+00:00",
+  "input_path": "planning/research/code-sample-census/data/docs-resolution-v3-2026-08-17.json",
+  "input_sha256": "b505a2c635182c36b6b630374e8dbf21d790e102278e39ae064f9fdf029c1f2a",
+  "rows": [
+    {
+      "declared_url": "https://docs.aws.amazon.com/boto3/latest/",
+      "inspection": {
+        "bytes": 257823,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "\"OXPmMZcz7jWkVyg2qi1CTyMKftw=\"",
+        "final_host": "docs.aws.amazon.com",
+        "final_url": "https://docs.aws.amazon.com/boto3/latest/",
+        "generator": "sphinx",
+        "last_modified": "Fri, 14 Aug 2026 19:07:51 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "d8b29b77e21fbc0bafe2557696d7636b5afb0ba0091de67d9cb64afd0bb2cc78",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "boto3",
+      "rank": 1,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://packaging.pypa.io/",
+      "inspection": {
+        "bytes": 19110,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"35b4a8a1ff72705a456ad645cbb4a3fb\"",
+        "final_host": "packaging.pypa.io",
+        "final_url": "https://packaging.pypa.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 03 Aug 2026 20:00:05 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://packaging.pypa.io/",
+            "status": 302,
+            "to": "https://packaging.pypa.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "5a7e7717d8b21ade8fbf25ad5889efc3dd11ae7ea300f84cfc74ddc8475c4eda",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "packaging",
+      "rank": 2,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://typing-extensions.readthedocs.io/",
+      "inspection": {
+        "bytes": 218083,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"72a9ddc2c002678965f6f666c0ee0048\"",
+        "final_host": "typing-extensions.readthedocs.io",
+        "final_url": "https://typing-extensions.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Thu, 02 Jul 2026 18:25:38 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://typing-extensions.readthedocs.io/",
+            "status": 302,
+            "to": "https://typing-extensions.readthedocs.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "756c21a3830a6e7bb4a0852199bce316c2eac0218193d41738d53840c92c81f9",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "typing-extensions",
+      "rank": 3,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://urllib3.readthedocs.io",
+      "inspection": {
+        "bytes": 25275,
+        "canonical_host": "urllib3.readthedocs.io",
+        "canonical_url": "https://urllib3.readthedocs.io/en/stable/index.html",
+        "content_type": "text/html",
+        "etag": "W/\"fce47908c2c42009b9e31e629f0d1c65\"",
+        "final_host": "urllib3.readthedocs.io",
+        "final_url": "https://urllib3.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Thu, 07 May 2026 16:09:14 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://urllib3.readthedocs.io",
+            "status": 302,
+            "to": "https://urllib3.readthedocs.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "b6c7d23fb96b534d42cf625bb9687c261b269dac97f91416afb646c8fffcb720",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "urllib3",
+      "rank": 5,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://requests.readthedocs.io",
+      "inspection": {
+        "bytes": 22611,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"383c984ddcaea61767644a6b6133b3ea\"",
+        "final_host": "requests.readthedocs.io",
+        "final_url": "https://requests.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Thu, 14 May 2026 19:23:44 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://requests.readthedocs.io",
+            "status": 302,
+            "to": "https://requests.readthedocs.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "996cf5462aff70ae64b0e48f1d4296d3a1fdc523002b5eb904c63fb6c23273b0",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "requests",
+      "rank": 7,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://charset-normalizer.readthedocs.io/",
+      "inspection": {
+        "bytes": 33582,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"a81bbeaf3136c2c31813db92f82b6388\"",
+        "final_host": "charset-normalizer.readthedocs.io",
+        "final_url": "https://charset-normalizer.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Sat, 15 Aug 2026 06:32:25 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://charset-normalizer.readthedocs.io/",
+            "status": 302,
+            "to": "https://charset-normalizer.readthedocs.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "dd35edc5c93f96bdd272a1964f33a5a736d86e9800d0a2492a4c43f1e38a8a6e",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "charset-normalizer",
+      "rank": 8,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://setuptools.pypa.io/",
+      "inspection": {
+        "bytes": 25272,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"37c030be823cc5fa721a09048053445d\"",
+        "final_host": "setuptools.pypa.io",
+        "final_url": "https://setuptools.pypa.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Fri, 07 Aug 2026 00:36:18 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://setuptools.pypa.io/",
+            "status": 302,
+            "to": "https://setuptools.pypa.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "65c7415b67a26ab5c3491783fd86b119730b2618c4dbd8d7018c333ecdae232c",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "setuptools",
+      "rank": 9,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://cryptography.io/",
+      "inspection": {
+        "bytes": 45099,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"7c6bb25142e31096621a1be0058799de\"",
+        "final_host": "cryptography.io",
+        "final_url": "https://cryptography.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 17 Aug 2026 10:24:11 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://cryptography.io/",
+            "status": 302,
+            "to": "https://cryptography.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "3a742d85bc326ad8aabdbadfd1dfd19a73dd01446064a4f64bed68b226924f76",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "cryptography",
+      "rank": 10,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://cffi.readthedocs.io/",
+      "inspection": {
+        "bytes": 12972,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"8ead620689aaacd764eafaeca99b430f\"",
+        "final_host": "cffi.readthedocs.io",
+        "final_url": "https://cffi.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 03 Aug 2026 21:23:47 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://cffi.readthedocs.io/",
+            "status": 302,
+            "to": "https://cffi.readthedocs.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "e1328809de7f8091d6cd573b3fb4d5a410a43e66b34f54d6dbd8c1cf760927b6",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "cffi",
+      "rank": 12,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://pygments.org/docs",
+      "inspection": {
+        "bytes": 7028,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "\"6a82c0aa-1b74\"",
+        "final_host": "pygments.org",
+        "final_url": "https://pygments.org/docs/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 17 Aug 2026 08:04:58 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://pygments.org/docs",
+            "status": 301,
+            "to": "https://pygments.org/docs/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "7deddb47b0ec146cae8058dcb4a44857d55c41389815a4b37a6273e81940e7f9",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pygments",
+      "rank": 14,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://pyyaml.org/wiki/PyYAMLDocumentation",
+      "inspection": {
+        "bytes": 151060,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "\"5eeb247c-24e14\"",
+        "final_host": "pyyaml.org",
+        "final_url": "https://pyyaml.org/wiki/PyYAMLDocumentation",
+        "generator": "unknown",
+        "last_modified": "Thu, 18 Jun 2020 08:23:24 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "073e624f52d66cc94c984c40dc1b1cce315882f444b5216630e4c2f9082a16bb",
+        "status": 200,
+        "supported_generator": false
+      },
+      "project": "pyyaml",
+      "rank": 15,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://dateutil.readthedocs.io/en/stable/",
+      "inspection": {
+        "bytes": 24371,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"995a7894a1092598ab28661259ffccf1\"",
+        "final_host": "dateutil.readthedocs.io",
+        "final_url": "https://dateutil.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Fri, 01 Mar 2024 03:44:31 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "edb10d14a7ee03a417b26b69e2777d78587622fd431c659a0bee5c38059e7778",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "python-dateutil",
+      "rank": 16,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://six.readthedocs.io/",
+      "inspection": {
+        "bytes": 123980,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"c7c2d3a93ce3af550991edb9dac9b8a2\"",
+        "final_host": "six.readthedocs.io",
+        "final_url": "https://six.readthedocs.io/",
+        "generator": "sphinx",
+        "last_modified": "Wed, 05 May 2021 14:17:22 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "c29cf140da490b7bf593603a1b4cc3c5e3507f4020cf33339432dd830eb22492",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "six",
+      "rank": 17,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://numpy.org/doc/",
+      "inspection": {
+        "bytes": 9949,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "numpy.org",
+        "final_url": "https://numpy.org/doc/",
+        "generator": "sphinx",
+        "last_modified": "Sun, 28 Jun 2026 08:37:33 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "fb2a213a94e7a9704041a5d8624410ccbe1fad8118a097133f2377d30018238e",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "numpy",
+      "rank": 18,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://docs.pydantic.dev",
+      "inspection": {
+        "bytes": 41997,
+        "canonical_host": "pydantic.dev",
+        "canonical_url": "https://pydantic.dev/docs/",
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "pydantic.dev",
+        "final_url": "https://pydantic.dev/docs/",
+        "generator": "starlight",
+        "last_modified": null,
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://docs.pydantic.dev",
+            "status": 301,
+            "to": "https://pydantic.dev/docs/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "aba69147034968a7123b0522946005b04d257bb6c3ccf5db5e57497b87ce86b1",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pydantic",
+      "rank": 19,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://aiobotocore.aio-libs.org",
+      "inspection": {
+        "bytes": 16818,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"93a83717fcdd764fe440615a5870152c\"",
+        "final_host": "aiobotocore.aio-libs.org",
+        "final_url": "https://aiobotocore.aio-libs.org/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Sat, 01 Aug 2026 11:42:40 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://aiobotocore.aio-libs.org",
+            "status": 302,
+            "to": "https://aiobotocore.aio-libs.org/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "b88ae1f920e86ba84dd9944f14d88ade9b8b46fd845aa11399b5adc887204078",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "aiobotocore",
+      "rank": 20,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://click.palletsprojects.com/",
+      "inspection": {
+        "bytes": 15424,
+        "canonical_host": "click.palletsprojects.com",
+        "canonical_url": "https://click.palletsprojects.com/en/stable/",
+        "content_type": "text/html",
+        "etag": "W/\"4242aeef4de9f835add983a9a837b2bc\"",
+        "final_host": "click.palletsprojects.com",
+        "final_url": "https://click.palletsprojects.com/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Fri, 17 Jul 2026 20:39:03 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://click.palletsprojects.com/",
+            "status": 302,
+            "to": "https://click.palletsprojects.com/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "832b601886840f318d05e11c6da20f62c656eec3a1182ac6dc761909f3ba067d",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "click",
+      "rank": 21,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://docs.pytest.org/en/latest/",
+      "inspection": {
+        "bytes": 31975,
+        "canonical_host": "docs.pytest.org",
+        "canonical_url": "https://docs.pytest.org/en/stable/index.html",
+        "content_type": "text/html",
+        "etag": "W/\"182d51bcc1fee0487dc26dd8eaef7e11\"",
+        "final_host": "docs.pytest.org",
+        "final_url": "https://docs.pytest.org/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Sun, 14 Jun 2026 06:09:55 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "5f092b0d1fe41430023a654b84b4ec801046d823ecc2e733680c592295d936ca",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pytest",
+      "rank": 23,
+      "resolution": "homepage-resolved"
+    },
+    {
+      "declared_url": "https://anyio.readthedocs.io/en/latest/",
+      "inspection": {
+        "bytes": 29520,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"05e2cc37ca6b5b39ea69328b267163a9\"",
+        "final_host": "anyio.readthedocs.io",
+        "final_url": "https://anyio.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 17 Aug 2026 17:19:48 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "994bc19d2d3cb05626d5e43b6b06b09afe51106d254f2f8855ad17d0915b746e",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "anyio",
+      "rank": 24,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://pydantic.dev/docs/validation/latest/get-started/",
+      "inspection": {
+        "bytes": 90798,
+        "canonical_host": "pydantic.dev",
+        "canonical_url": "https://pydantic.dev/docs/validation/latest/get-started/",
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "pydantic.dev",
+        "final_url": "https://pydantic.dev/docs/validation/latest/get-started/",
+        "generator": "starlight",
+        "last_modified": null,
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "3bc95df771c52cfaebbad80a871fb5893ffc2ead46703ba889dc08709c5e591e",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pydantic-core",
+      "rank": 25,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://h11.readthedocs.io/en/latest/",
+      "inspection": {
+        "bytes": 12602,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"420d52dcc0467b430e1b68686e47f171\"",
+        "final_host": "h11.readthedocs.io",
+        "final_url": "https://h11.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Thu, 24 Apr 2025 03:37:12 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "1855c89acbd834a674dd1b0dbedd511824c143723bd7883e78df7cb134a5aa45",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "h11",
+      "rank": 28,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://www.attrs.org/",
+      "inspection": {
+        "bytes": 34479,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"ae72dc5320262b4a5fa742ea6868ad12\"",
+        "final_host": "www.attrs.org",
+        "final_url": "https://www.attrs.org/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Thu, 19 Mar 2026 14:06:38 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://www.attrs.org/",
+            "status": 302,
+            "to": "https://www.attrs.org/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "946ee2031ceabdb10442a3012b153507a4af86e2c4b41e2c7b359448b88a650d",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "attrs",
+      "rank": 29,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://filesystem-spec.readthedocs.io/en/latest/",
+      "inspection": {
+        "bytes": 14133,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"a6da768b64a9577b0acb6a8c00143a2d\"",
+        "final_host": "filesystem-spec.readthedocs.io",
+        "final_url": "https://filesystem-spec.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 27 Jul 2026 15:06:31 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "23c0c794327ab20d244ffc89e5542df5b67a10553b5dc03708748b11fe4ff629",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "fsspec",
+      "rank": 30,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://grpc.github.io/grpc/python/grpc_status.html",
+      "inspection": {
+        "bytes": 16659,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "\"6a671da1-4113\"",
+        "final_host": "grpc.github.io",
+        "final_url": "https://grpc.github.io/grpc/python/grpc_status.html",
+        "generator": "sphinx",
+        "last_modified": "Mon, 27 Jul 2026 08:58:09 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "f67023f6f0857fd3efbcf55c6117894b832e86951a864f86cb805f0f7b2b956f",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "grpcio-status",
+      "rank": 33,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://pydantic.github.io/typing-inspection/dev/",
+      "inspection": {
+        "bytes": 21609,
+        "canonical_host": "typing-inspection.pydantic.dev",
+        "canonical_url": "https://typing-inspection.pydantic.dev/latest/",
+        "content_type": "text/html",
+        "etag": "\"6a7c68cc-5469\"",
+        "final_host": "pydantic.github.io",
+        "final_url": "https://pydantic.github.io/typing-inspection/dev/",
+        "generator": "mkdocs",
+        "last_modified": "Wed, 12 Aug 2026 12:36:28 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "b6913bba3b94976791663a7cee643a97e448595d4c805f08b111551fefafb8e2",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "typing-inspection",
+      "rank": 34,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://www.python-httpx.org",
+      "inspection": {
+        "bytes": 31898,
+        "canonical_host": "www.python-httpx.org",
+        "canonical_url": "https://www.python-httpx.org/",
+        "content_type": "text/html",
+        "etag": "\"68c2ac65-7c9a\"",
+        "final_host": "www.python-httpx.org",
+        "final_url": "https://www.python-httpx.org",
+        "generator": "mkdocs",
+        "last_modified": "Thu, 11 Sep 2025 11:03:01 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "1d26f6cab2beafb77f1dee7c26c24a835b5a9ba65f06e2feedb9267a5c49f957",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "httpx",
+      "rank": 35,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://markupsafe.palletsprojects.com/",
+      "inspection": {
+        "bytes": 10599,
+        "canonical_host": "markupsafe.palletsprojects.com",
+        "canonical_url": "https://markupsafe.palletsprojects.com/en/stable/",
+        "content_type": "text/html",
+        "etag": "W/\"ecc3173f3a1148e41fca7e48d0710eb8\"",
+        "final_host": "markupsafe.palletsprojects.com",
+        "final_url": "https://markupsafe.palletsprojects.com/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Sat, 27 Sep 2025 18:38:56 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://markupsafe.palletsprojects.com/",
+            "status": 302,
+            "to": "https://markupsafe.palletsprojects.com/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "1042f15aa8fc94dfb597f5f6a0f6b5a302742f4fd82c6e02b0757604ed1c3078",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "markupsafe",
+      "rank": 36,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://www.encode.io/httpcore",
+      "inspection": {
+        "bytes": 19370,
+        "canonical_host": "www.encode.io",
+        "canonical_url": "https://www.encode.io/httpcore/",
+        "content_type": "text/html",
+        "etag": "\"680ab5f4-4baa\"",
+        "final_host": "www.encode.io",
+        "final_url": "https://www.encode.io/httpcore/",
+        "generator": "mkdocs",
+        "last_modified": "Thu, 24 Apr 2025 22:06:44 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://www.encode.io/httpcore",
+            "status": 301,
+            "to": "https://www.encode.io/httpcore/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "f17d4d41b1a6965710fe8bd734e60092efca76d9af73da5ec4941568af50dd86",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "httpcore",
+      "rank": 37,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://platformdirs.readthedocs.io",
+      "inspection": {
+        "bytes": 21066,
+        "canonical_host": "platformdirs.readthedocs.io",
+        "canonical_url": "https://platformdirs.readthedocs.io/en/latest/index.html",
+        "content_type": "text/html",
+        "etag": "W/\"f9f5b80d2a3e971ebe481be8243ce248\"",
+        "final_host": "platformdirs.readthedocs.io",
+        "final_url": "https://platformdirs.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 17 Aug 2026 17:48:21 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://platformdirs.readthedocs.io",
+            "status": 302,
+            "to": "https://platformdirs.readthedocs.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "f0bf6eeb15c703f38ccacee8a867a280ea33dfd9053482a8a6333793f4dfecf6",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "platformdirs",
+      "rank": 38,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://saurabh-kumar.com/python-dotenv/",
+      "inspection": {
+        "bytes": 30413,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "saurabh-kumar.com",
+        "final_url": "https://saurabh-kumar.com/python-dotenv/",
+        "generator": "mkdocs",
+        "last_modified": "Sun, 16 Aug 2026 16:55:27 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "31520c06f9af3939981e76f8cfcd7f075cf7bfdf4778243a548dc5314fedd6ee",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "python-dotenv",
+      "rank": 39,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://pandas.pydata.org/docs/",
+      "inspection": {
+        "bytes": 22046,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "pandas.pydata.org",
+        "final_url": "https://pandas.pydata.org/docs/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 17 Aug 2026 16:02:08 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "f26f106918539b83ad6e7339ba62fac92a344ed8338d91386c504875fe848388",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pandas",
+      "rank": 40,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://python-path-specification.readthedocs.io/en/latest/index.html",
+      "inspection": {
+        "bytes": 12269,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"ec4c00633b2bd6c21e217c5c6e7366e7\"",
+        "final_host": "python-path-specification.readthedocs.io",
+        "final_url": "https://python-path-specification.readthedocs.io/en/latest/index.html",
+        "generator": "sphinx",
+        "last_modified": "Mon, 25 May 2026 03:03:08 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "3dba8e80494d53b0212ea0ffae9031240095ed100d0045c5169182d23d785a7a",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pathspec",
+      "rank": 41,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://jinja.palletsprojects.com/",
+      "inspection": {
+        "bytes": 18054,
+        "canonical_host": "jinja.palletsprojects.com",
+        "canonical_url": "https://jinja.palletsprojects.com/en/stable/",
+        "content_type": "text/html",
+        "etag": "W/\"0ea3b320397bfc6aab4a844bb0422db1\"",
+        "final_host": "jinja.palletsprojects.com",
+        "final_url": "https://jinja.palletsprojects.com/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Thu, 12 Jun 2025 21:00:04 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://jinja.palletsprojects.com/",
+            "status": 302,
+            "to": "https://jinja.palletsprojects.com/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "17cc0e25360784a5a755ac2a3ad89d5e339c45879e234c70733c0ade71e68ada",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "jinja2",
+      "rank": 42,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://docs.litellm.ai",
+      "inspection": {
+        "bytes": 203910,
+        "canonical_host": "docs.litellm.ai",
+        "canonical_url": "https://docs.litellm.ai/",
+        "content_type": "text/html",
+        "etag": "\"020e64e3db88fbde4207d2efdc16619e\"",
+        "final_host": "docs.litellm.ai",
+        "final_url": "https://docs.litellm.ai",
+        "generator": "docusaurus",
+        "last_modified": "Mon, 17 Aug 2026 08:03:06 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "d3703129d060c6379dbcace31f5be75106514ff00642f1303cf21c4cecbb5768",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "litellm",
+      "rank": 43,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://py-filelock.readthedocs.io",
+      "inspection": {
+        "bytes": 28241,
+        "canonical_host": "py-filelock.readthedocs.io",
+        "canonical_url": "https://py-filelock.readthedocs.io/index.html",
+        "content_type": "text/html",
+        "etag": "W/\"0796fd1a715ca20af0c301e80082c5e0\"",
+        "final_host": "py-filelock.readthedocs.io",
+        "final_url": "https://py-filelock.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 17 Aug 2026 17:48:22 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://py-filelock.readthedocs.io",
+            "status": 302,
+            "to": "https://py-filelock.readthedocs.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "9d0be41112dc4a931e68bda32702fa053cf894a41d6af8030cd5c610596403c1",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "filelock",
+      "rank": 44,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://pyjwt.readthedocs.io/en/stable/",
+      "inspection": {
+        "bytes": 17472,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"bc96f9733bc72ae0a5b6e2201a98fe21\"",
+        "final_host": "pyjwt.readthedocs.io",
+        "final_url": "https://pyjwt.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Thu, 21 May 2026 19:56:56 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "30454866d2f4fb656866cae93368da0ee601c492aab2662f20909b20b797e131",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pyjwt",
+      "rank": 45,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://pip.pypa.io",
+      "inspection": {
+        "bytes": 26484,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"d8b98936ed95caceaa0fe8ff39b3bd1d\"",
+        "final_host": "pip.pypa.io",
+        "final_url": "https://pip.pypa.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Tue, 04 Aug 2026 22:50:11 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://pip.pypa.io",
+            "status": 302,
+            "to": "https://pip.pypa.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "349476ac3bf6026955cc3f86616b53b7b3d508725fa111dd1e59e1f01fded85e",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pip",
+      "rank": 46,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://s3fs.readthedocs.io/en/latest/",
+      "inspection": {
+        "bytes": 42406,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"f860cf519680657fd9a1a557bab1c3ae\"",
+        "final_host": "s3fs.readthedocs.io",
+        "final_url": "https://s3fs.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Wed, 03 Dec 2025 15:38:41 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "f49dd3861ccd93c3a30060ef6b20a7ec714b8dad85bd1f50cfa95ec68e14eeba",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "s3fs",
+      "rank": 47,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://tqdm.github.io",
+      "inspection": {
+        "bytes": 35737,
+        "canonical_host": "tqdm.github.io",
+        "canonical_url": "https://tqdm.github.io/",
+        "content_type": "text/html",
+        "etag": "\"6a674509-8b99\"",
+        "final_host": "tqdm.github.io",
+        "final_url": "https://tqdm.github.io",
+        "generator": "mkdocs",
+        "last_modified": "Mon, 27 Jul 2026 11:46:17 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "c01ddefc412fc0a2d0a2102f88fc572c4dfe340afea441d8d48100bf0d3ec255",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "tqdm",
+      "rank": 48,
+      "resolution": "homepage-resolved"
+    },
+    {
+      "declared_url": "https://starlette.dev/",
+      "inspection": {
+        "bytes": 44494,
+        "canonical_host": "starlette.dev",
+        "canonical_url": "https://starlette.dev/",
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "starlette.dev",
+        "final_url": "https://starlette.dev/",
+        "generator": "mkdocs",
+        "last_modified": null,
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "708bbf5910e01576877404d01408579bbc0ecddd302182fb41462773f31ca4e1",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "starlette",
+      "rank": 49,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://uvicorn.dev/",
+      "inspection": {
+        "bytes": 48458,
+        "canonical_host": "uvicorn.dev",
+        "canonical_url": "https://uvicorn.dev/",
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "uvicorn.dev",
+        "final_url": "https://uvicorn.dev/",
+        "generator": "mkdocs",
+        "last_modified": null,
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "20644b172ebc5d377a7cb46a0e4f6099f9f338bf066b2bf73db5c73990eed418",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "uvicorn",
+      "rank": 50,
+      "resolution": "homepage-resolved"
+    },
+    {
+      "declared_url": "https://docs.aiohttp.org",
+      "inspection": {
+        "bytes": 29550,
+        "canonical_host": "docs.aiohttp.org",
+        "canonical_url": "http://docs.aiohttp.org/en/stable/index.html",
+        "content_type": "text/html",
+        "etag": "W/\"a0b429b1291506fc75993a991e3ba7d3\"",
+        "final_host": "docs.aiohttp.org",
+        "final_url": "https://docs.aiohttp.org/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Wed, 22 Jul 2026 22:17:26 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://docs.aiohttp.org",
+            "status": 302,
+            "to": "https://docs.aiohttp.org/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "ae8dd73b80b9375dfc65a65f573d80e9e9da98cda5c20d5aaaea135d6713bf98",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "aiohttp",
+      "rank": 51,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://jmespath.org/",
+      "inspection": {
+        "bytes": 6965,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "\"99233bd153fd8f3dd27c420b2bf1fa0d\"",
+        "final_host": "jmespath.org",
+        "final_url": "https://jmespath.org/",
+        "generator": "sphinx",
+        "last_modified": "Fri, 24 Mar 2023 15:15:02 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "e7b501572ee982e020d61605ce02d18c3fc804cd06dc22dc75aa5dbb8b965934",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "jmespath",
+      "rank": 52,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://yarl.aio-libs.org",
+      "inspection": {
+        "bytes": 74116,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"673c6981a6cd304ee77c2523592fe94b\"",
+        "final_host": "yarl.aio-libs.org",
+        "final_url": "https://yarl.aio-libs.org/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 20 Jul 2026 00:59:58 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://yarl.aio-libs.org",
+            "status": 302,
+            "to": "https://yarl.aio-libs.org/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "659e1e0f48219d60530057108d0d61fb88486eadee8d62e1f9dffb393faceb29",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "yarl",
+      "rank": 53,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://rpds.readthedocs.io/",
+      "inspection": {
+        "bytes": 22865,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"1ed2d5731b4bc625cfac247e49fec5b4\"",
+        "final_host": "rpds.readthedocs.io",
+        "final_url": "https://rpds.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 06 May 2024 13:17:30 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://rpds.readthedocs.io/",
+            "status": 302,
+            "to": "https://rpds.readthedocs.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "984cc37e5e35b8a28fc2290986837ab8115fb50fdf49d4c4d19a9be3b479d609",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "rpds-py",
+      "rank": 54,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://markdown-it-py.readthedocs.io",
+      "inspection": {
+        "bytes": 27143,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"7b3348843138e3228c1912f7dc4a5fe2\"",
+        "final_host": "markdown-it-py.readthedocs.io",
+        "final_url": "https://markdown-it-py.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Fri, 08 Aug 2025 11:20:51 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://markdown-it-py.readthedocs.io",
+            "status": 302,
+            "to": "https://markdown-it-py.readthedocs.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "976fbfc1022c71998ee868e9a0ddd2f4fc46152a8b8900ecffd297df7036e92f",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "markdown-it-py",
+      "rank": 55,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://rich.readthedocs.io/en/latest/",
+      "inspection": {
+        "bytes": 23150,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"afd11e42260de30cd23792ba9aa91af6\"",
+        "final_host": "rich.readthedocs.io",
+        "final_url": "https://rich.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Fri, 29 Aug 2025 18:00:27 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "3fd641e1bfaae4fe23f1e8876eca15b05d19eb05c1d033116c01359f15d8ed9f",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "rich",
+      "rank": 56,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://python-jsonschema.readthedocs.io/",
+      "inspection": {
+        "bytes": 35895,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"fa25b2b2fb707d92bc0a7bad08deadb3\"",
+        "final_host": "python-jsonschema.readthedocs.io",
+        "final_url": "https://python-jsonschema.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Wed, 07 Jan 2026 13:22:54 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://python-jsonschema.readthedocs.io/",
+            "status": 302,
+            "to": "https://python-jsonschema.readthedocs.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "b667a135fdef55245a0453265eca47e70ede7569ba059cef82d34b3f85d6670c",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "jsonschema",
+      "rank": 57,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://multidict.aio-libs.org",
+      "inspection": {
+        "bytes": 36369,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"2e8148ee4e6bbe80684d34f84025613e\"",
+        "final_host": "multidict.aio-libs.org",
+        "final_url": "https://multidict.aio-libs.org/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 26 Jan 2026 01:16:40 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://multidict.aio-libs.org",
+            "status": 302,
+            "to": "https://multidict.aio-libs.org/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "386a62eca3fdba1a13dfee89f1c0ba2d726c8b4f6deaa411cf225b75d57de9d2",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "multidict",
+      "rank": 58,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://fastapi.tiangolo.com/",
+      "inspection": {
+        "bytes": 153352,
+        "canonical_host": "fastapi.tiangolo.com",
+        "canonical_url": "https://fastapi.tiangolo.com/",
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "fastapi.tiangolo.com",
+        "final_url": "https://fastapi.tiangolo.com/",
+        "generator": "mkdocs",
+        "last_modified": null,
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "ccee68a4865df73b0962297f504907c016902fdf54f6c72aa807d315ebb2d463",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "fastapi",
+      "rank": 59,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://propcache.readthedocs.io",
+      "inspection": {
+        "bytes": 19219,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"35f70162954f13713273a57fc3e021fa\"",
+        "final_host": "propcache.aio-libs.org",
+        "final_url": "https://propcache.aio-libs.org/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Sun, 17 May 2026 19:37:35 GMT",
+        "redirect_count": 2,
+        "redirects": [
+          {
+            "from": "https://propcache.readthedocs.io",
+            "status": 302,
+            "to": "https://propcache.aio-libs.org/"
+          },
+          {
+            "from": "https://propcache.aio-libs.org/",
+            "status": 302,
+            "to": "https://propcache.aio-libs.org/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "3d02aa2f99f2e39144ab9e20f16b6b9c429ad4c026339604f58f3ff6a92946c9",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "propcache",
+      "rank": 60,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://wheel.readthedocs.io/",
+      "inspection": {
+        "bytes": 8341,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"2c435ea235b1b4d5a175c43297eb5977\"",
+        "final_host": "wheel.readthedocs.io",
+        "final_url": "https://wheel.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Tue, 11 Aug 2026 21:56:40 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://wheel.readthedocs.io/",
+            "status": 302,
+            "to": "https://wheel.readthedocs.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "112957bc548ecfc28ee0641f24ecab96dfc729b2c91917ce09b143c9ae931572",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "wheel",
+      "rank": 62,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://websockets.readthedocs.io/",
+      "inspection": {
+        "bytes": 40696,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"e219213247d0daf5b0ca13401824481f\"",
+        "final_host": "websockets.readthedocs.io",
+        "final_url": "https://websockets.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Thu, 30 Jul 2026 21:44:42 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://websockets.readthedocs.io/",
+            "status": 302,
+            "to": "https://websockets.readthedocs.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "bcecfd4cddc96c657941488b28c4286b63ca1b9e1e75da64e2e436d305eaa4ea",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "websockets",
+      "rank": 63,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://pyasn1.readthedocs.io",
+      "inspection": {
+        "bytes": 14247,
+        "canonical_host": "pyasn1.readthedocs.io",
+        "canonical_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "content_type": "text/html",
+        "etag": "W/\"8a988fb657025db1e4bfbc7e26058254\"",
+        "final_host": "pyasn1.readthedocs.io",
+        "final_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "generator": "sphinx",
+        "last_modified": "Wed, 13 Jul 2022 21:28:16 GMT",
+        "redirect_count": 2,
+        "redirects": [
+          {
+            "from": "https://pyasn1.readthedocs.io",
+            "status": 302,
+            "to": "https://pyasn1.readthedocs.io/en/latest/"
+          },
+          {
+            "from": "https://pyasn1.readthedocs.io/en/latest/",
+            "status": 302,
+            "to": "https://pyasn1.readthedocs.io/en/latest/contents.html"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "bd0ce0e529b58aeab2ef34aaaa9275288d595b15ef2e51965302bb9dccdff969",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pyasn1",
+      "rank": 64,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://referencing.readthedocs.io/",
+      "inspection": {
+        "bytes": 18872,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"47e93259fc2281073292c056753340e6\"",
+        "final_host": "referencing.readthedocs.io",
+        "final_url": "https://referencing.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 13 Oct 2025 15:22:47 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://referencing.readthedocs.io/",
+            "status": 302,
+            "to": "https://referencing.readthedocs.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "da17b656f762d74e23fd46a4b78f5bec43cc223a89ea44afd247803ed9f6a536",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "referencing",
+      "rank": 65,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://aiohappyeyeballs.readthedocs.io",
+      "inspection": {
+        "bytes": 30459,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"620738d933457722eef90937c4f7558b\"",
+        "final_host": "aiohappyeyeballs.aio-libs.org",
+        "final_url": "https://aiohappyeyeballs.aio-libs.org/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Wed, 01 Jul 2026 17:09:32 GMT",
+        "redirect_count": 2,
+        "redirects": [
+          {
+            "from": "https://aiohappyeyeballs.readthedocs.io",
+            "status": 302,
+            "to": "https://aiohappyeyeballs.aio-libs.org/"
+          },
+          {
+            "from": "https://aiohappyeyeballs.aio-libs.org/",
+            "status": 302,
+            "to": "https://aiohappyeyeballs.aio-libs.org/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "271bf445a22d86c4ea4deed062945d6cbbd02c707d030ad15831e5e39835e209",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "aiohappyeyeballs",
+      "rank": 66,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://frozenlist.aio-libs.org",
+      "inspection": {
+        "bytes": 18158,
+        "canonical_host": "frozenlist.aio-libs.org",
+        "canonical_url": "https://frozenlist.aio-libs.org/en/stable/index.html",
+        "content_type": "text/html",
+        "etag": "W/\"2186b4f1f21589d2fe43268da1edfa13\"",
+        "final_host": "frozenlist.aio-libs.org",
+        "final_url": "https://frozenlist.aio-libs.org/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Wed, 03 Jun 2026 23:52:43 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://frozenlist.aio-libs.org",
+            "status": 302,
+            "to": "https://frozenlist.aio-libs.org/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "f4c051542a542474e99992103cb3a955a0531a5fc98946e495a7884b82a1a008",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "frozenlist",
+      "rank": 67,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://jsonschema-specifications.readthedocs.io/",
+      "inspection": {
+        "bytes": 20201,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"4fa9258c9d2bda3ab735beafa201bcb9\"",
+        "final_host": "jsonschema-specifications.readthedocs.io",
+        "final_url": "https://jsonschema-specifications.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Sat, 25 Jul 2026 14:39:02 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://jsonschema-specifications.readthedocs.io/",
+            "status": 302,
+            "to": "https://jsonschema-specifications.readthedocs.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "ddfed1adb3ea5317d33cae10442f20efa08b09b3b45024214ec84b443e45639d",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "jsonschema-specifications",
+      "rank": 68,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://pillow.readthedocs.io",
+      "inspection": {
+        "bytes": 56641,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"86c4c17767f4875a7c8e2b5cfe3f9e9c\"",
+        "final_host": "pillow.readthedocs.io",
+        "final_url": "https://pillow.readthedocs.io/en/stable/",
+        "generator": "sphinx",
+        "last_modified": "Wed, 01 Jul 2026 09:49:55 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://pillow.readthedocs.io",
+            "status": 302,
+            "to": "https://pillow.readthedocs.io/en/stable/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "09f183a737dc39918f7a074957fc33d8cf897bb5ea54143efe8b0b61dc45e2e4",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pillow",
+      "rank": 70,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://pythonhosted.org/pytz/",
+      "inspection": {
+        "bytes": 68848,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "pythonhosted.org",
+        "final_url": "https://pythonhosted.org/pytz/",
+        "generator": "sphinx",
+        "last_modified": null,
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "8c74d3baea89bfa505968d53b04a6384eaf079ffdd4828746a9086dd3fd38adf",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pytz",
+      "rank": 71,
+      "resolution": "homepage-resolved"
+    },
+    {
+      "declared_url": "https://docs.aiosignal.org",
+      "error": "RootInspectionError: URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "project": "aiosignal",
+      "rank": 72,
+      "redirects": [],
+      "request_attempts": 3,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://virtualenv.pypa.io",
+      "inspection": {
+        "bytes": 23455,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"d1fa1881eef35fa24899713528016c77\"",
+        "final_host": "virtualenv.pypa.io",
+        "final_url": "https://virtualenv.pypa.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Sat, 15 Aug 2026 07:18:51 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://virtualenv.pypa.io",
+            "status": 302,
+            "to": "https://virtualenv.pypa.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "d7cf15ac62799bf94204a09cd8f15b23a46ac009b924fd5c12b1debc3c14c174",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "virtualenv",
+      "rank": 73,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://importlib-metadata.readthedocs.io/en/latest/",
+      "inspection": {
+        "bytes": 18832,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"9e657191f5ff0cfbbfb18259d5b394ed\"",
+        "final_host": "importlib-metadata.readthedocs.io",
+        "final_url": "https://importlib-metadata.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Thu, 16 Jul 2026 01:37:16 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "fba0d34299325711daae716c8a04e446cefa1e89e95aee4a9d8dff80b9645221",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "importlib-metadata",
+      "rank": 74,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://textual.textualize.io/",
+      "inspection": {
+        "bytes": 1165706,
+        "canonical_host": "textual.textualize.io",
+        "canonical_url": "https://textual.textualize.io/",
+        "content_type": "text/html",
+        "etag": "\"6a044c3e-11c98a\"",
+        "final_host": "textual.textualize.io",
+        "final_url": "https://textual.textualize.io/",
+        "generator": "mkdocs",
+        "last_modified": "Wed, 13 May 2026 10:02:38 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "5fe641dcb2a0ba932430f11debe7e2f6415bb10bc973f0e4c61b1beeaa19fe67",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "textual",
+      "rank": 76,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://sniffio.readthedocs.io/",
+      "inspection": {
+        "bytes": 16956,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"06c30fc1fa960098fb124ddaa28f06cf\"",
+        "final_host": "sniffio.readthedocs.io",
+        "final_url": "https://sniffio.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Fri, 06 Mar 2026 12:22:44 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://sniffio.readthedocs.io/",
+            "status": 302,
+            "to": "https://sniffio.readthedocs.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "db0b88a825d3231a30cbc0e66cb2e3df0a140bf6adec3961541f1e7f47bb3791",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "sniffio",
+      "rank": 80,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://tzdata.python.org",
+      "inspection": {
+        "bytes": 24817,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"ef93a37ca46fa5bfaf3e6dbe22dadad1\"",
+        "final_host": "tzdata.python.org",
+        "final_url": "https://tzdata.python.org",
+        "generator": "sphinx",
+        "last_modified": "Fri, 24 Apr 2026 17:30:59 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "2db22fc9735cb25f767822207a7275203aa6526b08e2ec178c41968b02ea4c49",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "tzdata",
+      "rank": 81,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://github.com/fastapi/annotated-doc",
+      "inspection": {
+        "bytes": 305102,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"2178cdcff178767747fec889d55188b0\"",
+        "final_host": "github.com",
+        "final_url": "https://github.com/fastapi/annotated-doc",
+        "generator": "unknown",
+        "last_modified": null,
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "905779d6a190ce70b6d5bf2bc63b7e65c3984ee07475f7c21e3b3bf9059128aa",
+        "status": 200,
+        "supported_generator": false
+      },
+      "project": "annotated-doc",
+      "rank": 82,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://wrapt.readthedocs.io/",
+      "inspection": {
+        "bytes": 11567,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"68b9ea9933a6172d6a19d751642a8dce\"",
+        "final_host": "wrapt.readthedocs.io",
+        "final_url": "https://wrapt.readthedocs.io/en/master/",
+        "generator": "sphinx",
+        "last_modified": "Tue, 28 Jul 2026 05:15:43 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://wrapt.readthedocs.io/",
+            "status": 302,
+            "to": "https://wrapt.readthedocs.io/en/master/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "5559e49f38f1b59015e088c39d8ff533cb6f1c646d7dc4c7851a37b60d8d5b13",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "wrapt",
+      "rank": 85,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://hatch.pypa.io/latest/",
+      "inspection": {
+        "bytes": 69967,
+        "canonical_host": "hatch.pypa.io",
+        "canonical_url": "https://hatch.pypa.io/1.18/",
+        "content_type": "text/html",
+        "etag": "\"6a7e2f75-1114f\"",
+        "final_host": "hatch.pypa.io",
+        "final_url": "https://hatch.pypa.io/latest/",
+        "generator": "mkdocs",
+        "last_modified": "Thu, 13 Aug 2026 20:56:21 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "9126838e661636e7e00b58d672f549e0bc4563c29ef5fe943cbc9f399741c1e0",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "hatchling",
+      "rank": 86,
+      "resolution": "homepage-resolved"
+    },
+    {
+      "declared_url": "https://greenlet.readthedocs.io",
+      "inspection": {
+        "bytes": 28138,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"cdb831423df1cdbf7116cd1a71f77221\"",
+        "final_host": "greenlet.readthedocs.io",
+        "final_url": "https://greenlet.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 10 Aug 2026 13:24:12 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://greenlet.readthedocs.io",
+            "status": 302,
+            "to": "https://greenlet.readthedocs.io/en/latest/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "fb179b893ddb483d5f1954634382da2c5d44fe61012003979e51ef68b29d9de4",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "greenlet",
+      "rank": 87,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://docs.pydantic.dev/dev-v2/concepts/pydantic_settings/",
+      "error": "RootInspectionError: HTTPError: HTTP Error 404: Not Found",
+      "project": "pydantic-settings",
+      "rank": 89,
+      "redirects": [
+        {
+          "from": "https://docs.pydantic.dev/dev-v2/concepts/pydantic_settings/",
+          "status": 301,
+          "to": "https://pydantic.dev/docs/validation/latest/dev-v2/concepts/pydantic_settings/"
+        }
+      ],
+      "request_attempts": 1,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://googleapis.dev/python/google-api-core/latest/",
+      "inspection": {
+        "bytes": 24036,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "\"496c6d6a8e20bb2c0f3f8a16aa21f42325b1d0353aa98dae1a059620ea6e5a23\"",
+        "final_host": "googleapis.dev",
+        "final_url": "https://googleapis.dev/python/google-api-core/latest/",
+        "generator": "sphinx",
+        "last_modified": "Sat, 15 Aug 2026 22:03:37 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "297ccf73f75afdebd889abfbe2756a54f1d037ac494323f393d4641a773ae7a1",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "google-api-core",
+      "rank": 90,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+      "inspection": {
+        "bytes": 14247,
+        "canonical_host": "pyasn1.readthedocs.io",
+        "canonical_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "content_type": "text/html",
+        "etag": "W/\"8a988fb657025db1e4bfbc7e26058254\"",
+        "final_host": "pyasn1.readthedocs.io",
+        "final_url": "https://pyasn1.readthedocs.io/en/latest/contents.html",
+        "generator": "sphinx",
+        "last_modified": "Wed, 13 Jul 2022 21:28:16 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "bd0ce0e529b58aeab2ef34aaaa9275288d595b15ef2e51965302bb9dccdff969",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pyasn1-modules",
+      "rank": 91,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://facelessuser.github.io/soupsieve/",
+      "inspection": {
+        "bytes": 55020,
+        "canonical_host": "facelessuser.github.io",
+        "canonical_url": "https://facelessuser.github.io/soupsieve/",
+        "content_type": "text/html",
+        "etag": "\"6a752d6c-d6ec\"",
+        "final_host": "facelessuser.github.io",
+        "final_url": "https://facelessuser.github.io/soupsieve/",
+        "generator": "mkdocs",
+        "last_modified": "Fri, 07 Aug 2026 00:57:16 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "1deb3da659454da22fe0523212fea603db6d73fba7ac6955b29a15942a51d4b3",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "soupsieve",
+      "rank": 93,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://arrow.apache.org/docs/python",
+      "inspection": {
+        "bytes": 181403,
+        "canonical_host": "arrow.apache.org",
+        "canonical_url": "https://arrow.apache.org/docs/python/index.html",
+        "content_type": "text/html",
+        "etag": "\"2c49b-658c25ec46f5d\"",
+        "final_host": "arrow.apache.org",
+        "final_url": "https://arrow.apache.org/docs/python/",
+        "generator": "sphinx",
+        "last_modified": "Tue, 11 Aug 2026 09:48:17 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://arrow.apache.org/docs/python",
+            "status": 301,
+            "to": "https://arrow.apache.org/docs/python/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "8c7582073e73b0a82f05fde03804d68da6151efc7c9b6efbdc7c7854cd69ba39",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "pyarrow",
+      "rank": 94,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://tenacity.readthedocs.io/en/latest/",
+      "inspection": {
+        "bytes": 56598,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"ebf45f981f2a2f3aa637c5fbf8dbd71b\"",
+        "final_host": "tenacity.readthedocs.io",
+        "final_url": "https://tenacity.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 14 Aug 2023 13:22:05 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "5686185039f9fdbabb83fd9264fed03f18fb5c3ebfb43d99cc25a9df315dacff",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "tenacity",
+      "rank": 95,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://grpc.github.io/grpc/python",
+      "inspection": {
+        "bytes": 15310,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "\"6a671da1-3bce\"",
+        "final_host": "grpc.github.io",
+        "final_url": "https://grpc.github.io/grpc/python/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 27 Jul 2026 08:58:09 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://grpc.github.io/grpc/python",
+            "status": 301,
+            "to": "https://grpc.github.io/grpc/python/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "de6adafc02fdaca1221300f005d18344081410978bbd802176124f20fd4f954f",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "grpcio",
+      "rank": 96,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://kludex.github.io/python-multipart/",
+      "inspection": {
+        "bytes": 49441,
+        "canonical_host": "kludex.github.io",
+        "canonical_url": "https://kludex.github.io/python-multipart/",
+        "content_type": "text/html",
+        "etag": null,
+        "final_host": "multipart.fastapiexpert.com",
+        "final_url": "http://multipart.fastapiexpert.com/",
+        "generator": "mkdocs",
+        "last_modified": "Thu, 04 Jun 2026 15:54:33 GMT",
+        "redirect_count": 1,
+        "redirects": [
+          {
+            "from": "https://kludex.github.io/python-multipart/",
+            "status": 301,
+            "to": "http://multipart.fastapiexpert.com/"
+          }
+        ],
+        "request_attempts": 1,
+        "response_sha256": "09bf1a2144abac89439933f13322df9eb8e85457ca9e96ce7593d714e9ad1885",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "python-multipart",
+      "rank": 98,
+      "resolution": "label-resolved"
+    },
+    {
+      "declared_url": "https://distro.readthedocs.io/en/latest/",
+      "inspection": {
+        "bytes": 135310,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "W/\"eb1a959bef3ec5c5475dc2b16b80b70a\"",
+        "final_host": "distro.readthedocs.io",
+        "final_url": "https://distro.readthedocs.io/en/latest/",
+        "generator": "sphinx",
+        "last_modified": "Mon, 29 Jun 2026 09:01:01 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "b711eceb4c2475962bf004711700b5d4c6bdfe20af41a2e7a261e510907da352",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "distro",
+      "rank": 99,
+      "resolution": "repository-homepage-resolved"
+    },
+    {
+      "declared_url": "https://docs.scipy.org/doc/scipy/",
+      "inspection": {
+        "bytes": 22267,
+        "canonical_host": null,
+        "canonical_url": null,
+        "content_type": "text/html",
+        "etag": "\"56fb-6549d52527c00\"",
+        "final_host": "docs.scipy.org",
+        "final_url": "https://docs.scipy.org/doc/scipy/",
+        "generator": "sphinx",
+        "last_modified": "Fri, 19 Jun 2026 15:55:28 GMT",
+        "redirect_count": 0,
+        "redirects": [],
+        "request_attempts": 1,
+        "response_sha256": "0007f0346aae5a051f069ad14098cbbbe1063512099deebf38ec8d4becd72c1f",
+        "status": 200,
+        "supported_generator": true
+      },
+      "project": "scipy",
+      "rank": 100,
+      "resolution": "label-resolved"
+    }
+  ],
+  "stage": "documentation-root-inspection",
+  "study": "code-sample-validity-census",
+  "summary": {
+    "errors": 2,
+    "generators": {
+      "docusaurus": 1,
+      "mkdocs": 12,
+      "sphinx": 61,
+      "starlight": 2,
+      "unknown": 2
+    },
+    "inspected": 78,
+    "redirect_hops": 45,
+    "request_attempts": 82,
+    "selected_roots": 80,
+    "supported_generators": 76,
+    "unsupported_or_non_html": 2
+  }
+}
