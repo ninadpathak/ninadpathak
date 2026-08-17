@@ -23,3 +23,21 @@ Two more targets are on hold in `semrush-opportunity-backlog.csv` for the same r
 Rebase onto `origin/main` and re-read `output/llms.txt` **before** writing any brief, not
 after. The do-not-repeat register in
 `/Users/ninad/.claude/orchestration/ninadpathak-seo/LEDGER.md` is the check.
+
+## Superseded 2026-08-17 by the queue reweight and the intent corrections
+
+Ten briefs written against the pre-reweight queue. Their dates now carry different rows, so
+following them would publish the wrong piece on the wrong day.
+
+They died in three waves on the same day:
+
+1. **The reweight** moved the whole API block out of rows 20-30 and changed what most August
+   dates hold.
+2. **The intent check** cut Reddit 11 to 4, community 10 to 5 and events 11 to 3 after the
+   keyword space failed the parent-topic test.
+3. **The GSC scoreboard** killed the expansion-slot premise: the site has three real
+   striking-distance queries, not a bank of near-ranking pages.
+
+Several are still good *ideas* and some may return as queue rows once their demand is verified.
+The merges into the IA page and the FAQ frontmatter pass are both real work that nothing else
+currently schedules. Treat this folder as a source of candidates, never as instructions.
