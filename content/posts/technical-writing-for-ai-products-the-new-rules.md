@@ -164,7 +164,7 @@ A few concrete rules follow from that:
 - Parameter tables should state defaults, limits, and replacement paths explicitly.
 - Error sections should include the exact failure object or message shape where possible.
 
-My post on [agent harnesses](/articles/agent-harnesses/) makes a related point from the systems side: the runtime around an LLM becomes load-bearing once the model is taking multi-step actions. Documentation plays the same role for developers.
+My post on agent harnesses makes a related point from the systems side: the runtime around an LLM becomes load-bearing once the model is taking multi-step actions. Documentation plays the same role for developers.
 
 A vague paragraph that a human can mentally patch over becomes a serious integration bug when an agent uses it as operating context. A human reading "rate limits apply" knows to go look up the actual number.
 

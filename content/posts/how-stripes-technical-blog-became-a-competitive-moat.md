@@ -132,7 +132,7 @@ Picture an engineer whose webhook fired twice and double-charged a customer, sea
 
 It earns default consideration.
 
-I covered a similar dynamic in [agent harnesses](/articles/agent-harnesses/). Teams trust systems that make failure legible and recoverable.
+I covered a similar dynamic in agent harnesses. Teams trust systems that make failure legible and recoverable.
 
 Stripe’s content does that for payment integrations, the way a good flight manual spends more pages on what to do when an engine fails than on cruising altitude. Posts do not just celebrate capability.
 

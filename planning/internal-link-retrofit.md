@@ -119,3 +119,32 @@ self-sustaining. The reweighted queue gives it only three of 71 rows, correctly,
 3.9% of winnable volume. That tension is real and should be decided rather than drifted into:
 either DevEx earns more rows than its volume justifies so the cluster can support itself, or it
 stays small and permanently depends on retrofits like this one.
+
+---
+
+## Update, 2026-08-17: the six links are removed
+
+Removed by unwrapping each `[anchor](/url/)` to plain text, so the sentence is untouched and no
+prose was written. Cross-cluster links drop from 22 to 16.
+
+Two pages fell into the low-outbound list as a direct result, and that is the finding:
+
+| Page | Outbound before | After |
+|---|---:|---:|
+| `technical-content-as-a-moat-the-long-game-for-developer-tools` | 3 | **0** |
+| `how-stripes-technical-blog-became-a-competitive-moat` | 2 | 1 |
+
+**Every outbound link on `technical-content-as-a-moat` was a convenience link.** Strip the ones
+that fail the subject test and nothing remains. A page whose entire link profile was decoration
+was not connected to the site; it only appeared to be. It needs review as a page, not three
+replacement links.
+
+Both now need outbound targets, in the same cluster:
+
+| Page | Add links to | Why |
+|---|---|---|
+| `technical-content-as-a-moat-the-long-game-for-developer-tools` | `why-devtools-startups-lose-deals-over-bad-docs`, `developer-trust-hierarchy` | Both are the same argument at a different altitude: content as commercial defence, and the trust mechanism that makes it work. Same cluster, and the connection is the subject rather than a resemblance. |
+| `how-stripes-technical-blog-became-a-competitive-moat` | `technical-content-as-a-moat-the-long-game-for-developer-tools` | Stripe is the worked example of the moat argument. That is a genuine subject relationship, and it reciprocates. |
+
+Revised totals: **20 orphans, 11 outbound-deficient pages, 16 cross-cluster links remaining**, all
+16 judged legitimate on the subject test.

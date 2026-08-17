@@ -152,7 +152,7 @@ Fragmentation like this carries real costs. Switching costs lock teams into thei
 
 Evaluation becomes impossible across frameworks because each system measures memory quality differently. Research findings do not transfer, because a technique that works in MemGPT's tiered memory model may not apply to Mem0's flat storage.
 
-I wrote about a similar fragmentation problem in [developer onboarding documentation](/articles/developer-onboarding-docs-what-works-what-doesnt/), and the pattern is the same. When a problem space is new and fast-moving, everyone builds their own solution.
+I wrote about a similar fragmentation problem in developer onboarding documentation, and the pattern is the same. When a problem space is new and fast-moving, everyone builds their own solution.
 
 When the space matures, standards emerge. The memory space is not mature yet.
 
