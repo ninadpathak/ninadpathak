@@ -276,3 +276,15 @@ disagreement, consistent with the tool-disagreement finding in the SERP verifica
 magnitudes, not figures.
 
 Output: `planning/research/REFERENCE-INFRASTRUCTURE-2026-08-17.md`.
+
+---
+
+## 2026-08-17 AI Overview citation checker — acquisition research (Semrush, 2 paid calls)
+
+| # | Tool | Query | Rows | Decision it changed |
+|---:|---|---|---:|---|
+| S16 | phrase_this | `ai overviews checker`, us, export Fk | 1 | Whether `Fk` is a valid SERP-feature column on phrase_this. It is not; the call fell back to defaults. Ruled out that report as the presence source. |
+| S17 | phrase_organic | `ai overviews checker`, us, export Dn,Ur,Fk | 3 | **Validated Semrush feature code 52 as AI Overview presence** against ground truth. seo-currency verified on a live SERP that this keyword reproducibly carries an Overview; Semrush returns `7,9,20,36,52` for all three ranking URLs. Two independent instruments agree. |
+
+No DataForSEO calls were made: no account exists. `tools/ai_overview_citations.py` refuses to
+spend without `--decision` and reports cost in dry-run.
