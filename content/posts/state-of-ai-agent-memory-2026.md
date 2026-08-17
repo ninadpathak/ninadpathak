@@ -26,7 +26,9 @@ The ecosystem offers several approaches to those problems, with different trade-
   </div>
 </div>
 
-## Why agent memory is categorically different from RAG
+## The memory stack separates active state from stored knowledge
+
+### Agent memory is categorically different from RAG
 
 Retrieval-Augmented Generation solved document question answering. You have a corpus, you embed it, you retrieve the relevant chunks, you pass them to the model.
 
@@ -42,7 +44,7 @@ Where the two diverge in practice is the failure mode. RAG fails silently when r
 
 Agent memory can fail loudly when the system acts on stale or contradictory state.
 
-## The memory stack in 2026
+### The stack separates storage, retrieval, and ranking
 
 Production agent-memory systems tend to share a conceptual stack even when their implementations differ.
 
@@ -62,7 +64,17 @@ The LLM itself decides what to recall, which sounds elegant until you realize it
 
 Cross-encoder and late-interaction reranking can improve multi-constraint retrieval at additional compute cost. Measure recall and latency on a labeled memory corpus before adding either one.
 
-## Letta: The closest thing to a memory OS
+### Open-source systems expose three consequential design choices
+
+The first choice is who controls movement between active context and stored memory. Model-managed systems let the agent decide what to recall or archive, while application-managed systems make those transitions explicit in code and easier to audit.
+
+The second is the shape of the store. A flat fact store is simple to inspect, a tiered store distinguishes always-present state from recall and archive, and a graph can preserve relationships and changes that vector similarity alone cannot express.
+
+The third is the deployment boundary. Self-hosting keeps memory data and migration decisions under the team's control, but it also makes indexing, access control, backups, and evaluation the team's operational responsibility.
+
+## Current systems make those choices concrete
+
+### Letta treats context as managed working space
 
 Letta positions itself as an operating system for agent memory, and the metaphor is more accurate than most. The system treats the LLM context window as RAM and external memory as disk storage, the same swap mechanism your laptop uses when physical RAM runs out and pages spill to the SSD.
 
@@ -78,7 +90,7 @@ Core memory is small, high-value, and queried on every turn. Archival memory is 
 
 Letta's architecture still needs load tests with the target agent, concurrency, memory volume, and deployment region. Platform pricing also needs to be calculated from the current plan rather than an article-level estimate.
 
-## MemGPT: More research platform than production system
+### MemGPT lets the model manage paging
 
 MemGPT launched with a strong academic pedigree, and it shows in the design. The system is built around the idea that modern LLMs have a limited attention window, and agents need a memory hierarchy similar to how operating systems manage RAM and disk.
 
@@ -90,7 +102,7 @@ Self-managed memory can move important state out of active context at the wrong 
 
 Memory versioning is another design question. Verify whether the selected system preserves history, supports rollback, and records why a memory changed.
 
-## Mem0: The fastest path to production memory
+### Mem0 hides memory operations behind a small interface
 
 Mem0 takes the opposite approach from MemGPT. The pitch is an infrastructure layer for developers who need agent memory working in production this quarter, with the novel memory model left as someone else's research problem.
 
@@ -106,7 +118,9 @@ Agent-level memory holds the agent's operational state and learned procedures.
 
 Mem0 and a custom vector-store implementation trade integration work against platform cost and control. Compare them with the same memory operations, retrieval labels, and engineering assumptions instead of using a universal crossover point.
 
-## What Is Still Research
+## The architecture still has unresolved boundaries
+
+### Consolidation and cross-agent sharing remain research problems
 
 Two areas have significant research backing but are not yet production-ready for most teams.
 
@@ -122,7 +136,7 @@ Cross-agent memory sharing adds coordination work because the system must decide
 
 Larger context windows may change where external memory earns its cost, but they do not remove the need to test recall, updates, and conflicting state.
 
-## The Fragmentation Crisis
+### Framework fragmentation traps memory behind abstractions
 
 Every agent framework has its own memory abstraction, and none of them talk to each other. That is the whole situation in one sentence.
 
@@ -146,7 +160,7 @@ Debugging gets harder too. When an agent makes a bad decision based on faulty me
 
 A monolithic system may offer a shorter trace. Framework middleware adds more places where state can be transformed or lost.
 
-## Mcp Changes The Memory Conversation
+### MCP standardizes transport, not memory meaning
 
 The Model Context Protocol (MCP) was never meant as a memory protocol, yet it has become one of the most important pieces of infrastructure for agent memory. My detailed breakdown of [how MCP works architecturally](/articles/model-context-protocol-explained/) is worth reading before you design any memory system on top of it.
 
@@ -165,7 +179,9 @@ It solves the transport problem and leaves the semantic one open.
 Teams building agent systems today should treat MCP as a required interface even when only one memory system is in use internally. Being able to swap providers without rewriting your agent's memory integration is worth the modest added complexity.
 
 
-## The Evaluation Problem
+## Selection starts with evidence from the target workflow
+
+### Evaluation must reach downstream task behavior
 
 You cannot improve what you cannot measure, and agent memory evaluation is hard in a way that RAG evaluation is not.
 
@@ -183,13 +199,13 @@ A useful evaluation has three layers. The bottom measures retrieval quality, the
 
 The task layer matters most and costs the most to build because it requires representative tasks and deterministic grading.
 
-## How I would choose a memory system
+### A provider-independent interface preserves options
 
 Start with the smallest architecture that can preserve required state and explain updates. Compare hosted and self-managed options on retrieval quality, auditability, portability, latency, and the engineering cost of operating them.
 
 Define a provider-independent memory interface before product code depends on one schema. Build custom storage only when a measured requirement rules out the available platforms.
 
-## What to watch next
+### Standards and evaluations matter more than rankings
 
 Transport standards can reduce integration work without standardizing memory schemas. Evaluation will matter more as agents take consequential actions, especially tests for updates, contradictions, and task outcomes.
 

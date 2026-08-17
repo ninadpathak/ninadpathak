@@ -30,7 +30,9 @@ Across production pipelines handling tens of thousands of agent sessions, I have
   </div>
 </div>
 
-##The Two Memory Types Your Agent Actually Uses
+## Memory hierarchy separates active context from persistent state
+
+### Explicit and implicit memory solve different constraints
 
 Every LLM agent operates with two distinct memory mechanisms. Calling them both "memory" causes confusion, so let me be precise.
 
@@ -46,13 +48,27 @@ You only control what enters the context window.
 
 The distinction matters because different strategies apply to each type. You can build sophisticated explicit memory layers, but if you ignore implicit memory management, you will still hit performance walls when the KV cache balloons during long inference runs.
 
-See also: [How Memory Works in Claude Code](/articles/how-memory-works-in-claude-code/) and [Memory Hierarchy in AI Systems](/articles/memory-hierarchy-in-ai-systems/).
+See also: [How Memory Works in Claude Code](/articles/how-memory-works-in-claude-code/).
 
-##Eviction Strategies: What Gets Kicked Out First
+### Five layers answer five different memory questions
+
+The Atkinson-Shiffrin model separates sensory input, short-term storage, and long-term storage. An agent system needs a more operational version of that hierarchy: an input buffer for the current event, working context for active reasoning, episodic memory for what happened, semantic memory for what is known, and procedural memory for how the agent should act.
+
+Each layer has a different retrieval key. Working context follows the current task, episodic memory needs time and source, semantic memory needs subject and validity, and procedural memory is expressed through instructions, tool schemas, and policies.
+
+### Hierarchy keeps retrieval scoped
+
+A flat store puts a current instruction, an old session event, and a durable product fact on the same retrieval surface. A hierarchy lets the system search the layer that fits the question and decide explicitly which information should move from a transient layer into a persistent one.
+
+That separation matters when facts conflict or expire. Promotion, eviction, and compression become layer transitions with rules, not one similarity score deciding what the agent remembers.
+
+## Eviction strategies decide what gets kicked out first
 
 When your memory buffer fills, something has to go. The strategy you choose determines what your agent loses and how gracefully it degrades.
 
-###Lru: Simple, Predictable, Wrong For Agents
+That decision needs more than an age check. Agent memory has to balance recency against task relevance and explicit instructions about what must survive.
+
+### LRU is simple, predictable, and wrong for agents
 
 Least Recently Used (LRU) is the default eviction strategy for most caching systems. It tracks when each memory entry was last accessed and evicts the oldest one when space runs out.
 
@@ -89,7 +105,7 @@ LRU fails for agents because recency has nothing to do with importance. The most
 
 Picture an agent that handled a flurry of small talk this morning and learned a load-bearing detail last Tuesday, like the user's deployment region. LRU will keep the small talk and evict the region, because the region has not been touched recently even though it decides every answer the agent gives next.
 
-###Sliding Window With Importance Signals
+### A sliding window can carry importance signals
 
 A better approach for agents combines a sliding window with importance signals. Each memory entry carries a score derived from relevance to the current task context, frequency of access across sessions, and explicit user signals (e.g., "remember this").
 
@@ -156,7 +172,9 @@ That decay keeps old, stale entries from dominating the buffer indefinitely.
 
 For more on how different agent frameworks handle eviction, see [How Memory Works in HyperAgents](/articles/how-memory-works-in-hyperagents/).
 
-##Kv Cache Management: The Silent Memory Hog
+## KV cache management controls the implicit-memory budget
+
+### Token history becomes stored attention state
 
 Where most engineers get surprised is the KV cache. Attention mechanisms store key and value tensors for every token position in every layer.
 
@@ -164,7 +182,7 @@ For a 4K context, you are caching 4,000 positions across 32 to 96 layers (depend
 
 A 70B parameter model running on 8xA100 with a full 128K context can dedicate 40GB+ of GPU memory just to the KV cache, and that is before you load the model weights. Engineers at mistral.cc and meta's Llama team have published benchmarks showing KV cache consuming 60-70% of available GPU memory during long-context inference.
 
-###Paged Attention Changes The Allocation
+### Paged attention changes the allocation
 
 vLLM introduced paged attention in 2023, and it reworked how the KV cache spends memory. Rather than pre-allocating a contiguous block for the full context, paged attention manages the KV cache in fixed-size pages (typically 16 tokens per page), the same trick an operating system uses to hand a process virtual pages instead of one giant contiguous slab.
 
@@ -203,11 +221,13 @@ Nvidia's TensorRT-LLM also handles KV cache management aggressively. It pre-allo
 
 Running inference without TensorRT-LLM or vLLM almost certainly means you are wasting GPU memory you already paid for, often enough to force a smaller batch size or a bigger box than the workload needs.
 
-##Compression And Summarization: Shrinking What Stays
+## Compression and summarization shrink what stays
 
 Eviction is not always an option. When the memory is genuinely important and you need to keep it but cannot afford the full space, compression and summarization step in.
 
-###Text Summarization Truncation
+Both methods save capacity by discarding information, so the choice depends on which errors the workload can tolerate and which facts must remain exact.
+
+### Text summarization trades detail for space
 
 Summarizing older memory entries before they fill your buffer is the simplest approach. If you have 50 interactions from the last week and room for only 10, you compress the 50 into 10 dense entries that preserve the facts and patterns, the way you would turn a week of standup notes into a few bullet points before a planning meeting.
 
@@ -251,7 +271,7 @@ Semantic drift is the problem with summarization. Each round loses some informat
 
 You need to track summarization depth and either block re-summarization of already-summarized entries or store the original version alongside the summary.
 
-###Embedding Compression
+### Embedding compression trades precision for space
 
 Compressing at the embedding level is another option. Rather than storing full text, you store a compressed representation of the semantic meaning.
 
@@ -287,7 +307,7 @@ Retrieval-heavy workloads where you care about semantic similarity more than exa
 
 For voice agents specifically, see [Memory for Voice AI Agents](/articles/memory-for-voice-ai-agents/) where compression latency becomes critical due to real-time constraints.
 
-##Letta And MemGPT: What Production Systems Actually Look Like
+## Letta and MemGPT make memory tiers explicit
 
 Letta (formerly MemGPT) is the most widely used open-source system for managing LLM memory beyond the context window. Having deployed it across several production pipelines, I can tell you what actually happens when you run it.
 
@@ -340,23 +360,35 @@ Engineers coming from traditional software backgrounds, where you just add anoth
 
 For a comparison with other agent frameworks, see [How Memory Works in DeerFlow](/articles/how-memory-works-in-deerflow/) and [Short-Term Memory for AI Agents](/articles/short-term-memory-for-ai-agents/).
 
-##The Forgetting Problem: Why Your Agent Loses Things
+## Forgetting has four distinct failure modes
 
 The forgetting problem is the difference between what you want your agent to remember and what it actually retains across interactions. Calling it a single problem hides the truth, since it is really a stack of related failures.
 
-**Retrieval failure** happens when the agent needs a memory but does not query for it. The storage layer is fine, and the entry is sitting right there.
+The remedy depends on where the memory lost its meaning or scope.
+
+### Retrieval fails before the store is queried
+
+Retrieval failure happens when the agent needs a memory but does not query for it. The storage layer is fine, and the entry is sitting right there.
 
 What broke is the trigger: the agent must decide to look for relevant memory before it can retrieve it, and with poor trigger logic it operates blind, answering a question about last month's invoice without ever checking the billing notes it already saved.
 
-**Attribution failure** happens when the agent retrieves a memory but cannot correctly attribute the information. It knows someone asked for a refund but pins it to the wrong account, or recalls a deployment preference and applies it to a different user entirely.
+### Attribution fails when identity or session scope is lost
 
-Thin metadata on memory entries is the usual cause.
+Attribution failure happens when the agent retrieves a memory but cannot correctly attribute the information. It knows someone asked for a refund but pins it to the wrong account, or recalls a deployment preference and applies it to a different user entirely.
 
-**Temporal decay failure** happens when memory entries survive too long without reinforcement. Over time, they drift semantically as you swap the embedding model or as related context shifts under them.
+Thin metadata on memory entries is the usual cause. A useful record carries the subject, source, session, write time, and validity window so retrieval can reject a plausible memory that belongs to the wrong user or the wrong session.
+
+Semantic similarity cannot enforce those boundaries by itself. Scope filters belong in the memory query, before the retrieved material reaches the model.
+
+### Temporal decay leaves expired facts active
+
+Temporal decay failure happens when memory entries survive too long without reinforcement. Over time, they drift semantically as you swap the embedding model or as related context shifts under them.
 
 The memory technically exists, but the meaning has warped, like a note that says "the new pricing" two years after the pricing changed again.
 
-**Context contamination** happens when retrieved memories contradict each other. Say the agent learned "user prefers dark mode" in session 3 and "user prefers light mode" in session 7, and both surface together.
+### Context contamination surfaces incompatible memories together
+
+Context contamination happens when retrieved memories contradict each other. Say the agent learned "user prefers dark mode" in session 3 and "user prefers light mode" in session 7, and both surface together.
 
 It now holds a conflict it must resolve, and absent explicit conflict resolution logic, it typically grabs the most recent entry and silently drops the older one, which is wrong as often as it is right.
 
@@ -396,7 +428,9 @@ class MemoryConflictResolver:
 
 For a broader view of how the industry is addressing this, see [State of AI Agent Memory 2026](/articles/state-of-ai-agent-memory-2026/).
 
-##Rag Vs Memory: Different Tools, Different Jobs
+## RAG and memory answer different questions
+
+### RAG retrieves document-shaped knowledge
 
 RAG and explicit memory management solve different problems, and conflating them causes architecture problems.
 
@@ -408,9 +442,13 @@ Memory management answers a different question: "what does this agent know about
 
 [RAG vs Memory](/articles/rag-vs-memory/) goes deep on this distinction. Storing documentation to answer questions calls for RAG.
 
-Storing interaction history to maintain identity and continuity calls for memory management. Production systems usually need both running side by side.
+### Episodic recall needs attribution and persistence
 
-##Practical Implementation: Where To Start
+Storing interaction history to maintain identity and continuity calls for memory management. An episodic record must preserve who or what the observation concerns, which session produced it, and whether a later event replaced it.
+
+RAG alone does not create that record or carry it across sessions. Production systems usually need semantic retrieval for document-shaped knowledge alongside explicit episodic storage for events, preferences, and state that the agent learned while acting.
+
+## A practical implementation starts with session state
 
 Building a production agent today with no memory management layer, you want this minimum viable implementation order.
 
@@ -428,7 +466,7 @@ Watch your retrieval hit rate, the percentage of memory queries that return some
 
 Production-grade memory management is genuinely involved as a full architecture. The minimum viable version, though, is achievable in a sprint, and it fixes the most common failure mode I see with LLM agents in production.
 
-##Faq
+## FAQ
 
 **How does context window size affect memory management decisions?**
 
