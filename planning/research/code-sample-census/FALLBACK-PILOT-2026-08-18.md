@@ -57,4 +57,3 @@ were not stored in the page snapshot: **134 free HTTP attempts total, paid calls
 conservative 3,450-page maximum, this pilot implies roughly 40 MB compressed;
 actual volume should be lower because many project traversals exhaust before 50
 and shared page records are reused.
-
