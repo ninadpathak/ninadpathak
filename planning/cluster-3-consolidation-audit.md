@@ -51,7 +51,7 @@ Each row names the target and what survives from the source. The moat consolidat
 | Source | Impr | Claims | Target | What survives from the source |
 |---|---:|---:|---|---|
 | `state-of-open-source-memory-2026` | 35 | 0 | `state-of-ai-agent-memory-2026` | the open-source vendor landscape, which the owner covers only as commercial options |
-| `beam-memory-benchmark` | 15 | 1 | `context-windows-vs-memory` | the measured long-context retrieval failure |
+| `beam-memory-benchmark` | 15 | 1 | `context-windows-vs-memory` | the literature-backed Lost in the Middle and RULER effective-context job; no local benchmark exists |
 | `memory-hierarchy-in-ai-systems` | 15 | 1 | `ai-memory-management-for-llms` | the layered model, after it has absorbed the RAG-is-not-enough argument |
 | `the-memory-hierarchy-why-rag-is-not-enough` | 13 | 0 | `ai-memory-management-for-llms` | the argument for why RAG alone fails as memory, which the hierarchy page states but does not argue |
 | `asymmetric-retrieval-agent-memory` | 12 | 1 | `rag-vs-memory` | why agent-side retrieval is asymmetric, which is the mechanism behind the comparison |
