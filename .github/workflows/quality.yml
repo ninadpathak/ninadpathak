@@ -35,17 +35,63 @@ jobs:
       - name: Run regression tests
         run: python -m unittest discover -s tests -v
 
-      - name: Check changed published writing
+      # Fail on regressions, not on inherited debt. Running rule_checker over a changed
+      # post and failing on any error turned CI red the moment anyone touched an older
+      # article, because ~250 pre-existing errors are spread across the archive. Hermes
+      # publishes daily and edits posts daily, so the gate was red by default, and a gate
+      # that cannot go green stops being read. campaign-90d.md's publish gate has always
+      # said "no new errors added to the pre-existing" — this makes CI match it.
+      - name: Check changed published writing for regressions
         run: |
-          changed_posts=$(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md')
-          if [ -n "$changed_posts" ]; then
-            python rule_checker.py $changed_posts
-          else
+          changed=$(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md')
+          if [ -z "$changed" ]; then
             echo "No changed blog posts to audit."
+            exit 0
           fi
+
+          echo "== findings on the new versions =="
+          python rule_checker.py $changed || true
+
+          count() { python rule_checker.py --summary "$@" 2>/dev/null \
+            | sed -n 's/^TOTAL: \([0-9]*\) errors.*/\1/p' | head -1; }
+
+          after=$(count $changed); after=${after:-0}
+
+          # Read the previous versions out of git into a scratch tree rather than
+          # checking them out, so the working tree is never disturbed. A newly added
+          # post has no prior version, so its baseline is zero and all of its errors
+          # are new.
+          base=$(mktemp -d)
+          befores=""
+          for f in $changed; do
+            if git cat-file -e "HEAD^:$f" 2>/dev/null; then
+              mkdir -p "$base/$(dirname "$f")"
+              git show "HEAD^:$f" > "$base/$f"
+              befores="$befores $base/$f"
+            fi
+          done
+          if [ -n "$befores" ]; then
+            before=$(cd "$base" && count $befores); before=${before:-0}
+          else
+            before=0
+          fi
+
+          echo "rule_checker errors on changed posts: before=$before after=$after"
+          if [ "$after" -gt "$before" ]; then
+            echo "::error::rule_checker errors increased from $before to $after on changed posts"
+            exit 1
+          fi
+          echo "No new rule_checker errors introduced."
+
+      # Deliberately not gating on `tools/audit_clusters.py --strict` yet: 18 posts still
+      # have no inbound link, so it exits 1 today and would redden CI on arrival, which is
+      # the same mistake the step above fixes. Add it once the orphan retrofit in
+      # planning/internal-link-retrofit.md has landed.
 
       - name: Build and audit site
         run: python build.py
 
-      - name: Verify generated output is committed
-        run: git diff --exit-code -- output
+      # `output/` is untracked and .gitignored — Cloudflare Pages generates it at build
+      # time — so the old "verify generated output is committed" step diffed nothing and
+      # passed unconditionally. Removed rather than left in place looking like a check.
+

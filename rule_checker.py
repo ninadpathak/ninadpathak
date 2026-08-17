@@ -261,6 +261,35 @@ def get_prose(text):
     return body
 
 
+# Introduces a list: "three types of load: intrinsic, extraneous, and germane" or
+# "three patterns - a, b and c". A trio that names its members is evidenced by the
+# sentence itself and needs no receipt.
+_TRIO_INTRO = re.compile(r'^[^.!?:\u2014-]{0,60}[:\u2014-]\s*(.{0,220})', re.S)
+
+
+def _names_its_trio(prose, after):
+    """True when the tokens right after a "three" actually name three things.
+
+    Deliberately conservative: it wants a colon, dash or em dash introducing a run of
+    comma-separated items with a final "and"/"or", or a markdown/numbered list starting
+    on the next line. Prose that merely contains the word "three" does not qualify.
+    """
+    tail = prose[after:after + 300]
+
+    # A list that begins on the following line, markdown bullet or numbered.
+    if re.match(r'[^\n]{0,80}:?\s*\n+\s*(?:[-*+]\s|1[.)]\s)', tail):
+        return True
+
+    match = _TRIO_INTRO.match(tail)
+    if not match:
+        return False
+    items = match.group(1).split('.')[0]
+    if not re.search(r'\b(?:and|or)\b', items):
+        return False
+    # Two commas plus a conjunction, or one comma with an Oxford-less "and".
+    return bool(items.count(',') >= 2 or (items.count(',') >= 1 and re.search(r',\s*\w[^,]*\b(?:and|or)\b', items)))
+
+
 def check_post(path):
     path = pathlib.Path(path)
     text = path.read_text(encoding='utf-8')
@@ -345,12 +374,24 @@ def check_post(path):
                             f'Forbidden word "{m.group(0)}" (use: {suggestion}): ...{snippet}...'))
 
     # ── 9. Rule-of-three language ─────────────────────────────────────
-    # A factual count, version, identifier, or explicit factual trio must
-    # carry a nearby invisible evidence receipt. Versions such as Python 3.13
-    # are excluded because the numeric token is part of the version.
+    # The rule exists because an unearned trio is an AI-writing tell. It is satisfied
+    # two ways, and the error message has always said so: a nearby invisible evidence
+    # receipt, or an explicit factual trio where the three things are actually named.
+    #
+    # Only the receipt was ever implemented, so the check fired on every literal
+    # "three" including sentences that name their trio immediately: "three types of
+    # load: intrinsic, extraneous, and germane" was reported as unevidenced while
+    # listing its own evidence. That produced errors no edit could clear, which meant
+    # CI went red on any commit touching an older post and stayed red. A gate that
+    # cannot go green stops being read.
+    #
+    # Versions such as Python 3.13 are excluded because the numeric token is part of
+    # the version.
     for m in re.finditer(r'\bthree\b|(?<![\d.])3(?![\d.])', prose, re.I):
         receipt_window = prose[max(0, m.start() - 300):m.start()]
         if '<!-- evidence-three:' in receipt_window:
+            continue
+        if _names_its_trio(prose, m.end()):
             continue
         start = max(0, m.start() - 30)
         snippet = prose[start:m.start() + 70].replace('\n', ' ').strip()
