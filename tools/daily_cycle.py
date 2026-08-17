@@ -460,12 +460,14 @@ def corpus_health() -> str:
 
     claims = count("audit_claims.py", r"^(\d+) candidate claim")
     headings = count("audit_headings.py", r"^(\d+) issue\(s\)")
+    structure = count("audit_structure.py", r"^(\d+) structural problem")
 
     code, out = run(python, "rule_checker.py", "--summary")
     match = re.search(r"^TOTAL: (\d+) errors", out, re.M)
     rules = match.group(1) if match else "?"
 
     return (f"{claims} unevidenced-claim candidate(s), {headings} heading issue(s), "
+            f"{structure} converged/saturated diagram group(s), "
             f"{rules} rule_checker error(s) — all candidates for review, not verdicts")
 
 

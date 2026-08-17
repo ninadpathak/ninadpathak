@@ -171,6 +171,13 @@ jobs:
       - name: Guard stylesheet coverage
         run: python tools/audit_stylesheets.py --strict
 
+      # Reported, not gated, until the glossary diagram rework lands. All 25 glossary
+      # entries currently share ONE diagram skeleton — 5 nodes, 2 branches, 2 outcomes —
+      # so --strict fails today, and adding a gate that cannot go green is the mistake
+      # this repo has made three times. Promote to --strict once the rework is in.
+      - name: Report diagram structural convergence
+        run: python tools/audit_structure.py
+
 
       # `output/` is untracked and .gitignored — Cloudflare Pages generates it at build
       # time — so the old "verify generated output is committed" step diffed nothing and
