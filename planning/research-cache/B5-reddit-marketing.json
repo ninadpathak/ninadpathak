@@ -1,0 +1,5345 @@
+[
+ {
+  "keyword": "reddit ads",
+  "volume": 8300,
+  "difficulty": 12,
+  "cpc": 3000,
+  "traffic_potential": 12000,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "subreddit",
+  "volume": 4700,
+  "difficulty": 14,
+  "cpc": 140,
+  "traffic_potential": 5100,
+  "parent_topic": "subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "what is a subreddit",
+  "volume": 1400,
+  "difficulty": 13,
+  "cpc": 80,
+  "traffic_potential": 500,
+  "parent_topic": "what is a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit seo",
+  "volume": 1300,
+  "difficulty": 34,
+  "cpc": 1000,
+  "traffic_potential": 6600,
+  "parent_topic": "reddit seo",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "subreddit list",
+  "volume": 1200,
+  "difficulty": 16,
+  "cpc": 4,
+  "traffic_potential": 2500,
+  "parent_topic": "subreddit list",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "how to report a subreddit",
+  "volume": 1100,
+  "difficulty": 0,
+  "cpc": 4,
+  "traffic_potential": 1400,
+  "parent_topic": "how to report a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "politics subreddit",
+  "volume": 1100,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 144000,
+  "parent_topic": "reddit politics",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "nfl subreddit",
+  "volume": 1000,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 214000,
+  "parent_topic": "nfl reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit ads manager",
+  "volume": 900,
+  "difficulty": 7,
+  "cpc": 450,
+  "traffic_potential": 12000,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "progressive growth reddit",
+  "volume": 800,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 4400,
+  "parent_topic": "progressivegrowth2",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "reddit marketing",
+  "volume": 800,
+  "difficulty": 36,
+  "cpc": 400,
+  "traffic_potential": 1000,
+  "parent_topic": "reddit marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit subreddit",
+  "volume": 800,
+  "difficulty": 22,
+  "cpc": 15,
+  "traffic_potential": 1200,
+  "parent_topic": "reddit subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "anime subreddit",
+  "volume": 800,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 9700,
+  "parent_topic": "anime reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "news",
+   "image"
+  ]
+ },
+ {
+  "keyword": "subreddit meaning",
+  "volume": 800,
+  "difficulty": 21,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "subreddit meaning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit nsfw subreddit",
+  "volume": 700,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 35000,
+  "parent_topic": "reddit nsfw",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "reddit progressive growth",
+  "volume": 700,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 4400,
+  "parent_topic": "progressivegrowth2",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news"
+  ]
+ },
+ {
+  "keyword": "nba subreddit",
+  "volume": 600,
+  "difficulty": 2,
+  "cpc": 600,
+  "traffic_potential": 285000,
+  "parent_topic": "reddit nba",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "subreddit stats",
+  "volume": 600,
+  "difficulty": 4,
+  "cpc": 160,
+  "traffic_potential": 900,
+  "parent_topic": "subreddit stats",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "overwatch subreddit",
+  "volume": 500,
+  "difficulty": 43,
+  "cpc": null,
+  "traffic_potential": 19000,
+  "parent_topic": "reddit overwatch",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to make a subreddit",
+  "volume": 500,
+  "difficulty": 3,
+  "cpc": 7,
+  "traffic_potential": 1300,
+  "parent_topic": "how to make a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "subreddit drama",
+  "volume": 450,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 3300,
+  "parent_topic": "subredditdrama",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "seo reddit",
+  "volume": 450,
+  "difficulty": 26,
+  "cpc": 1200,
+  "traffic_potential": 6200,
+  "parent_topic": "latest seo",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "squaredcircle subreddit",
+  "volume": 400,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 49000,
+  "parent_topic": "reddit squaredcircle",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "what is subreddit",
+  "volume": 400,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 400,
+  "parent_topic": "what is a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit ads cost",
+  "volume": 400,
+  "difficulty": 5,
+  "cpc": 1100,
+  "traffic_potential": 1800,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "subreddit finder",
+  "volume": 400,
+  "difficulty": 2,
+  "cpc": 3000,
+  "traffic_potential": 4900,
+  "parent_topic": "subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to block a subreddit",
+  "volume": 350,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "how to block a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "subreddit search",
+  "volume": 350,
+  "difficulty": 19,
+  "cpc": 1000,
+  "traffic_potential": 5100,
+  "parent_topic": "subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit ads login",
+  "volume": 350,
+  "difficulty": 8,
+  "cpc": 3500,
+  "traffic_potential": 13000,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": false,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to delete a subreddit",
+  "volume": 350,
+  "difficulty": 0,
+  "cpc": 3500,
+  "traffic_potential": 300,
+  "parent_topic": "how to delete a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "report a subreddit",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "how to report a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "subreddit viewer",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "reddit viewer",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit marketing agency",
+  "volume": 300,
+  "difficulty": 1,
+  "cpc": 300,
+  "traffic_potential": 100,
+  "parent_topic": "reddit marketing agency",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "ads reddit",
+  "volume": 250,
+  "difficulty": 12,
+  "cpc": 2000,
+  "traffic_potential": 10000,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "sitelink",
+   "question",
+   "news",
+   "image_th",
+   "video_th",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "reddit porn subreddit",
+  "volume": 250,
+  "difficulty": 45,
+  "cpc": null,
+  "traffic_potential": 59000,
+  "parent_topic": "nsfw reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "incel subreddit",
+  "volume": 250,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "reddit incels",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "h3 subreddit",
+  "volume": 250,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 4100,
+  "parent_topic": "h3",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to search within a subreddit",
+  "volume": 250,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "reddit subreddits search",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "report subreddit",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "how to report a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "youtube ads reddit",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 10,
+  "parent_topic": "reddit youtube ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "are reddit ads worth it",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 2000,
+  "traffic_potential": 100,
+  "parent_topic": "are reddit ads worth it",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai porn subreddit",
+  "volume": 200,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "reddit ai porn",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "reddit ads logo",
+  "volume": 200,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 12000,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how much are reddit ads",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 1100,
+  "traffic_potential": 1100,
+  "parent_topic": "reddit ads cost",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit marketing services",
+  "volume": 200,
+  "difficulty": 4,
+  "cpc": 600,
+  "traffic_potential": 10,
+  "parent_topic": "reddit marketing services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "piracy subreddit",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 22000,
+  "parent_topic": "r/piracy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "how much do reddit ads cost",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": 1400,
+  "traffic_potential": 1100,
+  "parent_topic": "reddit ads cost",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit ads account",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 250,
+  "traffic_potential": 13000,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "art subreddit",
+  "volume": 200,
+  "difficulty": 5,
+  "cpc": null,
+  "traffic_potential": 7400,
+  "parent_topic": "art",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th",
+   "image",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit marketing strategy",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 30,
+  "parent_topic": "reddit marketing strategy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "affiliate marketing reddit",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 400,
+  "traffic_potential": 700,
+  "parent_topic": "reddit affiliate marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "create a subreddit",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": 1200,
+  "traffic_potential": 1300,
+  "parent_topic": "how to make a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit ads best practices",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": 1100,
+  "traffic_potential": 150,
+  "parent_topic": "reddit ads best practices",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "marketing on reddit",
+  "volume": 200,
+  "difficulty": 17,
+  "cpc": 500,
+  "traffic_potential": 1100,
+  "parent_topic": "how to use reddit for business?",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to create a subreddit",
+  "volume": 200,
+  "difficulty": 3,
+  "cpc": 1600,
+  "traffic_potential": 1300,
+  "parent_topic": "how to make a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to start a subreddit",
+  "volume": 200,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "how to make a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "news"
+  ]
+ },
+ {
+  "keyword": "denver subreddit",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 2300,
+  "parent_topic": "r denver",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "news",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "conservative subreddit",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 61000,
+  "parent_topic": "r/conservative",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "create subreddit",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 800,
+  "traffic_potential": 1300,
+  "parent_topic": "how to make a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "similar subreddit",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "similar subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "benadryl subreddit",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "benadryl subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit ads help center",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "reddit ads help center",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "reddit affiliate marketing",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 200,
+  "traffic_potential": 1100,
+  "parent_topic": "affiliate links",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit onlyfans marketing",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 100,
+  "traffic_potential": 350,
+  "parent_topic": "reddit onlyfans marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "ads on reddit",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 1300,
+  "traffic_potential": 12000,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit ads specs",
+  "volume": 150,
+  "difficulty": 9,
+  "cpc": 7500,
+  "traffic_potential": 600,
+  "parent_topic": "reddit ad specs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to delete subreddit",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "how to delete a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "pokemon subreddit",
+  "volume": 150,
+  "difficulty": 30,
+  "cpc": null,
+  "traffic_potential": 12000,
+  "parent_topic": "pokemon reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "reddit ads 101",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 2000,
+  "traffic_potential": 40,
+  "parent_topic": "reddit ads 101",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "reddit ads examples",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 500,
+  "traffic_potential": 600,
+  "parent_topic": "reddit ad specs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "reddit ads agency",
+  "volume": 150,
+  "difficulty": 11,
+  "cpc": 600,
+  "traffic_potential": 30,
+  "parent_topic": "reddit ads agency",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "ai subreddit",
+  "volume": 150,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 6300,
+  "parent_topic": "reddit ai",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vikings subreddit",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 44000,
+  "parent_topic": "mn vikings",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "subreddit search engine",
+  "volume": 150,
+  "difficulty": 15,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "reddit subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit ads api",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 1100,
+  "traffic_potential": 70,
+  "parent_topic": "reddit ads api",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "cost of reddit ads",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": 900,
+  "traffic_potential": 1800,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "marketing reddit",
+  "volume": 150,
+  "difficulty": 17,
+  "cpc": 600,
+  "traffic_potential": 1600,
+  "parent_topic": "reddit marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "gooned subreddit",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 15000,
+  "parent_topic": "r/gooned",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "whats a subreddit",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "what is a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "gooning subreddit",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "gooning subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "question"
+  ]
+ },
+ {
+  "keyword": "hockey subreddit",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 17000,
+  "parent_topic": "reddit hockey",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit conversation ads",
+  "volume": 150,
+  "difficulty": 13,
+  "cpc": 900,
+  "traffic_potential": 80,
+  "parent_topic": "reddit conversation ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit seo guide",
+  "volume": 150,
+  "difficulty": 13,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "seo starter",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "soccer subreddit",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 89000,
+  "parent_topic": "reddit soccer",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "discussion",
+   "news",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit ads policy",
+  "volume": 150,
+  "difficulty": 12,
+  "cpc": 600,
+  "traffic_potential": 50,
+  "parent_topic": "reddit ads policy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "reddit ads cpc",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "reddit ads cpc",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "gay porn subreddit",
+  "volume": 150,
+  "difficulty": 34,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "gay porn subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "facebook ads reddit",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 3000,
+  "traffic_potential": 2100,
+  "parent_topic": "facebook ads news",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "question"
+  ]
+ },
+ {
+  "keyword": "types of reddit ads",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 600,
+  "traffic_potential": 600,
+  "parent_topic": "reddit ad specs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "discussion",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "reddit seo tips",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "seo recommendation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "squarespace seo reddit",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "is squarespace good for seo",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "reddit ads pixel",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 3500,
+  "traffic_potential": 30,
+  "parent_topic": "reddit ads pixel",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "random subreddit",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "random reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "lakers subreddit",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 26000,
+  "parent_topic": "lakers rumors",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "hentai subreddit",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 354000,
+  "parent_topic": "hentai",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "list of subreddit",
+  "volume": 100,
+  "difficulty": 26,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "how many subreddits are there",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "onlyfans subreddit",
+  "volume": 100,
+  "difficulty": 17,
+  "cpc": 140,
+  "traffic_potential": 200,
+  "parent_topic": "onlyfans subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit seo strategy",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 500,
+  "traffic_potential": 0,
+  "parent_topic": "reddit seo strategy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "twitch ads reddit",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 350,
+  "parent_topic": "twitch ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "incest subreddit",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "incest subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "mtg subreddit",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 23000,
+  "parent_topic": "mtg reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to create subreddit",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 1100,
+  "parent_topic": "create a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "league subreddit",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 40000,
+  "parent_topic": "lol reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "league of legends subreddit",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 43000,
+  "parent_topic": "lol reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "news",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit ads help",
+  "volume": 100,
+  "difficulty": 28,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "reddit ads help",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "how to use reddit for marketing",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 450,
+  "traffic_potential": 100,
+  "parent_topic": "how to use reddit for marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "reddit digital marketing",
+  "volume": 100,
+  "difficulty": 26,
+  "cpc": 400,
+  "traffic_potential": 800,
+  "parent_topic": "digital marketing news",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news"
+  ]
+ },
+ {
+  "keyword": "eagles subreddit",
+  "volume": 100,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 10000,
+  "parent_topic": "reddit eagles",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "packers subreddit",
+  "volume": 100,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 37000,
+  "parent_topic": "green bay packers",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "travel subreddit",
+  "volume": 100,
+  "difficulty": 11,
+  "cpc": null,
+  "traffic_potential": 15000,
+  "parent_topic": "travel",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "dodgers subreddit",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 12000,
+  "parent_topic": "dodgers reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "subreddit overlap",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 2600,
+  "parent_topic": "irlgirls",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "chicago bears subreddit",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 5400,
+  "parent_topic": "bears reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "news"
+  ]
+ },
+ {
+  "keyword": "subreddit simulator",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "subreddit simulator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "tft subreddit",
+  "volume": 100,
+  "difficulty": 37,
+  "cpc": null,
+  "traffic_potential": 6400,
+  "parent_topic": "tft reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "how to search a subreddit",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "how to search a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "reddit ads pricing",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 1400,
+  "traffic_potential": 1800,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "tfatk subreddit",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "tfatk reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "can you block a subreddit",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "how to block a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "classic wow subreddit",
+  "volume": 90,
+  "difficulty": 16,
+  "cpc": null,
+  "traffic_potential": 16000,
+  "parent_topic": "reddit classic wow",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video_th",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "reddit for marketing",
+  "volume": 90,
+  "difficulty": 17,
+  "cpc": 0,
+  "traffic_potential": 1100,
+  "parent_topic": "how to use reddit for business?",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "diep io subreddit",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 0,
+  "traffic_potential": 30,
+  "parent_topic": "http diep io",
+  "intents": null,
+  "serp_features": [
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "subreddit analytics",
+  "volume": 90,
+  "difficulty": 13,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "subreddit stats",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "similar subreddit finder",
+  "volume": 90,
+  "difficulty": 11,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "similar subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit ads formula",
+  "volume": 90,
+  "difficulty": 3,
+  "cpc": 700,
+  "traffic_potential": 60,
+  "parent_topic": "reddit ads formula",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "sitelink",
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "nursing subreddit",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 6400,
+  "parent_topic": "reddit nursing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "bears subreddit",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 10000,
+  "parent_topic": "bears news",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "how to search in a subreddit",
+  "volume": 90,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "how to search a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "arsenal subreddit",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 4300,
+  "parent_topic": "r gunners",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "hypest subreddit",
+  "volume": 90,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 7100,
+  "parent_topic": "r super best friends",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit subreddit list",
+  "volume": 90,
+  "difficulty": 30,
+  "cpc": null,
+  "traffic_potential": 2500,
+  "parent_topic": "list of subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "delete subreddit",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "how to delete a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "most popular subreddit",
+  "volume": 90,
+  "difficulty": 4,
+  "cpc": 700,
+  "traffic_potential": 2000,
+  "parent_topic": "top subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "subreddit growth",
+  "volume": 90,
+  "difficulty": 4,
+  "cpc": 2500,
+  "traffic_potential": 900,
+  "parent_topic": "subreddit stats",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "subreddit analysis",
+  "volume": 80,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 800,
+  "parent_topic": "best time to post on reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "private subreddit",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "private subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "pistons subreddit",
+  "volume": 80,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 5900,
+  "parent_topic": "detroit pistons",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit report subreddit",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "how to report a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "colts subreddit",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 12000,
+  "parent_topic": "colts news",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "lol subreddit",
+  "volume": 80,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 42000,
+  "parent_topic": "lol reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "does reddit have ads",
+  "volume": 80,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "does reddit have ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_top",
+   "question",
+   "video_th",
+   "news",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "reddit subreddit stats",
+  "volume": 80,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "reddit stats",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "apex legends subreddit",
+  "volume": 80,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 13000,
+  "parent_topic": "apex legends reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "49ers subreddit",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 14000,
+  "parent_topic": "49ers news",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "reddit video ads",
+  "volume": 80,
+  "difficulty": 8,
+  "cpc": 900,
+  "traffic_potential": 150,
+  "parent_topic": "reddit video ad specs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "news",
+   "image_th",
+   "question",
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "block a subreddit",
+  "volume": 80,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "how to block a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "destiny 2 subreddit",
+  "volume": 70,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": 28000,
+  "parent_topic": "destiny 2",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit carousel ads",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 100,
+  "parent_topic": "reddit carousel ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "video_th",
+   "question",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "search subreddit",
+  "volume": 70,
+  "difficulty": 11,
+  "cpc": 350,
+  "traffic_potential": 1800,
+  "parent_topic": "reddit subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "mff subreddit",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": 0,
+  "traffic_potential": 150,
+  "parent_topic": "mff forum",
+  "intents": null,
+  "serp_features": [
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "pacers subreddit",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 4000,
+  "parent_topic": "pacers rumors",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "chargers subreddit",
+  "volume": 70,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 13000,
+  "parent_topic": "chargers news",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "reddit progressive growth 2",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 3300,
+  "parent_topic": "progressivegrowth2",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "bdsm subreddit",
+  "volume": 70,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 3600,
+  "parent_topic": "reddit bdsm",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "mma subreddit",
+  "volume": 70,
+  "difficulty": 1,
+  "cpc": 250,
+  "traffic_potential": 22000,
+  "parent_topic": "reddit mma",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "how to post on a subreddit",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "how do you post on reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to block ads on reddit app",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "how to block reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to report subreddit",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1400,
+  "parent_topic": "how to report a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit facebook ads",
+  "volume": 70,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 4000,
+  "parent_topic": "meta ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "reddit user growth",
+  "volume": 70,
+  "difficulty": 31,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "reddit daily active users",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit growth",
+  "volume": 70,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "reddit growth",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "discord subreddit",
+  "volume": 70,
+  "difficulty": 43,
+  "cpc": null,
+  "traffic_potential": 4100,
+  "parent_topic": "discord reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "gonewild subreddit",
+  "volume": 60,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 39000,
+  "parent_topic": "reddit gone wild",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "subreddit definition",
+  "volume": 60,
+  "difficulty": 15,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "subreddit meaning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "bengals subreddit",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 2800,
+  "parent_topic": "bengals reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "biggest subreddit",
+  "volume": 60,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 2200,
+  "parent_topic": "top subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "meth subreddit",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1100,
+  "parent_topic": "r/meth",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vector marketing reddit",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 7700,
+  "parent_topic": "vector marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "subreddit statistics",
+  "volume": 60,
+  "difficulty": 16,
+  "cpc": 200,
+  "traffic_potential": 1000,
+  "parent_topic": "subreddit stats",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "personal finance subreddit",
+  "volume": 60,
+  "difficulty": 27,
+  "cpc": null,
+  "traffic_potential": 21000,
+  "parent_topic": "reddit personal finance",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "what is the most popular subreddit",
+  "volume": 60,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "top subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "furry porn subreddit",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "furry porn subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "what does subreddit mean",
+  "volume": 60,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "subreddit meaning",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "what's a subreddit",
+  "volume": 60,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "reddit subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "nfl streams subreddit",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": 15,
+  "traffic_potential": 481000,
+  "parent_topic": "nflbite",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "goon subreddit",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1800,
+  "parent_topic": "r/goon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "hair growth reddit",
+  "volume": 60,
+  "difficulty": 6,
+  "cpc": 450,
+  "traffic_potential": 50,
+  "parent_topic": "do hair growth products work",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "fantasy football subreddit",
+  "volume": 60,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 36000,
+  "parent_topic": "reddit fantasy football",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "block reddit ads",
+  "volume": 60,
+  "difficulty": 2,
+  "cpc": 140,
+  "traffic_potential": 70,
+  "parent_topic": "how to block reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "columbus subreddit",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 3400,
+  "parent_topic": "reddit columbus",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "news"
+  ]
+ },
+ {
+  "keyword": "nsfw subreddit viewer",
+  "volume": 60,
+  "difficulty": 30,
+  "cpc": null,
+  "traffic_potential": 1900,
+  "parent_topic": "reddit scroller",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "reddit paid ads",
+  "volume": 60,
+  "difficulty": 5,
+  "cpc": 2000,
+  "traffic_potential": 12000,
+  "parent_topic": "reddit ads",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "fortnite subreddit",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 15000,
+  "parent_topic": "r/fortnitebr",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "chiefs subreddit",
+  "volume": 60,
+  "difficulty": 16,
+  "cpc": null,
+  "traffic_potential": 38000,
+  "parent_topic": "kc chiefs",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "pornhub ads reddit",
+  "volume": 60,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "pornhub ads reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "hookup subreddit",
+  "volume": 60,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 4800,
+  "parent_topic": "r4r",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "raleigh subreddit",
+  "volume": 60,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 1000,
+  "parent_topic": "r/raleigh",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vr porn subreddit",
+  "volume": 60,
+  "difficulty": 38,
+  "cpc": 80,
+  "traffic_potential": 3900,
+  "parent_topic": "vr",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best gay porn subreddit",
+  "volume": 60,
+  "difficulty": 41,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "gay porn subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "can i block a subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "how to block a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "deleted subreddit archive",
+  "volume": 50,
+  "difficulty": 13,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "how to view deleted subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to block ads on reddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "how to block ads on reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "teachers subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 5600,
+  "parent_topic": "r/teachers",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "knicks subreddit",
+  "volume": 50,
+  "difficulty": 45,
+  "cpc": null,
+  "traffic_potential": 6600,
+  "parent_topic": "new york knicks",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "random subreddit generator",
+  "volume": 50,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "random subreddit generator",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "can you report a subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1400,
+  "parent_topic": "how to report a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "browns subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 16000,
+  "parent_topic": "cleveland browns",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "news",
+   "question"
+  ]
+ },
+ {
+  "keyword": "social media marketing reddit",
+  "volume": 50,
+  "difficulty": 4,
+  "cpc": 700,
+  "traffic_potential": 19000,
+  "parent_topic": "social media marketing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "csgo subreddit",
+  "volume": 50,
+  "difficulty": 31,
+  "cpc": null,
+  "traffic_potential": 6700,
+  "parent_topic": "csgo reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to make subreddit",
+  "volume": 50,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 1500,
+  "parent_topic": "how to make a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "news"
+  ]
+ },
+ {
+  "keyword": "best time to post on subreddit",
+  "volume": 50,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 800,
+  "parent_topic": "best time to post on reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to link a subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "how to link a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "subreddit traffic stats",
+  "volume": 50,
+  "difficulty": 33,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "subreddit traffic stats",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "funniest subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 800,
+  "parent_topic": "funny subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "iptv subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": 45,
+  "traffic_potential": 50,
+  "parent_topic": "tivimate premium",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "tsm subreddit",
+  "volume": 50,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "team solo mid",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "braincel subreddit",
+  "volume": 50,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "r/braincels",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "trans porn subreddit",
+  "volume": 50,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "trans porn subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "gay nsfw subreddit",
+  "volume": 50,
+  "difficulty": 24,
+  "cpc": null,
+  "traffic_potential": 2400,
+  "parent_topic": "gay nsfw",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best subreddit",
+  "volume": 50,
+  "difficulty": 1,
+  "cpc": 70,
+  "traffic_potential": 600,
+  "parent_topic": "best reddit communities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question",
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "femcel subreddit",
+  "volume": 50,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "r/femcel",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "news"
+  ]
+ },
+ {
+  "keyword": "what subreddit has the most members",
+  "volume": 50,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 2200,
+  "parent_topic": "top subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "traps arent gay subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "are traps gay",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "ufc subreddit",
+  "volume": 50,
+  "difficulty": 34,
+  "cpc": null,
+  "traffic_potential": 26000,
+  "parent_topic": "r/ufc",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "rule 34 subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 10000,
+  "parent_topic": "r/rule34",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit vs subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "reddit vs subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "subreddit activity tracker",
+  "volume": 50,
+  "difficulty": 33,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "subreddit stats",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "gay subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1000,
+  "parent_topic": "gay porn subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to post in a subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "how to post on reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "reddit gone wild subreddit",
+  "volume": 50,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 39000,
+  "parent_topic": "reddit gone wild",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to link a subreddit in a comment",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "how to link a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "diy subreddit",
+  "volume": 50,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": 1900,
+  "parent_topic": "diy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "can you delete a subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "how to delete a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "mlb subreddit",
+  "volume": 50,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 17000,
+  "parent_topic": "mlb reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th",
+   "video"
+  ]
+ },
+ {
+  "keyword": "magic the gathering subreddit",
+  "volume": 50,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 18000,
+  "parent_topic": "mtg reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "news",
+   "image_th",
+   "image",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "gaming subreddit",
+  "volume": 50,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 24000,
+  "parent_topic": "gaming",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "subreddit analyzer",
+  "volume": 40,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "subreddit analysis",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "liverpool subreddit",
+  "volume": 40,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 7100,
+  "parent_topic": "lfc reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "duggarssnark subreddit",
+  "volume": 40,
+  "difficulty": 32,
+  "cpc": null,
+  "traffic_potential": 5200,
+  "parent_topic": "duggarssnark",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "best time to post subreddit",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 800,
+  "parent_topic": "best time to post on reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how do reddit ads work",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 700,
+  "traffic_potential": 10,
+  "parent_topic": "how do reddit ads work",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "subreddit rankings",
+  "volume": 40,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "subreddit rankings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "reddit best porn subreddit",
+  "volume": 40,
+  "difficulty": 44,
+  "cpc": null,
+  "traffic_potential": 75000,
+  "parent_topic": "nsfw reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "steelers subreddit",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 35000,
+  "parent_topic": "pittsburgh steelers",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "reporting a subreddit",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "how to report a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "largest subreddit",
+  "volume": 40,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "top subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "peptides for muscle growth reddit",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 900,
+  "parent_topic": "peptides for muscle growth",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "air force subreddit",
+  "volume": 40,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 2600,
+  "parent_topic": "air force reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "block subreddit",
+  "volume": 40,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "how to block a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "onlyfans reddit marketing",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 70,
+  "traffic_potential": 250,
+  "parent_topic": "how to promote onlyfans on reddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "warriors subreddit",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 23000,
+  "parent_topic": "golden state warriors",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "how to make subreddit in infinite craft",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "how to make subreddit in infinite craft",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "reddit subreddit search",
+  "volume": 40,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "reddit subreddits search",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "fenugreek breast growth before and after reddit",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 400,
+  "parent_topic": "fenugreek breast growth",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to add rules to a subreddit",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "how to add rules to a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "red pill subreddit",
+  "volume": 40,
+  "difficulty": 20,
+  "cpc": null,
+  "traffic_potential": 1700,
+  "parent_topic": "red pill reddit",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is the biggest subreddit",
+  "volume": 40,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 1900,
+  "parent_topic": "top subreddits",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "block ads reddit",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 40,
+  "traffic_potential": 1300,
+  "parent_topic": "r/adblock",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "h3h3 subreddit",
+  "volume": 40,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 3100,
+  "parent_topic": "h3 podcast",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how do you report a subreddit",
+  "volume": 40,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 1300,
+  "parent_topic": "how to report a subreddit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ }
+]

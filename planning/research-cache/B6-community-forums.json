@@ -1,0 +1,5243 @@
+[
+ {
+  "keyword": "watch community online",
+  "volume": 2700,
+  "difficulty": 37,
+  "cpc": 90,
+  "traffic_potential": 5800,
+  "parent_topic": "where to watch community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "community management",
+  "volume": 2600,
+  "difficulty": 13,
+  "cpc": 180,
+  "traffic_potential": 11000,
+  "parent_topic": "hoa",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community building",
+  "volume": 1900,
+  "difficulty": 30,
+  "cpc": 100,
+  "traffic_potential": 150,
+  "parent_topic": "community building",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "question",
+   "sitelink",
+   "image"
+  ]
+ },
+ {
+  "keyword": "online community service",
+  "volume": 1600,
+  "difficulty": 18,
+  "cpc": 80,
+  "traffic_potential": 2500,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "online community",
+  "volume": 1400,
+  "difficulty": 29,
+  "cpc": 250,
+  "traffic_potential": 1100,
+  "parent_topic": "online communities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "rn community health online practice 2023 a",
+  "volume": 1400,
+  "difficulty": 0,
+  "cpc": 1,
+  "traffic_potential": 450,
+  "parent_topic": "rn community health online practice 2023 a",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "building community",
+  "volume": 1100,
+  "difficulty": 20,
+  "cpc": 160,
+  "traffic_potential": 900,
+  "parent_topic": "building community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "vision community management",
+  "volume": 1100,
+  "difficulty": 18,
+  "cpc": 150,
+  "traffic_potential": 1000,
+  "parent_topic": "vision community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "online community college",
+  "volume": 1100,
+  "difficulty": 5,
+  "cpc": 800,
+  "traffic_potential": 350,
+  "parent_topic": "community college online",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "rn community health online practice 2023 b",
+  "volume": 1100,
+  "difficulty": 0,
+  "cpc": 2,
+  "traffic_potential": 400,
+  "parent_topic": "rn community health online practice 2023 b",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "online community platforms",
+  "volume": 1000,
+  "difficulty": 16,
+  "cpc": 300,
+  "traffic_potential": 1200,
+  "parent_topic": "online community platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "online community platform",
+  "volume": 1000,
+  "difficulty": 16,
+  "cpc": 350,
+  "traffic_potential": 1000,
+  "parent_topic": "online community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "community building activities",
+  "volume": 800,
+  "difficulty": 17,
+  "cpc": 110,
+  "traffic_potential": 175000,
+  "parent_topic": "team building activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th",
+   "image"
+  ]
+ },
+ {
+  "keyword": "discord community guidelines",
+  "volume": 700,
+  "difficulty": 34,
+  "cpc": 60,
+  "traffic_potential": 5900,
+  "parent_topic": "discord rules",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "community management software",
+  "volume": 700,
+  "difficulty": 5,
+  "cpc": 60,
+  "traffic_potential": 700,
+  "parent_topic": "community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "community service online",
+  "volume": 600,
+  "difficulty": 33,
+  "cpc": 70,
+  "traffic_potential": 2500,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "trestle community management",
+  "volume": 600,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 300,
+  "parent_topic": "trestle community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community college online",
+  "volume": 600,
+  "difficulty": 5,
+  "cpc": 900,
+  "traffic_potential": 600,
+  "parent_topic": "online community college",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "first community management",
+  "volume": 600,
+  "difficulty": 1,
+  "cpc": 180,
+  "traffic_potential": 900,
+  "parent_topic": "first community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "brown community management",
+  "volume": 500,
+  "difficulty": 0,
+  "cpc": 140,
+  "traffic_potential": 500,
+  "parent_topic": "brown community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": true,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "rolling rock community management",
+  "volume": 500,
+  "difficulty": 0,
+  "cpc": 140,
+  "traffic_potential": 150,
+  "parent_topic": "rolling rock community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community management services",
+  "volume": 500,
+  "difficulty": 19,
+  "cpc": 400,
+  "traffic_potential": 30,
+  "parent_topic": "community management service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "grs community management",
+  "volume": 500,
+  "difficulty": 2,
+  "cpc": 110,
+  "traffic_potential": 700,
+  "parent_topic": "grs management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "online community colleges",
+  "volume": 450,
+  "difficulty": 3,
+  "cpc": 1000,
+  "traffic_potential": 10000,
+  "parent_topic": "community college near me",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best online community colleges",
+  "volume": 400,
+  "difficulty": 1,
+  "cpc": 600,
+  "traffic_potential": 30,
+  "parent_topic": "best online community college",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community management inc",
+  "volume": 400,
+  "difficulty": 31,
+  "cpc": 4,
+  "traffic_potential": 600,
+  "parent_topic": "community management inc",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community management software",
+  "volume": 400,
+  "difficulty": 1,
+  "cpc": 100,
+  "traffic_potential": 400,
+  "parent_topic": "online community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "highland community management",
+  "volume": 400,
+  "difficulty": 0,
+  "cpc": 350,
+  "traffic_potential": 50,
+  "parent_topic": "hcmanagement",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "social media community management",
+  "volume": 400,
+  "difficulty": 5,
+  "cpc": 450,
+  "traffic_potential": 600,
+  "parent_topic": "social media community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "market research online community",
+  "volume": 350,
+  "difficulty": 0,
+  "cpc": 1600,
+  "traffic_potential": 600,
+  "parent_topic": "market research online communities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community colleges online",
+  "volume": 350,
+  "difficulty": 5,
+  "cpc": 600,
+  "traffic_potential": 800,
+  "parent_topic": "online classes",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "discord community server",
+  "volume": 350,
+  "difficulty": 22,
+  "cpc": 1,
+  "traffic_potential": 179000,
+  "parent_topic": "discord login",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "community management corporation",
+  "volume": 350,
+  "difficulty": 41,
+  "cpc": 80,
+  "traffic_potential": 350,
+  "parent_topic": "community management corporation",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "community first credit union online banking",
+  "volume": 350,
+  "difficulty": 18,
+  "cpc": 200,
+  "traffic_potential": 12000,
+  "parent_topic": "community first credit union",
+  "intents": {
+   "informational": false,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "classroom community building activities",
+  "volume": 300,
+  "difficulty": 12,
+  "cpc": 30,
+  "traffic_potential": 600,
+  "parent_topic": "classroom community building activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "blue mountain community management",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": 160,
+  "traffic_potential": 100,
+  "parent_topic": "blue mountain community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "longwood community building",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": 60,
+  "traffic_potential": 150,
+  "parent_topic": "longwood community building",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "image_th",
+   "image",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community software",
+  "volume": 300,
+  "difficulty": 19,
+  "cpc": 600,
+  "traffic_potential": 800,
+  "parent_topic": "online community platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "building a community",
+  "volume": 300,
+  "difficulty": 12,
+  "cpc": 160,
+  "traffic_potential": 900,
+  "parent_topic": "building community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community association management limited",
+  "volume": 250,
+  "difficulty": 4,
+  "cpc": 200,
+  "traffic_potential": 450,
+  "parent_topic": "hoa community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "question",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "community building activities for students",
+  "volume": 250,
+  "difficulty": 3,
+  "cpc": 2,
+  "traffic_potential": 194000,
+  "parent_topic": "team building activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "community association management software",
+  "volume": 250,
+  "difficulty": 2,
+  "cpc": 1800,
+  "traffic_potential": 900,
+  "parent_topic": "hoa management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "online community management",
+  "volume": 250,
+  "difficulty": 3,
+  "cpc": 300,
+  "traffic_potential": 90,
+  "parent_topic": "online community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "fcs community management",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": 130,
+  "traffic_potential": 200,
+  "parent_topic": "community association management services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community management agency",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": 800,
+  "traffic_potential": 10,
+  "parent_topic": "social media community management agency",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "question"
+  ]
+ },
+ {
+  "keyword": "hoa community management software",
+  "volume": 250,
+  "difficulty": 25,
+  "cpc": 1300,
+  "traffic_potential": 11000,
+  "parent_topic": "payhoa",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "madden modding community discord",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "madden modding community",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "genesis community management",
+  "volume": 250,
+  "difficulty": 9,
+  "cpc": 300,
+  "traffic_potential": 300,
+  "parent_topic": "genesis community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel",
+   "question"
+  ]
+ },
+ {
+  "keyword": "hoa community management",
+  "volume": 250,
+  "difficulty": 1,
+  "cpc": 200,
+  "traffic_potential": 150,
+  "parent_topic": "community association management charlotte nc",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "question"
+  ]
+ },
+ {
+  "keyword": "shamrock community use building",
+  "volume": 250,
+  "difficulty": 0,
+  "cpc": 4,
+  "traffic_potential": 10,
+  "parent_topic": "shamrock community use building photos",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "image_th",
+   "image"
+  ]
+ },
+ {
+  "keyword": "chicagoland community management",
+  "volume": 250,
+  "difficulty": 7,
+  "cpc": 500,
+  "traffic_potential": 250,
+  "parent_topic": "chicagoland community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "free online community service for court",
+  "volume": 250,
+  "difficulty": 6,
+  "cpc": 110,
+  "traffic_potential": 2100,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community building platforms",
+  "volume": 200,
+  "difficulty": 11,
+  "cpc": 800,
+  "traffic_potential": 250,
+  "parent_topic": "best community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "community association management near me",
+  "volume": 200,
+  "difficulty": 24,
+  "cpc": 180,
+  "traffic_potential": 1100,
+  "parent_topic": "cma communities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "question"
+  ]
+ },
+ {
+  "keyword": "navigate community management",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 20,
+  "traffic_potential": 100,
+  "parent_topic": "navigate community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "online community management platform",
+  "volume": 200,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 250,
+  "parent_topic": "online community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "can you do community service online",
+  "volume": 200,
+  "difficulty": 31,
+  "cpc": 70,
+  "traffic_potential": 2500,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "community management platforms",
+  "volume": 200,
+  "difficulty": 4,
+  "cpc": 800,
+  "traffic_potential": 800,
+  "parent_topic": "community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "mystreet community management",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 15,
+  "traffic_potential": 100,
+  "parent_topic": "mystreet community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "image"
+  ]
+ },
+ {
+  "keyword": "how to build an online community",
+  "volume": 200,
+  "difficulty": 5,
+  "cpc": 120,
+  "traffic_potential": 700,
+  "parent_topic": "how to build an online community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community building games",
+  "volume": 200,
+  "difficulty": 42,
+  "cpc": 6,
+  "traffic_potential": 103000,
+  "parent_topic": "team building activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "online adjunct teaching jobs community colleges",
+  "volume": 200,
+  "difficulty": 17,
+  "cpc": 10,
+  "traffic_potential": 15000,
+  "parent_topic": "online jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "online community service hours",
+  "volume": 200,
+  "difficulty": 13,
+  "cpc": 80,
+  "traffic_potential": 2500,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community management social media",
+  "volume": 200,
+  "difficulty": 4,
+  "cpc": 70,
+  "traffic_potential": 500,
+  "parent_topic": "social media community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "bay community management",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "bay community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "aarp online community",
+  "volume": 200,
+  "difficulty": 33,
+  "cpc": 90,
+  "traffic_potential": 300,
+  "parent_topic": "aarp virtual community center",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "community management platform",
+  "volume": 200,
+  "difficulty": 10,
+  "cpc": 1400,
+  "traffic_potential": 200,
+  "parent_topic": "online community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is community management",
+  "volume": 200,
+  "difficulty": 6,
+  "cpc": 20,
+  "traffic_potential": 150,
+  "parent_topic": "social media community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community college courses",
+  "volume": 200,
+  "difficulty": 7,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "online community college",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community association management companies",
+  "volume": 200,
+  "difficulty": 37,
+  "cpc": 300,
+  "traffic_potential": 100,
+  "parent_topic": "associa",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "best forum software",
+  "volume": 200,
+  "difficulty": 37,
+  "cpc": 200,
+  "traffic_potential": 800,
+  "parent_topic": "forum software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "online marketing community",
+  "volume": 200,
+  "difficulty": 25,
+  "cpc": 45,
+  "traffic_potential": 100,
+  "parent_topic": "digital marketing community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "community management tools",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 90,
+  "traffic_potential": 700,
+  "parent_topic": "community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best community association management software",
+  "volume": 200,
+  "difficulty": 6,
+  "cpc": 3000,
+  "traffic_potential": 1200,
+  "parent_topic": "hoa management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "cadden community management",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 160,
+  "traffic_potential": 450,
+  "parent_topic": "cadden community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": true,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community manager jobs",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 10,
+  "traffic_potential": 200,
+  "parent_topic": "virtual community manager jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "american community management",
+  "volume": 200,
+  "difficulty": 1,
+  "cpc": 25,
+  "traffic_potential": 250,
+  "parent_topic": "american community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community building platform",
+  "volume": 200,
+  "difficulty": 27,
+  "cpc": 800,
+  "traffic_potential": 1000,
+  "parent_topic": "online community platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "online classes community college",
+  "volume": 200,
+  "difficulty": 41,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "online degree programs nyc",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best online community platforms",
+  "volume": 200,
+  "difficulty": 16,
+  "cpc": 500,
+  "traffic_potential": 1000,
+  "parent_topic": "online community platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "building one community",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 10,
+  "traffic_potential": 200,
+  "parent_topic": "building one community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community service for court",
+  "volume": 200,
+  "difficulty": 25,
+  "cpc": 60,
+  "traffic_potential": 2500,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "discord community management",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 30,
+  "traffic_potential": 50,
+  "parent_topic": "discord community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "video"
+  ]
+ },
+ {
+  "keyword": "discord community manager",
+  "volume": 200,
+  "difficulty": 4,
+  "cpc": 60,
+  "traffic_potential": 16000,
+  "parent_topic": "discord jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "cheapest online community college",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "cheapest online community colleges",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "aam community management",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 3300,
+  "parent_topic": "aam llc",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": true,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community software platform",
+  "volume": 150,
+  "difficulty": 14,
+  "cpc": 400,
+  "traffic_potential": 1000,
+  "parent_topic": "online community platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "top online community colleges",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 600,
+  "traffic_potential": 250,
+  "parent_topic": "accredited online associate degree programs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "online community college texas",
+  "volume": 150,
+  "difficulty": 43,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "acc online classes",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "community center management software",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 1300,
+  "traffic_potential": 20,
+  "parent_topic": "community center management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "free online community college",
+  "volume": 150,
+  "difficulty": 17,
+  "cpc": null,
+  "traffic_potential": 300,
+  "parent_topic": "free community college online",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "free online community platforms",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 200,
+  "traffic_potential": 1000,
+  "parent_topic": "online community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion",
+   "news"
+  ]
+ },
+ {
+  "keyword": "online community engagement tools",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "platforms for community engagement",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "cheapest online community colleges",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 600,
+  "traffic_potential": 250,
+  "parent_topic": "cheapest online community colleges",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "best online community management software",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 350,
+  "parent_topic": "online community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "small business online community",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "small business communities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "can i do community service online",
+  "volume": 150,
+  "difficulty": 28,
+  "cpc": 80,
+  "traffic_potential": 2500,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "community management app",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 700,
+  "traffic_potential": 16000,
+  "parent_topic": "townsq",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "community management companies",
+  "volume": 150,
+  "difficulty": 24,
+  "cpc": 250,
+  "traffic_potential": 2000,
+  "parent_topic": "hoa property management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "community management solutions",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 170,
+  "traffic_potential": 10,
+  "parent_topic": "association management logistics",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "online community building",
+  "volume": 150,
+  "difficulty": 5,
+  "cpc": 60,
+  "traffic_potential": 700,
+  "parent_topic": "how to build an online community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community management tool",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 90,
+  "traffic_potential": 200,
+  "parent_topic": "community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community management services",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 20,
+  "parent_topic": "community management agency",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "what is an online community",
+  "volume": 150,
+  "difficulty": 24,
+  "cpc": 130,
+  "traffic_potential": 300,
+  "parent_topic": "online community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "cryptocurrency community management",
+  "volume": 150,
+  "difficulty": 35,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "cryptocurrency community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community management strategy",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 500,
+  "traffic_potential": 20,
+  "parent_topic": "community management strategy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to do community service online",
+  "volume": 150,
+  "difficulty": 11,
+  "cpc": 70,
+  "traffic_potential": 6500,
+  "parent_topic": "virtual volunteer opportunities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "residential community management software",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "hoa management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "building community in the classroom",
+  "volume": 150,
+  "difficulty": 3,
+  "cpc": 45,
+  "traffic_potential": 700,
+  "parent_topic": "building community in the classroom",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "york community management",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 8000,
+  "traffic_potential": 20,
+  "parent_topic": "york community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "building an online community",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 300,
+  "traffic_potential": 700,
+  "parent_topic": "how to build an online community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "community college online courses",
+  "volume": 150,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 6000,
+  "parent_topic": "california virtual campus",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "watch community online free",
+  "volume": 150,
+  "difficulty": 33,
+  "cpc": 50,
+  "traffic_potential": 5800,
+  "parent_topic": "where to watch community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "community management system",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 600,
+  "traffic_potential": 700,
+  "parent_topic": "community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community hoa management",
+  "volume": 150,
+  "difficulty": 43,
+  "cpc": 250,
+  "traffic_potential": 800,
+  "parent_topic": "community association management limited",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community building strategies",
+  "volume": 150,
+  "difficulty": 2,
+  "cpc": 350,
+  "traffic_potential": 70,
+  "parent_topic": "community building strategies",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "rcp community management",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 60,
+  "traffic_potential": 200,
+  "parent_topic": "rcp management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "best online community college",
+  "volume": 150,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "community college classes",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "discussion",
+   "sitelink",
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "community goods order online",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 60,
+  "traffic_potential": 3400,
+  "parent_topic": "community goods",
+  "intents": {
+   "informational": false,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "knowledge_panel",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "creating an online community",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 450,
+  "traffic_potential": 700,
+  "parent_topic": "how to build an online community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community building activities for elementary students",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 40,
+  "traffic_potential": 3200,
+  "parent_topic": "team building activities for kids",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community college classes",
+  "volume": 150,
+  "difficulty": 41,
+  "cpc": null,
+  "traffic_potential": 5400,
+  "parent_topic": "california virtual campus",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community engagement platforms",
+  "volume": 150,
+  "difficulty": 9,
+  "cpc": 900,
+  "traffic_potential": 450,
+  "parent_topic": "online community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "community action application online",
+  "volume": 150,
+  "difficulty": 27,
+  "cpc": 90,
+  "traffic_potential": 200,
+  "parent_topic": "community action application online",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community building synonym",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "community building synonym",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online physics course community college",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "online physics course for college credit",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "online artistic community",
+  "volume": 150,
+  "difficulty": 6,
+  "cpc": 500,
+  "traffic_potential": 300,
+  "parent_topic": "online artistic community",
+  "intents": null,
+  "serp_features": [
+   "sitelink",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "online learning community",
+  "volume": 150,
+  "difficulty": 11,
+  "cpc": 45,
+  "traffic_potential": 50,
+  "parent_topic": "virtual learning community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online research community platform",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 900,
+  "traffic_potential": 150,
+  "parent_topic": "insight community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "pride community management",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 190,
+  "traffic_potential": 60,
+  "parent_topic": "pride community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "online community engagement",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 25,
+  "traffic_potential": 150,
+  "parent_topic": "online community engagement activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "gates hudson community management",
+  "volume": 150,
+  "difficulty": 4,
+  "cpc": 110,
+  "traffic_potential": 600,
+  "parent_topic": "gates hudson",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community association management companies near me",
+  "volume": 150,
+  "difficulty": 0,
+  "cpc": 180,
+  "traffic_potential": 900,
+  "parent_topic": "home owners association management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "online gaming community",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 100,
+  "traffic_potential": 2300,
+  "parent_topic": "gaming community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "discord gaming community",
+  "volume": 100,
+  "difficulty": 14,
+  "cpc": null,
+  "traffic_potential": 1100,
+  "parent_topic": "gaming discord servers",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "online community college florida",
+  "volume": 100,
+  "difficulty": 22,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "online community college florida",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "inland empire community management",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "inland empire hoa",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "community care management partners",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 140,
+  "traffic_potential": 20,
+  "parent_topic": "community care management partners",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community case management software",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "social work case management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "path of building community fork",
+  "volume": 100,
+  "difficulty": 14,
+  "cpc": null,
+  "traffic_potential": 12000,
+  "parent_topic": "path of building",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "sitelink",
+   "image_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "best online community platform",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 700,
+  "traffic_potential": 900,
+  "parent_topic": "online community platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "calculus 1 online course community college",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": null,
+  "traffic_potential": 400,
+  "parent_topic": "calculus 1 online course",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "total community management",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 60,
+  "traffic_potential": 200,
+  "parent_topic": "community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "building discord community",
+  "volume": 100,
+  "difficulty": 11,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "building discord community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community center building",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 150,
+  "parent_topic": "community center architect",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "question",
+   "image",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "community management portal",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": 30,
+  "traffic_potential": 450,
+  "parent_topic": "community management",
+  "intents": {
+   "informational": false,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community building software",
+  "volume": 100,
+  "difficulty": 15,
+  "cpc": 700,
+  "traffic_potential": 250,
+  "parent_topic": "best community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "community college online programs",
+  "volume": 100,
+  "difficulty": 21,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "ccp online courses",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "community building activities elementary",
+  "volume": 100,
+  "difficulty": 12,
+  "cpc": 110,
+  "traffic_potential": 600,
+  "parent_topic": "classroom community building activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community association management charlotte nc",
+  "volume": 100,
+  "difficulty": 40,
+  "cpc": 250,
+  "traffic_potential": 100,
+  "parent_topic": "charlotte hoa management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community website",
+  "volume": 100,
+  "difficulty": 24,
+  "cpc": 350,
+  "traffic_potential": 900,
+  "parent_topic": "community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "online community college degrees",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 45000,
+  "parent_topic": "online degree programs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview"
+  ]
+ },
+ {
+  "keyword": "united community management",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 190,
+  "traffic_potential": 10,
+  "parent_topic": "united hoa",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "superior community management",
+  "volume": 100,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "superior community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "community management service",
+  "volume": 100,
+  "difficulty": 19,
+  "cpc": 300,
+  "traffic_potential": 0,
+  "parent_topic": "cms hoa",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community sites",
+  "volume": 100,
+  "difficulty": 10,
+  "cpc": 350,
+  "traffic_potential": 800,
+  "parent_topic": "community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "discussion",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "community management jobs",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 7,
+  "traffic_potential": 10,
+  "parent_topic": "community manager jobs los angeles",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "community investment management",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "community investment management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "discord community management agency",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "discord management agency",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "discord community management services",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "discord community management services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "market research online community software",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "market research online communities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "discussion",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "online community engagement activities",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 100,
+  "parent_topic": "online community engagement activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "community online platform",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": 700,
+  "traffic_potential": 1200,
+  "parent_topic": "online community platform",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "agence community management",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 80,
+  "parent_topic": "agence community manager",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "accredited online community colleges",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": 900,
+  "traffic_potential": 250,
+  "parent_topic": "aas online degree programs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community engagement strategy",
+  "volume": 100,
+  "difficulty": 2,
+  "cpc": 350,
+  "traffic_potential": 50,
+  "parent_topic": "online community engagement strategy",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "best community management software",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 900,
+  "traffic_potential": 600,
+  "parent_topic": "online community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "discussion",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "community building apps",
+  "volume": 100,
+  "difficulty": 15,
+  "cpc": 350,
+  "traffic_potential": 900,
+  "parent_topic": "online community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "texas star community management",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 200,
+  "traffic_potential": 40,
+  "parent_topic": "texas star community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "online community research companies",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "market research online community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "importance of building community in the classroom",
+  "volume": 100,
+  "difficulty": 8,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "building community in the classroom",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online writing community",
+  "volume": 100,
+  "difficulty": 30,
+  "cpc": 200,
+  "traffic_potential": 800,
+  "parent_topic": "shut up and write",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community service online for court",
+  "volume": 100,
+  "difficulty": 17,
+  "cpc": 90,
+  "traffic_potential": 2100,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "question",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "professional community management",
+  "volume": 100,
+  "difficulty": 19,
+  "cpc": 250,
+  "traffic_potential": 50,
+  "parent_topic": "pcm management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community health worker certification online",
+  "volume": 100,
+  "difficulty": 7,
+  "cpc": 300,
+  "traffic_potential": 350,
+  "parent_topic": "how to become a community health worker",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "ccmc community management",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 4100,
+  "parent_topic": "ccmc",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "crypto community building",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "crypto community building",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "social media community building",
+  "volume": 100,
+  "difficulty": 18,
+  "cpc": 200,
+  "traffic_potential": 50,
+  "parent_topic": "social media community building",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_top",
+   "paid_sitelink",
+   "question",
+   "discussion",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "cusick community management",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 190,
+  "traffic_potential": 350,
+  "parent_topic": "cusick",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community service hours online",
+  "volume": 100,
+  "difficulty": 14,
+  "cpc": 90,
+  "traffic_potential": 2500,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community engagement ideas",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 20,
+  "parent_topic": "online community engagement ideas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "social media community management services",
+  "volume": 100,
+  "difficulty": 12,
+  "cpc": 150,
+  "traffic_potential": 30,
+  "parent_topic": "social media community management services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "build an online community",
+  "volume": 100,
+  "difficulty": 10,
+  "cpc": 80,
+  "traffic_potential": 700,
+  "parent_topic": "how to build an online community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "building classroom community lesson plans",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 130,
+  "traffic_potential": 600,
+  "parent_topic": "classroom community building activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "what is community building",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 10,
+  "traffic_potential": 150,
+  "parent_topic": "building community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "online health community",
+  "volume": 100,
+  "difficulty": 12,
+  "cpc": 110,
+  "traffic_potential": 60,
+  "parent_topic": "online health community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "benefits of online community engagement",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "benefits of online community engagement",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community building questions",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 3,
+  "traffic_potential": 5700,
+  "parent_topic": "team building questions",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "heywood community management",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 250,
+  "traffic_potential": 250,
+  "parent_topic": "heywood management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "circle online community",
+  "volume": 100,
+  "difficulty": 4,
+  "cpc": 200,
+  "traffic_potential": 24000,
+  "parent_topic": "circle",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "sitelink",
+   "question",
+   "video_th",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "monroe county community credit union online banking",
+  "volume": 100,
+  "difficulty": 1,
+  "cpc": 400,
+  "traffic_potential": 2600,
+  "parent_topic": "monroe county community credit union",
+  "intents": {
+   "informational": false,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "morton community bank online banking",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 7,
+  "traffic_potential": 5100,
+  "parent_topic": "morton community bank",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "market research online community platforms",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "market research online communities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best online community management",
+  "volume": 100,
+  "difficulty": 9,
+  "cpc": null,
+  "traffic_potential": 500,
+  "parent_topic": "online community management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community association management florida",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 110,
+  "traffic_potential": 600,
+  "parent_topic": "community association managers",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "create an online community",
+  "volume": 100,
+  "difficulty": 12,
+  "cpc": 350,
+  "traffic_potential": 700,
+  "parent_topic": "how to build an online community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "williamsburg community building",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": 45,
+  "traffic_potential": 100,
+  "parent_topic": "williamsburg community center",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "image",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "community colleges online degrees",
+  "volume": 100,
+  "difficulty": 39,
+  "cpc": 600,
+  "traffic_potential": 5800,
+  "parent_topic": "california virtual campus",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "telegram community management",
+  "volume": 100,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "telegram community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "california community management",
+  "volume": 100,
+  "difficulty": 31,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "california community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community college online classes",
+  "volume": 100,
+  "difficulty": 19,
+  "cpc": null,
+  "traffic_potential": 6300,
+  "parent_topic": "california virtual campus",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "online fitness community",
+  "volume": 90,
+  "difficulty": 3,
+  "cpc": 250,
+  "traffic_potential": 20,
+  "parent_topic": "online fitness community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community management login",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": 50,
+  "traffic_potential": 900,
+  "parent_topic": "community management",
+  "intents": {
+   "informational": false,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "online community service opportunities",
+  "volume": 90,
+  "difficulty": 14,
+  "cpc": 80,
+  "traffic_potential": 6200,
+  "parent_topic": "online volunteer opportunities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "building classroom community",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": 45,
+  "traffic_potential": 1000,
+  "parent_topic": "community building activities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community building examples",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": 140,
+  "traffic_potential": 700,
+  "parent_topic": "building community in the classroom",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "image"
+  ]
+ },
+ {
+  "keyword": "metal community building",
+  "volume": 90,
+  "difficulty": 43,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "metal community buildings",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "how to get community service hours fast online",
+  "volume": 90,
+  "difficulty": 12,
+  "cpc": 70,
+  "traffic_potential": 6300,
+  "parent_topic": "online volunteer opportunities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "how to grow an online community",
+  "volume": 90,
+  "difficulty": 11,
+  "cpc": 190,
+  "traffic_potential": 800,
+  "parent_topic": "how to build an online community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "pay for community service hours online",
+  "volume": 90,
+  "difficulty": 13,
+  "cpc": 25,
+  "traffic_potential": 2500,
+  "parent_topic": "online community service",
+  "intents": {
+   "informational": false,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community association management jobs",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 15,
+  "traffic_potential": 60,
+  "parent_topic": "community association management jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "community association management systems",
+  "volume": 90,
+  "difficulty": 12,
+  "cpc": null,
+  "traffic_potential": 700,
+  "parent_topic": "hoa management software",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "what is online community",
+  "volume": 90,
+  "difficulty": 10,
+  "cpc": 130,
+  "traffic_potential": 450,
+  "parent_topic": "online communities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "community colleges near me online",
+  "volume": 90,
+  "difficulty": 30,
+  "cpc": 900,
+  "traffic_potential": 150,
+  "parent_topic": "online colleges in maine",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "local_pack",
+   "question"
+  ]
+ },
+ {
+  "keyword": "california community college online course",
+  "volume": 90,
+  "difficulty": 22,
+  "cpc": 1900,
+  "traffic_potential": 2600,
+  "parent_topic": "cvc",
+  "intents": null,
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community first property management",
+  "volume": 90,
+  "difficulty": null,
+  "cpc": 160,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "community colleges online classes",
+  "volume": 90,
+  "difficulty": 6,
+  "cpc": 450,
+  "traffic_potential": 150,
+  "parent_topic": "online colleges in maine",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "community building activities for teachers",
+  "volume": 90,
+  "difficulty": 5,
+  "cpc": 80,
+  "traffic_potential": 1000,
+  "parent_topic": "team building activities for teachers",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_top",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "best community colleges online",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": 700,
+  "traffic_potential": 200,
+  "parent_topic": "community college online",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community engagement platform",
+  "volume": 90,
+  "difficulty": 9,
+  "cpc": 600,
+  "traffic_potential": 1000,
+  "parent_topic": "publicinput",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online trading community",
+  "volume": 90,
+  "difficulty": 19,
+  "cpc": 130,
+  "traffic_potential": 1500,
+  "parent_topic": "trading",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "paid_sitelink",
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "community management freelance",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "community management freelance",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community resident portal payment online",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 1200,
+  "traffic_potential": 6800,
+  "parent_topic": "community resident portal",
+  "intents": {
+   "informational": false,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community research",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 200,
+  "parent_topic": "online research communities",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "houston community college online class",
+  "volume": 90,
+  "difficulty": 27,
+  "cpc": 1400,
+  "traffic_potential": 450,
+  "parent_topic": "hcc d2l",
+  "intents": null,
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "excelsior community management",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "excelsior community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "how to build a discord community",
+  "volume": 90,
+  "difficulty": 10,
+  "cpc": 100,
+  "traffic_potential": 800,
+  "parent_topic": "how to make a discord server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "how to enable community on discord",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 200,
+  "parent_topic": "discord community server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "houston community college online course",
+  "volume": 90,
+  "difficulty": 18,
+  "cpc": 2000,
+  "traffic_potential": 450,
+  "parent_topic": "hcc d2l",
+  "intents": null,
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "community management best practices",
+  "volume": 90,
+  "difficulty": 6,
+  "cpc": 400,
+  "traffic_potential": 450,
+  "parent_topic": "social media community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community asset management",
+  "volume": 90,
+  "difficulty": 27,
+  "cpc": 90,
+  "traffic_potential": 40,
+  "parent_topic": "community asset management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "local_pack",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online panel community",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 500,
+  "traffic_potential": 10,
+  "parent_topic": "online panel community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "tolarian community college discord",
+  "volume": 90,
+  "difficulty": 15,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "tolarian community college discord",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "social media community management agency",
+  "volume": 90,
+  "difficulty": 19,
+  "cpc": 1700,
+  "traffic_potential": 100,
+  "parent_topic": "social media community management agency",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "local_pack"
+  ]
+ },
+ {
+  "keyword": "community associations management",
+  "volume": 90,
+  "difficulty": 28,
+  "cpc": 200,
+  "traffic_potential": 500,
+  "parent_topic": "community association management limited",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "local_pack",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community association management llc",
+  "volume": 90,
+  "difficulty": 40,
+  "cpc": null,
+  "traffic_potential": 70,
+  "parent_topic": "community association management llc",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "online community manager",
+  "volume": 90,
+  "difficulty": 2,
+  "cpc": 350,
+  "traffic_potential": 150,
+  "parent_topic": "online community manager jobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "best platform to build online community",
+  "volume": 90,
+  "difficulty": 17,
+  "cpc": 800,
+  "traffic_potential": 700,
+  "parent_topic": "online community platforms",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "paid_top",
+   "discussion",
+   "video_th",
+   "news",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community colleges in texas",
+  "volume": 90,
+  "difficulty": 43,
+  "cpc": 800,
+  "traffic_potential": 100,
+  "parent_topic": "online community college texas",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community service management",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 450,
+  "parent_topic": "social and community service manager",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "question",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "building a discord community",
+  "volume": 90,
+  "difficulty": 6,
+  "cpc": null,
+  "traffic_potential": 1200,
+  "parent_topic": "how to start a discord server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "paid_top",
+   "paid_sitelink",
+   "question",
+   "discussion",
+   "news",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "community building lawrence ks",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "community building lawrence ks",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": true
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "community boat building",
+  "volume": 90,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "community boat building",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "apc network management card nmc community",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "apc network management card nmc community",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "sierra community management",
+  "volume": 90,
+  "difficulty": 0,
+  "cpc": 900,
+  "traffic_potential": 80,
+  "parent_topic": "sierra community management",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": true
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "quickbooks online community",
+  "volume": 80,
+  "difficulty": 10,
+  "cpc": 160,
+  "traffic_potential": 800,
+  "parent_topic": "quickbooks community",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "online community examples",
+  "volume": 80,
+  "difficulty": 11,
+  "cpc": 90,
+  "traffic_potential": 200,
+  "parent_topic": "top trending community websites",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "discord community servers",
+  "volume": 80,
+  "difficulty": 20,
+  "cpc": 1,
+  "traffic_potential": 177000,
+  "parent_topic": "discord login",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "social community management",
+  "volume": 80,
+  "difficulty": 5,
+  "cpc": 300,
+  "traffic_potential": 100,
+  "parent_topic": "social media community management",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "community bank online banking app",
+  "volume": 80,
+  "difficulty": 30,
+  "cpc": 170,
+  "traffic_potential": 450,
+  "parent_topic": "cbna login",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ }
+]

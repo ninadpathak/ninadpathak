@@ -1,0 +1,2933 @@
+[
+ {
+  "keyword": "what is an mcp server",
+  "volume": 7200,
+  "difficulty": 40,
+  "cpc": 15,
+  "traffic_potential": 8100,
+  "parent_topic": "mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "mcp server meaning",
+  "volume": 4500,
+  "difficulty": 39,
+  "cpc": 30,
+  "traffic_potential": 2400,
+  "parent_topic": "what is an mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "how to build an ai agent",
+  "volume": 4200,
+  "difficulty": 12,
+  "cpc": 500,
+  "traffic_potential": 4900,
+  "parent_topic": "how to build an ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "ai agent news",
+  "volume": 4100,
+  "difficulty": 15,
+  "cpc": 250,
+  "traffic_potential": 2200,
+  "parent_topic": "ai agents updates",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "video",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "github mcp server",
+  "volume": 3900,
+  "difficulty": 36,
+  "cpc": 250,
+  "traffic_potential": 1400,
+  "parent_topic": "github mcp",
+  "intents": {
+   "informational": true,
+   "navigational": true,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to create an ai agent",
+  "volume": 2500,
+  "difficulty": 22,
+  "cpc": 450,
+  "traffic_potential": 4800,
+  "parent_topic": "how to build an ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "agentic workflow",
+  "volume": 2200,
+  "difficulty": 20,
+  "cpc": 400,
+  "traffic_potential": 700,
+  "parent_topic": "agentic workflows",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "news",
+   "video_th",
+   "image"
+  ]
+ },
+ {
+  "keyword": "context7 mcp server",
+  "volume": 1900,
+  "difficulty": 38,
+  "cpc": 400,
+  "traffic_potential": 3500,
+  "parent_topic": "context7",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai sales agent",
+  "volume": 1900,
+  "difficulty": 43,
+  "cpc": 900,
+  "traffic_potential": 2000,
+  "parent_topic": "ai sales agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "slack mcp server",
+  "volume": 1900,
+  "difficulty": 31,
+  "cpc": 200,
+  "traffic_potential": 1500,
+  "parent_topic": "slack mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent icon",
+  "volume": 1800,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 90,
+  "parent_topic": "agentic ai icon",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent builder",
+  "volume": 1800,
+  "difficulty": 30,
+  "cpc": 700,
+  "traffic_potential": 1200,
+  "parent_topic": "ai agent builder",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "what is mcp server",
+  "volume": 1700,
+  "difficulty": 36,
+  "cpc": 45,
+  "traffic_potential": 2400,
+  "parent_topic": "what is an mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "sitelink",
+   "news"
+  ]
+ },
+ {
+  "keyword": "ai agent architecture diagram",
+  "volume": 1600,
+  "difficulty": 30,
+  "cpc": 450,
+  "traffic_potential": 450,
+  "parent_topic": "ai agent architecture diagram",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "intercom fin ai agent features 2024 2025",
+  "volume": 1500,
+  "difficulty": 24,
+  "cpc": null,
+  "traffic_potential": 600,
+  "parent_topic": "fin ai",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai voice agent platform",
+  "volume": 1400,
+  "difficulty": 36,
+  "cpc": 1800,
+  "traffic_potential": 200,
+  "parent_topic": "best ai agents for customer support",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent development company",
+  "volume": 1400,
+  "difficulty": 17,
+  "cpc": 1000,
+  "traffic_potential": 30,
+  "parent_topic": "ai agent development services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "ai agent frameworks",
+  "volume": 1400,
+  "difficulty": 26,
+  "cpc": 450,
+  "traffic_potential": 1400,
+  "parent_topic": "agentic ai frameworks",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent development",
+  "volume": 1300,
+  "difficulty": 52,
+  "cpc": 800,
+  "traffic_potential": 450,
+  "parent_topic": "ai agent development",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "what is a mcp server",
+  "volume": 1300,
+  "difficulty": 44,
+  "cpc": 15,
+  "traffic_potential": 3500,
+  "parent_topic": "mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai virtual agent",
+  "volume": 1200,
+  "difficulty": 45,
+  "cpc": 80,
+  "traffic_potential": 500,
+  "parent_topic": "ai virtual agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "datadog mcp server",
+  "volume": 1200,
+  "difficulty": 35,
+  "cpc": 30,
+  "traffic_potential": 1100,
+  "parent_topic": "datadog mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "build mcp server",
+  "volume": 1200,
+  "difficulty": 13,
+  "cpc": 250,
+  "traffic_potential": 250,
+  "parent_topic": "how to build an mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent development services",
+  "volume": 1200,
+  "difficulty": 13,
+  "cpc": 1500,
+  "traffic_potential": 150,
+  "parent_topic": "ai agent development services",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "n8n mcp server",
+  "volume": 1200,
+  "difficulty": 36,
+  "cpc": 250,
+  "traffic_potential": 1000,
+  "parent_topic": "n8n mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent orchestration",
+  "volume": 1100,
+  "difficulty": 31,
+  "cpc": 600,
+  "traffic_potential": 1100,
+  "parent_topic": "agent orchestration",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "ai agent security",
+  "volume": 1100,
+  "difficulty": 30,
+  "cpc": 250,
+  "traffic_potential": 150,
+  "parent_topic": "ai agent security",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "vertex ai agent builder",
+  "volume": 1100,
+  "difficulty": 21,
+  "cpc": 400,
+  "traffic_potential": 12000,
+  "parent_topic": "vertex ai",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "azure mcp server",
+  "volume": 1000,
+  "difficulty": 34,
+  "cpc": 600,
+  "traffic_potential": 800,
+  "parent_topic": "azure mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to make an ai agent",
+  "volume": 1000,
+  "difficulty": 6,
+  "cpc": 350,
+  "traffic_potential": 4600,
+  "parent_topic": "how to build an ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "aws mcp server",
+  "volume": 1000,
+  "difficulty": 38,
+  "cpc": 600,
+  "traffic_potential": 1400,
+  "parent_topic": "aws mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "claude ai agent",
+  "volume": 1000,
+  "difficulty": 20,
+  "cpc": 170,
+  "traffic_potential": 1600,
+  "parent_topic": "claude agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "gitlab mcp server",
+  "volume": 1000,
+  "difficulty": 31,
+  "cpc": 300,
+  "traffic_potential": 800,
+  "parent_topic": "gitlab mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": []
+ },
+ {
+  "keyword": "linear mcp server",
+  "volume": 1000,
+  "difficulty": 16,
+  "cpc": 350,
+  "traffic_potential": 700,
+  "parent_topic": "linear mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "salesforce mcp server",
+  "volume": 900,
+  "difficulty": 20,
+  "cpc": 180,
+  "traffic_potential": 1000,
+  "parent_topic": "salesforce mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent marketplace",
+  "volume": 900,
+  "difficulty": 20,
+  "cpc": 350,
+  "traffic_potential": 100,
+  "parent_topic": "ai agent marketplace",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "news",
+   "video_th",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "jira mcp server",
+  "volume": 900,
+  "difficulty": 44,
+  "cpc": 250,
+  "traffic_potential": 1200,
+  "parent_topic": "atlassian mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent workflow",
+  "volume": 900,
+  "difficulty": 24,
+  "cpc": 900,
+  "traffic_potential": 2700,
+  "parent_topic": "agentic workflows",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent evaluation",
+  "volume": 800,
+  "difficulty": 34,
+  "cpc": 600,
+  "traffic_potential": 800,
+  "parent_topic": "ai agent evaluation",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "tavily mcp server",
+  "volume": 800,
+  "difficulty": 4,
+  "cpc": 250,
+  "traffic_potential": 14000,
+  "parent_topic": "tavily",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "best ai agent projects from 2025 hackathons",
+  "volume": 800,
+  "difficulty": 24,
+  "cpc": null,
+  "traffic_potential": 10,
+  "parent_topic": "hackathon agency",
+  "intents": {},
+  "serp_features": [
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "agent opus ai",
+  "volume": 800,
+  "difficulty": 13,
+  "cpc": 190,
+  "traffic_potential": 1500,
+  "parent_topic": "agent opus",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "voice ai agent",
+  "volume": 800,
+  "difficulty": 0,
+  "cpc": 500,
+  "traffic_potential": 1500,
+  "parent_topic": "ai voice agents",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "snowflake mcp server",
+  "volume": 800,
+  "difficulty": 14,
+  "cpc": 600,
+  "traffic_potential": 900,
+  "parent_topic": "snowflake mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai call center agent",
+  "volume": 800,
+  "difficulty": 8,
+  "cpc": 200,
+  "traffic_potential": 900,
+  "parent_topic": "ai call center",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "best ai agent",
+  "volume": 800,
+  "difficulty": 18,
+  "cpc": 500,
+  "traffic_potential": 4900,
+  "parent_topic": "best ai agents",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "video_th",
+   "video"
+  ]
+ },
+ {
+  "keyword": "stripe mcp server",
+  "volume": 700,
+  "difficulty": 2,
+  "cpc": 250,
+  "traffic_potential": 800,
+  "parent_topic": "stripe mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "zapier mcp server",
+  "volume": 700,
+  "difficulty": 5,
+  "cpc": 300,
+  "traffic_potential": 600,
+  "parent_topic": "zapier mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "sentry mcp server",
+  "volume": 700,
+  "difficulty": 0,
+  "cpc": 400,
+  "traffic_potential": 900,
+  "parent_topic": "sentry mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "create an ai agent",
+  "volume": 700,
+  "difficulty": 23,
+  "cpc": 190,
+  "traffic_potential": 4600,
+  "parent_topic": "how to build an ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "build your own ai agent",
+  "volume": 700,
+  "difficulty": 40,
+  "cpc": 250,
+  "traffic_potential": 2500,
+  "parent_topic": "how to create an ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent vs chatbot",
+  "volume": 700,
+  "difficulty": 19,
+  "cpc": 45,
+  "traffic_potential": 350,
+  "parent_topic": "ai agent vs chatbot",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "firecrawl mcp server",
+  "volume": 700,
+  "difficulty": 30,
+  "cpc": 400,
+  "traffic_potential": 400,
+  "parent_topic": "firecrawl mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "ai agent examples",
+  "volume": 700,
+  "difficulty": 11,
+  "cpc": 300,
+  "traffic_potential": 1100,
+  "parent_topic": "ai agents examples",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "news",
+   "video_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "ai marketing agent",
+  "volume": 700,
+  "difficulty": 20,
+  "cpc": 450,
+  "traffic_potential": 800,
+  "parent_topic": "ai marketing agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai coding agent",
+  "volume": 700,
+  "difficulty": 39,
+  "cpc": 700,
+  "traffic_potential": 1500,
+  "parent_topic": "best programming ai",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "google drive mcp server",
+  "volume": 700,
+  "difficulty": 35,
+  "cpc": 200,
+  "traffic_potential": 700,
+  "parent_topic": "google drive mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "obsidian mcp server",
+  "volume": 700,
+  "difficulty": 35,
+  "cpc": 130,
+  "traffic_potential": 400,
+  "parent_topic": "obsidian mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent assist",
+  "volume": 700,
+  "difficulty": 4,
+  "cpc": 500,
+  "traffic_potential": 300,
+  "parent_topic": "ai agent assist",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "agentic ai workflow",
+  "volume": 700,
+  "difficulty": 12,
+  "cpc": 600,
+  "traffic_potential": 3300,
+  "parent_topic": "agentic workflows",
+  "intents": {},
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent use cases",
+  "volume": 700,
+  "difficulty": 16,
+  "cpc": 250,
+  "traffic_potential": 600,
+  "parent_topic": "ai agents use cases",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "gmail mcp server",
+  "volume": 700,
+  "difficulty": 13,
+  "cpc": 300,
+  "traffic_potential": 600,
+  "parent_topic": "gmail mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "no code ai agent builder",
+  "volume": 700,
+  "difficulty": 12,
+  "cpc": 600,
+  "traffic_potential": 250,
+  "parent_topic": "no code ai agent builder",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "azure devops mcp server",
+  "volume": 600,
+  "difficulty": 23,
+  "cpc": 250,
+  "traffic_potential": 350,
+  "parent_topic": "azure devops mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai support agent",
+  "volume": 600,
+  "difficulty": 24,
+  "cpc": 4500,
+  "traffic_potential": 700,
+  "parent_topic": "ai customer service agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "best ai agent builder",
+  "volume": 600,
+  "difficulty": 40,
+  "cpc": 600,
+  "traffic_potential": 4200,
+  "parent_topic": "best ai agents",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "claude ai coding agent",
+  "volume": 600,
+  "difficulty": 34,
+  "cpc": 600,
+  "traffic_potential": 666000,
+  "parent_topic": "claude",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "serena mcp server",
+  "volume": 600,
+  "difficulty": 31,
+  "cpc": 350,
+  "traffic_potential": 1500,
+  "parent_topic": "serena mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "grafana mcp server",
+  "volume": 600,
+  "difficulty": 16,
+  "cpc": 700,
+  "traffic_potential": 200,
+  "parent_topic": "grafana mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent framework",
+  "volume": 600,
+  "difficulty": 28,
+  "cpc": 500,
+  "traffic_potential": 2000,
+  "parent_topic": "microsoft agent framework",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "google vertex ai agent builder",
+  "volume": 600,
+  "difficulty": 22,
+  "cpc": 700,
+  "traffic_potential": 12000,
+  "parent_topic": "vertex ai",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "discussion",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai customer support agent",
+  "volume": 600,
+  "difficulty": 31,
+  "cpc": 1200,
+  "traffic_potential": 21000,
+  "parent_topic": "fin",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "ai real estate agent",
+  "volume": 600,
+  "difficulty": 33,
+  "cpc": 250,
+  "traffic_potential": 350,
+  "parent_topic": "ai real estate agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "ai agent vs ai assistant",
+  "volume": 600,
+  "difficulty": 4,
+  "cpc": 300,
+  "traffic_potential": 1600,
+  "parent_topic": "ai assistants",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "discussion",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai customer service agent",
+  "volume": 600,
+  "difficulty": 36,
+  "cpc": 800,
+  "traffic_potential": 250,
+  "parent_topic": "ai support agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "snippet",
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "create ai agent",
+  "volume": 600,
+  "difficulty": 0,
+  "cpc": 160,
+  "traffic_potential": 4100,
+  "parent_topic": "how to create an ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent course",
+  "volume": 500,
+  "difficulty": 28,
+  "cpc": 350,
+  "traffic_potential": 100,
+  "parent_topic": "ai agents course",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "ai agent logo",
+  "volume": 500,
+  "difficulty": 0,
+  "cpc": 110,
+  "traffic_potential": 50,
+  "parent_topic": "ai agent logo",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "image",
+   "question",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "splunk mcp server",
+  "volume": 500,
+  "difficulty": 24,
+  "cpc": 200,
+  "traffic_potential": 450,
+  "parent_topic": "splunk mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent conference 2026",
+  "volume": 500,
+  "difficulty": 43,
+  "cpc": 200,
+  "traffic_potential": 500,
+  "parent_topic": "ai agent conference",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "ai agent types",
+  "volume": 500,
+  "difficulty": 43,
+  "cpc": 200,
+  "traffic_potential": 800,
+  "parent_topic": "types of ai agents",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "claude code mcp server",
+  "volume": 500,
+  "difficulty": 21,
+  "cpc": 350,
+  "traffic_potential": 2400,
+  "parent_topic": "claude code mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent conference",
+  "volume": 500,
+  "difficulty": 31,
+  "cpc": 150,
+  "traffic_potential": 500,
+  "parent_topic": "ai agent conference 2026",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": true,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "bright data mcp server",
+  "volume": 500,
+  "difficulty": 13,
+  "cpc": 35,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent workflows",
+  "volume": 500,
+  "difficulty": 4,
+  "cpc": 800,
+  "traffic_potential": 3300,
+  "parent_topic": "agentic workflows",
+  "intents": {},
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "customer service ai agent",
+  "volume": 500,
+  "difficulty": 28,
+  "cpc": 90,
+  "traffic_potential": 500,
+  "parent_topic": "ai support agent",
+  "intents": {},
+  "serp_features": [
+   "question",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "how to build an mcp server",
+  "volume": 500,
+  "difficulty": 10,
+  "cpc": 160,
+  "traffic_potential": 450,
+  "parent_topic": "build mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent studio",
+  "volume": 500,
+  "difficulty": 14,
+  "cpc": 600,
+  "traffic_potential": 70,
+  "parent_topic": "ai agent studio",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "sequential thinking mcp server",
+  "volume": 500,
+  "difficulty": 24,
+  "cpc": 350,
+  "traffic_potential": 400,
+  "parent_topic": "sequential thinking mcp server",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "autonomous ai agent",
+  "volume": 450,
+  "difficulty": 28,
+  "cpc": 500,
+  "traffic_potential": 350,
+  "parent_topic": "autonomous ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news",
+   "question"
+  ]
+ },
+ {
+  "keyword": "build an ai agent",
+  "volume": 450,
+  "difficulty": 21,
+  "cpc": 600,
+  "traffic_potential": 4600,
+  "parent_topic": "how to build an ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "sitelink",
+   "discussion",
+   "question"
+  ]
+ },
+ {
+  "keyword": "hubspot mcp server",
+  "volume": 450,
+  "difficulty": 15,
+  "cpc": 1300,
+  "traffic_potential": 600,
+  "parent_topic": "hubspot mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "best ai agent platform",
+  "volume": 450,
+  "difficulty": 22,
+  "cpc": 500,
+  "traffic_potential": 3300,
+  "parent_topic": "best ai agents",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "servicenow mcp server",
+  "volume": 450,
+  "difficulty": 0,
+  "cpc": 400,
+  "traffic_potential": 70,
+  "parent_topic": "servicenow mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "ai agent integration",
+  "volume": 400,
+  "difficulty": 3,
+  "cpc": 900,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "linkedin mcp server",
+  "volume": 400,
+  "difficulty": 0,
+  "cpc": 130,
+  "traffic_potential": 0,
+  "parent_topic": "linkedinjobs",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "virtual agent ai",
+  "volume": 400,
+  "difficulty": 37,
+  "cpc": 80,
+  "traffic_potential": 900,
+  "parent_topic": "ai virtual agent",
+  "intents": {},
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "openai operator ai agent",
+  "volume": 400,
+  "difficulty": 18,
+  "cpc": 600,
+  "traffic_potential": 900,
+  "parent_topic": "open ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video"
+  ]
+ },
+ {
+  "keyword": "ai seo agent",
+  "volume": 400,
+  "difficulty": 6,
+  "cpc": 200,
+  "traffic_potential": 500,
+  "parent_topic": "seo agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "mcp server architecture",
+  "volume": 400,
+  "difficulty": 23,
+  "cpc": 250,
+  "traffic_potential": 600,
+  "parent_topic": "mcp architecture",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "image",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "agent assist ai",
+  "volume": 350,
+  "difficulty": 2,
+  "cpc": 2000,
+  "traffic_potential": 450,
+  "parent_topic": "agent assist",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "ai insurance agent",
+  "volume": 350,
+  "difficulty": 5,
+  "cpc": 1100,
+  "traffic_potential": 300,
+  "parent_topic": "ai insurance agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "video_th",
+   "knowledge_panel"
+  ]
+ },
+ {
+  "keyword": "multi agent ai",
+  "volume": 350,
+  "difficulty": 23,
+  "cpc": 450,
+  "traffic_potential": 2800,
+  "parent_topic": "multi-agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "ai agent frameworks news",
+  "volume": 350,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": null,
+  "parent_topic": null,
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "paid_bottom",
+   "paid_sitelink"
+  ]
+ },
+ {
+  "keyword": "how to build ai agent",
+  "volume": 350,
+  "difficulty": 12,
+  "cpc": 350,
+  "traffic_potential": 4400,
+  "parent_topic": "how to build an ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion",
+   "question",
+   "news"
+  ]
+ },
+ {
+  "keyword": "ai agent observability",
+  "volume": 350,
+  "difficulty": 16,
+  "cpc": 1200,
+  "traffic_potential": 200,
+  "parent_topic": "agent observability",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "what is an ai agent and how does it work",
+  "volume": 300,
+  "difficulty": 0,
+  "cpc": 190,
+  "traffic_potential": 7600,
+  "parent_topic": "ai agents",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video",
+   "question",
+   "sitelink",
+   "news",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai agent\u662f\u4ec0\u4e48",
+  "volume": 300,
+  "difficulty": 3,
+  "cpc": 160,
+  "traffic_potential": 100,
+  "parent_topic": "ai agent\u662f\u4ec0\u4e48",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "ai agent software",
+  "volume": 300,
+  "difficulty": 20,
+  "cpc": 800,
+  "traffic_potential": 5400,
+  "parent_topic": "best ai agents",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "ai agent authentication",
+  "volume": 250,
+  "difficulty": 5,
+  "cpc": 800,
+  "traffic_potential": 0,
+  "parent_topic": "character ai auth0",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "n8n ai agent node",
+  "volume": 250,
+  "difficulty": 22,
+  "cpc": 250,
+  "traffic_potential": 100,
+  "parent_topic": "n8n ai agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "personal ai agent",
+  "volume": 250,
+  "difficulty": 28,
+  "cpc": 200,
+  "traffic_potential": 90,
+  "parent_topic": "personal assistant ai",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "question"
+  ]
+ },
+ {
+  "keyword": "postgres mcp server",
+  "volume": 250,
+  "difficulty": 27,
+  "cpc": 200,
+  "traffic_potential": 450,
+  "parent_topic": "postgres mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "supabase mcp server",
+  "volume": 200,
+  "difficulty": 0,
+  "cpc": 600,
+  "traffic_potential": 2000,
+  "parent_topic": "supabase mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "video_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "ai agent startups",
+  "volume": 200,
+  "difficulty": 14,
+  "cpc": 400,
+  "traffic_potential": 70,
+  "parent_topic": "ai agent startups",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "top ai agent platforms",
+  "volume": 200,
+  "difficulty": 9,
+  "cpc": 700,
+  "traffic_potential": 900,
+  "parent_topic": "ai agent builder",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "real estate agent ai",
+  "volume": 100,
+  "difficulty": 28,
+  "cpc": 300,
+  "traffic_potential": 350,
+  "parent_topic": "ai real estate agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "mcp server minecraft",
+  "volume": 100,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 0,
+  "parent_topic": "mcp minecraft",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "video",
+   "question",
+   "news",
+   "image_th"
+  ]
+ },
+ {
+  "keyword": "how to use ai as a real estate agent",
+  "volume": 70,
+  "difficulty": 21,
+  "cpc": null,
+  "traffic_potential": 2500,
+  "parent_topic": "ai in real estate",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "sitelink",
+   "news",
+   "image_th",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "mcp server python example",
+  "volume": 60,
+  "difficulty": 26,
+  "cpc": 200,
+  "traffic_potential": 500,
+  "parent_topic": "python sdk",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "news"
+  ]
+ },
+ {
+  "keyword": "multi-agent ai news",
+  "volume": 60,
+  "difficulty": 10,
+  "cpc": null,
+  "traffic_potential": 2000,
+  "parent_topic": "multi-agent ai news",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "video_th",
+   "news",
+   "image_th",
+   "question"
+  ]
+ },
+ {
+  "keyword": "docker mcp server",
+  "volume": 50,
+  "difficulty": 45,
+  "cpc": 500,
+  "traffic_potential": 350,
+  "parent_topic": "docker mcp",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "sitelink",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "ai leasing agent",
+  "volume": 50,
+  "difficulty": 5,
+  "cpc": 450,
+  "traffic_potential": 100,
+  "parent_topic": "ai leasing",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "ai certified real estate agent",
+  "volume": 40,
+  "difficulty": 0,
+  "cpc": 170,
+  "traffic_potential": 30,
+  "parent_topic": "ai certified real estate agent",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": true,
+   "transactional": false,
+   "branded": false,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "discussion"
+  ]
+ },
+ {
+  "keyword": "ai agent powered gpt4 can train",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 95000,
+  "parent_topic": "chatgpt 4",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "discussion",
+   "question",
+   "sitelink"
+  ]
+ },
+ {
+  "keyword": "new nvidia ai agent gpt4 train",
+  "volume": 30,
+  "difficulty": 1,
+  "cpc": null,
+  "traffic_potential": 40,
+  "parent_topic": "new nvidia agent powered gpt4 train",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "new ai agent gpt4 can train",
+  "volume": 30,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 95000,
+  "parent_topic": "chatgpt 4",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question",
+   "video_th"
+  ]
+ },
+ {
+  "keyword": "nvidia ai agent powered gpt4 train",
+  "volume": 30,
+  "difficulty": 18,
+  "cpc": null,
+  "traffic_potential": 60,
+  "parent_topic": "multi-agent ai news",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "sitelink",
+   "question",
+   "paid_bottom"
+  ]
+ },
+ {
+  "keyword": "nvidia ai agent powered gpt4 can",
+  "volume": 30,
+  "difficulty": 0,
+  "cpc": null,
+  "traffic_potential": 30,
+  "parent_topic": "nvidia nim",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "question"
+  ]
+ },
+ {
+  "keyword": "new nvidia ai agent powered train",
+  "volume": 30,
+  "difficulty": 3,
+  "cpc": null,
+  "traffic_potential": 50,
+  "parent_topic": "ai nvidia",
+  "intents": {
+   "informational": true,
+   "navigational": false,
+   "commercial": false,
+   "transactional": false,
+   "branded": true,
+   "local": false
+  },
+  "serp_features": [
+   "ai_overview",
+   "ai_overview_sitelink",
+   "image_th",
+   "video_th",
+   "question",
+   "paid_bottom"
+  ]
+ }
+]
