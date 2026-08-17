@@ -32,7 +32,7 @@ A single-agent loop can still fail at its tool boundary rather than in the loop 
 
 An agent would call a search tool that returned an empty array, or a database query that timed out after thirty seconds, and it would either retry sensibly or sit there spinning. Whatever broke, it broke in one place I could point at.
 
-Context is the limit I kept hitting. A single agent working a complex task accumulates its whole history inside the context window: every tool result, every intermediate thought, every file it read three steps ago.
+A single agent working a complex task accumulates its whole history inside the context window. That history includes tool results, intermediate thoughts, and files read earlier in the task.
 
 Past a certain point, paying to feed that history into every reasoning step costs more than the step is worth, and the agent starts forgetting how the task began by the time it reaches the end. None of that is a software bug.
 

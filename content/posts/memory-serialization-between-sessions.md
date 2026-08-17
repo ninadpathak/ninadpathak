@@ -43,7 +43,7 @@ Completeness is what you buy here. Nothing gets lost.
 
 The cost lands in latency and tokens. A six-month support thread, say a customer who has filed eleven tickets and changed plans twice, becomes enormous.
 
-You cannot fit that into a context window, or if you can, you pay to re-process it on every restart. Re-processing a 500-message history added roughly 3 seconds of latency in my measurements, on a Claude Sonnet call with a 200k context window.
+Even when the full history fits in the context window, replaying it on every restart makes the model process those input tokens again and adds latency.
 
 Cheaper than that is **conversation log storage**, where you write every message to a database as it happens. On restart, you retrieve the recent messages and hand the agent the raw log.
 
@@ -136,7 +136,7 @@ I wrote about this in my post on [asymmetric retrieval in agent memory](/article
 
 The serialization format itself matters less than the discipline of using it consistently. JSON is fine for most cases.
 
-Writing to disk on every action for an agent handling 10,000 requests per minute is the case where you need something faster. msgpack or Protocol Buffers cut serialization overhead by 5x in my benchmarks. For the vast majority of agents, JSON with a clear schema stays readable, debuggable, and sufficient.
+A write-heavy agent may need a binary format such as msgpack or Protocol Buffers to reduce serialization overhead. JSON with a clear schema remains easier to read and debug, so the format choice depends on whether throughput or inspectability is the tighter constraint.
 
 Serialization preserves the latest state, but an audit trail must preserve the states it replaced. [Memory versioning and audit trails](/articles/memory-versioning-and-audit-trails/) covers that history instead of overwriting it on every save.
 
