@@ -101,7 +101,7 @@ The planner read an empty slot, assumed nothing had been found, and planned arou
 
 So I ended up wiring explicit synchronization into the workflow: each agent confirmed its writes had propagated before the next agent was cleared to start. That bought correctness at the cost of latency, and it made the workflow more serial, which chipped away at the very reason I had split into multiple agents to begin with.
 
-Looking at [shared vs isolated memory in multi-agent workflows](/articles/memory-hierarchy-in-ai-systems/), the tradeoff was never which design is better. It was which failure mode I would rather debug at 2am.
+The [shared versus isolated memory guide](/articles/shared-vs-isolated-memory-multi-agent/) separates that coordination choice from the wider memory hierarchy. The tradeoff is which failure mode the system can contain and explain.
 
 ## When to make the call
 

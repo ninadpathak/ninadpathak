@@ -58,6 +58,10 @@ Orchestrating these agents well depends on repository documentation that serves 
 
 Practitioner writing keeps earning its place because it carries the intent agents lean on to resolve ambiguity.
 
+The comparison begins before either CLI edits a file. A [coding-agent setup that constrains the task](/articles/coding-agent-setup-that-works/) determines what the agent can see and which checks can reject its patch.
+
+Model choice is the other variable, so the [coding-model guide](/articles/best-llms-for-coding/) should be read as a separate decision from the terminal interface.
+
 ## FAQ
 
 **Which CLI is better for a legacy monolith?** The article does not contain evidence for a universal winner. Run a pinned task against both tools and compare test results, patch quality, and review effort.

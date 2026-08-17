@@ -150,3 +150,5 @@ Add troubleshooting when a failure has a recognizable symptom and recovery. Add 
 That is how the template stays smaller than the product while still growing with it. The archive gives you the first structure and verification loop.
 
 Product evidence decides what belongs in it next.
+
+The guide to [what technical documentation should include](/articles/what-is-technical-documentation-and-what-should-it-include/) defines the minimum package before a team fills the template with product details.

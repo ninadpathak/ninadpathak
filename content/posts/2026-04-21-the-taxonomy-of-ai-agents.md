@@ -111,6 +111,8 @@ Teams that reach for a multi-agent supervisor architecture when the job fits in 
 
 My [agent-design-space](/articles/the-agent-design-space/) survey covers what engineers are actually building across these categories. The data shows production deployments clustering in Types 2 and 3, with Type 4 held back for the genuinely complex workflows.
 
+The classification starts one step earlier than this taxonomy. Decide [where the boundary between an agent and an AI assistant falls](/articles/agent-vs-ai-assistant/) before assigning an agent type.
+
 ## The taxonomy I actually use
 
 When I am sketching out a new agent system, I ask three questions in order:

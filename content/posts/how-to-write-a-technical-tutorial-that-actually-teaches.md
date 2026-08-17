@@ -329,6 +329,8 @@ Copy the commands and code from the built article into a clean directory. When s
 
 The finished test should leave behind the same files and output promised at the top. That closes the contract the tutorial made with the reader.
 
+Before committing to a tutorial, compare it with [finished technical-writing examples](/articles/technical-writing-examples/) that serve other reader jobs. The [types of technical documentation guide](/articles/types-of-technical-documentation/) helps decide whether the task belongs in a tutorial at all.
+
 ## Technical tutorial FAQ
 
 **How long should a technical tutorial be?**

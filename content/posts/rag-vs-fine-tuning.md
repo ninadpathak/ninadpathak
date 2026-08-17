@@ -108,3 +108,5 @@ Now take a contract-review tool that must output a fixed risk-rating object the 
 Same two questions, two different builds.
 
 Get those two jobs straight, hand each to the technique built for it, and most of the failures I described above never show up. The expensive mistakes I keep running into come from one technique being asked to do the other one's work.
+
+Agent memory changes the boundary because the system must preserve behavior and changing state at once. The [fine-tuning versus RAG decision for agent memory](/articles/fine-tuning-vs-rag-for-agent-memory/) works through that narrower case.

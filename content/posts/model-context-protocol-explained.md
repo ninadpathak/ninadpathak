@@ -100,6 +100,8 @@ Big model providers like Anthropic and OpenAI have thrown their weight behind MC
 
 All that momentum points toward MCP becoming the USB port for AI models, a standard socket that any tool can plug into and expect to work. We are leaving behind the era where every integration was a one-off you wrote and maintained yourself, and heading into one where connecting a model to a new source is as routine as plugging in a cable.
 
+The protocol becomes concrete when a client can call a server you control. The [MCP server setup guide](/articles/mcp-server-setup-guide/) covers that implementation path after the architectural choice is settled.
+
 ## Frequently asked questions
 
 **Is MCP a replacement for LangChain?**

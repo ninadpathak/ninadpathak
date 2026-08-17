@@ -166,6 +166,8 @@ Coverage across evaluation, adoption, and retention comes out of that stack, and
 
 Were I advising the team, I would insist that each page have a named owner and a verification step, someone who actually runs the quickstart against the current API before it ships. If you need someone to build that kind of technical content program, [my work page](/work) shows how I approach it.
 
+The external return is only half the case. The analysis of [documentation and engineering velocity](/articles/engineering-velocity-documentation/) examines what the same maintained knowledge does to work inside the team.
+
 ## The real moat is editorial honesty under technical pressure
 
 Any company can now generate a large volume of AI-assisted articles. That is not the moat.

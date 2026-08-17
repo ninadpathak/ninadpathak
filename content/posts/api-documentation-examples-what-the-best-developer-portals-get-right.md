@@ -63,4 +63,6 @@ Copying a sidebar, color system, or endpoint table is easy because those are vis
 
 The [API documentation best-practices guide](/articles/api-documentation-best-practices-reference-guides-and-working-requests/) explains how those jobs divide across a quickstart, reference, and error guidance. For the wider information architecture, use the [documentation organization guide](/articles/how-to-organize-a-documentation-site/) to give each route a stable home.
 
+Once the portal requirements are clear, the [API documentation tool comparison](/articles/api-documentation-tools-hands-on-comparison-small-teams/) helps a small team match that route to its source of truth and review workflow.
+
 A developer portal does its best work when a reader can arrive with an unknown API, make one safe request, understand what happened, and find the detail or recovery route that the result requires. That path is worth testing before any visual pattern is worth copying.

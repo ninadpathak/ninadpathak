@@ -83,6 +83,8 @@ When a team hands me a slow endpoint and asks me to make it feel fast, I work do
 
 The reason it helps is mechanical: prefill spends most of its time hauling weights out of GPU memory, and halving the bytes per weight halves that traffic, so the first token arrives sooner even though the model is doing the same logical work.
 
+TTFT is one output of a wider serving system. The [LLM inference optimization guide](/articles/llm-inference-optimization/) covers the batching and memory decisions that can move it without confusing first-token delay with total throughput.
+
 ## How to measure without fooling yourself
 
 Averages are where I have fooled myself the most. A mean TTFT of 400ms looks healthy right up until I notice the tail, where one user in twenty is waiting two seconds and quietly churning.

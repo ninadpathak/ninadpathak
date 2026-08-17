@@ -258,6 +258,8 @@ Suppose the release later proves that webhook retries can happen over 20 minutes
 
 Readers need the canonical page to become accurate, but teams also need an audit trail when the published behavior changed. A repository commit provides that trail, and the next changelog entry makes the correction visible to people who do not watch the file.
 
+A changelog records the durable sequence, while [release notes explain one release decision](/articles/writing-release-notes-that-developers-trust/) in enough depth for a developer to act. When several supported versions remain live, the [product-version documentation guide](/articles/how-to-document-multiple-product-versions/) covers the routes those entries must preserve.
+
 ## Changelog FAQ
 
 **What is the difference between a changelog and release notes?**

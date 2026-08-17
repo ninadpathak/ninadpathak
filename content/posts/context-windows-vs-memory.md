@@ -325,6 +325,8 @@ Long context amplifies retrieval quality, including the retrieval quality of you
 
 
 
+Once a context window fills, the next decision is not simply what to delete. [Contextual compression for agent memory](/articles/contextual-compression-for-agent-memory/) explains how to decide what survives without treating every old token as equally useful.
+
 ## Related articles
 
 For a deeper look at the benchmark data behind these claims, see [the BEAM memory benchmark](/articles/beam-memory-benchmark/). For implementation patterns, read [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).

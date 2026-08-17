@@ -138,6 +138,8 @@ The serialization format itself matters less than the discipline of using it con
 
 Writing to disk on every action for an agent handling 10,000 requests per minute is the case where you need something faster. msgpack or Protocol Buffers cut serialization overhead by 5x in my benchmarks. For the vast majority of agents, JSON with a clear schema stays readable, debuggable, and sufficient.
 
+Serialization preserves the latest state, but an audit trail must preserve the states it replaced. [Memory versioning and audit trails](/articles/memory-versioning-and-audit-trails/) covers that history instead of overwriting it on every save.
+
 ## Where This Leaves You
 
 Building an agent that users come back to over days or weeks makes serialization non-negotiable. It is the mechanism that lets a long-term relationship exist at all.

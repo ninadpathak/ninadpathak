@@ -126,6 +126,8 @@ Pull the event log from Postgres and replay it to rebuild the exact state. That 
 
 The agent stays fast, and the compliance team still gets its paper trail.
 
+Version history is useful only if state survives a restart in a readable form. The guide to [serializing agent memory between sessions](/articles/memory-serialization-between-sessions/) covers that persistence layer before versioning begins.
+
 ## FAQ
 
 **How long should we keep historical memory versions?** Treat them like application logs. For standard debugging, 30 to 90 days is usually sufficient.

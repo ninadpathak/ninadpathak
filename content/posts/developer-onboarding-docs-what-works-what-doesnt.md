@@ -260,6 +260,10 @@ Use the results to find defects:
 
 “Pages read” tells you little about onboarding quality. Count the avoidable decisions and repeat failures the path removes.
 
+Onboarding is one route inside a wider documentation package. The guide to [what technical documentation should include](/articles/what-is-technical-documentation-and-what-should-it-include/) shows which questions belong outside that first path.
+
+Before the route ships, the [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) catches broken links and rendered failures that onboarding prose alone cannot reveal.
+
 ## Developer onboarding docs FAQ
 
 **How long should developer onboarding documentation be?**

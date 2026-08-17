@@ -348,6 +348,10 @@ Watch for searches that repeat visible navigation labels. If “API errors” is
 
 The structure is never finished, but it should not change casually. Move pages when reader evidence shows the current route is failing, not whenever the organization chart changes.
 
+Reorganization is also the cheapest point to fix structural barriers that repeat across a site. The [documentation accessibility release checklist](/articles/documentation-accessibility-checklist/) identifies the failures that should block the new structure from shipping.
+
+The new hierarchy needs a clear entrance after those routes move. The [documentation homepage guide](/articles/what-a-documentation-homepage-must-help-users-do/) explains how that entrance should expose first tasks and recovery paths.
+
 ## Documentation site organization checklist
 
 - The main reader routes include setup, use, failure, and change.

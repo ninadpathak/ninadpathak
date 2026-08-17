@@ -226,6 +226,8 @@ Later you can layer on a documentation team, a content calendar, a style guide, 
 
 Start with the discipline and add tooling once it is paying rent.
 
+Engineers moving into writing keep some habits and have to drop others. My account of the [move from engineering to technical writing](/articles/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/) separates verification and systems thinking from the shared context that strands a new reader.
+
 ## The compounding return
 
 Documentation compounds the way a paid-down mortgage does, with each entry quietly lowering what you owe later. Every accurate page cuts the count of repeat questions your team fields.

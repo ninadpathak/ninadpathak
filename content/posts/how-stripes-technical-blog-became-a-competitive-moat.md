@@ -184,6 +184,8 @@ That combination is part of the writing work I do for technical companies. Stron
 
 It should change how the market understands the problem and make the product feel easier to choose. [My work page](/work) is built around that exact outcome.
 
+AI products change what this publishing system must explain because outputs can vary and evidence can go stale between runs. The guide to [technical writing for AI products](/articles/technical-writing-for-ai-products-the-new-rules/) covers those product-specific requirements.
+
 ## FAQ
 
 **Why call a technical blog a moat instead of a marketing channel?**

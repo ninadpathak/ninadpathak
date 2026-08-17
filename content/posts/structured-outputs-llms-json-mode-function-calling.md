@@ -159,6 +159,8 @@ Here is the part that surprised me: schema design quality matters more under str
 
 A vague schema produces valid-but-useless output that sails through every check you wrote and is wrong anyway, like a perfectly typed `address` field that captured the billing address when you needed shipping.
 
+Function calling supplies the action payload, but it does not decide when an agent should act or retry. The [agent-loop anatomy](/articles/agent-loop-anatomy/) places that tool call inside the control flow around it.
+
 ## FAQ
 
 **Does structured outputs mode cost more per API call?** Yes, in two ways. First, the schema is included as input tokens on every request (roughly 50 tokens for a simple schema, 500 for a complex one).

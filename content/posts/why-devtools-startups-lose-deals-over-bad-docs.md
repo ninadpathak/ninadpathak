@@ -170,6 +170,8 @@ I would also instrument docs better. State of Docs shows a huge measurement diff
 
 Teams need to know which pages start trials, which pages correlate with activation, and which pages generate support.
 
+Documentation affects a deal because engineers rank evidence before they trust a vendor's claim. The [developer trust hierarchy](/articles/developer-trust-hierarchy/) explains that ordering and why working technical material outranks polished promises.
+
 ## Strong docs allow smaller startups to compete with larger vendors
 
 Against established vendors, small companies can win on documentation alone. I have watched it happen because docs narrow the gulf between product quality and buyer confidence.

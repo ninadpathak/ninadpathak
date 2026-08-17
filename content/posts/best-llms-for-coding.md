@@ -107,6 +107,8 @@ Are you running an agent unattended on multi-file pull requests? Reach for Claud
 Do you need to reason over an entire repository at once, or are you paying per token at high volume? That points to Gemini 3.1 Pro and DeepSeek V4 respectively.
 
 
+Benchmark totals can hide a reasoning failure that matters in code. A [composition-level lambda-calculus test](/articles/lambda-calculus-ai-reasoning-benchmark/) shows how to compare models on an answer that can be checked step by step instead of trusting one leaderboard number.
+
 ## FAQ
 
 **Should I use one model for everything?**

@@ -201,6 +201,8 @@ Pick boring technology for the storage layer, pick a platform that matches your 
 
 
 
+The stack becomes easier to judge inside one workload. The [customer-support agent memory example](/articles/agent-memory-for-customer-support/) follows identity and retrieval through a support conversation where a stale fact can change the answer.
+
 ## Related articles
 
 This cluster of articles covers the full AI memory stack. For understanding context windows vs memory, see [context windows vs memory](/articles/context-windows-vs-memory/).
