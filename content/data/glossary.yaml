@@ -20,6 +20,11 @@ terms:
     <p>Good context assembly filters by account plan and effective date, labels the source, and places the applicable policy next to the task.</p>
     <p>Context engineering applies when the answer depends on choosing and combining inputs. It does not apply to every formatting preference, and its common misuse is filling the window because space is available.</p>
     <p>More context is useful only when each added item has a reason to influence the answer.</p>
+    <h3>Graph-derived context helps when the answer depends on relationships</h3>
+    <p><a href="https://www.microsoft.com/en-us/research/project/graphrag/overview/">Microsoft Research developed GraphRAG</a> for questions that require a view across a corpus rather than one locally similar passage. The pipeline extracts entities and relationships, groups parts of the graph, and uses those structures during retrieval and answer construction.</p>
+    <p>Suppose incident reports name a service, its owning team, a dependency, and a sequence of failures across separate documents. Passage retrieval can return the reports, while a graph-derived context layer can make the cross-document path explicit.</p>
+    <p>That graph is an input to context assembly, not an independent source of truth. Entity resolution can merge different products, relationship extraction can reverse an edge, and a community summary can hide which document supported a claim.</p>
+    <p>Graph-derived retrieval belongs here only when the question depends on connections or corpus-wide themes. Direct passage retrieval is simpler for local factual questions, and every extracted node, edge, and summary still needs provenance back to source text.</p>
   title: 'Context Engineering: Structuring LLM Data Environments'
   description: Context engineering is the systematic discipline of designing, structuring, and managing
     the information provided to an LLM to maximize reasoning accuracy.
@@ -82,6 +87,10 @@ terms:
     <h3>The artifact between stages is the real interface</h3>
     <p>A useful flow specifies what each stage receives, what it must return, and which failure moves the process elsewhere. Passing a free-form transcript between every stage makes the sequence difficult to test and allows an early error to spread invisibly.</p>
     <p>Structured artifacts such as a requirements list, patch, test report, or citation map make the handoff inspectable. The flow earns its extra calls only when a later stage can reject or improve an earlier artifact using new information.</p>
+    <h3>DSPy optimizes a flow only against what its metric can see</h3>
+    <p><a href="https://arxiv.org/abs/2310.03714">DSPy expresses LLM programs as modules</a> and uses examples plus a metric to optimize instructions, demonstrations, or other program parameters. It can tune model calls inside a flow, but it does not choose the system's operating boundary or make the evaluation trustworthy.</p>
+    <p>Consider a support classifier that returns a category and urgency. Development examples provide the expected labels, while the metric can penalize a missed urgent ticket more heavily than a category error.</p>
+    <p>The optimizer can improve only the behavior visible in that dataset and score. A higher development result says nothing about tone, citation quality, or new ticket types unless the evaluation checks them, so the compiled program should be tested on held-out cases and versioned with its model, optimizer, examples, and metric.</p>
   title: Flow Engineering for LLM Applications
   description: Flow engineering involves designing iterative, multi-step LLM architectures rather than
     relying on a single zero-shot prompt.
@@ -237,31 +246,6 @@ terms:
     slug: semantic-chunking
   - name: Context Engineering
     slug: context-engineering
-  last_updated: '2026-08-17'
-- name: GraphRAG
-  slug: graphrag
-  opening_definition: GraphRAG is a retrieval-augmented generation approach that derives a graph of entities, relationships, or claims from source material and uses graph-based representations during retrieval and answer construction. It applies when questions depend on connections or corpus-wide themes that isolated text chunks do not expose well; it is not a generic name for every RAG system with metadata.
-  body_html: |
-    <h2>Microsoft’s GraphRAG work targeted corpus-level questions</h2>
-    <p>Microsoft Research <a href="https://www.microsoft.com/en-us/research/project/graphrag/overview/">developed GraphRAG</a> to answer questions that require understanding a dataset as a whole, not merely retrieving a few passages similar to a query. Its pipeline extracts a graph from text, identifies communities, and builds summaries that can support broader questions.</p>
-    <p>The term is now used loosely across products, so an implementation should state what its nodes and edges mean, how they were extracted, and which retrieval path uses them.</p>
-    <h3>A relationship question shows why chunks can be insufficient</h3>
-    <p>Suppose incident reports mention a service, its owning team, a dependency, and a sequence of failures across separate documents. Vector search may retrieve individually similar reports.</p>
-    <p>A graph can connect the service to the dependency and the team, making the cross-document path explicit.</p>
-    <h3>GraphRAG is not a knowledge graph with an LLM attached</h3>
-    <p>A knowledge graph may contain curated facts independent of retrieval-augmented generation. Ordinary RAG can answer local factual questions directly from passages, while GraphRAG adds extraction cost and another layer whose errors must be traced back to source text.</p>
-    <p>The <a href="/articles/rag-evaluation-metrics-what-actually-matters/">RAG evaluation guide</a> explains why retrieval and answer quality need separate checks. GraphRAG does not apply when direct passage retrieval already answers the task, and the common misuse is treating an extracted edge as a verified fact rather than a claim that still needs provenance.</p>
-    <h3>Extraction quality governs every later graph query</h3>
-    <p>Entity resolution must decide whether two names refer to the same thing, and relationship extraction must preserve the source that supports each edge. A confident community summary cannot repair a graph that merged two products or reversed a dependency.</p>
-    <p>A useful evaluation samples nodes, edges, and summaries against the underlying documents before measuring answer quality. Graph structure is valuable when it exposes a path the question needs, not merely because it produces an impressive visualization.</p>
-  title: 'GraphRAG: Knowledge Graphs for Retrieval Augmented Generation'
-  description: GraphRAG combines vector search with Knowledge Graphs to allow LLMs to reason across complex
-    relationships and entire datasets.
-  related_terms:
-  - name: Context Engineering
-    slug: context-engineering
-  - name: Cross-Encoder Reranking
-    slug: cross-encoder-reranking
   last_updated: '2026-08-17'
 - name: Tool Calling
   slug: tool-calling
@@ -764,28 +748,4 @@ terms:
     slug: tool-calling
   - name: Context Engineering
     slug: context-engineering
-  last_updated: '2026-08-17'
-- name: DSPy
-  slug: dspy
-  opening_definition: DSPy is an open-source framework for expressing LLM programs as modules and optimizing their prompts or weights against examples and a metric. It applies when a task can be represented as a repeatable program and evaluated on a development set; it does not remove the need for representative data or a trustworthy objective.
-  body_html: |
-    <h2>Stanford NLP shifted prompt work into program optimization</h2>
-    <p>Omar Khattab and collaborators <a href="https://arxiv.org/abs/2310.03714">introduced DSPy</a> to replace manual prompt tweaking with declarative modules and optimizers. A developer defines the input-output signature and composes operations, then a DSPy optimizer uses examples and a metric to produce instructions, demonstrations, or other parameters for that program.</p>
-    <p>The framework addresses a maintenance problem: handwritten prompts become brittle when models, modules, or task requirements change. Recompiling against an evaluation set can adapt the program without editing every instruction by hand.</p>
-    <h3>A support classifier needs a metric before an optimizer</h3>
-    <p>A DSPy program might map a ticket to a category and urgency. The development examples provide expected labels, while the metric rewards correct category and applies a stronger penalty when urgent tickets are missed.</p>
-    <p>The optimizer can only improve what that metric and dataset reveal.</p>
-    <h3>DSPy is not an agent framework or automatic truth machine</h3>
-    <p><a href="/glossary/flow-engineering/">Flow engineering</a> describes a staged system architecture, while DSPy supplies abstractions for composing and optimizing model calls within such a system. Fine-tuning changes model weights through training; many DSPy optimizers instead search instructions and demonstrations, though the framework can support weight optimization too.</p>
-    <p>The <a href="/articles/rag-evaluation-metrics-what-actually-matters/">evaluation metrics guide</a> explains why the objective must reflect the real task. DSPy is unnecessary for a one-off prompt with no evaluation set, and the common misuse is celebrating a higher development score without checking held-out cases for overfitting.</p>
-    <h3>Compilation is an experiment with dependencies</h3>
-    <p>A compiled DSPy program depends on the optimizer, model, training examples, metric, and search budget used to produce it. Changing the model can change which demonstrations and instructions work, so the compiled artifact should be versioned with those inputs.</p>
-    <p>Human review still matters when the metric captures only part of quality. A support answer can satisfy an exact-match label while using a tone, source, or explanation that the scoring function never examined.</p>
-  title: 'DSPy: Programming AI Language Models'
-  description: DSPy expresses LLM programs as modules and optimizes their parameters against examples and a metric.
-  related_terms:
-  - name: Context Engineering
-    slug: context-engineering
-  - name: Flow Engineering
-    slug: flow-engineering
   last_updated: '2026-08-17'
