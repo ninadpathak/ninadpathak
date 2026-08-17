@@ -308,6 +308,29 @@ def deploy_check() -> list[str]:
     return problems
 
 
+def url_inventory_check() -> tuple[list[str], str]:
+    """Fail when the build stops producing a URL Search Console still sends traffic to.
+
+    Returns (failures, one-line summary). The split draws the same distinction
+    deploy_check draws between something to act on now and something merely worth seeing:
+    a dead URL still earning impressions in the last 28 days is an active leak and fails,
+    while a URL Google has already dropped is a write-off and must never fail the build
+    forever, or the guard becomes another alarm people learn to ignore.
+
+    Written because the March 2026 rebuild 404ed the entire previous site with no redirects
+    and nobody noticed for five months. tools/url_inventory.py carries the full account and
+    the defence of the two windows.
+    """
+    sys.path.insert(0, str(ROOT / "tools"))
+    try:
+        import url_inventory
+    except ImportError as exc:
+        return [f"url_inventory unavailable: {exc}"], f"unavailable: {exc}"
+
+    outcome = url_inventory.check()
+    return outcome["failures"], url_inventory.summary_line(outcome)
+
+
 def publish_gate() -> list[str]:
     """The mechanical half of the publish gate in campaign-90d.md section 8."""
     failures = []
@@ -330,6 +353,11 @@ def publish_gate() -> list[str]:
     code, css = run("git", "diff", "--stat", "origin/main", "--", "static/css/")
     if css.strip():
         failures.append(f"CSS changed against origin/main: {css.strip().splitlines()[-1].strip()}")
+
+    # Runs after build.py so it reads the build this gate just produced, including the
+    # generated output/_redirects rather than the 25 hand-written source rules.
+    url_failures, _ = url_inventory_check()
+    failures += url_failures
 
     return failures
 
@@ -367,6 +395,7 @@ def main() -> int:
     gate = publish_gate()
     gate += robots_check()
     deploy = deploy_check()
+    _, url_summary = url_inventory_check()
     lag = deploy_lag_seconds()
     # A mismatch is only an alarm once production has had the grace window to catch up.
     deploy_waiting = bool(deploy) and lag is not None and lag < DEPLOY_GRACE_SECONDS
@@ -420,7 +449,8 @@ def main() -> int:
            + "".join(f"- {line}\n" for line in gsc_lines)
            + f"- Distance to 10,000/month: **{distance}**\n"
            f"- Publish gate: {'PASS' if not gate else 'FAIL — ' + '; '.join(gate)}\n"
-           f"- Deploy: {_deploy_line(deploy, deploy_waiting, lag)}\n")
+           f"- Deploy: {_deploy_line(deploy, deploy_waiting, lag)}\n"
+           f"- URL inventory: {url_summary}\n")
 
     print(row)
     if args.dry_run:

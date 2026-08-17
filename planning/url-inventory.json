@@ -1,0 +1,8363 @@
+{
+ "refreshed": "2026-08-17T14:46:27Z",
+ "site": "sc-domain:ninadpathak.com",
+ "span": {
+  "requested_start": "2025-04-21",
+  "earliest_with_data": "2025-04-21",
+  "end": "2026-08-14",
+  "note": "end is GSC_LAG_DAYS back; Search Console lags about three days."
+ },
+ "windows": {
+  "gsc_lag_days": 3,
+  "alarm_days": 28,
+  "watch_days": 84
+ },
+ "caveat": "Impression and click counts are floors, not totals. Search Console withholds low-volume pages and queries.",
+ "url_count": 1043,
+ "urls": [
+  {
+   "path": "/",
+   "clicks_total": 95,
+   "impressions_total": 1296,
+   "impressions_watch": 318,
+   "impressions_alarm": 133,
+   "clicks_alarm": 9
+  },
+  {
+   "path": "/2022/12/12/ticktick-vs-any-do/",
+   "clicks_total": 1,
+   "impressions_total": 205,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/2022/12/12/ticktick/",
+   "clicks_total": 0,
+   "impressions_total": 134,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/2022/12/17/airtable/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/2022/12/23/ticktick-vs-things3/",
+   "clicks_total": 0,
+   "impressions_total": 106,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/2022/12/30/todoist-vs-any-do/",
+   "clicks_total": 0,
+   "impressions_total": 416,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/2023/01/07/any-do-vs-notion/",
+   "clicks_total": 0,
+   "impressions_total": 43,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/2023/11/19/401k-rollover-guide/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/2024/09/28/freelancer-guest-posting-for-credibility/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/401k-rollover-guide/",
+   "clicks_total": 0,
+   "impressions_total": 22,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/about/",
+   "clicks_total": 7,
+   "impressions_total": 493,
+   "impressions_watch": 267,
+   "impressions_alarm": 66,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ai-agent-architecture/",
+   "clicks_total": 0,
+   "impressions_total": 14,
+   "impressions_watch": 14,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ai-agent-memory/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 6,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ai-workflows/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 5,
+   "impressions_alarm": 3,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/airtable/",
+   "clicks_total": 1,
+   "impressions_total": 8,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/any-do-vs-airtable/",
+   "clicks_total": 0,
+   "impressions_total": 232,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/any-do-vs-notion/",
+   "clicks_total": 0,
+   "impressions_total": 211,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/any-do-vs-notion/any-do-vs-notion/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/any-do-vs-things-3/",
+   "clicks_total": 3,
+   "impressions_total": 135,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/any-do-vs-trello/",
+   "clicks_total": 0,
+   "impressions_total": 121,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/any-do/",
+   "clicks_total": 1,
+   "impressions_total": 143,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/",
+   "clicks_total": 1,
+   "impressions_total": 10,
+   "impressions_watch": 10,
+   "impressions_alarm": 10,
+   "clicks_alarm": 1
+  },
+  {
+   "path": "/articles/developer-onboarding-docs-what-works-what-doesnt/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/documentation-review-checklist-before-you-publish/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/how-to-organize-a-documentation-site/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/how-to-write-a-technical-tutorial-that-actually-teaches/",
+   "clicks_total": 0,
+   "impressions_total": 11,
+   "impressions_watch": 11,
+   "impressions_alarm": 11,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/internal-vs-external-documentation/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/seo-for-technical-documentation/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 10,
+   "impressions_alarm": 10,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/technical-documentation-best-practices-tested-real-developer-docs/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 3,
+   "impressions_alarm": 3,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/technical-documentation-template/",
+   "clicks_total": 0,
+   "impressions_total": 30,
+   "impressions_watch": 30,
+   "impressions_alarm": 30,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/types-of-technical-documentation/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 4,
+   "impressions_alarm": 4,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/what-is-technical-documentation-and-what-should-it-include/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/articles/writing-release-notes-that-developers-trust/",
+   "clicks_total": 0,
+   "impressions_total": 11,
+   "impressions_watch": 11,
+   "impressions_alarm": 11,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/author/ninad/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/author/ninad/page/2/",
+   "clicks_total": 0,
+   "impressions_total": 21,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/",
+   "clicks_total": 2,
+   "impressions_total": 237,
+   "impressions_watch": 35,
+   "impressions_alarm": 15,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/2026-04-21-the-taxonomy-of-ai-agents/",
+   "clicks_total": 0,
+   "impressions_total": 42,
+   "impressions_watch": 41,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/2026-04-28-asymmetric-retrieval-agent-memory/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 6,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/agent-harnesses/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 10,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/agent-loop-anatomy/",
+   "clicks_total": 0,
+   "impressions_total": 12,
+   "impressions_watch": 12,
+   "impressions_alarm": 12,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/agent-vs-ai-assistant/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 4,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/agentic-cli-benchmarks/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 10,
+   "impressions_alarm": 4,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/agentic-workflow-playbook/",
+   "clicks_total": 0,
+   "impressions_total": 45,
+   "impressions_watch": 45,
+   "impressions_alarm": 9,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/ai-memory-management-for-llms/",
+   "clicks_total": 0,
+   "impressions_total": 48,
+   "impressions_watch": 48,
+   "impressions_alarm": 22,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/asymmetric-retrieval-agent-memory/",
+   "clicks_total": 0,
+   "impressions_total": 12,
+   "impressions_watch": 12,
+   "impressions_alarm": 12,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/beam-memory-benchmark/",
+   "clicks_total": 0,
+   "impressions_total": 15,
+   "impressions_watch": 15,
+   "impressions_alarm": 9,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/best-content-marketing-books/",
+   "clicks_total": 0,
+   "impressions_total": 103,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/best-llms-for-coding/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 3,
+   "impressions_alarm": 3,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/context-windows-vs-memory/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/contextual-compression-for-agent-memory/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 10,
+   "impressions_alarm": 10,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/developer-onboarding-docs-what-works-what-doesnt/",
+   "clicks_total": 0,
+   "impressions_total": 39,
+   "impressions_watch": 39,
+   "impressions_alarm": 12,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/embedding-models-compared/",
+   "clicks_total": 0,
+   "impressions_total": 120,
+   "impressions_watch": 120,
+   "impressions_alarm": 55,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/engineering-velocity-documentation/",
+   "clicks_total": 0,
+   "impressions_total": 51,
+   "impressions_watch": 51,
+   "impressions_alarm": 4,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/episodic-vs-semantic-vs-working-memory-agents/",
+   "clicks_total": 0,
+   "impressions_total": 65,
+   "impressions_watch": 12,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/fine-tuning-vs-rag-for-agent-memory/",
+   "clicks_total": 2,
+   "impressions_total": 87,
+   "impressions_watch": 87,
+   "impressions_alarm": 35,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/",
+   "clicks_total": 0,
+   "impressions_total": 13,
+   "impressions_watch": 13,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/hermes-md-git-commit-billing-bug/",
+   "clicks_total": 2,
+   "impressions_total": 70,
+   "impressions_watch": 26,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/",
+   "clicks_total": 0,
+   "impressions_total": 2420,
+   "impressions_watch": 2420,
+   "impressions_alarm": 755,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/how-memory-works-in-claude-code/",
+   "clicks_total": 0,
+   "impressions_total": 138,
+   "impressions_watch": 138,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/how-memory-works-in-deerflow/",
+   "clicks_total": 0,
+   "impressions_total": 46,
+   "impressions_watch": 46,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/how-memory-works-in-hyperagents/",
+   "clicks_total": 0,
+   "impressions_total": 11,
+   "impressions_watch": 11,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/how-stripes-technical-blog-became-a-competitive-moat/",
+   "clicks_total": 0,
+   "impressions_total": 116,
+   "impressions_watch": 116,
+   "impressions_alarm": 18,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/how-to-write-a-changelog-developers-actually-read/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 5,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/how-to-write-a-technical-tutorial-that-actually-teaches/",
+   "clicks_total": 0,
+   "impressions_total": 25,
+   "impressions_watch": 25,
+   "impressions_alarm": 6,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/hybrid-search-bm25-vector-search/",
+   "clicks_total": 0,
+   "impressions_total": 79,
+   "impressions_watch": 79,
+   "impressions_alarm": 22,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/icloud-keychain-escrow/",
+   "clicks_total": 1,
+   "impressions_total": 66,
+   "impressions_watch": 56,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/kv-cache-eviction-accuracy/",
+   "clicks_total": 0,
+   "impressions_total": 144,
+   "impressions_watch": 144,
+   "impressions_alarm": 5,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/lambda-calculus-ai-reasoning-benchmark/",
+   "clicks_total": 0,
+   "impressions_total": 22,
+   "impressions_watch": 18,
+   "impressions_alarm": 6,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/llm-context-windows-explained/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 5,
+   "impressions_alarm": 5,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/llm-inference-optimization/",
+   "clicks_total": 0,
+   "impressions_total": 79,
+   "impressions_watch": 79,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/llm-token-budgets-cost-control/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 5,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/local-wasm-vector-benchmarks/",
+   "clicks_total": 0,
+   "impressions_total": 86,
+   "impressions_watch": 86,
+   "impressions_alarm": 14,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/memory-attribution-errors/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 4,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/memory-for-voice-ai-agents/",
+   "clicks_total": 0,
+   "impressions_total": 34,
+   "impressions_watch": 34,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/memory-hierarchy-in-ai-systems/",
+   "clicks_total": 0,
+   "impressions_total": 15,
+   "impressions_watch": 15,
+   "impressions_alarm": 5,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/memory-serialization-between-sessions/",
+   "clicks_total": 0,
+   "impressions_total": 18,
+   "impressions_watch": 15,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/memory-versioning-and-audit-trails/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 5,
+   "impressions_alarm": 5,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/mixture-of-experts-explained/",
+   "clicks_total": 0,
+   "impressions_total": 19,
+   "impressions_watch": 19,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/model-context-protocol-explained/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 4,
+   "impressions_alarm": 4,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/multi-agent-vs-single-agent-tradeoffs/",
+   "clicks_total": 0,
+   "impressions_total": 80,
+   "impressions_watch": 80,
+   "impressions_alarm": 6,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/page/2/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/production-ai-agent-errors/",
+   "clicks_total": 0,
+   "impressions_total": 20,
+   "impressions_watch": 20,
+   "impressions_alarm": 11,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/prompt-caching-what-it-is-and-when-the-math-works/",
+   "clicks_total": 1,
+   "impressions_total": 111,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/rag-evaluation-metrics-what-actually-matters/",
+   "clicks_total": 0,
+   "impressions_total": 40,
+   "impressions_watch": 40,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/rag-vs-memory/",
+   "clicks_total": 1,
+   "impressions_total": 74,
+   "impressions_watch": 74,
+   "impressions_alarm": 22,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/",
+   "clicks_total": 0,
+   "impressions_total": 39,
+   "impressions_watch": 39,
+   "impressions_alarm": 19,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/semantic-caching-rag-optimization/",
+   "clicks_total": 0,
+   "impressions_total": 46,
+   "impressions_watch": 46,
+   "impressions_alarm": 10,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/shared-vs-isolated-memory-multi-agent/",
+   "clicks_total": 2,
+   "impressions_total": 120,
+   "impressions_watch": 120,
+   "impressions_alarm": 5,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/short-term-memory-for-ai-agents/",
+   "clicks_total": 0,
+   "impressions_total": 46,
+   "impressions_watch": 46,
+   "impressions_alarm": 16,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/speculative-decoding-explained/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 7,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/spinel-ruby-aot-compiler/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 7,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/state-of-ai-agent-memory-2026/",
+   "clicks_total": 0,
+   "impressions_total": 73,
+   "impressions_watch": 73,
+   "impressions_alarm": 25,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/state-of-open-source-memory-2026/",
+   "clicks_total": 0,
+   "impressions_total": 35,
+   "impressions_watch": 35,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/structured-outputs-llms-json-mode-function-calling/",
+   "clicks_total": 0,
+   "impressions_total": 32,
+   "impressions_watch": 32,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/technical-writing-for-ai-products-the-new-rules/",
+   "clicks_total": 1,
+   "impressions_total": 20,
+   "impressions_watch": 20,
+   "impressions_alarm": 8,
+   "clicks_alarm": 1
+  },
+  {
+   "path": "/blog/technical-writing-for-engineers/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 3,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/the-agent-design-space/",
+   "clicks_total": 0,
+   "impressions_total": 8,
+   "impressions_watch": 8,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/the-case-for-shorter-technical-documentation/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 7,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/the-memory-hierarchy-why-rag-is-not-enough/",
+   "clicks_total": 0,
+   "impressions_total": 13,
+   "impressions_watch": 13,
+   "impressions_alarm": 4,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/the-taxonomy-of-ai-agents/",
+   "clicks_total": 0,
+   "impressions_total": 19,
+   "impressions_watch": 19,
+   "impressions_alarm": 19,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/time-to-first-token-ttft/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 7,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/uv-package-manager-benchmark/",
+   "clicks_total": 0,
+   "impressions_total": 13,
+   "impressions_watch": 13,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/voice-ai-latency-gemini-benchmark/",
+   "clicks_total": 0,
+   "impressions_total": 71,
+   "impressions_watch": 71,
+   "impressions_alarm": 25,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/why-ai-agents-keep-failing-in-production/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 4,
+   "impressions_alarm": 4,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/why-coding-agents-lose-their-memory/",
+   "clicks_total": 0,
+   "impressions_total": 24,
+   "impressions_watch": 24,
+   "impressions_alarm": 15,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/why-devtools-startups-lose-deals-over-bad-docs/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/blog/writing-release-notes-that-developers-trust/",
+   "clicks_total": 0,
+   "impressions_total": 16,
+   "impressions_watch": 16,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/category/blog/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/category/customers/",
+   "clicks_total": 0,
+   "impressions_total": 25,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/category/glossary/technology/",
+   "clicks_total": 0,
+   "impressions_total": 13,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/category/marketing/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/category/tech/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/contact/",
+   "clicks_total": 0,
+   "impressions_total": 90,
+   "impressions_watch": 87,
+   "impressions_alarm": 36,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/contents/reform/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/contents/renga/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/creative-writing-vs-ai-text-generation/",
+   "clicks_total": 0,
+   "impressions_total": 11,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/customers/centus/",
+   "clicks_total": 0,
+   "impressions_total": 14,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/customers/delightchat/",
+   "clicks_total": 0,
+   "impressions_total": 167,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/customers/kiwi-sizing/",
+   "clicks_total": 0,
+   "impressions_total": 58,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/customers/linuxfordevices/",
+   "clicks_total": 0,
+   "impressions_total": 70,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/essays/",
+   "clicks_total": 1,
+   "impressions_total": 29,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/essays/asana-marketing-case-study/",
+   "clicks_total": 3,
+   "impressions_total": 360,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/essays/notion-api-documentation-case-study/",
+   "clicks_total": 2,
+   "impressions_total": 67,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/essays/stripe-documentation-lead-generation/",
+   "clicks_total": 1,
+   "impressions_total": 441,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/freelancer-guest-posting-for-credibility/",
+   "clicks_total": 0,
+   "impressions_total": 100,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/",
+   "clicks_total": 0,
+   "impressions_total": 19,
+   "impressions_watch": 18,
+   "impressions_alarm": 8,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/agentic-engineering/",
+   "clicks_total": 0,
+   "impressions_total": 25,
+   "impressions_watch": 25,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/agentic-router/",
+   "clicks_total": 0,
+   "impressions_total": 22,
+   "impressions_watch": 13,
+   "impressions_alarm": 6,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/bi-encoder/",
+   "clicks_total": 0,
+   "impressions_total": 17,
+   "impressions_watch": 3,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/context-engineering/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 5,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/cross-encoder-reranking/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 3,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/dspy/",
+   "clicks_total": 0,
+   "impressions_total": 14,
+   "impressions_watch": 14,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/flow-engineering/",
+   "clicks_total": 0,
+   "impressions_total": 12,
+   "impressions_watch": 12,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/graphrag/",
+   "clicks_total": 0,
+   "impressions_total": 15,
+   "impressions_watch": 15,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/hierarchical-navigable-small-world-hnsw/",
+   "clicks_total": 0,
+   "impressions_total": 103,
+   "impressions_watch": 102,
+   "impressions_alarm": 32,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/hypothetical-document-embeddings-hyde/",
+   "clicks_total": 0,
+   "impressions_total": 11,
+   "impressions_watch": 11,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/json-mode-vs-structured-outputs/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 4,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/kv-cache-eviction/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 3,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/late-chunking/",
+   "clicks_total": 0,
+   "impressions_total": 15,
+   "impressions_watch": 15,
+   "impressions_alarm": 5,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/matryoshka-representation-learning/",
+   "clicks_total": 0,
+   "impressions_total": 13,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/model-context-protocol/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/pagedattention/",
+   "clicks_total": 0,
+   "impressions_total": 17,
+   "impressions_watch": 2,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/plan-and-solve-framework/",
+   "clicks_total": 0,
+   "impressions_total": 8,
+   "impressions_watch": 4,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/product-quantization/",
+   "clicks_total": 0,
+   "impressions_total": 9,
+   "impressions_watch": 9,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/react-prompting/",
+   "clicks_total": 0,
+   "impressions_total": 21,
+   "impressions_watch": 20,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/self-querying-retrieval/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 4,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/semantic-caching/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 7,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/semantic-chunking/",
+   "clicks_total": 0,
+   "impressions_total": 16,
+   "impressions_watch": 16,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/speculative-decoding/",
+   "clicks_total": 0,
+   "impressions_total": 23,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/technology/what-is-cli/",
+   "clicks_total": 0,
+   "impressions_total": 227,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/technology/what-is-sdk/",
+   "clicks_total": 0,
+   "impressions_total": 75,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/test-time-compute/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 7,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/tool-calling/",
+   "clicks_total": 0,
+   "impressions_total": 43,
+   "impressions_watch": 42,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/what-is-api-testing/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/what-is-bug-severity/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/what-is-end-to-end-testing/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/what-is-smoke-testing/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/what-is-test-coverage/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/glossary/what-is-test-environment/",
+   "clicks_total": 0,
+   "impressions_total": 12,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/guides/",
+   "clicks_total": 0,
+   "impressions_total": 32,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/guides/css-grid-layouts-webflow-table/",
+   "clicks_total": 66,
+   "impressions_total": 5542,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/hg/",
+   "clicks_total": 0,
+   "impressions_total": 11,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/home/",
+   "clicks_total": 0,
+   "impressions_total": 14,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/jukyuban/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/linter/",
+   "clicks_total": 0,
+   "impressions_total": 9,
+   "impressions_watch": 7,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/marketing-research/",
+   "clicks_total": 1,
+   "impressions_total": 33,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/marketing-research/asana-marketing-case-study/",
+   "clicks_total": 3,
+   "impressions_total": 1949,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/marketing-research/notion-api-documentation-case-study/",
+   "clicks_total": 0,
+   "impressions_total": 33,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/marketing-research/stripe-documentation-case-study/",
+   "clicks_total": 4,
+   "impressions_total": 1310,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/measuring-and-tracking-salesforce-pipeline-performance/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/notion/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/portfolio/",
+   "clicks_total": 3,
+   "impressions_total": 367,
+   "impressions_watch": 149,
+   "impressions_alarm": 33,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/process/",
+   "clicks_total": 1,
+   "impressions_total": 42,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/productivity/airtable-vs-notion/",
+   "clicks_total": 0,
+   "impressions_total": 29,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/productivity/any-do-vs-notion/",
+   "clicks_total": 0,
+   "impressions_total": 65,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/productivity/any-do-vs-things-3/",
+   "clicks_total": 0,
+   "impressions_total": 54,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/productivity/any-do-vs-trello/",
+   "clicks_total": 0,
+   "impressions_total": 43,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/productivity/things3/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/productivity/ticktick/",
+   "clicks_total": 0,
+   "impressions_total": 873,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/productivity/trello/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10011155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10030300/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1004877/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10068377/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10133888/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10156377/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1015977/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10160333/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10196311/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10237477/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10253033/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10268055/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10303922/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10371155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10386677/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10458811/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1048500/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10497700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10532899/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10656044/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10698266/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10702133/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10712066/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10740044/",
+   "clicks_total": 0,
+   "impressions_total": 27,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10768922/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10795911/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10850000/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10858166/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10889877/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10893155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/10983222/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1110911/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11137366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11145733/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11149422/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11192477/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11203488/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11219977/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11249366/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11270366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11274255/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11290133/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11298944/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11303711/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11309899/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11336266/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11418733/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11447011/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11451188/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11473455/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11509844/",
+   "clicks_total": 0,
+   "impressions_total": 8,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11522188/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11524266/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11590966/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11650433/",
+   "clicks_total": 0,
+   "impressions_total": 20,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11683388/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11695844/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11722122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11755788/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11759122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11774977/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11795666/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11845966/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11866444/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11923800/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11936099/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11957922/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/11970511/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12003999/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12004622/",
+   "clicks_total": 1,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1202822/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12096700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12162855/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12201711/",
+   "clicks_total": 0,
+   "impressions_total": 58,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12262422/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12278600/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1231433/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12402600/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12431922/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12463377/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12512022/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12522100/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12526944/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12567922/",
+   "clicks_total": 0,
+   "impressions_total": 8,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12620755/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12648211/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12732488/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12775700/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1288488/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12886544/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/12994022/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13038066/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13074688/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13124322/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13126600/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13182911/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13354222/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13409199/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13439066/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13496700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13498100/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13498788/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13521255/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13564944/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13597300/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13615699/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13637577/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13637899/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13715977/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13768811/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13807477/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13811911/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13830688/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13865122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13877055/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13918588/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1396455/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/13993866/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14071100/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14102311/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14166066/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14250600/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14371500/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14387077/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14393311/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14398611/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14415700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14422188/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14464011/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14486499/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14513688/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14528633/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14555122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14614622/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14688122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14715822/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14738844/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14751544/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14758122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14768055/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14794777/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14825688/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14855277/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14869299/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14985577/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/14988744/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15009766/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15099444/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15153988/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15165655/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15211044/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15267533/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15320900/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15339299/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15349366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1538966/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15396355/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15408300/",
+   "clicks_total": 0,
+   "impressions_total": 59,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15418144/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1542055/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15426399/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15460555/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15475077/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15494699/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15565311/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15565366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15589655/",
+   "clicks_total": 1,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15683744/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15725155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15726900/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1574066/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15759111/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15765399/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15769700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15799733/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15843400/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15878155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/15914866/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1598311/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16013799/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16033033/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16089611/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16098888/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16214600/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16241399/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16256300/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16326200/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16405799/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16427600/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16468299/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16505777/",
+   "clicks_total": 1,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16516066/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16559711/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16574366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16643744/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16671844/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16696200/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16699511/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16733211/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16746288/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16783711/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16900633/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16971222/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16971544/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/16974099/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17000622/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1712377/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17195666/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17198255/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17289700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17292577/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17312933/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17346611/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1736533/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17408299/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17451700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17451722/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17510522/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17559877/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17561366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17630122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17679655/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17682433/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17746155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17747077/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17772655/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1789344/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/17929966/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18036355/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1819288/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18294377/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18342399/",
+   "clicks_total": 1,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18388000/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18517366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1853011/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18567744/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18596700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18605755/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18631355/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18646688/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1865044/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1877822/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18797288/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18846099/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18879555/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18898688/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18961033/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/18986055/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19025700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19031399/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19099011/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19133788/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/1923100/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19280833/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19296733/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19338122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19434288/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19508366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19540299/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19861899/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19872266/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19904755/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19947233/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19947255/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19950122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/19979277/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2000844/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20015244/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20016222/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2001888/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20060911/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20099544/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20122333/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20149111/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20239000/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20257966/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20312122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20312599/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20339588/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20346855/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20532088/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2054222/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20542666/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20560666/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20596533/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20612344/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20646477/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20748811/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20789766/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20791155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/20814266/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21018111/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21043466/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2104877/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21051800/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21059955/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21092111/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2111722/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21160333/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2128044/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21283666/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21363499/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2138488/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21497433/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2151122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21519333/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21523388/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21526333/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21571333/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21648966/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2164933/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21660044/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21713211/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21782700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21818344/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21871377/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21890988/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/21962955/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22003311/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22071533/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22084177/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2209488/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22105622/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22208566/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2223966/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22295699/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22302100/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22378955/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22386955/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22490344/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22565688/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22578333/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22624766/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22627300/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22639488/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22645355/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22699133/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22754444/",
+   "clicks_total": 2,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22830855/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22850055/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22851366/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22886555/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22939211/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22967433/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/22969688/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2298544/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23024044/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23172533/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23176744/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23179300/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23205700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2321411/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23291222/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23300099/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23305455/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23314944/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23314999/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23315955/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23348277/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23354311/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23358000/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23577755/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23600088/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23764699/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23797444/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23827977/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23841999/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/23984177/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24003933/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24011555/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24020311/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24023866/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24070955/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24105211/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2415433/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2425277/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24256177/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24261322/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24315266/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24337711/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24344322/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24372955/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24383266/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2448866/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24490911/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24498855/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2450533/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2451699/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24561088/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24579899/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24602644/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2462833/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24645688/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24673344/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2467999/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24691822/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24696622/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24765922/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24819533/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24880899/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24901344/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24916977/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24950011/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24954999/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24961511/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24970966/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/24981922/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25006233/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25044155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25105933/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25263811/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25266766/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25431455/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25446933/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25489666/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25554355/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25557899/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25568311/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25613022/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25665700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25677100/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25742400/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25761477/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25774644/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25864033/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25900144/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25900799/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/25929877/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26000777/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26014522/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2602922/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26185833/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26277388/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26345288/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2635444/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26381366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26393988/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26442099/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26443477/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26475733/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26484833/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26511266/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26560744/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26576577/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26579400/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26581211/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26581622/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26587244/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26629577/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26645211/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26657477/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26688588/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26723033/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26896377/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26944833/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26956922/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/26985099/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27030522/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27116777/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27121022/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27131700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27172833/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27174233/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27274066/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27296088/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27298699/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2732177/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27341133/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27357177/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27381455/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27423388/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27493400/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27513433/",
+   "clicks_total": 0,
+   "impressions_total": 38,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27536522/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27608988/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27662722/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27673611/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2768122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27692144/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27713822/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27734999/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27738455/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27772333/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27826177/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27832566/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27857988/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/27915633/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2805566/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28124799/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28169233/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28243144/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28245233/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28260911/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28303211/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28326033/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28347933/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28474500/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28492722/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28521100/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28543333/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28556033/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2858155/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28633966/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28648044/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28695766/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28768844/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28769044/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28822333/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28847000/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2884744/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2886388/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28865666/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28907799/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28939000/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28953366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28961066/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/28965111/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29051544/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29111577/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29118444/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29119711/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29148933/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29150611/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29152988/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2922799/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2927355/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29285988/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29286944/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29334077/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29391400/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2951311/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29573288/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29611422/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29624966/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29631166/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29670477/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29785911/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29866466/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29883144/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29890544/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29920122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29920600/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/2995444/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/29998255/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30071000/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30131777/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30137322/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30192455/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30212277/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30248566/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30291844/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30362500/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3038200/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30397744/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30475366/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3049100/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30510422/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30551055/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30595344/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30604333/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3061877/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30623399/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30626400/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30632066/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30638777/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30700155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30731777/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30741422/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3082566/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30847755/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30861099/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/30888855/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/31103999/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/31112066/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/31113444/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/31114711/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/31135133/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/31155199/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/31161833/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/31174900/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3126144/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3139266/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3238200/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3280511/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3329744/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3429555/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3507477/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3532122/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3572466/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3598300/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3639744/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3662777/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3680811/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3704566/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3742633/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3745766/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3746233/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3771888/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3793455/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3878322/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/3942399/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4060288/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4060622/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4083399/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4084188/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4105566/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4173311/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4244555/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4291800/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4369288/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4375122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4415766/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4508200/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4513533/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4525888/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4532100/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4546844/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4560077/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4602677/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4712599/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4753777/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4787977/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4790088/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4879444/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4920111/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/4937711/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5015699/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5070077/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5111311/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5117555/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5189744/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5211655/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5214000/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5228288/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5240900/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5251677/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5324188/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5355277/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5379699/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5465299/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5523777/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5528522/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5554599/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5564311/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5673899/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5684455/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5691655/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5729300/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5740855/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5746400/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5878899/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5881488/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5919133/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/5928500/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6039766/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6042522/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6058300/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6075800/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6083333/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6143199/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6270788/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6275077/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6282455/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6300588/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6313111/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6353200/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6395200/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6434500/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6446433/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6454155/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6463688/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6468800/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6470822/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6505400/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6543222/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6545800/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6595833/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6617966/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6668866/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6717500/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6721500/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6784011/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6788122/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6792566/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6798499/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6806699/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6849655/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6884977/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6931899/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6935344/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6978288/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/6985211/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7003622/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7029744/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7074899/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7098433/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7132799/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7175433/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7210400/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7259900/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7274288/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7280299/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7285422/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7369299/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7375699/",
+   "clicks_total": 0,
+   "impressions_total": 17,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7377044/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7408599/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7410577/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7411977/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7424911/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7439200/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7455111/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7457588/",
+   "clicks_total": 0,
+   "impressions_total": 7,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7531700/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7574799/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7673022/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7773733/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7826266/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7846333/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7882911/",
+   "clicks_total": 0,
+   "impressions_total": 12,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7883566/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7966400/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7971100/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/7992955/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8054244/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8073411/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8120655/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8200944/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8213600/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8230733/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8379900/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8387788/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8438255/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8517022/",
+   "clicks_total": 0,
+   "impressions_total": 8,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8542677/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8601755/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8632288/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8660688/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8663266/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/866500/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8683966/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8689300/",
+   "clicks_total": 1,
+   "impressions_total": 11,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8698644/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8715555/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8750388/",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8833022/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8837000/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8857866/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8932088/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8946144/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8978311/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/8983733/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9044655/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9102266/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/911788/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9129799/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9181222/",
+   "clicks_total": 1,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9195500/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9224988/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9225000/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9263822/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9312299/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9322955/",
+   "clicks_total": 0,
+   "impressions_total": 8,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9325244/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9325377/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9325666/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9330633/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9342599/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9399688/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9431288/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9446522/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/945622/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9490455/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9511422/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9653499/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9655888/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9660388/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9669777/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9739388/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9753933/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9858477/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/9924633/",
+   "clicks_total": 0,
+   "impressions_total": 14,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/993699/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/products/996400/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/project-category/ui-ux/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/project-category/web-design/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/project/augue-lacus-viverra/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/project/lorem-ipsum-dolor-sit-amet/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/project/placerat-vestibulum-lectus-2/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/project/placerat-vestibulum-lectus/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/projects/",
+   "clicks_total": 0,
+   "impressions_total": 87,
+   "impressions_watch": 63,
+   "impressions_alarm": 26,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/pw/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/rag/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 3,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/sample-page/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/shop/category/categorylist/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/shop/customer/bookmark/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/shop/customer/bookmark_guest/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/shop/customer/menu/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/shop/e/e009001044001/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/shop/pg/1005024164/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/shop/pg/1AgreementInfo/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/shop/pg/1sancyoku/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/shop/userreview/write/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/agent-taxonomy/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/bi-encoder-arch.html",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/changelog-anatomy/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/context-switching/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/dimension-scaling/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/hybrid-search-fusion/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/keyword-exactness/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/memory-versioning/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/oss-memory-landscape.html",
+   "clicks_total": 0,
+   "impressions_total": 5,
+   "impressions_watch": 5,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/rag-eval-metrics.html",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/reranking-pipeline/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/uv-cache-dedup/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 4,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/uv-reflink-lifecycle/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/uv-resolution-complexity.html",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/uv-resolution-complexity/",
+   "clicks_total": 0,
+   "impressions_total": 6,
+   "impressions_watch": 6,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/uv-resolution-speed/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/vector-space.html",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/vector-space/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/wasm-vdb-comparison/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/static/visuals/wasm-vdb-memory/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 1,
+   "impressions_alarm": 1,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/tags/case-study/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/tags/css-grid/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/tags/marketing/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/tags/notion/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/tags/tech-documentation/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/tags/web-design/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/tags/webflow/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/tech/wordpress-6-3-update/",
+   "clicks_total": 0,
+   "impressions_total": 12,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/technical-writing/",
+   "clicks_total": 0,
+   "impressions_total": 4,
+   "impressions_watch": 4,
+   "impressions_alarm": 3,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/terms/",
+   "clicks_total": 0,
+   "impressions_total": 36,
+   "impressions_watch": 35,
+   "impressions_alarm": 16,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/the-ai-dilemma/",
+   "clicks_total": 0,
+   "impressions_total": 3,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/things3/",
+   "clicks_total": 0,
+   "impressions_total": 14,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ticktick-alternatives/",
+   "clicks_total": 1,
+   "impressions_total": 457,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ticktick-vs-airtable/",
+   "clicks_total": 0,
+   "impressions_total": 38,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ticktick-vs-any-do/",
+   "clicks_total": 0,
+   "impressions_total": 166,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ticktick-vs-notion/",
+   "clicks_total": 2,
+   "impressions_total": 1048,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ticktick-vs-things3/",
+   "clicks_total": 1,
+   "impressions_total": 271,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ticktick-vs-todoist/",
+   "clicks_total": 0,
+   "impressions_total": 1535,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ticktick-vs-trello/",
+   "clicks_total": 0,
+   "impressions_total": 312,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/ticktick/",
+   "clicks_total": 1,
+   "impressions_total": 259,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/todoist-vs-airtable/",
+   "clicks_total": 1,
+   "impressions_total": 778,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/todoist-vs-any-do/",
+   "clicks_total": 0,
+   "impressions_total": 2489,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/todoist-vs-notion/",
+   "clicks_total": 0,
+   "impressions_total": 853,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/todoist-vs-things-3/",
+   "clicks_total": 0,
+   "impressions_total": 1107,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/todoist-vs-trello/",
+   "clicks_total": 0,
+   "impressions_total": 1384,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/todoist/",
+   "clicks_total": 0,
+   "impressions_total": 20,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/topics/",
+   "clicks_total": 0,
+   "impressions_total": 20,
+   "impressions_watch": 20,
+   "impressions_alarm": 18,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/toyu/top/CKmSpSfTop/",
+   "clicks_total": 0,
+   "impressions_total": 1,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/toyu/top/CSfTop/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/trello/",
+   "clicks_total": 0,
+   "impressions_total": 8,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/wordpress-6-3-update/",
+   "clicks_total": 0,
+   "impressions_total": 85,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/wordpress-6-3-update/wordpress-6-3-update-2/",
+   "clicks_total": 0,
+   "impressions_total": 15,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/wordpress-6-7-rollins/",
+   "clicks_total": 0,
+   "impressions_total": 29,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/wordpress-accessibility/",
+   "clicks_total": 0,
+   "impressions_total": 10,
+   "impressions_watch": 0,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/work/",
+   "clicks_total": 0,
+   "impressions_total": 109,
+   "impressions_watch": 85,
+   "impressions_alarm": 31,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/work/centus/",
+   "clicks_total": 0,
+   "impressions_total": 24,
+   "impressions_watch": 19,
+   "impressions_alarm": 11,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/work/delightchat/",
+   "clicks_total": 0,
+   "impressions_total": 45,
+   "impressions_watch": 39,
+   "impressions_alarm": 14,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/work/kiwisizing/",
+   "clicks_total": 1,
+   "impressions_total": 38,
+   "impressions_watch": 36,
+   "impressions_alarm": 19,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/work/linuxfordevices/",
+   "clicks_total": 0,
+   "impressions_total": 2,
+   "impressions_watch": 2,
+   "impressions_alarm": 2,
+   "clicks_alarm": 0
+  },
+  {
+   "path": "/work/mem0/",
+   "clicks_total": 1,
+   "impressions_total": 5,
+   "impressions_watch": 5,
+   "impressions_alarm": 0,
+   "clicks_alarm": 0
+  }
+ ]
+}

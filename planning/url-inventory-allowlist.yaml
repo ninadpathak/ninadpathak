@@ -1,0 +1,343 @@
+# Retired URLs — write-offs, recorded as decisions
+#
+# Read by tools/url_inventory.py. A URL listed here is one the site deliberately no
+# longer serves and does not intend to redirect. Listing it stops the guard reporting it
+# forever; omitting it means the guard keeps asking, which is the point.
+#
+# EVERY ENTRY NEEDS A REASON. A write-off with no stated reason is indistinguishable from
+# an accident, which is exactly the failure this file exists to prevent.
+#
+# Two entry shapes:
+#   - path:   one exact URL. Use this at the site root.
+#   - prefix: a whole directory family. Only safe where the site will never publish under
+#             that prefix again.
+#
+# There is deliberately no regex form. A pattern at the site root would silently swallow a
+# future page we do care about: `^/ticktick.*` would absorb a real /ticktick-integration/
+# article the day it shipped. Root-level URLs are therefore listed one by one, however
+# long that makes this file.
+#
+# THE EVIDENCE FOR THIS SEED
+#
+# Search Console span 2025-04-21 to 2026-08-14. Every URL below had
+# ZERO impressions in the 84 days ending 2026-08-14. Google has dropped them, so
+# restoring the URLs now would start from zero rather than recover anything. That is the
+# basis for writing them off rather than redirecting them, and it is a measurement, not an
+# assumption — see planning/url-inventory.json.
+#
+# What this was: a WordPress productivity-software review site that occupied this domain
+# before the March 2026 rebuild. 896 URLs, 26,072 impressions and about 119 clicks across
+# the whole recorded span. It converted at roughly 0% CTR on the comparison pages: the
+# largest, /todoist-vs-any-do/, took 2,489 impressions and zero clicks. Off-niche for
+# everything this site now does.
+#
+# The one genuine loss is /guides/css-grid-layouts-webflow-table/ — 5,542 impressions and
+# 66 clicks, the single best-performing URL this domain has ever had. It is still written
+# off, because it has had zero impressions in 84 days and it is a CSS tutorial with no
+# relationship to technical documentation, developer experience, or AI search.
+
+retired:
+  # ---------------------------------------------------------------------------
+  # Legacy WordPress directory families. Safe as prefixes: this site will not
+  # publish under any of them again.
+  # ---------------------------------------------------------------------------
+  - prefix: "/products/"
+    reason: >-
+      784 URLs, 1,448 impressions, 25 clicks. The old WordPress product directory.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/productivity/"
+    reason: >-
+      7 URLs, 1,068 impressions, 0 clicks. Productivity-app reviews.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/marketing-research/"
+    reason: >-
+      3 URLs, 3,292 impressions, 7 clicks. Includes two case studies that read as on-niche but are 2022 marketing-team research, not documentation work.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/essays/"
+    reason: >-
+      3 URLs, 868 impressions, 6 clicks. Personal essays from the previous site.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/guides/"
+    reason: >-
+      1 URL, 5,542 impressions, 66 clicks. The CSS-grid Webflow tutorial. The best URL this domain ever had, and off-niche.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/customers/"
+    reason: >-
+      4 URLs, 309 impressions, 0 clicks. WordPress theme demo pages.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/glossary/"
+    reason: >-
+      8 URLs, 332 impressions, 0 clicks. The PREVIOUS site's glossary, not the current /glossary/, which is live and built. Only the retired child URLs match here.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/2022/"
+    reason: >-
+      5 URLs, 862 impressions, 1 click. WordPress date archives.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/2023/"
+    reason: >-
+      2 URLs, 44 impressions, 0 clicks. WordPress date archives.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/2024/"
+    reason: >-
+      1 URL, 4 impressions, 0 clicks. WordPress date archive.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/category/"
+    reason: >-
+      5 URLs, 47 impressions, 0 clicks. WordPress taxonomy archives.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/tags/"
+    reason: >-
+      7 URLs, 29 impressions, 0 clicks. WordPress taxonomy archives.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/author/"
+    reason: >-
+      2 URLs, 26 impressions, 0 clicks. WordPress author archives.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/shop/"
+    reason: >-
+      9 URLs, 20 impressions, 0 clicks. WooCommerce pages. Nothing was ever sold.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/project/"
+    reason: >-
+      4 URLs, 9 impressions, 0 clicks. WordPress portfolio custom post type.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/project-category/"
+    reason: >-
+      2 URLs, 3 impressions, 0 clicks. WordPress taxonomy.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/contents/"
+    reason: >-
+      2 URLs, 4 impressions, 0 clicks. Orphaned WordPress paths.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/toyu/"
+    reason: >-
+      2 URLs, 3 impressions, 0 clicks. WordPress theme demo content.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - prefix: "/tech/"
+    reason: >-
+      1 URL, 12 impressions, 0 clicks. Legacy category.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+
+  # ---------------------------------------------------------------------------
+  # Root-level legacy URLs, listed individually on purpose. See the note above on
+  # why there is no pattern form for these.
+  # ---------------------------------------------------------------------------
+  - path: "/todoist-vs-any-do/"
+    reason: "Legacy WordPress site. 2489 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/ticktick-vs-todoist/"
+    reason: "Legacy WordPress site. 1535 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/todoist-vs-trello/"
+    reason: "Legacy WordPress site. 1384 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/todoist-vs-things-3/"
+    reason: "Legacy WordPress site. 1107 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/ticktick-vs-notion/"
+    reason: "Legacy WordPress site. 1048 impressions, 2 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/todoist-vs-notion/"
+    reason: "Legacy WordPress site. 853 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/todoist-vs-airtable/"
+    reason: "Legacy WordPress site. 778 impressions, 1 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/ticktick-alternatives/"
+    reason: "Legacy WordPress site. 457 impressions, 1 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/ticktick-vs-trello/"
+    reason: "Legacy WordPress site. 312 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/ticktick-vs-things3/"
+    reason: "Legacy WordPress site. 271 impressions, 1 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/ticktick/"
+    reason: "Legacy WordPress site. 259 impressions, 1 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/any-do-vs-airtable/"
+    reason: "Legacy WordPress site. 232 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/any-do-vs-notion/"
+    reason: "Legacy WordPress site. 211 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/ticktick-vs-any-do/"
+    reason: "Legacy WordPress site. 166 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/any-do/"
+    reason: "Legacy WordPress site. 143 impressions, 1 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/any-do-vs-things-3/"
+    reason: "Legacy WordPress site. 135 impressions, 3 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/any-do-vs-trello/"
+    reason: "Legacy WordPress site. 121 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/freelancer-guest-posting-for-credibility/"
+    reason: "Legacy WordPress site. 100 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/wordpress-6-3-update/"
+    reason: "Legacy WordPress site. 85 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/process/"
+    reason: "Legacy WordPress site. 42 impressions, 1 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/ticktick-vs-airtable/"
+    reason: "Legacy WordPress site. 38 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/wordpress-6-7-rollins/"
+    reason: "Legacy WordPress site. 29 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/401k-rollover-guide/"
+    reason: "Legacy WordPress site. 22 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/todoist/"
+    reason: "Legacy WordPress site. 20 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/home/"
+    reason: "Legacy WordPress site. 14 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/things3/"
+    reason: "Legacy WordPress site. 14 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/creative-writing-vs-ai-text-generation/"
+    reason: "Legacy WordPress site. 11 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/hg/"
+    reason: "Legacy WordPress site. 11 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/pw/"
+    reason: "Legacy WordPress site. 10 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/wordpress-accessibility/"
+    reason: "Legacy WordPress site. 10 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/airtable/"
+    reason: "Legacy WordPress site. 8 impressions, 1 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/trello/"
+    reason: "Legacy WordPress site. 8 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/notion/"
+    reason: "Legacy WordPress site. 5 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/jukyuban/"
+    reason: "Legacy WordPress site. 3 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/the-ai-dilemma/"
+    reason: "Legacy WordPress site. 3 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/measuring-and-tracking-salesforce-pipeline-performance/"
+    reason: "Legacy WordPress site. 1 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/sample-page/"
+    reason: "Legacy WordPress site. 1 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+
+  # ---------------------------------------------------------------------------
+  # Legacy index pages. A `prefix` entry deliberately does not retire its own base
+  # path, so that retiring the previous site's /glossary/ children could never
+  # retire the current /glossary/ index. These bases are genuinely retired and are
+  # therefore named one by one.
+  # ---------------------------------------------------------------------------
+  - path: "/marketing-research/"
+    reason: "Legacy WordPress index page. 33 impressions, 1 click across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/guides/"
+    reason: "Legacy WordPress index page. 32 impressions, 0 clicks across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/essays/"
+    reason: "Legacy WordPress index page. 29 impressions, 1 click across the whole recorded span."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/wordpress-6-3-update/wordpress-6-3-update-2/"
+    reason: "Legacy WordPress duplicate-slug artefact. 15 impressions, 0 clicks."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/any-do-vs-notion/any-do-vs-notion/"
+    reason: "Legacy WordPress duplicate-slug artefact. 1 impression, 0 clicks."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+
+  # ---------------------------------------------------------------------------
+  # Retired /blog/ posts with no /articles/ successor. build.py generates a
+  # /blog/ -> /articles/ redirect for every PUBLISHED post, so anything here is a
+  # post that was withdrawn rather than moved.
+  # ---------------------------------------------------------------------------
+  - path: "/blog/best-content-marketing-books/"
+    reason: >-
+      Withdrawn post, never republished under /articles/. 103 impressions, 0 clicks. A
+      book listicle, off-niche for the current seven clusters.
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/blog/page/2/"
+    reason: "Pagination page from the retired /blog/ listing. 1 impression, 0 clicks."
+    evidence: "zero impressions in the 84 days to 2026-08-14"
+    decided: "2026-08-17"
+  - path: "/blog/uv-package-manager-benchmark/"
+    reason: >-
+      Deliberately retired: content/posts/uv-package-manager-benchmark.md carries
+      status: retired, so build.py neither builds it nor generates its /blog/ redirect.
+      A Python packaging benchmark, off-niche for the current seven clusters. Still
+      earning about 2 impressions per 28 days, which the report names rather than hides;
+      republishing or redirecting it is an editorial call, not a guard decision.
+    evidence: "still earning impressions as of 2026-08-14; retired by frontmatter, not by accident"
+    decided: "2026-08-17"
