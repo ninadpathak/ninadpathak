@@ -64,6 +64,22 @@ below are final as written. Commit `ab04412c` revised `memory-hierarchy-in-ai-sy
 carried material but did not retire or redirect anything. Salvage that prose into the owner during
 this atomic batch; do not discard it and do not treat the content-only commit as an executed merge.
 
+## Pre-execution GSC preservation gate
+
+Run `tools/gsc_merge_guard.py --dry-run` before changing a source. Query coverage across all merge
+pages is only 18.0%, so absence is never permission to discard an idea.
+
+For batch 1, two sources have named human demand. `state-of-open-source-memory-2026` owns
+`ai memory systems research 2026` at 2 impressions and position 8.5; the carried open-source design
+distinctions must leave `state-of-ai-agent-memory-2026` answering that current-year research job.
+`memory-hierarchy-in-ai-systems` has one impression at position 87 for
+`inclusion property in memory hierarchy`; it does not name AI and is too thin to change the owner,
+but the layered model already specified below must survive. The hierarchy/RAG and attribution
+sources both have impressions with every human query withheld, so their demand is unknown, not
+zero. `agent-memory-for-customer-support` is the only disposition with no impressions across the
+full available GSC history, which supports the retirement as **no demand observed**, not proof that
+no demand could exist.
+
 ## The merges
 
 All targets verified **terminal** (no target is itself a merge source) and present in the built

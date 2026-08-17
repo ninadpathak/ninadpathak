@@ -160,15 +160,24 @@ The remediation set is posts carrying **30 or more impressions at position 20 or
 
 One thing the audit found that the rule did not anticipate: only **4 posts have no table, diagram or visual at all**, so tables are common and diagrams are absent. The gap is not that the writing lacks structure, it is that structure is always expressed as a table. That is what the never-used `flowcharts.css` system is for.
 
-### Cluster 3 consolidates 57 posts to 36, entirely by merge
+### Cluster 3 consolidates 57 posts to 36: 20 merges and one retirement
 
 Approved 2026-08-17. Cluster 3 holds the most volume in the niche, the worst KD≤20 share at 40%, the heaviest AI Overview saturation at 65%, and zero human clicks. Adding to it was the wrong move; the audit that decided what to consolidate is the work nothing had scheduled.
 
-**Nothing is retired.** All 21 reductions are merges into targets verified terminal and present in the built sitemap, so no URL loses its earning ability — each source 301s to a page that actually answers what it promised. The retrofit sits **inside each merge commit** rather than after it, because the merged sources carry 69 inbound links and a split commit would orphan them while `audit_clusters --strict` is a CI gate.
+**Twenty reductions are merges; one is a retirement with a redirect.** `agent-memory-for-customer-support` had no impressions in the full GSC history and its only supposed surviving idea was a fabricated case study, so nothing is carried from it. Every source still receives a terminal 301 rather than disappearing. The retrofit sits **inside each merge commit** rather than after it, because the merged sources carry 69 inbound links and a split commit would orphan them while `audit_clusters --strict` is a CI gate.
 
 Sequenced into five batches by target owner, **memory core first** because it carries the most inbound links and impressions — the opposite of the comfortable order, and the right one: it exercises the gates where a mistake costs most.
 
 The audit also corrected two of its own draft numbers before commit, an inbound-link count of 108 that was really 69 and a keep table that double-counted the repointed page. Its own words, which belong here: **an audit about unevidenced claims does not get to ship an unevidenced number.**
+
+**Pre-merge GSC guard added before execution.** None of the 20 merge pairs shares an exact named
+human query in Search Console. That does not falsify the editorial overlap: page+query coverage on
+the merge set is only **128 of 713 impressions (18.0%)**, and exact strings miss semantic variants.
+It does falsify any stronger claim that GSC independently validates these consolidations. Six
+sources own visible query jobs not observed on their targets, ten have demand fully withheld, four
+have no source demand observed, and the one retirement has none observed. The six visible jobs are
+now explicit preservation checks in `planning/cluster-3-consolidation-audit.md`; withheld demand is
+recorded as unknown rather than zero.
 
 **Recorded caveat: consolidation makes cluster 3 defensible, not competitive.** Thirty-six posts at 65% AI Overview saturation is still large in a hostile field. The twelve planned cluster-3 rows still collapse to about six and the freed slots stay empty.
 
