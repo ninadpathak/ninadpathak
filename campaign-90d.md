@@ -233,6 +233,40 @@ Two tools live long enough to judge have produced nine impressions and no clicks
 
 Two things the verification refused to do, both correct. Google served a bot-detection page on the first attempt and **the CAPTCHA was not bypassed** — a plain query on a normal session worked on retry, and had it not, the question would have been reported unanswerable. And only Semrush code 52 was decoded, because it is documented; codes 6, 7, 9, 14, 15, 20, 21 and 36 were left undecoded rather than guessed.
 
+### The band, re-derived on the changed premise: 149–1,525, central 413
+
+`tools/gsc_band.py`, built so the derivation is reproducible rather than asserted. The band was computed when the plan was tools-led; that premise is falsified, so it was re-derived rather than quietly carried.
+
+| | Value |
+|---|---|
+| **MEASURED** — the only figure that decides anything | **0 human non-brand clicks/month, and zero for ten months** |
+| RANGE, ESTIMATE — day 90 | **149–1,525/month, central 413** (was 306–1,176) |
+| Against the 10,000 target | the **ceiling** is 6.6× short |
+
+The framing that belongs with it, in the analyst's words: *every projection is an argument about when that zero stops being zero, and none of them is evidence that it will.* The target was already unreachable at 1,176.
+
+**Three defects the analyst caught in its own work**, all of which would have produced a more flattering answer:
+
+1. **Perfect-selection optimism.** Taking each cluster's absolute best N keywords made the band report *up* while every premise had worsened. Selection quality is now an explicit scenario axis rather than an assumption.
+2. **The verdict hardcoded "Down"** above a band that had in fact risen — prose written before the arithmetic. Direction is now read off the numbers, and judged on the central rather than on range overlap, because two ranges can overlap while the central halves.
+3. A dedupe regex matched `##` inside `###` and silently demoted every subsection heading in the scoreboard. Restored from git and redone line-anchored.
+
+One input could not be measured: the exact cluster-3 share of the remaining rows, because the live queue is on Phantom and unreadable from the analysis worktree. It is a parameter — 40/55/70% give centrals of 435/413/366 — and **the band is fairly insensitive to it, which is itself the finding: the cluster mix matters less than whether the pages earn at all.**
+
+`gsc_band.py` runs on demand rather than nightly, because it changes when a premise changes and a scheduled rerun would append identical sections and bury the ones that moved.
+
+### The metric I chose for tools cannot currently be measured
+
+Tools were re-based onto referring domains rather than sessions. `tools/link_inventory.py` went to measure it and returned the honest answer: **referring domains are UNKNOWN.** The authoritative Search Console figure has never been recorded, and there is no automated path to it — the API exposes no links resource, and the browser account lacks property access. In the tool's own words: *the campaign is measuring tools on a number nobody has read.*
+
+So the operational metric is the narrower one that **is** measurable: verified inbound links, counted from sources that can actually be fetched. The baseline is **zero for every one of the five tools**, and that is a measurement rather than a failure to measure. Referring domains stay recorded as unknown-pending-access rather than estimated, and the distinction between an `href` and a `rel=canonical` is kept — a canonical consolidates a duplicate, an href passes an endorsement, and the two are never added together.
+
+### The dev.to canonical split is deliberate, checked and closed
+
+The link inventory flagged that of 96 syndicated dev.to articles, 14 canonicalise to this site and **82 canonicalise to `pathak.ventures`**, and correctly called it a routing decision worth confirming rather than a defect. Confirmed by sampling the feed: the 82 are pathak.ventures **essays** — "Engineering Brand vs Employer Brand", "The Free Tier Trap", "Per-Seat vs Usage-Based Pricing" — correctly pointing at their own property, while every ninadpathak article points here. **Not a leak. Recorded so nobody investigates it twice.**
+
+What is worth noting: **zero dev.to canonicals point at a tool page**, and only 14 of 90 published articles are syndicated at all.
+
 ### A link profile is a diagnostic for editorial substance
 
 Added 2026-08-17, and it changes what internal linking is for. **If every outbound link on a page fails the subject-of-the-sentence test, the page is telling you it has no natural neighbours.** The cause is almost always that the page holds an abstraction while other pages own each concrete piece of its argument, and an abstraction has no neighbours, so every link has to be manufactured. **Review the page. Do not replace the links.**
@@ -581,7 +615,7 @@ Clusters 5, 6, and 7 hit the API's 250-row cap. Those three are floors, not meas
 
 **The earlier documentation figure was itself wrong.** `DERIVED-clean-universe.json` carried about 28 nursing-charting keywords (`picc line documentation example`, `perrla documentation example`) plus a junk `test.com` term at 3,000/month. Documentation is 63,730, not 68,870 — the number this campaign was reoriented on was 7.5% overstated. Recorded because a research bank that is trusted without being checked is worse than no bank.
 
-**Revised day-90 band: 350 to 1,350 clicks/month, central estimate ~710.** *(Corrected later the same day to 306–1,176 after the contamination sweep cut the universe 12.6%. See the fourth-cycle refresh.)* Down from the documentation-only 700–2,400, despite a 4.9× larger universe. The reason matters more than the number: **volume was never the constraint.** Seventy-one planned pages inside ninety days buys only 22.2 mature-equivalent pages once cohort maturity is applied (0.55 / 0.30 / 0.08). At DR 26 — the site is not zero-authority, as previously assumed — with P(top 3) at 0.15 and P(4–10) at 0.30, and an AI Overview haircut of 49.2% of SERPs losing about 35% of clicks (×0.828), the campaign contributes 334 / 685 / 1,295 and the recovered legacy set adds 15 / 25 / 40.
+**Revised day-90 band: 350 to 1,350 clicks/month, central estimate ~710.** *(Superseded twice the same day: 306–1,176 after the contamination sweep, then **149–1,525 with a central of 413** after the tool-first premise was falsified. Never compare a figure against a band quoted before the eleventh-cycle refresh.)* Down from the documentation-only 700–2,400, despite a 4.9× larger universe. The reason matters more than the number: **volume was never the constraint.** Seventy-one planned pages inside ninety days buys only 22.2 mature-equivalent pages once cohort maturity is applied (0.55 / 0.30 / 0.08). At DR 26 — the site is not zero-authority, as previously assumed — with P(top 3) at 0.15 and P(4–10) at 0.30, and an AI Overview haircut of 49.2% of SERPs losing about 35% of clicks (×0.828), the campaign contributes 334 / 685 / 1,295 and the recovered legacy set adds 15 / 25 / 40.
 
 **Against the 10,000 target, the central estimate is 7%.** Reaching 10,000 by publishing would need about 450 clicks per page across 22.2 mature-equivalent pages, which is roughly 25,000 addressable searches per page. The best 150 keywords in the entire niche average 740. **That is a 34× throughput gap, not a volume gap, and no choice of niche closes it.** Widening the niche bought winnability, not reach.
 
