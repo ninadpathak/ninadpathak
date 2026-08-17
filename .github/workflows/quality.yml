@@ -32,6 +32,15 @@ jobs:
       - name: Compile Python sources
         run: python -m compileall -q build.py check_rules.py rule_checker.py seo_audit.py tests
 
+      # MUST RUN BEFORE THE TESTS. Several tests read the built site — tool schema,
+      # tool end-to-end, cluster and link integrity — and they SKIP when output/ is
+      # absent rather than fail. Running them first meant four tool-schema tests were
+      # silently skipping in CI while passing locally off a stale build, so a tool could
+      # have shipped with no structured data and CI would have stayed green. A test that
+      # silently skips is a test that is not running.
+      - name: Build and audit site
+        run: python build.py
+
       - name: Run regression tests
         run: python -m unittest discover -s tests -v
 
@@ -137,9 +146,6 @@ jobs:
             exit 1
           fi
           echo "No new unevidenced claim candidates introduced.
-
-      - name: Build and audit site
-        run: python build.py
 
       # MUST RUN AFTER build.py. This reads output/ to count inbound links that come
       # from templates rather than article bodies — the homepage cluster nav, the tool
