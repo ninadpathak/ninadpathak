@@ -1,4 +1,4 @@
-# Brief: Does llms.txt Improve AI Visibility? A Controlled Documentation Test
+# Brief: Does llms.txt Actually Work? What Can and Cannot Be Measured
 
 **Slot:** 2026-09-17 | Order 50 | **Cluster:** AI Overviews and AI-search citation | **Experience: B**
 
@@ -7,6 +7,7 @@
 | Field | Value |
 |---|---|
 | Family | `llms.txt` 3,600, `llms.txt file` 1,900, `will llms.txt help your seo` |
+| **People-also-ask** | Google surfaces **"Does LLMs.txt actually work?"** as a live PAA on a SERP already targeted. Measured demand, needs no tool to rank, and the title now matches the question. |
 | Cluster | 30,980/mo, second-largest, four live tools |
 
 ## Reader task

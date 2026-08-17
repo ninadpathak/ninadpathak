@@ -15,9 +15,18 @@ SERP checked 2026-08-17: SE Ranking, aioverviewtracker.com, omniseo, **Advanced 
 free tool**, Seobility, and one how-to post from otterly.ai. Free tools rank here, and a
 supporting how-to ranks alongside them.
 
-**This is the tool-first directive working.** Tool intent is the one profile an AI Overview does
-not tax, because the searcher wants a thing to use rather than an answer to read. The site has
-`/ai-overviews-checker/` live and nothing currently routes to it.
+**Correction, 2026-08-17. The rationale that chose this row is dead.** It was selected because
+tool intent was believed to be the one profile an AI Overview does not tax. `seo-currency` verified
+that on live SERPs and it is false: three of six readable build-a-tool keywords carry an AI
+Overview, and `ai overviews checker` carries one reproducibly. The original claim came from
+keyword-tool feature flags, which were wrong on three of four rows in both directions.
+
+**The row survives on a different and smaller justification.** `/ai-overviews-checker/` is live and
+nothing routes to it. The llms.txt generator earned three impressions in its entire life for
+exactly that reason. This page exists to give a live tool an inbound link from an article that
+explains when to use it. That is a structural fix and it does not depend on the dead premise.
+
+Write it as routing, not as a traffic play. Do not claim tool intent escapes AI Overviews.
 
 ## Reader task
 

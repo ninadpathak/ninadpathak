@@ -155,3 +155,83 @@ Batch 1 first: it carries the most inbound links and the most impressions, so it
 Thirty-six posts in a cluster with 65% AI Overview saturation and 40% KD<=20 is still a large cluster in a hostile field. Consolidation makes it defensible, not competitive.
 
 The 12 planned cluster-3 rows should still collapse to about 6, and the freed slots should stay empty. **Adding to a cluster this saturated is the move this audit exists to prevent.**
+
+---
+
+## Reconciled against the operational long-tail, 2026-08-17
+
+The tool-first premise died the same day, and the twelve expansion rows repointed at cluster 4 on
+that reasoning came back for re-decision. The evidence offered for redirecting them was cluster 3's
+operational long-tail: the only two genuinely human queries this domain holds, `how do you handle
+errors when ai agents make mistakes in production` at position 10.6, and `how do companies debug ai
+agents that fail in production` at 10.2.
+
+That looks like it contradicts this audit, which says cluster 3 is over-populated. It does not, and
+the reconciliation is that **the two findings are about different shapes.** What is over-populated
+is definitional and taxonomic: five chunking variants, two chatbot architectures, three overlapping
+memory hierarchies. What is absent is operational: the question a working engineer types when
+something is broken.
+
+**Fewer, better, operational. But the honest row count that justifies is zero new rows, and here is
+why.**
+
+**Both queries already map to pages the plan holds.** `how do companies debug ai agents that fail in
+production` is order 76, The Agent Observability Stack, whose stated reader outcome is "see what an
+agent did, in enough detail to debug a bad run". `how do you handle errors when ai agents make
+mistakes in production` is order 78, Circuit Breakers for AI Agents, "stop a failing agent loop
+before it burns budget or corrupts state". Both were already in the keep set, and both are
+demand-backed by the corpus rather than by a keyword tool.
+
+**The queries also already rank.** Position 10.2 and 10.6 is page one to two on an existing page,
+`production-ai-agent-errors`, which holds 17 inbound links and is the batch-3 merge target absorbing
+`why-ai-agents-keep-failing-in-production`. Writing new pages for queries an existing page already
+ranks for is cannibalization, which is the rule this campaign enforces everywhere else.
+
+So the operational demand is served by **expanding a page that already ranks**, and that expansion
+is the batch-3 merge rather than a new row. The merge brief carries the requirement: the merged page
+answers those two questions directly, with question-shaped headings, in the operational register
+rather than the definitional one.
+
+### The caveats, carried into the rows rather than left in a covering note
+
+Both go into the batch-3 merge brief and into orders 76 and 78:
+
+- **Cluster 3's headline impressions are largely machine fan-out with zero clicks.** One page holds
+  54% of the cluster's impressions and it is the `anthropic contextual retrieval` fan-out. Its
+  apparent strength is inflated the same way everything else on this domain has been. Nothing in
+  these rows may cite cluster-3 impressions as evidence of demand.
+- **The two queries are conversational and operational, not head terms.** That is a different brief
+  shape: a question typed when something is broken, answered in the first two sentences, not a
+  definitional page with a taxonomy.
+
+### What actually changed
+
+| Action | Rows |
+|---|---:|
+| New cluster-3 rows added | **0** |
+| Cluster-3 rows skipped, completing this audit's collapse | **6** (68, 69, 70, 71, 74, 75) |
+| Cluster-3 planned rows remaining | **6** (63, 72, 73, 76, 77, 78) |
+| Cluster-4 rows repointed | 1 retitle (50), 1 re-justification (36) |
+
+Cluster 3 planned goes 12 to 6, exactly as this audit recommended. **The freed slots stay empty.**
+
+### Two corrections to the premise I was given
+
+**It was five rows, not twelve.** Of the twelve cancelled expansion slots, six were filled with
+cluster-4 targets and six were skipped on the day for want of a verified seventh target. One of the
+six filled was later skipped as a duplicate of a live article. So five rows carried the tools-lead
+reasoning, not twelve, and the other seven are already empty.
+
+**Four of those five survive the premise dying.** Orders 35, 38, 39 and 40 are cluster-4 *articles*
+chosen on verified keyword volume and parent-topic checks, not on tool intent. Only order 36 was
+justified by the dead premise, and it survives on a smaller and different justification: it gives a
+live tool an inbound link, which is a structural fix that does not depend on the premise. Its brief
+now says so and forbids claiming tool intent escapes AI Overviews.
+
+**The free win was already in the queue.** Google's People-also-ask "Does LLMs.txt actually work?"
+is order 50, previously titled "Does llms.txt Improve AI Visibility? A Controlled Documentation
+Test". The PAA validates an existing row rather than adding one. Retitled to the question Google
+actually surfaces.
+
+**The six skipped expansion slots cannot be reused.** `Skipped` is terminal in the queue state
+machine, with no transition out of it. They stay empty, which is the intended outcome.
