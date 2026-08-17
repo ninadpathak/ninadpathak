@@ -199,11 +199,59 @@ LIVE_URLS = (
 )
 
 
+# Cloudflare Pages serialises builds, so production legitimately trails main for a few
+# minutes after a push. A check that alarms instantly is worse than no check: it cried
+# wolf on 2026-08-17 while a deploy was mid-flight, and the false alarm cost more time
+# than the real problem would have. So the check distinguishes two states — "not deployed
+# yet", which is normal and reported as WAITING, and "deployed wrong", which is an alarm.
+#
+# The discriminator is the age of the newest commit that changed anything the build
+# renders. Inside the window a mismatch is expected; past it, production has had ample
+# time and something is wrong.
+DEPLOY_GRACE_SECONDS = 15 * 60
+
+
+def deploy_lag_seconds() -> int | None:
+    """Seconds since the newest commit that could have changed the built output.
+
+    Documentation-only commits are excluded: a change to campaign-90d.md or a file under
+    planning/ does not alter a single rendered page, so it must not start a deploy clock
+    that then reports a phantom lag.
+    """
+    code, out = run("git", "log", "-60", "--format=%H %ct", "--name-only")
+    if code != 0:
+        return None
+
+    # git prints "<sha> <unix-ts>", a blank line, then the file list, and the next
+    # commit's header follows with no separating blank line. Splitting on blank lines
+    # therefore runs commits together, so walk the lines and track the current commit.
+    import re as _re
+    import time
+    header = _re.compile(r"^[0-9a-f]{40} (\d+)$")
+    RENDERS_PREFIX = ("content/", "templates/", "static/", "functions/")
+    RENDERS_FILE = {"build.py", "config.toml", "rule_checker.py"}
+
+    current_ts = None
+    for line in out.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        match = header.match(line)
+        if match:
+            current_ts = int(match.group(1))
+            continue
+        if current_ts is None:
+            continue
+        if line.startswith(RENDERS_PREFIX) or line in RENDERS_FILE:
+            return int(time.time()) - current_ts
+    return None
+
+
 def deploy_check() -> list[str]:
     """Compare what the local build produces against what production actually serves.
 
-    Reports the sitemap URL count on both sides, because a stale count is the earliest
-    and cheapest signal that a deploy did not land.
+    Returns alarms only. A mismatch inside the grace window is returned as a WAITING
+    note by the caller, not as a failure, so a mid-flight deploy never reads as broken.
     """
     problems = []
     local_sitemap = ROOT / "output" / "sitemap.xml"
@@ -297,6 +345,16 @@ def todays_publish() -> str:
     return "NO PUBLISH FOUND on origin/main for today"
 
 
+def _deploy_line(problems, waiting, lag) -> str:
+    if not problems:
+        return "LIVE, matches the build"
+    age = "unknown age" if lag is None else f"{lag // 60}m since the last rendering commit"
+    if waiting:
+        return (f"WAITING, not an alarm — {age}, inside the "
+                f"{DEPLOY_GRACE_SECONDS // 60}m grace window: " + "; ".join(problems))
+    return f"ALARM, past the grace window — {age}: " + "; ".join(problems)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dry-run", action="store_true")
@@ -309,6 +367,9 @@ def main() -> int:
     gate = publish_gate()
     gate += robots_check()
     deploy = deploy_check()
+    lag = deploy_lag_seconds()
+    # A mismatch is only an alarm once production has had the grace window to catch up.
+    deploy_waiting = bool(deploy) and lag is not None and lag < DEPLOY_GRACE_SECONDS
     publish = todays_publish()
 
     if gsc is None:
@@ -359,7 +420,7 @@ def main() -> int:
            + "".join(f"- {line}\n" for line in gsc_lines)
            + f"- Distance to 10,000/month: **{distance}**\n"
            f"- Publish gate: {'PASS' if not gate else 'FAIL — ' + '; '.join(gate)}\n"
-           f"- Deploy: {'LIVE, matches the build' if not deploy else 'STALE or FAILED — ' + '; '.join(deploy)}\n")
+           f"- Deploy: {_deploy_line(deploy, deploy_waiting, lag)}\n")
 
     print(row)
     if args.dry_run:
@@ -382,7 +443,8 @@ def main() -> int:
     with LOG.open("a", encoding="utf-8") as f:
         f.write(row)
 
-    return 1 if gate or deploy or "NO PUBLISH" in publish else 0
+    # Waiting is not a failure. Only alarm once the grace window has passed.
+    return 1 if gate or (deploy and not deploy_waiting) or "NO PUBLISH" in publish else 0
 
 
 if __name__ == "__main__":

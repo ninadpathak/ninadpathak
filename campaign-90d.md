@@ -23,7 +23,7 @@ The brief handed to this campaign said impressions had roughly 4×'d while click
 
 Three findings, all verified on 2026-08-17:
 
-**The impression growth was not human.** 2,263 of the 5,300 impressions between 1 June and 15 August landed on one URL, `/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/`, at average position 8.3 with zero clicks. The queries reaching it are forty-plus permutations of a single keyword salad: `anthropic contextual retrieval bm25 embeddings reranking official`, `…official contextual embeddings bm25 reranking`, `…bm25 embeddings reranking official 2024`. Position 8–10, zero clicks, every variant. That is machine query fan-out, not people. Optimising titles and snippets against it would have been weeks of wasted work.
+**The impression growth was not human.** *(Refined in the fifth-cycle refresh: the sitewide machine share is a range of 1.8% to 52.9% because Search Console withholds half of all impressions. The per-page concentration below is solid; the sitewide claim was overstated.)* 2,263 of the 5,300 impressions between 1 June and 15 August landed on one URL, `/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/`, at average position 8.3 with zero clicks. The queries reaching it are forty-plus permutations of a single keyword salad: `anthropic contextual retrieval bm25 embeddings reranking official`, `…official contextual embeddings bm25 reranking`, `…bm25 embeddings reranking official 2024`. Position 8–10, zero clicks, every variant. That is machine query fan-out, not people. Optimising titles and snippets against it would have been weeks of wasted work.
 
 **Every non-brand impression the domain had ever earned was pointing at a 404.** Commit `b846597d`, 2026-07-30, "Refocus site for documentation authority," set `status: retired` or `status: review` on 68 posts and six topic hubs. `build.py` deliberately writes no redirect for a removed URL, on the reasonable general principle that a soft 404 is worse than a real one. Applied to a page at position 8.1 carrying 86% of the site's July impressions, it was wrong. Fixed 2026-08-17, see the execution log.
 
@@ -364,6 +364,45 @@ One operational change taken from it: **commits get batched into one push per cy
 Two bugs, both structural. The rule-of-three check offered two ways to pass in its error message — an evidence receipt or an explicit factual trio — and only implemented the receipt, so it fired on sentences that named all three of their items. Fixing that removed 29 false positives, 280 → 251, with nine tests pinning both directions. Then the CI step itself failed on **inherited** debt rather than regressions, so touching any older post turned CI red while ~250 pre-existing errors sit across the archive. Hermes edits a post daily, so red was the default state, and a gate that cannot go green stops being read. CI now compares changed files against their previous versions and fails only if the count rises, which is what the publish gate in section 8 always said.
 
 Also removed a "verify generated output is committed" step: `output/` is untracked and generated at build time, so it diffed nothing and passed unconditionally. A check that cannot fail reads as coverage and is worse than no check.
+
+### 2026-08-17 (fifth cycle) — the real baseline, and a write-off
+
+**This is the honest baseline, and it is worse than anything reported before it.** `tools/gsc_human_baseline.py` separated machine query fan-out from people across the full Search Console span:
+
+| Month | Site impressions | Human impressions | Human clicks | Human position | Machine % of named |
+|---|---:|---:|---:|---:|---:|
+| 2025-04 | 3,822 | 2,532 | 3 | 44.2 | 1.7% |
+| 2025-06 | 6,499 | 3,362 | 1 | 38.6 | 3.8% |
+| 2025-10 | 904 | 221 | 6 | 15.9 | 0.0% |
+| 2026-03 | 652 | 437 | 0 | 77.4 | 0.8% |
+| 2026-07 | 2,476 | 152 | 0 | 41.1 | 34.5% |
+| 2026-08 | 946 | 46 | 0 | 56.7 | 57.1% |
+
+**Human impressions fell from 3,362 in June 2025 to 46 in August 2026 — a 98.6% collapse.** Twenty human clicks in the entire span, all of them in 2025. **No human click on a named non-brand query since October 2025**, ten months. 49 of 72 named clicks are the brand query.
+
+So the framing this campaign inherited — impressions 4×'d — is not growth. Human visibility collapsed and machine fan-out partially refilled the hole. One page, `/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/`, went from zero impressions before May 2026 to 49% of all site impressions in July and 59% in August; its 69 identifiable queries are one family permuting `anthropic contextual retrieval` at a uniform position 8.7 with **zero clicks across all 69**.
+
+**A correction to an earlier entry in this document.** The third-cycle refresh said the impression growth "is machine query fan-out". That overstated what is provable. Within named queries fan-out is only 3.6% of impressions across the span; human is 93%. Search Console withholds 51% of impressions, so **the sitewide machine share is a range of 1.8% to 52.9%** — the lower bound assumes every withheld impression is human, the upper assumes every one is machine, and the midpoint is not an estimate. What *is* solid is the per-page concentration and the ten-month absence of non-brand human clicks. The range is now reported as a range.
+
+### The 2025 site is gone, and it is written off
+
+The repo history begins in March 2026. Search Console goes back to April 2025, and the site that earned the 2025 traffic no longer exists in it. Mid-2025 the domain pulled roughly 6,000 impressions and **26 clicks a month across about 30 URLs — more real clicks than it earns today.** The top page, `/guides/css-grid-layouts-webflow-table/`, took 65 clicks on 5,374 impressions at position 21.
+
+Every one of those URLs is a hard 404. The March 2026 rebuild dropped the previous site with no redirects.
+
+**Written off, deliberately, and the reasoning is recorded so nobody re-runs this investigation.** Checked whether it was recoverable: **zero impressions on any legacy URL in the last twelve weeks.** Google has dropped them, so restoring a URL now starts from zero rather than recovering a position. And the content does not warrant rewriting: the volume was productivity-app comparisons — `ticktick vs todoist`, `todoist vs trello`, fifteen variants — sitting at positions 30 to 45 with **0% CTR**. They were never converting. The only genuine click-earner was an off-niche CSS guide at ~16 clicks/month, and building on it would mean an eighth cluster of one page, which is the unfocused-personal-blog failure the isolation rule exists to prevent.
+
+Three URL sets earned on-niche: the Stripe documentation case study at position 7.7, a Stripe documentation lead-generation essay at 10.8, and a Notion API documentation case study at 19.8. Those *topics* are validated demand and belong in the queue as new work. The pages themselves are unrecoverable.
+
+**The finding that matters is not the lost traffic — it is that nothing prevented it.** The same failure nearly recurred twice more this month: the July refocus 404'd 68 pages carrying 86% of impressions, and the glossary sat dead with 24 indexed URLs behind one line of config. In every case the window closed quietly because nothing was watching. A committed inventory of every URL that has ever earned an impression, checked against the build, is in flight.
+
+### Deploy verification now distinguishes waiting from broken
+
+The post-deploy check added earlier this day cried wolf: a mismatch read while a deploy was mid-flight was treated as a build failure, and two stale reads agreeing with each other were mistaken for confirmation. The false alarm cost more time than a real failure would have.
+
+It now reports three states. **LIVE** when production matches the build. **WAITING** for a mismatch inside a fifteen-minute grace window measured from the newest commit that changed something the build actually renders — documentation-only commits do not start that clock, so editing this file cannot produce a phantom lag. **ALARM** only past the window. Seven tests pin the distinction.
+
+The general lesson, since it will recur: **when a check disagrees with what you believe you shipped, establish whether the check is sound before acting on it.** The same discipline that was applied correctly to the Ahrefs failure — proving the missing data could not change the conclusion before treating it as a blocker — was not applied here, and it cost a detour.
 
 ### 2026-08-17 — no-new-CSS violation, held out of the deploy
 
