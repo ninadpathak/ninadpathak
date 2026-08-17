@@ -52,13 +52,16 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 CACHE = ROOT / "planning" / "research-cache" / "aio"
@@ -78,8 +81,39 @@ def credentials() -> tuple[str, str] | None:
 
 
 def cache_path(keyword: str, location: str) -> Path:
-    slug = "".join(c if c.isalnum() else "-" for c in keyword.lower()).strip("-")
-    return CACHE / f"{slug}--{location}.json"
+    def slug(value: str) -> str:
+        return re.sub(r"-+", "-", "".join(
+            c if c.isalnum() else "-" for c in value.lower()
+        )).strip("-") or "empty"
+
+    # The readable slug is not an identity: ``llms.txt`` and ``llms txt`` both
+    # collapse to ``llms-txt``. Keep a short digest so one keyword can never read
+    # another keyword's paid response from cache.
+    identity = f"{keyword}\0{location}".encode("utf-8")
+    digest = hashlib.sha256(identity).hexdigest()[:10]
+    return CACHE / f"{slug(keyword)}--{slug(location)}--{digest}.json"
+
+
+def normalized_page(url: str | None) -> str | None:
+    """Return a scheme/query/fragment-independent page identity.
+
+    DataForSEO can return a tracking query on a citation while the organic result
+    uses the clean URL. Those are the same page. Two different paths on the same
+    host are not the same page, which is the distinction this instrument exists to
+    measure.
+    """
+    if not url or not isinstance(url, str):
+        return None
+    parts = urlsplit(url.strip())
+    host = (parts.hostname or "").lower()
+    if host.startswith("www."):
+        host = host[4:]
+    if not host:
+        return None
+    path = re.sub(r"/{2,}", "/", parts.path or "/")
+    if path != "/":
+        path = path.rstrip("/")
+    return f"{host}{path}"
 
 
 def fetch(keyword: str, location: str, creds: tuple[str, str]) -> dict:
@@ -141,18 +175,47 @@ def parse(payload: dict) -> dict:
 
 
 def overlap(parsed: dict, top_n: int = 10) -> dict:
-    """The finding: how much of the Overview's citation set also ranks classically."""
-    top = [o for o in parsed["organic"] if (o.get("rank") or 999) <= top_n]
+    """Compare cited pages with top-N organic pages; domains are secondary context.
+
+    The campaign decision is page-level. A host whose ``/tool`` ranks while its
+    ``/research`` page is cited has won two different surfaces, not one overlapping
+    result. Domain overlap is retained only to expose that near miss.
+    """
+    def is_top(result: dict) -> bool:
+        try:
+            rank = float(result.get("rank"))
+        except (TypeError, ValueError):
+            return False
+        return 1 <= rank <= top_n
+
+    top = [o for o in parsed["organic"] if is_top(o)]
+    ranked_pages = {page for o in top if (page := normalized_page(o.get("url")))}
+    cited_pages = {
+        page for citation in parsed["citations"]
+        if (page := normalized_page(citation.get("url")))
+    }
+    pages_in_both = ranked_pages & cited_pages
+    cited_pages_only = cited_pages - ranked_pages
+
     ranked_domains = {o["domain"] for o in top if o.get("domain")}
     cited_domains = {c["domain"] for c in parsed["citations"] if c.get("domain")}
-    both = ranked_domains & cited_domains
-    cited_only = cited_domains - ranked_domains
+    domains_in_both = ranked_domains & cited_domains
     return {
-        "ranked_top_n": len(ranked_domains),
-        "cited": len(cited_domains),
-        "in_both": sorted(both),
-        "cited_but_not_ranking": sorted(cited_only),
-        "overlap_pct": round(100 * len(both) / len(cited_domains), 1) if cited_domains else None,
+        "ranked_top_n_pages": len(ranked_pages),
+        "cited_pages": len(cited_pages),
+        "pages_in_both": sorted(pages_in_both),
+        "cited_pages_not_ranking": sorted(cited_pages_only),
+        "page_overlap_pct": (
+            round(100 * len(pages_in_both) / len(cited_pages), 1)
+            if cited_pages else None
+        ),
+        "ranked_top_n_domains": len(ranked_domains),
+        "cited_domains": len(cited_domains),
+        "domains_in_both": sorted(domains_in_both),
+        "domain_overlap_pct": (
+            round(100 * len(domains_in_both) / len(cited_domains), 1)
+            if cited_domains else None
+        ),
     }
 
 
@@ -175,16 +238,22 @@ def report(keyword: str, parsed: dict, ov: dict) -> str:
         lines.append("  That is a finding, not a failure: the Overview took the answer and "
                      "credited nobody the API could name.")
         return "\n".join(lines)
-    lines.append(f"  AI Overview present. {ov['cited']} cited domain(s), "
-                 f"{ov['ranked_top_n']} ranking in the top 10.")
-    lines.append(f"  Overlap: {ov['overlap_pct']}% of cited domains also rank.")
-    if ov["in_both"]:
-        lines.append("  Ranks AND cited: " + ", ".join(ov["in_both"]))
-    if ov["cited_but_not_ranking"]:
-        lines.append("  Cited WITHOUT ranking top 10: " + ", ".join(ov["cited_but_not_ranking"]))
+    lines.append(f"  AI Overview present. {ov['cited_pages']} cited page(s), "
+                 f"{ov['ranked_top_n_pages']} organic page(s) in the top 10.")
+    lines.append(f"  Page overlap: {ov['page_overlap_pct']}% of cited pages also rank.")
+    if ov["pages_in_both"]:
+        lines.append("  Pages ranking AND cited: " + ", ".join(ov["pages_in_both"]))
+    if ov["cited_pages_not_ranking"]:
+        lines.append("  Pages cited WITHOUT ranking top 10: " +
+                     ", ".join(ov["cited_pages_not_ranking"]))
         lines.append("  Those are the pages winning the citation without winning the ranking. "
                      "If this pattern holds across keywords, ranking and being cited are "
                      "separate games.")
+    if ov["domain_overlap_pct"] != ov["page_overlap_pct"]:
+        lines.append(
+            f"  Same-domain overlap is {ov['domain_overlap_pct']}%. A domain can rank one "
+            "page and have a different page cited; that does not count as page overlap."
+        )
     return "\n".join(lines)
 
 
@@ -218,7 +287,8 @@ def main() -> int:
         return 1
 
     creds = credentials()
-    estimate = len(keywords) * COST_PER_CALL_USD
+    uncached = [k for k in keywords if not cache_path(k, args.location).is_file()]
+    estimate = len(uncached) * COST_PER_CALL_USD
 
     if args.dry_run or not creds:
         if not creds:
@@ -227,14 +297,14 @@ def main() -> int:
             print("  Semrush gives presence only (SERP feature code 52) and is MCP-only here.")
             print("  Scraping Google is refused: it would get the box blocked.")
             print("  Creating the account is a purchase, so it is Ninad's to make.\n")
-        print(f"WOULD CHECK {len(keywords)} keyword(s) at ${COST_PER_CALL_USD:.3f} each "
-              f"= ${estimate:.3f}")
+        print(f"WOULD CHECK {len(keywords)} keyword(s); {len(uncached)} uncached at "
+              f"${COST_PER_CALL_USD:.3f} each = ${estimate:.3f}")
         for k in keywords:
             cached = cache_path(k, args.location)
             print(f"  {'cached' if cached.is_file() else 'would fetch'}  {k}")
         return 0
 
-    if not args.decision:
+    if uncached and not args.decision:
         print("REFUSING: --decision is required before spending. Name the decision this "
               "call changes. 'Interesting to know' is not a decision.")
         return 1
