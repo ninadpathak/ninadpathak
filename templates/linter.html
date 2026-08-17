@@ -2,6 +2,58 @@
 
 {% block title %}Technical Writing Linter | Ninad Pathak{% endblock %}
 {% block description %}Paste a technical article. Get a linter report: condescension words, AI writing signals, buzzwords, passive voice, readability score. Free. No signup.{% endblock %}
+
+{# The oldest tool on the site shipped with no structured data, so it inherited the base
+   Person schema while the four newer tools all declare SoftwareApplication. Every entry in
+   featureList below is one of the 18 checks this page already documents, so the schema
+   describes the tool rather than advertising it. #}
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["SoftwareApplication", "WebApplication"],
+  "name": "Technical Writing Linter",
+  "url": "{{ site.url }}/linter/",
+  "description": "Checks pasted technical prose against 18 named rules covering paragraph length, condescension, AI writing signals, buzzwords, hedging, passive voice, sentence length, adverb density and readability, and reports each finding with the rule that produced it.",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "Linter",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Flags prose paragraphs longer than two sentences",
+    "Checks for first-person experience, observation or judgment",
+    "Flags em dashes in prose",
+    "Flags contrastive parallelism such as 'unlike X, Y' and 'on the other hand'",
+    "Flags banned jargon including leverage, synergy and unlock",
+    "Flags banned sentence openers including In, This, By, Finally, Most and Ever",
+    "Flags condescension words including simply, just, easy, obviously and of course",
+    "Flags AI writing signals including delve, in conclusion and rapidly evolving",
+    "Flags filler openers such as 'In this article' and 'Today we will learn'",
+    "Flags hedge words including very, really, quite and basically",
+    "Flags buzzwords including seamless, robust, cutting-edge and utilize",
+    "Flags filler phrases including 'in order to' and 'as you can see'",
+    "Flags tutorial 'we' in favour of addressing the reader directly",
+    "Detects passive voice by pattern and marks it for review rather than rejection",
+    "Flags sentences over 35 words",
+    "Flags adverb density above 5% of words",
+    "Reports a Flesch-Kincaid readability score and flags below 30",
+    "Runs entirely in the browser, with no upload and no signup"
+  ],
+  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
+  "publisher": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}" },
+  "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
+  "isRelatedTo": [
+    {
+      "@type": ["SoftwareApplication", "WebApplication"],
+      "name": "AI Overviews Checker",
+      "url": "{{ site.url }}/ai-overviews-checker/"
+    }
+  ]
+}
+</script>
+{% endblock %}
 {% block canonical %}/linter/{% endblock %}
 {% block og_url %}/linter/{% endblock %}
 {% block og_title %}Technical Writing Linter{% endblock %}
