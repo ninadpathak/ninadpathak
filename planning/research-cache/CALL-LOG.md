@@ -246,3 +246,33 @@ unmeasurable in analytics.
 
 Output: `planning/research/SYNDICATION-AUDIT-2026-08-17.md`, plus engagement and the
 one-referring-domain ceiling now reported by `tools/link_inventory.py` on every run.
+
+---
+
+## Reference-infrastructure feasibility — 2026-08-17, agent `seo-currency`
+
+**Paid calls: 5**, all Semrush `backlinks_overview`.
+
+| Target | Result |
+|---|---|
+| `ahrefs.com/blog/llmstxt-study/` (url, no scheme) | ERROR 50, nothing found |
+| `https://ahrefs.com/blog/llmstxt-study/` (url) | 1,567 links / **439 referring domains** |
+| `keepachangelog.com` (root_domain) | 137,172 / **7,185** |
+| cats.txt Substack post (url) | 842 / **85**, authority score 0 |
+| `markwilliamscook.com` (root_domain) | 1,160 / 285 |
+
+Justified: the whole question was whether reference infrastructure is worth twenty rows
+against the alternative. These five calls produced the control that answered it — an
+independent author with an authority score of zero earned 85 referring domains from one
+original experiment.
+
+Free instruments did the rest: four spec pages read directly, GitHub code search for adoption
+counts (`semver.org` 956,416 files; `keepachangelog.com` 706,560, of which 587,776 are
+CHANGELOG.md; `conventionalcommits.org` 285,696; `AGENTS.md` 2,723,840; `llmstxt.org` 16,128),
+and WebSearch for incumbency.
+
+Note: Semrush reports 7,185 referring domains for keepachangelog against Ahrefs' 2,220 — a 3x
+disagreement, consistent with the tool-disagreement finding in the SERP verification. Treat
+magnitudes, not figures.
+
+Output: `planning/research/REFERENCE-INFRASTRUCTURE-2026-08-17.md`.
