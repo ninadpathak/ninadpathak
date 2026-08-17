@@ -351,6 +351,34 @@ Two cheap fixes taken, and one deliberately refused:
 
 Where the attention goes instead: the referring-domain metric needs *other people's* domains, and the two things that earn those are named reference infrastructure — the `keepachangelog.com` pattern, 2,220 referring domains on effectively no traffic — and content people cite.
 
+### The position measurement stopped a merge from 301-ing the better page into the worse one
+
+Recorded because it is the clearest return the diagnostic has produced, and because it argues for an order of operations.
+
+Cluster-3 batch 1 was specced, sequenced first deliberately — memory core, the most inbound links and impressions, where a mistake costs most — and about to run. Its merge target had been chosen on **word count**. Once human impressions were bucketed by position it was obvious that word count is not a ranking variable and position is, so the target was reversed: `memory-hierarchy-in-ai-systems` becomes the owner and absorbs the other three.
+
+**Had batch 1 executed before the measurement, it would have permanently redirected the better-ranking page into the worse one**, on live URLs, in the batch chosen for going first. The amendment sits at the top of the spec rather than buried in it.
+
+The general rule: **measure before consolidating, not after.** A merge is irreversible in practice — the source 301s and its history transfers — so the ranking evidence has to exist before the redirect, not be reconstructed from it.
+
+### The glossary diagrams now earn their place
+
+| | Before | After |
+|---|---:|---:|
+| Pages carrying a diagram | 25 of 25 | **7 of 25 (28%)** |
+| Distinct shapes | **1** | **7** |
+| Node counts | 5 everywhere | 3 to 7 |
+
+Eighteen decorative diagrams stripped, seven rebuilt with a shape that comes from the term. HNSW is a three-layer linear descent with a per-layer branch, verified live: `.flowchart-node` computes to `display: grid`, zero inline nodes, 7 nodes across 3 roots, and it closes on an honest limit — *"the hierarchy reduces the region searched. It does not guarantee the exact nearest neighbors."*
+
+The clearest sign the rule landed rather than the labels changing: **`bi-encoder` and `json-mode-vs-structured-outputs` are tables now, not flowcharts.** A comparison drawn as a decision tree was the sharpest case of a shape that did not come from its subject.
+
+`tools/audit_structure.py` is promoted from report-only to a **hard CI gate**, having been deliberately withheld while it could not pass. That withholding is now the pattern: `audit_clusters` and the rule_checker regression gate were both added the wrong way round earlier the same day, and a gate that cannot go green stops being read.
+
+One thing recorded so nobody misreads the output: **`branches=2` on every remaining diagram is a CSS constraint, not residual convergence.** `flowcharts.css` uses `grid-template-columns: repeat(2, ...)`, so a two-way split is the only branch shape the stylesheet supports.
+
+Also confirmed: the conditional stylesheet link works as intended rather than blanket-linking. `/glossary/context-engineering/` no longer carries a diagram and no longer loads `flowcharts.css`; HNSW carries both.
+
 ### A link profile is a diagnostic for editorial substance
 
 Added 2026-08-17, and it changes what internal linking is for. **If every outbound link on a page fails the subject-of-the-sentence test, the page is telling you it has no natural neighbours.** The cause is almost always that the page holds an abstraction while other pages own each concrete piece of its argument, and an abstraction has no neighbours, so every link has to be manufactured. **Review the page. Do not replace the links.**
