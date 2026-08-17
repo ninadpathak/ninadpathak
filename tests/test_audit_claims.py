@@ -104,5 +104,41 @@ class NavigationSuppressionTests(unittest.TestCase):
             "which showed the smaller model winning on repository-level edits."))
 
 
+class ReviewerIdentifiedRefinementTests(unittest.TestCase):
+    """Two refinements the reviewer named after classifying 118 candidates by hand.
+
+    Both are narrow on purpose. The valuable property is that an FAQ *answer* is still
+    scanned while its question is not — suppressing the whole block would hide real claims
+    behind a question mark.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from importlib.util import module_from_spec, spec_from_file_location
+        spec = spec_from_file_location("audit_claims_refine", TOOL)
+        cls.mod = module_from_spec(spec)
+        spec.loader.exec_module(cls.mod)
+
+    def flagged(self, line):
+        return bool(self.mod.classify(line)) and not self.mod._is_navigation(line)
+
+    def test_inline_code_is_quoted_not_asserted(self):
+        self.assertFalse(self.flagged("Run `I ran the checker` to reproduce it."))
+
+    def test_bold_faq_question_is_suppressed(self):
+        self.assertTrue(self.mod._is_navigation("**Can I run this offline?**"))
+
+    def test_the_faq_answer_is_still_scanned(self):
+        self.assertTrue(self.flagged("Yes. I ran it offline against the fixture and it passed."))
+
+    def test_real_claims_survive_both_refinements(self):
+        self.assertTrue(self.flagged("I measured 40ms on an RTX 4090."))
+        self.assertTrue(self.flagged("I built the checker on this site."))
+
+    def test_a_claim_beside_inline_code_still_counts(self):
+        """Stripping code spans must not smuggle the surrounding claim out with them."""
+        self.assertTrue(self.flagged("I measured 40ms running `npm test` on an RTX 4090."))
+
+
 if __name__ == "__main__":
     unittest.main()

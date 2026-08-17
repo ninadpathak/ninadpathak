@@ -67,8 +67,16 @@ UNBACKED = (
 UNBACKED_LINK = re.compile(r"\[([^\]]+)\]\(/articles/(" + "|".join(UNBACKED) + r")/?\)")
 
 
+# Inline code is quoted, not asserted. `I ran the checker` inside backticks is a command
+# a reader types, not a claim Ninad makes about having run it. Stripping code spans before
+# first-person detection was one of two refinements the reviewer identified after
+# classifying 118 candidates by hand.
+INLINE_CODE = re.compile(r"`[^`]*`")
+
+
 def classify(line: str) -> list[str]:
     """Why this line was flagged. Multiple reasons are common and useful."""
+    line = INLINE_CODE.sub(" ", line)
     reasons = []
     person = bool(FIRST_PERSON_ACTION.search(line))
     measured = bool(MEASUREMENT.search(line))
@@ -100,6 +108,11 @@ def _is_navigation(line: str) -> bool:
     if stripped.startswith("#"):
         return True
     if stripped.endswith("?"):
+        return True
+    # A bold-only line ending in a question mark is an FAQ heading in this house style.
+    # Its ANSWER is a separate line and still gets scanned, which is the point: the
+    # question asserts nothing, the answer might.
+    if re.match(r"^\*\*[^*]+\?\*\*:?$", stripped):
         return True
     # A list item whose whole content is a link and a short gloss is a reading pointer.
     if re.match(r"^[-*+]\s*\[[^\]]+\]\([^)]+\)\s*[:\u2014-]?\s*.{0,90}$", stripped):
