@@ -11,6 +11,44 @@ author = "Ninad Pathak"
 obsidian_path = ""
 posts_per_page = 20
 
+# THE TOOLS INVENTORY, and the single source of truth for it.
+#
+# The footer used to list all five tools individually, which is an inventory rather than a
+# set of destinations, and it would only dilute further with every tool shipped. One
+# `Tools` link now points at /tools/, which concentrates link equity on one rankable page
+# and finally gives the tools cluster an owner page.
+#
+# `name` and `description` are each tool page's own reviewed title and meta description,
+# reused verbatim rather than rewritten, so the index cannot drift from the pages it lists.
+# Order is by strategic priority: the AI Overviews checker leads because `ai overviews
+# checker` is 700/mo at KD 0 with no AI Overview on its SERP, and no build-a-tool keyword
+# in this niche carries one while all 15 top keywords do.
+
+[[content.tools]]
+slug = "ai-overviews-checker"
+name = "AI Overviews Checker"
+description = "Check a page with nine sourced structural checks for snippet eligibility and extractability. Runs in your browser and never predicts AI Overview placement."
+
+[[content.tools]]
+slug = "ai-crawler-checker"
+name = "AI Crawler Access Checker"
+description = "Check whether your robots.txt lets AI assistants cite you, separately from whether it lets them train on you. Runs in the browser. No signup."
+
+[[content.tools]]
+slug = "llms-txt-validator"
+name = "llms.txt Validator"
+description = "Validate llms.txt against the v2 proposal. Paste a file or fetch one from a domain, then separate spec requirements from conventions in your browser."
+
+[[content.tools]]
+slug = "llms-txt-generator"
+name = "llms.txt Generator"
+description = "Scan your sitemap, review page titles and descriptions, and generate an editable llms.txt file. Free, fast, and no signup required."
+
+[[content.tools]]
+slug = "linter"
+name = "Technical Writing Linter"
+description = "Paste a technical article. Get a linter report: condescension words, AI writing signals, buzzwords, passive voice, readability score. Free. No signup."
+
 # CLUSTER OWNER PAGES
 #
 # One category per cluster in campaign-90d.md section 3, and each one renders a real

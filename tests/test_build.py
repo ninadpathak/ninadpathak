@@ -193,10 +193,45 @@ class ToolDiscoverabilityTests(unittest.TestCase):
         for path in ("/llms-txt-generator/", "/llms-txt-validator/", "/linter/"):
             self.assertIn(f"{{base}}{path}", source, f"{path} missing from llms.txt output")
 
-    def test_footer_links_both_llms_txt_tools(self):
+    def test_footer_reaches_both_llms_txt_tools_through_the_tools_index(self):
+        """The footer links /tools/, not five tools.
+
+        Listing every tool in the footer split internal link equity five ways and would
+        have diluted further with each new tool, so it collapsed to one Tools destination
+        backed by an index page. Reachability is what this test protects, and it now lives
+        in the tools inventory rather than the footer.
+        """
         base_html = (self.repo_root / "templates" / "base.html").read_text(encoding="utf-8")
-        self.assertIn('href="/llms-txt-generator/"', base_html)
-        self.assertIn('href="/llms-txt-validator/"', base_html)
+        self.assertIn('href="/tools/"', base_html)
+        # And the footer must NOT go back to listing them individually.
+        for slug in ("llms-txt-generator", "llms-txt-validator", "linter",
+                     "ai-overviews-checker", "ai-crawler-checker"):
+            self.assertNotIn(f'href="/{slug}/" class="footer-link"', base_html,
+                             f"{slug} is back in the footer — link to /tools/ instead")
+
+        config = (self.repo_root / "config.toml").read_text(encoding="utf-8")
+        self.assertIn('slug = "llms-txt-generator"', config)
+        self.assertIn('slug = "llms-txt-validator"', config)
+
+    def test_tools_index_lists_every_built_tool(self):
+        """The inventory in config.toml must match the tools the build actually renders."""
+        # Same fallback build.py uses: tomllib is 3.11+, and the Cloudflare build image
+        # is 3.9.
+        try:
+            import tomllib
+        except ImportError:  # pragma: no cover - only on <3.11
+            import tomli as tomllib
+        config = tomllib.loads((self.repo_root / "config.toml").read_text(encoding="utf-8"))
+        inventory = {tool["slug"] for tool in config["content"]["tools"]}
+        build = (self.repo_root / "build.py").read_text(encoding="utf-8")
+        for slug in inventory:
+            self.assertIn(f'"{slug}/index.html"', build,
+                          f"{slug} is in the tools inventory but the build renders no page for it")
+        self.assertEqual(
+            inventory,
+            {"ai-overviews-checker", "ai-crawler-checker", "llms-txt-validator",
+             "llms-txt-generator", "linter"},
+            "a tool was added or removed without updating this test")
 
     def test_projects_yaml_lists_both_llms_txt_tools(self):
         projects = (self.repo_root / "content" / "projects.yaml").read_text(encoding="utf-8")
@@ -236,7 +271,9 @@ class ToolDiscoverabilityTests(unittest.TestCase):
         self.assertIn("{base}/ai-overviews-checker/", build)
 
         base_html = (self.repo_root / "templates" / "base.html").read_text(encoding="utf-8")
-        self.assertIn('href="/ai-overviews-checker/"', base_html)
+        self.assertIn('href="/tools/"', base_html)
+        config = (self.repo_root / "config.toml").read_text(encoding="utf-8")
+        self.assertIn('slug = "ai-overviews-checker"', config)
 
         projects = (self.repo_root / "content" / "projects.yaml").read_text(encoding="utf-8")
         self.assertIn('url: "/ai-overviews-checker/"', projects)
@@ -273,8 +310,12 @@ class ToolDiscoverabilityTests(unittest.TestCase):
         self.assertIn('("/ai-crawler-checker/", "0.9", "monthly", None)', build)
         self.assertIn("{base}/ai-crawler-checker/", build)
 
+        # The footer links /tools/ rather than each tool, so reachability is asserted
+        # against the tools index and its inventory instead of the footer.
         base_html = (self.repo_root / "templates" / "base.html").read_text(encoding="utf-8")
-        self.assertIn('href="/ai-crawler-checker/"', base_html)
+        self.assertIn('href="/tools/"', base_html)
+        config = (self.repo_root / "config.toml").read_text(encoding="utf-8")
+        self.assertIn('slug = "ai-crawler-checker"', config)
 
         projects = (self.repo_root / "content" / "projects.yaml").read_text(encoding="utf-8")
         self.assertIn('url: "/ai-crawler-checker/"', projects)

@@ -600,6 +600,19 @@ class SiteBuilder:
             page="404",
         )
 
+    def build_tools_index(self):
+        """The tools cluster's owner page.
+
+        The footer listed all five tools individually, which split internal link equity
+        five ways and gave the tools no rankable owner. This is that owner, and it reads
+        its inventory from config.toml so the index cannot drift from the pages it lists.
+        """
+        self.render(
+            "tools.html", "tools/index.html",
+            page="tools",
+            tools=self.config["content"].get("tools", []),
+        )
+
     def build_linter(self):
         self.render(
             "linter.html", "linter/index.html",
@@ -676,6 +689,7 @@ class SiteBuilder:
             ("/projects/", "0.7", "monthly", None),
             ("/about/", "0.6", "monthly", None),
             ("/contact/", "0.5", "yearly", None),
+            ("/tools/", "0.9", "monthly", None),
             ("/linter/", "0.9", "monthly", None),
             ("/llms-txt-generator/", "0.9", "monthly", None),
             ("/llms-txt-validator/", "0.9", "monthly", None),
@@ -824,6 +838,8 @@ class SiteBuilder:
         # able to find them without reading the whole Pages list.
         lines.append("## Tools")
         lines.append("")
+        lines.append(f"- [Tools]({base}/tools/): Index of every tool on this site, each running in the browser with no signup.")
+        lines.append("")
         lines.append(f"- [AI Crawler Access Checker]({base}/ai-crawler-checker/): Check which AI platforms a robots.txt lets cite a site, separately from which it lets train on it.")
         lines.append(f"- [AI Overviews Checker]({base}/ai-overviews-checker/): Check whether a page's answers can be extracted by AI Overviews and answer engines, with the source behind each check.")
         lines.append(f"- [llms.txt Generator]({base}/llms-txt-generator/): Scan a sitemap and generate an editable llms.txt file in the browser.")
@@ -945,6 +961,7 @@ class SiteBuilder:
         self.build_contact()
         self.build_404()
         self.build_linter()
+        self.build_tools_index()
         self.build_llms_txt_generator()
         self.build_llms_txt_validator()
         self.build_ai_overviews_checker()

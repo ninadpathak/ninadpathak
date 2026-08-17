@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Free Tools for Documentation and AI Search | Ninad Pathak{% endblock %}
+{% block description %}Five browser tools for technical documentation and AI search: check AI Overview extractability, audit robots.txt for AI crawler access, validate and generate llms.txt, and lint technical prose. No signup.{% endblock %}
+{% block canonical %}/tools/{% endblock %}
+{% block og_url %}/tools/{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Free Tools for Documentation and AI Search",
+  "description": "Browser tools for technical documentation and AI search. Each runs client-side, requires no signup, and states the method behind its findings.",
+  "url": "{{ site.url }}/tools/",
+  "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ tools | length }},
+    "itemListElement": [
+      {% for tool in tools %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "item": {
+          "@type": ["SoftwareApplication", "WebApplication"],
+          "name": {{ tool.name | tojson }},
+          "url": "{{ site.url }}/{{ tool.slug }}/",
+          "description": {{ tool.description | tojson }},
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "isAccessibleForFree": true,
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div class="container">
+    <div class="label">Tools</div>
+    <h1>Tools</h1>
+    <p class="lead">Each of these runs in your browser. Nothing you paste is uploaded, none of them
+    needs an account, and each one shows the method behind its findings rather than a score you
+    have to trust.</p>
+  </div>
+</section>
+
+<section class="blog-list-section">
+  <div class="container">
+    {% for tool in tools %}
+    <a href="/{{ tool.slug }}/" class="post-row">
+      <span class="post-row-title">{{ tool.name }}</span>
+      <div class="post-row-tags">
+        <span class="tag">free</span>
+        <span class="tag">no signup</span>
+      </div>
+    </a>
+    <p>{{ tool.description }}</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
