@@ -1,11 +1,12 @@
 # Brief: Turning Support Questions Into Documentation
 
-**Slot:** 2026-09-20 | Order 53 | **Cluster:** Forums and community building | **Experience: A**
+**Slot:** 2026-09-20 | Order 53 | **Cluster:** Distribution | **Subcluster:** Communities and forums | **Experience: A**
 
 ## Keyword
 
 `support ticket deflection` measures 30/mo and is the closest commercial phrasing. Low volume.
-This is the strongest genuinely-his piece in the community cluster and it earns its slot on that.
+This is the strongest genuinely-his piece in the communities-and-forums subcluster and earns its
+slot on that.
 
 ## Reader task
 
@@ -18,8 +19,8 @@ page, and closing the loop back to the community.
 
 ## Must not repeat
 
-Community building generally (row 49). Thread findability (row 56). Documentation review criteria,
-owned by the live review checklist.
+Community building generally (row 49). Documentation review criteria, owned by the live review
+checklist. Row 56 is skipped in the live guarded queue and owns no future boundary.
 
 ## Evidence — Experience A
 
@@ -37,6 +38,7 @@ Real ground he can point at: this site's own FAQ blocks are built from question-
 Outbound:
 - `/articles/documentation-review-checklist-before-you-publish/` only if the sentence is genuinely
   about reviewing the resulting page. That is cluster 1, so cross-cluster rules apply.
-- row 49, same cluster, live by this date.
+- row 49, same Distribution cluster, live by this date.
 
-**Inbound retrofit source:** row 49, the cluster owner, published four days earlier.
+**Inbound retrofit source:** row 49, the communities-and-forums overview, published four days
+earlier.
