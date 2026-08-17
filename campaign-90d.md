@@ -73,10 +73,8 @@ before the sweep.** Do not quote the old figure again.
 | 2 | Developer experience and DevRel for DevTools and B2B SaaS | 6,040 | Content that makes a developer product adoptable | `/articles/developer-experience/` | 8 |
 | 3 | AI agent architecture, agent memory, RAG, LLM inference | 149,790 | The revived cluster; the only search equity the domain has earned | `/articles/ai-engineering/` | 57 |
 | 4 | Optimising for AI Overviews and AI search citation | **30,980** | The tools cluster: `/linter/`, `/llms-txt-generator/`, the AI Overviews checker, the llms.txt validator | `/articles/ai-search-optimization/` | 3 |
-| 5 | Marketing and reaching people on Reddit | 18,300 *(floor)* | Distribution, first-hand | `/articles/reddit-marketing/` | 0 |
-| 6 | Finding and building an audience on forums and communities | 15,910 *(floor)* | Distribution, first-hand | `/articles/community-building/` | 0 |
-| 7 | Creating and running events | 18,470 *(floor)* | Distribution, first-hand | `/articles/technical-events/` | 0 |
-| | **Total** | **293,800** | | | **91** |
+| 5 | Distribution: Reddit, forums, communities, and events | 52,680 *(floor)* | Credibility, first-hand. **Merged 2026-08-17** from three clusters | `/articles/distribution/` | 0 |
+| | **Total** | **293,800** | | | **90** |
 
 **Clusters 5, 6 and 7 are floors, not measurements.** They hit the 250-row API cap before the
 sweep ran, so their true keyword sets are larger than recorded. Cleaning a floor leaves a floor:
@@ -94,6 +92,30 @@ failure the isolation rule exists to prevent. Cluster 1 goes 63,070 to 54,310 an
 22,220 to 30,980, making it the **second-largest cluster** in the niche.
 
 Clusters 5, 6, and 7 are new scope and they matter for a reason beyond volume: they are things Ninad genuinely does, so they pass the falsifiability test in section 4 where invented documentation war stories do not.
+
+**Seven clusters became five on 2026-08-17.** Reddit, forums and events merged into one
+Distribution cluster. **No topic was dropped and the scope settled in CHARTER 2c-bis is
+unchanged** — only the container changed. The isolation rule's own logic forced it: the rule
+requires every cluster to have one owner page covering the whole job, and clusters of 3, 4 and 5
+rows cannot each have an owner page that owns anything. Merging makes the rule satisfiable rather
+than aspirational, and it **removes** a cross-cluster exception instead of adding one.
+
+The decisive argument was empirical, not arithmetic. A brief for the community owner page needed a
+stop instruction, because it opened a cluster with no publishable siblings and could not honestly
+meet the two-outbound minimum. That is a structural failure surfacing in the work rather than a
+theory about it, and row 49's stop instruction disappearing is the tell that the structure was
+wrong rather than the writing.
+
+Verified before applying, not assumed: none of the three old slugs ever rendered. No directory in
+`output/`, no sitemap entry, and **zero commits in the entire repository history** placed any of
+them in a built sitemap. No post ever declared them. So no redirect was needed and nothing was
+indexed.
+
+> **Distribution is a credibility cluster, not a traffic cluster. Twelve rows is its ceiling, not a
+> starting allocation, and it must not grow on the strength of a floor figure.**
+
+That 52,680/mo is three capped, cleaned floors added together. It is exactly the number that would
+justify overinvesting, which is why the ceiling is written down here rather than left to memory.
 
 ### Cluster isolation — a hard structural rule
 
@@ -304,9 +326,11 @@ three were contaminated. Distribution is a **credibility cluster, not a traffic 
 that way. Twelve rows is the ceiling, not a starting allocation, and it should not grow on the
 strength of a floor figure.
 
-**Consequence for the cluster map in §3:** seven clusters become five. That is a real change to the
-niche definition settled on 2026-08-17, and it is proposed here rather than applied, because §3 is
-the settled scope and this section is the sequencing that tests it. The merge is the recommendation.
+**Applied 2026-08-17.** Seven clusters became five, in `config.toml`, in the queue's twelve rows,
+and in §3 above. The venue survives as `Subcluster` (Reddit 4, communities and forums 5, events 3)
+so planning granularity is not lost. `tools/daily_cycle.py` now asserts `/articles/distribution/`
+alongside the other owner pages; its check skips URLs the build does not produce, so the assertion
+is inert until the first Distribution piece ships and becomes live the moment it does.
 
 ---
 
@@ -317,7 +341,7 @@ the settled scope and this section is the sequencing that tests it. The merge is
 | 1 | AI search | 7 | Tool intent is untaxed by AI Overviews and least dependent on the damaged domain trust. Fixes five orphaned tools. |
 | 2 | Documentation | 26 | The commercial cluster. Artifacts first, explainers last. |
 | 3 | AI engineering | ~6, down from 12 | Consolidation beats addition at 57 posts and 65% AIO. Freed slots are not refilled. |
-| 4 | Distribution (5+6+7 merged) | 12 | Credibility, not traffic. Viable as one cluster, not as three. |
+| 4 | Distribution (5+6+7 merged, applied) | 12 | Credibility, not traffic. Viable as one cluster, not as three. Ceiling, not a starting allocation. |
 | 5 | DevEx and DevRel | 3 | Smallest at 6,040/mo. Search Console reports 4 of its pages, carrying 1 click on 32 impressions. Kept, not grown. |
 
 **Rows freed by the cluster-3 collapse: about 6.** They should stay empty or be spent on the

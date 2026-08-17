@@ -243,6 +243,9 @@ LIVE_URLS = (
     "/articles/ai-search-optimization/",
     "/articles/ai-engineering/",
     "/articles/technical-documentation/",
+    # Added with the Distribution merge, 2026-08-17. The loop below skips any URL the
+    # build does not produce, so this is inert until the first Distribution piece ships.
+    "/articles/distribution/",
 )
 
 

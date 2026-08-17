@@ -86,26 +86,31 @@ description = "Agent architecture, agent memory, retrieval-augmented generation,
 intro = "How production AI systems store, retrieve, and forget, and where each layer breaks."
 tag_matches = ["ai-agents", "ai agents", "agents", "agent-memory", "agent-architecture", "agent architecture", "agent design", "multi-agent", "multi-agent systems", "rag", "retrieval", "memory", "memory-hierarchy", "memory-management", "memory-optimization", "vector-search", "llm", "llm-architecture", "inference", "kv-cache", "context-window", "context-windows", "transformers", "fine-tuning", "mcp", "ai reasoning", "voice-ai", "agentic-cli", "infrastructure"]
 
+# Distribution. Merged 2026-08-17 from three separate clusters: reddit-marketing,
+# community-building and technical-events. No topic was dropped and the settled scope in
+# CHARTER 2c-bis is unchanged; only the container changed.
+#
+# The isolation rule's own logic forced this. It requires every cluster to have one owner
+# page covering the whole job, and three clusters of 3, 4 and 5 rows cannot each have an
+# owner page that owns anything. Merging makes the rule satisfiable rather than aspirational,
+# and it REMOVES a cross-cluster exception instead of adding one.
+#
+# The empirical tell: a brief for the community owner page needed a stop instruction, because
+# it opened a cluster with no publishable siblings and could not meet the two-outbound minimum
+# honestly. That is a structural failure surfacing in the work, not a theory about it.
+#
+# None of the three old slugs ever rendered. Verified 2026-08-17: no directory in output/, no
+# sitemap entry, and zero commits in the entire history placed any of them in a built sitemap.
+# No post ever declared them. So no redirect is needed and nothing was indexed.
+#
+# Distribution is a CREDIBILITY cluster, not a traffic cluster. Twelve rows is its ceiling,
+# not a starting allocation, and it must not grow on the strength of a floor figure.
 [[content.categories]]
-slug = "reddit-marketing"
-title = "Reaching Developers on Reddit"
-description = "Finding, reading, and participating in the Reddit communities where developer products get discussed."
-intro = "What works on Reddit when the product is technical and the audience distrusts marketing."
-tag_matches = ["reddit", "reddit-marketing"]
-
-[[content.categories]]
-slug = "community-building"
-title = "Communities and Forums"
-description = "Finding an audience in forums, Discords, and communities, and earning a place in them."
+slug = "distribution"
+title = "Reaching Developers"
+description = "Getting a technical product in front of the developers who would use it, through Reddit, forums, communities, and events."
 intro = "Where technical audiences already gather, and how to show up without being ejected."
-tag_matches = ["community", "community-building", "forums", "discord"]
-
-[[content.categories]]
-slug = "technical-events"
-title = "Running Technical Events"
-description = "Planning, running, and following up on meetups, workshops, and developer events."
-intro = "What it takes to run an event technical people are glad they attended."
-tag_matches = ["events", "meetups", "workshops", "conferences"]
+tag_matches = ["reddit", "reddit-marketing", "community", "community-building", "forums", "discord", "events", "meetups", "workshops", "conferences", "distribution"]
 
 [[content.categories]]
 slug = "developer-experience"
