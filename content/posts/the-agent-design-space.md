@@ -14,7 +14,7 @@ title: 'The Agent Design Space: A Map of What Engineers Are Actually Building'
 
 Three weeks of reading production architecture posts, scraping GitHub for agent implementations, and talking to engineers who run agents at scale taught me one thing the taxonomy diagrams miss: I wanted to know what engineers are actually building, not what the boxes say they should build.
 
-What I found is messier than the taxonomies suggest. Production agents do not map cleanly into types.
+The real design space is messier than the taxonomies suggest. Production agents do not map cleanly into types.
 
 They cluster around the constraints that decide everything else: how often the agent runs, what it can break when it gets something wrong, and how much a human can audit after the fact.
 
@@ -26,7 +26,7 @@ Plenty of RAG applications look exactly like this once someone wraps them in an 
 
 Teams reach for this shape when the task is bounded and a wrong answer costs little, say a docs-search assistant that surfaces the wrong paragraph and the user just re-asks.
 
-I covered the memory and retrieval foundations for this pattern in my posts on [state-of-ai-agent-memory-2026](/articles/state-of-ai-agent-memory-2026/) and [hybrid-search-bm25-vector-search](/articles/hybrid-search-bm25-vector-search/). Retrieval itself is rarely where the trouble lives.
+For a map of memory approaches, read [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/); for retrieval mechanics, read [hybrid search with BM25 and vectors](/articles/hybrid-search-bm25-vector-search/). Neither article establishes that retrieval is where a particular agent will fail.
 
 What bites you is retrieval failing silently, the vector search returning three plausible-but-wrong chunks, and the agent confidently building an answer on top of them.
 
@@ -48,7 +48,7 @@ I wrote about [circuit breakers](/articles/production-ai-agent-errors/) as a pat
 
 **Supervisor-delegation agents** split a task across several specialized agents, with a supervisor running the orchestration. The supervisor decides which sub-agent owns which part of the work, aggregates results, and resolves conflicts when two agents return contradictory answers.
 
-Of everything I saw in production, this was the most architecturally complex pattern.
+This is the most architecturally complex pattern in the design space.
 
 The [supervisor-agent pattern](/articles/multi-agent-vs-single-agent-tradeoffs/) post goes into where this works and where it breaks. One failure deserves naming outright: supervisors rack up hidden coordination costs that teams routinely underestimate.
 
@@ -73,17 +73,17 @@ Drop state when the process recycles overnight and the perceive-think-act cycle 
 
 ## What the production data shows
 
-Across the implementations I surveyed, three things stood out.
+Across these patterns, three things stand out.
 
 **Most agents are simpler than the taxonomy suggests.** Useful as the five-type taxonomy I published last week is for classification, production agents rarely sit cleanly in one type. They are blends with a dominant pattern.
 
-The single most common agent I found is a retrieval-augmented single-loop agent with multi-turn conversational memory bolted on, a Type 2-3 hybrid that has no clean home in most taxonomies and yet shows up everywhere.
+A common design is a retrieval-augmented single-loop agent with multi-turn conversational memory bolted on. This Type 2-3 hybrid has no clean home in most taxonomies.
 
 **The tool layer decides reliability more than the model does.** Teams with fragile agents almost always had a tool schema problem, not a model problem. The [tool schema design](/articles/structured-outputs-llms-json-mode-function-calling/) post covers this in depth, and the short version is that agents fall over when the tool interface is underspecified, when one tool returns errors as a 500 and another returns them as a cheerful 200 with an error string in the body, and when the agent has no defined way to retry a failed call.
 
 **Observability is the biggest blind spot.** Right behind tool schema problems, the second most common production failure was teams having no way to see what their agent was doing mid-execution. A minimum viable observability layer earns its place fast here.
 
-Basic logging was common in the teams I surveyed, but structured tracing of agent decisions was not, neither was the ability to replay a specific decision path or attribute cost to a single agentic action.
+Basic logging is not enough. A production agent also needs structured decision traces, replayable paths, and cost attribution for individual actions.
 
 ## Where agents are not being built
 
@@ -95,7 +95,7 @@ The post on [message passing between agents](/articles/multi-agent-vs-single-age
 
 **Agent regression testing** barely exists. Agents get tested the way teams test ordinary software: unit tests for functions, integration tests for APIs.
 
-An agent that sails through every unit test can still blow up in production the moment it meets an input shape it never saw in CI, such as a user pasting a 40-page PDF into a chat that the test suite only ever fed one-line questions. The post on [agent and RAG evaluation frameworks](/articles/rag-evaluation-metrics-what-actually-matters/) covers the eval frameworks that come closest to closing this.
+An agent that sails through every unit test can still blow up in production the moment it meets an input shape it never saw in CI, such as a user pasting a long PDF into a chat that the test suite only ever fed one-line questions. The [RAG evaluation metrics guide](/articles/rag-evaluation-metrics-what-actually-matters/) explains retrieval and answer checks, but those checks do not cover every production input shape.
 
 **Structured output reliability** from agents is still unsolved. Agents that must emit structured JSON or hit specific action schemas fail at higher rates than agents that just produce freeform text.
 

@@ -17,7 +17,7 @@ An agent that cannot touch the outside world is a very expensive autocomplete. T
 
 I went deep on the concept in [the Model Context Protocol explained](/articles/model-context-protocol-explained/). Here I want to show the practical setup, the parts you actually build and run.
 
-Write a tool once, expose it through a standard interface, and any MCP-aware agent can call it without a custom integration. A server I built to query our order database for a coding agent kept working untouched when I pointed a separate research agent at it the next week.
+Write a tool once, expose it through a standard interface, and MCP-aware clients can call it without a separate integration for each one. That portability is the useful promise to test when choosing MCP.
 
 That portability is the reason I reach for it instead of bolting tools directly into one agent.
 
@@ -127,7 +127,7 @@ When the agent starts, it launches that command as a subprocess, connects over t
 
 Based on the name and description the server reported, the agent decides when to call it.
 
-That same server config works across MCP-aware agents, which is the portability paying off. I wire the server once and reuse it wherever I need those tools, including inside the harness I run around my coding agents, which I described in [agent harnesses](/articles/agent-harnesses/).
+The same server configuration can work across MCP-aware clients, which is the portability paying off. The [agent harness](/articles/agent-harnesses/) is where that server fits into a larger control loop.
 
 ## Guardrails for tool access
 

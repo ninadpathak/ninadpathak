@@ -41,12 +41,6 @@ Double your context from 2K to 4K tokens, and you do not double the compute. You
 
 That quadratic cost is why long context models are expensive in ways that are not obvious from the API pricing sheet. The actual FLOPs scale superlinearly.
 
-I measured this on a Llama 3.1 8B model running locally. Processing 512 tokens cost about 0.003 USD equivalent on my RTX 4090.
-
-Processing 4,096 tokens cost 0.041 USD. That is a 13x increase in cost for an 8x increase in tokens.
-
-Scale to 32K tokens and you are at 0.89 USD. The curve is not friendly.
-
 Pouring your entire data store into the context window and calling it done does not survive contact with scale. The economics break first, and the retrieval quality breaks right behind them.
 
 Context is also ephemeral in a specific sense. When the inference call ends, the context is gone.
@@ -99,13 +93,7 @@ The "lost in the middle" problem, documented by Liu et al. and confirmed by othe
 
 The behavior is not a bug in current models. It is a structural property of how transformers handle long sequences.
 
-I ran a simple test on this. I gave a model a 50K token context containing 10 numbered facts scattered throughout.
-
-I then asked it to recall specific facts by number. Accuracy for facts 1 and 10 (beginning and end) was above 90%.
-
-Accuracy for facts 4, 5, 6, and 7 (middle) dropped to around 60%. The model knew the information was there.
-
-It simply could not lay hands on it reliably. The effect is the same one you get skimming a long contract: you remember the first clause and the signature line, and the indemnification paragraph buried on page nine slides right past you.
+The effect is similar to skimming a long contract: the first clause and signature line stay visible while a clause buried in the middle is easier to miss.
 
 Apply that to your RAG pipeline and the failure mode gets obvious. You retrieve 20 chunks, stuff them into context sorted by relevance score, and wonder why your system still gives wrong answers.
 
@@ -329,7 +317,7 @@ Once a context window fills, the next decision is not simply what to delete. [Co
 
 ## Related articles
 
-For a deeper look at the benchmark data behind these claims, see [the BEAM memory benchmark](/articles/beam-memory-benchmark/). For implementation patterns, read [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).
+For a conceptual treatment of the long-context problem, read [the BEAM memory article](/articles/beam-memory-benchmark/); it does not provide reproducible benchmark data. For implementation patterns, read [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).
 
 For understanding memory in specific agent frameworks, see [how memory works in Claude Code](/articles/how-memory-works-in-claude-code/) and [how memory works in HyperAgents](/articles/how-memory-works-in-hyperagents/).
 

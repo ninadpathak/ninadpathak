@@ -76,7 +76,7 @@ Anthropic's `tool_use` blocks deliver parsed arguments as a JavaScript object na
 
 [Claude scored 8.4 on tool-use reliability metrics in Q1 2026 benchmarks](https://dev.to/supertrained/llm-apis-for-ai-agents-anthropic-vs-openai-vs-google-ai-an-score-data-3e1j), compared to Google at 7.9 and OpenAI at 6.3. That gap matters most in agentic workflows where one missed or malformed tool call breaks the whole execution chain, like a five-step booking agent that calls `search_flights`, then `select_seat`, then `charge_card`, where a garbled argument on step two strands the run halfway through.
 
-Running multi-step agents on Claude 3.5 Sonnet, I saw tool argument parsing fail so rarely that I deleted the defensive fallback wrapper I'd written for it and never missed it.
+Schema-constrained output can make a defensive parsing wrapper redundant, but only observed failures in the target workflow justify removing it. A model name alone is not that evidence.
 
 <div class="visual-wrapper">
   <div class="visual-title">THREE MECHANISMS, ONE PROMPT</div>

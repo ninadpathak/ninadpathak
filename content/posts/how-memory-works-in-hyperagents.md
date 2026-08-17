@@ -30,7 +30,7 @@ Sessions collapse. Lacking a memory architecture, every turn starts from scratch
 
 I watched one of my early agents spend three turns re-reading the same config file because it had already pushed the earlier read out of its context window.
 
-Giving the agent somewhere to store what it knows, what it has done, and what it still needs to do is what memory in HyperAgents actually buys you. The architecture I am describing here is the one I built into my own agent runner, and it has handled sessions with 500+ turns without degradation.
+Giving the agent somewhere to store what it knows, what it has done, and what it still needs to do is what memory in HyperAgents actually buys you.
 
 ##The Three-layer Memory Architecture
 
@@ -191,7 +191,7 @@ class ToolResultBuffer:
         oldest["compressed"] = True
 ```
 
-A cheaper, smaller model handles the compression fine, since it only needs to extract gist-level information. gpt-4o-mini is more than sufficient for this. The compressed entry preserves the fact that something happened and what the outcome was, for example "ran the test suite, 3 of 47 failed, all in the billing module", without storing 500 lines of raw output.
+A smaller model can handle gist extraction when its output is checked against the fields the memory record requires. The compressed entry should preserve what happened and its outcome without retaining the raw output.
 
 ##Context Window Management
 
@@ -200,8 +200,6 @@ Context windows are finite. A HyperAgent running 200 turns against a 128K contex
 Managing long sessions actively beats trying to avoid them, because the useful work is in the long sessions.
 
 I use a tiered truncation strategy. At 70% context usage, the agent gets a warning and I trigger mid-level compression of older tool results.
-
-Once usage crosses 85%, I run full summarization of the oldest half of the conversation. At 95%, I force-persist the current state to episodic memory and start a new working context with only the last 5 turns plus the episode summary.
 
 ```python
 def check_context_pressure(context: WorkingContext, model: str):

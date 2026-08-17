@@ -58,7 +58,7 @@ PagedAttention typically lets you serve 2-4x more concurrent sequences than naiv
 
 **KV cache eviction** becomes critical once memory is full. LRU is the default, though it ignores the fact that some keys get attended to far more often than others.
 
-Recent work on "importance-based" eviction (dropping tokens the model attended to least) shows modest improvements, but the gains stay small enough that most systems keep the simplicity of LRU. I dug into this when examining [KV cache eviction accuracy](/articles/kv-cache-eviction-accuracy/).
+Recent work on "importance-based" eviction drops tokens the model attended to least, but the operational trade-off still depends on the workload. The [KV cache eviction article](/articles/kv-cache-eviction-accuracy/) explains the mechanism rather than supplying benchmark evidence.
 
 ## Quantization: Trading Precision for Throughput
 
@@ -116,7 +116,7 @@ No software optimization compensates for the wrong hardware choice. Your inferen
 
 For batch inference with long sequences, H100s with NVLink earn their cost, because the high bandwidth between GPUs lets tensor parallelism scale efficiently across cards. A100s hold up well at smaller scales.
 
-RTX 4090s shine for single-GPU development and small-scale serving, yet a 70B model at 128K context simply won't fit in their 24GB.
+A consumer GPU can suit local development while remaining too small for a large model and long context together. Check the model weights, quantization, and KV-cache budget against available memory before choosing the hardware.
 
 Running on consumer hardware with limited VRAM flips the priority order: quantization becomes your first move rather than a refinement on top of already-sufficient memory. For workloads with repeated system prompts or shared prefixes, like a RAG app that prepends the same 3,000-token instruction block to every query, [prompt caching](/articles/prompt-caching-what-it-is-and-when-the-math-works/) is worth understanding as a complementary technique.
 

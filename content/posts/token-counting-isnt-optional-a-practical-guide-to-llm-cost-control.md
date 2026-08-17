@@ -13,7 +13,7 @@ title: 'Token Counting Isn''t Optional: a Practical Guide to Llm Cost Control'
 
 Engineering teams keep treating LLM calls like traditional REST requests, where a `GET /users/42` costs the same whether the row is small or huge. LLM pricing works nothing like that.
 
-Every character you send and every character the model writes back moves the meter, so a chatty system prompt or a bloated retrieval payload quietly multiplies your bill on every single request. The first time I saw this bite, a teammate had appended the full conversation history to each turn of a support bot, and a fifty-message thread was paying to reprocess message one fifty separate times.
+Every character you send and every character the model writes back moves the meter, so a chatty system prompt or a bloated retrieval payload quietly multiplies your bill on every request. Appending the full conversation history makes each new turn pay to process earlier messages again.
 
 Scaling an AI product without strict token budgeting is how you end up explaining a five-figure invoice to a finance team. I will walk through the mechanics of tokenization and show you how to architect systems that keep costs predictable.
 
@@ -25,7 +25,7 @@ A common word like "the" becomes one token, while something like "tokenization" 
 
 Feed it minified code, stack traces, or a non-English language with its own script, and that ratio gets much worse because the model has fewer frequent patterns to lean on.
 
-Whitespace counts too, which surprises people. On one production system I debugged, trailing spaces and the deeply nested tab indentation in a pile of exported HTML were eating roughly twenty percent of the prompt budget before a single real word arrived.
+Whitespace counts too, which surprises people. Exported HTML with trailing spaces and deep indentation can spend tokens before the useful text begins.
 
 The model reads each of those spaces as a discrete token that still has to pass through the attention mechanism, the same as any other token. Strip and normalize formatting from your data before it ever reaches a foundation model.
 
@@ -62,7 +62,7 @@ Every curly brace, every quotation mark, and every repeated key name like `"cust
 
 YAML drops the brackets and quotes in favor of plain indentation and a single key per line.
 
-Parsing a batch of database records into YAML before sending them, I measured a forty percent cut in input tokens against the JSON version of the same data. The model reads the hierarchy from indentation just fine without the strict syntax.
+Serialization format changes the token count, but the cheaper format depends on the tokenizer and the data. Count the actual JSON and YAML payloads before choosing between them.
 
 Reserve JSON for the final output, where you actually need deterministic parsing back into your application layer.
 

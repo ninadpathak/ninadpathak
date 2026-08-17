@@ -410,29 +410,6 @@ Memory management answers a different question: "what does this agent know about
 
 Storing interaction history to maintain identity and continuity calls for memory management. Production systems usually need both running side by side.
 
-##Benchmarking Memory Strategies: What The Numbers Say
-
-I ran systematic benchmarks across three memory management strategies using a multi-turn agentic pipeline with 200 sessions of 50 interactions each. Here is what I measured.
-
-| Strategy | Memory Util | Retrieval Latency | Task Accuracy | Context Overflow Rate |
-|---|---|---|---|---|
-| LRU Baseline | 71% | 12ms | 67% | 34% |
-| Importance Weighted | 84% | 18ms | 74% | 19% |
-| Letta-style Tiered | 91% | 31ms | 78% | 8% |
-| Hybrid (tiered + importance) | 93% | 24ms | 81% | 6% |
-
-Context overflow rate is the percentage of sessions that exceeded the context window during the run. Higher is worse.
-
-The hybrid approach uses tiered memory with importance-weighted eviction at each tier.
-
-Those latency numbers carry more weight than they look. Retrieval at 31ms, run 10 times per interaction, adds 310ms before the model writes a single token.
-
-For a voice agent, 310ms is the gap between a natural reply and the pause where the caller starts wondering if the line dropped. See [Beam Memory Benchmark](/articles/beam-memory-benchmark/) for a detailed breakdown including throughput numbers across hardware configurations.
-
-How much dead weight each strategy carries shows up in the memory utilization column. LRU wastes nearly 30% of its memory budget on low-value entries.
-
-Tiered approaches waste less because they push cold data to archive tiers instead of keeping it in the active buffer.
-
 ##Practical Implementation: Where To Start
 
 Building a production agent today with no memory management layer, you want this minimum viable implementation order.

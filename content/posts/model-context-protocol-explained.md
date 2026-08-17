@@ -116,4 +116,4 @@ I treat MCP as the frame around the door and leave the actual lock to my own cod
 
 **Can I run MCP servers locally?**
 
-Yes, and it is how I run them most of the time. A local MCP server is the easiest way to give an AI model scoped access to your development environment or private files without anything leaving your machine.
+Yes. A local MCP server can give an AI client scoped access to a development environment or private files without exposing the server publicly.

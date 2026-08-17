@@ -116,7 +116,7 @@ Don't cache responses for anything where the ground truth can change without a c
 
 Semantic caching quality depends heavily on the embedding model you use for query similarity. A model that clusters paraphrases well at 0.88 cosine similarity for one domain may cluster them at 0.72 for another.
 
-Running `text-embedding-ada-002` on a technical code query corpus produced different similarity distributions than `text-embedding-3-small` in tests I ran: the same threshold that gave 8% false positives on one model gave 2% on the other.
+Similarity thresholds do not transfer safely between embedding models. Calibrate the threshold on the target corpus each time the model changes.
 
 What follows in practice is that you have to calibrate your similarity threshold on your actual query distribution using your actual embedding model. A threshold validated on a generic FAQ corpus doesn't transfer to a medical documentation corpus, and a threshold validated on one embedding model doesn't transfer to a different one.
 

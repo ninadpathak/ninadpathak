@@ -53,7 +53,7 @@ The agent ends up trusting the wordier answer over the correct one.
 
 Temporal conflation comes first. The agent retrieves a fact from semantic memory and treats it as current.
 
-I traced this in a multi-agent pipeline where the supervisor agent maintained a policy table in semantic memory, updated once a quarter. Between updates, the supervisor kept routing requests using thresholds that had quietly expired, because nothing in the retrieved values said how old they were.
+A policy table in semantic memory can retain thresholds after they expire. If the retrieved values carry no timestamp, the supervisor has no basis for rejecting them as stale.
 
 Patching it took an afternoon once I knew. Noticing it had gone wrong took the three days I mentioned, since every individual answer looked reasonable in isolation.
 
@@ -75,7 +75,7 @@ The model receives the retrieved chunks, reads them, and generates an answer. No
 
 A librarian who hands you five open books and lets you write your essay without noting which claim came from which page leaves you in the same spot: the citations are reconstructed from memory afterward, and that is exactly when they drift.
 
-The [RAG evaluation metrics framework](/articles/rag-evaluation-metrics-what-actually-matters/) measures retrieval accuracy and answer quality. It does not measure attribution accuracy.
+The [RAG evaluation metrics guide](/articles/rag-evaluation-metrics-what-actually-matters/) explains retrieval and answer-quality measures. Those measures do not test attribution accuracy.
 
 A system can score well on RAG benchmarks and still produce confident responses built on misattributed chunks.
 
@@ -93,7 +93,7 @@ That validity window is both the field that matters most and the one almost nobo
 
 They lean on version numbers instead, and version numbers only hold up if every system writing to memory versions things the same way, which in practice they do not.
 
-I found that the [practical breakdown of episodic, semantic, and working memory in agents](/articles/episodic-vs-semantic-vs-working-memory-agents/) clarifies which memory system should own provenance metadata. Episodic memory entries get timestamps automatically.
+The [practical breakdown of episodic, semantic, and working memory in agents](/articles/episodic-vs-semantic-vs-working-memory-agents/) clarifies which memory system should own provenance metadata. Episodic memory entries get timestamps automatically.
 
 Semantic memory entries need explicit scope and validity fields. Working memory is session-scoped and does not need long-term provenance, but agents need a clear protocol for promoting working memory inferences to semantic memory with full attribution metadata.
 
@@ -103,13 +103,13 @@ The agent already knows the product, region, and customer tier the request belon
 
 Attribution verification before response generation rounds it out. After retrieval and before the final response, the agent runs a check on whether each retrieved chunk actually matches the scope and validity window of the current request.
 
-Chunks that fail get downgraded or dropped. I built this as a lightweight filter layer in [production AI agent error patterns](/articles/production-ai-agent-errors/), wedged between retrieval and context assembly, and it caught the stale-tier quotes before they ever reached a customer.
+Chunks that fail get downgraded or dropped. A lightweight filter between retrieval and context assembly can stop stale material before it reaches the model, the same boundary described in [production AI agent error patterns](/articles/production-ai-agent-errors/).
 
 ## The Deeper Problem
 
 Attribution failures live in memory design, not in retrieval. Plenty of agent architectures treat memory as a passive store: the agent retrieves and acts, and the store enforces nothing about scope boundaries, temporal validity, or source provenance.
 
-The model gets handed the job of inferring those properties from context, and the context window guarantees no structure to support that inference. The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) documents how production tooling is starting to close the hole, though schema enforcement at the write layer is still nowhere near standard practice.
+The model gets handed the job of inferring those properties from context, and the context window guarantees no structure to support that inference. The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) is a map of available memory approaches, not evidence that write-time schema enforcement is standard practice.
 
 Building memory systems that enforce attribution requires treating memory as an active component, not a passive store. Memory writes need schemas.
 

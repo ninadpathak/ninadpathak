@@ -233,7 +233,7 @@ The episodic store stays small enough that retrieval is fast, and the summaries 
 
 **Why not just use a large context window instead of a memory hierarchy?**
 
-Context windows have a fixed capacity and a retrieval accuracy curve that sags in the middle of long contexts, the way a long phone number is hardest to recall in the middle digits. The [BEAM memory benchmark shows why 1M context windows are not enough](/articles/beam-memory-benchmark/) to solve this.
+Context windows have a fixed capacity, and published long-context research has found weaker retrieval from the middle of long inputs. The [BEAM memory article](/articles/beam-memory-benchmark/) discusses that limitation, but it does not provide reproducible benchmark evidence of its own.
 
 A 1 million token context window does not buy you 1 million tokens of useful memory. You get roughly 200K tokens of usable context at high accuracy, and the rest reads as noise.
 
@@ -249,7 +249,7 @@ Say a user lists their billing address as one city today and a different one las
 
 Persisting user data across sessions introduces privacy considerations that ephemeral context never raises. Segmentation is what saves you.
 
-User-specific memory belongs behind isolation at the storage layer, not just a WHERE clause in the application code that a single bug can bypass. I run project-scoped episodic stores where each project gets its own database file, so memory from a client's work conversations physically cannot bleed into a personal scratch project.
+User-specific memory belongs behind isolation at the storage layer, not just a `WHERE` clause in application code that one bug can bypass. Project-scoped stores can enforce that boundary without relying on every query to apply the right filter.
 
 **How does this differ from RAG?**
 

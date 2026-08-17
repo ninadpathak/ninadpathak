@@ -91,7 +91,7 @@ Speculative decoding shines brightest on latency-sensitive, low-concurrency serv
 
 ## Implementation options
 
-Standard speculative decoding needs a separate draft model, which means I run, serve, and version two checkpoints that have to stay compatible. Plenty of teams find that operational overhead annoying, so newer techniques fold the drafting straight into the large model.
+Standard speculative decoding needs a separate draft model, which means operators must serve and version two compatible checkpoints. Newer techniques avoid that overhead by folding the drafting step into the large model.
 
 Medusa bolts a handful of extra prediction heads onto the target so it proposes several future tokens itself, and Lookahead decoding generates and verifies candidate n-grams from the model's own recent output. Both approaches kill the need to babysit two separate networks, at the cost of either fine-tuning the heads or accepting a lower acceptance rate than a well-matched draft model gives me.
 

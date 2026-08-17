@@ -14,7 +14,7 @@ title: 'Prompt Caching: What It Is and When the Math Works'
 
 Inference cost is what stops most LLM applications from scaling cheaply. Every standard API call makes the model re-read your entire prompt from scratch, which is pure waste when most of that prompt is the same on every request.
 
-I run an agent whose system block and tool definitions add up to roughly 12,000 tokens that never change, and without caching I was paying to process those 12,000 tokens on every single turn.
+A stable system block and unchanged tool definitions are repeated input on every turn. Prompt caching can avoid processing that prefix from scratch when the provider's matching rules are satisfied.
 
 Prompt caching fixes that by persisting the intermediate state of the model's computation so you can reuse the work it already did. Whether you actually save money comes down to one mechanism: prefix matching.
 
@@ -47,7 +47,7 @@ Change anything near the start of the prompt and you invalidate the entire cache
 
 That sensitivity forces a specific ordering on you, from most static to most dynamic. System instructions go first, background data follows, and the user's unique query sits dead last.
 
-The first time I shipped caching I interpolated the current timestamp into the system prompt header and watched my hit rate sit at zero for a day before I found it.
+A timestamp interpolated near the start of a system prompt changes the prefix on every request. That placement can prevent later requests from matching the cached prefix.
 
 ## When caching actually pays for itself
 

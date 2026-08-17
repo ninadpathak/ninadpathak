@@ -21,7 +21,7 @@ updated: 2026-08-09
 
 Accessibility testing matters for documentation because a page can look finished and still leave a reader unable to complete its task. A bold heading, a link named “here,” or a screenshot holding the only success signal can turn setup instructions into a visual-only path.
 
-Use this release checklist when you need to decide what to automate, what needs manual testing, and which failure should block a documentation deploy. I built and ran a [documentation accessibility checker](/static/downloads/documentation-accessibility-checker.zip) against a broken fixture and its repaired version so the human review can focus on the experience a parser cannot judge.
+Use this release checklist when you need to decide what to automate, what needs manual testing, and which failure should block a documentation deploy. The [documentation accessibility checker](/static/downloads/documentation-accessibility-checker.zip) automates parser-visible checks so human review can focus on the experience a parser cannot judge.
 
 ## Accessibility testing checklist for a documentation release
 

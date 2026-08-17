@@ -103,11 +103,11 @@ The project file `CLAUDE.md` works differently. You write it.
 
 The agent reads it on every session start, yet it does not update it unless you specifically ask. Read-only access by default is intentional. `CLAUDE.md` is your file, encoding your decisions, and the agent respects that ownership the way it would not silently rewrite a config file you committed.
 
-## The Specific Failure Modes I Hit
+## The Failure Modes to Check
 
 Context window exhaustion is the failure mode that bites most coding agents. During a large task, the agent accumulates file reads, tool results, and reasoning in the context window.
 
-A 200K token context window sounds large until you are in the middle of a 50-file migration. I hit the wall at roughly the 30-file mark when working with Claude Sonnet 4.
+A large context window can still fill during a repository migration. Each opened file, tool result, patch, and test run consumes part of the same finite budget.
 
 The agent started dropping older file contents from context and making decisions based on incomplete information. It happened with no error, the same way a person three hours into a meeting answers confidently about a slide they no longer remember.
 
@@ -119,7 +119,7 @@ The [short-term memory patterns for AI agents](/articles/short-term-memory-for-a
 
 What you serialize to disk is long-term memory. The agent needs both, and you need to manage the boundary explicitly.
 
-Schema drift is a second failure mode. The SQLite memory database schema has not changed in the versions I tested, though the content the agent writes to it changes constantly.
+Schema drift is a second failure mode. A stable SQLite schema does not mean the content written into it stays compatible with every reader.
 
 An entry written six months ago might use a format that the current agent interprets differently, like a note that says "use the new auth flow" when there have since been two newer ones. To handle that, I review and prune memory entries monthly.
 

@@ -469,3 +469,179 @@ The extension contains **55 classified claim units**:
 - **CUT: 11**
 
 Only three artifacts survive the test: the API documentation page outline as a template, the documentation style guide as a template, and the external Cloudflare Workers audit as reproducible evidence. None of the other checkers or fixtures tests a proposition that its own input did not already assume.
+
+## Repository-wide claims audit
+
+The repository-wide scanner returned 118 candidates across 55 of 91 published posts on 17 August 2026. This section records the decision on every candidate in descending hit order; line numbers refer to the pre-repair article body reported by `tools/audit_claims.py`.
+
+False positives are a subset of KEEP. They are lines the scanner correctly matched syntactically but that make no risky evidentiary claim: FAQ questions, quoted configuration text, or links offered only as further reading.
+
+### `the-agent-design-space.md` (7)
+
+- **REWRITE L3:** “The real design space is messier than the taxonomies suggest. Production agents do not map cleanly into types.”
+- **REWRITE L15:** “For a map of memory approaches, read [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/); for retrieval mechanics, read [hybrid search with BM25 and vectors](/articles/hybrid-search-bm25-vector-search/). Neither article establishes that retrieval is where a particular agent will fail.”
+- **REWRITE L37:** “This is the most architecturally complex pattern in the design space.”
+- **REWRITE L62:** “Across these patterns, three things stand out.”
+- **REWRITE L66:** “A common design is a retrieval-augmented single-loop agent with multi-turn conversational memory bolted on. This Type 2-3 hybrid has no clean home in most taxonomies.”
+- **REWRITE L72:** “Basic logging is not enough. A production agent also needs structured decision traces, replayable paths, and cost attribution for individual actions.”
+- **REWRITE L84:** “An agent that sails through every unit test can still blow up in production the moment it meets an input shape it never saw in CI, such as a user pasting a long PDF into a chat that the test suite only ever fed one-line questions. The [RAG evaluation metrics guide](/articles/rag-evaluation-metrics-what-actually-matters/) explains retrieval and answer checks, but those checks do not cover every production input shape.”
+
+### `memory-attribution-errors.md` (6)
+
+- **REWRITE L42:** “A policy table in semantic memory can retain thresholds after they expire. If the retrieved values carry no timestamp, the supervisor has no basis for rejecting them as stale.”
+- **REWRITE L64:** “The [RAG evaluation metrics guide](/articles/rag-evaluation-metrics-what-actually-matters/) explains retrieval and answer-quality measures. Those measures do not test attribution accuracy.”
+- **KEEP L74, false positive:** The heading “What I Found Works” is editorial navigation, not evidence of a test event.
+- **REWRITE L82:** “The [practical breakdown of episodic, semantic, and working memory in agents](/articles/episodic-vs-semantic-vs-working-memory-agents/) clarifies which memory system should own provenance metadata. Episodic memory entries get timestamps automatically.”
+- **REWRITE L92:** “Chunks that fail get downgraded or dropped. A lightweight filter between retrieval and context assembly can stop stale material before it reaches the model, the same boundary described in [production AI agent error patterns](/articles/production-ai-agent-errors/).”
+- **REWRITE L98:** “The model gets handed the job of inferring those properties from context, and the context window guarantees no structure to support that inference. The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) is a map of available memory approaches, not evidence that write-time schema enforcement is standard practice.”
+
+### `episodic-vs-semantic-vs-working-memory-agents.md` (5)
+
+- **REWRITE L1:** “An agent can forget what it just did even when its logs look normal, retrieval is fast, and the context window has room.”
+- **REWRITE L17:** “Fast and volatile, working memory disappears when the context resets. Any long-running agent hits that boundary unless it persists state elsewhere.”
+- **KEEP L35:** “the failure mode I run into most” is an earned engineering judgment, not a claimed measurement.
+- **REWRITE L70:** “Storing every user message in episodic memory regardless of content mixes durable knowledge with conversational debris. Knowledge about Python, Git, and deployment pipelines should not sit in the same bucket as ‘ok thanks, try that again.’”
+- **REWRITE L124:** “My earlier hierarchy post did not go far enough in pulling these types apart, which is why I wrote this one. For a broader inventory of memory approaches, read [the state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/).”
+
+### `why-coding-agents-lose-their-memory.md` (5)
+
+- **REWRITE L90, scanner false positive:** Replace the heading with “The Failure Modes to Check.”
+- **REWRITE L94:** “A large context window can still fill during a repository migration. Each opened file, tool result, patch, and test run consumes part of the same finite budget.”
+- **REWRITE L106:** “Schema drift is a second failure mode. A stable SQLite schema does not mean the content written into it stays compatible with every reader.”
+- **KEEP L114:** The session-close and reopen diagnostic is a concrete, rerunnable procedure rather than claimed benchmark evidence.
+- **KEEP L167, false positive:** The state article is explicitly offered as broader context, not proof.
+
+### `contextual-compression-for-agent-memory.md` (4)
+
+- **REWRITE L5:** “A codebase navigation agent needs to remember which files it has analyzed, what it found, and which paths were dead ends. Keeping every raw tool response is a poor way to preserve that state.”
+- **REWRITE L40:** “Three compression strategies are useful in production because each preserves a different kind of information.”
+- **REWRITE L50:** “Consider a customer support agent that must remember bug reports. Each memory item can preserve the bug and its resolution without retaining the full conversation that produced them.”
+- **REWRITE L114:** “The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) catalogs tiered storage approaches, but it is not benchmark evidence that one compression policy wins. The choice still depends on what each memory tier must preserve.”
+
+### `agent-memory-for-customer-support.md` (4)
+
+- **CUT L15:** Remove the unsupported live-deployment claim, 34 percent result, and four-minute handle-time result.
+- **REWRITE L21:** “The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) surveys the available tooling. It does not decide what a customer-support system should persist or discard.”
+- **REWRITE L94, scanner false positive:** Replace the heading with “The Retrieval Problem to Solve First.”
+- **REWRITE L110:** “Correct retrieval can still produce a subtler failure. An agent may retrieve the right episode and attribute facts from it incorrectly.”
+
+### `agentic-workflow-playbook.md` (4)
+
+- **KEEP L1, L7, L62, and L122:** These lines describe Ninad's current agent-assisted writing and engineering workflow. They are earned process claims, and the repository's planning, review, and commit artifacts make the workflow checkable.
+
+### `how-memory-works-in-hyperagents.md` (4)
+
+- **CUT L18:** Keep the explanation of what memory buys; remove the claimed personal runner and unevidenced 500-turn result.
+- **REWRITE L179:** “A smaller model can handle gist extraction when its output is checked against the fields the memory record requires. The compressed entry should preserve what happened and its outcome without retaining the raw output.”
+- **CUT L189:** Remove the personal 85-percent and 95-percent summarization policy, including the five-turn detail. No implementation artifact supports it.
+- **KEEP L341, false positive:** The state article appears in a reading list and is not used as proof.
+
+### `voice-ai-latency-gemini-benchmark.md` (4)
+
+- **KEEP L50, false positive:** The KV-cache article is linked for a related context-management mechanism, not for a result.
+- **REWRITE L116:** “The [open-source AI memory review](/articles/state-of-open-source-memory-2026/) compares structured memory designs with raw context. Read it as an architecture survey, not as benchmark evidence for a voice pipeline.”
+- **KEEP L145, false positive:** The link points to an explanation of the broader KV-cache problem and makes no result claim.
+- **KEEP L157, false positive:** “Can I run” is an FAQ question, not a first-person action.
+
+### `ai-memory-management-for-llms.md` (3)
+
+- **KEEP L380, false positive:** The state article is offered as a broader industry view, not evidence for a number.
+- **CUT L398:** Remove the unsupported 200-session benchmark claim and the entire results table it introduces.
+- **CUT L413:** Remove the derived 310-millisecond voice claim and the promise that BEAM provides hardware throughput results. Both depend on the unsupported table.
+
+### `best-llms-for-coding.md` (3)
+
+- **REWRITE L5:** “This review separates coding work into four engineering personas, from autonomous changes to repository-scale reasoning. The persona that fits your work decides which model evidence matters, and the rest of this post walks through each one.”
+- **REWRITE L11:** “Real engineering happens at the repository level. The [Claude Code and Gemini CLI comparison](/articles/agentic-cli-benchmarks/) is a walkthrough of an autonomous refactoring task, not reproducible benchmark evidence.”
+- **REWRITE L95:** “Benchmark totals can hide a reasoning failure that matters in code. The [lambda-calculus article](/articles/lambda-calculus-ai-reasoning-benchmark/) explains a composition-level test, but it does not provide a reproducible model comparison.”
+
+### `context-windows-vs-memory.md` (3)
+
+- **CUT L29:** Remove the RTX 4090 measurement and its 512-token, 4,096-token, and 32K-token cost sequence. There is no artifact, and the named hardware makes the claim directly falsifiable.
+- **CUT L87:** Remove the personal 50K-token test and all recall percentages derived from it. Keep only the labeled analogy: “The effect is similar to skimming a long contract: the first clause and signature line stay visible while a clause buried in the middle is easier to miss.”
+- **REWRITE L317:** “For a conceptual treatment of the long-context problem, read [the BEAM memory article](/articles/beam-memory-benchmark/); it does not provide reproducible benchmark data. For implementation patterns, read [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).”
+
+### `from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md` (3)
+
+- **KEEP L1, L13, and L64:** These are career history, the site's actual command-verification practice, and earned editorial judgment. None claims a benchmark or an unrecorded client event.
+
+### `memory-serialization-between-sessions.md` (3)
+
+- **REWRITE L1:** “An agent can handle every conversation in one process and still lose its state at the next restart. That is a persistence failure, not a model failure.”
+- **REWRITE L75:** “Schema mismatch is a common persistence failure. The serialized state can outlive the schema that originally wrote it.”
+- **REWRITE L81:** “Version the schema explicitly. The serialized state should carry a version field, and deserialization should migrate old versions before the agent processes anything.”
+
+### `prompt-caching-what-it-is-and-when-the-math-works.md` (3)
+
+- **REWRITE L3:** “A stable system block and unchanged tool definitions are repeated input on every turn. Prompt caching can avoid processing that prefix from scratch when the provider's matching rules are satisfied.”
+- **KEEP L11, false positive:** The KV-cache article is linked for the mechanism's definition, not benchmark proof.
+- **REWRITE L36:** “A timestamp interpolated near the start of a system prompt changes the prefix on every request. That placement can prevent later requests from matching the cached prefix.”
+
+### `rag-vs-memory.md` (3)
+
+- **KEEP L306, L341, and L342, false positives:** All three links appear in reading lists. None is cited as proof for a claimed result.
+
+### `time-to-first-token-ttft.md` (3)
+
+- **KEEP L23, false positive:** The KV-cache link names the mechanism constructed during prefill; it is not evidence for a measurement.
+- **REWRITE L42:** “Think of it like a shuttle bus that only leaves once every seat is full: efficient per passenger, miserable if you are the one who boarded first and the bus refuses to move. Smaller batches or dedicated compute let interactive requests start instead of waiting for a pooled batch.”
+- **REWRITE L54:** “Reaching for a smaller distilled model is the highest-impact move when the quality bar leaves room for it. A two-model handoff can let a fast model acknowledge the request while a larger model handles the reasoning, but the transition must not present generated filler as a substantive answer.”
+
+### `token-counting-isnt-optional-a-practical-guide-to-llm-cost-control.md` (3)
+
+- **REWRITE L3:** “Every character you send and every character the model writes back moves the meter, so a chatty system prompt or a bloated retrieval payload quietly multiplies your bill on every request. Appending the full conversation history makes each new turn pay to process earlier messages again.”
+- **REWRITE L15:** “Whitespace counts too, which surprises people. Exported HTML with trailing spaces and deep indentation can spend tokens before the useful text begins.”
+- **REWRITE L52:** “Serialization format changes the token count, but the cheaper format depends on the tokenizer and the data. Count the actual JSON and YAML payloads before choosing between them.”
+
+### Two-hit articles
+
+- **`the-taxonomy-of-ai-agents.md`: KEEP L23, false positive**, because the state article is further reading; **REWRITE L38:** “A docs Q&A box that answers from whatever you pasted into the prompt and nothing else is the canonical case. The [agentic CLI comparison](/articles/agentic-cli-benchmarks/) describes two agents in this category, but it is not reproducible benchmark evidence.”
+- **`llm-inference-optimization.md`: REWRITE L46:** “Recent work on ‘importance-based’ eviction drops tokens the model attended to least, but the operational trade-off still depends on the workload. The [KV cache eviction article](/articles/kv-cache-eviction-accuracy/) explains the mechanism rather than supplying benchmark evidence.” **REWRITE L104:** “A consumer GPU can suit local development while remaining too small for a large model and long context together. Check the model weights, quantization, and KV-cache budget against available memory before choosing the hardware.”
+- **`local-wasm-vector-benchmarks.md`: KEEP L83, false positive**, because the embedding article is conceptual reading; **KEEP L126, false positive**, because “Can I run” is an FAQ question.
+- **`mcp-server-setup-guide.md`: REWRITE L5:** “Write a tool once, expose it through a standard interface, and MCP-aware clients can call it without a separate integration for each one. That portability is the useful promise to test when choosing MCP.” **REWRITE L115:** “The same server configuration can work across MCP-aware clients, which is the portability paying off. The [agent harness](/articles/agent-harnesses/) is where that server fits into a larger control loop.”
+- **`memory-for-voice-ai-agents.md`: KEEP L208 and L252, false positives.** Both unbacked pages are offered as further reading, not proof.
+- **`memory-hierarchy-in-ai-systems.md`: REWRITE L221:** “Context windows have a fixed capacity, and published long-context research has found weaker retrieval from the middle of long inputs. The [BEAM memory article](/articles/beam-memory-benchmark/) discusses that limitation, but it does not provide reproducible benchmark evidence of its own.” **REWRITE L237:** “User-specific memory belongs behind isolation at the storage layer, not just a `WHERE` clause in application code that one bug can bypass. Project-scoped stores can enforce that boundary without relying on every query to apply the right filter.”
+- **`model-context-protocol-explained.md`: KEEP L102, false positive**, because it is an FAQ question; **REWRITE L104:** “Yes. A local MCP server can give an AI client scoped access to a development environment or private files without exposing the server publicly.”
+- **`seo-for-technical-documentation.md`: KEEP L1 and L171.** The repository contains the auditor, and its external Cloudflare target reproduced 12 passes in the earlier repair audit.
+- **`short-term-memory-for-ai-agents.md`: KEEP L170 and L277, false positives.** Both unbacked links are further reading rather than claimed evidence.
+- **`speculative-decoding-explained.md`: KEEP L5, false positive**, because the KV-cache article explains the named mechanism; **REWRITE L80:** “Standard speculative decoding needs a separate draft model, which means operators must serve and version two compatible checkpoints. Newer techniques avoid that overhead by folding the drafting step into the large model.”
+- **`state-of-ai-agent-memory-2026.md`: KEEP L160 and L194, false positives.** Both links are explicitly framed as reading, not reproducible evidence.
+
+### One-hit articles
+
+- **KEEP, false positive:** `why-ai-agents-keep-failing-in-production.md` L88 links to a landscape article as reading.
+- **REWRITE:** `agent-loop-anatomy.md` L1 becomes “When an agent starts misbehaving, the loop is the first useful boundary to inspect. The literature describes it as a single construct.”
+- **KEEP, false positive:** `lambda-calculus-ai-reasoning-benchmark.md` L86 uses the state article to define an adjacent subject, not prove a result.
+- **REWRITE:** `agent-vs-ai-assistant.md` L34 becomes “For example, an agent without a retry limit may keep calling a flaky search tool after a transient timeout. The problem is the missing stop condition, not the model's ability to issue the call.”
+- **REWRITE:** `multi-agent-vs-single-agent-tradeoffs.md` L17 becomes “A single-agent loop can still fail at its tool boundary rather than in the loop architecture. [Production AI agent error patterns](/articles/production-ai-agent-errors/) explains those tool-call failures.”
+- **KEEP, false positive:** `asymmetric-retrieval-agent-memory.md` L70 offers the state article as a broader map.
+- **KEEP:** `api-documentation-template-the-pages-every-api-needs.md` L1 points to the page outline Ninad built and the repository contains.
+- **KEEP, false positive:** `beam-memory-benchmark.md` L21 uses the KV-cache article to distinguish mechanisms, not prove a measurement.
+- **KEEP:** `coding-agent-setup-that-works.md` L118 describes Ninad's current, repository-visible workflow.
+- **REWRITE:** `documentation-accessibility-checklist.md` L3 becomes “Use this release checklist when you need to decide what to automate, what needs manual testing, and which failure should block a documentation deploy. The [documentation accessibility checker](/static/downloads/documentation-accessibility-checker.zip) automates parser-visible checks so human review can focus on the experience a parser cannot judge.” The self-authored fixtures are demonstrations, not evidence.
+- **KEEP:** `documentation-style-guide-template.md` L3 points to the template Ninad built and the repository contains.
+- **KEEP, false positive:** `fine-tuning-vs-rag-for-agent-memory.md` L45 links to a metrics explanation as preparatory reading.
+- **KEEP, false positive:** `how-memory-works-in-claude-code.md` L174 matches “we migrated” inside an example configuration quote.
+- **REWRITE:** `how-memory-works-in-deerflow.md` L5 becomes “What you get is an architecture you can audit and debug. A single state file can make a failed run easier to trace than interleaved logs from several agents.”
+- **KEEP, false positive:** `hybrid-search-bm25-vector-search.md` L150 links to conceptual embedding-model reading.
+- **KEEP:** `llms-txt-examples-real-files-audited.md` L1 points to the live validator Ninad built.
+- **KEEP, false positive:** `mixture-of-experts-explained.md` L115 is an FAQ question.
+- **KEEP, false positive:** `rag-evaluation-metrics-what-actually-matters.md` L191 links to conceptual embedding-model reading.
+- **KEEP, false positive:** `reranking-in-rag-why-your-top-k-results-are-probably-wrong.md` L17 links to conceptual embedding-model reading.
+- **REWRITE:** `semantic-caching-rag-optimization.md` L104 becomes “Similarity thresholds do not transfer safely between embedding models. Calibrate the threshold on the target corpus each time the model changes.”
+- **REWRITE:** `structured-outputs-llms-json-mode-function-calling.md` L65 becomes “Schema-constrained output can make a defensive parsing wrapper redundant, but only observed failures in the target workflow justify removing it. A model name alone is not that evidence.”
+- **KEEP:** `technical-content-as-a-moat-the-long-game-for-developer-tools.md` L105 is an earned judgment from Ninad's work as an engineer turned technical writer.
+- **KEEP:** `technical-documentation-template.md` L5 points to a repository artifact Ninad built.
+- **KEEP, false positive:** `technical-writing-examples.md` L139 identifies one of Ninad's articles as an example; it does not use the article as benchmark evidence.
+- **REWRITE:** `what-a-documentation-homepage-must-help-users-do.md` L38 becomes “The [documentation homepage route audit](/static/downloads/documentation-homepage-audit/README.md) turns the four route jobs into explicit fields a team can inspect. Its included fixture demonstrates the expected shape; it does not prove that the routes work for real readers.”
+- **KEEP:** `what-makes-a-page-extractable-by-answer-engines.md` L3 points to the live checker Ninad built and accurately describes its limits.
+
+### Repository-wide totals
+
+The 118 candidates classify as:
+
+- **KEEP: 52**
+- **REWRITE: 59**
+- **CUT: 7**
+
+The scanner produced **36 false positives**, all counted within KEEP. Most are unbacked-article links used as reading rather than evidence; the rest are FAQ headings, a heading matched by a verb, or first-person text inside an example quote.

@@ -28,7 +28,7 @@ Repeat. When it works, it works cleanly.
 
 When it fails, you get one trace, one error, one place to look.
 
-For months I ran single-agent systems in production without incident. The failures I hit were almost always in [tool call reliability](/articles/production-ai-agent-errors/), not the loop architecture itself.
+A single-agent loop can still fail at its tool boundary rather than in the loop architecture. [Production AI agent error patterns](/articles/production-ai-agent-errors/) explains those tool-call failures.
 
 An agent would call a search tool that returned an empty array, or a database query that timed out after thirty seconds, and it would either retry sensibly or sit there spinning. Whatever broke, it broke in one place I could point at.
 

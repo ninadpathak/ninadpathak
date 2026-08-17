@@ -18,7 +18,7 @@ Structured context passing is what I call the way DeerFlow organizes memory. Rat
 
 Each agent in a workflow receives exactly what it needs at the moment it needs it, nothing more.
 
-What you get is an architecture you can audit, debug, and reason about at scale. The first time I traced a failed run by opening a single JSON file in my editor, instead of grepping through interleaved logs from five agents, the appeal was obvious.
+What you get is an architecture you can audit and debug. A single state file can make a failed run easier to trace than interleaved logs from several agents.
 
 Anyone who has watched an opaque agent system lose track of what happened three steps ago will recognize the relief.
 

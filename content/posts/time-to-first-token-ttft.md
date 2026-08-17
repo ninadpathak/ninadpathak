@@ -53,7 +53,7 @@ Interactive chat is the opposite job: a single human is waiting, and low TTFT is
 
 Batching is where the tension lives. Cramming more requests into one batch lets the GPU do more arithmetic per memory load, which is great for throughput, and it means your request now waits for the whole batch to assemble and run before its first token comes back.
 
-Think of it like a shuttle bus that only leaves once every seat is full: efficient per passenger, miserable if you are the one who boarded first and the bus refuses to move. To keep TTFT low I run smaller batches, or I carve off dedicated compute that processes interactive requests the moment they arrive instead of pooling them.
+Think of it like a shuttle bus that only leaves once every seat is full: efficient per passenger, miserable if you are the one who boarded first and the bus refuses to move. Smaller batches or dedicated compute let interactive requests start instead of waiting for a pooled batch.
 
 Continuous batching softens this on modern inference servers, where new requests can slot into a running batch instead of waiting for a fresh one to form. That helps a lot, and I still have to set the maximum batch size deliberately, because letting it grow without bound trades away the very TTFT I am trying to protect.
 
@@ -65,7 +65,7 @@ Before any tuning, model size sets the floor on TTFT. A 7B parameter model will 
 
 Picture prefill as reading a book aloud before you can answer a question about it: the thicker the model, the longer that silent read takes regardless of how clever the rest of your pipeline is. No amount of clever batching changes that baseline, which is why I treat model choice as the first knob I reach for, not the last.
 
-Reaching for a smaller distilled model is the highest-impact move I know when my quality bar leaves room for it. On one assistant I built, I let a small fast model produce the immediate acknowledgement and opening sentence the user sees, then handed the actual heavy reasoning to a larger model running in the background and streamed its output in behind the first model's.
+Reaching for a smaller distilled model is the highest-impact move when the quality bar leaves room for it. A two-model handoff can let a fast model acknowledge the request while a larger model handles the reasoning, but the transition must not present generated filler as a substantive answer.
 
 The user gets a word on screen almost instantly, and the depth still arrives, so nobody feels the larger model's slower start.
 

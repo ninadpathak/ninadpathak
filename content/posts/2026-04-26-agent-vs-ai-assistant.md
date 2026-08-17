@@ -45,7 +45,7 @@ Simple as the split sounds, it has real consequences for how you build, how you 
 
 Building inside the loop means the system can surprise you, which is the point, and it also means the system can fail in ways that are hard to predict and hard to observe. I wrote about the [production errors I keep seeing](/articles/production-ai-agent-errors/) with agent systems, and the root cause in almost every case was that the team did not fully account for what happens when the system makes its own decisions about tool use, retry behavior, and when to escalate.
 
-One agent I debugged kept re-running a flaky search tool nine times on a transient timeout, burning tokens and minutes before it gave up, because nobody had told it that two tries was plenty.
+For example, an agent without a retry limit may keep calling a flaky search tool after a transient timeout. The problem is the missing stop condition, not the model's ability to issue the call.
 
 Latency and cost ride along with every loop you add. Each iteration through it costs a model call.
 

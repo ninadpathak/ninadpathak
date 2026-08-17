@@ -16,7 +16,7 @@ Around week three, the problem shows up. After running long enough, the context 
 
 Either way, something has broken in how the agent manages memory over time.
 
-I ran into this with a codebase navigation agent I built last year. The agent needed to remember which files it had already analyzed, what it found in each, and which paths were dead ends.
+A codebase navigation agent needs to remember which files it has analyzed, what it found, and which paths were dead ends. Keeping every raw tool response is a poor way to preserve that state.
 
 After about 200 interactions, the memory payload was eating 40% of the context window, and the agent spent more tokens looking up memory than doing the analysis I had asked for.
 
@@ -51,7 +51,7 @@ The compression layer I am describing here sits on top of it and decides how muc
 
 ## The Three Approaches That Work
 
-After testing several compression strategies, I found three that hold up in production.
+Three compression strategies are useful in production because each preserves a different kind of information.
 
 ### Summary-Based Compression
 
@@ -61,7 +61,7 @@ Your savings track summary length directly. Squeezing a 512-token memory down to
 
 A sloppy summary drops the one detail you needed later.
 
-I tested this with a customer support agent that had to remember bug reports. The original memory items ran 300 to 500 tokens each, describing a bug and its resolution.
+Consider a customer support agent that must remember bug reports. Each memory item can preserve the bug and its resolution without retaining the full conversation that produced them.
 
 Summarized to 50 tokens, the agent still recognized the bug type but lost the specific steps to reproduce it. It could route a ticket to the right queue and never walk an engineer through the repro.
 
@@ -125,7 +125,7 @@ A one-off failure that cost the user three hours of debugging is worth keeping v
 
 No compression strategy is free. You trade recall for capacity, and each one drops something on the way.
 
-The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) shows that trade-off playing out across the memory tooling ecosystem, where most production teams I have seen settle on tiered storage rather than committing to one compression policy.
+The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) catalogs tiered storage approaches, but it is not benchmark evidence that one compression policy wins. The choice still depends on what each memory tier must preserve.
 
 Summary-based compression sheds nuance, hierarchical forgetting sheds older detail, relevance-gated retention sheds coverage in the quiet corners of the input space. Your right choice depends on what your agent can afford to forget.
 

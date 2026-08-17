@@ -17,13 +17,13 @@ Evaluating models for software engineering stopped being about snippet generatio
 
 A model that aces a Python quiz can still fall apart the moment you ask it to rename a function used across forty files or to split a monolithic service into two without breaking the test suite.
 
-Across four distinct engineering personas I benchmarked the leading models, weighing agentic autonomy against algorithmic complexity, and cost efficiency against repository-scale context management. The persona that fits your work decides which model you should reach for, and the rest of this post walks through each one.
+This review separates coding work into four engineering personas, from autonomous changes to repository-scale reasoning. The persona that fits your work decides which model evidence matters, and the rest of this post walks through each one.
 
 ## Why SWE-bench Verified is the only metric that matters
 
 HumanEval and the other snippet-based benchmarks are obsolete. They measure whether a model can solve a self-contained puzzle like "reverse a linked list," which is maybe two percent of what I actually do in a day.
 
-Real engineering happens at the repository level, which is exactly what I tested in my [head-to-head benchmark of Claude Code and Gemini CLI on autonomous refactoring](/articles/agentic-cli-benchmarks/).
+Real engineering happens at the repository level. The [Claude Code and Gemini CLI comparison](/articles/agentic-cli-benchmarks/) is a walkthrough of an autonomous refactoring task, not reproducible benchmark evidence.
 
 SWE-bench Verified gives the most honest signal I have found today. To pass, a model has to resolve an actual GitHub issue end to end: read its way around an unfamiliar codebase, trace a bug back to the line that causes it, write a patch, and prove the patch holds by running the existing tests.
 
@@ -107,7 +107,7 @@ Are you running an agent unattended on multi-file pull requests? Reach for Claud
 Do you need to reason over an entire repository at once, or are you paying per token at high volume? That points to Gemini 3.1 Pro and DeepSeek V4 respectively.
 
 
-Benchmark totals can hide a reasoning failure that matters in code. A [composition-level lambda-calculus test](/articles/lambda-calculus-ai-reasoning-benchmark/) shows how to compare models on an answer that can be checked step by step instead of trusting one leaderboard number.
+Benchmark totals can hide a reasoning failure that matters in code. The [lambda-calculus article](/articles/lambda-calculus-ai-reasoning-benchmark/) explains a composition-level test, but it does not provide a reproducible model comparison.
 
 ## FAQ
 

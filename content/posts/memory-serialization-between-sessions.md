@@ -12,7 +12,7 @@ tags:
 title: 'Memory Serialization: How Agents Persist State Across Sessions'
 ---
 
-The first time I deployed an agent to production, I watched it handle 200 conversations perfectly. Then I restarted the service for a routine deployment at 2 AM.
+An agent can handle every conversation in one process and still lose its state at the next restart. That is a persistence failure, not a model failure.
 
 The next morning the agent greeted the same users as if it had never seen them, asking one person their timezone for the second time after they had spelled it out the day before. No memory of preferences they had confirmed.
 
@@ -86,13 +86,13 @@ The resulting state, though, is small, fast to load, and semantically meaningful
 
 ## When Serialization Fails in Practice
 
-Schema mismatch is the failure mode I run into most often in production. You designed your serialization schema six months ago, then the agent grew.
+Schema mismatch is a common persistence failure. The serialized state can outlive the schema that originally wrote it.
 
 You added new capabilities, maybe a field for tracking which integrations the user connected. The new code writes state using keys that did not exist in the original schema, so old sessions deserialize with those keys missing.
 
 The agent does not crash. It quietly behaves as if certain facts were never established, like greeting a long-time user who once confirmed they were on the enterprise plan as a brand-new free-tier signup.
 
-Versioning the schema explicitly is how I handle this. The serialized state carries a schema version field, and on deserialization I run a migration function that maps old versions onto the current schema before the agent processes anything.
+Version the schema explicitly. The serialized state should carry a version field, and deserialization should migrate old versions before the agent processes anything.
 
 A database migration does the same job for table columns, and the discipline transfers directly.
 

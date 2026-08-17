@@ -28,13 +28,11 @@ What I want to close in this article is exactly that hole. I will walk through t
 
 A customer support agent that starts each session with zero memory has to rebuild context from scratch every time. That means asking the customer to re-explain their problem, re-verify their account, and re-establish the history of what has already been tried.
 
-Over a two-week period on a live deployment, I measured that 34% of returning customers had to repeat information they had already provided in a previous session. Those repeat explanations added an average of 4 minutes to handle time per session.
-
 Across 200 returning customers per day, that is 800 minutes of wasted time per day, roughly 13 hours of agent capacity consumed by a memory problem.
 
 A larger context window does not fix this, because the context window starts empty every session no matter how big it is. What fixes it is a persistent memory layer that survives sessions and gives the agent access to what happened before.
 
-The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) documents how the tooling for this has matured, but the architectural decision of what to persist and what to discard still belongs to you as the system designer.
+The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) surveys the available tooling. It does not decide what a customer-support system should persist or discard.
 
 ## The Memory Architecture I Used
 
@@ -107,7 +105,7 @@ The version field matters. When two sessions run concurrently or when a support 
 
 I use last-write-wins with version checking, which is simple but has edge cases. A more robust approach would use operational transforms, but that adds complexity that most customer support deployments do not need.
 
-## The Retrieval Problem I Hit First
+## The Retrieval Problem to Solve First
 
 My first implementation retrieved all episodes for a customer at session start and injected them into context. For customers with 5-10 episodes, that worked fine.
 
@@ -123,7 +121,7 @@ For example, a customer who says "my billing cycle got messed up after I upgrade
 
 ## The Attribution Problem: When Memory Points to the Wrong Thing
 
-Once I had retrieval working, I hit a subtler problem. The agent would retrieve an episode and attribute facts from it incorrectly.
+Correct retrieval can still produce a subtler failure. An agent may retrieve the right episode and attribute facts from it incorrectly.
 
 A customer had an episode from 8 months ago where they reported a login issue. The issue was actually caused by two-factor authentication being enabled on their account without their knowledge.
 

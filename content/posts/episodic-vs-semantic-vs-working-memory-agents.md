@@ -12,7 +12,7 @@ tags:
 title: 'Episodic, Semantic, and Working Memory in AI Agents: A Practical Map'
 ---
 
-For two weeks I debugged an agent that kept forgetting what it had just done. The logs looked fine, the retrieval pipeline was fast, and the context window was spacious.
+An agent can forget what it just did even when its logs look normal, retrieval is fast, and the context window has room.
 
 The problem was a category error: the agent was storing episodic memories in a semantic memory system, and semantic facts in episodic storage. Everything was there.
 
@@ -28,7 +28,7 @@ Whatever the model has right now is working memory. For an LLM, that means the c
 
 I think of it as the agent's immediate scratchpad: what was said in the last few turns, what the current task is, what tools are available.
 
-Fast and volatile, working memory disappears when the context resets. I ran into that wall building a long-running customer support agent.
+Fast and volatile, working memory disappears when the context resets. Any long-running agent hits that boundary unless it persists state elsewhere.
 
 Between turns, the agent would lose track of what the customer had already been told and re-offer a refund it had offered two messages earlier. A better retrieval system did nothing for it.
 
@@ -81,7 +81,7 @@ Most agent frameworks expose a single "memory" interface and call it done. You h
 
 That decision usually rides on token budget or retrieval latency, never on what kind of information you just handed it.
 
-Reviewing a widely used agent framework last year, I found every user message getting stored in episodic memory regardless of content. The agent's learned knowledge about Python, Git, and deployment pipelines sat in the same bucket as "ok thanks, try that again."
+Storing every user message in episodic memory regardless of content mixes durable knowledge with conversational debris. Knowledge about Python, Git, and deployment pipelines should not sit in the same bucket as "ok thanks, try that again."
 
 Retrieval came back noisy because episodic memory had been flooded with transient chatter.
 
@@ -135,6 +135,6 @@ These three memory types are no academic distinction. They carry different infor
 
 An agent that files a learned fact the same way it files a past event will fail in predictable ways. An agent that routes information by type stays easier to debug and more reliable in production.
 
-My earlier hierarchy post did not go far enough in pulling these types apart, which is why I wrote this one. The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) covers the wider landscape.
+My earlier hierarchy post did not go far enough in pulling these types apart, which is why I wrote this one. For a broader inventory of memory approaches, read [the state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/).
 
 What I cared about here is the set of architectural decisions that determine whether your agent's memory actually works.

@@ -55,7 +55,7 @@ That rule applies to links, headings, and navigation labels. Use the same langua
 
 ## Test the homepage as a route inventory
 
-I built a small [documentation homepage route audit](/static/downloads/documentation-homepage-audit/README.md) to turn this into a check instead of a design opinion. The fixture requires four route jobs, unique labels, a destination, and a named audience.
+The [documentation homepage route audit](/static/downloads/documentation-homepage-audit/README.md) turns the four route jobs into explicit fields a team can inspect. Its included fixture demonstrates the expected shape; it does not prove that the routes work for real readers.
 
 ```bash
 python3 audit_homepage_routes.py example-homepage-routes.json

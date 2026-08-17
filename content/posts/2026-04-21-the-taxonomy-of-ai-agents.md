@@ -49,7 +49,7 @@ These are the simplest agents. You send a prompt, the model generates a response
 
 Plenty of chatbots and assistants you see in production today are reactive information agents. They hold no state between calls, and they reach for no tools unless the tool call rides inside that single request-response cycle.
 
-A docs Q&A box that answers from whatever you pasted into the prompt and nothing else is the canonical case. The [agentic-cli-benchmarks](/articles/agentic-cli-benchmarks/) I published last month tested two agents in this category.
+A docs Q&A box that answers from whatever you pasted into the prompt and nothing else is the canonical case. The [agentic CLI comparison](/articles/agentic-cli-benchmarks/) describes two agents in this category, but it is not reproducible benchmark evidence.
 
 Their failure mode is easy to spot: they hallucinate or produce generic filler when the answer was never in their training data, so a question about your internal pricing tiers gets you a confident, wrong number. Retrieval augmentation helps, and once you bolt it on you are halfway to a more complex architecture anyway.
 

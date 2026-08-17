@@ -130,7 +130,7 @@ A waiter who says "let me check on that" buys the kitchen time without the table
 
 ## The context window memory tax
 
-As I documented in my [open source AI memory review](/articles/state-of-open-source-memory-2026/), raw context windows are a poor substitute for structured memory. The same principle applies to voice agents.
+The [open-source AI memory review](/articles/state-of-open-source-memory-2026/) compares structured memory designs with raw context. Read it as an architecture survey, not as benchmark evidence for a voice pipeline.
 
 Long conversation history increases prompt-processing work and can slow the first token. Summaries and selective recall can bound that cost, but both need tests for lost constraints.
 
