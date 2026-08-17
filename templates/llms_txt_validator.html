@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+
+{#
+  ============================================================================
+  TODO(copy) — ALL prose on this page is placeholder and must be commissioned.
+  Every slot below carrying a TODO(copy) marker is factual scaffolding written
+  only so the page builds and functions. None of it is search copy.
+  The exact brief, with keyword targets and character limits, is in
+  planning/research/LLMS-TXT-COPY-BRIEF.md.
+  ============================================================================
+#}
+
+{# TODO(copy) 1: <title>, 50-60 chars, primary target "llms.txt validator" #}
+{% block title %}llms.txt Validator | Ninad Pathak{% endblock %}
+
+{# TODO(copy) 2: meta description, 140-155 chars #}
+{% block description %}Check an llms.txt file against the llms.txt v2 spec. Paste the file or enter a domain, and get graded findings. Runs in the browser. No signup.{% endblock %}
+
+{% block canonical %}/llms-txt-validator/{% endblock %}
+{% block og_url %}/llms-txt-validator/{% endblock %}
+
+{# TODO(copy) 3: og:title, under 60 chars #}
+{% block og_title %}llms.txt Validator{% endblock %}
+
+{# TODO(copy) 4: og:description, 110-130 chars #}
+{% block og_description %}Validate an llms.txt file against the spec. Paste a file or check a live domain, and get graded findings.{% endblock %}
+
+{# TODO(copy) 5: twitter:title, under 60 chars #}
+{% block tw_title %}llms.txt Validator{% endblock %}
+
+{# TODO(copy) 6: twitter:description, under 120 chars #}
+{% block tw_desc %}Validate an llms.txt file against the spec. Free, browser-based, no signup.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/linter.css">
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["SoftwareApplication", "WebApplication"],
+  "name": "llms.txt Validator",
+  "url": "{{ site.url }}/llms-txt-validator/",
+  "description": "Validates an llms.txt file against the llms.txt v2 specification and returns graded findings.",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "Validator",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Validate a pasted llms.txt file entirely in the browser",
+    "Fetch and validate the llms.txt file published on a live domain",
+    "Graded findings separated into spec violations, warnings, and notes",
+    "Every finding states whether it rests on the specification or on convention"
+  ],
+  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
+  "publisher": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}" },
+  "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
+  "isRelatedTo": {
+    "@type": ["SoftwareApplication", "WebApplication"],
+    "name": "Automated llms.txt Generator",
+    "url": "{{ site.url }}/llms-txt-generator/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the llms.txt spec actually require?",
+      "acceptedAnswer": { "@type": "Answer", "text": "One H1 naming the project or site. The llms.txt v2 proposal calls that the only required section. A summary blockquote, free-form detail, and H2 file-list sections are all permitted and none of them are mandatory, which is why this validator reports most issues as warnings rather than errors." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a pasted llms.txt file uploaded anywhere?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Pasted text is validated by JavaScript in the page and is never transmitted. Only the domain check contacts the server, because a browser cannot read a file on another origin, and that request carries the domain and nothing else." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where should an llms.txt file be published?",
+      "acceptedAnswer": { "@type": "Answer", "text": "At the root path /llms.txt, or at any subpath such as /docs/llms.txt. A file covers the URLs under its own path, and where more than one applies an agent should use the most specific one." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does an llms.txt file control AI crawlers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It is a discovery and context file read on demand, not an access-control mechanism. Crawler permissions are set in robots.txt, and the citation and training user agents are separate per platform." }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">// Tool</div>
+    {# TODO(copy) 7: H1, must contain "llms.txt validator" #}
+    <h1>llms.txt Validator</h1>
+    {# TODO(copy) 8: lead paragraph, 2 sentences #}
+    <p class="lead">Paste an llms.txt file or enter a domain. Get graded findings against the llms.txt v2 spec, with each one marked as a spec requirement or a convention.</p>
+  </div>
+</section>
+
+<section class="tool-section">
+  <div class="container">
+    <form class="scan-form" id="validatorDomainForm">
+      <label class="form-field form-field-grow" for="validatorDomain">
+        <span>Check a live domain</span>
+        <input id="validatorDomain" name="domain" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="example.com">
+      </label>
+      <button class="btn btn-primary scan-submit" type="submit">Fetch llms.txt &rarr;</button>
+    </form>
+    {# TODO(copy) 9: one-sentence hint below the domain field #}
+    <p class="tool-hint">Fetches the file at the domain root and loads it below. Pasting a file instead keeps it in your browser.</p>
+    <div class="tool-status" id="validatorDomainStatus" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="linter-section">
+  <div class="container">
+    <div class="linter-layout">
+
+      <div class="linter-panel">
+        <div class="linter-panel-header">
+          <span class="linter-file-label">llms.txt</span>
+          <div class="linter-panel-header-actions">
+            <span class="linter-shortcut">&#8984;&crarr; to run</span>
+            <button class="linter-sample-btn" type="button" id="loadValidatorSample">load sample</button>
+          </div>
+        </div>
+
+        <div class="linter-editor-container">
+          <div
+            id="validatorInput"
+            class="linter-editor"
+            contenteditable="true"
+            spellcheck="false"
+            role="textbox"
+            aria-multiline="true"
+            aria-label="llms.txt file contents"
+          ></div>
+        </div>
+
+        <div class="linter-panel-footer">
+          <span class="linter-char-count" id="validatorCharCount">0 lines</span>
+          <button class="btn btn-primary" type="button" id="validateBtn">Validate &rarr;</button>
+        </div>
+      </div>
+
+      <div class="linter-panel">
+        <div class="linter-panel-header">
+          <span class="linter-file-label">report.log</span>
+          <div class="linter-panel-header-actions">
+            <button class="linter-action-btn" type="button" id="clearValidator">clear</button>
+            <button class="linter-action-btn" type="button" id="copyValidatorResults">copy</button>
+          </div>
+        </div>
+
+        <div class="linter-results-container">
+          <div class="linter-empty" id="validatorEmpty">
+            <div class="linter-empty-inner">
+              <div class="linter-empty-icon">{ }</div>
+              {# TODO(copy) 10: empty-state line #}
+              <p>Findings appear here once you validate a file.</p>
+            </div>
+          </div>
+
+          <div class="linter-results-content" id="validatorResults" hidden>
+            <div class="lint-score-bar" id="validatorScoreBar">
+              <div class="lint-score-left">
+                <div class="lint-score-number" id="validatorScore">--</div>
+                <div>
+                  <span class="lint-grade" id="validatorGrade">-</span>
+                  <span class="lint-grade-desc" id="validatorGradeDesc"></span>
+                </div>
+              </div>
+              <div class="lint-score-stats" id="validatorStats"></div>
+            </div>
+
+            <div id="validatorFindings"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="linter-rules-section">
+  <div class="container">
+    <div class="linter-rules-header">
+      <div class="label">// Rules</div>
+      {# TODO(copy) 11: H2 for the rules reference #}
+      <h2>What gets checked</h2>
+    </div>
+    <div class="linter-rules-grid">
+
+      <div>
+        <div class="lint-severity-badge lint-severity-error">error</div>
+        {# TODO(copy) 12: rule descriptions below are factual and may stand, but
+           review for voice. The rule names themselves must not change: they are
+           asserted by tests/test_llms_txt_validator.py. #}
+        <ul class="linter-rule-list">
+          <li><strong>Missing H1</strong> &mdash; The spec calls an H1 naming the project or site its only required section.</li>
+          <li><strong>Second H1</strong> &mdash; One H1 per file. File-list sections are delimited by H2.</li>
+          <li><strong>Content before the H1</strong> &mdash; The order is fixed: optional byte-order mark, H1, then the summary.</li>
+          <li><strong>Headings in the detail region</strong> &mdash; Between the summary and the first H2, the spec allows any markdown except headings.</li>
+          <li><strong>Nested headings in a section</strong> &mdash; File lists sit under H2 only.</li>
+          <li><strong>List item without a link</strong> &mdash; Each file-list item requires a markdown hyperlink.</li>
+          <li><strong>Malformed link</strong> &mdash; The required form is a name in brackets followed immediately by a URL in parentheses.</li>
+          <li><strong>Empty link name or URL</strong> &mdash; Both halves of the hyperlink carry meaning for an agent.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="lint-severity-badge lint-severity-warning">warning</div>
+        <ul class="linter-rule-list">
+          <li><strong>No summary blockquote</strong> &mdash; Permitted, and it is what an agent reads to interpret the rest of the file.</li>
+          <li><strong>Summary not next to the H1</strong> &mdash; The spec places the blockquote before any free-form detail.</li>
+          <li><strong>Relative URL</strong> &mdash; An agent may read the file without knowing its base.</li>
+          <li><strong>Insecure URL</strong> &mdash; A link over http rather than https.</li>
+          <li><strong>Duplicate URL</strong> &mdash; The same target twice spends an agent's context twice.</li>
+          <li><strong>Empty section</strong> &mdash; An H2 with no list items gives an agent nothing to fetch.</li>
+          <li><strong>Repeated section name</strong> &mdash; Two sections with one name should be merged.</li>
+          <li><strong>Optional section out of place</strong> &mdash; By convention it holds links an agent can skip, so it belongs last.</li>
+          <li><strong>Prose inside a file-list section</strong> &mdash; Detail belongs above the first H2.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="lint-severity-badge lint-severity-info">info</div>
+        <ul class="linter-rule-list">
+          <li><strong>Link without notes</strong> &mdash; Notes are optional in the spec, and they tell an agent why a link is worth fetching.</li>
+          <li><strong>Byte-order mark present</strong> &mdash; Explicitly permitted, and not required.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="guide-section">
+  <div class="prose-container">
+    <div class="label">Reference</div>
+    {# TODO(copy) 13: this whole section, roughly 250-400 words. It must cover the
+       spec's ordered structure and the fact that only the H1 is required. Do not
+       claim llms.txt improves AI visibility: Google's generative-AI guidance
+       (updated 2026-07-10) states Google Search ignores these files. See
+       planning/research/seo-state-of-play-2026-08.md section 2.2. #}
+    <h2>What the spec requires</h2>
+    <p>The llms.txt v2 proposal defines an ordered structure. Only the first heading is required, which means most files are technically valid and still leave an agent guessing.</p>
+
+    <ol class="numbered-steps">
+      <li><strong>An H1 naming the project or site.</strong> The only required section.</li>
+      <li><strong>A blockquote summary.</strong> Short, and carrying what a reader needs to interpret the rest of the file.</li>
+      <li><strong>Free-form detail.</strong> Any markdown except headings.</li>
+      <li><strong>H2 file-list sections.</strong> Each item a markdown link, optionally followed by a colon and notes.</li>
+    </ol>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-list">
+      <details>
+        <summary>What does the spec actually require?</summary>
+        <p>One H1 naming the project or site. Everything else is permitted rather than mandatory, so this validator reports most issues as warnings and marks each finding as resting on the spec or on convention.</p>
+      </details>
+      <details>
+        <summary>Is a pasted file uploaded anywhere?</summary>
+        <p>No. Pasted text is validated in the page and never transmitted. The domain check is the only request that leaves the browser, and it carries the domain alone.</p>
+      </details>
+      <details>
+        <summary>Where should the file live?</summary>
+        <p>At <code>/llms.txt</code>, or at any subpath such as <code>/docs/llms.txt</code>. A file covers the URLs beneath its own path.</p>
+      </details>
+      <details>
+        <summary>Does llms.txt control AI crawlers?</summary>
+        <p>No. It is read on demand for context, not for access control. Crawler permissions belong in <code>robots.txt</code>, where the citation and training user agents differ per platform.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script src="/static/js/llms-validator-core.js"></script>
+<script src="/static/js/llms-validator.js"></script>
+{% endblock %}

@@ -610,6 +610,12 @@ class SiteBuilder:
             page="llms-txt-generator",
         )
 
+    def build_llms_txt_validator(self):
+        self.render(
+            "llms_txt_validator.html", "llms-txt-validator/index.html",
+            page="llms-txt-validator",
+        )
+
     def build_legal_pages(self, legal_pages):
         for legal_page in legal_pages:
             self.render(
@@ -658,6 +664,7 @@ class SiteBuilder:
             ("/contact/", "0.5", "yearly", None),
             ("/linter/", "0.9", "monthly", None),
             ("/llms-txt-generator/", "0.9", "monthly", None),
+            ("/llms-txt-validator/", "0.9", "monthly", None),
             ("/privacy/", "0.3", "yearly", None),
             ("/terms/", "0.3", "yearly", None),
         ]
@@ -796,12 +803,21 @@ class SiteBuilder:
                 lines.append(f"- [{title}]({base}{case['url']}): {desc}")
             lines.append("")
 
+        # Tools get their own section: they are a distinct reader intent from the
+        # articles, and an agent answering "how do I check my llms.txt" should be
+        # able to find them without reading the whole Pages list.
+        lines.append("## Tools")
+        lines.append("")
+        lines.append(f"- [llms.txt Generator]({base}/llms-txt-generator/): Scan a sitemap and generate an editable llms.txt file in the browser.")
+        lines.append(f"- [llms.txt Validator]({base}/llms-txt-validator/): Check an llms.txt file against the llms.txt v2 spec and get graded findings.")
+        lines.append(f"- [Technical Writing Linter]({base}/linter/): Paste a technical article and get a linter report on the patterns that lose readers.")
+        lines.append("")
+
         lines.append("## Pages")
         lines.append("")
         lines.append(f"- [About]({base}/about/): Background, expertise, and how I work.")
         lines.append(f"- [Articles]({base}/articles/): Documentation, DevRel, tutorials, technical writing, and developer education.")
         lines.append(f"- [Projects]({base}/projects/): Working tools and software.")
-        lines.append(f"- [llms.txt Generator]({base}/llms-txt-generator/): Create and download a valid llms.txt file in the browser.")
         lines.append(f"- [Contact]({base}/contact/): Get in touch or book a call.")
         lines.append("")
 
@@ -903,6 +919,7 @@ class SiteBuilder:
         self.build_404()
         self.build_linter()
         self.build_llms_txt_generator()
+        self.build_llms_txt_validator()
         self.build_legal_pages(legal_pages)
         self.build_glossary(glossary_terms)
 

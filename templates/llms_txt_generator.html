@@ -13,15 +13,30 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
+  "@type": ["SoftwareApplication", "WebApplication"],
   "name": "Automated llms.txt Generator",
   "url": "{{ site.url }}/llms-txt-generator/",
   "description": "Scan a website sitemap, review page metadata, and generate an editable llms.txt file.",
   "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "Generator",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" }
+  "featureList": [
+    "Discover pages from robots.txt declarations and XML sitemaps",
+    "Read each page's title, canonical URL, and meta description",
+    "Edit titles, descriptions, and sections before generating",
+    "Copy or download the generated llms.txt file"
+  ],
+  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
+  "publisher": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}" },
+  "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
+  "isRelatedTo": {
+    "@type": ["SoftwareApplication", "WebApplication"],
+    "name": "llms.txt Validator",
+    "url": "{{ site.url }}/llms-txt-validator/"
+  }
 }
 </script>
 <script type="application/ld+json">

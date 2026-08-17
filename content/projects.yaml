@@ -1,10 +1,27 @@
 projects:
+  # TODO(copy) A: this description previously ended "without sending site data to a
+  # server". That is false and falsifiable with devtools open: scanning POSTs the
+  # domain and the discovered page URLs to /api/discover-site, because a browser
+  # cannot read another origin's sitemap. Per charter 2c the claim was removed
+  # rather than softened. Needs a replacement clause that is accurate about what
+  # is and is not transmitted. Also drop or justify the "Local-only" tech tag,
+  # which carries the same implication.
   - title: "llms.txt Generator"
-    description: "Create a clean llms.txt file for a website, preview it, copy it, and download it without sending site data to a server."
+    description: "Scan a website's sitemap, review each page's title and description, then preview, copy, and download an editable llms.txt file."
     url: "/llms-txt-generator/"
     tech_stack:
       - "Vanilla JS"
-      - "Local-only"
+      - "Cloudflare Pages Function"
+    category: "SEO / AI Retrieval"
+    status: "Live"
+  # TODO(copy) B: description for the validator, one sentence, same register as
+  # its siblings. Must not imply llms.txt improves AI visibility.
+  - title: "llms.txt Validator"
+    description: "Check an llms.txt file against the llms.txt v2 spec and get graded findings, with each one marked as a spec requirement or a convention."
+    url: "/llms-txt-validator/"
+    tech_stack:
+      - "Vanilla JS"
+      - "Browser-only validation"
     category: "SEO / AI Retrieval"
     status: "Live"
   - title: "Technical Writing Linter"

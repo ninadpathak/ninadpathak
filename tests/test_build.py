@@ -148,6 +148,78 @@ class SitemapTests(unittest.TestCase):
         self.assertIn("https://example.com/llms-txt-generator/", entries)
         self.assertIsNone(entries["https://example.com/llms-txt-generator/"])
 
+    def test_both_llms_txt_tools_are_in_the_sitemap(self):
+        """Neither tool may fall out of the sitemap: each is a separate search intent."""
+        builder = SiteBuilder.__new__(SiteBuilder)
+        builder.config = {"site": {"url": "https://example.com"}}
+
+        with tempfile.TemporaryDirectory() as directory:
+            builder.output = Path(directory)
+            builder.build_sitemap([], [], [])
+            root = ET.parse(builder.output / "sitemap.xml").getroot()
+            namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+            locations = {node.find("s:loc", namespace).text for node in root.findall("s:url", namespace)}
+
+        self.assertIn("https://example.com/llms-txt-generator/", locations)
+        self.assertIn("https://example.com/llms-txt-validator/", locations)
+        self.assertIn("https://example.com/linter/", locations)
+
+
+class ToolDiscoverabilityTests(unittest.TestCase):
+    """Guards the discoverability work: the tools were effectively unlinked and
+    /llms-txt-generator/ had earned three lifetime impressions."""
+
+    repo_root = Path(__file__).resolve().parent.parent
+
+    def test_site_llms_txt_lists_every_tool(self):
+        source = (self.repo_root / "build.py").read_text(encoding="utf-8")
+        self.assertIn("## Tools", source)
+        for path in ("/llms-txt-generator/", "/llms-txt-validator/", "/linter/"):
+            self.assertIn(f"{{base}}{path}", source, f"{path} missing from llms.txt output")
+
+    def test_footer_links_both_llms_txt_tools(self):
+        base_html = (self.repo_root / "templates" / "base.html").read_text(encoding="utf-8")
+        self.assertIn('href="/llms-txt-generator/"', base_html)
+        self.assertIn('href="/llms-txt-validator/"', base_html)
+
+    def test_projects_yaml_lists_both_llms_txt_tools(self):
+        projects = (self.repo_root / "content" / "projects.yaml").read_text(encoding="utf-8")
+        self.assertIn('url: "/llms-txt-generator/"', projects)
+        self.assertIn('url: "/llms-txt-validator/"', projects)
+
+    def test_generator_no_longer_claims_it_sends_nothing_to_a_server(self):
+        """It POSTs the domain and discovered URLs to /api/discover-site, so the
+        old 'without sending site data to a server' claim was falsifiable."""
+        projects = (self.repo_root / "content" / "projects.yaml").read_text(encoding="utf-8")
+        self.assertNotIn("without sending site data to a server", projects)
+
+    def test_both_tools_declare_software_application_schema(self):
+        for template in ("llms_txt_generator.html", "llms_txt_validator.html"):
+            markup = (self.repo_root / "templates" / template).read_text(encoding="utf-8")
+            self.assertIn("SoftwareApplication", markup, template)
+            self.assertIn("isAccessibleForFree", markup, template)
+
+    def test_tools_cross_reference_each_other_in_schema(self):
+        generator = (self.repo_root / "templates" / "llms_txt_generator.html").read_text(encoding="utf-8")
+        validator = (self.repo_root / "templates" / "llms_txt_validator.html").read_text(encoding="utf-8")
+        self.assertIn("/llms-txt-validator/", generator)
+        self.assertIn("/llms-txt-generator/", validator)
+
+    def test_validator_reuses_linter_css_and_adds_none(self):
+        markup = (self.repo_root / "templates" / "llms_txt_validator.html").read_text(encoding="utf-8")
+        self.assertIn("/static/css/linter.css", markup)
+        self.assertNotIn("<style", markup)
+        self.assertNotIn("style=", markup)
+
+    def test_paste_path_never_transmits_input(self):
+        """Privacy contract: only the domain lookup may touch the network."""
+        script = (self.repo_root / "static" / "js" / "llms-validator.js").read_text(encoding="utf-8")
+        network_calls = [line for line in script.splitlines() if "fetch(" in line]
+        self.assertEqual(len(network_calls), 1, network_calls)
+        self.assertIn("/api/fetch-llms-txt", network_calls[0])
+        for forbidden in ("sendBeacon", "localStorage", "sessionStorage", "new WebSocket"):
+            self.assertNotIn(forbidden, script)
+
 
 class DesignSystemTests(unittest.TestCase):
     css_files = (
