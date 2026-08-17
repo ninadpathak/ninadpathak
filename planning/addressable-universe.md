@@ -315,3 +315,64 @@ cluster-assigned) · `DERIVED-cleaning-audit.json` (every dropped keyword) ·
 Standard plan — confirmed twice. AI-search exposure here is inferred solely from the
 `serp_features` AI Overview flag, which says a SERP *has* an AI Overview, not whether
 ninadpathak.com is cited in it. Anything claiming citation share would be fabricated.
+
+---
+
+## Appendix A — the cluster 5/6/7 cap, 2026-08-17
+
+Appended, not merged into the tables above, so the correction keeps a history.
+
+### The re-pull did not happen: the Ahrefs credential died
+
+The uncapping call (clusters 5, 6 and 7, 15 seeds combined, `limit=1000`) **failed on
+authentication**. HTTP 401 on the direct API and MCP error -32600 `Access denied: MCP
+token is invalid`, persistent across retries on both transports. `~/.claude.json` was
+modified at 19:07 IST, about 21 minutes before the attempt, so the token looks rotated
+or revoked. No units were consumed and the call is logged as failed in `CALL-LOG.md`.
+
+**This is not a data-availability finding.** The seeds are not exhausted. Someone with a
+working credential should re-run that one call.
+
+### The cap does not change the day-90 band, and this is provable without the re-pull
+
+The band stands at **350–1,350 clicks/month, central ~710.** The cap cannot move it, for
+a structural reason rather than an estimate.
+
+All three capped pulls used `order_by volume:desc` with `limit 250`. Truncation therefore
+removed only the **lowest**-volume keywords in each cluster. Every keyword the cap hid has
+volume at most equal to the 250th row's:
+
+| Cluster | Rows | Highest vol | Lowest returned vol = ceiling on anything missing |
+|---:|---:|---:|---:|
+| 5 Reddit marketing | 250 | 8,300 | **40/mo** |
+| 6 Forums & community | 250 | 2,700 | **80/mo** |
+| 7 Technical & community events | 250 | 2,700 | **90/mo** |
+
+The band's per-page volume comes from the best 150 / 250 / 400 keywords of the KD≤20 pool.
+Those sets have cut-offs of 250, 150 and **100/mo** respectively. The highest volume any
+missing keyword can have is **90/mo** — below even the most permissive scenario's 100/mo
+cut-off.
+
+**No keyword the cap removed can enter any target set the band is built on.** The inputs
+(740 / 523 / 382 head volume per page) are unchanged, so the band is unchanged.
+
+### What the cap does understate
+
+The cluster **totals** in §2, which are sums over the whole cluster rather than its best
+keywords. Those three remain floors:
+
+| Cluster | Recorded (floor) | What the re-pull would correct |
+|---:|---:|---|
+| 5 Reddit marketing | 33,360/mo | Upward, by keywords ≤40/mo each |
+| 6 Forums & community | 24,140/mo | Upward, by keywords ≤80/mo each |
+| 7 Technical & community events | 33,000/mo | Upward, by keywords ≤90/mo each |
+
+So the honest position: the all-cluster total of **336,180/mo is a floor**, and the three
+distribution clusters are the part of it most understated. The calendar was reweighted
+toward these clusters — 32 of 71 rows, 45% of the schedule — and that reweighting is
+**not** invalidated, because it rested on their KD≤20 winnability share (76–91%), which
+the cap does not touch either: the withheld keywords are low-volume long tail, which skews
+*easier*, not harder.
+
+The one decision this cap could still affect is total-addressable sizing, not scheduling
+and not the band. Re-run the call when the credential is back and correct §2 here.

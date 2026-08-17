@@ -40,6 +40,8 @@ All are `keywords-explorer/matching-terms`, `terms` mode, country `us`,
 | 14 | 2026-08-17T12:55:25Z | ahrefs keywords-explorer-matching-terms | cluster 6 — seeds: online community, community building, community management, discord community, forum software | 250 | 11000 | B6-community-forums.json |
 | 15 | 2026-08-17T12:55:26Z | ahrefs keywords-explorer-matching-terms | cluster 7 — seeds: developer conference, tech meetup, hackathon, community event, virtual event | 250 | 11000 | B7-events.json |
 
+| — | 2026-08-17T13:58:31Z | ahrefs keywords-explorer-matching-terms | cluster 5+6+7 combined, 15 seeds, `limit=1000` — the uncapping re-pull | **FAILED** | 0 | none — HTTP 401 Unauthorized on the direct API, and MCP error -32600 "Access denied: MCP token is invalid". Persistent across retries on both transports. `~/.claude.json` was modified 2026-08-17T19:07 IST, ~21 min before the attempt, so the Ahrefs token appears to have been rotated or revoked. **No units consumed. Not a data-availability finding — do not treat these seeds as exhausted.** Retry this exact call once the credential is restored. |
+
 \* The per-call `Units` column is a before/after read of the workspace meter, which is
 eventually consistent and cannot be trusted at this call rate — call 12 reads 0 and the
 column sums to 55,864, both wrong. **The authoritative figure is the session delta:
