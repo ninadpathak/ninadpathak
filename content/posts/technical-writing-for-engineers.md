@@ -152,6 +152,8 @@ Plenty of teams produce only reference documentation and wonder why their docs f
 
 I have watched a team with an immaculate, fully generated API reference still bleed new hires, because nobody had ever written the one tutorial that walks you from a clean clone to a first passing request.
 
+The [boundary between a code comment, generated reference, and external guide](/articles/code-documentation/) determines which question each page should answer before an engineer starts writing.
+
 ## Version control your documentation
 
 Documentation belongs in version control, and I will not argue this one as a preference. It is the floor.
