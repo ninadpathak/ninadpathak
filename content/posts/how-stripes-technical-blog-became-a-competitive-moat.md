@@ -95,7 +95,7 @@ I argued in [my changelog post](/articles/how-to-write-a-changelog-developers-ac
 
 Stripe’s dev blog now spans a wide spread of topics, from payments and billing to sandboxes, Workbench, AWS integration patterns, developer productivity, AI agents, and release channels. That breadth matters because it gives Stripe many entry points into search and discovery without diluting the core audience.
 
-A founder searching for “Stripe API upgrades,” an engineer searching for webhook debugging, and a platform team searching for sandbox strategy can all enter through different posts and land inside the same ecosystem. The archive behaves like distributed product onboarding, where the side door a reader stumbled through still drops them into the same building.
+A founder searching for “Stripe API upgrades,” an engineer searching for webhook debugging, and a platform team searching for sandbox strategy can all enter through different posts and land inside the same ecosystem. The archive behaves like distributed product onboarding, where the side door a reader stumbled through still drops them into the same building and where [choosing the right subreddit for a developer product](/articles/how-to-find-the-right-subreddit-for-a-developer-product/) means finding an existing conversation that gives the product a useful way in.
 
 One reason I think Stripe’s blog became a moat is that the archive keeps widening the company’s right to answer adjacent questions. Stripe no longer only answers “how do I take payments?”
 
