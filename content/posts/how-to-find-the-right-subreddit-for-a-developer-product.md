@@ -36,7 +36,7 @@ Keep those roles separate in your notes. A useful subreddit can give you languag
 
 ## Evaluate subreddit rules before you plan a contribution
 
-Every subreddit has its own social contract, and moderators enforce rules that can be stricter than Reddit's sitewide standards. Reddit's [Reddiquette guidance](https://support.reddithelp.com/hc/en-us/articles/205926439-Reddiquette) explicitly tells people to read a community's rules before submitting, usually found in the sidebar or community information.
+Every subreddit has its own social contract, and moderators enforce rules that can be stricter than Reddit's sitewide standards. [Reading Reddit self-promotion rules properly](/articles/reddit-self-promotion-rules-read-properly/) explains how the sitewide and local layers set different boundaries before you decide whether a contribution belongs there.
 
 That is not a formality. The rules tell you whether a product mention needs approval, where self-promotion belongs, whether links are allowed, and what kind of post will be removed even if it is technically relevant.
 
