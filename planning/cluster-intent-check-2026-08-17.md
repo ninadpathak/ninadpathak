@@ -1,5 +1,7 @@
 # Intent check on clusters 5 and 6, and what it does to the reweight
 
+> Historical branch artifact restored during consolidation on 2026-09-07. Figures and proposed actions describe the dated investigation below; use `campaign-90d.md` and current tools for active decisions.
+
 **Date:** 2026-08-17 · **Trigger:** writing briefs against the reweighted queue
 **Status:** the reweight's Reddit and community allocation is wrong and is being corrected
 

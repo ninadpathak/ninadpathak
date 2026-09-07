@@ -1,5 +1,7 @@
 # Q3 2026 Fetch Plan
 
+> Historical branch artifact restored during consolidation on 2026-09-07. Figures and proposed actions describe the dated investigation below; use `campaign-90d.md` and current tools for active decisions.
+
 **Written:** 2026-08-17
 **Branch:** `seo/90day-strategy`
 **Hard cap:** 25 paid calls. This plan commits 15 and holds 10 in reserve.

@@ -279,6 +279,8 @@ You need to track summarization depth and either block re-summarization of alrea
 
 ### Embedding compression trades precision for space
 
+[Product quantization](/glossary/product-quantization/) compresses the embeddings used for retrieval. Keep the original memory text and its attribution separately when they are needed to verify a recalled claim.
+
 Compressing at the embedding level is another option. Rather than storing full text, you store a compressed representation of the semantic meaning.
 
 Techniques like product quantization (PQ) or residual quantization can shrink 768-dimensional embeddings from 3KB per vector down to 50-100 bytes with acceptable recall degradation.
@@ -512,4 +514,6 @@ See the MemoryConflictResolver code above for a production-ready implementation 
 
 Hallucinated memories occur when the agent generates factual statements about past interactions that never happened, like confidently telling a user they upgraded last month when they never did. The root cause sits in model behavior rather than your memory layer.
 
-To mitigate it, inject memory retrieval results with explicit source attribution in the prompt, use lower temperature for memory-related generation, and verify factual claims against stored memory entries before accepting them.
+A generated claim with no supporting stored record needs a different diagnosis from a retrieval failure, where the record exists but was not fetched. Attribution failure is different again: the retrieved record belongs to another subject or session.
+
+Verify recalled claims against stored evidence before accepting them. Prompt wording alone cannot establish whether an interaction happened.

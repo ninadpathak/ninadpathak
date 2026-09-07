@@ -1,5 +1,7 @@
 # Article Citation-Readiness and AEO Audit
 
+> Historical branch artifact restored during consolidation on 2026-09-07. Figures and proposed actions describe the dated investigation below; use `campaign-90d.md` and current tools for active decisions.
+
 Audit date: 2026-08-13 (Asia/Kolkata)  
 Repository: `/Users/ninad/Development/ninadpathak`  
 Scope: local Git update followed by a read-only audit of published, review, and draft articles. No articles were edited, committed, pushed, or deployed.

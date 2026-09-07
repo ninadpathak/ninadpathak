@@ -1,5 +1,7 @@
 # Internal link retrofit plan
 
+> Historical branch artifact restored during consolidation on 2026-09-07. Figures and proposed actions describe the dated investigation below; use `campaign-90d.md` and current tools for active decisions.
+
 **Date:** 2026-08-17 · **Source:** `tools/audit_clusters.py` against the build at `9e39eea8`
 **Charter:** 2e (linking), 2c-bis (cluster isolation)
 

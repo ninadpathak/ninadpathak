@@ -161,8 +161,6 @@ Summarization can reduce storage, but repeated summarization can erase qualifier
 
 Working context should keep the current goal, active constraints, recent tool results, and evidence needed for the next decision. Older material can be evicted from the window without being deleted from persistent memory.
 
-Least Recently Used (LRU) eviction is easy to implement, but age is a poor stand-in for importance. A deployment constraint stated several sessions ago can matter more than the newest conversational aside.
-
 Promotion is the reverse decision. A statement such as "always deploy to staging first" may deserve a durable attributed record, while a tool's intermediate progress message usually does not.
 
 No universal score can make that decision for every task. A useful policy names which source types may be promoted, which fields must accompany them, and what event makes the record stale.
@@ -182,8 +180,6 @@ Store session history explicitly rather than assuming the context window will pr
 Retrieve by identity and typed constraints before semantic similarity. Resolve conflicting records before context assembly so the model receives the applicable fact and the provenance needed to check it.
 
 Add compression only after the system can show which original record produced a summary. Add sophisticated ranking only after labeled queries show that the simpler scoped lookup misses information the task needs.
-
-Vector compression solves a different storage problem. Techniques such as [product quantization](/glossary/product-quantization/) reduce the space used by embeddings, but they do not preserve the exact text, attribution, or version history of a memory record.
 
 ## FAQ
 
@@ -215,10 +211,4 @@ The two pair up cleanly. RAG feeds external knowledge into the working context l
 
 Staleness is the broadest failure mode because a correct write can become wrong without the storage system changing. A memory system without expiry and supersession rules keeps returning old facts as if they were current.
 
-Mitigation starts with expiry and supersession rules. Compression may reduce storage, but it should not extend the life of a record whose validity ended.
-
-**What is a hallucinated memory?**
-
-A hallucinated memory is a generated claim about a past interaction that has no supporting stored record. That differs from retrieval failure, where the record exists but the system does not fetch it, and attribution failure, where the system fetches a record that belongs to another subject or session.
-
-Treat recalled claims as facts only when the application can attach them to stored evidence. Prompt wording cannot substitute for that check.
+The fix is aggressive compression at the short-term to long-term boundary plus explicit staleness thresholds that trigger deletion rather than yet another round of compression.
