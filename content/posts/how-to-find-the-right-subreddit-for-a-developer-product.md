@@ -1,4 +1,5 @@
 ---
+category: distribution
 title: "How to Find the Right Subreddit for a Developer Product"
 date: 2026-08-19
 updated: 2026-08-19

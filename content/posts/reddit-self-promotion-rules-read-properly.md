@@ -1,4 +1,5 @@
 ---
+category: distribution
 title: "Reddit Self-Promotion Rules, Read Properly"
 date: 2026-08-20
 updated: 2026-08-20

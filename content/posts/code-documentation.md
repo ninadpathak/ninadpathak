@@ -1,4 +1,5 @@
 ---
+category: technical-documentation
 title: "Code Documentation: Comments, Generated Reference, and External Guides"
 date: 2026-08-18
 updated: 2026-08-18

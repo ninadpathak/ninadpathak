@@ -65,7 +65,7 @@ Keep the generated contract close to the source and keep the guide close to the 
 
 Link from the quickstart to the exact endpoint reference after the reader has a request to inspect. Link from reference to a guide when the reader needs a workflow, and link each recoverable error to a diagnostic path instead of a generic support page.
 
-The [documentation template](/articles/technical-documentation-template/) shows the smaller site structure that separates a first task, reference, and troubleshooting. The [documentation organization guide](/articles/how-to-organize-a-documentation-site/) shows how those routes become navigation without creating duplicate homes for the same task.
+The [API documentation template](/articles/api-documentation-template-the-pages-every-api-needs/) gives the request and its failure cases separate homes that a guide can link to. The [documentation organization guide](/articles/how-to-organize-a-documentation-site/) shows how those routes become navigation without creating duplicate homes for the same task.
 
 Version changes need their own route because a valid request can become unsafe when its credentials, field names, or response behavior change. Use the [product-version documentation guide](/articles/how-to-document-multiple-product-versions/) to keep supported instructions reachable and to give retired routes an honest migration destination.
 
