@@ -77,6 +77,8 @@ Troubleshooting should identify a symptom, diagnostic check, likely cause, and r
 
 Code can look perfectly reasonable and still fail as soon as someone copies it. Run it from the rendered page in the same environment you promised the reader.
 
+When [writing with AI before the claim is settled](/articles/writing-with-ai-before-you-know-what-you-think/), also compare the passing example with the sentence it supports. A check that proves a repeated ID was stored once does not establish that an external action happened once.
+
 ### Start clean
 
 Use a fresh project, container, virtual machine, or test account. Existing credentials, cached packages, and globally installed tools can hide missing steps.
