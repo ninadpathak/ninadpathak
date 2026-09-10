@@ -5,7 +5,7 @@ description: "AI can help me prepare for an expert conversation: question an ide
 category: technical-documentation
 tags: [technical-writing, documentation, ai-writing]
 status: published
-slug: ai-before-expert-interviews
+slug: writing-ai-first-content
 ---
 
 If I had to write a good draft seven years ago, I'd sit down with someone who knew the subject and have a conversation, maybe a bit of a debate. I'd want to get past the answers I could find through SEO research and hear what they'd learned by doing the work.

@@ -77,7 +77,7 @@ Troubleshooting should identify a symptom, diagnostic check, likely cause, and r
 
 Code can look perfectly reasonable and still fail as soon as someone copies it. Run it from the rendered page in the same environment you promised the reader.
 
-When [using AI to prepare questions for an expert](/articles/ai-before-expert-interviews/), keep its proposed explanations separate from what you have verified. Ask the expert what evidence supports the explanation before carrying it into the draft.
+When [using AI to prepare questions for an expert](/articles/writing-ai-first-content/), keep its proposed explanations separate from what you have verified. Ask the expert what evidence supports the explanation before carrying it into the draft.
 
 ### Start clean
 

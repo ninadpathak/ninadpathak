@@ -1,7 +1,7 @@
 # Essay rewrite — accepted; publication validation in progress
 
 Title: Before You Ask an Expert
-Canonical path: /articles/ai-before-expert-interviews/
+Canonical path: /articles/writing-ai-first-content/
 Essay: content/posts/writing-with-ai-before-you-know-what-you-think.md
 Body: 615 words. Filename retained intentionally; public slug comes from frontmatter.
 
@@ -26,7 +26,7 @@ The given live page was fetched with curl after web fetch failed; its title and 
 
 ## Review and publication
 
-Root and independent reviewer accepted the final 615-word essay in the preceding turn (user confirms acceptance). The user subsequently rejected the short slug before any commit or push. The authorized canonical is now /articles/ai-before-expert-interviews/; title and accepted prose are unchanged. The unused ai-better-questions URL was never published and needs no alias.
+Root and independent reviewer accepted the final 615-word essay in the preceding turn (user confirms acceptance). The user subsequently rejected the short slug before any commit or push. The authorized canonical is now /articles/writing-ai-first-content/; title and accepted prose are unchanged. The unused ai-better-questions URL was never published and needs no alias.
 
 Push to main and established Cloudflare deployment are authorized. Exact staged-tree validation is in progress, excluding all unrelated article refreshes, static/examples, and dirty planning/video work. Publication status will be recorded only after exact-SHA deployment and live checks succeed.
 
@@ -34,6 +34,10 @@ The old run-owned preview /var/folders/8m/mzbx3_8d5xx9bfq8lqn7kpr00000gn/T/essay
 
 ## Exact publication-tree validation
 
-Validated an isolated export from a temporary Git index based on d83ac73f039dc14f9824f00287c719f29bf8be88 containing only this turn's four source files and evidence. No unrelated working-tree content was copied into the build. Python compilation, build including SEO audit, and all 666 regression tests passed (4 environment-dependent skips). All four CI strict audits passed: clusters, stylesheets, structural diversity, inert CSS. Changed-post writing errors remain 4 → 4; claim candidates remain 0 → 0. Canonical, title, first paragraph, homepage link, feeds, and four direct 301 routes passed assertions for ai-before-expert-interviews.
+Validated an isolated export from a temporary Git index based on d83ac73f039dc14f9824f00287c719f29bf8be88 containing only this turn's four source files and evidence. No unrelated working-tree content was copied into the build. Python compilation, build including SEO audit, and all 666 regression tests passed (4 environment-dependent skips). All four CI strict audits passed: clusters, stylesheets, structural diversity, inert CSS. Changed-post writing errors remain 4 → 4; claim candidates remain 0 → 0. Canonical, title, first paragraph, homepage link, feeds, and four direct 301 routes passed assertions for writing-ai-first-content.
 
 All 54 excluded dirty/untracked files were copied to a run-owned temporary backup and SHA-256 checked unchanged; publish-preserved-files.json records the snapshot. No unrelated refresh, static/examples, or planning/video change is staged.
+
+## Final slug correction
+
+After f362fd0e9fc2a49cf3b3acab2f94e6d4e95a1f54 was pushed, the user requested the exact canonical writing-ai-first-content. A corrective commit updates the slug and active links and preserves both forms of the briefly published ai-before-expert-interviews article URL with direct 301s. Original long article and generated blog aliases also target the final canonical directly. Title and accepted essay body are unchanged. Previous deployment verification is superseded by final-SHA verification.
