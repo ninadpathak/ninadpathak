@@ -1,0 +1,46 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "domain_domains",
+  "params": {
+    "database": "us",
+    "domains": [
+      {
+        "domain": "idratherbewriting.com",
+        "sign": "+",
+        "type": "organic"
+      },
+      {
+        "domain": "writethedocs.org",
+        "sign": "+",
+        "type": "organic"
+      },
+      {
+        "domain": "ninadpathak.com",
+        "sign": "-",
+        "type": "organic"
+      }
+    ],
+    "display_filter": [
+      {
+        "field": "keyword",
+        "operation": "contains",
+        "sign": "+",
+        "value": "documentation"
+      }
+    ],
+    "display_limit": 30,
+    "display_sort": "volume_desc"
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "parameter 'field' must be one of: backlinks_bucket_0 backlinks_bucket_1 backlinks_bucket_2 backlinks_bucket_3 backlinks_bucket_4 backlinks_bucket_5"
+      }
+    ],
+    "isError": true
+  }
+}

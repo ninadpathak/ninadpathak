@@ -1,0 +1,25 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "phrase_organic",
+  "params": {
+    "database": "us",
+    "phrase": "technical writing examples",
+    "display_limit": 10,
+    "export_columns": [
+      "position",
+      "domain",
+      "url"
+    ]
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Position;Domain;Url\n1;www.reddit.com;https://www.reddit.com/r/technicalwriting/comments/v77ukd/what_is_your_favourite_example_of_good_tech/\n2;medium.com;https://medium.com/softserve-technical-communication/the-best-technical-writing-examples-from-professionals-992182902bc7\n3;whatfix.com;https://whatfix.com/blog/technical-writing-examples/\n4;www.waveapps.com;https://www.waveapps.com/freelancing/technical-writing-examples\n5;www.youtube.com;https://www.youtube.com/watch?v=ez_bvYvfa_E\n6;www.softeq.com;https://www.softeq.com/blog/how-is-technical-writing-used-5-real-world-examples\n7;www.indeed.com;https://www.indeed.com/career-advice/career-development/technical-writing\n8;technicalwriterhq.com;https://technicalwriterhq.com/writing/technical-writing/technical-writing-examples/\n9;www.pinterest.com;https://www.pinterest.com/ideas/technical-writing-examples-for-students/894933643665/\n10;unmudl.com;https://unmudl.com/blog/examples-flawless-technical-writing\n"
+      }
+    ]
+  }
+}

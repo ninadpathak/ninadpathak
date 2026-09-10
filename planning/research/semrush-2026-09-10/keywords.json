@@ -1,0 +1,26 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "phrase_these",
+  "params": {
+    "database": "us",
+    "phrase": "technical writing;technical documentation;api documentation;docs as code;documentation testing;documentation debt;documentation maintenance;technical writing portfolio;technical writing examples;technical documentation template;api documentation best practices;readme best practices;release notes template;developer onboarding;documentation workflow;documentation versioning;code documentation;documentation tools;ai technical writing;technical writing with ai;llms.txt;documentation audit;documentation as code;how to write a technical tutorial;technical writer;technical writing services;api documentation example;software documentation",
+    "export_columns": [
+      "keyword",
+      "volume",
+      "cpc",
+      "keyword_difficulty",
+      "intent"
+    ]
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Keyword;Search Volume;CPC;Keyword Difficulty Index;Intent\ntechnical writing;6600;2.22;50;1,0\ntechnical documentation;1830000;5.39;50;1\napi documentation;2900;4.37;47;1\ndocs as code;320;6.19;30;1\ndocumentation testing;20;5.05;0;\ndocumentation debt;30;0;0;\ndocumentation maintenance;90;0;3;1\ntechnical writing portfolio;110;1.33;6;1\ntechnical writing examples;880;1.35;26;1\ntechnical documentation template;390;4.39;25;1\napi documentation best practices;260;11.58;32;1,0\nreadme best practices;20;0;0;\nrelease notes template;720;2.06;24;1\ndeveloper onboarding;390;0;18;1\ndocumentation workflow;70;7.01;34;1\ndocumentation versioning;10;3.7;0;\ncode documentation;720;5.51;44;1\ndocumentation tools;390;12.62;23;1,0\nai technical writing;40;4.03;24;1\ntechnical writing with ai;20;0;0;\nllms.txt;3600;1.61;59;1\ndocumentation audit;30;2.55;0;\ndocumentation as code;320;5.6;28;1\nhow to write a technical tutorial;0;0;0;\ntechnical writer;4400;2.22;49;1\ntechnical writing services;880;14.84;25;1\napi documentation example;320;4.11;24;1\nsoftware documentation;480;11.88;46;1,0\n"
+      }
+    ]
+  }
+}

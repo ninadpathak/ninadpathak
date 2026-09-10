@@ -1,5 +1,7 @@
 # Content Plan: AI Agents Hub and Spoke (SEO-Optimized)
 
+> **Editorial update, 10 September 2026:** [Technical-writing strategy](technical-writing-strategy-2026-09.md) now governs proposed editorial scope and cadence. Historical targets, retirement instructions, and production calendars below are retained as history, not current assignments. Existing URLs remain protected. External Hermes queue adoption is unresolved; this local update does not change that queue or its scheduler.
+
 **Last updated:** 2026-05-04
 **Goal:** 75 net-new articles across 9 topic clusters. Daily publishing starting now.
 

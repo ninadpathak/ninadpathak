@@ -1,0 +1,20 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "resource_organic",
+  "params": {
+    "target": "ninadpathak.com",
+    "database": "us",
+    "display_limit": 50
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Keyword;Position;Previous Position;Position Difference;Search Volume;CPC;Url;Traffic (%);Traffic Cost (%);Competition;Number of Results;Trends\nbest open source coding llms;81;81;0;50;4.22;https://ninadpathak.com/articles/best-llms-for-coding/;0.00;0.00;0.24;128;0.00,0.00,0.00,0.41,0.82,0.82,0.00,0.00,1.00,0.05,0.17,0.00\nbest open source llm for coding;78;78;0;260;4.13;https://ninadpathak.com/articles/best-llms-for-coding/;0.00;0.00;0.26;123;0.22,0.35,0.43,0.43,0.29,0.35,0.35,0.54,0.66,0.81,1.00,1.00\ncontext as memory;76;76;0;70;0.00;https://ninadpathak.com/static/visuals/context-memory;0.00;0.00;0.33;127;0.09,0.09,1.00,0.66,0.09,0.09,0.09,0.09,0.09,0.80,0.52,0.09\ncode llm;79;79;0;390;5.59;https://ninadpathak.com/articles/best-llms-for-coding/;0.00;0.00;0.04;122;0.30,0.30,0.30,0.24,0.36,0.45,0.24,0.13,0.24,0.20,0.24,0.20\nbest open source coding model;82;82;0;210;5.10;https://ninadpathak.com/articles/best-llms-for-coding/;0.00;0.00;0.25;160;0.04,0.04,0.22,0.04,0.22,0.22,0.29,0.10,0.81,1.00,1.00,1.00\nmastering llm techniques inference optimization;72;72;0;70;3.77;https://ninadpathak.com/articles/llm-inference-optimization/;0.00;0.00;0.19;126;0.11,0.17,0.41,0.41,1.00,0.52,0.11,0.17,0.11,0.82,0.17,0.64\nhttps www anthropic com news contextual retrieval;44;44;0;40;0.00;https://ninadpathak.com/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/;0.00;0.00;0.33;107;0.14,0.14,1.00,0.50,0.64,0.14,0.14,0.14,0.14,0.14,0.14,0.14\nanthropic contextual retrieval;50;50;0;170;0.00;https://ninadpathak.com/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/;0.00;0.00;0.33;108;0.54,1.00,0.54,0.35,0.22,0.22,0.00,0.00,0.02,0.29,0.29,0.81\nanthropic contextual retrieval;51;51;0;170;0.00;https://ninadpathak.com/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/;0.00;0.00;0.33;108;0.54,1.00,0.54,0.35,0.22,0.22,0.00,0.00,0.02,0.29,0.29,0.81\ncode documentation template;65;65;0;90;2.11;https://ninadpathak.com/articles/technical-documentation-template/;0.00;0.00;0.08;136;0.29,1.00,0.82,1.00,0.29,0.29,0.23,0.52,0.11,0.11,0.11,0.82\nllm for code;73;73;0;40;7.71;https://ninadpathak.com/articles/best-llms-for-coding/;0.00;0.00;0.22;111;0.42,0.00,0.33,0.52,0.23,0.19,0.09,0.00,0.33,0.00,0.00,0.09\nbest llm for system design;69;69;0;40;0.00;https://ninadpathak.com/articles/best-llms-for-coding/;0.00;0.00;0.33;118;0.41,0.11,0.11,0.11,0.11,0.11,1.00,0.11,0.11,0.11,0.11,0.11\nbest llm for system design;70;70;0;40;0.00;https://ninadpathak.com/articles/best-llms-for-coding/;0.00;0.00;0.33;118;0.41,0.11,0.11,0.11,0.11,0.11,1.00,0.11,0.11,0.11,0.11,0.11\nwhat is reranking in rag;67;67;0;30;1.29;https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/;0.00;0.00;0.10;163;0.28,0.28,0.28,0.28,0.28,0.71,0.28,0.28,0.28,0.28,1.00,0.28\n"
+      }
+    ]
+  }
+}

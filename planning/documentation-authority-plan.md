@@ -1,5 +1,7 @@
 # Documentation Authority Content Plan
 
+> **Editorial update, 10 September 2026:** [Technical-writing strategy](technical-writing-strategy-2026-09.md) now governs proposed editorial scope and cadence. Historical targets, retirement instructions, and production calendars below are retained as history, not current assignments. Existing URLs remain protected. External Hermes queue adoption is unresolved; this local update does not change that queue or its scheduler.
+
 **Status:** Canonical strategy for the next six months  
 **Created:** 2026-07-29  
 **Supersedes:** The publishing direction in `content-strategy.md`, `growth-strategy.md`, and `post-queue.md`  

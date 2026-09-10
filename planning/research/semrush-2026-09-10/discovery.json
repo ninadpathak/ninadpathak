@@ -1,0 +1,26 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "phrase_fullsearch",
+  "params": {
+    "database": "us",
+    "phrase": "documentation",
+    "display_limit": 40,
+    "export_columns": [
+      "keyword",
+      "volume",
+      "keyword_difficulty",
+      "intent"
+    ]
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Keyword;Search Volume;Keyword Difficulty Index;Intent\ntechnical documentation;1830000;50;1\ndocument shredding;450000;61;0\nhow to scan a document;368000;56;1\nword document;246000;100;2\ndocuments;135000;90;1\ngoogle documents;135000;90;2,3\ndocument;90500;90;1\nhistorical documents;74000;32;1\ngoogle document;49500;96;2\ndocument management platforms;40500;50;0\nmerge to pdf documents;40500;80;1\npython venv documentation;40500;77;1\nscheme information document;40500;27;1\ni9 documents;33100;65;1\nwhere can i print documents near me;27100;56;3\nedit pdf document adobe acrobat pro;22200;84;1\nediting a pdf document in adobe acrobat pro;22200;77;1\nhow to scan documents on iphone;22200;53;1\npdf to word document;22200;78;1\nwhere to print documents near me;22200;56;3\ndocumentation;18100;62;1,0\nedit adobe pdf documents;18100;57;1\nhow to scan a document on iphone;18100;49;1\nw-9 tax document;18100;68;1\ndocumental bowling for columbine;14800;65;1,3\ndocumentation for i 9 form;14800;58;1\ndocumentation for i-9;14800;53;1\ni-9 employment eligibility verification documents;14800;54;1\nidentity document card;14800;50;1\nprint documents near me;14800;59;3\nvirginia document;14800;27;1\nwalgreens document printing;14800;54;3\nadventhealth iodine software partnership cdi ai revenue cycle documentation;12100;0;\narc document solutions;12100;27;2\naver vision f17+ portable document camera;12100;14;1,0\ncompressing pdf documents;12100;81;1,0\ndocument object;12100;83;1\ndocument rug;12100;14;1,0\ndocumenting reality;12100;18;1\ngoogle document sheets;12100;97;2\n"
+      }
+    ]
+  }
+}

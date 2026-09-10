@@ -1,0 +1,16 @@
+/* Paragraph spacing for the homepage's introduction and work note. */
+.home-intro .lead + .lead {
+  margin-top: var(--space-4);
+}
+
+.home-intro .hero-actions {
+  margin-top: var(--space-6);
+}
+
+.home-work-copy {
+  max-width: 68ch;
+}
+
+.home-work-copy p + p {
+  margin-top: var(--space-4);
+}

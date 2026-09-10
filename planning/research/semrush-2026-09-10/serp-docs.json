@@ -1,0 +1,25 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "phrase_organic",
+  "params": {
+    "database": "us",
+    "phrase": "docs as code",
+    "display_limit": 10,
+    "export_columns": [
+      "position",
+      "domain",
+      "url"
+    ]
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Position;Domain;Url\n1;www.writethedocs.org;https://www.writethedocs.org/guide/docs-as-code/\n2;www.reddit.com;https://www.reddit.com/r/technicalwriting/comments/1c74f89/what_exactly_is_the_docsascode_process/\n3;buildwithfern.com;https://buildwithfern.com/post/docs-as-code\n4;engineering.homeoffice.gov.uk;https://engineering.homeoffice.gov.uk/patterns/docs-as-code/\n5;readme.com;https://readme.com/blog/docs-as-code\n6;www.gitbook.com;https://www.gitbook.com/blog/what-is-docs-as-code\n7;idratherbewriting.com;https://idratherbewriting.com/blog/thoughts-on-docs-as-code-promise\n8;medium.com;https://medium.com/@arastoo/what-is-docs-as-code-tools-best-practices-7f3f5f4bd8cb\n9;konghq.com;https://konghq.com/blog/learning-center/what-is-docs-as-code\n10;technology.blog.gov.uk;https://technology.blog.gov.uk/2017/08/25/why-we-use-a-docs-as-code-approach-for-technical-documentation/\n"
+      }
+    ]
+  }
+}

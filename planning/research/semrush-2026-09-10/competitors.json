@@ -1,0 +1,21 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "domain_organic_organic",
+  "params": {
+    "domain": "ninadpathak.com",
+    "database": "us",
+    "display_limit": 30
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "get domain_organic_organic: ERROR 50 :: NOTHING FOUND\nNo data found for this request. Verify your parameters are correct. If parameters are valid, try a different date range or target.\nnot found"
+      }
+    ],
+    "isError": true
+  }
+}

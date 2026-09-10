@@ -1,0 +1,19 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "domain_rank",
+  "params": {
+    "target": "ninadpathak.com",
+    "database": "us"
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Domain;Rank;Organic Keywords;Organic Traffic;Organic Cost;Adwords Keywords;Adwords Traffic;Adwords Cost\nninadpathak.com;16883973;14;0;0;0;0;0\n"
+      }
+    ]
+  }
+}

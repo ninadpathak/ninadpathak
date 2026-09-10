@@ -1,0 +1,35 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "resource_organic",
+  "params": {
+    "database": "us",
+    "target": "writethedocs.org",
+    "display_limit": 30,
+    "display_filter": [
+      {
+        "field": "keyword",
+        "operation": "contains",
+        "sign": "+",
+        "value": "documentation"
+      }
+    ],
+    "export_columns": [
+      "keyword",
+      "position",
+      "volume",
+      "url",
+      "keyword_difficulty"
+    ]
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Keyword;Position;Search Volume;Url;Keyword Difficulty\ntechnical documentation;21;1830000;https://www.writethedocs.org/guide/;51.00\ndocumentation;5;18100;https://www.writethedocs.org/guide/writing/docs-principles/;59.00\ntechnical documentation software;1;590;https://www.writethedocs.org/guide/;27.00\ndocumentation as code;1;320;https://www.writethedocs.org/guide/docs-as-code/;29.00\ntechnical documentation best practices;2;170;https://www.writethedocs.org/guide/;25.00\ntech documentation software;1;170;https://www.writethedocs.org/guide/;40.00\nhow to make documentation;5;590;https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/;49.00\nproduct documentation best practices;1;110;https://www.writethedocs.org/guide/;30.00\nit documentation best practices;2;140;https://www.writethedocs.org/guide/;30.00\nsoftware documentation;5;480;https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/;46.00\nhow to write technical documentation;2;140;https://www.writethedocs.org/guide/;39.00\nthe documentation;3;480;https://www.writethedocs.org/guide/docs-as-code/;71.00\nwhat is software documentation;11;1300;https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/;38.00\nsoftware documentation best practices;1;40;https://www.writethedocs.org/guide/;42.00\nsphinx documentation themes;4;110;https://www.writethedocs.org/guide/tools/sphinx-themes/;43.00\nhow to write documentation;3;110;https://www.writethedocs.org/guide/;41.00\nproduct documentation software;1;90;https://www.writethedocs.org/guide/;20.00\nsoftware documentation standards;1;50;https://www.writethedocs.org/guide/;37.00\nwriting documentation;3;140;https://www.writethedocs.org/guide/;42.00\ndocumentation in code;1;50;https://www.writethedocs.org/guide/docs-as-code/;43.00\nbest practices for technical documentation;1;50;https://www.writethedocs.org/guide/;39.00\nprepare documentation;2;210;https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/;47.00\ndocumentation of code;1;40;https://www.writethedocs.org/guide/docs-as-code/;44.00\ndocumentation style guide;2;70;https://www.writethedocs.org/guide/writing/style-guides/;56.00\ncomputer science documentation;3;90;https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/;9.00\ndocumentation guide;1;40;https://www.writethedocs.org/guide/;25.00\nwriting technical documentation;2;70;https://www.writethedocs.org/guide/;41.00\nseo documentation;6;170;https://www.writethedocs.org/guide/seo/;29.00\ntechnical documentation writing best practices;3;70;https://www.writethedocs.org/guide/;25.00\ndocumentation how to;2;70;https://www.writethedocs.org/guide/writing/beginners-guide-to-docs/;36.00\n"
+      }
+    ]
+  }
+}

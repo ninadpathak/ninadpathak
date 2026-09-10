@@ -1,0 +1,25 @@
+{
+  "retrieved_date": "2026-09-10",
+  "database": "us",
+  "country": "United States",
+  "snapshot": "latest returned; provider observation date not supplied",
+  "report": "phrase_organic",
+  "params": {
+    "database": "us",
+    "phrase": "technical documentation template",
+    "display_limit": 10,
+    "export_columns": [
+      "position",
+      "domain",
+      "url"
+    ]
+  },
+  "data": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Position;Domain;Url\n1;word.cloud.microsoft;https://word.cloud.microsoft/create/en/blog/technical-documentation-template-ai/\n2;www.reddit.com;https://www.reddit.com/r/technicalwriting/comments/113mh5p/technical_documentation_templatessamplesexamples/\n3;learn.microsoft.com;https://learn.microsoft.com/en-us/dynamics365/guidance/patterns/create-functional-technical-design-document\n4;bit.ai;https://bit.ai/document-templates/technical\n5;www.atlassian.com;https://www.atlassian.com/blog/development/5-real-life-examples-beautiful-technical-documentation\n6;miro.com;https://miro.com/templates/technical-document/\n7;www.compuscholar.com;https://www.compuscholar.com/schools/blog/project-documentation-templates\n8;www.altexsoft.com;https://www.altexsoft.com/blog/technical-documentation-in-software-development-types-best-practices-and-tools/\n9;gist.github.com;https://gist.github.com/ynwd/2e9c81472cc4eb93fa5dbc23d31b48d1\n10;klariti.com;https://klariti.com/technical-writing-templates/\n"
+      }
+    ]
+  }
+}

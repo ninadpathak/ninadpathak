@@ -1,5 +1,7 @@
 # ninadpathak.com 90-day organic search campaign
 
+> **Editorial update, 10 September 2026:** [Technical-writing strategy](planning/technical-writing-strategy-2026-09.md) now governs proposed editorial scope and cadence. Historical targets, retirement instructions, and production calendars below are retained as history, not current assignments. Existing URLs remain protected. External Hermes queue adoption is unresolved; this local update does not change that queue or its scheduler.
+
 **Campaign window:** 17 August to 15 November 2026
 **Target:** 10,000 organic visits per month by day 90
 **Baseline, 2026-08-17:** 16 clicks/month (July), of which ~12 are the brand query `ninad pathak`. Non-brand human clicks are approximately zero.
