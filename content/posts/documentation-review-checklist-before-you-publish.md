@@ -1,8 +1,7 @@
 ---
 category: technical-documentation
 date: 2026-07-30
-description: Review technical documentation for accuracy, task completion, code, structure,
-  accessibility, links, metadata, and release readiness before publishing.
+description: 'Review documentation in four passes: product truth, reader route, rendered behavior, and release state, before polishing prose.'
 slug: documentation-review-checklist-before-you-publish
 status: published
 tags:
@@ -10,251 +9,279 @@ tags:
 - documentation-workflow
 - docs-as-code
 takeaways:
-- Review technical accuracy, reader success, and presentation in separate passes.
-- Run every procedure and code sample in the environment the page promises.
-- Inspect the rendered page before approval.
-- Assign clear owners for technical, editorial, and release approval.
-title: Documentation Review Checklist Before You Publish
+- Verify product behavior before editing sentences.
+- Run the reader's success and failure paths from the documented starting state.
+- Inspect the exact rendered output at desktop and mobile widths.
+- Split approval by evidence instead of asking one reviewer to bless the page.
+title: Documentation Review Should Start With the Product, Not the Prose
+updated: 2026-09-11
 ---
 
-The pull request is ready for review, and the comments are all about headings, wording, and screenshot placement. Nobody has copied the command from the rendered page or checked whether the new permission exists in production.
+Picture a documentation pull request where the comments are breeding around commas, heading length, and screenshot placement. The command remains untested in the rendered page.
 
-Then the page ships with a clean title and a broken path. The checklist separates product behavior, the reader’s route, and the rendered page.
+So does the permission in the released product.
 
-## Confirm the page has a clear job
+Then a beautifully edited page ships with a broken path.
 
-Before getting into individual sentences, check whether the page should exist in this form at all. A precise duplicate is still a duplicate.
+Documentation review should begin with product truth, move through the reader's route, inspect the rendered artifact, and end at release state. Prose comes after the behavior survives.
 
-### Name the reader and the task
+My objection to the usual copyedit-first review is not that wording is unimportant. Perfect wording can make a false instruction look trustworthy enough to hurt someone.
 
-Write down who the page is for and what they should be able to do after reading it. If two reviewers give different answers, the title and introduction need work.
+## Put the product on trial first
 
-Check that the page begins at the reader’s real starting point. An administrator configuring single sign-on and a developer calling the authentication API should not be pushed through the same assumptions.
+A technical page makes claims about names, defaults, permissions, versions, side effects, errors, and recovery. Extract those claims before touching the sentences that carry them.
 
-### Check for overlap
+The reviewer needs a source outside the draft for each claim that can break the task. Otherwise the review is one sentence asking another sentence whether it is true.
 
-Search the site for the primary task, product name, error text, and likely synonyms. Decide whether the draft replaces, updates, or links to an existing page.
+### Build a claim ledger
 
-When two pages satisfy the same intent, consolidate the useful material and redirect the weaker URL. Publishing another answer because the first is inconvenient to edit creates a maintenance problem.
+Use a table that forces each material claim to point somewhere. The following API, role, response, and interface claims are fictional examples, not facts about a public product:
 
-### Verify the content type
+| Page claim | Verification source | Reviewer | Result |
+| --- | --- | --- | --- |
+| Workspace owners can create API keys | Released permission model | Product owner | Pending |
+| The API accepts `Authorization: Bearer` | Current API schema plus request | Engineer | Pending |
+| Invalid keys return `401 invalid_api_key` | Reproduced response | Engineer | Pending |
+| The key is displayed once | Released UI | Product owner | Pending |
 
-A tutorial guides a complete learning path, and a how-to page solves a known task. Reference records exact behavior, and explanation makes a concept or decision understandable.
+Reject a ledger row when its source is the draft itself, a remembered demo, or another page copying the same unsupported sentence.
 
-If the draft keeps switching modes, split the secondary material or link to it. The [technical tutorial guide](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/) covers the difference in more detail.
+When [using AI before asking an expert](/articles/writing-ai-first-content/), proposed explanations belong in the question pile, not the verified column. Plausible wording has no special claim on truth.
 
-## Review technical accuracy
+### Run the documented behavior
 
-I’d do the subject-matter pass before polishing sentences. There’s no point refining a paragraph that describes an obsolete API.
+Start in the environment the page promises. Follow the released UI path or run the API, CLI, and code samples with the documented inputs.
 
-### Test the documented behavior
+Record enough state for a second reviewer to reproduce the check:
 
-Verify the page against the current product. Check names, defaults, permissions, supported versions, error behavior, and any state the user cannot easily reverse.
+```text
+Product version: [released version or commit]
+Account role: [role used]
+Runtime: [name and version]
+Starting state: [required resource or clean project]
+Command: [exact command copied from the render]
+Expected signal: [status, output, or screen state]
+Observed signal: [actual result]
+```
 
-For a UI procedure, follow the exact labels and path in the released interface. For an API or CLI page, run the request or command with the documented inputs.
+Move an unstated credential, global package, private feature flag, or unreachable product state into the prerequisites before rerunning the page.
 
-### Challenge hidden assumptions
+### Attack the failure path
 
-Look for access, software, data, and configuration the author already had. These are common omissions:
+Trigger the error the page claims to solve. Confirm the message, status or exit code, diagnostic, and recovery step.
 
-- Required account tier or role
-- Runtime and package versions
-- Environment variables and secrets
-- Billing or region restrictions
-- Existing resources or sample data
-- Feature flags and rollout state
-- Operating system or shell differences
+Use a four-part recovery record:
 
-Move a prerequisite before the first step that depends on it. If obtaining access can take time, say so near the start.
+| Field | Required evidence |
+| --- | --- |
+| Symptom | Exact error or visible behavior |
+| Diagnostic | Command or observation that separates likely causes |
+| Recovery | Smallest supported action that restores progress |
+| Proof | Signal that the recovery worked |
 
-### Check risk and recovery
+Replace "Try again" with a diagnostic. Keep "Restart the service" only when the page names the state the restart clears and the signal that proves recovery.
 
-Mark steps that delete data, rotate credentials, change production traffic, create billable resources, or prevent rollback. Add a warning before the action and explain the safer test path where one exists.
+## Make the page earn its URL
 
-Troubleshooting should identify a symptom, diagnostic check, likely cause, and recovery. “Try again” is not recovery guidance.
+A technically correct draft can still be the wrong page. It may duplicate an existing answer, combine incompatible readers, or switch between tutorial and reference until neither job survives.
 
-## Run every procedure and example
+The URL earns more authority only after the page owns one necessary question.
 
-Code can look perfectly reasonable and still fail as soon as someone copies it. Run it from the rendered page in the same environment you promised the reader.
+### Name one reader decision
 
-When [using AI to prepare questions for an expert](/articles/writing-ai-first-content/), keep its proposed explanations separate from what you have verified. Ask the expert what evidence supports the explanation before carrying it into the draft.
+Write one sentence before review begins:
 
-### Start clean
+```text
+This page helps [reader with starting state] decide or do [specific outcome].
+```
 
-Use a fresh project, container, virtual machine, or test account. Existing credentials, cached packages, and globally installed tools can hide missing steps.
+If one reviewer writes "create a key" and another writes "understand authentication," the page has two jobs fighting inside it. Split the jobs or choose one before editing the draft.
 
-Record the versions used during the test. Version-sensitive pages should expose that information in the document or its maintenance metadata.
+The [technical tutorial guide](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/) shows how a learning path differs from a task page. The distinction matters because a tutorial can teach through a controlled build while reference must state behavior without dragging the reader through a lesson.
 
-### Check the complete path
+### Search for the answer that already exists
 
-For each procedure, confirm:
+Search titles, body copy, error strings, and product terms before granting the draft a new canonical URL.
 
-- Steps begin from the documented starting state.
-- Commands work in the named shell.
-- File paths and working directories are explicit.
-- Sample values are safe to copy.
-- Responses and screenshots match the current product.
-- Each stage has an observable success check.
-- Cleanup removes test data, credentials, and billable resources.
-
-One successful final screenshot is not enough. A reader needs to know whether step three worked before attempting step four.
-
-### Test the failure path
-
-Trigger the error the page claims to solve. Confirm the message, status code, exit code, and recovery step.
-
-If the product fails differently across versions or environments, document the boundary. A “Common issues” section still needs symptoms that help the reader choose the right recovery path.
-
-## Review structure and readability
-
-Once the technical path works, read the page like someone deciding whether to follow it. The title, opening, headings, lists, code, and visuals should make the route visible before every paragraph is read.
-
-### Scan headings on their own
-
-Hide the paragraphs and read only the heading outline. It should describe the task or argument without a sequence of labels such as Overview, Setup, Configuration, Usage, and Conclusion.
-
-Google’s [heading guidance](https://developers.google.com/style/headings) recommends descriptive, sentence-case headings, task verbs for procedures, noun phrases for concepts, and a logical H1–H3 hierarchy. Heading levels describe structure, and CSS handles appearance.
-
-### Check paragraph and sentence load
-
-Give each paragraph one job and keep it to no more than two sentences on this site. Split setup, consequence, and exception when they compete inside the same block.
-
-Short does not mean choppy. Vary sentence length, use specific transitions, and remove throat-clearing phrases that repeat the heading.
-
-### Use lists and tables deliberately
-
-Use a numbered list when order matters and bullets when it does not. A table earns its space when readers need to compare the same fields across several options.
-
-Introduce a dense list or table so the reader knows what to look for. Avoid turning every group of three ideas into a card, callout, or checklist.
-
-## Inspect links, visuals, and accessibility
-
-A page is more than its prose. Links, screenshots, headings, code formatting, and landmarks determine whether people can navigate and use it.
-
-### Check every link in context
-
-Open internal and external links from the rendered page. Confirm that anchors reach the intended section, redirects are intentional, and link text describes the destination without relying on “here.”
-
-Add links where a reader needs prerequisite knowledge, reference detail, or a next step. Remove links that interrupt the task without helping it.
-
-### Make every visual prove something
-
-A screenshot should help a reader find a control, recognize a state, compare behavior, or verify a result. Crop irrelevant interface chrome and keep enough surrounding context to show where the state belongs.
-
-Write alt text for the information conveyed by the image, then add a caption that explains what to notice. Those two pieces should not repeat each other word for word.
-
-### Preserve semantic structure
-
-W3C’s [page structure tutorial](https://www.w3.org/WAI/tutorials/page-structure/) explains how headings and landmarks help screen-reader, keyboard, mobile, and search users navigate. Use one descriptive H1, nest headings logically, label navigation regions, and retain visible focus states.
-
-Check color contrast, keyboard access, table headers, code overflow, zoom, and meaningful alt text. Accessibility cannot be recovered with an automated score alone.
-
-## Review the rendered page
-
-The Markdown can look tidy even when the published page is a mess. Long headings wrap, tables overflow, code loses characters, images dominate the screen, and generated anchors collide.
-
-### Use a preview build
-
-Open the exact output that will be deployed and review it at desktop and narrow viewport widths. Follow the table of contents, copy code, open images, and test the previous and next routes.
-
-GitLab can create [documentation review apps](https://docs.gitlab.com/development/documentation/review_apps/) for merge requests, which lets reviewers inspect the rendered change before it reaches the main site. The broader [GitLab documentation workflow](https://docs.gitlab.com/development/documentation/workflow/) includes technical, writing, and maintainer review around the product change.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Documentation review inside GitLab's workflow</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/gitlab-docs-workflow.png" alt="GitLab documentation workflow page showing authoring, review, product manager, developer, and technical writer responsibilities" loading="lazy">
-  </div>
-</div>
-<p class="visual-caption">GitLab places review inside the product workflow and splits responsibility across developers, maintainers, product managers, and technical writers. One writer is not expected to verify everything at the end.</p>
-
-### Check the complete page frame
-
-Inspect more than the article body:
-
-- Title, description, canonical URL, and publication date
-- Breadcrumbs and local navigation
-- Table of contents and heading anchors
-- Header and footer collisions
-- Related links and article cards
-- Structured data and social preview
-- Cookie, banner, and feedback overlays
-
-A component can work on most pages and still fail on the longest title or widest code sample. Include the awkward page in the review set.
-
-## Check search and retrieval signals
-
-SEO review should make the page easier to identify, not stuff it with alternate phrases. Match the title, description, H1, introduction, and URL to one clear reader intent.
-
-### Confirm the canonical answer
-
-Make sure the page has a self-referencing canonical and is allowed to be indexed. Update or redirect older pages that compete for the same question.
-
-Link to the new page from its section parent and relevant sibling articles. A page that exists only in the sitemap is technically published but practically orphaned.
-
-### Use concrete language
-
-Name product fields, commands, error messages, file formats, versions, and outcomes precisely. These details help humans scan and give search and retrieval systems better evidence about when the page answers a question.
-
-An FAQ earns its place when adjacent questions need short answers but do not deserve separate pages. Repeating the article with question marks adds nothing.
-
-## Align the page with the release
-
-Documentation can pass every editorial check and still ship at the wrong time. Confirm which version contains the behavior and whether the page should appear before, with, or after the release.
-
-### Match product state
-
-Check feature flags, preview labels, availability, plans, regions, and supported versions. A page about unreleased behavior needs explicit status and should not displace the current answer in search.
-
-For breaking changes, connect the task page to the [changelog](/articles/how-to-write-a-changelog-developers-actually-read/) and [release notes](/articles/writing-release-notes-that-developers-trust/). The compatibility statement must agree everywhere.
-
-### Assign maintenance ownership
-
-Record the team or person responsible for the page and the events that should trigger review. Product changes, dependency releases, UI renames, policy changes, and repeated support questions are stronger triggers than a decorative “review annually” note.
-
-Assign ownership for the next update before publication. Accuracy continues after the release.
-
-## Split approval by responsibility
-
-One reviewer should not pretend to verify everything. Assign the checks to people who can make the relevant claim.
-
-| Reviewer | Owns |
-|---|---|
-| Engineer or subject-matter expert | Product behavior, code, versions, risk, and recovery |
-| Technical writer or editor | Reader fit, structure, terminology, clarity, and links |
-| Accessibility reviewer or trained contributor | Semantics, keyboard use, visuals, contrast, and alternatives |
-| Product or release owner | Scope, availability, timing, migration, and support status |
-| Maintainer | Build, metadata, navigation, redirects, and deployment readiness |
-
-Small teams can combine roles while keeping the questions separate. The request example still needs an engineer to execute it and an editor to check the reader’s route.
-
-## Worked example: review an API authentication guide
-
-Suppose a draft begins with this instruction:
-
-> Generate an API key in Settings, add it to your request, and run the example below. The API returns your account.
-
-The prose is short and grammatical. It is also missing the permission, navigation path, header format, base URL, safe secret handling, expected response, failure behavior, and key-revocation step.
-
-### Pass one: verify the product
-
-The technical reviewer follows the current interface and discovers that only workspace owners can create keys. The control moved from Settings to Developer settings, and new keys are shown only once.
-
-Those facts change the procedure:
-
-1. Sign in as a workspace owner.
-2. Go to **Developer settings → API keys**.
-3. Select **Create key**.
-4. Enter a name and choose the required scopes.
-5. Copy the key before closing the dialog.
-
-The reviewer also checks that the API accepts `Authorization: Bearer`; the older draft used `X-API-Key`. Treat that as a blocking accuracy problem.
-
-### Pass two: run the reader path
-
-The reviewer starts in a clean shell and copies the rendered example:
+The command below is an illustrative repository search. Replace its terms and `content/` path with the project under review:
 
 ```bash
-export ORBIT_API_KEY="replace-with-your-test-key"
+rg -n -i 'create.*api key|invalid_api_key|authorization: bearer' content/
+```
+
+If two pages satisfy the same intent, consolidate the useful material and prepare a direct redirect.
+
+Do not publish a second answer because the first file is annoying to edit.
+
+### Expose hidden starting state
+
+Reviewers should mark each noun the author already possessed: account role, runtime, package, region, sample data, credential, feature state, and existing resource.
+
+Move a prerequisite before the first step that needs it. Do not make the reader discover an access request after the command that requires access.
+
+## Review the route as a sequence of decisions
+
+Once the behavior is true and the page deserves its URL, follow it as a reader. The question is not whether the prose sounds smooth.
+
+Each section must give the reader enough state to choose the next action.
+
+Read the route in order, then scan it out of order as someone returning with a failed command would.
+
+### Read the headings without the paragraphs
+
+Extract the outline. The path below is an illustrative Markdown file, not a live page in this repository:
+
+```bash
+rg '^#{2,3} ' content/posts/example.md
+```
+
+[Google's heading guidance](https://developers.google.com/style/headings) recommends a logical hierarchy, descriptive headings, and content between a parent heading and its subsections. The outline should expose the route rather than repeat labels such as Overview, Setup, Configuration, Usage, and Conclusion.
+
+Rewrite headings that could move to another article without changing meaning. The outline should expose both progression and recovery.
+
+### Demand proof after a consequential step
+
+Each procedure stage needs an observable success condition before the reader spends more state on the next one. The next API-key action, role, and interface label are fictional:
+
+```text
+Action: Create a test API key.
+Proof: The key list shows the new key name and test scope.
+Failure: If the Create key control is absent, confirm the workspace-owner role.
+```
+
+A final screenshot does not prove the middle steps. If step three can silently fail, step three needs its own check.
+
+### Separate advice from decision criteria
+
+"Keep paragraphs short" is advice. "Split the paragraph when setup, consequence, and exception compete inside it" gives a reviewer something to inspect.
+
+Lists should enumerate, and tables should compare repeated fields. Prose should carry judgment.
+
+A page made entirely of cards and checklists can look organized while refusing to explain why one choice beats another.
+
+## Inspect the page the reader receives
+
+Markdown is source code for a page. It is not the page.
+
+The rendered output can clip a table, swallow a character from copied code, hide a heading under a fixed header, or let a banner cover the only button that matters.
+
+### Build the exact artifact
+
+Use the same build path production uses:
+
+```bash
+python3 build.py
+python3 seo_audit.py
+python3 -m http.server 8765 --directory output
+```
+
+Build from the intended tree and stop on a missing page or canonical. Stop the server after review.
+
+If the preview uses an older build directory, the screenshots prove nothing about the change.
+
+GitLab's [documentation review apps](https://docs.gitlab.com/development/documentation/review_apps/) build and deploy a documentation preview from a merge request. GitLab's broader [documentation workflow](https://docs.gitlab.com/development/documentation/workflow/) also splits technical, writing, and maintainer review.
+
+The product-specific process is larger than a small static site needs, but the principle is sound: review the artifact attached to the change.
+
+### Check desktop and narrow widths
+
+Inspect the title, local navigation, tables, code blocks, images, related links, and calls to action at both widths. Copy a command from the rendered page and run a syntax-safe check when the command is destructive or credentialed.
+
+Fix clipping, overlap, unreadable code, hidden focus, or a control that moves outside the viewport. "It wraps" is not a defect by itself.
+
+The question is whether the wrap destroys hierarchy or meaning.
+
+### Check semantics instead of trusting a score
+
+[W3C's page-structure tutorial](https://www.w3.org/WAI/tutorials/page-structure/) covers page regions, labels, headings, and content structure. Inspect the actual semantics: one descriptive H1, ordered heading levels, labeled navigation regions, keyboard access, visible focus, table headers, and meaningful image alternatives.
+
+Automation can flag a missing `alt` attribute. It cannot decide whether the alt text carries the image's information or merely repeats the caption.
+
+### Open links in context
+
+Check internal paths, fragments, external sources, canonicals, and redirects from the rendered page.
+
+The `output/articles/example/` path below is illustrative. Use the page generated by the current change:
+
+```bash
+python3 seo_audit.py
+rg -n 'href="[^"]+#' output/articles/example/index.html
+```
+
+Repair a fragment that misses its heading, a redirect that hides a stale internal link, or a canonical that points at a competing page. A `200` response alone does not prove the reader reached the intended answer.
+
+## Match the page to the release
+
+Documentation can be accurate in a preview and wrong in production because the feature has not shipped, the permission differs by plan, or an older supported version behaves differently.
+
+The release pass binds the reviewed behavior to the version and audience that will receive the page.
+
+### Record availability and timing
+
+Add the release facts the page depends on:
+
+| Release question | Evidence |
+| --- | --- |
+| Which version contains the behavior? | Release or commit record |
+| Is a flag required? | Current feature status |
+| Which roles, plans, or regions can use it? | Released availability source |
+| Does an older supported version differ? | Versioned reference or compatibility test |
+| When should the page become indexable? | Release plan |
+
+Do not present preview behavior as the current answer. For a breaking change, make the compatibility statement agree with the [changelog](/articles/how-to-write-a-changelog-developers-actually-read/) and [release notes](/articles/writing-release-notes-that-developers-trust/).
+
+### Name the next review trigger
+
+"Review annually" lets eleven months of product changes walk past the page. Tie review to the events that can falsify it: a renamed control, dependency release, permission change, response-schema change, or supported-version change.
+
+Name an owner who can recognize the trigger in their normal workflow. Replace "the docs team" when another team controls the fact.
+
+## Split approval by evidence
+
+One reviewer should not impersonate an engineer, editor, accessibility specialist, and release owner in a single approval. A small team may combine people, but it should not combine the questions into one vague "LGTM."
+
+| Reviewer | Evidence owned |
+| --- | --- |
+| Engineer or subject-matter expert | Product behavior, code, versions, risk, and recovery |
+| Technical writer or editor | Reader fit, structure, terminology, and links |
+| Accessibility reviewer or trained contributor | Semantics, keyboard behavior, visuals, and alternatives |
+| Product or release owner | Scope, availability, timing, and migration state |
+| Maintainer | Build, metadata, navigation, redirects, and deployment readiness |
+
+Each reviewer should point to the evidence they checked. Do not treat one approval as proof of facts outside that reviewer's access.
+
+## Run the passes on a fictional authentication guide
+
+Orbit is a fictional API used to expose the review method. It is not client work, a product test, or evidence about a live service.
+
+The draft says:
+
+> Generate an API key in Settings, add it to your request, and run the example. The API returns your account.
+
+The sentence is grammatical and nearly useless. It hides the role, navigation path, header format, environment, expected response, error behavior, and cleanup.
+
+### Verify the fictional product contract
+
+Assume the fixture defines this behavior:
+
+```text
+Role: workspace owner
+Path: Developer settings > API keys
+Header: Authorization: Bearer $ORBIT_API_KEY
+Success: 200 with mode set to test
+Invalid key: 401 invalid_api_key
+Missing scope: 403 insufficient_scope
+Cleanup: revoke the test key
+```
+
+Because these values belong to the fictional fixture, the article makes no claim that a public product behaves this way.
+
+### Run the reader request
+
+The following command targets the fictional `api.orbit.example` host with a placeholder test key. It is not a live endpoint or credential:
+
+```bash
+export ORBIT_API_KEY="replace-with-a-fictional-test-key"
 
 curl --fail-with-body \
   --request GET \
@@ -262,41 +289,21 @@ curl --fail-with-body \
   --header "Authorization: Bearer $ORBIT_API_KEY"
 ```
 
-The draft had placed the raw key directly in shell history. The revised example uses an environment variable and points readers to the production secret-management guidance.
-
-The successful response needs enough detail to verify:
+The fictional response expected by this fixture is:
 
 ```json
 {
-  "id": "acct_01J2M7X8Q4",
+  "id": "acct_example",
   "name": "Docs sandbox",
   "mode": "test"
 }
 ```
 
-The guide should tell the reader to confirm that `mode` is `test`. Receiving any JSON object is not proof that the correct workspace or environment is active.
+The fictional pass condition is `mode: test`. A JSON object without that field does not prove the request reached the intended environment.
 
-### Pass three: add the failure path
+### Turn the outline into a route
 
-Remove one character from the key and run the request again. The current API returns:
-
-```http
-HTTP/2 401
-content-type: application/json
-
-{
-  "error": {
-    "code": "invalid_api_key",
-    "message": "The API key is invalid or has been revoked."
-  }
-}
-```
-
-Now the troubleshooting note can distinguish an invalid key from a valid key missing the required scope, which returns `403 insufficient_scope`. Without reproducing both states, the guide might tell every reader to regenerate credentials.
-
-### Pass four: edit the page as a route
-
-The editorial reviewer changes a topic outline such as Setup, Usage, Errors, and Security into task headings:
+Replace Setup, Usage, Errors, and Security with headings that expose decisions:
 
 - Create a test API key
 - Send an authenticated request
@@ -304,115 +311,44 @@ The editorial reviewer changes a topic outline such as Setup, Usage, Errors, and
 - Store the key outside source control
 - Revoke the test key
 
-The opening now states the audience, permission, and result. A warning appears before the key is created, and the cleanup step appears before the page sends the reader elsewhere.
+Move cleanup before the page sends the reader elsewhere, and keep error recovery beside the request that produces the error.
 
-### Pass five: inspect the publication frame
+## Automate mechanics without pretending to automate judgment
 
-The rendered review catches three issues that were invisible in the source:
-
-- The wide JSON response overflows on a phone.
-- The Developer settings anchor points to the old Setup heading.
-- The code-copy button includes the shell prompt, causing the pasted command to fail.
-
-The canonical still points to an older authentication page, which would tell search engines that the old answer is preferred. The reviewer fixes the canonical, redirects the duplicate page, and adds a link from the API section landing page.
-
-### Classify comments by severity
-
-Not every review comment should block publication. Use a shared severity model:
-
-| Severity | Meaning | Example |
-|---|---|---|
-| Blocker | Could cause failure, loss, exposure, or an unusable task | Wrong authentication header |
-| Major | A substantial group cannot complete or understand the task | Owner permission is omitted |
-| Minor | The task works but the page is less clear or consistent | Heading does not match local style |
-| Follow-up | Valuable improvement outside the release scope | Add examples for another SDK |
-
-Severity keeps a launch decision from becoming a contest between strongly worded comments. A comma and an unsafe command no longer carry equal weight.
-
-## Automate the mechanical checks
-
-Human reviewers should spend their attention on product truth, reader decisions, and risk. Machines are better at repeatable checks with deterministic answers.
-
-### Good candidates for automation
-
-Run these checks in continuous integration:
+Machines are good at answers that should not depend on taste:
 
 - Markdown and frontmatter syntax
-- Internal link and anchor resolution
-- Duplicate titles, slugs, and heading IDs
-- Missing alt attributes
+- Internal link and fragment resolution
+- Duplicate slugs and heading IDs
+- Missing image alternatives
 - Heading-level jumps
-- Forbidden or deprecated product terms
-- Code formatting and selected executable examples
-- Build success and broken templates
+- Build success
 - Canonical, sitemap, and robots rules
 - Redirect loops and chains
 
-Some external link checks need retries and allowlists because websites block automated requests. A third-party marketing page that occasionally returns `403` should not make the whole documentation build unreliable.
+External link checks need retries and bounded exceptions because a site can reject an automated client while remaining available to readers.
 
-### Keep judgment out of brittle rules
+A mechanical gate should report the file, rule, and local reproduction command. It should not declare a page "high quality" because it counted headings or found an aggressive adjective.
 
-A linter can flag passive voice, long sentences, or first-person pronouns. Treat those subjective style patterns as prompts for review.
-
-Hard gates should protect rules with unambiguous value, such as valid Markdown and working internal links. An earlier version of this site forced a minimum number of first-person references, and sentences started serving the counter instead of the article.
-
-### Report failures where authors can act
-
-Name the file, line, rule, and repair in every automated failure. “Documentation quality failed” sends the author hunting through logs and makes the tool feel arbitrary.
-
-When possible, show a local command that reproduces the failure. Authors fix checks faster when the local and continuous-integration behavior match.
+Product truth and reader judgment remain human approval.
 
 ## Documentation review checklist
 
-### Purpose and scope
-
-- The reader and intended outcome are explicit.
-- The page has one primary intent and no competing duplicate.
-- The content type matches the reader’s need.
-- Prerequisites and non-goals are clear.
-
-### Technical verification
-
-- Product names, UI labels, defaults, and permissions are current.
-- Commands and code run in the documented environment.
-- Expected output and success checks are accurate.
-- Risky actions include warnings, recovery, and rollback limits.
-- Errors and troubleshooting steps have been reproduced.
-
-### Editorial quality
-
-- The opening gives the reader a useful starting point.
-- H2 and H3 headings describe the route and follow a logical hierarchy.
-- Paragraphs contain no more than two sentences.
-- Lists, tables, notes, and code blocks have a clear purpose.
-- Terminology and voice stay consistent.
-
-### Published experience
-
-- Internal, external, and anchor links work.
-- Screenshots are current, focused, captioned, and accessible.
-- The page works with keyboard navigation, zoom, and narrow screens.
-- Metadata, canonical, structured data, and indexability are correct.
-- Navigation, related links, redirects, and release timing are ready.
+- Block publication when a behavior, permission, or recovery claim lacks an inspectable source.
+- Run commands from the documented starting state and record both success and failure signals.
+- Give one reader decision the title, route, and canonical URL.
+- Inspect the exact intended tree at desktop and mobile widths.
+- Match availability and version boundaries to the release.
+- Split approval by the evidence each reviewer can inspect.
 
 ## Documentation review FAQ
 
-**Who should review technical documentation?**
-
-Use a subject-matter expert for behavior and code, an editor for reader success and structure, and a maintainer or release owner for publication state. One person can hold several roles on a small team, but each review question still needs an answer.
-
 **Should documentation block a product release?**
 
-Missing or inaccurate instructions should block a release when users cannot adopt, operate, migrate, or recover safely without them. Minor editorial improvements can follow through a tracked change when the published page remains correct and usable.
+It should block when a missing or false instruction prevents safe adoption, operation, migration, or recovery. A tracked wording improvement can follow when the published route remains truthful and usable.
 
-**Can automated checks replace documentation review?**
+**Can automated checks replace review?**
 
-No. Automation can catch broken links, invalid markup, style patterns, spelling, and build failures, but it cannot reliably verify product behavior or whether the page solves the reader’s task.
+No. Automation can verify deterministic structure and build behavior.
 
-**How often should published documentation be reviewed?**
-
-Review it when the product, dependency, interface, or supported workflow changes. Add scheduled checks for high-traffic and high-risk pages, but do not treat a date alone as proof of freshness.
-
-**What should happen when a review finds major problems?**
-
-Publish when the technical path and claims are verified. A scheduled slot can move to the next prepared article.
+It cannot prove that the released product matches the claim or that the page changes the reader's next decision.
