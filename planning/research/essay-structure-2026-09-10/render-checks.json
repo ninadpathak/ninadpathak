@@ -1,0 +1,310 @@
+[
+  {
+    "device": "desktop",
+    "status": 200,
+    "title": "Before You Ask an Expert",
+    "canonical": "https://ninadpathak.com/articles/writing-ai-first-content/",
+    "viewportWidth": 1440,
+    "scrollWidth": 1440,
+    "headings": [
+      {
+        "level": 2,
+        "text": "Use AI to find the question beneath the topic",
+        "id": "use-ai-to-find-the-question-beneath-the-topic",
+        "fontSize": 32
+      },
+      {
+        "level": 3,
+        "text": "Start with the claim you would otherwise take to the interview",
+        "id": "start-with-the-claim-you-would-otherwise-take-to-the-interview",
+        "fontSize": 24
+      },
+      {
+        "level": 3,
+        "text": "Challenge the assumption until it becomes specific",
+        "id": "challenge-the-assumption-until-it-becomes-specific",
+        "fontSize": 24
+      },
+      {
+        "level": 2,
+        "text": "Bring the expert an open question",
+        "id": "bring-the-expert-an-open-question",
+        "fontSize": 32
+      },
+      {
+        "level": 3,
+        "text": "Prepare questions from what you still do not know",
+        "id": "prepare-questions-from-what-you-still-do-not-know",
+        "fontSize": 24
+      },
+      {
+        "level": 3,
+        "text": "Leave room for the expert to reject your premise",
+        "id": "leave-room-for-the-expert-to-reject-your-premise",
+        "fontSize": 24
+      },
+      {
+        "level": 2,
+        "text": "Follow the expert into the evidence",
+        "id": "follow-the-expert-into-the-evidence",
+        "fontSize": 32
+      },
+      {
+        "level": 3,
+        "text": "Let one concrete detail change the problem",
+        "id": "let-one-concrete-detail-change-the-problem",
+        "fontSize": 24
+      },
+      {
+        "level": 3,
+        "text": "Ask what the record can show",
+        "id": "ask-what-the-record-can-show",
+        "fontSize": 24
+      },
+      {
+        "level": 2,
+        "text": "Write from what survived the conversation",
+        "id": "write-from-what-survived-the-conversation",
+        "fontSize": 32
+      },
+      {
+        "level": 3,
+        "text": "Separate the stale-code claim from what the record proves",
+        "id": "separate-the-stale-code-claim-from-what-the-record-proves",
+        "fontSize": 24
+      },
+      {
+        "level": 3,
+        "text": "Rebuild the article around the evidence",
+        "id": "rebuild-the-article-around-the-evidence",
+        "fontSize": 24
+      }
+    ],
+    "tocLinks": [
+      {
+        "text": "Use AI to find the question beneath the topic",
+        "href": "#use-ai-to-find-the-question-beneath-the-topic",
+        "depth": 2
+      },
+      {
+        "text": "Start with the claim you would otherwise take to the interview",
+        "href": "#start-with-the-claim-you-would-otherwise-take-to-the-interview",
+        "depth": 3
+      },
+      {
+        "text": "Challenge the assumption until it becomes specific",
+        "href": "#challenge-the-assumption-until-it-becomes-specific",
+        "depth": 3
+      },
+      {
+        "text": "Bring the expert an open question",
+        "href": "#bring-the-expert-an-open-question",
+        "depth": 2
+      },
+      {
+        "text": "Prepare questions from what you still do not know",
+        "href": "#prepare-questions-from-what-you-still-do-not-know",
+        "depth": 3
+      },
+      {
+        "text": "Leave room for the expert to reject your premise",
+        "href": "#leave-room-for-the-expert-to-reject-your-premise",
+        "depth": 3
+      },
+      {
+        "text": "Follow the expert into the evidence",
+        "href": "#follow-the-expert-into-the-evidence",
+        "depth": 2
+      },
+      {
+        "text": "Let one concrete detail change the problem",
+        "href": "#let-one-concrete-detail-change-the-problem",
+        "depth": 3
+      },
+      {
+        "text": "Ask what the record can show",
+        "href": "#ask-what-the-record-can-show",
+        "depth": 3
+      },
+      {
+        "text": "Write from what survived the conversation",
+        "href": "#write-from-what-survived-the-conversation",
+        "depth": 2
+      },
+      {
+        "text": "Separate the stale-code claim from what the record proves",
+        "href": "#separate-the-stale-code-claim-from-what-the-record-proves",
+        "depth": 3
+      },
+      {
+        "text": "Rebuild the article around the evidence",
+        "href": "#rebuild-the-article-around-the-evidence",
+        "depth": 3
+      }
+    ],
+    "errors": [],
+    "assertions": {
+      "exactHeadingTree": true,
+      "uniqueNonemptyAnchors": true,
+      "tocMatchesHeadingAnchors": true,
+      "tocDepthMatchesHeadings": true,
+      "noHorizontalOverflow": true,
+      "readableHeadingFloor": true,
+      "noPageErrors": true
+    }
+  },
+  {
+    "device": "mobile",
+    "status": 200,
+    "title": "Before You Ask an Expert",
+    "canonical": "https://ninadpathak.com/articles/writing-ai-first-content/",
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "headings": [
+      {
+        "level": 2,
+        "text": "Use AI to find the question beneath the topic",
+        "id": "use-ai-to-find-the-question-beneath-the-topic",
+        "fontSize": 28
+      },
+      {
+        "level": 3,
+        "text": "Start with the claim you would otherwise take to the interview",
+        "id": "start-with-the-claim-you-would-otherwise-take-to-the-interview",
+        "fontSize": 22
+      },
+      {
+        "level": 3,
+        "text": "Challenge the assumption until it becomes specific",
+        "id": "challenge-the-assumption-until-it-becomes-specific",
+        "fontSize": 22
+      },
+      {
+        "level": 2,
+        "text": "Bring the expert an open question",
+        "id": "bring-the-expert-an-open-question",
+        "fontSize": 28
+      },
+      {
+        "level": 3,
+        "text": "Prepare questions from what you still do not know",
+        "id": "prepare-questions-from-what-you-still-do-not-know",
+        "fontSize": 22
+      },
+      {
+        "level": 3,
+        "text": "Leave room for the expert to reject your premise",
+        "id": "leave-room-for-the-expert-to-reject-your-premise",
+        "fontSize": 22
+      },
+      {
+        "level": 2,
+        "text": "Follow the expert into the evidence",
+        "id": "follow-the-expert-into-the-evidence",
+        "fontSize": 28
+      },
+      {
+        "level": 3,
+        "text": "Let one concrete detail change the problem",
+        "id": "let-one-concrete-detail-change-the-problem",
+        "fontSize": 22
+      },
+      {
+        "level": 3,
+        "text": "Ask what the record can show",
+        "id": "ask-what-the-record-can-show",
+        "fontSize": 22
+      },
+      {
+        "level": 2,
+        "text": "Write from what survived the conversation",
+        "id": "write-from-what-survived-the-conversation",
+        "fontSize": 28
+      },
+      {
+        "level": 3,
+        "text": "Separate the stale-code claim from what the record proves",
+        "id": "separate-the-stale-code-claim-from-what-the-record-proves",
+        "fontSize": 22
+      },
+      {
+        "level": 3,
+        "text": "Rebuild the article around the evidence",
+        "id": "rebuild-the-article-around-the-evidence",
+        "fontSize": 22
+      }
+    ],
+    "tocLinks": [
+      {
+        "text": "Use AI to find the question beneath the topic",
+        "href": "#use-ai-to-find-the-question-beneath-the-topic",
+        "depth": 2
+      },
+      {
+        "text": "Start with the claim you would otherwise take to the interview",
+        "href": "#start-with-the-claim-you-would-otherwise-take-to-the-interview",
+        "depth": 3
+      },
+      {
+        "text": "Challenge the assumption until it becomes specific",
+        "href": "#challenge-the-assumption-until-it-becomes-specific",
+        "depth": 3
+      },
+      {
+        "text": "Bring the expert an open question",
+        "href": "#bring-the-expert-an-open-question",
+        "depth": 2
+      },
+      {
+        "text": "Prepare questions from what you still do not know",
+        "href": "#prepare-questions-from-what-you-still-do-not-know",
+        "depth": 3
+      },
+      {
+        "text": "Leave room for the expert to reject your premise",
+        "href": "#leave-room-for-the-expert-to-reject-your-premise",
+        "depth": 3
+      },
+      {
+        "text": "Follow the expert into the evidence",
+        "href": "#follow-the-expert-into-the-evidence",
+        "depth": 2
+      },
+      {
+        "text": "Let one concrete detail change the problem",
+        "href": "#let-one-concrete-detail-change-the-problem",
+        "depth": 3
+      },
+      {
+        "text": "Ask what the record can show",
+        "href": "#ask-what-the-record-can-show",
+        "depth": 3
+      },
+      {
+        "text": "Write from what survived the conversation",
+        "href": "#write-from-what-survived-the-conversation",
+        "depth": 2
+      },
+      {
+        "text": "Separate the stale-code claim from what the record proves",
+        "href": "#separate-the-stale-code-claim-from-what-the-record-proves",
+        "depth": 3
+      },
+      {
+        "text": "Rebuild the article around the evidence",
+        "href": "#rebuild-the-article-around-the-evidence",
+        "depth": 3
+      }
+    ],
+    "errors": [],
+    "assertions": {
+      "exactHeadingTree": true,
+      "uniqueNonemptyAnchors": true,
+      "tocMatchesHeadingAnchors": true,
+      "tocDepthMatchesHeadings": true,
+      "noHorizontalOverflow": true,
+      "readableHeadingFloor": true,
+      "noPageErrors": true
+    }
+  }
+]
