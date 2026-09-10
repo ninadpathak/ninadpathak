@@ -1,0 +1,25 @@
+$ node check.mjs
+valid signature: 204
+wrong, malformed, missing signatures: 401
+body changed after signing: 401
+signed invalid JSON: 400
+response dropped after storage: client fetch rejected
+same key and payload: 200 exp_1
+same key, changed format: 409
+new key for same format: 202 exp_2
+stored state: {"exports":2,"events":1}
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+Error: aborted
+    at abortIncoming (node:_http_server:897:17)
+    at socketOnClose (node:_http_server:890:3)
+    at Socket.emit (node:events:521:24)
+    at TCP.<anonymous> (node:net:351:12) {
+  code: 'ECONNRESET'
+}
+
+Node.js v24.18.0
+
+exit=1

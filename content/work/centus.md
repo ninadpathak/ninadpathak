@@ -55,10 +55,6 @@ The coverage spanned more than ten framework and language combinations, includin
 
 When the docs said one thing and the framework did another, I kept what worked in the code, not what looked cleaner in the article.
 
-> "What saved us time was not just the writing quality. It was that the technical review stopped being a rewrite."
-> 
-> Product marketing stakeholder, Centus
-
 ## The review loop stayed short because the drafts were already usable
 
 This is where the engagement proved itself.
@@ -71,10 +67,6 @@ Across 50+ guides, the review pattern stayed stable:
 - 0 rounds of engineering revision
 - 10+ frameworks covered
 - articles good enough to be referenced in developer-facing discussions
-
-> "It read like someone had already hit the bugs before our users did."
-> 
-> Internal reviewer, Centus
 
 ## This is the workflow I bring to DevTools teams
 

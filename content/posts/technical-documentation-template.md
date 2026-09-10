@@ -17,138 +17,139 @@ takeaways:
 - Validate navigation and local links before publishing a generated documentation
   site.
 title: 'Technical Documentation Template: Build Product Docs With a Tested Structure'
-updated: 2026-08-05
+updated: 2026-09-10
 ---
 
-Creating documentation often forces several decisions at once: where readers begin, how they complete the first task, where exact details belong, and how they recover when a step fails. A template reduces that first pass to a structure you can inspect and adapt.
+A documentation template can manufacture the appearance of order in seconds: a getting-started page, a reference section, a neat little slot for troubleshooting. Fill those headings before choosing a real product task and you have built an empty house faster.
 
-<!-- receipt-backed-first-person -->
+I think a template earns its keep only when it forces the writer to expose product behavior. The downloads below pair a blank starter with a filled example for a hypothetical export service that stores request records in memory without generating files.
 
-I built this template to solve a narrow problem: an empty documentation repository leaves every contributor to invent navigation, page responsibilities, and release checks again. It provides five focused pages, a local validator, and a strict build path so the structure is useful before the product-specific writing begins.
+The quickstart proves a first result, reference nails down the contract, and troubleshooting tells the reader what to do when the response disappears.
 
-## Download the technical documentation template
+## Copy the blank starter or inspect the filled template
 
-<p><a class="btn btn-primary" href="/static/templates/technical-documentation-template.zip">Download the template</a></p>
+- [Download the blank technical documentation template](/static/templates/technical-documentation-template.zip).
+- [Download the filled writing lab and runnable fixture](/static/examples/writing-lab.zip).
+- [Read the filled documentation index](/static/examples/writing-lab/docs/index.md).
 
-Unpack the archive, then replace the placeholders with evidence from your product. The remaining sections show what belongs in each page and how to verify the result.
+The blank starter contains a MkDocs site and its validator. The writing lab is a separate Markdown example with a local service; it does not replace the starter's publishing setup.
 
-## What a technical documentation template should include
+If you need endpoint-specific documentation rather than a product-wide starting structure, use the [API documentation template](/articles/api-documentation-template-the-pages-every-api-needs/).
 
-A technical documentation template is a reusable starting structure for product or engineering documentation. It should tell a contributor where a reader begins, where they complete a task, where they look up stable details, and where they recover from a known failure.
-
-A table of contents alone cannot do that work. It can label a page “Getting started” without establishing prerequisites, a tested command, an expected result, or a recovery path.
-
-The starter contains five pages because they create a complete first route without pretending every product needs the same collection.
-
-| Page | Reader job | Evidence to add before publishing |
+| Page job | Filled example | Evidence the page must supply |
 | --- | --- | --- |
-| index.md | Choose the first useful task | A direct route to the right starting page |
-| getting-started.md | Complete first setup | Prerequisites, a tested command, expected output |
-| guides/send-a-request.md | Perform one bounded task | A full request and response or observable state |
-| reference/configuration.md | Look up stable details | Names, types, defaults, and constraints |
-| troubleshooting.md | Recover from a known failure | Symptom, diagnostic check, cause, and recovery |
+| Choose where to begin | `docs/index.md` | Links from the reader's task to the owning page |
+| Reach first success | `docs/getting-started.md` | Startup commands and an observable response |
+| Perform a bounded task | `docs/send-a-request.md` | A complete request with its recovery branch |
+| Look up a contract | `docs/reference.md` | Input rules and response meanings |
+| Recover from a symptom | `docs/troubleshooting.md` | A diagnostic check and a justified next action |
 
-Tutorials, how-to guides, reference, and explanation serve different reader needs. This template starts with a smaller product-docs system, then leaves room to add explanation when a concept needs more than instructions.
+If a page has no distinct reader job, kill the placeholder until a task requires it. An empty "Concepts" section is a promise nobody has done the work to keep.
 
-## The files included in the template
+The [documentation types guide](/articles/types-of-technical-documentation/) helps place explanation or tutorial material when it grows beyond this initial route.
 
-The archive contains Markdown source, MkDocs configuration, a validator, and a GitHub Actions deployment workflow.
+## Fill the starting path with a real command
 
-```text
-technical-documentation-template/
-├── docs/
-│   ├── index.md
-│   ├── getting-started.md
-│   ├── guides/send-a-request.md
-│   ├── reference/configuration.md
-│   └── troubleshooting.md
-├── scripts/validate_docs.py
-├── .github/workflows/deploy.yml
-├── mkdocs.yml
-└── requirements.txt
-```
-
-This layout keeps navigation, source, validation, and deployment close together. The documentation is not just a folder of Markdown files.
-
-It is a small publishing system with inputs and checks.
-
-[MkDocs](https://www.mkdocs.org/getting-started/) uses the same basic split: a configuration file defines the site, a docs directory contains the source, and a build produces static output. Keeping those roles separate makes a broken link or missing navigation target easier to locate.
-
-## Turn placeholders into a tested first task
-
-Start with the smallest action that proves your product is usable. For an API, that could be an authenticated request returning a known response.
-
-For a CLI, it could be installation followed by one safe command. For an internal service, it might be a local development setup that reaches a health endpoint.
-
-Write the getting-started page around that outcome. State what the reader needs before beginning, give the exact action, show the expected state, and link to the next task.
-
-A webhook product provides a concrete example. A vague template might say, “Configure a webhook endpoint.”
-
-A useful task page instead identifies the event, endpoint URL, signing-secret requirement, request body, successful response, and how to inspect a failed delivery. Each item answers a different question the reader encounters while completing the task.
-
-Do not move every option into the getting-started page. Put stable names, types, defaults, and constraints in reference.
-
-Stripe’s [API reference](https://docs.stripe.com/api) is useful to study because readers can move from an object to endpoints and fields without having to follow a tutorial first.
-
-## Give each page one owner and one update trigger
-
-A template stays useful when placeholder text is replaced with product evidence and maintained as the product changes.
-
-Give every page an owner and name the change that requires review. An API schema change should trigger reference review.
-
-A revised onboarding path should trigger getting-started review. A recurring support issue should create or update troubleshooting guidance.
-
-This rule is more useful than adding pages by habit. A page belongs in the documentation set when it owns a reader decision that would otherwise make another page harder to scan, update, or verify.
-
-Use the [documentation organization guide](/articles/how-to-organize-a-documentation-site/) when existing pages overlap. Use the [technical documentation types guide](/articles/types-of-technical-documentation/) when you need to decide whether the missing page is a tutorial, how-to guide, reference page, explanation, or an operational document.
-
-## Validate the template before you publish it
-
-The starter validator checks that every navigation target exists, each Markdown page has one H1, and local Markdown links resolve.
+The filled quickstart tells the reader to extract the archive and run these commands from `writing-lab`. The recorded test runtime is Node.js 24.18.0; the fixture has no npm dependencies.
 
 ```bash
+node --version
+node check.mjs
+node service.mjs
+```
+
+The check ends with `PASS`. The server then prints its loopback URL and remains running.
+
+Set `LAB_URL` to the printed value in another terminal:
+
+```bash
+export LAB_URL=http://127.0.0.1:49152
+curl --fail-with-body "$LAB_URL/health"
+curl -i "$LAB_URL/exports" \
+  -H 'Content-Type: application/json' \
+  -H 'Idempotency-Key: report-a' \
+  --data '{"format":"csv"}'
+```
+
+On a fresh server, the request returns HTTP 202 with `{"id":"exp_1","format":"csv","status":"accepted"}`. The page must define what "accepted" means: a record exists in this server's memory.
+
+If the health request fails, compare the URL with the server terminal before continuing; use the recovery page for an export error. Keep this server running for the recovery experiment below.
+
+## Put exact rules in reference
+
+A quickstart can choose `csv` for its first request. Reference must also say whether `json` is allowed and what happens to an unsupported value.
+
+That distinction keeps setup prose short without hiding the contract.
+
+| Reference field | Filled value | Check |
+| --- | --- | --- |
+| Format | `csv` or `json`, required | `xml` returns HTTP 400 |
+| Request key | Required; 1 to 64 ASCII letters, digits, or hyphens | Missing key returns HTTP 400 |
+| Body size | Limit: 4096 bytes | A valid padded 4096-byte request is accepted; 4097 bytes return HTTP 413 |
+| Retention | The lifetime of this server instance | A new instance starts with no stored records |
+| Output | An accepted record identifier | The fixture contains no file-generation worker |
+
+Run `node check.mjs` to verify the tested cases. An assertion failure means the corresponding contract statement needs investigation.
+
+For a CLI or internal tool, fill the option's allowed values and state the observed failure before recommending the page layout. Limit the claim to the tested cases, then name the behavior change that should trigger page review.
+
+## Give recovery its own decision table
+
+The blank starter already includes a troubleshooting page. The missing work is product-specific: supply enough information for the reader to act after an ambiguous outcome.
+
+The filled guide deliberately stores a request, then closes its connection without a response.
+
+```bash
+curl -i "$LAB_URL/exports" \
+  -H 'Content-Type: application/json' \
+  -H 'Idempotency-Key: report-loss' \
+  -H 'X-Fixture-Drop-Response: yes' \
+  --data '{"format":"csv"}'
+```
+
+Use a previously unused key. Expect curl's `Empty reply from server` and exit code 52.
+
+The controlled connection loss is not a timed network outage. If you receive HTTP 200, that key was already retained; use another unused key to reproduce the failure.
+
+| Observed state | Next action | Reason |
+| --- | --- | --- |
+| Response lost; same instance still running | Repeat with the saved key and format, omitting the fixture failure header | The retained record can be returned with HTTP 200 |
+| HTTP 409 | Compare the new format with the original request | The key identifies a different retained payload |
+| Process restarted after response loss | Stop the recovery experiment | The fixture cannot recover the previous record |
+
+"Retry failed requests" is the kind of instruction that looks tidy in a review and ruins someone's afternoon in production. The [filled request guide](/static/examples/writing-lab/docs/send-a-request.md) contains the retry command and the [troubleshooting page](/static/examples/writing-lab/docs/troubleshooting.md) owns the stop condition.
+
+The [recorded fixture checks](/static/examples/writing-lab/validation.txt) ran on Node.js 24.18.0 on 10 September 2026. No human reader trial has been completed.
+
+> Reader check: select an action for each row using only the filled pages, then identify the supporting sentence. If a choice needs outside information, record that gap before claiming the template supports the task.
+
+After the recovery experiment, press Ctrl-C in the server terminal. Stopping this fixture erases its stored records.
+
+## Check structure and behavior separately
+
+The blank starter's validator checks navigation and local Markdown links. Its strict build checks the documentation site.
+
+Run its commands from the extracted starter, after installing its requirements in a fresh Python environment:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements.txt
 python scripts/validate_docs.py
 mkdocs build --strict
 ```
 
-The validation is deliberately narrow. It cannot prove that a live API endpoint works, a permission is correct, or a screenshot matches the current interface.
+If installation or validation fails, stop before publishing generated output. These checks do not send a request to your product.
 
-Those claims still need product-level checks.
+The filled fixture's `node check.mjs` covers behavior and closes its temporary servers, but does not test the blank starter's publishing workflow.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Template validation and strict build receipt</div>
-  <div class="visual-container">
-    <img src="/static/images/articles/technical-documentation-template/template-build-receipt.png" alt="Terminal receipt showing five navigation targets, five Markdown pages, one H1 per page, resolvable local links, a strict MkDocs build, and generated index and sitemap files" loading="lazy">
-  </div>
-</div>
-<p class="visual-caption">The starter passed its repository checks and produced a static site in a fresh environment.</p>
+| Change | Page to review | Evidence to repeat |
+| --- | --- | --- |
+| Startup command changes | Getting started | Clean-directory startup and health request |
+| Input limit changes | Reference | Accepted boundary and rejected adjacent value |
+| Storage lifetime changes | Reference and troubleshooting | Recovery before and after restart |
+| A link target moves | Index and referring pages | Link validation and rendered navigation |
 
-I kept the validator beside the source because navigation defects are cheaper to catch before deployment. The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) adds a reader-facing review of links, visuals, accessibility, and the rendered page.
+The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) adds the reader-facing checks. The [technical writing examples](/articles/technical-writing-examples/) show how the same service needs different wording in a quickstart and a release note.
 
-## Publish the generated site, not your working files
-
-The included workflow installs pinned requirements, runs the validator, builds the site directory with strict checks, uploads that directory as the Pages artifact, and deploys it. Enable **GitHub Actions** as the publishing source before expecting a public site.
-
-[GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) confirms that static-site generators can publish through a custom Actions workflow. Verify the public URL after the workflow finishes rather than treating a green build as a public release.
-
-```yaml
-- run: python scripts/validate_docs.py
-- run: mkdocs build --strict
-- uses: actions/upload-pages-artifact@v3
-  with:
-    path: site
-```
-
-Do not put production credentials, private examples, or customer data in the repository. Pages content is public on the internet even when a plan permits a private repository.
-
-## Add pages when a reader need appears
-
-Begin with one tested path. Add reference when users need stable details without reading a guide.
-
-Add troubleshooting when a failure has a recognizable symptom and recovery. Add explanation when readers need to understand a design choice before they can apply it safely.
-
-That is how the template stays smaller than the product while still growing with it. The archive gives you the first structure and verification loop.
-
-Product evidence decides what belongs in it next.
-
-The guide to [what technical documentation should include](/articles/what-is-technical-documentation-and-what-should-it-include/) defines the minimum package before a team fills the template with product details.
+Assign an owner to each filled page and keep its triggering behavior beside the review check.

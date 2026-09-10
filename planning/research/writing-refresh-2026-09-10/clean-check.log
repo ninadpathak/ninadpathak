@@ -1,0 +1,17 @@
+$ node check.mjs
+valid signature: 204
+wrong, malformed, missing signatures: 401
+body changed after signing: 401
+signed invalid JSON: 400
+response dropped after storage: client fetch rejected
+same key and payload: 200 exp_1
+same key, changed format: 409
+new key for same format: 202 exp_2
+stored state: {"exports":2,"events":1}
+partial upload disconnected: server alive, prior state intact
+body limits: 4096 bytes accepted, 4097 bytes rejected; rejected body not stored
+replayed valid event: 204; event count increased from 1 to 2
+new fixture state: {"exports":0,"events":0}
+PASS
+
+exit=0

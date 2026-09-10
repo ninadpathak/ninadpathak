@@ -1,0 +1,290 @@
+[
+  {
+    "name": "tutorial",
+    "device": "desktop",
+    "status": 200,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "tables": [
+      {
+        "headings": [
+          "Requirement",
+          "Check",
+          "If it fails"
+        ],
+        "rows": 3
+      },
+      {
+        "headings": [
+          "Production question",
+          "What this fixture establishes",
+          "What remains unresolved"
+        ],
+        "rows": 4
+      },
+      {
+        "headings": [
+          "Review question",
+          "Evidence to retain",
+          "Release decision"
+        ],
+        "rows": 5
+      }
+    ],
+    "strayPipes": 0,
+    "errors": []
+  },
+  {
+    "name": "template",
+    "device": "desktop",
+    "status": 200,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "tables": [
+      {
+        "headings": [
+          "Page job",
+          "Filled example",
+          "Evidence the page must supply"
+        ],
+        "rows": 5
+      },
+      {
+        "headings": [
+          "Reference field",
+          "Filled value",
+          "Check"
+        ],
+        "rows": 5
+      },
+      {
+        "headings": [
+          "Observed state",
+          "Next action",
+          "Reason"
+        ],
+        "rows": 3
+      },
+      {
+        "headings": [
+          "Change",
+          "Page to review",
+          "Evidence to repeat"
+        ],
+        "rows": 4
+      }
+    ],
+    "strayPipes": 0,
+    "errors": []
+  },
+  {
+    "name": "examples",
+    "device": "desktop",
+    "status": 200,
+    "width": 1440,
+    "scrollWidth": 1440,
+    "tables": [
+      {
+        "headings": [
+          "Format",
+          "Reader's task",
+          "Example artifact"
+        ],
+        "rows": 8
+      },
+      {
+        "headings": [
+          "Draft instruction",
+          "Revised instruction",
+          "Consequence"
+        ],
+        "rows": 2
+      },
+      {
+        "headings": [
+          "Draft instruction",
+          "Revised instruction",
+          "Check"
+        ],
+        "rows": 1
+      },
+      {
+        "headings": [
+          "Draft instruction",
+          "Revised instruction",
+          "Consequence"
+        ],
+        "rows": 1
+      },
+      {
+        "headings": [
+          "Draft entry",
+          "Revised entry",
+          "Check"
+        ],
+        "rows": 2
+      },
+      {
+        "headings": [
+          "Symptom",
+          "Diagnostic check",
+          "Action"
+        ],
+        "rows": 3
+      },
+      {
+        "headings": [
+          "Annotation",
+          "Example for this fixture"
+        ],
+        "rows": 6
+      }
+    ],
+    "strayPipes": 0,
+    "errors": []
+  },
+  {
+    "name": "tutorial",
+    "device": "mobile",
+    "status": 200,
+    "width": 390,
+    "scrollWidth": 390,
+    "tables": [
+      {
+        "headings": [
+          "Requirement",
+          "Check",
+          "If it fails"
+        ],
+        "rows": 3
+      },
+      {
+        "headings": [
+          "Production question",
+          "What this fixture establishes",
+          "What remains unresolved"
+        ],
+        "rows": 4
+      },
+      {
+        "headings": [
+          "Review question",
+          "Evidence to retain",
+          "Release decision"
+        ],
+        "rows": 5
+      }
+    ],
+    "strayPipes": 0,
+    "errors": []
+  },
+  {
+    "name": "template",
+    "device": "mobile",
+    "status": 200,
+    "width": 390,
+    "scrollWidth": 390,
+    "tables": [
+      {
+        "headings": [
+          "Page job",
+          "Filled example",
+          "Evidence the page must supply"
+        ],
+        "rows": 5
+      },
+      {
+        "headings": [
+          "Reference field",
+          "Filled value",
+          "Check"
+        ],
+        "rows": 5
+      },
+      {
+        "headings": [
+          "Observed state",
+          "Next action",
+          "Reason"
+        ],
+        "rows": 3
+      },
+      {
+        "headings": [
+          "Change",
+          "Page to review",
+          "Evidence to repeat"
+        ],
+        "rows": 4
+      }
+    ],
+    "strayPipes": 0,
+    "errors": []
+  },
+  {
+    "name": "examples",
+    "device": "mobile",
+    "status": 200,
+    "width": 390,
+    "scrollWidth": 390,
+    "tables": [
+      {
+        "headings": [
+          "Format",
+          "Reader's task",
+          "Example artifact"
+        ],
+        "rows": 8
+      },
+      {
+        "headings": [
+          "Draft instruction",
+          "Revised instruction",
+          "Consequence"
+        ],
+        "rows": 2
+      },
+      {
+        "headings": [
+          "Draft instruction",
+          "Revised instruction",
+          "Check"
+        ],
+        "rows": 1
+      },
+      {
+        "headings": [
+          "Draft instruction",
+          "Revised instruction",
+          "Consequence"
+        ],
+        "rows": 1
+      },
+      {
+        "headings": [
+          "Draft entry",
+          "Revised entry",
+          "Check"
+        ],
+        "rows": 2
+      },
+      {
+        "headings": [
+          "Symptom",
+          "Diagnostic check",
+          "Action"
+        ],
+        "rows": 3
+      },
+      {
+        "headings": [
+          "Annotation",
+          "Example for this fixture"
+        ],
+        "rows": 6
+      }
+    ],
+    "strayPipes": 0,
+    "errors": []
+  }
+]

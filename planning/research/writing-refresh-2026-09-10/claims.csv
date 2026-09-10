@@ -1,0 +1,15 @@
+claim,kind,source_or_run,scope,author_confirmation
+Earlier import fails in empty directory,observed test,missing-import.log,Supplied setup is incomplete; no claim about registry availability,Not a personal recollection
+Valid signature accepted and invalid signatures rejected,observed test,archive-check.log,Synthetic HMAC protocol and recorded cases only,Not a personal recollection
+Changed raw bytes rejected,observed test,archive-check.log,Trailing-space test case,Not a personal recollection
+Malformed JSON rejected after successful signature check,observed test,archive-check.log,Signed invalid JSON returns 400,Not a personal recollection
+Aborted upload preserves prior state,observed test,archive-check.log,Controlled partial upload on local server,Not a personal recollection
+Body size accepts 4096 and rejects 4097 bytes,observed test,archive-check.log,Valid padded JSON boundary cases,Not a personal recollection
+Repeated valid event is accepted,observed test,archive-check.log,Explicit replay changes event count from 1 to 2; replay protection absent,Not a personal recollection
+Lost response recovered with retained key,observed test,manual-curl.json and archive-check.log,Same running fixture instance and matching format; deliberate connection close rather than timed outage,Not a personal recollection
+Fresh key creates separate record,observed test,archive-check.log,Synthetic service map only,Not a personal recollection
+New instance has no retained records,observed test,archive-check.log,In-memory server instance; no production durability claim,Not a personal recollection
+Service does not generate files,sourced fact,service.mjs,Source inspection of complete fixture,Not a personal recollection
+Timing safe comparison requires equal byte lengths,sourced fact,https://nodejs.org/api/crypto.html#cryptotimingsafeequala-b,Comparison primitive alone does not secure surrounding code,Not a personal recollection
+Filled pages support three recovery decisions,observed test,Root-relayed independent AI docs-only review,AI reviewer inspection; not a human trial or population estimate,Not a personal recollection
+Reader action should determine document format,opinion,Editorial argument and original annotated examples,Method judgment; no measured usability improvement,Editorial stance only

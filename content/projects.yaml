@@ -42,7 +42,7 @@ projects:
     category: "Tooling / DX"
     status: "Live"
   - title: "Social Ground"
-    description: "A social media automation tool designed to streamline content scheduling and engagement across multiple platforms."
+    description: "A social publishing tool I built to schedule posts and manage replies across several platforms without living in five browser tabs."
     url: "https://socialgroundhq.com"
     tech_stack:
       - "Python"

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "health",
+    "exit": 0,
+    "stdout": "{\"status\":\"ok\"}",
+    "stderr": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n100    15    0    15    0     0   5355      0 --:--:-- --:--:-- --:--:--  7500\n"
+  },
+  {
+    "name": "first",
+    "exit": 0,
+    "stdout": "HTTP/1.1 202 Accepted\ncontent-type: application/json\nDate: Thu, 10 Sep 2026 17:34:16 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked\n\n{\"id\":\"exp_1\",\"format\":\"csv\",\"status\":\"accepted\"}",
+    "stderr": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n100    65    0    49  100    16  34361  11220 --:--:-- --:--:-- --:--:-- 65000\n"
+  },
+  {
+    "name": "drop",
+    "exit": 52,
+    "stdout": "",
+    "stderr": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n100    16    0     0  100    16      0  23845 --:--:-- --:--:-- --:--:-- 16000\ncurl: (52) Empty reply from server\n"
+  },
+  {
+    "name": "retry",
+    "exit": 0,
+    "stdout": "HTTP/1.1 200 OK\ncontent-type: application/json\nDate: Thu, 10 Sep 2026 17:34:16 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\nTransfer-Encoding: chunked\n\n{\"id\":\"exp_2\",\"format\":\"csv\",\"status\":\"accepted\"}",
+    "stderr": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n100    65    0    49  100    16  76923  25117 --:--:-- --:--:-- --:--:-- 65000\n"
+  }
+]

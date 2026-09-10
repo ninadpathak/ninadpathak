@@ -22,10 +22,6 @@ DelightChat sells customer support software for eCommerce teams handling WhatsAp
 
 There was no meaningful content footprint to build on. No existing cluster structure. No library of articles quietly bringing in the right buyers. The job was to build that from scratch and make it useful inside a competitive market.
 
-> "We did not need more SaaS content. We needed content that spoke to how Shopify brands actually run support."
-> 
-> Marketing lead, DelightChat
-
 ## Their buyers were searching for support problems, not software categories
 
 This was the key framing decision.
@@ -58,10 +54,6 @@ My process was straightforward:
 
 That gave DelightChat a content architecture instead of a pile of unrelated posts.
 
-> "The articles finally sounded like they were written for operators, not for a SaaS keyword list."
-> 
-> Content stakeholder, DelightChat
-
 ## The articles that won were the ones with specific operating detail
 
 The strongest pages were not broad explainers about customer support software. They were articles with clear, practical intent:
@@ -79,10 +71,6 @@ Those articles ranked because they answered the exact problem. They also convert
 - clear topical authority in eCommerce support
 - content that kept bringing in traffic after the initial buildout
 - organic search turned into a reliable acquisition channel
-
-> "What worked was the specificity. We were no longer publishing content that could belong to any generic helpdesk tool."
-> 
-> Growth stakeholder, DelightChat
 
 ## This is the kind of buildout early-stage SaaS teams usually need
 

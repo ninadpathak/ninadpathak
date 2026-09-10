@@ -2,34 +2,44 @@
 title: About Ninad Pathak
 ---
 
-## Programmer first. Writer second.
+## I refuse to write around a product I do not understand
 
-Before I wrote a single word for a client, I spent years writing code. Reading documentation at 2am. Cursing at it. Occasionally thanking whoever wrote the one guide that actually showed the edge case that was breaking my build.
+A technical article can be grammatically clean, properly optimized, and completely dead. You feel it when the writer keeps circling the feature because they never ran it, never found the failure state, and never decided what the reader should do when the happy path ends.
 
-That experience doesn't leave you. When I write a tutorial now, I'm the developer reading it. When an example feels hand-wavy, I notice. When the setup instructions skip a step that trips up everyone, I've been that person. The output reflects that.
+I write code and technical content because I want to get past that performance. If the article teaches an implementation, I want the implementation in front of me. If the documentation describes a contract, I want to know where that contract breaks.
 
-My engineering background isn't a line on a CV. It's why Centus's devs pushed my guides straight to publish without a revision cycle. It's why LinuxForDevices' audience, a group of people whose hobby is spotting incorrect terminal output, trusted the content enough to cite it in their own Stack Overflow answers.
+<span id="what-i-believe"></span>
 
-## Six years. 30+ companies. One thing they all needed.
+## Technical content should have a pulse
 
-The pattern across every engagement: smart teams, genuinely good products, content that wasn't matching what their audience actually wanted to read.
+Tech documentation and developer content is an absolute necessity. Crack it and you've captured more market than anyone in your niche. Suck at it, or try to automate it with AI, and developers will smell it from so far away you won't even see them running.
 
-Developers don't read marketing. They read documentation, implementation guides, and technical posts that respect their intelligence. They'll close a tab the moment something rings false. Writing that works for this audience requires knowing what "technically correct" actually means, not just being able to approximate it.
+The practical boundary is adoption. Documentation can help someone decide, integrate, and recover. It cannot repair a weak product, create demand where none exists, or prove category leadership on its own.
 
-## What I work on
+Developers still meet a product through its explanations as surely as they meet it through the interface. A guide can take the fear out of trying something new. A vague page can make a sound product feel unfinished.
 
-**DevTools and B2B SaaS** whose buyers are developers or technical decision-makers. The work usually falls into three categories:
+Strong technical content needs another human being behind it. Tutorials need decisions. Explanations need a point of view. Repeating the consensus in cleaner English makes me interchangeable with the writer who published the previous search result.
 
-- **Technical tutorials and implementation guides.** Step-by-step walkthroughs where the code runs, the concepts land, and the edge cases are in there because I hit them myself.
-- **Developer-facing blog content.** Long-form technical articles on AI agents, testing infrastructure, localization workflows, vector search, and whatever the engineering community is thinking about this quarter.
-- **Content strategy and SEO.** Building topical authority for technical products. 487 to 203,400 monthly visits for LinuxForDevices. 7,000 to 450,000 for Kiwi Sizing. That kind of thing.
+## AI can move the work without doing the thinking
 
-## How I work
+I use AI to prepare research, inspect a corpus, try variations, and attack a draft. It can help me build fixtures and chase a claim back to its source. That is useful work.
 
-Small client list, on purpose. When I take on a project, I'm actually inside the product, reading the docs, running the API, understanding what's actually hard about the implementation. That level of attention isn't scalable. I don't pretend it is.
+I will not ask a model to manufacture product understanding or personal judgment. Plausible prose is dangerous around technical products because it can sound finished before anyone has checked whether it is true. The final page needs an owner who knows why each claim is there and what evidence would force it to change.
 
-Responsive. Hits deadlines. Will tell you when the brief is wrong rather than quietly write around it. Engineers call my work accurate. Editors call it minimal-revision. Those two things don't usually come together.
+## What I do and what I refuse
 
-## Based in India
+I work on developer documentation, runnable tutorials, technical articles, and the content systems that help people find them. The published subjects range from localization and code review to AI agents, retrieval, and inference.
 
-Working with companies across the US, UK, and EU. Fully async, entirely comfortable with remote-first teams, zero timezone drama.
+I refuse to:
+
+- invent a personal story because the opening needs color
+- hide a weak argument under an SEO brief
+- publish code I cannot run or a result I cannot trace
+- turn an engineer into the unpaid ghostwriter for a careless draft
+- chase output volume until every article sounds like it came from the same machine
+
+## You can inspect the work
+
+I've worked with Semrush, Adobe, TinyFish, Mastra, Manicule, and OpenComputer.
+
+The [portfolio](/portfolio/) links to published articles, and the [projects](/projects/) expose the tools I build around documentation and AI search. Read those before believing a claim on this page. Work should carry its own proof.

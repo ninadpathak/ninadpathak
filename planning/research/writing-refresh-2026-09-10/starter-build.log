@@ -1,0 +1,49 @@
+CHECK ['.venv/bin/python', '-m', 'pip', 'install', '-r', 'requirements.txt']
+Collecting mkdocs==1.6.1
+  Downloading mkdocs-1.6.1-py3-none-any.whl (3.9 MB)
+Collecting watchdog>=2.0
+  Downloading watchdog-6.0.0-cp39-cp39-macosx_11_0_arm64.whl (89 kB)
+Collecting jinja2>=2.11.1
+  Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Collecting ghp-import>=1.0
+  Downloading ghp_import-2.1.0-py3-none-any.whl (11 kB)
+Collecting markupsafe>=2.0.1
+  Downloading markupsafe-3.0.3-cp39-cp39-macosx_11_0_arm64.whl (12 kB)
+Collecting pyyaml>=5.1
+  Downloading pyyaml-6.0.3-cp39-cp39-macosx_11_0_arm64.whl (174 kB)
+Collecting importlib-metadata>=4.4
+  Downloading importlib_metadata-8.7.1-py3-none-any.whl (27 kB)
+Collecting markdown>=3.3.6
+  Downloading markdown-3.9-py3-none-any.whl (107 kB)
+Collecting click>=7.0
+  Downloading click-8.1.8-py3-none-any.whl (98 kB)
+Collecting pyyaml-env-tag>=0.1
+  Downloading pyyaml_env_tag-1.1-py3-none-any.whl (4.7 kB)
+Collecting pathspec>=0.11.1
+  Downloading pathspec-1.1.1-py3-none-any.whl (57 kB)
+Collecting mkdocs-get-deps>=0.2.0
+  Downloading mkdocs_get_deps-0.2.2-py3-none-any.whl (9.6 kB)
+Collecting packaging>=20.5
+  Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Collecting mergedeep>=1.3.4
+  Downloading mergedeep-1.3.4-py3-none-any.whl (6.4 kB)
+Collecting python-dateutil>=2.8.1
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Collecting zipp>=3.20
+  Downloading zipp-3.23.1-py3-none-any.whl (10 kB)
+Collecting platformdirs>=2.2.0
+  Downloading platformdirs-4.4.0-py3-none-any.whl (18 kB)
+Collecting six>=1.5
+  Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Installing collected packages: zipp, six, pyyaml, python-dateutil, platformdirs, mergedeep, markupsafe, importlib-metadata, watchdog, pyyaml-env-tag, pathspec, packaging, mkdocs-get-deps, markdown, jinja2, ghp-import, click, mkdocs
+Successfully installed click-8.1.8 ghp-import-2.1.0 importlib-metadata-8.7.1 jinja2-3.1.6 markdown-3.9 markupsafe-3.0.3 mergedeep-1.3.4 mkdocs-1.6.1 mkdocs-get-deps-0.2.2 packaging-26.3 pathspec-1.1.1 platformdirs-4.4.0 python-dateutil-2.9.0.post0 pyyaml-6.0.3 pyyaml-env-tag-1.1 six-1.17.0 watchdog-6.0.0 zipp-3.23.1
+WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
+You should consider upgrading via the '/private/var/folders/8m/mzbx3_8d5xx9bfq8lqn7kpr00000gn/T/writing-starter-_dtxia28/technical-documentation-template/.venv/bin/python -m pip install --upgrade pip' command.
+CHECK ['.venv/bin/python', 'scripts/validate_docs.py']
+PASS navigation targets: 5
+PASS Markdown pages: 5
+PASS one H1 and resolvable local Markdown links
+CHECK ['.venv/bin/mkdocs', 'build', '--strict']
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: /private/var/folders/8m/mzbx3_8d5xx9bfq8lqn7kpr00000gn/T/writing-starter-_dtxia28/technical-documentation-template/site
+INFO    -  Documentation built in 0.06 seconds

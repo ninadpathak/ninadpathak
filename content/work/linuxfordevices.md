@@ -24,10 +24,6 @@ Topics were being picked without a clear search map. Articles were not reinforci
 
 That kind of site is common in technical publishing. There is effort going in, but the work is not organized in a way that search or readers can follow.
 
-> "We had content, but it did not feel discoverable or strategically connected."
-> 
-> Stakeholder, LinuxForDevices
-
 ## Linux readers notice bad technical writing immediately
 
 This audience does not forgive vague writing.
@@ -50,19 +46,11 @@ On the writing side, the standard was simple: if a command had not been run, it 
 
 On the distribution side, I pushed the strongest work into developer spaces where it could earn recognition beyond search.
 
-> "The difference was that the content started feeling like it came from someone who had actually used the tools."
-> 
-> Editorial stakeholder, LinuxForDevices
-
 ## The site became visible to both search engines and developers
 
 Traffic grew because the content architecture improved. Brand recognition grew because the content was worth sharing.
 
 Developers began citing the tutorials in forums, GitHub discussions, and Stack Overflow answers. The brand moved from low recognition inside the Linux community to being a known tutorial source.
-
-> "We were no longer publishing into a void. People were finding the guides, using them, and referencing them back to us."
-> 
-> Marketing stakeholder, LinuxForDevices
 
 ## Traffic reached 203,400 monthly visits and organic added revenue
 

@@ -1,0 +1,26 @@
+{
+  "protected_dirty_files": {
+    "planning/attribution.md": true,
+    "planning/daily-cycle.md": true,
+    "planning/leading-indicators.md": true,
+    "planning/position.md": true,
+    "planning/scoreboard.md": true,
+    "planning/url-inventory.json": true,
+    "planning/video/brief-001.md": true,
+    "planning/video/review-001.md": true
+  },
+  "staging_empty": true,
+  "canonicals": {
+    "how-to-write-a-technical-tutorial-that-actually-teaches": {
+      "canonical_preserved": true
+    },
+    "technical-documentation-template": {
+      "canonical_preserved": true
+    },
+    "technical-writing-examples": {
+      "canonical_preserved": true
+    }
+  },
+  "new_downloads_resolve": true,
+  "hard_banned_words": 0
+}

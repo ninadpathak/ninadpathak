@@ -1,7 +1,7 @@
 [site]
 title = "Ninad Pathak"
-tagline = "Technical Writing & Developer Documentation"
-description = "Technical writing and developer documentation by Ninad Pathak. Notes on API guides, code examples, and the product behavior behind a useful explanation."
+tagline = "Technical Writing With a Point of View"
+description = "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it."
 url = "https://ninadpathak.com"
 author = "Ninad Pathak"
 
@@ -75,15 +75,15 @@ description = "Paste a technical article. Get a linter report: condescension wor
 [[content.categories]]
 slug = "ai-search-optimization"
 title = "AI Search and Citation"
-description = "Getting technical content found and cited by AI Overviews, ChatGPT, and other answer engines."
-intro = "How answer engines pick sources, and what a documentation site can control."
+description = "Tests and arguments about what answer engines can extract, what crawlers can access, and what publishers cannot honestly promise."
+intro = "Answer-engine advice is full of rituals. I test the parts a publisher can control and name the parts nobody can guarantee."
 tag_matches = ["ai-search", "ai-overviews", "llms-txt", "answer-engines", "documentation-seo", "generative-engine-optimization"]
 
 [[content.categories]]
 slug = "ai-engineering"
 title = "AI Agents, Memory, and Retrieval"
-description = "Agent architecture, agent memory, retrieval-augmented generation, and LLM inference, with the benchmarks behind them."
-intro = "How production AI systems store, retrieve, and forget, and where each layer breaks."
+description = "Agent architecture, memory, retrieval, and inference explained through the failure boundaries that change an engineering decision."
+intro = "AI systems look magical until state goes stale, retrieval lies, or latency eats the product. I write from those boundaries inward."
 tag_matches = ["ai-agents", "ai agents", "agents", "agent-memory", "agent-architecture", "agent architecture", "agent design", "multi-agent", "multi-agent systems", "rag", "retrieval", "memory", "memory-hierarchy", "memory-management", "memory-optimization", "vector-search", "llm", "llm-architecture", "inference", "kv-cache", "context-window", "context-windows", "transformers", "fine-tuning", "mcp", "ai reasoning", "voice-ai", "agentic-cli", "infrastructure"]
 
 # Distribution. Merged 2026-08-17 from three separate clusters: reddit-marketing,
@@ -108,22 +108,22 @@ tag_matches = ["ai-agents", "ai agents", "agents", "agent-memory", "agent-archit
 [[content.categories]]
 slug = "distribution"
 title = "Reaching Developers"
-description = "Getting a technical product in front of the developers who would use it, through Reddit, forums, communities, and events."
-intro = "Where technical audiences already gather, and how to show up without being ejected."
+description = "How to reach developers without barging into their communities with a campaign wearing a fake moustache."
+intro = "Developers do not owe a product attention. Earn a place in the conversation or accept that the post deserves to disappear."
 tag_matches = ["reddit", "reddit-marketing", "community", "community-building", "forums", "discord", "events", "meetups", "workshops", "conferences", "distribution"]
 
 [[content.categories]]
 slug = "developer-experience"
 title = "Developer Experience and DevRel"
-description = "Content, positioning, and developer-facing craft for DevTools and B2B SaaS companies."
-intro = "Why developers trust some technical content and bounce off the rest."
+description = "Arguments about developer trust, technical content, and the decisions that make a product feel credible before a sales call."
+intro = "Developer trust dies when marketing makes a technical claim the product cannot cash. These articles show where the debt starts."
 tag_matches = ["developer-experience", "devtools", "developer-tools", "developer-marketing", "developer-productivity", "content-strategy", "engineering-culture", "career"]
 
 [[content.categories]]
 slug = "technical-documentation"
 title = "Technical Documentation"
-description = "Technical documentation systems, developer education, and documentation operations."
-intro = "Practical guidance for documentation that helps developers reach a working result."
+description = "Technical documentation built from product behavior, working examples, and a writer willing to decide what the reader needs."
+intro = "Documentation is where a product either teaches people to win or leaves them alone with the error. I care about that choice."
 tag_matches = ["documentation", "technical-writing", "api-documentation", "docs-as-code", "documentation-workflow", "information-architecture", "accessibility"]
 
 [contact]
