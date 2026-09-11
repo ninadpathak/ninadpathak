@@ -11,6 +11,17 @@
   margin-top: var(--space-6);
 }
 
+.home-client-strip .marquee-track {
+  gap: 0;
+}
+
+.home-client-strip .marquee-inner {
+  box-sizing: border-box;
+  min-width: 100vw;
+  justify-content: space-around;
+  padding-inline: var(--space-8);
+}
+
 .home-work-copy {
   max-width: 68ch;
 }
