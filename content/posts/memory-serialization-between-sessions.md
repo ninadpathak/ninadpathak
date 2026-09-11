@@ -5,7 +5,7 @@ description: Why agents forget everything on restart, and the serialization patt
   that actually solve it
 slug: memory-serialization-between-sessions
 status: published
-work_note: "[I write persistence guides](/portfolio/) around saved records and their restore procedure, including how developers recognize a record their current application version can no longer read."
+work_note: "Technical writer [Ninad Pathak](/portfolio/) documents persistence through saved records and restore procedures, including how developers recognize data that the current application version can no longer read."
 tags:
 - ai-agents
 - agent-memory

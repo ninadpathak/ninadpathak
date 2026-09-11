@@ -5,7 +5,7 @@ description: Write documentation headings that tell a reader which task, decisio
   concept, or recovery path a section covers.
 slug: how-to-write-task-based-documentation-headings
 status: published
-work_note: "A developer scanning for authentication setup should be able to find it in the outline. [My documentation editing](/contact/) makes headings name the task and puts the instructions in the order the reader needs them."
+work_note: "A developer looking for authentication setup should find it in the outline. [Ninad Pathak](/contact/) edits technical documentation so headings identify the task and instructions follow the reader's next decision."
 tags:
 - technical-writing
 - documentation

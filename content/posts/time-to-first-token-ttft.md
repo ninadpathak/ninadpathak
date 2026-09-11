@@ -5,7 +5,7 @@ description: Users do not care about total throughput. They care about how fast 
   first word appears. Here is the engineering guide to measuring and optimizing Time
   to First Token (TTFT) in production.
 status: published
-work_note: "[My performance explainers](/portfolio/) put the measurement boundary and test conditions beside the latency number, so developers can compare your result with what their application experiences."
+work_note: "[Ninad Pathak](/portfolio/)'s technical content puts measurement boundaries and test conditions beside performance figures, so developers can compare a provider's latency claim with the application they need to run."
 tags:
 - ai
 - llm

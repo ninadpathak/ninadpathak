@@ -5,7 +5,7 @@ description: How to choose between shared and isolated memory architectures for 
   systems, including their coordination and debugging trade-offs.
 slug: shared-vs-isolated-memory-multi-agent
 status: published
-work_note: "Who gets to overwrite a shared record? [My framework documentation](/portfolio/) answers that through a multi-agent example, making write ownership visible before developers start coordinating their own agents."
+work_note: "Who can overwrite a shared record? Developer content creator [Ninad Pathak](/portfolio/) explains multi-agent frameworks through examples that make write ownership visible before readers coordinate their own agents."
 tags:
 - ai-agents
 - multi-agent

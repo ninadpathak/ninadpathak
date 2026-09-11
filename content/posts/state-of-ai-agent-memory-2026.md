@@ -4,7 +4,7 @@ date: 2026-04-19
 description: Agent memory spans working state, episodic history, retrieval, and consistency
   controls. The right architecture depends on the agent's task and risk.
 status: published
-work_note: "[My comparison writing](/portfolio/) helps memory products answer evaluation questions about state ownership and portability, including how a developer would move their records elsewhere."
+work_note: "For memory products, [Ninad Pathak](/portfolio/) writes technical comparisons that answer questions about state ownership and portability, including how a developer would move stored records elsewhere."
 tags:
 - ai
 - agents

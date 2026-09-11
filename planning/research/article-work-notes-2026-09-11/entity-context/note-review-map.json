@@ -1,0 +1,404 @@
+[
+  {
+    "source": "content/posts/2026-04-21-the-taxonomy-of-ai-agents.md",
+    "purpose": "Classifying autonomy; education through permissions and stopping points.",
+    "note": "Developer content creator [Ninad Pathak](/portfolio/) explains agent architectures through the decisions developers need to make: which actions a system can take and where human approval belongs.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/2026-04-22-why-ai-agents-keep-failing-in-production.md",
+    "purpose": "Failure recovery; a tutorial for timeout handling and safe retries.",
+    "note": "A failed tool call belongs in an agent framework's tutorial, alongside the successful run. [Ninad Pathak](/contact/) writes technical documentation that explains retry limits and the recovery steps available to the developer.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/2026-04-23-agent-loop-anatomy.md",
+    "purpose": "Execution loop; SDK tutorial follows observations to decisions to stopping.",
+    "note": "[Ninad Pathak](/portfolio/) creates developer content that follows an agent SDK through execution, showing how a returned tool result informs the next action and which condition stops the run.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/2026-04-25-lambda-calculus-ai-reasoning-benchmark.md",
+    "purpose": "Reasoning evaluation; worked task with inspectable scoring, no benchmark claim.",
+    "note": "Technical evaluation articles need problems readers can check, with scoring rules attached. Technical writer [Ninad Pathak](/portfolio/) develops explanations around worked examples that let developers question the conclusion.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/2026-04-26-agent-vs-ai-assistant.md",
+    "purpose": "Agent versus assistant; product walkthrough establishes who makes decisions.",
+    "note": "For AI companies explaining product autonomy, [Ninad Pathak](/contact/) writes developer content that makes the interaction model explicit: what the software decides and what still requires the user's instruction.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/2026-04-27-multi-agent-vs-single-agent-tradeoffs.md",
+    "purpose": "Single versus multiple agents; education explains the second agent's handoff cost.",
+    "note": "A second agent introduces a handoff that a developer needs to understand. [Ninad Pathak](/portfolio/) creates technical content comparing orchestration patterns through their coordination costs and failure behavior.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/2026-05-05-contextual-compression-for-agent-memory.md",
+    "purpose": "Compression; before/after records reveal what the product discards.",
+    "note": "[Ninad Pathak](/portfolio/)'s developer content for memory products uses before-and-after records to explain compression, giving readers a concrete way to judge which discarded details matter to an application.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/2026-05-05-memory-versioning-and-audit-trails.md",
+    "purpose": "Audit history; documentation shows retrieval of past state, without compliance guarantees.",
+    "note": "Technical writer [Ninad Pathak](/contact/) documents how to retrieve the state behind an agent's past decision, making retention behavior and record history explicit for developers evaluating memory infrastructure.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/agent-harnesses.md",
+    "purpose": "Harness recovery; focused checkpoint interruption/resumption tutorial.",
+    "note": "An interrupted run makes checkpointing visible. [Ninad Pathak](/contact/) writes developer content that shows what resumes, which steps repeat, and where the operator needs to intervene.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/agentic-cli-benchmarks.md",
+    "purpose": "Coding CLI comparison; pinned task and patch-verification criteria.",
+    "note": "Comparing coding tools requires a task and a way to judge the patches. Developer content creator [Ninad Pathak](/portfolio/) writes comparisons with verification criteria that readers can apply to their own repositories.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/agentic-workflow-playbook.md",
+    "purpose": "Agentic workflow; tutorial includes the human review of a generated diff.",
+    "note": "[Ninad Pathak](/portfolio/) creates developer content for coding tools that takes a scoped repository change through the test commands and diff review needed before a merge.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/ai-memory-management-for-llms.md",
+    "purpose": "Memory lifecycle; API docs cover correction and deletion.",
+    "note": "Creation is only part of a memory API's documentation. Technical writer [Ninad Pathak](/contact/) explains correction and deletion too, including what a later request can still retrieve.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/best-llms-for-coding.md",
+    "purpose": "Coding-model selection; strategy follows developer search jobs rather than claiming a winner.",
+    "note": "Searches for coding models hide different jobs, from completing a function to changing a repository. [Ninad Pathak](/contact/) develops technical content strategies that connect those jobs to relevant product comparisons.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/code-documentation.md",
+    "purpose": "Code documentation boundaries; guides connect reference contracts to integration procedures.",
+    "note": "Technical writer [Ninad Pathak](/portfolio/) connects API reference entries to integration guides, keeping exact function contracts available without making developers assemble the full procedure from scattered signatures.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/context-windows-vs-memory.md",
+    "purpose": "Context versus persistence; docs explain session survival and stale-state replacement.",
+    "note": "Developer content for memory APIs needs to explain what survives a session and how stale state gets replaced. [Ninad Pathak](/portfolio/) writes technical articles and documentation that make those integration decisions clear.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/developer-onboarding-docs-what-works-what-doesnt.md",
+    "purpose": "Engineer onboarding; documentation ends in verified merged work.",
+    "note": "From access requests to a verified change, [Ninad Pathak](/contact/) writes technical onboarding documentation that gives a new engineer a route through setup and review rather than another reading list.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/documentation-accessibility-checklist.md",
+    "purpose": "Accessible docs; copyable commands and nonvisual descriptions stay in the brief.",
+    "note": "Developer content has to work when a reader cannot use a screenshot. [Ninad Pathak](/portfolio/) writes technical documentation with copyable commands, descriptive links, and text explanations of the expected result.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/documentation-review-checklist-before-you-publish.md",
+    "purpose": "Documentation review; compare instructions with product version before copyediting.",
+    "note": "[Ninad Pathak](/contact/) reviews technical documentation against the product version it describes, checking the instructions and missing steps before editing the wording that carries them.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/embedding-models-compared.md",
+    "purpose": "Embedding choices; comparison ties dimension choice to storage and retrieval.",
+    "note": "For embedding API comparisons, technical writer [Ninad Pathak](/contact/) connects vector dimensions to storage requirements and retrieval choices so developers can evaluate a product against the application they are building.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/engineering-velocity-documentation.md",
+    "purpose": "Engineering delivery; document release knowledge and recovery for the next engineer.",
+    "note": "A release procedure should outlast the person who remembers it. [Ninad Pathak](/contact/) creates technical documentation that records deployment checks and recovery instructions for the next engineer carrying out the work.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/episodic-vs-semantic-vs-working-memory-agents.md",
+    "purpose": "Memory categories; SDK tutorial distinguishes saved facts from action history.",
+    "note": "Developer content creator [Ninad Pathak](/portfolio/) explains memory SDKs through concrete operations, distinguishing how an application saves a preference from how it records an action.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/fine-tuning-vs-rag-for-agent-memory.md",
+    "purpose": "Fine-tuning versus retrieval; evaluation content starts from update requirements.",
+    "note": "[Ninad Pathak](/portfolio/)'s technical content compares fine-tuning and retrieval through update requirements: what needs retraining, what can be retrieved, and what changes between requests.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md",
+    "purpose": "Engineering-to-writing boundary; turn engineering discussions into external instructions.",
+    "note": "Engineering discussions become customer-facing instructions through technical writer [Ninad Pathak](/contact/)'s documentation work, explaining product decisions for developers who were not in the room when those decisions were made.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/how-anthropics-contextual-retrieval-changes-rag-architecture.md",
+    "purpose": "Contextual retrieval research; explain a mechanism with its experimental conditions attached.",
+    "note": "A research result needs its experimental conditions alongside the explanation. [Ninad Pathak](/portfolio/) creates technical content that follows an engineering change through its mechanism and the evidence supporting the claim.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/how-memory-works-in-claude-code.md",
+    "purpose": "Claude Code memory; confirmed Mem0 relationship introduces writing an integration guide.",
+    "note": "[Ninad Pathak](/contact/) is a technical writer who has worked with Mem0 and creates developer guides for memory integrations, explaining how persistent state connects to a coding workflow.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/how-memory-works-in-deerflow.md",
+    "purpose": "DeerFlow state handoff; walkthrough follows one record between agents.",
+    "note": "A state record can make a multi-agent workflow understandable. Developer content creator [Ninad Pathak](/contact/) writes walkthroughs showing which agent receives the record and what the next step can change.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/how-memory-works-in-hyperagents.md",
+    "purpose": "Composed agent memory; diagram becomes outline of tool-result retrieval.",
+    "note": "Technical writer [Ninad Pathak](/portfolio/) turns agent architecture diagrams into product explanations that trace a tool result from execution to the memory a later step retrieves.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/how-stripes-technical-blog-became-a-competitive-moat.md",
+    "purpose": "Stripe content strategy; engineering decisions teach the domain and lead toward implementation.",
+    "note": "[Ninad Pathak](/contact/) develops technical content strategies around a company's engineering decisions, turning domain explanations into articles that connect potential customers to a supported implementation.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/how-to-organize-a-documentation-site.md",
+    "purpose": "Documentation organization; planning gives competing answers one task-based home.",
+    "note": "When documentation sends readers between competing answers, page ownership needs attention before more pages are added. [Ninad Pathak](/portfolio/) plans technical documentation around reader tasks and a clear home for each answer.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/how-to-write-a-changelog-developers-actually-read.md",
+    "purpose": "Changelog; translate release changes into user behavior and migration links.",
+    "note": "Technical writer [Ninad Pathak](/contact/) turns merged changes into changelogs that name the affected behavior and link developers to the migration instructions required for an upgrade.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/how-to-write-a-technical-tutorial-that-actually-teaches.md",
+    "purpose": "Tutorial learning progression; establish prerequisite knowledge and teach adaptation through implementation decisions.",
+    "note": "[Ninad Pathak](/portfolio/) creates developer tutorials that teach readers to adapt an example, checking prerequisite knowledge before introducing the next implementation decision.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/how-to-write-task-based-documentation-headings.md",
+    "purpose": "Task headings; edit outlines for readers finding a specific procedure.",
+    "note": "A developer looking for authentication setup should find it in the outline. [Ninad Pathak](/contact/) edits technical documentation so headings identify the task and instructions follow the reader's next decision.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/hybrid-search-bm25-vector-search.md",
+    "purpose": "Hybrid retrieval; tutorial contrasts exact identifiers with paraphrases.",
+    "note": "For search products, [Ninad Pathak](/portfolio/) writes developer content that tests exact identifiers alongside paraphrased questions, explaining why different retrieval configurations return different results.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/internal-vs-external-documentation.md",
+    "purpose": "Public/private docs; separate supported customer instructions from internal records.",
+    "note": "Customer recovery instructions and private incident records have different readers. Technical writer [Ninad Pathak](/contact/) separates those documents while keeping the description of supported product behavior consistent.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/kv-cache-eviction-accuracy.md",
+    "purpose": "KV eviction; explain savings alongside quality evaluation conditions.",
+    "note": "[Ninad Pathak](/portfolio/) creates technical content about inference infrastructure that connects memory-saving techniques to evaluation conditions, giving developers the context needed to judge the quality tradeoff.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/llm-context-windows-explained.md",
+    "purpose": "Context limit; guide budgets both request input and response allocation.",
+    "note": "An advertised context limit needs a worked request budget. [Ninad Pathak](/contact/) writes developer content that accounts for input and response allocation when explaining model usage.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/llm-inference-optimization.md",
+    "purpose": "Inference configuration; engineering content explains batching/latency choices.",
+    "note": "Developer content creator [Ninad Pathak](/portfolio/) explains inference configuration through the workload behind it, connecting batching decisions to the response time a customer needs from an application.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/llm-token-budgets-cost-control.md",
+    "purpose": "Token pricing; document conversation cost with repeated-input assumptions.",
+    "note": "Technical documentation for an AI API should show what a conversation costs, including repeated input. [Ninad Pathak](/contact/) writes usage guides with worked calculations and explicit pricing assumptions.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/local-wasm-vector-benchmarks.md",
+    "purpose": "Browser vector tools; tutorial accounts for download/startup before query performance.",
+    "note": "[Ninad Pathak](/portfolio/)'s developer content for browser tools covers the initial download as well as the first query, helping readers evaluate startup costs before adopting a database.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/memory-for-voice-ai-agents.md",
+    "purpose": "Voice memory; interrupted-call education follows events and state changes.",
+    "note": "An interruption changes what a voice application should remember. [Ninad Pathak](/contact/) creates developer content that follows conversation events into the state an application needs to update or discard.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/memory-serialization-between-sessions.md",
+    "purpose": "Serialization; restore guide recognizes incompatible record versions.",
+    "note": "Technical writer [Ninad Pathak](/portfolio/) documents persistence through saved records and restore procedures, including how developers recognize data that the current application version can no longer read.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/mixture-of-experts-explained.md",
+    "purpose": "MoE deployment; architecture explanation connects compute and storage to hardware.",
+    "note": "For model providers explaining deployment requirements, [Ninad Pathak](/portfolio/) creates technical content connecting active computation and storage needs to the hardware choices a developer must make.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/model-context-protocol-explained.md",
+    "purpose": "MCP authorization; distinguish server connection from the permission checks behind a tool call.",
+    "note": "Connecting an MCP server is not the same as granting a tool permission to act. [Ninad Pathak](/contact/) writes technical integration guides that explain authentication and the authorization checks behind a tool call.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/production-ai-agent-errors.md",
+    "purpose": "Agent errors; documentation checks uncertain external side effects before a duplicate action.",
+    "note": "Did the tool fail before or after changing external state? Technical writer [Ninad Pathak](/portfolio/) documents agent API errors with the checks developers need before risking a duplicate action.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/rag-evaluation-metrics-what-actually-matters.md",
+    "purpose": "RAG evaluation; product examples connect failed metric to pipeline stage.",
+    "note": "Developer education for evaluation tools needs to explain what a failed score means. Technical writer [Ninad Pathak](/contact/) connects example results to the retrieval or generation step a reader should inspect.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/rag-vs-memory.md",
+    "purpose": "RAG/memory boundary; request walkthrough separates source evidence from saved state.",
+    "note": "[Ninad Pathak](/contact/) writes technical content for AI products that separates retrieved source evidence from saved user state, following where each enters a request and how memory gets updated.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/reranking-in-rag-why-your-top-k-results-are-probably-wrong.md",
+    "purpose": "Reranking; product writing explains relevant-looking but unhelpful results.",
+    "note": "A retrieval API comparison should show why a relevant-looking result can still be useless. Developer content creator [Ninad Pathak](/portfolio/) explains that behavior through examples customers can use to evaluate the product.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/semantic-caching-rag-optimization.md",
+    "purpose": "Semantic cache; tutorial includes invalidation when a stored answer expires.",
+    "note": "Technical writer [Ninad Pathak](/portfolio/) creates caching-product guides with an invalidation example alongside a successful cache hit, explaining when a stored answer stops being usable.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/seo-for-technical-documentation.md",
+    "purpose": "Docs discovery; content strategy connects search intent to completed task and measurement.",
+    "note": "Documentation discovery starts with the question a developer searches for. [Ninad Pathak](/contact/) plans technical content that connects that search to a working example, with measurement tied to the relevant pages.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/shared-vs-isolated-memory-multi-agent.md",
+    "purpose": "Shared memory; framework docs identify overwrite authority and disagreement.",
+    "note": "Who can overwrite a shared record? Developer content creator [Ninad Pathak](/portfolio/) explains multi-agent frameworks through examples that make write ownership visible before readers coordinate their own agents.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/short-term-memory-for-ai-agents.md",
+    "purpose": "Short-term context; education demonstrates trimming/summarizing at a budget boundary.",
+    "note": "[Ninad Pathak](/contact/) creates developer content around an agent's context budget, showing what the next request receives after the application trims or summarizes a long conversation.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/speculative-decoding-explained.md",
+    "purpose": "Speculative decoding; technical launch explains draft verification and test conditions.",
+    "note": "A faster-generation announcement needs an account of the draft-and-verification process. [Ninad Pathak](/portfolio/) writes technical launch content with workload conditions attached so developers can judge the relevance of the result.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/state-of-ai-agent-memory-2026.md",
+    "purpose": "Memory products; comparison covers ownership and portability of stored records.",
+    "note": "For memory products, [Ninad Pathak](/portfolio/) writes technical comparisons that answer questions about state ownership and portability, including how a developer would move stored records elsewhere.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/structured-outputs-llms-json-mode-function-calling.md",
+    "purpose": "Structured output; documentation separates supported constraints from caller validation.",
+    "note": "An output guarantee still needs instructions for refusals and validation failures. Technical writer [Ninad Pathak](/portfolio/) explains supported API constraints separately from the checks an application must perform.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/technical-documentation-best-practices-tested-real-developer-docs.md",
+    "purpose": "Docs practices; task review places response and recovery beside the action.",
+    "note": "[Ninad Pathak](/contact/) writes technical documentation around the integration a customer needs to finish, keeping expected responses beside commands and recovery instructions beside the failures they address.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/technical-documentation-template.md",
+    "purpose": "Docs template; writing fills structure with behavior, quickstart and reference.",
+    "note": "A template supplies structure; the product supplies behavior. [Ninad Pathak](/portfolio/) writes technical documentation that turns that behavior into a quickstart and reference, with troubleshooting for unexpected responses.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/technical-writing-for-ai-products-the-new-rules.md",
+    "purpose": "AI product writing; docs clarify variable outputs, contracts and evaluations.",
+    "note": "Technical writer [Ninad Pathak](/contact/) documents AI products through their supported output contracts and evaluation examples, helping developers understand what they can depend on when responses vary.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/technical-writing-for-engineers.md",
+    "purpose": "Writing for engineers; turn source material into a reviewable draft and specific questions.",
+    "note": "Engineering reviewers need specific product questions, not a tutorial to rewrite. [Ninad Pathak](/portfolio/) creates developer content from technical source material and identifies the behavior still needing confirmation.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/the-agent-design-space.md",
+    "purpose": "Agent design; content planning teaches execution patterns then SDK implementation.",
+    "note": "[Ninad Pathak](/contact/) plans developer content for agent platforms around execution patterns, then writes tutorials that connect those architecture choices to a supported SDK implementation.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/the-case-for-shorter-technical-documentation.md",
+    "purpose": "Shorter docs; edit for answer placement without deleting safety conditions.",
+    "note": "When a retry instruction is buried under background reading, technical writer [Ninad Pathak](/contact/) edits the page around that decision while preserving the conditions that make the instruction safe to follow.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/time-to-first-token-ttft.md",
+    "purpose": "TTFT; performance writing makes measurement boundaries and test conditions explicit.",
+    "note": "[Ninad Pathak](/portfolio/)'s technical content puts measurement boundaries and test conditions beside performance figures, so developers can compare a provider's latency claim with the application they need to run.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/types-of-technical-documentation.md",
+    "purpose": "Docs types; planning assigns reference/tutorial jobs around customer tasks.",
+    "note": "Reference pages and tutorials serve different tasks. Technical writer [Ninad Pathak](/contact/) plans documentation that gives each a defined job and connects the pages a customer needs to use a product.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/voice-ai-latency-gemini-benchmark.md",
+    "purpose": "Voice latency; explain the spoken-turn pause through measured audio request stages.",
+    "note": "The pause between spoken turns spans more than model generation. [Ninad Pathak](/portfolio/) creates developer content for voice APIs that follows audio through the request stages and explains where that waiting time is measured.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/what-is-technical-documentation-and-what-should-it-include.md",
+    "purpose": "Docs scope; launch documentation establishes prerequisites, first request and reference.",
+    "note": "For a developer product launch, [Ninad Pathak](/contact/) writes technical documentation from the prerequisites for a first request to the reference that explains its response.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/why-coding-agents-lose-their-memory.md",
+    "purpose": "Coding-agent forgetting; strategy connects problem-aware searches to verifiable integration.",
+    "note": "A search about a forgetful coding agent can lead to a memory integration. [Ninad Pathak](/contact/) develops technical content strategies that answer the problem and explain a setup the reader can verify.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/why-devtools-startups-lose-deals-over-bad-docs.md",
+    "purpose": "DevTools evaluation; strategy and docs connect acquisition use case to setup and limits.",
+    "note": "[Ninad Pathak](/contact/) connects developer content strategy with product documentation, taking the use case that attracts an evaluator through setup and the limits needed to assess the product.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  },
+  {
+    "source": "content/posts/writing-release-notes-that-developers-trust.md",
+    "purpose": "Release notes; write upgrade behavior and migration instructions behind announcement.",
+    "note": "For an SDK release, technical writer [Ninad Pathak](/contact/) turns changed behavior into upgrade instructions that identify who is affected and what customers need to change.",
+    "status": "AWAITING_INDEPENDENT_ENTITY_NOTE_REVIEW"
+  }
+]

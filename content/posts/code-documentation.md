@@ -10,7 +10,7 @@ takeaways:
   - "Generate reference from stable contracts that source can expose."
   - "Use guides for decisions, sequences, and operating context that no symbol can contain."
 status: published
-work_note: "[I write API guides](/portfolio/) that connect a function's reference entry to the larger integration, keeping exact contracts available without making developers assemble the whole procedure themselves."
+work_note: "Technical writer [Ninad Pathak](/portfolio/) connects API reference entries to integration guides, keeping exact function contracts available without making developers assemble the full procedure from scattered signatures."
 slug: "code-documentation"
 ---
 

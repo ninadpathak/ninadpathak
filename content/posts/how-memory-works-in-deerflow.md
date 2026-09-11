@@ -5,7 +5,7 @@ description: 'A deep dive into the memory architecture of DeerFlow: layered cont
   passing, session state files, sub-agent isolation, and how it compares to Letta,
   AutoGen, and CrewAI.'
 status: published
-work_note: "[Let's write a walkthrough of your agent workflow](/contact/) that follows a state record across the handoff, showing developers which agent receives it and what can change."
+work_note: "A state record can make a multi-agent workflow understandable. Developer content creator [Ninad Pathak](/contact/) writes walkthroughs showing which agent receives the record and what the next step can change."
 tags:
 - ai
 - agents

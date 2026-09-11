@@ -4,7 +4,7 @@ date: 2026-07-30
 description: 'Review documentation in four passes: product truth, reader route, rendered behavior, and release state, before polishing prose.'
 slug: documentation-review-checklist-before-you-publish
 status: published
-work_note: "Bring me a documentation draft and the product version it describes. [My review work](/contact/) checks the instructions against that behavior, then fixes the missing steps before polishing the sentences around them."
+work_note: "[Ninad Pathak](/contact/) reviews technical documentation against the product version it describes, checking the instructions and missing steps before editing the wording that carries them."
 tags:
 - technical-writing
 - documentation-workflow

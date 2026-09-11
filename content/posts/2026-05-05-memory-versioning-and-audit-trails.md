@@ -5,7 +5,7 @@ description: If your agent overwrites its memory, you cannot pass a compliance a
   How to build append-only memory versioning and trace agent reasoning.
 slug: memory-versioning-and-audit-trails
 status: published
-work_note: "For products that retain decision history, the docs should show how to retrieve the state behind an answer. [Talk to me about documenting that workflow](/contact/), with clear retention behavior rather than unsupported compliance promises."
+work_note: "Technical writer [Ninad Pathak](/contact/) documents how to retrieve the state behind an agent's past decision, making retention behavior and record history explicit for developers evaluating memory infrastructure."
 tags:
 - ai agents
 - agent-memory

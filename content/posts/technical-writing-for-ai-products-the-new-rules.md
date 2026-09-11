@@ -4,7 +4,7 @@ date: 2026-03-31
 description: AI product docs now need prompts, schemas, evals, and version boundaries.
   I explain the rules I would use to judge a technical writer for an AI company.
 status: published
-work_note: "Your AI product's docs need to explain what developers can depend on when outputs vary. [I write that documentation](/contact/), covering the supported output contract and evaluation examples readers can use in their own applications."
+work_note: "Technical writer [Ninad Pathak](/contact/) documents AI products through their supported output contracts and evaluation examples, helping developers understand what they can depend on when responses vary."
 tags:
 - technical-writing
 - ai

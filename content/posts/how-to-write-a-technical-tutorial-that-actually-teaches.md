@@ -5,7 +5,7 @@ description: Write a technical tutorial that takes one reader from a clear start
   point to a tested, useful result.
 slug: how-to-write-a-technical-tutorial-that-actually-teaches
 status: published
-work_note: "Your developer tutorial should get someone through a working integration, including the request that fails. I write [tutorials and documentation](/portfolio/) with the setup commands and recovery instructions needed to follow that path."
+work_note: "[Ninad Pathak](/portfolio/) creates developer tutorials that teach readers to adapt an example, checking prerequisite knowledge before introducing the next implementation decision."
 tags:
 - technical-writing
 - tutorials

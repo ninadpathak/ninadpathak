@@ -4,7 +4,7 @@ date: 2026-04-07
 description: I think Stripe’s technical blog compounds into a moat because it teaches,
   documents, and shapes developer trust long before a sales conversation starts.
 status: published
-work_note: "[My content strategy work](/contact/) turns your engineering team's decisions into articles that teach the problem domain and lead readers toward a supported implementation with your product."
+work_note: "[Ninad Pathak](/contact/) develops technical content strategies around a company's engineering decisions, turning domain explanations into articles that connect potential customers to a supported implementation."
 tags:
 - technical-writing
 - developer-marketing

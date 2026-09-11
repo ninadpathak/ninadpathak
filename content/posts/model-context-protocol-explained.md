@@ -5,7 +5,7 @@ description: Model Context Protocol (MCP) is the new standard for connecting AI 
   to data sources and tools. Here is why it matters, how it works, and why it is the
   missing link for agentic infrastructure.
 status: published
-work_note: "I've worked with Firecrawl. [Let's write your MCP integration guide](/contact/), from connecting the server to a permitted tool call, with authentication explained where readers configure it."
+work_note: "Connecting an MCP server is not the same as granting a tool permission to act. [Ninad Pathak](/contact/) writes technical integration guides that explain authentication and the authorization checks behind a tool call."
 tags:
 - ai
 - agents

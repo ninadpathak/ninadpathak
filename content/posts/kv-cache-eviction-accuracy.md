@@ -4,7 +4,7 @@ date: 2026-04-15
 description: A research-led comparison of KV-cache eviction strategies, including
   their accuracy risks and implementation trade-offs.
 status: published
-work_note: "[I write about inference infrastructure](/portfolio/) by connecting memory-saving techniques to their evaluation conditions, giving developers enough detail to question the quality tradeoff before adopting them."
+work_note: "[Ninad Pathak](/portfolio/) creates technical content about inference infrastructure that connects memory-saving techniques to evaluation conditions, giving developers the context needed to judge the quality tradeoff."
 tags:
 - llm
 - kv-cache

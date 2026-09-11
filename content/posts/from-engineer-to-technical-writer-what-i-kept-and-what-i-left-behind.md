@@ -4,7 +4,7 @@ date: 2026-04-05
 description: I explain which engineering habits still make me better at technical
   writing, which ones I had to drop, and how the day-to-day work changed.
 status: published
-work_note: "Your engineers know why the product works the way it does; customers need that reasoning in usable instructions. [Work with me](/contact/) to turn engineering discussions into documentation and tutorials for people outside the team."
+work_note: "Engineering discussions become customer-facing instructions through technical writer [Ninad Pathak](/contact/)'s documentation work, explaining product decisions for developers who were not in the room when those decisions were made."
 tags:
 - technical-writing
 - career

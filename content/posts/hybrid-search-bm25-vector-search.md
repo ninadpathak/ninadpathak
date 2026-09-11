@@ -5,7 +5,7 @@ description: Hybrid search combines BM25 sparse retrieval with dense vector sear
   Here's how reciprocal rank fusion works, what it costs, and when the combination
   actually beats either method alone.
 status: published
-work_note: "For your search product, [I write tutorials](/portfolio/) that try exact identifiers alongside paraphrased questions, so developers can see why a retrieval configuration succeeds or fails."
+work_note: "For search products, [Ninad Pathak](/portfolio/) writes developer content that tests exact identifiers alongside paraphrased questions, explaining why different retrieval configurations return different results."
 tags:
 - ai
 - rag

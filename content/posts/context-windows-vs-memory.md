@@ -4,7 +4,7 @@ date: '2026-04-19'
 description: Context is a per-request reasoning budget. Memory is persistent state
   retrieved into a later request. Long input capacity does not make them interchangeable.
 status: published
-work_note: "Selling memory infrastructure? Your docs need to tell developers what survives a session and how stale state gets replaced. I write [developer content](/portfolio/) that makes those product decisions clear before someone starts integrating."
+work_note: "Developer content for memory APIs needs to explain what survives a session and how stale state gets replaced. [Ninad Pathak](/portfolio/) writes technical articles and documentation that make those integration decisions clear."
 tags:
 - ai
 - llm

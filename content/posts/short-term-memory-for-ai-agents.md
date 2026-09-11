@@ -5,7 +5,7 @@ description: Context windows are not memory. Here is what every production AI ag
   engineer needs to understand about token budgets, overflow handling, and how short-term
   and long-term memory actually work together.
 status: published
-work_note: "[Let's explain your agent's context handling](/contact/) with a conversation that outgrows its budget, showing what the next request receives after the application trims or summarizes it."
+work_note: "[Ninad Pathak](/contact/) creates developer content around an agent's context budget, showing what the next request receives after the application trims or summarizes a long conversation."
 tags:
 - ai
 - agents

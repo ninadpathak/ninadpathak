@@ -4,7 +4,7 @@ date: 2026-04-17
 description: Real numbers, real pricing, and concrete strategies for keeping your
   LLM spend predictable.
 status: published
-work_note: "Pricing documentation should help a developer estimate a conversation, including repeated input. [I write cost and usage guides](/contact/) that turn per-token rates into worked examples with explicit assumptions and a way to check the calculation."
+work_note: "Technical documentation for an AI API should show what a conversation costs, including repeated input. [Ninad Pathak](/contact/) writes usage guides with worked calculations and explicit pricing assumptions."
 tags:
 - ai
 - cost

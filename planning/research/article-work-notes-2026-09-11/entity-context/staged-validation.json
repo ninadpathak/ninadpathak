@@ -1,0 +1,73 @@
+{
+  "validated_tree": "7ed36701db35d033ae2555c965e9ab5d18a72893",
+  "method": "git archive of index tree into disposable directory; generated evidence is added afterward",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "build.py"
+      ],
+      "exit_code": 0,
+      "log": "staged-00.log"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "staged-01.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/content_inventory_gate.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "staged-02.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/audit_clusters.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "staged-03.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/audit_stylesheets.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "staged-04.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/audit_structure.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "staged-05.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/audit_inert_css.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "staged-06.log"
+    }
+  ],
+  "temporary_export_removed": true
+}

@@ -5,7 +5,7 @@ description: The agent loop is not one thing. It is four distinct phases that ru
   in sequence, and understanding each one is how you debug what breaks.
 slug: agent-loop-anatomy
 status: published
-work_note: "For an agent SDK launch, [I write tutorials](/portfolio/) that follow execution from a returned tool result through the next decision to the condition that stops the run."
+work_note: "[Ninad Pathak](/portfolio/) creates developer content that follows an agent SDK through execution, showing how a returned tool result informs the next action and which condition stops the run."
 tags:
 - ai agents
 - agent architecture

@@ -4,7 +4,7 @@ date: 2026-04-19
 description: A deep dive into how HyperAgents retain context across interactions,
   layer memory architectures, and handle session continuity in production.
 status: published
-work_note: "An architecture diagram can double as the outline for a product guide. [I write the explanation around it](/portfolio/), tracing how a tool result becomes something a later step can retrieve."
+work_note: "Technical writer [Ninad Pathak](/portfolio/) turns agent architecture diagrams into product explanations that trace a tool result from execution to the memory a later step retrieves."
 tags:
 - ai
 - agents

@@ -5,7 +5,7 @@ description: Not all models are created equal for software development. Here is 
   benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic
   logic, and repository-scale refactoring as of March 2026.
 status: published
-work_note: "Which coding tasks bring the right developers to your product? [My content strategy work](/contact/) starts with those searches and shapes comparisons around the decisions behind them."
+work_note: "Searches for coding models hide different jobs, from completing a function to changing a repository. [Ninad Pathak](/contact/) develops technical content strategies that connect those jobs to relevant product comparisons."
 tags:
 - ai
 - llm

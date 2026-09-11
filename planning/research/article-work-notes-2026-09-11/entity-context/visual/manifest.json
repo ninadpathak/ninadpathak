@@ -1,0 +1,646 @@
+{
+  "baseURL": "http://127.0.0.1:8765",
+  "browser": "153.0.8010.36",
+  "capture": "Normal viewport screenshots centered on work note and original opening; no full-page stitching",
+  "artifacts": [
+    {
+      "file": "1440-dark-agent-harnesses.png",
+      "url": "http://127.0.0.1:8765/articles/agent-harnesses/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "An interrupted run makes checkpointing visible. Ninad Pathak writes developer content that shows what resumes, which steps repeat, and where the operator needs to intervene.",
+      "rect": {
+        "x": 384,
+        "y": 139.625,
+        "width": 672,
+        "height": 49.5
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "Agents look impressive in demos because the happy path is easy to show. The problems start later, once a search tool times out, a task runs past the timeout you forgot to set, or the model has to pick up after a half-finished step instead of starting",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": []
+    },
+    {
+      "file": "1440-dark-context-windows-vs-memory.png",
+      "url": "http://127.0.0.1:8765/articles/context-windows-vs-memory/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Developer content for memory APIs needs to explain what survives a session and how stale state gets replaced. Ninad Pathak writes technical articles and documentation that make those integration decisions clear.",
+      "rect": {
+        "x": 384,
+        "y": 140.171875,
+        "width": 672,
+        "height": 74.25
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "A model can accept a long prompt and still fail to use the fact that answers the question. It can also answer perfectly during one request and know nothing about that exchange when the next request begins.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": []
+    },
+    {
+      "file": "1440-dark-how-to-write-a-technical-tutorial-that-actually-teaches.png",
+      "url": "http://127.0.0.1:8765/articles/how-to-write-a-technical-tutorial-that-actually-teaches/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Ninad Pathak creates developer tutorials that teach readers to adapt an example, checking prerequisite knowledge before introducing the next implementation decision.",
+      "rect": {
+        "x": 384,
+        "y": 140.3125,
+        "width": 672,
+        "height": 49.5
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "The earlier worked example on this page imported verifyWebhook from @example/webhooks and celebrated a successful event without supplying the dependency or a command to start the server. Copy that import into a clean directory and the whole performan",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": []
+    },
+    {
+      "file": "1440-dark-writing-release-notes-that-developers-trust.png",
+      "url": "http://127.0.0.1:8765/articles/writing-release-notes-that-developers-trust/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "For an SDK release, technical writer Ninad Pathak turns changed behavior into upgrade instructions that identify who is affected and what customers need to change.",
+      "rect": {
+        "x": 384,
+        "y": 140.4375,
+        "width": 672,
+        "height": 49.5
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "It is late in the release cycle and someone wants to upgrade the SDK before the weekend. The team needs to know whether the API changed, whether CI needs a new runtime, and whether rollback is still possible.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": [
+        {
+          "src": "/static/images/visuals/semver.png",
+          "visible": false,
+          "complete": false,
+          "naturalWidth": 0,
+          "naturalHeight": 0
+        }
+      ]
+    },
+    {
+      "file": "1440-dark-how-memory-works-in-claude-code.png",
+      "url": "http://127.0.0.1:8765/articles/how-memory-works-in-claude-code/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Ninad Pathak is a technical writer who has worked with Mem0 and creates developer guides for memory integrations, explaining how persistent state connects to a coding workflow.",
+      "rect": {
+        "x": 384,
+        "y": 140.4375,
+        "width": 672,
+        "height": 49.5
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "Claude Code carries instructions across sessions through CLAUDE.md files and auto memory. Conversation context itself remains session-bound.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": []
+    },
+    {
+      "file": "1440-dark-memory-serialization-between-sessions.png",
+      "url": "http://127.0.0.1:8765/articles/memory-serialization-between-sessions/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Technical writer Ninad Pathak documents persistence through saved records and restore procedures, including how developers recognize data that the current application version can no longer read.",
+      "rect": {
+        "x": 384,
+        "y": 140.078125,
+        "width": 672,
+        "height": 74.25
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "An agent can handle every conversation in one process and still lose its state at the next restart. That is a persistence failure, not a model failure.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": []
+    },
+    {
+      "file": "1440-dark-why-coding-agents-lose-their-memory.png",
+      "url": "http://127.0.0.1:8765/articles/why-coding-agents-lose-their-memory/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "A search about a forgetful coding agent can lead to a memory integration. Ninad Pathak develops technical content strategies that answer the problem and explain a setup the reader can verify.",
+      "rect": {
+        "x": 384,
+        "y": 140.0625,
+        "width": 672,
+        "height": 74.25
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "The first time I watched a coding agent forget a six-hour refactoring session, I assumed it was a bug. It was not.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": []
+    },
+    {
+      "file": "1440-dark-how-memory-works-in-hyperagents.png",
+      "url": "http://127.0.0.1:8765/articles/how-memory-works-in-hyperagents/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Technical writer Ninad Pathak turns agent architecture diagrams into product explanations that trace a tool result from execution to the memory a later step retrieves.",
+      "rect": {
+        "x": 384,
+        "y": 140.125,
+        "width": 672,
+        "height": 49.5
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "DIV",
+      "originalFirstText": "HyperAgents Memory Architecture",
+      "originalFirstFontSize": "16px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": []
+    },
+    {
+      "file": "1440-dark-home-unchanged.png",
+      "url": "http://127.0.0.1:8765/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "dark",
+      "noteAbsent": true,
+      "matrixPresent": true
+    },
+    {
+      "file": "1440-light-agent-harnesses.png",
+      "url": "http://127.0.0.1:8765/articles/agent-harnesses/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "light",
+      "text": "An interrupted run makes checkpointing visible. Ninad Pathak writes developer content that shows what resumes, which steps repeat, and where the operator needs to intervene.",
+      "rect": {
+        "x": 384,
+        "y": 139.625,
+        "width": 672,
+        "height": 49.5
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "Agents look impressive in demos because the happy path is easy to show. The problems start later, once a search tool times out, a task runs past the timeout you forgot to set, or the model has to pick up after a half-finished step instead of starting",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(58, 58, 58)",
+      "bodyBackground": "rgb(248, 248, 246)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": []
+    },
+    {
+      "file": "1440-light-context-windows-vs-memory.png",
+      "url": "http://127.0.0.1:8765/articles/context-windows-vs-memory/",
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "theme": "light",
+      "text": "Developer content for memory APIs needs to explain what survives a session and how stale state gets replaced. Ninad Pathak writes technical articles and documentation that make those integration decisions clear.",
+      "rect": {
+        "x": 384,
+        "y": 140.171875,
+        "width": 672,
+        "height": 74.25
+      },
+      "clientWidth": 672,
+      "scrollWidth": 672,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "A model can accept a long prompt and still fail to use the fact that answers the question. It can also answer perfectly during one request and know nothing about that exchange when the next request begins.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(58, 58, 58)",
+      "bodyBackground": "rgb(248, 248, 246)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 1440,
+      "viewportWidth": 1440,
+      "images": []
+    },
+    {
+      "file": "390-dark-agent-harnesses.png",
+      "url": "http://127.0.0.1:8765/articles/agent-harnesses/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "An interrupted run makes checkpointing visible. Ninad Pathak writes developer content that shows what resumes, which steps repeat, and where the operator needs to intervene.",
+      "rect": {
+        "x": 24,
+        "y": 139.8125,
+        "width": 342,
+        "height": 99
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "Agents look impressive in demos because the happy path is easy to show. The problems start later, once a search tool times out, a task runs past the timeout you forgot to set, or the model has to pick up after a half-finished step instead of starting",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": []
+    },
+    {
+      "file": "390-dark-context-windows-vs-memory.png",
+      "url": "http://127.0.0.1:8765/articles/context-windows-vs-memory/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Developer content for memory APIs needs to explain what survives a session and how stale state gets replaced. Ninad Pathak writes technical articles and documentation that make those integration decisions clear.",
+      "rect": {
+        "x": 24,
+        "y": 140.21875,
+        "width": 342,
+        "height": 123.75
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "A model can accept a long prompt and still fail to use the fact that answers the question. It can also answer perfectly during one request and know nothing about that exchange when the next request begins.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": []
+    },
+    {
+      "file": "390-dark-how-to-write-a-technical-tutorial-that-actually-teaches.png",
+      "url": "http://127.0.0.1:8765/articles/how-to-write-a-technical-tutorial-that-actually-teaches/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Ninad Pathak creates developer tutorials that teach readers to adapt an example, checking prerequisite knowledge before introducing the next implementation decision.",
+      "rect": {
+        "x": 24,
+        "y": 140.203125,
+        "width": 342,
+        "height": 99
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "The earlier worked example on this page imported verifyWebhook from @example/webhooks and celebrated a successful event without supplying the dependency or a command to start the server. Copy that import into a clean directory and the whole performan",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": []
+    },
+    {
+      "file": "390-dark-writing-release-notes-that-developers-trust.png",
+      "url": "http://127.0.0.1:8765/articles/writing-release-notes-that-developers-trust/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "For an SDK release, technical writer Ninad Pathak turns changed behavior into upgrade instructions that identify who is affected and what customers need to change.",
+      "rect": {
+        "x": 24,
+        "y": 140.25,
+        "width": 342,
+        "height": 99
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "It is late in the release cycle and someone wants to upgrade the SDK before the weekend. The team needs to know whether the API changed, whether CI needs a new runtime, and whether rollback is still possible.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": [
+        {
+          "src": "/static/images/visuals/semver.png",
+          "visible": false,
+          "complete": false,
+          "naturalWidth": 0,
+          "naturalHeight": 0
+        }
+      ]
+    },
+    {
+      "file": "390-dark-how-memory-works-in-claude-code.png",
+      "url": "http://127.0.0.1:8765/articles/how-memory-works-in-claude-code/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Ninad Pathak is a technical writer who has worked with Mem0 and creates developer guides for memory integrations, explaining how persistent state connects to a coding workflow.",
+      "rect": {
+        "x": 24,
+        "y": 139.6875,
+        "width": 342,
+        "height": 99
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "Claude Code carries instructions across sessions through CLAUDE.md files and auto memory. Conversation context itself remains session-bound.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": []
+    },
+    {
+      "file": "390-dark-memory-serialization-between-sessions.png",
+      "url": "http://127.0.0.1:8765/articles/memory-serialization-between-sessions/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Technical writer Ninad Pathak documents persistence through saved records and restore procedures, including how developers recognize data that the current application version can no longer read.",
+      "rect": {
+        "x": 24,
+        "y": 139.53125,
+        "width": 342,
+        "height": 123.75
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "An agent can handle every conversation in one process and still lose its state at the next restart. That is a persistence failure, not a model failure.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": []
+    },
+    {
+      "file": "390-dark-why-coding-agents-lose-their-memory.png",
+      "url": "http://127.0.0.1:8765/articles/why-coding-agents-lose-their-memory/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "A search about a forgetful coding agent can lead to a memory integration. Ninad Pathak develops technical content strategies that answer the problem and explain a setup the reader can verify.",
+      "rect": {
+        "x": 24,
+        "y": 140.140625,
+        "width": 342,
+        "height": 123.75
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "The first time I watched a coding agent forget a six-hour refactoring session, I assumed it was a bug. It was not.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": []
+    },
+    {
+      "file": "390-dark-how-memory-works-in-hyperagents.png",
+      "url": "http://127.0.0.1:8765/articles/how-memory-works-in-hyperagents/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "dark",
+      "text": "Technical writer Ninad Pathak turns agent architecture diagrams into product explanations that trace a tool result from execution to the memory a later step retrieves.",
+      "rect": {
+        "x": 24,
+        "y": 139.71875,
+        "width": 342,
+        "height": 99
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "DIV",
+      "originalFirstText": "HyperAgents Memory Architecture",
+      "originalFirstFontSize": "16px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(194, 194, 194)",
+      "bodyBackground": "rgb(9, 9, 9)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": []
+    },
+    {
+      "file": "390-dark-home-unchanged.png",
+      "url": "http://127.0.0.1:8765/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "dark",
+      "noteAbsent": true,
+      "matrixPresent": true
+    },
+    {
+      "file": "390-light-agent-harnesses.png",
+      "url": "http://127.0.0.1:8765/articles/agent-harnesses/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "light",
+      "text": "An interrupted run makes checkpointing visible. Ninad Pathak writes developer content that shows what resumes, which steps repeat, and where the operator needs to intervene.",
+      "rect": {
+        "x": 24,
+        "y": 139.8125,
+        "width": 342,
+        "height": 99
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "Agents look impressive in demos because the happy path is easy to show. The problems start later, once a search tool times out, a task runs past the timeout you forgot to set, or the model has to pick up after a half-finished step instead of starting",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(58, 58, 58)",
+      "bodyBackground": "rgb(248, 248, 246)",
+      "link": "/contact/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": []
+    },
+    {
+      "file": "390-light-context-windows-vs-memory.png",
+      "url": "http://127.0.0.1:8765/articles/context-windows-vs-memory/",
+      "viewport": {
+        "width": 390,
+        "height": 950
+      },
+      "theme": "light",
+      "text": "Developer content for memory APIs needs to explain what survives a session and how stale state gets replaced. Ninad Pathak writes technical articles and documentation that make those integration decisions clear.",
+      "rect": {
+        "x": 24,
+        "y": 140.21875,
+        "width": 342,
+        "height": 123.75
+      },
+      "clientWidth": 342,
+      "scrollWidth": 342,
+      "immediatelyBeforeContent": true,
+      "originalFirstElement": "P",
+      "originalFirstText": "A model can accept a long prompt and still fail to use the fact that answers the question. It can also answer perfectly during one request and know nothing about that exchange when the next request begins.",
+      "originalFirstFontSize": "17px",
+      "noteFontSize": "15px",
+      "noteColor": "rgb(58, 58, 58)",
+      "bodyBackground": "rgb(248, 248, 246)",
+      "link": "/portfolio/",
+      "linkDecoration": "underline",
+      "pageWidth": 390,
+      "viewportWidth": 390,
+      "images": []
+    }
+  ],
+  "browserDisconnected": true
+}

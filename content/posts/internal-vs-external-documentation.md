@@ -5,7 +5,7 @@ description: Compare internal and external documentation, decide where each page
   and split shared subjects without exposing private operating context.
 slug: internal-vs-external-documentation
 status: published
-work_note: "[My documentation work](/portfolio/) separates a customer's supported recovery procedure from the internal incident record, so the public guide contains the instructions without exposing private operating details."
+work_note: "Customer recovery instructions and private incident records have different readers. Technical writer [Ninad Pathak](/contact/) separates those documents while keeping the description of supported product behavior consistent."
 tags:
 - documentation
 - technical-writing

@@ -5,7 +5,7 @@ description: AI agents juggle three distinct memory types. Getting them wrong is
   source of most agent memory failures I see in production.
 slug: episodic-vs-semantic-vs-working-memory-agents
 status: published
-work_note: "[My memory SDK tutorials](/portfolio/) teach saved preferences separately from action history, using the read and write operations developers will need in their applications."
+work_note: "Developer content creator [Ninad Pathak](/portfolio/) explains memory SDKs through concrete operations, distinguishing how an application saves a preference from how it records an action."
 tags:
 - ai-agents
 - agent-memory

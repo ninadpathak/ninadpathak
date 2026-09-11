@@ -5,7 +5,7 @@ description: Everything in AI starts with a vector. Here is how embedding models
   human language into high-dimensional geometry, why dimensionality reduction matters,
   and how to choose between OpenAI, Cohere, and self-hosted models.
 status: published
-work_note: "[Hire me for an embedding API comparison](/contact/) that connects vector dimensions to storage requirements and retrieval choices, helping developers evaluate your product against their application."
+work_note: "For embedding API comparisons, technical writer [Ninad Pathak](/contact/) connects vector dimensions to storage requirements and retrieval choices so developers can evaluate a product against the application they are building."
 tags:
 - ai
 - llm

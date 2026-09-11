@@ -5,7 +5,7 @@ description: 'A senior engineer''s breakdown of what memory management for LLMs 
   looks like in production: eviction strategies, KV cache management, importance-weighted
   retention, and why your agent keeps forgetting things.'
 status: published
-work_note: "[Work with me on memory API documentation](/contact/) that follows a fact through creation, correction, and deletion, including what a later request can still retrieve."
+work_note: "Creation is only part of a memory API's documentation. Technical writer [Ninad Pathak](/contact/) explains correction and deletion too, including what a later request can still retrieve."
 tags:
 - ai
 - agents

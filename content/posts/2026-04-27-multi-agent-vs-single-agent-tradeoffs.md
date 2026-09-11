@@ -5,7 +5,7 @@ description: The decision between one agent and many is not about capability. It
   about failure modes, latency, and operational complexity.
 slug: multi-agent-vs-single-agent-tradeoffs
 status: published
-work_note: "A multi-agent framework deserves a tutorial that explains why the second agent exists. My [developer content](/portfolio/) shows the handoff and its cost, giving readers enough context to choose the architecture for their own application."
+work_note: "A second agent introduces a handoff that a developer needs to understand. [Ninad Pathak](/portfolio/) creates technical content comparing orchestration patterns through their coordination costs and failure behavior."
 tags:
 - ai agents
 - multi-agent systems
