@@ -60,18 +60,14 @@
   <div class="container hero-content-wrap">
     <div class="hero-copy">
       <div class="label hero-label">Ninad Pathak · Technical writer</div>
-      <h1>Write developer content<br>like you give a shit.</h1>
+      <h1>Write developer content<br>like you give a shit*.</h1>
       <p class="lead">
-        Technical documentation and developer content are an absolute necessity.
-      </p>
-      <p class="lead">
-        Crack them and you've captured more market than anyone in your niche. Suck at
-        them, or fake the understanding with AI, and developers will smell it before you
-        see them running.
+        Crack developer content, and you capture more market than anyone in your niche.
+        Suck at it, and developers will smell the bullshit before you see them running away from your product.
       </p>
       <div class="hero-actions">
-        <a href="/articles/" class="arrow-link">Read how I think →</a>
-        <a href="/work/" class="arrow-link">See the client work →</a>
+        <a href="/articles/" class="btn btn-primary">Read how I think →</a>
+        <a href="/work/" class="btn btn-outline">See client work →</a>
       </div>
     </div>
   </div>
@@ -80,22 +76,16 @@
 <section class="clients-strip home-client-strip" aria-label="Companies Ninad has worked with">
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <div class="marquee-inner">
-        <span class="client-chip">Semrush</span>
-        <span class="client-chip">Adobe</span>
-        <span class="client-chip">TinyFish</span>
-        <span class="client-chip">Mastra</span>
-        <span class="client-chip">Manicule</span>
-        <span class="client-chip">OpenComputer</span>
+      {% set clients = [('Semrush', 'semrush.svg'), ('Adobe', 'adobe.svg'), ('TinyFish', 'tinyfish.svg'), ('Mastra', 'mastra.png'), ('Manicule', 'manicule.svg'), ('OpenComputer', 'opencomputer.svg')] %}
+      {% for copy in range(2) %}
+      <div class="marquee-inner"{% if copy %} aria-hidden="true"{% endif %}>
+        {% for name, asset in clients %}
+        <span class="client-logo{% if name == 'Manicule' %} client-logo-light{% endif %}"{% if not copy %} tabindex="0"{% endif %}>
+          <img src="/static/images/clients/{{ asset }}" alt="{% if not copy %}{{ name }}{% endif %}" width="180" height="48">
+        </span>
+        {% endfor %}
       </div>
-      <div class="marquee-inner" aria-hidden="true">
-        <span class="client-chip">Semrush</span>
-        <span class="client-chip">Adobe</span>
-        <span class="client-chip">TinyFish</span>
-        <span class="client-chip">Mastra</span>
-        <span class="client-chip">Manicule</span>
-        <span class="client-chip">OpenComputer</span>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -128,30 +118,30 @@
     <div class="section-header">
       <div class="section-header-left">
         <div class="label">What I do</div>
-        <h2>Too much technical content never gets past the surface. Mine has to.</h2>
+        <h2>I write developer content that engineers call “awesome.”</h2>
       </div>
       <div class="section-header-right home-work-copy">
-        <p>I've worked with Semrush, Adobe, TinyFish, Mastra, Manicule, and OpenComputer.</p>
-        <p>I read the source, run the setup, break the example, and keep digging until the piece says something only your team could have known.</p>
-        <p>The result should make a developer understand the product, trust the people behind it, and wonder why every technical article isn’t written this way.</p>
+        <p>I've worked with Semrush, Adobe, TinyFish, Mastra, Manicule, OpenComputer, and many other companies over the last six years.</p>
+        <p>Working closely with their engineers, product marketers, product managers, founders, and CTOs means understanding both how the product works and where it's headed.</p>
+        <p>That becomes documentation that explains the engineering decisions and tutorials that show developers how to use them. DevRel becomes a PR function for your engineering team: the work behind the product gets understood outside the company.</p>
       </div>
     </div>
 
     <div class="services-list">
       <div class="service-item">
         <div class="service-num">01</div>
-        <div class="service-title">Documentation &amp; Developer Education</div>
-        <p class="service-desc">Your quickstart has one job: get a developer to a working result before doubt wins. I write the path, test every step, and cover what breaks.</p>
+        <div class="service-title">Documentation</div>
+        <p class="service-desc">Give developers a working first request, explain the API's guarantees, and show how to recover when a request fails.</p>
       </div>
       <div class="service-item">
         <div class="service-num">02</div>
-        <div class="service-title">Technical Content for DevRel</div>
-        <p class="service-desc">A launch post should make the right developer want to open a terminal. I turn the product’s hardest idea into an argument and a working example.</p>
+        <div class="service-title">Developer Education Through Content</div>
+        <p class="service-desc">Teach developers to solve a problem with your product through runnable examples. Explain the tradeoffs so they can adapt the code to their own application.</p>
       </div>
       <div class="service-item">
         <div class="service-num">03</div>
-        <div class="service-title">Organic Discovery &amp; Content Strategy</div>
-        <p class="service-desc">Search traffic is worthless if the page attracts people who will never use the product. I write for the questions future users ask before they trust you.</p>
+        <div class="service-title">Organic Discovery &amp; Strategy</div>
+        <p class="service-desc">Find the questions developers search for while choosing tools and building integrations. Answer them with content that connects their problem to what your product does.</p>
       </div>
     </div>
   </div>
@@ -162,7 +152,7 @@
     <div class="section-row">
       <div>
         <div class="label">Selected work</div>
-        <h2>What the work changed.</h2>
+        <h2>The impact other companies have seen.</h2>
       </div>
       <a href="/work/" class="arrow-link">View all case studies →</a>
     </div>
@@ -184,7 +174,7 @@
 <section class="testimonials-section">
   <div class="container">
     <div class="label">What clients say</div>
-    <h2>Engineers call it “awesome.”<br>Editors call it “barely needs editing.”</h2>
+    <h2>Less editing on your side.</h2>
 
     <div class="testimonials-grid">
       <div class="tcard">
@@ -224,8 +214,7 @@
   <div class="container">
     <div class="section-row">
       <div>
-        <div class="label">Documentation articles</div>
-        <h2>Read how I think.</h2>
+        <h2>Latest blog posts</h2>
       </div>
       <a href="/articles/" class="arrow-link">All articles →</a>
     </div>
@@ -257,8 +246,8 @@
   <div class="container">
     <div class="cta-inner">
       <div>
-        <h2>Need someone to understand the product before writing about it?</h2>
-        <p>Tell me what you're building. I’ll tell you whether I’m the right writer for it.</p>
+        <h2>Need someone who understands your audience and can write for them?</h2>
+        <p>Let's talk about the developers you want to reach and what you want to help them build.</p>
       </div>
       <div class="cta-actions">
         <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a 30-min Call →</a>
