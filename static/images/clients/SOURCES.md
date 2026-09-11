@@ -8,11 +8,11 @@ Downloaded from the companies' public websites on 2026-09-11:
 - Mastra: https://mastra.ai/brand/mastra-logo-wordmark.png
 - Manicule: https://manicule.com/logo-white.svg
 - OpenComputer: https://opencomputer.dev/logos/opencomputer.svg
-- Firecrawl: the icon and wordmark SVGs in the homepage brand link at https://www.firecrawl.dev/ (combined into one transparent SVG)
+- Firecrawl: https://www.firecrawl.dev/brand/firecrawl-wordmark.svg (orange icon/dark text); dark-theme variant uses white text, matching https://www.firecrawl.dev/brand/firecrawl-colored-light-wordmark.svg.
 - Graphite: the inline SVG labeled "Graphite Logo" at https://graphite.dev/
-- Mem0: the navigation logo SVG `svg-1766990247_10114` at https://mem0.ai/ (its site CSS color variable resolved to its original fallback)
+- Mem0: the navigation logo SVG `svg-1766990247_10114` at https://mem0.ai/, recolored with the brand purple #CBB2FF from https://raw.githubusercontent.com/mem0ai/mem0/main/docs/logo/favicon.svg. This is a transparent color adaptation of the wordmark, not an unmodified official color wordmark.
 - Centus: the inline `navbar-logo` SVG at https://centus.com/
 
-Original brand colors appear on hover or keyboard focus. Monochrome originals remain monochrome; no invented brand colors are applied. The reel is gray at rest and pauses on hover/focus. Reduced-motion visitors see a static wrapped set.
+Brand colors appear on hover or keyboard focus. Mem0's adaptation is noted above; other monochrome originals remain monochrome. The reel is gray at rest and pauses on hover/focus. Reduced-motion visitors see a static wrapped set.
 
 Adobe's background rectangle was removed and its viewBox cropped to the existing logo path to display a transparent mark. The path itself is unchanged. Logo containers remain transparent on hover.

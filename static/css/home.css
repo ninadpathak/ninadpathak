@@ -70,14 +70,16 @@
 [data-theme="dark"] .client-logo:focus-visible img[src*="/mastra.png"],
 [data-theme="dark"] .client-logo:hover img[src*="/graphite.svg"],
 [data-theme="dark"] .client-logo:focus-visible img[src*="/graphite.svg"],
-[data-theme="dark"] .client-logo:hover img[src*="/mem0.svg"],
-[data-theme="dark"] .client-logo:focus-visible img[src*="/mem0.svg"],
 [data-theme="dark"] .client-logo:hover img[src*="/centus.svg"],
 [data-theme="dark"] .client-logo:focus-visible img[src*="/centus.svg"],
 [data-theme="dark"] .client-logo:hover img[src*="/opencomputer.svg"],
 [data-theme="dark"] .client-logo:focus-visible img[src*="/opencomputer.svg"] {
   filter: grayscale(1) brightness(0) invert(0.95);
 }
+
+.client-logo .logo-on-dark { display: none; }
+[data-theme="dark"] .client-logo .logo-on-light { display: none; }
+[data-theme="dark"] .client-logo .logo-on-dark { display: block; }
 
 .home-client-strip:focus-within .marquee-track,
 .home-client-strip:hover .marquee-track {
