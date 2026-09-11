@@ -51,7 +51,7 @@
 </script>
 {% endblock %}
 
-{% block extra_css %}<link rel="stylesheet" href="/static/css/home.css?v=logo-sizing-2">{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="/static/css/home.css?v=logo-sizing-3">{% endblock %}
 
 {% block content %}
 
@@ -60,10 +60,10 @@
   <div class="container hero-content-wrap">
     <div class="hero-copy">
       <div class="label hero-label">Ninad Pathak · Technical writer</div>
-      <h1>Write developer content<br>like you give a shit*.</h1>
+      <h1>Write developer content<br>like you give a sh*t.</h1>
       <p class="lead">
         Crack developer content, and you capture more market than anyone in your niche.
-        Suck at it, and developers will smell the bullshit before you see them running away from your product.
+        Suck at it, and developers will smell the bullshit and run away before you ever see them.
       </p>
       <div class="hero-actions">
         <a href="/articles/" class="btn btn-primary">Read how I think →</a>
@@ -81,7 +81,7 @@
       <div class="marquee-inner"{% if copy %} aria-hidden="true"{% endif %}>
         {% for name, asset in clients %}
         <span class="client-logo{% if name == 'Manicule' %} client-logo-light{% endif %}"{% if not copy %} tabindex="0"{% endif %}>
-          <img src="/static/images/clients/{{ asset }}?v=2" alt="{% if not copy %}{{ name }}{% endif %}" width="180" height="32">
+          <img src="/static/images/clients/{{ asset }}?v=3" alt="{% if not copy %}{{ name }}{% endif %}" width="150" height="26">
         </span>
         {% endfor %}
       </div>
