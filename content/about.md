@@ -40,6 +40,6 @@ I refuse to:
 
 ## You can inspect the work
 
-I've worked with Semrush, Adobe, TinyFish, Mastra, Manicule, and OpenComputer.
+I've worked with Semrush, Adobe, TinyFish, Mastra, Manicule, OpenComputer, Firecrawl, Graphite, Mem0, and Centus.
 
 The [portfolio](/portfolio/) links to published articles, and the [projects](/projects/) expose the tools I build around documentation and AI search. Read those before believing a claim on this page. Work should carry its own proof.

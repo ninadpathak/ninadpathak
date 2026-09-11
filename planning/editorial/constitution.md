@@ -53,7 +53,7 @@ Claims may come from:
 - a first-person experience Ninad has confirmed
 - a clearly labeled opinion or inference
 
-The only relationships confirmed for positioning copy in this audit are Semrush, Adobe, TinyFish, Mastra, Manicule, and OpenComputer. Existing attributable portfolio links can remain as published-work evidence.
+The relationships confirmed by Ninad for positioning copy are Semrush, Adobe, TinyFish, Mastra, Manicule, OpenComputer, Firecrawl, Graphite, Mem0, and Centus. Existing attributable portfolio links can remain as published-work evidence.
 
 Never invent a client incident, internal quote, private result, job title, personal memory, or developer-psychology statistic. When a first-person story would carry the argument and no evidence exists, put the question in the interview backlog. An empty chair is better than a fake witness.
 

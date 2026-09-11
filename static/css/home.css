@@ -68,6 +68,12 @@
 [data-theme="dark"] .client-logo:focus-visible img[src*="/semrush.svg"],
 [data-theme="dark"] .client-logo:hover img[src*="/mastra.png"],
 [data-theme="dark"] .client-logo:focus-visible img[src*="/mastra.png"],
+[data-theme="dark"] .client-logo:hover img[src*="/graphite.svg"],
+[data-theme="dark"] .client-logo:focus-visible img[src*="/graphite.svg"],
+[data-theme="dark"] .client-logo:hover img[src*="/mem0.svg"],
+[data-theme="dark"] .client-logo:focus-visible img[src*="/mem0.svg"],
+[data-theme="dark"] .client-logo:hover img[src*="/centus.svg"],
+[data-theme="dark"] .client-logo:focus-visible img[src*="/centus.svg"],
 [data-theme="dark"] .client-logo:hover img[src*="/opencomputer.svg"],
 [data-theme="dark"] .client-logo:focus-visible img[src*="/opencomputer.svg"] {
   filter: grayscale(1) brightness(0) invert(0.95);

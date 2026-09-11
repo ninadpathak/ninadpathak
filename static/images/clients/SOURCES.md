@@ -8,6 +8,10 @@ Downloaded from the companies' public websites on 2026-09-11:
 - Mastra: https://mastra.ai/brand/mastra-logo-wordmark.png
 - Manicule: https://manicule.com/logo-white.svg
 - OpenComputer: https://opencomputer.dev/logos/opencomputer.svg
+- Firecrawl: the icon and wordmark SVGs in the homepage brand link at https://www.firecrawl.dev/ (combined into one transparent SVG)
+- Graphite: the inline SVG labeled "Graphite Logo" at https://graphite.dev/
+- Mem0: the navigation logo SVG `svg-1766990247_10114` at https://mem0.ai/ (its site CSS color variable resolved to its original fallback)
+- Centus: the inline `navbar-logo` SVG at https://centus.com/
 
 Original brand colors appear on hover or keyboard focus. Monochrome originals remain monochrome; no invented brand colors are applied. The reel is gray at rest and pauses on hover/focus. Reduced-motion visitors see a static wrapped set.
 
