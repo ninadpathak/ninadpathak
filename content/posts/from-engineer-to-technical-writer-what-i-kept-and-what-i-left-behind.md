@@ -32,7 +32,7 @@ Their [documentation workflow](https://docs.gitlab.com/development/documentation
 
 ## I kept systems thinking and documentation architecture
 
-People mistake technical writing for simple wordsmithing. Day to day, the work sits closer to information architecture and systems design.
+People mistake [technical writing](/articles/technical-writing-for-engineers/) for simple wordsmithing. Day to day, the work sits closer to information architecture and systems design.
 
 No single page lives in isolation. Each one sits inside a web of headers, search indices, versioned artifacts, and internal links, and pulling one thread tugs on the rest.
 

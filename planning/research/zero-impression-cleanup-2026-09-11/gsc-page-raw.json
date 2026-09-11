@@ -1,0 +1,1850 @@
+{
+  "property": "sc-domain:ninadpathak.com",
+  "pages": [
+    {
+      "request": {
+        "startDate": "2026-06-11",
+        "endDate": "2026-09-08",
+        "dimensions": [
+          "page"
+        ],
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "startRow": 0
+      },
+      "response": {
+        "rows": [
+          {
+            "keys": [
+              "https://ninadpathak.com/"
+            ],
+            "clicks": 28,
+            "impressions": 349,
+            "ctr": 0.08022922636103152,
+            "position": 6.765042979942693
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/about/"
+            ],
+            "clicks": 4,
+            "impressions": 261,
+            "ctr": 0.01532567049808429,
+            "position": 6.425287356321839
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/"
+            ],
+            "clicks": 2,
+            "impressions": 87,
+            "ctr": 0.022988505747126436,
+            "position": 10.71264367816092
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/"
+            ],
+            "clicks": 1,
+            "impressions": 17,
+            "ctr": 0.058823529411764705,
+            "position": 4.117647058823529
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/internal-vs-external-documentation/"
+            ],
+            "clicks": 1,
+            "impressions": 16,
+            "ctr": 0.0625,
+            "position": 34.3125
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/local-wasm-vector-benchmarks/"
+            ],
+            "clicks": 1,
+            "impressions": 130,
+            "ctr": 0.007692307692307693,
+            "position": 29.73076923076923
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/rag-vs-memory/"
+            ],
+            "clicks": 1,
+            "impressions": 56,
+            "ctr": 0.017857142857142856,
+            "position": 19.678571428571427
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/shared-vs-isolated-memory-multi-agent/"
+            ],
+            "clicks": 1,
+            "impressions": 59,
+            "ctr": 0.01694915254237288,
+            "position": 9.067796610169491
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/"
+            ],
+            "clicks": 1,
+            "impressions": 25,
+            "ctr": 0.04,
+            "position": 11.76
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/work/kiwisizing/"
+            ],
+            "clicks": 1,
+            "impressions": 45,
+            "ctr": 0.022222222222222223,
+            "position": 33.22222222222222
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/work/mem0"
+            ],
+            "clicks": 1,
+            "impressions": 1,
+            "ctr": 1,
+            "position": 1
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/ai-agent-architecture/"
+            ],
+            "clicks": 0,
+            "impressions": 14,
+            "ctr": 0,
+            "position": 25.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/ai-agent-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 23.714285714285715
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/ai-workflows/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 21.6
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/agent-harnesses/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 46.666666666666664
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/agent-loop-anatomy/"
+            ],
+            "clicks": 0,
+            "impressions": 15,
+            "ctr": 0,
+            "position": 54.93333333333333
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/agent-vs-ai-assistant/"
+            ],
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 49.25
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/agentic-cli-benchmarks/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 22.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/ai-engineering/"
+            ],
+            "clicks": 0,
+            "impressions": 9,
+            "ctr": 0,
+            "position": 37
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/ai-memory-management-for-llms/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 45.75
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/best-llms-for-coding/"
+            ],
+            "clicks": 0,
+            "impressions": 201,
+            "ctr": 0,
+            "position": 75.42786069651741
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/code-documentation/"
+            ],
+            "clicks": 0,
+            "impressions": 18,
+            "ctr": 0,
+            "position": 60.05555555555556
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/context-windows-vs-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 52
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/developer-experience/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 27
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/developer-onboarding-docs-what-works-what-doesnt/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 85
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/distribution/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 22
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/documentation-accessibility-checklist/"
+            ],
+            "clicks": 0,
+            "impressions": 13,
+            "ctr": 0,
+            "position": 75.76923076923077
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 18
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/embedding-models-compared/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 14
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/engineering-velocity-documentation/"
+            ],
+            "clicks": 0,
+            "impressions": 28,
+            "ctr": 0,
+            "position": 86.78571428571429
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/fine-tuning-vs-rag-for-agent-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 45.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/"
+            ],
+            "clicks": 0,
+            "impressions": 52,
+            "ctr": 0,
+            "position": 48.01923076923077
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/how-memory-works-in-deerflow/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 2
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/how-memory-works-in-hyperagents/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 34
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/how-stripes-technical-blog-became-a-competitive-moat/"
+            ],
+            "clicks": 0,
+            "impressions": 18,
+            "ctr": 0,
+            "position": 12.666666666666666
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/how-to-organize-a-documentation-site/"
+            ],
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 28.166666666666668
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/how-to-write-a-changelog-developers-actually-read/"
+            ],
+            "clicks": 0,
+            "impressions": 21,
+            "ctr": 0,
+            "position": 52.523809523809526
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/how-to-write-a-technical-tutorial-that-actually-teaches/"
+            ],
+            "clicks": 0,
+            "impressions": 21,
+            "ctr": 0,
+            "position": 33.95238095238095
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/how-to-write-task-based-documentation-headings/"
+            ],
+            "clicks": 0,
+            "impressions": 12,
+            "ctr": 0,
+            "position": 56.916666666666664
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/hybrid-search-bm25-vector-search/"
+            ],
+            "clicks": 0,
+            "impressions": 115,
+            "ctr": 0,
+            "position": 66.13913043478261
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/kv-cache-eviction-accuracy/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 11.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/lambda-calculus-ai-reasoning-benchmark/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 44
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/llm-context-windows-explained/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 43
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/llm-inference-optimization/"
+            ],
+            "clicks": 0,
+            "impressions": 284,
+            "ctr": 0,
+            "position": 78.70422535211267
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/llm-token-budgets-cost-control/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 8
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/memory-for-voice-ai-agents/"
+            ],
+            "clicks": 0,
+            "impressions": 13,
+            "ctr": 0,
+            "position": 57.92307692307692
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/memory-hierarchy-in-ai-systems/"
+            ],
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 66.375
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/memory-serialization-between-sessions/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 14
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/memory-versioning-and-audit-trails/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 3
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/mixture-of-experts-explained/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 24
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/model-context-protocol-explained/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 27
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/multi-agent-vs-single-agent-tradeoffs/"
+            ],
+            "clicks": 0,
+            "impressions": 19,
+            "ctr": 0,
+            "position": 83.42105263157895
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/production-ai-agent-errors/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 6
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/rag-evaluation-metrics-what-actually-matters/"
+            ],
+            "clicks": 0,
+            "impressions": 10,
+            "ctr": 0,
+            "position": 70.9
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/rag-vs-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 28,
+            "ctr": 0,
+            "position": 62.285714285714285
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/"
+            ],
+            "clicks": 0,
+            "impressions": 90,
+            "ctr": 0,
+            "position": 84.43333333333334
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/semantic-caching-rag-optimization/"
+            ],
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 46.333333333333336
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/seo-for-technical-documentation/"
+            ],
+            "clicks": 0,
+            "impressions": 10,
+            "ctr": 0,
+            "position": 44.2
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/shared-vs-isolated-memory-multi-agent/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 15
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/short-term-memory-for-ai-agents/"
+            ],
+            "clicks": 0,
+            "impressions": 39,
+            "ctr": 0,
+            "position": 59.1025641025641
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/state-of-ai-agent-memory-2026/"
+            ],
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 8.285714285714285
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/structured-outputs-llms-json-mode-function-calling/"
+            ],
+            "clicks": 0,
+            "impressions": 50,
+            "ctr": 0,
+            "position": 66.26
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 17.75
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/technical-documentation-template/"
+            ],
+            "clicks": 0,
+            "impressions": 51,
+            "ctr": 0,
+            "position": 67.29411764705883
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/technical-writing-for-ai-products-the-new-rules/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 19.666666666666668
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/the-agent-design-space/"
+            ],
+            "clicks": 0,
+            "impressions": 9,
+            "ctr": 0,
+            "position": 29.333333333333332
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/the-case-for-shorter-technical-documentation/"
+            ],
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 5.714285714285714
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/time-to-first-token-ttft/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 87.2
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/types-of-technical-documentation/"
+            ],
+            "clicks": 0,
+            "impressions": 50,
+            "ctr": 0,
+            "position": 70.66
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/voice-ai-latency-gemini-benchmark/"
+            ],
+            "clicks": 0,
+            "impressions": 20,
+            "ctr": 0,
+            "position": 78.8
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/"
+            ],
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 74.28571428571429
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/why-coding-agents-lose-their-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 12,
+            "ctr": 0,
+            "position": 19.25
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/writing-release-notes-that-developers-trust/"
+            ],
+            "clicks": 0,
+            "impressions": 22,
+            "ctr": 0,
+            "position": 20
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/"
+            ],
+            "clicks": 0,
+            "impressions": 30,
+            "ctr": 0,
+            "position": 4.7
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/2026-04-21-the-taxonomy-of-ai-agents/"
+            ],
+            "clicks": 0,
+            "impressions": 16,
+            "ctr": 0,
+            "position": 15.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/2026-04-28-asymmetric-retrieval-agent-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 13
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/?query-15-page=3"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 15.333333333333334
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/agent-harnesses/"
+            ],
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 10.25
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/agent-loop-anatomy/"
+            ],
+            "clicks": 0,
+            "impressions": 12,
+            "ctr": 0,
+            "position": 8.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/agent-vs-ai-assistant/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 6.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/agentic-cli-benchmarks/"
+            ],
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 14
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/agentic-workflow-playbook/"
+            ],
+            "clicks": 0,
+            "impressions": 47,
+            "ctr": 0,
+            "position": 8.595744680851064
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/ai-memory-management-for-llms/"
+            ],
+            "clicks": 0,
+            "impressions": 52,
+            "ctr": 0,
+            "position": 24.48076923076923
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/asymmetric-retrieval-agent-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 12,
+            "ctr": 0,
+            "position": 18.333333333333332
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/beam-memory-benchmark/"
+            ],
+            "clicks": 0,
+            "impressions": 15,
+            "ctr": 0,
+            "position": 12.866666666666667
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/best-llms-for-coding/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 76
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/context-windows-vs-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 34.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/contextual-compression-for-agent-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 10,
+            "ctr": 0,
+            "position": 12
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/developer-onboarding-docs-what-works-what-doesnt/"
+            ],
+            "clicks": 0,
+            "impressions": 42,
+            "ctr": 0,
+            "position": 8.285714285714285
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/embedding-models-compared/"
+            ],
+            "clicks": 0,
+            "impressions": 162,
+            "ctr": 0,
+            "position": 33.351851851851855
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/engineering-velocity-documentation/"
+            ],
+            "clicks": 0,
+            "impressions": 51,
+            "ctr": 0,
+            "position": 37.19607843137255
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/episodic-vs-semantic-vs-working-memory-agents/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 16.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/"
+            ],
+            "clicks": 0,
+            "impressions": 13,
+            "ctr": 0,
+            "position": 21.076923076923077
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/"
+            ],
+            "clicks": 0,
+            "impressions": 2141,
+            "ctr": 0,
+            "position": 8.304063521718824
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/how-memory-works-in-claude-code/"
+            ],
+            "clicks": 0,
+            "impressions": 53,
+            "ctr": 0,
+            "position": 13.056603773584905
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/how-memory-works-in-deerflow/"
+            ],
+            "clicks": 0,
+            "impressions": 36,
+            "ctr": 0,
+            "position": 25.36111111111111
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/how-memory-works-in-hyperagents/"
+            ],
+            "clicks": 0,
+            "impressions": 11,
+            "ctr": 0,
+            "position": 11.181818181818182
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/how-stripes-technical-blog-became-a-competitive-moat/"
+            ],
+            "clicks": 0,
+            "impressions": 116,
+            "ctr": 0,
+            "position": 9.560344827586206
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/how-to-write-a-changelog-developers-actually-read/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 22.2
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/"
+            ],
+            "clicks": 0,
+            "impressions": 15,
+            "ctr": 0,
+            "position": 12.066666666666666
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/hybrid-search-bm25-vector-search/"
+            ],
+            "clicks": 0,
+            "impressions": 79,
+            "ctr": 0,
+            "position": 19.82278481012658
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/icloud-keychain-escrow/"
+            ],
+            "clicks": 0,
+            "impressions": 13,
+            "ctr": 0,
+            "position": 9.384615384615385
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/kv-cache-eviction-accuracy/"
+            ],
+            "clicks": 0,
+            "impressions": 144,
+            "ctr": 0,
+            "position": 21.256944444444443
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/lambda-calculus-ai-reasoning-benchmark/"
+            ],
+            "clicks": 0,
+            "impressions": 17,
+            "ctr": 0,
+            "position": 15.176470588235293
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/llm-context-windows-explained/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 14.8
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/llm-inference-optimization/"
+            ],
+            "clicks": 0,
+            "impressions": 79,
+            "ctr": 0,
+            "position": 57.962025316455694
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/llm-token-budgets-cost-control/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 37.4
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/local-wasm-vector-benchmarks/"
+            ],
+            "clicks": 0,
+            "impressions": 86,
+            "ctr": 0,
+            "position": 8.604651162790699
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/memory-attribution-errors/"
+            ],
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 6.125
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/memory-for-voice-ai-agents/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 32.8
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/memory-hierarchy-in-ai-systems/"
+            ],
+            "clicks": 0,
+            "impressions": 15,
+            "ctr": 0,
+            "position": 28.733333333333334
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/memory-serialization-between-sessions/"
+            ],
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 11.142857142857142
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/memory-versioning-and-audit-trails/"
+            ],
+            "clicks": 0,
+            "impressions": 6,
+            "ctr": 0,
+            "position": 3.6666666666666665
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/mixture-of-experts-explained/"
+            ],
+            "clicks": 0,
+            "impressions": 19,
+            "ctr": 0,
+            "position": 10.210526315789474
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/model-context-protocol-explained/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 14.25
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/multi-agent-vs-single-agent-tradeoffs/"
+            ],
+            "clicks": 0,
+            "impressions": 22,
+            "ctr": 0,
+            "position": 8.181818181818182
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/production-ai-agent-errors/"
+            ],
+            "clicks": 0,
+            "impressions": 20,
+            "ctr": 0,
+            "position": 9.55
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/"
+            ],
+            "clicks": 0,
+            "impressions": 40,
+            "ctr": 0,
+            "position": 63.3
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/rag-vs-fine-tuning/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 2
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/"
+            ],
+            "clicks": 0,
+            "impressions": 39,
+            "ctr": 0,
+            "position": 21.94871794871795
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/semantic-caching-rag-optimization/"
+            ],
+            "clicks": 0,
+            "impressions": 37,
+            "ctr": 0,
+            "position": 21.37837837837838
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/short-term-memory-for-ai-agents/"
+            ],
+            "clicks": 0,
+            "impressions": 48,
+            "ctr": 0,
+            "position": 24.125
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/speculative-decoding-explained/"
+            ],
+            "clicks": 0,
+            "impressions": 10,
+            "ctr": 0,
+            "position": 45.3
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/spinel-ruby-aot-compiler/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 7
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/state-of-ai-agent-memory-2026/"
+            ],
+            "clicks": 0,
+            "impressions": 73,
+            "ctr": 0,
+            "position": 15.726027397260275
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/state-of-open-source-memory-2026/"
+            ],
+            "clicks": 0,
+            "impressions": 24,
+            "ctr": 0,
+            "position": 11.375
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/"
+            ],
+            "clicks": 0,
+            "impressions": 32,
+            "ctr": 0,
+            "position": 18.65625
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/technical-writing-for-engineers/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 12.75
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/the-agent-design-space/"
+            ],
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 13.142857142857142
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/the-case-for-shorter-technical-documentation/"
+            ],
+            "clicks": 0,
+            "impressions": 7,
+            "ctr": 0,
+            "position": 7.857142857142857
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/the-memory-hierarchy-why-rag-is-not-enough/"
+            ],
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 5.625
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/the-taxonomy-of-ai-agents/"
+            ],
+            "clicks": 0,
+            "impressions": 19,
+            "ctr": 0,
+            "position": 15.631578947368421
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/uv-package-manager-benchmark/"
+            ],
+            "clicks": 0,
+            "impressions": 11,
+            "ctr": 0,
+            "position": 5.909090909090909
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/voice-ai-latency-gemini-benchmark/"
+            ],
+            "clicks": 0,
+            "impressions": 71,
+            "ctr": 0,
+            "position": 9.408450704225352
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/why-ai-agents-keep-failing-in-production/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 10.25
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/why-coding-agents-lose-their-memory/"
+            ],
+            "clicks": 0,
+            "impressions": 24,
+            "ctr": 0,
+            "position": 16.333333333333336
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 21
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/writing-release-notes-that-developers-trust/"
+            ],
+            "clicks": 0,
+            "impressions": 16,
+            "ctr": 0,
+            "position": 10.75
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/contact/"
+            ],
+            "clicks": 0,
+            "impressions": 102,
+            "ctr": 0,
+            "position": 5.607843137254902
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/"
+            ],
+            "clicks": 0,
+            "impressions": 15,
+            "ctr": 0,
+            "position": 5.8
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/agentic-engineering/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 87
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/agentic-router/"
+            ],
+            "clicks": 0,
+            "impressions": 13,
+            "ctr": 0,
+            "position": 12.153846153846153
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/bi-encoder/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 33.666666666666664
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/cross-encoder-reranking/"
+            ],
+            "clicks": 0,
+            "impressions": 10,
+            "ctr": 0,
+            "position": 66.8
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/dspy/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 51
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/flow-engineering/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 14.8
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/graphrag/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 3.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/hierarchical-navigable-small-world-hnsw/"
+            ],
+            "clicks": 0,
+            "impressions": 108,
+            "ctr": 0,
+            "position": 55
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/hypothetical-document-embeddings-hyde/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 61.4
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/json-mode-vs-structured-outputs/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 9.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/kv-cache-eviction/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 25.333333333333332
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/late-chunking/"
+            ],
+            "clicks": 0,
+            "impressions": 45,
+            "ctr": 0,
+            "position": 50.422222222222224
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/matryoshka-representation-learning/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 48
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/pagedattention/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 45
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/plan-and-solve-framework/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 7
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/product-quantization/"
+            ],
+            "clicks": 0,
+            "impressions": 12,
+            "ctr": 0,
+            "position": 61.833333333333336
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/react-prompting/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 6
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/self-querying-retrieval/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 9.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/semantic-chunking/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 55.6
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/speculative-decoding/"
+            ],
+            "clicks": 0,
+            "impressions": 12,
+            "ctr": 0,
+            "position": 75
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/glossary/test-time-compute/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 58.25
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/linter/"
+            ],
+            "clicks": 0,
+            "impressions": 4,
+            "ctr": 0,
+            "position": 14.25
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/portfolio/"
+            ],
+            "clicks": 0,
+            "impressions": 147,
+            "ctr": 0,
+            "position": 13.748299319727892
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/privacy/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 10
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/projects/"
+            ],
+            "clicks": 0,
+            "impressions": 73,
+            "ctr": 0,
+            "position": 5.2465753424657535
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/rag/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/agent-success-rates"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 89
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/agent-taxonomy"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 17
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/bi-encoder-arch"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 54
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/bi-encoder-arch.html"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 73
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/changelog-anatomy"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 18
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/context-memory"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 77
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/context-switching"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 24
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/context-window-sliding"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 87
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/contextual-retrieval"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 49
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/dimension-scaling"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 46
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/hybrid-search-fusion"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 91.66666666666667
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/keyword-exactness"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 19.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/mcp-architecture.html"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 82
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/memory-hierarchy"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 97
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/memory-versioning"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 19
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/oss-memory-landscape.html"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 9.8
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/rag-eval-metrics.html"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 72.33333333333333
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/reranking-pipeline"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 30.333333333333332
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/support-memory-loop"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 52
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/uv-cache-dedup"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 8.5
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/uv-reflink-lifecycle"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 9
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/uv-resolution-complexity"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 65
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/uv-resolution-speed"
+            ],
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 53.375
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/vector-space"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 43
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/vector-space.html"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 31
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/wasm-vdb-comparison"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 25
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/wasm-vdb-dims"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 78
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/wasm-vdb-indexing"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 55
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/static/visuals/wasm-vdb-memory"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 26
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/technical-writing/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 6.2
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/terms/"
+            ],
+            "clicks": 0,
+            "impressions": 47,
+            "ctr": 0,
+            "position": 3.6382978723404253
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/topics/"
+            ],
+            "clicks": 0,
+            "impressions": 20,
+            "ctr": 0,
+            "position": 6.7
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/work/"
+            ],
+            "clicks": 0,
+            "impressions": 93,
+            "ctr": 0,
+            "position": 4.494623655913978
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/work/centus/"
+            ],
+            "clicks": 0,
+            "impressions": 22,
+            "ctr": 0,
+            "position": 12.454545454545455
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/work/delightchat/"
+            ],
+            "clicks": 0,
+            "impressions": 41,
+            "ctr": 0,
+            "position": 22
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/work/linuxfordevices/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 12
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/work/mem0/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 1
+          }
+        ],
+        "responseAggregationType": "byPage"
+      }
+    }
+  ]
+}

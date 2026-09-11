@@ -75,7 +75,7 @@ When a team hands me a slow endpoint and asks me to make it feel fast, I work do
 
 **Model Selection.** My first question is always whether a smaller model clears the quality bar, because swapping a 70B for a well-chosen 8B can halve TTFT before I touch the infrastructure. It is the cheapest experiment I can run and the one teams skip most often.
 
-**Prompt Caching.** Static context like a long system prompt or a fixed set of few-shot examples gets paid for on every single request unless I cache it. Wiring up [prompt caching to eliminate the prefill tax for static context](/articles/prompt-caching-what-it-is-and-when-the-math-works/) has dropped TTFT by around 80% on the repeated-prefix portion of requests I have measured, since the model reuses the KV cache for the part of the prompt that never changes.
+**Prompt Caching.** Static context like a long system prompt or a fixed set of few-shot examples gets paid for on every single request unless I cache it. Wiring up prompt caching to eliminate the prefill tax for static context has dropped TTFT by around 80% on the repeated-prefix portion of requests I have measured, since the model reuses the KV cache for the part of the prompt that never changes.
 
 **Speculative Decoding.** Pulling in [a draft model to speed up LLM inference for free](/articles/speculative-decoding-explained/) lets a small model guess several tokens ahead while the big model verifies them in one pass. The snappiness comes from generating multiple tokens per step rather than one at a time, and the output stays identical to what the big model would have produced alone.
 

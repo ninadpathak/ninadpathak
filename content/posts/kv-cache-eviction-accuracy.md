@@ -215,7 +215,7 @@ Context behaves like a dynamic heap, and managing it deserves the same rigor as 
 
 **Can I use this for RAG?** Absolutely. Pruning the KV cache sidesteps the physical VRAM limit, so you can feed much larger document chunks into the LLM during the retrieval phase.
 
-Pruning also pairs well with [prompt caching, which reuses the KV cache of a static prefix](/articles/prompt-caching-what-it-is-and-when-the-math-works/) across requests.
+Pruning also pairs well with prompt caching, which reuses the KV cache of a static prefix across requests.
 
 ### Sources
 *   [H2O: Heavy-Hitter Oracle for Efficient Generative Inference](https://arxiv.org/abs/2306.14048) - Foundational importance-based pruning paper.

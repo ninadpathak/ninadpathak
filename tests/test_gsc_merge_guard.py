@@ -1,7 +1,10 @@
 """Deterministic contract tests for the pre-merge Search Console guard."""
 from __future__ import annotations
 
+import hashlib
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -35,6 +38,27 @@ def query(slug, text, impressions=3, position=15, prefix="/blog/"):
 
 
 class TestAuditParser(unittest.TestCase):
+    def test_removal_archive_is_verified_and_never_treated_as_published(self):
+        statuses = mg.load_archived_statuses(mg.ARCHIVE_MANIFEST)
+        self.assertEqual(len(statuses), 20)
+        self.assertEqual(set(statuses.values()), {"archived"})
+        self.assertEqual(mg.load_post_statuses()["mcp-server-setup-guide"], "archived")
+
+    def test_archive_digest_mismatch_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            archive = root / "archived-posts" / "test.md"
+            archive.parent.mkdir()
+            archive.write_text("---\nslug: test\n---\nchanged content\n")
+            manifest = root / "cohort.json"
+            manifest.write_text(json.dumps([{
+                "source": "content/posts/test.md", "slug": "test",
+                "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+                "sha256": hashlib.sha256(b"original content").hexdigest(),
+            }]))
+            with self.assertRaisesRegex(ValueError, "Archive digest mismatch"):
+                mg.load_archived_statuses(manifest)
+
     def test_parses_merge_and_retirement_only_from_disposition_table(self):
         text = """before
 ### Merge, 2 pages

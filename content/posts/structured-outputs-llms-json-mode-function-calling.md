@@ -137,8 +137,6 @@ A pipeline running 100,000 extractions per day with a 500-token schema overhead 
 
 Prompt caching offsets some of this. When the schema lives in the system prompt and the system prompt stays stable across requests, caching cuts the marginal cost of the schema portion to a fraction of full price.
 
-I worked through the cost tradeoffs in [the prompt caching post](/articles/prompt-caching-what-it-is-and-when-the-math-works/).
-
 The comparison against raw JSON mode is where this decision lives. JSON mode adds essentially zero tokens beyond whatever schema description you already wrote into the prompt.
 
 Structured outputs add the schema as a formal, billed input. Whether that overhead earns its keep comes down to your failure rate under JSON mode and what a single bad record costs you downstream.

@@ -170,7 +170,7 @@ The preprocessing job repeats the same pattern over and over:
 
 Anthropic points directly to [prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) as the practical answer, which tracks with how I already think about token costs. Static prefixes should be reused, and Anthropic applies that rule during ingestion rather than generation.
 
-The same cost logic shows up in my piece on [Prompt Caching](/articles/prompt-caching-what-it-is-and-when-the-math-works/). Anthropic's docs say prompt caching can cut latency by **more than 2x** and reduce costs by **up to 90%** in the right setup.
+Anthropic's docs say prompt caching can cut latency by **more than 2x** and reduce costs by **up to 90%** in the right setup.
 
 Those numbers matter here because the contextualization expense lands up front, at ingestion. Query-time retrieval barely changes unless reranking is added.
 

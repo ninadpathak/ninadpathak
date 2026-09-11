@@ -74,6 +74,7 @@ description = "Paste a technical article. Get a linter report: condescension wor
 
 [[content.categories]]
 slug = "ai-search-optimization"
+preserve_empty_route = true
 title = "AI Search and Citation"
 description = "Tests and arguments about what answer engines can extract, what crawlers can access, and what publishers cannot honestly promise."
 intro = "Answer-engine advice is full of rituals. I test the parts a publisher can control and name the parts nobody can guarantee."
@@ -107,6 +108,7 @@ tag_matches = ["ai-agents", "ai agents", "agents", "agent-memory", "agent-archit
 # not a starting allocation, and it must not grow on the strength of a floor figure.
 [[content.categories]]
 slug = "distribution"
+preserve_empty_route = true
 title = "Reaching Developers"
 description = "How to reach developers without barging into their communities with a campaign wearing a fake moustache."
 intro = "Developers do not owe a product attention. Earn a place in the conversation or accept that the post deserves to disappear."

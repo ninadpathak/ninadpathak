@@ -1,0 +1,751 @@
+{
+  "baseURL": "http://127.0.0.1:8765",
+  "renders": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "route": "/",
+      "file": "desktop-home.png",
+      "capture": "top viewport",
+      "title": "Ninad Pathak | Technical Writing With a Point of View",
+      "canonical": "https://ninadpathak.com/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "emptyState": null,
+      "images": [
+        {
+          "src": "/static/images/clients/semrush.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 37
+        },
+        {
+          "src": "/static/images/clients/adobe.svg?v=4",
+          "complete": true,
+          "naturalWidth": 166,
+          "naturalHeight": 150
+        },
+        {
+          "src": "/static/images/clients/tinyfish.svg?v=4",
+          "complete": true,
+          "naturalWidth": 731,
+          "naturalHeight": 166
+        },
+        {
+          "src": "/static/images/clients/mastra.png?v=4",
+          "complete": true,
+          "naturalWidth": 4096,
+          "naturalHeight": 1001
+        },
+        {
+          "src": "/static/images/clients/manicule.svg?v=4",
+          "complete": true,
+          "naturalWidth": 599,
+          "naturalHeight": 492
+        },
+        {
+          "src": "/static/images/clients/opencomputer.svg?v=4",
+          "complete": true,
+          "naturalWidth": 548,
+          "naturalHeight": 74
+        },
+        {
+          "src": "/static/images/clients/firecrawl.svg?v=4",
+          "complete": true,
+          "naturalWidth": 172,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/firecrawl-dark.svg?v=4",
+          "complete": true,
+          "naturalWidth": 172,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/graphite.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 59
+        },
+        {
+          "src": "/static/images/clients/mem0.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 74
+        },
+        {
+          "src": "/static/images/clients/centus.svg?v=4",
+          "complete": true,
+          "naturalWidth": 114,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/semrush.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 37
+        },
+        {
+          "src": "/static/images/clients/adobe.svg?v=4",
+          "complete": true,
+          "naturalWidth": 166,
+          "naturalHeight": 150
+        },
+        {
+          "src": "/static/images/clients/tinyfish.svg?v=4",
+          "complete": true,
+          "naturalWidth": 731,
+          "naturalHeight": 166
+        },
+        {
+          "src": "/static/images/clients/mastra.png?v=4",
+          "complete": true,
+          "naturalWidth": 4096,
+          "naturalHeight": 1001
+        },
+        {
+          "src": "/static/images/clients/manicule.svg?v=4",
+          "complete": true,
+          "naturalWidth": 599,
+          "naturalHeight": 492
+        },
+        {
+          "src": "/static/images/clients/opencomputer.svg?v=4",
+          "complete": true,
+          "naturalWidth": 548,
+          "naturalHeight": 74
+        },
+        {
+          "src": "/static/images/clients/firecrawl.svg?v=4",
+          "complete": true,
+          "naturalWidth": 172,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/firecrawl-dark.svg?v=4",
+          "complete": true,
+          "naturalWidth": 172,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/graphite.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 59
+        },
+        {
+          "src": "/static/images/clients/mem0.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 74
+        },
+        {
+          "src": "/static/images/clients/centus.svg?v=4",
+          "complete": true,
+          "naturalWidth": 114,
+          "naturalHeight": 40
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "route": "/articles/",
+      "file": "desktop-articles.png",
+      "capture": "top viewport",
+      "title": "Articles on DevRel, Documentation, and Technical Writing | Ninad Pathak",
+      "canonical": "https://ninadpathak.com/articles/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "emptyState": null,
+      "images": []
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "route": "/articles/ai-search-optimization/",
+      "file": "desktop-articles-ai-search-optimization.png",
+      "capture": "full page",
+      "title": "AI Search and Citation Articles | Ninad Pathak",
+      "canonical": "https://ninadpathak.com/articles/ai-search-optimization/",
+      "robots": "noindex, follow",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "emptyState": "No articles are currently published in this category. Browse all articles.",
+      "images": []
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "route": "/articles/distribution/",
+      "file": "desktop-articles-distribution.png",
+      "capture": "full page",
+      "title": "Reaching Developers Articles | Ninad Pathak",
+      "canonical": "https://ninadpathak.com/articles/distribution/",
+      "robots": "noindex, follow",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "emptyState": "No articles are currently published in this category. Browse all articles.",
+      "images": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "/",
+      "file": "mobile-home.png",
+      "capture": "top viewport",
+      "title": "Ninad Pathak | Technical Writing With a Point of View",
+      "canonical": "https://ninadpathak.com/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "width": 390,
+      "scrollWidth": 390,
+      "emptyState": null,
+      "images": [
+        {
+          "src": "/static/images/clients/semrush.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 37
+        },
+        {
+          "src": "/static/images/clients/adobe.svg?v=4",
+          "complete": true,
+          "naturalWidth": 166,
+          "naturalHeight": 150
+        },
+        {
+          "src": "/static/images/clients/tinyfish.svg?v=4",
+          "complete": true,
+          "naturalWidth": 731,
+          "naturalHeight": 166
+        },
+        {
+          "src": "/static/images/clients/mastra.png?v=4",
+          "complete": true,
+          "naturalWidth": 4096,
+          "naturalHeight": 1001
+        },
+        {
+          "src": "/static/images/clients/manicule.svg?v=4",
+          "complete": true,
+          "naturalWidth": 599,
+          "naturalHeight": 492
+        },
+        {
+          "src": "/static/images/clients/opencomputer.svg?v=4",
+          "complete": true,
+          "naturalWidth": 548,
+          "naturalHeight": 74
+        },
+        {
+          "src": "/static/images/clients/firecrawl.svg?v=4",
+          "complete": true,
+          "naturalWidth": 172,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/firecrawl-dark.svg?v=4",
+          "complete": true,
+          "naturalWidth": 172,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/graphite.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 59
+        },
+        {
+          "src": "/static/images/clients/mem0.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 74
+        },
+        {
+          "src": "/static/images/clients/centus.svg?v=4",
+          "complete": true,
+          "naturalWidth": 114,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/semrush.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 37
+        },
+        {
+          "src": "/static/images/clients/adobe.svg?v=4",
+          "complete": true,
+          "naturalWidth": 166,
+          "naturalHeight": 150
+        },
+        {
+          "src": "/static/images/clients/tinyfish.svg?v=4",
+          "complete": true,
+          "naturalWidth": 731,
+          "naturalHeight": 166
+        },
+        {
+          "src": "/static/images/clients/mastra.png?v=4",
+          "complete": true,
+          "naturalWidth": 4096,
+          "naturalHeight": 1001
+        },
+        {
+          "src": "/static/images/clients/manicule.svg?v=4",
+          "complete": true,
+          "naturalWidth": 599,
+          "naturalHeight": 492
+        },
+        {
+          "src": "/static/images/clients/opencomputer.svg?v=4",
+          "complete": true,
+          "naturalWidth": 548,
+          "naturalHeight": 74
+        },
+        {
+          "src": "/static/images/clients/firecrawl.svg?v=4",
+          "complete": true,
+          "naturalWidth": 172,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/firecrawl-dark.svg?v=4",
+          "complete": true,
+          "naturalWidth": 172,
+          "naturalHeight": 40
+        },
+        {
+          "src": "/static/images/clients/graphite.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 59
+        },
+        {
+          "src": "/static/images/clients/mem0.svg?v=4",
+          "complete": true,
+          "naturalWidth": 300,
+          "naturalHeight": 74
+        },
+        {
+          "src": "/static/images/clients/centus.svg?v=4",
+          "complete": true,
+          "naturalWidth": 114,
+          "naturalHeight": 40
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "/articles/",
+      "file": "mobile-articles.png",
+      "capture": "top viewport",
+      "title": "Articles on DevRel, Documentation, and Technical Writing | Ninad Pathak",
+      "canonical": "https://ninadpathak.com/articles/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "width": 390,
+      "scrollWidth": 390,
+      "emptyState": null,
+      "images": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "/articles/ai-search-optimization/",
+      "file": "mobile-articles-ai-search-optimization.png",
+      "capture": "full page",
+      "title": "AI Search and Citation Articles | Ninad Pathak",
+      "canonical": "https://ninadpathak.com/articles/ai-search-optimization/",
+      "robots": "noindex, follow",
+      "width": 390,
+      "scrollWidth": 390,
+      "emptyState": "No articles are currently published in this category. Browse all articles.",
+      "images": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "/articles/distribution/",
+      "file": "mobile-articles-distribution.png",
+      "capture": "full page",
+      "title": "Reaching Developers Articles | Ninad Pathak",
+      "canonical": "https://ninadpathak.com/articles/distribution/",
+      "robots": "noindex, follow",
+      "width": 390,
+      "scrollWidth": 390,
+      "emptyState": "No articles are currently published in this category. Browse all articles.",
+      "images": []
+    }
+  ],
+  "removedHTTP": [
+    {
+      "url": "/articles/ai-crawlers-robots-txt-training-vs-citation/",
+      "status": 404
+    },
+    {
+      "url": "/articles/api-documentation-best-practices-reference-guides-and-working-requests/",
+      "status": 404
+    },
+    {
+      "url": "/articles/api-documentation-examples-what-the-best-developer-portals-get-right/",
+      "status": 404
+    },
+    {
+      "url": "/articles/api-documentation-template-the-pages-every-api-needs/",
+      "status": 404
+    },
+    {
+      "url": "/articles/api-documentation-tools-hands-on-comparison-small-teams/",
+      "status": 404
+    },
+    {
+      "url": "/articles/coding-agent-setup-that-works/",
+      "status": 404
+    },
+    {
+      "url": "/articles/developer-trust-hierarchy/",
+      "status": 404
+    },
+    {
+      "url": "/articles/documentation-style-guide-template/",
+      "status": 404
+    },
+    {
+      "url": "/articles/how-to-document-multiple-product-versions/",
+      "status": 404
+    },
+    {
+      "url": "/articles/how-to-find-the-right-subreddit-for-a-developer-product/",
+      "status": 404
+    },
+    {
+      "url": "/articles/llms-txt-examples-real-files-audited/",
+      "status": 404
+    },
+    {
+      "url": "/articles/mcp-server-setup-guide/",
+      "status": 404
+    },
+    {
+      "url": "/articles/prompt-caching-what-it-is-and-when-the-math-works/",
+      "status": 404
+    },
+    {
+      "url": "/articles/reddit-self-promotion-rules-read-properly/",
+      "status": 404
+    },
+    {
+      "url": "/articles/technical-writing-examples/",
+      "status": 404
+    },
+    {
+      "url": "/articles/technical-writing-is-deciding-what-the-reader-can-assume/",
+      "status": 404
+    },
+    {
+      "url": "/articles/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/",
+      "status": 404
+    },
+    {
+      "url": "/articles/what-a-documentation-homepage-must-help-users-do/",
+      "status": 404
+    },
+    {
+      "url": "/articles/what-makes-a-page-extractable-by-answer-engines/",
+      "status": 404
+    },
+    {
+      "url": "/articles/writing-ai-first-content/",
+      "status": 404
+    }
+  ],
+  "retainedHTTP": [
+    {
+      "url": "/articles/the-taxonomy-of-ai-agents/",
+      "status": 200
+    },
+    {
+      "url": "/articles/why-ai-agents-keep-failing-in-production/",
+      "status": 200
+    },
+    {
+      "url": "/articles/agent-loop-anatomy/",
+      "status": 200
+    },
+    {
+      "url": "/articles/lambda-calculus-ai-reasoning-benchmark/",
+      "status": 200
+    },
+    {
+      "url": "/articles/agent-vs-ai-assistant/",
+      "status": 200
+    },
+    {
+      "url": "/articles/multi-agent-vs-single-agent-tradeoffs/",
+      "status": 200
+    },
+    {
+      "url": "/articles/contextual-compression-for-agent-memory/",
+      "status": 200
+    },
+    {
+      "url": "/articles/memory-versioning-and-audit-trails/",
+      "status": 200
+    },
+    {
+      "url": "/articles/agent-harnesses/",
+      "status": 200
+    },
+    {
+      "url": "/articles/agentic-cli-benchmarks/",
+      "status": 200
+    },
+    {
+      "url": "/articles/agentic-workflow-playbook/",
+      "status": 200
+    },
+    {
+      "url": "/articles/ai-memory-management-for-llms/",
+      "status": 200
+    },
+    {
+      "url": "/articles/best-llms-for-coding/",
+      "status": 200
+    },
+    {
+      "url": "/articles/code-documentation/",
+      "status": 200
+    },
+    {
+      "url": "/articles/context-windows-vs-memory/",
+      "status": 200
+    },
+    {
+      "url": "/articles/developer-onboarding-docs-what-works-what-doesnt/",
+      "status": 200
+    },
+    {
+      "url": "/articles/documentation-accessibility-checklist/",
+      "status": 200
+    },
+    {
+      "url": "/articles/documentation-review-checklist-before-you-publish/",
+      "status": 200
+    },
+    {
+      "url": "/articles/embedding-models-compared/",
+      "status": 200
+    },
+    {
+      "url": "/articles/engineering-velocity-documentation/",
+      "status": 200
+    },
+    {
+      "url": "/articles/episodic-vs-semantic-vs-working-memory-agents/",
+      "status": 200
+    },
+    {
+      "url": "/articles/fine-tuning-vs-rag-for-agent-memory/",
+      "status": 200
+    },
+    {
+      "url": "/articles/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/",
+      "status": 200
+    },
+    {
+      "url": "/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/",
+      "status": 200
+    },
+    {
+      "url": "/articles/how-memory-works-in-claude-code/",
+      "status": 200
+    },
+    {
+      "url": "/articles/how-memory-works-in-deerflow/",
+      "status": 200
+    },
+    {
+      "url": "/articles/how-memory-works-in-hyperagents/",
+      "status": 200
+    },
+    {
+      "url": "/articles/how-stripes-technical-blog-became-a-competitive-moat/",
+      "status": 200
+    },
+    {
+      "url": "/articles/how-to-organize-a-documentation-site/",
+      "status": 200
+    },
+    {
+      "url": "/articles/how-to-write-a-changelog-developers-actually-read/",
+      "status": 200
+    },
+    {
+      "url": "/articles/how-to-write-a-technical-tutorial-that-actually-teaches/",
+      "status": 200
+    },
+    {
+      "url": "/articles/how-to-write-task-based-documentation-headings/",
+      "status": 200
+    },
+    {
+      "url": "/articles/hybrid-search-bm25-vector-search/",
+      "status": 200
+    },
+    {
+      "url": "/articles/internal-vs-external-documentation/",
+      "status": 200
+    },
+    {
+      "url": "/articles/kv-cache-eviction-accuracy/",
+      "status": 200
+    },
+    {
+      "url": "/articles/llm-context-windows-explained/",
+      "status": 200
+    },
+    {
+      "url": "/articles/llm-inference-optimization/",
+      "status": 200
+    },
+    {
+      "url": "/articles/llm-token-budgets-cost-control/",
+      "status": 200
+    },
+    {
+      "url": "/articles/local-wasm-vector-benchmarks/",
+      "status": 200
+    },
+    {
+      "url": "/articles/memory-for-voice-ai-agents/",
+      "status": 200
+    },
+    {
+      "url": "/articles/memory-serialization-between-sessions/",
+      "status": 200
+    },
+    {
+      "url": "/articles/mixture-of-experts-explained/",
+      "status": 200
+    },
+    {
+      "url": "/articles/model-context-protocol-explained/",
+      "status": 200
+    },
+    {
+      "url": "/articles/production-ai-agent-errors/",
+      "status": 200
+    },
+    {
+      "url": "/articles/rag-evaluation-metrics-what-actually-matters/",
+      "status": 200
+    },
+    {
+      "url": "/articles/rag-vs-memory/",
+      "status": 200
+    },
+    {
+      "url": "/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/",
+      "status": 200
+    },
+    {
+      "url": "/articles/semantic-caching-rag-optimization/",
+      "status": 200
+    },
+    {
+      "url": "/articles/seo-for-technical-documentation/",
+      "status": 200
+    },
+    {
+      "url": "/articles/shared-vs-isolated-memory-multi-agent/",
+      "status": 200
+    },
+    {
+      "url": "/articles/short-term-memory-for-ai-agents/",
+      "status": 200
+    },
+    {
+      "url": "/articles/speculative-decoding-explained/",
+      "status": 200
+    },
+    {
+      "url": "/articles/state-of-ai-agent-memory-2026/",
+      "status": 200
+    },
+    {
+      "url": "/articles/structured-outputs-llms-json-mode-function-calling/",
+      "status": 200
+    },
+    {
+      "url": "/articles/technical-documentation-best-practices-tested-real-developer-docs/",
+      "status": 200
+    },
+    {
+      "url": "/articles/technical-documentation-template/",
+      "status": 200
+    },
+    {
+      "url": "/articles/technical-writing-for-ai-products-the-new-rules/",
+      "status": 200
+    },
+    {
+      "url": "/articles/technical-writing-for-engineers/",
+      "status": 200
+    },
+    {
+      "url": "/articles/the-agent-design-space/",
+      "status": 200
+    },
+    {
+      "url": "/articles/the-case-for-shorter-technical-documentation/",
+      "status": 200
+    },
+    {
+      "url": "/articles/time-to-first-token-ttft/",
+      "status": 200
+    },
+    {
+      "url": "/articles/types-of-technical-documentation/",
+      "status": 200
+    },
+    {
+      "url": "/articles/voice-ai-latency-gemini-benchmark/",
+      "status": 200
+    },
+    {
+      "url": "/articles/what-is-technical-documentation-and-what-should-it-include/",
+      "status": 200
+    },
+    {
+      "url": "/articles/why-coding-agents-lose-their-memory/",
+      "status": 200
+    },
+    {
+      "url": "/articles/why-devtools-startups-lose-deals-over-bad-docs/",
+      "status": 200
+    },
+    {
+      "url": "/articles/writing-release-notes-that-developers-trust/",
+      "status": 200
+    }
+  ]
+}

@@ -57,7 +57,7 @@ A written guide belongs where the reader needs a path through several symbols, f
 
 A setup guide can show a reader where to begin, what must already exist, how to recognize success, and where to look when the result differs. The guide should link into reference at the exact point where a stable name or constraint becomes necessary.
 
-The guide also has to establish [what the reader can safely assume](/articles/technical-writing-is-deciding-what-the-reader-can-assume/) when a request fails, because a signature alone cannot justify a retry.
+The guide also has to establish what the reader can safely assume when a request fails, because a signature alone cannot justify a retry.
 
 That relationship keeps the guide readable and keeps the reference dependable. The site's [technical documentation template](/articles/technical-documentation-template/) uses the same split by giving task pages and reference pages separate jobs within one documentation system.
 

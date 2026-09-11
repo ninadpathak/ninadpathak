@@ -128,7 +128,7 @@ For teams running high-frequency CI/CD pipelines, the smaller footprint translat
 
 The speed of your toolchain defines the boundary of your [engineering velocity](/articles/engineering-velocity-documentation/). When a tool like `uv` makes dependency management near-instant, it changes how you document your onboarding and development workflows.
 
-Within the [developer trust hierarchy](/articles/developer-trust-hierarchy/), the "Working Build" is Tier 4 trust. A tool that fails to install, or takes five minutes to initialize, erodes that trust.
+A tool that fails to install, or takes five minutes to initialize, erodes trust.
 
 A reader who runs your Quickstart and watches it hang on `poetry install` quietly closes the tab, so moving to `uv` ensures those guides actually stay quick.
 

@@ -133,7 +133,7 @@ terms:
     <h3>A read-only repository server makes the boundary concrete</h3>
     <p>An IDE host can connect to an MCP server that exposes <code>search_files</code> and <code>read_file</code>. The host may approve that server for one repository and withhold write tools entirely.</p>
     <p>The protocol describes the exchange, while operating-system permissions and host policy enforce the limit.</p>
-    <p>The <a href="/articles/model-context-protocol-explained/">MCP architecture guide</a> explains the roles, and the <a href="/articles/mcp-server-setup-guide/">practical MCP setup</a> covers implementation and guardrails. The common misuse is calling MCP a universal security layer or assuming a compatible server is therefore trustworthy.</p>
+    <p>The <a href="/articles/model-context-protocol-explained/">MCP architecture guide</a> explains the roles. The common misuse is calling MCP a universal security layer or assuming a compatible server is therefore trustworthy.</p>
     <h3>Resources and tools carry different risk</h3>
     <p>A resource supplies context for the host to read, while a tool asks the server to perform an operation. Reading can still expose sensitive data, but a tool may also mutate state or trigger an external side effect.</p>
     <p>That distinction should shape consent, logging, and credential scope. A host that displays every capability as an equivalent menu item hides the most important fact about an integration: what can change when the model selects it.</p>
@@ -157,7 +157,7 @@ terms:
     <p>The cache key therefore needs more than an embedding. Tenant, permissions, product version, locale, source freshness, and response type may all belong in the eligibility check.</p>
     <h3>Semantic caching is not prompt caching or retrieval</h3>
     <p>Prompt caching reuses computation for an identical input prefix, while semantic caching may return an earlier application result for different text. Retrieval fetches evidence for a new answer; a semantic cache may bypass generation altogether.</p>
-    <p>The <a href="/articles/semantic-caching-rag-optimization/">semantic caching guide</a> develops the design and failure cases, while the <a href="/articles/prompt-caching-what-it-is-and-when-the-math-works/">prompt caching guide</a> covers the distinct provider-side mechanism. The common misuse is choosing one global similarity threshold without evaluating false hits on the decisions the application actually makes.</p>
+    <p>The <a href="/articles/semantic-caching-rag-optimization/">semantic caching guide</a> develops the design and failure cases. The common misuse is choosing one global similarity threshold without evaluating false hits on the decisions the application actually makes.</p>
     <h3>Invalidation is harder than matching</h3>
     <p>A cached answer may cease to be correct even when an incoming question remains similar. Source documents change, policies expire, and personalized facts move independently of the request wording.</p>
     <p>Entries therefore need provenance and an invalidation key tied to the data behind the response. Evaluation should count harmful false hits separately from harmless misses because reusing the wrong answer is usually worse than paying to generate a fresh one.</p>

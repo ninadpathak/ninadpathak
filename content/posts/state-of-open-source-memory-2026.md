@@ -145,7 +145,7 @@ Decay keeps the working context relevant and lean, so the agent stops attending 
 
 ## Persistent state ROI
 
-For a high-volume system, replaying a large context on every request can dominate input cost. External state and [prompt caching](/articles/prompt-caching-what-it-is-and-when-the-math-works/) may reduce repeated input, but the saving must come from billing and trace data for the deployed workload.
+For a high-volume system, replaying a large context on every request can dominate input cost. External state and prompt caching may reduce repeated input, but the saving must come from billing and trace data for the deployed workload.
 
 Retrieving a small set of anchors can also reduce first-token delay compared with processing the full history. Measure that difference rather than assuming a universal percentage or latency.
 

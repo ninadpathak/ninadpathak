@@ -1,0 +1,2115 @@
+[
+  {
+    "source": "content/posts/2026-04-21-the-taxonomy-of-ai-agents.md",
+    "slug": "the-taxonomy-of-ai-agents",
+    "date": "2026-04-21",
+    "title": "A Taxonomy of AI Agents That Actually Explains What You Are Building",
+    "sha256": "525b91b3b903c50f3ca0d6266fba566594bf7884ab137e328f188555565b7697",
+    "canonical": "/articles/the-taxonomy-of-ai-agents/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/2026-04-21-the-taxonomy-of-ai-agents/"
+        ],
+        "clicks": 0,
+        "impressions": 16,
+        "ctr": 0,
+        "position": 15.5
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/the-taxonomy-of-ai-agents/"
+        ],
+        "clicks": 0,
+        "impressions": 19,
+        "ctr": 0,
+        "position": 15.631578947368421
+      }
+    ],
+    "impressions": 35,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/2026-04-22-why-ai-agents-keep-failing-in-production.md",
+    "slug": "why-ai-agents-keep-failing-in-production",
+    "date": "2026-04-22",
+    "title": "Why AI Agents Keep Failing in Production and What the Field Is Doing About It",
+    "sha256": "94ed1b4fe7203099ddfbe40a9433b9bdee609eb524515e4be5f7fd5260aabeda",
+    "canonical": "/articles/why-ai-agents-keep-failing-in-production/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/why-ai-agents-keep-failing-in-production/"
+        ],
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 10.25
+      }
+    ],
+    "impressions": 4,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/2026-04-23-agent-loop-anatomy.md",
+    "slug": "agent-loop-anatomy",
+    "date": "2026-04-23",
+    "title": "The Anatomy of an Agent Loop: Perceive, Think, Act, Remember",
+    "sha256": "6c7730133451811810775b87e559bc069c106f6e4dc87cc1a6e6e2d47244f1ec",
+    "canonical": "/articles/agent-loop-anatomy/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/agent-loop-anatomy/"
+        ],
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 54.93333333333333
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/agent-loop-anatomy/"
+        ],
+        "clicks": 0,
+        "impressions": 12,
+        "ctr": 0,
+        "position": 8.5
+      }
+    ],
+    "impressions": 27,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/2026-04-25-lambda-calculus-ai-reasoning-benchmark.md",
+    "slug": "lambda-calculus-ai-reasoning-benchmark",
+    "date": "2026-04-25",
+    "title": "Lambda Calculus as an AI Reasoning Exercise",
+    "sha256": "e5fd3420cfa2dd511ac1ecdc61ce1fbd587ccc7d880b601b06bed3fbb110964c",
+    "canonical": "/articles/lambda-calculus-ai-reasoning-benchmark/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/lambda-calculus-ai-reasoning-benchmark/"
+        ],
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 44
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/lambda-calculus-ai-reasoning-benchmark/"
+        ],
+        "clicks": 0,
+        "impressions": 17,
+        "ctr": 0,
+        "position": 15.176470588235293
+      }
+    ],
+    "impressions": 22,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/2026-04-26-agent-vs-ai-assistant.md",
+    "slug": "agent-vs-ai-assistant",
+    "date": "2026-04-26",
+    "title": "When to Build an Agent and When to Build a Smarter Assistant",
+    "sha256": "9c9c1c1385d7178a0b4bf98418559afd8429bc4d0f4340dcc8754aff142d703a",
+    "canonical": "/articles/agent-vs-ai-assistant/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/agent-vs-ai-assistant/"
+        ],
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 49.25
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/agent-vs-ai-assistant/"
+        ],
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 6.5
+      }
+    ],
+    "impressions": 12,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/2026-04-27-multi-agent-vs-single-agent-tradeoffs.md",
+    "slug": "multi-agent-vs-single-agent-tradeoffs",
+    "date": "2026-04-27",
+    "title": "Multi-Agent vs Single-Agent Systems: The Real Trade-offs",
+    "sha256": "cbb3865430f8c4738002422f2a69dbfe144e9a3eff5d09990767849dbc0d2159",
+    "canonical": "/articles/multi-agent-vs-single-agent-tradeoffs/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/multi-agent-vs-single-agent-tradeoffs/"
+        ],
+        "clicks": 0,
+        "impressions": 19,
+        "ctr": 0,
+        "position": 83.42105263157895
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/multi-agent-vs-single-agent-tradeoffs/"
+        ],
+        "clicks": 0,
+        "impressions": 22,
+        "ctr": 0,
+        "position": 8.181818181818182
+      }
+    ],
+    "impressions": 41,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/2026-05-05-contextual-compression-for-agent-memory.md",
+    "slug": "contextual-compression-for-agent-memory",
+    "date": "2026-05-05",
+    "title": "Contextual Compression for Agent Memory: What Stays and What Goes",
+    "sha256": "871f94ec15a51bfb20cee44416b5604fadffd6a2c2ddeef9fb6f33943a70301d",
+    "canonical": "/articles/contextual-compression-for-agent-memory/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/contextual-compression-for-agent-memory/"
+        ],
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0,
+        "position": 12
+      }
+    ],
+    "impressions": 10,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/2026-05-05-memory-versioning-and-audit-trails.md",
+    "slug": "memory-versioning-and-audit-trails",
+    "date": "2026-05-05",
+    "title": "Memory Versioning and Audit Trails for Regulated AI Agents",
+    "sha256": "3fbd4f5fcf55256e33d8c151db45a87a8cf7ba8f92216746baeea9fc67ece730",
+    "canonical": "/articles/memory-versioning-and-audit-trails/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/memory-versioning-and-audit-trails/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/memory-versioning-and-audit-trails/"
+        ],
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 3.6666666666666665
+      }
+    ],
+    "impressions": 7,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/agent-harnesses.md",
+    "slug": "agent-harnesses",
+    "date": "2026-03-10",
+    "title": "Agent Harnesses: the Infrastructure Layer Your Llm Agent Actually Needs",
+    "sha256": "f6edb69baabb82f1b4b959cce0d738b7ef5b2fd98dddad83baa81265177f2714",
+    "canonical": "/articles/agent-harnesses/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/agent-harnesses/"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 46.666666666666664
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/agent-harnesses/"
+        ],
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 10.25
+      }
+    ],
+    "impressions": 11,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/agentic-cli-benchmarks.md",
+    "slug": "agentic-cli-benchmarks",
+    "date": "2026-04-12",
+    "title": "Claude Code vs. Gemini CLI for Repository Refactoring",
+    "sha256": "fdc706fc1f66468a2dd2c9f6ab554ad7bee786742e4a65837175567ca416d45b",
+    "canonical": "/articles/agentic-cli-benchmarks/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/agentic-cli-benchmarks/"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 22.5
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/agentic-cli-benchmarks/"
+        ],
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 14
+      }
+    ],
+    "impressions": 10,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/agentic-workflow-playbook.md",
+    "slug": "agentic-workflow-playbook",
+    "date": "2026-06-14",
+    "title": "The Agentic Workflow Playbook: From Prompt to Shipped PR",
+    "sha256": "c74b1b319a8f7dbec3e3c7ae000674854015cae46bb43ac3608425733f13b932",
+    "canonical": "/articles/agentic-workflow-playbook/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/agentic-workflow-playbook/"
+        ],
+        "clicks": 0,
+        "impressions": 47,
+        "ctr": 0,
+        "position": 8.595744680851064
+      }
+    ],
+    "impressions": 47,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/ai-crawlers-robots-txt-training-vs-citation.md",
+    "slug": "ai-crawlers-robots-txt-training-vs-citation",
+    "date": "2026-08-17",
+    "title": "AI Crawlers in robots.txt: Training, Citation, and What Each Block Costs",
+    "sha256": "81f5dfa3e98d7ced158c71d60a2ae5b31b599eac1705a9b9d37d9839238d3e75",
+    "canonical": "/articles/ai-crawlers-robots-txt-training-vs-citation/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/ai-memory-management-for-llms.md",
+    "slug": "ai-memory-management-for-llms",
+    "date": "2026-04-19",
+    "title": "AI Memory Management for LLMs: What Actually Works",
+    "sha256": "764d77ea89f293c9489da2f617f0d68eba7fdc5fc021d215ed17d9e0bf7b1729",
+    "canonical": "/articles/ai-memory-management-for-llms/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/ai-memory-management-for-llms/"
+        ],
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 45.75
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/memory-hierarchy-in-ai-systems/"
+        ],
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 66.375
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/ai-memory-management-for-llms/"
+        ],
+        "clicks": 0,
+        "impressions": 52,
+        "ctr": 0,
+        "position": 24.48076923076923
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/memory-attribution-errors/"
+        ],
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 6.125
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/memory-hierarchy-in-ai-systems/"
+        ],
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 28.733333333333334
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/the-memory-hierarchy-why-rag-is-not-enough/"
+        ],
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 5.625
+      }
+    ],
+    "impressions": 95,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/api-documentation-best-practices-reference-guides-and-working-requests.md",
+    "slug": "api-documentation-best-practices-reference-guides-and-working-requests",
+    "date": "2026-08-14",
+    "title": "API Documentation Best Practices: Reference, Guides, and Working Requests",
+    "sha256": "c3465ae304fe0dcf67452d82b21a3424165f88e6456a5befa9f831df5e1c8da3",
+    "canonical": "/articles/api-documentation-best-practices-reference-guides-and-working-requests/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/api-documentation-examples-what-the-best-developer-portals-get-right.md",
+    "slug": "api-documentation-examples-what-the-best-developer-portals-get-right",
+    "date": "2026-08-15",
+    "title": "API Documentation Examples: What the Best Developer Portals Get Right",
+    "sha256": "5e6fbb2fcda6cf1a71620501178308a681970500b38036d4388f14a87d25fc17",
+    "canonical": "/articles/api-documentation-examples-what-the-best-developer-portals-get-right/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/api-documentation-template-the-pages-every-api-needs.md",
+    "slug": "api-documentation-template-the-pages-every-api-needs",
+    "date": "2026-08-17",
+    "title": "API Documentation Template: The Pages Every API Needs",
+    "sha256": "eec3a990a4de3bbc162688c13900f659f4a5c93f00c6108410f5af4335624ea1",
+    "canonical": "/articles/api-documentation-template-the-pages-every-api-needs/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/api-documentation-tools-hands-on-comparison-small-teams.md",
+    "slug": "api-documentation-tools-hands-on-comparison-small-teams",
+    "date": "2026-08-16",
+    "title": "API Documentation Tools: A Workflow Comparison for Small Teams",
+    "sha256": "9a1f3532d669f9e5e900df509024cebd730786af5adb24fc9d290263357fe2d0",
+    "canonical": "/articles/api-documentation-tools-hands-on-comparison-small-teams/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/best-llms-for-coding.md",
+    "slug": "best-llms-for-coding",
+    "date": "2026-03-12",
+    "title": "The Best LLMs for Coding in 2026: An Engineering Review",
+    "sha256": "af0ad1283d864d9ac3c6a566815f8d2c388db29bd8c2a85edc399abc0e4a7792",
+    "canonical": "/articles/best-llms-for-coding/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/best-llms-for-coding/"
+        ],
+        "clicks": 0,
+        "impressions": 201,
+        "ctr": 0,
+        "position": 75.42786069651741
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/best-llms-for-coding/"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 76
+      }
+    ],
+    "impressions": 204,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/code-documentation.md",
+    "slug": "code-documentation",
+    "date": "2026-08-18",
+    "title": "Code Documentation: Comments, Generated Reference, and External Guides",
+    "sha256": "fc88e7306492e2a4aed39c8d55203a6a9e1a97c9e194eab20a4338351e33e885",
+    "canonical": "/articles/code-documentation/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/code-documentation/"
+        ],
+        "clicks": 0,
+        "impressions": 18,
+        "ctr": 0,
+        "position": 60.05555555555556
+      }
+    ],
+    "impressions": 18,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/coding-agent-setup-that-works.md",
+    "slug": "coding-agent-setup-that-works",
+    "date": "2026-06-13",
+    "title": "How I Set Up a Coding Agent That Actually Finishes the Task",
+    "sha256": "d90d8576bab73dfa02c910a153ae2d62857b6e673214b727d8e5a1fbc456a992",
+    "canonical": "/articles/coding-agent-setup-that-works/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/context-windows-vs-memory.md",
+    "slug": "context-windows-vs-memory",
+    "date": "2026-04-19",
+    "title": "Context Windows vs Memory: Why They Are Not the Same Thing",
+    "sha256": "4ea3200ca5d6cd412ef2c1c0622e9245fdf3bd78698cc33a6fe78e6361b5d7d6",
+    "canonical": "/articles/context-windows-vs-memory/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/context-windows-vs-memory/"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 52
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/beam-memory-benchmark/"
+        ],
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 12.866666666666667
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/context-windows-vs-memory/"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 34.5
+      }
+    ],
+    "impressions": 20,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/developer-onboarding-docs-what-works-what-doesnt.md",
+    "slug": "developer-onboarding-docs-what-works-what-doesnt",
+    "date": "2026-04-01",
+    "title": "Developer Onboarding Docs Should End in a Merged Change",
+    "sha256": "e06ff33880b23d9ad88c38967195f9581e0a1fff1381caba1a6a5c14d76e9a30",
+    "canonical": "/articles/developer-onboarding-docs-what-works-what-doesnt/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/developer-onboarding-docs-what-works-what-doesnt/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 85
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/developer-onboarding-docs-what-works-what-doesnt/"
+        ],
+        "clicks": 0,
+        "impressions": 42,
+        "ctr": 0,
+        "position": 8.285714285714285
+      }
+    ],
+    "impressions": 43,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/developer-trust-hierarchy.md",
+    "slug": "developer-trust-hierarchy",
+    "date": "2026-04-10",
+    "title": "The Developer Trust Hierarchy: Why Practitioner Writing Outranks Marketing Content",
+    "sha256": "64515727359a00fc114c99c31b04ac89dbf0360dd3d18aa82e568dde8c8748bd",
+    "canonical": "/articles/developer-trust-hierarchy/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/documentation-accessibility-checklist.md",
+    "slug": "documentation-accessibility-checklist",
+    "date": "2026-08-09",
+    "title": "Accessibility Testing for Documentation: A Release Checklist",
+    "sha256": "3cd60b17b461b907caf58a47b433be7a401317fb1795ab100054de59cdb0b935",
+    "canonical": "/articles/documentation-accessibility-checklist/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/documentation-accessibility-checklist/"
+        ],
+        "clicks": 0,
+        "impressions": 13,
+        "ctr": 0,
+        "position": 75.76923076923077
+      }
+    ],
+    "impressions": 13,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/documentation-review-checklist-before-you-publish.md",
+    "slug": "documentation-review-checklist-before-you-publish",
+    "date": "2026-07-30",
+    "title": "Documentation Review Should Start With the Product, Not the Prose",
+    "sha256": "214fc64d84604b38d1413d33da7086ad20b195bc39aead68c00c590b5c81f382",
+    "canonical": "/articles/documentation-review-checklist-before-you-publish/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/documentation-review-checklist-before-you-publish/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 18
+      }
+    ],
+    "impressions": 1,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/documentation-style-guide-template-for-developer-teams.md",
+    "slug": "documentation-style-guide-template",
+    "date": "2026-08-07",
+    "title": "A Documentation Style Guide Should Record Decisions, Not Taste",
+    "sha256": "b623a88c78a09f8365334ab2d1967a7cd2feb46aaa80b5ff0334199d504df02e",
+    "canonical": "/articles/documentation-style-guide-template/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/embedding-models-compared.md",
+    "slug": "embedding-models-compared",
+    "date": "2026-03-15",
+    "title": "Vector Embeddings: a Guide to the Geometry of Meaning in Ai",
+    "sha256": "d93ef771ee68107b00d051f649315e42d040047053e03bcbb7d35761538732df",
+    "canonical": "/articles/embedding-models-compared/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/embedding-models-compared/"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 14
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/embedding-models-compared/"
+        ],
+        "clicks": 0,
+        "impressions": 162,
+        "ctr": 0,
+        "position": 33.351851851851855
+      }
+    ],
+    "impressions": 165,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/engineering-velocity-documentation.md",
+    "slug": "engineering-velocity-documentation",
+    "date": "2026-04-11",
+    "title": "Quantifying the Engineering Velocity Impact of Technical Documentation",
+    "sha256": "c828857e445821bd60feb6893d275fb08fcac6930eb1517204dce802a9007d3b",
+    "canonical": "/articles/engineering-velocity-documentation/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/engineering-velocity-documentation/"
+        ],
+        "clicks": 0,
+        "impressions": 28,
+        "ctr": 0,
+        "position": 86.78571428571429
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/engineering-velocity-documentation/"
+        ],
+        "clicks": 0,
+        "impressions": 51,
+        "ctr": 0,
+        "position": 37.19607843137255
+      }
+    ],
+    "impressions": 79,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/episodic-vs-semantic-vs-working-memory-agents.md",
+    "slug": "episodic-vs-semantic-vs-working-memory-agents",
+    "date": "2026-05-04",
+    "title": "Episodic, Semantic, and Working Memory in AI Agents: A Practical Map",
+    "sha256": "c4241e248113c2bb8a1a61e473ee3659bb53c9eb76a44a76608802afddf9221f",
+    "canonical": "/articles/episodic-vs-semantic-vs-working-memory-agents/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/episodic-vs-semantic-vs-working-memory-agents/"
+        ],
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 16.5
+      }
+    ],
+    "impressions": 4,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/fine-tuning-vs-rag-for-agent-memory.md",
+    "slug": "fine-tuning-vs-rag-for-agent-memory",
+    "date": "2026-05-12",
+    "title": "Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense",
+    "sha256": "bf1455939a7b28b2f2e4c5fc2a0a054c509e80624773272f7debb44dcd5bcf40",
+    "canonical": "/articles/fine-tuning-vs-rag-for-agent-memory/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/fine-tuning-vs-rag-for-agent-memory/"
+        ],
+        "clicks": 2,
+        "impressions": 87,
+        "ctr": 0.022988505747126436,
+        "position": 10.71264367816092
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/fine-tuning-vs-rag-for-agent-memory/"
+        ],
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 45.5
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/rag-vs-fine-tuning/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      }
+    ],
+    "impressions": 94,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md",
+    "slug": "from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind",
+    "date": "2026-04-05",
+    "title": "From Engineer to Technical Writer: What I Kept and What I Left Behind",
+    "sha256": "117ed055a69793d96b47e7841c26aad8188338a527a86473285feca3a9fa656f",
+    "canonical": "/articles/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/"
+        ],
+        "clicks": 0,
+        "impressions": 13,
+        "ctr": 0,
+        "position": 21.076923076923077
+      }
+    ],
+    "impressions": 13,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/how-anthropics-contextual-retrieval-changes-rag-architecture.md",
+    "slug": "how-anthropics-contextual-retrieval-changes-rag-architecture",
+    "date": "2026-03-26",
+    "title": "How Anthropic's Contextual Retrieval Changes RAG Architecture",
+    "sha256": "17b72a6370ccec97f3f620d54ed400b11dd9cb0efecf9e8abd83f134d3a29830",
+    "canonical": "/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/"
+        ],
+        "clicks": 0,
+        "impressions": 52,
+        "ctr": 0,
+        "position": 48.01923076923077
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/how-anthropics-contextual-retrieval-changes-rag-architecture/"
+        ],
+        "clicks": 0,
+        "impressions": 2141,
+        "ctr": 0,
+        "position": 8.304063521718824
+      }
+    ],
+    "impressions": 2193,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/how-memory-works-in-claude-code.md",
+    "slug": "how-memory-works-in-claude-code",
+    "date": "2026-04-19",
+    "title": "How Memory Works in Claude Code",
+    "sha256": "b702106eb88eb520bff3bd024e117f74b0aaba289b38e283d3a615a20a715413",
+    "canonical": "/articles/how-memory-works-in-claude-code/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/how-memory-works-in-claude-code/"
+        ],
+        "clicks": 0,
+        "impressions": 53,
+        "ctr": 0,
+        "position": 13.056603773584905
+      }
+    ],
+    "impressions": 53,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/how-memory-works-in-deerflow.md",
+    "slug": "how-memory-works-in-deerflow",
+    "date": "2026-04-19",
+    "title": "How Memory Works in DeerFlow",
+    "sha256": "a05d373ff52f783b4949cfe01ec7c81fb3ea71d0e029169897bc37c6304cf318",
+    "canonical": "/articles/how-memory-works-in-deerflow/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/how-memory-works-in-deerflow/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/how-memory-works-in-deerflow/"
+        ],
+        "clicks": 0,
+        "impressions": 36,
+        "ctr": 0,
+        "position": 25.36111111111111
+      }
+    ],
+    "impressions": 37,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/how-memory-works-in-hyperagents.md",
+    "slug": "how-memory-works-in-hyperagents",
+    "date": "2026-04-19",
+    "title": "How Memory Works in HyperAgents",
+    "sha256": "9b094b01b61a152063d17d33b334657f57a85e615ef54651cf652dd7ae5af53f",
+    "canonical": "/articles/how-memory-works-in-hyperagents/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/how-memory-works-in-hyperagents/"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 34
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/how-memory-works-in-hyperagents/"
+        ],
+        "clicks": 0,
+        "impressions": 11,
+        "ctr": 0,
+        "position": 11.181818181818182
+      }
+    ],
+    "impressions": 13,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/how-stripes-technical-blog-became-a-competitive-moat.md",
+    "slug": "how-stripes-technical-blog-became-a-competitive-moat",
+    "date": "2026-04-07",
+    "title": "How Stripe's Technical Blog Became a Competitive Moat",
+    "sha256": "1e1d10013b68299b19d63f4c58f83fb0c06049b905e7392f2b5e56c9620bef12",
+    "canonical": "/articles/how-stripes-technical-blog-became-a-competitive-moat/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/how-stripes-technical-blog-became-a-competitive-moat/"
+        ],
+        "clicks": 0,
+        "impressions": 18,
+        "ctr": 0,
+        "position": 12.666666666666666
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/how-stripes-technical-blog-became-a-competitive-moat/"
+        ],
+        "clicks": 0,
+        "impressions": 116,
+        "ctr": 0,
+        "position": 9.560344827586206
+      }
+    ],
+    "impressions": 134,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/how-to-document-multiple-product-versions.md",
+    "slug": "how-to-document-multiple-product-versions",
+    "date": "2026-08-12",
+    "title": "How to Document Multiple Product Versions",
+    "sha256": "ad764926c5b292131ad5660e7b7717779d661104e19e1bb967f4c9d8932bcc41",
+    "canonical": "/articles/how-to-document-multiple-product-versions/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/how-to-find-the-right-subreddit-for-a-developer-product.md",
+    "slug": "how-to-find-the-right-subreddit-for-a-developer-product",
+    "date": "2026-08-19",
+    "title": "How to Find the Right Subreddit for a Developer Product",
+    "sha256": "074604646bd1a02134b43ee115d9f020a4bdbc130abfaa97ef331703261e8319",
+    "canonical": "/articles/how-to-find-the-right-subreddit-for-a-developer-product/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/how-to-organize-a-documentation-site.md",
+    "slug": "how-to-organize-a-documentation-site",
+    "date": "2026-07-30",
+    "title": "Organize Documentation Around Reader Routes, Not Your Org Chart",
+    "sha256": "be6ffcabb10c1299e3327d9f0b3892ad3ffd8d2c3567d80060f68a16216bbd13",
+    "canonical": "/articles/how-to-organize-a-documentation-site/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/how-to-organize-a-documentation-site/"
+        ],
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 28.166666666666668
+      }
+    ],
+    "impressions": 6,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/how-to-write-a-changelog-developers-actually-read.md",
+    "slug": "how-to-write-a-changelog-developers-actually-read",
+    "date": "2026-03-30",
+    "title": "How to Write a Changelog That Developers Actually Read",
+    "sha256": "50db2f2f5bee7706f6d0857a876cc3c0c93f202c8dfb5ce68266f0c0ad94c506",
+    "canonical": "/articles/how-to-write-a-changelog-developers-actually-read/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/how-to-write-a-changelog-developers-actually-read/"
+        ],
+        "clicks": 0,
+        "impressions": 21,
+        "ctr": 0,
+        "position": 52.523809523809526
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/how-to-write-a-changelog-developers-actually-read/"
+        ],
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 22.2
+      }
+    ],
+    "impressions": 26,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/how-to-write-a-technical-tutorial-that-actually-teaches.md",
+    "slug": "how-to-write-a-technical-tutorial-that-actually-teaches",
+    "date": "2026-04-02",
+    "title": "How to Write a Technical Tutorial That Actually Teaches",
+    "sha256": "e9c6ee80e65f1dbbe8cde8c4f30c270a3a8d1e88a9ddf7dde0043b9481e1260d",
+    "canonical": "/articles/how-to-write-a-technical-tutorial-that-actually-teaches/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/how-to-write-a-technical-tutorial-that-actually-teaches/"
+        ],
+        "clicks": 0,
+        "impressions": 21,
+        "ctr": 0,
+        "position": 33.95238095238095
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/how-to-write-a-technical-tutorial-that-actually-teaches/"
+        ],
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 12.066666666666666
+      }
+    ],
+    "impressions": 36,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/how-to-write-task-based-documentation-headings.md",
+    "slug": "how-to-write-task-based-documentation-headings",
+    "date": "2026-08-10",
+    "title": "How to Write Task-Based Documentation Headings",
+    "sha256": "3a806e0214b4ea4cdda4c4306d96b61eed05ce5800f39bd8cd6b3e330429c3c8",
+    "canonical": "/articles/how-to-write-task-based-documentation-headings/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/how-to-write-task-based-documentation-headings/"
+        ],
+        "clicks": 0,
+        "impressions": 12,
+        "ctr": 0,
+        "position": 56.916666666666664
+      }
+    ],
+    "impressions": 12,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/hybrid-search-bm25-vector-search.md",
+    "slug": "hybrid-search-bm25-vector-search",
+    "date": "2026-03-29",
+    "title": "Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval",
+    "sha256": "0eea4de1f15fb26f9b49e479bcadefbf82902cd7718e2082b35d791e42b36502",
+    "canonical": "/articles/hybrid-search-bm25-vector-search/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/hybrid-search-bm25-vector-search/"
+        ],
+        "clicks": 0,
+        "impressions": 115,
+        "ctr": 0,
+        "position": 66.13913043478261
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/hybrid-search-bm25-vector-search/"
+        ],
+        "clicks": 0,
+        "impressions": 79,
+        "ctr": 0,
+        "position": 19.82278481012658
+      }
+    ],
+    "impressions": 194,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/internal-vs-external-documentation.md",
+    "slug": "internal-vs-external-documentation",
+    "date": "2026-08-06",
+    "title": "Internal vs. External Documentation: What Belongs Where",
+    "sha256": "ce6732c644ef1060558dcc1e46b93e9e52dcce6a673a9704af9074fdd1cbbfb4",
+    "canonical": "/articles/internal-vs-external-documentation/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/internal-vs-external-documentation/"
+        ],
+        "clicks": 1,
+        "impressions": 16,
+        "ctr": 0.0625,
+        "position": 34.3125
+      }
+    ],
+    "impressions": 16,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/kv-cache-eviction-accuracy.md",
+    "slug": "kv-cache-eviction-accuracy",
+    "date": "2026-04-15",
+    "title": "Context Engineering as Heap Management: Accuracy Risks in KV Cache Eviction",
+    "sha256": "9a84e97cd974eab161b5a88efb924882b6939fd7f3aeea074c9803fbb9c2ca06",
+    "canonical": "/articles/kv-cache-eviction-accuracy/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/kv-cache-eviction-accuracy/"
+        ],
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 11.5
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/kv-cache-eviction-accuracy/"
+        ],
+        "clicks": 0,
+        "impressions": 144,
+        "ctr": 0,
+        "position": 21.256944444444443
+      }
+    ],
+    "impressions": 148,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/llm-context-windows-explained.md",
+    "slug": "llm-context-windows-explained",
+    "date": "2026-03-14",
+    "title": "Llm Context Windows Explained: Why More Is Not Always Better",
+    "sha256": "767d9c2e1047ea0e9030b6ba21d4080d300452da1130038014e3556c1a51f721",
+    "canonical": "/articles/llm-context-windows-explained/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/llm-context-windows-explained/"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 43
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/llm-context-windows-explained/"
+        ],
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 14.8
+      }
+    ],
+    "impressions": 8,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/llm-inference-optimization.md",
+    "slug": "llm-inference-optimization",
+    "date": "2026-05-06",
+    "title": "LLM Inference Optimization: What Actually Works in Production",
+    "sha256": "55efc096d46aafe0264b08a67a2e5a8990da88f9fc225489b9d6ab0c8bd0469a",
+    "canonical": "/articles/llm-inference-optimization/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/llm-inference-optimization/"
+        ],
+        "clicks": 0,
+        "impressions": 284,
+        "ctr": 0,
+        "position": 78.70422535211267
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/llm-inference-optimization/"
+        ],
+        "clicks": 0,
+        "impressions": 79,
+        "ctr": 0,
+        "position": 57.962025316455694
+      }
+    ],
+    "impressions": 363,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/llm-token-budgets-cost-control.md",
+    "slug": "llm-token-budgets-cost-control",
+    "date": "2026-04-17",
+    "title": "LLM token budgets: a practical guide to cost control",
+    "sha256": "1bfe6af32ffd852e4439064073a0ea4c02873e8beebb5086538cd03cfd34c853",
+    "canonical": "/articles/llm-token-budgets-cost-control/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/llm-token-budgets-cost-control/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 8
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/llm-token-budgets-cost-control/"
+        ],
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 37.4
+      }
+    ],
+    "impressions": 6,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/llms-txt-examples-real-files-audited.md",
+    "slug": "llms-txt-examples-real-files-audited",
+    "date": "2026-08-17",
+    "title": "llms.txt Examples: Four Public Files Audited Against the Proposal",
+    "sha256": "3837c9c91a8b0effb6033f7db2ab57fd1207f85bada508b04c9c6d71b5e9d3d1",
+    "canonical": "/articles/llms-txt-examples-real-files-audited/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/local-wasm-vector-benchmarks.md",
+    "slug": "local-wasm-vector-benchmarks",
+    "date": "2026-04-13",
+    "title": "Vector Search in the Browser: PGlite vs. SQLite-vec",
+    "sha256": "bbd8c02670d7d5d32219ea840fc7c4cad770eeff0ff5908f246ab4129581ab4a",
+    "canonical": "/articles/local-wasm-vector-benchmarks/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/local-wasm-vector-benchmarks/"
+        ],
+        "clicks": 1,
+        "impressions": 130,
+        "ctr": 0.007692307692307693,
+        "position": 29.73076923076923
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/local-wasm-vector-benchmarks/"
+        ],
+        "clicks": 0,
+        "impressions": 86,
+        "ctr": 0,
+        "position": 8.604651162790699
+      }
+    ],
+    "impressions": 216,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/mcp-server-setup-guide.md",
+    "slug": "mcp-server-setup-guide",
+    "date": "2026-06-12",
+    "title": "Wiring Tools into Your Agent with MCP: A Practical Setup",
+    "sha256": "8086fbd962ce1cb88dd5341eed1a0e18572c56b0dd7b59e00006ebbae2651097",
+    "canonical": "/articles/mcp-server-setup-guide/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/memory-for-voice-ai-agents.md",
+    "slug": "memory-for-voice-ai-agents",
+    "date": "2026-04-19",
+    "title": "Memory for Voice AI Agents: What Text Chatbots Cannot Do",
+    "sha256": "1ce244ac8b675f1a79dd9f9beeb8c14e0bc9cc3d160fc8e091ce37884a60f68b",
+    "canonical": "/articles/memory-for-voice-ai-agents/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/memory-for-voice-ai-agents/"
+        ],
+        "clicks": 0,
+        "impressions": 13,
+        "ctr": 0,
+        "position": 57.92307692307692
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/memory-for-voice-ai-agents/"
+        ],
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 32.8
+      }
+    ],
+    "impressions": 18,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/memory-serialization-between-sessions.md",
+    "slug": "memory-serialization-between-sessions",
+    "date": "2026-04-30",
+    "title": "Memory Serialization: How Agents Persist State Across Sessions",
+    "sha256": "8be1034a376ff95ff7eeb0580827679089cb622cd041a14fe8186fac0ddab662",
+    "canonical": "/articles/memory-serialization-between-sessions/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/memory-serialization-between-sessions/"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 14
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/memory-serialization-between-sessions/"
+        ],
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 11.142857142857142
+      }
+    ],
+    "impressions": 10,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/mixture-of-experts-explained.md",
+    "slug": "mixture-of-experts-explained",
+    "date": "2026-03-13",
+    "title": "Mixture of Experts: How Moe Models Are Cheap to Run but Expensive to Host",
+    "sha256": "ab4f49e55f43bb0659269423568dab9d72dc25e012613badf9f848b467edd71a",
+    "canonical": "/articles/mixture-of-experts-explained/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/mixture-of-experts-explained/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 24
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/mixture-of-experts-explained/"
+        ],
+        "clicks": 0,
+        "impressions": 19,
+        "ctr": 0,
+        "position": 10.210526315789474
+      }
+    ],
+    "impressions": 20,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/model-context-protocol-explained.md",
+    "slug": "model-context-protocol-explained",
+    "date": "2026-03-11",
+    "title": "The Model Context Protocol (MCP) Explained: A Universal Language for AI Tools",
+    "sha256": "3d22dfccd2dbd62cd202a3c9ab97303e15dc7618ef7d564cacbffac7e563ed55",
+    "canonical": "/articles/model-context-protocol-explained/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/model-context-protocol-explained/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 27
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/model-context-protocol-explained/"
+        ],
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 14.25
+      }
+    ],
+    "impressions": 5,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/production-ai-agent-errors.md",
+    "slug": "production-ai-agent-errors",
+    "date": "2026-04-16",
+    "title": "What Nobody Tells You About Error Handling in Production AI Agents",
+    "sha256": "73fa8287bf9a34a449494cca897e3cffe1f6c105ba1d8acc1239144770824f80",
+    "canonical": "/articles/production-ai-agent-errors/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/production-ai-agent-errors/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/production-ai-agent-errors/"
+        ],
+        "clicks": 0,
+        "impressions": 20,
+        "ctr": 0,
+        "position": 9.55
+      }
+    ],
+    "impressions": 21,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/prompt-caching-what-it-is-and-when-the-math-works.md",
+    "slug": "prompt-caching-what-it-is-and-when-the-math-works",
+    "date": "2026-03-13",
+    "title": "Prompt Caching: What It Is and When the Math Works",
+    "sha256": "7b4c028d52378c5a54b892ff965ae733df33ac08e756904b1d56e96034747241",
+    "canonical": "/articles/prompt-caching-what-it-is-and-when-the-math-works/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/rag-evaluation-metrics-what-actually-matters.md",
+    "slug": "rag-evaluation-metrics-what-actually-matters",
+    "date": "2026-04-16",
+    "title": "RAG Evaluation Metrics: What Actually Matters",
+    "sha256": "d51aebde80a2b9678891ab81684d8d4aa9789693c469ac7d97c6f574eed7d67b",
+    "canonical": "/articles/rag-evaluation-metrics-what-actually-matters/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/rag-evaluation-metrics-what-actually-matters/"
+        ],
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0,
+        "position": 70.9
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/rag-evaluation-metrics-what-actually-matters/"
+        ],
+        "clicks": 0,
+        "impressions": 40,
+        "ctr": 0,
+        "position": 63.3
+      }
+    ],
+    "impressions": 50,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/rag-vs-memory.md",
+    "slug": "rag-vs-memory",
+    "date": "2026-04-19",
+    "title": "RAG vs Memory: What AI Developers Need to Know",
+    "sha256": "d02bdbf119c9ca7a435ddeff02298c16c9d0cc30618aaa1175912f1446e864ed",
+    "canonical": "/articles/rag-vs-memory/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/rag-vs-memory/"
+        ],
+        "clicks": 1,
+        "impressions": 56,
+        "ctr": 0.017857142857142856,
+        "position": 19.678571428571427
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/rag-vs-memory/"
+        ],
+        "clicks": 0,
+        "impressions": 28,
+        "ctr": 0,
+        "position": 62.285714285714285
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/asymmetric-retrieval-agent-memory/"
+        ],
+        "clicks": 0,
+        "impressions": 12,
+        "ctr": 0,
+        "position": 18.333333333333332
+      }
+    ],
+    "impressions": 96,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/reddit-self-promotion-rules-read-properly.md",
+    "slug": "reddit-self-promotion-rules-read-properly",
+    "date": "2026-08-20",
+    "title": "Reddit Self-Promotion Rules, Read Properly",
+    "sha256": "73e1c4408339c2abd0a5b139b67cd8252a5b3791385626a474b9c94fd9c721ca",
+    "canonical": "/articles/reddit-self-promotion-rules-read-properly/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/reranking-in-rag-why-your-top-k-results-are-probably-wrong.md",
+    "slug": "reranking-in-rag-why-your-top-k-results-are-probably-wrong",
+    "date": "2026-03-21",
+    "title": "Reranking in RAG: Why Your Top-K Results Are Probably Wrong",
+    "sha256": "551f26348023c74498b2892199ef3a07ab53b36d8329d83c2bf1b30ce8eaead5",
+    "canonical": "/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/"
+        ],
+        "clicks": 0,
+        "impressions": 90,
+        "ctr": 0,
+        "position": 84.43333333333334
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/reranking-in-rag-why-your-top-k-results-are-probably-wrong/"
+        ],
+        "clicks": 0,
+        "impressions": 39,
+        "ctr": 0,
+        "position": 21.94871794871795
+      }
+    ],
+    "impressions": 129,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/semantic-caching-rag-optimization.md",
+    "slug": "semantic-caching-rag-optimization",
+    "date": "2026-03-28",
+    "title": "Semantic Caching: The RAG Optimization Nobody Talks About",
+    "sha256": "6e9b3570c1d7936bce65d82216ea5ee29f79f593d76b3e904c98c94128fae2c6",
+    "canonical": "/articles/semantic-caching-rag-optimization/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/semantic-caching-rag-optimization/"
+        ],
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 46.333333333333336
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/semantic-caching-rag-optimization/"
+        ],
+        "clicks": 0,
+        "impressions": 37,
+        "ctr": 0,
+        "position": 21.37837837837838
+      }
+    ],
+    "impressions": 43,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/seo-for-technical-documentation.md",
+    "slug": "seo-for-technical-documentation",
+    "date": "2026-07-30",
+    "title": "Technical SEO Checklist for Documentation Sites",
+    "sha256": "2dda0caf680d8940db5b462dc731d7d4be9e16a98fe15bbdcb8a06797c90241b",
+    "canonical": "/articles/seo-for-technical-documentation/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/seo-for-technical-documentation/"
+        ],
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0,
+        "position": 44.2
+      }
+    ],
+    "impressions": 10,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/shared-vs-isolated-memory-multi-agent.md",
+    "slug": "shared-vs-isolated-memory-multi-agent",
+    "date": "2026-05-11",
+    "title": "Shared Memory vs Isolated Memory in Multi-Agent Workflows",
+    "sha256": "15b06085ea4f1420ce32c1658da2afa2befd68717e408187f962b9065cfaa1be",
+    "canonical": "/articles/shared-vs-isolated-memory-multi-agent/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/shared-vs-isolated-memory-multi-agent/"
+        ],
+        "clicks": 1,
+        "impressions": 59,
+        "ctr": 0.01694915254237288,
+        "position": 9.067796610169491
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/shared-vs-isolated-memory-multi-agent/"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 15
+      }
+    ],
+    "impressions": 60,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/short-term-memory-for-ai-agents.md",
+    "slug": "short-term-memory-for-ai-agents",
+    "date": "2026-04-19",
+    "title": "Short-Term Memory for AI Agents: A Practical Guide",
+    "sha256": "642d6cc1c1dabb4bccab30ea7fc8f1bc16d71e803e9f4855243689673e99c183",
+    "canonical": "/articles/short-term-memory-for-ai-agents/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/short-term-memory-for-ai-agents/"
+        ],
+        "clicks": 0,
+        "impressions": 39,
+        "ctr": 0,
+        "position": 59.1025641025641
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/short-term-memory-for-ai-agents/"
+        ],
+        "clicks": 0,
+        "impressions": 48,
+        "ctr": 0,
+        "position": 24.125
+      }
+    ],
+    "impressions": 87,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/speculative-decoding-explained.md",
+    "slug": "speculative-decoding-explained",
+    "date": "2026-03-07",
+    "title": "Speculative Decoding: How to Speed up Llm Inference for Free",
+    "sha256": "8dad52e4500575141a1c5ba628bc4149a2fe23f1461557be9476cf1cefcd51a8",
+    "canonical": "/articles/speculative-decoding-explained/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/speculative-decoding-explained/"
+        ],
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0,
+        "position": 45.3
+      }
+    ],
+    "impressions": 10,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/state-of-ai-agent-memory-2026.md",
+    "slug": "state-of-ai-agent-memory-2026",
+    "date": "2026-04-19",
+    "title": "State of AI Agent Memory in 2026",
+    "sha256": "072023a77a118073a636ad954cfaac50afdde36cd0fe3f512b6478963d9dd247",
+    "canonical": "/articles/state-of-ai-agent-memory-2026/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/state-of-ai-agent-memory-2026/"
+        ],
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 8.285714285714285
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/state-of-ai-agent-memory-2026/"
+        ],
+        "clicks": 0,
+        "impressions": 73,
+        "ctr": 0,
+        "position": 15.726027397260275
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/state-of-open-source-memory-2026/"
+        ],
+        "clicks": 0,
+        "impressions": 24,
+        "ctr": 0,
+        "position": 11.375
+      }
+    ],
+    "impressions": 104,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/structured-outputs-llms-json-mode-function-calling.md",
+    "slug": "structured-outputs-llms-json-mode-function-calling",
+    "date": "2026-03-27",
+    "title": "Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use Each",
+    "sha256": "82bb1bd8c39968177e72a54d2c03c519b81a067cb4a792ef0cd97335afdd52de",
+    "canonical": "/articles/structured-outputs-llms-json-mode-function-calling/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/structured-outputs-llms-json-mode-function-calling/"
+        ],
+        "clicks": 0,
+        "impressions": 50,
+        "ctr": 0,
+        "position": 66.26
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/structured-outputs-llms-json-mode-function-calling/"
+        ],
+        "clicks": 0,
+        "impressions": 32,
+        "ctr": 0,
+        "position": 18.65625
+      }
+    ],
+    "impressions": 82,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/technical-documentation-best-practices-tested-real-developer-docs.md",
+    "slug": "technical-documentation-best-practices-tested-real-developer-docs",
+    "date": "2026-08-02",
+    "title": "Technical Documentation Best Practices, Tested on Real Developer Docs",
+    "sha256": "5e10d2f65f85c93b79b21f5a4a9852f178e09d79c4ab363ffe5bca31d26c30bc",
+    "canonical": "/articles/technical-documentation-best-practices-tested-real-developer-docs/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/technical-documentation-best-practices-tested-real-developer-docs/"
+        ],
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 17.75
+      }
+    ],
+    "impressions": 4,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/technical-documentation-template.md",
+    "slug": "technical-documentation-template",
+    "date": "2026-08-01",
+    "title": "Technical Documentation Template: Build Product Docs With a Tested Structure",
+    "sha256": "fed48ea2b36139b05157dce0cfadf64c1d0c1150ba5d30da34a11b67e99d720a",
+    "canonical": "/articles/technical-documentation-template/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/technical-documentation-template/"
+        ],
+        "clicks": 0,
+        "impressions": 51,
+        "ctr": 0,
+        "position": 67.29411764705883
+      }
+    ],
+    "impressions": 51,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/technical-writing-examples.md",
+    "slug": "technical-writing-examples",
+    "date": "2026-07-29",
+    "title": "Technical Writing Examples: Formats, Annotated Edits, and Reader Tasks",
+    "sha256": "67956446b7cb1ad1f910bd0acc185f6eaa5cfb7158552dee83b60258fd096684",
+    "canonical": "/articles/technical-writing-examples/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/technical-writing-for-ai-products-the-new-rules.md",
+    "slug": "technical-writing-for-ai-products-the-new-rules",
+    "date": "2026-03-31",
+    "title": "Technical Writing for AI Products: The New Rules",
+    "sha256": "20f04bf0c9605eb36e903712321c671241e00b33954121e07d7437107da59e00",
+    "canonical": "/articles/technical-writing-for-ai-products-the-new-rules/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/technical-writing-for-ai-products-the-new-rules/"
+        ],
+        "clicks": 1,
+        "impressions": 25,
+        "ctr": 0.04,
+        "position": 11.76
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/technical-writing-for-ai-products-the-new-rules/"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 19.666666666666668
+      }
+    ],
+    "impressions": 28,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/technical-writing-for-engineers.md",
+    "slug": "technical-writing-for-engineers",
+    "date": "2026-04-18",
+    "title": "Technical Writing for Engineers: The 80/20 Guide",
+    "sha256": "a10e697a0f7d1272a1062ea25b44f483868e08b5769de583142edeea42bb9fac",
+    "canonical": "/articles/technical-writing-for-engineers/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/technical-writing-for-engineers/"
+        ],
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 12.75
+      }
+    ],
+    "impressions": 4,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/technical-writing-is-deciding-what-the-reader-can-assume.md",
+    "slug": "technical-writing-is-deciding-what-the-reader-can-assume",
+    "date": "2026-09-07",
+    "title": "Technical Writing Is Deciding What the Reader Can Assume",
+    "sha256": "0da55382fd87546d3e0f52b87c1640b7058028d8c785029957e65f1cbefbc628",
+    "canonical": "/articles/technical-writing-is-deciding-what-the-reader-can-assume/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/the-agent-design-space.md",
+    "slug": "the-agent-design-space",
+    "date": "2026-04-26",
+    "title": "The Agent Design Space: A Map of What Engineers Are Actually Building",
+    "sha256": "0ecd307f640c7546495fa1b3997bfcf2389f2b0407262bcb9d09f87b3114a430",
+    "canonical": "/articles/the-agent-design-space/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/the-agent-design-space/"
+        ],
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0,
+        "position": 29.333333333333332
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/the-agent-design-space/"
+        ],
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 13.142857142857142
+      }
+    ],
+    "impressions": 16,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/the-case-for-shorter-technical-documentation.md",
+    "slug": "the-case-for-shorter-technical-documentation",
+    "date": "2026-04-04",
+    "title": "The Case for Shorter Technical Documentation",
+    "sha256": "edd90b06fe1aef84595aeb93f02d83acb2681495c82887ce19aea4f339b782e2",
+    "canonical": "/articles/the-case-for-shorter-technical-documentation/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/the-case-for-shorter-technical-documentation/"
+        ],
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 5.714285714285714
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/the-case-for-shorter-technical-documentation/"
+        ],
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 7.857142857142857
+      }
+    ],
+    "impressions": 14,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/time-to-first-token-ttft.md",
+    "slug": "time-to-first-token-ttft",
+    "date": "2026-03-08",
+    "title": "Time to First Token (TTFT): The Metric That Determines AI Snappiness",
+    "sha256": "fe06ab299961179ff151c2d1bb96a42736e42c4dc8d6ccb3fd33c0f435d08004",
+    "canonical": "/articles/time-to-first-token-ttft/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/time-to-first-token-ttft/"
+        ],
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 87.2
+      }
+    ],
+    "impressions": 5,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control.md",
+    "slug": "token-counting-isnt-optional-a-practical-guide-to-llm-cost-control",
+    "date": "2026-03-22",
+    "title": "Token Counting Isn't Optional: a Practical Guide to Llm Cost Control",
+    "sha256": "da883cfa4b9856b78f71a3953dae97107205a5011f2d24e7aca28a4e966c165b",
+    "canonical": "/articles/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/types-of-technical-documentation.md",
+    "slug": "types-of-technical-documentation",
+    "date": "2026-08-05",
+    "title": "Types of Technical Documentation: 8 Essential Types, Plus Agent Instructions",
+    "sha256": "f8d2c386b025311e3042adc4347c0325cde6866d9f1a666041d55be4c9830757",
+    "canonical": "/articles/types-of-technical-documentation/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/types-of-technical-documentation/"
+        ],
+        "clicks": 0,
+        "impressions": 50,
+        "ctr": 0,
+        "position": 70.66
+      }
+    ],
+    "impressions": 50,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/voice-ai-latency-gemini-benchmark.md",
+    "slug": "voice-ai-latency-gemini-benchmark",
+    "date": "2026-04-16",
+    "title": "How to Trace Latency in a Real-Time Voice Agent",
+    "sha256": "242e39951fb883353790a0cc344ec9ba1bcc87d0318c69e3ac8e65b3b0d5cb86",
+    "canonical": "/articles/voice-ai-latency-gemini-benchmark/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/voice-ai-latency-gemini-benchmark/"
+        ],
+        "clicks": 0,
+        "impressions": 20,
+        "ctr": 0,
+        "position": 78.8
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/voice-ai-latency-gemini-benchmark/"
+        ],
+        "clicks": 0,
+        "impressions": 71,
+        "ctr": 0,
+        "position": 9.408450704225352
+      }
+    ],
+    "impressions": 91,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/what-a-documentation-homepage-must-help-users-do.md",
+    "slug": "what-a-documentation-homepage-must-help-users-do",
+    "date": "2026-08-11",
+    "title": "What a Documentation Homepage Must Help Users Do",
+    "sha256": "ff23303fb2516fbe57f7109333584a84a076ea90525f3f30ad390cd15399e030",
+    "canonical": "/articles/what-a-documentation-homepage-must-help-users-do/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/what-is-technical-documentation-and-what-should-it-include.md",
+    "slug": "what-is-technical-documentation-and-what-should-it-include",
+    "date": "2026-08-05",
+    "title": "What Is Technical Documentation, and What Should It Include?",
+    "sha256": "47514ec4523e654dee81f9a375e43e5b082cfeb6f0080a83e148f56e27ab8997",
+    "canonical": "/articles/what-is-technical-documentation-and-what-should-it-include/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/"
+        ],
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 74.28571428571429
+      }
+    ],
+    "impressions": 7,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/what-makes-a-page-extractable-by-answer-engines.md",
+    "slug": "what-makes-a-page-extractable-by-answer-engines",
+    "date": "2026-08-17",
+    "title": "What Makes a Page Extractable by an Answer Engine",
+    "sha256": "7c14ba9e6b83cdc87e1b8174320acf933342409d29ef11f804122543b1111d55",
+    "canonical": "/articles/what-makes-a-page-extractable-by-answer-engines/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  },
+  {
+    "source": "content/posts/why-coding-agents-lose-their-memory.md",
+    "slug": "why-coding-agents-lose-their-memory",
+    "date": "2026-05-06",
+    "title": "Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI Coding Assistants",
+    "sha256": "81d1571544662e23809459bd5cad8204b907c412ef7492a427a91d7e64b7459a",
+    "canonical": "/articles/why-coding-agents-lose-their-memory/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/why-coding-agents-lose-their-memory/"
+        ],
+        "clicks": 0,
+        "impressions": 12,
+        "ctr": 0,
+        "position": 19.25
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/why-coding-agents-lose-their-memory/"
+        ],
+        "clicks": 0,
+        "impressions": 24,
+        "ctr": 0,
+        "position": 16.333333333333336
+      }
+    ],
+    "impressions": 36,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/why-devtools-startups-lose-deals-over-bad-docs.md",
+    "slug": "why-devtools-startups-lose-deals-over-bad-docs",
+    "date": "2026-04-06",
+    "title": "Why Devtools Startups Lose Deals Over Bad Docs",
+    "sha256": "663681f452f9f07f8e33f6c686e01c156d626732f68ca9221fb86fa5750fba4d",
+    "canonical": "/articles/why-devtools-startups-lose-deals-over-bad-docs/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/why-devtools-startups-lose-deals-over-bad-docs/"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 21
+      }
+    ],
+    "impressions": 2,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/writing-release-notes-that-developers-trust.md",
+    "slug": "writing-release-notes-that-developers-trust",
+    "date": "2026-04-03",
+    "title": "Writing Release Notes That Developers Trust",
+    "sha256": "6fa4c23a53b1f384c6c291d8e3e5d0d55c7946289d74962446d74c2958ac2c6a",
+    "canonical": "/articles/writing-release-notes-that-developers-trust/",
+    "matched_rows": [
+      {
+        "keys": [
+          "https://ninadpathak.com/articles/writing-release-notes-that-developers-trust/"
+        ],
+        "clicks": 0,
+        "impressions": 22,
+        "ctr": 0,
+        "position": 20
+      },
+      {
+        "keys": [
+          "https://ninadpathak.com/blog/writing-release-notes-that-developers-trust/"
+        ],
+        "clicks": 0,
+        "impressions": 16,
+        "ctr": 0,
+        "position": 10.75
+      }
+    ],
+    "impressions": 38,
+    "disposition": "RETAIN"
+  },
+  {
+    "source": "content/posts/writing-with-ai-before-you-know-what-you-think.md",
+    "slug": "writing-ai-first-content",
+    "date": "2026-09-07",
+    "title": "Before You Ask an Expert",
+    "sha256": "1edc163acf5cc984c45d729d38acba53bb3189ff71e00b4f21c5650d7cbdbaa7",
+    "canonical": "/articles/writing-ai-first-content/",
+    "matched_rows": [],
+    "impressions": 0,
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+  }
+]

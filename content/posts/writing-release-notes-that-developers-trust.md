@@ -310,7 +310,7 @@ The release note should leave the reader with checks they can run:
 
 Verification turns the notes into an upgrade tool. Without it, the page explains the change but leaves success undefined.
 
-A release note can explain the change without deciding where older instructions remain available. The [product-version documentation guide](/articles/how-to-document-multiple-product-versions/) covers that URL and support policy.
+A release note can explain the change without deciding where older instructions remain available. Keep their URLs and support policy explicit.
 
 ## Release notes FAQ
 

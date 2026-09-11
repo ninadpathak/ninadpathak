@@ -170,7 +170,7 @@ I would also instrument docs better. State of Docs shows a huge measurement diff
 
 Teams need to know which pages start trials, which pages correlate with activation, and which pages generate support.
 
-Documentation affects a deal because engineers rank evidence before they trust a vendor's claim. The [developer trust hierarchy](/articles/developer-trust-hierarchy/) explains that ordering and why working technical material outranks polished promises.
+Documentation affects a deal because engineers rank evidence before they trust a vendor's claim. Working technical material outranks polished promises.
 
 ## Strong docs allow smaller startups to compete with larger vendors
 

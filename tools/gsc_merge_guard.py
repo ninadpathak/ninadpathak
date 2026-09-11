@@ -35,6 +35,7 @@ import argparse
 import collections
 import datetime as dt
 import json
+import hashlib
 import pathlib
 import re
 import sys
@@ -47,6 +48,7 @@ import report_log as rl  # noqa: E402
 
 AUDIT = gr.ROOT / "planning" / "cluster-3-consolidation-audit.md"
 LOG = gr.ROOT / "planning" / "merge-guard.md"
+ARCHIVE_MANIFEST = gr.ROOT / "planning/research/zero-impression-cleanup-2026-09-11/cohort.json"
 HISTORY_START = "2025-04-04"
 WINDOW_DAYS = 90
 
@@ -84,13 +86,34 @@ def parse_dispositions(text: str) -> list[dict]:
     return out
 
 
+def load_archived_statuses(manifest: pathlib.Path) -> dict[str, str]:
+    """Recognize only manifest-listed, byte-verified sources in the removal archive."""
+    import frontmatter
+
+    statuses = {}
+    for row in json.loads(manifest.read_text()):
+        if row.get("disposition") != "ARCHIVE_ZERO_RECORDED_IMPRESSIONS":
+            continue
+        source = pathlib.PurePosixPath(row["source"])
+        if source.parent != pathlib.PurePosixPath("content/posts"):
+            raise ValueError(f"Unexpected archive source: {source}")
+        archive = manifest.parent / "archived-posts" / source.name
+        if hashlib.sha256(archive.read_bytes()).hexdigest() != row["sha256"]:
+            raise ValueError(f"Archive digest mismatch: {archive}")
+        post = frontmatter.load(archive)
+        if str(post.get("slug") or archive.stem) != row["slug"]:
+            raise ValueError(f"Archive slug mismatch: {archive}")
+        statuses[row["slug"]] = "archived"
+    return statuses
+
+
 def load_post_statuses(posts_dir: pathlib.Path = gr.POSTS) -> dict[str, str]:
     """Load every source status so completed batches do not break later pre-merge runs."""
     try:
         import frontmatter
     except ImportError:
         return {}
-    statuses = {}
+    statuses = load_archived_statuses(ARCHIVE_MANIFEST) if posts_dir.resolve() == gr.POSTS.resolve() else {}
     for path in sorted(posts_dir.glob("*.md")):
         data = frontmatter.load(path)
         slug = str(data.get("slug") or path.stem)

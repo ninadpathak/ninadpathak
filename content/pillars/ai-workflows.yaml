@@ -25,14 +25,12 @@ sections:
   - heading: "Setting up coding agents"
     blurb: "Make a coding agent hold context across a long task instead of forgetting halfway."
     posts:
-      - coding-agent-setup-that-works
       - how-memory-works-in-claude-code
       - why-coding-agents-lose-their-memory
       - agent-harnesses
   - heading: "Wiring tools and context"
     blurb: "Connect the agent to your real tools and data so it can act reliably."
     posts:
-      - mcp-server-setup-guide
       - model-context-protocol-explained
       - structured-outputs-llms-json-mode-function-calling
   - heading: "Designing the workflow"

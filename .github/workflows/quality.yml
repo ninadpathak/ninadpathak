@@ -55,7 +55,7 @@ jobs:
       # said "no new errors added to the pre-existing" — this makes CI match it.
       - name: Check changed published writing for regressions
         run: |
-          changed=$(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md')
+          changed=$(git diff --name-only --diff-filter=ACMR HEAD^ HEAD -- 'content/posts/*.md')
           if [ -z "$changed" ]; then
             echo "No changed blog posts to audit."
             exit 0
@@ -112,7 +112,7 @@ jobs:
       # check standing between a new article and production.
       - name: Check changed posts for new unevidenced claims
         run: |
-          changed=$(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md')
+          changed=$(git diff --name-only --diff-filter=ACMR HEAD^ HEAD -- 'content/posts/*.md')
           if [ -z "$changed" ]; then
             echo "No changed blog posts to audit."
             exit 0

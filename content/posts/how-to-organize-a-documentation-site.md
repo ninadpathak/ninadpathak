@@ -179,7 +179,7 @@ If the first screen offers four equally weighted starting points, decide which r
 
 ## Choose canonical answers before moving URLs
 
-A page may appear in several routes while keeping one canonical home. Copying its instructions into each section creates competing search results and guarantees that one copy will rot.
+A page may appear in several routes while keeping one canonical home. Copying its instructions into each section creates [competing search results](/articles/seo-for-technical-documentation/) and guarantees that one copy will rot.
 
 GitLab's [documentation folder guidance](https://docs.gitlab.com/development/documentation/site_architecture/folder_structure/) assigns distinct paths to user, administration, API, development, installation, update, and tutorial documentation. The exact folders belong to GitLab.
 
@@ -319,7 +319,7 @@ Use observed behavior without turning one signal into fake certainty:
 
 A lower bounce rate alone does not prove the structure works. My standard is stricter: the evidence should identify a reader decision and a route repair.
 
-The [documentation accessibility checklist](/articles/documentation-accessibility-checklist/) can catch structural barriers before the migration ships. The [documentation homepage guide](/articles/what-a-documentation-homepage-must-help-users-do/) covers the entrance readers need after the routes move.
+The [documentation accessibility checklist](/articles/documentation-accessibility-checklist/) can catch structural barriers before the migration ships.
 
 ## Documentation organization checklist
 

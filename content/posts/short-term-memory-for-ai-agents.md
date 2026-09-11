@@ -271,7 +271,7 @@ The context window is the working table, and the semantic and episodic stores ar
 
 Treating long-term memory as optional or secondary is the mistake. Give your agent nothing but the context window and it has no memory of previous sessions, no knowledge that this user always wants metric units, and no way to retrieve documentation beyond what already fits in the current context.
 
-I have written about [token counting and cost control](/articles/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/) and [prompt caching and when the math works](/articles/prompt-caching-what-it-is-and-when-the-math-works/). Both are relevant here because the memory architecture you design carries direct cost implications.
+Token counting and prompt caching matter here because the memory architecture you design carries direct cost implications.
 
 Every retrieval call, every summarization pass, and every context window refill bills against your account.
 

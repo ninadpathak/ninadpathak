@@ -35,7 +35,6 @@ sections:
   - heading: "Trust and craft"
     blurb: "What makes practitioner writing outrank marketing, and how I got here."
     posts:
-      - developer-trust-hierarchy
       - from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind
 
 faqs:

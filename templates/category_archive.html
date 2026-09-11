@@ -4,6 +4,7 @@
 {% block description %}{{ category.description }}{% endblock %}
 {% block canonical %}{{ category.url }}{% endblock %}
 {% block og_url %}{{ category.url }}{% endblock %}
+{% block robots %}{% if posts %}{{ super() }}{% else %}noindex, follow{% endif %}{% endblock %}
 
 {% block schema %}
 <script type="application/ld+json">
@@ -35,6 +36,8 @@
       {% if post.description %}<div class="blog-row-desc">{{ post.description }}</div>{% endif %}
       <div class="blog-row-meta"><span class="read-time">{{ post.reading_time }} min read</span></div>
     </a>
+    {% else %}
+    <p class="empty-state">No articles are currently published in this category. <a href="/articles/">Browse all articles.</a></p>
     {% endfor %}
   </div>
 </section>

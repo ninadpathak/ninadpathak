@@ -121,6 +121,6 @@ Then zoom until the page reflows and read the page with a screen reader when pos
 
 ## Make accessibility testing a documentation release gate
 
-Put this checklist beside the page template and run the checker in the same preview step that validates links and examples. The [documentation style guide template](/articles/documentation-style-guide-template/) can record the owner, release trigger, and manual-test boundary for rules that change with the product.
+Put this checklist beside the page template and run the checker in the same preview step that validates links and examples. Record the owner, release trigger, and manual-test boundary for rules that change with the product.
 
 Accessibility gets cheaper when it is part of the authoring contract rather than a repair after launch. Start with one task page, preserve the semantics that explain its route, and let the rendered review show what the source alone cannot prove.

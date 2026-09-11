@@ -18,12 +18,10 @@ sections:
     posts:
       - llm-context-windows-explained
       - context-windows-vs-memory
-      - token-counting-isnt-optional-a-practical-guide-to-llm-cost-control
       - llm-token-budgets-cost-control
   - heading: "Speed and cost levers"
     blurb: "The techniques that cut latency and spend without changing the output."
     posts:
-      - prompt-caching-what-it-is-and-when-the-math-works
       - speculative-decoding-explained
       - time-to-first-token-ttft
       - llm-inference-optimization

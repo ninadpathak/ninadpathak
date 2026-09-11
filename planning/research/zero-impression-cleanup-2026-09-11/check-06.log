@@ -1,0 +1,30 @@
+
+## glossary: 7 of 23 pages carry a diagram (30%), 7 distinct shape(s)
+  [distinct] 1 page(s) — nodes=4 branches=2 outcomes=0
+      flowchart>caption>caption-label>body>root>node>root>node>branches>branch>edge-label>node>branch>edge-lab
+      agentic-router
+  [distinct] 1 page(s) — nodes=7 branches=2 outcomes=2
+      flowchart>caption>caption-label>body>root>node>root>node>root>node>branches>branch>edge-label>node>branc
+      hierarchical-navigable-small-world-hnsw
+  [distinct] 1 page(s) — nodes=6 branches=2 outcomes=0
+      flowchart>caption>caption-label>body>root>node>root>node>root>node>root>node>branches>branch>edge-label>
+      kv-cache-eviction
+  [distinct] 1 page(s) — nodes=6 branches=2 outcomes=2
+      flowchart>caption>caption-label>body>root>node>root>node>branches>branch>edge-label>node>branch>edge-lab
+      pagedattention
+  [distinct] 1 page(s) — nodes=5 branches=2 outcomes=0
+      flowchart>caption>caption-label>body>root>node>root>node>root>node>branches>branch>edge-label>node>branc
+      semantic-chunking
+  [distinct] 1 page(s) — nodes=5 branches=2 outcomes=2
+      flowchart>caption>caption-label>body>root>node>branches>branch>edge-label>node>branch>edge-label>node>ou
+      speculative-decoding
+  [distinct] 1 page(s) — nodes=3 branches=2 outcomes=0
+      flowchart>caption>caption-label>body>root>node>branches>branch>edge-label>node>branch>edge-label>node>no
+      tool-calling
+
+## technical-documentation: 1 of 16 pages carry a diagram (6%), 1 distinct shape(s)
+  [distinct] 1 page(s) — nodes=0 branches=0 outcomes=0
+      image
+      internal-vs-external-documentation
+
+0 structural problem(s). No group shares a diagram skeleton, and none is saturated.

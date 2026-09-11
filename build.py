@@ -319,6 +319,7 @@ class SiteBuilder:
                 "title": raw["title"],
                 "description": raw["description"],
                 "intro": raw.get("intro", raw["description"]),
+                "preserve_empty_route": raw.get("preserve_empty_route", False),
                 "tag_matches": {str(tag).lower() for tag in raw.get("tag_matches", [])},
                 "posts": [],
             }
@@ -522,15 +523,13 @@ class SiteBuilder:
             )
 
     def build_category_archives(self, categories):
-        """Render one cluster owner page per non-empty category.
+        """Render populated categories and explicitly retained historical routes.
 
-        A category with no posts used to still emit a page and a sitemap entry, which
-        is how an empty /articles/ai-memory/ shipped and had to be removed by hand on
-        2026-08-17. Clusters are declared ahead of their content now, so skip the empty
-        ones until they have something to own.
+        Empty categories are skipped by default. An existing category whose articles
+        were archived can retain its route as a noindex empty state, outside the sitemap.
         """
         for category in categories:
-            if not category["posts"]:
+            if not category["posts"] and not category.get("preserve_empty_route"):
                 print(f"  i category '{category['slug']}': no posts yet, not built")
                 continue
             self.render(

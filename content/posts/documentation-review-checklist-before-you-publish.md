@@ -46,7 +46,7 @@ Use a table that forces each material claim to point somewhere. The following AP
 
 Reject a ledger row when its source is the draft itself, a remembered demo, or another page copying the same unsupported sentence.
 
-When [using AI before asking an expert](/articles/writing-ai-first-content/), proposed explanations belong in the question pile, not the verified column. Plausible wording has no special claim on truth.
+When using AI before asking an expert, proposed explanations belong in the question pile, not the verified column. Plausible wording has no special claim on truth.
 
 ### Run the documented behavior
 

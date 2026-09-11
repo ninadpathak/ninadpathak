@@ -118,6 +118,6 @@ For batch inference with long sequences, H100s with NVLink earn their cost, beca
 
 A consumer GPU can suit local development while remaining too small for a large model and long context together. Check the model weights, quantization, and KV-cache budget against available memory before choosing the hardware.
 
-Running on consumer hardware with limited VRAM flips the priority order: quantization becomes your first move rather than a refinement on top of already-sufficient memory. For workloads with repeated system prompts or shared prefixes, like a RAG app that prepends the same 3,000-token instruction block to every query, [prompt caching](/articles/prompt-caching-what-it-is-and-when-the-math-works/) is worth understanding as a complementary technique.
+Running on consumer hardware with limited VRAM flips the priority order: quantization becomes your first move rather than a refinement on top of already-sufficient memory. For workloads with repeated system prompts or shared prefixes, like a RAG app that prepends the same 3,000-token instruction block to every query, prompt caching is worth understanding as a complementary technique.
 
 It cuts the compute cost of re-encoding tokens that don't change between requests, and it compounds well with the batching and KV cache strategies above.

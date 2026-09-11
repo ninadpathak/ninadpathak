@@ -71,7 +71,7 @@ A live coding assistant or a checkout helper cannot, and that constraint usually
 
 
 
-[Prompt caching can mitigate some of these costs by reusing a static prefix](/articles/prompt-caching-what-it-is-and-when-the-math-works/), and it helps a lot when most of your prompt is boilerplate. Caching does not bend the underlying physics of attention, though, so the bottleneck stays.
+Prompt caching can mitigate some of these costs by reusing a static prefix, and it helps a lot when most of your prompt is boilerplate. Caching does not bend the underlying physics of attention, though, so the bottleneck stays.
 
 Every design decision becomes a weigh-in: more context against a slower reply. A chat assistant that has to feel instant simply cannot afford to load a full 128k window on each turn, because [a long prompt directly drives up time to first token](/articles/time-to-first-token-ttft/).
 

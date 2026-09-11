@@ -61,7 +61,7 @@ Context compounds too, and [bigger context windows are not always better for cos
 
 ## Counting tokens before you spend them
 
-Counting how many tokens a request will consume before you send it is [the most basic cost control technique there is](/articles/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/). Every major SDK ships a token counting utility for exactly this.
+Counting how many tokens a request will consume before you send it is the most basic cost control technique there is. Every major SDK ships a token counting utility for exactly this.
 
 ```python
 from anthropic import Anthropic
@@ -220,7 +220,7 @@ Token costs land on every new request. For applications fielding repetitive or n
 
 OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object, and the model processes them at a deep discount, typically 90% off input token pricing.
 
-The savings only materialize once the same prefix gets reused enough times to cover the small premium charged to write the cache, so I dig into [when prompt caching actually pays off](/articles/prompt-caching-what-it-is-and-when-the-math-works/) separately.
+The savings only materialize once the same prefix gets reused enough times to cover the small premium charged to write the cache.
 
 ```python
 # Anthropic caching example

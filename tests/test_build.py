@@ -81,6 +81,23 @@ Ignored.
 
 
 class CategoryArchiveTests(unittest.TestCase):
+    def test_empty_category_routes_are_only_rendered_when_explicitly_preserved(self):
+        builder = SiteBuilder.__new__(SiteBuilder)
+        calls = []
+        builder.render = lambda *args, **kwargs: calls.append((args, kwargs))
+        builder.build_category_archives([
+            {"slug": "new-category", "posts": []},
+            {"slug": "retained-category", "posts": [], "preserve_empty_route": True},
+        ])
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(calls[0][0][1], "articles/retained-category/index.html")
+
+    def test_preserved_empty_category_stays_out_of_sitemap(self):
+        self.assertNotIn("https://example.com/articles/retained-category/", self._sitemap_urls_for([
+            {"slug": "retained-category", "url": "/articles/retained-category/",
+             "posts": [], "preserve_empty_route": True},
+        ]))
+
     def test_category_loader_assigns_each_post_once_and_uses_explicit_category(self):
         builder = SiteBuilder.__new__(SiteBuilder)
         builder.config = {

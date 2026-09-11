@@ -42,7 +42,7 @@ Automation is not proof of correctness. The comparison should record which check
 
 The terminal clients call hosted models, so local RAM is not a direct measure of model context use. Local resource pressure comes from the repository, language servers, test processes, and any tools the agent launches.
 
-Compare context handling through observable behavior: what files the agent rereads, what instructions it forgets, and whether a fresh task inherits irrelevant history.
+Compare context handling through observable behavior: what files the agent rereads, [what instructions it forgets](/articles/why-coding-agents-lose-their-memory/), and whether a fresh task inherits irrelevant history.
 
 ## The cost of agentic loops
 
@@ -58,7 +58,7 @@ Orchestrating these agents well depends on repository documentation that serves 
 
 Practitioner writing keeps earning its place because it carries the intent agents lean on to resolve ambiguity.
 
-The comparison begins before either CLI edits a file. A [coding-agent setup that constrains the task](/articles/coding-agent-setup-that-works/) determines what the agent can see and which checks can reject its patch.
+The comparison begins before either CLI edits a file. A coding-agent setup that constrains the task determines what the agent can see and which checks can reject its patch.
 
 Model choice is the other variable, so the [coding-model guide](/articles/best-llms-for-coding/) should be read as a separate decision from the terminal interface.
 

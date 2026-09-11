@@ -34,8 +34,6 @@ The quickstart proves a first result, reference nails down the contract, and tro
 
 The blank starter contains a MkDocs site and its validator. The writing lab is a separate Markdown example with a local service; it does not replace the starter's publishing setup.
 
-If you need endpoint-specific documentation rather than a product-wide starting structure, use the [API documentation template](/articles/api-documentation-template-the-pages-every-api-needs/).
-
 | Page job | Filled example | Evidence the page must supply |
 | --- | --- | --- |
 | Choose where to begin | `docs/index.md` | Links from the reader's task to the owning page |
@@ -150,6 +148,6 @@ The filled fixture's `node check.mjs` covers behavior and closes its temporary s
 | Storage lifetime changes | Reference and troubleshooting | Recovery before and after restart |
 | A link target moves | Index and referring pages | Link validation and rendered navigation |
 
-The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) adds the reader-facing checks. The [technical writing examples](/articles/technical-writing-examples/) show how the same service needs different wording in a quickstart and a release note.
+The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) adds the reader-facing checks.
 
 Assign an owner to each filled page and keep its triggering behavior beside the review check.
