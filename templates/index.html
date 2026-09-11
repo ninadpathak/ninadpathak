@@ -51,7 +51,7 @@
 </script>
 {% endblock %}
 
-{% block extra_css %}<link rel="stylesheet" href="/static/css/home.css">{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="/static/css/home.css?v=logo-sizing-2">{% endblock %}
 
 {% block content %}
 
@@ -81,7 +81,7 @@
       <div class="marquee-inner"{% if copy %} aria-hidden="true"{% endif %}>
         {% for name, asset in clients %}
         <span class="client-logo{% if name == 'Manicule' %} client-logo-light{% endif %}"{% if not copy %} tabindex="0"{% endif %}>
-          <img src="/static/images/clients/{{ asset }}" alt="{% if not copy %}{{ name }}{% endif %}" width="180" height="48">
+          <img src="/static/images/clients/{{ asset }}?v=2" alt="{% if not copy %}{{ name }}{% endif %}" width="180" height="32">
         </span>
         {% endfor %}
       </div>

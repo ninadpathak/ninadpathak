@@ -29,24 +29,19 @@
   flex: 0 0 180px;
   height: 64px;
   padding: var(--space-2);
-  transition: background var(--t);
 }
 
 .client-logo img {
   width: 100%;
-  height: 48px;
+  height: 32px;
   object-fit: contain;
   filter: grayscale(1) brightness(0) invert(0.6);
   transition: filter var(--t);
 }
 
-.client-logo img[src$="adobe.svg"] {
-  filter: grayscale(1);
-}
-
-.client-logo:hover,
-.client-logo:focus-visible {
-  background: var(--text-1);
+.client-logo img[src*="/adobe.svg"] {
+  width: 30px;
+  height: 28px;
 }
 
 .client-logo:hover img,
@@ -56,12 +51,22 @@
 
 .client-logo-light:hover img,
 .client-logo-light:focus-visible img {
+  filter: none;
+}
+
+[data-theme="light"] .client-logo-light:hover img,
+[data-theme="light"] .client-logo-light:focus-visible img {
   filter: brightness(0);
 }
 
-[data-theme="light"] .client-logo:hover,
-[data-theme="light"] .client-logo:focus-visible {
-  background: var(--bg-1);
+/* These official marks are monochrome. Keep them legible on dark backgrounds. */
+[data-theme="dark"] .client-logo:hover img[src*="/semrush.svg"],
+[data-theme="dark"] .client-logo:focus-visible img[src*="/semrush.svg"],
+[data-theme="dark"] .client-logo:hover img[src*="/mastra.png"],
+[data-theme="dark"] .client-logo:focus-visible img[src*="/mastra.png"],
+[data-theme="dark"] .client-logo:hover img[src*="/opencomputer.svg"],
+[data-theme="dark"] .client-logo:focus-visible img[src*="/opencomputer.svg"] {
+  filter: grayscale(1) brightness(0) invert(0.95);
 }
 
 .home-client-strip:focus-within .marquee-track,

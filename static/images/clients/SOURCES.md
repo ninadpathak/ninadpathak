@@ -10,3 +10,5 @@ Downloaded from the companies' public websites on 2026-09-11:
 - OpenComputer: https://opencomputer.dev/logos/opencomputer.svg
 
 Original brand colors appear on hover or keyboard focus. Monochrome originals remain monochrome; no invented brand colors are applied. The reel is gray at rest and pauses on hover/focus. Reduced-motion visitors see a static wrapped set.
+
+Adobe's background rectangle was removed and its viewBox cropped to the existing logo path to display a transparent mark. The path itself is unchanged. Logo containers remain transparent on hover.
