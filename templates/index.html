@@ -55,23 +55,50 @@
 
 {% block content %}
 
-<section class="page-intro home-intro">
+<section class="hero home-hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="container hero-content-wrap">
+    <div class="hero-copy">
+      <div class="label hero-label">Ninad Pathak · Technical writer</div>
+      <h1>Write developer content<br>like you give a shit.</h1>
+      <p class="lead">
+        Technical documentation and developer content are an absolute necessity.
+      </p>
+      <p class="lead">
+        Crack them and you've captured more market than anyone in your niche. Suck at
+        them, or fake the understanding with AI, and developers will smell it before you
+        see them running.
+      </p>
+      <div class="hero-actions">
+        <a href="/articles/" class="arrow-link">Read the articles →</a>
+        <a href="/portfolio/" class="arrow-link">Browse my published work →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="clients-strip" aria-label="Companies Ninad has worked with">
   <div class="container">
-    <div class="label">Ninad Pathak · Technical writer</div>
-    <h1>Write like you give<br>a damn.</h1>
-    <p class="lead">
-      Technical documentation and developer content are an absolute necessity. Crack
-      them and you've captured more market than anyone in your niche.
-    </p>
-    <p class="lead">
-      Suck at them, or try to automate them with AI, and developers will smell it from
-      so far away you won't even see them running. I use AI for research, tests, and
-      edits. I refuse to use it as a substitute for knowing what the product does or
-      having something worth saying about it.
-    </p>
-    <div class="hero-actions">
-      <a href="/articles/" class="arrow-link">Read the articles →</a>
-      <a href="/portfolio/" class="arrow-link">Browse my published work →</a>
+    <div class="clients-strip-label">Worked with</div>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-inner">
+        <span class="client-chip">Semrush</span>
+        <span class="client-chip">Adobe</span>
+        <span class="client-chip">TinyFish</span>
+        <span class="client-chip">Mastra</span>
+        <span class="client-chip">Manicule</span>
+        <span class="client-chip">OpenComputer</span>
+      </div>
+      <div class="marquee-inner" aria-hidden="true">
+        <span class="client-chip">Semrush</span>
+        <span class="client-chip">Adobe</span>
+        <span class="client-chip">TinyFish</span>
+        <span class="client-chip">Mastra</span>
+        <span class="client-chip">Manicule</span>
+        <span class="client-chip">OpenComputer</span>
+      </div>
     </div>
   </div>
 </section>
@@ -96,27 +123,7 @@
 <section class="section-block section-block-top-border">
   <div class="container">
     <div class="section-row">
-      <h2>Start where the writing breaks</h2>
-    </div>
-    <a href="/articles/technical-writing-is-deciding-what-the-reader-can-assume/" class="blog-row">
-      <div class="blog-row-title">The instruction is clear. Can the reader act on it?</div>
-      <div class="blog-row-desc">A timeout leaves a caller deciding whether to retry. The answer depends on a guarantee the documentation needs to explain.</div>
-    </a>
-    <a href="/articles/writing-ai-first-content/" class="blog-row">
-      <div class="blog-row-title">Before You Ask an Expert</div>
-      <div class="blog-row-desc">Talk through an idea with AI before asking an expert about the decisions behind it.</div>
-    </a>
-    <a href="/articles/technical-documentation-template/" class="blog-row">
-      <div class="blog-row-title">A documentation template needs a product behind it.</div>
-      <div class="blog-row-desc">Give the reader a route from the first request to the recovery instructions they may need next.</div>
-    </a>
-  </div>
-</section>
-
-<section class="section-block section-block-top-border">
-  <div class="container">
-    <div class="section-row">
-      <h2>I do this work in public and for teams</h2>
+      <h2>I build before I explain</h2>
       <a href="/work/" class="arrow-link">Project write-ups →</a>
     </div>
     <div class="home-work-copy">

@@ -1,9 +1,13 @@
-/* Paragraph spacing for the homepage's introduction and work note. */
-.home-intro .lead + .lead {
+/* Keep the conviction compact inside the animated hero. */
+.home-hero .lead {
+  margin-bottom: 0;
+}
+
+.home-hero .lead + .lead {
   margin-top: var(--space-4);
 }
 
-.home-intro .hero-actions {
+.home-hero .hero-actions {
   margin-top: var(--space-6);
 }
 
