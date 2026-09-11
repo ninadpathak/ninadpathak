@@ -5,6 +5,7 @@ description: DeepSeek V3 has 671B parameters but only activates 37B per token. H
   how mixture of experts works, why it cuts inference costs, and the catch nobody
   puts in the headline.
 status: published
+work_note: "Explaining your model's architecture to potential users? [My technical writing](/portfolio/) connects active computation and storage requirements to the hardware choices a developer has to make."
 tags:
 - ai
 - llm

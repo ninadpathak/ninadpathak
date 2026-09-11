@@ -6,6 +6,7 @@ description: The repeatable five-stage process I run to take a task from vague i
   in to frame the work and read the diff before it merges.
 slug: agentic-workflow-playbook
 status: published
+work_note: "[My developer tutorials](/portfolio/) can take your coding tool through a scoped repository change, with the review and test commands beside the generated diff."
 tags:
 - ai
 - agents

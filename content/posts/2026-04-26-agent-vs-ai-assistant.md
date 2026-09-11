@@ -5,6 +5,7 @@ description: 'The difference between an AI agent and a smart assistant comes dow
   to one thing: who drives the loop.'
 slug: agent-vs-ai-assistant
 status: published
+work_note: "Does your product act independently or wait for the user's next instruction? [Let's make that distinction visible](/contact/) in the walkthrough a developer reads before choosing it."
 tags:
 - ai agents
 - ai architecture

@@ -4,6 +4,7 @@ date: 2026-04-01
 description: Build developer onboarding docs around one supported setup path and a safe first merged change, with proof and recovery at each fragile step.
 slug: developer-onboarding-docs-what-works-what-doesnt
 status: published
+work_note: "[Let's document the first merged change](/contact/), from getting access through setup to verification in a test environment, so your new engineer has a path beyond the reading list."
 tags:
 - technical-writing
 - developer-experience

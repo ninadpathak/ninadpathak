@@ -5,6 +5,7 @@ description: Use a tested review card to make documentation tasks, failure state
   limits, and ownership clear before readers need support.
 slug: technical-documentation-best-practices-tested-real-developer-docs
 status: published
+work_note: "[Bring me the integration customers need to finish](/contact/); I'll write the instructions with expected responses beside the commands and recovery steps beside the failures."
 tags:
 - documentation
 - technical-writing

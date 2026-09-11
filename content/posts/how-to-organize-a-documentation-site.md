@@ -4,6 +4,7 @@ date: 2026-07-30
 description: Reorganize a documentation site around reader routes, canonical answers, tested labels, and direct redirects instead of mirroring the org chart.
 slug: how-to-organize-a-documentation-site
 status: published
+work_note: "If your docs send readers between competing answers, adding pages makes the job harder. I help teams [plan and write documentation](/portfolio/) around reader tasks, with a clear home for each answer."
 tags:
 - technical-writing
 - information-architecture

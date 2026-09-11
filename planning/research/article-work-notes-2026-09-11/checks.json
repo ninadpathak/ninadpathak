@@ -1,0 +1,115 @@
+{
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "build.py"
+      ],
+      "exit_code": 0,
+      "log": "check-00.log"
+    },
+    {
+      "command": [
+        "python3",
+        "/Users/ninad/Development/ninadpathak/planning/research/article-work-notes-2026-09-11/verify.py"
+      ],
+      "exit_code": 0,
+      "log": "check-01.log"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "check-02.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/content_inventory_gate.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "check-03.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/audit_clusters.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "check-04.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/audit_stylesheets.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "check-05.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/audit_structure.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "check-06.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/audit_inert_css.py",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "log": "check-07.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "check-08.log"
+    }
+  ],
+  "regressions": [
+    {
+      "check": "writing",
+      "before": {
+        "count": 151,
+        "exit_code": 1,
+        "log": "writing-before.log"
+      },
+      "after": {
+        "count": 151,
+        "exit_code": 1,
+        "log": "writing-after.log"
+      }
+    },
+    {
+      "check": "claims",
+      "before": {
+        "count": 103,
+        "exit_code": 0,
+        "log": "claims-before.log"
+      },
+      "after": {
+        "count": 103,
+        "exit_code": 0,
+        "log": "claims-after.log"
+      }
+    }
+  ]
+}

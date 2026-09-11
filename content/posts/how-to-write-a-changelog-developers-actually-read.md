@@ -5,6 +5,7 @@ description: Write a changelog that helps developers assess an upgrade, find bre
   changes, and understand what each release means for their code.
 slug: how-to-write-a-changelog-developers-actually-read
 status: published
+work_note: "[Send me the changes behind your release](/contact/) and I'll turn them into a changelog that names affected behavior and links to the required migration."
 tags:
 - technical-writing
 - developer-experience

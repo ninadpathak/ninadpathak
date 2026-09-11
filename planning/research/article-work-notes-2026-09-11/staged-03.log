@@ -1,0 +1,110 @@
+67 published posts across 3 clusters
+
+   45  ai-engineering
+   16  technical-documentation
+    6  developer-experience
+
+--- undeclared cluster: 0 ---
+
+--- no inbound link: 0 ---
+Counts article bodies plus non-listing built pages. Listings are excluded:
+CHARTER 2e says a related-posts dump is not a link.
+
+--- fewer than 2 outbound links: 5 ---
+Counts links to articles and to the tools and standing pages, since a link to
+a tool sends a reader somewhere useful and satisfies 2e just as well.
+  [technical-documentation] documentation-accessibility-checklist  (1 out)
+  [technical-documentation] how-to-write-a-changelog-developers-actually-read  (1 out)
+  [ai-engineering] llm-token-budgets-cost-control  (1 out)
+  [ai-engineering] structured-outputs-llms-json-mode-function-calling  (1 out)
+  [technical-documentation] writing-release-notes-that-developers-trust  (1 out)
+
+--- glossary: 23 term(s), 23 linked from outside the glossary ---
+
+--- cross-cluster links: 17 ---
+Each needs the subject-of-the-sentence test applied by a reader. Not auto-fixable.
+
+  engineering-velocity-documentation  [developer-experience]
+    -> the-case-for-shorter-technical-documentation  [technical-documentation]
+    anchor: shorter technical documentation usually works better
+    2. **Findability**: Answers are discoverable in under 60 seconds, which is one reason [shorter technical documentation usually works better](/articles/the-case-for-shorter-technical-documentation/).
+
+  engineering-velocity-documentation  [developer-experience]
+    -> developer-onboarding-docs-what-works-what-doesnt  [technical-documentation]
+    anchor: developer onboarding docs that actually work
+    The "Time to First Commit" for a new hire is a leading indicator of organizational health. Teams with elite documentation cut that time by 40-60%, which is why [developer onboarding docs that actually
+
+  from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind  [developer-experience]
+    -> agent-harnesses  [ai-engineering]
+    anchor: Agent harnesses
+    A debugger's mindset persists in my writing for that reason. My post on [Agent harnesses](/articles/agent-harnesses/) focuses on control flow and observability because prompting advice often skips ret
+
+  from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind  [developer-experience]
+    -> how-to-write-a-changelog-developers-actually-read  [technical-documentation]
+    anchor: How to Write a Changelog That Developers Actually Read
+    [How to Write a Changelog That Developers Actually Read](/articles/how-to-write-a-changelog-developers-actually-read/) is one example from this site. That post gives me a stable reference point to lin
+
+  how-stripes-technical-blog-became-a-competitive-moat  [developer-experience]
+    -> how-to-write-a-changelog-developers-actually-read  [technical-documentation]
+    anchor: my changelog post
+    I argued in [my changelog post](/articles/how-to-write-a-changelog-developers-actually-read/) that changelogs are a trust instrument. Stripe proves the point at scale.
+
+  how-stripes-technical-blog-became-a-competitive-moat  [developer-experience]
+    -> agent-harnesses  [ai-engineering]
+    anchor: agent harnesses
+    I covered a similar dynamic in [agent harnesses](/articles/agent-harnesses/). Teams trust systems that make failure legible and recoverable.
+
+  state-of-ai-agent-memory-2026  [ai-engineering]
+    -> developer-onboarding-docs-what-works-what-doesnt  [technical-documentation]
+    anchor: developer onboarding documentation
+    I wrote about a similar fragmentation problem in [developer onboarding documentation](/articles/developer-onboarding-docs-what-works-what-doesnt/), and the pattern is the same. When a problem space is
+
+  technical-writing-for-ai-products-the-new-rules  [developer-experience]
+    -> structured-outputs-llms-json-mode-function-calling  [ai-engineering]
+    anchor: structured outputs
+    I covered the schema side of that problem in my post on [structured outputs](/articles/structured-outputs-llms-json-mode-function-calling/). OpenAI's structured outputs docs say the feature ensures th
+
+  technical-writing-for-ai-products-the-new-rules  [developer-experience]
+    -> how-to-write-a-changelog-developers-actually-read  [technical-documentation]
+    anchor: how to write a changelog developers actually read
+    I wrote recently about [how to write a changelog developers actually read](/articles/how-to-write-a-changelog-developers-actually-read/). AI product teams need the same discipline, except the changelo
+
+  technical-writing-for-ai-products-the-new-rules  [developer-experience]
+    -> agent-harnesses  [ai-engineering]
+    anchor: agent harnesses
+    Last comes the retrieval layer around modern tooling, meaning site search, support copilots, coding assistants, internal knowledge bases, and agent harnesses that quote your docs back to users.
+
+  technical-writing-for-engineers  [developer-experience]
+    -> the-case-for-shorter-technical-documentation  [technical-documentation]
+    anchor: the case for shorter technical documentation
+    There is a real functional reason behind it, the same one that drives [the case for shorter technical documentation](/articles/the-case-for-shorter-technical-documentation/). Short paragraphs break in
+
+  technical-writing-for-engineers  [developer-experience]
+    -> how-to-write-a-technical-tutorial-that-actually-teaches  [technical-documentation]
+    anchor: writing a technical tutorial that actually teaches
+    Tutorials should say "here is how to build X" and hold the reader's hand through every step, which is the whole craft of [writing a technical tutorial that actually teaches](/articles/how-to-write-a-t
+
+  technical-writing-for-engineers  [developer-experience]
+    -> code-documentation  [technical-documentation]
+    anchor: boundary between a code comment, generated reference, and external guide
+    The [boundary between a code comment, generated reference, and external guide](/articles/code-documentation/) determines which question each page should answer before an engineer starts writing.
+
+  technical-writing-for-engineers  [developer-experience]
+    -> developer-onboarding-docs-what-works-what-doesnt  [technical-documentation]
+    anchor: developer onboarding docs that fail and the practices that actually work
+    Delete onboarding documents that contradict the current codebase, because stale guidance is one of the clearest signs of [developer onboarding docs that fail and the practices that actually work](/art
+
+  the-case-for-shorter-technical-documentation  [technical-documentation]
+    -> agent-harnesses  [ai-engineering]
+    anchor: Agent harnesses
+    Infrastructure topics attract vague abstractions, so I organized [Agent harnesses](/articles/agent-harnesses/) as focused sections rather than one sprawling essay.
+
+  why-devtools-startups-lose-deals-over-bad-docs  [developer-experience]
+    -> how-to-write-a-changelog-developers-actually-read  [technical-documentation]
+    anchor: How to Write a Changelog That Developers Actually Read
+    I covered that problem from the user side in [How to Write a Changelog That Developers Actually Read](/articles/how-to-write-a-changelog-developers-actually-read/) and from the release side in [Writin
+
+  why-devtools-startups-lose-deals-over-bad-docs  [developer-experience]
+    -> writing-release-notes-that-developers-trust  [technical-documentation]
+    anchor: Writing release notes that developers trust
+    I covered that problem from the user side in [How to Write a Changelog That Developers Actually Read](/articles/how-to-write-a-changelog-developers-actually-read/) and from the release side in [Writin

@@ -5,6 +5,7 @@ description: Every production AI agent needs a harness. Here is what one contain
   why frameworks often are not enough, and how to build the layer that actually determines
   reliability.
 status: published
+work_note: "[Bring me in for your checkpointing tutorial](/contact/): interrupt a run, resume it, and show the reader which steps execute again."
 tags:
 - ai
 - agents

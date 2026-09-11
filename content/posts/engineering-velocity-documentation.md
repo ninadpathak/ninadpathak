@@ -5,6 +5,7 @@ description: I analyze the structural correlation between documentation quality 
   engineering throughput, using DORA metrics and Accelerate research to quantify the
   ROI of technical writing.
 status: published
+work_note: "Your release procedure should not require finding whoever deployed last time. [I help turn that knowledge into instructions](/contact/) the next engineer can follow, including the checks before release and the steps for recovery."
 tags:
 - engineering-velocity
 - developer-productivity

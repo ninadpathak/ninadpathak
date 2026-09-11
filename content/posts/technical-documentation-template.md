@@ -5,6 +5,7 @@ description: Download a technical documentation template, learn what each page m
   prove, and turn its placeholders into trustworthy product docs.
 slug: technical-documentation-template
 status: published
+work_note: "A template supplies the headings; your product supplies the behavior that belongs under them. [My documentation work](/portfolio/) turns that behavior into a quickstart and reference, with troubleshooting for the requests that do not return as expected."
 tags:
 - documentation
 - docs-as-code

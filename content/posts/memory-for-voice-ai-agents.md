@@ -5,6 +5,7 @@ description: Voice AI agents live or die by how they manage memory across a real
   streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something
   different.
 status: published
+work_note: "[Work with me on voice API education](/contact/) that follows an interrupted conversation through the emitted events and shows which remembered state the application should update."
 tags:
 - ai
 - voice

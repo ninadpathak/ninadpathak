@@ -5,6 +5,7 @@ description: How agents decide what to keep in memory when context space is fini
   and the three compression strategies that actually work.
 slug: contextual-compression-for-agent-memory
 status: published
+work_note: "[I write memory-product explainers](/portfolio/) with the uncompressed and compressed records side by side, giving customers something concrete to inspect before they choose what their application can discard."
 tags:
 - ai-agents
 - agent-memory

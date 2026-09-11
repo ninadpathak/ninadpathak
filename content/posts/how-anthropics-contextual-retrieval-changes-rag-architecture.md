@@ -4,6 +4,7 @@ date: 2026-03-26
 description: The mechanism changes what gets indexed before the RAG pipeline runs
   a query.
 status: published
+work_note: "An engineering result makes stronger product content when readers can follow the change that produced it. My [technical articles](/portfolio/) explain the mechanism alongside the experiment's conditions, keeping the evidence attached to the claim."
 tags:
 - ai
 - rag

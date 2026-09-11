@@ -5,6 +5,7 @@ description: Technical documentation helps a developer decide, start, use, and r
   from a product. Choose each page by the task it owns.
 slug: what-is-technical-documentation-and-what-should-it-include
 status: published
+work_note: "Launching a developer product? [Work with me on its documentation](/contact/), from the prerequisites for a first request to the reference that explains the response, so a new customer has a usable starting path."
 tags:
 - documentation
 - technical-writing

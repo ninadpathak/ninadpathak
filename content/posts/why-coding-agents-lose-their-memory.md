@@ -5,6 +5,7 @@ description: The memory persistence patterns that actually work for AI coding as
   and why most agents lose context between sessions.
 slug: why-coding-agents-lose-their-memory
 status: published
+work_note: "A developer searching for a forgetful coding agent may need the integration your company sells. [I plan and write content](/contact/) that answers that problem and takes them through a verifiable setup."
 tags:
 - ai-agents
 - coding

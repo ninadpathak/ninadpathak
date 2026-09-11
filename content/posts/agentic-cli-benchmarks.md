@@ -4,6 +4,7 @@ date: 2026-04-12
 description: A workflow comparison of Claude Code and Gemini CLI for repository refactoring,
   verification, and human review.
 status: published
+work_note: "A comparison for your coding tool can start from the same pinned repository and task as its competitors. [I write that kind of comparison](/portfolio/), including the verification criteria, so developers can judge the patches."
 tags:
 - agentic-cli
 - developer-productivity

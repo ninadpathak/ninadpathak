@@ -5,6 +5,7 @@ description: Fine-tuning and RAG solve different parts of the agent memory probl
   Here is how to decide which one you actually need.
 slug: fine-tuning-vs-rag-for-agent-memory
 status: published
+work_note: "For an AI product explaining where it fits, [I write comparison content](/portfolio/) around the customer's update requirements: what needs retraining, what can be retrieved, and what changes between requests."
 tags:
 - ai-agents
 - rag

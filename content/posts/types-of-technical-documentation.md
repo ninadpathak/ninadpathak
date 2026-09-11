@@ -5,6 +5,7 @@ description: Understand the main types of technical documentation, study useful 
   and build a documentation system for users, teams, and coding agents.
 slug: types-of-technical-documentation
 status: published
+work_note: "[Work with me to plan your documentation](/contact/), giving reference pages and tutorials separate jobs while connecting them around the tasks your customers need to finish."
 tags:
 - documentation
 - technical-writing

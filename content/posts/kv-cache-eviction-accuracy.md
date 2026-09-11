@@ -4,6 +4,7 @@ date: 2026-04-15
 description: A research-led comparison of KV-cache eviction strategies, including
   their accuracy risks and implementation trade-offs.
 status: published
+work_note: "[I write about inference infrastructure](/portfolio/) by connecting memory-saving techniques to their evaluation conditions, giving developers enough detail to question the quality tradeoff before adopting them."
 tags:
 - llm
 - kv-cache

@@ -5,6 +5,7 @@ description: After surveying production agents across industries, the design spa
   clusters into patterns. Here is what I found.
 slug: the-agent-design-space
 status: published
+work_note: "[I plan content for agent platforms](/contact/) around the execution patterns developers are choosing between, then write the tutorials that connect those choices to your SDK."
 tags:
 - ai
 - agents

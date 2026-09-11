@@ -5,6 +5,7 @@ description: Most AI agent taxonomies are either too academic or too vague to be
   Here is the classification I use when I need to decide what kind of agent to build.
 slug: the-taxonomy-of-ai-agents
 status: published
+work_note: "[Work with me on developer education](/contact/) that helps customers choose an agent architecture by its permissions and stopping conditions, with examples they can run against your SDK."
 tags:
 - ai
 - agents

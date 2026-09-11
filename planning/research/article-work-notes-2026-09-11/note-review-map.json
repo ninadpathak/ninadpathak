@@ -1,0 +1,404 @@
+[
+  {
+    "source": "content/posts/2026-04-21-the-taxonomy-of-ai-agents.md",
+    "purpose": "Classifying autonomy; education through permissions and stopping points.",
+    "note": "[Work with me on developer education](/contact/) that helps customers choose an agent architecture by its permissions and stopping conditions, with examples they can run against your SDK.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/2026-04-22-why-ai-agents-keep-failing-in-production.md",
+    "purpose": "Failure recovery; a tutorial for timeout handling and safe retries.",
+    "note": "Shipping an agent framework? [Let's write the recovery guide](/contact/): what happens after a tool times out, which operations can be retried, and where the developer takes over.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/2026-04-23-agent-loop-anatomy.md",
+    "purpose": "Execution loop; SDK tutorial follows observations to decisions to stopping.",
+    "note": "For an agent SDK launch, [I write tutorials](/portfolio/) that follow execution from a returned tool result through the next decision to the condition that stops the run.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/2026-04-25-lambda-calculus-ai-reasoning-benchmark.md",
+    "purpose": "Reasoning evaluation; worked task with inspectable scoring, no benchmark claim.",
+    "note": "[Technical evaluation content](/portfolio/) is part of my writing work: give readers a worked problem and its scoring rules, so they can challenge the conclusion.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/2026-04-26-agent-vs-ai-assistant.md",
+    "purpose": "Agent versus assistant; product walkthrough establishes who makes decisions.",
+    "note": "Does your product act independently or wait for the user's next instruction? [Let's make that distinction visible](/contact/) in the walkthrough a developer reads before choosing it.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/2026-04-27-multi-agent-vs-single-agent-tradeoffs.md",
+    "purpose": "Single versus multiple agents; education explains the second agent's handoff cost.",
+    "note": "A multi-agent framework deserves a tutorial that explains why the second agent exists. My [developer content](/portfolio/) shows the handoff and its cost, giving readers enough context to choose the architecture for their own application.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/2026-05-05-contextual-compression-for-agent-memory.md",
+    "purpose": "Compression; before/after records reveal what the product discards.",
+    "note": "[I write memory-product explainers](/portfolio/) with the uncompressed and compressed records side by side, giving customers something concrete to inspect before they choose what their application can discard.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/2026-05-05-memory-versioning-and-audit-trails.md",
+    "purpose": "Audit history; documentation shows retrieval of past state, without compliance guarantees.",
+    "note": "For products that retain decision history, the docs should show how to retrieve the state behind an answer. [Talk to me about documenting that workflow](/contact/), with clear retention behavior rather than unsupported compliance promises.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/agent-harnesses.md",
+    "purpose": "Harness recovery; focused checkpoint interruption/resumption tutorial.",
+    "note": "[Bring me in for your checkpointing tutorial](/contact/): interrupt a run, resume it, and show the reader which steps execute again.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/agentic-cli-benchmarks.md",
+    "purpose": "Coding CLI comparison; pinned task and patch-verification criteria.",
+    "note": "A comparison for your coding tool can start from the same pinned repository and task as its competitors. [I write that kind of comparison](/portfolio/), including the verification criteria, so developers can judge the patches.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/agentic-workflow-playbook.md",
+    "purpose": "Agentic workflow; tutorial includes the human review of a generated diff.",
+    "note": "[My developer tutorials](/portfolio/) can take your coding tool through a scoped repository change, with the review and test commands beside the generated diff.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/ai-memory-management-for-llms.md",
+    "purpose": "Memory lifecycle; API docs cover correction and deletion.",
+    "note": "[Work with me on memory API documentation](/contact/) that follows a fact through creation, correction, and deletion, including what a later request can still retrieve.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/best-llms-for-coding.md",
+    "purpose": "Coding-model selection; strategy follows developer search jobs rather than claiming a winner.",
+    "note": "Which coding tasks bring the right developers to your product? [My content strategy work](/contact/) starts with those searches and shapes comparisons around the decisions behind them.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/code-documentation.md",
+    "purpose": "Code documentation boundaries; guides connect reference contracts to integration procedures.",
+    "note": "[I write API guides](/portfolio/) that connect a function's reference entry to the larger integration, keeping exact contracts available without making developers assemble the whole procedure themselves.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/context-windows-vs-memory.md",
+    "purpose": "Context versus persistence; docs explain session survival and stale-state replacement.",
+    "note": "Selling memory infrastructure? Your docs need to tell developers what survives a session and how stale state gets replaced. I write [developer content](/portfolio/) that makes those product decisions clear before someone starts integrating.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/developer-onboarding-docs-what-works-what-doesnt.md",
+    "purpose": "Engineer onboarding; documentation ends in verified merged work.",
+    "note": "[Let's document the first merged change](/contact/), from getting access through setup to verification in a test environment, so your new engineer has a path beyond the reading list.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/documentation-accessibility-checklist.md",
+    "purpose": "Accessible docs; copyable commands and nonvisual descriptions stay in the brief.",
+    "note": "Copyable commands, descriptive links, and text explanations for screenshots belong in the same documentation brief. [I write and review those instructions](/portfolio/) together, including the heading structure readers use to navigate them.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/documentation-review-checklist-before-you-publish.md",
+    "purpose": "Documentation review; compare instructions with product version before copyediting.",
+    "note": "Bring me a documentation draft and the product version it describes. [My review work](/contact/) checks the instructions against that behavior, then fixes the missing steps before polishing the sentences around them.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/embedding-models-compared.md",
+    "purpose": "Embedding choices; comparison ties dimension choice to storage and retrieval.",
+    "note": "[Hire me for an embedding API comparison](/contact/) that connects vector dimensions to storage requirements and retrieval choices, helping developers evaluate your product against their application.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/engineering-velocity-documentation.md",
+    "purpose": "Engineering delivery; document release knowledge and recovery for the next engineer.",
+    "note": "Your release procedure should not require finding whoever deployed last time. [I help turn that knowledge into instructions](/contact/) the next engineer can follow, including the checks before release and the steps for recovery.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/episodic-vs-semantic-vs-working-memory-agents.md",
+    "purpose": "Memory categories; SDK tutorial distinguishes saved facts from action history.",
+    "note": "[My memory SDK tutorials](/portfolio/) teach saved preferences separately from action history, using the read and write operations developers will need in their applications.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/fine-tuning-vs-rag-for-agent-memory.md",
+    "purpose": "Fine-tuning versus retrieval; evaluation content starts from update requirements.",
+    "note": "For an AI product explaining where it fits, [I write comparison content](/portfolio/) around the customer's update requirements: what needs retraining, what can be retrieved, and what changes between requests.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md",
+    "purpose": "Engineering-to-writing boundary; turn engineering discussions into external instructions.",
+    "note": "Your engineers know why the product works the way it does; customers need that reasoning in usable instructions. [Work with me](/contact/) to turn engineering discussions into documentation and tutorials for people outside the team.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/how-anthropics-contextual-retrieval-changes-rag-architecture.md",
+    "purpose": "Contextual retrieval research; explain a mechanism with its experimental conditions attached.",
+    "note": "An engineering result makes stronger product content when readers can follow the change that produced it. My [technical articles](/portfolio/) explain the mechanism alongside the experiment's conditions, keeping the evidence attached to the claim.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/how-memory-works-in-claude-code.md",
+    "purpose": "Claude Code memory; confirmed Mem0 relationship introduces writing an integration guide.",
+    "note": "I've worked with Mem0. [Talk to me about your memory integration](/contact/) if you need a guide that explains how it connects to a coding workflow.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/how-memory-works-in-deerflow.md",
+    "purpose": "DeerFlow state handoff; walkthrough follows one record between agents.",
+    "note": "[Let's write a walkthrough of your agent workflow](/contact/) that follows a state record across the handoff, showing developers which agent receives it and what can change.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/how-memory-works-in-hyperagents.md",
+    "purpose": "Composed agent memory; diagram becomes outline of tool-result retrieval.",
+    "note": "An architecture diagram can double as the outline for a product guide. [I write the explanation around it](/portfolio/), tracing how a tool result becomes something a later step can retrieve.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/how-stripes-technical-blog-became-a-competitive-moat.md",
+    "purpose": "Stripe content strategy; engineering decisions teach the domain and lead toward implementation.",
+    "note": "[My content strategy work](/contact/) turns your engineering team's decisions into articles that teach the problem domain and lead readers toward a supported implementation with your product.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/how-to-organize-a-documentation-site.md",
+    "purpose": "Documentation organization; planning gives competing answers one task-based home.",
+    "note": "If your docs send readers between competing answers, adding pages makes the job harder. I help teams [plan and write documentation](/portfolio/) around reader tasks, with a clear home for each answer.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/how-to-write-a-changelog-developers-actually-read.md",
+    "purpose": "Changelog; translate release changes into user behavior and migration links.",
+    "note": "[Send me the changes behind your release](/contact/) and I'll turn them into a changelog that names affected behavior and links to the required migration.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/how-to-write-a-technical-tutorial-that-actually-teaches.md",
+    "purpose": "Tutorial completeness; write setup and failure recovery as one integration path.",
+    "note": "Your developer tutorial should get someone through a working integration, including the request that fails. I write [tutorials and documentation](/portfolio/) with the setup commands and recovery instructions needed to follow that path.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/how-to-write-task-based-documentation-headings.md",
+    "purpose": "Task headings; edit outlines for readers finding a specific procedure.",
+    "note": "A developer scanning for authentication setup should be able to find it in the outline. [My documentation editing](/contact/) makes headings name the task and puts the instructions in the order the reader needs them.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/hybrid-search-bm25-vector-search.md",
+    "purpose": "Hybrid retrieval; tutorial contrasts exact identifiers with paraphrases.",
+    "note": "For your search product, [I write tutorials](/portfolio/) that try exact identifiers alongside paraphrased questions, so developers can see why a retrieval configuration succeeds or fails.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/internal-vs-external-documentation.md",
+    "purpose": "Public/private docs; separate supported customer instructions from internal records.",
+    "note": "[My documentation work](/portfolio/) separates a customer's supported recovery procedure from the internal incident record, so the public guide contains the instructions without exposing private operating details.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/kv-cache-eviction-accuracy.md",
+    "purpose": "KV eviction; explain savings alongside quality evaluation conditions.",
+    "note": "[I write about inference infrastructure](/portfolio/) by connecting memory-saving techniques to their evaluation conditions, giving developers enough detail to question the quality tradeoff before adopting them.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/llm-context-windows-explained.md",
+    "purpose": "Context limit; guide budgets both request input and response allocation.",
+    "note": "[Let's document your model's context budget](/contact/) through an example request that accounts for the input and space reserved for the response, rather than stopping at the advertised limit.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/llm-inference-optimization.md",
+    "purpose": "Inference configuration; engineering content explains batching/latency choices.",
+    "note": "Your inference team's batching decisions can become a guide for customers tuning response time. [I write that engineering content](/portfolio/), explaining the configuration and workload behind the behavior.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/llm-token-budgets-cost-control.md",
+    "purpose": "Token pricing; document conversation cost with repeated-input assumptions.",
+    "note": "Pricing documentation should help a developer estimate a conversation, including repeated input. [I write cost and usage guides](/contact/) that turn per-token rates into worked examples with explicit assumptions and a way to check the calculation.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/local-wasm-vector-benchmarks.md",
+    "purpose": "Browser vector tools; tutorial accounts for download/startup before query performance.",
+    "note": "[My browser-tool tutorials](/portfolio/) cover the first download as well as the first query, so developers can judge startup costs before adopting your database in their application.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/memory-for-voice-ai-agents.md",
+    "purpose": "Voice memory; interrupted-call education follows events and state changes.",
+    "note": "[Work with me on voice API education](/contact/) that follows an interrupted conversation through the emitted events and shows which remembered state the application should update.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/memory-serialization-between-sessions.md",
+    "purpose": "Serialization; restore guide recognizes incompatible record versions.",
+    "note": "[I write persistence guides](/portfolio/) around saved records and their restore procedure, including how developers recognize a record their current application version can no longer read.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/mixture-of-experts-explained.md",
+    "purpose": "MoE deployment; architecture explanation connects compute and storage to hardware.",
+    "note": "Explaining your model's architecture to potential users? [My technical writing](/portfolio/) connects active computation and storage requirements to the hardware choices a developer has to make.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/model-context-protocol-explained.md",
+    "purpose": "MCP; confirmed Firecrawl relationship leads into authenticated integration docs.",
+    "note": "I've worked with Firecrawl. [Let's write your MCP integration guide](/contact/), from connecting the server to a permitted tool call, with authentication explained where readers configure it.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/production-ai-agent-errors.md",
+    "purpose": "Agent errors; reference and recovery docs distinguish safe retry from investigation.",
+    "note": "Developers using your agent API need to know whether a failed request can be retried safely. I write [reference and recovery guides](/portfolio/) that connect errors to their next action, including when to stop and investigate.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/rag-evaluation-metrics-what-actually-matters.md",
+    "purpose": "RAG evaluation; product examples connect failed metric to pipeline stage.",
+    "note": "[Let's write examples for your evaluation tool](/contact/) that connect a failing score to the retrieval or generation step a developer should inspect next.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/rag-vs-memory.md",
+    "purpose": "RAG/memory boundary; request walkthrough separates source evidence from saved state.",
+    "note": "If your product combines retrieval with memory, its documentation should distinguish source evidence from saved user state. [I help explain that boundary](/contact/) through a request walkthrough that shows when each is read and updated.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/reranking-in-rag-why-your-top-k-results-are-probably-wrong.md",
+    "purpose": "Reranking; product writing explains relevant-looking but unhelpful results.",
+    "note": "A retrieval product needs examples that explain why a relevant-looking result can still be useless. My [technical writing](/portfolio/) connects that engineering detail to the decisions developers make while evaluating your API.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/semantic-caching-rag-optimization.md",
+    "purpose": "Semantic cache; tutorial includes invalidation when a stored answer expires.",
+    "note": "[I write caching-product guides](/portfolio/) with an invalidation example alongside the successful cache hit, helping customers understand when the stored answer stops being usable.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/seo-for-technical-documentation.md",
+    "purpose": "Docs discovery; content strategy connects search intent to completed task and measurement.",
+    "note": "Connect the questions developers search for to documentation that finishes their task. [My organic content strategy](/contact/) covers that path from search intent to the working example, with measurement tied to the pages doing the work.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/shared-vs-isolated-memory-multi-agent.md",
+    "purpose": "Shared memory; framework docs identify overwrite authority and disagreement.",
+    "note": "Who gets to overwrite a shared record? [My framework documentation](/portfolio/) answers that through a multi-agent example, making write ownership visible before developers start coordinating their own agents.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/short-term-memory-for-ai-agents.md",
+    "purpose": "Short-term context; education demonstrates trimming/summarizing at a budget boundary.",
+    "note": "[Let's explain your agent's context handling](/contact/) with a conversation that outgrows its budget, showing what the next request receives after the application trims or summarizes it.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/speculative-decoding-explained.md",
+    "purpose": "Speculative decoding; technical launch explains draft verification and test conditions.",
+    "note": "Your faster-generation announcement can teach the draft-and-verification mechanism behind the result. [I write technical launch content](/portfolio/) with the workload conditions attached, giving developers a basis for judging whether it will help them.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/state-of-ai-agent-memory-2026.md",
+    "purpose": "Memory products; comparison covers ownership and portability of stored records.",
+    "note": "[My comparison writing](/portfolio/) helps memory products answer evaluation questions about state ownership and portability, including how a developer would move their records elsewhere.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/structured-outputs-llms-json-mode-function-calling.md",
+    "purpose": "Structured output; documentation separates supported constraints from caller validation.",
+    "note": "An output guarantee needs documentation for the refusal and validation failure, too. I write [AI API guides](/portfolio/) that distinguish supported constraints from application checks, with examples showing what the caller should handle.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/technical-documentation-best-practices-tested-real-developer-docs.md",
+    "purpose": "Docs practices; task review places response and recovery beside the action.",
+    "note": "[Bring me the integration customers need to finish](/contact/); I'll write the instructions with expected responses beside the commands and recovery steps beside the failures.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/technical-documentation-template.md",
+    "purpose": "Docs template; writing fills structure with behavior, quickstart and reference.",
+    "note": "A template supplies the headings; your product supplies the behavior that belongs under them. [My documentation work](/portfolio/) turns that behavior into a quickstart and reference, with troubleshooting for the requests that do not return as expected.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/technical-writing-for-ai-products-the-new-rules.md",
+    "purpose": "AI product writing; docs clarify variable outputs, contracts and evaluations.",
+    "note": "Your AI product's docs need to explain what developers can depend on when outputs vary. [I write that documentation](/contact/), covering the supported output contract and evaluation examples readers can use in their own applications.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/technical-writing-for-engineers.md",
+    "purpose": "Writing for engineers; turn source material into a reviewable draft and specific questions.",
+    "note": "Your engineers should be able to review product behavior without rewriting the whole draft. [My technical writing work](/portfolio/) turns their source material into instructions and brings back specific questions where the behavior needs confirmation.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/the-agent-design-space.md",
+    "purpose": "Agent design; content planning teaches execution patterns then SDK implementation.",
+    "note": "[I plan content for agent platforms](/contact/) around the execution patterns developers are choosing between, then write the tutorials that connect those choices to your SDK.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/the-case-for-shorter-technical-documentation.md",
+    "purpose": "Shorter docs; edit for answer placement without deleting safety conditions.",
+    "note": "If the retry instruction is buried under background reading, shortening the page starts with moving the answer. [I edit technical documentation](/contact/) around reader decisions, preserving the conditions that make a concise instruction safe to follow.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/time-to-first-token-ttft.md",
+    "purpose": "TTFT; performance writing makes measurement boundaries and test conditions explicit.",
+    "note": "[My performance explainers](/portfolio/) put the measurement boundary and test conditions beside the latency number, so developers can compare your result with what their application experiences.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/types-of-technical-documentation.md",
+    "purpose": "Docs types; planning assigns reference/tutorial jobs around customer tasks.",
+    "note": "[Work with me to plan your documentation](/contact/), giving reference pages and tutorials separate jobs while connecting them around the tasks your customers need to finish.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/voice-ai-latency-gemini-benchmark.md",
+    "purpose": "Voice latency; education explains measurement across the request path.",
+    "note": "The latency number on a voice API landing page needs a tutorial that shows what it measures. I write [developer education](/portfolio/) that explains the request path, so customers can judge what to expect in their application.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/what-is-technical-documentation-and-what-should-it-include.md",
+    "purpose": "Docs scope; launch documentation establishes prerequisites, first request and reference.",
+    "note": "Launching a developer product? [Work with me on its documentation](/contact/), from the prerequisites for a first request to the reference that explains the response, so a new customer has a usable starting path.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/why-coding-agents-lose-their-memory.md",
+    "purpose": "Coding-agent forgetting; strategy connects problem-aware searches to verifiable integration.",
+    "note": "A developer searching for a forgetful coding agent may need the integration your company sells. [I plan and write content](/contact/) that answers that problem and takes them through a verifiable setup.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/why-devtools-startups-lose-deals-over-bad-docs.md",
+    "purpose": "DevTools evaluation; strategy and docs connect acquisition use case to setup and limits.",
+    "note": "Make the evaluation path usable before sending more developers into it. [My content strategy and documentation work](/contact/) connects the use case that brought them in to the setup and limits they need to assess your product.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  },
+  {
+    "source": "content/posts/writing-release-notes-that-developers-trust.md",
+    "purpose": "Release notes; write upgrade behavior and migration instructions behind announcement.",
+    "note": "A release announcement gets attention; the upgrade instructions have to get someone onto the new version. [Work with me](/contact/) on release content that explains changed behavior and the migration it requires.",
+    "status": "INDEPENDENT_NOTE_REVIEW_ACCEPTED"
+  }
+]

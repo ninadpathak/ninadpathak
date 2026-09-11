@@ -159,6 +159,11 @@
         {{ post.toc }}
       </nav>
       {% endif %}
+      {% if post.work_note %}
+      <aside class="article-work-note" aria-label="Work with Ninad">
+        <p>{{ post.work_note }}</p>
+      </aside>
+      {% endif %}
       <div class="post-content">
         {{ post.content }}
       </div>

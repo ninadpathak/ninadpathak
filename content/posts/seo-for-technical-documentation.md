@@ -5,6 +5,7 @@ description: 'Technical SEO for developer documentation: crawling, rendering, in
   canonicals, internal links, Core Web Vitals, structured data, and search visibility.'
 slug: seo-for-technical-documentation
 status: published
+work_note: "Connect the questions developers search for to documentation that finishes their task. [My organic content strategy](/contact/) covers that path from search intent to the working example, with measurement tied to the pages doing the work."
 tags:
 - documentation-seo
 - technical-writing

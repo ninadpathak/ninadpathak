@@ -1,0 +1,292 @@
+
+## [ai-engineering] llm-token-budgets-cost-control  (21)
+  L1 [bare price or cost figure]
+      Token costs are the new EC2 bills. I learned that the expensive way after burning $200 on GPT-4 over a single weekend, chasing a bug with a loop that re-sent th
+  L3 [bare price or cost figure]
+      A production RAG pipeline serving 10,000 queries per day can quietly climb to $1,000 per month, and nobody notices until the invoice lands. For the first few ye
+  L25 [bare price or cost figure]
+      | GPT-5.4 Standard | $2.50 | $15 |
+  L26 [bare price or cost figure]
+      | GPT-5.4 Mini | $0.75 | $4.50 |
+  L27 [bare price or cost figure]
+      | GPT-5.4 Nano | $0.20 | $1.25 |
+  L28 [bare price or cost figure]
+      | GPT-5.4 Pro | $30 | $180 |
+  L29 [bare price or cost figure]
+      | GPT-5.2 | $1.75 | $14 |
+  L30 [bare price or cost figure]
+      | GPT-5.1 | $1.25 | $10 |
+  L31 [bare price or cost figure]
+      | Claude Opus 4.7 | $5 | $25 |
+  L32 [bare price or cost figure]
+      | Claude Sonnet 4.6 | $3 | $15 |
+  L33 [bare price or cost figure]
+      | Claude Haiku 4.5 | $1 | $5 |
+  L34 [bare price or cost figure]
+      | Gemini 3.1 Pro (<=200K ctx) | $2 | $12 |
+  L35 [bare price or cost figure]
+      | Gemini 3.1 Pro (>200K ctx) | $4 | $18 |
+  L37 [bare price or cost figure]
+      A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds like a rounding error until you multiply it by 50,000 requests per day,
+  L90 [experience claim without a first-person verb]
+      Here is a lightweight implementation I have run in production:
+  L143 [experience claim without a first-person verb, bare price or cost figure]
+      Spend rate stays bounded even when traffic spikes without warning, say a launch post hitting the front page of a forum and sending 10x the usual load at your en
+  L201 [bare price or cost figure]
+      The routing call itself costs almost nothing. Sending 80% of queries to the $0.20/$1.25 model instead of the $2.50/$15 one, though, is where the bill actually d
+  L237 [experience claim without a first-person verb]
+      Hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns. On an internal
+  L243 [bare price or cost figure]
+      Hard-limit output tokens and set max_tokens conservatively. A question answerable in 50 tokens should never be free to ramble for 500 at $0.15 per 1M.
+  L245 [bare price or cost figure]
+      I learned this after a single debug session ran up $180 in output costs because nobody had set a max_tokens limit and the model kept "thinking out loud" on ever
+  L300 [bare price or cost figure]
+      Run a pipeline that costs $0.001 per request 5 million times a month and you are at $5,000. A second pipeline at $0.002 per request pushes you to $15,000.
+
+## [ai-engineering] time-to-first-token-ttft  (5)
+  L1 [experience claim without a first-person verb]
+      Every interactive AI app I have shipped lives or dies by perceived latency. A model might churn out 100 tokens per second, and none of that speed matters when t
+  L3 [experience claim without a first-person verb]
+      Time to First Token (TTFT) is the metric I reach for when I want to know whether an application feels alive or feels broken, and I have watched the same chat UI
+  L23 [cites an article with no reproducible artifact]
+      Prefilling contributes to TTFT because the model processes the input before it emits the first token. The [KV-cache article](/articles/kv-cache-eviction-accurac
+  L64 [experience claim without a first-person verb]
+      **Prompt Caching.** Static context like a long system prompt or a fixed set of few-shot examples gets paid for on every single request unless I cache it. Wiring
+  L88 [experience claim without a first-person verb]
+      Perception is the whole game here. I have shipped features that win the moment the first token appears before the user has finished forming their thought, and l
+
+## [ai-engineering] why-ai-agents-keep-failing-in-production  (4)
+  L1 [experience claim without a first-person verb]
+      Across two years of debugging production AI agents, I keep landing on the same handful of failures. Different companies, different frameworks, same root causes.
+  L63 [experience claim without a first-person verb]
+      I have watched this happen for real on an agent that summarized inbound support tickets, where one ticket body contained instructions aimed squarely at the mode
+  L88 [cites an article with no reproducible artifact]
+      Where those patterns are converging is the subject of [the state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/).
+  L98 [experience claim without a first-person verb]
+      Those two investments have headed off more production incidents, in my experience, than any amount of prompt tuning.
+
+## [ai-engineering] production-ai-agent-errors  (4)
+  L1 [experience claim without a first-person verb]
+      Two years of running AI agents in production taught me that error handling separates a system that survives reality from one that falls over the moment somethin
+  L11 [experience claim without a first-person verb]
+      What follows are the error patterns that actually break agents in production, and the concrete patterns that fix them. My focus is LLM-based agents that call to
+  L15 [experience claim without a first-person verb]
+      Nearly every agent implementation I have seen looks like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling i
+  L84 [experience claim without a first-person verb]
+      I have watched this exact pattern stop a retrying agent from double-charging a customer, which is reason enough to treat it as mandatory rather than nice-to-hav
+
+## [ai-engineering] reranking-in-rag-why-your-top-k-results-are-probably-wrong  (4)
+  L17 [cites an article with no reproducible artifact]
+      Every document you store in a vector database passes through an embedding model. I discussed the geometry of these spaces in [Embedding models: the geometry of
+  L123 [experience claim without a first-person verb]
+      Whether the latency penalty earns its keep is the obvious question. Every time I add a reranker, the retrieval metrics climb in a way I can see in the numbers.
+  L150 [experience claim without a first-person verb]
+      The market offers excellent options for reranking, and I have tested several across different production workloads.
+  L173 [experience claim without a first-person verb]
+      Dimensionality does not touch the architecture flaw, though, and I have watched teams learn this the expensive way. A bi-encoder still compresses two texts inde
+
+## [ai-engineering] the-agent-design-space  (4)
+  L1 [experience claim without a first-person verb]
+      Three weeks of reading production architecture posts, scraping GitHub for agent implementations, and talking to engineers who run agents at scale taught me one
+  L15 [cites an article with no reproducible artifact]
+      For a map of memory approaches, read [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/); for retrieval mechanics, read [hybrid search
+  L25 [experience claim without a first-person verb]
+      I have watched it happen in production: a customer support agent kept citing a refund the user had already received, because the resolved ticket from three turn
+  L84 [cites an article with no reproducible artifact]
+      An agent that sails through every unit test can still blow up in production the moment it meets an input shape it never saw in CI, such as a user pasting a long
+
+## [ai-engineering] agent-vs-ai-assistant  (3)
+  L1 [experience claim without a first-person verb]
+      For the last year I have watched teams make the same architectural mistake twice. They reach for agent frameworks because agents are what the benchmarks talk ab
+  L98 [experience claim without a first-person verb]
+      Teams I have seen succeed with agent systems did not set out to build an agent. They set out to solve a problem that turned out to require an agent loop.
+  L100 [experience claim without a first-person verb]
+      The ones I have watched struggle built an agent first and then went hunting for a problem to point it at.
+
+## [ai-engineering] best-llms-for-coding  (3)
+  L11 [cites an article with no reproducible artifact]
+      Real engineering happens at the repository level. The [Claude Code and Gemini CLI comparison](/articles/agentic-cli-benchmarks/) is a walkthrough of an autonomo
+  L13 [experience claim without a first-person verb]
+      SWE-bench Verified gives the most honest signal I have found today. To pass, a model has to resolve an actual GitHub issue end to end: read its way around an un
+  L95 [cites an article with no reproducible artifact]
+      Benchmark totals can hide a reasoning failure that matters in code. The [lambda-calculus article](/articles/lambda-calculus-ai-reasoning-benchmark/) explains a
+
+## [developer-experience] from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind  (3)
+  L1 [first-person action]
+      Moving from engineering to technical writing did not feel like abandoning a technical career. I simply swapped the artifact I shipped.
+  L11 [experience claim without a first-person verb]
+      Engineering taught me to distrust any explanation that has not survived contact with a real environment. That skepticism carries straight into my writing.
+  L13 [first-person action]
+      When a draft says `npm run build` emits a dist folder with three files, I run it and count the files before the sentence stays. The command that "obviously" wor
+
+## [ai-engineering] short-term-memory-for-ai-agents  (3)
+  L5 [experience claim without a first-person verb]
+      Every production AI agent I have shipped runs into the same failure mode eventually. It starts forgetting recent conversation turns, dropping a critical instruc
+  L20 [experience claim without a first-person verb]
+      Attention scores distribute across all tokens, and research has consistently shown that performance degrades for information placed in the middle of long contex
+  L170 [cites an article with no reproducible artifact]
+      I have written about [how Anthropic's contextual retrieval changes RAG architecture](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/) an
+
+## [ai-engineering] voice-ai-latency-gemini-benchmark  (3)
+  L50 [cites an article with no reproducible artifact]
+      The same context-management problem appears in [KV-cache eviction](/articles/kv-cache-eviction-accuracy/). Reduce prompt history only after testing what the mod
+  L116 [cites an article with no reproducible artifact]
+      The [AI memory architecture review](/articles/state-of-ai-agent-memory-2026/) compares structured memory designs with raw context. Read it as an architecture su
+  L155 [first-person action]
+      **Can I run the entire voice agent pipeline locally?** Some VAD, STT, TTS, and language models can run locally. Whether the full pipeline is usable depends on t
+
+## [ai-engineering] why-coding-agents-lose-their-memory  (3)
+  L11 [experience claim without a first-person verb]
+      Claude Code is not unusual here. Every coding agent I have tested works this way by default.
+  L84 [experience claim without a first-person verb]
+      I have run sessions where the database gained 15 entries, all of them genuine findings like which service owned a shared schema. I have also run sessions where
+  L167 [cites an article with no reproducible artifact]
+      For the broader context, [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) covers the full landscape of memory approaches across diff
+
+## [ai-engineering] the-taxonomy-of-ai-agents  (2)
+  L23 [cites an article with no reproducible artifact]
+      A stateful agent maintains memory of past interactions, within a conversation or across them. Why that distinction matters in practice is something I covered in
+  L38 [cites an article with no reproducible artifact]
+      A docs Q&A box that answers from whatever you pasted into the prompt and nothing else is the canonical case. The [agentic CLI comparison](/articles/agentic-cli-
+
+## [ai-engineering] multi-agent-vs-single-agent-tradeoffs  (2)
+  L64 [experience claim without a first-person verb]
+      Building a pipeline on [event-driven agent architectures](/articles/the-agent-design-space/) taught me this the slow way. The event bus was rock solid in testin
+  L102 [experience claim without a first-person verb]
+      I have shipped both. The multi-agent systems felt more impressive going in.
+
+## [ai-engineering] contextual-compression-for-agent-memory  (2)
+  L114 [cites an article with no reproducible artifact]
+      The [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) catalogs tiered storage approaches, but it is not benchmark evidence that one c
+  L122 [experience claim without a first-person verb]
+      The best agent memory systems I have seen layer all three approaches together. Summary compression runs as the baseline, hierarchical forgetting handles tempora
+
+## [ai-engineering] ai-memory-management-for-llms  (2)
+  L7 [experience claim without a first-person verb]
+      Across production pipelines handling tens of thousands of agent sessions, I have shipped memory management layers, benchmarked eviction strategies, debugged sum
+  L420 [cites an article with no reproducible artifact]
+      For a broader view of how the industry is addressing this, see [State of AI Agent Memory 2026](/articles/state-of-ai-agent-memory-2026/).
+
+## [developer-experience] engineering-velocity-documentation  (2)
+  L1 [experience claim without a first-person verb]
+      Of every investment I have watched move engineering velocity, technical documentation is the one most teams underrate. Writing tends to get filed under secondar
+  L174 [experience claim without a first-person verb]
+      The most effective teams I have seen run a hybrid model where engineers draft the technical core and writers shape it for clarity, findability, and the Diátaxis
+
+## [ai-engineering] how-memory-works-in-hyperagents  (2)
+  L282 [bare performance range]
+      **Write latency** is the first trap. Writing to SQLite on every turn adds 5-10ms per operation.
+  L284 [bare performance range]
+      At 500 turns per session, that is 2.5-5 seconds of overhead spread across the session. For a smooth user experience, you want to batch writes or do them asynchr
+
+## [ai-engineering] hybrid-search-bm25-vector-search  (2)
+  L58 [experience claim without a first-person verb]
+      [Elasticsearch recommends RRF as the starting point](https://www.elastic.co/search-labs/blog/improving-information-retrieval-elastic-stack-hybrid) precisely bec
+  L150 [cites an article with no reproducible artifact]
+      The [embedding models guide](/articles/embedding-models-compared/) explains the model-selection trade-offs behind the dense retriever. Read it as background, no
+
+## [ai-engineering] llm-context-windows-explained  (2)
+  L5 [experience claim without a first-person verb]
+      I have shipped enough features on top of these models to know that the trade-offs decide whether the system is reliable or merely impressive in a demo. A prompt
+  L42 [experience claim without a first-person verb]
+      I have watched a summarization step quietly stop mentioning the last two of five attached documents once the combined input crossed a certain size, with no erro
+
+## [ai-engineering] local-wasm-vector-benchmarks  (2)
+  L83 [cites an article with no reproducible artifact]
+      OpenAI's [`text-embedding-3-large`](https://developers.openai.com/api/docs/models/text-embedding-3-large) uses 3,072 dimensions by default, a jump rooted in [ho
+  L126 [first-person action]
+      **Can I run PGlite and SQLite-vec in the same application?** Yes. Some teams run SQLite-vec for a fast, low-precision "first pass" search, then hand the candida
+
+## [ai-engineering] mixture-of-experts-explained  (2)
+  L79 [experience claim without a first-person verb]
+      Maarten Grootendorst's [visual guide to MoE](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts) is the most honest treatment I h
+  L93 [experience claim without a first-person verb]
+      Open-ended generation, multilingual tasks, and domain-specific workloads with unusual token distributions tend to see more variable performance because routing
+
+## [technical-documentation] seo-for-technical-documentation  (2)
+  L1 [first-person action]
+      I built the audit for this guide around Cloudflare's live Workers CLI guide. Its source and rendered page show which checks a reader can rerun and which still n
+  L171 [first-person action]
+      I built a small standard-library Python auditor for this guide. It checks one page's response, `robots.txt` access, index directives, title, description, canoni
+
+## [ai-engineering] speculative-decoding-explained  (2)
+  L7 [cites an article with no reproducible artifact]
+      [KV-cache eviction](/articles/kv-cache-eviction-accuracy/) addresses a related memory constraint but does not provide measured gains.
+  L60 [experience claim without a first-person verb]
+      Boilerplate code, structured JSON, and the verbose scaffolding around an answer ("Sure, here is the function you asked for...") get drafted almost perfectly, an
+
+## [technical-documentation] the-case-for-shorter-technical-documentation  (2)
+  L15 [bare before-and-after result]
+      Cognitive Load Theory (CLT) defines the mental effort required to process information. Research from 2020 to 2025 identifies three types of load: intrinsic, ext
+  L42 [experience claim without a first-person verb]
+      I follow four minimalist principles in my work.
+
+## [developer-experience] why-devtools-startups-lose-deals-over-bad-docs  (2)
+  L22 [experience claim without a first-person verb]
+      What I have seen on technical evaluations lines up with those numbers. When a product is technical enough to change infrastructure, workflows, or how much time
+  L164 [experience claim without a first-person verb]
+      Against established vendors, small companies can win on documentation alone. I have watched it happen because docs narrow the gulf between product quality and b
+
+## [ai-engineering] agent-loop-anatomy  (1)
+  L40 [experience claim without a first-person verb]
+      I have seen this happen when a file-read tool returns "permission denied," a later step retries and the retry scrolls the error out of view, and the agent then
+
+## [ai-engineering] lambda-calculus-ai-reasoning-benchmark  (1)
+  L86 [cites an article with no reproducible artifact]
+      Binding preservation matters to [agent memory systems](/articles/state-of-ai-agent-memory-2026/) and tool orchestration because both must track values and apply
+
+## [ai-engineering] memory-versioning-and-audit-trails  (1)
+  L11 [experience claim without a first-person verb]
+      Building a diagnostic agent for a compliance workflow taught me this the painful way. The agent failed a test case, so I opened the database to see what context
+
+## [ai-engineering] agentic-workflow-playbook  (1)
+  L1 [first-person action]
+      I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my
+
+## [ai-engineering] how-memory-works-in-claude-code  (1)
+  L174 [first-person action]
+      A second mistake is storing contradictory information across memory files. When `CLAUDE.md` says "we use SQLAlchemy" and `.claude/memory.md` says "we migrated t
+
+## [ai-engineering] how-memory-works-in-deerflow  (1)
+  L226 [experience claim without a first-person verb]
+      **Token budget management.** A twenty-stage workflow piles up serious context when each stage writes verbose summaries, and I have watched a research run quietl
+
+## [developer-experience] how-stripes-technical-blog-became-a-competitive-moat  (1)
+  L97 [bare price or cost figure]
+      The 2025 annual letter gives useful scale context here too. Stripe says businesses on Stripe generated $1.9 trillion in 2025, equivalent to 1.6% of global GDP.
+
+## [ai-engineering] llm-inference-optimization  (1)
+  L46 [cites an article with no reproducible artifact]
+      Recent work on "importance-based" eviction drops tokens the model attended to least, but the operational trade-off still depends on the workload. The [KV cache
+
+## [ai-engineering] memory-for-voice-ai-agents  (1)
+  L252 [cites an article with no reproducible artifact]
+      For more on the latency pipeline that this memory system lives inside, see my guide to [tracing real-time voice agent latency](/articles/voice-ai-latency-gemini
+
+## [ai-engineering] model-context-protocol-explained  (1)
+  L37 [experience claim without a first-person verb]
+      I have watched this change the shape of the work itself: integrating a tool drops from a coding task with a pull request and a deploy down to a configuration ta
+
+## [ai-engineering] rag-evaluation-metrics-what-actually-matters  (1)
+  L191 [cites an article with no reproducible artifact]
+      Starting with answer relevancy alone hides upstream failures. The [embedding models guide](/articles/embedding-models-compared/) explains one possible failure i
+
+## [ai-engineering] semantic-caching-rag-optimization  (1)
+  L37 [bare before-and-after result]
+      Across query categories, [GPTCache](https://arxiv.org/abs/2411.05276) reports API call reduction of up to 68.8%, with cache hit rates from 61.6% to 68.8%. The s
+
+## [ai-engineering] state-of-ai-agent-memory-2026  (1)
+  L182 [cites an article with no reproducible artifact]
+      I covered [RAG evaluation metrics in depth](/articles/rag-evaluation-metrics-what-actually-matters/) and those principles apply, though they only cover part of
+
+## [developer-experience] technical-writing-for-ai-products-the-new-rules  (1)
+  L177 [experience claim without a first-person verb]
+      What AI teams need, in my experience, is not more words. They need better boundaries.
+
+## [developer-experience] technical-writing-for-engineers  (1)
+  L140 [experience claim without a first-person verb]
+      I have watched a team with an immaculate, fully generated API reference still bleed new hires, because nobody had ever written the one tutorial that walks you f
+
+103 candidate claim(s) across 41 of 67 published posts
+Every hit is a candidate, not a verdict. A reviewer classifies each one
+KEEP (earned judgment), REWRITE (sound point, wrong attribution) or CUT.

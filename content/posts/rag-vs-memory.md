@@ -4,6 +4,7 @@ date: 2026-04-19
 description: Understand the fundamental differences between RAG and memory systems
   for LLM applications, when to use each, and how to combine them in production.
 status: published
+work_note: "If your product combines retrieval with memory, its documentation should distinguish source evidence from saved user state. [I help explain that boundary](/contact/) through a request walkthrough that shows when each is read and updated."
 tags:
 - ai
 - rag

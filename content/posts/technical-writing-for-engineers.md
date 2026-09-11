@@ -4,6 +4,7 @@ date: 2026-04-18
 description: Most engineering documentation fails for the same reasons. Here is what
   actually moves the needle.
 status: published
+work_note: "Your engineers should be able to review product behavior without rewriting the whole draft. [My technical writing work](/portfolio/) turns their source material into instructions and brings back specific questions where the behavior needs confirmation."
 tags:
 - technical-writing
 - developer-experience

@@ -4,6 +4,7 @@ date: 2026-04-16
 description: 'Hard-won lessons from running AI agents in production: the error patterns
   that actually break systems, and the patterns that fix them.'
 status: published
+work_note: "Developers using your agent API need to know whether a failed request can be retried safely. I write [reference and recovery guides](/portfolio/) that connect errors to their next action, including when to stop and investigate."
 tags:
 - ai
 - devtools

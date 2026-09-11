@@ -4,6 +4,7 @@ date: 2026-04-19
 description: A practical guide to understanding how Claude Code retains context across
   sessions, uses project files, and manages long-term memory for coding tasks.
 status: published
+work_note: "I've worked with Mem0. [Talk to me about your memory integration](/contact/) if you need a guide that explains how it connects to a coding workflow."
 tags:
 - ai
 - claude

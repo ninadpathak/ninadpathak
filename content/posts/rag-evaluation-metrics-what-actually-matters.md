@@ -4,6 +4,7 @@ date: 2026-04-16
 description: A practical guide to RAGAs, recall, precision, and the metrics that separate
   production RAG systems from prototypes.
 status: published
+work_note: "[Let's write examples for your evaluation tool](/contact/) that connect a failing score to the retrieval or generation step a developer should inspect next."
 tags:
 - rag
 - evaluation

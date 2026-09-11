@@ -6,6 +6,7 @@ description: A practical breakdown of the inference optimization techniques that
   numbers and the tradeoffs between them.
 slug: llm-inference-optimization
 status: published
+work_note: "Your inference team's batching decisions can become a guide for customers tuning response time. [I write that engineering content](/portfolio/), explaining the configuration and workload behind the behavior."
 tags:
 - ai
 - llm

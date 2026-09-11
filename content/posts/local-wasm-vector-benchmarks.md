@@ -4,6 +4,7 @@ date: 2026-04-13
 description: A comparison of PGlite and SQLite-vec for browser-based vector search,
   including indexing, memory, and deployment trade-offs.
 status: published
+work_note: "[My browser-tool tutorials](/portfolio/) cover the first download as well as the first query, so developers can judge startup costs before adopting your database in their application."
 tags:
 - vector-search
 - wasm

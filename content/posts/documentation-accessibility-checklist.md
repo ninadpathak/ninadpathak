@@ -5,6 +5,7 @@ description: Test developer documentation for release-blocking accessibility fai
   in structure, code, links, visuals, keyboard use, and rendered output.
 slug: documentation-accessibility-checklist
 status: published
+work_note: "Copyable commands, descriptive links, and text explanations for screenshots belong in the same documentation brief. [I write and review those instructions](/portfolio/) together, including the heading structure readers use to navigate them."
 tags:
 - documentation
 - accessibility

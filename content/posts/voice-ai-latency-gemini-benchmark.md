@@ -4,6 +4,7 @@ date: 2026-04-16
 description: A systems-level guide to tracing latency across endpointing, transcription,
   model inference, speech synthesis, and transport.
 status: published
+work_note: "The latency number on a voice API landing page needs a tutorial that shows what it measures. I write [developer education](/portfolio/) that explains the request path, so customers can judge what to expect in their application."
 tags:
 - voice-ai
 - real-time

@@ -5,6 +5,7 @@ description: Vector databases return results based on semantic similarity. I exp
   why that is rarely enough for production RAG and how a cross-encoder reranker fixes
   the problem.
 status: published
+work_note: "A retrieval product needs examples that explain why a relevant-looking result can still be useless. My [technical writing](/portfolio/) connects that engineering detail to the decisions developers make while evaluating your API."
 tags:
 - ai
 - rag

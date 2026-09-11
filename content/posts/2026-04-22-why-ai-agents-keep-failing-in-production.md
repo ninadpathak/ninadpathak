@@ -5,6 +5,7 @@ description: I have spent two years watching agents fail in production. Here is 
   I keep seeing and what the field is starting to do about it.
 slug: why-ai-agents-keep-failing-in-production
 status: published
+work_note: "Shipping an agent framework? [Let's write the recovery guide](/contact/): what happens after a tool times out, which operations can be retried, and where the developer takes over."
 tags:
 - ai agents
 - production

@@ -19,6 +19,7 @@ import threading
 import xml.etree.ElementTree as ET
 from datetime import datetime, date, time, timezone
 from email.utils import format_datetime as format_rfc2822_date
+from html import escape
 from pathlib import Path
 
 try:
@@ -41,6 +42,19 @@ os.chdir(ROOT)
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def render_work_note(note) -> str:
+    """Render plain text and one internal link, separate from the article body."""
+    if note is None or note == "":
+        return ""
+    if not isinstance(note, str) or "\n" in note.strip():
+        raise ValueError("work_note must be a single text paragraph")
+    match = re.fullmatch(r"([^\[\]]*)\[([^\[\]\n]+)\]\((/portfolio/|/contact/)\)([^\[\]]*)", note.strip())
+    if not match:
+        raise ValueError("work_note requires one link to /portfolio/ or /contact/")
+    before, label, url, after = match.groups()
+    return f'{escape(before)}<a href="{url}">{escape(label)}</a>{escape(after)}'
+
 
 def slugify(text: str) -> str:
     text = text.lower().strip()
@@ -288,6 +302,7 @@ class SiteBuilder:
                 "tags": post.get("tags", []),
                 "declared_category": post.get("category", ""),
                 "takeaways": post.get("takeaways", []),
+                "work_note": render_work_note(post.get("work_note")),
                 "status": status,
                 "source_stem": source_stem,
                 "content": html,

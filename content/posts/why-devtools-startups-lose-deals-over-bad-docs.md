@@ -4,6 +4,7 @@ date: 2026-04-06
 description: DevTools startups lose deals long before sales hears the objection. I
   explain how weak docs break evaluation, trials, and rollout confidence.
 status: published
+work_note: "Make the evaluation path usable before sending more developers into it. [My content strategy and documentation work](/contact/) connects the use case that brought them in to the setup and limits they need to assess your product."
 tags:
 - technical-writing
 - devtools

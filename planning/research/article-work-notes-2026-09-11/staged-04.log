@@ -1,0 +1,6 @@
+every page that uses a class links the stylesheet defining it
+
+served correctly: {'linter.css': 4, 'visuals.css': 55, 'flowcharts.css': 8}
+This checks linkage only. It cannot see layout — a computed style read in a
+browser is the other half, and `.flowchart-node` computing to display:inline
+is the signature of this failure.

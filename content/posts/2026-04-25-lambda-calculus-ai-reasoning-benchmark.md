@@ -5,6 +5,7 @@ description: Lambda calculus exposes substitution, scope, and composition errors
   AI outputs through problems with mechanically checkable answers.
 slug: lambda-calculus-ai-reasoning-benchmark
 status: published
+work_note: "[Technical evaluation content](/portfolio/) is part of my writing work: give readers a worked problem and its scoring rules, so they can challenge the conclusion."
 tags:
 - ai reasoning
 - formal methods

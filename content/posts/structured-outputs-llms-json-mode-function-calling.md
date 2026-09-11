@@ -4,6 +4,7 @@ date: 2026-03-27
 description: JSON mode, function calling, and structured outputs solve different problems.
   Here's when each one actually makes sense and what they cost you.
 status: published
+work_note: "An output guarantee needs documentation for the refusal and validation failure, too. I write [AI API guides](/portfolio/) that distinguish supported constraints from application checks, with examples showing what the caller should handle."
 tags:
 - ai
 - llm

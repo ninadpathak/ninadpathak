@@ -1,0 +1,694 @@
+{
+  "baseline": "60909b2c",
+  "published": 67,
+  "unique_notes": 67,
+  "archived_unchanged": 20,
+  "protected_unchanged": {
+    "planning/leading-indicators.md": "c95d64cec6d9d5909a8bc5c4f902e4fbb9699cb9390c5633eeb1a9d299c37589",
+    "planning/position.md": "74e58180decc0f62fd2f1ca96fa819bb036bac890b7b3ff22e7a8ca2e00164f6",
+    "planning/attribution.md": "6113307045889a281d5484ea2631ea24223d0f1eda8bdd34040ab21f2957f0b8",
+    "planning/daily-cycle.md": "d2326e2234427efb41e891877c932ea887e7a7ee2fb824814a584d1732a83f13",
+    "planning/scoreboard.md": "293c87cb524427f2d539548e3c1e8ea3a65b3a0373d56e3c67210535fc711879",
+    "planning/url-inventory.json": "21ccd1372fdd2ff0789c51b7f6d266d7ef25b49948432edee49dd8705531dc0a",
+    "planning/research/essay-rewrite-2026-09-10/publication.json": "ba1eb95b16c34ecd23c79e2f846dee52b668e8ad25033204ab3344033f2cae2c",
+    "planning/research/essay-rewrite-2026-09-10/handoff.md": "847eb7ea89adeb2747eb595bf25af7592505a68d3a182d64496abb46e0ac91bf",
+    "planning/video/brief-001.md": "2950375a3786b808f6d99972d593cfc381b2532768d90d955bc0b14e0dc858a4",
+    "planning/video/review-001.md": "4dc865a971f037ab055e09bfa56df058e81b66381d946facfe6693b363329467"
+  },
+  "word_range": [
+    20,
+    36
+  ],
+  "records": [
+    {
+      "source": "content/posts/2026-04-21-the-taxonomy-of-ai-agents.md",
+      "url": "/articles/the-taxonomy-of-ai-agents/",
+      "baseline_sha256": "525b91b3b903c50f3ca0d6266fba566594bf7884ab137e328f188555565b7697",
+      "current_sha256": "6ee4decb9b4767b7d8bdbbbc4e0ae44abee7640ed01b7b1ff1db0f3c496eb597",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 27,
+      "note": "[Work with me on developer education](/contact/) that helps customers choose an agent architecture by its permissions and stopping conditions, with examples they can run against your SDK.",
+      "rendered_note": "<a href=\"/contact/\">Work with me on developer education</a> that helps customers choose an agent architecture by its permissions and stopping conditions, with examples they can run against your SDK."
+    },
+    {
+      "source": "content/posts/2026-04-22-why-ai-agents-keep-failing-in-production.md",
+      "url": "/articles/why-ai-agents-keep-failing-in-production/",
+      "baseline_sha256": "94ed1b4fe7203099ddfbe40a9433b9bdee609eb524515e4be5f7fd5260aabeda",
+      "current_sha256": "b6d4fe6bf806244b3e2658dec5265f830cdac75203907e88a78c3833b87608da",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 27,
+      "note": "Shipping an agent framework? [Let's write the recovery guide](/contact/): what happens after a tool times out, which operations can be retried, and where the developer takes over.",
+      "rendered_note": "Shipping an agent framework? <a href=\"/contact/\">Let&#x27;s write the recovery guide</a>: what happens after a tool times out, which operations can be retried, and where the developer takes over."
+    },
+    {
+      "source": "content/posts/2026-04-23-agent-loop-anatomy.md",
+      "url": "/articles/agent-loop-anatomy/",
+      "baseline_sha256": "6c7730133451811810775b87e559bc069c106f6e4dc87cc1a6e6e2d47244f1ec",
+      "current_sha256": "c433f256e86bf3613bec63a7a1937ecbdecfe0ede94085d86d129eac1be71345",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 27,
+      "note": "For an agent SDK launch, [I write tutorials](/portfolio/) that follow execution from a returned tool result through the next decision to the condition that stops the run.",
+      "rendered_note": "For an agent SDK launch, <a href=\"/portfolio/\">I write tutorials</a> that follow execution from a returned tool result through the next decision to the condition that stops the run."
+    },
+    {
+      "source": "content/posts/2026-04-25-lambda-calculus-ai-reasoning-benchmark.md",
+      "url": "/articles/lambda-calculus-ai-reasoning-benchmark/",
+      "baseline_sha256": "e5fd3420cfa2dd511ac1ecdc61ce1fbd587ccc7d880b601b06bed3fbb110964c",
+      "current_sha256": "fa974a2dc690af4e48ecb8ec82839288683d2908a3d653424ab47e52634b5027",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 24,
+      "note": "[Technical evaluation content](/portfolio/) is part of my writing work: give readers a worked problem and its scoring rules, so they can challenge the conclusion.",
+      "rendered_note": "<a href=\"/portfolio/\">Technical evaluation content</a> is part of my writing work: give readers a worked problem and its scoring rules, so they can challenge the conclusion."
+    },
+    {
+      "source": "content/posts/2026-04-26-agent-vs-ai-assistant.md",
+      "url": "/articles/agent-vs-ai-assistant/",
+      "baseline_sha256": "9c9c1c1385d7178a0b4bf98418559afd8429bc4d0f4340dcc8754aff142d703a",
+      "current_sha256": "55722a9fc6ac9300114e4300dada7fc6380b54cc74ccf7fcf315ef9fa746097b",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 26,
+      "note": "Does your product act independently or wait for the user's next instruction? [Let's make that distinction visible](/contact/) in the walkthrough a developer reads before choosing it.",
+      "rendered_note": "Does your product act independently or wait for the user&#x27;s next instruction? <a href=\"/contact/\">Let&#x27;s make that distinction visible</a> in the walkthrough a developer reads before choosing it."
+    },
+    {
+      "source": "content/posts/2026-04-27-multi-agent-vs-single-agent-tradeoffs.md",
+      "url": "/articles/multi-agent-vs-single-agent-tradeoffs/",
+      "baseline_sha256": "cbb3865430f8c4738002422f2a69dbfe144e9a3eff5d09990767849dbc0d2159",
+      "current_sha256": "e3810d4ec533645a5a742aadf4a7b8b710867187f0b49b5db361e0c931d48b28",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 34,
+      "note": "A multi-agent framework deserves a tutorial that explains why the second agent exists. My [developer content](/portfolio/) shows the handoff and its cost, giving readers enough context to choose the architecture for their own application.",
+      "rendered_note": "A multi-agent framework deserves a tutorial that explains why the second agent exists. My <a href=\"/portfolio/\">developer content</a> shows the handoff and its cost, giving readers enough context to choose the architecture for their own application."
+    },
+    {
+      "source": "content/posts/2026-05-05-contextual-compression-for-agent-memory.md",
+      "url": "/articles/contextual-compression-for-agent-memory/",
+      "baseline_sha256": "871f94ec15a51bfb20cee44416b5604fadffd6a2c2ddeef9fb6f33943a70301d",
+      "current_sha256": "29d46dcafab0885d389924b71bd9f8d388e979369da918081b5ebb526f02a749",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 27,
+      "note": "[I write memory-product explainers](/portfolio/) with the uncompressed and compressed records side by side, giving customers something concrete to inspect before they choose what their application can discard.",
+      "rendered_note": "<a href=\"/portfolio/\">I write memory-product explainers</a> with the uncompressed and compressed records side by side, giving customers something concrete to inspect before they choose what their application can discard."
+    },
+    {
+      "source": "content/posts/2026-05-05-memory-versioning-and-audit-trails.md",
+      "url": "/articles/memory-versioning-and-audit-trails/",
+      "baseline_sha256": "3fbd4f5fcf55256e33d8c151db45a87a8cf7ba8f92216746baeea9fc67ece730",
+      "current_sha256": "23eb22c5f054162f414b3dcc39453e8ff92c45f34beeab571337d5df8596fbb8",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 34,
+      "note": "For products that retain decision history, the docs should show how to retrieve the state behind an answer. [Talk to me about documenting that workflow](/contact/), with clear retention behavior rather than unsupported compliance promises.",
+      "rendered_note": "For products that retain decision history, the docs should show how to retrieve the state behind an answer. <a href=\"/contact/\">Talk to me about documenting that workflow</a>, with clear retention behavior rather than unsupported compliance promises."
+    },
+    {
+      "source": "content/posts/agent-harnesses.md",
+      "url": "/articles/agent-harnesses/",
+      "baseline_sha256": "f6edb69baabb82f1b4b959cce0d738b7ef5b2fd98dddad83baa81265177f2714",
+      "current_sha256": "4ae62193c83ccc8b29a4d2fb9b9ec94b1e4a383a63a180b974ff5c9c91e14cfa",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 20,
+      "note": "[Bring me in for your checkpointing tutorial](/contact/): interrupt a run, resume it, and show the reader which steps execute again.",
+      "rendered_note": "<a href=\"/contact/\">Bring me in for your checkpointing tutorial</a>: interrupt a run, resume it, and show the reader which steps execute again."
+    },
+    {
+      "source": "content/posts/agentic-cli-benchmarks.md",
+      "url": "/articles/agentic-cli-benchmarks/",
+      "baseline_sha256": "cd1feb13bb0adc6e33e6745de038e224fc7e61e640981ee073c6e299e17ed0f3",
+      "current_sha256": "dabf2c0d3010f9c61b17ac3180d0ccf75f2342c3fae887f2042ca33fefe5a573",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 34,
+      "note": "A comparison for your coding tool can start from the same pinned repository and task as its competitors. [I write that kind of comparison](/portfolio/), including the verification criteria, so developers can judge the patches.",
+      "rendered_note": "A comparison for your coding tool can start from the same pinned repository and task as its competitors. <a href=\"/portfolio/\">I write that kind of comparison</a>, including the verification criteria, so developers can judge the patches."
+    },
+    {
+      "source": "content/posts/agentic-workflow-playbook.md",
+      "url": "/articles/agentic-workflow-playbook/",
+      "baseline_sha256": "c74b1b319a8f7dbec3e3c7ae000674854015cae46bb43ac3608425733f13b932",
+      "current_sha256": "e5be741b04a15831b32832e06c7e3a250f83c486a5e52afaa52404e9ed8528d4",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 23,
+      "note": "[My developer tutorials](/portfolio/) can take your coding tool through a scoped repository change, with the review and test commands beside the generated diff.",
+      "rendered_note": "<a href=\"/portfolio/\">My developer tutorials</a> can take your coding tool through a scoped repository change, with the review and test commands beside the generated diff."
+    },
+    {
+      "source": "content/posts/ai-memory-management-for-llms.md",
+      "url": "/articles/ai-memory-management-for-llms/",
+      "baseline_sha256": "764d77ea89f293c9489da2f617f0d68eba7fdc5fc021d215ed17d9e0bf7b1729",
+      "current_sha256": "e90425eac37e0c3355644a3c01d49cbb6ce412c4af47f69b95307509ac8bf772",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 24,
+      "note": "[Work with me on memory API documentation](/contact/) that follows a fact through creation, correction, and deletion, including what a later request can still retrieve.",
+      "rendered_note": "<a href=\"/contact/\">Work with me on memory API documentation</a> that follows a fact through creation, correction, and deletion, including what a later request can still retrieve."
+    },
+    {
+      "source": "content/posts/best-llms-for-coding.md",
+      "url": "/articles/best-llms-for-coding/",
+      "baseline_sha256": "af0ad1283d864d9ac3c6a566815f8d2c388db29bd8c2a85edc399abc0e4a7792",
+      "current_sha256": "a8bc2b07b4e5308efdcb0ee2dd3322466f90e46ff51ce88717e8cbd574d88f81",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 26,
+      "note": "Which coding tasks bring the right developers to your product? [My content strategy work](/contact/) starts with those searches and shapes comparisons around the decisions behind them.",
+      "rendered_note": "Which coding tasks bring the right developers to your product? <a href=\"/contact/\">My content strategy work</a> starts with those searches and shapes comparisons around the decisions behind them."
+    },
+    {
+      "source": "content/posts/code-documentation.md",
+      "url": "/articles/code-documentation/",
+      "baseline_sha256": "ca0da8753360bc288f1db8384f1f30366792290aa54c156f72b58477cee9f96f",
+      "current_sha256": "22f99d1e0853efa577beb137ba902a0c4a656df6de5af140f5cbf692158d7f14",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 26,
+      "note": "[I write API guides](/portfolio/) that connect a function's reference entry to the larger integration, keeping exact contracts available without making developers assemble the whole procedure themselves.",
+      "rendered_note": "<a href=\"/portfolio/\">I write API guides</a> that connect a function&#x27;s reference entry to the larger integration, keeping exact contracts available without making developers assemble the whole procedure themselves."
+    },
+    {
+      "source": "content/posts/context-windows-vs-memory.md",
+      "url": "/articles/context-windows-vs-memory/",
+      "baseline_sha256": "4ea3200ca5d6cd412ef2c1c0622e9245fdf3bd78698cc33a6fe78e6361b5d7d6",
+      "current_sha256": "57d67cf8f701d79c69ee433a4c02c0b0773dab33c1049ab0554f4389e575b7dc",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 33,
+      "note": "Selling memory infrastructure? Your docs need to tell developers what survives a session and how stale state gets replaced. I write [developer content](/portfolio/) that makes those product decisions clear before someone starts integrating.",
+      "rendered_note": "Selling memory infrastructure? Your docs need to tell developers what survives a session and how stale state gets replaced. I write <a href=\"/portfolio/\">developer content</a> that makes those product decisions clear before someone starts integrating."
+    },
+    {
+      "source": "content/posts/developer-onboarding-docs-what-works-what-doesnt.md",
+      "url": "/articles/developer-onboarding-docs-what-works-what-doesnt/",
+      "baseline_sha256": "e06ff33880b23d9ad88c38967195f9581e0a1fff1381caba1a6a5c14d76e9a30",
+      "current_sha256": "5bf8be62a1f61442cfccca98dc7455bf981900d1997cfed0c5f27d2409aed7a4",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 28,
+      "note": "[Let's document the first merged change](/contact/), from getting access through setup to verification in a test environment, so your new engineer has a path beyond the reading list.",
+      "rendered_note": "<a href=\"/contact/\">Let&#x27;s document the first merged change</a>, from getting access through setup to verification in a test environment, so your new engineer has a path beyond the reading list."
+    },
+    {
+      "source": "content/posts/documentation-accessibility-checklist.md",
+      "url": "/articles/documentation-accessibility-checklist/",
+      "baseline_sha256": "ff038d27650ea6bfab4839afae3c4bd889b798a4a42a3fcd5ec0958e62ae34a9",
+      "current_sha256": "c4a97140fc06e093a0e6b74d1669485c60719522b84be5bbab3c6d0ec71dd90b",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 31,
+      "note": "Copyable commands, descriptive links, and text explanations for screenshots belong in the same documentation brief. [I write and review those instructions](/portfolio/) together, including the heading structure readers use to navigate them.",
+      "rendered_note": "Copyable commands, descriptive links, and text explanations for screenshots belong in the same documentation brief. <a href=\"/portfolio/\">I write and review those instructions</a> together, including the heading structure readers use to navigate them."
+    },
+    {
+      "source": "content/posts/documentation-review-checklist-before-you-publish.md",
+      "url": "/articles/documentation-review-checklist-before-you-publish/",
+      "baseline_sha256": "d8b7a4556c362484263c609ca3fadf8d191691142f8b9de19d8a0377b3f3c92f",
+      "current_sha256": "0809f0e19accfa5a8cc70c8ae4e55b6b7436f9f6ee810742b75ce1967cf035e5",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 31,
+      "note": "Bring me a documentation draft and the product version it describes. [My review work](/contact/) checks the instructions against that behavior, then fixes the missing steps before polishing the sentences around them.",
+      "rendered_note": "Bring me a documentation draft and the product version it describes. <a href=\"/contact/\">My review work</a> checks the instructions against that behavior, then fixes the missing steps before polishing the sentences around them."
+    },
+    {
+      "source": "content/posts/embedding-models-compared.md",
+      "url": "/articles/embedding-models-compared/",
+      "baseline_sha256": "d93ef771ee68107b00d051f649315e42d040047053e03bcbb7d35761538732df",
+      "current_sha256": "eb620cb9bd123820b288108427ef29a027c4f7ed07c2c7dcb6ef5d7465108218",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "[Hire me for an embedding API comparison](/contact/) that connects vector dimensions to storage requirements and retrieval choices, helping developers evaluate your product against their application.",
+      "rendered_note": "<a href=\"/contact/\">Hire me for an embedding API comparison</a> that connects vector dimensions to storage requirements and retrieval choices, helping developers evaluate your product against their application."
+    },
+    {
+      "source": "content/posts/engineering-velocity-documentation.md",
+      "url": "/articles/engineering-velocity-documentation/",
+      "baseline_sha256": "c828857e445821bd60feb6893d275fb08fcac6930eb1517204dce802a9007d3b",
+      "current_sha256": "8f3eeb0f0181d97533ae640b1657b2d228d779cc9e3fa6484fe11190b7da3d24",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 33,
+      "note": "Your release procedure should not require finding whoever deployed last time. [I help turn that knowledge into instructions](/contact/) the next engineer can follow, including the checks before release and the steps for recovery.",
+      "rendered_note": "Your release procedure should not require finding whoever deployed last time. <a href=\"/contact/\">I help turn that knowledge into instructions</a> the next engineer can follow, including the checks before release and the steps for recovery."
+    },
+    {
+      "source": "content/posts/episodic-vs-semantic-vs-working-memory-agents.md",
+      "url": "/articles/episodic-vs-semantic-vs-working-memory-agents/",
+      "baseline_sha256": "c4241e248113c2bb8a1a61e473ee3659bb53c9eb76a44a76608802afddf9221f",
+      "current_sha256": "3d4175d6e340a9f3966e544ddc3cbb29a326ffbdd2f36d79e8cd0b221622fb1c",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 23,
+      "note": "[My memory SDK tutorials](/portfolio/) teach saved preferences separately from action history, using the read and write operations developers will need in their applications.",
+      "rendered_note": "<a href=\"/portfolio/\">My memory SDK tutorials</a> teach saved preferences separately from action history, using the read and write operations developers will need in their applications."
+    },
+    {
+      "source": "content/posts/fine-tuning-vs-rag-for-agent-memory.md",
+      "url": "/articles/fine-tuning-vs-rag-for-agent-memory/",
+      "baseline_sha256": "bf1455939a7b28b2f2e4c5fc2a0a054c509e80624773272f7debb44dcd5bcf40",
+      "current_sha256": "019f57e0d26bcbab3d6eaa9955b8fdee19951d2c2f24e83d94957241b359abb5",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 29,
+      "note": "For an AI product explaining where it fits, [I write comparison content](/portfolio/) around the customer's update requirements: what needs retraining, what can be retrieved, and what changes between requests.",
+      "rendered_note": "For an AI product explaining where it fits, <a href=\"/portfolio/\">I write comparison content</a> around the customer&#x27;s update requirements: what needs retraining, what can be retrieved, and what changes between requests."
+    },
+    {
+      "source": "content/posts/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind.md",
+      "url": "/articles/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/",
+      "baseline_sha256": "6c43e48c2d1fc2e82311d5535bdcf9b9337ee2bb28881c6d7648d3bc7c08401d",
+      "current_sha256": "694ef0fc8a0d3c4356fbdb705eba92a05661f86ccb26708502d8139c3b8919cf",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 34,
+      "note": "Your engineers know why the product works the way it does; customers need that reasoning in usable instructions. [Work with me](/contact/) to turn engineering discussions into documentation and tutorials for people outside the team.",
+      "rendered_note": "Your engineers know why the product works the way it does; customers need that reasoning in usable instructions. <a href=\"/contact/\">Work with me</a> to turn engineering discussions into documentation and tutorials for people outside the team."
+    },
+    {
+      "source": "content/posts/how-anthropics-contextual-retrieval-changes-rag-architecture.md",
+      "url": "/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/",
+      "baseline_sha256": "d158dae0f0a94ce79568831b3b29aca4bebbdddb7ec1804738eda8ea253c8c60",
+      "current_sha256": "12148832dde7f7b075c17f895ad0d02b3cf5009f22406aed7c724f7bd604cc63",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 33,
+      "note": "An engineering result makes stronger product content when readers can follow the change that produced it. My [technical articles](/portfolio/) explain the mechanism alongside the experiment's conditions, keeping the evidence attached to the claim.",
+      "rendered_note": "An engineering result makes stronger product content when readers can follow the change that produced it. My <a href=\"/portfolio/\">technical articles</a> explain the mechanism alongside the experiment&#x27;s conditions, keeping the evidence attached to the claim."
+    },
+    {
+      "source": "content/posts/how-memory-works-in-claude-code.md",
+      "url": "/articles/how-memory-works-in-claude-code/",
+      "baseline_sha256": "b702106eb88eb520bff3bd024e117f74b0aaba289b38e283d3a615a20a715413",
+      "current_sha256": "8c80bf6b39cab7b83d33820ad7d1194c9d657d92ea2fe15e1aa836625ebed6e6",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "I've worked with Mem0. [Talk to me about your memory integration](/contact/) if you need a guide that explains how it connects to a coding workflow.",
+      "rendered_note": "I&#x27;ve worked with Mem0. <a href=\"/contact/\">Talk to me about your memory integration</a> if you need a guide that explains how it connects to a coding workflow."
+    },
+    {
+      "source": "content/posts/how-memory-works-in-deerflow.md",
+      "url": "/articles/how-memory-works-in-deerflow/",
+      "baseline_sha256": "a05d373ff52f783b4949cfe01ec7c81fb3ea71d0e029169897bc37c6304cf318",
+      "current_sha256": "b21f3b73fe774b3edf206f474d50e94f5ce5b81df3cb479e5e594deb35b672e8",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 26,
+      "note": "[Let's write a walkthrough of your agent workflow](/contact/) that follows a state record across the handoff, showing developers which agent receives it and what can change.",
+      "rendered_note": "<a href=\"/contact/\">Let&#x27;s write a walkthrough of your agent workflow</a> that follows a state record across the handoff, showing developers which agent receives it and what can change."
+    },
+    {
+      "source": "content/posts/how-memory-works-in-hyperagents.md",
+      "url": "/articles/how-memory-works-in-hyperagents/",
+      "baseline_sha256": "9b094b01b61a152063d17d33b334657f57a85e615ef54651cf652dd7ae5af53f",
+      "current_sha256": "c9842b73cd4586cc5086d91460a05ad0213a00c1bb18fca103974fef77c35f06",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 30,
+      "note": "An architecture diagram can double as the outline for a product guide. [I write the explanation around it](/portfolio/), tracing how a tool result becomes something a later step can retrieve.",
+      "rendered_note": "An architecture diagram can double as the outline for a product guide. <a href=\"/portfolio/\">I write the explanation around it</a>, tracing how a tool result becomes something a later step can retrieve."
+    },
+    {
+      "source": "content/posts/how-stripes-technical-blog-became-a-competitive-moat.md",
+      "url": "/articles/how-stripes-technical-blog-became-a-competitive-moat/",
+      "baseline_sha256": "1e5245d4ae9a7b313f8203503ade2286e876798ec9697d5bc8858ad16c8ae1bf",
+      "current_sha256": "eb6efad13a7053c877f0ed83636f0797f72db07d16d579032ad81b781c1d111e",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 26,
+      "note": "[My content strategy work](/contact/) turns your engineering team's decisions into articles that teach the problem domain and lead readers toward a supported implementation with your product.",
+      "rendered_note": "<a href=\"/contact/\">My content strategy work</a> turns your engineering team&#x27;s decisions into articles that teach the problem domain and lead readers toward a supported implementation with your product."
+    },
+    {
+      "source": "content/posts/how-to-organize-a-documentation-site.md",
+      "url": "/articles/how-to-organize-a-documentation-site/",
+      "baseline_sha256": "8fb138a60affd97dba5a7b3700b462d5a0a24d7b14d142af087d32b1b94c8894",
+      "current_sha256": "7a20be555cfee78a43ea4765ea8ca72cd970df6157588f56b6ee863ee0542b35",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 31,
+      "note": "If your docs send readers between competing answers, adding pages makes the job harder. I help teams [plan and write documentation](/portfolio/) around reader tasks, with a clear home for each answer.",
+      "rendered_note": "If your docs send readers between competing answers, adding pages makes the job harder. I help teams <a href=\"/portfolio/\">plan and write documentation</a> around reader tasks, with a clear home for each answer."
+    },
+    {
+      "source": "content/posts/how-to-write-a-changelog-developers-actually-read.md",
+      "url": "/articles/how-to-write-a-changelog-developers-actually-read/",
+      "baseline_sha256": "a1b5f918f3d1d7e512990b839ac7aa9f289c82e98d585ed5c2951aaa213e368c",
+      "current_sha256": "67c858567eef6334a4fc8fa6ec3bf0085a678b3bcf1363c30cc0715d03784f7f",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 24,
+      "note": "[Send me the changes behind your release](/contact/) and I'll turn them into a changelog that names affected behavior and links to the required migration.",
+      "rendered_note": "<a href=\"/contact/\">Send me the changes behind your release</a> and I&#x27;ll turn them into a changelog that names affected behavior and links to the required migration."
+    },
+    {
+      "source": "content/posts/how-to-write-a-technical-tutorial-that-actually-teaches.md",
+      "url": "/articles/how-to-write-a-technical-tutorial-that-actually-teaches/",
+      "baseline_sha256": "f5f63173dad7e68411c66463777edfc781c57668e4b794f879b6db97e8b642ba",
+      "current_sha256": "a288ea123558ab4b79483cce85d28ddbdeaf8a5b0bdc527ed95c7d3e96bc4a41",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 32,
+      "note": "Your developer tutorial should get someone through a working integration, including the request that fails. I write [tutorials and documentation](/portfolio/) with the setup commands and recovery instructions needed to follow that path.",
+      "rendered_note": "Your developer tutorial should get someone through a working integration, including the request that fails. I write <a href=\"/portfolio/\">tutorials and documentation</a> with the setup commands and recovery instructions needed to follow that path."
+    },
+    {
+      "source": "content/posts/how-to-write-task-based-documentation-headings.md",
+      "url": "/articles/how-to-write-task-based-documentation-headings/",
+      "baseline_sha256": "3a806e0214b4ea4cdda4c4306d96b61eed05ce5800f39bd8cd6b3e330429c3c8",
+      "current_sha256": "be3458f637fe1ec628aed5f466633f41b70f444b802b0a5fedb380a03d1972e2",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 34,
+      "note": "A developer scanning for authentication setup should be able to find it in the outline. [My documentation editing](/contact/) makes headings name the task and puts the instructions in the order the reader needs them.",
+      "rendered_note": "A developer scanning for authentication setup should be able to find it in the outline. <a href=\"/contact/\">My documentation editing</a> makes headings name the task and puts the instructions in the order the reader needs them."
+    },
+    {
+      "source": "content/posts/hybrid-search-bm25-vector-search.md",
+      "url": "/articles/hybrid-search-bm25-vector-search/",
+      "baseline_sha256": "0eea4de1f15fb26f9b49e479bcadefbf82902cd7718e2082b35d791e42b36502",
+      "current_sha256": "b728b68fc757999a076eb07d3eb43de6851eaba733f81db98bcad5ce5d921541",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "For your search product, [I write tutorials](/portfolio/) that try exact identifiers alongside paraphrased questions, so developers can see why a retrieval configuration succeeds or fails.",
+      "rendered_note": "For your search product, <a href=\"/portfolio/\">I write tutorials</a> that try exact identifiers alongside paraphrased questions, so developers can see why a retrieval configuration succeeds or fails."
+    },
+    {
+      "source": "content/posts/internal-vs-external-documentation.md",
+      "url": "/articles/internal-vs-external-documentation/",
+      "baseline_sha256": "ce6732c644ef1060558dcc1e46b93e9e52dcce6a673a9704af9074fdd1cbbfb4",
+      "current_sha256": "564ab7a95540bac17949826a4949400aa635c7d942f0e1c06818388174e631bd",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 26,
+      "note": "[My documentation work](/portfolio/) separates a customer's supported recovery procedure from the internal incident record, so the public guide contains the instructions without exposing private operating details.",
+      "rendered_note": "<a href=\"/portfolio/\">My documentation work</a> separates a customer&#x27;s supported recovery procedure from the internal incident record, so the public guide contains the instructions without exposing private operating details."
+    },
+    {
+      "source": "content/posts/kv-cache-eviction-accuracy.md",
+      "url": "/articles/kv-cache-eviction-accuracy/",
+      "baseline_sha256": "87863c9b3c0bf5668d621b785f42566a711d625bb46c40d39f75ff7427232342",
+      "current_sha256": "ccb3f6abc3634db3e046a7168d0302aafea3f4c73fe54464bdd648468bc204e7",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "[I write about inference infrastructure](/portfolio/) by connecting memory-saving techniques to their evaluation conditions, giving developers enough detail to question the quality tradeoff before adopting them.",
+      "rendered_note": "<a href=\"/portfolio/\">I write about inference infrastructure</a> by connecting memory-saving techniques to their evaluation conditions, giving developers enough detail to question the quality tradeoff before adopting them."
+    },
+    {
+      "source": "content/posts/llm-context-windows-explained.md",
+      "url": "/articles/llm-context-windows-explained/",
+      "baseline_sha256": "c6e5ffc045881b8ffc078e53374fec63bd145b357c8c3e8b3fcd770dce62d424",
+      "current_sha256": "2c5b45c281109a251cc89f05eeca2a08b0e159bf2f7d55f5d0d76d5d74a98dd3",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 28,
+      "note": "[Let's document your model's context budget](/contact/) through an example request that accounts for the input and space reserved for the response, rather than stopping at the advertised limit.",
+      "rendered_note": "<a href=\"/contact/\">Let&#x27;s document your model&#x27;s context budget</a> through an example request that accounts for the input and space reserved for the response, rather than stopping at the advertised limit."
+    },
+    {
+      "source": "content/posts/llm-inference-optimization.md",
+      "url": "/articles/llm-inference-optimization/",
+      "baseline_sha256": "f9f6a5fb23c10c204d77ecc4021b6e3456d34ebbfad52e1f1886a569b4a58f21",
+      "current_sha256": "538e1d1494ba6704c53e6a2c6ff962f664461a39ea3f8f0bd7516088f8999f91",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 27,
+      "note": "Your inference team's batching decisions can become a guide for customers tuning response time. [I write that engineering content](/portfolio/), explaining the configuration and workload behind the behavior.",
+      "rendered_note": "Your inference team&#x27;s batching decisions can become a guide for customers tuning response time. <a href=\"/portfolio/\">I write that engineering content</a>, explaining the configuration and workload behind the behavior."
+    },
+    {
+      "source": "content/posts/llm-token-budgets-cost-control.md",
+      "url": "/articles/llm-token-budgets-cost-control/",
+      "baseline_sha256": "0fbd31d4b93ef58642ede67ee11a8cf8a3cde5017d392eba4599bbf1913491e7",
+      "current_sha256": "6d54c125ca98735e0916d49b6a915e481047bdb43c396295dea612161e37fb6e",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 35,
+      "note": "Pricing documentation should help a developer estimate a conversation, including repeated input. [I write cost and usage guides](/contact/) that turn per-token rates into worked examples with explicit assumptions and a way to check the calculation.",
+      "rendered_note": "Pricing documentation should help a developer estimate a conversation, including repeated input. <a href=\"/contact/\">I write cost and usage guides</a> that turn per-token rates into worked examples with explicit assumptions and a way to check the calculation."
+    },
+    {
+      "source": "content/posts/local-wasm-vector-benchmarks.md",
+      "url": "/articles/local-wasm-vector-benchmarks/",
+      "baseline_sha256": "bbd8c02670d7d5d32219ea840fc7c4cad770eeff0ff5908f246ab4129581ab4a",
+      "current_sha256": "7e886e75ea868a8c6bb9ad7ced161b791719d6f9d2f6ee493d801390266c0cf7",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 26,
+      "note": "[My browser-tool tutorials](/portfolio/) cover the first download as well as the first query, so developers can judge startup costs before adopting your database in their application.",
+      "rendered_note": "<a href=\"/portfolio/\">My browser-tool tutorials</a> cover the first download as well as the first query, so developers can judge startup costs before adopting your database in their application."
+    },
+    {
+      "source": "content/posts/memory-for-voice-ai-agents.md",
+      "url": "/articles/memory-for-voice-ai-agents/",
+      "baseline_sha256": "1ce244ac8b675f1a79dd9f9beeb8c14e0bc9cc3d160fc8e091ce37884a60f68b",
+      "current_sha256": "c7488ce0df7ce12ed95841251fd572f4023f373418fcd8f875dc2edf28c9d93b",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "[Work with me on voice API education](/contact/) that follows an interrupted conversation through the emitted events and shows which remembered state the application should update.",
+      "rendered_note": "<a href=\"/contact/\">Work with me on voice API education</a> that follows an interrupted conversation through the emitted events and shows which remembered state the application should update."
+    },
+    {
+      "source": "content/posts/memory-serialization-between-sessions.md",
+      "url": "/articles/memory-serialization-between-sessions/",
+      "baseline_sha256": "8be1034a376ff95ff7eeb0580827679089cb622cd041a14fe8186fac0ddab662",
+      "current_sha256": "6e80ceb429d0cd6f72c90dbfad1f3865c6e01417443fe6843a8e66ab041308ec",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "[I write persistence guides](/portfolio/) around saved records and their restore procedure, including how developers recognize a record their current application version can no longer read.",
+      "rendered_note": "<a href=\"/portfolio/\">I write persistence guides</a> around saved records and their restore procedure, including how developers recognize a record their current application version can no longer read."
+    },
+    {
+      "source": "content/posts/mixture-of-experts-explained.md",
+      "url": "/articles/mixture-of-experts-explained/",
+      "baseline_sha256": "ab4f49e55f43bb0659269423568dab9d72dc25e012613badf9f848b467edd71a",
+      "current_sha256": "febfceb467189d81298ff6151a4cc9d29a3be16bc04a261e8182bb8a73aaf3a3",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "Explaining your model's architecture to potential users? [My technical writing](/portfolio/) connects active computation and storage requirements to the hardware choices a developer has to make.",
+      "rendered_note": "Explaining your model&#x27;s architecture to potential users? <a href=\"/portfolio/\">My technical writing</a> connects active computation and storage requirements to the hardware choices a developer has to make."
+    },
+    {
+      "source": "content/posts/model-context-protocol-explained.md",
+      "url": "/articles/model-context-protocol-explained/",
+      "baseline_sha256": "e8f5900e2a1a0d50530cda491ace76bd216eb5cbae761d0c01de2db23c4cd56f",
+      "current_sha256": "f6ed89c4981998dd04163eb1a1cbe7d2822b30a141b3c042078603377bb288e1",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 26,
+      "note": "I've worked with Firecrawl. [Let's write your MCP integration guide](/contact/), from connecting the server to a permitted tool call, with authentication explained where readers configure it.",
+      "rendered_note": "I&#x27;ve worked with Firecrawl. <a href=\"/contact/\">Let&#x27;s write your MCP integration guide</a>, from connecting the server to a permitted tool call, with authentication explained where readers configure it."
+    },
+    {
+      "source": "content/posts/production-ai-agent-errors.md",
+      "url": "/articles/production-ai-agent-errors/",
+      "baseline_sha256": "73fa8287bf9a34a449494cca897e3cffe1f6c105ba1d8acc1239144770824f80",
+      "current_sha256": "8c582bf6adf6949aeb565b33191722504ce0c2cffa31900b6f8c687576413e51",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 35,
+      "note": "Developers using your agent API need to know whether a failed request can be retried safely. I write [reference and recovery guides](/portfolio/) that connect errors to their next action, including when to stop and investigate.",
+      "rendered_note": "Developers using your agent API need to know whether a failed request can be retried safely. I write <a href=\"/portfolio/\">reference and recovery guides</a> that connect errors to their next action, including when to stop and investigate."
+    },
+    {
+      "source": "content/posts/rag-evaluation-metrics-what-actually-matters.md",
+      "url": "/articles/rag-evaluation-metrics-what-actually-matters/",
+      "baseline_sha256": "d51aebde80a2b9678891ab81684d8d4aa9789693c469ac7d97c6f574eed7d67b",
+      "current_sha256": "710ddffbdc602d55c8c2923b87fc1d35fb0268b2458e3f147522d16221a42727",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 23,
+      "note": "[Let's write examples for your evaluation tool](/contact/) that connect a failing score to the retrieval or generation step a developer should inspect next.",
+      "rendered_note": "<a href=\"/contact/\">Let&#x27;s write examples for your evaluation tool</a> that connect a failing score to the retrieval or generation step a developer should inspect next."
+    },
+    {
+      "source": "content/posts/rag-vs-memory.md",
+      "url": "/articles/rag-vs-memory/",
+      "baseline_sha256": "d02bdbf119c9ca7a435ddeff02298c16c9d0cc30618aaa1175912f1446e864ed",
+      "current_sha256": "f404b4957754a068b232ff339e71791bf193b8f8dc88f2b6250b5d4738f236e9",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 34,
+      "note": "If your product combines retrieval with memory, its documentation should distinguish source evidence from saved user state. [I help explain that boundary](/contact/) through a request walkthrough that shows when each is read and updated.",
+      "rendered_note": "If your product combines retrieval with memory, its documentation should distinguish source evidence from saved user state. <a href=\"/contact/\">I help explain that boundary</a> through a request walkthrough that shows when each is read and updated."
+    },
+    {
+      "source": "content/posts/reranking-in-rag-why-your-top-k-results-are-probably-wrong.md",
+      "url": "/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/",
+      "baseline_sha256": "551f26348023c74498b2892199ef3a07ab53b36d8329d83c2bf1b30ce8eaead5",
+      "current_sha256": "d7a3deaae25831b9266ea60b294e296ff272275b44f2e1ba9195d9a04bdbeeb2",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 31,
+      "note": "A retrieval product needs examples that explain why a relevant-looking result can still be useless. My [technical writing](/portfolio/) connects that engineering detail to the decisions developers make while evaluating your API.",
+      "rendered_note": "A retrieval product needs examples that explain why a relevant-looking result can still be useless. My <a href=\"/portfolio/\">technical writing</a> connects that engineering detail to the decisions developers make while evaluating your API."
+    },
+    {
+      "source": "content/posts/semantic-caching-rag-optimization.md",
+      "url": "/articles/semantic-caching-rag-optimization/",
+      "baseline_sha256": "6e9b3570c1d7936bce65d82216ea5ee29f79f593d76b3e904c98c94128fae2c6",
+      "current_sha256": "4f87332bed14985d6276063bf72d7c72e4f9a5534c32554669e1f13e38b7fe3d",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 23,
+      "note": "[I write caching-product guides](/portfolio/) with an invalidation example alongside the successful cache hit, helping customers understand when the stored answer stops being usable.",
+      "rendered_note": "<a href=\"/portfolio/\">I write caching-product guides</a> with an invalidation example alongside the successful cache hit, helping customers understand when the stored answer stops being usable."
+    },
+    {
+      "source": "content/posts/seo-for-technical-documentation.md",
+      "url": "/articles/seo-for-technical-documentation/",
+      "baseline_sha256": "2dda0caf680d8940db5b462dc731d7d4be9e16a98fe15bbdcb8a06797c90241b",
+      "current_sha256": "7c37dd79a94852d6140922d4100db0b5a1b68a0a41e0161a5df0d613e3d15a38",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 35,
+      "note": "Connect the questions developers search for to documentation that finishes their task. [My organic content strategy](/contact/) covers that path from search intent to the working example, with measurement tied to the pages doing the work.",
+      "rendered_note": "Connect the questions developers search for to documentation that finishes their task. <a href=\"/contact/\">My organic content strategy</a> covers that path from search intent to the working example, with measurement tied to the pages doing the work."
+    },
+    {
+      "source": "content/posts/shared-vs-isolated-memory-multi-agent.md",
+      "url": "/articles/shared-vs-isolated-memory-multi-agent/",
+      "baseline_sha256": "15b06085ea4f1420ce32c1658da2afa2befd68717e408187f962b9065cfaa1be",
+      "current_sha256": "e02e5089d6352819b3c02c09cef3f9b33b1c225a9b4bc3ebec4a6357852b4379",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 27,
+      "note": "Who gets to overwrite a shared record? [My framework documentation](/portfolio/) answers that through a multi-agent example, making write ownership visible before developers start coordinating their own agents.",
+      "rendered_note": "Who gets to overwrite a shared record? <a href=\"/portfolio/\">My framework documentation</a> answers that through a multi-agent example, making write ownership visible before developers start coordinating their own agents."
+    },
+    {
+      "source": "content/posts/short-term-memory-for-ai-agents.md",
+      "url": "/articles/short-term-memory-for-ai-agents/",
+      "baseline_sha256": "843ecdf54f8a2074f4582c880d1ccef8a3010f02394632633097955949b14cca",
+      "current_sha256": "9bf81d4a5b7a9c3d4f34d8f8ad0a1c9ffaf84e96e14f57483058ea94662e547a",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 26,
+      "note": "[Let's explain your agent's context handling](/contact/) with a conversation that outgrows its budget, showing what the next request receives after the application trims or summarizes it.",
+      "rendered_note": "<a href=\"/contact/\">Let&#x27;s explain your agent&#x27;s context handling</a> with a conversation that outgrows its budget, showing what the next request receives after the application trims or summarizes it."
+    },
+    {
+      "source": "content/posts/speculative-decoding-explained.md",
+      "url": "/articles/speculative-decoding-explained/",
+      "baseline_sha256": "8dad52e4500575141a1c5ba628bc4149a2fe23f1461557be9476cf1cefcd51a8",
+      "current_sha256": "ea346d1623892d3596710218bb02e78028254d0f6f9c023334d9fda30a8319c9",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 32,
+      "note": "Your faster-generation announcement can teach the draft-and-verification mechanism behind the result. [I write technical launch content](/portfolio/) with the workload conditions attached, giving developers a basis for judging whether it will help them.",
+      "rendered_note": "Your faster-generation announcement can teach the draft-and-verification mechanism behind the result. <a href=\"/portfolio/\">I write technical launch content</a> with the workload conditions attached, giving developers a basis for judging whether it will help them."
+    },
+    {
+      "source": "content/posts/state-of-ai-agent-memory-2026.md",
+      "url": "/articles/state-of-ai-agent-memory-2026/",
+      "baseline_sha256": "072023a77a118073a636ad954cfaac50afdde36cd0fe3f512b6478963d9dd247",
+      "current_sha256": "cc301c411fff18754c5a5a8d25cdbefd80ba6ff07737bd058406c022b94b60d9",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 23,
+      "note": "[My comparison writing](/portfolio/) helps memory products answer evaluation questions about state ownership and portability, including how a developer would move their records elsewhere.",
+      "rendered_note": "<a href=\"/portfolio/\">My comparison writing</a> helps memory products answer evaluation questions about state ownership and portability, including how a developer would move their records elsewhere."
+    },
+    {
+      "source": "content/posts/structured-outputs-llms-json-mode-function-calling.md",
+      "url": "/articles/structured-outputs-llms-json-mode-function-calling/",
+      "baseline_sha256": "8daa9e0dbe785f45c71fa068f225fb41fbcd6638780d1f5c0df003b0dbac1b06",
+      "current_sha256": "e30c3d0a9b2f4a31d66533b4ae01ebadc8ac09b453e1691ca52fc28adcb5d10a",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 32,
+      "note": "An output guarantee needs documentation for the refusal and validation failure, too. I write [AI API guides](/portfolio/) that distinguish supported constraints from application checks, with examples showing what the caller should handle.",
+      "rendered_note": "An output guarantee needs documentation for the refusal and validation failure, too. I write <a href=\"/portfolio/\">AI API guides</a> that distinguish supported constraints from application checks, with examples showing what the caller should handle."
+    },
+    {
+      "source": "content/posts/technical-documentation-best-practices-tested-real-developer-docs.md",
+      "url": "/articles/technical-documentation-best-practices-tested-real-developer-docs/",
+      "baseline_sha256": "5e10d2f65f85c93b79b21f5a4a9852f178e09d79c4ab363ffe5bca31d26c30bc",
+      "current_sha256": "352fd56bf6bd9a52388000a50cbce7fb129b152e33508f2e8d561d8c141ddd80",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 24,
+      "note": "[Bring me the integration customers need to finish](/contact/); I'll write the instructions with expected responses beside the commands and recovery steps beside the failures.",
+      "rendered_note": "<a href=\"/contact/\">Bring me the integration customers need to finish</a>; I&#x27;ll write the instructions with expected responses beside the commands and recovery steps beside the failures."
+    },
+    {
+      "source": "content/posts/technical-documentation-template.md",
+      "url": "/articles/technical-documentation-template/",
+      "baseline_sha256": "545594c36fce3c9eb7c529c4d251a640ac2004c20ea9d9751c348e9ece4cabab",
+      "current_sha256": "e59b9d8181c9a869425557fb455b5b35455dd66a8e8695443910921b57cab83a",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 36,
+      "note": "A template supplies the headings; your product supplies the behavior that belongs under them. [My documentation work](/portfolio/) turns that behavior into a quickstart and reference, with troubleshooting for the requests that do not return as expected.",
+      "rendered_note": "A template supplies the headings; your product supplies the behavior that belongs under them. <a href=\"/portfolio/\">My documentation work</a> turns that behavior into a quickstart and reference, with troubleshooting for the requests that do not return as expected."
+    },
+    {
+      "source": "content/posts/technical-writing-for-ai-products-the-new-rules.md",
+      "url": "/articles/technical-writing-for-ai-products-the-new-rules/",
+      "baseline_sha256": "20f04bf0c9605eb36e903712321c671241e00b33954121e07d7437107da59e00",
+      "current_sha256": "f64e723f18b01c9f01677f37728d5ab1ab27fa691eb1f42bf2dec2607e02469b",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 34,
+      "note": "Your AI product's docs need to explain what developers can depend on when outputs vary. [I write that documentation](/contact/), covering the supported output contract and evaluation examples readers can use in their own applications.",
+      "rendered_note": "Your AI product&#x27;s docs need to explain what developers can depend on when outputs vary. <a href=\"/contact/\">I write that documentation</a>, covering the supported output contract and evaluation examples readers can use in their own applications."
+    },
+    {
+      "source": "content/posts/technical-writing-for-engineers.md",
+      "url": "/articles/technical-writing-for-engineers/",
+      "baseline_sha256": "a10e697a0f7d1272a1062ea25b44f483868e08b5769de583142edeea42bb9fac",
+      "current_sha256": "3889be3a8a64df7b0aa0de10e9ceb9caba986c8dd10b4101e41cdbcf5ff47590",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 34,
+      "note": "Your engineers should be able to review product behavior without rewriting the whole draft. [My technical writing work](/portfolio/) turns their source material into instructions and brings back specific questions where the behavior needs confirmation.",
+      "rendered_note": "Your engineers should be able to review product behavior without rewriting the whole draft. <a href=\"/portfolio/\">My technical writing work</a> turns their source material into instructions and brings back specific questions where the behavior needs confirmation."
+    },
+    {
+      "source": "content/posts/the-agent-design-space.md",
+      "url": "/articles/the-agent-design-space/",
+      "baseline_sha256": "0ecd307f640c7546495fa1b3997bfcf2389f2b0407262bcb9d09f87b3114a430",
+      "current_sha256": "1e040f6beaed1201b0d315bd79dff710d0cff556c6d07aed4b651cf945592123",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "[I plan content for agent platforms](/contact/) around the execution patterns developers are choosing between, then write the tutorials that connect those choices to your SDK.",
+      "rendered_note": "<a href=\"/contact/\">I plan content for agent platforms</a> around the execution patterns developers are choosing between, then write the tutorials that connect those choices to your SDK."
+    },
+    {
+      "source": "content/posts/the-case-for-shorter-technical-documentation.md",
+      "url": "/articles/the-case-for-shorter-technical-documentation/",
+      "baseline_sha256": "edd90b06fe1aef84595aeb93f02d83acb2681495c82887ce19aea4f339b782e2",
+      "current_sha256": "154330d46a7cbce3dc3769d076dd668671269b414e2bccc9b4e9ca05a4002f04",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 35,
+      "note": "If the retry instruction is buried under background reading, shortening the page starts with moving the answer. [I edit technical documentation](/contact/) around reader decisions, preserving the conditions that make a concise instruction safe to follow.",
+      "rendered_note": "If the retry instruction is buried under background reading, shortening the page starts with moving the answer. <a href=\"/contact/\">I edit technical documentation</a> around reader decisions, preserving the conditions that make a concise instruction safe to follow."
+    },
+    {
+      "source": "content/posts/time-to-first-token-ttft.md",
+      "url": "/articles/time-to-first-token-ttft/",
+      "baseline_sha256": "f2660dc74837337dc73901a649e476173e374820d24203337692c31af42ecd96",
+      "current_sha256": "80c20c49588e88a3641fd9a89915b072adb6e94c51275d9253f9a0530b1b0267",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "[My performance explainers](/portfolio/) put the measurement boundary and test conditions beside the latency number, so developers can compare your result with what their application experiences.",
+      "rendered_note": "<a href=\"/portfolio/\">My performance explainers</a> put the measurement boundary and test conditions beside the latency number, so developers can compare your result with what their application experiences."
+    },
+    {
+      "source": "content/posts/types-of-technical-documentation.md",
+      "url": "/articles/types-of-technical-documentation/",
+      "baseline_sha256": "f8d2c386b025311e3042adc4347c0325cde6866d9f1a666041d55be4c9830757",
+      "current_sha256": "9471245b07ccdc61459b91f969b870ea3482b92263a3511ecafe04c022d33bbc",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 25,
+      "note": "[Work with me to plan your documentation](/contact/), giving reference pages and tutorials separate jobs while connecting them around the tasks your customers need to finish.",
+      "rendered_note": "<a href=\"/contact/\">Work with me to plan your documentation</a>, giving reference pages and tutorials separate jobs while connecting them around the tasks your customers need to finish."
+    },
+    {
+      "source": "content/posts/voice-ai-latency-gemini-benchmark.md",
+      "url": "/articles/voice-ai-latency-gemini-benchmark/",
+      "baseline_sha256": "242e39951fb883353790a0cc344ec9ba1bcc87d0318c69e3ac8e65b3b0d5cb86",
+      "current_sha256": "2ae1877dfbc9d5a1dc1ee081a008ba6f42713656a5447dbd7b9822405894f150",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 36,
+      "note": "The latency number on a voice API landing page needs a tutorial that shows what it measures. I write [developer education](/portfolio/) that explains the request path, so customers can judge what to expect in their application.",
+      "rendered_note": "The latency number on a voice API landing page needs a tutorial that shows what it measures. I write <a href=\"/portfolio/\">developer education</a> that explains the request path, so customers can judge what to expect in their application."
+    },
+    {
+      "source": "content/posts/what-is-technical-documentation-and-what-should-it-include.md",
+      "url": "/articles/what-is-technical-documentation-and-what-should-it-include/",
+      "baseline_sha256": "47514ec4523e654dee81f9a375e43e5b082cfeb6f0080a83e148f56e27ab8997",
+      "current_sha256": "c92b9f84f6c57ea4ea14cb05db1f2668094a643330d29b27e654b44695bcd301",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 33,
+      "note": "Launching a developer product? [Work with me on its documentation](/contact/), from the prerequisites for a first request to the reference that explains the response, so a new customer has a usable starting path.",
+      "rendered_note": "Launching a developer product? <a href=\"/contact/\">Work with me on its documentation</a>, from the prerequisites for a first request to the reference that explains the response, so a new customer has a usable starting path."
+    },
+    {
+      "source": "content/posts/why-coding-agents-lose-their-memory.md",
+      "url": "/articles/why-coding-agents-lose-their-memory/",
+      "baseline_sha256": "81d1571544662e23809459bd5cad8204b907c412ef7492a427a91d7e64b7459a",
+      "current_sha256": "f5210c61f7c273267cf1a5ddf8bfaa30b16afd7669ad973014f091d39ba094c8",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 31,
+      "note": "A developer searching for a forgetful coding agent may need the integration your company sells. [I plan and write content](/contact/) that answers that problem and takes them through a verifiable setup.",
+      "rendered_note": "A developer searching for a forgetful coding agent may need the integration your company sells. <a href=\"/contact/\">I plan and write content</a> that answers that problem and takes them through a verifiable setup."
+    },
+    {
+      "source": "content/posts/why-devtools-startups-lose-deals-over-bad-docs.md",
+      "url": "/articles/why-devtools-startups-lose-deals-over-bad-docs/",
+      "baseline_sha256": "03e1c07b6c66f914899a8841b473d8f07d55938dfc434b8bb9828674e3c950fb",
+      "current_sha256": "d93cdbafb009c0c8d9079aeb9b8ecb8aebfac481629d42f8462d6f6b6e35874f",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 36,
+      "note": "Make the evaluation path usable before sending more developers into it. [My content strategy and documentation work](/contact/) connects the use case that brought them in to the setup and limits they need to assess your product.",
+      "rendered_note": "Make the evaluation path usable before sending more developers into it. <a href=\"/contact/\">My content strategy and documentation work</a> connects the use case that brought them in to the setup and limits they need to assess your product."
+    },
+    {
+      "source": "content/posts/writing-release-notes-that-developers-trust.md",
+      "url": "/articles/writing-release-notes-that-developers-trust/",
+      "baseline_sha256": "3f990b7aea0b5ead70d31318e153f76819e2bbc88f5dabf905e8a27d4f07dc27",
+      "current_sha256": "e0ceca76da0e37b51f72d1b7e3ac14b137746930871d74cdeb65e0c4c1d9fcd6",
+      "body_and_old_metadata_unchanged": true,
+      "word_count": 31,
+      "note": "A release announcement gets attention; the upgrade instructions have to get someone onto the new version. [Work with me](/contact/) on release content that explains changed behavior and the migration it requires.",
+      "rendered_note": "A release announcement gets attention; the upgrade instructions have to get someone onto the new version. <a href=\"/contact/\">Work with me</a> on release content that explains changed behavior and the migration it requires."
+    }
+  ]
+}

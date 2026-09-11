@@ -5,6 +5,7 @@ description: Context windows are expanding to millions of tokens. Here is why th
   middle of your context still gets ignored, what long context actually costs, and
   how to build production systems that use these massive windows effectively.
 status: published
+work_note: "[Let's document your model's context budget](/contact/) through an example request that accounts for the input and space reserved for the response, rather than stopping at the advertised limit."
 tags:
 - ai
 - llm

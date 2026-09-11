@@ -5,6 +5,7 @@ description: Write release notes that let developers assess upgrade risk, unders
   product impact, and migrate without surprises.
 slug: writing-release-notes-that-developers-trust
 status: published
+work_note: "A release announcement gets attention; the upgrade instructions have to get someone onto the new version. [Work with me](/contact/) on release content that explains changed behavior and the migration it requires."
 tags:
 - technical-writing
 - developer-experience

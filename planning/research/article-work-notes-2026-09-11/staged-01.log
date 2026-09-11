@@ -1,0 +1,799 @@
+test_location_is_part_of_the_cache_identity (test_ai_overview_citations.CacheIdentityTests) ... ok
+test_slug_collisions_do_not_share_a_cache_file (test_ai_overview_citations.CacheIdentityTests) ... ok
+test_approved_fetch_is_cached_and_logged_once (test_ai_overview_citations.CliSpendGateTests) ... ok
+test_cached_result_needs_no_spend_decision (test_ai_overview_citations.CliSpendGateTests) ... ok
+test_dry_run_with_credentials_never_fetches (test_ai_overview_citations.CliSpendGateTests) ... ok
+test_missing_credentials_costs_only_uncached_keywords_and_never_fetches (test_ai_overview_citations.CliSpendGateTests) ... ok
+test_strict_mode_fails_an_empty_api_response (test_ai_overview_citations.CliSpendGateTests) ... ok
+test_uncached_request_without_decision_is_refused_before_fetch (test_ai_overview_citations.CliSpendGateTests) ... ok
+test_different_paths_on_one_domain_are_not_page_overlap (test_ai_overview_citations.PageIdentityTests) ... ok
+test_invalid_and_out_of_range_ranks_are_not_top_ten (test_ai_overview_citations.PageIdentityTests) ... ok
+test_report_names_page_and_domain_overlap_separately (test_ai_overview_citations.PageIdentityTests) ... ok
+test_scheme_www_query_fragment_and_trailing_slash_do_not_split_a_page (test_ai_overview_citations.PageIdentityTests) ... ok
+test_the_same_normalized_page_is_overlap (test_ai_overview_citations.PageIdentityTests) ... ok
+test_no_overview_is_not_confused_with_an_empty_overview (test_ai_overview_citations.ParseTests) ... ok
+test_top_level_and_nested_references_are_deduplicated_by_url (test_ai_overview_citations.ParseTests) ... ok
+test_bad_page_reaches_a_low_band (test_aio_checker.DiscriminationTests) ... ok
+test_good_page_passes_more_than_bad_page (test_aio_checker.DiscriminationTests) ... ok
+test_good_page_reaches_a_high_band (test_aio_checker.DiscriminationTests) ... ok
+test_deterministic (test_aio_checker.EngineContractTests) ... ok
+test_empty_input_returns_no_checks (test_aio_checker.EngineContractTests) ... ok
+test_engine_exists_and_is_pure (test_aio_checker.EngineContractTests) ... ok
+test_every_basis_carries_a_date (test_aio_checker.EngineContractTests)
+An undated basis is not defensible, so each one must cite a dated source. ... ok
+test_every_check_declares_a_basis_and_confidence (test_aio_checker.EngineContractTests) ... ok
+test_no_weighted_score_is_exposed (test_aio_checker.EngineContractTests)
+Ninad's constraint: expose the method, never a formula implying precision. ... ok
+test_only_documented_checks_are_snippet_and_schema (test_aio_checker.EngineContractTests) ... ok
+test_html_entities_are_decoded (test_aio_checker.HtmlModeTests) ... ok
+test_html_headings_and_paragraphs_are_extracted (test_aio_checker.HtmlModeTests) ... ok
+test_markdown_input_skips_html_only_checks (test_aio_checker.HtmlModeTests) ... ok
+test_no_robots_tag_passes (test_aio_checker.HtmlModeTests) ... ok
+test_noindex_is_flagged (test_aio_checker.HtmlModeTests) ... ok
+test_nosnippet_is_flagged_as_documented (test_aio_checker.HtmlModeTests) ... ok
+test_positive_max_snippet_is_flagged (test_aio_checker.HtmlModeTests) ... ok
+test_schema_is_never_an_attention_status (test_aio_checker.HtmlModeTests)
+Google states schema is not required for generative AI features. ... ok
+test_schema_type_array_is_parsed (test_aio_checker.HtmlModeTests) ... ok
+test_script_and_style_content_is_not_treated_as_prose (test_aio_checker.HtmlModeTests) ... ok
+test_unrestricted_max_snippet_passes (test_aio_checker.HtmlModeTests) ... ok
+test_x_robots_tag_header_alone_blocks_snippets (test_aio_checker.HtmlModeTests)
+A page can be excluded by the header with nothing in its markup. ... ok
+test_x_robots_tag_without_directives_still_passes (test_aio_checker.HtmlModeTests) ... ok
+test_assertive_heading_passes (test_aio_checker.IndividualCheckTests) ... ok
+test_dangling_number_is_flagged (test_aio_checker.IndividualCheckTests)
+A number trailed only by punctuation cannot be interpreted once lifted. ... ok
+test_dated_page_without_time_relative_claims_passes (test_aio_checker.IndividualCheckTests) ... ok
+test_definition_sentence_is_detected (test_aio_checker.IndividualCheckTests) ... ok
+test_direct_opening_passes (test_aio_checker.IndividualCheckTests) ... ok
+test_limits_section_passes (test_aio_checker.IndividualCheckTests) ... ok
+test_missing_definition_is_flagged (test_aio_checker.IndividualCheckTests) ... ok
+test_named_subject_section_opening_passes (test_aio_checker.IndividualCheckTests) ... ok
+test_no_limits_is_flagged (test_aio_checker.IndividualCheckTests) ... ok
+test_no_numbers_skips_the_numeric_checks (test_aio_checker.IndividualCheckTests) ... ok
+test_no_subheadings_is_flagged (test_aio_checker.IndividualCheckTests) ... ok
+test_number_followed_by_the_noun_it_counts_passes (test_aio_checker.IndividualCheckTests)
+"47 problems" names its own unit, so it must not be flagged. ... ok
+test_numbers_with_units_pass (test_aio_checker.IndividualCheckTests) ... ok
+test_percentage_passes (test_aio_checker.IndividualCheckTests) ... ok
+test_preamble_opening_is_flagged (test_aio_checker.IndividualCheckTests) ... ok
+test_pronoun_section_opening_is_flagged (test_aio_checker.IndividualCheckTests) ... ok
+test_question_heading_passes (test_aio_checker.IndividualCheckTests) ... ok
+test_time_relative_claim_without_a_date_is_flagged (test_aio_checker.IndividualCheckTests) ... ok
+test_topic_label_headings_are_flagged (test_aio_checker.IndividualCheckTests) ... ok
+test_undated_page_is_flagged (test_aio_checker.IndividualCheckTests) ... ok
+test_checks_are_ordered_with_the_hard_requirement_first (test_aio_checker.RealPageTests) ... ok
+test_fenced_code_is_not_parsed_as_headings (test_aio_checker.RealPageTests) ... ok
+test_json_ld_in_head_is_still_found_when_prose_comes_from_main (test_aio_checker.RealPageTests) ... ok
+test_navigation_and_footer_are_not_analysed_as_prose (test_aio_checker.RealPageTests)
+Regression: a footer "Latest posts" list registered as an undated ... ok
+test_preamble_in_navigation_does_not_fail_the_opening_check (test_aio_checker.RealPageTests) ... ok
+test_robots_meta_in_head_is_still_found (test_aio_checker.RealPageTests) ... ok
+test_published_notes_are_present_unique_and_short (test_article_work_notes.PublishedWorkNoteTests) ... ok
+test_absent_note_is_optional_for_legacy_content (test_article_work_notes.WorkNoteRenderingTests) ... ok
+test_multiline_and_nonstrings_are_rejected (test_article_work_notes.WorkNoteRenderingTests) ... ok
+test_one_internal_link_renders_inline (test_article_work_notes.WorkNoteRenderingTests) ... ok
+test_plain_text_and_link_label_are_escaped (test_article_work_notes.WorkNoteRenderingTests) ... ok
+test_template_places_note_before_body_without_changing_first_paragraph (test_article_work_notes.WorkNoteRenderingTests) ... ok
+test_unapproved_destinations_and_multiple_links_are_rejected (test_article_work_notes.WorkNoteRenderingTests) ... ok
+test_a_nonexistent_path_does_not_crash (test_audit_claims.AuditClaimsContractTests) ... ok
+test_count_line_is_machine_readable (test_audit_claims.AuditClaimsContractTests) ... ok
+test_empty_paths_means_no_posts (test_audit_claims.AuditClaimsContractTests) ... ok
+test_first_person_judgment_is_not_flagged (test_audit_claims.AuditClaimsContractTests) ... ok
+test_scanner_reports_candidates_not_verdicts (test_audit_claims.AuditClaimsContractTests)
+The wording is load-bearing: a hit is for a reviewer to classify. ... ok
+test_a_duration_about_something_else_is_not_a_claim (test_audit_claims.ExperienceClaimTests)
+The distinction that keeps the detector usable. ... ok
+test_a_duration_with_a_first_person_marker_is_a_claim (test_audit_claims.ExperienceClaimTests) ... ok
+test_duration_plus_taught_me_is_a_claim (test_audit_claims.ExperienceClaimTests) ... ok
+test_first_person_duration_without_of_is_a_claim (test_audit_claims.ExperienceClaimTests) ... ok
+test_have_benchmarked_is_a_claim_without_a_number (test_audit_claims.ExperienceClaimTests)
+A claimed experiment is falsifiable even when its result is qualitative. ... ok
+test_have_debugged_is_a_claim (test_audit_claims.ExperienceClaimTests) ... ok
+test_have_watched_and_examined_are_past_evidence_claims (test_audit_claims.ExperienceClaimTests) ... ok
+test_in_my_experience_is_a_claim (test_audit_claims.ExperienceClaimTests) ... ok
+test_indirect_experience_phrasings_are_claims (test_audit_claims.ExperienceClaimTests) ... ok
+test_possessive_experience_is_a_claim (test_audit_claims.ExperienceClaimTests) ... ok
+test_stated_judgment_is_still_not_flagged (test_audit_claims.ExperienceClaimTests)
+my approach / my focus are positions, not events. ... ok
+test_a_claim_that_merely_mentions_a_link_is_not_suppressed (test_audit_claims.NavigationSuppressionTests)
+A sentence using a link as proof must still be flagged. ... ok
+test_a_real_claim_in_prose_is_not_navigation (test_audit_claims.NavigationSuppressionTests) ... ok
+test_faq_questions_are_navigation (test_audit_claims.NavigationSuppressionTests) ... ok
+test_headings_are_navigation (test_audit_claims.NavigationSuppressionTests) ... ok
+test_reading_list_bullet_is_navigation (test_audit_claims.NavigationSuppressionTests) ... ok
+test_a_claim_beside_inline_code_still_counts (test_audit_claims.ReviewerIdentifiedRefinementTests)
+Stripping code spans must not smuggle the surrounding claim out with them. ... ok
+test_bold_faq_question_is_suppressed (test_audit_claims.ReviewerIdentifiedRefinementTests) ... ok
+test_inline_code_is_quoted_not_asserted (test_audit_claims.ReviewerIdentifiedRefinementTests) ... ok
+test_real_claims_survive_both_refinements (test_audit_claims.ReviewerIdentifiedRefinementTests) ... ok
+test_the_faq_answer_is_still_scanned (test_audit_claims.ReviewerIdentifiedRefinementTests) ... ok
+test_latency_range_is_a_candidate (test_audit_claims.UnsupportedNumericResultTests) ... ok
+test_ordinary_architecture_number_is_not_promoted (test_audit_claims.UnsupportedNumericResultTests) ... ok
+test_unattributed_score_change_is_a_candidate (test_audit_claims.UnsupportedNumericResultTests) ... ok
+test_vendor_price_is_a_candidate (test_audit_claims.UnsupportedNumericResultTests) ... ok
+test_h1_is_ignored_because_the_template_owns_it (test_audit_headings.HeadingParsingTests) ... ok
+test_headings_inside_code_fences_are_not_document_headings (test_audit_headings.HeadingParsingTests)
+A `## ` in a shell or YAML sample is not structure. ... ok
+test_prose_is_attributed_to_the_heading_above_it (test_audit_headings.HeadingParsingTests) ... ok
+test_a_draft_is_not_audited (test_audit_headings.RuleDetectionTests) ... ok
+test_a_heading_over_a_short_paragraph_is_flagged (test_audit_headings.RuleDetectionTests) ... ok
+test_a_nested_document_is_not_flat (test_audit_headings.RuleDetectionTests) ... ok
+test_all_h2s_is_flat (test_audit_headings.RuleDetectionTests) ... ok
+test_one_h3_under_an_h2_is_flagged (test_audit_headings.RuleDetectionTests) ... ok
+test_skipping_a_level_is_flagged (test_audit_headings.RuleDetectionTests) ... ok
+test_two_h3s_under_an_h2_is_not_flagged (test_audit_headings.RuleDetectionTests) ... ok
+test_content_image_optimization_preserves_explicit_loading (test_build.BuildHelperTests) ... ok
+test_content_images_get_lazy_loading_and_intrinsic_dimensions (test_build.BuildHelperTests) ... ok
+test_extract_faqs_supports_heading_and_bold_questions (test_build.BuildHelperTests) ... ok
+test_format_date_iso_accepts_dates_and_datetimes (test_build.BuildHelperTests) ... ok
+test_reading_time_has_one_minute_minimum (test_build.BuildHelperTests) ... ok
+test_slugify_normalizes_punctuation_and_spacing (test_build.BuildHelperTests) ... ok
+test_sort_key_breaks_same_date_ties_by_slug (test_build.BuildHelperTests) ... ok
+test_sort_key_falls_back_for_invalid_dates (test_build.BuildHelperTests) ... ok
+test_category_loader_assigns_each_post_once_and_uses_explicit_category (test_build.CategoryArchiveTests) ... ok
+test_empty_category_routes_are_only_rendered_when_explicitly_preserved (test_build.CategoryArchiveTests) ... ok
+test_preserved_empty_category_stays_out_of_sitemap (test_build.CategoryArchiveTests) ... ok
+test_sitemap_includes_category_archives (test_build.CategoryArchiveTests) ... ok
+test_sitemap_omits_a_category_with_no_posts (test_build.CategoryArchiveTests)
+An empty category renders no page, so listing it would be a soft 404. ... ok
+test_article_visual_styles_stay_out_of_global_css (test_build.DesignSystemTests) ... ok
+test_fixed_type_sizes_use_tokens (test_build.DesignSystemTests) ... ok
+test_flowchart_svgs_include_dark_theme_and_accessible_titles (test_build.DesignSystemTests) ... ok
+test_handwritten_css_uses_color_tokens (test_build.DesignSystemTests) ... ok
+test_latest_article_uses_responsive_svg_flowchart_instead_of_raster (test_build.DesignSystemTests) ... ok
+test_both_llms_txt_tools_are_in_the_sitemap (test_build.SitemapTests)
+Neither tool may fall out of the sitemap: each is a separate search intent. ... ok
+test_static_tool_page_does_not_get_build_date_as_lastmod (test_build.SitemapTests) ... ok
+test_ai_crawler_checker_is_wired_everywhere (test_build.ToolDiscoverabilityTests) ... ok
+test_ai_overviews_checker_is_wired_everywhere (test_build.ToolDiscoverabilityTests)
+Primary tool target: "ai overviews checker", 700/mo, KD 0, no AI ... ok
+test_both_tools_declare_software_application_schema (test_build.ToolDiscoverabilityTests) ... ok
+test_checker_declares_software_application_schema (test_build.ToolDiscoverabilityTests) ... ok
+test_checker_never_promises_ai_overview_placement (test_build.ToolDiscoverabilityTests)
+Google states there are no special optimisations for AI Overviews, so ... ok
+test_checker_paste_path_never_transmits_input (test_build.ToolDiscoverabilityTests) ... ok
+test_checker_reuses_linter_css_and_adds_none (test_build.ToolDiscoverabilityTests) ... ok
+test_crawler_checker_declares_its_cluster (test_build.ToolDiscoverabilityTests) ... ok
+test_crawler_checker_declares_software_application_schema (test_build.ToolDiscoverabilityTests) ... ok
+test_crawler_checker_paste_path_never_transmits_input (test_build.ToolDiscoverabilityTests) ... ok
+test_crawler_checker_states_the_edge_blocking_limit (test_build.ToolDiscoverabilityTests)
+It must never imply robots.txt is enforcement. ... ok
+test_footer_reaches_both_llms_txt_tools_through_the_tools_index (test_build.ToolDiscoverabilityTests)
+The footer links /tools/, not five tools. ... ok
+test_footer_reaches_the_glossary (test_build.ToolDiscoverabilityTests)
+25 term pages, 24 of them indexed, shipped completely orphaned. ... ok
+test_generator_no_longer_claims_it_sends_nothing_to_a_server (test_build.ToolDiscoverabilityTests)
+It POSTs the domain and discovered URLs to /api/discover-site, so the ... ok
+test_no_template_hardcodes_the_label_slash_prefix (test_build.ToolDiscoverabilityTests)
+.label::before already emits "//", so a hardcoded one renders "// //". ... ok
+test_no_tool_page_adds_inline_css (test_build.ToolDiscoverabilityTests)
+Standing order 4: no new CSS, ever. ... ok
+test_paste_path_never_transmits_input (test_build.ToolDiscoverabilityTests)
+Privacy contract: only the domain lookup may touch the network. ... ok
+test_projects_yaml_lists_both_llms_txt_tools (test_build.ToolDiscoverabilityTests) ... ok
+test_site_llms_txt_lists_every_tool (test_build.ToolDiscoverabilityTests) ... ok
+test_tools_cross_reference_each_other_in_schema (test_build.ToolDiscoverabilityTests) ... ok
+test_tools_index_lists_every_built_tool (test_build.ToolDiscoverabilityTests)
+The inventory in config.toml must match the tools the build actually renders. ... ok
+test_validator_reuses_linter_css_and_adds_none (test_build.ToolDiscoverabilityTests) ... ok
+test_accepts_another_post_linking_to_the_target_article (test_check_link_retrofit.LinkRetrofitGateTests) ... ok
+test_does_not_count_the_target_post_linking_to_itself (test_check_link_retrofit.LinkRetrofitGateTests) ... ok
+test_rejects_a_target_without_an_inbound_post_link (test_check_link_retrofit.LinkRetrofitGateTests) ... ok
+test_declared_subcluster_may_not_contradict_queue (test_content_brief.ContentBriefGuardTests) ... ok
+test_duplicate_brief_refuses (test_content_brief.ContentBriefGuardTests) ... ok
+test_fixed_field_mismatch_refuses (test_content_brief.ContentBriefGuardTests) ... ok
+test_matching_brief_passes_when_optional_subcluster_is_absent (test_content_brief.ContentBriefGuardTests) ... ok
+test_missing_brief_refuses (test_content_brief.ContentBriefGuardTests) ... ok
+test_queue_order_must_be_unique (test_content_brief.ContentBriefGuardTests) ... ok
+test_wrapped_cluster_and_matching_subcluster_pass (test_content_brief.ContentBriefGuardTests) ... ok
+test_a_shipped_commit_wins_even_before_the_slot (test_daily_cycle.TestPublishDeadline) ... ok
+test_missing_publish_after_slot_is_an_alarm (test_daily_cycle.TestPublishDeadline) ... ok
+test_missing_publish_before_slot_is_not_due_not_an_alarm (test_daily_cycle.TestPublishDeadline) ... ok
+test_naive_datetime_is_refused (test_daily_cycle.TestPublishDeadline) ... ok
+test_lag_is_none_or_a_non_negative_int (test_deploy_check.DeployLagTests)
+Runs against the real repo, so it asserts the shape rather than a value. ... ok
+test_rendering_paths_are_the_ones_that_matter (test_deploy_check.DeployLagTests)
+A guard on intent: docs and planning must not start the deploy clock. ... ok
+test_grace_window_is_a_named_constant (test_deploy_check.DeployLineTests) ... ok
+test_mismatch_inside_grace_window_is_waiting_not_alarm (test_deploy_check.DeployLineTests) ... ok
+test_mismatch_past_grace_window_is_an_alarm (test_deploy_check.DeployLineTests) ... ok
+test_no_problems_reads_as_live (test_deploy_check.DeployLineTests) ... ok
+test_unknown_lag_is_reported_not_hidden (test_deploy_check.DeployLineTests) ... ok
+test_build_precedes_every_check_that_reads_generated_output (test_deploy_check.PublishGateOrderTests) ... ok
+test_external_task_without_internal_context_is_external (test_documentation_placement_audit.DocumentationPlacementAuditTests) ... ok
+test_missing_governance_fields_fail_validation (test_documentation_placement_audit.DocumentationPlacementAuditTests) ... ok
+test_sensitive_internal_task_stays_internal (test_documentation_placement_audit.DocumentationPlacementAuditTests) ... ok
+test_shared_subject_with_private_context_is_split (test_documentation_placement_audit.DocumentationPlacementAuditTests) ... ok
+test_unowned_task_is_flagged_for_review (test_documentation_placement_audit.DocumentationPlacementAuditTests) ... ok
+test_cli_writes_svg_png_and_geometry_receipt (test_flowchart_generator.FlowchartGeneratorTests) ... ok
+test_connectors_route_around_unrelated_nodes (test_flowchart_generator.FlowchartGeneratorTests) ... ok
+test_each_connector_starts_and_ends_on_the_expected_box_boundary (test_flowchart_generator.FlowchartGeneratorTests) ... ok
+test_layout_fits_the_real_prose_slot_at_desktop_and_mobile (test_flowchart_generator.FlowchartGeneratorTests) ... ok
+test_layout_has_no_box_overlap_or_clipping (test_flowchart_generator.FlowchartGeneratorTests) ... ok
+test_palette_is_derived_from_the_light_site_tokens (test_flowchart_generator.FlowchartGeneratorTests) ... ok
+test_skipped_layer_is_rejected_before_it_can_create_an_ambiguous_route (test_flowchart_generator.FlowchartGeneratorTests) ... ok
+test_svg_uses_only_the_derived_site_palette_and_is_deterministic (test_flowchart_generator.FlowchartGeneratorTests) ... ok
+test_every_slug_is_unique (test_glossary_integrity.GlossaryIntegrityTests) ... ok
+test_every_term_has_a_real_definition (test_glossary_integrity.GlossaryIntegrityTests)
+A published term must not ship a placeholder. ... ok
+test_glossary_has_terms (test_glossary_integrity.GlossaryIntegrityTests) ... ok
+test_related_terms_all_resolve (test_glossary_integrity.GlossaryIntegrityTests) ... ok
+test_a_large_gap_on_a_real_sample_is_called_a_difference (test_gsc_attribution.TestAgedVerdict) ... ok
+test_a_large_gap_on_a_tiny_sample_is_still_indistinguishable (test_gsc_attribution.TestAgedVerdict) ... ok
+test_a_two_day_gap_on_one_tool_is_called_indistinguishable (test_gsc_attribution.TestAgedVerdict) ... ok
+test_no_aged_tool_says_so_rather_than_concluding (test_gsc_attribution.TestAgedVerdict) ... ok
+test_the_sample_size_caveat_is_always_present (test_gsc_attribution.TestAgedVerdict) ... ok
+test_fetch_rows_paginates_past_the_api_row_limit (test_gsc_attribution.TestCompletePull) ... ok
+test_new_date_preserves_nested_headings (test_gsc_attribution.TestDatedReportIsIdempotent) ... ok
+test_preexisting_same_date_duplicates_collapse_to_one (test_gsc_attribution.TestDatedReportIsIdempotent) ... ok
+test_same_date_is_replaced_not_appended (test_gsc_attribution.TestDatedReportIsIdempotent) ... ok
+test_a_real_answer_is_a_day_count (test_gsc_attribution.TestDescribeThreeStates) ... ok
+test_day_zero_renders_as_a_day_count_not_as_absence (test_gsc_attribution.TestDescribeThreeStates) ... ok
+test_no_state_ever_renders_as_a_bare_zero (test_gsc_attribution.TestDescribeThreeStates) ... ok
+test_observable_but_silent_is_a_measurement (test_gsc_attribution.TestDescribeThreeStates) ... ok
+test_younger_than_the_lag_is_no_data_yet (test_gsc_attribution.TestDescribeThreeStates) ... ok
+test_zero_observable_days_is_still_a_measurement_not_no_data (test_gsc_attribution.TestDescribeThreeStates) ... ok
+test_a_silent_series_returns_none_not_zero (test_gsc_attribution.TestFirstDay) ... ok
+test_an_empty_series_returns_none (test_gsc_attribution.TestFirstDay) ... ok
+test_clicks_and_impressions_are_tracked_separately (test_gsc_attribution.TestFirstDay) ... ok
+test_days_are_counted_from_the_start_date (test_gsc_attribution.TestFirstDay) ... ok
+test_impressions_predating_the_start_give_a_negative_day (test_gsc_attribution.TestFirstDay)
+A recovered URL earns before its current source file exists; that is detectable. ... ok
+test_a_real_two_sided_comparison_refuses_to_call_it_a_trend (test_gsc_attribution.TestNewPageVerdict) ... ok
+test_articles_ahead_is_not_read_as_the_bet_being_wrong (test_gsc_attribution.TestNewPageVerdict) ... ok
+test_nothing_observable_is_not_answerable_yet (test_gsc_attribution.TestNewPageVerdict) ... ok
+test_observable_but_silent_is_called_a_measurement (test_gsc_attribution.TestNewPageVerdict) ... ok
+test_every_tool_template_maps_to_a_cluster_four_url (test_gsc_attribution.TestToolsAreAllTracked) ... ok
+test_the_tool_set_is_not_silently_empty (test_gsc_attribution.TestToolsAreAllTracked) ... ok
+test_an_empty_series_has_no_weeks (test_gsc_attribution.TestTrajectory) ... ok
+test_position_is_impression_weighted_per_week (test_gsc_attribution.TestTrajectory) ... ok
+test_weeks_are_separated_and_ordered (test_gsc_attribution.TestTrajectory) ... ok
+test_build_exposes_exact_floor_ceiling_and_coverage (test_gsc_attribution.TestWithholdingBounds) ... ok
+test_render_calls_the_ceiling_an_error_bound_not_an_estimate (test_gsc_attribution.TestWithholdingBounds) ... ok
+test_a_higher_share_moves_rows_into_cluster_three (test_gsc_band.TestAllocation) ... ok
+test_cluster_three_gets_its_share (test_gsc_band.TestAllocation) ... ok
+test_no_cluster_is_allocated_a_negative_row_count (test_gsc_band.TestAllocation) ... ok
+test_rows_are_fully_allocated (test_gsc_band.TestAllocation) ... ok
+test_a_fall_is_called_down (test_gsc_band.TestDirectionIsReadOffTheNumbers) ... ok
+test_a_rise_is_called_up_not_down (test_gsc_band.TestDirectionIsReadOffTheNumbers)
+The first run printed "Down" above a band that had risen. ... ok
+test_a_small_move_is_not_called_a_direction (test_gsc_band.TestDirectionIsReadOffTheNumbers) ... ok
+test_share_and_loss_are_three_point_ranges (test_gsc_band.TestHaircutIsARange) ... ok
+test_the_old_point_estimate_sits_inside_the_new_range (test_gsc_band.TestHaircutIsARange)
+49.2% x 35% was the old haircut; it must still be representable. ... ok
+test_the_range_is_ordered_low_to_high (test_gsc_band.TestHaircutIsARange) ... ok
+test_legacy_is_the_measured_human_non_brand_rate (test_gsc_band.TestLegacyTermUnits)
+The old band added sitewide clicks including brand to a human non-brand band. ... ok
+test_tools_contribute_no_click_rows (test_gsc_band.TestLegacyTermUnits) ... ok
+test_fewer_rows_buy_fewer_mature_equivalents (test_gsc_band.TestMaturity) ... ok
+test_maturity_is_well_under_the_row_count (test_gsc_band.TestMaturity)
+Publishing 60 pages in 90 days does not give 60 ranked pages on day 90. ... ok
+test_deeper_slices_are_strictly_smaller (test_gsc_band.TestSelectionSlices) ... ok
+test_perfect_selection_is_never_the_default (test_gsc_band.TestSelectionSlices)
+The regression guard for the band reporting UP on a worsened premise. ... ok
+test_rank_one_takes_the_next_slice_down (test_gsc_band.TestSelectionSlices) ... ok
+test_rank_zero_takes_the_best_keywords (test_gsc_band.TestSelectionSlices) ... ok
+test_running_off_the_end_of_the_pool_is_reported (test_gsc_band.TestSelectionSlices) ... ok
+test_an_unknown_section_reads_as_foreign_by_design (test_gsc_collapse_forensics.TestForeignDetection)
+The allowlist exists to catch the next injection, whose paths are unknown. ... ok
+test_every_injected_path_is_flagged (test_gsc_collapse_forensics.TestForeignDetection) ... ok
+test_no_legitimate_path_is_flagged (test_gsc_collapse_forensics.TestForeignDetection) ... ok
+test_products_and_productivity_are_not_confused (test_gsc_collapse_forensics.TestForeignDetection) ... ok
+test_the_four_original_false_positives_stay_fixed (test_gsc_collapse_forensics.TestForeignDetection)
+Regression guard: these cost accuracy in the first pass of the analysis. ... ok
+test_a_flat_series_reports_no_fall (test_gsc_collapse_forensics.TestLargestStep) ... ok
+test_a_rising_series_reports_no_fall (test_gsc_collapse_forensics.TestLargestStep) ... ok
+test_absolute_loss_finds_the_actual_event (test_gsc_collapse_forensics.TestLargestStep) ... ok
+test_proportion_picks_a_different_and_less_useful_week (test_gsc_collapse_forensics.TestLargestStep) ... ok
+test_the_two_measures_disagree_here (test_gsc_collapse_forensics.TestLargestStep) ... ok
+test_tiny_weeks_are_excluded_from_the_proportional_measure (test_gsc_collapse_forensics.TestLargestStep)
+A fall from 8 to 0 is 100% and means nothing. ... ok
+test_bare_word_is_not_a_post (test_gsc_collapse_forensics.TestPostSlug) ... ok
+test_hyphenated_single_segment_is_a_post (test_gsc_collapse_forensics.TestPostSlug) ... ok
+test_nested_path_is_not_a_root_post (test_gsc_collapse_forensics.TestPostSlug) ... ok
+test_purely_numeric_segment_is_not_a_post (test_gsc_collapse_forensics.TestPostSlug) ... ok
+test_first_segment_wins (test_gsc_collapse_forensics.TestSection) ... ok
+test_root_is_named_not_empty (test_gsc_collapse_forensics.TestSection) ... ok
+test_clicks_are_always_named_as_unanswerable (test_gsc_leading.TestCannotAnswer) ... ok
+test_no_era_comparison_is_reported_when_none_is_possible (test_gsc_leading.TestCannotAnswer) ... ok
+test_recovery_wording_depends_on_whether_the_watchlist_is_populated (test_gsc_leading.TestCannotAnswer) ... ok
+test_revision_is_unanswerable_when_nothing_is_informative (test_gsc_leading.TestCannotAnswer) ... ok
+test_the_reason_distinguishes_lag_from_no_prior_signal (test_gsc_leading.TestCannotAnswer) ... ok
+test_the_age_floor_exists_and_is_at_least_two_weeks (test_gsc_leading.TestEarnRateFloor)
+Counting pages younger than the floor as failures invented a survivorship story. ... ok
+test_comparable_eras_needs_more_than_one_cluster (test_gsc_leading.TestEraConfoundIsTheHeadline)
+An era holding one cluster supports no cluster comparison at all. ... ok
+test_cross_era_cluster_grouping_would_invert_the_answer (test_gsc_leading.TestEraConfoundIsTheHeadline) ... ok
+test_an_unknown_slug_is_empty_not_an_error (test_gsc_leading.TestMergedSeries) ... ok
+test_both_prefixes_are_summed (test_gsc_leading.TestMergedSeries) ... ok
+test_quarters_are_derived_from_the_month (test_gsc_leading.TestQuarter) ... ok
+test_revision_compare_window_is_at_least_a_week (test_gsc_leading.TestRecoveryWatchlistThresholds) ... ok
+test_silence_threshold_is_longer_than_the_gsc_lag (test_gsc_leading.TestRecoveryWatchlistThresholds)
+A page silent for three days is not recovering, it is just recent. ... ok
+test_a_page_inside_the_lag_is_not_observable (test_gsc_leading.TestRevisionInformativeness) ... ok
+test_an_observable_page_that_was_earning_is_informative (test_gsc_leading.TestRevisionInformativeness) ... ok
+test_an_observable_page_with_no_prior_impressions_is_not_informative (test_gsc_leading.TestRevisionInformativeness) ... ok
+test_archive_digest_mismatch_is_rejected (test_gsc_merge_guard.TestAuditParser) ... ok
+test_parses_merge_and_retirement_only_from_disposition_table (test_gsc_merge_guard.TestAuditParser) ... ok
+test_real_audit_has_nineteen_merges_and_one_retirement (test_gsc_merge_guard.TestAuditParser) ... ok
+test_real_audit_sources_and_targets_exist_even_after_status_changes (test_gsc_merge_guard.TestAuditParser) ... ok
+test_removal_archive_is_verified_and_never_treated_as_published (test_gsc_merge_guard.TestAuditParser) ... ok
+test_coverage_uses_page_dimension_as_denominator (test_gsc_merge_guard.TestCoverageAndRendering) ... ok
+test_new_day_preserves_nested_headings_in_old_report (test_gsc_merge_guard.TestCoverageAndRendering) ... ok
+test_position_never_prints_without_impressions (test_gsc_merge_guard.TestCoverageAndRendering) ... ok
+test_report_calls_query_counts_floors_and_absence_not_proof (test_gsc_merge_guard.TestCoverageAndRendering) ... ok
+test_same_day_rerun_replaces_instead_of_appending (test_gsc_merge_guard.TestCoverageAndRendering) ... ok
+test_measured (test_gsc_merge_guard.TestFourStates) ... ok
+test_no_human_when_named_rows_exist_but_none_survive_filtering (test_gsc_merge_guard.TestFourStates) ... ok
+test_page_paths_are_combined_and_position_is_impression_weighted (test_gsc_merge_guard.TestFourStates) ... ok
+test_withheld_is_not_never (test_gsc_merge_guard.TestFourStates) ... ok
+test_combines_legacy_and_canonical_query_rows_weighted_by_impressions (test_gsc_merge_guard.TestQueryCombination) ... ok
+test_page_query_fetch_paginates_instead_of_accepting_a_cap (test_gsc_merge_guard.TestQueryCombination) ... ok
+test_filtered_source_is_not_called_human_demand (test_gsc_merge_guard.TestVerdicts) ... ok
+test_no_impressions_does_not_become_overlap_support (test_gsc_merge_guard.TestVerdicts) ... ok
+test_retirement_can_only_say_no_demand_observed (test_gsc_merge_guard.TestVerdicts) ... ok
+test_retirement_holds_if_any_demand_exists (test_gsc_merge_guard.TestVerdicts) ... ok
+test_shared_named_demand_is_positive_overlap_evidence (test_gsc_merge_guard.TestVerdicts) ... ok
+test_visible_source_demand_without_overlap_requires_review (test_gsc_merge_guard.TestVerdicts) ... ok
+test_withheld_source_stays_unknown (test_gsc_merge_guard.TestVerdicts) ... ok
+test_both_path_prefixes_are_summed (test_gsc_page_position.TestFourStates) ... ok
+test_measured_when_a_human_query_is_named (test_gsc_page_position.TestFourStates) ... ok
+test_never_impressed_only_when_there_are_no_impressions (test_gsc_page_position.TestFourStates) ... ok
+test_no_human_queries_when_every_named_query_is_filtered_out (test_gsc_page_position.TestFourStates)
+The page is named in the pull, but nothing survived the human filter. ... ok
+test_position_is_impression_weighted_across_queries (test_gsc_page_position.TestFourStates) ... ok
+test_withheld_is_not_never_impressed (test_gsc_page_position.TestFourStates)
+The distinction that caused the merge error. These must not collapse. ... ok
+test_withheld_when_impressions_exist_but_no_query_is_named (test_gsc_page_position.TestFourStates) ... ok
+test_a_two_place_gap_on_five_impressions_is_not_a_basis (test_gsc_page_position.TestMergeEvidenceIsReconstructible)
+18.2 against 20.4, on 5 impressions against 22. ... ok
+test_impressions_favour_the_original_target (test_gsc_page_position.TestMergeEvidenceIsReconstructible) ... ok
+test_the_page_called_unmeasured_has_impressions_and_therefore_a_position (test_gsc_page_position.TestMergeEvidenceIsReconstructible) ... ok
+test_a_missing_position_refuses_to_print (test_gsc_page_position.TestPositionGuard) ... ok
+test_a_negative_query_count_refuses_to_print (test_gsc_page_position.TestPositionGuard) ... ok
+test_a_position_prints_with_its_query_count (test_gsc_page_position.TestPositionGuard) ... ok
+test_a_position_with_no_queries_refuses_to_print (test_gsc_page_position.TestPositionGuard) ... ok
+test_only_one_state_means_no_position (test_gsc_page_position.TestRefusalPreconditions) ... ok
+test_the_states_are_distinct_strings (test_gsc_page_position.TestRefusalPreconditions) ... ok
+test_the_window_default_is_long_enough_to_see_a_stable_page (test_gsc_page_position.TestRefusalPreconditions)
+A 28-day window showed neither merge candidate a single human query. ... ok
+test_a_new_date_appends_without_touching_nested_headings (test_gsc_position.TestDatedReportIsIdempotent) ... ok
+test_preexisting_same_date_duplicates_collapse_to_one (test_gsc_position.TestDatedReportIsIdempotent) ... ok
+test_same_date_is_replaced_not_appended (test_gsc_position.TestDatedReportIsIdempotent) ... ok
+test_a_legacy_pair_is_unknowable_not_no (test_gsc_position.TestInterventionIsThreeValued) ... ok
+test_an_unknown_slug_is_unknowable (test_gsc_position.TestInterventionIsThreeValued) ... ok
+test_unknowable_is_distinct_from_false (test_gsc_position.TestInterventionIsThreeValued)
+The distinction is the whole point: 82 of 84 movers are unknowable. ... ok
+test_a_nonzero_click_sample_drops_that_line (test_gsc_position.TestLimitsAlwaysStateTheSample) ... ok
+test_an_empty_click_sample_is_called_empty_not_small (test_gsc_position.TestLimitsAlwaysStateTheSample) ... ok
+test_every_limit_line_names_a_number (test_gsc_position.TestLimitsAlwaysStateTheSample) ... ok
+test_both_path_prefixes_resolve_to_a_slug (test_gsc_position.TestSlugExtraction) ... ok
+test_non_post_urls_have_no_slug (test_gsc_position.TestSlugExtraction) ... ok
+test_injected_product_pages_are_foreign (test_gsc_position.TestSpamPagesAreExcluded) ... ok
+test_the_sites_own_pages_are_not_foreign (test_gsc_position.TestSpamPagesAreExcluded) ... ok
+test_material_move_is_bigger_than_daily_position_noise (test_gsc_position.TestThresholds) ... ok
+test_min_span_is_at_least_three_weeks (test_gsc_position.TestThresholds) ... ok
+test_top_and_deep_bands_do_not_overlap (test_gsc_position.TestThresholds) ... ok
+test_underpowered_threshold_exists (test_gsc_position.TestThresholds) ... ok
+test_a_pair_improving_reports_a_positive_delta (test_gsc_position.TestTrajectoryIsPerPair) ... ok
+test_a_pair_worsening_reports_a_negative_delta (test_gsc_position.TestTrajectoryIsPerPair) ... ok
+test_a_short_span_is_not_measured (test_gsc_position.TestTrajectoryIsPerPair) ... ok
+test_campaign_and_legacy_are_split (test_gsc_position.TestTrajectoryIsPerPair) ... ok
+test_deltas_are_impression_weighted_within_a_third (test_gsc_position.TestTrajectoryIsPerPair) ... ok
+test_query_mix_alone_does_not_create_a_trend (test_gsc_position.TestTrajectoryIsPerPair)
+A page gaining a deep second query would move a per-PAGE average and must not ... ok
+test_a_flat_legacy_median_is_called_a_random_walk_not_a_climb (test_gsc_position.TestTrajectoryVerdict) ... ok
+test_a_tiny_campaign_sample_refuses_to_answer (test_gsc_position.TestTrajectoryVerdict) ... ok
+test_neither_cohort_large_enough_says_nothing_supported (test_gsc_position.TestTrajectoryVerdict) ... ok
+test_boundary_at_max_words (test_gsc_report.TestBlobFilter) ... ok
+test_long_pasted_passage_is_a_blob (test_gsc_report.TestBlobFilter) ... ok
+test_object_replacement_character_is_a_blob (test_gsc_report.TestBlobFilter) ... ok
+test_ordinary_queries_are_not_blobs (test_gsc_report.TestBlobFilter) ... ok
+test_brand_query_is_excluded_and_counted (test_gsc_report.TestClassifyClose) ... ok
+test_every_in_range_query_is_accounted_for (test_gsc_report.TestClassifyClose)
+Nothing may vanish: human + families + exclusions must equal the input. ... ok
+test_family_impressions_are_reported_not_lost (test_gsc_report.TestClassifyClose) ... ok
+test_fan_out_is_kept_out_of_the_human_list (test_gsc_report.TestClassifyClose) ... ok
+test_human_queries_survive_and_are_ordered_by_impressions (test_gsc_report.TestClassifyClose) ... ok
+test_impression_floor_excludes_and_counts (test_gsc_report.TestClassifyClose) ... ok
+test_out_of_range_position_is_not_considered (test_gsc_report.TestClassifyClose) ... ok
+test_legacy_blog_path_maps_to_the_same_cluster (test_gsc_report.TestClusterMapping)
+Search Console still reports most traffic under the pre-migration path. ... ok
+test_missing_trailing_slash_still_matches (test_gsc_report.TestClusterMapping) ... ok
+test_owner_page_maps_to_its_own_cluster (test_gsc_report.TestClusterMapping) ... ok
+test_pages_outside_any_cluster_return_none (test_gsc_report.TestClusterMapping) ... ok
+test_post_maps_through_frontmatter_category (test_gsc_report.TestClusterMapping) ... ok
+test_post_slug_reads_both_prefixes (test_gsc_report.TestClusterMapping) ... ok
+test_shipped_tools_belong_to_cluster_four (test_gsc_report.TestClusterMapping) ... ok
+test_clicks_and_impressions_are_conserved (test_gsc_report.TestClusterRollup) ... ok
+test_empty_cluster_reports_zero_not_absent (test_gsc_report.TestClusterRollup) ... ok
+test_every_cluster_always_appears (test_gsc_report.TestClusterRollup)
+Five since the 2026-08-17 Distribution merge folded three into one. ... ok
+test_position_is_impression_weighted (test_gsc_report.TestClusterRollup) ... ok
+test_unclustered_pages_are_reported_separately (test_gsc_report.TestClusterRollup) ... ok
+test_growth_is_not_decay (test_gsc_report.TestDecay) ... ok
+test_impression_loss_is_decay (test_gsc_report.TestDecay) ... ok
+test_noise_below_the_prior_floor_is_ignored (test_gsc_report.TestDecay) ... ok
+test_position_loss_alone_is_decay (test_gsc_report.TestDecay) ... ok
+test_a_genuine_topic_scores_high (test_gsc_report.TestDecorationDiversity)
+Same three shared words, but every query asks something different. ... ok
+test_fan_out_scores_low (test_gsc_report.TestDecorationDiversity) ... ok
+test_no_decoration_is_not_treated_as_narrow (test_gsc_report.TestDecorationDiversity) ... ok
+test_flagged_moves_uses_a_strict_threshold (test_gsc_report.TestDeltas) ... ok
+test_new_and_gone_are_labelled (test_gsc_report.TestDeltas) ... ok
+test_position_delta_is_negative_when_rank_worsens (test_gsc_report.TestDeltas) ... ok
+test_position_delta_is_positive_when_rank_improves (test_gsc_report.TestDeltas) ... ok
+test_thin_prior_window_is_not_comparable (test_gsc_report.TestDeltas) ... ok
+test_bare_core_query_is_never_absorbed (test_gsc_report.TestFamilies)
+The undecorated head term is a real query and must survive. ... ok
+test_below_minimum_family_size_is_not_a_family (test_gsc_report.TestFamilies) ... ok
+test_core_containment_absorbs_decorated_stragglers (test_gsc_report.TestFamilies)
+These two fall under the Jaccard threshold but are the same fan-out. ... ok
+test_human_queries_are_not_absorbed (test_gsc_report.TestFamilies) ... ok
+test_permutation_fan_out_collapses_to_one_family (test_gsc_report.TestFamilies) ... ok
+test_shared_core_is_the_topic (test_gsc_report.TestFamilies) ... ok
+test_unrelated_queries_form_no_family (test_gsc_report.TestFamilies) ... ok
+test_every_family_has_a_non_empty_core (test_gsc_report.TestFamiliesAreCoreAnchored) ... ok
+test_unrelated_comparison_queries_do_not_chain_into_one_family (test_gsc_report.TestFamiliesAreCoreAnchored) ... ok
+test_glossary_is_labelled_as_republished (test_gsc_report.TestNonPostGrouping) ... ok
+test_known_sections_get_their_own_label (test_gsc_report.TestNonPostGrouping) ... ok
+test_non_post_pages_get_one_row_each_not_one_bucket (test_gsc_report.TestNonPostGrouping) ... ok
+test_unknown_section_falls_back_to_its_path (test_gsc_report.TestNonPostGrouping) ... ok
+test_brand_wins_over_every_other_test (test_gsc_report.TestPartitionQueries) ... ok
+test_every_row_lands_in_exactly_one_bucket (test_gsc_report.TestPartitionQueries) ... ok
+test_machine_and_human_are_separated (test_gsc_report.TestPartitionQueries) ... ok
+test_precomputed_model_catches_a_family_too_small_to_detect_locally (test_gsc_report.TestPartitionQueries)
+A month holding two members of a known fan-out must not score them human. ... ok
+test_summarise_of_nothing_has_no_position (test_gsc_report.TestPartitionQueries) ... ok
+test_summarise_weights_position_by_impressions (test_gsc_report.TestPartitionQueries) ... ok
+test_canonical_and_legacy_are_counted_apart (test_gsc_report.TestPathSplit) ... ok
+test_no_legacy_traffic_reports_zero (test_gsc_report.TestPathSplit) ... ok
+test_a_post_still_tagged_with_a_retired_category_maps_to_distribution (test_gsc_report.TestRetiredClusterSlugs) ... ok
+test_a_retired_owner_page_maps_to_distribution (test_gsc_report.TestRetiredClusterSlugs) ... ok
+test_retired_slugs_do_not_add_rollup_rows (test_gsc_report.TestRetiredClusterSlugs) ... ok
+test_content_tokens_are_order_blind (test_gsc_report.TestTokenising) ... ok
+test_content_tokens_drop_stopwords (test_gsc_report.TestTokenising) ... ok
+test_jaccard (test_gsc_report.TestTokenising) ... ok
+test_stopword_ratio (test_gsc_report.TestTokenising) ... ok
+test_stopword_ratio_empty_query_does_not_divide_by_zero (test_gsc_report.TestTokenising) ... ok
+test_both_windows_are_the_same_length (test_gsc_report.TestWindows) ... ok
+test_windows_end_three_days_back_and_do_not_overlap (test_gsc_report.TestWindows) ... ok
+test_band_is_the_re_derived_band (test_gsc_scoreboard.TestBandConstantsMatchTheCampaignDoc) ... ok
+test_target_and_day_90 (test_gsc_scoreboard.TestBandConstantsMatchTheCampaignDoc) ... ok
+test_the_band_ceiling_is_short_of_the_target (test_gsc_scoreboard.TestBandConstantsMatchTheCampaignDoc)
+If this ever stops being true the verdict wording needs revisiting. ... ok
+test_the_central_sits_inside_the_band (test_gsc_scoreboard.TestBandConstantsMatchTheCampaignDoc) ... ok
+test_the_re_derivation_date_is_recorded (test_gsc_scoreboard.TestBandConstantsMatchTheCampaignDoc)
+A reader must be able to tell which premise a band figure belongs to. ... ok
+test_every_cluster_appears (test_gsc_scoreboard.TestLivePagesPerCluster) ... ok
+test_tools_count_toward_their_cluster (test_gsc_scoreboard.TestLivePagesPerCluster)
+The five shipped tools all belong to cluster 4, so it can never be zero. ... ok
+test_a_full_list_is_a_ranking (test_gsc_scoreboard.TestTopMovement) ... ok
+test_a_short_list_is_not_called_a_ranking (test_gsc_scoreboard.TestTopMovement) ... ok
+test_entered_and_left_are_computed_against_the_other_week (test_gsc_scoreboard.TestTopMovement) ... ok
+test_movement_carries_impressions_so_churn_can_be_weighed (test_gsc_scoreboard.TestTopMovement) ... ok
+test_only_the_top_n_are_considered (test_gsc_scoreboard.TestTopMovement) ... ok
+test_single_impression_share_flags_noise (test_gsc_scoreboard.TestTopMovement) ... ok
+test_two_empty_weeks_do_not_divide_by_zero (test_gsc_scoreboard.TestTopMovement) ... ok
+test_a_real_rate_produces_a_multiple (test_gsc_scoreboard.TestVerdictAboveZero) ... ok
+test_below_the_band_floor_is_reported_as_below (test_gsc_scoreboard.TestVerdictAboveZero) ... ok
+test_hitting_the_target_says_yes (test_gsc_scoreboard.TestVerdictAboveZero) ... ok
+test_days_remaining_are_counted_to_day_90 (test_gsc_scoreboard.TestVerdictAtZero) ... ok
+test_no_multiple_is_invented_from_zero (test_gsc_scoreboard.TestVerdictAtZero) ... ok
+test_zero_verdict_names_the_band_ceiling_gap (test_gsc_scoreboard.TestVerdictAtZero) ... ok
+test_zero_verdict_says_no_without_hedging (test_gsc_scoreboard.TestVerdictAtZero) ... ok
+test_month_windows_are_28_days_and_adjacent (test_gsc_scoreboard.TestWindows) ... ok
+test_this_week_ends_where_the_trailing_month_ends (test_gsc_scoreboard.TestWindows) ... ok
+test_weeks_are_seven_days (test_gsc_scoreboard.TestWindows) ... ok
+test_windows_end_at_the_lag_and_do_not_overlap (test_gsc_scoreboard.TestWindows) ... ok
+test_the_daily_cycle_reports_the_link_baseline (test_link_inventory.DailyCycleWiringTests) ... ok
+test_a_reviewed_elsewhere_host_is_reported_as_closed_not_reraised (test_link_inventory.DevtoSyndicationTests)
+pathak.ventures essays point at their own property. Checked 2026-08-17. A closed ... ok
+test_a_tool_canonical_is_counted_per_tool (test_link_inventory.DevtoSyndicationTests) ... ok
+test_an_unreadable_devto_api_is_reported_not_swallowed (test_link_inventory.DevtoSyndicationTests) ... ok
+test_an_unreviewed_elsewhere_host_is_raised (test_link_inventory.DevtoSyndicationTests)
+The closed question must not silence a genuine future leak. ... ok
+test_canonicals_pointing_elsewhere_are_reported (test_link_inventory.DevtoSyndicationTests) ... ok
+test_engagement_is_reported_so_a_dead_channel_is_visible (test_link_inventory.DevtoSyndicationTests) ... ok
+test_the_one_referring_domain_ceiling_is_stated_every_run (test_link_inventory.DevtoSyndicationTests)
+However many posts dev.to carries, it is one host. This is the fact that decides ... ok
+test_a_missing_baseline_fails_rather_than_reporting_zero (test_link_inventory.HonestyTests) ... ok
+test_a_recorded_figure_is_reported_with_its_date (test_link_inventory.HonestyTests) ... ok
+test_an_unread_authoritative_figure_reports_unknown (test_link_inventory.HonestyTests) ... ok
+test_canonicals_are_never_added_to_the_referring_domain_count (test_link_inventory.HonestyTests)
+14 dev.to canonicals must not become 14 referring domains. ... ok
+test_the_canonical_versus_href_caveat_is_always_printed (test_link_inventory.HonestyTests) ... ok
+test_zero_tool_links_is_stated_as_a_number_not_as_silence (test_link_inventory.HonestyTests) ... ok
+test_a_bare_text_mention_is_not_an_href (test_link_inventory.LinkCountingTests)
+A domain printed in prose is not a link and must not be counted as one. ... ok
+test_a_link_to_another_domain_is_not_counted (test_link_inventory.LinkCountingTests) ... ok
+test_an_href_to_the_domain_is_counted (test_link_inventory.LinkCountingTests) ... ok
+test_www_and_http_variants_count (test_link_inventory.LinkCountingTests) ... ok
+test_a_baseline_is_committed_and_parses (test_link_inventory.ShippedBaselineTests) ... ok
+test_the_check_runs_offline_against_the_committed_file (test_link_inventory.ShippedBaselineTests) ... ok
+test_the_committed_baseline_covers_every_tool (test_link_inventory.ShippedBaselineTests) ... ok
+test_a_missing_stamp_reads_as_ancient (test_link_inventory.StalenessTests) ... ok
+test_age_is_measured_from_the_refreshed_stamp (test_link_inventory.StalenessTests) ... ok
+test_the_summary_carries_the_tool_link_total (test_link_inventory.SummaryLineTests) ... ok
+test_the_summary_is_one_line_and_leads_with_the_unknown (test_link_inventory.SummaryLineTests) ... ok
+test_the_summary_reports_a_missing_baseline (test_link_inventory.SummaryLineTests) ... ok
+test_the_gsc_api_really_has_no_links_resource (test_link_inventory.UnmeasurableTests)
+Verified by enumeration rather than asserted, because the whole design rests on it. ... /Users/ninad/Library/Python/3.9/lib/python/site-packages/google/oauth2/__init__.py:40: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+/Users/ninad/Library/Python/3.9/lib/python/site-packages/google/auth/__init__.py:54: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+/Users/ninad/Library/Python/3.9/lib/python/site-packages/google/api_core/_python_version_support.py:242: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.api_core supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.api_core.
+  warnings.warn(message, FutureWarning)
+ok
+test_the_shipped_baseline_records_what_cannot_be_measured (test_link_inventory.UnmeasurableTests) ... ok
+test_unfetchable_sources_are_surfaced_in_the_report (test_link_inventory.UnmeasurableTests) ... ok
+test_engine_file_exists (test_llms_txt_validator.EngineAvailabilityTests) ... ok
+test_engine_has_no_dom_dependency (test_llms_txt_validator.EngineAvailabilityTests)
+The engine must stay pure so it can run in node and in the browser. ... ok
+test_blockquote_before_h1_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_content_before_h1_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_empty_h1_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_empty_input_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_empty_link_name_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_empty_link_url_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_heading_before_first_section_is_an_error (test_llms_txt_validator.ErrorRuleTests)
+The spec allows any markdown except headings in the details region. ... ok
+test_list_item_without_a_link_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_malformed_link_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_missing_h1_is_an_error_and_caps_the_score (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_nested_heading_inside_section_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_second_h1_is_an_error (test_llms_txt_validator.ErrorRuleTests) ... ok
+test_asterisk_and_ordered_list_markers_are_recognised (test_llms_txt_validator.ParsingRobustnessTests) ... ok
+test_byte_order_mark_is_permitted_and_noted (test_llms_txt_validator.ParsingRobustnessTests) ... ok
+test_crlf_line_endings_parse_identically (test_llms_txt_validator.ParsingRobustnessTests) ... ok
+test_every_finding_declares_a_basis (test_llms_txt_validator.ParsingRobustnessTests)
+Each rule must say whether it rests on the spec or on convention. ... ok
+test_fenced_code_block_is_not_parsed_as_structure (test_llms_txt_validator.ParsingRobustnessTests)
+Pasting the spec example inside a fence must not create a second H1. ... ok
+test_findings_are_ordered_errors_first (test_llms_txt_validator.ParsingRobustnessTests) ... ok
+test_multiline_blockquote_counts_as_a_summary (test_llms_txt_validator.ParsingRobustnessTests) ... ok
+test_url_containing_parentheses_is_parsed (test_llms_txt_validator.ParsingRobustnessTests) ... ok
+test_errors_cost_more_than_warnings (test_llms_txt_validator.ScoringTests) ... ok
+test_grade_boundaries (test_llms_txt_validator.ScoringTests) ... ok
+test_score_is_deterministic (test_llms_txt_validator.ScoringTests) ... ok
+test_score_never_goes_negative (test_llms_txt_validator.ScoringTests) ... ok
+test_minimal_valid_file_is_only_an_h1 (test_llms_txt_validator.SpecConformanceTests)
+The spec calls the H1 the only required section, so this must not error. ... ok
+test_optional_elements_are_never_errors (test_llms_txt_validator.SpecConformanceTests)
+Nothing the spec marks optional may be reported as an error. ... ok
+test_real_world_file_from_llmstxt_org_is_clean (test_llms_txt_validator.SpecConformanceTests)
+The spec author's own published llms.txt must validate cleanly. ... ok
+test_spec_example_is_clean (test_llms_txt_validator.SpecConformanceTests)
+The spec's own mock example must raise no errors or warnings. ... ok
+test_duplicate_section_name_is_a_warning (test_llms_txt_validator.WarningRuleTests) ... ok
+test_duplicate_url_is_reported_once (test_llms_txt_validator.WarningRuleTests) ... ok
+test_empty_section_is_a_warning (test_llms_txt_validator.WarningRuleTests) ... ok
+test_http_url_is_a_warning (test_llms_txt_validator.WarningRuleTests) ... ok
+test_optional_section_last_is_accepted (test_llms_txt_validator.WarningRuleTests) ... ok
+test_optional_section_must_come_last (test_llms_txt_validator.WarningRuleTests) ... ok
+test_prose_inside_a_section_is_a_warning (test_llms_txt_validator.WarningRuleTests) ... ok
+test_relative_url_is_a_warning_not_an_error (test_llms_txt_validator.WarningRuleTests) ... ok
+test_summary_not_adjacent_to_h1_is_a_warning (test_llms_txt_validator.WarningRuleTests) ... ok
+test_trailing_text_after_link_without_colon (test_llms_txt_validator.WarningRuleTests) ... ok
+test_no_durable_report_contains_duplicate_dates (test_report_log.TestCampaignLogsUseTheContract) ... ok
+test_no_report_writer_opens_its_log_in_append_mode (test_report_log.TestCampaignLogsUseTheContract) ... ok
+test_header_only_file_gets_its_first_section (test_report_log.TestDatedReportUpsert) ... ok
+test_heading_suffix_can_change_between_retries (test_report_log.TestDatedReportUpsert) ... ok
+test_nested_headings_stay_inside_their_section (test_report_log.TestDatedReportUpsert) ... ok
+test_old_duplicates_collapse_to_the_last_appended_observation (test_report_log.TestDatedReportUpsert) ... ok
+test_same_day_retry_replaces_instead_of_appending (test_report_log.TestDatedReportUpsert) ... ok
+test_blocking_a_citation_crawler_lowers_the_grade (test_robots_access.CitationVersusTrainingTests) ... ok
+test_blocking_everything_is_the_worst_grade (test_robots_access.CitationVersusTrainingTests) ... ok
+test_empty_file_allows_everything (test_robots_access.CitationVersusTrainingTests) ... ok
+test_google_extended_is_classified_as_training_not_citation (test_robots_access.CitationVersusTrainingTests)
+Blocking Google-Extended must not be read as blocking AI Overviews. ... ok
+test_ninads_live_file_allows_every_citation_crawler (test_robots_access.CitationVersusTrainingTests) ... ok
+test_ninads_live_file_blocks_the_training_crawlers (test_robots_access.CitationVersusTrainingTests) ... ok
+test_training_opt_out_is_not_reported_as_citation_damage (test_robots_access.CitationVersusTrainingTests)
+A training opt-out is an editorial choice, not a defect. ... ok
+test_deterministic (test_robots_access.EngineContractTests) ... ok
+test_edge_blocking_limitation_is_always_reported (test_robots_access.EngineContractTests)
+The tool must never imply robots.txt is the whole story. ... ok
+test_engine_exists_and_is_pure (test_robots_access.EngineContractTests) ... ok
+test_every_agent_declares_purpose_note_and_dated_source (test_robots_access.EngineContractTests) ... ok
+test_no_weighted_score_is_exposed (test_robots_access.EngineContractTests) ... ok
+test_content_signal_with_ai_input_is_reported_as_declared (test_robots_access.ReportingTests) ... ok
+test_content_signal_without_ai_input_is_reported (test_robots_access.ReportingTests) ... ok
+test_crlf_line_endings_parse_identically (test_robots_access.ReportingTests) ... ok
+test_every_note_carries_a_basis (test_robots_access.ReportingTests) ... ok
+test_explanation_names_the_governing_rule_and_line (test_robots_access.ReportingTests) ... ok
+test_explanation_says_when_a_named_group_overrode_the_wildcard (test_robots_access.ReportingTests) ... ok
+test_explanation_says_when_the_wildcard_group_was_used (test_robots_access.ReportingTests) ... ok
+test_file_with_no_user_agent_group_is_flagged (test_robots_access.ReportingTests) ... ok
+test_groups_with_the_same_token_are_merged (test_robots_access.ReportingTests)
+Real files rely on this: nytimes.com carried two "User-agent: Googlebot" ... ok
+test_multiple_wildcard_groups_are_merged (test_robots_access.ReportingTests) ... ok
+test_requester_variance_caveat_is_always_reported (test_robots_access.ReportingTests)
+Verified 2026-08-17: stackoverflow.com answers an unrecognised client ... ok
+test_sitemap_absence_is_info_not_a_problem (test_robots_access.ReportingTests) ... ok
+test_sitemap_presence_suppresses_the_note (test_robots_access.ReportingTests) ... ok
+test_claudebot_group_does_not_capture_claude_searchbot (test_robots_access.Rfc9309GroupSelectionTests) ... ok
+test_consecutive_user_agent_lines_share_one_group (test_robots_access.Rfc9309GroupSelectionTests) ... ok
+test_longer_token_prefix_wins_between_named_groups (test_robots_access.Rfc9309GroupSelectionTests)
+"Claude-SearchBot" must not be captured by a "ClaudeBot" group, and a ... ok
+test_named_group_wins_even_when_it_is_more_permissive (test_robots_access.Rfc9309GroupSelectionTests) ... ok
+test_no_wildcard_and_no_named_group_means_allowed (test_robots_access.Rfc9309GroupSelectionTests) ... ok
+test_only_the_most_specific_group_applies (test_robots_access.Rfc9309GroupSelectionTests)
+The counter-intuitive core rule: a named group replaces the "*" group ... ok
+test_unnamed_agent_falls_under_wildcard (test_robots_access.Rfc9309GroupSelectionTests) ... ok
+test_user_agent_matching_is_case_insensitive (test_robots_access.Rfc9309GroupSelectionTests) ... ok
+test_allow_wins_an_equal_length_tie (test_robots_access.Rfc9309RulePrecedenceTests) ... ok
+test_comments_are_stripped (test_robots_access.Rfc9309RulePrecedenceTests) ... ok
+test_default_path_is_root (test_robots_access.Rfc9309RulePrecedenceTests) ... ok
+test_dollar_anchors_the_end_of_the_path (test_robots_access.Rfc9309RulePrecedenceTests) ... ok
+test_empty_disallow_permits_everything (test_robots_access.Rfc9309RulePrecedenceTests) ... ok
+test_longest_matching_rule_wins (test_robots_access.Rfc9309RulePrecedenceTests) ... ok
+test_no_matching_rule_means_allowed (test_robots_access.Rfc9309RulePrecedenceTests) ... ok
+test_rule_before_any_user_agent_is_ignored_and_flagged (test_robots_access.Rfc9309RulePrecedenceTests) ... ok
+test_wildcard_in_path_is_honoured (test_robots_access.Rfc9309RulePrecedenceTests) ... ok
+test_a_range_is_not_a_trio (test_rule_of_three.BareDigitShapeTests) ... ok
+test_a_unit_is_not_a_trio (test_rule_of_three.BareDigitShapeTests) ... ok
+test_a_version_is_still_not_a_trio (test_rule_of_three.BareDigitShapeTests) ... ok
+test_an_identifier_is_not_a_trio (test_rule_of_three.BareDigitShapeTests) ... ok
+test_rhetorical_three_is_still_caught (test_rule_of_three.BareDigitShapeTests) ... ok
+test_colon_introduced_trio_passes (test_rule_of_three.NamesItsTrioTests) ... ok
+test_colon_introduced_trio_without_oxford_comma_passes (test_rule_of_three.NamesItsTrioTests) ... ok
+test_count_with_no_members_still_fails (test_rule_of_three.NamesItsTrioTests) ... ok
+test_dash_introduced_trio_passes (test_rule_of_three.NamesItsTrioTests) ... ok
+test_markdown_list_on_following_lines_passes (test_rule_of_three.NamesItsTrioTests) ... ok
+test_numbered_list_on_following_lines_passes (test_rule_of_three.NamesItsTrioTests) ... ok
+test_rhetorical_three_still_fails (test_rule_of_three.NamesItsTrioTests) ... ok
+test_two_items_is_not_a_trio (test_rule_of_three.NamesItsTrioTests) ... ok
+test_unnamed_count_still_fails (test_rule_of_three.NamesItsTrioTests) ... ok
+test_bottom_middle_top_enumeration_passes (test_rule_of_three.PositionalEnumerationTests) ... ok
+test_first_second_third_enumeration_passes (test_rule_of_three.PositionalEnumerationTests) ... ok
+test_rhetorical_three_with_no_enumeration_still_fires (test_rule_of_three.PositionalEnumerationTests) ... ok
+test_two_markers_is_not_enough (test_rule_of_three.PositionalEnumerationTests) ... ok
+test_every_tool_page_was_built (test_tool_e2e.BuildPrerequisiteTests) ... ok
+test_the_build_exists (test_tool_e2e.BuildPrerequisiteTests) ... ok
+test_the_harness_is_present (test_tool_e2e.BuildPrerequisiteTests) ... ok
+test_checker_flags_a_preamble_opening (test_tool_e2e.ClientLogicTests) ... ok
+test_checker_grades_a_page_and_cites_its_sources (test_tool_e2e.ClientLogicTests) ... ok
+test_crawler_checker_alarms_when_a_citation_crawler_is_blocked (test_tool_e2e.ClientLogicTests) ... ok
+test_crawler_checker_separates_citation_from_training (test_tool_e2e.ClientLogicTests) ... ok
+test_every_tool_loads_without_throwing (test_tool_e2e.ClientLogicTests)
+A load-time throw kills every handler on the page at once. ... ok
+test_generator_scan_populates_the_workspace (test_tool_e2e.ClientLogicTests)
+The generator's flow is a form submit, not a button click. ... ok
+test_linter_grades_a_defective_article (test_tool_e2e.ClientLogicTests) ... ok
+test_linter_ignores_an_empty_input (test_tool_e2e.ClientLogicTests) ... ok
+test_split_engines_assign_their_global_under_the_browser_branch (test_tool_e2e.ClientLogicTests)
+The require()-based unit tests never exercise this branch of the UMD wrapper. ... ok
+test_validator_grades_a_conforming_llms_txt (test_tool_e2e.ClientLogicTests) ... ok
+test_validator_reports_a_missing_h1_as_a_spec_violation (test_tool_e2e.ClientLogicTests) ... ok
+test_a_broken_function_fails_the_daily_cycle (test_tool_e2e.DailyCycleFunctionsProbeTests) ... ok
+test_each_probed_page_matches_its_endpoint (test_tool_e2e.DailyCycleFunctionsProbeTests) ... ok
+test_the_daily_cycle_probes_every_tool_function (test_tool_e2e.DailyCycleFunctionsProbeTests) ... ok
+test_each_function_answers_rather_than_404s (test_tool_e2e.LiveSmokeTests)
+The named near-miss, checked against production. ... skipped 'set NINADPATHAK_LIVE_TESTS=1 to probe production'
+test_each_tool_page_serves_200 (test_tool_e2e.LiveSmokeTests) ... skipped 'set NINADPATHAK_LIVE_TESTS=1 to probe production'
+test_every_function_refuses_a_private_address (test_tool_e2e.LiveSmokeTests) ... skipped 'set NINADPATHAK_LIVE_TESTS=1 to probe production'
+test_every_function_rejects_a_malformed_body (test_tool_e2e.LiveSmokeTests) ... skipped 'set NINADPATHAK_LIVE_TESTS=1 to probe production'
+test_every_endpoint_a_tool_calls_exists_as_a_function (test_tool_e2e.PagesFunctionContractTests) ... ok
+test_every_function_exports_the_post_handler (test_tool_e2e.PagesFunctionContractTests) ... ok
+test_every_function_identifies_itself_by_user_agent (test_tool_e2e.PagesFunctionContractTests) ... ok
+test_every_function_keeps_its_safety_rails (test_tool_e2e.PagesFunctionContractTests)
+SSRF guard, redirect handling, a timeout and a body ceiling, on every endpoint. ... ok
+test_no_function_is_orphaned_without_a_caller (test_tool_e2e.PagesFunctionContractTests)
+An unreferenced Function is either dead code or a page that lost its wiring. ... ok
+test_each_networked_tool_holds_exactly_one_endpoint (test_tool_e2e.PrivacyContractTests) ... ok
+test_no_tool_page_loads_a_third_party_script (test_tool_e2e.PrivacyContractTests)
+Analytics is sitewide in base.html; a tool must not add its own. ... ok
+test_no_tool_uses_a_storage_or_beacon_api (test_tool_e2e.PrivacyContractTests) ... ok
+test_running_a_pasted_input_makes_no_network_call (test_tool_e2e.PrivacyContractTests)
+Measured, not grepped: drive the paste path and count the fetches. ... ok
+test_the_linter_never_calls_the_network_at_all (test_tool_e2e.PrivacyContractTests) ... ok
+test_glossary_is_built_and_therefore_must_not_be_redirected (test_tool_e2e.RedirectShadowingTests)
+The specific page the near-miss was about. ... ok
+test_no_redirect_currently_shadows_a_built_page (test_tool_e2e.RedirectShadowingTests) ... ok
+test_no_redirect_source_is_a_built_tool_page (test_tool_e2e.RedirectShadowingTests) ... ok
+test_the_check_detects_a_shadowing_rule (test_tool_e2e.RedirectShadowingTests)
+Proves the check can fail, which is the only thing that makes a green run mean ... ok
+test_a_split_engine_loads_before_its_wiring (test_tool_e2e.StructuralContractTests)
+The wiring reads a global the engine assigns, so order is load-bearing. ... ok
+test_each_tool_page_loads_its_wiring_script (test_tool_e2e.StructuralContractTests) ... ok
+test_every_queried_id_exists_in_the_built_page (test_tool_e2e.StructuralContractTests)
+Rename an id in a template and the tool dies silently. This is that check. ... ok
+test_every_tool_declares_software_application_schema (test_tool_e2e.StructuralContractTests) ... ok
+test_no_tool_template_adds_inline_css (test_tool_e2e.StructuralContractTests)
+Standing order 4: no new CSS, ever. ... ok
+test_pages_using_lint_classes_link_linter_css (test_tool_e2e.StructuralContractTests) ... ok
+test_the_global_the_wiring_reads_is_the_one_the_engine_assigns (test_tool_e2e.StructuralContractTests) ... ok
+test_the_only_inline_style_on_a_tool_page_is_the_sitewide_theme_block (test_tool_e2e.StructuralContractTests)
+Pins the exception so a second one cannot slip in unnoticed. ... ok
+test_every_tool_declares_software_application (test_tool_schema.ToolSchemaTests) ... ok
+test_every_tool_page_is_built (test_tool_schema.ToolSchemaTests) ... ok
+test_tool_pages_have_a_title_and_description (test_tool_schema.ToolSchemaTests) ... ok
+test_tool_schema_names_a_url_and_is_free (test_tool_schema.ToolSchemaTests) ... ok
+test_a_prefix_does_not_retire_its_own_base (test_url_inventory.AllowlistTests)
+So retiring the old glossary's children cannot retire the live /glossary/. ... ok
+test_a_prefix_entry_retires_children (test_url_inventory.AllowlistTests) ... ok
+test_a_reasonless_entry_fails_the_check (test_url_inventory.AllowlistTests) ... ok
+test_an_entry_with_no_reason_is_rejected (test_url_inventory.AllowlistTests) ... ok
+test_an_exact_entry_retires_a_url (test_url_inventory.AllowlistTests) ... ok
+test_the_shipped_allowlist_cites_evidence_and_a_date (test_url_inventory.AllowlistTests) ... ok
+test_the_shipped_allowlist_gives_every_entry_a_reason (test_url_inventory.AllowlistTests) ... ok
+test_the_shipped_allowlist_retires_the_2025_legacy_top_page (test_url_inventory.AllowlistTests)
+The best URL this domain ever had is written off, with the evidence. ... ok
+test_index_html_and_standalone_files_are_both_registered (test_url_inventory.BuiltPathsTests) ... ok
+test_missing_output_is_empty_not_an_error (test_url_inventory.BuiltPathsTests) ... ok
+test_a_built_url_is_not_classified_at_all (test_url_inventory.ClassificationTests) ... ok
+test_a_human_approved_listing_redirect_is_not_reported_forever (test_url_inventory.ClassificationTests) ... ok
+test_a_soft_404_never_becomes_an_alarm (test_url_inventory.ClassificationTests)
+Reporting beats blocking where equivalence cannot be judged mechanically. ... ok
+test_dead_and_still_earning_is_an_alarm (test_url_inventory.ClassificationTests)
+The expensive case: an active leak. ... ok
+test_dropped_inside_84_days_is_watch_not_alarm (test_url_inventory.ClassificationTests) ... ok
+test_equivalent_redirect_without_a_reason_is_rejected (test_url_inventory.ClassificationTests) ... ok
+test_extension_less_serving_is_not_a_leak (test_url_inventory.ClassificationTests)
+Regression: this reported 12 live visual pages as leaks. ... ok
+test_redirect_approval_does_not_survive_a_target_change (test_url_inventory.ClassificationTests) ... ok
+test_redirect_matches_across_slash_variants (test_url_inventory.ClassificationTests) ... ok
+test_redirect_to_a_bare_listing_is_reported_as_a_soft_404 (test_url_inventory.ClassificationTests) ... ok
+test_redirect_to_a_missing_page_is_reported (test_url_inventory.ClassificationTests) ... ok
+test_redirect_to_a_real_page_is_a_pass (test_url_inventory.ClassificationTests) ... ok
+test_zero_in_84_days_is_a_write_off_and_never_an_alarm (test_url_inventory.ClassificationTests)
+A URL Google has dropped must not fail the build forever. ... ok
+test_a_clean_deploy_reads_as_live (test_url_inventory.DeployGraceWindowTests) ... ok
+test_a_grace_window_exists_and_is_short (test_url_inventory.DeployGraceWindowTests) ... ok
+test_a_mismatch_inside_the_window_is_waiting_not_an_alarm (test_url_inventory.DeployGraceWindowTests) ... ok
+test_a_mismatch_past_the_window_is_an_alarm (test_url_inventory.DeployGraceWindowTests) ... ok
+test_an_unknown_commit_age_is_stated_rather_than_guessed (test_url_inventory.DeployGraceWindowTests) ... ok
+test_daily_cycle_calls_the_guard_and_can_fail_on_it (test_url_inventory.GuardWiringTests) ... ok
+test_the_guard_runs_after_the_build_in_the_gate (test_url_inventory.GuardWiringTests)
+It must read the build's generated output/_redirects, not the source file. ... ok
+test_adds_a_leading_slash (test_url_inventory.PathNormalisationTests) ... ok
+test_does_not_append_a_trailing_slash (test_url_inventory.PathNormalisationTests)
+Regression: appending one stopped extension-less paths matching the build. ... ok
+test_empty_becomes_root (test_url_inventory.PathNormalisationTests) ... ok
+test_root_variants_stay_root (test_url_inventory.PathNormalisationTests) ... ok
+test_strips_origin_query_and_fragment (test_url_inventory.PathNormalisationTests) ... ok
+test_variants_cover_both_slash_forms (test_url_inventory.PathNormalisationTests) ... ok
+test_variants_cover_extension_less_serving (test_url_inventory.PathNormalisationTests)
+Cloudflare serves foo.html at /foo; verified against production 2026-08-17. ... ok
+test_exact_and_wildcard_rules_are_separated (test_url_inventory.RedirectLoadingTests) ... ok
+test_missing_file_is_empty (test_url_inventory.RedirectLoadingTests) ... ok
+test_prefers_the_built_file_over_the_source_file (test_url_inventory.RedirectLoadingTests)
+Regression: reading static/_redirects reported 65 phantom leaks. ... ok
+test_a_clean_run_says_so_explicitly (test_url_inventory.ReportingTests) ... ok
+test_a_retired_url_still_earning_is_named_not_hidden (test_url_inventory.ReportingTests)
+An allowlist must not become the place leaks go to hide. ... ok
+test_summary_line_is_one_line_and_leads_with_the_alarm (test_url_inventory.ReportingTests) ... ok
+test_summary_line_reports_a_missing_inventory (test_url_inventory.ReportingTests) ... ok
+test_the_report_always_states_the_floor_caveat (test_url_inventory.ReportingTests)
+Search Console withholds low-volume pages, so no count here is a total. ... ok
+test_the_report_names_the_alarm_urls (test_url_inventory.ReportingTests) ... ok
+test_every_row_carries_the_fields_the_check_reads (test_url_inventory.ShippedInventoryTests) ... ok
+test_the_inventory_covers_the_2025_legacy_traffic (test_url_inventory.ShippedInventoryTests)
+The whole point: the URLs the March 2026 rebuild dropped are in the record. ... ok
+test_the_inventory_is_committed_and_parses (test_url_inventory.ShippedInventoryTests) ... ok
+test_the_inventory_records_its_span_and_windows (test_url_inventory.ShippedInventoryTests) ... ok
+test_the_inventory_records_when_it_was_refreshed (test_url_inventory.ShippedInventoryTests) ... ok
+test_the_inventory_states_the_floor_caveat_in_the_data (test_url_inventory.ShippedInventoryTests) ... ok
+test_a_fresh_inventory_does_not_fail_on_staleness (test_url_inventory.StalenessTests) ... ok
+test_a_missing_inventory_is_a_failure_not_a_silent_pass (test_url_inventory.StalenessTests) ... ok
+test_a_missing_stamp_reads_as_ancient (test_url_inventory.StalenessTests) ... ok
+test_a_stale_inventory_fails_the_check (test_url_inventory.StalenessTests)
+A guard nobody refreshes is the failure mode this tool exists to prevent. ... ok
+test_age_is_measured_from_the_refreshed_stamp (test_url_inventory.StalenessTests) ... ok
+test_the_alarm_window_is_inside_the_write_off_window (test_url_inventory.WindowPolicyTests) ... ok
+test_the_alarm_window_matches_the_rest_of_the_toolchain (test_url_inventory.WindowPolicyTests)
+28 days is the window daily_cycle.py and gsc_report.py already use. ... ok
+test_the_write_off_window_matches_the_evidence_standard (test_url_inventory.WindowPolicyTests)
+84 days is the twelve weeks the 2025 legacy write-off was argued on. ... ok
+test_windows_end_before_the_search_console_lag (test_url_inventory.WindowPolicyTests) ... ok
+test_every_quality_workflow_run_block_is_valid_bash (test_workflow_shell.WorkflowShellSyntaxTests) ... ok
+
+----------------------------------------------------------------------
+Ran 677 tests in 14.126s
+
+OK (skipped=4)
+  i category 'new-category': no posts yet, not built
+FLOWCHART PASSED: 5 nodes, 4 connectors
+Canvas: 672×690; mobile font floor: 13.23px
