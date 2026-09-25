@@ -2,7 +2,7 @@
 
 {% block title %}llms.txt Validator: Check Your File | Ninad Pathak{% endblock %}
 
-{% block description %}Validate llms.txt against the v2 proposal. Paste a file or fetch one from a domain, then separate spec requirements from conventions in your browser.{% endblock %}
+{% block description %}Validate llms.txt against the v2 proposal. Paste a file or fetch one from a domain, and see which findings are spec requirements and which are conventions.{% endblock %}
 
 {% block canonical %}/llms-txt-validator/{% endblock %}
 {% block og_url %}/llms-txt-validator/{% endblock %}
@@ -56,7 +56,7 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What does the llms.txt spec actually require?",
+      "name": "What does the llms.txt spec require?",
       "acceptedAnswer": { "@type": "Answer", "text": "One H1 naming the project or site. The llms.txt v2 proposal calls that the only required section. A summary blockquote, free-form detail, and H2 file-list sections are all permitted and none of them are mandatory, which is why this validator reports most issues as warnings rather than errors." }
     },
     {
@@ -198,7 +198,7 @@
           <li><strong>Insecure URL.</strong> The link uses <code>http</code> rather than <code>https</code>.</li>
           <li><strong>Duplicate URL.</strong> The same destination appears more than once.</li>
           <li><strong>Empty section.</strong> The H2 has no links for an agent to fetch.</li>
-          <li><strong>Repeated section name.</strong> Two H2 sections use the same name.</li>
+          <li><strong>Repeated section name.</strong> The file gives the same name to two H2 sections.</li>
           <li><strong>Optional section out of place.</strong> Convention reserves this section for links an agent can skip, so it belongs last.</li>
           <li><strong>Prose inside a file-list section.</strong> Free-form detail belongs before the first H2.</li>
         </ul>
@@ -239,7 +239,7 @@
     <h2>Frequently asked questions</h2>
     <div class="faq-list">
       <details>
-        <summary>What does the spec actually require?</summary>
+        <summary>What does the spec require?</summary>
         <p>Only one H1 naming the project or site is required. The validator labels every other finding so you can distinguish the proposal's structure from a convention.</p>
       </details>
       <details>
@@ -257,8 +257,6 @@
     </div>
   </div>
 </section>
-
-{% include "tool_cta.html" %}
 
 <script src="/static/js/llms-validator-core.js"></script>
 <script src="/static/js/llms-validator.js"></script>

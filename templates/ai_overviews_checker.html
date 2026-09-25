@@ -2,7 +2,7 @@
 
 {% block title %}AI Overviews Checker: Test Extractability | Ninad Pathak{% endblock %}
 
-{% block description %}Check a page with nine sourced structural checks for snippet eligibility and extractability. Runs in your browser and never predicts AI Overview placement.{% endblock %}
+{% block description %}Check a live URL or pasted page with nine sourced structural checks for snippet eligibility and extractability. It reports structure, not AI Overview placement.{% endblock %}
 
 {% block canonical %}/ai-overviews-checker/{% endblock %}
 {% block og_url %}/ai-overviews-checker/{% endblock %}
@@ -79,7 +79,7 @@
     },
     {
       "@type": "Question",
-      "name": "What actually stops a page appearing in AI Overviews?",
+      "name": "What stops a page appearing in AI Overviews?",
       "acceptedAnswer": { "@type": "Answer", "text": "Snippet eligibility. Google's guidance states that to be eligible for generative AI features a page must be indexed and eligible to be shown with a snippet. A nosnippet directive, a restrictive max-snippet, or noindex removes that eligibility, whether it arrives in a meta tag or in the X-Robots-Tag header." }
     },
     {
@@ -253,7 +253,7 @@
         <p>Google's guidance says structured data is not required for generative AI search and there is no special markup to add. Schema can still support ordinary rich results, so the checker reports its presence as information.</p>
       </details>
       <details>
-        <summary>What actually blocks a page?</summary>
+        <summary>What blocks a page?</summary>
         <p>A page must be indexed and eligible for a Google Search snippet before it can be eligible for Google's generative AI features. The live URL check looks for directives that remove or restrict that eligibility.</p>
       </details>
       <details>
@@ -263,8 +263,6 @@
     </div>
   </div>
 </section>
-
-{% include "tool_cta.html" %}
 
 <script src="/static/js/aio-checker-core.js"></script>
 <script src="/static/js/aio-checker.js"></script>

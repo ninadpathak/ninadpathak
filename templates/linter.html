@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}Technical Writing Linter | Ninad Pathak{% endblock %}
-{% block description %}Check a technical article against 18 writing rules, from condescension words and AI writing signals to passive voice and readability. Free, no signup.{% endblock %}
+{% block description %}Check a technical article against 16 writing rules, from condescension words and AI writing signals to passive voice, and get a readability score. Free, no signup.{% endblock %}
 
 {# The oldest tool on the site shipped with no structured data, so it inherited the base
    Person schema while the four newer tools all declare SoftwareApplication. Every entry in
-   featureList below is one of the 18 checks this page already documents, so the schema
+   featureList below is one of the 16 checks this page already documents, so the schema
    describes the tool rather than advertising it. #}
 {% block schema %}
 <script type="application/ld+json">
@@ -14,7 +14,7 @@
   "@type": ["SoftwareApplication", "WebApplication"],
   "name": "Technical Writing Linter",
   "url": "{{ site.url }}/linter/",
-  "description": "Checks pasted technical prose against 18 named rules covering paragraph length, condescension, AI writing signals, buzzwords, hedging, passive voice, sentence length, adverb density and readability, and reports each finding with the rule that produced it.",
+  "description": "Checks pasted technical prose against 16 named rules covering paragraph length, condescension, AI writing signals, buzzwords, hedging, passive voice and sentence length, reports each finding with the rule that produced it, and shows a Flesch reading ease score.",
   "applicationCategory": "DeveloperApplication",
   "applicationSubCategory": "Linter",
   "operatingSystem": "Any",
@@ -37,8 +37,7 @@
     "Flags tutorial 'we' in favour of addressing the reader directly",
     "Detects passive voice by pattern and marks it for review rather than rejection",
     "Flags sentences over 35 words",
-    "Flags adverb density above 5% of words",
-    "Reports a Flesch reading ease score and flags scores below 30",
+    "Reports a Flesch reading ease score alongside the findings",
     "Runs entirely in the browser, with no upload and no signup"
   ],
   "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
@@ -57,9 +56,9 @@
 {% block canonical %}/linter/{% endblock %}
 {% block og_url %}/linter/{% endblock %}
 {% block og_title %}Technical Writing Linter{% endblock %}
-{% block og_description %}Paste a technical article and check it against 18 writing rules. Each finding names the rule and the passage that triggered it.{% endblock %}
+{% block og_description %}Paste a technical article and check it against 16 writing rules. Each finding names the rule and quotes the text that triggered it.{% endblock %}
 {% block tw_title %}Technical Writing Linter{% endblock %}
-{% block tw_desc %}Check a technical article against 18 writing rules in your browser. Free, no signup.{% endblock %}
+{% block tw_desc %}Check a technical article against 16 writing rules in your browser. Free, no signup.{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="/static/css/linter.css">
@@ -71,7 +70,7 @@
   <div class="container">
     <div class="label">Tool</div>
     <h1>Technical Writing Linter</h1>
-    <p class="lead">Paste a technical article or tutorial to check it against 18 writing rules. Each finding names the rule it broke and highlights the passage, and nothing you paste leaves your browser.</p>
+    <p class="lead">Paste a technical article or tutorial to check it against 16 writing rules. Each finding names the rule it broke and quotes the text that triggered it, and nothing you paste leaves your browser.</p>
   </div>
 </section>
 
@@ -159,16 +158,15 @@
       <div>
         <div class="lint-severity-badge lint-severity-error">error</div>
         <ul class="linter-rule-list">
-          <li><strong>Paragraph length.</strong> A prose paragraph holds two sentences at the most.</li>
-          <li><strong>Personal voice.</strong> A full article needs first-person experience or judgment. Anonymous reference copy belongs in product docs.</li>
-          <li><strong>Em dashes.</strong> Replace each em dash (—) in prose with a comma, a period, or parentheses.</li>
+          <li><strong>Paragraph length.</strong> Flags a prose paragraph with more than two sentences.</li>
+          <li><strong>Em dashes.</strong> Replace each em dash (—) with a comma, a period, or parentheses.</li>
           <li><strong>Contrastive parallelism.</strong> Flags "unlike X, Y…", "whereas", and "on the other hand". State the evidence instead of the contrast.</li>
           <li><strong>Horizontal lines.</strong> Replace a <code>---</code> section divider with a heading or white space.</li>
           <li><strong>Banned jargon.</strong> Flags "leverage", "synergy", and "unlock". Name the action the word stands in for.</li>
           <li><strong>Banned sentence openers.</strong> Flags sentences that start with "In", "This", "By", "Finally", "Most", or "Ever".</li>
           <li><strong>Condescension words.</strong> Flags "simply", "just", "easy", "obviously", and "of course". Each one tells a stuck reader the step should not have stopped them.</li>
           <li><strong>AI writing signals.</strong> Flags "delve", "in conclusion", "it's worth noting", "rapidly evolving", and "harness the power". Readers take these phrases as a sign that a model wrote the page.</li>
-          <li><strong>Filler openers.</strong> Flags a first line such as "In this article…" or "Today we will learn…". Open with the answer or the task instead.</li>
+          <li><strong>Filler openers.</strong> Flags phrases such as "In this article…" and "Today we will learn…", which announce the article instead of starting it.</li>
         </ul>
       </div>
 
@@ -176,7 +174,7 @@
         <div class="lint-severity-badge lint-severity-warning">warning</div>
         <ul class="linter-rule-list">
           <li><strong>Hedge words.</strong> Flags "very", "really", "quite", and "basically". Each one weakens the claim it modifies.</li>
-          <li><strong>Buzzwords.</strong> Flags "leverage", "seamless", "robust", "cutting-edge", and "utilize". Replace each with the property you can show.</li>
+          <li><strong>Buzzwords.</strong> Flags "seamless", "robust", "cutting-edge", and "utilize". Replace each with the property you can show.</li>
           <li><strong>Filler phrases.</strong> Flags "in order to", "note that", "please note", and "as you can see". Delete them and the sentence loses nothing.</li>
           <li><strong>Tutorial "we".</strong> Flags "we will" and "let's". Address the reader as "you".</li>
         </ul>
@@ -185,10 +183,10 @@
       <div>
         <div class="lint-severity-badge lint-severity-info">info</div>
         <ul class="linter-rule-list">
+          <li><strong>Personal voice.</strong> Flags an article of 100 words or more with no first-person reference. Add one only where a real decision or experience makes the article more useful.</li>
           <li><strong>Passive voice.</strong> Found by pattern and marked for review, because some passive sentences are the right choice.</li>
           <li><strong>Long sentences.</strong> Flags sentences over 35 words. Split them so a reader scanning the page gets one claim at a time.</li>
-          <li><strong>High adverb density.</strong> Flags text where more than 5% of words end in -ly. Cut the adverbs that repeat what the verb already says.</li>
-          <li><strong>Low readability.</strong> Flags a Flesch reading ease score below 30, the band the scale rates very difficult.</li>
+          <li><strong>Reading ease.</strong> The stats line shows a Flesch reading ease score from 0 to 100 for text of 20 words or more. The score is shown for reference and does not change the grade.</li>
         </ul>
       </div>
 
@@ -196,7 +194,20 @@
   </div>
 </section>
 
-{% include "tool_cta.html" %}
+<section class="cta-band cta-band-top-border">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Need writing that passes its own linter?</h2>
+        <p>I write technical articles and docs for developer-tool and B2B SaaS teams, and I test each claim against the product.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>
+        <a href="/articles/" class="btn btn-outline">Read the Writing</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <script src="/static/js/linter.js"></script>
 {% endblock %}

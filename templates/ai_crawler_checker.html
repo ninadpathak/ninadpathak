@@ -26,7 +26,7 @@
 
 {# TODO(copy) 2: meta description, 140-155 chars. Lead with the citation-vs-training
    distinction, because that is the differentiator. #}
-{% block description %}Check whether your robots.txt lets AI assistants cite you, separately from whether it lets them train on you. Runs in the browser. No signup.{% endblock %}
+{% block description %}Check whether your robots.txt lets AI assistants cite you, separately from whether it lets them train on you. Paste a file or check a live domain. No signup.{% endblock %}
 
 {% block canonical %}/ai-crawler-checker/{% endblock %}
 {% block og_url %}/ai-crawler-checker/{% endblock %}
@@ -35,13 +35,13 @@
 {% block og_title %}AI Crawler Access Checker{% endblock %}
 
 {# TODO(copy) 4: og:description, 110-130 chars #}
-{% block og_description %}See which AI platforms your robots.txt lets cite you, and which it only blocks from training. Free and browser-based.{% endblock %}
+{% block og_description %}See which AI platforms your robots.txt lets cite you, and which it only blocks from training. Free, no signup.{% endblock %}
 
 {# TODO(copy) 5: twitter:title, under 60 chars #}
 {% block tw_title %}AI Crawler Access Checker{% endblock %}
 
 {# TODO(copy) 6: twitter:description, under 120 chars #}
-{% block tw_desc %}Check whether your robots.txt blocks AI citation or only AI training. Free, browser-based, no signup.{% endblock %}
+{% block tw_desc %}Check whether your robots.txt blocks AI citation or only AI training. Free, no signup.{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="/static/css/linter.css">
@@ -248,7 +248,7 @@
         <div class="lint-severity-badge lint-severity-warning">matching rules</div>
         <ul class="linter-rule-list">
           <li><strong>Only the most specific group applies.</strong> RFC 9309 selects one user-agent group per crawler. A group naming a crawler <em>replaces</em> the <code>*</code> group for it rather than adding to it.</li>
-          <li><strong>Same-token groups are merged.</strong> Two <code>User-agent: Googlebot</code> blocks are treated as one, which real files rely on.</li>
+          <li><strong>Same-token groups are merged.</strong> The checker treats two <code>User-agent: Googlebot</code> blocks as one group, which real files rely on.</li>
           <li><strong>The longest matching rule wins,</strong> and <code>Allow</code> breaks a tie of equal length.</li>
           <li><strong>An empty <code>Disallow</code> permits everything,</strong> and a rule placed before any <code>User-agent</code> line is ignored.</li>
           <li><strong>Wildcards are honoured.</strong> <code>*</code> matches any sequence and <code>$</code> anchors the end of a path.</li>
@@ -279,7 +279,7 @@
        people out, and that robots.txt is advisory rather than enforcement.
        Do not claim any file or markup improves AI visibility. See
        planning/research/seo-state-of-play-2026-08.md sections 2.2 and 2.6. #}
-    <h2>Two controls, not one</h2>
+    <h2>Citation and training are separate controls</h2>
     <p>Each platform listed above reads at least two robots.txt tokens: one that decides whether it may quote a page in an answer, and one that decides whether the page may train a model. They are separate lines in robots.txt, and a file can permit the first while refusing the second.</p>
     <p>The checker catches the mistake in both directions. A file can block citation while its owner believes it only opted out of training, and a file that looks hostile to AI can still let each assistant above quote the site.</p>
 
@@ -308,8 +308,6 @@
     </div>
   </div>
 </section>
-
-{% include "tool_cta.html" %}
 
 <script src="/static/js/robots-access-core.js"></script>
 <script src="/static/js/robots-access.js"></script>
