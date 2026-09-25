@@ -4,9 +4,9 @@
 {% block description %}Check a technical article against 16 writing rules, from condescension words and AI writing signals to passive voice, and get a readability score. Free, no signup.{% endblock %}
 
 {# The oldest tool on the site shipped with no structured data, so it inherited the base
-   Person schema while the four newer tools all declare SoftwareApplication. Every entry in
-   featureList below is one of the 16 checks this page already documents, so the schema
-   describes the tool rather than advertising it. #}
+   Person schema while the four newer tools all declare SoftwareApplication. The first 16
+   featureList entries are the 16 checks this page documents; the last two describe the
+   unscored reading-ease figure and where the tool runs. #}
 {% block schema %}
 <script type="application/ld+json">
 {
@@ -24,7 +24,8 @@
   "featureList": [
     "Flags prose paragraphs longer than two sentences",
     "Checks for first-person experience, observation or judgment",
-    "Flags em dashes in prose",
+    "Flags em dashes",
+    "Flags --- horizontal-line dividers",
     "Flags contrastive parallelism such as 'unlike X, Y' and 'on the other hand'",
     "Flags banned jargon including leverage, synergy and unlock",
     "Flags banned sentence openers including In, This, By, Finally, Most and Ever",

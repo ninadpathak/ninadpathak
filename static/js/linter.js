@@ -387,7 +387,7 @@
     document.getElementById('lintGradeDesc').textContent = result.gradeDesc;
     scoreBarEl.className = 'lint-score-bar lint-grade-' + result.grade.toLowerCase();
     
-    document.getElementById('lintStats').innerHTML = result.wordCount + ' words &middot; ' + result.issues.length + ' issues' + (result.fkScore ? ' &middot; reading ease ' + result.fkScore : '');
+    document.getElementById('lintStats').innerHTML = result.wordCount + ' words &middot; ' + result.issues.length + ' issues' + (result.fkScore !== null ? ' &middot; reading ease ' + result.fkScore : '');
 
     var html = '';
     var groups = [

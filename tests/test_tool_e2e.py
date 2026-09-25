@@ -267,6 +267,14 @@ class ClientLogicTests(unittest.TestCase):
         self.assertEqual(got["errors"], [])
         self.assertEqual(got["elements"]["lintIssues"]["html"], "")
 
+    def test_linter_shows_a_zero_reading_ease_score(self):
+        # A clamped score of 0 is falsy, and the stats line once hid it behind a truthiness test.
+        dense = " ".join(["internationalization"] * 25) + "."
+        got = BY_PATH["/linter/"].drive(text={"linterInput": dense}, click="lintBtn",
+                                        collect=["lintStats"])
+        self.assertEqual(got["errors"], [])
+        self.assertIn("reading ease 0", got["elements"]["lintStats"]["html"])
+
     def test_validator_grades_a_conforming_llms_txt(self):
         source = "# Title\n\n> A summary.\n\n## Docs\n\n- [A](https://example.com/a): note\n"
         got = BY_PATH["/llms-txt-validator/"].drive(
