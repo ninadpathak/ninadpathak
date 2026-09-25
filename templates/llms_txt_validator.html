@@ -85,7 +85,7 @@
   <div class="container">
     <div class="label">Tool</div>
     <h1>llms.txt Validator</h1>
-    <p class="lead">The llms.txt validator checks a pasted file or one fetched from a domain against the v2 proposal. Every finding says whether it comes from the specification or from a convention.</p>
+    <p class="lead">Paste an llms.txt file or fetch one from a domain to check it against the v2 proposal. Each finding says whether it comes from the specification or from a convention.</p>
   </div>
 </section>
 
@@ -100,12 +100,8 @@
     </form>
     <p class="tool-hint">A domain check fetches its root <code>/llms.txt</code> file; pasted text stays in your browser.</p>
     <div class="tool-status" id="validatorDomainStatus" role="status" aria-live="polite"></div>
-  </div>
-</section>
 
-<section class="linter-section">
-  <div class="container">
-    <div class="linter-layout">
+    <div class="tool-workspace linter-layout">
 
       <div class="linter-panel">
         <div class="linter-panel-header">
@@ -125,6 +121,7 @@
             role="textbox"
             aria-multiline="true"
             aria-label="llms.txt file contents"
+            placeholder="Paste an llms.txt file here."
           ></div>
         </div>
 
@@ -147,7 +144,7 @@
           <div class="linter-empty" id="validatorEmpty">
             <div class="linter-empty-inner">
               <div class="linter-empty-icon">{ }</div>
-              <p>Validate a file to see its findings.</p>
+              <p>Findings appear here after you validate a file.</p>
             </div>
           </div>
 
@@ -172,12 +169,10 @@
   </div>
 </section>
 
-<section class="linter-rules-section">
+<section class="section-block section-block-top-border">
   <div class="container">
-    <div class="linter-rules-header">
-      <div class="label">Rules</div>
-      <h2>Requirements and conventions checked</h2>
-    </div>
+    <div class="label section-label">Rules</div>
+    <h2>Requirements and conventions checked</h2>
     <div class="linter-rules-grid">
 
       <div>
@@ -262,6 +257,8 @@
     </div>
   </div>
 </section>
+
+{% include "tool_cta.html" %}
 
 <script src="/static/js/llms-validator-core.js"></script>
 <script src="/static/js/llms-validator.js"></script>

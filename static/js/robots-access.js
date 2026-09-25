@@ -42,7 +42,7 @@
 
   var SAMPLE = [
     "# A training opt-out that keeps every citation crawler.",
-    "# This is the shape most publishers actually want.",
+    "# Search and user-request crawlers fall through to the * group.",
     "",
     "User-agent: *",
     "Allow: /",
@@ -146,7 +146,7 @@
       var blocked = items.filter(function (item) { return !item.allowed; }).length;
       html += '<div class="lint-group lint-group-' + section.severity + '">';
       html += '<div class="lint-group-header"><span class="lint-group-label">' +
-        escapeHtml(section.label) + " — " + (items.length - blocked) + " of " + items.length +
+        escapeHtml(section.label) + ": " + (items.length - blocked) + " of " + items.length +
         " allowed</span></div>";
       html += '<div class="lint-item"><div class="lint-item-message">' +
         escapeHtml(section.caption) + "</div></div>";
@@ -260,7 +260,7 @@
       ];
       lastResult.results.forEach(function (item) {
         lines.push("[" + (item.allowed ? "allowed" : "blocked") + "/" + item.purpose + "] " +
-          item.token + " — " + item.platform);
+          item.token + ": " + item.platform);
         lines.push("    " + item.explanation);
       });
       navigator.clipboard.writeText(lines.join("\n")).then(function () {

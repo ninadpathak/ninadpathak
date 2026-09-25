@@ -23,7 +23,7 @@
       severity: 'error',
       label: 'Contrastive parallelism',
       terms: ['unlike', 'whereas', 'on the other hand'],
-      message: function (w) { return '"' + w + '" — contrastive parallelism. Rewrite with evidence instead.'; }
+      message: function (w) { return '"' + w + '" sets up a contrast. State the evidence instead.'; }
     },
     {
       id: 'hr_prose',
@@ -37,7 +37,7 @@
       severity: 'error',
       label: 'Banned jargon',
       terms: ['leverage', 'leverages', 'leveraging', 'synergy', 'synergies', 'unlock', 'unlocks', 'unlocking'],
-      message: function (w) { return '"' + w + '" is banned jargon. Say what you mean.'; }
+      message: function (w) { return '"' + w + '" is banned jargon. Name the action it stands in for.'; }
     },
     {
       id: 'condescension',
@@ -66,7 +66,7 @@
         'navigate the complexities', 'the world of',
         'landscape of', 'realm of'
       ],
-      message: function (w) { return '"' + w + '" is a hallmark of LLM-generated content. Cut it.'; }
+      message: function (w) { return '"' + w + '" reads as LLM-generated text. Cut it.'; }
     },
     {
       id: 'filler_opener',
@@ -107,7 +107,7 @@
         'paradigm shift', 'mission-critical',
         'best-in-class', 'next-generation'
       ],
-      message: function (w) { return '"' + w + '" is a buzzword. Use plain language.'; }
+      message: function (w) { return '"' + w + '" is a buzzword. Replace it with the property you can show.'; }
     },
     {
       id: 'filler_phrase',
@@ -282,7 +282,7 @@
         label: 'Paragraph over two sentences',
         matched: lp.matched,
         excerpt: getExcerpt(text, lp.index, Math.min(lp.length, 80)),
-        message: lp.sentenceCount + ' sentences in one paragraph. Split it after the second sentence.'
+        message: 'The paragraph has ' + lp.sentenceCount + ' sentences. Split it after the second sentence.'
       });
     });
 
@@ -328,7 +328,7 @@
         label: 'Long sentence',
         matched: ls.matched,
         excerpt: getExcerpt(text, ls.index, Math.min(ls.length, 50)),
-        message: ls.wordCount + ' words. Break this up.'
+        message: 'At ' + ls.wordCount + ' words, the sentence is too long to scan. Split it.'
       });
     });
 

@@ -98,7 +98,7 @@
   <div class="container">
     <div class="label">Tool</div>
     <h1>AI Overviews Checker</h1>
-    <p class="lead">The AI Overviews Checker tests a page against nine sourced checks for snippet eligibility and extractable answers. It measures page structure and does not predict AI Overview placement.</p>
+    <p class="lead">Check a live URL or a pasted page against nine sourced checks for snippet eligibility and extractable answers. The result describes page structure and does not predict AI Overview placement.</p>
   </div>
 </section>
 
@@ -111,14 +111,10 @@
       </label>
       <button class="btn btn-primary scan-submit" type="submit">Fetch and check &rarr;</button>
     </form>
-    <p class="tool-hint">Fetching a URL is the only way to check snippet eligibility because the tool needs its HTML and response headers; pasted content stays in your browser.</p>
+    <p class="tool-hint">Snippet eligibility needs the page's HTML and response headers, so only a URL check can test it. Pasted content stays in your browser.</p>
     <div class="tool-status" id="aioUrlStatus" role="status" aria-live="polite"></div>
-  </div>
-</section>
 
-<section class="linter-section">
-  <div class="container">
-    <div class="linter-layout">
+    <div class="tool-workspace linter-layout">
 
       <div class="linter-panel">
         <div class="linter-panel-header">
@@ -138,6 +134,7 @@
             role="textbox"
             aria-multiline="true"
             aria-label="Page content or HTML source"
+            placeholder="Paste page text or HTML source here."
           ></div>
         </div>
 
@@ -160,7 +157,7 @@
           <div class="linter-empty" id="aioEmpty">
             <div class="linter-empty-inner">
               <div class="linter-empty-icon">{ }</div>
-              <p>Run the checks to inspect this page.</p>
+              <p>Findings appear here after you run the checks.</p>
             </div>
           </div>
 
@@ -185,12 +182,10 @@
   </div>
 </section>
 
-<section class="linter-rules-section">
+<section class="section-block section-block-top-border">
   <div class="container">
-    <div class="linter-rules-header">
-      <div class="label">Method</div>
-      <h2>The evidence behind each check</h2>
-    </div>
+    <div class="label section-label">Method</div>
+    <h2>The evidence behind each check</h2>
     <div class="linter-rules-grid">
 
       <div>
@@ -268,6 +263,8 @@
     </div>
   </div>
 </section>
+
+{% include "tool_cta.html" %}
 
 <script src="/static/js/aio-checker-core.js"></script>
 <script src="/static/js/aio-checker.js"></script>

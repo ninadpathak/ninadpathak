@@ -207,7 +207,7 @@
         lines.push(
           "[" + item.severity + "] " + item.rule +
           (typeof item.line === "number" ? " (line " + item.line + ")" : "") +
-          " — " + item.message
+          ": " + item.message
         );
       });
       navigator.clipboard.writeText(lines.join("\n")).then(function () {
@@ -245,7 +245,7 @@
           setInput(body.content);
           if (body.servedAsHtml) {
             setDomainStatus(
-              body.finalUrl + " returned HTML, not a markdown file. The host is most likely serving a page " +
+              body.finalUrl + " returned HTML, not a markdown file. The host is probably serving a page " +
               "instead of llms.txt, which an agent cannot use.",
               "error"
             );

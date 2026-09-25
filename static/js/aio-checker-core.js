@@ -479,7 +479,7 @@
         unsourced.slice(0, 5).map(function (sentence) { return { excerpt: sentence.slice(0, 160) }; }));
     }
     return makeCheck("claims-carry-sources", "Quantified claims name a source", PASS, HEURISTIC, basis,
-      "Most quantified claims sit near attribution or a link.", []);
+      "At least half of the quantified claims sit near attribution or a link.", []);
   }
 
   function checkDatedEvidence(doc) {

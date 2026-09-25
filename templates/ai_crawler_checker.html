@@ -133,7 +133,7 @@
     <h1>AI Crawler Access Checker</h1>
     {# TODO(copy) 8: lead paragraph, 2 sentences. Sentence one: what it answers.
        Sentence two: that citation and training are separate controls. #}
-    <p class="lead">Paste a robots.txt or enter a domain. This reports which AI platforms your file lets cite you, separately from which it lets train on you, and names the rule behind every verdict.</p>
+    <p class="lead">Paste a robots.txt or enter a domain to see which AI platforms your file lets cite you and which it lets train on your pages. Each verdict names the rule that produced it.</p>
   </div>
 </section>
 
@@ -151,14 +151,10 @@
       <button class="btn btn-primary scan-submit" type="submit">Fetch robots.txt &rarr;</button>
     </form>
     {# TODO(copy) 9: one-sentence hint below the form. #}
-    <p class="tool-hint">Rules can differ by path, so a site open at the root may still block a crawler from its docs. Pasting a file instead keeps it in your browser.</p>
+    <p class="tool-hint">Rules can differ by path, so a site open at the root may still block a crawler from its docs. A pasted file stays in your browser.</p>
     <div class="tool-status" id="robotsDomainStatus" role="status" aria-live="polite"></div>
-  </div>
-</section>
 
-<section class="linter-section">
-  <div class="container">
-    <div class="linter-layout">
+    <div class="tool-workspace linter-layout">
 
       <div class="linter-panel">
         <div class="linter-panel-header">
@@ -178,6 +174,7 @@
             role="textbox"
             aria-multiline="true"
             aria-label="robots.txt contents"
+            placeholder="Paste a robots.txt file here."
           ></div>
         </div>
 
@@ -201,7 +198,7 @@
             <div class="linter-empty-inner">
               <div class="linter-empty-icon">{ }</div>
               {# TODO(copy) 10: empty-state line #}
-              <p>Results appear here once you check a file.</p>
+              <p>Findings appear here after you check a file.</p>
             </div>
           </div>
 
@@ -226,13 +223,11 @@
   </div>
 </section>
 
-<section class="linter-rules-section">
+<section class="section-block section-block-top-border">
   <div class="container">
-    <div class="linter-rules-header">
-      <div class="label">Method</div>
-      {# TODO(copy) 11: H2 for the method section #}
-      <h2>How this reaches its verdict</h2>
-    </div>
+    <div class="label section-label">Method</div>
+    {# TODO(copy) 11: H2 for the method section #}
+    <h2>How this reaches its verdict</h2>
     <div class="linter-rules-grid">
 
       <div>
@@ -241,18 +236,18 @@
            load-bearing. Do not soften, and do not add any claim that llms.txt or
            schema affects citation. #}
         <ul class="linter-rule-list">
-          <li><strong>ChatGPT</strong> &mdash; <code>OAI-SearchBot</code> governs citation, <code>GPTBot</code> governs training. OpenAI states a site blocking the first "will not be shown in ChatGPT search answers".</li>
-          <li><strong>Claude</strong> &mdash; <code>Claude-SearchBot</code> governs search, <code>ClaudeBot</code> governs training. Anthropic states that blocking <code>ClaudeBot</code> leaves the other two unaffected.</li>
-          <li><strong>Perplexity</strong> &mdash; <code>PerplexityBot</code> surfaces and links sites, and Perplexity states it is not used for foundation-model training.</li>
-          <li><strong>Google</strong> &mdash; AI Overviews and AI Mode are part of Search and use <code>Googlebot</code>. <code>Google-Extended</code> covers Gemini apps and Vertex AI grounding, and does <em>not</em> affect Search.</li>
-          <li><strong>Apple</strong> &mdash; <code>Applebot</code> powers search features, <code>Applebot-Extended</code> is a training opt-out only.</li>
+          <li><strong>ChatGPT.</strong> <code>OAI-SearchBot</code> governs citation, <code>GPTBot</code> governs training. OpenAI states a site blocking the first "will not be shown in ChatGPT search answers".</li>
+          <li><strong>Claude.</strong> <code>Claude-SearchBot</code> governs search, <code>ClaudeBot</code> governs training. Anthropic states that blocking <code>ClaudeBot</code> leaves the other two unaffected.</li>
+          <li><strong>Perplexity.</strong> <code>PerplexityBot</code> surfaces and links sites, and Perplexity states it is not used for foundation-model training.</li>
+          <li><strong>Google.</strong> AI Overviews and AI Mode are part of Search and use <code>Googlebot</code>. <code>Google-Extended</code> covers Gemini apps and Vertex AI grounding, and does <em>not</em> affect Search.</li>
+          <li><strong>Apple.</strong> <code>Applebot</code> powers search features, and <code>Applebot-Extended</code> is a training opt-out only.</li>
         </ul>
       </div>
 
       <div>
         <div class="lint-severity-badge lint-severity-warning">matching rules</div>
         <ul class="linter-rule-list">
-          <li><strong>Only the most specific group applies.</strong> RFC 9309 selects one user-agent group per crawler. A group naming a crawler <em>replaces</em> the <code>*</code> group for it rather than adding to it. This is the most common cause of accidental access mistakes.</li>
+          <li><strong>Only the most specific group applies.</strong> RFC 9309 selects one user-agent group per crawler. A group naming a crawler <em>replaces</em> the <code>*</code> group for it rather than adding to it.</li>
           <li><strong>Same-token groups are merged.</strong> Two <code>User-agent: Googlebot</code> blocks are treated as one, which real files rely on.</li>
           <li><strong>The longest matching rule wins,</strong> and <code>Allow</code> breaks a tie of equal length.</li>
           <li><strong>An empty <code>Disallow</code> permits everything,</strong> and a rule placed before any <code>User-agent</code> line is ignored.</li>
@@ -285,8 +280,8 @@
        Do not claim any file or markup improves AI visibility. See
        planning/research/seo-state-of-play-2026-08.md sections 2.2 and 2.6. #}
     <h2>Two controls, not one</h2>
-    <p>Every major AI platform ships at least two crawlers: one that decides whether it may quote a page in an answer, and one that decides whether the page may train a model. They are separate lines in robots.txt, and a file can permit the first while refusing the second.</p>
-    <p>The mistake this tool exists to catch runs in both directions. A file can block citation while its owner believes it only opted out of training, and a file can look hostile to AI while in fact allowing every assistant to quote it.</p>
+    <p>Each platform listed above reads at least two robots.txt tokens: one that decides whether it may quote a page in an answer, and one that decides whether the page may train a model. They are separate lines in robots.txt, and a file can permit the first while refusing the second.</p>
+    <p>The checker catches the mistake in both directions. A file can block citation while its owner believes it only opted out of training, and a file that looks hostile to AI can still let each assistant above quote the site.</p>
 
     <h2>Frequently asked questions</h2>
     <div class="faq-list">
@@ -313,6 +308,8 @@
     </div>
   </div>
 </section>
+
+{% include "tool_cta.html" %}
 
 <script src="/static/js/robots-access-core.js"></script>
 <script src="/static/js/robots-access.js"></script>

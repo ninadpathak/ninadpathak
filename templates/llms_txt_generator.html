@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Automated llms.txt Generator | Ninad Pathak{% endblock %}
-{% block description %}Scan your sitemap, review page titles and descriptions, and generate an editable llms.txt file. Free, fast, and no signup required.{% endblock %}
+{% block description %}Scan a website's sitemap, review each page's title and description, and download an editable llms.txt draft. Free, no signup.{% endblock %}
 {# Uses the .tool-panel kit from linter.css and never linked it, so this page has been
    serving unstyled since it shipped. #}
 {% block extra_css %}<link rel="stylesheet" href="/static/css/linter.css">{% endblock %}
@@ -71,9 +71,9 @@
 {% block content %}
 <section class="page-intro">
   <div class="container">
-    <div class="label">Free website tool</div>
+    <div class="label">Tool</div>
     <h1>Generate llms.txt from your website</h1>
-    <p class="lead">Enter a domain. The generator finds its sitemap, reads each page’s title and description, and gives you an editable draft.</p>
+    <p class="lead">Enter a domain. The generator finds its sitemap, reads each page's title and description, and gives you an llms.txt draft to edit before you publish it.</p>
   </div>
 </section>
 
@@ -147,9 +147,9 @@
 
 <section class="guide-section">
   <div class="prose-container">
-    <div class="label">Implementation guide</div>
+    <div class="label">Reference</div>
     <h2>Review before you publish</h2>
-    <p>The sitemap gives you coverage, while the editor gives you control. Remove duplicate, account, search, tag, and other low-value pages. Keep the routes that explain the product, answer important questions, or help someone complete a task.</p>
+    <p>A sitemap also lists pages an agent has no use for. Remove duplicates and low-value routes such as account or tag pages, and keep the pages that explain the product or help a reader finish a task.</p>
 
     <ol class="numbered-steps">
       <li><strong>Review the scan.</strong> Edit titles and descriptions, choose a section, and exclude pages that add little context.</li>
@@ -166,7 +166,7 @@
       </details>
       <details>
         <summary>What happens when a site has more than 100 pages?</summary>
-        <p>The scan stops at 100 pages to keep the tool responsive. That is enough for a curated llms.txt draft; large sites should keep only their most authoritative pages.</p>
+        <p>The scan stops at 100 pages to keep the tool responsive. A curated llms.txt needs fewer pages than that, so a large site should list only the pages that define its product and documentation.</p>
       </details>
       <details>
         <summary>Does llms.txt control AI crawlers?</summary>
@@ -175,6 +175,8 @@
     </div>
   </div>
 </section>
+
+{% include "tool_cta.html" %}
 
 <script src="/static/js/llms-generator.js"></script>
 {% endblock %}
