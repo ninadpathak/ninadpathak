@@ -54,14 +54,14 @@
 <section class="blog-list-section">
   <div class="container">
     {% for tool in tools %}
-    <a href="/{{ tool.slug }}/" class="post-row">
-      <span class="post-row-title">{{ tool.name }}</span>
-      <div class="post-row-tags">
+    <a href="/{{ tool.slug }}/" class="blog-row">
+      <div class="blog-row-title">{{ tool.name }}</div>
+      <div class="blog-row-desc">{{ tool.description }}</div>
+      <div class="blog-row-meta">
         <span class="tag">free</span>
         <span class="tag">no signup</span>
       </div>
     </a>
-    <p>{{ tool.description }}</p>
     {% endfor %}
   </div>
 </section>
