@@ -162,7 +162,7 @@ Full-duplex systems also need a measured interruption target because the agent m
 
 Every millisecond saved in the context window is a millisecond closer to a conversation that feels human.
 
-Teams building voice-first products need clear architectural documentation and implementation guides. [My work page](/work) shows how I explain complex infrastructure for developer-tool companies.
+Teams building voice-first products need clear architectural documentation and implementation guides. [My work page](/work/) shows how I explain complex infrastructure for developer-tool companies.
 
 ## FAQ
 

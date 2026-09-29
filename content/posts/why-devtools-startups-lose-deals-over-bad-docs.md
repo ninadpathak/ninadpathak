@@ -116,7 +116,7 @@ That detective work reads as a preview of future maintenance cost. Tools that ar
 
 One reason I write for devtools companies is that docs quality improves sales and support simultaneously. Good docs reduce the labor required to believe in the product.
 
-[My work page](/work) covers the kind of writing work I mean.
+[My work page](/work/) covers the kind of writing work I mean.
 
 ## Documentation quality signals product maturity
 

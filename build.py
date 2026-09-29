@@ -209,6 +209,27 @@ def extract_faqs(md_content: str) -> list[dict]:
     return faqs
 
 
+def with_slash_variants(rules: list[str]) -> list[str]:
+    """Give every exact redirect source both its bare and trailing-slash form.
+
+    Cloudflare Pages matches a _redirects source exactly. Fifteen static aliases were
+    written only as /old/, so a request for /old skipped the rule, found no asset, and
+    returned 404 in production. The missing twin is emitted right after its rule.
+    """
+    sources = {rule.split()[0] for rule in rules}
+    expanded = []
+    for rule in rules:
+        expanded.append(rule)
+        source, *rest = rule.split()
+        if source == "/" or "*" in source or ":" in source or "." in source.rsplit("/", 1)[-1]:
+            continue
+        twin = source[:-1] if source.endswith("/") else source + "/"
+        if twin not in sources:
+            sources.add(twin)
+            expanded.append(" ".join([twin, *rest]))
+    return expanded
+
+
 def sort_key(post: dict):
     d = post.get("date")
     if isinstance(d, datetime):
@@ -912,7 +933,7 @@ class SiteBuilder:
                 if line.strip() and not line.lstrip().startswith("#")
             ]
             if static_lines:
-                lines.extend(["", "# Static aliases", *static_lines])
+                lines.extend(["", "# Static aliases", *with_slash_variants(static_lines)])
 
         (self.output / "_redirects").write_text("\n".join(lines) + "\n", encoding="utf-8")
 

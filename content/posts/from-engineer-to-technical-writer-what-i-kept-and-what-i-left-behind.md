@@ -139,7 +139,7 @@ Google’s materials on [becoming a technical writer](https://developers.google.
 
 Technical writing is not a decorative layer painted over engineering. The work is a separate production function with its own success metrics.
 
-If you are looking for this kind of depth for your own team, [my work page](/work) shows how I apply these engineering habits to client projects.
+If you are looking for this kind of depth for your own team, [my work page](/work/) shows how I apply these engineering habits to client projects.
 
 ## What changed in my day-to-day workflow
 

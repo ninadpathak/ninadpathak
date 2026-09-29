@@ -197,7 +197,7 @@ Helping a developer tools or infrastructure company build this kind of moat, I w
 
 That combination is part of the writing work I do for technical companies. Strong technical content should not sit outside the product strategy.
 
-It should change how the market understands the problem and make the product feel easier to choose. [My work page](/work) is built around that exact outcome.
+It should change how the market understands the problem and make the product feel easier to choose. [My work page](/work/) is built around that exact outcome.
 
 AI products change what this publishing system must explain because outputs can vary and evidence can go stale between runs. The guide to [technical writing for AI products](/articles/technical-writing-for-ai-products-the-new-rules/) covers those product-specific requirements.
 

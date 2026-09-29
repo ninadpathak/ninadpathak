@@ -13,6 +13,7 @@ from build import (
     optimize_content_images,
     slugify,
     sort_key,
+    with_slash_variants,
 )
 
 
@@ -78,6 +79,18 @@ Ignored.
         )
 
         self.assertEqual(rendered.count("loading="), 1)
+
+
+class RedirectVariantTests(unittest.TestCase):
+    def test_slash_only_and_bare_only_sources_gain_their_twin(self):
+        self.assertEqual(
+            with_slash_variants(["/old/ /new/ 301", "/bare /new/ 301"]),
+            ["/old/ /new/ 301", "/old /new/ 301", "/bare /new/ 301", "/bare/ /new/ 301"],
+        )
+
+    def test_existing_pairs_files_and_splats_are_left_alone(self):
+        rules = ["/a /new/ 301", "/a/ /new/ 301", "/feed.rss /feed.xml 301", "/x/* /new/ 301"]
+        self.assertEqual(with_slash_variants(rules), rules)
 
 
 class CategoryArchiveTests(unittest.TestCase):

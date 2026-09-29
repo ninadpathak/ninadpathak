@@ -203,7 +203,7 @@ Sequence length is going to stay a headline metric for model capability. The "Br
 
 Sustainable AI scaling runs on dynamic, importance-aware eviction instead. We should stop treating context as a static buffer you fill and forget.
 
-Context behaves like a dynamic heap, and managing it deserves the same rigor as other memory systems. [My work page](/work) shows how I explain dense infrastructure topics for developer-tool companies.
+Context behaves like a dynamic heap, and managing it deserves the same rigor as other memory systems. [My work page](/work/) shows how I explain dense infrastructure topics for developer-tool companies.
 
 ## FAQ
 

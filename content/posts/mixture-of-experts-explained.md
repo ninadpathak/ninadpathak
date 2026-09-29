@@ -112,7 +112,7 @@ Consuming MoE models through an API, you can mostly ignore the architecture. You
 
 The architecture starts to matter once you are self-hosting, deciding whether to fine-tune, or trying to understand why a model behaves inconsistently on edge cases.
 
-Explaining these kinds of infrastructure tradeoffs clearly for developer audiences is a significant part of what I do for AI companies. [My work page](/work) has examples if that is relevant.
+Explaining these kinds of infrastructure tradeoffs clearly for developer audiences is a significant part of what I do for AI companies. [My work page](/work/) has examples if that is relevant.
 
 ## Questions
 

@@ -88,7 +88,7 @@ Writing AI infrastructure content has made one pattern very clear to me: the bes
 
 They ask for the actual prompt template, the exact schema, the logged error objects, the benchmark setup, and the deprecation plan. That is also the kind of technical depth I bring when writing for AI companies.
 
-[My work page](/work) has examples if that is relevant.
+[My work page](/work/) has examples if that is relevant.
 
 ## Sample code has to be runnable, not decorative
 

@@ -66,7 +66,7 @@ entries:
   - title: "Scaling Mem0 from 30k to 45k Monthly Visits"
     client: "Mem0"
     category: "AI Systems"
-    url: "/work/mem0"
+    url: "/work/mem0/"
 
   - title: "What is Natural Language Processing (NLP)?"
     client: "Mem0"

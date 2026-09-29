@@ -87,6 +87,26 @@ def local_file_for_url(url):
     return direct / "index.html"
 
 
+def load_redirect_rules():
+    """(line number, source, target, status) for each rule in the generated _redirects."""
+    path = OUTPUT / "_redirects"
+    if not path.exists():
+        return []
+    rules = []
+    for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        parts = stripped.split()
+        rules.append((number, parts[0], parts[1] if len(parts) > 1 else "", parts[2] if len(parts) > 2 else ""))
+    return rules
+
+
+def is_page_path(path):
+    """True for a path Cloudflare Pages serves as a directory page, not a file."""
+    return not path.endswith("/") and "." not in path.rsplit("/", 1)[-1]
+
+
 def main():
     errors = []
     pages = {}
@@ -94,6 +114,9 @@ def main():
     if not OUTPUT.exists():
         print("output/ does not exist. Run python3 build.py first.")
         return 1
+
+    redirect_rules = load_redirect_rules()
+    redirect_sources = {source: target for _, source, target, _ in redirect_rules}
 
     html_files = sorted(path for path in OUTPUT.rglob("*.html") if "static" not in path.parts)
     for path in html_files:
@@ -132,6 +155,13 @@ def main():
             target = local_file_for_url(href)
             if target is not None and not target.exists():
                 errors.append(f"{label}: broken internal link: {href}")
+            # A crawler following these pays an extra redirect hop before the real page.
+            parsed = urlparse(href)
+            if target is not None and parsed.path.startswith("/"):
+                if parsed.path in redirect_sources:
+                    errors.append(f"{label}: internal link goes through a redirect: {href} -> {redirect_sources[parsed.path]}")
+                elif is_page_path(parsed.path):
+                    errors.append(f"{label}: internal link lacks its trailing slash and 308s: {href}")
 
         for asset_url in parser.assets:
             if asset_url.startswith(("data:", "//")):
@@ -187,13 +217,31 @@ def main():
     if not redirects_path.exists():
         errors.append("missing root _redirects file")
     else:
-        for number, line in enumerate(redirects_path.read_text(encoding="utf-8").splitlines(), 1):
-            stripped = line.strip()
-            if not stripped or stripped.startswith("#"):
+        lines = redirects_path.read_text(encoding="utf-8").splitlines()
+        seen_sources = set()
+        for number, source, target, status in redirect_rules:
+            if len(lines[number - 1].split()) != 3 or status not in {"301", "302", "303", "307", "308"}:
+                errors.append(f"_redirects line {number}: unsupported Cloudflare Pages rule: {lines[number - 1]}")
                 continue
-            parts = stripped.split()
-            if len(parts) != 3 or parts[2] not in {"301", "302", "303", "307", "308"}:
-                errors.append(f"_redirects line {number}: unsupported Cloudflare Pages rule: {line}")
+            if source in seen_sources:
+                errors.append(f"_redirects line {number}: duplicate source {source}; only the first rule fires")
+            seen_sources.add(source)
+            if "*" in source or ":" in source:
+                continue
+            # Cloudflare matches sources exactly, so /old/ alone leaves /old returning 404.
+            if source != "/" and (source.endswith("/") or is_page_path(source)):
+                twin = source[:-1] if source.endswith("/") else source + "/"
+                if twin not in redirect_sources:
+                    errors.append(f"_redirects line {number}: {source} has no rule for {twin}")
+            target_file = local_file_for_url(target)
+            if target_file is not None:
+                if not target_file.exists():
+                    errors.append(f"_redirects line {number}: {source} redirects to a missing page: {target}")
+                if urlparse(target).path in redirect_sources:
+                    errors.append(f"_redirects line {number}: redirect chain {source} -> {target} -> {redirect_sources[urlparse(target).path]}")
+            source_file = local_file_for_url(source)
+            if source != "/" and source_file is not None and source_file.exists():
+                errors.append(f"_redirects line {number}: {source} shadows a generated page")
 
     routes_path = OUTPUT / "_routes.json"
     if not routes_path.exists():

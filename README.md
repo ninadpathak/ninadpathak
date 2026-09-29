@@ -23,7 +23,10 @@ Output goes to `output/`. That's the folder to deploy.
 
 Every build runs `seo_audit.py` before it exits. Deployment stops if a generated page
 has a broken internal link, missing metadata, duplicate canonical, invalid JSON-LD,
-missing sitemap entry, missing `llms.txt` target, or malformed Cloudflare redirect.
+missing sitemap entry, missing `llms.txt` target, or malformed Cloudflare redirect. It also
+fails on internal links that would take a redirect hop (a slashless page path or a
+redirected URL), redirect chains, redirects to missing or live pages, and a redirect
+source without its bare or trailing-slash twin, since Cloudflare matches sources exactly.
 
 To preview locally:
 
