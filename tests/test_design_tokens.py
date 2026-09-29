@@ -5,8 +5,9 @@ the :root block of static/css/main.css. Templates, articles and site scripts sty
 classes, never inline. The few values that remain raw are listed here by name, so a new
 one-off fails loudly instead of accumulating.
 
-Out of scope here: the standalone iframe visuals in static/visuals/ cannot inherit
-main.css and carry their own <style> blocks.
+The standalone iframe visuals in static/visuals/ cannot inherit main.css. build.py writes
+their shared palette, visual-embed.css, from main.css's tokens, so the palette is written
+once. Artwork geometry and chart-specific colors stay in each visual.
 """
 
 import re
@@ -117,6 +118,72 @@ def _rules(css, context=""):
         elif not selector.startswith("@"):
             rules.append((context, selector, body))
         index = end
+
+
+def _palette(css):
+    """(light, dark) custom properties from :root and its prefers-color-scheme twin."""
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    light, dark = {}, {}
+    for context, selector, body in _rules(css):
+        if selector != ":root":
+            continue
+        target = light if not context else dark if "prefers-color-scheme" in context else None
+        if target is not None:
+            for name, value in re.findall(r"(--[\w-]+)\s*:\s*([^;]+)", body):
+                value = re.sub(r"#([0-9a-f])([0-9a-f])([0-9a-f])\b", r"#\1\1\2\2\3\3", " ".join(value.split()).lower())
+                target[name] = value
+    return light, dark
+
+
+class VisualEmbedPaletteTests(unittest.TestCase):
+    VISUALS = ROOT / "static" / "visuals"
+    LINK = '<link rel="stylesheet" href="/static/css/visual-embed.css">'
+    # Three.js and canvas scenes with fixed artwork colors, or palettes of their own.
+    UNLINKED = {
+        "beam-benchmark.html", "claude-code-memory.html", "context-memory.html", "deerflow-memory.html",
+        "hyperagents-memory.html", "memory-hierarchy.html", "memory-management.html", "rag-vs-memory.html",
+        "short-term-memory.html", "state-memory.html", "voice-memory.html",
+        "embedding-space.html", "matryoshka-truncation.html",
+        # References --text-3 and --border without defining them; linking would change it.
+        "vector-space.html",
+    }
+
+    @classmethod
+    def setUpClass(cls):
+        import tempfile
+        from build import SiteBuilder
+        builder = SiteBuilder.__new__(SiteBuilder)
+        with tempfile.TemporaryDirectory() as directory:
+            builder.output = Path(directory)
+            builder.build_visual_embed_css()
+            cls.shared_css = (builder.output / "static" / "css" / "visual-embed.css").read_text(encoding="utf-8")
+        light, dark = _palette(cls.shared_css)
+        cls.shared = {name: (light[name], dark.get(name, light[name])) for name in light}
+
+    def test_generated_palette_matches_main_css_in_both_themes(self):
+        css = (CSS_DIR / "main.css").read_text(encoding="utf-8")
+        light = dict(re.findall(r"(--[\w-]+)\s*:\s*([^;]+);", re.search(r":root\s*\{(.*?)\}", css, re.S).group(1)))
+        dark = dict(re.findall(r"(--[\w-]+)\s*:\s*([^;]+);", re.search(r"\[data-theme=\"dark\"\]\s*\{(.*?)\}", css, re.S).group(1)))
+        for name, (shared_light, shared_dark) in self.shared.items():
+            with self.subTest(token=name):
+                self.assertEqual(shared_light, light[name].strip().lower())
+                self.assertEqual(shared_dark, dark.get(name, light[name]).strip().lower())
+
+    def test_visuals_link_the_shared_palette_instead_of_pasting_it(self):
+        for path in sorted(self.VISUALS.glob("*.html")):
+            html = path.read_text(encoding="utf-8")
+            linked = self.LINK in html
+            with self.subTest(visual=path.name):
+                self.assertEqual(linked, path.name not in self.UNLINKED)
+            if not linked:
+                continue
+            styles = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, re.S))
+            self.assertLess(html.index(self.LINK), html.index("<style"), path.name)
+            light, dark = _palette(styles)
+            for name in set(light) | set(dark):
+                local = (light.get(name), dark.get(name, light.get(name)))
+                with self.subTest(visual=path.name, token=name):
+                    self.assertNotEqual(local, self.shared.get(name), "duplicates visual-embed.css")
 
 
 class InlineStyleTests(unittest.TestCase):

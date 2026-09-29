@@ -142,6 +142,12 @@ toggled from JavaScript such as `.scroll-locked`, `.is-active`, or `.copy-failed
 are two exceptions. The critical `<style>` in `base.html` paints the themed background
 before `main.css` loads, and the reading-progress bar sets its per-scroll width inline.
 
+The iframe visuals in `static/visuals/` are standalone documents that cannot inherit
+`main.css`. They link `/static/css/visual-embed.css`, which `build.py` generates from the
+`main.css` palette, so a color is edited in one place. Visuals follow the reader's OS
+color scheme through `prefers-color-scheme`. Each visual keeps only its own geometry,
+chart colors, and any token it deliberately overrides. The Three.js scenes with fixed
+artwork colors do not link the shared palette.
 
 ## Deploying to Cloudflare Pages
 
