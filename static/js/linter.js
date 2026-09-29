@@ -413,7 +413,7 @@
     var container = document.querySelector('.linter-results-container');
     container.scrollTop = 0;
 
-    issuesEl.innerHTML = html || '<div style="padding: 2rem; text-align: center; color: var(--text-3); font-family: var(--mono); font-size: 0.8rem;">No issues found. Perfect.</div>';
+    issuesEl.innerHTML = html || '<div class="lint-empty">No issues found. Perfect.</div>';
     document.getElementById('linterResults').hidden = false;
     document.getElementById('linterEmpty').hidden = true;
   }
@@ -462,8 +462,8 @@
         var resItem = document.getElementById('result-' + id);
         if (resItem) {
           resItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          document.querySelectorAll('.lint-item').forEach(i => i.style.background = 'transparent');
-          resItem.style.background = 'var(--bg-1)';
+          document.querySelectorAll('.lint-item.is-active').forEach(i => i.classList.remove('is-active'));
+          resItem.classList.add('is-active');
         }
       }
 
@@ -473,8 +473,8 @@
         var highlight = editor.querySelector('[data-issue-id="' + id + '"]');
         if (highlight) {
           highlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          highlight.style.outline = '2px solid var(--accent)';
-          setTimeout(() => { highlight.style.outline = 'none'; }, 2000);
+          highlight.classList.add('is-flashing');
+          setTimeout(() => { highlight.classList.remove('is-flashing'); }, 2000);
         }
       }
     });

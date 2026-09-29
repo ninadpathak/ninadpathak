@@ -131,6 +131,18 @@ article syntax highlighting and visual-embed styles are included only when the r
 article needs them. Static decision trees use the reusable classes in `flowcharts.css`;
 the build includes that stylesheet only for articles containing a `.flowchart`.
 
+Tokens cover color, font size, weight (`--weight-*`), line height (`--leading-*`),
+tracking (`--tracking-*`), spacing (`--space-*`), rules (`--rule`, `--rule-strong`,
+`--rule-accent`), durations (`--t-*`), and page stacking layers (`--z-*`). A handful of
+single-use values stay raw because snapping them would visibly move a component;
+`tests/test_design_tokens.py` names each one, so a new one-off fails the build.
+
+Templates, articles, and site scripts never set `style=`. Use a class, or a state class
+toggled from JavaScript such as `.scroll-locked`, `.is-active`, or `.copy-failed`. There
+are two exceptions. The critical `<style>` in `base.html` paints the themed background
+before `main.css` loads, and the reading-progress bar sets its per-scroll width inline.
+
+
 ## Deploying to Cloudflare Pages
 
 Set the build command to `python3 build.py` and the output directory to `output`.

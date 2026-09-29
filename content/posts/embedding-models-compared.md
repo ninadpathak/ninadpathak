@@ -142,7 +142,7 @@ The vector acts like a Russian nesting doll.
     <div class="visual-title">
         <span>//</span> Matryoshka: Dimensionality vs. Precision
     </div>
-    <div class="visual-container" style="height: 500px;">
+    <div class="visual-container visual-container--tall">
         <iframe src="/static/visuals/matryoshka-truncation.html" title="Matryoshka Truncation Simulator"></iframe>
     </div>
 </div>

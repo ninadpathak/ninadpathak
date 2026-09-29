@@ -141,10 +141,16 @@ def load_site_geometry(css_path: Path, mobile_viewport: int) -> tuple[int, int]:
     container = re.search(r"\.prose-container\s*\{(?P<body>.*?)\}", css, re.S)
     if not container:
         raise ValueError("CSS has no .prose-container rule")
-    padding = re.search(r"padding\s*:\s*0\s+([0-9.]+)rem", container.group("body"))
-    if not padding:
+    padding = re.search(r"padding\s*:\s*0\s+([^;\s]+)\s*;", container.group("body"))
+    inline = padding.group(1) if padding else ""
+    # The padding is normally a spacing token; resolve it through :root.
+    token = re.fullmatch(r"var\((--[\w-]+)\)", inline)
+    if token:
+        inline = _css_value(root, token.group(1))
+    rem = re.fullmatch(r"([0-9.]+)rem", inline)
+    if not rem:
         raise ValueError(".prose-container must have symmetric rem padding")
-    horizontal_padding = round(float(padding.group(1)) * 16)
+    horizontal_padding = round(float(rem.group(1)) * 16)
     desktop_width = int(prose_width[:-2]) - 2 * horizontal_padding
     mobile_width = mobile_viewport - 2 * horizontal_padding
     if desktop_width <= 0 or mobile_width <= 0:

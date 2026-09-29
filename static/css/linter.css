@@ -19,7 +19,7 @@
 }
 
 .linter-panel {
-  border: 1px solid var(--border);
+  border: var(--rule);
   background: var(--bg-1);
   display: flex;
   flex-direction: column;
@@ -35,9 +35,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.65rem 1rem;
+  padding: var(--space-2-5) var(--space-4);
   background: var(--bg-2);
-  border-bottom: 1px solid var(--border);
+  border-bottom: var(--rule);
   flex-shrink: 0;
 }
 
@@ -45,7 +45,7 @@
   font-family: var(--mono);
   font-size: var(--font-size-xs);
   color: var(--text-3);
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
 }
 
@@ -95,7 +95,7 @@
   outline: none;
   font-family: var(--mono);
   font-size: var(--font-size-xl);
-  line-height: 1.8;
+  line-height: var(--leading-loose-lg);
   color: var(--text-1);
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -112,8 +112,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
-  border-top: 1px solid var(--border);
+  padding: var(--space-3) var(--space-4);
+  border-top: var(--rule);
   background: var(--bg-2);
   flex-shrink: 0;
 }
@@ -143,7 +143,7 @@
   justify-content: space-between;
   gap: var(--space-4);
   padding: var(--space-6);
-  border-bottom: 1px solid var(--border);
+  border-bottom: var(--rule);
   background: var(--bg-1);
   position: sticky;
   top: 0;
@@ -159,14 +159,14 @@
 .lint-score-number {
   font-family: var(--mono);
   font-size: var(--font-size-display-sm);
-  font-weight: 700;
+  font-weight: var(--weight-bold);
   color: var(--text-1);
 }
 
 .lint-grade {
   font-family: var(--mono);
   font-size: var(--font-size-3xl);
-  font-weight: 700;
+  font-weight: var(--weight-bold);
   display: block;
 }
 
@@ -174,7 +174,7 @@
   font-size: var(--font-size-xs);
   color: var(--text-3);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-wide);
 }
 
 /* Grade colours */
@@ -189,7 +189,7 @@
   font-size: var(--font-size-sm);
   color: var(--text-3);
   text-align: right;
-  line-height: 1.5;
+  line-height: var(--leading-normal);
 }
 
 .lint-stat-sep {
@@ -199,15 +199,15 @@
 /* ── Issue Items ────────────────────────────────────────────────────── */
 
 .lint-group-header {
-  padding: 0.65rem 1.5rem;
+  padding: var(--space-2-5) var(--space-6);
   font-family: var(--mono);
   font-size: var(--font-size-xs);
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-caps-lg);
   background: var(--bg-2);
-  border-bottom: 1px solid var(--border);
-  border-top: 1px solid var(--border);
+  border-bottom: var(--rule);
+  border-top: var(--rule);
 }
 
 .lint-group:first-child .lint-group-header {
@@ -219,8 +219,8 @@
 .lint-group-info .lint-group-label { color: var(--severity-info); }
 
 .lint-item {
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border);
+  padding: var(--space-5) var(--space-6);
+  border-bottom: var(--rule);
   cursor: pointer;
   transition: background var(--t);
 }
@@ -229,7 +229,8 @@
   border-bottom: none;
 }
 
-.lint-item:hover {
+.lint-item:hover,
+.lint-item.is-active {
   background: var(--bg-1);
 }
 
@@ -243,7 +244,7 @@
 .lint-item-rule {
   font-family: var(--mono);
   font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
   color: var(--text-1);
 }
 
@@ -258,21 +259,17 @@
   font-family: var(--mono);
   font-size: var(--font-size-md);
   color: var(--text-2);
-  margin-bottom: 0.4rem;
-  line-height: 1.5;
+  margin-bottom: var(--space-1-5);
+  line-height: var(--leading-normal);
 }
 
 .lint-item-message {
   font-size: var(--font-size-md);
   color: var(--text-3);
-  line-height: 1.5;
+  line-height: var(--leading-normal);
 }
 
 /* ── Highlighting ───────────────────────────────────────────────────── */
-
-[hidden] {
-  display: none !important;
-}
 
 .lint-highlight {
   cursor: pointer;
@@ -284,8 +281,8 @@
 .highlight-warning { background: var(--severity-warning-bg); border-color: var(--severity-warning); }
 .highlight-info    { background: var(--severity-info-bg); border-color: var(--severity-info); }
 
-.lint-highlight:hover {
-  background-opacity: 0.25;
+.lint-highlight.is-flashing {
+  outline: var(--focus-ring);
 }
 
 /* ── Empty State ────────────────────────────────────────────────────── */
@@ -314,6 +311,15 @@
   color: var(--text-3);
 }
 
+/* Results pane after a run that found nothing. */
+.lint-empty {
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--text-3);
+  font-family: var(--mono);
+  font-size: var(--font-size-md);
+}
+
 /* ── Rules Reference ────────────────────────────────────────────────── */
 
 .linter-rules-grid {
@@ -326,10 +332,10 @@
 .lint-severity-badge {
   font-family: var(--mono);
   font-size: var(--font-size-xs);
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0.2rem 0.5rem;
+  letter-spacing: var(--tracking-caps-lg);
+  padding: var(--space-hairline) var(--space-2);
   border: 1px solid currentColor;
   display: inline-block;
   margin-bottom: var(--space-5);
@@ -348,7 +354,7 @@
 .linter-rule-list li {
   font-size: var(--font-size-xl);
   color: var(--text-2);
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
 }
 
 .linter-rule-list li strong {

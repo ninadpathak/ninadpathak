@@ -46,9 +46,9 @@
   }
 
   function setTheme(theme) {
+    // The critical <style> in base.html keys the page background and color-scheme
+    // off data-theme, so the attribute is the only thing to change.
     document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.style.colorScheme = theme === 'light' ? 'light' : 'dark';
-    document.documentElement.style.backgroundColor = theme === 'light' ? '#f8f8f6' : '#090909';
     try { localStorage.setItem(THEME_KEY, theme); } catch {}
   }
 
@@ -101,7 +101,7 @@
       modal.removeAttribute('inert');
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('scroll-locked');
       loadBookingWidget();
       if (closeBtn) closeBtn.focus();
     }
@@ -110,7 +110,7 @@
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
       modal.setAttribute('inert', '');
-      document.body.style.overflow = '';
+      document.body.classList.remove('scroll-locked');
       if (previousFocus) previousFocus.focus();
     }
 
@@ -156,7 +156,7 @@
       mobileNav.classList.add('open');
       mobileNav.setAttribute('aria-hidden', 'false');
       hamburger.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('scroll-locked');
       if (closeBtn) closeBtn.focus();
     }
 
@@ -165,7 +165,7 @@
       mobileNav.setAttribute('aria-hidden', 'true');
       mobileNav.setAttribute('inert', '');
       hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      document.body.classList.remove('scroll-locked');
       hamburger.focus();
     }
 
@@ -224,17 +224,7 @@
 
     // Create bar
     const bar = document.createElement('div');
-    bar.style.cssText = [
-      'position: fixed',
-      'top: 0',
-      'left: 0',
-      'height: 2px',
-      'width: 0%',
-      'background: var(--accent)',
-      'z-index: 999',
-      'transition: width 0.1s linear',
-      'pointer-events: none',
-    ].join(';');
+    bar.className = 'reading-progress';
     document.body.appendChild(bar);
 
     let scrollUpdatePending = false;
@@ -243,6 +233,7 @@
       const scrollTop  = window.scrollY;
       const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
       const progress   = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      // The one inline style left on the site: a per-scroll value no class can hold.
       bar.style.width  = Math.min(100, progress) + '%';
       scrollUpdatePending = false;
     }
@@ -519,9 +510,9 @@
             button.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
           }, 2000);
         }).catch(function () {
-          button.style.color = 'var(--accent)';
+          button.classList.add('copy-failed');
           setTimeout(function () {
-            button.style.color = '';
+            button.classList.remove('copy-failed');
           }, 2000);
         });
       });

@@ -7,8 +7,8 @@
    together. "No new CSS" forbids AUTHORING styles; linking a stylesheet that already
    exists in the repo is the reuse the rule is there to encourage. #}
 {% block extra_css %}
-{% if term.needs_flowcharts %}<link rel="stylesheet" href="/static/css/flowcharts.css">{% endif %}
-{% if term.needs_visuals %}<link rel="stylesheet" href="/static/css/visuals.css">{% endif %}
+{% if term.needs_flowcharts %}<link rel="stylesheet" href="/static/css/flowcharts.css?v=design-tokens-1">{% endif %}
+{% if term.needs_visuals %}<link rel="stylesheet" href="/static/css/visuals.css?v=design-tokens-1">{% endif %}
 {% endblock %}
 
 {% block canonical %}/glossary/{{ term.slug }}/{% endblock %}
