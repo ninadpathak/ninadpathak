@@ -156,7 +156,8 @@ a utility repeats its class until it outranks every rule that matches the same e
 A utility used by one visual stays in that visual. Script state changes toggle classes
 that sit last in the visual's sheet. The listed visuals in `tests/test_design_tokens.py`
 still write computed geometry at runtime, such as a data-driven bar width or a tooltip
-position.
+position. `tests/test_script_syntax.py` parses every inline visual script and every file
+in `static/js/` with `node --check`.
 
 ## Deploying to Cloudflare Pages
 

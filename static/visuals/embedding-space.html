@@ -220,9 +220,6 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.body.appendChild(renderer.domElement);
 
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.set(22, 18, 28);
@@ -373,7 +370,7 @@
         function updateTheme() {
             const c = getColors();
             scene.background = c.bg;
-            mat.color.set(c.noise);
+            partMat.color.set(c.noise);
             grid.material.color.set(c.grid);
             meshes.forEach(m => {
                 const group = m.userData.group;
