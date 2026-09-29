@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Voice AI Memory Pipeline</title>
+<link rel="stylesheet" href="/static/css/visual-utilities.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -73,6 +74,17 @@
     line-height: 1.5;
   }
   #tooltip strong { color: #ff5f1f; }
+
+  /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+  .u-bg-d44000 { background: #d44000; }
+  .u-bg-3a3a4a { background: #3a3a4a; }
+  .u-bg-ff2222 { background: #ff2222; }
+
+  /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+  #tooltip.is-hidden { display: none; }
+  #tooltip.is-visible { display: block; }
+  canvas.is-pointer { cursor: pointer; }
+  canvas.is-default-cursor { cursor: default; }
 </style>
 </head>
 <body>
@@ -81,10 +93,10 @@
   <p>Drag to orbit &middot; Scroll to zoom &middot; Click nodes for details</p>
 </div>
 <div id="legend">
-  <div class="legend-item"><div class="legend-dot" style="background:#ff5f1f"></div>User Speech</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#d44000"></div>Agent Response</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#3a3a4a"></div>Pipeline Layer</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#ff2222"></div>Interruption</div>
+  <div class="legend-item"><div class="legend-dot u-bg-ff5f1f"></div>User Speech</div>
+  <div class="legend-item"><div class="legend-dot u-bg-d44000"></div>Agent Response</div>
+  <div class="legend-item"><div class="legend-dot u-bg-3a3a4a"></div>Pipeline Layer</div>
+  <div class="legend-item"><div class="legend-dot u-bg-ff2222"></div>Interruption</div>
 </div>
 <div id="tooltip"></div>
 
@@ -561,14 +573,14 @@
     }
 
     if (found) {
-      tooltip.style.display = 'block';
+      tooltip.classList.remove('is-hidden'); tooltip.classList.add('is-visible');
       tooltip.style.left = (event.clientX + 15) + 'px';
       tooltip.style.top = (event.clientY + 15) + 'px';
       tooltip.innerHTML = getTooltipHTML(found);
-      renderer.domElement.style.cursor = 'pointer';
+      renderer.domElement.classList.remove('is-default-cursor'); renderer.domElement.classList.add('is-pointer');
     } else {
-      tooltip.style.display = 'none';
-      renderer.domElement.style.cursor = 'default';
+      tooltip.classList.remove('is-visible'); tooltip.classList.add('is-hidden');
+      renderer.domElement.classList.remove('is-pointer'); renderer.domElement.classList.add('is-default-cursor');
     }
   }
 

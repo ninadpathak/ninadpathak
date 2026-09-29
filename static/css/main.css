@@ -101,6 +101,7 @@
   --rule: 1px solid var(--border);
   --rule-strong: 1px solid var(--border-2);
   --rule-accent: 3px solid var(--accent);
+  --rule-accent-thin: 1px solid var(--accent);
 
   --radius-sm: 4px;
   --radius-md: 6px;
@@ -180,7 +181,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   z-index: var(--z-skip-link);
   padding: var(--space-2) var(--space-4);
   background: var(--bg-1);
-  border: 1px solid var(--accent);
+  border: var(--rule-accent-thin);
   color: var(--text-1);
   transform: translateY(calc(-100% - 1rem));
   transition: transform var(--t);
@@ -365,7 +366,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
   font-size: var(--font-size-md);
   font-weight: var(--weight-medium);
   padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--accent);
+  border: var(--rule-accent-thin);
   color: var(--accent);
   transition: background var(--t), color var(--t);
   white-space: nowrap;
@@ -543,7 +544,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
 .btn-primary {
   background: var(--accent);
   color: var(--on-accent);
-  border: 1px solid var(--accent);
+  border: var(--rule-accent-thin);
 }
 .btn-primary:hover { background: transparent; color: var(--accent); }
 
@@ -1930,7 +1931,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
   font-size: var(--font-size-2xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
-  border: 1px solid var(--accent);
+  border: var(--rule-accent-thin);
 }
 
 @media (max-width: 768px) {

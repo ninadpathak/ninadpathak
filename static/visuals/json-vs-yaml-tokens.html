@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSON vs YAML Tokens</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         
         
@@ -35,6 +36,9 @@
             text-shadow: 0 0 3px var(--bg-1), 0 0 5px var(--bg-1);
             text-align: center;
         }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-fs-10px--color-accent { font-size: 10px; color: var(--accent); }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -45,7 +49,7 @@
         Format Weight Comparison <br>
         JSON Weight: <span class="stat">28 Tokens (Heavy)</span><br>
         YAML Weight: <span class="stat">16 Tokens (Light)</span>
-        <div style="font-size: 10px; color: var(--text-3); margin-top: 8px;">Drag to rotate</div>
+        <div class="u-fs-10px--color-text-3--mt-8px">Drag to rotate</div>
     </div>
 
     <script>
@@ -116,8 +120,8 @@
             return div;
         };
 
-        const lblJson = createLabel('JSON<br><span style="font-size: 10px; color: var(--accent);">28 Tokens</span>');
-        const lblYaml = createLabel('YAML<br><span style="font-size: 10px; color: var(--accent);">16 Tokens</span>');
+        const lblJson = createLabel('JSON<br><span class="u-fs-10px--color-accent">28 Tokens</span>');
+        const lblYaml = createLabel('YAML<br><span class="u-fs-10px--color-accent">16 Tokens</span>');
 
         const updateLabelPosition = (mesh, labelDiv, yOffset) => {
             const vector = new THREE.Vector3();

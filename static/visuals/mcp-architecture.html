@@ -108,6 +108,9 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   .servers { flex-direction: row; gap: 16px; }
   .packet { top: auto; left: -3px; }
 }
+
+  /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+  .packet.is-moving { opacity: 1; }
 </style>
 </head>
 <body>
@@ -168,14 +171,14 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
     const start = fwd ? 0 : 100;
     const end = fwd ? 100 : 0;
     const t0 = performance.now();
-    packet.style.opacity = '1';
+    packet.classList.add('is-moving');
     function step(t) {
       const k = Math.min(1, (t - t0) / dur);
       const pos = start + (end - start) * k;
       if (isMobile()) packet.style.top = `calc(${pos}% - 3px)`, packet.style.left = '-3px';
       else packet.style.left = `calc(${pos}% - 3px)`, packet.style.top = '-3px';
       if (k < 1) requestAnimationFrame(step);
-      else { packet.style.opacity = '0'; cb && cb(); }
+      else { packet.classList.remove('is-moving'); cb && cb(); }
     }
     requestAnimationFrame(step);
   }

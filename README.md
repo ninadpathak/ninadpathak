@@ -133,14 +133,15 @@ the build includes that stylesheet only for articles containing a `.flowchart`.
 
 Tokens cover color, font size, weight (`--weight-*`), line height (`--leading-*`),
 tracking (`--tracking-*`), spacing (`--space-*`), rules (`--rule`, `--rule-strong`,
-`--rule-accent`), durations (`--t-*`), and page stacking layers (`--z-*`). A handful of
+`--rule-accent`, `--rule-accent-thin`), durations (`--t-*`), and page stacking layers (`--z-*`). A handful of
 single-use values stay raw because snapping them would visibly move a component;
 `tests/test_design_tokens.py` names each one, so a new one-off fails the build.
 
 Templates, articles, and site scripts never set `style=`. Use a class, or a state class
 toggled from JavaScript such as `.scroll-locked`, `.is-active`, or `.copy-failed`. There
-are two exceptions. The critical `<style>` in `base.html` paints the themed background
-before `main.css` loads, and the reading-progress bar sets its per-scroll width inline.
+are three exceptions. The critical `<style>` in `base.html` paints the themed background
+before `main.css` loads. The reading-progress bar sets its per-scroll width inline, and
+`post.html` sets an embedded visual's height from the height the visual reports.
 
 The iframe visuals in `static/visuals/` are standalone documents that cannot inherit
 `main.css`. They link `/static/css/visual-embed.css`, which `build.py` generates from the
@@ -148,6 +149,14 @@ The iframe visuals in `static/visuals/` are standalone documents that cannot inh
 color scheme through `prefers-color-scheme`. Each visual keeps only its own geometry,
 chart colors, and any token it deliberately overrides. The Three.js scenes with fixed
 artwork colors do not link the shared palette.
+
+Visual markup has no `style=` either. A utility used by two or more visuals lives once in
+`static/css/visual-utilities.css`. That file loads before each visual's own `<style>`, so
+a utility repeats its class until it outranks every rule that matches the same element.
+A utility used by one visual stays in that visual. Script state changes toggle classes
+that sit last in the visual's sheet. The listed visuals in `tests/test_design_tokens.py`
+still write computed geometry at runtime, such as a data-driven bar width or a tooltip
+position.
 
 ## Deploying to Cloudflare Pages
 

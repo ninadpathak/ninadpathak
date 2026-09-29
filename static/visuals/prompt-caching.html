@@ -61,6 +61,10 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   .tag { width: 70px; font-size: 8.5px; }
   .cells { margin-left: 0; flex-direction: column; gap: 8px; }
 }
+
+  /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+  .prefix.is-dimmed { transition: none; opacity: 0.55; }
+  .prefix.is-lit { transition: opacity 0.5s linear; opacity: 1; }
 </style>
 </head>
 <body>
@@ -103,11 +107,11 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   var write = document.querySelector('.row.write .prefix');
   var hit = document.querySelector('.row.hit .prefix');
   function pulse(el){
-    el.style.transition = 'none';
-    el.style.opacity = '0.55';
+    el.classList.remove('is-lit');
+    el.classList.add('is-dimmed');
     void el.offsetWidth;
-    el.style.transition = 'opacity 0.5s linear';
-    el.style.opacity = '1';
+    el.classList.remove('is-dimmed');
+    el.classList.add('is-lit');
   }
   function loop(){
     pulse(write);

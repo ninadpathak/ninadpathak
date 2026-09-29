@@ -43,6 +43,10 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
 @media (max-width:600px){
   .compare{flex-direction:column;}
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-width-12pct { width: 12%; }
+.u-width-82pct { width: 82%; }
 </style>
 </head>
 <body>
@@ -73,7 +77,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
       </div>
       <div class="mem-bar">
         <div class="mem-label">context richness</div>
-        <div class="mem-track"><div class="mem-fill" id="m1" style="width:12%"></div></div>
+        <div class="mem-track"><div class="mem-fill u-width-12pct" id="m1"></div></div>
       </div>
     </div>
 
@@ -100,7 +104,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
       </div>
       <div class="mem-bar">
         <div class="mem-label">context richness</div>
-        <div class="mem-track"><div class="mem-fill rich" id="m5" style="width:82%"></div></div>
+        <div class="mem-track"><div class="mem-fill rich u-width-82pct" id="m5"></div></div>
       </div>
     </div>
   </div>

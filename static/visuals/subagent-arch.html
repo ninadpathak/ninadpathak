@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parallel Subagent Architecture</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         :root {
             --bg: #ffffff;
@@ -28,6 +29,9 @@
         .node-box { fill: var(--bg); stroke: var(--border); stroke-width: 3.0; }
         .node-label { font-family: var(--mono); font-size: 22px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
         .line { stroke: var(--border); stroke-width: 3.0; marker-end: url(#arrow); }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-fs-19px--fill-text-dim { font-size: 19px; fill: var(--text-dim); }
     </style>
 </head>
 <body>
@@ -40,9 +44,9 @@
             </defs>
 
             <!-- Lead Agent -->
-            <rect x="325" y="20" width="150" height="60" rx="4" class="node-box" style="stroke: var(--accent);" />
+            <rect x="325" y="20" width="150" height="60" rx="4" class="node-box u-stroke-accent" />
             <text x="400" y="55" text-anchor="middle" class="node-label">Lead Agent</text>
-            <text x="400" y="72" text-anchor="middle" style="font-size: 19px; fill: var(--text-dim);">PLANNING & DELEGATION</text>
+            <text class="u-fs-19px--fill-text-dim" x="400" y="72" text-anchor="middle">PLANNING & DELEGATION</text>
 
             <!-- Lines -->
             <path d="M 400 80 L 150 150" class="line" />
@@ -53,22 +57,22 @@
             <g transform="translate(50, 150)">
                 <rect width="200" height="80" rx="4" class="node-box" />
                 <text x="100" y="35" text-anchor="middle" class="node-label">Analyst Agent</text>
-                <text x="100" y="55" text-anchor="middle" style="font-size: 19px; fill: var(--text-dim);">REPO-SCALE ANALYSIS</text>
-                <text x="100" y="68" text-anchor="middle" style="font-size: 19px; fill: var(--text-dim);">DEPENDENCY GRAPHING</text>
+                <text class="u-fs-19px--fill-text-dim" x="100" y="55" text-anchor="middle">REPO-SCALE ANALYSIS</text>
+                <text class="u-fs-19px--fill-text-dim" x="100" y="68" text-anchor="middle">DEPENDENCY GRAPHING</text>
             </g>
 
             <g transform="translate(300, 150)">
                 <rect width="200" height="80" rx="4" class="node-box" />
                 <text x="100" y="35" text-anchor="middle" class="node-label">Coder Agent</text>
-                <text x="100" y="55" text-anchor="middle" style="font-size: 19px; fill: var(--text-dim);">ATOMIC FILE EDITS</text>
-                <text x="100" y="68" text-anchor="middle" style="font-size: 19px; fill: var(--text-dim);">LINT & FORMAT</text>
+                <text class="u-fs-19px--fill-text-dim" x="100" y="55" text-anchor="middle">ATOMIC FILE EDITS</text>
+                <text class="u-fs-19px--fill-text-dim" x="100" y="68" text-anchor="middle">LINT & FORMAT</text>
             </g>
 
             <g transform="translate(550, 150)">
                 <rect width="200" height="80" rx="4" class="node-box" />
                 <text x="100" y="35" text-anchor="middle" class="node-label">Verifier Agent</text>
-                <text x="100" y="55" text-anchor="middle" style="font-size: 19px; fill: var(--text-dim);">TEST SUITE EXECUTION</text>
-                <text x="100" y="68" text-anchor="middle" style="font-size: 19px; fill: var(--text-dim);">FAILURE TRIAGE</text>
+                <text class="u-fs-19px--fill-text-dim" x="100" y="55" text-anchor="middle">TEST SUITE EXECUTION</text>
+                <text class="u-fs-19px--fill-text-dim" x="100" y="68" text-anchor="middle">FAILURE TRIAGE</text>
             </g>
 
             <!-- Output -->
@@ -76,9 +80,9 @@
             <path d="M 400 230 L 400 300" class="line" />
             <path d="M 650 230 L 400 300" class="line" />
 
-            <rect x="325" y="300" width="150" height="60" rx="4" class="node-box" style="stroke: #0088ff;" />
+            <rect x="325" y="300" width="150" height="60" rx="4" class="node-box u-stroke-0088ff" />
             <text x="400" y="335" text-anchor="middle" class="node-label">Merged PR</text>
-            <text x="400" y="352" text-anchor="middle" style="font-size: 19px; fill: var(--text-dim);">VERIFIED REFECTORED CODE</text>
+            <text class="u-fs-19px--fill-text-dim" x="400" y="352" text-anchor="middle">VERIFIED REFECTORED CODE</text>
         </svg>
     </div>
 </body>

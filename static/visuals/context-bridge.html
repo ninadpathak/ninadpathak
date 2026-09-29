@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
 
 
@@ -38,12 +39,13 @@
             padding: 4px 10px;
             border: 1px solid var(--border);
         }
+
     </style>
 </head>
 <body>
     <div id="label">technical writing // the context bridge</div>
-    <div class="side-label" style="left: 20px;">ENGINEERING (Detail)</div>
-    <div class="side-label" style="right: 20px;">USER (Outcomes)</div>
+    <div class="side-label u-left-20px">ENGINEERING (Detail)</div>
+    <div class="side-label u-right-20px">USER (Outcomes)</div>
 
     <script>
         const scene = new THREE.Scene();

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WASM VDB Summary</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
 
 
@@ -40,6 +41,10 @@
         .val { font-family: var(--sans); font-size: 18px; fill: var(--text-1); }
         .header { font-family: var(--mono); font-size: 20px; fill: var(--accent); font-weight: 700; text-transform: uppercase; }
         .line { stroke: var(--border); stroke-width: 1.5; }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-sw-3--stroke-text-1 { stroke-width: 3; stroke: var(--text-1); }
+        .u-fw-700 { font-weight: 700; }
     </style>
 </head>
 <body>
@@ -49,7 +54,7 @@
                 <text x="100" y="30" class="label">Feature</text>
                 <text x="450" y="30" text-anchor="middle" class="header">PGlite</text>
                 <text x="800" y="30" text-anchor="middle" class="header">SQLite-vec</text>
-                <line x1="80" y1="55" x2="920" y2="55" class="line" style="stroke-width: 3; stroke: var(--text-1);" />
+                <line x1="80" y1="55" x2="920" y2="55" class="line u-sw-3--stroke-text-1" />
             </g>
             
             <g transform="translate(0, 130)">
@@ -61,8 +66,8 @@
             
             <g transform="translate(0, 200)">
                 <text x="100" y="20" class="label">Best Index</text>
-                <text x="450" y="20" text-anchor="middle" class="val" style="font-weight: 700;">HNSW (Graph)</text>
-                <text x="800" y="20" text-anchor="middle" class="val" style="font-weight: 700;">Binary Quant</text>
+                <text x="450" y="20" text-anchor="middle" class="val u-fw-700">HNSW (Graph)</text>
+                <text x="800" y="20" text-anchor="middle" class="val u-fw-700">Binary Quant</text>
                 <line x1="80" y1="45" x2="920" y2="45" class="line" />
             </g>
             
@@ -77,10 +82,10 @@
                 <text x="100" y="20" class="label">Ideal For</text>
                 <text x="450" y="20" text-anchor="middle" class="val">Complex DB Apps</text>
                 <text x="800" y="20" text-anchor="middle" class="val">Fast Search Only</text>
-                <line x1="80" y1="45" x2="920" y2="45" class="line" style="stroke-width: 3; stroke: var(--text-1);" />
+                <line x1="80" y1="45" x2="920" y2="45" class="line u-sw-3--stroke-text-1" />
             </g>
             
-            <text x="500" y="30" text-anchor="middle" class="label" style="font-size: 24px; fill: var(--text-1);">Architectural Decision Matrix</text>
+            <text x="500" y="30" text-anchor="middle" class="label u-fs-24px--fill-text-1">Architectural Decision Matrix</text>
         </svg>
     </div>
 </body>

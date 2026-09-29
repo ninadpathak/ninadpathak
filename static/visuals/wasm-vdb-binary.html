@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WASM VDB Binary Quantization</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
 
 
@@ -40,6 +41,11 @@
         .desc { font-family: var(--sans); font-size: 18px; fill: var(--text-3); }
         .box { fill: var(--bg-1); stroke: var(--border); stroke-width: 2; }
         .arrow { stroke: var(--text-3); stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-fs-22px { font-size: 22px; }
+        .u-fs-24px--fill-accent { font-size: 24px; fill: var(--accent); }
+        .u-fs-26px--fill-text-1 { font-size: 26px; fill: var(--text-1); }
     </style>
 </head>
 <body>
@@ -54,19 +60,19 @@
             <g transform="translate(100, 100)">
                 <text x="0" y="-20" class="label">Float32 Vector (32 bits / dim)</text>
                 <rect x="0" y="0" width="800" height="70" rx="4" class="box" />
-                <text x="400" y="42" text-anchor="middle" class="label" style="font-size: 22px;">[ 0.12, -0.45, 0.89, -0.01, ... ]</text>
+                <text x="400" y="42" text-anchor="middle" class="label u-fs-22px">[ 0.12, -0.45, 0.89, -0.01, ... ]</text>
             </g>
             
             <path d="M 500 170 L 500 250" class="arrow" />
-            <text x="520" y="220" class="label" style="fill: var(--accent);">Sign Threshold ( > 0 )</text>
+            <text x="520" y="220" class="label u-fill-accent">Sign Threshold ( > 0 )</text>
             
             <g transform="translate(100, 270)">
                 <text x="0" y="-20" class="label">Binary Vector (1 bit / dim)</text>
-                <rect x="0" y="0" width="800" height="70" rx="4" class="box" style="stroke: var(--accent); stroke-width: 3;" />
-                <text x="400" y="42" text-anchor="middle" class="label" style="font-size: 24px; fill: var(--accent);">[ 1, 0, 1, 0, ... ]</text>
+                <rect x="0" y="0" width="800" height="70" rx="4" class="box u-stroke-accent--sw-3" />
+                <text x="400" y="42" text-anchor="middle" class="label u-fs-24px--fill-accent">[ 1, 0, 1, 0, ... ]</text>
             </g>
             
-            <text x="500" y="400" text-anchor="middle" class="label" style="font-size: 26px; fill: var(--text-1);">Binary Quantization: 32x Reduction</text>
+            <text x="500" y="400" text-anchor="middle" class="label u-fs-26px--fill-text-1">Binary Quantization: 32x Reduction</text>
         </svg>
     </div>
 </body>

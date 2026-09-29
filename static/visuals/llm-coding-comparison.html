@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LLMs for Coding: Comparison Matrix</title>
 <link rel="stylesheet" href="/static/css/visual-embed.css">
+<link rel="stylesheet" href="/static/css/visual-utilities.css">
 <style>
 :root {
   --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
@@ -154,6 +155,10 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   .model .for { display: none; }
   .head .b { display: none; }
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-align-left--justify-content-center--align-items-flex-start { text-align: left; justify-content: center; align-items: flex-start; }
+.u-bg-color-mix-in-srgb-accent-7pct-transparent { background: color-mix(in srgb, var(--accent) 7%, transparent); }
 </style>
 </head>
 <body>
@@ -165,29 +170,29 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
 
   <div class="matrix">
     <!-- header row -->
-    <div class="cell corner colhead" style="text-align:left;justify-content:center;align-items:flex-start;">Model</div>
+    <div class="cell corner colhead u-align-left--justify-content-center--align-items-flex-start">Model</div>
     <div class="cell colhead">SWE-bench</div>
     <div class="cell colhead">Reasoning</div>
     <div class="cell colhead">Context</div>
     <div class="cell colhead">Cost</div>
 
     <!-- Claude 4.6 Opus = pick -->
-    <div class="cell model" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
-      <span class="name" style="color:var(--accent);">Claude 4.6 Opus</span>
+    <div class="cell model u-bg-color-mix-in-srgb-accent-7pct-transparent">
+      <span class="name u-color-accent">Claude 4.6 Opus</span>
       <span class="for">Agentic / autonomous coding</span>
       <span class="pick-tag">RECOMMENDED</span>
     </div>
-    <div class="cell val" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
-      <span class="num" style="color:var(--accent);">80.9%</span><span class="unit">leads</span>
+    <div class="cell val u-bg-color-mix-in-srgb-accent-7pct-transparent">
+      <span class="num u-color-accent">80.9%</span><span class="unit">leads</span>
     </div>
-    <div class="cell val" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
-      <div class="dots"><span class="dot on" style="background:var(--accent);"></span><span class="dot on" style="background:var(--accent);"></span><span class="dot on" style="background:var(--accent);"></span><span class="dot on" style="background:var(--accent);"></span><span class="dot on" style="background:var(--accent);"></span></div>
+    <div class="cell val u-bg-color-mix-in-srgb-accent-7pct-transparent">
+      <div class="dots"><span class="dot on u-bg-accent"></span><span class="dot on u-bg-accent"></span><span class="dot on u-bg-accent"></span><span class="dot on u-bg-accent"></span><span class="dot on u-bg-accent"></span></div>
     </div>
-    <div class="cell val" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
-      <span class="num" style="color:var(--text-1);">200K</span><span class="unit">tokens</span>
+    <div class="cell val u-bg-color-mix-in-srgb-accent-7pct-transparent">
+      <span class="num u-color-text-1">200K</span><span class="unit">tokens</span>
     </div>
-    <div class="cell val" style="background:color-mix(in srgb, var(--accent) 7%, transparent);">
-      <span class="num" style="color:var(--text-1);">$$$</span><span class="unit">premium</span>
+    <div class="cell val u-bg-color-mix-in-srgb-accent-7pct-transparent">
+      <span class="num u-color-text-1">$$$</span><span class="unit">premium</span>
     </div>
 
     <!-- Gemini 3.1 Pro -->

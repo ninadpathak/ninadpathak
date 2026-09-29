@@ -13,13 +13,18 @@
         body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; }
         #label { position: absolute; bottom: 20px; left: 20px; font-family: var(--mono); font-size: 12px; color: var(--text-3); text-transform: uppercase; }
         .platform-label { position: absolute; font-family: var(--mono); font-size: 11px; color: var(--text-1); background: var(--bg-2); padding: 4px 8px; border: 1px solid var(--border); transform: translate(-50%, -50%); }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-left-20pct--top-50pct { left: 20%; top: 50%; }
+        .u-left-50pct--top-50pct { left: 50%; top: 50%; }
+        .u-left-80pct--top-50pct { left: 80%; top: 50%; }
     </style>
 </head>
 <body>
     <div id="label">Context Switching // Cognitive Load Flow</div>
-    <div id="ide" class="platform-label" style="left: 20%; top: 50%;">IDE (Code)</div>
-    <div id="docs" class="platform-label" style="left: 50%; top: 50%;">DOCS (Source)</div>
-    <div id="slack" class="platform-label" style="left: 80%; top: 50%;">SLACK (Silo)</div>
+    <div id="ide" class="platform-label u-left-20pct--top-50pct">IDE (Code)</div>
+    <div id="docs" class="platform-label u-left-50pct--top-50pct">DOCS (Source)</div>
+    <div id="slack" class="platform-label u-left-80pct--top-50pct">SLACK (Silo)</div>
 
     <script>
         const scene = new THREE.Scene();

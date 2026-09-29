@@ -73,6 +73,11 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   .seg { font-size: 8px; }
   .legend { gap: 10px; }
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-flex-300 { flex: 300; }
+.u-flex-400 { flex: 400; }
+.u-flex-500 { flex: 500; }
 </style>
 </head>
 <body>
@@ -83,10 +88,10 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   <div class="bar-wrap">
     <div class="bar">
       <!-- input 1000 tk: system 300, history 400, retrieved 300 ; output 500 -->
-      <div class="seg" style="flex: 300">SYSTEM</div>
-      <div class="seg" style="flex: 400">HISTORY</div>
-      <div class="seg" style="flex: 300">RETRIEVED</div>
-      <div class="seg output" style="flex: 500">OUTPUT</div>
+      <div class="seg u-flex-300">SYSTEM</div>
+      <div class="seg u-flex-400">HISTORY</div>
+      <div class="seg u-flex-300">RETRIEVED</div>
+      <div class="seg output u-flex-500">OUTPUT</div>
     </div>
     <div class="legend">
       <div class="li"><span class="sw"></span>System prompt <span class="tk">300 tk</span></div>

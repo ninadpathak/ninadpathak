@@ -82,6 +82,10 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   .phase { font-size: 8px; }
   .gen .gl { font-size: 8px; }
 }
+
+  /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+  .gtok.is-reset { transition: none; opacity: 0; }
+  .gtok.is-streamed { transition: opacity 0.12s linear; opacity: 1; }
 </style>
 </head>
 <body>
@@ -120,7 +124,7 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   var firstFrac = (0.6 + 1.4 + 2.4) / 7.4;
 
   function run(){
-    gtoks.forEach(function(g){ g.style.transition='none'; g.style.opacity='0'; });
+    gtoks.forEach(function(g){ g.classList.remove('is-streamed'); g.classList.add('is-reset'); });
     var W = timeline.clientWidth;
     var ttftDur = 2000;   // ms to traverse queue+prefill to first token (mechanical, linear)
     var t0 = null;
@@ -137,7 +141,7 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   function stream(){
     // emit generation tokens one by one (throughput phase)
     gtoks.forEach(function(g,i){
-      setTimeout(function(){ g.style.transition='opacity 0.12s linear'; g.style.opacity='1'; }, i*120);
+      setTimeout(function(){ g.classList.remove('is-reset'); g.classList.add('is-streamed'); }, i*120);
     });
   }
 

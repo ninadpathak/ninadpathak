@@ -82,6 +82,16 @@ class TokenUsageTests(unittest.TestCase):
             with self.subTest(file=path.name):
                 self.assertEqual(raw.findall(css_without_tokens(path)), [])
 
+    def test_no_raw_border_value_is_repeated(self):
+        """A border or outline written twice with a literal width belongs in a --rule token."""
+        counts = {}
+        for path in STYLESHEETS:
+            for value in re.findall(r"(?:border(?:-[a-z]+)?|outline)\s*:\s*([^;{}]*\d+px[^;{}]*)", css_without_tokens(path)):
+                value = " ".join(value.split())
+                counts.setdefault(value, []).append(path.name)
+        repeated = {value: files for value, files in counts.items() if len(files) > 1}
+        self.assertEqual(repeated, {})
+
     def test_no_selector_sets_a_property_twice_in_one_context(self):
         """A second declaration for the same selector, property and media query makes the
         first one dead weight. Grouped selectors are split so a shared rule is caught too."""
@@ -186,6 +196,87 @@ class VisualEmbedPaletteTests(unittest.TestCase):
                     self.assertNotEqual(local, self.shared.get(name), "duplicates visual-embed.css")
 
 
+class VisualInlineStyleTests(unittest.TestCase):
+    """Visual markup styles through classes: shared ones in visual-utilities.css, the rest
+    in the visual's own <style>. State changes toggle classes.
+
+    Scripts in the listed visuals still write computed geometry: a bar width taken from
+    data, a tooltip or packet position, a label placed from the scene. Those are runtime
+    values, and no other visual may add one without being listed here.
+    """
+    VISUALS = ROOT / "static" / "visuals"
+    RUNTIME_STYLE_WRITERS = {
+        "context-compression.html",
+        "context-window-sliding.html",
+        "embedding-space.html",
+        "evaluation-funnel.html",
+        "json-vs-yaml-tokens.html",
+        "latency-tradeoff.html",
+        "lost-in-the-middle.html",
+        "matryoshka-truncation.html",
+        "mcp-architecture.html",
+        "memory-finetuning-decision.html",
+        "memory-hierarchy.html",
+        "onboarding-path.html",
+        "rag-eval-metrics.html",
+        "rag-finetuning-decision.html",
+        "release-hierarchy.html",
+        "semantic-cache.html",
+        "state-memory.html",
+        "token-byte-pair.html",
+        "trust-hierarchy.html",
+        "ttft-chain.html",
+        "voice-memory.html",
+    }
+
+    def test_visual_markup_carries_no_inline_style_attributes(self):
+        for path in sorted(self.VISUALS.glob("*.html")):
+            with self.subTest(visual=path.name):
+                self.assertIsNone(re.search(r"\sstyle\s*=\s*\\?[\"']", path.read_text(encoding="utf-8")))
+
+    UTILITIES = ROOT / "static" / "css" / "visual-utilities.css"
+    UTILITY_LINK = '<link rel="stylesheet" href="/static/css/visual-utilities.css">'
+    UTILITY_RULE = re.compile(r"((?:\.u-[\w-]+)+)\s*\{([^}]*)\}")
+
+    def test_each_utility_is_defined_once(self):
+        """A utility used by two visuals lives in the shared file, never in both visuals."""
+        definitions = {}
+        for match in self.UTILITY_RULE.finditer(self.UTILITIES.read_text(encoding="utf-8")):
+            definitions.setdefault(match.group(1).split(".")[1], []).append("visual-utilities.css")
+        users = {}
+        for path in sorted(self.VISUALS.glob("*.html")):
+            html = path.read_text(encoding="utf-8")
+            for match in self.UTILITY_RULE.finditer(html):
+                definitions.setdefault(match.group(1).split(".")[1], []).append(path.name)
+            for name in set(re.findall(r"\bu-[\w-]+(?=[\s\"'])", html)):
+                users.setdefault(name, set()).add(path.name)
+        for name, places in definitions.items():
+            with self.subTest(utility=name):
+                self.assertEqual(len(places), 1, places)
+                if len(users.get(name, ())) > 1:
+                    self.assertEqual(places, ["visual-utilities.css"])
+        for name in users:
+            with self.subTest(utility=name, check="defined"):
+                self.assertIn(name, definitions)
+
+    def test_visuals_using_shared_utilities_link_them_before_their_own_style(self):
+        shared = {m.group(1).split(".")[1] for m in self.UTILITY_RULE.finditer(self.UTILITIES.read_text(encoding="utf-8"))}
+        for path in sorted(self.VISUALS.glob("*.html")):
+            html = path.read_text(encoding="utf-8")
+            uses = shared & set(re.findall(r"\bu-[\w-]+(?=[\s\"'])", html))
+            with self.subTest(visual=path.name):
+                self.assertEqual(self.UTILITY_LINK in html, bool(uses))
+                if uses:
+                    self.assertLess(html.index(self.UTILITY_LINK), html.index("<style"))
+
+    def test_only_listed_visuals_write_runtime_styles(self):
+        for path in sorted(self.VISUALS.glob("*.html")):
+            scripts = "\n".join(re.findall(r"<script[^>]*>(.*?)</script>", path.read_text(encoding="utf-8"), re.S))
+            writes = re.search(r"\.style\.[a-zA-Z]+\s*=(?!=)|\.style\.cssText", scripts)
+            with self.subTest(visual=path.name):
+                self.assertEqual(bool(writes), path.name in self.RUNTIME_STYLE_WRITERS)
+
+
 class InlineStyleTests(unittest.TestCase):
     INLINE_ATTRIBUTE = re.compile(r"\sstyle\s*=\s*[\"']", re.I)
 
@@ -197,13 +288,17 @@ class InlineStyleTests(unittest.TestCase):
                 self.assertIsNone(self.INLINE_ATTRIBUTE.search(path.read_text(encoding="utf-8")))
 
     def test_site_scripts_style_through_classes(self):
-        """The reading-progress width is the one per-frame value no class can hold."""
-        allowed = {("main.js", "bar.style.width")}
-        for path in sorted((ROOT / "static" / "js").glob("*.js")):
-            source = path.read_text(encoding="utf-8")
+        """Two values are data no class can hold: the reading-progress width, set per
+        scroll, and an embedded visual's height, reported by the visual itself."""
+        allowed = {("main.js", "bar.style.width"), ("post.html", "iframes[i].style.height")}
+        scripts = [(path, path.read_text(encoding="utf-8")) for path in sorted((ROOT / "static" / "js").glob("*.js"))]
+        for template in sorted((ROOT / "templates").glob("*.html")):
+            inline = re.findall(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", template.read_text(encoding="utf-8"), re.S)
+            scripts.append((template, "\n".join(inline)))
+        for path, source in scripts:
             with self.subTest(file=path.name, check="generated markup"):
                 self.assertIsNone(self.INLINE_ATTRIBUTE.search(source))
-            for write in re.findall(r"[\w.]+\.style(?:\.[\w]+|\.cssText|\.setProperty)", source):
+            for write in re.findall(r"[\w.\[\]]+\.style(?:\.[\w]+|\.cssText|\.setProperty)", source):
                 with self.subTest(file=path.name, write=write):
                     self.assertIn((path.name, write), allowed)
 

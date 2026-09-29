@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WASM VDB CPU Usage</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
 
 
@@ -42,6 +43,7 @@
         .grid { stroke: var(--border); stroke-width: 1.5; stroke-dasharray: 4; vector-effect: non-scaling-stroke; }
         .line { stroke: var(--accent); stroke-width: 3; fill: none; }
         .fill { fill: var(--accent); fill-opacity: 0.1; }
+
     </style>
 </head>
 <body>
@@ -62,8 +64,8 @@
             <path d="M 100 350 L 200 350 L 300 80 L 700 80 L 800 350 L 900 350" class="fill" />
             <path d="M 100 350 L 200 350 L 300 80 L 700 80 L 800 350 L 900 350" class="line" />
             
-            <text x="500" y="70" text-anchor="middle" class="label" style="fill: var(--accent);">HNSW Build Peak (100% Core)</text>
-            <text x="500" y="40" text-anchor="middle" class="label" style="font-size: 24px; fill: var(--text-1);">The HNSW Build Tax</text>
+            <text x="500" y="70" text-anchor="middle" class="label u-fill-accent">HNSW Build Peak (100% Core)</text>
+            <text x="500" y="40" text-anchor="middle" class="label u-fs-24px--fill-text-1">The HNSW Build Tax</text>
         </svg>
     </div>
 </body>

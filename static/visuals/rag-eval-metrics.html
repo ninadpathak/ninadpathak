@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAG Evaluation Funnel: Recall, Precision, Faithfulness, Relevance</title>
 <link rel="stylesheet" href="/static/css/visual-embed.css">
+<link rel="stylesheet" href="/static/css/visual-utilities.css">
 <style>
 :root{--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
 body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
@@ -33,6 +34,10 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
 .stage-meta{flex:0 0 130px;}
 .stage-name{font-size:11px;}
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-left-70pct { left: 70%; }
+.u-left-60pct { left: 60%; }
 </style>
 </head>
 <body>
@@ -41,25 +46,25 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
 
   <div class="stage">
     <div class="stage-meta"><div class="stage-name">Context Recall</div><div class="stage-sub">retrieval &middot; thresh 0.70</div></div>
-    <div class="gauge"><div class="fill" data-w="84"></div><div class="thresh" style="left:70%"></div></div>
+    <div class="gauge"><div class="fill" data-w="84"></div><div class="thresh u-left-70pct"></div></div>
     <div class="val" data-v="0.84">0.00</div>
   </div>
 
   <div class="stage">
     <div class="stage-meta"><div class="stage-name">Context Precision</div><div class="stage-sub">selection &middot; thresh 0.50</div></div>
-    <div class="gauge"><div class="fill" data-w="71"></div><div class="thresh" style="left:50%"></div></div>
+    <div class="gauge"><div class="fill" data-w="71"></div><div class="thresh u-left-50pct"></div></div>
     <div class="val" data-v="0.71">0.00</div>
   </div>
 
   <div class="stage">
     <div class="stage-meta"><div class="stage-name">Faithfulness</div><div class="stage-sub">generation &middot; thresh 0.50</div></div>
-    <div class="gauge"><div class="fill" data-w="66"></div><div class="thresh" style="left:50%"></div></div>
+    <div class="gauge"><div class="fill" data-w="66"></div><div class="thresh u-left-50pct"></div></div>
     <div class="val" data-v="0.66">0.00</div>
   </div>
 
   <div class="stage">
     <div class="stage-meta"><div class="stage-name">Answer Relevance</div><div class="stage-sub">end-to-end &middot; thresh 0.60</div></div>
-    <div class="gauge key"><div class="fill" data-w="78"></div><div class="thresh" style="left:60%"></div></div>
+    <div class="gauge key"><div class="fill" data-w="78"></div><div class="thresh u-left-60pct"></div></div>
     <div class="val" data-v="0.78">0.00</div>
   </div>
 

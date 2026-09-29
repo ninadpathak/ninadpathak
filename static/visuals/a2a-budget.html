@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>800ms Budget Breakdown</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         html, body { height: 100%; margin: 0; padding: 0; }
         body { background: var(--bg-1); font-family: var(--sans); color: var(--text-1); overflow: hidden; display: flex; justify-content: center; align-items: center; }
@@ -16,6 +17,7 @@
         .chart-title { font-family: var(--mono); font-size: 24px; fill: var(--text-1); font-weight: 700; text-transform: uppercase; }
         .axis { stroke: var(--text-1); stroke-width: 2; }
         .grid { stroke: var(--border); stroke-width: 1.5; stroke-dasharray: 4; }
+
     </style>
 </head>
 <body>
@@ -37,17 +39,17 @@
             <g>
                 <text x="240" y="190" text-anchor="end" class="bar-label">LLM TTFT</text>
                 <rect x="250" y="165" width="138" height="35" fill="var(--bg-2)" />
-                <text x="398" y="189" class="bar-pct" style="fill: var(--text-1);">23%</text>
+                <text x="398" y="189" class="bar-pct u-fill-text-1">23%</text>
             </g>
             <g>
                 <text x="240" y="245" text-anchor="end" class="bar-label">TTS Buffer</text>
                 <rect x="250" y="220" width="78" height="35" fill="var(--bg-2)" />
-                <text x="338" y="244" class="bar-pct" style="fill: var(--text-1);">13%</text>
+                <text x="338" y="244" class="bar-pct u-fill-text-1">13%</text>
             </g>
             <g>
                 <text x="240" y="300" text-anchor="end" class="bar-label">STT</text>
                 <rect x="250" y="275" width="78" height="35" fill="var(--bg-2)" />
-                <text x="338" y="299" class="bar-pct" style="fill: var(--text-1);">13%</text>
+                <text x="338" y="299" class="bar-pct u-fill-text-1">13%</text>
             </g>
             <text x="500" y="40" text-anchor="middle" class="chart-title">800ms Budget: Where Every ms Goes</text>
         </svg>

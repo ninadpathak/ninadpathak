@@ -80,6 +80,9 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
 .foot { flex: 0 0 auto; font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.04em; color: var(--text-3); }
 
 @media (max-width: 600px) { .cols { grid-template-columns: 1fr; } }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-mt-8px { margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -96,7 +99,7 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
         <span class="bullet"><span class="dim">- removed legacy_token</span></span>
         <span class="bullet"><span class="dim">- various improvements</span></span>
         <span class="bullet"><span class="dim">- updated dependency X</span></span>
-        <span class="bullet" style="margin-top:8px;"><span class="brk">no version. no date.</span></span>
+        <span class="bullet u-mt-8px"><span class="brk">no version. no date.</span></span>
         <span class="bullet"><span class="brk">no grouping. no impact.</span></span>
         <span class="bullet"><span class="dim">breaking change buried at line 3</span></span>
       </div>

@@ -38,6 +38,11 @@ svg{position:absolute;inset:0;width:100%;height:100%;}
   .scene{flex-direction:column;gap:18px;}
   .diagram{width:300px;height:300px;}
 }
+
+  /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+  .sweep.is-on { opacity: 1; }
+  .ring-label.is-on { fill: var(--accent); }
+  .ring.is-on { stroke: var(--accent); }
 </style>
 </head>
 <body>
@@ -100,14 +105,14 @@ const rows   = Array.from(document.querySelectorAll('.row'));
 const order = [3,2,1,0]; // inner to outer
 let k = 0;
 function setActive(i){
-  sweeps.forEach(s=>s.style.opacity=0);
-  labels.forEach(l=>l.style.fill='');
-  rings.forEach(r=>r.style.stroke='');
+  sweeps.forEach(s=>s.classList.remove('is-on'));
+  labels.forEach(l=>l.classList.remove('is-on'));
+  rings.forEach(r=>r.classList.remove('is-on'));
   rows.forEach(r=>r.classList.remove('on'));
   const idx = i;
-  sweeps.find(s=>+s.dataset.i===idx).style.opacity=1;
-  labels.find(l=>+l.dataset.i===idx).style.fill='var(--accent)';
-  rings.find(r=>+r.dataset.i===idx).style.stroke='var(--accent)';
+  sweeps.find(s=>+s.dataset.i===idx).classList.add('is-on');
+  labels.find(l=>+l.dataset.i===idx).classList.add('is-on');
+  rings.find(r=>+r.dataset.i===idx).classList.add('is-on');
   rows.find(r=>+r.dataset.i===idx).classList.add('on');
 }
 function step(){ setActive(order[k]); k=(k+1)%order.length; }

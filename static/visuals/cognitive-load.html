@@ -45,6 +45,9 @@
         .intrinsic { color: var(--text-1); }
         .extraneous { color: var(--accent); }
         .germane { color: #0088ff; }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-border-top-1px-solid-border--mt-8px--padding-top-4px { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 4px; }
     </style>
 </head>
 <body>
@@ -54,7 +57,7 @@
         <div class="metric-row intrinsic">intrinsic_load: <span id="intrinsic-val">0.40</span></div>
         <div class="metric-row extraneous">extraneous_load: <span id="extraneous-val">0.50</span></div>
         <div class="metric-row germane">germane_load: <span id="germane-val">0.10</span></div>
-        <div class="metric-row" style="border-top: 1px solid var(--border); margin-top: 8px; padding-top: 4px;">available_reserve: <span id="reserve-val">0.00</span></div>
+        <div class="metric-row u-border-top-1px-solid-border--mt-8px--padding-top-4px">available_reserve: <span id="reserve-val">0.00</span></div>
     </div>
     <script>
         const scene = new THREE.Scene();

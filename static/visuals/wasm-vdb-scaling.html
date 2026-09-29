@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WASM VDB Scaling</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         :root {
             --bg: #ffffff;
@@ -26,6 +27,11 @@
         .line-pg { fill: none; stroke: var(--text-dim); stroke-width: 4; }
         .line-sqlite { fill: none; stroke: var(--accent); stroke-width: 4; }
         .label { font-family: var(--mono); font-size: 18px; fill: var(--text); font-weight: 600; text-transform: uppercase; }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-fill-text-dim { fill: var(--text-dim); }
+        .u-fs-24px { font-size: 24px; }
+        .u-fs-18px--fill-text-dim { font-size: 18px; fill: var(--text-dim); }
     </style>
 </head>
 <body>
@@ -42,14 +48,14 @@
             
             <!-- PGlite Brute Line (Linear scaling) -->
             <path d="M 0 400 L 800 50" class="line-pg" />
-            <text x="810" y="50" class="label" style="fill: var(--text-dim);">PGlite Brute</text>
+            <text x="810" y="50" class="label u-fill-text-dim">PGlite Brute</text>
             
             <!-- SQLite-vec Binary Line (Near-flat scaling) -->
             <path d="M 0 400 L 800 380" class="line-sqlite" />
-            <text x="810" y="385" class="label" style="fill: var(--accent);">SQLite Binary</text>
+            <text x="810" y="385" class="label u-fill-accent">SQLite Binary</text>
             
-            <text x="400" y="480" text-anchor="middle" class="label" style="font-size: 24px;">p99 Latency vs Vector Count (10k to 1M)</text>
-            <text x="400" y="520" text-anchor="middle" class="label" style="font-size: 18px; fill: var(--text-dim);">X: Vector Count | Y: Latency (ms)</text>
+            <text x="400" y="480" text-anchor="middle" class="label u-fs-24px">p99 Latency vs Vector Count (10k to 1M)</text>
+            <text x="400" y="520" text-anchor="middle" class="label u-fs-18px--fill-text-dim">X: Vector Count | Y: Latency (ms)</text>
         </svg>
     </div>
 </body>

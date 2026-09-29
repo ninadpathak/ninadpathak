@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contextual Compression Pipeline</title>
 <link rel="stylesheet" href="/static/css/visual-embed.css">
+<link rel="stylesheet" href="/static/css/visual-utilities.css">
 <style>
 :root{--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
 body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
@@ -49,6 +50,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
   .pipeline{flex-direction:column;gap:10px;}
   .arrow-wrap{width:auto;height:20px;padding:0;transform:rotate(90deg);}
 }
+
 </style>
 </head>
 <body>
@@ -60,7 +62,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
     <div class="stage">
       <div class="box" id="b0">
         <div class="box-label">Full context</div>
-        <div class="token-bar"><div class="token-fill" id="f0" style="width:100%"></div></div>
+        <div class="token-bar"><div class="token-fill u-width-100pct" id="f0"></div></div>
         <div class="token-count" id="c0">8 400 tok</div>
         <div class="token-sub">before compression</div>
         <div class="tags">
@@ -84,7 +86,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
     <div class="stage">
       <div class="box" id="b1">
         <div class="box-label">Compression pass</div>
-        <div class="token-bar"><div class="token-fill" id="f1" style="width:0%"></div></div>
+        <div class="token-bar"><div class="token-fill u-width-0pct" id="f1"></div></div>
         <div class="token-count" id="c1">--</div>
         <div class="token-sub">scoring + eviction</div>
         <div class="tags">
@@ -105,7 +107,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
     <div class="stage">
       <div class="box" id="b2">
         <div class="box-label">Compressed context</div>
-        <div class="token-bar"><div class="token-fill" id="f2" style="width:0%"></div></div>
+        <div class="token-bar"><div class="token-fill u-width-0pct" id="f2"></div></div>
         <div class="token-count" id="c2">--</div>
         <div class="token-sub">after compression</div>
         <div class="tags">

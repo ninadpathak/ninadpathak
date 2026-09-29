@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agentic ROI Benchmark</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         :root {
             --bg: #ffffff;
@@ -30,6 +31,9 @@
             vector-effect: non-scaling-stroke; stroke: var(--text); stroke-width: 3.0; }
         .grid {
             vector-effect: non-scaling-stroke; stroke: var(--border); stroke-width: 2.5; stroke-dasharray: 4; }
+
+            /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+            .u-fill-0088ff { fill: #0088ff; }
     </style>
 </head>
 <body>
@@ -44,14 +48,14 @@
 
             <!-- Cloud API Line -->
             <path d="M 50 250 L 750 50" fill="none" stroke="var(--accent)" stroke-width="3" />
-            <text x="700" y="40" text-anchor="end" class="bar-label" style="fill: var(--accent);">Cloud API (Linear Scalability)</text>
+            <text x="700" y="40" text-anchor="end" class="bar-label u-fill-accent">Cloud API (Linear Scalability)</text>
 
             <!-- Local M2 Line -->
             <path d="M 50 250 L 750 230" fill="none" stroke="#0088ff" stroke-width="3" />
-            <text x="700" y="220" text-anchor="end" class="bar-label" style="fill: #0088ff;">Local M2 Air (Electricity/HW Only)</text>
+            <text x="700" y="220" text-anchor="end" class="bar-label u-fill-0088ff">Local M2 Air (Electricity/HW Only)</text>
 
             <rect x="200" y="100" width="400" height="80" rx="4" fill="rgba(0, 136, 255, 0.1)" stroke="#0088ff" stroke-dasharray="4" />
-            <text x="400" y="145" text-anchor="middle" class="bar-label" style="fill: #0088ff;">ROI BREAK-EVEN ZONE (150k Tokens/Day)</text>
+            <text x="400" y="145" text-anchor="middle" class="bar-label u-fill-0088ff">ROI BREAK-EVEN ZONE (150k Tokens/Day)</text>
         </svg>
     </div>
 </body>

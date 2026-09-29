@@ -35,6 +35,10 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
 .cols{flex-direction:column;gap:18px;}
 .metric-label{flex:0 0 130px;font-size:10px;}
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-width-49pct { width: 49%; }
+.u-width-67pct { width: 67%; }
 </style>
 </head>
 <body>
@@ -60,12 +64,12 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
   <div class="metric">
     <div class="metric-row">
       <span class="metric-label">Embeddings + BM25</span>
-      <span class="bar-track"><span class="bar-fill acc" style="width:49%"></span></span>
+      <span class="bar-track"><span class="bar-fill acc u-width-49pct"></span></span>
       <span class="metric-val">-49%</span>
     </div>
     <div class="metric-row">
       <span class="metric-label">+ Reranking</span>
-      <span class="bar-track"><span class="bar-fill acc" style="width:67%"></span></span>
+      <span class="bar-track"><span class="bar-fill acc u-width-67pct"></span></span>
       <span class="metric-val">-67%</span>
     </div>
     <div class="metric-cap">Reduction in top-20 retrieval failure (1 - recall@20)</div>

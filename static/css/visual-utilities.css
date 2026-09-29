@@ -1,0 +1,29 @@
+/* Utilities shared by the standalone visuals in /static/visuals/.
+   Each was an identical inline style in two or more visuals. This file loads before
+   a visual's own <style>, so a class is repeated until it outranks every rule that
+   matches the same element there; tests/test_design_tokens.py keeps that true. */
+
+.u-bg-accent.u-bg-accent.u-bg-accent { background: var(--accent); }
+.u-bg-ff5f1f { background: #ff5f1f; }
+.u-color-accent.u-color-accent.u-color-accent { color: var(--accent); }
+.u-color-text-1.u-color-text-1.u-color-text-1 { color: var(--text-1); }
+.u-color-text-3 { color: var(--text-3); }
+.u-delay-1-6s.u-delay-1-6s { animation-delay: 1.6s; }
+.u-fill-accent.u-fill-accent { fill: var(--accent); }
+.u-fill-text-1.u-fill-text-1 { fill: var(--text-1); }
+.u-fill-text-3.u-fill-text-3 { fill: var(--text-3); }
+.u-fs-10px--color-text-3--mt-8px { font-size: 10px; color: var(--text-3); margin-top: 8px; }
+.u-fs-16px.u-fs-16px { font-size: 16px; }
+.u-fs-16px--fill-text-1.u-fs-16px--fill-text-1 { font-size: 16px; fill: var(--text-1); }
+.u-fs-22px--fill-text-1.u-fs-22px--fill-text-1 { font-size: 22px; fill: var(--text-1); }
+.u-fs-24px--fill-text-1.u-fs-24px--fill-text-1 { font-size: 24px; fill: var(--text-1); }
+.u-left-20px.u-left-20px { left: 20px; }
+.u-left-50pct.u-left-50pct.u-left-50pct { left: 50%; }
+.u-m-0 { margin: 0; }
+.u-right-20px.u-right-20px { right: 20px; }
+.u-stroke-0088ff.u-stroke-0088ff { stroke: #0088ff; }
+.u-stroke-accent.u-stroke-accent { stroke: var(--accent); }
+.u-stroke-accent--sw-2-5.u-stroke-accent--sw-2-5 { stroke: var(--accent); stroke-width: 2.5; }
+.u-stroke-accent--sw-3.u-stroke-accent--sw-3 { stroke: var(--accent); stroke-width: 3; }
+.u-width-0pct.u-width-0pct { width: 0%; }
+.u-width-100pct.u-width-100pct { width: 100%; }

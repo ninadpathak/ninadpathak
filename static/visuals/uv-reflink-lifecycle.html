@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>uv Zero-copy Link Lifecycle</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
 
 
@@ -42,6 +43,7 @@
         .arrow { stroke: var(--accent); stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
         .box { fill: var(--bg-2); stroke: var(--border); stroke-width: 1.5; }
         .highlight { fill: var(--accent); font-weight: 700; font-size: 20px; }
+
     </style>
 </head>
 <body>
@@ -60,8 +62,8 @@
             </g>
             
             <g transform="translate(500, 80)">
-                <rect x="-100" y="0" width="200" height="50" rx="4" class="box" style="stroke: var(--accent); stroke-width: 2.5;" />
-                <text x="0" y="32" text-anchor="middle" class="label" style="fill: var(--accent);">uv Cache</text>
+                <rect x="-100" y="0" width="200" height="50" rx="4" class="box u-stroke-accent--sw-2-5" />
+                <text x="0" y="32" text-anchor="middle" class="label u-fill-accent">uv Cache</text>
                 <line x1="0" y1="50" x2="0" y2="380" class="line" stroke-dasharray="6" />
             </g>
             
@@ -73,12 +75,12 @@
 
             <g transform="translate(0, 150)">
                 <path d="M 150 0 L 490 0" class="arrow" />
-                <text x="325" y="-15" text-anchor="middle" class="label" style="font-size: 16px;">1. Download</text>
+                <text x="325" y="-15" text-anchor="middle" class="label u-fs-16px">1. Download</text>
             </g>
             
             <g transform="translate(0, 250)">
                 <path d="M 850 0 L 510 0" class="arrow" />
-                <text x="680" y="-15" text-anchor="middle" class="label" style="font-size: 16px;">2. Resolve</text>
+                <text x="680" y="-15" text-anchor="middle" class="label u-fs-16px">2. Resolve</text>
             </g>
             
             <g transform="translate(0, 350)">
@@ -88,7 +90,7 @@
             </g>
             
             <rect x="150" y="420" width="700" height="60" rx="4" fill="var(--bg-2)" stroke="var(--border)" />
-            <text x="500" y="458" text-anchor="middle" class="label" style="font-size: 22px; fill: var(--text-1);">Architecture: One Copy, Many Environments</text>
+            <text x="500" y="458" text-anchor="middle" class="label u-fs-22px--fill-text-1">Architecture: One Copy, Many Environments</text>
         </svg>
     </div>
 </body>

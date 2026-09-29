@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>uv Cache Deduplication</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
 
 
@@ -40,6 +41,11 @@
         .desc { font-family: var(--sans); font-size: 18px; fill: var(--text-3); }
         .box { fill: var(--bg-2); stroke: var(--border); stroke-width: 1.5; }
         .link { stroke: var(--accent); stroke-width: 3; stroke-dasharray: 8; fill: none; }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-fill-accent--fs-24px { fill: var(--accent); font-size: 24px; }
+        .u-fs-14px { font-size: 14px; }
+        .u-fs-28px--fill-text-1 { font-size: 28px; fill: var(--text-1); }
     </style>
 </head>
 <body>
@@ -47,10 +53,10 @@
         <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
             <!-- Global Cache -->
             <g transform="translate(500, 250)">
-                <rect x="-150" y="-80" width="300" height="160" rx="8" class="box" style="stroke: var(--accent); stroke-width: 3;" />
-                <text x="0" y="-20" text-anchor="middle" class="label" style="fill: var(--accent); font-size: 24px;">Global Cache</text>
+                <rect x="-150" y="-80" width="300" height="160" rx="8" class="box u-stroke-accent--sw-3" />
+                <text x="0" y="-20" text-anchor="middle" class="label u-fill-accent--fs-24px">Global Cache</text>
                 <text x="0" y="20" text-anchor="middle" class="desc">Content-Addressable</text>
-                <text x="0" y="50" text-anchor="middle" class="label" style="font-size: 14px;">torch-2.5.0.whl</text>
+                <text x="0" y="50" text-anchor="middle" class="label u-fs-14px">torch-2.5.0.whl</text>
             </g>
             
             <!-- Project Nodes -->
@@ -72,7 +78,7 @@
                 <path d="M -80 0 L -170 0" class="link" />
             </g>
             
-            <text x="500" y="60" text-anchor="middle" class="label" style="font-size: 28px; fill: var(--text-1);">Global Deduplication Architecture</text>
+            <text x="500" y="60" text-anchor="middle" class="label u-fs-28px--fill-text-1">Global Deduplication Architecture</text>
             <text x="500" y="460" text-anchor="middle" class="desc">Dashed lines: Zero-copy links. Disk space used once.</text>
         </svg>
     </div>

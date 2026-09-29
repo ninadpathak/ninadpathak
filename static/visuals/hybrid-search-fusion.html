@@ -101,6 +101,10 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
 @media (max-width: 600px) {
   .board { grid-template-columns: 1fr; gap: 8px; }
 }
+
+  /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+  .row.is-pending { opacity: 0; transform: translateY(6px); }
+  .row.is-dropped { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -159,12 +163,10 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   // Build the fused rows once (hidden initially).
   const fusedRows = ranked.map((r, idx) => {
     const row = document.createElement('div');
-    row.className = 'row' + (idx === 0 ? ' win' : '');
+    row.className = 'row' + (idx === 0 ? ' win' : '') + ' is-pending';
     row.dataset.id = r.id;
     const inBoth = bm25.includes(r.id) && vec.includes(r.id);
     row.innerHTML = `<span class="rank">${idx + 1}</span><span class="doc">doc ${r.id}${inBoth ? ' &#10003;' : ''}</span><span class="sc">${r.s.toFixed(4)}</span>`;
-    row.style.opacity = '0';
-    row.style.transform = 'translateY(6px)';
     fused.appendChild(row);
     return row;
   });
@@ -177,7 +179,7 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
 
   function cycle() {
     // reset
-    fusedRows.forEach(r => { r.style.opacity = '0'; r.style.transform = 'translateY(6px)'; });
+    fusedRows.forEach(r => { r.classList.remove('is-dropped'); r.classList.add('is-pending'); });
     laneRows.forEach(r => r.classList.remove('win', 'dim'));
     note.innerHTML = 'scores on different scales &mdash; RRF discards them, keeps only <b>rank</b>';
 
@@ -186,8 +188,8 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
       setTimeout(() => {
         highlightSource(r.id, true);
         const row = fusedRows[idx];
-        row.style.opacity = '1';
-        row.style.transform = 'translateY(0)';
+        row.classList.remove('is-pending');
+        row.classList.add('is-dropped');
         setTimeout(() => highlightSource(r.id, false), 600);
       }, 500 + idx * 700);
     });

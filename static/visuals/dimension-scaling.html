@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dimension Scaling</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         body { margin: 0; height: 100vh; height: 100vh; background: var(--bg-1); font-family: var(--sans); color: var(--text-1);  display: flex; align-items: center; justify-content: center; min-  overflow: hidden; }
         .container { width: 100%; max-width: 600px; padding: 2rem; box-sizing: border-box; display: flex; flex-direction: column; gap: 2rem; }
@@ -16,17 +17,23 @@
         .flex-col { display: flex; flex-direction: column; gap: 1rem; }
         .arrow { color: var(--text-3); font-family: var(--mono); text-align: center; }
         @media (max-width: 600px) { .flex-row { flex-direction: column; } .arrow { transform: rotate(90deg); } .no-rotate { transform: none !important; } }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-align-items-center--width-100pct { align-items: center; width: 100%; }
+        .u-fs-0-8rem { font-size: 0.8rem; }
+        .u-width-100pct--border-color-accent { width: 100%; border-color: var(--accent); }
+        .u-mt-1-5rem--color-text-2--align-center--fs-0-85rem--line-height-1-8 { margin-top: 1.5rem; color: var(--text-2); text-align: center; font-size: 0.85rem; line-height: 1.8; }
 </style>
 </head>
 <body>
     <div class="container" id="root">
         
-<div class="flex-col" style="align-items:center; width: 100%">
-    <div class="box mono" style="width: 100%">Query Vector <span style="color:var(--text-3)">(384 dimensions)</span></div>
-    <div class="arrow no-rotate" style="font-size: 0.8rem;">↓ Add Dimensions ↓</div>
-    <div class="box mono" style="width: 100%; border-color: var(--accent);">Query Vector <span class="accent">(3072 dimensions)</span></div>
+<div class="flex-col u-align-items-center--width-100pct">
+    <div class="box mono u-width-100pct">Query Vector <span class="u-color-text-3">(384 dimensions)</span></div>
+    <div class="arrow no-rotate u-fs-0-8rem">↓ Add Dimensions ↓</div>
+    <div class="box mono u-width-100pct--border-color-accent">Query Vector <span class="accent">(3072 dimensions)</span></div>
     
-    <div class="mono" style="margin-top: 1.5rem; color:var(--text-2); text-align:center; font-size:0.85rem; line-height:1.8">
+    <div class="mono u-mt-1-5rem--color-text-2--align-center--fs-0-85rem--line-height-1-8">
         Added dimensions do not solve the architecture flaw.<br>The model still evaluates the text <strong>in isolation</strong>.
     </div>
 </div>

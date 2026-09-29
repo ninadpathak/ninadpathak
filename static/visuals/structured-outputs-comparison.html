@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Structured Outputs: Three Approaches</title>
 <link rel="stylesheet" href="/static/css/visual-embed.css">
+<link rel="stylesheet" href="/static/css/visual-utilities.css">
 <style>
 :root {
   --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
@@ -148,6 +149,14 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   .cols { grid-template-columns: 1fr; }
   .body { white-space: pre-wrap; }
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-delay-0s { animation-delay: 0s; }
+.u-delay-3s { animation-delay: .3s; }
+.u-delay-6s { animation-delay: .6s; }
+.u-delay-9s { animation-delay: .9s; }
+.u-delay-1-3s { animation-delay: 1.3s; }
+.u-delay-1-2s { animation-delay: 1.2s; }
 </style>
 </head>
 <body>
@@ -166,7 +175,7 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
         <div class="h">JSON MODE</div>
         <div class="g">valid json, no schema</div>
       </div>
-      <div class="body"><span class="line" style="animation-delay:0s">{</span><span class="line" style="animation-delay:.3s">  <span class="k">"name"</span>: <span class="v">"Alice"</span>,</span><span class="line" style="animation-delay:.6s">  <span class="k">"score"</span>: <span class="bad">"high"</span></span><span class="line" style="animation-delay:.9s">}</span><span class="line" style="animation-delay:1.3s"><span class="bad">// type drifted: string</span></span></div>
+      <div class="body"><span class="line u-delay-0s">{</span><span class="line u-delay-3s">  <span class="k">"name"</span>: <span class="v">"Alice"</span>,</span><span class="line u-delay-6s">  <span class="k">"score"</span>: <span class="bad">"high"</span></span><span class="line u-delay-9s">}</span><span class="line u-delay-1-3s"><span class="bad">// type drifted: string</span></span></div>
       <div class="foot"><span class="pct lo">94.2%</span><span>schema compliance</span></div>
     </div>
 
@@ -176,7 +185,7 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
         <div class="h">FUNCTION CALLING</div>
         <div class="g">model decides to invoke</div>
       </div>
-      <div class="body"><span class="line" style="animation-delay:0s">tool_call:</span><span class="line" style="animation-delay:.3s">  <span class="k">name</span>: <span class="v">save_review</span></span><span class="line" style="animation-delay:.6s">  <span class="k">args</span>: {</span><span class="line" style="animation-delay:.9s">    <span class="k">name</span>: <span class="v">"Alice"</span></span><span class="line" style="animation-delay:1.2s">  }</span><span class="line" style="animation-delay:1.6s"><span class="k">or: plain text reply</span></span></div>
+      <div class="body"><span class="line u-delay-0s">tool_call:</span><span class="line u-delay-3s">  <span class="k">name</span>: <span class="v">save_review</span></span><span class="line u-delay-6s">  <span class="k">args</span>: {</span><span class="line u-delay-9s">    <span class="k">name</span>: <span class="v">"Alice"</span></span><span class="line u-delay-1-2s">  }</span><span class="line u-delay-1-6s"><span class="k">or: plain text reply</span></span></div>
       <div class="foot"><span class="pct na">8.4</span><span>tool-use reliability (claude)</span></div>
     </div>
 
@@ -186,7 +195,7 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
         <div class="h">STRUCTURED OUTPUTS</div>
         <div class="g">schema-constrained tokens</div>
       </div>
-      <div class="body"><span class="line" style="animation-delay:0s">{</span><span class="line" style="animation-delay:.3s">  <span class="k">"name"</span>: <span class="v">"Alice"</span>,</span><span class="line" style="animation-delay:.6s">  <span class="k">"score"</span>: <span class="v">8.4</span></span><span class="line" style="animation-delay:.9s">}</span><span class="line" style="animation-delay:1.3s"><span class="k">// grammar-enforced</span></span></div>
+      <div class="body"><span class="line u-delay-0s">{</span><span class="line u-delay-3s">  <span class="k">"name"</span>: <span class="v">"Alice"</span>,</span><span class="line u-delay-6s">  <span class="k">"score"</span>: <span class="v">8.4</span></span><span class="line u-delay-9s">}</span><span class="line u-delay-1-3s"><span class="k">// grammar-enforced</span></span></div>
       <div class="foot"><span class="pct hi">100%</span><span>schema adherence</span></div>
     </div>
   </div>

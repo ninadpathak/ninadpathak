@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latency Tradeoff</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         body { margin: 0; height: 100vh; height: 100vh; background: var(--bg-1); font-family: var(--sans); color: var(--text-1);  display: flex; align-items: center; justify-content: center; min-  overflow: hidden; }
         .container { width: 100%; max-width: 600px; padding: 2rem; box-sizing: border-box; display: flex; flex-direction: column; gap: 2rem; }
@@ -21,23 +22,27 @@
 .bar-fill { height: 100%; background: var(--text-1); transition: width 1.5s ease-out; width: 0; }
 .bar-fill.accent { background: var(--accent); }
 .label { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.75rem; margin-bottom: 0.5rem; }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-gap-2rem--width-100pct { gap: 2rem; width: 100%; }
+.u-bg-text-3--width-0pct { background: var(--text-3); width: 0%; }
 </style>
 </head>
 <body>
     <div class="container" id="root">
         
-<div class="flex-col" style="gap: 2rem; width: 100%;">
+<div class="flex-col u-gap-2rem--width-100pct">
     <div>
         <div class="label"><span>Stage 1: Bi-Encoder Vector Search</span><span>~50ms</span></div>
-        <div class="bar-track"><div class="bar-fill" id="bar1" style="width: 0%;" data-target="15%"></div></div>
+        <div class="bar-track"><div class="bar-fill u-width-0pct" id="bar1" data-target="15%"></div></div>
     </div>
     <div>
         <div class="label"><span class="accent">Stage 2: Cross-Encoder Reranking</span><span class="accent">~250ms</span></div>
-        <div class="bar-track"><div class="bar-fill accent" id="bar2" style="width: 0%;" data-target="60%"></div></div>
+        <div class="bar-track"><div class="bar-fill accent u-width-0pct" id="bar2" data-target="60%"></div></div>
     </div>
     <div>
-        <div class="label"><span style="color:var(--text-3)">Total Request Latency</span><span style="color:var(--text-3)">~300ms</span></div>
-        <div class="bar-track"><div class="bar-fill" id="bar3" style="background: var(--text-3); width: 0%;" data-target="75%"></div></div>
+        <div class="label"><span class="u-color-text-3">Total Request Latency</span><span class="u-color-text-3">~300ms</span></div>
+        <div class="bar-track"><div class="bar-fill u-bg-text-3--width-0pct" id="bar3" data-target="75%"></div></div>
     </div>
 </div>
 <script>

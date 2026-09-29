@@ -132,6 +132,13 @@
             padding: 4px 8px;
             border: 1px solid var(--border);
         }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-mt-4px { margin-top: 4px; }
+
+        /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+        #tooltip.is-hidden { display: none; }
+        #tooltip.is-visible { display: block; }
     </style>
 </head>
 <body>
@@ -155,7 +162,7 @@
                 <div class="accuracy-bar-outer">
                     <div class="accuracy-bar-inner" id="accy-bar"></div>
                 </div>
-                <div class="stat-row" style="margin-top: 4px;">
+                <div class="stat-row u-mt-4px">
                     <span class="stat-label">Memory Impact</span>
                     <span class="stat-val" id="mem-val">-0.0%</span>
                 </div>
@@ -365,13 +372,13 @@
 
             if(hits.length > 0 && hits[0].object.userData.id) {
                 const n = hits[0].object.userData;
-                tooltip.style.display = 'block';
+                tooltip.classList.remove('is-hidden'); tooltip.classList.add('is-visible');
                 tooltip.style.left = clientX + 15 + 'px';
                 tooltip.style.top = clientY + 15 + 'px';
                 tooltip.innerText = n.id;
                 hits[0].object.scale.set(1.5, 1.5, 1.5);
             } else {
-                tooltip.style.display = 'none';
+                tooltip.classList.remove('is-visible'); tooltip.classList.add('is-hidden');
                 meshes.forEach(m => m.scale.set(1, 1, 1));
             }
 

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Symmetric vs Asymmetric Retrieval</title>
 <link rel="stylesheet" href="/static/css/visual-embed.css">
+<link rel="stylesheet" href="/static/css/visual-utilities.css">
 <style>
 :root{--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
 body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
@@ -46,6 +47,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
   .gap{width:100%;height:34px;margin:2px 0;}
   .caption{flex-direction:column;gap:2px;}
 }
+
 </style>
 </head>
 <body>
@@ -55,7 +57,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
   <div class="rows">
     <!-- SYMMETRIC: human query <-> doc, same register -->
     <div class="sym">
-      <div class="caption"><span>Query-time / human</span><span class="status" style="color:var(--accent)">SYMMETRIC: MATCH</span></div>
+      <div class="caption"><span>Query-time / human</span><span class="status u-color-accent">SYMMETRIC: MATCH</span></div>
       <div class="track">
         <div class="box q-box">
           <div class="role">User query</div>
@@ -79,7 +81,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
 
     <!-- ASYMMETRIC: agent query !<-> doc, different register, pipeline breaks -->
     <div class="asym">
-      <div class="caption"><span>Agent-time / agent</span><span class="status" style="color:var(--text-3)">ASYMMETRIC: LOW OVERLAP</span></div>
+      <div class="caption"><span>Agent-time / agent</span><span class="status u-color-text-3">ASYMMETRIC: LOW OVERLAP</span></div>
       <div class="track">
         <div class="box q-box">
           <div class="role">Agent query</div>

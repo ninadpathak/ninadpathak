@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Agent Design Space Map</title>
 <link rel="stylesheet" href="/static/css/visual-embed.css">
+<link rel="stylesheet" href="/static/css/visual-utilities.css">
 <style>
 :root{--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;}
 body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1);overflow:hidden;}
@@ -57,6 +58,13 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
   .node{width:90px;}
   .lbl{font-size:7.5px;}
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-top-25pct.u-top-25pct.u-top-25pct { top: 25%; }
+.u-top-50pct.u-top-50pct.u-top-50pct { top: 50%; }
+.u-top-75pct.u-top-75pct.u-top-75pct { top: 75%; }
+.u-left-25pct.u-left-25pct.u-left-25pct { left: 25%; }
+.u-left-75pct.u-left-75pct.u-left-75pct { left: 75%; }
 </style>
 </head>
 <body>
@@ -65,12 +73,12 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
     <div class="ylabel">Blast radius / harder to audit &rarr;</div>
     <div class="plot">
       <div class="grid">
-        <div class="gl h" style="top:25%"></div>
-        <div class="gl h" style="top:50%"></div>
-        <div class="gl h" style="top:75%"></div>
-        <div class="gl v" style="left:25%"></div>
-        <div class="gl v" style="left:50%"></div>
-        <div class="gl v" style="left:75%"></div>
+        <div class="gl h u-top-25pct"></div>
+        <div class="gl h u-top-50pct"></div>
+        <div class="gl h u-top-75pct"></div>
+        <div class="gl v u-left-25pct"></div>
+        <div class="gl v u-left-50pct"></div>
+        <div class="gl v u-left-75pct"></div>
       </div>
 
       <div class="node p-rag" data-i="0"><div class="dot"></div><div class="lbl">RAG single-loop</div></div>

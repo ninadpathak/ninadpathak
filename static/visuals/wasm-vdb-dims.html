@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WASM VDB Latency vs Dimensions</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
 
 
@@ -41,6 +42,7 @@
         .desc { font-family: var(--sans); font-size: 11px; fill: var(--text-3); }
         .axis { stroke: var(--text-1); stroke-width: 1.5; fill: none; }
         .grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 2; }
+
     </style>
 </head>
 <body>
@@ -59,16 +61,16 @@
 
             <!-- Brute Force (Linear) -->
             <path d="M 100 350 L 750 80" fill="none" stroke="var(--border)" stroke-width="3" />
-            <text x="760" y="70" text-anchor="start" class="label" style="fill: var(--text-3);">Flat Scan (O(d))</text>
+            <text x="760" y="70" text-anchor="start" class="label u-fill-text-3">Flat Scan (O(d))</text>
             <text x="760" y="90" text-anchor="start" class="desc">Scaling penalty for 3k+ dims</text>
             
             <!-- Indexed (Logarithmic/Optimized) -->
             <path d="M 100 350 Q 250 345 750 300" fill="none" stroke="var(--accent)" stroke-width="4" />
-            <text x="760" y="305" text-anchor="start" class="label" style="fill: var(--accent);">HNSW Indexed</text>
+            <text x="760" y="305" text-anchor="start" class="label u-fill-accent">HNSW Indexed</text>
             <text x="760" y="325" text-anchor="start" class="desc">Stable at high dimensionality</text>
             
             <!-- Summary Title -->
-            <text x="425" y="30" text-anchor="middle" class="label" style="font-size: 16px; fill: var(--text-1);">Latency vs Vector Dimensions</text>
+            <text x="425" y="30" text-anchor="middle" class="label u-fs-16px--fill-text-1">Latency vs Vector Dimensions</text>
         </svg>
     </div>
 </body>

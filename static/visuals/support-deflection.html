@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support Deflection ROI</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         :root {
             --bg: #ffffff;
@@ -72,6 +73,9 @@
         }
         .legend-item { display: flex; align-items: center; gap: 8px; }
         .legend-color { width: 12px; height: 12px; }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-bg-border { background: var(--border); }
     </style>
 </head>
 <body>
@@ -122,11 +126,11 @@
     </div>
     <div class="legend">
         <div class="legend-item">
-            <div class="legend-color" style="background: var(--border);"></div>
+            <div class="legend-color u-bg-border"></div>
             <span>Documentation Depth</span>
         </div>
         <div class="legend-item">
-            <div class="legend-color" style="background: var(--accent);"></div>
+            <div class="legend-color u-bg-accent"></div>
             <span>Support Ticket Volume</span>
         </div>
     </div>

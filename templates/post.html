@@ -208,6 +208,7 @@
       const iframes = document.querySelectorAll('iframe');
       for (let i = 0; i < iframes.length; i++) {
         if (iframes[i].contentWindow === e.source) {
+          // A visual reports its own content height, so this is data, not a style choice.
           iframes[i].style.height = e.data.height + 'px';
           break;
         }

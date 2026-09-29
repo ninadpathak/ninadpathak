@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Agent Memory Constellation</title>
+<link rel="stylesheet" href="/static/css/visual-utilities.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -70,6 +71,23 @@
     text-transform: uppercase;
     margin-top: 12px;
   }
+
+  /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+  .u-bg-00bfff { background: #00bfff; }
+  .u-bg-39ff14 { background: #39ff14; }
+  .u-bg-ff2d78 { background: #ff2d78; }
+  .u-bg-bf5fff { background: #bf5fff; }
+  .u-bg-ffd700 { background: #ffd700; }
+  .u-bg-00ffcc { background: #00ffcc; }
+  .u-bg-ff8c00 { background: #ff8c00; }
+  .u-bg-ff4500 { background: #ff4500; }
+  .u-bg-1e90ff { background: #1e90ff; }
+  .u-bg-e6e6fa { background: #e6e6fa; }
+  .u-bg-98fb98 { background: #98fb98; }
+
+  /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+  .hover-label { position: fixed; background: rgba(0,0,0,0.8); color: #ff5f1f; padding: 5px 10px; border-radius: 4px; font-size: 11px; pointer-events: none; display: none; letter-spacing: 0.06em; text-transform: uppercase; backdrop-filter: blur(8px); border: 1px solid rgba(255,95,31,0.3); }
+  .hover-label.is-visible { display: block; }
 </style>
 </head>
 <body>
@@ -81,18 +99,18 @@
   </div>
   <div>
     <div id="legend">
-      <div class="legend-item"><div class="dot" style="background:#ff5f1f"></div>Letta</div>
-      <div class="legend-item"><div class="dot" style="background:#00bfff"></div>MemGPT</div>
-      <div class="legend-item"><div class="dot" style="background:#39ff14"></div>Mem0</div>
-      <div class="legend-item"><div class="dot" style="background:#ff2d78"></div>Pinecone</div>
-      <div class="legend-item"><div class="dot" style="background:#bf5fff"></div>Qdrant</div>
-      <div class="legend-item"><div class="dot" style="background:#ffd700"></div>Postgres/pgvector</div>
-      <div class="legend-item"><div class="dot" style="background:#00ffcc"></div>Working Memory</div>
-      <div class="legend-item"><div class="dot" style="background:#ff8c00"></div>Episodic Memory</div>
-      <div class="legend-item"><div class="dot" style="background:#ff4500"></div>Semantic Memory</div>
-      <div class="legend-item"><div class="dot" style="background:#1e90ff"></div>MCP Protocol</div>
-      <div class="legend-item"><div class="dot" style="background:#e6e6fa"></div>RAG Retrieval</div>
-      <div class="legend-item"><div class="dot" style="background:#98fb98"></div>Hybrid Search</div>
+      <div class="legend-item"><div class="dot u-bg-ff5f1f"></div>Letta</div>
+      <div class="legend-item"><div class="dot u-bg-00bfff"></div>MemGPT</div>
+      <div class="legend-item"><div class="dot u-bg-39ff14"></div>Mem0</div>
+      <div class="legend-item"><div class="dot u-bg-ff2d78"></div>Pinecone</div>
+      <div class="legend-item"><div class="dot u-bg-bf5fff"></div>Qdrant</div>
+      <div class="legend-item"><div class="dot u-bg-ffd700"></div>Postgres/pgvector</div>
+      <div class="legend-item"><div class="dot u-bg-00ffcc"></div>Working Memory</div>
+      <div class="legend-item"><div class="dot u-bg-ff8c00"></div>Episodic Memory</div>
+      <div class="legend-item"><div class="dot u-bg-ff4500"></div>Semantic Memory</div>
+      <div class="legend-item"><div class="dot u-bg-1e90ff"></div>MCP Protocol</div>
+      <div class="legend-item"><div class="dot u-bg-e6e6fa"></div>RAG Retrieval</div>
+      <div class="legend-item"><div class="dot u-bg-98fb98"></div>Hybrid Search</div>
     </div>
     <div id="hint">Drag to orbit &nbsp;·&nbsp; Scroll to zoom</div>
   </div>
@@ -290,7 +308,7 @@
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
   const labelDiv = document.createElement('div');
-  labelDiv.style.cssText = 'position:fixed;background:rgba(0,0,0,0.8);color:#ff5f1f;padding:5px 10px;border-radius:4px;font-size:11px;pointer-events:none;display:none;letter-spacing:0.06em;text-transform:uppercase;backdrop-filter:blur(8px);border:1px solid rgba(255,95,31,0.3)';
+  labelDiv.className = 'hover-label';
   document.body.appendChild(labelDiv);
 
   window.addEventListener('mousemove', e => {
@@ -300,12 +318,12 @@
     const intersects = raycaster.intersectObjects(meshes);
     if (intersects.length > 0) {
       const m = intersects[0].object;
-      labelDiv.style.display = 'block';
+      labelDiv.classList.add('is-visible');
       labelDiv.style.left = e.clientX + 14 + 'px';
       labelDiv.style.top = e.clientY - 8 + 'px';
       labelDiv.textContent = m.userData.label.replace(/\n/g, ' ');
     } else {
-      labelDiv.style.display = 'none';
+      labelDiv.classList.remove('is-visible');
     }
   });
 

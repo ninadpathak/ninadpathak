@@ -44,6 +44,10 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
   .arrow-row{flex-direction:column;gap:6px;}
   .arr{transform:rotate(90deg);}
 }
+
+  /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+  #mismatch.is-hidden { display: none; }
+  #mismatch.is-shown { display: block; }
 </style>
 </head>
 <body>
@@ -118,7 +122,7 @@ function clear(){
   statedPolicy.textContent='--';statedDate.textContent='--';statedSrc.textContent='--';
   actualPolicy.textContent='--';actualDate.textContent='--';actualUntil.textContent='--';
   badgeStated.textContent='retrieving...';
-  mismatch.style.display='none';
+  mismatch.classList.remove('is-shown'); mismatch.classList.add('is-hidden');
   status.innerHTML='&nbsp;';
 }
 var steps=[
@@ -135,7 +139,7 @@ var steps=[
   function(){
     cardStated.classList.add('mismatch');
     cardActual.classList.add('mismatch');
-    mismatch.style.display='block';
+    mismatch.classList.remove('is-hidden'); mismatch.classList.add('is-shown');
     status.innerHTML='<b>attribution failure</b> -- actual Q1 2026 price is $59/mo. Chunk had no validity window.';
   }
 ];

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Compounding Content Moat</title>
 <link rel="stylesheet" href="/static/css/visual-embed.css">
+<link rel="stylesheet" href="/static/css/visual-utilities.css">
 <style>
 :root {
   --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
@@ -92,6 +93,14 @@ svg { width: 100%; height: 100%; display: block; }
 }
 
 .foot { flex: 0 0 auto; font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.04em; color: var(--text-3); }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-delay-0-4s { animation-delay: 0.4s; }
+.u-delay-1-0s { animation-delay: 1.0s; }
+.u-delay-2-2s { animation-delay: 2.2s; }
+.u-delay-2-8s { animation-delay: 2.8s; }
+.u-delay-3-4s { animation-delay: 3.4s; }
+.u-delay-4-0s { animation-delay: 4.0s; }
 </style>
 </head>
 <body>
@@ -125,13 +134,13 @@ svg { width: 100%; height: 100%; display: block; }
       <path class="comp-line" d="M0,260 C150,250 300,210 450,120 C520,75 560,55 600,40"/>
 
       <!-- accumulating posts along the curve -->
-      <circle class="post post-anim" style="animation-delay:0.4s" cx="40" cy="258" r="4"/>
-      <circle class="post post-anim" style="animation-delay:1.0s" cx="150" cy="250" r="4"/>
-      <circle class="post post-anim" style="animation-delay:1.6s" cx="260" cy="225" r="4"/>
-      <circle class="post post-anim" style="animation-delay:2.2s" cx="360" cy="170" r="4"/>
-      <circle class="post post-anim" style="animation-delay:2.8s" cx="450" cy="120" r="4"/>
-      <circle class="post post-anim" style="animation-delay:3.4s" cx="530" cy="68" r="4"/>
-      <circle class="post post-anim" style="animation-delay:4.0s" cx="592" cy="42" r="5"/>
+      <circle class="post post-anim u-delay-0-4s" cx="40" cy="258" r="4"/>
+      <circle class="post post-anim u-delay-1-0s" cx="150" cy="250" r="4"/>
+      <circle class="post post-anim u-delay-1-6s" cx="260" cy="225" r="4"/>
+      <circle class="post post-anim u-delay-2-2s" cx="360" cy="170" r="4"/>
+      <circle class="post post-anim u-delay-2-8s" cx="450" cy="120" r="4"/>
+      <circle class="post post-anim u-delay-3-4s" cx="530" cy="68" r="4"/>
+      <circle class="post post-anim u-delay-4-0s" cx="592" cy="42" r="5"/>
 
       <text class="moat-label" x="300" y="200">the moat widens</text>
       <text class="flat-label" x="300" y="272">flat: resets each post</text>

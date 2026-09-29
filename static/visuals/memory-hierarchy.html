@@ -28,6 +28,9 @@
       opacity: 0.6;
       text-align: center;
     }
+
+      /* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+      .label.is-centered { left: 50%; top: 50%; }
   </style>
 </head>
 <body>
@@ -132,10 +135,8 @@
 
     labels.forEach(l => {
       const div = document.createElement('div');
-      div.className = 'label';
+      div.className = 'label is-centered';
       div.innerHTML = `${l.text}<span>${l.sub}</span>`;
-      div.style.left = '50%';
-      div.style.top = '50%';
       document.body.appendChild(div);
     });
 

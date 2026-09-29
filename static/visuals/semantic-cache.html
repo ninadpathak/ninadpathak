@@ -42,6 +42,9 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
 .arrow{transform:rotate(90deg);}
 .box{width:100%;min-height:0;}
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-left-91pct.u-left-91pct.u-left-91pct { left: 91%; }
 </style>
 </head>
 <body>
@@ -58,7 +61,7 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
       <div class="sim">
         <div class="sim-num" id="simnum">0.91</div>
         <div class="sim-thresh">vs threshold 0.88</div>
-        <div class="scale"><span class="tmark"></span><span class="marker" id="marker" style="left:91%"></span></div>
+        <div class="scale"><span class="tmark"></span><span class="marker u-left-91pct" id="marker"></span></div>
       </div>
     </div>
   </div>

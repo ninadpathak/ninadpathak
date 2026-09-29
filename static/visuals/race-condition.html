@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Race Condition Visualization</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         :root {
             --bg: #ffffff;
@@ -29,6 +30,10 @@
         .time-label { font-family: var(--mono); font-size: 20px; fill: var(--text-dim); }
         .state-box { fill: var(--bg); stroke: var(--border); stroke-width: 2.5; }
         .action-line { stroke: var(--accent); stroke-width: 3.5; marker-end: url(#arrowhead); }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-font-style-italic { font-style: italic; }
+        .u-fw-700--fill-accent { font-weight: 700; fill: var(--accent); }
     </style>
 </head>
 <body>
@@ -50,8 +55,8 @@
                 <text x="75" y="25" text-anchor="middle" class="step-label">A: READ (0)</text>
                 <line x1="75" y1="40" x2="75" y2="100" stroke="var(--border)" stroke-dasharray="4" />
                 <rect y="100" width="300" height="40" rx="4" class="state-box" fill="rgba(212, 64, 0, 0.1)" />
-                <text x="150" y="125" text-anchor="middle" class="step-label" style="font-style: italic;">WAITING...</text>
-                <rect x="300" y="50" width="150" height="40" rx="4" class="state-box" style="stroke: var(--accent);" />
+                <text x="150" y="125" text-anchor="middle" class="step-label u-font-style-italic">WAITING...</text>
+                <rect x="300" y="50" width="150" height="40" rx="4" class="state-box u-stroke-accent" />
                 <text x="375" y="75" text-anchor="middle" class="step-label">A: WRITE (1)</text>
             </g>
 
@@ -59,12 +64,12 @@
             <g transform="translate(200, 180)">
                 <rect width="150" height="40" rx="4" class="state-box" />
                 <text x="75" y="25" text-anchor="middle" class="step-label">B: READ (0)</text>
-                <text x="75" y="55" text-anchor="middle" class="time-label" style="fill: var(--accent);">STALE READ!</text>
-                <rect x="250" y="0" width="150" height="40" rx="4" class="state-box" style="stroke: var(--accent);" />
+                <text x="75" y="55" text-anchor="middle" class="time-label u-fill-accent">STALE READ!</text>
+                <rect x="250" y="0" width="150" height="40" rx="4" class="state-box u-stroke-accent" />
                 <text x="325" y="25" text-anchor="middle" class="step-label">B: WRITE (1)</text>
             </g>
 
-            <text x="400" y="295" text-anchor="middle" class="time-label" style="font-weight: 700; fill: var(--accent);">RESULT: BOTH WRITE "1", ONE INCREMENT LOST</text>
+            <text x="400" y="295" text-anchor="middle" class="time-label u-fw-700--fill-accent">RESULT: BOTH WRITE "1", ONE INCREMENT LOST</text>
         </svg>
     </div>
 </body>

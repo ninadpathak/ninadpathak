@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WASM VDB Accuracy</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
 
 
@@ -42,6 +43,7 @@
         .axis { stroke: var(--text-1); stroke-width: 1.5; fill: none; }
         .grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 2; }
         .point { fill: var(--accent); stroke: var(--bg-1); stroke-width: 2; }
+
     </style>
 </head>
 <body>
@@ -80,12 +82,12 @@
             
             <g>
                 <circle cx="750" cy="290" r="6" class="point" />
-                <text x="760" y="280" text-anchor="start" class="label" style="fill: var(--accent);">Binary (92%)</text>
+                <text x="760" y="280" text-anchor="start" class="label u-fill-accent">Binary (92%)</text>
                 <text x="760" y="300" text-anchor="start" class="desc">32x Reduction</text>
             </g>
             
             <!-- Summary Title -->
-            <text x="425" y="30" text-anchor="middle" class="label" style="font-size: 16px; fill: var(--text-1);">The Accuracy-Efficiency Frontier</text>
+            <text x="425" y="30" text-anchor="middle" class="label u-fs-16px--fill-text-1">The Accuracy-Efficiency Frontier</text>
         </svg>
     </div>
 </body>

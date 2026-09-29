@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keyword Exactness</title>
     <link rel="stylesheet" href="/static/css/visual-embed.css">
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         body { margin: 0; height: 100vh; height: 100vh; background: var(--bg-1); font-family: var(--sans); color: var(--text-1);  display: flex; align-items: center; justify-content: center; min-  overflow: hidden; }
         .container { width: 100%; max-width: 600px; padding: 2rem; box-sizing: border-box; display: flex; flex-direction: column; gap: 2rem; }
@@ -16,31 +17,44 @@
         .flex-col { display: flex; flex-direction: column; gap: 1rem; }
         .arrow { color: var(--text-3); font-family: var(--mono); text-align: center; }
         @media (max-width: 600px) { .flex-row { flex-direction: column; } .arrow { transform: rotate(90deg); } .no-rotate { transform: none !important; } }
+
+        /* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+        .u-border-color-text-1--fw-bold { border-color: var(--text-1); font-weight: bold; }
+        .u-mt-1rem--gap-1rem { margin-top: 1rem; gap: 1rem; }
+        .u-d-flex--justify-content-space-between--align-items-center--align-left { display: flex; justify-content: space-between; align-items: center; text-align: left; }
+        .u-fs-0-75rem--color-text-3 { font-size: 0.75rem; color: var(--text-3); }
+        .u-mt-0-5rem { margin-top: 0.5rem; }
+        .u-bg-bg-2--p-0-2rem { background: var(--bg-2); padding: 0.2rem; }
+        .u-gap-0-5rem--align-right { gap: 0.5rem; text-align: right; }
+        .u-fs-0-7rem { font-size: 0.7rem; }
+        .u-d-flex--justify-content-space-between--align-items-center--align-left--border-color-accent { display: flex; justify-content: space-between; align-items: center; text-align: left; border-color: var(--accent); }
+        .u-bg-rgba-212-64-0-0-1--p-0-2rem--color-accent { background: rgba(212, 64, 0, 0.1); padding: 0.2rem; color: var(--accent); }
+        .u-fs-0-7rem--fw-bold { font-size: 0.7rem; font-weight: bold; }
 </style>
 </head>
 <body>
     <div class="container" id="root">
         
-<div class="box mono" style="border-color: var(--text-1); font-weight:bold;">User Query: "Error code E-4048"</div>
-<div class="flex-col" style="margin-top: 1rem; gap: 1rem;">
-    <div class="box" style="display:flex; justify-content: space-between; align-items:center; text-align:left;">
+<div class="box mono u-border-color-text-1--fw-bold">User Query: "Error code E-4048"</div>
+<div class="flex-col u-mt-1rem--gap-1rem">
+    <div class="box u-d-flex--justify-content-space-between--align-items-center--align-left">
         <div>
-            <div class="mono" style="font-size:0.75rem; color:var(--text-3)">Document A</div>
-            <div class="mono" style="margin-top:0.5rem">...returned <span style="background:var(--bg-2); padding: 0.2rem">E-4049</span>...</div>
+            <div class="mono u-fs-0-75rem--color-text-3">Document A</div>
+            <div class="mono u-mt-0-5rem">...returned <span class="u-bg-bg-2--p-0-2rem">E-4049</span>...</div>
         </div>
-        <div class="flex-col" style="gap:0.5rem; text-align:right">
-            <div class="mono" style="font-size:0.7rem">Vector Match: <span style="color:var(--text-1)">High (0.89)</span></div>
-            <div class="mono accent" style="font-size:0.7rem">Reranker Score: <span class="accent">Low (0.02)</span></div>
+        <div class="flex-col u-gap-0-5rem--align-right">
+            <div class="mono u-fs-0-7rem">Vector Match: <span class="u-color-text-1">High (0.89)</span></div>
+            <div class="mono accent u-fs-0-7rem">Reranker Score: <span class="accent">Low (0.02)</span></div>
         </div>
     </div>
-    <div class="box" style="display:flex; justify-content: space-between; align-items:center; text-align:left; border-color: var(--accent);">
+    <div class="box u-d-flex--justify-content-space-between--align-items-center--align-left--border-color-accent">
         <div>
-            <div class="mono" style="font-size:0.75rem; color:var(--text-3)">Document B</div>
-            <div class="mono" style="margin-top:0.5rem">...returned <span style="background:rgba(212, 64, 0, 0.1); padding: 0.2rem; color:var(--accent)">E-4048</span>...</div>
+            <div class="mono u-fs-0-75rem--color-text-3">Document B</div>
+            <div class="mono u-mt-0-5rem">...returned <span class="u-bg-rgba-212-64-0-0-1--p-0-2rem--color-accent">E-4048</span>...</div>
         </div>
-        <div class="flex-col" style="gap:0.5rem; text-align:right">
-            <div class="mono" style="font-size:0.7rem">Vector Match: <span style="color:var(--text-1)">Med (0.75)</span></div>
-            <div class="mono accent" style="font-size:0.7rem; font-weight:bold">Reranker Score: <span class="accent">High (0.98)</span></div>
+        <div class="flex-col u-gap-0-5rem--align-right">
+            <div class="mono u-fs-0-7rem">Vector Match: <span class="u-color-text-1">Med (0.75)</span></div>
+            <div class="mono accent u-fs-0-7rem--fw-bold">Reranker Score: <span class="accent">High (0.98)</span></div>
         </div>
     </div>
 </div>

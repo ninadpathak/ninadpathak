@@ -46,6 +46,17 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   .row { grid-template-columns: 120px 1fr 32px; }
   .label { font-size: 8px; }
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-width-96pct--delay-0-1s { width: 96%; animation-delay: 0.1s; }
+.u-width-90pct--delay-0-25s { width: 90%; animation-delay: 0.25s; }
+.u-width-84pct--delay-0-4s { width: 84%; animation-delay: 0.4s; }
+.u-width-78pct--delay-0-55s { width: 78%; animation-delay: 0.55s; }
+.u-width-34pct--delay-0-7s { width: 34%; animation-delay: 0.7s; }
+.u-width-28pct--delay-0-8s { width: 28%; animation-delay: 0.8s; }
+.u-width-20pct--delay-0-9s { width: 20%; animation-delay: 0.9s; }
+.u-width-11pct--delay-1-0s { width: 11%; animation-delay: 1.0s; }
+.u-width-6pct--delay-1-1s { width: 6%; animation-delay: 1.1s; }
 </style>
 </head>
 <body>
@@ -59,22 +70,22 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
     <!-- high-impact: the vital 20% -->
     <div class="row high">
       <span class="label">Write for the reader's gap</span>
-      <div class="track"><div class="fill hi" style="width:96%;animation-delay:0.1s"></div></div>
+      <div class="track"><div class="fill hi u-width-96pct--delay-0-1s"></div></div>
       <span class="pct">96</span>
     </div>
     <div class="row high">
       <span class="label">Code that copy-pastes &amp; runs</span>
-      <div class="track"><div class="fill hi" style="width:90%;animation-delay:0.25s"></div></div>
+      <div class="track"><div class="fill hi u-width-90pct--delay-0-25s"></div></div>
       <span class="pct">90</span>
     </div>
     <div class="row high">
       <span class="label">Lead with task, not concept</span>
-      <div class="track"><div class="fill hi" style="width:84%;animation-delay:0.4s"></div></div>
+      <div class="track"><div class="fill hi u-width-84pct--delay-0-4s"></div></div>
       <span class="pct">84</span>
     </div>
     <div class="row high">
       <span class="label">Docs in version control</span>
-      <div class="track"><div class="fill hi" style="width:78%;animation-delay:0.55s"></div></div>
+      <div class="track"><div class="fill hi u-width-78pct--delay-0-55s"></div></div>
       <span class="pct">78</span>
     </div>
 
@@ -83,27 +94,27 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
     <!-- low-impact: the trivial many -->
     <div class="row">
       <span class="label">Structure for scanning</span>
-      <div class="track"><div class="fill" style="width:34%;animation-delay:0.7s"></div></div>
+      <div class="track"><div class="fill u-width-34pct--delay-0-7s"></div></div>
       <span class="pct">34</span>
     </div>
     <div class="row">
       <span class="label">Precise naming</span>
-      <div class="track"><div class="fill" style="width:28%;animation-delay:0.8s"></div></div>
+      <div class="track"><div class="fill u-width-28pct--delay-0-8s"></div></div>
       <span class="pct">28</span>
     </div>
     <div class="row">
       <span class="label">Behavioral metrics</span>
-      <div class="track"><div class="fill" style="width:20%;animation-delay:0.9s"></div></div>
+      <div class="track"><div class="fill u-width-20pct--delay-0-9s"></div></div>
       <span class="pct">20</span>
     </div>
     <div class="row">
       <span class="label">Style guide / content calendar</span>
-      <div class="track"><div class="fill" style="width:11%;animation-delay:1.0s"></div></div>
+      <div class="track"><div class="fill u-width-11pct--delay-1-0s"></div></div>
       <span class="pct">11</span>
     </div>
     <div class="row">
       <span class="label">Doc coverage %</span>
-      <div class="track"><div class="fill" style="width:6%;animation-delay:1.1s"></div></div>
+      <div class="track"><div class="fill u-width-6pct--delay-1-1s"></div></div>
       <span class="pct">6</span>
     </div>
   </div>

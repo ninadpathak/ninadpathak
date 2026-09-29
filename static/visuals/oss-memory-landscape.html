@@ -39,6 +39,14 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
   .wrap{width:300px;height:380px;}
   .pt .name{font-size:8px;}
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-left-78px--top-70px { left: 78px; top: 70px; }
+.u-left-118px--top-108px { left: 118px; top: 108px; }
+.u-left-266px--top-78px { left: 266px; top: 78px; }
+.u-left-288px--top-150px { left: 288px; top: 150px; }
+.u-left-84px--top-230px { left: 84px; top: 230px; }
+.u-left-150px--top-248px { left: 150px; top: 248px; }
 </style>
 </head>
 <body>
@@ -55,12 +63,12 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
     <div class="plot"></div>
 
     <!-- positions are % within .plot via JS-friendly inline left/top -->
-    <div class="pt" data-i="0" style="left:78px;top:70px;"><span class="dot"></span><span class="name">Letta</span></div>
-    <div class="pt" data-i="1" style="left:118px;top:108px;"><span class="dot"></span><span class="name">Open&nbsp;Viking</span></div>
-    <div class="pt" data-i="2" style="left:266px;top:78px;"><span class="dot"></span><span class="name">Zep&nbsp;/&nbsp;Graphiti</span></div>
-    <div class="pt" data-i="3" style="left:288px;top:150px;"><span class="dot"></span><span class="name">Cognee</span></div>
-    <div class="pt" data-i="4" style="left:84px;top:230px;"><span class="dot"></span><span class="name">pgvector</span></div>
-    <div class="pt" data-i="5" style="left:150px;top:248px;"><span class="dot"></span><span class="name">Mem0</span></div>
+    <div class="pt u-left-78px--top-70px" data-i="0"><span class="dot"></span><span class="name">Letta</span></div>
+    <div class="pt u-left-118px--top-108px" data-i="1"><span class="dot"></span><span class="name">Open&nbsp;Viking</span></div>
+    <div class="pt u-left-266px--top-78px" data-i="2"><span class="dot"></span><span class="name">Zep&nbsp;/&nbsp;Graphiti</span></div>
+    <div class="pt u-left-288px--top-150px" data-i="3"><span class="dot"></span><span class="name">Cognee</span></div>
+    <div class="pt u-left-84px--top-230px" data-i="4"><span class="dot"></span><span class="name">pgvector</span></div>
+    <div class="pt u-left-150px--top-248px" data-i="5"><span class="dot"></span><span class="name">Mem0</span></div>
   </div>
 </div>
 

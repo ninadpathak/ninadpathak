@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dimensionality - Vector Space</title>
+    <link rel="stylesheet" href="/static/css/visual-utilities.css">
     <style>
         :root {
             --bg-1: #ffffff;
@@ -35,6 +36,7 @@
             pointer-events: none;
         }
         .stat { color: var(--accent); }
+
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -44,7 +46,7 @@
     <div class="overlay">
         Dimensions: <span class="stat" id="dim-counter">3</span>D <br>
         Space mapping: <span class="stat">Semantic Concept Grouping</span>
-        <div style="font-size: 10px; color: var(--text-3); margin-top: 8px;">Drag to rotate</div>
+        <div class="u-fs-10px--color-text-3--mt-8px">Drag to rotate</div>
     </div>
 
     <script>

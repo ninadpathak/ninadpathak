@@ -37,6 +37,12 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
   .scene{flex-direction:column;gap:16px;}
   .legend{max-width:380px;}
 }
+
+/* Former inline styles as classes. A selector is repeated where a matching rule would otherwise win. */
+.u-mt-10px--border-top-1px-solid-border--padding-top-10px { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 10px; }
+
+/* Script-toggled states. Each is last in the sheet and at least as specific as any rule setting the same property. */
+.layer.is-sweep { box-shadow: inset 3px 0 0 var(--accent); }
 </style>
 </head>
 <body>
@@ -72,7 +78,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
   <div class="legend">
     <div class="k"><div class="sw r"></div><div><span class="t">RAG covers</span><br>1 of 4 layers</div></div>
     <div class="k"><div class="sw m"></div><div><span class="t">RAG misses</span><br>working, episodic, cross-session</div></div>
-    <div style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px;">A vector store is one piece. The other three layers need a structured episodic store + working-context manager.</div>
+    <div class="u-mt-10px--border-top-1px-solid-border--padding-top-10px">A vector store is one piece. The other three layers need a structured episodic store + working-context manager.</div>
   </div>
 </div>
 
@@ -84,8 +90,8 @@ const layers = Array.from(document.querySelectorAll('.layer'));
 layers.forEach(l=>{ if(l.dataset.rag==='1') l.classList.add('covered'); });
 let j=0;
 function sweep(){
-  layers.forEach(l=>l.style.boxShadow='');
-  layers[j].style.boxShadow='inset 3px 0 0 var(--accent)';
+  layers.forEach(l=>l.classList.remove('is-sweep'));
+  layers[j].classList.add('is-sweep');
   j=(j+1)%layers.length;
 }
 sweep();
