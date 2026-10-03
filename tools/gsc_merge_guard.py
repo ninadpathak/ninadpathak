@@ -49,6 +49,7 @@ import report_log as rl  # noqa: E402
 AUDIT = gr.ROOT / "planning" / "cluster-3-consolidation-audit.md"
 LOG = gr.ROOT / "planning" / "merge-guard.md"
 ARCHIVE_MANIFEST = gr.ROOT / "planning/research/zero-impression-cleanup-2026-09-11/cohort.json"
+REMOVED_POSTS_MANIFEST = gr.ROOT / "planning/research/blog-vault-cleanup-2026-10-04/removed-posts.json"
 HISTORY_START = "2025-04-04"
 WINDOW_DAYS = 90
 
@@ -107,13 +108,41 @@ def load_archived_statuses(manifest: pathlib.Path) -> dict[str, str]:
     return statuses
 
 
+def load_removed_statuses(manifest: pathlib.Path) -> dict[str, str]:
+    """Retain statuses for removed sources without keeping their essay text in Git.
+
+    SHA256 records were verified against the external archive during removal. This
+    reader validates the inventory shape; it does not claim to reverify absent bytes.
+    Live files are loaded last and always override these historical records.
+    """
+    statuses = {}
+    for row in json.loads(manifest.read_text()):
+        source = pathlib.PurePosixPath(row["source"])
+        if source.parent != pathlib.PurePosixPath("content/posts") or source.suffix != ".md":
+            raise ValueError(f"Unexpected removed source: {source}")
+        if row.get("status") not in {"merged", "retired"}:
+            raise ValueError(f"Unexpected removed status: {row.get('status')}")
+        if not re.fullmatch(r"[a-f0-9]{64}", row.get("sha256", "")):
+            raise ValueError(f"Invalid removed source digest: {source}")
+        slug = row["slug"]
+        if not isinstance(slug, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+            raise ValueError(f"Invalid removed slug: {slug}")
+        if slug in statuses:
+            raise ValueError(f"Duplicate removed slug: {slug}")
+        statuses[slug] = row["status"]
+    return statuses
+
+
 def load_post_statuses(posts_dir: pathlib.Path = gr.POSTS) -> dict[str, str]:
     """Load every source status so completed batches do not break later pre-merge runs."""
     try:
         import frontmatter
     except ImportError:
         return {}
-    statuses = load_archived_statuses(ARCHIVE_MANIFEST) if posts_dir.resolve() == gr.POSTS.resolve() else {}
+    statuses = {}
+    if posts_dir.resolve() == gr.POSTS.resolve():
+        statuses.update(load_archived_statuses(ARCHIVE_MANIFEST))
+        statuses.update(load_removed_statuses(REMOVED_POSTS_MANIFEST))
     for path in sorted(posts_dir.glob("*.md")):
         data = frontmatter.load(path)
         slug = str(data.get("slug") or path.stem)

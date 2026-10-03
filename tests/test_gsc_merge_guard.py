@@ -44,6 +44,35 @@ class TestAuditParser(unittest.TestCase):
         self.assertEqual(set(statuses.values()), {"archived"})
         self.assertEqual(mg.load_post_statuses()["mcp-server-setup-guide"], "archived")
 
+    def test_removed_source_inventory_preserves_nonpublished_statuses(self):
+        statuses = mg.load_removed_statuses(mg.REMOVED_POSTS_MANIFEST)
+        self.assertEqual(len(statuses), 9)
+        self.assertEqual(set(statuses.values()), {"merged", "retired"})
+        self.assertEqual(mg.load_post_statuses()["beam-memory-benchmark"], "merged")
+        self.assertEqual(mg.load_post_statuses()["uv-package-manager-benchmark"], "retired")
+
+    def test_removed_inventory_cannot_claim_a_source_is_published(self):
+        with tempfile.TemporaryDirectory() as directory:
+            manifest = Path(directory) / "removed.json"
+            manifest.write_text(json.dumps([{
+                "source": "content/posts/test.md", "slug": "test",
+                "status": "published", "sha256": "a" * 64,
+            }]))
+            with self.assertRaisesRegex(ValueError, "Unexpected removed status"):
+                mg.load_removed_statuses(manifest)
+
+    def test_live_status_overrides_removed_inventory_and_unknown_remains_unknown(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "test.md").write_text("---\nslug: test\nstatus: published\n---\n")
+            with patch.object(mg.gr, "POSTS", root), \
+                    patch.object(mg, "load_archived_statuses", return_value={}), \
+                    patch.object(mg, "load_removed_statuses", return_value={"test": "merged"}):
+                statuses = mg.load_post_statuses(root)
+            self.assertEqual(statuses["test"], "published")
+            self.assertNotIn("not-in-any-inventory", statuses)
+
     def test_archive_digest_mismatch_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
