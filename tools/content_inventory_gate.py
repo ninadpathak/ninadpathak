@@ -71,6 +71,29 @@ def audit_rows() -> dict[str, str]:
     return rows
 
 
+def resolve_source_names(rows: dict[str, str], posts: Path = POSTS,
+                         aliases: Path = Path("content/post-source-aliases.json")) -> dict[str, str]:
+    if not aliases.exists():
+        return dict(rows)
+    mapping = json.loads(aliases.read_text())
+    resolved = {}
+    slug_aliases = posts.parent / "post-slug-aliases.json"
+    slugs = json.loads(slug_aliases.read_text()) if slug_aliases.exists() else {}
+    for old, new in mapping.items():
+        for name in (old, new):
+            if Path(name).name != name or not name.endswith(".md") or name.startswith("."):
+                raise ValueError(f"Invalid source rename: {name}")
+        metadata, _ = frontmatter_and_body(posts / new)
+        if metadata.get("slug") != slugs.get(Path(new).stem, Path(new).stem):
+            raise ValueError(f"Source rename target is not canonical: {new}")
+    for name, state in rows.items():
+        target = mapping.get(name, name)
+        if target in resolved:
+            raise ValueError(f"Duplicate resolved source review: {target}")
+        resolved[target] = state
+    return resolved
+
+
 def apply_author_reviews(rows: dict[str, str], posts: Path = POSTS,
                          reviews: Path = AUTHOR_REVIEWS) -> dict[str, str]:
     """Apply explicit author approvals only to the exact reviewed note revision."""
@@ -112,7 +135,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     problems: list[str] = []
-    rows = apply_author_reviews(audit_rows())
+    rows = apply_author_reviews(resolve_source_names(audit_rows()))
     published: dict[str, Path] = {}
 
     for path in sorted(POSTS.glob("*.md")):

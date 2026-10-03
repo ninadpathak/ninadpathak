@@ -950,6 +950,20 @@ class SiteBuilder:
                             lines.append(f"{source} /articles/{new}/ 301")
                             generated_sources.add(source)
 
+        sources_path = Path("content/post-source-aliases.json")
+        if sources_path.exists():
+            current = {post.get("source_stem"): post["slug"] for post in posts}
+            emitted = {line.split()[0] for line in lines if line.startswith("/")}
+            for old, new in sorted(json.loads(sources_path.read_text()).items()):
+                slug = current.get(Path(new).stem)
+                if not slug:
+                    continue
+                for suffix in ("", "/"):
+                    source = f"/blog/{Path(old).stem}{suffix}"
+                    if source not in emitted:
+                        lines.append(f"{source} /articles/{slug}/ 301")
+                        emitted.add(source)
+
         redirects_src = Path("static/_redirects")
         if redirects_src.exists():
             static_lines = [

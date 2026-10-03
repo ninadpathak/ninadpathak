@@ -167,6 +167,13 @@ def load_post_statuses(posts_dir: pathlib.Path = gr.POSTS) -> dict[str, str]:
         for old, new in json.loads(aliases.read_text()).items():
             if new in statuses:
                 statuses[old] = statuses[new]
+    sources = gr.ROOT / "content/post-source-aliases.json"
+    if posts_dir.resolve() == gr.POSTS.resolve() and sources.exists():
+        for old, new in json.loads(sources.read_text()).items():
+            if pathlib.PurePosixPath(old).name != old or pathlib.PurePosixPath(new).name != new:
+                raise ValueError("Invalid historical source rename")
+            if pathlib.Path(new).stem in statuses:
+                statuses[pathlib.Path(old).stem] = statuses[pathlib.Path(new).stem]
     return statuses
 
 

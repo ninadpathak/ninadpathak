@@ -3,7 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from tools.content_inventory_gate import apply_author_reviews
+from tools.content_inventory_gate import apply_author_reviews, resolve_source_names
 
 class AuthorPublicationTests(unittest.TestCase):
     def setUp(self):
@@ -37,3 +37,22 @@ class AuthorPublicationTests(unittest.TestCase):
     def test_status_mismatch_rejected(self):
         self.record["status"] = "draft"
         with self.assertRaises(ValueError): self.apply()
+
+class SourceRenameTests(unittest.TestCase):
+    def test_exact_historical_name_resolves_without_losing_review(self):
+        with tempfile.TemporaryDirectory() as directory:
+            posts = Path(directory)
+            (posts / "essay.md").write_text("---\nslug: essay\nstatus: published\n---\nText.")
+            aliases = posts / "renames.json"
+            aliases.write_text(json.dumps({"dated-essay.md": "essay.md"}))
+            self.assertEqual(resolve_source_names({"dated-essay.md": "PHASE_A_EDITED"}, posts, aliases), {"essay.md": "PHASE_A_EDITED"})
+            with self.assertRaises(ValueError):
+                resolve_source_names({"dated-essay.md": "PHASE_A_EDITED", "essay.md": "PROVISIONAL_REVIEW"}, posts, aliases)
+    def test_noncanonical_or_escaping_targets_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            posts = Path(directory)
+            (posts / "essay.md").write_text("---\nslug: different\n---\nText.")
+            aliases = posts / "renames.json"
+            for target in ("essay.md", "../essay.md"):
+                aliases.write_text(json.dumps({"old.md": target}))
+                with self.assertRaises(ValueError): resolve_source_names({"old.md": "PHASE_A_EDITED"}, posts, aliases)

@@ -447,7 +447,7 @@ class DesignSystemTests(unittest.TestCase):
         self.assertNotIn(".flowchart {", global_css)
 
     def test_latest_article_uses_responsive_svg_flowchart_instead_of_raster(self):
-        article = Path("content/posts/internal-vs-external-documentation.md").read_text()
+        article = Path("content/posts/internal-vs-external-docs.md").read_text()
         self.assertIn('class="flowchart-image"', article)
         self.assertIn("documentation-placement-flowchart-mobile.svg", article)
         self.assertIn("documentation-placement-flowchart.svg", article)
