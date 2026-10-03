@@ -88,7 +88,11 @@ def parse_dispositions(text: str) -> list[dict]:
 
 
 def load_archived_statuses(manifest: pathlib.Path) -> dict[str, str]:
-    """Recognize only manifest-listed, byte-verified sources in the removal archive."""
+    """Load archived source statuses from the fixed cohort inventory.
+
+    Local archives remain byte-verified. Explicit external_verified records retain
+    status after verified prose recovery copies move outside the Git repository.
+    """
     import frontmatter
 
     statuses = {}
@@ -96,9 +100,19 @@ def load_archived_statuses(manifest: pathlib.Path) -> dict[str, str]:
         if row.get("disposition") != "ARCHIVE_ZERO_RECORDED_IMPRESSIONS":
             continue
         source = pathlib.PurePosixPath(row["source"])
-        if source.parent != pathlib.PurePosixPath("content/posts"):
+        if source.parent != pathlib.PurePosixPath("content/posts") or source.suffix != ".md":
             raise ValueError(f"Unexpected archive source: {source}")
+        slug = row["slug"]
+        if not isinstance(slug, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+            raise ValueError(f"Invalid archive slug: {slug}")
+        if slug in statuses:
+            raise ValueError(f"Duplicate archive slug: {slug}")
+        if not re.fullmatch(r"[a-f0-9]{64}", row.get("sha256", "")):
+            raise ValueError(f"Invalid archive digest: {source}")
         archive = manifest.parent / "archived-posts" / source.name
+        if not archive.exists() and row.get("archive_storage") == "external_verified":
+            statuses[slug] = "archived"
+            continue
         if hashlib.sha256(archive.read_bytes()).hexdigest() != row["sha256"]:
             raise ValueError(f"Archive digest mismatch: {archive}")
         post = frontmatter.load(archive)

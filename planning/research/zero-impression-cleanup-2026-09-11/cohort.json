@@ -311,7 +311,8 @@
     "canonical": "/articles/ai-crawlers-robots-txt-training-vs-citation/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/ai-memory-management-for-llms.md",
@@ -388,7 +389,8 @@
     "canonical": "/articles/api-documentation-best-practices-reference-guides-and-working-requests/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/api-documentation-examples-what-the-best-developer-portals-get-right.md",
@@ -399,7 +401,8 @@
     "canonical": "/articles/api-documentation-examples-what-the-best-developer-portals-get-right/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/api-documentation-template-the-pages-every-api-needs.md",
@@ -410,7 +413,8 @@
     "canonical": "/articles/api-documentation-template-the-pages-every-api-needs/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/api-documentation-tools-hands-on-comparison-small-teams.md",
@@ -421,7 +425,8 @@
     "canonical": "/articles/api-documentation-tools-hands-on-comparison-small-teams/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/best-llms-for-coding.md",
@@ -483,7 +488,8 @@
     "canonical": "/articles/coding-agent-setup-that-works/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/context-windows-vs-memory.md",
@@ -563,7 +569,8 @@
     "canonical": "/articles/developer-trust-hierarchy/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/documentation-accessibility-checklist.md",
@@ -616,7 +623,8 @@
     "canonical": "/articles/documentation-style-guide-template/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/embedding-models-compared.md",
@@ -909,7 +917,8 @@
     "canonical": "/articles/how-to-document-multiple-product-versions/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/how-to-find-the-right-subreddit-for-a-developer-product.md",
@@ -920,7 +929,8 @@
     "canonical": "/articles/how-to-find-the-right-subreddit-for-a-developer-product/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/how-to-organize-a-documentation-site.md",
@@ -1204,7 +1214,8 @@
     "canonical": "/articles/llms-txt-examples-real-files-audited/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/local-wasm-vector-benchmarks.md",
@@ -1245,7 +1256,8 @@
     "canonical": "/articles/mcp-server-setup-guide/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/memory-for-voice-ai-agents.md",
@@ -1406,7 +1418,8 @@
     "canonical": "/articles/prompt-caching-what-it-is-and-when-the-math-works/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/rag-evaluation-metrics-what-actually-matters.md",
@@ -1486,7 +1499,8 @@
     "canonical": "/articles/reddit-self-promotion-rules-read-properly/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/reranking-in-rag-why-your-top-k-results-are-probably-wrong.md",
@@ -1770,7 +1784,8 @@
     "canonical": "/articles/technical-writing-examples/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/technical-writing-for-ai-products-the-new-rules.md",
@@ -1832,7 +1847,8 @@
     "canonical": "/articles/technical-writing-is-deciding-what-the-reader-can-assume/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/the-agent-design-space.md",
@@ -1924,7 +1940,8 @@
     "canonical": "/articles/token-counting-isnt-optional-a-practical-guide-to-llm-cost-control/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/types-of-technical-documentation.md",
@@ -1986,7 +2003,8 @@
     "canonical": "/articles/what-a-documentation-homepage-must-help-users-do/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/what-is-technical-documentation-and-what-should-it-include.md",
@@ -2018,7 +2036,8 @@
     "canonical": "/articles/what-makes-a-page-extractable-by-answer-engines/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   },
   {
     "source": "content/posts/why-coding-agents-lose-their-memory.md",
@@ -2110,6 +2129,7 @@
     "canonical": "/articles/writing-ai-first-content/",
     "matched_rows": [],
     "impressions": 0,
-    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS"
+    "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+    "archive_storage": "external_verified"
   }
 ]

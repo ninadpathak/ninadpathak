@@ -73,6 +73,29 @@ class TestAuditParser(unittest.TestCase):
             self.assertEqual(statuses["test"], "published")
             self.assertNotIn("not-in-any-inventory", statuses)
 
+    def test_unmarked_missing_archive_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            manifest = Path(directory) / "cohort.json"
+            manifest.write_text(json.dumps([{
+                "source": "content/posts/test.md", "slug": "test",
+                "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS", "sha256": "a" * 64,
+            }]))
+            with self.assertRaises(FileNotFoundError):
+                mg.load_archived_statuses(manifest)
+
+    def test_explicit_external_archive_keeps_status_and_validates_provenance(self):
+        with tempfile.TemporaryDirectory() as directory:
+            manifest = Path(directory) / "cohort.json"
+            row = {"source": "content/posts/test.md", "slug": "test",
+                   "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
+                   "sha256": "a" * 64, "archive_storage": "external_verified"}
+            manifest.write_text(json.dumps([row]))
+            self.assertEqual(mg.load_archived_statuses(manifest), {"test": "archived"})
+            row["sha256"] = "invalid"
+            manifest.write_text(json.dumps([row]))
+            with self.assertRaisesRegex(ValueError, "Invalid archive digest"):
+                mg.load_archived_statuses(manifest)
+
     def test_archive_digest_mismatch_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -84,6 +107,7 @@ class TestAuditParser(unittest.TestCase):
                 "source": "content/posts/test.md", "slug": "test",
                 "disposition": "ARCHIVE_ZERO_RECORDED_IMPRESSIONS",
                 "sha256": hashlib.sha256(b"original content").hexdigest(),
+                "archive_storage": "external_verified",
             }]))
             with self.assertRaisesRegex(ValueError, "Archive digest mismatch"):
                 mg.load_archived_statuses(manifest)
