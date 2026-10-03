@@ -4,13 +4,11 @@ date: 2026-04-17
 description: Real numbers, real pricing, and concrete strategies for keeping your
   LLM spend predictable.
 status: published
-work_note: "Technical documentation for an AI API should show what a conversation costs, including repeated input. [Ninad Pathak](/contact/) writes usage guides with worked calculations and explicit pricing assumptions."
-tags:
-- ai
-- cost
-- backend
-- llm
+work_note: Technical documentation for an AI API should show what a conversation costs,
+  including repeated input. [Ninad Pathak](/contact/) writes usage guides with worked
+  calculations and explicit pricing assumptions.
 title: 'LLM token budgets: a practical guide to cost control'
+slug: llm-token-budgets
 ---
 
 Token costs are the new EC2 bills. I learned that the expensive way after burning $200 on GPT-4 over a single weekend, chasing a bug with a loop that re-sent the whole conversation on every retry.
@@ -51,7 +49,7 @@ Always.
 
 A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds like a rounding error until you multiply it by 50,000 requests per day, which lands at $13 per day, or $390 per month.
 
-Context compounds too, and [bigger context windows are not always better for cost or accuracy](/articles/llm-context-windows-explained/). A chatbot that grows its system prompt and replays the full history on every turn pays for those same tokens again on each message, so a 20-message conversation can cost twenty times what the first reply did.
+Context compounds too, and [bigger context windows are not always better for cost or accuracy](/articles/llm-context-windows/). A chatbot that grows its system prompt and replays the full history on every turn pays for those same tokens again on each message, so a 20-message conversation can cost twenty times what the first reply did.
 
 <div class="visual-wrapper">
   <div class="visual-title">TOKEN BUDGET</div>

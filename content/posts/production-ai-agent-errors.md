@@ -4,20 +4,18 @@ date: 2026-04-16
 description: 'Hard-won lessons from running AI agents in production: the error patterns
   that actually break systems, and the patterns that fix them.'
 status: published
-work_note: "Did the tool fail before or after changing external state? Technical writer [Ninad Pathak](/portfolio/) documents agent API errors with the checks developers need before risking a duplicate action."
-tags:
-- ai
-- devtools
-- backend
-- sre
+work_note: Did the tool fail before or after changing external state? Technical writer
+  [Ninad Pathak](/portfolio/) documents agent API errors with the checks developers
+  need before risking a duplicate action.
 title: What Nobody Tells You About Error Handling in Production AI Agents
+slug: agent-error-handling
 ---
 
 Two years of running AI agents in production taught me that error handling separates a system that survives reality from one that falls over the moment something goes wrong. Reasoning and tool use get all the attention.
 
 Error handling, the part that keeps your on-call phone quiet at 2 AM, gets almost none.
 
-The failures are predictable, and they line up with [the broader pattern of why agents keep failing in production](/articles/why-ai-agents-keep-failing-in-production/). An agent loops forever because a tool returned JSON wrapped in a markdown code fence and the parser choked.
+The failures are predictable, and they line up with [the broader pattern of why agents keep failing in production](/articles/ai-agent-failures/). An agent loops forever because a tool returned JSON wrapped in a markdown code fence and the parser choked.
 
 Another silently drops a step because a downstream API throttled for 200 milliseconds and the agent treated the empty response as "done." A third corrupts state because it retried a charge endpoint without checking whether the first attempt had already gone through.
 
@@ -233,7 +231,7 @@ def logged_tool_call(tool_name: str, tool_fn, **kwargs):
         raise
 ```
 
-Some failures come from retrieving a valid memory for the wrong subject. [AI memory management for LLMs](/articles/ai-memory-management-for-llms/) separates that attribution failure from a generic retrieval miss.
+Some failures come from retrieving a valid memory for the wrong subject. [AI memory management for LLMs](/articles/ai-memory-management/) separates that attribution failure from a generic retrieval miss.
 
 ## The non-negotiables
 

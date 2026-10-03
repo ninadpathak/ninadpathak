@@ -161,6 +161,12 @@ def load_post_statuses(posts_dir: pathlib.Path = gr.POSTS) -> dict[str, str]:
         data = frontmatter.load(path)
         slug = str(data.get("slug") or path.stem)
         statuses[slug] = str(data.get("status") or "unknown")
+    # Historical Search Console evidence retains the old URLs after canonical moves.
+    aliases = gr.ROOT / "content/post-slug-aliases.json"
+    if posts_dir.resolve() == gr.POSTS.resolve() and aliases.exists():
+        for old, new in json.loads(aliases.read_text()).items():
+            if new in statuses:
+                statuses[old] = statuses[new]
     return statuses
 
 

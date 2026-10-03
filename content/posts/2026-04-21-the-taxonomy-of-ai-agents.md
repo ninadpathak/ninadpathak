@@ -3,14 +3,12 @@ category: ai-engineering
 date: 2026-04-21
 description: Most AI agent taxonomies are either too academic or too vague to be useful.
   Here is the classification I use when I need to decide what kind of agent to build.
-slug: the-taxonomy-of-ai-agents
+slug: ai-agent-taxonomy
 status: published
-work_note: "Developer content creator [Ninad Pathak](/portfolio/) explains agent architectures through the decisions developers need to make: which actions a system can take and where human approval belongs."
-tags:
-- ai
-- agents
-- architecture
-title: A Taxonomy of AI Agents That Actually Explains What You Are Building
+work_note: 'Developer content creator [Ninad Pathak](/portfolio/) explains agent architectures
+  through the decisions developers need to make: which actions a system can take and
+  where human approval belongs.'
+title: A Taxonomy of AI Agents
 ---
 
 Every few months someone publishes a new taxonomy of AI agents. The diagrams look clean, the categories feel comprehensive, and then you try to use one to decide whether your customer support bot should run a single-agent loop or a multi-agent hierarchy, and the taxonomy dissolves into hand-waving.
@@ -35,7 +33,7 @@ Production agents usually do both, and the ratio drives how much care the tool l
 
 Whether the agent handles a single session or carries state across many interactions is the question **operational scope** answers. A stateless agent treats every request as independent, like a calculator that forgets the previous sum.
 
-A stateful agent maintains memory of past interactions, within a conversation or across them. Why that distinction matters in practice is something I covered in my post on [state-of-ai-agent-memory-2026](/articles/state-of-ai-agent-memory-2026/).
+A stateful agent maintains memory of past interactions, within a conversation or across them. Why that distinction matters in practice is something I covered in my post on [state-of-ai-agent-memory-2026](/articles/agent-memory-2026/).
 
 <div class="visual-wrapper">
   <div class="visual-title">AGENT TYPES BY AUTONOMY</div>
@@ -50,7 +48,7 @@ These are the simplest agents. You send a prompt, the model generates a response
 
 Plenty of chatbots and assistants you see in production today are reactive information agents. They hold no state between calls, and they reach for no tools unless the tool call rides inside that single request-response cycle.
 
-A docs Q&A box that answers from whatever you pasted into the prompt and nothing else is the canonical case. The [agentic CLI comparison](/articles/agentic-cli-benchmarks/) describes two agents in this category, but it is not reproducible benchmark evidence.
+A docs Q&A box that answers from whatever you pasted into the prompt and nothing else is the canonical case. The [agentic CLI comparison](/articles/claude-vs-gemini-cli/) describes two agents in this category, but it is not reproducible benchmark evidence.
 
 Their failure mode is easy to spot: they hallucinate or produce generic filler when the answer was never in their training data, so a question about your internal pricing tiers gets you a confident, wrong number. Retrieval augmentation helps, and once you bolt it on you are halfway to a more complex architecture anyway.
 
@@ -64,9 +62,9 @@ What makes or breaks this type is the tool schema. Define it before the agent lo
 
 The schema is the agent's job description. Underspecify it and the agent makes poor tool choices, the way a contractor handed "fix the kitchen" might rewire an outlet you never asked about.
 
-Overspecify it with twenty near-identical tools and the agent second-guesses itself and calls the wrong one anyway. My post on [structured outputs and function-calling schemas](/articles/structured-outputs-llms-json-mode-function-calling/) digs into exactly this.
+Overspecify it with twenty near-identical tools and the agent second-guesses itself and calls the wrong one anyway. My post on [structured outputs and function-calling schemas](/articles/llm-structured-outputs/) digs into exactly this.
 
-The [model-context-protocol-explained](/articles/model-context-protocol-explained/) post covers how standardized tool schemas change the agent-to-tool interface. When your tool schemas are consistent, swapping tools or adding new ones stops being a fragile operation.
+The [model-context-protocol-explained](/articles/model-context-protocol/) post covers how standardized tool schemas change the agent-to-tool interface. When your tool schemas are consistent, swapping tools or adding new ones stops being a fragile operation.
 
 ## Type 3: Loop agents
 
@@ -78,7 +76,7 @@ Nearly every implementation I see is a ReAct-style loop: the agent reasons about
 
 Failure modes get more expensive at this rung. A reactive agent produces a bad answer and stops.
 
-A loop agent can produce a bad answer and then burn fifty more iterations chasing it, like a GPS that missed a turn and keeps confidently recalculating you deeper into the wrong neighborhood. I documented the production errors I keep running into in [production-ai-agent-errors](/articles/production-ai-agent-errors/), where tool-use failures inside loop agents show up again and again.
+A loop agent can produce a bad answer and then burn fifty more iterations chasing it, like a GPS that missed a turn and keeps confidently recalculating you deeper into the wrong neighborhood. I documented the production errors I keep running into in [production-ai-agent-errors](/articles/agent-error-handling/), where tool-use failures inside loop agents show up again and again.
 
 ## Type 4: Multi-agent systems
 
@@ -86,7 +84,7 @@ Things get interesting at the multi-agent level. Several agents coordinate, thro
 
 A research agent gathers sources, a writer agent drafts from them, a critic agent flags weak claims, and a supervisor decides when the draft is done.
 
-I compared the trade-offs of multi-agent against single-agent architectures in [multi-agent versus single-agent architectures](/articles/multi-agent-vs-single-agent-tradeoffs/). The short version: more agents buy you more task complexity at the price of coordination overhead and failure modes that are far harder to trace, since a wrong answer now has four places it could have originated.
+I compared the trade-offs of multi-agent against single-agent architectures in [multi-agent versus single-agent architectures](/articles/multi-agent-vs-single-agent/). The short version: more agents buy you more task complexity at the price of coordination overhead and failure modes that are far harder to trace, since a wrong answer now has four places it could have originated.
 
 A supervisor agent that delegates sub-tasks to specialized agents is the pattern I see most in production. The supervisor-agent setup covers where it works and where it breaks down.
 
@@ -96,7 +94,7 @@ The most autonomous category. These agents hold a long-running goal and work tow
 
 An agent assigned to "migrate this service off the deprecated payments API" might run for a week: opening pull requests, waiting on CI, and picking the work back up the next morning. They checkpoint their state, resume after interruptions, and adapt the plan as new information arrives.
 
-Memory stops being optional here, and it is where most teams underestimate the complexity. The [layered memory model for AI systems](/articles/ai-memory-management-for-llms/) separates current context from persistent state.
+Memory stops being optional here, and it is where most teams underestimate the complexity. The [layered memory model for AI systems](/articles/ai-memory-management/) separates current context from persistent state.
 
 Get the memory architecture wrong and persistent-goal agents either forget what they were doing or drag stale state forward that corrupts every later decision, like resuming a migration against a schema that changed two days ago.
 
@@ -110,7 +108,7 @@ Mistakes run in both directions. Teams that ship a reactive chatbot and call it 
 
 Teams that reach for a multi-agent supervisor architecture when the job fits in a single tool-using loop spend months debugging coordination failures that never needed to exist.
 
-My [agent-design-space](/articles/the-agent-design-space/) survey covers what engineers are actually building across these categories. The data shows production deployments clustering in Types 2 and 3, with Type 4 held back for the genuinely complex workflows.
+My [agent-design-space](/articles/agent-design-space/) survey covers what engineers are actually building across these categories. The data shows production deployments clustering in Types 2 and 3, with Type 4 held back for the genuinely complex workflows.
 
 The classification starts one step earlier than this taxonomy. Decide [where the boundary between an agent and an AI assistant falls](/articles/agent-vs-ai-assistant/) before assigning an agent type.
 

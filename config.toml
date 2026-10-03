@@ -82,6 +82,7 @@ tag_matches = ["ai-search", "ai-overviews", "llms-txt", "answer-engines", "docum
 
 [[content.categories]]
 slug = "ai-engineering"
+label = "AI Engineering"
 title = "AI Agents, Memory, and Retrieval"
 description = "Agent architecture, memory, retrieval, and inference explained through the failure boundaries that change an engineering decision."
 intro = "AI systems look magical until state goes stale, retrieval lies, or latency eats the product. I write from those boundaries inward."
@@ -116,6 +117,7 @@ tag_matches = ["reddit", "reddit-marketing", "community", "community-building", 
 
 [[content.categories]]
 slug = "developer-experience"
+label = "Developer Experience"
 title = "Developer Experience and DevRel"
 description = "Arguments about developer trust, technical content, and the decisions that make a product feel credible before a sales call."
 intro = "Developer trust dies when marketing makes a technical claim the product cannot cash. These articles show where the debt starts."
@@ -123,6 +125,7 @@ tag_matches = ["developer-experience", "devtools", "developer-tools", "developer
 
 [[content.categories]]
 slug = "technical-documentation"
+label = "Technical Documentation"
 title = "Technical Documentation"
 description = "Technical documentation built from product behavior, working examples, and a writer willing to decide what the reader needs."
 intro = "Documentation is where a product either teaches people to win or leaves them alone with the error. I care about that choice."

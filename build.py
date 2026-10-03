@@ -11,6 +11,7 @@ Usage:
 
 import os
 import re
+import json
 import struct
 import sys
 import shutil
@@ -358,6 +359,7 @@ class SiteBuilder:
             category = {
                 "slug": raw["slug"],
                 "title": raw["title"],
+                "label": raw.get("label", raw["title"]),
                 "description": raw["description"],
                 "intro": raw.get("intro", raw["description"]),
                 "preserve_empty_route": raw.get("preserve_empty_route", False),
@@ -583,11 +585,12 @@ class SiteBuilder:
 
     def build_posts(self, posts):
         for post in posts:
-            # find related posts (same tag, different slug)
+            # Related reading follows the single declared category.
             related = [
                 p for p in posts
                 if p["slug"] != post["slug"]
-                and any(t in post.get("tags", []) for t in p.get("tags", []))
+                and post.get("category") is not None
+                and p.get("category") == post.get("category")
             ][:3]
             self.render(
                 "post.html",
@@ -930,6 +933,22 @@ class SiteBuilder:
             if stem and stem != slug:
                 lines.append(f"/blog/{stem} /articles/{slug}/ 301")
                 lines.append(f"/blog/{stem}/ /articles/{slug}/ 301")
+
+        aliases_path = Path("content/post-slug-aliases.json")
+        if aliases_path.exists():
+            published_slugs = {post["slug"] for post in posts}
+            generated_sources = {line.split()[0] for line in lines if line.startswith("/")}
+            for old, new in sorted(json.loads(aliases_path.read_text()).items()):
+                if new not in published_slugs:
+                    continue
+                if old in published_slugs:
+                    raise ValueError(f"Legacy article alias shadows a published route: {old}")
+                for prefix in ("/articles/", "/blog/"):
+                    for suffix in ("", "/"):
+                        source = f"{prefix}{old}{suffix}"
+                        if source not in generated_sources:
+                            lines.append(f"{source} /articles/{new}/ 301")
+                            generated_sources.add(source)
 
         redirects_src = Path("static/_redirects")
         if redirects_src.exists():

@@ -3,13 +3,11 @@ category: ai-engineering
 date: '2026-04-30'
 description: Why agents forget everything on restart, and the serialization patterns
   that actually solve it
-slug: memory-serialization-between-sessions
+slug: memory-serialization
 status: published
-work_note: "Technical writer [Ninad Pathak](/portfolio/) documents persistence through saved records and restore procedures, including how developers recognize data that the current application version can no longer read."
-tags:
-- ai-agents
-- agent-memory
-- agent-architecture
+work_note: Technical writer [Ninad Pathak](/portfolio/) documents persistence through
+  saved records and restore procedures, including how developers recognize data that
+  the current application version can no longer read.
 title: 'Memory Serialization: How Agents Persist State Across Sessions'
 ---
 
@@ -129,7 +127,7 @@ Serialize a conversation with no way to find the relevant parts quickly, and you
 
 The memory hierarchy matters here. Serialized state is one layer.
 
-How you index and retrieve from that state is another. [My post on AI memory management](/articles/ai-memory-management-for-llms/) goes into this in detail, and the short version is that serialization and retrieval are separate problems you have to design together.
+How you index and retrieve from that state is another. [My post on AI memory management](/articles/ai-memory-management/) goes into this in detail, and the short version is that serialization and retrieval are separate problems you have to design together.
 
 Agent memory retrieval is also asymmetric. What you serialize is not always what you retrieve.
 
@@ -139,7 +137,7 @@ The serialization format itself matters less than the discipline of using it con
 
 A write-heavy agent may need a binary format such as msgpack or Protocol Buffers to reduce serialization overhead. JSON with a clear schema remains easier to read and debug, so the format choice depends on whether throughput or inspectability is the tighter constraint.
 
-Serialization preserves the latest state, but an audit trail must preserve the states it replaced. [Memory versioning and audit trails](/articles/memory-versioning-and-audit-trails/) covers that history instead of overwriting it on every save.
+Serialization preserves the latest state, but an audit trail must preserve the states it replaced. [Memory versioning and audit trails](/articles/memory-versioning/) covers that history instead of overwriting it on every save.
 
 ## Where This Leaves You
 

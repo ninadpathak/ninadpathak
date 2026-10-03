@@ -5,13 +5,11 @@ description: Model Context Protocol (MCP) is the new standard for connecting AI 
   to data sources and tools. Here is why it matters, how it works, and why it is the
   missing link for agentic infrastructure.
 status: published
-work_note: "Connecting an MCP server is not the same as granting a tool permission to act. [Ninad Pathak](/contact/) writes technical integration guides that explain authentication and the authorization checks behind a tool call."
-tags:
-- ai
-- agents
-- infrastructure
-- mcp
-title: 'The Model Context Protocol (MCP) Explained: A Universal Language for AI Tools'
+work_note: Connecting an MCP server is not the same as granting a tool permission
+  to act. [Ninad Pathak](/contact/) writes technical integration guides that explain
+  authentication and the authorization checks behind a tool call.
+title: 'Model Context Protocol (MCP): Connecting AI Tools'
+slug: model-context-protocol
 ---
 
 Wiring an AI model up to external data has always been a messy engineering chore. The last time I did it, I wrote one connector to read a GitHub repo, a second to pull docs out of Google Drive, and a third to query our Postgres logs, each with its own auth dance and its own way of describing what the model was allowed to do.
@@ -60,7 +58,7 @@ Compare that to the old world, where a new endpoint on a vendor API meant I had 
 
 Walk through one round trip and the flow is easy to follow. The host opens a connection to the server, and the server answers with a catalog of the resources and tools it offers.
 
-Every tool in that catalog carries a name, a plain-language description, and a JSON Schema that pins down exactly which input arguments it expects, the same mechanism behind [structured outputs and function calling in LLMs](/articles/structured-outputs-llms-json-mode-function-calling/).
+Every tool in that catalog carries a name, a plain-language description, and a JSON Schema that pins down exactly which input arguments it expects, the same mechanism behind [structured outputs and function calling in LLMs](/articles/llm-structured-outputs/).
 
 Working from those definitions, the model produces a tool call, for instance a request to run `search_issues` with a `status` of `open` and an `assignee` of my username. The host hands that request to the MCP server, the server runs the function and returns the result, and the model picks up where it left off.
 

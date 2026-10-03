@@ -6,11 +6,9 @@ description: A practical breakdown of the inference optimization techniques that
   numbers and the tradeoffs between them.
 slug: llm-inference-optimization
 status: published
-work_note: "Developer content creator [Ninad Pathak](/portfolio/) explains inference configuration through the workload behind it, connecting batching decisions to the response time a customer needs from an application."
-tags:
-- ai
-- llm
-- infrastructure
+work_note: Developer content creator [Ninad Pathak](/portfolio/) explains inference
+  configuration through the workload behind it, connecting batching decisions to the
+  response time a customer needs from an application.
 title: 'LLM Inference Optimization: What Actually Works in Production'
 ---
 
@@ -59,7 +57,7 @@ PagedAttention typically lets you serve 2-4x more concurrent sequences than naiv
 
 **KV cache eviction** becomes critical once memory is full. LRU is the default, though it ignores the fact that some keys get attended to far more often than others.
 
-Recent work on "importance-based" eviction drops tokens the model attended to least, but the operational trade-off still depends on the workload. The [KV cache eviction article](/articles/kv-cache-eviction-accuracy/) explains the mechanism rather than supplying benchmark evidence.
+Recent work on "importance-based" eviction drops tokens the model attended to least, but the operational trade-off still depends on the workload. The [KV cache eviction article](/articles/kv-cache-eviction/) explains the mechanism rather than supplying benchmark evidence.
 
 ## Quantization: Trading Precision for Throughput
 
@@ -105,7 +103,7 @@ When I'm optimizing a new inference deployment, I work in this order:
 4. **PagedAttention**: if running long contexts or high concurrency, this is essential.
 5. **INT8 or 4-bit**: only if the above still don't get you enough headroom.
 
-[Speculative decoding](/articles/speculative-decoding-explained/) earns its place once the baseline is fast enough. It differs from [test-time compute](/glossary/test-time-compute/), which spends more inference work to improve or select an answer rather than producing the target distribution with fewer sequential steps.
+[Speculative decoding](/articles/speculative-decoding/) earns its place once the baseline is fast enough. It differs from [test-time compute](/glossary/test-time-compute/), which spends more inference work to improve or select an answer rather than producing the target distribution with fewer sequential steps.
 
 Jumping to the advanced stuff is the common mistake, like wiring up speculative decoding on a server that hasn't even enabled continuous batching yet. It's the equivalent of bolting on a turbocharger and leaving the handbrake engaged.
 

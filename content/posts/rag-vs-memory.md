@@ -4,15 +4,12 @@ date: 2026-04-19
 description: Understand the fundamental differences between RAG and memory systems
   for LLM applications, when to use each, and how to combine them in production.
 status: published
-work_note: "[Ninad Pathak](/contact/) writes technical content for AI products that separates retrieved source evidence from saved user state, following where each enters a request and how memory gets updated."
-tags:
-- ai
-- rag
-- memory
-- llm
-- infrastructure
+work_note: '[Ninad Pathak](/contact/) writes technical content for AI products that
+  separates retrieved source evidence from saved user state, following where each
+  enters a request and how memory gets updated.'
 title: 'RAG vs Memory: What AI Developers Need to Know'
 updated: '2026-08-18'
+slug: rag-vs-memory
 ---
 
 RAG and memory both put useful context in front of a model, but they govern different things. RAG selects external source evidence for the current request.
@@ -50,7 +47,7 @@ Lexical indexes, metadata filters, rerankers, and direct database lookups can al
 
 A memory system decides which observations become durable state, where that state belongs, how it can be retrieved, and when it should be superseded or removed. A preference, a completed action, and a temporary tool result have different lifecycles even if each can be represented as text.
 
-The [five-layer memory hierarchy](/articles/ai-memory-management-for-llms/) makes those lifecycle decisions explicit. The current event and working context can expire quickly, while episodic, semantic, and procedural records need separate inclusion, retrieval, and retention rules.
+The [five-layer memory hierarchy](/articles/ai-memory-management/) makes those lifecycle decisions explicit. The current event and working context can expire quickly, while episodic, semantic, and procedural records need separate inclusion, retrieval, and retention rules.
 
 A recent-message buffer covers only one part of that design. It does not decide whether a record remains valid next week, whether a later record replaces it, or whether another user may read it.
 
@@ -60,7 +57,7 @@ The context window is the container the model reads during one inference call. I
 
 It does not decide which of those inputs are authoritative or durable.
 
-That distinction is easy to lose when a large window can hold a long transcript. The [context-window guide](/articles/llm-context-windows-explained/) explains why capacity alone does not guarantee that every included fact will be used reliably.
+That distinction is easy to lose when a large window can hold a long transcript. The [context-window guide](/articles/llm-context-windows/) explains why capacity alone does not guarantee that every included fact will be used reliably.
 
 Selection and placement still belong to the application.
 
@@ -116,7 +113,7 @@ Anthropic's primary [Contextual Retrieval explanation](https://www.anthropic.com
 
 BM25 can match the identifier.
 
-The site's [hybrid-search guide](/articles/hybrid-search-bm25-vector-search/) covers how dense and lexical result lists can be combined without pretending their raw scores share one scale.
+The site's [hybrid-search guide](/articles/hybrid-search/) covers how dense and lexical result lists can be combined without pretending their raw scores share one scale.
 
 For agent memory, the useful question is not whether dense or lexical search wins in general. It is whether their combined candidate set recovers the records required by the queries the agent actually forms.
 

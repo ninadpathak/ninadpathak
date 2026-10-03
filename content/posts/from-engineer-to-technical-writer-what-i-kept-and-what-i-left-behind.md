@@ -4,13 +4,12 @@ date: 2026-04-05
 description: I explain which engineering habits still make me better at technical
   writing, which ones I had to drop, and how the day-to-day work changed.
 status: published
-work_note: "Engineering discussions become customer-facing instructions through technical writer [Ninad Pathak](/contact/)'s documentation work, explaining product decisions for developers who were not in the room when those decisions were made."
-tags:
-- technical-writing
-- career
-- developer-experience
+work_note: Engineering discussions become customer-facing instructions through technical
+  writer [Ninad Pathak](/contact/)'s documentation work, explaining product decisions
+  for developers who were not in the room when those decisions were made.
 title: 'From Engineer to Technical Writer: What I Kept and What I Left Behind'
 updated: 2026-08-17
+slug: engineer-to-writer
 ---
 
 Moving from engineering to technical writing did not feel like abandoning a technical career. I simply swapped the artifact I shipped.
@@ -118,7 +117,7 @@ Search queries drift, product defaults change, and screenshots rot the instant a
 
 I also hunt for chances to link older posts into newer ones, knitting the site into a network instead of a pile of isolated blog posts.
 
-[How to Write a Changelog That Developers Actually Read](/articles/how-to-write-a-changelog-developers-actually-read/) is one example from this site. That post gives me a stable reference point to link from every later piece about developer communication.
+[How to Write a Changelog That Developers Actually Read](/articles/writing-changelogs/) is one example from this site. That post gives me a stable reference point to link from every later piece about developer communication.
 
 Maintenance is not a chore tacked on at the end. Maintenance is how the technical assets you already built hold their value.
 

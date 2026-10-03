@@ -223,7 +223,7 @@
     {% if categories %}
     <nav class="post-tags" aria-label="Article topics">
       {% for category in categories if category.posts %}
-      <a class="tag" href="{{ category.url }}">{{ category.title }}</a>
+      <a class="tag" href="{{ category.url }}">{{ category.label }}</a>
       {% endfor %}
     </nav>
     {% endif %}

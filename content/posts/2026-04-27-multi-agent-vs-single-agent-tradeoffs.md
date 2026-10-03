@@ -3,13 +3,11 @@ category: ai-engineering
 date: '2026-04-27'
 description: The decision between one agent and many is not about capability. It is
   about failure modes, latency, and operational complexity.
-slug: multi-agent-vs-single-agent-tradeoffs
+slug: multi-agent-vs-single-agent
 status: published
-work_note: "A second agent introduces a handoff that a developer needs to understand. [Ninad Pathak](/portfolio/) creates technical content comparing orchestration patterns through their coordination costs and failure behavior."
-tags:
-- ai agents
-- multi-agent systems
-- agent architecture
+work_note: A second agent introduces a handoff that a developer needs to understand.
+  [Ninad Pathak](/portfolio/) creates technical content comparing orchestration patterns
+  through their coordination costs and failure behavior.
 title: 'Multi-Agent vs Single-Agent Systems: The Real Trade-offs'
 ---
 
@@ -29,7 +27,7 @@ Repeat. When it works, it works cleanly.
 
 When it fails, you get one trace, one error, one place to look.
 
-A single-agent loop can still fail at its tool boundary rather than in the loop architecture. [Production AI agent error patterns](/articles/production-ai-agent-errors/) explains those tool-call failures.
+A single-agent loop can still fail at its tool boundary rather than in the loop architecture. [Production AI agent error patterns](/articles/agent-error-handling/) explains those tool-call failures.
 
 An agent would call a search tool that returned an empty array, or a database query that timed out after thirty seconds, and it would either retry sensibly or sit there spinning. Whatever broke, it broke in one place I could point at.
 
@@ -37,7 +35,7 @@ A single agent working a complex task accumulates its whole history inside the c
 
 Past a certain point, paying to feed that history into every reasoning step costs more than the step is worth, and the agent starts forgetting how the task began by the time it reaches the end. None of that is a software bug.
 
-It is a physics problem rooted in the [layered memory model for AI systems](/articles/ai-memory-management-for-llms/).
+It is a physics problem rooted in the [layered memory model for AI systems](/articles/ai-memory-management/).
 
 Serialization is the other constraint. A single agent does its steps in order, so if a task means scrape ten pages, summarize each, then compare them, the agent grinds through all ten scrapes one at a time before it touches the comparison.
 
@@ -49,7 +47,7 @@ Two reasons pushed me toward multi-agent architectures. Specialization came firs
 
 A coding agent that also has to drive a file browser, a shell, and a PR reviewer is holding twenty-odd tool schemas in its head at once, and it starts misfiring: calling the shell when it meant to read a file, passing a diff to the wrong tool. Splitting those into separate agents let each one carry a handful of tools it understood cold.
 
-That is the pattern I later recognized as the [supervisor agent pattern](/articles/the-agent-design-space/) in production. The supervisor becomes an [agentic router](/glossary/agentic-router/) when it chooses which specialist receives each request.
+That is the pattern I later recognized as the [supervisor agent pattern](/articles/agent-design-space/) in production. The supervisor becomes an [agentic router](/glossary/agentic-router/) when it chooses which specialist receives each request.
 
 Isolation was the second reason. A research agent that goes off the rails and starts hallucinating sources should not be able to corrupt the state of a code generation agent working the same ticket.
 
@@ -76,7 +74,7 @@ The supervisor sends a task to a sub-agent and gets back JSON shaped nothing lik
 
 The coordinator dispatches tasks to three workers and one of them drops off the network without raising a single error.
 
-Building a pipeline on [event-driven agent architectures](/articles/the-agent-design-space/) taught me this the slow way. The event bus was rock solid in testing.
+Building a pipeline on [event-driven agent architectures](/articles/agent-design-space/) taught me this the slow way. The event bus was rock solid in testing.
 
 Under production load, message delivery turned non-deterministic. Agents would finish their work and publish results that nobody consumed, because the consumer had restarted and re-subscribed under a fresh consumer group.
 
@@ -84,7 +82,7 @@ Every dashboard said the system was alive. No actual work was moving through it.
 
 Error propagation is the other trap. Inside a single agent, an error stays local to the loop.
 
-Across agents, one bad output cascades the moment a downstream agent trusts it without validation, which is exactly what I described under [production AI agent errors](/articles/production-ai-agent-errors/). Hand a planner agent garbage findings from a research agent and it will build its entire plan on that rotten foundation, confidently.
+Across agents, one bad output cascades the moment a downstream agent trusts it without validation, which is exactly what I described under [production AI agent errors](/articles/agent-error-handling/). Hand a planner agent garbage findings from a research agent and it will build its entire plan on that rotten foundation, confidently.
 
 ## Memory becomes exponentially more complex
 
@@ -102,11 +100,11 @@ The planner read an empty slot, assumed nothing had been found, and planned arou
 
 So I ended up wiring explicit synchronization into the workflow: each agent confirmed its writes had propagated before the next agent was cleared to start. That bought correctness at the cost of latency, and it made the workflow more serial, which chipped away at the very reason I had split into multiple agents to begin with.
 
-The [shared versus isolated memory guide](/articles/shared-vs-isolated-memory-multi-agent/) separates that coordination choice from the wider memory hierarchy. The tradeoff is which failure mode the system can contain and explain.
+The [shared versus isolated memory guide](/articles/shared-vs-isolated-memory/) separates that coordination choice from the wider memory hierarchy. The tradeoff is which failure mode the system can contain and explain.
 
 ## When to make the call
 
-My heuristic is plain. For a task with one clear goal whose steps run linear or lightly branched, say "read this repo, find the bug, open a PR", a single agent with good [context window management](/articles/llm-context-windows-explained/) gets there faster and springs fewer surprises.
+My heuristic is plain. For a task with one clear goal whose steps run linear or lightly branched, say "read this repo, find the bug, open a PR", a single agent with good [context window management](/articles/llm-context-windows/) gets there faster and springs fewer surprises.
 
 When the work splits into genuinely independent streams, demands tool sets that share no schemas, or needs real concurrency to hit a latency target, I reach for multiple agents.
 

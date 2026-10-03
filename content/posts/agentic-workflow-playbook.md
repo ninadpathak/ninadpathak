@@ -4,13 +4,11 @@ date: 2026-06-14
 description: The repeatable five-stage process I run to take a task from vague intent
   to a pull request I trust, with an AI agent doing the heavy lifting and me stepping
   in to frame the work and read the diff before it merges.
-slug: agentic-workflow-playbook
+slug: agentic-workflows
 status: published
-work_note: "[Ninad Pathak](/portfolio/) creates developer content for coding tools that takes a scoped repository change through the test commands and diff review needed before a merge."
-tags:
-- ai
-- agents
-- developer-experience
+work_note: '[Ninad Pathak](/portfolio/) creates developer content for coding tools
+  that takes a scoped repository change through the test commands and diff review
+  needed before a merge.'
 title: 'The Agentic Workflow Playbook: From Prompt to Shipped PR'
 ---
 
@@ -69,7 +67,7 @@ The sequence builds toward the big change through steps I can verify one at a ti
 
 Scoping is also where I decide whether the task needs one agent or several. The honest answer is almost always one.
 
-I covered the real trade-offs in [multi-agent versus single-agent systems](/articles/multi-agent-vs-single-agent-tradeoffs/), and the short version is that coordination cost is real and most tasks do not need it.
+I covered the real trade-offs in [multi-agent versus single-agent systems](/articles/multi-agent-vs-single-agent/), and the short version is that coordination cost is real and most tasks do not need it.
 
 ## Stage 3: Let the agent work against an instrumented loop
 
@@ -107,7 +105,7 @@ The errors that survive to this stage tend to be the quiet ones. A dependency ad
 
 An edge case handled by deleting the assertion that caught it. A retry wrapped around a call that should have failed loudly.
 
-Reviewing an agent's diff is closer to auditing an expense report than reading a story: the line that hides the problem is never the one drawing attention to itself, so I scan for the entries that should not be there at all. I keep a running list from [why AI agents keep failing in production](/articles/why-ai-agents-keep-failing-in-production/), and most of those failures are visible in the diff once I read it line by line.
+Reviewing an agent's diff is closer to auditing an expense report than reading a story: the line that hides the problem is never the one drawing attention to itself, so I scan for the entries that should not be there at all. I keep a running list from [why AI agents keep failing in production](/articles/ai-agent-failures/), and most of those failures are visible in the diff once I read it line by line.
 
 ## Stage 5: Land it
 
@@ -131,7 +129,7 @@ Scoping and landing are the seams that connect them. Skip framing and the agent 
 
 Skip review and the wrong solution ships. Keep all five and the agent becomes the fastest reliable contributor I work with.
 
-The shape of what people build keeps shifting, and I mapped a lot of that in [the agent design space](/articles/the-agent-design-space/), but the outer loop has stayed the same since the first week I trusted an agent with real work. Get the structure right and the model becomes a detail you swap out.
+The shape of what people build keeps shifting, and I mapped a lot of that in [the agent design space](/articles/agent-design-space/), but the outer loop has stayed the same since the first week I trusted an agent with real work. Get the structure right and the model becomes a detail you swap out.
 
 ## FAQ
 

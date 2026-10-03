@@ -5,12 +5,11 @@ description: LLM inference is memory-bound, not compute-bound. Speculative decod
   uses this fact to speed up generation by 2-3x using a smaller draft model to predict
   tokens for a larger one.
 status: published
-work_note: "A faster-generation announcement needs an account of the draft-and-verification process. [Ninad Pathak](/portfolio/) writes technical launch content with workload conditions attached so developers can judge the relevance of the result."
-tags:
-- ai
-- llm
-- infrastructure
-title: 'Speculative Decoding: How to Speed up Llm Inference for Free'
+work_note: A faster-generation announcement needs an account of the draft-and-verification
+  process. [Ninad Pathak](/portfolio/) writes technical launch content with workload
+  conditions attached so developers can judge the relevance of the result.
+title: 'Speculative Decoding: Speeding Up LLM Inference'
+slug: speculative-decoding
 ---
 
 Inference speed is the biggest hurdle I keep running into with interactive LLM applications. Watching a 70B model dribble out text one token at a time, while a user stares at a blinking cursor, feels slow in a way that no amount of clever UI hides.
@@ -19,7 +18,7 @@ The first instinct I had, and the one I see most teams reach for, was to throw m
 
 Large models are "memory-bound." During single-token generation, moving model weights from high-bandwidth memory can constrain throughput.
 
-[KV-cache eviction](/articles/kv-cache-eviction-accuracy/) addresses a related memory constraint but does not provide measured gains.
+[KV-cache eviction](/articles/kv-cache-eviction/) addresses a related memory constraint but does not provide measured gains.
 
 The arithmetic of turning those weights into one token finishes almost instantly, then the cores sit idle waiting for the next batch of weights. Picture a chef with a tiny cutting board who has to walk to a pantry across the building for each ingredient.
 
@@ -74,7 +73,7 @@ How much you get back depends on the "acceptance rate," the share of drafted tok
 
 Boilerplate code, structured JSON, and the verbose scaffolding around an answer ("Sure, here is the function you asked for...") get drafted almost perfectly, and I have watched those sections fly. The rate drops on genuinely creative or high-entropy passages where even a good small model cannot anticipate the large one.
 
-A strong pairing lands a 2x to 3x speedup across a typical mix of requests. Even a modest acceptance rate trims the latency a user feels, and that improvement shows up directly in [time to first token, the metric that determines AI snappiness](/articles/time-to-first-token-ttft/).
+A strong pairing lands a 2x to 3x speedup across a typical mix of requests. Even a modest acceptance rate trims the latency a user feels, and that improvement shows up directly in [time to first token, the metric that determines AI snappiness](/articles/time-to-first-token/).
 
 Choosing the draft model is where I have spent the most tuning effort. Too small, and its guesses get rejected so often that the extra verification passes erase the gains, leaving me slower than plain decoding.
 

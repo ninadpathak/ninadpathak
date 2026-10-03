@@ -4,14 +4,12 @@ date: 2026-03-26
 description: The mechanism changes what gets indexed before the RAG pipeline runs
   a query.
 status: published
-work_note: "A research result needs its experimental conditions alongside the explanation. [Ninad Pathak](/portfolio/) creates technical content that follows an engineering change through its mechanism and the evidence supporting the claim."
-tags:
-- ai
-- rag
-- infrastructure
-- vector-search
+work_note: A research result needs its experimental conditions alongside the explanation.
+  [Ninad Pathak](/portfolio/) creates technical content that follows an engineering
+  change through its mechanism and the evidence supporting the claim.
 title: How Anthropic's Contextual Retrieval Changes RAG Architecture
 updated: '2026-08-17'
+slug: contextual-retrieval
 ---
 
 Anthropic took a chunk like `"The company's revenue grew by 3% over the previous quarter."`, asked Claude to explain that chunk using the full document, then prepended the explanation before indexing it. That one step cut top-20 retrieval failure by **49%** when Anthropic combined contextual embeddings with contextual BM25, according to [their writeup](https://www.anthropic.com/engineering/contextual-retrieval).
@@ -40,7 +38,7 @@ A paragraph about retries loses the service boundary that makes it relevant, whi
 
 Retrieval quality drops right there, at the seam where the chunk got cut out.
 
-Context decay is something I wrote about in [LLM Context Windows Explained](/articles/llm-context-windows-explained/), and the same idea shows up earlier in the pipeline. Small chunks improve recall because they are easier to match, and the same smallness strips away the frame that made the text identifiable in the first place.
+Context decay is something I wrote about in [LLM Context Windows Explained](/articles/llm-context-windows/), and the same idea shows up earlier in the pipeline. Small chunks improve recall because they are easier to match, and the same smallness strips away the frame that made the text identifiable in the first place.
 
 That tradeoff sits in the middle of production RAG, and most teams pick a chunk size by feel and then live with whatever it costs them. [Semantic chunking](/glossary/semantic-chunking/) makes the boundary follow a change in meaning instead of a fixed size, but it still has to be evaluated through retrieval.
 
@@ -92,7 +90,7 @@ A chunk about quarterly growth can now carry words like the company name, the qu
 
 That is why I do not read this as a replacement for hybrid search. I read it as a way to give hybrid search better input.
 
-My [reranking piece](/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/) makes the case that vector similarity is a decent filter and a weak ranker. Contextual Retrieval fixes something earlier.
+My [reranking piece](/articles/rag-reranking/) makes the case that vector similarity is a decent filter and a weak ranker. Contextual Retrieval fixes something earlier.
 
 It makes the filter more likely to surface the right chunk at all.
 

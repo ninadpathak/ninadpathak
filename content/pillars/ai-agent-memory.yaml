@@ -19,38 +19,37 @@ sections:
   - heading: "Fundamentals"
     blurb: "What agent memory is, the types that matter, and why a bigger context window does not solve it."
     posts:
-      - ai-memory-management-for-llms
-      - short-term-memory-for-ai-agents
+      - ai-memory-management
+      - short-term-agent-memory
       - context-windows-vs-memory
-      - episodic-vs-semantic-vs-working-memory-agents
+      - agent-memory-types
   - heading: "Memory vs retrieval"
     blurb: "Where RAG stops being enough and how memory retrieval differs from document search."
     posts:
       - rag-vs-memory
-      - fine-tuning-vs-rag-for-agent-memory
-      - contextual-compression-for-agent-memory
+      - fine-tuning-vs-rag
+      - memory-compression
   - heading: "Persistence and state"
     blurb: "Keeping memory alive across sessions, audits, and multiple agents."
     posts:
-      - memory-serialization-between-sessions
-      - memory-versioning-and-audit-trails
-      - why-coding-agents-lose-their-memory
-      - shared-vs-isolated-memory-multi-agent
+      - memory-serialization
+      - memory-versioning
+      - coding-agent-memory
+      - shared-vs-isolated-memory
   - heading: "Applied and specialized"
     blurb: "Memory under real constraints, from real-time voice to customer support."
     posts:
-      - memory-for-voice-ai-agents
+      - voice-agent-memory
   - heading: "How real systems do it"
     blurb: "Teardowns of the memory architecture inside shipping agent frameworks."
     posts:
-      - how-memory-works-in-claude-code
-      - how-memory-works-in-deerflow
-      - how-memory-works-in-hyperagents
+      - claude-code-memory
+      - deerflow-memory
+      - hyperagents-memory
   - heading: "State of the field"
     blurb: "Where agent-memory architectures and tooling are heading."
     posts:
-      - state-of-ai-agent-memory-2026
-
+      - agent-memory-2026
 faqs:
   - q: "What is the difference between an agent's memory and its context window?"
     a: "A context window is the text an agent can read in a single call. Memory is the system that decides what to put in that window, what to store outside it, and how to bring the right facts back later. A large window helps, but on its own it forgets everything between sessions and pays full price to re-read history every turn."

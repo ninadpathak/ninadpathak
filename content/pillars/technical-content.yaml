@@ -23,9 +23,9 @@ sections:
   - heading: "Useful technical formats"
     blurb: "Teach a task and communicate product changes with tested detail."
     posts:
-      - how-to-write-a-technical-tutorial-that-actually-teaches
-      - how-to-write-a-changelog-developers-actually-read
-      - writing-release-notes-that-developers-trust
+      - writing-technical-tutorials
+      - writing-changelogs
+      - writing-release-notes
 planned:
   - "SEO Content Brief Template for Technical Blog Posts"
   - "How to Write Code Examples for Technical Content"

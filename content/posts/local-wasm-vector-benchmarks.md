@@ -4,16 +4,12 @@ date: 2026-04-13
 description: A comparison of PGlite and SQLite-vec for browser-based vector search,
   including indexing, memory, and deployment trade-offs.
 status: published
-work_note: "[Ninad Pathak](/portfolio/)'s developer content for browser tools covers the initial download as well as the first query, helping readers evaluate startup costs before adopting a database."
-tags:
-- vector-search
-- wasm
-- pglite
-- sqlite-vec
-- edge-computing
-- technical-deep-dive
+work_note: '[Ninad Pathak](/portfolio/)''s developer content for browser tools covers
+  the initial download as well as the first query, helping readers evaluate startup
+  costs before adopting a database.'
 title: 'Vector Search in the Browser: PGlite vs. SQLite-vec'
 updated: '2026-08-17'
+slug: browser-vector-search
 ---
 
 PGlite and SQLite-vec take different approaches to vector search in the browser. PGlite brings Postgres features and indexed search, while SQLite-vec keeps the runtime and data model closer to SQLite.
@@ -98,7 +94,7 @@ A query that should surface the three most relevant support docs might return tw
 
 As vector dimensionality climbs, the performance gulf between these engines widens. Standard open-source models like `all-MiniLM` use 384 dimensions.
 
-OpenAI's [`text-embedding-3-large`](https://developers.openai.com/api/docs/models/text-embedding-3-large) uses 3,072 dimensions by default, a jump rooted in [how embedding models trade dimensionality for information density](/articles/embedding-models-compared/).
+OpenAI's [`text-embedding-3-large`](https://developers.openai.com/api/docs/models/text-embedding-3-large) uses 3,072 dimensions by default, a jump rooted in [how embedding models trade dimensionality for information density](/articles/vector-embeddings/).
 
 A flat scan does proportionally more arithmetic as vector dimension grows. Benchmark the crossover against the target browser, vector count, and recall requirement.
 
@@ -127,7 +123,7 @@ Picking between these two engines comes down to your application's data model an
   </div>
 </div>
 
-PGlite is the correct choice for applications that need a real relational database. If your search results must be joined with complex metadata, filtered via JSONB, or [combined with BM25 full-text search in a hybrid retrieval setup](/articles/hybrid-search-bm25-vector-search/), or synced with a backend Postgres instance, the PGlite bundle size is a small price to pay.
+PGlite is the correct choice for applications that need a real relational database. If your search results must be joined with complex metadata, filtered via JSONB, or [combined with BM25 full-text search in a hybrid retrieval setup](/articles/hybrid-search/), or synced with a backend Postgres instance, the PGlite bundle size is a small price to pay.
 
 A local documentation assistant with a bounded corpus can fit SQLite-vec's simpler deployment model.
 
@@ -150,6 +146,6 @@ A two-stage design can show approximate candidates first and rerank them with a 
 
 SQLite-vec is particularly well-suited for mobile due to its low memory footprint and efficient use of CPU registers for binary math.
 
-**What is the "lost in the middle" problem for local RAG?** That one is a [context window limitation rather than a database limitation](/articles/llm-context-windows-explained/). Even with flawless retrieval, packing too much context into a small local model degrades its reasoning, since the relevant passage gets buried among the filler.
+**What is the "lost in the middle" problem for local RAG?** That one is a [context window limitation rather than a database limitation](/articles/llm-context-windows/). Even with flawless retrieval, packing too much context into a small local model degrades its reasoning, since the relevant passage gets buried among the filler.
 
 Choose top-K from retrieval and answer-quality evals for the local model rather than copying a cloud pipeline's setting.

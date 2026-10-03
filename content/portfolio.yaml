@@ -91,7 +91,7 @@ entries:
   - title: "Short-Term Memory for AI Agents: What, Why, and How?"
     client: "Mem0"
     category: "AI Systems"
-    url: "https://mem0.ai/blog/short-term-memory-for-ai-agents"
+    url: "https://mem0.ai/articles/short-term-agent-memory"
 
   - title: "What Are Vector Embeddings? A Complete Guide"
     client: "Mem0"

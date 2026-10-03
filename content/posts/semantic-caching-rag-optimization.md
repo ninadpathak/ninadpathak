@@ -5,13 +5,11 @@ description: Semantic caching returns cached LLM responses for semantically simi
   queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism
   works and where it fails.
 status: published
-work_note: "Technical writer [Ninad Pathak](/portfolio/) creates caching-product guides with an invalidation example alongside a successful cache hit, explaining when a stored answer stops being usable."
-tags:
-- ai
-- rag
-- infrastructure
-- vector-search
+work_note: Technical writer [Ninad Pathak](/portfolio/) creates caching-product guides
+  with an invalidation example alongside a successful cache hit, explaining when a
+  stored answer stops being usable.
 title: 'Semantic Caching: The RAG Optimization Nobody Talks About'
+slug: semantic-caching
 ---
 
 Almost every conversation I see about RAG optimization centers on retrieval quality: better embeddings, rerankers, hybrid search, contextual chunking. The layer nobody talks about sits before retrieval even starts.
@@ -149,7 +147,7 @@ Where you put your effort changes once you see that. Retrieval improvements (bet
 
 Semantic caching reduces how often the retrieval system runs in the first place. They compound.
 
-I covered retrieval improvements with [contextual retrieval here](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/) and [reranking here](/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/). Semantic caching fits in the layer above both.
+I covered retrieval improvements with [contextual retrieval here](/articles/contextual-retrieval/) and [reranking here](/articles/rag-reranking/). Semantic caching fits in the layer above both.
 
 What people miss is that semantic caching doesn't just reduce LLM API calls. A cache hit skips the retrieval search, the reranker call, and the query-side embedding too.
 

@@ -5,16 +5,12 @@ description: Voice AI agents live or die by how they manage memory across a real
   streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something
   different.
 status: published
-work_note: "An interruption changes what a voice application should remember. [Ninad Pathak](/contact/) creates developer content that follows conversation events into the state an application needs to update or discard."
-tags:
-- ai
-- voice
-- agents
-- memory
-- voice-ai
-- infrastructure
+work_note: An interruption changes what a voice application should remember. [Ninad
+  Pathak](/contact/) creates developer content that follows conversation events into
+  the state an application needs to update or discard.
 title: 'Memory for Voice AI Agents: What Text Chatbots Cannot Do'
 updated: '2026-08-17'
+slug: voice-agent-memory
 ---
 
 Voice agents and text chatbots fail differently. A text chatbot that loses context produces a confusing paragraph the user can reread and shrug off.
@@ -214,17 +210,17 @@ A voice agent storing only transcripts is throwing away half of what the caller 
 
 This cluster of articles covers the full AI memory stack. For understanding how memory differs from context windows, see [context windows vs memory](/articles/context-windows-vs-memory/).
 
-For how HyperAgents handle memory across sessions, read [how memory works in HyperAgents](/articles/how-memory-works-in-hyperagents/). For implementation patterns, see [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).
+For how HyperAgents handle memory across sessions, read [how memory works in HyperAgents](/articles/hyperagents-memory/). For implementation patterns, see [AI memory management for LLMs](/articles/ai-memory-management/).
 
 
 
 ##Related Articles
 
 - [Context windows vs memory](/articles/context-windows-vs-memory/)
-- [AI memory management for LLMs](/articles/ai-memory-management-for-llms/)
-- [Short-term memory for AI agents](/articles/short-term-memory-for-ai-agents/)
-- [How memory works in HyperAgents](/articles/how-memory-works-in-hyperagents/)
-- [State of AI agent memory 2026](/articles/state-of-ai-agent-memory-2026/)
+- [AI memory management for LLMs](/articles/ai-memory-management/)
+- [Short-term memory for AI agents](/articles/short-term-agent-memory/)
+- [How memory works in HyperAgents](/articles/hyperagents-memory/)
+- [State of AI agent memory 2026](/articles/agent-memory-2026/)
 
 ##Faq
 
@@ -268,6 +264,6 @@ TTS synthesis starts before LLM generation is complete. Tokens stream from the L
 
 Streaming generation and synthesis can overlap, allowing audio playback to begin before the full model response is complete.
 
-For more on the latency pipeline that this memory system lives inside, see my guide to [tracing real-time voice agent latency](/articles/voice-ai-latency-gemini-benchmark/). For the LLM context window management that determines how much memory you can hold, see [how Anthropic's contextual retrieval changes RAG architecture](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/).
+For more on the latency pipeline that this memory system lives inside, see my guide to [tracing real-time voice agent latency](/articles/voice-agent-latency/). For the LLM context window management that determines how much memory you can hold, see [how Anthropic's contextual retrieval changes RAG architecture](/articles/contextual-retrieval/).
 
-For the broader agent infrastructure context, see [production AI agent errors: what actually fails](/articles/production-ai-agent-errors/).
+For the broader agent infrastructure context, see [production AI agent errors: what actually fails](/articles/agent-error-handling/).

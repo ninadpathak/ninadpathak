@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-08-02
 description: Use a tested review card to make documentation tasks, failure states,
   limits, and ownership clear before readers need support.
-slug: technical-documentation-best-practices-tested-real-developer-docs
+slug: documentation-best-practices
 status: published
-work_note: "[Ninad Pathak](/contact/) writes technical documentation around the integration a customer needs to finish, keeping expected responses beside commands and recovery instructions beside the failures they address."
-tags:
-- documentation
-- technical-writing
-- developer-experience
+work_note: '[Ninad Pathak](/contact/) writes technical documentation around the integration
+  a customer needs to finish, keeping expected responses beside commands and recovery
+  instructions beside the failures they address.'
 takeaways:
 - Give every page one reader task and an observable success state.
 - Put recovery guidance beside the action that can fail.
@@ -82,7 +80,7 @@ Use the review card’s limit table to make this operational. If the writer cann
 
 Documentation drifts when tutorials, reference pages, release notes, and support articles all explain the same behavior differently. More navigation does not fix that conflict.
 
-Assign one page to own the task, then link outward for prerequisites, stable parameter detail, and deeper recovery. The [documentation organization guide](/articles/how-to-organize-a-documentation-site/) explains how to split those page roles, while the [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) covers the release checks that follow.
+Assign one page to own the task, then link outward for prerequisites, stable parameter detail, and deeper recovery. The [documentation organization guide](/articles/documentation-structure/) explains how to split those page roles, while the [documentation review checklist](/articles/documentation-review/) covers the release checks that follow.
 
 The owner should also know what invalidates the page: a changed permission, renamed control, new response shape, revised quota, or support issue that reveals an absent recovery path. A review date alone cannot keep documentation current.
 

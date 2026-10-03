@@ -16,30 +16,29 @@ sections:
   - heading: "Context and tokens"
     blurb: "What you are actually paying for, and why bigger windows do not fix everything."
     posts:
-      - llm-context-windows-explained
+      - llm-context-windows
       - context-windows-vs-memory
-      - llm-token-budgets-cost-control
+      - llm-token-budgets
   - heading: "Speed and cost levers"
     blurb: "The techniques that cut latency and spend without changing the output."
     posts:
-      - speculative-decoding-explained
-      - time-to-first-token-ttft
+      - speculative-decoding
+      - time-to-first-token
       - llm-inference-optimization
   - heading: "Internals"
     blurb: "What happens inside the model and the cache while it runs."
     posts:
-      - kv-cache-eviction-accuracy
-      - mixture-of-experts-explained
+      - kv-cache-eviction
+      - mixture-of-experts
   - heading: "Model selection and reasoning"
     blurb: "Choosing the right model and testing whether it can actually reason."
     posts:
       - best-llms-for-coding
-      - lambda-calculus-ai-reasoning-benchmark
+      - lambda-calculus-ai
   - heading: "Latency benchmarks"
     blurb: "Profiling the full chain on real-time workloads."
     posts:
-      - voice-ai-latency-gemini-benchmark
-
+      - voice-agent-latency
 faqs:
   - q: "What is time to first token (TTFT)?"
     a: "TTFT is how long a model takes to produce its first output token after a request. It is the latency users actually feel, because it controls how fast a response starts streaming. The TTFT post breaks down the chain that determines it."

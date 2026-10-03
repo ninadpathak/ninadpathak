@@ -3,13 +3,11 @@ category: ai-engineering
 date: 2026-04-26
 description: After surveying production agents across industries, the design space
   clusters into patterns. Here is what I found.
-slug: the-agent-design-space
+slug: agent-design-space
 status: published
-work_note: "[Ninad Pathak](/contact/) plans developer content for agent platforms around execution patterns, then writes tutorials that connect those architecture choices to a supported SDK implementation."
-tags:
-- ai
-- agents
-- architecture
+work_note: '[Ninad Pathak](/contact/) plans developer content for agent platforms
+  around execution patterns, then writes tutorials that connect those architecture
+  choices to a supported SDK implementation.'
 title: 'The Agent Design Space: A Map of What Engineers Are Actually Building'
 ---
 
@@ -27,13 +25,13 @@ Plenty of RAG applications look exactly like this once someone wraps them in an 
 
 Teams reach for this shape when the task is bounded and a wrong answer costs little, say a docs-search assistant that surfaces the wrong paragraph and the user just re-asks.
 
-For a map of memory approaches, read [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/); for retrieval mechanics, read [hybrid search with BM25 and vectors](/articles/hybrid-search-bm25-vector-search/). Neither article establishes that retrieval is where a particular agent will fail.
+For a map of memory approaches, read [state of AI agent memory in 2026](/articles/agent-memory-2026/); for retrieval mechanics, read [hybrid search with BM25 and vectors](/articles/hybrid-search/). Neither article establishes that retrieval is where a particular agent will fail.
 
 What bites you is retrieval failing silently, the vector search returning three plausible-but-wrong chunks, and the agent confidently building an answer on top of them.
 
 **Multi-turn conversational agents** are the second major cluster. Holding state across a single conversation session is what sets them apart.
 
-They are retrieval-augmented underneath, plus a memory layer that tracks the conversation history and lets the agent reference earlier turns. Customer support bots and coding assistants dominate this category, and the [short-term-memory-for-ai-agents](/articles/short-term-memory-for-ai-agents/) post covers the mechanisms used in practice.
+They are retrieval-augmented underneath, plus a memory layer that tracks the conversation history and lets the agent reference earlier turns. Customer support bots and coding assistants dominate this category, and the [short-term-memory-for-ai-agents](/articles/short-term-agent-memory/) post covers the mechanisms used in practice.
 
 Context pollution is the failure I see most in this cluster. Every turn appends to the conversation context, and without active compression or windowing, the agent ends up reasoning over a bloated context stuffed with stale earlier turns.
 
@@ -45,13 +43,13 @@ Production is where the [plan-and-execute pattern](/articles/agent-loop-anatomy/
 
 Error handling here looks nothing like the single-loop case. A workflow agent that dies on step four of seven has to either checkpoint state or restart from a known good position, otherwise it re-runs steps one through three and you get duplicate side effects, like a payment fired twice.
 
-I wrote about [circuit breakers](/articles/production-ai-agent-errors/) as a pattern for stopping cascade failures in these systems. A circuit breaker barely earns its keep in a simple single-loop agent, yet it becomes load-bearing once you have a chain of steps that can drag each other down.
+I wrote about [circuit breakers](/articles/agent-error-handling/) as a pattern for stopping cascade failures in these systems. A circuit breaker barely earns its keep in a simple single-loop agent, yet it becomes load-bearing once you have a chain of steps that can drag each other down.
 
 **Supervisor-delegation agents** split a task across several specialized agents, with a supervisor running the orchestration. The supervisor decides which sub-agent owns which part of the work, aggregates results, and resolves conflicts when two agents return contradictory answers.
 
 This is the most architecturally complex pattern in the design space.
 
-The [supervisor-agent pattern](/articles/multi-agent-vs-single-agent-tradeoffs/) post goes into where this works and where it breaks. One failure deserves naming outright: supervisors rack up hidden coordination costs that teams routinely underestimate.
+The [supervisor-agent pattern](/articles/multi-agent-vs-single-agent/) post goes into where this works and where it breaks. One failure deserves naming outright: supervisors rack up hidden coordination costs that teams routinely underestimate.
 
 Every sub-agent call adds latency and one more thing that can break, the way adding people to a meeting adds nothing to the output but multiplies the time spent getting everyone aligned. Parallelize those sub-agent calls and you hit the same challenges I covered in [parallel versus sequential tool calls](/articles/agent-loop-anatomy/).
 
@@ -80,7 +78,7 @@ Across these patterns, three things stand out.
 
 A common design is a retrieval-augmented single-loop agent with multi-turn conversational memory bolted on. This Type 2-3 hybrid has no clean home in most taxonomies.
 
-**The tool layer decides reliability more than the model does.** Teams with fragile agents almost always had a tool schema problem, not a model problem. The [tool schema design](/articles/structured-outputs-llms-json-mode-function-calling/) post covers this in depth, and the short version is that agents fall over when the tool interface is underspecified, when one tool returns errors as a 500 and another returns them as a cheerful 200 with an error string in the body, and when the agent has no defined way to retry a failed call.
+**The tool layer decides reliability more than the model does.** Teams with fragile agents almost always had a tool schema problem, not a model problem. The [tool schema design](/articles/llm-structured-outputs/) post covers this in depth, and the short version is that agents fall over when the tool interface is underspecified, when one tool returns errors as a 500 and another returns them as a cheerful 200 with an error string in the body, and when the agent has no defined way to retry a failed call.
 
 **Observability is the biggest blind spot.** Right behind tool schema problems, the second most common production failure was teams having no way to see what their agent was doing mid-execution. A minimum viable observability layer earns its place fast here.
 
@@ -92,15 +90,15 @@ Clear blind spots showed up in the survey too, areas where the demand exists but
 
 **Cross-agent state synchronization** is the piece nobody has nailed. When several agents need to share state in real time, teams reach for shared databases or message queues, yet no established pattern exists for doing it without bolting the agents tightly together.
 
-The post on [message passing between agents](/articles/multi-agent-vs-single-agent-tradeoffs/) covers what does exist, and most of it still demands a pile of custom plumbing.
+The post on [message passing between agents](/articles/multi-agent-vs-single-agent/) covers what does exist, and most of it still demands a pile of custom plumbing.
 
 **Agent regression testing** barely exists. Agents get tested the way teams test ordinary software: unit tests for functions, integration tests for APIs.
 
-An agent that sails through every unit test can still blow up in production the moment it meets an input shape it never saw in CI, such as a user pasting a long PDF into a chat that the test suite only ever fed one-line questions. The [RAG evaluation metrics guide](/articles/rag-evaluation-metrics-what-actually-matters/) explains retrieval and answer checks, but those checks do not cover every production input shape.
+An agent that sails through every unit test can still blow up in production the moment it meets an input shape it never saw in CI, such as a user pasting a long PDF into a chat that the test suite only ever fed one-line questions. The [RAG evaluation metrics guide](/articles/rag-evaluation/) explains retrieval and answer checks, but those checks do not cover every production input shape.
 
 **Structured output reliability** from agents is still unsolved. Agents that must emit structured JSON or hit specific action schemas fail at higher rates than agents that just produce freeform text.
 
-The cause is rarely raw model capability and almost always prompt and schema design, which I dug into in [structured-outputs-llms-json-mode-function-calling](/articles/structured-outputs-llms-json-mode-function-calling/).
+The cause is rarely raw model capability and almost always prompt and schema design, which I dug into in [structured-outputs-llms-json-mode-function-calling](/articles/llm-structured-outputs/).
 
 ## The design space is not a menu
 
@@ -110,7 +108,7 @@ A reactive information agent is not a watered-down persistent-goal agent. It is 
 
 Picking a simpler pattern is not the mistake. Picking a simpler pattern and then stretching it past its intended scope is, like turning a single-loop docs assistant into something you expect to track a multi-day migration on its own.
 
-Sketching a new agent system, I start with the [three questions in the taxonomy post](/articles/the-taxonomy-of-ai-agents/). Does it need to act or just generate?
+Sketching a new agent system, I start with the [three questions in the taxonomy post](/articles/ai-agent-taxonomy/). Does it need to act or just generate?
 
 Does it need to persist state? Does the task complexity genuinely call for multiple agents?
 

@@ -5,13 +5,11 @@ description: Hybrid search combines BM25 sparse retrieval with dense vector sear
   Here's how reciprocal rank fusion works, what it costs, and when the combination
   actually beats either method alone.
 status: published
-work_note: "For search products, [Ninad Pathak](/portfolio/) writes developer content that tests exact identifiers alongside paraphrased questions, explaining why different retrieval configurations return different results."
-tags:
-- ai
-- rag
-- vector-search
-- infrastructure
-title: 'Hybrid Search: Combining Bm25 and Vector Search for Better Retrieval'
+work_note: For search products, [Ninad Pathak](/portfolio/) writes developer content
+  that tests exact identifiers alongside paraphrased questions, explaining why different
+  retrieval configurations return different results.
+title: 'Hybrid Search: Combining BM25 and Vector Search'
+slug: hybrid-search
 ---
 
 Dense vector search became the default for RAG systems almost overnight. Embeddings capture semantic meaning, handle paraphrase and synonym matching, and outperform keyword search on most standard retrieval benchmarks.
@@ -147,7 +145,7 @@ The combination is stronger than either alone.
 
 Once hybrid retrieval returns a top-K candidate set of typically 20 to 100 documents, a cross-encoder reranker scores each document against the query independently. A cross-encoder reads the query and document together in one pass and can attend to how specific query words line up against the document, which produces sharper relevance scores at the cost of being slower than the bi-encoder that fetched the candidates.
 
-[Azure's benchmark data](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-ai-search-outperforming-vector-search-with-hybrid-retrieval-and-reranking/3929167) shows the hybrid + rerank combination consistently outperforming hybrid alone by a significant margin. I wrote about reranking mechanics in depth at [Reranking in RAG](/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/).
+[Azure's benchmark data](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-ai-search-outperforming-vector-search-with-hybrid-retrieval-and-reranking/3929167) shows the hybrid + rerank combination consistently outperforming hybrid alone by a significant margin. I wrote about reranking mechanics in depth at [Reranking in RAG](/articles/rag-reranking/).
 
 The ordering matters. Always hybrid-retrieve a larger candidate set first, then rerank down to the final top-K you'll send to the LLM.
 
@@ -163,7 +161,7 @@ Paying for that requires real infrastructure. You're running two indexes for BM2
 
 Latency roughly doubles against single-retriever approaches before any reranking enters the picture. For a search box that needs to feel instant under a user's keystrokes, that doubling is the difference between fast and noticeably laggy.
 
-The [embedding models guide](/articles/embedding-models-compared/) explains the model-selection trade-offs behind the dense retriever. Read it as background, not benchmark evidence that BM25 can rescue a weak retriever.
+The [embedding models guide](/articles/vector-embeddings/) explains the model-selection trade-offs behind the dense retriever. Read it as background, not benchmark evidence that BM25 can rescue a weak retriever.
 
 The combination amplifies both retrievers' strengths, not their weaknesses.
 

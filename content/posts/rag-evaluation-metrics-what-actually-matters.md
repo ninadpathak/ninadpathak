@@ -4,14 +4,12 @@ date: 2026-04-16
 description: A practical guide to RAGAs, recall, precision, and the metrics that separate
   production RAG systems from prototypes.
 status: published
-work_note: "Developer education for evaluation tools needs to explain what a failed score means. Technical writer [Ninad Pathak](/contact/) connects example results to the retrieval or generation step a reader should inspect."
-tags:
-- rag
-- evaluation
-- llm
-- metrics
+work_note: Developer education for evaluation tools needs to explain what a failed
+  score means. Technical writer [Ninad Pathak](/contact/) connects example results
+  to the retrieval or generation step a reader should inspect.
 title: 'RAG Evaluation Metrics: What Actually Matters'
 updated: '2026-08-17'
+slug: rag-evaluation
 ---
 
 Building a RAG system is the part every tutorial covers. Measuring whether it works is the part almost none of them touch.
@@ -48,7 +46,7 @@ When you're squeezing ten passages into a tight budget for a latency-sensitive c
 
 **NDCG@K** (Normalized Discounted Cumulative Gain) weights ranked results by relevance. A relevant document at rank 1 scores higher than the same document at rank 5.
 
-Use NDCG when rank order matters for your pipeline, which is exactly the case once you add [a reranking stage to fix wrong top-k ordering](/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/).
+Use NDCG when rank order matters for your pipeline, which is exactly the case once you add [a reranking stage to fix wrong top-k ordering](/articles/rag-reranking/).
 
 ### Stage 2: Passage Selection
 
@@ -196,7 +194,7 @@ Monitor retrieval and answer quality on a recurring sample of production queries
 
 If you're starting from scratch, optimize in this order:
 
-1. **Retrieval recall first.** No generation improvement fixes missing context. Measure what percentage of your knowledge base the system can actually surface for any given query, and remember that techniques like [Anthropic's contextual retrieval can cut top-20 retrieval failures by 49%](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/).
+1. **Retrieval recall first.** No generation improvement fixes missing context. Measure what percentage of your knowledge base the system can actually surface for any given query, and remember that techniques like [Anthropic's contextual retrieval can cut top-20 retrieval failures by 49%](/articles/contextual-retrieval/).
 
 2. **Context precision second.** Once recall is solid, reduce noise. High precision means the generator spends its context budget on signal, not noise.
 
@@ -204,7 +202,7 @@ If you're starting from scratch, optimize in this order:
 
 4. **Answer relevancy fourth.** Everything above this point measures parts of the system. Answer relevancy measures the whole thing working together.
 
-Starting with answer relevancy alone hides upstream failures. The [embedding models guide](/articles/embedding-models-compared/) explains one possible failure in the retrieval layer, but it does not provide benchmark evidence for a particular model.
+Starting with answer relevancy alone hides upstream failures. The [embedding models guide](/articles/vector-embeddings/) explains one possible failure in the retrieval layer, but it does not provide benchmark evidence for a particular model.
 
 <div class="visual-wrapper">
   <div class="visual-title">RAG EVALUATION FUNNEL</div>

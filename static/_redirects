@@ -10,10 +10,10 @@
 /documentation-seo/ /articles/ai-search-optimization/ 301
 /ai-ready-documentation/ /articles/ai-search-optimization/ 301
 /technical-content/ /articles/developer-experience/ 301
-/articles/technical-content-as-a-moat-the-long-game-for-developer-tools /articles/how-stripes-technical-blog-became-a-competitive-moat/ 301
-/articles/technical-content-as-a-moat-the-long-game-for-developer-tools/ /articles/how-stripes-technical-blog-became-a-competitive-moat/ 301
-/blog/technical-content-as-a-moat-the-long-game-for-developer-tools /articles/how-stripes-technical-blog-became-a-competitive-moat/ 301
-/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/ /articles/how-stripes-technical-blog-became-a-competitive-moat/ 301
+/articles/technical-content-as-a-moat-the-long-game-for-developer-tools /articles/stripe-technical-blog/ 301
+/articles/technical-content-as-a-moat-the-long-game-for-developer-tools/ /articles/stripe-technical-blog/ 301
+/blog/technical-content-as-a-moat-the-long-game-for-developer-tools /articles/stripe-technical-blog/ 301
+/blog/technical-content-as-a-moat-the-long-game-for-developer-tools/ /articles/stripe-technical-blog/ 301
 # AI-cluster focus areas: collapsed into the /articles/ index during the
 # July 30 refocus. Redirected until each cluster gets its own owner page.
 /ai-agent-memory /articles/ai-engineering/ 301
@@ -31,19 +31,19 @@
 /glossary/graphrag /glossary/context-engineering/ 301
 /glossary/graphrag/ /glossary/context-engineering/ 301
 # Cluster-3 batch 1: retired sources point directly to their reviewed final owners.
-/articles/state-of-open-source-memory-2026/ /articles/state-of-ai-agent-memory-2026/ 301
-/blog/state-of-open-source-memory-2026/ /articles/state-of-ai-agent-memory-2026/ 301
-/articles/memory-hierarchy-in-ai-systems/ /articles/ai-memory-management-for-llms/ 301
-/blog/memory-hierarchy-in-ai-systems/ /articles/ai-memory-management-for-llms/ 301
-/articles/the-memory-hierarchy-why-rag-is-not-enough/ /articles/ai-memory-management-for-llms/ 301
-/blog/the-memory-hierarchy-why-rag-is-not-enough/ /articles/ai-memory-management-for-llms/ 301
-/articles/memory-attribution-errors/ /articles/ai-memory-management-for-llms/ 301
-/blog/memory-attribution-errors/ /articles/ai-memory-management-for-llms/ 301
-/articles/agent-memory-for-customer-support/ /articles/state-of-ai-agent-memory-2026/ 301
-/blog/agent-memory-for-customer-support/ /articles/state-of-ai-agent-memory-2026/ 301
+/articles/state-of-open-source-memory-2026/ /articles/agent-memory-2026/ 301
+/blog/state-of-open-source-memory-2026/ /articles/agent-memory-2026/ 301
+/articles/memory-hierarchy-in-ai-systems/ /articles/ai-memory-management/ 301
+/blog/memory-hierarchy-in-ai-systems/ /articles/ai-memory-management/ 301
+/articles/the-memory-hierarchy-why-rag-is-not-enough/ /articles/ai-memory-management/ 301
+/blog/the-memory-hierarchy-why-rag-is-not-enough/ /articles/ai-memory-management/ 301
+/articles/memory-attribution-errors/ /articles/ai-memory-management/ 301
+/blog/memory-attribution-errors/ /articles/ai-memory-management/ 301
+/articles/agent-memory-for-customer-support/ /articles/agent-memory-2026/ 301
+/blog/agent-memory-for-customer-support/ /articles/agent-memory-2026/ 301
 # Cluster-3 decision-framework merge: preserve the measured agent-memory owner.
-/articles/rag-vs-fine-tuning/ /articles/fine-tuning-vs-rag-for-agent-memory/ 301
-/blog/rag-vs-fine-tuning/ /articles/fine-tuning-vs-rag-for-agent-memory/ 301
+/articles/rag-vs-fine-tuning/ /articles/fine-tuning-vs-rag/ 301
+/blog/rag-vs-fine-tuning/ /articles/fine-tuning-vs-rag/ 301
 # Cluster-3 context evidence merge: the reviewed owner carries Lost in the Middle and RULER.
 /articles/beam-memory-benchmark/ /articles/context-windows-vs-memory/ 301
 /blog/beam-memory-benchmark/ /articles/context-windows-vs-memory/ 301

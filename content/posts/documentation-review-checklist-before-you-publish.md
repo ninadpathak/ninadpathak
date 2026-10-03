@@ -1,14 +1,13 @@
 ---
 category: technical-documentation
 date: 2026-07-30
-description: 'Review documentation in four passes: product truth, reader route, rendered behavior, and release state, before polishing prose.'
-slug: documentation-review-checklist-before-you-publish
+description: 'Review documentation in four passes: product truth, reader route, rendered
+  behavior, and release state, before polishing prose.'
+slug: documentation-review
 status: published
-work_note: "[Ninad Pathak](/contact/) reviews technical documentation against the product version it describes, checking the instructions and missing steps before editing the wording that carries them."
-tags:
-- technical-writing
-- documentation-workflow
-- docs-as-code
+work_note: '[Ninad Pathak](/contact/) reviews technical documentation against the
+  product version it describes, checking the instructions and missing steps before
+  editing the wording that carries them.'
 takeaways:
 - Verify product behavior before editing sentences.
 - Run the reader's success and failure paths from the documented starting state.
@@ -98,7 +97,7 @@ This page helps [reader with starting state] decide or do [specific outcome].
 
 If one reviewer writes "create a key" and another writes "understand authentication," the page has two jobs fighting inside it. Split the jobs or choose one before editing the draft.
 
-The [technical tutorial guide](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/) shows how a learning path differs from a task page. The distinction matters because a tutorial can teach through a controlled build while reference must state behavior without dragging the reader through a lesson.
+The [technical tutorial guide](/articles/writing-technical-tutorials/) shows how a learning path differs from a task page. The distinction matters because a tutorial can teach through a controlled build while reference must state behavior without dragging the reader through a lesson.
 
 ### Search for the answer that already exists
 
@@ -229,7 +228,7 @@ Add the release facts the page depends on:
 | Does an older supported version differ? | Versioned reference or compatibility test |
 | When should the page become indexable? | Release plan |
 
-Do not present preview behavior as the current answer. For a breaking change, make the compatibility statement agree with the [changelog](/articles/how-to-write-a-changelog-developers-actually-read/) and [release notes](/articles/writing-release-notes-that-developers-trust/).
+Do not present preview behavior as the current answer. For a breaking change, make the compatibility statement agree with the [changelog](/articles/writing-changelogs/) and [release notes](/articles/writing-release-notes/).
 
 ### Name the next review trigger
 

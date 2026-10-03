@@ -5,14 +5,11 @@ description: 'A deep dive into the memory architecture of DeerFlow: layered cont
   passing, session state files, sub-agent isolation, and how it compares to Letta,
   AutoGen, and CrewAI.'
 status: published
-work_note: "A state record can make a multi-agent workflow understandable. Developer content creator [Ninad Pathak](/contact/) writes walkthroughs showing which agent receives the record and what the next step can change."
-tags:
-- ai
-- agents
-- memory
-- deerflow
-- infrastructure
+work_note: A state record can make a multi-agent workflow understandable. Developer
+  content creator [Ninad Pathak](/contact/) writes walkthroughs showing which agent
+  receives the record and what the next step can change.
 title: How Memory Works in DeerFlow
+slug: deerflow-memory
 ---
 
 Structured context passing is what I call the way DeerFlow organizes memory. Rather than relying on a central vector store or a global knowledge graph, DeerFlow passes memory between agents through explicit JSON state files and Markdown context documents.
@@ -79,7 +76,7 @@ Splitting memory into three layers means you never pay the token cost of loading
 
 ##Session Continuity Via State Files
 
-DeerFlow's structured file passing for session continuity rests on the same principle behind [checkpointing in production AI agents](/articles/production-ai-agent-errors/). DeerFlow enforces it at the workflow level rather than the tool call level.
+DeerFlow's structured file passing for session continuity rests on the same principle behind [checkpointing in production AI agents](/articles/agent-error-handling/). DeerFlow enforces it at the workflow level rather than the tool call level.
 
 Should the workflow crash, restart, or get handed off to a different process, it reads the state file and resumes from exactly where it left off.
 
@@ -313,4 +310,4 @@ You can use DeerFlow with an MCP-compatible memory server if your infrastructure
 
 DeerFlow is built for task-oriented workflows, not free-form conversation. The stage-gated execution model means it is optimized for research, analysis, and code generation tasks where depth matters more than response latency.
 
-For real-time conversation, use a framework designed for that, like VAPI or a simple RAG pipeline. If you want to understand the long-term memory tradeoffs better, read my [breakdown of context retrieval](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/).
+For real-time conversation, use a framework designed for that, like VAPI or a simple RAG pipeline. If you want to understand the long-term memory tradeoffs better, read my [breakdown of context retrieval](/articles/contextual-retrieval/).

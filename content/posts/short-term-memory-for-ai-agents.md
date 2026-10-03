@@ -5,14 +5,11 @@ description: Context windows are not memory. Here is what every production AI ag
   engineer needs to understand about token budgets, overflow handling, and how short-term
   and long-term memory actually work together.
 status: published
-work_note: "[Ninad Pathak](/contact/) creates developer content around an agent's context budget, showing what the next request receives after the application trims or summarizes a long conversation."
-tags:
-- ai
-- agents
-- memory
-- context-window
-- infrastructure
+work_note: '[Ninad Pathak](/contact/) creates developer content around an agent''s
+  context budget, showing what the next request receives after the application trims
+  or summarizes a long conversation.'
 title: 'Short-Term Memory for AI Agents: A Practical Guide'
+slug: short-term-agent-memory
 ---
 
 Context windows are not memory, and that is the first thing engineers get wrong when building AI agents. A context window is a fixed-size buffer.
@@ -184,7 +181,7 @@ You build episodic memory by summarizing past conversation sessions and storing 
 
 Semantic memory makes up the third layer, the external knowledge retrieval side: your RAG pipeline, your product documentation, your codebases. The agent retrieves relevant documents from this layer on each turn based on the current query.
 
-I have written about [how Anthropic's contextual retrieval changes RAG architecture](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/) and about [RAG evaluation metrics that actually matter](/articles/rag-evaluation-metrics-what-actually-matters/). Both posts are relevant here because the retrieval quality in your semantic memory layer directly affects how much you need to rely on raw context window capacity.
+I have written about [how Anthropic's contextual retrieval changes RAG architecture](/articles/contextual-retrieval/) and about [RAG evaluation metrics that actually matter](/articles/rag-evaluation/). Both posts are relevant here because the retrieval quality in your semantic memory layer directly affects how much you need to rely on raw context window capacity.
 
 Treating these three layers as separate systems is the mistake. They are one memory hierarchy.
 
@@ -289,9 +286,9 @@ The architectures that work in 2026 will look primitive by 2028. Build for repla
 ##Related Articles
 
 - [Context windows vs memory](/articles/context-windows-vs-memory/)
-- [AI memory management for LLMs](/articles/ai-memory-management-for-llms/)
-- [How memory works in HyperAgents](/articles/how-memory-works-in-hyperagents/)
-- [State of AI agent memory 2026](/articles/state-of-ai-agent-memory-2026/)
+- [AI memory management for LLMs](/articles/ai-memory-management/)
+- [How memory works in HyperAgents](/articles/hyperagents-memory/)
+- [State of AI agent memory 2026](/articles/agent-memory-2026/)
 
 ##Faq
 

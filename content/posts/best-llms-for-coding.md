@@ -5,13 +5,11 @@ description: Not all models are created equal for software development. Here is 
   benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic
   logic, and repository-scale refactoring as of March 2026.
 status: published
-work_note: "Searches for coding models hide different jobs, from completing a function to changing a repository. [Ninad Pathak](/contact/) develops technical content strategies that connect those jobs to relevant product comparisons."
-tags:
-- ai
-- llm
-- technical-writing
-- devtools
+work_note: Searches for coding models hide different jobs, from completing a function
+  to changing a repository. [Ninad Pathak](/contact/) develops technical content strategies
+  that connect those jobs to relevant product comparisons.
 title: 'The Best LLMs for Coding in 2026: An Engineering Review'
+slug: best-llms-for-coding
 ---
 
 Evaluating models for software engineering stopped being about snippet generation a while ago. Production coding now leans on long-range reasoning, autonomous tool interaction, and deep algorithmic logic all at once.
@@ -24,7 +22,7 @@ This review separates coding work into four engineering personas, from autonomou
 
 HumanEval and the other snippet-based benchmarks are obsolete. They measure whether a model can solve a self-contained puzzle like "reverse a linked list," which is maybe two percent of what I actually do in a day.
 
-Real engineering happens at the repository level. The [Claude Code and Gemini CLI comparison](/articles/agentic-cli-benchmarks/) is a walkthrough of an autonomous refactoring task, not reproducible benchmark evidence.
+Real engineering happens at the repository level. The [Claude Code and Gemini CLI comparison](/articles/claude-vs-gemini-cli/) is a walkthrough of an autonomous refactoring task, not reproducible benchmark evidence.
 
 SWE-bench Verified gives the most honest signal I have found today. To pass, a model has to resolve an actual GitHub issue end to end: read its way around an unfamiliar codebase, trace a bug back to the line that causes it, write a patch, and prove the patch holds by running the existing tests.
 
@@ -62,7 +60,7 @@ Think of it as the engineer who has read every file in the repo before the meeti
 
 ## For cost-sensitive production use: DeepSeek V4
 
-DeepSeek V4 rewrote the economics of high-performance AI coding. It lands close to Claude 4.6 on quality at a sliver of the per-token cost, built on a [Mixture-of-Experts architecture that is cheap to run but expensive to host](/articles/mixture-of-experts-explained/) and tuned hard for efficiency.
+DeepSeek V4 rewrote the economics of high-performance AI coding. It lands close to Claude 4.6 on quality at a sliver of the per-token cost, built on a [Mixture-of-Experts architecture that is cheap to run but expensive to host](/articles/mixture-of-experts/) and tuned hard for efficiency.
 
 My own use for DeepSeek is the high-volume, repetitive work: pointing it at every file in a pull request to flag obvious smells, or having it backfill unit tests across a module that someone shipped without any. It carries "Engram Memory" too, so after a few sessions it stops suggesting tabs in a repo that uses spaces and starts matching your naming conventions.
 
@@ -108,7 +106,7 @@ Are you running an agent unattended on multi-file pull requests? Reach for Claud
 Do you need to reason over an entire repository at once, or are you paying per token at high volume? That points to Gemini 3.1 Pro and DeepSeek V4 respectively.
 
 
-Benchmark totals can hide a reasoning failure that matters in code. The [lambda-calculus article](/articles/lambda-calculus-ai-reasoning-benchmark/) explains a composition-level test, but it does not provide a reproducible model comparison.
+Benchmark totals can hide a reasoning failure that matters in code. The [lambda-calculus article](/articles/lambda-calculus-ai/) explains a composition-level test, but it does not provide a reproducible model comparison.
 
 ## FAQ
 

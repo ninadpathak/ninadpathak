@@ -17,26 +17,25 @@ sections:
     blurb: "The craft of content that a technical reader will actually trust."
     posts:
       - technical-writing-for-engineers
-      - technical-writing-for-ai-products-the-new-rules
-      - the-case-for-shorter-technical-documentation
+      - writing-for-ai-products
+      - shorter-documentation
   - heading: "Specific formats"
     blurb: "How to handle the documents developers read most."
     posts:
-      - developer-onboarding-docs-what-works-what-doesnt
-      - how-to-write-a-technical-tutorial-that-actually-teaches
-      - how-to-write-a-changelog-developers-actually-read
-      - writing-release-notes-that-developers-trust
+      - developer-onboarding-docs
+      - writing-technical-tutorials
+      - writing-changelogs
+      - writing-release-notes
   - heading: "The business case"
     blurb: "Why docs move revenue, retention, and developer trust."
     posts:
-      - why-devtools-startups-lose-deals-over-bad-docs
-      - how-stripes-technical-blog-became-a-competitive-moat
-      - engineering-velocity-documentation
+      - devtools-documentation
+      - stripe-technical-blog
+      - documentation-velocity
   - heading: "Trust and craft"
     blurb: "What makes practitioner writing outrank marketing, and how I got here."
     posts:
-      - from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind
-
+      - engineer-to-writer
 faqs:
   - q: "What makes technical writing good for a developer audience?"
     a: "Accuracy first, then a clear path to a working result. Engineers trust writing that shows real commands, real output, and the parts that usually go wrong. Marketing language and vague benefits make them leave."

@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-04-03
 description: Write release notes that let developers assess upgrade risk, understand
   product impact, and migrate without surprises.
-slug: writing-release-notes-that-developers-trust
+slug: writing-release-notes
 status: published
-work_note: "For an SDK release, technical writer [Ninad Pathak](/contact/) turns changed behavior into upgrade instructions that identify who is affected and what customers need to change."
-tags:
-- technical-writing
-- developer-experience
-- releases
+work_note: For an SDK release, technical writer [Ninad Pathak](/contact/) turns changed
+  behavior into upgrade instructions that identify who is affected and what customers
+  need to change.
 takeaways:
 - Put compatibility, affected users, and required action on the first screen.
 - Separate product impact from launch language and implementation detail.
@@ -221,7 +219,7 @@ Trust comes from repeating this disclosure standard every time. One vague releas
 
 ## Worked example: write the notes for a breaking SDK release
 
-Take the same hypothetical `4.0.0` release used in the [changelog example](/articles/how-to-write-a-changelog-developers-actually-read/). The changelog records pagination, runtime, webhook retry, validation, and login changes in compact form.
+Take the same hypothetical `4.0.0` release used in the [changelog example](/articles/writing-changelogs/). The changelog records pagination, runtime, webhook retry, validation, and login changes in compact form.
 
 Release notes turn that record into an upgrade plan. They need more context than the changelog, especially around order, verification, and rollback.
 

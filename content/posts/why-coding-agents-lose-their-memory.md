@@ -3,14 +3,11 @@ category: ai-engineering
 date: '2026-05-06'
 description: The memory persistence patterns that actually work for AI coding assistants,
   and why most agents lose context between sessions.
-slug: why-coding-agents-lose-their-memory
+slug: coding-agent-memory
 status: published
-work_note: "A search about a forgetful coding agent can lead to a memory integration. [Ninad Pathak](/contact/) develops technical content strategies that answer the problem and explain a setup the reader can verify."
-tags:
-- ai-agents
-- coding
-- memory
-- claude-code
+work_note: A search about a forgetful coding agent can lead to a memory integration.
+  [Ninad Pathak](/contact/) develops technical content strategies that answer the
+  problem and explain a setup the reader can verify.
 title: 'Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI
   Coding Assistants'
 ---
@@ -62,7 +59,7 @@ The SQLite database, if it exists, holds what the agent chose to record. That un
 
 ## How Memory Serialization Actually Works
 
-The serialization layer is where persistence either happens or does not. I covered serialization patterns in depth in [my post on memory serialization between sessions](/articles/memory-serialization-between-sessions/), but the short version for coding agents follows.
+The serialization layer is where persistence either happens or does not. I covered serialization patterns in depth in [my post on memory serialization between sessions](/articles/memory-serialization/), but the short version for coding agents follows.
 
 When you run Claude Code with `--memory`, the agent gains the ability to write entries to a SQLite database. These entries are retrievable in future sessions and are scoped by project.
 
@@ -116,7 +113,7 @@ Just quietly wrong code, like reintroducing an import I had already told it to d
 
 Checkpointing is the fix. For long tasks, I write periodic summaries to `CLAUDE.md` or the SQLite database, usually after every handful of files: which modules are done, which are still pending, and any decision that would be expensive to rediscover.
 
-The [short-term memory patterns for AI agents](/articles/short-term-memory-for-ai-agents/) that I wrote about apply directly here. The context window is short-term memory.
+The [short-term memory patterns for AI agents](/articles/short-term-agent-memory/) that I wrote about apply directly here. The context window is short-term memory.
 
 What you serialize to disk is long-term memory. The agent needs both, and you need to manage the boundary explicitly.
 
@@ -149,7 +146,7 @@ A count of zero after a week of regular use means the agent is not writing anyth
 
 When it is the second case, you need to prompt more explicitly. A line like "remember that the auth service uses JWT with RS256" triggers a database write where a passing mention of the same fact will not.
 
-The [practical guide to AI memory management for LLMs](/articles/ai-memory-management-for-llms/) covers the eviction and retention decisions behind what gets written and what gets dropped, which helps explain why some entries appear and others do not.
+The [practical guide to AI memory management for LLMs](/articles/ai-memory-management/) covers the eviction and retention decisions behind what gets written and what gets dropped, which helps explain why some entries appear and others do not.
 
 Reach for `CLAUDE.md` for what you know the agent needs on every session: architecture decisions, coding standards, team conventions, environment setup, the fact that tests run under `make test` and not `pytest` directly. These do not change often and the agent reads them automatically.
 
@@ -159,7 +156,7 @@ The SQLite database is for cross-session tracking. I use it for migration status
 
 A customer support agent might track user preferences here. A coding agent tracks technical debt and architectural findings.
 
-Store full conversation logs separately if you need them. The [layered memory model for AI systems](/articles/ai-memory-management-for-llms/) makes the case for separating structured state from raw log data.
+Store full conversation logs separately if you need them. The [layered memory model for AI systems](/articles/ai-memory-management/) makes the case for separating structured state from raw log data.
 
 The log is append-only and grows unbounded. The structured state is what the agent uses to make decisions.
 
@@ -171,7 +168,7 @@ Across weeks or months on the same codebase, the memory architecture matters mor
 
 A model that can access relevant context from six months ago, like the reason a particular table was denormalized, will make better decisions about a large refactoring than a model that starts fresh every session and proposes undoing that choice.
 
-The [episodic, semantic, and working memory map](/articles/episodic-vs-semantic-vs-working-memory-agents/) I wrote covers this in detail. Episodic memory is what happened in specific sessions.
+The [episodic, semantic, and working memory map](/articles/agent-memory-types/) I wrote covers this in detail. Episodic memory is what happened in specific sessions.
 
 Semantic memory is what the agent knows about the codebase as a whole. Working memory is what is active right now.
 
@@ -181,7 +178,7 @@ All of which means treating memory management as part of your workflow, not an o
 
 During the task, serialize significant findings. After the task, verify that what you want remembered was actually written to a persistent layer.
 
-For the broader context, [state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/) covers the full landscape of memory approaches across different agent systems. The patterns are similar even when the implementations differ.
+For the broader context, [state of AI agent memory in 2026](/articles/agent-memory-2026/) covers the full landscape of memory approaches across different agent systems. The patterns are similar even when the implementations differ.
 
 Agents that ship with real memory discipline are still the exception. Coding agents mostly give you the tools and expect you to know how to use them.
 

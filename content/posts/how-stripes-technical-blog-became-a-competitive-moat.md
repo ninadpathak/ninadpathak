@@ -4,13 +4,12 @@ date: 2026-04-07
 description: I think Stripe’s technical blog compounds into a moat because it teaches,
   documents, and shapes developer trust long before a sales conversation starts.
 status: published
-work_note: "[Ninad Pathak](/contact/) develops technical content strategies around a company's engineering decisions, turning domain explanations into articles that connect potential customers to a supported implementation."
-tags:
-- technical-writing
-- developer-marketing
-- developer-experience
+work_note: '[Ninad Pathak](/contact/) develops technical content strategies around
+  a company''s engineering decisions, turning domain explanations into articles that
+  connect potential customers to a supported implementation.'
 title: How Stripe's Technical Blog Became a Competitive Moat
 updated: '2026-08-17'
+slug: stripe-technical-blog
 ---
 
 Stripe built a strong technical blog by creating an acquisition surface, a trust layer, and a product education system. These assets keep paying back years after publication.
@@ -47,7 +46,7 @@ Look at the shape of Stripe’s content surface:
 
 Each surface serves a different stage of developer trust. The engineering blog proves depth.
 
-The dev blog helps builders ship. [The docs close the loop during implementation](/articles/why-devtools-startups-lose-deals-over-bad-docs/).
+The dev blog helps builders ship. [The docs close the loop during implementation](/articles/devtools-documentation/).
 
 The changelog signals stability and respect for existing integrations.
 
@@ -90,7 +89,7 @@ Stripe’s public changelog strengthens the same loop. Developers can inspect da
 
 A team pinning an API version can see what changed between releases instead of discovering it during an incident. That kind of changelog reduces the fear that usually comes with depending on a fast-moving API vendor.
 
-I argued in [my changelog post](/articles/how-to-write-a-changelog-developers-actually-read/) that changelogs are a trust instrument. Stripe proves the point at scale.
+I argued in [my changelog post](/articles/writing-changelogs/) that changelogs are a trust instrument. Stripe proves the point at scale.
 
 ## The archive itself becomes distribution
 
@@ -175,7 +174,7 @@ Separating content from product truth causes more damage. A content team can mee
 
 Stripe's strongest posts work because their authors can explain state transitions, migrations, and failure modes from inside the problem. Editorial polish cannot recover details that the publishing process never collected.
 
-That separation also costs the team building the product. The analysis of [documentation and engineering velocity](/articles/engineering-velocity-documentation/) explains what maintained knowledge changes inside engineering work.
+That separation also costs the team building the product. The analysis of [documentation and engineering velocity](/articles/documentation-velocity/) explains what maintained knowledge changes inside engineering work.
 
 Long engineering posts go up without a docs system worth linking to, so a reader who gets excited has nowhere to land. Architecture stories that impress peers at conferences do little for the buyer or the implementer trying to ship next week.
 
@@ -199,7 +198,7 @@ That combination is part of the writing work I do for technical companies. Stron
 
 It should change how the market understands the problem and make the product feel easier to choose. [My work page](/work/) is built around that exact outcome.
 
-AI products change what this publishing system must explain because outputs can vary and evidence can go stale between runs. The guide to [technical writing for AI products](/articles/technical-writing-for-ai-products-the-new-rules/) covers those product-specific requirements.
+AI products change what this publishing system must explain because outputs can vary and evidence can go stale between runs. The guide to [technical writing for AI products](/articles/writing-for-ai-products/) covers those product-specific requirements.
 
 ## FAQ
 

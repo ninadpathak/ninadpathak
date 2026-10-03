@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-08-06
 description: Compare internal and external documentation, decide where each page belongs,
   and split shared subjects without exposing private operating context.
-slug: internal-vs-external-documentation
+slug: internal-vs-external-docs
 status: published
-work_note: "Customer recovery instructions and private incident records have different readers. Technical writer [Ninad Pathak](/contact/) separates those documents while keeping the description of supported product behavior consistent."
-tags:
-- documentation
-- technical-writing
-- developer-experience
+work_note: Customer recovery instructions and private incident records have different
+  readers. Technical writer [Ninad Pathak](/contact/) separates those documents while
+  keeping the description of supported product behavior consistent.
 takeaways:
 - Choose internal or external documentation by the reader's task, not by the file's
   technical depth.
@@ -127,4 +125,4 @@ GitLab's [documentation style guide](https://docs.gitlab.com/development/documen
 
 Start with the external task. If the answer also requires private operating context, create paired documents instead of widening one page until it serves neither reader well.
 
-Use the [types of technical documentation](/articles/types-of-technical-documentation/) to choose the artifact each reader needs. If duplicate pages and navigation drift already hide the canonical answer, [organize the documentation site](/articles/how-to-organize-a-documentation-site/) before adding more pages.
+Use the [types of technical documentation](/articles/documentation-types/) to choose the artifact each reader needs. If duplicate pages and navigation drift already hide the canonical answer, [organize the documentation site](/articles/documentation-structure/) before adding more pages.

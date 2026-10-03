@@ -4,15 +4,12 @@ date: 2026-04-19
 description: Agent memory spans working state, episodic history, retrieval, and consistency
   controls. The right architecture depends on the agent's task and risk.
 status: published
-work_note: "For memory products, [Ninad Pathak](/portfolio/) writes technical comparisons that answer questions about state ownership and portability, including how a developer would move stored records elsewhere."
-tags:
-- ai
-- agents
-- memory
-- infrastructure
-- 2026
+work_note: For memory products, [Ninad Pathak](/portfolio/) writes technical comparisons
+  that answer questions about state ownership and portability, including how a developer
+  would move stored records elsewhere.
 title: State of AI Agent Memory in 2026
 updated: '2026-08-17'
+slug: agent-memory-2026
 ---
 
 An agent can act on stale or contradictory state without realizing that its memory is wrong. The architecture therefore needs provenance, update rules, and evaluation, not only storage.
@@ -57,7 +54,7 @@ Retrieval sits above storage, and it is where the fragmentation crisis is worst 
 
 Hybrid search combining dense vectors with BM25 lexical matching is now table stakes for anything where recall quality matters.
 
-I wrote about hybrid search for production RAG systems in my piece on [BM25 and vector search combinations](/articles/hybrid-search-bm25-vector-search/), and the same principles apply directly to agent memory retrieval. The difference is that agent memory retrieval needs to be faster and more contextual, because it happens inline with reasoning, not as a pre-retrieval step.
+I wrote about hybrid search for production RAG systems in my piece on [BM25 and vector search combinations](/articles/hybrid-search/), and the same principles apply directly to agent memory retrieval. The difference is that agent memory retrieval needs to be faster and more contextual, because it happens inline with reasoning, not as a pre-retrieval step.
 
 Ranking and re-ranking come next, fed by the retrieval layer, and here MemGPT's architecture separates itself from simpler approaches. MemGPT uses a tiered memory architecture that explicitly manages what stays in the context window and what gets paged out.
 
@@ -159,7 +156,7 @@ Fragmentation like this carries real costs. Switching costs lock teams into thei
 
 Evaluation becomes impossible across frameworks because each system measures memory quality differently. Research findings do not transfer, because a technique that works in MemGPT's tiered memory model may not apply to Mem0's flat storage.
 
-I wrote about a similar fragmentation problem in [developer onboarding documentation](/articles/developer-onboarding-docs-what-works-what-doesnt/), and the pattern is the same. When a problem space is new and fast-moving, everyone builds their own solution.
+I wrote about a similar fragmentation problem in [developer onboarding documentation](/articles/developer-onboarding-docs/), and the pattern is the same. When a problem space is new and fast-moving, everyone builds their own solution.
 
 When the space matures, standards emerge. The memory space is not mature yet.
 
@@ -169,7 +166,7 @@ A monolithic system may offer a shorter trace. Framework middleware adds more pl
 
 ### MCP standardizes transport, not memory meaning
 
-The Model Context Protocol (MCP) was never meant as a memory protocol, yet it has become one of the most important pieces of infrastructure for agent memory. My detailed breakdown of [how MCP works architecturally](/articles/model-context-protocol-explained/) is worth reading before you design any memory system on top of it.
+The Model Context Protocol (MCP) was never meant as a memory protocol, yet it has become one of the most important pieces of infrastructure for agent memory. My detailed breakdown of [how MCP works architecturally](/articles/model-context-protocol/) is worth reading before you design any memory system on top of it.
 
 What makes it matter is the standardized interface it provides for tools and data sources. Memory systems can expose themselves as MCP servers, which means any MCP-compliant agent can connect to any MCP-compliant memory system without custom code.
 
@@ -196,7 +193,7 @@ RAG evaluation has established benchmarks. Retrieval quality has recall and MRR.
 
 Answer quality has faithfulness and relevance. Off-the-shelf evaluation frameworks work well enough for most teams.
 
-I covered [RAG evaluation metrics in depth](/articles/rag-evaluation-metrics-what-actually-matters/) and those principles apply, though they only cover part of the agent memory problem.
+I covered [RAG evaluation metrics in depth](/articles/rag-evaluation/) and those principles apply, though they only cover part of the agent memory problem.
 
 Agent memory evaluation has to measure something different: does the agent make better decisions because of its memory? Answering that means evaluating downstream outcomes rather than retrieval quality alone.
 
@@ -230,9 +227,9 @@ The stack becomes easier to judge inside one workload. A support workflow forces
 
 This cluster of articles covers the full AI memory stack. [Context windows vs memory](/articles/context-windows-vs-memory/) explains the boundary and includes long-context evaluation with Lost in the Middle and RULER.
 
-For implementation patterns, see [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).
+For implementation patterns, see [AI memory management for LLMs](/articles/ai-memory-management/).
 
-For short-term memory specifically, see [short-term memory for AI agents](/articles/short-term-memory-for-ai-agents/).
+For short-term memory specifically, see [short-term memory for AI agents](/articles/short-term-agent-memory/).
 
 ## FAQ
 

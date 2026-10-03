@@ -5,11 +5,9 @@ description: The agent loop is not one thing. It is four distinct phases that ru
   in sequence, and understanding each one is how you debug what breaks.
 slug: agent-loop-anatomy
 status: published
-work_note: "[Ninad Pathak](/portfolio/) creates developer content that follows an agent SDK through execution, showing how a returned tool result informs the next action and which condition stops the run."
-tags:
-- ai agents
-- agent architecture
-- loop design
+work_note: '[Ninad Pathak](/portfolio/) creates developer content that follows an
+  agent SDK through execution, showing how a returned tool result informs the next
+  action and which condition stops the run.'
 title: 'The Anatomy of an Agent Loop: Perceive, Think, Act, Remember'
 ---
 
@@ -31,7 +29,7 @@ Because the agent needs a cycle it can repeat, the loop exists at all. Each cycl
 
 The loop terminates when the task is complete or when a stop condition is hit.
 
-How different agent architectures handle this loop is something I covered in my post on [the taxonomy of AI agents](/articles/the-taxonomy-of-ai-agents/). Reflex agents skip the think phase almost entirely.
+How different agent architectures handle this loop is something I covered in my post on [the taxonomy of AI agents](/articles/ai-agent-taxonomy/). Reflex agents skip the think phase almost entirely.
 
 Deliberative agents spend significant compute in think before acting. That structural difference matters more than most framework documentation suggests.
 
@@ -70,7 +68,7 @@ That opacity is harmless on the happy path. It becomes a serious debugging probl
 
 Token budget management happens here too. The think phase consumes tokens.
 
-A deliberative agent that reasons extensively before acting will spend more per step than a reflex agent that acts on pattern matching. I covered token budget strategies in [LLM token budgets and cost control](/articles/llm-token-budgets-cost-control/).
+A deliberative agent that reasons extensively before acting will spend more per step than a reflex agent that acts on pattern matching. I covered token budget strategies in [LLM token budgets and cost control](/articles/llm-token-budgets/).
 
 The think phase is usually where that budget gets eaten.
 
@@ -86,7 +84,7 @@ The agent receives that result and feeds it back into the loop as a perceived in
 
 Tool schema design determines whether the act phase succeeds or fails. A poorly designed schema produces malformed arguments that the tool rejects, like a date field the model fills with "next Tuesday" because nothing told it to send an ISO timestamp.
 
-A schema with clear types and validation catches that argument error before the tool is even called. [Tool schema design for reliability](/articles/structured-outputs-llms-json-mode-function-calling/) goes deep on what makes schemas actually work in production.
+A schema with clear types and validation catches that argument error before the tool is even called. [Tool schema design for reliability](/articles/llm-structured-outputs/) goes deep on what makes schemas actually work in production.
 
 There is an implicit cost to the act phase too. Every tool call has latency.
 
@@ -104,7 +102,7 @@ It breaks for long ones.
 
 A fixed-capacity context window is the root of the problem. Remembering everything means eventually forgetting something.
 
-[AI memory management for LLMs](/articles/ai-memory-management-for-llms/) covers the layered approach that actually solves this. Short-term working memory lives in the context window.
+[AI memory management for LLMs](/articles/ai-memory-management/) covers the layered approach that actually solves this. Short-term working memory lives in the context window.
 
 Long-term facts get written to external storage and retrieved when relevant.
 
@@ -136,7 +134,7 @@ The next iteration proceeds as if the tool call never happened. The cause is usu
 
 Structured logging of every tool call and its result is the fix.
 
-The [production AI agent errors](/articles/production-ai-agent-errors/) post has a fuller taxonomy of what goes wrong. The loop phases are the right frame for understanding those errors because each phase has its own failure modes.
+The [production AI agent errors](/articles/agent-error-handling/) post has a fuller taxonomy of what goes wrong. The loop phases are the right frame for understanding those errors because each phase has its own failure modes.
 
 ## The loop is a design tool
 

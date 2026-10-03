@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-03-30
 description: Write a changelog that helps developers assess an upgrade, find breaking
   changes, and understand what each release means for their code.
-slug: how-to-write-a-changelog-developers-actually-read
+slug: writing-changelogs
 status: published
-work_note: "Technical writer [Ninad Pathak](/contact/) turns merged changes into changelogs that name the affected behavior and link developers to the migration instructions required for an upgrade."
-tags:
-- technical-writing
-- developer-experience
-- devtools
+work_note: Technical writer [Ninad Pathak](/contact/) turns merged changes into changelogs
+  that name the affected behavior and link developers to the migration instructions
+  required for an upgrade.
 takeaways:
 - Lead with upgrade impact, not an undifferentiated list of commits.
 - Group releases by version, date, and consistent change categories.
@@ -259,7 +257,7 @@ Suppose the release later proves that webhook retries can happen over 20 minutes
 
 Readers need the canonical page to become accurate, but teams also need an audit trail when the published behavior changed. A repository commit provides that trail, and the next changelog entry makes the correction visible to people who do not watch the file.
 
-A changelog records the durable sequence, while [release notes explain one release decision](/articles/writing-release-notes-that-developers-trust/) in enough depth for a developer to act. When several supported versions remain live, preserve the routes to their instructions.
+A changelog records the durable sequence, while [release notes explain one release decision](/articles/writing-release-notes/) in enough depth for a developer to act. When several supported versions remain live, preserve the routes to their instructions.
 
 ## Changelog FAQ
 

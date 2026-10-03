@@ -4,16 +4,12 @@ date: 2026-04-19
 description: A practical guide to understanding how Claude Code retains context across
   sessions, uses project files, and manages long-term memory for coding tasks.
 status: published
-work_note: "[Ninad Pathak](/contact/) is a technical writer who has worked with Mem0 and creates developer guides for memory integrations, explaining how persistent state connects to a coding workflow."
-tags:
-- ai
-- claude
-- agents
-- memory
-- anthropic
-- coding
+work_note: '[Ninad Pathak](/contact/) is a technical writer who has worked with Mem0
+  and creates developer guides for memory integrations, explaining how persistent
+  state connects to a coding workflow.'
 title: How Memory Works in Claude Code
 updated: '2026-08-17'
+slug: claude-code-memory
 ---
 
 Claude Code carries instructions across sessions through `CLAUDE.md` files and auto memory. Conversation context itself remains session-bound.
@@ -214,11 +210,11 @@ Reach for command-line context when the information is a one-off that does not n
 
 Use `/memory` to inspect the files and auto memory loaded into the current session. Keep the startup content concise enough that the important instructions remain visible.
 
-The same [context window optimization](/articles/llm-context-windows-explained/) advice I give for LLM deployment applies here: quality over quantity.
+The same [context window optimization](/articles/llm-context-windows/) advice I give for LLM deployment applies here: quality over quantity.
 
 For larger teams, fold a `CLAUDE.md` convention into code review. Whoever changes the architecture updates `CLAUDE.md` in the same PR, which keeps memory current and spreads ownership across the people who actually make the changes.
 
-Teams building a [multi-agent system](/articles/multi-agent-vs-single-agent-tradeoffs/) need these conventions even more, since several agents read and write the shared context at once and one stale line propagates to all of them.
+Teams building a [multi-agent system](/articles/multi-agent-vs-single-agent/) need these conventions even more, since several agents read and write the shared context at once and one stale line propagates to all of them.
 
 ##Faq
 
@@ -232,7 +228,7 @@ A user-level `~/.claude/CLAUDE.md` can provide instructions across projects. Pro
 
 Use `/memory` to inspect and edit the active memory sources when an instruction is stale or conflicting.
 
-If you are debugging memory issues in a production AI agent, also check my post on [debugging AI agent errors](/articles/production-ai-agent-errors/) which covers similar diagnostic patterns.
+If you are debugging memory issues in a production AI agent, also check my post on [debugging AI agent errors](/articles/agent-error-handling/) which covers similar diagnostic patterns.
 
 **Does Claude Code learn from my codebase automatically?**
 

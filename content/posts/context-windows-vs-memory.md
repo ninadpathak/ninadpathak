@@ -4,15 +4,12 @@ date: '2026-04-19'
 description: Context is a per-request reasoning budget. Memory is persistent state
   retrieved into a later request. Long input capacity does not make them interchangeable.
 status: published
-work_note: "Developer content for memory APIs needs to explain what survives a session and how stale state gets replaced. [Ninad Pathak](/portfolio/) writes technical articles and documentation that make those integration decisions clear."
-tags:
-- ai
-- llm
-- memory
-- context-window
-- infrastructure
+work_note: Developer content for memory APIs needs to explain what survives a session
+  and how stale state gets replaced. [Ninad Pathak](/portfolio/) writes technical
+  articles and documentation that make those integration decisions clear.
 title: 'Context Windows vs Memory: Why They Are Not the Same Thing'
 updated: '2026-08-18'
+slug: context-windows-vs-memory
 ---
 
 A model can accept a long prompt and still fail to use the fact that answers the question. It can also answer perfectly during one request and know nothing about that exchange when the next request begins.
@@ -56,7 +53,7 @@ Persistence alone is not enough. The application still needs policies for what t
 
 A chat interface often resends prior turns on every request. That can provide continuity, but the continuity comes from replaying stored history into the current context.
 
-Once the history grows beyond the available budget, the application must select, summarize, or retrieve from it. [Contextual compression for agent memory](/articles/contextual-compression-for-agent-memory/) covers that selection problem without treating every old token as equally useful.
+Once the history grows beyond the available budget, the application must select, summarize, or retrieve from it. [Contextual compression for agent memory](/articles/memory-compression/) covers that selection problem without treating every old token as equally useful.
 
 ### Persistent state needs more than similarity search
 
@@ -110,7 +107,7 @@ That final write must be deliberate. Saving every generated sentence creates a l
 
 Memory policy decides which observations qualify for storage, how versions and conflicts are represented, and when old state expires. Retrieval policy then selects candidate memories using filters, recency, similarity, rules, or other signals appropriate to the job.
 
-[AI memory management for LLMs](/articles/ai-memory-management-for-llms/) develops those inclusion, retrieval, and lifecycle decisions across the wider memory stack. The context window receives only the subset selected for the present request.
+[AI memory management for LLMs](/articles/ai-memory-management/) develops those inclusion, retrieval, and lifecycle decisions across the wider memory stack. The context window receives only the subset selected for the present request.
 
 ### The context layer handles the current reasoning task
 
@@ -148,7 +145,7 @@ Score whether the answer uses the required evidence, not merely whether the requ
 
 Evaluate writes, retrieval, conflicts, updates, deletion, and isolation between entities. A memory test should catch stale facts, missing state, cross-user leakage, and irrelevant material that consumes context without helping the answer.
 
-Framework-specific storage details differ, but the boundary remains the same. [Memory in Claude Code](/articles/how-memory-works-in-claude-code/) and [memory in HyperAgents](/articles/how-memory-works-in-hyperagents/) show how separate systems expose persistent state to later work.
+Framework-specific storage details differ, but the boundary remains the same. [Memory in Claude Code](/articles/claude-code-memory/) and [memory in HyperAgents](/articles/hyperagents-memory/) show how separate systems expose persistent state to later work.
 
 ## FAQ
 

@@ -3,14 +3,11 @@ category: ai-engineering
 date: '2026-05-11'
 description: How to choose between shared and isolated memory architectures for multi-agent
   systems, including their coordination and debugging trade-offs.
-slug: shared-vs-isolated-memory-multi-agent
+slug: shared-vs-isolated-memory
 status: published
-work_note: "Who can overwrite a shared record? Developer content creator [Ninad Pathak](/portfolio/) explains multi-agent frameworks through examples that make write ownership visible before readers coordinate their own agents."
-tags:
-- ai-agents
-- multi-agent
-- agent-memory
-- agent-architecture
+work_note: Who can overwrite a shared record? Developer content creator [Ninad Pathak](/portfolio/)
+  explains multi-agent frameworks through examples that make write ownership visible
+  before readers coordinate their own agents.
 title: Shared Memory vs Isolated Memory in Multi-Agent Workflows
 updated: '2026-08-17'
 ---
@@ -52,7 +49,7 @@ Explicit handoffs make the pipeline easier to replay because each stage has a bo
 
 Reproducing it gets harder with shared memory, where the memory state at each step depends on everything that ran before it.
 
-The [multi-agent vs single-agent tradeoffs](/articles/multi-agent-vs-single-agent-tradeoffs/) article covers when multi-agent pipelines make sense in general. The short version is to use them when the task decomposes cleanly and each step requires a different model or tool set.
+The [multi-agent vs single-agent tradeoffs](/articles/multi-agent-vs-single-agent/) article covers when multi-agent pipelines make sense in general. The short version is to use them when the task decomposes cleanly and each step requires a different model or tool set.
 
 If the extractor and validator are separate services with independent release cadences, isolated handoffs reduce coupling.
 
@@ -70,7 +67,7 @@ A parallel research workflow is a useful counterexample: several agents can expl
 
 The trade-off agent needed to see that the failure-case agent had already ruled out an approach so it could stop scoring that approach and spend its budget elsewhere. With isolated memory, each agent would have finished its research blind to what the others discovered, and the synthesis step would have stitched together three answers that never accounted for one another.
 
-The [memory hierarchy in AI systems](/articles/ai-memory-management-for-llms/) article covers how to organize memory layers in agentic systems, and whatever you choose for multi-agent memory should fit within that broader hierarchy. Shared memory in a multi-agent context is usually a working memory layer that all agents can read and write.
+The [memory hierarchy in AI systems](/articles/ai-memory-management/) article covers how to organize memory layers in agentic systems, and whatever you choose for multi-agent memory should fit within that broader hierarchy. Shared memory in a multi-agent context is usually a working memory layer that all agents can read and write.
 
 There is also the "late-arriving information" problem, which shared memory handles better. Suppose the summary agent needs a caveat the extractor discovered but that never made it into the artifact handed to the validator.
 
@@ -106,9 +103,9 @@ Once an agent reaches a conclusion it wants to share, it hands that conclusion t
 
 Routing every write through the orchestrator works like a newsroom with a single copy desk: any reporter can pull from the wire, but nothing reaches the wire until one editor signs off, so no agent ever reads another's unedited draft. That gives you the coherence benefits of shared memory without the cross-contamination problem.
 
-The serialization layer underneath it carries real weight, and the patterns I cover in [memory serialization between sessions](/articles/memory-serialization-between-sessions/) apply directly to how you persist and version the shared confirmed-facts store.
+The serialization layer underneath it carries real weight, and the patterns I cover in [memory serialization between sessions](/articles/memory-serialization/) apply directly to how you persist and version the shared confirmed-facts store.
 
-The [production-ai-agent-errors](/articles/production-ai-agent-errors/) article has more on failure patterns in multi-agent setups. Cross-contamination is a predictable risk when agents can overwrite shared state without provenance or version checks.
+The [production-ai-agent-errors](/articles/agent-error-handling/) article has more on failure patterns in multi-agent setups. Cross-contamination is a predictable risk when agents can overwrite shared state without provenance or version checks.
 
 ## The decision framework I use
 

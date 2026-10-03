@@ -3,14 +3,11 @@ category: ai-engineering
 date: '2026-05-12'
 description: Fine-tuning and RAG solve different parts of the agent memory problem.
   Here is how to decide which one you actually need.
-slug: fine-tuning-vs-rag-for-agent-memory
+slug: fine-tuning-vs-rag
 status: published
-work_note: "[Ninad Pathak](/portfolio/)'s technical content compares fine-tuning and retrieval through update requirements: what needs retraining, what can be retrieved, and what changes between requests."
-tags:
-- ai-agents
-- rag
-- fine-tuning
-- agent-memory
+work_note: '[Ninad Pathak](/portfolio/)''s technical content compares fine-tuning
+  and retrieval through update requirements: what needs retraining, what can be retrieved,
+  and what changes between requests.'
 title: 'Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense'
 updated: '2026-08-17'
 ---
@@ -29,7 +26,7 @@ That reference card stays in your hand, and you can swap it out between one ques
 
 For agent memory, this distinction matters more than in most applications. An agent operating in memory needs to retain three things simultaneously: factual knowledge about the domain, procedural knowledge about how to handle tasks, and episodic knowledge about what happened in specific sessions.
 
-Each of these has different update patterns and different failure costs. The [practical map of episodic, semantic, and working memory in agents](/articles/episodic-vs-semantic-vs-working-memory-agents/) is useful background here, because the layer boundaries determine which memory problems are solvable with RAG and which require changing the model's weights.
+Each of these has different update patterns and different failure costs. The [practical map of episodic, semantic, and working memory in agents](/articles/agent-memory-types/) is useful background here, because the layer boundaries determine which memory problems are solvable with RAG and which require changing the model's weights.
 
 Factual knowledge about your product changes constantly: a pricing update, a new API endpoint, a renamed plan tier. Fine-tuning on those facts means retraining every time one of them moves.
 
@@ -86,7 +83,7 @@ There is a subtler cost. Fine-tuning on a narrow dataset risks catastrophic forg
 
 ## The Memory Hierarchy Changes the Trade-Off
 
-Looking at agent memory through the [memory hierarchy lens](/articles/ai-memory-management-for-llms/), the fine-tuning versus RAG decision maps cleanly onto different layers.
+Looking at agent memory through the [memory hierarchy lens](/articles/ai-memory-management/), the fine-tuning versus RAG decision maps cleanly onto different layers.
 
 Working memory is episodic and short-lived, and it is never a fine-tuning problem. No one retrains a model on what a user said two turns ago.
 
@@ -144,7 +141,7 @@ If retrieval latency breaks the service-level objective, test a different retrie
 
 Compare retrieval time with the actual tool-call and inference traces from the target workflow.
 
-For most agent memory use cases in 2026, the honest answer is RAG as the foundation, with fine-tuning reserved for the reasoning patterns that refuse to stick through prompt engineering. [Anthropic's contextual retrieval](/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/) is worth reviewing before you finalize the architecture, because contextual embeddings lift retrieval accuracy enough to change whether you need fine-tuning for some reasoning tasks at all.
+For most agent memory use cases in 2026, the honest answer is RAG as the foundation, with fine-tuning reserved for the reasoning patterns that refuse to stick through prompt engineering. [Anthropic's contextual retrieval](/articles/contextual-retrieval/) is worth reviewing before you finalize the architecture, because contextual embeddings lift retrieval accuracy enough to change whether you need fine-tuning for some reasoning tasks at all.
 
 Build the retrieval pipeline first, then add fine-tuning once you have real behavioral failures that retrieval cannot reach.
 

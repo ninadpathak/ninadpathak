@@ -3,22 +3,19 @@ category: ai-engineering
 date: '2026-04-22'
 description: I have spent two years watching agents fail in production. Here is what
   I keep seeing and what the field is starting to do about it.
-slug: why-ai-agents-keep-failing-in-production
+slug: ai-agent-failures
 status: published
-work_note: "A failed tool call belongs in an agent framework's tutorial, alongside the successful run. [Ninad Pathak](/contact/) writes technical documentation that explains retry limits and the recovery steps available to the developer."
-tags:
-- ai agents
-- production
-- reliability
-title: Why AI Agents Keep Failing in Production and What the Field Is Doing About
-  It
+work_note: A failed tool call belongs in an agent framework's tutorial, alongside
+  the successful run. [Ninad Pathak](/contact/) writes technical documentation that
+  explains retry limits and the recovery steps available to the developer.
+title: Why AI Agents Fail in Production
 ---
 
 Across two years of debugging production AI agents, I keep landing on the same handful of failures. Different companies, different frameworks, same root causes.
 
 The field is starting to converge on solutions, and most teams are still catching up.
 
-These failures cluster into four categories. I wrote about the specific error patterns in my post on [production AI agent errors](/articles/production-ai-agent-errors/) if you want the taxonomy.
+These failures cluster into four categories. I wrote about the specific error patterns in my post on [production AI agent errors](/articles/agent-error-handling/) if you want the taxonomy.
 
 The piece you are reading now is about why the failures happen in the first place and what actually helps.
 
@@ -34,7 +31,7 @@ I once watched a code-refactor agent start out renaming a function, get three fi
 
 The model decides when it is done, and it can be wrong about that.
 
-Reflex agents and deliberative ones fail differently, a split the [taxonomy of AI agents I wrote](/articles/the-taxonomy-of-ai-agents/) covers in structural detail. A reflex agent that misfires usually does one wrong thing and stops.
+Reflex agents and deliberative ones fail differently, a split the [taxonomy of AI agents I wrote](/articles/ai-agent-taxonomy/) covers in structural detail. A reflex agent that misfires usually does one wrong thing and stops.
 
 A deliberative one builds a wrong plan and then executes ten coherent steps toward the wrong outcome. You need to know which category you are building before you can predict how it will break.
 
@@ -48,7 +45,7 @@ A customer support agent I watched handled the first 40 turns of a conversation 
 
 It was not lying. It literally could no longer see its own earlier replies.
 
-[Short-term memory for AI agents](/articles/short-term-memory-for-ai-agents/) covers the mechanics of how this happens. Bigger context windows look like the obvious answer and they are the wrong one, because doubling the window roughly doubles the per-call inference bill on every turn, which gets brutal once you run thousands of concurrent sessions.
+[Short-term memory for AI agents](/articles/short-term-agent-memory/) covers the mechanics of how this happens. Bigger context windows look like the obvious answer and they are the wrong one, because doubling the window roughly doubles the per-call inference bill on every turn, which gets brutal once you run thousands of concurrent sessions.
 
 What works is explicit memory management with eviction policies, the kind of thing most frameworks implement badly or skip entirely.
 
@@ -58,7 +55,7 @@ Splitting a task across multiple agents does not hand you one agent's reliabilit
 
 Five agents each running at 90% reliability multiply out to 59% overall. That is not a production system.
 
-Teams scale to multi-agent architectures because they want parallelism or role specialization, and then they forget to budget for the coordination overhead. When the tradeoffs actually pencil out is exactly what [Multi-agent versus single-agent tradeoffs](/articles/multi-agent-vs-single-agent-tradeoffs/) works through.
+Teams scale to multi-agent architectures because they want parallelism or role specialization, and then they forget to budget for the coordination overhead. When the tradeoffs actually pencil out is exactly what [Multi-agent versus single-agent tradeoffs](/articles/multi-agent-vs-single-agent/) works through.
 
 Three failure modes dominate the multi-agent systems I see. Context pollution, where one agent's scratch work leaks into another's prompt and muddies its reasoning.
 
@@ -78,7 +75,7 @@ Prompt injection sits in a nastier class of tool failure. An adversarial input r
 
 I have watched this happen for real on an agent that summarized inbound support tickets, where one ticket body contained instructions aimed squarely at the model rather than the human.
 
-The [Model Context Protocol](/articles/model-context-protocol-explained/) was designed partly to fence off this class of failure, though protocol compliance still varies a lot across implementations.
+The [Model Context Protocol](/articles/model-context-protocol/) was designed partly to fence off this class of failure, though protocol compliance still varies a lot across implementations.
 
 <div class="visual-wrapper">
   <div class="visual-title">WHERE THE LOOP BREAKS</div>
@@ -91,7 +88,7 @@ The [Model Context Protocol](/articles/model-context-protocol-explained/) was de
 
 Solutions are emerging, just unevenly distributed across the teams that need them.
 
-Circuit breakers for agents are starting to show up. Borrowed straight from the resilience pattern that trips a service offline when downstream calls keep failing, [agent circuit breakers](/articles/production-ai-agent-errors/) halt the loop once the error rate crosses a threshold, so a stuck retry loop cannot keep firing actions for an hour.
+Circuit breakers for agents are starting to show up. Borrowed straight from the resilience pattern that trips a service offline when downstream calls keep failing, [agent circuit breakers](/articles/agent-error-handling/) halt the loop once the error rate crosses a threshold, so a stuck retry loop cannot keep firing actions for an hour.
 
 Few production teams have these yet, and the pattern is simple enough to write yourself in an afternoon.
 
@@ -101,11 +98,11 @@ Run an agent without that and you are debugging a crash with no stack trace.
 
 Context management is finally getting serious attention. Teams are walking away from naive accumulation toward structured memory hierarchies with explicit eviction, deciding on purpose what stays in the window and what gets summarized or dropped.
 
-Where those patterns are converging is the subject of [the state of AI agent memory in 2026](/articles/state-of-ai-agent-memory-2026/).
+Where those patterns are converging is the subject of [the state of AI agent memory in 2026](/articles/agent-memory-2026/).
 
 ## What you should do today
 
-Running agents in production without having read my post on [production AI agent errors](/articles/production-ai-agent-errors/)? Start there.
+Running agents in production without having read my post on [production AI agent errors](/articles/agent-error-handling/)? Start there.
 
 A concrete error taxonomy beats general advice every time.
 

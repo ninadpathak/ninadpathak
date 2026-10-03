@@ -4,15 +4,12 @@ date: 2026-04-15
 description: A research-led comparison of KV-cache eviction strategies, including
   their accuracy risks and implementation trade-offs.
 status: published
-work_note: "[Ninad Pathak](/portfolio/) creates technical content about inference infrastructure that connects memory-saving techniques to evaluation conditions, giving developers the context needed to judge the quality tradeoff."
-tags:
-- llm
-- kv-cache
-- memory-optimization
-- transformers
-- engineering
+work_note: '[Ninad Pathak](/portfolio/) creates technical content about inference
+  infrastructure that connects memory-saving techniques to evaluation conditions,
+  giving developers the context needed to judge the quality tradeoff.'
 title: 'Context Engineering as Heap Management: Accuracy Risks in KV Cache Eviction'
 updated: '2026-08-17'
+slug: kv-cache-eviction
 ---
 
 VRAM capacity dictates the boundary of what a Large Language Model (LLM) can actually do for you. The naive way to expand a context window is to scale hardware until you hit the physical ceiling of the GPU, then buy a bigger GPU.
@@ -194,7 +191,7 @@ Optimizing context memory requires following these steps:
 ## Economic outcomes of importance-based pruning
 
 
-There's a quality bonus too: the ["Lost in the Middle" problem where the center of a long context gets ignored](/articles/llm-context-windows-explained/) eases off. Stripping noise out of the KV cache lets the model spend its limited attention budget on high-signal tokens.
+There's a quality bonus too: the ["Lost in the Middle" problem where the center of a long context gets ignored](/articles/llm-context-windows/) eases off. Stripping noise out of the KV cache lets the model spend its limited attention budget on high-signal tokens.
 
 
 ## The future of context engineering

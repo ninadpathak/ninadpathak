@@ -5,14 +5,12 @@ description: Everything in AI starts with a vector. Here is how embedding models
   human language into high-dimensional geometry, why dimensionality reduction matters,
   and how to choose between OpenAI, Cohere, and self-hosted models.
 status: published
-work_note: "For embedding API comparisons, technical writer [Ninad Pathak](/contact/) connects vector dimensions to storage requirements and retrieval choices so developers can evaluate a product against the application they are building."
-tags:
-- ai
-- llm
-- rag
-- vector-search
-title: 'Vector Embeddings: a Guide to the Geometry of Meaning in Ai'
+work_note: For embedding API comparisons, technical writer [Ninad Pathak](/contact/)
+  connects vector dimensions to storage requirements and retrieval choices so developers
+  can evaluate a product against the application they are building.
+title: 'Vector Embeddings: A Guide to the Geometry of Meaning in AI'
 updated: '2026-08-17'
+slug: vector-embeddings
 ---
 
 Every interaction with a modern language model begins with a conversion. You provide text, and the system translates that text into a list of numbers.
@@ -244,7 +242,7 @@ These vectors are stored in a vector database alongside the original text and me
 
 The vector database performs a nearest-neighbor search to find the chunks with the highest similarity.
 
-These chunks are then passed to an LLM as context for the final answer, and many production systems pair dense vectors with [BM25 sparse retrieval in a hybrid search setup](/articles/hybrid-search-bm25-vector-search/) to catch exact keyword matches that pure semantic search misses. The embedding model acts as the librarian.
+These chunks are then passed to an LLM as context for the final answer, and many production systems pair dense vectors with [BM25 sparse retrieval in a hybrid search setup](/articles/hybrid-search/) to catch exact keyword matches that pure semantic search misses. The embedding model acts as the librarian.
 
 The LLM acts as the researcher.
 
@@ -285,7 +283,7 @@ Packing several topics into one vector dilutes the signal for any single passage
 
 The model struggles to maintain the importance of specific facts buried in the middle of a long text. The "Lost in the Middle" phenomenon applies to embedding encoders just as much as to decoder LLMs. Recursive chunking with overlap remains the most reliable strategy for production RAG.
 
-Small, focused chunks preserve semantic density. You can then use cross-encoders for [reranking your top-k results](/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/).
+Small, focused chunks preserve semantic density. You can then use cross-encoders for [reranking your top-k results](/articles/rag-reranking/).
 
 You can also implement a parent-document retrieval strategy to give the LLM broader context.
 

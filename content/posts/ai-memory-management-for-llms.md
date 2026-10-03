@@ -5,15 +5,11 @@ description: 'A senior engineer''s breakdown of what memory management for LLMs 
   looks like in production: eviction strategies, KV cache management, importance-weighted
   retention, and why your agent keeps forgetting things.'
 status: published
-work_note: "Creation is only part of a memory API's documentation. Technical writer [Ninad Pathak](/contact/) explains correction and deletion too, including what a later request can still retrieve."
-tags:
-- ai
-- agents
-- memory
-- llm
-- infrastructure
-- memory-management
+work_note: Creation is only part of a memory API's documentation. Technical writer
+  [Ninad Pathak](/contact/) explains correction and deletion too, including what a
+  later request can still retrieve.
 title: 'AI Memory Management for LLMs: What Actually Works'
+slug: ai-memory-management
 ---
 
 Having a context window does not mean an LLM has memory. When I started building agentic pipelines in 2023, I watched junior engineers assume that a 128K token context meant their agent could "remember" previous interactions.
@@ -49,7 +45,7 @@ You only control what enters the context window.
 
 The distinction matters because different strategies apply to each type. You can build sophisticated explicit memory layers, but if you ignore implicit memory management, you will still hit performance walls when the KV cache balloons during long inference runs.
 
-See also: [How Memory Works in Claude Code](/articles/how-memory-works-in-claude-code/).
+See also: [How Memory Works in Claude Code](/articles/claude-code-memory/).
 
 ### Five layers answer five different memory questions
 
@@ -177,7 +173,7 @@ Notice the `decay_factor`. Memory that is not reinforced decays over time, the w
 
 That decay keeps old, stale entries from dominating the buffer indefinitely.
 
-For more on how different agent frameworks handle eviction, see [How Memory Works in HyperAgents](/articles/how-memory-works-in-hyperagents/).
+For more on how different agent frameworks handle eviction, see [How Memory Works in HyperAgents](/articles/hyperagents-memory/).
 
 ## KV cache management controls the implicit-memory budget
 
@@ -314,7 +310,7 @@ class CompressedMemoryStore:
 
 Retrieval-heavy workloads where you care about semantic similarity more than exact text recall are a good fit for this. For factual memory (names, dates, configuration values like a webhook URL or a port number), embedding compression introduces error rates I would never ship, since "remembering" a port as 5433 instead of 5432 is worse than not remembering it at all.
 
-For voice agents specifically, see [Memory for Voice AI Agents](/articles/memory-for-voice-ai-agents/) where compression latency becomes critical due to real-time constraints.
+For voice agents specifically, see [Memory for Voice AI Agents](/articles/voice-agent-memory/) where compression latency becomes critical due to real-time constraints.
 
 ## Letta and MemGPT make memory tiers explicit
 
@@ -367,7 +363,7 @@ The core memory limit forces real decisions about what matters. You cannot cheat
 
 Engineers coming from traditional software backgrounds, where you just add another index or a bigger disk, tend to fight this for a week before it clicks. Memory management in LLM agents is the discipline of deciding what to forget, not the discipline of storing everything.
 
-For a comparison with other agent frameworks, see [How Memory Works in DeerFlow](/articles/how-memory-works-in-deerflow/) and [Short-Term Memory for AI Agents](/articles/short-term-memory-for-ai-agents/).
+For a comparison with other agent frameworks, see [How Memory Works in DeerFlow](/articles/deerflow-memory/) and [Short-Term Memory for AI Agents](/articles/short-term-agent-memory/).
 
 ## Forgetting has four distinct failure modes
 
@@ -435,7 +431,7 @@ class MemoryConflictResolver:
         return resolved
 ```
 
-For a broader view of how the industry is addressing this, see [State of AI Agent Memory 2026](/articles/state-of-ai-agent-memory-2026/).
+For a broader view of how the industry is addressing this, see [State of AI Agent Memory 2026](/articles/agent-memory-2026/).
 
 ## RAG and memory answer different questions
 

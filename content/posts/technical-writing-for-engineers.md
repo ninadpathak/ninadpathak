@@ -4,12 +4,11 @@ date: 2026-04-18
 description: Most engineering documentation fails for the same reasons. Here is what
   actually moves the needle.
 status: published
-work_note: "Engineering reviewers need specific product questions, not a tutorial to rewrite. [Ninad Pathak](/portfolio/) creates developer content from technical source material and identifies the behavior still needing confirmation."
-tags:
-- technical-writing
-- developer-experience
-- engineering-culture
+work_note: Engineering reviewers need specific product questions, not a tutorial to
+  rewrite. [Ninad Pathak](/portfolio/) creates developer content from technical source
+  material and identifies the behavior still needing confirmation.
 title: 'Technical Writing for Engineers: The 80/20 Guide'
+slug: technical-writing-for-engineers
 ---
 
 Documentation debt accumulates silently. It starts when a project ships without a README, compounds when features get added but never explained, and becomes critical when a new engineer joins and spends three days reconstructing knowledge that lived in one person's head.
@@ -125,7 +124,7 @@ Avoid italics in technical writing. They are harder to read at speed and add no 
 
 Keep paragraphs short. Two sentences maximum.
 
-There is a real functional reason behind it, the same one that drives [the case for shorter technical documentation](/articles/the-case-for-shorter-technical-documentation/). Short paragraphs break information into chunks a scanning eye can absorb in one pass.
+There is a real functional reason behind it, the same one that drives [the case for shorter technical documentation](/articles/shorter-documentation/). Short paragraphs break information into chunks a scanning eye can absorb in one pass.
 
 Once a paragraph runs past three sentences, the reader has to hunt for which sentence actually carries the point.
 
@@ -135,7 +134,7 @@ Engineers need four types of documentation, and conflating them is a common fail
 
 **Tutorials** take a newcomer from zero to a working result. They are task-oriented and forgiving of complexity.
 
-Tutorials should say "here is how to build X" and hold the reader's hand through every step, which is the whole craft of [writing a technical tutorial that actually teaches](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/). The goal is success, not completeness.
+Tutorials should say "here is how to build X" and hold the reader's hand through every step, which is the whole craft of [writing a technical tutorial that actually teaches](/articles/writing-technical-tutorials/). The goal is success, not completeness.
 
 **How-to guides** solve a specific problem for someone who already knows the basics. "How to configure OAuth with an existing Next.js app" is a how-to guide.
 
@@ -207,7 +206,7 @@ The deeper fix is cultural: updating docs has to be a normal line in feature wor
 
 Documentation debt is not only about missing content. A large share of it is content that should never have survived this long.
 
-Delete onboarding documents that contradict the current codebase, because stale guidance is one of the clearest signs of [developer onboarding docs that fail and the practices that actually work](/articles/developer-onboarding-docs-what-works-what-doesnt/). Delete tutorials that reference deprecated API versions.
+Delete onboarding documents that contradict the current codebase, because stale guidance is one of the clearest signs of [developer onboarding docs that fail and the practices that actually work](/articles/developer-onboarding-docs/). Delete tutorials that reference deprecated API versions.
 
 Delete FAQ entries that are no longer questions anyone asks. Stale documentation is worse than no documentation because it sends engineers down wrong paths.
 
@@ -229,7 +228,7 @@ Later you can layer on a documentation team, a content calendar, a style guide, 
 
 Start with the discipline and add tooling once it is paying rent.
 
-Engineers moving into writing keep some habits and have to drop others. My account of the [move from engineering to technical writing](/articles/from-engineer-to-technical-writer-what-i-kept-and-what-i-left-behind/) separates verification and systems thinking from the shared context that strands a new reader.
+Engineers moving into writing keep some habits and have to drop others. My account of the [move from engineering to technical writing](/articles/engineer-to-writer/) separates verification and systems thinking from the shared context that strands a new reader.
 
 ## The compounding return
 

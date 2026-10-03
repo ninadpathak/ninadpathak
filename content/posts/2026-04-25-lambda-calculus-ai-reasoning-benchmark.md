@@ -3,13 +3,11 @@ category: ai-engineering
 date: '2026-04-25'
 description: Lambda calculus exposes substitution, scope, and composition errors in
   AI outputs through problems with mechanically checkable answers.
-slug: lambda-calculus-ai-reasoning-benchmark
+slug: lambda-calculus-ai
 status: published
-work_note: "Technical evaluation articles need problems readers can check, with scoring rules attached. Technical writer [Ninad Pathak](/portfolio/) develops explanations around worked examples that let developers question the conclusion."
-tags:
-- ai reasoning
-- formal methods
-- evaluation
+work_note: Technical evaluation articles need problems readers can check, with scoring
+  rules attached. Technical writer [Ninad Pathak](/portfolio/) develops explanations
+  around worked examples that let developers question the conclusion.
 title: Lambda Calculus as an AI Reasoning Exercise
 updated: '2026-08-17'
 ---
@@ -77,7 +75,7 @@ Lambda calculus can serve as a diagnostic before an agentic task because both re
 
 The underlying skill is the same: track bindings and apply transformations in the correct order.
 
-The [production failure patterns](/articles/production-ai-agent-errors/) article covers related state and tool-use errors. Lambda-calculus exercises provide a narrow proxy for that class of failure.
+The [production failure patterns](/articles/agent-error-handling/) article covers related state and tool-use errors. Lambda-calculus exercises provide a narrow proxy for that class of failure.
 
 ## How the exercise differs from existing evaluations
 
@@ -99,7 +97,7 @@ A system that reliably handles Tier 1, 2, and 3 lambda calculus problems has dem
 
 It is a diagnostic for one reasoning capability that happens to be necessary for reliable code generation and agent planning.
 
-Binding preservation matters to [agent memory systems](/articles/state-of-ai-agent-memory-2026/) and tool orchestration because both must track values and apply transformations in order. Lambda-calculus errors can reveal weakness in that narrow skill, but they do not predict overall agent performance on their own.
+Binding preservation matters to [agent memory systems](/articles/agent-memory-2026/) and tool orchestration because both must track values and apply transformations in order. Lambda-calculus errors can reveal weakness in that narrow skill, but they do not predict overall agent performance on their own.
 
 ## How to turn the exercise into an evaluation
 
@@ -115,6 +113,6 @@ Compositional reasoning under substitution is all lambda calculus tests. World k
 
 Even perfect performance on this exercise would not establish physical, temporal, or social reasoning. Lambda calculus tests one necessary skill, not general intelligence.
 
-Use it as an early filter, then test structured output, tool use, and multi-step planning before assigning [production AI agent tasks](/articles/why-ai-agents-keep-failing-in-production/).
+Use it as an early filter, then test structured output, tool use, and multi-step planning before assigning [production AI agent tasks](/articles/ai-agent-failures/).
 
 The exercise tells you whether the system can track bindings through composition. Everything else requires additional testing.

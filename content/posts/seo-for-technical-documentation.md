@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-07-30
 description: 'Technical SEO for developer documentation: crawling, rendering, indexing,
   canonicals, internal links, Core Web Vitals, structured data, and search visibility.'
-slug: seo-for-technical-documentation
+slug: docs-seo
 status: published
-work_note: "Documentation discovery starts with the question a developer searches for. [Ninad Pathak](/contact/) plans technical content that connects that search to a working example, with measurement tied to the relevant pages."
-tags:
-- documentation-seo
-- technical-writing
-- developer-experience
+work_note: Documentation discovery starts with the question a developer searches for.
+  [Ninad Pathak](/contact/) plans technical content that connects that search to a
+  working example, with measurement tied to the relevant pages.
 takeaways:
 - A useful technical SEO audit follows dependency order instead of chasing one score.
 - Discovery, crawling, indexing, and page quality need separate evidence.
@@ -53,7 +51,7 @@ Make page ownership the first thing in your audit because developer searches usu
 
 If two pages complete the same task, compare the documentation, marketing site, support center, changelog, and older versions before writing anything new. One page should become the canonical owner, with useful material from the weaker page moved into it before the duplicate is redirected or demoted.
 
-The [documentation organization guide](/articles/how-to-organize-a-documentation-site/) covers that consolidation work in detail.
+The [documentation organization guide](/articles/documentation-structure/) covers that consolidation work in detail.
 
 ### 2. Internal links and XML sitemaps
 
@@ -161,7 +159,7 @@ Opening:     Use the signing secret and timestamp header to verify each payload.
 
 Reading the headings without the sidebar shows whether the procedure still makes sense. “Create an API key” and “Recover from an expired key” survive that test, while “Setup” and “Errors” depend on navigation context that search visitors may never see.
 
-The task is complete only when the page carries a reader through the required access and versions, a working command or request, expected output, recognizable failure symptoms, recovery, and cleanup. The [technical tutorial guide](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/) shows how to test that path from a clean environment.
+The task is complete only when the page carries a reader through the required access and versions, a working command or request, expected output, recognizable failure symptoms, recovery, and cleanup. The [technical tutorial guide](/articles/writing-technical-tutorials/) shows how to test that path from a clean environment.
 
 Return version-sensitive pages to the review queue when an SDK release, renamed field, changed permission, UI move, deprecation, support pattern, or ranking loss makes the instructions suspect. The updated date should change when the page itself changes meaningfully, not merely because the review took place.
 

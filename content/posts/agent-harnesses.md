@@ -5,13 +5,11 @@ description: Every production AI agent needs a harness. Here is what one contain
   why frameworks often are not enough, and how to build the layer that actually determines
   reliability.
 status: published
-work_note: "An interrupted run makes checkpointing visible. [Ninad Pathak](/contact/) writes developer content that shows what resumes, which steps repeat, and where the operator needs to intervene."
-tags:
-- ai
-- agents
-- infrastructure
-- llm
-title: 'Agent Harnesses: the Infrastructure Layer Your Llm Agent Actually Needs'
+work_note: An interrupted run makes checkpointing visible. [Ninad Pathak](/contact/)
+  writes developer content that shows what resumes, which steps repeat, and where
+  the operator needs to intervene.
+title: 'Agent Harnesses: The Infrastructure Your LLM Agent Needs'
+slug: agent-harnesses
 ---
 
 Agents look impressive in demos because the happy path is easy to show. The problems start later, once a search tool times out, a task runs past the timeout you forgot to set, or the model has to pick up after a half-finished step instead of starting the whole run over.
@@ -97,7 +95,7 @@ Three patterns work in practice.
 
 A good fit for tasks with clear phases that take roughly equal time.
 
-**Idempotent tool design.** Build tools so calling them twice produces the same result as calling them once. Paired with step-level checkpointing, that design removes an entire class of [error patterns that break agents in production](/articles/production-ai-agent-errors/).
+**Idempotent tool design.** Build tools so calling them twice produces the same result as calling them once. Paired with step-level checkpointing, that design removes an entire class of [error patterns that break agents in production](/articles/agent-error-handling/).
 
 You re-run from the last checkpoint, the idempotent tools return the same results they did before, and the agent continues from where it left off. Picture a "send invoice email" tool that checks for an already-sent record before firing, so a replayed step does not double-bill the customer.
 
@@ -170,7 +168,7 @@ Skip the harness when an application takes a single user input, calls the model 
 
 Skip it for plain retrieval-augmented generation, where a fixed retrieval step feeds a single synthesis step.
 
-Build the harness once the model decides which tools to call and in what order, the property that separates an agent from a smarter assistant across [the broader taxonomy of AI agents](/articles/the-taxonomy-of-ai-agents/). Build it once tasks span more than a handful of API calls, once partial failures need recovery without a full restart, or once you have to be able to audit what the agent did and why.
+Build the harness once the model decides which tools to call and in what order, the property that separates an agent from a smarter assistant across [the broader taxonomy of AI agents](/articles/ai-agent-taxonomy/). Build it once tasks span more than a handful of API calls, once partial failures need recovery without a full restart, or once you have to be able to audit what the agent did and why.
 
 The rough line is clear enough. Treat the harness as load-bearing infrastructure when the model controls the flow.
 

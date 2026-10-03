@@ -5,13 +5,11 @@ description: Vector databases return results based on semantic similarity. I exp
   why that is rarely enough for production RAG and how a cross-encoder reranker fixes
   the problem.
 status: published
-work_note: "A retrieval API comparison should show why a relevant-looking result can still be useless. Developer content creator [Ninad Pathak](/portfolio/) explains that behavior through examples customers can use to evaluate the product."
-tags:
-- ai
-- rag
-- vector-search
-- infrastructure
+work_note: A retrieval API comparison should show why a relevant-looking result can
+  still be useless. Developer content creator [Ninad Pathak](/portfolio/) explains
+  that behavior through examples customers can use to evaluate the product.
 title: 'Reranking in RAG: Why Your Top-K Results Are Probably Wrong'
+slug: rag-reranking
 ---
 
 Vector databases are powerful tools for building retrieval-augmented generation systems. Plenty of engineering teams I have worked with assume that dropping text into an embedding model and running a cosine similarity search is the entire retrieval job.
@@ -30,7 +28,7 @@ To use it well, you need to understand the structural limits of bi-encoder model
 
 ## The structural limitation of dense embeddings
 
-Every document you store in a vector database passes through an embedding model. I discussed the geometry of these spaces in [Embedding models: the geometry of meaning across OpenAI, Cohere, and open-source](/articles/embedding-models-compared/).
+Every document you store in a vector database passes through an embedding model. I discussed the geometry of these spaces in [Embedding models: the geometry of meaning across OpenAI, Cohere, and open-source](/articles/vector-embeddings/).
 
 The model compresses the entire semantic meaning of a chunk of text into a single array of floating-point numbers.
 
@@ -109,7 +107,7 @@ The reranker scores each pair, and you re-sort the one hundred chunks by those n
 
 From that newly sorted list you take only the top five or ten chunks and pass them to your language model for the final generation step. The dangers of passing too much context I covered in [Your Context Window Has a Middle.
 
-Models Don't Read It.](/articles/llm-context-windows-explained/). Handing the model a small, highly accurate set of chunks is what carries generation quality.
+Models Don't Read It.](/articles/llm-context-windows/). Handing the model a small, highly accurate set of chunks is what carries generation quality.
 
 ## Evaluating the latency tradeoff
 
@@ -199,7 +197,7 @@ Give it eight times the dimensions and you are still asking it to guess a relati
 
 The other argument I hear leans on massive context windows. The pitch is that you can pass all one hundred retrieved chunks straight to the language model and let it sort them out.
 
-I dug into that approach when comparing [fine-tuning and RAG for agent memory](/articles/fine-tuning-vs-rag-for-agent-memory/). Stuffing the context window grows your inference cost linearly and drags latency along with it.
+I dug into that approach when comparing [fine-tuning and RAG for agent memory](/articles/fine-tuning-vs-rag/). Stuffing the context window grows your inference cost linearly and drags latency along with it.
 
 Time to first token degrades noticeably once you are sending eighty thousand tokens on every request, the difference between an answer that appears instantly and one the user waits on.
 

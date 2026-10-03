@@ -1,17 +1,19 @@
 ---
 category: technical-documentation
-title: "Code Documentation: Comments, Generated Reference, and External Guides"
+title: 'Code Documentation: Comments, Generated Reference, and External Guides'
 date: 2026-08-18
 updated: 2026-08-18
-description: "Decide what belongs in code comments, generated reference, and written guides so each reader can find the right kind of answer."
-tags: ["documentation", "technical-writing", "developer-experience"]
+description: Decide what belongs in code comments, generated reference, and written
+  guides so each reader can find the right kind of answer.
 takeaways:
-  - "Put local rationale beside the code that needs it to be read correctly."
-  - "Generate reference from stable contracts that source can expose."
-  - "Use guides for decisions, sequences, and operating context that no symbol can contain."
+- Put local rationale beside the code that needs it to be read correctly.
+- Generate reference from stable contracts that source can expose.
+- Use guides for decisions, sequences, and operating context that no symbol can contain.
 status: published
-work_note: "Technical writer [Ninad Pathak](/portfolio/) connects API reference entries to integration guides, keeping exact function contracts available without making developers assemble the full procedure from scattered signatures."
-slug: "code-documentation"
+work_note: Technical writer [Ninad Pathak](/portfolio/) connects API reference entries
+  to integration guides, keeping exact function contracts available without making
+  developers assemble the full procedure from scattered signatures.
+slug: code-documentation
 ---
 
 A codebase starts to become hard to change when the reason for a line lives in a handbook, while the handbook repeats signatures the source already knows. I use a simpler boundary in this site's Python code: comments explain local reasoning, generated reference records stable contracts, and guides carry the decisions that connect several parts of the system.
@@ -48,7 +50,7 @@ The same rule applies to APIs and configuration. Google asks API reference autho
 
 Generated output can tell a reader what a parameter accepts. It cannot reliably decide which operation proves an integration is working, which prerequisite changes the order of setup, or what a team should do when an otherwise valid request fails in production.
 
-That limit matters because a reference page can be complete and still leave a new reader stranded. The distinction between reference and explanation is useful in the site's [guide to technical documentation types](/articles/types-of-technical-documentation/), where each document earns its place through a different reader task.
+That limit matters because a reference page can be complete and still leave a new reader stranded. The distinction between reference and explanation is useful in the site's [guide to technical documentation types](/articles/documentation-types/), where each document earns its place through a different reader task.
 
 ## Write guides for decisions that cross symbols
 
@@ -60,7 +62,7 @@ A setup guide can show a reader where to begin, what must already exist, how to 
 
 The guide also has to establish what the reader can safely assume when a request fails, because a signature alone cannot justify a retry.
 
-That relationship keeps the guide readable and keeps the reference dependable. The site's [technical documentation template](/articles/technical-documentation-template/) uses the same split by giving task pages and reference pages separate jobs within one documentation system.
+That relationship keeps the guide readable and keeps the reference dependable. The site's [technical documentation template](/articles/documentation-template/) uses the same split by giving task pages and reference pages separate jobs within one documentation system.
 
 ### Guides preserve context that source cannot reveal
 

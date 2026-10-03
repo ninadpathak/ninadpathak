@@ -4,16 +4,12 @@ date: 2026-04-16
 description: A systems-level guide to tracing latency across endpointing, transcription,
   model inference, speech synthesis, and transport.
 status: published
-work_note: "The pause between spoken turns spans more than model generation. [Ninad Pathak](/portfolio/) creates developer content for voice APIs that follows audio through the request stages and explains where that waiting time is measured."
-tags:
-- voice-ai
-- real-time
-- gemini
-- latency
-- webrtc
-- engineering
+work_note: The pause between spoken turns spans more than model generation. [Ninad
+  Pathak](/portfolio/) creates developer content for voice APIs that follows audio
+  through the request stages and explains where that waiting time is measured.
 title: How to Trace Latency in a Real-Time Voice Agent
 updated: '2026-08-17'
+slug: voice-agent-latency
 ---
 
 Voice latency is the sum of endpointing, transcription, model inference, speech synthesis, buffering, and transport. The guide explains that chain without claiming a reproducible benchmark.
@@ -65,7 +61,7 @@ When VAD fires too early, STT receives an incomplete sentence and produces a par
 
 Longer prompts require more input processing before generation starts. The effect depends on the model and serving path, so trace first-token latency across representative conversation lengths.
 
-The same context-management problem appears in [KV-cache eviction](/articles/kv-cache-eviction-accuracy/). Reduce prompt history only after testing what the model forgets.
+The same context-management problem appears in [KV-cache eviction](/articles/kv-cache-eviction/). Reduce prompt history only after testing what the model forgets.
 
 ## The TTS synthesis delay
 
@@ -89,7 +85,7 @@ The trade-off is architectural, not a universal latency table. Build the budget 
 
 ## Speculative TTS: the risky shortcut
 
-Speculative TTS is the voice agent equivalent of [speculative decoding](/articles/speculative-decoding-explained/). You start working before you have the full answer.
+Speculative TTS is the voice agent equivalent of [speculative decoding](/articles/speculative-decoding/). You start working before you have the full answer.
 
 Instead of waiting for the LLM to produce a complete sentence, the TTS engine begins synthesizing audio as soon as the first few tokens arrive.
 
@@ -131,7 +127,7 @@ A waiter who says "let me check on that" buys the kitchen time without the table
 
 ## The context window memory tax
 
-The [AI memory architecture review](/articles/state-of-ai-agent-memory-2026/) compares structured memory designs with raw context. Read it as an architecture survey, not as benchmark evidence for a voice pipeline.
+The [AI memory architecture review](/articles/agent-memory-2026/) compares structured memory designs with raw context. Read it as an architecture survey, not as benchmark evidence for a voice pipeline.
 
 Long conversation history increases prompt-processing work and can slow the first token. Summaries and selective recall can bound that cost, but both need tests for lost constraints.
 

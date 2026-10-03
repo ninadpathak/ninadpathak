@@ -5,13 +5,11 @@ description: I analyze the structural correlation between documentation quality 
   engineering throughput, using DORA metrics and Accelerate research to quantify the
   ROI of technical writing.
 status: published
-work_note: "A release procedure should outlast the person who remembers it. [Ninad Pathak](/contact/) creates technical documentation that records deployment checks and recovery instructions for the next engineer carrying out the work."
-tags:
-- engineering-velocity
-- developer-productivity
-- dora-metrics
-- technical-writing
+work_note: A release procedure should outlast the person who remembers it. [Ninad
+  Pathak](/contact/) creates technical documentation that records deployment checks
+  and recovery instructions for the next engineer carrying out the work.
 title: Quantifying the Engineering Velocity Impact of Technical Documentation
+slug: documentation-velocity
 ---
 
 Of every investment I have watched move engineering velocity, technical documentation is the one most teams underrate. Writing tends to get filed under secondary administrative work, and yet [DORA research (Accelerate)](https://dora.dev/publications/) confirms that high-quality documentation makes a team 2.4x more likely to achieve elite software delivery performance.
@@ -136,7 +134,7 @@ Google Cloud's Architecture Framework identifies documentation not as a support 
 To achieve velocity gains, DORA research identifies eight key attributes of high-quality documentation that must be met:
 
 1.  **Clarity**: Easy to understand for the intended audience.
-2.  **Findability**: Answers are discoverable in under 60 seconds, which is one reason [shorter technical documentation usually works better](/articles/the-case-for-shorter-technical-documentation/).
+2.  **Findability**: Answers are discoverable in under 60 seconds, which is one reason [shorter technical documentation usually works better](/articles/shorter-documentation/).
 3.  **Reliability**: The information is technically accurate.
 4.  **Updateability**: The friction to revise a doc is lower than the friction to ignore it.
 5.  **Relevance**: Content is directly applicable to current workflows.
@@ -156,7 +154,7 @@ That trade moves spend from Opex (maintenance) toward Capex (new feature value).
 
 ### Onboarding velocity
 
-The "Time to First Commit" for a new hire is a leading indicator of organizational health. Teams with elite documentation cut that time by 40-60%, which is why [developer onboarding docs that actually work](/articles/developer-onboarding-docs-what-works-what-doesnt/) pay back so quickly.
+The "Time to First Commit" for a new hire is a leading indicator of organizational health. Teams with elite documentation cut that time by 40-60%, which is why [developer onboarding docs that actually work](/articles/developer-onboarding-docs/) pay back so quickly.
 
 Picture two new hires: one clones the repo, follows a working setup guide, and ships a small fix on day three, and the other spends that week pinging strangers to learn which environment variables the local server needs. Making the first scenario the default, in a competitive hiring market, is a real economic advantage.
 
@@ -171,7 +169,7 @@ ADRs are a high-signal example of practitioner writing that outranks the standar
 
 ## Engineering documentation as infrastructure
 
-Information architecture has become the primary competitive moat for developer-first companies in 2026, and [Stripe's technical blog shows how that advantage compounds](/articles/how-stripes-technical-blog-became-a-competitive-moat/). Practitioners reward the teams that put writing on the product roadmap instead of leaving it for a quarter that never arrives.
+Information architecture has become the primary competitive moat for developer-first companies in 2026, and [Stripe's technical blog shows how that advantage compounds](/articles/stripe-technical-blog/). Practitioners reward the teams that put writing on the product roadmap instead of leaving it for a quarter that never arrives.
 
 When a doc lets a developer wire up your SDK in ten minutes instead of an afternoon, that page stops being content and starts being infrastructure. Deep practitioner writing earns a permanent spot in the trusted toolkit the way a reliable library does.
 

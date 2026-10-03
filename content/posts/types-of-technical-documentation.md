@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-08-05
 description: Understand the main types of technical documentation, study useful examples,
   and build a documentation system for users, teams, and coding agents.
-slug: types-of-technical-documentation
+slug: documentation-types
 status: published
-work_note: "Reference pages and tutorials serve different tasks. Technical writer [Ninad Pathak](/contact/) plans documentation that gives each a defined job and connects the pages a customer needs to use a product."
-tags:
-- documentation
-- technical-writing
-- developer-experience
+work_note: Reference pages and tutorials serve different tasks. Technical writer [Ninad
+  Pathak](/contact/) plans documentation that gives each a defined job and connects
+  the pages a customer needs to use a product.
 takeaways:
 - Technical documentation includes user guides, tutorials, how-to guides, reference,
   troubleshooting, release notes, runbooks, and architecture documents.
@@ -83,7 +81,7 @@ A migration guide should provide the affected starting state, replacement path, 
 
 Product documentation is only one part of technical documentation. Teams also need durable records that explain why a system exists in its current form and how to maintain it.
 
-Use the [internal vs. external documentation decision](/articles/internal-vs-external-documentation/) to keep private operating context separate from the public task or contract.
+Use the [internal vs. external documentation decision](/articles/internal-vs-external-docs/) to keep private operating context separate from the public task or contract.
 
 ### 7. Architecture and design documents
 
@@ -139,4 +137,4 @@ I reviewed the ranking pages for this query, including ClickHelp, Tango, and Squ
 
 Documentation becomes easier to maintain when each type has a named audience, a distinct job, and a change that tells its owner when to revisit it.
 
-Use the [technical documentation template](/articles/technical-documentation-template/) to turn that inventory into a working plan. Then use the [technical documentation best practices](/articles/technical-documentation-best-practices-tested-real-developer-docs/) to test whether each page helps someone complete the job it promises.
+Use the [technical documentation template](/articles/documentation-template/) to turn that inventory into a working plan. Then use the [technical documentation best practices](/articles/documentation-best-practices/) to test whether each page helps someone complete the job it promises.

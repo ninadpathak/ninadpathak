@@ -23,8 +23,8 @@ sections:
   - heading: "Release communication"
     blurb: "Keep developers informed when behavior changes."
     posts:
-      - how-to-write-a-changelog-developers-actually-read
-      - writing-release-notes-that-developers-trust
+      - writing-changelogs
+      - writing-release-notes
 planned:
   - "Docs as Code: A Working Git-Based Documentation Workflow"
   - "Documentation Maintenance: A Workflow That Keeps Docs Current"

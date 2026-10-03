@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-08-10
 description: Write documentation headings that tell a reader which task, decision,
   concept, or recovery path a section covers.
-slug: how-to-write-task-based-documentation-headings
+slug: documentation-headings
 status: published
-work_note: "A developer looking for authentication setup should find it in the outline. [Ninad Pathak](/contact/) edits technical documentation so headings identify the task and instructions follow the reader's next decision."
-tags:
-- technical-writing
-- documentation
-- developer-experience
+work_note: A developer looking for authentication setup should find it in the outline.
+  [Ninad Pathak](/contact/) edits technical documentation so headings identify the
+  task and instructions follow the reader's next decision.
 takeaways:
 - Use a task heading when a section tells the reader how to reach a specific result.
 - Use a descriptive noun phrase when a section explains a concept or documents a reference
@@ -109,6 +107,6 @@ Do not rewrite every heading into an imperative. A section that explains token s
 
 A section that documents a request field should name that field. A section that guides a reader through a result should state the result.
 
-For a full tutorial structure, see [How to Write a Technical Tutorial That Actually Teaches](/articles/how-to-write-a-technical-tutorial-that-actually-teaches/). Before publishing, use the [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) to check the rendered outline, links, and navigation.
+For a full tutorial structure, see [How to Write a Technical Tutorial That Actually Teaches](/articles/writing-technical-tutorials/). Before publishing, use the [documentation review checklist](/articles/documentation-review/) to check the rendered outline, links, and navigation.
 
 The useful standard is not "every heading starts with a verb." It is simpler: a reader should be able to tell why a section exists before they have to read it.

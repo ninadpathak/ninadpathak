@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-08-09
 description: Test developer documentation for release-blocking accessibility failures
   in structure, code, links, visuals, keyboard use, and rendered output.
-slug: documentation-accessibility-checklist
+slug: docs-accessibility
 status: published
-work_note: "Developer content has to work when a reader cannot use a screenshot. [Ninad Pathak](/portfolio/) writes technical documentation with copyable commands, descriptive links, and text explanations of the expected result."
-tags:
-- documentation
-- accessibility
-- developer-experience
+work_note: Developer content has to work when a reader cannot use a screenshot. [Ninad
+  Pathak](/portfolio/) writes technical documentation with copyable commands, descriptive
+  links, and text explanations of the expected result.
 takeaways:
 - Accessibility testing catches documentation failures that a visual review can miss.
 - A documentation-specific checker removes repeatable structural defects before manual
@@ -118,7 +116,7 @@ Run it against generated HTML, not only the source Markdown. The rendered page i
 
 Tab through the page from the browser address bar. The current control should stay visible, links and controls should work without a pointer, and the order should match the reading order.
 
-Then zoom until the page reflows and read the page with a screen reader when possible. The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) covers the wider release review, including links, metadata, and the rendered frame.
+Then zoom until the page reflows and read the page with a screen reader when possible. The [documentation review checklist](/articles/documentation-review/) covers the wider release review, including links, metadata, and the rendered frame.
 
 ## Make accessibility testing a documentation release gate
 

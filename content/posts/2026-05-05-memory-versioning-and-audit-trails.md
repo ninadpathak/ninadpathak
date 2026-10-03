@@ -3,13 +3,11 @@ category: ai-engineering
 date: '2026-05-05'
 description: If your agent overwrites its memory, you cannot pass a compliance audit.
   How to build append-only memory versioning and trace agent reasoning.
-slug: memory-versioning-and-audit-trails
+slug: memory-versioning
 status: published
-work_note: "Technical writer [Ninad Pathak](/contact/) documents how to retrieve the state behind an agent's past decision, making retention behavior and record history explicit for developers evaluating memory infrastructure."
-tags:
-- ai agents
-- agent-memory
-- compliance
+work_note: Technical writer [Ninad Pathak](/contact/) documents how to retrieve the
+  state behind an agent's past decision, making retention behavior and record history
+  explicit for developers evaluating memory infrastructure.
 title: Memory Versioning and Audit Trails for Regulated AI Agents
 ---
 
@@ -123,11 +121,11 @@ The pattern keeps a standard, mutable vector database for fast retrieval, and ev
 
 Semantic search lives in the vector DB, the audit record lives in Postgres. Need to reconstruct the past?
 
-Pull the event log from Postgres and replay it to rebuild the exact state. That replay-from-the-log idea is what I covered when discussing [state persistence across sessions](/articles/memory-serialization-between-sessions/).
+Pull the event log from Postgres and replay it to rebuild the exact state. That replay-from-the-log idea is what I covered when discussing [state persistence across sessions](/articles/memory-serialization/).
 
 The agent stays fast, and the compliance team still gets its paper trail.
 
-Version history is useful only if state survives a restart in a readable form. The guide to [serializing agent memory between sessions](/articles/memory-serialization-between-sessions/) covers that persistence layer before versioning begins.
+Version history is useful only if state survives a restart in a readable form. The guide to [serializing agent memory between sessions](/articles/memory-serialization/) covers that persistence layer before versioning begins.
 
 ## FAQ
 

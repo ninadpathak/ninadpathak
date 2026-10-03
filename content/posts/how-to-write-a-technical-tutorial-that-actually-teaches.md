@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-04-02
 description: Write a technical tutorial that takes one reader from a clear starting
   point to a tested, useful result.
-slug: how-to-write-a-technical-tutorial-that-actually-teaches
+slug: writing-technical-tutorials
 status: published
-work_note: "[Ninad Pathak](/portfolio/) creates developer tutorials that teach readers to adapt an example, checking prerequisite knowledge before introducing the next implementation decision."
-tags:
-- technical-writing
-- tutorials
-- developer-experience
+work_note: '[Ninad Pathak](/portfolio/) creates developer tutorials that teach readers
+  to adapt an example, checking prerequisite knowledge before introducing the next
+  implementation decision.'
 takeaways:
 - Choose one reader, one starting state, and one result they can verify.
 - Build the working path before writing the explanation around it.
@@ -37,7 +35,7 @@ Write the starting state before the steps. For this example, the reader can run 
 
 The finish line is deliberately bounded: accept an event signed with the fixture's public test value, reject altered bytes, and confirm rejected events were not recorded. Calling this a production webhook system would turn a useful teaching fixture into bullshit.
 
-If the reader only needs a signature field definition, give them reference documentation instead of this build sequence. The [documentation types guide](/articles/types-of-technical-documentation/) separates those jobs.
+If the reader only needs a signature field definition, give them reference documentation instead of this build sequence. The [documentation types guide](/articles/documentation-types/) separates those jobs.
 
 ## Build the tutorial around observable checkpoints
 
@@ -144,4 +142,4 @@ I keep the review focused on what the next instruction needs: run the archive fr
 
 The [recorded checks](/static/examples/writing-lab/validation.txt) passed on Node.js 24.18.0 on 10 September 2026. No human usability study was conducted.
 
-The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) provides the wider release review; [developer onboarding documentation](/articles/developer-onboarding-docs-what-works-what-doesnt/) applies the same prerequisite discipline to a contributor's first task.
+The [documentation review checklist](/articles/documentation-review/) provides the wider release review; [developer onboarding documentation](/articles/developer-onboarding-docs/) applies the same prerequisite discipline to a contributor's first task.

@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-08-05
 description: Technical documentation helps a developer decide, start, use, and recover
   from a product. Choose each page by the task it owns.
-slug: what-is-technical-documentation-and-what-should-it-include
+slug: technical-docs
 status: published
-work_note: "For a developer product launch, [Ninad Pathak](/contact/) writes technical documentation from the prerequisites for a first request to the reference that explains its response."
-tags:
-- documentation
-- technical-writing
-- developer-experience
+work_note: For a developer product launch, [Ninad Pathak](/contact/) writes technical
+  documentation from the prerequisites for a first request to the reference that explains
+  its response.
 takeaways:
 - Technical documentation gives each reader task one useful home.
 - Start with orientation, one verified success path, and the reference that path needs.
@@ -50,7 +48,7 @@ For a CLI, orientation should explain the tool’s job and supported environment
 
 An internal platform may need a different starting package. Access, a supported setup path, ownership, and the operating rules that change a team’s next action can matter before a public-style product portal.
 
-Use the [internal vs. external documentation decision](/articles/internal-vs-external-documentation/) when the same subject needs both private operating context and a public task-focused treatment.
+Use the [internal vs. external documentation decision](/articles/internal-vs-external-docs/) when the same subject needs both private operating context and a public task-focused treatment.
 
 Google’s [technical writing guidance](https://developers.google.com/tech-writing/one/documents) recommends defining scope, non-scope, and audience before expanding a draft. That decision keeps a page from collecting unrelated jobs as it grows.
 
@@ -78,6 +76,6 @@ GitLab’s [documentation guidance](https://docs.gitlab.com/development/document
 
 A useful review trigger connects the document to the change that can invalidate it. A schema change should prompt reference review, a revised onboarding flow should prompt quickstart review, and a recurring failure should prompt troubleshooting work.
 
-Use a [technical documentation template](/articles/technical-documentation-template/) when you are ready to turn these decisions into a repository. Then [test whether a page helps someone finish a task](/articles/technical-documentation-best-practices-tested-real-developer-docs/) before calling it complete.
+Use a [technical documentation template](/articles/documentation-template/) when you are ready to turn these decisions into a repository. Then [test whether a page helps someone finish a task](/articles/documentation-best-practices/) before calling it complete.
 
-Use the [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) before publication. If duplicate or stale answers are the problem, start by [organizing documentation that has drifted](/articles/how-to-organize-a-documentation-site/) instead of adding another page.
+Use the [documentation review checklist](/articles/documentation-review/) before publication. If duplicate or stale answers are the problem, start by [organizing documentation that has drifted](/articles/documentation-structure/) instead of adding another page.

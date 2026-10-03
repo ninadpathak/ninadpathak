@@ -21,31 +21,30 @@ sections:
     blurb: "Pick the model and the agent that fit the job before you automate anything."
     posts:
       - best-llms-for-coding
-      - agentic-cli-benchmarks
+      - claude-vs-gemini-cli
   - heading: "Setting up coding agents"
     blurb: "Make a coding agent hold context across a long task instead of forgetting halfway."
     posts:
-      - how-memory-works-in-claude-code
-      - why-coding-agents-lose-their-memory
+      - claude-code-memory
+      - coding-agent-memory
       - agent-harnesses
   - heading: "Wiring tools and context"
     blurb: "Connect the agent to your real tools and data so it can act reliably."
     posts:
-      - model-context-protocol-explained
-      - structured-outputs-llms-json-mode-function-calling
+      - model-context-protocol
+      - llm-structured-outputs
   - heading: "Designing the workflow"
     blurb: "Decide what the agent owns, what stays manual, and how many agents you need."
     posts:
-      - agentic-workflow-playbook
+      - agentic-workflows
       - agent-vs-ai-assistant
-      - the-agent-design-space
-      - multi-agent-vs-single-agent-tradeoffs
+      - agent-design-space
+      - multi-agent-vs-single-agent
   - heading: "Automating developer busywork"
     blurb: "Concrete wins: faster tooling and content drafted from your own artifacts."
     posts:
-      - how-to-write-a-changelog-developers-actually-read
-      - writing-release-notes-that-developers-trust
-
+      - writing-changelogs
+      - writing-release-notes
 faqs:
   - q: "What is an AI workflow?"
     a: "An AI workflow is a repeatable process where one or more AI agents do part of the work, wired into your real tools and data. It is the difference between asking a chatbot a question and handing an agent a task it completes end to end."

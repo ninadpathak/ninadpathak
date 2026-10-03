@@ -1,14 +1,13 @@
 ---
 category: technical-documentation
 date: 2026-04-01
-description: Build developer onboarding docs around one supported setup path and a safe first merged change, with proof and recovery at each fragile step.
-slug: developer-onboarding-docs-what-works-what-doesnt
+description: Build developer onboarding docs around one supported setup path and a
+  safe first merged change, with proof and recovery at each fragile step.
+slug: developer-onboarding-docs
 status: published
-work_note: "From access requests to a verified change, [Ninad Pathak](/contact/) writes technical onboarding documentation that gives a new engineer a route through setup and review rather than another reading list."
-tags:
-- technical-writing
-- developer-experience
-- documentation
+work_note: From access requests to a verified change, [Ninad Pathak](/contact/) writes
+  technical onboarding documentation that gives a new engineer a route through setup
+  and review rather than another reading list.
 takeaways:
 - Make a safe first merged change the finish line instead of assigning a reading list.
 - Give the reader one supported setup path with proof after each stage.
@@ -255,6 +254,6 @@ Each observation should point to a repair in the route. Page views cannot tell y
 - Fact owners and product-change triggers are visible.
 - A clean-state run reproduces the documented path.
 
-Onboarding is one route inside a wider documentation package. The guide to [what technical documentation should include](/articles/what-is-technical-documentation-and-what-should-it-include/) shows which questions belong outside it.
+Onboarding is one route inside a wider documentation package. The guide to [what technical documentation should include](/articles/technical-docs/) shows which questions belong outside it.
 
-Before the route ships, the [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) should attack the commands, assumptions, and rendered page.
+Before the route ships, the [documentation review checklist](/articles/documentation-review/) should attack the commands, assumptions, and rendered page.

@@ -3,13 +3,11 @@ category: technical-documentation
 date: 2026-08-01
 description: Download a technical documentation template, learn what each page must
   prove, and turn its placeholders into trustworthy product docs.
-slug: technical-documentation-template
+slug: documentation-template
 status: published
-work_note: "A template supplies structure; the product supplies behavior. [Ninad Pathak](/portfolio/) writes technical documentation that turns that behavior into a quickstart and reference, with troubleshooting for unexpected responses."
-tags:
-- documentation
-- docs-as-code
-- technical-writing
+work_note: A template supplies structure; the product supplies behavior. [Ninad Pathak](/portfolio/)
+  writes technical documentation that turns that behavior into a quickstart and reference,
+  with troubleshooting for unexpected responses.
 takeaways:
 - A documentation template should define page jobs and evidence requirements, not
   only headings.
@@ -45,7 +43,7 @@ The blank starter contains a MkDocs site and its validator. The writing lab is a
 
 If a page has no distinct reader job, kill the placeholder until a task requires it. An empty "Concepts" section is a promise nobody has done the work to keep.
 
-The [documentation types guide](/articles/types-of-technical-documentation/) helps place explanation or tutorial material when it grows beyond this initial route.
+The [documentation types guide](/articles/documentation-types/) helps place explanation or tutorial material when it grows beyond this initial route.
 
 ## Fill the starting path with a real command
 
@@ -149,6 +147,6 @@ The filled fixture's `node check.mjs` covers behavior and closes its temporary s
 | Storage lifetime changes | Reference and troubleshooting | Recovery before and after restart |
 | A link target moves | Index and referring pages | Link validation and rendered navigation |
 
-The [documentation review checklist](/articles/documentation-review-checklist-before-you-publish/) adds the reader-facing checks.
+The [documentation review checklist](/articles/documentation-review/) adds the reader-facing checks.
 
 Assign an owner to each filled page and keep its triggering behavior beside the review check.

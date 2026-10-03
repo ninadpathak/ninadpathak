@@ -4,13 +4,12 @@ date: 2026-04-04
 description: I think technical docs are often too long for the wrong reasons. Here’s
   why shorter docs usually work better, and where longer docs still earn their keep.
 status: published
-work_note: "When a retry instruction is buried under background reading, technical writer [Ninad Pathak](/contact/) edits the page around that decision while preserving the conditions that make the instruction safe to follow."
-tags:
-- technical-writing
-- documentation
-- developer-experience
+work_note: When a retry instruction is buried under background reading, technical
+  writer [Ninad Pathak](/contact/) edits the page around that decision while preserving
+  the conditions that make the instruction safe to follow.
 title: The Case for Shorter Technical Documentation
 updated: 2026-08-17
+slug: shorter-documentation
 ---
 
 Technical documentation often suffers from information obesity. Fearing the support ticket that an omission might trigger, teams expand a manual to cover every possible edge case.
@@ -157,7 +156,7 @@ That instinct is what creates the wall of text readers eventually ignore.
 
 Strong documentation comes from subtraction. A team that already knows its product cold still struggles most with deciding what *not* to say on a given page.
 
-My post on [changelogs](/articles/how-to-write-a-changelog-developers-actually-read/) makes a similar point: developers reward signal density and they punish filler instantly.
+My post on [changelogs](/articles/writing-changelogs/) makes a similar point: developers reward signal density and they punish filler instantly.
 
 ## My position on documentation length
 

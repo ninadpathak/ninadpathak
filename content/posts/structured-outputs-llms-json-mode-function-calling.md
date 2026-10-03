@@ -4,13 +4,12 @@ date: 2026-03-27
 description: JSON mode, function calling, and structured outputs solve different problems.
   Here's when each one actually makes sense and what they cost you.
 status: published
-work_note: "An output guarantee still needs instructions for refusals and validation failures. Technical writer [Ninad Pathak](/portfolio/) explains supported API constraints separately from the checks an application must perform."
-tags:
-- ai
-- llm
-- infrastructure
+work_note: An output guarantee still needs instructions for refusals and validation
+  failures. Technical writer [Ninad Pathak](/portfolio/) explains supported API constraints
+  separately from the checks an application must perform.
 title: 'Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use
   Each'
+slug: llm-structured-outputs
 ---
 
 Getting a reliable JSON object out of an LLM used to mean wrapping every call in a try/except, re-prompting on parse failures, and hoping your production traffic never hit the 3% of responses that came back malformed. I once shipped an invoice-parsing job that quietly dropped about one document in thirty because a `total` field came back as the string `"N/A"` instead of a number, and nobody noticed until a finance report didn't reconcile.

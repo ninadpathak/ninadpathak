@@ -26,7 +26,7 @@ sections:
   - heading: "Audit search visibility"
     blurb: "Trace one documentation task from discovery and crawling through canonicalization, usefulness, and Search Console measurement."
     posts:
-      - seo-for-technical-documentation
+      - docs-seo
 faqs:
   - q: "Should product documentation be optimized for search?"
     a: "Yes, when the query represents a product or problem task the documentation genuinely solves. Optimization should improve the page's clarity, access, and structure rather than add generic keyword copy."

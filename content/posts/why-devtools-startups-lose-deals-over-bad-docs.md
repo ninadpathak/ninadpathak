@@ -4,12 +4,11 @@ date: 2026-04-06
 description: DevTools startups lose deals long before sales hears the objection. I
   explain how weak docs break evaluation, trials, and rollout confidence.
 status: published
-work_note: "[Ninad Pathak](/contact/) connects developer content strategy with product documentation, taking the use case that attracts an evaluator through setup and the limits needed to assess the product."
-tags:
-- technical-writing
-- devtools
-- documentation
+work_note: '[Ninad Pathak](/contact/) connects developer content strategy with product
+  documentation, taking the use case that attracts an evaluator through setup and
+  the limits needed to assess the product.'
 title: Why Devtools Startups Lose Deals Over Bad Docs
+slug: devtools-documentation
 ---
 
 DevTools startups lose deals over bad docs long before anyone writes "documentation" into a CRM field. A buyer hits a dead quickstart, an auth example leaves out a required scope, a pricing-sensitive limit like the free-tier request cap sits buried three pages deep, or the migration path for one breaking change reads as a single vague sentence.
@@ -133,7 +132,7 @@ Perfect breadth is not something I expect from a small team. I do expect the ess
 
 Release communication matters to founders. Vague update pages make buyers wonder how painful upgrades will become after adoption.
 
-I covered that problem from the user side in [How to Write a Changelog That Developers Actually Read](/articles/how-to-write-a-changelog-developers-actually-read/) and from the release side in [Writing release notes that developers trust](/articles/writing-release-notes-that-developers-trust/). Buyers read those surfaces as evidence that the product will age gracefully.
+I covered that problem from the user side in [How to Write a Changelog That Developers Actually Read](/articles/writing-changelogs/) and from the release side in [Writing release notes that developers trust](/articles/writing-release-notes/). Buyers read those surfaces as evidence that the product will age gracefully.
 
 ## The hidden deal killer is post-sale fear
 

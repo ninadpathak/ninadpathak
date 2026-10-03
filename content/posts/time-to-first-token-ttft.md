@@ -5,12 +5,11 @@ description: Users do not care about total throughput. They care about how fast 
   first word appears. Here is the engineering guide to measuring and optimizing Time
   to First Token (TTFT) in production.
 status: published
-work_note: "[Ninad Pathak](/portfolio/)'s technical content puts measurement boundaries and test conditions beside performance figures, so developers can compare a provider's latency claim with the application they need to run."
-tags:
-- ai
-- llm
-- infrastructure
+work_note: '[Ninad Pathak](/portfolio/)''s technical content puts measurement boundaries
+  and test conditions beside performance figures, so developers can compare a provider''s
+  latency claim with the application they need to run.'
 title: 'Time to First Token (TTFT): The Metric That Determines AI Snappiness'
+slug: time-to-first-token
 ---
 
 Every interactive AI app I have shipped lives or dies by perceived latency. A model might churn out 100 tokens per second, and none of that speed matters when the user stares at a blank box for five seconds before the stream starts.
@@ -35,7 +34,7 @@ When I talk about TTFT I mean the interval between a user sending a request and 
 
 A model can post a gorgeous tokens-per-second figure and still feel sluggish to type at, because the user judges responsiveness almost entirely by that first word.
 
-Prefilling contributes to TTFT because the model processes the input before it emits the first token. The [KV-cache article](/articles/kv-cache-eviction-accuracy/) explains the state built during that phase, not a universal latency result.
+Prefilling contributes to TTFT because the model processes the input before it emits the first token. The [KV-cache article](/articles/kv-cache-eviction/) explains the state built during that phase, not a universal latency result.
 
 Because the cost scales with prompt length, a request carrying a 200-token question returns far faster than the same request after I have stuffed 40k tokens of retrieved documents in front of it. A support assistant I worked on went from snappy to painful purely because someone padded the system prompt with a second page of tone-of-voice instructions, doubling its size overnight and adding a beat of dead air before every reply.
 
@@ -78,7 +77,7 @@ When a team hands me a slow endpoint and asks me to make it feel fast, I work do
 
 **Prompt Caching.** Static context like a long system prompt or a fixed set of few-shot examples gets paid for on every single request unless I cache it. Wiring up prompt caching to eliminate the prefill tax for static context has dropped TTFT by around 80% on the repeated-prefix portion of requests I have measured, since the model reuses the KV cache for the part of the prompt that never changes.
 
-**Speculative Decoding.** Pulling in [a draft model to speed up LLM inference for free](/articles/speculative-decoding-explained/) lets a small model guess several tokens ahead while the big model verifies them in one pass. The snappiness comes from generating multiple tokens per step rather than one at a time, and the output stays identical to what the big model would have produced alone.
+**Speculative Decoding.** Pulling in [a draft model to speed up LLM inference for free](/articles/speculative-decoding/) lets a small model guess several tokens ahead while the big model verifies them in one pass. The snappiness comes from generating multiple tokens per step rather than one at a time, and the output stays identical to what the big model would have produced alone.
 
 **Quantization.** Dropping the precision of the weights speeds up the memory loads that prefill is bottlenecked on. Moving from FP16 to INT8 or FP8 has given me a real TTFT improvement with accuracy loss small enough that my eval suite barely flinched.
 

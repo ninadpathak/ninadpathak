@@ -1,14 +1,13 @@
 ---
 category: technical-documentation
 date: 2026-07-30
-description: Reorganize a documentation site around reader routes, canonical answers, tested labels, and direct redirects instead of mirroring the org chart.
-slug: how-to-organize-a-documentation-site
+description: Reorganize a documentation site around reader routes, canonical answers,
+  tested labels, and direct redirects instead of mirroring the org chart.
+slug: documentation-structure
 status: published
-work_note: "When documentation sends readers between competing answers, page ownership needs attention before more pages are added. [Ninad Pathak](/portfolio/) plans technical documentation around reader tasks and a clear home for each answer."
-tags:
-- technical-writing
-- information-architecture
-- documentation
+work_note: When documentation sends readers between competing answers, page ownership
+  needs attention before more pages are added. [Ninad Pathak](/portfolio/) plans technical
+  documentation around reader tasks and a clear home for each answer.
 takeaways:
 - Inventory page jobs and evidence before drawing a new navigation tree.
 - Organize around reader routes through setup, use, failure, and change.
@@ -180,7 +179,7 @@ If the first screen offers four equally weighted starting points, decide which r
 
 ## Choose canonical answers before moving URLs
 
-A page may appear in several routes while keeping one canonical home. Copying its instructions into each section creates [competing search results](/articles/seo-for-technical-documentation/) and guarantees that one copy will rot.
+A page may appear in several routes while keeping one canonical home. Copying its instructions into each section creates [competing search results](/articles/docs-seo/) and guarantees that one copy will rot.
 
 GitLab's [documentation folder guidance](https://docs.gitlab.com/development/documentation/site_architecture/folder_structure/) assigns distinct paths to user, administration, API, development, installation, update, and tutorial documentation. The exact folders belong to GitLab.
 
@@ -320,7 +319,7 @@ Use observed behavior without turning one signal into fake certainty:
 
 A lower bounce rate alone does not prove the structure works. My standard is stricter: the evidence should identify a reader decision and a route repair.
 
-The [documentation accessibility checklist](/articles/documentation-accessibility-checklist/) can catch structural barriers before the migration ships.
+The [documentation accessibility checklist](/articles/docs-accessibility/) can catch structural barriers before the migration ships.
 
 ## Documentation organization checklist
 

@@ -4,13 +4,11 @@ date: 2026-03-31
 description: AI product docs now need prompts, schemas, evals, and version boundaries.
   I explain the rules I would use to judge a technical writer for an AI company.
 status: published
-work_note: "Technical writer [Ninad Pathak](/contact/) documents AI products through their supported output contracts and evaluation examples, helping developers understand what they can depend on when responses vary."
-tags:
-- technical-writing
-- ai
-- developer-experience
-- devtools
+work_note: Technical writer [Ninad Pathak](/contact/) documents AI products through
+  their supported output contracts and evaluation examples, helping developers understand
+  what they can depend on when responses vary.
 title: 'Technical Writing for AI Products: The New Rules'
+slug: writing-for-ai-products
 ---
 
 Technical writing for AI products has become a product design problem. A weak paragraph used to confuse a reader for five minutes and cost nothing else.
@@ -73,7 +71,7 @@ They give one happy-path example and never show the borderline cases, like an em
 
 Worst of all, teams ship a prompt example that was never re-run against the current model snapshot, then claim the output is consistent.
 
-I covered the schema side of that problem in my post on [structured outputs](/articles/structured-outputs-llms-json-mode-function-calling/). OpenAI's structured outputs docs say the feature ensures the model adheres to your supplied JSON Schema and removes the need to retry malformed responses ([OpenAI structured outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs)).
+I covered the schema side of that problem in my post on [structured outputs](/articles/llm-structured-outputs/). OpenAI's structured outputs docs say the feature ensures the model adheres to your supplied JSON Schema and removes the need to retry malformed responses ([OpenAI structured outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs)).
 
 That changes what good documentation looks like. A writer working on an AI API now needs to explain:
 
@@ -142,7 +140,7 @@ Rarely do AI companies apply that thinking far enough. They version SDKs and neg
 
 Then they act surprised when support volume rises after a "minor" model update that quietly made the model chattier and broke a downstream parser expecting one-line answers.
 
-I wrote recently about [how to write a changelog developers actually read](/articles/how-to-write-a-changelog-developers-actually-read/). AI product teams need the same discipline, except the changelog has to explain behavioral changes with much more care.
+I wrote recently about [how to write a changelog developers actually read](/articles/writing-changelogs/). AI product teams need the same discipline, except the changelog has to explain behavioral changes with much more care.
 
 "Improved reasoning quality" is not a useful release note. "Responses are now more likely to include intermediate rationale unless `verbosity` is set to low" is useful.
 

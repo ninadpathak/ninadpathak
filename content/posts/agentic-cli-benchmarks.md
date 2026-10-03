@@ -4,13 +4,12 @@ date: 2026-04-12
 description: A workflow comparison of Claude Code and Gemini CLI for repository refactoring,
   verification, and human review.
 status: published
-work_note: "Comparing coding tools requires a task and a way to judge the patches. Developer content creator [Ninad Pathak](/portfolio/) writes comparisons with verification criteria that readers can apply to their own repositories."
-tags:
-- agentic-cli
-- developer-productivity
-- technical-deep-dive
+work_note: Comparing coding tools requires a task and a way to judge the patches.
+  Developer content creator [Ninad Pathak](/portfolio/) writes comparisons with verification
+  criteria that readers can apply to their own repositories.
 title: Claude Code vs. Gemini CLI for Repository Refactoring
 updated: '2026-08-17'
+slug: claude-vs-gemini-cli
 ---
 
 Claude Code and Gemini CLI can both inspect a repository, edit files, and run verification commands. The useful comparison is how each tool exposes plans, permissions, tool calls, and failures during a refactor.
@@ -43,7 +42,7 @@ Automation is not proof of correctness. The comparison should record which check
 
 The terminal clients call hosted models, so local RAM is not a direct measure of model context use. Local resource pressure comes from the repository, language servers, test processes, and any tools the agent launches.
 
-Compare context handling through observable behavior: what files the agent rereads, [what instructions it forgets](/articles/why-coding-agents-lose-their-memory/), and whether a fresh task inherits irrelevant history.
+Compare context handling through observable behavior: what files the agent rereads, [what instructions it forgets](/articles/coding-agent-memory/), and whether a fresh task inherits irrelevant history.
 
 ## The cost of agentic loops
 

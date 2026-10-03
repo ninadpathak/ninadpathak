@@ -5,13 +5,11 @@ description: DeepSeek V3 has 671B parameters but only activates 37B per token. H
   how mixture of experts works, why it cuts inference costs, and the catch nobody
   puts in the headline.
 status: published
-work_note: "For model providers explaining deployment requirements, [Ninad Pathak](/portfolio/) creates technical content connecting active computation and storage needs to the hardware choices a developer must make."
-tags:
-- ai
-- llm
-- inference
-- architecture
-title: 'Mixture of Experts: How Moe Models Are Cheap to Run but Expensive to Host'
+work_note: For model providers explaining deployment requirements, [Ninad Pathak](/portfolio/)
+  creates technical content connecting active computation and storage needs to the
+  hardware choices a developer must make.
+title: 'Mixture of Experts: How MoE Models Cut Computation but Need More Memory'
+slug: mixture-of-experts
 ---
 
 DeepSeek's API launched at roughly a tenth the price of comparable Anthropic and OpenAI endpoints, with competitive benchmark results. The architecture answer is mixture of experts.
@@ -36,7 +34,7 @@ DeepSeek V3 uses 256 routed experts per layer plus a few shared experts, activat
 
 The [DeepSeekMoE paper](https://arxiv.org/abs/2401.06066) and [DeepSeek-V2 paper](https://arxiv.org/abs/2405.04434) cover the specific architectural choices behind V3.
 
-Why this translates to cost savings comes down to the memory bandwidth bottleneck I explained in [my piece on speculative decoding](/articles/speculative-decoding-explained/). LLM inference spends most of its time waiting for weight reads from DRAM, not running matrix multiplications.
+Why this translates to cost savings comes down to the memory bandwidth bottleneck I explained in [my piece on speculative decoding](/articles/speculative-decoding/). LLM inference spends most of its time waiting for weight reads from DRAM, not running matrix multiplications.
 
 Activating only 37B parameters per forward pass means you do only 37B parameters worth of that weight loading, not 671B worth. A 671B MoE model running 37B active parameters per token moves roughly as many bytes off memory per token as a 37B dense model.
 

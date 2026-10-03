@@ -11,7 +11,7 @@ terms:
     <h3>Prompt engineering controls instructions; context engineering controls evidence</h3>
     <p>Prompt engineering focuses on how a task is expressed. Retrieval-augmented generation selects outside documents, while memory decides what persists across interactions.</p>
     <p>Context engineering coordinates those pieces and determines what the model sees for this specific step.</p>
-    <p>The <a href="/articles/context-windows-vs-memory/">context windows versus memory guide</a> explains why capacity and persistence are separate concerns. The <a href="/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/">contextual retrieval analysis</a> shows one index-time technique for giving retrieved chunks enough surrounding meaning.</p>
+    <p>The <a href="/articles/context-windows-vs-memory/">context windows versus memory guide</a> explains why capacity and persistence are separate concerns. The <a href="/articles/contextual-retrieval/">contextual retrieval analysis</a> shows one index-time technique for giving retrieved chunks enough surrounding meaning.</p>
     <h3>Assembly needs provenance and a deletion rule</h3>
     <p>Each context item should have a source, a reason for inclusion, and a condition that makes it stale. Tool results may last for one step, account preferences may persist across sessions, and system constraints may apply to every turn.</p>
     <p>When inputs conflict, the application should not rely on the model to infer which one is authoritative. It should resolve version and permission conflicts before assembly, then preserve source labels so the answer can be checked.</p>
@@ -56,7 +56,7 @@ terms:
     <h3>A repository repair shows what the discipline changes</h3>
     <p>Consider a coding agent asked to rename an API. The model can search for call sites, edit the implementation, run tests, read a failure, and correct the missed fixture.</p>
     <p>The engineering work lies in limiting writable paths, preserving the test output as evidence, preventing an endless retry loop, and requiring a diff for review.</p>
-    <p>The <a href="/articles/agentic-workflow-playbook/">agentic workflow playbook</a> develops that example into a shipped-work process. Agentic engineering does not apply when a deterministic script already knows every step, and the common misuse is adding a planner or extra agent where ordinary control flow would be cheaper and easier to test.</p>
+    <p>The <a href="/articles/agentic-workflows/">agentic workflow playbook</a> develops that example into a shipped-work process. Agentic engineering does not apply when a deterministic script already knows every step, and the common misuse is adding a planner or extra agent where ordinary control flow would be cheaper and easier to test.</p>
     <h3>Completion must be demonstrated outside the model</h3>
     <p>An agent saying that a task is complete is only another model output. Completion evidence comes from the environment: a passing pre-existing test, a clean diff against the requested scope, or a returned record that proves the external operation occurred.</p>
     <p>A self-authored fixture does not close the loop because it tests the agent’s assumptions against a test built from those same assumptions. The verifier must have an independent reason to reject a wrong result.</p>
@@ -83,7 +83,7 @@ terms:
     <p>Chain-of-thought is internal reasoning, while flow engineering produces external artifacts and transitions that the host can inspect.</p>
     <h3>A schema repair flow has an honest stopping condition</h3>
     <p>For structured extraction, one stage produces JSON, a validator checks it against a schema, and a repair stage receives the actual validation errors. The workflow stops when validation passes or a retry limit is reached.</p>
-    <p>The <a href="/articles/agentic-workflow-playbook/">agentic workflow playbook</a> shows a larger delivery flow with human review. Flow engineering is unnecessary when a deterministic parser already solves the task, and the common misuse is adding model stages that merely restate the same unchecked output.</p>
+    <p>The <a href="/articles/agentic-workflows/">agentic workflow playbook</a> shows a larger delivery flow with human review. Flow engineering is unnecessary when a deterministic parser already solves the task, and the common misuse is adding model stages that merely restate the same unchecked output.</p>
     <h3>The artifact between stages is the real interface</h3>
     <p>A useful flow specifies what each stage receives, what it must return, and which failure moves the process elsewhere. Passing a free-form transcript between every stage makes the sequence difficult to test and allows an early error to spread invisibly.</p>
     <p>Structured artifacts such as a requirements list, patch, test report, or citation map make the handoff inspectable. The flow earns its extra calls only when a later stage can reject or improve an earlier artifact using new information.</p>
@@ -133,7 +133,7 @@ terms:
     <h3>A read-only repository server makes the boundary concrete</h3>
     <p>An IDE host can connect to an MCP server that exposes <code>search_files</code> and <code>read_file</code>. The host may approve that server for one repository and withhold write tools entirely.</p>
     <p>The protocol describes the exchange, while operating-system permissions and host policy enforce the limit.</p>
-    <p>The <a href="/articles/model-context-protocol-explained/">MCP architecture guide</a> explains the roles. The common misuse is calling MCP a universal security layer or assuming a compatible server is therefore trustworthy.</p>
+    <p>The <a href="/articles/model-context-protocol/">MCP architecture guide</a> explains the roles. The common misuse is calling MCP a universal security layer or assuming a compatible server is therefore trustworthy.</p>
     <h3>Resources and tools carry different risk</h3>
     <p>A resource supplies context for the host to read, while a tool asks the server to perform an operation. Reading can still expose sensitive data, but a tool may also mutate state or trigger an external side effect.</p>
     <p>That distinction should shape consent, logging, and credential scope. A host that displays every capability as an equivalent menu item hides the most important fact about an integration: what can change when the model selects it.</p>
@@ -157,7 +157,7 @@ terms:
     <p>The cache key therefore needs more than an embedding. Tenant, permissions, product version, locale, source freshness, and response type may all belong in the eligibility check.</p>
     <h3>Semantic caching is not prompt caching or retrieval</h3>
     <p>Prompt caching reuses computation for an identical input prefix, while semantic caching may return an earlier application result for different text. Retrieval fetches evidence for a new answer; a semantic cache may bypass generation altogether.</p>
-    <p>The <a href="/articles/semantic-caching-rag-optimization/">semantic caching guide</a> develops the design and failure cases. The common misuse is choosing one global similarity threshold without evaluating false hits on the decisions the application actually makes.</p>
+    <p>The <a href="/articles/semantic-caching/">semantic caching guide</a> develops the design and failure cases. The common misuse is choosing one global similarity threshold without evaluating false hits on the decisions the application actually makes.</p>
     <h3>Invalidation is harder than matching</h3>
     <p>A cached answer may cease to be correct even when an incoming question remains similar. Source documents change, policies expire, and personalized facts move independently of the request wording.</p>
     <p>Entries therefore need provenance and an invalidation key tied to the data behind the response. Evaluation should count harmful false hits separately from harmless misses because reusing the wrong answer is usually worse than paying to generate a fresh one.</p>
@@ -184,7 +184,7 @@ terms:
     <p>An MRL prefix remains in the coordinate system the model was trained to organize. That training property is why prefix truncation can be evaluated as a deliberate operating point rather than an arbitrary loss of dimensions.</p>
     <h3>A two-stage catalog search shows the intended use</h3>
     <p>A catalog can search compact prefixes to retrieve a broad candidate set, then rescore those candidates with longer embeddings from the same MRL model. The design makes sense only after recall is evaluated at both stages on representative queries.</p>
-    <p>The <a href="/articles/embedding-models-compared/">embedding model guide</a> covers model selection and vector dimensions. The common misuse is chopping any embedding to a convenient size and assuming the result preserves meaning because an MRL-trained model could do so.</p>
+    <p>The <a href="/articles/vector-embeddings/">embedding model guide</a> covers model selection and vector dimensions. The common misuse is chopping any embedding to a convenient size and assuming the result preserves meaning because an MRL-trained model could do so.</p>
     <h3>The prefix length becomes a deployment parameter</h3>
     <p>Choosing a shorter prefix can reduce index storage and distance-computation work, but the effect depends on the model, corpus, and retrieval task. A product-name lookup may tolerate a compact representation that loses distinctions needed for legal or scientific search.</p>
     <p>The useful comparison holds the model and evaluation queries constant, then measures recall as dimensions are removed. A smaller vector is not automatically cheaper end to end if lower recall forces a much larger candidate set or reranking stage.</p>
@@ -207,7 +207,7 @@ terms:
     <p>For the query “authentication without API keys,” a semantically similar API-key guide may rank above a page about workload identity. A cross-encoder can inspect the negation and the candidate text together, then move the workload-identity page upward.</p>
     <p>A <a href="/glossary/bi-encoder/">bi-encoder</a> creates reusable vectors for candidate retrieval. A large generative model can also score documents, but generation is not required for the pairwise relevance task.</p>
     <h3>The candidate set limits what reranking can repair</h3>
-    <p>The <a href="/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/">RAG reranking guide</a> explains the two-stage architecture. Cross-encoder reranking does not apply if the relevant document never enters the candidate set, and the common misuse is tuning the reranker while ignoring first-stage recall.</p>
+    <p>The <a href="/articles/rag-reranking/">RAG reranking guide</a> explains the two-stage architecture. Cross-encoder reranking does not apply if the relevant document never enters the candidate set, and the common misuse is tuning the reranker while ignoring first-stage recall.</p>
     <p>A useful diagnosis records the relevant document’s position before and after reranking. That separates a reranker that fails to reorder a good candidate from a retriever that never supplied one.</p>
     <h3>Reranking depth is a budget decision</h3>
     <p>Scoring more candidates gives the cross-encoder more opportunities to recover the best passage, but the request cost grows with the number and length of pairs. Documents may need trimming or passage-level scoring to fit the model input.</p>
@@ -233,7 +233,7 @@ terms:
     <p><a href="/glossary/semantic-chunking/">Semantic chunking</a> chooses boundaries according to topical change. Late chunking changes when embeddings are computed.</p>
     <p>The two techniques can coexist because they solve different problems.</p>
     <h3>Long-document support is a condition, not a footnote</h3>
-    <p>The <a href="/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/">contextual retrieval analysis</a> covers a different method that prepends generated context before indexing each chunk. Late chunking is unsuitable when documents exceed the embedding model’s usable context or when each record is already self-contained.</p>
+    <p>The <a href="/articles/contextual-retrieval/">contextual retrieval analysis</a> covers a different method that prepends generated context before indexing each chunk. Late chunking is unsuitable when documents exceed the embedding model’s usable context or when each record is already self-contained.</p>
     <p>The common misuse is calling any post-embedding text split late chunking, even though the chunk vectors were never pooled from contextualized token representations.</p>
     <h3>Document boundaries still need a policy</h3>
     <p>Encoding an entire file is not always the right unit. A long collection of unrelated tickets may fit the model window but gain nothing from sharing context, while one chapter split across files may need a larger logical boundary.</p>
@@ -277,7 +277,7 @@ terms:
     <h3>A safe weather lookup has two validation layers</h3>
     <p>Suppose a model returns <code>{"city":"Pune","units":"metric"}</code> for a <code>get_weather</code> tool. Schema validation can reject an unknown unit, while application policy can reject a location the user is not authorized to query.</p>
     <p>A valid JSON object is not proof that the request is safe.</p>
-    <p>The <a href="/articles/model-context-protocol-explained/">MCP architecture guide</a> shows how this boundary extends across clients and servers. Tool calling is unnecessary for facts already present in context, and its common misuse is treating a schema-valid request as permission to execute it.</p>
+    <p>The <a href="/articles/model-context-protocol/">MCP architecture guide</a> shows how this boundary extends across clients and servers. Tool calling is unnecessary for facts already present in context, and its common misuse is treating a schema-valid request as permission to execute it.</p>
     <h3>Retries must account for side effects</h3>
     <p>A timed-out weather lookup can usually be repeated. A timed-out payment or ticket-creation call may already have succeeded, so a blind retry can duplicate the action.</p>
     <p>Mutation tools need an idempotency strategy or a read-after-write check that resolves an uncertain result. Returning the tool error to the model without that protection shifts a distributed-systems problem into generated text.</p>
@@ -360,7 +360,7 @@ terms:
     <p>A smaller context input can avoid creating some states in the first place, but that is context selection rather than cache eviction.</p>
     <h3>A name at the start of a conversation is a hard test</h3>
     <p>If a long support conversation introduces an account identifier early and asks for it again much later, an eviction policy that keeps only recent tokens may lose the relevant state. A credible evaluation varies the position and type of required evidence instead of verifying a fixture constructed to match the policy.</p>
-    <p>The <a href="/articles/kv-cache-eviction-accuracy/">KV-cache eviction analysis</a> explains the accuracy risks without presenting an unsupported hardware benchmark. The common misuse is publishing a memory or latency gain without the model, sequence distribution, hardware, policy settings, and task-level quality result needed to interpret it.</p>
+    <p>The <a href="/articles/kv-cache-eviction/">KV-cache eviction analysis</a> explains the accuracy risks without presenting an unsupported hardware benchmark. The common misuse is publishing a memory or latency gain without the model, sequence distribution, hardware, policy settings, and task-level quality result needed to interpret it.</p>
     <h3>Attention weight is not the same as future importance</h3>
     <p>A token that receives little attention now may become essential after the topic changes or the user refers back to it. Policies based on recent attention therefore make a prediction about future use, not an objective judgment that a token is irrelevant.</p>
     <p>Evaluation should include delayed references, information near different positions, and tasks that depend on several separated facts. A policy that succeeds only when the fixture places important tokens where the policy already prefers carries no evidence beyond its construction.</p>
@@ -397,7 +397,7 @@ terms:
     <p>Imagine a procedure whose final sentence warns that token rotation invalidates active sessions. A fixed boundary may place the warning in the next chunk, while a semantic boundary can keep the consequence with the rotation step.</p>
     <p><a href="/glossary/late-chunking/">Late chunking</a> changes when embeddings are computed, not how boundaries are chosen. Recursive chunking follows structural separators, and simple overlap repeats text across adjacent chunks.</p>
     <h3>Coherence does not excuse unbounded chunks</h3>
-    <p>The <a href="/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/">contextual retrieval analysis</a> shows how chunk context can be improved at index time. Semantic chunking does not apply when each database record is already atomic, and the common misuse is letting one broad topic produce a chunk too large for precise retrieval.</p>
+    <p>The <a href="/articles/contextual-retrieval/">contextual retrieval analysis</a> shows how chunk context can be improved at index time. Semantic chunking does not apply when each database record is already atomic, and the common misuse is letting one broad topic produce a chunk too large for precise retrieval.</p>
     <h3>Boundary quality must be tested through retrieval</h3>
     <p>A chunk can read coherently and still be a poor retrieval unit. It may contain several answers, omit a heading that disambiguates the subject, or exceed the amount of text the downstream model can use effectively.</p>
     <p>A representative query set should reveal whether the answer-bearing passage is retrieved and whether the returned chunk includes enough context to support an answer. Average chunk length alone cannot establish that the boundaries are useful.</p>
@@ -424,7 +424,7 @@ terms:
     <h3>Query expansion may generate terms; HyDE generates a document</h3>
     <p>Traditional query expansion adds related words or alternate queries. HyDE generates answer-shaped prose and embeds it.</p>
     <p>Self-querying retrieval instead extracts structured filters and a semantic query from the request.</p>
-    <p>The <a href="/articles/hybrid-search-bm25-vector-search/">hybrid search guide</a> covers another way to handle vocabulary mismatch. HyDE is a poor fit when invented specifics can pull retrieval toward the wrong domain, and the common misuse is quoting the hypothetical document as though a source had said it.</p>
+    <p>The <a href="/articles/hybrid-search/">hybrid search guide</a> covers another way to handle vocabulary mismatch. HyDE is a poor fit when invented specifics can pull retrieval toward the wrong domain, and the common misuse is quoting the hypothetical document as though a source had said it.</p>
     <h3>The generated text must remain outside the evidence set</h3>
     <p>A safe implementation labels the hypothetical document internally and keeps it separate from retrieved sources. If the generation invents a product name or technical term, retrieval may follow that invention and return a coherent but irrelevant neighborhood.</p>
     <p>Evaluation should compare retrieval with and without HyDE on the same queries, then inspect both gains and regressions. The method earns its extra model call only when it improves access to real answer-bearing documents.</p>
@@ -448,7 +448,7 @@ terms:
     <p>For that request, “incidents” belongs in semantic retrieval, while region equals EU and date after July belong in structured filters. Embedding the entire sentence leaves exact constraints to vector geometry, which is not designed to enforce them.</p>
     <p>Metadata filtering written directly by application code is preferable when the UI already supplies exact fields. <a href="/glossary/tool-calling/">Tool calling</a> may carry the generated search request, but self-querying retrieval describes the translation step.</p>
     <h3>Schema quality sets the ceiling</h3>
-    <p>The <a href="/articles/hybrid-search-bm25-vector-search/">hybrid search guide</a> explains how semantic and lexical retrieval can be combined after filtering. Self-querying does not apply when metadata is incomplete or access control is being delegated to model output.</p>
+    <p>The <a href="/articles/hybrid-search/">hybrid search guide</a> explains how semantic and lexical retrieval can be combined after filtering. Self-querying does not apply when metadata is incomplete or access control is being delegated to model output.</p>
     <p>The common misuse is treating a generated filter as authorization rather than as untrusted input to a policy-enforcing search layer.</p>
     <h3>The allowed query language should be smaller than the database language</h3>
     <p>The model usually needs a restricted set of fields and operators, not arbitrary SQL or a vendor’s full filter syntax. A typed intermediate representation lets the host reject unknown fields and compile allowed expressions safely.</p>
@@ -489,7 +489,7 @@ terms:
     <p>Model documentation may prescribe distinct query and passage prefixes or separate encoders. Omitting that contract can make a capable model look weak because the deployment no longer matches its training setup.</p>
     <h3>The query and document may need different instructions</h3>
     <p>For the query “how do I rotate an API key?”, a bi-encoder can retrieve a credential-rotation guide even when that guide uses different wording. An asymmetric retrieval model may encode the short question and the longer document with different prefixes or encoders because they play different roles.</p>
-    <p>The <a href="/articles/embedding-models-compared/">embedding model guide</a> explains the vector representation underneath this search. A bi-encoder is a poor final judge when a tiny qualifier changes relevance, and the common misuse is reading a high cosine similarity as a calibrated probability that a document answers the query.</p>
+    <p>The <a href="/articles/vector-embeddings/">embedding model guide</a> explains the vector representation underneath this search. A bi-encoder is a poor final judge when a tiny qualifier changes relevance, and the common misuse is reading a high cosine similarity as a calibrated probability that a document answers the query.</p>
     <h3>Hard negatives teach the boundary the retriever keeps missing</h3>
     <p>A random unrelated document is easy to rank below a relevant one. A versioned page for the wrong release or a guide that discusses API keys when the query excludes them is a harder and more useful negative.</p>
     <p>Evaluation should include those near misses and report whether the answer-bearing document enters the candidate set. A reranker cannot repair a document that the bi-encoder never retrieves.</p>
@@ -512,7 +512,7 @@ terms:
     <p>If a vector is divided into four sub-vectors and each codebook has entries addressed by one byte, the compressed representation contains four centroid identifiers plus any index overhead. The example explains the shape, not a universal compression ratio, because production choices depend on dimension, codebook size, and metadata.</p>
     <h3>PQ compresses vectors; HNSW navigates neighbors</h3>
     <p><a href="/glossary/hierarchical-navigable-small-world-hnsw/">HNSW</a> is a graph index, while PQ is an encoding. Matryoshka representation learning trains useful vector prefixes, and scalar quantization reduces the precision of individual values.</p>
-    <p>The <a href="/articles/embedding-models-compared/">embedding model guide</a> explains why dimension and model behavior must be evaluated together. Product quantization is unnecessary when full vectors fit comfortably in memory, and the common misuse is reporting space savings without measuring recall on the compressed index.</p>
+    <p>The <a href="/articles/vector-embeddings/">embedding model guide</a> explains why dimension and model behavior must be evaluated together. Product quantization is unnecessary when full vectors fit comfortably in memory, and the common misuse is reporting space savings without measuring recall on the compressed index.</p>
     <h3>Codebooks inherit the distribution they learned</h3>
     <p>A codebook trained on one embedding model or domain may represent a changed distribution poorly. Replacing the embedding model, normalizing vectors differently, or adding a distinct document population can make the old centroids a worse approximation.</p>
     <p>Migration planning should therefore include codebook retraining and side-by-side recall checks. Keeping original vectors elsewhere may also be necessary when the system needs exact reranking or future re-encoding.</p>
@@ -560,7 +560,7 @@ terms:
     <h3>A filtered support search exposes the tradeoff</h3>
     <p>Imagine an index of support articles where the query must match both semantic meaning and a product-version filter. If filtering leaves few eligible graph nodes, an aggressive search setting can miss the best valid result.</p>
     <p>Increasing search breadth may recover it, but the right setting must be measured on representative queries rather than copied from a vendor default.</p>
-    <p>The <a href="/articles/local-wasm-vector-benchmarks/">browser vector-search analysis</a> discusses index choices without treating its earlier benchmark framing as proof. HNSW is unnecessary for a small collection that exact search handles comfortably, and its common misuse is quoting a latency number without the dataset, hardware, recall target, index parameters, and filter behavior that produced it.</p>
+    <p>The <a href="/articles/browser-vector-search/">browser vector-search analysis</a> discusses index choices without treating its earlier benchmark framing as proof. HNSW is unnecessary for a small collection that exact search handles comfortably, and its common misuse is quoting a latency number without the dataset, hardware, recall target, index parameters, and filter behavior that produced it.</p>
     <h3>Exact search supplies the baseline HNSW needs</h3>
     <p>Before tuning an approximate index, run exact search on the evaluation queries and record the true nearest neighbors. HNSW recall is the share of those neighbors recovered under a particular search setting.</p>
     <p>Exact search can also be the production choice for a collection that fits the latency and cost budget. An approximate index adds build time, memory, and operational settings, so scale alone does not make it necessary.</p>
@@ -620,7 +620,7 @@ terms:
     <p>Review is most useful before expensive or irreversible execution begins. The reviewer can reject the route while the plan is still cheap to change.</p>
     <h3>A migration checklist is a good fit; incident response is not</h3>
     <p>For an API migration, the model can first list the affected endpoints, authentication changes, compatibility checks, code edits, and tests, then work through that ordered plan. The plan makes a skipped compatibility check visible.</p>
-    <p>An outage investigation is different because each log or metric changes the next question. The <a href="/articles/agentic-workflow-playbook/">agentic workflow playbook</a> shows where planning fits inside a broader delivery process.</p>
+    <p>An outage investigation is different because each log or metric changes the next question. The <a href="/articles/agentic-workflows/">agentic workflow playbook</a> shows where planning fits inside a broader delivery process.</p>
     <p>The common misuse is treating a polished plan as verification; every executed step still needs evidence.</p>
     <h3>Plan repair should preserve completed evidence</h3>
     <p>If execution exposes a false assumption, the system should revise the affected steps rather than regenerate the entire plan and lose the state of completed work. Each step needs a status and an artifact that supports that status.</p>
@@ -660,7 +660,7 @@ terms:
     <p>A draft model that predicts common boilerplate well may advance several tokens per target-model verification. If the domain, language, or style makes its proposals diverge, frequent rejection can erase the benefit.</p>
     <p>Quantization reduces numeric precision, batching combines requests, and test-time compute spends more work to improve an answer. Speculative decoding instead tries to produce target-model tokens with fewer sequential target passes.</p>
     <h3>The benchmark needs the whole serving context</h3>
-    <p>The <a href="/articles/speculative-decoding-explained/">speculative decoding guide</a> explains the mechanism and evaluation variables. The technique is a poor fit when the target model is already small or verification overhead dominates.</p>
+    <p>The <a href="/articles/speculative-decoding/">speculative decoding guide</a> explains the mechanism and evaluation variables. The technique is a poor fit when the target model is already small or verification overhead dominates.</p>
     <p>The common misuse is publishing one speedup without the draft and target models, hardware, batch size, prompt and output lengths, acceptance behavior, and decoding settings.</p>
     <h3>Serving load can change the result</h3>
     <p>A technique that improves single-request latency may compete for compute that a busy server could use for batching other requests. Draft-model memory also reduces the capacity available to the target model and its KV cache.</p>
@@ -703,7 +703,7 @@ terms:
     <p>Sending a simple question to an expensive general model wastes money, but sending a refund request to an under-authorized answer bot can block the user. Evaluation should weight each error by what the wrong destination can do, not report accuracy alone.</p>
     <h3>Support triage makes the failure cost visible</h3>
     <p>A billing question can go to a read-only account agent, while a refund request must take a path with stronger authentication and an approval step. Routing both to the same broad agent increases its permissions and makes failures harder to contain.</p>
-    <p>The <a href="/articles/multi-agent-vs-single-agent-tradeoffs/">single-agent versus multi-agent analysis</a> helps decide whether those destinations should exist at all. The common misuse is adding an LLM classifier where a stable field or explicit user choice would route more reliably.</p>
+    <p>The <a href="/articles/multi-agent-vs-single-agent/">single-agent versus multi-agent analysis</a> helps decide whether those destinations should exist at all. The common misuse is adding an LLM classifier where a stable field or explicit user choice would route more reliably.</p>
     <h3>A fallback path must preserve the original request</h3>
     <p>When the router is uncertain, it can ask a clarifying question, choose a constrained general path, or escalate to a human. Silently choosing the top label hides uncertainty and makes later failures look like executor failures.</p>
     <p>The fallback should receive the original request and the router’s evidence, not only its predicted label. That preserves the information needed to correct a bad route.</p>
@@ -736,7 +736,7 @@ terms:
     <p>Validation after generation is another option, but it may require repair or retry when the model produces an invalid shape.</p>
     <h3>Schema compliance is not semantic correctness</h3>
     <p>A response can match every type and still contain the wrong customer identifier or an unsupported conclusion. The host must validate permissions, ranges, referential integrity, and business rules that JSON Schema does not prove.</p>
-    <p>The <a href="/articles/structured-outputs-llms-json-mode-function-calling/">structured outputs guide</a> compares the API patterns in depth. JSON mode is enough when any valid JSON value is acceptable, while structured outputs fit stable contracts.</p>
+    <p>The <a href="/articles/llm-structured-outputs/">structured outputs guide</a> compares the API patterns in depth. JSON mode is enough when any valid JSON value is acceptable, while structured outputs fit stable contracts.</p>
     <p>The common misuse is presenting schema compliance as proof that the underlying facts are correct.</p>
     <h3>Refusals and incomplete generations need a separate path</h3>
     <p>An API may return a refusal or stop before completing a schema-constrained object. Application code should inspect the provider’s finish state and refusal representation before attempting to parse ordinary output.</p>

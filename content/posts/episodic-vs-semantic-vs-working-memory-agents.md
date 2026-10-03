@@ -3,13 +3,11 @@ category: ai-engineering
 date: '2026-05-04'
 description: AI agents juggle three distinct memory types. Getting them wrong is the
   source of most agent memory failures I see in production.
-slug: episodic-vs-semantic-vs-working-memory-agents
+slug: agent-memory-types
 status: published
-work_note: "Developer content creator [Ninad Pathak](/portfolio/) explains memory SDKs through concrete operations, distinguishing how an application saves a preference from how it records an action."
-tags:
-- ai-agents
-- agent-memory
-- llm-architecture
+work_note: Developer content creator [Ninad Pathak](/portfolio/) explains memory SDKs
+  through concrete operations, distinguishing how an application saves a preference
+  from how it records an action.
 title: 'Episodic, Semantic, and Working Memory in AI Agents: A Practical Map'
 ---
 
@@ -39,7 +37,7 @@ The context window also caps how much working memory is available. As a session 
 
 It is like trying to keep a forty-item grocery list in your head while someone keeps adding to it: past a point you stop holding the early items at all.
 
-If you want to understand how context windows fit into this picture, I wrote about [LLM context windows explained](/articles/llm-context-windows-explained/) and how they interact with different memory systems.
+If you want to understand how context windows fit into this picture, I wrote about [LLM context windows explained](/articles/llm-context-windows/) and how they interact with different memory systems.
 
 ### Episodic memory: what happened
 
@@ -65,7 +63,7 @@ A wrong semantic memory makes the agent confidently misinform you, citing a func
 
 The error signatures look nothing alike, and debugging them takes different tools.
 
-Whenever I reason about where semantic memory sits relative to retrieval, I come back to the [layered memory model for AI systems](/articles/ai-memory-management-for-llms/). The hierarchy framing helps because it makes one thing obvious: semantic memory is a single layer, the slow-changing reference shelf the agent reads from, far from the whole system.
+Whenever I reason about where semantic memory sits relative to retrieval, I come back to the [layered memory model for AI systems](/articles/ai-memory-management/). The hierarchy framing helps because it makes one thing obvious: semantic memory is a single layer, the slow-changing reference shelf the agent reads from, far from the whole system.
 
 Treating it as the whole system is how teams end up dumping yesterday's task logs into the same store as their hard-won API facts and wondering why answers drift.
 
@@ -136,6 +134,6 @@ These three memory types are no academic distinction. They carry different infor
 
 An agent that files a learned fact the same way it files a past event will fail in predictable ways. An agent that routes information by type stays easier to debug and more reliable in production.
 
-[AI memory management for LLMs](/articles/ai-memory-management-for-llms/) develops the wider hierarchy, including the inclusion, retrieval, and lifecycle rules that connect these memory types.
+[AI memory management for LLMs](/articles/ai-memory-management/) develops the wider hierarchy, including the inclusion, retrieval, and lifecycle rules that connect these memory types.
 
 What I cared about here is the set of architectural decisions that determine whether your agent's memory actually works.

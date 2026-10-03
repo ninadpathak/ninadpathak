@@ -23,8 +23,8 @@ sections:
   - heading: "Write and test the path"
     blurb: "Start with onboarding and tutorials—the places where missing assumptions become visible fastest."
     posts:
-      - developer-onboarding-docs-what-works-what-doesnt
-      - how-to-write-a-technical-tutorial-that-actually-teaches
+      - developer-onboarding-docs
+      - writing-technical-tutorials
 planned:
   - "Technical Documentation Template: From Empty Repository to Published Guide"
   - "Technical Documentation Best Practices, Tested on Real Developer Docs"

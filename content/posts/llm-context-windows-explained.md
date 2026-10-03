@@ -5,12 +5,11 @@ description: Context windows are expanding to millions of tokens. Here is why th
   middle of your context still gets ignored, what long context actually costs, and
   how to build production systems that use these massive windows effectively.
 status: published
-work_note: "An advertised context limit needs a worked request budget. [Ninad Pathak](/contact/) writes developer content that accounts for input and response allocation when explaining model usage."
-tags:
-- ai
-- llm
-- infrastructure
-title: 'Llm Context Windows Explained: Why More Is Not Always Better'
+work_note: An advertised context limit needs a worked request budget. [Ninad Pathak](/contact/)
+  writes developer content that accounts for input and response allocation when explaining
+  model usage.
+title: 'LLM Context Windows Explained: Why More Is Not Always Better'
+slug: llm-context-windows
 ---
 
 Language models read and reason over a fixed span of text called the context window, and that span has grown from a few thousand tokens to several million in barely a year. On paper, you can now drop an entire codebase, or a shelf of books, into one prompt and ask a question across all of it.
@@ -74,7 +73,7 @@ A live coding assistant or a checkout helper cannot, and that constraint usually
 
 Prompt caching can mitigate some of these costs by reusing a static prefix, and it helps a lot when most of your prompt is boilerplate. Caching does not bend the underlying physics of attention, though, so the bottleneck stays.
 
-Every design decision becomes a weigh-in: more context against a slower reply. A chat assistant that has to feel instant simply cannot afford to load a full 128k window on each turn, because [a long prompt directly drives up time to first token](/articles/time-to-first-token-ttft/).
+Every design decision becomes a weigh-in: more context against a slower reply. A chat assistant that has to feel instant simply cannot afford to load a full 128k window on each turn, because [a long prompt directly drives up time to first token](/articles/time-to-first-token/).
 
 ## Long context vs RAG vs hybrid
 
@@ -106,7 +105,7 @@ Whatever depth it starts failing at becomes your working context limit.
 
 **Optimize through chunking.** Split data into labeled units even when the whole thing fits, with clear delimiters like `### CUSTOMER PROFILE` between sections. Structure gives the attention mechanism handholds, the same way headings let a reader find their place in a long document.
 
-A million-token window is a genuinely powerful tool, and it retires none of the careful context engineering that came before it. Token space stays a scarce resource if you want dependable output, which is also the groundwork for [keeping your LLM spend predictable with token budgets](/articles/llm-token-budgets-cost-control/).
+A million-token window is a genuinely powerful tool, and it retires none of the careful context engineering that came before it. Token space stays a scarce resource if you want dependable output, which is also the groundwork for [keeping your LLM spend predictable with token budgets](/articles/llm-token-budgets/).
 
 ## Questions
 

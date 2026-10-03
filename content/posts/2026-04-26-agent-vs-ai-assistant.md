@@ -5,11 +5,9 @@ description: 'The difference between an AI agent and a smart assistant comes dow
   to one thing: who drives the loop.'
 slug: agent-vs-ai-assistant
 status: published
-work_note: "For AI companies explaining product autonomy, [Ninad Pathak](/contact/) writes developer content that makes the interaction model explicit: what the software decides and what still requires the user's instruction."
-tags:
-- ai agents
-- ai architecture
-- agent design
+work_note: 'For AI companies explaining product autonomy, [Ninad Pathak](/contact/)
+  writes developer content that makes the interaction model explicit: what the software
+  decides and what still requires the user''s instruction.'
 title: When to Build an Agent and When to Build a Smarter Assistant
 ---
 
@@ -44,13 +42,13 @@ Simple as the split sounds, it has real consequences for how you build, how you 
 
 ## What You Trade When You Add a Loop
 
-Building inside the loop means the system can surprise you, which is the point, and it also means the system can fail in ways that are hard to predict and hard to observe. The [production error patterns](/articles/production-ai-agent-errors/) show why tool use, retry behavior, and escalation need explicit limits when the system makes those decisions.
+Building inside the loop means the system can surprise you, which is the point, and it also means the system can fail in ways that are hard to predict and hard to observe. The [production error patterns](/articles/agent-error-handling/) show why tool use, retry behavior, and escalation need explicit limits when the system makes those decisions.
 
 For example, an agent without a retry limit may keep calling a flaky search tool after a transient timeout. The problem is the missing stop condition, not the model's ability to issue the call.
 
 Latency and cost ride along with every loop you add. Each iteration through it costs a model call.
 
-A task that resolves in one or two prompt-response exchanges turns expensive once you force it through an agent loop. The [LLM token budgets](/articles/llm-token-budgets-cost-control/) for a multi-turn agent session climb quickly, especially when the alternative is a single well-crafted prompt with a few good examples baked in.
+A task that resolves in one or two prompt-response exchanges turns expensive once you force it through an agent loop. The [LLM token budgets](/articles/llm-token-budgets/) for a multi-turn agent session climb quickly, especially when the alternative is a single well-crafted prompt with a few good examples baked in.
 
 ## When a Smarter Assistant Is the Right Call
 
@@ -92,7 +90,7 @@ Running through all three is one common thread: the human cannot reasonably spec
 
 ## The Taxonomy I Keep Coming Back To
 
-I mapped out [a taxonomy of AI agents](/articles/the-taxonomy-of-ai-agents/) that tries to make these distinctions concrete. The split that organizes everything in that taxonomy is between systems where the model drives the loop and systems where the human does.
+I mapped out [a taxonomy of AI agents](/articles/ai-agent-taxonomy/) that tries to make these distinctions concrete. The split that organizes everything in that taxonomy is between systems where the model drives the loop and systems where the human does.
 
 Every design decision flows from there.
 

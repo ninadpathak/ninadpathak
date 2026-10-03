@@ -4,14 +4,11 @@ date: 2026-04-19
 description: A deep dive into how HyperAgents retain context across interactions,
   layer memory architectures, and handle session continuity in production.
 status: published
-work_note: "Technical writer [Ninad Pathak](/portfolio/) turns agent architecture diagrams into product explanations that trace a tool result from execution to the memory a later step retrieves."
-tags:
-- ai
-- agents
-- memory
-- hyperagents
-- infrastructure
+work_note: Technical writer [Ninad Pathak](/portfolio/) turns agent architecture diagrams
+  into product explanations that trace a tool result from execution to the memory
+  a later step retrieves.
 title: How Memory Works in HyperAgents
+slug: hyperagents-memory
 ---
 
 <div class="visual-wrapper">
@@ -291,7 +288,7 @@ The pattern lets agents contribute to a collective memory without stepping on ea
 
 ##Production Considerations
 
-If you want to understand how this compares to other memory systems, see my post on [context windows vs memory](/articles/context-windows-vs-memory/). For a deeper look at the layers, check out [AI memory management for LLMs](/articles/ai-memory-management-for-llms/).
+If you want to understand how this compares to other memory systems, see my post on [context windows vs memory](/articles/context-windows-vs-memory/). For a deeper look at the layers, check out [AI memory management for LLMs](/articles/ai-memory-management/).
 
 Memory architecture that looks clean in a notebook breaks in production if you do not account for latency, storage growth, and failure modes.
 
@@ -350,9 +347,9 @@ A standard RAG pipeline would not know that the agent is three steps into a six-
 ##Related Articles
 
 - [Context windows vs memory](/articles/context-windows-vs-memory/)
-- [AI memory management for LLMs](/articles/ai-memory-management-for-llms/)
-- [Short-term memory for AI agents](/articles/short-term-memory-for-ai-agents/)
-- [State of AI agent memory 2026](/articles/state-of-ai-agent-memory-2026/)
+- [AI memory management for LLMs](/articles/ai-memory-management/)
+- [Short-term memory for AI agents](/articles/short-term-agent-memory/)
+- [State of AI agent memory 2026](/articles/agent-memory-2026/)
 
 ##Faq
 
