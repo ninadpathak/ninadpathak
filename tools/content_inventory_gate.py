@@ -8,6 +8,9 @@ Those remain separate human review decisions recorded in the audit register.
 from __future__ import annotations
 
 import argparse
+import json
+import hashlib
+from datetime import datetime
 import re
 import sys
 from difflib import SequenceMatcher
@@ -17,6 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / "planning/research/opinionated-site-2026-09-11/page-pov-audit.md"
 POSTS = ROOT / "content/posts"
+AUTHOR_REVIEWS = ROOT / "planning/research/blog-author-reviews.json"
 REVIEW_STATES = {
     "PHASE_A_EDITED",
     "EVIDENCE_REQUIRED",
@@ -67,6 +71,38 @@ def audit_rows() -> dict[str, str]:
     return rows
 
 
+def apply_author_reviews(rows: dict[str, str], posts: Path = POSTS,
+                         reviews: Path = AUTHOR_REVIEWS) -> dict[str, str]:
+    """Apply explicit author approvals only to the exact reviewed note revision."""
+    result = dict(rows)
+    if not reviews.exists():
+        return result
+    for name, record in json.loads(reviews.read_text()).items():
+        source = Path(name)
+        if source.parent != Path(".") or source.suffix != ".md" or name.startswith("."):
+            raise ValueError(f"Unexpected author review source: {name}")
+        if record.get("state") != "PROVISIONAL_REVIEW" or record.get("approval_source") != "obsidian_author_confirmation":
+            raise ValueError(f"Explicit author confirmation missing: {name}")
+        approved = datetime.fromisoformat(record["approved_at"].replace("Z", "+00:00"))
+        if approved.tzinfo is None:
+            raise ValueError(f"Author approval timestamp must include a timezone: {name}")
+        if record.get("status") not in {"published", "draft"}:
+            raise ValueError(f"Invalid author publication status: {name}")
+        if not re.fullmatch(r"[a-f0-9]{64}", record.get("sha256", "")):
+            raise ValueError(f"Invalid author review digest: {name}")
+        file = posts / name
+        if hashlib.sha256(file.read_bytes()).hexdigest() != record["sha256"]:
+            raise ValueError(f"Essay changed after author review; approve the new revision: {name}")
+        metadata, _ = frontmatter_and_body(file)
+        if metadata.get("status") != record["status"]:
+            raise ValueError(f"Author review status disagrees with the note: {name}")
+        if record["status"] == "published":
+            result[name] = "PROVISIONAL_REVIEW"
+        else:
+            result.pop(name, None)
+    return result
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -76,7 +112,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     problems: list[str] = []
-    rows = audit_rows()
+    rows = apply_author_reviews(audit_rows())
     published: dict[str, Path] = {}
 
     for path in sorted(POSTS.glob("*.md")):

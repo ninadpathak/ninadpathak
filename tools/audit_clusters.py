@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import json
 import pathlib
 import re
 import sys
@@ -86,6 +87,8 @@ def main() -> int:
     args = ap.parse_args()
 
     posts = load()
+    aliases_path = POSTS.parent / "post-slug-aliases.json"
+    aliases = json.loads(aliases_path.read_text()) if aliases_path.exists() else {}
     if not posts:
         print("no published posts found — run from the repo root")
         return 1
@@ -112,6 +115,7 @@ def main() -> int:
             if target.rstrip("/") + "/" in NON_ARTICLE_TARGETS:
                 outbound[slug] += 1
         for anchor, target in LINK.findall(post["content"]):
+            target = aliases.get(target, target)
             if target == slug or target not in posts:
                 continue
             outbound[slug] += 1
@@ -138,6 +142,7 @@ def main() -> int:
             except OSError:
                 continue
             for target in set(HREF.findall(html)):
+                target = aliases.get(target, target)
                 if target in posts:
                     template_inbound[target] += 1
 
