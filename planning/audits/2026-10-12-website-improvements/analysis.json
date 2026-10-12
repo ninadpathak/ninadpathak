@@ -1,0 +1,571 @@
+{
+  "stable_query_cohort": {
+    "method": "Exact same named nonbrand query; >=5 impressions in each window; fixed weight = min(current impressions, prior impressions). Not a controlled experiment; countries/devices and search-result mix can still change.",
+    "rows": [
+      {
+        "query": "code documentation",
+        "current": {
+          "keys": [
+            "code documentation"
+          ],
+          "clicks": 0,
+          "impressions": 63,
+          "ctr": 0,
+          "position": 63.80952380952381
+        },
+        "prior": {
+          "keys": [
+            "code documentation"
+          ],
+          "clicks": 0,
+          "impressions": 28,
+          "ctr": 0,
+          "position": 59.035714285714285
+        },
+        "fixed_weight": 28
+      },
+      {
+        "query": "code llm",
+        "current": {
+          "keys": [
+            "code llm"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 76.125
+        },
+        "prior": {
+          "keys": [
+            "code llm"
+          ],
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 80.45454545454545
+        },
+        "fixed_weight": 8
+      },
+      {
+        "query": "hybrid search expert",
+        "current": {
+          "keys": [
+            "hybrid search expert"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 75.5
+        },
+        "prior": {
+          "keys": [
+            "hybrid search expert"
+          ],
+          "clicks": 0,
+          "impressions": 13,
+          "ctr": 0,
+          "position": 83.38461538461539
+        },
+        "fixed_weight": 6
+      },
+      {
+        "query": "llm for software development",
+        "current": {
+          "keys": [
+            "llm for software development"
+          ],
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 69.57142857142857
+        },
+        "prior": {
+          "keys": [
+            "llm for software development"
+          ],
+          "clicks": 0,
+          "impressions": 16,
+          "ctr": 0,
+          "position": 68.9375
+        },
+        "fixed_weight": 7
+      },
+      {
+        "query": "llm inference optimization",
+        "current": {
+          "keys": [
+            "llm inference optimization"
+          ],
+          "clicks": 0,
+          "impressions": 61,
+          "ctr": 0,
+          "position": 71.68852459016394
+        },
+        "prior": {
+          "keys": [
+            "llm inference optimization"
+          ],
+          "clicks": 0,
+          "impressions": 176,
+          "ctr": 0,
+          "position": 76.36363636363636
+        },
+        "fixed_weight": 61
+      },
+      {
+        "query": "pglite vs sqlite",
+        "current": {
+          "keys": [
+            "pglite vs sqlite"
+          ],
+          "clicks": 0,
+          "impressions": 80,
+          "ctr": 0,
+          "position": 8.9
+        },
+        "prior": {
+          "keys": [
+            "pglite vs sqlite"
+          ],
+          "clicks": 0,
+          "impressions": 39,
+          "ctr": 0,
+          "position": 8.692307692307693
+        },
+        "fixed_weight": 39
+      },
+      {
+        "query": "sqlite vs pglite",
+        "current": {
+          "keys": [
+            "sqlite vs pglite"
+          ],
+          "clicks": 0,
+          "impressions": 14,
+          "ctr": 0,
+          "position": 6.714285714285714
+        },
+        "prior": {
+          "keys": [
+            "sqlite vs pglite"
+          ],
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 8.636363636363637
+        },
+        "fixed_weight": 11
+      }
+    ],
+    "current_fixed_weight_position": 50.81014880952382,
+    "prior_fixed_weight_position": 52.32305233828671
+  },
+  "windows": {
+    "current": {
+      "start": "2026-09-13",
+      "end": "2026-10-10",
+      "property_total": {
+        "clicks": 7,
+        "impressions": 1173,
+        "ctr": 0.005967604433077579,
+        "position": 24.392156862745097
+      },
+      "page_impressions_sum": 1412,
+      "named_query_impressions": 504,
+      "named_query_clicks": 2,
+      "legacy_alias_page_impressions_sum": 690,
+      "static_asset_page_impressions_sum": 16
+    },
+    "prior": {
+      "start": "2026-08-16",
+      "end": "2026-09-12",
+      "property_total": {
+        "clicks": 4,
+        "impressions": 1809,
+        "ctr": 0.002211166390270868,
+        "position": 57.94472084024323
+      },
+      "page_impressions_sum": 2003,
+      "named_query_impressions": 648,
+      "named_query_clicks": 1,
+      "legacy_alias_page_impressions_sum": 950,
+      "static_asset_page_impressions_sum": 20
+    },
+    "context_90d": {
+      "start": "2026-07-13",
+      "end": "2026-10-10",
+      "property_total": {
+        "clicks": 23,
+        "impressions": 4864,
+        "ctr": 0.0047286184210526315,
+        "position": 33.2243009868421
+      },
+      "page_impressions_sum": 5644,
+      "named_query_impressions": 1521,
+      "named_query_clicks": 7,
+      "legacy_alias_page_impressions_sum": 3120,
+      "static_asset_page_impressions_sum": 61
+    }
+  },
+  "priority_pages": {
+    "/articles/internal-vs-external-docs/": {
+      "current": {
+        "observed_alias_rows": [
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/internal-vs-external-documentation/"
+            ],
+            "clicks": 1,
+            "impressions": 84,
+            "ctr": 0.011904761904761904,
+            "position": 10.416666666666666
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/internal-vs-external-docs/"
+            ],
+            "clicks": 0,
+            "impressions": 8,
+            "ctr": 0,
+            "position": 7.75
+          }
+        ],
+        "page_impressions_sum": 92,
+        "clicks_sum": 1,
+        "derived_alias_weighted_position": 10.184782608695652,
+        "note": "Summed page/alias rows may count multiple appearances of the same property. This is an alias-based analytic summary, not the property total or a query-level rank."
+      },
+      "prior": {
+        "observed_alias_rows": [
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/internal-vs-external-documentation/"
+            ],
+            "clicks": 1,
+            "impressions": 18,
+            "ctr": 0.05555555555555555,
+            "position": 21.61111111111111
+          }
+        ],
+        "page_impressions_sum": 18,
+        "clicks_sum": 1,
+        "derived_alias_weighted_position": 21.61111111111111,
+        "note": "Summed page/alias rows may count multiple appearances of the same property. This is an alias-based analytic summary, not the property total or a query-level rank."
+      },
+      "current_named_queries": [
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/internal-vs-external-documentation/",
+            "external documentation"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 26.5
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/internal-vs-external-documentation/",
+            "internal documentation"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 73.5
+        }
+      ]
+    },
+    "/articles/browser-vector-search/": {
+      "current": {
+        "observed_alias_rows": [
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/browser-vector-search/"
+            ],
+            "clicks": 0,
+            "impressions": 27,
+            "ctr": 0,
+            "position": 7.62962962962963
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/local-wasm-vector-benchmarks/"
+            ],
+            "clicks": 0,
+            "impressions": 134,
+            "ctr": 0,
+            "position": 8.365671641791046
+          }
+        ],
+        "page_impressions_sum": 161,
+        "clicks_sum": 0,
+        "derived_alias_weighted_position": 8.242236024844722,
+        "note": "Summed page/alias rows may count multiple appearances of the same property. This is an alias-based analytic summary, not the property total or a query-level rank."
+      },
+      "prior": {
+        "observed_alias_rows": [
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/local-wasm-vector-benchmarks/"
+            ],
+            "clicks": 1,
+            "impressions": 157,
+            "ctr": 0.006369426751592357,
+            "position": 25.955414012738853
+          }
+        ],
+        "page_impressions_sum": 157,
+        "clicks_sum": 1,
+        "derived_alias_weighted_position": 25.955414012738853,
+        "note": "Summed page/alias rows may count multiple appearances of the same property. This is an alias-based analytic summary, not the property total or a query-level rank."
+      },
+      "current_named_queries": [
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/browser-vector-search/",
+            "pglite vs sqlite"
+          ],
+          "clicks": 0,
+          "impressions": 16,
+          "ctr": 0,
+          "position": 8.625
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/browser-vector-search/",
+            "sqlite vs pglite"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/local-wasm-vector-benchmarks/",
+            "pglite vector"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/local-wasm-vector-benchmarks/",
+            "pglite vs sqlite"
+          ],
+          "clicks": 0,
+          "impressions": 64,
+          "ctr": 0,
+          "position": 8.96875
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/local-wasm-vector-benchmarks/",
+            "sqlite vs pglite"
+          ],
+          "clicks": 0,
+          "impressions": 13,
+          "ctr": 0,
+          "position": 7.153846153846154
+        }
+      ]
+    },
+    "/articles/vector-embeddings/": {
+      "current": {
+        "observed_alias_rows": [
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/embedding-models-compared/"
+            ],
+            "clicks": 0,
+            "impressions": 45,
+            "ctr": 0,
+            "position": 19.88888888888889
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/vector-embeddings/"
+            ],
+            "clicks": 0,
+            "impressions": 11,
+            "ctr": 0,
+            "position": 17.90909090909091
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/embedding-models-compared/"
+            ],
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "position": 9.333333333333334
+          }
+        ],
+        "page_impressions_sum": 59,
+        "clicks_sum": 0,
+        "derived_alias_weighted_position": 18.983050847457626,
+        "note": "Summed page/alias rows may count multiple appearances of the same property. This is an alias-based analytic summary, not the property total or a query-level rank."
+      },
+      "prior": {
+        "observed_alias_rows": [
+          {
+            "keys": [
+              "https://ninadpathak.com/articles/embedding-models-compared/"
+            ],
+            "clicks": 0,
+            "impressions": 5,
+            "ctr": 0,
+            "position": 38.6
+          },
+          {
+            "keys": [
+              "https://ninadpathak.com/blog/embedding-models-compared/"
+            ],
+            "clicks": 0,
+            "impressions": 44,
+            "ctr": 0,
+            "position": 46.22727272727273
+          }
+        ],
+        "page_impressions_sum": 49,
+        "clicks_sum": 0,
+        "derived_alias_weighted_position": 45.44897959183673,
+        "note": "Summed page/alias rows may count multiple appearances of the same property. This is an alias-based analytic summary, not the property total or a query-level rank."
+      },
+      "current_named_queries": [
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/embedding-models-compared/",
+            "ai vector embedding"
+          ],
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 6.142857142857143
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/embedding-models-compared/",
+            "are embeddings different from vectors"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 64
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/embedding-models-compared/",
+            "embedding dimension"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 79.5
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/embedding-models-compared/",
+            "embedding geometry"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/embedding-models-compared/",
+            "how many dimenssions to use in embeddings"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 65.5
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/embedding-models-compared/",
+            "vector embedding ai"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 9.5
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/embedding-models-compared/",
+            "vector embedding in ai"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 8.333333333333332
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/embedding-models-compared/",
+            "vector embedding models"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 5.333333333333333
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/embedding-models-compared/",
+            "what is vector embedding in ai"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 27
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/vector-embeddings/",
+            "binary vector embedding"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 3.3333333333333335
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/vector-embeddings/",
+            "vector embedding"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 69.5
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/vector-embeddings/",
+            "vector embedding model"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "keys": [
+            "https://ninadpathak.com/articles/vector-embeddings/",
+            "what is vector embedding in ai"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "fetched_on": "2026-10-12",
+  "database": "us",
+  "reports": [
+    {
+      "name": "semrush_1",
+      "data": "Domain;Rank;Organic Keywords;Organic Traffic;X0;X1;X2\nninadpathak.com;15689898;26;0;0;0;0\n",
+      "metadata": {
+        "format": "csv",
+        "url": "https://www.semrush.com/analytics/overview/?db=us&export_columns=domain%2Crank%2Corganic_keywords%2Corganic_traffic%2Cpositions_1_3%2Cpositions_4_10%2Cpositions_11_20&q=ninadpathak.com",
+        "usage": {
+          "api_units": 10
+        }
+      }
+    },
+    {
+      "name": "semrush_2",
+      "data": "Keyword;Position;Previous Position;Search Volume;Url;Traffic;Keyword Difficulty;Intents;Timestamp\ndocumentation pages;58;58;40;https://ninadpathak.com/articles/how-to-organize-a-documentation-site/;0;35.00;1;1789344673\nwhat is chunking and embedding;79;0;40;https://ninadpathak.com/static/visuals/chunking;0;25.00;1;1791715925\nbest open source coding llms;81;81;50;https://ninadpathak.com/articles/best-llms-for-coding/;0;40.00;0;1788303298\nbest open source llm for coding;78;78;260;https://ninadpathak.com/articles/best-llms-for-coding/;0;49.00;0;1788332070\nm3 agent;56;56;90;https://ninadpathak.com/glossary/;0;33.00;1;1790905922\nm3-agent;58;58;480;https://ninadpathak.com/glossary/;0;35.00;1;1790295484\ncontext as memory;76;76;70;https://ninadpathak.com/static/visuals/context-memory;0;27.00;1;1787707222\ncode llm;79;79;390;https://ninadpathak.com/articles/best-llms-for-coding/;0;43.00;1;1788043941\nclaude-memory;61;61;170;https://ninadpathak.com/articles/how-memory-works-in-claude-code/;0;32.00;1;1789809890\nbest open source coding model;82;82;210;https://ninadpathak.com/articles/best-llms-for-coding/;0;49.00;0;1787694660\nmastering llm techniques inference optimization;72;72;70;https://ninadpathak.com/articles/llm-inference-optimization/;0;29.00;1;1787694932\nhttps www anthropic com news contextual retrieval;44;44;40;https://ninadpathak.com/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/;0;42.00;1;1787116535\nanthropic contextual retrieval;50;50;170;https://ninadpathak.com/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/;0;51.00;1;1787733714\nanthropic contextual retrieval;51;51;170;https://ninadpathak.com/articles/how-anthropics-contextual-retrieval-changes-rag-architecture/;0;51.00;1;1787733714\nllm for code;73;73;40;https://ninadpathak.com/articles/best-llms-for-coding/;0;33.00;0,1;1788244471\nconditional content reuse documentation versioning;88;88;70;https://ninadpathak.com/articles/how-to-document-multiple-product-versions/;0;3.00;1;1789847270\nhnsw algorithm approximate nearest neighbor paper malkov yashunin 2018;53;53;70;https://ninadpathak.com/glossary/hierarchical-navigable-small-world-hnsw/;0;0.0;1;1789886760\ndocumentation comment;68;68;40;https://ninadpathak.com/articles/code-documentation/;0;29.00;1;1789600025\nmemory claude;67;67;110;https://ninadpathak.com/articles/how-memory-works-in-claude-code/;0;39.00;1;1789468077\ntechnical documentation classification types;72;72;210;https://ninadpathak.com/articles/types-of-technical-documentation/;0;22.00;1;1789441726\nembedding dimension;69;69;70;https://ninadpathak.com/articles/embedding-models-compared/;0;39.00;1;1790257294\n4 types of documentation;74;74;40;https://ninadpathak.com/articles/documentation-types/;0;34.00;1;1791458301\nbest llm for system design;69;69;40;https://ninadpathak.com/articles/best-llms-for-coding/;0;33.00;0;1788226119\nbest llm for system design;70;70;40;https://ninadpathak.com/articles/best-llms-for-coding/;0;33.00;0;1788226119\nwhat is code documentation;62;62;140;https://ninadpathak.com/articles/code-documentation/;0;41.00;1;1789175651\ncoding llm;79;79;210;https://ninadpathak.com/articles/best-llms-for-coding/;0;39.00;0;1791575157\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 50,
+          "sort": "traffic_desc"
+        },
+        "url": "https://www.semrush.com/analytics/organic/positions/?db=us&display_limit=50&display_sort=traffic_desc&export_columns=keyword%2Cposition%2Cprevious_position%2Cvolume%2Curl%2Ctraffic%2Ckeyword_difficulty%2Cintent%2Ctimestamp&q=ninadpathak.com",
+        "usage": {
+          "api_units": 270
+        }
+      }
+    },
+    {
+      "name": "semrush_extra_0",
+      "data": "Keyword;Search Volume;CPC;Keyword Difficulty Index;Intent\ntechnical writing services;880;14.84;25;1\ntechnical documentation services;390;0;17;1\napi documentation services;10;18.15;0;\ndeveloper content marketing;40;5.95;5;1\ntechnical content writer;90;5.73;39;1\ntechnical writing for engineers;110;3.11;18;1\ninternal vs external documentation;20;0;0;\ndocumentation best practices;110;4.69;31;0\ndocumentation template;720;2.68;35;1\nai overviews checker;390;4.77;37;0\nllms txt validator;70;5.1;13;1\n",
+      "metadata": {
+        "format": "csv",
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=us&export_columns=keyword%2Cvolume%2Ccpc%2Ckeyword_difficulty%2Cintent&q=technical+writing+services%3Btechnical+documentation+services%3Bapi+documentation+services%3Bdeveloper+content+marketing%3Btechnical+content+writer%3Btechnical+writing+for+engineers%3Binternal+vs+external+documentation%3Bdocumentation+best+practices%3Bdocumentation+template%3Bai+overviews+checker%3Bllms+txt+validator",
+        "usage": {
+          "api_units": 910
+        }
+      }
+    },
+    {
+      "name": "semrush_extra_1",
+      "content": [
+        {
+          "type": "text",
+          "text": "tool call error: tool call failed for `semrush/execute_report`\n\nCaused by:\n    Mcp error: -32603: {\"code\":\"internal\",\"message\":\"get domain_organic_organic: ERROR 50 :: NOTHING FOUND\\nNo data found for this request. Verify your parameters are correct. If parameters are valid, try a different date range or target.\\nnot found\",\"retryable\":false,\"trace_id\":\"6e7b2fb9398c6e86fce066bc2d443cab\"}"
+        }
+      ],
+      "isError": true
+    },
+    {
+      "name": "semrush_final_0",
+      "data": "Position;Domain;Url\n1;www.sgs.com;https://www.sgs.com/en-us/services/technical-documentation\n2;www.timelytext.com;https://www.timelytext.com/services/documentation-services/\n3;www.madcapsoftware.com;https://www.madcapsoftware.com/services/technical-writing/\n4;tecnicum.com;https://tecnicum.com/en/consulting/technical-documentation\n5;blog.stanzago.com;https://blog.stanzago.com/technical-documentation-services-providers/\n6;blog.rsisecurity.com;https://blog.rsisecurity.com/are-technical-documentation-services-right-for-my-business/\n7;essentialdata.com;https://essentialdata.com/documentation-services/system-technical-documentation/\n8;www.ltts.com;https://www.ltts.com/services/integrated-content-management\n9;www.linkedin.com;https://www.linkedin.com/company/performance-technical-documentation-services-inc.\n10;www.doxis.com;https://www.doxis.com/en/blog/technical-documentation\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 10
+        },
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=us&display_limit=10&export_columns=position%2Cdomain%2Curl&q=technical+documentation+services",
+        "usage": {
+          "api_units": 260
+        }
+      }
+    },
+    {
+      "name": "semrush_final_1",
+      "data": "Position;Domain;Url\n1;www.madcapsoftware.com;https://www.madcapsoftware.com/services/technical-writing/\n2;www.timelytext.com;https://www.timelytext.com/services/technical-writing-services/\n3;www.thekyogroup.com;https://www.thekyogroup.com/technical-writing-services\n4;www.matcgroup.com;https://www.matcgroup.com/technical-writing/\n5;essentialdata.com;https://essentialdata.com/\n6;www.rubicontechservices.com;https://www.rubicontechservices.com/technical-writing-services/\n7;altuent.com;https://altuent.com/services/content-production/tech-writing/\n8;developers.google.com;https://developers.google.com/tech-writing\n9;3di-info.com;https://3di-info.com/services/technical-writing-services/\n10;servicelist.io;https://servicelist.io/article/technical-writing-services\n",
+      "metadata": {
+        "format": "csv",
+        "pagination": {
+          "limit": 10
+        },
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=us&display_limit=10&export_columns=position%2Cdomain%2Curl&q=technical+writing+services",
+        "usage": {
+          "api_units": 260
+        }
+      }
+    },
+    {
+      "name": "semrush_final_2",
+      "data": "Keyword;Search Volume;Keyword Difficulty Index\npglite vs sqlite;20;0\nvector embedding models;140;51\ncode documentation;720;44\nllm inference optimization;260;23\ninternal documentation;390;26\nexternal documentation;320;8\n",
+      "metadata": {
+        "format": "csv",
+        "url": "https://www.semrush.com/analytics/keywordoverview/?db=us&export_columns=keyword%2Cvolume%2Ckeyword_difficulty&q=pglite+vs+sqlite%3Bvector+embedding+models%3Bcode+documentation%3Bllm+inference+optimization%3Binternal+documentation%3Bexternal+documentation",
+        "usage": {
+          "api_units": 260
+        }
+      }
+    }
+  ]
+}
