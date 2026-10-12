@@ -1,0 +1,5672 @@
+{
+  "/": {
+    "fetched_at_utc": "2026-10-12T18:13:55.950062+00:00",
+    "requested_url": "https://ninadpathak.com/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Ninad Pathak | Technical Writing With a Point of View",
+    "canonical": [
+      "https://ninadpathak.com/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Technical documentation and developer content with tested examples, strong opinions, and no AI-generated understanding.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "website",
+      "og:title": "Ninad Pathak | Technical Writing With a Point of View",
+      "og:description": "Technical documentation and developer content with tested examples, strong opinions, and no AI-generated understanding.",
+      "og:url": "https://ninadpathak.com/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and no AI-generated understanding.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Write developer content"
+      ],
+      [
+        "h2",
+        "Creating content engineers call \u201cawesome\u201d"
+      ],
+      [
+        "h2",
+        "The impact other companies have seen."
+      ],
+      [
+        "h2",
+        "Less editing on your side."
+      ],
+      [
+        "h2",
+        "Latest blog posts"
+      ],
+      [
+        "h2",
+        "Need someone who understands your audience and can write for them?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "btn btn-primary"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-outline booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "arrow-link"
+      },
+      {
+        "href": "/work/centus/",
+        "class": "case-card"
+      },
+      {
+        "href": "/work/delightchat/",
+        "class": "case-card"
+      },
+      {
+        "href": "/work/kiwisizing/",
+        "class": "case-card"
+      },
+      {
+        "href": "/articles/",
+        "class": "arrow-link"
+      },
+      {
+        "class": "tag",
+        "href": "/articles/ai-engineering/"
+      },
+      {
+        "class": "tag",
+        "href": "/articles/developer-experience/"
+      },
+      {
+        "class": "tag",
+        "href": "/articles/technical-documentation/"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "post-row"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "post-row"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "post-row"
+      },
+      {
+        "href": "/articles/internal-vs-external-docs/",
+        "class": "post-row"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "btn btn-outline"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 4,
+    "bytes": 24060
+  },
+  "/articles/": {
+    "fetched_at_utc": "2026-10-12T18:13:55.990406+00:00",
+    "requested_url": "https://ninadpathak.com/articles/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Articles on DevRel, Documentation, and Technical Writing | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Arguments, tested tutorials, and technical notes on documentation, developer content, and AI engineering by Ninad Pathak.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "website",
+      "og:title": "Ninad Pathak | Technical Writing With a Point of View",
+      "og:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "og:url": "https://ninadpathak.com/articles/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Notes, tests, and arguments."
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/internal-vs-external-docs/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/technical-docs/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-types/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-best-practices/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-template/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-structure/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-review/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/docs-seo/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/agentic-workflows/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/fine-tuning-vs-rag/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/shared-vs-isolated-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/llm-inference-optimization/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/coding-agent-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/memory-versioning/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/memory-compression/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/agent-memory-types/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/memory-serialization/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/page/2/",
+        "class": "pagination-link next"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 2,
+    "bytes": 21075
+  },
+  "/articles/technical-documentation/": {
+    "fetched_at_utc": "2026-10-12T18:13:55.976536+00:00",
+    "requested_url": "https://ninadpathak.com/articles/technical-documentation/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/technical-documentation/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Technical Documentation Articles | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/technical-documentation/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Technical documentation built from product behavior, working examples, and a writer willing to decide what the reader needs.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "website",
+      "og:title": "Ninad Pathak | Technical Writing With a Point of View",
+      "og:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "og:url": "https://ninadpathak.com/articles/technical-documentation/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Technical Documentation"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/internal-vs-external-docs/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/technical-docs/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-types/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-best-practices/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-template/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-structure/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-review/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/docs-seo/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/shorter-documentation/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/writing-release-notes/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/writing-technical-tutorials/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/developer-onboarding-docs/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/writing-changelogs/",
+        "class": "blog-row"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 2,
+    "bytes": 17479
+  },
+  "/articles/developer-experience/": {
+    "fetched_at_utc": "2026-10-12T18:13:55.984055+00:00",
+    "requested_url": "https://ninadpathak.com/articles/developer-experience/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/developer-experience/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Developer Experience and DevRel Articles | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/developer-experience/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Arguments about developer trust, technical content, and the decisions that make a product feel credible before a sales call.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "website",
+      "og:title": "Ninad Pathak | Technical Writing With a Point of View",
+      "og:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "og:url": "https://ninadpathak.com/articles/developer-experience/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Developer Experience and DevRel"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/articles/technical-writing-for-engineers/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/documentation-velocity/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/stripe-technical-blog/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/devtools-documentation/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/engineer-to-writer/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/writing-for-ai-products/",
+        "class": "blog-row"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 2,
+    "bytes": 13335
+  },
+  "/articles/ai-engineering/": {
+    "fetched_at_utc": "2026-10-12T18:13:56.537655+00:00",
+    "requested_url": "https://ninadpathak.com/articles/ai-engineering/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/ai-engineering/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "AI Agents, Memory, and Retrieval Articles | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/ai-engineering/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Agent architecture, memory, retrieval, and inference explained through the failure boundaries that change an engineering decision.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "website",
+      "og:title": "Ninad Pathak | Technical Writing With a Point of View",
+      "og:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "og:url": "https://ninadpathak.com/articles/ai-engineering/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "AI Agents, Memory, and Retrieval"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/articles/agentic-workflows/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/fine-tuning-vs-rag/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/shared-vs-isolated-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/llm-inference-optimization/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/coding-agent-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/memory-versioning/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/memory-compression/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/agent-memory-types/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/memory-serialization/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/multi-agent-vs-single-agent/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/agent-vs-ai-assistant/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/agent-design-space/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/lambda-calculus-ai/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/agent-loop-anatomy/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/ai-agent-failures/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/ai-agent-taxonomy/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/voice-agent-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/short-term-agent-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/rag-vs-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/hyperagents-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/deerflow-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/context-windows-vs-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/claude-code-memory/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/ai-memory-management/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/agent-memory-2026/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/llm-token-budgets/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/voice-agent-latency/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/rag-evaluation/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/agent-error-handling/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/kv-cache-eviction/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/browser-vector-search/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/claude-vs-gemini-cli/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/hybrid-search/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/semantic-caching/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/llm-structured-outputs/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/contextual-retrieval/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/rag-reranking/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/vector-embeddings/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/llm-context-windows/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/mixture-of-experts/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/best-llms-for-coding/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/model-context-protocol/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/agent-harnesses/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/time-to-first-token/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/articles/speculative-decoding/",
+        "class": "blog-row"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 2,
+    "bytes": 30285
+  },
+  "/contact/": {
+    "fetched_at_utc": "2026-10-12T18:13:56.505392+00:00",
+    "requested_url": "https://ninadpathak.com/contact/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/contact/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Contact | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/contact/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Talk to Ninad Pathak about technical documentation or developer content that needs product understanding, testing, and a point of view.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "website",
+      "og:title": "Ninad Pathak | Technical Writing With a Point of View",
+      "og:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "og:url": "https://ninadpathak.com/contact/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Show me where it breaks."
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/cdn-cgi/l/email-protection#7018151c1c1f301e191e111400110418111b5e131f1d",
+        "class": "contact-method-val"
+      },
+      {
+        "href": "https://linkedin.com/in/ninadwrites",
+        "class": "contact-method-val",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://x.com/ninadwrites",
+        "class": "contact-method-val",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary btn-block booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 14123
+  },
+  "/work/": {
+    "fetched_at_utc": "2026-10-12T18:13:56.507522+00:00",
+    "requested_url": "https://ninadpathak.com/work/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/work/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Work | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/work/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Case studies showing how technical content drove real results: 450K monthly visits, 740% ROI, and 50K organic sessions from zero.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "website",
+      "og:title": "Ninad Pathak | Technical Writing With a Point of View",
+      "og:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "og:url": "https://ninadpathak.com/work/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "The work has to do something."
+      ],
+      [
+        "h2",
+        "Do your docs deserve a harder look?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/centus/",
+        "class": "work-card"
+      },
+      {
+        "href": "/work/delightchat/",
+        "class": "work-card"
+      },
+      {
+        "href": "/work/kiwisizing/",
+        "class": "work-card"
+      },
+      {
+        "href": "/work/linuxfordevices/",
+        "class": "work-card"
+      },
+      {
+        "href": "/work/mem0/",
+        "class": "work-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "btn btn-outline"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 15482
+  },
+  "/portfolio/": {
+    "fetched_at_utc": "2026-10-12T18:13:56.537496+00:00",
+    "requested_url": "https://ninadpathak.com/portfolio/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/portfolio/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Portfolio | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/portfolio/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Published tutorials and technical articles by Ninad Pathak across developer tools, AI systems, localization, and infrastructure.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "website",
+      "og:title": "Ninad Pathak | Technical Writing With a Point of View",
+      "og:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "og:url": "https://ninadpathak.com/portfolio/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "My published work"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://graphite.dev/blog/code-review-best-practices",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://graphite.dev/blog/phabricator-code-review",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://graphite.dev/blog/phabricator-alternatives",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://graphite.dev/blog/pull-request-guidelines",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://www.testmu.ai/learning-hub/ai-agent-testing",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.testmu.ai/blog/ai-adoption-challenges/",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://centus.com/blog/svelte-localization",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "localization"
+      },
+      {
+        "href": "https://centus.com/blog/react-i18n-intl",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "localization"
+      },
+      {
+        "href": "https://centus.com/blog/react-i18next-localization",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "localization"
+      },
+      {
+        "href": "https://centus.com/blog/yaml-translation",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "localization"
+      },
+      {
+        "href": "https://centus.com/blog/software-internationalization",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "localization"
+      },
+      {
+        "href": "https://centus.com/blog/javascript-localization",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "localization"
+      },
+      {
+        "href": "/work/mem0/",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://mem0.ai/blog/what-is-natural-language-processing",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://mem0.ai/blog/what-is-ai-agent-memory",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://mem0.ai/blog/claude-code-memory",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://mem0.ai/blog/long-term-memory-ai-agents",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://mem0.ai/articles/short-term-agent-memory",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://mem0.ai/blog/vector-embeddings",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://mem0.ai/blog/reducing-hallucinations-llms-with-grounded-memory",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://mem0.ai/blog/what-is-agentic-rag",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.factors.ai/authors/ninad-pathak",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "growth-&-marketing"
+      },
+      {
+        "href": "https://www.factors.ai/blog/content-marketing-metrics-and-kpis-for-saas",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "growth-&-marketing"
+      },
+      {
+        "href": "https://www.factors.ai/authors/ninad-pathak",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "growth-&-marketing"
+      },
+      {
+        "href": "https://www.hostinger.com/tutorials/difference-between-wordpress-categories-and-tags",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.delightchat.io/blog/automate-customer-service-for-ecommerce",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "growth-&-marketing"
+      },
+      {
+        "href": "https://www.delightchat.io/blog/live-chat-launch",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "growth-&-marketing"
+      },
+      {
+        "href": "https://www.delightchat.io/blog/gorgias-vs-freshchat-top-differences-and-similarities",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "growth-&-marketing"
+      },
+      {
+        "href": "https://www.linuxfordevices.com/tutorials/shell-script/variables-in-shell-scripts",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.linuxfordevices.com/tutorials/linux/start-stop-restart-services-linux",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.linuxfordevices.com/tutorials/linux/start-stop-restart-services-linux",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.linuxfordevices.com/tutorials/ssh-command-in-linux",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/agent-tools",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/context-layer-for-ai-agents",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/best-semantic-search-apis",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/why-clis-are-better-for-agents",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/firecrawl-mcp-in-cursor",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/firecrawl-mcp-chatgpt",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/selenium-web-scraping",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/agent-skills-explained",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/claude-web-fetch-vs-firecrawl",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/cms-migration-guide",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/curl-web-scraping-guide",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://mem0.ai/blog/self-hosting-mem0",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://graphite.dev/blog/how-to-use-stacked-prs",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://graphite.dev/blog/best-github-pull-request-merge-strategy",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://www.testmu.ai/blog/ai-testing-agents-accelerate-qa",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.testmu.ai/blog/ai-testing-vs-traditional-testing",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/what-is-an-agent-harness",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/what-is-agentic-search",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/ai-agent-sandbox",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/ai-voice-agent-platforms",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/antigravity-skills",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/api-for-ai-agents",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/best-search-tools-for-agents",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/llm-grounding",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/openclaw-vs-hermes",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/playwright-vs-puppeteer",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/scrape-a-website-to-markdown",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/training-vs-retrieved-vs-live-web-data",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/competitor-feature-alert-system-firecrawl-monitor",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/nimbleway-alternatives",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://www.firecrawl.dev/blog/scrapingbee-alternatives",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://opencomputer.dev/blog/pr-review-agent",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "devtools"
+      },
+      {
+        "href": "https://opencomputer.dev/guides/claude-agent-sdk-sandbox",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "ai-systems"
+      },
+      {
+        "href": "https://opencomputer.dev/guides/codespaces-gitpod-agents",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://opencomputer.dev/guides/e2b-alternatives",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://opencomputer.dev/guides/podman-vs-docker-untrusted-code",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://opencomputer.dev/guides/python-sandbox",
+        "class": "p-item",
+        "target": "_blank",
+        "rel": "noopener",
+        "data-cat": "developer-infrastructure"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "btn btn-outline"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 39021
+  },
+  "/tools/": {
+    "fetched_at_utc": "2026-10-12T18:13:57.135039+00:00",
+    "requested_url": "https://ninadpathak.com/tools/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/tools/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Free Tools for Documentation and AI Search | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/tools/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Five browser tools for technical documentation and AI search: check AI Overview extractability, audit robots.txt for AI crawler access, validate and generate llms.txt, and lint technical prose. No signup.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "website",
+      "og:title": "Ninad Pathak | Technical Writing With a Point of View",
+      "og:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "og:url": "https://ninadpathak.com/tools/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Tools"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/ai-overviews-checker/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/ai-crawler-checker/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/llms-txt-validator/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/llms-txt-generator/",
+        "class": "blog-row"
+      },
+      {
+        "href": "/linter/",
+        "class": "blog-row"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 2,
+    "bytes": 16335
+  },
+  "/articles/technical-writing-for-engineers/": {
+    "fetched_at_utc": "2026-10-12T18:13:57.199183+00:00",
+    "requested_url": "https://ninadpathak.com/articles/technical-writing-for-engineers/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/technical-writing-for-engineers/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Technical Writing for Engineers: The 80/20 Guide | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/technical-writing-for-engineers/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Most engineering documentation fails for the same reasons. Here is what actually moves the needle.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "article",
+      "og:title": "Technical Writing for Engineers: The 80/20 Guide",
+      "og:description": "Most engineering documentation fails for the same reasons. Here is what actually moves the needle.",
+      "og:url": "https://ninadpathak.com/articles/technical-writing-for-engineers/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Technical Writing for Engineers: The 80/20 Guide"
+      ],
+      [
+        "h2",
+        "The core problem"
+      ],
+      [
+        "h2",
+        "Start with the task, not the concept"
+      ],
+      [
+        "h2",
+        "Code that works beats code that explains"
+      ],
+      [
+        "h2",
+        "Name things precisely"
+      ],
+      [
+        "h2",
+        "Structure for scanning"
+      ],
+      [
+        "h2",
+        "The four documentation types"
+      ],
+      [
+        "h2",
+        "Version control your documentation"
+      ],
+      [
+        "h2",
+        "Measure whether docs work"
+      ],
+      [
+        "h2",
+        "The update discipline"
+      ],
+      [
+        "h2",
+        "What to cut"
+      ],
+      [
+        "h2",
+        "The minimal viable documentation stack"
+      ],
+      [
+        "h2",
+        "The compounding return"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/"
+      },
+      {
+        "href": "/articles/"
+      },
+      {
+        "href": "/articles/",
+        "class": "back-link"
+      },
+      {
+        "href": "/about/",
+        "rel": "author"
+      },
+      {
+        "href": "/articles/developer-experience/",
+        "class": "tag"
+      },
+      {
+        "href": "#the-core-problem"
+      },
+      {
+        "href": "#start-with-the-task-not-the-concept"
+      },
+      {
+        "href": "#code-that-works-beats-code-that-explains"
+      },
+      {
+        "href": "#name-things-precisely"
+      },
+      {
+        "href": "#structure-for-scanning"
+      },
+      {
+        "href": "#the-four-documentation-types"
+      },
+      {
+        "href": "#version-control-your-documentation"
+      },
+      {
+        "href": "#measure-whether-docs-work"
+      },
+      {
+        "href": "#the-update-discipline"
+      },
+      {
+        "href": "#what-to-cut"
+      },
+      {
+        "href": "#the-minimal-viable-documentation-stack"
+      },
+      {
+        "href": "#the-compounding-return"
+      },
+      {
+        "href": "/portfolio/"
+      },
+      {
+        "href": "/articles/shorter-documentation/"
+      },
+      {
+        "href": "/articles/writing-technical-tutorials/"
+      },
+      {
+        "href": "/articles/code-documentation/"
+      },
+      {
+        "href": "/articles/developer-onboarding-docs/"
+      },
+      {
+        "href": "/articles/engineer-to-writer/"
+      },
+      {
+        "href": "/articles/documentation-velocity/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/stripe-technical-blog/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/devtools-documentation/",
+        "class": "related-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 33014
+  },
+  "/articles/code-documentation/": {
+    "fetched_at_utc": "2026-10-12T18:13:57.057501+00:00",
+    "requested_url": "https://ninadpathak.com/articles/code-documentation/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/code-documentation/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Code Documentation: Comments, Generated Reference, and External Guides | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/code-documentation/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Decide what belongs in code comments, generated reference, and written guides so each reader can find the right kind of answer.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "article",
+      "og:title": "Code Documentation: Comments, Generated Reference, and External Guides",
+      "og:description": "Decide what belongs in code comments, generated reference, and written guides so each reader can find the right kind of answer.",
+      "og:url": "https://ninadpathak.com/articles/code-documentation/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Code Documentation: Comments, Generated Reference, and External Guides"
+      ],
+      [
+        "h2",
+        "Put local reasoning beside the code that needs it"
+      ],
+      [
+        "h2",
+        "Generate reference from contracts that source can expose"
+      ],
+      [
+        "h2",
+        "Write guides for decisions that cross symbols"
+      ],
+      [
+        "h2",
+        "Use one placement test before you document code"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/"
+      },
+      {
+        "href": "/articles/"
+      },
+      {
+        "href": "/articles/",
+        "class": "back-link"
+      },
+      {
+        "href": "/about/",
+        "rel": "author"
+      },
+      {
+        "href": "/articles/technical-documentation/",
+        "class": "tag"
+      },
+      {
+        "href": "#put-local-reasoning-beside-the-code-that-needs-it"
+      },
+      {
+        "href": "#comments-explain-intent-that-syntax-cannot-carry"
+      },
+      {
+        "href": "#docstrings-define-the-unit-a-caller-can-depend-on"
+      },
+      {
+        "href": "#generate-reference-from-contracts-that-source-can-expose"
+      },
+      {
+        "href": "#generated-reference-keeps-exact-facts-close-to-change"
+      },
+      {
+        "href": "#a-generated-page-cannot-explain-a-multi-step-decision"
+      },
+      {
+        "href": "#write-guides-for-decisions-that-cross-symbols"
+      },
+      {
+        "href": "#guides-connect-a-task-to-the-contract-it-needs"
+      },
+      {
+        "href": "#guides-preserve-context-that-source-cannot-reveal"
+      },
+      {
+        "href": "#use-one-placement-test-before-you-document-code"
+      },
+      {
+        "href": "/portfolio/"
+      },
+      {
+        "href": "https://github.com/ninadpathak/ninadpathak/blob/main/build.py"
+      },
+      {
+        "href": "https://developers.google.com/style/api-reference-comments"
+      },
+      {
+        "href": "https://docs.python.org/3/library/pydoc.html"
+      },
+      {
+        "href": "https://docs.python.org/3/library/pydoc.html"
+      },
+      {
+        "href": "/articles/documentation-types/"
+      },
+      {
+        "href": "/articles/documentation-template/"
+      },
+      {
+        "href": "https://www.ibm.com/think/topics/code-documentation"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/internal-vs-external-docs/",
+        "class": "related-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 25069
+  },
+  "/articles/internal-vs-external-documentation/": {
+    "fetched_at_utc": "2026-10-12T18:13:57.228193+00:00",
+    "requested_url": "https://ninadpathak.com/articles/internal-vs-external-documentation/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/internal-vs-external-docs/",
+    "redirects": [
+      {
+        "status": 301,
+        "url": "https://ninadpathak.com/articles/internal-vs-external-documentation/",
+        "location": "/articles/internal-vs-external-docs/"
+      }
+    ],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Internal vs. External Documentation: What Belongs Where | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/internal-vs-external-docs/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Compare internal and external documentation, decide where each page belongs, and split shared subjects without exposing private operating context.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "article",
+      "og:title": "Internal vs. External Documentation: What Belongs Where",
+      "og:description": "Compare internal and external documentation, decide where each page belongs, and split shared subjects without exposing private operating context.",
+      "og:url": "https://ninadpathak.com/articles/internal-vs-external-docs/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Internal vs. External Documentation: What Belongs Where"
+      ],
+      [
+        "h2",
+        "Internal vs. external documentation: choose by reader task"
+      ],
+      [
+        "h2",
+        "Internal vs. external documentation comparison"
+      ],
+      [
+        "h2",
+        "What belongs in internal documentation"
+      ],
+      [
+        "h2",
+        "What belongs in external documentation"
+      ],
+      [
+        "h2",
+        "When to split internal and external documentation"
+      ],
+      [
+        "h2",
+        "Documentation placement audit template"
+      ],
+      [
+        "h2",
+        "Documentation ownership and update triggers"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/"
+      },
+      {
+        "href": "/articles/"
+      },
+      {
+        "href": "/articles/",
+        "class": "back-link"
+      },
+      {
+        "href": "/about/",
+        "rel": "author"
+      },
+      {
+        "href": "/articles/technical-documentation/",
+        "class": "tag"
+      },
+      {
+        "href": "#internal-vs-external-documentation-choose-by-reader-task"
+      },
+      {
+        "href": "#internal-vs-external-documentation-comparison"
+      },
+      {
+        "href": "#what-belongs-in-internal-documentation"
+      },
+      {
+        "href": "#architecture-decisions-and-system-design"
+      },
+      {
+        "href": "#runbooks-and-internal-recovery-procedures"
+      },
+      {
+        "href": "#employee-onboarding-and-working-agreements"
+      },
+      {
+        "href": "#what-belongs-in-external-documentation"
+      },
+      {
+        "href": "#product-scope-and-getting-started"
+      },
+      {
+        "href": "#public-interfaces-and-product-contracts"
+      },
+      {
+        "href": "#releases-migrations-and-customer-recovery"
+      },
+      {
+        "href": "#when-to-split-internal-and-external-documentation"
+      },
+      {
+        "href": "#documentation-placement-audit-template"
+      },
+      {
+        "href": "#documentation-ownership-and-update-triggers"
+      },
+      {
+        "href": "/contact/"
+      },
+      {
+        "href": "https://developers.google.com/tech-writing/one/audience"
+      },
+      {
+        "href": "https://www.ibm.com/think/topics/code-documentation"
+      },
+      {
+        "href": "https://www.atlassian.com/work-management/knowledge-sharing/documentation"
+      },
+      {
+        "href": "/static/templates/documentation_placement_audit.py"
+      },
+      {
+        "href": "/static/templates/documentation-placement-audit.json"
+      },
+      {
+        "href": "/static/templates/documentation-placement-audit-report.csv"
+      },
+      {
+        "href": "https://docs.gitlab.com/development/documentation/styleguide/"
+      },
+      {
+        "href": "/articles/documentation-types/"
+      },
+      {
+        "href": "/articles/documentation-structure/"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "related-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 28809
+  },
+  "/articles/internal-vs-external-docs/": {
+    "fetched_at_utc": "2026-10-12T18:13:57.673743+00:00",
+    "requested_url": "https://ninadpathak.com/articles/internal-vs-external-docs/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/internal-vs-external-docs/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Internal vs. External Documentation: What Belongs Where | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/internal-vs-external-docs/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Compare internal and external documentation, decide where each page belongs, and split shared subjects without exposing private operating context.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "article",
+      "og:title": "Internal vs. External Documentation: What Belongs Where",
+      "og:description": "Compare internal and external documentation, decide where each page belongs, and split shared subjects without exposing private operating context.",
+      "og:url": "https://ninadpathak.com/articles/internal-vs-external-docs/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Internal vs. External Documentation: What Belongs Where"
+      ],
+      [
+        "h2",
+        "Internal vs. external documentation: choose by reader task"
+      ],
+      [
+        "h2",
+        "Internal vs. external documentation comparison"
+      ],
+      [
+        "h2",
+        "What belongs in internal documentation"
+      ],
+      [
+        "h2",
+        "What belongs in external documentation"
+      ],
+      [
+        "h2",
+        "When to split internal and external documentation"
+      ],
+      [
+        "h2",
+        "Documentation placement audit template"
+      ],
+      [
+        "h2",
+        "Documentation ownership and update triggers"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/"
+      },
+      {
+        "href": "/articles/"
+      },
+      {
+        "href": "/articles/",
+        "class": "back-link"
+      },
+      {
+        "href": "/about/",
+        "rel": "author"
+      },
+      {
+        "href": "/articles/technical-documentation/",
+        "class": "tag"
+      },
+      {
+        "href": "#internal-vs-external-documentation-choose-by-reader-task"
+      },
+      {
+        "href": "#internal-vs-external-documentation-comparison"
+      },
+      {
+        "href": "#what-belongs-in-internal-documentation"
+      },
+      {
+        "href": "#architecture-decisions-and-system-design"
+      },
+      {
+        "href": "#runbooks-and-internal-recovery-procedures"
+      },
+      {
+        "href": "#employee-onboarding-and-working-agreements"
+      },
+      {
+        "href": "#what-belongs-in-external-documentation"
+      },
+      {
+        "href": "#product-scope-and-getting-started"
+      },
+      {
+        "href": "#public-interfaces-and-product-contracts"
+      },
+      {
+        "href": "#releases-migrations-and-customer-recovery"
+      },
+      {
+        "href": "#when-to-split-internal-and-external-documentation"
+      },
+      {
+        "href": "#documentation-placement-audit-template"
+      },
+      {
+        "href": "#documentation-ownership-and-update-triggers"
+      },
+      {
+        "href": "/contact/"
+      },
+      {
+        "href": "https://developers.google.com/tech-writing/one/audience"
+      },
+      {
+        "href": "https://www.ibm.com/think/topics/code-documentation"
+      },
+      {
+        "href": "https://www.atlassian.com/work-management/knowledge-sharing/documentation"
+      },
+      {
+        "href": "/static/templates/documentation_placement_audit.py"
+      },
+      {
+        "href": "/static/templates/documentation-placement-audit.json"
+      },
+      {
+        "href": "/static/templates/documentation-placement-audit-report.csv"
+      },
+      {
+        "href": "https://docs.gitlab.com/development/documentation/styleguide/"
+      },
+      {
+        "href": "/articles/documentation-types/"
+      },
+      {
+        "href": "/articles/documentation-structure/"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "related-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 28809,
+    "opening_excerpt": "Internal documentation helps your team operate the system. External documentation helps customers, partners, and public developers use the supported product. When both tasks exist, publish a public task page and keep a separate private operating record. Classify each subject as internal , external , or split . Internal vs. external documentation: choose by reader task Google's technical writing guidance on audience defines an audience by the knowledge and skills it needs for a task. Use that task, not a person's job title, to decide where a page belongs. Ask four questions: Does someone outsid"
+  },
+  "/articles/what-is-technical-documentation-and-what-should-it-include/": {
+    "fetched_at_utc": "2026-10-12T18:13:57.839030+00:00",
+    "requested_url": "https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/technical-docs/",
+    "redirects": [
+      {
+        "status": 301,
+        "url": "https://ninadpathak.com/articles/what-is-technical-documentation-and-what-should-it-include/",
+        "location": "/articles/technical-docs/"
+      }
+    ],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "What Is Technical Documentation, and What Should It Include? | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/technical-docs/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Technical documentation helps a developer decide, start, use, and recover from a product. Choose each page by the task it owns.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "article",
+      "og:title": "What Is Technical Documentation, and What Should It Include?",
+      "og:description": "Technical documentation helps a developer decide, start, use, and recover from a product. Choose each page by the task it owns.",
+      "og:url": "https://ninadpathak.com/articles/technical-docs/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "What Is Technical Documentation, and What Should It Include?"
+      ],
+      [
+        "h2",
+        "What technical documentation should include"
+      ],
+      [
+        "h2",
+        "Build the smallest package that lets someone succeed"
+      ],
+      [
+        "h2",
+        "Give each document a boundary"
+      ],
+      [
+        "h2",
+        "Assign an owner and an update trigger"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/"
+      },
+      {
+        "href": "/articles/"
+      },
+      {
+        "href": "/articles/",
+        "class": "back-link"
+      },
+      {
+        "href": "/about/",
+        "rel": "author"
+      },
+      {
+        "href": "/articles/technical-documentation/",
+        "class": "tag"
+      },
+      {
+        "href": "#what-technical-documentation-should-include"
+      },
+      {
+        "href": "#build-the-smallest-package-that-lets-someone-succeed"
+      },
+      {
+        "href": "#give-each-document-a-boundary"
+      },
+      {
+        "href": "#assign-an-owner-and-an-update-trigger"
+      },
+      {
+        "href": "/contact/"
+      },
+      {
+        "href": "https://diataxis.fr/"
+      },
+      {
+        "href": "/articles/internal-vs-external-docs/"
+      },
+      {
+        "href": "https://developers.google.com/tech-writing/one/documents"
+      },
+      {
+        "href": "https://developers.google.com/style/api-reference-comments"
+      },
+      {
+        "href": "https://docs.gitlab.com/development/documentation/"
+      },
+      {
+        "href": "/articles/documentation-template/"
+      },
+      {
+        "href": "/articles/documentation-best-practices/"
+      },
+      {
+        "href": "/articles/documentation-review/"
+      },
+      {
+        "href": "/articles/documentation-structure/"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "related-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 23790
+  },
+  "/articles/technical-docs/": {
+    "fetched_at_utc": "2026-10-12T18:13:57.759796+00:00",
+    "requested_url": "https://ninadpathak.com/articles/technical-docs/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/technical-docs/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "What Is Technical Documentation, and What Should It Include? | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/technical-docs/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Technical documentation helps a developer decide, start, use, and recover from a product. Choose each page by the task it owns.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "article",
+      "og:title": "What Is Technical Documentation, and What Should It Include?",
+      "og:description": "Technical documentation helps a developer decide, start, use, and recover from a product. Choose each page by the task it owns.",
+      "og:url": "https://ninadpathak.com/articles/technical-docs/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "What Is Technical Documentation, and What Should It Include?"
+      ],
+      [
+        "h2",
+        "What technical documentation should include"
+      ],
+      [
+        "h2",
+        "Build the smallest package that lets someone succeed"
+      ],
+      [
+        "h2",
+        "Give each document a boundary"
+      ],
+      [
+        "h2",
+        "Assign an owner and an update trigger"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/"
+      },
+      {
+        "href": "/articles/"
+      },
+      {
+        "href": "/articles/",
+        "class": "back-link"
+      },
+      {
+        "href": "/about/",
+        "rel": "author"
+      },
+      {
+        "href": "/articles/technical-documentation/",
+        "class": "tag"
+      },
+      {
+        "href": "#what-technical-documentation-should-include"
+      },
+      {
+        "href": "#build-the-smallest-package-that-lets-someone-succeed"
+      },
+      {
+        "href": "#give-each-document-a-boundary"
+      },
+      {
+        "href": "#assign-an-owner-and-an-update-trigger"
+      },
+      {
+        "href": "/contact/"
+      },
+      {
+        "href": "https://diataxis.fr/"
+      },
+      {
+        "href": "/articles/internal-vs-external-docs/"
+      },
+      {
+        "href": "https://developers.google.com/tech-writing/one/documents"
+      },
+      {
+        "href": "https://developers.google.com/style/api-reference-comments"
+      },
+      {
+        "href": "https://docs.gitlab.com/development/documentation/"
+      },
+      {
+        "href": "/articles/documentation-template/"
+      },
+      {
+        "href": "/articles/documentation-best-practices/"
+      },
+      {
+        "href": "/articles/documentation-review/"
+      },
+      {
+        "href": "/articles/documentation-structure/"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "related-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 23790
+  },
+  "/articles/docs-seo/": {
+    "fetched_at_utc": "2026-10-12T18:13:57.811254+00:00",
+    "requested_url": "https://ninadpathak.com/articles/docs-seo/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/docs-seo/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Technical SEO Checklist for Documentation Sites | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/docs-seo/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Technical SEO for developer documentation: crawling, rendering, indexing, canonicals, internal links, Core Web Vitals, structured data, and search visibility.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "article",
+      "og:title": "Technical SEO Checklist for Documentation Sites",
+      "og:description": "Technical SEO for developer documentation: crawling, rendering, indexing, canonicals, internal links, Core Web Vitals, structured data, and search visibility.",
+      "og:url": "https://ninadpathak.com/articles/docs-seo/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Technical SEO Checklist for Documentation Sites"
+      ],
+      [
+        "h2",
+        "Technical SEO audit checklist: what to check"
+      ],
+      [
+        "h2",
+        "Step-by-step SEO audit for documentation sites"
+      ],
+      [
+        "h2",
+        "Technical SEO checklist for documentation sites"
+      ],
+      [
+        "h2",
+        "Start with one documentation path"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/"
+      },
+      {
+        "href": "/articles/"
+      },
+      {
+        "href": "/articles/",
+        "class": "back-link"
+      },
+      {
+        "href": "/about/",
+        "rel": "author"
+      },
+      {
+        "href": "/articles/technical-documentation/",
+        "class": "tag"
+      },
+      {
+        "href": "#technical-seo-audit-checklist-what-to-check"
+      },
+      {
+        "href": "#step-by-step-seo-audit-for-documentation-sites"
+      },
+      {
+        "href": "#1-search-intent-and-page-ownership"
+      },
+      {
+        "href": "#2-internal-links-and-xml-sitemaps"
+      },
+      {
+        "href": "#3-crawling-rendering-and-indexing"
+      },
+      {
+        "href": "#4-canonical-urls-and-documentation-versions"
+      },
+      {
+        "href": "#5-page-titles-headings-and-task-content"
+      },
+      {
+        "href": "#6-performance-mobile-and-structured-data"
+      },
+      {
+        "href": "#7-run-the-documentation-seo-audit-script"
+      },
+      {
+        "href": "#8-measure-documentation-search-performance"
+      },
+      {
+        "href": "#technical-seo-checklist-for-documentation-sites"
+      },
+      {
+        "href": "#search-intent"
+      },
+      {
+        "href": "#discovery-and-crawling"
+      },
+      {
+        "href": "#indexing-and-canonicalization"
+      },
+      {
+        "href": "#page-quality"
+      },
+      {
+        "href": "#performance-and-structured-data"
+      },
+      {
+        "href": "#measurement"
+      },
+      {
+        "href": "#start-with-one-documentation-path"
+      },
+      {
+        "href": "/contact/"
+      },
+      {
+        "href": "/articles/documentation-structure/"
+      },
+      {
+        "href": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+      },
+      {
+        "href": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+      },
+      {
+        "href": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+      },
+      {
+        "href": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      },
+      {
+        "href": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      },
+      {
+        "href": "https://developers.google.com/search/docs/appearance/title-link"
+      },
+      {
+        "href": "/articles/writing-technical-tutorials/"
+      },
+      {
+        "href": "/static/tools/docs-seo-audit.py"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "related-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 40508
+  },
+  "/articles/documentation-types/": {
+    "fetched_at_utc": "2026-10-12T18:13:58.271244+00:00",
+    "requested_url": "https://ninadpathak.com/articles/documentation-types/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/documentation-types/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Types of Technical Documentation: 8 Essential Types, Plus Agent Instructions | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/documentation-types/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Understand the main types of technical documentation, study useful examples, and build a documentation system for users, teams, and coding agents.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "article",
+      "og:title": "Types of Technical Documentation: 8 Essential Types, Plus Agent Instructions",
+      "og:description": "Understand the main types of technical documentation, study useful examples, and build a documentation system for users, teams, and coding agents.",
+      "og:url": "https://ninadpathak.com/articles/documentation-types/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "Types of Technical Documentation: 8 Essential Types, Plus Agent Instructions"
+      ],
+      [
+        "h2",
+        "The three audiences for technical documentation"
+      ],
+      [
+        "h2",
+        "User-facing documentation helps someone use the product"
+      ],
+      [
+        "h2",
+        "Process documentation helps a team build and operate the system"
+      ],
+      [
+        "h2",
+        "The newer type: instructions for coding agents"
+      ],
+      [
+        "h2",
+        "Build documentation from the work people need to finish"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/"
+      },
+      {
+        "href": "/articles/"
+      },
+      {
+        "href": "/articles/",
+        "class": "back-link"
+      },
+      {
+        "href": "/about/",
+        "rel": "author"
+      },
+      {
+        "href": "/articles/technical-documentation/",
+        "class": "tag"
+      },
+      {
+        "href": "#the-three-audiences-for-technical-documentation"
+      },
+      {
+        "href": "#user-facing-documentation-helps-someone-use-the-product"
+      },
+      {
+        "href": "#1-getting-started-guides-and-quickstarts"
+      },
+      {
+        "href": "#2-tutorials"
+      },
+      {
+        "href": "#3-how-to-guides"
+      },
+      {
+        "href": "#4-reference-documentation"
+      },
+      {
+        "href": "#5-troubleshooting-guides"
+      },
+      {
+        "href": "#6-release-notes-and-migration-guides"
+      },
+      {
+        "href": "#process-documentation-helps-a-team-build-and-operate-the-system"
+      },
+      {
+        "href": "#7-architecture-and-design-documents"
+      },
+      {
+        "href": "#8-runbooks-onboarding-guides-test-plans-and-standards"
+      },
+      {
+        "href": "#the-newer-type-instructions-for-coding-agents"
+      },
+      {
+        "href": "#build-documentation-from-the-work-people-need-to-finish"
+      },
+      {
+        "href": "/contact/"
+      },
+      {
+        "href": "https://react.dev/learn"
+      },
+      {
+        "href": "https://docs.stripe.com/api"
+      },
+      {
+        "href": "https://kubernetes.io/docs/tasks/debug/"
+      },
+      {
+        "href": "/articles/internal-vs-external-docs/"
+      },
+      {
+        "href": "https://www.tango.ai/blog/types-of-technical-documents"
+      },
+      {
+        "href": "https://agents.md/"
+      },
+      {
+        "href": "/articles/documentation-template/"
+      },
+      {
+        "href": "/articles/documentation-best-practices/"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "related-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 27441
+  },
+  "/articles/best-llms-for-coding/": {
+    "fetched_at_utc": "2026-10-12T18:13:58.395762+00:00",
+    "requested_url": "https://ninadpathak.com/articles/best-llms-for-coding/",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/articles/best-llms-for-coding/",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "The Best LLMs for Coding in 2026: An Engineering Review | Ninad Pathak",
+    "canonical": [
+      "https://ninadpathak.com/articles/best-llms-for-coding/"
+    ],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "description": "Not all models are created equal for software development. Here is a benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic logic, and repository-scale refactoring as of March 2026.",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "google-site-verification": "JPZOxEOKPApfJLB3cOGevLHBJJwv_Tnud08L29gwUHU",
+      "og:type": "article",
+      "og:title": "The Best LLMs for Coding in 2026: An Engineering Review",
+      "og:description": "Not all models are created equal for software development. Here is a benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic logic, and repository-scale refactoring as of March 2026.",
+      "og:url": "https://ninadpathak.com/articles/best-llms-for-coding/",
+      "og:image": "https://ninadpathak.com/static/favicon.png",
+      "og:image:width": "512",
+      "og:image:height": "512",
+      "og:image:alt": "Ninad Pathak",
+      "twitter:card": "summary",
+      "twitter:site": "@ninadwrites",
+      "twitter:title": "Ninad Pathak",
+      "twitter:description": "Technical documentation and developer content with tested examples, strong opinions, and an actual person behind it.",
+      "twitter:image": "https://ninadpathak.com/static/favicon.png"
+    },
+    "headings": [
+      [
+        "h1",
+        "The Best LLMs for Coding in 2026: An Engineering Review"
+      ],
+      [
+        "h2",
+        "Why SWE-bench Verified is the only metric that matters"
+      ],
+      [
+        "h2",
+        "For agentic and autonomous coding: Claude 4.6 Opus"
+      ],
+      [
+        "h2",
+        "For complex logic and repository-scale context: Gemini 3.1 Pro"
+      ],
+      [
+        "h2",
+        "For cost-sensitive production use: DeepSeek V4"
+      ],
+      [
+        "h2",
+        "For multi-step reasoning and planning: GPT-5.4 Codex"
+      ],
+      [
+        "h2",
+        "For everyday IDE autocomplete: the OpenAI and Cursor ecosystem"
+      ],
+      [
+        "h2",
+        "The closing difference of open source"
+      ],
+      [
+        "h2",
+        "Summary decision framework"
+      ],
+      [
+        "h2",
+        "FAQ"
+      ],
+      [
+        "h2",
+        "Need a technical writer?"
+      ],
+      [
+        "h2",
+        "30-minute intro call"
+      ]
+    ],
+    "links": [
+      {
+        "class": "skip-link",
+        "href": "#main"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/portfolio/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/projects/",
+        "class": "nav-link "
+      },
+      {
+        "href": "/articles/",
+        "class": "nav-link active"
+      },
+      {
+        "href": "/about/",
+        "class": "nav-link "
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "nav-cta booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/",
+        "class": "nav-logo"
+      },
+      {
+        "href": "/work/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/about/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "mobile-nav-link"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "/"
+      },
+      {
+        "href": "/articles/"
+      },
+      {
+        "href": "/articles/",
+        "class": "back-link"
+      },
+      {
+        "href": "/about/",
+        "rel": "author"
+      },
+      {
+        "href": "/articles/ai-engineering/",
+        "class": "tag"
+      },
+      {
+        "href": "#why-swe-bench-verified-is-the-only-metric-that-matters"
+      },
+      {
+        "href": "#for-agentic-and-autonomous-coding-claude-46-opus"
+      },
+      {
+        "href": "#for-complex-logic-and-repository-scale-context-gemini-31-pro"
+      },
+      {
+        "href": "#for-cost-sensitive-production-use-deepseek-v4"
+      },
+      {
+        "href": "#for-multi-step-reasoning-and-planning-gpt-54-codex"
+      },
+      {
+        "href": "#for-everyday-ide-autocomplete-the-openai-and-cursor-ecosystem"
+      },
+      {
+        "href": "#the-closing-difference-of-open-source"
+      },
+      {
+        "href": "#summary-decision-framework"
+      },
+      {
+        "href": "#faq"
+      },
+      {
+        "href": "/contact/"
+      },
+      {
+        "href": "/articles/claude-vs-gemini-cli/"
+      },
+      {
+        "href": "/articles/agent-harnesses/"
+      },
+      {
+        "href": "/articles/mixture-of-experts/"
+      },
+      {
+        "href": "/articles/lambda-calculus-ai/"
+      },
+      {
+        "href": "/articles/agentic-workflows/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/fine-tuning-vs-rag/",
+        "class": "related-card"
+      },
+      {
+        "href": "/articles/shared-vs-isolated-memory/",
+        "class": "related-card"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "class": "btn btn-primary booking-modal-trigger",
+        "rel": "noopener"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv"
+      },
+      {
+        "href": "https://zcal.co/i/AGG1iJtv",
+        "target": "_blank",
+        "rel": "noopener"
+      },
+      {
+        "href": "/work/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/portfolio/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/projects/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/tools/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/glossary/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/contact/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/feed.xml",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/code-documentation/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/documentation-headings/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/articles/docs-accessibility/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/#what-i-believe",
+        "class": "footer-link"
+      },
+      {
+        "href": "/about/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/terms/",
+        "class": "footer-link"
+      },
+      {
+        "href": "/privacy/",
+        "class": "footer-link"
+      }
+    ],
+    "scripts": [
+      "https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N",
+      "/static/js/main.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 3,
+    "bytes": 28558,
+    "opening_excerpt": "Evaluating models for software engineering stopped being about snippet generation a while ago. Production coding now leans on long-range reasoning, autonomous tool interaction, and deep algorithmic logic all at once. A model that aces a Python quiz can still fall apart the moment you ask it to rename a function used across forty files or to split a monolithic service into two without breaking the test suite. This review separates coding work into four engineering personas, from autonomous changes to repository-scale reasoning. The persona that fits your work decides which model evidence matter"
+  },
+  "/static/visuals/chunking": {
+    "fetched_at_utc": "2026-10-12T18:13:58.440095+00:00",
+    "requested_url": "https://ninadpathak.com/static/visuals/chunking",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/static/visuals/chunking",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Chunking and Embedding",
+    "canonical": [],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0"
+    },
+    "headings": [],
+    "links": [],
+    "scripts": [
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 0,
+    "bytes": 6436
+  },
+  "/static/visuals/context-memory": {
+    "fetched_at_utc": "2026-10-12T18:13:58.445586+00:00",
+    "requested_url": "https://ninadpathak.com/static/visuals/context-memory",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/static/visuals/context-memory",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Context Windows vs Memory \u2014 Retrieval Decay",
+    "canonical": [],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0"
+    },
+    "headings": [
+      [
+        "h1",
+        "Retrieval Accuracy Decay Over Time"
+      ]
+    ],
+    "links": [],
+    "scripts": [
+      "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js",
+      "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js",
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 0,
+    "bytes": 10812
+  },
+  "/static/visuals/contextual-retrieval.html": {
+    "fetched_at_utc": "2026-10-12T18:13:58.966176+00:00",
+    "requested_url": "https://ninadpathak.com/static/visuals/contextual-retrieval.html",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/static/visuals/contextual-retrieval",
+    "redirects": [
+      {
+        "status": 308,
+        "url": "https://ninadpathak.com/static/visuals/contextual-retrieval.html",
+        "location": "/static/visuals/contextual-retrieval"
+      }
+    ],
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "Contextual Retrieval: Chunk Enrichment Before Embedding",
+    "canonical": [],
+    "meta": {
+      "": "",
+      "viewport": "width=device-width, initial-scale=1.0"
+    },
+    "headings": [],
+    "links": [],
+    "scripts": [
+      "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    ],
+    "booking_triggers": 0,
+    "bytes": 4470
+  },
+  "/static/js/main.js": {
+    "fetched_at_utc": "2026-10-12T18:13:58.897405+00:00",
+    "requested_url": "https://ninadpathak.com/static/js/main.js",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/static/js/main.js",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "application/javascript",
+      "Cache-Control": "public, max-age=28800, must-revalidate",
+      "cf-cache-status": "REVALIDATED"
+    },
+    "title": "",
+    "canonical": [],
+    "meta": {},
+    "headings": [],
+    "links": [],
+    "scripts": [],
+    "booking_triggers": 2,
+    "bytes": 18680
+  },
+  "/robots.txt": {
+    "fetched_at_utc": "2026-10-12T18:13:58.966508+00:00",
+    "requested_url": "https://ninadpathak.com/robots.txt",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/robots.txt",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "public, max-age=28800, must-revalidate",
+      "cf-cache-status": "REVALIDATED"
+    },
+    "title": "",
+    "canonical": [],
+    "meta": {},
+    "headings": [],
+    "links": [],
+    "scripts": [],
+    "booking_triggers": 0,
+    "bytes": 88
+  },
+  "/sitemap.xml": {
+    "fetched_at_utc": "2026-10-12T18:13:59.014375+00:00",
+    "requested_url": "https://ninadpathak.com/sitemap.xml",
+    "status": 200,
+    "final_url": "https://ninadpathak.com/sitemap.xml",
+    "redirects": [],
+    "headers": {
+      "Content-Type": "application/xml",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    },
+    "title": "",
+    "canonical": [],
+    "meta": {},
+    "headings": [],
+    "links": [],
+    "scripts": [],
+    "booking_triggers": 0,
+    "bytes": 20903
+  }
+}

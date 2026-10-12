@@ -1,0 +1,16 @@
+      modal.setAttribute('inert', '');
+      document.body.classList.remove('scroll-locked');
+      if (previousFocus) previousFocus.focus();
+    }
+
+    triggers.forEach(function (trigger) {
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        trackEvent('generate_lead', {
+          lead_source: 'booking_modal',
+          link_text: trigger.textContent.trim(),
+          page_path: window.location.pathname
+        });
+        openModal();
+      });
+    });

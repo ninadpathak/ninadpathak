@@ -1,0 +1,250 @@
+{
+  "fetched_at_utc": "2026-10-12T18:15:09.884300+00:00",
+  "property": "sc-domain:ninadpathak.com",
+  "inspections": {
+    "/articles/internal-vs-external-documentation/": {
+      "inspectionResult": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ninadpathak.com&id=4zgd62NcMoKBG7cTmzkLag&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-01T06:15:25Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://ninadpathak.com/articles/internal-vs-external-documentation/",
+          "userCanonical": "https://ninadpathak.com/articles/internal-vs-external-docs/",
+          "referringUrls": [
+            "https://dev.to/ninadpathak/internal-vs-external-documentation-what-belongs-where-3147"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "/articles/internal-vs-external-docs/": {
+      "inspectionResult": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ninadpathak.com&id=iNHJoINtS8sDbcYt2WEMBA&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-10T01:26:44Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://ninadpathak.com/articles/internal-vs-external-docs/",
+          "userCanonical": "https://ninadpathak.com/articles/internal-vs-external-docs/",
+          "sitemap": [
+            "https://ninadpathak.com/sitemap.xml"
+          ],
+          "referringUrls": [
+            "https://ninadpathak.com/"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "/articles/local-wasm-vector-benchmarks/": {
+      "inspectionResult": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ninadpathak.com&id=8uqBmiiQbnIwpOEuMDbaig&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-28T17:39:21Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://ninadpathak.com/articles/local-wasm-vector-benchmarks/",
+          "userCanonical": "https://ninadpathak.com/articles/browser-vector-search/",
+          "referringUrls": [
+            "https://ninadpathak.com/blog/local-wasm-vector-benchmarks/"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "/articles/browser-vector-search/": {
+      "inspectionResult": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ninadpathak.com&id=bi_JQsQKx0J1OHdue7yoZw&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-10T13:49:45Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://ninadpathak.com/articles/browser-vector-search/",
+          "userCanonical": "https://ninadpathak.com/articles/browser-vector-search/",
+          "sitemap": [
+            "https://ninadpathak.com/sitemap.xml"
+          ],
+          "referringUrls": [
+            "https://ninadpathak.com/articles/ai-engineering/"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "/articles/embedding-models-compared/": {
+      "inspectionResult": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ninadpathak.com&id=uYKNU_BA5TrGROu5UCBvwA&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "NEUTRAL",
+          "coverageState": "Page with redirect",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-12T13:09:00Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://ninadpathak.com/articles/vector-embeddings/",
+          "userCanonical": "https://ninadpathak.com/articles/vector-embeddings/",
+          "referringUrls": [
+            "https://ninadpathak.com/articles/vector-embeddings/"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        }
+      }
+    },
+    "/articles/vector-embeddings/": {
+      "inspectionResult": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ninadpathak.com&id=j5IQzO_SkYYpIxhhn3qcHQ&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-12T13:09:00Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://ninadpathak.com/articles/vector-embeddings/",
+          "userCanonical": "https://ninadpathak.com/articles/vector-embeddings/",
+          "sitemap": [
+            "https://ninadpathak.com/sitemap.xml"
+          ],
+          "referringUrls": [
+            "https://ninadpathak.com/articles/ai-engineering/"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "/articles/code-documentation/": {
+      "inspectionResult": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ninadpathak.com&id=7ES0UWoLOuz2ZwtY9pNbBw&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-10T01:26:46Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://ninadpathak.com/articles/code-documentation/",
+          "userCanonical": "https://ninadpathak.com/articles/code-documentation/",
+          "sitemap": [
+            "https://ninadpathak.com/sitemap.xml"
+          ],
+          "referringUrls": [
+            "https://ninadpathak.com/articles/reranking-in-rag-why-your-top-k-results-are-probably-wrong/"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

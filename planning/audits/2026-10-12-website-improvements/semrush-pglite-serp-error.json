@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "tool call error: tool call failed for `semrush/execute_report`\n\nCaused by:\n    Mcp error: -32603: {\"code\":\"internal\",\"message\":\"get phrase_organic: ERROR 50 :: NOTHING FOUND\\nNo data found for this request. Verify your parameters are correct. If parameters are valid, try a different date range or target.\\nnot found\",\"retryable\":false,\"trace_id\":\"85279cc71c3e89824a382925bd165d03\"}"
+    }
+  ],
+  "isError": true
+}
