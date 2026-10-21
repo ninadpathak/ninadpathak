@@ -16,7 +16,7 @@
 {% block tw_desc %}Check page extractability with nine sourced structural checks. No placement prediction.{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="/static/css/linter.css?v=design-tokens-1">
+<link rel="stylesheet" href="/static/css/linter.css?v=contrast-1">
 {% endblock %}
 
 {% block schema %}
@@ -156,7 +156,7 @@
         <div class="linter-results-container">
           <div class="linter-empty" id="aioEmpty">
             <div class="linter-empty-inner">
-              <div class="linter-empty-icon">{ }</div>
+              <div class="linter-empty-icon" aria-hidden="true">{ }</div>
               <p>Findings appear here after you run the checks.</p>
             </div>
           </div>

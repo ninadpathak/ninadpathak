@@ -32,7 +32,7 @@ class FlowchartGeneratorTests(unittest.TestCase):
                 "border_strong": "#c8c8c4",
                 "ink": "#0e0e0e",
                 "text": "#3a3a3a",
-                "accent": "#d44000",
+                "accent": "#c23b00",
             },
         )
 

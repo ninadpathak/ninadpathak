@@ -70,12 +70,9 @@
   border: none;
   padding: 0;
   text-transform: lowercase;
-  opacity: 0.8;
-  transition: opacity var(--t);
 }
 
 .linter-sample-btn:hover, .linter-action-btn:hover {
-  opacity: 1;
   text-decoration: underline;
 }
 
@@ -179,9 +176,9 @@
 
 /* Grade colours */
 .lint-grade-a .lint-score-number, .lint-grade-a .lint-grade { color: var(--status-success); }
-.lint-grade-b .lint-score-number, .lint-grade-b .lint-grade { color: var(--severity-info); }
-.lint-grade-c .lint-score-number, .lint-grade-c .lint-grade { color: var(--severity-warning); }
-.lint-grade-d .lint-score-number, .lint-grade-d .lint-grade { color: var(--severity-error); }
+.lint-grade-b .lint-score-number, .lint-grade-b .lint-grade { color: var(--severity-info-text); }
+.lint-grade-c .lint-score-number, .lint-grade-c .lint-grade { color: var(--severity-warning-text); }
+.lint-grade-d .lint-score-number, .lint-grade-d .lint-grade { color: var(--severity-error-text); }
 .lint-grade-f .lint-score-number, .lint-grade-f .lint-grade { color: var(--severity-error-strong); }
 
 .lint-score-stats {
@@ -214,9 +211,9 @@
   border-top: none;
 }
 
-.lint-group-error .lint-group-label { color: var(--severity-error); }
-.lint-group-warning .lint-group-label { color: var(--severity-warning); }
-.lint-group-info .lint-group-label { color: var(--severity-info); }
+.lint-group-error .lint-group-label { color: var(--severity-error-text); }
+.lint-group-warning .lint-group-label { color: var(--severity-warning-text); }
+.lint-group-info .lint-group-label { color: var(--severity-info-text); }
 
 .lint-item {
   padding: var(--space-5) var(--space-6);
@@ -341,9 +338,9 @@
   margin-bottom: var(--space-5);
 }
 
-.lint-severity-error { color: var(--severity-error); }
-.lint-severity-warning { color: var(--severity-warning); }
-.lint-severity-info { color: var(--severity-info); }
+.lint-severity-error { color: var(--severity-error-text); }
+.lint-severity-warning { color: var(--severity-warning-text); }
+.lint-severity-info { color: var(--severity-info-text); }
 
 .linter-rule-list {
   display: flex;

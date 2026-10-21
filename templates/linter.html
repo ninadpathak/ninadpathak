@@ -62,7 +62,7 @@
 {% block tw_desc %}Check a technical article against 16 writing rules in your browser. Free, no signup.{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="/static/css/linter.css?v=design-tokens-1">
+<link rel="stylesheet" href="/static/css/linter.css?v=contrast-1">
 {% endblock %}
 
 {% block content %}
@@ -122,7 +122,7 @@
           <!-- EMPTY STATE -->
           <div class="linter-empty" id="linterEmpty">
             <div class="linter-empty-inner">
-              <div class="linter-empty-icon">{ }</div>
+              <div class="linter-empty-icon" aria-hidden="true">{ }</div>
               <p>Findings appear here after you run the linter.</p>
             </div>
           </div>
