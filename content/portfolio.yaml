@@ -91,7 +91,7 @@ entries:
   - title: "Short-Term Memory for AI Agents: What, Why, and How?"
     client: "Mem0"
     category: "AI Systems"
-    url: "https://mem0.ai/articles/short-term-agent-memory"
+    url: "https://mem0.ai/library/agent-memory/short-term-memory"
 
   - title: "What Are Vector Embeddings? A Complete Guide"
     client: "Mem0"
@@ -206,7 +206,7 @@ entries:
   - title: "Agent Skills Explained: How SKILL.md Files Work and Why They're Everywhere"
     client: "Firecrawl"
     category: "DevTools"
-    url: "https://www.firecrawl.dev/blog/agent-skills-explained"
+    url: "https://www.firecrawl.dev/blog/agent-skills"
 
   - title: "Claude Web Fetch vs Firecrawl— Which One Actually Works for Web Extraction?"
     client: "Firecrawl"
@@ -216,37 +216,37 @@ entries:
   - title: "CMS Migration: A Developer's Guide to Doing It Right in 2026"
     client: "Firecrawl"
     category: "Developer Infrastructure"
-    url: "https://www.firecrawl.dev/blog/cms-migration-guide"
+    url: "https://www.firecrawl.dev/blog/cms-migration"
 
   - title: "cURL Web Scraping Guide: How to Scrape Web Pages with cURL"
     client: "Firecrawl"
     category: "Developer Infrastructure"
-    url: "https://www.firecrawl.dev/blog/curl-web-scraping-guide"
+    url: "https://www.firecrawl.dev/blog/curl-web-scraping"
 
   - title: "Self-Hosting Mem0: A Complete Docker Deployment Guide"
     client: "Mem0"
     category: "Developer Infrastructure"
-    url: "https://mem0.ai/blog/self-hosting-mem0"
+    url: "https://mem0.ai/library/integrations/self-host-mem0-docker"
 
   - title: "How to use stacked PRs to unblock your entire team"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/blog/how-to-use-stacked-prs"
+    url: "https://graphite.com/blog/stacked-prs"
 
   - title: "What's the best GitHub pull request merge strategy?"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/blog/best-github-pull-request-merge-strategy"
+    url: "https://graphite.com/blog/pull-request-merge-strategy"
 
   - title: "How AI Testing Agents Accelerate QA"
     client: "LambdaTest"
     category: "AI Systems"
     url: "https://www.testmu.ai/blog/ai-testing-agents-accelerate-qa"
 
-  - title: "AI Testing vs. Traditional Testing: Efficiency and Adaptability"
+  - title: "AI Testing vs Traditional Testing: What's The Difference?"
     client: "LambdaTest"
     category: "AI Systems"
-    url: "https://www.testmu.ai/blog/ai-testing-vs-traditional-testing"
+    url: "https://www.testmuai.com/blog/traditional-testing-vs-ai-testing/"
 
   # Firecrawl — new pieces
   - title: "What Is an Agent Harness? The Infrastructure That Makes AI Agents Actually Work"
@@ -257,7 +257,7 @@ entries:
   - title: "What is Agentic Search (and Why Cached Results Aren't Enough)"
     client: "Firecrawl"
     category: "AI Systems"
-    url: "https://www.firecrawl.dev/blog/what-is-agentic-search"
+    url: "https://www.firecrawl.dev/blog/agentic-search"
 
   - title: "AI Agent Sandbox: How to Safely Run Autonomous Agents in 2026"
     client: "Firecrawl"
@@ -309,10 +309,10 @@ entries:
     category: "AI Systems"
     url: "https://www.firecrawl.dev/blog/training-vs-retrieved-vs-live-web-data"
 
-  - title: "How to Build a Competitor Feature Alert System Using Firecrawl Monitor"
+  - title: "How to Build a Competitor Monitoring System Using Firecrawl Monitor"
     client: "Firecrawl"
     category: "Developer Infrastructure"
-    url: "https://www.firecrawl.dev/blog/competitor-feature-alert-system-firecrawl-monitor"
+    url: "https://www.firecrawl.dev/blog/competitor-monitoring-firecrawl"
 
   - title: "5 Best Nimbleway Alternatives in 2026"
     client: "Firecrawl"
