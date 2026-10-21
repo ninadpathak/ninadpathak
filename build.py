@@ -152,6 +152,27 @@ def optimize_content_images(html: str) -> str:
     return image_pattern.sub(optimize, html)
 
 
+def link_visuals_without_extension(html: str) -> str:
+    """Point visual iframes at the extensionless URL Cloudflare Pages serves.
+
+    Pages answers /static/visuals/name.html with a 308 to /static/visuals/name, so an
+    embed written with the .html suffix costs every reader a redirect before the visual
+    loads. Only visuals that exist are rewritten; anything else is left for the audit.
+    """
+    pattern = re.compile(r"""(<iframe\b[^>]*\bsrc\s*=\s*["'])/static/visuals/([a-z0-9-]+)\.html(?=["'?#])""", re.IGNORECASE)
+
+    def rewrite(match: re.Match) -> str:
+        if not (ROOT / "static" / "visuals" / f"{match.group(2)}.html").is_file():
+            return match.group(0)
+        return f"{match.group(1)}/static/visuals/{match.group(2)}"
+
+    return pattern.sub(rewrite, html)
+
+
+def render_content_html(html: str) -> str:
+    return link_visuals_without_extension(optimize_content_images(html))
+
+
 def _clean_inline_md(text: str) -> str:
     """Strip inline markdown so a string is safe/clean for JSON-LD text fields."""
     text = text.strip()
@@ -315,7 +336,7 @@ class SiteBuilder:
                     f"{md_file} violates the two-sentence paragraph rule:\n{details}"
                 )
             self.md.reset()
-            html = optimize_content_images(self.md.convert(post.content))
+            html = render_content_html(self.md.convert(post.content))
             # Extract TOC from markdown if available
             toc_html = getattr(self.md, 'toc', '') if hasattr(self.md, 'toc') else ''
             slug = post.get("slug") or slugify(md_file.stem)
@@ -391,7 +412,7 @@ class SiteBuilder:
         for md_file in sorted(work_dir.glob("*.md")):
             post = frontmatter.load(md_file)
             self.md.reset()
-            html = optimize_content_images(self.md.convert(post.content))
+            html = render_content_html(self.md.convert(post.content))
             slug = md_file.stem
             cases.append({
                 **post.metadata,
@@ -413,7 +434,7 @@ class SiteBuilder:
     def load_md_content(self, path: str) -> tuple[dict, str]:
         post = frontmatter.load(path)
         self.md.reset()
-        return post.metadata, optimize_content_images(self.md.convert(post.content))
+        return post.metadata, render_content_html(self.md.convert(post.content))
 
     def load_legal_pages(self) -> list[dict]:
         pages = []
@@ -1109,10 +1130,22 @@ class SiteBuilder:
 # Local server
 # ---------------------------------------------------------------------------
 
+class PrettyURLHandler(http.server.SimpleHTTPRequestHandler):
+    """Serve /name from name.html, as Cloudflare Pages does, so embedded visuals load."""
+
+    def translate_path(self, path):
+        local = super().translate_path(path)
+        if not os.path.exists(local) and os.path.isfile(local + ".html"):
+            return local + ".html"
+        return local
+
+    def log_message(self, *args):  # silence logs
+        pass
+
+
 def serve(port: int = 8000):
     os.chdir("output")
-    handler = http.server.SimpleHTTPRequestHandler
-    handler.log_message = lambda *a: None  # silence logs
+    handler = PrettyURLHandler
     server = http.server.HTTPServer(("", port), handler)
     print(f"Serving at http://localhost:{port}/")
     server.serve_forever()

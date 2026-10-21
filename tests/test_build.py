@@ -10,6 +10,7 @@ from build import (
     estimate_reading_time,
     extract_faqs,
     format_date_iso,
+    link_visuals_without_extension,
     optimize_content_images,
     slugify,
     sort_key,
@@ -79,6 +80,15 @@ Ignored.
         )
 
         self.assertEqual(rendered.count("loading="), 1)
+
+    def test_visual_iframes_skip_the_pages_redirect_hop(self):
+        rendered = link_visuals_without_extension(
+            '<iframe src="/static/visuals/moe-routing.html" title="MoE" loading="lazy"></iframe>'
+            '<iframe src="/static/visuals/no-such-visual.html" title="Missing"></iframe>'
+        )
+
+        self.assertIn('src="/static/visuals/moe-routing"', rendered)
+        self.assertIn('src="/static/visuals/no-such-visual.html"', rendered)
 
 
 class RedirectVariantTests(unittest.TestCase):
