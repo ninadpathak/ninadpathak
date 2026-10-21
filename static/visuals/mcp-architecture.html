@@ -105,7 +105,10 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
   .link { width: 1px; min-width: 0; height: 28px; flex: none; margin: 4px 0; }
   .link.to-servers { flex-direction: row; height: auto; gap: 16px; }
   .seg { width: 1px; height: 28px; }
-  .servers { flex-direction: row; gap: 16px; }
+  .servers { flex-direction: row; gap: 6px; width: 100%; }
+  .node.srv { flex: 1 1 0; min-width: 0; padding: 8px 4px; font-size: 10px; }
+  .node.srv .nlbl { font-size: 7.5px; letter-spacing: 0.06em; }
+  .node.srv .tools { font-size: 7.5px; letter-spacing: 0; }
   .packet { top: auto; left: -3px; }
 }
 
