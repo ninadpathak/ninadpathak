@@ -1,0 +1,82 @@
+{
+  "$comment": "Image brand tokens for ninadpathak.com article images. Color values are the target site palette (accent #c23b00 and muted #6b6b6b / #8a8a8a are pending in the site-fixes branch). `node render.mjs --check` reports any drift from static/css/main.css.",
+  "color": {
+    "light": {
+      "canvas":       { "value": "#f8f8f6", "site": "--bg",            "role": "Plate background. Matches the page so the figure sits flush." },
+      "surface":      { "value": "#ffffff", "site": "--bg-1",          "role": "Node fill, label masks, callout fill." },
+      "surface-2":    { "value": "#efefed", "site": "--bg-2",          "role": "Outcome nodes, cluster wash, legend swatches." },
+      "hairline":     { "value": "#e0e0dc", "site": "--border",        "role": "Plate frame, band separators, outcome borders. Decorative only." },
+      "rule":         { "value": "#c8c8c4", "site": "--border-2",      "role": "Node borders, cluster dashes, ruler ticks, crop marks, grid dots. Decorative only." },
+      "line":         { "value": "#7d7d79", "site": null,              "role": "Connectors and arrowheads. Image-only token: >=3:1 against canvas and surface (WCAG 1.4.11)." },
+      "ink":          { "value": "#0e0e0e", "site": "--text-1",        "role": "Node labels, OG title." },
+      "ink-2":        { "value": "#3a3a3a", "site": "--text-2",        "role": "Detail lines, notes text, neutral edge labels." },
+      "muted":        { "value": "#6b6b6b", "site": "--text-3",        "role": "Kickers on neutral nodes, index tags, footer meta, legend labels." },
+      "accent":       { "value": "#c23b00", "site": "--accent",        "role": "Header kicker, primary-path rule and edges, callout markers. One accent per image." },
+      "accent-wash":  { "value": "#fdf1ec", "site": "--accent-lo",     "role": "Fill behind the single focal node only." },
+      "on-accent":    { "value": "#ffffff", "site": "--on-accent",     "role": "Text on solid accent (badges)." },
+      "danger":       { "value": "#b42318", "site": "--status-error",  "role": "Failure nodes and edges (class `fail`)." },
+      "success":      { "value": "#18794e", "site": "--status-success","role": "Pass nodes and edges (class `pass`)." }
+    },
+    "dark": {
+      "canvas":       { "value": "#090909", "site": "--bg" },
+      "surface":      { "value": "#111111", "site": "--bg-1" },
+      "surface-2":    { "value": "#1a1a1a", "site": "--bg-2" },
+      "hairline":     { "value": "#1e1e1e", "site": "--border" },
+      "rule":         { "value": "#2c2c2c", "site": "--border-2" },
+      "line":         { "value": "#6f6f6f", "site": null },
+      "ink":          { "value": "#f0f0f0", "site": "--text-1" },
+      "ink-2":        { "value": "#c2c2c2", "site": "--text-2" },
+      "muted":        { "value": "#8a8a8a", "site": "--text-3" },
+      "accent":       { "value": "#ff5f1f", "site": "--accent" },
+      "accent-wash":  { "value": "#1a0d07", "site": "--accent-lo" },
+      "on-accent":    { "value": "#090909", "site": null },
+      "danger":       { "value": "#ff8a80", "site": "--status-error" },
+      "success":      { "value": "#6ee7a7", "site": "--status-success" }
+    }
+  },
+  "contrast": [
+    { "fg": "ink",       "bg": ["canvas", "surface", "surface-2", "accent-wash"], "min": 4.5, "use": "label text" },
+    { "fg": "ink-2",     "bg": ["canvas", "surface", "surface-2"],                "min": 4.5, "use": "detail text" },
+    { "fg": "muted",     "bg": ["canvas", "surface"],                             "min": 4.5, "use": "small mono meta text" },
+    { "fg": "muted",     "bg": ["surface-2"],                                     "min": 4.5, "use": "kicker on outcome node" },
+    { "fg": "accent",    "bg": ["canvas", "surface", "accent-wash"],              "min": 4.5, "use": "accent kicker and edge labels" },
+    { "fg": "on-accent", "bg": ["accent"],                                        "min": 4.5, "use": "badge text on accent" },
+    { "fg": "danger",    "bg": ["canvas", "surface"],                             "min": 4.5, "use": "failure labels" },
+    { "fg": "success",   "bg": ["canvas", "surface"],                             "min": 4.5, "use": "pass labels" },
+    { "fg": "line",      "bg": ["canvas", "surface"],                             "min": 3.0, "use": "connectors (non-text graphics)" },
+    { "fg": "accent",    "bg": ["canvas", "surface"],                             "min": 3.0, "use": "accent connectors and rules" }
+  ],
+  "type": {
+    "sans": "Inter",
+    "mono": "JetBrains Mono",
+    "sansFallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "monoFallback": "'SF Mono', 'Fira Code', monospace",
+    "roles": {
+      "header-kicker": { "family": "mono", "size": 11,  "weight": 500, "tracking": "0.12em", "case": "upper", "color": "accent" },
+      "header-meta":   { "family": "mono", "size": 10,  "weight": 400, "tracking": "0.08em", "case": "upper", "color": "muted" },
+      "node-label":    { "family": "sans", "size": 14,  "weight": 500, "tracking": "0", "color": "ink" },
+      "node-strong":   { "family": "sans", "size": 14,  "weight": 700, "tracking": "0", "color": "ink" },
+      "node-kicker":   { "family": "mono", "size": 9.5, "weight": 600, "tracking": "0.1em",  "case": "upper", "color": "muted" },
+      "node-detail":   { "family": "sans", "size": 12.5,"weight": 400, "tracking": "0",      "color": "ink-2" },
+      "index-tag":     { "family": "mono", "size": 8.5, "weight": 500, "tracking": "0.06em", "color": "muted" },
+      "edge-label":    { "family": "mono", "size": 9.5, "weight": 600, "tracking": "0.08em", "case": "upper", "color": "ink-2" },
+      "cluster-label": { "family": "mono", "size": 9.5, "weight": 600, "tracking": "0.12em", "case": "upper", "color": "muted" },
+      "note-number":   { "family": "mono", "size": 9,   "weight": 600, "tracking": "0",      "color": "accent" },
+      "note-text":     { "family": "sans", "size": 12.5,"weight": 400, "tracking": "0",      "color": "ink-2" },
+      "legend":        { "family": "mono", "size": 9,   "weight": 500, "tracking": "0.1em",  "case": "upper", "color": "muted" },
+      "og-kicker":     { "family": "mono", "size": 15,  "weight": 500, "tracking": "0.12em", "case": "upper", "color": "accent" },
+      "og-title":      { "family": "sans", "size": 54,  "weight": 600, "tracking": "-0.025em", "leading": 1.12, "color": "ink" },
+      "og-byline":     { "family": "mono", "size": 14,  "weight": 600, "tracking": "0.12em", "case": "upper", "color": "ink" },
+      "og-url":        { "family": "mono", "size": 14,  "weight": 400, "tracking": "0.02em", "color": "muted" }
+    }
+  },
+  "stroke": {
+    "frame": 1, "node": 1, "edge": 1.25, "edge-hot": 1.75, "accent-rule": 3, "tick": 0.75, "crop": 1
+  },
+  "layout": { "nodeSpacing": 28 },
+  "radius": { "node": 4, "plate": 4, "label": 2 },
+  "canvas": {
+    "article": { "width": 720, "head": 44, "foot": 36, "pad": 32, "minScale": 0.875, "grid": 16 },
+    "og":      { "width": 1200, "height": 630, "pad": 64, "grid": 16 }
+  }
+}

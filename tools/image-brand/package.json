@@ -1,0 +1,17 @@
+{
+  "name": "ninadpathak-image-brand",
+  "private": true,
+  "type": "module",
+  "description": "Renders article diagrams from Mermaid source through Pele in the ninadpathak.com image brand.",
+  "scripts": {
+    "render": "node render.mjs",
+    "check": "node render.mjs --check"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "pele": "1.8.0",
+    "playwright-core": "1.64.1",
+    "subset-font": "2.9.0"
+  }
+}

@@ -1,0 +1,79 @@
+/* ninadpathak.com image brand: element styles for plates and the Pele SVG inside them.
+ * Colors come only from --np-* variables (theme CSS is generated from brand.tokens.json).
+ * Sizes are display pixels at the 720 px article width.
+ */
+.np-plate { font-family: var(--np-sans); -webkit-font-smoothing: antialiased; }
+.np-canvas { fill: var(--np-canvas); }
+.np-frame { fill: none; stroke: var(--np-hairline); stroke-width: 1; }
+.np-sep { fill: none; stroke: var(--np-hairline); stroke-width: 1; }
+
+/* Texture: low-contrast drafting cues. None of it carries meaning. */
+.np-grid-dot { fill: var(--np-rule); opacity: 0.55; }
+.np-ruler { fill: none; stroke: var(--np-rule); stroke-width: 0.75; }
+.np-crop { fill: none; stroke: var(--np-rule); stroke-width: 1; }
+
+/* Bands */
+.np-head-kicker { font: 500 11px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-accent); }
+.np-slash { opacity: 0.5; font-weight: 400; }
+.np-head-meta, .np-foot-meta { font: 400 10px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-muted); }
+.np-legend { font: 500 9px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-swatch { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
+.np-swatch-outcome { fill: var(--np-surface-2); }
+.np-swatch-focal { fill: var(--np-accent-wash); stroke: var(--np-accent); }
+.np-swatch-muted { stroke-dasharray: 2 2; }
+.np-swatch-rule-accent { fill: var(--np-accent); }
+.np-swatch-rule-fail { fill: var(--np-danger); }
+.np-swatch-rule-pass { fill: var(--np-success); }
+.np-legend-line { fill: none; stroke: var(--np-accent); stroke-width: 1.75; }
+
+/* Callouts */
+.np-badge { fill: var(--np-surface); stroke: var(--np-accent); stroke-width: 1; }
+.np-badge-num { font: 600 9px var(--np-mono); fill: var(--np-accent); }
+.np-note { font: 400 12.5px var(--np-sans); fill: var(--np-ink-2); }
+
+/* Pele diagram: nodes */
+.np-diagram { overflow: visible; }
+.np-diagram .np-shape { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
+.np-diagram .pele-label { font-weight: 500; font-size: 14px; fill: var(--np-ink); }
+.np-diagram .pele-shape-diam .pele-label { font-weight: 600; font-size: 13px; }
+.np-diagram .np-kicker { font: 600 9.5px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-diagram .np-detail { font: 400 12.5px var(--np-sans); fill: var(--np-ink-2); }
+.np-diagram .np-index { font: 500 8.5px var(--np-mono); letter-spacing: 0.06em; fill: var(--np-muted); }
+.np-diagram .np-rule { fill: var(--np-accent); }
+
+.np-diagram .accent .np-kicker { fill: var(--np-accent); }
+.np-diagram .focal .np-shape { fill: var(--np-accent-wash); stroke: var(--np-accent); }
+.np-diagram .focal .np-kicker { fill: var(--np-accent); }
+.np-diagram .outcome .np-shape { fill: var(--np-surface-2); stroke: var(--np-rule); }
+.np-diagram .muted .np-shape { stroke-dasharray: 3 3; fill: var(--np-canvas); }
+.np-diagram .muted .pele-label { fill: var(--np-muted); }
+.np-diagram .fail .np-rule { fill: var(--np-danger); }
+.np-diagram .fail .np-kicker { fill: var(--np-danger); }
+.np-diagram .pass .np-rule { fill: var(--np-success); }
+.np-diagram .pass .np-kicker { fill: var(--np-success); }
+
+/* Pele diagram: edges */
+.np-diagram .pele-edge path { stroke: var(--np-line); stroke-width: 1.25; stroke-linecap: butt; stroke-linejoin: miter; }
+.np-diagram .pele-edge .np-arrow { fill: none; stroke-width: 1.25; }
+.np-diagram .np-port { fill: var(--np-canvas); stroke: var(--np-line); stroke-width: 1.25; }
+.np-diagram .np-hot path { stroke: var(--np-accent); stroke-width: 1.75; }
+.np-diagram .np-port-hot, .np-legend-port { fill: var(--np-accent); stroke: var(--np-accent); }
+.np-diagram .pele-edge-label rect { fill: var(--np-canvas); }
+.np-diagram .pele-edge-label text { font: 600 9.5px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-ink-2); }
+.np-diagram .pele-edge-label.np-hot text { fill: var(--np-accent); }
+
+/* Pele diagram: clusters */
+.np-diagram .pele-cluster rect:first-child { fill: var(--np-surface-2); fill-opacity: 0.35; stroke: var(--np-rule); stroke-width: 1; stroke-dasharray: 4 3; }
+.np-diagram .pele-cluster-label { font: 600 9.5px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-muted); }
+.np-diagram .np-cluster-tick { fill: var(--np-accent); }
+.np-diagram .np-cluster-mask { fill: var(--np-canvas); }
+.np-diagram .np-cluster-mask-wash { fill: var(--np-surface-2); fill-opacity: 0.35; }
+.np-diagram .pele-cluster.ghost rect:first-child { fill: none; stroke: none; }
+
+/* Share card */
+.np-og-rule { fill: var(--np-accent); }
+.np-og-panel { fill: var(--np-surface); stroke: var(--np-hairline); stroke-width: 1; }
+.np-og-kicker { font: 500 15px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-accent); }
+.np-og-title { font: 600 54px var(--np-sans); letter-spacing: -0.025em; fill: var(--np-ink); }
+.np-og-byline { font: 600 14px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-ink); }
+.np-og-url { font: 400 14px var(--np-mono); letter-spacing: 0.02em; fill: var(--np-muted); }

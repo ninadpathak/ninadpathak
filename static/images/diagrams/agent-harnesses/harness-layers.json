@@ -1,0 +1,11 @@
+{
+  "source": "content/diagrams/agent-harnesses/harness-layers.mmd",
+  "hash": "188033ad47e7b777",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 808,
+  "scale": 1,
+  "alt": "The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning, and tool calls pass through the loop.",
+  "caption": "The model reasons. The harness handles everything else.",
+  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/agent-harnesses/harness-layers.svg\" width=\"720\" height=\"808\" alt=\"The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning, and tool calls pass through the loop.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>The model reasons. The harness handles everything else.</figcaption>\n</figure>"
+}

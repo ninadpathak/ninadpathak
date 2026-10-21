@@ -1,0 +1,34 @@
+%% @fig 01
+%% @kicker Harness layers around the raw LLM
+%% @alt The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning, and tool calls pass through the loop.
+%% @caption The model reasons. The harness handles everything else.
+%% @path app>loop>prompt>llm
+%% @legend accent=Harness layer; outcome=Outside the harness; hot=Request path
+flowchart TB
+  app["§Caller
+Application"]:::outcome
+  subgraph harness [Agent harness]
+    direction LR
+    loop["§Layer 1
+Execution loop
+~Steps, stop rules, retries"]:::accent
+    prompt["§Layer 2
+Prompt assembler
+~System, history, tool results"]:::accent
+    state["§Layer 3
+State manager
+~Subtasks and checkpoints"]
+    observer["§Layer 4
+Observer
+~Logs every step by run ID"]
+  end
+  llm["§Model
+Raw LLM
+~Reasoning only"]:::outcome
+  tools[("Tools")]:::outcome
+  app --> loop
+  loop --> prompt
+  prompt --> llm
+  loop <-->|calls| tools
+  loop --> state
+  loop -.-> observer

@@ -1,0 +1,22 @@
+%% @fig 01
+%% @kicker An illustrative heading rewrite
+%% @alt An illustrative example rewrites the topic label Setup as the task heading Configure the client with an API key, which names an action, an object, and a context.
+%% @caption A topic label names a subject. A task heading names the work the section covers.
+%% @path before>after
+%% @note after | Read it alone in the outline: the reader knows what they will have done.
+%% @legend muted=Topic label; focal=Task heading; outcome=Heading part; hot=Rewrite
+flowchart LR
+  before["§Topic label
+Setup"]:::muted
+  after["§Task heading
+Configure the client with an API key"]:::focal
+  action["§Action
+Configure"]:::outcome
+  object["§Object
+the client"]:::outcome
+  context["§Context
+with an API key"]:::outcome
+  before -->|rewrite| after
+  after --- action
+  after --- object
+  after --- context
