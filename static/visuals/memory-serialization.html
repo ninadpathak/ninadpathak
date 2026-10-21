@@ -44,11 +44,20 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
 @media (max-width:431px){
   .lane{padding:8px 6px 10px;}
   .flow{gap:3px;}
-  .node{padding:7px 1px;letter-spacing:0;}
+  .node{padding:7px 2px;letter-spacing:0;}
   .lanes{zoom:0.9;}
 }
-@media (max-width:366px){ .lanes{zoom:0.8;} }
-@media (max-width:310px){ .scene{padding:18px 8px;} .lanes{zoom:0.74;} }
+@media (max-width:366px){
+  .scene{padding:18px 6px;}
+  .lane{padding:8px 4px 10px;}
+  .flow{gap:2px;}
+  .arrow{font-size:9px;}
+  .store{width:32px;letter-spacing:0;}
+}
+@media (max-width:310px){ .lanes{zoom:0.82;} }
+@media (prefers-reduced-motion:reduce){
+  .node,.arrow,.store{transition:none;}
+}
 </style>
 </head>
 <body>
@@ -116,15 +125,19 @@ const steps=[
        recallGood.innerHTML='recall: <b>&#x2713; remembers prefs &amp; resolved issues</b>';
        recallBad.innerHTML='recall: <b>&#x2717; forgot everything</b>';}
 ];
+// One extra tick past the last step holds the finished state before the loop clears.
 let s=0;
 function tick(){
   if(s===0)clear();
-  steps[s]();
-  s++;
-  if(s>steps.length){s=0;}
+  if(s<steps.length)steps[s]();
+  s=(s+1)%(steps.length+1);
 }
-tick();
-setInterval(tick,1400);
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  steps.forEach(step=>step());
+}else{
+  tick();
+  setInterval(tick,1400);
+}
 </script>
 </body>
 </html>
