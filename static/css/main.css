@@ -144,6 +144,7 @@
   --accent:    #ff5f1f;
   --accent-lo: #1a0d07;
   --on-accent: #090909;
+  --accent-strong: #ff7a3d;
   --status-error: #ff8a80;
   --status-success: #6ee7a7;
   --severity-error-text: var(--severity-error);
