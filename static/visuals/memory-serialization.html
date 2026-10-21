@@ -39,13 +39,16 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
   .node small{display:none;}
   .store{width:40px;}
 }
-@media (max-width:300px){
-  .scene{padding:18px 10px;}
+/* The lanes need about 432px before the longest label, DESERIALIZE, outgrows its box.
+   Narrower frames tighten the spacing and zoom the lanes down a step instead of breaking words. */
+@media (max-width:431px){
   .lane{padding:8px 6px 10px;}
   .flow{gap:3px;}
-  .node{font-size:6.5px;letter-spacing:0;overflow-wrap:anywhere;}
-  .store{width:34px;font-size:7px;letter-spacing:0;}
+  .node{padding:7px 1px;letter-spacing:0;}
+  .lanes{zoom:0.9;}
 }
+@media (max-width:366px){ .lanes{zoom:0.8;} }
+@media (max-width:310px){ .scene{padding:18px 8px;} .lanes{zoom:0.74;} }
 </style>
 </head>
 <body>
