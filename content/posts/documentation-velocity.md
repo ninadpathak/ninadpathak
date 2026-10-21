@@ -42,7 +42,7 @@ It accrues quietly as a tax on every Pull Request where a reviewer has to ask wh
   </div>
 </div>
 
-A [Stripe survey](https://stripe.com/reports/developer-coefficient-2018) found that developers spend an average of 17 hours per week on technical debt and maintenance, with poor documentation cited as a primary friction point. Once the answers live only in someone's memory or a Slack thread that scrolled away last Tuesday, the cost of discovery scales with the size of the team.
+A [Stripe survey](https://stripe.com/files/reports/the-developer-coefficient.pdf) found that developers spend an average of 17 hours per week on technical debt and maintenance, with poor documentation cited as a primary friction point. Once the answers live only in someone's memory or a Slack thread that scrolled away last Tuesday, the cost of discovery scales with the size of the team.
 
 A team of 100 engineers working in an undocumented system is rarely 10x more productive than a team of 10. They are often less productive, because the overhead of keeping everyone's mental model in sync eats the surplus capacity the extra headcount was supposed to buy.
 

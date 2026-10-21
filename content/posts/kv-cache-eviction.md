@@ -222,4 +222,4 @@ Pruning also pairs well with prompt caching, which reuses the KV cache of a stat
 *   [FlashAttention-2: Faster Attention with Better Parallelism](https://arxiv.org/abs/2307.08691) - Technical specs for hardware-aware attention.
 *   [vLLM: High-Throughput Serving with PagedAttention](https://github.com/vllm-project/vllm) - Implementation of memory-managed LLM inference.
 *   [Llama 3 Technical Report](https://ai.meta.com/blog/meta-llama-3/) - Architecture details on context handling.
-*   [Unified Memory Management on Apple Silicon](https://developer.apple.com/documentation/metal/memory_management) - Hardware constraints for local benchmarks.
+*   [Choosing a resource storage mode for Apple GPUs](https://developer.apple.com/documentation/metal/choosing-a-resource-storage-mode-for-apple-gpus) - Hardware constraints for local benchmarks.
