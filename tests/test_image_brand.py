@@ -86,5 +86,20 @@ class ArticleFigureTests(unittest.TestCase):
                     self.assertTrue((ROOT / src.lstrip("/")).exists())
 
 
+class EmbedSyncTests(unittest.TestCase):
+    def test_every_embed_matches_its_figure_json(self):
+        """Width, height, alt, and caption come from the render; `node tools/image-brand/embed.mjs` syncs them."""
+        import json
+        for path in sorted((ROOT / "content/posts").glob("*.md")):
+            text = path.read_text(encoding="utf-8")
+            for block in re.findall(r'<figure class="np-figure">.*?</figure>', text, re.S):
+                href = re.search(r'class="np-figure-zoom" href="([^"]+)\.svg"', block)
+                meta = href and ROOT / (href.group(1).lstrip("/") + ".json")
+                if not meta or not meta.exists():
+                    continue
+                with self.subTest(post=path.name, figure=href.group(1)):
+                    self.assertEqual(block, json.loads(meta.read_text(encoding="utf-8"))["embed"])
+
+
 if __name__ == "__main__":
     unittest.main()

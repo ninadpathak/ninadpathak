@@ -1,0 +1,18 @@
+%% @fig 01
+%% @kicker Where evaluations stall
+%% @alt A technical evaluator's path from the docs to a deal: a dead quickstart, an auth example that leaves out a required scope, and a usage limit buried three pages deep each mark a point where the trial quietly cools off before anyone signs.
+%% @caption Each crossed step is a place where docs lose the deal before sales hears an objection.
+%% @path dev>quick>auth>limits>deal
+%% @glyph dev | reader
+%% @glyph quick | action corner=cross
+%% @glyph auth | key corner=cross
+%% @glyph limits | stop corner=cross
+%% @glyph deal | doc check
+%% @spacing 20,36
+flowchart LR
+  dev["Evaluator"]
+  quick["Quickstart"]
+  auth["Auth"]
+  limits["Limits"]
+  deal["Deal"]:::muted
+  dev --> quick --> auth --> limits --> deal

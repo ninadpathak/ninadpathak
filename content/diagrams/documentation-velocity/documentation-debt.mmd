@@ -1,0 +1,17 @@
+%% @fig 02
+%% @kicker Where documentation debt gets paid
+%% @alt Missing documentation never breaks the build, but it taxes three places: every pull request where a reviewer has to ask what a function does, every onboarding where a new hire reverse-engineers the deploy process, and every incident where the one person who understands the failing job is asleep.
+%% @caption A Stripe survey found developers spend about 17 hours a week on technical debt and maintenance, with poor docs a primary friction point.
+%% @glyph debt | doc cross
+%% @glyph pr | doc question
+%% @glyph onboard | reader question
+%% @glyph incident | rack corner=cross
+%% @spacing 16,36
+flowchart LR
+  debt["Missing docs"]:::focal
+  pr["Pull request"]
+  onboard["Onboarding"]
+  incident["Incident"]
+  debt --> pr
+  debt --> onboard
+  debt --> incident

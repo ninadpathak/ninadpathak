@@ -17,12 +17,10 @@ An agent can act on stale or contradictory state without realizing that its memo
 The ecosystem offers several approaches to those problems, with different trade-offs in control, portability, and operational cost.
 
 
-<div class="visual-wrapper">
-  <div class="visual-title">The Agent Memory Constellation</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/state-memory.html" title="The 2026 AI agent memory constellation" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-memory-2026/memory-stack.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-memory-2026/memory-stack.narrow.svg" width="288" height="648"><img class="np-has-narrow" src="/static/images/diagrams/agent-memory-2026/memory-stack.svg" width="720" height="256" alt="The agent memory stack from the bottom up: an embedding and storage layer such as pgvector, Pinecone, or Qdrant holds memories outside the context window; a retrieval layer combines dense vectors with BM25; a ranking layer reorders candidates; and the result reaches the agent's context window, the active working state." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Storage, retrieval, and ranking are separate layers; only what survives ranking reaches the context window.</figcaption>
+</figure>
 
 ## The memory stack separates active state from stored knowledge
 

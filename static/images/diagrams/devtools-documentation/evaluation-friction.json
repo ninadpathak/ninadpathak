@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/devtools-documentation/evaluation-friction.mmd",
+  "hash": "0cfbe63e1720cdd1",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 264,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 10
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/devtools-documentation/evaluation-friction.narrow",
+    "width": 288,
+    "height": 776,
+    "minText": {
+      "sans": 13,
+      "mono": 11
+    }
+  },
+  "alt": "A technical evaluator's path from the docs to a deal: a dead quickstart, an auth example that leaves out a required scope, and a usage limit buried three pages deep each mark a point where the trial quietly cools off before anyone signs.",
+  "caption": "Each crossed step is a place where docs lose the deal before sales hears an objection.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/devtools-documentation/evaluation-friction.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/devtools-documentation/evaluation-friction.narrow.svg\" width=\"288\" height=\"776\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/devtools-documentation/evaluation-friction.svg\" width=\"720\" height=\"264\" alt=\"A technical evaluator's path from the docs to a deal: a dead quickstart, an auth example that leaves out a required scope, and a usage limit buried three pages deep each mark a point where the trial quietly cools off before anyone signs.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each crossed step is a place where docs lose the deal before sales hears an objection.</figcaption>\n</figure>"
+}

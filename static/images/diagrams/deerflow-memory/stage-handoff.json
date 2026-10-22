@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/deerflow-memory/stage-handoff.mmd",
+  "hash": "51f3232d4e9e7863",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 256,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 10
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/deerflow-memory/stage-handoff.narrow",
+    "width": 288,
+    "height": 728,
+    "minText": {
+      "sans": 13,
+      "mono": 11
+    }
+  },
+  "alt": "A DeerFlow workflow runs as a sequence of stages: plan, research, and report. Each stage works in its own fresh working memory, the prompt at execution time, then writes its outputs to the session state file. The file grows stage by stage, and the next stage reads it into its working memory, so stopping and resuming a run only needs that one file.",
+  "caption": "Working memory resets between stages; the session file carries state forward, so a failed run resumes from its last stage.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/deerflow-memory/stage-handoff.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/deerflow-memory/stage-handoff.narrow.svg\" width=\"288\" height=\"728\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/deerflow-memory/stage-handoff.svg\" width=\"720\" height=\"256\" alt=\"A DeerFlow workflow runs as a sequence of stages: plan, research, and report. Each stage works in its own fresh working memory, the prompt at execution time, then writes its outputs to the session state file. The file grows stage by stage, and the next stage reads it into its working memory, so stopping and resuming a run only needs that one file.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Working memory resets between stages; the session file carries state forward, so a failed run resumes from its last stage.</figcaption>\n</figure>"
+}

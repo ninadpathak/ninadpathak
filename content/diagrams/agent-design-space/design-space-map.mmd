@@ -1,0 +1,18 @@
+%% @fig 01
+%% @kicker Agent patterns by run frequency and risk
+%% @alt The five production agent patterns in order of how often they run and how wide their blast radius is: retrieval-augmented single-loop agents run once per request with the smallest blast radius, then multi-turn conversational agents, workflow orchestration agents, supervisor-delegation agents that split work across several agents, and persistent-goal agents that run continuously and carry state across days with the widest blast radius and the hardest audit.
+%% @caption The further right a pattern sits, the longer it runs and the more its state has to survive a restart.
+%% @glyph rag | vectors
+%% @glyph conv | tokens
+%% @glyph flow | tools
+%% @glyph sup | loop
+%% @glyph goal | loop corner=flag
+%% @dim rag | goal | Longer runs, wider risk
+%% @spacing 20,22
+flowchart LR
+  rag["RAG loop"]
+  conv["Chat"]
+  flow["Workflow"]
+  sup["Supervisor"]:::stack
+  goal["Persistent goal"]:::focal
+  rag --> conv --> flow --> sup --> goal

@@ -92,12 +92,10 @@ One important constraint trips people up. Claude Code reads `CLAUDE.md` on every
 Edit the file mid-session and the agent keeps running on the version it loaded at launch, until the next session starts.
 
 
-<div class="visual-wrapper">
-  <div class="visual-title">Claude Code Memory Layers</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/claude-code-memory.html" title="Claude Code layered memory architecture" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/claude-code-memory/memory-sources.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/claude-code-memory/memory-sources.narrow.svg" width="288" height="584"><img class="np-has-narrow" src="/static/images/diagrams/claude-code-memory/memory-sources.svg" width="720" height="416" alt="Three sources feed a Claude Code session's context. CLAUDE.md files, written and maintained by you, load at startup across managed, user, project, and local scopes. Auto memory, MEMORY.md plus topic files that Claude Code writes as it works, also loads at startup and is updated from the session. One-off context passed on the command line lasts only for that session." loading="lazy" decoding="async"></picture></a>
+  <figcaption>CLAUDE.md loads at startup and isn't re-read mid-session, so an edit takes effect in the next session.</figcaption>
+</figure>
 
 
 ##Memory Files On Disk: The Claude.md Convention Across The Project

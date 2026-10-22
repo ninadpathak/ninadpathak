@@ -1,0 +1,14 @@
+%% @fig 01
+%% @kicker Three memory types
+%% @alt Working, episodic, and semantic memory side by side. Working memory is the scratchpad for the current turn, backed by the context window and gone when the turn ends. Episodic memory records what happened, such as a task that failed on Friday with a given error, in an event store ordered by time. Semantic memory holds what is true, such as the fact that list.sort() is stable, in a durable knowledge base.
+%% @caption Working memory lasts a turn, episodic memory a session's log, and semantic memory until a fact stops being true.
+%% @glyph working | context
+%% @glyph episodic | ledger rows=3
+%% @glyph semantic | doc check
+%% @dim working | semantic | Lasts longer
+%% @spacing 40,30
+flowchart LR
+  working["Working"]
+  episodic["Episodic"]
+  semantic["Semantic"]:::focal
+  working ~~~ episodic ~~~ semantic

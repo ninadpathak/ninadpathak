@@ -130,12 +130,10 @@ Strong evidence is how I read the result, and I would still run my own evals bef
 
 Code, support tickets, legal docs, and a messy internal wiki all fail differently, and a 49% number measured on one will not carry over cleanly to another.
 
-<div class="visual-wrapper">
-  <div class="visual-title">CHUNK ENRICHMENT AND RETRIEVAL FAILURE REDUCTION</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/contextual-retrieval.html" title="A raw chunk versus a chunk with a prepended context blurb before embedding, and the 49% / 67% reduction in top-20 retrieval failure" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/contextual-retrieval/retrieval-failure.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/contextual-retrieval/retrieval-failure.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/contextual-retrieval/retrieval-failure.svg" width="720" height="472" alt="Reduction in top-20 retrieval failure, measured as 1 minus recall at 20, in Anthropic's contextual retrieval tests: 35% from contextual embeddings alone, 49% once contextual BM25 joins, and 67% once reranking joins too. Each tile is 5 percentage points." loading="lazy" decoding="async"></picture></a>
+  <figcaption>From Anthropic's contextual retrieval writeup. Each layer still helps on top of the one before it; each tile is 5 points.</figcaption>
+</figure>
 
 ## The interesting change happens before query time
 

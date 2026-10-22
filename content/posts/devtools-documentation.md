@@ -15,12 +15,10 @@ DevTools startups lose deals over bad docs long before anyone writes "documentat
 
 The trial cools off quietly, sales blames timing, and product blames pricing. I think the docs were the real loss point more often than teams want to admit.
 
-<div class="visual-wrapper">
-  <div class="visual-title">The Evaluation Friction Funnel</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/evaluation-funnel.html" title="Evaluation Friction Funnel" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/devtools-documentation/evaluation-friction.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/devtools-documentation/evaluation-friction.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/devtools-documentation/evaluation-friction.svg" width="720" height="264" alt="A technical evaluator's path from the docs to a deal: a dead quickstart, an auth example that leaves out a required scope, and a usage limit buried three pages deep each mark a point where the trial quietly cools off before anyone signs." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each crossed step is a place where docs lose the deal before sales hears an objection.</figcaption>
+</figure>
 
 **Short answer:** DevTools buyers use docs as a proxy for product maturity, implementation risk, and post-sale support quality. The 2026 State of Docs report says 80% of decision-makers review documentation before buying, 88% rate docs extremely or somewhat important, and 51% say docs are important or essential for closing deals, yet 57% do not track leads from documentation.
 
