@@ -311,6 +311,48 @@ class HtmlModeTests(unittest.TestCase):
                 self.assertEqual(check["status"], "pass")
                 self.assertIn(f"max-snippet:{value}", check["detail"])
 
+    def snippet(self, head, headers=None):
+        html = f"<html><head>{head}</head><body><h1>T</h1><p>B.</p></body></html>"
+        return by_id(run_check(html, headers or {}))["snippet-eligibility"]
+
+    def test_most_restrictive_directive_wins_in_either_order(self):
+        # Review round 3, finding 1: only the first max-snippet was read, so
+        # "max-snippet:160, max-snippet:0" passed while the reverse order failed.
+        for content in ("max-snippet:160, max-snippet:0", "max-snippet:0, max-snippet:160",
+                        "max-snippet:160, nosnippet", "nosnippet, max-snippet:160"):
+            with self.subTest(content=content):
+                self.assertEqual(self.snippet(f'<meta name="robots" content="{content}">')["status"], "attention")
+
+    def test_every_robots_meta_tag_is_read(self):
+        head = '<meta name="robots" content="max-snippet:160"><meta name="robots" content="noindex">'
+        self.assertEqual(self.snippet(head)["status"], "attention")
+
+    def test_header_and_meta_are_combined(self):
+        # Review round 3, finding 1: HTML max-snippet:160 plus X-Robots-Tag max-snippet:0 passed.
+        meta = '<meta name="robots" content="max-snippet:160">'
+        self.assertEqual(self.snippet(meta, {"xRobotsTag": "max-snippet:0"})["status"], "attention")
+        self.assertEqual(self.snippet('<meta name="robots" content="max-snippet:0">',
+                                      {"xRobotsTag": "max-snippet:160"})["status"], "attention")
+
+    def test_googlebot_meta_applies_and_other_bots_do_not(self):
+        self.assertEqual(self.snippet('<meta name="googlebot" content="nosnippet">')["status"], "attention")
+        self.assertEqual(self.snippet('<meta content="nosnippet" name="googlebot">')["status"], "attention")
+        self.assertEqual(self.snippet('<meta name="bingbot" content="nosnippet">')["status"], "pass")
+
+    def test_header_user_agent_scope_is_respected(self):
+        self.assertEqual(self.snippet("", {"xRobotsTag": "googlebot: nosnippet"})["status"], "attention")
+        self.assertEqual(self.snippet("", {"xRobotsTag": "otherbot: noindex, nosnippet"})["status"], "pass")
+        self.assertEqual(self.snippet("", {"xRobotsTag": "otherbot: noindex, googlebot: max-snippet:0"})["status"],
+                         "attention")
+
+    def test_none_counts_as_noindex(self):
+        self.assertEqual(self.snippet('<meta name="robots" content="none">')["status"], "attention")
+
+    def test_smallest_positive_limit_is_reported(self):
+        check = self.snippet('<meta name="robots" content="max-snippet:300">', {"xRobotsTag": "max-snippet:120"})
+        self.assertEqual(check["status"], "pass")
+        self.assertIn("max-snippet:120", check["detail"])
+
     def test_max_snippet_zero_is_flagged_as_nosnippet(self):
         html = '<html><head><meta name="robots" content="max-snippet:0"></head><body><h1>T</h1><p>B.</p></body></html>'
         check = by_id(run_check(html))["snippet-eligibility"]

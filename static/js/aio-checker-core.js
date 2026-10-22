@@ -242,12 +242,20 @@
       });
     });
 
-    var robots = "";
-    var robotsTag = /<meta\b[^>]*name\s*=\s*["']robots["'][^>]*>/i.exec(fullInput);
-    if (robotsTag) {
-      var content = /content\s*=\s*["']([^"']*)["']/i.exec(robotsTag[0]);
-      robots = content ? content[1].toLowerCase() : "";
-    }
+    /* Every robots and googlebot meta tag counts, in any attribute order: Google
+     * combines them and applies the most restrictive. Tags for other crawlers
+     * (bingbot and so on) do not apply to Google and are ignored. */
+    var robotsSources = [];
+    (fullInput.match(/<meta\b[^>]*>/gi) || []).forEach(function (tag) {
+      var name = /\bname\s*=\s*["']([^"']*)["']/i.exec(tag);
+      var content = /\bcontent\s*=\s*["']([^"']*)["']/i.exec(tag);
+      if (!name || !content) return;
+      var agent = name[1].toLowerCase();
+      if (agent === "robots" || agent === "googlebot") {
+        robotsSources.push({ source: "meta " + agent, value: content[1].toLowerCase(), header: false });
+      }
+    });
+    var robots = robotsSources.map(function (item) { return item.value; }).join(", ");
 
     return {
       blocks: blocks,
@@ -255,6 +263,7 @@
       jsonLdTypes: unique(jsonLdTypes),
       jsonLdCount: jsonLdBlocks.length,
       robots: robots,
+      robotsSources: robotsSources,
       hasTimeElement: /<time\b/i.test(fullInput),
       dataNosnippetCount: (fullInput.match(/data-nosnippet/gi) || []).length,
       raw: input,
@@ -302,6 +311,7 @@
       jsonLdTypes: [],
       jsonLdCount: 0,
       robots: "",
+      robotsSources: [],
       hasTimeElement: false,
       dataNosnippetCount: 0,
       raw: input
@@ -553,30 +563,62 @@
       hits.slice(0, 3).map(function (sentence) { return { excerpt: sentence.slice(0, 160) }; }));
   }
 
-  /* Snippet eligibility is the one hard gate in this whole tool, and it is the
-   * only check that restates a requirement rather than a correlation. */
+  /* Snippet eligibility is the only check in this tool that restates a documented
+   * requirement. Google's other documented condition, site inclusion in Search
+   * Console's Search generative AI control, cannot be seen from the page. */
+  /* Directives that apply to Google from every source. In an X-Robots-Tag header a
+   * "useragent:" prefix scopes the directives after it, until the next prefix;
+   * only unscoped and googlebot-scoped directives apply. Names that themselves take a
+   * value (max-snippet:, unavailable_after: and so on) are not user agents. */
+  var VALUE_DIRECTIVES = { "max-snippet": 1, "max-image-preview": 1, "max-video-preview": 1, "unavailable_after": 1 };
+  function applicableDirectives(sources) {
+    var found = [];
+    (sources || []).forEach(function (item) {
+      var scope = null;
+      item.value.split(",").forEach(function (raw) {
+        var token = raw.trim();
+        if (!token) return;
+        var prefixed = /^([a-z0-9_.-]+)\s*:\s*(.*)$/.exec(token);
+        if (item.header && prefixed && !VALUE_DIRECTIVES[prefixed[1]]) {
+          scope = prefixed[1];
+          token = prefixed[2].trim();
+          if (!token) return;
+        }
+        if (scope === null || scope === "googlebot") found.push({ source: item.source, directive: token });
+      });
+    });
+    return found;
+  }
+
   function checkSnippetEligibility(doc) {
     var basis = "[G-AIO] 2026-07-10, verbatim: \"To be eligible to be shown in generative AI features on Google Search, a page must be indexed and eligible to be shown in Google Search with a snippet, fulfilling the Search technical requirements.\"";
     if (!doc.isHtml && !doc.robots) {
       return makeCheck("snippet-eligibility", "Snippets are not blocked", SKIPPED, DOCUMENTED, basis,
         "This check needs the page's HTML. Use the URL mode, or paste the full HTML source rather than the text.", []);
     }
+    /* Google applies the most restrictive directive across every meta tag and header.
+     * noindex, none (noindex, nofollow), nosnippet and max-snippet:0 each remove
+     * snippet eligibility. A positive max-snippet is a length limit, and -1 lets
+     * Google choose, so neither blocks; the smallest positive limit is reported. */
     var problems = [];
-    if (/\bnoindex\b/.test(doc.robots)) problems.push({ excerpt: "meta robots: " + doc.robots, note: "noindex" });
-    if (/\bnosnippet\b/.test(doc.robots)) problems.push({ excerpt: "meta robots: " + doc.robots, note: "nosnippet" });
-    // Google: a positive max-snippet is a maximum snippet length, 0 is equivalent to
-    // nosnippet, and -1 lets Google choose. Only 0 removes snippet eligibility.
-    var maxSnippet = /max-snippet\s*:\s*(-?\d+)/.exec(doc.robots);
-    var snippetLimit = maxSnippet ? Number(maxSnippet[1]) : null;
-    if (snippetLimit === 0) {
-      problems.push({ excerpt: "meta robots: max-snippet:0", note: "max-snippet:0, equivalent to nosnippet" });
-    }
+    var snippetLimit = null;
+    applicableDirectives(doc.robotsSources).forEach(function (item) {
+      var directive = item.directive;
+      var limit = /^max-snippet\s*:\s*(-?\d+)$/.exec(directive);
+      if (directive === "noindex" || directive === "none" || directive === "nosnippet") {
+        problems.push({ excerpt: item.source + ": " + directive, note: directive === "none" ? "none, equivalent to noindex, nofollow" : directive });
+      } else if (limit && Number(limit[1]) === 0) {
+        problems.push({ excerpt: item.source + ": max-snippet:0", note: "max-snippet:0, equivalent to nosnippet" });
+      } else if (limit && Number(limit[1]) > 0) {
+        snippetLimit = snippetLimit === null ? Number(limit[1]) : Math.min(snippetLimit, Number(limit[1]));
+      }
+    });
     if (problems.length) {
       return makeCheck("snippet-eligibility", "Snippets are not blocked", ATTENTION, DOCUMENTED, basis,
-        "The page restricts snippets, which by Google's own wording makes it ineligible for AI Overviews and AI Mode. This is the one finding here that is a stated requirement rather than a heuristic.",
+        "The page restricts snippets, which by Google's own wording makes it ineligible for AI Overviews and AI Mode. Google documents snippet eligibility as a requirement, so this finding is not a heuristic. Its other requirement, site inclusion in Search Console's Search generative AI control, is outside what this tool can check.",
         problems);
     }
-    var detail = "No noindex, nosnippet, or max-snippet:0 was found.";
+    var detail = "No noindex, none, nosnippet, or max-snippet:0 was found in any robots or googlebot meta tag or X-Robots-Tag header.";
     if (snippetLimit !== null && snippetLimit > 0) {
       detail += " max-snippet:" + snippetLimit + " limits snippet text to " + snippetLimit + " characters, which Google documents as a length limit, not a block.";
     }
@@ -627,7 +669,9 @@
      * nothing visible in its markup, so the header is merged into the robots
      * directives before the snippet check reads them. */
     if (settings.xRobotsTag) {
-      doc.robots = (doc.robots ? doc.robots + ", " : "") + String(settings.xRobotsTag).toLowerCase();
+      var headerValue = String(settings.xRobotsTag).toLowerCase();
+      doc.robots = (doc.robots ? doc.robots + ", " : "") + headerValue;
+      doc.robotsSources = (doc.robotsSources || []).concat([{ source: "X-Robots-Tag header", value: headerValue, header: true }]);
       doc.robotsFromHeader = true;
     }
     var checks = [
