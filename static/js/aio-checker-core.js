@@ -564,16 +564,23 @@
     var problems = [];
     if (/\bnoindex\b/.test(doc.robots)) problems.push({ excerpt: "meta robots: " + doc.robots, note: "noindex" });
     if (/\bnosnippet\b/.test(doc.robots)) problems.push({ excerpt: "meta robots: " + doc.robots, note: "nosnippet" });
+    // Google: a positive max-snippet is a maximum snippet length, 0 is equivalent to
+    // nosnippet, and -1 lets Google choose. Only 0 removes snippet eligibility.
     var maxSnippet = /max-snippet\s*:\s*(-?\d+)/.exec(doc.robots);
-    if (maxSnippet && Number(maxSnippet[1]) >= 0) {
-      problems.push({ excerpt: "meta robots: max-snippet:" + maxSnippet[1], note: "max-snippet" });
+    var snippetLimit = maxSnippet ? Number(maxSnippet[1]) : null;
+    if (snippetLimit === 0) {
+      problems.push({ excerpt: "meta robots: max-snippet:0", note: "max-snippet:0, equivalent to nosnippet" });
     }
     if (problems.length) {
       return makeCheck("snippet-eligibility", "Snippets are not blocked", ATTENTION, DOCUMENTED, basis,
         "The page restricts snippets, which by Google's own wording makes it ineligible for AI Overviews and AI Mode. This is the one finding here that is a stated requirement rather than a heuristic.",
         problems);
     }
-    var detail = "No noindex, nosnippet, or restrictive max-snippet was found.";
+    var detail = "No noindex, nosnippet, or max-snippet:0 was found.";
+    if (snippetLimit !== null && snippetLimit > 0) {
+      detail += " max-snippet:" + snippetLimit + " limits snippet text to " + snippetLimit + " characters, which Google documents as a length limit, not a block.";
+    }
+    detail += " Google also requires the site to be included in the Search generative AI control in Search Console, which this tool cannot see.";
     if (doc.dataNosnippetCount) {
       detail += " " + doc.dataNosnippetCount + " data-nosnippet attributes exclude specific passages, which is a deliberate choice worth confirming.";
     }

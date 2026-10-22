@@ -301,9 +301,25 @@ class HtmlModeTests(unittest.TestCase):
         html = '<html><head><meta name="robots" content="noindex"></head><body><h1>T</h1><p>Body.</p></body></html>'
         self.assertEqual(status_of(run_check(html), "snippet-eligibility"), "attention")
 
-    def test_positive_max_snippet_is_flagged(self):
-        html = '<html><head><meta name="robots" content="max-snippet:50"></head><body><h1>T</h1><p>B.</p></body></html>'
-        self.assertEqual(status_of(run_check(html), "snippet-eligibility"), "attention")
+    def test_positive_max_snippet_only_limits_length(self):
+        # Review finding: max-snippet:160 was reported as making the page ineligible. Google
+        # documents a positive value as a maximum snippet length and only 0 as nosnippet.
+        for value in ("50", "160"):
+            html = f'<html><head><meta name="robots" content="max-snippet:{value}"></head><body><h1>T</h1><p>B.</p></body></html>'
+            check = by_id(run_check(html))["snippet-eligibility"]
+            with self.subTest(value=value):
+                self.assertEqual(check["status"], "pass")
+                self.assertIn(f"max-snippet:{value}", check["detail"])
+
+    def test_max_snippet_zero_is_flagged_as_nosnippet(self):
+        html = '<html><head><meta name="robots" content="max-snippet:0"></head><body><h1>T</h1><p>B.</p></body></html>'
+        check = by_id(run_check(html))["snippet-eligibility"]
+        self.assertEqual(check["status"], "attention")
+        self.assertEqual(check["confidence"], "documented")
+
+    def test_pass_names_the_search_console_control_it_cannot_see(self):
+        html = "<html><head></head><body><h1>T</h1><p>Body text.</p></body></html>"
+        self.assertIn("Search Console", by_id(run_check(html))["snippet-eligibility"]["detail"])
 
     def test_unrestricted_max_snippet_passes(self):
         html = '<html><head><meta name="robots" content="index, follow, max-snippet:-1"></head><body><h1>T</h1><p>B.</p></body></html>'

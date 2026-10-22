@@ -80,7 +80,7 @@
     {
       "@type": "Question",
       "name": "What stops a page appearing in AI Overviews?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Snippet eligibility. Google's guidance states that to be eligible for generative AI features a page must be indexed and eligible to be shown with a snippet. A nosnippet directive, a restrictive max-snippet, or noindex removes that eligibility, whether it arrives in a meta tag or in the X-Robots-Tag header." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Snippet eligibility. Google's guidance states that to be eligible for generative AI features a page must be indexed and eligible to be shown with a snippet. A nosnippet directive, max-snippet:0 (which Google treats as nosnippet), or noindex removes that eligibility, whether it arrives in a meta tag or in the X-Robots-Tag header. A positive max-snippet only limits snippet length." }
     },
     {
       "@type": "Question",
@@ -191,7 +191,7 @@
       <div>
         <div class="lint-severity-badge lint-severity-error">documented requirement</div>
         <ul class="linter-rule-list">
-          <li><strong>Snippets are not blocked.</strong> Google's generative AI guidance, updated 10 July 2026, says a page must be indexed and eligible for a Google Search snippet before it can be eligible for generative AI features. A <code>nosnippet</code> directive, a non-negative <code>max-snippet</code>, or <code>noindex</code> removes that eligibility, whether it appears in a meta tag or an <code>X-Robots-Tag</code> header.</li>
+          <li><strong>Snippets are not blocked.</strong> Google's generative AI guidance, updated 10 July 2026, says a page must be indexed and eligible for a Google Search snippet before it can be eligible for generative AI features. A <code>nosnippet</code> directive, <code>max-snippet:0</code> (which Google treats as <code>nosnippet</code>), or <code>noindex</code> removes that eligibility, whether it appears in a meta tag or an <code>X-Robots-Tag</code> header. A positive <code>max-snippet</code> only limits snippet length.</li>
           <li><strong>Structured data.</strong> The tool reports its presence as information, not as an AI Overview requirement. Google's guidance says structured data is not required for generative AI search and there is no special schema.org markup to add, though it can still support ordinary rich results.</li>
         </ul>
       </div>
