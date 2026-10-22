@@ -69,11 +69,19 @@ function resolveCard(src) {
 
 // Committed and fresh SVGs must match token for token; numbers may differ by half a pixel
 // so a different Chromium build's text metrics do not fail CI.
-function sameSvg(a, b) {
+function svgDiff(a, b, tol = 0.5) {
   const A = a.split(/(-?\d+(?:\.\d+)?)/), B = b.split(/(-?\d+(?:\.\d+)?)/);
-  if (A.length !== B.length) return false;
-  return A.every((t, i) => (i % 2 ? Math.abs(Number(t) - Number(B[i])) <= 0.5 : t === B[i]));
+  let maxDelta = 0, first = null, count = 0;
+  const n = Math.min(A.length, B.length);
+  for (let i = 0; i < n; i++) {
+    const bad = i % 2 ? Math.abs(Number(A[i]) - Number(B[i])) > tol : A[i] !== B[i];
+    if (i % 2) maxDelta = Math.max(maxDelta, Math.abs(Number(A[i]) - Number(B[i])) || 0);
+    if (bad) { count += 1; if (!first) first = `committed "${A.slice(Math.max(0, i - 3), i + 2).join('').slice(-90)}" vs fresh "${B.slice(Math.max(0, i - 3), i + 2).join('').slice(-90)}"`; }
+  }
+  if (A.length !== B.length) { count += 1; first = first || `token count ${A.length} vs ${B.length}`; }
+  return { same: count === 0, count, first, maxDelta: Math.round(maxDelta * 100) / 100 };
 }
+const sameSvg = (a, b) => svgDiff(a, b).same;
 const minify = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/\s*([{};:,])\s*/g, '$1').trim();
 
 function findSources() {
@@ -189,7 +197,10 @@ async function main() {
         if (src.meta.kind === 'og' && (titleOf(committed) !== titleOf(svg) || kickerOf(committed) !== kickerOf(svg))) {
           // A retitled or recategorized post keeps its old card until someone re-renders; that is not a CI failure.
           console.warn(`warn ${label}: card still shows "${titleOf(committed)}" / ${kickerOf(committed)}; run node tools/image-brand/render.mjs to refresh it`);
-        } else if (!sameSvg(committed, svg)) failures.push(`${label}: committed SVG differs from a fresh render; run node tools/image-brand/render.mjs`);
+        } else {
+          const d = svgDiff(committed, svg);
+          if (!d.same) failures.push(`${label}: committed SVG differs from a fresh render (${d.count} tokens, max numeric delta ${d.maxDelta}; first: ${d.first}); run node tools/image-brand/render.mjs`);
+        }
         if (meta && existsSync(path.join(outDir, `${src.id}.json`)) && !sameSvg(readFileSync(path.join(outDir, `${src.id}.json`), 'utf8'), meta)) failures.push(`${label}: committed ${src.id}.json differs from a fresh render`);
         continue;
       }
