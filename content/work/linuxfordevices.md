@@ -5,10 +5,10 @@ industry: "Linux / Developer Media"
 duration: "15 months"
 services: "Content Strategy, Technical Writing, SEO"
 summary: "Built LinuxForDevices' content and distribution system from scratch, growing traffic from 487 to 203,400 monthly visits and adding $34K in MRR."
-hero_metric: "731%"
-hero_metric_label: "Traffic growth in 15 months"
+hero_metric: "418×"
+hero_metric_label: "Traffic growth in 15 months (487 → 203,400)"
 metrics:
-  - value: "731%"
+  - value: "418×"
     label: "Traffic growth"
   - value: "$34K"
     label: "MRR added"
@@ -55,7 +55,7 @@ Developers began citing the tutorials in forums, GitHub discussions, and Stack O
 ## Traffic reached 203,400 monthly visits and organic added revenue
 
 - 487 to 203,400 monthly visits in 15 months
-- 731% traffic growth
+- 418x traffic growth
 - $34,000 in added MRR
 - 1,240% increase in lead generation
 - 740% ROI on content investment
