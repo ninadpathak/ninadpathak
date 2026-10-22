@@ -14,7 +14,7 @@ import { chromium } from 'playwright-core';
 const [beforeUrl, afterUrl, outDir, ...targets] = process.argv.slice(2);
 if (!targets.length) { console.error('usage: sweep.mjs <before-url> <after-url> <out-dir> <slug>[|before-selector] ...'); process.exit(2); }
 mkdirSync(outDir, { recursive: true });
-const WIDTHS = [320, 375, 1366];
+const WIDTHS = [320, 375, 768, 1024, 1366];
 const SCHEMES = ['light', 'dark'];
 const browser = await chromium.launch();
 const results = [];
@@ -83,17 +83,20 @@ for (const target of targets) {
         variant: img ? (img.currentSrc.includes('.narrow.svg') ? 'narrow' : 'wide') : null,
         shownText: shown,
         textOk: !!shown && shown.sans >= 12 && shown.mono >= 8.5,
+        // A variant may not be stretched past 1.25x its drawn width.
+        notBlownUp: !!variant && k <= 1.25 + 0.01,
+        scale: Math.round(k * 100) / 100,
       };
     });
-    results.push({ slug, width, scheme, ...metrics, ok: metrics.pageOverflow <= 0 && metrics.figureLoaded && metrics.figureFits && metrics.textOk });
-    cols.push([`${width} · ${scheme} · ${metrics.variant} · ${metrics.shownText?.sans}px`, await shot(page, 'figure.np-figure'), width === 1366 ? 520 : width * 0.9]);
+    results.push({ slug, width, scheme, ...metrics, ok: metrics.pageOverflow <= 0 && metrics.figureLoaded && metrics.figureFits && metrics.textOk && metrics.notBlownUp });
+    cols.push([`${width} · ${scheme} · ${metrics.variant} · ${metrics.shownText?.sans}px`, await shot(page, 'figure.np-figure'), width >= 768 ? 420 : width * 0.9]);
     await ctx.close();
   }
-  await sheet(`${slug}.sweep.png`, `${slug} · sweep 320 / 375 / 1366 · light and dark`, cols);
-  console.log(`${slug}: ${results.filter((r) => r.slug === slug && r.ok).length}/6 ok`);
+  await sheet(`${slug}.sweep.png`, `${slug} · sweep 320 / 375 / 768 / 1024 / 1366 · light and dark`, cols);
+  console.log(`${slug}: ${results.filter((r) => r.slug === slug && r.ok).length}/${WIDTHS.length * SCHEMES.length} ok`);
 }
 writeFileSync(path.join(outDir, 'sweep.json'), JSON.stringify(results, null, 2) + '\n');
 await browser.close();
 const bad = results.filter((r) => !r.ok);
-for (const r of bad) console.error(`FAIL ${r.slug} ${r.width} ${r.scheme}: overflow ${r.pageOverflow}px, loaded ${r.figureLoaded}, fits ${r.figureFits}, ${r.variant} text ${JSON.stringify(r.shownText)}`);
+for (const r of bad) console.error(`FAIL ${r.slug} ${r.width} ${r.scheme}: overflow ${r.pageOverflow}px, loaded ${r.figureLoaded}, fits ${r.figureFits}, ${r.variant} ×${r.scale} text ${JSON.stringify(r.shownText)}`);
 process.exit(bad.length ? 1 : 0);

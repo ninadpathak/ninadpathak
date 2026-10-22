@@ -80,7 +80,7 @@ class ArticleFigureTests(unittest.TestCase):
     def test_narrow_variants_exist_and_swap_below_the_breakpoint(self):
         for slug, _ in published_posts():
             html = (OUTPUT / "articles" / slug / "index.html").read_text(encoding="utf-8")
-            for src in re.findall(r'<source media="\(max-width: 780px\)" srcset="([^"]+)"', html):
+            for src in re.findall(r'<source media="\(max-width: 712px\)" srcset="([^"]+)"', html):
                 with self.subTest(slug=slug, src=src):
                     self.assertTrue(src.endswith(".narrow.svg"))
                     self.assertTrue((ROOT / src.lstrip("/")).exists())

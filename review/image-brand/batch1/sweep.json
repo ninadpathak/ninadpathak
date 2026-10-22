@@ -13,6 +13,8 @@
       "mono": 9
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
     "ok": true
   },
   {
@@ -29,6 +31,44 @@
       "mono": 10.8
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
     "ok": true
   },
   {
@@ -45,6 +85,8 @@
       "mono": 8.9
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
     "ok": true
   },
   {
@@ -61,6 +103,8 @@
       "mono": 9
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
     "ok": true
   },
   {
@@ -77,6 +121,44 @@
       "mono": 10.8
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
     "ok": true
   },
   {
@@ -93,6 +175,8 @@
       "mono": 8.9
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
     "ok": true
   },
   {
@@ -109,6 +193,8 @@
       "mono": 10.4
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
     "ok": true
   },
   {
@@ -125,6 +211,44 @@
       "mono": 12.5
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
     "ok": true
   },
   {
@@ -141,6 +265,8 @@
       "mono": 8.9
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
     "ok": true
   },
   {
@@ -157,6 +283,8 @@
       "mono": 10.4
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
     "ok": true
   },
   {
@@ -173,6 +301,44 @@
       "mono": 12.5
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
     "ok": true
   },
   {
@@ -189,6 +355,8 @@
       "mono": 8.9
     },
     "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
     "ok": true
   }
 ]

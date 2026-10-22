@@ -97,11 +97,13 @@ async function embedFonts(text) {
 }
 
 // Breakpoint below which a figure with a narrow variant swaps to it (GUIDELINE.md §14a).
-const NARROW_MEDIA = '(max-width: 780px)';
+// The wide plate keeps 13 px labels at >=12 px down to a ~665 px column, which the site
+// reaches at a 712 px viewport; below that the phone variant takes over.
+const NARROW_MEDIA = '(max-width: 712px)';
 
 function embedSnippet(src, rel, dims, narrowVariant) {
   const caption = src.meta.caption ? `\n  <figcaption>${src.meta.caption}</figcaption>` : '';
-  const img = `<img src="${rel}.svg" width="${dims.width}" height="${dims.height}" alt="${src.meta.alt.replace(/"/g, '&quot;')}" loading="lazy" decoding="async">`;
+  const img = `<img${narrowVariant ? ' class="np-has-narrow"' : ''} src="${rel}.svg" width="${dims.width}" height="${dims.height}" alt="${src.meta.alt.replace(/"/g, '&quot;')}" loading="lazy" decoding="async">`;
   const picture = narrowVariant ? `<picture><source media="${NARROW_MEDIA}" srcset="${narrowVariant.rel}.svg" width="${narrowVariant.width}" height="${narrowVariant.height}">${img}</picture>` : img;
   return `<figure class="np-figure">
   <a class="np-figure-zoom" href="${rel}.svg">${picture}</a>${caption}
@@ -183,9 +185,10 @@ async function main() {
         const siblings = isNarrow ? [] : src.meta.kind === 'og' ? [`${src.id}.png`] : [`${src.id}.light.png`, `${src.id}.dark.png`, `${src.id}.json`];
         for (const f of siblings) if (!existsSync(path.join(outDir, f))) failures.push(`${label}: missing ${src.slug}/${f}`);
         const titleOf = (x) => (x.match(/<title[^>]*>([^<]*)<\/title>/) || [])[1];
-        if (src.meta.kind === 'og' && titleOf(committed) !== titleOf(svg)) {
-          // A retitled post keeps its old card until someone re-renders; that is not a CI failure.
-          console.warn(`warn ${label}: card still shows "${titleOf(committed)}"; run node tools/image-brand/render.mjs to refresh it`);
+        const kickerOf = (x) => (x.match(/class="np-og-kicker"[^>]*>(?:<tspan[^>]*>[^<]*<\/tspan>)?([^<]*)</) || [])[1];
+        if (src.meta.kind === 'og' && (titleOf(committed) !== titleOf(svg) || kickerOf(committed) !== kickerOf(svg))) {
+          // A retitled or recategorized post keeps its old card until someone re-renders; that is not a CI failure.
+          console.warn(`warn ${label}: card still shows "${titleOf(committed)}" / ${kickerOf(committed)}; run node tools/image-brand/render.mjs to refresh it`);
         } else if (!sameSvg(committed, svg)) failures.push(`${label}: committed SVG differs from a fresh render; run node tools/image-brand/render.mjs`);
         if (meta && existsSync(path.join(outDir, `${src.id}.json`)) && !sameSvg(readFileSync(path.join(outDir, `${src.id}.json`), 'utf8'), meta)) failures.push(`${label}: committed ${src.id}.json differs from a fresh render`);
         continue;

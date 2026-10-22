@@ -1,27 +1,6 @@
 {
   "$comment": "Share-card glyph chains, one per post slug. 2–3 glyphs from GUIDELINE.md §7, read top to bottom; '*' marks the focal glyph. og.mjs writes content/diagrams/<slug>/og.mmd from this map; render.mjs takes the title, category, and URL from the post at render time. '$pending' holds the title and category of posts on unmerged branches so their cards exist when they land. Slugs with a hand-written og.mmd (no GENERATED marker) are left alone.",
-  "$pending": {
-    "api-documentation": {
-      "title": "API Documentation: What to Include, With a Tested Reference Example",
-      "category": "technical-documentation"
-    },
-    "claude-md": {
-      "title": "CLAUDE.md and AGENTS.md: Which File Loads, and a Template",
-      "category": "technical-documentation"
-    },
-    "design-doc-template": {
-      "title": "Design Doc Template: Sections, a Filled Example and a Review Check",
-      "category": "technical-documentation"
-    },
-    "quickstart-guide": {
-      "title": "Quick Start Guide Template: Write a Quickstart Developers Can Run",
-      "category": "technical-documentation"
-    },
-    "release-notes-template": {
-      "title": "Release Notes Template: Copyable Markdown With a Pre-Publish Check",
-      "category": "technical-documentation"
-    }
-  },
+  "$pending": {},
   "agent-design-space": [
     "reader",
     "loop*",

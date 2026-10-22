@@ -23,3 +23,13 @@
   line-height: var(--leading-relaxed);
   color: var(--text-3);
 }
+
+/* Below 712px a figure with a phone variant swaps to it (see the <picture> source).
+   The variant is drawn at 288px; letting it stretch past 1.25x blows up its strokes
+   and labels on small tablets, so it stays at most 360px wide, centred. */
+@media (max-width: 712px) {
+  .np-figure .np-has-narrow {
+    max-width: 360px;
+    margin-inline: auto;
+  }
+}

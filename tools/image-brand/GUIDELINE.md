@@ -206,7 +206,7 @@ Keep one only when interaction teaches something a drawing can't, such as draggi
 ```html
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/<slug>/<id>.svg"><picture>
-    <source media="(max-width: 780px)" srcset="…/<id>.narrow.svg" width="288" height="…">
+    <source media="(max-width: 712px)" srcset="…/<id>.narrow.svg" width="288" height="…">
     <img src="…/<id>.svg" width="720" height="…" alt="…" loading="lazy" decoding="async">
   </picture></a>
   <figcaption>…</figcaption>
@@ -215,7 +215,7 @@ Keep one only when interaction teaches something a drawing can't, such as draggi
 
 Copy the markup from the figure's `.json`; the `<picture>` appears only when a narrow variant exists. `static/css/figures.css` loads only on pages with an `.np-figure` (the build sets `has_figure`). The link opens the full-size SVG.
 
-**Narrow variant.** A 720 px plate shown at a phone's ~272 px column renders 13 px labels at about 5 px. So any figure whose labels would fall below the §4 floor on a phone needs `<id>.narrow.mmd` beside it, with `@width 288`. Narrow plates drop the ruled coordinate strips and keep 8 px field padding, which leaves 272 px for the diagram at 1:1. That shows labels at ≥12 px on a 320 px screen. Re-flow the figure, don't shrink it: stack subtrees, wrap headings onto two lines, and use the same glyphs and the same word budget. When a straight connector would cross another node, the router detours it past the obstacle.
+**Narrow variant.** Phones and small tablets (≤712 px, where the wide plate's labels would drop below 12 px) get the variant, capped at 360 px (1.25×) and centred, so a tablet never stretches it. A 720 px plate shown at a phone's ~272 px column renders 13 px labels at about 5 px. So any figure whose labels would fall below the §4 floor on a phone needs `<id>.narrow.mmd` beside it, with `@width 288`. Narrow plates drop the ruled coordinate strips and keep 8 px field padding, which leaves 272 px for the diagram at 1:1. That shows labels at ≥12 px on a 320 px screen. Re-flow the figure, don't shrink it: stack subtrees, wrap headings onto two lines, and use the same glyphs and the same word budget. When a straight connector would cross another node, the router detours it past the obstacle.
 
 ## 15. Files
 
@@ -232,7 +232,7 @@ The SVG header holds a hash of the source and the whole pipeline: `render.mjs`, 
 - the committed SVG or JSON differs from the fresh render (numbers may differ by up to 0.5 px, so a different Chromium build's text metrics don't fail CI);
 - a contrast pair, a stroke, radius, or text token, or the word budget fails.
 
-A share card whose post was retitled only warns: the card keeps the old title until someone re-renders. Output is byte-identical across re-renders on one machine.
+A share card whose post was retitled or recategorized only warns: the card keeps the old title and kicker until someone re-renders. Output is byte-identical across re-renders on one machine.
 
 ## 16. Directive reference
 
