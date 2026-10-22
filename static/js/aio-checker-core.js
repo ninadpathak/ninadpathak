@@ -208,6 +208,8 @@
    *   - a source counts only if the whole tag is exactly name + content (either
    *     order), quoted, with a plain directive charset and no entity or angle bracket;
    *   - a <meta> whose name attribute holds an entity could hide "robots";
+   *   - tag boundaries respect quoted values, so a quoted "<" or ">" cannot end a tag;
+   *   - every mention of robots or googlebot must sit inside a tag read exactly;
    *   - a source inside a comment, script, style, template, noscript or textarea
    *     is not evaluated either way.
    * Each unclear case adds a reason to `manual`. */
@@ -215,6 +217,42 @@
   var CLEAN_ROBOTS_META = new RegExp(
     "^<meta\\s+(?:name\\s*=\\s*([\"'])(robots|googlebot)\\1\\s+content\\s*=\\s*([\"'])([a-z0-9 ,:._/+-]*)\\3" +
     "|content\\s*=\\s*([\"'])([a-z0-9 ,:._/+-]*)\\5\\s+name\\s*=\\s*([\"'])(robots|googlebot)\\7)\\s*\\/?>$", "i");
+  function countRobotsMentions(text) {
+    return (String(text).match(/robots|googlebot/gi) || []).length;
+  }
+  /* Reads one tag's attributes the way the HTML tokenizer does, so a quoted "<" or
+   * ">" cannot end the tag early. Returns { end, names } where names are the raw
+   * name attribute values, or null if the tag never closes. */
+  function readMetaTag(html, at) {
+    var i = at + 5;
+    var names = [];
+    while (i < html.length) {
+      while (i < html.length && /[\s\/]/.test(html[i])) i++;
+      if (html[i] === ">") return { end: i + 1, names: names };
+      var nameStart = i;
+      while (i < html.length && !/[\s\/=>]/.test(html[i])) i++;
+      var attr = html.slice(nameStart, i).toLowerCase();
+      while (i < html.length && /\s/.test(html[i])) i++;
+      var value = "";
+      if (html[i] === "=") {
+        i++;
+        while (i < html.length && /\s/.test(html[i])) i++;
+        if (html[i] === "\"" || html[i] === "'") {
+          var closeQuote = html.indexOf(html[i], i + 1);
+          if (closeQuote === -1) return null;
+          value = html.slice(i + 1, closeQuote);
+          i = closeQuote + 1;
+        } else {
+          var valueStart = i;
+          while (i < html.length && !/[\s>]/.test(html[i])) i++;
+          value = html.slice(valueStart, i);
+        }
+      }
+      if (attr === "name") names.push(value);
+      if (i === nameStart) i++;
+    }
+    return null;
+  }
   function scanRobotsMeta(html) {
     var regions = [];
     var region;
@@ -226,28 +264,37 @@
     var inRegion = function (at) { return regions.some(function (r) { return at >= r[0] && at < r[1]; }); };
     var sources = [];
     var manual = [];
+    var accounted = 0;
     var metaStart = /<meta\b/gi;
     var found;
     while ((found = metaStart.exec(html))) {
       var at = found.index;
-      var nextTag = html.indexOf("<", at + 1);
-      var span = html.slice(at, nextTag === -1 ? html.length : nextTag);
-      var close = html.indexOf(">", at);
-      var tag = close === -1 ? span : html.slice(at, close + 1);
-      var mentionsRobots = /robots|googlebot/i.test(span);
-      var nameEntity = /\bname\s*=\s*["']?[^"'\s>]*&/i.test(span);
-      if (!mentionsRobots && !nameEntity) continue;
+      var read = readMetaTag(html, at);
+      var tag = read ? html.slice(at, read.end) : html.slice(at);
+      var mentionsRobots = /robots|googlebot/i.test(tag);
+      // A name that is not a plain word (an entity, say) could spell robots.
+      var unclearName = !read || read.names.length > 1 || read.names.some(function (n) { return !/^[a-z0-9:._-]*$/i.test(n); });
+      if (!mentionsRobots && !unclearName) continue;
       if (inRegion(at)) {
         manual.push("a robots meta tag sits inside a comment or script, so the page's real directives are unclear");
         continue;
       }
       var clean = CLEAN_ROBOTS_META.exec(tag);
-      if (!clean || tag.length !== span.length && span.slice(tag.length).trim()) {
+      if (!clean) {
         manual.push("a robots meta tag could not be read exactly: " + tag.slice(0, 120));
         continue;
       }
       var agent = (clean[2] || clean[8]).toLowerCase();
       sources.push({ source: "meta " + agent, value: (clean[4] !== undefined ? clean[4] : clean[6]).toLowerCase(), header: false });
+      accounted += countRobotsMentions(tag);
+    }
+    /* Invariant: every occurrence of robots or googlebot in the input (x-robots
+     * included) must sit inside a tag that was read exactly. Any other occurrence
+     * might be a directive this scanner missed, so the page needs a manual check. */
+    var total = countRobotsMentions(html);
+    if (total !== accounted && !manual.length) {
+      manual.push((total - accounted) + " mention" + (total - accounted === 1 ? "" : "s") +
+        " of robots or googlebot in the HTML " + (total - accounted === 1 ? "sits" : "sit") + " outside a robots meta tag the tool could read exactly");
     }
     return { sources: sources, manual: manual };
   }
@@ -613,9 +660,36 @@
   var KNOWN_DIRECTIVES = { all: 1, index: 1, follow: 1, noindex: 1, nofollow: 1, none: 1, noarchive: 1, nocache: 1,
     nosnippet: 1, indexifembedded: 1, notranslate: 1, noimageindex: 1 };
   var VALUE_DIRECTIVES = { "max-snippet": 1, "max-image-preview": 1, "max-video-preview": 1, "unavailable_after": 1 };
+  /* unavailable_after is read only as a strict ISO 8601 date whose fields round-trip
+   * through Date.UTC, so 2026-02-30 or 25:00 is a manual check instead of being
+   * normalized. Without a time zone the instant is known only to within 14 hours;
+   * when now falls inside that window the answer is a manual check. Returns
+   * { early, late } in ms, or null. */
+  var ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})(?:[t ](\d{2}):(\d{2})(?::(\d{2}))?(z|([+-])(\d{2}):?(\d{2}))?)?$/;
+  function readDate(value) {
+    var m = ISO_DATE.exec(value);
+    if (!m) return null;
+    var parts = [m[1], m[2], m[3], m[4] || 0, m[5] || 0, m[6] || 0].map(Number);
+    var at = Date.UTC(parts[0], parts[1] - 1, parts[2], parts[3], parts[4], parts[5]);
+    var back = new Date(at);
+    if (back.getUTCFullYear() !== parts[0] || back.getUTCMonth() !== parts[1] - 1 || back.getUTCDate() !== parts[2] ||
+        back.getUTCHours() !== parts[3] || back.getUTCMinutes() !== parts[4] || back.getUTCSeconds() !== parts[5]) return null;
+    if (!m[7]) return { early: at - 14 * 3600000, late: at + 14 * 3600000 };
+    if (m[7] === "z") return { early: at, late: at };
+    var offsetHours = Number(m[9]);
+    var offsetMinutes = Number(m[10]);
+    if (offsetHours > 14 || offsetMinutes > 59) return null;
+    var exact = at - (m[8] === "+" ? 1 : -1) * (offsetHours * 60 + offsetMinutes) * 60000;
+    return { early: exact, late: exact };
+  }
+  var CLEAN_DIRECTIVES = /^[a-z0-9 ,:._\/+-]*$/;
   function evaluateDirectives(sources, now) {
     var result = { blocking: [], manual: [], limit: null, expires: [] };
     (sources || []).forEach(function (item) {
+      if (!CLEAN_DIRECTIVES.test(item.value)) {
+        result.manual.push(item.source + " holds characters outside plain directives, so it could not be read exactly");
+        return;
+      }
       var tokens = item.value.split(",").map(function (raw) { return raw.trim(); });
       var scope = tokens.map(function (token) { return /^([a-z0-9_.-]+)\s*:/.exec(token); })
         .filter(function (m) { return m && !VALUE_DIRECTIVES[m[1]]; })[0];
@@ -633,14 +707,15 @@
         if (named) {
           var value = named[2].trim();
           if (named[1] === "max-snippet") {
-            if (!/^-?\d+$/.test(value)) { result.manual.push(item.source + ": max-snippet value \"" + value + "\" is not a number"); return; }
+            if (!/^(?:-1|\d{1,9})$/.test(value)) { result.manual.push(item.source + ": max-snippet value \"" + value + "\" is not -1 or a whole number of up to nine digits"); return; }
             var limit = Number(value);
             if (limit === 0) result.blocking.push({ excerpt: item.source + ": max-snippet:0", note: "max-snippet:0, equivalent to nosnippet" });
             else if (limit > 0) result.limit = result.limit === null ? limit : Math.min(result.limit, limit);
           } else if (named[1] === "unavailable_after") {
-            var when = /^\d{4}-\d{2}-\d{2}(?:[t ]\d{2}:\d{2}(?::\d{2})?(?:z|[+-]\d{2}:?\d{2})?)?$/.test(value) ? Date.parse(value.toUpperCase().replace(" ", "T")) : NaN;
-            if (isNaN(when)) { result.manual.push(item.source + ": unavailable_after date \"" + value + "\" could not be read"); return; }
-            if (when <= now) result.blocking.push({ excerpt: item.source + ": unavailable_after: " + value, note: "unavailable_after is in the past, so Google stops showing the page" });
+            var when = readDate(value);
+            if (!when) { result.manual.push(item.source + ": unavailable_after date \"" + value + "\" could not be read"); return; }
+            if (when.early <= now && now < when.late) { result.manual.push(item.source + ": unavailable_after date \"" + value + "\" has no time zone and falls within a day of now"); return; }
+            if (when.late <= now) result.blocking.push({ excerpt: item.source + ": unavailable_after: " + value, note: "unavailable_after is in the past, so Google stops showing the page" });
             else result.expires.push(value);
           }
           return;

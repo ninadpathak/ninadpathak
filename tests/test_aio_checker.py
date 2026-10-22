@@ -400,6 +400,51 @@ class HtmlModeTests(unittest.TestCase):
         self.assertEqual(check["status"], "pass")
         self.assert_not_pass('<meta name="robots" content="unavailable_after: someday">')
 
+    def test_quoted_angle_bracket_before_name_needs_a_manual_check(self):
+        # Review round 5, finding 1: a quoted "<" ended the scan early and the
+        # noindex tag was discarded, so the page passed.
+        self.assert_not_pass('<meta data-label="<example>" name="robots" content="noindex">')
+        self.assert_not_pass('<meta data-label="<example>" name="&#114;obots" content="noindex">')
+        self.assert_not_pass("<meta content='x<y' name=\"googlebot\" content=\"noindex\">")
+
+    def test_every_robots_mention_must_be_accounted_for(self):
+        # Invariant: any robots, googlebot or x-robots text outside a cleanly read
+        # robots meta tag makes the result a manual check.
+        for head in ('<meta name="robots" content="index"><link rel="x-robots" href="/r">',
+                     '<meta name="robots" content="index"><p>Googlebot reads this page.</p>',
+                     '<meta property="robots" content="noindex">',
+                     '<meta name="robots" content="index"><meta name="robots" content="follow" data-x="1">'):
+            with self.subTest(head=head):
+                self.assert_not_pass(head)
+        self.assertEqual(self.snippet('<meta name="robots" content="index"><meta name="googlebot" content="follow">')["status"], "pass")
+        self.assertEqual(self.snippet('<meta name="description" content="Tom &amp; Jerry">')["status"], "pass")
+
+    def test_header_that_is_not_plain_directives_needs_a_manual_check(self):
+        for header in ("noindex\n", "max-snippet:\u0661\u0666\u0660", "index; noindex"):
+            with self.subTest(header=header):
+                self.assert_not_pass("", {"xRobotsTag": header})
+
+    def test_max_snippet_must_be_minus_one_or_up_to_nine_digits(self):
+        # Review round 5, finding 2: a 400-digit value passed as "Infinity characters".
+        for value in ("9" * 400, "1234567890", "-2", "+5", "1e3"):
+            with self.subTest(value=value):
+                self.assert_not_pass(f'<meta name="robots" content="max-snippet:{value}">')
+        self.assertEqual(self.snippet('<meta name="robots" content="max-snippet:999999999">')["status"], "pass")
+
+    def test_impossible_or_near_now_dates_need_a_manual_check(self):
+        # Review round 5, finding 2: 2099-02-31 rolled over to March and passed.
+        import datetime
+        # Without a time zone, the current UTC minute could be past or future.
+        now_no_zone = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M")
+        for value in ("2099-02-31", "2099-13-01", "2099-01-01T25:00Z", "2099-01-01T10:00+15:00", now_no_zone):
+            with self.subTest(value=value):
+                self.assert_not_pass(f'<meta name="robots" content="unavailable_after: {value}">')
+        for value in ("2099-02-28", "2099-01-01T10:00:00+05:30", "2099-01-01t10:00z"):
+            with self.subTest(value=value):
+                self.assertEqual(self.snippet(f'<meta name="robots" content="unavailable_after: {value}">')["status"], "pass")
+        check = self.assert_not_pass('<meta name="robots" content="unavailable_after: 2000-02-29T00:00Z">', manual=False)
+        self.assertNotIn("manual check", check["detail"])
+
     def test_clean_single_quoted_and_reordered_tags_still_work(self):
         self.assertEqual(self.snippet("<meta content='index, follow' name='robots'>")["status"], "pass")
         self.assertEqual(self.snippet('<META NAME="ROBOTS" CONTENT="NOSNIPPET">')["status"], "attention")
