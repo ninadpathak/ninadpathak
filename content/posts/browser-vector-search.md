@@ -77,30 +77,28 @@ Binary quantization is the most aggressive form of this optimization. Each 32-bi
 
 That collapse buys a 32x reduction in memory footprint and lets the CPU swap expensive floating-point dot products for XOR-based Hamming distance, which counts mismatched bits in a single cheap instruction.
 
-<div class="visual-wrapper">
-
 ## The precision tax: accuracy vs speed
 
 Nothing in AI engineering comes free. Quantization buys speed and pays for it with a recall penalty, so the results drift slightly away from the true nearest neighbors.
 
-A query that should surface the three most relevant support docs might return two of them plus a near-miss fourth.
+A query that should surface the two most relevant support docs might return one of them plus a near miss.
 
 
 ## Dimensionality and the scaling wall
 
-As vector dimensionality climbs, the performance gulf between these engines widens. Standard open-source models like `all-MiniLM` use 384 dimensions.
+As vector dimensionality climbs, each vector comparison costs more on both engines. Standard open-source models like `all-MiniLM` use 384 dimensions.
 
-OpenAI's [`text-embedding-3-large`](https://developers.openai.com/api/docs/models/text-embedding-3-large) uses 3,072 dimensions by default, a jump rooted in [how embedding models trade dimensionality for information density](/articles/vector-embeddings/).
+OpenAI's [`text-embedding-3-large`](https://developers.openai.com/api/docs/models/text-embedding-3-large) uses 3072 dimensions by default, a jump rooted in [how embedding models trade dimensionality for information density](/articles/vector-embeddings/).
 
 A flat scan does proportionally more arithmetic as vector dimension grows. Benchmark the crossover against the target browser, vector count, and recall requirement.
 
-PGlite's HNSW index stays relatively flat, because the graph lets a query skip most vectors no matter how wide each vector is. Dimensionality stretches the cost of comparing two vectors, and HNSW simply compares far fewer of them.
+HNSW can compare fewer candidate vectors, but wider vectors still make each comparison cost more. [pgvector's HNSW index](https://github.com/pgvector/pgvector#hnsw) takes `vector` columns up to 2,000 dimensions and `halfvec` up to 4,000, so for 3072 dimensions I'd use a half-precision index or reduce the dimensions, then measure latency and recall.
 
 ## Memory constraints in the WASM heap
 
 Browser and WebAssembly memory limits constrain how large an in-memory vector index can grow, and those limits vary by runtime.
 
-HNSW indexes store both vectors and graph edges, while flat quantized indexes can use less memory. Measure heap use in the target browser instead of assuming a universal footprint.
+HNSW indexes store graph edges on top of the vectors, so a flat quantized table can use less memory. Measure heap use in the target browser instead of assuming a universal footprint.
 
 ## Economic outcomes of edge retrieval
 

@@ -15,7 +15,7 @@ title: What Is Technical Documentation, and What Should It Include?
 updated: 2026-08-17
 ---
 
-Technical documentation is the written material that explains how a product works and how to use it, from a first install to the exact behavior of each API field. Each document owns one reader task, and the table below maps the [types of documentation](/articles/documentation-types/) to the task each one owns.
+Technical documentation is the written material that explains how a product works and how to use it, from a first install to the exact behavior of each API field. I give each [type of documentation](/articles/documentation-types/) one reader task.
 
 It works when a reader can take the next step without guessing.
 
