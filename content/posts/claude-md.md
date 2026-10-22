@@ -26,9 +26,7 @@ Both defaults can be changed. Claude Code's **Project instructions** setting can
 
 ## Which file each agent loads
 
-Each case below is a fresh git repository in a temporary directory with no instruction file above it. Each instruction file carries one codeword, `AGENTS-4417` in AGENTS.md and `CLAUDE-2093` in CLAUDE.md.
-
-Claude Code ran with every tool and MCP server switched off and without user settings. Codex kept its read-only shell, with its two file-loading settings pinned to their defaults, and the script prints TOOLS in place of an answer if either agent's event trace shows Claude Code with a tool available or either agent using one.
+Anthropic's and OpenAI's docs define the rules, and a check on 2026-10-22 confirmed the defaults on Claude Code 2.1.308 and Codex CLI 0.162.0. Each case was a fresh git repository in a temporary directory with no instruction file in any parent directory, and each instruction file carried one codeword: `AGENTS-4417` in AGENTS.md and `CLAUDE-2093` in CLAUDE.md.
 
 Both agents were asked to list the codewords they had been given:
 
@@ -39,17 +37,11 @@ Both agents were asked to list the codewords they had been given:
 | AGENTS.md and CLAUDE.md | CLAUDE-2093 | AGENTS-4417 |
 | AGENTS.md, and a CLAUDE.md that starts with `@AGENTS.md` | both codewords | AGENTS-4417 |
 
-Running the script twice on 2026-10-22, with Claude Code 2.1.308 and Codex CLI 0.162.0, gave the same codewords in each case, and no trace showed a tool available or used. Both vendors document the same default behavior.
+Running the check twice gave the same codewords in each case, and neither agent's event trace showed a tool call. Claude Code ran with its tools and MCP servers off and without user settings, but Codex kept its user configuration and its global `~/.codex/AGENTS.md`, which holds no codeword, so treat the table as a check of the documented defaults on those versions.
 
 A stray CLAUDE.md hides AGENTS.md from Claude Code (third row), and an `@AGENTS.md` import brings it back (fourth row).
 
-You can rerun the test with the [script](/static/examples/which-instructions-load.sh), which needs `claude`, `codex` and `python3` on your PATH. It takes no arguments, works only inside a temporary directory it creates, and deletes that directory when it finishes:
-
-```bash
-bash which-instructions-load.sh
-```
-
-If Claude Code answers NONE in the first case, check `claude --version`, because direct AGENTS.md support needs v2.1.277 or later. Then type `/config` and confirm that **Project instructions** is not set to `claude-md` or `managed-only`.
+If Claude Code doesn't pick up your AGENTS.md, check `claude --version`, because direct AGENTS.md support needs v2.1.277 or later. Then type `/config` and confirm that **Project instructions** is not set to `claude-md` or `managed-only`.
 
 ## Keep one file for every agent
 
@@ -119,7 +111,7 @@ Both concatenate the files they find, from the broadest directory down to the wo
 
 For Claude Code, run `/context` and look for the file under **Memory files**, or run `/memory`, which lists an AGENTS.md that Claude Code read directly. A subdirectory's CLAUDE.md never appears under **Memory files**, because it loads on demand when Claude opens a file in that subdirectory.
 
-For Codex, run `codex --ask-for-approval never "Summarize the current instructions."` and check that the summary quotes your file. If either agent answers without your rules, the codeword script above narrows down which layout it is reading.
+For Codex, run `codex --ask-for-approval never "Summarize the current instructions."` and check that the summary quotes your file. If either agent answers without your rules, compare your repository's files with the four rows of the table above.
 
 ## FAQ
 

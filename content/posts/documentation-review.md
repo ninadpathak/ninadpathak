@@ -139,6 +139,8 @@ rg '^#{2,3} ' content/posts/example.md
 
 Rewrite headings that could move to another article without changing meaning. The outline should expose both progression and recovery.
 
+[Task-based documentation headings](/articles/documentation-headings/) walks through that rewrite one heading type at a time.
+
 ### Demand proof after a consequential step
 
 Each procedure stage needs an observable success condition before the reader spends more state on the next one. The next API-key action, role, and interface label are fictional:
