@@ -47,9 +47,9 @@ Set `max_num_seqs=256` on a workload that rarely sees more than 30 concurrent se
 
 Every token your model generates needs to remember all previous tokens in the sequence. Storing those keys and values in GPU memory is the KV cache, and for long contexts it becomes the dominant memory consumer, often dwarfing the weights themselves.
 
-Run the numbers and the pressure is obvious. A 70B model with a 128K context window at full precision needs roughly 64GB just for the KV cache on a single sequence.
+Run the numbers and the pressure is obvious. Meta's 70B Llama models in BF16 have 80 layers and 8 grouped-query key/value heads of 128 dimensions ([Meta's Llama paper](https://arxiv.org/abs/2407.21783)), so each token stores 2 × 80 × 8 × 128 × 2 bytes, about 328KB, and one 128K-token sequence needs roughly 43GB just for the KV cache.
 
-Sixteen concurrent sequences consume 1TB, which no single GPU holds. Context length and throughput pull against each other for exactly this reason: every extra token of context steals room you could have spent on another concurrent user.
+At sixteen concurrent sequences that grows to roughly 690GB, which no single GPU holds. Context length and throughput pull against each other for exactly this reason: every extra token of context steals room you could have spent on another concurrent user.
 
 [PagedAttention](/glossary/pagedattention/) (vLLM's approach) manages the KV cache the way an operating system manages RAM, mapping non-contiguous physical blocks to logical sequence positions instead of demanding one long contiguous slab per request. Fragmentation disappears, and memory utilization gets close to perfect.
 
@@ -63,7 +63,7 @@ Recent work on "importance-based" eviction drops tokens the model attended to le
 
 Quantization reduces the numerical precision of weights and activations (typically from 16-bit or 32-bit floats to 8-bit or 4-bit integers). Fitting more model parameters into the same VRAM is the goal, which buys you larger batch sizes or lets you run the same model on cheaper hardware.
 
-**FP8 quantization** (8-bit floating point) is now well-supported in both Ampere and Hopper architectures. For most models, FP8 delivers near-identical output quality to BF16 with a 40-50% memory reduction.
+**FP8 quantization** (8-bit floating point) has native tensor-core support starting with NVIDIA's [Hopper](https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/) and [Ada Lovelace](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf) architectures, and Ampere GPUs like the A100 have none. For most models, FP8 delivers near-identical output quality to BF16 with a 40-50% memory reduction.
 
 The speedup is real but modest, since you still dequantize before computing, so the saved memory bandwidth is the primary benefit, not raw arithmetic throughput.
 
@@ -89,7 +89,7 @@ Stretch that to 128K and you're at 16B values, which alone overflows the memory 
 
 That gets you O(n) memory instead of O(n²) and runs typically 2-4x faster for longer sequences. Any inference stack without Flash Attention leaves real performance on the table, so it's now a baseline expectation.
 
-**Flash Attention 2** improved the tile sizes for A100 and H100 architectures, delivering another 10-20% speedup over FA1 for many workloads. Flash Attention 3 (available on H100s with FP8 support) pushes this further with overlapping compute and memory operations.
+**Flash Attention 2** reworked how attention is split across thread blocks and warps, and the [FlashAttention-2 paper](https://arxiv.org/abs/2307.08691) reports around a 2x speedup over FA1. Flash Attention 3 (available on H100s with FP8 support) pushes this further with overlapping compute and memory operations.
 
 **PagedAttention** I already mentioned in the KV cache context, but it's worth noting it combines with Flash Attention. vLLM uses PA by default with FA2 as its attention kernel.
 
