@@ -253,7 +253,7 @@ Hit rates above 40% are common in customer support bots, internal tooling, and a
 
 Input costs dominate for most applications, yet output costs take over the moment your pipeline starts generating long responses. Code generation, document synthesis, and agentic reasoning loops all spill out large outputs.
 
-Hard-limit output tokens and set max_tokens conservatively. A question answerable in 50 tokens should never be free to ramble for 500 at $0.15 per 1M.
+Hard-limit output tokens and set max_tokens conservatively. A question answerable in 50 tokens should never be free to ramble for 500 at Claude Sonnet 4.6's $15 per 1M output tokens.
 
 I learned this after a single debug session ran up $180 in output costs because nobody had set a max_tokens limit and the model kept "thinking out loud" on every retry.
 
