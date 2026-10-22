@@ -65,7 +65,7 @@ Quantization reduces the numerical precision of weights and activations (typical
 
 **FP8 quantization** (8-bit floating point) has native tensor-core support starting with NVIDIA's [Hopper](https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/) and [Ada Lovelace](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf) architectures, and Ampere GPUs like the A100 have none. For most models, FP8 delivers near-identical output quality to BF16 with a 40-50% memory reduction.
 
-The speedup is real but modest, since you still dequantize before computing, so the saved memory bandwidth is the primary benefit, not raw arithmetic throughput.
+On Hopper and Ada the matrix multiplies run natively in FP8, which adds compute throughput on top of the memory savings. On older GPUs without FP8 tensor cores, the weights get dequantized before computing, so saved memory bandwidth is the main benefit.
 
 **INT8 quantization** using quantization-aware training or post-training calibration pushes harder. For language tasks, it typically degrades quality by 1-3% on standard benchmarks, acceptable for many production use cases like summarization or chat.
 
