@@ -130,7 +130,9 @@ async function main() {
   const sources = files.map(parseSource).sort((a, b) => (b.id.endsWith('.narrow') - a.id.endsWith('.narrow')) || a.file.localeCompare(b.file));
   const narrow = new Map();
 
-  const browser = await chromium.launch();
+  // Unhinted font metrics on every platform: Linux Chromium otherwise rounds glyph
+  // advances, which moves text-measured geometry by 1-16 px against a macOS render.
+  const browser = await chromium.launch({ args: ['--font-render-hinting=none'] });
   const page = await (await browser.newContext({ deviceScaleFactor: 1 })).newPage();
   await page.setContent(`<!doctype html><html><head><style>${fontFaceCss(FACES)}${css}body{margin:0}</style></head><body></body></html>`);
   await page.addScriptTag({ content: peleJs });
