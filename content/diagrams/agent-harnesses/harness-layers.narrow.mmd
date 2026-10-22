@@ -1,0 +1,36 @@
+%% @width 288
+%% @kicker Harness layers
+%% @alt The agent harness sits between the application and the model. Inside it, the execution loop calls tools in both directions, checkpoints state, and logs every step to an observer, and the prompt assembler builds the prompt the model receives. The model only reasons.
+%% @path app>loop>prompt>llm
+%% @glyph app | window
+%% @glyph loop | loop w=44
+%% @glyph prompt | tokens w=44
+%% @glyph state | cells fill=0.55 flag w=44
+%% @glyph observer | eye w=44
+%% @glyph llm | core
+%% @glyph tools | tools
+%% @spacing 4,34
+flowchart TB
+  app["App"]:::external
+  subgraph harness [Harness]
+    direction TB
+    subgraph r1 [ ]
+      direction LR
+      loop["Loop"]:::accent
+      state["State"]
+    end
+    subgraph r2 [ ]
+      direction LR
+      prompt["Prompt"]:::accent
+      observer["Observer"]
+    end
+  end
+  llm["Model"]:::focal
+  tools["Tools"]:::stack
+  app --> loop
+  loop --> prompt
+  prompt --> llm
+  loop --> state
+  loop -.-> observer
+  loop <--> tools
+  class r1,r2 ghost

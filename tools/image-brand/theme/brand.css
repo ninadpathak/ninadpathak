@@ -56,6 +56,8 @@
 .np-diagram .accent > .np-tile, .np-diagram .focal > .np-tile { stroke: var(--np-accent); }
 .np-diagram .focal > .np-tile { fill: var(--np-accent-wash); }
 .np-diagram .muted > .np-tile { stroke-dasharray: 3 3; fill: var(--np-canvas); }
+.np-diagram .fail > .np-tile { stroke: var(--np-danger); }
+.np-diagram .fail .gl-badge { stroke: var(--np-danger); }
 .np-diagram .np-stack-ghost { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
 .np-diagram .pele-label { font-weight: 500; font-size: 14px; fill: var(--np-ink); }
 .np-diagram .np-glyph-label { font-weight: 500; font-size: 13px; fill: var(--np-ink); }

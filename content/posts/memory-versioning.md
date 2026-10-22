@@ -63,12 +63,10 @@ If you are using a framework like [LangGraph](https://github.com/langchain-ai/la
 
 For that, you need a dedicated memory ledger.
 
-<div class="visual-wrapper">
-  <div class="visual-title">APPEND-ONLY VS OVERWRITE</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/memory-versioning.html" title="An append-only versioned memory ledger (v1 to v2 to v3, never overwritten) with a full audit trail, versus a destructive UPDATE that destroys prior state" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/memory-versioning/append-vs-overwrite.narrow.svg" width="288" height="1000"><img src="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg" width="720" height="544" alt="Two ways to change a memory. The append-only ledger inserts a new row and stamps the old one as superseded, so v1, v2, and v3 all remain and any point in time can be recovered. A destructive update overwrites the row and the prior state is gone." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Inserting a new row and stamping valid_to on the old one gives point-in-time recovery for free.</figcaption>
+</figure>
 
 ## Linking memory to reasoning
 

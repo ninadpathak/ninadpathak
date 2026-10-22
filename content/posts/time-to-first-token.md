@@ -38,12 +38,10 @@ Prefilling contributes to TTFT because the model processes the input before it e
 
 Because the cost scales with prompt length, a request carrying a 200-token question returns far faster than the same request after I have stuffed 40k tokens of retrieved documents in front of it. A support assistant I worked on went from snappy to painful purely because someone padded the system prompt with a second page of tone-of-voice instructions, doubling its size overnight and adding a beat of dead air before every reply.
 
-<div class="visual-wrapper">
-  <div class="visual-title">TTFT CHAIN</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/ttft-chain.html" title="The latency chain to the first token: network, queue, and prefill make up TTFT, then token generation continues as throughput" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/time-to-first-token/ttft-chain.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/time-to-first-token/ttft-chain.narrow.svg" width="288" height="704"><img src="/static/images/diagrams/time-to-first-token/ttft-chain.svg" width="720" height="288" alt="The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Prefill cost scales with prompt length, so 40k tokens of retrieved documents can turn snappy into painful.</figcaption>
+</figure>
 
 ## TTFT is not the same as throughput
 

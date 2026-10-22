@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/ai-agent-taxonomy/agent-taxonomy.mmd",
+  "hash": "6269a037899fdaba",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 808,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.narrow",
+    "width": 288,
+    "height": 752,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "The five agent types as a ladder of rising autonomy: reactive information agents, tool-using agents, loop agents, multi-agent systems, and persistent-goal agents. Cost and blast radius climb with each step.",
+  "caption": "Each step up makes more decisions without a human, and cost and blast radius climb by roughly an order of magnitude at each one.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.narrow.svg\" width=\"288\" height=\"752\"><img src=\"/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.svg\" width=\"720\" height=\"808\" alt=\"The five agent types as a ladder of rising autonomy: reactive information agents, tool-using agents, loop agents, multi-agent systems, and persistent-goal agents. Cost and blast radius climb with each step.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each step up makes more decisions without a human, and cost and blast radius climb by roughly an order of magnitude at each one.</figcaption>\n</figure>"
+}

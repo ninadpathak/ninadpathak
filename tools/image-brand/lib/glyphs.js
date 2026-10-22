@@ -38,6 +38,10 @@
     },
     check(g, a) { P(g, 'M-3.4,0.2L-1,2.6L3.6,-2.6', a ? 'gl-accent-line gl-thick' : 'gl-ink gl-thick'); },
     cross(g, a) { P(g, 'M-2.8,-2.8L2.8,2.8M2.8,-2.8L-2.8,2.8', a ? 'gl-accent-line gl-thick' : 'gl-ink gl-thick'); },
+    person(g, a) {
+      C(g, 0, -2.2, 2.4, a ? 'gl-accent' : 'gl-solid');
+      P(g, 'M-4.2,4.6C-4.2,0.8 4.2,0.8 4.2,4.6Z', a ? 'gl-accent' : 'gl-solid');
+    },
     flag(g, a) {
       P(g, 'M-2.5,5V-5', 'gl-ink');
       P(g, 'M-2.5,-5L4.5,-2.5L-2.5,0Z', a ? 'gl-accent' : 'gl-solid');
@@ -107,7 +111,7 @@
 
   // Token tiles: rows of tiles; the last row grows (context accumulating).
   G.tokens = (g, w, h, o) => {
-    const rows = o.rows || [5, 4, 6];
+    const rows = Array.isArray(o.rows) ? o.rows : o.rows ? [o.rows] : [5, 4, 6];
     const tw = 7, th = 8, gap = 2.2;
     const maxCols = Math.max(...rows);
     const x0 = -(maxCols * (tw + gap) - gap) / 2, y0 = -(rows.length * (th + gap) - gap) / 2;
@@ -124,7 +128,7 @@
 
   // A context window: bracketed rows of tokens; the newest row runs past the right bracket.
   G.context = (g, w, h, o) => {
-    const rows = o.rows || [6, 7, 9], tw = 7, th = 8, gap = 2.2, inside = 7;
+    const rows = Array.isArray(o.rows) ? o.rows : [6, 7, 9], tw = 7, th = 8, gap = 2.2, inside = 7;
     const ww = inside * (tw + gap) - gap, x0 = -ww / 2 - 6, y0 = -(rows.length * (th + gap) - gap) / 2;
     const bx0 = x0 - 5, bx1 = x0 + ww + 5, by0 = y0 - 6, by1 = -y0 + 6;
     P(g, `M${r2(bx0 + 4)},${r2(by0)}H${r2(bx0)}V${r2(by1)}H${r2(bx0 + 4)}M${r2(bx1 - 4)},${r2(by0)}H${r2(bx1)}V${r2(by1)}H${r2(bx1 - 4)}`, 'gl-ink gl-thick');
@@ -157,6 +161,63 @@
     const bw = 3, gap = 2.4, x0 = -(bars.length * (bw + gap) - gap) / 2, hh = h * 0.34;
     bars.forEach((k, i) => R(g, x0 + i * (bw + gap), -hh * k, bw, 2 * hh * k, i === 8 && o.accent ? 'gl-accent' : 'gl-solid', 1));
     P(g, `M${r2(x0 - 4)},0H${r2(-x0 + 4)}`, 'gl-hair');
+  };
+
+  // A plug meeting a socket: a connector, client, or integration point.
+  G.plug = (g, w, h, o) => {
+    R(g, -20, -8, 14, 16, 'gl-fill', 2);
+    P(g, 'M-6,-4H0M-6,4H0', 'gl-ink gl-thick');
+    R(g, 4, -10, 16, 20, 'gl-fill2', 2);
+    P(g, 'M8,-4H12M8,4H12', 'gl-ink gl-thick');
+    P(g, 'M-26,0H-20M20,0H26', o.accent ? 'gl-accent-line' : 'gl-line');
+    C(g, 0, 0, 1.6, o.accent ? 'gl-accent' : 'gl-solid');
+  };
+
+  // A ranked list: rows that shorten with rank; `hi` marks one row in accent.
+  G.ranked = (g, w, h, o) => {
+    const n = o.rows || 6, rh = 3.2, gap = 3.4, x0 = -w * 0.32, ww = w * 0.64, y0 = -(n * (rh + gap) - gap) / 2;
+    for (let i = 0; i < n; i++) {
+      const y = y0 + i * (rh + gap);
+      C(g, x0 - 4, y + rh / 2, 1, 'gl-solid');
+      R(g, x0, y, ww * (1 - i * 0.09), rh, i === (o.hi ?? -1) ? 'gl-accent' : 'gl-bar', 1);
+    }
+  };
+
+  // A globe: meridians and parallels; the network or the public web.
+  G.globe = (g, w, h, o) => {
+    const r = Math.min(w, h) * 0.34;
+    C(g, 0, 0, r, 'gl-fill');
+    el('ellipse', { cx: 0, cy: 0, rx: r * 0.45, ry: r, class: 'gl-line' }, g);
+    P(g, `M${r2(-r)},0H${r2(r)}M${r2(-r * 0.87)},${r2(-r * 0.5)}H${r2(r * 0.87)}M${r2(-r * 0.87)},${r2(r * 0.5)}H${r2(r * 0.87)}`, 'gl-hair');
+    C(g, r * 0.5, -r * 0.35, 2, o.accent ? 'gl-accent' : 'gl-solid');
+  };
+
+  // A store: three stacked cylinder discs; durable storage.
+  G.store = (g, w, h, o) => {
+    const rx = Math.min(w * 0.3, 16), ry = 4.5;
+    for (const [i, y] of [[0, 8], [1, 0], [2, -8]]) {
+      P(g, `M${-rx},${y}V${y + 6}A${rx},${ry} 0 0 0 ${rx},${y + 6}V${y}`, 'gl-fill');
+      el('ellipse', { cx: 0, cy: y, rx, ry, class: i === 2 && o.accent ? 'gl-fill gl-accent-edge' : 'gl-fill' }, g);
+    }
+  };
+
+  // Experts: a grid of experts with only a few lit (`on` of `n`).
+  G.experts = (g, w, h, o) => {
+    const n = o.n || 256, on = o.on || 8, cols = o.cols || 32, rows = Math.ceil(n / cols), s = 3.6, gap = 1.2;
+    const lit = new Set(Array.from({ length: on }, (_, k) => (k * 37 + 11) % n));
+    const x0 = -(cols * (s + gap) - gap) / 2, y0 = -(rows * (s + gap) - gap) / 2;
+    for (let i = 0; i < n; i++) R(g, x0 + (i % cols) * (s + gap), y0 + Math.floor(i / cols) * (s + gap), s, s, lit.has(i) ? 'gl-accent' : 'gl-cell', 1);
+  };
+
+  // A ledger: rows stacked newest on top; superseded rows hatched, never removed.
+  G.ledger = (g, w, h, o) => {
+    const n = o.rows || 3, rw = w * 0.62, rh = 8, gap = 3, y0 = -(n * (rh + gap) - gap) / 2;
+    for (let i = 0; i < n; i++) {
+      const y = y0 + i * (rh + gap), newest = i === 0;
+      R(g, -rw / 2, y, rw, rh, newest ? 'gl-fill gl-accent-edge' : 'gl-fill', 1);
+      if (!newest) R(g, -rw / 2, y, rw, rh, 'gl-hatch', 1).setAttribute('fill', hatch(o));
+      C(g, -rw / 2 + 5, y + rh / 2, 1.4, newest ? 'gl-accent' : 'gl-solid');
+    }
   };
 
   // Memory cells: a grid filled to a level; the newest cell is accent; optional checkpoint flag.
@@ -378,6 +439,36 @@
       for (let k = -2; k <= 2; k++) P(g, `M${r2(bx)},${r2(k * 3)}H${r2(ex - s / 2 - 4)}`, k === 0 ? 'gl-accent-hair' : 'gl-hair');
       const sub2 = el('g', { transform: `translate(${r2(ex)},0)` }, g);
       G.chip(sub2, s / 0.6, s / 0.6, {});
+    }
+  };
+
+  // Sliding context window: turns in a row; the oldest fall away left, the newest joins right.
+  S.sliding = (g, w, h, o) => {
+    const n = 16, tw = (w - 60) / n - 3, th = 12, y = -th / 2, x0 = -w / 2 + 30;
+    const win = [5, 14];
+    for (let i = 0; i < n; i++) {
+      const x = x0 + i * (tw + 3), out = i < win[0], fresh = i === n - 1;
+      const dy = out ? (win[0] - i) * 2.2 : 0;
+      R(g, x, y + dy, tw, th, fresh ? 'gl-accent' : out ? 'gl-cell-empty' : i % 3 === 0 ? 'gl-solid' : 'gl-fill', 1);
+      if (out) R(g, x, y + dy, tw, th, 'gl-hatch', 1).setAttribute('fill', hatch(o));
+    }
+    const bx0 = x0 + win[0] * (tw + 3) - 4, bx1 = x0 + (n) * (tw + 3) + 1;
+    P(g, `M${r2(bx0 + 5)},${r2(y - 7)}H${r2(bx0)}V${r2(y + th + 7)}H${r2(bx0 + 5)}M${r2(bx1 - 5)},${r2(y - 7)}H${r2(bx1)}V${r2(y + th + 7)}H${r2(bx1 - 5)}`, 'gl-ink gl-thick');
+    for (const k of [0, 6, 12]) P(g, `M${r2(bx0 - 8 - k)},${r2(y + th / 2)}l-3,-2.5M${r2(bx0 - 8 - k)},${r2(y + th / 2)}l-3,2.5`, 'gl-line');
+  };
+
+  // Per-turn budget: each turn replays the system prompt and all history, then adds a message and an answer.
+  S.budget = (g, w, h, o) => {
+    const turns = 6, sys = 3, msg = 1, out = 2, unit = (w - 20) / (sys + turns * (msg + out)), bh = Math.min(9, (h - (turns - 1) * 3) / turns);
+    const x0 = -w / 2 + 10, y0 = -(turns * (bh + 3) - 3) / 2;
+    for (let t = 0; t < turns; t++) {
+      const y = y0 + t * (bh + 3);
+      let x = x0;
+      const seg = (n, cls, hatchIt) => { const ww = n * unit - 0.8; R(g, x, y, ww, bh, cls, 1); if (hatchIt) R(g, x, y, ww, bh, 'gl-hatch', 1).setAttribute('fill', hatch(o)); x += n * unit; };
+      seg(sys, 'gl-solid');
+      if (t) seg(t * (msg + out), 'gl-fill', true);
+      seg(msg, 'gl-fill');
+      seg(out, 'gl-accent');
     }
   };
 

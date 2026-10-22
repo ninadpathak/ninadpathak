@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/memory-versioning/append-vs-overwrite.mmd",
+  "hash": "02dc0daaeb683af7",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 544,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/memory-versioning/append-vs-overwrite.narrow",
+    "width": 288,
+    "height": 1000,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Two ways to change a memory. The append-only ledger inserts a new row and stamps the old one as superseded, so v1, v2, and v3 all remain and any point in time can be recovered. A destructive update overwrites the row and the prior state is gone.",
+  "caption": "Inserting a new row and stamping valid_to on the old one gives point-in-time recovery for free.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/memory-versioning/append-vs-overwrite.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/memory-versioning/append-vs-overwrite.narrow.svg\" width=\"288\" height=\"1000\"><img src=\"/static/images/diagrams/memory-versioning/append-vs-overwrite.svg\" width=\"720\" height=\"544\" alt=\"Two ways to change a memory. The append-only ledger inserts a new row and stamps the old one as superseded, so v1, v2, and v3 all remain and any point in time can be recovered. A destructive update overwrites the row and the prior state is gone.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Inserting a new row and stamping valid_to on the old one gives point-in-time recovery for free.</figcaption>\n</figure>"
+}

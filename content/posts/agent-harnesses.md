@@ -40,12 +40,10 @@ Scattered or not, that is still a harness. The real question is whether anyone d
 
 A well-designed harness is not one monolithic block of logic. It splits into five distinct components, each with a specific responsibility.
 
-<div class="visual-wrapper">
-  <div class="visual-title">HARNESS LAYERS AROUND THE RAW LLM</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/agent-harness-layers.html" title="The agent harness as concentric infrastructure layers wrapping the raw LLM" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-harnesses/harness-layers.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/agent-harnesses/harness-layers.narrow.svg" width="288" height="864"><img src="/static/images/diagrams/agent-harnesses/harness-layers.svg" width="720" height="928" alt="The agent harness sits between the application and the model. Inside it, the execution loop calls tools in both directions, checkpoints state, and logs every step to an observer, and the prompt assembler builds the prompt the model receives. The model only reasons." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.</figcaption>
+</figure>
 
 **Tool registry.** A catalog of available tools. Each tool carries a typed schema, a description the model can read, and an execution handler the harness calls when the model requests it.
 

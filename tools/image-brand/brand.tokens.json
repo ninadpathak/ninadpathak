@@ -79,7 +79,7 @@
   "layout": { "nodeSpacing": 28, "rankSpacing": 64, "chartWidth": 600, "chartHeight": 340 },
   "radius": { "node": 4, "plate": 4, "label": 2 },
   "canvas": {
-    "article": { "width": 720, "head": 44, "pad": 32, "minScale": 1, "grid": 16 },
+    "article": { "width": 720, "head": 44, "pad": 24, "minScale": 1, "grid": 16 },
     "og":      { "width": 1200, "height": 630, "pad": 64, "grid": 16, "minDiagramScale": 1.5, "titleSizes": [54, 48, 42, 38] }
   }
 }

@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/speculative-decoding/draft-verify.mmd",
+  "hash": "69f827def931b7ff",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 392,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/speculative-decoding/draft-verify.narrow",
+    "width": 288,
+    "height": 736,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "A small draft model guesses the next few tokens in quick succession, and the large target model verifies all of the guesses in one parallel step. Tokens the target agrees with are kept; the first one it rejects, and everything after it, is discarded.",
+  "caption": "The draft model is fast and often wrong, like a 1B running ahead; the target is the 70B you actually want answering.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/speculative-decoding/draft-verify.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/speculative-decoding/draft-verify.narrow.svg\" width=\"288\" height=\"736\"><img src=\"/static/images/diagrams/speculative-decoding/draft-verify.svg\" width=\"720\" height=\"392\" alt=\"A small draft model guesses the next few tokens in quick succession, and the large target model verifies all of the guesses in one parallel step. Tokens the target agrees with are kept; the first one it rejects, and everything after it, is discarded.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The draft model is fast and often wrong, like a 1B running ahead; the target is the 70B you actually want answering.</figcaption>\n</figure>"
+}

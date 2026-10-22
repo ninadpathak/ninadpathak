@@ -34,12 +34,10 @@ Whether the agent handles a single session or carries state across many interact
 
 A stateful agent maintains memory of past interactions, within a conversation or across them. Why that distinction matters in practice is something I covered in my post on [state-of-ai-agent-memory-2026](/articles/agent-memory-2026/).
 
-<div class="visual-wrapper">
-  <div class="visual-title">AGENT TYPES BY AUTONOMY</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/agent-taxonomy.html" title="The five agent types arranged as a ladder by degree of autonomy" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.narrow.svg" width="288" height="752"><img src="/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.svg" width="720" height="808" alt="The five agent types as a ladder of rising autonomy: reactive information agents, tool-using agents, loop agents, multi-agent systems, and persistent-goal agents. Cost and blast radius climb with each step." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each step up makes more decisions without a human, and cost and blast radius climb by roughly an order of magnitude at each one.</figcaption>
+</figure>
 
 ## Type 1: Reactive information agents
 

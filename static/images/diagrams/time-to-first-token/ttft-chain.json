@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/time-to-first-token/ttft-chain.mmd",
+  "hash": "516a7cf1692e53b4",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 288,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/time-to-first-token/ttft-chain.narrow",
+    "width": 288,
+    "height": 704,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput.",
+  "caption": "Prefill cost scales with prompt length, so 40k tokens of retrieved documents can turn snappy into painful.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/time-to-first-token/ttft-chain.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/time-to-first-token/ttft-chain.narrow.svg\" width=\"288\" height=\"704\"><img src=\"/static/images/diagrams/time-to-first-token/ttft-chain.svg\" width=\"720\" height=\"288\" alt=\"The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Prefill cost scales with prompt length, so 40k tokens of retrieved documents can turn snappy into painful.</figcaption>\n</figure>"
+}

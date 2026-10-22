@@ -1,0 +1,19 @@
+%% @fig 01
+%% @kicker TTFT chain
+%% @alt The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput.
+%% @caption Prefill cost scales with prompt length, so 40k tokens of retrieved documents can turn snappy into painful.
+%% @path net>queue>prefill>first
+%% @glyph net | globe
+%% @glyph queue | inbox
+%% @glyph prefill | context
+%% @glyph first | tokens rows=1
+%% @glyph stream | tokens rows=3,5,7
+%% @dim net | prefill | TTFT
+%% @spacing 16,16
+flowchart LR
+  net["Network"]
+  queue["Queue"]
+  prefill["Prefill"]:::accent
+  first["First token"]:::focal
+  stream["Stream"]
+  net --> queue --> prefill --> first --> stream

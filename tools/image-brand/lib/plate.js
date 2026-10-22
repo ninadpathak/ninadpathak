@@ -121,7 +121,8 @@
       const b = shape.getBBox();
       const [tx, ty] = translateOf(g);
       const x = b.x + tx, y = b.y + ty;
-      map.set(id, { id, g, x, y, w: b.width, h: b.height, l: x, r: x + b.width, t: y, b: y + b.height, cx: x + b.width / 2, cy: y + b.height / 2, cluster: g.classList.contains('pele-cluster') });
+      const ay = g.dataset.tilecy !== undefined ? ty + Number(g.dataset.tilecy) : y + b.height / 2;
+      map.set(id, { id, g, x, y, w: b.width, h: b.height, l: x, r: x + b.width, t: y, b: y + b.height, cx: x + b.width / 2, cy: y + b.height / 2, ay, cluster: g.classList.contains('pele-cluster') });
     }
     return map;
   }
@@ -182,7 +183,8 @@
       const lp = parsePoints(e.line.getAttribute('d'));
       const near = (m, p) => { const tip = parsePoints(m.getAttribute('d'))[0]; return Math.hypot(tip[0] - p[0], tip[1] - p[1]); };
       e.both = e.markers.length >= 2;
-      e.reverse = e.markers.length === 1 && near(e.markers[0], lp[0]) < near(e.markers[0], lp[lp.length - 1]);
+      // Pele may draw a back edge from target to source; the head still belongs at the target.
+      e.reverse = !e.rel && e.markers.length === 1 && near(e.markers[0], lp[0]) < near(e.markers[0], lp[lp.length - 1]);
       e.headless = e.markers.length === 0;
     }
     routeAll(edges);
@@ -220,13 +222,13 @@
         if (e.bus) {
           const gap = Math.min(...group.map((g) => (sign > 0 ? g.t.l - s.r : s.l - g.t.r)));
           const mx = sx + sign * gap * 0.4;
-          pts = [[sx, s.cy], [mx, s.cy], [mx, t.cy], [ex, t.cy]];
-        } else if (lo <= hi) {
-          const y = s.cy >= lo && s.cy <= hi ? s.cy : t.cy >= lo && t.cy <= hi ? t.cy : (lo + hi) / 2;
+          pts = [[sx, s.ay], [mx, s.ay], [mx, t.ay], [ex, t.ay]];
+        } else if (Math.abs(s.ay - t.ay) < 1 || lo <= hi) {
+          const y = Math.abs(s.ay - t.ay) < 1 ? s.ay : s.ay >= lo && s.ay <= hi ? s.ay : t.ay >= lo && t.ay <= hi ? t.ay : (lo + hi) / 2;
           pts = [[sx, y], [ex, y]];
         } else {
           const mx = (sx + ex) / 2;
-          pts = [[sx, s.cy], [mx, s.cy], [mx, t.cy], [ex, t.cy]];
+          pts = [[sx, s.ay], [mx, s.ay], [mx, t.ay], [ex, t.ay]];
         }
       }
       // Detour: any vertical leg that would cross another node steps right of the obstacle.
@@ -351,6 +353,16 @@
     const words = lines.filter((l) => l.isConnected && l.textContent.trim());
     const x = Number(shape.getAttribute('x')), y = Number(shape.getAttribute('y')), w = Number(shape.getAttribute('width')), h = Number(shape.getAttribute('height'));
     const opts = { ...spec.opts, hatch: `${defsId}-hatch`, accent: spec.opts.accent || node.classList.contains('focal') || node.classList.contains('accent') };
+    if (spec.mode === 'strip' && spec.opts.stacked) {
+      // M3 narrow: the label on top, the strip glyph under it across the slab.
+      node.classList.add('np-slab');
+      if (label) label.setAttribute('text-anchor', 'start');
+      words.forEach((l, i) => { l.setAttribute('x', r2(x + 14)); l.setAttribute('y', r2(y + 22 + i * 17)); });
+      const top = y + 22 + words.length * 17;
+      const g = el('g', { class: 'np-glyph', transform: `translate(${r2(x + w / 2)},${r2(top + (y + h - top) / 2)})` }, node);
+      window.npGlyphs.strip[spec.name](g, w - 28, Math.min(spec.h, y + h - top - 8), opts);
+      return;
+    }
     if (spec.mode === 'strip') {
       // M3 · Layer slab: label column on the left, the strip glyph across the rest.
       node.classList.add('np-slab');
@@ -375,12 +387,15 @@
     }
     const gy = spec.mode === 'bare' ? y + 15 : y + tileH / 2;
     const g = el('g', { class: 'np-glyph', transform: `translate(0,${r2(gy)})` }, node);
+    node.dataset.tilecy = r2(spec.mode === 'bare' ? gy : y + tileH / 2);
     if (spec.mode === 'bare') shape.setAttribute('height', r2(spec.h + 4));
     const draw = window.npGlyphs.tile[spec.name];
     if (!draw) throw new Error(`unknown glyph "${spec.name}"`);
     draw(g, spec.w, Math.min(spec.h, tileH - 8), opts);
     if (label) label.setAttribute('text-anchor', 'middle');
     words.forEach((l, i) => { l.setAttribute('x', 0); l.setAttribute('y', r2(y + tileH + 17 + i * 19)); l.classList.add('np-glyph-label'); });
+    // Corner badge (any tile glyph): a status or owner mark pinned to the tile's top-right.
+    if (spec.opts.corner && spec.mode === 'tile') window.npGlyphs.badge(node, tw / 2 - 3, y + 3, spec.opts.corner, node.classList.contains('fail') ? false : !!opts.accent, 8);
   }
 
   // ---------------------------------------------------------------- ring layout (M10)
@@ -391,7 +406,8 @@
     const cx = ring.reduce((s, n) => s + n.cx, 0) / ring.length, cy = ring.reduce((s, n) => s + n.cy, 0) / ring.length;
     const R = spec.r || 140;
     const n = ring.length;
-    const angle = (i) => Math.PI + (2 * Math.PI * i) / n;
+    const start = spec.start === undefined ? Math.PI : (spec.start * Math.PI) / 180;
+    const angle = (i) => start + (2 * Math.PI * i) / n;
     const place = (box, x, y) => {
       const [tx, ty] = translateOf(box.g);
       box.g.setAttribute('transform', `translate(${r2(x + (tx - box.cx))},${r2(y + (ty - box.cy))})`);
@@ -404,8 +420,14 @@
       if (b.cluster || ringSet.has(id)) continue;
       const i = spec.ids.findIndex((r) => edgeIds.some((e) => e.startsWith(`L_${id}_${r}_`) || e.startsWith(`L_${r}_${id}_`)));
       if (i < 0) continue;
-      const a = angle(i), out = R + 96 + (Math.abs(Math.cos(a)) * b.w + Math.abs(Math.sin(a)) * b.h) / 2;
-      place(b, cx + out * Math.cos(a), cy + out * Math.sin(a));
+      const a = angle(i), out = R + (spec.gap ?? 96) + (Math.abs(Math.cos(a)) * b.w + Math.abs(Math.sin(a)) * b.h) / 2;
+      if (spec.stack) {
+        // Narrow plates: neighbours sit above or below the ring, never beside it.
+        const up = Math.sin(a) < 0 || (Math.abs(Math.sin(a)) < 0.01 && Math.cos(a) < 0);
+        const used = [...nodes.values()].filter((o) => o.stacked === (up ? 'up' : 'down')).length;
+        b.stacked = up ? 'up' : 'down';
+        place(b, cx + (used ? (used % 2 ? 1 : -1) * 70 : 0), cy + (up ? -1 : 1) * (R + (spec.gap ?? 30) + 40 + b.h / 2));
+      } else place(b, cx + out * Math.cos(a), cy + out * Math.sin(a));
     }
     for (const g of [...svg.querySelectorAll('.pele-edge')]) {
       const id = g.getAttribute('data-id') || '';
@@ -694,15 +716,25 @@
     return t;
   }
 
-  function seriesKey(svg, src, defsId) {
+  // Key: chart series by default; @key names glyph encodings (solid, hatch, outline, accent).
+  function seriesKey(svg, src, defsId, maxW = Infinity) {
     const g = el('g', { class: 'np-series-key' }, svg);
-    let cx = 0;
-    src.meta.seriesNames.forEach((name, i) => {
-      el('rect', { class: `np-bar-tile np-bar-tile-${i + 1}`, x: cx, y: -8, width: 12, height: 10, rx: 1 }, g);
-      if (i === 1) el('rect', { class: 'np-hatch-fill', x: cx, y: -8, width: 12, height: 10, fill: `url(#${defsId}-hatch)` }, g);
-      cx += 18 + width(text(g, 'np-key', cx + 18, 0, name.toUpperCase())) + 22;
-    });
-    return { g, w: cx - 22 };
+    const entries = src.meta.keySpec || src.meta.seriesNames.map((name, i) => [i === 0 ? 'series-1' : 'series-2', name]);
+    const swatch = { 'series-1': ['np-bar-tile np-bar-tile-1', false], 'series-2': ['np-bar-tile np-bar-tile-2', true], solid: ['gl-solid', false], hatch: ['gl-fill', true], outline: ['gl-fill', false], accent: ['gl-accent', false] };
+    let cx = 0, cy = 0, widest = 0;
+    for (const [kind, name] of entries) {
+      const item = el('g', {}, g);
+      const [cls, hatchIt] = swatch[kind] || swatch.outline;
+      el('rect', { class: cls, x: 0, y: -8, width: 12, height: 10, rx: 1 }, item);
+      if (hatchIt) el('rect', { class: 'np-hatch-fill', x: 0, y: -8, width: 12, height: 10, fill: `url(#${defsId}-hatch)` }, item);
+      const iw = 18 + width(text(item, 'np-key', 18, 0, name.toUpperCase()));
+      if (cx && cx + iw > maxW) { cx = 0; cy += 18; } // wrap the key on narrow plates
+      item.setAttribute('transform', `translate(${r2(cx)},${r2(cy)})`);
+      cx += iw + 22;
+      widest = Math.max(widest, cx - 22);
+    }
+    g.dataset.rows = String(cy / 18 + 1);
+    return { g, w: widest };
   }
 
   function renderPele(host, src, T, maxWidth) {
@@ -744,12 +776,13 @@
     const svg = renderPele(host, src, T, inner);
     const facts = brandDiagram(svg, src, T, src.id);
     drawDims(svg, src, facts.nodes);
-    if (src.meta.seriesNames.length) {
+    if (src.meta.seriesNames.length || src.meta.keySpec) {
       const bb = stableBBox(svg);
-      const { g, w } = seriesKey(svg, src, src.id);
-      g.setAttribute('transform', `translate(${r2(bb.x + bb.width - w)},${r2(bb.y - 18)})`);
+      const { g, w } = seriesKey(svg, src, src.id, Math.min(inner - 12, bb.width));
+      const rows = Number(g.dataset.rows);
+      g.setAttribute('transform', `translate(${r2(bb.x + Math.max(0, bb.width - w))},${r2(bb.y - 18 * rows)})`);
     }
-    const { s, cw, ch } = fit(svg, inner, 0, C.minScale, 1, src, narrow ? 3 : 6);
+    const { s, cw, ch } = fit(svg, inner, 0, C.minScale, 1, src, narrow ? 1 : 6);
     const dw = cw * s, dh = ch * s;
     const top = C.head;
     const fieldH = Math.ceil((S + C.pad * 2 + dh) / 8) * 8;
@@ -757,8 +790,12 @@
     for (const [k, v] of Object.entries({ x: dx, y: dy, width: dw, height: dh })) svg.setAttribute(k, r2(v));
     field(fieldLayer, 0, top, W, fieldH, src.id, S);
 
-    kickerText(plate, 20, 27, src.meta.kicker || src.id, 'np-head-kicker');
-    if (src.meta.fig) { const f = text(plate, 'np-head-meta', W - 20, 27, `FIG. ${src.meta.fig}`, 'end'); f.setAttribute('data-exempt', '1'); }
+    const kick = kickerText(plate, 20, 27, src.meta.kicker || src.id, 'np-head-kicker');
+    if (src.meta.fig) {
+      const f = text(plate, 'np-head-meta', W - 20, 27, `FIG. ${src.meta.fig}`, 'end');
+      f.setAttribute('data-exempt', '1');
+      if (20 + width(kick) + 16 > W - 20 - width(f)) f.remove(); // no room: the title wins
+    }
     el('path', { class: 'np-sep', d: `M0,${C.head}H${W}` }, plate);
 
     let y = top + fieldH;

@@ -127,7 +127,31 @@ async function main() {
   const files = findSources();
   if (!files.length) { console.log('no sources'); return failures; }
   // Narrow variants render first so the wide figure's embed can include them.
-  const sources = files.map(parseSource).sort((a, b) => (b.id.endsWith('.narrow') - a.id.endsWith('.narrow')) || a.file.localeCompare(b.file));
+  const parsed = files.map(parseSource);
+  // Every article figure gets a phone variant. A hand-written <id>.narrow.mmd wins; otherwise
+  // one is derived from the source: 288 px wide, left-to-right flows turned top-to-bottom,
+  // rings tightened. A derived variant that doesn't fit at 1:1 is skipped with a warning.
+  const handNarrow = new Set(parsed.filter((p) => p.id.endsWith('.narrow')).map((p) => `${p.slug}/${p.id.replace(/\.narrow$/, '')}`));
+  const derived = parsed.filter((p) => p.meta.kind === 'diagram' && !p.id.endsWith('.narrow') && !handNarrow.has(`${p.slug}/${p.id}`)).map((p) => {
+    const d = JSON.parse(JSON.stringify(p));
+    d.id = `${p.id}.narrow`;
+    d.derived = true;
+    d.meta.width = '288';
+    d.mermaid = p.mermaid.replace(/^(flowchart|graph)\s+(LR|RL)/m, '$1 TB').replace(/direction (LR|RL)/g, 'direction TB');
+    // Block diagrams collapse to one column; spans no longer apply.
+    if (/^block(-beta)?/m.test(d.mermaid)) d.mermaid = d.mermaid.replace(/^(\s*)columns \d+/m, '$1columns 1').replace(/(\])\s*:\d+/g, '$1');
+    // A ring is too wide for a phone: lay the loop out as a column; the router draws the return.
+    if (d.meta.ringSpec) { d.meta.ringSpec = null; d.meta.centerGlyph = null; }
+    // Strip glyphs in a narrow slab sit under their label instead of beside it.
+    for (const g of Object.values(d.meta.glyphs)) {
+      if (g.mode !== 'strip') continue;
+      d.mermaid = d.mermaid.split(`⟦g:${g.w + 150}⟧`).join('⟦g:220⟧');
+      g.opts.stacked = true;
+      g.w = 220;
+    }
+    return d;
+  });
+  const sources = [...parsed, ...derived].sort((a, b) => (b.id.endsWith('.narrow') - a.id.endsWith('.narrow')) || a.file.localeCompare(b.file) || a.id.localeCompare(b.id));
   const narrow = new Map();
 
   // Unhinted font metrics on every platform: Linux Chromium otherwise rounds glyph
@@ -145,10 +169,10 @@ async function main() {
   const shot = await (await browser.newContext({ deviceScaleFactor: 2 })).newPage();
 
   for (const src of sources) {
-    const label = path.relative(REPO_DIR, src.file);
+    const label = path.relative(REPO_DIR, src.file) + (src.derived ? ' (derived narrow)' : '');
     try {
       if (src.meta.kind === 'og') resolveCard(src);
-      const hash = createHash('sha256').update([readFileSync(src.file, 'utf8'), PIPELINE].join('\0')).digest('hex').slice(0, 16);
+      const hash = createHash('sha256').update([readFileSync(src.file, 'utf8'), src.derived ? 'derived-narrow' : '', PIPELINE].join('\0')).digest('hex').slice(0, 16);
       const result = await page.evaluate(({ src, tokens, hash }) => {
         document.body.innerHTML = '';
         const dims = src.meta.kind === 'og' ? window.npComposeOg(src, tokens, { hash }) : window.npComposeArticle(src, tokens, { hash });
@@ -232,7 +256,8 @@ async function main() {
       }
       console.log(`${label} -> ${path.relative(REPO_DIR, svgPath)} ${result.dims.width}x${result.dims.height} scale ${result.dims.scale} words ${words.length}/${budget}`);
     } catch (error) {
-      failures.push(`${label}: ${error.message}`);
+      if (src.derived) console.warn(`warn ${label}: no derived phone variant (${error.message.split('\n')[0].slice(0, 120)}); write ${src.id}.mmd by hand`);
+      else failures.push(`${label}: ${error.message}`);
     }
   }
   await browser.close();

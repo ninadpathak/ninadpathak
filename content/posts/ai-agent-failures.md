@@ -77,12 +77,10 @@ I have watched this happen for real on an agent that summarized inbound support 
 
 The [Model Context Protocol](/articles/model-context-protocol/) was designed partly to fence off this class of failure, though protocol compliance still varies a lot across implementations.
 
-<div class="visual-wrapper">
-  <div class="visual-title">WHERE THE LOOP BREAKS</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/agent-failure-modes.html" title="The agent loop with common production failure points marked: tool timeout, double-execution, context pollution" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/ai-agent-failures/failure-modes.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/ai-agent-failures/failure-modes.narrow.svg" width="288" height="888"><img src="/static/images/diagrams/ai-agent-failures/failure-modes.svg" width="720" height="488" alt="The agent loop drawn as a ring of perceive, think, act, and remember, with two failure points marked. At act, a tool call times out, the agent retries, and the action executes twice. At perceive, context pollution lets one agent's scratch work leak into another's prompt." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Timeouts, retries, partial failure, and drifting state: underneath, a distributed systems problem.</figcaption>
+</figure>
 
 ## What the field is doing about it
 

@@ -1,0 +1,19 @@
+%% @fig 01
+%% @kicker Speculative decoding
+%% @alt A small draft model guesses the next few tokens in quick succession, and the large target model verifies all of the guesses in one parallel step. Tokens the target agrees with are kept; the first one it rejects, and everything after it, is discarded.
+%% @caption The draft model is fast and often wrong, like a 1B running ahead; the target is the 70B you actually want answering.
+%% @path draft>guess>target>kept
+%% @glyph draft | core w=40
+%% @glyph guess | tokens rows=5
+%% @glyph target | core
+%% @glyph kept | tokens rows=3
+%% @glyph dropped | tokens rows=2 accent=false
+flowchart LR
+  draft["Draft"]
+  guess["Guesses"]
+  target["Target"]:::focal
+  kept["Kept"]:::accent
+  dropped["Dropped"]:::muted
+  draft --> guess --> target
+  target -->|yes| kept
+  target -->|no| dropped

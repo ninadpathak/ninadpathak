@@ -38,12 +38,10 @@ Two models do the work. A small "draft" model guesses the next few tokens in rap
 
 The draft model is fast and frequently wrong, something like a 1B model running ahead. The target model is slow and authoritative, the 70B you actually want answering.
 
-<div class="visual-wrapper">
-  <div class="visual-title">SPECULATIVE DECODING</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/speculative-decoding.html" title="A small draft model proposes several tokens, the large target model verifies them in parallel, accepted tokens are kept and rejected ones discarded" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/speculative-decoding/draft-verify.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/speculative-decoding/draft-verify.narrow.svg" width="288" height="736"><img src="/static/images/diagrams/speculative-decoding/draft-verify.svg" width="720" height="392" alt="A small draft model guesses the next few tokens in quick succession, and the large target model verifies all of the guesses in one parallel step. Tokens the target agrees with are kept; the first one it rejects, and everything after it, is discarded." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The draft model is fast and often wrong, like a 1B running ahead; the target is the 70B you actually want answering.</figcaption>
+</figure>
 
 The system works because checking is cheaper than generating. Verifying four or five proposed tokens costs the target model almost the same wall-clock time as producing one, since it loads its weights once and runs the candidates through together.
 

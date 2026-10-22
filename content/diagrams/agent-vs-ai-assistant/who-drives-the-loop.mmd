@@ -1,0 +1,25 @@
+%% @fig 01
+%% @kicker Who drives the loop
+%% @alt Two systems side by side. In the assistant, the human sends each prompt and reads each response, so the loop lives in the human's workflow. In the agent, the human sets a goal once and the system runs its own loop until it returns a result.
+%% @caption An assistant answers each turn you drive. An agent drives its own loop, and you check the result.
+%% @path you2>agent>result
+%% @glyph you1 | reader corner=person
+%% @glyph model | core
+%% @glyph you2 | reader
+%% @glyph agent | loop
+%% @glyph result | doc check
+flowchart TB
+  subgraph assistant [Assistant]
+    direction LR
+    you1["You"]:::accent
+    model["Model"]
+    you1 <--> model
+  end
+  subgraph agentic [Agent]
+    direction LR
+    you2["Goal"]
+    agent["Loop"]:::focal
+    result["Result"]
+    you2 --> agent --> result
+  end
+  assistant ~~~ agentic

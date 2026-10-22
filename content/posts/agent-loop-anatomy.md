@@ -33,12 +33,10 @@ How different agent architectures handle this loop is something I covered in my 
 
 Deliberative agents spend significant compute in think before acting. That structural difference matters more than most framework documentation suggests.
 
-<div class="visual-wrapper">
-  <div class="visual-title">THE FOUR-PHASE AGENT LOOP</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/agent-loop-cycle.html" title="A continuous loop cycling through perceive, think, act, and remember, with a pulse traveling the circle and highlighting each phase in turn" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-loop-anatomy/agent-loop.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/agent-loop-anatomy/agent-loop.narrow.svg" width="288" height="1064"><img src="/static/images/diagrams/agent-loop-anatomy/agent-loop.svg" width="720" height="664" alt="The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each phase has its own failure modes: infinite loops start in act, context exhaustion and lost tool results start in remember.</figcaption>
+</figure>
 
 ## Perceive: what the agent sees before it decides
 

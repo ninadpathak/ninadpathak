@@ -20,12 +20,10 @@ Across vLLM, TensorRT-LLM, and SGLang, I've spent time tuning inference stacks u
 
 Here's how they work and where they break.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Inference Optimization Stack</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/inference-optimization-stack.html" title="LLM inference optimization stack: batching, flash attention, KV cache, quantization, and speculative decoding, each with its own measured gain" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/llm-inference-optimization/inference-stack.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/llm-inference-optimization/inference-stack.narrow.svg" width="288" height="1040"><img src="/static/images/diagrams/llm-inference-optimization/inference-stack.svg" width="720" height="856" alt="The inference stack as layered slabs, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang); continuous batching, drawn as request lanes where a finished request frees its slot for a new one; Flash Attention, drawn as a score matrix streamed tile by tile into on-chip memory; quantization, drawn as one weight at 16, 8, and 4 bits; the paged KV cache, drawn as three sequences mapped onto scattered memory blocks; and the GPU with its memory stacks. Numbered squares, top to bottom, give the order to apply them: batching, the attention kernel, FP8 quantization, then the paged KV cache." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Apply the levers in the numbered order. Continuous batching moves throughput 10–20× on its own; the article covers each lever's trade-off.</figcaption>
+</figure>
 
 ## Batching: The First Lever
 

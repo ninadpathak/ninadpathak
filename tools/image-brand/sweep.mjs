@@ -66,6 +66,9 @@ for (const target of targets) {
   const cols = [];
   for (const scheme of SCHEMES) for (const width of WIDTHS) {
     const { ctx, page } = await open(afterUrl + url, width, scheme);
+    // Lazy images load only near the viewport: bring the figure in and wait for its image.
+    await page.locator('figure.np-figure').first().scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => { const i = document.querySelector('figure.np-figure img'); return i && i.complete && i.naturalWidth > 0; }, null, { timeout: 15000 }).catch(() => {});
     const metrics = await page.evaluate(async () => {
       const fig = document.querySelector('figure.np-figure');
       const img = fig?.querySelector('img');

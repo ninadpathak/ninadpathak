@@ -1,0 +1,18 @@
+%% @fig 01
+%% @kicker The five-stage agentic workflow
+%% @alt Five stages left to right: frame the task, scope it down, let the agent work against an instrumented loop, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop.
+%% @caption Two stages are mine, one is the agent's, and scoping and landing are the seams between them.
+%% @path frame>scope>work>review>land
+%% @glyph frame | doc corner=person
+%% @glyph scope | outline
+%% @glyph work | loop
+%% @glyph review | eye corner=person
+%% @glyph land | doc check
+%% @spacing 20,30
+flowchart LR
+  frame["Frame"]
+  scope["Scope"]
+  work["Work"]:::focal
+  review["Review"]
+  land["Land"]
+  frame --> scope --> work --> review --> land

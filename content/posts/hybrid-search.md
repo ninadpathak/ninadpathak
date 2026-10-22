@@ -60,12 +60,10 @@ Sitting at rank 100 in both lists, a document scores `0.0099 + 0.0099 = 0.0198` 
 
 Agreement between the two retrievers becomes the strongest signal, which is exactly the behavior you want.
 
-<div class="visual-wrapper">
-  <div class="visual-title">FUSING TWO RANKED LISTS WITH RRF (k=60)</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/hybrid-search-fusion.html" title="BM25 and vector result lists fusing into one ranked list via reciprocal rank fusion" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/hybrid-search/rrf-fusion.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/hybrid-search/rrf-fusion.narrow.svg" width="288" height="520"><img src="/static/images/diagrams/hybrid-search/rrf-fusion.svg" width="720" height="392" alt="A BM25 keyword list and a vector list each rank the same documents differently. Reciprocal rank fusion discards their scores and adds 1/(60 + rank) from each list, so the document both retrievers rank highly rises to the top of the fused list." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Agreement between the two retrievers becomes the strongest signal; the underlying scores are discarded.</figcaption>
+</figure>
 
 The practical advantage of RRF is that it needs no tuning for initial deployment. The `k=60` constant generalizes well across domains, and you don't need labeled data to set weights.
 

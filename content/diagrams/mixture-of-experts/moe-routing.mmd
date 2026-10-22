@@ -1,0 +1,16 @@
+%% @fig 01
+%% @kicker Sparse expert routing: 8 of 256 activate per token
+%% @alt Each token passes through a router that activates 8 of 256 experts; the other 248 stay idle. A 671B mixture-of-experts model with 37B active parameters moves roughly as many bytes from memory per token as a 37B dense model.
+%% @caption Compute follows the active experts, but all 256 still have to sit in memory.
+%% @path token>router>experts>out
+%% @glyph token | tokens rows=1
+%% @glyph router | plug
+%% @glyph experts | experts n=256 on=8 cols=32
+%% @glyph out | tokens rows=1
+%% @spacing 24,40
+flowchart LR
+  token["Token"]
+  router["Router"]:::accent
+  experts["Experts"]:::focal
+  out["Output"]
+  token --> router --> experts --> out

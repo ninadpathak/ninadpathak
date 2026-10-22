@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/llm-token-budgets/token-budget.mmd",
+  "hash": "ef48898e443d88d7",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 280,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/llm-token-budgets/token-budget.narrow",
+    "width": 288,
+    "height": 248,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Six turns of a chat, each drawn as one request: the system prompt, the replayed history of every earlier turn, the new message, and the answer. Because history is replayed on every turn, each request is longer than the last.",
+  "caption": "A bot that replays its full history pays for the same tokens again on every message; a 20-message conversation can cost twenty times what the first reply did.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/llm-token-budgets/token-budget.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/llm-token-budgets/token-budget.narrow.svg\" width=\"288\" height=\"248\"><img src=\"/static/images/diagrams/llm-token-budgets/token-budget.svg\" width=\"720\" height=\"280\" alt=\"Six turns of a chat, each drawn as one request: the system prompt, the replayed history of every earlier turn, the new message, and the answer. Because history is replayed on every turn, each request is longer than the last.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A bot that replays its full history pays for the same tokens again on every message; a 20-message conversation can cost twenty times what the first reply did.</figcaption>\n</figure>"
+}

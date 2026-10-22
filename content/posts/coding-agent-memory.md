@@ -50,12 +50,10 @@ Restart the terminal, though, and the session layer is gone. The project files s
 
 The SQLite database, if it exists, holds what the agent chose to record. That uneven combination is what makes the experience feel inconsistent: one day the agent recalls a decision you never wrote down, the next day it forgets a constraint you mentioned an hour ago.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Context Window as Sliding Window</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/context-window-sliding.html" title="Context window sliding: old turns falling off the left edge while newest turns are appended on the right" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/coding-agent-memory/sliding-window.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/coding-agent-memory/sliding-window.narrow.svg" width="288" height="184"><img src="/static/images/diagrams/coding-agent-memory/sliding-window.svg" width="720" height="232" alt="A row of conversation turns with the context window bracketed over the most recent ones. As each new turn is appended on the right, the oldest turns fall off the left edge and out of the model's view." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Restart the terminal and the session layer is gone; only project files and any recorded memory remain.</figcaption>
+</figure>
 
 ## How Memory Serialization Actually Works
 

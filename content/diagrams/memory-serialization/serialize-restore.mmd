@@ -1,0 +1,27 @@
+%% @fig 01
+%% @kicker Serialize, restart, restore
+%% @alt Two sessions across a restart. With serialization, the agent writes its state to a store at session end and restores it after the restart, so the new session starts where the old one stopped. Without it, the restart wipes the session and the agent starts from zero.
+%% @caption A session that cannot be serialized will not survive a restart.
+%% @path s1>store>s2
+%% @glyph s1 | cells fill=0.7
+%% @glyph store | store
+%% @glyph s2 | cells fill=0.7
+%% @glyph t1 | cells fill=0.7
+%% @glyph restart | stop
+%% @glyph t2 | cells fill=0
+flowchart TB
+  subgraph with [Serialized]
+    direction LR
+    s1["Session"]
+    store["Store"]:::accent
+    s2["Restored"]:::focal
+    s1 --> store --> s2
+  end
+  subgraph without [Not serialized]
+    direction LR
+    t1["Session"]
+    restart["Restart"]:::fail
+    t2["Empty"]:::muted
+    t1 --> restart --> t2
+  end
+  with ~~~ without

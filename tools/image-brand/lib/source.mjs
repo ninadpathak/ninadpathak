@@ -6,16 +6,16 @@ import path from 'node:path';
 const LIST_KEYS = new Set(['path', 'glyph', 'dim', 'step', 'callout']);
 const KNOWN = new Set([
   'kind', 'fig', 'kicker', 'alt', 'caption', 'path', 'glyph', 'ring', 'center', 'dim', 'step', 'parts',
-  'callout', 'ratio', 'series', 'unit', 'legend', 'width', 'spacing', 'og-title', 'og-kicker', 'og-url',
+  'callout', 'ratio', 'series', 'unit', 'legend', 'width', 'spacing', 'key', 'og-title', 'og-kicker', 'og-url',
 ]);
 // v2 text components, removed in v3 (GUIDELINE.md §6). Their content belongs in the article.
 const REMOVED = new Set(['note', 'detail', 'table', 'row', 'bar', 'timeline', 'index']);
 
 // Glyphs drawn as a wide strip inside a layer slab (block diagrams); everything else is a tile.
-export const STRIP_GLYPHS = new Set(['queue', 'sram', 'paged', 'quant', 'gpu']);
+export const STRIP_GLYPHS = new Set(['queue', 'sram', 'paged', 'quant', 'gpu', 'sliding', 'budget']);
 const TILE = { w: 56, h: 48 };
 // Glyphs whose drawing is wider than the default tile.
-const TILE_SIZES = { context: { w: 92, h: 48 } };
+const TILE_SIZES = { context: { w: 92, h: 48 }, experts: { w: 168, h: 48 }, plug: { w: 64, h: 48 } };
 const STRIP = { w: 360, h: 46, label: 150 };
 
 const split = (s, sep = '|') => s.split(sep).map((p) => p.trim());
@@ -28,7 +28,7 @@ function parseGlyph(spec, file) {
   for (const t of tokens) {
     const [k, v] = t.split('=');
     if (v === undefined) {
-      if (['lock', 'globe', 'question', 'check', 'cross', 'flag'].includes(k)) opts.badge = k;
+      if (['lock', 'globe', 'question', 'check', 'cross', 'flag', 'person'].includes(k)) opts.badge = k;
       else opts[k] = true;
     } else opts[k] = /^[-\d.]+$/.test(v) ? Number(v) : v.includes(',') ? v.split(',').map(Number) : v;
   }
@@ -63,7 +63,7 @@ export function parseSource(file) {
   meta.glyphs = Object.fromEntries(meta.glyph.map((g) => { const x = parseGlyph(g, file); return [x.id, x]; }));
   meta.dims = meta.dim.map((d) => { const [from, to, label = ''] = split(d); return { from, to, label }; });
   meta.steps = Object.fromEntries(meta.step.map((s) => split(s)));
-  meta.ringSpec = meta.ring ? { ids: split(split(meta.ring)[0], '>'), r: Number(split(meta.ring)[1] || 0) || null } : null;
+  meta.ringSpec = meta.ring ? { ids: split(split(meta.ring)[0], '>'), r: Number(split(meta.ring)[1] || 0) || null, gap: split(meta.ring)[2] ? Number(split(meta.ring)[2]) : undefined } : null;
   meta.centerGlyph = meta.center ? parseGlyph(`center | ${meta.center}`, file) : null;
   meta.partsSpec = meta.parts ? (() => {
     const [target, list] = split(meta.parts);
@@ -72,6 +72,7 @@ export function parseSource(file) {
   meta.callouts = meta.callout.map((c) => c.split(':').map(Number));
   meta.ratioAt = meta.ratio === undefined ? null : Number(meta.ratio);
   meta.seriesNames = meta.series ? split(meta.series, ';') : [];
+  meta.keySpec = meta.key ? meta.key.split(';').map((p) => p.trim()).filter(Boolean).map((p) => p.split('=').map((x) => x.trim())) : null;
   meta.spacingSpec = meta.spacing ? meta.spacing.split(',').map(Number) : null;
 
   let mermaid = body.join('\n').trim();

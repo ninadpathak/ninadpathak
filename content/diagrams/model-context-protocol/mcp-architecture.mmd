@@ -1,0 +1,18 @@
+%% @fig 01
+%% @kicker Request flow: host to client to server and back
+%% @alt An MCP round trip. The host's model produces a tool call, the client carries it across the protocol to the server, and the server runs the tool and returns the result the same way. The server's catalog of tools, each with a JSON Schema, constrains what a valid call looks like.
+%% @caption The schema pins down what a valid call looks like, and the loop gives one clean choke point for auth, rate limits, and audit logging.
+%% @path host>client>server>tools
+%% @glyph host | window
+%% @glyph client | plug
+%% @glyph server | rack
+%% @glyph tools | tools
+%% @spacing 24,48
+flowchart LR
+  host["Host"]
+  client["Client"]:::focal
+  server["Server"]
+  tools["Tools"]:::stack
+  host <--> client
+  client <--> server
+  server <--> tools

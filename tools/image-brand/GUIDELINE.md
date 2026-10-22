@@ -143,6 +143,14 @@ Each glyph lives in `lib/glyphs.js`, draws on a 56 × 48 box (strips: 360 × 46)
 | `paged` *(strip)* | Logical sequences wired to scattered physical blocks | Paging, allocation, or fragmentation | — |
 | `quant` *(strip)* | One weight at 16, 8, and 4 bits, with the freed width bracketed | Precision or compression | — |
 | `gpu` *(strip)* | Chip, memory stacks, interconnect to a second chip | Hardware and memory bandwidth | — |
+| `plug` | Plug meeting a socket | A connector, client, router, or merge point | — |
+| `ranked` | Rows shortening with rank, one in accent | A ranked result list | `rows=n`, `hi=i` |
+| `globe` | Meridians and parallels | The network or the public web | — |
+| `store` | Three stacked cylinder discs | Durable storage | — |
+| `experts` | Grid of cells with a few lit | Sparse selection (`on` of `n`) | `n`, `on`, `cols` |
+| `ledger` | Rows newest-first, superseded rows hatched | Versioned, append-only records | `rows=n` |
+| `sliding` *(strip)* | Turns in a row under a window bracket; old turns fall away, the newest is accent | A sliding context window | — |
+| `budget` *(strip)* | Per-turn bars of system, replayed history, message, answer | Cost that compounds per turn | — |
 
 A new glyph is added to `glyphs.js` and to this table in the same change. Never improvise a one-off drawing inside a figure.
 
@@ -164,6 +172,8 @@ A new glyph is added to `glyphs.js` and to this table in the same change. Never 
 | M12 | Tile bars: one tile per unit, solid versus hatched series, ≤2 callouts, one ratio | Benchmarks and prices (`@callout s:i`, `@ratio i`) |
 | M13 | Span bracket: dimension line labelled by a badge glyph (`:lock`, `:globe`) | Grouping outcomes or layers without words |
 | M14 | Drafting field: dot grid, ruled strips, ruler, crop marks, foot scale bar, registration mark | Always; texture only |
+| M15 | Corner badge (`corner=person`, `cross`, `flag`, …): a badge pinned to any tile's top-right | Ownership (person = a human's stage) or status (cross = failure point) |
+| M16 | Glyph key (`@key solid=…; hatch=…; outline=…; accent=…`): swatches naming fill encodings, wrapping on narrow plates | Any figure whose fills encode categories |
 
 Budget per figure: one hot path, at most two span brackets, at most two value callouts and one ratio, and one centre glyph.
 
@@ -214,6 +224,8 @@ Keep one only when interaction teaches something a drawing can't, such as draggi
 ```
 
 Copy the markup from the figure's `.json`; the `<picture>` appears only when a narrow variant exists. `static/css/figures.css` loads only on pages with an `.np-figure` (the build sets `has_figure`). The link opens the full-size SVG.
+
+**Derived phone variants.** Every article figure gets a phone variant. A hand-written `<id>.narrow.mmd` wins. Otherwise `render.mjs` derives one: 288 px wide, left-to-right flows turned top-to-bottom, block diagrams collapsed to one column with strips under their labels, and rings laid out as a column. A derived variant that doesn't fit at 1:1 is skipped with a warning, and the figure then needs a hand-written one.
 
 **Narrow variant.** Phones and small tablets (≤712 px, where the wide plate's labels would drop below 12 px) get the variant, capped at 360 px (1.25×) and centred, so a tablet never stretches it. A 720 px plate shown at a phone's ~272 px column renders 13 px labels at about 5 px. So any figure whose labels would fall below the §4 floor on a phone needs `<id>.narrow.mmd` beside it, with `@width 288`. Narrow plates drop the ruled coordinate strips and keep 8 px field padding, which leaves 272 px for the diagram at 1:1. That shows labels at ≥12 px on a 320 px screen. Re-flow the figure, don't shrink it: stack subtrees, wrap headings onto two lines, and use the same glyphs and the same word budget. When a straight connector would cross another node, the router detours it past the obstacle.
 

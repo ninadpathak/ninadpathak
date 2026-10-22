@@ -1,0 +1,19 @@
+%% @fig 01
+%% @kicker Agent types by autonomy
+%% @alt The five agent types as a ladder of rising autonomy: reactive information agents, tool-using agents, loop agents, multi-agent systems, and persistent-goal agents. Cost and blast radius climb with each step.
+%% @caption Each step up makes more decisions without a human, and cost and blast radius climb by roughly an order of magnitude at each one.
+%% @path reactive>tooluse>loopag>multi>persistent
+%% @glyph reactive | doc
+%% @glyph tooluse | tools
+%% @glyph loopag | loop
+%% @glyph multi | loop
+%% @glyph persistent | loop corner=flag
+%% @dim reactive | persistent | More autonomy
+%% @spacing 24,28
+flowchart BT
+  reactive["Reactive"]
+  tooluse["Tool-using"]
+  loopag["Loop"]
+  multi["Multi-agent"]:::stack
+  persistent["Persistent goal"]:::focal
+  reactive --> tooluse --> loopag --> multi --> persistent

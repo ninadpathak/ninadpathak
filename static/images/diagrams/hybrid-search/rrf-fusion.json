@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/hybrid-search/rrf-fusion.mmd",
+  "hash": "f1836d90ce935a6e",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 392,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/hybrid-search/rrf-fusion.narrow",
+    "width": 288,
+    "height": 520,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "A BM25 keyword list and a vector list each rank the same documents differently. Reciprocal rank fusion discards their scores and adds 1/(60 + rank) from each list, so the document both retrievers rank highly rises to the top of the fused list.",
+  "caption": "Agreement between the two retrievers becomes the strongest signal; the underlying scores are discarded.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/hybrid-search/rrf-fusion.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/hybrid-search/rrf-fusion.narrow.svg\" width=\"288\" height=\"520\"><img src=\"/static/images/diagrams/hybrid-search/rrf-fusion.svg\" width=\"720\" height=\"392\" alt=\"A BM25 keyword list and a vector list each rank the same documents differently. Reciprocal rank fusion discards their scores and adds 1/(60 + rank) from each list, so the document both retrievers rank highly rises to the top of the fused list.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Agreement between the two retrievers becomes the strongest signal; the underlying scores are discarded.</figcaption>\n</figure>"
+}

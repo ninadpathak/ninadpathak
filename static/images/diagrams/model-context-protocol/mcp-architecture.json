@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/model-context-protocol/mcp-architecture.mmd",
+  "hash": "bfa4b34a703e585a",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 264,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/model-context-protocol/mcp-architecture.narrow",
+    "width": 288,
+    "height": 672,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "An MCP round trip. The host's model produces a tool call, the client carries it across the protocol to the server, and the server runs the tool and returns the result the same way. The server's catalog of tools, each with a JSON Schema, constrains what a valid call looks like.",
+  "caption": "The schema pins down what a valid call looks like, and the loop gives one clean choke point for auth, rate limits, and audit logging.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/model-context-protocol/mcp-architecture.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/model-context-protocol/mcp-architecture.narrow.svg\" width=\"288\" height=\"672\"><img src=\"/static/images/diagrams/model-context-protocol/mcp-architecture.svg\" width=\"720\" height=\"264\" alt=\"An MCP round trip. The host's model produces a tool call, the client carries it across the protocol to the server, and the server runs the tool and returns the result the same way. The server's catalog of tools, each with a JSON Schema, constrains what a valid call looks like.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The schema pins down what a valid call looks like, and the loop gives one clean choke point for auth, rate limits, and audit logging.</figcaption>\n</figure>"
+}

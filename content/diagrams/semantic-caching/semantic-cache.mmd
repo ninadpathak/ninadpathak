@@ -1,0 +1,20 @@
+%% @fig 01
+%% @kicker Semantic cache: hit vs miss
+%% @alt An incoming query is embedded and compared with cached queries by similarity. Above the threshold it is a hit and the cached response returns. Below it is a miss: the full pipeline and model run, and the result is stored in the cache for next time.
+%% @caption GPTCache reports API-call reductions of up to 68.8%, and hits come back 2–10× faster.
+%% @spacing 20,40
+%% @path query>embed>match>cached
+%% @glyph query | reader
+%% @glyph embed | vectors
+%% @glyph match | cells fill=0.6
+%% @glyph cached | doc check
+%% @glyph model | core
+flowchart LR
+  query["Query"]
+  embed["Embed"]
+  match["Similar?"]:::accent
+  cached["Cached"]:::focal
+  model["Model"]
+  query --> embed --> match
+  match -->|yes| cached
+  match -->|no| model

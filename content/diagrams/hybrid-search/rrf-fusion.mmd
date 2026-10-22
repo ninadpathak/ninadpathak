@@ -1,0 +1,18 @@
+%% @fig 01
+%% @kicker Fusing two ranked lists with RRF (k=60)
+%% @alt A BM25 keyword list and a vector list each rank the same documents differently. Reciprocal rank fusion discards their scores and adds 1/(60 + rank) from each list, so the document both retrievers rank highly rises to the top of the fused list.
+%% @caption Agreement between the two retrievers becomes the strongest signal; the underlying scores are discarded.
+%% @path rrf>fused
+%% @glyph bm25 | ranked hi=1
+%% @glyph vec | ranked hi=2
+%% @glyph rrf | plug
+%% @glyph fused | ranked hi=0
+%% @spacing 28,52
+flowchart LR
+  bm25["BM25"]
+  vec["Vector"]
+  rrf["RRF"]:::accent
+  fused["Fused"]:::focal
+  bm25 --> rrf
+  vec --> rrf
+  rrf --> fused
