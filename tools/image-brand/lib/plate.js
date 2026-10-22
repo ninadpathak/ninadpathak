@@ -51,6 +51,35 @@
     }
   };
   window.npPinText = pinAll;
+  // A text line's box with its horizontal extent taken from the pinned width: getBBox reports
+  // glyph ink on Linux and advances on macOS.
+  const lineBox = (t) => {
+    const b = t.getBBox();
+    const w = Number(t.getAttribute('textLength')) || canvasWidth(t);
+    const x = Number(t.getAttribute('x') ?? t.closest('text').getAttribute('x')) || 0;
+    const a = getComputedStyle(t).textAnchor;
+    return { x: a === 'middle' ? x - w / 2 : a === 'end' ? x - w : x, y: b.y, width: w, height: b.height };
+  };
+  // getBBox of a subtree with every text line counted by lineBox.
+  const stableBBox = (root) => {
+    const temps = [], hidden = [];
+    for (const t of root.querySelectorAll('text')) {
+      const lines = t.querySelectorAll(':scope > tspan[x]');
+      for (const line of lines.length ? lines : [t]) {
+        const b = lineBox(line);
+        if (!b.width) continue;
+        const r = el('rect', { x: b.x, y: b.y, width: b.width, height: b.height, fill: 'none' }, t.parentNode);
+        if (t.getAttribute('transform')) r.setAttribute('transform', t.getAttribute('transform'));
+        temps.push(r);
+      }
+      hidden.push([t, t.style.display]);
+      t.style.display = 'none';
+    }
+    const bb = root.getBBox();
+    temps.forEach((r) => r.remove());
+    for (const [t, d] of hidden) t.style.display = d;
+    return bb;
+  };
   const width = pin;
   const parsePoints = (d) => [...d.matchAll(/(-?\d*\.?\d+),(-?\d*\.?\d+)/g)].map((m) => [Number(m[1]), Number(m[2])]);
   const fail = (src, msg) => { throw new Error(`${src.id}: ${msg}`); };
@@ -507,7 +536,7 @@
     svg.appendChild(clusterLabels);
     pinAll(clusterLabels);
     for (const head of clusterLabels.querySelectorAll('.np-cluster-head')) {
-      const b = head.querySelector('.pele-cluster-label').getBBox();
+      const b = lineBox(head.querySelector('.pele-cluster-label'));
       const m = head.querySelector('.np-cluster-mask');
       for (const [k, v] of Object.entries({ x: b.x - 16, y: b.y - 3, width: b.width + 22, height: b.height + 6, rx: T.radius.label })) m.setAttribute(k, r2(v));
     }
@@ -682,7 +711,7 @@
 
   function fit(svg, maxW, maxH, minScale, maxScale, src, margin = 6) {
     pinAll(svg);
-    const bb = svg.getBBox();
+    const bb = stableBBox(svg);
     const x0 = bb.x - margin, y0 = bb.y - margin, cw = bb.width + 2 * margin, ch = bb.height + 2 * margin;
     svg.setAttribute('viewBox', `${r2(x0)} ${r2(y0)} ${r2(cw)} ${r2(ch)}`);
     const s = Math.min(maxScale, maxW / cw, maxH ? maxH / ch : Infinity);
@@ -711,7 +740,7 @@
     const facts = brandDiagram(svg, src, T, src.id);
     drawDims(svg, src, facts.nodes);
     if (src.meta.seriesNames.length) {
-      const bb = svg.getBBox();
+      const bb = stableBBox(svg);
       const { g, w } = seriesKey(svg, src, src.id);
       g.setAttribute('transform', `translate(${r2(bb.x + bb.width - w)},${r2(bb.y - 18)})`);
     }
