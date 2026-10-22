@@ -1,0 +1,10 @@
+%% @fig 03
+%% @kicker Bits per dimension
+%% @alt Binary quantization stores each dimension in one bit instead of 32: every float32 value collapses to 1 if it is positive and 0 otherwise, a 32-fold cut in memory that also replaces floating-point dot products with XOR-based Hamming distance.
+%% @caption Keeping only the sign of each value cuts memory 32×, at the cost of some recall.
+%% @callout 1:0
+%% @callout 1:1
+xychart-beta horizontal
+  x-axis ["Float32", "Binary"]
+  y-axis "Bits per dimension" 0 --> 36
+  bar [32, 1]

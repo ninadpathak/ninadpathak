@@ -25,12 +25,10 @@ Local retrieval can remove a network round trip from an interactive search path.
 
 Moving retrieval into the browser removes the first half of that latency chain entirely, and the box starts keeping up with the typist.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Local-first WASM lifecycle: the loading sequence</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/wasm-vdb-sequence.html" title="WASM VDB Sequence" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/browser-vector-search/wasm-lifecycle.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/browser-vector-search/wasm-lifecycle.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/browser-vector-search/wasm-lifecycle.svg" width="720" height="256" alt="Vector search in the browser spans three environments. The main thread spawns a Web Worker, the worker loads the WebAssembly engine into the WASM memory heap, where PGlite runs a full Postgres instance or SQLite-vec runs as an extension, and once the engine is ready the first vector query runs locally on the device." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The main thread never blocks: the worker owns the engine, and every query stays on the device.</figcaption>
+</figure>
 
 Implementing vector search in WASM means juggling three distinct environments: the main thread, the Web Worker, and the WASM memory heap. PGlite runs a full Postgres instance inside that heap.
 
@@ -49,12 +47,10 @@ PGlite brings the industry-standard `pgvector` implementation to the edge. Its p
 
 [HNSW](/glossary/hierarchical-navigable-small-world-hnsw/) is a graph-based index for approximate nearest-neighbor search, using graph navigation instead of comparing the query with every stored vector.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Search complexity: flat vs indexing</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/wasm-vdb-indexing.html" title="WASM VDB Complexity" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/browser-vector-search/search-complexity.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/browser-vector-search/search-complexity.narrow.svg" width="288" height="472"><img class="np-has-narrow" src="/static/images/diagrams/browser-vector-search/search-complexity.svg" width="720" height="392" alt="A query vector can be answered two ways. A flat scan compares the query with every stored vector, so its work grows with the number of vectors. An HNSW graph index navigates sparse long-distance links first and compares only a small set of candidate vectors near the answer." loading="lazy" decoding="async"></picture></a>
+  <figcaption>HNSW compares fewer candidates; wider vectors still make each comparison cost more on both engines.</figcaption>
+</figure>
 
 
 The graph works like the express layers of a subway map: instead of stopping at every station, a query hops along sparse long-distance edges first, then drops down to local stops only near the answer.
@@ -66,12 +62,10 @@ In its stable release, v0.1.9 from 2026-03-31, SQLite-vec answers a KNN query wi
 
 Quantization shaves the precision off each dimension to save memory and speed up the arithmetic.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Binary quantization: mapping and reduction</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/wasm-vdb-binary.html" title="WASM VDB Binary Quantization" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/browser-vector-search/binary-quantization.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/browser-vector-search/binary-quantization.narrow.svg" width="288" height="416"><img class="np-has-narrow" src="/static/images/diagrams/browser-vector-search/binary-quantization.svg" width="720" height="472" alt="Binary quantization stores each dimension in one bit instead of 32: every float32 value collapses to 1 if it is positive and 0 otherwise, a 32-fold cut in memory that also replaces floating-point dot products with XOR-based Hamming distance." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Keeping only the sign of each value cuts memory 32×, at the cost of some recall.</figcaption>
+</figure>
 
 Binary quantization is the most aggressive form of this optimization. Each 32-bit floating point dimension collapses to a single bit based on whether the value is positive or negative, like throwing away the exact GPS coordinates and keeping only which side of the street something sits on.
 
@@ -110,12 +104,10 @@ Your retrieval compute budget quietly migrates off the AWS bill and onto the use
 
 Picking between these two engines comes down to your application's data model and scale.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Architectural decision matrix</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/wasm-vdb-comparison.html" title="WASM VDB Summary" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/browser-vector-search/engine-choice.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/browser-vector-search/engine-choice.narrow.svg" width="288" height="368"><img class="np-has-narrow" src="/static/images/diagrams/browser-vector-search/engine-choice.svg" width="720" height="432" alt="Choosing the engine starts with the data model. If search results must join relational metadata, filter on JSONB, combine with BM25 full-text search, or sync with a backend Postgres, choose PGlite, a full Postgres runtime in WebAssembly with pgvector's HNSW index. Otherwise, for a bounded corpus such as a local documentation assistant, SQLite-vec's extension with brute-force KNN search keeps deployment simpler." loading="lazy" decoding="async"></picture></a>
+  <figcaption>PGlite brings a real relational database and HNSW; SQLite-vec trades those for a simpler extension.</figcaption>
+</figure>
 
 PGlite is the correct choice for applications that need a real relational database. If your search results must be joined with complex metadata, filtered via JSONB, or [combined with BM25 full-text search in a hybrid retrieval setup](/articles/hybrid-search/), or synced with a backend Postgres instance, the PGlite bundle size is a small price to pay.
 

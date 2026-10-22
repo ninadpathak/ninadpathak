@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/browser-vector-search/search-complexity.mmd",
+  "hash": "a010522c1bbb5741",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 392,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/browser-vector-search/search-complexity.narrow",
+    "width": 288,
+    "height": 472,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "A query vector can be answered two ways. A flat scan compares the query with every stored vector, so its work grows with the number of vectors. An HNSW graph index navigates sparse long-distance links first and compares only a small set of candidate vectors near the answer.",
+  "caption": "HNSW compares fewer candidates; wider vectors still make each comparison cost more on both engines.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/browser-vector-search/search-complexity.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/browser-vector-search/search-complexity.narrow.svg\" width=\"288\" height=\"472\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/browser-vector-search/search-complexity.svg\" width=\"720\" height=\"392\" alt=\"A query vector can be answered two ways. A flat scan compares the query with every stored vector, so its work grows with the number of vectors. An HNSW graph index navigates sparse long-distance links first and compares only a small set of candidate vectors near the answer.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>HNSW compares fewer candidates; wider vectors still make each comparison cost more on both engines.</figcaption>\n</figure>"
+}

@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/browser-vector-search/engine-choice.mmd",
+  "hash": "e09cc5b461f67518",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 432,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/browser-vector-search/engine-choice.narrow",
+    "width": 288,
+    "height": 368,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Choosing the engine starts with the data model. If search results must join relational metadata, filter on JSONB, combine with BM25 full-text search, or sync with a backend Postgres, choose PGlite, a full Postgres runtime in WebAssembly with pgvector's HNSW index. Otherwise, for a bounded corpus such as a local documentation assistant, SQLite-vec's extension with brute-force KNN search keeps deployment simpler.",
+  "caption": "PGlite brings a real relational database and HNSW; SQLite-vec trades those for a simpler extension.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/browser-vector-search/engine-choice.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/browser-vector-search/engine-choice.narrow.svg\" width=\"288\" height=\"368\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/browser-vector-search/engine-choice.svg\" width=\"720\" height=\"432\" alt=\"Choosing the engine starts with the data model. If search results must join relational metadata, filter on JSONB, combine with BM25 full-text search, or sync with a backend Postgres, choose PGlite, a full Postgres runtime in WebAssembly with pgvector's HNSW index. Otherwise, for a bounded corpus such as a local documentation assistant, SQLite-vec's extension with brute-force KNN search keeps deployment simpler.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>PGlite brings a real relational database and HNSW; SQLite-vec trades those for a simpler extension.</figcaption>\n</figure>"
+}

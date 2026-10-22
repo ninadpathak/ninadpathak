@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/browser-vector-search/wasm-lifecycle.mmd",
+  "hash": "87fd2ad7c8b6c570",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 256,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/browser-vector-search/wasm-lifecycle.narrow",
+    "width": 288,
+    "height": 544,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Vector search in the browser spans three environments. The main thread spawns a Web Worker, the worker loads the WebAssembly engine into the WASM memory heap, where PGlite runs a full Postgres instance or SQLite-vec runs as an extension, and once the engine is ready the first vector query runs locally on the device.",
+  "caption": "The main thread never blocks: the worker owns the engine, and every query stays on the device.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/browser-vector-search/wasm-lifecycle.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/browser-vector-search/wasm-lifecycle.narrow.svg\" width=\"288\" height=\"544\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/browser-vector-search/wasm-lifecycle.svg\" width=\"720\" height=\"256\" alt=\"Vector search in the browser spans three environments. The main thread spawns a Web Worker, the worker loads the WebAssembly engine into the WASM memory heap, where PGlite runs a full Postgres instance or SQLite-vec runs as an extension, and once the engine is ready the first vector query runs locally on the device.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The main thread never blocks: the worker owns the engine, and every query stays on the device.</figcaption>\n</figure>"
+}

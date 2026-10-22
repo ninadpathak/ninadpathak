@@ -1,0 +1,15 @@
+%% @fig 04
+%% @kicker PGlite or SQLite-vec
+%% @alt Choosing the engine starts with the data model. If search results must join relational metadata, filter on JSONB, combine with BM25 full-text search, or sync with a backend Postgres, choose PGlite, a full Postgres runtime in WebAssembly with pgvector's HNSW index. Otherwise, for a bounded corpus such as a local documentation assistant, SQLite-vec's extension with brute-force KNN search keeps deployment simpler.
+%% @caption PGlite brings a real relational database and HNSW; SQLite-vec trades those for a simpler extension.
+%% @path app>pglite
+%% @glyph app | window
+%% @glyph pglite | store
+%% @glyph sqlite | plug
+%% @spacing 48,48
+flowchart TB
+  app["Relational data?"]:::accent
+  pglite["PGlite"]:::focal
+  sqlite["SQLite-vec"]
+  app -->|yes| pglite
+  app -->|no| sqlite

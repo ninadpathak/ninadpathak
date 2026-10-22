@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/browser-vector-search/binary-quantization.mmd",
+  "hash": "5b25b6f34a41e8a8",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 472,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/browser-vector-search/binary-quantization.narrow",
+    "width": 288,
+    "height": 416,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Binary quantization stores each dimension in one bit instead of 32: every float32 value collapses to 1 if it is positive and 0 otherwise, a 32-fold cut in memory that also replaces floating-point dot products with XOR-based Hamming distance.",
+  "caption": "Keeping only the sign of each value cuts memory 32×, at the cost of some recall.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/browser-vector-search/binary-quantization.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/browser-vector-search/binary-quantization.narrow.svg\" width=\"288\" height=\"416\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/browser-vector-search/binary-quantization.svg\" width=\"720\" height=\"472\" alt=\"Binary quantization stores each dimension in one bit instead of 32: every float32 value collapses to 1 if it is positive and 0 otherwise, a 32-fold cut in memory that also replaces floating-point dot products with XOR-based Hamming distance.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Keeping only the sign of each value cuts memory 32×, at the cost of some recall.</figcaption>\n</figure>"
+}
