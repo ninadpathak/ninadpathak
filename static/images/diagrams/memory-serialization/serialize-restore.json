@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/memory-serialization/serialize-restore.mmd",
-  "hash": "7b381d84298af32e",
+  "hash": "0f814e1031328bad",
   "pele": "1.8.0",
   "width": 720,
   "height": 544,
@@ -20,5 +20,5 @@
   },
   "alt": "Two sessions across a restart. With serialization, the agent writes its state to a store at session end and restores it after the restart, so the new session starts where the old one stopped. Without it, the restart wipes the session and the agent starts from zero.",
   "caption": "A session that cannot be serialized will not survive a restart.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/memory-serialization/serialize-restore.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/memory-serialization/serialize-restore.narrow.svg\" width=\"288\" height=\"1176\"><img src=\"/static/images/diagrams/memory-serialization/serialize-restore.svg\" width=\"720\" height=\"544\" alt=\"Two sessions across a restart. With serialization, the agent writes its state to a store at session end and restores it after the restart, so the new session starts where the old one stopped. Without it, the restart wipes the session and the agent starts from zero.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A session that cannot be serialized will not survive a restart.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/memory-serialization/serialize-restore.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/memory-serialization/serialize-restore.narrow.svg\" width=\"288\" height=\"1176\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/memory-serialization/serialize-restore.svg\" width=\"720\" height=\"544\" alt=\"Two sessions across a restart. With serialization, the agent writes its state to a store at session end and restores it after the restart, so the new session starts where the old one stopped. Without it, the restart wipes the session and the agent starts from zero.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A session that cannot be serialized will not survive a restart.</figcaption>\n</figure>"
 }

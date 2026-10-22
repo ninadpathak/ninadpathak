@@ -39,7 +39,7 @@ Why this translates to cost savings comes down to the memory bandwidth bottlenec
 Activating only 37B parameters per forward pass means you do only 37B parameters worth of that weight loading, not 671B worth. A 671B MoE model running 37B active parameters per token moves roughly as many bytes off memory per token as a 37B dense model.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/mixture-of-experts/moe-routing.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/mixture-of-experts/moe-routing.narrow.svg" width="288" height="648"><img src="/static/images/diagrams/mixture-of-experts/moe-routing.svg" width="720" height="256" alt="Each token passes through a router that activates 8 of 256 experts; the other 248 stay idle. A 671B mixture-of-experts model with 37B active parameters moves roughly as many bytes from memory per token as a 37B dense model." loading="lazy" decoding="async"></picture></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/mixture-of-experts/moe-routing.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/mixture-of-experts/moe-routing.narrow.svg" width="288" height="664"><img class="np-has-narrow" src="/static/images/diagrams/mixture-of-experts/moe-routing.svg" width="720" height="256" alt="Each token passes through a router that activates 8 of 256 experts; the other 248 stay idle. A 671B mixture-of-experts model with 37B active parameters moves roughly as many bytes from memory per token as a 37B dense model." loading="lazy" decoding="async"></picture></a>
   <figcaption>Compute follows the active experts, but all 256 still have to sit in memory.</figcaption>
 </figure>
 

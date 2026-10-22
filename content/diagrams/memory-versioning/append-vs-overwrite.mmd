@@ -1,13 +1,13 @@
 %% @fig 01
 %% @kicker Append-only vs overwrite
-%% @alt Two ways to change a memory. The append-only ledger inserts a new row and stamps the old one as superseded, so v1, v2, and v3 all remain and any point in time can be recovered. A destructive update overwrites the row and the prior state is gone.
+%% @alt Two ways to change a memory. The append-only ledger inserts a new row and stamps the old one as superseded, so v1, v2, and v3 all remain and any point in time can be recovered. A destructive update overwrites the row: v2 replaces v1, and the prior state is gone.
 %% @caption Inserting a new row and stamping valid_to on the old one gives point-in-time recovery for free.
 %% @path v1>v2>v3
 %% @glyph v1 | ledger rows=1
 %% @glyph v2 | ledger rows=2
 %% @glyph v3 | ledger rows=3
-%% @glyph old | doc
-%% @glyph gone | doc cross
+%% @glyph old | doc cross
+%% @glyph gone | doc
 flowchart TB
   subgraph append [Append-only]
     direction LR
@@ -18,8 +18,8 @@ flowchart TB
   end
   subgraph overwrite [Overwrite]
     direction LR
-    old["v1"]
-    gone["v2"]:::fail
+    old["v1"]:::fail
+    gone["v2"]
     old --> gone
   end
   append ~~~ overwrite

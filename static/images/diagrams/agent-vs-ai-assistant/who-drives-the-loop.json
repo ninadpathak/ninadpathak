@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/agent-vs-ai-assistant/who-drives-the-loop.mmd",
-  "hash": "bdfe13d494697f69",
+  "hash": "42cc1af0305cb416",
   "pele": "1.8.0",
   "width": 720,
   "height": 544,
@@ -20,5 +20,5 @@
   },
   "alt": "Two systems side by side. In the assistant, the human sends each prompt and reads each response, so the loop lives in the human's workflow. In the agent, the human sets a goal once and the system runs its own loop until it returns a result.",
   "caption": "An assistant answers each turn you drive. An agent drives its own loop, and you check the result.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.narrow.svg\" width=\"288\" height=\"1000\"><img src=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg\" width=\"720\" height=\"544\" alt=\"Two systems side by side. In the assistant, the human sends each prompt and reads each response, so the loop lives in the human's workflow. In the agent, the human sets a goal once and the system runs its own loop until it returns a result.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>An assistant answers each turn you drive. An agent drives its own loop, and you check the result.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.narrow.svg\" width=\"288\" height=\"1000\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg\" width=\"720\" height=\"544\" alt=\"Two systems side by side. In the assistant, the human sends each prompt and reads each response, so the loop lives in the human's workflow. In the agent, the human sets a goal once and the system runs its own loop until it returns a result.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>An assistant answers each turn you drive. An agent drives its own loop, and you check the result.</figcaption>\n</figure>"
 }

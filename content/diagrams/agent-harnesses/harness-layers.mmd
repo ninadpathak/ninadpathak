@@ -1,6 +1,6 @@
 %% @fig 01
 %% @kicker Harness layers around the raw LLM
-%% @alt The agent harness sits between the application and the model. Inside it, the execution loop calls tools in both directions, checkpoints state, and logs every step to an observer, and the prompt assembler builds the prompt the model receives. The model only reasons.
+%% @alt The agent harness sits between the application and the model. Its five components are the execution loop, the tool registry the loop calls in both directions, the prompt assembler that builds the prompt the model receives, the state manager that holds checkpoints, and the observer that logs every step. The model only reasons.
 %% @caption The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.
 %% @path app>loop>prompt>llm
 %% @glyph app | window
@@ -13,17 +13,21 @@
 flowchart TB
   app["App"]:::external
   subgraph harness [Harness]
-    direction LR
-    loop["Loop"]:::accent
-    prompt["Prompt"]:::accent
+    direction TB
+    subgraph row1 [ ]
+      direction LR
+      tools["Tool registry"]:::stack
+      loop["Loop"]:::accent
+    end
     state["State"]
+    prompt["Prompt"]:::accent
     observer["Observer"]
   end
   llm["Model"]:::focal
-  tools["Tools"]:::stack
   app --> loop
-  loop --> prompt
-  prompt --> llm
-  loop <--> tools
+  tools <--> loop
   loop --> state
+  loop --> prompt
   loop -.-> observer
+  prompt --> llm
+  class row1 ghost

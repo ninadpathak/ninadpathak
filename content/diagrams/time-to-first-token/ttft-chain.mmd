@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker TTFT chain
 %% @alt The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput.
-%% @caption Prefill cost scales with prompt length, so 40k tokens of retrieved documents can turn snappy into painful.
+%% @caption Prefill cost scales with prompt length: a 200-token question returns far faster than the same request with 40k tokens of retrieved documents in front of it.
 %% @path net>queue>prefill>first
 %% @glyph net | globe
 %% @glyph queue | inbox

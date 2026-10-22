@@ -53,8 +53,8 @@ Across query categories, [GPTCache](https://arxiv.org/abs/2411.05276) reports AP
 Speed improvement on hits is 2-10x depending on your LLM's baseline latency.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/semantic-caching/semantic-cache.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/semantic-caching/semantic-cache.narrow.svg" width="288" height="664"><img src="/static/images/diagrams/semantic-caching/semantic-cache.svg" width="720" height="384" alt="An incoming query is embedded and compared with cached queries by similarity. Above the threshold it is a hit and the cached response returns. Below it is a miss: the full pipeline and model run, and the result is stored in the cache for next time." loading="lazy" decoding="async"></picture></a>
-  <figcaption>GPTCache reports API-call reductions of up to 68.8%, and hits come back 2–10× faster.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/semantic-caching/semantic-cache.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/semantic-caching/semantic-cache.narrow.svg" width="288" height="664"><img class="np-has-narrow" src="/static/images/diagrams/semantic-caching/semantic-cache.svg" width="720" height="384" alt="An incoming query is embedded and compared with cached queries by similarity. Above the threshold it is a hit and the cached response returns. Below it is a miss, and the full pipeline and model run." loading="lazy" decoding="async"></picture></a>
+  <figcaption>On a miss the result is stored for next time. GPTCache reports API-call reductions of up to 68.8%, and hits come back 2–10× faster.</figcaption>
 </figure>
 
 ## Similarity threshold tuning: the number that determines everything

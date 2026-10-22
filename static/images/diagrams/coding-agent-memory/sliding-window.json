@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/coding-agent-memory/sliding-window.mmd",
-  "hash": "8bbb277ad4fd8f46",
+  "hash": "57d09f222e311bc5",
   "pele": "1.8.0",
   "width": 720,
   "height": 232,
@@ -12,13 +12,13 @@
   "narrow": {
     "rel": "/static/images/diagrams/coding-agent-memory/sliding-window.narrow",
     "width": 288,
-    "height": 184,
+    "height": 200,
     "minText": {
       "sans": 13,
       "mono": 11
     }
   },
   "alt": "A row of conversation turns with the context window bracketed over the most recent ones. As each new turn is appended on the right, the oldest turns fall off the left edge and out of the model's view.",
-  "caption": "Restart the terminal and the session layer is gone; only project files and any recorded memory remain.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/coding-agent-memory/sliding-window.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/coding-agent-memory/sliding-window.narrow.svg\" width=\"288\" height=\"184\"><img src=\"/static/images/diagrams/coding-agent-memory/sliding-window.svg\" width=\"720\" height=\"232\" alt=\"A row of conversation turns with the context window bracketed over the most recent ones. As each new turn is appended on the right, the oldest turns fall off the left edge and out of the model's view.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Restart the terminal and the session layer is gone; only project files and any recorded memory remain.</figcaption>\n</figure>"
+  "caption": "Each new turn joins on the right while the oldest fall off the left edge and out of the model's view.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/coding-agent-memory/sliding-window.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/coding-agent-memory/sliding-window.narrow.svg\" width=\"288\" height=\"200\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/coding-agent-memory/sliding-window.svg\" width=\"720\" height=\"232\" alt=\"A row of conversation turns with the context window bracketed over the most recent ones. As each new turn is appended on the right, the oldest turns fall off the left edge and out of the model's view.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each new turn joins on the right while the oldest fall off the left edge and out of the model's view.</figcaption>\n</figure>"
 }

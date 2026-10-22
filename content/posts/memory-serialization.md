@@ -24,7 +24,7 @@ Kill that process and you have nothing left to greet anyone with.
 Serialization is the problem underneath all of it, and it fights back harder than a first pass suggests.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/memory-serialization/serialize-restore.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/memory-serialization/serialize-restore.narrow.svg" width="288" height="1176"><img src="/static/images/diagrams/memory-serialization/serialize-restore.svg" width="720" height="544" alt="Two sessions across a restart. With serialization, the agent writes its state to a store at session end and restores it after the restart, so the new session starts where the old one stopped. Without it, the restart wipes the session and the agent starts from zero." loading="lazy" decoding="async"></picture></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/memory-serialization/serialize-restore.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/memory-serialization/serialize-restore.narrow.svg" width="288" height="1176"><img class="np-has-narrow" src="/static/images/diagrams/memory-serialization/serialize-restore.svg" width="720" height="544" alt="Two sessions across a restart. With serialization, the agent writes its state to a store at session end and restores it after the restart, so the new session starts where the old one stopped. Without it, the restart wipes the session and the agent starts from zero." loading="lazy" decoding="async"></picture></a>
   <figcaption>A session that cannot be serialized will not survive a restart.</figcaption>
 </figure>
 

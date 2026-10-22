@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/agentic-workflows/workflow-pipeline.mmd",
-  "hash": "bdf04219e7309d02",
+  "hash": "e8ba5ac7947d5f27",
   "pele": "1.8.0",
   "width": 720,
   "height": 264,
@@ -12,7 +12,7 @@
   "narrow": {
     "rel": "/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow",
     "width": 288,
-    "height": 760,
+    "height": 776,
     "minText": {
       "sans": 13,
       "mono": 11
@@ -20,5 +20,5 @@
   },
   "alt": "Five stages left to right: frame the task, scope it down, let the agent work against an instrumented loop, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop.",
   "caption": "Two stages are mine, one is the agent's, and scoping and landing are the seams between them.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agentic-workflows/workflow-pipeline.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow.svg\" width=\"288\" height=\"760\"><img src=\"/static/images/diagrams/agentic-workflows/workflow-pipeline.svg\" width=\"720\" height=\"264\" alt=\"Five stages left to right: frame the task, scope it down, let the agent work against an instrumented loop, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Two stages are mine, one is the agent's, and scoping and landing are the seams between them.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agentic-workflows/workflow-pipeline.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow.svg\" width=\"288\" height=\"776\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agentic-workflows/workflow-pipeline.svg\" width=\"720\" height=\"264\" alt=\"Five stages left to right: frame the task, scope it down, let the agent work against an instrumented loop, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Two stages are mine, one is the agent's, and scoping and landing are the seams between them.</figcaption>\n</figure>"
 }

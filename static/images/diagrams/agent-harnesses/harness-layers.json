@@ -1,9 +1,9 @@
 {
   "source": "content/diagrams/agent-harnesses/harness-layers.mmd",
-  "hash": "3e4a8c2edae96e9b",
+  "hash": "c9662cc7f79e00ed",
   "pele": "1.8.0",
   "width": 720,
-  "height": 928,
+  "height": 912,
   "scale": 1,
   "minText": {
     "sans": 13,
@@ -12,13 +12,13 @@
   "narrow": {
     "rel": "/static/images/diagrams/agent-harnesses/harness-layers.narrow",
     "width": 288,
-    "height": 864,
+    "height": 1000,
     "minText": {
       "sans": 13,
       "mono": 9.5
     }
   },
-  "alt": "The agent harness sits between the application and the model. Inside it, the execution loop calls tools in both directions, checkpoints state, and logs every step to an observer, and the prompt assembler builds the prompt the model receives. The model only reasons.",
+  "alt": "The agent harness sits between the application and the model. Its five components are the execution loop, the tool registry the loop calls in both directions, the prompt assembler that builds the prompt the model receives, the state manager that holds checkpoints, and the observer that logs every step. The model only reasons.",
   "caption": "The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-harnesses/harness-layers.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/agent-harnesses/harness-layers.narrow.svg\" width=\"288\" height=\"864\"><img src=\"/static/images/diagrams/agent-harnesses/harness-layers.svg\" width=\"720\" height=\"928\" alt=\"The agent harness sits between the application and the model. Inside it, the execution loop calls tools in both directions, checkpoints state, and logs every step to an observer, and the prompt assembler builds the prompt the model receives. The model only reasons.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-harnesses/harness-layers.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-harnesses/harness-layers.narrow.svg\" width=\"288\" height=\"1000\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-harnesses/harness-layers.svg\" width=\"720\" height=\"912\" alt=\"The agent harness sits between the application and the model. Its five components are the execution loop, the tool registry the loop calls in both directions, the prompt assembler that builds the prompt the model receives, the state manager that holds checkpoints, and the observer that logs every step. The model only reasons.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.</figcaption>\n</figure>"
 }

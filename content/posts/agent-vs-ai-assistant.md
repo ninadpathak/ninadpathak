@@ -33,7 +33,7 @@ You guide every hole the drill makes. The Roomba decides its own path across the
 Simple as the split sounds, it has real consequences for how you build, how you pay, and how you debug.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.narrow.svg" width="288" height="1000"><img src="/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg" width="720" height="544" alt="Two systems side by side. In the assistant, the human sends each prompt and reads each response, so the loop lives in the human's workflow. In the agent, the human sets a goal once and the system runs its own loop until it returns a result." loading="lazy" decoding="async"></picture></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.narrow.svg" width="288" height="1000"><img class="np-has-narrow" src="/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg" width="720" height="544" alt="Two systems side by side. In the assistant, the human sends each prompt and reads each response, so the loop lives in the human's workflow. In the agent, the human sets a goal once and the system runs its own loop until it returns a result." loading="lazy" decoding="async"></picture></a>
   <figcaption>An assistant answers each turn you drive. An agent drives its own loop, and you check the result.</figcaption>
 </figure>
 

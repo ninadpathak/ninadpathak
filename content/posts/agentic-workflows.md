@@ -27,7 +27,7 @@ I think about the whole thing as [flow engineering](/glossary/flow-engineering/)
 My job is the outer loop around it, and that outer loop has barely changed across three generations of models.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow.svg" width="288" height="760"><img src="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg" width="720" height="264" alt="Five stages left to right: frame the task, scope it down, let the agent work against an instrumented loop, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop." loading="lazy" decoding="async"></picture></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg" width="720" height="264" alt="Five stages left to right: frame the task, scope it down, let the agent work against an instrumented loop, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop." loading="lazy" decoding="async"></picture></a>
   <figcaption>Two stages are mine, one is the agent's, and scoping and landing are the seams between them.</figcaption>
 </figure>
 

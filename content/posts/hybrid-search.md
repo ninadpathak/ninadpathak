@@ -61,7 +61,7 @@ Sitting at rank 100 in both lists, a document scores `0.0099 + 0.0099 = 0.0198` 
 Agreement between the two retrievers becomes the strongest signal, which is exactly the behavior you want.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/hybrid-search/rrf-fusion.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/hybrid-search/rrf-fusion.narrow.svg" width="288" height="520"><img src="/static/images/diagrams/hybrid-search/rrf-fusion.svg" width="720" height="392" alt="A BM25 keyword list and a vector list each rank the same documents differently. Reciprocal rank fusion discards their scores and adds 1/(60 + rank) from each list, so the document both retrievers rank highly rises to the top of the fused list." loading="lazy" decoding="async"></picture></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/hybrid-search/rrf-fusion.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/hybrid-search/rrf-fusion.narrow.svg" width="288" height="536"><img class="np-has-narrow" src="/static/images/diagrams/hybrid-search/rrf-fusion.svg" width="720" height="392" alt="A BM25 keyword list and a vector list each rank the same documents differently. Reciprocal rank fusion discards their scores and adds 1/(60 + rank) from each list, so the document both retrievers rank highly rises to the top of the fused list." loading="lazy" decoding="async"></picture></a>
   <figcaption>Agreement between the two retrievers becomes the strongest signal; the underlying scores are discarded.</figcaption>
 </figure>
 

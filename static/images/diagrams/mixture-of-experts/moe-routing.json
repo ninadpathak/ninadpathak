@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/mixture-of-experts/moe-routing.mmd",
-  "hash": "504cfdac6e1f85a4",
+  "hash": "4128e2ab8876a982",
   "pele": "1.8.0",
   "width": 720,
   "height": 256,
@@ -12,7 +12,7 @@
   "narrow": {
     "rel": "/static/images/diagrams/mixture-of-experts/moe-routing.narrow",
     "width": 288,
-    "height": 648,
+    "height": 664,
     "minText": {
       "sans": 13,
       "mono": 9.5
@@ -20,5 +20,5 @@
   },
   "alt": "Each token passes through a router that activates 8 of 256 experts; the other 248 stay idle. A 671B mixture-of-experts model with 37B active parameters moves roughly as many bytes from memory per token as a 37B dense model.",
   "caption": "Compute follows the active experts, but all 256 still have to sit in memory.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/mixture-of-experts/moe-routing.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/mixture-of-experts/moe-routing.narrow.svg\" width=\"288\" height=\"648\"><img src=\"/static/images/diagrams/mixture-of-experts/moe-routing.svg\" width=\"720\" height=\"256\" alt=\"Each token passes through a router that activates 8 of 256 experts; the other 248 stay idle. A 671B mixture-of-experts model with 37B active parameters moves roughly as many bytes from memory per token as a 37B dense model.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Compute follows the active experts, but all 256 still have to sit in memory.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/mixture-of-experts/moe-routing.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/mixture-of-experts/moe-routing.narrow.svg\" width=\"288\" height=\"664\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/mixture-of-experts/moe-routing.svg\" width=\"720\" height=\"256\" alt=\"Each token passes through a router that activates 8 of 256 experts; the other 248 stay idle. A 671B mixture-of-experts model with 37B active parameters moves roughly as many bytes from memory per token as a 37B dense model.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Compute follows the active experts, but all 256 still have to sit in memory.</figcaption>\n</figure>"
 }

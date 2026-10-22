@@ -170,9 +170,15 @@
       const markers = paths.filter((m) => m.classList.contains('pele-marker'));
       edges.push({ g, id, from, to, line: paths.find((p) => !p.classList.contains('pele-marker')), markers });
     }
+    // Diagonal neighbours follow the flowchart's main direction when both gaps are real,
+    // so a top-to-bottom chart keeps its edges on the vertical buses.
+    const vertical = !/^(LR|RL)$/.test(svg.dataset.direction || 'TB');
     const relation = (s, t) => {
       const gaps = { down: t.t - s.b, up: s.t - t.b, right: t.l - s.r, left: s.l - t.r };
-      const best = Object.entries(gaps).filter(([, v]) => v >= 6).sort((a, b) => b[1] - a[1])[0];
+      const open = Object.entries(gaps).filter(([, v]) => v >= 6);
+      const v = open.filter(([k]) => k === 'down' || k === 'up'), h = open.filter(([k]) => k === 'right' || k === 'left');
+      if (v.length && h.length && v[0][1] >= 20 && h[0][1] >= 20) return (vertical ? v : h)[0][0];
+      const best = open.sort((a, b) => b[1] - a[1])[0];
       return best ? best[0] : null;
     };
     const all = [...nodes.values()];
@@ -501,6 +507,7 @@
     const used = new Set();
     const meta = src.meta;
     svg.classList.add('np-diagram');
+    svg.dataset.direction = src.direction || 'TB';
     svg.removeAttribute('width');
     svg.removeAttribute('height');
 
@@ -508,7 +515,10 @@
     const clusterLabels = el('g', { class: 'np-cluster-labels' }, svg);
     for (const cluster of svg.querySelectorAll('.pele-cluster')) {
       const rect = cluster.querySelector('rect');
-      const label = cluster.querySelector('.pele-cluster-label');
+      // Pele sometimes draws a cluster's title in a separate group with a halo copy.
+      const titleGroup = svg.querySelector(`.pele-cluster-title[data-id="${CSS.escape(cluster.getAttribute('data-id') || '')}"]`);
+      const label = cluster.querySelector('.pele-cluster-label') || titleGroup?.querySelector('.pele-cluster-label');
+      if (titleGroup) { if (label) cluster.appendChild(label); titleGroup.remove(); }
       for (const a of ['fill', 'fill-opacity', 'stroke']) rect.removeAttribute(a);
       rect.classList.add('np-shape');
       if (cluster.classList.contains('hatch')) rect.after(el('rect', { class: 'np-hatch-fill', x: rect.getAttribute('x'), y: rect.getAttribute('y'), width: rect.getAttribute('width'), height: rect.getAttribute('height'), rx: T.radius.node, fill: `url(#${defsId}-hatch)` }));
@@ -784,19 +794,32 @@
     }
     const { s, cw, ch } = fit(svg, inner, 0, C.minScale, 1, src, narrow ? 1 : 6);
     const dw = cw * s, dh = ch * s;
-    const top = C.head;
+    // Head band: the title wraps onto a second line (and the band grows) when it doesn't fit.
+    const title = (src.meta.kicker || src.id).toUpperCase();
+    const kick = kickerText(plate, 20, 27, title, 'np-head-kicker');
+    let headH = C.head;
+    if (20 + width(kick) > W - 20) {
+      const words = title.split(' ');
+      let best = 1, bestDiff = Infinity;
+      for (let i = 1; i < words.length; i++) { const d = Math.abs(words.slice(0, i).join(' ').length - words.slice(i).join(' ').length); if (d < bestDiff) { bestDiff = d; best = i; } }
+      kick.textContent = '';
+      el('tspan', { class: 'np-slash' }, kick).textContent = '// ';
+      kick.appendChild(document.createTextNode(words.slice(0, best).join(' ')));
+      el('tspan', { x: 20 + width(kick.querySelector('.np-slash')), dy: 16 }, kick).textContent = words.slice(best).join(' ');
+      headH = C.head + 16;
+    }
+    const top = headH;
     const fieldH = Math.ceil((S + C.pad * 2 + dh) / 8) * 8;
     const dx = S + (W - S - dw) / 2, dy = top + S + (fieldH - S - dh) / 2;
     for (const [k, v] of Object.entries({ x: dx, y: dy, width: dw, height: dh })) svg.setAttribute(k, r2(v));
     field(fieldLayer, 0, top, W, fieldH, src.id, S);
 
-    const kick = kickerText(plate, 20, 27, src.meta.kicker || src.id, 'np-head-kicker');
     if (src.meta.fig) {
       const f = text(plate, 'np-head-meta', W - 20, 27, `FIG. ${src.meta.fig}`, 'end');
       f.setAttribute('data-exempt', '1');
       if (20 + width(kick) + 16 > W - 20 - width(f)) f.remove(); // no room: the title wins
     }
-    el('path', { class: 'np-sep', d: `M0,${C.head}H${W}` }, plate);
+    el('path', { class: 'np-sep', d: `M0,${headH}H${W}` }, plate);
 
     let y = top + fieldH;
     y += foot(plate, y, W);
@@ -829,6 +852,12 @@
         const rx = parseFloat(n.getAttribute('rx') || cs.rx || 0) || 0;
         if (!near(rx, A.radii)) out.push(`radius ${rx} on ${describe(n)}`);
       }
+    }
+    const W = plate.viewBox.baseVal.width;
+    for (const t of plate.querySelectorAll('text')) {
+      const b = t.getBBox();
+      const m = t.closest('svg.np-diagram') ? null : b; // diagram text is measured in its own viewBox
+      if (m && (m.x < 4 || m.x + m.width > W - 4)) out.push(`text runs past the plate edge: "${t.textContent.slice(0, 24)}"`);
     }
     for (const t of [...plate.querySelectorAll('text, tspan')].filter((t) => t.textContent.trim())) {
       const cs = getComputedStyle(t);

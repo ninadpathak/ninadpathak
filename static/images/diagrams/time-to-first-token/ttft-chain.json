@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/time-to-first-token/ttft-chain.mmd",
-  "hash": "516a7cf1692e53b4",
+  "hash": "6833ef14ddae64be",
   "pele": "1.8.0",
   "width": 720,
   "height": 288,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput.",
-  "caption": "Prefill cost scales with prompt length, so 40k tokens of retrieved documents can turn snappy into painful.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/time-to-first-token/ttft-chain.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/time-to-first-token/ttft-chain.narrow.svg\" width=\"288\" height=\"704\"><img src=\"/static/images/diagrams/time-to-first-token/ttft-chain.svg\" width=\"720\" height=\"288\" alt=\"The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Prefill cost scales with prompt length, so 40k tokens of retrieved documents can turn snappy into painful.</figcaption>\n</figure>"
+  "caption": "Prefill cost scales with prompt length: a 200-token question returns far faster than the same request with 40k tokens of retrieved documents in front of it.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/time-to-first-token/ttft-chain.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/time-to-first-token/ttft-chain.narrow.svg\" width=\"288\" height=\"704\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/time-to-first-token/ttft-chain.svg\" width=\"720\" height=\"288\" alt=\"The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Prefill cost scales with prompt length: a 200-token question returns far faster than the same request with 40k tokens of retrieved documents in front of it.</figcaption>\n</figure>"
 }

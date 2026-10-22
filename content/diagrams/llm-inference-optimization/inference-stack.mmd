@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker Inference optimization stack
 %% @alt The inference stack as layered slabs, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang); continuous batching, drawn as request lanes where a finished request frees its slot for a new one; Flash Attention, drawn as a score matrix streamed tile by tile into on-chip memory; quantization, drawn as one weight at 16, 8, and 4 bits; the paged KV cache, drawn as three sequences mapped onto scattered memory blocks; and the GPU with its memory stacks. Numbered squares, top to bottom, give the order to apply them: batching, the attention kernel, FP8 quantization, then the paged KV cache.
-%% @caption Apply the levers in the numbered order. Continuous batching moves throughput 10–20× on its own; the article covers each lever's trade-off.
+%% @caption Apply the levers in the numbered order. Continuous batching alone typically delivers 10–20× higher throughput than naive batching.
 %% @glyph e1 | rack
 %% @glyph e2 | rack
 %% @glyph e3 | rack accent

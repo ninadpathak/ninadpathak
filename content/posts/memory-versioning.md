@@ -64,7 +64,7 @@ If you are using a framework like [LangGraph](https://github.com/langchain-ai/la
 For that, you need a dedicated memory ledger.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/memory-versioning/append-vs-overwrite.narrow.svg" width="288" height="1000"><img src="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg" width="720" height="544" alt="Two ways to change a memory. The append-only ledger inserts a new row and stamps the old one as superseded, so v1, v2, and v3 all remain and any point in time can be recovered. A destructive update overwrites the row and the prior state is gone." loading="lazy" decoding="async"></picture></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/memory-versioning/append-vs-overwrite.narrow.svg" width="288" height="1000"><img class="np-has-narrow" src="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg" width="720" height="544" alt="Two ways to change a memory. The append-only ledger inserts a new row and stamps the old one as superseded, so v1, v2, and v3 all remain and any point in time can be recovered. A destructive update overwrites the row: v2 replaces v1, and the prior state is gone." loading="lazy" decoding="async"></picture></a>
   <figcaption>Inserting a new row and stamping valid_to on the old one gives point-in-time recovery for free.</figcaption>
 </figure>
 
