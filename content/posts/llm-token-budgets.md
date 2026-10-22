@@ -47,7 +47,7 @@ Always.
 | Gemini 3.1 Pro (<=200K ctx) | $2 | $12 |
 | Gemini 3.1 Pro (>200K ctx) | $4 | $18 |
 
-A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. That sounds like a rounding error until you multiply it by 50,000 requests per day, which lands at $13 per day, or $390 per month.
+A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.000825. That sounds like a rounding error until you multiply it by 50,000 requests per day, which lands at $41.25 per day, or $1,237.50 per month.
 
 Context compounds too, and [bigger context windows are not always better for cost or accuracy](/articles/llm-context-windows/). A chatbot that grows its system prompt and replays the full history on every turn pays for those same tokens again on each message, so a 20-message conversation can cost twenty times what the first reply did.
 
@@ -327,7 +327,7 @@ It is the work that separates teams blindsided by their invoice from teams that 
 Starting from zero cost control, here is the priority order I would follow:
 
 1. Enable token counting on every request. You cannot manage what you cannot measure.
-2. Route simple queries to cheap models. A 60% routing ratio to GPT-5.4 Nano instead of GPT-5.4 saves 92% on input token costs.
+2. Route simple queries to cheap models. A 60% routing ratio to GPT-5.4 Nano instead of GPT-5.4 saves about 55% on input token costs.
 3. Audit system prompts. Halve them first, then measure the difference.
 4. Enable caching. Target 30%+ cache hit rate on high-volume endpoints.
 5. Set hard output token limits. That single change can cut output costs by 20-40%.

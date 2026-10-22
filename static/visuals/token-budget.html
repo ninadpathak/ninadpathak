@@ -113,7 +113,7 @@ body { margin: 0; background: var(--bg-1); font-family: var(--sans); color: var(
 </div>
 <script>
   // Cost = (1000/1e6 * 0.20) + (500/1e6 * 1.25) = 0.0002 + 0.000625 = $0.000825
-  // (Post's $0.00026 figure is at a smaller-input mix; here we show the full 1k/500 budget.)
+  // Matches the post's 1k-input / 500-output example.
   var target = 0.000825;
   var el = document.getElementById('cost');
   var dur = 1100, t0 = null;
