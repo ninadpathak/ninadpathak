@@ -30,7 +30,7 @@ class DesignDocTemplateTests(unittest.TestCase):
         self.assertEqual(checker.check(text, filled=False)[0], [])
         errors = checker.check(text, filled=True)[0]
         self.assertEqual(len(errors), 1)
-        self.assertIn("20 unfilled placeholder(s)", errors[0])
+        self.assertIn("22 unfilled placeholder(s)", errors[0])
 
     def test_filled_example_passes(self):
         self.assertEqual(checker.check(example(), filled=True), ([], 2, 0))
@@ -40,7 +40,7 @@ class DesignDocTemplateTests(unittest.TestCase):
         self.assertIn("'Alternatives considered' has no '### Do nothing' entry", errors)
 
     def test_alternative_without_reason_fails(self):
-        text = re.sub(r"^Rejected because: it adds.*$", "Rejected because:", example(), flags=re.M)
+        text = re.sub(r"^Rejected because: the fixture exists.*$", "Rejected because:", example(), flags=re.M)
         self.assertIn("alternative 'SQLite database' has no 'Rejected because:' reason",
                       checker.check(text, True)[0])
 
@@ -60,6 +60,20 @@ class DesignDocTemplateTests(unittest.TestCase):
         errors = checker.check(text, True)[0]
         self.assertTrue(any("Status must start with" in e for e in errors))
         self.assertTrue(any("Date is not a calendar date" in e for e in errors))
+
+    def test_accepted_doc_needs_who_when_and_outcome(self):
+        # Review finding 10: an Accepted doc whose Decision said only "None" passed.
+        text = re.sub(r"## Decision\n\n(.*\n)+", "## Decision\n\nNone\n", example())
+        errors = checker.check(text, True)[0]
+        for name in ("Decided by", "Decided on", "Outcome"):
+            self.assertIn(f"Status is Accepted but Decision '{name}:' is not filled in", errors)
+        text = example().replace("Decided on: 2026-10-21", "Decided on: yesterday")
+        self.assertTrue(any("Decided on:' is not a calendar date" in e for e in checker.check(text, True)[0]))
+
+    def test_draft_doc_may_leave_decision_as_none(self):
+        text = re.sub(r"(Decided by|Decided on|Outcome): .*", r"\1: None", example())
+        text = text.replace("Status: Accepted", "Status: In review")
+        self.assertEqual(checker.check(text, True)[0], [])
 
     def test_bracketed_code_is_not_a_placeholder(self):
         text = example().replace("## Goals", "Reads `records[0]` at startup.\n\n## Goals")

@@ -51,4 +51,7 @@ Rejected because: {{the reason, in one or two sentences}}
 
 ## Decision
 
-{{Filled in when Status becomes Accepted or Rejected: what was decided, by whom, on what date.}}
+<!-- Write None in each field while the status is Draft or In review. -->
+Decided by: {{names}}
+Decided on: {{YYYY-MM-DD}}
+Outcome: {{what was decided, and any conditions}}

@@ -16,6 +16,7 @@ import sys
 HEADER_FIELDS = ("Status", "Author", "Reviewers", "Date")
 SECTIONS = ("Problem", "Goals", "Non-goals", "Proposal", "Alternatives considered",
             "Risks and rollout", "Open questions", "Decision")
+DECISION_FIELDS = ("Decided by", "Decided on", "Outcome")
 STATUSES = ("Draft", "In review", "Accepted", "Rejected", "Superseded by")
 PLACEHOLDER = re.compile(r"\{\{[^{}]+\}\}")
 COMMENT = re.compile(r"<!--.*?-->", re.S)
@@ -80,8 +81,14 @@ def check(text, filled):
         questions = found.get("Open questions", "").strip().lstrip("- ").strip()
         if questions and questions != "None":
             errors.append(f"Status is {status} but 'Open questions' is not None")
-        if PLACEHOLDER.search(found.get("Decision", "")):
-            errors.append(f"Status is {status} but 'Decision' is not filled in")
+        decision = found.get("Decision", "")
+        for name in DECISION_FIELDS:
+            value = field(decision, name) or ""
+            if not value or value == "None" or PLACEHOLDER.search(value):
+                errors.append(f"Status is {status} but Decision '{name}:' is not filled in")
+        decided_on = field(decision, "Decided on") or ""
+        if decided_on and decided_on != "None" and not PLACEHOLDER.search(decided_on) and not is_date(decided_on):
+            errors.append(f"Decision 'Decided on:' is not a calendar date (YYYY-MM-DD): {decided_on!r}")
 
     placeholders = PLACEHOLDER.findall(text)
     if filled and placeholders:

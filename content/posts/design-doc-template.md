@@ -28,7 +28,7 @@ A design doc template is a fixed outline for proposing a technical change before
 6. **Alternatives considered:** each option with what would happen and why it was rejected, starting with doing nothing.
 7. **Risks and rollout:** each risk with its mitigation, the release order and how to roll back.
 8. **Open questions:** what must be answered before the doc is accepted.
-9. **Decision:** what was decided, by whom and when.
+9. **Decision:** who decided, on what date, and the outcome.
 
 ## Copy the template and the checker
 
@@ -62,12 +62,12 @@ I made the "Do nothing" entry required because it is the Rust template's questio
 
 ## A filled example: keep export records across restarts
 
-The example proposes a change to the writing-lab service from the [technical documentation template](/articles/documentation-template/), whose export records live only in memory. Its problem statement names the failure a client of that service would hit:
+The example proposes a change to the writing-lab service from the [technical documentation template](/articles/documentation-template/), whose export records live only in memory. Its problem statement names the limit the current reference already documents:
 
 ```markdown
 ## Problem
 
-`POST /exports` stores records in a `Map` inside the process, so a restart loses every record and every idempotency key. A client that retries with the key it used before the restart gets a new `exp_1` instead of its original record, which breaks the retry promise in the reference.
+The current contract limits safe retries to one running instance: `POST /exports` keeps records and idempotency keys in a `Map`, so a restart erases them. A client whose retry lands after a restart gets a new `exp_1` instead of its original record, and the reference has to warn about that boundary.
 ```
 
 Its non-goals rule out generating export files and running several instances. Without those two lines, a reviewer could reasonably ask why the proposal ignores both.
@@ -96,7 +96,7 @@ draft2.md: FAIL (3 problem(s))
   - alternative 'SQLite database' has no 'Rejected because:' reason
 ```
 
-A failing doc exits with status 1, so fix each listed line and rerun until it prints PASS. The checker also fails a doc marked Accepted or Rejected that still lists an open question, because that decision depends on an answer nobody has given.
+A failing doc exits with status 1, so fix each listed line and rerun until it prints PASS. The checker also fails a doc marked Accepted or Rejected that still lists an open question or leaves a Decision field empty, because a decision needs an answer, a date and someone who made it.
 
 ## Design doc or RFC
 
@@ -118,4 +118,4 @@ It states the cost of leaving things as they are, which is the baseline every ot
 
 ### When is a design doc finished?
 
-When its status is Accepted or Rejected, the Decision section records who decided and when, and no open question remains. The checker enforces the last two once the status changes.
+When its status is Accepted or Rejected, the Decision section names who decided, the date and the outcome, and no open question remains. The checker enforces both once the status changes.
