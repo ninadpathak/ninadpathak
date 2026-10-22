@@ -125,6 +125,8 @@ You do not need every document type on launch day. Start by listing the moments 
 
 For a public API, that first package may include a quickstart, API reference, authentication guide, error guide, and release notes. For an internal service, it may start with an architecture document, onboarding guide, deployment runbook, and incident procedure.
 
+A [design doc template](/articles/design-doc-template/) gives an architecture change its own page before the code exists, with the alternatives it beat.
+
 For an agent-enabled repository, add AGENTS.md when the agent needs instructions that should remain close to the code.
 
 Then give each document a clear owner and update trigger. An API schema change should trigger reference review.
