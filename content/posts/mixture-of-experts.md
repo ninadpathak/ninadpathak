@@ -66,13 +66,13 @@ Based on the token itself, the router decides which experts to send it to, and t
 
 You cannot pre-load only the popular two and fetch the rest on demand, because the router might pick any of the 256 for the very next token.
 
-Running DeepSeek V3 requires holding 671B parameters in VRAM. FP8 quantization puts that at over 1.3TB, and BF16 lands higher still.
+Running DeepSeek V3 requires holding 671B parameters in VRAM. At FP8 the weights alone take about 671GB, and BF16 doubles that to about 1.34TB.
 
 NVIDIA's [Blackwell MoE overview](https://blogs.nvidia.com/blog/mixture-of-experts-frontier-models/) cites 10x faster inference and 1/10 the token cost. Those numbers are accurate, and they apply only in the context of NVL72-class hardware, racks that cost more than most startups spend on engineering in a year.
 
 Calling DeepSeek's API, you benefit from their hardware and from running at high enough throughput to amortize that footprint across many requests. Self-hosting means facing the same memory footprint as a dense model of the same total size, with the compute advantage only showing up once you hit high concurrent request volumes.
 
-A team running a handful of requests per minute on its own cluster pays the full 1.3TB rent and sees almost none of the savings the headline promises.
+A team running a handful of requests per minute on its own cluster pays for the full weight footprint, about 671GB even in FP8, and sees almost none of the savings the headline promises.
 
 ## Routing is where most of the training difficulty lives
 
@@ -128,7 +128,7 @@ At smaller scales, the complexity overhead is not worth the efficiency gains.
 
 **Can I run DeepSeek V3 locally?**
 
-Only with serious hardware. FP8 requires over 1.3TB of VRAM.
+Only with serious hardware. At FP8 the weights alone take about 671GB of VRAM, and BF16 takes about 1.34TB.
 
 Quantized versions (GPTQ, GGUF) reduce this, and you are still looking at a minimum of 8 high-end GPUs for reasonable throughput. More aggressive quantization degrades output quality on tasks that are sensitive to it.
 
