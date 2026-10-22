@@ -22,6 +22,8 @@ Conversation context disappears when the session ends. Project instructions and 
 
 A fresh session does not retain the previous conversation unless the relevant information was saved in `CLAUDE.md` or auto memory.
 
+A [subagent](/articles/claude-code-subagents/) gets a fresh context window inside the session, and only its final report returns to the conversation.
+
 The new instance has zero knowledge of the previous one and will happily search for the old name. The session layer stays ephemeral on purpose, because project state changes constantly and a half-remembered file tree from yesterday causes more harm than a clean read today.
 
 What does make it into session context? The contents of `CLAUDE.md` at the project root gets prepended to every new session.

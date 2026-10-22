@@ -77,6 +77,8 @@ The instrumentation lives in the harness, not in the prompt. The harness enforce
 
 I wrote about what belongs in that layer in [agent harnesses](/articles/agent-harnesses/). A coding agent without a harness is a demo.
 
+A [Claude Code subagent](/articles/claude-code-subagents/) keeps a sub-task's tool calls in its own context window, and Claude Code saves its transcript for the same read-back.
+
 A coding agent with one is a tool I can rely on.
 
 I do not babysit every step. I let the agent run to a natural checkpoint, a passing test or a completed sub-change, and then I look.

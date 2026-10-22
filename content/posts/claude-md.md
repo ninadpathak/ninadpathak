@@ -107,6 +107,8 @@ The two agents look in different places and cap size differently:
 
 Both concatenate the files they find, from the broadest directory down to the working directory, so the closest file is read last. The Claude Code details come from [Anthropic's memory docs](https://code.claude.com/docs/en/memory) and the Codex details from [OpenAI's AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
 
+Custom [Claude Code subagents](/articles/claude-code-subagents/) load the same CLAUDE.md files, unless a subagent's definition sets `omitClaudeMd: true`.
+
 ## Check that your file loaded
 
 For Claude Code, run `/context` and look for the file under **Memory files**, or run `/memory`, which lists an AGENTS.md that Claude Code read directly. A subdirectory's CLAUDE.md never appears under **Memory files**, because it loads on demand when Claude opens a file in that subdirectory.
