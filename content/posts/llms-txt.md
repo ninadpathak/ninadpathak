@@ -78,7 +78,7 @@ For a small site, I prefer the llmstxt.org pattern: one clear summary, a few sec
 
 The [llms.txt generator](/llms-txt-generator/) drafts a file from a site's discovered pages when writing the first version by hand adds nothing. Someone still has to choose which pages earn a place and keep the file current.
 
-The [validator](/llms-txt-validator/) checks the structure, and your server logs show whether anything requests `/llms.txt`.
+The [validator](/llms-txt-validator/) checks the structure, and your server logs show whether anything requests `/llms.txt`. For the checks Google and OpenAI do document for AI search, see [AEO vs GEO vs SEO for developer docs](/articles/aeo-for-developer-docs/).
 
 ## FAQ
 
