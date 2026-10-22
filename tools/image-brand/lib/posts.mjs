@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { REPO_DIR } from './tokens.mjs';
 
-export const KICKERS = { 'ai-engineering': 'AI engineering', 'technical-documentation': 'Technical documentation', 'developer-experience': 'Developer experience' };
+export const KICKERS = { 'ai-engineering': 'AI engineering', 'ai-search-optimization': 'AI search', 'distribution': 'Distribution', 'technical-documentation': 'Technical documentation', 'developer-experience': 'Developer experience' };
 
 export function frontmatter(file) {
   const m = readFileSync(file, 'utf8').match(/^---\n([\s\S]*?)\n---/);
