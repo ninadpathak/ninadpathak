@@ -1,15 +1,13 @@
 ---
 category: ai-engineering
 date: 2026-06-14
-description: The repeatable five-stage process I run to take a task from vague intent
-  to a pull request I trust, with an AI agent doing the heavy lifting and me stepping
-  in to frame the work and read the diff before it merges.
+description: 'An agentic workflow puts an AI agent inside a fixed process. I frame and scope the task before the agent runs, and I review its diff before the change lands.'
 slug: agentic-workflows
 status: published
 work_note: '[Ninad Pathak](/portfolio/) creates developer content for coding tools
   that takes a scoped repository change through the test commands and diff review
   needed before a merge.'
-title: 'The Agentic Workflow Playbook: From Prompt to Shipped PR'
+title: 'Agentic Workflows: A Five-Stage Playbook From Prompt to PR'
 ---
 
 I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my name on.

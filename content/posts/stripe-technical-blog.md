@@ -1,13 +1,12 @@
 ---
 category: developer-experience
 date: 2026-04-07
-description: I think Stripe’s technical blog compounds into a moat because it teaches,
-  documents, and shapes developer trust long before a sales conversation starts.
+description: 'I think the Stripe engineering blog became a moat because it teaches the payments domain and lowers integration risk before a sales conversation starts.'
 status: published
 work_note: '[Ninad Pathak](/contact/) develops technical content strategies around
   a company''s engineering decisions, turning domain explanations into articles that
   connect potential customers to a supported implementation.'
-title: How Stripe's Technical Blog Became a Competitive Moat
+title: 'Stripe Engineering Blog: How It Became a Competitive Moat'
 updated: '2026-08-17'
 slug: stripe-technical-blog
 ---

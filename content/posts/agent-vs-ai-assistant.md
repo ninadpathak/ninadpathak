@@ -1,14 +1,13 @@
 ---
 category: ai-engineering
 date: '2026-04-26'
-description: 'The difference between an AI agent and a smart assistant comes down
-  to one thing: who drives the loop.'
+description: 'An AI agent drives its own loop toward a goal. An AI assistant answers each turn and leaves the loop with you, which costs less and fits bounded tasks.'
 slug: agent-vs-ai-assistant
 status: published
 work_note: 'For AI companies explaining product autonomy, [Ninad Pathak](/contact/)
   writes developer content that makes the interaction model explicit: what the software
   decides and what still requires the user''s instruction.'
-title: When to Build an Agent and When to Build a Smarter Assistant
+title: 'AI Agent vs AI Assistant: When to Build Each'
 ---
 
 For the last year I have watched teams make the same architectural mistake twice. They reach for agent frameworks because agents are what the benchmarks talk about, what the conference talks cover, what their investors ask about.
