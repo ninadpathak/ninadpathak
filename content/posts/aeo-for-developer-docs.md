@@ -46,7 +46,7 @@ Google Search doesn't read [llms.txt](/articles/llms-txt/) or other AI text file
 
 I'd check access first, partly with the tools on this site, then read each passage on its own. Each check says what to fix when it fails:
 
-1. **The page can show a snippet.** Paste the page's HTML into the [AI Overviews checker](/ai-overviews-checker/), which flags `noindex`, `nosnippet` and `max-snippet:0`. If one of them is set, remove it unless keeping the page out of search was the point. A positive `max-snippet` only shortens the snippet and can stay.
+1. **The page can show a snippet.** Paste the page's HTML into the [AI Overviews checker](/ai-overviews-checker/), which flags `noindex`, `nosnippet` and `max-snippet:0`. If one of them is set, remove it unless keeping the page out of search was the point. A positive `max-snippet` only shortens the snippet and can stay. A "Needs a manual check" result means the tool couldn't decide, so inspect the meta tags and response headers it lists before changing a directive.
 2. **The site is included in Search Console.** Open the Search generative AI control for the property and its parents, and confirm the site is included. If it is excluded, or inherits an exclusion, change the control on the property that set it.
 3. **The crawlers you want can reach it.** Run your domain through the [AI crawler access checker](/ai-crawler-checker/), which reports search crawlers and training crawlers separately. If a search crawler you want is blocked, fix that agent's `robots.txt` rule and leave the training rules as you chose them.
 4. **The opening answers first.** Read the first paragraph alone, and if it introduces the topic without answering the question in the title, rewrite it so the answer comes first.
