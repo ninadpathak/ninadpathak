@@ -72,6 +72,8 @@ On a fresh server, the request returns HTTP 202 with `{"id":"exp_1","format":"cs
 
 If the health request fails, compare the URL with the server terminal before continuing; use the recovery page for an export error. Keep this server running for the recovery experiment below.
 
+For a quickstart page on its own, the [quick start guide template](/articles/quickstart-guide/) adds a version check for each tool and a table of the errors a first run produces.
+
 ## Put exact rules in reference
 
 A quickstart can choose `csv` for its first request. Reference must also say whether `json` is allowed and what happens to an unsupported value.
