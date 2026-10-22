@@ -3,17 +3,13 @@
 %% @og-title Agent Harnesses: The Infrastructure Your LLM Agent Needs
 %% @og-url ninadpathak.com/articles/agent-harnesses/
 %% @path app>harness>llm
----
-config:
-  flowchart:
-    rankSpacing: 28
----
+%% @spacing 20,22
+%% @glyph app | window
+%% @glyph harness | loop
+%% @glyph llm | core
 flowchart TB
-  app["§Caller
-Application"]:::external
-  harness["§Runtime
-Agent harness"]:::focal
-  llm["§Model
-Raw LLM"]:::external
+  app[" "]:::external
+  harness[" "]:::accent
+  llm[" "]:::focal
   app --> harness
   harness --> llm

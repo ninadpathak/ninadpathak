@@ -1,36 +1,25 @@
 %% @fig 01
 %% @kicker Documentation placement
-%% @alt Documentation placement decision tree. If no external reader needs the information, keep it internal when an operator needs it or contains private context, otherwise review whether the page has a task. If an external reader needs it, split it into a public task page and a private record when private context remains, otherwise publish it externally.
+%% @alt Documentation placement decision tree. If no external reader needs the information, keep it internal when an operator needs it or it holds private context; otherwise review whether the page has a task. If an external reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally.
 %% @caption Each path ends in internal, review, split, or external documentation. A split is two documents with one contract between them, not a redacted internal page.
 %% @path reader>public>split
-%% @dim internal | review | Private readers
-%% @dim split | external | Public readers
-%% @detail split | Split documentation | Public: customer task + contract; Private: operating detail; Owners: one per side; Update: when the two disagree
-%% @detail external | External documentation | Reader: customer, partner, developer; Task: evaluate, integrate, recover; Update: interface or limit change
-%% @legend accent=Decision; outcome=Destination; hot=Both readers
+%% @glyph reader | reader globe
+%% @glyph private | reader lock
+%% @glyph public | doc lock
+%% @glyph internal | doc lock
+%% @glyph review | doc question
+%% @glyph split | pair
+%% @glyph external | doc globe
+%% @dim internal | review | :lock
+%% @dim split | external | :globe
 flowchart TB
-  reader["§Start | Q1
-Does an external reader need this for a supported task?"]:::accent
-  private["§Private path | Q2
-Does an operator need it, or does it hold private context?"]
-  public["§Public path | Q3
-Does private operating context remain once the public task is clear?"]:::accent
-  internal["`§Outcome
-**Internal**
-~Private task
-or context`"]:::outcome
-  review["`§Outcome
-**Review**
-~No owned
-reader task yet`"]:::outcome
-  split["`§Outcome
-**Split**
-~Public task +
-private record`"]:::outcome
-  external["`§Outcome
-**External**
-~Supported
-public task`"]:::outcome
+  reader["Outside reader?"]:::accent
+  private["Operator need?"]
+  public["Private context?"]:::accent
+  internal["Internal"]
+  review["Review"]
+  split["Split"]:::focal
+  external["External"]
   reader -->|no| private
   reader -->|yes| public
   private -->|yes| internal

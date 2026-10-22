@@ -24,8 +24,10 @@ const SAMPLES = [
   { name: '6-benchmark', type: 'Comparison / benchmark (iframe replaced)', url: '/articles/llm-token-budgets/', selector: '.visual-wrapper', diagram: 'llm-token-budgets/token-pricing' },
 ];
 
-// v1 renders kept for the v1-vs-v2 sheet (pass a directory holding the phase-1 output).
-const V1_DIR = process.env.V1_DIR;
+// Earlier renders for a version-vs-version sheet: PREV_DIR holds them, PREV_LABEL names them.
+const PREV_DIR = process.env.PREV_DIR;
+const PREV = process.env.PREV_LABEL || 'v2';
+const NEXT = process.env.NEXT_LABEL || 'v3';
 
 const browser = await chromium.launch();
 
@@ -103,13 +105,13 @@ for (const sample of SAMPLES) {
     console.log(`${sample.name}.${scheme}.png`);
   }
 }
-if (V1_DIR) {
-  for (const sample of SAMPLES.slice(0, 4)) {
+if (PREV_DIR) {
+  for (const sample of SAMPLES) {
     const id = sample.og || sample.diagram;
-    const v1 = readFileSync(path.join(V1_DIR, sample.og ? `${id}.png` : `${id}.light.png`));
+    const v1 = readFileSync(path.join(PREV_DIR, sample.og ? `${id}.png` : `${id}.light.png`));
     const v2 = readFileSync(path.join(REPO_DIR, 'static/images/diagrams', sample.og ? `${id}.png` : `${id}.light.png`));
-    await sheet({ ...sample, v1: true }, 'light', v1, v2, 'phase 1', 'component library', ['v1', 'v2'], `v1-vs-v2-${sample.name}.png`);
-    console.log(`v1-vs-v2-${sample.name}.png`);
+    await sheet({ ...sample, v1: true }, 'light', v1, v2, '', '', [PREV, NEXT], `${PREV}-vs-${NEXT}-${sample.name}.png`);
+    console.log(`${PREV}-vs-${NEXT}-${sample.name}.png`);
   }
 }
 await browser.close();

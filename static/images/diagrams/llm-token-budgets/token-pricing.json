@@ -1,11 +1,11 @@
 {
   "source": "content/diagrams/llm-token-budgets/token-pricing.mmd",
-  "hash": "fe15bed007ac77c0",
+  "hash": "42efc72e55c05308",
   "pele": "1.8.0",
   "width": 720,
-  "height": 788,
+  "height": 512,
   "scale": 1,
-  "alt": "A horizontal bar chart of input and output prices per million tokens for seven models, from GPT-5.4 Nano at $0.20 input and $1.25 output to Claude Opus 4.7 at $5 input and $25 output. A table repeats the prices and shows that output costs 5 to 6.25 times input for every model listed.",
-  "caption": "Prices from the article's Q2 2026 table, rounded to three significant figures. GPT-5.4 Pro ($30 / $180) is left out so the scale stays readable.",
-  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/llm-token-budgets/token-pricing.svg\" width=\"720\" height=\"788\" alt=\"A horizontal bar chart of input and output prices per million tokens for seven models, from GPT-5.4 Nano at $0.20 input and $1.25 output to Claude Opus 4.7 at $5 input and $25 output. A table repeats the prices and shows that output costs 5 to 6.25 times input for every model listed.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>Prices from the article's Q2 2026 table, rounded to three significant figures. GPT-5.4 Pro ($30 / $180) is left out so the scale stays readable.</figcaption>\n</figure>"
+  "alt": "Paired bars built from one-dollar tiles show input and output prices per million tokens for four models: GPT-5.4 Nano at $0.20 and $1.25, Claude Haiku 4.5 at $1 and $5, Claude Sonnet 4.6 at $3 and $15, and Claude Opus 4.7 at $5 and $25. Output costs five to six times input on every model; Opus is marked at 5×.",
+  "caption": "Prices from the article's Q2 2026 table. Each tile is $1 per million tokens.",
+  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/llm-token-budgets/token-pricing.svg\" width=\"720\" height=\"512\" alt=\"Paired bars built from one-dollar tiles show input and output prices per million tokens for four models: GPT-5.4 Nano at $0.20 and $1.25, Claude Haiku 4.5 at $1 and $5, Claude Sonnet 4.6 at $3 and $15, and Claude Opus 4.7 at $5 and $25. Output costs five to six times input on every model; Opus is marked at 5×.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>Prices from the article's Q2 2026 table. Each tile is $1 per million tokens.</figcaption>\n</figure>"
 }

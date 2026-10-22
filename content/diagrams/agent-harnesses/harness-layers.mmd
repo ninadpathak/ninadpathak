@@ -1,36 +1,29 @@
 %% @fig 01
 %% @kicker Harness layers around the raw LLM
-%% @alt The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning. The loop calls tools in both directions, the prompt assembler sends the assembled prompt to the model, the state manager checkpoints after each step, and the observer logs every step.
+%% @alt The agent harness sits between the application and the model. Inside it, the execution loop calls tools in both directions, checkpoints state, and logs every step to an observer, and the prompt assembler builds the prompt the model receives. The model only reasons.
 %% @caption The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.
 %% @path app>loop>prompt>llm
-%% @dim harness | harness | Everything except reasoning
-%% @detail state | State manager · checkpoint | Writes: after each successful tool call; Holds: history, data, decisions, status; Recovery: tested, not assumed
-%% @legend accent=Layer; external=Outside; stack=Tool set; hot=Request; flow=Call; async=Log
+%% @glyph app | window
+%% @glyph loop | loop
+%% @glyph prompt | tokens
+%% @glyph state | cells fill=0.55 flag
+%% @glyph observer | eye
+%% @glyph llm | core
+%% @glyph tools | tools
 flowchart TB
-  app["§Caller | In
-Application"]:::external
-  subgraph harness ["Agent harness | Runtime"]
+  app["App"]:::external
+  subgraph harness [Harness]
     direction LR
-    loop["§Layer 1 | Control
-Execution loop
-~Steps, stop rules, retries"]:::accent
-    prompt["§Layer 2 | Context
-Prompt assembler
-~System, history, tool results"]:::accent
-    state["§Layer 3 | Durable
-State manager
-~Subtasks and checkpoints"]
-    observer["§Layer 4 | Record
-Observer
-~Logs every step by run ID"]
+    loop["Loop"]:::accent
+    prompt["Prompt"]:::accent
+    state["State"]
+    observer["Observer"]
   end
-  llm["§Model | Out
-Raw LLM
-~Reasoning only"]:::external
-  tools[("Tools")]:::stack
+  llm["Model"]:::focal
+  tools["Tools"]:::stack
   app --> loop
   loop --> prompt
-  prompt -->|prompt :: system + history| llm
-  loop <-->|calls| tools
-  loop -->|checkpoint| state
-  loop -.->|step log| observer
+  prompt --> llm
+  loop <--> tools
+  loop --> state
+  loop -.-> observer

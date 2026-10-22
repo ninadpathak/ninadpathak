@@ -17,7 +17,7 @@ import path from 'node:path';
 import { chromium } from 'playwright-core';
 import subsetFont from 'subset-font';
 import { loadTokens, contrastReport, siteDrift, themeCss, TOOL_DIR, REPO_DIR } from './lib/tokens.mjs';
-import { parseSource } from './lib/source.mjs';
+import { parseSource, countWords } from './lib/source.mjs';
 
 const require = createRequire(import.meta.url);
 const args = process.argv.slice(2);
@@ -40,6 +40,7 @@ const FACES = [
 const tokens = loadTokens();
 const brandCss = readFileSync(path.join(TOOL_DIR, 'theme/brand.css'), 'utf8');
 const plateJs = readFileSync(path.join(TOOL_DIR, 'lib/plate.js'), 'utf8');
+const glyphsJs = readFileSync(path.join(TOOL_DIR, 'lib/glyphs.js'), 'utf8');
 const peleJs = readFileSync(path.join(TOOL_DIR, 'node_modules/pele/dist/pele.global.js'), 'utf8');
 const peleVersion = JSON.parse(readFileSync(path.join(TOOL_DIR, 'node_modules/pele/package.json'), 'utf8')).version;
 const css = themeCss(tokens) + brandCss;
@@ -86,6 +87,7 @@ async function main() {
   const page = await (await browser.newContext({ deviceScaleFactor: 1 })).newPage();
   await page.setContent(`<!doctype html><html><head><style>${fontFaceCss(FACES)}${css}body{margin:0}</style></head><body></body></html>`);
   await page.addScriptTag({ content: peleJs });
+  await page.addScriptTag({ content: glyphsJs });
   await page.addScriptTag({ content: plateJs });
   await page.evaluate(async (faces) => {
     await Promise.all(faces.map(([fam, w]) => document.fonts.load(`${w} 14px '${fam}'`)));
@@ -97,16 +99,21 @@ async function main() {
     const label = path.relative(REPO_DIR, src.file);
     try {
       const hash = createHash('sha256')
-        .update([readFileSync(src.file, 'utf8'), JSON.stringify(tokens), brandCss, plateJs, peleVersion].join('\0'))
+        .update([readFileSync(src.file, 'utf8'), JSON.stringify(tokens), brandCss, glyphsJs, plateJs, peleVersion].join('\0'))
         .digest('hex').slice(0, 16);
       const result = await page.evaluate(({ src, tokens, hash }) => {
         document.body.innerHTML = '';
         const dims = src.meta.kind === 'og' ? window.npComposeOg(src, tokens, { hash }) : window.npComposeArticle(src, tokens, { hash });
         const plate = document.body.querySelector('svg.np-plate');
         const text = [...plate.querySelectorAll('text, tspan')].map((t) => t.textContent).join('');
-        return { dims, text, svg: new XMLSerializer().serializeToString(plate) };
+        // Words in the image, excluding the figure title band and decorative digits.
+        const counted = [...plate.querySelectorAll('text')].filter((t) => !t.closest('[data-exempt]') && !t.classList.contains('gl-digit')).map((t) => t.textContent);
+        return { dims, text, counted, svg: new XMLSerializer().serializeToString(plate) };
       }, { src, tokens, hash });
 
+      const words = countWords(result.counted.join(' '));
+      const budget = tokens.wordBudget[src.meta.kind] ?? tokens.wordBudget.diagram;
+      if (words.length > budget) throw new Error(`${words.length} words in the image; the budget is ${budget} (${words.join(' ')})`);
       const fonts = await embedFonts(result.text + ' ');
       const svg = `<!-- ninadpathak.com image brand · source content/diagrams/${src.slug}/${src.id}.mmd · pele ${peleVersion} · ${hash} -->\n`
         + result.svg.replace('/*NP-STYLE*/', minify(fonts + css)) + '\n';
@@ -145,7 +152,7 @@ async function main() {
           alt: src.meta.alt, caption: src.meta.caption ?? null, embed: embedSnippet(src, rel, result.dims),
         }, null, 2) + '\n');
       }
-      console.log(`${label} -> ${path.relative(REPO_DIR, svgPath)} ${result.dims.width}x${result.dims.height} scale ${result.dims.scale}`);
+      console.log(`${label} -> ${path.relative(REPO_DIR, svgPath)} ${result.dims.width}x${result.dims.height} scale ${result.dims.scale} words ${words.length}/${budget}`);
     } catch (error) {
       failures.push(`${label}: ${error.message}`);
     }

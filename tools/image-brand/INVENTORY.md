@@ -17,7 +17,7 @@ Taken on `origin/main` at `2e40c460` (2026-10-22); branch since rebased onto `07
 
 **`hermes-featured-images` (sibling repo, inspected read-only).** It is a Python renderer that makes 1920×1080 featured images for LinuxForDevices, CodeForGeek, and AskPython, deterministic and byte-identical. Nothing in it targets ninadpathak.com, and this site doesn't consume its output. This pipeline borrows its deterministic-output and validate-before-render ideas but doesn't depend on it.
 
-## Samples (phase 1, v2 component library)
+## Samples (phase 1, v3 visual library)
 
 | # | Archetype | Article | Source | Replaces |
 |---|---|---|---|---|

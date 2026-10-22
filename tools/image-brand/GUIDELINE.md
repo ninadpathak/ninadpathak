@@ -1,293 +1,190 @@
 # ninadpathak.com image brand guideline
 
-Version 2 · October 2026 · covers every image an article ships: diagrams, charts, share cards, screenshots, terminal receipts, and interactive visuals.
+Version 3 · October 2026 · covers every image an article ships: diagrams, charts, share cards, screenshots, terminal receipts, and interactive visuals.
 
-The site's stylesheet opens with *Technical Precision. No gradients. No decoration.* Images follow it. A figure earns its intricacy the way an engineering drawing does. It has a coordinate grid, a title block, numbered steps, dimensioned spans, lettered detail callouts, and tables of real values. Each layer answers a question a reader would otherwise have to dig out of the prose. Glow, gradients, and illustration don't count as detail.
+The site's stylesheet opens with *Technical Precision. No gradients. No decoration.* Images follow it. Version 3 adds a second rule: **visuals are visual.** A figure gets its intricacy from drawing: glyphs that depict the concept, layered depth, repetition, fill levels, hatching, and connectors with ports and flow marks. Words and data don't count as detail. The article carries the explanation; the figure shows the shape of the idea. A reader should get it at a glance and find more on a closer look.
 
-Version 2 adds a **component library** (§8). Each component has a fixed look, a "use when" rule, and a per-figure budget that the pipeline enforces (§9). Density comes from choosing components, so a figure stays precise as it gets richer.
-
-The pipeline in this folder implements everything below. If this document and `brand.tokens.json` disagree, the tokens file wins and the document gets fixed.
+Pele still lays out every diagram. The brand layer in this folder (`lib/glyphs.js`, `lib/plate.js`, `theme/brand.css`) draws the rest. If this document and `brand.tokens.json` disagree, the tokens file wins and the document gets fixed.
 
 ---
 
-## 1. Image types and archetypes
+## 1. Visual over text: the rules
 
-| Type | Use it for | Made with | Output |
+1. **Word budget, enforced.** A diagram carries at most **15 words**, and a share-card diagram at most **6**. The head band (figure title and number) is exempt, and so are the share card's title and byline. A word is any token with two or more letters; digits, `$`, `×`, and single letters don't count. `render.mjs` and `--check` both fail a figure over budget.
+2. **Labels are names, one to three words.** "Perceive", "KV cache", "Outside reader?". Never a sentence, a description, a payload, or a parenthetical.
+3. **Draw the concept, don't write it.** Before adding a word, look for a glyph (§7) that shows it: a lock instead of "private", a globe instead of "public", a check or cross instead of "yes" or "no", filling cells instead of "context grows".
+4. **Numbers only when the number is the point.** In a benchmark or price chart, encode values as length, count, or fill (tile bars, §8 M12), and label at most two key values plus one ratio. Everywhere else, numbers stay in the article.
+5. **Text moves to three places:** the article prose, the HTML `<figcaption>` (one or two sentences), and `@alt` (a full description of what the figure shows). None of them count against the budget, and all of them stay readable by search engines and screen readers.
+6. **One accent idea.** Accent marks the path, node, or part the figure is about, and nothing else.
+7. **Glanceable first, rewarding second.** At thumbnail size the silhouette should tell the story: a ring for a loop, a stack of slabs for a stack, a fork for a decision. Up close, the glyphs, hatching, ticks, ports, and particles reward a second look. If the thumbnail doesn't read, simplify the structure. Don't add words.
+
+## 2. Image types and archetypes
+
+| Archetype | Mermaid | Visual kit | Sample |
 |---|---|---|---|
-| **Diagram plate** | Flows, decisions, loops, architectures, stacks, anatomies, sequences, states | Mermaid → Pele → brand layer | SVG (light and dark), PNG 2x, JSON sidecar |
-| **Chart plate** | Measured numbers: prices, latencies, benchmark scores | Pele `xychart` in a plate, plus a table panel | Same as above |
-| **Share card** | `og:image` and `twitter:image`, one per article | `@kind og` source with its own small diagram | PNG 1200×630 |
-| **Evidence screenshot** | Proof that a third-party page says what the article claims | Browser capture under §15 | PNG, 1440 wide |
-| **Terminal receipt** | Output of a command the article ran | Receipt plate (§15; template is in the rollout) | PNG 2x or SVG |
-| **Interactive visual** | Only when interaction teaches something a static plate can't | `static/visuals/*.html` | HTML |
+| Decision tree | `flowchart TB` | Glyph tiles with short questions; ✓/✕ marks on the branches; symmetric buses; hot path with particles; badge-labelled span brackets under outcome groups | `internal-vs-external-docs/documentation-placement` |
+| Anatomy | `flowchart TB` | Muted "before" tile → focal heading; coloured brackets under each phrase; bare glyphs for the parts | `documentation-headings/task-heading-anatomy` |
+| Loop | `flowchart` + `@ring` | Circular track with tick rail, accent arcs, chevrons, particles, and numbered stations; a centre glyph for the state that accumulates; entry and exit tiles radially outside | `agent-loop-anatomy/agent-loop` |
+| Architecture | `flowchart TB` + cluster | Glyph tiles per component; hatched `external` tiles; stacked `stack` tiles; one-word cluster label; hot path with steps and particles | `agent-harnesses/harness-layers` |
+| Stack | `block-beta` | Layer slabs, each carrying a wide strip glyph that pictures its mechanism; numbered squares for order | `llm-inference-optimization/inference-stack` |
+| Benchmark | `xychart-beta horizontal` | Tile bars (one tile per unit), solid versus hatched series, two value callouts, one ratio bracket | `llm-token-budgets/token-pricing` |
+| Share card | `@kind og` | Title column plus a word-free glyph chain at 1.5× or larger | `agent-harnesses/og` |
 
-Diagram plates come in five archetypes. Each one has a default component kit, so two figures of the same archetype look like siblings:
+Evidence screenshots and terminal receipts follow §12. Interactive visuals follow §13.
 
-| Archetype | Mermaid | Default kit | Sample |
+## 3. Palette
+
+The colors are the site tokens from `static/css/main.css`, and `--check` reports zero drift.
+
+| Token | Light | Dark | Visual role |
 |---|---|---|---|
-| Decision tree | `flowchart TB` | Kicker meta `Q1…`, hot path + steps, span dims under outcome groups, detail panels on two outcomes | `internal-vs-external-docs/documentation-placement` |
-| Loop or pipeline | `flowchart TB` with `ghost` rows | Hot path + steps, payload edge labels, timeline panel, detail panels on failure-prone steps | `agent-loop-anatomy/agent-loop` |
-| Architecture | `flowchart TB` with a cluster | Cluster with meta, layer kickers with meta, `external` and `stack` nodes, payload label on the main call, dim spanning the system boundary, one detail | `agent-harnesses/harness-layers` |
-| Stack | `block-beta` | Ordered kicker meta (`1st`, `2nd`), a dim spanning the software layers, order-of-application table, details on quantities | `llm-inference-optimization/inference-stack` |
-| Comparison or benchmark | `xychart-beta horizontal` | Two series (solid and hatched), value labels, a table with the derived ratio and inline bars | `llm-token-budgets/token-pricing` |
-| Anatomy | `flowchart TB` | Muted "before", focal "after", parts as outcomes, dim across the parts, a mapping table | `documentation-headings/task-heading-anatomy` |
+| `canvas` | `#f8f8f6` | `#090909` | Plate, masks, empty memory cells |
+| `surface` | `#ffffff` | `#111111` | Tiles, glyph bodies, slabs |
+| `surface-2` | `#efefed` | `#1a1a1a` | Shaded faces (isometric sides), causal cells, outcomes |
+| `hairline` | `#e0e0dc` | `#1e1e1e` | Band separators, chart grid |
+| `rule` | `#c8c8c4` | `#2c2c2c` | Tile borders, hatching, tick rails, text lines inside pages, grid dots |
+| `line` | `#7d7d79` | `#6f6f6f` | Glyph outlines, connectors, filled cells and tiles (≥3:1) |
+| `ink` / `ink-2` | `#0e0e0e` / `#3a3a3a` | `#f0f0f0` / `#c2c2c2` | Labels / glyph detail strokes, dimension lines |
+| `muted` | `#6b6b6b` | `#8a8a8a` | Decorative digits, chart ticks, series key |
+| `accent` | `#c23b00` | `#ff5f1f` | The one idea: hot path, particles, step squares, the newest cell, the focal glyph part |
+| `accent-wash` | `#fdf1ec` | `#1a0d07` | The focal tile |
+| `on-accent` | `#ffffff` | `#090909` | Digits on step squares |
 
-## 2. Palette
-
-The colors are the site tokens from `static/css/main.css`. The target palette from site-fixes (`#c23b00`, `#6b6b6b` / `#8a8a8a`) is now live, and `render.mjs --check` reports zero drift.
-
-| Token | Light | Dark | Site token | Role |
-|---|---|---|---|---|
-| `canvas` | `#f8f8f6` | `#090909` | `--bg` | Plate, label masks, title block |
-| `surface` | `#ffffff` | `#111111` | `--bg-1` | Nodes, panels, coordinate strips, payload chips |
-| `surface-2` | `#efefed` | `#1a1a1a` | `--bg-2` | Outcome nodes, panel headers, cluster wash (35%), bar tracks |
-| `hairline` | `#e0e0dc` | `#1e1e1e` | `--border` | Band and cell separators, row rules, grid lines |
-| `rule` | `#c8c8c4` | `#2c2c2c` | `--border-2` | Node and panel borders, frame, cluster dashes, ruler, crop marks, hatching, grid dots |
-| `line` | `#7d7d79` | `#6f6f6f` | image-only | Connectors, arrowheads, ports, handles, inline bars |
-| `ink` | `#0e0e0e` | `#f0f0f0` | `--text-1` | Labels, table cells, panel titles, detail tags |
-| `ink-2` | `#3a3a3a` | `#c2c2c2` | `--text-2` | Detail lines, notes, edge labels, payloads, dimension lines and labels |
-| `muted` | `#6b6b6b` | `#8a8a8a` | `--text-3` | Neutral kickers and meta, coordinates, table headers, keys, title-block labels |
-| `accent` | `#c23b00` | `#ff5f1f` | `--accent` | One idea: the hot path, step markers, top rules, callout rings, timeline track |
-| `accent-wash` | `#fdf1ec` | `#1a0d07` | `--accent-lo` | Fill behind the single focal node |
-| `on-accent` | `#ffffff` | `#090909` | `--on-accent` | Step numbers on accent (dark text in dark mode) |
-| `danger` / `success` | `#b42318` / `#18794e` | `#ff8a80` / `#6ee7a7` | `--status-*` | `fail` and `pass` nodes only |
-
-**Contrast,** checked on every run across all 46 pairs. The table shows the worst ratio for each pair across its backgrounds:
-
-| Pair | Light | Dark | Needs |
-|---|---|---|---|
-| ink on canvas, surface, surface-2, accent-wash | 16.77 | 15.27 | 4.5 |
-| ink-2 on canvas, surface, surface-2 | 9.88 | 9.77 | 4.5 |
-| muted on canvas, surface | 5.01 | 5.47 | 4.5 |
-| muted on surface-2 (outcome kickers, panel-header meta) | 4.63 | 5.04 | 4.5 |
-| accent on canvas, surface, accent-wash | 4.84 | 6.21 | 4.5 |
-| on-accent on accent (step numbers) | 5.36 | 6.55 | 4.5 |
-| canvas on ink (detail-tag letters) | 18.15 | 17.47 | 4.5 |
-| danger, success on canvas and surface | 6.18 / 5.08 | 8.27 / 12.28 | 4.5 |
-| line on canvas, surface (connectors) | 3.89 | 3.76 | 3.0 |
-
-`muted` never sits on `accent-wash`. Hatching, grid dots, the ruler, and crop marks are texture, so they carry no contrast requirement and can carry no meaning.
-
-**Accent budget.** One hue, one idea per figure. Accent marks the hot path and its step markers, top rules on at most half the nodes, at most one focal node, and callout rings. Never type hex values into Mermaid `style` or `classDef`; that hard-codes color and breaks dark mode.
-
-## 3. Light and dark
-
-- Plate SVGs carry both palettes. Inside `<img>` they follow `prefers-color-scheme`. Inline, they also follow the site's `data-theme` toggle.
-- Each figure also exports `<id>.light.png` and `<id>.dark.png` at 2x for feeds and email.
-- Share cards are always light.
+All 46 contrast pairs pass in both schemes: ink ≥15.27, ink-2 ≥9.77, muted ≥4.63, accent text ≥4.84, on-accent ≥5.36, and connectors ≥3.76 against 3.0. Hatching, dots, rails, and ticks are texture; they carry no contrast requirement and can carry no meaning on their own.
 
 ## 4. Typography
 
-Two families: **Inter** (400, 500, 600, 700) and **JetBrains Mono** (400, 500, 600). The pipeline embeds a per-figure WOFF2 subset. Mono labels things *about* the diagram (kickers, coordinates, keys, metadata, values). Inter carries the diagram's content.
+There is less text, but the same faces: **Inter** for labels, **JetBrains Mono** for the head band, chart ticks, step digits, and the series key.
 
-All sizes are px at the 720 px article width.
+| Role | Family | Size / weight | Color |
+|---|---|---|---|
+| Head kicker `// TITLE` (exempt) | Mono caps | 11 / 500, tracking 0.12em | accent |
+| Glyph label | Inter | 13 / 500 | ink |
+| Slab label | Inter | 13 / 600 | ink |
+| Plain node label | Inter | 14 / 500 | ink |
+| Cluster label (one word) | Mono caps | 9.5 / 600, tracking 0.12em | muted |
+| Chart category | Inter | 12.5 / 500 | ink |
+| Chart tick, decorative digit | Mono | 9.5 / 500, 8.5 / 500 | muted |
+| Value callout, ratio | Mono | 10 / 600 | ink / accent |
+| Step digit | Mono | 9 / 600 | on-accent |
+| OG title (exempt) | Inter | 54 / 600, −0.025em | ink |
 
-| Role | Family | Size | Weight | Tracking | Color |
-|---|---|---|---|---|---|
-| Head kicker `// TITLE` | Mono, caps | 11 | 500 | 0.12em | accent (the `//` at 50%) |
-| Head meta `FIG. 01` | Mono, caps | 10 | 400 | 0.08em | muted |
-| Node label | Inter | 14 | 500 | 0 | ink |
-| Node title `**bold**` | Inter | 14 | 700 | 0 | ink |
-| Node kicker `§`, kicker meta | Mono, caps | 9.5 | 600 / 500 | 0.10em | muted; accent on `accent` and `focal` |
-| Node detail `~` | Inter | 12.5 | 400 | 0 | ink-2 |
-| Edge label | Mono, caps | 9.5 | 600 | 0.08em | ink-2; accent when hot |
-| Payload chip | Mono | 10 | 400 | 0 | ink-2 |
-| Cluster label, cluster meta | Mono, caps | 9.5 / 9 | 600 / 500 | 0.12em / 0.08em | muted |
-| Step and badge numbers | Mono | 9 | 600 | 0 | on-accent / accent |
-| Detail-tag letter | Mono | 9 | 600 | 0 | canvas on ink |
-| Dimension label | Mono, caps | 9 | 600 | 0.08em | ink-2 |
-| Grid coordinates, index tags | Mono | 8.5 | 500 | 0.06em | muted |
-| Panel title / panel meta | Mono, caps | 9.5 / 9 | 600 / 500 | 0.12em / 0.08em | ink / muted |
-| Table header, key-value key | Mono, caps | 9 | 600 / 500 | 0.10em / 0.08em | muted |
-| Table text cell, key-value value | Inter | 12.5 | 400 | 0 | ink |
-| Table numeric cell, chart value | Mono, tabular | 11.5 / 9.5 | 500 | 0 | ink / ink-2 |
-| Chart category | Inter | 12.5 | 500 | 0 | ink |
-| Note text | Inter | 12.5 | 400 | 0 | ink-2 |
-| Title-block label / value | Mono, caps | 8.5 / 10 | 500 | 0.10em / 0.04em | muted / ink-2 |
-| OG title | Inter | 54 / 1.12 | 600 | −0.025em | ink |
+Floors: Inter 12 px and mono 8.5 px at display size. Plates scale down to 87.5% at most. Share-card diagrams render at **1.5× or larger** and carry no words.
 
-**Floors:** Inter at 12 px and mono at 8.5 px, both at final display size. A plate may scale down to 87.5% and no further (`minScale`), so a 14 px label never drops below 12.25 px. The share-card diagram must render at **1.75× or larger**, which puts labels at 24.5 px on the 1200 px card and about 10 px when a feed shows the card 500 px wide. The pipeline fails any figure that breaks either floor. Uppercase is written into the text itself, never applied with CSS.
-
-## 5. Canvas and plate anatomy
-
-Everything snaps to a 4 px grid.
+## 5. Canvas
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐ frame: rule 1px, r4
-│ // KICKER                                                    FIG. 01 │ head band 44
-├───┬────────A────────┬────────B────────┬────────C────────┬──── … ─────┤ C3 coordinate strip 16
-│ 1 │┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬ │ C2 ruler 8/40
-│   │ ⌜ · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·  ⌝ │ C1 field: 16px dots, crops
-│ 2 │   · · ┌────────┐ ●─1─┐      · · · · · · · · · · · · · · ·   ┐   │ diagram centred, pad 32
-│   │   · · │  node  │     └──▶□┌────────┐      · · · · · · · · ·  │   │ C11 dim gutter
-│ 3 │ ⌞ · · └────────┘          │ node  A│· · · · · · · · · · ·    ┘ ⌟ │
-├───┴──────────────────────────────────────────────────────────────────┤
-│ ①  C3  One-line note                                                 │ C9 notes band (optional)
-├──────────────────────────────────────────────────────────────────────┤
-│ ┌ TIMELINE / TABLE / DETAIL A · DETAIL B ───────────────────────────┐ │ panels band (optional)
-│ └──────────────────────────────────────────────────────────────────┘ │
-├──────┬───────────────────────────────────────────────────────────────┤
-│ KEY  │ ●─▶ PATH   ─▶ FLOW   ▭ CLASS …                                 │ C16 title block 66
-├──────┴──────────────────────────────┬─────┬───────┬─────────┬────────┤
-│ SOURCE slug/id.mmd                  │ FIG │ SCALE │ REV     │ DRAWN  │
-└─────────────────────────────────────┴─────┴───────┴─────────┴────────┘
+│ // FIGURE TITLE                                              FIG. 01 │ head band 44 (exempt)
+├──┬───────────┬───────────┬───────────┬───────────┬───────────┬───────┤ ruled strip 12, 80 px cells
+│  │┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┤ ruler 8/40
+│  │ ⌜ · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·  ⌝  │ field: 16 px dots, crops
+│  │   · · ┌──────┐ ●──1──•••──▶□ ┌──────┐ · · · · · · · · · ·       │ diagram centred, pad 32
+│  │   · · │ ▣▣▣  │               │ ◇◇◇  │ · · · · · · · · · ·       │
+│  │   · · └──────┘               └──────┘                            │
+│  │     ·  Label                  Label  · · · · · · · · · · ·    ⌟  │
+├──┴───────────────────────────────────────────────────────────────────┤
+│ ▬▭▬▭▬▭▬▭                                                         ⊕  │ foot 26: scale bar, registration mark
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
-| Type | Canvas | Notes |
-|---|---|---|
-| Article plate | 720 × content height | 1440 px PNG. Field pad 32, coordinate strips 16, grid pitch 80 |
-| Share card | 1200 × 630 | Title column x 64–584, drafting panel x 624–1160 |
-| Evidence screenshot | 1440 × 900 or 1440 × 810 | Cropped to the claim |
+There are no text bands. v2's notes band, panels band, and title block are gone. Article plates are 720 wide, share cards 1200 × 630. Flowchart spacing is `nodeSpacing 28`, `rankSpacing 64`; override it per figure with `@spacing node,rank`.
 
-Flowchart spacing: `nodeSpacing 28`, `rankSpacing 64`. Override per figure with Mermaid frontmatter, never with colors.
+## 6. Strokes, radii, depth
 
-## 6. Strokes and radii
-
-| Element | Stroke |
+| Element | Rule |
 |---|---|
-| Frame, node border, panel border | 1 px rule |
-| Band, cell, and row separators | 1 px hairline (table rows dotted 1/2) |
-| Top rule (accent, fail, pass) | 3 px fill, clipped to the node's top corners |
-| Connector / hot connector | 1.25 px line / 1.75 px accent |
-| Dashed connector (`-.->`) | 1.25 px, 3/3, meaning async or observe-only |
-| Cluster boundary | 1 px rule, 4/3 dash |
-| Dimension line / extension line | 1 px ink-2 / 1 px rule 2/2 |
-| Detail ring | 1 px ink-2, 2/3 dash, offset 5 from the node |
-| Hatching | 1 px rule at 45°, 6 px pitch |
-| Ruler ticks / crop marks | 0.75 px / 1 px rule |
+| Glyph outline | 1.25 px `line`, round joins; detail strokes 1.25 px `ink-2`; emphasis 1.75 px |
+| Tile | 1 px `rule`, radius 4, 9 px padding around the glyph |
+| Connector / hot connector | 1.25 px `line` / 1.75 px accent, 4 px corner radius |
+| Ring rails / arcs | 1 px `rule` ±9 px from the radius / 2 px accent |
+| Hatching | 1 px `rule` at 45°, 5 px pitch |
+| Depth | Isometric slabs (top face surface, left face surface-2, right face hatched), stacked offset outlines (3 and 6 px), and hatch for "outside". No shadows, gradients, blur, or opacity stacks |
 
-Radii: 4 px on the plate, nodes, panels, and corner turns of routed edges. 2 px on chips, masks, step markers, and tags.
+## 7. Glyph library
 
-## 7. Nodes
+Each glyph lives in `lib/glyphs.js`, draws on a 56 × 48 box (strips: 360 × 46), and uses at most one accent part. The accent part switches on when the node is `accent` or `focal`, or when the glyph gets the `accent` option. **Use when** is a rule: a glyph means one thing everywhere.
 
-**Label grammar**, written in plain Mermaid:
+| Glyph | Drawing | Use when the node is… | Options |
+|---|---|---|---|
+| `doc` | Page with folded corner, heading bar, text lines | A document, page, or artifact | badge: `lock` private, `globe` public, `question` undecided, `check`, `cross`, `flag` |
+| `pair` | Private page behind a public page | Two documents with one contract | — |
+| `reader` | Head and shoulders | A person or audience | badge as above |
+| `window` | App window with title rule, sidebar, content lines | An application or caller | — |
+| `loop` | 300° track with chevron, particles, hub | A control loop or scheduler | — |
+| `tokens` | Rows of tiles: solid, hatched, outline, newest in accent | A prompt, context, or token stream | `rows=a,b,c` |
+| `cells` | Memory grid filled to a level, newest cell accent | State, memory, or cache, where the fill level means fullness | `fill=0–1`, `flag` (checkpoint) |
+| `eye` | Eye over a log trace | Observation, monitoring, logging | — |
+| `core` | Three isometric slabs with weight lines | A model | — |
+| `tools` | Four tiles: search, terminal, braces, database | A set of tools or integrations | — |
+| `rack` | Three server units with vents and status lights | A serving engine, service, or host | — |
+| `chip` | Package, pins, hatched die | A processor or accelerator | — |
+| `inbox` | Tray with work dropping in | An incoming task or request | — |
+| `stop` | Octagon with bar | Termination or a stop condition | — |
+| `action`, `object`, `key` | Play head / isometric cube / key | Parts of a phrase: verb, noun, condition | — |
+| `outline` | Page of heading bars | A heading outline or table of contents | — |
+| `queue` *(strip)* | Request lanes; a finished slot refilled in accent | Batching or scheduling | — |
+| `sram` *(strip)* | Causal score matrix, one tile in flight to an on-chip block | Tiled computation or streaming through fast memory | — |
+| `paged` *(strip)* | Logical sequences wired to scattered physical blocks | Paging, allocation, or fragmentation | — |
+| `quant` *(strip)* | One weight at 16, 8, and 4 bits, with the freed width bracketed | Precision or compression | — |
+| `gpu` *(strip)* | Chip, memory stacks, interconnect to a second chip | Hardware and memory bandwidth | — |
 
-```
-id["§Kicker | Meta
-Label
-~Detail line"]:::class
-id["`§Outcome
-**Title**
-~Detail line
-continues as detail`"]
-```
+A new glyph is added to `glyphs.js` and to this table in the same change. Never improvise a one-off drawing inside a figure.
 
-- `§Kicker | Meta`: the kicker on the left and an optional meta on the right (`Q1`, `1st`, `Durable`, `Before`), both in mono caps. A kicker never wraps. Any node with a kicker becomes a left-aligned card with 10–16 px padding.
-- Label: seven words or fewer.
-- `**Title**`: needs a backtick string. Use it for destinations and named parts.
-- `~Detail`: every line after the first `~` is a detail line. Break long details by hand. In `block-beta`, keep each cell to three lines, because detail lines collapse the column widths.
+## 8. Motifs
 
-**Classes** (names only; no `classDef`):
-
-| Class | Look | Meaning |
+| # | Motif | Use when |
 |---|---|---|
-| *(none)* | surface, rule border | A step or component |
-| `accent` | 3 px accent top rule, accent kicker | A primary step |
-| `focal` | accent-wash fill, accent border | The one node the figure is about |
-| `outcome` | surface-2 fill | End state, destination, engine, part |
-| `external` | canvas fill under 45° hatching | Outside the system boundary |
-| `stack` | two offset outlines behind the shape | Many interchangeable instances (tools, workers, replicas) |
-| `muted` | dashed border, muted label | Before, deprecated, optional |
-| `fail` / `pass` | danger / success top rule and kicker | Failure or success state |
-| `ghost` (clusters) | nothing drawn | Layout-only grouping, such as the two rows of a 2×2 loop |
-| `hatch` (clusters) | hatched boundary zone | A trust or network boundary |
+| M1 | Glyph tile: surface tile, glyph, label below | The default node |
+| M2 | Bare glyph: no tile | Parts of something drawn elsewhere (anatomy parts) |
+| M3 | Layer slab: full-width slab, label column, strip glyph | Each layer of a stack |
+| M4 | Cluster: dashed boundary, 35% wash, accent tick, one-word label | A real boundary (process, runtime, trust zone) |
+| M5 | Orthogonal router: side ports, symmetric shared buses | Always, for flowcharts |
+| M6 | Ports and handles: ring out, square in | Always |
+| M7 | Flow particles: three shrinking accent dots trailing toward the head | The hot path only |
+| M8 | Edge marks: ✓ / ✕ in a ring for yes/no; otherwise one to three words | Decisions; avoid edge words elsewhere |
+| M9 | Step squares: numbered accent squares | When order matters (`@path`, `@step`) |
+| M10 | Ring: tick rail, accent arcs, chevrons, particles, stations, centre glyph | Any cycle (`@ring a>b>c>d`, `@center glyph`) |
+| M11 | Parts brackets: coloured brackets under phrases, edges start from them | Taking apart a label (`@parts`) |
+| M12 | Tile bars: one tile per unit, solid versus hatched series, ≤2 callouts, one ratio | Benchmarks and prices (`@callout s:i`, `@ratio i`) |
+| M13 | Span bracket: dimension line labelled by a badge glyph (`:lock`, `:globe`) | Grouping outcomes or layers without words |
+| M14 | Drafting field: dot grid, ruled strips, ruler, crop marks, foot scale bar, registration mark | Always; texture only |
 
-## 8. Component library
+Budget per figure: one hot path, at most two span brackets, at most two value callouts and one ratio, and one centre glyph.
 
-Every component is drawn by `lib/plate.js` and styled by `theme/brand.css`. The **Use when** column is a rule, not a suggestion.
+## 9. Removed in v3
 
-| # | Component | Look | Use when | Directive |
-|---|---|---|---|---|
-| C1 | Drafting field | 16 px dot grid, crop marks | Always | — |
-| C2 | Ruler | Ticks every 8 px, majors every 40 px, inside the coordinate strips | Always | — |
-| C3 | Grid coordinates | Columns A… and rows 1…, 80 px pitch, mono 8.5 | Always. Notes, details, and the timeline cite them (`C4`) so the prose can point into the figure | — |
-| C4 | Card node | Kicker, meta, label, title, detail; class treatments | Any node that needs a category or more than one line | Label grammar |
-| C5 | Cluster | Dashed boundary, 35% wash, accent tick, label and meta lifted above edges on a mask | A real boundary: a process, service, trust zone, or loop | `subgraph id ["Name \| Meta"]` |
-| C6 | Orthogonal router | Edges leave and enter at side centres with 4 px corner radii. Siblings leaving one side share one port and one bus (vertical buses split at 50%, horizontal at 40%), so trees come out symmetric | Always, for flowcharts | — |
-| C7 | Ports and handles | 2.5 px ring where an edge leaves, 5 px square where it lands; filled accent on the hot path | Always | — |
-| C8 | Edge label + payload chip | Mono caps label; `label :: payload` adds a mono chip with an example value | A label: one to three words. A payload: only when the article names the data that crosses that edge | `-->\|"call :: tool(name, args)"\|` |
-| C9 | Callout | Numbered ring on the node's top-right corner; a notes band with grid ref and one sentence | A trap or consequence that fits in one line | `@note id \| text` |
-| C10 | Step markers | Numbered accent squares on each hot edge in `@path` order; skipped on edges shorter than 36 px | Any figure with an order the reader must follow | `@path a>b>c` |
-| C11 | Dimension line | Extension lines, a span with 45° ticks, and a caps label, in a gutter right of or below the diagram; spans that don't overlap share a row | To name what a group of nodes amounts to ("Private readers", "Four software levers") or a measured span | `@dim a \| b \| label` (`a = b` spans one node or cluster) |
-| C12 | Detail tag + panel | Dashed ring and lettered ink tag on the node; a panel with the letter, title, `DETAIL A · F6`, and key/value rows | When a node hides specifics the article states: quantities, failure modes, ownership | `@detail id \| Title \| key: value; …` |
-| C13 | Table panel | Mono caps header, dotted row rules, numeric columns right-aligned in tabular mono | When the article has a table or a set of comparable values the figure organizes | `@table Title \| cols…` + `@row …` |
-| C14 | Mini-chart and chart | Inline bars in one table column; branded `xychart` with solid series 1, hatched series 2, value labels at bar ends | A numeric column whose shape matters; any chart plate | `@bar n`, `@series`, `@unit` |
-| C15 | Timeline panel | The hot path laid flat: numbered steps, grid refs, and a dashed return hook for loops | Loops and pipelines where the order is the point | `@timeline a>b>c \| loop \| label` |
-| C16 | Title block | Key row generated from the classes and edge kinds in use, then cells for source, figure number, scale, revision hash, and drawn-by | Always | `@legend k=v; …` |
+`@note`, `@detail`, `@table`, `@row`, `@bar`, `@timeline`, and `@index` are gone, along with the title block, grid-coordinate letters, payload chips, kicker grammar, and the notes and panel bands. The parser rejects them with a message pointing here. Their content belongs in the article.
 
-## 9. Composition rules
+## 10. Composition
 
-1. **Budget per figure** (enforced): at most 2 notes, 2 dims, 2 details, 1 table (8 rows or fewer), 1 timeline, and 1 hot path. The key must fit on one row.
-2. **Pick by question, not by appetite.** Use a table when the reader asks "how much?". Use a detail when they ask "what's inside that box?". Use a dim when they ask "what do these add up to?". Use a timeline when they ask "in what order?", and a note when they ask "where does this break?". If you can't name the question, don't add the component.
-3. **Don't say anything twice.** If a detail panel covers a failure mode, drop the matching note (the loop sample does exactly this). Table cells must not repeat node labels word for word unless the table adds a column the nodes don't have.
-4. **Every number is sourced from the article.** Payloads, quantities, and ratios must appear in the article or follow directly from its table, as with output ÷ input. Mark illustrative payloads as such in the caption.
-5. **Order of the panels band:** timeline, table, details. Panels are always full width or split in exactly two.
-6. **Readability gates** (enforced): scale of at least 87.5%, every note on one line, every detail value inside its panel, and every table inside its panel width.
+- Pick the archetype (§2) first, then glyphs (§7), then motifs (§8).
+- Every visual encoding must be readable without a legend, except chart series, which get a two-word key.
+- If the figure needs more than 15 words, it's two figures, or the extra words belong in the prose.
+- Check both PNGs at 100% for crossings, collisions, and connectors that stop short of their glyph.
 
-## 10. Edges
+## 11. Share cards
 
-- Arrowheads are open chevrons, 8 px long and 6.8 px wide, with the shaft running to the tip. The tip stops 3 px short of the node so the input handle stays visible.
-- Bidirectional edges (`<-->`) get chevrons at both ends and no port.
-- Only one hot path per figure, and the key must name it.
-- Labels on a vertical drop sit centred on a canvas mask. On a short horizontal branch they sit above the line, flush with the arrow, so neither the trunk nor the head is hidden.
-- No crossings. If two edges would cross, reorder the source, change direction, or add `ghost` rows. The router doesn't detect crossings, so check both PNGs.
+1200 × 630, light, with a 4 px accent rule along the top. Left: the category kicker, the published title (four lines at most), a hairline, the byline, and the URL; all of it is exempt. Right: a drafting panel with a **word-free** chain of two or three glyph tiles at 1.5× or larger. Never shrink the article's full diagram into the card.
 
-## 11. Charts
+## 12. Screenshots and receipts
 
-- Horizontal bars by default; category labels in Inter 12.5 ink.
-- Series 1 is solid accent; series 2 is surface with a line border and hatching. Never use a third series; split the chart instead.
-- Value labels at bar ends, formatted like the article's table: two decimals below 10 unless the value is whole.
-- A dashed hairline grid; the axis title in mono caps.
-- Pair every chart with a table panel only when the table adds a derived column, such as output ÷ input. A chart that just repeats the table adds noise.
+**Evidence screenshots.** Capture at 1440 wide in the light scheme and crop to the proving element. Mark it with one accent rectangle (2 px, r4, 8 px outside the element) and redact with a solid surface-2 block. Never use device frames, shadows, or blur. The source and capture date go in the caption, not in the image.
 
-## 12. Callouts, details, and notes, compared
+**Terminal receipts** (template in the rollout). Real output only, on a dark canvas in both schemes, in JetBrains Mono 13/1.6, with the cited line in accent. Trim to the lines the article cites; the receipt counts against the word budget like any figure.
 
-| Need | Component |
-|---|---|
-| One sentence about a trap at one node | C9 note |
-| Three or four facts about one node | C12 detail |
-| Facts across several nodes or options | C13 table |
-| What a group or span adds up to | C11 dim |
+## 13. Interactive visuals
 
-## 13. Texture and depth
+Keep one only when interaction teaches something a drawing can't, such as dragging a vector or scrubbing a slider. Those that stay use the same glyphs, strokes, palette, and word budget, load the site fonts, respect `prefers-reduced-motion`, and get a static plate fallback. Everything else becomes a plate. Plates may later move inline into the page with CSS-only motion (pending decision; see `INVENTORY.md`).
 
-Layers bottom to top: canvas → drafting field (C1–C3) → clusters and hatching → edges → nodes (stack outlines, fill, top rule, text) → ports and handles → edge labels → steps → cluster labels → dims and detail rings → callout badges → bands (notes, panels, title block).
+## 14. Accessibility
 
-Depth comes only from hairlines, hatching, stacked outlines, and band backgrounds. Shadows, blur, gradients, and opacity stacks beyond the 35% cluster wash are not allowed.
+- `@alt` is required and full. It states every path, part, and value the figure shows, because the image no longer spells them out.
+- `@caption` carries the takeaway.
+- Never encode with color alone: hot paths are also thicker and carry particles and steps; badges differ by shape (lock versus globe); series differ by fill versus hatch.
+- Contrast is checked on every render.
 
-## 14. Share cards
-
-- 1200 × 630, light, with a 4 px accent rule along the top and a rule frame.
-- Left column: kicker (`// CATEGORY`), the published title in Inter 600 54/1.12 (four lines at most, enforced), and a card title block with AUTHOR, READ (canonical URL), and REV cells.
-- Right: a drafting panel with coordinates and the card's **own** three-node diagram, written in the `og.mmd` body at 1.75× or larger. The article's full diagram is never reused here, because it can't be read at feed size.
-- An article without a diagram gets the text column centred on the left two-thirds (layout planned for the rollout; today a card without a body renders an empty drafting panel). Never use stock imagery.
-
-## 15. Screenshots and receipts
-
-**Evidence screenshots.** Capture at 1440 wide in the light scheme and crop to the proving element, keeping enough chrome to identify the source. Mark the claim with one accent rectangle: 2 px stroke, 4 px radius, 8 px outside the element. Redact with a solid surface-2 block. No device frames, shadows, or blur. The caption names the source and the capture date.
-
-**Terminal receipts** (template planned for the rollout). Real output only. A plate with a dark canvas in both schemes, a head band showing `// COMMAND` and the run date, JetBrains Mono 13/1.6, commands in ink with a `$` prefix, output in ink-2, and the cited line in accent. A title block gives the command source and REV. No traffic-light window dots.
-
-## 16. Interactive visuals
-
-Keep one only when the interaction itself teaches. Rules for those that stay:
-
-- Load the site fonts. Every visual today falls back to Courier.
-- Use only `visual-embed.css` variables. 14 visuals still hard-code the old palette.
-- Use the same type roles, strokes, chevrons, ports, and coordinate and title-block treatments as plates.
-- No Three.js glow, fog, bloom, or auto-orbit, and respect `prefers-reduced-motion`.
-- Give each one a static plate fallback rendered from Mermaid.
-
-Everything else becomes a plate (see the rollout plan in `INVENTORY.md`).
-
-## 17. Accessibility
-
-- `@alt` is required. In one to three sentences, state what the figure shows, including where each path ends and any numbers it presents. It is written into `<desc>` and the `<img alt>`.
-- `@caption` carries the takeaway and the sourcing note.
-- Text inside a figure is limited to labels, kickers, values, and one-sentence notes. Article titles appear only on share cards.
-- Never carry meaning by color alone. The hot path is thicker and numbered, classes are named in the key, and hatching means "outside" only together with the key entry.
-
-## 18. Files
+## 15. Files
 
 ```
 content/diagrams/<article-slug>/<figure-id>.mmd
@@ -295,43 +192,44 @@ static/images/diagrams/<article-slug>/<figure-id>.svg | .light.png | .dark.png |
 static/images/diagrams/<article-slug>/og.svg | og.png
 ```
 
-- The SVG header comment and the title block's REV hold a 16-character hash of the source, tokens, CSS, brand layer, and Pele version. `render.mjs --check` fails on a mismatch, so it catches stale output and AA breaks alike.
-- Output is byte-identical across re-renders on the same machine.
-- Size budget: SVG under 120 KB (the v2 samples are 71–104 KB, mostly embedded font subsets) and PNG under 300 KB.
+The SVG header holds a hash of the source, tokens, CSS, glyphs, brand layer, and Pele version. `--check` fails on stale output, broken contrast, or a figure over its word budget. Output is byte-identical across re-renders.
 
-## 19. Directive reference
+## 16. Directive reference
 
 | Directive | Meaning |
 |---|---|
-| `@alt`, `@kicker`, `@fig`, `@caption` | Alt text, head kicker, figure number, HTML caption |
-| `@path a>b>c` | Hot path with step markers (C10) |
-| `@note id \| text` | Callout (C9) |
-| `@dim a \| b \| label` | Dimension line (C11) |
-| `@detail id \| Title \| k: v; k: v` | Detail tag and panel (C12) |
-| `@table Title \| col \| …` + `@row v \| …` + `@bar n` | Table panel and inline bars (C13, C14) |
-| `@timeline a>b>c \| loop \| label` | Timeline panel (C15) |
-| `@series A; B`, `@unit $` | Chart series names and value prefix (C14) |
-| `@legend class=Label; …` or `off` | Key labels (C16) |
-| `@index on` | Index tags above nodes |
+| `@alt`, `@caption`, `@kicker`, `@fig` | Description, takeaway, head title, figure number |
+| `@glyph id \| name [options]` | Draw node `id` as a glyph (`bare` for M2; strips become slabs) |
+| `@path a>b>c` | Hot path with particles and steps |
+| `@ring a>b>c>d \| radius` | Lay those nodes on a ring (M10) |
+| `@center glyph [options] scale=k` | Glyph at the ring's hub |
+| `@parts id \| phrase>node; …` | Parts brackets (M11) |
+| `@step id \| n` | Pin a numbered square to a node or slab |
+| `@dim a \| b \| :badge` | Span bracket (M13); text labels allowed but counted |
+| `@series A; B`, `@unit $`, `@callout s:i`, `@ratio i` | Tile-bar charts (M12) |
+| `@spacing node,rank` | Flowchart spacing override |
 | `@kind og`, `@og-title`, `@og-kicker`, `@og-url` | Share card |
 
-## 20. Do and don't
+## 17. Do and don't
 
 | Do | Don't |
 |---|---|
-| Symmetric orthogonal buses with shared ports | Curved, uneven branches from one node (v1's START node) |
-| Add the component that answers a reader's question | Add a component because the figure "looks empty" |
-| Cite grid coordinates in notes, details, and prose | Write "the box on the right" |
-| Give the OG card its own large three-node diagram | Shrink the article diagram into the card |
-| Stay within the budget, or split the figure | A third note, a second table, or a second hot path |
-| Source every number in the article | Invent latencies or payloads for texture |
-| Draw a plate with its own frame, without `.visual-wrapper` | Double borders and doubled titles |
+| A lock badge on a page | The word "Private" in a box |
+| ✓ / ✕ marks on branches | `YES` / `NO` labels |
+| Memory cells filling up | "Context exhaustion: untrimmed tool outputs" |
+| A ring with arcs and stations | A timeline panel listing the steps again |
+| Tile bars with two callouts and a ratio | A chart plus a table of every value |
+| One-word cluster label ("Harness") | Cluster label plus meta ("Agent harness · Runtime") |
+| A word-free glyph chain on the share card | A shrunken copy of the article diagram |
+| Specifics in the article and alt text | Detail panels, notes bands, title blocks |
+| A new glyph added to the library and this table | A one-off doodle inside one figure |
+| Fewer, larger, better-drawn elements | More boxes to look "intricate" |
 
-## 21. Checklist
+## 18. Checklist
 
-- [ ] `node tools/image-brand/render.mjs` is clean and `--check` passes.
-- [ ] The archetype kit (§1) is applied, and each extra component answers a named question (§9).
-- [ ] Scale is 1:1, or at least 0.875 with a reason. The OG diagram is at 1.75× or more.
-- [ ] No crossings, collisions, or masked arrowheads in either PNG.
-- [ ] Every number traces to the article. Illustrative payloads are labelled in the caption.
-- [ ] Alt text states each path's end. The caption carries the takeaway.
+- [ ] `node tools/image-brand/render.mjs` is clean, and the words count is within budget.
+- [ ] `--check` passes.
+- [ ] The thumbnail silhouette reads; a close look rewards with detail.
+- [ ] Every glyph is used for the meaning in §7.
+- [ ] Alt text covers everything the figure shows; the caption carries the takeaway.
+- [ ] Both PNGs checked at 100%.

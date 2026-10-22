@@ -1,40 +1,25 @@
 %% @fig 01
 %% @kicker The four-phase agent loop
-%% @alt The agent loop runs perceive, think, act, and remember in sequence and returns to perceive until the task is complete or a stop condition ends the run. Think passes a tool call to act, and act passes the tool result to remember. Infinite loops start in act; context exhaustion and lost tool results start in remember.
-%% @caption Each phase has its own failure modes, so debug the loop one phase at a time. Payloads are illustrative.
-%% @path perceive>think>act>remember>perceive
-%% @timeline perceive>think>act>remember | loop | Next iteration until a stop condition
-%% @detail act | Act · failure mode | Symptom: same tool, new args, again; Cause: task still looks incomplete; Fix: explicit, tested iteration budget
-%% @detail remember | Remember · failure modes | Exhaustion: untrimmed tool outputs; Lost result: never appended; Fix: log every tool call + result
-%% @legend accent=Phase; outcome=Entry and exit; hot=One iteration
-flowchart TB
-  task(["Task arrives"]):::outcome
-  subgraph loop ["Agent loop | Repeats until a stop condition"]
-    direction TB
-    subgraph upper [ ]
-      direction LR
-      perceive["§01 Perceive | Read
-Read context
-~Form the task state"]:::accent
-      think["§02 Think | Decide
-Reason over state
-~Pick a tool and its arguments"]:::accent
-    end
-    subgraph lower [ ]
-      direction RL
-      act["§03 Act | Execute
-Call the tool
-~Produce output"]:::accent
-      remember["§04 Remember | Write
-Update state
-~Append the result, checkpoint"]:::accent
-    end
-  end
-  done(["Done or stopped"]):::outcome
+%% @alt The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills as the loop repeats.
+%% @caption Each phase has its own failure modes: infinite loops start in act, context exhaustion and lost tool results start in remember.
+%% @ring perceive>think>act>remember | 128
+%% @center tokens rows=3,5,7 scale=1.6
+%% @glyph task | inbox
+%% @glyph perceive | eye
+%% @glyph think | core
+%% @glyph act | tools
+%% @glyph remember | cells fill=0.7 flag
+%% @glyph done | stop
+flowchart LR
+  task["Task"]
+  perceive["Perceive"]:::accent
+  think["Think"]:::accent
+  act["Act"]:::accent
+  remember["Remember"]:::accent
+  done["Done"]
   task --> perceive
   perceive --> think
-  think -->|"call :: tool(name, args)"| act
-  act -->|result :: tool_result| remember
-  remember -->|next iteration| perceive
-  remember -->|complete or stop| done
-  class upper,lower ghost
+  think --> act
+  act --> remember
+  remember --> perceive
+  remember --> done
