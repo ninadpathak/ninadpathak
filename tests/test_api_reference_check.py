@@ -27,7 +27,7 @@ class ApiReferenceCheckTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as cwd:
             result = self.run_check(str(EXAMPLES / "writing-lab/service.mjs"), cwd=cwd)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-            self.assertIn("PASS: 8 of 8 documented responses match", result.stdout)
+            self.assertIn("PASS: 9 of 9 documented responses match", result.stdout)
             self.assertEqual(list(Path(cwd).iterdir()), [])
 
     def test_a_changed_status_is_reported(self):
@@ -41,7 +41,7 @@ class ApiReferenceCheckTests(unittest.TestCase):
             result = self.run_check(str(service), cwd=tmp)
             self.assertEqual(result.returncode, 1)
             self.assertIn("DIFF 202 new key   got 201", result.stdout)
-            self.assertIn("FAIL: 1 of 8 documented responses differ", result.stdout)
+            self.assertIn("FAIL: 2 of 9 documented responses differ", result.stdout)
 
 
 if __name__ == "__main__":

@@ -22,6 +22,7 @@ export const REFERENCE = [
   { case: 'extra field', key: 'report-b', body: '{"format":"csv","limit":5}', status: 400, json: { error: 'invalid_format' } },
   { case: 'malformed JSON', key: 'report-b', body: '{format:csv}', status: 400, json: { error: 'invalid_json' } },
   { case: 'body over 4 KB', key: 'report-c', body: JSON.stringify({ format: 'x'.repeat(5000) }), status: 413, json: { error: 'body_too_large' } },
+  { case: 'no Content-Type header', key: 'report-d', body: '{"format":"json"}', contentType: null, status: 202, json: { id: 'exp_2', format: 'json', status: 'accepted' } },
 ];
 
 export async function check(servicePath) {
@@ -32,7 +33,8 @@ export async function check(servicePath) {
   const rows = [];
   try {
     for (const row of REFERENCE) {
-      const headers = { 'Content-Type': 'application/json' };
+      const headers = {};
+      if (row.contentType !== null) headers['Content-Type'] = row.contentType || 'application/json';
       if (row.key) headers['Idempotency-Key'] = row.key;
       const response = await fetch(`${base}/exports`, { method: 'POST', headers, body: row.body });
       const text = await response.text();

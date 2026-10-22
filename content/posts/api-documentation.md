@@ -14,7 +14,7 @@ work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical docume
 
 The [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) describes an HTTP API's paths, operations, parameters, request bodies and responses, so a generator can turn one OpenAPI file into a reference page for each endpoint. Those pages still leave two jobs to a writer: choosing the request a new developer should send first, and explaining what to do after a 409.
 
-I treat API documentation as a set of pages with one job each, and I test the reference against the service it describes. The reference entry on this page documents one real endpoint, and a script checks each documented response against the running service.
+I treat API documentation as a set of pages with one job each. For the worked example I use `POST /exports` from the local writing-lab service, with a checker for its documented request cases.
 
 ## What API documentation includes
 
@@ -40,11 +40,13 @@ The endpoint is `POST /exports` from the writing-lab service that ships with the
 
 Creates an export record in the server's memory. The server generates no file, and repeating a request with the same key and body returns the stored record without creating another.
 
+Records and keys live only as long as this server instance runs. A restart clears them and separate instances share nothing, so a retry with the same key is safe only against the same running instance.
+
 **Headers**
 
 | Header | Required | Value |
 |---|---|---|
-| `Content-Type` | Yes | `application/json` |
+| `Content-Type` | Recommended | `application/json`. The service parses the body as JSON whatever this header says. |
 | `Idempotency-Key` | Yes | Up to 64 letters, digits or hyphens, and not empty. Reuse the key to retry the same request safely. |
 
 **Body**
@@ -67,7 +69,7 @@ curl -i "$LAB_URL/exports" \
 | Status | Body | When | What to do |
 |---|---|---|---|
 | `202` | `{"id":"exp_1","format":"csv","status":"accepted"}` | A new key created a record | Store the `id` |
-| `200` | The same record as the `202` | The key and body match an earlier request | No action. The retry was safe and created no duplicate |
+| `200` | The same record as the `202` | The key and body match an earlier request on this instance | No action. The retry was safe and created no duplicate |
 | `409` | `{"error":"key_conflict"}` | The key was used before with a different body | Send a new key for a different request |
 | `400` | `{"error":"invalid_key"}` | `Idempotency-Key` is missing or has other characters | Send a key that matches the rule above |
 | `400` | `{"error":"invalid_format"}` | `format` is not `csv` or `json`, or the body has another field | Send only `format` with a supported value |
@@ -78,7 +80,7 @@ The service parses the body before it validates the key, so a request with broke
 
 ## Check the reference against the running service
 
-The [check script](/static/examples/api-reference-check.mjs) holds the eight documented requests and responses from the table above. It starts its own copy of the service on a random local port, sends the rows in order, compares each response with the page, and stops the server:
+The [check script](/static/examples/api-reference-check.mjs) holds nine documented cases: the seven response rows, a second `invalid_format` case with an extra field, and a request with no `Content-Type` header. It starts its own copy of the service on a random local port, sends the rows in order, compares each response with the page, and stops the server:
 
 ```bash
 node api-reference-check.mjs
@@ -93,15 +95,17 @@ ok   400 unsupported format
 ok   400 extra field
 ok   400 malformed JSON
 ok   413 body over 4 KB
-PASS: 8 of 8 documented responses match
+ok   202 no Content-Type header
+PASS: 9 of 9 documented responses match
 ```
 
-Change the service to return `201` for a new key, pass that copy's path, and the first row fails:
+Change the service to return `201` for a new key, pass that copy's path, and both `202` rows fail:
 
 ```text
 DIFF 202 new key   got 201 {"id":"exp_1","format":"csv","status":"accepted"}
 ...
-FAIL: 1 of 8 documented responses differ
+DIFF 202 no Content-Type header   got 201 {"id":"exp_2","format":"json","status":"accepted"}
+FAIL: 2 of 9 documented responses differ
 ```
 
 A FAIL exits with status 1, so the check can run in CI next to the service's own tests. When a row shows DIFF, decide whether the service or the page is wrong, fix that one, and rerun until it prints PASS.
@@ -110,7 +114,7 @@ A FAIL exits with status 1, so the check can run in CI next to the service's own
 
 The quickstart owns first success, so it links to this entry once the reader has a request to inspect. The reference owns exact behavior, the error guide owns recovery across endpoints, and a status change like `202` to `201` belongs in the [changelog](/articles/writing-changelogs/) as well as the reference.
 
-A generated reference keeps up with endpoints as they change, and I'd still write the "What to do" column by hand. The generator can list a `409`, but it has no way to know that the fix is a new key.
+A generated reference keeps up with endpoints as they change. I write the recovery guidance explicitly, whether it lives in the OpenAPI response description or on the page, and I check the generated reference against the service.
 
 ## FAQ
 
@@ -128,4 +132,4 @@ Give each error its status, response body, the state that causes it and the acti
 
 ### Is an OpenAPI file enough for API documentation?
 
-An OpenAPI file gives you an accurate reference for each endpoint. You still need a quickstart that picks the first request, an authentication guide, and the recovery step for each error.
+An OpenAPI file can generate a reference for each endpoint, and that reference is accurate only once you check it against the running service. You still need a quickstart that picks the first request, an authentication guide, and a recovery step for each error.
