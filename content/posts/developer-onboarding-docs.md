@@ -1,8 +1,7 @@
 ---
 category: technical-documentation
 date: 2026-04-01
-description: Build developer onboarding docs around one supported setup path and a
-  safe first merged change, with proof and recovery at each fragile step.
+description: 'Developer onboarding documentation should take a new engineer from a clean machine to a safe first merged change, with one setup path and a check after each step.'
 slug: developer-onboarding-docs
 status: published
 work_note: From access requests to a verified change, [Ninad Pathak](/contact/) writes
@@ -13,9 +12,11 @@ takeaways:
 - Give the reader one supported setup path with proof after each stage.
 - Put help and recovery beside the command that can fail.
 - Review the route when the product or development workflow changes.
-title: Developer Onboarding Docs Should End in a Merged Change
+title: 'Developer Onboarding Documentation: End It in a Merged Change'
 updated: 2026-09-11
 ---
+
+Developer onboarding documentation takes a new engineer from a clean machine to a safe first merged change, with one supported setup path and a check after each step. I end it at the merge, because a reading list gives the reader no finish line to reach.
 
 Picture a hypothetical day two: a new engineer is asking which Node version to use, whether Docker is required, and where the test credentials live. The answers exist.
 
@@ -25,7 +26,7 @@ A teammate can walk them through it, so the machine eventually runs. That rescue
 
 It says the route is documented when the route still lives in somebody's head.
 
-Developer onboarding docs should end in a safe merged change, not a finished reading list. My rule is blunt: if the guide cannot carry someone from a clean machine through setup, review, and proof in a test environment, it is company background with a checklist attached.
+My rule is blunt: if the guide cannot carry someone from a clean machine through setup, review, and proof in a test environment, it is company background with a checklist attached.
 
 ## Design the route backward from the first merge
 

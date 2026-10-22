@@ -1,8 +1,7 @@
 ---
 category: technical-documentation
 date: 2026-08-05
-description: Technical documentation helps a developer decide, start, use, and recover
-  from a product. Choose each page by the task it owns.
+description: 'Technical documentation explained: the document types it includes and the reader task each one owns, in a table you can check a docs set against.'
 slug: technical-docs
 status: published
 work_note: For a developer product launch, [Ninad Pathak](/contact/) writes technical
@@ -16,7 +15,9 @@ title: What Is Technical Documentation, and What Should It Include?
 updated: 2026-08-17
 ---
 
-Technical documentation is the material that helps someone understand, use, integrate with, or safely operate a system. It works when a reader can take the next step without guessing.
+Technical documentation is the written material that explains how a product works and how to use it, from a first install to the exact behavior of each API field. Each document owns one reader task, and the table below maps the [types of documentation](/articles/documentation-types/) to the task each one owns.
+
+It works when a reader can take the next step without guessing.
 
 Think of it as a route through a product. A tutorial gets someone moving, reference answers an exact question, explanation gives a decision context, and troubleshooting helps when the route breaks.
 

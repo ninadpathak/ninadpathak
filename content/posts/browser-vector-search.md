@@ -1,23 +1,19 @@
 ---
 category: ai-engineering
 date: 2026-04-13
-description: A comparison of PGlite and SQLite-vec for browser-based vector search,
-  including indexing, memory, and deployment trade-offs.
+description: 'PGlite vs SQLite-vec for vector search in the browser: how the two engines differ, and what to measure on your own data before you pick one.'
 status: published
 work_note: '[Ninad Pathak](/portfolio/)''s developer content for browser tools covers
   the initial download as well as the first query, helping readers evaluate startup
   costs before adopting a database.'
-title: 'Vector Search in the Browser: PGlite vs. SQLite-vec'
+title: 'PGlite vs SQLite-vec: Vector Search in the Browser'
 updated: '2026-08-17'
 slug: browser-vector-search
 ---
 
-PGlite and SQLite-vec take different approaches to vector search in the browser. PGlite brings Postgres features and indexed search, while SQLite-vec keeps the runtime and data model closer to SQLite.
+[PGlite](https://pglite.dev/docs/) runs Postgres in the browser through WebAssembly, and its separately packaged [pgvector extension](https://pglite.dev/extensions/) adds vector columns and indexes. [SQLite-vec](https://github.com/asg017/sqlite-vec) is a pre-v1 SQLite extension that stores full-precision and quantized vectors in `vec0` tables, and it runs in the browser through WebAssembly too.
 
-
-**Short answer:** Choose PGlite when Postgres compatibility and indexed search matter. Choose SQLite-vec when a smaller SQLite-based runtime and flat or quantized search fit the dataset.
-
-PGlite wins on index-build stability for massive sets, while SQLite-vec wins on low-latency startup and memory efficiency.
+**Short answer:** Choose PGlite when you need Postgres features next to your vectors. Choose SQLite-vec when a SQLite runtime fits, and time both on your own vectors in your target browser, because this article doesn't measure which is faster.
 
 ## The architectural shift to the browser
 
