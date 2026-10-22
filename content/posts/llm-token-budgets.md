@@ -284,13 +284,16 @@ class SpendTracker:
         self.model_prices = {
             "gpt-5.4": {"input": 2.50, "output": 15.00},
             "gpt-5.4-mini": {"input": 0.75, "output": 4.50},
+            "gpt-5.4-nano": {"input": 0.20, "output": 1.25},
             "claude-opus-4.7": {"input": 5.00, "output": 25.00},
             "claude-sonnet-4.6": {"input": 3.00, "output": 15.00},
             "gemini-3.1-pro": {"input": 2.00, "output": 12.00},
         }
 
     def record(self, model: str, input_tokens: int, output_tokens: int):
-        prices = self.model_prices.get(model, {"input": 0, "output": 0})
+        prices = self.model_prices.get(model)
+        if prices is None:
+            raise KeyError(f"no price for {model!r}; add it to model_prices")
         cost = (input_tokens / 1_000_000 * prices["input"] +
                 output_tokens / 1_000_000 * prices["output"])
 
@@ -327,7 +330,7 @@ It is the work that separates teams blindsided by their invoice from teams that 
 Starting from zero cost control, here is the priority order I would follow:
 
 1. Enable token counting on every request. You cannot manage what you cannot measure.
-2. Route simple queries to cheap models. A 60% routing ratio to GPT-5.4 Nano instead of GPT-5.4 saves about 55% on input token costs.
+2. Route simple queries to cheap models. Routing 60% of input tokens from GPT-5.4 to Nano saves about 55% of uncached input cost, before the routing call's own cost.
 3. Audit system prompts. Halve them first, then measure the difference.
 4. Enable caching. Target 30%+ cache hit rate on high-volume endpoints.
 5. Set hard output token limits. That single change can cut output costs by 20-40%.

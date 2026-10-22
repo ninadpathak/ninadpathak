@@ -23,7 +23,7 @@ Here's how they work and where they break.
 <div class="visual-wrapper">
   <div class="visual-title">Inference Optimization Stack</div>
   <div class="visual-container">
-    <iframe src="/static/visuals/inference-optimization-stack.html" title="LLM inference optimization stack: batching, flash attention, KV cache, quantization, and speculative decoding with speedup contributions" loading="lazy"></iframe>
+    <iframe src="/static/visuals/inference-optimization-stack.html" title="LLM inference optimization stack: batching, flash attention, KV cache, quantization, and speculative decoding, each with its own measured gain" loading="lazy"></iframe>
   </div>
 </div>
 
@@ -63,7 +63,7 @@ Recent work on "importance-based" eviction drops tokens the model attended to le
 
 Quantization reduces the numerical precision of weights and activations (typically from 16-bit or 32-bit floats to 8-bit or 4-bit integers). Fitting more model parameters into the same VRAM is the goal, which buys you larger batch sizes or lets you run the same model on cheaper hardware.
 
-**FP8 quantization** (8-bit floating point) has native tensor-core support starting with NVIDIA's [Hopper](https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/) and [Ada Lovelace](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf) architectures, and Ampere GPUs like the A100 have none. For most models, FP8 delivers near-identical output quality to BF16 with a 40-50% memory reduction.
+**FP8 quantization** (8-bit floating point) has native tensor-core support starting with NVIDIA's [Hopper](https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/) and [Ada Lovelace](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf) architectures, and Ampere GPUs like the A100 have none. FP8 roughly halves the storage of the weights it quantizes compared to BF16, though total VRAM savings depend on how much of the budget the KV cache and other allocations take.
 
 On Hopper and Ada the matrix multiplies run natively in FP8, which adds compute throughput on top of the memory savings. On older GPUs without FP8 tensor cores, the weights get dequantized before computing, so saved memory bandwidth is the main benefit.
 
@@ -75,7 +75,7 @@ Code generation is where the degradation bites. I've seen 5-8% drops on HumanEva
 
 AWQ runs faster and preserves more quality at 4-bit for most tasks, which is why SGLang has defaulted to AWQ for its 4-bit quantization path.
 
-Here is the rule I follow. Reach for FP8 when your hardware supports it and you need zero quality compromise.
+Here is the rule I follow. Reach for FP8 first when your hardware supports it, and test output quality on your own workload before you ship it.
 
 Move to INT8 when memory is the bottleneck and you can tolerate small quality losses. Drop to 4-bit only when you're severely memory-constrained and the quality tradeoff is acceptable for the specific job in front of you.
 

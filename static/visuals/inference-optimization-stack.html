@@ -45,7 +45,7 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
 </head>
 <body>
 <div class="scene">
-  <div class="header">Inference Optimization Stack / Layered Speedup</div>
+  <div class="header">Inference Optimization Stack / Apply In Order</div>
 
   <div class="stack">
     <div class="layer" id="l0">
@@ -79,9 +79,9 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
       <div class="layer-num">4</div>
       <div class="layer-body">
         <div class="layer-name">Quantization (FP8)</div>
-        <div class="layer-desc">40-50% VRAM reduction at near-identical quality. Enables larger batch sizes on same hardware.</div>
+        <div class="layer-desc">Roughly halves weight storage vs BF16. Total VRAM saved depends on the KV cache; test quality first.</div>
       </div>
-      <div class="speedup"><div class="speedup-val">40%</div><div class="speedup-label">VRAM saved</div></div>
+      <div class="speedup"><div class="speedup-val">~50%</div><div class="speedup-label">weight storage</div></div>
     </div>
 
     <div class="layer" id="l4">
@@ -103,7 +103,9 @@ body{margin:0;background:var(--bg-1);font-family:var(--sans);color:var(--text-1)
 <script>
 var layers=[0,1,2,3,4].map(function(i){return document.getElementById('l'+i);});
 var totalVal=document.getElementById('total-val');
-var totals=['10-20x','20-80x','40-320x','fits 2x more','full stack'];
+// Each layer's gain measures a different thing (throughput, attention speed,
+// concurrency, memory, tokens/s), so they are not multiplied into a combined figure.
+var totals=['layer 1','layers 1-2','layers 1-3','layers 1-4','layers 1-5'];
 var step=0;
 function clear(){
   layers.forEach(function(l){l.classList.remove('lit');});
