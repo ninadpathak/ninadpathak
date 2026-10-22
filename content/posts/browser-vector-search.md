@@ -62,7 +62,7 @@ The graph works like the express layers of a subway map: instead of stopping at 
 
 ## SQLite-vec and the speed of quantization
 
-SQLite-vec bets on a different idea. Rather than building complex graph indexes, it optimizes for **extremely fast brute-force scans** through vector quantization.
+In its stable release, v0.1.9 from 2026-03-31, SQLite-vec answers a KNN query with what [its docs](https://github.com/asg017/sqlite-vec/blob/main/site/features/knn.md) call a brute-force scan, and it speeds that scan up with vector quantization. The [v0.1.10 alpha releases](https://github.com/asg017/sqlite-vec/releases) add ANN indexes, rescore and DiskANN, with IVF marked experimental and not enabled, so an indexed SQLite-vec is still pre-release.
 
 Quantization shaves the precision off each dimension to save memory and speed up the arithmetic.
 
@@ -133,14 +133,12 @@ Local-first vector databases have graduated from a nice optimization to the new 
 
 ## FAQ
 
-**Can I run PGlite and SQLite-vec in the same application?** Yes. Some teams run SQLite-vec for a fast, low-precision "first pass" search, then hand the candidates to PGlite for a high-precision "refinement" pass.
+**Can I run PGlite and SQLite-vec in the same application?** Yes, nothing stops one page from loading both. One design runs SQLite-vec for a fast, low-precision "first pass" search, then hands the candidates to PGlite for a high-precision "refinement" pass.
 
 A two-stage design can show approximate candidates first and rerank them with a higher-precision index before settling the result set.
 
 
-**Do these databases work in mobile browsers?** Yes. Both run in iOS Safari and Android Chrome via WASM.
-
-SQLite-vec is particularly well-suited for mobile due to its low memory footprint and efficient use of CPU registers for binary math.
+**Do these databases work in mobile browsers?** Both projects document a browser build through WebAssembly, and neither project's docs that I checked list tested mobile browsers. Test on the iOS Safari and Android Chrome versions you support, and measure heap use there, because this article has no mobile measurements.
 
 **What is the "lost in the middle" problem for local RAG?** That one is a [context window limitation rather than a database limitation](/articles/llm-context-windows/). Even with flawless retrieval, packing too much context into a small local model degrades its reasoning, since the relevant passage gets buried among the filler.
 
