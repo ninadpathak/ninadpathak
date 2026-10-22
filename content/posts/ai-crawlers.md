@@ -18,7 +18,7 @@ None of 12 developer documentation hosts blocks either one. Their robots.txt fil
 
 ## What each AI crawler does
 
-Each platform names a separate agent for each job, so one robots.txt rule governs one use:
+Each platform names a separate agent for each job, and OpenAI and Anthropic separate their training crawlers from their search agents:
 
 | Platform | Search and citation | Fetches for a user's question | Training |
 |---|---|---|---|
