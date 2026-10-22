@@ -25,6 +25,21 @@ export const REFERENCE = [
   { case: 'no Content-Type header', key: 'report-d', body: '{"format":"json"}', contentType: null, status: 202, json: { id: 'exp_2', format: 'json', status: 'accepted' } },
 ];
 
+// Fetch adds "text/plain;charset=UTF-8" to a string body, so a row that documents a
+// request without Content-Type sends its body as bytes, and the script refuses to send
+// it if the header is still present.
+export function buildRequest(base, row) {
+  const headers = {};
+  if (row.contentType !== null) headers['Content-Type'] = row.contentType || 'application/json';
+  if (row.key) headers['Idempotency-Key'] = row.key;
+  const body = row.contentType === null ? new TextEncoder().encode(row.body) : row.body;
+  const request = new Request(`${base}/exports`, { method: 'POST', headers, body });
+  if (row.contentType === null && request.headers.has('content-type')) {
+    throw new Error(`row "${row.case}" would send Content-Type: ${request.headers.get('content-type')}`);
+  }
+  return request;
+}
+
 export async function check(servicePath) {
   const { createFixture } = await import(pathToFileURL(resolve(servicePath)).href);
   const server = createFixture();
@@ -33,10 +48,7 @@ export async function check(servicePath) {
   const rows = [];
   try {
     for (const row of REFERENCE) {
-      const headers = {};
-      if (row.contentType !== null) headers['Content-Type'] = row.contentType || 'application/json';
-      if (row.key) headers['Idempotency-Key'] = row.key;
-      const response = await fetch(`${base}/exports`, { method: 'POST', headers, body: row.body });
+      const response = await fetch(buildRequest(base, row));
       const text = await response.text();
       let body;
       try { body = JSON.parse(text); } catch { body = text; }
