@@ -1,7 +1,7 @@
 ---
 category: ai-engineering
 date: 2026-04-21
-description: 'The five types of AI agents, from reactive information agents to persistent-goal agents, sorted by autonomy, task type and scope so you can pick what to build.'
+description: 'I group AI agents into five types, from reactive information agents to persistent-goal agents, to decide how much autonomy a task needs and which tools and memory it gets.'
 slug: ai-agent-taxonomy
 status: published
 work_note: 'Developer content creator [Ninad Pathak](/portfolio/) explains agent architectures

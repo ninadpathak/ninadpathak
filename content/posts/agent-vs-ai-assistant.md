@@ -1,7 +1,7 @@
 ---
 category: ai-engineering
 date: '2026-04-26'
-description: 'An AI agent drives its own loop toward a goal. An AI assistant answers each turn and leaves the loop with you, which costs less and fits bounded tasks.'
+description: 'An AI agent chooses its next steps toward a goal, and an AI assistant leaves the next step to you. I compare the cost and control you trade when you build each.'
 slug: agent-vs-ai-assistant
 status: published
 work_note: 'For AI companies explaining product autonomy, [Ninad Pathak](/contact/)
