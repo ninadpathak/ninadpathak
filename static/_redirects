@@ -65,3 +65,6 @@
 # AI crawlers guide: the robots.txt article archived on 2026-09-11 points to the refreshed page.
 /articles/ai-crawlers-robots-txt-training-vs-citation/ /articles/ai-crawlers/ 301
 /blog/ai-crawlers-robots-txt-training-vs-citation/ /articles/ai-crawlers/ 301
+# MCP server tutorial: the setup guide archived on 2026-09-11 points to the rewritten tutorial.
+/articles/mcp-server-setup-guide/ /articles/mcp-server-tutorial/ 301
+/blog/mcp-server-setup-guide/ /articles/mcp-server-tutorial/ 301

@@ -87,6 +87,8 @@ Reach for MCP when you are building a set of tools that more than one AI applica
 
 Local development is another sweet spot, when you want to hand an LLM scoped access to your filesystem or terminal and keep tight control over what it can touch.
 
+The [MCP server tutorial](/articles/mcp-server-tutorial/) builds one of those: a read-only server that can't read outside one docs folder.
+
 For a single-purpose app with one or two fixed tools, plain function calling is honestly simpler and I would not bother with the protocol. Standing up an MCP server, wiring the client, and managing the handshake only starts to pay back once you care about scale and reuse across applications.
 
 Spending that effort early is a bet on flexibility you will want later, not a fix for anything you have today.
