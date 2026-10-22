@@ -10,13 +10,14 @@
 %% @glyph observer | eye
 %% @glyph llm | core
 %% @glyph tools | tools
+%% @spacing 40,72
 flowchart TB
   app["App"]:::external
   subgraph harness [Harness]
     direction TB
     subgraph row1 [ ]
       direction LR
-      tools["Tool registry"]:::stack
+      tools["Tools"]:::stack
       loop["Loop"]:::accent
     end
     state["State"]
