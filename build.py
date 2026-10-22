@@ -173,6 +173,9 @@ def render_content_html(html: str) -> str:
     return link_visuals_without_extension(optimize_content_images(html))
 
 
+VISUAL_ROBOTS = "noindex, indexifembedded"
+
+
 def disable_email_obfuscation(html: str) -> str:
     """Wrap a page in Cloudflare's email_off markers so addresses ship as written.
 
@@ -1020,6 +1023,26 @@ class SiteBuilder:
 
         (self.output / "_redirects").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
+    def mark_visuals_embed_only(self):
+        """Give every copied /static/visuals/ page an embed-only robots meta tag.
+
+        _headers sends the same X-Robots-Tag, but the meta tag travels with the file,
+        so the directive holds even where the header is not applied. Injected at build
+        time so a new visual inherits it without anyone remembering to add it.
+        """
+        for path in sorted((self.output / "static" / "visuals").glob("*.html")):
+            html = path.read_text(encoding="utf-8")
+            if re.search(r"<meta\s+name=[\"']robots[\"']", html, re.IGNORECASE):
+                continue
+            # After the charset declaration when there is one, which must come first.
+            head = re.search(r"<meta\s+charset=[^>]*>", html, re.IGNORECASE) or re.search(
+                r"<head\b[^>]*>", html, re.IGNORECASE
+            )
+            if not head:
+                raise ValueError(f"{path} has no <head> to carry {VISUAL_ROBOTS!r}")
+            tag = f'\n    <meta name="robots" content="{VISUAL_ROBOTS}">'
+            path.write_text(html[: head.end()] + tag + html[head.end() :], encoding="utf-8")
+
     def build_visual_embed_css(self):
         """Write the palette the standalone /static/visuals/ iframes load.
 
@@ -1092,16 +1115,17 @@ class SiteBuilder:
         if Path("static").exists():
             shutil.copytree("static", self.output / "static")
             # Copy platform control files to the deployment root.
-            for control_file in ("robots.txt", "_routes.json"):
+            for control_file in ("robots.txt", "_headers", "_routes.json"):
                 control_src = Path("static") / control_file
                 if control_src.exists():
                     shutil.copy2(control_src, self.output / control_file)
             # Cloudflare reads deployment controls only from the output root.
             # Remove source copies from /static after copying/generating them.
-            for control_file in ("robots.txt", "_redirects", "_routes.json"):
+            for control_file in ("robots.txt", "_headers", "_redirects", "_routes.json"):
                 copied_control = self.output / "static" / control_file
                 if copied_control.exists():
                     copied_control.unlink()
+            self.mark_visuals_embed_only()
         else:
             (self.output / "static" / "css").mkdir(parents=True)
 

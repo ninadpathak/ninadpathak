@@ -6,6 +6,7 @@ from datetime import date, datetime
 from pathlib import Path
 
 from build import (
+    VISUAL_ROBOTS,
     SiteBuilder,
     disable_email_obfuscation,
     estimate_reading_time,
@@ -122,6 +123,59 @@ class EmailObfuscationTests(unittest.TestCase):
                 self.assertIn('href="mailto:hello@ninadpathak.com"', html)
                 self.assertLess(html.index("<!--email_off-->"), html.index("hello@ninadpathak.com"))
                 self.assertNotIn("/cdn-cgi/l/email-protection", html)
+
+
+class VisualIndexingTests(unittest.TestCase):
+    """Standalone /static/visuals/ pages are thin on their own. They must stay out of
+    the index while remaining indexable inside the article that embeds them."""
+
+    repo_root = Path(__file__).resolve().parent.parent
+
+    def test_headers_rule_covers_every_visual(self):
+        headers = (self.repo_root / "static" / "_headers").read_text(encoding="utf-8")
+        self.assertEqual(VISUAL_ROBOTS, "noindex, indexifembedded")
+        self.assertRegex(headers, r"(?m)^/static/visuals/\*\n\s+X-Robots-Tag: noindex, indexifembedded$")
+
+    def test_robots_txt_leaves_visuals_crawlable(self):
+        """indexifembedded only works if Google can fetch the visual."""
+        robots = (self.repo_root / "static" / "robots.txt").read_text(encoding="utf-8")
+        for line in robots.splitlines():
+            rule = line.split("#", 1)[0].strip()
+            if rule.lower().startswith("disallow:"):
+                path = rule.split(":", 1)[1].strip()
+                with self.subTest(rule=rule):
+                    self.assertFalse(path and "/static/visuals/".startswith(path.rstrip("*")), rule)
+
+    def test_build_marks_every_visual_and_ships_headers(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            visuals = output / "static" / "visuals"
+            visuals.mkdir(parents=True)
+            (visuals / "new-visual.html").write_text(
+                '<!DOCTYPE html><html><head>\n<meta charset="UTF-8">\n<title>x</title></head></html>', encoding="utf-8"
+            )
+            builder = SiteBuilder()
+            builder.output = output
+            builder.mark_visuals_embed_only()
+            builder.mark_visuals_embed_only()
+            html = (visuals / "new-visual.html").read_text(encoding="utf-8")
+
+        self.assertEqual(html.count('<meta name="robots"'), 1)
+        self.assertLess(html.index("charset"), html.index(f'content="{VISUAL_ROBOTS}"'))
+
+    def test_built_visuals_are_noindex_and_outside_the_sitemap(self):
+        output = self.repo_root / "output"
+        if not (output / "sitemap.xml").exists():
+            self.skipTest("output/ not built")
+        self.assertIn("/static/visuals/*", (output / "_headers").read_text(encoding="utf-8"))
+        self.assertFalse((output / "static" / "_headers").exists())
+        sources = sorted((self.repo_root / "static" / "visuals").glob("*.html"))
+        self.assertTrue(sources)
+        for source in sources:
+            html = (output / "static" / "visuals" / source.name).read_text(encoding="utf-8")
+            with self.subTest(visual=source.name):
+                self.assertIn(f'<meta name="robots" content="{VISUAL_ROBOTS}">', html)
+        self.assertNotIn("/static/visuals/", (output / "sitemap.xml").read_text(encoding="utf-8"))
 
 
 class RedirectVariantTests(unittest.TestCase):

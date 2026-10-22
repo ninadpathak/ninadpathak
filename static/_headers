@@ -1,0 +1,6 @@
+# Standalone visuals exist to be embedded in articles. On their own they are thin
+# pages, so keep them out of the index while letting Google index them as part of
+# the article that embeds them. Do not Disallow them in robots.txt: Google has to
+# crawl a visual to honour indexifembedded.
+/static/visuals/*
+  X-Robots-Tag: noindex, indexifembedded
